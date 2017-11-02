@@ -1,13 +1,7 @@
 var path = require('path')
 var projectId = '27469'
 var api = [
-  '/getOpportunityInfo',
-  '/getCustomerInfo',
-  '/getCustomerCommentList',
-  '/getCustomerOpportunityListByType',
-  '/getOpportunityTypes',
-  '/getOpportunityList',
-  '/reply',
+  '/a',
 ]
 
 function makeRapConfig(key) {
