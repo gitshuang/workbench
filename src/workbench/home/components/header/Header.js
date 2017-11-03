@@ -4,16 +4,27 @@ import NavBar from '../../../public-components/navbar/index'
 import Icon from '../../../public-components/icon/index'
 
 class Header extends Component {
+
+  openUser = () => {
+    console.log('onLeftClick')
+  }
+  opena = (name) => {
+    return function (){
+      console.log(name)
+    }
+  }
+
   render() {
+    let _this = this;
     return (
       <div>
         <NavBar
           mode="light"
-          icon={<Icon type="back" />}
-          onLeftClick={() => console.log('onLeftClick')}
+          iconName={<Icon type="touxiang1" />}
+          onLeftClick={this.openUser}
           rightContent={[
-            <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
-            <Icon key="1" type="quanzi" />,
+            <Icon key="0" type="search" style={{ marginRight: '16px' }} onClick={this.opena("a")} />,
+            <Icon key="1" type="quanzi" onClick={this.opena("b")}/>
           ]}
         >首页</NavBar>
       </div>

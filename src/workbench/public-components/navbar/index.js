@@ -18,7 +18,10 @@ const propTypes = {
   className: PropTypes.string,
   children: PropTypes.any,
   mode: PropTypes.string,
-  iconName: PropTypes.string,
+  iconName: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]),
   leftContent: PropTypes.any,
   rightContent: PropTypes.any,
   onLeftClick: PropTypes.func
