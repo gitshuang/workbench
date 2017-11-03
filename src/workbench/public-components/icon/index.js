@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import '../../style/iconfont/iconfont.css'
+import '../../static/style/iconfont/iconfont.css'
 import './index.css'
 
 const propTypes = {
