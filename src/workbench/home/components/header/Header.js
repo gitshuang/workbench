@@ -5,10 +5,10 @@ import Icon from '../../../public-components/icon/index'
 
 class Header extends Component {
 
-  openUser = () => {
+  onLeftClick = () => {
     console.log('onLeftClick')
   }
-  opena = (name) => {
+  onRightClick = (name) => {
     return function (){
       console.log(name)
     }
@@ -21,10 +21,10 @@ class Header extends Component {
         <NavBar
           mode="light"
           iconName={<Icon type="touxiang1" />}
-          onLeftClick={this.openUser}
+          onLeftClick={this.onLeftClick}
           rightContent={[
-            <Icon key="0" type="search" style={{ marginRight: '16px' }} onClick={this.opena("a")} />,
-            <Icon key="1" type="quanzi" onClick={this.opena("b")}/>
+            <Icon key="0" type="search" style={{ marginRight: '16px' }} onClick={this.onRightClick("a")} />,
+            <Icon key="1" type="quanzi" onClick={this.onRightClick("b")}/>
           ]}
         >首页</NavBar>
       </div>
