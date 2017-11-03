@@ -17,7 +17,7 @@ class Header extends Component {
   render() {
     let _this = this;
     return (
-      <div>
+      <div className="um-header">
         <NavBar
           mode="light"
           iconName={<Icon type="touxiang1" />}

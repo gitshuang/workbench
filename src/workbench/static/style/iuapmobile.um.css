@@ -75,6 +75,46 @@ body {
   line-height: 1.5;
   color: #000;
 }
+.um-win {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.um-header {
+  position: relative;
+  min-height: 44px;
+  z-index: 5;
+}
+.um-content {
+  overflow: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  -webkit-transform-origin: top center;
+  transform-origin: top center;
+}
+.um-footerbar {
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  border: none;
+  border-radius: 0;
+}
+
 .um-container {
   margin-right: auto;
   margin-left: auto;
