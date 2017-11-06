@@ -1,7 +1,7 @@
-var proxyTable = require('../proxy')
-var webpackConfig = require('./webpack')
+const proxyTable = require('../proxy');
+const webpackConfig = require('./webpack');
 
-var config = {
+const config = {
   env: '"development"',
   assetsSubDirectory: 'static',
   assetsPublicPath: '/',

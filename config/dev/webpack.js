@@ -12,10 +12,14 @@ module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     // add hot-reload related code to entry chunks
     entry: {
-      main: [
+      work: [
         './scripts/dev-client',
-        './src/main.js'
-      ]
+        './src/workbench/work/index.js',
+      ],
+      home: [
+        './scripts/dev-client',
+        './src/workbench/home/index.js',
+      ],
     },
     module: {
       rules: [
@@ -83,11 +87,16 @@ module.exports = function (config) {
       // https://github.com/ampedandwired/html-webpack-plugin
       new FriendlyErrorsPlugin(),
       new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'template/dev.ejs',
-        inject: false
-      })
-    ]
-  })
+        filename: 'home.html',
+        template: 'template/index.ejs',
+        inject: false,
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'work.html',
+        template: 'template/work.ejs',
+        inject: false,
+      }),
+    ],
+  });
   return webpackConfig
 }
