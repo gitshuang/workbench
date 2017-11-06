@@ -34,5 +34,7 @@ module.exports = {
     'no-param-reassign': "warn",
     'react/jsx-filename-extension': 0,
     'react/prefer-stateless-function': 0,
+    'react/no-array-index-key': 0,
+    'jsx-a11y/anchor-is-valid': 0,
   }
 }

@@ -1,7 +1,12 @@
 var path = require('path')
 var projectId = '27469'
 var api = [
-  '/a',
+  '/getProductList',
+  '/getUserInfo',
+  '/getWidgetList',
+  '/getServiceList',
+  '/getMessage',
+  '/getProductInfo',
 ]
 
 function makeRapConfig(key) {
@@ -19,7 +24,7 @@ function makeStaticConfig(key) {
     target: 'http://localhost:3000',
     pathRewrite: {}
   };
-  config.pathRewrite['^' + key] = '/static/' + key + '.json'
+  config.pathRewrite['^' + key] = '/static' + key + '.json'
   return config
 }
 

@@ -1,0 +1,29 @@
+.widgetList {
+  padding: 20px 0 0 20px;
+  margin: 20px 0 0 0;
+  border: 1px solid #000;
+  list-style: none;
+  overflow: hidden;
+}
+.widgetList li {
+  float: left;
+  height: 100px;
+  width: 100px;
+  padding: 0;
+  margin: 0 20px 20px 0;
+  border: 1px solid #000;
+}
+.widgetList li:after {
+  content: '\20';
+  width: 0;
+  overflow: hidden;
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.widgetList a {
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
