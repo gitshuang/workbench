@@ -4,9 +4,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import Icon from '../icon/index'
-
+import "./index.css"
 const defaultProps = {
-  prefixCls: 'um-navbar',
+  prefixCls: 'lebra-navbar',
   mode: 'dark',
   iconName: 'back',
   onLeftClick() {

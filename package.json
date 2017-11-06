@@ -11,6 +11,7 @@
   "dependencies": {
     "array.prototype.find": "^2.0.4",
     "babel-runtime": "^6.26.0",
+    "bee-tabs": "^1.0.5",
     "classnames": "^2.2.5",
     "promise-polyfill": "^6.0.2",
     "react": "^16.0.0",
