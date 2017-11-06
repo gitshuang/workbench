@@ -14,7 +14,13 @@
     "promise-polyfill": "^6.0.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "prop-types": "^15.6.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "redux": "^3.7.2",
+    "tinper-bee": "^1.0.2",
+    "bee-menus": "^1.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
