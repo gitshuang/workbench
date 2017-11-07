@@ -68,8 +68,8 @@ class Home extends Component {
     return (
       <div className="um-win">
         <div className="um-header">
-          <Header onLeftClick={ changeUserInfoDisplay } iconName={"touxiang1"}>
-            <span position="center" onClick={ changeTitleServiceDisplay }>首页<i className="iconfont icon-toupiao um-icon-md"></i></span>
+          <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
+            <span position="center" onClick={ changeTitleServiceDisplay }>首页<i style={{fontSize:"10px"}} className="iconfont icon-xiala um-icon-md"></i></span>
           </Header>
           { /* <Tab /> */ }
         </div>
