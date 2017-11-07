@@ -8,7 +8,7 @@ import "./index.css"
 const defaultProps = {
   prefixCls: 'lebra-navbar',
   mode: 'dark',
-  iconName: 'back',
+  iconName: 'touxiang1',
   onLeftClick() {
   },
 };

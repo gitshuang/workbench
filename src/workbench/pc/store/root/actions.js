@@ -14,6 +14,7 @@ const {
   GET_SERVICE_LIST,
   GET_MESSAGE,
   CHANGE_QUICK_SERVICE_DISPLAY,
+  CHANGE_TITLE_SERVICE_DISPLAY,
 } = types;
 
 export default createActions({
@@ -25,4 +26,5 @@ export default createActions({
   REQUEST_SUCCESS,
   REQUEST_ERROR,
   CHANGE_QUICK_SERVICE_DISPLAY,
+  CHANGE_TITLE_SERVICE_DISPLAY,
 );

@@ -62,13 +62,13 @@ class Home extends Component {
 
     }
 
-    render() {
-        const {changeUserInfoDisplay, widgetList} = this.props;
-        return (
-            <div className="um-win">
+  render() {
+    const { changeUserInfoDisplay, widgetList, changeTitleServiceDisplay } = this.props;
+    return (
+      <div className="um-win">
         <div className="um-header">
-          <Header title="首页">
-            <button position="left" onClick={changeUserInfoDisplay} >个人中心</button>
+          <Header onLeftClick={ changeUserInfoDisplay }>
+            <span position="center" onClick={ changeTitleServiceDisplay }>首页<i className="iconfont icon-toupiao um-icon-md"></i></span>
           </Header>
           { /* <Tab /> */ }
         </div>
