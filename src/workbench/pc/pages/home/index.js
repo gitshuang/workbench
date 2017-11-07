@@ -17,7 +17,7 @@ const {wrap, } = baseStyles;
 
 const {changeUserInfoDisplay, getWidgetList, } = homeActions;
 
-const {requestStart, requestSuccess, requestError, } = rootActions;
+const {requestStart, requestSuccess, requestError,changeTitleServiceDisplay } = rootActions;
 
 @withRouter
 @connect(
@@ -33,6 +33,7 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
         requestError,
         getWidgetList,
         changeUserInfoDisplay,
+        changeTitleServiceDisplay
     }
 )
 
@@ -67,7 +68,7 @@ class Home extends Component {
     return (
       <div className="um-win">
         <div className="um-header">
-          <Header onLeftClick={ changeUserInfoDisplay }>
+          <Header onLeftClick={ changeUserInfoDisplay } iconName={"touxiang1"}>
             <span position="center" onClick={ changeTitleServiceDisplay }>首页<i className="iconfont icon-toupiao um-icon-md"></i></span>
           </Header>
           { /* <Tab /> */ }
@@ -101,7 +102,7 @@ class Home extends Component {
 
             </Tabs>
 
-         
+
         </div>
         <UserCenterContainer />
       </div>
