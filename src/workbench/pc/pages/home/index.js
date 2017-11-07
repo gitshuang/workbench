@@ -84,17 +84,17 @@ class Home extends Component {
                   <WidgetArea data={widgetList} />
                </TabPane>
 
-               <TabPane tab='HR相关' key="1">
+               <TabPane tab='HR相关' key="2">
                    HR相关内容
 
                </TabPane>
 
-               <TabPane tab='我的日常' key="2">
+               <TabPane tab='我的日常' key="3">
                    我的日常内容
 
                </TabPane>
 
-               <TabPane tab='公司新闻' key="3">
+               <TabPane tab='公司新闻' key="4">
                    公司新闻内容
 
                </TabPane>
