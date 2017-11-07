@@ -7,8 +7,6 @@ import { sideBar } from './style.css';
 
 const { setContentSrc } = actions;
 
-const MenuItemGroup = Menu.ItemGroup;
-
 class SideBarContainer extends Component {
   constructor(props, context) {
     super(props, context);
@@ -19,22 +17,22 @@ class SideBarContainer extends Component {
   }
   handleClick({ key }) {
     const { data, setContentSrc } = this.props;
-    const item = data.find(v => v.id === key);
+    const item = data[key];
     if (item) {
       setContentSrc.bind(this, item.src)
       this.setState({
-        current: e.key,
+        current: key,
       });
     }
   }
   render() {
-    const { data, setContentSrc } = this.props;
+    const { data } = this.props;
     return (
       <div className={sideBar} >
         <Menu onClick={this.handleClick} style={{ width: 240 }} selectedKeys={[this.state.current]} mode="inline">
           {
-            data.map((item) => (
-              <Menu.Item key={item.id} >{item.name}</Menu.Item>
+            data.map((item, i) => (
+              <Menu.Item key={i} >{item.name}</Menu.Item>
             ))
           }
         </Menu>

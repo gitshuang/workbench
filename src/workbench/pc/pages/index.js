@@ -5,6 +5,7 @@ import {
   withRouter,
 } from 'react-router-dom';
 import routes from 'router';
+import store from 'store';
 import { mapStateToProps } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
@@ -83,10 +84,13 @@ class Root extends Component {
   }
 }
 
-export default App = () => (
+const App = () => (
   <Router>
     <Provider store={store} >
       <Root />
     </Provider>
   </Router>
 );
+
+export default App;
+

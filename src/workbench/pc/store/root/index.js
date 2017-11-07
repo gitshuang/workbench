@@ -27,15 +27,15 @@ const defaultState = {
 
 const reducer = handleActions({
   [requestStart](state) {
-    Loading.create();
+    // Loading.create();
     return state;
   },
   [requestSuccess](state) {
-    Loading.destroy();
+    // Loading.destroy();
     return state;
   },
   [requestError](state, { payload: msg }) {
-    Loading.destroy();
+    // Loading.destroy();
     notification.notice({
       content: msg,
       duration: 6,

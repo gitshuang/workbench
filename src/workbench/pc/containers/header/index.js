@@ -31,10 +31,10 @@ class HeaderContainer extends Component {
           mode="light"
           iconName={<Icon type="touxiang1" />}
           leftContent={
-            leftContent.map(child => cloneElement(child))
+            leftContent.map((child, i) => cloneElement(child, { key: i }))
           }
           rightContent={
-            rightContent.map(child => cloneElement(child))
+            rightContent.map((child, i) => cloneElement(child, { key: i }))
           }
         >{ title }</NavBar>
       </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import HeaderContainer from 'containers/header';
+import Header from 'containers/header';
 import UserCenterContainer from 'containers/userCenter';
 import WidgetArea from 'components/widgetArea';
 import { mapStateToProps } from '@u';

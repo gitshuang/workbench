@@ -26,3 +26,4 @@ export default connect(mapStateToProps(
     namespace: 'work',
   },
 ))(ContentContainer);
+
