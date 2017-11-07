@@ -12,14 +12,13 @@ const {
 
 class HeaderContainer extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
     children: PropTypes.node,
   }
   render() {
-    const { children, title, changeQuickServiceDisplay } = this.props;
+    const { children, changeQuickServiceDisplay, onLeftClick } = this.props;
     const children2Array = Children.toArray(children);
     const leftContent = children2Array.filter(
-      (v) => v.props.position === undefined || v.props.position === 'left'
+      (v) => v.props.position === 'left'
     );
     const rightContent = children2Array.filter(
       (v) => v.props.position === 'right'
@@ -36,7 +35,8 @@ class HeaderContainer extends Component {
           rightContent={
             rightContent.map((child, i) => cloneElement(child, { key: i }))
           }
-        >{ title }</NavBar>
+          onLeftClick={ onLeftClick }
+        >{ children }</NavBar>
       </div>
     );
   }

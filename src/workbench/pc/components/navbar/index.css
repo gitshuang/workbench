@@ -1,4 +1,4 @@
-.lebra-navbar{
+:global(.lebra-navbar){
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11,11 +11,11 @@
   background-color: #108ee9;
   color: #fff;
 }
-.lebra-navbar-light{
+:global(.lebra-navbar-light){
   background-color: #eaeaea;
   color: #108ee9;
 }
-.lebra-navbar-left, .lebra-navbar-title, .lebra-navbar-right{
+:global(.lebra-navbar-left), :global(.lebra-navbar-title), :global(.lebra-navbar-right){
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -30,11 +30,11 @@
   -ms-flex-align: center;
   align-items: center;
 }
-.lebra-navbar-left{
+:global(.lebra-navbar-left){
   padding-left: 15px;
   font-size: 16px;
 }
-.lebra-navbar-title{
+:global(.lebra-navbar-title){
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -42,10 +42,10 @@
   font-size: 16px;
   white-space: nowrap;
 }
-.lebra-navbar-light .lebra-navbar-title{
+:global(.lebra-navbar-light) :global(.lebra-navbar-title){
   color: #000;
 }
-.lebra-navbar-right{
+:global(.lebra-navbar-right){
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;

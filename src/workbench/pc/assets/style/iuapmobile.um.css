@@ -175,6 +175,28 @@ body {
   -webkit-flex: 1;
   flex: 1;
 }
+/*定位布局*/
+.um-css3-hc {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+.um-css3-vc {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+
+.um-css3-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 /*栅格布局*/
 .um-container {
   margin-right: auto;

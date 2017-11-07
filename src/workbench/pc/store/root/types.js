@@ -8,4 +8,5 @@ export default createTypes(
   'GET_SERVICE_LIST',
   'GET_MESSAGE',
   'CHANGE_QUICK_SERVICE_DISPLAY',
+  'CHANGE_TITLE_SERVICE_DISPLAY',
 );

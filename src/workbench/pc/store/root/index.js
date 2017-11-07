@@ -17,12 +17,14 @@ const {
   getServiceList,
   getMessage,
   changeQuickServiceDisplay,
+  changeTitleServiceDisplay,
 } = actions;
 
 const defaultState = {
   productList: [],
   serviceList: [],
   quickServiceDisplay: false,
+  titleServiceDisplay: false,
 };
 
 const reducer = handleActions({
@@ -76,6 +78,10 @@ const reducer = handleActions({
   [changeQuickServiceDisplay]: state => ({
     ...state,
     quickServiceDisplay: !state.quickServiceDisplay,
+  }),
+  [changeTitleServiceDisplay]: state => ({
+    ...state,
+    titleServiceDisplay: !state.titleServiceDisplay,
   }),
 }, defaultState);
 

@@ -23,6 +23,7 @@ const {
   requestStart,
   requestSuccess,
   requestError,
+  changeTitleServiceDisplay
 } = rootActions;
 
 @withRouter
@@ -37,6 +38,7 @@ const {
     requestStart,
     requestSuccess,
     requestError,
+    changeTitleServiceDisplay,
     getWidgetList,
     changeUserInfoDisplay,
   }
@@ -60,13 +62,18 @@ export default class Home extends Component {
       });
     }
   }
+
+  aaa =() => {
+    alert(1)
+  }
+
   render() {
-    const { changeUserInfoDisplay, widgetList } = this.props;
+    const { changeUserInfoDisplay, widgetList, changeTitleServiceDisplay } = this.props;
     return (
       <div className="um-win">
         <div className="um-header">
-          <Header title="首页">
-            <button position="left" onClick={changeUserInfoDisplay} >个人中心</button>
+          <Header onLeftClick={ changeUserInfoDisplay }>
+            <span position="center" onClick={ changeTitleServiceDisplay }>首页<i className="iconfont icon-toupiao"></i></span>
           </Header>
           {/* <Tab /> */}
         </div>
