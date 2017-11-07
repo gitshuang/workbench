@@ -8,73 +8,105 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'public/base.css';
+
+import Tabs, { TabPane } from 'bee-tabs';
+
 // import Tab from 'containers/homeTabs';
 
-const {
-  wrap,
-} = baseStyles;
+const {wrap, } = baseStyles;
 
-const {
-  changeUserInfoDisplay,
-  getWidgetList,
-} = homeActions;
+const {changeUserInfoDisplay, getWidgetList, } = homeActions;
 
-const {
-  requestStart,
-  requestSuccess,
-  requestError,
-} = rootActions;
+const {requestStart, requestSuccess, requestError, } = rootActions;
 
 @withRouter
 @connect(
-  mapStateToProps(
-    'widgetList',
-    {
-      namespace: 'home',
-    }
-  ),
-  {
-    requestStart,
-    requestSuccess,
-    requestError,
-    getWidgetList,
-    changeUserInfoDisplay,
-  }
-)
-export default class Home extends Component {
-  componentWillMount() {
-    const {
-      requestStart,
-      requestSuccess,
-      requestError,
-      getWidgetList,
-      widgetList,
-    } = this.props;
-    if (!widgetList.length) {
-      requestStart();
-      getWidgetList().then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
+    mapStateToProps(
+        'widgetList',
+        {
+            namespace: 'home',
         }
-        requestSuccess();
-      });
+    ),
+    {
+        requestStart,
+        requestSuccess,
+        requestError,
+        getWidgetList,
+        changeUserInfoDisplay,
     }
-  }
-  render() {
-    const { changeUserInfoDisplay, widgetList } = this.props;
-    return (
-      <div className="um-win">
+)
+
+class Home extends Component {
+
+    constructor(props) {
+        super(props);
+        // this.callback = this.callback.bind(this);
+
+    }
+
+    componentWillMount() {
+        const {requestStart, requestSuccess, requestError, getWidgetList, widgetList, } = this.props;
+        if (!widgetList.length) {
+            requestStart();
+            getWidgetList().then(({error, payload}) => {
+                if (error) {
+                    requestError(payload);
+                }
+                requestSuccess();
+            });
+        }
+    }
+
+    callback = (e) => {
+
+
+    }
+
+    render() {
+        const {changeUserInfoDisplay, widgetList} = this.props;
+        return (
+            <div className="um-win">
         <div className="um-header">
           <Header title="首页">
             <button position="left" onClick={changeUserInfoDisplay} >个人中心</button>
           </Header>
-          {/* <Tab /> */}
+          { /* <Tab /> */ }
         </div>
         <div className="um-content">
-          <WidgetArea data={widgetList} />
+
+              <Tabs
+            defaultActiveKey="1"
+            onChange={this.callback}
+            tabBarStyle="upborder"
+            className="demo-tabs"
+            >
+               <TabPane tab='待办' key="1">
+                  <WidgetArea data={widgetList} />
+               </TabPane>
+
+               <TabPane tab='HR相关' key="1">
+                   HR相关内容
+
+               </TabPane>
+
+               <TabPane tab='我的日常' key="2">
+                   我的日常内容
+
+               </TabPane>
+
+               <TabPane tab='公司新闻' key="3">
+                   公司新闻内容
+
+               </TabPane>
+
+            </Tabs>
+
+         
         </div>
         <UserCenterContainer />
       </div>
-    );
-  }
+        );
+    }
 }
+
+export default Home;
