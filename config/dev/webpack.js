@@ -29,6 +29,28 @@ module.exports = function (config) {
         },
         {
           test: /\.css$/,
+          include: [paths('assets')],
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: false,
+                importLoaders: 1,
+                sourceMap: false
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                sourceMap: false
+              }
+            }
+          ]
+        },
+        {
+          test: /\.css$/,
           include: [paths('src')],
           exclude: [paths('assets')],
           use: [
