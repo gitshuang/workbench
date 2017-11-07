@@ -5,6 +5,7 @@ import actions from 'store/root/work/actions';
 import Menu, { SubMenu } from 'bee-menus';
 import { sideBar } from './style.css';
 
+
 const { setContentSrc } = actions;
 
 class SideBarContainer extends Component {
@@ -13,15 +14,15 @@ class SideBarContainer extends Component {
     this.state = {
       current: 1,
     };
-    this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
-  handleClick({ key }) {
+  handleClick(o) {
     const { data, setContentSrc } = this.props;
-    const item = data[key];
+    const item = data[o.key];
     if (item) {
-      setContentSrc.bind(this, item.src)
+      setContentSrc(item.src);
       this.setState({
-        current: key,
+        current: o.key,
       });
     }
   }
@@ -45,5 +46,5 @@ export default connect(
   () => ({}),
   {
     setContentSrc,
-  }
+  },
 )(SideBarContainer);
