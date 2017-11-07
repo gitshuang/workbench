@@ -88,9 +88,10 @@ export default class Work extends Component {
     const { type, menu } = this.state;
     return (
       <div className={wrap} >
-        <HeaderContainer title={product.name || ''} >
-          <button onClick={this.goBack.bind(this)} >返回</button>
+        <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
+          <span position="center">{product.name || ''}</span>
         </HeaderContainer>
+
         {
           this.state.loaded ? (
             <div className={workArea} >

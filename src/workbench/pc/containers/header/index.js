@@ -15,28 +15,29 @@ class HeaderContainer extends Component {
     children: PropTypes.node,
   }
   render() {
-    const { children, changeQuickServiceDisplay, onLeftClick } = this.props;
+    const { children, changeQuickServiceDisplay, onLeftClick,iconName,leftContent } = this.props;
     const children2Array = Children.toArray(children);
-    const leftContent = children2Array.filter(
+    /*const leftContent = children2Array.filter(
       (v) => v.props.position === 'left'
-    );
+    );*/
     const rightContent = children2Array.filter(
       (v) => v.props.position === 'right'
     ).concat(<Icon type="quanzi" onClick={changeQuickServiceDisplay} />);
 
+    const centerContent = children2Array.filter(
+      (v) => v.props.position === 'center'
+    );
     return (
       <div className="header">
         <NavBar
           mode="light"
-          iconName={<Icon type="touxiang1" />}
-          leftContent={
-            leftContent.map((child, i) => cloneElement(child, { key: i }))
-          }
+          iconName={ iconName }
+          leftContent={ leftContent }
           rightContent={
             rightContent.map((child, i) => cloneElement(child, { key: i }))
           }
           onLeftClick={ onLeftClick }
-        >{ children }</NavBar>
+        >{ centerContent }</NavBar>
       </div>
     );
   }

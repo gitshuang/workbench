@@ -73,7 +73,7 @@ export default class Home extends Component {
       <div className="um-win">
         <div className="um-header">
           <Header onLeftClick={ changeUserInfoDisplay }>
-            <span position="center" onClick={ changeTitleServiceDisplay }>首页<i className="iconfont icon-toupiao"></i></span>
+            <span position="center" onClick={ changeTitleServiceDisplay }>首页<i className="iconfont icon-toupiao um-icon-md"></i></span>
           </Header>
           {/* <Tab /> */}
         </div>

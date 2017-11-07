@@ -9,7 +9,36 @@ class QuickServiceContainer extends Component {
     const { titleServiceDisplay } = this.props;
     return (
       <div className={title + ' um-css3-hc'} style={{ display: titleServiceDisplay ? 'block' : 'none' }} >
-        123
+        <div>
+          <h4>相关服务</h4>
+          <ul className="clearfix">
+            <li>
+              <button className="btn btn-gray">简历</button>
+            </li>
+            <li>
+              <button className="btn btn-gray">邮件</button>
+            </li>
+            <li>
+              <button className="btn btn-gray">登记表</button>
+            </li>
+            <li>
+              <button className="btn btn-gray">Offer</button>
+            </li>
+            <li>
+              <button className="btn btn-gray">审批</button>
+            </li>
+            <li>
+              <button className="btn btn-gray">转正</button>
+            </li>
+            <li>
+              <button className="btn btn-gray">合同</button>
+            </li>
+            <li>
+              <button className="btn btn-gray">组织架构</button>
+            </li>
+          </ul>
+        </div>
+
       </div>
     );
   }

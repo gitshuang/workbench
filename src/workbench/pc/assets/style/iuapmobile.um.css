@@ -42,11 +42,46 @@ h4, h5, h6 {
 *:before, *:after {
   box-sizing: border-box;
 }
-
+/* position */
+.tl {
+  text-align: left;
+}
+.tc {
+  text-align: center;
+}
+.tr {
+  text-align: right;
+}
+.fl {
+  float: left;
+  display: inline;
+}
+.fr {
+  float: right;
+  display: inline;
+}
+.clearfix {
+  display: block;
+}
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: " ";
+}
+.clearfix:after {
+  clear: both;
+}
+.db {
+  display: block;
+}
+.ib {
+  display: inline-block;
+}
+.none {
+  display: none;
+}
 html {
   background-color: #efeff4;
 }
-
 html, body {
   margin: 0;
   /*overflow:hidden;*/
@@ -1074,4 +1109,222 @@ body {
   .um-lg-offset-12 {
     margin-left: 100%;
   }
+}
+/*常用的一些样式*/
+.btn, .btn-bg, .um-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  color: #007aff;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #007aff;
+  -webkit-user-select: none;
+  padding: 9px 12px;
+  font-size: 17px;
+  line-height: 1.5;
+  border-radius: 5px;
+}
+.btn:hover, .btn-bg:hover, .um-btn:hover {
+  text-decoration: none;
+}
+.btn:focus, .btn-bg:focus, .um-btn:focus {
+  outline: 0;
+}
+.btn:active, .btn-bg:active, .um-btn:active, .btn.active, .active.btn-bg, .active.um-btn {
+  outline: 0;
+  box-shadow: inset 2px 3px 5px rgba(0, 0, 0, 0.12);
+  opacity: .95;
+}
+.btn.disabled, .disabled.btn-bg, .disabled.um-btn, .btn[disabled], [disabled].btn-bg, [disabled].um-btn, fieldset[disabled] .btn, fieldset[disabled] .btn-bg, fieldset[disabled] .um-btn {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: .6;
+}
+/*带填充的btn*/
+.btn-bg {
+  background-color: #007aff;
+  color: #ffffff;
+}
+
+.btn-gray {
+  color: #000;
+  background-color: #fff;
+  border-color: #e6e6e6;
+}
+.btn-gray .badge {
+  color: #fff;
+  background-color: #000;
+}
+
+.btn-primary {
+  color: #34aadc;
+  background-color: #fff;
+  border-color: #34aadc;
+}
+.btn-primary .badge {
+  color: #fff;
+  background-color: #34aadc;
+}
+
+.btn-success {
+  color: #4cd964;
+  background-color: #fff;
+  border-color: #4cd964;
+}
+.btn-success .badge {
+  color: #fff;
+  background-color: #4cd964;
+}
+
+.btn-info {
+  color: #5bc0de;
+  background-color: #fff;
+  border-color: #5bc0de;
+}
+.btn-info .badge {
+  color: #fff;
+  background-color: #5bc0de;
+}
+
+.btn-warning {
+  color: #ff9500;
+  background-color: #fff;
+  border-color: #ff9500;
+}
+.btn-warning .badge {
+  color: #fff;
+  background-color: #ff9500;
+}
+
+.btn-danger {
+  color: #ff3b30;
+  background-color: #fff;
+  border-color: #ff3b30;
+}
+.btn-danger .badge {
+  color: #fff;
+  background-color: #ff3b30;
+}
+
+.um-btn {
+  color: #fff;
+  background-color: #007aff;
+  border-color: #007aff;
+}
+.um-btn .badge {
+  color: #007aff;
+  background-color: #fff;
+}
+
+.um-btn-gray {
+  color: #000;
+  background-color: #ddd;
+  border-color: #ddd;
+}
+.um-btn-gray .badge {
+  color: #ddd;
+  background-color: #000;
+}
+
+.um-btn-primary {
+  color: #fff;
+  background-color: #34aadc;
+  border-color: #34aadc;
+}
+.um-btn-primary .badge {
+  color: #34aadc;
+  background-color: #fff;
+}
+
+.um-btn-success {
+  color: #fff;
+  background-color: #4cd964;
+  border-color: #4cd964;
+}
+.um-btn-success .badge {
+  color: #4cd964;
+  background-color: #fff;
+}
+
+.um-btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+}
+.um-btn-info .badge {
+  color: #5bc0de;
+  background-color: #fff;
+}
+
+.um-btn-warning {
+  color: #fff;
+  background-color: #ff9500;
+  border-color: #ff9500;
+}
+.um-btn-warning .badge {
+  color: #ff9500;
+  background-color: #fff;
+}
+
+.um-btn-danger {
+  color: #fff;
+  background-color: #ff3b30;
+  border-color: #ff3b30;
+}
+.um-btn-danger .badge {
+  color: #ff3b30;
+  background-color: #fff;
+}
+
+.btn-link, .btn-link:focus, .btn-link:visited .btn-link:active, .btn-link.active, .btn-link[disabled], fieldset[disabled] .btn-link {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.btn-link[disabled]:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
+  color: #777777;
+  text-decoration: none;
+}
+
+.btn-lg {
+  padding: 12px 16px;
+  font-size: 20.4px;
+  line-height: 2;
+  border-radius: 7px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 14.45px;
+  line-height: 1.1;
+  border-radius: 3px;
+}
+
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 14.45px;
+  line-height: 1.1;
+  border-radius: 3px;
+}
+
+.btn-inline {
+  display: inline-block;
+  width: auto;
+}
+
+.btn-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.btn-block + .btn-block {
+  margin-top: 5px;
 }
