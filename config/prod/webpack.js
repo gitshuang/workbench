@@ -11,7 +11,7 @@ module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     entry: {
       main: [
-        './src/main.js'
+        './src/workbench/pc/main.js',
       ],
     },
     module: {

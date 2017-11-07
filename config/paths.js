@@ -1,20 +1,20 @@
 var path = require('path')
 
 function resolve (dir) {
-  return path.join(__dirname, '../', dir)
+  return path.join(__dirname, '../src/workbench/pc/', dir)
 }
 
 var paths = {
-  src: resolve('src/'),
-  dist: resolve('dist/'),
-  assets: resolve('src/assets/'),
-  containers: resolve('src/containers/'),
-  public: resolve('src/public/'),
-  api: resolve('src/api/'),
-  components: resolve('src/components/'),
-  router: resolve('src/router/'),
-  store: resolve('src/store/'),
-  utils: resolve('src/public/utils.js'),
+  src: resolve(''),
+  assets: resolve('assets'),
+  containers: resolve('containers'),
+  public: resolve('public'),
+  pages: resolve('pages'),
+  api: resolve('api'),
+  components: resolve('components'),
+  router: resolve('router'),
+  store: resolve('store'),
+  utils: resolve('public/utils.js'),
 }
 
 module.exports = function (key) {

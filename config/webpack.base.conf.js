@@ -13,6 +13,7 @@ module.exports = {
       'assets': paths('assets'),
       'containers': paths('containers'),
       'public': paths('public'),
+      'pages': paths('pages'),
       'api': paths('api'),
       'components': paths('components'),
       'router': paths('router'),
@@ -22,15 +23,15 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   loader: 'eslint-loader',
-      //   enforce: 'pre',
-      //   include: [paths('src')],
-      //   options: {
-      //     formatter: require('eslint-friendly-formatter')
-      //   }
-      // },
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [paths('src')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
