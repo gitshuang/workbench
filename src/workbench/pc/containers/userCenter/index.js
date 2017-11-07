@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { wrap } from './style.css';
+import { wrap, outerContainer, active } from './style.css';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 
@@ -43,12 +43,13 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
   render() {
-    const { userInfoDisplay, userInfo: { name, company } } = this.props;
+    const { userInfoDisplay, userInfo: { name, company, phone } } = this.props;
     return (
-      <div className={wrap} style={{display: (userInfoDisplay ? 'block' : 'none')}} >
+      <div className={`${wrap} ${outerContainer}` +  (userInfoDisplay ? ` ${active}` : '') } style={{ display: (userInfoDisplay ? 'block' : 'none') }} >
         <ul>
           <li>{name}</li>
           <li>{company}</li>
+          <li>{phone}</li>
         </ul>
       </div>
     );
