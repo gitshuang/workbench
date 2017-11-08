@@ -10,7 +10,7 @@ import rootActions from 'store/root/actions';
 import baseStyles from 'public/base.css';
 
 import Tabs, { TabPane } from 'bee-tabs';
-
+import Icon from 'components/icon'
 // import Tab from 'containers/homeTabs';
 
 const {wrap, } = baseStyles;
@@ -69,7 +69,10 @@ class Home extends Component {
       <div className="um-win">
         <div className="um-header">
           <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
-            <span position="center" onClick={ changeTitleServiceDisplay }>首页<i style={{fontSize:"10px"}} className="iconfont icon-xiala um-icon-md"></i></span>
+            <div position="center" onClick={ changeTitleServiceDisplay }>
+              <span>首页</span>
+              <Icon type="xiala" style={{fontSize:"8px",marginLeft:"5px"}} />
+            </div>
           </Header>
           { /* <Tab /> */ }
         </div>

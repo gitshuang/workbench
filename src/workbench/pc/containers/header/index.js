@@ -24,9 +24,17 @@ class HeaderContainer extends Component {
       (v) => v.props.position === 'right'
     ).concat(<Icon type="quanzi" onClick={changeQuickServiceDisplay} />);
 
-    const centerContent = children2Array.filter(
+    let centerContent = children2Array.filter(
       (v) => v.props.position === 'center'
     );
+    /*
+    centerContent = centerContent.reduce((result, item) => {
+      if (item.props.icon) {
+        return result.concat( <Icon type= {item.props.icon} />)
+      }
+      return result;
+    }, centerContent);
+  */
     return (
       <div className="header">
         <NavBar
@@ -36,8 +44,9 @@ class HeaderContainer extends Component {
           rightContent={
             rightContent.map((child, i) => cloneElement(child, { key: i }))
           }
-          onLeftClick={ onLeftClick }
-        >{ centerContent }</NavBar>
+          onLeftClick={ onLeftClick }>
+          { centerContent.map((child, i) => cloneElement(child, { key: i })) }
+        </NavBar>
       </div>
     );
   }
