@@ -1,0 +1,24 @@
+.button_group{
+	width: 100%;
+}
+
+.button_group li{
+	width: 100px;
+    margin: auto;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    background: #ccc;
+    margin-left: 10px;
+    float: left;
+}
+
+.button_group li:hover {
+
+	border-bottom: 4px solid #e14b4a;
+
+}
+
+.selected{
+	border-bottom: 4px solid #e14b4a;
+}
