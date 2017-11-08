@@ -17,6 +17,7 @@ const {
   getServiceList,
   getMessage,
   changeQuickServiceDisplay,
+  changeQuickServiceHidden,
   changeTitleServiceDisplay,
 } = actions;
 
@@ -77,7 +78,11 @@ const reducer = handleActions({
   },
   [changeQuickServiceDisplay]: state => ({
     ...state,
-    quickServiceDisplay: !state.quickServiceDisplay,
+    quickServiceDisplay: true,
+  }),
+  [changeQuickServiceHidden]: state => ({
+    ...state,
+    quickServiceDisplay: false,
   }),
   [changeTitleServiceDisplay]: state => ({
     ...state,

@@ -69,9 +69,9 @@ class Home extends Component {
       <div className="um-win">
         <div className="um-header">
           <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
-            <div position="center" onClick={ changeTitleServiceDisplay }>
+            <div position="center">
               <span>首页</span>
-              <Icon type="xiala" style={{fontSize:"8px",marginLeft:"5px"}} />
+              {/* <Icon type="xiala" style={{fontSize:"8px",marginLeft:"5px"}} /> */}
             </div>
           </Header>
           { /* <Tab /> */ }
