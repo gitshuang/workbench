@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { wrap, outerContainer, active } from './style.css';
+import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut } from './style.css';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
+import Button from 'bee-button';
 
 const {
   getUserInfo,
@@ -42,15 +43,27 @@ class UserInfoContainer extends Component {
   componentWillUnmount() {
     hideUserInfoDisplay();
   }
+  handleClick() {
+    alert("谢谢")
+  }
+
   render() {
-    const { userInfoDisplay, userInfo: { name, company, phone } } = this.props;
+    const { userInfoDisplay, userInfo: { name, company, phone, imgsrc } } = this.props;
     return (
-      <div className={`${wrap} ${outerContainer}` +  (userInfoDisplay ? ` ${active}` : '') } style={{ display: (userInfoDisplay ? 'block' : 'none') }} >
-        <ul>
-          <li>{name}</li>
-          <li>{company}</li>
-          <li>{phone}</li>
-        </ul>
+      <div className={`${wrap} ${outerContainer}`  +  (userInfoDisplay ? ` ${active}` : '') } style={{ display: (userInfoDisplay ? 'block' : 'none') }} >
+        <div className={imgUser}>
+          <img src={imgsrc} className={imgInner}/>
+        </div>
+        <div className={userInfo}>
+          <ul>
+            <li>{name}</li>
+            <li>{company}</li>
+            <li>{phone}</li>
+          </ul>
+        </div>
+        <div className={loginOut}>
+          <button colors="primary" onclick={ this.handleClick }>注销</button>
+        </div>
       </div>
     );
   }
