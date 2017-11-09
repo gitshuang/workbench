@@ -9,6 +9,7 @@ import application from './application';
 import actions from './actions';
 import types from './types';
 import Button from 'bee-button';
+import Notice from 'components/notice';
 
 
 const notification = Notification.newInstance({ position: 'bottomRight' });
