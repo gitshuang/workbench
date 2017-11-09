@@ -60,8 +60,8 @@ class UserInfoContainer extends Component {
         <div className={userInfo}>
           <ul>
             <li>{name}</li>
-            <li>{company}</li>
             <li>{phone}</li>
+            <li>{company}</li>
           </ul>
         </div>
         <div className={loginOut}>

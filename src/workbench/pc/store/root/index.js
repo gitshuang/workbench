@@ -1,3 +1,4 @@
+import React from 'react';
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import { mergeReducers } from '@u';
@@ -6,6 +7,8 @@ import home from './home';
 import work from './work';
 import actions from './actions';
 import types from './types';
+import Button from 'bee-button';
+
 
 const notification = Notification.newInstance({ position: 'bottomRight' });
 
@@ -68,9 +71,16 @@ const reducer = handleActions({
     if (!error) {
       message.forEach((m) => {
         notification.notice({
-          content: m.content,
-          duration: 6,
+          title:m.title,
+          content: <div>
+            <p>{m.content}</p>
+            <Button  className="notifyBtn" size="sm" style={{ position: 'absolute', right: 15, bottom: 15}}>ok</Button>
+          </div>,
+
+          color:m.color,
+          duration: 11,
           closable: false,
+
         });
       });
     }

@@ -1,13 +1,24 @@
 {
   "data": [
     {
-      "content": "消息一"
+      "content": "您收到了一封新邮件",
+      "title": "邮件",
+      "color": "dark",
+      "type":"mail:mayun"
     },
     {
-      "content": "消息二"
+      "title": "通知",
+      "content": "明天下午李总召开会议，请您参加",
+      "color": "light",
+      "type":"notify:meeting"
     },
     {
-      "content": "消息三"
+      "content": "消息三",
+      "color": "warning"
+    },
+    {
+      "content": "通知",
+      "color": "danger"
     }
   ],
   "status": 1
