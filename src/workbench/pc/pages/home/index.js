@@ -12,7 +12,7 @@ import {button_group,selected,WidgetCont,WidgetTitle} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
- 
+
 const {wrap, } = baseStyles;
 
 const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
@@ -106,11 +106,11 @@ class Home extends Component {
         if(anchorElement) { anchorElement.scrollIntoView(); }
         this.setLiSelected(id);
     }
- 
+
     render() {
 
         const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
-        let {workList} = this.state; 
+        let {workList} = this.state;
 
         let self = this;
         let lis = [];
@@ -148,10 +148,10 @@ class Home extends Component {
             </ul>
           </div>
 
-          <div className="um-content"> 
+          <div className="um-content">
              {conts}
           </div>
-          <UserCenterContainer />
+          <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>
         </div>
         );
     }

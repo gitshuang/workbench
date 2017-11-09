@@ -1,6 +1,5 @@
 /* notice */
 import React, {Component} from 'react';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
 import Button from 'bee-button';
@@ -15,15 +14,10 @@ const defaultProps = {
 
 const propTypes = {
   notice: PropTypes.string,
-  className: PropTypes.string,
-  children: PropTypes.any,
-  mode: PropTypes.string,
   iconName: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
-  ]),
-  leftContent: PropTypes.any,
-  rightContent: PropTypes.any
+  ])
 }
 
 

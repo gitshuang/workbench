@@ -8,11 +8,13 @@ import rootActions from 'store/root/actions';
 
 import Button from 'bee-button';
 import Tabs, { TabPane } from 'bee-tabs';
-import Icon from 'components/icon'
+import Icon from 'components/icon';
+import onClickOutside from 'react-onclickoutside';
 
 const {
   getUserInfo,
   hideUserInfoDisplay,
+  userInfoDisplay
 } = homeActions;
 
 const {
@@ -20,7 +22,15 @@ const {
   requestSuccess,
   requestError,
 } = rootActions;
+@connect(
+  ()=>({}),
+  {
+    hideUserInfoDisplay
+  }
+)
 
+
+@onClickOutside
 class UserInfoContainer extends Component {
   static propTypes = {
     userInfo: PropTypes.object,
@@ -30,6 +40,11 @@ class UserInfoContainer extends Component {
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
+  }
+
+  handleClickOutside(evt) {
+    const {changeQuickServiceHidden,hideUserInfoDisplay } = this.props;
+    hideUserInfoDisplay();
   }
   componentWillMount() {
     const { userInfo: { name }, getUserInfo } = this.props;

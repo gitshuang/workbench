@@ -76,7 +76,7 @@ const reducer = handleActions({
           title:m.title,
           content: <Notice data={m}/>,
           color:m.color,
-          duration: 9,
+          duration: null,
           closable: false,
 
         });
