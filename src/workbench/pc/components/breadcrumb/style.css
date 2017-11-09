@@ -1,0 +1,10 @@
+.breadcrumbClass {
+
+}
+.breadcrumbClass ol {
+  display:inline-block;
+  background: none;
+}
+.breadcrumbClassIcon {
+  cursor:pointer;
+}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import HeaderContainer from 'containers/header';
+import BreadcrumbContainer from 'containers/breadcrumb';
 import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
 import rootActions from 'store/root/actions';
@@ -91,7 +92,7 @@ export default class Work extends Component {
         <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
           <span position="center">{product.name || ''}</span>
         </HeaderContainer>
-
+        <BreadcrumbContainer />
         {
           this.state.loaded ? (
             <div className={workArea} >
