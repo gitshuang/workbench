@@ -12,6 +12,7 @@ import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
 import 'assets/style/iuapmobile.um.css';
 import 'assets/style/sidebar.css';
+import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 const {
   requestStart,
@@ -72,6 +73,7 @@ class Root extends Component {
       requestSuccess();
     });
     timer(getMessage, 10000);
+    regMessageTypeHandler.call(this);
   }
   render() {
     return (

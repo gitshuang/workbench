@@ -3,14 +3,14 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
+import Button from 'bee-button';
+import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
 import "./index.css"
 
 const defaultProps = {
   notice: 'notice',
   mode: 'dark',
-  iconName: '',
-  handClick() {
-  },
+  iconName: ''
 };
 
 const propTypes = {
@@ -23,31 +23,39 @@ const propTypes = {
     PropTypes.string,
   ]),
   leftContent: PropTypes.any,
-  rightContent: PropTypes.any,
-  handClick: PropTypes.func
+  rightContent: PropTypes.any
 }
 
-class NavBar extends Component {
+
+class Notice extends Component {
   constructor(props, context) {
     super(props, context);
   }
 
+  handClick() {
+    const type = this.props.data.type;
+    dispathMessageTypeHandler(type);
+  }
+
   render() {
     const {
-      notice,content, handClick, iconName, leftContent, rightContent
+      notice,
+      data: {
+        content,
+        typeBtn,
+      },
     } = this.props;
 
-
     return (
-      <div className={notice}>
+      <div >
         <p>{content}</p>
-        <Button  className="noticeBtn" onClick={ handClick } size="sm" style={{ position: 'absolute',fontSize: 10,minWidth: 50, right: 15, bottom: 5}}>{m.typeBtn}</Button>
+        <Button  className={`${notice}Btn`} size="sm" onClick={ this.handClick.bind(this) } >{typeBtn}</Button>
       </div>
     );
   }
 }
 
-NavBar.propTypes = propTypes;
-NavBar.defaultProps = defaultProps;
+Notice.propTypes = propTypes;
+Notice.defaultProps = defaultProps;
 
 export default Notice;
