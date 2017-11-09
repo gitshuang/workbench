@@ -88,18 +88,22 @@ export default class Work extends Component {
     const { product = {} } = this.props;
     const { type, menu } = this.state;
     return (
-      <div className={wrap} >
-        <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
-          <span position="center">{product.name || ''}</span>
-        </HeaderContainer>
-        <BreadcrumbContainer />
-        {
-          this.state.loaded ? (
-            <div className={workArea} >
-              { makeLayout(type, menu) }
-            </div>
-          ) : null
-        }
+      <div className="um-win">
+        <div className="um-header">
+          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
+            <span position="center">{product.name || ''}</span>
+          </HeaderContainer>
+        </div>
+        <div className="um-content">
+          <BreadcrumbContainer />
+          {
+            this.state.loaded ? (
+              <div className={workArea} >
+                { makeLayout(type, menu) }
+              </div>
+            ) : null
+          }
+        </div>
       </div>
     );
   }
