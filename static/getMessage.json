@@ -14,21 +14,23 @@
       "content": "明天下午李总召开会议，请您参加",
       "color": "dark",
       "typeBtn": "OK",
-      "type":"notify:meeting"
+      "type":"notice:meeting"
     },
     {
       "messageId": "002",
       "title": "审批",
       "content": "别忘补考勤哦",
       "typeBtn": "查看",
-      "color": "warning"
+      "color": "warning",
+      "type":"tip:check"
     },
     {
       "messageId": "002",
       "title": "张三",
       "content": "别忘签到哦",
       "typeBtn": "签到",
-      "color": "danger"
+      "color": "danger",
+      "type":"tips:in"
     }
   ],
   "status": 1
