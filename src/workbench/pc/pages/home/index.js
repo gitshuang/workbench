@@ -122,7 +122,7 @@ class Home extends Component {
 
                 let firstLi = i !=0 ? <div className={WidgetTitle} >{da.name}</div>:null;
 
-                let selectedClass = i == 0 ? selected : null;
+                let selectedClass = da.selected ? selected : null;
 
                 lis.push(<a key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
 
