@@ -119,12 +119,12 @@ class Home extends Component {
         if (workList.length != 0 ) {
             workList.map(function(da,i) {
                 let _id = da.id+"_"+i;
-                
+
                 let firstLi = i !=0 ? <div className={WidgetTitle} >{da.name}</div>:null;
 
                 let selectedClass = i == 0 ? selected : null;
 
-                lis.push(<a key={da.id+i} onClick={()=>this.scrollToAnchor("1004_3")}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
+                lis.push(<a key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
 
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     {firstLi}
