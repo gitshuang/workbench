@@ -1,12 +1,14 @@
 .wrap {
   position: absolute;
-  left: 0;
+  left: 10px;
   top: 50px;
-  width: 200px;
+  width: 400px;
+  height: 400px;
   background: #fff;
   border: 1px solid #000;
+  z-index: 99;
 }
-.outerContainer{
+.outerContainer {
   webkit-transition: -webkit-transform .3s ease-out;
   -o-transition: -o-transform .3s ease-out;
   transition: transform .3s ease-out;
@@ -18,4 +20,31 @@
   -webkit-transform: translate3d(0,0,0);
   -o-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
+}
+.imgUser{
+  float: left;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+.imgInner{
+  margin-top: 25px;
+}
+.userInfo{
+  float: left;
+  font-size: 13px;
+  line-height: 2;
+  margin-top: 15px;
+}
+.loginOut{
+  float: left;
+  margin-top: 40px;
+  margin-left: 55px;
+  text-align: center;
+}
+.tabContent{
+  float: left;
+  width: 380px;
+  margin-top: 20px;
+  margin-left: 10px;
 }

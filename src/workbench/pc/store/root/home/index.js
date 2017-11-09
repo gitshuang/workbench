@@ -5,6 +5,7 @@ import actions from './actions';
 const {
   getUserInfo,
   getWidgetList,
+  getWorkList,
   changeUserInfoDisplay,
   hideUserInfoDisplay,
 } = actions;
@@ -12,6 +13,7 @@ const {
 const defaultState = {
   userInfo: {},
   widgetList: [],
+  workList: [],
   userInfoDisplay: false,
 };
 
@@ -54,6 +56,7 @@ const createReducer = (key) => (state, { payload, error }) => {
 const reducer = handleActions({
   [getUserInfo]: createReducer('userInfo'),
   [getWidgetList]: createReducer('widgetList'),
+  [getWorkList]: createReducer('workList'),
   [changeUserInfoDisplay]: (state) => {
     const newState = {
       ...state,

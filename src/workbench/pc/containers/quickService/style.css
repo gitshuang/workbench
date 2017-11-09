@@ -3,5 +3,32 @@
   top: 50px;
   right: 0;
   background: #fff;
-  border: 1px solid #000;
+  border:1px solid #888888;
+}
+.service h4{
+  font-weight: 500;
+  font-size: 12px;
+  padding-left: 15px;
+  line-height: 30px;
+}
+.service ul{
+  padding:0px 10px 20px;
+  width:300px;
+}
+.service ul li{
+  float: left;
+  width:60px;
+  height:60px;
+  line-height: 60px;
+  margin:5px;
+  text-align: center;
+  background: #EEEEEE;
+  font-size:12px;
+  cursor: pointer;
+}
+.service button{
+  border: none;
+  border-radius: 0;
+  border-top:1px solid #888888;
+  font-size: 12px;
 }
