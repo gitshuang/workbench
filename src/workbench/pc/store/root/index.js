@@ -1,11 +1,16 @@
+import React from 'react';
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import { mergeReducers } from '@u';
 import { Loading, Notification } from 'tinper-bee';
 import home from './home';
 import work from './work';
+import application from './application';
 import actions from './actions';
 import types from './types';
+import Button from 'bee-button';
+import Notice from 'components/notice';
+
 
 const notification = Notification.newInstance({ position: 'bottomRight' });
 
@@ -68,9 +73,12 @@ const reducer = handleActions({
     if (!error) {
       message.forEach((m) => {
         notification.notice({
-          content: m.content,
-          duration: 6,
+          title:m.title,
+          content: <Notice data={m}/>,
+          color:m.color,
+          duration: 9,
           closable: false,
+
         });
       });
     }
@@ -95,6 +103,7 @@ export default function (state, action) {
   const pageState = {
     home: home(state ? state.home : undefined, action),
     work: work(state ? state.work : undefined, action),
+    application: work(state ? state.application : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;

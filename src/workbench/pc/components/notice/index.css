@@ -1,0 +1,19 @@
+:global(.notice){
+  position: absolute;
+}
+:global(.noticeBtn){
+  position: absolute;
+  padding: 0px;
+  font-size: 1rem;
+  min-width: 3rem;
+  right: 15px;
+  bottom: 5px;
+}
+:global(.noticeBtn2){
+  position: absolute;
+  padding: 0px;
+  font-size: 1rem;
+  min-width: 3rem;
+  right: 5px;
+  bottom: 5px;
+}
