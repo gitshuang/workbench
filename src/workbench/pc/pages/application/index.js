@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
-
 import Header from 'containers/header';
 
 const {requestStart, requestSuccess, requestError} = rootActions;

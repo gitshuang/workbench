@@ -81,7 +81,7 @@ class Root extends Component {
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
-        <QuickServiceContainer />
+        <QuickServiceContainer outsideClickIgnoreClass={'icon-quanzi'} />
       </div>
     );
   }

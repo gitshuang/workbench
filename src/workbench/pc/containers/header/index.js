@@ -6,7 +6,6 @@ import Icon from 'components/icon';
 import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
 
-
 const {
   changeQuickServiceDisplay,
 } = actions;
@@ -63,7 +62,7 @@ class HeaderContainer extends Component {
 }
 
 export default connect(mapStateToProps(
-  'quickServiceDisplay',
+  'quickServiceDisplay'
 ),
   {
     changeQuickServiceDisplay,

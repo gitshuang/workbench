@@ -1,5 +1,6 @@
 .service {
   position: absolute;
+  z-index: 9;
   top: 50px;
   right: 0;
   background: #fff;
