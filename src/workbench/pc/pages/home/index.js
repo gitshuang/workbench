@@ -23,7 +23,7 @@ const {wrap, } = baseStyles;
 
 const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
 
-const {requestStart, requestSuccess, requestError, changeTitleServiceDisplay} = rootActions;
+const {requestStart, requestSuccess, requestError} = rootActions;
 
 @withRouter
 @connect(
@@ -41,7 +41,6 @@ const {requestStart, requestSuccess, requestError, changeTitleServiceDisplay} = 
         getWidgetList,
         getWorkList,
         changeUserInfoDisplay,
-        changeTitleServiceDisplay
     }
 )
 
@@ -101,7 +100,7 @@ class Home extends Component {
     }
 
     render() {
-        const {changeUserInfoDisplay, widgetList, workList, changeTitleServiceDisplay} = this.props;
+        const {changeUserInfoDisplay, widgetList, workList} = this.props;
 
         let lis = [];
         let conts = [];

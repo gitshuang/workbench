@@ -8,7 +8,6 @@ import routes from 'router';
 import store from 'store';
 import { mapStateToProps } from '@u';
 import QuickServiceContainer from 'containers/quickService';
-import TitleServiceContainer from 'containers/titleService'
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
 import 'assets/style/iuapmobile.um.css';
@@ -81,7 +80,6 @@ class Root extends Component {
           <RouteWithSubRoutes key={i} {...route} />
         ))}
         <QuickServiceContainer />
-        <TitleServiceContainer />
       </div>
     );
   }

@@ -5,6 +5,7 @@ import { mergeReducers } from '@u';
 import { Loading, Notification } from 'tinper-bee';
 import home from './home';
 import work from './work';
+import application from './application';
 import actions from './actions';
 import types from './types';
 import Button from 'bee-button';
@@ -105,6 +106,7 @@ export default function (state, action) {
   const pageState = {
     home: home(state ? state.home : undefined, action),
     work: work(state ? state.work : undefined, action),
+    application: work(state ? state.application : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;

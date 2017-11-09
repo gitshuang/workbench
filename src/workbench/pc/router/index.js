@@ -1,5 +1,6 @@
 import Home from 'pages/home';
 import Work from 'pages/work';
+import Application from 'pages/application';
 
 const routes = [
   {
@@ -10,6 +11,10 @@ const routes = [
   {
     path: '/work/:productId',
     component: Work,
+  },
+  {
+    path: '/application',
+    component: Application,
   },
 ];
 
