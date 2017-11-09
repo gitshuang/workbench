@@ -74,11 +74,11 @@ const reducer = handleActions({
           title:m.title,
           content: <div>
             <p>{m.content}</p>
-            <Button  className="notifyBtn" size="sm" style={{ position: 'absolute', right: 15, bottom: 15}}>ok</Button>
+            <Button  className="notifyBtn" size="sm" style={{ position: 'absolute',fontSize: 10,minWidth: 50, right: 15, bottom: 5}}>{m.typeBtn}</Button>
           </div>,
 
           color:m.color,
-          duration: 11,
+          duration: 9,
           closable: false,
 
         });
