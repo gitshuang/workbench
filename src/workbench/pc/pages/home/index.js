@@ -11,8 +11,8 @@ import baseStyles from 'public/base.css';
 import {button_group,selected,WidgetCont,WidgetTitle} from './style.css';
 
 import Button from 'bee-button';
-//TUDO考虑是否去掉
-import Icon from 'components/icon';
+//TUDO考虑是否去掉  暂时可以先去掉
+//import Icon from 'components/icon';
 
 import ButtonGroup from 'bee-button-group';
 import BeeIcon from 'bee-icon';
@@ -69,7 +69,7 @@ class Home extends Component {
     }
 
     componentWillMount() {
-        
+
         const {requestStart, requestSuccess, requestError, getWidgetList, getWorkList, widgetList, } = this.props;
         if (!widgetList.length) {
             requestStart();
@@ -86,13 +86,13 @@ class Home extends Component {
 
 
     }
- 
+
     scrollToAnchor = (id) => {
 
         debugger;
         // if (id) return;
         let anchorElement = document.getElementById(id);
-        
+
         if(anchorElement) { anchorElement.scrollIntoView(); }
     }
 
@@ -114,11 +114,11 @@ class Home extends Component {
                 let selectedClass = i == 0 ? selected : null;
 
                 lis.push(<a key={da.id+i} onClick={()=>this.scrollToAnchor("1004_3")}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
-                
+
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     <div className={WidgetTitle} >{da.name}</div>
                     <div  className={WidgetCont} name={da.id} >
-                        <WidgetArea data={da.widgeList} > </WidgetArea> 
+                        <WidgetArea data={da.widgeList} > </WidgetArea>
                     </div>
                 </div>);
             });
@@ -127,22 +127,23 @@ class Home extends Component {
         return (<div className="um-win">
           <div className="um-header">
             <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
-            <div position="center">
-              <span>首页</span>
-              {/* <Icon type="xiala" style={{fontSize:"8px",marginLeft:"5px"}} /> */}
-            </div>
-          </Header>
+              <div position="center">
+                <span>首页</span>
+                {/* <Icon type="xiala" style={{fontSize:"8px",marginLeft:"5px"}} /> */}
+              </div>
+            </Header>
+            <ul className={button_group}>
+              {lis}
+            </ul>
             { /* <Tab /> */ }
           </div>
           <div className="um-content">
 
-             <ul className={button_group}>
-               {lis}
-             </ul>
+
 
              <a onClick={()=>this.scrollToAnchor("1004_3")}> aaaa </a>
 
-             {conts} 
+             {conts}
 
           </div>
           <UserCenterContainer />
