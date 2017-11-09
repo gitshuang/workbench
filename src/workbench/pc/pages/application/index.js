@@ -27,7 +27,6 @@ class Application extends Component {
 
   componentWillMount() {
     const { requestStart, requestSuccess, requestError, } = this.props;
-
   }
 
   goBack() {
@@ -35,7 +34,8 @@ class Application extends Component {
   }
 
   render() {
-    return (<div className="um-win">
+    return (
+      <div className="um-win">
         <div className="um-header">
           <Header onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
             <div position="center">
