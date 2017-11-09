@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import NavBar from 'components/navbar';
 import Icon from 'components/icon';
-import { noop } from '@u';
+import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
+
 
 const {
   changeQuickServiceDisplay,
@@ -14,6 +15,15 @@ class HeaderContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
   }
+
+  openService(event) {
+
+    const { changeQuickServiceDisplay, quickServiceDisplay } = this.props;
+    if( !quickServiceDisplay ){
+      changeQuickServiceDisplay();
+    }
+  }
+
   render() {
     const { children, changeQuickServiceDisplay, onLeftClick,iconName,leftContent } = this.props;
     const children2Array = Children.toArray(children);
@@ -22,7 +32,7 @@ class HeaderContainer extends Component {
     );*/
     const rightContent = children2Array.filter(
       (v) => v.props.position === 'right'
-    ).concat(<Icon type="quanzi" onClick={changeQuickServiceDisplay} />);
+    ).concat(<Icon type="quanzi" onClick={ (e) =>{this.openService(e)} }/>);
 
     let centerContent = children2Array.filter(
       (v) => v.props.position === 'center'
@@ -52,8 +62,9 @@ class HeaderContainer extends Component {
   }
 }
 
-export default connect(
-  ()=>({}),
+export default connect(mapStateToProps(
+  'quickServiceDisplay',
+),
   {
     changeQuickServiceDisplay,
   }

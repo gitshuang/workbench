@@ -86,8 +86,7 @@ class Home extends Component {
 
 
     }
-
-
+ 
     scrollToAnchor = (id) => {
 
         debugger;
@@ -128,14 +127,11 @@ class Home extends Component {
         return (<div className="um-win">
           <div className="um-header">
             <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
-              <div position="center" onClick={ changeTitleServiceDisplay }>
-                <span>首页</span>
-                <Icon type="xiala" style={{
-                fontSize: "8px",
-                marginLeft: "5px"
-            }} />
-              </div>
-            </Header>
+            <div position="center">
+              <span>首页</span>
+              {/* <Icon type="xiala" style={{fontSize:"8px",marginLeft:"5px"}} /> */}
+            </div>
+          </Header>
             { /* <Tab /> */ }
           </div>
           <div className="um-content">
