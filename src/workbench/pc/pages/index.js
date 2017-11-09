@@ -12,6 +12,7 @@ import TitleServiceContainer from 'containers/titleService'
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
 import 'assets/style/iuapmobile.um.css';
+import 'assets/style/sidebar.css';
 
 const {
   requestStart,

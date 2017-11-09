@@ -3,18 +3,121 @@
     "type": 2,
     "menu": [
       {
-        "name": "百度",
-        "src": "http://www.baidu.com"
+        "id": "console",
+        "name": "人力云",
+        "location": "http://www.sohu.com",
+        "menustatus": "Y",
+        "parentid": null,
+        "icon": "uf uf-qq",
+        "target": "",
+        "urltype": "url",
+        "children": [],
+        "sort": 1,
+        "openview": "curpage",
+        "category": "engine"
       },
       {
-        "name": "新浪微博",
-        "src": "http://www.weibo.com"
+        "id": "myReleasePool",
+        "name": "财务云",
+        "location": "http://www.sina.com",
+        "menustatus": "Y",
+        "parentid": null,
+        "icon": "uf uf-4square-3",
+        "target": "",
+        "urltype": "url",
+        "children": [],
+        "sort": 2,
+        "openview": "curpage",
+        "category": "pass"
       },
       {
-        "name": "优酷",
-        "src": "http://www.youku.com"
+        "id": "continuous",
+        "name": "云审批",
+        "location": "http://www.163.com",
+        "menustatus": "Y",
+        "parentid": null,
+        "icon": "uf uf-send",
+        "target": "",
+        "urltype": "url",
+        "children": [],
+        "sort": 2,
+        "openview": "curpage",
+        "category": "engine"
+      },
+      {
+        "id": "appmgr",
+        "name": "云表单",
+        "location": "http://www.weibo.com",
+        "menustatus": "Y",
+        "parentid": null,
+        "icon": "uf uf-map",
+        "target": "",
+        "urltype": "url",
+        "children": [],
+        "sort": 2,
+        "openview": "curpage",
+        "category": "engine"
+      },
+      {
+        "id": "mirrorRes",
+        "name": "云打印",
+        "location": "http://www.yonyou.com",
+        "menustatus": "Y",
+        "parentid": null,
+        "icon": "uf uf-9square-2",
+        "target": "",
+        "urltype": "url",
+        "children": [],
+        "sort": 3,
+        "openview": "curpage",
+        "category": "engine"
+      },
+      {
+        "id": "confcenter2",
+        "name": "协同云",
+        "location": "/confcenter",
+        "menustatus": "Y",
+        "parentid": null,
+        "icon": "uf uf-rain",
+        "target": "",
+        "urltype": "view",
+        "children": [
+          {
+            "id": "appconf",
+            "name": "应用设置",
+            "location": "https://ec.yonyoucloud.com/",
+            "menustatus": "Y",
+            "parentid": null,
+            "icon": "iconfont cl cl-bk-conf green-A700",
+            "target": "",
+            "urltype": "url",
+            "children": [],
+            "sort": 1,
+            "openview": "curpage",
+            "category": "paas"
+          },
+          {
+            "id": "configmgr",
+            "name": "配置管理",
+            "location": "https://www.baidu.com/",
+            "menustatus": "Y",
+            "parentid": null,
+            "icon": "iconfont cl cl-set indigo-700",
+            "target": "",
+            "urltype": "url",
+            "children": [],
+            "sort": 2,
+            "openview": "curpage",
+            "category": "paas"
+          }
+        ],
+        "sort": 5,
+        "openview": "curpage",
+        "category": "paas"
       }
+
     ]
   },
   "status": 1
 }
+
