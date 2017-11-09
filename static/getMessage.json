@@ -1,24 +1,36 @@
 {
   "data": [
     {
+      "messageId": "001",
       "content": "您收到了一封新邮件",
       "title": "邮件",
-      "color": "dark",
+      "color": "light",
+      "typeBtn": "查看",
       "type":"mail:mayun"
     },
     {
+      "messageId": "002",
       "title": "通知",
       "content": "明天下午李总召开会议，请您参加",
-      "color": "light",
-      "type":"notify:meeting"
+      "color": "dark",
+      "typeBtn": "OK",
+      "type":"notice:meeting"
     },
     {
-      "content": "消息三",
-      "color": "warning"
+      "messageId": "002",
+      "title": "审批",
+      "content": "别忘补考勤哦",
+      "typeBtn": "查看",
+      "color": "warning",
+      "type":"tip:check"
     },
     {
-      "content": "通知",
-      "color": "danger"
+      "messageId": "002",
+      "title": "张三",
+      "content": "别忘签到哦",
+      "typeBtn": "签到",
+      "color": "danger",
+      "type":"tips:in"
     }
   ],
   "status": 1
