@@ -1,17 +1,28 @@
 .widgetList {
-  padding: 20px 0 0 20px;
-  // margin: 20px 0 0 0;
-  border: 1px solid #000;
+  /*padding-top:10px;*/
+  /*padding-bottom: 10px;*/
+  /*// margin: 20px 0 0 0;*/
+  /*border: 1px solid #000;*/
+  /*padding-top: 10px;*/
+  /*padding-bottom: 10px;*/
+
   list-style: none;
   overflow: hidden;
 }
 .widgetList li {
   float: left;
-  height: 100px;
-  width: 100px;
-  padding: 0;
-  margin: 0 20px 20px 0;
-  border: 1px solid #000;
+  height: 158px;
+  /*width: 100px;*/
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /*margin: 0 20px 20px 0;*/
+  /*border: 1px solid #000;*/
+  background: #fff;
+  box-shadow: 0 0 20px #b8c1c6;
+
+  display: block;
+
+  /*margin-bottom: 10px;*/
 }
 .widgetList li:after {
   content: '\20';
@@ -26,4 +37,35 @@
   text-align: center;
   display: inline-block;
   vertical-align: middle;
+}
+
+.title{
+    height: 50px;
+    line-height: 50px;
+    background: #ccc;
+    display: -webkit-box;
+}
+
+.title_left,
+.title_right{
+    -webkit-box-flex:1.0;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    display: -webkit-box;
+}
+
+.title_left{
+  width: 30px;
+  /*background: red;*/
+}
+
+.title_right{
+  /*background: yellow;*/
+    
+}
+.context{
+  
+}
+.bottom{
+  
 }

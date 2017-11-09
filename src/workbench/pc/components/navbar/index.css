@@ -12,7 +12,7 @@
   color: #fff;
 }
 :global(.lebra-navbar-light){
-  background-color: #eaeaea;
+  background-color: #fff;
   color: #108ee9;
 }
 :global(.lebra-navbar-left), :global(.lebra-navbar-title), :global(.lebra-navbar-right){

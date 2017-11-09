@@ -11,11 +11,9 @@ import baseStyles from 'public/base.css';
 import {button_group,selected,WidgetCont,WidgetTitle} from './style.css';
 
 import Button from 'bee-button';
-//TUDO考虑是否去掉
-import Icon from 'components/icon';
 
 import ButtonGroup from 'bee-button-group';
-import BeeIcon from 'bee-icon';
+import Icon from 'bee-icon';
 
 // import Tab from 'containers/homeTabs';
 
@@ -50,8 +48,9 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        this.scrollToAnchor = this.scrollToAnchor.bind(this);
-
+        this.state = {
+            workList:[]
+        }
         this.getWorkService();
     }
 
@@ -60,6 +59,13 @@ class Home extends Component {
         const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
 
         getWorkList().then(({error, payload}) => {
+
+            let workList = [];
+            Object.assign(workList,payload);
+            workList[0].selected = true;
+            this.setState({
+                workList
+            })
             if (error) {
                 requestError(payload);
             }
@@ -82,41 +88,57 @@ class Home extends Component {
         }
     }
 
-    callback = (e) => {
+    setLiSelected(id){
 
+        this.state.workList.map(function(da,i){
+            da.selected = false;
+        })
 
+        this.state.workList.map(function(da,i){
+            if((da.id+"_"+i) == id){
+                da.selected = true;
+            }
+        })
+
+        this.setState({
+            ...this.state
+        })
     }
- 
+
     scrollToAnchor = (id) => {
-
-        debugger;
-        // if (id) return;
-        let anchorElement = document.getElementById(id);
         
+        let anchorElement = document.getElementById(id);
         if(anchorElement) { anchorElement.scrollIntoView(); }
+        this.setLiSelected(id);
     }
 
-    scrollToAnchorddd(){
+    getLiClass(){
+
+
+        return selectedClass;
 
     }
 
     render() {
-        const {changeUserInfoDisplay, widgetList, workList, changeTitleServiceDisplay} = this.props;
+        const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
+        let {workList} = this.state;
 
+        let self = this;
         let lis = [];
         let conts = [];
 
-        if (workList) {
+        if (workList.length != 0 ) {
             workList.map(function(da,i) {
-                let icon = da.icon ? <BeeIcon type={da.icon} /> : null;
                 let _id = da.id+"_"+i;
 
-                let selectedClass = i == 0 ? selected : null;
-
-                lis.push(<a key={da.id+i} onClick={()=>this.scrollToAnchor("1004_3")}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
+                let selectedClass = da.selected ? selected : null;
                 
+                lis.push(<a key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
+                
+                let firstLi = i !=0 ? <div className={WidgetTitle} >{da.name}</div>:null;
+
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
-                    <div className={WidgetTitle} >{da.name}</div>
+                    {firstLi}
                     <div  className={WidgetCont} name={da.id} >
                         <WidgetArea data={da.widgeList} > </WidgetArea> 
                     </div>
@@ -129,21 +151,15 @@ class Home extends Component {
             <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
             <div position="center">
               <span>首页</span>
-              {/* <Icon type="xiala" style={{fontSize:"8px",marginLeft:"5px"}} /> */}
             </div>
           </Header>
-            { /* <Tab /> */ }
-          </div>
-          <div className="um-content">
 
-             <ul className={button_group}>
+           <ul className={button_group}>
                {lis}
-             </ul>
-
-             <a onClick={()=>this.scrollToAnchor("1004_3")}> aaaa </a>
-
-             {conts} 
-
+            </ul>
+          </div>
+          <div className="um-content"> 
+             {conts}
           </div>
           <UserCenterContainer />
         </div>

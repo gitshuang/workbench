@@ -8,58 +8,69 @@
             "widgeList":[
                 {
                     "id":"1101",
-                    "width":1,
-                    "title":"代办业务一组件"
+                    "width":2,
+                    "title":"入职",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1102",
                     "width":1,
-                    "title":"代办业务二组件"
+                    "title":"核算",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
                     "width":1,
-                    "title":"代办业务三组件"
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
                 }
              ]
         },
@@ -70,15 +81,21 @@
             "widgeList":[
                 {
                     "id":"3001",
-                    "title":"HR相关业务一组件"
+                    "width":1,
+                    "title":"HR相关业务一组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"3001",
-                    "title":"HR相关业务二组件"
+                    "width":1,
+                    "title":"HR相关业务二组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"2001",
-                    "title":"HR相关业务三组件"
+                    "width":1,
+                    "title":"HR相关业务三组件",
+                    "optionTitle":"查看"
                 }
              ]
         },
@@ -89,15 +106,21 @@
             "widgeList":[
                 {
                     "id":"4001",
-                    "title":"我的日常业务一组件"
+                    "width":1,
+                    "title":"我的日常业务一组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"5001",
-                    "title":"我的日常二组件"
+                    "width":1,
+                    "title":"我的日常二组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"6001",
-                    "title":"我的日常业务三组件"
+                    "width":1,
+                    "title":"我的日常业务三组件",
+                    "optionTitle":"查看"
                 }
              ]
         },
@@ -108,15 +131,21 @@
             "widgeList":[
                 {
                     "id":"2001",
-                    "title":"公司新闻一组件"
+                    "width":1,
+                    "title":"公司新闻一组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"2001",
-                    "title":"公司新闻二组件"
+                    "width":1,
+                    "title":"公司新闻二组件",
+                    "optionTitle":"查看"
                 },
                 {
                     "id":"2001",
-                    "title":"公司新闻三组件"
+                    "width":1,
+                    "title":"公司新闻三组件",
+                    "optionTitle":"查看"
                 }
              ]
         }
