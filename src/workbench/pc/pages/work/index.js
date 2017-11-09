@@ -46,10 +46,30 @@ function makeLayout(type, menu) {
 
 @withRouter
 @connect(
-  mapStateToProps({
-    key: 'product',
-    value: (state, { productId }) => state.productList.find(product => product.id === productId),
-  }),
+  mapStateToProps(
+    {
+      key: 'product',
+      //value: (state, { productId }) => state.productList.find(product => product.id === productId),
+      value: (home,props,root)=>{
+        let value = '';
+        home.workList.forEach((work) => {
+          work.widgeList.forEach((widget)=>{
+            if(widget.id === props.match.params.productId){
+              value = widget;
+              return false;
+            }
+          })
+          if (value) {
+            return false;
+          }
+        });
+        return value
+      }
+    },
+    {
+      namespace: 'home'
+    }
+  ),
   {
     requestStart,
     requestSuccess,
@@ -66,7 +86,7 @@ export default class Work extends Component {
     };
   }
   goBack() {
-    this.props.history.goBack();
+    this.props.history.replace('');
   }
   componentWillMount() {
     const { product = {} } = this.props;
@@ -88,18 +108,22 @@ export default class Work extends Component {
     const { product = {} } = this.props;
     const { type, menu } = this.state;
     return (
-      <div className={wrap} >
-        <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
-          <span position="center">{product.name || ''}</span>
-        </HeaderContainer>
-        <BreadcrumbContainer />
-        {
-          this.state.loaded ? (
-            <div className={workArea} >
-              { makeLayout(type, menu) }
-            </div>
-          ) : null
-        }
+      <div className="um-win">
+        <div className="um-header">
+          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
+            <span position="center">{product.title || ''}</span>
+          </HeaderContainer>
+        </div>
+        <div className="um-content">
+          <BreadcrumbContainer />
+          {
+            this.state.loaded ? (
+              <div className={workArea} >
+                { makeLayout(type, menu) }
+              </div>
+            ) : null
+          }
+        </div>
       </div>
     );
   }
