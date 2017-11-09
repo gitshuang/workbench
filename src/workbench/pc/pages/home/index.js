@@ -8,7 +8,7 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'public/base.css';
-import {button_group,selected} from './style.css';
+import {button_group,selected,WidgetCont,WidgetTitle} from './style.css';
 
 import Button from 'bee-button';
 //TUDO考虑是否去掉
@@ -50,6 +50,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
+        this.scrollToAnchor = this.scrollToAnchor.bind(this);
+
         this.getWorkService();
     }
 
@@ -67,8 +69,7 @@ class Home extends Component {
     }
 
     componentWillMount() {
-        console.log(" componentWillMount ");
-
+        
         const {requestStart, requestSuccess, requestError, getWidgetList, getWorkList, widgetList, } = this.props;
         if (!widgetList.length) {
             requestStart();
@@ -86,6 +87,20 @@ class Home extends Component {
 
     }
 
+
+    scrollToAnchor = (id) => {
+
+        debugger;
+        // if (id) return;
+        let anchorElement = document.getElementById(id);
+        
+        if(anchorElement) { anchorElement.scrollIntoView(); }
+    }
+
+    scrollToAnchorddd(){
+
+    }
+
     render() {
         const {changeUserInfoDisplay, widgetList, workList, changeTitleServiceDisplay} = this.props;
 
@@ -95,13 +110,18 @@ class Home extends Component {
         if (workList) {
             workList.map(function(da,i) {
                 let icon = da.icon ? <BeeIcon type={da.icon} /> : null;
-                if(i == 0 ){
-                  lis.push(<li className={selected} key={da.id} >{da.name}</li> );
-                }else{
-                  lis.push(<li  key={da.id} >{da.name}</li>);
-                }
+                let _id = da.id+"_"+i;
 
-                conts.push(<div name={da.id} > </div>);
+                let selectedClass = i == 0 ? selected : null;
+
+                lis.push(<a key={da.id+i} onClick={()=>this.scrollToAnchor("1004_3")}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
+                
+                conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
+                    <div className={WidgetTitle} >{da.name}</div>
+                    <div  className={WidgetCont} name={da.id} >
+                        <WidgetArea data={da.widgeList} > </WidgetArea> 
+                    </div>
+                </div>);
             });
         }
 
@@ -123,7 +143,10 @@ class Home extends Component {
              <ul className={button_group}>
                {lis}
              </ul>
-             {conts}
+
+             <a onClick={()=>this.scrollToAnchor("1004_3")}> aaaa </a>
+
+             {conts} 
 
           </div>
           <UserCenterContainer />
