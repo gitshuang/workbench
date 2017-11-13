@@ -27,7 +27,9 @@ class WidgetArea extends Component {
 
                 let _width = (self.state.width * da.width) + (self.state.marginRight*(da.width-1));
 
-                lis.push(<li key={'widgetList' + da.id + i }  style={{width:_width,marginRight:10,}} >
+                // lis.push(<li key={'widgetList' + da.id + i }  style={{width:_width,marginRight:10,}} >
+
+                lis.push(<li key={'widgetList' + da.id + i } >
 
                   <div className={title}> 
                     <div className={title_left}><Icon type="uf-add-c-o" /></div>

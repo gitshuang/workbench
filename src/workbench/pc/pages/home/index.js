@@ -124,7 +124,7 @@ class Home extends Component {
 
                 let selectedClass = da.selected ? selected : null;
 
-                lis.push(<a key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
+                lis.push( <li key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}><a className={selectedClass}>{da.name}</a></li>);
 
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     {firstLi}
