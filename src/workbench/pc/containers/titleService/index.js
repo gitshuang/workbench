@@ -46,4 +46,7 @@ class QuickServiceContainer extends Component {
 
 export default connect(mapStateToProps(
   'titleServiceDisplay',
+  {
+    namespace: 'work',
+  },
 ))(QuickServiceContainer);
