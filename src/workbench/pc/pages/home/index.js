@@ -153,11 +153,8 @@ class Home extends Component {
     return (<div className="um-win">
         <div className="um-header">
           <Header onLeftClick={ changeUserInfoDisplay } leftContent={leftContent}>
-            <div position="center">
               <span>首页</span>
-            </div>
           </Header>
-
           <ul className={button_group}>
             {lis}
           </ul>
