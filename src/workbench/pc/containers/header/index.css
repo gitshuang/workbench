@@ -1,0 +1,37 @@
+.header{
+  height:64px;
+}
+.lebraNavbar{
+  height: 100%;
+}
+:global(.lebra-navbar-left-icon){
+  width:32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  position: relative;
+  cursor: pointer;
+  color: rgba(135,139,148,1);
+}
+:global(.lebra-navbar-right div){
+  width:32px;
+  height: 32px;
+  line-height: 32px;
+  position: relative;
+  cursor: pointer;
+}
+:global(.lebra-navbar-right .iconfont){
+  color: rgba(135,139,148,1);
+}
+:global(.lebra-navbar-right .active .iconfont){
+  color: rgba(225,76,70,1);
+}
+:global(.lebra-navbar-right .CircleDot){
+  position: absolute;
+  width:6px;
+  height: 6px;
+  background: rgba(225,76,70,1);
+  border-radius: 50% 50%;
+  top:5px;
+  right:5px;
+}

@@ -8,7 +8,7 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'public/base.css';
-import {page_home,button_group,selected,WidgetCont,WidgetTitle} from './style.css';
+import {page_home,button_group,selected,WidgetCont,WidgetTitle,HeaderLeft} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
@@ -135,15 +135,19 @@ class Home extends Component {
             });
         }
 
+
+        let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
+        let leftContent = <div className={HeaderLeft}>
+          <img src= {logoUrl} />
+        </div>
+
         return (<div className={page_home}>
           <div className="header">
-            <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
-                <div position="center">
+            <Header onLeftClick={ changeUserInfoDisplay } leftContent={leftContent} iconName={'wode'}>
                   <span>首页</span>
-                </div>
             </Header>
 
-           <ul className={button_group}>
+            <ul className={button_group}>
                {lis}
             </ul>
           </div>
