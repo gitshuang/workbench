@@ -29,6 +29,7 @@ const defaultState = {
   productList: [],
   serviceList: [],
   quickServiceDisplay: false,
+  messageType: true,
 };
 
 const reducer = handleActions({

@@ -3,11 +3,13 @@ import types from './types';
 
 const {
   SET_CONTENT_SRC,
-  CHANGE_TITLE_SERVICE_DISPLAY,
+  TITLE_SERVICE_DISPLAY,
+  TITLE_SERVICE_HIDDEN,
 } = types;
 
 export default createActions({
   },
   SET_CONTENT_SRC,
-  CHANGE_TITLE_SERVICE_DISPLAY,
+  TITLE_SERVICE_DISPLAY,
+  TITLE_SERVICE_HIDDEN,
   { namespace: 'work' });

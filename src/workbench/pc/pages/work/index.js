@@ -22,7 +22,7 @@ const {
   workArea,
   HeaderLeft
 } = styles;
-const { changeTitleServiceDisplay, } = workActions;
+const { titleServiceDisplay, } = workActions;
 const {
   requestStart,
   requestSuccess,
@@ -52,7 +52,6 @@ function makeLayout(type, menu) {
 @withRouter
 @connect(
   mapStateToProps(
-    'titleServiceDisplay',
     {
       key: 'product',
       //value: (state, { productId }) => state.productList.find(product => product.id === productId),
@@ -80,7 +79,7 @@ function makeLayout(type, menu) {
     requestStart,
     requestSuccess,
     requestError,
-    changeTitleServiceDisplay,
+    titleServiceDisplay,
   },
 )
 export default class Work extends Component {
@@ -113,15 +112,17 @@ export default class Work extends Component {
   }
   render() {
     let leftContent = <div className={HeaderLeft}>返回</div>
-    const { product = {}, changeTitleServiceDisplay } = this.props;
+    const { product = {}, titleServiceDisplay } = this.props;
     const { type, menu } = this.state;
 
     return (
       <div className="um-win">
         <div className="um-header">
           <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"qiyejieshao"} leftContent={leftContent}>
-            <span>{product.title || ''}</span>
-            <Icon type="qiyejieshao" onClick={changeTitleServiceDisplay}></Icon>
+            <div className="um-box">
+              <span>{product.title || ''}</span>
+              <Icon type="xiala" style={{marginLeft:"15px",fontSize:"10px"}} onClick={titleServiceDisplay}></Icon>
+            </div>
           </HeaderContainer>
         </div>
         <div className="um-content">
@@ -134,7 +135,7 @@ export default class Work extends Component {
             ) : null
           }
         </div>
-        <QuickServiceContainer />
+        <QuickServiceContainer outsideClickIgnoreClass={'icon-xiala'}/>
       </div>
     );
   }

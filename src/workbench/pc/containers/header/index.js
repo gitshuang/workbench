@@ -28,7 +28,16 @@ class HeaderContainer extends Component {
   }
 
   render() {
-    const { children, changeQuickServiceDisplay, onLeftClick,iconName,leftContent,rightContent, quickServiceDisplay } = this.props;
+    const {
+      children,
+      changeQuickServiceDisplay,
+      onLeftClick,
+      iconName,
+      leftContent,
+      rightContent,
+      quickServiceDisplay,
+      messageType
+    } = this.props;
 
     /*
     const children2Array = Children.toArray();
@@ -57,7 +66,7 @@ class HeaderContainer extends Component {
       <div className={appClass} style={{marginRight:"15px"}} onClick = {(e) =>{this.openService(e)}} ><Icon type="yingyong" /></div>,
       <div className="tc">
         <Icon type="xiaoxi" />
-        <span className="CircleDot"></span>
+        <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>
     );
     return (
@@ -79,7 +88,8 @@ class HeaderContainer extends Component {
 }
 
 export default connect(mapStateToProps(
-  'quickServiceDisplay'
+  'quickServiceDisplay',
+  'messageType',
 ),
   {
     changeQuickServiceDisplay,

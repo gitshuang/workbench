@@ -3,12 +3,34 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { title } from './style.css';
+import workActions from 'store/root/work/actions';
+import onClickOutside from 'react-onclickoutside';
 
+const { titleServiceHidden, } = workActions;
+
+@connect(mapStateToProps(
+  'titleServiceType',
+  {
+    "namespace":"work"
+  }
+  ),
+
+  {
+    titleServiceHidden
+  }
+)
+@onClickOutside
 class QuickServiceContainer extends Component {
+  handleClickOutside(evt) {
+    const {titleServiceHidden, titleServiceType } = this.props;
+    if(titleServiceType){
+      titleServiceHidden();
+    }
+  }
   render() {
-    const { titleServiceDisplay } = this.props;
+    const { titleServiceType } = this.props;
     return (
-      <div className={title + ' um-css3-hc'} style={{ display: titleServiceDisplay ? 'block' : 'none' }} >
+      <div className={title + ' um-css3-hc'} style={{ display: titleServiceType ? 'block' : 'none' }} >
         <div>
           <h4>相关服务</h4>
           <ul className="clearfix">
@@ -44,9 +66,4 @@ class QuickServiceContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps(
-  'titleServiceDisplay',
-  {
-    namespace: 'work',
-  },
-))(QuickServiceContainer);
+export default QuickServiceContainer;

@@ -4,12 +4,13 @@ import actions from './actions';
 
 const {
   setContentSrc,
-  changeTitleServiceDisplay,
+  titleServiceDisplay,
+  titleServiceHidden
 } = actions;
 
 const defaultState = {
   contentSrc: '',
-  titleServiceDisplay: false,
+  titleServiceType: false,
 };
 
 const reducer = handleActions({
@@ -17,9 +18,13 @@ const reducer = handleActions({
     ...state,
     contentSrc,
   }),
-  [changeTitleServiceDisplay]: state => ({
+  [titleServiceDisplay]: state => ({
     ...state,
-    titleServiceDisplay: !state.titleServiceDisplay,
+    titleServiceType: true,
+  }),
+  [titleServiceHidden]: state => ({
+    ...state,
+    titleServiceType: false,
   }),
 }, defaultState);
 
