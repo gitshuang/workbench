@@ -131,9 +131,7 @@ class Home extends Component {
 
         let selectedClass = da.selected ? selected : null;
 
-        lis.push(<a key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}>
-          <li className={selectedClass} key={da.id}>{da.name}</li>
-        </a>);
+        lis.push( <li key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}><a className={selectedClass}>{da.name}</a></li>);
 
         conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
           {firstLi}
@@ -143,7 +141,7 @@ class Home extends Component {
         </div>);
       });
     }
-    
+
     let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
     let leftContent = <div className={HeaderLeft}>
       <span>

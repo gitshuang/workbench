@@ -10,8 +10,9 @@ import { mapStateToProps } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
-import 'assets/style/iuapmobile.um.css';
-import 'assets/style/sidebar.css';
+//TODU 此处不应该引入全局样式，会影响到其他样式的设置(jony)。
+// import 'assets/style/iuapmobile.um.css';
+// import 'assets/style/sidebar.css';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 const {

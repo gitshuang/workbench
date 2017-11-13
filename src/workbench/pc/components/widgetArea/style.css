@@ -11,18 +11,15 @@
 }
 .widgetList li {
   float: left;
-  height: 158px;
-  /*width: 100px;*/
-  margin-top: 10px;
+  margin-right: 10px;
   margin-bottom: 10px;
-  /*margin: 0 20px 20px 0;*/
-  /*border: 1px solid #000;*/
-  background: #fff;
-  box-shadow: 0 0 20px #b8c1c6;
-
+  /*box-shadow: 0 0 20px #b8c1c6;*/
   display: block;
-
-  /*margin-bottom: 10px;*/
+  width:176px;
+  height:176px; 
+  background:rgba(255,255,255,1);
+  border-radius: 2px ; 
+  box-sizing: border-box;
 }
 .widgetList li:after {
   content: '\20';
@@ -45,21 +42,21 @@
     background: #ccc;
     display: -webkit-box;
 }
-
 .title_left,
 .title_right{
-    -webkit-box-flex:1.0;
     -webkit-box-align: center;
-    -webkit-box-pack: center;
     display: -webkit-box;
 }
 
 .title_left{
   width: 30px;
+  -webkit-box-pack: end;
   /*background: red;*/
 }
 
 .title_right{
+  -webkit-box-flex:1.0;
+  -webkit-box-pack: start;
   /*background: yellow;*/
     
 }

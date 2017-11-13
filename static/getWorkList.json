@@ -8,67 +8,67 @@
             "widgeList":[
                 {
                     "id":"1101",
-                    "width":2,
+                    "size":"sm",
                     "title":"入职",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1102",
-                    "width":1,
+                    "size":"sm",
                     "title":"核算",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"1103",
-                    "width":1,
+                    "size":"sm",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 }
@@ -77,23 +77,23 @@
         {
             "id":"1002",
             "name":"HR相关",
-            "width":2,
+            "size":"sm",
             "widgeList":[
                 {
                     "id":"3001",
-                    "width":1,
+                    "size":"sm",
                     "title":"HR相关业务一组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"3001",
-                    "width":1,
+                    "size":"sm",
                     "title":"HR相关业务二组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"2001",
-                    "width":1,
+                    "size":"sm",
                     "title":"HR相关业务三组件",
                     "optionTitle":"查看"
                 }
@@ -102,23 +102,23 @@
         {
             "id":"1003",
             "name":"我的日常",
-            "width":2,
+            "size":"sm",
             "widgeList":[
                 {
                     "id":"4001",
-                    "width":1,
+                    "size":"sm",
                     "title":"我的日常业务一组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"5001",
-                    "width":1,
+                    "size":"sm",
                     "title":"我的日常二组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"6001",
-                    "width":1,
+                    "size":"sm",
                     "title":"我的日常业务三组件",
                     "optionTitle":"查看"
                 }
@@ -127,23 +127,23 @@
         {
             "id":"1004",
             "name":"公司新闻",
-            "width":2,
+            "size":"sm",
             "widgeList":[
                 {
                     "id":"2001",
-                    "width":1,
+                    "size":"sm",
                     "title":"公司新闻一组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"2001",
-                    "width":1,
+                    "size":"sm",
                     "title":"公司新闻二组件",
                     "optionTitle":"查看"
                 },
                 {
                     "id":"2001",
-                    "width":1,
+                    "size":"sm",
                     "title":"公司新闻三组件",
                     "optionTitle":"查看"
                 }
