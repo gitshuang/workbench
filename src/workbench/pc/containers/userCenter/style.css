@@ -1,9 +1,9 @@
 .wrap {
   position: absolute;
-  left: 3px;
+  left: 0px;
   top: 40px;
   width: 400px;
-  height: 750px;
+  height: 770px;
   background: #fff;
   border: 1px solid #000;
   z-index: 99;
@@ -47,4 +47,15 @@
   width: 380px;
   margin-top: 20px;
   margin-left: 10px;
+}
+
+.active{
+  display:block;
+}
+.wrapBtn{
+  background-color:inherit;
+  border:solid 1px rgb(121, 121, 121);
+  border-radius: 5px;
+  color: rgb(51, 51, 51);
+  font-size: 16px;
 }
