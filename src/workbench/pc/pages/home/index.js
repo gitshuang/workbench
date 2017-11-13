@@ -116,7 +116,7 @@ class Home extends Component {
 
   render() {
 
-    const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
+    const {changeUserInfoDisplay, widgetList} = this.props;
     let {workList} = this.state;
 
     let self = this;
@@ -144,15 +144,12 @@ class Home extends Component {
 
     let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
     let leftContent = <div className={HeaderLeft}>
-      <span>
-        <Icon2 type="wode"/>
-      </span>
       <img src= {logoUrl} />
     </div>
 
     return (<div className="um-win">
         <div className="um-header">
-          <Header onLeftClick={ changeUserInfoDisplay } leftContent={leftContent}>
+          <Header onLeftClick={ changeUserInfoDisplay } leftContent={leftContent} iconName={'wode'}>
               <span>首页</span>
           </Header>
           <ul className={button_group}>

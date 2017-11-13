@@ -67,7 +67,9 @@ class HeaderContainer extends Component {
           mode="light"
           iconName={ iconName }
           leftContent={ leftContent }
-          rightContent={ rightContents }
+          rightContent={
+            rightContents.map((child, i) => cloneElement(child, { key: i }))
+          }
           onLeftClick={ onLeftClick }>
           { children }
         </NavBar>

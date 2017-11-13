@@ -34,7 +34,9 @@
   padding-left: 15px;
   font-size: 16px;
 }
-
+:global(.lebra-navbar-left-content){
+  cursor: pointer;
+}
 :global(.lebra-navbar-title){
   -webkit-box-pack: center;
   -webkit-justify-content: center;

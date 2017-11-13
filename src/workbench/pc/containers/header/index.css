@@ -4,6 +4,15 @@
 .lebraNavbar{
   height: 100%;
 }
+:global(.lebra-navbar-left-icon){
+  width:32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  position: relative;
+  cursor: pointer;
+  color: rgba(135,139,148,1);
+}
 :global(.lebra-navbar-right div){
   width:32px;
   height: 32px;

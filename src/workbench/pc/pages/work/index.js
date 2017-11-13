@@ -10,19 +10,24 @@ import rootActions from 'store/root/actions';
 import getProductInfo from 'store/root/work/api';
 import baseStyles from 'public/base.css';
 import styles from './style.css';
-
+import QuickServiceContainer from 'containers/titleService';
+import Icon from 'components/icon';
+import workActions from 'store/root/work/actions';
 const {
   wrap,
+
 } = baseStyles;
 
 const {
   workArea,
+  HeaderLeft
 } = styles;
-
+const { changeTitleServiceDisplay, } = workActions;
 const {
   requestStart,
   requestSuccess,
   requestError,
+
 } = rootActions;
 
 function makeLayout(type, menu) {
@@ -47,6 +52,7 @@ function makeLayout(type, menu) {
 @withRouter
 @connect(
   mapStateToProps(
+    'titleServiceDisplay',
     {
       key: 'product',
       //value: (state, { productId }) => state.productList.find(product => product.id === productId),
@@ -74,6 +80,7 @@ function makeLayout(type, menu) {
     requestStart,
     requestSuccess,
     requestError,
+    changeTitleServiceDisplay,
   },
 )
 export default class Work extends Component {
@@ -105,13 +112,16 @@ export default class Work extends Component {
     );
   }
   render() {
-    const { product = {} } = this.props;
+    let leftContent = <div className={HeaderLeft}>返回</div>
+    const { product = {}, changeTitleServiceDisplay } = this.props;
     const { type, menu } = this.state;
+
     return (
       <div className="um-win">
         <div className="um-header">
-          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
-            <span position="center">{product.title || ''}</span>
+          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"qiyejieshao"} leftContent={leftContent}>
+            <span>{product.title || ''}</span>
+            <Icon type="qiyejieshao" onClick={changeTitleServiceDisplay}></Icon>
           </HeaderContainer>
         </div>
         <div className="um-content">
@@ -124,6 +134,7 @@ export default class Work extends Component {
             ) : null
           }
         </div>
+        <QuickServiceContainer />
       </div>
     );
   }
