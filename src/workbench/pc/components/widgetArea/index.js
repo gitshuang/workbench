@@ -6,6 +6,8 @@ import { widgetList ,title,title_left,title_right,context,bottom} from './style.
 
 class WidgetArea extends Component {
 
+    //TUDO 数据中的 size ： sm 、lg、xg （小[标准]、中、大）
+
     // static propTypes = {
     //     widgeList: PropTypes.array.isRequired,
     // }
@@ -13,25 +15,50 @@ class WidgetArea extends Component {
      constructor(props) {
         super(props);
 
+
+        let _width = {
+          sm:{width:176},
+          lg:{width:360},
+          xg:{width:360,height:360}
+        }
+
+        this.width =  _width;
+
         this.state = {
-          width:158,
           marginRight:10
         }
+    }
+
+    getLiSize(da){
+        let width = this.width.sm;
+        switch(da.size){
+          case "sm":
+            width = this.width.sm;
+              break;
+          case "lg":
+            width = this.width.lg;
+            break;
+          case "xg":
+            width = this.width.xg;
+            break;
+        }
+        return width;
     }
  
     render() { 
         let self = this;
         let lis = [];
+      
+
         {
             this.props.data.map(function(da,i){
 
-                let _width = (self.state.width * da.width) + (self.state.marginRight*(da.width-1));
-
+                let _width = self.getLiSize(da);
+                // let _width = (self.state.width * da.width) + (self.state.marginRight*(da.width-1));
                 // lis.push(<li key={'widgetList' + da.id + i }  style={{width:_width,marginRight:10,}} >
+                lis.push(<li key={'widgetList' + da.id + i } style={{..._width}}  >
 
-                lis.push(<li key={'widgetList' + da.id + i } >
-
-                  <div className={title}> 
+                  <div className={title}>
                     <div className={title_left}><Icon type="uf-add-c-o" /></div>
                     <div className={title_right}>{da.title}</div>
                   </div>

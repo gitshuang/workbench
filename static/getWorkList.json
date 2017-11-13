@@ -8,7 +8,7 @@
             "widgeList":[
                 {
                     "id":"1101",
-                    "size":"sm",
+                    "size":"lg",
                     "title":"入职",
                     "optionTitle":"查看"
                 },
@@ -32,7 +32,7 @@
                 },
                 {
                     "id":"1103",
-                    "size":"sm",
+                    "size":"xg",
                     "title":"代办业务三组件",
                     "optionTitle":"查看"
                 },
