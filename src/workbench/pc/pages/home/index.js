@@ -8,153 +8,170 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'public/base.css';
-import {button_group,selected,WidgetCont,WidgetTitle} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
-
+import Icon2 from 'components/icon';
 const {wrap, } = baseStyles;
-
+import {
+  button_group,
+  selected,
+  WidgetCont,
+  WidgetTitle,
+  HeaderLeft,
+} from './style.css';
 const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 
 @withRouter
 @connect(
-    mapStateToProps(
-        'widgetList',
-        'workList',
-        {
-            namespace: 'home',
-        }
-    ),
+  mapStateToProps(
+    'widgetList',
+    'workList',
     {
-        requestStart,
-        requestSuccess,
-        requestError,
-        getWidgetList,
-        getWorkList,
-        changeUserInfoDisplay,
+      namespace: 'home',
     }
+  ),
+  {
+    requestStart,
+    requestSuccess,
+    requestError,
+    getWidgetList,
+    getWorkList,
+    changeUserInfoDisplay,
+  }
 )
 
 class Home extends Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            workList:[]
+    this.state = {
+      workList: []
+    }
+    this.getWorkService();
+  }
+
+  getWorkService() {
+
+    const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
+
+    getWorkList().then(({error, payload}) => {
+
+      let workList = [];
+      Object.assign(workList, payload);
+      workList[0].selected = true;
+      this.setState({
+        workList
+      })
+      if (error) {
+        requestError(payload);
+      }
+      requestSuccess();
+    });
+
+  }
+
+  componentWillMount() {
+
+    const {requestStart, requestSuccess, requestError, getWidgetList, getWorkList, widgetList, } = this.props;
+    if (!widgetList.length) {
+      requestStart();
+      getWidgetList().then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
         }
-        this.getWorkService();
+        requestSuccess();
+      });
     }
+  }
 
-    getWorkService() {
+  setLiSelected(id) {
 
-        const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
+    this.state.workList.map(function (da, i) {
+      da.selected = false;
+    })
 
-        getWorkList().then(({error, payload}) => {
+    this.state.workList.map(function (da, i) {
+      if ((da.id + "_" + i) == id) {
+        da.selected = true;
+      }
+    })
 
-            let workList = [];
-            Object.assign(workList,payload);
-            workList[0].selected = true;
-            this.setState({
-                workList
-            })
-            if (error) {
-                requestError(payload);
-            }
-            requestSuccess();
-        });
+    this.setState({
+      ...this.state
+    })
+  }
 
+  scrollToAnchor = (id) => {
+    let anchorElement = document.getElementById(id);
+
+    if (anchorElement) {
+      anchorElement.scrollIntoView();
     }
+    this.setLiSelected(id);
+  }
 
-    componentWillMount() {
+  render() {
 
-        const {requestStart, requestSuccess, requestError, getWidgetList, getWorkList, widgetList, } = this.props;
-        if (!widgetList.length) {
-            requestStart();
-            getWidgetList().then(({error, payload}) => {
-                if (error) {
-                    requestError(payload);
-                }
-                requestSuccess();
-            });
-        }
-    }
+    const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
+    let {workList} = this.state;
 
-    setLiSelected(id){
+    let self = this;
+    let lis = [];
+    let conts = [];
 
-        this.state.workList.map(function(da,i){
-            da.selected = false;
-        })
+    if (workList.length != 0) {
+      workList.map(function (da, i) {
+        let _id = da.id + "_" + i;
 
-        this.state.workList.map(function(da,i){
-            if((da.id+"_"+i) == id){
-                da.selected = true;
-            }
-        })
+        let firstLi = i != 0 ? <div className={WidgetTitle}>{da.name}</div> : null;
 
-        this.setState({
-            ...this.state
-        })
-    }
+        let selectedClass = da.selected ? selected : null;
 
-    scrollToAnchor = (id) => {
-        let anchorElement = document.getElementById(id);
+        lis.push(<a key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}>
+          <li className={selectedClass} key={da.id}>{da.name}</li>
+        </a>);
 
-        if(anchorElement) { anchorElement.scrollIntoView(); }
-        this.setLiSelected(id);
-    }
-
-    render() {
-
-        const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
-        let {workList} = this.state;
-
-        let self = this;
-        let lis = [];
-        let conts = [];
-
-        if (workList.length != 0 ) {
-            workList.map(function(da,i) {
-                let _id = da.id+"_"+i;
-
-                let firstLi = i !=0 ? <div className={WidgetTitle} >{da.name}</div>:null;
-
-                let selectedClass = da.selected ? selected : null;
-
-                lis.push(<a key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
-
-                conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
-                    {firstLi}
-                    <div  className={WidgetCont} name={da.id} >
-                        <WidgetArea data={da.widgeList} > </WidgetArea>
-                    </div>
-                </div>);
-            });
-        }
-
-        return (<div className="um-win">
-          <div className="um-header">
-            <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
-                <div position="center">
-                  <span>首页</span>
-                </div>
-            </Header>
-
-           <ul className={button_group}>
-               {lis}
-            </ul>
+        conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
+          {firstLi}
+          <div className={WidgetCont} name={da.id}>
+            <WidgetArea data={da.widgeList}> </WidgetArea>
           </div>
+        </div>);
+      });
+    }
+    
+    let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
+    let leftContent = <div className={HeaderLeft}>
+      <span>
+        <Icon2 type="wode"/>
+      </span>
+      <img src= {logoUrl} />
+    </div>
 
-          <div className="um-content">
-             {conts}
-          </div>
-          <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>
+    return (<div className="um-win">
+        <div className="um-header">
+          <Header onLeftClick={ changeUserInfoDisplay } leftContent={leftContent}>
+            <div position="center">
+              <span>首页</span>
+            </div>
+          </Header>
+
+          <ul className={button_group}>
+            {lis}
+          </ul>
         </div>
-        );
-    }
+
+        <div className="um-content">
+          {conts}
+        </div>
+        <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>
+      </div>
+    );
+  }
 }
 
 export default Home;
