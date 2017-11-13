@@ -9,6 +9,7 @@
     "build": "node scripts/build.js"
   },
   "dependencies": {
+    "animate.css": "^3.5.2",
     "array.prototype.find": "^2.0.4",
     "babel-runtime": "^6.26.0",
     "bee-button": "^1.0.2",
