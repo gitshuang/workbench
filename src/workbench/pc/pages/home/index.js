@@ -8,7 +8,7 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'public/base.css';
-import {button_group,selected,WidgetCont,WidgetTitle} from './style.css';
+import {page_home,button_group,selected,WidgetCont,WidgetTitle} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
@@ -103,7 +103,7 @@ class Home extends Component {
     scrollToAnchor = (id) => {
         let anchorElement = document.getElementById(id);
 
-        if(anchorElement) { anchorElement.scrollIntoView(); }
+        if(anchorElement) { anchorElement.scrollIntoView({block: "start", behavior: "smooth"}); }
         this.setLiSelected(id);
     }
 
@@ -135,8 +135,8 @@ class Home extends Component {
             });
         }
 
-        return (<div className="um-win">
-          <div className="um-header">
+        return (<div className={page_home}>
+          <div className="header">
             <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
                 <div position="center">
                   <span>首页</span>
@@ -148,7 +148,7 @@ class Home extends Component {
             </ul>
           </div>
 
-          <div className="um-content">
+          <div className="content">
              {conts}
           </div>
           <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>

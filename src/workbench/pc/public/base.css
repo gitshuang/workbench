@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family:MicrosoftYaHei-Bold;
   background:rgba(230,233,233,1);
+  font-size:15px;
 }
 .wrap {
   padding: 20px; 
