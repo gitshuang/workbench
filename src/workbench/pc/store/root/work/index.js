@@ -103,6 +103,7 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
+    debugger;
     return {
       ...state,
       titleServiceList,

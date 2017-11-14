@@ -30,7 +30,7 @@ const {
   pinDisplayBlock,
   pinDisplayNone,
   pinTypeFocus,
-  setPinCancel
+  setPinCancel,
 } = workActions;
 
 function makeLayout(type, menu,tabsList) {
@@ -122,7 +122,7 @@ export default class Work extends Component {
     this.props.history.replace('');
   }
   componentDidMount() {
-    const { product = {},tabsList } = this.props;
+    const { product = {},tabsList, getProductInfo } = this.props;
     requestStart();
     getProductInfo(product.id).then(({ type, menu = [] }) => {
         this.setState({
@@ -158,7 +158,7 @@ export default class Work extends Component {
     pinDisplayBlock();
   }
   render() {
-    const { product = {},tabsList=[],current, pinType } = this.props;
+    const { product = {},tabsList=[],current, pinType, titleServiceDisplay } = this.props;
     const { type, menu } = this.state;
     let iconName = <Icon type="qiyejieshao" style={{fontSize:"24px"}}/>
     return (
