@@ -46,8 +46,10 @@ class UserInfoContainer extends Component {
   }
 
   handleClickOutside(evt) {
-    const {changeQuickServiceHidden,hideUserInfoDisplay } = this.props;
-    hideUserInfoDisplay();
+    const {changeQuickServiceHidden,hideUserInfoDisplay,userInfoDisplay } = this.props;
+    if(userInfoDisplay !== "userInfohidden" && userInfoDisplay === "fadeInLeft"){
+      hideUserInfoDisplay();
+    }
   }
   componentWillMount() {
     const { userInfo: { name }, getUserInfo } = this.props;

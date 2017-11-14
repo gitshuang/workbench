@@ -119,8 +119,8 @@ const reducer = handleActions({
       searchAnimate: " animated fadeInRight"
     };
     if(state.searchAnimate === " animated fadeInRight"){
-      newState.searchAnimate = " animated fadeOutRight";
-    }else if(state.searchAnimate === " animated fadeOutRight"){
+      newState.searchAnimate = " animated fadeOut";
+    }else if(state.searchAnimate === " animated fadeOut"){
       newState.searchAnimate = " animated fadeInRight";
     }
     return newState;
@@ -132,7 +132,7 @@ const reducer = handleActions({
       searchAnimate: "searchHidden"
     };
     if(state.searchAnimate !== "searchHidden"){
-      newState.searchAnimate = " animated fadeOutRight";
+      newState.searchAnimate = " animated fadeOut";
     }
     return newState;
   },
