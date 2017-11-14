@@ -12,6 +12,8 @@ import {page_home,button_group,selected,WidgetCont,WidgetTitle,HeaderLeft} from 
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
+import Modal from 'bee-modal';
+import HeaderPage from './HeaderPage';
 
 const {wrap, } = baseStyles;
 
@@ -44,7 +46,9 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            workList:[]
+            workList:[],
+            showModal: false,
+            modalData:[]
         }
         this.getWorkService();
     }
@@ -107,6 +111,29 @@ class Home extends Component {
         this.setLiSelected(id);
     }
 
+    close = () => {
+        this.setState({
+            showModal: false
+        });
+    }
+
+    open = () => {
+        this.setState({
+            showModal: true
+        });
+    }
+
+    changeModal = (e,da) => {
+        let newDa = [];
+        Object.assign(newDa,da);
+
+        debugger;
+         this.setState({
+            showModal: e,
+            modalData:newDa
+        });
+    }
+
     render() {
 
         const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
@@ -129,35 +156,43 @@ class Home extends Component {
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     {firstLi}
                     <div  className={WidgetCont} name={da.id} >
-                        <WidgetArea data={da.widgeList} > </WidgetArea>
+                        <WidgetArea data={da.widgeList} change={self.changeModal} > </WidgetArea>
                     </div>
+
                 </div>);
             });
         }
+ 
+        return (
+        <div className={page_home}>
 
-
-        let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
-        let leftContent = <div className={HeaderLeft}>
-          <img src= {logoUrl} />
-        </div>
-
-        return (<div className={page_home}>
-          <div className="header">
-            <Header onLeftClick={ changeUserInfoDisplay } leftContent={leftContent} iconName={'wode'}>
-                  <span>首页</span>
-            </Header>
-
-            <ul className={button_group}>
-               {lis}
-            </ul>
-          </div>
+          <HeaderPage lis={lis}></HeaderPage>
 
           <div className="content">
              {conts}
           </div>
+          
           <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>
-        </div>
-        );
+
+          <Modal show = { self.state.showModal } onHide = { self.close } >
+              <Modal.Header>
+                  <Modal.Title>文件夹类型</Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body>
+                <div className={WidgetCont} >
+                    {
+                        self.state.modalData.length != 0?<WidgetArea data={self.state.modalData} > </WidgetArea>:null
+                    }
+                </div>
+              </Modal.Body>
+
+              <Modal.Footer>
+
+              </Modal.Footer>
+          </Modal>
+
+        </div>);
     }
 }
 

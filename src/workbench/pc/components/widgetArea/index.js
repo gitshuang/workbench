@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import Icon from 'bee-icon';
-import { widgetList ,title,title_left,title_right,context,bottom} from './style.css'
+import Popconfirm from 'bee-popconfirm';
+import { widgetList,title,file_context,title_left,file_icon,title_right,context,bottom} from './style.css'
 
 class WidgetArea extends Component {
 
@@ -25,7 +26,8 @@ class WidgetArea extends Component {
         this.width =  _width;
 
         this.state = {
-          marginRight:10
+          marginRight:10,
+          showModal: false
         }
     }
 
@@ -45,31 +47,67 @@ class WidgetArea extends Component {
         return width;
     }
  
+
+    change = (da) => {
+
+      let _modal = this.state.showModal?false:true;
+
+      this.state.showModal = _modal;
+
+      this.setState({
+          ...this.state
+      });
+      if(da.fileList){
+        this.props.change(_modal,da.fileList);  
+      }else{
+        console.log("数据错误!");
+      }
+    }
+
     render() { 
         let self = this;
         let lis = [];
-      
-
         {
             this.props.data.map(function(da,i){
 
                 let _width = self.getLiSize(da);
                 // let _width = (self.state.width * da.width) + (self.state.marginRight*(da.width-1));
                 // lis.push(<li key={'widgetList' + da.id + i }  style={{width:_width,marginRight:10,}} >
-                lis.push(<li key={'widgetList' + da.id + i } style={{..._width}}  >
+                if(da.type && da.type == "file"){
 
-                  <div className={title}>
-                    <div className={title_left}><Icon type="uf-add-c-o" /></div>
-                    <div className={title_right}>{da.title}</div>
-                  </div>
-                  <div className={context}>
-                    
-                  </div>
-                  <div className={bottom}>
-                    <Link to={`/work/${da.id}`} >{da.optionTitle}</Link>
-                  </div>
+                   lis.push(<li key={'widgetList' + da.id + i } style={{..._width}}  >
 
-                </li>)
+                      <div className={title}>
+                        <div className={title_left,file_icon}></div>
+                        <div className={title_right}>{da.title}</div>
+                      </div>
+
+                      <div className={context,file_context} onClick={ () =>{self.change(da)} }>
+                           <div></div>
+                           <div></div>
+                           <div></div>
+                           <div></div>
+                      </div>
+
+                    </li>)
+
+                }else{
+
+                    lis.push(<li key={'widgetList' + da.id + i } style={{..._width}}  >
+
+                      <div className={title}>
+                        <div className={title_left}><Icon type="uf-add-c-o" /></div>
+                        <div className={title_right}>{da.title}</div>
+                      </div>
+                      <div className={context}>
+                        
+                      </div>
+                      <div className={bottom}>
+                        <Link to={`/work/${da.id}`} >{da.optionTitle}</Link>
+                      </div>
+
+                    </li>)
+                }
 
             })
          }

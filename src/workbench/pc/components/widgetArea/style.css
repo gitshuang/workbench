@@ -3,6 +3,7 @@
   overflow: hidden;
 }
 .widgetList li {
+  position: relative;
   float: left;
   /*margin-top: 30px;*/
   margin-right: 10px;
@@ -33,8 +34,8 @@
 }
 
 .title{
-    height: 50px;
-    line-height: 50px;
+    height: 60px;
+    line-height: 60px;
     /*background: #ccc;*/
     display: -webkit-box;
 }
@@ -52,12 +53,47 @@
 .title_right{
   -webkit-box-flex:1.0;
   -webkit-box-pack: start;
+  padding-left: 5px;
   /*background: yellow;*/
-    
 }
+.file_icon{
+  background: url("assets/image/wgt/file.png") no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+}
+
 .context{
-  
+  cursor:pointer;
 }
 .bottom{
-  
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    width: 100%;
 }
+.file_context{
+    
+}
+.file_context div{
+  width:47px;
+  height:47px; 
+  background:rgba(184,194,200,1);
+  border-radius: 4px ; 
+  border: 1px solid #B8C2C8;
+  float: left;
+  margin: 0 0 10px 10px;
+}
+.file_context div:nth-child(odd){
+   
+}
+
+
+.file_context div:nth-child(even){
+   opacity:56.53;
+}
+

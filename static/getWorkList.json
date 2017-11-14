@@ -14,9 +14,42 @@
                 },
                 {
                     "id":"1102",
+                    "type":"file",
                     "size":"sm",
                     "title":"核算",
-                    "optionTitle":"查看"
+                    "optionTitle":"查看",
+                    "fileList":[
+                        {
+                            "id":"file_1001",
+                            "size":"sm",
+                            "title":"工资核算",
+                            "optionTitle":"查看"
+                        },
+                        {
+                            "id":"file_1002",
+                            "size":"sm",
+                            "title":"报销核算",
+                            "optionTitle":"查看"
+                        },
+                        {
+                            "id":"file_1003",
+                            "size":"sm",
+                            "title":"项目核算",
+                            "optionTitle":"查看"
+                        },
+                        {
+                            "id":"file_1004",
+                            "size":"lg",
+                            "title":"财政核算",
+                            "optionTitle":"查看"
+                        },
+                        {
+                            "id":"file_1005",
+                            "size":"sm",
+                            "title":"成本核算",
+                            "optionTitle":"查看"
+                        }
+                    ]
                 },
                 {
                     "id":"1103",
