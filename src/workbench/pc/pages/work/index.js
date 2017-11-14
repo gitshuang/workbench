@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-
+/*   actions   */
 import rootActions from 'store/root/actions';
-import rootActions from 'store/root/work/actions';
-
+import workActions from 'store/root/work/actions';
+/*  components 组件 */
+import Icon from 'components/icon';
+/*  containers 容器组件  */
 import TabsContainer from 'containers/tabs';
 import HeaderContainer from 'containers/header';
 import BreadcrumbContainer from 'containers/breadcrumb';
@@ -14,7 +16,6 @@ import SideBarContainer from 'containers/sideBar';
 import QuickServiceContainer from 'containers/titleService';
 import Pin from 'containers/pin'
 
-import styles from './style.css';
 /*  style样式库组件  */
 import "assets/style/iuapmobile.um.css"
 import styles from './style.css';
@@ -157,14 +158,23 @@ export default class Work extends Component {
     pinDisplayBlock();
   }
   render() {
-    const { product = {},tabsList=[],current } = this.props;
+    const { product = {},tabsList=[],current, pinType } = this.props;
     const { type, menu } = this.state;
-
+    let iconName = <Icon type="qiyejieshao" style={{fontSize:"24px"}}/>
     return (
-      <div className="um-win">
+      <div className={wrap + " um-win"}>
         <div className="um-header">
-          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
-            <span position="center">{product.title || ''}</span>
+          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={iconName} leftContent={ product.title }>
+            <div className="um-box">
+              <span>{product.title || ''}</span>
+              <Icon type="xiala" style={{marginLeft:"15px",fontSize:"10px"}} onClick={titleServiceDisplay} />
+              <Icon
+                type="dingzhi"
+                className={ pinType ? 'active' : '' }
+                style={{ marginLeft:"15px",fontSize:"18px" }}
+                onClick={ this.pinDisplay }
+              />
+            </div>
           </HeaderContainer>
         </div>
         <div className="um-content">
