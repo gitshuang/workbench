@@ -5,6 +5,5 @@ export const getProductInfo = function(id){
 }
 export const getTitleService = () => get('/getTitleService');
 export const setPinCancel = () => {
-  debugger;
   return get('/setPinCancel')
 };

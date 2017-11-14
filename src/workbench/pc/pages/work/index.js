@@ -1,20 +1,20 @@
-/*应用级引用*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-/*   actions   */
+
 import rootActions from 'store/root/actions';
-import workActions from 'store/root/work/actions';
-/*  components 组件 */
-import Icon from 'components/icon';
-/*  containers 容器组件  */
+import rootActions from 'store/root/work/actions';
+
+import TabsContainer from 'containers/tabs';
 import HeaderContainer from 'containers/header';
 import BreadcrumbContainer from 'containers/breadcrumb';
 import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
 import QuickServiceContainer from 'containers/titleService';
 import Pin from 'containers/pin'
+
+import styles from './style.css';
 /*  style样式库组件  */
 import "assets/style/iuapmobile.um.css"
 import styles from './style.css';
@@ -32,7 +32,7 @@ const {
   setPinCancel
 } = workActions;
 
-function makeLayout(type, menu) {
+function makeLayout(type, menu,tabsList) {
   switch (type) {
     case 1:
       return [
@@ -41,7 +41,8 @@ function makeLayout(type, menu) {
     case 2:
       return [
         <SideBarContainer key={1} data={menu} />,
-        <ContentContainer key={2}/>
+        <ContentContainer key={2}/>,
+        <TabsContainer tabsList={tabsList} />
       ];
     case 3:
       return [
@@ -83,6 +84,12 @@ function makeLayout(type, menu) {
           }
         });
         return value
+      },
+    },
+    {
+      key:'tabsList',
+      value: (home,props,root)=>{
+        return root.work.tabsList;
       }
     },
     {
@@ -110,9 +117,11 @@ export default class Work extends Component {
       menu: [],
     };
   }
-
-  componentWillMount() {
-    const { product = {}, getProductInfo, } = this.props;
+  goBack() {
+    this.props.history.replace('');
+  }
+  componentDidMount() {
+    const { product = {},tabsList } = this.props;
     requestStart();
     getProductInfo(product.id).then(({ type, menu = [] }) => {
         this.setState({
@@ -124,7 +133,7 @@ export default class Work extends Component {
       },
       (e) => {
         requestError(e);
-      }
+      },
     );
   }
 
@@ -147,26 +156,15 @@ export default class Work extends Component {
     }
     pinDisplayBlock();
   }
-
   render() {
-    const { product = {}, titleServiceDisplay, pinType } = this.props;
+    const { product = {},tabsList=[],current } = this.props;
     const { type, menu } = this.state;
 
-    let iconName = <Icon type="qiyejieshao" style={{fontSize:"24px"}}/>
     return (
-      <div className={wrap + " um-win"}>
+      <div className="um-win">
         <div className="um-header">
-          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={iconName} leftContent={ product.title }>
-            <div className="um-box">
-              <span>{product.title || ''}</span>
-              <Icon type="xiala" style={{marginLeft:"15px",fontSize:"10px"}} onClick={titleServiceDisplay} />
-              <Icon
-                type="dingzhi"
-                className={ pinType ? 'active' : '' }
-                style={{ marginLeft:"15px",fontSize:"18px" }}
-                onClick={ this.pinDisplay }
-              />
-            </div>
+          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
+            <span position="center">{product.title || ''}</span>
           </HeaderContainer>
         </div>
         <div className="um-content">
@@ -174,7 +172,7 @@ export default class Work extends Component {
           {
             this.state.loaded ? (
               <div className={workArea} >
-                { makeLayout(type, menu) }
+                { makeLayout(type, menu,tabsList) }
               </div>
             ) : null
           }

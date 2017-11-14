@@ -1,7 +1,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { Breadcrumb } from 'tinper-bee';
-import { breadcrumbClass,breadcrumbClassIcon } from './style.css';
+import { breadcrumbClass,breadcrumbClassIcon,breadcrumbBack } from './style.css';
 
 class Breadcrumbs extends Component {
   static propTypes = {
@@ -12,16 +12,14 @@ class Breadcrumbs extends Component {
     const { breadcrumb, goback, } = this.props;
     return (
       <div className={breadcrumbClass} >
-        <i className={`${breadcrumbClassIcon} uf uf-navmenu`} />
+        <a href={"###"} >返回</a>
+        <span className={breadcrumbBack}>|</span>
         <Breadcrumb>
-          <Breadcrumb.Item href="#">
-            Home
-          </Breadcrumb.Item>
           <Breadcrumb.Item>
-            Library
+            财务报表
           </Breadcrumb.Item>
           <Breadcrumb.Item active>
-            Data
+            新增凭证
           </Breadcrumb.Item>
         </Breadcrumb>
       </div>

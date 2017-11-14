@@ -10,9 +10,11 @@ import { mapStateToProps } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
-//TODU 此处不应该引入全局样式，会影响到其他样式的设置(jony)。
-// import 'assets/style/iuapmobile.um.css';
-// import 'assets/style/sidebar.css';
+//<--后续样式提到组件库里面
+import 'assets/style/iuapmobile.um.css';
+import 'assets/style/sidebar.css';
+import 'assets/style/tabs.css';
+//-->后续样式提到组件库里面
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 const {
@@ -82,7 +84,7 @@ class Root extends Component {
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
-        <QuickServiceContainer outsideClickIgnoreClass={'icon-yingyong'} />
+        <QuickServiceContainer outsideClickIgnoreClass={'icon-quanzi'} />
       </div>
     );
   }
