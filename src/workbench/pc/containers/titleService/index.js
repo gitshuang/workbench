@@ -2,25 +2,54 @@ import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { title } from './style.css';
+import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 import onClickOutside from 'react-onclickoutside';
-
-const { titleServiceHidden, } = workActions;
+import { title } from './style.css';
+const {requestStart, requestSuccess, requestError} = rootActions;
+const { titleServiceHidden, getTitleService} = workActions;
 
 @connect(mapStateToProps(
   'titleServiceType',
+  'titleService',
   {
     "namespace":"work"
   }
   ),
 
   {
-    titleServiceHidden
+    requestStart,
+    requestSuccess,
+    requestError,
+    titleServiceHidden,
+    getTitleService
   }
 )
 @onClickOutside
 class QuickServiceContainer extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      service: [],
+      contacts: []
+    }
+  }
+
+  componentDidMount() {
+    const { requestStart, requestSuccess, requestError, getTitleService } = this.props;
+    getTitleService().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        service: payload.service,
+        contacts: payload.contacts
+      });
+      //requestSuccess();
+    });
+  }
+
   handleClickOutside(evt) {
     const {titleServiceHidden, titleServiceType } = this.props;
     if(titleServiceType){
@@ -31,36 +60,30 @@ class QuickServiceContainer extends Component {
     const { titleServiceType } = this.props;
     return (
       <div className={title + ' um-css3-hc'} style={{ display: titleServiceType ? 'block' : 'none' }} >
-        <div>
+        <div className="">
           <h4>相关服务</h4>
           <ul className="clearfix">
-            <li>
-              <button className="btn btn-gray">简历</button>
-            </li>
-            <li>
-              <button className="btn btn-gray">邮件</button>
-            </li>
-            <li>
-              <button className="btn btn-gray">登记表</button>
-            </li>
-            <li>
-              <button className="btn btn-gray">Offer</button>
-            </li>
-            <li>
-              <button className="btn btn-gray">审批</button>
-            </li>
-            <li>
-              <button className="btn btn-gray">转正</button>
-            </li>
-            <li>
-              <button className="btn btn-gray">合同</button>
-            </li>
-            <li>
-              <button className="btn btn-gray">组织架构</button>
-            </li>
+            {
+              this.state.service.map((item, i) =>
+                <li key={i}>
+                  <button className="btn">{item.name}</button>
+                </li>
+              )
+            }
           </ul>
         </div>
-
+        <div className="">
+          <h4>相关联系人</h4>
+          <ul className="clearfix">
+            {
+              this.state.contacts.map((item, i) =>
+                <li key={i}>
+                  <button className="btn">{item.name}</button>
+                </li>
+              )
+            }
+          </ul>
+        </div>
       </div>
     );
   }

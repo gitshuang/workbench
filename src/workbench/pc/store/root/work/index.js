@@ -4,12 +4,15 @@ import actions from './actions';
 
 const {
   setContentSrc,
+  getProductInfo,
+  getTitleService,
   titleServiceDisplay,
   titleServiceHidden
 } = actions;
 
 const defaultState = {
   contentSrc: '',
+  titleService:[],
   titleServiceType: false,
 };
 
@@ -18,6 +21,24 @@ const reducer = handleActions({
     ...state,
     contentSrc,
   }),
+  [getProductInfo]: (state, { payload: productInfo, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      productInfo,
+    };
+  },
+  [getTitleService]: (state, { payload: titleService, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      titleService,
+    };
+  },
   [titleServiceDisplay]: state => ({
     ...state,
     titleServiceType: true,

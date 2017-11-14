@@ -7,7 +7,8 @@ var api = [
   '/getServiceList',
   '/getMessage',
   '/getProductInfo',
-  '/getWorkList'
+  '/getWorkList',
+  '/getTitleService'
 ]
 
 function makeRapConfig(key) {

@@ -7,8 +7,8 @@ import home from './home';
 import work from './work';
 import application from './application';
 import actions from './actions';
-import types from './types';
-import Button from 'bee-button';
+//import types from './types';
+//import Button from 'bee-button';
 import Notice from 'components/notice';
 
 

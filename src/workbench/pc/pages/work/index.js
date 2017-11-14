@@ -7,7 +7,7 @@ import BreadcrumbContainer from 'containers/breadcrumb';
 import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
 import rootActions from 'store/root/actions';
-import getProductInfo from 'store/root/work/api';
+//import getProductInfo from 'store/root/work/api';
 import baseStyles from 'public/base.css';
 import styles from './style.css';
 import QuickServiceContainer from 'containers/titleService';
@@ -22,7 +22,7 @@ const {
   workArea,
   HeaderLeft
 } = styles;
-const { titleServiceDisplay, } = workActions;
+const { titleServiceDisplay, getProductInfo } = workActions;
 const {
   requestStart,
   requestSuccess,
@@ -80,6 +80,7 @@ function makeLayout(type, menu) {
     requestSuccess,
     requestError,
     titleServiceDisplay,
+    getProductInfo,
   },
 )
 export default class Work extends Component {
@@ -95,7 +96,7 @@ export default class Work extends Component {
     this.props.history.replace('');
   }
   componentWillMount() {
-    const { product = {} } = this.props;
+    const { product = {}, getProductInfo, } = this.props;
     requestStart();
     getProductInfo(product.id).then(({ type, menu = [] }) => {
         this.setState({
