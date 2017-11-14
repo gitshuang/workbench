@@ -17,18 +17,37 @@
   right: 35px;
   bottom: 5px;
 }
+:global(.u-notification-notice){
+  width: 330px;
+  height: 93px;
+}
 :global(.u-notification-notice-title){
   margin-bottom: -20px;
   margin-left: 60px;
+  color: #333333;
+  font-size:14px;
+  font-weight: bold;
 }
 :global(.u-notification-notice-content .u-notification-notice-description img){
   float: left;
+}
+:global(.u-notification-notice-content .u-notification-notice-description .noticeBtn){
+  background: #fff;
+  color:#468CE3;
+  font-size: 14px;
+  min-width: 28px;
+  width:28px;
+  height:21px;
+  right: 28px;
+  bottom: 27px;
 }
 :global(.u-notification-notice-content .u-notification-notice-description p){
   float: left;
   margin-top: 30px;
   margin-left: 10px;
   width: 160px;
+  color: #333333;
+  font-size:14px;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
