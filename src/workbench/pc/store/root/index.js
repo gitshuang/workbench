@@ -23,8 +23,6 @@ const {
   getMessage,
   changeQuickServiceDisplay,
   changeQuickServiceHidden,
-  changeSearchDisplay,
-  changeSearchHidden,
 } = actions;
 
 const defaultState = {
@@ -32,9 +30,6 @@ const defaultState = {
   serviceList: [],
   quickServiceDisplay: false,
   quickServiceAnimate: "quickServiceHidden",
-  searchDisplay: false,
-  searchAnimate: "searchHidden",
-  messageType: true,
 };
 
 const reducer = handleActions({
@@ -109,30 +104,6 @@ const reducer = handleActions({
     };
     if(state.quickServiceAnimate !== "quickServiceHidden"){
       newState.quickServiceAnimate = " animated slideOutUp";
-    }
-    return newState;
-  },
-  [changeSearchDisplay]: state => {
-    const newState = {
-      ...state,
-      searchDisplay: true,
-      searchAnimate: " animated fadeInRight"
-    };
-    if(state.searchAnimate === " animated fadeInRight"){
-      newState.searchAnimate = " animated fadeOut";
-    }else if(state.searchAnimate === " animated fadeOut"){
-      newState.searchAnimate = " animated fadeInRight";
-    }
-    return newState;
-  },
-  [changeSearchHidden]: state => {
-    const newState = {
-      ...state,
-      searchDisplay: false,
-      searchAnimate: "searchHidden"
-    };
-    if(state.searchAnimate !== "searchHidden"){
-      newState.searchAnimate = " animated fadeOut";
     }
     return newState;
   },

@@ -22,7 +22,7 @@
   color:rgba(74,81,93,1);
   line-height:19px;
 }
-:global(.lebra-navbar-right div){
+:global(.lebra-navbar-right>div){
   width:32px;
   height: 32px;
   line-height: 32px;

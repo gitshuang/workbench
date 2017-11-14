@@ -6,12 +6,12 @@ import Icon from 'components/icon';
 import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
 import styles from './index.css';
+import SearchContainer from 'containers/search';
 const {
   lebraNavbar,
 } = styles;
 const {
   changeQuickServiceDisplay,
-  changeSearchDisplay,
 } = actions;
 
 class HeaderContainer extends Component {
@@ -24,13 +24,6 @@ class HeaderContainer extends Component {
     const { changeQuickServiceDisplay, quickServiceDisplay } = this.props;
     if( !quickServiceDisplay ){
       changeQuickServiceDisplay();
-    }
-  }
-
-  openSearch(event) {
-    const { changeSearchDisplay, searchDisplay } = this.props;
-    if( !searchDisplay ){
-      changeSearchDisplay();
     }
   }
 
@@ -70,7 +63,7 @@ class HeaderContainer extends Component {
     const rightArray = Children.toArray(rightContent);
     let appClass = quickServiceDisplay ? "active tc" : "tc"
     const rightContents = rightArray.concat(
-      <div className="tc" style={{marginRight:"15px"}} onClick = {(e) =>{this.openSearch(e)}} ><Icon type="search" /></div>,
+      <SearchContainer />,
       <div className={appClass} style={{marginRight:"15px"}} onClick = {(e) =>{this.openService(e)}} ><Icon type="yingyong" /></div>,
       <div className="tc">
         <Icon type="xiaoxi" />
@@ -100,6 +93,5 @@ export default connect(mapStateToProps(
 ),
   {
     changeQuickServiceDisplay,
-    changeSearchDisplay,
   }
 )(HeaderContainer);

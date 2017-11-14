@@ -1,45 +1,79 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { mapStateToProps } from '@u';
-import { search } from './style.css';
 import onClickOutside from 'react-onclickoutside';
-import actions from 'store/root/actions';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { withRouter } from 'react-router-dom';
-
-const {changeSearchHidden} = actions;
+import Icon from 'components/icon';
+import {
+  search,
+  searchBtn,
+  inputArea,
+  inputEnter,
+  inputLeave,
+  inputEnterActive,
+  inputLeaveActive,
+} from './style.css';
 
 @withRouter
-@connect(mapStateToProps(
-  'searchDisplay',
-  'searchAnimate'
-  ),
-  {
-    changeSearchHidden,
-  }
-)
 @onClickOutside
 class SearchContainer extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+      isShow: false
+    };
+    this.search = this.search.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+  }
+  onChangeHandler(e) {
+    this.setState({
+      text: e.target.value
+    })
+  }
   handleClickOutside(evt) {
-    const {changeSearchHidden,searchDisplay,searchAnimate } = this.props;
-    if(searchDisplay){
-      changeSearchHidden();
+    const { isShow } = this.state;
+    if(isShow){
+      this.setState({
+        isShow: false,
+      })
     }
   }
-
-  openApplication = () => {
-    console.log(this.props)
-    const {changeSearchHidden } = this.props;
-    changeSearchHidden();
-    this.props.history.push('/application');;
+  search() {
+    const { isShow } = this.state;
+    if (isShow) {
+      console.log(this.state.text)
+    } else {
+      this.setState({
+        isShow: true,
+      })
+    }
+    // this.props.history.push('/application');;
   }
-
   render() {
-    const { searchDisplay,searchAnimate } = this.props;
+    const { isShow, text } = this.state;
+    let item;
+    if (isShow) {
+      item = (
+        <div className={inputArea} >
+          <input className="searchText" type="text" value={text} onChange={this.onChangeHandler}/>
+        </div>
+      )
+    }
     return (
-      <div className={`${search} ${searchAnimate}` } >
-        <input className="searchText" type="text"/>
+      <div className={search}>
+        <ReactCSSTransitionGroup
+          transitionName={ {
+            enter: inputEnter,
+            enterActive: inputEnterActive,
+            leave: inputLeave,
+            leaveActive: inputLeaveActive,
+          } } >
+          {item}
+        </ReactCSSTransitionGroup>
+        <div className={`tc ${searchBtn}`} onClick={this.search} >
+          <Icon type="search" />
+        </div>
       </div>
     );
   }

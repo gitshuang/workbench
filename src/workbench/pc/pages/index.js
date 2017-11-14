@@ -8,7 +8,6 @@ import routes from 'router';
 import store from 'store';
 import { mapStateToProps } from '@u';
 import QuickServiceContainer from 'containers/quickService';
-import SearchContainer from 'containers/search';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
 //<--后续样式提到组件库里面
@@ -76,7 +75,7 @@ class Root extends Component {
       }
       requestSuccess();
     });
-    timer(getMessage, 10000);
+    timer(getMessage, 30000);
     regMessageTypeHandler.call(this);
   }
   render() {
@@ -86,7 +85,6 @@ class Root extends Component {
           <RouteWithSubRoutes key={i} {...route} />
         ))}
         <QuickServiceContainer outsideClickIgnoreClass={'icon-quanzi'} />
-        <SearchContainer outsideClickIgnoreClass={'icon-quanzi'} />
       </div>
     );
   }
