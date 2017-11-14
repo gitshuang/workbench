@@ -6,7 +6,7 @@
   padding: 0px;
   font-size: 1rem;
   min-width: 3rem;
-  right: 15px;
+  right: 5px;
   bottom: 5px;
 }
 :global(.noticeBtn2){
@@ -14,6 +14,23 @@
   padding: 0px;
   font-size: 1rem;
   min-width: 3rem;
-  right: 5px;
+  right: 35px;
   bottom: 5px;
 }
+:global(.u-notification-notice-title){
+  margin-bottom: -20px;
+  margin-left: 60px;
+}
+:global(.u-notification-notice-content .u-notification-notice-description img){
+  float: left;
+}
+:global(.u-notification-notice-content .u-notification-notice-description p){
+  float: left;
+  margin-top: 30px;
+  margin-left: 10px;
+  width: 160px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+

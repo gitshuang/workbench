@@ -37,14 +37,13 @@ const { INTERVAL } = 2000;
 class UserInfoContainer extends Component {
   static propTypes = {
     userInfo: PropTypes.object,
-    userInfoDisplay: PropTypes.bool,
+    userInfoDisplay: PropTypes.String,
     getUserInfo: PropTypes.func,
     hideUserInfoDisplay: PropTypes.func,
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
   }
-
 
   handleClickOutside(evt) {
     const {changeQuickServiceHidden,hideUserInfoDisplay } = this.props;
@@ -69,18 +68,10 @@ class UserInfoContainer extends Component {
     alert("谢谢")
   }
 
-  handleAdd() {
-
-  }
-
-  handleRemove(i) {
-    hideUserInfoDisplay();
-  }
-
   render() {
     const { userInfoDisplay, userInfo: { name, company, phone, imgsrc } } = this.props;
     const childrenComponent = (
-      <div className={`${wrap} ${outerContainer}`  + ' animated ' + (userInfoDisplay ? ' fadeInLeft' : ' fadeOutLeft ') }  >
+      <div  className={`${wrap} animated ${userInfoDisplay}`}  >
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner}/>
         </div>
