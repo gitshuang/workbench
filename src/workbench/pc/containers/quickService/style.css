@@ -2,9 +2,12 @@
   position: absolute;
   z-index: 9;
   top: 50px;
-  right: 0;
+  right: 33px;
   background: #fff;
-  border:1px solid #888888;
+  border:1px solid #D2D2D2;
+  width:300px;
+  height:310px;
+  box-shadow:2px 2px 7px 2px #D2D2D2;
 }
 .service h4{
   font-weight: 500;
@@ -32,4 +35,7 @@
   border-radius: 0;
   border-top:1px solid #888888;
   font-size: 12px;
+}
+:global(.quickServiceHidden){
+  display:none;
 }

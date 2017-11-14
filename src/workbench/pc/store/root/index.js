@@ -29,6 +29,7 @@ const defaultState = {
   productList: [],
   serviceList: [],
   quickServiceDisplay: false,
+  quickServiceAnimate: "quickServiceHidden",
   messageType: true,
 };
 
@@ -83,14 +84,30 @@ const reducer = handleActions({
     }
     return state;
   },
-  [changeQuickServiceDisplay]: state => ({
-    ...state,
-    quickServiceDisplay: true,
-  }),
-  [changeQuickServiceHidden]: state => ({
-    ...state,
-    quickServiceDisplay: false,
-  }),
+  [changeQuickServiceDisplay]: state => {
+    const newState = {
+      ...state,
+      quickServiceDisplay: true,
+      quickServiceAnimate: " animated slideInDown"
+    };
+    if(state.quickServiceAnimate === " animated slideInDown"){
+      newState.quickServiceAnimate = " animated slideOutUp";
+    }else if(state.quickServiceAnimate === " animated slideOutUp"){
+      newState.quickServiceAnimate = " animated slideInDown";
+    }
+    return newState;
+  },
+  [changeQuickServiceHidden]: state => {
+    const newState = {
+      ...state,
+      quickServiceDisplay: false,
+      quickServiceAnimate: "quickServiceHidden"
+    };
+    if(state.quickServiceAnimate !== "quickServiceHidden"){
+      newState.quickServiceAnimate = " animated slideOutUp";
+    }
+    return newState;
+  },
 }, defaultState);
 
 export default function (state, action) {
