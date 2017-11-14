@@ -7,8 +7,8 @@ import home from './home';
 import work from './work';
 import application from './application';
 import actions from './actions';
-import types from './types';
-import Button from 'bee-button';
+//import types from './types';
+//import Button from 'bee-button';
 import Notice from 'components/notice';
 
 
@@ -23,14 +23,14 @@ const {
   getMessage,
   changeQuickServiceDisplay,
   changeQuickServiceHidden,
-  changeTitleServiceDisplay,
 } = actions;
 
 const defaultState = {
   productList: [],
   serviceList: [],
   quickServiceDisplay: false,
-  titleServiceDisplay: false,
+  quickServiceAnimate: "quickServiceHidden",
+  messageType: true,
 };
 
 const reducer = handleActions({
@@ -84,18 +84,30 @@ const reducer = handleActions({
     }
     return state;
   },
-  [changeQuickServiceDisplay]: state => ({
-    ...state,
-    quickServiceDisplay: true,
-  }),
-  [changeQuickServiceHidden]: state => ({
-    ...state,
-    quickServiceDisplay: false,
-  }),
-  [changeTitleServiceDisplay]: state => ({
-    ...state,
-    titleServiceDisplay: !state.titleServiceDisplay,
-  }),
+  [changeQuickServiceDisplay]: state => {
+    const newState = {
+      ...state,
+      quickServiceDisplay: true,
+      quickServiceAnimate: " animated slideInDown"
+    };
+    if(state.quickServiceAnimate === " animated slideInDown"){
+      newState.quickServiceAnimate = " animated slideOutUp";
+    }else if(state.quickServiceAnimate === " animated slideOutUp"){
+      newState.quickServiceAnimate = " animated slideInDown";
+    }
+    return newState;
+  },
+  [changeQuickServiceHidden]: state => {
+    const newState = {
+      ...state,
+      quickServiceDisplay: false,
+      quickServiceAnimate: "quickServiceHidden"
+    };
+    if(state.quickServiceAnimate !== "quickServiceHidden"){
+      newState.quickServiceAnimate = " animated slideOutUp";
+    }
+    return newState;
+  },
 }, defaultState);
 
 export default function (state, action) {

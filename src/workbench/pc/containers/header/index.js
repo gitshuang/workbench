@@ -5,7 +5,10 @@ import NavBar from 'components/navbar';
 import Icon from 'components/icon';
 import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
-
+import styles from './index.css';
+const {
+  lebraNavbar,
+} = styles;
 const {
   changeQuickServiceDisplay,
 } = actions;
@@ -24,45 +27,66 @@ class HeaderContainer extends Component {
   }
 
   render() {
-    const { children, changeQuickServiceDisplay, onLeftClick,iconName,leftContent } = this.props;
-    const children2Array = Children.toArray(children);
-    /*const leftContent = children2Array.filter(
-      (v) => v.props.position === 'left'
-    );*/
-    const rightContent = children2Array.filter(
-      (v) => v.props.position === 'right'
-    ).concat(<Icon type="quanzi" onClick={ (e) =>{this.openService(e)} }/>);
+    const {
+      children,
+      changeQuickServiceDisplay,
+      onLeftClick,
+      iconName,
+      leftContent,
+      rightContent,
+      quickServiceDisplay,
+      messageType
+    } = this.props;
 
-    let centerContent = children2Array.filter(
-      (v) => v.props.position === 'center'
-    );
     /*
+    const children2Array = Children.toArray();
+    const leftContent = children2Array.filter(
+      (v) => v.props.position === 'left'
+    );
+    let centerContent = children2Array.filter(
+     (v) => v.props.position === 'center'
+    );
     centerContent = centerContent.reduce((result, item) => {
       if (item.props.icon) {
         return result.concat( <Icon type= {item.props.icon} />)
       }
       return result;
     }, centerContent);
-  */
+    const rightContent = children2Array.filter(
+      (v) => v.props.position === 'right'
+    ).concat(
+      <div className="tc" style={{marginRight:"15px"}}><Icon type="search" /></div>,
+    );
+    */
+    const rightArray = Children.toArray(rightContent);
+    let appClass = quickServiceDisplay ? "active tc" : "tc"
+    const rightContents = rightArray.concat(
+      <div className="tc" style={{marginRight:"15px"}}><Icon type="search" /></div>,
+      <div className={appClass} style={{marginRight:"15px"}} onClick = {(e) =>{this.openService(e)}} ><Icon type="yingyong" /></div>,
+      <div className="tc">
+        <Icon type="xiaoxi" />
+        <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
+      </div>
+    );
     return (
-      <div className="header">
         <NavBar
+          className={lebraNavbar}
           mode="light"
           iconName={ iconName }
           leftContent={ leftContent }
           rightContent={
-            rightContent.map((child, i) => cloneElement(child, { key: i }))
+            rightContents.map((child, i) => cloneElement(child, { key: i }))
           }
           onLeftClick={ onLeftClick }>
-          { centerContent.map((child, i) => cloneElement(child, { key: i })) }
+          { children }
         </NavBar>
-      </div>
     );
   }
 }
 
 export default connect(mapStateToProps(
-  'quickServiceDisplay'
+  'quickServiceDisplay',
+  'messageType',
 ),
   {
     changeQuickServiceDisplay,

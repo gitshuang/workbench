@@ -37,12 +37,14 @@ class Notice extends Component {
       data: {
         content,
         typeBtn,
+        icon
       },
     } = this.props;
 
     return (
       <div >
-        <p>{content}</p>
+        <img src={icon}/>
+        <p title={content}>{content}</p>
         <Button  className={`${notice}Btn`} size="sm" onClick={ this.handClick.bind(this) } >{typeBtn}</Button>
       </div>
     );

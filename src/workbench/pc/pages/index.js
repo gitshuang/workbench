@@ -10,9 +10,11 @@ import { mapStateToProps } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
+//<--后续样式提到组件库里面
 import 'assets/style/iuapmobile.um.css';
 import 'assets/style/sidebar.css';
 import 'assets/style/tabs.css';
+//-->后续样式提到组件库里面
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 const {

@@ -8,7 +8,7 @@ import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
 import TabsContainer from 'containers/tabs';
 import rootActions from 'store/root/actions';
-import getProductInfo from 'store/root/work/api';
+import {getProductInfo} from 'store/root/work/api';
 import baseStyles from 'public/base.css';
 import styles from './style.css';
 
@@ -96,7 +96,7 @@ export default class Work extends Component {
   goBack() {
     this.props.history.replace('');
   }
-  componentWillMount() {
+  componentDidMount() {
     const { product = {},tabsList } = this.props;
     requestStart();
     getProductInfo(product.id).then(({ type, menu = [] }) => {

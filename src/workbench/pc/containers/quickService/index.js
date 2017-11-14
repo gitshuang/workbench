@@ -12,6 +12,7 @@ const {changeQuickServiceHidden,} = actions;
 @withRouter
 @connect(mapStateToProps(
   'quickServiceDisplay',
+  'quickServiceAnimate',
   'serviceList'
   ),
   {
@@ -32,13 +33,13 @@ class QuickServiceContainer extends Component {
     console.log(this.props)
     const {changeQuickServiceHidden } = this.props;
     changeQuickServiceHidden();
-    this.props.history.replace('/application');;
+    this.props.history.push('/application');;
   }
 
   render() {
-    const { quickServiceDisplay, serviceList } = this.props;
+    const { quickServiceDisplay,quickServiceAnimate, serviceList } = this.props;
     return (
-      <div className={service} style={{ display: quickServiceDisplay ? 'block' : 'none' }} >
+      <div className={`${service} ${quickServiceAnimate}` } >
         <h4>相关服务</h4>
         <ul className="clearfix">
           {

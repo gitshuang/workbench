@@ -8,10 +8,12 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'public/base.css';
-import {button_group,selected,WidgetCont,WidgetTitle} from './style.css';
+import {page_home,button_group,selected,WidgetCont,WidgetTitle,HeaderLeft} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
+import Modal from 'bee-modal';
+import HeaderPage from './HeaderPage';
 
 const {wrap, } = baseStyles;
 
@@ -44,7 +46,9 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            workList:[]
+            workList:[],
+            showModal: false,
+            modalData:[]
         }
         this.getWorkService();
     }
@@ -103,8 +107,31 @@ class Home extends Component {
     scrollToAnchor = (id) => {
         let anchorElement = document.getElementById(id);
 
-        if(anchorElement) { anchorElement.scrollIntoView(); }
+        if(anchorElement) { anchorElement.scrollIntoView({block: "start", behavior: "smooth"}); }
         this.setLiSelected(id);
+    }
+
+    close = () => {
+        this.setState({
+            showModal: false
+        });
+    }
+
+    open = () => {
+        this.setState({
+            showModal: true
+        });
+    }
+
+    changeModal = (e,da) => {
+        let newDa = [];
+        Object.assign(newDa,da);
+
+        debugger;
+         this.setState({
+            showModal: e,
+            modalData:newDa
+        });
     }
 
     render() {
@@ -124,36 +151,48 @@ class Home extends Component {
 
                 let selectedClass = da.selected ? selected : null;
 
-                lis.push(<a key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}> <li className={selectedClass} key={da.id} >{da.name}</li></a>);
+                lis.push( <li key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}><a className={selectedClass}>{da.name}</a></li>);
 
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     {firstLi}
                     <div  className={WidgetCont} name={da.id} >
-                        <WidgetArea data={da.widgeList} > </WidgetArea>
+                        <WidgetArea data={da.widgeList} change={self.changeModal} > </WidgetArea>
                     </div>
+
                 </div>);
             });
         }
+ 
+        return (
+        <div className={page_home}>
 
-        return (<div className="um-win">
-          <div className="um-header">
-            <Header onLeftClick={ changeUserInfoDisplay } iconName={"wode"}>
-                <div position="center">
-                  <span>首页</span>
-                </div>
-            </Header>
+          <HeaderPage lis={lis}></HeaderPage>
 
-           <ul className={button_group}>
-               {lis}
-            </ul>
-          </div>
-
-          <div className="um-content">
+          <div className="content">
              {conts}
           </div>
+          
           <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>
-        </div>
-        );
+
+          <Modal show = { self.state.showModal } onHide = { self.close } >
+              <Modal.Header>
+                  <Modal.Title>文件夹类型</Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body>
+                <div className={WidgetCont} >
+                    {
+                        self.state.modalData.length != 0?<WidgetArea data={self.state.modalData} > </WidgetArea>:null
+                    }
+                </div>
+              </Modal.Body>
+
+              <Modal.Footer>
+
+              </Modal.Footer>
+          </Modal>
+
+        </div>);
     }
 }
 

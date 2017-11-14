@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent } from './style.css';
+import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent, wrapBtn} from './style.css';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 
@@ -10,6 +10,8 @@ import Button from 'bee-button';
 import Tabs, { TabPane } from 'bee-tabs';
 import Icon from 'components/icon';
 import onClickOutside from 'react-onclickoutside';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import 'assets/style/animate.css';
 
 const {
   getUserInfo,
@@ -22,6 +24,7 @@ const {
   requestSuccess,
   requestError,
 } = rootActions;
+const { INTERVAL } = 2000;
 @connect(
   ()=>({}),
   {
@@ -34,7 +37,7 @@ const {
 class UserInfoContainer extends Component {
   static propTypes = {
     userInfo: PropTypes.object,
-    userInfoDisplay: PropTypes.bool,
+    userInfoDisplay: PropTypes.String,
     getUserInfo: PropTypes.func,
     hideUserInfoDisplay: PropTypes.func,
     requestStart: PropTypes.func,
@@ -67,8 +70,8 @@ class UserInfoContainer extends Component {
 
   render() {
     const { userInfoDisplay, userInfo: { name, company, phone, imgsrc } } = this.props;
-    return (
-      <div className={`${wrap} ${outerContainer}`  +  (userInfoDisplay ? ` ${active}` : '') } style={{ display: (userInfoDisplay ? 'block' : 'none') }} >
+    const childrenComponent = (
+      <div  className={`${wrap} animated ${userInfoDisplay}`}  >
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner}/>
         </div>
@@ -80,7 +83,7 @@ class UserInfoContainer extends Component {
           </ul>
         </div>
         <div className={loginOut}>
-          <Button colors="primary" size="sm" onClick={ this.handleClick }>注销</Button>
+          <Button className={wrapBtn}  size="sm" onClick={ this.handleClick }>注销</Button>
         </div>
 
         <div className={"um-content" + ` ${tabContent}`}>
@@ -106,12 +109,19 @@ class UserInfoContainer extends Component {
               时间线
 
             </TabPane>
-
           </Tabs>
-
-
         </div>
       </div>
+    );
+    return (
+        <ReactCSSTransitionGroup
+          transitionEnter={true}
+          transitionLeave={true}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+          transitionName="example" >
+          {childrenComponent}
+        </ReactCSSTransitionGroup>
     );
   }
 }

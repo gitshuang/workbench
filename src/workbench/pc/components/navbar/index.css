@@ -35,8 +35,6 @@
   font-size: 16px;
 }
 :global(.lebra-navbar-left-content){
-  padding-left: 5px;
-  font-size: 13px;
   cursor: pointer;
 }
 :global(.lebra-navbar-title){
