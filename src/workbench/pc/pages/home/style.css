@@ -55,7 +55,7 @@
 
 
 .WidgetCont{
-    
+
     /*background: yellow;*/
 }
 
@@ -67,9 +67,9 @@
 
 .li_hr{
     width:14px;
-    height:6px; 
+    height:6px;
     background:rgba(225,76,70,1);
-    border-radius: 2px ; 
+    border-radius: 2px ;
 }
 
 
@@ -88,6 +88,6 @@
   color: #fff;
 }*/
 .HeaderLeft img{
-  width:60px;
-  height:30px;
+  width: 58px;
+  height: 27px;
 }
