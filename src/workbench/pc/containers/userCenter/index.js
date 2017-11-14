@@ -37,7 +37,7 @@ const { INTERVAL } = 2000;
 class UserInfoContainer extends Component {
   static propTypes = {
     userInfo: PropTypes.object,
-    userInfoDisplay: PropTypes.String,
+    userInfoDisplay: PropTypes.string,
     getUserInfo: PropTypes.func,
     hideUserInfoDisplay: PropTypes.func,
     requestStart: PropTypes.func,

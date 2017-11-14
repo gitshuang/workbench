@@ -26,9 +26,9 @@ class Notice extends Component {
     super(props, context);
   }
 
-  handClick() {
-    const type = this.props.data.type;
-    dispathMessageTypeHandler(type);
+  handClick(param) {
+    const type = this.props.data.btns;
+    dispathMessageTypeHandler(type[param].type);
   }
 
   render() {
@@ -36,7 +36,7 @@ class Notice extends Component {
       notice,
       data: {
         content,
-        typeBtn,
+        btns,
         icon
       },
     } = this.props;
@@ -45,7 +45,7 @@ class Notice extends Component {
       <div >
         <img src={icon}/>
         <p title={content}>{content}</p>
-        <Button  className={`${notice}Btn`} size="sm" onClick={ this.handClick.bind(this) } >{typeBtn}</Button>
+        <Button  className={`${notice}Btn`} size="sm" onClick={ this.handClick.bind(this,0) } >{btns[0].typeBtn}</Button>
       </div>
     );
   }
