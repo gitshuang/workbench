@@ -13,6 +13,18 @@
   cursor: pointer;
   color: rgba(135,139,148,1);
 }
+:global(.lebra-navbar-left-content){
+  margin-left: 20px;
+  font-size:14px;
+  font-family:MicrosoftYaHei;
+  color:rgba(74,81,93,1);
+}
+:global(.lebra-navbar-title){
+  font-size:14px;
+  font-family:MicrosoftYaHei;
+  color:rgba(74,81,93,1);
+  line-height:19px;
+}
 :global(.lebra-navbar-right div){
   width:32px;
   height: 32px;
