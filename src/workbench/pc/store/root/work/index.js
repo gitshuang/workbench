@@ -10,6 +10,8 @@ const {
   titleServiceHidden,
   pinDisplayBlock,
   pinDisplayNone,
+  pinTypeFocus,
+  setPinCancel,
 } = actions;
 
 const defaultState = {
@@ -17,7 +19,8 @@ const defaultState = {
   productInfo: '',
   titleServiceList: [],
   titleServiceType: false,
-  pinType: false,
+  pinType: true,
+  pinDisplay: false
 };
 
 const reducer = handleActions({
@@ -25,6 +28,16 @@ const reducer = handleActions({
     ...state,
     contentSrc,
   }),
+  [setPinCancel]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    debugger;
+    return {
+      ...state,
+      pinType: payload,
+    };
+  },
   [getProductInfo]: (state, { payload: productInfo, error }) => {
     if (error) {
       return state;
@@ -53,11 +66,15 @@ const reducer = handleActions({
   }),
   [pinDisplayBlock]: state => ({
     ...state,
-    pinType: true,
+    pinDisplay: true,
   }),
   [pinDisplayNone]: state => ({
     ...state,
-    pinType: false,
+    pinDisplay: false,
+  }),
+  [pinTypeFocus]: state => ({
+    ...state,
+    pinType: true,
   }),
 }, defaultState);
 

@@ -8,7 +8,8 @@ var api = [
   '/getMessage',
   '/getProductInfo',
   '/getWorkList',
-  '/getTitleService'
+  '/getTitleService',
+  '/setPinCancel',
 ]
 
 function makeRapConfig(key) {

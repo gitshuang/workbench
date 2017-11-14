@@ -6,12 +6,13 @@ import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 import onClickOutside from 'react-onclickoutside';
 
-
+import { pin } from './style.css'
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { pinDisplayBlock, pinDisplayNone} = workActions;
 
 @connect(mapStateToProps(
   'pinType',
+  'pinDisplay',
   {
     "namespace":"work"
   }
@@ -38,13 +39,15 @@ class Pin extends Component {
   }
 
   handleClickOutside(evt) {
-    const { pinDisplayBlock, pinDisplayNone  } = this.props;
-    pinDisplayNone();
+    const { pinDisplayBlock, pinDisplayNone, pinDisplay  } = this.props;
+    if(pinDisplay){
+      pinDisplayNone();
+    }
   }
   render() {
-    const { pinType } = this.props;
+    const { pinType, pinDisplay } = this.props;
     return (
-      <div className={ 'um-css3-hc'} style={{ display: pinType ? 'block' : 'none' }} >
+      <div className={ pin + ' um-css3-hc'} style={{ display: pinDisplay ? 'block' : 'none' }} >
         123
       </div>
     );

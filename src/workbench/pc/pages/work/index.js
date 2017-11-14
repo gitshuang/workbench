@@ -14,6 +14,7 @@ import BreadcrumbContainer from 'containers/breadcrumb';
 import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
 import QuickServiceContainer from 'containers/titleService';
+import Pin from 'containers/pin'
 /*  style样式库组件  */
 import "assets/style/iuapmobile.um.css"
 import styles from './style.css';
@@ -22,7 +23,14 @@ import styles from './style.css';
 const { workArea,wrap } = styles;
 /* 声明actions */
 const { requestStart, requestSuccess, requestError, } = rootActions;
-const { titleServiceDisplay, getProductInfo, pinDisplayBlock, pinDisplayNone } = workActions;
+const {
+  titleServiceDisplay,
+  getProductInfo,
+  pinDisplayBlock,
+  pinDisplayNone,
+  pinTypeFocus,
+  setPinCancel
+} = workActions;
 
 function makeLayout(type, menu) {
   switch (type) {
@@ -46,13 +54,24 @@ function makeLayout(type, menu) {
 @withRouter
 @connect(
   mapStateToProps(
-    'pinType',
+    {
+      key: 'pinType',
+      value: (rot,props,root)=>{
+        return rot.work.pinType
+      }
+    },
+    {
+      key: 'pinDisplay',
+      value: (rot,props,root)=>{
+        return rot.work.pinDisplay
+      }
+    },
     {
       key: 'product',
       //value: (state, { productId }) => state.productList.find(product => product.id === productId),
-      value: (home,props,root)=>{
+      value: (rot,props,root)=>{
         let value = '';
-        home.workList.forEach((work) => {
+        rot.home.workList.forEach((work) => {
           work.widgeList.forEach((widget)=>{
             if(widget.id === props.match.params.productId){
               value = widget;
@@ -67,7 +86,7 @@ function makeLayout(type, menu) {
       }
     },
     {
-      namespace: 'home'
+      namespace: 'root'
     }
   ),
   {
@@ -77,7 +96,9 @@ function makeLayout(type, menu) {
     titleServiceDisplay,
     getProductInfo,
     pinDisplayBlock,
-    pinDisplayNone
+    pinDisplayNone,
+    pinTypeFocus,
+    setPinCancel,
   }
 )
 export default class Work extends Component {
@@ -112,8 +133,19 @@ export default class Work extends Component {
   }
 
   pinDisplay = () => {
-    const { pinDisplayBlock, pinDisplayNone, pinType } = this.props;
+    const { pinDisplayBlock, pinDisplayNone, pinType, pinDisplay, pinTypeFocus, setPinCancel } = this.props;
+    if ( pinType ){
 
+      setPinCancel().then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
+        }
+        debugger;
+        console.log(payload);
+      });
+      return false;
+    }
+    pinDisplayBlock();
   }
 
   render() {
@@ -148,6 +180,7 @@ export default class Work extends Component {
           }
         </div>
         <QuickServiceContainer outsideClickIgnoreClass={'icon-xiala'}/>
+        <Pin outsideClickIgnoreClass={'icon-dingzhi'} />
       </div>
     );
   }
