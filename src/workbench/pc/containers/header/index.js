@@ -11,6 +11,7 @@ const {
 } = styles;
 const {
   changeQuickServiceDisplay,
+  changeSearchDisplay,
 } = actions;
 
 class HeaderContainer extends Component {
@@ -26,6 +27,13 @@ class HeaderContainer extends Component {
     }
   }
 
+  openSearch(event) {
+    const { changeSearchDisplay, searchDisplay } = this.props;
+    if( !searchDisplay ){
+      changeSearchDisplay();
+    }
+  }
+
   render() {
     const {
       children,
@@ -35,6 +43,7 @@ class HeaderContainer extends Component {
       leftContent,
       rightContent,
       quickServiceDisplay,
+      searchDisplay,
       messageType
     } = this.props;
 
@@ -61,7 +70,7 @@ class HeaderContainer extends Component {
     const rightArray = Children.toArray(rightContent);
     let appClass = quickServiceDisplay ? "active tc" : "tc"
     const rightContents = rightArray.concat(
-      <div className="tc" style={{marginRight:"15px"}}><Icon type="search" /></div>,
+      <div className="tc" style={{marginRight:"15px"}} onClick = {(e) =>{this.openSearch(e)}} ><Icon type="search" /></div>,
       <div className={appClass} style={{marginRight:"15px"}} onClick = {(e) =>{this.openService(e)}} ><Icon type="yingyong" /></div>,
       <div className="tc">
         <Icon type="xiaoxi" />
@@ -86,9 +95,11 @@ class HeaderContainer extends Component {
 
 export default connect(mapStateToProps(
   'quickServiceDisplay',
+  'searchDisplay',
   'messageType',
 ),
   {
     changeQuickServiceDisplay,
+    changeSearchDisplay,
   }
 )(HeaderContainer);
