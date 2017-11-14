@@ -10,6 +10,7 @@ var api = [
   '/getWorkList',
   '/getTitleService',
   '/setPinCancel',
+  '/setPinAdd',
 ]
 
 function makeRapConfig(key) {

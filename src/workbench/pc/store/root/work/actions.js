@@ -3,7 +3,8 @@ import types from './types';
 import {
   getProductInfo,
   getTitleService,
-  setPinCancel
+  setPinCancel,
+  setPinAdd
 } from './api';
 
 const {
@@ -18,7 +19,7 @@ const {
   TITLE_SERVICE_HIDDEN,
   PIN_DISPLAY_BLOCK,
   PIN_DISPLAY_NONE,
-  PIN_TYPE_FOCUS,
+  SET_PIN_ADD,
   SET_PIN_CANCEL,
 } = types;
 
@@ -26,6 +27,7 @@ export default createActions({
     [GET_PRODUCT_INFO]: getProductInfo,
     [GET_TITLE_SERVICE]: getTitleService,
     [SET_PIN_CANCEL]: setPinCancel,
+    [SET_PIN_ADD]: setPinAdd,
   },
   SET_CONTENT_SRC,
   SET_EXPANDED_SIDEBAR,
@@ -36,6 +38,5 @@ export default createActions({
   TITLE_SERVICE_HIDDEN,
   PIN_DISPLAY_BLOCK,
   PIN_DISPLAY_NONE,
-  PIN_TYPE_FOCUS,
   { namespace: 'work' }
 );

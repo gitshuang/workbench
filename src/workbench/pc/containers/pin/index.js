@@ -6,9 +6,17 @@ import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 import onClickOutside from 'react-onclickoutside';
 
-import { pin } from './style.css'
+import Button from 'bee-button';
+
+import {
+  pin,
+  bc,
+  title,
+  content,
+  footer
+} from './style.css'
 const {requestStart, requestSuccess, requestError} = rootActions;
-const { pinDisplayBlock, pinDisplayNone} = workActions;
+const { pinDisplayNone, setPinAdd } = workActions;
 
 @connect(mapStateToProps(
   'pinType',
@@ -22,8 +30,8 @@ const { pinDisplayBlock, pinDisplayNone} = workActions;
     requestStart,
     requestSuccess,
     requestError,
-    pinDisplayBlock,
-    pinDisplayNone
+    pinDisplayNone,
+    setPinAdd,
   }
 )
 @onClickOutside
@@ -39,16 +47,52 @@ class Pin extends Component {
   }
 
   handleClickOutside(evt) {
-    const { pinDisplayBlock, pinDisplayNone, pinDisplay  } = this.props;
+    const {  pinDisplayNone, pinDisplay  } = this.props;
     if(pinDisplay){
       pinDisplayNone();
     }
   }
+
+  confirmFn = () => {
+    const { requestError, pinDisplayNone, setPinAdd } = this.props;
+    setPinAdd().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      pinDisplayNone();
+    });
+  }
+
+  cancelFn = () => {
+    const { pinDisplayNone } = this.props;
+    pinDisplayNone();
+  }
+
   render() {
     const { pinType, pinDisplay } = this.props;
     return (
       <div className={ pin + ' um-css3-hc'} style={{ display: pinDisplay ? 'block' : 'none' }} >
-        123
+        <div className="um-box">
+          <div className={bc}>
+            <img src="../" alt="" />
+          </div>
+          <p>工作页名称</p>
+        </div>
+        <div className={title}>
+          添加到：
+        </div>
+        <div className={ content + " um-content"}>
+
+        </div>
+        <div className={footer + " um-box-justify"}>
+          <div>
+            <Button>添加分组</Button>
+          </div>
+          <div>
+            <Button style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
+            <Button onClick={this.cancelFn}>取消</Button>
+          </div>
+        </div>
       </div>
     );
   }

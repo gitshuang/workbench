@@ -12,6 +12,6 @@ export default createTypes(
   'TITLE_SERVICE_HIDDEN',
   'PIN_DISPLAY_BLOCK',
   'PIN_DISPLAY_NONE',
-  'PIN_TYPE_FOCUS',
+  'SET_PIN_ADD',
   'SET_PIN_CANCEL'
 );

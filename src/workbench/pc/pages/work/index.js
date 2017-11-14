@@ -28,8 +28,6 @@ const {
   titleServiceDisplay,
   getProductInfo,
   pinDisplayBlock,
-  pinDisplayNone,
-  pinTypeFocus,
   setPinCancel,
 } = workActions;
 
@@ -104,8 +102,6 @@ function makeLayout(type, menu,tabsList) {
     titleServiceDisplay,
     getProductInfo,
     pinDisplayBlock,
-    pinDisplayNone,
-    pinTypeFocus,
     setPinCancel,
   }
 )
@@ -143,7 +139,7 @@ export default class Work extends Component {
   }
 
   pinDisplay = () => {
-    const { pinDisplayBlock, pinDisplayNone, pinType, pinDisplay, pinTypeFocus, setPinCancel } = this.props;
+    const { pinDisplayBlock, pinType, pinDisplay, setPinCancel } = this.props;
     if ( pinType ){
 
       setPinCancel().then(({ error, payload }) => {
@@ -157,7 +153,6 @@ export default class Work extends Component {
     if( !pinDisplay ){
       pinDisplayBlock();
     }
-
   }
   render() {
     const { product = {},tabsList=[],current, pinType, titleServiceDisplay } = this.props;

@@ -10,7 +10,7 @@ const {
   titleServiceHidden,
   pinDisplayBlock,
   pinDisplayNone,
-  pinTypeFocus,
+  setPinAdd,
   setPinCancel,
   setExpandedSidebar,
   getTabsList,
@@ -27,7 +27,7 @@ const defaultState = {
   productInfo: '',
   titleServiceList: [],
   titleServiceType: false,
-  pinType: true,
+  pinType: false,
   pinDisplay: false
 };
 
@@ -36,7 +36,15 @@ const reducer = handleActions({
     ...state,
     contentSrc,
   }),
-
+  [setPinAdd]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      pinType: true,
+    };
+  },
   [setPinCancel]: (state, { payload, error }) => {
     if (error) {
       return state;
@@ -123,11 +131,6 @@ const reducer = handleActions({
     ...state,
     pinDisplay: false,
   }),
-  [pinTypeFocus]: state => ({
-    ...state,
-    pinType: true,
-  }),
-
 }, defaultState);
 
 export default reducer;
