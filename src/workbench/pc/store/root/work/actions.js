@@ -4,7 +4,8 @@ import {
   getProductInfo,
   getTitleService,
   setPinCancel,
-  setPinAdd
+  setPinAdd,
+  setPinAddGroup
 } from './api';
 
 const {
@@ -20,6 +21,7 @@ const {
   PIN_DISPLAY_BLOCK,
   PIN_DISPLAY_NONE,
   SET_PIN_ADD,
+  SET_PIN_ADD_GROUP,
   SET_PIN_CANCEL,
 } = types;
 
@@ -28,6 +30,7 @@ export default createActions({
     [GET_TITLE_SERVICE]: getTitleService,
     [SET_PIN_CANCEL]: setPinCancel,
     [SET_PIN_ADD]: setPinAdd,
+    [SET_PIN_ADD_GROUP]: setPinAddGroup,
   },
   SET_CONTENT_SRC,
   SET_EXPANDED_SIDEBAR,

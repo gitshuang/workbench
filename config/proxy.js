@@ -11,6 +11,7 @@ var api = [
   '/getTitleService',
   '/setPinCancel',
   '/setPinAdd',
+  '/setPinAddGroup',
 ]
 
 function makeRapConfig(key) {

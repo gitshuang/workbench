@@ -10,3 +10,6 @@ export const setPinCancel = () => {
 export const setPinAdd = () => {
   return get('/setPinAdd')
 };
+export const setPinAddGroup = () => {
+  return get('/setPinAddGroup')
+};
