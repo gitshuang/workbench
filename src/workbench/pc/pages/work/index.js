@@ -6,6 +6,7 @@ import HeaderContainer from 'containers/header';
 import BreadcrumbContainer from 'containers/breadcrumb';
 import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
+import TabsContainer from 'containers/tabs';
 import rootActions from 'store/root/actions';
 import getProductInfo from 'store/root/work/api';
 import baseStyles from 'public/base.css';
@@ -25,7 +26,7 @@ const {
   requestError,
 } = rootActions;
 
-function makeLayout(type, menu) {
+function makeLayout(type, menu,tabsList) {
   switch (type) {
     case 1:
       return [
@@ -34,7 +35,8 @@ function makeLayout(type, menu) {
     case 2:
       return [
         <SideBarContainer key={1} data={menu} />,
-        <ContentContainer key={2}/>
+        <ContentContainer key={2}/>,
+        <TabsContainer tabsList={tabsList} />
       ];
     case 3:
       return [
@@ -64,6 +66,12 @@ function makeLayout(type, menu) {
           }
         });
         return value
+      },
+    },
+    {
+      key:'tabsList',
+      value: (home,props,root)=>{
+        return root.work.tabsList;
       }
     },
     {
@@ -89,7 +97,7 @@ export default class Work extends Component {
     this.props.history.replace('');
   }
   componentWillMount() {
-    const { product = {} } = this.props;
+    const { product = {},tabsList } = this.props;
     requestStart();
     getProductInfo(product.id).then(({ type, menu = [] }) => {
         this.setState({
@@ -105,8 +113,9 @@ export default class Work extends Component {
     );
   }
   render() {
-    const { product = {} } = this.props;
+    const { product = {},tabsList=[],current } = this.props;
     const { type, menu } = this.state;
+
     return (
       <div className="um-win">
         <div className="um-header">
@@ -119,7 +128,7 @@ export default class Work extends Component {
           {
             this.state.loaded ? (
               <div className={workArea} >
-                { makeLayout(type, menu) }
+                { makeLayout(type, menu,tabsList) }
               </div>
             ) : null
           }

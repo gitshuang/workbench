@@ -5,12 +5,13 @@ import actions from 'store/root/work/actions';
 import Menu, { SubMenu } from 'bee-menus';
 import { sideBar } from './style.css';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { mapStateToProps } from '@u';
 
 
 const SideContainer = Menu.SideContainer;
 
 
-const { setContentSrc } = actions;
+const { setContentSrc,setTabsCurrent } = actions;
 
 class SideBarContainer extends Component {
   constructor(props, context) {
@@ -28,12 +29,18 @@ class SideBarContainer extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(e) {
-    const { data, setContentSrc } = this.props;
+    const { data, setContentSrc,setTabsCurrent } = this.props;
     //const item = data[o.key];
-    debugger;
     const item = e.keyPath.length>1?data[e.keyPath[1]].children[e.keyPath[0]]:data[e.keyPath[0]];
     if (item) {
+      //设定iframe内容
       setContentSrc(item.location);
+      //设定tabs组件的当前值
+      setTabsCurrent({
+        id:item.id,
+        url:item.location,
+        title:item.name
+      });
       const st = (e.keyPath.length==1)?{
         current: item.id,
         openKeys: [],
@@ -125,18 +132,18 @@ class SideBarContainer extends Component {
     return map[key] || [];
   }
   render() {
-    const { data } = this.props;
+    const { data,expanded } = this.props;
     const self = this;
 
-    const expanded = this.state.expanded?"expanded":"";
-    const isSeleted = this.state.submenuSelected;
+    console.log(expanded);
 
     return (
+
 
       <div id="portal" className={`sideBar`} >
 
 
-        <SideContainer onToggle={this.onToggle.bind(this)} expanded={this.state.expanded}>
+        <SideContainer onToggle={this.onToggle.bind(this)} expanded={expanded}>
           <div className="scroll-height">
             <Scrollbars>
               <Menu  onOpenChange={this.onOpenChange.bind(this)} onClick={this.handleClick.bind(this)} className="u-menu-max1" style={{ width: '100%' }}  openKeys={this.state.openKeys} selectedKeys={[this.state.current]} mode="inline">
@@ -150,14 +157,15 @@ class SideBarContainer extends Component {
                     if(Array.isArray(item.children)&&item.children.length>0){
                       let list = [];
                       let title = (<a href="javascript:;"><i className={'icon '+item.icon}></i><span>{item.name}</span></a>);
+
                       item.children.map(function(it,i){
                         let blank =it.openview=="blank"?"_blank":"";
                         list.push(<Menu.Item key={i}><a target={blank} ref="child" href={'javascript:;'}>{it.name}</a></Menu.Item>)
                       });
-                      var selected = item.id == isSeleted?"u-menu-submenus-selected":"";
+
 
                       return (
-                        <SubMenu key={s} className={selected} children={item.children} title={title}>
+                        <SubMenu key={s} children={item.children} title={title}>
                           {list}
                         </SubMenu>
                       )
@@ -182,9 +190,14 @@ class SideBarContainer extends Component {
   }
 }
 
-export default connect(
-  () => ({}),
+export default connect(mapStateToProps(
+  'expanded',
+  {
+    namespace: 'work',
+  },
+  ),
   {
     setContentSrc,
+    setTabsCurrent,
   },
 )(SideBarContainer);

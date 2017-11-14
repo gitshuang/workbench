@@ -1,10 +1,34 @@
-.breadcrumbClass {
-
-}
 .breadcrumbClass ol {
   display:inline-block;
   background: none;
+  margin:0;
+  padding:0;
+  color:#888;
+  vertical-align: middle;
+  font-family: "Microsoft Yahei", STHeiTi, Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+}
+.breadcrumbClass ol li {
+  color:#888;
+}
+.breadcrumbClass a {
+  color:#888;
+}
+.breadcrumbClass ol>li+li:before {
+  content: "\003e";
 }
 .breadcrumbClassIcon {
   cursor:pointer;
+  color:#878B94;
+  margin:0 10px;
+  vertical-align: middle;
+}
+.breadcrumbClass {
+  background:#fff;
+  height:38px;
+  line-height:38px;
+  display:inline-block;
+}
+.breadcrumbBack {
+  margin:0 10px;
+  color:#888;
 }

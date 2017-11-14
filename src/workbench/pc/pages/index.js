@@ -12,6 +12,7 @@ import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
 import 'assets/style/iuapmobile.um.css';
 import 'assets/style/sidebar.css';
+import 'assets/style/tabs.css';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 const {
