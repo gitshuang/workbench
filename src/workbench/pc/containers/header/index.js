@@ -7,7 +7,6 @@ import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
 import styles from './index.css';
 const {
-  header,
   lebraNavbar,
 } = styles;
 const {
@@ -70,7 +69,6 @@ class HeaderContainer extends Component {
       </div>
     );
     return (
-      <div className={header}>
         <NavBar
           className={lebraNavbar}
           mode="light"
@@ -82,7 +80,6 @@ class HeaderContainer extends Component {
           onLeftClick={ onLeftClick }>
           { children }
         </NavBar>
-      </div>
     );
   }
 }

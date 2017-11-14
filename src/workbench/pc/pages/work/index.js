@@ -19,7 +19,7 @@ import "assets/style/iuapmobile.um.css"
 import styles from './style.css';
 
 /*  定义style  css-loader  */
-const { workArea, HeaderLeft } = styles;
+const { workArea,wrap } = styles;
 /* 声明actions */
 const { requestStart, requestSuccess, requestError, } = rootActions;
 const { titleServiceDisplay, getProductInfo, pinDisplayBlock, pinDisplayNone } = workActions;
@@ -46,6 +46,7 @@ function makeLayout(type, menu) {
 @withRouter
 @connect(
   mapStateToProps(
+    'pinType',
     {
       key: 'product',
       //value: (state, { productId }) => state.productList.find(product => product.id === productId),
@@ -88,9 +89,7 @@ export default class Work extends Component {
       menu: [],
     };
   }
-  goBack() {
-    this.props.history.replace('');
-  }
+
   componentWillMount() {
     const { product = {}, getProductInfo, } = this.props;
     requestStart();
@@ -104,22 +103,37 @@ export default class Work extends Component {
       },
       (e) => {
         requestError(e);
-      },
+      }
     );
   }
+
+  goBack() {
+    this.props.history.replace('');
+  }
+
+  pinDisplay = () => {
+    const { pinDisplayBlock, pinDisplayNone, pinType } = this.props;
+
+  }
+
   render() {
-    let leftContent = <div className={HeaderLeft}>返回</div>
-    const { product = {}, titleServiceDisplay } = this.props;
+    const { product = {}, titleServiceDisplay, pinType } = this.props;
     const { type, menu } = this.state;
-    let iconName = <Icon type="qiyejieshao" style={{fontSize:"20PX"}}/>
+
+    let iconName = <Icon type="qiyejieshao" style={{fontSize:"24px"}}/>
     return (
-      <div className="um-win">
+      <div className={wrap + " um-win"}>
         <div className="um-header">
-          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={iconName} leftContent={leftContent}>
+          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={iconName} leftContent={ product.title }>
             <div className="um-box">
               <span>{product.title || ''}</span>
-              <Icon type="xiala" style={{marginLeft:"15px",fontSize:"10px"}} onClick={titleServiceDisplay}></Icon>
-              <Icon type="dingzhi" style={{marginLeft:"15px"}}></Icon>
+              <Icon type="xiala" style={{marginLeft:"15px",fontSize:"10px"}} onClick={titleServiceDisplay} />
+              <Icon
+                type="dingzhi"
+                className={ pinType ? 'active' : '' }
+                style={{ marginLeft:"15px",fontSize:"18px" }}
+                onClick={ this.pinDisplay }
+              />
             </div>
           </HeaderContainer>
         </div>
