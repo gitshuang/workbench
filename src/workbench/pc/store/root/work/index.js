@@ -41,7 +41,6 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    debugger;
     return {
       ...state,
       pinType: payload,
@@ -103,7 +102,6 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    debugger;
     return {
       ...state,
       titleServiceList,

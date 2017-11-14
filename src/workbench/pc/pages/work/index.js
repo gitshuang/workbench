@@ -150,7 +150,6 @@ export default class Work extends Component {
         if (error) {
           requestError(payload);
         }
-        debugger;
         console.log(payload);
       });
       return false;
