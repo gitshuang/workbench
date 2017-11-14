@@ -69,10 +69,16 @@ const reducer = handleActions({
     }
     return newState;
   },
-  [hideUserInfoDisplay]: (state) => ({
-    ...state,
-    userInfoDisplay: "fadeOutLeft",
-  }),
+  [hideUserInfoDisplay]: (state) => {
+    const newState = {
+      ...state,
+      userInfoDisplay: "userInfohidden"
+    };
+    if(state.userInfoDisplay !== "userInfohidden"){
+      newState.userInfoDisplay = "fadeOutLeft";
+    }
+    return newState;
+  },
 }, defaultState);
 
 
