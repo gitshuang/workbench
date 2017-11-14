@@ -154,7 +154,10 @@ export default class Work extends Component {
       });
       return false;
     }
-    pinDisplayBlock();
+    if( !pinDisplay ){
+      pinDisplayBlock();
+    }
+
   }
   render() {
     const { product = {},tabsList=[],current, pinType, titleServiceDisplay } = this.props;
