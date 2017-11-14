@@ -1,34 +1,28 @@
+/*应用级引用*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
+/*   actions   */
+import rootActions from 'store/root/actions';
+import workActions from 'store/root/work/actions';
+/*  components 组件 */
+import Icon from 'components/icon';
+/*  containers 容器组件  */
 import HeaderContainer from 'containers/header';
 import BreadcrumbContainer from 'containers/breadcrumb';
 import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
-import rootActions from 'store/root/actions';
-//import getProductInfo from 'store/root/work/api';
-import baseStyles from 'public/base.css';
-import styles from './style.css';
 import QuickServiceContainer from 'containers/titleService';
-import Icon from 'components/icon';
-import workActions from 'store/root/work/actions';
-const {
-  wrap,
+/*  style样式库组件  */
+import "assets/style/iuapmobile.um.css"
+import styles from './style.css';
 
-} = baseStyles;
-
-const {
-  workArea,
-  HeaderLeft
-} = styles;
-const { titleServiceDisplay, getProductInfo } = workActions;
-const {
-  requestStart,
-  requestSuccess,
-  requestError,
-
-} = rootActions;
+/*  定义style  css-loader  */
+const { workArea, HeaderLeft } = styles;
+/* 声明actions */
+const { requestStart, requestSuccess, requestError, } = rootActions;
+const { titleServiceDisplay, getProductInfo, pinDisplayBlock, pinDisplayNone } = workActions;
 
 function makeLayout(type, menu) {
   switch (type) {
@@ -81,7 +75,9 @@ function makeLayout(type, menu) {
     requestError,
     titleServiceDisplay,
     getProductInfo,
-  },
+    pinDisplayBlock,
+    pinDisplayNone
+  }
 )
 export default class Work extends Component {
   constructor(props) {
@@ -115,14 +111,15 @@ export default class Work extends Component {
     let leftContent = <div className={HeaderLeft}>返回</div>
     const { product = {}, titleServiceDisplay } = this.props;
     const { type, menu } = this.state;
-
+    let iconName = <Icon type="qiyejieshao" style={{fontSize:"20PX"}}/>
     return (
       <div className="um-win">
         <div className="um-header">
-          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={"qiyejieshao"} leftContent={leftContent}>
+          <HeaderContainer onLeftClick={ this.goBack.bind(this) } iconName={iconName} leftContent={leftContent}>
             <div className="um-box">
               <span>{product.title || ''}</span>
               <Icon type="xiala" style={{marginLeft:"15px",fontSize:"10px"}} onClick={titleServiceDisplay}></Icon>
+              <Icon type="dingzhi" style={{marginLeft:"15px"}}></Icon>
             </div>
           </HeaderContainer>
         </div>

@@ -10,6 +10,8 @@ const {
   GET_TITLE_SERVICE,
   TITLE_SERVICE_DISPLAY,
   TITLE_SERVICE_HIDDEN,
+  PIN_DISPLAY_BLOCK,
+  PIN_DISPLAY_NONE,
 } = types;
 
 export default createActions({
@@ -19,4 +21,6 @@ export default createActions({
   SET_CONTENT_SRC,
   TITLE_SERVICE_DISPLAY,
   TITLE_SERVICE_HIDDEN,
-  { namespace: 'work' });
+  PIN_DISPLAY_BLOCK,
+  PIN_DISPLAY_NONE,
+);

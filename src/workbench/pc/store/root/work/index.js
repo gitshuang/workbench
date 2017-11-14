@@ -7,13 +7,17 @@ const {
   getProductInfo,
   getTitleService,
   titleServiceDisplay,
-  titleServiceHidden
+  titleServiceHidden,
+  pinDisplayBlock,
+  pinDisplayNone,
 } = actions;
 
 const defaultState = {
   contentSrc: '',
-  titleService:[],
+  productInfo: '',
+  titleServiceList: [],
   titleServiceType: false,
+  pinType: false,
 };
 
 const reducer = handleActions({
@@ -30,13 +34,13 @@ const reducer = handleActions({
       productInfo,
     };
   },
-  [getTitleService]: (state, { payload: titleService, error }) => {
+  [getTitleService]: (state, { payload: titleServiceList, error }) => {
     if (error) {
       return state;
     }
     return {
       ...state,
-      titleService,
+      titleServiceList,
     };
   },
   [titleServiceDisplay]: state => ({
@@ -46,6 +50,14 @@ const reducer = handleActions({
   [titleServiceHidden]: state => ({
     ...state,
     titleServiceType: false,
+  }),
+  [pinDisplayBlock]: state => ({
+    ...state,
+    pinType: true,
+  }),
+  [pinDisplayNone]: state => ({
+    ...state,
+    pinType: false,
   }),
 }, defaultState);
 
