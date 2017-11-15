@@ -139,7 +139,13 @@ class Pin extends Component {
             添加到：
           </div>
           <div className={borderBox}>
-            <Menu onClick={this.handleClick.bind(this)} style={{ width: 240 }} defaultOpenKeys={['demo3sub1']} selectedKeys={[this.state.currentMenu]} mode="inline">
+            <Menu
+              onClick={this.handleClick.bind(this)}
+              style={{ width: 240 }}
+              defaultOpenKeys={['demo3sub1']}
+              selectedKeys={[this.state.currentMenu]}
+              mode="inline"
+            >
               <SubMenu key="demo3sub1" title={<span><span>组织 2</span></span>}>
                 <Menu.Item key="5">选项 5</Menu.Item>
                 <Menu.Item key="6">选项 6</Menu.Item>

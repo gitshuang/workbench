@@ -12,6 +12,7 @@ const {
   pinDisplayNone,
   setPinAdd,
   setPinAddGroup,
+  getPinGroup,
   setPinCancel,
   setExpandedSidebar,
   getTabsList,
@@ -46,6 +47,14 @@ const reducer = handleActions({
     };
   },
   [setPinAddGroup]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+    };
+  },
+  [getPinGroup]: (state, { payload, error }) => {
     if (error) {
       return state;
     }

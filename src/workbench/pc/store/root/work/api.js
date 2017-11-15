@@ -13,3 +13,6 @@ export const setPinAdd = () => {
 export const setPinAddGroup = () => {
   return get('/setPinAddGroup')
 };
+export const getPinGroup = () => {
+  return get('/getPinGroup')
+};

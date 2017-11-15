@@ -12,6 +12,7 @@ var api = [
   '/setPinCancel',
   '/setPinAdd',
   '/setPinAddGroup',
+  '/getPinGroup',
 ]
 
 function makeRapConfig(key) {
