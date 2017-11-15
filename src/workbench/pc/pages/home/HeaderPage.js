@@ -7,10 +7,11 @@ import WidgetArea from 'components/widgetArea';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-import baseStyles from 'public/base.css';
+// import baseStyles from 'public/base.css';
 import {button_group} from './style.css';
+import {header} from './header_page.css';
 
-const {wrap, } = baseStyles;
+// const {wrap, } = baseStyles;
 
 const {changeUserInfoDisplay} = homeActions;
 
@@ -54,7 +55,7 @@ class HeaderPage extends Component {
         let {workList} = this.state;
 
         return (
-          <div className="header">
+          <div className={header}>
             <Header onLeftClick={ changeUserInfoDisplay } leftContent={this.getLeftContent} iconName={'wode'}>
                   <span>首页</span>
             </Header>
