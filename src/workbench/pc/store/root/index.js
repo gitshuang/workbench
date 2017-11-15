@@ -87,12 +87,12 @@ const reducer = handleActions({
     const newState = {
       ...state,
       quickServiceDisplay: true,
-      quickServiceAnimate: " animated slideInDown"
+      quickServiceAnimate: " animated fadeInDownBig"
     };
-    if(state.quickServiceAnimate === " animated slideInDown"){
-      newState.quickServiceAnimate = " animated slideOutUp";
-    }else if(state.quickServiceAnimate === " animated slideOutUp"){
-      newState.quickServiceAnimate = " animated slideInDown";
+    if(state.quickServiceAnimate === " animated fadeInDownBig"){
+      newState.quickServiceAnimate = " animated fadeOutUpBig";
+    }else if(state.quickServiceAnimate === " animated fadeOutUpBig"){
+      newState.quickServiceAnimate = " animated fadeInDownBig";
     }
     return newState;
   },
@@ -103,7 +103,7 @@ const reducer = handleActions({
       quickServiceAnimate: "quickServiceHidden"
     };
     if(state.quickServiceAnimate !== "quickServiceHidden"){
-      newState.quickServiceAnimate = " animated slideOutUp";
+      newState.quickServiceAnimate = " animated fadeOutUpBig";
     }
     return newState;
   },

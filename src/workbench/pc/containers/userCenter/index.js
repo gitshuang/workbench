@@ -47,7 +47,7 @@ class UserInfoContainer extends Component {
 
   handleClickOutside(evt) {
     const {changeQuickServiceHidden,hideUserInfoDisplay,userInfoDisplay } = this.props;
-    if(userInfoDisplay !== "userInfohidden" && userInfoDisplay === "fadeInLeft"){
+    if(userInfoDisplay !== "userInfohidden" && userInfoDisplay === "fadeInLeftBig"){
       hideUserInfoDisplay();
     }
   }

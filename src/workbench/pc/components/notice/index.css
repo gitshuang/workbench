@@ -52,4 +52,9 @@
   text-overflow:ellipsis;
   white-space: nowrap;
 }
-
+:global(.hideAuto){
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  float: right;
+}

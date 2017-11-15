@@ -46,6 +46,7 @@ class Notice extends Component {
         <img src={icon}/>
         <p title={content}>{content}</p>
         <Button  className={`${notice}Btn`} size="sm" onClick={ this.handClick.bind(this,0) } >{btns[0].typeBtn}</Button>
+        <div className="hideAuto"><Icon type="xiaoxi" /></div>
       </div>
     );
   }
