@@ -26,11 +26,14 @@ function makeRapConfig(key) {
 
 function makeStaticConfig(key) {
   var config = {
-    target: 'http://localhost:3000',
-    pathRewrite: {}
+    target: 'http://localhost:3000/static',
+    pathRewrite: function(path, req) {
+      return key + '.json';
+    }
   };
-  config.pathRewrite['^' + key] = '/static' + key + '.json'
-  return config
+  // config.pathRewrite['^' + key] = '/static' + key + '.json'
+  return config;
+  // return 'http://localhost:3000/static' + key + '.json'
 }
 
 function addApi() {
