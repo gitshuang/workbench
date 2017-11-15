@@ -11,9 +11,11 @@ import Button from 'bee-button';
 /*  style */
 import {
   pin,
-  bc,
+  header,
+  container,
   title,
-  content,
+  pd,
+  borderBox,
   footer
 } from './style.css'
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -78,14 +80,48 @@ class Pin extends Component {
     pinDisplayNone();
   }
 
+  addNewGroup =() => {
+
+  }
+
+  groupCancelFn =() => {
+    this.setState({
+      isGroup: false
+    });
+  }
+
   renderContent = () => {
     let content;
     if (this.state.isGroup){
-      content = <div>
-        <input type="text"/>
-      </div>
+      content =
+        <div className= {`${pd} ${container}`}>
+          <div className={borderBox}>
+            <input type="text"/>
+          </div>
+          <div className={footer + " um-box-justify"}>
+            <Button onClick={this.addNewGroup}>添加到新分组</Button>
+            <Button onClick={this.groupCancelFn}>取消</Button>
+          </div>
+        </div>
     }else{
-      content = <div>111111111111111111111</div>
+      content =
+        <div className= {container}>
+          <div className={title}>
+            添加到：
+          </div>
+          <div className={borderBox}>
+
+          </div>
+          <div className={footer + " um-box-justify"}>
+            <div>
+              <Button onClick={this.addGroup}>添加分组</Button>
+            </div>
+            <div>
+              <Button style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
+              <Button onClick={this.cancelFn}>取消</Button>
+            </div>
+          </div>
+        </div>
     }
     return content;
   }
@@ -94,29 +130,13 @@ class Pin extends Component {
     const { pinType, pinDisplay } = this.props;
     return (
       <div className={ pin + ' um-css3-hc'} style={{ display: pinDisplay ? 'block' : 'none' }} >
-        <div className="um-box">
-          <div className={bc}>
+        <div className={header +" um-box"}>
+          <div>
             <img src="../" alt="" />
           </div>
           <p>工作页名称</p>
         </div>
-        <div className={title}>
-          添加到：
-        </div>
-        <div className={ content + " um-content"}>
-          {this.renderContent()}
-        </div>
-        <div className={footer + " um-box-justify"}>
-
-          <div>
-            <Button onClick={this.addGroup}>添加分组</Button>
-          </div>
-          <div>
-            <Button style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
-            <Button onClick={this.cancelFn}>取消</Button>
-          </div>
-        </div>
-
+        {this.renderContent()}
       </div>
     );
   }
