@@ -101,7 +101,11 @@ class Pin extends Component {
       if (error) {
         requestError(payload);
       }
-      console.log(payload);
+
+      this.setState({
+        isGroup: false
+      });
+      alert("添加分组成功");
     });
   }
 
