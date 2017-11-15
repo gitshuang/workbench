@@ -40,7 +40,7 @@ class QuickServiceContainer extends Component {
     const { quickServiceDisplay,quickServiceAnimate, serviceList } = this.props;
     return (
       <div className={`${serviceContainer} ${quickServiceAnimate}`}>
-      <div className={`${service} ` } >
+        <div className={`${service} ` } >
         <div className={`${serviceGroup} `}>
           <h4>分组一</h4>
           <ul className="clearfix">
@@ -62,8 +62,8 @@ class QuickServiceContainer extends Component {
           </ul>
         </div>
 
-      </div>
-      <div className={`${serviceBtn} ` }><button className="btn" onClick={this.openApplication}>全部服务</button></div>
+        </div>
+        <div className={`${serviceBtn} ` }><button className="btn" onClick={this.openApplication}>全部服务</button></div>
       </div>
     );
   }
