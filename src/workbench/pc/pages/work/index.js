@@ -14,7 +14,8 @@ import BreadcrumbContainer from 'containers/breadcrumb';
 import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
 import QuickServiceContainer from 'containers/titleService';
-import Pin from 'containers/pin'
+import Pin from 'containers/pin';
+import {getProductInfo} from 'store/root/work/api';
 
 /*  style样式库组件  */
 import "assets/style/iuapmobile.um.css"
@@ -26,7 +27,6 @@ const { workArea,wrap } = styles;
 const { requestStart, requestSuccess, requestError, } = rootActions;
 const {
   titleServiceDisplay,
-  getProductInfo,
   pinDisplayBlock,
   setPinCancel,
 } = workActions;
@@ -118,7 +118,7 @@ export default class Work extends Component {
     this.props.history.replace('');
   }
   componentDidMount() {
-    const { product = {},tabsList, getProductInfo } = this.props;
+    const { product = {},tabsList } = this.props;
     requestStart();
     getProductInfo(product.id).then(({ type, menu = [] }) => {
         this.setState({
