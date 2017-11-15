@@ -26,6 +26,7 @@
     "prop-types": "^15.6.0",
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-anchor": "^5.0.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^15.0.0",
     "react-onclickoutside": "^6.6.3",
