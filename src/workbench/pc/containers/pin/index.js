@@ -1,13 +1,14 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import onClickOutside from 'react-onclickoutside';
 import { mapStateToProps } from '@u';
+/*  actions  */
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
-import onClickOutside from 'react-onclickoutside';
-
+/*  comp */
 import Button from 'bee-button';
-
+/*  style */
 import {
   pin,
   bc,
@@ -39,6 +40,9 @@ class Pin extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isGroup : false,
+    }
   }
 
   componentDidMount() {
@@ -51,6 +55,12 @@ class Pin extends Component {
     if(pinDisplay){
       pinDisplayNone();
     }
+  }
+
+  addGroup = () => {
+    this.setState({
+      isGroup: true
+    });
   }
 
   confirmFn = () => {
@@ -68,6 +78,18 @@ class Pin extends Component {
     pinDisplayNone();
   }
 
+  renderContent = () => {
+    let content;
+    if (this.state.isGroup){
+      content = <div>
+        <input type="text"/>
+      </div>
+    }else{
+      content = <div>111111111111111111111</div>
+    }
+    return content;
+  }
+
   render() {
     const { pinType, pinDisplay } = this.props;
     return (
@@ -82,17 +104,19 @@ class Pin extends Component {
           添加到：
         </div>
         <div className={ content + " um-content"}>
-
+          {this.renderContent()}
         </div>
         <div className={footer + " um-box-justify"}>
+
           <div>
-            <Button>添加分组</Button>
+            <Button onClick={this.addGroup}>添加分组</Button>
           </div>
           <div>
             <Button style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
             <Button onClick={this.cancelFn}>取消</Button>
           </div>
         </div>
+
       </div>
     );
   }
