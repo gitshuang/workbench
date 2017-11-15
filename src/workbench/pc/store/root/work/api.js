@@ -11,5 +11,6 @@ export const setPinAdd = () => {
   return get('/setPinAdd')
 };
 export const setPinAddGroup = () => {
+  debugger;
   return get('/setPinAddGroup')
 };

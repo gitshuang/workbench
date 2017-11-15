@@ -8,6 +8,7 @@ import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 /*  comp */
 import Button from 'bee-button';
+import Menu, { SubMenu } from 'bee-menus';
 /*  style */
 import {
   pin,
@@ -17,9 +18,10 @@ import {
   pd,
   borderBox,
   footer
-} from './style.css'
+} from './style.css';
+
 const {requestStart, requestSuccess, requestError} = rootActions;
-const { pinDisplayNone, setPinAdd } = workActions;
+const { pinDisplayNone, setPinAdd, setPinAddGroup } = workActions;
 
 @connect(mapStateToProps(
   'pinType',
@@ -35,6 +37,7 @@ const { pinDisplayNone, setPinAdd } = workActions;
     requestError,
     pinDisplayNone,
     setPinAdd,
+    setPinAddGroup,
   }
 )
 @onClickOutside
@@ -43,7 +46,13 @@ class Pin extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      newGroupName : '',
       isGroup : false,
+      currentMenu : 1,
+      menuData: {
+        menuList : [],
+
+      },
     }
   }
 
@@ -80,14 +89,31 @@ class Pin extends Component {
     pinDisplayNone();
   }
 
-  addNewGroup =() => {
+  handleClick =()=>{
 
+  }
+
+  /*  下三个方法为  添加新组  method  */
+  addNewGroup =() => {
+    const { setPinAddGroup, requestError } = this.props;
+    setPinAddGroup().then( ({ error, payload }) => {
+      debugger;
+      if (error) {
+        requestError(payload);
+      }
+      console.log(payload);
+    });
   }
 
   groupCancelFn =() => {
     this.setState({
       isGroup: false
     });
+  }
+  setNewGroupName =(e) => {
+    this.setState({
+      newGroupName: e.target.value
+    })
   }
 
   renderContent = () => {
@@ -96,7 +122,7 @@ class Pin extends Component {
       content =
         <div className= {`${pd} ${container}`}>
           <div className={borderBox}>
-            <input type="text"/>
+            <input type="text" value={this.state.newGroupName} onChange={ this.setNewGroupName }/>
           </div>
           <div className={footer + " um-box-justify"}>
             <Button onClick={this.addNewGroup}>添加到新分组</Button>
@@ -110,7 +136,22 @@ class Pin extends Component {
             添加到：
           </div>
           <div className={borderBox}>
-
+            <Menu onClick={this.handleClick.bind(this)} style={{ width: 240 }} defaultOpenKeys={['demo3sub1']} selectedKeys={[this.state.currentMenu]} mode="inline">
+              <SubMenu key="demo3sub1" title={<span><span>组织 2</span></span>}>
+                <Menu.Item key="5">选项 5</Menu.Item>
+                <Menu.Item key="6">选项 6</Menu.Item>
+                <SubMenu key="demo3sub2" title="子项">
+                  <Menu.Item key="7">选项 7</Menu.Item>
+                  <Menu.Item key="8">选项 8</Menu.Item>
+                </SubMenu>
+              </SubMenu>
+              <SubMenu key="demo3sub3" title={<span><span>组织 3</span></span>}>
+                <Menu.Item key="9">选项 9</Menu.Item>
+                <Menu.Item key="10">选项 10</Menu.Item>
+                <Menu.Item key="11">选项 11</Menu.Item>
+                <Menu.Item key="12">选项 12</Menu.Item>
+              </SubMenu>
+            </Menu>
           </div>
           <div className={footer + " um-box-justify"}>
             <div>

@@ -28,9 +28,9 @@ const {
 export default createActions({
     [GET_PRODUCT_INFO]: getProductInfo,
     [GET_TITLE_SERVICE]: getTitleService,
-    [SET_PIN_CANCEL]: setPinCancel,
     [SET_PIN_ADD]: setPinAdd,
     [SET_PIN_ADD_GROUP]: setPinAddGroup,
+    [SET_PIN_CANCEL]: setPinCancel,
   },
   SET_CONTENT_SRC,
   SET_EXPANDED_SIDEBAR,
