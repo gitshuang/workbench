@@ -66,14 +66,16 @@ class Root extends Component {
     getProductList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+      } else {
+        requestSuccess();
       }
-      requestSuccess();
     });
     getServiceList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+      } else {
+        requestSuccess();
       }
-      requestSuccess();
     });
     timer(getMessage, 30000);
     regMessageTypeHandler.call(this);

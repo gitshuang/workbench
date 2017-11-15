@@ -41,12 +41,13 @@ class QuickServiceContainer extends Component {
     getTitleService().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+      } else {
+        this.setState({
+          service: payload.service,
+          contacts: payload.contacts
+        });
+        requestSuccess();
       }
-      this.setState({
-        service: payload.service,
-        contacts: payload.contacts
-      });
-      //requestSuccess();
     });
   }
 

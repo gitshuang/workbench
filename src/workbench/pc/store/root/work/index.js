@@ -25,7 +25,6 @@ const defaultState = {
   expanded:false,
   current:{},
   tabsList:[],
-  productInfo: '',
   titleServiceList: [],
   titleServiceType: false,
   pinType: false,
@@ -106,15 +105,7 @@ const reducer = handleActions({
       contentSrc:nextId.url
     }
   },
-  [getProductInfo]: (state, { payload: productInfo, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-      productInfo,
-    };
-  },
+  [getProductInfo]: state => state,
   [getTitleService]: (state, { payload: titleServiceList, error }) => {
     if (error) {
       return state;

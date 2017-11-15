@@ -36,7 +36,6 @@ class HeaderContainer extends Component {
       leftContent,
       rightContent,
       quickServiceDisplay,
-      searchDisplay,
       messageType
     } = this.props;
 
@@ -88,7 +87,6 @@ class HeaderContainer extends Component {
 
 export default connect(mapStateToProps(
   'quickServiceDisplay',
-  'searchDisplay',
   'messageType',
 ),
   {

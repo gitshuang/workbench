@@ -58,17 +58,17 @@ class Home extends Component {
         const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
 
         getWorkList().then(({error, payload}) => {
-
+          if (error) {
+            requestError(payload);
+          } else {
             let workList = [];
-            Object.assign(workList,payload);
+            Object.assign(workList, payload);
             workList[0].selected = true;
             this.setState({
-                workList
-            })
-            if (error) {
-                requestError(payload);
-            }
+              workList,
+            });
             requestSuccess();
+          }
         });
 
     }
@@ -79,10 +79,11 @@ class Home extends Component {
         if (!widgetList.length) {
             requestStart();
             getWidgetList().then(({error, payload}) => {
-                if (error) {
-                    requestError(payload);
-                }
+              if (error) {
+                requestError(payload);
+              } else {
                 requestSuccess();
+              }
             });
         }
     }
@@ -162,7 +163,7 @@ class Home extends Component {
                 </div>);
             });
         }
- 
+
         return (
         <div className={page_home}>
 
@@ -171,7 +172,7 @@ class Home extends Component {
           <div className="content">
              {conts}
           </div>
-          
+
           <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>
 
           <Modal show = { self.state.showModal } onHide = { self.close } >

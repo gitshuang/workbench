@@ -15,7 +15,7 @@ import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
 import QuickServiceContainer from 'containers/titleService';
 import Pin from 'containers/pin';
-import {getProductInfo} from 'store/root/work/api';
+// import {getProductInfo} from 'store/root/work/api';
 
 /*  style样式库组件  */
 import "assets/style/iuapmobile.um.css"
@@ -29,6 +29,7 @@ const {
   titleServiceDisplay,
   pinDisplayBlock,
   setPinCancel,
+  getProductInfo,
 } = workActions;
 
 function makeLayout(type, menu,tabsList) {
@@ -118,20 +119,21 @@ export default class Work extends Component {
     this.props.history.replace('');
   }
   componentDidMount() {
-    const { product = {},tabsList } = this.props;
+    const { product = {},tabsList, getProductInfo } = this.props;
     requestStart();
-    getProductInfo(product.id).then(({ type, menu = [] }) => {
+    getProductInfo(product.id).then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      } else {
+        const { type, menu = [] } = payload;
         this.setState({
           loaded: true,
           type: type,
           menu: menu,
         })
         requestSuccess();
-      },
-      (e) => {
-        requestError(e);
-      },
-    );
+      }
+    });
   }
 
   goBack() {

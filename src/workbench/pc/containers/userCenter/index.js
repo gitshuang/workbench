@@ -58,8 +58,9 @@ class UserInfoContainer extends Component {
       getUserInfo().then(({ error, payload }) => {
         if (error) {
           requestError(payload);
+        } else {
+          requestSuccess();
         }
-        requestSuccess();
       });
     }
   }
