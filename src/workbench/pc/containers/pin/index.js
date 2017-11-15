@@ -97,7 +97,6 @@ class Pin extends Component {
   addNewGroup =() => {
     const { setPinAddGroup, requestError } = this.props;
     setPinAddGroup().then( ({ error, payload }) => {
-      debugger;
       if (error) {
         requestError(payload);
       }
