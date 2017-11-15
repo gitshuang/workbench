@@ -2,7 +2,7 @@ import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { service } from './style.css';
+import { serviceContainer,service,serviceGroup,serviceBtn,contentDiv,content } from './style.css';
 import onClickOutside from 'react-onclickoutside';
 import actions from 'store/root/actions';
 import { withRouter } from 'react-router-dom';
@@ -39,14 +39,31 @@ class QuickServiceContainer extends Component {
   render() {
     const { quickServiceDisplay,quickServiceAnimate, serviceList } = this.props;
     return (
-      <div className={`${service} ${quickServiceAnimate}` } >
-        <h4>相关服务</h4>
-        <ul className="clearfix">
-          {
-            serviceList.map((service, i) => <li key={i} >{service.name}</li>)
-          }
-        </ul>
-        <button className="btn" onClick={this.openApplication}>全部服务</button>
+      <div className={`${serviceContainer} ${quickServiceAnimate}`}>
+      <div className={`${service} ` } >
+        <div className={`${serviceGroup} `}>
+          <h4>分组一</h4>
+          <ul className="clearfix">
+            {
+              serviceList.map((service, i) => (
+                <div className={contentDiv}><li key={i} >{service.name}</li><div className={content}>{service.name}</div></div>
+              ))
+            }
+          </ul>
+        </div>
+        <div className={`${serviceGroup} `}>
+          <h4>分组二</h4>
+          <ul className="clearfix">
+            {
+              serviceList.map((service, i) => (
+                <div className={contentDiv}><li key={i} >{service.name}</li><div className={content}>{service.name}</div></div>
+              ))
+            }
+          </ul>
+        </div>
+
+      </div>
+      <div className={`${serviceBtn} ` }><button className="btn" onClick={this.openApplication}>全部服务</button></div>
       </div>
     );
   }
