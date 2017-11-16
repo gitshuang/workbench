@@ -44,13 +44,12 @@ class Notice extends Component {
     return (
       <div >
         <img src={icon}/>
-        <p title={content}>{content}</p>
+        <p btn-length={btns.length} style={{ width: btns.length>1 ? '147px' : '187px' }} title={content}>{content}</p>
         {
           btns.map((btn, i) => (
-            <Button  className={`${notice}Btn`} size="sm" onClick={ this.handClick.bind(this,i) } >{btn.typeBtn}</Button>
+            <Button  className={`${notice}Btn  btn`+i} size="sm" onClick={ this.handClick.bind(this,i) } >{btn.typeBtn}</Button>
           ))
         }
-
         {/*<div className="hideAuto"><Icon type="xiaoxi" /></div>*/}
       </div>
     );
