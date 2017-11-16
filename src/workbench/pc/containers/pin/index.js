@@ -130,7 +130,8 @@ class Pin extends Component {
 
       this.setState({
         isGroup: false,
-        menuData: menuData
+        menuData: menuData,
+        newGroupName: ""
       });
       alert("添加分组成功");
     });
@@ -157,7 +158,7 @@ class Pin extends Component {
             <input type="text" value={this.state.newGroupName} onChange={ this.setNewGroupName }/>
           </div>
           <div className={footer + " um-box-justify"}>
-            <Button onClick={this.addNewGroup}>添加到新分组</Button>
+            <Button disabled={!this.state.newGroupName} onClick={this.addNewGroup}>添加到新分组</Button>
             <Button onClick={this.groupCancelFn}>取消</Button>
           </div>
         </div>
@@ -214,15 +215,14 @@ class Pin extends Component {
                   })
                 }
               </Menu>
-              */
-            }
+              */ }
           </div>
           <div className={footer + " um-box-justify"}>
             <div>
               <Button onClick={this.addGroup}>添加分组</Button>
             </div>
             <div>
-              <Button style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
+              <Button disabled={!this.state.way} style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
               <Button onClick={this.cancelFn}>取消</Button>
             </div>
           </div>
