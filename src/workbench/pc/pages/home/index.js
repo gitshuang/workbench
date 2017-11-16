@@ -1,36 +1,59 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, {
+    Component
+} from 'react';
+import {
+    connect
+} from 'react-redux';
+import {
+    withRouter
+} from 'react-router-dom';
 import Header from 'containers/header';
 import UserCenterContainer from 'containers/userCenter';
 import WidgetArea from 'components/widgetArea';
-import { mapStateToProps } from '@u';
+import {
+    mapStateToProps
+} from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'public/base.css';
-import {page_home,button_group,selected,WidgetCont,WidgetTitle,HeaderLeft} from './style.css';
+import {
+    page_home,
+    button_group,
+    selected,
+    WidgetCont,
+    WidgetTitle,
+    HeaderLeft
+} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
 import Modal from 'bee-modal';
 import HeaderPage from './HeaderPage';
 
-const {wrap, } = baseStyles;
+const {
+    wrap,
+} = baseStyles;
 
-const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
+const {
+    changeUserInfoDisplay,
+    getWidgetList,
+    getWorkList
+} = homeActions;
 
-const {requestStart, requestSuccess, requestError} = rootActions;
+const {
+    requestStart,
+    requestSuccess,
+    requestError
+} = rootActions;
 
 @withRouter
 @connect(
     mapStateToProps(
         'widgetList',
-        'workList',
-        {
+        'workList', {
             namespace: 'home',
         }
-    ),
-    {
+    ), {
         requestStart,
         requestSuccess,
         requestError,
@@ -46,56 +69,74 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            workList:[],
+            workList: [],
             showModal: false,
-            modalData:[]
+            modalData: []
         }
         this.getWorkService();
     }
 
     getWorkService() {
 
-        const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
+        const {
+            requestStart,
+            requestSuccess,
+            requestError,
+            getWorkList
+        } = this.props;
 
-        getWorkList().then(({error, payload}) => {
-          if (error) {
-            requestError(payload);
-          } else {
-            let workList = [];
-            Object.assign(workList, payload);
-            workList[0].selected = true;
-            this.setState({
-              workList,
-            });
-            requestSuccess();
-          }
+        getWorkList().then(({
+            error,
+            payload
+        }) => {
+            if (error) {
+                requestError(payload);
+            } else {
+                let workList = [];
+                Object.assign(workList, payload);
+                workList[0].selected = true;
+                this.setState({
+                    workList,
+                });
+                requestSuccess();
+            }
         });
 
     }
 
     componentWillMount() {
 
-        const {requestStart, requestSuccess, requestError, getWidgetList, getWorkList, widgetList, } = this.props;
+        const {
+            requestStart,
+            requestSuccess,
+            requestError,
+            getWidgetList,
+            getWorkList,
+            widgetList,
+        } = this.props;
         if (!widgetList.length) {
             requestStart();
-            getWidgetList().then(({error, payload}) => {
-              if (error) {
-                requestError(payload);
-              } else {
-                requestSuccess();
-              }
+            getWidgetList().then(({
+                error,
+                payload
+            }) => {
+                if (error) {
+                    requestError(payload);
+                } else {
+                    requestSuccess();
+                }
             });
         }
     }
 
-    setLiSelected(id){
+    setLiSelected(id) {
 
-        this.state.workList.map(function(da,i){
+        this.state.workList.map(function(da, i) {
             da.selected = false;
         })
 
-        this.state.workList.map(function(da,i){
-            if((da.id+"_"+i) == id){
+        this.state.workList.map(function(da, i) {
+            if ((da.id + "_" + i) == id) {
                 da.selected = true;
             }
         })
@@ -108,7 +149,12 @@ class Home extends Component {
     scrollToAnchor = (id) => {
         let anchorElement = document.getElementById(id);
 
-        if(anchorElement) { anchorElement.scrollIntoView({block: "start", behavior: "smooth"}); }
+        if (anchorElement) {
+            anchorElement.scrollIntoView({
+                block: "start",
+                behavior: "smooth"
+            });
+        }
         this.setLiSelected(id);
     }
 
@@ -124,35 +170,41 @@ class Home extends Component {
         });
     }
 
-    changeModal = (e,da) => {
+    changeModal = (e, da) => {
         let newDa = [];
-        Object.assign(newDa,da);
+        Object.assign(newDa, da);
 
         debugger;
-         this.setState({
+        this.setState({
             showModal: e,
-            modalData:newDa
+            modalData: newDa
         });
     }
 
     render() {
 
-        const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
-        let {workList} = this.state;
+        const {
+            changeUserInfoDisplay,
+            widgetList,
+            changeTitleServiceDisplay
+        } = this.props;
+        let {
+            workList
+        } = this.state;
 
         let self = this;
         let lis = [];
         let conts = [];
 
-        if (workList.length != 0 ) {
-            workList.map(function(da,i) {
-                let _id = da.id+"_"+i;
+        if (workList.length != 0) {
+            workList.map(function(da, i) {
+                let _id = da.id + "_" + i;
 
-                let firstLi = i !=0 ? <div className={WidgetTitle} >{da.name}</div>:null;
+                let firstLi = i != 0 ? <div className={WidgetTitle} >{da.name}</div> : null;
 
                 let selectedClass = da.selected ? selected : null;
 
-                lis.push( <li key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}><a className={selectedClass}>{da.name}</a></li>);
+                lis.push(<li key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}><a className={selectedClass}>{da.name}</a></li>);
 
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     {firstLi}
@@ -165,7 +217,7 @@ class Home extends Component {
         }
 
         return (
-        <div className={page_home}>
+            <div className={page_home}>
 
           <HeaderPage lis={lis}></HeaderPage>
 
