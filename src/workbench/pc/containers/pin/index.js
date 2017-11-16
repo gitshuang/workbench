@@ -21,7 +21,7 @@ import {
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const { pinDisplayNone, setPinAdd, setPinAddGroup } = workActions;
+const { pinDisplayNone, setPinAdd, setPinAddGroup, getPinGroup } = workActions;
 
 @connect(mapStateToProps(
   'pinType',
@@ -38,6 +38,7 @@ const { pinDisplayNone, setPinAdd, setPinAddGroup } = workActions;
     pinDisplayNone,
     setPinAdd,
     setPinAddGroup,
+    getPinGroup,
   }
 )
 @onClickOutside
@@ -46,19 +47,26 @@ class Pin extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      way: '',
       newGroupName : '',
       isGroup : false,
       currentMenu : 1,
-      menuData: {
-        menuList : [],
-
-      },
+      menuData: []
     }
   }
 
   componentDidMount() {
-    const { requestStart, requestSuccess, requestError,} = this.props;
-
+    const { requestStart, requestSuccess, requestError, getPinGroup} = this.props;
+    getPinGroup().then( ({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      let menuData = [];
+      Object.assign(menuData, payload);
+      this.setState({
+        menuData,
+      });
+    })
   }
 
   handleClickOutside(evt) {
@@ -88,10 +96,22 @@ class Pin extends Component {
     const { pinDisplayNone } = this.props;
     pinDisplayNone();
   }
-
-  handleClick =()=>{
-
+  /*  menu  方法汇总   */
+  handleClick =(e,item, list)=>{
+      e.stopPropagation();
+      let way = item.name +"/"+ list.name
+      this.setState({
+        way: way
+      });
   }
+  handleTitleClick = (item) => {
+    return () =>{
+      this.setState({
+        way: item.name
+      });
+    }
+  }
+
 
   /*  下三个方法为  添加新组  method  */
   addNewGroup =() => {
@@ -100,14 +120,21 @@ class Pin extends Component {
       if (error) {
         requestError(payload);
       }
+      let newGroup = {
+        id : "2222",
+        name : this.state.newGroupName,
+        widgeList: []
+      };
+      let menuData = this.state.menuData;
+      menuData.push(newGroup);
 
       this.setState({
-        isGroup: false
+        isGroup: false,
+        menuData: menuData
       });
       alert("添加分组成功");
     });
   }
-
   groupCancelFn =() => {
     this.setState({
       isGroup: false
@@ -120,7 +147,9 @@ class Pin extends Component {
   }
 
   renderContent = () => {
+    let _this = this;
     let content;
+    let data = this.state.menuData;
     if (this.state.isGroup){
       content =
         <div className= {`${pd} ${container}`}>
@@ -136,31 +165,57 @@ class Pin extends Component {
       content =
         <div className= {container}>
           <div className={title}>
-            添加到：
+            添加到：{this.state.way}
           </div>
           <div className={borderBox}>
-            <Menu
-              onClick={this.handleClick.bind(this)}
-              style={{ width: 240 }}
-              defaultOpenKeys={['demo3sub1']}
-              selectedKeys={[this.state.currentMenu]}
-              mode="inline"
-            >
-              <SubMenu key="demo3sub1" title={<span><span>组织 2</span></span>}>
-                <Menu.Item key="5">选项 5</Menu.Item>
-                <Menu.Item key="6">选项 6</Menu.Item>
-                <SubMenu key="demo3sub2" title="子项">
-                  <Menu.Item key="7">选项 7</Menu.Item>
-                  <Menu.Item key="8">选项 8</Menu.Item>
-                </SubMenu>
-              </SubMenu>
-              <SubMenu key="demo3sub3" title={<span><span>组织 3</span></span>}>
-                <Menu.Item key="9">选项 9</Menu.Item>
-                <Menu.Item key="10">选项 10</Menu.Item>
-                <Menu.Item key="11">选项 11</Menu.Item>
-                <Menu.Item key="12">选项 12</Menu.Item>
-              </SubMenu>
-            </Menu>
+            <ul style={{width:"240px"}}>
+              {
+                data.map((item, index) => {
+                  return (
+                    <li className="" key={index} onClick={this.handleTitleClick(item)}>
+                      {item.name}
+                      {
+                        item.widgeList && item.widgeList.map((list, key) => {
+                          return (
+                            <div className="" key ={key} onClick={(e) =>{this.handleClick(e,item,list)}}>{list.name}</div>
+                          )
+                        })
+                      }
+                    </li>
+                  )
+                })
+              }
+            </ul>
+            {  /*
+              <Menu
+                onSelect={this.handleSelect.bind(this)}
+                onClick={this.handleClick.bind(this)}
+                style={{ width: 240 }}
+                defaultOpenKeys={[]}
+                mode="inline"
+              >
+                {
+                  data.map((item, index) => {
+                    return (
+                      <SubMenu
+                        key={index}
+                        title={ <span><span>{item.name}</span></span> }
+                        onTitleClick={ this.handleTitleClick.bind(this) }
+                      >
+                        {
+                          item.widgeList.map((list, key) => {
+                            return (
+                              <Menu.Item key={key}>{list.name}</Menu.Item>
+                            )
+                          })
+                        }
+                      </SubMenu>
+                    )
+                  })
+                }
+              </Menu>
+              */
+            }
           </div>
           <div className={footer + " um-box-justify"}>
             <div>
