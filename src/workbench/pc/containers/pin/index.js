@@ -183,7 +183,7 @@ class Pin extends Component {
             <input type="text" value={this.state.newGroupName} onChange={ this.setNewGroupName }/>
           </div>
           <div className={footer + " um-box-justify"}>
-            <Button disabled={!this.state.newGroupName} onClick={this.addNewGroup}>添加到新分组</Button>
+            <Button colors="danger" disabled={!this.state.newGroupName} onClick={this.addNewGroup}>添加到新分组</Button>
             <Button onClick={this.groupCancelFn}>取消</Button>
           </div>
         </div>
@@ -197,14 +197,12 @@ class Pin extends Component {
             <ul>
               {
                 data.map( (item, index) => {
-                  let classNameLi = item.widgeList.length ? "active" : "";
                   return (
                     <li key={index}>
                       <p
                         onClick={ () =>{this.handleTitleClick(item,index)} }
                         className={ item.checked ? selectedli : "" }
                       >
-                        <Icon type="add" className={classNameLi}></Icon>
                         {item.name}
                       </p>
                       {
@@ -260,7 +258,7 @@ class Pin extends Component {
               <Button onClick={this.addGroup}>添加分组</Button>
             </div>
             <div>
-              <Button disabled={!this.state.way} style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
+              <Button colors="danger" disabled={!this.state.way} style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
               <Button onClick={this.cancelFn}>取消</Button>
             </div>
           </div>
