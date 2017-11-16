@@ -136,12 +136,11 @@ class WidgetArea extends Component {
                         <div className={title_left}><Icon type="uf-add-c-o" /></div>
                         <div className={title_right}>{da.title}</div>
                       </div>
-                      <div style={{position: 'relative'}} id="contain1" ref={(para) => { self.contain = para; }} >
+                      <div style={{position: 'relative'}} id="contain1" ref={da.id =="1101"?(para) => { self.contain = para; }:null} >
                         <div className={context}>
                           {da.id =="1101"?<Button colors="primary" onClick={ () => {self.handleShow()} }>Loading按钮</Button>:null}
                         </div>
                         <div className={bottom}>
-                        {console.log(self.contain)}
                           {da.id =="1101"?<Loading container={self.contain} show={self.state.showRotate} />:null}
                           <Link to={`/work/${da.id}`} >{da.optionTitle}</Link>}
                         </div>
