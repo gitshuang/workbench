@@ -58,3 +58,17 @@
   line-height: 14px;
   float: right;
 }
+:global(a.u-notification-notice-close){
+  font-size: 25px;
+  font-weight: normal;
+  width: 14px;
+  height: 14px;
+  line-height: 11px;
+  color: #BDBDBD;
+  right: 9px;
+  top: 10px;
+}
+:global(.u-notification-topRight){
+  top: 130px;
+  right: 30px;
+}

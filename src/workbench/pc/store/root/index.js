@@ -12,7 +12,7 @@ import actions from './actions';
 import Notice from 'components/notice';
 
 
-const notification = Notification.newInstance({ position: 'bottomRight' });
+const notification = Notification.newInstance({ position: 'topRight' });
 
 const {
   requestStart,
@@ -75,9 +75,8 @@ const reducer = handleActions({
           title:m.title,
           content: <Notice data={m}/>,
           color:m.color,
-          duration: 9,
-          closable: false,
-
+          duration: null,
+          closable: true,
         });
       });
     }

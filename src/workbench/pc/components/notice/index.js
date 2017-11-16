@@ -45,8 +45,13 @@ class Notice extends Component {
       <div >
         <img src={icon}/>
         <p title={content}>{content}</p>
-        <Button  className={`${notice}Btn`} size="sm" onClick={ this.handClick.bind(this,0) } >{btns[0].typeBtn}</Button>
-        <div className="hideAuto"><Icon type="xiaoxi" /></div>
+        {
+          btns.map((btn, i) => (
+            <Button  className={`${notice}Btn`} size="sm" onClick={ this.handClick.bind(this,i) } >{btn.typeBtn}</Button>
+          ))
+        }
+
+        {/*<div className="hideAuto"><Icon type="xiaoxi" /></div>*/}
       </div>
     );
   }
