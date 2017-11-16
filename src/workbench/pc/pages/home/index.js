@@ -105,10 +105,18 @@ class Home extends Component {
         })
     }
 
-    scrollToAnchor = (id) => {
+    scrollToAnchor = (index,id) => {
+
         let anchorElement = document.getElementById(id);
 
         if(anchorElement) { anchorElement.scrollIntoView({block: "start", behavior: "smooth"}); }
+        if(index == 0 ){
+ 
+            // scrollView.scrollTo(0, 0);  
+
+            // let top = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset;
+            scrollTo(0, 0);
+        }
         this.setLiSelected(id);
     }
 
@@ -152,7 +160,7 @@ class Home extends Component {
 
                 let selectedClass = da.selected ? selected : null;
 
-                lis.push( <li key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}><a className={selectedClass}>{da.name}</a></li>);
+                lis.push( <li key={da.id+i} onClick={()=>self.scrollToAnchor(i,_id)}><a className={selectedClass}>{da.name}</a></li>);
 
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     {firstLi}
