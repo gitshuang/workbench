@@ -1,10 +1,25 @@
 .workArea {
+  flex: 1;
   display: flex;
-  height: 500px;
-}
-.wrap{
-
 }
 .wrap :global(.icon-dingzhi.active){
   color: red;
+}
+.wrap :global(.um-content) {
+  flex-direction: column;
+  display: flex;
+}
+.sideBarArea {
+  width: 200px;
+}
+.contentArea {
+  flex: 1;
+}
+.hasTab {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+}
+.tabArea {
+  height: 48px;
 }

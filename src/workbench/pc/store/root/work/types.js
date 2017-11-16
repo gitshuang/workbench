@@ -1,11 +1,10 @@
 import { createTypes } from '@u';
 
 export default createTypes(
-  'SET_CONTENT_SRC',
+  'SET_MENUS',
+  'SET_CURRENT',
   'SET_EXPANDED_SIDEBAR',
-  'GET_TABS_LIST',
-  'SET_TABS_CURRENT',
-  'DEL_TABS',
+  'DEL_TAB',
   'GET_PRODUCT_INFO',
   'GET_TITLE_SERVICE',
   'TITLE_SERVICE_DISPLAY',

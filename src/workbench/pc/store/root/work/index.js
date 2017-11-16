@@ -3,7 +3,9 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-  setContentSrc,
+  setMenus,
+  setCurrent,
+  setExpandedSidebar,
   getProductInfo,
   getTitleService,
   titleServiceDisplay,
@@ -14,28 +16,76 @@ const {
   setAddGroup,
   getPinGroup,
   setPinCancel,
-  setExpandedSidebar,
-  getTabsList,
-  setTabsCurrent,
-  delTabs,
+  delTab,
 } = actions;
 
 
 const defaultState = {
-  contentSrc: '',
-  expanded:false,
-  current:{},
-  tabsList:[],
+  expandedSidebar: false,
+  current:{
+    name: '',
+    hasRelationFunc: false,
+  },
+  menus:[],
+  tabs:[],
   titleServiceList: [],
   titleServiceType: false,
   pinType: false,
   pinDisplay: false
 };
 
+const findMenuById = (menus, curId) => {
+  let result;
+  for (let i = 0, l = menus.length; i < l; i++) {
+    const menu = menus[i];
+    const { id, children } = menu;
+    if (children && children.length) {
+      result = findMenuById(children, curId);
+    }
+    if (result) {
+      break;
+    }
+    if (id === curId) {
+      result = menu;
+      break;
+    }
+  }
+  return result;
+}
+
 const reducer = handleActions({
-  [setContentSrc]: (state, { payload: contentSrc }) => ({
+  [setMenus]: (state, { payload: menus }) => ({
     ...state,
-    contentSrc,
+    menus,
+  }),
+  [setCurrent]: (state, { payload: currentId }) => {
+    const { tabs, menus } = state;
+    const current = findMenuById(menus, currentId);
+    if (!current) {
+      return state;
+    }
+    const { name, location } = current
+    const curTab = tabs.find(({id}) => id === currentId);
+    if (curTab) {
+      return {
+        ...state,
+        current,
+      }
+    } else {
+      return {
+        ...state,
+        current,
+        tabs: tabs.concat({
+          id: currentId,
+          name,
+          location,
+        })
+      }
+    }
+  },
+  [setExpandedSidebar]: (state, { payload: expandedSidebar }) => ({
+    ...state,
+    expandedSidebar,
   }),
   [setPinAdd]: (state, { payload, error }) => {
     if (error) {
@@ -71,47 +121,25 @@ const reducer = handleActions({
       pinType: payload,
     };
   },
-  [setExpandedSidebar]:(state,{ payload: expanded }) => ({
-    ...state,
-    expanded
-  }),
-  [getTabsList]:(state,{payload:tabsList}) => ({
-    ...state,
-    tabsList
-  }),
-  [setTabsCurrent]:(state,{payload:current}) => {
-    const item = state.tabsList.filter((element) => {
-      return element.id == current.id
-    });
-    if(item.length==0) {
-      state.tabsList.push(current);
-    }
-
-    return {
-      ...state,
-      current:current,
-      tabsList:state.tabsList
-    }
-  },
-  [delTabs]:(state,{payload:id}) => {
-    const newItem = state.tabsList.filter((element,index) => {
-      return element.id != id;
-    });
-    let nextId = '',tabs =state.tabsList;
-    for(let i=0;i<tabs.length;i++){
-      if(tabs.length==1) return {
-        ...state,
-      };
-      if(tabs[i].id==id){
-        nextId = (i==0)?tabs[i+1]:tabs[i-1];
+  [delTab]: (state, { payload: currentId }) => {
+    const { tabs: oldTabs, menus } = state;
+    let newCurIndex;
+    const newTabs = oldTabs.filter(({ id }, i) => {
+      const result = id !== currentId;
+      if (!result) {
+        newCurIndex = i;
+        if (newCurIndex + 1 === oldTabs.length) {
+          newCurIndex -= 1;
+        }
       }
-    }
+      return result;
+    });
+    const newCur = findMenuById(menus, newTabs[newCurIndex].id);
 
     return {
       ...state,
-      tabsList:newItem,
-      current:nextId,
-      contentSrc:nextId.url
+      tabs: newTabs,
+      current: newCur,
     }
   },
   [getProductInfo]: state => state,

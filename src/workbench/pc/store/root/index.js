@@ -18,7 +18,6 @@ const {
   requestStart,
   requestSuccess,
   requestError,
-  getProductList,
   getServiceList,
   getMessage,
   changeQuickServiceDisplay,
@@ -26,7 +25,6 @@ const {
 } = actions;
 
 const defaultState = {
-  productList: [],
   serviceList: [],
   quickServiceDisplay: false,
   quickServiceAnimate: "quickServiceHidden",
@@ -49,15 +47,6 @@ const reducer = handleActions({
       closable: false,
     });
     return state;
-  },
-  [getProductList]: (state, { payload: productList, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-      productList,
-    };
   },
   [getServiceList]: (state, { payload: serviceList, error }) => {
     if (error) {

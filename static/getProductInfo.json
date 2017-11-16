@@ -1,123 +1,65 @@
 {
   "data": {
-    "type": 2,
-    "menu": [
-      {
-        "id": "console",
-        "name": "人力云",
-        "location": "http://www.sohu.com",
-        "menustatus": "Y",
-        "parentid": null,
-        "icon": "uf uf-qq",
-        "target": "",
-        "urltype": "url",
-        "children": [],
-        "sort": 1,
-        "openview": "curpage",
-        "category": "engine"
-      },
-      {
-        "id": "myReleasePool",
-        "name": "财务云",
-        "location": "http://www.sina.com",
-        "menustatus": "Y",
-        "parentid": null,
-        "icon": "uf uf-4square-3",
-        "target": "",
-        "urltype": "url",
-        "children": [],
-        "sort": 2,
-        "openview": "curpage",
-        "category": "pass"
-      },
-      {
-        "id": "continuous",
-        "name": "云审批",
-        "location": "http://www.163.com",
-        "menustatus": "Y",
-        "parentid": null,
-        "icon": "uf uf-send",
-        "target": "",
-        "urltype": "url",
-        "children": [],
-        "sort": 2,
-        "openview": "curpage",
-        "category": "engine"
-      },
-      {
-        "id": "appmgr",
-        "name": "云表单",
-        "location": "http://www.weibo.com",
-        "menustatus": "Y",
-        "parentid": null,
-        "icon": "uf uf-map",
-        "target": "",
-        "urltype": "url",
-        "children": [],
-        "sort": 2,
-        "openview": "curpage",
-        "category": "engine"
-      },
-      {
-        "id": "mirrorRes",
-        "name": "云打印",
-        "location": "http://www.yonyou.com",
-        "menustatus": "Y",
-        "parentid": null,
-        "icon": "uf uf-9square-2",
-        "target": "",
-        "urltype": "url",
-        "children": [],
-        "sort": 3,
-        "openview": "curpage",
-        "category": "engine"
-      },
-      {
-        "id": "confcenter2",
-        "name": "协同云",
-        "location": "/confcenter",
-        "menustatus": "Y",
-        "parentid": null,
-        "icon": "uf uf-rain",
-        "target": "",
-        "urltype": "view",
-        "children": [
-          {
-            "id": "appconf",
-            "name": "应用设置",
-            "location": "https://ec.yonyoucloud.com/",
-            "menustatus": "Y",
-            "parentid": null,
-            "icon": "iconfont cl cl-bk-conf green-A700",
-            "target": "",
-            "urltype": "url",
-            "children": [],
-            "sort": 1,
-            "openview": "curpage",
-            "category": "paas"
-          },
-          {
-            "id": "configmgr",
-            "name": "配置管理",
-            "location": "https://www.baidu.com/",
-            "menustatus": "Y",
-            "parentid": null,
-            "icon": "iconfont cl cl-set indigo-700",
-            "target": "",
-            "urltype": "url",
-            "children": [],
-            "sort": 2,
-            "openview": "curpage",
-            "category": "paas"
-          }
-        ],
-        "sort": 5,
-        "openview": "curpage",
-        "category": "paas"
-      }
-
-    ]
+    "domain": {
+      "id": "111",
+      "name": "用友云"
+    },
+    "curFunc": {
+      "icon": "",
+      "id": "11111",
+      "nodecode": "11111",
+      "name": "应用中心",
+      "hasRelationFunc": true,
+      "location": "https://euc.yonyoucloud.com/cas/login?sysid=aps&service=https%3A%2F%2Fapcenter.yonyoucloud.com%2Fapptenant"
+    },
+    "menuRoot": {
+      "menus": [
+        {
+          "icon": "",
+          "id": "1111",
+          "nodecode": "1111",
+          "name": "云平台",
+          "hasRelationFunc": false,
+          "location": "",
+          "children": [
+            {
+              "icon": "",
+              "id": "11111",
+              "nodecode": "11111",
+              "name": "应用中心",
+              "hasRelationFunc": true,
+              "location": "https://euc.yonyoucloud.com/cas/login?sysid=aps&service=https%3A%2F%2Fapcenter.yonyoucloud.com%2Fapptenant"
+            },
+            {
+              "icon": "",
+              "id": "11112",
+              "nodecode": "11112",
+              "name": "UDN社区",
+              "hasRelationFunc": false,
+              "location": "http://udn.yyuap.com/forum.php"
+            }
+          ]
+        },
+        {
+          "icon": "",
+          "id": "1112",
+          "nodecode": "1112",
+          "name": "云市场",
+          "hasRelationFunc": false,
+          "location": "https://market.yonyoucloud.com/"
+        },
+        {
+          "icon": "",
+          "id": "1113",
+          "nodecode": "1113",
+          "name": "用友集团",
+          "hasRelationFunc": false,
+          "location": "http://www.yonyou.com/index.html?t=0.15068910546594472"
+        }
+      ],
+      "withTab": true
+    }
   },
+  "msg": "",
   "status": 1
 }
-

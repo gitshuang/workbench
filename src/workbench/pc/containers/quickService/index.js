@@ -46,7 +46,7 @@ class QuickServiceContainer extends Component {
           <ul className="clearfix">
             {
               serviceList.map((service, i) => (
-                <div className={contentDiv}><li key={i} >{service.name}</li><div className={content}>{service.name}</div></div>
+                <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
               ))
             }
           </ul>
@@ -56,7 +56,7 @@ class QuickServiceContainer extends Component {
           <ul className="clearfix">
             {
               serviceList.map((service, i) => (
-                <div className={contentDiv}><li key={i} >{service.name}</li><div className={content}>{service.name}</div></div>
+                <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
               ))
             }
           </ul>

@@ -10,36 +10,43 @@ import { breadcrumbClass} from './style.css';
 const { setExpandedSidebar }
 = actions;
 
-
+@connect(
+  mapStateToProps(
+    'expandedSidebar',
+    {
+      namespace: 'work',
+    },
+  ),
+  {
+    setExpandedSidebar,
+  }
+)
 class BreadcrumbContainer extends Component {
   static propTypes = {
-    children: PropTypes.node,
-  };
+    withSidebar: PropTypes.bool,
+  }
+  constructor(props) {
+    super(props);
+    this.setExpended = this.setExpended.bind(this);
+  }
   setExpended(){
-    const { setExpandedSidebar,expanded } = this.props;
-    setExpandedSidebar(!expanded);
+    const { setExpandedSidebar, expandedSidebar } = this.props;
+    setExpandedSidebar(!expandedSidebar);
   }
   render() {
-    /*const leftContent = children2Array.filter(
-      (v) => v.props.position === 'left'
-    );*/
+    const { withSidebar } = this.props;
 
     return (
-      <div className={`${breadcrumbClass}`}>
-        <i className={`uf uf-navmenu`} onClick={this.setExpended.bind(this)} />
+      <div className={breadcrumbClass}>
+        {
+          withSidebar ? (
+              <i className="uf uf-navmenu" onClick={this.setExpended} />
+            ) : null
+        }
         <Breadcrumbs />
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps(
-  'expanded',
-  {
-    namespace: 'work',
-  },
-  ),
-  {
-  setExpandedSidebar,
-  }
-  )(BreadcrumbContainer);
+export default BreadcrumbContainer;
