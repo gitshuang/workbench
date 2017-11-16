@@ -55,6 +55,45 @@
   box-shadow: none;
   -webkit-box-shadow: none;
 }
+.borderBox ul{
+  padding:5px;
+}
+.borderBox li{
+  width:100%;
+  font-family:MicrosoftYaHei;
+  color:rgba(74,81,93,1);
+}
+.borderBox li p{
+  padding-left: 30px;
+  line-height: 40px;
+  position: relative;
+  font-size:14px;
+}
+.borderBox li p:hover{
+  background:rgba(238,238,238,1);
+  font-weight: 600;
+}
+.borderBox li p :global(.iconfont){
+  position: absolute;
+  z-index: 2;
+  left:10px;
+  font-size: 10px;
+}
+
+.borderBox li p :global(.iconfont.active){
+  position: absolute;
+  color: red;
+  left:10px;
+}
+.borderBox li div{
+  line-height: 25px;
+  padding-left: 38px;
+  font-size:12px;
+}
+.borderBox li div:hover{
+  background:rgba(238,238,238,1);
+  font-weight: 600;
+}
 .footer{
   padding-top: 9px;
 }
@@ -67,4 +106,7 @@
   line-height:21px;
   padding: 0 12px;
   border-radius: 2px ;
+}
+.selectedli{
+  background:rgba(238,238,238,1);
 }

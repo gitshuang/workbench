@@ -9,6 +9,7 @@ import workActions from 'store/root/work/actions';
 /*  comp */
 import Button from 'bee-button';
 import Menu, { SubMenu } from 'bee-menus';
+import Icon from 'components/icon';
 /*  style */
 import {
   pin,
@@ -17,7 +18,8 @@ import {
   title,
   pd,
   borderBox,
-  footer
+  footer,
+  selectedli
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -51,7 +53,8 @@ class Pin extends Component {
       newGroupName : '',
       isGroup : false,
       currentMenu : 1,
-      menuData: []
+      menuData: [],
+      selectedClass:false
     }
   }
 
@@ -94,24 +97,46 @@ class Pin extends Component {
 
   cancelFn = () => {
     const { pinDisplayNone } = this.props;
+    this.setState({
+      way: "",
+      menuData: this.cancelSelect()
+    });
     pinDisplayNone();
   }
   /*  menu  方法汇总   */
-  handleClick =(e,item, list)=>{
-      e.stopPropagation();
-      let way = item.name +"/"+ list.name
+  handleClick =(item, index, list, key)=>{
+      let way = item.name +"/"+ list.name;
       this.setState({
-        way: way
+        way: way,
+        menuData: this.cancelSelect(index,key)
       });
   }
-  handleTitleClick = (item) => {
-    return () =>{
-      this.setState({
-        way: item.name
-      });
-    }
+  handleTitleClick = (item,index) => {
+    this.setState({
+      way: item.name,
+      menuData: this.cancelSelect(index)
+    });
   }
 
+  cancelSelect = (index,key) => {
+    let menuData = this.state.menuData;
+    menuData.forEach((v,i)=>{
+      v.checked = false;
+      v.widgeList && v.widgeList.forEach((w,k)=>{
+        w.checked = false;
+      })
+    });
+    //if(arguments.length == 0){
+    if( index == undefined && key == undefined){
+      return menuData;
+    }
+    if(key == undefined){
+      menuData[index].checked = true;
+      return menuData;
+    }
+    menuData[index].widgeList[key].checked = true;
+    return menuData;
+  }
 
   /*  下三个方法为  添加新组  method  */
   addNewGroup =() => {
@@ -169,16 +194,29 @@ class Pin extends Component {
             添加到：{this.state.way}
           </div>
           <div className={borderBox}>
-            <ul style={{width:"240px"}}>
+            <ul>
               {
-                data.map((item, index) => {
+                data.map( (item, index) => {
+                  let classNameLi = item.widgeList.length ? "active" : "";
                   return (
-                    <li className="" key={index} onClick={this.handleTitleClick(item)}>
-                      {item.name}
+                    <li key={index}>
+                      <p
+                        onClick={ () =>{this.handleTitleClick(item,index)} }
+                        className={ item.checked ? selectedli : "" }
+                      >
+                        <Icon type="add" className={classNameLi}></Icon>
+                        {item.name}
+                      </p>
                       {
-                        item.widgeList && item.widgeList.map((list, key) => {
+                        item.widgeList.map((list, key) => {
                           return (
-                            <div className="" key ={key} onClick={(e) =>{this.handleClick(e,item,list)}}>{list.name}</div>
+                            <div
+                              key = {key}
+                              className = { list.checked ? selectedli : "" }
+                              onClick={() =>{this.handleClick(item, index, list, key)}}
+                            >
+                              {list.name}
+                            </div>
                           )
                         })
                       }
