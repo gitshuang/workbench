@@ -87,12 +87,12 @@ const reducer = handleActions({
     const newState = {
       ...state,
       quickServiceDisplay: true,
-      quickServiceAnimate: " animated fadeIn"
+      quickServiceAnimate: " animated zoomIn"
     };
-    if(state.quickServiceAnimate === " animated fadeIn"){
+    if(state.quickServiceAnimate === " animated zoomIn"){
       newState.quickServiceAnimate = " animated fadeOutUpBig";
     }else if(state.quickServiceAnimate === " animated fadeOutUpBig"){
-      newState.quickServiceAnimate = " animated fadeIn";
+      newState.quickServiceAnimate = " animated zoomIn";
     }
     return newState;
   },

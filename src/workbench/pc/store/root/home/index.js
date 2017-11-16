@@ -60,12 +60,12 @@ const reducer = handleActions({
   [changeUserInfoDisplay]: (state) => {
     const newState = {
       ...state,
-      userInfoDisplay: "fadeInLeftBig"
+      userInfoDisplay: " animated fadeInLeft"
     };
-    if(state.userInfoDisplay === "fadeInLeftBig"){
-      newState.userInfoDisplay = "fadeOutLeftBig";
-    }else if(state.userInfoDisplay === "fadeOutLeftBig"){
-      newState.userInfoDisplay = "fadeInLeftBig";
+    if(state.userInfoDisplay === " animated fadeInLeft"){
+      newState.userInfoDisplay = " animated fadeOutLeftBig";
+    }else if(state.userInfoDisplay === " animated fadeOutLeftBig"){
+      newState.userInfoDisplay = " animated fadeInLeft";
     }
     return newState;
   },
@@ -75,7 +75,7 @@ const reducer = handleActions({
       userInfoDisplay: "userInfohidden"
     };
     if(state.userInfoDisplay !== "userInfohidden"){
-      newState.userInfoDisplay = "fadeOutLeftBig";
+      newState.userInfoDisplay = " animated fadeOutLeftBig";
     }
     return newState;
   },

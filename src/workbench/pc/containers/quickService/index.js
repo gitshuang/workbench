@@ -33,7 +33,7 @@ class QuickServiceContainer extends Component {
     console.log(this.props)
     const {changeQuickServiceHidden } = this.props;
     changeQuickServiceHidden();
-    this.props.history.push('/application');;
+    this.props.history.push('/application');
   }
 
   render() {

@@ -24,7 +24,6 @@ const {
   requestSuccess,
   requestError,
 } = rootActions;
-const { INTERVAL } = 2000;
 @connect(
   ()=>({}),
   {
@@ -47,7 +46,7 @@ class UserInfoContainer extends Component {
 
   handleClickOutside(evt) {
     const {changeQuickServiceHidden,hideUserInfoDisplay,userInfoDisplay } = this.props;
-    if(userInfoDisplay !== "userInfohidden" && userInfoDisplay === "fadeInLeftBig"){
+    if(userInfoDisplay !== "userInfohidden" && userInfoDisplay === " animated fadeInLeft"){
       hideUserInfoDisplay();
     }
   }
@@ -64,17 +63,18 @@ class UserInfoContainer extends Component {
       });
     }
   }
-  componentWillUnmount() {
-    hideUserInfoDisplay();
-  }
+  // componentWillUnmount() {
+  //   hideUserInfoDisplay();
+  // }
+
   handleClick() {
     alert("谢谢")
   }
 
   render() {
     const { userInfoDisplay, userInfo: { name, company, phone, imgsrc } } = this.props;
-    const childrenComponent = (
-      <div  className={`${wrap} animated ${userInfoDisplay}`}  >
+    return (
+      <div  className={`${wrap}  ${userInfoDisplay}`}  >
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner}/>
         </div>
@@ -115,16 +115,6 @@ class UserInfoContainer extends Component {
           </Tabs>
         </div>
       </div>
-    );
-    return (
-        <ReactCSSTransitionGroup
-          transitionEnter={true}
-          transitionLeave={true}
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-          transitionName="example" >
-          {childrenComponent}
-        </ReactCSSTransitionGroup>
     );
   }
 }

@@ -9,6 +9,7 @@ import store from 'store';
 import { mapStateToProps } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
+import UserCenterContainer from 'containers/userCenter';
 import rootActions from 'store/root/actions';
 //<--后续样式提到组件库里面
 import 'assets/style/iuapmobile.um.css';
@@ -87,6 +88,7 @@ class Root extends Component {
           <RouteWithSubRoutes key={i} {...route} />
         ))}
         <QuickServiceContainer outsideClickIgnoreClass={'icon-quanzi'} />
+        <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>
       </div>
     );
   }
