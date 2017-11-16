@@ -1,41 +1,106 @@
+.serviceContainer {
+  position: absolute;
+  z-index: 999;
+  top: 50px;
+  right: 33px;
+  width:300px;
+  height:310px;
+  border:1px solid #D2D2D2;
+  box-shadow:2px 2px 7px 2px #D2D2D2;
+}
 .service {
   position: absolute;
   z-index: 9;
-  top: 50px;
-  right: 33px;
   background: #fff;
-  border:1px solid #D2D2D2;
   width:300px;
-  height:310px;
-  box-shadow:2px 2px 7px 2px #D2D2D2;
+  height:271px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.serviceBtn{
+  position: absolute;
+  z-index: 9;
+  top: 271px;
+  background: #F5F5F5;
+  width:300px;
+  height:39px;
 }
 .service h4{
   font-weight: 500;
-  font-size: 12px;
-  padding-left: 15px;
-  line-height: 30px;
+  font-size: 14px;
+  padding-left: 9px;
+  padding-top: 14px;
+  line-height: 19px;
 }
 .service ul{
-  padding:0px 10px 20px;
+  padding:0px;
   width:300px;
+}
+.service .contentDiv{
+  float: left;
+  width: 48px;
+  height:69px;
+  text-align: center;
+  margin: 5px 13.5px 5px 13.5px;
+}
+.service .content{
+  width: 48px;
+  height:16px;
+  font-size: 12px;
+  padding: 0;
+  text-align: center;
 }
 .service ul li{
   float: left;
-  width:60px;
-  height:60px;
-  line-height: 60px;
-  margin:5px;
+  width:48px;
+  height:48px;
+  margin-bottom: 5px;
+  line-height: 48px;
   text-align: center;
   background: #EEEEEE;
   font-size:12px;
+  border: 1px solid #fff;
   cursor: pointer;
 }
-.service button{
+.service ul li:hover{
+  background: #D8D8D8;
+  border:1px solid #979797;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+}
+.serviceBtn button{
   border: none;
   border-radius: 0;
-  border-top:1px solid #888888;
   font-size: 12px;
+  height: 39px;
+  color: #666666;
+  background:none;
 }
 :global(.quickServiceHidden){
   display:none;
+}
+.serviceGroup{
+  position: relative;
+}
+
+.serviceContainer:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-bottom-color: #d2d2d2;
+  position: absolute;
+  margin-top: -21px;
+  margin-left: 243px;
+}
+.serviceContainer:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 11px solid transparent;
+  border-bottom-color: #ffffff;
+  position: absolute;
+  margin-top: -21px;
+  margin-left: 243px;
 }

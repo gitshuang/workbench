@@ -14,5 +14,6 @@ export default createTypes(
   'PIN_DISPLAY_NONE',
   'SET_PIN_ADD',
   'SET_PIN_ADD_GROUP',
+  'GET_PIN_GROUP',
   'SET_PIN_CANCEL'
 );

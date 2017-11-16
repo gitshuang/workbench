@@ -146,78 +146,98 @@ class Home extends Component {
         })
     }
 
-    scrollToAnchor = (id) => {
+    scrollToAnchor = (index, id) => {
+
         let anchorElement = document.getElementById(id);
+
 
         if (anchorElement) {
             anchorElement.scrollIntoView({
                 block: "start",
                 behavior: "smooth"
             });
+
+            if (anchorElement) {
+                anchorElement.scrollIntoView({
+                    block: "start",
+                    behavior: "smooth"
+                });
+            }
+            if (index == 0) {
+
+                // scrollView.scrollTo(0, 0);  
+
+                // let top = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset;
+                scrollTo(0, 0);
+
+            }
+            this.setLiSelected(id);
         }
-        this.setLiSelected(id);
-    }
 
-    close = () => {
-        this.setState({
-            showModal: false
-        });
-    }
+        close = () => {
+            this.setState({
+                showModal: false
+            });
+        }
 
-    open = () => {
-        this.setState({
-            showModal: true
-        });
-    }
+        open = () => {
+            this.setState({
+                showModal: true
+            });
+        }
 
-    changeModal = (e, da) => {
-        let newDa = [];
-        Object.assign(newDa, da);
+        changeModal = (e, da) => {
+            let newDa = [];
+            Object.assign(newDa, da);
 
-        debugger;
-        this.setState({
-            showModal: e,
-            modalData: newDa
-        });
-    }
+            debugger;
+            this.setState({
+                showModal: e,
+                modalData: newDa
+            });
+        }
 
-    render() {
+        render() {
 
-        const {
-            changeUserInfoDisplay,
-            widgetList,
-            changeTitleServiceDisplay
-        } = this.props;
-        let {
-            workList
-        } = this.state;
+            const {
+                changeUserInfoDisplay,
+                widgetList,
+                changeTitleServiceDisplay
+            } = this.props;
+            let {
+                workList
+            } = this.state;
 
-        let self = this;
-        let lis = [];
-        let conts = [];
+            let self = this;
+            let lis = [];
+            let conts = [];
 
-        if (workList.length != 0) {
-            workList.map(function(da, i) {
-                let _id = da.id + "_" + i;
+            if (workList.length != 0) {
+                workList.map(function(da, i) {
+                    let _id = da.id + "_" + i;
 
-                let firstLi = i != 0 ? <div className={WidgetTitle} >{da.name}</div> : null;
+                    let firstLi = i != 0 ? <div className={WidgetTitle} >{da.name}</div> : null;
 
-                let selectedClass = da.selected ? selected : null;
+                    let selectedClass = da.selected ? selected : null;
 
-                lis.push(<li key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}><a className={selectedClass}>{da.name}</a></li>);
 
-                conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
+                    lis.push(<li key={da.id+i} onClick={()=>self.scrollToAnchor(_id)}><a className={selectedClass}>{da.name}</a></li>);
+
+                    lis.push(<li key={da.id+i} onClick={()=>self.scrollToAnchor(i,_id)}><a className={selectedClass}>{da.name}</a></li>);
+
+
+                    conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     {firstLi}
                     <div  className={WidgetCont} name={da.id} >
                         <WidgetArea data={da.widgeList} change={self.changeModal} > </WidgetArea>
                     </div>
 
                 </div>);
-            });
-        }
+                });
+            }
 
-        return (
-            <div className={page_home}>
+            return (
+                <div className={page_home}>
 
           <HeaderPage lis={lis}></HeaderPage>
 
@@ -246,7 +266,7 @@ class Home extends Component {
           </Modal>
 
         </div>);
+        }
     }
-}
 
-export default Home;
+    export default Home;
