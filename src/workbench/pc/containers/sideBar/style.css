@@ -1,5 +1,31 @@
 .sideBar {
   width: 200px;
-  border: 1px solid #000;
   height: 100%;
+  background: #fff;
+}
+.menuItem{
+	width:20px;
+	height:20px; 
+	color:rgba(135,139,148,1);
+	font-size: 14px;
+}
+.menuArrow{
+	color:#878B94;
+	float:right;
+}
+.sideBarMenu :global(.u-menu-submenu-title):after{
+	font-size:14px;
+	color:#878B94;
+	transform:rotate(-90deg);
+	-ms-transform:rotate(-90deg); 	/* IE 9 */
+	-moz-transform:rotate(-90deg); 	/* Firefox */
+	-webkit-transform:rotate(-90deg); /* Safari 和 Chrome */
+	-o-transform:rotate(-90deg); 
+	-webkit-transition: -webkit-transform .3s ease;
+    transition: -webkit-transform .3s ease;
+    transition: transform .3s ease;
+    transition: transform .3s ease,-webkit-transform .3s ease;
+}
+.u-menu-inline .u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected{
+	color:#E14C46;
 }

@@ -8,3 +8,11 @@ body {
 .wrap {
   padding: 20px; 
 }
+.u-menu-inline>.u-menu-item, .u-menu-inline>.u-menu-submenu>.u-menu-submenu-title{
+	font-size:14px;
+	color:#4A515D;
+}
+.u-menu-inline .u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected{
+	border-right: 2px solid #E14C46;
+	color:#E14C46;
+}

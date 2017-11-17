@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import actions from 'store/root/work/actions';
 import Menu, { SubMenu } from 'bee-menus';
+import Icon from 'bee-icon';
 // import { Scrollbars } from 'react-custom-scrollbars';
 import { mapStateToProps } from '@u';
-import { sideBar } from './style.css';
+import { sideBar ,menuItem,menuArrow,sideBarMenu,aa} from './style.css';
 
 const { Item } = Menu;
 const { setCurrent } = actions;
@@ -14,13 +15,14 @@ function makeMenus(menus) {
   menus.forEach(({ children, id, name }) => {
     if (children) {
       result.push(
-        <SubMenu key={id} title={name}>
+        <SubMenu className={sideBarMenu} key={id} title={<span><Icon type="uf-rmb" className={menuItem}/>{name}</span>}>
           { makeMenus(children) }
         </SubMenu>
       );
     } else {
       result.push(
         <Item key={id}>
+          <Icon type="uf-cloud-o" className={menuItem}/>
           { name }
         </Item>
       );
