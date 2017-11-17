@@ -1,9 +1,7 @@
 import React, {
   Component
 } from 'react';
-import {
-  Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Icon from 'bee-icon';
 import Button from 'bee-button';
@@ -136,7 +134,7 @@ class WidgetArea extends Component {
                         <div className={title_left}><Icon type="uf-add-c-o" /></div>
                         <div className={title_right}>{da.title}</div>
                       </div>
-                      <div style={{position: 'relative'}} id="contain1" ref={da.id =="1101"?(para) => { self.contain = para; }:null} >
+                      <div style={{position: 'relative'}} ref={da.id =="1101"?(para) => { self.contain = para; }:null} >
                         <div className={context}>
                           {da.id =="1101"?<Button colors="primary" onClick={ () => {self.handleShow()} }>Loading按钮</Button>:null}
                         </div>

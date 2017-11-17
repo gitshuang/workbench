@@ -6,8 +6,15 @@ import WidgetArea from 'components/widgetArea';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-import baseStyles from 'public/base.css';
-import {page_home,button_group,selected,WidgetCont,WidgetTitle,HeaderLeft} from './style.css';
+import baseStyles from 'assets/style/base.css';
+import {
+    page_home,
+    button_group,
+    selected,
+    WidgetCont,
+    WidgetTitle,
+    HeaderLeft
+} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
@@ -104,11 +111,15 @@ class Home extends Component {
         })
     }
 
-    scrollToAnchor = (index,id) => {
-
+    scrollToAnchor = (id) => {
         let anchorElement = document.getElementById(id);
 
-        if(anchorElement) { anchorElement.scrollIntoView({block: "start", behavior: "smooth"}); }
+        if (anchorElement) {
+            anchorElement.scrollIntoView({
+                block: "start",
+                behavior: "smooth"
+            });
+	}
         if(index == 0 ){
 
             // scrollView.scrollTo(0, 0);
@@ -131,35 +142,40 @@ class Home extends Component {
         });
     }
 
-    changeModal = (e,da) => {
+    changeModal = (e, da) => {
         let newDa = [];
-        Object.assign(newDa,da);
+        Object.assign(newDa, da);
 
-        debugger;
-         this.setState({
+        this.setState({
             showModal: e,
-            modalData:newDa
+            modalData: newDa
         });
     }
 
     render() {
 
-        const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
-        let {workList} = this.state;
+        const {
+            changeUserInfoDisplay,
+            widgetList,
+            changeTitleServiceDisplay
+        } = this.props;
+        let {
+            workList
+        } = this.state;
 
         let self = this;
         let lis = [];
         let conts = [];
 
-        if (workList.length != 0 ) {
-            workList.map(function(da,i) {
-                let _id = da.id+"_"+i;
+        if (workList.length != 0) {
+            workList.map(function(da, i) {
+                let _id = da.id + "_" + i;
 
-                let firstLi = i !=0 ? <div className={WidgetTitle} >{da.name}</div>:null;
+                let firstLi = i != 0 ? <div className={WidgetTitle} >{da.name}</div> : null;
 
                 let selectedClass = da.selected ? selected : null;
 
-                lis.push( <li key={da.id+i} onClick={()=>self.scrollToAnchor(i,_id)}><a className={selectedClass}>{da.name}</a></li>);
+                lis.push(<li key={da.id+i} onClick={()=>self.scrollToAnchor(i,_id)}><a className={selectedClass}>{da.name}</a></li>);
 
                 conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
                     {firstLi}
@@ -204,3 +220,4 @@ class Home extends Component {
 }
 
 export default Home;
+
