@@ -65,7 +65,7 @@ class Root extends Component {
         requestSuccess();
       }
     });
-    // timer(getMessage, 30000);
+    timer(getMessage, 30000);
     regMessageTypeHandler.call(this);
   }
   render() {
