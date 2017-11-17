@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import cs from 'classnames';
 import { connect } from 'react-redux';
 import actions from 'store/root/work/actions';
+import Icon from 'bee-icon';
 import { mapStateToProps } from '@u';
 import {
   moreList,
@@ -16,6 +17,7 @@ import {
   tab,
   tabName,
   tabDelBtn,
+  moreSelect
 } from './style.css';
 
 const {
@@ -172,6 +174,7 @@ class TabsContainer extends Component {
               </li>
             ))
           }
+          <li className={moreSelect}><Icon type="uf-gridcaretarrowup"></Icon></li>
         </ul>
         {moreAreaElm}
       </div>

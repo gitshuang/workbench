@@ -45,11 +45,12 @@
   float: left;
   white-space: nowrap;
 }
-.tab, .moreBtn{
+.tab, .moreBtn,.moreSelect{
   float: left;
   border-top: 2px solid #A7A7A7;
   height: 46px;
   color: #888;
+  background:rgba(246,247,248,1);
 }
 .tab {
   position: relative;
@@ -89,4 +90,12 @@
 .active .tabDelBtn,
 .active .moreBtn{
   color: #E14C46;
+}
+.moreSelect{
+  text-align:center;
+  line-height:46px;
+}
+.moreSelect:hover{
+  border-color:#E14C46;
+  color:#E14C46;
 }
