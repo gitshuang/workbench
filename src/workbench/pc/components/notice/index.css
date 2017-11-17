@@ -39,7 +39,7 @@
   width:28px;
   height:21px;
   right: 28px;
-  bottom: 15px;
+  bottom: 11px;
 }
 :global(.btn0){
   right: 28px !important;
@@ -49,17 +49,17 @@
 }
 :global(.u-notification-notice-content .u-notification-notice-description p){
   float: left;
-  margin-top: 22px;
+  margin-top: 26px;
   margin-left: 10px;
-  width: 187px;
+  width: 217px;
   color: #333333;
   font-size:14px;
   overflow: hidden;
   text-overflow:ellipsis;
-  /*white-space: nowrap;*/
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  white-space: nowrap;
+  /*display: -webkit-box;*/
+  /*-webkit-box-orient: vertical;*/
+  /*-webkit-line-clamp: 2;*/
 }
 :global(.hideAuto){
   width: 14px;
@@ -80,4 +80,7 @@
 :global(.u-notification-topRight){
   top: 130px;
   right: 30px;
+}
+:global(.u-notification-bottomRight) {
+    top: 480px;
 }
