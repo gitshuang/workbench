@@ -58,13 +58,14 @@ const reducer = handleActions({
     };
   },
   [getMessage]: (state, { payload: message, error }) => {
+    // localStorage.setItem('userId_myMessage', message);
     if (!error) {
       message.forEach((m) => {
         notification.notice({
           title:m.title,
           content: <Notice data={m}/>,
           color:m.color,
-          duration: null,
+          duration: 9,
           closable: true,
         });
       });
