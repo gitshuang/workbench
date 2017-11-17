@@ -40,7 +40,7 @@ const { pinDisplayNone, setPinAdd, setPinAddGroup, getPinGroup } = workActions;
     pinDisplayNone,
     setPinAdd,
     setPinAddGroup,
-    getPinGroup,
+    getPinGroup
   }
 )
 @onClickOutside

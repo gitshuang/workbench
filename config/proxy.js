@@ -11,7 +11,7 @@ var api = [
   '/getTitleService',
   '/setPinCancel',
   '/setPinAdd',
-  '/setPinAddGroup',
+  '/setAddGroup',
   '/getPinGroup',
 ]
 
