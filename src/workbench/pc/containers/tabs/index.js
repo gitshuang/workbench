@@ -28,6 +28,19 @@ const {
 const tabWidth = 160;
 const tabMargin = 1;
 const moreBtnWidth = 19;
+const getTabsAndMores = (totalTabs, areaWidth) => {
+  let mores = [];
+  let tabs = totalTabs;
+  const maxTabsNum = Math.floor((areaWidth - moreBtnWidth)/(tabWidth + tabMargin));
+  if (totalTabs.length > maxTabsNum) {
+    tabs = totalTabs.slice(0, maxTabsNum);
+    mores = totalTabs.slice(maxTabsNum);
+  }
+  return {
+    tabs,
+    mores,
+  }
+}
 
 @connect(
   mapStateToProps(
@@ -61,9 +74,15 @@ class TabsContainer extends Component {
     this.resizeHandler();
   }
   componentWillReceiveProps({ tabs: nextTabs }) {
-    const { tabs } = this.props;
-    if (tabs.length !== nextTabs.length) {
-      this.resizeHandler();
+    const { tabs: oldTabs } = this.props;
+    if (oldTabs.length !== nextTabs.length) {
+      const areaWidth = this.refs.tabsArea.clientWidth;
+      const { moreIsShow } = this.state;
+      const { mores } = getTabsAndMores(nextTabs, areaWidth);
+      this.setState({
+        width: areaWidth,
+        moreIsShow: !mores.length && moreIsShow ? false : moreIsShow,
+      });
     }
   }
   select(id) {
@@ -93,17 +112,11 @@ class TabsContainer extends Component {
     })
   }
   render() {
-    const { current: { id: currentId } } = this.props;
-    let { tabs } = this.props;
+    const { current: { id: currentId }, tabs: totalTabs } = this.props;
     const { width: areaWidth, moreIsShow } = this.state;
-    const maxTabsNum = Math.floor((areaWidth - moreBtnWidth)/(tabWidth + tabMargin));
-    const curIndex = tabs.findIndex(({ id }) => id === currentId);
-    const totalTabsNum = tabs.length;
-    let mores = [];
-    if (totalTabsNum > maxTabsNum) {
-      mores = tabs.slice(maxTabsNum);
-      tabs = tabs.slice(0, maxTabsNum);
-    }
+    const curIndex = totalTabs.findIndex(({ id }) => id === currentId);
+    const totalTabsNum = totalTabs.length;
+    const { tabs, mores } = getTabsAndMores(totalTabs, areaWidth);
     const moreListElm = moreIsShow ? (
       <ul className={moreList}>
         {
