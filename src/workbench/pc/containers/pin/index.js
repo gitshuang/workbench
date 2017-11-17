@@ -23,7 +23,7 @@ import {
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const { pinDisplayNone, setPinAdd, setPinAddGroup, getPinGroup } = workActions;
+const { pinDisplayNone, setPinAdd, setAddGroup, getPinGroup } = workActions;
 
 @connect(mapStateToProps(
   'pinType',
@@ -39,7 +39,7 @@ const { pinDisplayNone, setPinAdd, setPinAddGroup, getPinGroup } = workActions;
     requestError,
     pinDisplayNone,
     setPinAdd,
-    setPinAddGroup,
+    setAddGroup,
     getPinGroup
   }
 )
@@ -79,6 +79,10 @@ class Pin extends Component {
     }
   }
 
+  setReset = () => {
+
+  }
+
   addGroup = () => {
     this.setState({
       isGroup: true
@@ -86,12 +90,12 @@ class Pin extends Component {
   }
 
   confirmFn = () => {
-    const { requestError, pinDisplayNone, setPinAdd } = this.props;
+    const { requestError, setPinAdd } = this.props;
     setPinAdd().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       }
-      pinDisplayNone();
+      this.cancelFn();
     });
   }
 
@@ -104,6 +108,7 @@ class Pin extends Component {
     pinDisplayNone();
   }
   /*  menu  方法汇总   */
+  // 子集文件夹的点击事件
   handleClick =(item, index, list, key)=>{
       let way = item.name +"/"+ list.name;
       this.setState({
@@ -111,13 +116,14 @@ class Pin extends Component {
         menuData: this.cancelSelect(index,key)
       });
   }
+  // menu一级菜单的点击事件
   handleTitleClick = (item,index) => {
     this.setState({
       way: item.name,
       menuData: this.cancelSelect(index)
     });
   }
-
+  //  统一的返回加工或点击之后的menuData数据
   cancelSelect = (index,key) => {
     let menuData = this.state.menuData;
     menuData.forEach((v,i)=>{
@@ -140,30 +146,28 @@ class Pin extends Component {
 
   /*  下三个方法为  添加新组  method  */
   addNewGroup =() => {
-    const { setPinAddGroup, requestError } = this.props;
-    setPinAddGroup().then( ({ error, payload }) => {
+    const { setAddGroup, requestError } = this.props;
+    setAddGroup().then( ({ error, payload }) => {
       if (error) {
         requestError(payload);
       }
       let newGroup = {
         id : "2222",
         name : this.state.newGroupName,
-        widgeList: []
       };
       let menuData = this.state.menuData;
       menuData.push(newGroup);
 
       this.setState({
-        isGroup: false,
         menuData: menuData,
-        newGroupName: ""
       });
-      alert("添加分组成功");
+      this.groupCancelFn();
     });
   }
   groupCancelFn =() => {
     this.setState({
-      isGroup: false
+      isGroup: false,
+      newGroupName: ""
     });
   }
   setNewGroupName =(e) => {
@@ -206,7 +210,7 @@ class Pin extends Component {
                         {item.name}
                       </p>
                       {
-                        item.widgeList.map((list, key) => {
+                        item.widgeList && item.widgeList.map((list, key) => {
                           return (
                             <div
                               key = {key}
@@ -223,35 +227,6 @@ class Pin extends Component {
                 })
               }
             </ul>
-            {  /*
-              <Menu
-                onSelect={this.handleSelect.bind(this)}
-                onClick={this.handleClick.bind(this)}
-                style={{ width: 240 }}
-                defaultOpenKeys={[]}
-                mode="inline"
-              >
-                {
-                  data.map((item, index) => {
-                    return (
-                      <SubMenu
-                        key={index}
-                        title={ <span><span>{item.name}</span></span> }
-                        onTitleClick={ this.handleTitleClick.bind(this) }
-                      >
-                        {
-                          item.widgeList.map((list, key) => {
-                            return (
-                              <Menu.Item key={key}>{list.name}</Menu.Item>
-                            )
-                          })
-                        }
-                      </SubMenu>
-                    )
-                  })
-                }
-              </Menu>
-              */ }
           </div>
           <div className={footer + " um-box-justify"}>
             <div>

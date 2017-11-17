@@ -17,21 +17,15 @@
     },
     {
       "id":"1002",
-      "name":"HR相关",
-      "widgeList":[
-      ]
+      "name":"HR相关"
     },
     {
       "id":"1003",
-      "name":"我的日常",
-      "widgeList":[
-      ]
+      "name":"我的日常"
     },
     {
       "id":"1004",
-      "name":"公司新闻",
-      "widgeList":[
-      ]
+      "name":"公司新闻"
     }
   ]
 }
