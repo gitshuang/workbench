@@ -111,7 +111,7 @@ class Home extends Component {
         })
     }
 
-    scrollToAnchor = (id) => {
+    scrollToAnchor = (index, id) => {
         let anchorElement = document.getElementById(id);
 
         if (anchorElement) {
@@ -119,12 +119,8 @@ class Home extends Component {
                 block: "start",
                 behavior: "smooth"
             });
-	}
+        }
         if(index == 0 ){
-
-            // scrollView.scrollTo(0, 0);
-
-            // let top = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset;
             scrollTo(0, 0);
         }
         this.setLiSelected(id);

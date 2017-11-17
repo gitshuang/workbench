@@ -190,7 +190,7 @@ export default class Work extends Component {
       pinType,
       titleServiceDisplay,
       current: {
-        title,
+        name: title,
         hasRelationFunc,
       },
     } = this.props;
