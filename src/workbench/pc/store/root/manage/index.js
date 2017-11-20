@@ -29,43 +29,46 @@ const reducer = handleActions({
       ...state,
     };
   },
-  [addGroup]: (state, { payload: menus }) => ({
+  [addGroup]: (state, { payload: workList }) => {
+    console.log(workList);
+    return{
+      ...state,
+      workList,
+    }
+  },
+  [delectGroup]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
-  [delectGroup]: (state, { payload: menus }) => ({
+  [renameGroup]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
-  [renameGroup]: (state, { payload: menus }) => ({
+  [moveGroup]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
-  [moveGroup]: (state, { payload: menus }) => ({
+  [addFolder]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
-  [addFolder]: (state, { payload: menus }) => ({
+  [delectFolder]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
-  [delectFolder]: (state, { payload: menus }) => ({
+  [renameFolder]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
-  [renameFolder]: (state, { payload: menus }) => ({
+  [addServe]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
-  [addServe]: (state, { payload: menus }) => ({
+  [delectServe]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
-  [delectServe]: (state, { payload: menus }) => ({
-    ...state,
-    workList,
-  }),
-  [moveServe]: (state, { payload: menus }) => ({
+  [moveServe]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),

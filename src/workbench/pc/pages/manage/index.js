@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { mapStateToProps } from '@u';
-import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
+import manageActions from 'store/root/manage/actions';
 
 import Header from 'containers/header';
 import WidgetArea from 'components/widgetArea';
@@ -19,14 +20,12 @@ import {
   HeaderLeft,
   header
 } from './style.css';
-import Icon from 'bee-icon';
 import Modal from 'bee-modal';
 
-const {wrap, } = baseStyles;
-
-const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
-
 const {requestStart, requestSuccess, requestError} = rootActions;
+const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
+const { addGroup } = manageActions;
+
 
 @withRouter
 @connect(
@@ -44,6 +43,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
     getWidgetList,
     getWorkList,
     changeUserInfoDisplay,
+    addGroup
   }
 )
 
@@ -55,7 +55,8 @@ class Home extends Component {
     this.state = {
       workList: [],
       showModal: false,
-      modalData: []
+      modalData: [],
+      newGroup : {},
     }
     this.getWorkService();
   }
@@ -141,6 +142,28 @@ class Home extends Component {
     </div>)
   }
 
+  addGroup =()=> {
+    const { addGroup } = this.props;
+    debugger
+    let workList = this.state.workList;
+    //workList.push(this.state.newGroup)
+    workList.push({
+      "id":"1005",
+      "name":"新增分组",
+      "size":"sm",
+      "widgeList":[{
+        "id":"2001",
+        "size":"sm",
+        "title":"公司新闻一组件",
+        "optionTitle":"查看"
+      }]
+    });
+    this.setState({
+      workList
+    });
+    addGroup(workList);
+  }
+
   render() {
 
     const {
@@ -182,6 +205,7 @@ class Home extends Component {
         </div>
         <div className="content">
           {conts}
+          <button onClick={this.addGroup.bind(this)}>添加分组</button>
         </div>
         <Modal show={ self.state.showModal } onHide={ self.close }>
           <Modal.Header>
