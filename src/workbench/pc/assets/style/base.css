@@ -16,3 +16,8 @@ body {
 	border-right: 2px solid #E14C46;
 	color:#E14C46;
 }
+.u-menu-submenu-open.u-menu-submenu-inline>.u-menu-submenu-title:after{
+  font-size:14px;
+  color:#878B94;
+  transform: rotate(0deg) scale(.75);
+}

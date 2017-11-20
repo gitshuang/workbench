@@ -16,8 +16,7 @@ import {
   tabsList,
   tab,
   tabName,
-  tabDelBtn,
-  moreSelect
+  tabDelBtn
 } from './style.css';
 
 const {
@@ -174,7 +173,6 @@ class TabsContainer extends Component {
               </li>
             ))
           }
-          <li className={moreSelect}><Icon type="uf-gridcaretarrowup"></Icon></li>
         </ul>
         {moreAreaElm}
       </div>
