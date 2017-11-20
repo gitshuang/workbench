@@ -4,6 +4,8 @@ import cs from 'classnames';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { content, contentArea, active } from './style.css';
+import IFrame from 'components/iframe';
+import {TEST_IFRAME_EVENT} from 'public/message';
 
 @connect(
   mapStateToProps(
@@ -25,6 +27,11 @@ class ContentContainer extends Component {
   constructor(props) {
     super(props);
   }
+
+  messageHandler(e){
+    console.log(" --content -- ");
+  }
+
   render() {
     const { hasTab, current: { id: currentId, location: currentLocation }, tabs, menus } = this.props;
     if (hasTab) {
@@ -38,7 +45,7 @@ class ContentContainer extends Component {
                   [active]: currentId === id,
                 }
               )} >
-                <iframe title={id} src={location} />
+                <IFrame title={id} url={location} messType={TEST_IFRAME_EVENT} />
               </div>
             ))
           }
@@ -48,7 +55,7 @@ class ContentContainer extends Component {
       return (
         <div className={contentArea} >
           <div className={content} >
-            <iframe title={currentId} src={currentLocation} />
+            <IFrame title={currentId} url={currentLocation} messType={TEST_IFRAME_EVENT} />
           </div>
         </div>
       );

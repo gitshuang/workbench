@@ -15,6 +15,7 @@ import rootActions from 'store/root/actions';
 import 'assets/style/iuapmobile.um.css';
 //-->后续样式提到组件库里面
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { initMessage } from 'public/message';
 
 const {
   requestStart,
@@ -67,6 +68,7 @@ class Root extends Component {
     });
     // timer(getMessage, 30000);
     regMessageTypeHandler.call(this);
+    initMessage();
   }
   render() {
     return (
