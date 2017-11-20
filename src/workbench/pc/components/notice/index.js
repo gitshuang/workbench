@@ -1,8 +1,10 @@
 /* notice */
 import React, {Component} from 'react';
+import { handleActions } from 'redux-actions';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
 import Button from 'bee-button';
+import rootActions from 'store/root/actions';
 import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
 import "./index.css"
 
@@ -20,6 +22,9 @@ const propTypes = {
   ])
 }
 
+const {
+  getMessage,
+} = rootActions;
 
 class Notice extends Component {
   constructor(props, context) {
@@ -29,6 +34,11 @@ class Notice extends Component {
   handClick(param) {
     const type = this.props.data.btns;
     dispathMessageTypeHandler(type[param].type);
+  }
+  hideClick(){
+    window.remainingNum++;
+    // 执行getMessage逻辑
+    getMessage();
   }
 
   render() {
@@ -50,7 +60,7 @@ class Notice extends Component {
             <Button  className={`${notice}Btn  btn`+i} size="sm" style={{ color: `${btn.btnColor}` }} onClick={ this.handClick.bind(this,i) } >{btn.typeBtn}</Button>
           ))
         }
-        {/*<div className="hideAuto"><Icon type="xiaoxi" /></div>*/}
+        <div className="hideAuto" onClick={ this.hideClick.bind(this) }><Icon type="xiaoxi" /></div>
       </div>
     );
   }

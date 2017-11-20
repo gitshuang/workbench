@@ -31,22 +31,30 @@ function makeMenus(menus) {
   return result;
 }
 
-const findOpenKeysById = (menus, curId, result = []) => {
-  let flag = true;
-  for (let i = 0, l = menus; i < l; i++) {
-    const menu = menus;
-    const { id, children } = menu;
-    if (children && children.length) {
-      result.push(id);
-      result = findOpenKeysById(children, curId, result);
-    } else if (id === curId) {
-      flag = false;
-      break;
+const findOpenKeysById = (menus, curId) => {
+  let finded = false;
+  const result = [];
+  const loop = (list) => {
+    if (finded) {
+      return;
+    }
+    for (let i = 0, l = list.length; i < l; i++) {
+      const item = list[i];
+      const { id, children } = item;
+      if (id === curId) {
+        finded = true;
+        break;
+      }
+      if (children && children.length) {
+        result.push(id);
+        loop(children);
+      }
+    }
+    if (!finded) {
+      result.pop();
     }
   }
-  if (flag) {
-    result.pop();
-  }
+  loop(menus);
   return result;
 }
 

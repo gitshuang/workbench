@@ -28,10 +28,10 @@
   font-size:14px;
   font-weight: bold;
 }
-:global(.u-notification-notice-content .u-notification-notice-description img){
+:global(.u-notification-notice-content) :global(.u-notification-notice-description) img{
   float: left;
 }
-:global(.u-notification-notice-content .u-notification-notice-description .noticeBtn){
+:global(.u-notification-notice-content) :global(.u-notification-notice-description) :global(.noticeBtn){
   background: #fff;
   color:#468CE3;
   font-size: 14px;
@@ -47,7 +47,7 @@
 :global(.btn1){
   right: 68px !important;
 }
-:global(.u-notification-notice-content .u-notification-notice-description p){
+:global(.u-notification-notice-content) :global(.u-notification-notice-description) p{
   float: left;
   margin-top: 26px;
   margin-left: 10px;
@@ -66,8 +66,10 @@
   height: 14px;
   line-height: 14px;
   float: right;
+  margin-top: -5px;
+  padding-left: 10px;
 }
-:global(a.u-notification-notice-close){
+a:global(.u-notification-notice-close){
   font-size: 25px;
   font-weight: normal;
   width: 14px;
@@ -76,11 +78,12 @@
   color: #BDBDBD;
   right: 9px;
   top: 10px;
+  display: none;
 }
 :global(.u-notification-topRight){
   top: 130px;
   right: 30px;
 }
 :global(.u-notification-bottomRight) {
-    top: 480px;
+  /* top: 480px; */
 }
