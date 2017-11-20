@@ -26,7 +26,42 @@ module.exports = function (config) {
         },
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract(
+          include: [paths('assets')],
+          use: ExtractTextPlugin.extract(
+            Object.assign({
+              fallback: {
+                loader: 'style-loader',
+                options: {
+                  hmr: false,
+                },
+              },
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: {
+                    modules: false,
+                    localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                    importLoaders: 1,
+                    minimize: true,
+                    sourceMap: true,
+                  },
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    ident: 'postcss',
+                    sourceMap: false
+                  }
+                }
+              ]
+            })
+          )
+        },
+        {
+          test: /\.css$/,
+          include: [paths('src')],
+          exclude: [paths('assets')],
+          use: ExtractTextPlugin.extract(
             Object.assign({
               fallback: {
                 loader: 'style-loader',

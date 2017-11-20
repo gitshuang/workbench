@@ -15,6 +15,7 @@ var paths = {
   router: resolve('router'),
   store: resolve('store'),
   utils: resolve('public/utils.js'),
+  dist: path.join(__dirname, '../dist')
 }
 
 module.exports = function (key) {
