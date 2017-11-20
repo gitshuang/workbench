@@ -159,8 +159,8 @@ export default function (state, action) {
   const pageState = {
     home: home(state ? state.home : undefined, action),
     work: work(state ? state.work : undefined, action),
-    application: work(state ? state.application : undefined, action),
-    manage: work(state ? state.manage : undefined, action),
+    application: application(state ? state.application : undefined, action),
+    manage: manage(state ? state.manage : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;
