@@ -1,6 +1,12 @@
 /* notice */
 import React, {Component} from 'react';
-import { handleActions } from 'redux-actions';
+import { connect, Provider } from 'react-redux';
+import {
+  HashRouter as Router,
+  withRouter,
+} from 'react-router-dom';
+import { mapStateToProps } from '@u';
+import store from 'store';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
 import Button from 'bee-button';
@@ -24,7 +30,10 @@ const propTypes = {
 
 const {
   getMessage,
+  pushMessageQueue
 } = rootActions;
+
+
 
 class Notice extends Component {
   constructor(props, context) {
@@ -37,8 +46,9 @@ class Notice extends Component {
   }
   hideClick(){
     window.remainingNum++;
-    // 执行getMessage逻辑
-    getMessage();
+    //执行getMessage逻辑
+    //store.dispatch(getMessage())
+    store.dispatch(pushMessageQueue())
   }
 
   render() {
@@ -68,5 +78,6 @@ class Notice extends Component {
 
 Notice.propTypes = propTypes;
 Notice.defaultProps = defaultProps;
+
 
 export default Notice;
