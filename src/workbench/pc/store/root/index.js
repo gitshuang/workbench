@@ -6,6 +6,7 @@ import { Loading, Notification } from 'tinper-bee';
 import home from './home';
 import work from './work';
 import application from './application';
+import manage from './manage';
 import actions from './actions';
 //import types from './types';
 //import Button from 'bee-button';
@@ -159,6 +160,7 @@ export default function (state, action) {
     home: home(state ? state.home : undefined, action),
     work: work(state ? state.work : undefined, action),
     application: work(state ? state.application : undefined, action),
+    manage: work(state ? state.manage : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;
