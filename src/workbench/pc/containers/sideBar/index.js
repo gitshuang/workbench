@@ -5,7 +5,7 @@ import Menu, { SubMenu } from 'bee-menus';
 import Icon from 'bee-icon';
 // import { Scrollbars } from 'react-custom-scrollbars';
 import { mapStateToProps } from '@u';
-import { sideBar ,menuItem,menuArrow,sideBarMenu,aa} from './style.css';
+import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu} from './style.css';
 
 const { Item } = Menu;
 const { setCurrent } = actions;
@@ -95,7 +95,8 @@ class SideBarContainer extends Component {
           style={{ width: '100%' }}
           defaultOpenKeys={defaultOpenKeys}
           selectedKeys={selectedKeys}
-          mode="inline" >
+          mode="inline" 
+          className={sideMainMenu}>
           { makeMenus(menus) }
         </Menu>
       </div>

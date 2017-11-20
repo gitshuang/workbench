@@ -16,7 +16,8 @@ import {
   tabsList,
   tab,
   tabName,
-  tabDelBtn
+  tabDelBtn,
+  moreBtnArrow
 } from './style.css';
 
 const {
@@ -152,7 +153,7 @@ class TabsContainer extends Component {
           style= {{
             width: moreBtnWidth,
           }}
-          onClick={this.toggleMore}>></button>
+          onClick={this.toggleMore}><Icon className={moreBtnArrow} type="uf-gridcaretarrowup"></Icon></button>
         { moreListElm }
       </div>
     ) : null;
