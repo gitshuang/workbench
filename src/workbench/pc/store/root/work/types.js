@@ -14,5 +14,6 @@ export default createTypes(
   'SET_PIN_ADD',
   'SET_ADD_GROUP',
   'GET_PIN_GROUP',
-  'SET_PIN_CANCEL'
+  'SET_PIN_CANCEL',
+  'ADD_BRM'
 );
