@@ -66,6 +66,8 @@
   height: 14px;
   line-height: 14px;
   float: right;
+  margin-top: -5px;
+  padding-left: 10px;
 }
 a:global(.u-notification-notice-close){
   font-size: 25px;
@@ -76,6 +78,7 @@ a:global(.u-notification-notice-close){
   color: #BDBDBD;
   right: 9px;
   top: 10px;
+  display: none;
 }
 :global(.u-notification-topRight){
   top: 130px;

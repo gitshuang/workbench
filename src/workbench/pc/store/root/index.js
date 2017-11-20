@@ -28,6 +28,7 @@ const defaultState = {
   serviceList: [],
   quickServiceDisplay: false,
   quickServiceAnimate: "quickServiceHidden",
+  messageList:[]
 };
 
 const reducer = handleActions({
@@ -58,17 +59,59 @@ const reducer = handleActions({
     };
   },
   [getMessage]: (state, { payload: message, error }) => {
-    // localStorage.setItem('userId_myMessage', message);
-    if (!error) {
-      message.forEach((m) => {
+    // debugger;
+    let messageNotice = [];
+    typeof window.remainingNum === "undefined" && (window.remainingNum = 3); //剩余条数 默认剩余3条
+    window.messageList = [...(window.messageList || []), ...message,];
+    // localStorage.setItem('userId_myMessage', JSON.stringify(messageList));
+    if(window.messageList.length === 1 && window.remainingNum>0){
+      const [first, ...messageTemp] = window.messageList;
+      window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
+      messageNotice = [first];
+      window.messageList = messageTemp;
+    }else if(window.messageList.length===2 && window.remainingNum>0){
+      if(window.remainingNum===1){
+        const [first, ...messageTemp] = window.messageList;
+        window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
+        messageNotice = [first];
+        window.messageList = messageTemp;
+      }else {
+        const [first, second, ...messageTemp] = window.messageList;
+        window.remainingNum = (window.remainingNum - 2) < 0 ? 0 : (window.remainingNum - 2);
+        messageNotice = [first].concat([second]);
+        window.messageList = messageTemp;
+        // messageNotice = [...[first],...[second]];
+      }
+    }else if(window.messageList.length>=3 && window.remainingNum>0){
+      if(window.remainingNum===1){
+        const [first, ...messageTemp] = window.messageList;
+        window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
+        messageNotice = [first];
+        window.messageList = messageTemp;
+      }else if(window.remainingNum===2){
+        const [first, second, ...messageTemp] = window.messageList;
+        window.remainingNum = (window.remainingNum - 2) < 0 ? 0 : (window.remainingNum - 2);
+        messageNotice = [...[first],...[second]];
+        window.messageList = messageTemp;
+      }else {
+        const [first, second, third, ...messageTemp] = window.messageList;
+        window.remainingNum = (window.remainingNum - 3) < 0 ? 0 : (window.remainingNum - 3);
+        messageNotice = [first].concat([second]).concat([third]);
+        window.messageList = messageTemp;
+      }
+    }
+
+    if (!error && messageNotice.length>0) {
+      messageNotice.forEach((m) => {
         notification.notice({
           title:m.title,
           content: <Notice data={m}/>,
           color:m.color,
-          duration: 9,
+          duration: null,
           closable: true,
         });
       });
+     // window.messageList = messageTemp;
     }
     return state;
   },
