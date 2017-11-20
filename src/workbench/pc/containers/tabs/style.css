@@ -59,10 +59,21 @@
 .moreBtn {
   border-width: 2px 0 0 0;
   background: #fff;
+  text-align:center;
 }
 .tab.active, .moreBtn.active {
   color: #E14C46;
   border-color: #E14C46;
+}
+.moreBtnArrow{
+  padding:0 !important;
+}
+.moreBtn.active .moreBtnArrow{
+  transform:rotate(90deg);
+  -ms-transform:rotate(90deg); /* Internet Explorer */
+  -moz-transform:rotate(90deg); /* Firefox */
+  -webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+  -o-transform:rotate(90deg); /* Opera */
 }
 .tabName{
   font-size: 14px;
