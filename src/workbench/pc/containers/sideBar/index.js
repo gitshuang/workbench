@@ -10,19 +10,20 @@ import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu} from './style.css
 const { Item } = Menu;
 const { setCurrent } = actions;
 
-function makeMenus(menus) {
+//isTop:判断是否是一级菜单
+function makeMenus(menus,isTop) {
   let result = [];
   menus.forEach(({ children, id, name }) => {
     if (children) {
       result.push(
-        <SubMenu className={sideBarMenu} key={id} title={<span><Icon type="uf-rmb" className={menuItem}/>{name}</span>}>
+        <SubMenu className={sideBarMenu} key={id} style={{fontSize:14+'px'}} title={<span><Icon type="uf-rmb" className={menuItem}/>{name}</span>}>
           { makeMenus(children) }
         </SubMenu>
       );
     } else {
       result.push(
-        <Item key={id}>
-          <Icon type="uf-cloud-o" className={menuItem}/>
+        <Item key={id} style={isTop?{fontSize:14+'px'}:null}>
+          {isTop?<Icon type="uf-cloud-o" className={menuItem}/>:null}
           { name }
         </Item>
       );
@@ -87,6 +88,7 @@ class SideBarContainer extends Component {
   }
   render() {
     const { menus } = this.props;
+    const isTop = true;//标识是否是一级菜单
     const { defaultOpenKeys, selectedKeys } = this.getDefaultOpenKeys();
     return (
       <div className={sideBar} >
@@ -97,7 +99,7 @@ class SideBarContainer extends Component {
           selectedKeys={selectedKeys}
           mode="inline" 
           className={sideMainMenu}>
-          { makeMenus(menus) }
+          { makeMenus(menus,isTop) }
         </Menu>
       </div>
     );
