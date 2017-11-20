@@ -17,6 +17,7 @@ const {
   getPinGroup,
   setPinCancel,
   delTab,
+  addBrm,
 } = actions;
 
 
@@ -27,6 +28,10 @@ const defaultState = {
     hasRelationFunc: false,
   },
   menus:[],
+  brm:[
+     {name:"财务"},
+     {name:"人员"}
+  ],
   tabs:[],
   titleServiceList: [],
   titleServiceType: false,
@@ -57,6 +62,12 @@ const reducer = handleActions({
   [setMenus]: (state, { payload: menus }) => ({
     ...state,
     menus,
+  }), 
+  [addBrm]: (state, { payload: data }) => ({
+    ...state,
+    brm:state.brm.concat({
+       name:data
+    })
   }),
   [setCurrent]: (state, { payload: currentId }) => {
     const { tabs, menus } = state;
@@ -66,15 +77,24 @@ const reducer = handleActions({
     }
     const { name, location } = current
     const curTab = tabs.find(({id}) => id === currentId);
+    
+    let brm = [];
+    current.parent.map(function(da,i){
+        brm.push({name:da.name});
+    })
+    console.log("brm.length " + brm.length);
+    
     if (curTab) {
       return {
         ...state,
         current,
+        brm
       }
     } else {
       return {
         ...state,
         current,
+        brm,
         tabs: tabs.concat({
           id: currentId,
           name,
