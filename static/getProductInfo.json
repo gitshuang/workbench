@@ -16,6 +16,14 @@
       "menus": [
         {
           "icon": "",
+          "id": "1114",
+          "nodecode": "1114",
+          "name": "三方平台",
+          "hasRelationFunc": false,
+          "location": "http://localhost:9010/index.html"
+        },
+        {
+          "icon": "",
           "id": "1111",
           "nodecode": "1111",
           "name": "云平台",
