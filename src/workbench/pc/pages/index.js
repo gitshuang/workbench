@@ -4,6 +4,7 @@ import {
   HashRouter as Router,
   withRouter,
 } from 'react-router-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import routes from 'router';
 import store from 'store';
 import { mapStateToProps } from '@u';
@@ -40,7 +41,12 @@ function timer(fn, time) {
 @withRouter
 @connect(
   mapStateToProps(
+    {
+      key: 'userInfoDisplay',
+      value: (root) => root.home.userInfoDisplay,
+    },
     'serviceList',
+    'quickServiceDisplay',
   ), {
     requestStart,
     requestSuccess,
@@ -71,13 +77,32 @@ class Root extends Component {
     initMessage();
   }
   render() {
+    const { userInfoDisplay, quickServiceDisplay } = this.props;
+    const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'icon-yingyong'} />) : null;
+    const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>) : null;
     return (
       <div>
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
-        <QuickServiceContainer outsideClickIgnoreClass={'icon-quanzi'} />
-        <UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>
+        <ReactCSSTransitionGroup
+          transitionName={ {
+            enter: 'animated',
+            enterActive: 'fadeInLeft',
+            leave: 'animated',
+            leaveActive: 'fadeOutLeft',
+          } } >
+          { itemUserInfo }
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+          transitionName={ {
+            enter: 'animated',
+            enterActive: 'fadeIn',
+            leave: 'animated',
+            leaveActive: 'fadeOut',
+          } } >
+          { itemQuickService }
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

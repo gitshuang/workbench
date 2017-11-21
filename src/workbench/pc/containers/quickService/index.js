@@ -10,10 +10,10 @@ import { withRouter } from 'react-router-dom';
 const {changeQuickServiceHidden,} = actions;
 
 @withRouter
-@connect(mapStateToProps(
-  'quickServiceDisplay',
-  'quickServiceAnimate',
-  'serviceList'
+@connect(
+  mapStateToProps(
+    'serviceList',
+    'quickServiceDisplay',
   ),
   {
     changeQuickServiceHidden,
@@ -21,47 +21,44 @@ const {changeQuickServiceHidden,} = actions;
 )
 @onClickOutside
 class QuickServiceContainer extends Component {
-
-  handleClickOutside(evt) {
-    const {changeQuickServiceHidden,quickServiceDisplay } = this.props;
+  handleClickOutside() {
+    const { changeQuickServiceHidden, quickServiceDisplay } = this.props;
     if(quickServiceDisplay){
       changeQuickServiceHidden();
     }
   }
 
   openApplication = () => {
-    console.log(this.props)
-    const {changeQuickServiceHidden } = this.props;
+    const { changeQuickServiceHidden } = this.props;
     changeQuickServiceHidden();
     this.props.history.push('/application');
   }
 
   render() {
-    const { quickServiceDisplay,quickServiceAnimate, serviceList } = this.props;
+    const { serviceList } = this.props;
     return (
-      <div className={`${serviceContainer} ${quickServiceAnimate}`}>
-        <div className={`${service} ` } >
-        <div className={`${serviceGroup} `}>
-          <h4>分组一</h4>
-          <ul className="clearfix">
-            {
-              serviceList.map((service, i) => (
-                <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
-              ))
-            }
-          </ul>
-        </div>
-        <div className={`${serviceGroup} `}>
-          <h4>分组二</h4>
-          <ul className="clearfix">
-            {
-              serviceList.map((service, i) => (
-                <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
-              ))
-            }
-          </ul>
-        </div>
-
+      <div className={serviceContainer}>
+        <div className={service} >
+          <div className={serviceGroup}>
+            <h4>分组一</h4>
+            <ul className="clearfix">
+              {
+                serviceList.map((service, i) => (
+                  <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
+                ))
+              }
+            </ul>
+          </div>
+          <div className={serviceGroup}>
+            <h4>分组二</h4>
+            <ul className="clearfix">
+              {
+                serviceList.map((service, i) => (
+                  <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
+                ))
+              }
+            </ul>
+          </div>
         </div>
         <div className={`${serviceBtn} ` }><button className="btn" onClick={this.openApplication}>全部服务</button></div>
       </div>

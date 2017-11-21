@@ -14,7 +14,7 @@ const defaultState = {
   userInfo: {},
   widgetList: [],
   workList: [],
-  userInfoDisplay: "userInfohidden",
+  userInfoDisplay: false,
 };
 
 /*
@@ -57,28 +57,14 @@ const reducer = handleActions({
   [getUserInfo]: createReducer('userInfo'),
   [getWidgetList]: createReducer('widgetList'),
   [getWorkList]: createReducer('workList'),
-  [changeUserInfoDisplay]: (state) => {
-    const newState = {
-      ...state,
-      userInfoDisplay: " animated fadeInLeft"
-    };
-    if(state.userInfoDisplay === " animated fadeInLeft"){
-      newState.userInfoDisplay = " animated fadeOutLeftBig";
-    }else if(state.userInfoDisplay === " animated fadeOutLeftBig"){
-      newState.userInfoDisplay = " animated fadeInLeft";
-    }
-    return newState;
-  },
-  [hideUserInfoDisplay]: (state) => {
-    const newState = {
-      ...state,
-      userInfoDisplay: "userInfohidden"
-    };
-    if(state.userInfoDisplay !== "userInfohidden"){
-      newState.userInfoDisplay = " animated fadeOutLeftBig";
-    }
-    return newState;
-  },
+  [changeUserInfoDisplay]: (state) => ({
+    ...state,
+    userInfoDisplay: true,
+  }),
+  [hideUserInfoDisplay]: (state) => ({
+    ...state,
+    userInfoDisplay: false,
+  }),
 }, defaultState);
 
 

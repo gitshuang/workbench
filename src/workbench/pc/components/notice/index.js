@@ -66,7 +66,7 @@ class Notice extends Component {
         <p title={content}>{content}</p>
         {
           btns.map((btn, i) => (
-            <Button  className={`${notice}Btn  btn`+i} size="sm" style={{ color: `${btn.btnColor}` }} onClick={ this.handClick.bind(this,i) } >{btn.typeBtn}</Button>
+            <Button key={i} className={`${notice}Btn  btn`+i} size="sm" style={{ color: `${btn.btnColor}` }} onClick={ this.handClick.bind(this,i) } >{btn.typeBtn}</Button>
           ))
         }
         <div className="hideAuto" onClick={ this.hideClick.bind(this) }><Icon type="xiaoxi" /></div>

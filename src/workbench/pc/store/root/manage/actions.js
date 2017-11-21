@@ -6,6 +6,7 @@ import {
 
 const {
   SET_WORK_LIST,
+  SET_INIT_LIST,
   ADD_GROUP,
   DELECT_GROUP,
   RENAME_GROUP,
@@ -23,6 +24,7 @@ export default createActions(
     [SET_WORK_LIST]: setWorkList,
   },
   ADD_GROUP,
+  SET_INIT_LIST,
   DELECT_GROUP,
   RENAME_GROUP,
   MOVE_GROUP,

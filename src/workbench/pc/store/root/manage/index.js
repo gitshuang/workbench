@@ -4,6 +4,7 @@ import actions from './actions';
 
 const {
   setWorkList,
+  setInitList,
   addGroup,
   delectGroup,
   renameGroup,
@@ -29,6 +30,13 @@ const reducer = handleActions({
     return {
       ...state,
     };
+  },
+  [setInitList]: (state, { payload: workList }) => {
+    console.log(workList);
+    return{
+      ...state,
+      workList,
+    }
   },
   [addGroup]: (state, { payload: workList }) => {
     console.log(workList);
