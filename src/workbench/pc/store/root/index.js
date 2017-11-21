@@ -132,12 +132,12 @@ const reducer = handleActions({
     const newState = {
       ...state,
       quickServiceDisplay: true,
-      quickServiceAnimate: " animated zoomIn"
+      quickServiceAnimate: " animated fadeInUp"
     };
-    if(state.quickServiceAnimate === " animated zoomIn"){
-      newState.quickServiceAnimate = " animated fadeOutUpBig";
-    }else if(state.quickServiceAnimate === " animated fadeOutUpBig"){
-      newState.quickServiceAnimate = " animated zoomIn";
+    if(state.quickServiceAnimate === " animated fadeInUp"){
+      newState.quickServiceAnimate = " animated fadeOutDown";
+    }else if(state.quickServiceAnimate === " animated fadeOutDown"){
+      newState.quickServiceAnimate = " animated fadeInUp";
     }
     return newState;
   },
@@ -148,7 +148,7 @@ const reducer = handleActions({
       quickServiceAnimate: "quickServiceHidden"
     };
     if(state.quickServiceAnimate !== "quickServiceHidden"){
-      newState.quickServiceAnimate = " animated fadeOutUpBig";
+      newState.quickServiceAnimate = " animated fadeOutDown";
     }
     return newState;
   },

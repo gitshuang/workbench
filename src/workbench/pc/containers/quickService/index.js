@@ -41,27 +41,26 @@ class QuickServiceContainer extends Component {
     return (
       <div className={`${serviceContainer} ${quickServiceAnimate}`}>
         <div className={`${service} ` } >
-        <div className={`${serviceGroup} `}>
-          <h4>分组一</h4>
-          <ul className="clearfix">
-            {
-              serviceList.map((service, i) => (
-                <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
-              ))
-            }
-          </ul>
-        </div>
-        <div className={`${serviceGroup} `}>
-          <h4>分组二</h4>
-          <ul className="clearfix">
-            {
-              serviceList.map((service, i) => (
-                <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
-              ))
-            }
-          </ul>
-        </div>
-
+          <contentDiv className={`${serviceGroup} `}>
+            <h4>分组一</h4>
+            <ul className="clearfix">
+              {
+                serviceList.map((service, i) => (
+                  <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
+                ))
+              }
+            </ul>
+          </contentDiv>
+          <contentDiv className={`${serviceGroup} `}>
+            <h4>分组二</h4>
+            <ul className="clearfix">
+              {
+                serviceList.map((service, i) => (
+                  <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
+                ))
+              }
+            </ul>
+          </contentDiv>
         </div>
         <div className={`${serviceBtn} ` }><button className="btn" onClick={this.openApplication}>全部服务</button></div>
       </div>
