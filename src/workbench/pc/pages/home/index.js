@@ -12,7 +12,6 @@ import { page_home, button_group, selected, WidgetCont, WidgetTitle, HeaderLeft,
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
-import Modal from 'bee-modal';
 import HeaderPage from './HeaderPage';
 import Navbar, { ElementsWrapper } from 'components/scroll-nav';
 

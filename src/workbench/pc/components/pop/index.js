@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {pop_cont} from "./style.css";
 import PropTypes from "prop-types";
+import Modal from 'bee-modal';
 
 const propTypes = {
 	show:PropTypes.bool.isRequired,
