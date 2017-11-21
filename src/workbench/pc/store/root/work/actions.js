@@ -24,7 +24,8 @@ const {
   SET_ADD_GROUP,
   GET_PIN_GROUP,
   SET_PIN_CANCEL,
-  ADD_BRM
+  ADD_BRM,
+  RETURN_DEFAULT_STATE
 } = types;
 
 export default createActions({
@@ -44,5 +45,6 @@ export default createActions({
   PIN_DISPLAY_BLOCK,
   PIN_DISPLAY_NONE,
   ADD_BRM,
+  RETURN_DEFAULT_STATE,
   { namespace: 'work' }
 );
