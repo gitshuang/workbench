@@ -37,7 +37,8 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'img/[name]-[hash:8].[ext]'
+          // name: 'img/[name]-[hash:8].[ext]'
+          name: 'img/[name].[ext]'
         }
       },
       {
@@ -45,7 +46,8 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'font/[name]-[hash:8].[ext]'
+          // name: 'font/[name]-[hash:8].[ext]'
+          name: 'font/[name].[ext]'
         }
       }
     ]
