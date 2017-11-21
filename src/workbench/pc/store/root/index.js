@@ -12,8 +12,8 @@ import actions from './actions';
 //import Button from 'bee-button';
 import Notice from 'components/notice';
 
-
 const notification = Notification.newInstance({ position: 'bottomRight' });
+const maxMessageShowNum = 3;
 
 const {
   requestStart,
@@ -23,71 +23,15 @@ const {
   getMessage,
   changeQuickServiceDisplay,
   changeQuickServiceHidden,
-  pushMessageQueue,
+  popMessage,
 } = actions;
 
 const defaultState = {
   serviceList: [],
   quickServiceDisplay: false,
-  messageList:[]
+  messageList:[],
+  messageShowNum:0,
 };
-
-//消息推送
-function pushMessageListQueue() {
-  let messageNotice = [];
-  //typeof window.messageList === "undefined" && (window.messageList = JSON.parse(localStorage.getItem("user_myMessage") || "[]"));
-
-  if(window.messageList.length === 1 && window.remainingNum>0){
-    const [first, ...messageTemp] = window.messageList;
-    window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
-    messageNotice = [first];
-    window.messageList = messageTemp;
-  }else if(window.messageList.length===2 && window.remainingNum>0){
-    if(window.remainingNum===1){
-      const [first, ...messageTemp] = window.messageList;
-      window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
-      messageNotice = [first];
-      window.messageList = messageTemp;
-    }else {
-      const [first, second, ...messageTemp] = window.messageList;
-      window.remainingNum = (window.remainingNum - 2) < 0 ? 0 : (window.remainingNum - 2);
-      messageNotice = [first].concat([second]);
-      window.messageList = messageTemp;
-      // messageNotice = [...[first],...[second]];
-    }
-  }else if(window.messageList.length>=3 && window.remainingNum>0){
-    if(window.remainingNum===1){
-      const [first, ...messageTemp] = window.messageList;
-      window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
-      messageNotice = [first];
-      window.messageList = messageTemp;
-    }else if(window.remainingNum===2){
-      const [first, second, ...messageTemp] = window.messageList;
-      window.remainingNum = (window.remainingNum - 2) < 0 ? 0 : (window.remainingNum - 2);
-      messageNotice = [...[first],...[second]];
-      window.messageList = messageTemp;
-    }else {
-      const [first, second, third, ...messageTemp] = window.messageList;
-      window.remainingNum = (window.remainingNum - 3) < 0 ? 0 : (window.remainingNum - 3);
-      messageNotice = [first].concat([second]).concat([third]);
-      window.messageList = messageTemp;
-    }
-  }
-  //localStorage.setItem('user_myMessage', JSON.stringify(window.messageList));
-
-  if (messageNotice.length>0) {
-    messageNotice.forEach((m) => {
-      notification.notice({
-        title:m.title,
-        content: <Notice data={m} />,
-        color:m.color,
-        duration: null,
-        closable: true,
-      });
-    });
-  }
-  return messageNotice;
-}
 
 const reducer = handleActions({
   [requestStart](state) {
@@ -117,15 +61,54 @@ const reducer = handleActions({
     };
   },
   [getMessage]: (state, { payload: message, error }) => {
-    typeof window.remainingNum === "undefined" && (window.remainingNum = 3); //剩余条数 默认剩余3条
-    window.messageList = [...(window.messageList || []), ...message,];
-    pushMessageListQueue(); //消息推送
-    return state;
-  },
+    if (error) {
+      return state;
+    }
+    const { messageShowNum, messageList } = state;
+    const newMessageList = messageList.concat(message);
+    let newMessageShowNum = messageShowNum;
+    const popNums = maxMessageShowNum - messageShowNum;
+    if (popNums > 0) {
+      for (let i = 0, l = popNums; i < l; i++) {
+        let m = newMessageList.shift();
+        newMessageShowNum += 1;
+        notification.notice({
+          title:m.title,
+          content: <Notice data={m} />,
+          color:m.color,
+          duration: null,
+          closable: true,
+        });
+      }
+    }
 
-  [pushMessageQueue]: state => {
-    pushMessageListQueue();
-    return state;
+    return {
+      ...state,
+      messageList: newMessageList,
+      messageShowNum: newMessageShowNum,
+    };
+  },
+  [popMessage]: state => {
+    const { messageShowNum, messageList } = state;
+    const newMessageList = messageList.concat([]);
+    let newMessageShowNum = messageShowNum;
+    if (messageList.length) {
+      let m = newMessageList.shift();
+      notification.notice({
+        title:m.title,
+        content: <Notice data={m} />,
+        color:m.color,
+        duration: null,
+        closable: true,
+      });
+    } else {
+      newMessageShowNum -= 1;
+    }
+    return {
+      ...state,
+      messageList: newMessageList,
+      messageShowNum: newMessageShowNum,
+    };
   },
   [changeQuickServiceDisplay]: state => ({
     ...state,
