@@ -65,7 +65,8 @@
           "location": "http://www.yonyou.com/index.html?t=0.15068910546594472"
         }
       ],
-      "withTab": true
+      "withTab": true,
+      "widthBrm":true
     }
   },
   "msg": "",

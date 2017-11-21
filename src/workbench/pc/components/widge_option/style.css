@@ -1,0 +1,21 @@
+.option_ul{
+	 display: -webkit-box;
+	 -webkit-box-align: center;
+    -webkit-box-pack: center;
+
+	height: 100%;
+	width: 100%;
+	// justify-content:center;	
+	// align-items:center;
+}
+
+.option_ul li{
+	-webkit-box-flex:1.0;
+	padding: 0 20px;
+	cursor: pointer;
+}
+
+.option_ul li:hover{
+	background:#ccc;
+	border-radius:50%;
+}

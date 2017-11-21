@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { mapStateToProps } from '@u';
 /*   actions   */
 import rootActions from 'store/root/actions';
@@ -24,7 +23,7 @@ import styles from './style.css';
 const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap, } = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
-const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, } = workActions;
+const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, returnDefaultState} = workActions;
 
 
 @withRouter
@@ -50,6 +49,8 @@ const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel,
         getProductInfo,
         pinDisplayBlock,
         setPinCancel,
+        returnDefaultState
+
     }
 )
 export default class Work extends Component {
@@ -61,6 +62,7 @@ export default class Work extends Component {
             loaded: false,
             domainName: '',
             type: 1,
+            widthBrm:false
         };
         this.goBack = this.goBack.bind(this);
         this.pinDisplay = this.pinDisplay.bind(this);
@@ -76,7 +78,7 @@ export default class Work extends Component {
             if (error) {
                 requestError(payload);
             } else {
-                const {domain: {name: domainName, }, menuRoot: {menus, withTab, }, curFunc: {id: currentId}, } = payload;
+                const {domain: {name: domainName, }, menuRoot: {menus, withTab, widthBrm}, curFunc: {id: currentId}, } = payload;
                 let type = 1;
                 if (menus && menus.length) {
                     type = 2;
@@ -88,6 +90,7 @@ export default class Work extends Component {
                     loaded: true,
                     domainName,
                     type,
+                    widthBrm,
                 })
                 let _menus = [];
                 Object.assign(_menus,menus);
@@ -99,6 +102,10 @@ export default class Work extends Component {
         });
     }
 
+    componentWillUnmount(){
+        const {returnDefaultState} = this.props;
+        returnDefaultState();
+    }
     findArray(array,key, curId) {
       let b = false;
        array.map(function(da,i){
@@ -110,11 +117,11 @@ export default class Work extends Component {
     }
 
     getParentNodeById(menus, curId,parent) {
-      
+
       for (let i = 0, l = menus.length; i < l; i++) {
         const menu = menus[i];
         const {children } = menu;
-        
+
         if(parent){
             if(menus[i].parent){
               if(!findArray(menu.parent,"id",curId)){
@@ -201,7 +208,7 @@ export default class Work extends Component {
             }
         }
     }
- 
+
     render() {
         const {pinType, titleServiceDisplay, current: {title, hasRelationFunc, }, } = this.props;
         const { loaded, type, domainName } = this.state;
@@ -229,7 +236,9 @@ export default class Work extends Component {
               </HeaderContainer>
             </div>
             <div className={`um-content ${workArea}`}>
-              <BreadcrumbContainer withSidebar={ type !== 1 }/>
+                {
+                    this.state.widthBrm?<BreadcrumbContainer withSidebar={ type !== 1 }/>:null
+                }
               { this.makeLayout() }
             </div>
             <QuickServiceContainer outsideClickIgnoreClass={'icon-xiala'}/>

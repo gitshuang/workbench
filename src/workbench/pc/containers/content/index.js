@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { content, contentArea, active } from './style.css';
 import IFrame from 'components/iframe';
-import {TEST_IFRAME_EVENT} from 'public/message';
 
 @connect(
   mapStateToProps(
@@ -45,7 +44,7 @@ class ContentContainer extends Component {
                   [active]: currentId === id,
                 }
               )} >
-                <IFrame title={id} url={location} messType={TEST_IFRAME_EVENT} />
+                <IFrame title={id} url={location} />
               </div>
             ))
           }
@@ -55,7 +54,7 @@ class ContentContainer extends Component {
       return (
         <div className={contentArea} >
           <div className={content} >
-            <IFrame title={currentId} url={currentLocation} messType={TEST_IFRAME_EVENT} />
+            <IFrame title={currentId} url={currentLocation} />
           </div>
         </div>
       );

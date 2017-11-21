@@ -4,6 +4,7 @@ import actions from './actions';
 
 const {
   setWorkList,
+  setInitList,
   addGroup,
   delectGroup,
   renameGroup,
@@ -11,6 +12,7 @@ const {
   addFolder,
   delectFolder,
   renameFolder,
+  splitFolder,
   addServe,
   delectServe,
   moveServe,
@@ -29,6 +31,13 @@ const reducer = handleActions({
       ...state,
     };
   },
+  [setInitList]: (state, { payload: workList }) => {
+    console.log(workList);
+    return{
+      ...state,
+      workList,
+    }
+  },
   [addGroup]: (state, { payload: workList }) => {
     console.log(workList);
     return{
@@ -40,10 +49,12 @@ const reducer = handleActions({
     ...state,
     workList,
   }),
-  [renameGroup]: (state, { payload: workList }) => ({
-    ...state,
-    workList,
-  }),
+  [renameGroup]: (state, { payload: workList }) => {
+    return{
+      ...state,
+      workList,
+    }
+  },
   [moveGroup]: (state, { payload: workList }) => ({
     ...state,
     workList,
@@ -57,6 +68,10 @@ const reducer = handleActions({
     workList,
   }),
   [renameFolder]: (state, { payload: workList }) => ({
+    ...state,
+    workList,
+  }),
+  [splitFolder]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),

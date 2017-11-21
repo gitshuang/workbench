@@ -10,13 +10,10 @@ import Button from 'bee-button';
 import Tabs, { TabPane } from 'bee-tabs';
 import Icon from 'components/icon';
 import onClickOutside from 'react-onclickoutside';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import 'assets/style/animate.css';
 
 const {
   getUserInfo,
   hideUserInfoDisplay,
-  userInfoDisplay
 } = homeActions;
 
 const {
@@ -24,19 +21,27 @@ const {
   requestSuccess,
   requestError,
 } = rootActions;
+
 @connect(
-  ()=>({}),
+  mapStateToProps(
+    'userInfo',
+    'userInfoDisplay',
+    {
+      namespace: 'home',
+    },
+  ),
   {
-    hideUserInfoDisplay
+    requestStart,
+    requestSuccess,
+    requestError,
+    hideUserInfoDisplay,
+    getUserInfo,
   }
 )
-
-
 @onClickOutside
 class UserInfoContainer extends Component {
   static propTypes = {
     userInfo: PropTypes.object,
-    userInfoDisplay: PropTypes.string,
     getUserInfo: PropTypes.func,
     hideUserInfoDisplay: PropTypes.func,
     requestStart: PropTypes.func,
@@ -44,9 +49,9 @@ class UserInfoContainer extends Component {
     requestError: PropTypes.func,
   }
 
-  handleClickOutside(evt) {
-    const {changeQuickServiceHidden,hideUserInfoDisplay,userInfoDisplay } = this.props;
-    if(userInfoDisplay !== "userInfohidden" && userInfoDisplay === " animated fadeInLeft"){
+  handleClickOutside() {
+    const { hideUserInfoDisplay, userInfoDisplay } = this.props;
+    if(userInfoDisplay){
       hideUserInfoDisplay();
     }
   }
@@ -72,9 +77,9 @@ class UserInfoContainer extends Component {
   }
 
   render() {
-    const { userInfoDisplay, userInfo: { name, company, phone, imgsrc } } = this.props;
+    const { userInfo: { name, company, phone, imgsrc } } = this.props;
     return (
-      <div  className={`${wrap}  ${userInfoDisplay}`}  >
+      <div  className={wrap} >
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner}/>
         </div>
@@ -86,7 +91,7 @@ class UserInfoContainer extends Component {
           </ul>
         </div>
         <div className={loginOut}>
-          <Button className={wrapBtn}  size="sm" onClick={ this.handleClick }>注销</Button>
+          <Button className={wrapBtn}  size="sm" onClick={ this.handleClick.bind(this) }>注销</Button>
         </div>
 
         <div className={"um-content" + ` ${tabContent}`}>
@@ -119,17 +124,4 @@ class UserInfoContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps(
-  'userInfoDisplay',
-  'userInfo',
-  {
-    namespace: 'home',
-  },
-),
-{
-  getUserInfo,
-  hideUserInfoDisplay,
-  requestStart,
-  requestSuccess,
-  requestError,
-})(UserInfoContainer);
+export default UserInfoContainer;

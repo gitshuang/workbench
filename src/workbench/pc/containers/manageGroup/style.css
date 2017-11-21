@@ -1,0 +1,9 @@
+.WidgetTitle{
+  height: 50px;
+  line-height: 50px;
+  color:rgba(136,136,136,1);
+}
+.WidgetTitle :global(.iconfont){
+  font-size: 30px;
+  margin-right: 20px;
+}

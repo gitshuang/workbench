@@ -18,6 +18,7 @@ const {
   setPinCancel,
   delTab,
   addBrm,
+  returnDefaultState
 } = actions;
 
 
@@ -188,6 +189,7 @@ const reducer = handleActions({
     ...state,
     pinDisplay: false,
   }),
+  [returnDefaultState]:state => defaultState
 }, defaultState);
 
 export default reducer;

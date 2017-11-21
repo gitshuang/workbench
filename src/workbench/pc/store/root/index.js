@@ -29,7 +29,6 @@ const {
 const defaultState = {
   serviceList: [],
   quickServiceDisplay: false,
-  quickServiceAnimate: "quickServiceHidden",
   messageList:[]
 };
 
@@ -128,30 +127,14 @@ const reducer = handleActions({
     pushMessageListQueue();
     return state;
   },
-  [changeQuickServiceDisplay]: state => {
-    const newState = {
-      ...state,
-      quickServiceDisplay: true,
-      quickServiceAnimate: " animated zoomIn"
-    };
-    if(state.quickServiceAnimate === " animated zoomIn"){
-      newState.quickServiceAnimate = " animated fadeOutUpBig";
-    }else if(state.quickServiceAnimate === " animated fadeOutUpBig"){
-      newState.quickServiceAnimate = " animated zoomIn";
-    }
-    return newState;
-  },
-  [changeQuickServiceHidden]: state => {
-    const newState = {
-      ...state,
-      quickServiceDisplay: false,
-      quickServiceAnimate: "quickServiceHidden"
-    };
-    if(state.quickServiceAnimate !== "quickServiceHidden"){
-      newState.quickServiceAnimate = " animated fadeOutUpBig";
-    }
-    return newState;
-  },
+  [changeQuickServiceDisplay]: state => ({
+    ...state,
+    quickServiceDisplay: true,
+  }),
+  [changeQuickServiceHidden]: state => ({
+    ...state,
+    quickServiceDisplay: false,
+  }),
 }, defaultState);
 
 export default function (state, action) {

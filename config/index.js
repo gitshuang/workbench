@@ -1,8 +1,10 @@
 var build = require('./prod')
 var dev = require('./dev')
+var test = require('./test')
 var configs = {
   build: build,
-  dev: dev
+  dev: dev,
+  test: test,
 }
 
 module.exports = function (key) {

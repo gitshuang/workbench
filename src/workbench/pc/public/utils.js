@@ -14,8 +14,7 @@ export const createTypes = (...types) => types.reduce((obj, type) => {
 const getHost = (key = 'api') => {
   const hosts = {
     api: {
-      release: 'https://yyapp.yonyoucloud.com/personas',
-      production: 'http://uastest.yyuap.com/personas',
+      production: '/workbench',
       development: '',
     },
   };

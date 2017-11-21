@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js"
   },
   "dependencies": {
     "animate.css": "^3.5.2",
@@ -14,6 +15,7 @@
     "babel-runtime": "^6.26.0",
     "bee-button": "^1.0.2",
     "bee-button-group": "^1.0.0",
+    "bee-form-control": "^1.0.4",
     "bee-icon": "^1.0.3",
     "bee-loading": "^1.0.2",
     "bee-menus": "^1.0.2",
@@ -35,6 +37,7 @@
     "react-onclickoutside": "^6.6.3",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-scroll": "^1.6.4",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-logger": "^3.0.6",

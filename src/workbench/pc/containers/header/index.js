@@ -21,7 +21,7 @@ class HeaderContainer extends Component {
 
   openService(event) {
 
-    const { changeQuickServiceDisplay, quickServiceDisplay,quickServiceAnimate } = this.props;
+    const { changeQuickServiceDisplay, quickServiceDisplay } = this.props;
     if( !quickServiceDisplay){
       changeQuickServiceDisplay();
     }
@@ -87,7 +87,6 @@ class HeaderContainer extends Component {
 
 export default connect(mapStateToProps(
   'quickServiceDisplay',
-  "quickServiceAnimate",
   'messageType',
 ),
   {
