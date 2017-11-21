@@ -24,7 +24,7 @@ import styles from './style.css';
 const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap, } = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
-const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, } = workActions;
+const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, returnDefaultState} = workActions;
 
 
 @withRouter
@@ -50,6 +50,8 @@ const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel,
         getProductInfo,
         pinDisplayBlock,
         setPinCancel,
+        returnDefaultState
+
     }
 )
 export default class Work extends Component {
@@ -101,6 +103,10 @@ export default class Work extends Component {
         });
     }
 
+    componentWillUnmount(){
+        const {returnDefaultState} = this.props;
+        returnDefaultState();
+    }
     findArray(array,key, curId) {
       let b = false;
        array.map(function(da,i){

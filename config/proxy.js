@@ -13,6 +13,7 @@ var api = [
   '/setPinAdd',
   '/setAddGroup',
   '/getPinGroup',
+  '/setWorkList',
 ]
 
 function makeRapConfig(key) {
