@@ -7,19 +7,13 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'assets/style/base.css';
-import {
-    page_home,
-    button_group,
-    selected,
-    WidgetCont,
-    WidgetTitle,
-    HeaderLeft
-} from './style.css';
+import { page_home, button_group, selected, WidgetCont, WidgetTitle, HeaderLeft,item ,navbar} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
 import Modal from 'bee-modal';
 import HeaderPage from './HeaderPage';
+import Navbar, { ElementsWrapper } from 'components/scroll-nav';
 
 const {wrap, } = baseStyles;
 
@@ -52,9 +46,9 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            workList:[],
+            workList: [],
             showModal: false,
-            modalData:[]
+            modalData: []
         }
         this.getWorkService();
     }
@@ -64,17 +58,17 @@ class Home extends Component {
         const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
 
         getWorkList().then(({error, payload}) => {
-          if (error) {
-            requestError(payload);
-          } else {
-            let workList = [];
-            Object.assign(workList, payload);
-            workList[0].selected = true;
-            this.setState({
-              workList,
-            });
-            requestSuccess();
-          }
+            if (error) {
+                requestError(payload);
+            } else {
+                let workList = [];
+                Object.assign(workList, payload);
+                workList[0].selected = true;
+                this.setState({
+                    workList,
+                });
+                requestSuccess();
+            }
         });
 
     }
@@ -85,23 +79,23 @@ class Home extends Component {
         if (!widgetList.length) {
             requestStart();
             getWidgetList().then(({error, payload}) => {
-              if (error) {
-                requestError(payload);
-              } else {
-                requestSuccess();
-              }
+                if (error) {
+                    requestError(payload);
+                } else {
+                    requestSuccess();
+                }
             });
         }
     }
 
-    setLiSelected(id){
+    setLiSelected(id) {
 
-        this.state.workList.map(function(da,i){
+        this.state.workList.map(function(da, i) {
             da.selected = false;
         })
 
-        this.state.workList.map(function(da,i){
-            if((da.id+"_"+i) == id){
+        this.state.workList.map(function(da, i) {
+            if ((da.id + "_" + i) == id) {
                 da.selected = true;
             }
         })
@@ -120,7 +114,7 @@ class Home extends Component {
                 behavior: "smooth"
             });
         }
-        if(index == 0 ){
+        if (index == 0) {
             scrollTo(0, 0);
         }
         this.setLiSelected(id);
@@ -150,48 +144,78 @@ class Home extends Component {
 
     render() {
 
-        const {
-            changeUserInfoDisplay,
-            widgetList,
-            changeTitleServiceDisplay
-        } = this.props;
-        let {
-            workList
-        } = this.state;
+         const containerStyle = {
+            width: "100%",
+            margin: "70px 0 100px"
+        }
+
+        const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
+        let {workList} = this.state;
 
         let self = this;
         let lis = [];
         let conts = [];
 
+        // if (workList.length != 0) {
+
+        //     workList.map(function(da, i) {
+        //         let _id = da.id + "_" + i;
+
+        //         let firstLi = i != 0 ? <div className={WidgetTitle} >{da.name}</div> : null;
+
+        //         let selectedClass = da.selected ? selected : null;
+
+        //         // lis.push({ label:da.name,target: "nav" + da.id});
+        //         lis.push({
+        //             label: da.name,
+        //             target: "nav" + da.id
+        //         })
+        //         //lis.push(<li key={da.id+i} onClick={()=>self.scrollToAnchor(i,_id)}><a className={selectedClass}>{da.name}</a></li>);
+
+        //         conts.push(<div name={"nav"+da.id} className={item}  key={'WidgetArea'+da.id}>
+        //             {firstLi}
+        //             <div className={WidgetCont} name={da.id} >
+        //                 <WidgetArea data={da.widgeList} change={self.changeModal} > </WidgetArea>
+        //             </div>
+
+        //         </div>);
+        //     });
+        // }
+
+
         if (workList.length != 0) {
-            workList.map(function(da, i) {
-                let _id = da.id + "_" + i;
 
-                let firstLi = i != 0 ? <div className={WidgetTitle} >{da.name}</div> : null;
+            workList.map(function(da, i) { 
 
-                let selectedClass = da.selected ? selected : null;
+                lis.push({label: da.name, target: "nav" + da.id });
 
-                lis.push(<li key={da.id+i} onClick={()=>self.scrollToAnchor(i,_id)}><a className={selectedClass}>{da.name}</a></li>);
+                let firstLi = i != 0 ? <div className={WidgetTitle} key={"widge"+i}>{da.name}</div> : null;
 
-                conts.push(<div key={'WidgetArea'+da.id} id={da.id+"_"+i}>
+                // conts.push(<div name={"nav" + da.id} className={item}>{da.name}</div>);
+                conts.push(<div name={"nav"+da.id} className={item}  key={'nav'+da.id}>
                     {firstLi}
-                    <div  className={WidgetCont} name={da.id} >
+                    <div className={WidgetCont} name={da.id} >
                         <WidgetArea data={da.widgeList} change={self.changeModal} > </WidgetArea>
                     </div>
-
                 </div>);
-            });
-        }
 
+            })
+        }
+        
         return (
         <div className={page_home}>
 
-          <HeaderPage lis={lis}></HeaderPage>
-
+          <HeaderPage lis={lis}> </HeaderPage>
+          
           <div className="content">
-             {conts}
-          </div>
 
+            <div style={containerStyle}>
+                <ElementsWrapper items={lis}>
+                    {conts}
+                </ElementsWrapper>
+            </div>
+
+          </div>
 
           <Modal show = { self.state.showModal } onHide = { self.close } >
               <Modal.Header>

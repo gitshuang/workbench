@@ -61,6 +61,7 @@ export default class Work extends Component {
             loaded: false,
             domainName: '',
             type: 1,
+            widthBrm:false
         };
         this.goBack = this.goBack.bind(this);
         this.pinDisplay = this.pinDisplay.bind(this);
@@ -76,7 +77,7 @@ export default class Work extends Component {
             if (error) {
                 requestError(payload);
             } else {
-                const {domain: {name: domainName, }, menuRoot: {menus, withTab, }, curFunc: {id: currentId}, } = payload;
+                const {domain: {name: domainName, }, menuRoot: {menus, withTab, widthBrm}, curFunc: {id: currentId}, } = payload;
                 let type = 1;
                 if (menus && menus.length) {
                     type = 2;
@@ -88,6 +89,7 @@ export default class Work extends Component {
                     loaded: true,
                     domainName,
                     type,
+                    widthBrm,
                 })
                 let _menus = [];
                 Object.assign(_menus,menus);
@@ -229,7 +231,9 @@ export default class Work extends Component {
               </HeaderContainer>
             </div>
             <div className={`um-content ${workArea}`}>
-              <BreadcrumbContainer withSidebar={ type !== 1 }/>
+                {
+                    this.state.widthBrm?<BreadcrumbContainer withSidebar={ type !== 1 }/>:null
+                }
               { this.makeLayout() }
             </div>
             <QuickServiceContainer outsideClickIgnoreClass={'icon-xiala'}/>

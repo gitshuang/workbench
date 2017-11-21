@@ -8,8 +8,9 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 // import baseStyles from 'public/base.css';
-import {button_group} from './style.css';
+import {button_group,navbar} from './style.css';
 import {header} from './header_page.css';
+import Navbar from 'components/scroll-nav';
 
 // const {wrap, } = baseStyles;
 
@@ -50,7 +51,6 @@ class HeaderPage extends Component {
     }
 
     render() {
-
         const {changeUserInfoDisplay} = this.props;
         let {workList} = this.state;
 
@@ -60,9 +60,8 @@ class HeaderPage extends Component {
                   <span>首页</span>
             </Header>
 
-            <ul className={button_group}>
-               {this.props.lis}
-            </ul>
+            <Navbar className={navbar} items={this.props.lis} offset={-80} height={30} duration={500} delay={0}> </Navbar>
+
           </div>
         );
     }
