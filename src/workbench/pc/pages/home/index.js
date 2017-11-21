@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from 'containers/header';
 import WidgetArea from 'components/widgetArea';
+import PopDialog from 'components/pop';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -144,45 +145,18 @@ class Home extends Component {
 
     render() {
 
-         const containerStyle = {
+        const containerStyle = {
             width: "100%",
             margin: "70px 0 100px"
         }
 
         const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
-        let {workList} = this.state;
 
+        let {workList} = this.state;
         let self = this;
         let lis = [];
         let conts = [];
-
-        // if (workList.length != 0) {
-
-        //     workList.map(function(da, i) {
-        //         let _id = da.id + "_" + i;
-
-        //         let firstLi = i != 0 ? <div className={WidgetTitle} >{da.name}</div> : null;
-
-        //         let selectedClass = da.selected ? selected : null;
-
-        //         // lis.push({ label:da.name,target: "nav" + da.id});
-        //         lis.push({
-        //             label: da.name,
-        //             target: "nav" + da.id
-        //         })
-        //         //lis.push(<li key={da.id+i} onClick={()=>self.scrollToAnchor(i,_id)}><a className={selectedClass}>{da.name}</a></li>);
-
-        //         conts.push(<div name={"nav"+da.id} className={item}  key={'WidgetArea'+da.id}>
-        //             {firstLi}
-        //             <div className={WidgetCont} name={da.id} >
-        //                 <WidgetArea data={da.widgeList} change={self.changeModal} > </WidgetArea>
-        //             </div>
-
-        //         </div>);
-        //     });
-        // }
-
-
+ 
         if (workList.length != 0) {
 
             workList.map(function(da, i) { 
@@ -191,7 +165,6 @@ class Home extends Component {
 
                 let firstLi = i != 0 ? <div className={WidgetTitle} key={"widge"+i}>{da.name}</div> : null;
 
-                // conts.push(<div name={"nav" + da.id} className={item}>{da.name}</div>);
                 conts.push(<div name={"nav"+da.id} className={item}  key={'nav'+da.id}>
                     {firstLi}
                     <div className={WidgetCont} name={da.id} >
@@ -208,36 +181,19 @@ class Home extends Component {
           <HeaderPage lis={lis}> </HeaderPage>
           
           <div className="content">
-
             <div style={containerStyle}>
                 <ElementsWrapper items={lis}>
                     {conts}
                 </ElementsWrapper>
             </div>
-
           </div>
 
-          <Modal show = { self.state.showModal } onHide = { self.close } >
-              <Modal.Header>
-                  <Modal.Title>文件夹类型</Modal.Title>
-              </Modal.Header>
-
-              <Modal.Body>
-                <div className={WidgetCont} >
-                    {
-                        self.state.modalData.length != 0?<WidgetArea data={self.state.modalData} > </WidgetArea>:null
-                    }
-                </div>
-              </Modal.Body>
-
-              <Modal.Footer>
-
-              </Modal.Footer>
-          </Modal>
+          <PopDialog show = { self.state.showModal } close = { self.close }>
+            {self.state.modalData.length != 0?<WidgetArea data={self.state.modalData} > </WidgetArea>:null}
+          </PopDialog>
 
         </div>);
     }
 }
-
 export default Home;
 
