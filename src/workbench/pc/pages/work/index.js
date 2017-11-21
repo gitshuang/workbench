@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { mapStateToProps } from '@u';
 /*   actions   */
 import rootActions from 'store/root/actions';
@@ -118,11 +117,11 @@ export default class Work extends Component {
     }
 
     getParentNodeById(menus, curId,parent) {
-      
+
       for (let i = 0, l = menus.length; i < l; i++) {
         const menu = menus[i];
         const {children } = menu;
-        
+
         if(parent){
             if(menus[i].parent){
               if(!findArray(menu.parent,"id",curId)){
@@ -209,7 +208,7 @@ export default class Work extends Component {
             }
         }
     }
- 
+
     render() {
         const {pinType, titleServiceDisplay, current: {title, hasRelationFunc, }, } = this.props;
         const { loaded, type, domainName } = this.state;
