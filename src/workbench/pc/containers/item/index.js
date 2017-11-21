@@ -51,11 +51,11 @@ function collectTaget(connect, monitor) {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
+    //index: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
-    moveCard: PropTypes.func.isRequired,
+    //moveCard: PropTypes.func.isRequired,
   }
   render(){
     const { text, connectDragSource, connectDropTarget,isDragging} = this.props;
