@@ -11,6 +11,7 @@ const {
   addFolder,
   delectFolder,
   renameFolder,
+  splitFolder,
   addServe,
   delectServe,
   moveServe,
@@ -57,6 +58,10 @@ const reducer = handleActions({
     workList,
   }),
   [renameFolder]: (state, { payload: workList }) => ({
+    ...state,
+    workList,
+  }),
+  [splitFolder]: (state, { payload: workList }) => ({
     ...state,
     workList,
   }),
