@@ -18,3 +18,19 @@
 .WidgetCont{
 
 }
+
+.edit_cont{
+    display: -webkit-box;
+}
+.form_control{
+    -webkit-box-flex:1;
+    width: 200px;
+}
+.save_btn{
+    -webkit-box-flex:1;
+    width: 60px;
+}
+.close_btn{
+    -webkit-box-flex:1;
+    width: 60px;
+}

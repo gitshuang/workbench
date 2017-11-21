@@ -4,13 +4,12 @@ import PropTypes from "prop-types";
 import Icon from 'bee-icon';
 
 const propTypes = {
-	url:PropTypes.string,
-	// messageData:PropTypes.object,//message 数据
-	// messType:PropTypes.string,//message 事件key
-	// messageHandler:PropTypes.func //回调函数
+	delete:PropTypes.fun,
+	add:PropTypes.fun,
+	edit:PropTypes.fun
 }
 
-class Iframe extends Component{
+class WidgeOption extends Component{
 
 	constructor(props) {
         super(props);
@@ -20,14 +19,13 @@ class Iframe extends Component{
     render() {
     	return (
 	    	<ul className={option_ul}>
-	    		<li><Icon type="uf-pencil" /></li>
-	    		<li><Icon type="uf-del" /></li>
-	    		<li><Icon type="uf-add-c-o" /></li>
+	    		<li onClick={this.props.edit} ><Icon type="uf-pencil"/></li>
+	    		<li onClick={this.props.delete} ><Icon type="uf-del" /></li>
+	    		<li onClick={this.props.add} ><Icon type="uf-add-c-o" /></li>
 	    </ul>);
    }
 
 }
 
-Iframe.propTypes = propTypes;
-
-export default Iframe;
+WidgeOption.propTypes = propTypes;
+export default WidgeOption;

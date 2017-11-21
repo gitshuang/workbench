@@ -11,9 +11,11 @@
 
 .option_ul li{
 	-webkit-box-flex:1.0;
-
+	padding: 0 20px;
+	cursor: pointer;
 }
 
-.option_ul li{
-	padding: 0 20px;
+.option_ul li:hover{
+	background:#ccc;
+	border-radius:50%;
 }

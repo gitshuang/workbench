@@ -142,6 +142,22 @@ class Home extends Component {
         });
     }
 
+    save = (rsData) => {
+
+        let {workList} = this.state;
+
+        workList.map(function(da, i) {
+
+            if(da.id == rsData.id){
+                da.name = rsData.name;
+            }
+        })
+
+        this.setState({
+            workList:this.state.workList
+        })
+    }
+
     render() {
 
         const containerStyle = {
@@ -162,7 +178,7 @@ class Home extends Component {
 
                 lis.push({label: da.name, target: "nav" + da.id });
 
-                conts.push(<WidgeList key={'nav'+da.id} data={da} index={i} change={self.changeModal}  />);
+                conts.push(<WidgeList key={'nav'+da.id} data={da} index={i} change={self.changeModal} save={ self.save } />);
             })
         }
         
