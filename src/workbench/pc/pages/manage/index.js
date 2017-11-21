@@ -31,7 +31,6 @@ const { addGroup } = manageActions;
 @connect(
   mapStateToProps(
     'widgetList',
-    'workList',
     {
       namespace: 'home',
     }
@@ -200,7 +199,7 @@ class Home extends Component {
       <div className={page_home}>
         <div className={header}>
           <Header onLeftClick={ changeUserInfoDisplay } leftContent={this.getLeftContent} iconName={'wode'}>
-            <span>首页</span>
+            <span>首页编辑</span>
           </Header>
         </div>
         <div className="content">
