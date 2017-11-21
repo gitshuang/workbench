@@ -1,12 +1,13 @@
 import { createActions } from 'redux-actions';
 import types from './types';
 import {
-  setWorkList,
+  setManageList,
+  getManageList
 } from './api';
 
 const {
-  SET_WORK_LIST,
-  SET_INIT_LIST,
+  SET_MANAGE_LIST,
+  GET_MANAGE_LIST,
   ADD_GROUP,
   DELECT_GROUP,
   RENAME_GROUP,
@@ -21,10 +22,10 @@ const {
 
 export default createActions(
   {
-    [SET_WORK_LIST]: setWorkList,
+    [SET_MANAGE_LIST]: setManageList,
+    [GET_MANAGE_LIST]: getManageList,
   },
   ADD_GROUP,
-  SET_INIT_LIST,
   DELECT_GROUP,
   RENAME_GROUP,
   MOVE_GROUP,

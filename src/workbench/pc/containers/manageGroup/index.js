@@ -40,7 +40,7 @@ class ManageGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      manageList: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
+      manageData: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
       groupName:  "",
       editFlag: false
     }
@@ -88,15 +88,12 @@ class ManageGroup extends Component {
 
   delectGroupFn =(index) =>{
     const { delectGroup } = this.props;
-    let manageList = this.state.manageList;
-    manageList.splice(index,1);
-    this.setState({
-      manageList : manageList
-    });
+    delectGroup(index);
   }
 
-  addGroupFn =() =>{
-    alert("添加文件夹")
+  addGroupFn =(index) =>{
+    const { addGroup } = this.props;
+    addGroup(index);
   }
   addFolderFn = ()=> {
 
@@ -107,8 +104,8 @@ class ManageGroup extends Component {
 
 
   render() {
-    const { manageList,index } = this.props;
-    let _id = manageList.id + "_" + index;
+    const { manageData,index } = this.props;
+    let _id = manageData.id + "_" + index;
     let groupTitle = null;
     if(this.state.editFlag) {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
@@ -120,7 +117,7 @@ class ManageGroup extends Component {
       </div>;
     }else {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
-        <h6>{manageList.name}</h6>
+        <h6>{manageData.name}</h6>
         <div>
           <Icon type="dingzhi" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
           <Icon type="momozhushou" onClick={ ()=>{this.delectGroupFn(index)} }/>
@@ -132,10 +129,10 @@ class ManageGroup extends Component {
       <div key={index} id={_id}>
         { groupTitle }
         <div>
-          <WidgetArea data={manageList.widgeList} />
+          <WidgetArea data={manageData.widgeList} />
         </div>
         <div>
-          <button className="btn" onClick={()=>{this.addGroupFn()}}>添加分组</button>
+          <button className="btn" onClick={()=>{this.addGroupFn(index)}}>添加分组</button>
         </div>
       </div>
     );

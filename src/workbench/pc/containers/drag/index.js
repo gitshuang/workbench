@@ -40,6 +40,7 @@ class Drag extends Component {
   }
 
   moveItem(id, afterId) {
+    //debugger;
     const { items } = this.state;
 
     const item = items.filter(i => i.id === id)[0];
