@@ -6,6 +6,7 @@ import { Loading, Notification } from 'tinper-bee';
 import home from './home';
 import work from './work';
 import application from './application';
+import manage from './manage';
 import actions from './actions';
 //import types from './types';
 //import Button from 'bee-button';
@@ -120,60 +121,6 @@ const reducer = handleActions({
     typeof window.remainingNum === "undefined" && (window.remainingNum = 3); //剩余条数 默认剩余3条
     window.messageList = [...(window.messageList || []), ...message,];
     pushMessageListQueue(); //消息推送
-
-    // let messageNotice = [];
-    // //typeof window.messageList === "undefined" && (window.messageList = JSON.parse(localStorage.getItem("user_myMessage") || "[]"));
-    // typeof window.remainingNum === "undefined" && (window.remainingNum = 3); //剩余条数 默认剩余3条
-    // window.messageList = [...(window.messageList || []), ...message,];
-    // if(window.messageList.length === 1 && window.remainingNum>0){
-    //   const [first, ...messageTemp] = window.messageList;
-    //   window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
-    //   messageNotice = [first];
-    //   window.messageList = messageTemp;
-    // }else if(window.messageList.length===2 && window.remainingNum>0){
-    //   if(window.remainingNum===1){
-    //     const [first, ...messageTemp] = window.messageList;
-    //     window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
-    //     messageNotice = [first];
-    //     window.messageList = messageTemp;
-    //   }else {
-    //     const [first, second, ...messageTemp] = window.messageList;
-    //     window.remainingNum = (window.remainingNum - 2) < 0 ? 0 : (window.remainingNum - 2);
-    //     messageNotice = [first].concat([second]);
-    //     window.messageList = messageTemp;
-    //     // messageNotice = [...[first],...[second]];
-    //   }
-    // }else if(window.messageList.length>=3 && window.remainingNum>0){
-    //   if(window.remainingNum===1){
-    //     const [first, ...messageTemp] = window.messageList;
-    //     window.remainingNum = (window.remainingNum - 1) < 0 ? 0 : (window.remainingNum - 1);
-    //     messageNotice = [first];
-    //     window.messageList = messageTemp;
-    //   }else if(window.remainingNum===2){
-    //     const [first, second, ...messageTemp] = window.messageList;
-    //     window.remainingNum = (window.remainingNum - 2) < 0 ? 0 : (window.remainingNum - 2);
-    //     messageNotice = [...[first],...[second]];
-    //     window.messageList = messageTemp;
-    //   }else {
-    //     const [first, second, third, ...messageTemp] = window.messageList;
-    //     window.remainingNum = (window.remainingNum - 3) < 0 ? 0 : (window.remainingNum - 3);
-    //     messageNotice = [first].concat([second]).concat([third]);
-    //     window.messageList = messageTemp;
-    //   }
-    // }
-    // //localStorage.setItem('user_myMessage', JSON.stringify(window.messageList));
-    //
-    // if (!error && messageNotice.length>0) {
-    //   messageNotice.forEach((m) => {
-    //     notification.notice({
-    //       title:m.title,
-    //       content: <Notice data={m} click/>,
-    //       color:m.color,
-    //       duration: null,
-    //       closable: true,
-    //     });
-    //   });
-    // }
     return state;
   },
 
@@ -212,7 +159,8 @@ export default function (state, action) {
   const pageState = {
     home: home(state ? state.home : undefined, action),
     work: work(state ? state.work : undefined, action),
-    application: work(state ? state.application : undefined, action),
+    application: application(state ? state.application : undefined, action),
+    manage: manage(state ? state.manage : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;

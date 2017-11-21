@@ -46,8 +46,7 @@ class Notice extends Component {
   }
   hideClick(){
     window.remainingNum++;
-    //执行getMessage逻辑
-    //store.dispatch(getMessage())
+    //执行pushMessageQueue消息推送
     store.dispatch(pushMessageQueue())
   }
 

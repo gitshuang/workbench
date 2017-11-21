@@ -1,0 +1,96 @@
+.page_home{
+
+}
+
+.page_home .header{
+    min-height: 44px;
+}
+
+.page_home :global(.content){
+    padding-top: 130px;
+    padding-left: 100px;
+}
+/*
+:global(.um-content){
+    padding-top: 30px;
+    padding-left: 100px;
+}*/
+
+.button_group{
+    width: 100%;
+    height: 40px;
+    background: #fff;
+}
+
+.button_group li{
+    width: 100px;
+    margin: auto;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    /*background: #ccc;*/
+    /*margin-left: 10px;*/
+    float: left;
+    cursor:pointer;
+
+    font-size:15px;
+    font-family:MicrosoftYaHei;
+    color:rgba(136,136,136,1);
+}
+
+.button_group li:hover {
+    /*border-bottom: 4px solid #e14b4a;*/
+}
+
+.button_group li a{
+    /*width: 100px;*/
+    /*text-decoration:underline;*/
+    /*border-bottom:1px solid red*/
+}
+
+.selected{
+    border-bottom: 4px solid #E14C46 ;
+    color:rgba(74,81,93,1);
+}
+
+
+.WidgetCont{
+
+    /*background: yellow;*/
+}
+
+.WidgetTitle{
+    height: 50px;
+    line-height: 50px;
+    color:rgba(136,136,136,1);
+}
+
+.li_hr{
+    width:14px;
+    height:6px;
+    background:rgba(225,76,70,1);
+    border-radius: 2px ;
+}
+
+.page_home :global(.lebra-navbar-left-icon){
+  background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
+  background: #BEC1C8;
+  border: 1px solid #FFFFFF;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.header{
+  position: fixed!important;
+  width: 100%;
+  z-index: 100;
+}
+
+.HeaderLeft{
+
+}
+
+.HeaderLeft img{
+  width: 58px;
+  height: 27px;
+}

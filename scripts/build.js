@@ -33,7 +33,7 @@ rm(assetsRoot, err => {
 
     var namedChunks = stats.compilation.namedChunks;
     var options = stats.compilation.options;
-    var htmlDir = path.join(__dirname, '..', 'dist', 'html')
+    var htmlDir = path.join(__dirname, '..', 'dist')
     Object.keys(webpackConfig.entry).forEach(function(entry){
       var templatePath = path.join(__dirname, '..', 'template', `${entry}.ejs`)
       var defaultTemplatePath = path.join(__dirname, '..', 'template', 'default.ejs')
@@ -56,7 +56,6 @@ rm(assetsRoot, err => {
             index: namedChunks[entry].files[0].replace(/(^js\/)|(\.js$)/g, ''),
             manifest: namedChunks['manifest'].files[0],
             vendor: namedChunks['vendor'].files[0],
-            summer: '/appserver_web/static/js'
           })
         );
       } catch (e) {

@@ -1,6 +1,7 @@
 import Home from 'pages/home';
 import Work from 'pages/work';
 import Application from 'pages/application';
+import Manage from 'pages/manage';
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '/application',
     component: Application,
+  },
+  {
+    path: '/manage',
+    component: Manage,
   },
 ];
 
