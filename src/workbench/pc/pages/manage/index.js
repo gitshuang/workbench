@@ -16,7 +16,7 @@ import { HeaderLeft } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
-
+const {setInitList} = manageActions;
 
 @withRouter
 @connect(
@@ -33,6 +33,7 @@ const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
     getWidgetList,
     getWorkList,
     changeUserInfoDisplay,
+    setInitList
   }
 )
 
@@ -47,7 +48,7 @@ class Home extends Component {
   }
 
   getWorkService() {
-    const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
+    const {requestStart, requestSuccess, requestError, getWorkList,setInitList} = this.props;
     getWorkList().then(({error, payload}) => {
       if (error) {
         requestError(payload);
@@ -55,8 +56,9 @@ class Home extends Component {
         let workList = [];
         Object.assign(workList, payload);
         this.setState({
-          workList,
+          workList
         });
+        setInitList(workList);
         requestSuccess();
       }
     });
@@ -85,17 +87,29 @@ class Home extends Component {
     )
   }
 
+  renderContent =() => {
+    let workList = this.state.workList;
+    let list = [];
+    if(workList.length == 0) return;
+    workList.map((item, index) =>{
+      list.push(
+        <ManageGroup manageList={item} index={index} key={index}/>
+      )
+    });
+    return list;
+  }
+
   render() {
     const { changeUserInfoDisplay, widgetList, } = this.props;
     return (
       <div className="um-win">
         <div className="um-header">
-          <Header onLeftClick={ changeUserInfoDisplay } leftContent={this.getLeftContent} iconName={'wode'}>
+          <Header onLeftClick={ changeUserInfoDisplay } leftContent={this.getLeftContent()} iconName={'wode'}>
             <span>首页编辑</span>
           </Header>
         </div>
         <div className="um-content">
-          <ManageGroup workList={this.state.workList} />
+          {this.renderContent()}
         </div>
         <div className="um-footer">
           <div className="tr">

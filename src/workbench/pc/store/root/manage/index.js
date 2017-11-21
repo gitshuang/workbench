@@ -49,10 +49,12 @@ const reducer = handleActions({
     ...state,
     workList,
   }),
-  [renameGroup]: (state, { payload: workList }) => ({
-    ...state,
-    workList,
-  }),
+  [renameGroup]: (state, { payload: workList }) => {
+    return{
+      ...state,
+      workList,
+    }
+  },
   [moveGroup]: (state, { payload: workList }) => ({
     ...state,
     workList,
