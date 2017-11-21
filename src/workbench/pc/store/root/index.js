@@ -3,17 +3,36 @@ import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import { mergeReducers } from '@u';
 import { Loading, Notification } from 'tinper-bee';
+import Notice from 'components/notice';
+import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
 import home from './home';
 import work from './work';
 import application from './application';
 import manage from './manage';
 import actions from './actions';
-//import types from './types';
-//import Button from 'bee-button';
-import Notice from 'components/notice';
 
-const notification = Notification.newInstance({ position: 'bottomRight' });
+const notification = Notification.newInstance({
+  position: 'bottomRight',
+});
 const maxMessageShowNum = 3;
+function addMessage(message) {
+  if (message) {
+    const {
+      title,
+      color,
+    } = message;
+    notification.notice({
+      title,
+      content: <Notice data={message} />,
+      color,
+      duration: null,
+      closable: false,
+      onClose: () => {
+        dispathMessageTypeHandler('action:{"type":"POP_MESSAGE"}');
+      }
+    });
+  }
+}
 
 const {
   requestStart,
@@ -70,15 +89,8 @@ const reducer = handleActions({
     const popNums = maxMessageShowNum - messageShowNum;
     if (popNums > 0) {
       for (let i = 0, l = popNums; i < l; i++) {
-        let m = newMessageList.shift();
         newMessageShowNum += 1;
-        notification.notice({
-          title:m.title,
-          content: <Notice data={m} />,
-          color:m.color,
-          duration: null,
-          closable: true,
-        });
+        addMessage(newMessageList.shift());
       }
     }
 
@@ -93,14 +105,9 @@ const reducer = handleActions({
     const newMessageList = messageList.concat([]);
     let newMessageShowNum = messageShowNum;
     if (messageList.length) {
-      let m = newMessageList.shift();
-      notification.notice({
-        title:m.title,
-        content: <Notice data={m} />,
-        color:m.color,
-        duration: null,
-        closable: true,
-      });
+      setTimeout(() => {
+        addMessage(newMessageList.shift());
+      }, 300);
     } else {
       newMessageShowNum -= 1;
     }

@@ -17,6 +17,14 @@ const handlers = {
     },
     test(data) {
         store.dispatch(addBrm(data));
+    },
+    action(actionStr) {
+      try {
+        const action = JSON.parse(actionStr);
+        store.dispatch(action);
+      } catch(e) {
+        console.log(e);
+      }
     }
 }
 
@@ -29,11 +37,14 @@ export function regMessageTypeHandler() {
     });
 }
 export function dispathMessageTypeHandler(type) {
-    const typeParser = type.split(':');
-    const dataProp = typeParser[0];
-    const param = typeParser[1];
-    const event = new CustomEvent(dataProp, {
-        detail: param
+    const firstColonIndex = type.indexOf(':');
+    let detail;
+    if ( firstColonIndex !== -1) {
+      detail = type.slice(firstColonIndex + 1);
+      type = type.slice(0, firstColonIndex);
+    }
+    const event = new CustomEvent(type, {
+      detail,
     });
     document.dispatchEvent(event);
 }

@@ -46,5 +46,4 @@ export default createActions({
   PIN_DISPLAY_NONE,
   ADD_BRM,
   RETURN_DEFAULT_STATE,
-  { namespace: 'work' }
 );

@@ -73,7 +73,7 @@ class Root extends Component {
         requestSuccess();
       }
     });
-    // timer(getMessage, 30000);
+    timer(getMessage, 10000);
     regMessageTypeHandler.call(this);
     initMessage();
   }

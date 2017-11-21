@@ -4,13 +4,8 @@ import store from 'store';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
 import Button from 'bee-button';
-import rootActions from 'store/root/actions';
 import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
 import "./index.css"
-
-const {
-  popMessage,
-} = rootActions;
 
 class Notice extends Component {
   static propTypes = {
@@ -33,9 +28,6 @@ class Notice extends Component {
       // return false;
     }
   }
-  hideClick(){
-    store.dispatch(popMessage())
-  }
 
   render() {
     const {
@@ -56,7 +48,7 @@ class Notice extends Component {
             <Button key={i} className={`${notice}Btn  btn`+i} size="sm" style={{ color: `${btn.btnColor}` }} onClick={ this.handClick(i) } >{btn.typeBtn}</Button>
           ))
         }
-        <div className="hideAuto" onClick={ this.hideClick }><Icon type="xiaoxi" /></div>
+        <div className="hideAuto"><Icon type="xiaoxi" /></div>
       </div>
     );
   }

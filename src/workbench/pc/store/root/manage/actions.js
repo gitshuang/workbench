@@ -35,7 +35,4 @@ export default createActions(
   ADD_SERVE,
   DELECT_SERVE,
   MOVE_SERVE,
-  {
-    namespace: 'manage'
-  },
 );
