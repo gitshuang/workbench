@@ -15,25 +15,23 @@ import 'assets/style/iuapmobile.um.css';
 import { HeaderLeft } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
-const {setInitList} = manageActions;
+const {changeUserInfoDisplay} = homeActions;
+const { getManageList } = manageActions;
 
 @withRouter
 @connect(
   mapStateToProps(
-    'widgetList',
+    'manageList',
     {
-      namespace: 'home',
+      namespace: 'manage',
     }
   ),
   {
     requestStart,
     requestSuccess,
     requestError,
-    getWidgetList,
-    getWorkList,
     changeUserInfoDisplay,
-    setInitList
+    getManageList
   }
 )
 
@@ -41,41 +39,22 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      workList: [], // 拷贝的worklist
-    }
-    this.getWorkService();
   }
 
-  getWorkService() {
-    const {requestStart, requestSuccess, requestError, getWorkList,setInitList} = this.props;
-    getWorkList().then(({error, payload}) => {
+  componentDidMount() {
+    const { requestError, requestSuccess, getManageList } = this.props;
+    getManageList().then(({error, payload}) => {
       if (error) {
         requestError(payload);
       } else {
-        let workList = [];
-        Object.assign(workList, payload);
-        this.setState({
-          workList
-        });
-        setInitList(workList);
         requestSuccess();
       }
     });
-  }
-
-  componentWillMount() {
-    const {requestStart, requestSuccess, requestError, getWidgetList, widgetList, } = this.props;
-    if (!widgetList.length) {
-      requestStart();
-      getWidgetList().then(({error, payload}) => {
-        if (error) {
-          requestError(payload);
-        } else {
-          requestSuccess();
-        }
-      });
-    }
+    //let manageList = [];
+    //Object.assign(manageList, workList);
+    //this.setState({
+      //manageList
+    //});
   }
 
   getLeftContent() {
@@ -88,19 +67,19 @@ class Home extends Component {
   }
 
   renderContent =() => {
-    let workList = this.state.workList;
+    let { manageList } = this.props;
     let list = [];
-    if(workList.length == 0) return;
-    workList.map((item, index) =>{
+    if(manageList.length == 0) return;
+    manageList.map((item, index) =>{
       list.push(
-        <ManageGroup manageList={item} index={index} key={index}/>
+        <ManageGroup manageData={item} index={index} key={index}/>
       )
     });
     return list;
   }
 
   render() {
-    const { changeUserInfoDisplay, widgetList, } = this.props;
+    const { changeUserInfoDisplay, } = this.props;
     return (
       <div className="um-win">
         <div className="um-header">

@@ -3,8 +3,8 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-  setWorkList,
-  setInitList,
+  setManageList,
+  getManageList,
   addGroup,
   delectGroup,
   renameGroup,
@@ -19,11 +19,11 @@ const {
   } = actions;
 
 const defaultState = {
-  workList : []
+  manageList : []
 };
 
 const reducer = handleActions({
-  [setWorkList]: (state, { payload, error }) => {
+  [setManageList]: (state, { payload, error }) => {
     if (error) {
       return state;
     }
@@ -31,61 +31,87 @@ const reducer = handleActions({
       ...state,
     };
   },
-  [setInitList]: (state, { payload: workList }) => {
-    console.log(workList);
-    return{
-      ...state,
-      workList,
+  [getManageList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    } else {
+      return {
+        ...state,
+        manageList: payload,
+      };
     }
   },
-  [addGroup]: (state, { payload: workList }) => {
-    console.log(workList);
+  [addGroup]: (state, { payload: index }) => {
+    const manageList = state.manageList;
+
+    manageList.splice(index+1,0,{
+      name: '默认分组',
+      id: '',
+      icon: '',
+      "widgeList": [],
+    });
     return{
       ...state,
-      workList,
+      manageList: [...manageList],
     }
   },
-  [delectGroup]: (state, { payload: workList }) => ({
-    ...state,
-    workList,
-  }),
-  [renameGroup]: (state, { payload: workList }) => {
+  [delectGroup]: (state, { payload: index }) => {
+    const manageList = state.manageList;
+    const newList =  manageList.filter((item,i) => {
+      return index !== i;
+    });
+    if (!newList.length) {
+      newList.push({
+        name: '默认分组',
+        id: '',
+        icon: '',
+        "widgeList": [],
+      })
+    }
     return{
       ...state,
-      workList,
+      manageList: newList,
     }
   },
-  [moveGroup]: (state, { payload: workList }) => ({
+  [renameGroup]: (state, { payload: {name,index} }) => {
+    let manageList = state.manageList;
+    manageList[index].name = name;
+    return{
+      ...state,
+      manageList,
+    }
+  },
+  [moveGroup]: (state, { payload: manageList }) => ({
     ...state,
-    workList,
+    manageList,
   }),
-  [addFolder]: (state, { payload: workList }) => ({
+  [addFolder]: (state, { payload: manageList }) => ({
     ...state,
-    workList,
+    manageList,
   }),
-  [delectFolder]: (state, { payload: workList }) => ({
+  [delectFolder]: (state, { payload: manageList }) => ({
     ...state,
-    workList,
+    manageList,
   }),
-  [renameFolder]: (state, { payload: workList }) => ({
+  [renameFolder]: (state, { payload: manageList }) => ({
     ...state,
-    workList,
+    manageList,
   }),
-  [splitFolder]: (state, { payload: workList }) => ({
+  [splitFolder]: (state, { payload: manageList }) => ({
     ...state,
-    workList,
+    manageList,
   }),
-  [addServe]: (state, { payload: workList }) => ({
+  [addServe]: (state, { payload: manageList }) => ({
     ...state,
-    workList,
+    manageList,
   }),
-  [delectServe]: (state, { payload: workList }) => ({
+  [delectServe]: (state, { payload: manageList }) => ({
     ...state,
-    workList,
+    manageList,
   }),
-  [moveServe]: (state, { payload: workList }) => ({
+  [moveServe]: (state, { payload: manageList }) => ({
     ...state,
-    workList,
+    manageList,
   }),
 }, defaultState);
 
