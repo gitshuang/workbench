@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from 'containers/header';
-import WidgetArea from 'components/widgetArea';
 import PopDialog from 'components/pop';
+import WidgeList from 'components/widge_list';
+import WidgetArea from 'components/widgetArea';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import baseStyles from 'assets/style/base.css';
-import { page_home, button_group, selected, WidgetCont, WidgetTitle, HeaderLeft,item ,navbar} from './style.css';
+import { page_home, button_group, selected, HeaderLeft ,navbar} from './style.css';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
 import Icon from 'bee-icon';
@@ -135,7 +136,6 @@ class Home extends Component {
     changeModal = (e, da) => {
         let newDa = [];
         Object.assign(newDa, da);
-
         this.setState({
             showModal: e,
             modalData: newDa
@@ -162,15 +162,7 @@ class Home extends Component {
 
                 lis.push({label: da.name, target: "nav" + da.id });
 
-                let firstLi = i != 0 ? <div className={WidgetTitle} key={"widge"+i}>{da.name}</div> : null;
-
-                conts.push(<div name={"nav"+da.id} className={item}  key={'nav'+da.id}>
-                    {firstLi}
-                    <div className={WidgetCont} name={da.id} >
-                        <WidgetArea data={da.widgeList} change={self.changeModal} > </WidgetArea>
-                    </div>
-                </div>);
-
+                conts.push(<WidgeList key={'nav'+da.id} data={da} index={i} change={self.changeModal}  />);
             })
         }
         
