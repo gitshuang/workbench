@@ -97,6 +97,9 @@ class Home extends Component {
   batchDelect =() => {
     const { batchDelect } = this.props;
     let selectGroup = this.state.selectGroup;
+    this.setState({
+      selectGroup:[]
+    });
     batchDelect(selectGroup);
   }
 
