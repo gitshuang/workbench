@@ -5,10 +5,12 @@ import actions from './actions';
 const {
   setManageList,
   getManageList,
+  batchDelect,
   addGroup,
   delectGroup,
   renameGroup,
   moveGroup,
+  stickGroup,
   addFolder,
   delectFolder,
   renameFolder,
@@ -21,6 +23,14 @@ const {
 const defaultState = {
   manageList : []
 };
+
+/*eidt = (fn)=>{
+  return(...args) {
+    result = fn(...args)
+    result.isEdit = true;
+    return result
+  }
+}*/
 
 const reducer = handleActions({
   [setManageList]: (state, { payload, error }) => {
@@ -41,9 +51,23 @@ const reducer = handleActions({
       };
     }
   },
+  [batchDelect]: (state, {payload:selectGroup}) => {
+    const manageList = state.manageList;
+    selectGroup.map((item,index)=>{
+      manageList[item] = false;
+    });
+    const newList =  manageList.filter((val,key) => {
+      return val != false;
+    });
+
+    console.log(newList);
+    return {
+      ...state,
+      manageList: newList
+    }
+  },
   [addGroup]: (state, { payload: index }) => {
     const manageList = state.manageList;
-
     manageList.splice(index+1,0,{
       name: '默认分组',
       id: '',
@@ -81,10 +105,24 @@ const reducer = handleActions({
       manageList,
     }
   },
+
   [moveGroup]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
   }),
+  [stickGroup]: (state, { payload: index }) => {
+    let manageList = state.manageList;
+    const curr = manageList[index];
+    const newList =  manageList.filter((item,i) => {
+      return index !== i;
+    });
+    newList.unshift(curr);
+    return{
+      ...state,
+      manageList: newList,
+      //isedit:true
+    }
+  },
   [addFolder]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
