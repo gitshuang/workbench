@@ -1,5 +1,8 @@
 import { get } from '@u';
 
-export const setWorkList = function(list){
-  return get('/setWorkList', { list });
+export const setManageList = function(list){
+  return get('/setManageList', { list });
+}
+export const getManageList = () => {
+  return get('/getManageList');
 }

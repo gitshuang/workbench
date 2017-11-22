@@ -6,10 +6,21 @@ export const mergeReducers = (...reducers) =>
     {},
   );
 
-export const createTypes = (...types) => types.reduce((obj, type) => {
-  obj[type] = type;
-  return obj;
-}, {});
+export const createTypes = (namespaceObj, ...types) => {
+  let namespace = '';
+  if (typeof namespaceObj === 'object' && namespaceObj.namespace) {
+    namespace = namespaceObj.namespace
+      .split('.')
+      .map(n => n.toUpperCase())
+      .join('/') + '/';
+  } else if (typeof namespaceObj === 'string') {
+    types = [namespaceObj].concat(types);
+  }
+  return types.reduce((obj, type) => {
+    obj[type] = `${namespace}${type}`;
+    return obj;
+  }, {});
+};
 
 const getHost = (key = 'api') => {
   const hosts = {

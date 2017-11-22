@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-//import { mapStateToProps } from '@u';
+import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
@@ -21,7 +21,11 @@ const {
   moveGroup
 } = manageActions;
 
-@connect(()=>({}),
+@connect(
+  mapStateToProps(
+    'workList',
+    {'namespace':'manage'}
+  ),
   {
     requestStart,
     requestSuccess,
@@ -36,7 +40,9 @@ class ManageGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      workList: []
+      manageData: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
+      groupName:  "",
+      editFlag: false
     }
   }
 
@@ -44,15 +50,50 @@ class ManageGroup extends Component {
 
   }
 
+  componentWillReceiveProps(nextProps){
+
+  }
+
+  // 打开编辑分组形态
+  openRenameGroupFn =(index) =>{
+    this.setState({
+      editFlag: true
+    })
+  }
+  // 点击取消编辑分组按钮
+  renameGroupCancel = (index) =>{
+    this.setState({
+      editFlag: false,
+      groupName:""
+    })
+  }
+  // 点击按钮执行 action   重新构造
   renameGroupFn =(index) =>{
     const { renameGroup } = this.props;
-    renameGroup(index);
+    let groupName = this.state.groupName;
+    let param = {
+      index: index,
+      name: groupName
+    }
+    renameGroup(param);
+    this.renameGroupCancel(index);
   }
-  delectGroupFn =() =>{
-    alert("删除")
+  // 输入框的更改
+  editGroupName = (e) =>{
+    this.setState({
+      groupName: e.target.value
+    })
   }
-  addGroupFn =() =>{
-    alert("添加文件夹")
+
+
+  delectGroupFn =(index) =>{
+    const { delectGroup } = this.props;
+    delectGroup(index);
+  }
+
+  addGroupFn =(index) =>{
+    const { addGroup } = this.props;
+    addGroup(index);
   }
   addFolderFn = ()=> {
 
@@ -61,42 +102,38 @@ class ManageGroup extends Component {
 
   }
 
-  renderGroup = () => {
-    let workList = this.props.workList;
-    let list = [];
-    if(!workList) return;
-    this.setState({
-      workList
-    });
-    workList.map((item, index) =>{
-      let _id = item.id + "_" + index;
-      let groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
-        <h6>{item.name}</h6>
+
+  render() {
+    const { manageData,index } = this.props;
+    let _id = manageData.id + "_" + index;
+    let groupTitle = null;
+    if(this.state.editFlag) {
+      groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
-          <Icon type="dingzhi" onClick={()=>{this.renameGroupFn(index)}} />
-          <Icon type="momozhushou" onClick={this.delectGroupFn}/>
+          <input type="text" value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
+          <button className="btn btn-inline" onClick={ ()=>{this.renameGroupFn(index)} }>完成</button>
+          <button className="btn btn-inline" onClick={ ()=>{this.renameGroupCancel(index)} }>取消</button>
+        </div>
+      </div>;
+    }else {
+      groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
+        <h6>{manageData.name}</h6>
+        <div>
+          <Icon type="dingzhi" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
+          <Icon type="momozhushou" onClick={ ()=>{this.delectGroupFn(index)} }/>
           <Icon type="add" onClick={this.addFolderFn}/>
         </div>
       </div>;
-      list.push(
-        <div key={index} id={_id}>
-          { groupTitle }
-          <div>
-            <WidgetArea data={item.widgeList} />
-          </div>
-          <div>
-            <button className="btn" onClick={()=>{this.addGroupFn()}}>添加分组</button>
-          </div>
-        </div>
-      );
-    });
-    return list;
-  }
-
-  render() {
+    }
     return (
-      <div>
-        {this.renderGroup()}
+      <div key={index} id={_id}>
+        { groupTitle }
+        <div>
+          <WidgetArea data={manageData.widgeList} />
+        </div>
+        <div>
+          <button className="btn" onClick={()=>{this.addGroupFn(index)}}>添加分组</button>
+        </div>
       </div>
     );
   }

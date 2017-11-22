@@ -1,8 +1,8 @@
 import { createTypes } from '@u';
 
 export default createTypes(
-  'SET_WORK_LIST',
-  'SET_INIT_LIST',
+  'SET_MANAGE_LIST',
+  'GET_MANAGE_LIST',
   'ADD_GROUP',
   'DELECT_GROUP',
   'RENAME_GROUP',

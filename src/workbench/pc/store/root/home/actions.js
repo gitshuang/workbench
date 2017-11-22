@@ -12,7 +12,4 @@ export default createActions(
     },
     CHANGE_USER_INFO_DISPLAY,
     HIDE_USER_INFO_DISPLAY,
-    {
-        namespace: 'home'
-    },
 );
