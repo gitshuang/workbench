@@ -18,7 +18,7 @@ import Navbar, { ElementsWrapper } from 'components/scroll-nav';
 
 const {wrap, } = baseStyles;
 
-const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
+const {changeUserInfoDisplay, getWorkList} = homeActions;
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 
@@ -35,7 +35,6 @@ const {requestStart, requestSuccess, requestError} = rootActions;
         requestStart,
         requestSuccess,
         requestError,
-        getWidgetList,
         getWorkList,
         changeUserInfoDisplay,
     }
@@ -51,11 +50,9 @@ class Home extends Component {
             showModal: false,
             modalData: []
         }
-        this.getWorkService();
     }
 
-    getWorkService() {
-
+    componentWillMount() {
         const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
 
         getWorkList().then(({error, payload}) => {
@@ -71,22 +68,6 @@ class Home extends Component {
                 requestSuccess();
             }
         });
-
-    }
-
-    componentWillMount() {
-
-        const {requestStart, requestSuccess, requestError, getWidgetList, getWorkList, widgetList, } = this.props;
-        if (!widgetList.length) {
-            requestStart();
-            getWidgetList().then(({error, payload}) => {
-                if (error) {
-                    requestError(payload);
-                } else {
-                    requestSuccess();
-                }
-            });
-        }
     }
 
     setLiSelected(id) {
@@ -172,10 +153,10 @@ class Home extends Component {
         let self = this;
         let lis = [];
         let conts = [];
- 
+
         if (workList.length != 0) {
 
-            workList.map(function(da, i) { 
+            workList.map(function(da, i) {
 
                 lis.push({label: da.name, target: "nav" + da.id });
 
@@ -184,12 +165,12 @@ class Home extends Component {
                 // change={self.changeModal}
             })
         }
-        
+
         return (
         <div className={page_home}>
 
           <HeaderPage lis={lis}> </HeaderPage>
-          
+
           <div className="content">
             <div style={containerStyle}>
                 <ElementsWrapper items={lis}>

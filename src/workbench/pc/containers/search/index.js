@@ -1,7 +1,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import { withRouter } from 'react-router-dom';
 import Icon from 'components/icon';
 import {
@@ -62,15 +62,17 @@ class SearchContainer extends Component {
     }
     return (
       <div className={search}>
-        <ReactCSSTransitionGroup
+        <CSSTransitionGroup
           transitionName={ {
             enter: inputEnter,
             enterActive: inputEnterActive,
             leave: inputLeave,
             leaveActive: inputLeaveActive,
-          } } >
+          } }
+          transitionEnterTimeout={0}
+          transitionLeaveTimeout={0} >
           {item}
-        </ReactCSSTransitionGroup>
+        </CSSTransitionGroup>
         <div className={`tc ${searchBtn}`} onClick={this.search} >
           <Icon type="search" />
         </div>

@@ -4,7 +4,7 @@ import {
   HashRouter as Router,
   withRouter,
 } from 'react-router-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import routes from 'router';
 import store from 'store';
 import { mapStateToProps } from '@u';
@@ -86,24 +86,28 @@ class Root extends Component {
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
-        <ReactCSSTransitionGroup
+        <CSSTransitionGroup
           transitionName={ {
             enter: 'animated',
             enterActive: 'fadeInLeft',
             leave: 'animated',
             leaveActive: 'fadeOutLeft',
-          } } >
+          } }
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300} >
           { itemUserInfo }
-        </ReactCSSTransitionGroup>
-        <ReactCSSTransitionGroup
+        </CSSTransitionGroup>
+        <CSSTransitionGroup
           transitionName={ {
             enter: 'animated',
             enterActive: 'fadeIn',
             leave: 'animated',
             leaveActive: 'fadeOut',
-          } } >
+          } }
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300} >
           { itemQuickService }
-        </ReactCSSTransitionGroup>
+        </CSSTransitionGroup>
         <Drag/>
       </div>
     );
