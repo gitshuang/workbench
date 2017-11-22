@@ -1,9 +1,11 @@
 {
   "data": {
-    "name": "张三",
+    "name": "乔布斯",
     "phone": "13306891266",
     "company": "用友交互设计师",
-    "imgsrc":"https://portal.yonyoucloud.com/workbench/user.png"
+    "imgsrc":"https://portal.yonyoucloud.com/workbench/user.png",
+    "glory" : "58",
+    "redPackets" : "88"
   },
   "status": 1
 }
