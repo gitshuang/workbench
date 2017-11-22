@@ -20,12 +20,13 @@ import { HeaderLeft } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {changeUserInfoDisplay} = homeActions;
-const { getManageList,batchDelect } = manageActions;
+const { setManageList,getManageList,batchDelect } = manageActions;
 
 @withRouter
 @connect(
   mapStateToProps(
     'manageList',
+    'isEdit',
     {
       namespace: 'manage',
     }
@@ -35,6 +36,7 @@ const { getManageList,batchDelect } = manageActions;
     requestSuccess,
     requestError,
     changeUserInfoDisplay,
+    setManageList,
     getManageList,
     batchDelect
   }
@@ -102,7 +104,32 @@ class Home extends Component {
     });
     batchDelect(selectGroup);
   }
-
+  // 保存
+  save =() => {
+    const {setManageList,manageList} = this.props;
+    setManageList(manageList).then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      } else {
+        requestSuccess();
+      }
+    });
+  }
+  // 取消
+  cancelFn = () => {
+    const {isEdit,getManageList} = this.props;
+    if(isEdit){
+      getManageList().then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        } else {
+          requestSuccess();
+        }
+      });
+    }else{
+      this.props.history.goBack();
+    }
+  }
 
   getLeftContent() {
     let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
@@ -136,7 +163,7 @@ class Home extends Component {
   }
 
   render() {
-    const { changeUserInfoDisplay, } = this.props;
+    const { changeUserInfoDisplay,isEdit } = this.props;
     return (
       <div className="um-win">
         <div className="um-header">
@@ -153,8 +180,8 @@ class Home extends Component {
               <button className="btn btn-inline" disabled={this.state.selectGroup.length ? false : true } onClick={this.batchDelect}>批量删除</button>
             </div>
             <div>
-              <button className="btn btn-inline">保存</button>
-              <button className="btn btn-inline">取消</button>
+              <button className="btn btn-inline" disabled={isEdit} onClick={this.save}>保存</button>
+              <button className="btn btn-inline" onClick={this.cancelFn}>取消</button>
             </div>
           </div>
         </div>

@@ -21,7 +21,8 @@ const {
   } = actions;
 
 const defaultState = {
-  manageList : []
+  manageList : [],
+  isEdit : false,
 };
 
 /*eidt = (fn)=>{
