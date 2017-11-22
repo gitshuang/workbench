@@ -1,0 +1,51 @@
+{
+  "data": {
+    "curMenuBar": {
+      "hasTab": true,
+      "hasTopNav": true,
+      "menuBarCode": "search",
+      "menuBarId": "1",
+      "menuBarName": "搜索",
+      "menuItems": [{
+        "children": [{
+          "children": 1,
+          "menuItemIcon": 1,
+          "serveCode": 1,
+          "serveId": 1,
+          "url": 1,
+          "menuBarId": "1",
+          "menuItemCode": "baidu",
+          "menuItemId": "3",
+          "menuItemName": "百度搜索",
+          "parentId": "1"
+        }],
+        "menuBarId": "1",
+        "menuItemCode": "search",
+        "menuItemIcon": 1,
+        "menuItemId": "1",
+        "menuItemName": "搜索",
+        "parentId": 1,
+        "serveCode": 1,
+        "serveId": 1,
+        "url": 1
+      }],
+      "single": false,
+      "tenantId": 1
+    },
+    "curServe": {
+      "relationServes": [{
+        "serveCode": "google",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serveId": 1,
+        "serveName": "谷歌",
+        "url": "https://www.google.com"
+      }],
+      "serveCode": "baidu",
+      "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+      "serveId": 1,
+      "serveName": "百度",
+      "url": "https://www.baidu.com"
+    }
+  },
+  "status": 1
+}

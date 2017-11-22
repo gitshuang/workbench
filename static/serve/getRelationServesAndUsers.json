@@ -1,0 +1,51 @@
+{
+  "status": 1,
+  "data": {
+    "serveName": "谷歌",
+    "serveCode": "google",
+    "enable": true,
+    "url": "https://www.google.com",
+    "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+    "hasWidget": true,
+    "relationServes": [{
+        "serveName": "百度",
+        "serveCode": "baidu",
+        "enable": true,
+        "url": "https://www.baidu.com",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "hasWidget": false
+      },
+      {
+        "serveName": "360急速搜索",
+        "serveCode": "360",
+        "enable": true,
+        "url": "https://www.google.com",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "hasWidget": false
+      }
+    ],
+    "relationUsers": [{
+        "company": null,
+        "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=806695075,861492878&fm=58&bpow=0&bpoh=0",
+        "userEmail": null,
+        "userName": "李彦宏",
+        "userMobile": null,
+        "userId": "111",
+        "allowTenants": null,
+        "redPacketsNum": 0,
+        "gloriesNum": 0
+      },
+      {
+        "company": null,
+        "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2825762689,1796178341&fm=58",
+        "userEmail": null,
+        "userName": "周鸿祎",
+        "userMobile": null,
+        "userId": "222",
+        "allowTenants": null,
+        "redPacketsNum": 0,
+        "gloriesNum": 0
+      }
+    ]
+  }
+}

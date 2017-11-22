@@ -1,18 +1,18 @@
 var path = require('path')
 var projectId = '27469'
 var api = [
-  '/getProductList',
+  '/serve/getServeTree',
+  '/application/getApplicationList',
+  '/getdeskTop',
+  '/widget/deleteByServeCode',
+  '/widget/create',
+  '/widget/getFolders',
+  '/serve/getServeInfoByServeCode',
+  '/serve/getServeInfoByAppCode',
+  '/serve/getRelationServesAndUsers',
+
   '/getUserInfo',
-  '/getWidgetList',
-  '/getServiceList',
   '/getMessage',
-  '/getProductInfo',
-  '/getWorkList',
-  '/getTitleService',
-  '/setPinCancel',
-  '/setPinAdd',
-  '/setAddGroup',
-  '/getPinGroup',
   '/setManageList',
   '/getManageList',
 ]

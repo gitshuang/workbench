@@ -1,7 +1,6 @@
 import { createTypes } from '@u';
 
 export default createTypes(
-  'SET_MENUS',
   'SET_CURRENT',
   'SET_EXPANDED_SIDEBAR',
   'DEL_TAB',

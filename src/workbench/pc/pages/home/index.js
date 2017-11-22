@@ -25,7 +25,6 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
-        'widgetList',
         'workList',
         {
             namespace: 'home',
@@ -147,7 +146,7 @@ class Home extends Component {
             margin: "70px 0 100px"
         }
 
-        const {changeUserInfoDisplay, widgetList, changeTitleServiceDisplay} = this.props;
+        const {changeUserInfoDisplay, changeTitleServiceDisplay} = this.props;
 
         let {workList} = this.state;
         let self = this;

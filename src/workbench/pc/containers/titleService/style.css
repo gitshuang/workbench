@@ -23,9 +23,10 @@
   width:50px;
 }
 .uf{
-  font-size:32px !important;
   padding:10px 10px !important;
   margin:0 3px;
+  width: 52px;
+  height: 52px;
   border:1px solid #fff;
 }
 .uf:hover{

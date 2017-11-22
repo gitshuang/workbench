@@ -1,0 +1,66 @@
+{
+  "data": [
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "640000200809157236",
+          "serviceId": "610000197003102455",
+          "serviceName": "ycac"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "520000197409081517",
+          "serviceId": "650000199706099586",
+          "serviceName": "qdclvoenm"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "520000200607108383",
+          "serviceId": "230000200505095324",
+          "serviceName": "glhhqnkvxq"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "420000199106183423",
+          "serviceId": "440000198812124438",
+          "serviceName": "dmycq"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "220000199905305311",
+          "serviceId": "370000201312166662",
+          "serviceName": "pvix"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "210000200906045156",
+          "serviceId": "500000198412068656",
+          "serviceName": "uhdmex"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "460000197904176736",
+          "serviceId": "620000201002087135",
+          "serviceName": "kodgbriyn"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "460000200612126766",
+          "serviceId": "15000020110915151X",
+          "serviceName": "irs"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "370000201502177231",
+          "serviceId": "820000201601152522",
+          "serviceName": "cwhobryswi"
+      },
+      {
+          "icon": "http://dummyimage.com/50x50",
+          "serviceCode": "610000200001054482",
+          "serviceId": "360000197805314853",
+          "serviceName": "uunfu"
+      }
+  ],
+  "status": 1,
+  "msg": ""
+}

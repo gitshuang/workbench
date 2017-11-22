@@ -13,22 +13,45 @@ const { setCurrent } = actions;
 //isTop:判断是否是一级菜单
 function makeMenus(menus,isTop) {
   let result = [];
-  menus.forEach(({ children, id, name }) => {
+  menus.forEach(({ children, menuItemId: id, menuItemIcon, menuItemName: name }) => {
     if (children) {
       result.push(
-        <SubMenu className={sideBarMenu} key={id} style={{fontSize:14+'px'}} title={<span><Icon type="uf-rmb" className={menuItem}/>{name}</span>}>
+        <SubMenu
+          className={sideBarMenu}
+          key={id}
+          style={{fontSize:'14px'}}
+          title={<span><img src={menuItemIcon} className={menuItem}/>{name}</span>}>
           { makeMenus(children) }
         </SubMenu>
       );
     } else {
       result.push(
-        <Item key={id} style={isTop?{fontSize:14+'px'}:null}>
+        <Item key={id} style={isTop?{fontSize:'14px'}:null}>
           {isTop?<Icon type="uf-cloud-o" className={menuItem}/>:null}
           { name }
         </Item>
       );
     }
   });
+  return result;
+}
+
+const findMenuById = (menus, curId) => {
+  let result;
+  for (let i = 0, l = menus.length; i < l; i++) {
+    const menu = menus[i];
+    const { menuItemId: id, children } = menu;
+    if (children && children.length) {
+      result = findMenuById(children, curId);
+    }
+    if (result) {
+      break;
+    }
+    if (id === curId) {
+      result = menu;
+      break;
+    }
+  }
   return result;
 }
 
@@ -41,13 +64,13 @@ const findOpenKeysById = (menus, curId) => {
     }
     for (let i = 0, l = list.length; i < l; i++) {
       const item = list[i];
-      const { id, children } = item;
+      const { serveId: id, menuItemId, children } = item;
       if (id === curId) {
         finded = true;
         break;
       }
       if (children && children.length) {
-        result.push(id);
+        result.push(menuItemId);
         loop(children);
       }
     }
@@ -77,13 +100,16 @@ class SideBarContainer extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick({ key: id }) {
+    // const { menus } = this.props;
+    // const cur = findMenuById(menus, id);
     this.props.setCurrent(id);
   }
   getDefaultOpenKeys() {
-    const { menus, current: { id } } = this.props;
+    const { menus, current: { menuItemId: id } } = this.props;
+    const menu = findMenuById(menus, id);
     return {
       defaultOpenKeys: findOpenKeysById(menus, id),
-      selectedKeys: [id]
+      selectedKeys: menu && [menu.menuItemId]
     }
   }
   render() {
@@ -97,7 +123,7 @@ class SideBarContainer extends Component {
           style={{ width: '100%' }}
           defaultOpenKeys={defaultOpenKeys}
           selectedKeys={selectedKeys}
-          mode="inline" 
+          mode="inline"
           className={sideMainMenu}>
           { makeMenus(menus,isTop) }
         </Menu>

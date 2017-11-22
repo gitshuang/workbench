@@ -10,7 +10,7 @@ const routes = [
     exact: true,
   },
   {
-    path: '/work/:productId',
+    path: '/:type/:code',
     component: Work,
   },
   {

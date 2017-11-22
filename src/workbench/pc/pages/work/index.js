@@ -13,7 +13,7 @@ import HeaderContainer from 'containers/header';
 import BreadcrumbContainer from 'containers/breadcrumb';
 import ContentContainer from 'containers/content';
 import SideBarContainer from 'containers/sideBar';
-import QuickServiceContainer from 'containers/titleService';
+import TitleServiceContainer from 'containers/titleService';
 import Pin from 'containers/pin';
 
 /*  style样式库组件  */
@@ -29,40 +29,35 @@ const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel,
 @withRouter
 @connect(
     mapStateToProps(
+        'widthBrm',
+        'domainName',
         'pinType',
         'pinDisplay',
         'current',
         'tabs',
         'menus',
         'expandedSidebar',
+        'type',
         {
             namespace: 'work'
         }
     ),
     {
-        setMenus,
-        setCurrent,
         requestStart,
         requestSuccess,
         requestError,
-        titleServiceDisplay,
         getProductInfo,
+        titleServiceDisplay,
         pinDisplayBlock,
         setPinCancel,
         returnDefaultState
-
     }
 )
 export default class Work extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            productId: this.props.match.params.productId,
-            loaded: false,
-            domainName: '',
-            type: 1,
-            widthBrm:false
+          loaded: false,
         };
         this.goBack = this.goBack.bind(this);
         this.pinDisplay = this.pinDisplay.bind(this);
@@ -71,87 +66,54 @@ export default class Work extends Component {
         this.props.history.replace('');
     }
     componentWillMount() {
-        const {getProductInfo, setCurrent, setMenus} = this.props;
-        const {productId} = this.state;
+        const {
+          match: {
+            params: {
+              code,
+              type,
+            },
+          },
+          getProductInfo,
+          requestStart,
+          requestError,
+          requestSuccess,
+        } = this.props;
         requestStart();
-        getProductInfo(productId).then(({error, payload}) => {
-            if (error) {
-                requestError(payload);
-            } else {
-                const {domain: {name: domainName, }, menuRoot: {menus, withTab, widthBrm}, curFunc: {id: currentId}, } = payload;
-                let type = 1;
-                if (menus && menus.length) {
-                    type = 2;
-                    if (withTab) {
-                        type = 3;
-                    }
-                }
-                this.setState({
-                    loaded: true,
-                    domainName,
-                    type,
-                    widthBrm,
-                })
-                let _menus = [];
-                Object.assign(_menus,menus);
-                this.getParentNodeById(_menus, currentId);
-                setMenus(_menus);
-                setCurrent(currentId);
-                requestSuccess();
-            }
+        getProductInfo(code, type).then(({error, payload}) => {
+          if (error) {
+            requestError(payload);
+          } else {
+            this.setState({
+              loaded: true,
+            })
+            requestSuccess();
+          }
         });
     }
-
     componentWillUnmount(){
-        const {returnDefaultState} = this.props;
+        const { returnDefaultState } = this.props;
         returnDefaultState();
     }
-    findArray(array,key, curId) {
-      let b = false;
-       array.map(function(da,i){
-           if(da[key] == curId){
-              b = true;
-           }
-       })
-       return b;
-    }
-
-    getParentNodeById(menus, curId,parent) {
-
-      for (let i = 0, l = menus.length; i < l; i++) {
-        const menu = menus[i];
-        const {children } = menu;
-
-        if(parent){
-            if(menus[i].parent){
-              if(!findArray(menu.parent,"id",curId)){
-                menus[i].parent.push({name:parent.name},{name:menu.name});
-              }
-            }else{
-                menus[i].parent = [{name:parent.name},{name:menu.name}];
-            }
-        }else{
-          menus[i].parent = [{name:menu.name}];
-        }
-
-        if (children && children.length) {
-          this.getParentNodeById(children, curId,menus[i]);
-        }
-      }
-      return menus;
-    }
-
-
-
     pinDisplay() {
-        const {pinDisplayBlock, pinType, pinDisplay, setPinCancel} = this.props;
+        const {
+          current: {
+            serveCode,
+          },
+          pinDisplayBlock,
+          pinType,
+          pinDisplay,
+          setPinCancel,
+          requestStart,
+          requestError,
+          requestSuccess,
+        } = this.props;
         if (pinType) {
-
-            setPinCancel().then(({error, payload}) => {
+            requestStart();
+            setPinCancel(serveCode).then(({error, payload}) => {
                 if (error) {
                     requestError(payload);
                 }
-                console.log(payload);
+                requestSuccess();
             });
             return false;
         }
@@ -160,58 +122,68 @@ export default class Work extends Component {
         }
     }
     makeLayout() {
-        const {type, loaded} = this.state;
-        const {menus, tabs, current, expandedSidebar} = this.props;
-        if (loaded) {
-            switch (type) {
-            case 1:
-                return (
-                    <div className={workArea} >
-              <ContentContainer />
-            </div>
-                );
-            case 2:
-                return (
-                    <div className={workArea} >
-              {
-                    expandedSidebar ? (
-                        <div className={sideBarArea}>
-                    <SideBarContainer />
-                  </div>
-                        ) : null
-                    }
-              <div className={contentArea}>
+      const { loaded } = this.state;
+      const { expandedSidebar, type } = this.props;
+      if (loaded) {
+        switch (type) {
+          case 1:
+            return (
+              <div className={workArea} >
                 <ContentContainer />
               </div>
-            </div>
-                );
-            case 3:
-                return (
-                    <div className={workArea} >
-                    {
-                    expandedSidebar ? (
-                        <div className={sideBarArea}>
-                    <SideBarContainer />
-                  </div>
-                        ) : null
-                    }
-              <div className={hasTab}>
+            );
+          case 2:
+            return (
+              <div className={workArea} >
+                {
+                  expandedSidebar ? (
+                    <div className={sideBarArea}>
+                      <SideBarContainer />
+                    </div>
+                  ) : null
+                }
                 <div className={contentArea}>
-                  <ContentContainer hasTab={true}/>
-                </div>
-                <div className={tabArea}>
-                  <TabsContainer />
+                  <ContentContainer />
                 </div>
               </div>
-            </div>
-                );
-            }
+            );
+          case 3:
+            return (
+              <div className={workArea} >
+                {
+                  expandedSidebar ? (
+                    <div className={sideBarArea}>
+                      <SideBarContainer />
+                    </div>
+                  ) : null
+                }
+                <div className={hasTab}>
+                  <div className={contentArea}>
+                    <ContentContainer hasTab={true} />
+                  </div>
+                  <div className={tabArea}>
+                    <TabsContainer />
+                  </div>
+                </div>
+              </div>
+            );
         }
+      }
     }
 
     render() {
-        const {pinType, titleServiceDisplay, current: {title, hasRelationFunc, }, } = this.props;
-        const { loaded, type, domainName } = this.state;
+        const {
+          pinType,
+          titleServiceDisplay,
+          current: {
+            title,
+            hasRelationFunc,
+          },
+          domainName,
+          widthBrm,
+          type,
+        } = this.props;
+        const { loaded } = this.state;
         let iconName = <Icon type="qiyejieshao" style={{fontSize:"24px"}}/>
         return (
           <div className={wrap + " um-win"}>
@@ -236,12 +208,14 @@ export default class Work extends Component {
               </HeaderContainer>
             </div>
             <div className={`um-content ${workArea}`}>
-                {
-                    this.state.widthBrm?<BreadcrumbContainer withSidebar={ type !== 1 }/>:null
-                }
+              {
+                widthBrm ? <BreadcrumbContainer withSidebar={ type !== 1 }/> : null
+              }
               { this.makeLayout() }
             </div>
-            <QuickServiceContainer outsideClickIgnoreClass={'icon-xiala'}/>
+            {
+              hasRelationFunc ? <TitleServiceContainer outsideClickIgnoreClass={'icon-xiala'}/> : null
+            }
             <Pin outsideClickIgnoreClass={'icon-dingzhi'} />
           </div>
         );

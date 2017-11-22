@@ -2,12 +2,20 @@
     "status": 1,
     "data":[
         {
-            "id":"1001",
-            "name":"代办",
-            "icon":"",
-            "widgeList":[
+            "widgetId":"1001",
+            "widgetName":"代办",
+            "type": 1,
+            "children":[
                 {
-                    "id":"1101",
+                    "background": ,
+                    "icon": ,
+                    "jsurl": ,
+                    "serviceCode": ,
+                    "size": ,
+                    "type": ,
+                    "widgetConfig": ,
+
+                    "widgetId":"1101",
                     "size":"lg",
                     "title":"入职",
                     "optionTitle":"查看"
