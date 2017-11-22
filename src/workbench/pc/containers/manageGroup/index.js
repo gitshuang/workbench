@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+
+import { DragSource, DropTarget } from 'react-dnd';
+import PropTypes from 'prop-types';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
@@ -21,6 +26,46 @@ const {
   moveGroup
 } = manageActions;
 
+const style = {
+  border: '1px dashed gray',
+  padding: '0.5rem 1rem',
+  marginBottom: '.5rem',
+  backgroundColor: 'white',
+  cursor: 'move'
+};
+
+const type='group';
+
+const itemSource = {
+  beginDrag(props) {
+    return { id: props.id };
+  }
+};
+
+const itemTarget = {
+  hover(props, monitor) {
+    const draggedId = monitor.getItem().id;
+
+    if (draggedId !== props.id) {
+      props.moveItem(draggedId, props.id);
+    }
+  }
+};
+
+function collectSource(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
+
+
+function collectTaget(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
+}
+
 @connect(
   mapStateToProps(
     'workList',
@@ -36,7 +81,18 @@ const {
     moveGroup
   }
 )
+
+
+
 class ManageGroup extends Component {
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    id: PropTypes.any.isRequired,
+    //text: PropTypes.string.isRequired,
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -104,7 +160,8 @@ class ManageGroup extends Component {
 
 
   render() {
-    const { manageData,index } = this.props;
+    const { manageData,index,connectDragSource, connectDropTarget,isDragging } = this.props;
+    const opacity = isDragging ? 0 : 1;
     let _id = manageData.id + "_" + index;
     let groupTitle = null;
     if(this.state.editFlag) {
@@ -125,8 +182,8 @@ class ManageGroup extends Component {
         </div>
       </div>;
     }
-    return (
-      <div key={index} id={_id}>
+    return connectDragSource(connectDropTarget(
+      <div key={index} id={_id} style={{ ...style, opacity }}>
         { groupTitle }
         <div>
           <WidgetArea data={manageData.widgeList} />
@@ -135,8 +192,8 @@ class ManageGroup extends Component {
           <button className="btn" onClick={()=>{this.addGroupFn(index)}}>添加分组</button>
         </div>
       </div>
-    );
+    ));
   }
 }
 
-export default ManageGroup;
+export default DragSource(type, itemSource, collectSource)(DropTarget(type,itemTarget,collectTaget)(ManageGroup));

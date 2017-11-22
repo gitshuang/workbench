@@ -29,6 +29,7 @@
 .save_btn{
     -webkit-box-flex:1;
     width: 60px;
+    margin:0 10px 0 20px;
 }
 .close_btn{
     -webkit-box-flex:1;

@@ -6,22 +6,22 @@ import Icon from 'bee-icon';
 const propTypes = {
 	delete:PropTypes.fun,
 	add:PropTypes.fun,
-	edit:PropTypes.fun
+	edit:PropTypes.fun,
+	data:PropTypes.object
 }
 
 class WidgeOption extends Component{
 
 	constructor(props) {
         super(props);
-
     }
 
     render() {
     	return (
 	    	<ul className={option_ul}>
-	    		<li onClick={this.props.edit} ><Icon type="uf-pencil"/></li>
-	    		<li onClick={this.props.delete} ><Icon type="uf-del" /></li>
-	    		<li onClick={this.props.add} ><Icon type="uf-add-c-o" /></li>
+	    		<li onClick={ ()=> {this.props.edit(this.props.data)} } ><Icon type="uf-pencil"/></li>
+	    		<li onClick={ ()=> {this.props.delete(this.props.data)} } ><Icon type="uf-del" /></li>
+	    		<li onClick={ ()=> {this.props.add(this.props.data)} }><Icon type="uf-add-c-o" /></li>
 	    </ul>);
    }
 

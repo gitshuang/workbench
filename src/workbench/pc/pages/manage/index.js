@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { DragDropContext } from 'react-dnd';
+import update from 'react/lib/update';
+import HTML5BackendGroup from 'react-dnd-html5-backend';
+
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
@@ -39,6 +43,28 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
+    this.moveItem = this.moveItem.bind(this);
+    // let { manageList } = this.props;
+    // debugger;
+    // this.state = manageList.data;
+  }
+
+  moveItem(id, afterId) {
+    const { data } = this.state;
+
+    const item = data.filter(i => i.id === id)[0];
+    const afterItem = data.filter(i => i.id === afterId)[0];
+    const itemIndex = data.indexOf(item);
+    const afterIndex = data.indexOf(afterItem);
+
+    this.setState(update(this.state, {
+      data: {
+        $splice: [
+          [itemIndex, 1],
+          [afterIndex, 0, item]
+        ]
+      }
+    }));
   }
 
   componentDidMount() {
@@ -68,11 +94,14 @@ class Home extends Component {
 
   renderContent =() => {
     let { manageList } = this.props;
+    const data = {};
+    data.data = manageList;
+    (typeof this.state === "undefined" || this.state===null || this.state.data.length===0) ? (this.state = data) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
       list.push(
-        <ManageGroup manageData={item} index={index} key={index}/>
+        <ManageGroup manageData={item} index={index} key={index}  id={item.id} moveItem={this.moveItem}/>
       )
     });
     return list;
@@ -101,5 +130,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
-
+export default DragDropContext(HTML5BackendGroup)(Home);

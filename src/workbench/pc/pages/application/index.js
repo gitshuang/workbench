@@ -6,7 +6,7 @@ import rootActions from 'store/root/actions';
 import Header from 'containers/header';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-//const {changeUserInfoDisplay, getWidgetList, getWorkList} = homeActions;
+//const {changeUserInfoDisplay, getWorkList} = homeActions;
 
 @withRouter
 @connect(
