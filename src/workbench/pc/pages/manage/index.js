@@ -20,7 +20,7 @@ import { HeaderLeft } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {changeUserInfoDisplay} = homeActions;
-const { getManageList } = manageActions;
+const { getManageList,batchDelect } = manageActions;
 
 @withRouter
 @connect(
@@ -35,7 +35,8 @@ const { getManageList } = manageActions;
     requestSuccess,
     requestError,
     changeUserInfoDisplay,
-    getManageList
+    getManageList,
+    batchDelect
   }
 )
 
@@ -44,9 +45,9 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.moveItem = this.moveItem.bind(this);
-    // let { manageList } = this.props;
-    // debugger;
-    // this.state = manageList.data;
+    this.state ={
+      selectGroup: []
+    }
   }
 
   moveItem(id, afterId) {
@@ -76,12 +77,29 @@ class Home extends Component {
         requestSuccess();
       }
     });
-    //let manageList = [];
-    //Object.assign(manageList, workList);
-    //this.setState({
-      //manageList
-    //});
   }
+  // 将此方法传递给manageGroup 组件中
+  selectGroupFn = (flag, index) => {
+    let selectGroup = this.state.selectGroup;
+    if(flag){
+      selectGroup.push(index);
+    }else{
+      selectGroup =  selectGroup.filter((item,i) => {
+        return index !== item;
+      });
+    }
+    console.log(selectGroup);
+    this.setState({
+      selectGroup
+    });
+  }
+  // 批量删除
+  batchDelect =() => {
+    const { batchDelect } = this.props;
+    let selectGroup = this.state.selectGroup;
+    batchDelect(selectGroup);
+  }
+
 
   getLeftContent() {
     let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
@@ -101,7 +119,14 @@ class Home extends Component {
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
       list.push(
-        <ManageGroup manageData={item} index={index} key={index}  id={item.id} moveItem={this.moveItem}/>
+        <ManageGroup
+          selectGroupFn={this.selectGroupFn}
+          manageData={item}
+          index={index}
+          key={item.id}
+          id={item.id}
+          moveItem={this.moveItem}
+        />
       )
     });
     return list;
@@ -120,9 +145,14 @@ class Home extends Component {
           {this.renderContent()}
         </div>
         <div className="um-footer">
-          <div className="tr">
-            <button className="btn btn-inline">保存</button>
-            <button className="btn btn-inline">取消</button>
+          <div className="um-box-justify">
+            <div>
+              <button className="btn btn-inline" disabled={this.state.selectGroup.length ? false : true } onClick={this.batchDelect}>批量删除</button>
+            </div>
+            <div>
+              <button className="btn btn-inline">保存</button>
+              <button className="btn btn-inline">取消</button>
+            </div>
           </div>
         </div>
       </div>
