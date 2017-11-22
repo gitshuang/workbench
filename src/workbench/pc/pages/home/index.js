@@ -133,14 +133,15 @@ class Home extends Component {
         });
     }
 
-    changeModal = (e, da) => {
-        let newDa = [];
-        Object.assign(newDa, da);
-        this.setState({
-            showModal: e,
-            modalData: newDa
-        });
-    }
+    // changeModal = (e, da) => {
+    //     debugger;
+    //     let newDa = [];
+    //     Object.assign(newDa, da);
+    //     this.setState({
+    //         showModal: e,
+    //         modalData: newDa
+    //     });
+    // }
 
     save = (rsData) => {
 
@@ -178,7 +179,9 @@ class Home extends Component {
 
                 lis.push({label: da.name, target: "nav" + da.id });
 
-                conts.push(<WidgeList key={'nav'+da.id} data={da} index={i} change={self.changeModal} save={ self.save } />);
+                conts.push(<WidgeList key={'nav'+da.id} data={da} index={i} save={ self.save } />);
+
+                // change={self.changeModal}
             })
         }
         
