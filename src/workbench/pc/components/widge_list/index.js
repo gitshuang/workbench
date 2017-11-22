@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {pop_cont} from "./style.css";
 import PropTypes from "prop-types";
-import WidgetArea from 'components/widgetArea';
+// import WidgetArea from 'components/widgetArea';
+//TODO 此处代码不应该调用containers中的容器，后续修改
+import WidgetArea from 'containers/widgetArea';
 import WidgeOption from 'components/widge_option';
 import PopDialog from 'components/pop';
 import { WidgetCont, WidgetTitle,item ,form_control,

@@ -25,13 +25,24 @@ const defaultState = {
   isEdit : false,
 };
 
-/*eidt = (fn)=>{
-  return(...args) {
-    result = fn(...args)
-    result.isEdit = true;
-    return result
+const findTreeById = (data, curId) => {
+  let result;
+  for (let i = 0, l = data.length; i < l; i++) {
+    const menu = data[i];
+    const { id, children } = menu;
+    if (children && children.length) {
+      result = findTreeById(children, curId);
+    }
+    if (result) {
+      break;
+    }
+    if (id === curId) {
+      result = menu;
+      break;
+    }
   }
-}*/
+  return result;
+}
 
 const reducer = handleActions({
   [setManageList]: (state, { payload, error }) => {
@@ -133,10 +144,20 @@ const reducer = handleActions({
     ...state,
     manageList,
   }),
-  [renameFolder]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
+  [renameFolder]: (state, { payload: {id,value} }) => {
+      let _manageList = JSON.parse(JSON.stringify(state.manageList));
+      let current = null;
+      for (let i = 0, l = _manageList.length; i < l; i++) {
+           let da = _manageList[i];
+           current = findTreeById(da.widgeList, id);
+           if(current)break;
+      }
+      current.title = value;
+      return{
+        ...state,
+        manageList:_manageList
+      }
+  },
   [splitFolder]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
@@ -154,5 +175,6 @@ const reducer = handleActions({
     manageList,
   }),
 }, defaultState);
+
 
 export default reducer;

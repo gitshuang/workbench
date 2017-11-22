@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Header from 'containers/header';
 import PopDialog from 'components/pop';
 import WidgeList from 'components/widge_list';
-import WidgetArea from 'components/widgetArea';
+import WidgetArea from 'containers/widgetArea';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -114,11 +114,12 @@ class Home extends Component {
         });
     }
 
-    changeModal = (e, da) => {
+    changeModal = (da) => {
+        let _showModal = this.state.showModal?false:true;
         let newDa = [];
         Object.assign(newDa, da);
         this.setState({
-            showModal: e,
+            showModal: _showModal,
             modalData: newDa
         });
     }
@@ -177,7 +178,7 @@ class Home extends Component {
           </div>
 
           <PopDialog show = { self.state.showModal } close = { self.close }>
-            {self.state.modalData.length != 0?<WidgetArea data={self.state.modalData} > </WidgetArea>:null}
+            {self.state.modalData.length != 0?<WidgetArea data={self.state.modalData} />:null}
           </PopDialog>
 
         </div>);

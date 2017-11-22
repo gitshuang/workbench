@@ -12,7 +12,7 @@ import manageActions from 'store/root/manage/actions';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import Icon from 'components/icon';
-import WidgetArea from 'components/widgetArea';
+import WidgetArea from 'containers/widgetArea';
 import {WidgetTitle} from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
