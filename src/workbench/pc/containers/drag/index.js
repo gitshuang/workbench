@@ -8,7 +8,8 @@ import { mapStateToProps } from '@u';
 const style = {
   position: 'absolute',
   width: '400px',
-  top: '100px'
+  top: '100px',
+  display:'none'
 };
 
 
