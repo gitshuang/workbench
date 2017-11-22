@@ -180,7 +180,7 @@ class Home extends Component {
               <button className="btn btn-inline" disabled={this.state.selectGroup.length ? false : true } onClick={this.batchDelect}>批量删除</button>
             </div>
             <div>
-              <button className="btn btn-inline" disabled={isEdit} onClick={this.save}>保存</button>
+              <button className="btn btn-inline" disabled={!isEdit} onClick={this.save}>保存</button>
               <button className="btn btn-inline" onClick={this.cancelFn}>取消</button>
             </div>
           </div>

@@ -104,6 +104,7 @@ const reducer = handleActions({
     return{
       ...state,
       manageList,
+      isEdit: true
     }
   },
 
