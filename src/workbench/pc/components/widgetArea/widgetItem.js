@@ -90,13 +90,13 @@ class WidgetItem extends Component {
           <Widget/>
         </div>
       );
-    } else if (id == '1101') {
+    } /*else if (id == '1101') {
       contentElm = (
         <div className={content} ref={(para) => { this.contain = para }}>
           <Loading container={this.contain} show={true} />
         </div>
       );
-    }
+    }*/
 
     return (
       <li className={widgetItem} style={widgetStyle[type]} >
