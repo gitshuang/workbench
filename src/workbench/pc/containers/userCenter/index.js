@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
-  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait
+  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon
 } from './style.css';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -13,6 +13,9 @@ import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee-tabs';
 import Icon from 'bee-icon';
 import onClickOutside from 'react-onclickoutside';
+
+import img from '../../assets/image/gloryIcon.png';
+import img2 from '../../assets/image/gloryIcon2.png';
 
 const {
   getUserInfo,
@@ -112,6 +115,10 @@ class UserInfoContainer extends Component {
           </ul>
         </div>
         <div className={userName}>{name}</div>
+        <div className={gloryIcon}>
+          <img src={img} style={{marginLeft : 144}}/>
+          <img src={img2}/>
+        </div>
         {/*<div className={userInfo}>
           <ul>
             <li>{name}</li>

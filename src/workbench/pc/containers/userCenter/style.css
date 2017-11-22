@@ -98,10 +98,15 @@
   height:20px;
   font-size:14px;
   font-family:PingFangSC-Semibold;
+  font-weight:bold;
   color:rgba(51,51,51,1);
   line-height:20px;
   text-align:center;
   margin: 0 300px 20px 0; 
+}
+.gloryIcon img{
+  margin-right:32px;
+  margin-top:-88px;
 }
 .active{
   display:block;
@@ -153,6 +158,9 @@
 .tabPane1,.tabPane2{
   height:400px;
 }
+.tabPane1 li,.tabPane2 li{
+  padding-top:14px;
+}
 .usedTit{
   float: left;
   width:56px;
@@ -178,6 +186,9 @@
   height:100%;
   margin-left:67px;
 }
+.module{
+  height:26px;
+}
 .tabPane1 :global(.uf),.tabPane2 :global(.uf){
   float: left;
   color:#B9BABB;
@@ -201,7 +212,7 @@
 }
 .userBtnList{
   margin-left: 33px;
-  margin-bottom:65px;
+  margin-bottom:45px;
 }
 .wrap :global(.u-tabs-tab-active){
   font-weight: bold;
@@ -228,4 +239,7 @@
 :global(.u-select-dropdown .u-select-dropdown-menu-item-active), :global(.u-select-dropdown .u-select-dropdown-menu-item):hover{
   background:rgba(239,239,239,1);
   color: #E14C46;
+}
+.wrap :global(.u-tabs-content){
+  // padding-top:14px;
 }
