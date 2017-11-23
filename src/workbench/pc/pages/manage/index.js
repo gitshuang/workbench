@@ -151,8 +151,9 @@ class Home extends Component {
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
+
       list.push(
-        <ManageGroup manageData={item} index={index} key={item.id + index} selectGroupFn={this.selectGroupFn}  id={item.id} moveGroupDrag={this.moveGroupDrag}/>
+        <ManageGroup manageData={item} index={index} key={item.name+index} selectGroupFn={this.selectGroupFn}  id={item.id} moveGroupDrag={this.moveGroupDrag}/>
       )
     });
     return list;

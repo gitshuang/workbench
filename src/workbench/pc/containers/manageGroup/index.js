@@ -180,10 +180,10 @@ class ManageGroup extends Component {
       this.delectGroupFn(index);
     }
   }
+
   renderDrop =(index) => {
     const menu1 = (
       <Menu
-        multiple
         onClick={(e) => {this.onDropSelect(e,index)} }>
         <MenuItem key="1">置顶</MenuItem>
         <MenuItem key="2">删除</MenuItem>
