@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import Header from 'containers/header';
+import ServiceClassify from 'containers/serviceClassify';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 //const {changeUserInfoDisplay, getWorkList} = homeActions;
@@ -42,7 +43,9 @@ class Application extends Component {
             </div>
           </Header>
         </div>
-        <div className="um-content"></div>
+        <div className="um-content">
+          <ServiceClassify /> 
+        </div>
       </div>
     );
   }
