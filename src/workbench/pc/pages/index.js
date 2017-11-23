@@ -46,7 +46,6 @@ function timer(fn, time) {
       key: 'userInfoDisplay',
       value: (root) => root.home.userInfoDisplay,
     },
-    'serviceList',
     'quickServiceDisplay',
   ), {
     requestStart,

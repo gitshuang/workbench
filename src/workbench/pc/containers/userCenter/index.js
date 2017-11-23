@@ -60,16 +60,6 @@ class UserInfoContainer extends Component {
     requestError: PropTypes.func,
   }
 
-  handleMouseEnter=() => {
-    let portrait = this.refs.portrait;
-    portrait.style.display ="block";
-  }
-
-  handleMouseLeave=() => {
-    let portrait = this.refs.portrait;
-    portrait.style.display ="none";
-  }
-
   handleClickOutside(e) {
     //在面板中操作不要关闭面板
     if(event.target.getAttribute("class") == "u-select-dropdown-menu-item-active u-select-dropdown-menu-item"){
@@ -107,13 +97,20 @@ class UserInfoContainer extends Component {
   }
 
   render() {
-    const { userInfo: { name, company, phone, imgsrc ,glory ,redPackets} } = this.props;
+    const {
+      userInfo: {
+        userName: name,
+        userAvator: imgsrc,
+        gloriesNum: glory,
+        redPacketsNum: redPackets
+      }
+    } = this.props;
     return (
       <div  className={`${wrap} ${clearfix}`}>
         <div className={imgUser}>
-          <img src={imgsrc} className={imgInner} onMouseEnter={() => this.handleMouseEnter()} />
-          <div className={editPortrait} ref="portrait" onMouseLeave={() => this.handleMouseLeave()}>
-            <Icon type="uf-pencil-s" onClick={ ()=>this.handleClick() }></Icon>
+          <img src={imgsrc} className={imgInner} />
+          <div className={editPortrait}>
+            <Icon type="uf-pencil-s" onClick={this.handleClick.bind(this)}></Icon>
           </div>
         </div>
         <div className={userInfo}>
@@ -133,17 +130,6 @@ class UserInfoContainer extends Component {
           <img src={img} style={{marginLeft : 144}}/>
           <img src={img2}/>
         </div>
-        {/*<div className={userInfo}>
-          <ul>
-            <li>{name}</li>
-            <li>{phone}</li>
-            <li>{company}</li>
-          </ul>
-        </div>
-        <div className={loginOut}>
-          <Button className={wrapBtn}  size="sm" onClick={ this.handleClick.bind(this) }>注销</Button>
-        </div>
-        */}
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
             <li><Button shape="border" size="sm">桌面管理</Button></li>

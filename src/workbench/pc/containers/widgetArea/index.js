@@ -49,12 +49,7 @@ class WidgetArea extends Component {
     //     widgeList: PropTypes.array.isRequired,
     // }
     constructor(props) {
-        super(props);
-
-        this.state = {
-            // showModal: false,
-            showRotate: false
-        }
+      super(props);
       this.moveItemDrag = this.moveItemDrag.bind(this);
     }
 
@@ -62,37 +57,41 @@ class WidgetArea extends Component {
     let data = { data: this.props.data,id,afterId,parentId}
     const { moveServe } = this.props;
     moveServe(data);
-
   }
-
-    change = (da) => {
-        if (da.fileList) {
-            this.props.change(da.fileList);
-        } else {
-            console.log("数据错误!");
+  render() {
+      const lis = [];
+      const { data } = this.props;
+      const list = data.map((item, i) => {
+        const {
+          type,
+          WidgetId: id,
+          widgetName: name
+        } = item;
+        switch (type) {
+          case 2:
+            return (
+              <WidgeFileItem
+                key={`widget-file-${id}-${i}`}
+                data={item}
+                id={id}
+                index={id}
+                moveItemDrag={this.moveItemDrag}
+              />
+            );
+          default:
+            return (
+              <WidgetItem
+                key={`widget-${id}-${i}`}
+                data={item}
+                id={id}
+                index={id}
+                moveItemDrag={this.moveItemDrag}
+              />
+            );
         }
-    }
-
-    render() {
-
-        let self = this;
-        let lis = [];
-        let liList = this.props.data;
-        if(liList){
-          liList.map((da, i) => {
-
-            if (da.type && da.type == "file") {
-
-                lis.push(<WidgeFileItem key={`widget-file-${da.id}-${i}`} data={da} change={self.change} id={da.id} index={da.id} moveItemDrag={this.moveItemDrag}/>);
-
-            } else {
-
-                lis.push(<WidgetItem key={`widget-${da.id}-${i}`}  data={da} id={da.id} index={da.id} moveItemDrag={this.moveItemDrag}/>);
-            }
-          })
-        }
-      return (<ul className={widgetList} >{lis}</ul>);
-    }
+      })
+    return (<ul className={widgetList} >{list}</ul>);
+  }
 }
 
 export default WidgetArea;

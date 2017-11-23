@@ -1,0 +1,27 @@
+{
+  "data": [{
+      "children": [{
+        "enable": true,
+        "serveCode": "111",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serveId": "111",
+        "serveName": "交通费报销"
+      }],
+      "lebalId": "1111",
+      "lebalName": "财务云"
+    },
+    {
+      "children": [{
+        "enable": true,
+        "serveCode": "222",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serveId": "222",
+        "serveName": "差旅费报销"
+      }],
+      "lebalId": "2222",
+      "lebalName": "协同云"
+    }
+  ],
+  "msg": 1,
+  "status": 1
+}

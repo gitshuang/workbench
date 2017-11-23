@@ -1,0 +1,73 @@
+{
+  "status": 1,
+  "data": [{
+      "widgetId": "1111",
+      "widgetName": "我的常用",
+      "type": 1,
+      "children": [{
+        "widgetId": "11111111",
+        "type": 2,
+        "parentId": "1111",
+        "children": [{
+            "widgetId": "111111111111",
+            "icon": "http://img5.imgtn.bdimg.com/it/u=1364135330,218137125&fm=11&gp=0.jpg",
+            "serveCode": "aaaa",
+            "type": 3,
+            "parentId": "11111111",
+            "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/6516a334-6404-4d7d-9f20-f82381170158.js",
+            "size": 3
+          },
+          {
+            "widgetId": "111111112222",
+            "icon": "http://img5.imgtn.bdimg.com/it/u=1364135330,218137125&fm=11&gp=0.jpg",
+            "serveCode": "ffff",
+            "type": 3,
+            "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/1f064cc1-4aab-4374-ab09-046876f1bce4.js",
+            "size": 3
+          },
+          {
+            "widgetId": "111111113333",
+            "icon": "http://img5.imgtn.bdimg.com/it/u=1364135330,218137125&fm=11&gp=0.jpg",
+            "serveCode": "cccc",
+            "type": 3,
+            "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/e87d8215-5bd8-4b11-b815-87b565271d48.js",
+            "size": 3
+          }
+        ]
+      }]
+    },
+    {
+      "widgetId": "2222",
+      "widgetName": "我的待办",
+      "type": 1,
+      "children": [{
+          "widgetId": "22221111",
+          "icon": "http://img5.imgtn.bdimg.com/it/u=1364135330,218137125&fm=11&gp=0.jpg",
+          "serveCode": "cccc",
+          "type": 3,
+          "parentId": "2222",
+          "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/6516a334-6404-4d7d-9f20-f82381170158.js",
+          "size": 1
+        },
+        {
+          "widgetId": "22222222",
+          "icon": "http://img5.imgtn.bdimg.com/it/u=1364135330,218137125&fm=11&gp=0.jpg",
+          "serveCode": "aaaa",
+          "type": 3,
+          "parentId": "2222",
+          "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/1f064cc1-4aab-4374-ab09-046876f1bce4.js",
+          "size": 3
+        },
+        {
+          "widgetId": "22223333",
+          "icon": "http://img5.imgtn.bdimg.com/it/u=1364135330,218137125&fm=11&gp=0.jpg",
+          "serveCode": "bbbb",
+          "type": 3,
+          "parentId": "2222",
+          "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/e87d8215-5bd8-4b11-b815-87b565271d48.js",
+          "size": 2
+        }
+      ]
+    }
+  ]
+}

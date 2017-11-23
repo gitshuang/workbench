@@ -22,7 +22,6 @@ const style = {
   cursor: 'move'
 };
 
-const type='item';
 
 const itemSource = {
   beginDrag(props) {
@@ -54,18 +53,21 @@ function collectTaget(connect, monitor) {
   }
 }
 
-const widgetStyle = {
-  sm: {
+const widgetStyle = [
+  // 小
+  {
     width: 176
   },
-  lg: {
+  // 中
+  {
     width: 360
   },
-  xg: {
+  // 大
+  {
     width: 360,
     height: 360
   }
-};
+];
 
 function getData(url, callback) {
   fetch(url, {
@@ -124,11 +126,11 @@ class WidgetItem extends Component {
   render() {
     const {
       data: {
-        id,
+        background,
+        widgetId: id,
         size,
-        title: widgetTitle,
-        optionTitle,
-        jsurl,
+        widgetName: name,
+        icon,
       }
     } = this.props;
     const { index,connectDragSource, connectDropTarget,isDragging } = this.props;
@@ -136,29 +138,23 @@ class WidgetItem extends Component {
     const opacity = isDragging ? 0 : 1;
     let contentElm;
     if (loaded) {
-      contentElm = (
-        <div className={content} >
-          <Widget/>
-        </div>
-      );
-    } else if (id == '1101') {
-      contentElm = (
-        <div className={content}>
-            <Loading container={this} show={true} />
-        </div>
-      );
+      contentElm = (<Widget/>);
+    } else {
+      contentElm = (<Loading container={this} show={true} />);
     }
 
-    return connectDragSource(connectDropTarget(
-      <li className={widgetItem} style={{...widgetStyle[size],...style, opacity }} >
+    return (
+      <li className={widgetItem} style={{...widgetStyle[size], ...style, opacity, backgroundImage: background }} >
         <div className={title}>
-          <div className={title_left}><Icon type="uf-add-c-o" /></div>
-          <div className={title_right}>{widgetTitle}</div>
+          <div className={title_left}><img src={icon} /></div>
+          <div className={title_right}>{name}</div>
         </div>
-        {contentElm}
+        <div className={content}>
+          {contentElm}
+        </div>
       </li>
-    ));
+    );
   }
 }
 
-export default DragSource(type, itemSource, collectSource)(DropTarget(type,itemTarget,collectTaget)(WidgetItem));
+export default WidgetItem;

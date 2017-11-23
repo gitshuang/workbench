@@ -136,34 +136,38 @@ export function get(oriUrl, oriParams = {}) {
 }
 
 export function mapStateToProps(...keys) {
-  return (state, ownProps) => {
-    const rootState = state;
-    let { namespace } = keys.slice(-1)[0];
-    if (namespace) {
-      namespace = namespace.split('.');
-      state = namespace.reduce(
-        (subState, space) => {
-          let stateByNamespace = subState[space];
-          if (!stateByNamespace) {
-            stateByNamespace = subState;
-          }
-          return stateByNamespace;
-        },
-        state,
-      );
-    }
-
-    return keys.reduce((obj, key) => {
-      if (typeof key === 'string') {
-        obj[key] = state[key];
-      } else if (
-        typeof key === 'object' &&
-        typeof key.key === 'string' &&
-        typeof key.value === 'function'
-      ) {
-        obj[key.key] = key.value(state, ownProps, rootState);
+  if (keys.length) {
+    return (state, ownProps) => {
+      const rootState = state;
+      let { namespace } = keys.slice(-1)[0];
+      if (namespace) {
+        namespace = namespace.split('.');
+        state = namespace.reduce(
+          (subState, space) => {
+            let stateByNamespace = subState[space];
+            if (!stateByNamespace) {
+              stateByNamespace = subState;
+            }
+            return stateByNamespace;
+          },
+          state,
+        );
       }
-      return obj;
-    }, {});
-  };
+
+      return keys.reduce((obj, key) => {
+        if (typeof key === 'string') {
+          obj[key] = state[key];
+        } else if (
+          typeof key === 'object' &&
+          typeof key.key === 'string' &&
+          typeof key.value === 'function'
+        ) {
+          obj[key.key] = key.value(state, ownProps, rootState);
+        }
+        return obj;
+      }, {});
+    };
+  } else {
+    return () => ({});
+  }
 }

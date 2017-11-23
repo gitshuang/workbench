@@ -1,0 +1,18 @@
+{
+  "data": {
+    "allowTenants": [{
+      "tenantId": "gtzceot7",
+      "tenantName": "毛坤测试"
+    }],
+    "company": 1,
+    "gloriesNum": 0,
+    "redPacketsNum": 0,
+    "userAvator": "",
+    "userEmail": "",
+    "userId": "9ab8b615-a28c-43d6-9b3f-447be0d7299f",
+    "userMobile": "181****9676",
+    "userName": "maokunb"
+  },
+  "msg": 1,
+  "status": 1
+}
