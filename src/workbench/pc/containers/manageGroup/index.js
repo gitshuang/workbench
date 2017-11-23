@@ -234,7 +234,7 @@ class ManageGroup extends Component {
       <div id={_id} style={{ ...style, opacity }}>
         { groupTitle }
         <div>
-          <WidgetArea data={manageData.widgeList} />
+          <WidgetArea index={index} data={manageData.widgeList} />
         </div>
         <div>
           <button className="btn" onClick={()=>{this.addGroupFn(index)}}>添加分组</button>

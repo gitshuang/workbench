@@ -2,6 +2,8 @@ import React, {
   Component
 } from 'react';
 import ReactDOM from 'react-dom';
+import { DragSource, DropTarget } from 'react-dnd';
+import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
 import Icon from 'bee-icon';
 import {
@@ -11,6 +13,46 @@ import {
   title_right,
   content,
 } from './style.css'
+
+const style = {
+  border: '1px dashed gray',
+  padding: '0.5rem 1rem',
+  marginBottom: '.5rem',
+  backgroundColor: 'white',
+  cursor: 'move'
+};
+
+const type='item';
+
+const itemSource = {
+  beginDrag(props) {
+    return { id: props.id };
+  }
+};
+
+const itemTarget = {
+  hover(props, monitor) {
+    const draggedId = monitor.getItem().id;
+
+    if (draggedId !== props.id) {
+      props.moveItemDrag(draggedId, props.id);
+    }
+  }
+};
+
+function collectSource(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
+
+
+function collectTaget(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
+}
 
 const widgetStyle = {
   sm: {
@@ -54,6 +96,13 @@ function getData(url, callback) {
 
 
 class WidgetItem extends Component {
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    index: PropTypes.any.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    id: PropTypes.any.isRequired,
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -82,7 +131,9 @@ class WidgetItem extends Component {
         jsurl,
       }
     } = this.props;
+    const { index,connectDragSource, connectDropTarget,isDragging } = this.props;
     const { widget: Widget, loaded } = this.state;
+    const opacity = isDragging ? 0 : 1;
     let contentElm;
     if (loaded) {
       contentElm = (
@@ -98,16 +149,16 @@ class WidgetItem extends Component {
       );
     }*/
 
-    return (
-      <li className={widgetItem} style={widgetStyle[size]} >
+    return connectDragSource(connectDropTarget(
+      <li className={widgetItem} style={{...widgetStyle[size],...style, opacity }} >
         <div className={title}>
           <div className={title_left}><Icon type="uf-add-c-o" /></div>
           <div className={title_right}>{widgetTitle}</div>
         </div>
         {contentElm}
       </li>
-    );
+    ));
   }
 }
 
-export default WidgetItem;
+export default DragSource(type, itemSource, collectSource)(DropTarget(type,itemTarget,collectTaget)(WidgetItem));
