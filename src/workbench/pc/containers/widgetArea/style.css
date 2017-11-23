@@ -142,6 +142,17 @@
     box-sizing: border-box;
     background: #fff;
 }
+.edit_btn{
+   display: -webkit-box;
+  -webkit-box-pack: center;
+  margin: 10px 0;
+}
+.edit_btn :global(.u-button){
+    min-width:10px !important;
+    margin-right: 10px;
+    width: 60px;
+    height: 32px;
+}
 
 .form_control{
     // -webkit-box-flex:1;
@@ -162,3 +173,29 @@
   left: 10px;
   top: 40px;
 }
+
+
+:global(.u-modal-dialog .u-modal-footer){
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    border: 1px solid rgba(242, 242, 242, 1);
+}
+:global(.u-modal-dialog .u-modal-footer .u-button){
+    min-width:10px !important;
+    margin-right: 10px;
+    width: 60px;
+    height: 32px;
+}
+
+:global(.u-modal.in .u-modal-dialog){
+    width: 416px;
+    height: 201px;
+}
+.pop_cont{
+    font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+}
+
+    

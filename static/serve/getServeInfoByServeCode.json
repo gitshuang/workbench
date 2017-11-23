@@ -25,10 +25,10 @@
             "serveCode": "google",
             "serve": {
               "serveId": "asfasdfasfas111",
-              "serveName": "谷歌",
+              "serveName": "百度搜索",
               "serveCode": "google",
               "enable": true,
-              "url": "https://www.google.com",
+              "url": "https://www.baidu.com",
               "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
               "hasWidget": true,
               "relationServes": [{

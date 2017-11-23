@@ -180,14 +180,10 @@ class ManageGroup extends Component {
       this.delectGroupFn(index);
     }
   }
-  onVisibleChange =(visible) => {
-    console.log(visible);
-  }
 
   renderDrop =(index) => {
     const menu1 = (
       <Menu
-        multiple
         onClick={(e) => {this.onDropSelect(e,index)} }>
         <MenuItem key="1">置顶</MenuItem>
         <MenuItem key="2">删除</MenuItem>
@@ -198,7 +194,6 @@ class ManageGroup extends Component {
         trigger={['click']}
         overlay={menu1}
         animation="slide-up"
-        onVisibleChange={this.onVisibleChange}
       >
         <Icon type="momozhushou" />
       </Dropdown>
@@ -232,7 +227,7 @@ class ManageGroup extends Component {
       </div>;
     }
     return connectDragSource(connectDropTarget(
-      <div key={index} id={_id} style={{ ...style, opacity }}>
+      <div id={_id} style={{ ...style, opacity }}>
         { groupTitle }
         <div>
           <WidgetArea data={manageData.widgeList} />

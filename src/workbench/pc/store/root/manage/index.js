@@ -12,7 +12,7 @@ const {
   moveGroup,
   stickGroup,
   addFolder,
-  delectFolder,
+  deleteFolder,
   renameFolder,
   splitFolder,
   addServe,
@@ -43,6 +43,23 @@ const findTreeById = (data, curId) => {
   }
   return result;
 }
+
+
+const findDeleteTreeById = (data, curId) => {
+  for (let i = 0, l = data.length; i < l; i++) {
+    const menu = data[i];
+    const { id, children } = menu;
+
+    if (id === curId) {
+      delete data[i];
+      i--;
+      return ;
+    }else if(children && children.length) {
+      findTreeById(children, curId);
+    }
+  }
+}
+
 
 const reducer = handleActions({
   [setManageList]: (state, { payload, error }) => {
@@ -140,10 +157,20 @@ const reducer = handleActions({
     ...state,
     manageList,
   }),
-  [delectFolder]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
+  [deleteFolder]: (state, { payload: manageList })  => {
+      let { id } = manageList;
+      let _manageList = JSON.parse(JSON.stringify(state.manageList));
+      let current = null;
+      for (let i = 0, l = _manageList.length; i < l; i++) {
+           let da = _manageList[i];
+           current = findDeleteTreeById(da.widgeList, id);
+           if(current)break;
+      }
+      return{
+        ...state,
+        manageList:_manageList
+      }
+  },
   [renameFolder]: (state, { payload: {id,value} }) => {
       let _manageList = JSON.parse(JSON.stringify(state.manageList));
       let current = null;

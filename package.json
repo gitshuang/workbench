@@ -25,6 +25,7 @@
     "bee-popconfirm": "^1.0.2",
     "bee-select": "^1.0.2",
     "bee-tabs": "^1.0.5",
+    "bee-dropdown": "^1.0.1",
     "classnames": "^2.2.5",
     "install": "^0.10.2",
     "npm": "^5.5.1",

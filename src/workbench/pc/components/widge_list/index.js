@@ -86,7 +86,7 @@ class WidgeList extends Component{
         
     }
 
-    popSave = ()=>{
+    popSave = (data)=>{
 
         // this.state.data
         debugger;
@@ -128,7 +128,7 @@ class WidgeList extends Component{
             </div>
 
 
-            <PopDialog show = { this.state.showModal } close = { this.close }   btns={pop_btn} >
+            <PopDialog show = { this.state.showModal } data={da} close = { this.close }   btns={pop_btn} >
                 <div >确认要删除分组xx ? </div>
             </PopDialog>
 

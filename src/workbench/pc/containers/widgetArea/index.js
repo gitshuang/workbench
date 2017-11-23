@@ -40,17 +40,19 @@ class WidgetArea extends Component {
         let self = this;
         let lis = []; 
 
-        this.props.data.map(function(da, i) {
-          
-          if (da.type && da.type == "file") {
+        if(this.props.data){
+          this.props.data.map(function(da, i) {
+            
+            if (da.type && da.type == "file") {
 
-              lis.push(<WidgeFileItem key={`widget-file-${da.id}-${i}`} data={da} change={self.change} />);
+                lis.push(<WidgeFileItem key={`widget-file-${da.id}-${i}`} data={da} change={self.change} />);
 
-          } else {
+            } else {
 
-              lis.push(<WidgetItem key={`widget-${da.id}-${i}`}  data={da}/>);
-          }
-        })
+                lis.push(<WidgetItem key={`widget-${da.id}-${i}`}  data={da}/>);
+            }
+          })
+        }
       return (<ul className={widgetList} >{lis}</ul>);
     }
 }
