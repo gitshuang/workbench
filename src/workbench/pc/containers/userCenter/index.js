@@ -157,7 +157,7 @@ class UserInfoContainer extends Component {
             <TabPane tab='最近使用' key="1" className={tabPane1}>
               <ul>
                 <li>
-                  <Icon type="uf-rmb-s-o-2"></Icon>
+                  <Icon type="uf-rmb-c-o"></Icon>
                   <div className={`${used} ${clearfix}`}>
                     <div className={`${usedModule} ${clearfix}`}>
                       <div className={`${module} ${clearfix}`}>
