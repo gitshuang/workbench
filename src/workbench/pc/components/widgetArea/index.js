@@ -45,44 +45,7 @@ class WidgetArea extends Component {
     }));
   }
 
-  change = (da) => {
 
-    let _modal = this.state.showModal ? false : true;
-
-    // static propTypes = {
-    //     widgeList: PropTypes.array.isRequired,
-    // }
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            showModal: false,
-            showRotate: false
-        }
-    }
-  }
-
-  render() {
-    let self = this;
-    const { index,connectDragSource, connectDropTarget,isDragging } = this.props;
-    let liList = this.props.data;
-    (typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data=liList,this.state.showModal=false,this.state.showRotate=false) : (liList=this.state.data);
-
-    let lis = []; {
-      liList.map((da, i) => {
-
-        // let _width = self.getLiSize(da);
-        // let _width = (self.state.width * da.width) + (self.state.marginRight*(da.width-1));
-        // lis.push(<li key={'widgetList' + da.id + i }  style={{width:_width,marginRight:10,}} >
-        if (da.type && da.type == "file") {
-            this.props.change(_modal, da.fileList);
-        } else {
-
-
-          lis.push(<WidgetItem key={`widget-${da.id}-${i}`} data={da} id={da.id} index={da.id} moveItemDrag={this.moveItemDrag}/>)
-
-        }
-    }
 
 
     render() {
@@ -92,10 +55,10 @@ class WidgetArea extends Component {
 
           if (da.type && da.type == "file") {
 
-              lis.push(<WidgeFileItem key={`widget-file-${da.id}-${i}`} data={da} change={self.change} />);
+              lis.push(<WidgeFileItem key={`widget-file-${da.id}-${i}`} data={da} change={self.change} id={da.id} index={da.id} moveItemDrag={this.moveItemDrag}/>);
           } else {
 
-              lis.push(<WidgetItem key={`widget-${da.id}-${i}`}  data={da}/>);
+              lis.push(<WidgetItem key={`widget-${da.id}-${i}`}  data={da} id={da.id} index={da.id} moveItemDrag={this.moveItemDrag}/>);
           }
         })
       return (<ul className={widgetList} >{lis}</ul>);
