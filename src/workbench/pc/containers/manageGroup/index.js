@@ -232,7 +232,7 @@ class ManageGroup extends Component {
       </div>;
     }
     return connectDragSource(connectDropTarget(
-      <div key={index} id={_id} style={{ ...style, opacity }}>
+      <div id={_id} style={{ ...style, opacity }}>
         { groupTitle }
         <div>
           <WidgetArea data={manageData.widgeList} />

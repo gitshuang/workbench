@@ -47,7 +47,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.moveItem = this.moveItem.bind(this);
+   // this.moveItem = this.moveItem.bind(this);
     this.state ={
       selectGroup: []
     }
@@ -147,7 +147,7 @@ class Home extends Component {
     const data = {};
     data.data = manageList;
 
-    (typeof this.state === "undefined" || this.state===null || typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state = data) : (manageList=this.state.data);
+    //(typeof this.state === "undefined" || this.state===null || typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state = data) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
