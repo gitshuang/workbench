@@ -13,7 +13,6 @@ import manageActions from 'store/root/manage/actions';
 
 import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
-import WidgetArea from 'components/widgetArea';
 
 import 'assets/style/iuapmobile.um.css';
 import { HeaderLeft } from './style.css';
@@ -151,7 +150,6 @@ class Home extends Component {
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
-
       list.push(
         <ManageGroup manageData={item} index={index} key={item.name+index} selectGroupFn={this.selectGroupFn}  id={item.id} moveGroupDrag={this.moveGroupDrag}/>
       )
