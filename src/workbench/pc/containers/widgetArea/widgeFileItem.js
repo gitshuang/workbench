@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from 'bee-icon';
 import { widgetList, widgetItem, title, file_context, title_left, 
   file_icon, title_right, context, bottom ,footer,
-title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont} from './style.css'
+title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn} from './style.css'
 import WidgetItem from './widgetItem';
 import Checkbox from 'bee-checkbox';
 import FormControl from 'bee-form-control';
@@ -136,8 +136,10 @@ class WidgeFileItem extends Component {
         const edit = <div className={edit_cont}>
             <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
 
-            <Button className={save_btn} onClick={this.save} >完成</Button>
-            <Button className={close_btn} onClick={this.close} >取消</Button>
+            <div className={edit_btn}>
+              <Button className={save_btn} onClick={this.save} >完成</Button>
+              <Button className={close_btn} onClick={this.close} >取消</Button>
+            </div>
         </div>;
 
         const btns = <div className={footer}>
