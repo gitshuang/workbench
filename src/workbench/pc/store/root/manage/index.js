@@ -12,6 +12,7 @@ const {
   moveGroup,
   stickGroup,
   addFolder,
+  setFolderEdit,
   deleteFolder,
   renameFolder,
   splitFolder,
@@ -154,11 +155,21 @@ const reducer = handleActions({
     }
   },
   [addFolder]: (state, { payload: manageList }) => {
-      let obj = {id:"3423423",optionTitle:"文件夹",size:"sm",title:"文件夹",type:"file",fileList:[]};
+      // state.manageList.map(function(da,i){
+      //   da.widgeList.map(function(_da,_i){
+      //       _da.editShow = false;
+
+      //   })
+      // })
+      let d = new Date();
+      let id = d.getHours() + d.getMinutes() + d.getSeconds() + d.getMilliseconds();
+      let obj = {id:id,optionTitle:"文件夹",size:"sm",title:"文件夹",type:"file",fileList:[],editShow:true};
       manageList.widgeList.push(obj);
+
       let _manageList = JSON.parse(JSON.stringify(state.manageList));
       return{
         ...state,
+        id,
         manageList:_manageList
       }
   },
@@ -174,6 +185,12 @@ const reducer = handleActions({
       return{
         ...state,
         manageList:_manageList
+      }
+  },
+  [setFolderEdit]: (state, { payload: id }) => {
+      return{
+        ...state,
+        id
       }
   },
   [renameFolder]: (state, { payload: {id,value} }) => {

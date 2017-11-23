@@ -16,7 +16,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit } = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 const widgetStyle = {
@@ -32,13 +32,23 @@ const widgetStyle = {
     }
 }
 
-@connect(()=>({}),
+// TODU id 
+// 'currtEditFiledI',
+@connect(
+  mapStateToProps(
+    'manageList',
+    'id',
+    {
+      namespace: 'manage',
+    }
+  ),
   {
     requestStart,
     requestSuccess,
     requestError,
     deleteFolder,
-    renameFolder
+    renameFolder,
+    setFolderEdit
     // addGroup
   }
 )
@@ -54,21 +64,41 @@ class WidgeFileItem extends Component {
 
         this.popSave = this.popSave.bind(this);
         this.popClose = this.popClose.bind(this);
+        let ed = true;
+        if(props.id){
+            ed = true;
+        }else{
+            ed = false;
+        }
 
         this.state = {
             value:props.data.title,
-            editShow:false,
+            editShow: ed,
             showModal:false
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.id != this.props.data.id){
+            this.setState({
+              editShow:false
+            })
+        }
+    }
+
+    // shouldComponentUpdate(nextProps,nextState) {
+      // debugger;
+      // return nextProps.id!== this.props.id;
+    // }
+
     //点击文件夹编辑按钮
     fileEdit = () =>{
-
+        const { setFolderEdit,data } = this.props;
+        setFolderEdit(data.id);
         this.setState({
             editShow:true
-            // optionShow:false
         })
+
     }
 
     //输入框修改data数据源
@@ -76,7 +106,6 @@ class WidgeFileItem extends Component {
         this.setState({
             value:e
         });
-
     }
 
     fileDele = () =>{

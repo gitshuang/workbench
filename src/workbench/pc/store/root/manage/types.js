@@ -10,6 +10,7 @@ export default createTypes(
   'MOVE_GROUP',
   'STICK_GROUP',
   'ADD_FOLDER',
+  'SET_FOLDER_EDIT',
   'DELETE_FOLDER',
   'RENAME_FOLDER',
   'SPLIT_FOLDER',

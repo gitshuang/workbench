@@ -153,6 +153,7 @@ class Home extends Component {
         let lis = [];
         let conts = [];
 
+        debugger;
         if (workList.length != 0) {
 
             workList.map(function(da, i) {
