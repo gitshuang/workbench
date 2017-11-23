@@ -67,7 +67,7 @@ class WidgetItem extends Component {
       getData(jsurl, (result) => {
         this.setState({
           loaded: true,
-          widget: result.default
+          widget: result.default ? result.default : result,
         })
       })
     }
