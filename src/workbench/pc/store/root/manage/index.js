@@ -189,14 +189,36 @@ const reducer = handleActions({
     ...state,
     manageList,
   }),
-  [addServe]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
-  [delectServe]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
+  [addServe]: (state, { payload: {index,newServe} }) => {
+    let manageList = state.manageList;
+    manageList[index].push(newServe);
+    return{
+      ...state,
+      manageList,
+    }
+  },
+  [delectServe]: (state, { payload: {index,folder,id} }) => {
+    let manageList = state.manageList;
+    manageList[index].map((item,key)=>{
+      if(!folder && item.id == id ){
+        return manageList[index].splice(key,1);
+      }
+      if (folder && item.id == folder ){
+        item.map((list,i)=>{
+          if(list.id == id){
+            return manageList[index][key].splice(i,1);
+          }
+        })
+      }
+    });
+    let newGroup = currGroup.filter((item,key)=>{
+      return item.id != id;
+    });
+    return{
+      ...state,
+      manageList,
+    }
+  },
   [moveServe]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
