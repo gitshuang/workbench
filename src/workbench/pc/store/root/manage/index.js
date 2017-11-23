@@ -216,9 +216,6 @@ const reducer = handleActions({
         })
       }
     });
-    let newGroup = currGroup.filter((item,key)=>{
-      return item.id != id;
-    });
     return{
       ...state,
       manageList,
