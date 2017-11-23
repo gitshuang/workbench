@@ -20,12 +20,13 @@ import { HeaderLeft } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {changeUserInfoDisplay} = homeActions;
-const { getManageList } = manageActions;
+const { setManageList,getManageList,batchDelect } = manageActions;
 
 @withRouter
 @connect(
   mapStateToProps(
     'manageList',
+    'isEdit',
     {
       namespace: 'manage',
     }
@@ -35,7 +36,9 @@ const { getManageList } = manageActions;
     requestSuccess,
     requestError,
     changeUserInfoDisplay,
-    getManageList
+    setManageList,
+    getManageList,
+    batchDelect
   }
 )
 
@@ -43,13 +46,15 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
+
     this.moveItem = this.moveItem.bind(this);
-    // let { manageList } = this.props;
-    // debugger;
-    // this.state = manageList.data;
+    this.state ={
+      selectGroup: []
+    }
+    this.moveGroupDrag = this.moveGroupDrag.bind(this);
   }
 
-  moveItem(id, afterId) {
+  moveGroupDrag(id, afterId) {
     const { data } = this.state;
 
     const item = data.filter(i => i.id === id)[0];
@@ -76,11 +81,56 @@ class Home extends Component {
         requestSuccess();
       }
     });
-    //let manageList = [];
-    //Object.assign(manageList, workList);
-    //this.setState({
-      //manageList
-    //});
+  }
+  // 将此方法传递给manageGroup 组件中
+  selectGroupFn = (flag, index) => {
+    let selectGroup = this.state.selectGroup;
+    if(flag){
+      selectGroup.push(index);
+    }else{
+      selectGroup =  selectGroup.filter((item,i) => {
+        return index !== item;
+      });
+    }
+    console.log(selectGroup);
+    this.setState({
+      selectGroup
+    });
+  }
+  // 批量删除
+  batchDelect =() => {
+    const { batchDelect } = this.props;
+    let selectGroup = this.state.selectGroup;
+    this.setState({
+      selectGroup:[]
+    });
+    batchDelect(selectGroup);
+  }
+  // 保存
+  save =() => {
+    const {setManageList,manageList} = this.props;
+    setManageList(manageList).then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      } else {
+        requestSuccess();
+      }
+    });
+  }
+  // 取消
+  cancelFn = () => {
+    const {isEdit,getManageList} = this.props;
+    if(isEdit){
+      getManageList().then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        } else {
+          requestSuccess();
+        }
+      });
+    }else{
+      this.props.history.goBack();
+    }
   }
 
   getLeftContent() {
@@ -96,19 +146,20 @@ class Home extends Component {
     let { manageList } = this.props;
     const data = {};
     data.data = manageList;
-    (typeof this.state === "undefined" || this.state===null || this.state.data.length===0) ? (this.state = data) : (manageList=this.state.data);
+
+    (typeof this.state === "undefined" || this.state===null || typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state = data) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
       list.push(
-        <ManageGroup manageData={item} index={index} key={index}  id={item.id} moveItem={this.moveItem}/>
+        <ManageGroup manageData={item} index={index} key={index}  id={item.id} moveGroupDrag={this.moveGroupDrag}/>
       )
     });
     return list;
   }
 
   render() {
-    const { changeUserInfoDisplay, } = this.props;
+    const { changeUserInfoDisplay,isEdit } = this.props;
     return (
       <div className="um-win">
         <div className="um-header">
@@ -120,9 +171,14 @@ class Home extends Component {
           {this.renderContent()}
         </div>
         <div className="um-footer">
-          <div className="tr">
-            <button className="btn btn-inline">保存</button>
-            <button className="btn btn-inline">取消</button>
+          <div className="um-box-justify">
+            <div>
+              <button className="btn btn-inline" disabled={this.state.selectGroup.length ? false : true } onClick={this.batchDelect}>批量删除</button>
+            </div>
+            <div>
+              <button className="btn btn-inline" disabled={!isEdit} onClick={this.save}>保存</button>
+              <button className="btn btn-inline" onClick={this.cancelFn}>取消</button>
+            </div>
           </div>
         </div>
       </div>

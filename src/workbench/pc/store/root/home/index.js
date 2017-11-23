@@ -11,7 +11,6 @@ const {
 
 const defaultState = {
   userInfo: {},
-  widgetList: [],
   workList: [],
   userInfoDisplay: false,
 };

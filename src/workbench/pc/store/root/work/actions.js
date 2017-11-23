@@ -10,7 +10,6 @@ import {
 } from './api';
 
 const {
-  SET_MENUS,
   SET_CURRENT,
   SET_EXPANDED_SIDEBAR,
   DEL_TAB,
@@ -36,7 +35,6 @@ export default createActions({
     [SET_PIN_CANCEL]: setPinCancel,
     [GET_PIN_GROUP]: getPinGroup,
   },
-  SET_MENUS,
   SET_CURRENT,
   SET_EXPANDED_SIDEBAR,
   DEL_TAB,

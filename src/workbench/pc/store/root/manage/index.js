@@ -5,10 +5,12 @@ import actions from './actions';
 const {
   setManageList,
   getManageList,
+  batchDelect,
   addGroup,
   delectGroup,
   renameGroup,
   moveGroup,
+  stickGroup,
   addFolder,
   delectFolder,
   renameFolder,
@@ -19,8 +21,28 @@ const {
   } = actions;
 
 const defaultState = {
-  manageList : []
+  manageList : [],
+  isEdit : false,
 };
+
+const findTreeById = (data, curId) => {
+  let result;
+  for (let i = 0, l = data.length; i < l; i++) {
+    const menu = data[i];
+    const { id, children } = menu;
+    if (children && children.length) {
+      result = findTreeById(children, curId);
+    }
+    if (result) {
+      break;
+    }
+    if (id === curId) {
+      result = menu;
+      break;
+    }
+  }
+  return result;
+}
 
 const reducer = handleActions({
   [setManageList]: (state, { payload, error }) => {
@@ -41,9 +63,23 @@ const reducer = handleActions({
       };
     }
   },
+  [batchDelect]: (state, {payload:selectGroup}) => {
+    const manageList = state.manageList;
+    selectGroup.map((item,index)=>{
+      manageList[item] = false;
+    });
+    const newList =  manageList.filter((val,key) => {
+      return val != false;
+    });
+
+    console.log(newList);
+    return {
+      ...state,
+      manageList: newList
+    }
+  },
   [addGroup]: (state, { payload: index }) => {
     const manageList = state.manageList;
-
     manageList.splice(index+1,0,{
       name: '默认分组',
       id: '',
@@ -79,12 +115,27 @@ const reducer = handleActions({
     return{
       ...state,
       manageList,
+      isEdit: true
     }
   },
+
   [moveGroup]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
   }),
+  [stickGroup]: (state, { payload: index }) => {
+    let manageList = state.manageList;
+    const curr = manageList[index];
+    const newList =  manageList.filter((item,i) => {
+      return index !== i;
+    });
+    newList.unshift(curr);
+    return{
+      ...state,
+      manageList: newList,
+      //isedit:true
+    }
+  },
   [addFolder]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
@@ -93,10 +144,20 @@ const reducer = handleActions({
     ...state,
     manageList,
   }),
-  [renameFolder]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
+  [renameFolder]: (state, { payload: {id,value} }) => {
+      let _manageList = JSON.parse(JSON.stringify(state.manageList));
+      let current = null;
+      for (let i = 0, l = _manageList.length; i < l; i++) {
+           let da = _manageList[i];
+           current = findTreeById(da.widgeList, id);
+           if(current)break;
+      }
+      current.title = value;
+      return{
+        ...state,
+        manageList:_manageList
+      }
+  },
   [splitFolder]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
@@ -114,5 +175,6 @@ const reducer = handleActions({
     manageList,
   }),
 }, defaultState);
+
 
 export default reducer;

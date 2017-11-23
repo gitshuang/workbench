@@ -112,7 +112,7 @@ class TabsContainer extends Component {
     })
   }
   render() {
-    const { current: { id: currentId }, tabs: totalTabs } = this.props;
+    const { current: { menuItemId: currentId }, tabs: totalTabs } = this.props;
     const { width: areaWidth, moreIsShow } = this.state;
     const curIndex = totalTabs.findIndex(({ id }) => id === currentId);
     const totalTabsNum = totalTabs.length;

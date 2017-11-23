@@ -33,11 +33,10 @@ const {
 
 @connect(mapStateToProps(
     'titleServiceType',
-    'titleService', {
+    {
       "namespace": "work"
     }
   ),
-
   {
     requestStart,
     requestSuccess,
@@ -47,39 +46,41 @@ const {
   }
 )
 @onClickOutside
-class QuickServiceContainer extends Component {
+class titleServiceContainer extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      loaded: false,
       service: [],
       contacts: []
     }
   }
-
-  componentDidMount() {
-    const {
-      requestStart,
-      requestSuccess,
-      requestError,
-      getTitleService
-    } = this.props;
-    getTitleService().then(({
-      error,
-      payload
-    }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        this.setState({
-          service: payload.service,
-          contacts: payload.contacts
-        });
-        requestSuccess();
-      }
-    });
+  componentWillReceiveProps({titleServiceType}) {
+    if (titleServiceType && !this.state.loaded) {
+      const {
+        requestStart,
+        requestSuccess,
+        requestError,
+        getTitleService
+      } = this.props;
+      getTitleService().then(({
+        error,
+        payload
+      }) => {
+        if (error) {
+          requestError(payload);
+        } else {
+          this.setState({
+            loaded: true,
+            service: payload.relationServes,
+            contacts: payload.relationUsers
+          });
+          requestSuccess();
+        }
+      });
+    }
   }
-
   handleClickOutside(evt) {
     const {
       titleServiceHidden,
@@ -99,12 +100,12 @@ class QuickServiceContainer extends Component {
           <h4>相关服务</h4>
           <ul className="clearfix">
             {
-              this.state.service.map((item, i) =>
+              this.state.service.map(({ serveIcon, serveName }, i) =>
                 <li key={i}>
                   <div className={serviceIcon}>
-                    <Icon type="uf-cloud-o" className={uf}></Icon>
+                    <img src={serveIcon} className={uf} />
                   </div>
-                  <span className={serviceName}>服务名称</span>
+                  <span className={serviceName}>{serveName}</span>
                 </li>
               )
             }
@@ -114,12 +115,12 @@ class QuickServiceContainer extends Component {
           <h4>相关联系人</h4>
           <ul className="clearfix">
             {
-              this.state.contacts.map((item, i) =>
+              this.state.contacts.map(({ userAvator, userName }, i) =>
                 <li key={i}>
                   <div className="serviceIcon">
-                    <Icon type="uf-cloud-o" className={uf}></Icon>  
-                  </div> 
-                  <span className={serviceName}>人名</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                    <img src={userAvator} className={uf} />
+                  </div>
+                  <span className={serviceName}>{userName}</span>
                 </li>
               )
             }
@@ -130,4 +131,4 @@ class QuickServiceContainer extends Component {
   }
 }
 
-export default QuickServiceContainer;
+export default titleServiceContainer;

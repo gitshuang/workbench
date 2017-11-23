@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
-import HTML5Backend from 'react-dnd-html5-backend';
 
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
+import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
+import Dropdown from 'bee-dropdown';
 import Icon from 'components/icon';
-import WidgetArea from 'components/widgetArea';
+import WidgetArea from 'containers/widgetArea';
 import {WidgetTitle} from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
@@ -23,8 +23,9 @@ const {
   addGroup,
   delectGroup,
   renameGroup,
-  moveGroup
-} = manageActions;
+  moveGroup,
+  stickGroup,
+  } = manageActions;
 
 const style = {
   border: '1px dashed gray',
@@ -47,7 +48,7 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
 
     if (draggedId !== props.id) {
-      props.moveItem(draggedId, props.id);
+      props.moveGroupDrag(draggedId, props.id);
     }
   }
 };
@@ -78,7 +79,8 @@ function collectTaget(connect, monitor) {
     addGroup,
     delectGroup,
     renameGroup,
-    moveGroup
+    moveGroup,
+    stickGroup,
   }
 )
 
@@ -91,7 +93,6 @@ class ManageGroup extends Component {
     index: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
-    //text: PropTypes.string.isRequired,
   }
   constructor(props) {
     super(props);
@@ -109,7 +110,14 @@ class ManageGroup extends Component {
   componentWillReceiveProps(nextProps){
 
   }
+  // 添加文件夹
+  addFolderFn = ()=> {
+    alert("添加文件夹功能");
+  }
+  // 移动分组
+  moveGroupFn =() => {
 
+  }
   // 打开编辑分组形态
   openRenameGroupFn =(index) =>{
     this.setState({
@@ -140,24 +148,62 @@ class ManageGroup extends Component {
       groupName: e.target.value
     })
   }
+  /*         ********            *****                      */
+  // 选择框  选择
+  selectFn =(e,index) => {
+    const {selectGroupFn} = this.props;
+    let checkFlag = e.target.checked;
+    selectGroupFn(checkFlag,index);
+  }
 
-
+  // 置顶分组
+  stickFn =(index)=>{
+    const { stickGroup } = this.props;
+    stickGroup(index);
+  }
+  // 删除群组
   delectGroupFn =(index) =>{
     const { delectGroup } = this.props;
     delectGroup(index);
   }
-
+  // 添加新分组
   addGroupFn =(index) =>{
     const { addGroup } = this.props;
     addGroup(index);
   }
-  addFolderFn = ()=> {
 
+  //
+  onDropSelect =(e, index) =>{
+    if( e.key == 1 ){
+      this.stickFn(index);
+    }else{
+      this.delectGroupFn(index);
+    }
   }
-  moveGroupFn =() => {
-
+  onVisibleChange =(visible) => {
+    console.log(visible);
   }
 
+  renderDrop =(index) => {
+    const menu1 = (
+      <Menu
+        multiple
+        onClick={(e) => {this.onDropSelect(e,index)} }>
+        <MenuItem key="1">置顶</MenuItem>
+        <MenuItem key="2">删除</MenuItem>
+      </Menu>
+    );
+    return (
+      <Dropdown
+        trigger={['click']}
+        overlay={menu1}
+        animation="slide-up"
+        onVisibleChange={this.onVisibleChange}
+      >
+        <Icon type="momozhushou" />
+      </Dropdown>
+    )
+  }
 
   render() {
     const { manageData,index,connectDragSource, connectDropTarget,isDragging } = this.props;
@@ -174,11 +220,14 @@ class ManageGroup extends Component {
       </div>;
     }else {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
-        <h6>{manageData.name}</h6>
+        <label>
+          <input type="checkbox" onChange={ (e)=>{this.selectFn(e,index)} }/>
+          <span>{manageData.name}</span>
+        </label>
         <div>
           <Icon type="dingzhi" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
-          <Icon type="momozhushou" onClick={ ()=>{this.delectGroupFn(index)} }/>
           <Icon type="add" onClick={this.addFolderFn}/>
+          {this.renderDrop(index)}
         </div>
       </div>;
     }

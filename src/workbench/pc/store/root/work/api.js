@@ -1,18 +1,36 @@
-import { get } from '@u';
+import { get, post } from '@u';
 
-export const getProductInfo = function(id){
-  return get('/getProductInfo', { id });
+export const getProductInfo = (
+  code,
+  type
+) => {
+  if (type === 'app') {
+    return get('/serve/getServeInfoByAppCode', {
+      appCode: code,
+    });
+  }
+  return get('/serve/getServeInfoByServeCode', {
+    serveCode: code,
+  });
 }
-export const getTitleService = () => get('/getTitleService');
-export const setPinCancel = () => {
-  return get('/setPinCancel')
-};
-export const setPinAdd = () => {
-  return get('/setPinAdd')
-};
-export const setAddGroup = () => {
-  return get('/setAddGroup')
-};
-export const getPinGroup = () => {
-  return get('/getPinGroup')
-};
+export const getTitleService = serveCode => get('/serve/getRelationServesAndUsers', { serveCode });
+export const setPinCancel = serveCode => post('/widget/deleteByServeCode', { serveCode });
+export const setPinAdd = (
+  icon,
+  parentId,
+  serveCode,
+  templateId,
+  widgetName,
+) => post('/widget/create', {
+  icon,
+  parentId,
+  serviceCode,
+  templateId,
+  type: 3,
+  widgetName,
+});
+export const setAddGroup = (widgetName) => post('/widget/create', {
+  type: 1,
+  widgetName,
+});
+export const getPinGroup = () => get('/widget/getFolders');

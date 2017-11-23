@@ -3,7 +3,6 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-  setMenus,
   setCurrent,
   setExpandedSidebar,
   getProductInfo,
@@ -23,28 +22,30 @@ const {
 
 
 const defaultState = {
+  domainName: '',
   expandedSidebar: false,
   current:{
-    name: '',
+    title: '',
+    serveCode: '',
     hasRelationFunc: false,
   },
+  // 页面布局类型
+  type: 1,
   menus:[],
-  brm:[
-     {name:"财务"},
-     {name:"人员"}
-  ],
+  brm:[],
   tabs:[],
   titleServiceList: [],
   titleServiceType: false,
   pinType: false,
-  pinDisplay: false
+  pinDisplay: false,
+  widthBrm: true,
 };
 
 const findMenuById = (menus, curId) => {
   let result;
   for (let i = 0, l = menus.length; i < l; i++) {
     const menu = menus[i];
-    const { id, children } = menu;
+    const { menuItemId: id, children } = menu;
     if (children && children.length) {
       result = findMenuById(children, curId);
     }
@@ -59,11 +60,54 @@ const findMenuById = (menus, curId) => {
   return result;
 }
 
+const findMenuByServeId = (menus, serveId) => {
+  let result;
+  for (let i = 0, l = menus.length; i < l; i++) {
+    const menu = menus[i];
+    const { serveId: id, children } = menu;
+    if (children && children.length) {
+      result = findMenuByServeId(children, serveId);
+    }
+    if (result) {
+      break;
+    }
+    if (id === serveId) {
+      result = menu;
+      break;
+    }
+  }
+  return result;
+}
+
+
+const getBrmById = (menus, curId) => {
+  let finded = false;
+  let result = [];
+  function loop (menus) {
+    if (finded) {
+      return;
+    }
+    for (let i = 0, l = menus.length; i < l; i++) {
+      const menu = menus[i];
+      const { menuItemId: id, menuItemName: name, children } = menu;
+      if (id === curId) {
+        finded = true;
+        break;
+      }
+      if (children && children.length) {
+        result.push({name});
+        loop(children, curId);
+      }
+    }
+    if (!finded) {
+      result.pop();
+    }
+  }
+  loop(menus);
+  return result;
+}
+
 const reducer = handleActions({
-  [setMenus]: (state, { payload: menus }) => ({
-    ...state,
-    menus,
-  }), 
   [addBrm]: (state, { payload: data }) => ({
     ...state,
     brm:state.brm.concat({
@@ -76,30 +120,49 @@ const reducer = handleActions({
     if (!current) {
       return state;
     }
-    const { name, location } = current
+    const {
+      menuItemName: name,
+      serve: {
+        url,
+        relationServes,
+      },
+      serveId,
+      serveCode,
+    } = current;
+
     const curTab = tabs.find(({id}) => id === currentId);
-    
-    let brm = [];
-    current.parent.map(function(da,i){
-        brm.push({name:da.name});
-    })
-    console.log("brm.length " + brm.length);
-    
+
+    let brm = getBrmById(menus, currentId).concat({name});
+
     if (curTab) {
       return {
         ...state,
-        current,
+        current: {
+          menuItemId: currentId,
+          title: name,
+          hasRelationFunc: relationServes,
+          serveCode,
+          serveId,
+          url,
+        },
         brm
       }
     } else {
       return {
         ...state,
-        current,
+        current:{
+          menuItemId: currentId,
+          title: name,
+          hasRelationFunc: relationServes,
+          serveCode,
+          serveId,
+          url,
+        },
         brm,
         tabs: tabs.concat({
           id: currentId,
           name,
-          location,
+          location: url,
         })
       }
     }
@@ -155,23 +218,89 @@ const reducer = handleActions({
       }
       return result;
     });
-    const newCur = findMenuById(menus, newTabs[newCurIndex].id);
+    const menuItemId = newTabs[newCurIndex].id;
+    const newCur = findMenuById(menus, menuItemId);
+    const {
+      menuItemName: name,
+      serve: {
+        url,
+        relationServes,
+      },
+      serveId,
+      serveCode,
+    } = newCur;
 
     return {
       ...state,
       tabs: newTabs,
-      current: newCur,
+      current:{
+        menuItemId,
+        title: name,
+        hasRelationFunc: relationServes,
+        serveCode,
+        serveId,
+        url,
+      },
     }
   },
-  [getProductInfo]: state => state,
   [getTitleService]: (state, { payload: titleServiceList, error }) => {
-    if (error) {
-      return state;
-    }
     return {
       ...state,
       titleServiceList,
     };
+  },
+  [getProductInfo]: (state, { payload: productInfo, error}) => {
+    if (error) {
+      return state;
+    }
+    const {
+      curMenuBar: {
+        single,
+        hasTab,
+        menuBarName: domainName,
+        hasTopNav: widthBrm,
+        menuItems: menus,
+      },
+      curServe: {
+        serveName: title,
+        relationServes,
+        hasWidget: pinType,
+        serveCode,
+        serveId,
+        url,
+      },
+    } = productInfo;
+    let type = 1;
+    if (!single) {
+      type = 2;
+    }
+    if (hasTab) {
+      type = 3;
+    }
+    const menu = findMenuByServeId(menus, serveId);
+    const brm = getBrmById(menus, menu.menuItemId).concat({name: title});
+    return {
+      ...state,
+      brm,
+      menus,
+      domainName,
+      widthBrm,
+      current:{
+        menuItemId: menu && menu.menuItemId,
+        title,
+        hasRelationFunc: relationServes,
+        serveCode,
+        serveId,
+        url,
+      },
+      tabs: [{
+        id: menu && menu.menuItemId,
+        name: title,
+        location: url,
+      }],
+      type,
+      pinType,
+    }
   },
   [titleServiceDisplay]: state => ({
     ...state,
