@@ -25,6 +25,7 @@ const {
   renameGroup,
   moveGroup,
   stickGroup,
+  addFolder
   } = manageActions;
 
 const style = {
@@ -81,6 +82,7 @@ function collectTaget(connect, monitor) {
     renameGroup,
     moveGroup,
     stickGroup,
+    addFolder
   }
 )
 
@@ -111,8 +113,10 @@ class ManageGroup extends Component {
 
   }
   // 添加文件夹
-  addFolderFn = ()=> {
-    alert("添加文件夹功能");
+  addFolderFn = (data)=> {
+    // alert("添加文件夹功能");
+    const { addFolder } = this.props;
+    addFolder(data);
   }
   // 移动分组
   moveGroupFn =() => {
@@ -221,7 +225,7 @@ class ManageGroup extends Component {
         </label>
         <div>
           <Icon type="dingzhi" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
-          <Icon type="add" onClick={this.addFolderFn}/>
+          <Icon type="add" onClick={()=>{this.addFolderFn(manageData)}}/>
           {this.renderDrop(index)}
         </div>
       </div>;

@@ -153,10 +153,15 @@ const reducer = handleActions({
       //isedit:true
     }
   },
-  [addFolder]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
+  [addFolder]: (state, { payload: manageList }) => {
+      let obj = {id:"3423423",optionTitle:"文件夹",size:"sm",title:"文件夹",type:"file",fileList:[]};
+      manageList.widgeList.push(obj);
+      let _manageList = JSON.parse(JSON.stringify(state.manageList));
+      return{
+        ...state,
+        manageList:_manageList
+      }
+  },
   [deleteFolder]: (state, { payload: manageList })  => {
       let { id } = manageList;
       let _manageList = JSON.parse(JSON.stringify(state.manageList));
