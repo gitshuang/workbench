@@ -13,6 +13,7 @@
     "animate.css": "^3.5.2",
     "array.prototype.find": "^2.0.4",
     "babel-runtime": "^6.26.0",
+    "bee-autocomplete": "^1.0.1",
     "bee-button": "^1.0.2",
     "bee-button-group": "^1.0.0",
     "bee-form-control": "^1.0.4",
