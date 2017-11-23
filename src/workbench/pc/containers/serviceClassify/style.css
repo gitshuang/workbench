@@ -12,10 +12,42 @@
 	margin:0 auto;
 	padding-top:40px;
 }
+:global(.u-autocomplete){
+	width:355px;
+	height:38px;
+}
+:global(.u-form-control){
+	height:100%;
+}
 .serviceSearch{
 	width:456px;
-	border-radius: 2px ;
 	margin:0 auto;
+}
+.wrap :global(.u-button){
+	width:100px;
+	margin:0;
+	background:#fff;
+}
+.ufSearch{
+	color: rgba(135,139,148,1);
+	font-size:16px;
+}
+.ufSearch span{
+	font-size: 12px;
+	margin-left:8px;
+}
+:global(.u-input-group-btn){
+	width:102px;
+}
+:global(.u-input-group .u-input-group-btn .u-button){
+	height:38px;
+	margin-top:-5px;
+}
+:global(.u-input-group .u-form-control){
+	border-color:#ccc;
+}
+:global(.u-autocomplete-options){
+	background:#fff;
 }
 .hotService li,.hotService span,.hotService ul{
 	display:inline-block;
@@ -24,9 +56,12 @@
 	color:rgba(136,136,136,1);
 	line-height:16px;
 }
-.hotService li{
+.hotService a{
 	margin-right: 17px;
 	color:#3A3F4B;
+}
+.hotService a:hover{
+	color:#E14C46;
 }
 .hotService{
 	margin-left:380px;
