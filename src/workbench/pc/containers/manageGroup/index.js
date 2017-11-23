@@ -180,10 +180,6 @@ class ManageGroup extends Component {
       this.delectGroupFn(index);
     }
   }
-  onVisibleChange =(visible) => {
-    console.log(visible);
-  }
-
   renderDrop =(index) => {
     const menu1 = (
       <Menu
@@ -198,7 +194,6 @@ class ManageGroup extends Component {
         trigger={['click']}
         overlay={menu1}
         animation="slide-up"
-        onVisibleChange={this.onVisibleChange}
       >
         <Icon type="momozhushou" />
       </Dropdown>
