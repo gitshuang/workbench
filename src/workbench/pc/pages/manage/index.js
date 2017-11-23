@@ -45,8 +45,6 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
-
-   // this.moveItem = this.moveItem.bind(this);
     this.state ={
       selectGroup: []
     }
@@ -143,15 +141,12 @@ class Home extends Component {
 
   renderContent =() => {
     let { manageList } = this.props;
-    const data = {};
-    data.data = manageList;
-
-    //(typeof this.state === "undefined" || this.state===null || typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state = data) : (manageList=this.state.data);
+    (typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = manageList) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
       list.push(
-        <ManageGroup manageData={item} index={index} key={item.name+index} selectGroupFn={this.selectGroupFn}  id={item.id} moveGroupDrag={this.moveGroupDrag}/>
+        <ManageGroup manageData={item} index={index} key={item.name+index} selectGroupFn={this.selectGroupFn}  id={item.id} moveGroupDrag={this.moveGroupDrag} />
       )
     });
     return list;
