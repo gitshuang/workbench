@@ -1,180 +1,186 @@
 {
-  "status": 1,
-  "data": [{
-      "id": "1001",
-      "name": "代办",
-      "icon": "",
-      "widgeList": [{
-          "id": "1101",
-          "size": "lg",
-          "title": "入职",
-          "optionTitle": "查看"
+    "status": 1,
+    "data":[
+        {
+            "id":"1001",
+            "name":"代办",
+            "icon":"",
+            "widgeList":[
+                {
+                    "id":"1101",
+                    "size":"lg",
+                    "title":"入职",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1102",
+                    "type":"file",
+                    "size":"sm",
+                    "title":"核算",
+                    "optionTitle":"查看",
+                    "fileList":[
+                        {
+                            "id":"file_1001",
+                            "size":"sm",
+                            "title":"工资核算",
+                            "optionTitle":"查看"
+                        },
+                        {
+                            "id":"file_1002",
+                            "size":"sm",
+                            "title":"报销核算",
+                            "optionTitle":"查看"
+                        },
+                        {
+                            "id":"file_1003",
+                            "size":"sm",
+                            "title":"项目核算",
+                            "optionTitle":"查看"
+                        },
+                        {
+                            "id":"file_1004",
+                            "size":"lg",
+                            "title":"财政核算",
+                            "optionTitle":"查看"
+                        },
+                        {
+                            "id":"file_1005",
+                            "size":"sm",
+                            "title":"成本核算",
+                            "optionTitle":"查看"
+                        }
+                    ]
+                },
+                {
+                    "id":"1103",
+                    "size":"sm",
+                    "title":"代办业务三组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1104",
+                    "size":"sm",
+                    "title":"代办业务四组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1105",
+                    "size":"xg",
+                    "title":"代办业务五组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1106",
+                    "size":"sm",
+                    "title":"代办业务六组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1107",
+                    "size":"sm",
+                    "title":"代办业务七组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1108",
+                    "size":"sm",
+                    "title":"代办业务八组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1109",
+                    "size":"sm",
+                    "title":"代办业务九组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1110",
+                    "size":"sm",
+                    "title":"代办业务十组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"1111",
+                    "size":"sm",
+                    "title":"代办业务11组件",
+                    "optionTitle":"查看"
+                }
+             ]
         },
         {
-          "id": "1102",
-          "type": "file",
-          "size": "sm",
-          "title": "核算",
-          "optionTitle": "查看",
-          "fileList": [{
-              "id": "file_1001",
-              "size": "sm",
-              "title": "工资核算",
-              "optionTitle": "查看"
-            },
-            {
-              "id": "file_1002",
-              "size": "sm",
-              "title": "报销核算",
-              "optionTitle": "查看"
-            },
-            {
-              "id": "file_1003",
-              "size": "sm",
-              "title": "项目核算",
-              "optionTitle": "查看"
-            },
-            {
-              "id": "file_1004",
-              "size": "lg",
-              "title": "财政核算",
-              "optionTitle": "查看"
-            },
-            {
-              "id": "file_1005",
-              "size": "sm",
-              "title": "成本核算",
-              "optionTitle": "查看"
-            }
-          ]
+            "id":"1002",
+            "name":"HR相关",
+            "size":"sm",
+            "widgeList":[
+                {
+                    "id":"3001",
+                    "size":"sm",
+                    "title":"HR相关业务一组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"3002",
+                    "size":"sm",
+                    "title":"HR相关业务二组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"3003",
+                    "size":"sm",
+                    "title":"HR相关业务三组件",
+                    "optionTitle":"查看"
+                }
+             ]
         },
         {
-          "id": "1103",
-          "size": "sm",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
+            "id":"1003",
+            "name":"我的日常",
+            "size":"sm",
+            "widgeList":[
+                {
+                    "id":"4001",
+                    "size":"sm",
+                    "title":"我的日常业务一组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"5001",
+                    "size":"sm",
+                    "title":"我的日常二组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"6001",
+                    "size":"sm",
+                    "title":"我的日常业务三组件",
+                    "optionTitle":"查看"
+                }
+             ]
         },
         {
-          "id": "1103",
-          "size": "sm",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "1103",
-          "size": "xg",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "1103",
-          "size": "sm",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "1103",
-          "size": "sm",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "1103",
-          "size": "sm",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "1103",
-          "size": "sm",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "1103",
-          "size": "sm",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "1103",
-          "size": "sm",
-          "title": "代办业务三组件",
-          "optionTitle": "查看"
+            "id":"1004",
+            "name":"公司新闻",
+            "size":"sm",
+            "widgeList":[
+                {
+                    "id":"2001",
+                    "size":"sm",
+                    "title":"公司新闻一组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"2002",
+                    "size":"sm",
+                    "title":"公司新闻二组件",
+                    "optionTitle":"查看"
+                },
+                {
+                    "id":"2003",
+                    "size":"sm",
+                    "title":"公司新闻三组件",
+                    "optionTitle":"查看"
+                }
+             ]
         }
-      ]
-    },
-    {
-      "id": "1002",
-      "name": "HR相关",
-      "size": "sm",
-      "widgeList": [{
-          "id": "3001",
-          "size": "sm",
-          "title": "HR相关业务一组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "3001",
-          "size": "sm",
-          "title": "HR相关业务二组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "2001",
-          "size": "sm",
-          "title": "HR相关业务三组件",
-          "optionTitle": "查看"
-        }
-      ]
-    },
-    {
-      "id": "1003",
-      "name": "我的日常",
-      "size": "sm",
-      "widgeList": [{
-          "id": "4001",
-          "size": "sm",
-          "title": "我的日常业务一组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "5001",
-          "size": "sm",
-          "title": "我的日常二组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "6001",
-          "size": "sm",
-          "title": "我的日常业务三组件",
-          "optionTitle": "查看"
-        }
-      ]
-    },
-    {
-      "id": "1004",
-      "name": "公司新闻",
-      "size": "sm",
-      "widgeList": [{
-          "id": "2001",
-          "size": "sm",
-          "title": "公司新闻一组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "2001",
-          "size": "sm",
-          "title": "公司新闻二组件",
-          "optionTitle": "查看"
-        },
-        {
-          "id": "2001",
-          "size": "sm",
-          "title": "公司新闻三组件",
-          "optionTitle": "查看"
-        }
-      ]
-    }
-  ]
+    ]
 }

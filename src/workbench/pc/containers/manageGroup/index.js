@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
-import HTML5Backend from 'react-dnd-html5-backend';
 
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
@@ -49,7 +48,7 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
 
     if (draggedId !== props.id) {
-      props.moveItem(draggedId, props.id);
+      props.moveGroupDrag(draggedId, props.id);
     }
   }
 };
@@ -94,7 +93,6 @@ class ManageGroup extends Component {
     index: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
-    //text: PropTypes.string.isRequired,
   }
   constructor(props) {
     super(props);
