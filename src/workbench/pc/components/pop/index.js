@@ -9,13 +9,14 @@ const propTypes = {
 	show:PropTypes.bool.isRequired,
   btns:[{label:"",fun:null,className:""},{label:"",fun:null,className:""}],   //设置操作按钮
 	close:PropTypes.fun,
-
+  data:null
 };
 
 class PopDialog extends Component{
 
-  fun = ()=>{
 
+  constructor(props) {
+        super(props);
   }
 
 	render(){
@@ -23,11 +24,14 @@ class PopDialog extends Component{
     let btns = [];
     if(this.props.btns){
 
+        let _data = this.props.data ? this.props.data : this;
         this.props.btns.map(function(da,i){
-            let _fun = da.fun ? da.fun : fun;
             let _className = da.className ? da.className : null;
-
-            btns.push(<Button key={"pop_btn"+i} onClick={ _fun } className={_className} >{da.label}</Button>);
+            if(da.fun){
+                btns.push(<Button key={"pop_btn"+i} onClick={ () => { da.fun(_data) } } className={_className} >{da.label}</Button>);
+            }else{
+                btns.push(<Button key={"pop_btn"+i} className={_className} >{da.label}</Button>);
+            }
         })
     }
 		
