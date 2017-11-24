@@ -1,11 +1,8 @@
 import React, {
   Component
 } from 'react';
-import ReactDOM from 'react-dom';
-import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
-import Icon from 'bee-icon';
 import {
   widgetItem,
   title,
@@ -14,6 +11,7 @@ import {
   content,
 } from './style.css'
 
+/*
 const style = {
   border: '1px dashed gray',
   padding: '0.5rem 1rem',
@@ -52,6 +50,7 @@ function collectTaget(connect, monitor) {
     connectDropTarget: connect.dropTarget()
   }
 }
+*/
 
 const widgetStyle = [
   // 小
@@ -99,11 +98,7 @@ function getData(url, callback) {
 
 class WidgetItem extends Component {
   static propTypes = {
-    connectDragSource: PropTypes.func.isRequired,
-    connectDropTarget: PropTypes.func.isRequired,
-    index: PropTypes.any.isRequired,
-    isDragging: PropTypes.bool.isRequired,
-    id: PropTypes.any.isRequired,
+    data: PropTypes.any.isRequired,
   }
   constructor(props) {
     super(props);
@@ -135,7 +130,6 @@ class WidgetItem extends Component {
     } = this.props;
     const { index,connectDragSource, connectDropTarget,isDragging } = this.props;
     const { widget: Widget, loaded } = this.state;
-    const opacity = isDragging ? 0 : 1;
     let contentElm;
     if (loaded) {
       contentElm = (<Widget/>);
@@ -144,7 +138,7 @@ class WidgetItem extends Component {
     }
 
     return (
-      <li className={widgetItem} style={{...widgetStyle[size], ...style, opacity, backgroundImage: background }} >
+      <li className={widgetItem} style={{...widgetStyle[size], backgroundImage: background }} >
         <div className={title}>
           <div className={title_left}><img src={icon} /></div>
           <div className={title_right}>{name}</div>

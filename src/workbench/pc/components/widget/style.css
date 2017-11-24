@@ -1,7 +1,3 @@
-.widgetList {
-  list-style: none;
-  overflow: hidden;
-}
 .widgetItem {
   position: relative;
   float: left;
@@ -26,7 +22,7 @@
   display: inline-block;
   vertical-align: middle;
 }
-.widgetList a {
+.widgetItem a {
   text-decoration: none;
   text-align: center;
   display: inline-block;

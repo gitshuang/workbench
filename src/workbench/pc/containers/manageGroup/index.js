@@ -11,7 +11,7 @@ import manageActions from 'store/root/manage/actions';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import Icon from 'components/icon';
-import WidgetArea from 'containers/widgetArea';
+// import WidgetArea from 'containers/widgetArea';
 import {WidgetTitle} from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
@@ -233,7 +233,7 @@ class ManageGroup extends Component {
       <div id={_id} style={{ ...style, opacity }}>
         { groupTitle }
         <div>
-          <WidgetArea index={index} data={manageData.widgeList} />
+          {/* <WidgetArea index={index} data={manageData.widgeList} /> */}
         </div>
         <div>
           <button className="btn" onClick={()=>{this.addGroupFn(index)}}>添加分组</button>

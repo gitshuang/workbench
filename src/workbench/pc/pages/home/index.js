@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from 'containers/header';
-import PopDialog from 'components/pop';
-import WidgeList from 'components/widge_list';
-import WidgetArea from 'containers/widgetArea';
+import Dialog from 'containers/homeFolderDialog';
+import WidgeList from 'containers/homeWidgetList';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -24,29 +23,24 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 
 @withRouter
 @connect(
-    mapStateToProps(
-        'workList',
-        {
-            namespace: 'home',
-        }
-    ),
+  mapStateToProps(
+    'workList',
+    'folderModalDisplay',
     {
-        requestStart,
-        requestSuccess,
-        requestError,
-        getWorkList,
-        changeUserInfoDisplay,
+      namespace: 'home',
     }
+  ),
+  {
+    requestStart,
+    requestSuccess,
+    requestError,
+    getWorkList,
+    changeUserInfoDisplay,
+  }
 )
-
 class Home extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            showModal: false,
-            modalData: []
-        }
     }
 
     componentWillMount() {
@@ -60,28 +54,6 @@ class Home extends Component {
         });
     }
 
-    close() {
-        this.setState({
-            showModal: false
-        });
-    }
-
-    open() {
-        this.setState({
-            showModal: true
-        });
-    }
-
-    changeModal(da) {
-        let _showModal = this.state.showModal?false:true;
-        let newDa = [];
-        Object.assign(newDa, da);
-        this.setState({
-            showModal: _showModal,
-            modalData: newDa
-        });
-    }
-
     render() {
 
         const containerStyle = {
@@ -89,9 +61,12 @@ class Home extends Component {
             margin: "70px 0 100px"
         }
 
-        const { changeUserInfoDisplay, changeTitleServiceDisplay } = this.props;
+        const {
+          changeUserInfoDisplay,
+          folderModalDisplay,
+          workList,
+        } = this.props;
 
-        let { workList } = this.props;
         let lis = [];
         let conts = [];
         workList.forEach((da, i) => {
@@ -103,19 +78,24 @@ class Home extends Component {
               label: name,
               target: `nav${id}`,
             });
-            conts.push(
-              <WidgeList
-                key={`nav${id}`}
-                data={da}
-                index={i}
-                change={self.changeModal} />
-            );
+            if (i) {
+              conts.push(
+                <WidgeList
+                  key={`nav${id}`}
+                  data={da} />
+              );
+            } else {
+              conts.push(
+                <WidgeList
+                  key={`nav${id}`}
+                  data={da}
+                  noTitle />
+              );
+            }
         })
         return (
         <div className={page_home}>
-
-          <HeaderPage lis={lis}> </HeaderPage>
-
+          <HeaderPage lis={lis} />
           <div className="content">
             <div style={containerStyle}>
                 <ElementsWrapper items={lis}>
@@ -123,8 +103,11 @@ class Home extends Component {
                 </ElementsWrapper>
             </div>
           </div>
-
-
+          {
+            folderModalDisplay ? (
+              <Dialog/>
+            ) : null
+          }
         </div>);
     }
 }

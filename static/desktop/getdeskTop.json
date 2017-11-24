@@ -6,6 +6,7 @@
       "type": 1,
       "children": [{
         "widgetId": "11111111",
+        "widgetName": "我的文件夹",
         "type": 2,
         "parentId": "1111",
         "children": [{
