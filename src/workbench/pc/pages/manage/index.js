@@ -65,9 +65,8 @@ class Home extends Component {
     getManageList().then(({error, payload}) => {
       if (error) {
         requestError(payload);
-      } else {
-        requestSuccess();
       }
+      requestSuccess();
     });
   }
   // 将此方法传递给manageGroup 组件中
@@ -80,7 +79,7 @@ class Home extends Component {
         return index !== item;
       });
     }
-    console.log(selectGroup);
+    // console.log(selectGroup);
     this.setState({
       selectGroup
     });
@@ -96,13 +95,12 @@ class Home extends Component {
   }
   // 保存
   save =() => {
-    const {setManageList,manageList} = this.props;
+    const {setManageList, manageList} = this.props;
     setManageList(manageList).then(({error, payload}) => {
       if (error) {
         requestError(payload);
-      } else {
-        requestSuccess();
       }
+      requestSuccess();
     });
   }
   // 取消
@@ -112,9 +110,8 @@ class Home extends Component {
       getManageList().then(({error, payload}) => {
         if (error) {
           requestError(payload);
-        } else {
-          requestSuccess();
         }
+        requestSuccess();
       });
     }else{
       this.props.history.goBack();
@@ -137,7 +134,13 @@ class Home extends Component {
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
       list.push(
-        <ManageGroup manageData={item} index={index} key={item.name+index} selectGroupFn={this.selectGroupFn}  id={item.id} moveGroupDrag={this.moveGroupDrag} />
+        <ManageGroup
+          manageData={item}
+          index={index}
+          key={item.widgetName+index}
+          selectGroupFn={this.selectGroupFn}
+          id={item.widgetId}
+          moveGroupDrag={this.moveGroupDrag} />
       )
     });
     return list;

@@ -17,31 +17,26 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,moveServe } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder } = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
-// TODU id
-// 'currtEditFiledI',
 @connect(
   mapStateToProps(
     'manageList',
-    'id',
+    'curEditFolderId',
     {
       namespace: 'manage',
     }
   ),
   {
-    requestStart,
-    requestSuccess,
-    requestError,
+    openFolder,
     deleteFolder,
     renameFolder,
     setFolderEdit,
     moveServe
-    // addGroup
   }
 )
-class WidgetArea extends Component {
+class WidgetList extends Component {
 
     //TUDO 数据中的 size ： sm 、lg、xg （小[标准]、中、大）
 
@@ -59,7 +54,6 @@ class WidgetArea extends Component {
     moveServe(data);
   }
   render() {
-      const lis = [];
       const { data } = this.props;
       const list = data.map((item, i) => {
         const {
@@ -76,6 +70,7 @@ class WidgetArea extends Component {
                 id={id}
                 index={id}
                 moveItemDrag={this.moveItemDrag}
+                onClick={()=>{/*openFolder(item)*/}}
               />
             );
           default:
@@ -94,4 +89,4 @@ class WidgetArea extends Component {
   }
 }
 
-export default WidgetArea;
+export default WidgetList;

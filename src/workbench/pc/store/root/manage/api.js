@@ -1,8 +1,6 @@
-import { get } from '@u';
+import { get, post } from '@u';
 
-export const setManageList = function(list){
-  return get('/setManageList', { list });
+export const setManageList = (list) => {
+  return post('/setManageList', { list });
 }
-export const getManageList = () => {
-  return get('/getManageList');
-}
+export const getManageList = () => get('/desktop/getdeskTop');

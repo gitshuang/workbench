@@ -11,7 +11,7 @@ import manageActions from 'store/root/manage/actions';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import Icon from 'components/icon';
-// import WidgetArea from 'containers/widgetArea';
+import WidgetList from 'containers/manageWidgetList';
 import {WidgetTitle} from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
@@ -69,8 +69,10 @@ function collectTaget(connect, monitor) {
 
 @connect(
   mapStateToProps(
-    'workList',
-    {'namespace':'manage'}
+    'manageList',
+    {
+      namespace:'manage'
+    }
   ),
   {
     requestStart,
@@ -84,9 +86,6 @@ function collectTaget(connect, monitor) {
     addFolder
   }
 )
-
-
-
 class ManageGroup extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
@@ -98,18 +97,10 @@ class ManageGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      manageData: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
+      // manageData: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
       groupName:  "",
       editFlag: false
     }
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentWillReceiveProps(nextProps){
-
   }
   // 添加文件夹
   addFolderFn = (data)=> {
@@ -204,9 +195,15 @@ class ManageGroup extends Component {
   }
 
   render() {
-    const { manageData,index,connectDragSource, connectDropTarget,isDragging } = this.props;
+    const {
+      manageData,
+      index,
+      connectDragSource,
+      connectDropTarget,
+      isDragging
+    } = this.props;
     const opacity = isDragging ? 0 : 1;
-    let _id = manageData.id + "_" + index;
+    let _id = manageData.widgetId + "_" + index;
     let groupTitle = null;
     if(this.state.editFlag) {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
@@ -220,11 +217,11 @@ class ManageGroup extends Component {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <label>
           <input type="checkbox" onChange={ (e)=>{this.selectFn(e,index)} }/>
-          <span>{manageData.name}</span>
+          <span>{manageData.widgetName}</span>
         </label>
         <div>
           <Icon type="dingzhi" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
-          <Icon type="add" onClick={()=>{this.addFolderFn(manageData)}}/>
+          <Icon type="add" onClick={()=>{this.addFolderFn(index)}}/>
           {this.renderDrop(index)}
         </div>
       </div>;
@@ -233,7 +230,7 @@ class ManageGroup extends Component {
       <div id={_id} style={{ ...style, opacity }}>
         { groupTitle }
         <div>
-          {/* <WidgetArea index={index} data={manageData.widgeList} /> */}
+          <WidgetList index={index} data={manageData.children} />
         </div>
         <div>
           <button className="btn" onClick={()=>{this.addGroupFn(index)}}>添加分组</button>
