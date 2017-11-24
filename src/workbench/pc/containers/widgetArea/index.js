@@ -12,7 +12,34 @@ import WidgetItem from './widgetItem';
 import WidgeFileItem from './widgeFileItem';
 import Checkbox from 'bee-checkbox';
 
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+import manageActions from 'store/root/manage/actions';
+import homeActions from 'store/root/home/actions';
+import rootActions from 'store/root/actions';
+const {deleteFolder, renameFolder, setFolderEdit } = manageActions;
+const {requestStart, requestSuccess, requestError, } = rootActions;
 
+// TODU id 
+// 'currtEditFiledI',
+@connect(
+  mapStateToProps(
+    'manageList',
+    'id',
+    {
+      namespace: 'manage',
+    }
+  ),
+  {
+    requestStart,
+    requestSuccess,
+    requestError,
+    deleteFolder,
+    renameFolder,
+    setFolderEdit
+    // addGroup
+  }
+)
 class WidgetArea extends Component {
 
     //TUDO 数据中的 size ： sm 、lg、xg （小[标准]、中、大）
@@ -61,6 +88,7 @@ class WidgetArea extends Component {
         let self = this;
         let lis = [];
         let liList = this.props.data;
+        debugger;
         (typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = liList) : (liList=this.state.data);
         if(liList){
           liList.map((da, i) => {

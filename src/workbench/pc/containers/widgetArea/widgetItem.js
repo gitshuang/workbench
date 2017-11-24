@@ -141,13 +141,14 @@ class WidgetItem extends Component {
           <Widget/>
         </div>
       );
-    } /*else if (id == '1101') {
-      contentElm = (
-        <div className={content} ref={(para) => { this.contain = para }}>
-          <Loading container={this.contain} show={true} />
-        </div>
-      );
-    }*/
+    } 
+    // else if (id == '1101') {
+    //   contentElm = (
+    //     <div className={content} ref={(para) => { this.contain = para }}>
+    //       <Loading id={"war_"+id} container={this.contain} show={true} />
+    //     </div>
+    //   );
+    // }
 
     return connectDragSource(connectDropTarget(
       <li className={widgetItem} style={{...widgetStyle[size],...style, opacity }} >

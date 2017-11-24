@@ -155,15 +155,9 @@ const reducer = handleActions({
     }
   },
   [addFolder]: (state, { payload: manageList }) => {
-      // state.manageList.map(function(da,i){
-      //   da.widgeList.map(function(_da,_i){
-      //       _da.editShow = false;
-
-      //   })
-      // })
       let d = new Date();
       let id = d.getHours() + d.getMinutes() + d.getSeconds() + d.getMilliseconds();
-      let obj = {id:id,optionTitle:"文件夹",size:"sm",title:"文件夹",type:"file",fileList:[],editShow:true};
+      let obj = {id:id+"",optionTitle:"文件夹",size:"sm",title:"文件夹",type:"file",fileList:[]};
       manageList.widgeList.push(obj);
 
       let _manageList = JSON.parse(JSON.stringify(state.manageList));

@@ -79,6 +79,7 @@ class WidgeFileItem extends Component {
     }
 
     componentWillReceiveProps(nextProps){
+      debugger;
         if(nextProps.id != this.props.data.id){
             this.setState({
               editShow:false
