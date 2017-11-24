@@ -6,6 +6,8 @@ const {
   setManageList,
   getManageList,
   batchDelect,
+  batchMove,
+  batchTo,
   addGroup,
   delectGroup,
   renameGroup,
@@ -95,6 +97,37 @@ const reducer = handleActions({
       ...state,
       manageList: newList
     }
+  },
+  [batchMove]: (state, {payload:selectGroup}) => {
+    [
+      {
+        index: 0,
+        widgeList:[
+          {
+            id:""
+          },
+          {
+            id:""
+          }
+        ]
+      }
+    ]
+    const manageList = state.manageList;
+    selectGroup.map((item,index)=>{
+      manageList[item] = false;
+    });
+    const newList =  manageList.filter((val,key) => {
+      return val != false;
+    });
+
+    console.log(newList);
+    return {
+      ...state,
+      manageList: newList
+    }
+  },
+  [batchTo]:(state, {payload: group}) => {
+
   },
   [addGroup]: (state, { payload: index }) => {
     const manageList = state.manageList;
