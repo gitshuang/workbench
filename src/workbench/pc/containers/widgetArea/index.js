@@ -88,7 +88,6 @@ class WidgetArea extends Component {
         let self = this;
         let lis = [];
         let liList = this.props.data;
-        debugger;
         (typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = liList) : (liList=this.state.data);
         if(liList){
           liList.map((da, i) => {
