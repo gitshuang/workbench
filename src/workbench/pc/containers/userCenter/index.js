@@ -70,7 +70,11 @@ class UserInfoContainer extends Component {
     portrait.style.display ="none";
   }
 
-  handleClickOutside() {
+  handleClickOutside(e) {
+    //在面板中操作不要关闭面板
+    if(event.target.getAttribute("class") == "u-select-dropdown-menu-item-active u-select-dropdown-menu-item"){
+      return;
+    }
     const { hideUserInfoDisplay, userInfoDisplay } = this.props;
     if(userInfoDisplay){
       hideUserInfoDisplay();
@@ -97,11 +101,9 @@ class UserInfoContainer extends Component {
     alert("修改")
   }
 
-  handleChange(e){
-    debugger
+  handleChange=(e)=>{
     console.log(e);
-    e.stopPropagation();
-    alert("账号");
+    // alert("账号");
   }
 
   render() {
@@ -148,23 +150,14 @@ class UserInfoContainer extends Component {
             <li><Button shape="border" size="sm">切换账号</Button></li>
             <li>
               <Select
-                defaultValue="系统设置"
-                onChange={(e)=>{this.handleChange(e)} }
+                defaultValue="系统设置" name="123"
+                onChange={this.handleChange}
               >
                 <Option name="account"  value="account" >账号</Option>
                 <Option name="language" value="language" >界面语言</Option>
                 <Option name="message" value="message" >消息</Option>
                 <Option name="cancel" value="cancel">注销</Option>
               </Select>
-              <div className={select}>
-                <div className={selectTit}>系统设置</div>
-                <ul className={options}>
-                  <li>账号</li>
-                  <li>界面管理</li>
-                  <li>消息</li>
-                  <li>注销</li>
-                </ul>
-              </div>
             </li>
           </ul>
         </div>
