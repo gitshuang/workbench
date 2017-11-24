@@ -35,7 +35,7 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
 
     if (draggedId !== props.id) {
-      props.moveItemDrag(draggedId, props.id);
+      props.moveItemDrag(draggedId, props.id, props.data.parentId);
     }
   }
 };
@@ -146,8 +146,9 @@ class WidgetItem extends Component {
         <div className={content}>
             <Loading container={this} show={true} />
         </div>
-      ); 
+      );
     }
+
     return connectDragSource(connectDropTarget(
       <li className={widgetItem} style={{...widgetStyle[size],...style, opacity }} >
         <div className={title}>

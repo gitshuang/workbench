@@ -19,7 +19,7 @@ import { HeaderLeft } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {changeUserInfoDisplay} = homeActions;
-const { setManageList,getManageList,batchDelect } = manageActions;
+const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
 
 @withRouter
 @connect(
@@ -37,7 +37,8 @@ const { setManageList,getManageList,batchDelect } = manageActions;
     changeUserInfoDisplay,
     setManageList,
     getManageList,
-    batchDelect
+    batchDelect,
+    moveGroup
   }
 )
 
@@ -52,21 +53,11 @@ class Home extends Component {
   }
 
   moveGroupDrag(id, afterId) {
-    const { data } = this.state;
 
-    const item = data.filter(i => i.id === id)[0];
-    const afterItem = data.filter(i => i.id === afterId)[0];
-    const itemIndex = data.indexOf(item);
-    const afterIndex = data.indexOf(afterItem);
+    let data = {id,afterId}
+    const { moveGroup } = this.props;
+    moveGroup(data);
 
-    this.setState(update(this.state, {
-      data: {
-        $splice: [
-          [itemIndex, 1],
-          [afterIndex, 0, item]
-        ]
-      }
-    }));
   }
 
   componentDidMount() {

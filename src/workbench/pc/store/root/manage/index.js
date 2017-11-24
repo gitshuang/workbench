@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import actions from './actions';
+import update from 'react/lib/update';
 
 const {
   setManageList,
@@ -160,10 +161,27 @@ const reducer = handleActions({
     }
   },
 
-  [moveGroup]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
+  [moveGroup]: (state, { payload: {id,afterId} }) => {
+
+    let manageList = state.manageList;
+    const item = manageList.filter(i => i.id === id)[0];
+    const afterItem = manageList.filter(i => i.id === afterId)[0];
+    const itemIndex = manageList.indexOf(item);
+    const afterIndex = manageList.indexOf(afterItem);
+
+    manageList = update(manageList, {
+      $splice: [
+        [itemIndex, 1],
+        [afterIndex, 0, item]
+      ]
+    })
+    //manageList = JSON.parse(JSON.stringify(manageList));
+
+    return{
+      ...state,
+      manageList,
+    }
+  },
   [stickGroup]: (state, { payload: index }) => {
     let manageList = state.manageList;
     const curr = manageList[index];
@@ -255,10 +273,26 @@ const reducer = handleActions({
       manageList,
     }
   },
-  [moveServe]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
+  [moveServe]: (state, { payload: {dataList,id,afterId,parentId} }) => {
+    let manageList = state.manageList;
+    let data = manageList.filter(i => i.id === parentId)[0].widgeList;
+    const item = data.filter(i => i.id === id)[0];
+    const afterItem = data.filter(i => i.id === afterId)[0];
+    const itemIndex = data.indexOf(item);
+    const afterIndex = data.indexOf(afterItem);
+
+    manageList.filter(i => i.id === parentId)[0].widgeList = update(data, {
+        $splice: [
+          [itemIndex, 1],
+          [afterIndex, 0, item]
+        ]
+    })
+    manageList = JSON.parse(JSON.stringify(manageList));
+    return{
+      ...state,
+      manageList,
+    }
+  },
 }, defaultState);
 
 

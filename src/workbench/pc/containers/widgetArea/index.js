@@ -17,10 +17,10 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,moveServe } = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
-// TODU id 
+// TODU id
 // 'currtEditFiledI',
 @connect(
   mapStateToProps(
@@ -36,7 +36,8 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
     requestError,
     deleteFolder,
     renameFolder,
-    setFolderEdit
+    setFolderEdit,
+    moveServe
     // addGroup
   }
 )
@@ -57,22 +58,11 @@ class WidgetArea extends Component {
       this.moveItemDrag = this.moveItemDrag.bind(this);
     }
 
-  moveItemDrag(id, afterId) {
-    const { data } = this.state;
+  moveItemDrag(id, afterId,parentId) {
+    let data = { data: this.props.data,id,afterId,parentId}
+    const { moveServe } = this.props;
+    moveServe(data);
 
-    const item = data.filter(i => i.id === id)[0];
-    const afterItem = data.filter(i => i.id === afterId)[0];
-    const itemIndex = data.indexOf(item);
-    const afterIndex = data.indexOf(afterItem);
-
-    this.setState(update(this.state, {
-      data: {
-        $splice: [
-          [itemIndex, 1],
-          [afterIndex, 0, item]
-        ]
-      }
-    }));
   }
 
     change = (da) => {
@@ -88,7 +78,6 @@ class WidgetArea extends Component {
         let self = this;
         let lis = [];
         let liList = this.props.data;
-        (typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = liList) : (liList=this.state.data);
         if(liList){
           liList.map((da, i) => {
 
