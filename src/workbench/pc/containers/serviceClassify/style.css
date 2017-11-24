@@ -1,16 +1,15 @@
 .bg{
 	width:100%;
-	height:1000px;
 	background: rgb(230,233,233);
-	padding-top:10px;
+	padding:10px;
 }
 .wrap{
-	width:1190px;
-	height:811px; 
+	width:1190px; 
 	background:#fff;
 	border-radius: 2px ; 
 	margin:0 auto;
 	padding-top:40px;
+	padding-bottom: 40px;
 }
 :global(.u-autocomplete){
 	width:355px;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
-  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon
+  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options
 } from './style.css';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -46,6 +46,11 @@ const {
 )
 @onClickOutside
 class UserInfoContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   static propTypes = {
     userInfo: PropTypes.object,
     getUserInfo: PropTypes.func,
@@ -92,6 +97,13 @@ class UserInfoContainer extends Component {
     alert("修改")
   }
 
+  handleChange(e){
+    debugger
+    console.log(e);
+    e.stopPropagation();
+    alert("账号");
+  }
+
   render() {
     const { userInfo: { name, company, phone, imgsrc ,glory ,redPackets} } = this.props;
     return (
@@ -99,7 +111,7 @@ class UserInfoContainer extends Component {
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner} onMouseEnter={() => this.handleMouseEnter()} />
           <div className={editPortrait} ref="portrait" onMouseLeave={() => this.handleMouseLeave()}>
-            <Icon type="uf-pencil-s" onClick={()=>this.handleClick()}></Icon>
+            <Icon type="uf-pencil-s" onClick={ ()=>this.handleClick() }></Icon>
           </div>
         </div>
         <div className={userInfo}>
@@ -137,13 +149,22 @@ class UserInfoContainer extends Component {
             <li>
               <Select
                 defaultValue="系统设置"
-                onChange={this.handleChange}
+                onChange={(e)=>{this.handleChange(e)} }
               >
-                <Option value="account">账号</Option>
-                <Option value="language">界面语言</Option>
-                <Option value="message">消息</Option>
-                <Option value="Cancel">注销</Option>
+                <Option name="account"  value="account" >账号</Option>
+                <Option name="language" value="language" >界面语言</Option>
+                <Option name="message" value="message" >消息</Option>
+                <Option name="cancel" value="cancel">注销</Option>
               </Select>
+              <div className={select}>
+                <div className={selectTit}>系统设置</div>
+                <ul className={options}>
+                  <li>账号</li>
+                  <li>界面管理</li>
+                  <li>消息</li>
+                  <li>注销</li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>

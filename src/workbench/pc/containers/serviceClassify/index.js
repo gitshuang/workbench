@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+import actions from 'store/root/actions';
+
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';
 import Icon from 'bee-icon';
 import InputGroup from 'bee-input-group';
 import AutoComplete from 'bee-autocomplete';
+
 import {bg,wrap,clearfix,serviceSearch,ufSearch,hotService,classify,class1,class2,services,serviceInfo,serviceTit,describe,servicePic,singleService } from './style.css';
+
+@connect(
+  mapStateToProps(
+    'serviceList',
+    'quickServiceDisplay',
+  )
+)
 
 class serviceClassify extends Component {
 
@@ -24,6 +36,7 @@ class serviceClassify extends Component {
     })
   }
   render() { 
+    const { serviceList } = this.props;
     let {value ,options,placeholder,disabled } = this.state;
     return (
       <div className={bg}>
@@ -51,185 +64,43 @@ class serviceClassify extends Component {
           <div className={classify}>
             <dl className={`${class1} ${clearfix}`}>
               <dt>分类一</dt>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友空间</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友空间</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友空间</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友空间</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友空间</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友空间</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友空间</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友空间</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
+              <ul className="clearfix">
+                {
+                  serviceList.map((service, i) => (
+                    <dd>
+                      <div className={`${singleService} ${clearfix}`}>
+                        <img className={servicePic}></img>
+                        <div className={`${services} ${clearfix}`}>
+                          <div className={`${serviceInfo}`}>
+                            <div className={serviceTit}>{service.serviceName}</div>
+                            <div className={describe}>{service.serviceId}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </dd>
+                  ))
+                }
+              </ul>
             </dl>
             <dl className={`${class2} ${clearfix}`}>
               <dt>分类二</dt>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友报账</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友报账</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友报账</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友报账</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友报账</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友报账</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友报账</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-              <dd>
-                <div className={`${singleService} ${clearfix}`}>
-                  <img className={servicePic}></img>
-                  <div className={`${services} ${clearfix}`}>
-                    <div className={`${serviceInfo}`}>
-                      <div className={serviceTit}>友报账</div>
-                      <div className={describe}>沟通协作一步到位</div>
-                    </div>
-                  </div>
-                </div>
-              </dd>
+              <ul className="clearfix">
+                {
+                  serviceList.map((service, i) => (
+                    <dd>
+                      <div className={`${singleService} ${clearfix}`}>
+                        <img className={servicePic}></img>
+                        <div className={`${services} ${clearfix}`}>
+                          <div className={`${serviceInfo}`}>
+                            <div className={serviceTit}>{service.serviceName}</div>
+                            <div className={describe}>{service.serviceId}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </dd>
+                  ))
+                }
+              </ul>
             </dl>
           </div>
         </div>
