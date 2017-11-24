@@ -1,0 +1,18 @@
+.select{
+	position: absolute;
+	width: 100px;	
+	border: 1px solid #000;
+}
+
+.select li{
+	height: 20px;
+	border-bottom: 1px solid #ccc;
+}
+
+.select li:hover{
+	background: #ccc;
+}
+
+.select .selectedli{
+	background: #ccc;
+}
