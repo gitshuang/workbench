@@ -141,7 +141,7 @@ class Home extends Component {
 
   renderContent =() => {
     let { manageList } = this.props;
-    (typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = manageList) : (manageList=this.state.data);
+    //(typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = manageList) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
