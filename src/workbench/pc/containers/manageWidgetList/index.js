@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
 import update from 'react/lib/update';
 import PropTypes from 'prop-types';
-import Icon from 'components/icon';
+import Icon from 'bee-icon';
 import Button from 'bee-button';
 import Popconfirm from 'bee-popconfirm';
 import { widgetList, widgetItem, title, file_context, title_left,
@@ -98,7 +98,7 @@ class WidgetList extends Component {
             );
         }
       })
-    return (<ul className={`${widgetList} ${clearfix}`} >{list}<div className={addModule}><Icon type="add" onClick={()=>{this.addFolderFn(index)}}/></div></ul>);
+    return (<ul className={`${widgetList} ${clearfix}`} >{list}<div className={addModule}><Icon type="uf-plus" onClick={()=>{this.addFolderFn(index)}}/></div></ul>);
   }
 }
 
