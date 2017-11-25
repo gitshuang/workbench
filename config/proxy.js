@@ -13,6 +13,7 @@ var api = [
   '/user/getUserInfo',
 
   '/getMessage',
+  '/getSelectWidgetList',
   '/setManageList',
   '/getManageList',
 ]

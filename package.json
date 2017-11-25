@@ -19,6 +19,7 @@
     "bee-dropdown": "^1.0.1",
     "bee-form-control": "^1.0.4",
     "bee-icon": "^1.0.3",
+    "bee-layout": "^1.2.7",
     "bee-loading": "^1.0.2",
     "bee-menus": "^1.0.2",
     "bee-modal": "^1.0.2",

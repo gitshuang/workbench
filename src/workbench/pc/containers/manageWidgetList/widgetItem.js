@@ -171,7 +171,7 @@ class WidgetItem extends Component {
           <div onClick={this.fileDele}><Icon type="uf-del" /></div>
         </div>
 
-        <PopDialog show = { this.state.showModal } data={this.props.data} btns={pop_btn} >
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={this.props.data} btns={pop_btn} >
             <div className={pop_cont}>
               <Icon type="uf-exc-t" />
               <span>您确认要删除服务此项?</span>

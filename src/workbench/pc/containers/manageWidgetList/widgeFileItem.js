@@ -142,12 +142,12 @@ class WidgeFileItem extends Component {
           <div className={[title_left,file_icon].join(' ')}></div>
           <div className={title_right}> {da.widgetName} </div>
         </div>
-        <div className={[context,file_context].join(' ')}>
-          { da.children.map((da,i) => (<div key={"file_"+i}></div>)).slice(0, 9) }
+        <div name="file" className={[context,file_context].join(' ')}>
+          { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) }
         </div>
         {this.state.editShow ? edit : null }
         {this.state.editShow ? null : btns }
-        <PopDialog show = { this.state.showModal } data={da} btns={pop_btn} >
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={da} btns={pop_btn} >
             <div className={pop_cont}>
               <Icon type="uf-exc-t" />
               <span>您确认要删除服务[{this.props.data.widgetName}]?</span>

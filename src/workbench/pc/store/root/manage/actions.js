@@ -2,7 +2,8 @@ import { createActions } from 'redux-actions';
 import types from './types';
 import {
   setManageList,
-  getManageList
+  getManageList,
+  getSelectWidgetList
 } from './api';
 
 const {
@@ -25,12 +26,14 @@ const {
   MOVE_SERVE,
   OPEN_FOLDER,
   CLOSE_FOLDER,
+  GET_SELECT_WIDGET_LIST,
   } = types;
 
 export default createActions(
   {
     [SET_MANAGE_LIST]: setManageList,
     [GET_MANAGE_LIST]: getManageList,
+    [GET_SELECT_WIDGET_LIST]: getSelectWidgetList,
   },
   BATCH_DELECT,
   ADD_GROUP,

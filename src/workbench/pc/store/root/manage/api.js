@@ -4,3 +4,5 @@ export const setManageList = (list) => {
   return post('/setManageList', { list });
 }
 export const getManageList = () => get('/desktop/getdeskTop');
+
+export const getSelectWidgetList = () => get('/getSelectWidgetList');

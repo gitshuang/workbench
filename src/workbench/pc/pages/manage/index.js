@@ -13,7 +13,7 @@ import manageActions from 'store/root/manage/actions';
 
 import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
-import Dialog from 'containers/homeFolderDialog';
+import Dialog from 'containers/manageFolderDialog';
 
 import MoveToGroup from 'components/moveToGroup';
 

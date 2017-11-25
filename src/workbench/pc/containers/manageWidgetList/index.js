@@ -11,6 +11,8 @@ import { widgetList, widgetItem, title, file_context, title_left,
 import WidgetItem from './widgetItem';
 import WidgeFileItem from './widgeFileItem';
 import Checkbox from 'bee-checkbox';
+import PopDialog from 'components/pop';
+import SelectWidgetList from 'containers/manageSelectWidgetList';
 
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
@@ -46,13 +48,22 @@ class WidgetList extends Component {
     constructor(props) {
       super(props);
       this.moveItemDrag = this.moveItemDrag.bind(this);
+      this.state = {
+
+        showModal:false
+      }
     }
 
   // 添加文件夹
-  addFolderFn = (data)=> {
-    // alert("添加文件夹功能");
+  addFolderFn = (data)=> {  
     const { addFolder } = this.props;
     addFolder(data);
+  }
+
+  openSelectWidget = ()=> {
+      this.setState({
+        showModal:true
+      })
   }
 
   moveItemDrag(id, afterId,parentId) {
@@ -62,11 +73,30 @@ class WidgetList extends Component {
   }
 
   widgeOnclick = (e,da) => {
-    this.props.openFolder(da);
+    if(e.target.getAttribute("name") == "file"){
+      this.props.openFolder(da);  
+    }
+  }
+
+
+  popSave = (data)=>{
+     
+  }
+
+  popClose = ()=>{
+      this.setState({
+        showModal:false
+      })
   }
 
   render() {
       const { data } = this.props;
+
+      const pop_btn = [
+        {label:"确认",fun:this.popSave,className:""},
+        {label:"取消",fun:this.popClose,className:""}
+      ]   //设置操作按钮
+
 
       const list = data.map((item, i) => {
         const {
@@ -98,7 +128,20 @@ class WidgetList extends Component {
             );
         }
       })
-    return (<ul className={`${widgetList} ${clearfix}`} >{list}<div className={addModule}><Icon type="uf-plus" onClick={()=>{this.addFolderFn(index)}}/></div></ul>);
+    
+    let _da = {};
+    
+    return (<ul className={`${widgetList} ${clearfix}`} >
+        {list}
+        <div className={addModule} onClick={this.openSelectWidget} >
+          <Icon  type="uf-plus"  />
+        </div>
+
+        <PopDialog show = { this.state.showModal } data={_da} btns={pop_btn} >
+            <SelectWidgetList close={this.popClose}/>
+        </PopDialog>
+
+      </ul>);
   }
 }
 

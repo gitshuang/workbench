@@ -196,11 +196,6 @@
     width: 60px;
     height: 32px;
 }
-
-:global(.u-modal.in .u-modal-dialog){
-    width: 416px;
-    height: 201px;
-}
 .pop_cont{
     font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';
     font-weight: 700;

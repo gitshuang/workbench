@@ -24,6 +24,7 @@ const {
   moveServe,
   openFolder,
   closeFolder,
+  getSelectWidgetList,
   } = actions;
 
 const defaultState = {
@@ -32,6 +33,7 @@ const defaultState = {
   isEdit: false,
   curDisplayFolder: {},
   folderModalDisplay: false,
+  selectWidgetList:[],
 };
 
 const findTreeById = (data, curId) => {
@@ -75,6 +77,16 @@ const reducer = handleActions({
       return {
         ...state,
         manageList: payload,
+      };
+    }
+  },
+  [getSelectWidgetList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    } else {
+      return {
+        ...state,
+        selectWidgetList: payload,
       };
     }
   },

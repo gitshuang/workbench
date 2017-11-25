@@ -20,4 +20,5 @@ export default createTypes(
   'MOVE_SERVE',
   'OPEN_FOLDER',
   'CLOSE_FOLDER',
+  'GET_SELECT_WIDGET_LIST',
 );
