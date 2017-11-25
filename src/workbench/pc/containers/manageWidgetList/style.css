@@ -114,13 +114,14 @@
 
 
 .footer{
-   display: -webkit-box;
-   height: 35px;
-   width: 100%;
+  display: -webkit-box;
+  height: 35px;
+  width: 100%;
   -webkit-box-align: center;
   text-align: center;
   position: absolute;
   bottom: 0px;
+  background:rgba(242,242,242,1);
 }
 
 .footer>div{

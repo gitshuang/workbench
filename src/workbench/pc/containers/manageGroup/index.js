@@ -10,9 +10,10 @@ import manageActions from 'store/root/manage/actions';
 
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
-import Icon from 'components/icon';
+import Button from 'bee-button';
+import Icon from 'bee-icon';
 import WidgetList from 'containers/manageWidgetList';
-import {WidgetTitle,addGroupBtn,addBtnContainer} from './style.css';
+import {WidgetTitle,addGroupBtn,addBtnContainer,complete,cancel,newGroupName,addBtn} from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
   requestStart,
@@ -35,6 +36,7 @@ const style = {
   padding: '0.5rem 4rem',
   margin: '0 auto',
   marginBottom: '.5rem',
+  marginTop: '.5rem',
   background:'rgba(79,86,98,0.1)',
   cursor: 'move'
 };
@@ -193,7 +195,7 @@ class ManageGroup extends Component {
         overlay={menu1}
         animation="slide-up"
       >
-        <Icon type="momozhushou" />
+        <Icon type="uf-3dot-h" />
       </Dropdown>
     )
   }
@@ -212,9 +214,9 @@ class ManageGroup extends Component {
     if(this.state.editFlag) {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
-          <input type="text" value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
-          <button className="btn btn-inline" onClick={ ()=>{this.renameGroupFn(index)} }>完成</button>
-          <button className="btn btn-inline" onClick={ ()=>{this.renameGroupCancel(index)} }>取消</button>
+          <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
+          <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
+          <Button className={cancel} onClick={ ()=>{this.renameGroupCancel(index)} }>取消</Button>
         </div>
       </div>;
     }else {
@@ -224,8 +226,8 @@ class ManageGroup extends Component {
           <span>{manageData.widgetName}</span>
         </label>
         <div>
-          <Icon type="dingzhi" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
-          <Icon type="add" onClick={()=>{this.addFolderFn(index)}}/>
+          <Icon type="uf-pencil" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
+          <Icon type="uf-plus" onClick={()=>{this.addFolderFn(index)}}/>
           {this.renderDrop(index)}
         </div>
       </div>;
@@ -238,8 +240,8 @@ class ManageGroup extends Component {
             <WidgetList index={index} data={manageData.children} />
           </div>
         </div>
-        <div>
-          <button className={`'btn' ${addGroupBtn}`} onClick={()=>{this.addGroupFn(index)}}><Icon type="add" style={{marginRight:8}}></Icon>添加组</button>
+        <div className={addBtn}>
+          <button className={`'btn' ${addGroupBtn}`} onClick={()=>{this.addGroupFn(index)}}><Icon type="uf-plus"></Icon>添加组</button>
         </div>
       </div>
     ));

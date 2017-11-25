@@ -19,7 +19,8 @@ import MoveToGroup from 'components/moveToGroup';
 
 import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
-import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin} from './style.css';
+
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin,um_content} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
@@ -156,7 +157,7 @@ class Home extends Component {
             <span>首页编辑</span>
           </Header>
         </div>
-        <div className="um-content">
+        <div className={um_content}>
           {this.renderContent()}
         </div>
         <div className="um-footer">

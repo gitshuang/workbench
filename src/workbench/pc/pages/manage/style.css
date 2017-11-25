@@ -3,6 +3,9 @@
   width: 58px;
   height: 27px;
 }
+.um_content{
+	background:rgb(230,233,233);
+}
 .umBoxJustify{
 	height:48px;
 	padding:10px 0;
