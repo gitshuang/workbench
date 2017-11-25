@@ -23,6 +23,8 @@ const {
   ADD_SERVE,
   DELECT_SERVE,
   MOVE_SERVE,
+  OPEN_FOLDER,
+  CLOSE_FOLDER,
   } = types;
 
 export default createActions(
@@ -45,4 +47,6 @@ export default createActions(
   ADD_SERVE,
   DELECT_SERVE,
   MOVE_SERVE,
+  OPEN_FOLDER,
+  CLOSE_FOLDER,
 );

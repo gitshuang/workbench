@@ -7,46 +7,42 @@ import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
 import homeActions from 'store/root/home/actions';
 
-const { closeFolder } = homeActions;
+const {closeFolder} = homeActions;
 
 @connect(
-  mapStateToProps(
-    'workList',
-    'curDisplayFolder',
-    'folderModalDisplay',
+    mapStateToProps(
+        'workList',
+        'curDisplayFolder',
+        'folderModalDisplay',
+        {
+            namespace: 'home',
+        }
+    ),
     {
-      namespace: 'home',
+        closeFolder,
     }
-  ),
-  {
-    closeFolder,
-  }
 )
-class homeFolderDialog extends Component{
-	render(){
-    const {
-      curDisplayFolder: {
-        widgetName: title,
-        children,
-      },
-      closeFolder,
-    } = this.props;
-    const list = children.map((child, i) => {
-      const {
-        type,
-        widgetId,
-      } = child;
-      const Widget = WidgetMaker(3);
-      const props = {
-        key: `widget-${widgetId}-${i}`,
-        data: child,
-      };
-      return (
-        <Widget { ...props }/>
-      );
-    })
-		return(
-      <Modal show={true} onHide={ closeFolder } >
+class homeFolderDialog extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const {curDisplayFolder: {widgetName: title, children, }, closeFolder, } = this.props;
+        const list = children.map((child, i) => {
+            const {type, widgetId, } = child;
+            const Widget = WidgetMaker(3);
+            const props = {
+                key: `widget-${widgetId}-${i}`,
+                data: child,
+            };
+            return (
+                <Widget { ...props }/>
+            );
+        })
+        return (
+            <Modal show={true} onHide={ closeFolder } >
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
@@ -56,8 +52,8 @@ class homeFolderDialog extends Component{
           </div>
         </Modal.Body>
       </Modal>
-    );
-  }
+        );
+    }
 }
 
 export default homeFolderDialog;

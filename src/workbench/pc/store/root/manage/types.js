@@ -18,4 +18,6 @@ export default createTypes(
   'ADD_SERVE',
   'DELECT_SERVE',
   'MOVE_SERVE',
+  'OPEN_FOLDER',
+  'CLOSE_FOLDER',
 );

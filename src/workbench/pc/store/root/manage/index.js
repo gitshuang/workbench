@@ -22,12 +22,16 @@ const {
   addServe,
   delectServe,
   moveServe,
+  openFolder,
+  closeFolder,
   } = actions;
 
 const defaultState = {
   curEditFolderId: '',
   manageList: [],
   isEdit: false,
+  curDisplayFolder: {},
+  folderModalDisplay: false,
 };
 
 const findTreeById = (data, curId) => {
@@ -322,6 +326,16 @@ const reducer = handleActions({
       manageList,
     }
   },
+  [openFolder]: (state, { payload: curDisplayFolder }) => ({
+    ...state,
+    curDisplayFolder,
+    folderModalDisplay: true,
+  }),
+  [closeFolder]: (state) => ({
+    ...state,
+    curDisplayFolder: {},
+    folderModalDisplay: false,
+  }),
 }, defaultState);
 
 export default reducer;

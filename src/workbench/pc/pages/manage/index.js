@@ -13,6 +13,7 @@ import manageActions from 'store/root/manage/actions';
 
 import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
+import Dialog from 'containers/homeFolderDialog';
 
 import 'assets/style/iuapmobile.um.css';
 import { HeaderLeft } from './style.css';
@@ -25,6 +26,7 @@ const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
   mapStateToProps(
     'manageList',
     'isEdit',
+    'folderModalDisplay',
     {
       namespace: 'manage',
     }
@@ -140,6 +142,9 @@ class Home extends Component {
   }
 
   render() {
+     const {
+          folderModalDisplay,
+        } = this.props;
     const { isEdit } = this.props;
     return (
       <div className="um-win">
@@ -162,6 +167,11 @@ class Home extends Component {
             </div>
           </div>
         </div>
+        {
+            folderModalDisplay ? (
+              <Dialog/>
+            ) : null
+          }
       </div>
     );
   }

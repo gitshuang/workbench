@@ -53,8 +53,14 @@ class WidgetList extends Component {
     const { moveServe } = this.props;
     moveServe(data);
   }
+
+  widgeOnclick = (e,da) => {
+    this.props.openFolder(da);
+  }
+
   render() {
       const { data } = this.props;
+
       const list = data.map((item, i) => {
         const {
           type,
@@ -70,7 +76,7 @@ class WidgetList extends Component {
                 id={id}
                 index={id}
                 moveItemDrag={this.moveItemDrag}
-                onClick={()=>{/*openFolder(item)*/}}
+                onClick={(e)=>{this.widgeOnclick(e,item)}}
               />
             );
           default:
