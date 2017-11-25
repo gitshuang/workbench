@@ -167,7 +167,7 @@ class WidgetItem extends Component {
 
         <div className={footer}>
           <div><Checkbox disabled className="test" /></div>
-          <div onClick={this.fileEdit}><Icon type="uf-pencil" /></div>
+         
           <div onClick={this.fileDele}><Icon type="uf-del" /></div>
         </div>
 
