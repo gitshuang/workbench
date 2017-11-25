@@ -143,7 +143,7 @@ class WidgeFileItem extends Component {
           <div className={title_right}> {da.widgetName} </div>
         </div>
         <div className={[context,file_context].join(' ')}>
-          { da.children.map(() => (<div></div>)).slice(0, 9) }
+          { da.children.map((da,i) => (<div key={"file_"+i}></div>)).slice(0, 9) }
         </div>
         {this.state.editShow ? edit : null }
         {this.state.editShow ? null : btns }

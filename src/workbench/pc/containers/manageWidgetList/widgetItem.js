@@ -6,12 +6,23 @@ import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
 import Icon from 'bee-icon';
+import Checkbox from 'bee-checkbox';
+import PopDialog from 'components/pop';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+import manageActions from 'store/root/manage/actions';
+import homeActions from 'store/root/home/actions';
+import rootActions from 'store/root/actions';
+const {deleteFolder, renameFolder, setFolderEdit } = manageActions;
 import {
   widgetItem,
   title,
   title_left,
   title_right,
   content,
+  footer,
+  pop_cont,
+  widgetItemCont,
 } from './style.css'
 
 const style = {
@@ -29,6 +40,7 @@ const itemSource = {
     return { id: props.id };
   }
 };
+
 
 const itemTarget = {
   hover(props, monitor) {
@@ -70,18 +82,70 @@ const widgetStyle = [
   }
 ];
 
+
+@connect(
+  mapStateToProps(
+    'manageList',
+    'curEditFolderId',
+    {
+      namespace: 'manage',
+    }
+  ),
+  {
+    deleteFolder,
+    renameFolder,
+    setFolderEdit
+  }
+)
 class WidgetItem extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
-    index: PropTypes.any.isRequired,
+    // index: PropTypes.any.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    id: PropTypes.any.isRequired,
+    // id: PropTypes.any.isRequired,
   }
   constructor(props) {
     super(props);
+
+
+    this.popSave = this.popSave.bind(this);
+    this.popClose = this.popClose.bind(this);
+
+    this.state = {
+      showModal:false
+    }
   }
+
+
+  popSave = (data)=>{
+    // this.state.data
+    const { deleteFolder } = this.props;
+    deleteFolder(data.widgetId);
+    this.setState({
+        showModal:false
+    })
+  }
+
+  popClose = ()=>{
+      this.setState({
+        showModal:false
+      })
+  }
+
+  fileDele = () =>{
+    this.setState({
+      showModal:true
+    })
+  }
+
   render() {
+
+     const pop_btn = [
+      {label:"确认",fun:this.popSave,className:""},
+      {label:"取消",fun:this.popClose,className:""}
+    ]   //设置操作按钮
+
     const {
       data: {
         widgetId: id,
@@ -89,7 +153,7 @@ class WidgetItem extends Component {
         widgetName,
       }
     } = this.props;
-    const { index,connectDragSource, connectDropTarget,isDragging } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging } = this.props;
     const opacity = isDragging ? 0 : 1;
     return connectDragSource(connectDropTarget(
       <li className={widgetItem} style={{...widgetStyle[size],...style, opacity }} >
@@ -97,6 +161,23 @@ class WidgetItem extends Component {
           <div className={title_left}><Icon type="uf-add-c-o" /></div>
           <div className={title_right}>{widgetName}</div>
         </div>
+        <div className={widgetItemCont}>
+          
+        </div>
+
+        <div className={footer}>
+          <div><Checkbox disabled className="test" /></div>
+          <div onClick={this.fileEdit}><Icon type="uf-pencil" /></div>
+          <div onClick={this.fileDele}><Icon type="uf-del" /></div>
+        </div>
+
+        <PopDialog show = { this.state.showModal } data={this.props.data} btns={pop_btn} >
+            <div className={pop_cont}>
+              <Icon type="uf-exc-t" />
+              <span>您确认要删除服务此项?</span>
+            </div>
+        </PopDialog>
+
       </li>
     ));
   }
