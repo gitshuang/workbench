@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options
@@ -28,6 +29,7 @@ const {
   requestError,
 } = rootActions;
 
+@withRouter
 @connect(
   mapStateToProps(
     'userInfo',
@@ -95,7 +97,14 @@ class UserInfoContainer extends Component {
     console.log(e);
     // alert("账号");
   }
-
+  gotoManage() {
+    const {
+      history,
+      hideUserInfoDisplay,
+    } = this.props;
+    history.push('/manage');
+    hideUserInfoDisplay();
+  }
   render() {
     const {
       userInfo: {
@@ -132,7 +141,7 @@ class UserInfoContainer extends Component {
         </div>
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
-            <li><Button shape="border" size="sm">桌面管理</Button></li>
+            <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>桌面管理</Button></li>
             <li><Button shape="border" size="sm">切换账号</Button></li>
             <li>
               <Select

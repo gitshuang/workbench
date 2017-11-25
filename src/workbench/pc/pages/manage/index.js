@@ -18,7 +18,6 @@ import 'assets/style/iuapmobile.um.css';
 import { HeaderLeft } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const {changeUserInfoDisplay} = homeActions;
 const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
 
 @withRouter
@@ -34,7 +33,6 @@ const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
     requestStart,
     requestSuccess,
     requestError,
-    changeUserInfoDisplay,
     setManageList,
     getManageList,
     batchDelect,
@@ -118,15 +116,6 @@ class Home extends Component {
     }
   }
 
-  getLeftContent() {
-    let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
-    return (
-      <div className={HeaderLeft}>
-        <img src={logoUrl}/>
-      </div>
-    )
-  }
-
   renderContent =() => {
     let { manageList } = this.props;
     //(typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = manageList) : (manageList=this.state.data);
@@ -146,12 +135,16 @@ class Home extends Component {
     return list;
   }
 
+  goBack() {
+    this.props.history.goBack();
+  }
+
   render() {
-    const { changeUserInfoDisplay,isEdit } = this.props;
+    const { isEdit } = this.props;
     return (
       <div className="um-win">
         <div className="um-header">
-          <Header onLeftClick={ changeUserInfoDisplay } leftContent={this.getLeftContent()} iconName={'wode'}>
+          <Header onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
             <span>首页编辑</span>
           </Header>
         </div>
