@@ -12,7 +12,7 @@ import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-men
 import Dropdown from 'bee-dropdown';
 import Icon from 'components/icon';
 import WidgetList from 'containers/manageWidgetList';
-import {WidgetTitle} from './style.css';
+import {WidgetTitle,addGroupBtn,addBtnContainer} from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
   requestStart,
@@ -29,10 +29,13 @@ const {
   } = manageActions;
 
 const style = {
-  border: '1px dashed gray',
-  padding: '0.5rem 1rem',
+  width:'1290px',
+  border: '1px solid #fff',
+  borderRadius:'2px',
+  padding: '0.5rem 4rem',
+  margin: '0 auto',
   marginBottom: '.5rem',
-  backgroundColor: 'white',
+  background:'rgba(79,86,98,0.1)',
   cursor: 'move'
 };
 
@@ -228,13 +231,15 @@ class ManageGroup extends Component {
       </div>;
     }
     return connectDragSource(connectDropTarget(
-      <div id={_id} style={{ ...style, opacity }}>
-        { groupTitle }
-        <div>
-          <WidgetList index={index} data={manageData.children} />
+      <div>
+        <div id={_id} style={{ ...style, opacity }}>
+          { groupTitle }
+          <div>
+            <WidgetList index={index} data={manageData.children} />
+          </div>
         </div>
         <div>
-          <button className="btn" onClick={()=>{this.addGroupFn(index)}}>添加分组</button>
+          <button className={`'btn' ${addGroupBtn}`} onClick={()=>{this.addGroupFn(index)}}><Icon type="add" style={{marginRight:8}}></Icon>添加组</button>
         </div>
       </div>
     ));

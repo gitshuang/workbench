@@ -7,3 +7,14 @@
   font-size: 30px;
   margin-right: 20px;
 }
+.addGroupBtn{
+	height:28px;
+	background: #fff;
+	border: 1px solid #D9D9D9;
+	padding:0 9px;
+	margin:15px 0;
+	font-size:12px;
+	line-height:28px;
+	color:rgba(74,81,93,1);
+	margin-left: 665px;
+}

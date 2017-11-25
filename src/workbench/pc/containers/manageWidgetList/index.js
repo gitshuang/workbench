@@ -7,7 +7,7 @@ import Icon from 'bee-icon';
 import Button from 'bee-button';
 import Popconfirm from 'bee-popconfirm';
 import { widgetList, widgetItem, title, file_context, title_left,
-  file_icon, title_right, context, bottom ,footer} from './style.css'
+  file_icon, title_right, context, bottom ,footer,clearfix,addModule} from './style.css'
 import WidgetItem from './widgetItem';
 import WidgeFileItem from './widgeFileItem';
 import Checkbox from 'bee-checkbox';
@@ -85,7 +85,7 @@ class WidgetList extends Component {
             );
         }
       })
-    return (<ul className={widgetList} >{list}</ul>);
+    return (<ul className={`${widgetList} ${clearfix}`} >{list}<div className={addModule}><Icon type="uf-plus"></Icon></div></ul>);
   }
 }
 
