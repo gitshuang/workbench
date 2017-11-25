@@ -19,7 +19,7 @@ import { HeaderLeft } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {changeUserInfoDisplay} = homeActions;
-const { setManageList,getManageList,batchDelect } = manageActions;
+const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
 
 @withRouter
 @connect(
@@ -37,7 +37,8 @@ const { setManageList,getManageList,batchDelect } = manageActions;
     changeUserInfoDisplay,
     setManageList,
     getManageList,
-    batchDelect
+    batchDelect,
+    moveGroup
   }
 )
 
@@ -52,21 +53,11 @@ class Home extends Component {
   }
 
   moveGroupDrag(id, afterId) {
-    const { data } = this.state;
 
-    const item = data.filter(i => i.id === id)[0];
-    const afterItem = data.filter(i => i.id === afterId)[0];
-    const itemIndex = data.indexOf(item);
-    const afterIndex = data.indexOf(afterItem);
+    let data = {id,afterId}
+    const { moveGroup } = this.props;
+    moveGroup(data);
 
-    this.setState(update(this.state, {
-      data: {
-        $splice: [
-          [itemIndex, 1],
-          [afterIndex, 0, item]
-        ]
-      }
-    }));
   }
 
   componentDidMount() {
@@ -74,9 +65,8 @@ class Home extends Component {
     getManageList().then(({error, payload}) => {
       if (error) {
         requestError(payload);
-      } else {
-        requestSuccess();
       }
+      requestSuccess();
     });
   }
   // 将此方法传递给manageGroup 组件中
@@ -89,7 +79,7 @@ class Home extends Component {
         return index !== item;
       });
     }
-    console.log(selectGroup);
+    // console.log(selectGroup);
     this.setState({
       selectGroup
     });
@@ -105,13 +95,12 @@ class Home extends Component {
   }
   // 保存
   save =() => {
-    const {setManageList,manageList} = this.props;
+    const {setManageList, manageList} = this.props;
     setManageList(manageList).then(({error, payload}) => {
       if (error) {
         requestError(payload);
-      } else {
-        requestSuccess();
       }
+      requestSuccess();
     });
   }
   // 取消
@@ -121,9 +110,8 @@ class Home extends Component {
       getManageList().then(({error, payload}) => {
         if (error) {
           requestError(payload);
-        } else {
-          requestSuccess();
         }
+        requestSuccess();
       });
     }else{
       this.props.history.goBack();
@@ -146,7 +134,13 @@ class Home extends Component {
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
       list.push(
-        <ManageGroup manageData={item} index={index} key={item.name+index} selectGroupFn={this.selectGroupFn}  id={item.id} moveGroupDrag={this.moveGroupDrag} />
+        <ManageGroup
+          manageData={item}
+          index={index}
+          key={item.widgetName+index}
+          selectGroupFn={this.selectGroupFn}
+          id={item.widgetId}
+          moveGroupDrag={this.moveGroupDrag} />
       )
     });
     return list;

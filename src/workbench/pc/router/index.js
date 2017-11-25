@@ -1,4 +1,4 @@
-import Home from 'pages/home/index';
+import Home from 'pages/home';
 import Work from 'pages/work';
 import Application from 'pages/application';
 import Manage from 'pages/manage';

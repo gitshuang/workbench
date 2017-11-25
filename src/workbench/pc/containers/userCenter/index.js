@@ -60,17 +60,11 @@ class UserInfoContainer extends Component {
     requestError: PropTypes.func,
   }
 
-  handleMouseEnter=() => {
-    let portrait = this.refs.portrait;
-    portrait.style.display ="block";
-  }
-
-  handleMouseLeave=() => {
-    let portrait = this.refs.portrait;
-    portrait.style.display ="none";
-  }
-
-  handleClickOutside() {
+  handleClickOutside(e) {
+    //在面板中操作不要关闭面板
+    if(event.target.getAttribute("class") == "u-select-dropdown-menu-item-active u-select-dropdown-menu-item"){
+      return;
+    }
     const { hideUserInfoDisplay, userInfoDisplay } = this.props;
     if(userInfoDisplay){
       hideUserInfoDisplay();
@@ -97,21 +91,26 @@ class UserInfoContainer extends Component {
     alert("修改")
   }
 
-  handleChange(e){
-    debugger
+  handleChange=(e)=>{
     console.log(e);
-    e.stopPropagation();
-    alert("账号");
+    // alert("账号");
   }
 
   render() {
-    const { userInfo: { name, company, phone, imgsrc ,glory ,redPackets} } = this.props;
+    const {
+      userInfo: {
+        userName: name,
+        userAvator: imgsrc,
+        gloriesNum: glory,
+        redPacketsNum: redPackets
+      }
+    } = this.props;
     return (
       <div  className={`${wrap} ${clearfix}`}>
         <div className={imgUser}>
-          <img src={imgsrc} className={imgInner} onMouseEnter={() => this.handleMouseEnter()} />
-          <div className={editPortrait} ref="portrait" onMouseLeave={() => this.handleMouseLeave()}>
-            <Icon type="uf-pencil-s" onClick={ ()=>this.handleClick() }></Icon>
+          <img src={imgsrc} className={imgInner} />
+          <div className={editPortrait}>
+            <Icon type="uf-pencil-s" onClick={this.handleClick.bind(this)}></Icon>
           </div>
         </div>
         <div className={userInfo}>
@@ -131,40 +130,20 @@ class UserInfoContainer extends Component {
           <img src={img} style={{marginLeft : 144}}/>
           <img src={img2}/>
         </div>
-        {/*<div className={userInfo}>
-          <ul>
-            <li>{name}</li>
-            <li>{phone}</li>
-            <li>{company}</li>
-          </ul>
-        </div>
-        <div className={loginOut}>
-          <Button className={wrapBtn}  size="sm" onClick={ this.handleClick.bind(this) }>注销</Button>
-        </div>
-        */}
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
             <li><Button shape="border" size="sm">桌面管理</Button></li>
             <li><Button shape="border" size="sm">切换账号</Button></li>
             <li>
               <Select
-                defaultValue="系统设置"
-                onChange={(e)=>{this.handleChange(e)} }
+                defaultValue="系统设置" name="123"
+                onChange={this.handleChange}
               >
                 <Option name="account"  value="account" >账号</Option>
                 <Option name="language" value="language" >界面语言</Option>
                 <Option name="message" value="message" >消息</Option>
                 <Option name="cancel" value="cancel">注销</Option>
               </Select>
-              <div className={select}>
-                <div className={selectTit}>系统设置</div>
-                <ul className={options}>
-                  <li>账号</li>
-                  <li>界面管理</li>
-                  <li>消息</li>
-                  <li>注销</li>
-                </ul>
-              </div>
             </li>
           </ul>
         </div>

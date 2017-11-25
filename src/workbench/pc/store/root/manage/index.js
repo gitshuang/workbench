@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
+import update from 'react/lib/update';
+import { guid } from '@u';
 import actions from './actions';
 
 const {
@@ -23,8 +25,9 @@ const {
   } = actions;
 
 const defaultState = {
-  manageList : [],
-  isEdit : false,
+  curEditFolderId: '',
+  manageList: [],
+  isEdit: false,
 };
 
 const findTreeById = (data, curId) => {
@@ -46,31 +49,20 @@ const findTreeById = (data, curId) => {
   return result;
 }
 
-
-const findDeleteTreeById = (data, curId) => {
-  for (let i = 0, l = data.length; i < l; i++) {
-    const menu = data[i];
-    const { id, children } = menu;
-
-    if (id === curId) {
-      delete data[i];
-      i--;
-      return ;
-    }else if(children && children.length) {
-      findTreeById(children, curId);
-    }
-  }
-}
-
+const defaultGroup = {
+  widgetName: '默认分组',
+  type: 1,
+  children: [],
+};
+const defaultFolder = {
+  type: 2,
+  widgetName:"文件夹",
+  children:[],
+};
 
 const reducer = handleActions({
   [setManageList]: (state, { payload, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-    };
+    return state;
   },
   [getManageList]: (state, { payload, error }) => {
     if (error) {
@@ -84,52 +76,50 @@ const reducer = handleActions({
   },
   [batchDelect]: (state, {payload:selectGroup}) => {
     const manageList = state.manageList;
-    selectGroup.map((item,index)=>{
+    selectGroup.forEach((item,index)=>{
       manageList[item] = false;
     });
-    const newList =  manageList.filter((val,key) => {
-      return val != false;
-    });
+    const newList = manageList.filter(val => val != false);
 
-    console.log(newList);
     return {
       ...state,
+      isEdit: true,
       manageList: newList
     }
   },
   [batchMove]: (state, {payload:{selectGroup,toGroupIndex} }) => {
     let manageList = state.manageList;
     let newList = [];
-    manageList.map((item,index)=>{
-      item.widgeList.map((list,key)=>{
-        arr.map((a,b)=>{
-          if(list.id == a){
-            newList.push(item.widgeList[key]);
-            delete item.widgeList[key];
+    manageList.forEach(({children})=>{
+      children.forEach((child, key)=>{
+        const { widgetId } = child;
+        selectGroup.forEach((select)=>{
+          if(widgetId === select){
+            newList.push(child);
+            delete children[key];
           }
         })
       });
     });
-    newList.map((item,index)=>{
-      manageList[toGroupIndex].widgeList.push(item);
+    newList.forEach((item)=>{
+      manageList[toGroupIndex].children.push(item);
     });
     return {
       ...state,
-      manageList: manageList
+      manageList: manageList,
+      isEdit: true,
     }
   },
-
   [addGroup]: (state, { payload: index }) => {
     const manageList = state.manageList;
-    manageList.splice(index+1,0,{
-      name: '默认分组',
-      id: '',
-      icon: '',
-      "widgeList": [],
+    manageList.splice(index+1, 0, {
+      ...defaultGroup,
+      widgetId: guid(),
     });
     return{
       ...state,
       manageList: [...manageList],
+      isEdit: true,
     }
   },
   [delectGroup]: (state, { payload: index }) => {
@@ -139,31 +129,46 @@ const reducer = handleActions({
     });
     if (!newList.length) {
       newList.push({
-        name: '默认分组',
-        id: '',
-        icon: '',
-        "widgeList": [],
+        ...defaultGroup
       })
     }
     return{
       ...state,
       manageList: newList,
+      isEdit: true,
     }
   },
   [renameGroup]: (state, { payload: {name,index} }) => {
     let manageList = state.manageList;
-    manageList[index].name = name;
+    manageList[index].widgetName = name;
     return{
       ...state,
       manageList,
-      isEdit: true
+      isEdit: true,
     }
   },
+  [moveGroup]: (state, { payload: {id,afterId} }) => {
+    let manageList = state.manageList;
+    const item = manageList.filter(({widgetId}) => widgetId === id)[0];
+    const afterItem = manageList.filter(({widgetId}) => widgetId === afterId)[0];
+    const itemIndex = manageList.indexOf(item);
+    const afterIndex = manageList.indexOf(afterItem);
 
-  [moveGroup]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
+    manageList = update(manageList, {
+      $splice: [
+        [itemIndex, 1],
+        [afterIndex, 0, item]
+      ]
+    })
+    //深拷贝
+    //manageList = JSON.parse(JSON.stringify(manageList));
+
+    return{
+      ...state,
+      isEdit: true,
+      manageList,
+    }
+  },
   [stickGroup]: (state, { payload: index }) => {
     let manageList = state.manageList;
     const curr = manageList[index];
@@ -174,77 +179,118 @@ const reducer = handleActions({
     return{
       ...state,
       manageList: newList,
-      isEdit:true
+      isEdit: true,
     }
   },
-  [addFolder]: (state, { payload: manageList }) => {
-      let d = new Date();
-      let id = d.getHours() + d.getMinutes() + d.getSeconds() + d.getMilliseconds();
-      let obj = {id:id+"",optionTitle:"文件夹",size:"sm",title:"文件夹",type:"file",fileList:[]};
-      manageList.widgeList.push(obj);
+  [addFolder]: (state, { payload: groupIndex }) => {
+    const { manageList } = state;
+    const group = manageList[groupIndex];
+    const newId = guid()
+    group.children = group.children.concat({
+      ...defaultFolder,
+      widgetId: newId,
+    });
+    manageList.splice(groupIndex, 1, {
+      ...group,
+    });
+    return{
+      ...state,
+      curEditFolderId: newId,
+      isEdit: true,
+      manageList: [ ...manageList ]
+    }
+  },
+  [deleteFolder]: (state, { payload: folderId })  => {
+    const { manageList } = state;
+    let groupIndex;
+    let widgetIndex;
+    if (
+      !manageList.some((group, i) => {
+        groupIndex = i;
+        return group.children.some(({ widgetId }, j) => {
+          widgetIndex = j;
+          return folderId === widgetId;
+        })
+      })
+    ) {
+      return state;
+    }
+    const group = manageList[groupIndex];
+    group.children.splice(widgetIndex, 1);
+    group.children = [...group.children];
+    manageList.splice(groupIndex, 1, {
+      ...group,
+    });
+    return{
+      ...state,
+      isEdit: true,
+      manageList: [ ...manageList ]
+    }
+  },
+  [setFolderEdit]: (state, { payload: curEditFolderId }) => {
+    return{
+      ...state,
+      curEditFolderId
+    }
+  },
+  [renameFolder]: (state, { payload: { id: folderId, value: newName } }) => {
+    const { manageList } = state;
+    let groupIndex;
+    let widgetIndex;
+    if (
+      !manageList.some((group, i) => {
+        groupIndex = i;
+        return group.children.some(({ widgetId }, j) => {
+          widgetIndex = j;
+          return folderId === widgetId;
+        })
+      })
+    ) {
+      return state;
+    }
+    const group = manageList[groupIndex];
+    const folder = group.children[widgetIndex];
+    group.children.splice(widgetIndex, 1, {
+      ...folder,
+      widgetName: newName,
+    });
+    group.children = [...group.children];
+    manageList.splice(groupIndex, 1, {
+      ...group,
+    });
 
-      let _manageList = JSON.parse(JSON.stringify(state.manageList));
-      return{
-        ...state,
-        id,
-        manageList:_manageList
-      }
-  },
-  [deleteFolder]: (state, { payload: manageList })  => {
-      let { id } = manageList;
-      let _manageList = JSON.parse(JSON.stringify(state.manageList));
-      let current = null;
-      for (let i = 0, l = _manageList.length; i < l; i++) {
-           let da = _manageList[i];
-           current = findDeleteTreeById(da.widgeList, id);
-           if(current)break;
-      }
-      return{
-        ...state,
-        manageList:_manageList
-      }
-  },
-  [setFolderEdit]: (state, { payload: id }) => {
-      return{
-        ...state,
-        id
-      }
-  },
-  [renameFolder]: (state, { payload: {id,value} }) => {
-      let _manageList = JSON.parse(JSON.stringify(state.manageList));
-      let current = null;
-      for (let i = 0, l = _manageList.length; i < l; i++) {
-           let da = _manageList[i];
-           current = findTreeById(da.widgeList, id);
-           if(current)break;
-      }
-      current.title = value;
-      return{
-        ...state,
-        manageList:_manageList
-      }
+    return{
+      ...state,
+      isEdit: true,
+      manageList: [ ...manageList ]
+    }
   },
   [splitFolder]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
   }),
-  [addServe]: (state, { payload: {index,newServe} }) => {
-    let manageList = state.manageList;
-    manageList[index].push(newServe);
+  [addServe]: (state, { payload: { index: groupIndex, serve } }) => {
+    const { manageList } = state;
+    const group = manageList[groupIndex];
+    group.children = group.children.concat(serve);
+    manageList.splice(groupIndex, 1, {
+      ...group,
+    });
     return{
       ...state,
-      manageList,
+      isEdit: true,
+      manageList: [ ...manageList ],
     }
   },
-  [delectServe]: (state, { payload: {index,folder,id} }) => {
+  [delectServe]: (state, { payload: {index,folder,widgetId} }) => {
     let manageList = state.manageList;
-    manageList[index].map((item,key)=>{
-      if(!folder && item.id == id ){
+    manageList[index].forEach((item,key)=>{
+      if(!folder && item.widgetId == widgetId ){
         return manageList[index].splice(key,1);
       }
-      if (folder && item.id == folder ){
-        item.map((list,i)=>{
-          if(list.id == id){
+      if (folder && item.widgetId == folder ){
+        item.children.forEach((list,i)=>{
+          if(list.widgetId == widgetId){
             return manageList[index][key].splice(i,1);
           }
         })
@@ -252,14 +298,30 @@ const reducer = handleActions({
     });
     return{
       ...state,
+      isEdit: true,
+      manageList: [...manageList],
+    }
+  },
+  [moveServe]: (state, { payload: {dataList,id,afterId,parentId} }) => {
+    let manageList = state.manageList;
+    let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
+    const item = data.filter(({widgetId}) => widgetId === id)[0];
+    const afterItem = data.filter(({widgetId}) => widgetId === afterId)[0];
+    const itemIndex = data.indexOf(item);
+    const afterIndex = data.indexOf(afterItem);
+
+    manageList.filter(({widgetId}) => widgetId)[0].children = update(data, {
+        $splice: [
+          [itemIndex, 1],
+          [afterIndex, 0, item]
+        ]
+    })
+    manageList = JSON.parse(JSON.stringify(manageList));
+    return{
+      ...state,
       manageList,
     }
   },
-  [moveServe]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-  }),
 }, defaultState);
-
 
 export default reducer;
