@@ -16,7 +16,7 @@ import ManageGroup from 'containers/manageGroup';
 import Dialog from 'containers/homeFolderDialog';
 
 import 'assets/style/iuapmobile.um.css';
-import { HeaderLeft } from './style.css';
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
@@ -157,12 +157,12 @@ class Home extends Component {
           {this.renderContent()}
         </div>
         <div className="um-footer">
-          <div className="um-box-justify">
-            <div>
+          <div className={umBoxJustify}>
+            <div className={umBoxJustify1}>
               <button className="btn btn-inline" disabled={this.state.selectGroup.length ? false : true } onClick={this.batchDelect}>批量删除</button>
             </div>
-            <div>
-              <button className="btn btn-inline" disabled={!isEdit} onClick={this.save}>保存2</button>
+            <div className={umBoxJustify2}>
+              <button className="btn btn-inline" disabled={!isEdit} onClick={this.save}>保存</button>
               <button className="btn btn-inline" onClick={this.cancelFn}>取消</button>
             </div>
           </div>

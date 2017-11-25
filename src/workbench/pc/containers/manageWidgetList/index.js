@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
 import update from 'react/lib/update';
 import PropTypes from 'prop-types';
-import Icon from 'bee-icon';
+import Icon from 'components/icon';
 import Button from 'bee-button';
 import Popconfirm from 'bee-popconfirm';
 import { widgetList, widgetItem, title, file_context, title_left,
@@ -48,6 +48,13 @@ class WidgetList extends Component {
       this.moveItemDrag = this.moveItemDrag.bind(this);
     }
 
+  // 添加文件夹
+  addFolderFn = (data)=> {
+    // alert("添加文件夹功能");
+    const { addFolder } = this.props;
+    addFolder(data);
+  }
+
   moveItemDrag(id, afterId,parentId) {
     let data = { data: this.props.data,id,afterId,parentId}
     const { moveServe } = this.props;
@@ -91,7 +98,7 @@ class WidgetList extends Component {
             );
         }
       })
-    return (<ul className={`${widgetList} ${clearfix}`} >{list}<div className={addModule}><Icon type="uf-plus"></Icon></div></ul>);
+    return (<ul className={`${widgetList} ${clearfix}`} >{list}<div className={addModule}><Icon type="add" onClick={()=>{this.addFolderFn(index)}}/></div></ul>);
   }
 }
 

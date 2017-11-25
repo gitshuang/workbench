@@ -222,7 +222,7 @@
   border:1px dashed #878B94;
   text-align:center;
 }
-.addModule :global(.uf){
+.addModule :global(.iconfont){
   font-size:30px;
   color:#878B94;
   line-height:176px;
