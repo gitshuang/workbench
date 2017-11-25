@@ -174,7 +174,7 @@ const reducer = handleActions({
     return{
       ...state,
       manageList: newList,
-      //isedit:true
+      isEdit:true
     }
   },
   [addFolder]: (state, { payload: manageList }) => {

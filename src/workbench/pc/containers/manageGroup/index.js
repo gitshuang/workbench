@@ -61,6 +61,7 @@ function collectSource(connect, monitor) {
   };
 }
 
+
 function collectTaget(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget()
