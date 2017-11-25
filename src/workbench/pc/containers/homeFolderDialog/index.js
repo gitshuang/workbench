@@ -22,27 +22,31 @@ const {closeFolder} = homeActions;
         closeFolder,
     }
 )
-class homeFolderDialog extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const {curDisplayFolder: {widgetName: title, children, }, closeFolder, } = this.props;
-        const list = children.map((child, i) => {
-            const {type, widgetId, } = child;
-            const Widget = WidgetMaker(3);
-            const props = {
-                key: `widget-${widgetId}-${i}`,
-                data: child,
-            };
-            return (
-                <Widget { ...props }/>
-            );
-        })
-        return (
-            <Modal show={true} onHide={ closeFolder } >
+class homeFolderDialog extends Component{
+	render(){
+    const {
+      curDisplayFolder: {
+        widgetName: title,
+        children,
+      },
+      closeFolder,
+    } = this.props;
+    const list = children.map((child, i) => {
+      const {
+        type,
+        widgetId,
+      } = child;
+      const Widget = WidgetMaker(child);
+      const props = {
+        key: `widget-${widgetId}-${i}`,
+        data: child,
+      };
+      return (
+        <Widget { ...props }/>
+      );
+    })
+	return(
+      <Modal show={true} onHide={ closeFolder } >
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
@@ -52,8 +56,9 @@ class homeFolderDialog extends Component {
           </div>
         </Modal.Body>
       </Modal>
-        );
-    }
+    );
+  }
 }
 
 export default homeFolderDialog;
+

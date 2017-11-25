@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
+import { withRouter } from 'react-router-dom'
 import WidgetMaker from 'components/widget';
 import {
   WidgetCont,
@@ -10,7 +11,9 @@ import {
 import homeActions from 'store/root/home/actions';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-const {openFolder} = homeActions
+const {openFolder} = homeActions;
+
+@withRouter
 @connect(
   mapStateToProps(),
   {
@@ -28,13 +31,16 @@ class HomeWidgeList extends Component{
       },
       noTitle,
       openFolder,
+      history,
     } = this.props;
     const list = children.map((child, i) => {
       const {
         type,
+        jsurl,
         widgetId,
+        serviceCode,
       } = child;
-      const Widget = WidgetMaker(type);
+      const Widget = WidgetMaker(child);
       const props = {
         key: `widget-${widgetId}-${i}`,
         data: child,
@@ -42,6 +48,10 @@ class HomeWidgeList extends Component{
       if (type === 2) {
         props.clickHandler = () => {
           openFolder(child);
+        }
+      } else if (type === 3 && !jsurl){
+        props.clickHandler = () => {
+          history.push(`/service/${serviceCode}`);
         }
       }
       return (
