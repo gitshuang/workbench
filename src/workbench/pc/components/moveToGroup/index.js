@@ -11,7 +11,44 @@ import {
   selectedli
 } from './style.css';
 
-
+const defaultProps = {
+  data: [
+    {
+      "type": "1",
+      "widgetId": "f1",
+      "widgetName": "分组一",
+      "children": [
+        {
+          "type": "2",
+          "widgetId": "w1",
+          "widgetName": "文件夹一"
+        },
+        {
+          "type": "2",
+          "widgetId": "w2",
+          "widgetName": "文件夹二"
+        }
+      ]
+    },
+    {
+      "type": "1",
+      "widgetId": "f2",
+      "widgetName": "分组二",
+      "children": [
+        {
+          "type": "2",
+          "widgetId": "w3",
+          "widgetName": "文件夹三"
+        },
+        {
+          "type": "2",
+          "widgetId": "w4",
+          "widgetName": "文件夹四"
+        }
+      ]
+    }
+  ]
+}
 class MoveToGroup extends Component {
 
   constructor(props) {
@@ -118,5 +155,5 @@ class MoveToGroup extends Component {
     return content;
   }
 }
-
+MoveToGroup.defaultProps = defaultProps;
 export default MoveToGroup;

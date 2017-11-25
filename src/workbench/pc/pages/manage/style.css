@@ -31,3 +31,10 @@
 .umBoxJustify2{
 	right:260px;
 }
+.pin{
+  width:300px;
+  background:rgba(255,255,255,1);
+  border-radius: 2px ;
+  box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.14);
+  padding: 16px;
+}

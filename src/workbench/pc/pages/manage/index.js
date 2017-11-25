@@ -15,9 +15,11 @@ import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
 import Dialog from 'containers/homeFolderDialog';
 
+import MoveToGroup from 'components/moveToGroup';
+
 import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
-import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel} from './style.css';
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
@@ -161,6 +163,7 @@ class Home extends Component {
           <div className={umBoxJustify}>
             <div className={umBoxJustify1}>
               <Button className={batchDeletion} disabled={this.state.selectGroup.length ? false : true } onClick={this.batchDelect}>批量删除</Button>
+              <Button className={batchDeletion} disabled={this.state.selectGroup.length ? false : true } onClick={this.batchMove}>批量移动</Button>
             </div>
             <div className={umBoxJustify2}>
               <Button className={preserve} disabled={!isEdit} onClick={this.save}>保存</Button>
@@ -173,6 +176,12 @@ class Home extends Component {
               <Dialog/>
             ) : null
           }
+        <div className={pin +" um-css3-center"}>
+          <MoveToGroup
+            data={this.state.data}
+            hand
+          />
+        </div>
       </div>
     );
   }
