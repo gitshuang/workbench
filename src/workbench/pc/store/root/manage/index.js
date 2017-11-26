@@ -34,6 +34,7 @@ const defaultState = {
   curDisplayFolder: {},
   folderModalDisplay: false,
   selectWidgetList:[],
+  selectGroup:[]
 };
 
 const findTreeById = (data, curId) => {
@@ -103,8 +104,10 @@ const reducer = handleActions({
       manageList: newList
     }
   },
-  [batchMove]: (state, {payload:{selectGroup,toGroupIndex} }) => {
+  [batchMove]: (state, {payload:{toGroupIndex} }) => {
     let manageList = state.manageList;
+    // 选中之后将id 都放到这个组中
+    let selectGroup = state.selectGroup;
     let newList = [];
     manageList.forEach(({children})=>{
       children.forEach((child, key)=>{

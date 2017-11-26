@@ -161,12 +161,12 @@ class WidgetItem extends Component {
           <div className={title_right}>{widgetName}</div>
         </div>
         <div className={widgetItemCont}>
-          
+
         </div>
 
         <div className={footer}>
-          <div><Checkbox disabled className="test" /></div>
-         
+          <div><Checkbox className="test" /></div>
+
           <div onClick={this.fileDele}><Icon type="uf-del" /></div>
         </div>
 

@@ -131,7 +131,7 @@ class WidgeFileItem extends Component {
     </div>;
 
     const btns = <div className={footer}>
-      <div><Checkbox disabled className="test" /></div>
+      <div><Checkbox className="test" /></div>
       <div onClick={this.fileEdit}><Icon type="uf-pencil" /></div>
       <div onClick={this.fileDele}><Icon type="uf-del" /></div>
     </div>
