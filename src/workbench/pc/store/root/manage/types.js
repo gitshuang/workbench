@@ -5,6 +5,7 @@ export default createTypes(
   'GET_MANAGE_LIST',
   'BATCH_DELECT',
   'BATCH_MOVE',
+  'SELECT_GROUP_ACTIONS',
   'ADD_GROUP',
   'DELECT_GROUP',
   'RENAME_GROUP',

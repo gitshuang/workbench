@@ -23,7 +23,7 @@ import 'assets/style/iuapmobile.um.css';
 import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin,um_content} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
+const { setManageList,getManageList,batchDelect,batchMove,moveGroup,selectGroupActions } = manageActions;
 
 @withRouter
 @connect(
@@ -31,6 +31,7 @@ const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
     'manageList',
     'isEdit',
     'folderModalDisplay',
+    'selectList',
     {
       namespace: 'manage',
     }
@@ -42,7 +43,9 @@ const { setManageList,getManageList,batchDelect,moveGroup } = manageActions;
     setManageList,
     getManageList,
     batchDelect,
-    moveGroup
+    batchMove,
+    moveGroup,
+    selectGroupActions,
   }
 )
 
@@ -51,7 +54,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state ={
-      selectGroup: []
+      isOpenMove: false,
+      //selectGroup: []
     }
     this.moveGroupDrag = this.moveGroupDrag.bind(this);
   }
@@ -75,27 +79,44 @@ class Home extends Component {
   }
   // 将此方法传递给manageGroup 组件中
   selectGroupFn = (flag, index) => {
-    let selectGroup = this.state.selectGroup;
-    if(flag){
-      selectGroup.push(index);
-    }else{
-      selectGroup =  selectGroup.filter((item,i) => {
-        return index !== item;
-      });
-    }
-    // console.log(selectGroup);
-    this.setState({
-      selectGroup
+    //let selectGroup = this.state.selectGroup;
+    let {selectList,manageList,selectGroupActions} = this.props;
+    let aa = [];
+    manageList[index].children.map((item,index)=>{
+      aa.push(item.widgetId);
     });
+    if(flag){
+      //selectGroup.push(index);
+      selectList = selectList.concat(aa);
+    }else{
+      selectList = selectList.concat(aa).filter(v => !selectList.includes(v) || !selectList.includes(v))
+      /*selectList =  selectList.filter((item,i) => {
+        return index !== item;
+      });*/
+    }
+    selectGroupActions(selectList);
+    // console.log(selectGroup);
+   /* this.setState({
+      selectGroup
+    });*/
   }
   // 批量删除
   batchDelect =() => {
     const { batchDelect } = this.props;
-    let selectGroup = this.state.selectGroup;
-    this.setState({
+    //let selectGroup = this.state.selectGroup;
+    /*this.setState({
       selectGroup:[]
-    });
-    batchDelect(selectGroup);
+    });*/
+    batchDelect();
+  }
+  // 批量删除
+  batchMove =(index) => {
+    const { batchMove } = this.props;
+    //let selectGroup = this.state.selectGroup;
+    /*this.setState({
+      selectGroup:[]
+    });*/
+    batchMove(index);
   }
   // 保存
   save =() => {
@@ -145,10 +166,17 @@ class Home extends Component {
     this.props.history.goBack();
   }
 
+  openGroupTo =() => {
+    this.setState({
+      isOpenMove: true
+    });
+  }
+
   render() {
      const {
-          folderModalDisplay,
-        } = this.props;
+       folderModalDisplay,
+       selectList
+     } = this.props;
     const { isEdit } = this.props;
     return (
       <div className="um-win">
@@ -163,8 +191,8 @@ class Home extends Component {
         <div className="um-footer">
           <div className={umBoxJustify}>
             <div className={umBoxJustify1}>
-              <Button className={batchDeletion} disabled={this.state.selectGroup.length ? false : true } onClick={this.batchDelect}>批量删除</Button>
-              <Button className={batchDeletion} disabled={this.state.selectGroup.length ? false : true } onClick={this.batchMove}>批量移动</Button>
+              <Button className={batchDeletion} disabled={selectList.length ? false : true } onClick={this.batchDelect}>批量删除</Button>
+              <Button className={batchDeletion} disabled={selectList.length ? false : true } onClick={this.openGroupTo}>批量移动</Button>
             </div>
             <div className={umBoxJustify2}>
               <Button className={preserve} disabled={!isEdit} onClick={this.save}>保存</Button>
@@ -177,12 +205,15 @@ class Home extends Component {
               <Dialog/>
             ) : null
           }
-        <div className={pin +" um-css3-center"}>
-          <MoveToGroup
-            data={this.state.data}
-            hand
-          />
-        </div>
+        {
+          this.state.isOpenMove ? (
+            <div className={pin +" um-css3-center"}>
+              <MoveToGroup
+                data={this.state.data}
+              />
+            </div>
+          ): null
+        }
       </div>
     );
   }

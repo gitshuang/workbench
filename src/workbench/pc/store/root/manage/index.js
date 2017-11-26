@@ -9,6 +9,7 @@ const {
   getManageList,
   batchDelect,
   batchMove,
+  selectGroupActions,
   addGroup,
   delectGroup,
   renameGroup,
@@ -33,6 +34,7 @@ const defaultState = {
   isEdit: false,
   curDisplayFolder: {},
   folderModalDisplay: false,
+  selectList:[],
   selectWidgetList:[],
   selectGroup:[]
 };
@@ -92,14 +94,15 @@ const reducer = handleActions({
     }
   },
   [batchDelect]: (state, {payload}) => {
+    debugger;
     let manageList = state.manageList;
     // 选中之后将id 都放到这个组中
-    let selectGroup = state.selectGroup;
+    let selectList = state.selectList;
     let newList = [];
     manageList.forEach(({children})=>{
       children.forEach((child, key)=>{
         const { widgetId } = child;
-        selectGroup.forEach((select)=>{
+        selectList.forEach((select)=>{
           if(widgetId === select){
             delete children[key];
           }
@@ -115,12 +118,12 @@ const reducer = handleActions({
   [batchMove]: (state, {payload:{toGroupIndex} }) => {
     let manageList = state.manageList;
     // 选中之后将id 都放到这个组中
-    let selectGroup = state.selectGroup;
+    let selectList = state.selectList;
     let newList = [];
     manageList.forEach(({children})=>{
       children.forEach((child, key)=>{
         const { widgetId } = child;
-        selectGroup.forEach((select)=>{
+        selectList.forEach((select)=>{
           if(widgetId === select){
             newList.push(child);
             delete children[key];
@@ -135,6 +138,12 @@ const reducer = handleActions({
       ...state,
       manageList: manageList,
       isEdit: true,
+    }
+  },
+  [selectGroupActions]: (state, {payload:selectList }) => {
+    return {
+      ...state,
+      selectList: selectList,
     }
   },
   [addGroup]: (state, { payload: index }) => {
