@@ -91,17 +91,25 @@ const reducer = handleActions({
       };
     }
   },
-  [batchDelect]: (state, {payload:selectGroup}) => {
-    const manageList = state.manageList;
-    selectGroup.forEach((item,index)=>{
-      manageList[item] = false;
+  [batchDelect]: (state, {payload}) => {
+    let manageList = state.manageList;
+    // 选中之后将id 都放到这个组中
+    let selectGroup = state.selectGroup;
+    let newList = [];
+    manageList.forEach(({children})=>{
+      children.forEach((child, key)=>{
+        const { widgetId } = child;
+        selectGroup.forEach((select)=>{
+          if(widgetId === select){
+            delete children[key];
+          }
+        })
+      });
     });
-    const newList = manageList.filter(val => val != false);
-
     return {
       ...state,
+      manageList: manageList,
       isEdit: true,
-      manageList: newList
     }
   },
   [batchMove]: (state, {payload:{toGroupIndex} }) => {
