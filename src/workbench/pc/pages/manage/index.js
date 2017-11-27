@@ -167,13 +167,16 @@ class Home extends Component {
   goBack() {
     this.props.history.goBack();
   }
-
+  // 批量移动
   openGroupTo =() => {
     this.setState({
       isOpenMove: true
     });
   }
-
+  // 批量删除
+  openDeleteMark =() => {
+    this.batchDelect()
+  }
 
   addGroup = () => {
     this.setState({
@@ -234,7 +237,7 @@ class Home extends Component {
         <div className="um-footer">
           <div className={umBoxJustify}>
             <div className={umBoxJustify1}>
-              <Button className={batchDeletion} disabled={selectList.length ? false : true } onClick={this.batchDelect}>批量删除</Button>
+              <Button className={batchDeletion} disabled={selectList.length ? false : true } onClick={this.openDeleteMark}>批量删除</Button>
               <Button className={batchDeletion} disabled={selectList.length ? false : true } onClick={this.openGroupTo}>批量移动</Button>
             </div>
             <div className={umBoxJustify2}>

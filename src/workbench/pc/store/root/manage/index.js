@@ -111,6 +111,7 @@ const reducer = handleActions({
         })
       }
     });
+    manageList = JSON.parse(JSON.stringify(manageList));
     return {
       ...state,
       manageList: manageList,
@@ -140,6 +141,7 @@ const reducer = handleActions({
     newList.forEach((item)=>{
       manageList[toGroupIndex].children.push(item);
     });
+    manageList = JSON.parse(JSON.stringify(manageList));
     return {
       ...state,
       manageList: manageList,
