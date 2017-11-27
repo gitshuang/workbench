@@ -13,7 +13,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions } = manageActions;
 import {
   widgetItem,
   title,
@@ -88,6 +88,8 @@ const widgetStyle = [
   mapStateToProps(
     'manageList',
     'curEditFolderId',
+    'selectList',
+    'selectGroup',
     {
       namespace: 'manage',
     }
@@ -95,7 +97,8 @@ const widgetStyle = [
   {
     deleteFolder,
     renameFolder,
-    setFolderEdit
+    setFolderEdit,
+    selectListActions,selectGroupActions
   }
 )
 class WidgetItem extends Component {
@@ -139,7 +142,25 @@ class WidgetItem extends Component {
       showModal:true
     })
   }
+  onHandChange =(flag) =>{
+    const {selectList,selectGroup,selectListActions,selectGroupActions} = this.props;
+    const {
+      data: {
+        widgetId
+        }
+      } = this.props;
+    console.log(flag);
+    let selectList2;
+    if(!flag){
+      selectList2 = selectList.filter((item,i) => {
+        return item !== widgetId;
+      });
 
+    }else{
+      selectList2 = [widgetId, ...selectList];
+    }
+    selectListActions(selectList2);
+  }
   render() {
 
      const pop_btn = [
@@ -154,8 +175,9 @@ class WidgetItem extends Component {
         widgetName,
       }
     } = this.props;
-    const { connectDragSource, connectDropTarget,isDragging } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,selectList,propsIndex } = this.props;
     const opacity = isDragging ? 0 : 1;
+    const checkType = selectList.indexOf(id) > -1 ? true : false;
     return connectDragSource(connectDropTarget(
       <li className={widgetItem} style={{...widgetStyle[size],...style, opacity }} >
         <div className={title}>
@@ -167,7 +189,7 @@ class WidgetItem extends Component {
         </div>
 
         <div className={`${clearfix} ${footer}`}>
-          <div><Checkbox className="test" /></div>
+          <div><Checkbox className="test" checked={checkType} onChange={ this.onHandChange }/></div>
           <div className={`${editDele} ${clearfix}`}>
             <div onClick={this.fileEdit}><Icon type="uf-pencil" /></div>
             <div onClick={this.fileDele}><Icon type="uf-del" /></div>

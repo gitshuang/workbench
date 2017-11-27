@@ -144,17 +144,17 @@ class Home extends Component {
     this.batchDelect()
   }
 
-  addGroup = () => {
+  moveAddGroup = () => {
     this.setState({
       isGroup: true
     });
   }
-  confirmFn = () => {
+  moveConfirmFn = () => {
     const { batchMove } = this.props;
     batchMove(0);
   }
 
-  cancelFn = () => {
+  moveCancelFn = () => {
     this.setState({
       isOpenMove: false
     })
@@ -222,9 +222,9 @@ class Home extends Component {
             <div className={pin +" um-css3-center"}>
               <MoveToGroup
                 isGroup={this.state.isGroup}
-                addGroup={this.addGroup}
-                confirmFn={this.confirmFn}
-                cancelFn={this.cancelFn}
+                addGroup={this.moveAddGroup}
+                confirmFn={this.moveConfirmFn}
+                cancelFn={this.movecCncelFn}
                 addNewGroup={this.addNewGroup }
                 groupCancelFn={this.groupCancelFn}
               />

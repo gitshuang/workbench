@@ -195,6 +195,10 @@ class ManageGroup extends Component {
     selectGroupActions(selectGroup);
   }
 
+
+
+
+
   // 置顶分组
   stickFn =(index)=>{
     const { stickGroup } = this.props;
@@ -238,7 +242,7 @@ class ManageGroup extends Component {
       </Dropdown>
     )
   }
-  
+
   render() {
 
     const {
@@ -249,7 +253,7 @@ class ManageGroup extends Component {
       isDragging,
       selectGroup,
     } = this.props;
-
+    const checkType = this.state.selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
     let _id = manageData.widgetId + "_" + index;
     let groupTitle = null;
@@ -267,7 +271,7 @@ class ManageGroup extends Component {
     }else {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <label>
-          <input type="checkbox" checked={this.state.selectGroup.indexOf(index) >= 0 ? true : false} onChange={ (e)=>{this.selectFn(e,index)} }/>
+          <input type="checkbox" checked={checkType} onChange={ (e)=>{this.selectFn(e,index)} }/>
           <span>{manageData.widgetName}</span>
         </label>
         <div>
@@ -282,7 +286,7 @@ class ManageGroup extends Component {
         <div id={_id} style={{ ...style, opacity }}>
           { groupTitle }
           <div>
-            <WidgetList index={index} data={manageData.children} />
+            <WidgetList index={index} data={manageData.children} checkType={checkType} />
           </div>
         </div>
         <div className={addBtn}>

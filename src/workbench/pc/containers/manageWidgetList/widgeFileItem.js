@@ -154,9 +154,12 @@ class WidgeFileItem extends Component {
         showModal:false
       })
   }
+  onHandChange =(e) =>{
+
+  }
   render() {
     const da = this.props.data;
-
+    const {checkType,propsIndex} = this.props;
     const pop_btn = [
       {label:"确认",fun:this.popSave,className:""},
       {label:"取消",fun:this.popClose,className:""}
@@ -172,7 +175,9 @@ class WidgeFileItem extends Component {
     </div>;
 
     const btns = <div className={`${clearfix} ${footer}`}>
-      <div><Checkbox className="test" /></div>
+      <div>
+        <Checkbox className="test" checked={checkType} onChange={ this.onHandChange } />
+        </div>
       <div className={`${editDele} ${clearfix}`}>
         <div onClick={this.fileEdit}><Icon type="uf-pencil" /></div>
         <div onClick={this.fileDele}><Icon type="uf-del" /></div>
