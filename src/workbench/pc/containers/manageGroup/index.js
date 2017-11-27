@@ -11,6 +11,7 @@ import manageActions from 'store/root/manage/actions';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import Button from 'bee-button';
+import Icon1 from 'components/icon';
 import Icon from 'bee-icon';
 import WidgetList from 'containers/manageWidgetList';
 import {WidgetTitle,addGroupBtn,addBtnContainer,complete,cancel,newGroupName,addBtn} from './style.css';
@@ -165,7 +166,7 @@ class ManageGroup extends Component {
   }
   //点击清空输入框
   clearInput = () => {
-    console.log(this.refs.newGroupName);
+    this.setState({groupName:""});
   }
   // 输入框的更改
   editGroupName = (e) =>{
@@ -261,7 +262,7 @@ class ManageGroup extends Component {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
           <span>
-            <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} } ref={newGroupName}/>
+            <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
             <Icon type="uf-close-c" onClick={ this.clearInput.bind(this) }></Icon>
           </span>
           <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
@@ -275,7 +276,7 @@ class ManageGroup extends Component {
           <span>{manageData.widgetName}</span>
         </label>
         <div>
-          <Icon type="uf-pencil" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
+          <Icon1 type="record" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
           <Icon type="uf-plus" onClick={()=>{this.addFolderFn(index)}}/>
           {this.renderDrop(index)}
         </div>

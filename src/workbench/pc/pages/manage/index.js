@@ -117,6 +117,7 @@ class Home extends Component {
     //(typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = manageList) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
+    debugger;
     manageList.map((item, index) =>{
       list.push(
         <ManageGroup

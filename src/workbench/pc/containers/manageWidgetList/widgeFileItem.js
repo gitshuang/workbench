@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
-import Icon from 'bee-icon';
 import { widgetList, widgetItem, title, file_context, title_left,
   file_icon, title_right, context, bottom ,footer,
 title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix} from './style.css'
@@ -11,6 +10,8 @@ import Checkbox from 'bee-checkbox';
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';
 import PopDialog from 'components/pop';
+import Icon1 from 'components/icon';
+import Icon from 'bee-icon';
 
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
@@ -179,7 +180,7 @@ class WidgeFileItem extends Component {
         <Checkbox className="test" checked={checkType} onChange={ this.onHandChange } />
         </div>
       <div className={`${editDele} ${clearfix}`}>
-        <div onClick={this.fileEdit}><Icon type="uf-pencil" /></div>
+        <div onClick={this.fileEdit}><Icon1 type="record" /></div>
         <div onClick={this.fileDele}><Icon type="uf-del" /></div>
       </div>
     </div>
@@ -192,7 +193,7 @@ class WidgeFileItem extends Component {
           <div className={title_right}> {da.widgetName} </div>
         </div>
         <div name="file" className={[context,file_context].join(' ')}>
-          { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) }
+          {/* { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) } */}
         </div>
         {this.state.editShow ? edit : null }
         {this.state.editShow ? null : btns }

@@ -5,7 +5,7 @@ import actions from 'store/root/actions';
 
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';
-import Icon from 'bee-icon';
+import Icon from 'components/icon';
 import InputGroup from 'bee-input-group';
 import AutoComplete from 'bee-autocomplete';
 
@@ -50,7 +50,10 @@ class serviceClassify extends Component {
               onValueChange={value => this.onFormChange(value)}
             />
             <InputGroup.Button>
-              <Button><Icon type="uf-search" className={ufSearch}><span>搜索</span></Icon></Button>
+              <Button>
+                <Icon type="search" className={ufSearch}></Icon>
+                <span>搜索</span>
+              </Button>
             </InputGroup.Button>
           </InputGroup>
           <div className={hotService}>
