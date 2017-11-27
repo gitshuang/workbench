@@ -55,11 +55,6 @@ class Home extends Component {
       isGroup: false,
     }
     this.moveGroupDrag = this.moveGroupDrag.bind(this);
-    this.goBack = this.goBack.bind(this);
-    this.openGroupTo = this.openGroupTo.bind(this);
-    this.openDeleteMark = this.openDeleteMark.bind(this);
-    this.save = this.save.bind(this);
-    this.cancel = this.cancel.bind(this);
   }
   moveGroupDrag(id, afterId) {
     const { moveGroup } = this.props;
