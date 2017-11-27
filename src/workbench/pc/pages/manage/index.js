@@ -55,6 +55,7 @@ class Home extends Component {
     super(props);
     this.state ={
       isOpenMove: false,
+      isGroup: false,
       //selectGroup: []
     }
     this.moveGroupDrag = this.moveGroupDrag.bind(this);
@@ -148,6 +149,7 @@ class Home extends Component {
     //(typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = manageList) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
+    debugger;
     manageList.map((item, index) =>{
       list.push(
         <ManageGroup
@@ -165,10 +167,54 @@ class Home extends Component {
   goBack() {
     this.props.history.goBack();
   }
-
+  // 批量移动
   openGroupTo =() => {
     this.setState({
       isOpenMove: true
+    });
+  }
+  // 批量删除
+  openDeleteMark =() => {
+    this.batchDelect()
+  }
+
+  addGroup = () => {
+    this.setState({
+      isGroup: true
+    });
+  }
+  confirmFn = () => {
+    const { batchMove } = this.props;
+    batchMove(0);
+  }
+
+  cancelFn = () => {
+    this.setState({
+      isOpenMove: false
+    })
+  }
+
+  /*  添加新组  method  */
+  addNewGroup =(name,id) => {
+    const { setAddGroup, requestError } = this.props;
+    let newGroup = {
+      id : id,
+      name : name,
+    };
+    setAddGroup().then( ({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      let menuData = this.state.menuData;
+      menuData.push(newGroup);
+      this.setState({
+        menuData: menuData,
+      });
+    });
+  }
+  groupCancelFn =() => {
+    this.setState({
+      isGroup: false,
     });
   }
 
@@ -191,7 +237,7 @@ class Home extends Component {
         <div className="um-footer">
           <div className={umBoxJustify}>
             <div className={umBoxJustify1}>
-              <Button className={batchDeletion} disabled={selectList.length ? false : true } onClick={this.batchDelect}>批量删除</Button>
+              <Button className={batchDeletion} disabled={selectList.length ? false : true } onClick={this.openDeleteMark}>批量删除</Button>
               <Button className={batchDeletion} disabled={selectList.length ? false : true } onClick={this.openGroupTo}>批量移动</Button>
             </div>
             <div className={umBoxJustify2}>
@@ -209,7 +255,12 @@ class Home extends Component {
           this.state.isOpenMove ? (
             <div className={pin +" um-css3-center"}>
               <MoveToGroup
-                data={this.state.data}
+                isGroup={this.state.isGroup}
+                addGroup={this.addGroup}
+                confirmFn={this.confirmFn}
+                cancelFn={this.cancelFn}
+                addNewGroup={this.addNewGroup }
+                groupCancelFn={this.groupCancelFn}
               />
             </div>
           ): null
