@@ -66,40 +66,70 @@ class serviceClassify extends Component {
               <dt>分类一</dt>
               <ul className="clearfix">
                 {
-                  serviceList.map((service, i) => (
+                  serviceList.map(({
+                    lebalId,
+                    children,
+                    lebalName,
+                  }) => (
                     <dd>
-                      <div className={`${singleService} ${clearfix}`}>
-                        <img className={servicePic}></img>
-                        <div className={`${services} ${clearfix}`}>
-                          <div className={`${serviceInfo}`}>
-                            <div className={serviceTit}>{service.serviceName}</div>
-                            <div className={describe}>{service.serviceId}</div>
-                          </div>
-                        </div>
+                      <div key={lebalId} className={`${singleService} ${clearfix}`}>
+                        {
+                          children.map(({
+                            applicationCode,
+                            applicationIcon,
+                            applicationId,
+                            applicationName,
+                          }) => (
+                            <div>
+                              <img src={applicationIcon} className={servicePic}></img>
+                              <div className={`${services} ${clearfix}`}>
+                                <div className={`${serviceInfo}`}>
+                                  <div className={serviceTit}>{lebalName}</div>
+                                  <div className={describe}>{applicationName}</div>
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        }
                       </div>
                     </dd>
-                  ))
-                }
+                    ))
+                  }
               </ul>
             </dl>
             <dl className={`${class2} ${clearfix}`}>
               <dt>分类二</dt>
               <ul className="clearfix">
                 {
-                  serviceList.map((service, i) => (
+                  serviceList.map(({
+                    lebalId,
+                    children,
+                    lebalName,
+                  }) => (
                     <dd>
-                      <div className={`${singleService} ${clearfix}`}>
-                        <img className={servicePic}></img>
-                        <div className={`${services} ${clearfix}`}>
-                          <div className={`${serviceInfo}`}>
-                            <div className={serviceTit}>{service.serviceName}</div>
-                            <div className={describe}>{service.serviceId}</div>
-                          </div>
-                        </div>
+                      <div key={lebalId} className={`${singleService} ${clearfix}`}>
+                        {
+                          children.map(({
+                            applicationCode,
+                            applicationIcon,
+                            applicationId,
+                            applicationName,
+                          }) => (
+                            <div>
+                              <img src={applicationIcon} className={servicePic}></img>
+                              <div className={`${services} ${clearfix}`}>
+                                <div className={`${serviceInfo}`}>
+                                  <div className={serviceTit}>{lebalName}</div>
+                                  <div className={describe}>{applicationName}</div>
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        }
                       </div>
                     </dd>
-                  ))
-                }
+                    ))
+                  }
               </ul>
             </dl>
           </div>
