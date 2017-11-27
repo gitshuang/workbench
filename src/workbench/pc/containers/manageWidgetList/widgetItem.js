@@ -23,10 +23,11 @@ import {
   footer,
   pop_cont,
   widgetItemCont,
+  editDele,
+  clearfix
 } from './style.css'
 
 const style = {
-  padding: '0.5rem 1rem',
   marginBottom: '.5rem',
   backgroundColor: 'white',
   cursor: 'move'
@@ -164,10 +165,12 @@ class WidgetItem extends Component {
 
         </div>
 
-        <div className={footer}>
+        <div className={`${clearfix} ${footer}`}>
           <div><Checkbox className="test" /></div>
-
-          <div onClick={this.fileDele}><Icon type="uf-del" /></div>
+          <div className={`${editDele} ${clearfix}`}>
+            <div onClick={this.fileEdit}><Icon type="uf-pencil" /></div>
+            <div onClick={this.fileDele}><Icon type="uf-del" /></div>
+          </div>
         </div>
 
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={this.props.data} btns={pop_btn} >
