@@ -6,6 +6,7 @@ export default createTypes(
   'BATCH_DELECT',
   'BATCH_MOVE',
   'SELECT_GROUP_ACTIONS',
+  'SELECT_LIST_ACTIONS',
   'ADD_GROUP',
   'DELECT_GROUP',
   'RENAME_GROUP',

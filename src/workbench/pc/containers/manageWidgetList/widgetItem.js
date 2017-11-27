@@ -38,7 +38,7 @@ const type='item';
 
 const itemSource = {
   beginDrag(props) {
-    return { id: props.id };
+    return { id: props.id , parentId:props.parentId};
   }
 };
 
@@ -46,9 +46,10 @@ const itemSource = {
 const itemTarget = {
   hover(props, monitor) {
     const draggedId = monitor.getItem().id;
+    const previousParentId = monitor.getItem().parentId;
 
     if (draggedId !== props.id) {
-      props.moveItemDrag(draggedId, props.id, props.data.parentId);
+      props.moveItemDrag(draggedId,previousParentId, props.id, props.data.parentId);
     }
   }
 };

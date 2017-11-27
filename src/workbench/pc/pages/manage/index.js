@@ -23,7 +23,7 @@ import 'assets/style/iuapmobile.um.css';
 import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin,um_content} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const { setManageList,getManageList,batchDelect,batchMove,moveGroup,selectGroupActions } = manageActions;
+const { setManageList,getManageList,batchDelect,batchMove,moveGroup } = manageActions;
 
 @withRouter
 @connect(
@@ -45,7 +45,6 @@ const { setManageList,getManageList,batchDelect,batchMove,moveGroup,selectGroupA
     batchDelect,
     batchMove,
     moveGroup,
-    selectGroupActions,
   }
 )
 
@@ -56,7 +55,6 @@ class Home extends Component {
     this.state ={
       isOpenMove: false,
       isGroup: false,
-      //selectGroup: []
     }
     this.moveGroupDrag = this.moveGroupDrag.bind(this);
   }
@@ -78,45 +76,15 @@ class Home extends Component {
       requestSuccess();
     });
   }
-  // 将此方法传递给manageGroup 组件中
-  selectGroupFn = (flag, index) => {
-    //let selectGroup = this.state.selectGroup;
-    let {selectList,manageList,selectGroupActions} = this.props;
-    let aa = [];
-    manageList[index].children.map((item,index)=>{
-      aa.push(item.widgetId);
-    });
-    if(flag){
-      //selectGroup.push(index);
-      selectList = selectList.concat(aa);
-    }else{
-      selectList = selectList.concat(aa).filter(v => !selectList.includes(v) || !selectList.includes(v))
-      /*selectList =  selectList.filter((item,i) => {
-        return index !== item;
-      });*/
-    }
-    selectGroupActions(selectList);
-    // console.log(selectGroup);
-   /* this.setState({
-      selectGroup
-    });*/
-  }
+
   // 批量删除
   batchDelect =() => {
     const { batchDelect } = this.props;
-    //let selectGroup = this.state.selectGroup;
-    /*this.setState({
-      selectGroup:[]
-    });*/
     batchDelect();
   }
   // 批量删除
   batchMove =(index) => {
     const { batchMove } = this.props;
-    //let selectGroup = this.state.selectGroup;
-    /*this.setState({
-      selectGroup:[]
-    });*/
     batchMove(index);
   }
   // 保存
@@ -149,14 +117,13 @@ class Home extends Component {
     //(typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = manageList) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
-    // debugger;
+    debugger;
     manageList.map((item, index) =>{
       list.push(
         <ManageGroup
           manageData={item}
           index={index}
           key={item.widgetName+index}
-          selectGroupFn={this.selectGroupFn}
           id={item.widgetId}
           moveGroupDrag={this.moveGroupDrag} />
       )

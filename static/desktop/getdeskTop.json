@@ -23,6 +23,7 @@
               "icon": "http://img5.imgtn.bdimg.com/it/u=1364135330,218137125&fm=11&gp=0.jpg",
               "serviceCode": "ffff",
               "type": 3,
+              "parentId": "11111111",
               "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/1f064cc1-4aab-4374-ab09-046876f1bce4.js",
               "size": 3
             },
@@ -31,6 +32,7 @@
               "icon": "http://img5.imgtn.bdimg.com/it/u=1364135330,218137125&fm=11&gp=0.jpg",
               "serviceCode": "cccc",
               "type": 3,
+              "parentId": "11111111",
               "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/e87d8215-5bd8-4b11-b815-87b565271d48.js",
               "size": 3
             }

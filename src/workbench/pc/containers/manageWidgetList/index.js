@@ -55,7 +55,7 @@ class WidgetList extends Component {
     }
 
   // 添加文件夹
-  addFolderFn = (data)=> {  
+  addFolderFn = (data)=> {
     const { addFolder } = this.props;
     addFolder(data);
   }
@@ -66,21 +66,21 @@ class WidgetList extends Component {
       })
   }
 
-  moveItemDrag(id, afterId,parentId) {
-    let data = { data: this.props.data,id,afterId,parentId}
+  moveItemDrag(id,preParentId, afterId,parentId) {
+    let data = {id,preParentId,afterId,parentId}
     const { moveServe } = this.props;
     moveServe(data);
   }
 
   widgeOnclick = (e,da) => {
     if(e.target.getAttribute("name") == "file"){
-      this.props.openFolder(da);  
+      this.props.openFolder(da);
     }
   }
 
 
   popSave = (data)=>{
-     
+
   }
 
   popClose = ()=>{
@@ -101,7 +101,8 @@ class WidgetList extends Component {
       const list = data.map((item, i) => {
         const {
           type,
-          WidgetId: id,
+          parentId,
+          widgetId: id,
           widgetName: name
         } = item;
         switch (type) {
@@ -111,6 +112,7 @@ class WidgetList extends Component {
                 key={`widget-file-${id}-${i}`}
                 data={item}
                 id={id}
+                parentId={parentId}
                 index={id}
                 moveItemDrag={this.moveItemDrag}
                 onClick={(e)=>{this.widgeOnclick(e,item)}}
@@ -122,15 +124,16 @@ class WidgetList extends Component {
                 key={`widget-${id}-${i}`}
                 data={item}
                 id={id}
+                parentId={parentId}
                 index={id}
                 moveItemDrag={this.moveItemDrag}
               />
             );
         }
       })
-    
+
     let _da = {};
-    
+
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >

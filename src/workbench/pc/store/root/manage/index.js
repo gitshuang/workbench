@@ -10,6 +10,7 @@ const {
   batchDelect,
   batchMove,
   selectGroupActions,
+  selectListActions,
   addGroup,
   delectGroup,
   renameGroup,
@@ -34,7 +35,7 @@ const defaultState = {
   isEdit: false,
   curDisplayFolder: {},
   folderModalDisplay: false,
-  selectList:[],
+  selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
   selectGroup:[]
 };
@@ -68,7 +69,19 @@ const defaultFolder = {
   widgetName:"文件夹",
   children:[],
 };
+//递归查找
+function findById(manageList,id) {
 
+  for(let i = 0;i<manageList.length;i++){
+    if(manageList[i].widgetId === id){
+      return manageList[i];
+    }else{
+      //if(i === manageList.length-1){return findById(manageList[i].children,id);}
+      return findById(manageList[i].children,id);
+    }
+  }
+
+}
 const reducer = handleActions({
   [setManageList]: (state, { payload, error }) => {
     return state;
@@ -116,6 +129,7 @@ const reducer = handleActions({
       ...state,
       manageList: manageList,
       selectList:[],
+      selectGroup:[],
       isEdit: true,
     }
   },
@@ -146,10 +160,20 @@ const reducer = handleActions({
       ...state,
       manageList: manageList,
       selectList:[],
+      selectGroup:[],
       isEdit: true,
     }
   },
-  [selectGroupActions]: (state, {payload:selectList }) => {
+  [selectGroupActions]: (state, {payload:selectGroup }) => {
+    //debugger;
+    let selectGroup2 = [];
+    Object.assign(selectGroup2,selectGroup)
+    return {
+      ...state,
+      selectGroup: selectGroup2,
+    }
+  },
+  [selectListActions]: (state, {payload:selectList }) => {
     return {
       ...state,
       selectList: selectList,
@@ -347,21 +371,25 @@ const reducer = handleActions({
       manageList: [...manageList],
     }
   },
-  [moveServe]: (state, { payload: {dataList,id,afterId,parentId} }) => {
-    let manageList = state.manageList;
+  [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId} }) => {
+    let manageAllList = state.manageList;
+    let manageList = preType==="3" ? findById(manageAllList,preParentId) : manageAllList;
+    typeof manageList === "object" && preType==="3" && (manageList = [manageList]);
+
+    let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
     let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
-    const item = data.filter(({widgetId}) => widgetId === id)[0];
+    const item = dataPre.filter(({widgetId}) => widgetId === id)[0];
     const afterItem = data.filter(({widgetId}) => widgetId === afterId)[0];
     const itemIndex = data.indexOf(item);
     const afterIndex = data.indexOf(afterItem);
 
-    manageList.filter(({widgetId}) => widgetId)[0].children = update(data, {
+    manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
         $splice: [
           [itemIndex, 1],
           [afterIndex, 0, item]
         ]
     })
-    manageList = JSON.parse(JSON.stringify(manageList));
+    manageList = JSON.parse(JSON.stringify(manageAllList));
     return{
       ...state,
       manageList,
