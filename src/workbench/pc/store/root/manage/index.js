@@ -347,15 +347,16 @@ const reducer = handleActions({
       manageList: [...manageList],
     }
   },
-  [moveServe]: (state, { payload: {dataList,id,afterId,parentId} }) => {
+  [moveServe]: (state, { payload: {id,preParentId,afterId,parentId} }) => {
     let manageList = state.manageList;
+    let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
     let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
-    const item = data.filter(({widgetId}) => widgetId === id)[0];
+    const item = dataPre.filter(({widgetId}) => widgetId === id)[0];
     const afterItem = data.filter(({widgetId}) => widgetId === afterId)[0];
     const itemIndex = data.indexOf(item);
     const afterIndex = data.indexOf(afterItem);
 
-    manageList.filter(({widgetId}) => widgetId)[0].children = update(data, {
+    manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
         $splice: [
           [itemIndex, 1],
           [afterIndex, 0, item]
