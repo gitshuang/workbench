@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import Icon from 'bee-icon';
 import { widgetList, widgetItem, title, file_context, title_left,
@@ -17,6 +18,46 @@ import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 const {deleteFolder, renameFolder, setFolderEdit } = manageActions;
+
+const style = {
+  marginBottom: '.5rem',
+  backgroundColor: 'white',
+  cursor: 'move'
+};
+
+const type='item';
+
+const itemSource = {
+  beginDrag(props) {
+    return { id: props.id , parentId:props.parentId};
+  }
+};
+
+
+const itemTarget = {
+  hover(props, monitor) {
+    const draggedId = monitor.getItem().id;
+    const previousParentId = monitor.getItem().parentId;
+
+    if (draggedId !== props.id) {
+      props.moveItemDrag(draggedId,previousParentId, props.id, props.data.parentId);
+    }
+  }
+};
+
+function collectSource(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
+
+
+function collectTaget(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
+}
 
 @connect(
   mapStateToProps(
@@ -137,9 +178,10 @@ class WidgeFileItem extends Component {
         <div onClick={this.fileDele}><Icon type="uf-del" /></div>
       </div>
     </div>
-
-    return (
-      <li className={widgetItem} onClick={this.props.onClick}>
+    const { connectDragSource, connectDropTarget,isDragging } = this.props;
+    const opacity = isDragging ? 0 : 1;
+    return connectDragSource(connectDropTarget(
+      <li className={widgetItem} style={{...style, opacity }} onClick={this.props.onClick}>
         <div className={title}>
           <div className={[title_left,file_icon].join(' ')}></div>
           <div className={title_right}> {da.widgetName} </div>
@@ -156,8 +198,9 @@ class WidgeFileItem extends Component {
             </div>
         </PopDialog>
       </li>
-    );
+    ));
   }
 }
 
-export default WidgeFileItem;
+//export default WidgeFileItem;
+export default DragSource(type, itemSource, collectSource)(DropTarget(type,itemTarget,collectTaget)(WidgeFileItem));
