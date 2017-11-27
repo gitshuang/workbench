@@ -10,6 +10,7 @@ const {
   batchDelect,
   batchMove,
   selectGroupActions,
+  selectListActions,
   addGroup,
   delectGroup,
   renameGroup,
@@ -34,7 +35,7 @@ const defaultState = {
   isEdit: false,
   curDisplayFolder: {},
   folderModalDisplay: false,
-  selectList:[],
+  selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
   selectGroup:[]
 };
@@ -116,6 +117,7 @@ const reducer = handleActions({
       ...state,
       manageList: manageList,
       selectList:[],
+      selectGroup:[],
       isEdit: true,
     }
   },
@@ -146,10 +148,20 @@ const reducer = handleActions({
       ...state,
       manageList: manageList,
       selectList:[],
+      selectGroup:[],
       isEdit: true,
     }
   },
-  [selectGroupActions]: (state, {payload:selectList }) => {
+  [selectGroupActions]: (state, {payload:selectGroup }) => {
+    //debugger;
+    let selectGroup2 = [];
+    Object.assign(selectGroup2,selectGroup)
+    return {
+      ...state,
+      selectGroup: selectGroup2,
+    }
+  },
+  [selectListActions]: (state, {payload:selectList }) => {
     return {
       ...state,
       selectList: selectList,

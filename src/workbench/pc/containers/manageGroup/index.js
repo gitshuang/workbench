@@ -26,7 +26,10 @@ const {
   renameGroup,
   moveGroup,
   stickGroup,
-  addFolder
+  addFolder,
+  selectListActions,
+  selectGroupActions,
+
   } = manageActions;
 
 const style = {
@@ -77,6 +80,8 @@ function collectTaget(connect, monitor) {
 @connect(
   mapStateToProps(
     'manageList',
+    'selectGroup',
+    'selectList',
     {
       namespace:'manage'
     }
@@ -90,7 +95,9 @@ function collectTaget(connect, monitor) {
     renameGroup,
     moveGroup,
     stickGroup,
-    addFolder
+    addFolder,
+    selectListActions,
+    selectGroupActions,
   }
 )
 class ManageGroup extends Component {
@@ -106,8 +113,21 @@ class ManageGroup extends Component {
     this.state = {
       // manageData: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
       groupName:  "",
-      editFlag: false
+      editFlag: false,
+      selectGroup : []
     }
+  }
+  componentDidMount () {
+    const {selectGroup} = this.props;
+    this.setState({
+      selectGroup
+    });
+  }
+  componentWillReceiveProps(nextProps){
+    const {selectGroup} = nextProps;
+    this.setState({
+      selectGroup
+    });
   }
   // 添加文件夹
   addFolderFn = (data)=> {
@@ -156,9 +176,23 @@ class ManageGroup extends Component {
   /*         ********            *****                      */
   // 选择框  选择
   selectFn =(e,index) => {
-    const {selectGroupFn} = this.props;
+    let {selectList,selectListActions,manageList,selectGroupActions,selectGroup} = this.props;
     let checkFlag = e.target.checked;
-    selectGroupFn(checkFlag,index);
+    let aa = [];
+    manageList[index].children.map((item,index)=>{
+      aa.push(item.widgetId);
+    });
+    if(checkFlag){
+      selectGroup.push(index);
+      selectList = selectList.concat(aa);
+    }else{
+      selectList = selectList.concat(aa).filter(v => !selectList.includes(v) || !selectList.includes(v))
+      selectGroup =  selectGroup.filter((item,i) => {
+        return index !== item;
+      });
+    }
+    selectListActions(selectList);
+    selectGroupActions(selectGroup);
   }
 
   // 置顶分组
@@ -212,7 +246,8 @@ class ManageGroup extends Component {
       index,
       connectDragSource,
       connectDropTarget,
-      isDragging
+      isDragging,
+      selectGroup,
     } = this.props;
 
     const opacity = isDragging ? 0 : 1;
@@ -232,7 +267,7 @@ class ManageGroup extends Component {
     }else {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <label>
-          <input type="checkbox" onChange={ (e)=>{this.selectFn(e,index)} }/>
+          <input type="checkbox" checked={this.state.selectGroup.indexOf(index) >= 0 ? true : false} onChange={ (e)=>{this.selectFn(e,index)} }/>
           <span>{manageData.widgetName}</span>
         </label>
         <div>
