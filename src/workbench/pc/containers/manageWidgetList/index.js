@@ -134,7 +134,7 @@ class WidgetList extends Component {
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >
-          <Icon  type="uf-plus"  />
+          <Icon type="uf-plus"  />
         </div>
 
         <PopDialog show = { this.state.showModal } data={_da} btns={pop_btn} >

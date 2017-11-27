@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
-import Icon from 'bee-icon';
+import Icon from 'components/icon';
+import Icon1 from 'bee-icon';
 import Checkbox from 'bee-checkbox';
 import PopDialog from 'components/pop';
 import { connect } from 'react-redux';
@@ -168,8 +169,8 @@ class WidgetItem extends Component {
         <div className={`${clearfix} ${footer}`}>
           <div><Checkbox className="test" /></div>
           <div className={`${editDele} ${clearfix}`}>
-            <div onClick={this.fileEdit}><Icon type="uf-pencil" /></div>
-            <div onClick={this.fileDele}><Icon type="uf-del" /></div>
+            <div onClick={this.fileEdit}><Icon type="record" /></div>
+            <div onClick={this.fileDele}><Icon1 type="uf-del" /></div>
           </div>
         </div>
 

@@ -63,9 +63,9 @@ class HeaderContainer extends Component {
     let appClass = quickServiceDisplay ? "active tc" : "tc"
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <div className={appClass} style={{marginRight:"15px"}} onClick = {(e) =>{this.openService(e)}} ><Icon type="yingyong" /></div>,
+      <div className={appClass} style={{marginRight:"15px"}} onClick = {(e) =>{this.openService(e)}} ><Icon type="application" /></div>,
       <div className="tc">
-        <Icon type="xiaoxi" />
+        <Icon type="clock" />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>
     );

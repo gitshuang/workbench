@@ -12,7 +12,7 @@ import rootActions from 'store/root/actions';
 import Button from 'bee-button';
 import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee-tabs';
-import Icon from 'bee-icon';
+import Icon from 'components/icon';
 import onClickOutside from 'react-onclickoutside';
 
 import img from '../../assets/image/gloryIcon.png';
@@ -94,8 +94,22 @@ class UserInfoContainer extends Component {
   }
 
   handleChange=(e)=>{
-    console.log(e);
-    // alert("账号");
+    // console.log(e);
+    switch(e){
+      case 'account' : 
+        alert("账号");
+        break;
+      case 'language' : 
+        alert("界面语言");
+        break;
+      case 'message' : 
+        alert("消息");
+        break;
+      case 'cancel' : 
+        alert("注销");
+        break;
+      default : alert("undefined");
+    }
   }
   gotoManage() {
     const {
@@ -119,7 +133,7 @@ class UserInfoContainer extends Component {
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner} />
           <div className={editPortrait}>
-            <Icon type="uf-pencil-s" onClick={this.handleClick.bind(this)}></Icon>
+            <Icon type="copyreader" onClick={this.handleClick.bind(this)}></Icon>
           </div>
         </div>
         <div className={userInfo}>
@@ -166,7 +180,7 @@ class UserInfoContainer extends Component {
             <TabPane tab='最近使用' key="1" className={tabPane1}>
               <ul>
                 <li>
-                  <Icon type="uf-rmb-c-o"></Icon>
+                  <Icon type="loan"></Icon>
                   <div className={`${used} ${clearfix}`}>
                     <div className={`${usedModule} ${clearfix}`}>
                       <div className={`${module} ${clearfix}`}>
@@ -178,7 +192,7 @@ class UserInfoContainer extends Component {
                   </div>
                 </li>
                 <li>
-                  <Icon type="uf-rmb-s-o-2"></Icon>
+                  <Icon type="bill"></Icon>
                   <div className={`${used} ${clearfix}`}>
                     <div className={`${usedModule} ${clearfix}`}>
                       <div className={`${module} ${clearfix}`}>

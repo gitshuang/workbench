@@ -30,6 +30,8 @@
   cursor: pointer;
 }
 :global(.lebra-navbar-right .iconfont){
+  font-size:20px;
+  font-weight:bold;
   color: rgba(135,139,148,1);
 }
 :global(.lebra-navbar-right .active .iconfont){
