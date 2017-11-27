@@ -15,7 +15,10 @@ const defaultState = {
   userInfo: {},
   workList: [],
   userInfoDisplay: false,
-  curDisplayFolder: {},
+  curDisplayFolder: {
+    widgetName: '',
+    children: [],
+  },
   folderModalDisplay: false,
 };
 
@@ -48,7 +51,6 @@ const reducer = handleActions({
   }),
   [closeFolder]: (state) => ({
     ...state,
-    curDisplayFolder: {},
     folderModalDisplay: false,
   }),
 }, defaultState);

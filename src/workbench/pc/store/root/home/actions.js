@@ -1,4 +1,4 @@
-import { createActions } from 'redux-actions';
+import { createActions } from '@u';
 import types from './types';
 import { getUserInfo, getWorkList } from './api';
 
@@ -13,6 +13,9 @@ const {
 } = types;
 
 export default createActions(
+  {
+    namespace: 'home',
+  },
   {
     [GET_USER_INFO]: getUserInfo,
     [GET_WORK_LIST]: getWorkList,

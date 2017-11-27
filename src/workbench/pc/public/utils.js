@@ -1,3 +1,5 @@
+import { createActions as createReduxActions } from 'redux-actions';
+
 export const noop = () => {};
 
 export const mergeReducers = (...reducers) =>
@@ -6,21 +8,42 @@ export const mergeReducers = (...reducers) =>
     {},
   );
 
-export const createTypes = (namespaceObj, ...types) => {
-  let namespace = '';
-  if (typeof namespaceObj === 'object' && namespaceObj.namespace) {
-    namespace = namespaceObj.namespace
-      .split('.')
-      .map(n => n.toUpperCase())
-      .join('/') + '/';
-  } else if (typeof namespaceObj === 'string') {
-    types = [namespaceObj].concat(types);
-  }
+export const createTypes = (...types) => {
   return types.reduce((obj, type) => {
-    obj[type] = `${namespace}${type}`;
+    obj[type] = type;
     return obj;
   }, {});
 };
+
+export const createActions = (namespaceObj, ...args) => {
+  let namespace = [];
+  if (typeof namespaceObj === 'object' && namespaceObj.namespace) {
+    let [ actionMap, ...identityActions ] = args;
+    namespace = namespaceObj.namespace.split('.');
+    const result = {};
+    const space = namespace.reduce((obj, name)=>{
+      name = name.toUpperCase();
+      obj[name] = {};
+      return obj[name];
+    }, result);
+    if (typeof actionMap === 'object') {
+      Object.assign(space, actionMap);
+    } else {
+      identityActions = [ actionMap ].concat(identityActions);
+    }
+    identityActions.reduce((obj, identity) => {
+      obj[identity] = undefined;
+      return obj;
+    }, space);
+    const actions = createReduxActions(result);
+    return namespace.reduce((action, space)=>{
+      return action[space] ? action[space] : action;
+    }, actions);
+  } else {
+    args = [namespaceObj].concat(args);
+    return createReduxActions(...args);
+  }
+}
 
 const getHost = (key = 'api') => {
   const hosts = {

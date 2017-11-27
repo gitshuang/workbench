@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from 'containers/header';
-import Dialog from 'containers/homeFolderDialog';
+import HomeFolderDialog from 'containers/homeFolderDialog';
 import WidgeList from 'containers/homeWidgetList';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
@@ -25,7 +25,6 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 @connect(
   mapStateToProps(
     'workList',
-    'folderModalDisplay',
     {
       namespace: 'home',
     }
@@ -63,7 +62,6 @@ class Home extends Component {
 
         const {
           changeUserInfoDisplay,
-          folderModalDisplay,
           workList,
         } = this.props;
 
@@ -103,11 +101,7 @@ class Home extends Component {
                 </ElementsWrapper>
             </div>
           </div>
-          {
-            folderModalDisplay ? (
-              <Dialog/>
-            ) : null
-          }
+          <HomeFolderDialog />
         </div>);
     }
 }

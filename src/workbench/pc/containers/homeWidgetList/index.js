@@ -11,13 +11,13 @@ import {
 import homeActions from 'store/root/home/actions';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-const {openFolder} = homeActions;
+const {homeOpenFolder} = homeActions;
 
 @withRouter
 @connect(
   mapStateToProps(),
   {
-    openFolder,
+    homeOpenFolder,
   }
 )
 class HomeWidgeList extends Component{
@@ -30,7 +30,7 @@ class HomeWidgeList extends Component{
         type,
       },
       noTitle,
-      openFolder,
+      homeOpenFolder,
       history,
     } = this.props;
     const list = children.map((child, i) => {
@@ -47,7 +47,7 @@ class HomeWidgeList extends Component{
       };
       if (type === 2) {
         props.clickHandler = () => {
-          openFolder(child);
+          homeOpenFolder(child);
         }
       } else if (type === 3 && !jsurl){
         props.clickHandler = () => {
