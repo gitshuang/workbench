@@ -34,6 +34,7 @@ const style = {
   border: '1px solid #fff',
   borderRadius:'2px',
   padding: '0.5rem 4rem',
+  paddingRight:'0',
   margin: '0 auto',
   marginBottom: '.5rem',
   marginTop: '.5rem',
@@ -142,6 +143,10 @@ class ManageGroup extends Component {
     renameGroup(param);
     this.renameGroupCancel(index);
   }
+  //点击清空输入框
+  clearInput = () => {
+    console.log(this.refs.newGroupName);
+  }
   // 输入框的更改
   editGroupName = (e) =>{
     this.setState({
@@ -199,7 +204,7 @@ class ManageGroup extends Component {
       </Dropdown>
     )
   }
-
+  
   render() {
     const {
       manageData,
@@ -214,7 +219,10 @@ class ManageGroup extends Component {
     if(this.state.editFlag) {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
-          <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
+          <span>
+            <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} } ref={newGroupName}/>
+            <Icon type="uf-close-c" onClick={ this.clearInput.bind(this) }></Icon>
+          </span>
           <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
           <Button className={cancel} onClick={ ()=>{this.renameGroupCancel(index)} }>取消</Button>
         </div>
