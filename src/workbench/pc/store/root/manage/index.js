@@ -100,36 +100,42 @@ const reducer = handleActions({
     let selectList = state.selectList;
     let newList = [];
     manageList.forEach(({children})=>{
-      children.forEach((child, key)=>{
-        const { widgetId } = child;
+      for(var i=0,flag=true,len=children.length;i<len;flag ? i++ : i){
         selectList.forEach((select)=>{
-          if(widgetId === select){
-            delete children[key];
+          if(children[i]&&children[i].widgetId === select){
+            children.splice(i,1);
+            flag = false;
+          }else{
+            flag = true;
           }
         })
-      });
+      }
     });
     return {
       ...state,
       manageList: manageList,
+      selectList:[],
       isEdit: true,
     }
   },
-  [batchMove]: (state, {payload:{toGroupIndex} }) => {
+  [batchMove]: (state, {payload:toGroupIndex }) => {
+    debugger;
     let manageList = state.manageList;
     // 选中之后将id 都放到这个组中
     let selectList = state.selectList;
     let newList = [];
     manageList.forEach(({children})=>{
-      children.forEach((child, key)=>{
-        const { widgetId } = child;
+      for(var i=0,flag=true,len=children.length;i<len;flag ? i++ : i){
         selectList.forEach((select)=>{
-          if(widgetId === select){
-            newList.push(child);
-            delete children[key];
+          if(children[i]&&children[i].widgetId === select){
+            newList.push(children[i]);
+            children.splice(i,1);
+            flag = false;
+          }else{
+            flag = true;
           }
         })
-      });
+      }
     });
     newList.forEach((item)=>{
       manageList[toGroupIndex].children.push(item);
@@ -137,6 +143,7 @@ const reducer = handleActions({
     return {
       ...state,
       manageList: manageList,
+      selectList:[],
       isEdit: true,
     }
   },

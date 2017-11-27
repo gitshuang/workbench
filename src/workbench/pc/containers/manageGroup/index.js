@@ -201,6 +201,7 @@ class ManageGroup extends Component {
   }
 
   render() {
+
     const {
       manageData,
       index,
@@ -208,6 +209,7 @@ class ManageGroup extends Component {
       connectDropTarget,
       isDragging
     } = this.props;
+
     const opacity = isDragging ? 0 : 1;
     let _id = manageData.widgetId + "_" + index;
     let groupTitle = null;
