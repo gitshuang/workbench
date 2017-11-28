@@ -53,6 +53,20 @@ class Home extends Component {
     this.state ={
       isOpenMove: false,
       isGroup: false,
+      moveData: [
+        {
+          "type": "1",
+          "widgetId": "f1",
+          "widgetName": "分组一",
+          "children": []
+        },
+        {
+          "type": "1",
+          "widgetId": "f2",
+          "widgetName": "分组二",
+          "children": []
+        }
+      ]
     }
     this.moveGroupDrag = this.moveGroupDrag.bind(this);
   }
@@ -108,7 +122,7 @@ class Home extends Component {
   goBack() {
     this.props.history.goBack();
   }
-  openGroupTo() {
+  openGroupTo =()=> {
     this.setState({
       isOpenMove: true
     });
@@ -121,9 +135,11 @@ class Home extends Component {
       isGroup: true
     });
   }
-  moveConfirmFn() {
+  moveConfirmFn =(index,key)=> {
     const { batchMove } = this.props;
-    batchMove(0);
+    debugger;
+    batchMove(index);
+    this.moveCancelFn();
   }
 
   moveCancelFn() {
@@ -148,7 +164,7 @@ class Home extends Component {
       });
     });
   }
-  groupCancelFn() {
+  groupCancelFn =()=> {
     this.setState({
       isGroup: false,
     });
@@ -182,14 +198,14 @@ class Home extends Component {
             <span>首页编辑</span>
           </Header>
         </div>
-        <div className={um_content}>
+        <div className={um_content} style={{background:"rgb(230,233,233)"}}>
           {this.renderContent()}
         </div>
         <div className={um_footer}>
           <div className={umBoxJustify}>
             <div className={umBoxJustify1}>
-              <Button className={batchDeletion} disabled={!!selectList.length} onClick={this.openDeleteMark}>批量删除</Button>
-              <Button className={batchDeletion} disabled={!!selectList.length} onClick={this.openGroupTo}>批量移动</Button>
+              <Button className={batchDeletion} disabled={selectList.length ? false:true} onClick={this.openDeleteMark}>批量删除</Button>
+              <Button className={batchDeletion} disabled={selectList.length? false : true} onClick={this.openGroupTo}>批量移动</Button>
             </div>
             <div className={umBoxJustify2}>
               <Button className={preserve} disabled={!isEdit} onClick={this.save}>保存</Button>
@@ -202,6 +218,7 @@ class Home extends Component {
           this.state.isOpenMove ? (
             <div className={pin +" um-css3-center"}>
               <MoveToGroup
+                data={this.state.moveData}
                 isGroup={this.state.isGroup}
                 addGroup={this.moveAddGroup}
                 confirmFn={this.moveConfirmFn}
