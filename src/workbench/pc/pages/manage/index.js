@@ -20,7 +20,7 @@ import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
 
-import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin} from './style.css';
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin,um_content,um_footer} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { setManageList,getManageList,batchDelect,batchMove,moveGroup } = manageActions;
@@ -53,6 +53,7 @@ class Home extends Component {
     this.state ={
       isOpenMove: false,
       isGroup: false,
+      // TODO: 这部分数据应该是从managelist里面算出来的
       moveData: [
         {
           "type": "1",
@@ -66,11 +67,10 @@ class Home extends Component {
           "widgetName": "分组二",
           "children": []
         }
-      ]
-    }
-    this.moveGroupDrag = this.moveGroupDrag.bind(this);
+      ],
+    };
   }
-  moveGroupDrag(id, afterId) {
+  moveGroupDrag = (id, afterId) => {
     const { moveGroup } = this.props;
     moveGroup({ id, afterId });
   }
@@ -89,15 +89,7 @@ class Home extends Component {
       requestSuccess();
     });
   }
-  batchDelect() {
-    const { batchDelect } = this.props;
-    batchDelect();
-  }
-  batchMove(index) {
-    const { batchMove } = this.props;
-    batchMove(index);
-  }
-  save() {
+  save = () => {
     const { setManageList, manageList } = this.props;
     setManageList(manageList).then(({error, payload}) => {
       if (error) {
@@ -106,7 +98,7 @@ class Home extends Component {
       requestSuccess();
     });
   }
-  cancel() {
+  cancel = () => {
     const { isEdit, getManageList } = this.props;
     if(isEdit){
       getManageList().then(({error, payload}) => {
@@ -119,35 +111,35 @@ class Home extends Component {
       this.goBack();
     }
   }
-  goBack() {
+  goBack = () => {
     this.props.history.goBack();
   }
-  openGroupTo =()=> {
+  openGroupTo = () => {
     this.setState({
       isOpenMove: true
     });
   }
-  openDeleteMark() {
-    this.batchDelect()
+  openDeleteMark = () => {
+    const { batchDelect } = this.props;
+    batchDelect();
   }
   moveAddGroup = () => {
     this.setState({
       isGroup: true
     });
   }
-  moveConfirmFn =(index,key)=> {
+  moveConfirmFn = (index,key) => {
     const { batchMove } = this.props;
-    debugger;
     batchMove(index);
     this.moveCancelFn();
   }
 
-  moveCancelFn() {
+  moveCancelFn = () => {
     this.setState({
       isOpenMove: false
     })
   }
-  addNewGroup(name,id) {
+  addNewGroup = (name,id) => {
     const { setAddGroup, requestError } = this.props;
     let newGroup = {
       id: id,
@@ -198,10 +190,10 @@ class Home extends Component {
             <span>首页编辑</span>
           </Header>
         </div>
-        <div className='um-content' style={{background:"rgb(230,233,233)"}}>
+        <div className={um_content} style={{background:"rgb(230,233,233)"}}>
           {this.renderContent()}
         </div>
-        <div className="um-footer">
+        <div className={um_footer}>
           <div className={umBoxJustify}>
             <div className={umBoxJustify1}>
               <Button className={batchDeletion} disabled={selectList.length ? false:true} onClick={this.openDeleteMark}>批量删除</Button>

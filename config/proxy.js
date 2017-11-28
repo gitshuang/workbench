@@ -2,7 +2,7 @@ var path = require('path')
 var projectId = '29035'
 var api = [
   '/serve/getAllServesGroupByLabels',
-  '/application/getAllAppsGroupByLabels',
+  '/application/getAllApps',
   '/desktop/getdeskTop',
   '/widget/deleteByServeCode',
   '/widget/create',

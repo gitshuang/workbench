@@ -1,5 +1,5 @@
 import { get } from '@u';
 
-export default function getAllAppsGroupByLabels(){
-  return get('/application/getAllAppsGroupByLabels');
+export default function getAllApps(){
+  return get('/application/getAllApps');
 }
