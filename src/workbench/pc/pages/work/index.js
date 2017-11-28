@@ -60,7 +60,6 @@ export default class Work extends Component {
           loaded: false,
         };
         this.goBack = this.goBack.bind(this);
-        this.pinDisplay = this.pinDisplay.bind(this);
     }
     goBack() {
         this.props.history.replace('');
@@ -94,7 +93,7 @@ export default class Work extends Component {
         const { returnDefaultState } = this.props;
         returnDefaultState();
     }
-    pinDisplay() {
+    pinDisplayFn =()=> {
         const {
           current: {
             serveCode,
@@ -202,7 +201,7 @@ export default class Work extends Component {
                     type="dingzhi"
                     className={ pinType ? 'active' : '' }
                     style={{ marginLeft:"15px",fontSize:"18px" }}
-                    onClick={ this.pinDisplay }
+                    onClick={ this.pinDisplayFn }
                   />
                 </div>
               </HeaderContainer>

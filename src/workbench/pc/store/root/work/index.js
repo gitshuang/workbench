@@ -202,7 +202,7 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      pinType: payload,
+      pinType: false,
     };
   },
   [delTab]: (state, { payload: currentId }) => {
