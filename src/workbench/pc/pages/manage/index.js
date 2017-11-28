@@ -53,6 +53,7 @@ class Home extends Component {
     this.state ={
       isOpenMove: false,
       isGroup: false,
+      // TODO: 这部分数据应该是从managelist里面算出来的
       moveData: [
         {
           "type": "1",
@@ -66,11 +67,10 @@ class Home extends Component {
           "widgetName": "分组二",
           "children": []
         }
-      ]
-    }
-    this.moveGroupDrag = this.moveGroupDrag.bind(this);
+      ],
+    };
   }
-  moveGroupDrag(id, afterId) {
+  moveGroupDrag = (id, afterId) => {
     const { moveGroup } = this.props;
     moveGroup({ id, afterId });
   }
@@ -89,15 +89,7 @@ class Home extends Component {
       requestSuccess();
     });
   }
-  batchDelect() {
-    const { batchDelect } = this.props;
-    batchDelect();
-  }
-  batchMove(index) {
-    const { batchMove } = this.props;
-    batchMove(index);
-  }
-  save() {
+  save = () => {
     const { setManageList, manageList } = this.props;
     setManageList(manageList).then(({error, payload}) => {
       if (error) {
@@ -106,7 +98,7 @@ class Home extends Component {
       requestSuccess();
     });
   }
-  cancel() {
+  cancel = () => {
     const { isEdit, getManageList } = this.props;
     if(isEdit){
       getManageList().then(({error, payload}) => {
@@ -119,35 +111,35 @@ class Home extends Component {
       this.goBack();
     }
   }
-  goBack() {
+  goBack = () => {
     this.props.history.goBack();
   }
-  openGroupTo =()=> {
+  openGroupTo = () => {
     this.setState({
       isOpenMove: true
     });
   }
-  openDeleteMark() {
-    this.batchDelect()
+  openDeleteMark = () => {
+    const { batchDelect } = this.props;
+    batchDelect();
   }
   moveAddGroup = () => {
     this.setState({
       isGroup: true
     });
   }
-  moveConfirmFn =(index,key)=> {
+  moveConfirmFn = (index,key) => {
     const { batchMove } = this.props;
-    debugger;
     batchMove(index);
     this.moveCancelFn();
   }
 
-  moveCancelFn() {
+  moveCancelFn = () => {
     this.setState({
       isOpenMove: false
     })
   }
-  addNewGroup(name,id) {
+  addNewGroup = (name,id) => {
     const { setAddGroup, requestError } = this.props;
     let newGroup = {
       id: id,

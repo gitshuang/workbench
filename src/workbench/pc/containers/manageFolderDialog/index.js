@@ -31,7 +31,7 @@ class ManageFolderDialog extends Component {
         super(props);
         this.moveItemDrag = this.moveItemDrag.bind(this);
     }
-    moveItemDrag(id,preParentId,preType, afterId,parentId) {
+    moveItemDrag = (id,preParentId,preType, afterId,parentId) => {
       let data = {id,preParentId,preType,afterId,parentId}
       const { moveServe } = this.props;
       moveServe(data);
