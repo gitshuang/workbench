@@ -111,6 +111,9 @@ class UserInfoContainer extends Component {
       default : alert("undefined");
     }
   }
+  handleScroll = (e)=>{
+    console.log(e);
+  }
   gotoManage() {
     const {
       history,
@@ -129,7 +132,7 @@ class UserInfoContainer extends Component {
       }
     } = this.props;
     return (
-      <div  className={`${wrap} ${clearfix}`}>
+      <div className={`${wrap} ${clearfix}`} onScroll={this.handleScroll.bind(this)}>
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner} />
           <div className={editPortrait}>

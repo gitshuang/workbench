@@ -194,12 +194,12 @@ export default class Work extends Component {
                   {
                     hasRelationFunc ?
                       (<Icon
-                        type="xiala"
-                        style={{marginLeft:"15px",fontSize:"10px"}}
+                        type="application"
+                        style={{marginLeft:"15px",fontSize:"18px"}}
                         onClick={ titleServiceDisplay } />) : undefined
                   }
                   <Icon
-                    type="dingzhi"
+                    type="pin"
                     className={ pinType ? 'active' : '' }
                     style={{ marginLeft:"15px",fontSize:"18px" }}
                     onClick={ this.pinDisplay }

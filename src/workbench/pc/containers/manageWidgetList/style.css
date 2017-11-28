@@ -150,13 +150,13 @@
 }
 
 .edit_cont{
-    position: absolute;
-    z-index: 1;
-    overflow: hidden;
-    top: 40px;
-    padding:5px;
-    box-sizing: border-box;
-    background: #fff;
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  top: 40px;
+  padding:5px;
+  box-sizing: border-box;
+  background: #fff;
 }
 .edit_btn{
    display: -webkit-box;
