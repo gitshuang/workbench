@@ -21,6 +21,8 @@ import img2 from '../../assets/image/gloryIcon2.png';
 const {
   getUserInfo,
   hideUserInfoDisplay,
+  getWorkList,
+  setCutUser
 } = homeActions;
 
 const {
@@ -44,6 +46,8 @@ const {
     requestError,
     hideUserInfoDisplay,
     getUserInfo,
+    getWorkList,
+    setCutUser
   }
 )
 @onClickOutside
@@ -92,27 +96,60 @@ class UserInfoContainer extends Component {
   handleClick() {
     alert("修改")
   }
+  setCutUserFn =() => {
+    const {setCutUser,getWorkList} = this.props;
+    setCutUser().then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      }
+      getWorkList().then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        }
+        debugger;
+        requestSuccess();
+      });
+    });
+  }
 
   handleChange=(e)=>{
     // console.log(e);
     switch(e){
-      case 'account' : 
+      case 'account' :
         alert("账号");
         break;
-      case 'language' : 
+      case 'language' :
         alert("界面语言");
         break;
-      case 'message' : 
+      case 'message' :
         alert("消息");
         break;
-      case 'cancel' : 
+      case 'cancel' :
         alert("注销");
         break;
       default : alert("undefined");
     }
   }
-  handleScroll = (e)=>{
-    console.log(e);
+
+  handleChange2 =(e)=>{
+    // console.log(e);
+    switch(e){
+      case 'account' :
+        alert("账号");
+        break;
+      case 'safetyPick' :
+        alert("安全评级");
+        break;
+      case 'password' :
+        alert("password");
+        break;
+      case 'cutuser' :
+        alert("切换企业帐号");
+        this.setCutUserFn();
+        break;
+      default : alert("undefined");
+    }
+
   }
   gotoManage() {
     const {
@@ -128,11 +165,34 @@ class UserInfoContainer extends Component {
         userName: name,
         userAvator: imgsrc,
         gloriesNum: glory,
-        redPacketsNum: redPackets
+        redPacketsNum: redPackets,
+        allowTenants,
       }
     } = this.props;
+    let renderAllow = null;
+    if(allowTenants && allowTenants.length){
+      renderAllow =
+        <Select
+          defaultValue="账号管理" name="456"
+          onChange={this.handleChange2}
+        >
+          <Option name="account"  value="account" >账号</Option>
+          <Option name="safetyPick" value="safetyPick" >安全评级</Option>
+          <Option name="password" value="password" >修改密码</Option>
+          <Option name="cutuser" value="cutuser">切换企业帐号</Option>
+        </Select>
+    }else{
+      renderAllow = <Select
+        defaultValue="账号管理" name="456"
+        onChange={this.handleChange2}
+      >
+        <Option name="account"  value="account" >账号</Option>
+        <Option name="safetyPick" value="safetyPick" >安全评级</Option>
+        <Option name="password" value="password" >修改密码</Option>
+      </Select>
+    }
     return (
-      <div className={`${wrap} ${clearfix}`} onScroll={this.handleScroll.bind(this)}>
+      <div className={`${wrap} ${clearfix}`}>
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner} />
           <div className={editPortrait}>
@@ -159,7 +219,9 @@ class UserInfoContainer extends Component {
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
             <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>桌面管理</Button></li>
-            <li><Button shape="border" size="sm">切换账号</Button></li>
+            <li>
+              {renderAllow}
+            </li>
             <li>
               <Select
                 defaultValue="系统设置" name="123"

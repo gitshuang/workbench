@@ -11,6 +11,7 @@ var api = [
   '/serve/getServeInfoByAppCode',
   '/serve/getRelationServesAndUsers',
   '/user/getUserInfo',
+  '/user/setCutUser',
 
   '/getMessage',
   '/getSelectWidgetList',

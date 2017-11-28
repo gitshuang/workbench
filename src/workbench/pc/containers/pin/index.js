@@ -10,6 +10,7 @@ import workActions from 'store/root/work/actions';
 import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee-button';
 /*  style */
+import 'assets/style/iuapmobile.um.css'
 import {
   pin,
   header,
@@ -116,7 +117,7 @@ class Pin extends Component {
     const { pinDisplay,classname } = this.props;
     if(pinDisplay){
       return (
-        <div className={`${pin} um-box-center`} >
+        <div className={`${pin} um-css3-hc`} >
           <div className={header +" um-box"}>
             <div>
               <img src="../" alt="" />
