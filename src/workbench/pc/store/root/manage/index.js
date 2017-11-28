@@ -77,7 +77,7 @@ const defaultFolder = {
 var data;
 function findById(manageList,id) {
   for(let i = 0;i<manageList.length;i++){
-    if(manageList[i].widgetId === id){
+    if(manageList[i].widgetId && manageList[i].widgetId === id){
       data = manageList[i];
       break;
     }else{
@@ -394,19 +394,20 @@ const reducer = handleActions({
     let afterParentType = targetData.type;
     //判断是否为文件夹里面元素拖拽
     let manageList = (preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3) ? [sourceData] : manageAllList;
-    //从外面拖入文件夹里面
+    let itemIn = findById(manageAllList,id);
+    let itemAfter = findById(manageAllList,afterId);
     if(preType === 3 && afterType === 2){
-      let folderData = findById(manageAllList,afterId);
-      let itemIn = findById(manageAllList,id);
-      folderData.children.push(itemIn); //往文件夹里添加拖拽的数据
+      //从外面拖入文件夹里面
+      itemAfter.children.push(itemIn); //往文件夹里添加拖拽的数据
       sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //将拖拽的数据从外层删掉
-    }else if(preParentType===2 && afterParentType===1 && preType === 3 && afterType === 3){
-      //从文件夹里面往外面拖拽
-      let itemOut = findById(manageAllList,id);
-      let itemAfter = findById(manageAllList,afterId);
+    }else if(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3){
+      //从文件夹里面往外面拖拽 或 跨分组拖拽
       //targetData.children.push(itemOut);
-      targetData.children.splice(targetData.children.indexOf(itemAfter),0,itemOut); //添加
-      sourceData.children.splice(sourceData.children.indexOf(itemOut),1); //删掉
+      sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
+      if(preParentId !== parentId){
+        itemIn.parentId = parentId;
+      }
+      targetData.children.splice(targetData.children.indexOf(itemAfter),0,itemIn); //添加
     } else {
       let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
       let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
