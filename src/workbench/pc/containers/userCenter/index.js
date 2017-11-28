@@ -117,14 +117,14 @@ class UserInfoContainer extends Component {
       case 'account' :
         alert("账号");
         break;
-      case 'language' :
-        alert("界面语言");
+      case 'safetyPick' :
+        alert("安全评级");
         break;
-      case 'message' :
-        alert("消息");
+      case 'password' :
+        alert("password");
         break;
-      case 'cancel' :
-        alert("注销");
+      case 'cutusername' :
+        alert("切换企业帐号");
         break;
       default : alert("undefined");
     }
@@ -151,22 +151,22 @@ class UserInfoContainer extends Component {
     if(allowTenants && allowTenants.length){
       renderAllow =
         <Select
-          defaultValue="切换账号" name="456"
+          defaultValue="账号管理" name="456"
           onChange={this.handleChange2}
         >
           <Option name="account"  value="account" >账号</Option>
           <Option name="safetyPick" value="safetyPick" >安全评级</Option>
-          <Option name="passwork" value="passwork" >修改密码</Option>
-          <Option name="cancel" value="cancel">切换企业帐号</Option>
+          <Option name="password" value="password" >修改密码</Option>
+          <Option name="cutusername" value="cutusername">切换企业帐号</Option>
         </Select>
     }else{
       renderAllow = <Select
-        defaultValue="切换账号" name="456"
+        defaultValue="账号管理" name="456"
         onChange={this.handleChange2}
       >
         <Option name="account"  value="account" >账号</Option>
         <Option name="safetyPick" value="safetyPick" >安全评级</Option>
-        <Option name="passwork" value="passwork" >修改密码</Option>
+        <Option name="password" value="password" >修改密码</Option>
       </Select>
     }
     return (
