@@ -90,7 +90,7 @@ class WidgetList extends Component {
 
   render() {
 
-      const { data,index,checkType } = this.props;
+      const { data,index } = this.props;
 
       const pop_btn = [
         {label:"确认",fun:this.popSave,className:""},
@@ -116,7 +116,6 @@ class WidgetList extends Component {
                 parentId={parentId}
                 index={id}
                 propsIndex={index}
-                checkType={checkType}
                 moveItemDrag={this.moveItemDrag}
                 onClick={(e)=>{this.widgeOnclick(e,item)}}
               />
@@ -130,7 +129,6 @@ class WidgetList extends Component {
                 parentId={parentId}
                 index={id}
                 propsIndex={index}
-                checkType={checkType}
                 moveItemDrag={this.moveItemDrag}
               />
             );

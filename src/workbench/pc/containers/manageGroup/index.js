@@ -287,7 +287,7 @@ class ManageGroup extends Component {
         <div id={_id} style={{ ...style, opacity }}>
           { groupTitle }
           <div>
-            <WidgetList index={index} data={manageData.children} checkType={checkType} />
+            <WidgetList index={index} data={manageData.children}  />
           </div>
         </div>
         <div className={addBtn}>

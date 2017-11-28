@@ -144,8 +144,17 @@ class WidgetItem extends Component {
       showModal:true
     })
   }
+  isContained =(a, b)=>{
+    if(!(a instanceof Array) || !(b instanceof Array)) return false;
+    if(a.length < b.length) return false;
+    var aStr = a.toString();
+    for(var i = 0, len = b.length; i < len; i++){
+      if(aStr.indexOf(b[i]) == -1) return false;
+    }
+    return true;
+  }
   onHandChange =(flag) =>{
-    const {selectList,selectGroup,selectListActions,selectGroupActions} = this.props;
+    const {selectList,selectGroup,selectListActions,selectGroupActions,propsIndex,manageList} = this.props;
     const {
       data: {
         widgetId
@@ -157,12 +166,24 @@ class WidgetItem extends Component {
       selectList2 = selectList.filter((item,i) => {
         return item !== widgetId;
       });
-
+      const selectGroup2 =  selectGroup.filter((item,i) => {
+        return propsIndex !== item;
+      });
+      selectGroupActions(selectGroup2);
     }else{
       selectList2 = [widgetId, ...selectList];
+      // 判断当前分组下的子节点是否都在selectList中
+      let newArr = manageList[propsIndex].children.map((item,index)=>{
+        return item.widgetId;
+      })
+      if(this.isContained(selectList2,newArr)){
+        selectGroup.push(propsIndex);
+        selectGroupActions(selectGroup);
+      }
     }
     selectListActions(selectList2);
   }
+
   render() {
 
      const pop_btn = [
@@ -177,7 +198,7 @@ class WidgetItem extends Component {
         widgetName,
       }
     } = this.props;
-    const { connectDragSource, connectDropTarget,isDragging,selectList,propsIndex } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,selectList } = this.props;
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     return connectDragSource(connectDropTarget(
