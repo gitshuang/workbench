@@ -1,0 +1,16 @@
+{
+  "data": [{
+      "applicationId": 1,
+      "applicationCode": "111",
+      "applicationIcon": "https://www.baidu.com/img/bd_logo1.png",
+      "applicationName": "交通费报销"
+    },
+    {
+      "applicationId": 1,
+      "applicationCode": "222",
+      "applicationIcon": "https://www.baidu.com/img/bd_logo1.png",
+      "applicationName": "燃油费报销"
+    }
+  ],
+  "status": 1
+}

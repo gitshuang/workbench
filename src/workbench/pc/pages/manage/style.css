@@ -3,3 +3,41 @@
   width: 58px;
   height: 27px;
 }
+.um_content{
+	background:rgb(230,233,233);
+}
+.umBoxJustify{
+	height:48px;
+	padding:10px 0;
+	position:relative;
+	background:rgba(26,32,38,0.6);
+}
+.umBoxJustify button{
+	height:28px;
+	padding: 0 22px;
+	margin-right:8px;
+	border: 1px solid #d9d9d9;
+	font-size: 12px;
+	line-height: 28px;
+	color:#fff;
+	background:transparent;
+}
+.umBoxJustify button:hover{
+	background:rgba(225,76,70,1);
+}
+.umBoxJustify div{
+	position:absolute;
+}
+.umBoxJustify1{
+	left:80px;
+}
+.umBoxJustify2{
+	right:260px;
+}
+.pin{
+  width:300px;
+  background:rgba(255,255,255,1);
+  border-radius: 2px ;
+  box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.14);
+  padding: 16px;
+}

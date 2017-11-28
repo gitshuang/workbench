@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import {pop_cont} from "./style.css";
 import PropTypes from "prop-types";
 import Modal from 'bee-modal';
 import Button from 'bee-button';
 
 const propTypes = {
   title:"",
-	show:PropTypes.bool.isRequired,
+        show:PropTypes.bool.isRequired,
   btns:[{label:"",fun:null,className:""},{label:"",fun:null,className:""}],   //设置操作按钮
-	close:PropTypes.fun,
+        close:PropTypes.fun,
   data:null
 };
 
@@ -19,7 +18,7 @@ class PopDialog extends Component{
         super(props);
   }
 
-	render(){
+        render(){
 
     let btns = [];
     if(this.props.btns){
@@ -34,14 +33,14 @@ class PopDialog extends Component{
             }
         })
     }
-		
-		return(<Modal show = { this.props.show } onHide = { this.props.close } >
+
+                return(<Modal className={this.props.className?this.props.className:"pop_dialog"} show = { this.props.show } onHide = { this.props.close } >
               <Modal.Header>
                   <Modal.Title>{this.props.title}</Modal.Title>
               </Modal.Header>
 
               <Modal.Body>
-                <div className={pop_cont} >
+                <div>
                     {this.props.children}
                 </div>
               </Modal.Body>
@@ -50,7 +49,7 @@ class PopDialog extends Component{
                   {btns}
               </Modal.Footer>
         </Modal>)
-	}
+        }
 
 }
 

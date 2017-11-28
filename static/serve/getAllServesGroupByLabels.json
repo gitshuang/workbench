@@ -1,0 +1,34 @@
+{
+  "data": [{
+      "children": [{
+        "enable": true,
+        "serveCode": "3002",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serveId": "2222_001",
+        "serveName": "HR相关业务二组件"
+      },
+      {
+        "enable": true,
+        "serveCode": "222",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serveId": "2222_002",
+        "serveName": "代办业务五组件"
+      }],
+      "lebalId": "s_1001",
+      "lebalName": "财务云"
+    },
+    {
+      "children": [{
+        "enable": true,
+        "serveCode": "222",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serveId": "2222_008",
+        "serveName": "HR相关业务一组件"
+      }],
+      "lebalId": "s_1002",
+      "lebalName": "协同云"
+    }
+  ],
+  "msg": 1,
+  "status": 1
+}

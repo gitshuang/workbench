@@ -7,7 +7,7 @@ import onClickOutside from 'react-onclickoutside';
 import actions from 'store/root/actions';
 import { withRouter } from 'react-router-dom';
 
-const {changeQuickServiceHidden,} = actions;
+const {changeQuickServiceHidden} = actions;
 
 @withRouter
 @connect(
@@ -27,40 +27,36 @@ class QuickServiceContainer extends Component {
       changeQuickServiceHidden();
     }
   }
-
-  openApplication = () => {
+  openAllAppList() {
     const { changeQuickServiceHidden } = this.props;
     changeQuickServiceHidden();
     this.props.history.push('/application');
   }
-
+  openApp(applicationCode) {
+    this.props.history.push(`/app/${applicationCode}`);
+  }
   render() {
     const { serviceList } = this.props;
     return (
       <div className={serviceContainer}>
         <div className={service} >
-          <div className={serviceGroup}>
-            <h4>分组一</h4>
-            <ul className="clearfix">
-              {
-                serviceList.map((service, i) => (
-                  <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
-                ))
-              }
-            </ul>
-          </div>
-          <div className={serviceGroup}>
-            <h4>分组二</h4>
-            <ul className="clearfix">
-              {
-                serviceList.map((service, i) => (
-                  <div key={i} className={contentDiv}><li>{service.name}</li><div className={content}>{service.name}</div></div>
-                ))
-              }
-            </ul>
-          </div>
+          <ul className="clearfix">
+          {
+            serviceList.map(({
+              applicationCode,
+              applicationIcon,
+              applicationId,
+              applicationName,
+            }) => (
+              <div key={applicationCode} className={contentDiv} onClick={this.openApp.bind(this, applicationCode)}>
+                <li><img src={applicationIcon}/></li>
+                <div className={content}>{applicationName}</div>
+              </div>
+            ))
+          }
+          </ul>
         </div>
-        <div className={`${serviceBtn} ` }><button className="btn" onClick={this.openApplication}>全部服务</button></div>
+        <div className={serviceBtn}><button className="btn" onClick={this.openAllAppList}>全部服务</button></div>
       </div>
     );
   }

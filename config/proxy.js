@@ -1,21 +1,26 @@
 var path = require('path')
-var projectId = '27469'
+var projectId = '29035'
 var api = [
-  '/serve/getServeTree',
-  '/application/getApplicationList',
-  '/getdeskTop',
+  '/serve/getAllServesGroupByLabels',
+  '/application/getAllAppsGroupByLabels',
+  '/desktop/getdeskTop',
   '/widget/deleteByServeCode',
   '/widget/create',
   '/widget/getFolders',
   '/serve/getServeInfoByServeCode',
   '/serve/getServeInfoByAppCode',
   '/serve/getRelationServesAndUsers',
+  '/user/getUserInfo',
 
-  '/getUserInfo',
   '/getMessage',
+  '/getSelectWidgetList',
   '/setManageList',
   '/getManageList',
 ]
+
+var rapApi = [
+    // '/serve/getAllServesGroupByLabels'
+];
 
 function makeRapConfig(key) {
   var config = {
@@ -52,4 +57,4 @@ function addApi() {
   return obj;
 }
 
-module.exports = addApi([makeStaticConfig, api])
+module.exports = addApi([makeStaticConfig, api],[makeRapConfig,rapApi])

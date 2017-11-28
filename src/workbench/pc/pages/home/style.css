@@ -11,7 +11,7 @@
     padding-left: 100px;
 }
 
-.page_home :global(.content>div){
+.page_home :global(.content) > div{
     margin-top: 120px;
 }
 /*
@@ -81,4 +81,18 @@
 }
 .navbar{
    background:yellow;
+}
+
+.selectCont{
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin-left: 100px;
+  margin-top: 100px;
+  // background: #ccc;
+}
+.button{
+  width: 80px;
+  height: 50px;
+  background: #000;
 }

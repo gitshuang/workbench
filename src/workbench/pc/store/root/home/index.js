@@ -7,12 +7,19 @@ const {
   getWorkList,
   changeUserInfoDisplay,
   hideUserInfoDisplay,
+  openFolder,
+  closeFolder,
 } = actions;
 
 const defaultState = {
   userInfo: {},
   workList: [],
   userInfoDisplay: false,
+  curDisplayFolder: {
+    widgetName: '',
+    children: [],
+  },
+  folderModalDisplay: false,
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -36,6 +43,15 @@ const reducer = handleActions({
   [hideUserInfoDisplay]: (state) => ({
     ...state,
     userInfoDisplay: false,
+  }),
+  [openFolder]: (state, { payload: curDisplayFolder }) => ({
+    ...state,
+    curDisplayFolder,
+    folderModalDisplay: true,
+  }),
+  [closeFolder]: (state) => ({
+    ...state,
+    folderModalDisplay: false,
   }),
 }, defaultState);
 

@@ -1,5 +1,5 @@
 import { get } from '@u';
 
-export default function getProductInfo(id){
-  return get('/getProductInfo', { id });
+export default function getAllAppsGroupByLabels(){
+  return get('/application/getAllAppsGroupByLabels');
 }

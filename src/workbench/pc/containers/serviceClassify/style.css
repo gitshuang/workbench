@@ -1,16 +1,15 @@
 .bg{
 	width:100%;
-	height:1000px;
 	background: rgb(230,233,233);
-	padding-top:10px;
+	padding:10px;
 }
 .wrap{
-	width:1190px;
-	height:811px; 
+	width:1190px; 
 	background:#fff;
 	border-radius: 2px ; 
 	margin:0 auto;
 	padding-top:40px;
+	padding-bottom: 40px;
 }
 :global(.u-autocomplete){
 	width:355px;
@@ -29,12 +28,14 @@
 	background:#fff;
 }
 .ufSearch{
-	color: rgba(135,139,148,1);
-	font-size:16px;
+	color: #878B94;
+	font-size:22px;
+	font-weight:bold;
 }
-.ufSearch span{
+.ufSearch+span{
 	font-size: 12px;
 	margin-left:8px;
+	color: #878B94;
 }
 :global(.u-input-group-btn){
 	width:102px;

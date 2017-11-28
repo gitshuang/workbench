@@ -11,7 +11,6 @@ import { mapStateToProps } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
-//import Drag from 'containers/drag';
 import rootActions from 'store/root/actions';
 //<--后续样式提到组件库里面
 import 'assets/style/iuapmobile.um.css';
@@ -46,7 +45,6 @@ function timer(fn, time) {
       key: 'userInfoDisplay',
       value: (root) => root.home.userInfoDisplay,
     },
-    'serviceList',
     'quickServiceDisplay',
   ), {
     requestStart,

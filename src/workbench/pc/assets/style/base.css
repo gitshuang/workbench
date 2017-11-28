@@ -25,3 +25,15 @@ body {
   color:#878B94;
   transform: rotate(0deg) scale(.75);
 }
+
+/** loading **/
+.u-loading-backdrop{
+  z-index: 0;
+}
+
+.pop_dialog_delete{
+  width: 416px;
+  height: 201px;
+  margin: 0 auto;
+  top: 60px;
+}

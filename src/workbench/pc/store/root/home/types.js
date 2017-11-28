@@ -5,4 +5,6 @@ export default createTypes(
   'GET_WORK_LIST',
   'CHANGE_USER_INFO_DISPLAY',
   'HIDE_USER_INFO_DISPLAY',
+  'OPEN_FOLDER',
+  'CLOSE_FOLDER',
 );

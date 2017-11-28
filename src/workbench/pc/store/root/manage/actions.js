@@ -1,15 +1,20 @@
-import { createActions } from 'redux-actions';
+import { createActions } from '@u';
 import types from './types';
 import {
   setManageList,
-  getManageList
+  getManageList,
+  getSelectWidgetList
 } from './api';
 
 const {
   SET_MANAGE_LIST,
   GET_MANAGE_LIST,
   BATCH_DELECT,
+  BATCH_MOVE,
+  SELECT_GROUP_ACTIONS,
+  SELECT_LIST_ACTIONS,
   ADD_GROUP,
+  ADD_DESK,
   DELECT_GROUP,
   RENAME_GROUP,
   MOVE_GROUP,
@@ -22,16 +27,27 @@ const {
   ADD_SERVE,
   DELECT_SERVE,
   MOVE_SERVE,
+  OPEN_FOLDER,
+  CLOSE_FOLDER,
+  GET_SELECT_WIDGET_LIST,
   } = types;
 
-export default createActions(
+const actions = createActions(
+  {
+    namespace: 'manage',
+  },
   {
     [SET_MANAGE_LIST]: setManageList,
     [GET_MANAGE_LIST]: getManageList,
+    [GET_SELECT_WIDGET_LIST]: getSelectWidgetList,
   },
   BATCH_DELECT,
   ADD_GROUP,
+  ADD_DESK,
   DELECT_GROUP,
+  BATCH_MOVE,
+  SELECT_GROUP_ACTIONS,
+  SELECT_LIST_ACTIONS,
   RENAME_GROUP,
   MOVE_GROUP,
   STICK_GROUP,
@@ -43,4 +59,7 @@ export default createActions(
   ADD_SERVE,
   DELECT_SERVE,
   MOVE_SERVE,
+  OPEN_FOLDER,
+  CLOSE_FOLDER,
 );
+export default actions;

@@ -13,19 +13,24 @@ import manageActions from 'store/root/manage/actions';
 
 import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
+import ManageFolderDialog from 'containers/manageFolderDialog';
 
+import MoveToGroup from 'components/moveToGroup';
+
+import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
-import { HeaderLeft } from './style.css';
+
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const {changeUserInfoDisplay} = homeActions;
-const { setManageList,getManageList,batchDelect } = manageActions;
+const { setManageList,getManageList,batchDelect,batchMove,moveGroup } = manageActions;
 
 @withRouter
 @connect(
   mapStateToProps(
     'manageList',
     'isEdit',
+    'selectList',
     {
       namespace: 'manage',
     }
@@ -34,147 +39,196 @@ const { setManageList,getManageList,batchDelect } = manageActions;
     requestStart,
     requestSuccess,
     requestError,
-    changeUserInfoDisplay,
     setManageList,
     getManageList,
-    batchDelect
+    batchDelect,
+    batchMove,
+    moveGroup,
   }
 )
 
 class Home extends Component {
-
   constructor(props) {
     super(props);
     this.state ={
-      selectGroup: []
+      isOpenMove: false,
+      isGroup: false,
+      moveData: [
+        {
+          "type": "1",
+          "widgetId": "f1",
+          "widgetName": "分组一",
+          "children": []
+        },
+        {
+          "type": "1",
+          "widgetId": "f2",
+          "widgetName": "分组二",
+          "children": []
+        }
+      ]
     }
     this.moveGroupDrag = this.moveGroupDrag.bind(this);
   }
-
   moveGroupDrag(id, afterId) {
-    const { data } = this.state;
-
-    const item = data.filter(i => i.id === id)[0];
-    const afterItem = data.filter(i => i.id === afterId)[0];
-    const itemIndex = data.indexOf(item);
-    const afterIndex = data.indexOf(afterItem);
-
-    this.setState(update(this.state, {
-      data: {
-        $splice: [
-          [itemIndex, 1],
-          [afterIndex, 0, item]
-        ]
-      }
-    }));
+    const { moveGroup } = this.props;
+    moveGroup({ id, afterId });
   }
-
   componentDidMount() {
-    const { requestError, requestSuccess, getManageList } = this.props;
+    const {
+      requestStart,
+      requestError,
+      requestSuccess,
+      getManageList
+    } = this.props;
+    requestStart();
     getManageList().then(({error, payload}) => {
       if (error) {
         requestError(payload);
-      } else {
-        requestSuccess();
       }
+      requestSuccess();
     });
   }
-  // 将此方法传递给manageGroup 组件中
-  selectGroupFn = (flag, index) => {
-    let selectGroup = this.state.selectGroup;
-    if(flag){
-      selectGroup.push(index);
-    }else{
-      selectGroup =  selectGroup.filter((item,i) => {
-        return index !== item;
-      });
-    }
-    console.log(selectGroup);
-    this.setState({
-      selectGroup
-    });
-  }
-  // 批量删除
-  batchDelect =() => {
+  batchDelect() {
     const { batchDelect } = this.props;
-    let selectGroup = this.state.selectGroup;
-    this.setState({
-      selectGroup:[]
-    });
-    batchDelect(selectGroup);
+    batchDelect();
   }
-  // 保存
-  save =() => {
-    const {setManageList,manageList} = this.props;
+  batchMove(index) {
+    const { batchMove } = this.props;
+    batchMove(index);
+  }
+  save() {
+    const { setManageList, manageList } = this.props;
     setManageList(manageList).then(({error, payload}) => {
       if (error) {
         requestError(payload);
-      } else {
-        requestSuccess();
       }
+      requestSuccess();
     });
   }
-  // 取消
-  cancelFn = () => {
-    const {isEdit,getManageList} = this.props;
+  cancel() {
+    const { isEdit, getManageList } = this.props;
     if(isEdit){
       getManageList().then(({error, payload}) => {
         if (error) {
           requestError(payload);
-        } else {
-          requestSuccess();
         }
+        requestSuccess();
       });
     }else{
-      this.props.history.goBack();
+      this.goBack();
     }
   }
-
-  getLeftContent() {
-    let logoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510562718599&di=2c650c278296b97dcab3e594f49330f4&imgtype=0&src=http%3A%2F%2Fimage.it168.com%2Fcms%2F2008-2-25%2FImage%2F2008225113034.jpg";
-    return (
-      <div className={HeaderLeft}>
-        <img src={logoUrl}/>
-      </div>
-    )
+  goBack() {
+    this.props.history.goBack();
+  }
+  openGroupTo =()=> {
+    this.setState({
+      isOpenMove: true
+    });
+  }
+  openDeleteMark() {
+    this.batchDelect()
+  }
+  moveAddGroup = () => {
+    this.setState({
+      isGroup: true
+    });
+  }
+  moveConfirmFn =(index,key)=> {
+    const { batchMove } = this.props;
+    debugger;
+    batchMove(index);
+    this.moveCancelFn();
   }
 
-  renderContent =() => {
+  moveCancelFn() {
+    this.setState({
+      isOpenMove: false
+    })
+  }
+  addNewGroup(name,id) {
+    const { setAddGroup, requestError } = this.props;
+    let newGroup = {
+      id: id,
+      name: name,
+    };
+    setAddGroup().then( ({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      let menuData = this.state.menuData;
+      menuData.push(newGroup);
+      this.setState({
+        menuData: menuData,
+      });
+    });
+  }
+  groupCancelFn =()=> {
+    this.setState({
+      isGroup: false,
+    });
+  }
+  renderContent() {
     let { manageList } = this.props;
-    (typeof this.state.data === "undefined" || (this.state.data && this.state.data.length===0)) ? (this.state.data = manageList) : (manageList=this.state.data);
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
       list.push(
-        <ManageGroup manageData={item} index={index} key={item.name+index} selectGroupFn={this.selectGroupFn}  id={item.id} moveGroupDrag={this.moveGroupDrag} />
+        <ManageGroup
+          manageData={item}
+          index={index}
+          key={item.widgetName+index}
+          id={item.widgetId}
+          moveGroupDrag={this.moveGroupDrag} />
       )
     });
     return list;
   }
-
   render() {
-    const { changeUserInfoDisplay,isEdit } = this.props;
+    const {
+      folderModalDisplay,
+      selectList,
+      isEdit,
+    } = this.props;
     return (
       <div className="um-win">
         <div className="um-header">
-          <Header onLeftClick={ changeUserInfoDisplay } leftContent={this.getLeftContent()} iconName={'wode'}>
+          <Header onLeftClick={ this.goBack } iconName={"back"} leftContent={"返回"}>
             <span>首页编辑</span>
           </Header>
         </div>
-        <div className="um-content">
+        <div className='um-content' style={{background:"rgb(230,233,233)"}}>
           {this.renderContent()}
         </div>
         <div className="um-footer">
-          <div className="um-box-justify">
-            <div>
-              <button className="btn btn-inline" disabled={this.state.selectGroup.length ? false : true } onClick={this.batchDelect}>批量删除</button>
+          <div className={umBoxJustify}>
+            <div className={umBoxJustify1}>
+              <Button className={batchDeletion} disabled={selectList.length ? false:true} onClick={this.openDeleteMark}>批量删除</Button>
+              <Button className={batchDeletion} disabled={selectList.length? false : true} onClick={this.openGroupTo}>批量移动</Button>
             </div>
-            <div>
-              <button className="btn btn-inline" disabled={!isEdit} onClick={this.save}>保存</button>
-              <button className="btn btn-inline" onClick={this.cancelFn}>取消</button>
+            <div className={umBoxJustify2}>
+              <Button className={preserve} disabled={!isEdit} onClick={this.save}>保存</Button>
+              <Button className={cancel} onClick={this.cancel}>取消</Button>
             </div>
           </div>
         </div>
+        <ManageFolderDialog />
+        {
+          this.state.isOpenMove ? (
+            <div className={pin +" um-css3-center"}>
+              <MoveToGroup
+                data={this.state.moveData}
+                isGroup={this.state.isGroup}
+                addGroup={this.moveAddGroup}
+                confirmFn={this.moveConfirmFn}
+                cancelFn={this.moveCancelFn}
+                addNewGroup={this.addNewGroup }
+                groupCancelFn={this.groupCancelFn}
+              />
+            </div>
+          ): null
+        }
       </div>
     );
   }

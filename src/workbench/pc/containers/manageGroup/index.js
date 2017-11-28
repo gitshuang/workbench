@@ -10,9 +10,11 @@ import manageActions from 'store/root/manage/actions';
 
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
-import Icon from 'components/icon';
-import WidgetArea from 'containers/widgetArea';
-import {WidgetTitle} from './style.css';
+import Button from 'bee-button';
+import Icon1 from 'components/icon';
+import Icon from 'bee-icon';
+import WidgetList from 'containers/manageWidgetList';
+import {WidgetTitle,addGroupBtn,addBtnContainer,complete,cancel,newGroupName,addBtn} from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
   requestStart,
@@ -25,14 +27,22 @@ const {
   renameGroup,
   moveGroup,
   stickGroup,
-  addFolder
+  addFolder,
+  selectListActions,
+  selectGroupActions,
+
   } = manageActions;
 
 const style = {
-  border: '1px dashed gray',
-  padding: '0.5rem 1rem',
+  width:'1290px',
+  border: '1px solid #fff',
+  borderRadius:'2px',
+  padding: '0.5rem 4rem',
+  paddingRight:'0',
+  margin: '0 auto',
   marginBottom: '.5rem',
-  backgroundColor: 'white',
+  marginTop: '.5rem',
+  background:'rgba(79,86,98,0.1)',
   cursor: 'move'
 };
 
@@ -70,8 +80,12 @@ function collectTaget(connect, monitor) {
 
 @connect(
   mapStateToProps(
-    'workList',
-    {'namespace':'manage'}
+    'manageList',
+    'selectGroup',
+    'selectList',
+    {
+      namespace:'manage'
+    }
   ),
   {
     requestStart,
@@ -82,12 +96,11 @@ function collectTaget(connect, monitor) {
     renameGroup,
     moveGroup,
     stickGroup,
-    addFolder
+    addFolder,
+    selectListActions,
+    selectGroupActions,
   }
 )
-
-
-
 class ManageGroup extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
@@ -99,18 +112,23 @@ class ManageGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      manageData: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
+      // manageData: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
       groupName:  "",
-      editFlag: false
+      editFlag: false,
+      selectGroup : []
     }
   }
-
-  componentDidMount() {
-
+  componentDidMount () {
+    const {selectGroup} = this.props;
+    this.setState({
+      selectGroup
+    });
   }
-
   componentWillReceiveProps(nextProps){
-
+    const {selectGroup} = nextProps;
+    this.setState({
+      selectGroup
+    });
   }
   // 添加文件夹
   addFolderFn = (data)=> {
@@ -146,6 +164,10 @@ class ManageGroup extends Component {
     renameGroup(param);
     this.renameGroupCancel(index);
   }
+  //点击清空输入框
+  clearInput = () => {
+    this.setState({groupName:""});
+  }
   // 输入框的更改
   editGroupName = (e) =>{
     this.setState({
@@ -155,10 +177,28 @@ class ManageGroup extends Component {
   /*         ********            *****                      */
   // 选择框  选择
   selectFn =(e,index) => {
-    const {selectGroupFn} = this.props;
+    let {selectList,selectListActions,manageList,selectGroupActions,selectGroup} = this.props;
     let checkFlag = e.target.checked;
-    selectGroupFn(checkFlag,index);
+    let aa = [];
+    manageList[index].children.map((item,index)=>{
+      aa.push(item.widgetId);
+    });
+    if(checkFlag){
+      selectGroup.push(index);
+      selectList = selectList.concat(aa);
+    }else{
+      selectList = selectList.concat(aa).filter(v => !selectList.includes(v) || !selectList.includes(v))
+      selectGroup =  selectGroup.filter((item,i) => {
+        return index !== item;
+      });
+    }
+    selectListActions(selectList);
+    selectGroupActions(selectGroup);
   }
+
+
+
+
 
   // 置顶分组
   stickFn =(index)=>{
@@ -199,45 +239,59 @@ class ManageGroup extends Component {
         overlay={menu1}
         animation="slide-up"
       >
-        <Icon type="momozhushou" />
+        <Icon type="uf-3dot-h" />
       </Dropdown>
     )
   }
 
   render() {
-    const { manageData,index,connectDragSource, connectDropTarget,isDragging } = this.props;
+
+    const {
+      manageData,
+      index,
+      connectDragSource,
+      connectDropTarget,
+      isDragging,
+      selectGroup,
+    } = this.props;
+    const checkType = this.state.selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
-    let _id = manageData.id + "_" + index;
+    let _id = manageData.widgetId + "_" + index;
     let groupTitle = null;
     if(this.state.editFlag) {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
-          <input type="text" value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
-          <button className="btn btn-inline" onClick={ ()=>{this.renameGroupFn(index)} }>完成</button>
-          <button className="btn btn-inline" onClick={ ()=>{this.renameGroupCancel(index)} }>取消</button>
+          <span>
+            <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
+            <Icon type="uf-close-c" onClick={ this.clearInput.bind(this) }></Icon>
+          </span>
+          <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
+          <Button className={cancel} onClick={ ()=>{this.renameGroupCancel(index)} }>取消</Button>
         </div>
       </div>;
     }else {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <label>
-          <input type="checkbox" onChange={ (e)=>{this.selectFn(e,index)} }/>
-          <span>{manageData.name}</span>
+          <input type="checkbox" checked={checkType} onChange={ (e)=>{this.selectFn(e,index)} }/>
+          <span>{manageData.widgetName}</span>
         </label>
         <div>
-          <Icon type="dingzhi" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
-          <Icon type="add" onClick={()=>{this.addFolderFn(manageData)}}/>
+          <Icon1 type="record" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
+          <Icon type="uf-plus" onClick={()=>{this.addFolderFn(index)}}/>
           {this.renderDrop(index)}
         </div>
       </div>;
     }
     return connectDragSource(connectDropTarget(
-      <div id={_id} style={{ ...style, opacity }}>
-        { groupTitle }
-        <div>
-          <WidgetArea index={index} data={manageData.widgeList} />
+      <div>
+        <div id={_id} style={{ ...style, opacity }}>
+          { groupTitle }
+          <div>
+            <WidgetList index={index} data={manageData.children} checkType={checkType} />
+          </div>
         </div>
-        <div>
-          <button className="btn" onClick={()=>{this.addGroupFn(index)}}>添加分组</button>
+        <div className={addBtn}>
+          <button className={`'btn' ${addGroupBtn}`} onClick={()=>{this.addGroupFn(index)}}><Icon type="uf-plus"></Icon>添加组</button>
         </div>
       </div>
     ));

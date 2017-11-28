@@ -36,8 +36,8 @@ const defaultState = {
   tabs:[],
   titleServiceList: [],
   titleServiceType: false,
-  pinType: false,
-  pinDisplay: false,
+  pinType: false,       // 是否pin上
+  pinDisplay: false,   // pin是否显示
   widthBrm: true,
 };
 
