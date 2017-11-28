@@ -11,6 +11,7 @@ import manageActions from 'store/root/manage/actions';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import Button from 'bee-button';
+import Icon1 from 'components/icon';
 import Icon from 'bee-icon';
 import WidgetList from 'containers/manageWidgetList';
 import {WidgetTitle,addGroupBtn,addBtnContainer,complete,cancel,newGroupName,addBtn} from './style.css';
@@ -165,7 +166,7 @@ class ManageGroup extends Component {
   }
   //点击清空输入框
   clearInput = () => {
-    console.log(this.refs.newGroupName);
+    this.setState({groupName:""});
   }
   // 输入框的更改
   editGroupName = (e) =>{
@@ -194,6 +195,10 @@ class ManageGroup extends Component {
     selectListActions(selectList);
     selectGroupActions(selectGroup);
   }
+
+
+
+
 
   // 置顶分组
   stickFn =(index)=>{
@@ -238,7 +243,7 @@ class ManageGroup extends Component {
       </Dropdown>
     )
   }
-  
+
   render() {
 
     const {
@@ -249,7 +254,7 @@ class ManageGroup extends Component {
       isDragging,
       selectGroup,
     } = this.props;
-
+    const checkType = this.state.selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
     let _id = manageData.widgetId + "_" + index;
     let groupTitle = null;
@@ -257,7 +262,7 @@ class ManageGroup extends Component {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
           <span>
-            <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} } ref={newGroupName}/>
+            <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
             <Icon type="uf-close-c" onClick={ this.clearInput.bind(this) }></Icon>
           </span>
           <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
@@ -267,11 +272,11 @@ class ManageGroup extends Component {
     }else {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <label>
-          <input type="checkbox" checked={this.state.selectGroup.indexOf(index) >= 0 ? true : false} onChange={ (e)=>{this.selectFn(e,index)} }/>
+          <input type="checkbox" checked={checkType} onChange={ (e)=>{this.selectFn(e,index)} }/>
           <span>{manageData.widgetName}</span>
         </label>
         <div>
-          <Icon type="uf-pencil" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
+          <Icon1 type="record" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
           <Icon type="uf-plus" onClick={()=>{this.addFolderFn(index)}}/>
           {this.renderDrop(index)}
         </div>
@@ -282,7 +287,7 @@ class ManageGroup extends Component {
         <div id={_id} style={{ ...style, opacity }}>
           { groupTitle }
           <div>
-            <WidgetList index={index} data={manageData.children} />
+            <WidgetList index={index} data={manageData.children} checkType={checkType} />
           </div>
         </div>
         <div className={addBtn}>

@@ -85,7 +85,6 @@
 .file_context{
     overflow: hidden;
     height: 100px;
-    overflow-y: scroll;
 }
 .file_context div{
   width:47px;
@@ -138,6 +137,9 @@
 }
 .editDele>div:hover{
   background:#ccc;
+}
+.editDele :global(.iconfont){
+  line-height:23px;
 }
 .title_cont{
   position: absolute;

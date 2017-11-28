@@ -90,8 +90,7 @@ class WidgetList extends Component {
   }
 
   render() {
-      const { data } = this.props;
-
+      const { data,index,checkType } = this.props;
       const pop_btn = [
         {label:"确认",fun:this.popSave,className:""},
         {label:"取消",fun:this.popClose,className:""}
@@ -103,7 +102,7 @@ class WidgetList extends Component {
           type,
           parentId,
           widgetId: id,
-          widgetName: name
+          widgetName: name,
         } = item;
         switch (type) {
           case 2:
@@ -114,6 +113,8 @@ class WidgetList extends Component {
                 id={id}
                 parentId={parentId}
                 index={id}
+                propsIndex={index}
+                checkType={checkType}
                 moveItemDrag={this.moveItemDrag}
                 onClick={(e)=>{this.widgeOnclick(e,item)}}
               />
@@ -126,6 +127,8 @@ class WidgetList extends Component {
                 id={id}
                 parentId={parentId}
                 index={id}
+                propsIndex={index}
+                checkType={checkType}
                 moveItemDrag={this.moveItemDrag}
               />
             );
@@ -137,7 +140,7 @@ class WidgetList extends Component {
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >
-          <Icon  type="uf-plus"  />
+          <Icon type="uf-plus"  />
         </div>
 
         <PopDialog show = { this.state.showModal } data={_da} btns={pop_btn} >

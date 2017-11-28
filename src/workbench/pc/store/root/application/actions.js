@@ -1,11 +1,12 @@
-import { createActions } from 'redux-actions';
+import { createActions } from '@u';
 import types from './types';
 
 const {
 
 } = types;
 
-export default createActions({
-
-  }
+export default createActions(
+  {
+    namespace: 'application',
+  },
 );

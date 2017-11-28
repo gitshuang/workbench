@@ -27,17 +27,20 @@ const {
   openFolder,
   closeFolder,
   getSelectWidgetList,
-  } = actions;
+} = actions;
 
 const defaultState = {
   curEditFolderId: '',
   manageList: [],
   isEdit: false,
-  curDisplayFolder: {},
+  curDisplayFolder: {
+    widgetName: '',
+    children: [],
+  },
   folderModalDisplay: false,
   selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
-  selectGroup:[]
+  selectGroup: [],
 };
 
 const findTreeById = (data, curId) => {
@@ -402,7 +405,6 @@ const reducer = handleActions({
   }),
   [closeFolder]: (state) => ({
     ...state,
-    curDisplayFolder: {},
     folderModalDisplay: false,
   }),
 }, defaultState);

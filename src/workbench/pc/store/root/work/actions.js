@@ -1,4 +1,4 @@
-import { createActions } from 'redux-actions';
+import { createActions } from '@u';
 import types from './types';
 import {
   getProductInfo,
@@ -27,7 +27,11 @@ const {
   RETURN_DEFAULT_STATE
 } = types;
 
-export default createActions({
+export default createActions(
+  {
+    namespace: 'work',
+  },
+  {
     [GET_PRODUCT_INFO]: getProductInfo,
     [GET_TITLE_SERVICE]: getTitleService,
     [SET_PIN_ADD]: setPinAdd,

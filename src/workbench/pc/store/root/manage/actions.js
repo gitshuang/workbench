@@ -1,4 +1,4 @@
-import { createActions } from 'redux-actions';
+import { createActions } from '@u';
 import types from './types';
 import {
   setManageList,
@@ -31,7 +31,10 @@ const {
   GET_SELECT_WIDGET_LIST,
   } = types;
 
-export default createActions(
+const actions = createActions(
+  {
+    namespace: 'manage',
+  },
   {
     [SET_MANAGE_LIST]: setManageList,
     [GET_MANAGE_LIST]: getManageList,
@@ -57,3 +60,4 @@ export default createActions(
   OPEN_FOLDER,
   CLOSE_FOLDER,
 );
+export default actions;

@@ -28,12 +28,14 @@
 	background:#fff;
 }
 .ufSearch{
-	color: rgba(135,139,148,1);
-	font-size:16px;
+	color: #878B94;
+	font-size:22px;
+	font-weight:bold;
 }
-.ufSearch span{
+.ufSearch+span{
 	font-size: 12px;
 	margin-left:8px;
+	color: #878B94;
 }
 :global(.u-input-group-btn){
 	width:102px;
