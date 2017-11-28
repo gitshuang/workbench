@@ -130,6 +130,7 @@ class UserInfoContainer extends Component {
       default : alert("undefined");
     }
   }
+
   handleChange2 =(e)=>{
     // console.log(e);
     switch(e){
@@ -148,6 +149,7 @@ class UserInfoContainer extends Component {
         break;
       default : alert("undefined");
     }
+
   }
   gotoManage() {
     const {
@@ -190,7 +192,7 @@ class UserInfoContainer extends Component {
       </Select>
     }
     return (
-      <div  className={`${wrap} ${clearfix}`}>
+      <div className={`${wrap} ${clearfix}`}>
         <div className={imgUser}>
           <img src={imgsrc} className={imgInner} />
           <div className={editPortrait}>

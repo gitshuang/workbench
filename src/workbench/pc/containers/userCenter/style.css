@@ -10,6 +10,16 @@
   box-shadow: 4px 0 4px rgba(0,0,0,.14);
   z-index: 999;
   padding-top: 1px;
+  overflow-y:scroll;
+}
+/*定义滚动条宽高*/
+.wrap::-webkit-scrollbar{
+    width: 8px;
+}
+/*定义滑块，内阴影及圆角*/
+.wrap::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    background-color: #757575;
 }
 /*.outerContainer {*/
   /*webkit-transition: -webkit-transform .3s ease-out;*/
@@ -67,7 +77,7 @@
   width:80px;
   float: left;
   text-align:center;
-  margin-right: 43px;
+  margin-right: 40px;
 }
 .gloryValue,.packetsValue{
   height:49px;
@@ -208,7 +218,7 @@
 }
 .userBtnList :global(.u-button),.userBtnList :global(.u-select){
   width:91px;
-  height:28px;
+  height:30px;
   margin-right:8px;
   color:rgba(102,102,102,1);
 }
