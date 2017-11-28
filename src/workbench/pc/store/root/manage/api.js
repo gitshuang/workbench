@@ -5,4 +5,4 @@ export const setManageList = (list) => {
 }
 export const getManageList = () => get('/desktop/getdeskTop');
 
-export const getSelectWidgetList = () => get('/getSelectWidgetList');
+export const getSelectWidgetList = () => get('/serve/getAllServesGroupByLabels');

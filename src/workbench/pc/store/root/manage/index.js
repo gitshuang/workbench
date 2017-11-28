@@ -7,6 +7,7 @@ import actions from './actions';
 const {
   setManageList,
   getManageList,
+  addDesk,
   batchDelect,
   batchMove,
   selectGroupActions,
@@ -97,6 +98,17 @@ const reducer = handleActions({
         ...state,
         manageList: payload,
       };
+    }
+  },
+  [addDesk]: (state, { payload: data }) => {
+    state.manageList.map(function(da,i){
+      da.children.push(data);
+    })
+    debugger;
+    let newManageList = JSON.parse(JSON.stringify(state.manageList));
+    return{
+      ...state,
+      manageList: newManageList
     }
   },
   [getSelectWidgetList]: (state, { payload, error }) => {

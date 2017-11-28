@@ -78,7 +78,6 @@ class WidgetList extends Component {
     }
   }
 
-
   popSave = (data)=>{
 
   }
@@ -90,12 +89,15 @@ class WidgetList extends Component {
   }
 
   render() {
+
       const { data,index,checkType } = this.props;
+
       const pop_btn = [
         {label:"确认",fun:this.popSave,className:""},
         {label:"取消",fun:this.popClose,className:""}
       ]   //设置操作按钮
 
+      // const { data } = this.props;
 
       const list = data.map((item, i) => {
         const {

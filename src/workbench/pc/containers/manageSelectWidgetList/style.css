@@ -37,7 +37,12 @@
 .search_icon{
 	font-size: 30px;
 }
-
+:global(.u-modal.in .u-modal-dialog){
+	width: 80%;
+	height: auto;
+	background: rgba(238, 238, 238, 0.976470588235294);
+}
+/***
 :global(.u-modal.in .u-modal-dialog){
 	width: 80%;
 	height: auto;
@@ -68,8 +73,29 @@
 	display: none;
 }
 
+:global(.u-modal .u-modal-header){
+	display: none;
+}
+
+***/
+
 .panel{
 	padding-top: 30px;
+	display: -webkit-box;
+}
+.panel_left{
+	width: 224px;
+	// -webkit-box-flex:1;
+}
+.panel .right{
+	-webkit-box-flex:1;
+	margin-left: 10px;
+}
+.panel_left>div{
+	width: 100%;
+}
+.panel_left>div>button{
+	height: 50px;
 }
 
 .searchPanel{
@@ -86,7 +112,6 @@
     height: 50px;
     
 }
-
-:global(.u-modal .u-modal-header){
-	display: none;
+:global(.u-modal .u-modal-content){
+	background: rgba(238, 238, 238, 0.976470588235294);
 }

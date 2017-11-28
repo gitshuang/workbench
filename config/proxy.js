@@ -1,5 +1,5 @@
 var path = require('path')
-var projectId = '27469'
+var projectId = '29035'
 var api = [
   '/serve/getAllServesGroupByLabels',
   '/application/getAllAppsGroupByLabels',
@@ -17,6 +17,10 @@ var api = [
   '/setManageList',
   '/getManageList',
 ]
+
+var rapApi = [
+    // '/serve/getAllServesGroupByLabels'
+];
 
 function makeRapConfig(key) {
   var config = {
@@ -53,4 +57,4 @@ function addApi() {
   return obj;
 }
 
-module.exports = addApi([makeStaticConfig, api])
+module.exports = addApi([makeStaticConfig, api],[makeRapConfig,rapApi])
