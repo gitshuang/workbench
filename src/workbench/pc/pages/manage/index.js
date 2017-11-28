@@ -20,7 +20,7 @@ import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
 
-import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin,um_content} from './style.css';
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin,um_content,um_footer} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { setManageList,getManageList,batchDelect,batchMove,moveGroup } = manageActions;
@@ -185,7 +185,7 @@ class Home extends Component {
         <div className={um_content}>
           {this.renderContent()}
         </div>
-        <div className="um-footer">
+        <div className={um_footer}>
           <div className={umBoxJustify}>
             <div className={umBoxJustify1}>
               <Button className={batchDeletion} disabled={!!selectList.length} onClick={this.openDeleteMark}>批量删除</Button>
