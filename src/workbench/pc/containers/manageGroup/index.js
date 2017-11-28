@@ -55,7 +55,7 @@ const itemSource = {
 };
 
 const itemTarget = {
-  hover(props, monitor) {
+  drop(props, monitor) {
     const draggedId = monitor.getItem().id;
 
     if (draggedId !== props.id) {
