@@ -21,6 +21,8 @@ import img2 from '../../assets/image/gloryIcon2.png';
 const {
   getUserInfo,
   hideUserInfoDisplay,
+  getWorkList,
+  setCutUser
 } = homeActions;
 
 const {
@@ -44,6 +46,8 @@ const {
     requestError,
     hideUserInfoDisplay,
     getUserInfo,
+    getWorkList,
+    setCutUser
   }
 )
 @onClickOutside
@@ -92,6 +96,20 @@ class UserInfoContainer extends Component {
   handleClick() {
     alert("修改")
   }
+  cutusername =() => {
+    const {setCutUser,getWorkList} = this.props;
+    setCutUser().then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      }
+      getWorkList().then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        }
+        requestSuccess();
+      });
+    });
+  }
 
   handleChange=(e)=>{
     // console.log(e);
@@ -123,7 +141,7 @@ class UserInfoContainer extends Component {
       case 'password' :
         alert("password");
         break;
-      case 'cutusername' :
+      case 'cutuser' :
         alert("切换企业帐号");
         break;
       default : alert("undefined");
@@ -157,7 +175,7 @@ class UserInfoContainer extends Component {
           <Option name="account"  value="account" >账号</Option>
           <Option name="safetyPick" value="safetyPick" >安全评级</Option>
           <Option name="password" value="password" >修改密码</Option>
-          <Option name="cutusername" value="cutusername">切换企业帐号</Option>
+          <Option name="cutuser" value="cutuser">切换企业帐号</Option>
         </Select>
     }else{
       renderAllow = <Select

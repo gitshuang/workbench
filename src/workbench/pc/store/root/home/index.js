@@ -9,6 +9,7 @@ const {
   hideUserInfoDisplay,
   openFolder,
   closeFolder,
+  setCutUser
 } = actions;
 
 const defaultState = {
@@ -36,6 +37,7 @@ const createReducer = (key) => (state, { payload, error }) => {
 const reducer = handleActions({
   [getUserInfo]: createReducer('userInfo'),
   [getWorkList]: createReducer('workList'),
+  [setCutUser]: createReducer('setCutUser'),
   [changeUserInfoDisplay]: (state) => ({
     ...state,
     userInfoDisplay: true,
