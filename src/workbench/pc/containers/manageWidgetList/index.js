@@ -66,8 +66,8 @@ class WidgetList extends Component {
       })
   }
 
-  moveItemDrag(id,preParentId, afterId,parentId) {
-    let data = {id,preParentId,afterId,parentId}
+  moveItemDrag(id,preParentId, preType,afterId,parentId) {
+    let data = {id,preParentId,preType,afterId,parentId}
     const { moveServe } = this.props;
     moveServe(data);
   }
