@@ -74,17 +74,17 @@ const defaultFolder = {
   children:[],
 };
 //递归查找
+var data;
 function findById(manageList,id) {
-
   for(let i = 0;i<manageList.length;i++){
     if(manageList[i].widgetId === id){
-      return manageList[i];
+      data = manageList[i];
+      break;
     }else{
-      //if(i === manageList.length-1){return findById(manageList[i].children,id);}
-      return findById(manageList[i].children,id);
+      manageList[i].children && findById(manageList[i].children,id)
     }
   }
-
+  return data;
 }
 const reducer = handleActions({
   [setManageList]: (state, { payload, error }) => {
@@ -386,24 +386,42 @@ const reducer = handleActions({
       manageList: [...manageList],
     }
   },
-  [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId} }) => {
+  [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType} }) => {
     let manageAllList = state.manageList;
-    let manageList = preType===3 ? findById(manageAllList,preParentId) : manageAllList;
-    typeof manageList === "object" && preType===3 && (manageList = [manageList]);
+    let sourceData= findById(manageAllList,preParentId); //拖拽前 父级源对象
+    let targetData = findById(manageAllList,parentId); //拖拽后 父级目标对象
+    let preParentType = sourceData.type;
+    let afterParentType = targetData.type;
+    //判断是否为文件夹里面元素拖拽
+    let manageList = (preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3) ? [sourceData] : manageAllList;
+    //从外面拖入文件夹里面
+    if(preType === 3 && afterType === 2){
+      let folderData = findById(manageAllList,afterId);
+      let itemIn = findById(manageAllList,id);
+      folderData.children.push(itemIn); //往文件夹里添加拖拽的数据
+      sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //将拖拽的数据从外层删掉
+    }else if(preParentType===2 && afterParentType===1 && preType === 3 && afterType === 3){
+      //从文件夹里面往外面拖拽
+      let itemOut = findById(manageAllList,id);
+      let itemAfter = findById(manageAllList,afterId);
+      //targetData.children.push(itemOut);
+      targetData.children.splice(targetData.children.indexOf(itemAfter),0,itemOut); //添加
+      sourceData.children.splice(sourceData.children.indexOf(itemOut),1); //删掉
+    } else {
+      let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
+      let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
+      const item = dataPre.filter(({widgetId}) => widgetId === id)[0];
+      const afterItem = data.filter(({widgetId}) => widgetId === afterId)[0];
+      const itemIndex = data.indexOf(item);
+      const afterIndex = data.indexOf(afterItem);
 
-    let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
-    let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
-    const item = dataPre.filter(({widgetId}) => widgetId === id)[0];
-    const afterItem = data.filter(({widgetId}) => widgetId === afterId)[0];
-    const itemIndex = data.indexOf(item);
-    const afterIndex = data.indexOf(afterItem);
-
-    manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
-        $splice: [
-          [itemIndex, 1],
-          [afterIndex, 0, item]
-        ]
-    })
+      manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
+          $splice: [
+            [itemIndex, 1],
+            [afterIndex, 0, item]
+          ]
+      })
+    }
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return{
       ...state,

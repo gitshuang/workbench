@@ -38,7 +38,7 @@ const type='item';
 
 const itemSource = {
   beginDrag(props) {
-    return { id: props.id , parentId:props.parentId,type:props.preType};
+    return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
   }
 };
 
@@ -50,7 +50,7 @@ const itemTarget = {
     const preType = monitor.getItem().type;
 
     if (draggedId !== props.id) {
-      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId);
+      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
     }
   }
 };

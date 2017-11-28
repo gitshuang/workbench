@@ -65,8 +65,8 @@ class WidgetList extends Component {
       })
   }
 
-  moveItemDrag = (id,preParentId, preType,afterId,parentId) => {
-    let data = {id,preParentId,preType,afterId,parentId}
+  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType) => {
+    let data = {id,preParentId,preType,afterId,parentId,afterType}
     const { moveServe } = this.props;
     moveServe(data);
   }
@@ -115,6 +115,7 @@ class WidgetList extends Component {
                 parentId={parentId}
                 index={id}
                 propsIndex={index}
+                type={type}
                 moveItemDrag={this.moveItemDrag}
                 onClick={(e)=>{this.widgeOnclick(e,item)}}
               />
@@ -128,6 +129,7 @@ class WidgetList extends Component {
                 parentId={parentId}
                 index={id}
                 propsIndex={index}
+                type={type}
                 moveItemDrag={this.moveItemDrag}
               />
             );
