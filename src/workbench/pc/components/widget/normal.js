@@ -22,7 +22,7 @@ const type='item';
 
 const itemSource = {
   beginDrag(props) {
-    return { id: props.id , parentId:props.parentId};
+    return { id: props.id , parentId:props.parentId,type:props.preType};
   }
 };
 

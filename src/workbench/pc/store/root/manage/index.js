@@ -373,8 +373,8 @@ const reducer = handleActions({
   },
   [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId} }) => {
     let manageAllList = state.manageList;
-    let manageList = preType==="3" ? findById(manageAllList,preParentId) : manageAllList;
-    typeof manageList === "object" && preType==="3" && (manageList = [manageList]);
+    let manageList = preType===3 ? findById(manageAllList,preParentId) : manageAllList;
+    typeof manageList === "object" && preType===3 && (manageList = [manageList]);
 
     let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
     let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
