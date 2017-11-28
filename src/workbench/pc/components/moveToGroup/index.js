@@ -23,6 +23,8 @@ class MoveToGroup extends Component {
       isGroup : false,        // 是否是打开新的分组
       way:"",
       selectId:"",
+      index: 0,
+      key: 0
     }
   }
 
@@ -41,6 +43,8 @@ class MoveToGroup extends Component {
     let way = item.widgetName +"/"+ list.widgetName;
     this.setState({
       way: way,
+      index: index,
+      key:key,
       selectId: list.widgetId
     });
   }
@@ -48,10 +52,15 @@ class MoveToGroup extends Component {
   handleTitleClick = (item,index) => {
     this.setState({
       way: item.widgetName,
+      index: index,
       selectId: item.widgetId
     });
   }
-
+  confirmFn =()=>{
+    const { confirmFn } = this.props;
+    const {index,key} = this.state;
+    confirmFn(index,key);
+  }
   render() {
     let _this = this;
     let content;
@@ -111,7 +120,7 @@ class MoveToGroup extends Component {
               <Button onClick={addGroup}>添加分组</Button>
             </div>
             <div>
-              <Button colors="danger" disabled={!this.state.way} style={{marginRight:"5px"}} onClick={ confirmFn }>确定</Button>
+              <Button colors="danger" disabled={!this.state.way} style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
               <Button onClick={cancelFn}>取消</Button>
             </div>
           </div>
