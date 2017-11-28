@@ -28,6 +28,8 @@ const {
   openFolder,
   closeFolder,
   getSelectWidgetList,
+  openBatchMove,
+  closeBatchMove,
 } = actions;
 
 const defaultState = {
@@ -39,6 +41,7 @@ const defaultState = {
     children: [],
   },
   folderModalDisplay: false,
+  batchMoveModalDisplay: false,
   selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
   selectGroup: [],
@@ -121,7 +124,6 @@ const reducer = handleActions({
     }
   },
   [batchDelect]: (state, {payload}) => {
-    debugger;
     let manageList = state.manageList;
     // 选中之后将id 都放到这个组中
     let selectList = state.selectList;
@@ -148,7 +150,6 @@ const reducer = handleActions({
     }
   },
   [batchMove]: (state, {payload:toGroupIndex }) => {
-    debugger;
     let manageList = state.manageList;
     // 选中之后将id 都放到这个组中
     let selectList = state.selectList;
@@ -179,7 +180,6 @@ const reducer = handleActions({
     }
   },
   [selectGroupActions]: (state, {payload:selectGroup }) => {
-    //debugger;
     let selectGroup2 = [];
     Object.assign(selectGroup2,selectGroup)
     return {
@@ -463,6 +463,14 @@ const reducer = handleActions({
   [closeFolder]: (state) => ({
     ...state,
     folderModalDisplay: false,
+  }),
+  [openBatchMove]: (state) => ({
+    ...state,
+    batchMoveModalDisplay: true,
+  }),
+  [closeBatchMove]: (state) => ({
+    ...state,
+    batchMoveModalDisplay: false,
   }),
 }, defaultState);
 

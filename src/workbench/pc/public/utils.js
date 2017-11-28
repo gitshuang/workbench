@@ -134,8 +134,7 @@ export function post(oriUrl, oriParams = {}) {
   try {
     options.body = JSON.stringify(oriParams);
   } catch(e) {
-    console.log(e);
-    return Promise.reject(new Error('参数错误'));
+    return Promise.reject(e);
   }
   return fetch(url(oriUrl), options);
 }
@@ -199,5 +198,28 @@ export function guid() {
   function S4() {
     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
   }
-  return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+  return `LS-${(S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4())}`;
+}
+
+export function findPath(datas, childrenKey, compareKey, compareValue) {
+  const paths = [];
+  function loop(children) {
+    for (let i = 0, l = children.length; i < l; i++) {
+      let result = false;
+      paths.push(children[i]);
+      if (children[i][childrenKey]) {
+        result = !loop(children[i][childrenKey]);
+      } else if (children[i][compareKey] === compareValue) {
+        result =  true;
+      }
+      if (result) {
+        return result;
+      } else {
+        paths.pop();
+      }
+    }
+    return false;
+  }
+  loop(datas);
+  return paths;
 }

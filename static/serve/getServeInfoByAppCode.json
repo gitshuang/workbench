@@ -2,194 +2,115 @@
   "status": 1,
   "data": {
     "curMenuBar": {
-      "menuBarId": "menuBarId1",
-      "menuBarCode": "search",
-      "menuBarName": "搜索",
+      "modifiedTime": 1511844328000,
+      "tenantId": "gtzceot7",
+      "menuBarId": "84e7b955-5f52-47c6-817f-1331b4b47d16",
+      "menuBarCode": "manager",
+      "menuBarName": "工作台管理",
       "hasTab": true,
       "hasTopNav": true,
       "single": false,
+      "applicationId": "54e156c6-cd05-4d85-a0e2-c64836440e17",
+      "menuDefault": true,
       "menuItems": [{
-        "menuItemId": "1",
-        "menuItemName": "搜索",
-        "menuItemCode": "search",
-        "menuItemIcon": "http://mat1.gtimg.com/www/images/qq2012/qzoneIconHover.png",
-        "menuBarId": "menuBarId1",
-        "children": [{
-            "menuItemId": "3",
-            "menuItemName": "百度搜索",
-            "menuItemCode": "baidu",
-            "menuItemIcon": "https://www.baidu.com/img/bd_logo1.png",
-            "parentId": "1",
-            "menuBarId": "menuBarId1",
-            "serveId": "asfasdfasfas111",
-            "serveCode": "google",
-            "serve": {
-              "serveId": "asfasdfasfas111",
-              "serveName": "百度搜索",
-              "serveCode": "google",
-              "enable": true,
-              "url": "https://www.baidu.com",
-              "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-              "hasWidget": true,
-              "relationServes": [{
-                  "serveId": "asfasfasfasfdsdfg",
-                  "serveName": "百度",
-                  "serveCode": "baidu",
-                  "enable": true,
-                  "url": "https://www.baidu.com",
-                  "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-                  "hasWidget": false
-                },
-                {
-                  "serveId": "fhsdfdhsfhr54eretwe",
-                  "serveName": "360急速搜索",
-                  "serveCode": "360",
-                  "enable": true,
-                  "url": "https://www.google.com",
-                  "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-                  "hasWidget": false
-                }
-              ],
-              "relationUsers": [{
-                  "company": null,
-                  "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=806695075,861492878&fm=58&bpow=0&bpoh=0",
-                  "userEmail": null,
-                  "userName": "李彦宏",
-                  "userMobile": null,
-                  "userId": "111",
-                  "allowTenants": null,
-                  "redPacketsNum": 0,
-                  "gloriesNum": 0
-                },
-                {
-                  "company": null,
-                  "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2825762689,1796178341&fm=58",
-                  "userEmail": null,
-                  "userName": "周鸿祎",
-                  "userMobile": null,
-                  "userId": "222",
-                  "allowTenants": null,
-                  "redPacketsNum": 0,
-                  "gloriesNum": 0
-                }
-              ]
-            },
-            "url": "https://www.baidu.com"
-          },
-          {
-            "menuItemId": "4",
-            "menuItemName": "谷歌搜索",
-            "menuItemCode": "google",
-            "parentId": "1",
-            "menuBarId": "menuBarId1",
-            "serveId": "asfasdfasfas222",
-            "serveCode": "google",
-            "serve": {
-              "serveId": "asfasdfasfas222",
-              "serveName": "谷歌",
-              "serveCode": "google",
-              "enable": true,
-              "url": "https://www.google.com",
-              "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-              "hasWidget": true,
-              "relationServes": [{
-                  "serveId": "asfasfasfasfdsdfg",
-                  "serveName": "百度",
-                  "serveCode": "baidu",
-                  "enable": true,
-                  "url": "https://www.baidu.com",
-                  "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-                  "hasWidget": false
-                },
-                {
-                  "serveId": "fhsdfdhsfhr54eretwe",
-                  "serveName": "360急速搜索",
-                  "serveCode": "360",
-                  "enable": true,
-                  "url": "https://www.google.com",
-                  "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-                  "hasWidget": false
-                }
-              ],
-              "relationUsers": [{
-                  "company": null,
-                  "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=806695075,861492878&fm=58&bpow=0&bpoh=0",
-                  "userEmail": null,
-                  "userName": "李彦宏",
-                  "userMobile": null,
-                  "userId": "111",
-                  "allowTenants": null,
-                  "redPacketsNum": 0,
-                  "gloriesNum": 0
-                },
-                {
-                  "company": null,
-                  "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2825762689,1796178341&fm=58",
-                  "userEmail": null,
-                  "userName": "周鸿祎",
-                  "userMobile": null,
-                  "userId": "222",
-                  "allowTenants": null,
-                  "redPacketsNum": 0,
-                  "gloriesNum": 0
-                }
-              ]
-            },
-            "url": "https://www.google.com"
+          "tenantId": "gtzceot7",
+          "menuItemId": "2baa6719-f2fd-45de-99a9-a4eb626a04e0",
+          "menuItemName": "菜单项管理",
+          "menuItemCode": "menuitem",
+          "menuBarId": "84e7b955-5f52-47c6-817f-1331b4b47d16",
+          "menuItemDefault": false,
+          "serveId": "77827ff0-26c7-40ba-ab04-1ff83a0f0b46",
+          "serve": {
+            "tenantId": "gtzceot7",
+            "serveId": "77827ff0-26c7-40ba-ab04-1ff83a0f0b46",
+            "serveName": "菜单项管理",
+            "serveCode": "menuitem",
+            "applicationId": "54e156c6-cd05-4d85-a0e2-c64836440e17",
+            "enable": true,
+            "url": "http://localhost:8081/manager/menuitem.html",
+            "serveIcon": "",
+            "hasWidget": false,
+            "relationServes": [],
+            "relationUsers": []
           }
-        ]
-      }]
-    },
-    "curServe": {
-      "serveId": "asfasdfasfas222",
-      "serveName": "谷歌搜索",
-      "serveCode": "google",
-      "enable": true,
-      "url": "https://www.google.com",
-      "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-      "hasWidget": true,
-      "relationServes": [{
-          "serveId": "asfasfasfasfdsdfg",
-          "serveName": "百度",
-          "serveCode": "baidu",
-          "enable": true,
-          "url": "https://www.baidu.com",
-          "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-          "hasWidget": false
         },
         {
-          "serveId": "fhsdfdhsfhr54eretwe",
-          "serveName": "360急速搜索",
-          "serveCode": "360",
-          "enable": true,
-          "url": "https://www.google.com",
-          "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-          "hasWidget": false
-        }
-      ],
-      "relationUsers": [{
-          "company": null,
-          "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=806695075,861492878&fm=58&bpow=0&bpoh=0",
-          "userEmail": null,
-          "userName": "李彦宏",
-          "userMobile": null,
-          "userId": "111",
-          "allowTenants": null,
-          "redPacketsNum": 0,
-          "gloriesNum": 0
+          "tenantId": "gtzceot7",
+          "menuItemId": "93990aa7-df87-4cf9-a881-b038bcf05aca",
+          "menuItemName": "服务管理",
+          "menuItemCode": "service",
+          "menuBarId": "84e7b955-5f52-47c6-817f-1331b4b47d16",
+          "menuItemDefault": false,
+          "serveId": "9b05d3d1-eed3-4b1e-b412-95dd1da9dfc9",
+          "serve": {
+            "tenantId": "gtzceot7",
+            "serveId": "9b05d3d1-eed3-4b1e-b412-95dd1da9dfc9",
+            "serveName": "服务管理",
+            "serveCode": "service",
+            "applicationId": "54e156c6-cd05-4d85-a0e2-c64836440e17",
+            "enable": true,
+            "hasWidget": false,
+            "relationServes": [],
+            "relationUsers": []
+          }
         },
         {
-          "company": null,
-          "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2825762689,1796178341&fm=58",
-          "userEmail": null,
-          "userName": "周鸿祎",
-          "userMobile": null,
-          "userId": "222",
-          "allowTenants": null,
-          "redPacketsNum": 0,
-          "gloriesNum": 0
+          "tenantId": "gtzceot7",
+          "menuItemId": "e1ca9d0c-0151-4cd3-b9b4-2ebba8fcae14",
+          "menuItemName": "侧边栏管理",
+          "menuItemCode": "menubar",
+          "menuBarId": "84e7b955-5f52-47c6-817f-1331b4b47d16",
+          "menuItemDefault": false,
+          "serveId": "08a6b20d-0b7e-456f-af1e-76f73e8c8480",
+          "serve": {
+            "tenantId": "gtzceot7",
+            "serveId": "08a6b20d-0b7e-456f-af1e-76f73e8c8480",
+            "serveName": "侧边栏管理",
+            "serveCode": "menubar",
+            "applicationId": "54e156c6-cd05-4d85-a0e2-c64836440e17",
+            "enable": true,
+            "url": "http://localhost:8081/manager/menubar.html",
+            "serveIcon": "",
+            "hasWidget": false,
+            "relationServes": [],
+            "relationUsers": []
+          }
+        },
+        {
+          "tenantId": "gtzceot7",
+          "menuItemId": "ebbabd17-3407-4b3d-b1dc-60fc9e930887",
+          "menuItemName": "应用管理",
+          "menuItemCode": "application",
+          "menuBarId": "84e7b955-5f52-47c6-817f-1331b4b47d16",
+          "menuItemDefault": false,
+          "serveId": "0f64cc11-f6d0-473c-b293-cdc09c1cddc2",
+          "serve": {
+            "tenantId": "gtzceot7",
+            "serveId": "0f64cc11-f6d0-473c-b293-cdc09c1cddc2",
+            "serveName": "应用管理",
+            "serveCode": "application",
+            "applicationId": "54e156c6-cd05-4d85-a0e2-c64836440e17",
+            "enable": true,
+            "url": "http://localhost:8081/manager/application.html",
+            "hasWidget": false,
+            "relationServes": [],
+            "relationUsers": []
+          }
         }
       ]
+    },
+    "curServe": {
+      "tenantId": "gtzceot7",
+      "serveId": "77827ff0-26c7-40ba-ab04-1ff83a0f0b46",
+      "serveName": "菜单项管理",
+      "serveCode": "menuitem",
+      "applicationId": "54e156c6-cd05-4d85-a0e2-c64836440e17",
+      "enable": true,
+      "url": "http://localhost:8081/manager/menuitem.html",
+      "serveIcon": "",
+      "hasWidget": false,
+      "relationServes": [],
+      "relationUsers": []
     }
   }
 }

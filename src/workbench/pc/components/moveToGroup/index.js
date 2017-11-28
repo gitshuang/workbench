@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'bee-button';
+import { findPath } from '@u';
 /*  style */
 import {
   container,
@@ -8,126 +9,153 @@ import {
   pd,
   borderBox,
   footer,
-  selectedli
+  selectedli,
+  saveBtn,
 } from './style.css';
 
-const defaultProps = {
-
-}
 class MoveToGroup extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      newGroupName : '',      // 新分组名
-      isGroup : false,        // 是否是打开新的分组
-      way:"",
-      selectId:"",
-      index: 0,
-      key: 0
+      newGroupName: '',      // 新分组名
+      inAddGroup: false,        // 是否是打开新的分组
+      way: '',
+      selectId: '',
     }
   }
-
-  componentDidMount() {
-
-  }
-
-
   setNewGroupName =(e) => {
     this.setState({
       newGroupName: e.target.value
     })
   }
-  // 子集文件夹的点击事件
-  handleClick =(item, index, list, key)=>{
-    let way = item.widgetName +"/"+ list.widgetName;
+  handlerClick(selectId) {
+    const way = findPath(
+        this.props.data,
+        'children',
+        'widgetId',
+        selectId
+      ).map(
+        ({widgetName})=>widgetName
+      ).join('/');
     this.setState({
-      way: way,
-      index: index,
-      key:key,
-      selectId: list.widgetId
+      way,
+      selectId,
     });
   }
-  // menu一级菜单的点击事件
-  handleTitleClick = (item,index) => {
+  addGroup = () => {
     this.setState({
-      way: item.widgetName,
-      index: index,
-      selectId: item.widgetId
+      inAddGroup: true,
     });
   }
-  confirmFn =()=>{
-    const { confirmFn } = this.props;
-    const {index,key} = this.state;
-    confirmFn(index,key);
+  confirmAddGroup = () => {
+    this.props
+      .onAddGroup(this.state.newGroupName)
+      .then(({ error, payload }) => {
+        this.setState({
+          inAddGroup: false,
+        });
+      });
+  }
+  cancelAddGroup = () => {
+    this.setState({
+      inAddGroup: false,
+    });
+  }
+  save = () => {
+    const { selectId } = this.state;
+    this.props.onSave(selectId);
+  }
+  cancel = () => {
+    this.props.onCancel();
+  }
+  makeSelectInterface(data, selectId) {
+    if (data.length) {
+      return (
+        <ul>
+          {
+            data.map(({ widgetId, widgetName, children = [], type }) => {
+              const classname = widgetId == selectId ? selectedli : "";
+              return (
+                <li key={widgetId}>
+                  <p
+                    onClick={this.handlerClick.bind(this, widgetId)}
+                    className={ classname }>
+                    { widgetName }
+                  </p>
+                  {
+                    this.makeSelectInterface(children, selectId)
+                  }
+                </li>
+              );
+            })
+          }
+        </ul>
+      );
+    } else {
+      return null;
+    }
   }
   render() {
-    let _this = this;
     let content;
-    const {data,isGroup,addGroup,confirmFn,cancelFn,addNewGroup,groupCancelFn } = this.props;
-    if (isGroup){
-      content =
+    const {
+      inAddGroup,
+      newGroupName,
+      way,
+      selectId,
+    } = this.state;
+    const {
+      data,
+      onSave,
+      onCancel,
+      onAddGroup,
+    } = this.props;
+
+    if (inAddGroup) {
+      content = (
         <div className= {`${pd} ${container}`}>
           <div className={borderBox}>
-            <input type="text" value={this.state.newGroupName} onChange={ this.setNewGroupName }/>
+            <input type="text" value={newGroupName} onChange={ this.setNewGroupName }/>
           </div>
           <div className={footer + " um-box-justify"}>
-            <Button colors="danger" disabled={!this.state.newGroupName} onClick={addNewGroup}>添加到新分组</Button>
-            <Button onClick={groupCancelFn}>取消</Button>
+            <Button colors="danger" disabled={!newGroupName} onClick={ this.confirmAddGroup }>添加到新分组</Button>
+            <Button onClick={ this.cancelAddGroup }>取消</Button>
           </div>
         </div>
+      );
     }else{
-      content =
+      content = (
         <div className= {container}>
           <div className={title}>
-            添加到：{this.state.way}
+            添加到：{way}
           </div>
           <div className={borderBox}>
-            <ul>
-              {
-                data.map( (item, index) => {
-                  const classname = item.widgetId == this.state.selectId ? selectedli : ""
-                  return (
-                    <li key={index}>
-                      <p
-                        onClick={ ()=>{this.handleTitleClick(item,index)} }
-                        className={ classname}
-                      >
-                        {item.widgetName}
-                      </p>
-                      {
-                        item.children && item.children.map((list, key) => {
-                          const classname2 = list.widgetId == this.state.selectId ? selectedli : ""
-                          return (
-                            <div
-                              key = {key}
-                              className = { classname2 }
-                              onClick={ ()=>{this.handleClick(item, index, list, key)} }
-                            >
-                              {list.widgetName}
-                            </div>
-                          )
-                        })
-                      }
-                    </li>
-                  )
-                })
-              }
-            </ul>
+            { this.makeSelectInterface(data, selectId) }
           </div>
-          <div className={footer + " um-box-justify"}>
+          <div className={`${footer} um-box-justify`}>
+            {
+              onAddGroup ? (<div>
+                <Button onClick={this.addGroup}>添加分组</Button>
+              </div>) : null
+            }
             <div>
-              <Button onClick={addGroup}>添加分组</Button>
-            </div>
-            <div>
-              <Button colors="danger" disabled={!this.state.way} style={{marginRight:"5px"}} onClick={ this.confirmFn }>确定</Button>
-              <Button onClick={cancelFn}>取消</Button>
+              {
+                onSave ? (<Button
+                  colors="danger"
+                  disabled={!way}
+                  className={saveBtn}
+                  onClick={ this.save }>确定</Button>) : null
+              }
+              {
+                onCancel ? (<Button
+                  onClick={this.cancel}>取消</Button>) : null
+              }
             </div>
           </div>
         </div>
+      );
     }
     return content;
   }
 }
-MoveToGroup.defaultProps = defaultProps;
+
 export default MoveToGroup;

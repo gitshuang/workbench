@@ -12,9 +12,6 @@ import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
 import rootActions from 'store/root/actions';
-//<--后续样式提到组件库里面
-import 'assets/style/iuapmobile.um.css';
-//-->后续样式提到组件库里面
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { initMessage } from 'public/message';
 
@@ -106,7 +103,6 @@ class Root extends Component {
           transitionLeaveTimeout={300} >
           { itemQuickService }
         </CSSTransitionGroup>
-        {/*<Drag/>*/}
       </div>
     );
   }

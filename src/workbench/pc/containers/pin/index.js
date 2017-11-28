@@ -1,8 +1,9 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { CSSTransitionGroup } from 'react-transition-group';
 import onClickOutside from 'react-onclickoutside';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, guid } from '@u';
 /*  actions  */
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
@@ -19,13 +20,14 @@ import {
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { pinDisplayNone, setPinAdd, setAddGroup, getPinGroup } = workActions;
 
-@connect(mapStateToProps(
-  'pinDisplay',
-  {
-    "namespace":"work"
-  }
+@connect(
+  mapStateToProps(
+    'pinDisplay',
+    'current',
+    {
+      "namespace":"work"
+    }
   ),
-
   {
     requestStart,
     requestSuccess,
@@ -38,15 +40,12 @@ const { pinDisplayNone, setPinAdd, setAddGroup, getPinGroup } = workActions;
 )
 @onClickOutside
 class Pin extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      menuData: [],
-      isGroup: false
+      menuData: []
     }
   }
-
   componentDidMount() {
     const { requestStart, requestSuccess, requestError, getPinGroup} = this.props;
     getPinGroup().then( ({ error, payload }) => {
@@ -67,20 +66,23 @@ class Pin extends Component {
       pinDisplayNone();
     }
   }
+  confirmFn = (parentId) => {
+    const {
+      current: {
+        title,
+        serveCode,
+      },
+      setPinAdd,
+      requestStart,
+      requestSuccess,
+      requestError,
+    } = this.props;
 
-  addGroup = () => {
-    this.setState({
-      isGroup: true
-    });
-  }
-  groupCancelFn =() => {
-    this.setState({
-      isGroup: false,
-    });
-  }
-  confirmFn = () => {
-    const { requestError, setPinAdd } = this.props;
-    setPinAdd().then(({ error, payload }) => {
+    setPinAdd(
+      serveCode,
+      title,
+      parentId,
+    ).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       }
@@ -95,50 +97,62 @@ class Pin extends Component {
   /*  menu  方法汇总   */
 
   /*  下三个方法为  添加新组  method  */
-  addNewGroup =(name,id) => {
-    const { setAddGroup, requestError } = this.props;
-    let newGroup = {
-      id : id,
-      name : name,
-    };
-    setAddGroup().then( ({ error, payload }) => {
+  addNewGroup =(name) => {
+    const {
+      setAddGroup,
+      requestStart,
+      requestSuccess,
+      requestError,
+    } = this.props;
+    requestStart()
+    return setAddGroup(name).then((action) => {
+      const { error, payload } = action;
       if (error) {
         requestError(payload);
+      } else {
+        requestSuccess();
+        this.setState({
+          menuData: [...this.state.menuData, {
+            id : guid(),
+            name,
+          }],
+        });
       }
-      let menuData = this.state.menuData;
-      menuData.push(newGroup);
-      this.setState({
-        menuData: menuData,
-      });
+      return action;
     });
   }
 
   render() {
-    const { pinDisplay,classname } = this.props;
-    if(pinDisplay){
-      return (
-        <div className={`${pin} um-css3-hc`} >
-          <div className={header +" um-box"}>
-            <div>
-              <img src="../" alt="" />
-            </div>
-            <p>工作页名称</p>
+    const { pinDisplay } = this.props;
+    const content = pinDisplay ? (
+      <div className={`${pin} um-css3-hc`} >
+        <div className={`${header} um-box`}>
+          <div>
+            <img src="../" alt="" />
           </div>
-
-          <MoveToGroup
-            data={this.state.menuData}
-            isGroup={this.state.isGroup}
-            addGroup={this.addGroup}
-            confirmFn={this.confirmFn}
-            cancelFn={this.cancelFn}
-            addNewGroup={this.addNewGroup }
-            groupCancelFn={this.groupCancelFn}
-          />
+          <p>工作页名称</p>
         </div>
-      );
-    }else{
-      return null
-    }
+        <MoveToGroup
+          data={this.state.menuData}
+          onSave={this.confirmFn}
+          onCancel={this.cancelFn}
+          onAddGroup={this.addNewGroup}
+        />
+      </div>
+    ) : null;
+    return (
+      <CSSTransitionGroup
+        transitionName={ {
+          enter: 'animated',
+          enterActive: 'fadeIn',
+          leave: 'animated',
+          leaveActive: 'fadeOut',
+        } }
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300} >
+        { content }
+      </CSSTransitionGroup>
+    );
   }
 }
 

@@ -27,6 +27,7 @@ const defaultState = {
   current:{
     title: '',
     serveCode: '',
+    serveId: '',
     hasRelationFunc: false,
   },
   // 页面布局类型
