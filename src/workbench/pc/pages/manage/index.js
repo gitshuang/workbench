@@ -53,6 +53,20 @@ class Home extends Component {
     this.state ={
       isOpenMove: false,
       isGroup: false,
+      moveData: [
+        {
+          "type": "1",
+          "widgetId": "f1",
+          "widgetName": "分组一",
+          "children": []
+        },
+        {
+          "type": "1",
+          "widgetId": "f2",
+          "widgetName": "分组二",
+          "children": []
+        }
+      ]
     }
     this.moveGroupDrag = this.moveGroupDrag.bind(this);
   }
@@ -149,7 +163,7 @@ class Home extends Component {
       });
     });
   }
-  groupCancelFn() {
+  groupCancelFn =()=> {
     this.setState({
       isGroup: false,
     });
@@ -203,6 +217,7 @@ class Home extends Component {
           this.state.isOpenMove ? (
             <div className={pin +" um-css3-center"}>
               <MoveToGroup
+                data={this.state.moveData}
                 isGroup={this.state.isGroup}
                 addGroup={this.moveAddGroup}
                 confirmFn={this.moveConfirmFn}
