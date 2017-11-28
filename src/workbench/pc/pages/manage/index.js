@@ -20,7 +20,7 @@ import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
 
-import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin,um_content} from './style.css';
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { setManageList,getManageList,batchDelect,batchMove,moveGroup } = manageActions;
@@ -153,6 +153,7 @@ class Home extends Component {
   moveConfirmFn = () => {
     const { batchMove } = this.props;
     batchMove(0);
+    this.moveCancelFn();
   }
 
   moveCancelFn = () => {
@@ -198,7 +199,7 @@ class Home extends Component {
             <span>首页编辑</span>
           </Header>
         </div>
-        <div className={um_content}>
+        <div className='um-content' style={{background:"rgb(230,233,233)"}}>
           {this.renderContent()}
         </div>
         <div className="um-footer">
@@ -225,7 +226,7 @@ class Home extends Component {
                 isGroup={this.state.isGroup}
                 addGroup={this.moveAddGroup}
                 confirmFn={this.moveConfirmFn}
-                cancelFn={this.movecCncelFn}
+                cancelFn={this.moveCancelFn}
                 addNewGroup={this.addNewGroup }
                 groupCancelFn={this.groupCancelFn}
               />
