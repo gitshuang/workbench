@@ -7,6 +7,7 @@ import actions from './actions';
 const {
   setManageList,
   getManageList,
+  addDesk,
   batchDelect,
   batchMove,
   selectGroupActions,
@@ -27,17 +28,20 @@ const {
   openFolder,
   closeFolder,
   getSelectWidgetList,
-  } = actions;
+} = actions;
 
 const defaultState = {
   curEditFolderId: '',
   manageList: [],
   isEdit: false,
-  curDisplayFolder: {},
+  curDisplayFolder: {
+    widgetName: '',
+    children: [],
+  },
   folderModalDisplay: false,
   selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
-  selectGroup:[]
+  selectGroup: [],
 };
 
 const findTreeById = (data, curId) => {
@@ -94,6 +98,17 @@ const reducer = handleActions({
         ...state,
         manageList: payload,
       };
+    }
+  },
+  [addDesk]: (state, { payload: data }) => {
+    state.manageList.map(function(da,i){
+      da.children.push(data);
+    })
+    debugger;
+    let newManageList = JSON.parse(JSON.stringify(state.manageList));
+    return{
+      ...state,
+      manageList: newManageList
     }
   },
   [getSelectWidgetList]: (state, { payload, error }) => {
@@ -373,8 +388,8 @@ const reducer = handleActions({
   },
   [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId} }) => {
     let manageAllList = state.manageList;
-    let manageList = preType==="3" ? findById(manageAllList,preParentId) : manageAllList;
-    typeof manageList === "object" && preType==="3" && (manageList = [manageList]);
+    let manageList = preType===3 ? findById(manageAllList,preParentId) : manageAllList;
+    typeof manageList === "object" && preType===3 && (manageList = [manageList]);
 
     let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
     let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
@@ -402,7 +417,6 @@ const reducer = handleActions({
   }),
   [closeFolder]: (state) => ({
     ...state,
-    curDisplayFolder: {},
     folderModalDisplay: false,
   }),
 }, defaultState);

@@ -1,31 +1,29 @@
 import workActions from 'store/root/work/actions';
-const {addBrm} = workActions;
+import rootActions from 'store/root/actions';
+const { addBrm } = workActions;
+const { popMessage } = rootActions;
+
 import store from "store";
 
 const handlers = {
-    jump(url) {
-        this.props.history.push(url);
-    },
-    notice(url) {
-        this.props.history.push(url);
-    },
-    mail(url) {
-        this.props.history.push(url);
-    },
-    tips(url) {
-        this.props.history.push(url);
-    },
-    test(data) {
-        store.dispatch(addBrm(data));
-    },
-    action(actionStr) {
-      try {
-        const action = JSON.parse(actionStr);
-        store.dispatch(action);
-      } catch(e) {
-        console.log(e);
-      }
-    }
+  jump(url) {
+    this.props.history.push(url);
+  },
+  notice(url) {
+    this.props.history.push(url);
+  },
+  mail(url) {
+    this.props.history.push(url);
+  },
+  tips(url) {
+    this.props.history.push(url);
+  },
+  test(data) {
+    store.dispatch(addBrm(data));
+  },
+  popMessage() {
+    store.dispatch(popMessage());
+  }
 }
 
 export function regMessageTypeHandler() {

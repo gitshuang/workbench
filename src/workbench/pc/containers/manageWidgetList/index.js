@@ -66,8 +66,8 @@ class WidgetList extends Component {
       })
   }
 
-  moveItemDrag(id,preParentId, afterId,parentId) {
-    let data = {id,preParentId,afterId,parentId}
+  moveItemDrag(id,preParentId, preType,afterId,parentId) {
+    let data = {id,preParentId,preType,afterId,parentId}
     const { moveServe } = this.props;
     moveServe(data);
   }
@@ -77,7 +77,6 @@ class WidgetList extends Component {
       this.props.openFolder(da);
     }
   }
-
 
   popSave = (data)=>{
 
@@ -90,12 +89,15 @@ class WidgetList extends Component {
   }
 
   render() {
+
       const { data,index,checkType } = this.props;
+
       const pop_btn = [
         {label:"确认",fun:this.popSave,className:""},
         {label:"取消",fun:this.popClose,className:""}
       ]   //设置操作按钮
 
+      // const { data } = this.props;
 
       const list = data.map((item, i) => {
         const {

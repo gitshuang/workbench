@@ -7,20 +7,19 @@ import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
 import homeActions from 'store/root/home/actions';
 
-const {closeFolder} = homeActions;
+const { closeFolder } = homeActions;
 
 @connect(
-    mapStateToProps(
-        'workList',
-        'curDisplayFolder',
-        'folderModalDisplay',
-        {
-            namespace: 'home',
-        }
-    ),
+  mapStateToProps(
+    'curDisplayFolder',
+    'folderModalDisplay',
     {
-        closeFolder,
+      namespace: 'home',
     }
+  ),
+  {
+    closeFolder,
+  }
 )
 class homeFolderDialog extends Component{
 	render(){
@@ -29,6 +28,7 @@ class homeFolderDialog extends Component{
         widgetName: title,
         children,
       },
+      folderModalDisplay,
       closeFolder,
     } = this.props;
     const list = children.map((child, i) => {
@@ -46,7 +46,7 @@ class homeFolderDialog extends Component{
       );
     })
 	return(
-      <Modal show={true} onHide={ closeFolder } >
+      <Modal show={folderModalDisplay} onHide={ closeFolder } >
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

@@ -8,6 +8,7 @@ export default createTypes(
   'SELECT_GROUP_ACTIONS',
   'SELECT_LIST_ACTIONS',
   'ADD_GROUP',
+  'ADD_DESK',
   'DELECT_GROUP',
   'RENAME_GROUP',
   'MOVE_GROUP',

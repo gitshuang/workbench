@@ -1,0 +1,31 @@
+.serverItem{
+	width: 226px;
+    height: 100px;
+    float: left;
+    background: #fff;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+.item_li_top{
+	height: 70px;
+	display: -webkit-box;
+}
+.item_footer{
+	height: 30px;
+	text-align: right;
+	padding-right: 20px;
+}
+ 
+.item_left {
+    background: #ccc;
+    width: 60px;
+}
+.item_right{
+	-webkit-box-flex: 1;
+	padding-left: 10px;
+	padding-top: 10px;
+	box-sizing: border-box;
+}

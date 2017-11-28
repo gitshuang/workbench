@@ -82,7 +82,7 @@ class WidgeFileItem extends Component {
       this.popSave = this.popSave.bind(this);
       this.popClose = this.popClose.bind(this);
       let ed = true;
-      if(props.id){
+      if(props.curEditFolderId){
           ed = true;
       }else{
           ed = false;
