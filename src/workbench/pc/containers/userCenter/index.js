@@ -96,7 +96,7 @@ class UserInfoContainer extends Component {
   handleClick() {
     alert("修改")
   }
-  cutusername =() => {
+  setCutUserFn =() => {
     const {setCutUser,getWorkList} = this.props;
     setCutUser().then(({error, payload}) => {
       if (error) {
@@ -106,6 +106,7 @@ class UserInfoContainer extends Component {
         if (error) {
           requestError(payload);
         }
+        debugger;
         requestSuccess();
       });
     });
@@ -143,6 +144,7 @@ class UserInfoContainer extends Component {
         break;
       case 'cutuser' :
         alert("切换企业帐号");
+        this.setCutUserFn();
         break;
       default : alert("undefined");
     }

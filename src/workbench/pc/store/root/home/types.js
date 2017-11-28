@@ -7,4 +7,5 @@ export default createTypes(
   'HIDE_USER_INFO_DISPLAY',
   'OPEN_FOLDER',
   'CLOSE_FOLDER',
+  'SET_CUT_USER',
 );
