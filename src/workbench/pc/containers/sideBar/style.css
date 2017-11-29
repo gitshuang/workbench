@@ -8,6 +8,7 @@
 	height:20px; 
 	color:rgba(135,139,148,1);
 	font-size: 14px;
+	margin:-3px 8px 0 0 ;
 }
 .menuArrow{
 	color:#878B94;
@@ -35,4 +36,8 @@
 }
 .u-menu-inline .u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected {
 	border:none;
+}
+:global(.u-menu-sub.u-menu-inline>.u-menu-item){
+	height:30px;
+	line-height: 30px;
 }

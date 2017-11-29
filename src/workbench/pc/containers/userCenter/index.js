@@ -200,7 +200,7 @@ class UserInfoContainer extends Component {
               <Icon type="copyreader" onClick={this.handleClick.bind(this)}></Icon>
             </div>
           </div>
-          <div className={userInfo}>
+          {/*<div className={userInfo}>
             <ul className={clearfix}>
               <li>
                 <div className={gloryValue}>{glory}</div>
@@ -211,12 +211,22 @@ class UserInfoContainer extends Component {
                 <div className={packetsKey}>红包</div>
               </li>
             </ul>
-          </div>
+          </div>*/}
           <div className={userName}>{name}</div>
-          <div className={gloryIcon}>
-            <img src={img} style={{marginLeft : 144}}/>
-            <img src={img2}/>
-          </div>
+          <ul className={`${gloryIcon} ${clearfix}`}>
+            <li>
+              <img src={img}/>
+              <span>荣耀</span>
+            </li>
+            <li>
+              <img src={img2}/>
+              <span>个人空间</span>
+            </li>
+            <li>
+              <img src={img2}/>
+              <span>动态</span>
+            </li>
+          </ul>
         </div>
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>

@@ -46,6 +46,11 @@
   float: left;
   white-space: nowrap;
 }
+.tabsList li:hover{
+  background:#fff;
+  color:#E14C46;
+  cursor: pointer;
+}
 .tab, .moreBtn{
   float: left;
   border-top: 2px solid #A7A7A7;
@@ -67,6 +72,7 @@
 }
 .moreBtnArrow{
   padding:0 !important;
+  font-weight:bold;
 }
 .moreBtn.active .moreBtnArrow{
   transform:rotate(90deg);
@@ -94,6 +100,9 @@
   right: 0;
   top: 0;
   display: none;
+}
+.tabDelBtn :global(.iconfont){
+  font-weight:bold;
 }
 .tab:hover .tabDelBtn,
 .more:hover .moreDelBtn{

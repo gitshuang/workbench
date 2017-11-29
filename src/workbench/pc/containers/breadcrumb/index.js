@@ -44,7 +44,7 @@ class BreadcrumbContainer extends Component {
       return (
         <div className={breadcrumbClass}>
           {
-            withSidebar ? ( <i className="uf uf-navmenu" onClick={this.setExpended} />) : null
+            withSidebar ? ( <Icon type="tabulation" onClick={this.setExpended} />) : null
           }
           <Breadcrumbs data={this.props.brm}/>
         </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import cs from 'classnames';
 import { connect } from 'react-redux';
 import actions from 'store/root/work/actions';
-import Icon from 'bee-icon';
+import Icon from 'components/icon';
 import { mapStateToProps } from '@u';
 import {
   moreList,
@@ -153,7 +153,7 @@ class TabsContainer extends Component {
           style= {{
             width: moreBtnWidth,
           }}
-          onClick={this.toggleMore}><Icon className={moreBtnArrow} type="uf-gridcaretarrowup"></Icon></button>
+          onClick={this.toggleMore}><Icon className={moreBtnArrow} type="upward"></Icon></button>
         { moreListElm }
       </div>
     ) : null;
@@ -181,7 +181,7 @@ class TabsContainer extends Component {
                     <button
                       className={tabDelBtn}
                       type="button"
-                      onClick={this.del(id)} >x</button>
+                      onClick={this.del(id)} ><Icon type="error3"></Icon></button>
                   ) : null
                 }
               </li>

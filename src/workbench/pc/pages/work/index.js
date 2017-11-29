@@ -20,7 +20,7 @@ import Pin from 'containers/pin';
 import styles from './style.css';
 
 /*  定义style  css-loader  */
-const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap, } = styles;
+const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap} = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, returnDefaultState} = workActions;
@@ -183,17 +183,17 @@ export default class Work extends Component {
           type,
         } = this.props;
         const { loaded } = this.state;
-        let iconName = <Icon type="qiyejieshao" style={{fontSize:"24px"}}/>
+        let iconName = <Icon type="search" style={{fontSize:"24px"}}/>
         return (
           <div className={wrap + " um-win"}>
             <div className="um-header">
               <HeaderContainer onLeftClick={ this.goBack } iconName={iconName} leftContent={ domainName }>
-                <div className="um-box">
+                <div className={"um-box"}>
                   <span>{ title }</span>
                   {
                     hasRelationFunc ?
                       (<Icon
-                        type="application"
+                        type="pull-down"
                         style={{marginLeft:"15px",fontSize:"18px"}}
                         onClick={ titleServiceDisplay } />) : undefined
                   }
