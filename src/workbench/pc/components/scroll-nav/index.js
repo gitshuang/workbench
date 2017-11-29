@@ -16,7 +16,7 @@ const Navbar = ({
         left: 0,
         top: 0,
         width: "100%",
-        backgroundColor: backgroundColor ? backgroundColor : "#FFF",
+        background: backgroundColor ? backgroundColor : "rgba(255,255,255,0.92)",
         display: "flex"
         // justifyContent: "center"
     };
@@ -43,7 +43,7 @@ Navbar.propTypes = {
     delay: React.PropTypes.number,
     navbarStyle: React.PropTypes.object,
     height: React.PropTypes.number,
-    backgroundColor: React.PropTypes.string,
+    background: React.PropTypes.string,
     children: React.PropTypes.node,
     coverWidth: React.PropTypes.number,
     navWidth: React.PropTypes.number

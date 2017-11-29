@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
 import update from 'react/lib/update';
 import PropTypes from 'prop-types';
-import Icon from 'bee-icon';
+import Icon from 'components/Icon';
 import Button from 'bee-button';
 import Popconfirm from 'bee-popconfirm';
 import { widgetList, widgetItem, title, file_context, title_left,
@@ -140,7 +140,7 @@ class WidgetList extends Component {
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >
-          <Icon type="uf-plus"  />
+          <Icon type="price"  />
         </div>
 
         <PopDialog show = { this.state.showModal } data={_da} btns={pop_btn} >

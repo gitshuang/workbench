@@ -56,7 +56,7 @@ class QuickServiceContainer extends Component {
           }
           </ul>
         </div>
-        <div className={serviceBtn}><button className="btn" onClick={this.openAllAppList}>全部服务</button></div>
+        <div className={serviceBtn}><button className="btn" onClick={this.openAllAppList}>更多应用</button></div>
       </div>
     );
   }

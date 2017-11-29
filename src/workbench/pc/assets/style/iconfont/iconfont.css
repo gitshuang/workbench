@@ -1,13 +1,14 @@
 @font-face {
   font-family: 'iconfont';
-  src:  url('iconfont.eot?irsm6q');
-  src:  url('iconfont.eot?irsm6q#iefix') format('embedded-opentype'),
-    url('iconfont.ttf?irsm6q') format('truetype'),
-    url('iconfont.woff?irsm6q') format('woff'),
-    url('iconfont.svg?irsm6q#iconfont') format('svg');
+  src:  url('iconfont.eot?25k5a');
+  src:  url('iconfont.eot?25k5a#iefix') format('embedded-opentype'),
+    url('iconfont.ttf?25k5a') format('truetype'),
+    url('iconfont.woff?25k5a') format('woff'),
+    url('iconfont.svg?25k5a#iconfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'iconfont' !important;
@@ -31,6 +32,156 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-charge-up:before {
+  content: "\e970";
+}
+.icon-currency-conversion:before {
+  content: "\e971";
+}
+.icon-dynamics:before {
+  content: "\e972";
+}
+.icon-error3:before {
+  content: "\e973";
+}
+.icon-excel:before {
+  content: "\e974";
+}
+.icon-glory:before {
+  content: "\e975";
+}
+.icon-pdf:before {
+  content: "\e976";
+}
+.icon-personal-information:before {
+  content: "\e977";
+}
+.icon-ppt:before {
+  content: "\e978";
+}
+.icon-vote:before {
+  content: "\e979";
+}
+.icon-wallet2:before {
+  content: "\e97a";
+}
+.icon-word:before {
+  content: "\e97b";
+}
+.icon-taxi:before {
+  content: "\e96f";
+}
+.icon-airplane-mode:before {
+  content: "\e96d";
+}
+.icon-target:before {
+  content: "\e96e";
+}
+.icon-add:before {
+  content: "\e94c";
+}
+.icon-add2:before {
+  content: "\e94d";
+}
+.icon-alarm:before {
+  content: "\e94e";
+}
+.icon-back:before {
+  content: "\e94f";
+}
+.icon-back2:before {
+  content: "\e950";
+}
+.icon-back3:before {
+  content: "\e951";
+}
+.icon-blank-page:before {
+  content: "\e952";
+}
+.icon-calculator:before {
+  content: "\e953";
+}
+.icon-clock-in:before {
+  content: "\e954";
+}
+.icon-cloud:before {
+  content: "\e955";
+}
+.icon-correct:before {
+  content: "\e956";
+}
+.icon-delete-files:before {
+  content: "\e957";
+}
+.icon-delete:before {
+  content: "\e958";
+}
+.icon-download2:before {
+  content: "\e959";
+}
+.icon-error:before {
+  content: "\e95a";
+}
+.icon-error2:before {
+  content: "\e95b";
+}
+.icon-forward:before {
+  content: "\e95c";
+}
+.icon-forward2:before {
+  content: "\e95d";
+}
+.icon-Internet:before {
+  content: "\e95e";
+}
+.icon-Internet2:before {
+  content: "\e95f";
+}
+.icon-loading:before {
+  content: "\e960";
+}
+.icon-more:before {
+  content: "\e961";
+}
+.icon-notification2:before {
+  content: "\e962";
+}
+.icon-personal-center:before {
+  content: "\e963";
+}
+.icon-pull-down:before {
+  content: "\e964";
+}
+.icon-reading:before {
+  content: "\e965";
+}
+.icon-refresh:before {
+  content: "\e966";
+}
+.icon-refresh2:before {
+  content: "\e967";
+}
+.icon-refresh3:before {
+  content: "\e968";
+}
+.icon-tabulation:before {
+  content: "\e969";
+}
+.icon-upward:before {
+  content: "\e96a";
+}
+.icon-Yoyo-Filled:before {
+  content: "\e96b";
+}
+.icon-Yoyo-Line:before {
+  content: "\e96c";
+}
+.icon-add-files:before {
+  content: "\e94a";
+}
+.icon-dustbin:before {
+  content: "\e94b";
+}
 .icon-loan:before {
   content: "\e949";
 }
@@ -64,10 +215,10 @@
 .icon-expense:before {
   content: "\e91b";
 }
-.icon-export:before {
+.icon-derivation:before {
   content: "\e91c";
 }
-.icon-file:before {
+.icon-brief-case:before {
   content: "\e91d";
 }
 .icon-hard-disk:before {
@@ -91,7 +242,7 @@
 .icon-favorite:before {
   content: "\e924";
 }
-.icon-link:before {
+.icon-chaining:before {
   content: "\e925";
 }
 .icon-location:before {
@@ -118,10 +269,10 @@
 .icon-copyreader:before {
   content: "\e92d";
 }
-.icon-personage-2:before {
+.icon-expression:before {
   content: "\e92e";
 }
-.icon-personage:before {
+.icon-expression-2:before {
   content: "\e92f";
 }
 .icon-personal-details:before {
@@ -184,13 +335,13 @@
 .icon-staff:before {
   content: "\e943";
 }
-.icon-staffs:before {
+.icon-group:before {
   content: "\e944";
 }
 .icon-toolbox:before {
   content: "\e945";
 }
-.icon-uploading2:before {
+.icon-return:before {
   content: "\e946";
 }
 .icon-wallet:before {
@@ -241,7 +392,7 @@
 .icon-uploading:before {
   content: "\e904";
 }
-.icon-yy-cloud:before {
+.icon-yy-clud:before {
   content: "\e905";
 }
 .icon-home:before {

@@ -277,7 +277,7 @@ class ManageGroup extends Component {
         </label>
         <div>
           <Icon1 type="record" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
-          <Icon type="uf-plus" onClick={()=>{this.addFolderFn(index)}}/>
+          <Icon1 type="add-files" onClick={()=>{this.addFolderFn(index)}}/>
           {this.renderDrop(index)}
         </div>
       </div>;
