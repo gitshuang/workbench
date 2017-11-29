@@ -42,7 +42,7 @@ const itemSource = {
 };
 
 const itemTarget = {
-  hover(props, monitor) {
+  drop(props, monitor) {
     const draggedId = monitor.getItem().id;
 
     if (draggedId !== props.id) {
@@ -107,9 +107,10 @@ class ManageGroup extends Component {
     }
   }
   componentDidMount () {
-    const {selectGroup} = this.props;
+    const {selectGroup,manageData} = this.props;
     this.setState({
-      selectGroup
+      selectGroup,
+      groupName: manageData.widgetName
     });
   }
   componentWillReceiveProps(nextProps){
@@ -138,13 +139,12 @@ class ManageGroup extends Component {
   renameGroupCancel = (index) =>{
     this.setState({
       editFlag: false,
-      groupName:""
     })
   }
   // 点击按钮执行 action   重新构造
   renameGroupFn =(index) =>{
     const { renameGroup } = this.props;
-    let groupName = this.state.groupName;
+    let groupName = this.state.groupName ? this.state.groupName : "默认分组";
     let param = {
       index: index,
       name: groupName
@@ -258,7 +258,7 @@ class ManageGroup extends Component {
     const opacity = isDragging ? 0 : 1;
     let _id = manageData.widgetId + "_" + index;
     let groupTitle = null;
-    if(this.state.editFlag) {
+    if(this.state.editFlag || manageData.widgetName=="") {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
           <span>

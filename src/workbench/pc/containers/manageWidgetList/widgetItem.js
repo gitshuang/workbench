@@ -38,7 +38,8 @@ const itemSource = {
 
 
 const itemTarget = {
-  hover(props, monitor) {
+  //hover 悬浮调用 drop落在目标上时调用
+  drop(props, monitor) {
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;

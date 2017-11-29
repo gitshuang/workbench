@@ -130,13 +130,13 @@ export function post(oriUrl, oriParams = {}) {
     options: optionsMaker,
     url,
   } = fetchTools;
-  const data = params(oriParams);
   const options = optionsMaker('post');
-
-  if (data) {
-    options.body = data;
+  try {
+    options.body = JSON.stringify(oriParams);
+  } catch(e) {
+    console.log(e);
+    return Promise.reject(new Error('参数错误'));
   }
-
   return fetch(url(oriUrl), options);
 }
 

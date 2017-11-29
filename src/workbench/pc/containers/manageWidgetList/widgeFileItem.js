@@ -30,7 +30,7 @@ const itemSource = {
 
 
 const itemTarget = {
-  hover(props, monitor) {
+  drop(props, monitor) {
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
