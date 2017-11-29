@@ -43,7 +43,7 @@ class NavBar extends Component {
       <div className={wrapCls} >
         <div className={`${prefixCls}-left`} role="button" onClick={onLeftClick} >
           <span className={`${prefixCls}-left-icon`} aria-hidden="true">
-            {typeof iconName === 'string' ? <Icon type={iconName}/> : iconName}
+            {typeof iconName === 'string' ? <Icon type='staff'/> : iconName}
           </span>
           <span className={`${prefixCls}-left-content`} >{leftContent}</span>
         </div>

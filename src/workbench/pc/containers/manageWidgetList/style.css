@@ -13,6 +13,7 @@
   border:1px solid #F1F1F1;
   box-sizing: border-box;
   overflow: auto;
+  cursor: move;
 }
 .widgetItem:after {
   content: '\20';

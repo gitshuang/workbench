@@ -10,17 +10,8 @@
   box-shadow: 4px 0 4px rgba(0,0,0,.14);
   z-index: 999;
   padding-top: 1px;
-  overflow-y:scroll;
 }
-/*定义滚动条宽高*/
-.wrap::-webkit-scrollbar{
-    width: 8px;
-}
-/*定义滑块，内阴影及圆角*/
-.wrap::-webkit-scrollbar-thumb{
-    border-radius: 8px;
-    background-color: #757575;
-}
+
 /*.outerContainer {*/
   /*webkit-transition: -webkit-transform .3s ease-out;*/
   /*-o-transition: -o-transform .3s ease-out;*/
@@ -101,9 +92,21 @@
 }
 .tabContent{
   display:inline-block;
-  width: 380px;
+  width: 346px;
   margin-top: 20px;
   margin-left: 10px;
+}
+.tabPane1{
+  overflow-y: scroll;
+}
+/*定义滚动条宽高*/
+.tabPane1::-webkit-scrollbar{
+    width: 8px;
+}
+/*定义滑块，内阴影及圆角*/
+.tabPane1::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    background-color: #757575;
 }
 .userName{
   display:block;
@@ -148,7 +151,7 @@
 .serviceImg img{
   width:48px;
   height:48px;
-  margin:14px 35px 5px 5px;
+  margin:14px 27px 5px 5px;
 }
 .serviceName{
   width:48px;
@@ -167,7 +170,7 @@
 .used{
   width:346px;
   height:68px;
-  border-bottom: 1px solid #DDE0E3;
+  // border-bottom: 1px solid #DDE0E3;
 }
 .tabPane1,.tabPane2{
   height:400px;
@@ -175,6 +178,24 @@
 .tabPane1 li,.tabPane2 li{
   padding-top:14px;
 }
+.tabPane1 li{
+  border-bottom: 1px solid #DDE0E3;
+}
+.recently li:last-child{
+  border-bottom:none;
+}
+.tabPane1 :global(.u-button){
+  display:block;
+  width:48px;
+  margin:0 auto;
+  margin-top:29px; 
+  background:#fff;
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(136,136,136,1);
+  line-height:16px;
+}
+.tabPane1 :global(.u-button):hover{color:#E14C46;}
 .usedTit{
   float: left;
   width:56px;

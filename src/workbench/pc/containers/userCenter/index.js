@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
-  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options
+  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently
 } from './style.css';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -192,29 +192,31 @@ class UserInfoContainer extends Component {
       </Select>
     }
     return (
-      <div className={`${wrap} ${clearfix}`}>
-        <div className={imgUser}>
-          <img src={imgsrc} className={imgInner} />
-          <div className={editPortrait}>
-            <Icon type="copyreader" onClick={this.handleClick.bind(this)}></Icon>
+      <div className={`${wrap} ${clearfix}`} >
+        <div>
+          <div className={imgUser}>
+            <img src={imgsrc} className={imgInner} />
+            <div className={editPortrait}>
+              <Icon type="copyreader" onClick={this.handleClick.bind(this)}></Icon>
+            </div>
           </div>
-        </div>
-        <div className={userInfo}>
-          <ul className={clearfix}>
-            <li>
-              <div className={gloryValue}>{glory}</div>
-              <div className={gloryKey}>荣耀</div>
-            </li>
-            <li>
-              <div className={packetsValue}>{redPackets}</div>
-              <div className={packetsKey}>红包</div>
-            </li>
-          </ul>
-        </div>
-        <div className={userName}>{name}</div>
-        <div className={gloryIcon}>
-          <img src={img} style={{marginLeft : 144}}/>
-          <img src={img2}/>
+          <div className={userInfo}>
+            <ul className={clearfix}>
+              <li>
+                <div className={gloryValue}>{glory}</div>
+                <div className={gloryKey}>荣耀</div>
+              </li>
+              <li>
+                <div className={packetsValue}>{redPackets}</div>
+                <div className={packetsKey}>红包</div>
+              </li>
+            </ul>
+          </div>
+          <div className={userName}>{name}</div>
+          <div className={gloryIcon}>
+            <img src={img} style={{marginLeft : 144}}/>
+            <img src={img2}/>
+          </div>
         </div>
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
@@ -243,7 +245,7 @@ class UserInfoContainer extends Component {
             className="demo-tabs"
           >
             <TabPane tab='最近使用' key="1" className={tabPane1}>
-              <ul>
+              <ul className={recently}>
                 <li>
                   <Icon type="loan"></Icon>
                   <div className={`${used} ${clearfix}`}>
@@ -269,6 +271,7 @@ class UserInfoContainer extends Component {
                   </div>
                 </li>
               </ul>
+              <Button onClick={this.handleClick}>清空列表</Button>
             </TabPane>
             <TabPane tab='推广服务' key="2" className={tabPane2}>
               <ul className={`${promotion} ${clearfix}`}>

@@ -19,7 +19,9 @@ import {
   uf,
   serviceName,
   serviceIcon,
-  services
+  services,
+  uf_name,
+  uf_service
 } from './style.css';
 const {
   requestStart,
@@ -103,7 +105,7 @@ class titleServiceContainer extends Component {
               this.state.service.map(({ serveIcon, serveName }, i) =>
                 <li key={i}>
                   <div className={serviceIcon}>
-                    <img src={serveIcon} className={uf} />
+                    <img src={serveIcon} className={uf_service} />
                   </div>
                   <span className={serviceName}>{serveName}</span>
                 </li>
@@ -117,8 +119,8 @@ class titleServiceContainer extends Component {
             {
               this.state.contacts.map(({ userAvator, userName }, i) =>
                 <li key={i}>
-                  <div className="serviceIcon">
-                    <img src={userAvator} className={uf} />
+                  <div className={serviceIcon}>
+                    <img src={userAvator} className={uf_name} />
                   </div>
                   <span className={serviceName}>{userName}</span>
                 </li>

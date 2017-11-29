@@ -28,12 +28,6 @@ import {
   clearfix
 } from './style.css'
 
-const style = {
-  marginBottom: '.5rem',
-  backgroundColor: 'white',
-  cursor: 'move'
-};
-
 const type='item';
 
 const itemSource = {
@@ -202,7 +196,7 @@ class WidgetItem extends Component {
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     return connectDragSource(connectDropTarget(
-      <li className={widgetItem} style={{...widgetStyle[size],...style, opacity }} >
+      <li className={widgetItem} style={{...widgetStyle[size],...opacity }} >
         <div className={title}>
           <div className={title_left}><Icon type="uf-add-c-o" /></div>
           <div className={title_right}>{widgetName}</div>
@@ -214,7 +208,6 @@ class WidgetItem extends Component {
         <div className={`${clearfix} ${footer}`}>
           <div><Checkbox className="test" checked={checkType} onChange={ this.onHandChange }/></div>
           <div className={`${editDele} ${clearfix}`}>
-            <div onClick={this.fileEdit}><Icon type="record" /></div>
             <div onClick={this.fileDele}><Icon1 type="uf-del" /></div>
           </div>
         </div>

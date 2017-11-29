@@ -14,7 +14,7 @@ import Button from 'bee-button';
 import Icon1 from 'components/icon';
 import Icon from 'bee-icon';
 import WidgetList from 'containers/manageWidgetList';
-import {WidgetTitle,addGroupBtn,addBtnContainer,complete,cancel,newGroupName,addBtn} from './style.css';
+import {WidgetTitle,addGroupBtn,addBtnContainer,complete,cancel,newGroupName,addBtn,groupArea,selected_Back_Class} from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
   requestStart,
@@ -32,19 +32,6 @@ const {
   selectGroupActions,
 
   } = manageActions;
-
-const style = {
-  width:'1290px',
-  border: '1px solid #fff',
-  borderRadius:'2px',
-  padding: '0.5rem 4rem',
-  paddingRight:'0',
-  margin: '0 auto',
-  marginBottom: '.5rem',
-  marginTop: '.5rem',
-  background:'rgba(79,86,98,0.1)',
-  cursor: 'move'
-};
 
 const type='group';
 
@@ -115,7 +102,8 @@ class ManageGroup extends Component {
       // manageData: [],  // 可直接更改加工的渲染页面的list   actions中worklist为最后提交的
       groupName:  "",
       editFlag: false,
-      selectGroup : []
+      selectGroup : [],
+      selectedBackClass:""
     }
   }
   componentDidMount () {
@@ -172,6 +160,18 @@ class ManageGroup extends Component {
   editGroupName = (e) =>{
     this.setState({
       groupName: e.target.value
+    })
+  }
+  //输入框聚焦更改背景颜色
+  handleFocus = ()=>{
+    this.setState({
+      selectedBackClass:selected_Back_Class
+    })
+  }
+  // 输入框失焦
+  handleBlur =() => {
+    this.setState({
+      selectedBackClass:""
     })
   }
   /*         ********            *****                      */
@@ -262,7 +262,7 @@ class ManageGroup extends Component {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
           <span>
-            <input className={newGroupName} value={this.state.groupName} onChange={(e) => {this.editGroupName(e)} }/>
+            <input className={newGroupName} value={this.state.groupName} autoFocus="autofocus" onChange={(e) => {this.editGroupName(e)} } onFocus={()=>{this.handleFocus()}} onBlur={()=>{this.handleBlur()}}/>
             <Icon type="uf-close-c" onClick={ this.clearInput.bind(this) }></Icon>
           </span>
           <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
@@ -283,13 +283,13 @@ class ManageGroup extends Component {
       </div>;
     }
     return connectDragSource(connectDropTarget(
-      <div>
-        <div id={_id} style={{ ...style, opacity }}>
+      <div className={groupArea}>
+        <section id={_id} style={{ ...opacity }} className={this.state.selectedBackClass?selected_Back_Class:""}>
           { groupTitle }
           <div>
             <WidgetList index={index} data={manageData.children}  />
           </div>
-        </div>
+        </section>
         <div className={addBtn}>
           <button className={`'btn' ${addGroupBtn}`} onClick={()=>{this.addGroupFn(index)}}><Icon type="uf-plus"></Icon>添加组</button>
         </div>

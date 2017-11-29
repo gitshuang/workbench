@@ -20,12 +20,6 @@ import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions } = manageActions;
 
-const style = {
-  marginBottom: '.5rem',
-  backgroundColor: 'white',
-  cursor: 'move'
-};
-
 const type='item';
 
 const itemSource = {
@@ -229,7 +223,7 @@ class WidgeFileItem extends Component {
     const { connectDragSource, connectDropTarget,isDragging } = this.props;
     const opacity = isDragging ? 0 : 1;
     return connectDragSource(connectDropTarget(
-      <li className={widgetItem} style={{...style, opacity }} onClick={this.props.onClick}>
+      <li className={widgetItem} style={{...opacity }} onClick={this.props.onClick}>
         <div className={title}>
           <div className={[title_left,file_icon].join(' ')}></div>
           <div className={title_right}> {da.widgetName} </div>
