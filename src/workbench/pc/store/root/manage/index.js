@@ -265,14 +265,41 @@ const reducer = handleActions({
       isEdit: true,
     }
   },
-  [addFolder]: (state, { payload: groupIndex }) => {
+  [addFolder]: (state, { payload: {groupIndex,id,preParentId,preType,afterId,parentId,afterType} }) => {
     const { manageList } = state;
+    if(groupIndex === ""){
+      groupIndex = manageList.findIndex(function(value, index, arr) {
+        return value.widgetId === parentId;
+      });
+    }
     const group = manageList[groupIndex];
-    const newId = guid()
+    const newId = guid();
+
+    const newdefaultFolder = {
+      type: 2,
+      widgetName:"文件夹",
+      children:[],
+    };
     group.children = group.children.concat({
-      ...defaultFolder,
+      ...newdefaultFolder,
       widgetId: newId,
     });
+    if(typeof afterId !== "undefined"){
+      let dataPre = findById(manageList,id);
+      let dataAfter = findById(manageList,afterId);
+      let groupData = findById(manageList,newId);
+      groupData.children.push(dataPre);
+      groupData.children.push(dataAfter);
+      if(preParentId !== parentId){
+        let dataPreParent = findById(manageList,preParentId);
+        let dataAfterParent = findById(manageList,parentId);
+        dataPreParent.children.splice(dataPreParent.children.indexOf(dataPre),1);
+        dataAfterParent.children.splice(dataAfterParent.children.indexOf(dataAfter),1);
+      }else{
+        group.children.splice(group.children.indexOf(dataPre),1);
+        group.children.splice(group.children.indexOf(dataAfter),1);
+      }
+    }
     manageList.splice(groupIndex, 1, {
       ...group,
     });

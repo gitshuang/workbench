@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DragDropContext } from 'react-dnd';
+import { DragDropContext,DragSource, DropTarget  } from 'react-dnd';
 import Modal from 'bee-modal';
 import Button from 'bee-button';
 import WidgetItem from 'containers/manageWidgetList/widgetItem';
@@ -11,6 +11,47 @@ import manageActions from 'store/root/manage/actions';
 
 const {moveServe,closeFolder } = manageActions;
 
+const type='item';
+
+const itemSource = {
+  beginDrag(props) {
+    return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
+  },
+  endDrag(props, monitor, component){
+    return monitor.getClientOffset();
+  }
+
+};
+
+
+const itemTarget = {
+  //hover 悬浮调用 drop落在目标上时调用
+  hover(props, monitor, component){
+    return monitor.getClientOffset();
+  },
+  drop(props, monitor) {
+    const draggedId = monitor.getItem().id;
+    //const previousParentId = monitor.getItem().parentId;
+
+    if (draggedId !== props.id) {
+      //props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
+    }
+  }
+};
+
+function collectSource(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
+
+
+function collectTaget(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
+}
 
 @connect(
     mapStateToProps(
@@ -52,20 +93,27 @@ class ManageFolderDialog extends Component {
             return (
                 <WidgetItem { ...props }/>
             );
-        })
-        return (
+        });
+      const { connectDragSource, connectDropTarget,isDragging } = this.props;
+      const opacity = isDragging ? 0 : 1;
+
+      return connectDropTarget(
+            <div>
             <Modal show={folderModalDisplay} onHide={closeFolder} >
-        <Modal.Header>
-          <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className={content} >
-            { list }
-          </div>
-        </Modal.Body>
-      </Modal>
+              <div className={`targetModal`}>
+              <Modal.Header>
+                <Modal.Title>{title}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className={content} >
+                  { list }
+                </div>ßß
+              </Modal.Body>
+            </div>
+            </Modal>
+            </div>
         );
     }
 }
 
-export default ManageFolderDialog;
+export default  DropTarget(type,itemTarget,collectTaget)(ManageFolderDialog);

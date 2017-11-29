@@ -14,7 +14,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions } = manageActions;
+const {deleteFolder, renameFolder,addFolder, setFolderEdit,selectListActions,selectGroupActions } = manageActions;
 import {
   widgetItem,
   title,
@@ -32,20 +32,33 @@ const type='item';
 
 const itemSource = {
   beginDrag(props) {
+    timestamp=new Date().getTime();
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
+  },
+
+  endDrag(props, monitor, component){
+    return monitor.getClientOffset();
   }
 };
 
 
 const itemTarget = {
   //hover 悬浮调用 drop落在目标上时调用
+  hover(props, monitor){
+
+  },
   drop(props, monitor) {
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
 
     if (draggedId !== props.id) {
-      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
+      if(new Date().getTime() - timestamp > 1500 && preType === 3 && props.data.type === 3){
+        //放上去停留大于1.5s添加文件夹
+        props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
+      }else {
+        props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
+      }
     }
   }
 };
@@ -95,7 +108,8 @@ const widgetStyle = [
     deleteFolder,
     renameFolder,
     setFolderEdit,
-    selectListActions,selectGroupActions
+    selectListActions,selectGroupActions,
+    addFolder
   }
 )
 class WidgetItem extends Component {
