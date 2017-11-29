@@ -130,13 +130,9 @@ export function post(oriUrl, oriParams = {}) {
     options: optionsMaker,
     url,
   } = fetchTools;
-  const data = params(oriParams);
+  const data = JSON.stringify(oriParams);
   const options = optionsMaker('post');
-
-  if (data) {
-    options.body = data;
-  }
-
+  options.body = `data=${data}`;
   return fetch(url(oriUrl), options);
 }
 
