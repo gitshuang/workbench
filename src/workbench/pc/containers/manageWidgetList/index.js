@@ -19,7 +19,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder } = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 @connect(
@@ -35,7 +35,8 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
     deleteFolder,
     renameFolder,
     setFolderEdit,
-    moveServe
+    moveServe,
+    addFolder
   }
 )
 class WidgetList extends Component {
@@ -68,6 +69,11 @@ class WidgetList extends Component {
     let data = {id,preParentId,preType,afterId,parentId,afterType}
     const { moveServe } = this.props;
     moveServe(data);
+  }
+  addFolderDrag = (groupIndex,id,preParentId, preType,afterId,parentId,afterType) => {
+    let data = {groupIndex,id,preParentId, preType,afterId,parentId,afterType}
+    const { addFolder } = this.props;
+    addFolder(data);
   }
 
   widgeOnclick = (e,da) => {
@@ -130,6 +136,7 @@ class WidgetList extends Component {
                 propsIndex={index}
                 type={type}
                 moveItemDrag={this.moveItemDrag}
+                addFolderDrag={this.addFolderDrag}
               />
             );
         }
