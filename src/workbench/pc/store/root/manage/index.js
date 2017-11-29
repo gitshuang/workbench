@@ -64,7 +64,7 @@ const findTreeById = (data, curId) => {
 }
 
 const defaultGroup = {
-  widgetName: '默认分组',
+  widgetName: '',
   type: 1,
   children: [],
 };
@@ -200,6 +200,7 @@ const reducer = handleActions({
       ...defaultGroup,
       widgetId: guid(),
     });
+    debugger;
     return{
       ...state,
       manageList: [...manageList],

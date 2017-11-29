@@ -258,7 +258,7 @@ class ManageGroup extends Component {
     const opacity = isDragging ? 0 : 1;
     let _id = manageData.widgetId + "_" + index;
     let groupTitle = null;
-    if(this.state.editFlag) {
+    if(this.state.editFlag || manageData.widgetName=="") {
       groupTitle = <div className={WidgetTitle + ' um-box-justify'}>
         <div>
           <span>
