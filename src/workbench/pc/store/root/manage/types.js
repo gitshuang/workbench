@@ -24,4 +24,6 @@ export default createTypes(
   'OPEN_FOLDER',
   'CLOSE_FOLDER',
   'GET_SELECT_WIDGET_LIST',
+  'OPEN_BATCH_MOVE',
+  'CLOSE_BATCH_MOVE',
 );

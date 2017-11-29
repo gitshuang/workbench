@@ -16,15 +16,15 @@ export const getProductInfo = (
 export const getTitleService = serveCode => get('/serve/getRelationServesAndUsers', { serveCode });
 export const setPinCancel = serveCode => post('/widget/deleteByServeCode', { serveCode });
 export const setPinAdd = (
-  icon,
-  parentId,
   serveCode,
-  templateId,
   widgetName,
+  parentId,
+  icon,
+  templateId,
 ) => post('/widget/create', {
   icon,
   parentId,
-  serviceCode,
+  serveCode,
   templateId,
   type: 3,
   widgetName,

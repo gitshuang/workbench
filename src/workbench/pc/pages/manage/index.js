@@ -14,16 +14,15 @@ import manageActions from 'store/root/manage/actions';
 import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
 import ManageFolderDialog from 'containers/manageFolderDialog';
-
-import MoveToGroup from 'components/moveToGroup';
+import ManageBatchMoveDialog from 'containers/manageBatchMoveDialog';
 
 import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
 
-import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,pin,um_content,um_footer} from './style.css';
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,um_content,um_footer} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const { setManageList,getManageList,batchDelect,batchMove,moveGroup } = manageActions;
+const { setManageList,getManageList,batchDelect,openBatchMove,moveGroup } = manageActions;
 
 @withRouter
 @connect(
@@ -42,7 +41,7 @@ const { setManageList,getManageList,batchDelect,batchMove,moveGroup } = manageAc
     setManageList,
     getManageList,
     batchDelect,
-    batchMove,
+    openBatchMove,
     moveGroup,
   }
 )
@@ -50,24 +49,10 @@ const { setManageList,getManageList,batchDelect,batchMove,moveGroup } = manageAc
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state ={
-      isOpenMove: false,
+    const { manageList } = props;
+    this.state = {
       isGroup: false,
-      // TODO: 这部分数据应该是从managelist里面算出来的
-      moveData: [
-        {
-          "type": "1",
-          "widgetId": "f1",
-          "widgetName": "分组一",
-          "children": []
-        },
-        {
-          "type": "1",
-          "widgetId": "f2",
-          "widgetName": "分组二",
-          "children": []
-        }
-      ],
+      moveData: [],
     };
   }
   moveGroupDrag = (id, afterId) => {
@@ -87,6 +72,8 @@ class Home extends Component {
         requestError(payload);
       }
       requestSuccess();
+      this.setState({
+      })
     });
   }
   save = () => {
@@ -114,52 +101,13 @@ class Home extends Component {
   goBack = () => {
     this.props.history.goBack();
   }
-  openGroupTo = () => {
-    this.setState({
-      isOpenMove: true
-    });
-  }
   openDeleteMark = () => {
     const { batchDelect } = this.props;
     batchDelect();
   }
-  moveAddGroup = () => {
-    this.setState({
-      isGroup: true
-    });
-  }
-  moveConfirmFn = (index,key) => {
-    const { batchMove } = this.props;
-    batchMove(index);
-    this.moveCancelFn();
-  }
-
-  moveCancelFn = () => {
-    this.setState({
-      isOpenMove: false
-    })
-  }
-  addNewGroup = (name,id) => {
-    const { setAddGroup, requestError } = this.props;
-    let newGroup = {
-      id: id,
-      name: name,
-    };
-    setAddGroup().then( ({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      }
-      let menuData = this.state.menuData;
-      menuData.push(newGroup);
-      this.setState({
-        menuData: menuData,
-      });
-    });
-  }
-  groupCancelFn =()=> {
-    this.setState({
-      isGroup: false,
-    });
+  openGroupTo = () => {
+    const { openBatchMove } = this.props;
+    openBatchMove();
   }
   renderContent() {
     let { manageList } = this.props;
@@ -206,21 +154,7 @@ class Home extends Component {
           </div>
         </div>
         <ManageFolderDialog />
-        {
-          this.state.isOpenMove ? (
-            <div className={pin +" um-css3-center"}>
-              <MoveToGroup
-                data={this.state.moveData}
-                isGroup={this.state.isGroup}
-                addGroup={this.moveAddGroup}
-                confirmFn={this.moveConfirmFn}
-                cancelFn={this.moveCancelFn}
-                addNewGroup={this.addNewGroup }
-                groupCancelFn={this.groupCancelFn}
-              />
-            </div>
-          ): null
-        }
+        <ManageBatchMoveDialog />
       </div>
     );
   }

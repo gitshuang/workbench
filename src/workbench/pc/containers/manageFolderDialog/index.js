@@ -6,7 +6,6 @@ import WidgetItem from 'containers/manageWidgetList/widgetItem';
 import { content } from './style.css';
 import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
-import homeActions from 'store/root/home/actions';
 import manageActions from 'store/root/manage/actions';
 
 const {moveServe,closeFolder } = manageActions;

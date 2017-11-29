@@ -30,6 +30,8 @@ const {
   OPEN_FOLDER,
   CLOSE_FOLDER,
   GET_SELECT_WIDGET_LIST,
+  OPEN_BATCH_MOVE,
+  CLOSE_BATCH_MOVE,
   } = types;
 
 const actions = createActions(
@@ -61,5 +63,7 @@ const actions = createActions(
   MOVE_SERVE,
   OPEN_FOLDER,
   CLOSE_FOLDER,
+  OPEN_BATCH_MOVE,
+  CLOSE_BATCH_MOVE,
 );
 export default actions;
