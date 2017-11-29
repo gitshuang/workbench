@@ -119,9 +119,10 @@ class ManageGroup extends Component {
     }
   }
   componentDidMount () {
-    const {selectGroup} = this.props;
+    const {selectGroup,manageData} = this.props;
     this.setState({
-      selectGroup
+      selectGroup,
+      groupName: manageData.widgetName
     });
   }
   componentWillReceiveProps(nextProps){
@@ -150,13 +151,12 @@ class ManageGroup extends Component {
   renameGroupCancel = (index) =>{
     this.setState({
       editFlag: false,
-      groupName:""
     })
   }
   // 点击按钮执行 action   重新构造
   renameGroupFn =(index) =>{
     const { renameGroup } = this.props;
-    let groupName = this.state.groupName;
+    let groupName = this.state.groupName ? this.state.groupName : "默认分组";
     let param = {
       index: index,
       name: groupName

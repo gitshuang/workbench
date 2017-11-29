@@ -104,7 +104,6 @@ const reducer = handleActions({
     state.manageList.map(function(da,i){
       da.children.push(data);
     })
-    debugger;
     let newManageList = JSON.parse(JSON.stringify(state.manageList));
     return{
       ...state,
@@ -200,7 +199,6 @@ const reducer = handleActions({
       ...defaultGroup,
       widgetId: guid(),
     });
-    debugger;
     return{
       ...state,
       manageList: [...manageList],
