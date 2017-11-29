@@ -10,8 +10,8 @@ import Checkbox from 'bee-checkbox';
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';
 import PopDialog from 'components/pop';
-import Icon1 from 'components/icon';
-import Icon from 'bee-icon';
+import Icon from 'components/icon';
+import Icon1 from 'bee-icon';
 
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
@@ -216,8 +216,8 @@ class WidgeFileItem extends Component {
         <Checkbox className="test" checked={checkType} onChange={ this.onHandChange } />
         </div>
       <div className={`${editDele} ${clearfix}`}>
-        <div onClick={this.fileEdit}><Icon1 type="record" /></div>
-        <div onClick={this.fileDele}><Icon type="uf-del" /></div>
+        <div onClick={this.fileEdit}><Icon type="record" /></div>
+        <div onClick={this.fileDele}><Icon type="dustbin" /></div>
       </div>
     </div>
     const { connectDragSource, connectDropTarget,isDragging } = this.props;

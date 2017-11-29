@@ -8,10 +8,10 @@
   font-family: "Microsoft Yahei", STHeiTi, Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
 }
 .breadcrumbClass ol li {
-  color:#888;
+  color:#9a9a9a;
 }
 .breadcrumbClass a {
-  color:#888;
+  color:#9a9a9a;
 }
 .breadcrumbClass ol>li+li:before {
   content: "\003e";
@@ -30,5 +30,14 @@
 }
 .breadcrumbBack {
   margin:0 10px;
-  color:#888;
+  color:#9a9a9a;
+}
+.breadcrumbClass :global(.u-breadcrumb){
+  margin-top: -3px;
+}
+.breadcrumbClass :global(.u-breadcrumb) li:last-child{
+  color:#4A515D;
+}
+.breadcrumbClass :global(.u-breadcrumb>li+li:before){
+  color:#666;
 }

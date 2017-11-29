@@ -199,7 +199,6 @@ class WidgetItem extends Component {
     return connectDragSource(connectDropTarget(
       <li className={widgetItem} style={{...widgetStyle[size],...opacity }} >
         <div className={title}>
-          <div className={title_left}><Icon type="uf-add-c-o" /></div>
           <div className={title_right}>{widgetName}</div>
         </div>
         <div className={widgetItemCont}>
@@ -209,13 +208,13 @@ class WidgetItem extends Component {
         <div className={`${clearfix} ${footer}`}>
           <div><Checkbox className="test" checked={checkType} onChange={ this.onHandChange }/></div>
           <div className={`${editDele} ${clearfix}`}>
-            <div onClick={this.fileDele}><Icon1 type="uf-del" /></div>
+            <div onClick={this.fileDele}><Icon type="dustbin" /></div>
           </div>
         </div>
 
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={this.props.data} btns={pop_btn} >
             <div className={pop_cont}>
-              <Icon type="uf-exc-t" />
+              <Icon1 type="uf-exc-t" />
               <span>您确认要删除服务此项?</span>
             </div>
         </PopDialog>

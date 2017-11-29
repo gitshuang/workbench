@@ -11,8 +11,8 @@ import manageActions from 'store/root/manage/actions';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import Button from 'bee-button';
-import Icon1 from 'components/icon';
-import Icon from 'bee-icon';
+import Icon from 'components/icon';
+import Icon1 from 'bee-icon';
 import WidgetList from 'containers/manageWidgetList';
 import {WidgetTitle,addGroupBtn,addBtnContainer,complete,cancel,newGroupName,addBtn,groupArea,selected_Back_Class} from './style.css';
 import 'assets/style/iuapmobile.um.css';
@@ -239,7 +239,7 @@ class ManageGroup extends Component {
         overlay={menu1}
         animation="slide-up"
       >
-        <Icon type="uf-3dot-h" />
+        <Icon type="more" />
       </Dropdown>
     )
   }
@@ -263,7 +263,7 @@ class ManageGroup extends Component {
         <div>
           <span>
             <input className={newGroupName} value={this.state.groupName} autoFocus="autofocus" onChange={(e) => {this.editGroupName(e)} } onFocus={()=>{this.handleFocus()}} onBlur={()=>{this.handleBlur()}}/>
-            <Icon type="uf-close-c" onClick={ this.clearInput.bind(this) }></Icon>
+            <Icon1 type="uf-close-c" onClick={ this.clearInput.bind(this) }></Icon1>
           </span>
           <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
           <Button className={cancel} onClick={ ()=>{this.renameGroupCancel(index)} }>取消</Button>
@@ -276,8 +276,8 @@ class ManageGroup extends Component {
           <span>{manageData.widgetName}</span>
         </label>
         <div>
-          <Icon1 type="record" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
-          <Icon1 type="add-files" onClick={()=>{this.addFolderFn(index)}}/>
+          <Icon type="record" onClick={ ()=>{this.openRenameGroupFn(index)} }/>
+          <Icon type="add-files" onClick={()=>{this.addFolderFn(index)}}/>
           {this.renderDrop(index)}
         </div>
       </div>;
@@ -291,7 +291,7 @@ class ManageGroup extends Component {
           </div>
         </section>
         <div className={addBtn}>
-          <button className={`'btn' ${addGroupBtn}`} onClick={()=>{this.addGroupFn(index)}}><Icon type="uf-plus"></Icon>添加组</button>
+          <button className={`'btn' ${addGroupBtn}`} onClick={()=>{this.addGroupFn(index)}}><Icon type="add"></Icon>添加组</button>
         </div>
       </div>
     ));

@@ -55,8 +55,8 @@
 .title_right{
   -webkit-box-flex:1.0;
   -webkit-box-pack: start;
-  padding-left: 5px;
-  /*background: yellow;*/
+  padding-left: 10px;
+  color:#4A515D;
 }
 .widgetItem .content {
   position: relative;
@@ -137,7 +137,7 @@
   margin-left:11px;
 }
 .editDele>div:hover{
-  background:#ccc;
+  color:#E14C46;
 }
 .editDele :global(.iconfont){
   line-height:23px;
@@ -226,8 +226,15 @@
 }
 .addModule :global(.iconfont){
   font-size:30px;
-  color:#878B94;
+  color:#878b94;
   line-height:176px;
+}
+.addModule:hover :global(.iconfont){
+  color:#242D3B;
+}
+.addModule:hover{
+  background:rgba(255,255,255,0.4);
+  cursor:pointer;
 }
 .widgetList li{
   overflow:hidden;

@@ -34,10 +34,16 @@
 	line-height:26px;
 	color:rgba(74,81,93,1);
 }
-.addGroupBtn :global(.uf){
+.addGroupBtn:hover{
+	color:#E14C46;
+}
+.addGroupBtn :global(.iconfont){
 	font-size:16px;
 	color:#878b94;
-	padding-left:0;
+	margin:0 5px;
+}
+.addGroupBtn:hover :global(.iconfont){
+	color:#E14C46;
 }
 .WidgetTitle :global(.u-button){
 	height:22px;
@@ -68,6 +74,9 @@
 	color:#4A515D;
 	margin-right:23px;
 	font-weight: bold;
+}
+.WidgetTitle :global(.iconfont):hover{
+	color:#242D3B;
 }
 .WidgetTitle span{
 	position:relative;
