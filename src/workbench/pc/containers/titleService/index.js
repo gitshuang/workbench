@@ -102,7 +102,7 @@ class titleServiceContainer extends Component {
                   <div className={serviceIcon}>
                     <img src={serveIcon} className={uf_service} />
                   </div>
-                  <span className={serviceName}>{serveName}</span>
+                  <span className={serviceName} title={serveName}>{String(serveName).substring(0,3)+"..."}</span>
                 </li>
               )
             }
