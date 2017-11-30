@@ -8,8 +8,17 @@ import {
   file_icon,
   title_right,
   context,
+  file_num,
+  file_title_right,
+  widget_file_item
 } from './style.css'
 
+const style={
+  'position':'absolute',
+  'right':'8px',
+  'bottom':'8px',
+  'color':'#fff'
+}
 class FolderWidget extends Component {
   render() {
     const {
@@ -19,15 +28,18 @@ class FolderWidget extends Component {
     const {
       widgetName: name,
       children,
+      type
     } = data;
     return (
-      <li className={widgetItem} onClick={ clickHandler } >
+      <li className={`${widgetItem} ${type==2?widget_file_item:""}`} onClick={ clickHandler } >
         <div className={title}>
-          <div className={[title_left, file_icon].join(' ')}></div>
-          <div className={title_right}>{name}</div>
+          <div className={`${title_right} ${file_title_right}`}>{name}</div>
         </div>
-        <div className={[context, file_context].join(' ')} >
+        {/*<div className={[context, file_context].join(' ')} >
           { children.map(() => (<div></div>)).slice(0, 9) }
+        </div>*/}
+        <div className={file_num} style={style}>
+          ({children.length})
         </div>
       </li>
     )

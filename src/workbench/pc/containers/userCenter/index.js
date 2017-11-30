@@ -239,18 +239,6 @@ class UserInfoContainer extends Component {
               <Icon type="copyreader" onClick={this.handleClick.bind(this)}></Icon>
             </div>
           </div>
-          {/*<div className={userInfo}>
-            <ul className={clearfix}>
-              <li>
-                <div className={gloryValue}>{glory}</div>
-                <div className={gloryKey}>荣耀</div>
-              </li>
-              <li>
-                <div className={packetsValue}>{redPackets}</div>
-                <div className={packetsKey}>红包</div>
-              </li>
-            </ul>
-          </div>*/}
           <div className={userName}>{name}</div>
           <ul className={`${gloryIcon} ${clearfix}`}>
             <li>

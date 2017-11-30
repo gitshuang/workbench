@@ -230,13 +230,13 @@ class WidgeFileItem extends Component {
         </div>
         {/*<div name="file" className={[context,file_context].join(' ')}>
            { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) } 
-        </div> 
+        </div> */}
         {this.state.editShow ? edit : null }
         {this.state.editShow ? null : btns }
-        */}
-        <div className={file_num}>
+        
+        {/*<div className={file_num}>
           (3)
-        </div>
+        </div>*/}
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={da} btns={pop_btn} >
             <div className={pop_cont}>
               <Icon type="uf-exc-t" />

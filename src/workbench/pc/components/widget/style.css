@@ -12,7 +12,13 @@
   border-radius: 2px ;
   border:1px solid #DBDEE5;
   box-sizing: border-box;
-  overflow: auto;
+  // overflow: auto;
+}
+.widget_file_item{
+  background: url("assets/image/wgt/fileBackground.png") no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  border:none;
 }
 .widgetItem:after {
   content: '\20';
@@ -223,4 +229,15 @@
 }
 .footer>div:hover{
   background: #ccc;
+}
+// folder.js
+.widgetFileItem .file_num{
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  color:#fff;
+}
+.file_title_right{
+  margin:58px 0 0 26px;
+  color:#fff;
 }

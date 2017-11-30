@@ -5,7 +5,7 @@ import Breadcrumbs from 'components/breadcrumb';
 import Icon from 'components/icon';
 import { mapStateToProps } from '@u';
 import actions from 'store/root/work/actions';
-import { breadcrumbClass ,breadcrumb_menu} from './style.css';
+import { breadcrumbClass ,breadcrumb_menu,closeMenu,breadcrumb_tab} from './style.css';
 
 const {setExpandedSidebar} = actions;
 
@@ -32,26 +32,37 @@ class BreadcrumbContainer extends Component {
         super(props);
         this.state = {
             breadcrumbMenu:"",
+            breadcrumbTab:""
         }
         this.setExpended = this.setExpended.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
     }
 
     setExpended() {
         const {setExpandedSidebar, expandedSidebar} = this.props;
         setExpandedSidebar(!expandedSidebar);
         this.setState({
-          breadcrumbMenu:breadcrumb_menu
+          breadcrumbMenu:breadcrumb_menu,
+          breadcrumbTab:breadcrumb_tab
         })
     }
 
+    closeMenu(){
+        const {setExpandedSidebar, expandedSidebar} = this.props;
+        setExpandedSidebar(!expandedSidebar);
+        this.setState({
+          breadcrumbMenu:"",
+          breadcrumbTab:""
+        })
+    }
     render() {
       const { withSidebar } = this.props;
 
       return (
         <div className={breadcrumbClass}>
-            <section className={this.state.breadcrumbMenu?breadcrumb_menu:""}>菜单<Icon type="error3"></Icon></section>
+            <section className={this.state.breadcrumbMenu?breadcrumb_menu:""}>菜单<Icon type="error3" className={closeMenu} onClick={this.closeMenu}></Icon></section>
           {
-            withSidebar ? (<Icon type="tabulation" onClick={this.setExpended} />) : null
+            withSidebar ? (<Icon type="tabulation" className={this.state.breadcrumbTab?breadcrumb_tab:""} onClick={this.setExpended} />) : null
           }
           <Breadcrumbs data={this.props.brm}/>
         </div>

@@ -36,12 +36,13 @@
 }
 :global(.lebra-navbar-left-content){
   position: relative;
+  display:block;
+  width:60px;
+  height:28px;
+  background:url(assets/image/wgt/yonyou_logo.svg) no-repeat center;
 }
 :global(.lebra-navbar-left-content) img{
-  display:block;
-  margin-left: -100px;
-  margin-top: 5px;
-  // max-height:27px
+  
 }
 :global(.lebra-navbar-title){
   -webkit-box-pack: center;

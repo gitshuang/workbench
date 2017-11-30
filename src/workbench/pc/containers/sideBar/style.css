@@ -41,3 +41,9 @@
 	height:30px;
 	line-height: 30px;
 }
+:global(.u-menu-submenu-selected){
+	background:#fff;
+}
+:global(.u-menu-submenu-active):hover{
+	background:#fff;
+}
