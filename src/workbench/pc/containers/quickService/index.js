@@ -50,7 +50,7 @@ class QuickServiceContainer extends Component {
             }) => (
               <div key={applicationCode} className={contentDiv} onClick={this.openApp.bind(this, applicationCode)}>
                 <li><img src={applicationIcon}/></li>
-                <div className={content}>{applicationName}</div>
+                <div className={content} title={applicationName}>{String(applicationName).substring(0,3)+"..."}</div>
               </div>
             ))
           }
