@@ -29,7 +29,7 @@ import {
 } from './style.css'
 
 const type='item';
-
+let timestamp;
 const itemSource = {
   beginDrag(props) {
     timestamp=new Date().getTime();
