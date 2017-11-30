@@ -11,6 +11,7 @@ module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     entry: {
       main: [
+        'whatwg-fetch',
         './src/workbench/pc/main.js',
       ],
     },
