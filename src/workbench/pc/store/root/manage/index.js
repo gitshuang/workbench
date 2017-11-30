@@ -67,7 +67,11 @@ const findTreeById = (data, curId) => {
   }
   return result;
 }
-
+// 定义上下移动数组
+const swapItems = function(arr, index1, index2) {
+  arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+  return arr;
+};
 const defaultGroup = {
   widgetName: '',
   type: 1,
@@ -269,27 +273,19 @@ const reducer = handleActions({
   },
   [moveTopGroup]: (state, { payload: index }) => {
     let manageList = state.manageList;
-    const curr = manageList[index];
-    const newList =  manageList.filter((item,i) => {
-      return index !== i;
-    });
-    newList.unshift(curr);
+    const newList = swapItems(manageList, index, index - 1);
     return{
       ...state,
-      manageList: newList,
+      manageList: [...newList],
       isEdit: true,
     }
   },
   [moveBottomGroup]: (state, { payload: index }) => {
     let manageList = state.manageList;
-    const curr = manageList[index];
-    const newList =  manageList.filter((item,i) => {
-      return index !== i;
-    });
-    newList.unshift(curr);
+    const newList = swapItems(manageList, index, index + 1);
     return{
       ...state,
-      manageList: newList,
+      manageList: [...newList],
       isEdit: true,
     }
   },
