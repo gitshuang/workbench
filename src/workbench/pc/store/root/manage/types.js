@@ -13,6 +13,8 @@ export default createTypes(
   'RENAME_GROUP',
   'MOVE_GROUP',
   'STICK_GROUP',
+  'MOVE_TOP_GROUP',
+  'MOVE_BOTTOM_GROUP',
   'ADD_FOLDER',
   'SET_FOLDER_EDIT',
   'DELETE_FOLDER',

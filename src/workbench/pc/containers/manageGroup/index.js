@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
-
+import PopDialog from 'components/pop';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import Button from 'bee-button';
@@ -26,7 +26,8 @@ const {
   delectGroup,
   renameGroup,
   moveGroup,
-  stickGroup,
+  moveTopGroup,
+  moveBottomGroup,
   addFolder,
   selectListActions,
   selectGroupActions,
@@ -82,7 +83,8 @@ function collectTaget(connect, monitor) {
     delectGroup,
     renameGroup,
     moveGroup,
-    stickGroup,
+    moveTopGroup,
+    moveBottomGroup,
     addFolder,
     selectListActions,
     selectGroupActions,
@@ -103,7 +105,8 @@ class ManageGroup extends Component {
       groupName:  "",
       editFlag: false,
       selectGroup : [],
-      selectedBackClass:""
+      selectedBackClass:"",
+      showModal: false,
     }
   }
   componentDidMount () {
@@ -125,10 +128,6 @@ class ManageGroup extends Component {
     const { addFolder } = this.props;
     const index = {groupIndex:data};
     addFolder(index);
-  }
-  // 移动分组
-  moveGroupFn =() => {
-
   }
   // 打开编辑分组形态
   openRenameGroupFn =(index) =>{
@@ -196,43 +195,78 @@ class ManageGroup extends Component {
     selectGroupActions(selectGroup);
   }
 
+  popOpen = () => {
+    this.setState({
+      showModal: true
+    });
+  }
+  popClose = () => {
+    this.setState({
+      showModal: false
+    });
+  }
 
-
-
-
-  // 置顶分组
-  stickFn =(index)=>{
-    const { stickGroup } = this.props;
-    stickGroup(index);
+  // 上移分组
+  moveTopFn =(index)=>{
+    const { moveTopGroup } = this.props;
+    moveTopGroup(index);
+  }
+  // 下移分组
+  moveBottomFn =(index) => {
+    const { moveBottomGroup } = this.props;
+    moveBottomGroup(index);
   }
   // 删除群组
-  delectGroupFn =(index) =>{
+  delectGroupFn =(data) =>{
     const { delectGroup } = this.props;
-    delectGroup(index);
+    delectGroup(data.index);
   }
   // 添加新分组
   addGroupFn =(index) =>{
     const { addGroup } = this.props;
     addGroup(index);
   }
-
-  //
+  // menu组件 方法
   onDropSelect =(e, index) =>{
     if( e.key == 1 ){
-      this.stickFn(index);
+      this.moveTopFn(index);
+    }else if( e.key == 2 ){
+      this.moveBottomFn(index);
     }else{
-      this.delectGroupFn(index);
+      this.popOpen();
     }
   }
 
   renderDrop =(index) => {
-    const menu1 = (
-      <Menu
-        onClick={(e) => {this.onDropSelect(e,index)} }>
-        <MenuItem key="1">置顶</MenuItem>
-        <MenuItem key="2">删除</MenuItem>
-      </Menu>
-    );
+    const {manageList} = this.props;
+    let menu1;
+    if(index == 0){
+      menu1 = (
+        <Menu
+          onClick={(e) => {this.onDropSelect(e,index)} }>
+          <MenuItem key="1">下移</MenuItem>
+          <MenuItem key="3">删除</MenuItem>
+        </Menu>
+      );
+    }else if( index == manageList.length - 1 ){
+      menu1 = (
+        <Menu
+          onClick={(e) => {this.onDropSelect(e,index)} }>
+          <MenuItem key="2">上移</MenuItem>
+          <MenuItem key="3">删除</MenuItem>
+        </Menu>
+      );
+    }else{
+      menu1 = (
+        <Menu
+          onClick={(e) => {this.onDropSelect(e,index)} }>
+          <MenuItem key="1">上移</MenuItem>
+          <MenuItem key="2">下移</MenuItem>
+          <MenuItem key="3">删除</MenuItem>
+        </Menu>
+      );
+    }
+
     return (
       <Dropdown
         trigger={['click']}
@@ -282,6 +316,11 @@ class ManageGroup extends Component {
         </div>
       </div>;
     }
+
+    const pop_btn = [
+      {label:"确认",fun:this.delectGroupFn,className:""},
+      {label:"取消",fun:this.popClose,className:""}
+    ]
     return connectDragSource(connectDropTarget(
       <div className={groupArea}>
         <section id={_id} style={{ ...opacity }} className={this.state.selectedBackClass?selected_Back_Class:""}>
@@ -293,6 +332,11 @@ class ManageGroup extends Component {
         <div className={addBtn}>
           <button className={`'btn' ${addGroupBtn}`} onClick={()=>{this.addGroupFn(index)}}><Icon type="add"></Icon>添加组</button>
         </div>
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } btns={pop_btn} data={{index:index}}>
+          <div>
+            <span>您确认要批量删除吗?</span>
+          </div>
+        </PopDialog>
       </div>
     ));
   }
