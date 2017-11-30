@@ -123,7 +123,8 @@ class ManageGroup extends Component {
   addFolderFn = (data)=> {
     // alert("添加文件夹功能");
     const { addFolder } = this.props;
-    addFolder(data);
+    const index = {groupIndex:data};
+    addFolder(index);
   }
   // 移动分组
   moveGroupFn =() => {

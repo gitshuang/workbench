@@ -56,7 +56,8 @@ class WidgetList extends Component {
   // 添加文件夹
   addFolderFn = (data)=> {
     const { addFolder } = this.props;
-    addFolder(data);
+    const index = {groupIndex:data};
+    addFolder(index);
   }
 
   openSelectWidget = ()=> {
