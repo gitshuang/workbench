@@ -24,7 +24,23 @@
 	background:transparent;
 }
 .umBoxJustify button:hover{
+	color:#4A515D;
+	background:rgba(255,255,255,0.6);
+	border:none;
+}
+button:disabled,:global(.u-button[disabled]:hover){
+	background:rgba(255,255,255,0.2);
+    color:#fff;
+    border:none;
+}
+.umBoxJustify .preserve{
 	background:rgba(225,76,70,1);
+	border:none;
+}
+.umBoxJustify .preserve:hover{
+	background:rgba(208,54,48,1);
+	border:none;
+	color:#fff;
 }
 .umBoxJustify div{
 	position:absolute;

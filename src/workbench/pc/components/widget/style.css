@@ -4,13 +4,13 @@
   /*margin-top: 30px;*/
   margin-right: 10px;
   margin-bottom: 10px;
-  /*box-shadow: 0 0 20px #b8c1c6;*/
+  box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
   display: block;
   width:176px;
   height:176px;
   background:rgba(255,255,255,1);
   border-radius: 2px ;
-  border:1px solid #F1F1F1;
+  border:1px solid #DBDEE5;
   box-sizing: border-box;
   overflow: auto;
 }

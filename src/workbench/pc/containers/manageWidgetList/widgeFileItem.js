@@ -4,7 +4,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { widgetList, widgetItem, title, file_context, title_left,
   file_icon, title_right, context, bottom ,footer,
-title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix} from './style.css'
+title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix,widgetFileItem,file_title_right} from './style.css'
 import WidgetItem from './widgetItem';
 import Checkbox from 'bee-checkbox';
 import FormControl from 'bee-form-control';
@@ -223,16 +223,17 @@ class WidgeFileItem extends Component {
     const { connectDragSource, connectDropTarget,isDragging } = this.props;
     const opacity = isDragging ? 0 : 1;
     return connectDragSource(connectDropTarget(
-      <li className={widgetItem} style={{...opacity }} onClick={this.props.onClick}>
+      <li className={`${widgetItem} ${widgetFileItem}`} style={{...opacity }} onClick={this.props.onClick}>
         <div className={title}>
           <div className={[title_left,file_icon].join(' ')}></div>
-          <div className={title_right}> {da.widgetName} </div>
+          <div className={`${title_right} ${file_title_right}`}> {da.widgetName} </div>
         </div>
-        <div name="file" className={[context,file_context].join(' ')}>
-          {/* { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) } */}
-        </div>
+        {/*<div name="file" className={[context,file_context].join(' ')}>
+           { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) } 
+        </div> 
         {this.state.editShow ? edit : null }
         {this.state.editShow ? null : btns }
+        */}
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={da} btns={pop_btn} >
             <div className={pop_cont}>
               <Icon type="uf-exc-t" />

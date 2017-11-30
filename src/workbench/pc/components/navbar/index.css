@@ -35,7 +35,13 @@
   padding:8px 0 8px 15px;
 }
 :global(.lebra-navbar-left-content){
-  cursor: pointer;
+  position: relative;
+}
+:global(.lebra-navbar-left-content) img{
+  display:block;
+  margin-left: -100px;
+  margin-top: 5px;
+  // max-height:27px
 }
 :global(.lebra-navbar-title){
   -webkit-box-pack: center;
@@ -55,6 +61,8 @@
   justify-content: flex-end;
   font-size: 16px;
   margin-right: 15px;
+  background:url("assets/image/wgt/背景图片.png") no-repeat;
+  background-position: right;
 }
 :global(.lebra-navbar-left-icon){
   padding:4px 0;

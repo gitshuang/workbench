@@ -15,7 +15,8 @@
     text-align: left;
 }
 .WidgetCont{
-
+    background: url("assets/image/wgt/背景图片2.png") no-repeat;
+    background-position: 100% 100%;
 }
 
 .edit_cont{
