@@ -23,6 +23,7 @@
   -webkit-box-flex : 1;
   -webkit-box-align:center;
   -webkit-box-pack:center;
+  border:none;
 }
 .widgetItem:after {
   content: '\20';
