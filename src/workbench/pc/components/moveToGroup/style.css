@@ -20,6 +20,13 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
+.borderBox::-webkit-scrollbar{
+    width: 8px;
+}
+.borderBox::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    background-color: #757575;
+}
 .borderBox :global(.u-menu){
   border:none;
   box-shadow: none;
@@ -35,13 +42,13 @@
 }
 .borderBox li p{
   padding-left: 30px;
-  line-height: 40px;
+  line-height: 25px;
   position: relative;
   font-size:14px;
 }
 .borderBox li p:hover{
   background:rgba(238,238,238,1);
-  font-weight: 600;
+  color:#E14C46;
 }
 
 .borderBox li div{
@@ -83,6 +90,7 @@
   line-height:21px;
   padding: 0 12px;
   border-radius: 2px ;
+  background:#fff;
 }
 .footer :global(.u-button-danger[disabled]){
   cursor: not-allowed;
@@ -93,6 +101,9 @@
   color: rgba(74,81,93,1);
   background-color: #e0e0e0;
   border: none;
+}
+.footer :global(.u-button-danger){
+  background:#E14C46;
 }
 .saveBtn{
   margin-right: 5px;

@@ -10,6 +10,7 @@ import workActions from 'store/root/work/actions';
 /*  comp */
 import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee-button';
+import Icon from 'components/Icon';
 /*  style */
 import 'assets/style/iuapmobile.um.css'
 import {
@@ -128,7 +129,7 @@ class Pin extends Component {
       <div className={`${pin} um-css3-hc`} >
         <div className={`${header} um-box`}>
           <div>
-            <img src="../" alt="" />
+            <Icon type="yy-clud"></Icon>
           </div>
           <p>工作页名称</p>
         </div>

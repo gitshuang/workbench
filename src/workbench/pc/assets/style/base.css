@@ -37,3 +37,6 @@ body {
   margin: 0 auto;
   top: 60px;
 }
+.u-modal-open .u-modal{
+  overflow-y: hidden;
+}

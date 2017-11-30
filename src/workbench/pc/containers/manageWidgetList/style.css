@@ -16,13 +16,14 @@
   cursor: move;
 }
 .widgetFileItem{
-  background: url("assets/image/wgt/首页文件夹.png") no-repeat;
+  background: url("assets/image/wgt/fileBackground.png") no-repeat;
   background-size: 100% 100%;
   background-position: center;
-  display: -webkit-box;
-  -webkit-box-flex : 1;
-  -webkit-box-align:center;
-  -webkit-box-pack:center;
+  // display: -webkit-box;
+  // -webkit-box-flex : 1;
+  // -webkit-box-align:center;
+  // -webkit-box-pack:center;
+  position:relative;
   border:none;
 }
 .widgetItem:after {
@@ -69,8 +70,7 @@
   color:#4A515D;
 }
 .file_title_right{
-  // padding-top:55px;
-  margin-left:-82px;
+  margin:58px 0 0 -17px;
   color:#fff;
 }
 .widgetItem .content {
@@ -250,4 +250,10 @@
 }
 .widgetList li{
   overflow:hidden;
+}
+.file_num{
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  color:#fff;
 }
