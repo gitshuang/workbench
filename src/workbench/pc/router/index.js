@@ -2,6 +2,7 @@ import Home from 'pages/home';
 import Work from 'pages/work';
 import Application from 'pages/application';
 import Manage from 'pages/manage';
+import Page404 from 'pages/404';
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
     path: '/manage',
     component: Manage,
   },
+  {
+    path: '/404',
+    component:Page404
+  }
 ];
 
 export default routes;

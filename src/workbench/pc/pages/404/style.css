@@ -1,0 +1,61 @@
+.workArea {
+  flex: 1;
+  display: flex;
+}
+.wrap :global(.icon-dingzhi.active){
+  color: red;
+}
+.wrap :global(.um-content) {
+  flex-direction: column;
+  display: flex;
+}
+.sideBarArea {
+  width: 200px;
+}
+.contentArea {
+  flex: 1;
+}
+.hasTab {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+}
+.tabArea {
+  height: 48px;
+}
+.wrap .page404_area{
+  background:url(assets/image/wgt/404.png) no-repeat 50% -50%;
+  position: relative;
+}
+.remindWord{
+  height:22px; 
+  font-size:22px;
+  font-family:MicrosoftYaHei;
+  color:rgba(74,81,93,1);
+  line-height:22px;
+  margin-bottom: 15px;
+}
+.wrap .page404_area :global(.u-button){
+  width:80px;
+  height:28px;
+  border-color: #D9D9D9;
+  color:#4A515D;
+  text-align: center;
+  line-height: 28px;
+  padding:0;
+  font-size:12px;
+  margin-left:50px;
+  position:absolute;
+  left:50%;
+  margin-left: -40px;
+}
+.wrap .page404_area :global(.u-button):hover{
+  background:#EFEFEF;
+}
+.page404_area>div{
+  width:318px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  margin-left: -159px;
+}
