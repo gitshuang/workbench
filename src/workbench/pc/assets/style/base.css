@@ -37,6 +37,8 @@ body {
   margin: 0 auto;
   top: 60px;
 }
-.u-modal-open .u-modal{
+.src-workbench-pc-pages-work-style__wrap--GLwgN .lebra-navbar-left-content img{
+  display: none;
+}.u-modal-open .u-modal{
   overflow-y: hidden;
 }

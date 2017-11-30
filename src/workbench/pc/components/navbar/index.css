@@ -68,3 +68,7 @@
   padding:4px 0;
   color:#878B94;
 }
+
+.workArea :global(.lebra-navbar-left-content > img){
+  display: none;
+}

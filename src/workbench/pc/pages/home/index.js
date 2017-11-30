@@ -39,8 +39,24 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 )
 class Home extends Component {
     constructor(props) {
-        super(props);
+      super(props);
+
+      // document.documentElement.scrollTop = 4;
+      // window.addEventListener('scroll', this.handleScroll); // 添加滚动事件
+      // window.scrollTo(23,0);
+      // window.removeEventListener('scroll', this.handleScroll); // 删除滚动事件
     }
+
+
+    // handleScroll (e) {
+    //     console.log('浏览器滚动事件');
+    //     let scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
+    //     // if(scrollTop <= 110){
+    //     //    document.documentElement.scrollTop = 110;
+    //     // }
+    //     console.log("scrollTop"+scrollTop);
+    //   } 
+
 
     componentWillMount() {
         const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
@@ -53,11 +69,17 @@ class Home extends Component {
         });
     }
 
+    componentDidMount(){
+      document.documentElement.scrollTop = 4;
+    }
+
     render() {
 
         const containerStyle = {
             width: "100%",
-            margin: "70px 0 100px"
+            // margin: "6px 0 100px",
+            marginTop:"10px",
+            // paddingTop:"30px",
         }
 
         const {

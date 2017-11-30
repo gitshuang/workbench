@@ -223,7 +223,7 @@ class WidgeFileItem extends Component {
     const { connectDragSource, connectDropTarget,isDragging } = this.props;
     const opacity = isDragging ? 0 : 1;
     return connectDragSource(connectDropTarget(
-      <li className={`${widgetItem} ${widgetFileItem}`} style={{...opacity }} onClick={this.props.onClick}>
+      <li name="file" className={`${widgetItem} ${widgetFileItem}`} style={{...opacity }} onClick={this.props.onClick}>
         <div className={title}>
           <div className={[title_left,file_icon].join(' ')}></div>
           <div className={`${title_right} ${file_title_right}`}> {da.widgetName} </div>

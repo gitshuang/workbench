@@ -12,7 +12,7 @@
 }
 
 .page_home :global(.content) > div{
-    margin-top: 120px;
+    // margin-top: 120px;
 }
 /*
 :global(.um-content){

@@ -18,6 +18,19 @@ import onClickOutside from 'react-onclickoutside';
 import img from '../../assets/image/gloryIcon.png';
 import img2 from '../../assets/image/gloryIcon2.png';
 
+const li = (<li>
+  <Icon type="loan"></Icon>
+  <div className={`${used} ${clearfix}`}>
+    <div className={`${usedModule} ${clearfix}`}>
+      <div className={`${module} ${clearfix}`}>
+        <div className={usedTit}>结算中心</div>
+        <div className={lastTime}>1分钟前</div>
+      </div>
+      <div className={usedService}>核算服务</div>
+    </div>
+  </div>
+</li>);
+
 const {
   getUserInfo,
   hideUserInfoDisplay,
@@ -55,6 +68,13 @@ class UserInfoContainer extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+
+    this.state = {
+      dataList:[
+        {"id":"1001","name":"结算中心","icon":"loan","usedService":"核算服务","lastTime":"1分钟前"},
+        {"id":"1001","name":"新增凭证","icon":"bill","usedService":"报账服务","lastTime":"30分钟前"}
+      ]
+    }
   }
 
   static propTypes = {
@@ -94,7 +114,9 @@ class UserInfoContainer extends Component {
   // }
 
   handleClick() {
-    alert("修改")
+      this.setState({
+        dataList:[]
+      })
   }
   setCutUserFn =() => {
     const {setCutUser,getWorkList} = this.props;
@@ -191,6 +213,23 @@ class UserInfoContainer extends Component {
         <Option name="password" value="password" >修改密码</Option>
       </Select>
     }
+
+    let _li = [];
+    this.state.dataList.forEach((da,i)=>{
+        _li.push(<li>
+          <Icon type={da.icon}></Icon>
+          <div className={`${used} ${clearfix}`}>
+            <div className={`${usedModule} ${clearfix}`}>
+              <div className={`${module} ${clearfix}`}>
+                <div className={usedTit}>{da.name}</div>
+                <div className={lastTime}>{da.lastTime}</div>
+              </div>
+              <div className={usedService}>{da.usedService}</div>
+            </div>
+          </div>
+        </li>);
+    })
+
     return (
       <div className={`${wrap} ${clearfix}`} >
         <div>
@@ -256,32 +295,9 @@ class UserInfoContainer extends Component {
           >
             <TabPane tab='最近使用' key="1" className={tabPane1}>
               <ul className={recently}>
-                <li>
-                  <Icon type="loan"></Icon>
-                  <div className={`${used} ${clearfix}`}>
-                    <div className={`${usedModule} ${clearfix}`}>
-                      <div className={`${module} ${clearfix}`}>
-                        <div className={usedTit}>结算中心</div>
-                        <div className={lastTime}>1分钟前</div>
-                      </div>
-                      <div className={usedService}>核算服务</div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <Icon type="bill"></Icon>
-                  <div className={`${used} ${clearfix}`}>
-                    <div className={`${usedModule} ${clearfix}`}>
-                      <div className={`${module} ${clearfix}`}>
-                        <div className={usedTit}>新增凭证</div>
-                        <div className={lastTime}>30分钟前</div>
-                      </div>
-                      <div className={usedService}>报账服务</div>
-                    </div>
-                  </div>
-                </li>
+                {_li}
               </ul>
-              <Button onClick={this.handleClick}>清空列表</Button>
+              {this.state.dataList.length != 0 ?<Button onClick={this.handleClick}>清空列表</Button>:<Button>没有数据!</Button>}
             </TabPane>
             <TabPane tab='推广服务' key="2" className={tabPane2}>
               <ul className={`${promotion} ${clearfix}`}>
