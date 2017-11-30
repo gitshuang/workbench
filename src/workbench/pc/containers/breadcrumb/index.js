@@ -5,7 +5,7 @@ import Breadcrumbs from 'components/breadcrumb';
 import Icon from 'components/icon';
 import { mapStateToProps } from '@u';
 import actions from 'store/root/work/actions';
-import { breadcrumbClass } from './style.css';
+import { breadcrumbClass ,breadcrumb_menu} from './style.css';
 
 const {setExpandedSidebar} = actions;
 
@@ -30,12 +30,18 @@ class BreadcrumbContainer extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            breadcrumbMenu:"",
+        }
         this.setExpended = this.setExpended.bind(this);
     }
 
     setExpended() {
         const {setExpandedSidebar, expandedSidebar} = this.props;
         setExpandedSidebar(!expandedSidebar);
+        this.setState({
+          breadcrumbMenu:breadcrumb_menu
+        })
     }
 
     render() {
@@ -43,8 +49,9 @@ class BreadcrumbContainer extends Component {
 
       return (
         <div className={breadcrumbClass}>
+            <section className={this.state.breadcrumbMenu?breadcrumb_menu:""}>菜单<Icon type="error3"></Icon></section>
           {
-            withSidebar ? ( <Icon type="tabulation" onClick={this.setExpended} />) : null
+            withSidebar ? (<Icon type="tabulation" onClick={this.setExpended} />) : null
           }
           <Breadcrumbs data={this.props.brm}/>
         </div>

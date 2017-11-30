@@ -10,7 +10,7 @@ import workActions from 'store/root/work/actions';
 /*  comp */
 import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee-button';
-import Icon from 'components/Icon';
+import Icon from 'components/icon';
 /*  style */
 import 'assets/style/iuapmobile.um.css'
 import {

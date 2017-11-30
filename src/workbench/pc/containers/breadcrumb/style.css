@@ -14,3 +14,22 @@
 .breadcrumbClass :global(.iconfont):hover{
 	color:#E14C46;
 }
+.menu_expended{
+  margin-left: 200px !important;
+}
+.breadcrumbClass section{
+  display:none;
+  width:200px;
+  height:37px;
+  padding:9px 17px;
+  background:#9FA4AE;
+  color:#fff;
+  font-size:14px;
+}
+.breadcrumbClass section :global(.iconfont){
+  font-size:14px;
+  color:#fff;
+}
+.breadcrumbClass .breadcrumb_menu{
+  display: inline-block;
+}
