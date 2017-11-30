@@ -28,4 +28,5 @@ export default createTypes(
   'GET_SELECT_WIDGET_LIST',
   'OPEN_BATCH_MOVE',
   'CLOSE_BATCH_MOVE',
+  'SET_EDIT_STATE',
 );

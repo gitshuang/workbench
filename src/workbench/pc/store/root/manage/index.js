@@ -32,6 +32,7 @@ const {
   getSelectWidgetList,
   openBatchMove,
   closeBatchMove,
+  setEditState,
 } = actions;
 
 const defaultState = {
@@ -495,6 +496,10 @@ const reducer = handleActions({
   [closeBatchMove]: (state) => ({
     ...state,
     batchMoveModalDisplay: false,
+  }),
+  [setEditState]: (state, { payload: isEdit }) => ({
+    ...state,
+    isEdit,
   }),
 }, defaultState);
 

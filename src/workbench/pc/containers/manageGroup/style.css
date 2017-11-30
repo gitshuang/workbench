@@ -1,10 +1,10 @@
-.WidgetTitle{
+.widgetTitle{
   height: 50px;
   line-height: 50px;
-  color:rgba(136,136,136,1);
+  color:rgba(136,136,136);
   margin-bottom:16px;
 }
-.WidgetTitle :global(.iconfont){
+.widgetTitle :global(.iconfont){
   font-size: 30px;
   margin-right: 20px;
   cursor:pointer;
@@ -45,7 +45,7 @@
 .addGroupBtn:hover :global(.iconfont){
 	color:#E14C46;
 }
-.WidgetTitle :global(.u-button){
+.widgetTitle :global(.u-button){
 	height:22px;
 	background:#fff;
 	padding: 0px;
@@ -57,7 +57,7 @@
 	color:#4A515D;
 	min-width:4.2rem;
 }
-.WidgetTitle button:hover{
+.widgetTitle button:hover{
 	background:rgba(225,76,70,1);
 	color:#fff;
 }
@@ -69,40 +69,44 @@
 	font-size:12px;
 	color:rgba(51,51,51,1);
 }
-.WidgetTitle :global(.uf),.WidgetTitle :global(.iconfont){
+.widgetTitle :global(.uf),.widgetTitle :global(.iconfont){
 	font-size:20px;
 	color:#4A515D;
 	margin-right:23px;
 	font-weight: bold;
 }
-.WidgetTitle :global(.iconfont):hover{
+.widgetTitle :global(.iconfont):hover{
 	color:#242D3B;
 }
-.WidgetTitle span{
-	position:relative;
+.titleInputArea{
+  position:relative;
+  display: inline-block;
 }
-.newGroupName+:global(.uf){
+.titleInputArea .icon{
 	cursor: pointer;
 	color:rgb(179,179,179);
 	font-size:14px;
 	margin:0;
 	position:absolute;
-	right:0;
+  right:0;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 20px;
 }
 .newGroupName+:global(.uf):hover{
 	color:#4A515D;
 }
 .groupArea>section{
-  width:1290px;
   border: 1px solid #fff;
+  min-width: 460px;
   border-radius:2px;
   padding: 0.5rem 0 2.5rem 4rem;
-  margin: 0 auto;
+  margin: 0 75px;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   background:rgba(79,86,98,0.1);
   cursor: move;
 }
-.selected_Back_Class{
+.selectedBackClass{
 	background:rgba(51,58,68,0.2) !important;
 }

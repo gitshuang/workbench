@@ -34,7 +34,8 @@ const {
   GET_SELECT_WIDGET_LIST,
   OPEN_BATCH_MOVE,
   CLOSE_BATCH_MOVE,
-  } = types;
+  SET_EDIT_STATE,
+} = types;
 
 const actions = createActions(
   {
@@ -69,5 +70,6 @@ const actions = createActions(
   CLOSE_FOLDER,
   OPEN_BATCH_MOVE,
   CLOSE_BATCH_MOVE,
+  SET_EDIT_STATE,
 );
 export default actions;
