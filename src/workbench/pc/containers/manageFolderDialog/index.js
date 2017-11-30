@@ -106,7 +106,7 @@ class ManageFolderDialog extends Component {
               <Modal.Body>
                 <div className={content} >
                   { list }
-                </div>ßß
+                </div>
               </Modal.Body>
             </div>
             </Modal>
