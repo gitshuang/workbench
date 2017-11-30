@@ -17,6 +17,8 @@ const {
   renameGroup,
   moveGroup,
   stickGroup,
+  moveTopGroup,
+  moveBottomGroup,
   addFolder,
   setFolderEdit,
   deleteFolder,
@@ -253,6 +255,32 @@ const reducer = handleActions({
     }
   },
   [stickGroup]: (state, { payload: index }) => {
+    let manageList = state.manageList;
+    const curr = manageList[index];
+    const newList =  manageList.filter((item,i) => {
+      return index !== i;
+    });
+    newList.unshift(curr);
+    return{
+      ...state,
+      manageList: newList,
+      isEdit: true,
+    }
+  },
+  [moveTopGroup]: (state, { payload: index }) => {
+    let manageList = state.manageList;
+    const curr = manageList[index];
+    const newList =  manageList.filter((item,i) => {
+      return index !== i;
+    });
+    newList.unshift(curr);
+    return{
+      ...state,
+      manageList: newList,
+      isEdit: true,
+    }
+  },
+  [moveBottomGroup]: (state, { payload: index }) => {
     let manageList = state.manageList;
     const curr = manageList[index];
     const newList =  manageList.filter((item,i) => {
