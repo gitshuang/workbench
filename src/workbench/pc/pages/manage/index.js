@@ -107,10 +107,23 @@ class Home extends Component {
     batchDelect();
     this.popClose();
   }
+
   openGroupTo = () => {
     const { openBatchMove } = this.props;
     openBatchMove();
   }
+
+  popOpen = () => {
+    this.setState({
+      showModal: true
+    });
+  }
+  popClose = () => {
+    this.setState({
+      showModal: false
+    });
+  }
+
   renderContent() {
     let { manageList } = this.props;
     let list = [];
@@ -133,6 +146,10 @@ class Home extends Component {
       selectList,
       isEdit,
     } = this.props;
+    const pop_btn = [
+      {label:"确认",fun:this.batchDelectFn,className:""},
+      {label:"取消",fun:this.popClose,className:""}
+    ]
     return (
       <div className="um-win">
         <div className="um-header">
@@ -146,7 +163,7 @@ class Home extends Component {
         <div className={um_footer}>
           <div className={umBoxJustify}>
             <div className={umBoxJustify1}>
-              <Button className={batchDeletion} disabled={selectList.length ? false:true} onClick={this.openDeleteMark}>批量删除</Button>
+              <Button className={batchDeletion} disabled={selectList.length ? false:true} onClick={this.popOpen}>批量删除</Button>
               <Button className={batchDeletion} disabled={selectList.length? false : true} onClick={this.openGroupTo}>批量移动</Button>
             </div>
             <div className={umBoxJustify2}>
@@ -158,6 +175,11 @@ class Home extends Component {
         </div>
         <ManageFolderDialog />
         <ManageBatchMoveDialog />
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } btns={pop_btn} >
+          <div>
+            <span>您确认要批量删除吗?</span>
+          </div>
+        </PopDialog>
       </div>
     );
   }
