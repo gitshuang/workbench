@@ -15,7 +15,7 @@ import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
 import ManageFolderDialog from 'containers/manageFolderDialog';
 import ManageBatchMoveDialog from 'containers/manageBatchMoveDialog';
-
+import PopDialog from 'components/pop';
 import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
 
@@ -53,6 +53,7 @@ class Home extends Component {
     this.state = {
       isGroup: false,
       moveData: [],
+      showModal: false,
     };
   }
   moveGroupDrag = (id, afterId) => {
@@ -101,9 +102,10 @@ class Home extends Component {
   goBack = () => {
     this.props.history.goBack();
   }
-  openDeleteMark = () => {
+  batchDelectFn = () => {
     const { batchDelect } = this.props;
     batchDelect();
+    this.popClose();
   }
   openGroupTo = () => {
     const { openBatchMove } = this.props;
