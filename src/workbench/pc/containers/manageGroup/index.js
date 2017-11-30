@@ -244,7 +244,7 @@ class ManageGroup extends Component {
       menu1 = (
         <Menu
           onClick={(e) => {this.onDropSelect(e,index)} }>
-          <MenuItem key="1">下移</MenuItem>
+          <MenuItem key="2">下移</MenuItem>
           <MenuItem key="3">删除</MenuItem>
         </Menu>
       );
@@ -252,7 +252,7 @@ class ManageGroup extends Component {
       menu1 = (
         <Menu
           onClick={(e) => {this.onDropSelect(e,index)} }>
-          <MenuItem key="2">上移</MenuItem>
+          <MenuItem key="1">上移</MenuItem>
           <MenuItem key="3">删除</MenuItem>
         </Menu>
       );
