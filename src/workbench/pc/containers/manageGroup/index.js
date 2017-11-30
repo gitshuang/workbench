@@ -179,16 +179,15 @@ class ManageGroup extends Component {
   // 选择框  选择
   selectFn =(e,index) => {
     let {selectList,selectListActions,manageList,selectGroupActions,selectGroup} = this.props;
-    let checkFlag = e.target.checked;
-    let aa = [];
-    manageList[index].children.map((item,index)=>{
-      aa.push(item.widgetId);
+    const checkFlag = e.target.checked;
+    const aa = manageList[index].children.map((item,index)=>{
+      return item.widgetId;
     });
     if(checkFlag){
       selectGroup.push(index);
-      selectList = selectList.concat(aa);
+      selectList = Array.from(new Set(selectList.concat(aa)));
     }else{
-      selectList = selectList.concat(aa).filter(v => !selectList.includes(v) || !selectList.includes(v))
+      selectList = selectList.filter(v => !aa.includes(v));
       selectGroup =  selectGroup.filter((item,i) => {
         return index !== item;
       });
