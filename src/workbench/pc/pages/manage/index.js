@@ -148,7 +148,8 @@ class Home extends Component {
               <Button className={batchDeletion} disabled={selectList.length? false : true} onClick={this.openGroupTo}>批量移动</Button>
             </div>
             <div className={umBoxJustify2}>
-              <Button className={preserve} disabled={!isEdit} onClick={this.save}>保存</Button>
+              {/* <Button className={preserve} disabled={!isEdit} onClick={this.save}>保存</Button> */}
+              <Button className={preserve} onClick={this.save}>保存</Button>
               <Button className={cancel} onClick={this.cancel}>取消</Button>
             </div>
           </div>

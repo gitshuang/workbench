@@ -182,6 +182,10 @@
 .promotion li{
   float: left;
 }
+.promotion li:hover .serviceName{
+  cursor:pointer;
+  color:#E14C46;
+}
 .used{
   width:346px;
   height:68px;
@@ -198,6 +202,13 @@
 }
 .recently li:last-child{
   border-bottom:none;
+}
+.recently li:hover{
+  background:rgba(239,239,239,1);
+  cursor:pointer;
+}
+.recently li:hover .usedTit{
+  color:#E14C46;
 }
 .tabPane1 :global(.u-button){
   display:block;

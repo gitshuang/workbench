@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
+import logosrc from '../../assets/image/wgt/用友云logo.svg';
 import "./index.css"
 
 const defaultProps = {
@@ -45,7 +46,7 @@ class NavBar extends Component {
           <span className={`${prefixCls}-left-icon`} aria-hidden="true">
             {typeof iconName === 'string' ? <Icon type='staff'/> : iconName}
           </span>
-          <span className={`${prefixCls}-left-content`} >{leftContent}</span>
+          <span className={`${prefixCls}-left-content`} >{leftContent}<img src={logosrc}/></span>
         </div>
         <div className={`${prefixCls}-title`} >{children}</div>
         <div className={`${prefixCls}-right`} >
