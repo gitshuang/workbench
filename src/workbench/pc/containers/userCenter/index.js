@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
-  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently
+  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
+  iconContainer,icon1,icon2,icon3
 } from './style.css';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -14,22 +15,11 @@ import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee-tabs';
 import Icon from 'components/icon';
 import onClickOutside from 'react-onclickoutside';
-
-import img from '../../assets/image/gloryIcon.png';
-import img2 from '../../assets/image/gloryIcon2.png';
-
-const li = (<li>
-  <Icon type="loan"></Icon>
-  <div className={`${used} ${clearfix}`}>
-    <div className={`${usedModule} ${clearfix}`}>
-      <div className={`${module} ${clearfix}`}>
-        <div className={usedTit}>结算中心</div>
-        <div className={lastTime}>1分钟前</div>
-      </div>
-      <div className={usedService}>核算服务</div>
-    </div>
-  </div>
-</li>);
+import img1 from 'assets/image/wgt/yonyouSpace.png';
+import img2 from 'assets/image/wgt/intelligent_logo.png';
+import img3 from 'assets/image/wgt/goldInstitute.png';
+import img4 from 'assets/image/wgt/salary_logo.png';
+import img5 from 'assets/image/wgt/relation.png';
 
 const {
   getUserInfo,
@@ -73,6 +63,13 @@ class UserInfoContainer extends Component {
       dataList:[
         {"id":"1001","name":"结算中心","icon":"loan","usedService":"核算服务","lastTime":"1分钟前"},
         {"id":"1001","name":"新增凭证","icon":"bill","usedService":"报账服务","lastTime":"30分钟前"}
+      ],
+      promotionList:[
+        {"src":img1,"promotion_tit":"友空间"},
+        {"src":img2,"promotion_tit":"智能服务"},
+        {"src":img3,"promotion_tit":"友金所"},
+        {"src":img4,"promotion_tit":"新福社"},
+        {"src":img5,"promotion_tit":"相关服务"}
       ]
     }
   }
@@ -214,7 +211,7 @@ class UserInfoContainer extends Component {
       </Select>
     }
 
-    let _li = [];
+    let _li = [];//最近使用列表
     this.state.dataList.forEach((da,i)=>{
         _li.push(<li>
           <Icon type={da.icon}></Icon>
@@ -226,6 +223,16 @@ class UserInfoContainer extends Component {
               </div>
               <div className={usedService}>{da.usedService}</div>
             </div>
+          </div>
+        </li>);
+    })
+
+    let lis = [];//推广服务列表
+    this.state.promotionList.forEach((item,index)=>{
+      lis.push(<li>
+          <div className={serviceImg}>
+            <section><img src={item.src}/></section>
+            <div className={serviceName}>{item.promotion_tit}</div>
           </div>
         </li>);
     })
@@ -242,15 +249,15 @@ class UserInfoContainer extends Component {
           <div className={userName}>{name}</div>
           <ul className={`${gloryIcon} ${clearfix}`}>
             <li>
-              <img src={img}/>
+              <div className={`${iconContainer} ${icon1}`}><Icon type="glory"></Icon></div>
               <span>荣耀</span>
             </li>
             <li>
-              <img src={img2}/>
+              <div className={`${iconContainer} ${icon2}`}><Icon type="favorite"></Icon></div>
               <span>个人空间</span>
             </li>
             <li>
-              <img src={img2}/>
+              <div className={`${iconContainer} ${icon3}`}><Icon type="Internet2"></Icon></div>
               <span>动态</span>
             </li>
           </ul>
@@ -289,42 +296,7 @@ class UserInfoContainer extends Component {
             </TabPane>
             <TabPane tab='推广服务' key="2" className={tabPane2}>
               <ul className={`${promotion} ${clearfix}`}>
-                <li>
-                  <div className={serviceImg}>
-                    <img/>
-                    <div className={serviceName}>友空间</div>
-                  </div>
-                </li>
-                <li>
-                  <div className={serviceImg}>
-                    <img/>
-                    <div className={serviceName}>智能服务</div>
-                  </div>
-                </li>
-                <li>
-                  <div className={serviceImg}>
-                    <img/>
-                    <div className={serviceName}>相关服务</div>
-                  </div>
-                </li>
-                <li>
-                  <div className={serviceImg}>
-                    <img/>
-                    <div className={serviceName}>相关服务</div>
-                  </div>
-                </li>
-                <li>
-                  <div className={serviceImg}>
-                    <img/>
-                    <div className={serviceName}>相关服务</div>
-                  </div>
-                </li>
-                <li>
-                  <div className={serviceImg}>
-                    <img/>
-                    <div className={serviceName}>相关服务</div>
-                  </div>
-                </li>
+                {lis}
               </ul>
             </TabPane>
           </Tabs>

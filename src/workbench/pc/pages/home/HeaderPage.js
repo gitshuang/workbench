@@ -5,7 +5,7 @@ import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import Header from 'containers/header';
 import Navbar from 'components/scroll-nav';
-import {button_group,navbar} from './style.css';
+import {button_group,navbar,logoImg} from './style.css';
 import {header} from './header_page.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
@@ -19,7 +19,7 @@ const { changeUserInfoDisplay } = homeActions;
 )
 class HeaderPage extends Component {
   getLeftContent() {
-    return (<img src={logoUrl}/>);
+    return (<img src={logoUrl} className={logoImg}/>);
   }
 
   render() {

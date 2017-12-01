@@ -135,10 +135,25 @@
   line-height:16px;
   cursor:pointer;
 }
-.gloryIcon li img{
-  display:block;
+.gloryIcon .iconContainer{
+  width:36px;
+  height:36px;
+  background:#E66C67;
+  text-align:center;
+  border-radius:18px;
   margin:0 auto;  
   margin-bottom: 5px;
+}
+.gloryIcon .icon2{
+  background:#E8A76B;
+}
+.gloryIcon .icon3{
+  background:#44C5E2;
+}
+.iconContainer :global(.iconfont){
+  font-size:24px;
+  line-height:36px;
+  color:#fff;
 }
 .active{
   display:block;
@@ -164,9 +179,19 @@
   float : left;
 }
 .serviceImg img{
+  margin-left:-41%;
+  margin-top:-41%;
+}
+.serviceImg section{
   width:48px;
   height:48px;
   margin:14px 27px 5px 5px;
+  border-radius:3px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-flex : 1;
+  -webkit-box-align:center;
+  -webkit-box-pack:center;
 }
 .serviceName{
   width:48px;
@@ -189,7 +214,6 @@
 .used{
   width:346px;
   height:68px;
-  // border-bottom: 1px solid #DDE0E3;
 }
 .tabPane1,.tabPane2{
   height:400px;
@@ -280,7 +304,9 @@
   font-weight: bold;
   color:#4A515D;
 }
-
+.wrap :global(.u-tabs){
+  border-bottom:none;
+}
 .wrap :global(.u-tabs-tab){
   color:#666;
 }
