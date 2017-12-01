@@ -2,7 +2,8 @@
   position: relative;
   float: left;
   /*margin-top: 30px;*/
-  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
   margin-bottom: 10px;
   box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
   display: block;
@@ -13,6 +14,9 @@
   border:1px solid #DBDEE5;
   box-sizing: border-box;
   // overflow: auto;
+}
+.widgetItem:first-child{
+  margin-left: 0px;
 }
 .widget_file_item{
   background: url("assets/image/wgt/fileBackground.png") no-repeat;
@@ -183,7 +187,7 @@
   left: 10px;
   top: 40px;
 }
-
+/**
 
 :global(.u-modal-dialog .u-modal-footer){
     display: -webkit-box;
@@ -201,6 +205,8 @@
     width: 416px;
     height: 201px;
 }
+**/
+
 .pop_cont{
     font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';
     font-weight: 700;

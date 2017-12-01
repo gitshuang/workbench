@@ -1,6 +1,37 @@
 .content{
   overflow: hidden;
+  background:rgba(230,233,233,1);
+  display: -webkit-box; 
+  -webkit-box-pack: center; 
+  margin: 15px;
+  margin-top: 0;
+  position: relative;
 }
-.homeFolder :global(.u-modal-content){
-	background: #fff !important;
+.home_file_item_dailog{
+  display: -webkit-box !important;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+.home_file_item_dailog :global(.u-modal-header){
+    padding:8px 15px;
+}
+.home_file_item_dailog :global(.u-modal-body){
+    padding:0;
+}
+.home_file_item_dailog :global(.u-modal-body){
+    padding:0;
+}
+.close{
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  color: rgba(135,139,148,1);
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+}
+.close:hover{
+  background: rgba(135,139,148,1);
+  color: #ccc;
 }

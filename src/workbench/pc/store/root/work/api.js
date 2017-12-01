@@ -13,7 +13,9 @@ export const getProductInfo = (
     serveCode: code,
   });
 }
-export const getTitleService = serveCode => get('/serve/getRelationServesAndUsers', { serveCode });
+export const getTitleService = (serveCode) => {
+  return get('/serve/getServeInfoWithDetail', { serveCode });
+}
 export const setPinCancel = serveCode => post('/widget/deleteByServeCode', { serveCode });
 export const setPinAdd = (
   serveCode,
@@ -33,4 +35,6 @@ export const setAddGroup = (widgetName) => post('/widget/create', {
   type: 1,
   widgetName,
 });
-export const getPinGroup = () => get('/widget/getFolders');
+export const getPinGroup = () =>{
+  return get('/widget/getFolders');
+}
