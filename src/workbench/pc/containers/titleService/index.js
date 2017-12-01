@@ -30,6 +30,7 @@ const {
 
 @connect(mapStateToProps(
     'titleServiceType',
+    'current',
     {
       "namespace": "work"
     }
@@ -59,9 +60,10 @@ class titleServiceContainer extends Component {
         requestStart,
         requestSuccess,
         requestError,
-        getTitleService
+        getTitleService,
+        current
       } = this.props;
-      getTitleService().then(({
+      getTitleService(current.serveCode).then(({
         error,
         payload
       }) => {

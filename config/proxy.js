@@ -4,11 +4,8 @@ var api = [
   '/serve/getAllServesGroupByLabels',
   '/application/getAllApps',
   '/desktop/getdeskTop',
-  '/widget/create',
-  '/widget/getFolders',
   '/serve/getServeInfoByServeCode',
   '/serve/getServeInfoByAppCode',
-  '/serve/getRelationServesAndUsers',
   '/user/getUserInfo',
   '/user/setCutUser',
 
@@ -21,7 +18,9 @@ var api = [
 var rapApi = [
     // '/serve/getAllServesGroupByLabels'
   '/widget/deleteByServeCode',
-  '/widget/create'
+  '/widget/create',
+  '/serve/getServeInfoWithDetail',
+  '/widget/getFolders'
 ];
 
 function makeRapConfig(key) {
