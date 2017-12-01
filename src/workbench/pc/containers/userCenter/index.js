@@ -144,7 +144,7 @@ class UserInfoContainer extends Component {
         alert("消息");
         break;
       case 'cancel' :
-        alert("注销");
+        window.location.href = `/workbench/logout?SAMLRequest=true&service=${encodeURIComponent(`${window.location.origin}/workbench/`)}`;
         break;
       default : alert("undefined");
     }
