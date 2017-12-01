@@ -23,6 +23,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
+        'widthBrm',
         'domainName',
         {
             namespace: '404'
@@ -49,6 +50,7 @@ export default class Page404 extends Component {
     render() {
         const {
           domainName,
+          widthBrm,
           type,
         } = this.props;
         let iconName = <Icon type="home" style={{fontSize:"24px"}}/>
@@ -62,10 +64,11 @@ export default class Page404 extends Component {
               </HeaderContainer>
             </div>
             <div className={`um-content ${page404_area}`}>
-              <div>
+              <BreadcrumbContainer/>
+              <section>
                 <div className={remindWord}>很抱歉，当前访问的页面已丢失</div>
                 <Button shape="border" ><a href="###">返回首页</a></Button>
-              </div>
+              </section>
             </div>
             <Pin outsideClickIgnoreClass={'icon-dingzhi'} />
           </div>
