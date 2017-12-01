@@ -22,11 +22,11 @@
             "parentId": "1",
             "menuBarId": "menuBarId1",
             "serveId": "asfasdfasfas111",
-            "serveCode": "google",
+            "serveCode": "bing",
             "serve": {
               "serveId": "asfasdfasfas111",
               "serveName": "百度搜索",
-              "serveCode": "google",
+              "serveCode": "bing",
               "enable": true,
               "url": "https://www.baidu.com",
               "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
@@ -45,7 +45,7 @@
                   "serveName": "360急速搜索",
                   "serveCode": "360",
                   "enable": true,
-                  "url": "https://www.google.com",
+                  "url": "https://www.bing.com",
                   "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
                   "hasWidget": false
                 }
@@ -78,18 +78,18 @@
           },
           {
             "menuItemId": "4",
-            "menuItemName": "谷歌搜索",
-            "menuItemCode": "google",
+            "menuItemName": "必应搜索",
+            "menuItemCode": "bing",
             "parentId": "1",
             "menuBarId": "menuBarId1",
             "serveId": "asfasdfasfas222",
-            "serveCode": "google",
+            "serveCode": "bing",
             "serve": {
               "serveId": "asfasdfasfas222",
-              "serveName": "谷歌",
-              "serveCode": "google",
+              "serveName": "必应",
+              "serveCode": "bing",
               "enable": true,
-              "url": "https://www.google.com",
+              "url": "https://www.bing.com",
               "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
               "hasWidget": true,
               "relationServes": [{
@@ -106,7 +106,7 @@
                   "serveName": "360急速搜索",
                   "serveCode": "360",
                   "enable": true,
-                  "url": "https://www.google.com",
+                  "url": "https://www.bing.com",
                   "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
                   "hasWidget": false
                 }
@@ -135,17 +135,17 @@
                 }
               ]
             },
-            "url": "https://www.google.com"
+            "url": "https://www.bing.com"
           }
         ]
       }]
     },
     "curServe": {
       "serveId": "asfasdfasfas222",
-      "serveName": "谷歌搜索",
-      "serveCode": "google",
+      "serveName": "必应搜索",
+      "serveCode": "bing",
       "enable": true,
-      "url": "https://www.google.com",
+      "url": "https://www.bing.com",
       "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
       "hasWidget": true,
       "relationServes": [{
@@ -162,7 +162,7 @@
           "serveName": "360急速搜索",
           "serveCode": "360",
           "enable": true,
-          "url": "https://www.google.com",
+          "url": "https://www.bing.com",
           "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
           "hasWidget": false
         }
