@@ -111,14 +111,14 @@ class Pin extends Component {
       if (error) {
         requestError(payload);
       } else {
-        requestSuccess();
         this.setState({
           menuData: [...this.state.menuData, {
-            id : guid(),
-            name,
+            ...payload,
+            widgetName: name,
           }],
         });
       }
+      requestSuccess();
       return action;
     });
   }
