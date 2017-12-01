@@ -20,7 +20,8 @@ var api = [
 
 var rapApi = [
     // '/serve/getAllServesGroupByLabels'
-  '/widget/deleteByServeCode'
+  '/widget/deleteByServeCode',
+  '/widget/create'
 ];
 
 function makeRapConfig(key) {

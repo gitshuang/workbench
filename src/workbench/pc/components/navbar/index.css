@@ -39,10 +39,6 @@
   display:block;
   width:60px;
   height:28px;
-  background:url(assets/image/wgt/yonyou_logo.svg) no-repeat center;
-}
-:global(.lebra-navbar-left-content) img{
-  
 }
 :global(.lebra-navbar-title){
   -webkit-box-pack: center;
