@@ -131,6 +131,9 @@ export function post(oriUrl, oriParams = {}) {
     url,
   } = fetchTools;
   const options = optionsMaker('post');
+  options.headers = {
+    'Content-Type': 'application/json;charset=UTF-8',
+  };
   try {
     options.body = JSON.stringify(oriParams);
   } catch(e) {
