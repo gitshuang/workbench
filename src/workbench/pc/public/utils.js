@@ -211,9 +211,10 @@ export function findPath(datas, childrenKey, compareKey, compareValue) {
       let result = false;
       paths.push(children[i]);
       if (children[i][childrenKey]) {
-        result = !loop(children[i][childrenKey]);
-      } else if (children[i][compareKey] === compareValue) {
-        result =  true;
+        result = loop(children[i][childrenKey]);
+      }
+      if (children[i][compareKey] === compareValue) {
+        result = true;
       }
       if (result) {
         return result;

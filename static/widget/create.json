@@ -1,4 +1,10 @@
 {
-  "data": true,
+  "data": {
+      "children": [],
+      "type": 1,
+      "widgetId": "340000200709223186",
+      "widgetName": "iheg"
+  },
+  "msg": "",
   "status": 1
 }
