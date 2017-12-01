@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Icon from 'components/icon';
 import Button from 'bee-button';
 import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
-import "./index.css"
+import {closeNotice} from "./index.css";
 
 class Notice extends Component {
   static propTypes = {
@@ -42,6 +42,7 @@ class Notice extends Component {
     return (
       <div >
         <img src={icon}/>
+        <Icon type="error3" className={closeNotice}></Icon>
         <p title={content}>{content}</p>
         {
           btns.map((btn, i) => (

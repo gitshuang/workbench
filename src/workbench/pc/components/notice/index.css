@@ -87,3 +87,15 @@ a:global(.u-notification-notice-close){
 :global(.u-notification-bottomRight) {
   /* top: 480px; */
 }
+:global(.closeNotice){
+  font-size:14px;
+}
+:global(.u-notification-notice-description) :global(.iconfont){
+  font-size:20px;
+  color:#BDBDBD;
+  font-weight:bold;
+  cursor: pointer;
+}
+:global(.u-notification-notice-description) :global(.iconfont):hover{
+  color:#E14C46;
+}
