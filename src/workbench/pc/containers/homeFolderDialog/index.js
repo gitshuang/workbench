@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'bee-modal';
 import Button from 'bee-button';
 import WidgetMaker from 'components/widget';
-import { content } from './style.css';
+import { content ,homeFolder} from './style.css';
 import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
 import homeActions from 'store/root/home/actions';
@@ -46,7 +46,7 @@ class homeFolderDialog extends Component{
       );
     })
 	return(
-      <Modal show={folderModalDisplay} onHide={ closeFolder } >
+      <Modal show={folderModalDisplay} onHide={ closeFolder } className={`${homeFolder}`}>
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

@@ -20,7 +20,7 @@ import Pin from 'containers/pin';
 import styles from './style.css';
 
 /*  定义style  css-loader  */
-const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap} = styles;
+const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display} = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, returnDefaultState} = workActions;
@@ -36,6 +36,7 @@ const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel,
         'current',
         'tabs',
         'menus',
+        'titleServiceType',
         'expandedSidebar',
         'type',
         {
@@ -174,6 +175,7 @@ export default class Work extends Component {
         const {
           pinType,
           titleServiceDisplay,
+          titleServiceType,
           current: {
             title,
             hasRelationFunc,
@@ -194,13 +196,14 @@ export default class Work extends Component {
                     hasRelationFunc ?
                       (<Icon
                         type="pull-down"
-                        style={{marginLeft:"15px",fontSize:"18px"}}
+                        style={{marginLeft:"15px",fontSize:"18px",fontWeight:900}}
+                        className={titleServiceType?title_service_display:""}
                         onClick={ titleServiceDisplay } />) : undefined
                   }
                   <Icon
                     type="pin"
                     className={ pinType ? 'active' : '' }
-                    style={{ marginLeft:"15px",fontSize:"18px" }}
+                    style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                     onClick={ this.pinDisplayFn }
                   />
                 </div>
