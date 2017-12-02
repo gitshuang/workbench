@@ -7,7 +7,7 @@ import onClickOutside from 'react-onclickoutside';
 import actions from 'store/root/actions';
 import { withRouter } from 'react-router-dom';
 
-const {changeQuickServiceHidden} = actions;
+const { changeQuickServiceHidden } = actions;
 
 @withRouter
 @connect(
@@ -27,12 +27,12 @@ class QuickServiceContainer extends Component {
       changeQuickServiceHidden();
     }
   }
-  openAllAppList() {
-    const { changeQuickServiceHidden } = this.props;
-    changeQuickServiceHidden();
+  openAllAppList = () => {
+    this.handleClickOutside();
     this.props.history.push('/application');
   }
   openApp(applicationCode) {
+    this.handleClickOutside();
     this.props.history.push(`/app/${applicationCode}`);
   }
   render() {
