@@ -243,10 +243,10 @@ class ManageGroup extends Component {
   // menu组件 方法
   onDropSelect = (index) => ({ key }) => {
     switch(key) {
-      case 1:
+      case '1':
         this.moveTopFn(index);
         break;
-      case 2:
+      case '2':
         this.moveBottomFn(index);
         break;
       default:
@@ -369,7 +369,7 @@ class ManageGroup extends Component {
         </div>
         <PopDialog className="pop_dialog_delete" show={ showModal } btns={pop_btn} data={{ index }}>
           <div>
-            <span>您确认要批量删除吗?</span>
+            <span>您确认要删除吗?</span>
           </div>
         </PopDialog>
       </div>
