@@ -32,6 +32,7 @@ class HomeWidgeList extends Component{
       noTitle,
       openFolder,
       history,
+      style,
     } = this.props;
     const list = children.map((child, i) => {
       const {
@@ -59,7 +60,7 @@ class HomeWidgeList extends Component{
       );
     })
 		return(
-      <div className={item} >
+      <div className={item} style={style} >
         {
           noTitle ? null : (
             <div className={WidgetTitle} >
