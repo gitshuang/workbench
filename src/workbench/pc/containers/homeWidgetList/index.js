@@ -51,7 +51,7 @@ class HomeWidgeList extends Component{
         }
       } else if (type === 3 && !jsurl){
         props.clickHandler = () => {
-          history.push(`/service/${serveCode}`);
+          history.push(`/serve/${serveCode}`);
         }
       }
       return (
