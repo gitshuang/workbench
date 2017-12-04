@@ -65,30 +65,59 @@ export default class Work extends Component {
     goBack() {
         this.props.history.replace('');
     }
+    getProductInfo(code, type) {
+      const {
+        getProductInfo,
+        requestStart,
+        requestError,
+        requestSuccess,
+      } = this.props;
+      requestStart();
+      getProductInfo(code, type).then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        } else {
+          this.setState({
+            loaded: true,
+          })
+          requestSuccess();
+        }
+      });
+    }
     componentWillMount() {
-        const {
-          match: {
-            params: {
-              code,
-              type,
-            },
+      const {
+        match: {
+          params: {
+            code,
+            type,
           },
-          getProductInfo,
-          requestStart,
-          requestError,
-          requestSuccess,
-        } = this.props;
-        requestStart();
-        getProductInfo(code, type).then(({error, payload}) => {
-          if (error) {
-            requestError(payload);
-          } else {
-            this.setState({
-              loaded: true,
-            })
-            requestSuccess();
+        },
+      } = this.props;
+      this.getProductInfo(code, type);
+    }
+    componentWillReceiveProps(nextProps) {
+      const {
+        match: {
+          params: {
+            code: newCode,
+            type: newType,
           }
-        });
+        }
+      } = nextProps;
+      const {
+        match: {
+          params: {
+            code: oldCode,
+            type: oldType,
+          }
+        },
+      } = this.props;
+      if (!(newCode === oldCode && newType === oldType)) {
+        this.setState({
+          loaded: false,
+        })
+        this.getProductInfo(newCode, newType);
+      }
     }
     componentWillUnmount(){
         const { returnDefaultState } = this.props;

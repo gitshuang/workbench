@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group';
 import {
@@ -28,6 +29,7 @@ const {
   getTitleService
 } = workActions;
 
+@withRouter
 @connect(mapStateToProps(
     'titleServiceType',
     'current',
@@ -89,6 +91,9 @@ class titleServiceContainer extends Component {
       titleServiceHidden();
     }
   }
+  handlerClickService(serveCode) {
+    this.props.history.push(`/serve/${serveCode}`);
+  }
   render() {
     const {
       titleServiceType
@@ -99,12 +104,12 @@ class titleServiceContainer extends Component {
           <h4>相关服务</h4>
           <ul className="clearfix">
             {
-              this.state.service.map(({ serveIcon, serveName }, i) =>
-                <li key={i}>
+              this.state.service.map(({ serveIcon, serveName, serveCode }, i) =>
+                <li key={i} onClick={this.handlerClickService.bind(this, serveCode)}>
                   <div className={serviceIcon}>
                     <img src={serveIcon} className={uf_service} />
                   </div>
-                  <span className={serviceName} title={serveName}>{String(serveName).substring(0,3)+"..."}</span>
+                  <span className={serviceName} title={serveName}>{serveName}</span>
                 </li>
               )
             }

@@ -209,11 +209,20 @@ export function findPath(datas, childrenKey, compareKey, compareValue) {
   function loop(children) {
     for (let i = 0, l = children.length; i < l; i++) {
       let result = false;
-      paths.push(children[i]);
-      if (children[i][childrenKey]) {
-        result = loop(children[i][childrenKey]);
+      const child = children[i];
+      paths.push(child);
+      if (child[childrenKey]) {
+        result = loop(child[childrenKey]);
       }
-      if (children[i][compareKey] === compareValue) {
+      let value;
+      try {
+        value = compareKey.split('.').reduce((obj, key) => {
+          return obj[key]
+        }, child);
+      } catch(e) {
+        console.log(e);
+      }
+      if (value === compareValue) {
         result = true;
       }
       if (result) {

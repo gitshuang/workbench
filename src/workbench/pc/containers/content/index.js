@@ -27,15 +27,11 @@ class ContentContainer extends Component {
     super(props);
   }
 
-  messageHandler(e){
-    console.log(" --content -- ");
-  }
-
   render() {
     const { hasTab, current: { menuItemId: currentId, url: currentLocation }, tabs, menus } = this.props;
     if (hasTab) {
       return (
-        <div key={currentId} className={contentArea} >
+        <div className={contentArea} >
           {
             tabs.map(({ id, location }) => (
               <div key={id} className={cs(

@@ -73,7 +73,7 @@ class MoveToGroup extends Component {
       return (
         <ul>
           {
-            data.map(({ widgetId, widgetName, children = [], type }) => {
+            data.map(({ widgetId, widgetName, children, type }) => {
               const classname = widgetId == selectId ? selectedli : "";
               return (
                 <li key={widgetId}>
@@ -83,7 +83,9 @@ class MoveToGroup extends Component {
                     { widgetName }
                   </p>
                   {
-                    this.makeSelectInterface(children, selectId)
+                    children ?
+                      this.makeSelectInterface(children, selectId) :
+                      null
                   }
                 </li>
               );

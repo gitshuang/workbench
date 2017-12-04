@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Element } from 'react-scroll';
+import { content } from './style.css';
 
 const ElementsWrapper = ({ children, items, style, className }) => (
-    <div>
+    <div className={content}>
         {children.map((child, i) => (
             <Element style={style} className={className} name={items[i].target} key={i} >{child}</Element>
         ))}
@@ -14,7 +15,6 @@ ElementsWrapper.propTypes = {
         PropTypes.element,
         PropTypes.arrayOf(PropTypes.element)
     ]).isRequired,
-    navItems: PropTypes.array.isRequired,
     style: PropTypes.object,
     className: PropTypes.string
 }

@@ -1,8 +1,0 @@
-.header{
-    position: fixed!important;
-    width: 100%;
-    z-index: 100;
-    background:url("assets/image/wgt/navBar_bg.png") no-repeat;
-  	background-position: right;
-  	background-color:rgba(255,255,255,0.92);
-}

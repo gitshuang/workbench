@@ -1,7 +1,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import NavBar from 'components/navbar';
+import Header from 'components/header';
 import Icon from 'components/icon';
 import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
@@ -14,6 +14,15 @@ const {
   changeQuickServiceDisplay
 } = actions;
 
+@connect(
+  mapStateToProps(
+    'quickServiceDisplay',
+    'messageType',
+  ),
+  {
+    changeQuickServiceDisplay,
+  }
+)
 class HeaderContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
@@ -39,26 +48,6 @@ class HeaderContainer extends Component {
       messageType
     } = this.props;
 
-    /*
-    const children2Array = Children.toArray();
-    const leftContent = children2Array.filter(
-      (v) => v.props.position === 'left'
-    );
-    let centerContent = children2Array.filter(
-     (v) => v.props.position === 'center'
-    );
-    centerContent = centerContent.reduce((result, item) => {
-      if (item.props.icon) {
-        return result.concat( <Icon type= {item.props.icon} />)
-      }
-      return result;
-    }, centerContent);
-    const rightContent = children2Array.filter(
-      (v) => v.props.position === 'right'
-    ).concat(
-      <div className="tc" style={{marginRight:"15px"}}><Icon type="search" /></div>,
-    );
-    */
     const rightArray = Children.toArray(rightContent);
     let appClass = quickServiceDisplay ? "active tc" : "tc"
     const rightContents = rightArray.concat(
@@ -70,7 +59,7 @@ class HeaderContainer extends Component {
       </div>
     );
     return (
-        <NavBar
+        <Header
           className={lebraNavbar}
           mode="light"
           iconName={ iconName }
@@ -80,16 +69,9 @@ class HeaderContainer extends Component {
           }
           onLeftClick={ onLeftClick }>
           { children }
-        </NavBar>
+        </Header>
     );
   }
 }
 
-export default connect(mapStateToProps(
-  'quickServiceDisplay',
-  'messageType',
-),
-  {
-    changeQuickServiceDisplay,
-  }
-)(HeaderContainer);
+export default HeaderContainer;

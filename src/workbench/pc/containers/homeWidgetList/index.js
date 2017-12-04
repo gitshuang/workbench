@@ -32,13 +32,14 @@ class HomeWidgeList extends Component{
       noTitle,
       openFolder,
       history,
+      style,
     } = this.props;
     const list = children.map((child, i) => {
       const {
         type,
         jsurl,
         widgetId,
-        serviceCode,
+        serveCode,
       } = child;
       const Widget = WidgetMaker(child);
       const props = {
@@ -51,7 +52,7 @@ class HomeWidgeList extends Component{
         }
       } else if (type === 3 && !jsurl){
         props.clickHandler = () => {
-          history.push(`/service/${serviceCode}`);
+          history.push(`/serve/${serveCode}`);
         }
       }
       return (
@@ -59,7 +60,7 @@ class HomeWidgeList extends Component{
       );
     })
 		return(
-      <div className={item} >
+      <div className={item} style={style} >
         {
           noTitle ? null : (
             <div className={WidgetTitle} >

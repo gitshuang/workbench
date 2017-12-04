@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
+import { findPath } from '@u';
 import actions from './actions';
 
 const {
@@ -42,45 +43,6 @@ const defaultState = {
   widthBrm: true,
 };
 
-const findMenuById = (menus, curId) => {
-  let result;
-  for (let i = 0, l = menus.length; i < l; i++) {
-    const menu = menus[i];
-    const { menuItemId: id, children } = menu;
-    if (children && children.length) {
-      result = findMenuById(children, curId);
-    }
-    if (result) {
-      break;
-    }
-    if (id === curId) {
-      result = menu;
-      break;
-    }
-  }
-  return result;
-}
-
-const findMenuByServeId = (menus, serveId) => {
-  let result;
-  for (let i = 0, l = menus.length; i < l; i++) {
-    const menu = menus[i];
-    const { serveId: id, children } = menu;
-    if (children && children.length) {
-      result = findMenuByServeId(children, serveId);
-    }
-    if (result) {
-      break;
-    }
-    if (id === serveId) {
-      result = menu;
-      break;
-    }
-  }
-  return result;
-}
-
-
 const getBrmById = (menus, curId) => {
   let finded = false;
   let result = [];
@@ -117,7 +79,8 @@ const reducer = handleActions({
   }),
   [setCurrent]: (state, { payload: currentId }) => {
     const { tabs, menus } = state;
-    const current = findMenuById(menus, currentId);
+    const menuPath = findPath(menus, 'children', 'menuItemId', currentId);
+    const current = menuPath.slice(-1)[0];
     if (!current) {
       return state;
     }
@@ -132,8 +95,7 @@ const reducer = handleActions({
     } = current;
 
     const curTab = tabs.find(({id}) => id === currentId);
-
-    let brm = getBrmById(menus, currentId).concat({name});
+    const brm = menuPath.map(({menuItemName: name}) => ({name}));
 
     if (curTab) {
       return {
@@ -220,7 +182,9 @@ const reducer = handleActions({
       return result;
     });
     const menuItemId = newTabs[newCurIndex].id;
-    const newCur = findMenuById(menus, menuItemId);
+    const menuPath = findPath(menus, 'children', 'menuItemId', menuItemId);
+    const newCur = menuPath.slice(-1)[0];
+    const brm = menuPath.map(({menuItemName: name}) => ({name}));
     const {
       menuItemName: name,
       serve: {
@@ -234,6 +198,7 @@ const reducer = handleActions({
     return {
       ...state,
       tabs: newTabs,
+      brm,
       current:{
         menuItemId,
         title: name,
@@ -278,8 +243,9 @@ const reducer = handleActions({
     if (hasTab) {
       type = 3;
     }
-    const menu = findMenuByServeId(menus, serveId);
-    const brm = getBrmById(menus, menu.menuItemId).concat({name: title});
+    const menuPath = findPath(menus, 'children', 'serveId', serveId);
+    const menu = menuPath.slice(-1)[0];
+    const brm = menuPath.map(({menuItemName: name}) => ({name}));
     return {
       ...state,
       brm,

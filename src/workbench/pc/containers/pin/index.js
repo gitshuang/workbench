@@ -115,6 +115,7 @@ class Pin extends Component {
           menuData: [...this.state.menuData, {
             ...payload,
             widgetName: name,
+            children: [],
           }],
         });
       }

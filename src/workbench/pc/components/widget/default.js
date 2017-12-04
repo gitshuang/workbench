@@ -40,9 +40,14 @@ class WidgetItem extends Component {
       clickHandler,
     } = this.props;
 
+    const style = {
+      ...widgetStyle[size],
+      backgroundImage: `url(${background})`,
+    };
+
     return (
       <li className={widgetItem}
-        style={{...widgetStyle[size], backgroundImage: background }}
+        style={style}
         onClick={clickHandler} >
         <div className={title}>
           <div className={title_left}><img src={icon} /></div>

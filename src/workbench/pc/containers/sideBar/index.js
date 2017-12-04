@@ -4,7 +4,7 @@ import actions from 'store/root/work/actions';
 import Menu, { SubMenu } from 'bee-menus';
 import Icon from 'bee-icon';
 // import { Scrollbars } from 'react-custom-scrollbars';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, findPath } from '@u';
 import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu} from './style.css';
 
 const { Item } = Menu;
@@ -36,52 +36,6 @@ function makeMenus(menus,isTop) {
   return result;
 }
 
-const findMenuById = (menus, curId) => {
-  let result;
-  for (let i = 0, l = menus.length; i < l; i++) {
-    const menu = menus[i];
-    const { menuItemId: id, children } = menu;
-    if (children && children.length) {
-      result = findMenuById(children, curId);
-    }
-    if (result) {
-      break;
-    }
-    if (id === curId) {
-      result = menu;
-      break;
-    }
-  }
-  return result;
-}
-
-const findOpenKeysById = (menus, curId) => {
-  let finded = false;
-  const result = [];
-  const loop = (list) => {
-    if (finded) {
-      return;
-    }
-    for (let i = 0, l = list.length; i < l; i++) {
-      const item = list[i];
-      const { serveId: id, menuItemId, children } = item;
-      if (id === curId) {
-        finded = true;
-        break;
-      }
-      if (children && children.length) {
-        result.push(menuItemId);
-        loop(children);
-      }
-    }
-    if (!finded) {
-      result.pop();
-    }
-  }
-  loop(menus);
-  return result;
-}
-
 @connect(
   mapStateToProps(
     'menus',
@@ -106,10 +60,16 @@ class SideBarContainer extends Component {
   }
   getDefaultOpenKeys() {
     const { menus, current: { menuItemId: id } } = this.props;
-    const menu = findMenuById(menus, id);
+    const menuPath = findPath(menus, 'children', 'menuItemId', id);
+    const defaultOpenKeys = menuPath.slice(0, -1).map(({menuItemId}) => {
+      return menuItemId;
+    })
+    const selectedKeys = menuPath.slice(-1).map(({menuItemId}) => {
+      return menuItemId;
+    })
     return {
-      defaultOpenKeys: findOpenKeysById(menus, id),
-      selectedKeys: menu && [menu.menuItemId]
+      defaultOpenKeys,
+      selectedKeys,
     }
   }
   render() {

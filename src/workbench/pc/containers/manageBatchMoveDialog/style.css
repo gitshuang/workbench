@@ -1,4 +1,5 @@
 .pin{
+  position: fixed;
   width:300px;
   background:rgba(255,255,255,1);
   border-radius: 2px ;
