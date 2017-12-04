@@ -1,5 +1,6 @@
 import React, { Component, Children, cloneElement } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import Breadcrumbs from 'components/breadcrumb';
 import Icon from 'components/icon';
@@ -9,6 +10,7 @@ import { breadcrumbClass ,breadcrumb_menu,closeMenu,breadcrumb_tab} from './styl
 
 const {setExpandedSidebar} = actions;
 
+@withRouter
 @connect(
     mapStateToProps(
         'expandedSidebar',
@@ -21,7 +23,6 @@ const {setExpandedSidebar} = actions;
         setExpandedSidebar,
     }
 )
-
 class BreadcrumbContainer extends Component {
 
     static propTypes = {
@@ -55,6 +56,9 @@ class BreadcrumbContainer extends Component {
           breadcrumbTab:""
         })
     }
+    goback = () => {
+      window.history.back();
+    }
     render() {
       const { withSidebar } = this.props;
 
@@ -64,7 +68,7 @@ class BreadcrumbContainer extends Component {
           {
             withSidebar ? (<Icon type="tabulation" className={this.state.breadcrumbTab?breadcrumb_tab:""} onClick={this.setExpended} />) : null
           }
-          <Breadcrumbs data={this.props.brm}/>
+          <Breadcrumbs data={this.props.brm} goback={this.goback}/>
         </div>
       );
     }

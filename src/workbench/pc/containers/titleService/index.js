@@ -45,6 +45,7 @@ class titleServiceContainer extends Component {
   }
   handlerClickService(serveCode) {
     this.props.history.push(`/serve/${serveCode}`);
+    this.handleClickOutside();
   }
   render() {
     const {
