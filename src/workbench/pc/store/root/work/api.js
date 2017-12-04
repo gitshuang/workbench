@@ -35,6 +35,4 @@ export const setAddGroup = (widgetName) => post('/widget/create', {
   type: 1,
   widgetName,
 });
-export const getPinGroup = () =>{
-  return get('/widget/getFolders');
-}
+export const getPinGroup = () => get('/widget/getFolders');
