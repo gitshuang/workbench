@@ -112,7 +112,7 @@ class ManageGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      groupName:  "添加分组",
+      groupName:  "默认分组",
       inEdit: false,
       inFoucs: false,
       showModal: false,
@@ -144,19 +144,31 @@ class ManageGroup extends Component {
   openRenameGroupFn = () => {
     this.setState({
       inEdit: true
-    })
+    });
+    setTimeout(() => {
+      this.refs.groupName.focus();
+      this.refs.groupName.select();
+    }, 0);
   }
   // 点击取消编辑分组按钮
-  renameGroupCancel = () => {
+  renameGroupCancel = (index) => {
+    const { renameGroup } = this.props;
     const {
       data: {
         widgetName: groupName,
       },
     } = this.props;
+    debugger;
     this.setState({
       inEdit: false,
-      groupName,
-    })
+      groupName:groupName ? groupName : "默认分组",
+    });
+    if(!groupName){
+      renameGroup({
+        index,
+        name:"默认分组",
+      });
+    }
   }
   // 点击按钮执行 action   重新构造
   renameGroupFn = (index) => {
@@ -166,7 +178,7 @@ class ManageGroup extends Component {
       index,
       name,
     });
-    this.renameGroupCancel();
+    this.renameGroupCancel(index);
   }
   //点击清空输入框
   clearInput = () => {
