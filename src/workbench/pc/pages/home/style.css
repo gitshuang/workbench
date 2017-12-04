@@ -16,3 +16,9 @@
   background-position: right;
   background-color:rgba(255,255,255,0.92);
 }
+body{
+  background-image:url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png");
+  background-repeat: no-repeat, no-repeat, no-repeat;  
+  background-position: 0% 100%, 100% 0%, 90% 100%; 
+  background-attachment:fixed;
+}
