@@ -22,6 +22,7 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 @connect(
   mapStateToProps(
     'workList',
+    'userInfoDisplay',
     {
       namespace: 'home',
     }
@@ -54,6 +55,7 @@ class Home extends Component {
         const {
           changeUserInfoDisplay,
           workList,
+          userInfoDisplay
         } = this.props;
 
         const list = [];
@@ -83,7 +85,7 @@ class Home extends Component {
         })
         return (
           <div className={page_home}>
-            <HeaderPage list={list} />
+            <HeaderPage list={list}/>
             <ElementsWrapper items={list}>
               {conts}
             </ElementsWrapper>

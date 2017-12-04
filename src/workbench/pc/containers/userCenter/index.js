@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
+import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
   iconContainer,usedIcon,icon1,icon2,icon3
 } from './style.css';
@@ -243,7 +243,7 @@ class UserInfoContainer extends Component {
       <div className={`${wrap} ${clearfix}`} >
         <div>
           <div className={imgUser}>
-            <img src={imgsrc} className={imgInner} />
+            <div className={imgOuter}><img src={imgsrc} className={imgInner} /></div>
             <div className={editPortrait}>
               <Icon type="copyreader" onClick={this.handleClick.bind(this)}></Icon>
             </div>

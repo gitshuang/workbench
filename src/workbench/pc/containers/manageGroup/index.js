@@ -25,7 +25,7 @@ import {
   groupArea,
   selectedBackClass,
   titleInputArea,
-  icon,
+  icon
 } from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {

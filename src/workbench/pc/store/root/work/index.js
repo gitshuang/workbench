@@ -18,7 +18,10 @@ const {
   setPinCancel,
   delTab,
   addBrm,
-  returnDefaultState
+  returnDefaultState,
+  getServeInfoWithDetail,
+  setTabs,
+  changeServe,
 } = actions;
 
 
@@ -30,45 +33,19 @@ const defaultState = {
     serveCode: '',
     serveId: '',
     hasRelationFunc: false,
+    relationUsers: [],
+    relationServes: [],
   },
   // 页面布局类型
   type: 1,
   menus:[],
   brm:[],
   tabs:[],
-  titleServiceList: [],
   titleServiceType: false,
   pinType: false,       // 是否pin上
   pinDisplay: false,   // pin是否显示
   widthBrm: true,
 };
-
-const getBrmById = (menus, curId) => {
-  let finded = false;
-  let result = [];
-  function loop (menus) {
-    if (finded) {
-      return;
-    }
-    for (let i = 0, l = menus.length; i < l; i++) {
-      const menu = menus[i];
-      const { menuItemId: id, menuItemName: name, children } = menu;
-      if (id === curId) {
-        finded = true;
-        break;
-      }
-      if (children && children.length) {
-        result.push({name});
-        loop(children, curId);
-      }
-    }
-    if (!finded) {
-      result.pop();
-    }
-  }
-  loop(menus);
-  return result;
-}
 
 const reducer = handleActions({
   [addBrm]: (state, { payload: data }) => ({
@@ -77,10 +54,8 @@ const reducer = handleActions({
        name:data
     })
   }),
-  [setCurrent]: (state, { payload: currentId }) => {
-    const { tabs, menus } = state;
-    const menuPath = findPath(menus, 'children', 'menuItemId', currentId);
-    const current = menuPath.slice(-1)[0];
+  [changeServe]: (state, { payload: { currentId, current, menuPath } }) => {
+    const { tabs } = state;
     if (!current) {
       return state;
     }
@@ -88,22 +63,19 @@ const reducer = handleActions({
       menuItemName: name,
       serve: {
         url,
-        relationServes,
       },
       serveId,
       serveCode,
     } = current;
-
     const curTab = tabs.find(({id}) => id === currentId);
     const brm = menuPath.map(({menuItemName: name}) => ({name}));
-
     if (curTab) {
       return {
         ...state,
         current: {
+          ...defaultState.current,
           menuItemId: currentId,
           title: name,
-          hasRelationFunc: relationServes,
           serveCode,
           serveId,
           url,
@@ -114,9 +86,9 @@ const reducer = handleActions({
       return {
         ...state,
         current:{
+          ...defaultState.current,
           menuItemId: currentId,
           title: name,
-          hasRelationFunc: relationServes,
           serveCode,
           serveId,
           url,
@@ -168,51 +140,38 @@ const reducer = handleActions({
       pinType: false,
     };
   },
-  [delTab]: (state, { payload: currentId }) => {
-    const { tabs: oldTabs, menus } = state;
-    let newCurIndex;
-    const newTabs = oldTabs.filter(({ id }, i) => {
-      const result = id !== currentId;
-      if (!result) {
-        newCurIndex = i;
-        if (newCurIndex + 1 === oldTabs.length) {
-          newCurIndex -= 1;
-        }
-      }
-      return result;
-    });
-    const menuItemId = newTabs[newCurIndex].id;
-    const menuPath = findPath(menus, 'children', 'menuItemId', menuItemId);
-    const newCur = menuPath.slice(-1)[0];
-    const brm = menuPath.map(({menuItemName: name}) => ({name}));
+  [setTabs]: (state, { payload: tabs }) => ({
+    ...state,
+    tabs,
+  }),
+  [getTitleService]: (state, { payload: serveInfo, error }) => {
+    if (error) {
+      return state;
+    }
     const {
-      menuItemName: name,
-      serve: {
-        url,
+      hasWidget,
+      relationServes,
+      relationUsers,
+      serveId,
+    } = serveInfo;
+    const {
+      current,
+    } = state;
+
+    let hasRelationFunc = false;
+    if ((relationServes && relationServes.length) ||
+        (relationUsers && relationUsers.length)) {
+      hasRelationFunc = true;
+    }
+    return {
+      ...state,
+      pinType: hasWidget,
+      current: {
+        ...current,
+        hasRelationFunc,
+        relationUsers,
         relationServes,
       },
-      serveId,
-      serveCode,
-    } = newCur;
-
-    return {
-      ...state,
-      tabs: newTabs,
-      brm,
-      current:{
-        menuItemId,
-        title: name,
-        hasRelationFunc: relationServes,
-        serveCode,
-        serveId,
-        url,
-      },
-    }
-  },
-  [getTitleService]: (state, { payload: titleServiceList, error }) => {
-    return {
-      ...state,
-      titleServiceList,
     };
   },
   [getProductInfo]: (state, { payload: productInfo, error}) => {
@@ -230,6 +189,7 @@ const reducer = handleActions({
       curServe: {
         serveName: title,
         relationServes,
+        relationUsers,
         hasWidget: pinType,
         serveCode,
         serveId,
@@ -245,7 +205,12 @@ const reducer = handleActions({
     }
     const menuPath = findPath(menus, 'children', 'serveId', serveId);
     const menu = menuPath.slice(-1)[0];
+    const menuItemId = menu.menuItemId;
     const brm = menuPath.map(({menuItemName: name}) => ({name}));
+    const hasRelationFunc = (
+      (relationServes && relationServes.length) ||
+      (relationUsers && relationUsers.length)
+    );
     return {
       ...state,
       brm,
@@ -253,15 +218,17 @@ const reducer = handleActions({
       domainName,
       widthBrm,
       current:{
-        menuItemId: menu && menu.menuItemId,
+        menuItemId,
         title,
-        hasRelationFunc: relationServes,
         serveCode,
         serveId,
         url,
+        hasRelationFunc,
+        relationServes,
+        relationUsers,
       },
       tabs: [{
-        id: menu && menu.menuItemId,
+        id: menuItemId,
         name: title,
         location: url,
       }],
@@ -285,7 +252,7 @@ const reducer = handleActions({
     ...state,
     pinDisplay: false,
   }),
-  [returnDefaultState]:state => defaultState
+  [returnDefaultState]: state => defaultState,
 }, defaultState);
 
 export default reducer;
