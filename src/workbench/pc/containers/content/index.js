@@ -31,7 +31,7 @@ class ContentContainer extends Component {
     const { hasTab, current: { menuItemId: currentId, url: currentLocation }, tabs, menus } = this.props;
     if (hasTab) {
       return (
-        <div key={currentId} className={contentArea} >
+        <div className={contentArea} >
           {
             tabs.map(({ id, location }) => (
               <div key={id} className={cs(
