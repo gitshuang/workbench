@@ -13,7 +13,10 @@ const { changeUserInfoDisplay,hideUserInfoDisplay } = homeActions;
 
 @connect(
   mapStateToProps(
-    'userInfoDisplay'
+    'userInfoDisplay',
+    {
+      namespace: 'home',
+    }
   ),
   {
     changeUserInfoDisplay,
@@ -29,7 +32,7 @@ class HeaderPage extends Component {
       window.scrollTo(0, 1)
     },0);
   }
-  render() {  
+  render() {
     const {
       changeUserInfoDisplay,
       hideUserInfoDisplay,
