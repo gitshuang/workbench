@@ -15,11 +15,6 @@
     -webkit-box-flex: 1;
     text-align: left;
 }
-.WidgetCont{
-    background: url("assets/image/wgt/wiget_bg.png") no-repeat;
-    background-position: 100% 100%;
-    background-attachment:fixed;
-}
 
 .edit_cont{
     display: -webkit-box;

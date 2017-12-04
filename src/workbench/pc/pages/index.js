@@ -74,7 +74,7 @@ class Root extends Component {
   }
   render() {
     const { userInfoDisplay, quickServiceDisplay } = this.props;
-    const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'icon-yingyong'} />) : null;
+    const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'icon-application'} />) : null;
     const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>) : null;
     return (
       <div>

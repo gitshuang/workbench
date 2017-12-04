@@ -96,6 +96,9 @@
   margin-top: 20px;
   margin-left: 10px;
 }
+.tabContent,.tabPane1,.tabPane2{
+  overflow-x: hidden;
+}
 .tabPane1{
   overflow-y: scroll;
 }
@@ -212,9 +215,9 @@
   cursor:pointer;
   color:#E14C46;
 }
-.used{
-  width:346px;
+.used{  
   height:68px;
+  // border-bottom: 1px solid #DDE0E3;
 }
 .tabPane1,.tabPane2{
   height:400px;
@@ -223,6 +226,7 @@
   padding-top:14px;
 }
 .tabPane1 li{
+  display:flex;
   border-bottom: 1px solid #DDE0E3;
 }
 .recently li:last-child{
@@ -270,10 +274,15 @@
 .usedModule{
   width:284px;
   height:100%;
-  margin-left:67px;
+  box-flex:1;
 }
 .module{
   height:26px;
+}
+.usedIcon{
+  width:67px;
+  height:55px;
+  box-flex:1;
 }
 .tabPane1 :global(.iconfont),.tabPane2 :global(.iconfont){
   float: left;

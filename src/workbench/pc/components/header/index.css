@@ -8,11 +8,11 @@
   -ms-flex-align: center;
   align-items: center;
   height: 45px;
-  background-color: #108ee9;
+  // background-color: #108ee9;
   color: #fff;
 }
 :global(.lebra-navbar-light){
-  background: rgba(255,255,255,0.92);
+  // background: rgba(255,255,255,0.92);
   color: #108ee9;
 }
 :global(.lebra-navbar-left), :global(.lebra-navbar-title), :global(.lebra-navbar-right){
@@ -58,8 +58,6 @@
   justify-content: flex-end;
   font-size: 16px;
   margin-right: 15px;
-  // background:url("assets/image/wgt/navBar_bg.png") no-repeat;
-  // background-position: right;
 }
 :global(.lebra-navbar-left-icon){
   padding:4px 0;

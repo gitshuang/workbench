@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import { mapStateToProps } from '@u';
 import MoveToGroup from 'components/moveToGroup';
 import manageActions from 'store/root/manage/actions';
@@ -50,26 +50,28 @@ class ManageBatchMoveDialog extends Component {
       moveData,
     } = this.props;
     const content = batchMoveModalDisplay ? (
-      <div className={pin +" um-css3-center"}>
-        <MoveToGroup
-          data={moveData}
-          onSave={this.confirmFn}
-          onCancel={this.cancelFn}
-        />
-      </div>
+        <div className={pin +" um-css3-center"}>
+          <MoveToGroup
+            data={moveData}
+            onSave={this.confirmFn}
+            onCancel={this.cancelFn}
+          />
+        </div>
     ) : null;
     return (
-      <CSSTransitionGroup
-        transitionName={ {
-          enter: 'animated',
-          enterActive: 'fadeIn',
-          leave: 'animated',
-          leaveActive: 'fadeOut',
-        } }
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300} >
-        { content }
-      </CSSTransitionGroup>
+      <TransitionGroup>
+        <CSSTransitionGroup
+          transitionName={ {
+              enter: 'animated',
+              enterActive: 'fadeIn',
+              leave: 'animated',
+              leaveActive: 'fadeOut',
+            } }
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300} >
+          { content }
+        </CSSTransitionGroup>
+      </TransitionGroup>
     );
   }
 }

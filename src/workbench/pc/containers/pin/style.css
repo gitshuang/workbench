@@ -2,6 +2,7 @@
   top: 60px;
   width:300px;
   background:rgba(255,255,255,1);
+  border:1px solid #DBDEE5;
   border-radius: 2px ;
   box-shadow: 0px 3px 6px 0px rgba(74,81,93,0.25);
   padding: 16px;

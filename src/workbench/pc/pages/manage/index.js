@@ -9,12 +9,14 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
+import HeaderPage from './headerPage';
 import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
 import ManageFolderDialog from 'containers/manageFolderDialog';
 import ManageBatchMoveDialog from 'containers/manageBatchMoveDialog';
 import PopDialog from 'components/pop';
 import 'assets/style/iuapmobile.um.css';
+
 
 import {
   HeaderLeft,
@@ -28,6 +30,7 @@ import {
   um_footer,
   saveArea,
   batchArea,
+  header
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -184,13 +187,17 @@ class Home extends Component {
       {label:"确认",fun:this.batchDelectFn,className:""},
       {label:"取消",fun:this.popClose,className:""}
     ]
+    const list = [];
     return (
       <div className="um-win">
-        <div className="um-header">
-          <Header onLeftClick={ this.goBack } iconName={"back"} leftContent={"返回"}>
-            <span>首页编辑</span>
-          </Header>
-        </div>
+        {/*<div className={header}>
+          <div className="um-header">
+            <Header onLeftClick={ this.goBack } iconName={"back"} leftContent={"返回"}>
+              <span>首页编辑</span>
+            </Header>
+          </div>
+        </div>*/}
+        <HeaderPage list={list} />
         <div className={um_content}>
           {this.renderContent()}
         </div>
