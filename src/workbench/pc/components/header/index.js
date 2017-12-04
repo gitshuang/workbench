@@ -44,8 +44,8 @@ class Header extends Component {
 
     return (
       <div className={wrapCls} >
-        <div className={`${prefixCls}-left`} role="button" >
-          <span className={`${prefixCls}-left-icon`} aria-hidden="true" onClick={onLeftClick} >
+        <div className={`${prefixCls}-left`} role="button"  >
+          <span className={`${prefixCls}-left-icon`} aria-hidden="true" onClick={onLeftClick}>
             {typeof iconName === 'string' ? <Icon type='staff'/> : iconName}
           </span>
           <span className={`${prefixCls}-left-content`} >{leftContent}</span>

@@ -106,6 +106,7 @@ class UserInfoContainer extends Component {
       });
     }
   }
+  
   // componentWillUnmount() {
   //   hideUserInfoDisplay();
   // }
@@ -186,10 +187,11 @@ class UserInfoContainer extends Component {
         gloriesNum: glory,
         redPacketsNum: redPackets,
         allowTenants,
+        isAdmin
       }
     } = this.props;
     let renderAllow = null;
-    if(allowTenants && allowTenants.length){
+    if(isAdmin){
       renderAllow =
         <Select
           defaultValue="账号管理" name="456"
@@ -213,7 +215,7 @@ class UserInfoContainer extends Component {
 
     let _li = [];//最近使用列表
     this.state.dataList.forEach((da,i)=>{
-        _li.push(<li>
+        _li.push(<li key={i}>
           <div className={usedIcon}><Icon type={da.icon}></Icon></div>
           <div className={`${used} ${clearfix}`}>
             <div className={`${usedModule} ${clearfix}`}>
@@ -229,7 +231,7 @@ class UserInfoContainer extends Component {
 
     let lis = [];//推广服务列表
     this.state.promotionList.forEach((item,index)=>{
-      lis.push(<li>
+      lis.push(<li key={index}>
           <div className={serviceImg}>
             <section><img src={item.src}/></section>
             <div className={serviceName}>{item.promotion_tit}</div>
@@ -264,7 +266,7 @@ class UserInfoContainer extends Component {
         </div>
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
-            <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>桌面管理</Button></li>
+            <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页个性化</Button></li>
             <li>
               {renderAllow}
             </li>

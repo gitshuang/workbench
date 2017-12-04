@@ -40,6 +40,7 @@ const {
   batchDelect,
   openBatchMove,
   moveGroup,
+  moveServe,
   setEditState,
 } = manageActions;
 
@@ -62,6 +63,7 @@ const {
     batchDelect,
     openBatchMove,
     moveGroup,
+    moveServe,
     setEditState,
   }
 )
@@ -77,6 +79,11 @@ class Home extends Component {
   moveGroupDrag = (id, afterId) => {
     const { moveGroup } = this.props;
     moveGroup({ id, afterId });
+  }
+  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType) => {
+    let data = {id,preParentId,preType,afterId,parentId,afterType}
+    const { moveServe } = this.props;
+    moveServe(data);
   }
   componentDidMount() {
     this.getManageList();
@@ -164,7 +171,9 @@ class Home extends Component {
           index={index}
           key={item.widgetName+index}
           id={item.widgetId}
-          moveGroupDrag={this.moveGroupDrag} />
+          type={item.type}
+          moveGroupDrag={this.moveGroupDrag}
+          moveItemDrag={this.moveItemDrag} />
       )
     });
     return list;

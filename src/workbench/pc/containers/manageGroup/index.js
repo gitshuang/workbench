@@ -45,20 +45,26 @@ const {
   selectGroupActions,
 } = manageActions;
 
-const type='group';
+const type='item';
 
 const itemSource = {
   beginDrag(props) {
-    return { id: props.id };
+    return { id: props.id,type:props.type,parentId:props.parentId };
   }
 };
 
 const itemTarget = {
   drop(props, monitor) {
     const draggedId = monitor.getItem().id;
-
-    if (draggedId !== props.id) {
+    const preParentId = monitor.getItem().parentId;
+    const draggedType = monitor.getItem().type;
+    let afterParentId = props.data.parentId;
+    if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
+    }else if(draggedType===3 && props.data.type===1 && preParentId !== props.data.widgetId){
+      typeof props.data.parentId === "undefined" && (afterParentId = props.data.widgetId);
+      let data = props.data.children.filter(({widgetId}) => widgetId === draggedId);
+      data.length===0 && props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
     }
   }
 };
