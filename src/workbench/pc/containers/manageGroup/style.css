@@ -88,10 +88,10 @@
 	font-size:14px;
 	margin:0;
 	position:absolute;
-  right:0;
-  top: 50%;
-  transform: translate(0, -50%);
-  font-size: 20px;
+  	right:0;
+  	top: 50%;
+  	transform: translate(0, -50%);
+  	font-size: 20px;
 }
 .newGroupName+:global(.uf):hover{
 	color:#4A515D;

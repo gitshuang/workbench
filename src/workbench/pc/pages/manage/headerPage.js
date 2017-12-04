@@ -18,7 +18,7 @@ const { changeUserInfoDisplay } = homeActions;
 )
 class HeaderPage extends Component {
   getLeftContent() {
-    return (<img src={logoUrl} className={logoImg}/>);
+    return (<a href="##"><img src={logoUrl} className={logoImg}/></a>);
   }
   componentDidMount() {
     setTimeout(() => {

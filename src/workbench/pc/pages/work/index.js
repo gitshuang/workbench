@@ -199,7 +199,6 @@ export default class Work extends Component {
         }
       }
     }
-
     render() {
         const {
           pinType,
