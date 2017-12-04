@@ -52,9 +52,9 @@ const itemTarget = {
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
 
-    if (draggedId !== props.id) {
-      if(new Date().getTime() - timestamp > 1500 && preType === 3 && props.data.type === 3){
-        //放上去停留大于1.5s添加文件夹
+    if (draggedId !== props.id && preType !==1) {
+      if(new Date().getTime() - timestamp > 2000 && preType === 3 && props.data.type === 3){
+        //放上去停留大于2s添加文件夹
         props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
       }else {
         props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);

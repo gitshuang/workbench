@@ -439,8 +439,8 @@ const reducer = handleActions({
   },
   [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType} }) => {
     let manageAllList = state.manageList;
-    let sourceData= findById(manageAllList,preParentId); //拖拽前 父级源对象
-    let targetData = findById(manageAllList,parentId); //拖拽后 父级目标对象
+    let sourceData= preParentId && findById(manageAllList,preParentId); //拖拽前 父级源对象
+    let targetData = parentId && findById(manageAllList,parentId); //拖拽后 父级目标对象
     let preParentType = sourceData.type;
     let afterParentType = targetData.type;
     //判断是否为文件夹里面元素拖拽
@@ -459,7 +459,13 @@ const reducer = handleActions({
         itemIn.parentId = parentId;
       }
       targetData.children.splice(targetData.children.indexOf(itemAfter),0,itemIn); //添加
-    } else {
+    }else if(preParentId !== parentId && preType === 3 && afterType === 1){
+      sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
+      if(preParentId !== parentId){
+        itemIn.parentId = parentId;
+      }
+      targetData.children.splice(targetData.children.length,0,itemIn); //添加
+    }else {
       let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
       let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
       const item = dataPre.filter(({widgetId}) => widgetId === id)[0];
