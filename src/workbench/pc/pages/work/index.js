@@ -20,7 +20,7 @@ import Pin from 'containers/pin';
 import styles from './style.css';
 
 /*  定义style  css-loader  */
-const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display,header} = styles;
+const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display,header,active} = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, returnDefaultState} = workActions;
@@ -232,7 +232,7 @@ export default class Work extends Component {
                     }
                     <Icon
                       type="pin"
-                      className={ pinType ? 'active' : '' }
+                      className={ pinType ? active : '' }
                       style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                       onClick={ this.pinDisplayFn }
                     />
