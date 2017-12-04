@@ -36,7 +36,7 @@ class HeaderPage extends Component {
           onLeftClick={ changeUserInfoDisplay }
           leftContent={this.getLeftContent()}
           iconName={'wode'} >
-          <span>首页编辑</span>
+          <span>首页个性化</span>
         </Header>
         {
           list.length > 1 ? (

@@ -264,7 +264,7 @@ class UserInfoContainer extends Component {
         </div>
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
-            <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>桌面管理</Button></li>
+            <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页个性化</Button></li>
             <li>
               {renderAllow}
             </li>
