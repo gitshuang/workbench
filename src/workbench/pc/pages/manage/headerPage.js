@@ -8,12 +8,18 @@ import Navbar from 'components/scrollNav';
 import { logoImg, header } from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
-const { changeUserInfoDisplay } = homeActions;
+const { changeUserInfoDisplay,hideUserInfoDisplay} = homeActions;
 
 @connect(
-  mapStateToProps(),
+  mapStateToProps(
+    'userInfoDisplay',
+    {
+      namespace:'home',
+    }
+  ),
   {
     changeUserInfoDisplay,
+    hideUserInfoDisplay
   }
 )
 class HeaderPage extends Component {
@@ -28,12 +34,14 @@ class HeaderPage extends Component {
   render() {
     const {
       changeUserInfoDisplay,
+      hideUserInfoDisplay,
+      userInfoDisplay,
       list,
     } = this.props;
     return (
       <div className={header}>
         <Header
-          onLeftClick={ changeUserInfoDisplay }
+          onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
           leftContent={this.getLeftContent()}
           iconName={'wode'} >
           <span>首页个性化</span>
