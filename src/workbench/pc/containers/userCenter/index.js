@@ -106,6 +106,7 @@ class UserInfoContainer extends Component {
       });
     }
   }
+  
   // componentWillUnmount() {
   //   hideUserInfoDisplay();
   // }
