@@ -244,10 +244,10 @@ class ManageGroup extends Component {
   onDropSelect = (index) => ({ key }) => {
     switch(key) {
       case '1':
-        this.moveTopFn(index);
+        this.moveBottomFn(index);
         break;
       case '2':
-        this.moveBottomFn(index);
+        this.moveTopFn(index);
         break;
       default:
         this.popOpen();
