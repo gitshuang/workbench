@@ -118,6 +118,7 @@ class Home extends Component {
         requestError(payload);
       }
       requestSuccess();
+      this.goBack();
     });
   }
   cancel = () => {

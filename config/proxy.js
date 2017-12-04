@@ -13,6 +13,7 @@ var api = [
   '/getSelectWidgetList',
   '/setManageList',
   '/getManageList',
+
 ]
 
 var rapApi = [
@@ -21,7 +22,8 @@ var rapApi = [
   '/widget/deleteByServeCode',
   '/widget/create',
   '/serve/getServeInfoWithDetail',
-  '/widget/getFolders'
+  '/widget/getFolders',
+  '/desktop/update',
 ];
 
 function makeRapConfig(key) {
