@@ -213,7 +213,7 @@ class UserInfoContainer extends Component {
 
     let _li = [];//最近使用列表
     this.state.dataList.forEach((da,i)=>{
-        _li.push(<li>
+        _li.push(<li key={i}>
           <div className={usedIcon}><Icon type={da.icon}></Icon></div>
           <div className={`${used} ${clearfix}`}>
             <div className={`${usedModule} ${clearfix}`}>
@@ -229,7 +229,7 @@ class UserInfoContainer extends Component {
 
     let lis = [];//推广服务列表
     this.state.promotionList.forEach((item,index)=>{
-      lis.push(<li>
+      lis.push(<li key={index}>
           <div className={serviceImg}>
             <section><img src={item.src}/></section>
             <div className={serviceName}>{item.promotion_tit}</div>
