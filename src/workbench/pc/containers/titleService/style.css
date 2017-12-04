@@ -34,7 +34,7 @@
 }
 .uf_service:hover{
   background:#fafafa;
-  border:1px solid #e5e5e5;
+  // border:1px solid #e5e5e5;
   cursor: pointer;
 }
 .uf_name:hover{cursor:pointer;}

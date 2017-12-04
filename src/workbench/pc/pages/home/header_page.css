@@ -3,6 +3,6 @@
     width: 100%;
     z-index: 100;
     background:url("assets/image/wgt/navBar_bg.png") no-repeat;
-  	background-position: center;
-  	background-size: 100% 100%;
+  	background-position: right;
+  	background-color:rgba(255,255,255,0.92);
 }

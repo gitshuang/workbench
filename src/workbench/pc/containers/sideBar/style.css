@@ -14,20 +14,10 @@
 	color:#878B94;
 	float:right;
 }
-.sideBarMenu :global(.u-menu-submenu-title):after{
-	font-size:14px;
-	color:#878B94;
-	transform:rotate(-90deg);
-	-ms-transform:rotate(-90deg); 	/* IE 9 */
-	-moz-transform:rotate(-90deg); 	/* Firefox */
-	-webkit-transform:rotate(-90deg); /* Safari 和 Chrome */
-	-o-transform:rotate(-90deg); 
-	-webkit-transition: -webkit-transform .3s ease;
-    transition: -webkit-transform .3s ease;
-    transition: transform .3s ease;
-    transition: transform .3s ease,-webkit-transform .3s ease;
+.u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected{
+	color:#E14C46;
 }
-.u-menu-inline .u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected{
+.u-menu-submenu-active.u-menu-submenu-inline>.u-menu-submenu-title:after{
 	color:#E14C46;
 }
 .sideMainMenu{
@@ -44,6 +34,9 @@
 :global(.u-menu-submenu-selected){
 	background:#fff;
 }
-:global(.u-menu-submenu-active):hover{
+:global(.u-menu-submenu-active .u-menu-submenu-title){
+	background:#fff;
+}
+:global(.u-menu-item-active){
 	background:#fff;
 }

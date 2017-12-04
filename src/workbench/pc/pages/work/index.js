@@ -20,7 +20,7 @@ import Pin from 'containers/pin';
 import styles from './style.css';
 
 /*  定义style  css-loader  */
-const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display} = styles;
+const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display,header} = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, returnDefaultState} = workActions;
@@ -188,26 +188,28 @@ export default class Work extends Component {
         let iconName = <Icon type="home" style={{fontSize:"24px"}}/>
         return (
           <div className={wrap + " um-win"}>
-            <div className="um-header">
-              <HeaderContainer onLeftClick={ this.goBack } iconName={iconName} leftContent={ domainName }>
-                <div className={"um-box"}>
-                  <span>{ title }</span>
-                  {
-                    hasRelationFunc ?
-                      (<Icon
-                        type="pull-down"
-                        style={{marginLeft:"15px",fontSize:"18px",fontWeight:900}}
-                        className={titleServiceType?title_service_display:""}
-                        onClick={ titleServiceDisplay } />) : undefined
-                  }
-                  <Icon
-                    type="pin"
-                    className={ pinType ? 'active' : '' }
-                    style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
-                    onClick={ this.pinDisplayFn }
-                  />
-                </div>
-              </HeaderContainer>
+            <div className={header}>
+              <div className="um-header">
+                <HeaderContainer onLeftClick={ this.goBack } iconName={iconName} leftContent={ domainName }>
+                  <div className={"um-box"}>
+                    <span>{ title }</span>
+                    {
+                      hasRelationFunc ?
+                        (<Icon
+                          type="pull-down"
+                          style={{marginLeft:"15px",fontSize:"18px",fontWeight:900}}
+                          className={titleServiceType?title_service_display:""}
+                          onClick={ titleServiceDisplay } />) : undefined
+                    }
+                    <Icon
+                      type="pin"
+                      className={ pinType ? 'active' : '' }
+                      style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
+                      onClick={ this.pinDisplayFn }
+                    />
+                  </div>
+                </HeaderContainer>
+              </div>
             </div>
             <div className={`um-content ${workArea}`}>
               {

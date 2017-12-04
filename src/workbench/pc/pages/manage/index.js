@@ -19,7 +19,7 @@ import PopDialog from 'components/pop';
 import Button from 'bee-button';
 import 'assets/style/iuapmobile.um.css';
 
-import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,um_content,um_footer} from './style.css';
+import { HeaderLeft ,umBoxJustify,umBoxJustify1,umBoxJustify2,batchDeletion,preserve,cancel,um_content,um_footer,header} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 const { setManageList,getManageList,batchDelect,openBatchMove,moveGroup } = manageActions;
@@ -152,10 +152,12 @@ class Home extends Component {
     ]
     return (
       <div className="um-win">
-        <div className="um-header">
-          <Header onLeftClick={ this.goBack } iconName={"back"} leftContent={"返回"}>
-            <span>首页编辑</span>
-          </Header>
+        <div className={header}>
+          <div className="um-header">
+            <Header onLeftClick={ this.goBack } iconName={"back"} leftContent={"返回"}>
+              <span>首页编辑</span>
+            </Header>
+          </div>
         </div>
         <div className={um_content} style={{background:"rgb(230,233,233)"}}>
           {this.renderContent()}

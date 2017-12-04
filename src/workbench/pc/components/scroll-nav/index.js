@@ -16,7 +16,7 @@ const Navbar = ({
         left: 0,
         top: 0,
         width: "100%",
-        background: backgroundColor ? backgroundColor : "rgba(255,255,255,0.92)",
+        // background: backgroundColor ? backgroundColor : "rgba(255,255,255,0.92)",
         display: "flex"
         // justifyContent: "center"
     };

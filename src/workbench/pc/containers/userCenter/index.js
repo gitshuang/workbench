@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import { wrap, outerContainer, active, imgUser, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer,icon1,icon2,icon3
+  iconContainer,usedIcon,icon1,icon2,icon3
 } from './style.css';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -214,7 +214,7 @@ class UserInfoContainer extends Component {
     let _li = [];//最近使用列表
     this.state.dataList.forEach((da,i)=>{
         _li.push(<li>
-          <Icon type={da.icon}></Icon>
+          <div className={usedIcon}><Icon type={da.icon}></Icon></div>
           <div className={`${used} ${clearfix}`}>
             <div className={`${usedModule} ${clearfix}`}>
               <div className={`${module} ${clearfix}`}>
