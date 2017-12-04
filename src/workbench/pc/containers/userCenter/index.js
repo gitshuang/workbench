@@ -186,10 +186,11 @@ class UserInfoContainer extends Component {
         gloriesNum: glory,
         redPacketsNum: redPackets,
         allowTenants,
+        isAdmin
       }
     } = this.props;
     let renderAllow = null;
-    if(allowTenants && allowTenants.length){
+    if(isAdmin){
       renderAllow =
         <Select
           defaultValue="账号管理" name="456"
