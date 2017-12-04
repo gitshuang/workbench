@@ -112,7 +112,7 @@ class ManageGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      groupName:  "",
+      groupName:  "添加分组",
       inEdit: false,
       inFoucs: false,
       showModal: false,
@@ -124,9 +124,16 @@ class ManageGroup extends Component {
         widgetName: groupName,
       },
     } = this.props;
-    this.setState({
-      groupName,
-    });
+    if (groupName) {
+      this.setState({
+        groupName,
+      });
+    } else {
+      setTimeout(() => {
+        this.refs.groupName.focus();
+        this.refs.groupName.select();
+      }, 0);
+    }
   }
   // 添加文件夹
   addFolderFn(groupIndex) {
@@ -244,10 +251,10 @@ class ManageGroup extends Component {
   onDropSelect = (index) => ({ key }) => {
     switch(key) {
       case '1':
-        this.moveTopFn(index);
+        this.moveBottomFn(index);
         break;
       case '2':
-        this.moveBottomFn(index);
+        this.moveTopFn(index);
         break;
       default:
         this.popOpen();
@@ -303,7 +310,7 @@ class ManageGroup extends Component {
     const checkType = selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
     let groupTitle;
-    if(inEdit) {
+    if(inEdit || !widgetName) {
       groupTitle = (
         <div className={widgetTitle} >
           <div className={titleInputArea}>
@@ -313,7 +320,8 @@ class ManageGroup extends Component {
               autoFocus="autofocus"
               onChange={this.editGroupName}
               onFocus={this.handleFocus}
-              onBlur={this.handleBlur} />
+              onBlur={this.handleBlur}
+              ref="groupName" />
             <Icon
               className={icon}
               type="error3"
