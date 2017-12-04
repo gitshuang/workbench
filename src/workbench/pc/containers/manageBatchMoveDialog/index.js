@@ -50,6 +50,15 @@ class ManageBatchMoveDialog extends Component {
       moveData,
     } = this.props;
     const content = batchMoveModalDisplay ? (
+    <CSSTransitionGroup
+      transitionName={ {
+          enter: 'animated',
+          enterActive: 'fadeIn',
+          leave: 'animated',
+          leaveActive: 'fadeOut',
+        } }
+      transitionEnterTimeout={300}
+      transitionLeaveTimeout={300} >
       <div className={pin +" um-css3-center"}>
         <MoveToGroup
           data={moveData}
@@ -57,20 +66,10 @@ class ManageBatchMoveDialog extends Component {
           onCancel={this.cancelFn}
         />
       </div>
+    </CSSTransitionGroup>
+
     ) : null;
-    return (
-      <CSSTransitionGroup
-        transitionName={ {
-          enter: 'animated',
-          enterActive: 'fadeIn',
-          leave: 'animated',
-          leaveActive: 'fadeOut',
-        } }
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300} >
-        { content }
-      </CSSTransitionGroup>
-    );
+    return content;
   }
 }
 
