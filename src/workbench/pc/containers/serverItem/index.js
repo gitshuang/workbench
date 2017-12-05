@@ -19,12 +19,13 @@ class ServerItem extends Component {
     const {serveId, serveName,selected} = this.props.data;
     let btn = null;
     if(selected){
-       btn = (<div onClick={()=>{this.props.onChange(this.props.data)}}  >
-          <BeeIcon type="pin" />
-       "已添加"</div>) ;
+       btn = (<div >
+          <BeeIcon  type="pin" />
+          <span>已添加</span>
+       </div>) ;
     }else{
       btn = (<div onClick={()=>{this.props.onChange(this.props.data)}}  >
-      <BeeIcon type="pin2" /></div>);
+      <BeeIcon type="pin2" style={{cursor:"pointer"}} /> </div>);
     }
 
     console.log(serveId+"_"+selected)
@@ -32,9 +33,7 @@ class ServerItem extends Component {
     return (
        <div className={serverItem}>
             <div className={item_li_top}>
-                <div className={item_left}>
-                  <Icon type="uf-list-s-o" />
-                </div>
+                 
 
                 <div className={item_right}>
                     {serveId}

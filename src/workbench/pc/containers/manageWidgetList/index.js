@@ -96,11 +96,10 @@ class WidgetList extends Component {
   render() {
 
       const { data,index } = this.props;
-
-      const pop_btn = [
-        {label:"确认",fun:this.popSave,className:""},
-        {label:"取消",fun:this.popClose,className:""}
-      ]   //设置操作按钮
+      // const pop_btn = [
+      //   {label:"确认",fun:this.popSave,className:""},
+      //   {label:"取消",fun:this.popClose,className:""}
+      // ]   //设置操作按钮
 
       // const { data } = this.props;
 
@@ -145,14 +144,19 @@ class WidgetList extends Component {
 
     let _da = {};
 
+    let _parentId = "";
+    if(this.props.data.length != 0){
+      _parentId = this.props.data[0].parentId;
+    }
+
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >
           <Icon type="add"  />
         </div>
 
-        <PopDialog className={pop_dialog_widge_list} show = { this.state.showModal } data={_da} btns={pop_btn} >
-            <SelectWidgetList close={this.popClose}/>
+        <PopDialog className={pop_dialog_widge_list} show = { this.state.showModal } data={_da} >
+            <SelectWidgetList close={this.popClose} parentId={_parentId} />
         </PopDialog>
 
       </ul>);

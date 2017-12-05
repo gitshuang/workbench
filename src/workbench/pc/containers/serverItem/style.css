@@ -6,7 +6,15 @@
     margin-top: 10px;
     margin-left: 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    padding: 5px;
+    position: relative;
+
+    font-family: "微软雅黑 Regular", 微软雅黑;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    border-width: 0px;
 }
 
 .item_li_top{
@@ -15,8 +23,11 @@
 }
 .item_footer{
 	height: 30px;
+  line-height: 30px;
 	text-align: right;
-	padding-right: 20px;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
 }
  
 .item_left {
@@ -28,4 +39,15 @@
 	padding-left: 10px;
 	padding-top: 10px;
 	box-sizing: border-box;
+}
+
+.item_footer span{
+  font-family: "微软雅黑 Regular", 微软雅黑;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  color: rgb(153, 153, 153);
+}
+.item_footer i{
+  font-size: 25px;
 }

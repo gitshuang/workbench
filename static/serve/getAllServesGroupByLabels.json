@@ -1,57 +1,181 @@
 {
-  "data": [{
-      "children": [{
-        "enable": true,
-        "serveCode": "3002",
-        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-        "serveId": "2222_001",
-        "serveName": "HR相关业务二组件"
-      },
-      {
-        "enable": true,
-        "serveCode": "222",
-        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-        "serveId": "2222_002",
-        "serveName": "代办业务五组件"
-      }],
-      "lebalId": "s_1001",
-      "lebalName": "财务云"
-    },
-    {
-      "children": [{
-        "enable": true,
-        "serveCode": "222",
-        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-        "serveId": "2222_008",
-        "serveName": "HR相关业务一组件"
-      }],
-      "lebalId": "s_1002",
-      "lebalName": "协同云"
-    },
-    {
-      "children": [{
-        "enable": true,
-        "serveCode": "222",
-        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-        "serveId": "111111",
-        "serveName": "HR相关业务一组件"
-      }],
-      "lebalId": "c_1003",
-      "lebalName": "协同云2"
-    },
-    {
-      "children": [{
-        "enable": true,
-        "serveCode": "222",
-        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
-        "serveId": "222222",
-        "serveName": "HR相关业务一组件"
-      }],
-      "lebalId": "c_1004",
-      "lebalName": "协同云3"
-    }
-
-  ],
-  "msg": 1,
-  "status": 1
+    "status":1,
+    "data":[
+        {
+            "createTime":null,
+            "modifiedTime":null,
+            "ts":null,
+            "creator":null,
+            "modifier":null,
+            "tenantId":"gtzceot7",
+            "labelId":"1111",
+            "labelName":"协同云",
+            "labelCode":"001",
+            "labelType":"domain",
+            "children":[
+                {
+                    "tenantId":"gtzceot7",
+                    "serveId":"08a6b20d-0b7e-456f-af1e-76f73e8c8480",
+                    "serveName":"侧边栏管理",
+                    "serveCode":"menubar",
+                    "applicationId":"54e156c6-cd05-4d85-a0e2-c64836440e17",
+                    "enable":true,
+                    "url":"http://y78fwqxj.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/manager/menuBar.html",
+                    "serveIcon":"http://app.yonyou.com:80//UF_MOB_IMG_LIB/mob_image/product_icon/zsxt_icon.png",
+                    "hasWidget":false,
+                    "widgetTemplate":{
+                        "createTime":null,
+                        "modifiedTime":null,
+                        "ts":null,
+                        "creator":null,
+                        "modifier":null,
+                        "tenantId":"gtzceot7",
+                        "widgettemplateId":"08a6b20d-0b7e-456f-af1e-76f73e8c8480",
+                        "jsurl":null,
+                        "size":1,
+                        "background":"http://tqnhbd8y.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/workbench/calendar.png",
+                        "type":0,
+                        "descr":null,
+                        "serviceId":"08a6b20d-0b7e-456f-af1e-76f73e8c8480",
+                        "wasDefault":true,
+                        "primaryKey":"08a6b20d-0b7e-456f-af1e-76f73e8c8480"
+                    },
+                    "primaryKey":"08a6b20d-0b7e-456f-af1e-76f73e8c8480"
+                },
+                {
+                    "tenantId":"gtzceot7",
+                    "serveId":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2",
+                    "serveName":"应用管理",
+                    "serveCode":"application",
+                    "applicationId":"54e156c6-cd05-4d85-a0e2-c64836440e17",
+                    "enable":true,
+                    "url":"http://y78fwqxj.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/manager/application.html",
+                    "serveIcon":"http://app.yonyou.com:80//UF_MOB_IMG_LIB/mob_image/product_icon/ism-logo.png",
+                    "hasWidget":false,
+                    "widgetTemplate":{
+                        "createTime":null,
+                        "modifiedTime":null,
+                        "ts":null,
+                        "creator":null,
+                        "modifier":null,
+                        "tenantId":"gtzceot7",
+                        "widgettemplateId":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2",
+                        "jsurl":null,
+                        "size":1,
+                        "background":"http://tqnhbd8y.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/workbench/gauge_2.png",
+                        "type":0,
+                        "descr":null,
+                        "serviceId":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2",
+                        "wasDefault":true,
+                        "primaryKey":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2"
+                    },
+                    "primaryKey":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2"
+                }
+            ],
+            "primaryKey":"1111"
+        },
+        {
+            "createTime":null,
+            "modifiedTime":null,
+            "ts":null,
+            "creator":null,
+            "modifier":null,
+            "tenantId":"gtzceot7",
+            "labelId":"2222",
+            "labelName":"人力云",
+            "labelCode":"002",
+            "labelType":"domain",
+            "children":[
+                {
+                    "tenantId":"gtzceot7",
+                    "serveId":"08a6b20d-0b7e-456f-af1e-76f73e8c8480",
+                    "serveName":"侧边栏管理",
+                    "serveCode":"menubar",
+                    "applicationId":"54e156c6-cd05-4d85-a0e2-c64836440e17",
+                    "enable":true,
+                    "url":"http://y78fwqxj.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/manager/menuBar.html",
+                    "serveIcon":"http://app.yonyou.com:80//UF_MOB_IMG_LIB/mob_image/product_icon/zsxt_icon.png",
+                    "hasWidget":false,
+                    "widgetTemplate":{
+                        "createTime":null,
+                        "modifiedTime":null,
+                        "ts":null,
+                        "creator":null,
+                        "modifier":null,
+                        "tenantId":"gtzceot7",
+                        "widgettemplateId":"08a6b20d-0b7e-456f-af1e-76f73e8c8480",
+                        "jsurl":null,
+                        "size":1,
+                        "background":"http://tqnhbd8y.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/workbench/calendar.png",
+                        "type":0,
+                        "descr":null,
+                        "serviceId":"08a6b20d-0b7e-456f-af1e-76f73e8c8480",
+                        "wasDefault":true,
+                        "primaryKey":"08a6b20d-0b7e-456f-af1e-76f73e8c8480"
+                    },
+                    "primaryKey":"08a6b20d-0b7e-456f-af1e-76f73e8c8480"
+                },
+                {
+                    "tenantId":"gtzceot7",
+                    "serveId":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2",
+                    "serveName":"应用管理",
+                    "serveCode":"application",
+                    "applicationId":"54e156c6-cd05-4d85-a0e2-c64836440e17",
+                    "enable":true,
+                    "url":"http://y78fwqxj.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/manager/application.html",
+                    "serveIcon":"http://app.yonyou.com:80//UF_MOB_IMG_LIB/mob_image/product_icon/ism-logo.png",
+                    "hasWidget":false,
+                    "widgetTemplate":{
+                        "createTime":null,
+                        "modifiedTime":null,
+                        "ts":null,
+                        "creator":null,
+                        "modifier":null,
+                        "tenantId":"gtzceot7",
+                        "widgettemplateId":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2",
+                        "jsurl":null,
+                        "size":1,
+                        "background":"http://tqnhbd8y.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/workbench/gauge_2.png",
+                        "type":0,
+                        "descr":null,
+                        "serviceId":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2",
+                        "wasDefault":true,
+                        "primaryKey":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2"
+                    },
+                    "primaryKey":"0f64cc11-f6d0-473c-b293-cdc09c1cddc2"
+                },
+                {
+                    "tenantId":"gtzceot7",
+                    "serveId":"serve_43",
+                    "serveName":"维护自定义项",
+                    "serveCode":"serve_43",
+                    "applicationId":"app_4",
+                    "enable":true,
+                    "url":"http://uastest.yyuap.com/basedoc/pages/docInfo/index.html",
+                    "serveIcon":"http://app.yonyou.com/UF_MOB_IMG_LIB/mob_image/product_icon/zsxt_icon.png",
+                    "hasWidget":false,
+                    "widgetTemplate":{
+                        "createTime":null,
+                        "modifiedTime":null,
+                        "ts":null,
+                        "creator":null,
+                        "modifier":null,
+                        "tenantId":"gtzceot7",
+                        "widgettemplateId":"serve_43",
+                        "jsurl":null,
+                        "size":1,
+                        "background":"http://tqnhbd8y.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/workbench/round_1.png",
+                        "type":0,
+                        "descr":null,
+                        "serviceId":"serve_43",
+                        "wasDefault":true,
+                        "primaryKey":"serve_43"
+                    },
+                    "primaryKey":"serve_43"
+                }
+            ],
+            "primaryKey":"2222"
+        }
+        
+    ]
 }
