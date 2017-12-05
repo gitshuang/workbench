@@ -53,6 +53,13 @@
 .editPortrait :global(.iconfont):hover{
   cursor:pointer;
 }
+.imgOuter{
+  width:88px;
+  height:88px;
+  border:1px solid #ddd;
+  border-radius:44px;
+  overflow:hidden;
+}
 .imgInner{
   width:88px;
   height:88px;
@@ -137,6 +144,10 @@
   color:rgba(136,136,136,1);
   line-height:16px;
   cursor:pointer;
+}
+.gloryIcon li:hover{
+  cursor:pointer;
+  color:#E14C46;
 }
 .gloryIcon .iconContainer{
   width:36px;
@@ -349,4 +360,11 @@
   padding:0;
   width:60px;
   text-align:center;
+}
+:global(.u-select-selection-rendered){
+  display: block;
+  margin-left: 8px;
+  margin-right: 8px;
+  position: relative;
+  line-height: 28px;
 }

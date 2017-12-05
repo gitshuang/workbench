@@ -66,3 +66,8 @@ body {
   color:#fff;
   font-size:30px;
 }
+.u-dropdown-menu{
+  box-shadow: 0 3px 6px 0 rgba(74,81,93,0.25);
+}
+.u-dropdown-menu>.u-dropdown-menu-item{padding:0 25px;}
+.u-dropdown-menu>.u-dropdown-menu-item:hover{cursor: pointer;color:#E14C46;}

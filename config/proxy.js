@@ -6,21 +6,24 @@ var api = [
   '/desktop/getdeskTop',
   '/serve/getServeInfoByServeCode',
   '/serve/getServeInfoByAppCode',
-  '/user/getUserInfo',
+
   '/user/setCutUser',
 
   '/getMessage',
   '/getSelectWidgetList',
   '/setManageList',
   '/getManageList',
+
 ]
 
 var rapApi = [
     // '/serve/getAllServesGroupByLabels'
+  '/user/getUserInfo',
   '/widget/deleteByServeCode',
   '/widget/create',
   '/serve/getServeInfoWithDetail',
-  '/widget/getFolders'
+  '/widget/getFolders',
+  '/desktop/update',
 ];
 
 function makeRapConfig(key) {
