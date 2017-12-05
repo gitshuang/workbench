@@ -110,9 +110,38 @@ const reducer = handleActions({
       };
     }
   },
-  [addDesk]: (state, { payload: data }) => {
-    state.manageList.map(function(da,i){
-      da.children.push(data);
+  [addDesk]: (state, { payload: data}) => {
+
+    let defaultCar = {
+      "widgetId":"",
+      "icon": "",
+      "serviceCode": "",
+      "type": 3,
+      "parentId": parentId,
+      "widgetName": "",
+      "jsurl": "",
+      "size": 1
+    };
+
+    let newCar = [];
+
+    const { dataList, parentId} = data ;
+ 
+    for(let da of dataList){
+      if(da.selected){
+          let newCarObn = {...defaultCar};
+          newCarObn.widgetId = da.serveId;
+          newCarObn.widgetName = da.serveName;
+          newCarObn.serviceCode = da.serveCode;
+          newCarObn.icon = da.serveIcon;
+          newCarObn.jsurl = da.url;
+          newCar.push(newCarObn);
+      }
+    }
+    state.manageList.forEach((da,i)=>{
+        if(da.widgetId == parentId){
+          da.children = [...da.children,...newCar];
+        }
     })
     let newManageList = JSON.parse(JSON.stringify(state.manageList));
     return{

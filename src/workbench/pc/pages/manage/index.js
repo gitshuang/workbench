@@ -117,6 +117,7 @@ class Home extends Component {
       if (error) {
         requestError(payload);
       }
+
       requestSuccess();
       this.goBack();
     });

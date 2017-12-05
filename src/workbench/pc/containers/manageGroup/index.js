@@ -188,7 +188,7 @@ class ManageGroup extends Component {
         widgetName: groupName,
       },
     } = this.props;
-    debugger;
+    
     this.setState({
       inEdit: false,
       groupName:groupName ? groupName : "默认分组",

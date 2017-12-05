@@ -5,16 +5,17 @@
   margin-right: 15px;
 }
 .inputArea {
-  width: 100px;
-  left: -105px;
+  width: 270px;
+  left: -275px;
   position: absolute;
   top: 0;
   height: 32px;
   overflow: hidden;
   border: 1px solid #D2D2D2;
 }
-.inputArea input {
-  width: 100px;
+.searchText {
+  float: left;
+  width: 100%;
   height: 100%;
   padding: 0 10px;
   font-size: 14px;
@@ -27,13 +28,13 @@
   width: 1px;
 }
 .inputEnter.inputEnterActive {
-  width: 100px;
-  left: -105px;
+  width: 270px;
+  left: -275px;
   transition: all 300ms ease-in;
 }
 .inputLeave {
-  width: 100px;
-  left: -105px;
+  width: 270px;
+  left: -275px;
 }
 .inputLeave.inputLeaveActive {
   width: 1px;

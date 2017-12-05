@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Icon from 'bee-icon';
+import BeeIcon from 'components/icon';
 import ButtonGroup from 'bee-button-group';
 import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
@@ -17,7 +18,7 @@ const {getSelectWidgetList,addDesk} = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 import { select_widget_list,searchPanel,panel,left,right,button_group,form_control,icon,search_icon
-,panel_left
+,panel_left,footer_btn
 } from './style.css'
 
 @connect(
@@ -44,9 +45,8 @@ class SelectWidgetList extends Component {
         activeKey: "1",
         start: 0,
         value:"搜索内容...",
-        // data:{},
         dataList:[],  //存放数据源
-        // dataListBack:[],
+        dataListBack:[],
         dataMap:null    //存放转换后数据Map
     })
   }
@@ -55,14 +55,6 @@ class SelectWidgetList extends Component {
     
     this.getServices();
   }
-
-  // componentWillReceiveProps(nextProps){
-  //     if(nextProps.manageList !== this.props.manageList){
-  //         this.setState({
-  //           manageList:manageList
-  //         })
-  //     }
-  // }
 
   getServices(parme){
     let self = this;
@@ -73,16 +65,19 @@ class SelectWidgetList extends Component {
         requestError(payload);
       }
       //TODO此处深度复制payload---start
-      let dataList = [];
-      Object.assign(dataList,payload);
+      // let dataList = [];
+      // Object.assign(dataList,payload);
       //TODO此处深度复制payload---end
-      let _dataMap = self.getArrayToMap(dataList);
+      let _dataMap = self.getArrayToMap(payload);
       self.getDefaultSelectCheck(_dataMap);//修改map上的selected选中状态
       let _allDataList = self.getFindByTypeId("all");
+
       self.setState({
            dataMap:_dataMap,
-           dataList:_allDataList
+           dataList:_allDataList,
+           dataListBack:_allDataList
       });
+      // console.log(dataList);
       requestSuccess();
     });
   }
@@ -135,7 +130,6 @@ class SelectWidgetList extends Component {
     const {selectWidgetList} = this.props;
     let parme = {};//设置参数
     // getServices(parme);
-    debugger;
     let _data = [];
     if(id == "all"){
         _data = this.state.dataListBack;
@@ -153,34 +147,18 @@ class SelectWidgetList extends Component {
       dataList:_data
     });
   }
-
-  // onChange = (activeKey) => {
-  //     console.log(`onChange ${activeKey}o-^-o`);
-  //     this.setState({
-  //         activeKey,
-  //     });
-  // }
-
-  // onTabClick = (key) => {
-  //     console.log(`onTabClick ${key}o^o`);
-  //     if (key === this.state.activeKey) {
-  //         this.setState({
-  //             activeKey: '',
-  //         });
-  //     }
-  // }
-
+ 
   onChange =(data)=>{
+
     if(data.selected){
       this.state.dataMap[data.serveId].selected = false;
     }else{
       this.state.dataMap[data.serveId].selected = true;
     }
+    console.log(this.state.dataMap);
     this.setState({
         ...this.state
     });
-    debugger;
-    this.props.addDesk(data);
   }
 
   //输入框修改data数据源
@@ -190,15 +168,20 @@ class SelectWidgetList extends Component {
       });
   }
 
+  btnSave=()=>{
+    this.props.addDesk({dataList:this.state.dataList,parentId:this.props.parentId});
+    this.props.close();
+  }
+
   render() {
     let self = this;
     const {selectWidgetList} = this.props;
     const {dataList} = this.state;
 
     let btns = [];
-    btns.push(<Button shape='border' onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
+    btns.push(<Button key="10012" shape='border' onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
     selectWidgetList.map(function(da,i){
-        btns.push(<Button shape='border' onClick={()=>{self.onBtnOnclick(da.lebalId)}}>{da.lebalName}</Button>);
+        btns.push(<Button key={`button_li_${da.lebalId}-${i}`} shape='border' onClick={()=>{self.onBtnOnclick(da.lebalId)}}>{da.labelName}</Button>);
     });
     let list = [];
     list = dataList.map((item, i) => {
@@ -225,6 +208,10 @@ class SelectWidgetList extends Component {
              {list}
           </div>
 
+          <div className={footer_btn}>
+             <Button onClick={this.btnSave} >添加</Button>
+             <Button onClick={this.props.close} >取消</Button>
+          </div>
        </div>
     </div>);
   }

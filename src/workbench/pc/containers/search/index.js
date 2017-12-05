@@ -1,12 +1,13 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import { withRouter } from 'react-router-dom';
 import Icon from 'components/icon';
 import {
   search,
   searchBtn,
+  searchText,
   inputArea,
   inputEnter,
   inputLeave,
@@ -56,23 +57,30 @@ class SearchContainer extends Component {
     if (isShow) {
       item = (
         <div className={inputArea} >
-          <input className="searchText" type="text" value={text} onChange={this.onChangeHandler}/>
+          <input
+            className={searchText}
+            type="text"
+            value={text}
+            onChange={this.onChangeHandler}
+            placeholder="搜索员工信息，应用、服务及其他内容"/>
         </div>
       )
     }
     return (
       <div className={search}>
-        <CSSTransitionGroup
-          transitionName={ {
-            enter: inputEnter,
-            enterActive: inputEnterActive,
-            leave: inputLeave,
-            leaveActive: inputLeaveActive,
-          } }
-          transitionEnterTimeout={0}
-          transitionLeaveTimeout={0} >
-          {item}
-        </CSSTransitionGroup>
+        <TransitionGroup>
+          <CSSTransitionGroup
+            transitionName={ {
+              enter: inputEnter,
+              enterActive: inputEnterActive,
+              leave: inputLeave,
+              leaveActive: inputLeaveActive,
+            } }
+            transitionEnterTimeout={0}
+            transitionLeaveTimeout={0} >
+            {item}
+          </CSSTransitionGroup>
+        </TransitionGroup>
         <div className={`tc ${searchBtn}`} onClick={this.search} >
           <Icon type="search" />
         </div>
