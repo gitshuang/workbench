@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, findPath } from '@u';
 import workActions from 'store/root/work/actions';
 import onClickOutside from 'react-onclickoutside';
 import {
@@ -18,18 +18,21 @@ import {
 
 const {
   titleServiceHidden,
+  setCurrent,
 } = workActions;
 
 @withRouter
 @connect(mapStateToProps(
     'titleServiceType',
     'current',
+    'menus',
     {
       "namespace": "work"
     }
   ),
   {
     titleServiceHidden,
+    setCurrent,
   }
 )
 @onClickOutside
@@ -44,7 +47,19 @@ class titleServiceContainer extends Component {
     }
   }
   handlerClickService(serveCode) {
-    this.props.history.push(`/serve/${serveCode}`);
+    const {
+      history,
+      menus,
+      setCurrent,
+    } = this.props;
+    const menuPath = findPath(menus, 'children', 'serveCode', serveCode);
+    if (menuPath.length) {
+      const current = menuPath.slice(-1)[0];
+      const { menuItemId } = current;
+      setCurrent(menuItemId);
+    } else {
+      history.push(`/serve/${serveCode}`);
+    }
     this.handleClickOutside();
   }
   render() {

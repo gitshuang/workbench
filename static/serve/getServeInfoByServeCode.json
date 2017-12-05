@@ -22,11 +22,11 @@
             "parentId": "1",
             "menuBarId": "menuBarId1",
             "serveId": "asfasdfasfas111",
-            "serveCode": "bing",
+            "serveCode": "baidu",
             "serve": {
               "serveId": "asfasdfasfas111",
               "serveName": "百度搜索",
-              "serveCode": "bing",
+              "serveCode": "baidu",
               "enable": true,
               "url": "https://www.baidu.com",
               "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
