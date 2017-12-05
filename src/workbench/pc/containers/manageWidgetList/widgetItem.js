@@ -29,12 +29,13 @@ import {
 } from './style.css'
 
 const type='item';
-let timestamp;
+var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
     props.folderType && props.closeFolderDrag();
     let diffOffset = monitor.getDifferenceFromInitialOffset();
     timestamp=new Date().getTime();
+    window.timestamp = timestamp;
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType};
   },
 

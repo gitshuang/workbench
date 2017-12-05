@@ -437,7 +437,7 @@ const reducer = handleActions({
       manageList: [...manageList],
     }
   },
-  [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType} }) => {
+  [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType,timeFlag} }) => {
     let manageAllList = state.manageList;
     let sourceData= preParentId && findById(manageAllList,preParentId); //拖拽前 父级源对象
     let targetData = parentId && findById(manageAllList,parentId); //拖拽后 父级目标对象
@@ -447,22 +447,22 @@ const reducer = handleActions({
     let manageList = (preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3) ? [sourceData] : manageAllList;
     let itemIn = findById(manageAllList,id);
     let itemAfter = findById(manageAllList,afterId);
-    if(preType === 3 && afterType === 2){
+    if(preType === 3 && afterType === 2 && timeFlag){
       //从外面拖入文件夹里面
+      sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
       if(preParentId !== afterId){
         itemIn.parentId = afterId;
       }
-      itemAfter.children.push(itemIn); //往文件夹里添加拖拽的数据
-      sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //将拖拽的数据从外层删掉
-    }else if(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3){
+      itemAfter.children.push(itemIn); //添加
+    }else if((preType === 3 && afterType === 2 && !timeFlag)||(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3)){
       //从文件夹里面往外面拖拽 或 跨分组拖拽
-      //targetData.children.push(itemOut);
       sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
       if(preParentId !== parentId){
         itemIn.parentId = parentId;
       }
       targetData.children.splice(targetData.children.indexOf(itemAfter),0,itemIn); //添加
     }else if(preParentId !== parentId && preType === 3 && afterType === 1){
+      //跨分组拖拽 放到组内 而不是元素上
       sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
       if(preParentId !== parentId){
         itemIn.parentId = parentId;
