@@ -36,9 +36,9 @@
 }
 :global(.lebra-navbar-left-content){
   position: relative;
-  display:block;
-  width:60px;
-  height:28px;
+  display: block;
+  height: 28px;
+  line-height: 28px;
 }
 :global(.lebra-navbar-title){
   -webkit-box-pack: center;

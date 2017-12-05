@@ -8,40 +8,41 @@
   line-height: 32px;
   position: relative;
   cursor: pointer;
-  color: rgba(135,139,148,1);
+  color: #878b94;
 }
 :global(.lebra-navbar-left-content){
   margin-left: 20px;
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(74,81,93,1);
+  color:#4a515d;
 }
 :global(.lebra-navbar-title){
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(74,81,93,1);
+  color:#4a515d;
   line-height:19px;
 }
-:global(.lebra-navbar-right>div){
+:global(.lebra-navbar-right)>div{
   width:32px;
   height: 32px;
   line-height: 32px;
   position: relative;
   cursor: pointer;
 }
-:global(.lebra-navbar-right .iconfont){
+:global(.lebra-navbar-right) :global(.iconfont){
   font-size:20px;
   font-weight:bold;
-  color: rgba(135,139,148,1);
+  color: #878b94;
+  vertical-align: middle;
 }
-:global(.lebra-navbar-right .active .iconfont){
-  color: rgba(225,76,70,1);
+:global(.lebra-navbar-right) :global(.active) :global(.iconfont){
+  color: #e14c46;
 }
-:global(.lebra-navbar-right .CircleDot){
+:global(.lebra-navbar-right) :global(.CircleDot){
   position: absolute;
   width:6px;
   height: 6px;
-  background: rgba(225,76,70,1);
+  background: #e14c46;
   border-radius: 50% 50%;
   top:5px;
   right:5px;

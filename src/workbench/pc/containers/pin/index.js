@@ -1,7 +1,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import onClickOutside from 'react-onclickoutside';
 import { mapStateToProps, guid } from '@u';
 /*  actions  */
@@ -127,16 +127,6 @@ class Pin extends Component {
   render() {
     const { pinDisplay } = this.props;
     const content = pinDisplay ? (
-
-    <CSSTransitionGroup
-      transitionName={ {
-          enter: 'animated',
-          enterActive: 'fadeIn',
-          leave: 'animated',
-          leaveActive: 'fadeOut',
-        } }
-      transitionEnterTimeout={300}
-      transitionLeaveTimeout={300} >
       <div className={`${pin} um-css3-hc`} >
         <div className={`${header} um-box`}>
           <div>
@@ -151,9 +141,22 @@ class Pin extends Component {
           onAddGroup={this.addNewGroup}
         />
       </div>
-    </CSSTransitionGroup>
     ) : null;
-    return content;
+    return (
+      <TransitionGroup>
+        <CSSTransitionGroup
+          transitionName={ {
+              enter: 'animated',
+              enterActive: 'fadeIn',
+              leave: 'animated',
+              leaveActive: 'fadeOut',
+            } }
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300} >
+          { content }
+        </CSSTransitionGroup>
+      </TransitionGroup>
+    );
   }
 }
 

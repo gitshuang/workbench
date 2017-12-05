@@ -14,6 +14,7 @@ const { changeUserInfoDisplay,hideUserInfoDisplay } = homeActions;
 @connect(
   mapStateToProps(
     'userInfoDisplay',
+    'userInfo',
     {
       namespace: 'home',
     }
@@ -25,7 +26,12 @@ const { changeUserInfoDisplay,hideUserInfoDisplay } = homeActions;
 )
 class HeaderPage extends Component {
   getLeftContent() {
-    return (<a href="##"><img src={logoUrl} className={logoImg}/></a>);
+    const {
+      userInfo: {
+        logo,
+      }
+    } = this.props;
+    return (<img src={logo} className={logoImg}/>);
   }
   componentDidMount() {
     setTimeout(() => {
