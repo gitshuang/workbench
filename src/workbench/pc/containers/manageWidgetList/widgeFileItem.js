@@ -22,8 +22,10 @@ const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupAc
 
 const type='item';
 
+//let timestamp;
 const itemSource = {
   beginDrag(props) {
+    //timestamp=new Date().getTime();
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
   }
 };
@@ -34,9 +36,9 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
-
+    const timeFlag = (new Date().getTime() - timestamp > 2000);
     if (draggedId !== props.id) {
-      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
+      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag);
     }
   }
 };
@@ -229,11 +231,11 @@ class WidgeFileItem extends Component {
           <div className={`${title_right} ${file_title_right}`}> {da.widgetName} </div>
         </div>
         {/*<div name="file" className={[context,file_context].join(' ')}>
-           { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) } 
+           { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) }
         </div> */}
         {this.state.editShow ? edit : null }
         {this.state.editShow ? null : btns }
-        
+
         {/*<div className={file_num}>
           (3)
         </div>*/}
