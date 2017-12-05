@@ -29,6 +29,7 @@ const itemTarget = {
     return monitor.getClientOffset();
   },
   drop(props, monitor) {
+    debugger;
     const draggedId = monitor.getItem().id;
     //const previousParentId = monitor.getItem().parentId;
 
@@ -76,6 +77,11 @@ class ManageFolderDialog extends Component {
       const { moveServe } = this.props;
       moveServe(data);
     }
+    closeFolderDrag = () => {
+      const { closeFolder } = this.props;
+      closeFolder();
+    }
+
     render() {
         const {curDisplayFolder: {widgetName: title, children, }, closeFolder, folderModalDisplay} = this.props;
         const list = children.map((child, i) => {
@@ -90,7 +96,7 @@ class ManageFolderDialog extends Component {
                 moveItemDrag: this.moveItemDrag,
             };
             return (
-                <WidgetItem { ...props }/>
+                <WidgetItem { ...props } folderType={'folder'} closeFolderDrag={this.closeFolderDrag}/>
             );
         });
       const { connectDragSource, connectDropTarget,isDragging } = this.props;
