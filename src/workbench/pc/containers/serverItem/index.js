@@ -14,7 +14,7 @@ class ServerItem extends Component {
   constructor(props) {
       super(props);
   }
-  
+
   render() {
     const {serveId, serveName,selected} = this.props.data;
     let btn = null;
@@ -28,12 +28,10 @@ class ServerItem extends Component {
       <BeeIcon type="pin2" style={{cursor:"pointer"}} /> </div>);
     }
 
-    console.log(serveId+"_"+selected)
-
     return (
        <div className={serverItem}>
             <div className={item_li_top}>
-                 
+
 
                 <div className={item_right}>
                     {serveId}
