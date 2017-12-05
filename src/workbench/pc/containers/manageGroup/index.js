@@ -79,15 +79,13 @@ const itemTarget = {
 
     if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
-    }else if(draggedType===3 && props.data.type===1){
+    }else if((draggedType===2 || draggedType===3) && props.data.type===1){
       typeof props.data.parentId === "undefined" && (afterParentId = props.data.widgetId);
       //因为冒泡 所以已经有的话 不需要执行move
       let dataItem = findItemById(props.data.children,draggedId);
-      if(folderType==="folder"){
-        //从文件夹把元素往分组里拖拽
+      if(folderType==="folder" || (typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId))){
+        //folderType==="folder" 从文件夹把元素往分组里拖拽
         props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
-      }else {
-        (typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)) && props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }
     }
   }
@@ -188,7 +186,7 @@ class ManageGroup extends Component {
         widgetName: groupName,
       },
     } = this.props;
-    
+
     this.setState({
       inEdit: false,
       groupName:groupName ? groupName : "默认分组",

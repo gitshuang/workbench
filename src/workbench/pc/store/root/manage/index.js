@@ -126,7 +126,7 @@ const reducer = handleActions({
     let newCar = [];
 
     const { dataList, parentId} = data ;
- 
+
     for(let da of dataList){
       if(da.selected){
           let newCarObn = {...defaultCar};
@@ -491,7 +491,7 @@ const reducer = handleActions({
         itemIn.parentId = afterId;
       }
       itemAfter.children.push(itemIn); //添加
-    }else if((preType === 3 && afterType === 2 && preParentId !== parentId && !timeFlag)||(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3)){
+    }else if((preType === 2 && preParentId !== parentId)|| (preType === 3 && afterType === 2 && preParentId !== parentId && !timeFlag)||(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3)){
       //从文件夹里面往外面拖拽 或 跨分组拖拽
       sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
       if(preParentId !== parentId){
