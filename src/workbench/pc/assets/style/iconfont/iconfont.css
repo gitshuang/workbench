@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';
-  src:  url('iconfont.eot?25k5a');
-  src:  url('iconfont.eot?25k5a#iefix') format('embedded-opentype'),
-    url('iconfont.ttf?25k5a') format('truetype'),
-    url('iconfont.woff?25k5a') format('woff'),
-    url('iconfont.svg?25k5a#iconfont') format('svg');
+  src:  url('iconfont.eot?qxtaju');
+  src:  url('iconfont.eot?qxtaju#iefix') format('embedded-opentype'),
+    url('iconfont.ttf?qxtaju') format('truetype'),
+    url('iconfont.woff?qxtaju') format('woff'),
+    url('iconfont.svg?qxtaju#iconfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,14 +24,65 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.iconfont {
-  font-family:"iconfont" !important;
-  font-size:16px;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.icon-close:before {
+  content: "\e97e";
 }
-
+.icon-close2 .path1:before {
+  content: "\e984";
+  color: rgb(0, 0, 0);
+}
+.icon-close2 .path2:before {
+  content: "\e985";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-close2 .path3:before {
+  content: "\e986";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-close2 .path4:before {
+  content: "\e987";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-close2 .path5:before {
+  content: "\e988";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-close2 .path6:before {
+  content: "\e989";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-pin2:before {
+  content: "\e98a";
+}
+.icon-application-management:before {
+  content: "\e977";
+}
+.icon-application-management2:before {
+  content: "\e97c";
+}
+.icon-application-management3:before {
+  content: "\e97d";
+}
+.icon-life-buoy:before {
+  content: "\e97f";
+}
+.icon-message-management:before {
+  content: "\e980";
+}
+.icon-message-management2:before {
+  content: "\e981";
+}
+.icon-role-management-2:before {
+  content: "\e982";
+}
+.icon-role-management:before {
+  content: "\e983";
+}
 .icon-charge-up:before {
   content: "\e970";
 }
@@ -52,9 +103,6 @@
 }
 .icon-pdf:before {
   content: "\e976";
-}
-.icon-personal-information:before {
-  content: "\e977";
 }
 .icon-ppt:before {
   content: "\e978";

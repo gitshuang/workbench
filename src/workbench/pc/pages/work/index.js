@@ -7,6 +7,7 @@ import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 /*  components 组件 */
 import Icon from 'components/icon';
+import {Message} from 'tinper-bee';
 /*  containers 容器组件  */
 import TabsContainer from 'containers/tabs';
 import HeaderContainer from 'containers/header';
@@ -40,7 +41,7 @@ const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel,
         'expandedSidebar',
         'type',
         {
-            namespace: 'work'
+          namespace: 'work'
         }
     ),
     {
@@ -142,6 +143,7 @@ export default class Work extends Component {
                 if (error) {
                     requestError(payload);
                 }
+                Message.create({content: '从首页移除成功', position: 'top',color:"success"});
                 requestSuccess();
             });
             return false;
@@ -202,6 +204,7 @@ export default class Work extends Component {
     render() {
         const {
           pinType,
+          pinDisplay,
           titleServiceDisplay,
           titleServiceType,
           current: {
@@ -230,7 +233,7 @@ export default class Work extends Component {
                           onClick={ titleServiceDisplay } />) : undefined
                     }
                     <Icon
-                      type="pin"
+                      type={pinDisplay?"pin2":"pin"}
                       className={ pinType ? active : '' }
                       style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                       onClick={ this.pinDisplayFn }
