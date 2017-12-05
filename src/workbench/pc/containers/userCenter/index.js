@@ -133,7 +133,6 @@ class UserInfoContainer extends Component {
   }
 
   handleChange=(e)=>{
-    // console.log(e);
     switch(e){
       case 'account' :
         alert("账号");
@@ -147,27 +146,27 @@ class UserInfoContainer extends Component {
       case 'cancel' :
         window.location.href = `/workbench/logout?SAMLRequest=true&service=${encodeURIComponent(`${window.location.origin}/workbench/`)}`;
         break;
-      default : alert("undefined");
+      default :
+        break;
     }
   }
 
   handleChange2 =(e)=>{
-    // console.log(e);
     switch(e){
       case 'account' :
         alert("账号");
         break;
       case 'safetyPick' :
-        alert("安全评级");
+        window.open('http://idtest.yyuap.com/usercenter/securityscore');
         break;
       case 'password' :
-        alert("password");
+        window.open('http://idtest.yyuap.com/usercenter/security');
         break;
       case 'cutuser' :
-        alert("切换企业帐号");
         this.setCutUserFn();
         break;
-      default : alert("undefined");
+      default :
+        break;
     }
 
   }
