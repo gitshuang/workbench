@@ -45,17 +45,17 @@ const {
   selectGroupActions,
 } = manageActions;
 
-let dataItem;
 function findItemById(manageList,id) {
+  let dataItem;
   for(let i = 0;i<manageList.length;i++){
     if(manageList[i].children){
-      manageList[i].children && findItemById(manageList[i].children,id)
+      dataItem = findItemById(manageList[i].children,id)
+    }
+    if(dataItem){
+      break;
     }
     if(manageList[i].widgetId && manageList[i].widgetId === id){
       dataItem = manageList[i];
-      break;
-    }
-    if(dataItem){
       break;
     }
   }
@@ -82,12 +82,12 @@ const itemTarget = {
     }else if(draggedType===3 && props.data.type===1){
       typeof props.data.parentId === "undefined" && (afterParentId = props.data.widgetId);
       //因为冒泡 所以已经有的话 不需要执行move
-      dataItem = findItemById(props.data.children,draggedId);
+      let dataItem = findItemById(props.data.children,draggedId);
       if(folderType==="folder"){
         //从文件夹把元素往分组里拖拽
         props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }else {
-        typeof dataItem==="undefined" && (dataItem && dataItem.widgetId !==draggedId)&& props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
+        (typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)) && props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }
     }
   }
