@@ -31,7 +31,7 @@ class HeaderPage extends Component {
         logo,
       }
     } = this.props;
-    return (<img src={logo} className={logoImg}/>);
+    return (<img src={logo || logoUrl} className={logoImg}/>);
   }
   componentDidMount() {
     setTimeout(() => {
