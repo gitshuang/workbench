@@ -23,7 +23,7 @@
 	position: relative;
 }
 .icon{
-    font-size: 36px;
+    font-size: 24px;
     text-align: center;
     position: absolute;
     top: 0;
@@ -98,6 +98,7 @@
 .panel .right{
 	-webkit-box-flex:1;
 	margin-left: 10px;
+  overflow: scroll;
 }
 .panel_left>div{
 	width: 100%;

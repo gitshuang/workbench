@@ -35,7 +35,7 @@ class HeaderPage extends Component {
   }
   componentDidMount() {
     setTimeout(() => {
-      window.scrollTo(0, 1)
+      window.scrollTo(0, 1);
     },0);
   }
   render() {

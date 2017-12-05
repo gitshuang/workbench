@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Icon from 'bee-icon';
+import BeeIcon from 'components/icon';
 import ButtonGroup from 'bee-button-group';
 import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
@@ -46,7 +47,7 @@ class SelectWidgetList extends Component {
         value:"搜索内容...",
         // data:{},
         dataList:[],  //存放数据源
-        // dataListBack:[],
+        dataListBack:[],
         dataMap:null    //存放转换后数据Map
     })
   }
@@ -81,7 +82,8 @@ class SelectWidgetList extends Component {
       let _allDataList = self.getFindByTypeId("all");
       self.setState({
            dataMap:_dataMap,
-           dataList:_allDataList
+           dataList:_allDataList,
+           dataListBack:_allDataList
       });
       requestSuccess();
     });
@@ -135,7 +137,6 @@ class SelectWidgetList extends Component {
     const {selectWidgetList} = this.props;
     let parme = {};//设置参数
     // getServices(parme);
-    debugger;
     let _data = [];
     if(id == "all"){
         _data = this.state.dataListBack;
@@ -179,7 +180,6 @@ class SelectWidgetList extends Component {
     this.setState({
         ...this.state
     });
-    debugger;
     this.props.addDesk(data);
   }
 
@@ -198,7 +198,7 @@ class SelectWidgetList extends Component {
     let btns = [];
     btns.push(<Button shape='border' onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
     selectWidgetList.map(function(da,i){
-        btns.push(<Button shape='border' onClick={()=>{self.onBtnOnclick(da.lebalId)}}>{da.lebalName}</Button>);
+        btns.push(<Button key={`button_li_${da.lebalId}-${i}`} shape='border' onClick={()=>{self.onBtnOnclick(da.lebalId)}}>{da.lebalName}</Button>);
     });
     let list = [];
     list = dataList.map((item, i) => {

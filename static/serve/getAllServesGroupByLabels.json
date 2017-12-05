@@ -27,7 +27,30 @@
       }],
       "lebalId": "s_1002",
       "lebalName": "协同云"
+    },
+    {
+      "children": [{
+        "enable": true,
+        "serveCode": "222",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serveId": "111111",
+        "serveName": "HR相关业务一组件"
+      }],
+      "lebalId": "c_1003",
+      "lebalName": "协同云2"
+    },
+    {
+      "children": [{
+        "enable": true,
+        "serveCode": "222",
+        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serveId": "222222",
+        "serveName": "HR相关业务一组件"
+      }],
+      "lebalId": "c_1004",
+      "lebalName": "协同云3"
     }
+
   ],
   "msg": 1,
   "status": 1

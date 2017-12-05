@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Icon from 'bee-icon';
-// import _Icon from 'components/icon';
+import BeeIcon from 'components/icon';
 import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
 
@@ -19,9 +19,12 @@ class ServerItem extends Component {
     const {serveId, serveName,selected} = this.props.data;
     let btn = null;
     if(selected){
-       btn = <div onClick={()=>{this.props.onChange(this.props.data)}} style={{width:"50px",height:"50px"}}>"已存在"</div> ;
+       btn = (<div onClick={()=>{this.props.onChange(this.props.data)}}  >
+          <BeeIcon type="pin" />
+       "已添加"</div>) ;
     }else{
-      btn = <div onClick={()=>{this.props.onChange(this.props.data)}} style={{width:"50px",height:"50px"}} >"加入桌面"</div>;
+      btn = (<div onClick={()=>{this.props.onChange(this.props.data)}}  >
+      <BeeIcon type="pin2" /></div>);
     }
 
     console.log(serveId+"_"+selected)
