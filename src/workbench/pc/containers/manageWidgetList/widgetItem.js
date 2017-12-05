@@ -31,13 +31,16 @@ import {
 const type='item';
 let timestamp;
 const itemSource = {
-  beginDrag(props) {
+  beginDrag(props, monitor, component) {
+    props.folderType && props.closeFolderDrag();
+    let diffOffset = monitor.getDifferenceFromInitialOffset();
     timestamp=new Date().getTime();
-    return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
+    return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType};
   },
 
   endDrag(props, monitor, component){
-    return monitor.getClientOffset();
+    //props.closeFolderDrag();
+    return monitor.getDifferenceFromInitialOffset();
   }
 };
 
@@ -45,7 +48,14 @@ const itemSource = {
 const itemTarget = {
   //hover 悬浮调用 drop落在目标上时调用
   hover(props, monitor){
-
+    const draggedId = monitor.getItem().id;
+    const previousParentId = monitor.getItem().parentId;
+    const preType = monitor.getItem().type;
+    if (draggedId !== props.id){
+      let diff = monitor.getDifferenceFromInitialOffset();
+    }else {
+      //props.closeFolderDrag();
+    }
   },
   drop(props, monitor) {
     const draggedId = monitor.getItem().id;
@@ -53,7 +63,7 @@ const itemTarget = {
     const preType = monitor.getItem().type;
 
     if (draggedId !== props.id && preType !==1) {
-      if(new Date().getTime() - timestamp > 2000 && preType === 3 && props.data.type === 3){
+      if(new Date().getTime() - timestamp > 2000 && preType === 3 && props.data.type === 3 && props.folderType!=="folder"){
         //放上去停留大于2s添加文件夹
         props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
       }else {
@@ -109,7 +119,7 @@ const widgetStyle = [
     renameFolder,
     setFolderEdit,
     selectListActions,selectGroupActions,
-    addFolder
+    addFolder,
   }
 )
 class WidgetItem extends Component {

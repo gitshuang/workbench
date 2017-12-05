@@ -449,6 +449,9 @@ const reducer = handleActions({
     let itemAfter = findById(manageAllList,afterId);
     if(preType === 3 && afterType === 2){
       //从外面拖入文件夹里面
+      if(preParentId !== afterId){
+        itemIn.parentId = afterId;
+      }
       itemAfter.children.push(itemIn); //往文件夹里添加拖拽的数据
       sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //将拖拽的数据从外层删掉
     }else if(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3){

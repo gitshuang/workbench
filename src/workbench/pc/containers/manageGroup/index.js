@@ -45,11 +45,27 @@ const {
   selectGroupActions,
 } = manageActions;
 
+let dataItem;
+function findItemById(manageList,id) {
+  for(let i = 0;i<manageList.length;i++){
+    if(manageList[i].children){
+      manageList[i].children && findItemById(manageList[i].children,id)
+    }
+    if(manageList[i].widgetId && manageList[i].widgetId === id){
+      dataItem = manageList[i];
+      break;
+    }
+    if(dataItem){
+      break;
+    }
+  }
+  return dataItem;
+}
 const type='item';
 
 const itemSource = {
   beginDrag(props) {
-    return { id: props.id,type:props.type,parentId:props.parentId };
+    return { id: props.id,type:props.type,parentId:props.parentId,folderType:props.folderType };
   }
 };
 
@@ -58,13 +74,21 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
     const preParentId = monitor.getItem().parentId;
     const draggedType = monitor.getItem().type;
+    const folderType = monitor.getItem().folderType;
     let afterParentId = props.data.parentId;
+
     if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
-    }else if(draggedType===3 && props.data.type===1 && preParentId !== props.data.widgetId){
+    }else if(draggedType===3 && props.data.type===1){
       typeof props.data.parentId === "undefined" && (afterParentId = props.data.widgetId);
-      let data = props.data.children.filter(({widgetId}) => widgetId === draggedId);
-      data.length===0 && props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
+      //因为冒泡 所以已经有的话 不需要执行move
+      dataItem = findItemById(props.data.children,draggedId);
+      if(folderType==="folder"){
+        //从文件夹把元素往分组里拖拽
+        props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
+      }else {
+        typeof dataItem==="undefined" && (dataItem && dataItem.widgetId !==draggedId)&& props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
+      }
     }
   }
 };

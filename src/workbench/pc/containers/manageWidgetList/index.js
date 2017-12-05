@@ -19,7 +19,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder,closeFolder } = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 @connect(
@@ -36,7 +36,8 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
     renameFolder,
     setFolderEdit,
     moveServe,
-    addFolder
+    addFolder,
+    closeFolder
   }
 )
 class WidgetList extends Component {
@@ -65,7 +66,6 @@ class WidgetList extends Component {
         showModal:true
       })
   }
-
   moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType) => {
     let data = {id,preParentId,preType,afterId,parentId,afterType}
     const { moveServe } = this.props;
