@@ -342,7 +342,7 @@ class ManageGroup extends Component {
               ref="groupName" />
             <Icon
               className={icon}
-              type="error3"
+              type="close2"
               onClick={ this.clearInput } />
           </div>
           <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>

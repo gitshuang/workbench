@@ -40,7 +40,7 @@ const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel,
         'expandedSidebar',
         'type',
         {
-            namespace: 'work'
+          namespace: 'work'
         }
     ),
     {
@@ -202,6 +202,7 @@ export default class Work extends Component {
     render() {
         const {
           pinType,
+          pinDisplay,
           titleServiceDisplay,
           titleServiceType,
           current: {
@@ -230,7 +231,7 @@ export default class Work extends Component {
                           onClick={ titleServiceDisplay } />) : undefined
                     }
                     <Icon
-                      type="pin"
+                      type={pinDisplay?"pin2":"pin"}
                       className={ pinType ? active : '' }
                       style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                       onClick={ this.pinDisplayFn }
