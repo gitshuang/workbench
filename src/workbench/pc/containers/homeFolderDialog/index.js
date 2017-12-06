@@ -36,7 +36,7 @@ class homeFolderDialog extends Component {
         } = this.props;
 
         const list = children.map((child, i) => {
-            const {type, widgetId, serveCode } = child;
+            const {type, widgetId, serveCode, jsurl } = child;
             const Widget = WidgetMaker(child);
             const props = {
                 key: `widget-${widgetId}-${i}`,
