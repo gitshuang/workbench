@@ -74,7 +74,7 @@ class BreadcrumbContainer extends Component {
       return (
         <div className={breadcrumbClass}>
           {
-            withSidebar ? ([
+            withSidebar ? (
               <section
                 className={this.state.breadcrumbMenu} >
                 菜单
@@ -82,12 +82,16 @@ class BreadcrumbContainer extends Component {
                   type="error3"
                   className={closeMenu}
                   onClick={this.closeMenu} />
-              </section>,
+              </section>
+            ) : null
+          }
+          {
+            withSidebar ? (
               <Icon
                 type="tabulation"
                 className={this.state.breadcrumbTab}
                 onClick={this.setExpended} />
-            ]) : null
+            ) : null
           }
           <div className={breadcrumbArea}>
             <Breadcrumbs data={this.props.brm} goback={this.goback}/>

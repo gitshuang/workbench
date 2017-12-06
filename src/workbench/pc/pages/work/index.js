@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, findPath } from '@u';
 /*   actions   */
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
@@ -24,7 +24,15 @@ import styles from './style.css';
 const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display,header,active} = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
-const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel, getProductInfo, returnDefaultState} = workActions;
+const {
+  setMenus,
+  setCurrent,
+  titleServiceDisplay,
+  pinDisplayBlock,
+  setPinCancel,
+  getProductInfo,
+  returnDefaultState
+} = workActions;
 
 
 @withRouter
@@ -52,7 +60,8 @@ const {setMenus, setCurrent, titleServiceDisplay, pinDisplayBlock, setPinCancel,
         titleServiceDisplay,
         pinDisplayBlock,
         setPinCancel,
-        returnDefaultState
+        returnDefaultState,
+        setCurrent,
     }
 )
 export default class Work extends Component {
@@ -66,23 +75,32 @@ export default class Work extends Component {
     goBack() {
         this.props.history.replace('');
     }
-    getProductInfo(code, type) {
+    getProductInfo(code, type, subcode) {
       const {
         getProductInfo,
         requestStart,
         requestError,
         requestSuccess,
+        history,
       } = this.props;
       requestStart();
-      getProductInfo(code, type).then(({error, payload}) => {
+      getProductInfo(code, type, subcode).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         } else {
           this.setState({
             loaded: true,
-          })
-          requestSuccess();
+          });
+          if (!subcode) {
+            const {
+              curServe: {
+                serveCode: subcode
+              },
+            } = payload;
+            history.replace(`/${type}/${code}/${subcode}`);
+          }
         }
+        requestSuccess();
       });
     }
     componentWillMount() {
@@ -91,10 +109,11 @@ export default class Work extends Component {
           params: {
             code,
             type,
+            subcode,
           },
         },
       } = this.props;
-      this.getProductInfo(code, type);
+      this.getProductInfo(code, type, subcode);
     }
     componentWillReceiveProps(nextProps) {
       const {
@@ -102,6 +121,7 @@ export default class Work extends Component {
           params: {
             code: newCode,
             type: newType,
+            subcode: newSubcode,
           }
         }
       } = nextProps;
@@ -110,14 +130,19 @@ export default class Work extends Component {
           params: {
             code: oldCode,
             type: oldType,
+            subcode: oldSubcode,
           }
         },
+        menus,
+        setCurrent,
       } = this.props;
-      if (!(newCode === oldCode && newType === oldType)) {
+      if (!(newCode === oldCode && newType === oldType) || !newSubcode) {
         this.setState({
           loaded: false,
         })
         this.getProductInfo(newCode, newType);
+      } else if (newSubcode && newSubcode !== oldSubcode) {
+        setCurrent(newSubcode);
       }
     }
     componentWillUnmount(){

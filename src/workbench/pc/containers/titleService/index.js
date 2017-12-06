@@ -18,7 +18,6 @@ import {
 
 const {
   titleServiceHidden,
-  setCurrent,
 } = workActions;
 
 @withRouter
@@ -32,7 +31,6 @@ const {
   ),
   {
     titleServiceHidden,
-    setCurrent,
   }
 )
 @onClickOutside
@@ -49,14 +47,17 @@ class titleServiceContainer extends Component {
   handlerClickService(serveCode) {
     const {
       history,
+      match: {
+        params: {
+          code,
+          type,
+        },
+      },
       menus,
-      setCurrent,
     } = this.props;
     const menuPath = findPath(menus, 'children', 'serveCode', serveCode);
     if (menuPath.length) {
-      const current = menuPath.slice(-1)[0];
-      const { menuItemId } = current;
-      setCurrent(menuItemId);
+      history.push(`/${type}/${code}/${serveCode}`);
     } else {
       history.push(`/serve/${serveCode}`);
     }
