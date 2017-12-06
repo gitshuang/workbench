@@ -131,9 +131,8 @@ const reducer = handleActions({
           let newCarObn = {...defaultCar};
           newCarObn.widgetId = da.serveId;
           newCarObn.widgetName = da.serveName;
-          newCarObn.serviceCode = da.serveCode;
+          newCarObn.serveCode = da.serveCode;
           newCarObn.icon = da.serveIcon;
-          newCarObn.jsurl = da.url;
           newCar.push(newCarObn);
       // }
     }
