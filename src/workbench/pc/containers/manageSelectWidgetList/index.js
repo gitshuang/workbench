@@ -41,18 +41,23 @@ class SelectWidgetList extends Component {
   constructor(props) {
     super(props);
 
+    debugger;
+
     this.state = ({
         activeKey: "1",
         start: 0,
         value:"搜索内容...",
         dataList:[],  //存放数据源
         dataListBack:[],
-        dataMap:null    //存放转换后数据Map
+        dataMap:null,    //存放转换后数据Map
+        selectedList:[],
+        edit:false
     })
   }
 
   componentDidMount() {
     
+    console.log(" --SelectWidgetList--componentDidMount-- ");
     this.getServices();
   }
 
@@ -64,6 +69,9 @@ class SelectWidgetList extends Component {
       if (error) {
         requestError(payload);
       }
+      // let _newPayload = [];
+      // Object.assign(_newPayload,payload);
+
       let _dataMap = self.getArrayToMap(payload);
       self.getDefaultSelectCheck(_dataMap);//修改map上的selected选中状态
       let _allDataList = self.getFindByTypeId("all");
@@ -73,7 +81,6 @@ class SelectWidgetList extends Component {
            dataList:_allDataList,
            dataListBack:_allDataList
       });
-      // console.log(dataList);
       requestSuccess();
     });
   }
@@ -83,7 +90,7 @@ class SelectWidgetList extends Component {
       let dataMap = {};
       data.map(function(da,i){
         da.children.map(function(_da,_i){
-          _da.parId = da.lebalId;
+          _da.parId = da.labelId;
           dataMap[_da.serveId] = _da;
         })
       })
@@ -125,13 +132,12 @@ class SelectWidgetList extends Component {
   onBtnOnclick =(id)=>{
     const {selectWidgetList} = this.props;
     let parme = {};//设置参数
-    // getServices(parme);
     let _data = [];
     if(id == "all"){
         _data = this.state.dataListBack;
     }else{
         this.props.selectWidgetList.map(function(_da,i){
-            const {lebalId: _id, lebalName: name} = _da;
+            const {labelId: _id, lebalName: name} = _da;
             if(_id == id){
                _data = _da.children;
             }
@@ -145,15 +151,15 @@ class SelectWidgetList extends Component {
   }
  
   onChange =(data)=>{
-
+    this.state.selectedList.push(data);
     if(data.selected){
       this.state.dataMap[data.serveId].selected = false;
     }else{
       this.state.dataMap[data.serveId].selected = true;
     }
-    console.log(this.state.dataMap);
     this.setState({
-        ...this.state
+        ...this.state,
+        edit:true
     });
   }
 
@@ -165,8 +171,11 @@ class SelectWidgetList extends Component {
   }
 
   btnSave=()=>{
-    // console.log("btnSave - this.props.parentId " + this.props.parentId);
-    this.props.addDesk({dataList:this.state.dataList,parentId:this.props.parentId});
+    // this.state.selectedList.push(data);
+    this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
+    this.setState({
+      selectedList:[]
+    })
     this.props.close();
   }
 
@@ -178,7 +187,7 @@ class SelectWidgetList extends Component {
     let btns = [];
     btns.push(<Button key="10012" shape='border' onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
     selectWidgetList.map(function(da,i){
-        btns.push(<Button key={`button_li_${da.lebalId}-${i}`} shape='border' onClick={()=>{self.onBtnOnclick(da.lebalId)}}>{da.labelName}</Button>);
+        btns.push(<Button key={`button_li_${da.labelId}-${i}`} shape='border' onClick={()=>{self.onBtnOnclick(da.labelId)}}>{da.labelName}</Button>);
     });
     let list = [];
     list = dataList.map((item, i) => {
@@ -206,7 +215,7 @@ class SelectWidgetList extends Component {
           </div>
 
           <div className={footer_btn}>
-             <Button onClick={this.btnSave} >添加</Button>
+            {this.state.edit?<Button onClick={this.btnSave} >添加</Button>:<Button onClick={this.btnSave} disabled >添加</Button>}
              <Button onClick={this.props.close} >取消</Button>
           </div>
        </div>

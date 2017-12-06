@@ -3,7 +3,7 @@
   font-size:12px;
 }
 .breadcrumbClass :global(.iconfont) {
-  margin:-2px 15px;
+  margin:-2px 0 0 15px;
   vertical-align: middle;
   line-height:27px;
   color:#878B94;
@@ -18,18 +18,18 @@
   margin-left: 200px !important;
 }
 .breadcrumbClass section{
-  display:none;
+  display: none;
   width:200px;
-  height:37px;
+  height:38px;
   padding:9px 17px;
   border-radius: 0 3px 0 0;
-  margin-right:15px;
   background:#9FA4AE;
   color:#fff;
   font-size:14px;
   position: relative;
 }
 .breadcrumbClass section :global(.iconfont){
+  margin:-2px 15px 0 0;
   font-size:24px;
   color:#fff;
   position:absolute;
@@ -39,5 +39,9 @@
   display: inline-block;
 }
 .breadcrumbClass .breadcrumb_tab{
-  display:none;
+  display: none;
+}
+.breadcrumbArea{
+  margin-left: 15px;
+  display: inline-block;
 }
