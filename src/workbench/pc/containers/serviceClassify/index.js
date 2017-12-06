@@ -10,7 +10,7 @@ import AutoComplete from 'bee-autocomplete';
 import Menu from 'bee-menus';
 import ButtonGroup from 'bee-button-group';
 
-import {bg,bg_wrap,wrap,clearfix,serviceSearch,ufSearch,hotService,classify,class1,class2,services,serviceInfo,serviceTit,describe,servicePic,singleService,appContent,menuBtnGroup } from './style.css';
+import {bg,bg_wrap,wrap,clearfix,serviceSearch,ufSearch,services,serviceInfo,serviceTit,describe,singleService,appContent,menuBtnGroup } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
 // import manageActions from 'store/root/manage/actions';
@@ -172,7 +172,7 @@ class serviceClassify extends Component {
     let {value ,options,placeholder,disabled, current } = this.state;
 
     let btns = [];
-    btns.push(<Button  className={ current === 1000 ? 'active' : '' } onClick={ (e)=>{this.handleClick(e,"all")} } key="1000">全部</Button>);
+    btns.push(<Button  className={ current === undefined ? 'active' : '' } onClick={ (e)=>{this.handleClick(e,"all")} } key="1000">全部</Button>);
 
     allApplicationList.map((da,i) =>{
       btns.push(<Button className={ current === da.labelId ? 'active' : '' } onClick={(e)=>{this.handleClick(e,da)} }  key={da.labelId} >{da.labelName}</Button>);
@@ -196,7 +196,6 @@ class serviceClassify extends Component {
                 </Button>
               </InputGroup.Button>
             </InputGroup>
-
             <div className={menuBtnGroup}>
               <ButtonGroup vertical >
                 {btns}
@@ -205,78 +204,6 @@ class serviceClassify extends Component {
             <div className={appContent}>
               {this.state.list2}
             </div>
-            {/*<div className={classify}>
-              <dl className={`${class1} ${clearfix}`}>
-                <dt>分类一</dt>
-                <ul className="clearfix">
-                  {
-                    serviceList.map(({
-                      lebalId,
-                      children,
-                      lebalName,
-                    }) => (
-                      <dd>
-                        <div key={lebalId} className={`${singleService} ${clearfix}`}>
-                          {
-                            children.map(({
-                              applicationCode,
-                              applicationIcon,
-                              applicationId,
-                              applicationName,
-                            }) => (
-                              <div>
-                                <img src={applicationIcon} className={servicePic}></img>
-                                <div className={`${services} ${clearfix}`}>
-                                  <div className={`${serviceInfo}`}>
-                                    <div className={serviceTit}>{lebalName}</div>
-                                    <div className={describe}>{applicationName}</div>
-                                  </div>
-                                </div>
-                              </div>
-                            ))
-                          }
-                        </div>
-                      </dd>
-                      ))
-                    }
-                </ul>
-              </dl>
-              <dl className={`${class2} ${clearfix}`}>
-                <dt>分类二</dt>
-                <ul className="clearfix">
-                  {
-                    serviceList.map(({
-                      lebalId,
-                      children,
-                      lebalName,
-                    }) => (
-                      <dd>
-                        <div key={lebalId} className={`${singleService} ${clearfix}`}>
-                          {
-                            children.map(({
-                              applicationCode,
-                              applicationIcon,
-                              applicationId,
-                              applicationName,
-                            }) => (
-                              <div>
-                                <img src={applicationIcon} className={servicePic}></img>
-                                <div className={`${services} ${clearfix}`}>
-                                  <div className={`${serviceInfo}`}>
-                                    <div className={serviceTit}>{lebalName}</div>
-                                    <div className={describe}>{applicationName}</div>
-                                  </div>
-                                </div>
-                              </div>
-                            ))
-                          }
-                        </div>
-                      </dd>
-                      ))
-                    }
-                </ul>
-              </dl>
-            </div>*/}
           </div>
         </div>
       </div>
