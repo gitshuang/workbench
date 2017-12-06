@@ -96,6 +96,7 @@ const reducer = handleActions({
         brm,
         tabs: tabs.concat({
           id: currentId,
+          serveCode,
           name,
           location: url,
         })
@@ -229,6 +230,7 @@ const reducer = handleActions({
       },
       tabs: [{
         id: menuItemId,
+        serveCode,
         name: title,
         location: url,
       }],

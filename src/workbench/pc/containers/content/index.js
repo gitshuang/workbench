@@ -36,13 +36,13 @@ class ContentContainer extends Component {
   }
 
   render() {
-    const { hasTab, current: { menuItemId: currentId, url: currentLocation, serveCode }, tabs, menus } = this.props;
+    const { hasTab, current: { menuItemId: currentId, url: currentLocation, serveCode: curServeCode }, tabs, menus } = this.props;
 
     if (hasTab) {
       return (
         <div className={contentArea} >
           {
-            tabs.map(({ id, location }) => (
+            tabs.map(({ id, location, serveCode }) => (
               <div key={id} className={cs(
                 content,
                 {
@@ -59,7 +59,7 @@ class ContentContainer extends Component {
       return (
         <div className={contentArea} >
           <div className={content} >
-            <IFrame title={currentId} url={appendSearchParam(currentLocation, { serveCode })} />
+            <IFrame title={currentId} url={appendSearchParam(currentLocation, { serveCode: curServeCode })} />
           </div>
         </div>
       );

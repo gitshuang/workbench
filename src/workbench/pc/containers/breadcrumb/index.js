@@ -6,14 +6,19 @@ import Breadcrumbs from 'components/breadcrumb';
 import Icon from 'components/icon';
 import { mapStateToProps } from '@u';
 import actions from 'store/root/work/actions';
-import { breadcrumbClass ,breadcrumb_menu,closeMenu,breadcrumb_tab} from './style.css';
+import {
+  breadcrumbClass,
+  breadcrumb_menu,
+  closeMenu,
+  breadcrumb_tab,
+  breadcrumbArea,
+} from './style.css';
 
 const {setExpandedSidebar} = actions;
 
 @withRouter
 @connect(
     mapStateToProps(
-        'expandedSidebar',
         'brm',
         {
             namespace: 'work',
@@ -38,19 +43,23 @@ class BreadcrumbContainer extends Component {
         this.setExpended = this.setExpended.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
     }
-
+    componentWillReceiveProps() {
+      const { withSidebar } = this.props;
+      if (!withSidebar) {
+        this.closeMenu()
+      }
+    }
     setExpended() {
-        const {setExpandedSidebar, expandedSidebar} = this.props;
-        setExpandedSidebar(!expandedSidebar);
+        const {setExpandedSidebar} = this.props;
+        setExpandedSidebar(true);
         this.setState({
           breadcrumbMenu:breadcrumb_menu,
           breadcrumbTab:breadcrumb_tab
         })
     }
-
     closeMenu(){
-        const {setExpandedSidebar, expandedSidebar} = this.props;
-        setExpandedSidebar(!expandedSidebar);
+        const {setExpandedSidebar} = this.props;
+        setExpandedSidebar(false);
         this.setState({
           breadcrumbMenu:"",
           breadcrumbTab:""
@@ -64,11 +73,25 @@ class BreadcrumbContainer extends Component {
 
       return (
         <div className={breadcrumbClass}>
-            <section className={this.state.breadcrumbMenu?breadcrumb_menu:""}>菜单<Icon type="error3" className={closeMenu} onClick={this.closeMenu}></Icon></section>
           {
-            withSidebar ? (<Icon type="tabulation" className={this.state.breadcrumbTab?breadcrumb_tab:""} onClick={this.setExpended} />) : null
+            withSidebar ? ([
+              <section
+                className={this.state.breadcrumbMenu} >
+                菜单
+                <Icon
+                  type="error3"
+                  className={closeMenu}
+                  onClick={this.closeMenu} />
+              </section>,
+              <Icon
+                type="tabulation"
+                className={this.state.breadcrumbTab}
+                onClick={this.setExpended} />
+            ]) : null
           }
-          <Breadcrumbs data={this.props.brm} goback={this.goback}/>
+          <div className={breadcrumbArea}>
+            <Breadcrumbs data={this.props.brm} goback={this.goback}/>
+          </div>
         </div>
       );
     }

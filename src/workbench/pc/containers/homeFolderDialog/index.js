@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'bee-modal';
 import Button from 'bee-button';
+import { withRouter } from 'react-router-dom'
 import WidgetMaker from 'components/widget';
 import { content ,home_file_item_dailog,close} from './style.css';
 import { mapStateToProps } from '@u';
@@ -9,6 +10,7 @@ import homeActions from 'store/root/home/actions';
 
 const {closeFolder} = homeActions;
 
+@withRouter
 @connect(
     mapStateToProps(
         'curDisplayFolder',
@@ -21,18 +23,30 @@ const {closeFolder} = homeActions;
         closeFolder,
     }
 )
-
 class homeFolderDialog extends Component {
     render() {
-        const {curDisplayFolder: {widgetName: title, children, }, folderModalDisplay, closeFolder, } = this.props;
-        
+        const {
+          curDisplayFolder: {
+            widgetName: title,
+            children
+          },
+          folderModalDisplay,
+          closeFolder,
+          history,
+        } = this.props;
+
         const list = children.map((child, i) => {
-            const {type, widgetId, } = child;
+            const {type, widgetId, serveCode } = child;
             const Widget = WidgetMaker(child);
             const props = {
                 key: `widget-${widgetId}-${i}`,
                 data: child,
             };
+            if (type === 3 && !jsurl){
+              props.clickHandler = () => {
+                history.push(`/serve/${serveCode}`);
+              }
+            }
             return (
                 <Widget { ...props }/>
             );
