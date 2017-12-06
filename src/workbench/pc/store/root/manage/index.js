@@ -337,6 +337,7 @@ const reducer = handleActions({
     group.children = group.children.concat({
       ...newdefaultFolder,
       widgetId: newId,
+      parentId:group.widgetId,
     });
     //拖拽创建文件夹
     if(typeof afterId !== "undefined"){
