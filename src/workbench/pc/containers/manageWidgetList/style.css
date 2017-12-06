@@ -257,3 +257,9 @@
   bottom:8px;
   color:#fff;
 }
+.pop_dialog_widge_list :global(.u-modal-dialog){
+  width: 900px;
+}
+.pop_dialog_widge_list :global(.u-modal-content){
+  background-color: #EEEEEE;
+}

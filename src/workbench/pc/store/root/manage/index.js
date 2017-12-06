@@ -110,9 +110,38 @@ const reducer = handleActions({
       };
     }
   },
-  [addDesk]: (state, { payload: data }) => {
-    state.manageList.map(function(da,i){
-      da.children.push(data);
+  [addDesk]: (state, { payload: data}) => {
+
+    let defaultCar = {
+      "widgetId":"",
+      "icon": "",
+      "serviceCode": "",
+      "type": 3,
+      "parentId": parentId,
+      "widgetName": "",
+      "jsurl": "",
+      "size": 1
+    };
+
+    let newCar = [];
+
+    const { dataList, parentId} = data ;
+
+    for(let da of dataList){
+      if(da.selected){
+          let newCarObn = {...defaultCar};
+          newCarObn.widgetId = da.serveId;
+          newCarObn.widgetName = da.serveName;
+          newCarObn.serviceCode = da.serveCode;
+          newCarObn.icon = da.serveIcon;
+          newCarObn.jsurl = da.url;
+          newCar.push(newCarObn);
+      }
+    }
+    state.manageList.forEach((da,i)=>{
+        if(da.widgetId == parentId){
+          da.children = [...da.children,...newCar];
+        }
     })
     let newManageList = JSON.parse(JSON.stringify(state.manageList));
     return{
@@ -308,19 +337,28 @@ const reducer = handleActions({
     group.children = group.children.concat({
       ...newdefaultFolder,
       widgetId: newId,
+      parentId:group.widgetId,
     });
+    //拖拽创建文件夹
     if(typeof afterId !== "undefined"){
       let dataPre = findById(manageList,id);
       let dataAfter = findById(manageList,afterId);
       let groupData = findById(manageList,newId);
+      dataPre.parentId =groupData.widgetId;
+      dataAfter.parentId =groupData.widgetId;
+      //放进文件夹
       groupData.children.push(dataPre);
       groupData.children.push(dataAfter);
+      //给文件夹赋值parentId
+      typeof groupData.parentId === "undefined" && (groupData.parentId = parentId);
       if(preParentId !== parentId){
         let dataPreParent = findById(manageList,preParentId);
         let dataAfterParent = findById(manageList,parentId);
+        //删掉
         dataPreParent.children.splice(dataPreParent.children.indexOf(dataPre),1);
         dataAfterParent.children.splice(dataAfterParent.children.indexOf(dataAfter),1);
       }else{
+        //删掉
         group.children.splice(group.children.indexOf(dataPre),1);
         group.children.splice(group.children.indexOf(dataAfter),1);
       }
@@ -454,7 +492,7 @@ const reducer = handleActions({
         itemIn.parentId = afterId;
       }
       itemAfter.children.push(itemIn); //添加
-    }else if((preType === 3 && afterType === 2 && !timeFlag)||(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3)){
+    }else if((preType === 2 && preParentId !== parentId)|| (preType === 3 && afterType === 2 && preParentId !== parentId && !timeFlag)||(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3)){
       //从文件夹里面往外面拖拽 或 跨分组拖拽
       sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
       if(preParentId !== parentId){

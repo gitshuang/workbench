@@ -7,6 +7,7 @@ import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 /*  components 组件 */
 import Icon from 'components/icon';
+import {Message} from 'tinper-bee';
 /*  containers 容器组件  */
 import TabsContainer from 'containers/tabs';
 import HeaderContainer from 'containers/header';
@@ -142,6 +143,7 @@ export default class Work extends Component {
                 if (error) {
                     requestError(payload);
                 }
+                Message.create({content: '从首页移除成功', position: 'top',color:"success"});
                 requestSuccess();
             });
             return false;

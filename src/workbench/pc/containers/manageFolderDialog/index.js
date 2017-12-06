@@ -7,51 +7,10 @@ import { content } from './style.css';
 import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
 import manageActions from 'store/root/manage/actions';
+import DialogContent from './dialogContent';
 
 const {moveServe,closeFolder } = manageActions;
 
-const type='item';
-
-const itemSource = {
-  beginDrag(props) {
-    return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
-  },
-  endDrag(props, monitor, component){
-    return monitor.getClientOffset();
-  }
-
-};
-
-
-const itemTarget = {
-  //hover 悬浮调用 drop落在目标上时调用
-  hover(props, monitor, component){
-    return monitor.getClientOffset();
-  },
-  drop(props, monitor) {
-    debugger;
-    const draggedId = monitor.getItem().id;
-    //const previousParentId = monitor.getItem().parentId;
-
-    if (draggedId !== props.id) {
-      //props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
-    }
-  }
-};
-
-function collectSource(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  };
-}
-
-
-function collectTaget(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget()
-  }
-}
 
 @connect(
     mapStateToProps(
@@ -102,7 +61,7 @@ class ManageFolderDialog extends Component {
       const { connectDragSource, connectDropTarget,isDragging } = this.props;
       const opacity = isDragging ? 0 : 1;
 
-      return connectDropTarget(
+      return (
             <div>
             <Modal show={folderModalDisplay} onHide={closeFolder} >
               <div className={`targetModal`}>
@@ -110,9 +69,12 @@ class ManageFolderDialog extends Component {
                 <Modal.Title>{title}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <div className={content} >
-                  { list }
-                </div>
+
+                <DialogContent list={list} isOverFolder={'over'}/>
+                {/*{connectDropTarget(*/}
+                {/*<div className={content} isOverFolder="over">*/}
+                  {/*{ list }*/}
+                {/*</div>)}*/}
               </Modal.Body>
             </div>
             </Modal>
@@ -121,4 +83,4 @@ class ManageFolderDialog extends Component {
     }
 }
 
-export default  DropTarget(type,itemTarget,collectTaget)(ManageFolderDialog);
+export default  ManageFolderDialog;

@@ -6,6 +6,14 @@ import { mapStateToProps } from '@u';
 import { content, contentArea, active } from './style.css';
 import IFrame from 'components/iframe';
 
+function appendSearchParam(url, params) {
+  var urlObj = new URL(url);
+  Object.keys(params).forEach((name) => {
+    urlObj.searchParams.append(name, params[name]);
+  });
+  return urlObj.toString();
+}
+
 @connect(
   mapStateToProps(
     'tabs',
@@ -28,7 +36,8 @@ class ContentContainer extends Component {
   }
 
   render() {
-    const { hasTab, current: { menuItemId: currentId, url: currentLocation }, tabs, menus } = this.props;
+    const { hasTab, current: { menuItemId: currentId, url: currentLocation, serveCode }, tabs, menus } = this.props;
+
     if (hasTab) {
       return (
         <div className={contentArea} >
@@ -40,7 +49,7 @@ class ContentContainer extends Component {
                   [active]: currentId === id,
                 }
               )} >
-                <IFrame title={id} url={location} />
+                <IFrame title={id} url={appendSearchParam(location, { serveCode })} />
               </div>
             ))
           }
@@ -50,7 +59,7 @@ class ContentContainer extends Component {
       return (
         <div className={contentArea} >
           <div className={content} >
-            <IFrame title={currentId} url={currentLocation} />
+            <IFrame title={currentId} url={appendSearchParam(currentLocation, { serveCode })} />
           </div>
         </div>
       );

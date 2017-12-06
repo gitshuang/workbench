@@ -7,7 +7,7 @@ import Icon from 'components/icon';
 import Button from 'bee-button';
 import Popconfirm from 'bee-popconfirm';
 import { widgetList, widgetItem, title, file_context, title_left,
-  file_icon, title_right, context, bottom ,footer,clearfix,addModule} from './style.css'
+  file_icon, title_right, context, bottom ,footer,clearfix,addModule,pop_dialog_widge_list} from './style.css'
 import WidgetItem from './widgetItem';
 import WidgeFileItem from './widgeFileItem';
 import Checkbox from 'bee-checkbox';
@@ -96,11 +96,10 @@ class WidgetList extends Component {
   render() {
 
       const { data,index } = this.props;
-
-      const pop_btn = [
-        {label:"确认",fun:this.popSave,className:""},
-        {label:"取消",fun:this.popClose,className:""}
-      ]   //设置操作按钮
+      // const pop_btn = [
+      //   {label:"确认",fun:this.popSave,className:""},
+      //   {label:"取消",fun:this.popClose,className:""}
+      // ]   //设置操作按钮
 
       // const { data } = this.props;
 
@@ -144,6 +143,11 @@ class WidgetList extends Component {
       })
 
     let _da = {};
+    // let _parentId = "";
+    // if(this.props.data.length != 0){
+    //   _parentId = this.props.data[0].parentId;
+    //   console.log("this.props.data[0].parentId ---- " + this.props.data[0].parentId );
+    // }
 
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
@@ -151,8 +155,8 @@ class WidgetList extends Component {
           <Icon type="add"  />
         </div>
 
-        <PopDialog show = { this.state.showModal } data={_da} btns={pop_btn} >
-            <SelectWidgetList close={this.popClose}/>
+        <PopDialog className={pop_dialog_widge_list} show = { this.state.showModal } data={_da} >
+            <SelectWidgetList close={this.popClose} parentId={this.props.parentId} />
         </PopDialog>
 
       </ul>);

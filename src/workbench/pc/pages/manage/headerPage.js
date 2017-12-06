@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import Header from 'containers/header';
@@ -10,9 +10,11 @@ import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
 const { changeUserInfoDisplay,hideUserInfoDisplay} = homeActions;
 
+@withRouter
 @connect(
   mapStateToProps(
     'userInfoDisplay',
+    'userInfo',
     {
       namespace:'home',
     }
@@ -24,7 +26,15 @@ const { changeUserInfoDisplay,hideUserInfoDisplay} = homeActions;
 )
 class HeaderPage extends Component {
   getLeftContent() {
-    return (<a href="##"><img src={logoUrl} className={logoImg}/></a>);
+    const {
+      userInfo: {
+        logo,
+      }
+    } = this.props;
+    return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
+  }
+  goback= () => {
+    this.props.history.goBack();
   }
   componentDidMount() {
     setTimeout(() => {

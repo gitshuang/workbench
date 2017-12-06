@@ -45,17 +45,17 @@ const {
   selectGroupActions,
 } = manageActions;
 
-let dataItem;
 function findItemById(manageList,id) {
+  let dataItem;
   for(let i = 0;i<manageList.length;i++){
     if(manageList[i].children){
-      manageList[i].children && findItemById(manageList[i].children,id)
+      dataItem = findItemById(manageList[i].children,id)
+    }
+    if(dataItem){
+      break;
     }
     if(manageList[i].widgetId && manageList[i].widgetId === id){
       dataItem = manageList[i];
-      break;
-    }
-    if(dataItem){
       break;
     }
   }
@@ -79,15 +79,13 @@ const itemTarget = {
 
     if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
-    }else if(draggedType===3 && props.data.type===1){
+    }else if((draggedType===2 || draggedType===3) && props.data.type===1){
       typeof props.data.parentId === "undefined" && (afterParentId = props.data.widgetId);
       //因为冒泡 所以已经有的话 不需要执行move
-      dataItem = findItemById(props.data.children,draggedId);
-      if(folderType==="folder"){
-        //从文件夹把元素往分组里拖拽
+      let dataItem = findItemById(props.data.children,draggedId);
+      if(folderType==="folder" || (typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId))){
+        //folderType==="folder" 从文件夹把元素往分组里拖拽
         props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
-      }else {
-        typeof dataItem==="undefined" && (dataItem && dataItem.widgetId !==draggedId)&& props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }
     }
   }
@@ -188,7 +186,7 @@ class ManageGroup extends Component {
         widgetName: groupName,
       },
     } = this.props;
-    debugger;
+
     this.setState({
       inEdit: false,
       groupName:groupName ? groupName : "默认分组",
@@ -401,12 +399,17 @@ class ManageGroup extends Component {
         className: "",
       }
     ]
+
+    console.log("this.props");
+    console.log(this.props);
+
+
     return connectDragSource(connectDropTarget(
       <div className={groupArea}>
         <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
           { groupTitle }
           <div>
-            <WidgetList index={index} data={children} />
+            <WidgetList index={index} data={children} parentId={this.props.data.widgetId}  />
           </div>
         </section>
         <div className={addBtn} >

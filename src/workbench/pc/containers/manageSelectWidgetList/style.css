@@ -23,7 +23,7 @@
 	position: relative;
 }
 .icon{
-    font-size: 36px;
+    font-size: 24px;
     text-align: center;
     position: absolute;
     top: 0;
@@ -90,6 +90,8 @@
 .panel{
 	padding-top: 30px;
 	display: -webkit-box;
+  position: relative;
+  margin-bottom: 50px;
 }
 .panel_left{
 	width: 224px;
@@ -98,6 +100,8 @@
 .panel .right{
 	-webkit-box-flex:1;
 	margin-left: 10px;
+  overflow: scroll;
+  height: 300px;
 }
 .panel_left>div{
 	width: 100%;
@@ -117,6 +121,23 @@
 }
 .form_control{
 	width: 437px;
-    height: 50px;
-    
+  height: 50px;
+}
+.footer_btn{
+  width: 300px;
+  position: absolute;
+  right: 10px;
+  bottom: -65px;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+}
+.footer_btn button{
+  border: 1px solid rgb(121, 121, 121);
+  border-radius: 5px;
+}
+.footer_btn button:first-child{
+  margin-right: 25px;
+}
+.footer_btn button:hover{
+  background:rgb(121, 121, 121);
 }
