@@ -64,10 +64,6 @@ class SelectWidgetList extends Component {
       if (error) {
         requestError(payload);
       }
-      //TODO此处深度复制payload---start
-      // let dataList = [];
-      // Object.assign(dataList,payload);
-      //TODO此处深度复制payload---end
       let _dataMap = self.getArrayToMap(payload);
       self.getDefaultSelectCheck(_dataMap);//修改map上的selected选中状态
       let _allDataList = self.getFindByTypeId("all");
@@ -169,6 +165,7 @@ class SelectWidgetList extends Component {
   }
 
   btnSave=()=>{
+    // console.log("btnSave - this.props.parentId " + this.props.parentId);
     this.props.addDesk({dataList:this.state.dataList,parentId:this.props.parentId});
     this.props.close();
   }

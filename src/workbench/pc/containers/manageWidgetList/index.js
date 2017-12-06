@@ -143,11 +143,11 @@ class WidgetList extends Component {
       })
 
     let _da = {};
-
-    let _parentId = "";
-    if(this.props.data.length != 0){
-      _parentId = this.props.data[0].parentId;
-    }
+    // let _parentId = "";
+    // if(this.props.data.length != 0){
+    //   _parentId = this.props.data[0].parentId;
+    //   console.log("this.props.data[0].parentId ---- " + this.props.data[0].parentId );
+    // }
 
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
@@ -156,7 +156,7 @@ class WidgetList extends Component {
         </div>
 
         <PopDialog className={pop_dialog_widge_list} show = { this.state.showModal } data={_da} >
-            <SelectWidgetList close={this.popClose} parentId={_parentId} />
+            <SelectWidgetList close={this.popClose} parentId={this.props.parentId} />
         </PopDialog>
 
       </ul>);
