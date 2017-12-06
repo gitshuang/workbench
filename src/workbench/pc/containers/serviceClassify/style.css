@@ -191,3 +191,7 @@
   color:rgba(136,136,136,1);
   line-height:16px;
 }
+
+:global(.u-button-group .active){
+	background-color: #f5f5f5;
+}

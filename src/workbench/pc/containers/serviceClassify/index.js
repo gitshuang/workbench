@@ -12,25 +12,26 @@ import ButtonGroup from 'bee-button-group';
 
 import {bg,bg_wrap,wrap,clearfix,serviceSearch,ufSearch,hotService,classify,class1,class2,services,serviceInfo,serviceTit,describe,servicePic,singleService,appContent,menuBtnGroup } from './style.css';
 
-// import applicationActions from 'store/root/application/actions';
-import manageActions from 'store/root/manage/actions';
+import applicationActions from 'store/root/application/actions';
+// import manageActions from 'store/root/manage/actions';
 import rootActions from 'store/root/actions';
-const {getSelectWidgetList} = manageActions;
+// const {getSelectWidgetList} = manageActions;
+const {getAllApplicationList} = applicationActions;
 const {requestStart, requestSuccess, requestError} = rootActions;
 
 @connect(
   mapStateToProps(
     'quickServiceDisplay',
-    'selectWidgetList',
+    'allApplicationList',
     {
-      namespace: 'manage',
+      namespace: 'application',
     },
   ),
   {
     requestStart,
     requestSuccess,
     requestError,
-    getSelectWidgetList,
+    getAllApplicationList,
   }
 )
 
@@ -43,7 +44,7 @@ class serviceClassify extends Component {
       options: ['友空间', '友人才', '友报账', '友报账','友报账'],
       placeholder: "搜索应用",
       disabled: false,
-      // current : 1000,
+      current : 1000,
       list2 : [],
       listAll : [],
     }
@@ -51,21 +52,21 @@ class serviceClassify extends Component {
   }
 
   componentDidMount() {
-    if(this.props.selectWidgetList.length == 0){
-      this.getSelectWidgetList();
+    if(this.props.allApplicationList.length == 0){
+      this.getAllApplicationList();
     }
   }
 
-  getSelectWidgetList() {
+  getAllApplicationList() {
     const {
       requestStart,
       requestError,
       requestSuccess,
-      getSelectWidgetList,
+      getAllApplicationList,
     } = this.props;
     let self = this;
     requestStart();
-    return getSelectWidgetList().then(({error, payload}) => {
+    return getAllApplicationList().then(({error, payload}) => {
       if (error) {
         requestError(payload);
       }
@@ -81,17 +82,17 @@ class serviceClassify extends Component {
   }
 
   handleClick = (e,da) => {
-    let { selectWidgetList } = this.props;
+    let { allApplicationList } = this.props;
 
     //选中了当前显示的
     // if (da.labelId === this.state.current) {
     //   return;
     // }
 
-    // this.state.current = e.key;
+    this.state.current = da.labelId;
     this.state.list2 = [];
     if(typeof(da) === 'object'){
-      let selected = selectWidgetList.find(item => item.labelId == da.labelId);
+      let selected = allApplicationList.find(item => item.labelId == da.labelId);
       selected.children.forEach((app)=>{
         app.service.forEach((service)=>{
           this.state.list2.push(
@@ -126,8 +127,6 @@ class serviceClassify extends Component {
     })
   }
 
-
-
   onFormChange(value) {
     this.setState({
         value: value
@@ -135,7 +134,6 @@ class serviceClassify extends Component {
   }
 
   renderContent(selectWidgetList) {
-    // let { selectWidgetList } = this.props;
     if(selectWidgetList.length == 0) return;
     let listAll = [];
     selectWidgetList.map((tag) =>{
@@ -170,14 +168,14 @@ class serviceClassify extends Component {
   }
 
   render() { 
-    const { selectWidgetList} = this.props;
-    let {value ,options,placeholder,disabled } = this.state;
+    const { allApplicationList} = this.props;
+    let {value ,options,placeholder,disabled, current } = this.state;
 
     let btns = [];
-    btns.push(<Button onClick={ (e)=>{this.handleClick(e,"all")} } key="1000">全部</Button>);
+    btns.push(<Button  className={ current === 1000 ? 'active' : '' } onClick={ (e)=>{this.handleClick(e,"all")} } key="1000">全部</Button>);
 
-    this.props.selectWidgetList.map((da,i) =>{
-      btns.push(<Button onClick={(e)=>{this.handleClick(e,da)} }  key={da.labelId} >{da.labelName}</Button>);
+    allApplicationList.map((da,i) =>{
+      btns.push(<Button className={ current === da.labelId ? 'active' : '' } onClick={(e)=>{this.handleClick(e,da)} }  key={da.labelId} >{da.labelName}</Button>);
     })
 
     return (
@@ -200,7 +198,7 @@ class serviceClassify extends Component {
             </InputGroup>
 
             <div className={menuBtnGroup}>
-              <ButtonGroup vertical bordered="false">
+              <ButtonGroup vertical >
                 {btns}
               </ButtonGroup>
             </div>

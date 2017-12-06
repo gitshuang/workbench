@@ -3,11 +3,11 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-	getAllServesGroup
+	getAllApplicationList
 } = actions;
 
 const defaultState = {
-	allServesGroup: {},
+	allApplicationList: [],
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -22,7 +22,7 @@ const createReducer = (key) => (state, { payload, error }) => {
 };
 
 const reducer = handleActions({
-	[getAllServesGroup]: createReducer('allServesGroup'),
+	[getAllApplicationList]: createReducer('allApplicationList'),
 }, defaultState);
 
 export default reducer;
