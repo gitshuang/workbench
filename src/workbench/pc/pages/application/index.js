@@ -3,15 +3,27 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
+
+import Icon from 'components/icon';
 import Header from 'containers/header';
+import BreadcrumbContainer from 'containers/breadcrumb';
 import ServiceClassify from 'containers/serviceClassify';
 
+import {header,um_content} from './style.css';
+
 const {requestStart, requestSuccess, requestError} = rootActions;
-//const {changeUserInfoDisplay, getWorkList} = homeActions;
+// const {changeUserInfoDisplay, getWorkList} = homeActions;
 
 @withRouter
 @connect(
-  ()=>({}),
+  mapStateToProps(
+    'widthBrm',
+    'current',
+    'domainName',
+    {
+      namespace: 'work'
+    }
+  ),
   {
     requestStart,
     requestSuccess,
@@ -23,6 +35,7 @@ class Application extends Component {
 
   constructor(props) {
     super(props);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentWillMount() {
@@ -30,20 +43,23 @@ class Application extends Component {
   }
 
   goBack() {
-    this.props.history.goBack();
+    this.props.history.replace('');
   }
 
   render() {
     return (
       <div className="um-win">
-        <div className="um-header">
-          <Header onLeftClick={ this.goBack.bind(this) } iconName={"back"} leftContent={"返回"}>
-            <div position="center">
-              <span>全部应用</span>
-            </div>
-          </Header>
+        <div className={header}>
+          <div className="um-header">
+            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} leftContent={"返回"}>
+              <div position="center">
+                <span>全部应用及服务</span>
+              </div>
+            </Header>
+            <BreadcrumbContainer/>
+          </div>
         </div>
-        <div className="um-content">
+        <div className={um_content}>
           <ServiceClassify /> 
         </div>
       </div>

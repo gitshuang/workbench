@@ -71,3 +71,12 @@ body {
 }
 .u-dropdown-menu>.u-dropdown-menu-item{padding:0 25px;}
 .u-dropdown-menu>.u-dropdown-menu-item:hover{cursor: pointer;color:#E14C46;}
+.u-select-arrow:before{color:#878B94;}
+.u-select-open .u-select-arrow:before{
+  transform: rotate(-180deg);
+  color:#E14C46;
+}
+.u-input-group .u-form-control:last-child {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}

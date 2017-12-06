@@ -1,29 +1,32 @@
 .bg{
 	width:100%;
 	background: rgb(230,233,233);
-	padding:10px;
+	padding:10px 0;
+}
+.bg_wrap{
+	background:#fff;
+	border:1px solid #DBDEE5;
+	box-shadow: 0 6px 8px 0 rgba(74,81,93,0.25);
+	border-radius: 3px ;
 }
 .wrap{
-	width:1190px; 
-	background:#fff;
-	border-radius: 3px ; 
+	width:1000px;
 	margin:0 auto;
-	padding-top:40px;
-	padding-bottom: 40px;
+	padding:33px 0;
+	// position:relative;
+}
+.wrap>div{
+	float: left;
 }
 :global(.u-autocomplete){
-	width:355px;
+	width:433px;
 	height:38px;
 }
 :global(.u-form-control){
 	height:100%;
 }
-.serviceSearch{
-	width:456px;
-	margin:0 auto;
-}
 .wrap :global(.u-button){
-	width:100px;
+	width:68px;
 	margin:0;
 	background:#fff;
 }
@@ -32,41 +35,95 @@
 	font-size:22px;
 	font-weight:bold;
 }
-.ufSearch+span{
-	font-size: 12px;
-	margin-left:8px;
-	color: #878B94;
+.serviceSearch{
+	display: flex;
+	border-bottom:1px solid #DDE0E3;
+	padding-bottom: 16px;
+	margin-bottom:23px;
+}
+.serviceSearch :global(.u-autocomplete),.serviceSearch :global(.u-input-group-btn){
+	box-flex:1;
 }
 :global(.u-input-group-btn){
 	width:102px;
 }
 :global(.u-input-group .u-input-group-btn .u-button){
 	height:38px;
-	margin-top:-5px;
 }
-:global(.u-input-group .u-form-control){
-	border-color:#ccc;
+:global(.u-input-group .u-form-control),:global(.u-input-group .u-button){
+	border-color:#D9D9D9;
 }
 :global(.u-autocomplete-options){
 	background:#fff;
 }
-.hotService li,.hotService span,.hotService ul{
-	display:inline-block;
-	font-size:12px;
-	font-family:MicrosoftYaHei;
-	color:rgba(136,136,136,1);
-	line-height:16px;
+.wrap :global(.u-button-group, .u-button-group-vertical){
+	width:256px;
+	height:635px;
+	border:1px solid #DDE0E3;
+	border-radius: 3px ;
+	box-shadow:none;
 }
-.hotService a{
-	margin-right: 17px;
-	color:#3A3F4B;
+.menuBtnGroup{
+	width:180px;
+	height:635px;
+	border:1px solid #DDE0E3;
+	border-radius:3px;
+	padding:20px 0;
+	box-sizing:border-box;
 }
-.hotService a:hover{
+.menuBtnGroup :global(.u-button){
+	display:block;
+	width:178px;
+	padding:3px 0 3px 23px ;
+	color:#4A515D;
+	text-align: left;
+	border-radius:0;
+}
+.menuBtnGroup :global(.u-button):hover{
+	background:rgba(239,239,239,1);
 	color:#E14C46;
 }
-.hotService{
-	margin-left:380px;
-	margin-top:5px;
+.appContent{
+	width:730px;
+	height:635px;
+	margin-left:16px;
+}
+.appContent :global(.iconfont){
+	display:inline-block;
+	width:32px;
+	height:32px; 
+	background:rgba(216,216,216,1);
+	border-radius: 3px ; 
+}
+.appContent span{
+	display:inline-block;
+	font-size:14px;
+	font-family:MicrosoftYaHei;
+	color:rgba(74,81,93,1);
+	margin-left:8px;
+}
+.appContent header{
+	padding:8px 0;
+	border-bottom:1px solid #DDE0E3;
+	margin:17px 0 23px 0;
+}
+.appContent hgroup>div{
+	float: left;
+	width:235px;
+	height:52px; 
+	box-sizing: border-box;
+	background:rgba(219,222,229,0.1);
+	padding:10px 17px;
+	margin-right: 8px;
+	border-radius: 3px ; 
+}
+.appContent hgroup>div:hover{
+	background:rgba(239,239,239,1);
+	cursor: pointer;
+}
+.appContent hgroup>div:hover span,.appContent header:hover span{
+	color:#E14C46;
+	cursor: pointer;
 }
 .classify{
 	width:992px;
