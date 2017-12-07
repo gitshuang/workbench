@@ -24,6 +24,7 @@
     align-items: center;
 }
 .addGroupBtn{
+	display:flex;
 	height:28px;
 	background: #fff;
 	border: 1px solid #D9D9D9;
@@ -39,8 +40,16 @@
 }
 .addGroupBtn :global(.iconfont){
 	font-size:16px;
+	line-height:26px;
+	font-weight:900;
 	color:#878b94;
 	margin:0 5px;
+	box-flex:1;
+	-webkit-box-flex:1;
+}
+.addGroupBtn span{
+	box-flex:1;
+	-webkit-box-flex:1;
 }
 .addGroupBtn:hover :global(.iconfont){
 	color:#E14C46;

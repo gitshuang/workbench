@@ -417,7 +417,7 @@ class ManageGroup extends Component {
             className={addGroupBtn}
             onClick={this.addGroupFn.bind(this, index)} >
             <Icon type="add" ></Icon>
-            添加组
+            <span>添加组</span>
           </button>
         </div>
         <PopDialog className="pop_dialog_delete" show={ showModal } btns={pop_btn} data={{ index }}>
