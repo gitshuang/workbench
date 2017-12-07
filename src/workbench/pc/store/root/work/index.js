@@ -6,7 +6,6 @@ import actions from './actions';
 const {
   setCurrent,
   setExpandedSidebar,
-  getProductInfo,
   getTitleService,
   titleServiceDisplay,
   titleServiceHidden,
@@ -22,6 +21,7 @@ const {
   getServeInfoWithDetail,
   setTabs,
   changeServe,
+  setProductInfo,
 } = actions;
 
 
@@ -54,12 +54,15 @@ const reducer = handleActions({
        name:data
     })
   }),
-  [changeServe]: (state, { payload: { currentId, current, menuPath } }) => {
-    const { tabs } = state;
+  [changeServe]: (state, { payload: code }) => {
+    const { menus, tabs } = state;
+    const menuPath = findPath(menus, 'children', 'serveCode', code);
+    const current = menuPath.slice(-1)[0];
     if (!current) {
       return state;
     }
     const {
+      menuItemId: currentId,
       menuItemName: name,
       serve: {
         url,
@@ -96,6 +99,7 @@ const reducer = handleActions({
         brm,
         tabs: tabs.concat({
           id: currentId,
+          serveCode,
           name,
           location: url,
         })
@@ -174,10 +178,7 @@ const reducer = handleActions({
       },
     };
   },
-  [getProductInfo]: (state, { payload: productInfo, error}) => {
-    if (error) {
-      return state;
-    }
+  [setProductInfo]: (state, { payload: productInfo}) => {
     const {
       curMenuBar: {
         single,
@@ -188,12 +189,7 @@ const reducer = handleActions({
       },
       curServe: {
         serveName: title,
-        relationServes,
-        relationUsers,
         hasWidget: pinType,
-        serveCode,
-        serveId,
-        url,
       },
     } = productInfo;
     let type = 1;
@@ -203,35 +199,11 @@ const reducer = handleActions({
     if (hasTab) {
       type = 3;
     }
-    const menuPath = findPath(menus, 'children', 'serveId', serveId);
-    const menu = menuPath.slice(-1)[0];
-    const menuItemId = menu.menuItemId;
-    const brm = menuPath.map(({menuItemName: name}) => ({name}));
-    const hasRelationFunc = (
-      (relationServes && relationServes.length) ||
-      (relationUsers && relationUsers.length)
-    );
     return {
       ...state,
-      brm,
       menus,
       domainName,
       widthBrm,
-      current:{
-        menuItemId,
-        title,
-        serveCode,
-        serveId,
-        url,
-        hasRelationFunc,
-        relationServes,
-        relationUsers,
-      },
-      tabs: [{
-        id: menuItemId,
-        name: title,
-        location: url,
-      }],
       type,
       pinType,
     }

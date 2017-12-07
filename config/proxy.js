@@ -6,6 +6,7 @@ var api = [
   '/desktop/getdeskTop',
   '/serve/getServeInfoByServeCode',
   '/serve/getServeInfoByAppCode',
+  '/serve/getAllAppsGroupByLabels',
 
   '/user/setCutUser',
 

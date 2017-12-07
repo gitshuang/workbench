@@ -15,14 +15,13 @@ import { wrap } from 'assets/style/base.css';
 import HeaderPage from './headerPage';
 import { page_home } from './style.css';
 
-const { changeUserInfoDisplay, getWorkList } = homeActions;
+const { getWorkList } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
 @withRouter
 @connect(
   mapStateToProps(
     'workList',
-    'userInfoDisplay',
     {
       namespace: 'home',
     }
@@ -32,7 +31,6 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     requestSuccess,
     requestError,
     getWorkList,
-    changeUserInfoDisplay,
   }
 )
 class Home extends Component {
@@ -53,9 +51,7 @@ class Home extends Component {
 
     render() {
         const {
-          changeUserInfoDisplay,
           workList,
-          userInfoDisplay
         } = this.props;
 
         const list = [];

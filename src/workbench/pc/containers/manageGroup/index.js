@@ -364,7 +364,7 @@ class ManageGroup extends Component {
               ref="groupName" />
             <Icon
               className={icon}
-              type="close2"
+              type="close"
               onClick={ this.clearInput } />
           </div>
           <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
@@ -399,12 +399,17 @@ class ManageGroup extends Component {
         className: "",
       }
     ]
+
+    console.log("this.props");
+    console.log(this.props);
+
+
     return connectDragSource(connectDropTarget(
       <div className={groupArea}>
         <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
           { groupTitle }
           <div>
-            <WidgetList index={index} data={children} />
+            <WidgetList index={index} data={children} parentId={this.props.data.widgetId}  />
           </div>
         </section>
         <div className={addBtn} >

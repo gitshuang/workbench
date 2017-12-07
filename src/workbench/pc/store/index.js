@@ -9,7 +9,7 @@ let middleware;
 if (process.env.NODE_ENV === 'production') {
   middleware = applyMiddleware(thunk, promise);
 } else {
-  middleware = applyMiddleware(thunk, promise, createLogger());
+  middleware = applyMiddleware(createLogger(), thunk, promise, );
 }
 
 const preloadedState = {};

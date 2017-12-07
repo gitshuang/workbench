@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import actions from 'store/root/work/actions';
 import Menu, { SubMenu } from 'bee-menus';
 import Icon from 'bee-icon';
@@ -8,7 +9,6 @@ import { mapStateToProps, findPath } from '@u';
 import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu} from './style.css';
 
 const { Item } = Menu;
-const { setCurrent } = actions;
 
 //isTop:判断是否是一级菜单
 function makeMenus(menus,isTop) {
@@ -36,6 +36,7 @@ function makeMenus(menus,isTop) {
   return result;
 }
 
+@withRouter
 @connect(
   mapStateToProps(
     'menus',
@@ -44,9 +45,6 @@ function makeMenus(menus,isTop) {
       namespace: 'work',
     },
   ),
-  {
-    setCurrent,
-  },
 )
 class SideBarContainer extends Component {
   constructor(props) {
@@ -54,9 +52,24 @@ class SideBarContainer extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick({ key: id }) {
-    // const { menus } = this.props;
-    // const cur = findMenuById(menus, id);
-    this.props.setCurrent(id);
+    const {
+      history,
+      menus,
+      current: {
+        serveCode: curServeCode,
+      },
+      match: {
+        params: {
+          code,
+          type,
+        },
+      },
+    } = this.props;
+    const menuPath = findPath(menus, 'children', 'menuItemId', id);
+    const { serveCode } = menuPath.slice(-1)[0];
+    if (serveCode !== curServeCode) {
+      history.push(`/${type}/${code}/${serveCode}`);
+    }
   }
   getDefaultOpenKeys() {
     const { menus, current: { menuItemId: id } } = this.props;

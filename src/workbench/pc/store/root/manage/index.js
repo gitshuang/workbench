@@ -126,17 +126,15 @@ const reducer = handleActions({
     let newCar = [];
 
     const { dataList, parentId} = data ;
-
     for(let da of dataList){
-      if(da.selected){
+      // if(da.selected){
           let newCarObn = {...defaultCar};
           newCarObn.widgetId = da.serveId;
           newCarObn.widgetName = da.serveName;
-          newCarObn.serviceCode = da.serveCode;
+          newCarObn.serveCode = da.serveCode;
           newCarObn.icon = da.serveIcon;
-          newCarObn.jsurl = da.url;
           newCar.push(newCarObn);
-      }
+      // }
     }
     state.manageList.forEach((da,i)=>{
         if(da.widgetId == parentId){
@@ -146,7 +144,8 @@ const reducer = handleActions({
     let newManageList = JSON.parse(JSON.stringify(state.manageList));
     return{
       ...state,
-      manageList: newManageList
+      manageList: newManageList,
+      isEdit: true,
     }
   },
   [getSelectWidgetList]: (state, { payload, error }) => {
