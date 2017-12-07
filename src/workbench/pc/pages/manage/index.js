@@ -215,7 +215,9 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <ManageFolderDialog />
+        <div className="manageDialog">
+          <ManageFolderDialog />
+        </div>
         <ManageBatchMoveDialog />
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } btns={pop_btn} >
           <div>

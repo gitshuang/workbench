@@ -62,9 +62,9 @@ class ManageFolderDialog extends Component {
       const opacity = isDragging ? 0 : 1;
 
       return (
-            <div className={"dialog"} >
+            <div className="manageDialogFolder" >
               <DialogContent folderModalDisplay = {folderModalDisplay} closeFolderDrag={this.closeFolderDrag} />
-            <Modal show={folderModalDisplay} onHide={closeFolder} backdrop={true} >
+            <Modal className="manageDialogFolder" show={folderModalDisplay} onHide={closeFolder}>
               <div className={`targetModal`}>
               <Modal.Header>
                 <Modal.Title>{title}</Modal.Title>

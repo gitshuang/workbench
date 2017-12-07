@@ -3,11 +3,11 @@
   max-height: 600px;
 }
 
-:global(.folderDialog){
+:global( .manageDialogFolder .folderDialog){
   z-index: 2000;
   background-color: initial;
 }
-:global(.u-modal){
+:global(.manageDialogFolder.u-modal){
   position: relative;
   margin: 0px;
   z-index: 3000;
@@ -19,7 +19,7 @@
 :global(div[role=dialog]){
   // height:100%;
 }
-:global(.u-modal-dialog){
+:global( .manageDialogFolder .u-modal-dialog){
   margin:0px;
 }
 
