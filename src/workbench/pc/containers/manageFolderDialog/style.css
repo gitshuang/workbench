@@ -1,3 +1,24 @@
 .content{
   overflow: hidden;
 }
+
+:global(.folderDialog){
+  z-index: 2000;
+  background-color: initial;
+}
+:global(.u-modal){
+  position: relative;
+  margin: 0px;
+  z-index: 3000;
+  height: auto;
+  width: 600px;
+  left: calc((100% - 600px)/2);
+  top: 30px;
+}
+:global(div[role=dialog]){
+  // height:100%;
+}
+:global(.u-modal-dialog){
+  margin:0px;
+}
+

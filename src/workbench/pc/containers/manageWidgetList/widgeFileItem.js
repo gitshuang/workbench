@@ -22,10 +22,8 @@ const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupAc
 
 const type='item';
 
-//let timestamp;
 const itemSource = {
   beginDrag(props) {
-    //timestamp=new Date().getTime();
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
   }
 };
@@ -127,8 +125,13 @@ class WidgeFileItem extends Component {
   save = (e) => {
     //TODO 此处最好只处理一次即可。setState
     this.setState({
-      editShow:false
+      editShow:false,
+      curEditFolderId:false
     });
+    // let { curEditFolderId } = this.props;
+    // console.log(curEditFolderId);
+    // curEditFolderId = null;
+    //this.props.curEditFolderId = "";
     let data = {
       id: this.props.data.widgetId,
       value: this.state.value
@@ -138,10 +141,10 @@ class WidgeFileItem extends Component {
   }
 
   close = (e) => {
-      this.setState({
-          value:this.props.data.widgetName,
-          editShow:false
-      });
+    this.setState({
+        value:this.props.data.widgetName,
+        editShow:false
+    });
   }
 
   popSave = (data)=>{

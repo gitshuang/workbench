@@ -32,7 +32,7 @@ const type='item';
 var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
-    props.folderType && props.closeFolderDrag();
+    //props.folderType && props.closeFolderDrag();
     let diffOffset = monitor.getDifferenceFromInitialOffset();
     timestamp=new Date().getTime();
     window.timestamp = timestamp;

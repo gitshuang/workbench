@@ -435,6 +435,7 @@ const reducer = handleActions({
     return{
       ...state,
       isEdit: true,
+      curEditFolderId: false,
       manageList: [ ...manageList ]
     }
   },

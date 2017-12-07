@@ -12,35 +12,15 @@ const {moveServe,closeFolder } = manageActions;
 
 const type='item';
 
-const itemSource = {
-  beginDrag(props) {
-    return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
-  },
-  endDrag(props, monitor, component){
-    return monitor.getClientOffset();
-  }
-
-};
-
 
 const itemTarget = {
   //hover 悬浮调用 drop落在目标上时调用
   hover(props, monitor, component){
-    if(props.isOverFolder !== "over" || !monitor.isOver()){
-      //debugger;
-      console.log(monitor.isOver());
-      console.log(monitor.isOver({ shallow: true }));
-      return monitor.getClientOffset();
-    }
+    props.closeFolderDrag();
   },
   drop(props, monitor) {
     //debugger;
-    const draggedId = monitor.getItem().id;
-    //const previousParentId = monitor.getItem().parentId;
-
-    if (draggedId !== props.id) {
-      //props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
-    }
+    //const draggedId = monitor.getItem().id;
   }
 };
 
@@ -87,15 +67,21 @@ class DialogContent extends Component {
       closeFolder();
     }
 
+    popClose = ()=>{
+      this.setState({
+        folderModalDisplay:false
+      })
+      const { closeFolder } = this.props;
+      closeFolder();
+    }
+
     render() {
       const {curDisplayFolder: {widgetName: title, children, }, closeFolder, folderModalDisplay,list} = this.props;
       const { connectDragSource, connectDropTarget,isDragging } = this.props;
       const opacity = isDragging ? 0 : 1;
 
       return connectDropTarget(
-                <div className={content}>
-                  { list }
-                </div>
+              <div className={folderModalDisplay ? "u-modal-backdrop fade in folderDialog" : "out"} onClick={this.popClose}></div>
             );
     }
 }
