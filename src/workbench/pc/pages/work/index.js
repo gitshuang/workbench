@@ -88,9 +88,6 @@ export default class Work extends Component {
         if (error) {
           requestError(payload);
         } else {
-          this.setState({
-            loaded: true,
-          });
           if (!subcode) {
             const {
               curServe: {
@@ -99,6 +96,9 @@ export default class Work extends Component {
             } = payload;
             history.replace(`/${type}/${code}/${subcode}`);
           }
+          this.setState({
+            loaded: true,
+          });
         }
         requestSuccess();
       });

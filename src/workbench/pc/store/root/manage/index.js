@@ -533,6 +533,7 @@ const reducer = handleActions({
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return{
       ...state,
+      isEdit: true,
       manageList,
     }
   },
