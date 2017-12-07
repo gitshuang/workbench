@@ -35,3 +35,10 @@
   background: rgba(135,139,148,1);
   color: #ccc;
 }
+.home{
+
+}
+
+.home .u-modal{
+  display: none !important;
+}

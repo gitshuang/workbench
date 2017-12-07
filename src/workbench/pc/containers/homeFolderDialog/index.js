@@ -3,7 +3,7 @@ import Modal from 'bee-modal';
 import Button from 'bee-button';
 import { withRouter } from 'react-router-dom'
 import WidgetMaker from 'components/widget';
-import { content ,home_file_item_dailog,close} from './style.css';
+import { content ,home_file_item_dailog,close,home} from './style.css';
 import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
 import homeActions from 'store/root/home/actions';
@@ -52,6 +52,7 @@ class homeFolderDialog extends Component {
             );
         })
         return (
+          <div className={home}>
             <Modal className={home_file_item_dailog} show={folderModalDisplay} onHide={ closeFolder } >
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
@@ -63,6 +64,7 @@ class homeFolderDialog extends Component {
           </div>
         </Modal.Body>
       </Modal>
+      </div>
         );
     }
 }
