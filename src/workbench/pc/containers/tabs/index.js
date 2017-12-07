@@ -101,11 +101,17 @@ class TabsContainer extends Component {
     const {
       delTab,
       history,
+      match: {
+        params: {
+          type,
+          code,
+        }
+      }
     } = this.props;
     return (e) => {
       e.stopPropagation();
-      delTab(id);
-      history.goBack();
+      const serveCode = delTab(id);
+      history.replace(`/${type}/${code}/${serveCode}`);
     };
   }
   resizeHandler() {

@@ -78,8 +78,9 @@ const actions = createActions(
         }
         return result;
       });
-      const menuItemId = newTabs[newCurIndex].id;
+      const { serveCode } = newTabs[newCurIndex];
       dispatch(setTabs(newTabs));
+      return serveCode;
     },
     [SET_CURRENT]: (code) => (dispatch, getState) =>{
       const state = getState();
