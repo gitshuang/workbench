@@ -11,8 +11,9 @@ const routes = [
     exact: true,
   },
   {
-    path: '/:type/:code',
+    path: '/:type/:code/:subcode?',
     component: Work,
+    exact: true,
   },
   {
     path: '/application',

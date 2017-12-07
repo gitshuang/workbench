@@ -7,7 +7,7 @@ import { breadcrumbClass,breadcrumbClassIcon,breadcrumbBack } from './style.css'
 class Breadcrumbs extends Component {
 
   static propTypes = {
-    goback: PropTypes.node,
+    goback: PropTypes.func,
     data:PropTypes.array
   }
   render() {

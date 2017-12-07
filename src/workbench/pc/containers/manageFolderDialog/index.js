@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { DragDropContext,DragSource, DropTarget  } from 'react-dnd';
+import { content } from './style.css';
 import Modal from 'bee-modal';
 import Button from 'bee-button';
 import WidgetItem from 'containers/manageWidgetList/widgetItem';
-import { content } from './style.css';
 import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
 import manageActions from 'store/root/manage/actions';
@@ -62,19 +62,17 @@ class ManageFolderDialog extends Component {
       const opacity = isDragging ? 0 : 1;
 
       return (
-            <div>
-            <Modal show={folderModalDisplay} onHide={closeFolder} >
+            <div className="manageDialogFolder" >
+              <DialogContent folderModalDisplay = {folderModalDisplay} closeFolderDrag={this.closeFolderDrag} />
+            <Modal className="manageDialogFolder" show={folderModalDisplay} onHide={closeFolder}>
               <div className={`targetModal`}>
               <Modal.Header>
                 <Modal.Title>{title}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-
-                <DialogContent list={list} isOverFolder={'over'}/>
-                {/*{connectDropTarget(*/}
-                {/*<div className={content} isOverFolder="over">*/}
-                  {/*{ list }*/}
-                {/*</div>)}*/}
+                <div className={content}>
+                  { list }
+                </div>
               </Modal.Body>
             </div>
             </Modal>

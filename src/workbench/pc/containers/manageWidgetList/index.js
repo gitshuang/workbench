@@ -66,10 +66,11 @@ class WidgetList extends Component {
         showModal:true
       })
   }
-  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType,timeFlag) => {
-    let data = {id,preParentId,preType,afterId,parentId,afterType,timeFlag}
-    const { moveServe } = this.props;
+  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType,timeFlag,dataFolder) => {
+    let data = {id,preParentId,preType,afterId,parentId,afterType,timeFlag,dataFolder}
+    const { moveServe,openFolder } = this.props;
     moveServe(data);
+    preType === 3 && afterType === 2 && timeFlag && dataFolder && openFolder(dataFolder);
   }
   addFolderDrag = (groupIndex,id,preParentId, preType,afterId,parentId,afterType) => {
     let data = {groupIndex,id,preParentId, preType,afterId,parentId,afterType}

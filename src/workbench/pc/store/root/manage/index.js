@@ -33,6 +33,7 @@ const {
   openBatchMove,
   closeBatchMove,
   setEditState,
+  cancelFolderEdit,
 } = actions;
 
 const defaultState = {
@@ -405,6 +406,14 @@ const reducer = handleActions({
       curEditFolderId
     }
   },
+  [cancelFolderEdit]: (state, { payload: cnaceFolder }) => {
+    const { manageList } = state;
+    return{
+      ...state,
+      curEditFolderId: false,
+      manageList: [ ...manageList ]
+    }
+  },
   [renameFolder]: (state, { payload: { id: folderId, value: newName } }) => {
     const { manageList } = state;
     let groupIndex;
@@ -434,6 +443,7 @@ const reducer = handleActions({
     return{
       ...state,
       isEdit: true,
+      curEditFolderId: false,
       manageList: [ ...manageList ]
     }
   },

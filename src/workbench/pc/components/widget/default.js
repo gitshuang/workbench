@@ -41,7 +41,7 @@ class WidgetItem extends Component {
     } = this.props;
 
     const style = {
-      ...widgetStyle[size],
+      ...widgetStyle[size - 1],
       backgroundImage: `url(${background})`,
     };
 

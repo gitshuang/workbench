@@ -14,6 +14,7 @@ const {
   SET_EXPANDED_SIDEBAR,
   DEL_TAB,
   GET_PRODUCT_INFO,
+  SET_PRODUCT_INFO,
   GET_TITLE_SERVICE,
   TITLE_SERVICE_DISPLAY,
   TITLE_SERVICE_HIDDEN,
@@ -34,7 +35,27 @@ const actions = createActions(
     namespace: 'work',
   },
   {
-    [GET_PRODUCT_INFO]: getProductInfo,
+    [GET_PRODUCT_INFO]: (code, type, subcode) => (dispatch, getState) => {
+      const {
+        setProductInfo,
+        setCurrent,
+      } = actions;
+      return getProductInfo(code, type)
+        .then((data) => {
+          dispatch(setProductInfo(data));
+          if (subcode) {
+            dispatch(setCurrent(subcode));
+          }
+          return {
+            payload: data
+          }
+        }, (e) => {
+          return {
+            error: true,
+            payload: e,
+          };
+        })
+    },
     [GET_TITLE_SERVICE]: getTitleService,
     [SET_PIN_ADD]: setPinAdd,
     [SET_ADD_GROUP]: setAddGroup,
@@ -44,7 +65,6 @@ const actions = createActions(
       const state = getState();
       const {
         setTabs,
-        setCurrent,
       } = actions;
       const { tabs: oldTabs, menus } = state.work;
       let newCurIndex;
@@ -58,26 +78,18 @@ const actions = createActions(
         }
         return result;
       });
-      const menuItemId = newTabs[newCurIndex].id;
+      const { serveCode } = newTabs[newCurIndex];
       dispatch(setTabs(newTabs));
-      dispatch(setCurrent(menuItemId));
+      return serveCode;
     },
-    [SET_CURRENT]: (currentId) => (dispatch, getState) =>{
+    [SET_CURRENT]: (code) => (dispatch, getState) =>{
       const state = getState();
       const {
         changeServe,
         getTitleService,
       } = actions;
-      const { menus } = state.work;
-      const menuPath = findPath(menus, 'children', 'menuItemId', currentId);
-      const current = menuPath.slice(-1)[0];
-      const { serveCode } = current;
-      dispatch(changeServe({
-        currentId,
-        current,
-        menuPath,
-      }));
-      dispatch(getTitleService(serveCode));
+      dispatch(changeServe(code));
+      dispatch(getTitleService(code));
     },
   },
   SET_EXPANDED_SIDEBAR,
@@ -89,6 +101,7 @@ const actions = createActions(
   RETURN_DEFAULT_STATE,
   CHANGE_SERVE,
   SET_TABS,
+  SET_PRODUCT_INFO,
 );
 
 export default actions;

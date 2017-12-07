@@ -119,7 +119,7 @@ class MoveToGroup extends Component {
             <input type="text" value={newGroupName} onChange={ this.setNewGroupName }/>
           </div>
           <div className={footer + " um-box-justify"}>
-            <Button colors="danger" disabled={!newGroupName} onClick={ this.confirmAddGroup }>添加到新分组</Button>
+            <Button colors="danger" disabled={!newGroupName} onClick={ this.confirmAddGroup }>添加新分组</Button>
             <Button onClick={ this.cancelAddGroup }>取消</Button>
           </div>
         </div>

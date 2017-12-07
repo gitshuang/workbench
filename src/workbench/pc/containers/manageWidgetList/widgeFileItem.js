@@ -18,14 +18,12 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit,openFolder } = manageActions;
 
 const type='item';
 
-//let timestamp;
 const itemSource = {
   beginDrag(props) {
-    //timestamp=new Date().getTime();
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
   }
 };
@@ -39,7 +37,7 @@ const itemTarget = {
     //添加大于1.5s的标记 判断是否拖入文件夹里面
     const timeFlag = (new Date().getTime() - timestamp > 1500);
     if (draggedId !== props.id) {
-      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag);
+      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag,props.data);
     }
   }
 };
@@ -71,7 +69,9 @@ function collectTaget(connect, monitor) {
   {
     deleteFolder,
     renameFolder,
-    setFolderEdit,selectListActions,selectGroupActions
+    setFolderEdit,selectListActions,selectGroupActions,
+    cancelFolderEdit,
+    openFolder
   }
 )
 class WidgeFileItem extends Component {
@@ -127,7 +127,7 @@ class WidgeFileItem extends Component {
   save = (e) => {
     //TODO 此处最好只处理一次即可。setState
     this.setState({
-      editShow:false
+      editShow:false,
     });
     let data = {
       id: this.props.data.widgetId,
@@ -138,10 +138,13 @@ class WidgeFileItem extends Component {
   }
 
   close = (e) => {
-      this.setState({
-          value:this.props.data.widgetName,
-          editShow:false
-      });
+    const { cancelFolderEdit } = this.props;
+    cancelFolderEdit(this.props.data.widgetId);
+
+    this.setState({
+        value:this.props.data.widgetName,
+        editShow:false
+    });
   }
 
   popSave = (data)=>{

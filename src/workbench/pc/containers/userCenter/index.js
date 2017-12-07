@@ -153,8 +153,11 @@ class UserInfoContainer extends Component {
 
   handleChange2 =(e)=>{
     switch(e){
-      case 'account' :
-        alert("账号");
+      case 'accountManagement' :
+        window.open('https://idtest.yyuap.com/usercenter/usermng');
+        break;
+      case 'userInfo' :
+        window.open('https://idtest.yyuap.com/usercenter/user');
         break;
       case 'safetyPick' :
         window.open('http://idtest.yyuap.com/usercenter/securityscore');
@@ -196,7 +199,8 @@ class UserInfoContainer extends Component {
           defaultValue="账号管理" name="456"
           onChange={this.handleChange2}
         >
-          <Option name="account"  value="account" >账号</Option>
+          <Option name="accountManagement" value="accountManagement" >帐号管理</Option>
+          <Option name="userInfo" value="userInfo" >个人信息</Option>
           <Option name="safetyPick" value="safetyPick" >安全评级</Option>
           <Option name="password" value="password" >修改密码</Option>
           <Option name="cutuser" value="cutuser">切换企业帐号</Option>
@@ -206,7 +210,6 @@ class UserInfoContainer extends Component {
         defaultValue="账号管理" name="456"
         onChange={this.handleChange2}
       >
-        <Option name="account"  value="account" >账号</Option>
         <Option name="safetyPick" value="safetyPick" >安全评级</Option>
         <Option name="password" value="password" >修改密码</Option>
       </Select>

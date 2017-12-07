@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import cs from 'classnames';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import actions from 'store/root/work/actions';
 import Icon from 'components/icon';
 import { mapStateToProps } from '@u';
@@ -21,7 +22,6 @@ import {
 } from './style.css';
 
 const {
-  setCurrent,
   delTab,
 } = actions;
 
@@ -42,6 +42,7 @@ const getTabsAndMores = (totalTabs, areaWidth) => {
   }
 }
 
+@withRouter
 @connect(
   mapStateToProps(
     'current',
@@ -51,7 +52,6 @@ const getTabsAndMores = (totalTabs, areaWidth) => {
     },
   ),
   {
-    setCurrent,
     delTab,
   }
 )
@@ -85,15 +85,33 @@ class TabsContainer extends Component {
       });
     }
   }
-  select(id) {
-    const { setCurrent } = this.props;
-    setCurrent(id);
+  select(serveCode) {
+    const {
+      history,
+      match: {
+        params: {
+          code,
+          type,
+        },
+      },
+    } = this.props;
+    history.push(`/${type}/${code}/${serveCode}`);
   }
   del(id) {
-    const { delTab } = this.props;
+    const {
+      delTab,
+      history,
+      match: {
+        params: {
+          type,
+          code,
+        }
+      }
+    } = this.props;
     return (e) => {
       e.stopPropagation();
-      delTab(id);
+      const serveCode = delTab(id);
+      history.replace(`/${type}/${code}/${serveCode}`);
     };
   }
   resizeHandler() {
@@ -120,10 +138,10 @@ class TabsContainer extends Component {
     const moreListElm = moreIsShow ? (
       <ul className={moreList}>
         {
-          mores.map(({ id, name }) => (
+          mores.map(({ id, name, serveCode }) => (
             <li
               key={id}
-              onClick={this.select.bind(this, id)}
+              onClick={this.select.bind(this, serveCode)}
               className={cs(
                 more,
                 {
@@ -161,10 +179,10 @@ class TabsContainer extends Component {
       <div ref="tabsArea" className={tabsArea}>
         <ul className={tabsList}>
           {
-            tabs.map(({ id, name }) => (
+            tabs.map(({ id, name, serveCode }) => (
               <li
                 key={id}
-                onClick={this.select.bind(this, id)}
+                onClick={this.select.bind(this, serveCode)}
                 className={cs(
                   tab,
                   {

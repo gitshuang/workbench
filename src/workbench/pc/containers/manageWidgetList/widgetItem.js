@@ -32,7 +32,7 @@ const type='item';
 var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
-    props.folderType && props.closeFolderDrag();
+    //props.folderType && props.closeFolderDrag();
     let diffOffset = monitor.getDifferenceFromInitialOffset();
     timestamp=new Date().getTime();
     window.timestamp = timestamp;
@@ -64,9 +64,10 @@ const itemTarget = {
     const preType = monitor.getItem().type;
 
     if (draggedId !== props.id && preType !==1) {
-      if(new Date().getTime() - timestamp > 1500 && preType === 3 && props.data.type === 3 && props.folderType!=="folder"){
-        //放上去停留大于2s添加文件夹
-        props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
+      let timeOut = (new Date().getTime() - timestamp > 1500);
+      if(timeOut && preType === 3 && props.data.type === 3 && props.folderType!=="folder"){
+        //放上去停留大于2s创建文件夹
+        props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeOut);
       }else {
         props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
       }
@@ -221,7 +222,7 @@ class WidgetItem extends Component {
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     return connectDragSource(connectDropTarget(
-      <li className={widgetItem} style={{...widgetStyle[size],...opacity }} >
+      <li className={widgetItem} style={{...widgetStyle[size - 1],...opacity }} >
         <div className={title}>
           <div className={title_right}>{widgetName}</div>
         </div>
