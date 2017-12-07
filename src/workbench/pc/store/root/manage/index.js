@@ -33,6 +33,7 @@ const {
   openBatchMove,
   closeBatchMove,
   setEditState,
+  cancelFolderEdit,
 } = actions;
 
 const defaultState = {
@@ -403,6 +404,14 @@ const reducer = handleActions({
     return{
       ...state,
       curEditFolderId
+    }
+  },
+  [cancelFolderEdit]: (state, { payload: cnaceFolder }) => {
+    const { manageList } = state;
+    return{
+      ...state,
+      curEditFolderId: false,
+      manageList: [ ...manageList ]
     }
   },
   [renameFolder]: (state, { payload: { id: folderId, value: newName } }) => {

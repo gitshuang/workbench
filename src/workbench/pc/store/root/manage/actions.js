@@ -35,6 +35,7 @@ const {
   OPEN_BATCH_MOVE,
   CLOSE_BATCH_MOVE,
   SET_EDIT_STATE,
+  CANCEL_FOLDER_EDIT
 } = types;
 
 const actions = createActions(
@@ -71,5 +72,6 @@ const actions = createActions(
   OPEN_BATCH_MOVE,
   CLOSE_BATCH_MOVE,
   SET_EDIT_STATE,
+  CANCEL_FOLDER_EDIT
 );
 export default actions;

@@ -29,4 +29,5 @@ export default createTypes(
   'OPEN_BATCH_MOVE',
   'CLOSE_BATCH_MOVE',
   'SET_EDIT_STATE',
+  'CANCEL_FOLDER_EDIT'
 );

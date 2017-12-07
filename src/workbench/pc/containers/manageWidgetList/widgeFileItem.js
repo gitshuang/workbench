@@ -18,7 +18,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit } = manageActions;
 
 const type='item';
 
@@ -69,7 +69,8 @@ function collectTaget(connect, monitor) {
   {
     deleteFolder,
     renameFolder,
-    setFolderEdit,selectListActions,selectGroupActions
+    setFolderEdit,selectListActions,selectGroupActions,
+    cancelFolderEdit
   }
 )
 class WidgeFileItem extends Component {
@@ -126,12 +127,7 @@ class WidgeFileItem extends Component {
     //TODO 此处最好只处理一次即可。setState
     this.setState({
       editShow:false,
-      curEditFolderId:false
     });
-    // let { curEditFolderId } = this.props;
-    // console.log(curEditFolderId);
-    // curEditFolderId = null;
-    //this.props.curEditFolderId = "";
     let data = {
       id: this.props.data.widgetId,
       value: this.state.value
@@ -141,6 +137,9 @@ class WidgeFileItem extends Component {
   }
 
   close = (e) => {
+    const { cancelFolderEdit } = this.props;
+    cancelFolderEdit(this.props.data.widgetId);
+
     this.setState({
         value:this.props.data.widgetName,
         editShow:false
