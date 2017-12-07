@@ -112,7 +112,8 @@ const reducer = handleActions({
     }
   },
   [addDesk]: (state, { payload: data}) => {
-
+    
+    const { dataList, parentId} = data ;
     let defaultCar = {
       "widgetId":"",
       "icon": "",
@@ -126,7 +127,6 @@ const reducer = handleActions({
 
     let newCar = [];
 
-    const { dataList, parentId} = data ;
     for(let da of dataList){
       // if(da.selected){
           let newCarObn = {...defaultCar};

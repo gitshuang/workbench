@@ -40,9 +40,6 @@ class SelectWidgetList extends Component {
 
   constructor(props) {
     super(props);
-
-    debugger;
-
     this.state = ({
         activeKey: "1",
         start: 0,
