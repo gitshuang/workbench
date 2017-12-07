@@ -222,7 +222,7 @@ class WidgetItem extends Component {
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     return connectDragSource(connectDropTarget(
-      <li className={widgetItem} style={{...widgetStyle[size],...opacity }} >
+      <li className={widgetItem} style={{...widgetStyle[size - 1],...opacity }} >
         <div className={title}>
           <div className={title_right}>{widgetName}</div>
         </div>

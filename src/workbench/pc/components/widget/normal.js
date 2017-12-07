@@ -95,7 +95,7 @@ class WidgetItem extends Component {
     }
 
     return (
-      <li className={widgetItem} style={{...widgetStyle[size], backgroundImage: background }} >
+      <li className={widgetItem} style={{...widgetStyle[size - 1], backgroundImage: background }} >
         <div className={title}>
           <div className={title_left}><img src={icon} /></div>
           <div className={title_right}>{name}</div>
