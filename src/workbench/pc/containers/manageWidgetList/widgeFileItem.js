@@ -18,7 +18,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit,openFolder } = manageActions;
 
 const type='item';
 
@@ -37,7 +37,7 @@ const itemTarget = {
     //添加大于1.5s的标记 判断是否拖入文件夹里面
     const timeFlag = (new Date().getTime() - timestamp > 1500);
     if (draggedId !== props.id) {
-      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag);
+      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag,props.data);
     }
   }
 };
@@ -70,7 +70,8 @@ function collectTaget(connect, monitor) {
     deleteFolder,
     renameFolder,
     setFolderEdit,selectListActions,selectGroupActions,
-    cancelFolderEdit
+    cancelFolderEdit,
+    openFolder
   }
 )
 class WidgeFileItem extends Component {
