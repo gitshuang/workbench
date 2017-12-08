@@ -14,7 +14,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder,addFolder, setFolderEdit,selectListActions,selectGroupActions } = manageActions;
+const {deleteFolder,delectServe, renameFolder,addFolder, setFolderEdit,selectListActions,selectGroupActions } = manageActions;
 import {
   widgetItem,
   title,
@@ -147,8 +147,8 @@ class WidgetItem extends Component {
 
   popSave = (data)=>{
     const { deleteFolder,type } = this.props;
-    if(type == "pop"){
-      deleteFolder(data.widgetId,parentId,propsIndex);
+    if(type === "pop"){
+      delectServe(data.widgetId,parentId,propsIndex);
     }else{
       deleteFolder(data.widgetId);
     }
