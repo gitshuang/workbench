@@ -40,9 +40,6 @@ class SelectWidgetList extends Component {
 
   constructor(props) {
     super(props);
-
-    debugger;
-
     this.state = ({
         activeKey: "1",
         start: 0,
@@ -99,17 +96,16 @@ class SelectWidgetList extends Component {
   //判断数据是否是在桌面上
   getDefaultSelectCheck(alllist){
     let dataList = [];
+    debugger;
     const {manageList} = this.props;//页面已经有的项
     for(let i=0;i<manageList.length;i++){
         let da = manageList[i];
         for(let j=0;j<da.children.length;j++){
             let _da = da.children[j];
-            if(_da.type == 3){
-
-              let mapItem = alllist[_da.widgetId];
+            if(_da.type != 2){
+              let mapItem = alllist[_da.serviceId];
               if(!mapItem)continue;
               mapItem.selected  = true;
-
             }
         }
     }

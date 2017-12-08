@@ -403,7 +403,6 @@ class ManageGroup extends Component {
     console.log("this.props");
     console.log(this.props);
 
-
     return connectDragSource(connectDropTarget(
       <div className={groupArea}>
         <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
@@ -417,7 +416,7 @@ class ManageGroup extends Component {
             className={addGroupBtn}
             onClick={this.addGroupFn.bind(this, index)} >
             <Icon type="add" ></Icon>
-            添加组
+            <span>添加组</span>
           </button>
         </div>
         <PopDialog className="pop_dialog_delete" show={ showModal } btns={pop_btn} data={{ index }}>
