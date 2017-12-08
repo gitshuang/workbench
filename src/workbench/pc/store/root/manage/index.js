@@ -50,7 +50,7 @@ const defaultState = {
   selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
   selectGroup: [],
-  currGroupIndex,
+  currGroupIndex:0
 };
 
 const findTreeById = (data, curId) => {
