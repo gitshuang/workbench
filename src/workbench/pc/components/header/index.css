@@ -39,6 +39,7 @@
   display: block;
   height: 28px;
   line-height: 28px;
+  cursor: pointer;
 }
 :global(.lebra-navbar-title){
   -webkit-box-pack: center;

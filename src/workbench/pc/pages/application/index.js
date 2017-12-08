@@ -9,7 +9,7 @@ import Header from 'containers/header';
 import BreadcrumbContainer from 'containers/breadcrumb';
 import ServiceClassify from 'containers/serviceClassify';
 
-import {header,um_content} from './style.css';
+import {header,um_content,appBreadcrumb} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 // const {changeUserInfoDisplay, getWorkList} = homeActions;
@@ -56,7 +56,7 @@ class Application extends Component {
                 <span>全部应用及服务</span>
               </div>
             </Header>
-            <BreadcrumbContainer/>
+            <div className={appBreadcrumb}><BreadcrumbContainer/></div>
           </div>
         </div>
         <div className={um_content}>

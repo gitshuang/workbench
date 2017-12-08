@@ -66,11 +66,8 @@ class SelectWidgetList extends Component {
       if (error) {
         requestError(payload);
       }
-      // let _newPayload = [];
-      // Object.assign(_newPayload,payload);
-
-      let _dataMap = self.getArrayToMap(payload);
-      self.getDefaultSelectCheck(_dataMap);//修改map上的selected选中状态
+      let _dataMap = self.getArrayToMap(payload,{},0);
+      let _dataList = self.getDefaultSelectCheck(_dataMap,self.props.manageList,[]);
       let _allDataList = self.getFindByTypeId("all");
 
       self.setState({
@@ -83,32 +80,61 @@ class SelectWidgetList extends Component {
   }
 
   //数据转换成map
-  getArrayToMap(data){
-      let dataMap = {};
-      data.map(function(da,i){
-        da.children.map(function(_da,_i){
-          _da.parId = da.labelId;
-          dataMap[_da.serveId] = _da;
-        })
-      })
-    return dataMap;
-  }
-  //判断数据是否是在桌面上
-  getDefaultSelectCheck(alllist){
-    let dataList = [];
-    debugger;
-    const {manageList} = this.props;//页面已经有的项
-    for(let i=0;i<manageList.length;i++){
-        let da = manageList[i];
-        for(let j=0;j<da.children.length;j++){
-            let _da = da.children[j];
-            if(_da.type != 2){
-              let mapItem = alllist[_da.serviceId];
-              if(!mapItem)continue;
-              mapItem.selected  = true;
-            }
+  // getArrayToMap(data){
+  //     let dataMap = {};
+  //     data.map(function(da,i){
+  //       da.children.map(function(_da,_i){
+  //         _da.parId = da.labelId;
+  //         dataMap[_da.serveId] = _da;
+  //       })
+  //     })
+  //   return dataMap;
+  // }
+
+  // //判断数据是否是在桌面上
+  // getDefaultSelectCheck(alllist){
+  //   let dataList = [];
+  //   debugger;
+  //   const {manageList} = this.props;//页面已经有的项
+  //   for(let i=0;i<manageList.length;i++){
+  //       let da = manageList[i];
+  //       for(let j=0;j<da.children.length;j++){
+  //           let _da = da.children[j];
+  //           if(_da.type != 2){
+  //             let mapItem = alllist[_da.serviceId];
+  //             if(!mapItem)continue;
+  //             mapItem.selected  = true;
+  //           }
+  //       }
+  //   }
+  // }
+
+  getArrayToMap(data,dataMap,parId){
+    if(!dataMap){dataMap = {}};
+    for(let i = 0;i<data.length;i++){
+        parId == 0 ? data[i].parId = data[i].labelId : data[i].parId = parId;
+        if(data[i].children && data[i].children.length != 0){
+          this.getArrayToMap(data[i].children,dataMap,data[i].labelId);
+        }else{
+          dataMap[data[i].serveId] = data[i];
         }
     }
+    return dataMap;
+  }
+
+  getDefaultSelectCheck(alllist,manageList,dataList) {
+    if(!dataList){dataList = []};
+    for(let i = 0;i<manageList.length;i++){
+      if(manageList[i].children && manageList[i].children.length != 0){
+        this.getDefaultSelectCheck(alllist,manageList[i].children,dataList);
+      }else{
+          let mapItem = alllist[manageList[i].serviceId];
+          if(mapItem && manageList[i].type != 2){
+            mapItem.selected  = true;
+          }
+      }
+    }
+    return dataList;
   }
 
   //根据type进行查询合并数组子元素
