@@ -81,10 +81,11 @@ class WidgetList extends Component {
 
   widgeOnclick = (e,da) => {
     const {index,setCurrGroupIndex} = this.props;
+    setCurrGroupIndex(index);
     if(e.target.getAttribute("name") == "file"){
       this.props.openFolder(da);
     }
-    setCurrGroupIndex(index);
+
   }
 
   popSave = (data)=>{

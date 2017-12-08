@@ -36,7 +36,7 @@ const {
   CLOSE_BATCH_MOVE,
   SET_EDIT_STATE,
   CANCEL_FOLDER_EDIT,
-  SET_CURR_GROUPO_INDEX,
+  SET_CURR_GROUP_INDEX,
 } = types;
 
 const actions = createActions(
@@ -74,6 +74,6 @@ const actions = createActions(
   CLOSE_BATCH_MOVE,
   SET_EDIT_STATE,
   CANCEL_FOLDER_EDIT,
-  SET_CURR_GROUPO_INDEX
+  SET_CURR_GROUP_INDEX
 );
 export default actions;

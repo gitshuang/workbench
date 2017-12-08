@@ -262,7 +262,7 @@ const reducer = handleActions({
   [setCurrGroupIndex]: (state, { payload: index }) => {
     return{
       ...state,
-      setCurrGroupIndex: index,
+      currGroupIndex: index,
     }
   },
   [renameGroup]: (state, { payload: {name,index} }) => {
@@ -478,11 +478,11 @@ const reducer = handleActions({
 
     curDisplayFolder.children.forEach((item,index)=>{
       if(widgetId == item.widgetId){
-        return curDisplayFolder.children[index].splice(i,1);
+        return curDisplayFolder.children.splice(index,1);
       }
     });
     curDisplayFolder.children = [...curDisplayFolder.children];
-    manageList[index].forEach((item,key)=>{
+    /*manageList[index].children.forEach((item,key)=>{
       if ( item.widgetId == folder ){
         item.children.forEach((list,i)=>{
           if(list.widgetId == widgetId){
@@ -490,18 +490,8 @@ const reducer = handleActions({
           }
         })
       }
-      /*if(!folder && item.widgetId == widgetId ){
-        return manageList[index].splice(key,1);
-      }
-       if (folder && item.widgetId == folder ){
-       item.children.forEach((list,i)=>{
-       if(list.widgetId == widgetId){
-       return manageList[index][key].splice(i,1);
-       }
-       })
-       }
-      */
-    });
+    });*/
+    curDisplayFolder = JSON.parse(JSON.stringify(curDisplayFolder))
     return{
       ...state,
       isEdit: true,
@@ -568,7 +558,6 @@ const reducer = handleActions({
     }
   },
   [openFolder]: (state, { payload: curDisplayFolder }) => {
-    debugger;
     return{
       ...state,
       curDisplayFolder,

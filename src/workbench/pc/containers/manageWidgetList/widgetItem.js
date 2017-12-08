@@ -112,6 +112,7 @@ const widgetStyle = [
     'curEditFolderId',
     'selectList',
     'selectGroup',
+    'currGroupIndex',
     {
       namespace: 'manage',
     }
@@ -122,6 +123,7 @@ const widgetStyle = [
     setFolderEdit,
     selectListActions,selectGroupActions,
     addFolder,
+    delectServe
   }
 )
 class WidgetItem extends Component {
@@ -146,9 +148,9 @@ class WidgetItem extends Component {
 
 
   popSave = (data)=>{
-    const { deleteFolder,type } = this.props;
+    const { deleteFolder,type,currGroupIndex,delectServe,parentId } = this.props;
     if(type === "pop"){
-     // delectServe(propsIndex,parentId,data.widgetId);
+     delectServe({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
     }else{
       deleteFolder(data.widgetId);
     }

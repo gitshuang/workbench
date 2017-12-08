@@ -127,7 +127,6 @@ class UserInfoContainer extends Component {
         if (error) {
           requestError(payload);
         }
-        debugger;
         requestSuccess();
       });
     });
