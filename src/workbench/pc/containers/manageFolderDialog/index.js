@@ -43,7 +43,7 @@ class ManageFolderDialog extends Component {
 
     render() {
         const {curDisplayFolder: {widgetName: title, children, }, closeFolder, folderModalDisplay} = this.props;
-        const list = children.map((child, i) => {
+        const list = children && children.map((child, i) => {
             const {type, parentId, widgetId: id, } = child;
             const props = {
                 key: `widget-${id}-${i}`,
@@ -64,7 +64,7 @@ class ManageFolderDialog extends Component {
       return (
             <div className="manageDialogFolder" >
               <DialogContent folderModalDisplay = {folderModalDisplay} closeFolderDrag={this.closeFolderDrag} />
-            <Modal className="manageDialogFolder" show={folderModalDisplay} backup={false} onHide={closeFolder}>
+            <Modal className="manageDialogFolder" show={folderModalDisplay} onHide={closeFolder}>
               <div className={`targetModal`}>
               <Modal.Header>
                 <Modal.Title>{title}</Modal.Title>
