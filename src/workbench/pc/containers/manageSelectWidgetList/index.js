@@ -66,13 +66,8 @@ class SelectWidgetList extends Component {
       if (error) {
         requestError(payload);
       }
-      // let _newPayload = [];
-      // Object.assign(_newPayload,payload);
-
       let _dataMap = self.getArrayToMap(payload,{},0);
-      // self.getDefaultSelectCheck(_dataMap);//修改map上的selected选中状态
       let _dataList = self.getDefaultSelectCheck(_dataMap,self.props.manageList,[]);
-      debugger;
       let _allDataList = self.getFindByTypeId("all");
 
       self.setState({
