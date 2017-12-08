@@ -64,7 +64,7 @@ class ManageFolderDialog extends Component {
       return (
             <div className="manageDialogFolder" >
               <DialogContent folderModalDisplay = {folderModalDisplay} closeFolderDrag={this.closeFolderDrag} />
-            <Modal className="manageDialogFolder" show={folderModalDisplay} onHide={closeFolder}>
+            <Modal className="manageDialogFolder" show={folderModalDisplay} backup={false} onHide={closeFolder}>
               <div className={`targetModal`}>
               <Modal.Header>
                 <Modal.Title>{title}</Modal.Title>

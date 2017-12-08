@@ -8,7 +8,8 @@
   background-color: initial;
 }
 :global(.manageDialogFolder.u-modal){
-  position: relative;
+  position: fixed;
+  bottom:auto;
   margin: 0px;
   z-index: 3000;
   height: auto;
