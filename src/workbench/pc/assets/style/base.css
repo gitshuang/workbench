@@ -60,6 +60,7 @@ body {
   height: 201px;
   margin: 0 auto;
   top: 60px;
+  z-index: 99999;
 }
 .src-workbench-pc-pages-work-style__wrap--GLwgN .lebra-navbar-left-content img{
   display: none;
