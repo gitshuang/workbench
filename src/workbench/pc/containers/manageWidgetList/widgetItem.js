@@ -149,16 +149,9 @@ class WidgetItem extends Component {
 
 
   popSave = (data)=>{
-<<<<<<< HEAD
     const { deleteFolder,type,currGroupIndex,delectServe,parentId } = this.props;
     if(type === "pop"){
      delectServe({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
-=======
-    const { deleteFolder,type ,delectServe} = this.props;
-    if(type === "pop"){
-     // delectServe(propsIndex,parentId,data.widgetId);
-      delectServe(data.widgetId,parentId,propsIndex);
->>>>>>>  按钮组件01
     }else{
       deleteFolder(data.widgetId);
     }
