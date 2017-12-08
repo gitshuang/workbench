@@ -119,3 +119,19 @@
 .selectedBackClass{
 	background:rgba(51,58,68,0.2) !important;
 }
+.iconBox{
+  float: left;
+  position: relative;
+}
+.iconBox p{
+  top:34px;
+  font-size:12px;
+  position: absolute;
+  background: #b3b3b3;
+  width:70px;
+  line-height: 30px;
+  text-align: center;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
