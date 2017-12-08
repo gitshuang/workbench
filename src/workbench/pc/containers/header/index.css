@@ -47,3 +47,6 @@
   top:5px;
   right:5px;
 }
+:global( .tc i:hover ){
+  color:#2D3F5D;
+}
