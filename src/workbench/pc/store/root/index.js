@@ -65,7 +65,7 @@ const reducer = handleActions({
     // Loading.destroy();
     notification.notice({
       content: msg,
-      duration: 6,
+      duration: 4.5,
       closable: false,
     });
     return state;

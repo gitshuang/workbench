@@ -11,7 +11,8 @@ const {
   lebraNavbar,
 } = styles;
 const {
-  changeQuickServiceDisplay
+  changeQuickServiceDisplay,
+  changeQuickServiceHidden,
 } = actions;
 
 @connect(
@@ -20,6 +21,7 @@ const {
     'messageType',
   ),
   {
+    changeQuickServiceHidden,
     changeQuickServiceDisplay,
   }
 )
@@ -29,9 +31,10 @@ class HeaderContainer extends Component {
   }
 
   openService(event) {
-
-    const { changeQuickServiceDisplay, quickServiceDisplay } = this.props;
-    if( !quickServiceDisplay){
+    const { changeQuickServiceDisplay, quickServiceDisplay, changeQuickServiceHidden } = this.props;
+    if(quickServiceDisplay){
+      changeQuickServiceHidden();
+    } else {
       changeQuickServiceDisplay();
     }
   }

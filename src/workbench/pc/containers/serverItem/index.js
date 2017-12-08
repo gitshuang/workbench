@@ -34,9 +34,7 @@ class ServerItem extends Component {
 
 
                 <div className={item_right}>
-                    {serveId}
                     {serveName}
-                    {selected}
                 </div>
             </div>
              <div className={item_footer}>

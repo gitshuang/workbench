@@ -75,6 +75,7 @@ class Home extends Component {
     const { manageList } = props;
     this.state = {
       showModal: false,
+      showCancelModal: false
     };
   }
   moveGroupDrag = (id, afterId) => {
@@ -105,6 +106,8 @@ class Home extends Component {
       return error;
     });
   }
+
+  //  保存
   save = () => {
     const {
       requestStart,
@@ -117,12 +120,14 @@ class Home extends Component {
     setManageList(manageList).then(({error, payload}) => {
       if (error) {
         requestError(payload);
+      } else {
+        this.goBack();
       }
-
       requestSuccess();
-      this.goBack();
+      this.popCloseCancel();
     });
   }
+  // 取消
   cancel = () => {
     const {
       isEdit,
@@ -137,10 +142,13 @@ class Home extends Component {
     }else{
       this.goBack();
     }
+    this.popCloseCancel();
   }
+  // 返回操作
   goBack = () => {
     this.props.history.goBack();
   }
+  //
   batchDelectFn = () => {
     const { batchDelect } = this.props;
     batchDelect();
@@ -160,6 +168,18 @@ class Home extends Component {
   popClose = () => {
     this.setState({
       showModal: false
+    });
+  }
+  // 打开弹窗取消
+  popOpenCancel = () => {
+    this.setState({
+      showCancelModal: true
+    });
+  }
+  // 关闭取消的弹窗
+  popCloseCancel = () => {
+    this.setState({
+      showCancelModal: false
     });
   }
 
@@ -190,6 +210,11 @@ class Home extends Component {
       {label:"确认",fun:this.batchDelectFn,className:""},
       {label:"取消",fun:this.popClose,className:""}
     ]
+    const pop_btn2 = [
+      {label:"保存",fun:this.save,className:""},
+      {label:"不保存",fun:this.cancel,className:""},
+      {label:"取消",fun:this.popCloseCancel,className:""}
+    ]
     const list = [];
     return (
       <div className={page_home}>
@@ -212,7 +237,7 @@ class Home extends Component {
             </div>
             <div className={saveArea}>
               <Button className={preserve} disabled={!isEdit} onClick={this.save}>保存</Button>
-              <Button className={cancel} onClick={this.cancel}>取消</Button>
+              <Button className={cancel} onClick={this.popOpenCancel}>取消</Button>
             </div>
           </div>
         </div>
@@ -223,6 +248,11 @@ class Home extends Component {
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } btns={pop_btn} >
           <div>
             <span>您确认要批量删除吗?</span>
+          </div>
+        </PopDialog>
+        <PopDialog className="pop_dialog_delete" show = { this.state.showCancelModal } btns={pop_btn2} title={"是否保存最新修改？"} >
+          <div>
+            <span>点击不保存，则最新修改将丢失</span>
           </div>
         </PopDialog>
       </div>

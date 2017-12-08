@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext,DragSource, DropTarget  } from 'react-dnd';
 import { content } from './style.css';
-import Modal from 'bee-modal';
+import PopDialog from 'components/pop';
 import Button from 'bee-button';
 import WidgetItem from 'containers/manageWidgetList/widgetItem';
 import { mapStateToProps } from '@u';
@@ -43,7 +43,7 @@ class ManageFolderDialog extends Component {
 
     render() {
         const {curDisplayFolder: {widgetName: title, children, }, closeFolder, folderModalDisplay} = this.props;
-        const list = children.map((child, i) => {
+        const list = children && children.map((child, i) => {
             const {type, parentId, widgetId: id, } = child;
             const props = {
                 key: `widget-${id}-${i}`,
@@ -55,7 +55,7 @@ class ManageFolderDialog extends Component {
                 moveItemDrag: this.moveItemDrag,
             };
             return (
-                <WidgetItem { ...props } folderType={'folder'} closeFolderDrag={this.closeFolderDrag}/>
+                <WidgetItem { ...props } folderType={'folder'} type="pop" closeFolderDrag={this.closeFolderDrag}/>
             );
         });
       const { connectDragSource, connectDropTarget,isDragging } = this.props;
@@ -64,18 +64,16 @@ class ManageFolderDialog extends Component {
       return (
             <div className="manageDialogFolder" >
               <DialogContent folderModalDisplay = {folderModalDisplay} closeFolderDrag={this.closeFolderDrag} />
-            <Modal className="manageDialogFolder" show={folderModalDisplay} onHide={closeFolder}>
-              <div className={`targetModal`}>
-              <Modal.Header>
-                <Modal.Title>{title}</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
+              <PopDialog
+                className="manageDialogFolder"
+                show={ folderModalDisplay }
+                title={title}
+                backup={false}
+                close={closeFolder} >
                 <div className={content}>
                   { list }
                 </div>
-              </Modal.Body>
-            </div>
-            </Modal>
+              </PopDialog>
             </div>
         );
     }

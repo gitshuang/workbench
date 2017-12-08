@@ -81,7 +81,7 @@ class SearchContainer extends Component {
             {item}
           </CSSTransitionGroup>
         </TransitionGroup>
-        <div className={`tc ${searchBtn}`} onClick={this.search} >
+        <div className={`tc ${searchBtn}  ${isShow?'btnColor':""}`} onClick={this.search} style={{color:isShow?"red":""}}>
           <Icon type="search" />
         </div>
       </div>

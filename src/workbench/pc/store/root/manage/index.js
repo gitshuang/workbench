@@ -34,6 +34,7 @@ const {
   closeBatchMove,
   setEditState,
   cancelFolderEdit,
+  setCurrGroupIndex
 } = actions;
 
 const defaultState = {
@@ -49,6 +50,7 @@ const defaultState = {
   selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
   selectGroup: [],
+  currGroupIndex:0
 };
 
 const findTreeById = (data, curId) => {
@@ -112,7 +114,7 @@ const reducer = handleActions({
     }
   },
   [addDesk]: (state, { payload: data}) => {
-    
+
     const { dataList, parentId} = data ;
     let defaultCar = {
       "widgetId":"",
@@ -255,6 +257,12 @@ const reducer = handleActions({
       ...state,
       manageList: newList,
       isEdit: true,
+    }
+  },
+  [setCurrGroupIndex]: (state, { payload: index }) => {
+    return{
+      ...state,
+      setCurrGroupIndex: index,
     }
   },
   [renameGroup]: (state, { payload: {name,index} }) => {
@@ -466,22 +474,39 @@ const reducer = handleActions({
   },
   [delectServe]: (state, { payload: {index,folder,widgetId} }) => {
     let manageList = state.manageList;
-    manageList[index].forEach((item,key)=>{
-      if(!folder && item.widgetId == widgetId ){
-        return manageList[index].splice(key,1);
+    let curDisplayFolder = state.curDisplayFolder;
+
+    curDisplayFolder.children.forEach((item,index)=>{
+      if(widgetId == item.widgetId){
+        return curDisplayFolder.children[index].splice(i,1);
       }
-      if (folder && item.widgetId == folder ){
+    });
+    curDisplayFolder.children = [...curDisplayFolder.children];
+    manageList[index].forEach((item,key)=>{
+      if ( item.widgetId == folder ){
         item.children.forEach((list,i)=>{
           if(list.widgetId == widgetId){
             return manageList[index][key].splice(i,1);
           }
         })
       }
+      /*if(!folder && item.widgetId == widgetId ){
+        return manageList[index].splice(key,1);
+      }
+       if (folder && item.widgetId == folder ){
+       item.children.forEach((list,i)=>{
+       if(list.widgetId == widgetId){
+       return manageList[index][key].splice(i,1);
+       }
+       })
+       }
+      */
     });
     return{
       ...state,
       isEdit: true,
       manageList: [...manageList],
+      curDisplayFolder: curDisplayFolder
     }
   },
   [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType,timeFlag} }) => {
@@ -530,18 +555,26 @@ const reducer = handleActions({
           ]
       })
     }
+    let curDisplayFolder = state.curDisplayFolder;
+    if(preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3){
+      curDisplayFolder = JSON.parse(JSON.stringify(targetData));
+    }
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return{
       ...state,
       isEdit: true,
       manageList,
+      curDisplayFolder,
     }
   },
-  [openFolder]: (state, { payload: curDisplayFolder }) => ({
-    ...state,
-    curDisplayFolder,
-    folderModalDisplay: true,
-  }),
+  [openFolder]: (state, { payload: curDisplayFolder }) => {
+    debugger;
+    return{
+      ...state,
+      curDisplayFolder,
+      folderModalDisplay: true,
+    }
+  },
   [closeFolder]: (state) => ({
     ...state,
     folderModalDisplay: false,

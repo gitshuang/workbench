@@ -25,7 +25,8 @@ import {
   groupArea,
   selectedBackClass,
   titleInputArea,
-  icon
+  icon,
+  iconBox
 } from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
@@ -144,6 +145,8 @@ class ManageGroup extends Component {
       inEdit: false,
       inFoucs: false,
       showModal: false,
+      renameTip: "none",
+      addFoldTip: "none"
     }
   }
   componentDidMount() {
@@ -301,6 +304,29 @@ class ManageGroup extends Component {
         break;
     }
   }
+
+
+  //滑过事件
+  handleMouseOver =() =>{
+    this.setState({
+      renameTip: "block"
+    })
+  }
+  handleMouseOut =() => {
+    this.setState({
+      renameTip: "none"
+    })
+  }
+  handleMouseOver2 =() =>{
+    this.setState({
+      addFoldTip: "block"
+    })
+  }
+  handleMouseOut2 =() => {
+    this.setState({
+      addFoldTip: "none"
+    })
+  }
   renderDrop =(index) => {
     const { manageList } = this.props;
     let menu = (
@@ -346,6 +372,8 @@ class ManageGroup extends Component {
       inFoucs,
       groupName,
       showModal,
+      renameTip,
+      addFoldTip
     } = this.state;
     const checkType = selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
@@ -378,9 +406,15 @@ class ManageGroup extends Component {
             <input type="checkbox" checked={checkType} onChange={ this.selectFn(index) }/>
             <span>{widgetName}</span>
           </label>
-          <div>
-            <Icon type="record" onClick={ this.openRenameGroupFn }/>
-            <Icon type="add-files" onClick={this.addFolderFn.bind(this, index)}/>
+          <div className="clearfix">
+            <div className={iconBox}>
+              <Icon type="record" onClick={ this.openRenameGroupFn } onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}/>
+              <p style={{display: renameTip}}>重命名分组</p>
+            </div>
+            <div className={iconBox}>
+              <Icon type="add-files" onClick={this.addFolderFn.bind(this, index)} onMouseOver={this.handleMouseOver2} onMouseOut={this.handleMouseOut2}/>
+              <p style={{display: addFoldTip}}>添加文件夹</p>
+            </div>
             {this.renderDrop(index)}
           </div>
         </div>
