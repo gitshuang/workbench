@@ -26,11 +26,19 @@
   background:#fff;
   height:38px;
   line-height:38px;
+  // display:inline-block;
+  display:flex;
+}
+.breadcrumbClass a{
   display:inline-block;
+  -webkit-box-flex:1;
+  line-height:35px;
 }
 .breadcrumbBack {
   margin:0 10px;
   color:#9a9a9a;
+  -webkit-box-flex:1;
+  line-height:33px;
 }
 .breadcrumbClass :global(.u-breadcrumb){
   margin-top: -3px;
