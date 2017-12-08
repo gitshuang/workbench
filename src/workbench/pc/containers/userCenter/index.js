@@ -20,6 +20,7 @@ import img2 from 'assets/image/wgt/intelligent_logo.png';
 import img3 from 'assets/image/wgt/goldInstitute.png';
 import img4 from 'assets/image/wgt/salary_logo.png';
 import img5 from 'assets/image/wgt/relation.png';
+import defaultPic from 'assets/image/wgt/default.png';
 
 const {
   getUserInfo,
@@ -245,10 +246,10 @@ class UserInfoContainer extends Component {
       <div className={`${wrap} ${clearfix}`} >
         <div>
           <div className={imgUser}>
-            <div className={imgOuter}><img src={imgsrc} className={imgInner} /></div>
-            <div className={editPortrait}>
+            <div className={imgOuter}><img src={imgsrc?imgsrc:defaultPic} className={imgInner} /></div>
+            {/*<div className={editPortrait}>
               <Icon type="copyreader" onClick={this.handleClick.bind(this)}></Icon>
-            </div>
+            </div>*/}
           </div>
           <div className={userName}>{name}</div>
           <ul className={`${gloryIcon} ${clearfix}`}>
@@ -268,7 +269,7 @@ class UserInfoContainer extends Component {
         </div>
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
-            <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页个性化</Button></li>
+            <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
             <li>
               {renderAllow}
             </li>

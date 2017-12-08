@@ -355,7 +355,9 @@
 .wrap :global(.u-tabs-content){
   // padding-top:14px;
 }
-
+.wrap :global(.u-tabs-tab):hover{
+  font-weight:900;
+}
 .wrap :global(.u-select-selection-selected-value){
   padding:0;
   width:60px;
