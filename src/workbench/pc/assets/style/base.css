@@ -66,14 +66,20 @@ body {
 }.u-modal-open .u-modal{
   overflow-y: hidden;
 }
+.lebra-navbar-left{
+  display:flex;
+}
 .lebra-navbar-left-icon{
   width:32px;
   height:32px;
   border-radius: 16px;
-  background:rgba(190,193,200,1);
+  -webkit-box-flex: 1;
+}
+.lebra-navbar-left-content{
+  -webkit-box-flex: 1;
+  line-height: 36px;
 }
 .lebra-navbar-left-icon .iconfont{
-  color:#fff;
   font-size:30px;
 }
 .u-dropdown-menu{

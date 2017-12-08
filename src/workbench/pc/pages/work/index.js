@@ -241,7 +241,7 @@ export default class Work extends Component {
           type,
         } = this.props;
         const { loaded } = this.state;
-        let iconName = <Icon type="home" style={{fontSize:"24px"}}/>
+        let iconName = <Icon type="home"/>
         return (
           <div className={wrap + " um-win"}>
             <div className={header}>

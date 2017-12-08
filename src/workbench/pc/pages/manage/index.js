@@ -30,7 +30,8 @@ import {
   um_footer,
   saveArea,
   batchArea,
-  header
+  header,
+  page_home
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -191,7 +192,7 @@ class Home extends Component {
     ]
     const list = [];
     return (
-      <div className="um-win">
+      <div className={page_home}>
         {/*<div className={header}>
           <div className="um-header">
             <Header onLeftClick={ this.goBack } iconName={"back"} leftContent={"返回"}>
