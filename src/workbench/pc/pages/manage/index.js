@@ -185,6 +185,8 @@ class Home extends Component {
 
   renderContent() {
     let { manageList } = this.props;
+    //console.log(manageList)
+    //debugger;
     let list = [];
     if(manageList.length == 0) return;
     manageList.map((item, index) =>{
