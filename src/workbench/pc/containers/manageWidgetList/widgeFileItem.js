@@ -34,9 +34,11 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
+    const preFolderType = monitor.getItem().folderType;
+
     //添加大于1.5s的标记 判断是否拖入文件夹里面
     const timeFlag = (new Date().getTime() - timestamp > 1500);
-    if (draggedId !== props.id) {
+    if (draggedId !== props.id && preFolderType!=="folder") {
       props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag,props.data);
     }
   }
