@@ -24,6 +24,15 @@ const {closeFolder} = homeActions;
     }
 )
 class homeFolderDialog extends Component {
+  componentWillUnmount() {
+    const {
+      folderModalDisplay,
+      closeFolder,
+    } = this.props;
+    if (folderModalDisplay) {
+      closeFolder();
+    }
+  }
     render() {
         const {
           curDisplayFolder: {

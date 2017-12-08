@@ -117,10 +117,10 @@ class Home extends Component {
     setManageList(manageList).then(({error, payload}) => {
       if (error) {
         requestError(payload);
+      } else {
+        this.goBack();
       }
-
       requestSuccess();
-      this.goBack();
     });
   }
   cancel = () => {
