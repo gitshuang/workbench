@@ -1,0 +1,35 @@
+.default_font{
+  font-size:14px;
+font-family:PingFangSC-Regular;
+color:rgba(71,77,84,1);
+  line-height:32px;
+}
+
+.default_btn{
+  width:80px;
+  height:32px; 
+  background:rgb(243, 173, 61);
+  border-radius: 3px ;
+  text-align: center;
+  cursor:pointer;
+}
+
+.default_btn:hover{
+  background:rgb(246, 197, 68);
+font-family:PingFangSC-Medium;
+color:rgba(71,77,84,1);
+}
+.active_btn{
+  background:rgb(241, 156, 65) !important;
+  font-family:PingFangSC-Medium !important;
+color:rgba(71,77,84,1) !important;
+}
+
+.disabled_btn{
+  background:rgba(9,44,66,0);
+  color:rgba(165,173,186,1);
+}
+
+.loading_btn{
+  
+}
