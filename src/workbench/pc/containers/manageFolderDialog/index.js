@@ -55,7 +55,7 @@ class ManageFolderDialog extends Component {
                 moveItemDrag: this.moveItemDrag,
             };
             return (
-                <WidgetItem { ...props } folderType={'folder'} closeFolderDrag={this.closeFolderDrag}/>
+                <WidgetItem { ...props } folderType={'folder'} type="pop" closeFolderDrag={this.closeFolderDrag}/>
             );
         });
       const { connectDragSource, connectDropTarget,isDragging } = this.props;

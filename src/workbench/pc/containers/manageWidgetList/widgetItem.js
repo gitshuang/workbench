@@ -146,9 +146,12 @@ class WidgetItem extends Component {
 
 
   popSave = (data)=>{
-    // this.state.data
-    const { deleteFolder } = this.props;
-    deleteFolder(data.widgetId);
+    const { deleteFolder,type } = this.props;
+    if(type == "pop"){
+      deleteFolder(data.widgetId,parentId,propsIndex);
+    }else{
+      deleteFolder(data.widgetId);
+    }
     this.setState({
         showModal:false
     })
