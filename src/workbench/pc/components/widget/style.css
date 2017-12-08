@@ -41,20 +41,21 @@
     /*background: #ccc;*/
     display: -webkit-box;
 }
-.title_left,
 .title_right{
     -webkit-box-align: center;
     display: -webkit-box;
 }
 
-.title_left{
-  width: 30px;
-  height: 30px;
-  -webkit-box-pack: end;
+.defaultArea{
+  position: relative;
 }
-.title_left img{
-  width: 100%;
-  height: 100%;
+.defaultArea .iconImg{
+  position: absolute;
+  width: 65px;
+  height: auto;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(50%,50%);
 }
 
 .title_right{

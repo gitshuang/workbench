@@ -9,6 +9,8 @@ import {
   title_left,
   title_right,
   content,
+  defaultArea,
+  iconImg,
 } from './style.css'
 
 const widgetStyle = [
@@ -46,13 +48,13 @@ class WidgetItem extends Component {
     };
 
     return (
-      <li className={widgetItem}
+      <li className={`${widgetItem} ${defaultArea}`}
         style={style}
         onClick={clickHandler} >
         <div className={title}>
-          <div className={title_left}><img src={icon} /></div>
           <div className={title_right}>{name}</div>
         </div>
+        <img src={icon} className={iconImg}/>
       </li>
     );
   }
