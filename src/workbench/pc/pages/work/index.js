@@ -258,8 +258,7 @@ export default class Work extends Component {
                           onClick={ titleServiceDisplay } />) : undefined
                     }
                     <Icon
-                      type={pinDisplay?"pin2":"pin"}
-                      className={ pinType ? active : '' }
+                      type={pinType?"pin2":"pin"}
                       style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                       onClick={ this.pinDisplayFn }
                     />
