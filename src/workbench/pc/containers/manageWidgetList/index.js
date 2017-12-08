@@ -19,7 +19,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder,closeFolder } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder,closeFolder,setCurrGroupIndex } = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 @connect(
@@ -37,7 +37,8 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
     setFolderEdit,
     moveServe,
     addFolder,
-    closeFolder
+    closeFolder,
+    setCurrGroupIndex
   }
 )
 class WidgetList extends Component {
@@ -79,9 +80,11 @@ class WidgetList extends Component {
   }
 
   widgeOnclick = (e,da) => {
+    const {index,setCurrGroupIndex} = this.props;
     if(e.target.getAttribute("name") == "file"){
       this.props.openFolder(da);
     }
+    setCurrGroupIndex(index);
   }
 
   popSave = (data)=>{

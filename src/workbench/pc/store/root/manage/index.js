@@ -34,6 +34,7 @@ const {
   closeBatchMove,
   setEditState,
   cancelFolderEdit,
+  setCurrGroupIndex
 } = actions;
 
 const defaultState = {
@@ -49,6 +50,7 @@ const defaultState = {
   selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
   selectGroup: [],
+  currGroupIndex,
 };
 
 const findTreeById = (data, curId) => {
@@ -255,6 +257,12 @@ const reducer = handleActions({
       ...state,
       manageList: newList,
       isEdit: true,
+    }
+  },
+  [setCurrGroupIndex]: (state, { payload: index }) => {
+    return{
+      ...state,
+      setCurrGroupIndex: index,
     }
   },
   [renameGroup]: (state, { payload: {name,index} }) => {
