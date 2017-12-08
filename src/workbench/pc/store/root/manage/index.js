@@ -549,14 +549,14 @@ const reducer = handleActions({
     }
     let curDisplayFolder = state.curDisplayFolder;
     if(preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3){
-      curDisplayFolder = targetData;
+      curDisplayFolder = JSON.parse(JSON.stringify(targetData));
     }
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return{
       ...state,
       isEdit: true,
       manageList,
-      curDisplayFolder:[...curDisplayFolder],
+      curDisplayFolder,
     }
   },
   [openFolder]: (state, { payload: curDisplayFolder }) => {
