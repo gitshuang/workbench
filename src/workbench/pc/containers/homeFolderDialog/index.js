@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Modal from 'bee-modal';
 import Button from 'bee-button';
+import PopDialog from 'components/pop';
 import { withRouter } from 'react-router-dom'
 import WidgetMaker from 'components/widget';
 import { content ,home_file_item_dailog,close,home} from './style.css';
@@ -62,18 +62,17 @@ class homeFolderDialog extends Component {
         })
         return (
           <div className={home}>
-            <Modal className={home_file_item_dailog} show={folderModalDisplay} onHide={ closeFolder } >
-        <Modal.Header>
-          <Modal.Title>{title}</Modal.Title>
-          <a className={close} onClick={closeFolder} >X</a>
-        </Modal.Header>
-        <Modal.Body>
-          <div className={content} >
-            { list }
+            <PopDialog
+              className={home_file_item_dailog}
+              show={ folderModalDisplay }
+              title={title}
+              backup={false}
+              close={closeFolder} >
+              <div className={content} >
+                { list }
+              </div>
+            </PopDialog>
           </div>
-        </Modal.Body>
-      </Modal>
-      </div>
         );
     }
 }

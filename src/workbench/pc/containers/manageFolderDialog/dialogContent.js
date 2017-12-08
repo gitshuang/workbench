@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { DragDropContext,DragSource, DropTarget  } from 'react-dnd';
-import Modal from 'bee-modal';
 import Button from 'bee-button';
 import WidgetItem from 'containers/manageWidgetList/widgetItem';
 import { content } from './style.css';

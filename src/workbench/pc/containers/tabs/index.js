@@ -191,7 +191,6 @@ class TabsContainer extends Component {
                 )}
                 style={{
                   width: tabWidth,
-                  marginRight: tabMargin,
                 }} >
                 <div className={tabName}> { name } </div>
                 {
