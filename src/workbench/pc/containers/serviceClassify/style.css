@@ -172,7 +172,6 @@
 }
 :global(.u-button-group-vertical){
 	border-right: 1px solid #DDE0E3;
-	border-left: 1px solid #DDE0E3;
 }
 :global(.u-button-group-vertical .active){
 	background:rgba(239,239,239,1);
