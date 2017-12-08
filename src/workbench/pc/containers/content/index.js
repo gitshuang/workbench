@@ -7,11 +7,14 @@ import { content, contentArea, active } from './style.css';
 import IFrame from 'components/iframe';
 
 function appendSearchParam(url, params) {
-  var urlObj = new URL(url);
-  Object.keys(params).forEach((name) => {
-    urlObj.searchParams.append(name, params[name]);
-  });
-  return urlObj.toString();
+  if (url) {
+    var urlObj = new URL(url);
+    Object.keys(params).forEach((name) => {
+      urlObj.searchParams.append(name, params[name]);
+    });
+    return urlObj.toString();
+  }
+  return url;
 }
 
 @connect(

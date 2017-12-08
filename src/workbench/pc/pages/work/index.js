@@ -88,9 +88,6 @@ export default class Work extends Component {
         if (error) {
           requestError(payload);
         } else {
-          this.setState({
-            loaded: true,
-          });
           if (!subcode) {
             const {
               curServe: {
@@ -99,6 +96,9 @@ export default class Work extends Component {
             } = payload;
             history.replace(`/${type}/${code}/${subcode}`);
           }
+          this.setState({
+            loaded: true,
+          });
         }
         requestSuccess();
       });
@@ -258,8 +258,7 @@ export default class Work extends Component {
                           onClick={ titleServiceDisplay } />) : undefined
                     }
                     <Icon
-                      type={pinDisplay?"pin2":"pin"}
-                      className={ pinType ? active : '' }
+                      type={pinType?"pin2":"pin"}
                       style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                       onClick={ this.pinDisplayFn }
                     />

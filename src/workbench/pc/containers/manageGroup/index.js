@@ -80,7 +80,7 @@ const itemTarget = {
     if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
     }else if((draggedType===2 || draggedType===3) && props.data.type===1){
-      typeof props.data.parentId === "undefined" && (afterParentId = props.data.widgetId);
+      !props.data.parentId && (afterParentId = props.data.widgetId);
       //因为冒泡 所以已经有的话 不需要执行move
       let dataItem = findItemById(props.data.children,draggedId);
       if(folderType==="folder" || (typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId))){
@@ -402,7 +402,6 @@ class ManageGroup extends Component {
 
     console.log("this.props");
     console.log(this.props);
-
 
     return connectDragSource(connectDropTarget(
       <div className={groupArea}>

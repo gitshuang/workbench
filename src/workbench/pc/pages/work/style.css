@@ -11,6 +11,9 @@ body{
     background-color:rgba(255,255,255,1);
     z-index: 100;
 }
+.header :global(.iconfont){
+  cursor: pointer;
+}
 .active {
   color: red;
 }
