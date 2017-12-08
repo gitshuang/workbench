@@ -14,6 +14,9 @@ body{
 .header :global(.iconfont){
   cursor: pointer;
 }
+.header :global(.icon-pin2){
+  color: rgba(135,139,148,1)
+}
 .active {
   color: red;
 }
