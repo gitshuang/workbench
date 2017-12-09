@@ -68,7 +68,6 @@ class ManageFolderDialog extends Component {
                 className="manageDialogFolder"
                 show={ folderModalDisplay }
                 title={title}
-                backup={false}
                 close={closeFolder} >
                 <div className={content}>
                   { list }
