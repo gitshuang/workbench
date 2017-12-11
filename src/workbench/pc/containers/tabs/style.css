@@ -70,6 +70,7 @@
 .tab.active, .moreBtn.active {
   color: #E14C46;
   border-top-color: #E14C46;
+  background: #fff;
 }
 .moreBtnArrow{
   padding:0 !important;

@@ -111,7 +111,9 @@ class UserInfoContainer extends Component {
   // componentWillUnmount() {
   //   hideUserInfoDisplay();
   // }
-
+  editAvatar = () => {
+    console.log('edit avatar');
+  }
   handleClick() {
       this.setState({
         dataList:[]
@@ -122,13 +124,14 @@ class UserInfoContainer extends Component {
     setCutUser().then(({error, payload}) => {
       if (error) {
         requestError(payload);
+      } else {
+        getWorkList().then(({error, payload}) => {
+          if (error) {
+            requestError(payload);
+          }
+        });
       }
-      getWorkList().then(({error, payload}) => {
-        if (error) {
-          requestError(payload);
-        }
-        requestSuccess();
-      });
+      requestSuccess();
     });
   }
 
@@ -196,18 +199,18 @@ class UserInfoContainer extends Component {
     if(admin){
       renderAllow =
         <Select
-          defaultValue="账号管理" name="456"
+          defaultValue="帐号管理" name="456"
           onChange={this.handleChange2}
         >
-          <Option name="accountManagement" value="accountManagement" >帐号管理</Option>
           <Option name="userInfo" value="userInfo" >个人信息</Option>
+          <Option name="accountManagement" value="accountManagement" >帐号管理</Option>
           <Option name="safetyPick" value="safetyPick" >安全评级</Option>
           <Option name="password" value="password" >修改密码</Option>
-          <Option name="cutuser" value="cutuser">切换企业帐号</Option>
+          {/* <Option name="cutuser" value="cutuser">切换企业帐号</Option> */}
         </Select>
     }else{
       renderAllow = <Select
-        defaultValue="账号管理" name="456"
+        defaultValue="帐号管理" name="456"
         onChange={this.handleChange2}
       >
         <Option name="safetyPick" value="safetyPick" >安全评级</Option>
@@ -246,9 +249,9 @@ class UserInfoContainer extends Component {
         <div>
           <div className={imgUser}>
             <div className={imgOuter}><img src={imgsrc?imgsrc:defaultPic} className={imgInner} /></div>
-            {/*<div className={editPortrait}>
-              <Icon type="copyreader" onClick={this.handleClick.bind(this)}></Icon>
-            </div>*/}
+            <div className={editPortrait}>
+              <Icon type="copyreader" onClick={this.editAvatar}></Icon>
+            </div>
           </div>
           <div className={userName}>{name}</div>
           <ul className={`${gloryIcon} ${clearfix}`}>
@@ -256,10 +259,10 @@ class UserInfoContainer extends Component {
               <div className={`${iconContainer} ${icon1}`}><Icon type="glory"></Icon></div>
               <span>荣耀</span>
             </li>
-            <li>
+            {/* <li>
               <div className={`${iconContainer} ${icon2}`}><Icon type="favorite"></Icon></div>
               <span>个人空间</span>
-            </li>
+            </li> */}
             <li>
               <div className={`${iconContainer} ${icon3}`}><Icon type="Internet2"></Icon></div>
               <span>动态</span>
@@ -277,7 +280,7 @@ class UserInfoContainer extends Component {
                 defaultValue="系统设置" name="123"
                 onChange={this.handleChange}
               >
-                <Option name="account"  value="account" >账号</Option>
+                {/* <Option name="account"  value="account" >账号</Option> */}
                 <Option name="language" value="language" >界面语言</Option>
                 <Option name="message" value="message" >消息</Option>
                 <Option name="cancel" value="cancel">注销</Option>
