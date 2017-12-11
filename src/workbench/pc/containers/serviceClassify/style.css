@@ -10,15 +10,15 @@
 	border-radius: 3px ;
 }
 .wrap{
-	width:1000px;
+	max-width:1000px;
 	margin:0 auto;
-	padding:33px 0;
+	padding:33px;
 }
-:global(.u-autocomplete){
+.wrap :global(.u-autocomplete){
 	width:433px;
 	height:38px;
 }
-:global(.u-form-control){
+.wrap :global(.u-form-control){
 	height:100%;
 }
 .wrap :global(.u-button){
@@ -40,16 +40,17 @@
 .serviceSearch :global(.u-autocomplete),.serviceSearch :global(.u-input-group-btn){
 	box-flex:1;
 }
-:global(.u-input-group-btn){
+.wrap :global(.u-input-group-btn){
 	width:102px;
 }
-:global(.u-input-group .u-input-group-btn .u-button){
+.wrap :global(.u-input-group .u-input-group-btn .u-button){
 	height:38px;
 }
-:global(.u-input-group .u-form-control),:global(.u-input-group .u-button){
+.wrap :global(.u-input-group .u-form-control),
+.wrap :global(.u-input-group .u-button){
 	border-color:#D9D9D9;
 }
-:global(.u-autocomplete-options){
+.wrap :global(.u-autocomplete-options){
 	background:#fff;
 }
 .wrap :global(.u-button-group, .u-button-group-vertical){
@@ -61,7 +62,8 @@
 }
 .menuBtnGroup{
 	float: left;
-	width:180px;
+  width:180px;
+  margin-right: -180px;
 	height:635px;
 	border:1px solid #DDE0E3;
 	border-radius:3px;
@@ -81,26 +83,9 @@
 	color:#E14C46;
 }
 .appContent{
-	float: left;
-	width:803px;
-	// height:635px;
-	margin-left:16px;
+	margin-left: 200px;
 }
-.appContent :global(.iconfont){
-	display:inline-block;
-	width:32px;
-	height:32px; 
-	background:rgba(216,216,216,1);
-	border-radius: 3px ; 
-}
-.appContent span{
-	display:inline-block;
-	font-size:14px;
-	font-family:MicrosoftYaHei;
-	line-height:32px;
-	color:rgba(74,81,93,1);
-	margin-left:8px;
-}
+
 .appContent header{
 	padding:8px 0;
 	border-bottom:1px solid #DDE0E3;
@@ -110,31 +95,9 @@
 .appContent hgroup{
 	margin-bottom:25px;
 }
-.appContent hgroup>div{
-	float: left;
-	width:235px;
-	height:52px; 
-	box-sizing: border-box;
-	background:rgba(219,222,229,0.1);
-	padding:10px 17px;
-	margin-right: 8px;
-	border-radius: 3px ; 
-	display:flex;
-}
-.appContent hgroup>div:hover{
-	background:rgba(239,239,239,1);
-	cursor: pointer;
-}
-.appContent hgroup>div:hover span,.appContent header:hover span{
-	color:#E14C46;
-	cursor: pointer;
-}
-.clearfix:after{
-	content:"";
-	display:block;
-	height:0;
-	clear: both;
-	visibility:hidden;
+
+.clearfix{
+  overflow: hidden;
 }
 .singleService{
 	float: left;
@@ -150,30 +113,49 @@
 }
 .serviceInfo{
   float: left;
-  // width:284px;
   height:26px;
   margin-left:8px;
 }
-.serviceTit{
-  // width:56px;
-  height:19px; 
-  font-size:14px;
-  font-family:MicrosoftYaHei;
-  color:rgba(51,51,51,1);
-  line-height:19px;
-}
-.describe{
-  // width:55px;
-  height:16px; 
-  font-size:12px;
-  font-family:MicrosoftYaHei;
-  color:rgba(136,136,136,1);
-  line-height:16px;
-}
-:global(.u-button-group-vertical){
+.wrap :global(.u-button-group-vertical){
 	border-right: 1px solid #DDE0E3;
 }
-:global(.u-button-group-vertical .active){
+.wrap :global(.u-button-group-vertical .active){
 	background:rgba(239,239,239,1);
 	color:#E14C46;
+}
+
+.link {
+	width:235px;
+	height:52px;
+	box-sizing: border-box;
+	padding:10px 17px;
+	margin-right: 8px;
+	border-radius: 3px ;
+	display:flex;
+}
+.link:hover{
+	background:rgba(239,239,239,1);
+	cursor: pointer;
+}
+.appContent hgroup .link {
+  float: left;
+}
+.link .icon{
+	display:inline-block;
+	width:32px;
+	height:32px;
+	background:rgba(216,216,216,1);
+	border-radius: 3px ;
+}
+.link span{
+	display:inline-block;
+	font-size:14px;
+	font-family:MicrosoftYaHei;
+	line-height:32px;
+	color:rgba(74,81,93,1);
+	margin-left:8px;
+}
+.link:hover span{
+	color:#E14C46;
+	cursor: pointer;
 }

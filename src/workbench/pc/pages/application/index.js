@@ -38,10 +38,6 @@ class Application extends Component {
     this.goBack = this.goBack.bind(this);
   }
 
-  componentWillMount() {
-    const { requestStart, requestSuccess, requestError, } = this.props;
-  }
-
   goBack() {
     this.props.history.replace('');
   }
@@ -52,7 +48,7 @@ class Application extends Component {
         <div className={header}>
           <div className="um-header">
             <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} leftContent={"返回"}>
-              <div position="center">
+              <div>
                 <span>全部应用及服务</span>
               </div>
             </Header>
@@ -60,7 +56,7 @@ class Application extends Component {
           </div>
         </div>
         <div className={um_content}>
-          <ServiceClassify /> 
+          <ServiceClassify />
         </div>
       </div>
     );
