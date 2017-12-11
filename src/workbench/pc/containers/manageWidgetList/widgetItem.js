@@ -64,9 +64,9 @@ const itemTarget = {
     const preType = monitor.getItem().type;
     const preFolderType = monitor.getItem().folderType;
 
-    if (draggedId !== props.id && preType !==1 && preFolderType!=="folder" && props.folderType!=="folder") {
+    if (draggedId !== props.id && preType !==1) {
       let timeOut = (new Date().getTime() - timestamp > 1500);
-      if(timeOut && preType === 3 && props.data.type === 3 ){
+      if(timeOut && preType === 3 && props.data.type === 3 && preFolderType!=="folder" && props.folderType!=="folder"){
         //放上去停留大于2s创建文件夹
         props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeOut);
       }else {
