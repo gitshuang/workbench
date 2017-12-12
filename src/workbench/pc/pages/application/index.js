@@ -47,7 +47,7 @@ class Application extends Component {
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} leftContent={"返回"}>
+            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} >
               <div>
                 <span>全部应用及服务</span>
               </div>

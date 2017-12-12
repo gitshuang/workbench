@@ -10,9 +10,9 @@
 	border-radius: 3px ;
 }
 .wrap{
-	max-width:1000px;
-	margin:0 auto;
-	padding:33px;
+  width:1280px;
+  margin:0 auto;
+  padding-top:27px;
 }
 .wrap :global(.u-autocomplete){
 	width:433px;
@@ -61,9 +61,8 @@
 	box-shadow:none;
 }
 .menuBtnGroup{
-	float: left;
   width:180px;
-  margin-right: -180px;
+  margin-right: 16px;
 	height:635px;
 	border:1px solid #DDE0E3;
 	border-radius:3px;
@@ -83,20 +82,15 @@
 	color:#E14C46;
 }
 .appContent{
-	float: left;
-	width:803px;
-	// height:635px;
-	margin-left:16px;
+
 }
 .appContent img{
-	display:inline-block;
 	width:32px;
-	height:32px; 
+	height:32px;
 	background:rgba(216,216,216,1);
-	border-radius: 3px ; 
+	border-radius: 3px ;
 }
 .appContent span{
-	display:inline-block;
 	font-size:14px;
 	font-family:MicrosoftYaHei;
 	line-height:32px;
@@ -105,9 +99,8 @@
 }
 
 .appContent header{
-	padding:8px 0;
+	padding-bottom:8px;
 	border-bottom:1px solid #DDE0E3;
-	margin:17px 0 23px 0;
 	display:flex;
 }
 .appContent hgroup{
