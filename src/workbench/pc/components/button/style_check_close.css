@@ -1,6 +1,6 @@
 .btn{
-  min-width: 80px;
-  height:32px; 
+  width:22px;
+  height:22px; 
   text-align: center;
   cursor:pointer;
   border-radius: 3px ;
@@ -13,23 +13,22 @@
 }
 
 .default_btn{
-  background:rgba(225,76,70,1);
+  background:rgb(118, 127, 139);
+  border: 1px solid rgba(117,127,140,1);
 }
 
 .active_btn{
-  background:rgba(178,51,46,1);
-  color:rgba(255,255,255,1);
+  background:#444651;
+  border: 1px solid #444651;
 }
 
 .default_btn:hover{
-  background:rgba(210,61,55,1);
+  background:#2D3F5D;
+  border: 1px solid #2D3F5D;
 }
 
 .disabled_btn{
-  background:rgba(9,44,66,0.04);
- color:rgba(165,173,186,1);
- cursor: not-allowed;
-
+  
 }
 
 .loading_btn{

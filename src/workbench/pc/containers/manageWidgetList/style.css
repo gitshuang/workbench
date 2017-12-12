@@ -203,11 +203,10 @@
   top: 40px;
 }
 
-
+/**
 :global(.u-modal-dialog .u-modal-footer){
     display: -webkit-box;
     -webkit-box-pack: center;
-    border: 1px solid rgba(242, 242, 242, 1);
 }
 :global(.u-modal-dialog .u-modal-footer .u-button){
     min-width:10px !important;
@@ -215,6 +214,7 @@
     width: 60px;
     height: 32px;
 }
+**/
 .pop_cont{
     font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';
     font-weight: 700;
@@ -262,4 +262,17 @@
 }
 .pop_dialog_widge_list :global(.u-modal-content){
   background-color: #EEEEEE;
+}
+
+.edit_cont .btn{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 2px;
+  text-align: center;
+  position: relative;
+}
+.edit_cont .btn>span{
+  position: absolute;
+  top: -6px;
+  right: 6px;
 }

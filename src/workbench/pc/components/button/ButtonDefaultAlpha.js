@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Button from 'bee-button';
 import Loadingstate from 'bee-loading-state';
 
-import {default_btn,default_font,active_btn} from './style_default_alpha.css';
+import {btn,default_btn,active_btn,disabled_btn} from './style_default_alpha.css';
 
 const propTypes = {
   type: PropTypes.string,
@@ -17,37 +17,44 @@ class ButtonDefaultAlpha extends Component {
 
     constructor(props, context) {
       super(props, context);
+
       this.state = {
-        active:false
+        type:props.type?props.type:"",
+        disabled:props.disabled?true:false,
       }
     }
 
     btnClick = (e) =>{
-      let _b = this.state.active?false:true;
+      this.state.type = "active";
       this.setState({
-          active:_b
+         type:"active"
+      },()=>{
+        if(this.props.onClick){
+            this.getPropsClick(e);
+        }
       })
-      if(this.props.onClick){
-        this.getPropsClick();
-      }
     }
 
-    getPropsClick(){
+    getPropsClick(e){
       if(this.props.data){
-        this.props.onClick(e,this.props.data);  
+        this.props.onClick(e,this.props.data);
       }else{
         this.props.onClick(e);
       }
     }
 
     render() {
-      let label = this.props.label?this.props.label:"按钮";
-
-      let _btn = <div className={`${default_btn} ${default_font} `} onClick={this.btnClick} >{label}</div>;
-      if(this.state.active){
-        _btn = <div className={`${active_btn} ${default_btn} ${default_font} `} onClick={this.btnClick} >{label}</div>
+      let {children,className,disabled} = this.props;
+      let _btn = <div className={`${btn} ${default_btn} ${this.props.className} `} onClick={this.btnClick} >{children}</div>;
+      if(disabled){
+        _btn = <div className={`${btn} ${disabled_btn}`} >{children}</div>
       }else{
-        _btn = <div className={`${default_btn} ${default_font}`} onClick={this.btnClick} >{label}</div>
+        switch(this.state.type){
+            case "active"://active
+            debugger;
+            _btn = <div className={`${btn} ${active_btn}`} onClick={this.btnClick} >{children}</div>
+            default:
+        }
       }
       return (_btn);
     }

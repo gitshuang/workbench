@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
 import HTML5BackendGroup from 'react-dnd-html5-backend';
+import {ButtonDefaultLine,ButtonBrand} from 'components/button';
 import Button from 'bee-button';
 
 import { mapStateToProps } from '@u';
@@ -233,13 +234,13 @@ class Home extends Component {
         </div>
         <div className={um_footer}>
           <div className={`${umBoxJustify} um-box-justify`}>
-            <div className={batchArea}>
-              <Button className={batchDeletion} disabled={selectList.length ? false:true} onClick={this.popOpen}>批量删除</Button>
-              <Button className={batchDeletion} disabled={selectList.length? false : true} onClick={this.openGroupTo}>批量移动</Button>
+             <div className={`${batchArea}  horizontalParent`}>
+              <ButtonDefaultLine onClick={this.popOpen} disabled={selectList.length ? false:true} className="horizontal">批量删除</ButtonDefaultLine>
+              <ButtonDefaultLine onClick={this.openGroupTo} disabled={selectList.length ? false:true} >批量移动</ButtonDefaultLine>
             </div>
-            <div className={saveArea}>
-              <Button className={preserve} disabled={!isEdit} onClick={this.save}>保存</Button>
-              <Button className={cancel} onClick={this.popOpenCancel}>取消</Button>
+            <div className={`${saveArea}  horizontalParent`}>
+              <ButtonBrand disabled={!isEdit} onClick={this.save}>保存</ButtonBrand>
+              <ButtonDefaultLine onClick={this.popOpenCancel} >取消</ButtonDefaultLine>
             </div>
           </div>
         </div>
@@ -247,12 +248,12 @@ class Home extends Component {
           <ManageFolderDialog />
         </div>
         <ManageBatchMoveDialog />
-        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } btns={pop_btn} >
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } close={this.popClose} btns={pop_btn} >
           <div>
             <span>您确认要批量删除吗?</span>
           </div>
         </PopDialog>
-        <PopDialog className="pop_dialog_delete" show = { this.state.showCancelModal } btns={pop_btn2} title={"是否保存最新修改？"} >
+        <PopDialog className="pop_dialog_delete" show = { this.state.showCancelModal } close={this.popCloseCancel} btns={pop_btn2} title={"是否保存最新修改？"} >
           <div>
             <span>点击不保存，则最新修改将丢失</span>
           </div>

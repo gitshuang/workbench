@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Button from 'bee-button';
 import Loadingstate from 'bee-loading-state';
 
-import {btn,default_btn,active_btn,disabled_btn} from './style_default_line.css';
+import {btn,default_btn,active_btn,disabled_btn} from './style_check_close.css';
 
 const propTypes = {
   type: PropTypes.string,
@@ -13,7 +13,7 @@ const propTypes = {
 }
 
 // type default
-class ButtonDefaultLine extends Component {
+class ButtonCheckClose extends Component {
 
     constructor(props, context) {
       super(props, context);
@@ -51,6 +51,7 @@ class ButtonDefaultLine extends Component {
       }else{
         switch(this.state.type){
             case "active"://active
+            debugger;
             _btn = <div className={`${btn} ${active_btn}`} onClick={this.btnClick} >{children}</div>
             default:
         }
@@ -59,5 +60,5 @@ class ButtonDefaultLine extends Component {
     }
 }
 
-ButtonDefaultLine.PropTypes = propTypes;
-export default ButtonDefaultLine
+ButtonCheckClose.PropTypes = propTypes;
+export default ButtonCheckClose

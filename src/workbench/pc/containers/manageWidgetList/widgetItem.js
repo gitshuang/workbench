@@ -243,7 +243,7 @@ class WidgetItem extends Component {
           </div>
         </div>
 
-        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={this.props.data} btns={pop_btn} >
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } close={this.popClose} data={this.props.data} btns={pop_btn} >
             <div className={pop_cont}>
               <Icon1 type="uf-exc-t" />
               <span>您确认要删除服务此项?</span>

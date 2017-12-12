@@ -37,6 +37,7 @@ class HeaderPage extends Component {
     setTimeout(() => {
       window.scrollTo(0, 1);
     },0);
+    // scroll.scrollTo(50,this.Navbar);
   }
   render() {
     const {
@@ -57,7 +58,7 @@ class HeaderPage extends Component {
           list.length > 1 ? (
             <Navbar
               items={list}
-              offset={-80}
+              offset={-24}
               duration={500}
               delay={0} />
           ) : null

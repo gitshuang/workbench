@@ -83,7 +83,25 @@
 	color:#E14C46;
 }
 .appContent{
-	margin-left: 200px;
+	float: left;
+	width:803px;
+	// height:635px;
+	margin-left:16px;
+}
+.appContent img{
+	display:inline-block;
+	width:32px;
+	height:32px; 
+	background:rgba(216,216,216,1);
+	border-radius: 3px ; 
+}
+.appContent span{
+	display:inline-block;
+	font-size:14px;
+	font-family:MicrosoftYaHei;
+	line-height:32px;
+	color:rgba(74,81,93,1);
+	margin-left:8px;
 }
 
 .appContent header{
@@ -94,6 +112,7 @@
 }
 .appContent hgroup{
 	margin-bottom:25px;
+	display:inline-block;
 }
 
 .clearfix{

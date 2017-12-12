@@ -131,13 +131,6 @@
   display: -webkit-box;
   -webkit-box-pack: center;
 }
-.footer_btn button{
-  border: 1px solid rgb(121, 121, 121);
-  border-radius: 5px;
-}
-.footer_btn button:first-child{
-  margin-right: 25px;
-}
-.footer_btn button:hover{
-  background:rgb(121, 121, 121);
+.footer_btn>div{
+  margin-right: 8px;
 }

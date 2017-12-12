@@ -4,7 +4,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { widgetList, widgetItem, title, file_context, title_left,
   file_icon, title_right, context, bottom ,footer,
-title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix,widgetFileItem,file_title_right,file_num} from './style.css'
+title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix,widgetFileItem,file_title_right,file_num,btn} from './style.css'
 import WidgetItem from './widgetItem';
 import Checkbox from 'bee-checkbox';
 import FormControl from 'bee-form-control';
@@ -12,6 +12,7 @@ import Button from 'bee-button';
 import PopDialog from 'components/pop';
 import Icon from 'components/icon';
 import Icon1 from 'bee-icon';
+import {ButtonDefaultLine,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
 
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
@@ -211,12 +212,10 @@ class WidgeFileItem extends Component {
     ]   //设置操作按钮
 
     const edit = <div className={edit_cont}>
-        <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
+        <FormControl className={`${form_control} input`} value={this.state.value} onChange={this.inputOnChange}/>
 
-        <div className={edit_btn}>
-          <Button className={save_btn} onClick={this.save} >完成</Button>
-          <Button className={close_btn} onClick={this.close} >取消</Button>
-        </div>
+         <ButtonCheckSelected className={btn} onClick={this.save}><span>√</span></ButtonCheckSelected>
+         <ButtonCheckClose className={btn} onClick={this.close}><span>×</span></ButtonCheckClose>
     </div>;
 
     const btns = <div className={`${clearfix} ${footer}`}>
@@ -245,7 +244,7 @@ class WidgeFileItem extends Component {
         {/*<div className={file_num}>
           (3)
         </div>*/}
-        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={da} btns={pop_btn} >
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } close={this.popClose} data={da} btns={pop_btn} >
             <div className={pop_cont}>
               <Icon type="uf-exc-t" />
               <span>您确认要删除服务[{this.props.data.widgetName}]?</span>

@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 
 import Menu, { Item as MenuItem } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
-import Button from 'bee-button';
 import PopDialog from 'components/pop';
+import Button from 'bee-button';
+import {ButtonDefaultLine,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
 
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
@@ -26,7 +27,8 @@ import {
   selectedBackClass,
   titleInputArea,
   icon,
-  iconBox
+  iconBox,
+  btn,
 } from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
@@ -383,20 +385,16 @@ class ManageGroup extends Component {
         <div className={widgetTitle} >
           <div className={titleInputArea}>
             <input
-              className={newGroupName}
+              className={`${newGroupName} input`}
               value={groupName}
               autoFocus="autofocus"
               onChange={this.editGroupName}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               ref="groupName" />
-            <Icon
-              className={icon}
-              type="close"
-              onClick={ this.clearInput } />
           </div>
-          <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
-          <Button className={cancel} onClick={ ()=>{this.renameGroupCancel(index)} }>取消</Button>
+          <ButtonCheckSelected className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><span>√</span></ButtonCheckSelected>
+          <ButtonCheckClose className={btn} onClick={ ()=>{this.renameGroupCancel(index)} }><span>×</span></ButtonCheckClose>
         </div>
       );
     }else {
@@ -446,14 +444,12 @@ class ManageGroup extends Component {
           </div>
         </section>
         <div className={addBtn} >
-          <button
-            className={addGroupBtn}
-            onClick={this.addGroupFn.bind(this, index)} >
+          <ButtonDefaultLine className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
             <Icon type="add" ></Icon>
-            <span>添加组</span>
-          </button>
+            添加组
+          </ButtonDefaultLine>
         </div>
-        <PopDialog className="pop_dialog_delete" show={ showModal } btns={pop_btn} data={{ index }}>
+        <PopDialog className="pop_dialog_delete" show={ showModal } close={this.popClose} btns={pop_btn} data={{ index }}>
           <div>
             <span>您确认要删除吗?</span>
           </div>

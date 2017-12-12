@@ -8,6 +8,7 @@ import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
 import ServerItem from 'containers/serverItem';
 import FormControl from 'bee-form-control';
+import {ButtonBrand,ButtonDefaultLine} from 'components/button';
 
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
@@ -237,8 +238,8 @@ class SelectWidgetList extends Component {
           </div>
 
           <div className={footer_btn}>
-            {this.state.edit?<Button onClick={this.btnSave} >添加</Button>:<Button onClick={this.btnSave} disabled >添加</Button>}
-             <Button onClick={this.props.close} >取消</Button>
+            {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
+             <ButtonDefaultLine onClick={this.props.close} >取消</ButtonDefaultLine>
           </div>
        </div>
     </div>);

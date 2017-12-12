@@ -4,9 +4,11 @@ import ButtonDefault from './ButtonDefault';
 import ButtonDefaultAlpha from './ButtonDefaultAlpha';
 import ButtonDefaultLine from './ButtonDefaultLine';
 import ButtonWarning from './ButtonWarning';
+import ButtonCheckClose from './ButtonCheckClose';
+import ButtonCheckSelected from './ButtonCheckSelected';
 
 export default ButtonDefault;
-export { ButtonDanger,ButtonBrand,ButtonDefaultAlpha, ButtonDefaultLine,ButtonWarning};
+export { ButtonDanger,ButtonBrand,ButtonDefaultAlpha, ButtonDefaultLine,ButtonWarning,ButtonCheckClose,ButtonCheckSelected};
 
 
 /**

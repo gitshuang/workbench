@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-scroll';
+import { Link ,animateScroll as scroll} from 'react-scroll';
 import {
   link,
   activeLink,
@@ -8,11 +8,12 @@ import {
   navs,
 } from './style.css';
 
+
 const Navs = ({
   items,
   offset,
   duration,
-  delay,
+  delay
 }) => {
   return (
     <div className={cover}>
@@ -26,7 +27,7 @@ const Navs = ({
                 to={target}
                 spy={true}
                 smooth={true}
-                offset={offset}
+                offset={i==0?(-80):offset}
                 duration={duration}
                 isDynamic={true}
                 delay={delay}>
@@ -39,5 +40,4 @@ const Navs = ({
     </div>
   );
 };
-
 export default Navs;

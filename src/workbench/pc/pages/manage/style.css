@@ -61,10 +61,13 @@ body{
 	border:none;
 	color:#fff;
 }
-.batchArea button{
-  margin-right:8px;
+.batchArea{
+  // background: red;
 }
-.saveArea button{
+.batchArea>div{
+   margin-right: 8px;
+}
+.saveArea>div{
   margin-left:8px;
 }
 .um_footer{
