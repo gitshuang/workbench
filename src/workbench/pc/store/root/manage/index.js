@@ -34,7 +34,9 @@ const {
   closeBatchMove,
   setEditState,
   cancelFolderEdit,
-  setCurrGroupIndex
+  setCurrGroupIndex,
+  setEditGroup,
+  setEditFile
 } = actions;
 
 const defaultState = {
@@ -50,7 +52,9 @@ const defaultState = {
   selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
   selectGroup: [],
-  currGroupIndex:0
+  currGroupIndex:0,
+  groupId:"",
+  fileId:"",
 };
 
 const findTreeById = (data, curId) => {
@@ -100,6 +104,7 @@ function findById(manageList,id) {
   return data;
 }
 const reducer = handleActions({
+
   [setManageList]: (state, { payload, error }) => {
     return state;
   },
@@ -579,6 +584,14 @@ const reducer = handleActions({
   [setEditState]: (state, { payload: isEdit }) => ({
     ...state,
     isEdit,
+  }),
+  [setEditGroup]: (state, { payload: groupId }) => ({
+    ...state,
+    groupId,
+  }),
+  [setEditFile]: (state, { payload: fileId }) => ({
+    ...state,
+    fileId,
   }),
 }, defaultState);
 
