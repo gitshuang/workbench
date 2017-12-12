@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-
+import { withRouter } from 'react-router-dom';
 import Button from 'bee-button';
 import Icon from 'components/icon';
 import InputGroup from 'bee-input-group';
@@ -29,7 +29,7 @@ import rootActions from 'store/root/actions';
 // const {getSelectWidgetList} = manageActions;
 const {getAllApplicationList} = applicationActions;
 const {requestStart, requestSuccess, requestError} = rootActions;
-
+@withRouter
 @connect(
   mapStateToProps(
     'allApplicationList',
@@ -88,7 +88,9 @@ class serviceClassify extends Component {
       value
     })
   }
-
+  goToLink =(path)=>{
+    this.props.history.push('/app/'+path);
+  }
   renderList() {
     let listAll = [];
     const { current } = this.state;
@@ -117,7 +119,7 @@ class serviceClassify extends Component {
       return (
         <div key={applicationCode}>
           <header>
-            <div>
+            <div onClick={ ()=>{this.goToLink(applicationCode)} }>
               <img src={applicationIcon}/>
               <span>{ applicationName }</span>
             </div>
