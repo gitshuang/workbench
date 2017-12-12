@@ -61,8 +61,9 @@
 	box-shadow:none;
 }
 .menuBtnGroup{
+  float: left;
   width:180px;
-  margin-right: 16px;
+  margin-right: -180px;
 	height:635px;
 	border:1px solid #DDE0E3;
 	border-radius:3px;
