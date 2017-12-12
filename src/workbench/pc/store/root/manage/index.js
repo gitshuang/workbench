@@ -627,10 +627,13 @@ const reducer = handleActions({
     currEditonlyId:""
   }),
 
-  [setEditonlyId]: (state, { payload: currEditonlyId }) => ({
-    ...state,
-    currEditonlyId,
-  }),
+  [setEditonlyId]: (state, { payload: currEditonlyId }) => {
+    return{
+      ...state,
+      currEditonlyId,
+    }
+
+  },
 }, defaultState);
 
 export default reducer;
