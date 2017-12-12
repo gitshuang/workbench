@@ -235,8 +235,8 @@ class Home extends Component {
         <div className={um_footer}>
           <div className={`${umBoxJustify} um-box-justify`}>
              <div className={`${batchArea}  horizontalParent`}>
-              <ButtonDefaultLine onClick={this.popOpen} disabled={selectList.length ? false:true} className="horizontal">批量删除</ButtonDefaultLine>
-              <ButtonDefaultLine onClick={this.openGroupTo} disabled={selectList.length ? false:true} >批量移动</ButtonDefaultLine>
+              <ButtonDefaultLine onClick={this.popOpen} disabled={selectList.length ? false:true} className="horizontal">删除</ButtonDefaultLine>
+              <ButtonDefaultLine onClick={this.openGroupTo} disabled={selectList.length ? false:true} >移动到</ButtonDefaultLine>
             </div>
             <div className={`${saveArea}  horizontalParent`}>
               <ButtonBrand disabled={!isEdit} onClick={this.save}>保存</ButtonBrand>
