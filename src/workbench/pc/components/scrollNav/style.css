@@ -41,7 +41,7 @@
     width: 100%;
 }
 .cover {
-  // background: rgba(255,255,255, .92);
+  padding-left: 56px;
 }
 .navs {
   margin: 0;
