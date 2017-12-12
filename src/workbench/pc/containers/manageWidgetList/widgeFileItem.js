@@ -141,17 +141,15 @@ class WidgeFileItem extends Component {
     };
     const { renameFolder,setEditonlyId } = this.props;
     renameFolder(data);
-    setEditonlyId("");
   }
 
   close = (e) => {
-    const { cancelFolderEdit,setEditonlyId } = this.props;
+    const { cancelFolderEdit } = this.props;
     cancelFolderEdit(this.props.data.widgetId);
     this.setState({
         value:this.props.data.widgetName,
         editShow:false
     });
-    setEditonlyId("");
   }
 
   popSave = (data)=>{
