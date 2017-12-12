@@ -17,8 +17,10 @@ import rootActions from 'store/root/actions';
 const {getSelectWidgetList,addDesk} = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
-import { select_widget_list,searchPanel,panel,left,right,button_group,form_control,icon,search_icon
-,panel_left,footer_btn
+import { select_widget_list,
+widget_left,widget_right,search_icon,search_icon_con,
+  searchPanel,panel,left,panel_right,button_group,form_control,icon,
+panel_left,footer_btn,title
 } from './style.css'
 
 @connect(
@@ -53,8 +55,6 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-
-    console.log(" --SelectWidgetList--componentDidMount-- ");
     this.getServices();
   }
 
@@ -78,37 +78,7 @@ class SelectWidgetList extends Component {
       requestSuccess();
     });
   }
-
-  //数据转换成map
-  // getArrayToMap(data){
-  //     let dataMap = {};
-  //     data.map(function(da,i){
-  //       da.children.map(function(_da,_i){
-  //         _da.parId = da.labelId;
-  //         dataMap[_da.serveId] = _da;
-  //       })
-  //     })
-  //   return dataMap;
-  // }
-
-  // //判断数据是否是在桌面上
-  // getDefaultSelectCheck(alllist){
-  //   let dataList = [];
-  //   debugger;
-  //   const {manageList} = this.props;//页面已经有的项
-  //   for(let i=0;i<manageList.length;i++){
-  //       let da = manageList[i];
-  //       for(let j=0;j<da.children.length;j++){
-  //           let _da = da.children[j];
-  //           if(_da.type != 2){
-  //             let mapItem = alllist[_da.serviceId];
-  //             if(!mapItem)continue;
-  //             mapItem.selected  = true;
-  //           }
-  //       }
-  //   }
-  // }
-
+ 
   getArrayToMap(data,dataMap,parId){
     if(!dataMap){dataMap = {}};
     for(let i = 0;i<data.length;i++){
@@ -218,28 +188,33 @@ class SelectWidgetList extends Component {
     })
 
     return (<div className={select_widget_list}>
-       <div className={searchPanel}>
-          <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
-          <Icon title="搜索" type="search" size="lg"  className={search_icon}/>
-          <div className={icon} onClick={this.props.close} >
-             X
-          </div>
+       <div className={widget_left}>
+          <div className={title}>添加服务</div> 
        </div>
-       <div className={panel} >
-          <div className={panel_left}>
-            <ButtonGroup vertical>
-              {btns}
-            </ButtonGroup>
-          </div>
+       <div className={widget_right}>
+          <div className={searchPanel}>
+              <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
+              <div className={search_icon_con}>
+                  <span>|</span>
+                  <Icon type="uf-search" size="lg"  className={search_icon}>  搜索</Icon>
+              </div>
+           </div>
+           <div className={panel} >
+              <div className={panel_left}>
+                <ButtonGroup vertical>
+                  {btns}
+                </ButtonGroup>
+              </div>
 
-          <div className={right}>
-             {list}
-          </div>
+              <div className={panel_right}>
+                 {list}
+              </div>
 
-          <div className={footer_btn}>
-            {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
-             <ButtonDefaultLine onClick={this.props.close} >取消</ButtonDefaultLine>
-          </div>
+              <div className={footer_btn}>
+                {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
+                 <ButtonDefaultLine onClick={this.props.close} >取消</ButtonDefaultLine>
+              </div>
+           </div>
        </div>
     </div>);
   }

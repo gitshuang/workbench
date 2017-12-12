@@ -41,7 +41,7 @@ class PopDialog extends Component{
             }
         })
     }
-    return(<Modal className={this.props.className?this.props.className:"pop_dialog"} show = { this.props.show } onHide = { this.props.close } >
+    return(<Modal className={this.props.className?this.props.className:"pop_dialog"} backdrop={this.props.backdrop?false:true} show = { this.props.show } onHide = { this.props.close } >
           <Modal.Header>
               <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>

@@ -8,7 +8,7 @@ import Menu, { Item as MenuItem } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import PopDialog from 'components/pop';
 import Button from 'bee-button';
-import {ButtonDefaultLine,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
+import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
 
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
@@ -416,10 +416,10 @@ class ManageGroup extends Component {
           </div>
         </section>
         <div className={addBtn} >
-          <ButtonDefaultLine className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
+          <ButtonDefaultAlpha className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
             <Icon type="add" ></Icon>
             添加组
-          </ButtonDefaultLine>
+          </ButtonDefaultAlpha>
         </div>
         <PopDialog className="pop_dialog_delete" show={ showModal } close={this.popClose} btns={pop_btn} data={{ index }}>
           <div>
