@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
-  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer,usedIcon,icon1,icon2,icon3
-} from './style.css';
+import Icon from 'components/icon';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 
 import Button from 'bee-button';
 import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee-tabs';
-import Icon from 'components/icon';
 import onClickOutside from 'react-onclickoutside';
 import img1 from 'assets/image/wgt/yonyouSpace.png';
 import img2 from 'assets/image/wgt/intelligent_logo.png';
 import img3 from 'assets/image/wgt/goldInstitute.png';
 import img4 from 'assets/image/wgt/salary_logo.png';
 import img5 from 'assets/image/wgt/relation.png';
-import defaultPic from 'assets/image/wgt/default.png';
+
+import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
+  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
+  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,
+} from './style.css';
 
 const {
   getUserInfo,
@@ -184,6 +184,19 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
+  getIcon(imgsrc) {
+    if (imgsrc) {
+      return (
+        <img src={imgsrc} className={imgInner} />
+      );
+    } else {
+      return (
+        <div className={defaultPic}>
+          <Icon type="staff" />
+        </div>
+      );
+    }
+  }
   render() {
     const {
       userInfo: {
@@ -248,7 +261,9 @@ class UserInfoContainer extends Component {
       <div className={`${wrap} ${clearfix}`} >
         <div>
           <div className={imgUser}>
-            <div className={imgOuter}><img src={imgsrc?imgsrc:defaultPic} className={imgInner} /></div>
+            <div className={imgOuter}>
+              {this.getIcon(imgsrc)}
+            </div>
             <div className={editPortrait}>
               <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>

@@ -373,3 +373,13 @@
   position: relative;
   line-height: 28px;
 }
+.defaultPic {
+  background: #BEC1C8;
+  border-radius: 50px;
+  width:88px;
+  height:88px;
+  font-size: 88px;
+  color: #fff;
+  line-height: 88px;
+  overflow: hidden;
+}

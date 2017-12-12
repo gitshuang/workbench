@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Icon from 'components/icon';
 import {
   search,
+  searchExtend,
   searchBtn,
   searchText,
   inputArea,
@@ -13,6 +14,7 @@ import {
   inputLeave,
   inputEnterActive,
   inputLeaveActive,
+  clearSearch,
 } from './style.css';
 
 @withRouter
@@ -41,15 +43,24 @@ class SearchContainer extends Component {
     }
   }
   search() {
-    const { isShow } = this.state;
-    if (isShow) {
+    const { isShow, text } = this.state;
+    if (isShow && text) {
       console.log(this.state.text)
+    } else if (isShow) {
+      this.setState({
+        isShow: false,
+      })
     } else {
       this.setState({
         isShow: true,
       })
     }
     // this.props.history.push('/application');;
+  }
+  clearInput = () => {
+    this.setState({
+      text: '',
+    })
   }
   render() {
     const { isShow, text } = this.state;
@@ -61,27 +72,21 @@ class SearchContainer extends Component {
             className={searchText}
             type="text"
             value={text}
-            onChange={this.onChangeHandler}
-            placeholder="搜索员工信息，应用、服务及其他内容"/>
+            onChange={this.onChangeHandler} />
         </div>
       )
     }
     return (
-      <div className={search}>
-        <TransitionGroup>
-          <CSSTransitionGroup
-            transitionName={ {
-              enter: inputEnter,
-              enterActive: inputEnterActive,
-              leave: inputLeave,
-              leaveActive: inputLeaveActive,
-            } }
-            transitionEnterTimeout={0}
-            transitionLeaveTimeout={0} >
-            {item}
-          </CSSTransitionGroup>
-        </TransitionGroup>
-        <div className={`tc ${searchBtn}  ${isShow?'btnColor':""}`} onClick={this.search} style={{color:isShow?"red":""}}>
+      <div className={`${search} ${isShow? searchExtend : ''}`}>
+        {item}
+        {
+          isShow && text ? (
+            <div className={clearSearch} onClick={this.clearInput}>
+              <Icon title="清空" type="error3"/>
+            </div>
+          ) : null
+        }
+        <div className={`tc ${searchBtn}`} onClick={this.search}>
           <Icon title="搜索" type="search" />
         </div>
       </div>
