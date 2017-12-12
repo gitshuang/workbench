@@ -55,7 +55,9 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-    this.getServices();
+    if(!this.state.edit){
+      this.getServices();
+    }
   }
 
   getServices(parme){
@@ -69,7 +71,6 @@ class SelectWidgetList extends Component {
       let _dataMap = self.getArrayToMap(payload,{},0);
       let _dataList = self.getDefaultSelectCheck(_dataMap,self.props.manageList,[]);
       let _allDataList = self.getFindByTypeId("all");
-
       self.setState({
            dataMap:_dataMap,
            dataList:_allDataList,
@@ -143,8 +144,11 @@ class SelectWidgetList extends Component {
   }
 
   onChange =(data,sele)=>{
+    // console.log(this.state.dataMap);
     this.state.selectedList.push(data);
+    
     this.state.dataMap[data.serveId].selected = sele;
+    // console.log(this.state.dataMap);
     // if(data.selected == "3"){
     //   this.state.dataMap[data.serveId].selected = "4";
     // }else{

@@ -104,57 +104,6 @@
             "primaryKey":"1e1ab731-6cef-449a-a6c6-ea620f0964dc"
         },
         {
-            "createTime":1512550410000,
-            "modifiedTime":null,
-            "ts":null,
-            "creator":null,
-            "modifier":null,
-            "tenantId":"gtzceot7",
-            "widgetId":"7f51c8da-47c8-4312-b566-5adaa602f018",
-            "templateId":null,
-            "widgetConfig":null,
-            "icon":null,
-            "serveCode":null,
-            "serviceId":null,
-            "widgetName":"默认jony",
-            "userId":"0c294160-fad0-412c-b6c5-47b4bd28dda2",
-            "type":1,
-            "parentId":null,
-            "orders":2,
-            "children":[
-                {
-                    "createTime":1512550410000,
-                    "modifiedTime":null,
-                    "ts":null,
-                    "creator":null,
-                    "modifier":null,
-                    "tenantId":"gtzceot7",
-                    "widgetId":"e09a480b-df9d-4ab9-b26a-51cc01f5a4ae",
-                    "templateId":"9b05d3d1-eed3-4b1e-b412-95dd1da9dfc9",
-                    "widgetConfig":null,
-                    "icon":"http://app.yonyou.com:80//UF_MOB_IMG_LIB/mob_image/ncv63/jxsxd-icon.jpg",
-                    "serveCode":"service",
-                    "serviceId":"9b05d3d1-eed3-4b1e-b412-95dd1da9dfc9",
-                    "widgetName":"服务管理",
-                    "userId":"0c294160-fad0-412c-b6c5-47b4bd28dda2",
-                    "type":3,
-                    "parentId":"7f51c8da-47c8-4312-b566-5adaa602f018",
-                    "orders":1,
-                    "children":[
-
-                    ],
-                    "jsurl":"",
-                    "background":null,
-                    "size":1,
-                    "primaryKey":"e09a480b-df9d-4ab9-b26a-51cc01f5a4ae"
-                }
-            ],
-            "jsurl":null,
-            "background":null,
-            "size":null,
-            "primaryKey":"7f51c8da-47c8-4312-b566-5adaa602f018"
-        },
-        {
             "createTime":1512370482000,
             "modifiedTime":null,
             "ts":null,
