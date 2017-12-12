@@ -429,7 +429,9 @@ class ManageGroup extends Component {
 
     console.log("this.props");
     console.log(this.props);
-
+    if (isDragging) {
+      return null
+    }
     return connectDragSource(connectDropTarget(
       <div className={groupArea}>
         <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
