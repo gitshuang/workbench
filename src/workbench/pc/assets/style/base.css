@@ -108,6 +108,9 @@ body {
   top: 60px;
   z-index: 99999;
 }
+.pop_dialog_delete .u-modal-dialog{
+  width: auto;
+}
 
 .input{
   width:110px;
