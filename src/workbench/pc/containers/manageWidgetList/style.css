@@ -166,7 +166,7 @@
   position: absolute;
   z-index: 1;
   overflow: hidden;
-  top: 40px;
+  top: 20px;
   padding:5px;
   box-sizing: border-box;
   background: #fff;
@@ -258,10 +258,13 @@
   color:#fff;
 }
 .pop_dialog_widge_list :global(.u-modal-dialog){
-  width: 900px;
+  width: 99%;
+  height: 100%;
+  top: 23px;
 }
 .pop_dialog_widge_list :global(.u-modal-content){
-  background-color: #EEEEEE;
+  height: 100%;
+  // background-color: #EEEEEE;
 }
 
 .edit_cont .btn{

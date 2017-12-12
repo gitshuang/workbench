@@ -22,11 +22,15 @@
 .more:last-child {
   border: 0 none;
 }
-.more.active {
+.more.active, .moreName:hover {
   color: #E14C46;
 }
 .moreName{
-  padding: 0 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 5px;
+  cursor: pointer;
 }
 .moreDelBtn{
   text-align: center;
@@ -63,9 +67,10 @@
   position: relative;
 }
 .moreBtn {
-  border-width: 2px 0 0 0;
-  background: #fff;
+  border-radius: 0;
   text-align:center;
+  border-bottom: 0;
+  border-right: 0;
 }
 .tab.active, .moreBtn.active {
   color: #E14C46;

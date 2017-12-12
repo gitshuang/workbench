@@ -58,7 +58,7 @@
 	box-flex:1;
 	-webkit-box-flex:1;
 }
-**/
+
  
 .widgetTitle :global(.u-button){
 	height:22px;
@@ -76,6 +76,7 @@
 	background:rgba(225,76,70,1);
 	color:#fff;
 }
+**/
 .newGroupName{
 	width:176px;
 	height:22px;

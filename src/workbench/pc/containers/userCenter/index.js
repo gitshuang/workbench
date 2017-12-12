@@ -214,6 +214,7 @@ class UserInfoContainer extends Component {
         <Select
           defaultValue="帐号设置" name="456"
           onChange={this.handleChange2}
+          getPopupContainer = {()=> document.getElementById("modalId")}
         >
           <Option name="userInfo" value="userInfo" >个人信息</Option>
           <Option name="accountManagement" value="accountManagement" >帐号管理</Option>
@@ -225,6 +226,7 @@ class UserInfoContainer extends Component {
       renderAllow = <Select
         defaultValue="帐号管理" name="456"
         onChange={this.handleChange2}
+        getPopupContainer = {()=> document.getElementById("modalId")}
       >
         <Option name="safetyPick" value="safetyPick" >安全评级</Option>
         <Option name="password" value="password" >修改密码</Option>
@@ -258,7 +260,7 @@ class UserInfoContainer extends Component {
     })
 
     return (
-      <div className={`${wrap} ${clearfix}`} >
+      <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
           <div className={imgUser}>
             <div className={imgOuter}>
@@ -294,6 +296,7 @@ class UserInfoContainer extends Component {
               <Select
                 defaultValue="系统设置" name="123"
                 onChange={this.handleChange}
+                getPopupContainer = {()=> document.getElementById("modalId")}
               >
                 {/* <Option name="account"  value="account" >账号</Option> */}
                 <Option name="language" value="language" >界面语言</Option>

@@ -123,3 +123,7 @@ body {
 .input:hover{
   border: 2px solid #00CDC3;
 }
+.u-button{
+  min-width: 5px;
+  padding:0;
+}

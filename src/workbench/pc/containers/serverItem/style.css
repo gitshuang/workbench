@@ -14,7 +14,7 @@
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
-    border-width: 0px;
+    border: 1px solid rgba(78,89,104,0.19);
 }
 
 .item_li_top{
@@ -39,6 +39,11 @@
 	padding-left: 10px;
 	padding-top: 10px;
 	box-sizing: border-box;
+
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(71,77,84,1);
+
 }
 
 .item_footer span{

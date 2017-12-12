@@ -97,12 +97,12 @@ const reducer = handleActions({
           url,
         },
         brm,
-        tabs: tabs.concat({
+        tabs: [{
           id: currentId,
           serveCode,
           name,
           location: url,
-        })
+        }].concat(tabs)
       }
     }
   },

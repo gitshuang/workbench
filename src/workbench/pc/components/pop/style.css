@@ -10,3 +10,9 @@
     color: #757F8C;
     cursor: pointer;
 }
+/**
+.manageDialogFolder .close{
+  top: -46px;
+  right: 20px;
+}
+**/
