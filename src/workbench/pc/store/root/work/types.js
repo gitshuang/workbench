@@ -19,4 +19,5 @@ export default createTypes(
   'RETURN_DEFAULT_STATE',
   'SET_TABS',
   'CHANGE_SERVE',
+  'UNSHIFT_TAB'
 );

@@ -46,6 +46,7 @@ const {
   addFolder,
   selectListActions,
   selectGroupActions,
+  setEditonlyId
 } = manageActions;
 
 function findItemById(manageList,id) {
@@ -113,6 +114,7 @@ function collectTaget(connect, monitor) {
     'manageList',
     'selectGroup',
     'selectList',
+    'currEditonlyId',
     {
       namespace:'manage'
     }
@@ -130,6 +132,7 @@ function collectTaget(connect, monitor) {
     addFolder,
     selectListActions,
     selectGroupActions,
+    setEditonlyId
   }
 )
 class ManageGroup extends Component {
@@ -143,23 +146,38 @@ class ManageGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      groupName:  "默认分组",
+      groupName:  "",
       inEdit: false,
       inFoucs: false,
       showModal: false,
     }
   }
   componentDidMount() {
+
     const {
       data: {
         widgetName: groupName,
       },
+      manageList
     } = this.props;
-    if (groupName) {
+    let i = 0;
+    manageList.forEach((item,index)=>{
+      if(item.widgetName.indexOf("默认分组") == 0 ) {
+        i += 1
+      };
+    });
+
+    const currName = i > 0 ? "默认分组"+ i : "默认分组";
+
+    if (groupName && groupName!="默认分组") {
       this.setState({
         groupName,
       });
+
     } else {
+      this.setState({
+        groupName : currName
+      });
       setTimeout(() => {
         this.refs.groupName.focus();
         this.refs.groupName.select();
@@ -172,10 +190,12 @@ class ManageGroup extends Component {
     addFolder({ groupIndex });
   }
   // 打开编辑分组形态
-  openRenameGroupFn = () => {
+  openRenameGroupFn = (id) => {
+    const {setEditonlyId} = this.props;
     this.setState({
       inEdit: true
     });
+    setEditonlyId(id);
     setTimeout(() => {
       this.refs.groupName.focus();
       this.refs.groupName.select();
@@ -183,28 +203,30 @@ class ManageGroup extends Component {
   }
   // 点击取消编辑分组按钮
   renameGroupCancel = (index) => {
-    const { renameGroup } = this.props;
+
+    const { renameGroup, setEditonlyId } = this.props;
     const {
       data: {
         widgetName: groupName,
       },
     } = this.props;
-
+    const stateGroupName = this.state.groupName;
     this.setState({
       inEdit: false,
-      groupName:groupName ? groupName : "默认分组",
+      groupName : groupName ? groupName : stateGroupName,
     });
+    setEditonlyId("");
     if(!groupName){
       renameGroup({
         index,
-        name:"默认分组",
+        name: stateGroupName,
       });
     }
   }
   // 点击按钮执行 action   重新构造
   renameGroupFn = (index) => {
     const { renameGroup } = this.props;
-    const name = this.state.groupName || "默认分组";
+    const name = this.state.groupName;
     renameGroup({
       index,
       name,
@@ -344,6 +366,7 @@ class ManageGroup extends Component {
       connectDropTarget,
       isDragging,
       selectGroup,
+      currEditonlyId
     } = this.props;
     const {
       inEdit,
@@ -354,7 +377,7 @@ class ManageGroup extends Component {
     const checkType = selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
     let groupTitle;
-    if(inEdit || !widgetName) {
+    if( currEditonlyId == widgetId || !widgetName) {
       groupTitle = (
         <div className={widgetTitle} >
           <div className={titleInputArea}>
@@ -380,7 +403,7 @@ class ManageGroup extends Component {
           </label>
           <div className="clearfix">
             <div className={iconBox}>
-              <Icon title="重命名分组" type="record" onClick={ this.openRenameGroupFn } />
+              <Icon title="重命名分组" type="record" onClick={ ()=>{this.openRenameGroupFn(widgetId)}} />
             </div>
             <div className={iconBox}>
               <Icon title="添加文件夹" type="add-files" onClick={this.addFolderFn.bind(this, index)} />

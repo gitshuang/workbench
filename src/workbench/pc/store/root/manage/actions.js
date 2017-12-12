@@ -37,7 +37,8 @@ const {
   SET_EDIT_STATE,
   CANCEL_FOLDER_EDIT,
   SET_CURR_GROUP_INDEX,
-  EDIT_TITLE
+  EDIT_TITLE,
+  SET_EDITONLY_ID,
 } = types;
 
 const actions = createActions(
@@ -76,6 +77,7 @@ const actions = createActions(
   SET_EDIT_STATE,
   CANCEL_FOLDER_EDIT,
   SET_CURR_GROUP_INDEX,
-  EDIT_TITLE
+  EDIT_TITLE,
+  SET_EDITONLY_ID,
 );
 export default actions;

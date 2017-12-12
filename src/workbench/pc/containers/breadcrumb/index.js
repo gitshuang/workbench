@@ -50,16 +50,20 @@ class BreadcrumbContainer extends Component {
       }
     }
     setExpended() {
-        const {setExpandedSidebar} = this.props;
-        setExpandedSidebar(true);
+        this.setExpandedSidebar(true);
         this.setState({
           breadcrumbMenu:breadcrumb_menu,
           breadcrumbTab:breadcrumb_tab
         })
     }
+    setExpandedSidebar(state) {
+      const {setExpandedSidebar} = this.props;
+      setExpandedSidebar(state);
+      const evt = new CustomEvent('resize');
+      window.dispatchEvent(evt);
+    }
     closeMenu(){
-        const {setExpandedSidebar} = this.props;
-        setExpandedSidebar(false);
+        this.setExpandedSidebar(false);
         this.setState({
           breadcrumbMenu:"",
           breadcrumbTab:""

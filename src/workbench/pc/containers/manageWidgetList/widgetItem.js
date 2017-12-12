@@ -249,9 +249,9 @@ class WidgetItem extends Component {
         </div>
 
         <div className={`${clearfix} ${footer}`}>
-
+          {this.props.type == "pop"?null:<Checkbox className="test" checked={checkType} onChange={ this.onHandChange } />}
           <div className={`${editDele} ${clearfix}`}>
-            <div onClick={this.fileDele}><Icon title="删除服务" type="dustbin" /></div>
+            <div onClick={()=>{this.popSave(this.props.data)}}><Icon title="删除服务" type="dustbin" /></div>
           </div>
         </div>
 

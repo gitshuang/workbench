@@ -142,7 +142,7 @@ class MoveToGroup extends Component {
         <div className={`${footer} um-box-justify`}>
           {
             onAddGroup ? (<div>
-              <Button onClick={this.addGroup}>添加分组</Button>
+              <Button onClick={this.addGroup} disabled={inAddGroup? true: false}>添加分组</Button>
             </div>) : null
           }
           <div>

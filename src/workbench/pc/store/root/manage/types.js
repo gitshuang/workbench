@@ -32,4 +32,5 @@ export default createTypes(
   'CANCEL_FOLDER_EDIT',
   'SET_CURR_GROUP_INDEX',
   'EDIT_TITLE',
+  'SET_EDITONLY_ID'
 );

@@ -35,7 +35,8 @@ const {
   setEditState,
   cancelFolderEdit,
   setCurrGroupIndex,
-  editTitle
+  editTitle,
+  setEditonlyId,
 } = actions;
 
 const defaultState = {
@@ -53,6 +54,7 @@ const defaultState = {
   selectGroup: [],
   currGroupIndex:0,
   title:'',
+  currEditonlyId:""
 };
 
 const findTreeById = (data, curId) => {
@@ -102,6 +104,7 @@ function findById(manageList,id) {
   return data;
 }
 const reducer = handleActions({
+
   [setManageList]: (state, { payload, error }) => {
     return state;
   },
@@ -590,6 +593,11 @@ const reducer = handleActions({
   [setEditState]: (state, { payload: isEdit }) => ({
     ...state,
     isEdit,
+  }),
+
+  [setEditonlyId]: (state, { payload: currEditonlyId }) => ({
+    ...state,
+    currEditonlyId,
   }),
 }, defaultState);
 
