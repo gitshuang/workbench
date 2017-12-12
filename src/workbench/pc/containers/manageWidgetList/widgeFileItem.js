@@ -207,6 +207,7 @@ class WidgeFileItem extends Component {
   }
 
   render() {
+    
     const da = this.props.data;
     const id = da.widgetId;
     const {selectList} = this.props;
@@ -246,7 +247,7 @@ class WidgeFileItem extends Component {
         {/*<div name="file" className={[context,file_context].join(' ')}>
          { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) }
          </div> */}
-        {this.props.currEditonlyId==id ? edit : null }
+        {this.props.currEditonlyId == id ? edit : null }
         {this.props.currEditonlyId==id ? null : btns }
 
         {/*<div className={file_num}>

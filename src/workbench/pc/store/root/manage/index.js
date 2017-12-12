@@ -402,7 +402,7 @@ const reducer = handleActions({
       curEditFolderId: newId,
       isEdit: true,
       manageList: [ ...manageList ],
-      currEditonlyId:""
+      currEditonlyId:newId
     }
   },
   [deleteFolder]: (state, { payload: folderId })  => {
