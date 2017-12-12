@@ -309,8 +309,9 @@ class ManageGroup extends Component {
   }
   // 添加新分组
   addGroupFn(index) {
-    const { addGroup } = this.props;
+    const { addGroup,setEditonlyId } = this.props;
     addGroup(index);
+    setEditonlyId("");
   }
   // menu组件 方法
   onDropSelect = (index) => ({ key }) => {
@@ -438,6 +439,7 @@ class ManageGroup extends Component {
             <WidgetList index={index} data={children} parentId={this.props.data.widgetId}  />
           </div>
         </section>
+
         <div className={addBtn} >
           <ButtonDefaultAlpha className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
             <Icon type="add" ></Icon>

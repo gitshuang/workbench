@@ -19,7 +19,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit,openFolder } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit,openFolder,setEditonlyId } = manageActions;
 
 const type='item';
 
@@ -65,6 +65,7 @@ function collectTaget(connect, monitor) {
     'curEditFolderId',
     'selectList',
     'selectGroup',
+    'currEditonlyId',
     {
       namespace: 'manage',
     }
@@ -74,7 +75,8 @@ function collectTaget(connect, monitor) {
     renameFolder,
     setFolderEdit,selectListActions,selectGroupActions,
     cancelFolderEdit,
-    openFolder
+    openFolder,
+    setEditonlyId
   }
 )
 class WidgeFileItem extends Component {
@@ -107,8 +109,9 @@ class WidgeFileItem extends Component {
   }
   //点击文件夹编辑按钮
   fileEdit = () =>{
-    const { setFolderEdit, data } = this.props;
+    const { setFolderEdit, data, setEditonlyId } = this.props;
     setFolderEdit(data.widgetId);
+    setEditonlyId(data.widgetId);
     this.setState({
         editShow:true
     })
@@ -136,18 +139,19 @@ class WidgeFileItem extends Component {
       id: this.props.data.widgetId,
       value: this.state.value
     };
-    const { renameFolder } = this.props;
+    const { renameFolder,setEditonlyId } = this.props;
     renameFolder(data);
+    setEditonlyId("");
   }
 
   close = (e) => {
-    const { cancelFolderEdit } = this.props;
+    const { cancelFolderEdit,setEditonlyId } = this.props;
     cancelFolderEdit(this.props.data.widgetId);
-
     this.setState({
         value:this.props.data.widgetName,
         editShow:false
     });
+    setEditonlyId("");
   }
 
   popSave = (data)=>{
@@ -238,8 +242,8 @@ class WidgeFileItem extends Component {
         {/*<div name="file" className={[context,file_context].join(' ')}>
            { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) }
         </div> */}
-        {this.state.editShow ? edit : null }
-        {this.state.editShow ? null : btns }
+        {this.props.currEditonlyId==id ? edit : null }
+        {this.props.currEditonlyId==id ? null : btns }
 
         {/*<div className={file_num}>
           (3)
