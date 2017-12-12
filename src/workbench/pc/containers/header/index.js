@@ -9,6 +9,7 @@ import styles from './index.css';
 import SearchContainer from 'containers/search';
 const {
   lebraNavbar,
+  rightBtn,
 } = styles;
 const {
   changeQuickServiceDisplay,
@@ -55,8 +56,8 @@ class HeaderContainer extends Component {
     let appClass = quickServiceDisplay ? "active tc" : "tc"
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <div className={appClass} style={{marginRight:"15px"}} onClick = {(e) =>{this.openService(e)}} ><Icon title="快捷应用" type="application" /></div>,
-      <div className="tc">
+      <div className={`${appClass} ${rightBtn}`} style={{marginRight:"15px"}} onClick = {(e) =>{this.openService(e)}} ><Icon title="快捷应用" type="application" /></div>,
+      <div className={`tc ${rightBtn}`}>
         <Icon title="智能通讯" type="clock" />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>

@@ -1,48 +1,61 @@
 .search {
   display: inline-block;
   margin-right: 15px;
+  position: relative;
+}
+.search.searchExtend {
+  width: 46px;
+  text-align: right;
+}
+.searchExtend {
+  border-bottom: 2px solid #878B94;
 }
 .searchBtn {
-  // margin-right: 15px;
+  width:32px;
+  height: 32px;
+  line-height: 32px;
+  cursor: pointer;
+  display: inline-block;
 }
 .searchBtn >i:hover {
   color:#2D3F5D;
 }
 .inputArea {
-  width: 270px;
-  left: -275px;
+  width: 250px;
+  left: -250px;
   position: absolute;
   top: 0;
   height: 32px;
   overflow: hidden;
-  border: 1px solid #D2D2D2;
+  border-bottom: 2px solid #878B94;
+  box-sizing: content-box;
 }
 .searchText {
   float: left;
   width: 100%;
   height: 100%;
   padding: 0 10px;
-  font-size: 14px;
+  font-size: 12px;
   color: #333;
-  background: #fff;
+  background: transparent;
   border:0 none;
 }
 .inputEnter {
-  left: -6px;
-  width: 1px;
+  left: 0;
+  width: 0;
 }
 .inputEnter.inputEnterActive {
-  width: 270px;
-  left: -275px;
+  width: 250px;
+  left: -250px;
   transition: all 300ms ease-in;
 }
 .inputLeave {
-  width: 270px;
-  left: -275px;
+  width: 250px;
+  left: -250px;
 }
 .inputLeave.inputLeaveActive {
-  width: 1px;
-  left: -6px;
+  width: 0;
+  left: 0;
   transition: all 300ms ease-in;
 }
 
@@ -52,6 +65,19 @@
   border-top:1px solid #888888;
   font-size: 12px;
 }
-:global(.tc.btnColor i){
-  color: #E14C46;
+
+.clearSearch {
+  background: rgba(0,0,0,.3);
+  width: 14px;
+  height: 14px;
+  border-radius: 10px;
+  line-height: 12px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.search .clearSearch :global(.iconfont) {
+  font-size: 10px;
+  color: #fff;
 }
