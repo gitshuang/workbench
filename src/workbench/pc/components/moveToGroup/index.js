@@ -17,17 +17,19 @@ class MoveToGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newGroupName: '',      // 新分组名
+      newGroupName: '添加分组',      // 新分组名
       inAddGroup: false,        // 是否是打开新的分组
-      way: '',
-      selectId: '',
+      way: '',          // 路径
+      selectId: '',   // 选中的id
     }
   }
+  // 新分组名称的onchange
   setNewGroupName =(e) => {
     this.setState({
       newGroupName: e.target.value
     })
   }
+  //  点击每一行对应的操作
   handlerClick(selectId) {
     const way = findPath(
         this.props.data,
@@ -40,31 +42,42 @@ class MoveToGroup extends Component {
     this.setState({
       way,
       selectId,
+      inAddGroup: false,
     });
   }
+  // 点击添加分组
   addGroup = () => {
     this.setState({
       inAddGroup: true,
     });
+    setTimeout(() => {
+      this.refs.newGroupName.focus();
+      this.refs.newGroupName.select();
+    }, 0);
   }
+  // 确认添加分组
   confirmAddGroup = () => {
+    debugger;
     this.props
       .onAddGroup(this.state.newGroupName)
       .then(({ error, payload }) => {
+        this.props.onSave(payload.widgetId);
         this.setState({
           inAddGroup: false,
         });
       });
   }
-  cancelAddGroup = () => {
-    this.setState({
-      inAddGroup: false,
-    });
-  }
+
+  //   保存
   save = () => {
-    const { selectId } = this.state;
-    this.props.onSave(selectId);
+    const { selectId, inAddGroup } = this.state;
+    if(inAddGroup){
+      this.confirmAddGroup()
+    }else{
+      this.props.onSave(selectId);
+    }
   }
+  //  取消
   cancel = () => {
     this.props.onCancel();
   }
@@ -98,7 +111,6 @@ class MoveToGroup extends Component {
     }
   }
   render() {
-    let content;
     const {
       inAddGroup,
       newGroupName,
@@ -111,8 +123,45 @@ class MoveToGroup extends Component {
       onCancel,
       onAddGroup,
     } = this.props;
+    let content = (
+      <div className= {container}>
+        <div className={title}>
+          添加到：{way}
+        </div>
+        <div className={borderBox}>
+          { this.makeSelectInterface(data, selectId) }
+          {inAddGroup ? (<div>
+            <input type="text" ref="newGroupName"
+              value={newGroupName}
+              onChange={ this.setNewGroupName }
+              autoFocus="autofocus"
+            />
+          </div>):null}
+        </div>
 
-    if (inAddGroup) {
+        <div className={`${footer} um-box-justify`}>
+          {
+            onAddGroup ? (<div>
+              <Button onClick={this.addGroup}>添加分组</Button>
+            </div>) : null
+          }
+          <div>
+            {
+              onSave ? (<Button
+                colors="danger"
+                disabled={!way && !inAddGroup}
+                className={saveBtn}
+                onClick={ this.save }>确定</Button>) : null
+            }
+            {
+              onCancel ? (<Button
+                onClick={this.cancel}>取消</Button>) : null
+            }
+          </div>
+        </div>
+      </div>
+    );
+    {/*if (inAddGroup) {
       content = (
         <div className= {`${pd} ${container}`}>
           <div className={borderBox}>
@@ -125,37 +174,8 @@ class MoveToGroup extends Component {
         </div>
       );
     }else{
-      content = (
-        <div className= {container}>
-          <div className={title}>
-            添加到：{way}
-          </div>
-          <div className={borderBox}>
-            { this.makeSelectInterface(data, selectId) }
-          </div>
-          <div className={`${footer} um-box-justify`}>
-            {
-              onAddGroup ? (<div>
-                <Button onClick={this.addGroup}>添加分组</Button>
-              </div>) : null
-            }
-            <div>
-              {
-                onSave ? (<Button
-                  colors="danger"
-                  disabled={!way}
-                  className={saveBtn}
-                  onClick={ this.save }>确定</Button>) : null
-              }
-              {
-                onCancel ? (<Button
-                  onClick={this.cancel}>取消</Button>) : null
-              }
-            </div>
-          </div>
-        </div>
-      );
-    }
+
+    }*/}
     return content;
   }
 }
