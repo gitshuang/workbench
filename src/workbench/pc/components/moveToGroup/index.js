@@ -57,14 +57,15 @@ class MoveToGroup extends Component {
   }
   // 确认添加分组
   confirmAddGroup = () => {
-    debugger;
     this.props
       .onAddGroup(this.state.newGroupName)
       .then(({ error, payload }) => {
-        this.props.onSave(payload.widgetId);
-        this.setState({
-          inAddGroup: false,
-        });
+        if (!error) {
+          this.props.onSave(payload.widgetId);
+          this.setState({
+            inAddGroup: false,
+          });
+        }
       });
   }
 
