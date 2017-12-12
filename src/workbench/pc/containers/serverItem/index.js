@@ -9,6 +9,10 @@ import { serverItem,item_li_top,item_footer,item_left,item_right} from './style.
 
 class ServerItem extends Component {
 
+  // 1，已存在，
+  // 2，为添加，
+  // 3，本次勾选
+  // 4，本次取消
 
   constructor(props) {
       super(props);
