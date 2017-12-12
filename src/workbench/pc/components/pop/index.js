@@ -51,7 +51,7 @@ class PopDialog extends Component{
                 {this.props.children}
             </div>
 
-            <div className={close} onClick={ this.props.close } >x</div>
+            <div className={`${close} close`} onClick={ this.props.close } >x</div>
           </Modal.Body>
 
           <Modal.Footer>

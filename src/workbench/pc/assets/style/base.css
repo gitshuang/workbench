@@ -127,3 +127,7 @@ body {
   min-width: 5px;
   padding:0;
 }
+.manageDialogFolder .close{
+  top: -46px;
+  right: 20px;
+}
