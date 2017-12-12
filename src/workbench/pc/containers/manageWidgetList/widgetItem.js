@@ -32,16 +32,14 @@ const type='item';
 var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
-    //props.folderType && props.closeFolderDrag();
-    let diffOffset = monitor.getDifferenceFromInitialOffset();
+    //let diffOffset = monitor.getDifferenceFromInitialOffset();
     timestamp=new Date().getTime();
     window.timestamp = timestamp;
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType};
   },
 
   endDrag(props, monitor, component){
-    //props.closeFolderDrag();
-    return monitor.getDifferenceFromInitialOffset();
+    //return monitor.getDifferenceFromInitialOffset();
   }
 };
 
@@ -52,11 +50,14 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
+    let targetId = props.id;
+    let timeFlag=new Date().getTime();
     if (draggedId !== props.id){
-      let diff = monitor.getDifferenceFromInitialOffset();
-      props.editTitle(props.id,props.data.widgetName);
-    }else {
-      //props.closeFolderDrag();
+      //let diff = monitor.getDifferenceFromInitialOffset();
+      if(timeFlag - timestamp <100){
+        console.log(timeFlag - timeFlag);
+        props.editTitle(props.id,props.data.widgetName);
+      }
     }
   },
   drop(props, monitor) {
@@ -233,12 +234,13 @@ class WidgetItem extends Component {
         widgetName,
       }
     } = this.props;
-    const { connectDragSource, connectDropTarget,isDragging,selectList,title } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,selectList } = this.props;
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     if (isDragging) {
       return null
     }
+    const {title} = this.state;
     return connectDragSource(connectDropTarget(
       <li title={title} className={`${widgetItem} ${isDragging ? '':''}` } style={{...widgetStyle[size - 1],...opacity }} >
         <div className={title}>

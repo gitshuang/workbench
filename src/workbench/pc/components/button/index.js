@@ -17,7 +17,7 @@ const ButtonDefault = ({ ...props }) => {
 //带边框
 const ButtonDefaultLine = ({ ...props }) => {
     const { children ,disabled} = props;     
-    return(<Button className={`${btn} ${default_line_btn}`} disabled={disabled} onClick={(e)=>{props.onClick(e,...props)}}>{children}</Button>);
+    return(<Button className={`${btn} ${default_line_btn}`} type="button" disabled={disabled} onClick={(e)=>{props.onClick(e,...props)}}>{children}</Button>);
 };
 
 //默认背景透明
