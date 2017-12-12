@@ -54,6 +54,7 @@ const itemTarget = {
     const preType = monitor.getItem().type;
     if (draggedId !== props.id){
       let diff = monitor.getDifferenceFromInitialOffset();
+      props.editTitle(props.id,props.data.widgetName);
     }else {
       //props.closeFolderDrag();
     }
@@ -90,6 +91,13 @@ function collectTaget(connect, monitor) {
   }
 }
 
+function getItemStyles() {
+  return{
+    pointerEvents: 'none',
+    background:'red',
+  }
+}
+
 const widgetStyle = [
   // 小
   {
@@ -114,6 +122,7 @@ const widgetStyle = [
     'selectList',
     'selectGroup',
     'currGroupIndex',
+    'title',
     {
       namespace: 'manage',
     }
@@ -143,7 +152,8 @@ class WidgetItem extends Component {
     this.popClose = this.popClose.bind(this);
 
     this.state = {
-      showModal:false
+      showModal:false,
+      title:'',
     }
   }
 
@@ -211,8 +221,7 @@ class WidgetItem extends Component {
   }
 
   render() {
-
-     const pop_btn = [
+    const pop_btn = [
       {label:"确认",fun:this.popSave,className:""},
       {label:"取消",fun:this.popClose,className:""}
     ]   //设置操作按钮
@@ -224,11 +233,14 @@ class WidgetItem extends Component {
         widgetName,
       }
     } = this.props;
-    const { connectDragSource, connectDropTarget,isDragging,selectList } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,selectList,title } = this.props;
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
+    if (isDragging) {
+      return null
+    }
     return connectDragSource(connectDropTarget(
-      <li className={widgetItem} style={{...widgetStyle[size - 1],...opacity }} >
+      <li title={title} className={`${widgetItem} ${isDragging ? '':''}` } style={{...widgetStyle[size - 1],...opacity }} >
         <div className={title}>
           <div className={title_right}>{widgetName}</div>
         </div>
@@ -237,7 +249,7 @@ class WidgetItem extends Component {
         </div>
 
         <div className={`${clearfix} ${footer}`}>
-          
+
           <div className={`${editDele} ${clearfix}`}>
             <div onClick={this.fileDele}><Icon title="删除服务" type="dustbin" /></div>
           </div>

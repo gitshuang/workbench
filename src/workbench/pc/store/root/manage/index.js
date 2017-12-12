@@ -34,7 +34,8 @@ const {
   closeBatchMove,
   setEditState,
   cancelFolderEdit,
-  setCurrGroupIndex
+  setCurrGroupIndex,
+  editTitle
 } = actions;
 
 const defaultState = {
@@ -50,7 +51,8 @@ const defaultState = {
   selectList:[],  // 勾选的服务列表
   selectWidgetList:[],
   selectGroup: [],
-  currGroupIndex:0
+  currGroupIndex:0,
+  title:'',
 };
 
 const findTreeById = (data, curId) => {
@@ -497,6 +499,15 @@ const reducer = handleActions({
       isEdit: true,
       manageList: [...manageList],
       curDisplayFolder: curDisplayFolder
+    }
+  },
+  [editTitle]: (state, { payload: {id,name} }) => {
+    let manageList = state.manageList;
+
+    return{
+      ...state,
+      title: name,
+      // manageList: [...manageList],
     }
   },
   [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType,timeFlag} }) => {

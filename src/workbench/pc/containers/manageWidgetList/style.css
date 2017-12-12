@@ -279,3 +279,8 @@
   top: -6px;
   right: 6px;
 }
+:global(.widgetHover){
+  background-color: indianred;
+}
+
+

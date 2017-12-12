@@ -19,7 +19,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder,closeFolder,setCurrGroupIndex } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder,closeFolder,setCurrGroupIndex,editTitle } = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 @connect(
@@ -38,7 +38,8 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
     moveServe,
     addFolder,
     closeFolder,
-    setCurrGroupIndex
+    setCurrGroupIndex,
+    editTitle,
   }
 )
 class WidgetList extends Component {
@@ -77,6 +78,11 @@ class WidgetList extends Component {
     let data = {groupIndex,id,preParentId, preType,afterId,parentId,afterType}
     const { addFolder } = this.props;
     addFolder(data);
+  }
+  editTitle = (id,name) => {
+    let data = {id,name}
+    // const { editTitle } = this.props;
+    // editTitle(data);
   }
 
   widgeOnclick = (e,da) => {
@@ -127,6 +133,7 @@ class WidgetList extends Component {
                 propsIndex={index}
                 type={type}
                 moveItemDrag={this.moveItemDrag}
+                editTitle={this.editTitle}
                 onClick={(e)=>{this.widgeOnclick(e,item)}}
               />
             );
@@ -141,6 +148,7 @@ class WidgetList extends Component {
                 propsIndex={index}
                 type={type}
                 moveItemDrag={this.moveItemDrag}
+                editTitle={this.editTitle}
                 addFolderDrag={this.addFolderDrag}
               />
             );
