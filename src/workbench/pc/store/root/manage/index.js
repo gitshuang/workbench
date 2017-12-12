@@ -236,11 +236,13 @@ const reducer = handleActions({
       selectList: selectList,
     }
   },
-  [addGroup]: (state, { payload: index }) => {
+  [addGroup]: (state, { payload: { index, widgetId, widgetName = '' } }) => {
     const manageList = state.manageList;
     manageList.splice(index+1, 0, {
       ...defaultGroup,
-      widgetId: guid(),
+      widgetId: widgetId || guid(),
+      widgetName,
+      children: [],
     });
     return{
       ...state,
@@ -255,7 +257,8 @@ const reducer = handleActions({
     });
     if (!newList.length) {
       newList.push({
-        ...defaultGroup
+        ...defaultGroup,
+        children: [],
       })
     }
     return{

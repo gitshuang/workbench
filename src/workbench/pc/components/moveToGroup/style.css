@@ -62,7 +62,7 @@
 }
 .borderBox input{
   display: block;
-  margin:20px auto;
+  margin: 0 auto;
   width: 90%;
   height: 40px;
   padding: 9px 12px;

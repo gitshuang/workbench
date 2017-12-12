@@ -310,7 +310,7 @@ class ManageGroup extends Component {
   // 添加新分组
   addGroupFn(index) {
     const { addGroup } = this.props;
-    addGroup(index);
+    addGroup({ index });
   }
   // menu组件 方法
   onDropSelect = (index) => ({ key }) => {
