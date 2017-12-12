@@ -28,6 +28,7 @@ const {
   RETURN_DEFAULT_STATE,
   SET_TABS,
   CHANGE_SERVE,
+  UNSHIFT_TAB,
 } = types;
 
 const actions = createActions(
@@ -66,7 +67,7 @@ const actions = createActions(
       const {
         setTabs,
       } = actions;
-      const { tabs: oldTabs, menus } = state.work;
+      const { tabs: oldTabs } = state.work;
       let newCurIndex;
       const newTabs = oldTabs.filter(({ id }, i) => {
         const result = id !== currentId;
@@ -81,6 +82,21 @@ const actions = createActions(
       const { serveCode } = newTabs[newCurIndex];
       dispatch(setTabs(newTabs));
       return serveCode;
+    },
+    [UNSHIFT_TAB]: (serveCode) => (dispatch, getState) => {
+      const state = getState();
+      const {
+        setTabs,
+      } = actions;
+      const { tabs: oldTabs, menus } = state.work;
+      let index = -1;
+      const curTabIndex = oldTabs.findIndex(({ serveCode: tabServeCode }, i) => {
+        return serveCode === tabServeCode;
+      });
+      const curTab = oldTabs[curTabIndex];
+      const other = oldTabs.slice(0, curTabIndex).concat(oldTabs.slice(curTabIndex + 1));
+      const newTabs = [curTab].concat(other);
+      dispatch(setTabs(newTabs));
     },
     [SET_CURRENT]: (code) => (dispatch, getState) =>{
       const state = getState();
