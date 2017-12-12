@@ -79,6 +79,7 @@ class BreadcrumbContainer extends Component {
                 className={this.state.breadcrumbMenu} >
                 菜单
                 <Icon
+                  title="隐藏菜单"
                   type="error3"
                   className={closeMenu}
                   onClick={this.closeMenu} />
@@ -88,6 +89,7 @@ class BreadcrumbContainer extends Component {
           {
             withSidebar ? (
               <Icon
+                title="显示菜单"
                 type="tabulation"
                 className={this.state.breadcrumbTab}
                 onClick={this.setExpended} />

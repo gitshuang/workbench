@@ -46,14 +46,14 @@ export default class Page404 extends Component {
     goBack() {
         this.props.history.replace('');
     }
-  
+
     render() {
         const {
           domainName,
           widthBrm,
           type,
         } = this.props;
-        let iconName = <Icon type="home" style={{fontSize:"24px"}}/>
+        let iconName = <Icon title="返回首页" type="home" style={{fontSize:"24px"}}/>
         return (
           <div className={wrap + " um-win"}>
             <div className="um-header">

@@ -171,7 +171,7 @@ class TabsContainer extends Component {
           style= {{
             width: moreBtnWidth,
           }}
-          onClick={this.toggleMore}><Icon className={moreBtnArrow} type="upward"></Icon></button>
+          onClick={this.toggleMore}><Icon title="更多" className={moreBtnArrow} type="upward"></Icon></button>
         { moreListElm }
       </div>
     ) : null;
@@ -198,7 +198,7 @@ class TabsContainer extends Component {
                     <button
                       className={tabDelBtn}
                       type="button"
-                      onClick={this.del(id)} ><Icon type="error3"></Icon></button>
+                      onClick={this.del(id)} ><Icon title="关闭页签" type="error3"></Icon></button>
                   ) : null
                 }
               </li>

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Icon from 'bee-icon';
-import BeeIcon from 'components/icon';
+import Icon from 'components/icon';
 import ButtonGroup from 'bee-button-group';
 import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
@@ -54,7 +53,7 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-    
+
     console.log(" --SelectWidgetList--componentDidMount-- ");
     this.getServices();
   }
@@ -172,7 +171,7 @@ class SelectWidgetList extends Component {
       dataList:_data
     });
   }
- 
+
   onChange =(data)=>{
     this.state.selectedList.push(data);
     if(data.selected){
@@ -221,7 +220,7 @@ class SelectWidgetList extends Component {
     return (<div className={select_widget_list}>
        <div className={searchPanel}>
           <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
-          <Icon type="uf-search" size="lg"  className={search_icon}/>
+          <Icon title="搜索" type="search" size="lg"  className={search_icon}/>
           <div className={icon} onClick={this.props.close} >
              X
           </div>
