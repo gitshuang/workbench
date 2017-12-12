@@ -151,7 +151,7 @@ class MoveToGroup extends Component {
                 colors="danger"
                 disabled={!way && !inAddGroup}
                 className={saveBtn}
-                onClick={ this.save }>确定</Button>) : null
+                onClick={ this.save }>添加</Button>) : null
             }
             {
               onCancel ? (<Button

@@ -19,6 +19,8 @@ import {
   ufSearch,
   appContent,
   menuBtnGroup,
+  link,
+  icon,
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -115,12 +117,12 @@ class serviceClassify extends Component {
       return (
         <div key={applicationCode}>
           <header>
-            <GoTo
-              name={applicationName}
-              icon={applicationIcon}
-              to={`/app/${applicationCode}`} />
+            <div>
+              <img src={applicationIcon}/>
+              <span>{ applicationName }</span>
+            </div>
           </header>
-          <hgroup className={clearfix}>
+          <hgroup className="um-box">
             {
               service.map(({
                 serveName,
@@ -177,9 +179,9 @@ class serviceClassify extends Component {
     const list = this.renderList();
 
     return (
-      <div className={bg}>
-        <div className={bg_wrap}>
-          <div className={`${wrap} ${clearfix}`}>
+      <div className={bg+" um-content um-vbox"}>
+        <div className={bg_wrap+" um-content um-vbox"}>
+          <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <InputGroup className={serviceSearch}>
               <AutoComplete
                 value={value}
@@ -194,13 +196,15 @@ class serviceClassify extends Component {
                 </Button>
               </InputGroup.Button>
             </InputGroup>
-            <div className={menuBtnGroup}>
-              <ButtonGroup vertical>
-                {btns}
-              </ButtonGroup>
-            </div>
-            <div className={appContent}>
-              {list}
+            <div className="um-box um-content">
+              <div className={menuBtnGroup}>
+                <ButtonGroup vertical>
+                  {btns}
+                </ButtonGroup>
+              </div>
+              <div className={appContent+" um-bf1 um-content"}>
+                {list}
+              </div>
             </div>
           </div>
         </div>

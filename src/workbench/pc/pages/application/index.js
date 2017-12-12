@@ -54,7 +54,7 @@ class Application extends Component {
             <div className={appBreadcrumb}><BreadcrumbContainer/></div>
           </div>
         </div>
-        <div className={um_content}>
+        <div className={um_content + " um-box um-content"}>
           <ServiceClassify />
         </div>
       </div>

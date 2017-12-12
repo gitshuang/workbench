@@ -305,7 +305,7 @@
   margin: 0 10px;
   line-height:48px;
 }
-:global(.um-content){
+.wrap :global(.um-content){
   background:#fff;
 }
 .tabPane2{
