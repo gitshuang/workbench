@@ -199,7 +199,7 @@ class UserInfoContainer extends Component {
     if(admin){
       renderAllow =
         <Select
-          defaultValue="帐号管理" name="456"
+          defaultValue="帐号设置" name="456"
           onChange={this.handleChange2}
         >
           <Option name="userInfo" value="userInfo" >个人信息</Option>
