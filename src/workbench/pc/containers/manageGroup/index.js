@@ -204,7 +204,7 @@ class ManageGroup extends Component {
   // 点击取消编辑分组按钮
   renameGroupCancel = (index) => {
 
-    const { renameGroup } = this.props;
+    const { renameGroup,setEditonlyId } = this.props;
     const {
       data: {
         widgetName: groupName,
@@ -215,6 +215,7 @@ class ManageGroup extends Component {
       inEdit: false,
       groupName : groupName ? groupName : stateGroupName,
     });
+    setEditonlyId("");
     if(!groupName){
       renameGroup({
         index,
@@ -309,7 +310,7 @@ class ManageGroup extends Component {
   // 添加新分组
   addGroupFn(index) {
     const { addGroup } = this.props;
-    addGroup(index);
+    addGroup({index});
   }
   // menu组件 方法
   onDropSelect = (index) => ({ key }) => {

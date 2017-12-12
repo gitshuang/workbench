@@ -112,6 +112,7 @@ class WidgeFileItem extends Component {
     const { setFolderEdit, data, setEditonlyId } = this.props;
     setFolderEdit(data.widgetId);
     setEditonlyId(data.widgetId);
+    debugger;
     this.setState({
         editShow:true
     })
