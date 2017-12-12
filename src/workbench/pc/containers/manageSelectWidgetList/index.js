@@ -100,7 +100,7 @@ class SelectWidgetList extends Component {
       }else{
           let mapItem = alllist[manageList[i].serviceId];
           if(mapItem && manageList[i].type != 2){
-            mapItem.selected  = true;
+            mapItem.selected  = "1";
           }
       }
     }
@@ -142,13 +142,14 @@ class SelectWidgetList extends Component {
     });
   }
 
-  onChange =(data)=>{
+  onChange =(data,sele)=>{
     this.state.selectedList.push(data);
-    if(data.selected){
-      this.state.dataMap[data.serveId].selected = false;
-    }else{
-      this.state.dataMap[data.serveId].selected = true;
-    }
+    this.state.dataMap[data.serveId].selected = sele;
+    // if(data.selected == "3"){
+    //   this.state.dataMap[data.serveId].selected = "4";
+    // }else{
+    //   this.state.dataMap[data.serveId].selected = "3";
+    // }
     this.setState({
         ...this.state,
         edit:true
