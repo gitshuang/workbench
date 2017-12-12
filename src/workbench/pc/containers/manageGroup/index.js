@@ -46,7 +46,7 @@ const {
   addFolder,
   selectListActions,
   selectGroupActions,
-  setEditGroup
+  setEditonlyId
 } = manageActions;
 
 function findItemById(manageList,id) {
@@ -114,6 +114,7 @@ function collectTaget(connect, monitor) {
     'manageList',
     'selectGroup',
     'selectList',
+    'currEditonlyId',
     {
       namespace:'manage'
     }
@@ -131,7 +132,7 @@ function collectTaget(connect, monitor) {
     addFolder,
     selectListActions,
     selectGroupActions,
-    setEditGroup
+    setEditonlyId
   }
 )
 class ManageGroup extends Component {
@@ -190,11 +191,11 @@ class ManageGroup extends Component {
   }
   // 打开编辑分组形态
   openRenameGroupFn = (id) => {
-    const {setEditGroup} = this.props;
+    const {setEditonlyId} = this.props;
     this.setState({
       inEdit: true
     });
-    setEditGroup(id);
+    setEditonlyId(id);
     setTimeout(() => {
       this.refs.groupName.focus();
       this.refs.groupName.select();
@@ -202,7 +203,8 @@ class ManageGroup extends Component {
   }
   // 点击取消编辑分组按钮
   renameGroupCancel = (index) => {
-    const { renameGroup } = this.props;
+
+    const { renameGroup, setEditonlyId } = this.props;
     const {
       data: {
         widgetName: groupName,
@@ -213,6 +215,7 @@ class ManageGroup extends Component {
       inEdit: false,
       groupName : groupName ? groupName : stateGroupName,
     });
+    setEditonlyId("");
     if(!groupName){
       renameGroup({
         index,
@@ -363,6 +366,7 @@ class ManageGroup extends Component {
       connectDropTarget,
       isDragging,
       selectGroup,
+      currEditonlyId
     } = this.props;
     const {
       inEdit,
@@ -373,7 +377,7 @@ class ManageGroup extends Component {
     const checkType = selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
     let groupTitle;
-    if(inEdit || !widgetName) {
+    if( currEditonlyId == widgetId || !widgetName) {
       groupTitle = (
         <div className={widgetTitle} >
           <div className={titleInputArea}>

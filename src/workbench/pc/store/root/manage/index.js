@@ -35,8 +35,7 @@ const {
   setEditState,
   cancelFolderEdit,
   setCurrGroupIndex,
-  setEditGroup,
-  setEditFile
+  setEditonlyId,
 } = actions;
 
 const defaultState = {
@@ -53,8 +52,7 @@ const defaultState = {
   selectWidgetList:[],
   selectGroup: [],
   currGroupIndex:0,
-  groupId:"",
-  fileId:"",
+  currEditonlyId:""
 };
 
 const findTreeById = (data, curId) => {
@@ -585,13 +583,10 @@ const reducer = handleActions({
     ...state,
     isEdit,
   }),
-  [setEditGroup]: (state, { payload: groupId }) => ({
+
+  [setEditonlyId]: (state, { payload: currEditonlyId }) => ({
     ...state,
-    groupId,
-  }),
-  [setEditFile]: (state, { payload: fileId }) => ({
-    ...state,
-    fileId,
+    currEditonlyId,
   }),
 }, defaultState);
 
