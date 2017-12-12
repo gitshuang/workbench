@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import Header from 'containers/header';
-import Navbar from 'components/scrollNav';
 import Icon from 'components/icon';
+import BreadcrumbContainer from 'components/breadcrumb';
 import { logoImg, header } from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
@@ -26,6 +26,12 @@ const { changeUserInfoDisplay,hideUserInfoDisplay} = homeActions;
   }
 )
 class HeaderPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brm: [{name:"首页编辑"}]
+    }
+  }
   getLeftContent() {
     const {
       userInfo: {
@@ -58,15 +64,9 @@ class HeaderPage extends Component {
           iconName={iconName} >
           <span>首页编辑</span>
         </Header>
-        {
-          list.length > 1 ? (
-            <Navbar
-              items={list}
-              offset={-80}
-              duration={500}
-              delay={0} />
-          ) : null
-        }
+        <div style={{paddingLeft:"70px"}}>
+          <BreadcrumbContainer data={this.state.brm} goback={this.goback}/>
+        </div>
       </div>
     );
   }

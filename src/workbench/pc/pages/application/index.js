@@ -5,7 +5,7 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 
 import Header from 'containers/header';
-import BreadcrumbContainer from 'containers/breadcrumb';
+import BreadcrumbContainer from 'components/breadcrumb';
 import ServiceClassify from 'containers/serviceClassify';
 
 import {header,um_content,appBreadcrumb} from './style.css';
@@ -34,6 +34,9 @@ class Application extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      brm: [{name:"添加应用"}]
+    }
     this.goBack = this.goBack.bind(this);
   }
 
@@ -51,7 +54,9 @@ class Application extends Component {
                 <span>全部应用及服务</span>
               </div>
             </Header>
-            <div className={appBreadcrumb}><BreadcrumbContainer/></div>
+            <div className={appBreadcrumb}>
+              <BreadcrumbContainer data={this.state.brm} goback={this.goBack}/>
+            </div>
           </div>
         </div>
         <div className={um_content + " um-box um-content"}>

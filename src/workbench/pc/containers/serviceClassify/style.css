@@ -10,9 +10,7 @@
 	border-radius: 3px ;
 }
 .wrap{
-  width:1300px;
-  margin:0 auto;
-  padding-top:27px;
+  padding:27px 80px 0;
 }
 .wrap :global(.u-autocomplete){
 	width:433px;
@@ -165,9 +163,9 @@
   margin-right: 24px;
   margin-top: 16px;
 }
-.link:nth-child(6){
+/*.link:nth-child(6){
   margin-right: 0;
-}
+}*/
 .link:hover{
   background:rgba(225,76,70,0.1);
 	cursor: pointer;
