@@ -52,21 +52,30 @@
 .default_line_btn{
    color:rgba(255,255,255,1);
   background:rgba(255,255,255,0.08);
-  border: 1px solid #FFFFFF;
+  border: 1px solid rgba(255,255,255,0.8);
 }
 .default_line_btn:active{
   background:rgba(252,237,236,1);
   color:rgba(225,76,70,1);
 }
+.default_line_btn:hover{
+  border: 1px solid rgba(255,255,255,0.5);
+  background:rgba(255,255,255,0.08);
+  color:rgba(255,255,255,1);
+}
+.default_line_btn:disabled{
+  color:rgba(165,173,186,1);
+  background:rgba(245,246,248,1);
+}
+/**
 .default_line_btn:visited{
  background:rgba(245,246,248,1);
  color:rgba(165,173,186,1);
  opacity:70; 
  cursor: not-allowed;
 }
-.default_line_btn:hover{
-  border: 1px solid rgba(255,255,255,0.5);
-}
+**/
+
 
 /**  默认无背景色 **/
 .default_alpha_btn{
