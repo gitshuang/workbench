@@ -82,8 +82,9 @@
 	color:#E14C46;
 }
 .appContent{
-
+	margin-left: 200px;
 }
+/*
 .appContent img{
 	width:32px;
 	height:32px;
@@ -97,6 +98,7 @@
 	color:rgba(74,81,93,1);
 	margin-left:8px;
 }
+*/
 
 .appContent header{
 	padding-bottom:8px;
@@ -105,7 +107,6 @@
 }
 .appContent hgroup{
 	margin-bottom:25px;
-	display:inline-block;
 }
 
 .clearfix{
