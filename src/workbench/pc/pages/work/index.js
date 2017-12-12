@@ -249,7 +249,7 @@ export default class Work extends Component {
       type,
       } = this.props;
     const { loaded } = this.state;
-    let iconName = <Icon type="home"/>
+    let iconName = <Icon title="返回首页" type="home"/>
     return (
       <div className={wrap + " um-win"}>
         <div className={header}>
@@ -260,12 +260,14 @@ export default class Work extends Component {
                 {
                   hasRelationFunc ?
                     (<Icon
+                      title="相关服务"
                       type="pull-down"
                       style={{marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                       className={titleServiceType?title_service_display:""}
                       onClick={ titleServiceDisplay }/>) : undefined
                 }
                 <Icon
+                  title="添加到首页"
                   type={pinType?"pin2":"pin"}
                   style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                   onClick={ this.pinDisplayFn }

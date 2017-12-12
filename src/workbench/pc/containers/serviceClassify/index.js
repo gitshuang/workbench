@@ -141,7 +141,7 @@ class serviceClassify extends Component {
     return listAll;
   }
 
-  render() { 
+  render() {
     const { allApplicationList} = this.props;
     let {value ,options,placeholder,disabled, current } = this.state;
 
@@ -166,7 +166,7 @@ class serviceClassify extends Component {
               />
               <InputGroup.Button>
                 <Button>
-                  <Icon type="search" className={ufSearch}></Icon>
+                  <Icon title="搜索" type="search" className={ufSearch}></Icon>
                 </Button>
               </InputGroup.Button>
             </InputGroup>

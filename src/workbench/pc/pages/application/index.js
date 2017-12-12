@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 
-import Icon from 'components/icon';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'containers/breadcrumb';
 import ServiceClassify from 'containers/serviceClassify';

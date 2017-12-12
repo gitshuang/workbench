@@ -250,13 +250,13 @@ class UserInfoContainer extends Component {
           <div className={imgUser}>
             <div className={imgOuter}><img src={imgsrc?imgsrc:defaultPic} className={imgInner} /></div>
             <div className={editPortrait}>
-              <Icon type="copyreader" onClick={this.editAvatar}></Icon>
+              <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>
           </div>
           <div className={userName}>{name}</div>
           <ul className={`${gloryIcon} ${clearfix}`}>
             <li>
-              <div className={`${iconContainer} ${icon1}`}><Icon type="glory"></Icon></div>
+              <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
               <span>荣耀</span>
             </li>
             {/* <li>
@@ -264,7 +264,7 @@ class UserInfoContainer extends Component {
               <span>个人空间</span>
             </li> */}
             <li>
-              <div className={`${iconContainer} ${icon3}`}><Icon type="Internet2"></Icon></div>
+              <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
               <span>动态</span>
             </li>
           </ul>

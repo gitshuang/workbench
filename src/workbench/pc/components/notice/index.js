@@ -49,7 +49,7 @@ class Notice extends Component {
             <Button key={i} className={`${notice}Btn  btn`+i} size="sm" style={{ color: `${btn.btnColor}` }} onClick={ this.handClick(i) } >{btn.typeBtn}</Button>
           ))
         }
-        <div className="hideAuto"><Icon type="xiaoxi" /></div>
+        {/* <div className="hideAuto"><Icon type="xiaoxi" /></div> */}
       </div>
     );
   }

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { ElementsWrapper } from 'components/scrollNav';
 import Button from 'bee-button';
 import ButtonGroup from 'bee-button-group';
-import Icon from 'bee-icon';
 import { mapStateToProps } from '@u';
 import Header from 'containers/header';
 import HomeFolderDialog from 'containers/homeFolderDialog';

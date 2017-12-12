@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import actions from 'store/root/work/actions';
 import Menu, { SubMenu } from 'bee-menus';
-import Icon from 'bee-icon';
 // import { Scrollbars } from 'react-custom-scrollbars';
 import { mapStateToProps, findPath } from '@u';
 import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu} from './style.css';
@@ -27,8 +26,10 @@ function makeMenus(menus,isTop) {
     } else {
       result.push(
         <Item key={id} style={isTop?{fontSize:'14px'}:null}>
-          {isTop?<Icon type="uf-cloud-o" className={menuItem}/>:null}
-          { name }
+          <span>
+            {isTop?<img src={menuItemIcon} className={menuItem}/>:null}
+            { name }
+          </span>
         </Item>
       );
     }

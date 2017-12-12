@@ -1,8 +1,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { Breadcrumb } from 'tinper-bee';
-import Icon from 'components/icon';
-import { breadcrumbClass,breadcrumbClassIcon,breadcrumbBack } from './style.css';
+import { breadcrumbClass,breadcrumbBack } from './style.css';
 
 class Breadcrumbs extends Component {
 

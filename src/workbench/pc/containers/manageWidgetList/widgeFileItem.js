@@ -223,8 +223,8 @@ class WidgeFileItem extends Component {
         <Checkbox className="test" checked={checkType} onChange={ this.onHandChange } />
         </div>
       <div className={`${editDele} ${clearfix}`}>
-        <div onClick={this.fileEdit}><Icon type="record" /></div>
-        <div onClick={this.fileDele}><Icon type="dustbin" /></div>
+        <div onClick={this.fileEdit}><Icon title="重命名文件夹" type="record" /></div>
+        <div onClick={this.fileDele}><Icon title="删除文件夹" type="dustbin" /></div>
       </div>
     </div>
     const { connectDragSource, connectDropTarget,isDragging } = this.props;
