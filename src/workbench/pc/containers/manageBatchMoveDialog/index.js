@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, guid } from '@u';
 import MoveToGroup from 'components/moveToGroup';
 import manageActions from 'store/root/manage/actions';
 import { pin } from './style.css';
 
-const { closeBatchMove, batchMove } = manageActions;
+const { closeBatchMove, batchMove, addGroup } = manageActions;
 
 @connect(
   mapStateToProps(
@@ -26,6 +26,7 @@ const { closeBatchMove, batchMove } = manageActions;
   {
     closeBatchMove,
     batchMove,
+    addGroup,
   }
 )
 class ManageBatchMoveDialog extends Component {
@@ -44,6 +45,23 @@ class ManageBatchMoveDialog extends Component {
     const { closeBatchMove } = this.props;
     closeBatchMove();
   }
+  addNewGroup = (widgetName) => {
+    const {
+      addGroup,
+      manageList,
+    } = this.props;
+    return Promise.resolve().then(() => {
+      const widgetId = guid();
+      const index = manageList.length;
+      addGroup({ index, widgetId, widgetName });
+      return {
+        error: false,
+        payload: {
+          widgetId,
+        },
+      };
+    });
+  }
   render() {
     const {
       batchMoveModalDisplay,
@@ -55,6 +73,7 @@ class ManageBatchMoveDialog extends Component {
             data={moveData}
             onSave={this.confirmFn}
             onCancel={this.cancelFn}
+            onAddGroup={this.addNewGroup}
           />
         </div>
     ) : null;
