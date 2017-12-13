@@ -11,7 +11,7 @@ import FormControl from 'bee-form-control';
 import Button from 'bee-button';
 import PopDialog from 'components/pop';
 import Icon from 'components/icon';
-import Icon1 from 'bee-icon';
+import BeeIcon from 'bee-icon';
 import {ButtonDefaultLine,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
 
 import { connect } from 'react-redux';
@@ -253,9 +253,9 @@ class WidgeFileItem extends Component {
         {/*<div className={file_num}>
          (3)
          </div>*/}
-        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } close={this.popClose} data={da} btns={pop_btn} >
-          <div className={pop_cont}>
-            <Icon type="uf-exc-t" />
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } type="delete" close={this.popClose} data={da} btns={pop_btn} >
+          <div className="pop_cont">
+            <BeeIcon type="uf-exc-t" className="icon"/>
             <span>您确认要删除服务[{this.props.data.widgetName}]?</span>
           </div>
         </PopDialog>

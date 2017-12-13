@@ -170,8 +170,7 @@
 .warning_btn{
   font-family:PingFangSC-Regular;
   color:rgba(71,77,84,1);
-  background:rgb(243, 173, 61);
-
+  background:rgba(255,171,0,1);
 } 
 .warning_btn:hover{
   background:rgb(246, 197, 68);
@@ -179,12 +178,12 @@ font-family:PingFangSC-Medium;
 color:rgba(71,77,84,1);
 }
 .warning_btn:active{
-  background:rgb(241, 156, 65);
+  background:rgba(255,153,31,1);
   font-family:PingFangSC-Medium;
-color:rgba(71,77,84,1);
+  color:rgba(71,77,84,1);
 }
 
-.disabled_warning_btn{
-  background:rgba(9,44,66,0);
+.warning_btn:disabled{
+  background:rgba(9,44,66,0.04);
   color:rgba(165,173,186,1);
 }

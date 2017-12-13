@@ -14,6 +14,7 @@ import { mapStateToProps, avoidSameName } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
+import BeeIcon from 'bee-icon';
 import WidgetList from 'containers/manageWidgetList';
 import {
   widgetTitle,
@@ -448,9 +449,10 @@ class ManageGroup extends Component {
             添加组
           </ButtonDefaultAlpha>
         </div>
-        <PopDialog className="pop_dialog_delete" show={ showModal } close={this.popClose} btns={pop_btn} data={{ index }}>
-          <div>
-            <span>您确认要删除吗?</span>
+        <PopDialog className="pop_dialog_delete" show={ showModal } type="delete" close={this.popClose} btns={pop_btn} data={{ index }}>
+          <div className="pop_cont">
+            <BeeIcon type="uf-exc-t" className="icon"/>
+            <span>您确认要删除此项?</span>
           </div>
         </PopDialog>
       </div>
