@@ -15,7 +15,7 @@ import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
 import BeeIcon from 'bee-icon';
-import Checkbox from 'bee-Checkbox';
+import Checkbox from 'bee-checkbox';
 import WidgetList from 'containers/manageWidgetList';
 import {
   widgetTitle,
