@@ -33,41 +33,45 @@ var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
     //let diffOffset = monitor.getDifferenceFromInitialOffset();
+    // props.editTitle(props.id,props.data.widgetName);
     timestamp=new Date().getTime();
     window.timestamp = timestamp;
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType};
   },
 
   endDrag(props, monitor, component){
-    //return monitor.getDifferenceFromInitialOffset();
+    return monitor.getDifferenceFromInitialOffset();
   }
 };
 
 
 const itemTarget = {
   //hover 悬浮调用 drop落在目标上时调用
-  hover(props, monitor){
+  hover(props, monitor,component){
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
     let targetId = props.id;
     let timeFlag=new Date().getTime();
     if (draggedId !== props.id){
+      component.setState({
+        drag:'fadeInLeft'
+      });
       //let diff = monitor.getDifferenceFromInitialOffset();
       if(timeFlag - timestamp <100){
-        console.log(timeFlag - timeFlag);
-        props.editTitle(props.id,props.data.widgetName);
+        //console.log(timeFlag - timeFlag);
+        //props.editTitle(props.id,props.data.widgetName);
       }
     }
   },
-  drop(props, monitor) {
+  drop(props, monitor,component) {
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
     const preFolderType = monitor.getItem().folderType;
 
     if (draggedId !== props.id && preType !==1) {
-      let timeOut = (new Date().getTime() - timestamp > 1500);
+      let timeOut = (new Date().getTime() - timestamp > 1000);
       if(timeOut && preType === 3 && props.data.type === 3 && preFolderType!=="folder" && props.folderType!=="folder"){
         //放上去停留大于2s创建文件夹
         props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeOut);
@@ -124,6 +128,7 @@ const widgetStyle = [
     'selectGroup',
     'currGroupIndex',
     'title',
+    'drag',
     {
       namespace: 'manage',
     }
@@ -234,15 +239,15 @@ class WidgetItem extends Component {
         widgetName,
       }
     } = this.props;
-    const { connectDragSource, connectDropTarget,isDragging,selectList } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,selectList,drag } = this.props;
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     if (isDragging) {
-      return null
+      //return null
     }
     const {title} = this.state;
     return connectDragSource(connectDropTarget(
-      <li title={title} className={`${widgetItem} ${isDragging ? '':''}` } style={{...widgetStyle[size - 1],...opacity }} >
+      <li title={title} className={`${widgetItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag}` } style={{...widgetStyle[size - 1],...opacity }} >
         <div className={title}>
           <div className={title_right}>{widgetName}</div>
         </div>
