@@ -6,7 +6,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
 import Icon from 'components/icon';
-import Icon1 from 'bee-icon';
+import BeeIcon from 'bee-icon';
 import Checkbox from 'bee-checkbox';
 import PopDialog from 'components/pop';
 import { connect } from 'react-redux';
@@ -262,10 +262,10 @@ class WidgetItem extends Component {
           </div>
         </div>
 
-        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } close={this.popClose} data={this.props.data} btns={pop_btn} >
-            <div className={pop_cont}>
-              <Icon1 type="uf-exc-t" />
-              <span>您确认要删除服务此项?</span>
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } type="delete" close={this.popClose} data={this.props.data} btns={pop_btn} >
+            <div className="pop_cont">
+              <BeeIcon type="uf-exc-t" className="icon"/>
+              <span>您确认要删除此项服务?</span>
             </div>
         </PopDialog>
 

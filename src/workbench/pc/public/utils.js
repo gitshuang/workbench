@@ -236,3 +236,26 @@ export function findPath(datas, childrenKey, compareKey, compareValue) {
   loop(datas);
   return paths;
 }
+
+export function avoidSameName(namaArr, name) {
+  const reg = new RegExp(`^${name}(\\((\\d)\\)){0,1}$`);
+  let num = 0;
+  namaArr.forEach((item) => {
+    if (reg.test(item)) {
+      let curNum = item.match(reg)[2];
+      if (curNum) {
+        curNum = parseInt(curNum, 10) + 1;
+        if (curNum > num) {
+          num = curNum;
+        }
+      } else if (!num) {
+        num = 1;
+      }
+    }
+  });
+  if (num) {
+    return `${name}(${num})`;
+  } else {
+    return name;
+  }
+}

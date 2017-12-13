@@ -195,7 +195,7 @@ class Home extends Component {
         <ManageGroup
           data={item}
           index={index}
-          key={item.widgetName+index}
+          key={item.widgetId}
           id={item.widgetId}
           type={item.type}
           moveGroupDrag={this.moveGroupDrag}

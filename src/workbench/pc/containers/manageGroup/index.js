@@ -10,10 +10,11 @@ import PopDialog from 'components/pop';
 import Button from 'bee-button';
 import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
 
-import { mapStateToProps } from '@u';
+import { mapStateToProps, avoidSameName } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
+import BeeIcon from 'bee-icon';
 import WidgetList from 'containers/manageWidgetList';
 import {
   widgetTitle,
@@ -147,41 +148,47 @@ class ManageGroup extends Component {
     super(props);
     this.state = {
       groupName:  "",
-      inEdit: false,
       inFoucs: false,
       showModal: false,
     }
   }
-  componentDidMount() {
-
+  componentWillMount() {
     const {
       data: {
-        widgetName: groupName,
+        widgetName,
+        isNew,
       },
-      manageList
+      manageList,
     } = this.props;
-    let i = 0;
-    manageList.forEach((item,index)=>{
-      if(item.widgetName.indexOf("默认分组") == 0 ) {
-        i += 1
-      };
-    });
 
-    const currName = i > 0 ? "默认分组"+ i : "默认分组";
-
-    if (groupName && groupName!="默认分组") {
-      this.setState({
-        groupName,
-      });
-
-    } else {
-      this.setState({
-        groupName : currName
-      });
+    if (isNew) {
       setTimeout(() => {
+        const nameArr = manageList.map(({ widgetName }) => {
+          return widgetName;
+        });
+        const newGroupName = avoidSameName(nameArr, '默认分组');
+        this.setState({
+          groupName: newGroupName,
+        });
         this.refs.groupName.focus();
         this.refs.groupName.select();
       }, 0);
+    } else {
+      this.setState({
+        groupName: widgetName,
+      });
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.props.currEditonlyId !== nextProps.currEditonlyId &&
+      this.props.data.isNew
+    ) {
+      this.props.renameGroup({
+        id: this.props.data.widgetId,
+        name: this.state.groupName,
+        dontChangeCurrEditonlyId: true,
+      });
     }
   }
   // 添加文件夹
@@ -192,9 +199,6 @@ class ManageGroup extends Component {
   // 打开编辑分组形态
   openRenameGroupFn = (id) => {
     const {setEditonlyId} = this.props;
-    this.setState({
-      inEdit: true
-    });
     setEditonlyId(id);
     setTimeout(() => {
       this.refs.groupName.focus();
@@ -204,7 +208,7 @@ class ManageGroup extends Component {
   // 点击取消编辑分组按钮
   renameGroupCancel = (index) => {
 
-    const { renameGroup, setEditonlyId } = this.props;
+    const { renameGroup,setEditonlyId } = this.props;
     const {
       data: {
         widgetName: groupName,
@@ -212,7 +216,6 @@ class ManageGroup extends Component {
     } = this.props;
     const stateGroupName = this.state.groupName;
     this.setState({
-      inEdit: false,
       groupName : groupName ? groupName : stateGroupName,
     });
     setEditonlyId("");
@@ -309,9 +312,8 @@ class ManageGroup extends Component {
   }
   // 添加新分组
   addGroupFn(index) {
-    const { addGroup,setEditonlyId } = this.props;
-    addGroup(index);
-    setEditonlyId("");
+    const { addGroup } = this.props;
+    addGroup({index});
   }
   // menu组件 方法
   onDropSelect = (index) => ({ key }) => {
@@ -370,7 +372,6 @@ class ManageGroup extends Component {
       currEditonlyId
     } = this.props;
     const {
-      inEdit,
       inFoucs,
       groupName,
       showModal,
@@ -378,7 +379,7 @@ class ManageGroup extends Component {
     const checkType = selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
     let groupTitle;
-    if( currEditonlyId == widgetId || !widgetName) {
+    if( currEditonlyId == widgetId) {
       groupTitle = (
         <div className={widgetTitle} >
           <div className={titleInputArea}>
@@ -448,9 +449,10 @@ class ManageGroup extends Component {
             添加组
           </ButtonDefaultAlpha>
         </div>
-        <PopDialog className="pop_dialog_delete" show={ showModal } close={this.popClose} btns={pop_btn} data={{ index }}>
-          <div>
-            <span>您确认要删除吗?</span>
+        <PopDialog className="pop_dialog_delete" show={ showModal } type="delete" close={this.popClose} btns={pop_btn} data={{ index }}>
+          <div className="pop_cont">
+            <BeeIcon type="uf-exc-t" className="icon"/>
+            <span>您确认要删除此项?</span>
           </div>
         </PopDialog>
       </div>

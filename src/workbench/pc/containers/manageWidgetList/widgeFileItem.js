@@ -4,14 +4,14 @@ import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { widgetList, widgetItem, title, file_context, title_left,
   file_icon, title_right, context, bottom ,footer,
-title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix,widgetFileItem,file_title_right,file_num,btn} from './style.css'
+  title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix,widgetFileItem,file_title_right,file_num,btn} from './style.css'
 import WidgetItem from './widgetItem';
 import Checkbox from 'bee-checkbox';
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';
 import PopDialog from 'components/pop';
 import Icon from 'components/icon';
-import Icon1 from 'bee-icon';
+import BeeIcon from 'bee-icon';
 import {ButtonDefaultLine,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
 
 import { connect } from 'react-redux';
@@ -83,46 +83,47 @@ function collectTaget(connect, monitor) {
 class WidgeFileItem extends Component {
 
   constructor(props) {
-      super(props);
+    super(props);
 
-      this.popSave = this.popSave.bind(this);
-      this.popClose = this.popClose.bind(this);
-      let ed = true;
-      if(props.curEditFolderId){
-          ed = true;
-      }else{
-          ed = false;
-      }
+    this.popSave = this.popSave.bind(this);
+    this.popClose = this.popClose.bind(this);
+    let ed = true;
+    if(props.curEditFolderId){
+      ed = true;
+    }else{
+      ed = false;
+    }
 
-      this.state = {
-          value:props.data.widgetName,
-          editShow: ed,
-          showModal:false
-      }
+    this.state = {
+      value:props.data.widgetName,
+      editShow: ed,
+      showModal:false
+    }
   }
 
   componentWillReceiveProps(nextProps){
-      if(nextProps.curEditFolderId !== this.props.data.widgetId){
-          this.setState({
-            editShow:false
-          })
-      }
+    if(nextProps.curEditFolderId !== this.props.data.widgetId){
+      this.setState({
+        editShow:false
+      })
+    }
   }
   //点击文件夹编辑按钮
-  fileEdit = () =>{
+  fileEdit = (e) =>{
+    e.stopPropagation();
     const { setFolderEdit, data, setEditonlyId } = this.props;
     setFolderEdit(data.widgetId);
     setEditonlyId(data.widgetId);
     this.setState({
-        editShow:true
+      editShow:true
     })
   }
 
   //输入框修改data数据源
   inputOnChange = (e) => {
-      this.setState({
-          value:e
-      });
+    this.setState({
+      value:e
+    });
   }
 
   fileDele = () =>{
@@ -149,8 +150,8 @@ class WidgeFileItem extends Component {
     const { cancelFolderEdit,setEditonlyId } = this.props;
     cancelFolderEdit(this.props.data.widgetId);
     this.setState({
-        value:this.props.data.widgetName,
-        editShow:false
+      value:this.props.data.widgetName,
+      editShow:false
     });
     setEditonlyId("");
   }
@@ -162,9 +163,9 @@ class WidgeFileItem extends Component {
   }
 
   popClose = ()=>{
-      this.setState({
-        showModal:false
-      })
+    this.setState({
+      showModal:false
+    })
   }
   isContained =(a, b)=>{
     if(!(a instanceof Array) || !(b instanceof Array)) return false;
@@ -207,6 +208,7 @@ class WidgeFileItem extends Component {
   }
 
   render() {
+    
     const da = this.props.data;
     const id = da.widgetId;
     const {selectList} = this.props;
@@ -217,16 +219,16 @@ class WidgeFileItem extends Component {
     ]   //设置操作按钮
 
     const edit = <div className={edit_cont}>
-        <FormControl className={`${form_control} input`} value={this.state.value} onChange={this.inputOnChange}/>
+      <FormControl className={`${form_control} input`} value={this.state.value} onChange={this.inputOnChange}/>
 
-         <ButtonCheckSelected className={btn} onClick={this.save}><span>√</span></ButtonCheckSelected>
-         <ButtonCheckClose className={btn} onClick={this.close}><span>×</span></ButtonCheckClose>
+      <ButtonCheckSelected className={btn} onClick={this.save}><span>√</span></ButtonCheckSelected>
+      <ButtonCheckClose className={btn} onClick={this.close}><span>×</span></ButtonCheckClose>
     </div>;
 
     const btns = <div className={`${clearfix} ${footer}`}>
       <div>
         <Checkbox className="test" checked={checkType} onChange={ this.onHandChange } />
-        </div>
+      </div>
       <div className={`${editDele} ${clearfix}`}>
         <div onClick={this.fileEdit}><Icon title="重命名文件夹" type="record" /></div>
         <div onClick={this.fileDele}><Icon title="删除文件夹" type="dustbin" /></div>
@@ -245,19 +247,19 @@ class WidgeFileItem extends Component {
           <div className={`${title_right} ${file_title_right}`}> {da.widgetName} </div>
         </div>
         {/*<div name="file" className={[context,file_context].join(' ')}>
-           { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) }
-        </div> */}
-        {this.props.currEditonlyId==id ? edit : null }
+         { da.children.map((da,i) => (<div key={"file_1001"+i}></div>)).slice(0, 9) }
+         </div> */}
+        {this.props.currEditonlyId == id ? edit : null }
         {this.props.currEditonlyId==id ? null : btns }
 
         {/*<div className={file_num}>
-          (3)
-        </div>*/}
-        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } close={this.popClose} data={da} btns={pop_btn} >
-            <div className={pop_cont}>
-              <Icon type="uf-exc-t" />
-              <span>您确认要删除服务[{this.props.data.widgetName}]?</span>
-            </div>
+         (3)
+         </div>*/}
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } type="delete" close={this.popClose} data={da} btns={pop_btn} >
+          <div className="pop_cont">
+            <BeeIcon type="uf-exc-t" className="icon"/>
+            <span>您确认要删除服务[{this.props.data.widgetName}]?</span>
+          </div>
         </PopDialog>
       </li>
     ));

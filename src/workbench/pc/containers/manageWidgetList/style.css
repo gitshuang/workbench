@@ -215,12 +215,6 @@
     height: 32px;
 }
 **/
-.pop_cont{
-    font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';
-    font-weight: 700;
-    font-style: normal;
-    font-size: 16px;
-}
 .clearfix:after{
   content:"";
   display:block;
@@ -260,11 +254,11 @@
 .pop_dialog_widge_list :global(.u-modal-dialog){
   width: 99%;
   height: 100%;
-  top: 23px;
+ /** top: 23px; **/
+  top: 61px;
 }
 .pop_dialog_widge_list :global(.u-modal-content){
   height: 100%;
-  // background-color: #EEEEEE;
 }
 
 .edit_cont .btn{

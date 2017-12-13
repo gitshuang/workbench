@@ -102,16 +102,35 @@ body {
 
 /***----------统一组价样式 弹框----------**/
 .pop_dialog_delete{
+  /**
   width: 416px;
   height: 201px;
+  **/
+  width: 370px;
+  height: 200px;
   margin: 0 auto;
   top: 60px;
   z-index: 99999;
+  border: 1px solid rgba(78,89,104,0.19);
+  box-shadow: 0 6px 8px 0 rgba(74,81,93,0.25);
+  border-radius: 3px;
 }
 .pop_dialog_delete .u-modal-dialog{
   width: auto;
 }
-
+.pop_cont{
+}
+.pop_cont .icon{
+  color: #FFAB00;
+  font-size: 20px;
+  padding-right: 5px;
+}
+.pop_cont span{
+  font-family: MicrosoftYaHei;
+  font-size: 14px;
+  color: #474D54;
+  line-height: 24px;
+}
 .input{
   width:110px;
   height:22px; 
@@ -126,4 +145,8 @@ body {
 .u-button{
   min-width: 5px;
   padding:0;
+}
+.manageDialogFolder .close{
+  top: -46px;
+  right: 20px;
 }

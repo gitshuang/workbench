@@ -52,21 +52,30 @@
 .default_line_btn{
    color:rgba(255,255,255,1);
   background:rgba(255,255,255,0.08);
-  border: 1px solid #FFFFFF;
+  border: 1px solid rgba(255,255,255,0.8);
 }
 .default_line_btn:active{
   background:rgba(252,237,236,1);
   color:rgba(225,76,70,1);
 }
+.default_line_btn:hover{
+  border: 1px solid rgba(255,255,255,0.5);
+  background:rgba(255,255,255,0.08);
+  color:rgba(255,255,255,1);
+}
+.default_line_btn:disabled{
+  color:rgba(165,173,186,1);
+  background:rgba(245,246,248,1);
+}
+/**
 .default_line_btn:visited{
  background:rgba(245,246,248,1);
  color:rgba(165,173,186,1);
  opacity:70; 
  cursor: not-allowed;
 }
-.default_line_btn:hover{
-  border: 1px solid rgba(255,255,255,0.5);
-}
+**/
+
 
 /**  默认无背景色 **/
 .default_alpha_btn{
@@ -161,8 +170,7 @@
 .warning_btn{
   font-family:PingFangSC-Regular;
   color:rgba(71,77,84,1);
-  background:rgb(243, 173, 61);
-
+  background:rgba(255,171,0,1);
 } 
 .warning_btn:hover{
   background:rgb(246, 197, 68);
@@ -170,12 +178,12 @@ font-family:PingFangSC-Medium;
 color:rgba(71,77,84,1);
 }
 .warning_btn:active{
-  background:rgb(241, 156, 65);
+  background:rgba(255,153,31,1);
   font-family:PingFangSC-Medium;
-color:rgba(71,77,84,1);
+  color:rgba(71,77,84,1);
 }
 
-.disabled_warning_btn{
-  background:rgba(9,44,66,0);
+.warning_btn:disabled{
+  background:rgba(9,44,66,0.04);
   color:rgba(165,173,186,1);
 }

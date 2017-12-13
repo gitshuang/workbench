@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import Modal from 'bee-modal';
 import Button from 'bee-button';
-import {ButtonBrand,ButtonDefaultAlpha} from 'components/button';
+import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
 import {btn,close} from './style.css';
 
 const propTypes = {
@@ -19,26 +19,28 @@ class PopDialog extends Component{
         super(props);
   }
 
+  btnClick =(e,da)=>{
+    let _data = this.props.data ? this.props.data : this;
+    if(da.fun){
+      da.fun(_data)
+    }
+  }
+
   render(){
 
-    let btns = [];
+    let _btns = [];
     if(this.props.btns){
         let _data = this.props.data ? this.props.data : this;
-        this.props.btns.map(function(da,i){
+        this.props.btns.map((da,i)=>{
             let _className = da.className ? da.className : null;
-            if(i == 0){
-              if(da.fun){
-                  btns.push(<ButtonBrand key={"pop_btn"+i} onClick={ () => { da.fun(_data) } } className={`${_className} ${btn}`} >{da.label}</ButtonBrand>);
-              }else{
-                  btns.push(<ButtonBrand key={"pop_btn"+i} className={`${_className} ${btn}`} >{da.label}</ButtonBrand>);
-              }
+            let _defultAlphaButton = <ButtonDefaultAlpha key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn}`} >{da.label}</ButtonDefaultAlpha>;
+            let _button =  null;
+            if(this.props.type == "delete"){
+               _button = i===0?<ButtonWarning key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da)} } className={`${_className} ${btn}`} >{da.label}</ButtonWarning>:_defultAlphaButton;
             }else{
-              if(da.fun){
-                  btns.push(<ButtonDefaultAlpha key={"pop_btn"+i} onClick={ () => { da.fun(_data) } } className={`${_className} ${btn}`} >{da.label}</ButtonDefaultAlpha>);
-              }else{
-                  btns.push(<ButtonDefaultAlpha key={"pop_btn"+i} className={`${_className} ${btn}`} >{da.label}</ButtonDefaultAlpha>);
-              }
+               _button = i===0?<ButtonBrand key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn}`} >{da.label}</ButtonBrand>:_defultAlphaButton;
             }
+            _btns.push(_button);
         })
     }
     return(<Modal className={this.props.className?this.props.className:"pop_dialog"} backdrop={this.props.backdrop?false:true} show = { this.props.show } onHide = { this.props.close } >
@@ -51,11 +53,11 @@ class PopDialog extends Component{
                 {this.props.children}
             </div>
 
-            <div className={close} onClick={ this.props.close } >x</div>
+            <div className={`${close} close`} onClick={ this.props.close } >x</div>
           </Modal.Body>
 
           <Modal.Footer>
-              {btns}
+              {_btns}
           </Modal.Footer>
     </Modal>)}
   }

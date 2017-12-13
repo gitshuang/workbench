@@ -84,6 +84,7 @@ const defaultGroup = {
   widgetName: '',
   type: 1,
   children: [],
+  isNew: true,
 };
 const defaultFolder = {
   type: 2,
@@ -115,6 +116,7 @@ const reducer = handleActions({
       return {
         ...state,
         manageList: payload,
+        currEditonlyId:""
       };
     }
   },
@@ -154,6 +156,7 @@ const reducer = handleActions({
       ...state,
       manageList: newManageList,
       isEdit: true,
+      currEditonlyId:""
     }
   },
   [getSelectWidgetList]: (state, { payload, error }) => {
@@ -163,6 +166,7 @@ const reducer = handleActions({
       return {
         ...state,
         selectWidgetList: payload,
+        currEditonlyId:""
       };
     }
   },
@@ -190,6 +194,7 @@ const reducer = handleActions({
       selectList:[],
       selectGroup:[],
       isEdit: true,
+      currEditonlyId:""
     }
   },
   [batchMove]: (state, {payload:toGroupIndex }) => {
@@ -220,6 +225,7 @@ const reducer = handleActions({
       selectList:[],
       selectGroup:[],
       isEdit: true,
+      currEditonlyId:""
     }
   },
   [selectGroupActions]: (state, {payload:selectGroup }) => {
@@ -228,26 +234,30 @@ const reducer = handleActions({
     return {
       ...state,
       selectGroup: selectGroup2,
+      currEditonlyId:""
     }
   },
   [selectListActions]: (state, {payload:selectList }) => {
     return {
       ...state,
       selectList: selectList,
+      currEditonlyId:""
     }
   },
   [addGroup]: (state, { payload: { index, widgetId, widgetName = '' } }) => {
     const manageList = state.manageList;
-    manageList.splice(index+1, 0, {
+    const newGroup = {
       ...defaultGroup,
       widgetId: widgetId || guid(),
       widgetName,
       children: [],
-    });
+    };
+    manageList.splice(index+1, 0, newGroup);
     return{
       ...state,
       manageList: [...manageList],
       isEdit: true,
+      currEditonlyId: newGroup.widgetId,
     }
   },
   [delectGroup]: (state, { payload: index }) => {
@@ -265,21 +275,39 @@ const reducer = handleActions({
       ...state,
       manageList: newList,
       isEdit: true,
+      currEditonlyId:""
     }
   },
   [setCurrGroupIndex]: (state, { payload: index }) => {
     return{
       ...state,
       currGroupIndex: index,
+      currEditonlyId:""
     }
   },
-  [renameGroup]: (state, { payload: {name,index} }) => {
-    let manageList = state.manageList;
-    manageList[index].widgetName = name;
+  [renameGroup]: (state, { payload: { name, index, id, dontChangeCurrEditonlyId } }) => {
+    const manageList = state.manageList;
+    let group;
+    let currEditonlyId;
+    if (typeof id !== 'undefined') {
+      group = manageList.find(({widgetId}) => {
+        return widgetId === id;
+      });
+    } else if (typeof index !== 'undefined') {
+      group = manageList[index];
+    }
+    if (dontChangeCurrEditonlyId) {
+      currEditonlyId = state.currEditonlyId;
+    } else {
+      currEditonlyId = '';
+    }
+    group.widgetName = name;
+    group.isNew = false;
     return{
       ...state,
       manageList,
       isEdit: true,
+      currEditonlyId,
     }
   },
   [moveGroup]: (state, { payload: {id,afterId} }) => {
@@ -302,6 +330,7 @@ const reducer = handleActions({
       ...state,
       isEdit: true,
       manageList,
+      currEditonlyId:""
     }
   },
   [stickGroup]: (state, { payload: index }) => {
@@ -315,6 +344,7 @@ const reducer = handleActions({
       ...state,
       manageList: newList,
       isEdit: true,
+      currEditonlyId:""
     }
   },
   [moveTopGroup]: (state, { payload: index }) => {
@@ -324,6 +354,7 @@ const reducer = handleActions({
       ...state,
       manageList: [...newList],
       isEdit: true,
+      currEditonlyId:""
     }
   },
   [moveBottomGroup]: (state, { payload: index }) => {
@@ -333,6 +364,7 @@ const reducer = handleActions({
       ...state,
       manageList: [...newList],
       isEdit: true,
+      currEditonlyId:""
     }
   },
   [addFolder]: (state, { payload: {groupIndex,id,preParentId,preType,afterId,parentId,afterType} }) => {
@@ -386,7 +418,8 @@ const reducer = handleActions({
       ...state,
       curEditFolderId: newId,
       isEdit: true,
-      manageList: [ ...manageList ]
+      manageList: [ ...manageList ],
+      currEditonlyId: newId,
     }
   },
   [deleteFolder]: (state, { payload: folderId })  => {
@@ -413,13 +446,14 @@ const reducer = handleActions({
     return{
       ...state,
       isEdit: true,
-      manageList: [ ...manageList ]
+      manageList: [ ...manageList ],
+      currEditonlyId:""
     }
   },
   [setFolderEdit]: (state, { payload: curEditFolderId }) => {
     return{
       ...state,
-      curEditFolderId
+      curEditFolderId,
     }
   },
   [cancelFolderEdit]: (state, { payload: cnaceFolder }) => {
@@ -427,7 +461,8 @@ const reducer = handleActions({
     return{
       ...state,
       curEditFolderId: false,
-      manageList: [ ...manageList ]
+      manageList: [ ...manageList ],
+      currEditonlyId:""
     }
   },
   [renameFolder]: (state, { payload: { id: folderId, value: newName } }) => {
@@ -460,12 +495,14 @@ const reducer = handleActions({
       ...state,
       isEdit: true,
       curEditFolderId: false,
-      manageList: [ ...manageList ]
+      manageList: [ ...manageList ],
+      currEditonlyId:""
     }
   },
   [splitFolder]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
+    currEditonlyId:""
   }),
   [addServe]: (state, { payload: { index: groupIndex, serve } }) => {
     const { manageList } = state;
@@ -478,6 +515,7 @@ const reducer = handleActions({
       ...state,
       isEdit: true,
       manageList: [ ...manageList ],
+      currEditonlyId:""
     }
   },
   [delectServe]: (state, { payload: {index,folder,widgetId} }) => {
@@ -504,7 +542,8 @@ const reducer = handleActions({
       ...state,
       isEdit: true,
       manageList: [...manageList],
-      curDisplayFolder: curDisplayFolder
+      curDisplayFolder: curDisplayFolder,
+      currEditonlyId:""
     }
   },
   [editTitle]: (state, { payload: {id,name} }) => {
@@ -516,6 +555,8 @@ const reducer = handleActions({
       drag:'zoomIn',
       //manageList,
       manageList: [...manageList],
+      currEditonlyId:""
+      // manageList: [...manageList],
     }
   },
   [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType,timeFlag} }) => {
@@ -574,6 +615,7 @@ const reducer = handleActions({
       isEdit: true,
       manageList,
       curDisplayFolder,
+      currEditonlyId:""
     }
   },
   [openFolder]: (state, { payload: curDisplayFolder }) => {
@@ -581,29 +623,37 @@ const reducer = handleActions({
       ...state,
       curDisplayFolder,
       folderModalDisplay: true,
+      currEditonlyId:""
     }
   },
   [closeFolder]: (state) => ({
     ...state,
     folderModalDisplay: false,
+    currEditonlyId:""
   }),
   [openBatchMove]: (state) => ({
     ...state,
     batchMoveModalDisplay: true,
+    currEditonlyId:""
   }),
   [closeBatchMove]: (state) => ({
     ...state,
     batchMoveModalDisplay: false,
+    currEditonlyId:""
   }),
   [setEditState]: (state, { payload: isEdit }) => ({
     ...state,
     isEdit,
+    currEditonlyId:""
   }),
 
-  [setEditonlyId]: (state, { payload: currEditonlyId }) => ({
-    ...state,
-    currEditonlyId,
-  }),
+  [setEditonlyId]: (state, { payload: currEditonlyId }) => {
+    return{
+      ...state,
+      currEditonlyId,
+    }
+
+  },
 }, defaultState);
 
 export default reducer;
