@@ -84,6 +84,7 @@ const defaultGroup = {
   widgetName: '',
   type: 1,
   children: [],
+  isNew: true,
 };
 const defaultFolder = {
   type: 2,
@@ -245,17 +246,18 @@ const reducer = handleActions({
   },
   [addGroup]: (state, { payload: { index, widgetId, widgetName = '' } }) => {
     const manageList = state.manageList;
-    manageList.splice(index+1, 0, {
+    const newGroup = {
       ...defaultGroup,
       widgetId: widgetId || guid(),
       widgetName,
       children: [],
-    });
+    };
+    manageList.splice(index+1, 0, newGroup);
     return{
       ...state,
       manageList: [...manageList],
       isEdit: true,
-      currEditonlyId:""
+      currEditonlyId: newGroup.widgetId,
     }
   },
   [delectGroup]: (state, { payload: index }) => {
@@ -283,14 +285,29 @@ const reducer = handleActions({
       currEditonlyId:""
     }
   },
-  [renameGroup]: (state, { payload: {name,index} }) => {
-    let manageList = state.manageList;
-    manageList[index].widgetName = name;
+  [renameGroup]: (state, { payload: { name, index, id, dontChangeCurrEditonlyId } }) => {
+    const manageList = state.manageList;
+    let group;
+    let currEditonlyId;
+    if (typeof id !== 'undefined') {
+      group = manageList.find(({widgetId}) => {
+        return widgetId === id;
+      });
+    } else if (typeof index !== 'undefined') {
+      group = manageList[index];
+    }
+    if (dontChangeCurrEditonlyId) {
+      currEditonlyId = state.currEditonlyId;
+    } else {
+      currEditonlyId = '';
+    }
+    group.widgetName = name;
+    group.isNew = false;
     return{
       ...state,
       manageList,
       isEdit: true,
-      currEditonlyId:""
+      currEditonlyId,
     }
   },
   [moveGroup]: (state, { payload: {id,afterId} }) => {
@@ -402,7 +419,7 @@ const reducer = handleActions({
       curEditFolderId: newId,
       isEdit: true,
       manageList: [ ...manageList ],
-      currEditonlyId:newId
+      currEditonlyId: newId,
     }
   },
   [deleteFolder]: (state, { payload: folderId })  => {
