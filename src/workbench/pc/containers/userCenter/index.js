@@ -217,17 +217,19 @@ class UserInfoContainer extends Component {
           getPopupContainer = {()=> document.getElementById("modalId")}
         >
           <Option name="userInfo" value="userInfo" >个人信息</Option>
-          <Option name="accountManagement" value="accountManagement" >帐号管理</Option>
+          <Option name="accountManagement" value="accountManagement" >帐号设置</Option>
           <Option name="safetyPick" value="safetyPick" >安全评级</Option>
           <Option name="password" value="password" >修改密码</Option>
           {/* <Option name="cutuser" value="cutuser">切换企业帐号</Option> */}
         </Select>
     }else{
       renderAllow = <Select
-        defaultValue="帐号管理" name="456"
+        defaultValue="帐号设置" name="456"
         onChange={this.handleChange2}
         getPopupContainer = {()=> document.getElementById("modalId")}
       >
+        <Option name="userInfo" value="userInfo" >个人信息</Option>
+        <Option name="accountManagement" value="accountManagement" >帐号设置</Option>
         <Option name="safetyPick" value="safetyPick" >安全评级</Option>
         <Option name="password" value="password" >修改密码</Option>
       </Select>
