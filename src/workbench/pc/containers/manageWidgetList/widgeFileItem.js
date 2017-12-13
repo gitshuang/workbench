@@ -38,7 +38,7 @@ const itemTarget = {
     const preFolderType = monitor.getItem().folderType;
 
     //添加大于1.5s的标记 判断是否拖入文件夹里面
-    const timeFlag = (new Date().getTime() - timestamp > 1500);
+    const timeFlag = (new Date().getTime() - timestamp > 1000);
     if (draggedId !== props.id && preFolderType!=="folder") {
       props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag,props.data);
     }
@@ -66,6 +66,7 @@ function collectTaget(connect, monitor) {
     'selectList',
     'selectGroup',
     'currEditonlyId',
+    'drag',
     {
       namespace: 'manage',
     }
@@ -233,13 +234,14 @@ class WidgeFileItem extends Component {
         <div onClick={this.fileDele}><Icon title="删除文件夹" type="dustbin" /></div>
       </div>
     </div>
-    const { connectDragSource, connectDropTarget,isDragging } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,drag } = this.props;
     const opacity = isDragging ? 0 : 1;
     if (isDragging) {
-      return null
+      //return null
     }
+    // ${isDragging ? 'rollOut':'slideInRight'}
     return connectDragSource(connectDropTarget(
-      <li name="file" className={`${widgetItem} ${widgetFileItem}`} style={{...opacity }} onClick={this.props.onClick}>
+      <li name="file" className={`${widgetItem} ${widgetFileItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag} `} style={{...opacity }} onClick={this.props.onClick}>
         <div className={title}>
           <div className={[title_left,file_icon].join(' ')}></div>
           <div className={`${title_right} ${file_title_right}`}> {da.widgetName} </div>

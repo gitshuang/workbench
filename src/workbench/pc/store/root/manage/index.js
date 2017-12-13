@@ -548,10 +548,13 @@ const reducer = handleActions({
   },
   [editTitle]: (state, { payload: {id,name} }) => {
     let manageList = state.manageList;
-
+    //manageList = JSON.parse(JSON.stringify(manageList));
     return{
       ...state,
       title: name,
+      drag:'zoomIn',
+      //manageList,
+      manageList: [...manageList],
       currEditonlyId:""
       // manageList: [...manageList],
     }

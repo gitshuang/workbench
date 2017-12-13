@@ -26,6 +26,7 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
   mapStateToProps(
     'manageList',
     'curEditFolderId',
+    'drag',
     {
       namespace: 'manage',
     }
@@ -81,8 +82,8 @@ class WidgetList extends Component {
   }
   editTitle = (id,name) => {
     let data = {id,name}
-    // const { editTitle } = this.props;
-    // editTitle(data);
+    const { editTitle } = this.props;
+    editTitle(data);
   }
 
   widgeOnclick = (e,da) => {
@@ -106,7 +107,7 @@ class WidgetList extends Component {
 
   render() {
 
-      const { data,index } = this.props;
+      const { data,index,drag } = this.props;
       // const pop_btn = [
       //   {label:"确认",fun:this.popSave,className:""},
       //   {label:"取消",fun:this.popClose,className:""}
@@ -130,6 +131,7 @@ class WidgetList extends Component {
                 id={id}
                 parentId={parentId}
                 index={id}
+                drag={drag}
                 propsIndex={index}
                 type={type}
                 moveItemDrag={this.moveItemDrag}
@@ -140,6 +142,8 @@ class WidgetList extends Component {
           default:
             return (
               <WidgetItem
+                ref={id}
+                drag={drag}
                 key={`widget-${id}-${i}`}
                 data={item}
                 id={id}
