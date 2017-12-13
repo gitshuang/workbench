@@ -15,6 +15,7 @@ import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
 import BeeIcon from 'bee-icon';
+import Checkbox from 'bee-Checkbox';
 import WidgetList from 'containers/manageWidgetList';
 import {
   widgetTitle,
@@ -269,7 +270,9 @@ class ManageGroup extends Component {
       selectGroupActions,
       selectGroup,
     } = this.props;
-    const checkFlag = e.target.checked;
+    //const checkFlag = e.target.checked;
+    // 换成checkbox插件
+    const checkFlag = e;
     const aa = manageList[index].children.map((item,index)=>{
       return item.widgetId;
     });
@@ -399,10 +402,10 @@ class ManageGroup extends Component {
     }else {
       groupTitle = (
         <div className={`${widgetTitle} um-box-justify`} >
-          <label>
-            <input type="checkbox" checked={checkType} onChange={ this.selectFn(index) }/>
-            <span>{widgetName}</span>
-          </label>
+          <div>
+            <Checkbox checked={checkType} onChange={ this.selectFn(index) }>{widgetName}</Checkbox>
+          </div>
+
           <div className="clearfix">
             <div className={iconBox}>
               <Icon title="重命名分组" type="record" onClick={ ()=>{this.openRenameGroupFn(widgetId)}} />
