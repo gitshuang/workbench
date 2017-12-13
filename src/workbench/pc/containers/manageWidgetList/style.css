@@ -222,6 +222,9 @@
   clear: both;
   visibility: hidden;
 }
+.clearfix i{
+  font-size: 18px;
+}
 .addModule{
   float: left;
   width:176px;

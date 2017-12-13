@@ -40,9 +40,11 @@
   -webkit-box-flex:1;
   line-height:33px;
 }
+/**
 .breadcrumbClass :global(.u-breadcrumb){
-  margin-top: -3px;
+  color: #9a9a9a;
 }
+**/
 .breadcrumbClass :global(.u-breadcrumb) li:last-child{
   color:#4A515D;
 }
