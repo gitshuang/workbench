@@ -282,7 +282,7 @@ const reducer = handleActions({
     return{
       ...state,
       currGroupIndex: index,
-      currEditonlyId:""
+      //currEditonlyId:""
     }
   },
   [renameGroup]: (state, { payload: { name, index, id, dontChangeCurrEditonlyId } }) => {
