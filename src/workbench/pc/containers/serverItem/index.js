@@ -26,8 +26,8 @@ class ServerItem extends Component {
     if(selected){
       if(selected == "1"){
          btn = (<div >
-            <Icon title="已添加"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
             <span>已添加</span>
+            <Icon title="已添加"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
          </div>);
       }else if(selected == "2"){
         btn = (<div onClick={()=>{this.props.onChange(this.props.data,"3")}}  >

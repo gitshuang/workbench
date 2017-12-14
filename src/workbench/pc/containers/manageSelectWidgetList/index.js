@@ -196,6 +196,7 @@ class SelectWidgetList extends Component {
        <div className={widget_left}>
           <div className={title}>添加服务</div> 
        </div>
+       
        <div className={widget_right}>
           <div className={searchPanel}>
               <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
