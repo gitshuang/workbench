@@ -1,6 +1,6 @@
 .content{
-  overflow: scroll;
-  max-height: 600px;
+  overflow: auto;
+  height: 400px;
 }
 
 :global( .manageDialogFolder .folderDialog){
