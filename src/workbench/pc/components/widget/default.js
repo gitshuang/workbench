@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
+import Icon from 'components/icon';
 import {
   widgetItem,
   title,
@@ -11,6 +12,7 @@ import {
   content,
   defaultArea,
   iconImg,
+  default_icon
 } from './style.css'
 
 const widgetStyle = [
@@ -46,7 +48,7 @@ class WidgetItem extends Component {
       ...widgetStyle[size - 1],
       backgroundImage: `url(${background})`,
     };
-
+    console.log("icon____"+icon);
     return (
       <li className={`${widgetItem} ${defaultArea}`}
         style={style}
@@ -54,7 +56,9 @@ class WidgetItem extends Component {
         <div className={title}>
           <div className={title_right}>{name}</div>
         </div>
-        <img src={icon} className={iconImg}/>
+        {
+          icon?<img src={icon} className={iconImg}/>:<Icon className={`${iconImg} ${default_icon}`} type="instrument-2" />
+        }
       </li>
     );
   }
