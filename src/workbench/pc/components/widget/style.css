@@ -53,8 +53,8 @@
   position: absolute;
   width: 65px;
   height: auto;
-  right: 50%;
-  bottom: 50%;
+  right: 50px;
+  bottom: 65px;
   transform: translate(50%,50%);
 }
 
