@@ -19,7 +19,7 @@ import img5 from 'assets/image/wgt/relation.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,
+  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,select_cont
 } from './style.css';
 
 const {
@@ -294,8 +294,8 @@ class UserInfoContainer extends Component {
             <li>
               {renderAllow}
             </li>
-            <li>
-              <Select
+            <li className={select_cont}>
+              <Select 
                 defaultValue="系统设置" name="123"
                 onChange={this.handleChange}
                 getPopupContainer = {()=> document.getElementById("modalId")}

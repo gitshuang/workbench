@@ -222,12 +222,14 @@ class WidgeFileItem extends Component {
       <FormControl className={`${form_control} input`} value={this.state.value} onChange={this.inputOnChange}/>
 
       <ButtonCheckSelected className={btn} onClick={this.save}><span>√</span></ButtonCheckSelected>
-      <ButtonCheckClose className={btn} onClick={this.close}><span>×</span></ButtonCheckClose>
+      <ButtonCheckClose className={btn} onClick={this.close}>
+        <span>×</span>
+      </ButtonCheckClose>
     </div>;
 
     const btns = <div className={`${clearfix} ${footer}`}>
       <div>
-        <Checkbox className="test" checked={checkType} onChange={ this.onHandChange } />
+        <Checkbox className="test" size="sm" checked={checkType} onChange={ this.onHandChange } />
       </div>
       <div className={`${editDele} ${clearfix}`}>
         <div onClick={this.fileEdit}><Icon title="重命名文件夹" type="record" /></div>

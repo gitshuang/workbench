@@ -248,7 +248,7 @@ class Home extends Component {
           <ManageFolderDialog />
         </div>
         <ManageBatchMoveDialog />
-        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } close={this.popClose} btns={pop_btn} >
+        <PopDialog className="pop_dialog_delete" type="delete" show = { this.state.showModal } close={this.popClose} btns={pop_btn} >
           <div>
             <span>您确认要批量删除吗?</span>
           </div>

@@ -4,7 +4,7 @@ var config = {
   env: '"production"',
   assetsSubDirectory: 'static',
   // assetsPublicPath: 'https://cdn.yonyoucloud.com/',
-  assetsPublicPath: 'http://s4ofo45k.9194af05-6466-4f8c-8c41-40768e0ee4f5.app.yyuap.com/',
+  assetsPublicPath: 'http://workbench.yyuap.com/fe/',
 
   productionSourceMap: true,
   // Gzip off by default as many popular static hosts such as

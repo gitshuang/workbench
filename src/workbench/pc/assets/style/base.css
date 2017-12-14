@@ -150,3 +150,16 @@ body {
   top: -46px;
   right: 20px;
 }
+.u-tabs-tab{
+  padding-left: 0px !important;
+}
+.u-checkbox span{
+  padding-top: 4px;
+  color: #888;
+}
+.u-select-dropdown .u-select-dropdown-menu-item{
+  border-top: 1px solid rgba(78,89,104,0.19);
+}
+.u-select-dropdown{
+  margin-top: 10px;
+}

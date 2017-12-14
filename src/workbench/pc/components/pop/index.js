@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import Modal from 'bee-modal';
 import Button from 'bee-button';
+import Icon from 'components/icon';
 import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
 import {btn,close} from './style.css';
 
@@ -53,7 +54,7 @@ class PopDialog extends Component{
                 {this.props.children}
             </div>
 
-            <div className={`${close} close`} onClick={ this.props.close } >x</div>
+            <div className={`${close} close`} onClick={ this.props.close } ><Icon type="error3" /></div>
           </Modal.Body>
 
           <Modal.Footer>
