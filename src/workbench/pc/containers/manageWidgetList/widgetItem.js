@@ -25,7 +25,8 @@ import {
   pop_cont,
   widgetItemCont,
   editDele,
-  clearfix
+  clearfix,
+  widget_node
 } from './style.css'
 
 const type='item';
@@ -248,7 +249,7 @@ class WidgetItem extends Component {
     }
     const {title} = this.state;
     return connectDragSource(connectDropTarget(
-      <li title={title} className={`${widgetItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag}` } style={{...widgetStyle[size - 1],...opacity }} >
+      <li title={title} className={`${widgetItem} ${widget_node} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag}` } style={{...widgetStyle[size - 1],...opacity }} >
         <div className={title}>
           <div className={title_right}>{widgetName}</div>
         </div>

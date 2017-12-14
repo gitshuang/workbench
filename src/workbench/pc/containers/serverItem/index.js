@@ -20,8 +20,6 @@ class ServerItem extends Component {
 
   render() {
     const {serveId, serveName,selected} = this.props.data;
-    console.log("=====ServerItem========this.props.data============");
-    console.log(this.props.data);
     let btn = null;
     if(selected){
       if(selected == "1"){

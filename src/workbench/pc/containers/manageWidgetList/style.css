@@ -70,8 +70,12 @@
   color:#4A515D;
 }
 .file_title_right{
-  margin:58px 0 0 -17px;
+  margin-top: 3px;
+  margin-left: -17px;
   color:#fff;
+}
+.widget_node{
+  padding-top: 13px;
 }
 .widgetItem .content {
   position: relative;

@@ -55,9 +55,7 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-    if(!this.state.edit){
-      this.getServices();
-    }
+    this.getServices();
   }
 
   getServices(parme){
