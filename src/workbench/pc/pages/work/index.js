@@ -39,7 +39,6 @@ const {
 @connect(
   mapStateToProps(
     'widthBrm',
-    'domainName',
     'pinType',
     'pinDisplay',
     'current',
@@ -48,6 +47,12 @@ const {
     'titleServiceType',
     'expandedSidebar',
     'type',
+    {
+      key: 'domainName',
+      value: ({ domainName, type }) => {
+        return type === 1 ? '' : domainName;
+      },
+    },
     {
       namespace: 'work'
     }
