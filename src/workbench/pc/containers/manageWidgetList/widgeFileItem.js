@@ -38,7 +38,7 @@ const itemTarget = {
     const preFolderType = monitor.getItem().folderType;
 
     //添加大于1.5s的标记 判断是否拖入文件夹里面
-    const timeFlag = (new Date().getTime() - timestamp > 1000);
+    const timeFlag = (new Date().getTime() - timestamp > 1500);
     if (draggedId !== props.id && preFolderType!=="folder") {
       props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag,props.data);
     }
@@ -208,7 +208,7 @@ class WidgeFileItem extends Component {
   }
 
   render() {
-    
+
     const da = this.props.data;
     const id = da.widgetId;
     const {selectList} = this.props;

@@ -36,7 +36,7 @@ const itemSource = {
     // props.editTitle(props.id,props.data.widgetName);
     timestamp=new Date().getTime();
     window.timestamp = timestamp;
-    return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType};
+    return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType,dragType:props.dragType};
   },
 
   endDrag(props, monitor, component){
@@ -69,10 +69,11 @@ const itemTarget = {
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
     const preFolderType = monitor.getItem().folderType;
+    const dragType = monitor.getItem().dragType;
 
-    if (draggedId !== props.id && preType !==1) {
-      let timeOut = (new Date().getTime() - timestamp > 1000);
-      if(timeOut && preType === 3 && props.data.type === 3 && preFolderType!=="folder" && props.folderType!=="folder"){
+    if (draggedId !== props.id && preType !==1  && ((preFolderType!=="folder" && props.folderType!=="folder") || (dragType==="dragInFolder" && props.dragType==="dragInFolder"))) {
+      let timeOut = (new Date().getTime() - timestamp > 1500);
+      if(timeOut && preType === 3 && props.data.type === 3){
         //放上去停留大于2s创建文件夹
         props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeOut);
       }else {

@@ -89,7 +89,7 @@ const itemTarget = {
       !props.data.parentId && (afterParentId = props.data.widgetId);
       //因为冒泡 所以已经有的话 不需要执行move
       let dataItem = findItemById(props.data.children,draggedId);
-      if(folderType==="folder" || (typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId))){
+      if(folderType==="folder" || typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)){
         //folderType==="folder" 从文件夹把元素往分组里拖拽
         props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }
