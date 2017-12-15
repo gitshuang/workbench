@@ -77,6 +77,7 @@ const reducer = handleActions({
         ...state,
         current: {
           ...defaultState.current,
+          hasRelationFunc: state.crurent.hasRelationFunc,
           menuItemId: currentId,
           title: name,
           serveCode,
@@ -90,6 +91,7 @@ const reducer = handleActions({
         ...state,
         current:{
           ...defaultState.current,
+          hasRelationFunc: state.crurent.hasRelationFunc,
           menuItemId: currentId,
           title: name,
           serveCode,
