@@ -38,7 +38,7 @@ class HeaderPage extends Component {
         logo,
       }
     } = this.props;
-    return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
+    // return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
   }
   goback = () => {
     this.props.history.goBack();
