@@ -20,7 +20,7 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
 import { select_widget_list,
 widget_left,widget_right,search_icon,search_icon_con,
   searchPanel,panel,left,panel_right,button_group,form_control,icon,
-panel_left,footer_btn,title
+panel_left,footer_btn,title,search_tit
 } from './style.css'
 
 @connect(
@@ -200,7 +200,8 @@ class SelectWidgetList extends Component {
               <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
-                  <Icon type="search" className={search_icon}><span>搜索</span></Icon>
+                  <Icon type="search" className={search_icon}></Icon>
+                  <span className={search_tit}>搜索</span>
               </div>
            </div>
            <div className={panel} >

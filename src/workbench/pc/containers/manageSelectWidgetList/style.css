@@ -96,18 +96,22 @@
   position: absolute;
   top: 0px;
   left: 360px;
-}
-.search_icon>span{
-  color:rgba(71,77,84,1);
-  font-size:12px;
-  margin-left: 10px;
+  display: flex;
 }
 .search_icon_con :global(.iconfont){
   color:#878B94;
   font-size:20px;
   font-weight:bold;
   margin-left: 10px;
+  box-flex:1;
+  line-height:38px;
 }
 .search_icon_con > span{
   color: rgba(217,217,217,1);
+  box-flex:1;
+  line-height:38px;
+}
+.search_icon_con .search_tit{
+  color:rgba(74,81,93,1);
+  margin-left:8px;
 }

@@ -21,6 +21,7 @@ import {
   menuBtnGroup,
   link,
   icon,
+  u_button_tit
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -194,7 +195,9 @@ class serviceClassify extends Component {
               />
               <InputGroup.Button>
                 <Button>
+                  <span>|</span>
                   <Icon title="搜索" type="search" className={ufSearch}></Icon>
+                  <span className={u_button_tit}>搜索</span>
                 </Button>
               </InputGroup.Button>
             </InputGroup>

@@ -48,6 +48,24 @@
 .wrap :global(.u-input-group .u-button){
 	border-color:#D9D9D9;
 }
+.wrap :global(.u-input-group-btn .u-button){
+	width:100px;
+	border-left:none;
+	display: flex;
+}
+.wrap :global(.u-input-group .u-button)>span{
+	color:#D9D9D9;
+	line-height:38px;
+	box-flex:1;
+	margin:0 11px;
+}
+.wrap :global(.u-input-group .u-button .iconfont){
+	box-flex:1;
+	line-height:38px;
+}
+.wrap :global(.u-input-group .u-button) .u_button_tit{
+	color:#4A515D;
+}
 .wrap :global(.u-autocomplete-options){
 	background:#fff;
 }
