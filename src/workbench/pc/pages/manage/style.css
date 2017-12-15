@@ -72,3 +72,6 @@ body{
 	position:fixed;
 	bottom: 0;
 }
+:global(.cancelModal ){
+
+}

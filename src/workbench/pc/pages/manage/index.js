@@ -227,8 +227,8 @@ class Home extends Component {
       {label:"取消",fun:this.popClose,className:""}
     ]
     const pop_btn2 = [
-      {label:"保存",fun:this.save,className:""},
       {label:"不保存",fun:this.cancel,className:""},
+      {label:"保存",fun:this.save,className:""},
       {label:"取消",fun:this.popCloseCancel,className:""}
     ]
     const list = [];
@@ -267,7 +267,7 @@ class Home extends Component {
             <span>您确认要批量删除吗?</span>
           </div>
         </PopDialog>
-        <PopDialog className="pop_dialog_delete" show = { this.state.showCancelModal } close={this.popCloseCancel} btns={pop_btn2} title={"是否保存最新修改？"} >
+        <PopDialog className="pop_dialog_delete cancelModal" show = { this.state.showCancelModal } close={this.popCloseCancel} btns={pop_btn2} title={"是否保存最新修改？"} >
           <div>
             <span>点击不保存，则最新修改将丢失</span>
           </div>
