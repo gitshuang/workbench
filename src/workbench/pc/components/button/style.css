@@ -103,7 +103,7 @@
   width:22px;
   height:22px; 
   color:rgb(118, 127, 139);
-  border: 1px solid rgba(117,127,140,1);
+  // border: 1px solid rgba(117,127,140,1);
   background: transparent;
   margin: 0px;
   margin-left:2px;
@@ -114,7 +114,7 @@
 }
 .check_selected_btn:hover{
   color: rgba(45,63,93,1);
-  border: 1px solid rgba(45,63,93,1);
+  // border: 1px solid rgba(45,63,93,1);
 }
 
 .disabled_check_selected_btn{
@@ -126,7 +126,7 @@
   width:22px;
   height:22px;
   color:rgb(118, 127, 139);
-  border: 1px solid rgba(117,127,140,1);
+  // border: 1px solid rgba(117,127,140,1);
   background: transparent;
   margin: 0px;
   margin-left:2px;
@@ -138,7 +138,7 @@
 
 .check_close_btn:hover{
   color: rgba(68,70,81,1);
-  border: 1px solid rgba(68,70,81,1);
+  // border: 1px solid rgba(68,70,81,1);
 }
 
 .disabled_check_close_btn{

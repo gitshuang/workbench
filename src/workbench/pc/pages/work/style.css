@@ -50,3 +50,13 @@ body{
 .title_service_display{
   color:#E14C46 !important;
 }
+.work :global(.lebra-navbar-left){
+  padding-left: 7px;
+}
+.work :global(.lebra-navbar-left-content){
+  margin-left: 8px;
+}
+.work :global(.lebra-navbar-title .um-box){
+  margin-left: 30px;
+}
+

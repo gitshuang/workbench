@@ -24,9 +24,8 @@
 }
 .breadcrumbClass {
   background:#fff;
-  height:38px;
+  height:35px;
   line-height:35px;
-  // display:inline-block;
   display:flex;
 }
 .breadcrumbClass a{

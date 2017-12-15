@@ -21,7 +21,7 @@ import Pin from 'containers/pin';
 import styles from './style.css';
 
 /*  定义style  css-loader  */
-const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display,header,active} = styles;
+const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display,header,active,work} = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {
@@ -256,7 +256,7 @@ export default class Work extends Component {
     const { loaded } = this.state;
     let iconName = <Icon title="返回首页" type="home"/>
     return (
-      <div className={wrap + " um-win"}>
+      <div className={`${wrap} um-win ${work}`}>
         <div className={header}>
           <div className="um-header">
             <HeaderContainer onLeftClick={ this.goBack } iconName={iconName} leftContent={ domainName }>
