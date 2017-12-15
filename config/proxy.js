@@ -14,7 +14,8 @@ var api = [
   '/getSelectWidgetList',
   '/setManageList',
   '/getManageList',
-
+  '/getLatestAccess',
+  '/getPromotionService',
 ]
 
 var rapApi = [

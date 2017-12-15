@@ -165,12 +165,12 @@
 .wrap :global(.u-button-group-vertical){
 	border-right: 1px solid #DDE0E3;
 }
+*/
+
 .wrap :global(.u-button-group-vertical .active){
 	background:rgba(239,239,239,1);
 	color:#E14C46;
 }
-*/
-
 .link {
   width:160px;
   height:52px;

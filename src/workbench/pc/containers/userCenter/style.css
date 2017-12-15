@@ -193,20 +193,15 @@
   float : left;
 }
 .serviceImg img{
-  margin-left:-41%;
-  margin-top:-41%;
+  width: 100%;
+  height: 100%;
 }
 .serviceImg section{
   width:48px;
   height:48px;
-  margin:14px 27px 5px 5px;
   border:1px solid #D9D9D9;
   border-radius:3px;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-flex : 1;
-  -webkit-box-align:center;
-  -webkit-box-pack:center;
 }
 .serviceName{
   width:48px;
@@ -286,18 +281,24 @@
   float: right;
 }
 .usedModule{
-  width:284px;
+  width: 100%;
   height:100%;
+  margin-left: 10px;
   box-flex:1;
 }
 .module{
   height:26px;
 }
 .usedIcon{
-  width:67px;
-  height:55px;
+  width:48px;
+  height:48px;
   box-flex:1;
 }
+.usedIcon>img{
+  width: 100%;
+  height: 100%;
+}
+
 .tabPane1 :global(.iconfont),.tabPane2 :global(.iconfont){
   float: left;
   color:#B9BABB;
