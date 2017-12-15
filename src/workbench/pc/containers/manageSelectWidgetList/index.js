@@ -200,7 +200,7 @@ class SelectWidgetList extends Component {
               <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
-                  <Icon type="uf-search" size="lg"  className={search_icon}>  搜索</Icon>
+                  <Icon type="search" className={search_icon}><span>搜索</span></Icon>
               </div>
            </div>
            <div className={panel} >
