@@ -32,7 +32,7 @@ const defaultState = {
     title: '',
     serveCode: '',
     serveId: '',
-    hasRelationFunc: false,
+    hasRelationFunc: true,
     relationUsers: [],
     relationServes: [],
   },
@@ -162,10 +162,10 @@ const reducer = handleActions({
       current,
     } = state;
 
-    let hasRelationFunc = false;
-    if ((relationServes && relationServes.length) ||
-        (relationUsers && relationUsers.length)) {
-      hasRelationFunc = true;
+    let hasRelationFunc = true;
+    if (!(relationServes && relationServes.length) &&
+        !(relationUsers && relationUsers.length)) {
+      hasRelationFunc = false;
     }
     return {
       ...state,

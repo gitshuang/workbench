@@ -21,7 +21,21 @@ import Pin from 'containers/pin';
 import styles from './style.css';
 
 /*  定义style  css-loader  */
-const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display,header,active,work} = styles;
+const {
+  workArea,
+  sideBarArea,
+  contentArea,
+  hasTab,
+  tabArea,
+  wrap,
+  title_service_display,
+  header,
+  active,
+  work,
+  titleArea,
+  service,
+  pin,
+} = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {
@@ -248,7 +262,7 @@ export default class Work extends Component {
       current: {
         title,
         hasRelationFunc,
-        },
+      },
       domainName,
       widthBrm,
       type,
@@ -260,21 +274,26 @@ export default class Work extends Component {
         <div className={header}>
           <div className="um-header">
             <HeaderContainer onLeftClick={ this.goBack } iconName={iconName} leftContent={ domainName }>
-              <div className={"um-box"}>
+              <div className={titleArea}>
                 <span>{ title }</span>
                 {
                   hasRelationFunc ?
                     (<Icon
                       title="相关服务"
                       type="pull-down"
-                      style={{marginLeft:"15px",fontSize:"18px",fontWeight:900}}
-                      className={titleServiceType?title_service_display:""}
+                      className={`
+                        ${titleServiceType?title_service_display:""}
+                        ${service}
+                      `}
                       onClick={ titleServiceDisplay }/>) : undefined
                 }
                 <Icon
                   title="添加到首页"
+                  className={pin}
+                  style={{
+                    right: hasRelationFunc ? '-70px' : '-35px',
+                  }}
                   type={pinType?"pin2":"pin"}
-                  style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                   onClick={ this.pinDisplayFn }
                 />
               </div>
