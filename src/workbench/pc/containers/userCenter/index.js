@@ -295,7 +295,7 @@ class UserInfoContainer extends Component {
               {renderAllow}
             </li>
             <li className={select_cont}>
-              <Select 
+              <Select
                 defaultValue="系统设置" name="123"
                 onChange={this.handleChange}
                 getPopupContainer = {()=> document.getElementById("modalId")}

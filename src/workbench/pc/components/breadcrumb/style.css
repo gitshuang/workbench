@@ -24,9 +24,14 @@
 }
 .breadcrumbClass {
   background:#fff;
+<<<<<<< HEAD
   height:38px;
   line-height:35px;
   // display:inline-block;
+=======
+  height:35px;
+  line-height:35px;
+>>>>>>> 样式修改12.15
   display:flex;
 }
 .breadcrumbClass a{
