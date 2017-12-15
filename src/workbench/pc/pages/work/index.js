@@ -179,14 +179,7 @@ export default class Work extends Component {
         if (error) {
           requestError(payload);
         }
-        Message.config({
-          top: 0,  //顶上显示时距顶部的位置
-          bottom: 20, //左下右下显示时距底部的位置
-          defaultBottom: 20, //底部显示时距底部的位置
-          duration: 20, //显示持续时间
-          width: 500 //左下左上右下右上显示时的宽度
-        });
-        Message.create({content: '从首页移除成功', position: 'top', color: "success"});
+        Message.create({content: '从首页移除成功',duration:2,position: 'top', color: "success"});
         requestSuccess();
       });
       return false;
