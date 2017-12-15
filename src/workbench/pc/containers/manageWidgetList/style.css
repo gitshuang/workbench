@@ -171,9 +171,8 @@
   z-index: 1;
   overflow: hidden;
   top: 20px;
-  padding:5px;
+  padding-left: 15px;
   box-sizing: border-box;
-  background: #fff;
 }
 .edit_btn{
    display: -webkit-box;
@@ -260,7 +259,7 @@
 }
 .pop_dialog_widge_list :global(.u-modal-dialog){
   width: 99%;
-  
+  padding-left:0;
  /**height: 100%;
   top: 23px; **/
   margin-top: 91px;
