@@ -91,6 +91,7 @@ class Home extends Component {
   componentDidMount() {
     this.getManageList();
   }
+
   getManageList() {
     const {
       requestStart,
@@ -107,6 +108,8 @@ class Home extends Component {
       return error;
     });
   }
+
+
 
   //  保存
   save = () => {
@@ -131,25 +134,29 @@ class Home extends Component {
   // 取消
   cancel = () => {
     const {
-      isEdit,
+      //isEdit,
       setEditState,
     } = this.props;
+    /*
     if(isEdit){
       this.getManageList().then((error) => {
         if (!error) {
-          setEditState(false);
+
         }
+        setEditState(false);
       });
     }else{
       this.goBack();
-    }
+    }*/
+    setEditState(false);
     this.popCloseCancel();
+    this.goBack();
   }
   // 返回操作
   goBack = () => {
     this.props.history.goBack();
   }
-  //
+  //批量删除
   batchDelectFn = () => {
     const { batchDelect } = this.props;
     batchDelect();
@@ -160,22 +167,28 @@ class Home extends Component {
     const { openBatchMove } = this.props;
     openBatchMove();
   }
-
+  // 打开删除的弹窗
   popOpen = () => {
     this.setState({
       showModal: true
     });
   }
+  // 关闭删除的弹窗
   popClose = () => {
     this.setState({
       showModal: false
     });
   }
-  // 打开弹窗取消
+  // 打开取消的弹窗
   popOpenCancel = () => {
-    this.setState({
-      showCancelModal: true
-    });
+    const {isEdit} = this.props;
+    if(isEdit){
+      this.setState({
+        showCancelModal: true
+      });
+    }else{
+      this.goBack();
+    }
   }
   // 关闭取消的弹窗
   popCloseCancel = () => {
@@ -241,6 +254,7 @@ class Home extends Component {
             <div className={`${saveArea}  horizontalParent`}>
               <ButtonBrand disabled={!isEdit} onClick={this.save}>保存</ButtonBrand>
               <ButtonDefaultLine onClick={this.popOpenCancel} >取消</ButtonDefaultLine>
+              {/*<ButtonDefaultLine onClick={this.goBack}>取消</ButtonDefaultLine>*/}
             </div>
           </div>
         </div>
