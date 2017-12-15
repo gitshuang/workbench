@@ -92,28 +92,14 @@
 	text-align: left;
 	border-radius:0;
 }
-.menuBtnGroup :global(.u-button):hover{
+.menuBtnGroup :global(.u-button):hover,
+.wrap :global(.u-button-group-vertical .active){
 	background:rgba(239,239,239,1);
 	color:#E14C46;
 }
 .appContent{
 	padding-left: 16px;
 }
-/*
-.appContent img{
-	width:32px;
-	height:32px;
-	background:rgba(216,216,216,1);
-	border-radius: 3px ;
-}
-.appContent span{
-	font-size:14px;
-	font-family:MicrosoftYaHei;
-	line-height:32px;
-	color:rgba(74,81,93,1);
-	margin-left:8px;
-}
-*/
 
 .appContent header{
 	padding-bottom:8px;
@@ -123,6 +109,8 @@
 .appContent header img{
   width:32px;
   height:32px;
+	background:rgba(216,216,216,1);
+	border-radius: 3px ;
 }
 .appContent header span{
   display: inline-block;
@@ -141,36 +129,6 @@
   padding-bottom: 48px;
 }
 
-/*
-.clearfix{
-  overflow: hidden;
-}
-.singleService{
-	float: left;
-	width:228px;
-	height:100px;
-	padding:40px 0 0 13px;
-	margin-right: 20px;
-	border-bottom:1px solid #DDE0E3;
-}
-.services{
-  width:346px;
-  height:68px;
-}
-.serviceInfo{
-  float: left;
-  height:26px;
-  margin-left:8px;
-}
-.wrap :global(.u-button-group-vertical){
-	border-right: 1px solid #DDE0E3;
-}
-*/
-
-.wrap :global(.u-button-group-vertical .active){
-	background:rgba(239,239,239,1);
-	color:#E14C46;
-}
 .link {
   width:160px;
   height:52px;
