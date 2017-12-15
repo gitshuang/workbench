@@ -61,7 +61,7 @@ class ContentContainer extends Component {
     } else {
       return (
         <div className={contentArea} >
-          <div className={content} >
+          <div className={`${content} ${active}`} >
             <IFrame title={currentId} url={appendSearchParam(currentLocation, { serveCode: curServeCode })} />
           </div>
         </div>

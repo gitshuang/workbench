@@ -23,22 +23,28 @@ import {
 
 const {
   delTab,
+  unshiftTab,
+  setTabs,
 } = actions;
 
 const tabWidth = 160;
 const tabMargin = 1;
 const moreBtnWidth = 19;
-const getTabsAndMores = (totalTabs, areaWidth) => {
+const deviation = 108;
+const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
   let mores = [];
   let tabs = totalTabs;
-  const maxTabsNum = Math.floor((areaWidth - moreBtnWidth)/(tabWidth + tabMargin));
+  let hasMore = false;
+  const maxTabsNum = Math.floor((areaWidth - deviation)/(tabWidth + tabMargin));
   if (totalTabs.length > maxTabsNum) {
     tabs = totalTabs.slice(0, maxTabsNum);
-    mores = totalTabs.slice(maxTabsNum);
+    mores = totalTabs;
+    hasMore = true;
   }
   return {
     tabs,
     mores,
+    hasMore,
   }
 }
 
@@ -53,6 +59,8 @@ const getTabsAndMores = (totalTabs, areaWidth) => {
   ),
   {
     delTab,
+    unshiftTab,
+    setTabs,
   }
 )
 class TabsContainer extends Component {
@@ -77,13 +85,17 @@ class TabsContainer extends Component {
     const { tabs: oldTabs } = this.props;
     if (oldTabs.length !== nextTabs.length) {
       const areaWidth = this.refs.tabsArea.clientWidth;
-      const { moreIsShow } = this.state;
-      const { mores } = getTabsAndMores(nextTabs, areaWidth);
       this.setState({
         width: areaWidth,
-        moreIsShow: !mores.length && moreIsShow ? false : moreIsShow,
       });
     }
+    this.setState({
+      moreIsShow: false,
+    });
+  }
+  unshift(serveCode) {
+    this.props.unshiftTab(serveCode);
+    this.select(serveCode);
   }
   select(serveCode) {
     const {
@@ -99,6 +111,7 @@ class TabsContainer extends Component {
   }
   del(id) {
     const {
+      tabs,
       delTab,
       history,
       match: {
@@ -110,9 +123,21 @@ class TabsContainer extends Component {
     } = this.props;
     return (e) => {
       e.stopPropagation();
-      const serveCode = delTab(id);
-      history.replace(`/${type}/${code}/${serveCode}`);
+      if (tabs.length > 1) {
+        const serveCode = delTab(id);
+        history.replace(`/${type}/${code}/${serveCode}`);
+      } else {
+        history.replace('');
+      }
     };
+  }
+  closeAll = () => {
+    const {
+      setTabs,
+      history,
+    } = this.props;
+    setTabs([]);
+    history.replace('');
   }
   resizeHandler() {
     if (this.timer) {
@@ -134,14 +159,14 @@ class TabsContainer extends Component {
     const { width: areaWidth, moreIsShow } = this.state;
     const curIndex = totalTabs.findIndex(({ id }) => id === currentId);
     const totalTabsNum = totalTabs.length;
-    const { tabs, mores } = getTabsAndMores(totalTabs, areaWidth);
+    const { tabs, mores } = getTabsAndMores(totalTabs, areaWidth, curIndex);
     const moreListElm = moreIsShow ? (
       <ul className={moreList}>
         {
           mores.map(({ id, name, serveCode }) => (
             <li
               key={id}
-              onClick={this.select.bind(this, serveCode)}
+              onClick={this.unshift.bind(this, serveCode)}
               className={cs(
                 more,
                 {
@@ -150,12 +175,19 @@ class TabsContainer extends Component {
               )} >
               <div className={moreName}> { name } </div>
               <button
+                title={tabs.length === 1 ? "关闭后，将回到用友云首页" : ""}
                 className={moreDelBtn}
                 type="button"
                 onClick={this.del(id)} >x</button>
             </li>
           ))
         }
+        <li
+          onClick={this.closeAll}
+          className={more}
+          title="关闭后，将回到用友云首页" >
+          <div className={moreName}>关闭全部页面</div>
+        </li>
       </ul>
     ) : null;
     const moreAreaElm = mores.length ? (
@@ -165,13 +197,13 @@ class TabsContainer extends Component {
           className={cs(
             moreBtn,
             {
-              [active]: curIndex >= tabs.length,
+              [active]: moreIsShow,
             }
           )}
           style= {{
             width: moreBtnWidth,
           }}
-          onClick={this.toggleMore}><Icon className={moreBtnArrow} type="upward"></Icon></button>
+          onClick={this.toggleMore}><Icon title="更多" className={moreBtnArrow} type="upward"></Icon></button>
         { moreListElm }
       </div>
     ) : null;
@@ -193,14 +225,14 @@ class TabsContainer extends Component {
                   width: tabWidth,
                 }} >
                 <div className={tabName}> { name } </div>
-                {
-                  totalTabsNum > 1 ? (
-                    <button
-                      className={tabDelBtn}
-                      type="button"
-                      onClick={this.del(id)} ><Icon type="error3"></Icon></button>
-                  ) : null
-                }
+                <button
+                  className={tabDelBtn}
+                  type="button"
+                  onClick={this.del(id)} >
+                  <Icon
+                    title={tabs.length === 1 ? "关闭后，将回到用友云首页" : ""}
+                    type="error3" />
+                </button>
               </li>
             ))
           }

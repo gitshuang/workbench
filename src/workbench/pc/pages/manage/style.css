@@ -1,14 +1,9 @@
 .page_home :global(.lebra-navbar-left-icon){
-  background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
-  background: #BEC1C8;
-  border: 1px solid #FFFFFF;
-  border-radius: 100px;
-  color: #fff;
 }
 body{
   background-image:url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png");
-  background-repeat: no-repeat, no-repeat, no-repeat;  
-  background-position: 0% 100%, 100% 0%, 90% 100%; 
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: 0% 100%, 100% 0%, 90% 100%;
   background-attachment:fixed;
 }
 .header{
@@ -25,7 +20,7 @@ body{
 }
 .um_content{
 	background:#e6e9e9;
-	padding:48px 45px;
+	padding:82px 45px 48px;
 }
 .umBoxJustify{
 	height:48px;
@@ -33,6 +28,7 @@ body{
 	position:relative;
 	background:rgba(26,32,38,0.6);
 }
+/**
 .umBoxJustify button{
 	height:28px;
 	padding: 0 22px;
@@ -52,6 +48,7 @@ body{
     color:#fff;
     border:none;
 }
+**/
 .umBoxJustify .preserve{
 	background:#e14c46;
 	border:none;
@@ -61,10 +58,13 @@ body{
 	border:none;
 	color:#fff;
 }
-.batchArea button{
-  margin-right:8px;
+.batchArea{
+  // background: red;
 }
-.saveArea button{
+.batchArea>div{
+   margin-right: 8px;
+}
+.saveArea>div{
   margin-left:8px;
 }
 .um_footer{

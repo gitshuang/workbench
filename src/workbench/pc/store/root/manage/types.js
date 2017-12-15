@@ -30,5 +30,7 @@ export default createTypes(
   'CLOSE_BATCH_MOVE',
   'SET_EDIT_STATE',
   'CANCEL_FOLDER_EDIT',
-  'SET_CURR_GROUP_INDEX'
+  'SET_CURR_GROUP_INDEX',
+  'EDIT_TITLE',
+  'SET_EDITONLY_ID'
 );

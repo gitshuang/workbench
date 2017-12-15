@@ -50,16 +50,20 @@ class BreadcrumbContainer extends Component {
       }
     }
     setExpended() {
-        const {setExpandedSidebar} = this.props;
-        setExpandedSidebar(true);
+        this.setExpandedSidebar(true);
         this.setState({
           breadcrumbMenu:breadcrumb_menu,
           breadcrumbTab:breadcrumb_tab
         })
     }
+    setExpandedSidebar(state) {
+      const {setExpandedSidebar} = this.props;
+      setExpandedSidebar(state);
+      const evt = new CustomEvent('resize');
+      window.dispatchEvent(evt);
+    }
     closeMenu(){
-        const {setExpandedSidebar} = this.props;
-        setExpandedSidebar(false);
+        this.setExpandedSidebar(false);
         this.setState({
           breadcrumbMenu:"",
           breadcrumbTab:""
@@ -79,6 +83,7 @@ class BreadcrumbContainer extends Component {
                 className={this.state.breadcrumbMenu} >
                 菜单
                 <Icon
+                  title="隐藏菜单"
                   type="error3"
                   className={closeMenu}
                   onClick={this.closeMenu} />
@@ -88,6 +93,7 @@ class BreadcrumbContainer extends Component {
           {
             withSidebar ? (
               <Icon
+                title="显示菜单"
                 type="tabulation"
                 className={this.state.breadcrumbTab}
                 onClick={this.setExpended} />

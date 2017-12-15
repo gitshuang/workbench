@@ -6,6 +6,7 @@
   width:300px;
   height:310px;
   border:1px solid #DBDEE5;
+  background: #fff;
   border-radius:3px;
   box-shadow: 0px 3px 6px 0px rgba(74,81,93,0.25);
 }
@@ -30,7 +31,7 @@
 .serviceBtn{
   position: absolute;
   z-index: 9;
-  top: 271px;
+  bottom:0px;
   background: #F5F5F5;
   width:300px;
   height:39px;
@@ -129,4 +130,16 @@
   position: absolute;
   margin-top: -20px;
   margin-left: 243px;
+}
+.link_cont{
+    position: absolute;
+    z-index: 9;
+    z-index: 9;
+    bottom: 0px;
+    width: 300px;
+    height: 39px;
+    line-height: 39px;
+    text-align: center;
+    cursor: pointer;
+    color: blue;
 }

@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import Header from 'containers/header';
-import Navbar from 'components/scrollNav';
+import Icon from 'components/icon';
+import BreadcrumbContainer from 'components/breadcrumb';
 import { logoImg, header } from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
@@ -25,6 +26,12 @@ const { changeUserInfoDisplay,hideUserInfoDisplay} = homeActions;
   }
 )
 class HeaderPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brm: [{name:"首页编辑"}]
+    }
+  }
   getLeftContent() {
     const {
       userInfo: {
@@ -33,7 +40,7 @@ class HeaderPage extends Component {
     } = this.props;
     return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
   }
-  goback= () => {
+  goback = () => {
     this.props.history.goBack();
   }
   componentDidMount() {
@@ -48,23 +55,18 @@ class HeaderPage extends Component {
       userInfoDisplay,
       list,
     } = this.props;
+    let iconName = <Icon type="home"/>
     return (
       <div className={header}>
         <Header
-          onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
+          onLeftClick={ this.goback }
           leftContent={this.getLeftContent()}
-          iconName={"staff"} >
-          <span>首页个性化</span>
+          iconName={iconName} >
+          <span>首页编辑</span>
         </Header>
-        {
-          list.length > 1 ? (
-            <Navbar
-              items={list}
-              offset={-80}
-              duration={500}
-              delay={0} />
-          ) : null
-        }
+        <div style={{paddingLeft:"70px","fontSize":"12px"}}>
+          <BreadcrumbContainer data={this.state.brm} goback={this.goback}/>
+        </div>
       </div>
     );
   }

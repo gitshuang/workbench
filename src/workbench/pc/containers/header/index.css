@@ -22,7 +22,7 @@
   color:#4a515d;
   line-height:19px;
 }
-:global(.lebra-navbar-right)>div{
+.rightBtn{
   width:32px;
   height: 32px;
   line-height: 32px;

@@ -1,0 +1,18 @@
+.btn{
+  margin-right: 10px;
+  display: inline-block;
+}
+.close{
+    position: absolute;
+    top: -22px;
+    right: 22px;
+    font-size: 18px;
+    color: #757F8C;
+    cursor: pointer;
+}
+/**
+.manageDialogFolder .close{
+  top: -46px;
+  right: 20px;
+}
+**/

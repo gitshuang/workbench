@@ -41,22 +41,31 @@
     /*background: #ccc;*/
     display: -webkit-box;
 }
-.title_left,
 .title_right{
     -webkit-box-align: center;
     display: -webkit-box;
 }
 
-.title_left{
-  width: 30px;
-  height: 30px;
-  -webkit-box-pack: end;
+.defaultArea{
+  position: relative;
 }
-.title_left img{
-  width: 100%;
-  height: 100%;
+.defaultArea .iconImg{
+  position: absolute;
+  width: 65px;
+  height: 65;
+  right: 50px;
+  bottom: 65px;
+  transform: translate(50%,50%);
 }
-
+/**
+.defaultArea .default_icon{
+  width: auto;
+  bottom: 57px;
+  right: 50px;
+  font-size: 90px;
+  color: rgba(117,127,140,1);
+}
+**/
 .title_right{
   -webkit-box-flex:1.0;
   -webkit-box-pack: start;
@@ -182,27 +191,7 @@
   position: absolute;
   left: 10px;
   top: 40px;
-}
-/**
-
-:global(.u-modal-dialog .u-modal-footer){
-    display: -webkit-box;
-    -webkit-box-pack: center;
-    border: 1px solid rgba(242, 242, 242, 1);
-}
-:global(.u-modal-dialog .u-modal-footer .u-button){
-    min-width:10px !important;
-    margin-right: 10px;
-    width: 60px;
-    height: 32px;
-}
-
-:global(.u-modal.in .u-modal-dialog){
-    width: 416px;
-    height: 201px;
-}
-**/
-
+} 
 .pop_cont{
     font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';
     font-weight: 700;

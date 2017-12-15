@@ -6,13 +6,16 @@ import PropTypes from 'prop-types';
 
 import Menu, { Item as MenuItem } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
-import Button from 'bee-button';
 import PopDialog from 'components/pop';
+import Button from 'bee-button';
+import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
 
-import { mapStateToProps } from '@u';
+import { mapStateToProps, avoidSameName } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
+import BeeIcon from 'bee-icon';
+import Checkbox from 'bee-checkbox';
 import WidgetList from 'containers/manageWidgetList';
 import {
   widgetTitle,
@@ -26,7 +29,8 @@ import {
   selectedBackClass,
   titleInputArea,
   icon,
-  iconBox
+  iconBox,
+  btn,
 } from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
@@ -44,6 +48,7 @@ const {
   addFolder,
   selectListActions,
   selectGroupActions,
+  setEditonlyId
 } = manageActions;
 
 function findItemById(manageList,id) {
@@ -84,7 +89,7 @@ const itemTarget = {
       !props.data.parentId && (afterParentId = props.data.widgetId);
       //因为冒泡 所以已经有的话 不需要执行move
       let dataItem = findItemById(props.data.children,draggedId);
-      if(folderType==="folder" || (typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId))){
+      if(folderType==="folder" || typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)){
         //folderType==="folder" 从文件夹把元素往分组里拖拽
         props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }
@@ -111,6 +116,7 @@ function collectTaget(connect, monitor) {
     'manageList',
     'selectGroup',
     'selectList',
+    'currEditonlyId',
     {
       namespace:'manage'
     }
@@ -128,6 +134,7 @@ function collectTaget(connect, monitor) {
     addFolder,
     selectListActions,
     selectGroupActions,
+    setEditonlyId
   }
 )
 class ManageGroup extends Component {
@@ -141,29 +148,48 @@ class ManageGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      groupName:  "默认分组",
-      inEdit: false,
+      groupName:  "",
       inFoucs: false,
       showModal: false,
-      renameTip: "none",
-      addFoldTip: "none"
     }
   }
-  componentDidMount() {
+  componentWillMount() {
     const {
       data: {
-        widgetName: groupName,
+        widgetName,
+        isNew,
       },
+      manageList,
     } = this.props;
-    if (groupName) {
-      this.setState({
-        groupName,
-      });
-    } else {
+
+    if (isNew) {
       setTimeout(() => {
+        const nameArr = manageList.map(({ widgetName }) => {
+          return widgetName;
+        });
+        const newGroupName = avoidSameName(nameArr, '默认分组');
+        this.setState({
+          groupName: newGroupName,
+        });
         this.refs.groupName.focus();
         this.refs.groupName.select();
       }, 0);
+    } else {
+      this.setState({
+        groupName: widgetName,
+      });
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.props.currEditonlyId !== nextProps.currEditonlyId &&
+      this.props.data.isNew
+    ) {
+      this.props.renameGroup({
+        id: this.props.data.widgetId,
+        name: this.state.groupName,
+        dontChangeCurrEditonlyId: true,
+      });
     }
   }
   // 添加文件夹
@@ -172,10 +198,9 @@ class ManageGroup extends Component {
     addFolder({ groupIndex });
   }
   // 打开编辑分组形态
-  openRenameGroupFn = () => {
-    this.setState({
-      inEdit: true
-    });
+  openRenameGroupFn = (id) => {
+    const {setEditonlyId} = this.props;
+    setEditonlyId(id);
     setTimeout(() => {
       this.refs.groupName.focus();
       this.refs.groupName.select();
@@ -183,28 +208,29 @@ class ManageGroup extends Component {
   }
   // 点击取消编辑分组按钮
   renameGroupCancel = (index) => {
-    const { renameGroup } = this.props;
+
+    const { renameGroup,setEditonlyId } = this.props;
     const {
       data: {
         widgetName: groupName,
       },
     } = this.props;
-
+    const stateGroupName = this.state.groupName;
     this.setState({
-      inEdit: false,
-      groupName:groupName ? groupName : "默认分组",
+      groupName : groupName ? groupName : stateGroupName,
     });
+    setEditonlyId("");
     if(!groupName){
       renameGroup({
         index,
-        name:"默认分组",
+        name: stateGroupName,
       });
     }
   }
   // 点击按钮执行 action   重新构造
   renameGroupFn = (index) => {
     const { renameGroup } = this.props;
-    const name = this.state.groupName || "默认分组";
+    const name = this.state.groupName;
     renameGroup({
       index,
       name,
@@ -244,7 +270,9 @@ class ManageGroup extends Component {
       selectGroupActions,
       selectGroup,
     } = this.props;
-    const checkFlag = e.target.checked;
+    //const checkFlag = e.target.checked;
+    // 换成checkbox插件
+    const checkFlag = e;
     const aa = manageList[index].children.map((item,index)=>{
       return item.widgetId;
     });
@@ -288,7 +316,7 @@ class ManageGroup extends Component {
   // 添加新分组
   addGroupFn(index) {
     const { addGroup } = this.props;
-    addGroup(index);
+    addGroup({index});
   }
   // menu组件 方法
   onDropSelect = (index) => ({ key }) => {
@@ -305,28 +333,6 @@ class ManageGroup extends Component {
     }
   }
 
-
-  //滑过事件
-  handleMouseOver =() =>{
-    this.setState({
-      renameTip: "block"
-    })
-  }
-  handleMouseOut =() => {
-    this.setState({
-      renameTip: "none"
-    })
-  }
-  handleMouseOver2 =() =>{
-    this.setState({
-      addFoldTip: "block"
-    })
-  }
-  handleMouseOut2 =() => {
-    this.setState({
-      addFoldTip: "none"
-    })
-  }
   renderDrop =(index) => {
     const { manageList } = this.props;
     let menu = (
@@ -350,7 +356,7 @@ class ManageGroup extends Component {
         trigger={['click']}
         overlay={menu}
         animation="slide-up" >
-        <Icon type="more" />
+        <Icon title="更多" type="more" />
       </Dropdown>
     )
   }
@@ -366,54 +372,46 @@ class ManageGroup extends Component {
       connectDropTarget,
       isDragging,
       selectGroup,
+      currEditonlyId
     } = this.props;
     const {
-      inEdit,
       inFoucs,
       groupName,
       showModal,
-      renameTip,
-      addFoldTip
     } = this.state;
     const checkType = selectGroup.indexOf(index) >= 0 ? true : false
     const opacity = isDragging ? 0 : 1;
     let groupTitle;
-    if(inEdit || !widgetName) {
+    if( currEditonlyId == widgetId) {
       groupTitle = (
         <div className={widgetTitle} >
           <div className={titleInputArea}>
             <input
-              className={newGroupName}
+              className={`${newGroupName} input`}
               value={groupName}
               autoFocus="autofocus"
               onChange={this.editGroupName}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               ref="groupName" />
-            <Icon
-              className={icon}
-              type="close"
-              onClick={ this.clearInput } />
           </div>
-          <Button className={complete} onClick={ ()=>{this.renameGroupFn(index)} }>确定</Button>
-          <Button className={cancel} onClick={ ()=>{this.renameGroupCancel(index)} }>取消</Button>
+          <ButtonCheckSelected className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><span>√</span></ButtonCheckSelected>
+          <ButtonCheckClose className={btn} onClick={ ()=>{this.renameGroupCancel(index)} }><span>×</span></ButtonCheckClose>
         </div>
       );
     }else {
       groupTitle = (
         <div className={`${widgetTitle} um-box-justify`} >
-          <label>
-            <input type="checkbox" checked={checkType} onChange={ this.selectFn(index) }/>
-            <span>{widgetName}</span>
-          </label>
+          <div>
+            <Checkbox checked={checkType} onChange={ this.selectFn(index) }>{widgetName}</Checkbox>
+          </div>
+
           <div className="clearfix">
             <div className={iconBox}>
-              <Icon type="record" onClick={ this.openRenameGroupFn } onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}/>
-              <p style={{display: renameTip}}>重命名分组</p>
+              <Icon title="重命名分组" type="record" onClick={ ()=>{this.openRenameGroupFn(widgetId)}} />
             </div>
             <div className={iconBox}>
-              <Icon type="add-files" onClick={this.addFolderFn.bind(this, index)} onMouseOver={this.handleMouseOver2} onMouseOut={this.handleMouseOut2}/>
-              <p style={{display: addFoldTip}}>添加文件夹</p>
+              <Icon title="添加文件夹" type="add-files" onClick={this.addFolderFn.bind(this, index)} />
             </div>
             {this.renderDrop(index)}
           </div>
@@ -436,7 +434,9 @@ class ManageGroup extends Component {
 
     console.log("this.props");
     console.log(this.props);
-
+    if (isDragging) {
+      //return null
+    }
     return connectDragSource(connectDropTarget(
       <div className={groupArea}>
         <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
@@ -445,17 +445,17 @@ class ManageGroup extends Component {
             <WidgetList index={index} data={children} parentId={this.props.data.widgetId}  />
           </div>
         </section>
+
         <div className={addBtn} >
-          <button
-            className={addGroupBtn}
-            onClick={this.addGroupFn.bind(this, index)} >
+          <ButtonDefaultAlpha className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
             <Icon type="add" ></Icon>
-            <span>添加组</span>
-          </button>
+            添加组
+          </ButtonDefaultAlpha>
         </div>
-        <PopDialog className="pop_dialog_delete" show={ showModal } btns={pop_btn} data={{ index }}>
-          <div>
-            <span>您确认要删除吗?</span>
+        <PopDialog className="pop_dialog_delete" show={ showModal } type="delete" close={this.popClose} btns={pop_btn} data={{ index }}>
+          <div className="pop_cont">
+            <BeeIcon type="uf-exc-t" className="icon"/>
+            <span>您确认要删除此项?</span>
           </div>
         </PopDialog>
       </div>

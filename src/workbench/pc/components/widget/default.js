@@ -3,13 +3,18 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
+import Icon from 'components/icon';
 import {
   widgetItem,
   title,
   title_left,
   title_right,
   content,
+  defaultArea,
+  iconImg,
+  default_icon
 } from './style.css'
+import _default_icon from 'assets/image/default.png';
 
 const widgetStyle = [
   // 小
@@ -44,15 +49,15 @@ class WidgetItem extends Component {
       ...widgetStyle[size - 1],
       backgroundImage: `url(${background})`,
     };
-
+    console.log("icon____"+icon);
     return (
-      <li className={widgetItem}
+      <li className={`${widgetItem} ${defaultArea}`}
         style={style}
         onClick={clickHandler} >
         <div className={title}>
-          <div className={title_left}><img src={icon} /></div>
           <div className={title_right}>{name}</div>
         </div>
+        <img src={icon?icon:_default_icon} className={iconImg}/>
       </li>
     );
   }

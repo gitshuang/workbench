@@ -4,9 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 
-import Icon from 'components/icon';
 import Header from 'containers/header';
-import BreadcrumbContainer from 'containers/breadcrumb';
+import BreadcrumbContainer from 'components/breadcrumb';
 import ServiceClassify from 'containers/serviceClassify';
 
 import {header,um_content,appBreadcrumb} from './style.css';
@@ -35,11 +34,10 @@ class Application extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      brm: [{name:"添加应用"}]
+    }
     this.goBack = this.goBack.bind(this);
-  }
-
-  componentWillMount() {
-    const { requestStart, requestSuccess, requestError, } = this.props;
   }
 
   goBack() {
@@ -51,16 +49,18 @@ class Application extends Component {
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} leftContent={"返回"}>
-              <div position="center">
+            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} >
+              <div>
                 <span>全部应用及服务</span>
               </div>
             </Header>
-            <div className={appBreadcrumb}><BreadcrumbContainer/></div>
+            <div className={appBreadcrumb}>
+              <BreadcrumbContainer data={this.state.brm} goback={this.goBack}/>
+            </div>
           </div>
         </div>
-        <div className={um_content}>
-          <ServiceClassify /> 
+        <div className={um_content + " um-box um-content"}>
+          <ServiceClassify />
         </div>
       </div>
     );

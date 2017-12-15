@@ -6,7 +6,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
 import Icon from 'components/icon';
-import Icon1 from 'bee-icon';
+import BeeIcon from 'bee-icon';
 import Checkbox from 'bee-checkbox';
 import PopDialog from 'components/pop';
 import { connect } from 'react-redux';
@@ -25,22 +25,22 @@ import {
   pop_cont,
   widgetItemCont,
   editDele,
-  clearfix
+  clearfix,
+  widget_node
 } from './style.css'
 
 const type='item';
 var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
-    //props.folderType && props.closeFolderDrag();
-    let diffOffset = monitor.getDifferenceFromInitialOffset();
+    //let diffOffset = monitor.getDifferenceFromInitialOffset();
+    // props.editTitle(props.id,props.data.widgetName);
     timestamp=new Date().getTime();
     window.timestamp = timestamp;
-    return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType};
+    return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType,dragType:props.dragType};
   },
 
   endDrag(props, monitor, component){
-    //props.closeFolderDrag();
     return monitor.getDifferenceFromInitialOffset();
   }
 };
@@ -48,25 +48,33 @@ const itemSource = {
 
 const itemTarget = {
   //hover 悬浮调用 drop落在目标上时调用
-  hover(props, monitor){
+  hover(props, monitor,component){
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
+    let targetId = props.id;
+    let timeFlag=new Date().getTime();
     if (draggedId !== props.id){
-      let diff = monitor.getDifferenceFromInitialOffset();
-    }else {
-      //props.closeFolderDrag();
+      component.setState({
+        drag:'fadeInLeft'
+      });
+      //let diff = monitor.getDifferenceFromInitialOffset();
+      if(timeFlag - timestamp <100){
+        //console.log(timeFlag - timeFlag);
+        //props.editTitle(props.id,props.data.widgetName);
+      }
     }
   },
-  drop(props, monitor) {
+  drop(props, monitor,component) {
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
     const preFolderType = monitor.getItem().folderType;
+    const dragType = monitor.getItem().dragType;
 
-    if (draggedId !== props.id && preType !==1 && preFolderType!=="folder" && props.folderType!=="folder") {
+    if (draggedId !== props.id && preType !==1  && ((preFolderType!=="folder" && props.folderType!=="folder") || (dragType==="dragInFolder" && props.dragType==="dragInFolder"))) {
       let timeOut = (new Date().getTime() - timestamp > 1500);
-      if(timeOut && preType === 3 && props.data.type === 3 ){
+      if(timeOut && preType === 3 && props.data.type === 3){
         //放上去停留大于2s创建文件夹
         props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeOut);
       }else {
@@ -87,6 +95,13 @@ function collectSource(connect, monitor) {
 function collectTaget(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget()
+  }
+}
+
+function getItemStyles() {
+  return{
+    pointerEvents: 'none',
+    background:'red',
   }
 }
 
@@ -114,6 +129,8 @@ const widgetStyle = [
     'selectList',
     'selectGroup',
     'currGroupIndex',
+    'title',
+    'drag',
     {
       namespace: 'manage',
     }
@@ -143,7 +160,8 @@ class WidgetItem extends Component {
     this.popClose = this.popClose.bind(this);
 
     this.state = {
-      showModal:false
+      showModal:false,
+      title:'',
     }
   }
 
@@ -211,8 +229,7 @@ class WidgetItem extends Component {
   }
 
   render() {
-
-     const pop_btn = [
+    const pop_btn = [
       {label:"确认",fun:this.popSave,className:""},
       {label:"取消",fun:this.popClose,className:""}
     ]   //设置操作按钮
@@ -224,11 +241,15 @@ class WidgetItem extends Component {
         widgetName,
       }
     } = this.props;
-    const { connectDragSource, connectDropTarget,isDragging,selectList } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,selectList,drag } = this.props;
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
+    if (isDragging) {
+      //return null
+    }
+    const {title} = this.state;
     return connectDragSource(connectDropTarget(
-      <li className={widgetItem} style={{...widgetStyle[size - 1],...opacity }} >
+      <li title={title} className={`${widgetItem} ${widget_node} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag}` } style={{...widgetStyle[size - 1],...opacity }} >
         <div className={title}>
           <div className={title_right}>{widgetName}</div>
         </div>
@@ -237,16 +258,16 @@ class WidgetItem extends Component {
         </div>
 
         <div className={`${clearfix} ${footer}`}>
-          <div><Checkbox className="test" checked={checkType} onChange={ this.onHandChange }/></div>
+          {this.props.type == "pop"?null:<Checkbox className="test" checked={checkType} onChange={ this.onHandChange } />}
           <div className={`${editDele} ${clearfix}`}>
-            <div onClick={this.fileDele}><Icon type="dustbin" /></div>
+            <div onClick={()=>{this.popSave(this.props.data)}}><Icon title="删除服务" type="dustbin" /></div>
           </div>
         </div>
 
-        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } data={this.props.data} btns={pop_btn} >
-            <div className={pop_cont}>
-              <Icon1 type="uf-exc-t" />
-              <span>您确认要删除服务此项?</span>
+        <PopDialog className="pop_dialog_delete" show = { this.state.showModal } type="delete" close={this.popClose} data={this.props.data} btns={pop_btn} >
+            <div className="pop_cont">
+              <BeeIcon type="uf-exc-t" className="icon"/>
+              <span>您确认要删除此项服务?</span>
             </div>
         </PopDialog>
 

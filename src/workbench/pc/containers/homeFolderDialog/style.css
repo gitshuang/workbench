@@ -1,11 +1,11 @@
 .content{
-  overflow: hidden;
+  /*overflow: hidden;*/
   background:rgba(230,233,233,1);
-  display: -webkit-box; 
-  -webkit-box-pack: center; 
   margin: 15px;
   margin-top: 0;
   position: relative;
+  overflow: auto;
+  height: 400px;
 }
 .home_file_item_dailog{
   display: -webkit-box !important;

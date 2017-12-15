@@ -19,13 +19,14 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder,closeFolder,setCurrGroupIndex } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,moveServe, openFolder,addFolder,closeFolder,setCurrGroupIndex,editTitle } = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 @connect(
   mapStateToProps(
     'manageList',
     'curEditFolderId',
+    'drag',
     {
       namespace: 'manage',
     }
@@ -38,7 +39,8 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
     moveServe,
     addFolder,
     closeFolder,
-    setCurrGroupIndex
+    setCurrGroupIndex,
+    editTitle,
   }
 )
 class WidgetList extends Component {
@@ -51,7 +53,7 @@ class WidgetList extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        showModal:false
+        showModal:false,
       }
     }
 
@@ -78,6 +80,11 @@ class WidgetList extends Component {
     const { addFolder } = this.props;
     addFolder(data);
   }
+  editTitle = (id,name) => {
+    let data = {id,name}
+    const { editTitle } = this.props;
+    editTitle(data);
+  }
 
   widgeOnclick = (e,da) => {
     const {index,setCurrGroupIndex} = this.props;
@@ -100,7 +107,7 @@ class WidgetList extends Component {
 
   render() {
 
-      const { data,index } = this.props;
+      const { data,index,drag } = this.props;
       // const pop_btn = [
       //   {label:"确认",fun:this.popSave,className:""},
       //   {label:"取消",fun:this.popClose,className:""}
@@ -124,15 +131,19 @@ class WidgetList extends Component {
                 id={id}
                 parentId={parentId}
                 index={id}
+                drag={drag}
                 propsIndex={index}
                 type={type}
                 moveItemDrag={this.moveItemDrag}
+                editTitle={this.editTitle}
                 onClick={(e)=>{this.widgeOnclick(e,item)}}
               />
             );
           default:
             return (
               <WidgetItem
+                ref={id}
+                drag={drag}
                 key={`widget-${id}-${i}`}
                 data={item}
                 id={id}
@@ -141,6 +152,7 @@ class WidgetList extends Component {
                 propsIndex={index}
                 type={type}
                 moveItemDrag={this.moveItemDrag}
+                editTitle={this.editTitle}
                 addFolderDrag={this.addFolderDrag}
               />
             );
@@ -157,10 +169,10 @@ class WidgetList extends Component {
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >
-          <Icon type="add"  />
+          <Icon title="添加服务" type="add"  />
         </div>
 
-        <PopDialog className={pop_dialog_widge_list} show = { this.state.showModal } data={_da} >
+        <PopDialog className={pop_dialog_widge_list} close={this.popClose} backdrop={false} show = { this.state.showModal } data={_da} >
             <SelectWidgetList close={this.popClose} parentId={this.props.parentId} />
         </PopDialog>
 
