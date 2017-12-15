@@ -395,8 +395,8 @@ class ManageGroup extends Component {
               onBlur={this.handleBlur}
               ref="groupName" />
           </div>
-          <ButtonCheckSelected className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><span>√</span></ButtonCheckSelected>
-          <ButtonCheckClose className={btn} onClick={ ()=>{this.renameGroupCancel(index)} }><span>×</span></ButtonCheckClose>
+          <ButtonCheckSelected className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><Icon type="right"></Icon></ButtonCheckSelected>
+          <ButtonCheckClose className={btn} onClick={ ()=>{this.renameGroupCancel(index)} }><Icon type="cancel"></Icon></ButtonCheckClose>
         </div>
       );
     }else {

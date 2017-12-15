@@ -64,7 +64,7 @@ class HeaderPage extends Component {
           iconName={iconName} >
           <span>首页编辑</span>
         </Header>
-        <div style={{paddingLeft:"70px","fontSize":"12px"}}>
+        <div style={{paddingLeft:"23px","fontSize":"12px"}}>
           <BreadcrumbContainer data={this.state.brm} goback={this.goback}/>
         </div>
       </div>
