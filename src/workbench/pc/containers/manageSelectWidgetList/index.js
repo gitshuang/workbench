@@ -143,15 +143,16 @@ class SelectWidgetList extends Component {
 
   onChange =(data,sele)=>{
     // console.log(this.state.dataMap);
-    this.state.selectedList.push(data);
-    
+    console.log(data);
+    if(sele == "3" ){
+      this.state.selectedList.push(data);
+    }else{
+      if(this.state.selectedList.length != 0){
+        let index = this.state.selectedList.findIndex(da=>da.serveId == data.serveId);
+        this.state.selectedList.splice(index,1);
+      }
+    }
     this.state.dataMap[data.serveId].selected = sele;
-    // console.log(this.state.dataMap);
-    // if(data.selected == "3"){
-    //   this.state.dataMap[data.serveId].selected = "4";
-    // }else{
-    //   this.state.dataMap[data.serveId].selected = "3";
-    // }
     this.setState({
         ...this.state,
         edit:true
@@ -166,7 +167,6 @@ class SelectWidgetList extends Component {
   }
 
   btnSave=()=>{
-    // this.state.selectedList.push(data);
     this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
     this.setState({
       selectedList:[]
