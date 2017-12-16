@@ -56,10 +56,21 @@ body{
 .work :global(.lebra-navbar-left-content){
   margin-left: 8px;
 }
-.work :global(.lebra-navbar-title .um-box){
-  margin-left: 30px;
+.titleArea {
+  text-align: center;
+  position: relative;
 }
-
+.service, .pin {
+  position: absolute;
+  font-size:18px;
+  font-weight:900;
+}
+.service {
+  right: -35px;
+}
+.pin {
+  right: -70px;
+}
 :global(.u-message){
   left:50%;
   transform: translate(-50% ,0);

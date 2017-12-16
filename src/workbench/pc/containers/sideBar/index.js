@@ -50,7 +50,27 @@ function makeMenus(menus,isTop) {
 class SideBarContainer extends Component {
   constructor(props) {
     super(props);
+    const { openKeys, selectedKeys } = this.getOpenKeys(props);
+    this.state = {
+      openKeys,
+      selectedKeys,
+    };
     this.handleClick = this.handleClick.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.current.menuItemId !== this.props.current.menuItemId) {
+      const { openKeys } = this.state;
+      const { openKeys: newOpenKeys, selectedKeys } = this.getOpenKeys(nextProps);
+      newOpenKeys.forEach((key) => {
+        if (openKeys.indexOf(key) === -1) {
+          openKeys.push(key);
+        }
+      });
+      this.setState({
+        openKeys: [...openKeys],
+        selectedKeys,
+      });
+    }
   }
   handleClick({ key: id }) {
     const {
@@ -72,30 +92,36 @@ class SideBarContainer extends Component {
       history.push(`/${type}/${code}/${serveCode}`);
     }
   }
-  getDefaultOpenKeys() {
-    const { menus, current: { menuItemId: id } } = this.props;
+  onOpenChange = (openKeys) => {
+    this.setState({
+      openKeys,
+    });
+  }
+  getOpenKeys(props) {
+    const { menus, current: { menuItemId: id } } = props;
     const menuPath = findPath(menus, 'children', 'menuItemId', id);
-    const defaultOpenKeys = menuPath.slice(0, -1).map(({menuItemId}) => {
+    const openKeys = menuPath.slice(0, -1).map(({menuItemId}) => {
       return menuItemId;
     })
     const selectedKeys = menuPath.slice(-1).map(({menuItemId}) => {
       return menuItemId;
     })
     return {
-      defaultOpenKeys,
+      openKeys,
       selectedKeys,
     }
   }
   render() {
     const { menus } = this.props;
+    const { openKeys, selectedKeys } = this.state;
     const isTop = true;//标识是否是一级菜单
-    const { defaultOpenKeys, selectedKeys } = this.getDefaultOpenKeys();
     return (
       <div className={sideBar} >
         <Menu
           onClick={this.handleClick}
           style={{ width: '100%' }}
-          defaultOpenKeys={defaultOpenKeys}
+          onOpenChange={this.onOpenChange}
+          openKeys={openKeys}
           selectedKeys={selectedKeys}
           mode="inline"
           className={sideMainMenu}>
