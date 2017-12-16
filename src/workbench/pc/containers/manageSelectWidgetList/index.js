@@ -55,14 +55,13 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-    this.getServices();
+    this.getServices(null);
   }
 
-  getServices(parme){
+  getServices(serveName){
     let self = this;
     const { requestError, requestSuccess, getSelectWidgetList } = this.props;
-
-    getSelectWidgetList(parme).then(({error, payload}) => {
+    getSelectWidgetList(serveName).then(({error, payload}) => {
       if (error) {
         requestError(payload);
       }
@@ -76,6 +75,12 @@ class SelectWidgetList extends Component {
       });
       requestSuccess();
     });
+  }
+
+  btnSearch=()=>{
+    if(this.state.value != "搜索内容..."){
+        this.getServices(this.state.value);
+    }
   }
  
   getArrayToMap(data,dataMap,parId){
@@ -161,9 +166,24 @@ class SelectWidgetList extends Component {
 
   //输入框修改data数据源
   inputOnChange = (e) => {
+    this.setState({
+        value:e
+    });
+  }
+
+  inputOnFocus = (e) => {
+    let _value = e.target.value != "搜索内容..."?e.target.value:"";
+    this.setState({
+        value:_value
+    });
+  }
+
+  inputOnBlur = (e) => {
+    if(e.target.value == ""){
       this.setState({
-          value:e
+          value:"搜索内容..."
       });
+    }
   }
 
   btnSave=()=>{
@@ -197,11 +217,11 @@ class SelectWidgetList extends Component {
        
        <div className={widget_right}>
           <div className={searchPanel}>
-              <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
-              <div className={search_icon_con}>
+              <FormControl className={form_control} value={this.state.value} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
+              <div className={search_icon_con} >
                   <span>|</span>
-                  <Icon type="search" className={search_icon}></Icon>
-                  <span className={search_tit}>搜索</span>
+                  <Icon type="search" className={search_icon} onClick={this.btnSearch} ></Icon>
+                  <span className={search_tit} onClick={this.btnSearch} >搜索</span>
               </div>
            </div>
            <div className={panel} >
