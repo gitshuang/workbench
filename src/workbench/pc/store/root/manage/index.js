@@ -143,6 +143,7 @@ const reducer = handleActions({
           newCarObn.widgetName = da.serveName;
           newCarObn.serveCode = da.serveCode;
           newCarObn.icon = da.serveIcon;
+          newCarObn.size = da.widgetTemplate.size;
           newCar.push(newCarObn);
       // }
     }

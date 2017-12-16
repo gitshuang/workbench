@@ -21,24 +21,14 @@
 .home_file_item_dailog :global(.u-modal-body){
     padding:0;
 }
-.close{
-  position: absolute;
-  right: 15px;
-  top: 8px;
-  color: rgba(135,139,148,1);
-  width: 20px;
-  border-radius: 50%;
-  text-align: center;
-  cursor: pointer;
+.home_file_item_dailog :global(.close){
+  top: -31px;
 }
-.close:hover{
-  background: rgba(135,139,148,1);
-  color: #ccc;
+.home_file_item_dailog  :global(.u-modal-dialog){
+  margin-left: 40px;
+  margin-right: 40px;
+  width: 900px;
 }
-.home{
-
-}
-
 .home .u-modal{
   display: none !important;
 }
