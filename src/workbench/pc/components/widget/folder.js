@@ -15,8 +15,8 @@ import {
 
 const style={
   'position':'absolute',
-  'right':'8px',
-  'bottom':'8px',
+  'right':'11px',
+  'bottom':'9px',
   'color':'#fff'
 }
 class FolderWidget extends Component {

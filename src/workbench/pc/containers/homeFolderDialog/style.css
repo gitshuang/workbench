@@ -25,9 +25,7 @@
   top: -31px;
 }
 .home_file_item_dailog  :global(.u-modal-dialog){
-  margin-left: 40px;
-  margin-right: 40px;
-  width: 900px;
+  width: 850px;
 }
 .home .u-modal{
   display: none !important;
