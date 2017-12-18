@@ -165,7 +165,6 @@ export default class Work extends Component {
     const typeChange = newType !== oldType;
     const codeChange = newCode !== oldCode;
     const subcodeChange = newSubcode !== oldSubcode;
-    debugger;
     if (typeChange || codeChange) {
       this.getProductInfo(newCode, newType, newSubcode);
     } else if (subcodeChange) {
