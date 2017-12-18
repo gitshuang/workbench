@@ -105,6 +105,9 @@ export default class Work extends Component {
       history,
       } = this.props;
     requestStart();
+    this.setState({
+      loaded: false,
+    })
     getProductInfo(code, type, subcode).then(({error, payload}) => {
       if (error) {
         requestError(payload);
@@ -113,8 +116,8 @@ export default class Work extends Component {
           const {
             curServe: {
               serveCode: subcode
-              },
-            } = payload;
+            },
+          } = payload;
           history.replace(`/${type}/${code}/${subcode}`);
         }
         this.setState({
@@ -132,9 +135,9 @@ export default class Work extends Component {
           code,
           type,
           subcode,
-          },
         },
-      } = this.props;
+      },
+    } = this.props;
     this.getProductInfo(code, type, subcode);
   }
 
@@ -158,14 +161,19 @@ export default class Work extends Component {
         },
       menus,
       setCurrent,
-      } = this.props;
-    if (!(newCode === oldCode && newType === oldType) || !newSubcode) {
-      this.setState({
-        loaded: false,
-      })
-      this.getProductInfo(newCode, newType);
-    } else if (newSubcode && newSubcode !== oldSubcode) {
-      setCurrent(newSubcode);
+    } = this.props;
+    const typeChange = newType !== oldType;
+    const codeChange = newCode !== oldCode;
+    const subcodeChange = newSubcode !== oldSubcode;
+    debugger;
+    if (typeChange || codeChange) {
+      this.getProductInfo(newCode, newType, newSubcode);
+    } else if (subcodeChange) {
+      if (newSubcode) {
+        setCurrent(newSubcode);
+      } else {
+        this.getProductInfo(newCode, newType);
+      }
     }
   }
 
