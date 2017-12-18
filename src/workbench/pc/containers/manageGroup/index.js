@@ -309,9 +309,9 @@ class ManageGroup extends Component {
     moveBottomGroup(index);
   }
   // 删除群组
-  delectGroupFn =(data) =>{
+  delectGroupFn =(index) =>{
     const { delectGroup } = this.props;
-    delectGroup(data.index);
+    delectGroup(index);
   }
   // 添加新分组
   addGroupFn(index) {
@@ -328,7 +328,7 @@ class ManageGroup extends Component {
         this.moveTopFn(index);
         break;
       default:
-        this.popOpen();
+        this.delectGroupFn(index);
         break;
     }
   }
@@ -432,8 +432,6 @@ class ManageGroup extends Component {
       }
     ]
 
-    console.log("this.props");
-    console.log(this.props);
     if (isDragging) {
       //return null
     }

@@ -48,8 +48,8 @@ const actions = createActions(
             dispatch(setCurrent(subcode));
           }
           return {
-            payload: data
-          }
+            payload: data,
+          };
         }, (e) => {
           return {
             error: true,

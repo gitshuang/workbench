@@ -32,7 +32,8 @@ import {
   saveArea,
   batchArea,
   header,
-  page_home
+  page_home,
+  cancelModal
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -229,7 +230,7 @@ class Home extends Component {
     const pop_btn2 = [
       {label:"不保存",fun:this.cancel,className:""},
       {label:"保存",fun:this.save,className:""},
-        {label:"取消",fun:this.popCloseCancel,className:""}
+      {label:"取消",fun:this.popCloseCancel,className:""}
     ]
     const list = [];
     return (
@@ -248,7 +249,7 @@ class Home extends Component {
         <div className={um_footer}>
           <div className={`${umBoxJustify} um-box-justify`}>
              <div className={`${batchArea}  horizontalParent`}>
-              <ButtonDefaultLine onClick={this.popOpen} disabled={selectList.length ? false:true} className="horizontal">删除</ButtonDefaultLine>
+              <ButtonDefaultLine onClick={this.batchDelectFn} disabled={selectList.length ? false:true} className="horizontal">删除</ButtonDefaultLine>
               <ButtonDefaultLine onClick={this.openGroupTo} disabled={selectList.length ? false:true} >移动到</ButtonDefaultLine>
             </div>
             <div className={`${saveArea}  horizontalParent`}>

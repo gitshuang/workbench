@@ -30,7 +30,7 @@ var rapApi = [
 
 function makeRapConfig(key) {
   var config = {
-    target: 'http://rapapi.org',
+    target: 'http://rap.taobao.org/',
     changeOrigin: true,
     pathRewrite: {}
   };
