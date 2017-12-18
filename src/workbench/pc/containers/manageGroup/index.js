@@ -446,7 +446,7 @@ class ManageGroup extends Component {
 
         <div className={addBtn} >
           <ButtonDefaultAlpha className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
-            <Icon type="add" ></Icon>
+            <Icon type="add"></Icon>
             添加组
           </ButtonDefaultAlpha>
         </div>

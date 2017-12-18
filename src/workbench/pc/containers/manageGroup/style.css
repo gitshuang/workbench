@@ -31,7 +31,7 @@
   // display:flex;
   border: 1px solid #D9D9D9;
   font-size:12px;
-  color:rgba(74,81,93,1);
+  color:rgba(71,77,84,1);
 }
 .addGroupBtn :global(.iconfont){
   padding-right: 10px;
