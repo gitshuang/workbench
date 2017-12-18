@@ -6,6 +6,7 @@ import Button from 'bee-button';
 import Icon from 'components/icon';
 import InputGroup from 'bee-input-group';
 import AutoComplete from 'bee-autocomplete';
+import FormControl from 'bee-form-control';
 import Menu from 'bee-menus';
 import ButtonGroup from 'bee-button-group';
 import GoTo from './goto';
@@ -21,7 +22,12 @@ import {
   menuBtnGroup,
   link,
   icon,
-  u_button_tit
+  search_tit,
+  search_icon_con,
+  searchPanel,
+  um_content,
+  icon_close,
+  icon_open
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -51,8 +57,8 @@ class serviceClassify extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
-      options: ['友空间', '友人才', '友报账', '友报账','友报账'],
+      value: "搜索应用",
+      isPackUp:false,
       current: undefined,
       list2 : [],
       listAll : [],
@@ -84,6 +90,24 @@ class serviceClassify extends Component {
     })
   }
 
+  packUp = (flag,event)=>{
+    let appContainer = event.target.parentNode.parentNode;
+    if(!flag){
+      appContainer.lastChild.style.display = "none";
+    }else{
+      appContainer.lastChild.style.display = "flex";
+    }
+    this.setState({
+      isPackUp:!flag
+    })
+  }
+
+  btnSearch=()=>{
+    if(this.state.value != "搜索应用"){
+      console.log(this.state.value);
+    }
+  }
+
   onFormChange = (value) => {
     this.setState({
       value
@@ -94,7 +118,7 @@ class serviceClassify extends Component {
   }
   renderList() {
     let listAll = [];
-    const { current } = this.state;
+    const { current ,isPackUp} = this.state;
     const {
       allApplicationList
     } = this.props;
@@ -118,12 +142,13 @@ class serviceClassify extends Component {
         service,
       } = app;
       return (
-        <div key={applicationCode}>
+        <div key={applicationCode} >
           <header>
             <div onClick={ ()=>{this.goToLink(applicationCode)} }>
               <img src={applicationIcon}/>
               <span>{ applicationName }</span>
             </div>
+            <Icon type="upward" className={icon_close} onClick={ (e)=>{this.packUp(isPackUp,e)} }></Icon>
           </header>
           <hgroup className="um-box">
             {
@@ -176,6 +201,28 @@ class serviceClassify extends Component {
     return btns;
   }
 
+  //输入框修改data数据源
+  inputOnChange = (e) => {
+    this.setState({
+        value:e
+    });
+  }
+
+  inputOnFocus = (e) => {
+    let _value = e.target.value != "搜索应用"?e.target.value:"";
+    this.setState({
+        value:_value 
+    });
+  }
+
+  inputOnBlur = (e) => {
+    if(e.target.value == ""){
+      this.setState({
+          value:"搜索应用"
+      });
+    }
+  }
+
   render() {
     const { value, options, current } = this.state;
     const btns = this.renderBtns();
@@ -185,23 +232,15 @@ class serviceClassify extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <InputGroup className={serviceSearch}>
-              <AutoComplete
-                value={value}
-                disabled={false}
-                options={options}
-                placeholder="搜索应用"
-                onValueChange={value => this.onFormChange(value)}
-              />
-              <InputGroup.Button>
-                <Button>
+            <div className={searchPanel}>
+              <FormControl className={serviceSearch} value={this.state.value} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
+              <div className={search_icon_con}>
                   <span>|</span>
-                  <Icon title="搜索" type="search" className={ufSearch}></Icon>
-                  <span className={u_button_tit}>搜索</span>
-                </Button>
-              </InputGroup.Button>
-            </InputGroup>
-            <div className="um-box um-content">
+                  <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
+                  <span className={search_tit} onClick={this.btnSearch}>搜索</span>
+              </div>
+            </div>
+            <div className={um_content}>
               <div className={menuBtnGroup}>
                 <ButtonGroup vertical>
                   {btns}

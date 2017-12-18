@@ -27,6 +27,9 @@ body {
 
   user-select:none;
 }
+.iconfont{
+  font-weight:bold;
+}
 .wrap {
   padding: 20px;
 }
@@ -36,6 +39,7 @@ body {
 }
 .u-menu-inline>.u-menu-submenu>.u-menu-submenu-title{
   font-size:14px;
+  font-weight: bold;
   color:#4A515D;
 }
 .u-menu-inline .u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected{
@@ -43,9 +47,9 @@ body {
 	color:#E14C46;
 }
 .u-menu-submenu-open.u-menu-submenu-inline>.u-menu-submenu-title,:root .u-menu-submenu-inline>.u-menu-submenu-title:after{
-  font-size:16px;
   font-weight: bold;
-  color:#878B94;
+  // font-size:16px;
+  // color:#4A515D;
 }
 .u-menu-submenu-inline>.u-menu-submenu-title:after{
   font-size: 16px;
