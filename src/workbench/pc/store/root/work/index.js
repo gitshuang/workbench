@@ -208,7 +208,6 @@ const reducer = handleActions({
       widthBrm,
       type,
       pinType,
-      tabs:[],
     }
   },
   [titleServiceDisplay]: state => ({
