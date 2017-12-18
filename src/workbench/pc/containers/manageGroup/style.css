@@ -9,6 +9,9 @@
   margin-right: 20px;
   cursor:pointer;
 }
+.widgetTitle :global(.u-checkbox input[type=checkbox]){
+  top:18px;
+}
 .addBtn{
 	display: -webkit-box;
     display: -ms-flexbox;
@@ -59,7 +62,7 @@
 	-webkit-box-flex:1;
 }
 
- 
+
 .widgetTitle :global(.u-button){
 	height:22px;
 	background:#fff;
