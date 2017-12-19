@@ -176,11 +176,8 @@ body {
   border-top: 1px solid rgba(78,89,104,0.19);
 }
 .u-select-dropdown{
-  /**
-  margin-top: 16px;
-  **/
-}
-/*全屏弹窗*/
+  /* padding-top: 16px; */
+}/*全屏弹窗*/
 .u-modal .u-modal-dialog{
   margin:0;
 }
