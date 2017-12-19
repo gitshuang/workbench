@@ -56,6 +56,7 @@ class DropdownButton extends Component{
          </div>
           <div className={btn}>
             <Dropdown
+                getPopupContainer = {this.props.getPopupContainer}
                 trigger={['click']}
                 overlay={_menus}
                 animation="slide-up"
