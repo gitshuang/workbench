@@ -70,6 +70,7 @@ class UserInfoContainer extends Component {
     this.getPromotionServiceList();
 
     this.state = {
+      editPortrait:false,
       dataList:[
         // {"id":"1001","name":"结算中心","icon":"loan","usedService":"核算服务","lastTime":"1分钟前"},
         // {"id":"1001","name":"新增凭证","icon":"bill","usedService":"报账服务","lastTime":"30分钟前"}
@@ -327,16 +328,18 @@ class UserInfoContainer extends Component {
             <div className={imgOuter}>
               {this.getIcon(imgsrc)}
             </div>
-            <div className={editPortrait}>
+            {/* style={{display:this.state.editPortrait}} */}
+            <div className={editPortrait}  >
               <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>
             <div className={userName}>{name}</div>
-
-            <div className={logOut} onClick={this.logOut}>
-              <Icon type="derivation" />
-              <span>注销</span>
-            </div>
           </div>
+          
+          <div className={logOut} onClick={this.logOut}>
+            <Icon type="derivation" />
+            <span>注销</span>
+          </div>
+
           <ul className={`${gloryIcon} ${clearfix}`}>
             <li>
               <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
@@ -361,16 +364,6 @@ class UserInfoContainer extends Component {
             <li className={select_cont}>
               <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")}
                label="系统设置" dataItem={_menuDataItem} />
-              {/* <Select
-                style={{clolr:"red"}}
-                defaultValue="系统设置" name="123"
-                onChange={this.handleChange}
-                getPopupContainer = {()=> document.getElementById("modalId")}
-              >
-                <Option name="language" value="language" >界面语言</Option>
-                <Option name="message" value="message" >消息</Option>
-                <Option name="cancel" value="cancel">注销</Option>
-              </Select> */}
             </li>
           </ul>
         </div>
