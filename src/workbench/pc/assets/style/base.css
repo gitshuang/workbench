@@ -188,5 +188,5 @@ body {
 .u-modal-body .close{
 }
 .lebra-navbar-left-icon img{
-  margin-top: -12px;
+  margin-top: -12px !important;
 }
