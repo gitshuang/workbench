@@ -12,6 +12,7 @@
 }
 .breadcrumbClass a {
   color:#9a9a9a;
+  cursor:pointer;
 }
 .breadcrumbClass ol>li+li:before {
   content: "\003e";

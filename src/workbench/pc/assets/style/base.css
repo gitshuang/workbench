@@ -36,18 +36,19 @@ body {
 .u-menu-inline>.u-menu-item{
 	font-size:12px;
 	color:#4A515D;
+  cursor:pointer;
 }
 .u-menu-inline>.u-menu-submenu>.u-menu-submenu-title{
   font-size:14px;
-  font-weight: bold;
   color:#4A515D;
+  cursor:pointer;
 }
 .u-menu-inline .u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected{
   border:none;
 	color:#E14C46;
 }
 .u-menu-submenu-open.u-menu-submenu-inline>.u-menu-submenu-title,:root .u-menu-submenu-inline>.u-menu-submenu-title:after{
-  font-weight: bold;
+  // font-weight: bold;
   // font-size:16px;
   // color:#4A515D;
 }
@@ -178,4 +179,15 @@ body {
   /**
   margin-top: 16px;
   **/
+}
+/*全屏弹窗*/
+.u-modal .u-modal-dialog{
+  margin:0;
+}
+.u-modal .u-modal-header{
+  padding:0;
+  border:none;
+}
+.u-modal-body .close{
+  top:20px;
 }
