@@ -20,7 +20,7 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
 import { select_widget_list,
 widget_left,widget_right,search_icon,search_icon_con,
   searchPanel,panel,left,panel_right,button_group,form_control,icon,
-panel_left,footer_btn,title,search_tit
+panel_left,footer_btn,title,search_tit,active
 } from './style.css'
 
 @connect(
@@ -55,7 +55,7 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-    this.getServices(null);
+    this.getServices("");
   }
 
   getServices(serveName){
@@ -142,7 +142,8 @@ class SelectWidgetList extends Component {
     let dataList = [];
     Object.assign(dataList,_data);
     this.setState({
-      dataList:_data
+      dataList:_data,
+      activeKey:''
     });
   }
 
@@ -197,10 +198,10 @@ class SelectWidgetList extends Component {
   render() {
     let self = this;
     const {selectWidgetList} = this.props;
-    const {dataList} = this.state;
+    const {dataList,activeKey} = this.state;
 
     let btns = [];
-    btns.push(<Button key="10012" shape='border' onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
+    btns.push(<Button key="10012" shape='border' className={ activeKey ? 'active' : '' } onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
     selectWidgetList.map(function(da,i){
         btns.push(<Button key={`button_li_${da.labelId}-${i}`} shape='border' onClick={()=>{self.onBtnOnclick(da.labelId)}}>{da.labelName}</Button>);
     });

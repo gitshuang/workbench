@@ -15,7 +15,7 @@
   box-sizing: border-box;
 }
 .widget_file_item{
-  background: url("assets/image/wgt/fileBackground.png") no-repeat;
+  background: url("assets/image/wgt/folder_bg.png") no-repeat;
   background-size: 100% 100%;
   background-position: center;
   border:none;

@@ -90,17 +90,17 @@ class serviceClassify extends Component {
     })
   }
 
-  packUp = (flag,event)=>{
-    let appContainer = event.target.parentNode.parentNode;
-    if(!flag){
-      appContainer.lastChild.style.display = "none";
-    }else{
-      appContainer.lastChild.style.display = "flex";
-    }
-    this.setState({
-      isPackUp:!flag
-    })
-  }
+  // packUp = (flag,event)=>{
+  //   let appContainer = event.target.parentNode.parentNode;
+  //   if(!flag){
+  //     appContainer.lastChild.style.display = "none";
+  //   }else{
+  //     appContainer.lastChild.style.display = "flex";
+  //   }
+  //   this.setState({
+  //     isPackUp:!flag
+  //   })
+  // }
 
   btnSearch=()=>{
     if(this.state.value != "搜索应用"){
@@ -148,7 +148,7 @@ class serviceClassify extends Component {
               <img src={applicationIcon}/>
               <span>{ applicationName }</span>
             </div>
-            <Icon type="upward" className={icon_close} onClick={ (e)=>{this.packUp(isPackUp,e)} }></Icon>
+            {/*<Icon type="upward" className={icon_close} onClick={ (e)=>{this.packUp(isPackUp,e)} }></Icon>*/}
           </header>
           <hgroup className="um-box">
             {

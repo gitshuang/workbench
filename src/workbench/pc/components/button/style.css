@@ -10,6 +10,7 @@
   margin:0 8px;
   font-family:Helvetica;
   font-size:14px;
+  line-height: 32px;
 }
 .btn>i{
   margin-right:8px;
@@ -100,8 +101,8 @@
 
 /** 选用样式一 **/
 .check_selected_btn{
-  width:20px;
-  height:20px; 
+  width:22px;
+  height:22px; 
   color:rgb(118, 127, 139);
   // border: 1px solid rgba(117,127,140,1);
   background: transparent;
@@ -124,8 +125,8 @@
 
 /**  选用样式二 **/
 .check_close_btn{
-  width:20px;
-  height:20px;
+  width:22px;
+  height:22px;
   color:rgb(118, 127, 139);
   // border: 1px solid rgba(117,127,140,1);
   background: transparent;
