@@ -202,6 +202,11 @@
 .userBtnList li{
   float : left;
 }
+.userBtnList li:nth-child(1)>button{
+  border: none;
+  background: rgba(9,44,66,0.04);
+  border-radius: 0;
+}
 .userBtnList li:nth-child(2){
   margin-right: 8px;
 }
