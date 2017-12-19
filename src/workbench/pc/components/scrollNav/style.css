@@ -10,6 +10,7 @@
     word-break: break-all;
     font-size:15px;
     color:rgba(136,136,136);
+    line-height: 32px;
 }
 
 .link:hover {
@@ -57,4 +58,7 @@
   padding-right: 100px;
   width: 100%;
   box-sizing: border-box;
+}
+.navs>li{
+  height:48px;
 }

@@ -11,7 +11,7 @@ import Button from 'bee-button';
 import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee-tabs';
 import onClickOutside from 'react-onclickoutside';
-import img1 from 'assets/image/wgt/yonyouSpace.png';
+import img1 from 'assets/image/wgt/yonyouSpace1.png';
 import img2 from 'assets/image/wgt/intelligent_logo.png';
 import img3 from 'assets/image/wgt/goldInstitute.png';
 import img4 from 'assets/image/wgt/salary_logo.png';
@@ -33,6 +33,8 @@ const {
   requestStart,
   requestSuccess,
   requestError,
+  getLatestAccessList,
+  getPromotionServiceList
 } = rootActions;
 
 @withRouter
@@ -40,6 +42,8 @@ const {
   mapStateToProps(
     'userInfo',
     'userInfoDisplay',
+    'latestAccessList',
+    'promotionServiceList',
     {
       namespace: 'home',
     },
@@ -51,7 +55,9 @@ const {
     hideUserInfoDisplay,
     getUserInfo,
     getWorkList,
-    setCutUser
+    setCutUser,
+    getLatestAccessList,
+    getPromotionServiceList
   }
 )
 @onClickOutside
@@ -59,18 +65,20 @@ class UserInfoContainer extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.getLatestAccessList();
+    this.getPromotionServiceList();
 
     this.state = {
       dataList:[
-        {"id":"1001","name":"结算中心","icon":"loan","usedService":"核算服务","lastTime":"1分钟前"},
-        {"id":"1001","name":"新增凭证","icon":"bill","usedService":"报账服务","lastTime":"30分钟前"}
+        // {"id":"1001","name":"结算中心","icon":"loan","usedService":"核算服务","lastTime":"1分钟前"},
+        // {"id":"1001","name":"新增凭证","icon":"bill","usedService":"报账服务","lastTime":"30分钟前"}
       ],
       promotionList:[
-        {"src":img1,"promotion_tit":"友空间"},
-        {"src":img2,"promotion_tit":"智能服务"},
-        {"src":img3,"promotion_tit":"友金所"},
-        {"src":img4,"promotion_tit":"新福社"},
-        {"src":img5,"promotion_tit":"相关服务"}
+        // {"src":img1,"promotion_tit":"友空间"},
+        // {"src":img2,"promotion_tit":"智能服务"},
+        // {"src":img3,"promotion_tit":"友金所"},
+        // {"src":img4,"promotion_tit":"新福社"},
+        // {"src":img5,"promotion_tit":"相关服务"}
       ]
     }
   }
@@ -83,6 +91,35 @@ class UserInfoContainer extends Component {
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
   }
+
+  getLatestAccessList() {
+    const {requestStart, requestSuccess, requestError,   getLatestAccessList} = this.props;
+    requestStart();
+    getLatestAccessList().then(({error, payload}) => {
+        if (error) {
+            requestError(payload);
+        }
+        this.setState({
+          dataList:payload
+        })
+        requestSuccess();
+    });
+  }
+
+  getPromotionServiceList() {
+    const {requestStart, requestSuccess, requestError, getPromotionServiceList} = this.props;
+    requestStart();
+    getPromotionServiceList().then(({error, payload}) => {
+        if (error) {
+            requestError(payload);
+        }
+        this.setState({
+          promotionList:payload
+        })
+        requestSuccess();
+    });
+  }
+
 
   handleClickOutside(e) {
     //在面板中操作不要关闭面板
@@ -237,15 +274,16 @@ class UserInfoContainer extends Component {
 
     let _li = [];//最近使用列表
     this.state.dataList.forEach((da,i)=>{
+      let applicationName = da.serve.application.applicationName;
         _li.push(<li key={i}>
-          <div className={usedIcon}><Icon type={da.icon}></Icon></div>
+          <div className={usedIcon}><img src={img1} /></div>
           <div className={`${used} ${clearfix}`}>
             <div className={`${usedModule} ${clearfix}`}>
               <div className={`${module} ${clearfix}`}>
-                <div className={usedTit}>{da.name}</div>
-                <div className={lastTime}>{da.lastTime}</div>
+                <div className={usedTit}>{applicationName}</div>
+                <div className={lastTime}>{da.accessTime}</div>
               </div>
-              <div className={usedService}>{da.usedService}</div>
+              <div className={usedService}>{da.serve.serveName}</div>
             </div>
           </div>
         </li>);
@@ -255,8 +293,8 @@ class UserInfoContainer extends Component {
     this.state.promotionList.forEach((item,index)=>{
       lis.push(<li key={index}>
           <div className={serviceImg}>
-            <section><img src={item.src}/></section>
-            <div className={serviceName}>{item.promotion_tit}</div>
+            <section><img src={img1}/></section>
+            <div className={serviceName}>{item.serveName}</div>
           </div>
         </li>);
     })
@@ -295,7 +333,7 @@ class UserInfoContainer extends Component {
               {renderAllow}
             </li>
             <li className={select_cont}>
-              <Select 
+              <Select
                 defaultValue="系统设置" name="123"
                 onChange={this.handleChange}
                 getPopupContainer = {()=> document.getElementById("modalId")}

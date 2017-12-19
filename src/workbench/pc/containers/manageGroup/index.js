@@ -309,9 +309,9 @@ class ManageGroup extends Component {
     moveBottomGroup(index);
   }
   // 删除群组
-  delectGroupFn =(data) =>{
+  delectGroupFn =(index) =>{
     const { delectGroup } = this.props;
-    delectGroup(data.index);
+    delectGroup(index);
   }
   // 添加新分组
   addGroupFn(index) {
@@ -328,7 +328,7 @@ class ManageGroup extends Component {
         this.moveTopFn(index);
         break;
       default:
-        this.popOpen();
+        this.delectGroupFn(index);
         break;
     }
   }
@@ -395,8 +395,8 @@ class ManageGroup extends Component {
               onBlur={this.handleBlur}
               ref="groupName" />
           </div>
-          <ButtonCheckSelected className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><span>√</span></ButtonCheckSelected>
-          <ButtonCheckClose className={btn} onClick={ ()=>{this.renameGroupCancel(index)} }><span>×</span></ButtonCheckClose>
+          <ButtonCheckSelected className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><Icon type="right"></Icon></ButtonCheckSelected>
+          <ButtonCheckClose className={btn} onClick={ ()=>{this.renameGroupCancel(index)} }><Icon type="cancel"></Icon></ButtonCheckClose>
         </div>
       );
     }else {
@@ -432,8 +432,6 @@ class ManageGroup extends Component {
       }
     ]
 
-    console.log("this.props");
-    console.log(this.props);
     if (isDragging) {
       //return null
     }
@@ -448,7 +446,7 @@ class ManageGroup extends Component {
 
         <div className={addBtn} >
           <ButtonDefaultAlpha className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
-            <Icon type="add" ></Icon>
+            <Icon type="add"></Icon>
             添加组
           </ButtonDefaultAlpha>
         </div>

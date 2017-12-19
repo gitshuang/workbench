@@ -20,7 +20,7 @@ body{
 }
 .um_content{
 	background:#e6e9e9;
-	padding:82px 45px 48px;
+	padding:82px 23px 48px;
 }
 .umBoxJustify{
 	height:48px;
@@ -71,4 +71,20 @@ body{
 	width:100%;
 	position:fixed;
 	bottom: 0;
+}
+:global(.cancelModal button){
+  margin:0;
+}
+:global(.cancelModal button:first-child){
+  float: left;
+  color: rgba(71,77,84,1);
+  background: transparent;
+}
+:global(.cancelModal button:first-child:hover){
+  color: rgba(71,77,84,1);
+  background: rgba(9,44,66,0.08);
+}
+:global(.cancelModal button:nth-child(2)){
+  background: rgba(225,76,70,1);
+  color: rgba(255,255,255,1);
 }

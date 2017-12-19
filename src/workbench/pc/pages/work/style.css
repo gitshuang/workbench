@@ -50,3 +50,29 @@ body{
 .title_service_display{
   color:#E14C46 !important;
 }
+.work :global(.lebra-navbar-left){
+  padding-left: 7px;
+}
+.work :global(.lebra-navbar-left-content){
+  margin-left: 8px;
+}
+.titleArea {
+  text-align: center;
+  position: relative;
+}
+.service, .pin {
+  position: absolute;
+  font-size:18px;
+  font-weight:900;
+}
+.service {
+  right: -35px;
+}
+.pin {
+  right: -70px;
+}
+:global(.u-message){
+  left:50%;
+  transform: translate(-50% ,0);
+  width:300px !important;
+}

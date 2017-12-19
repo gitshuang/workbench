@@ -14,6 +14,7 @@ import {
   iconImg,
   default_icon
 } from './style.css'
+import _default_icon from 'assets/image/default.png';
 
 const widgetStyle = [
   // 小
@@ -56,9 +57,7 @@ class WidgetItem extends Component {
         <div className={title}>
           <div className={title_right}>{name}</div>
         </div>
-        {
-          icon?<img src={icon} className={iconImg}/>:<Icon className={`${iconImg} ${default_icon}`} type="instrument-2" />
-        }
+        <img src={icon?icon:_default_icon} className={iconImg}/>
       </li>
     );
   }

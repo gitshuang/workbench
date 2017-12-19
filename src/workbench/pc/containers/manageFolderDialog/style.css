@@ -8,14 +8,17 @@
   background-color: initial;
 }
 :global(.manageDialogFolder.u-modal){
-  position: fixed;
-  bottom:auto;
+   position: fixed;
+  bottom: auto;
   margin: 0px;
   z-index: 3000;
-  height: auto;
-  width: 600px;
-  left: calc((100% - 600px)/2);
-  top: 30px;
+  height: 600px;
+  width: 800px;
+  left: calc((100% - 800px)/2);
+  top: calc((100% - 600px)/2);
+}
+:global(.manageDialogFolder .u-modal-dialog){
+  width: auto;
 }
 :global(div[role=dialog]){
   // height:100%;

@@ -5,6 +5,9 @@
   border-radius: 100px;
   color: #fff;
 }
+.page_home :global(.lebra-navbar-left-icon .iconfont){
+  font-size: 31px;
+}
 .logoImg{
   max-height: 27px;
 }

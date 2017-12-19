@@ -32,7 +32,8 @@ import {
   saveArea,
   batchArea,
   header,
-  page_home
+  page_home,
+  cancelModal
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -91,6 +92,7 @@ class Home extends Component {
   componentDidMount() {
     this.getManageList();
   }
+
   getManageList() {
     const {
       requestStart,
@@ -107,6 +109,8 @@ class Home extends Component {
       return error;
     });
   }
+
+
 
   //  保存
   save = () => {
@@ -131,25 +135,29 @@ class Home extends Component {
   // 取消
   cancel = () => {
     const {
-      isEdit,
+      //isEdit,
       setEditState,
     } = this.props;
+    /*
     if(isEdit){
       this.getManageList().then((error) => {
         if (!error) {
-          setEditState(false);
+
         }
+        setEditState(false);
       });
     }else{
       this.goBack();
-    }
+    }*/
+    setEditState(false);
     this.popCloseCancel();
+    this.goBack();
   }
   // 返回操作
   goBack = () => {
     this.props.history.goBack();
   }
-  //
+  //批量删除
   batchDelectFn = () => {
     const { batchDelect } = this.props;
     batchDelect();
@@ -160,22 +168,28 @@ class Home extends Component {
     const { openBatchMove } = this.props;
     openBatchMove();
   }
-
+  // 打开删除的弹窗
   popOpen = () => {
     this.setState({
       showModal: true
     });
   }
+  // 关闭删除的弹窗
   popClose = () => {
     this.setState({
       showModal: false
     });
   }
-  // 打开弹窗取消
+  // 打开取消的弹窗
   popOpenCancel = () => {
-    this.setState({
-      showCancelModal: true
-    });
+    const {isEdit} = this.props;
+    if(isEdit){
+      this.setState({
+        showCancelModal: true
+      });
+    }else{
+      this.goBack();
+    }
   }
   // 关闭取消的弹窗
   popCloseCancel = () => {
@@ -214,8 +228,8 @@ class Home extends Component {
       {label:"取消",fun:this.popClose,className:""}
     ]
     const pop_btn2 = [
-      {label:"保存",fun:this.save,className:""},
       {label:"不保存",fun:this.cancel,className:""},
+      {label:"保存",fun:this.save,className:""},
       {label:"取消",fun:this.popCloseCancel,className:""}
     ]
     const list = [];
@@ -235,12 +249,13 @@ class Home extends Component {
         <div className={um_footer}>
           <div className={`${umBoxJustify} um-box-justify`}>
              <div className={`${batchArea}  horizontalParent`}>
-              <ButtonDefaultLine onClick={this.popOpen} disabled={selectList.length ? false:true} className="horizontal">删除</ButtonDefaultLine>
+              <ButtonDefaultLine onClick={this.batchDelectFn} disabled={selectList.length ? false:true} className="horizontal">删除</ButtonDefaultLine>
               <ButtonDefaultLine onClick={this.openGroupTo} disabled={selectList.length ? false:true} >移动到</ButtonDefaultLine>
             </div>
             <div className={`${saveArea}  horizontalParent`}>
               <ButtonBrand disabled={!isEdit} onClick={this.save}>保存</ButtonBrand>
               <ButtonDefaultLine onClick={this.popOpenCancel} >取消</ButtonDefaultLine>
+              {/*<ButtonDefaultLine onClick={this.goBack}>取消</ButtonDefaultLine>*/}
             </div>
           </div>
         </div>
@@ -253,7 +268,7 @@ class Home extends Component {
             <span>您确认要批量删除吗?</span>
           </div>
         </PopDialog>
-        <PopDialog className="pop_dialog_delete" show = { this.state.showCancelModal } close={this.popCloseCancel} btns={pop_btn2} title={"是否保存最新修改？"} >
+        <PopDialog className="pop_dialog_delete cancelModal" show = { this.state.showCancelModal } close={this.popCloseCancel} btns={pop_btn2} title={"是否保存最新修改？"} >
           <div>
             <span>点击不保存，则最新修改将丢失</span>
           </div>

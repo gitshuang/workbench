@@ -221,9 +221,9 @@ class WidgeFileItem extends Component {
     const edit = <div className={edit_cont}>
       <FormControl className={`${form_control} input`} value={this.state.value} onChange={this.inputOnChange}/>
 
-      <ButtonCheckSelected className={btn} onClick={this.save}><span>√</span></ButtonCheckSelected>
+      <ButtonCheckSelected className={btn} onClick={this.save}><Icon type="right"></Icon></ButtonCheckSelected>
       <ButtonCheckClose className={btn} onClick={this.close}>
-        <span>×</span>
+        <Icon type="cancel"></Icon>
       </ButtonCheckClose>
     </div>;
 
@@ -233,7 +233,7 @@ class WidgeFileItem extends Component {
       </div>
       <div className={`${editDele} ${clearfix}`}>
         <div onClick={this.fileEdit}><Icon title="重命名文件夹" type="record" /></div>
-        <div onClick={this.fileDele}><Icon title="删除文件夹" type="dustbin" /></div>
+        <div onClick={()=>{this.popSave(da)}}><Icon title="删除文件夹" type="dustbin" /></div>
       </div>
     </div>
     const { connectDragSource, connectDropTarget,isDragging,drag } = this.props;

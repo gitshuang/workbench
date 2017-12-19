@@ -38,7 +38,7 @@ class HeaderPage extends Component {
         logo,
       }
     } = this.props;
-    return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
+    // return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
   }
   goback = () => {
     this.props.history.goBack();
@@ -64,7 +64,7 @@ class HeaderPage extends Component {
           iconName={iconName} >
           <span>首页编辑</span>
         </Header>
-        <div style={{paddingLeft:"70px","fontSize":"12px"}}>
+        <div style={{paddingLeft:"23px","fontSize":"12px"}}>
           <BreadcrumbContainer data={this.state.brm} goback={this.goback}/>
         </div>
       </div>

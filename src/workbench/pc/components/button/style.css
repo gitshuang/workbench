@@ -100,21 +100,22 @@
 
 /** 选用样式一 **/
 .check_selected_btn{
-  width:22px;
-  height:22px; 
+  width:20px;
+  height:20px; 
   color:rgb(118, 127, 139);
-  border: 1px solid rgba(117,127,140,1);
+  // border: 1px solid rgba(117,127,140,1);
   background: transparent;
   margin: 0px;
   margin-left:2px;
 }
 .check_selected_btn:active{
   color: rgba(0,203,124,1);
-  border: 1px solid rgba(0,203,124,1);
+  // border: 1px solid rgba(0,203,124,1);
 }
 .check_selected_btn:hover{
   color: rgba(45,63,93,1);
-  border: 1px solid rgba(45,63,93,1);
+  background:none;
+  // border: 1px solid rgba(45,63,93,1);
 }
 
 .disabled_check_selected_btn{
@@ -123,22 +124,23 @@
 
 /**  选用样式二 **/
 .check_close_btn{
-  width:22px;
-  height:22px;
+  width:20px;
+  height:20px;
   color:rgb(118, 127, 139);
-  border: 1px solid rgba(117,127,140,1);
+  // border: 1px solid rgba(117,127,140,1);
   background: transparent;
   margin: 0px;
   margin-left:2px;
 }
 .check_close_btn:active{
   color: rgba(45,63,93,1);
-  border: 1px solid rgba(45,63,93,1);
+  // border: 1px solid rgba(45,63,93,1);
 }
 
 .check_close_btn:hover{
   color: rgba(68,70,81,1);
-  border: 1px solid rgba(68,70,81,1);
+  background:none;
+  // border: 1px solid rgba(68,70,81,1);
 }
 
 .disabled_check_close_btn{
@@ -174,8 +176,8 @@
 } 
 .warning_btn:hover{
   background:rgb(246, 197, 68);
-font-family:PingFangSC-Medium;
-color:rgba(71,77,84,1);
+  font-family:PingFangSC-Medium;
+  color:rgba(71,77,84,1);
 }
 .warning_btn:active{
   background:rgba(255,153,31,1);

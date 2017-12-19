@@ -21,7 +21,21 @@ import Pin from 'containers/pin';
 import styles from './style.css';
 
 /*  定义style  css-loader  */
-const {workArea, sideBarArea, contentArea, hasTab, tabArea, wrap,title_service_display,header,active} = styles;
+const {
+  workArea,
+  sideBarArea,
+  contentArea,
+  hasTab,
+  tabArea,
+  wrap,
+  title_service_display,
+  header,
+  active,
+  work,
+  titleArea,
+  service,
+  pin,
+} = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {
@@ -39,7 +53,6 @@ const {
 @connect(
   mapStateToProps(
     'widthBrm',
-    'domainName',
     'pinType',
     'pinDisplay',
     'current',
@@ -48,6 +61,12 @@ const {
     'titleServiceType',
     'expandedSidebar',
     'type',
+    {
+      key: 'domainName',
+      value: ({ domainName, type }) => {
+        return type === 1 ? '' : domainName;
+      },
+    },
     {
       namespace: 'work'
     }
@@ -86,6 +105,9 @@ export default class Work extends Component {
       history,
       } = this.props;
     requestStart();
+    this.setState({
+      loaded: false,
+    })
     getProductInfo(code, type, subcode).then(({error, payload}) => {
       if (error) {
         requestError(payload);
@@ -94,8 +116,8 @@ export default class Work extends Component {
           const {
             curServe: {
               serveCode: subcode
-              },
-            } = payload;
+            },
+          } = payload;
           history.replace(`/${type}/${code}/${subcode}`);
         }
         this.setState({
@@ -113,9 +135,9 @@ export default class Work extends Component {
           code,
           type,
           subcode,
-          },
         },
-      } = this.props;
+      },
+    } = this.props;
     this.getProductInfo(code, type, subcode);
   }
 
@@ -139,14 +161,18 @@ export default class Work extends Component {
         },
       menus,
       setCurrent,
-      } = this.props;
-    if (!(newCode === oldCode && newType === oldType) || !newSubcode) {
-      this.setState({
-        loaded: false,
-      })
-      this.getProductInfo(newCode, newType);
-    } else if (newSubcode && newSubcode !== oldSubcode) {
-      setCurrent(newSubcode);
+    } = this.props;
+    const typeChange = newType !== oldType;
+    const codeChange = newCode !== oldCode;
+    const subcodeChange = newSubcode !== oldSubcode;
+    if (typeChange || codeChange) {
+      this.getProductInfo(newCode, newType, newSubcode);
+    } else if (subcodeChange) {
+      if (newSubcode) {
+        setCurrent(newSubcode);
+      } else {
+        this.getProductInfo(newCode, newType);
+      }
     }
   }
 
@@ -174,7 +200,7 @@ export default class Work extends Component {
         if (error) {
           requestError(payload);
         }
-        Message.create({content: '从首页移除成功', position: 'top', color: "success"});
+        Message.create({content: '从首页移除成功',duration:2,position: 'top', color: "success"});
         requestSuccess();
       });
       return false;
@@ -243,7 +269,7 @@ export default class Work extends Component {
       current: {
         title,
         hasRelationFunc,
-        },
+      },
       domainName,
       widthBrm,
       type,
@@ -251,25 +277,30 @@ export default class Work extends Component {
     const { loaded } = this.state;
     let iconName = <Icon title="返回首页" type="home"/>
     return (
-      <div className={wrap + " um-win"}>
+      <div className={`${wrap} um-win ${work}`}>
         <div className={header}>
           <div className="um-header">
             <HeaderContainer onLeftClick={ this.goBack } iconName={iconName} leftContent={ domainName }>
-              <div className={"um-box"}>
+              <div className={titleArea}>
                 <span>{ title }</span>
                 {
                   hasRelationFunc ?
                     (<Icon
                       title="相关服务"
                       type="pull-down"
-                      style={{marginLeft:"15px",fontSize:"18px",fontWeight:900}}
-                      className={titleServiceType?title_service_display:""}
+                      className={`
+                        ${titleServiceType?title_service_display:""}
+                        ${service}
+                      `}
                       onClick={ titleServiceDisplay }/>) : undefined
                 }
                 <Icon
                   title="添加到首页"
+                  className={pin}
+                  style={{
+                    right: hasRelationFunc ? '-70px' : '-35px',
+                  }}
                   type={pinType?"pin2":"pin"}
-                  style={{ marginLeft:"15px",fontSize:"18px",fontWeight:900}}
                   onClick={ this.pinDisplayFn }
                 />
               </div>

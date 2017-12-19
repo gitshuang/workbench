@@ -20,7 +20,7 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
 import { select_widget_list,
 widget_left,widget_right,search_icon,search_icon_con,
   searchPanel,panel,left,panel_right,button_group,form_control,icon,
-panel_left,footer_btn,title
+panel_left,footer_btn,title,search_tit
 } from './style.css'
 
 @connect(
@@ -55,16 +55,13 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-    if(!this.state.edit){
-      this.getServices();
-    }
+    this.getServices(null);
   }
 
-  getServices(parme){
+  getServices(serveName){
     let self = this;
     const { requestError, requestSuccess, getSelectWidgetList } = this.props;
-
-    getSelectWidgetList(parme).then(({error, payload}) => {
+    getSelectWidgetList(serveName).then(({error, payload}) => {
       if (error) {
         requestError(payload);
       }
@@ -78,6 +75,12 @@ class SelectWidgetList extends Component {
       });
       requestSuccess();
     });
+  }
+
+  btnSearch=()=>{
+    if(this.state.value != "搜索内容..."){
+        this.getServices(this.state.value);
+    }
   }
  
   getArrayToMap(data,dataMap,parId){
@@ -145,15 +148,16 @@ class SelectWidgetList extends Component {
 
   onChange =(data,sele)=>{
     // console.log(this.state.dataMap);
-    this.state.selectedList.push(data);
-    
+    console.log(data);
+    if(sele == "3" ){
+      this.state.selectedList.push(data);
+    }else{
+      if(this.state.selectedList.length != 0){
+        let index = this.state.selectedList.findIndex(da=>da.serveId == data.serveId);
+        this.state.selectedList.splice(index,1);
+      }
+    }
     this.state.dataMap[data.serveId].selected = sele;
-    // console.log(this.state.dataMap);
-    // if(data.selected == "3"){
-    //   this.state.dataMap[data.serveId].selected = "4";
-    // }else{
-    //   this.state.dataMap[data.serveId].selected = "3";
-    // }
     this.setState({
         ...this.state,
         edit:true
@@ -162,13 +166,27 @@ class SelectWidgetList extends Component {
 
   //输入框修改data数据源
   inputOnChange = (e) => {
+    this.setState({
+        value:e
+    });
+  }
+
+  inputOnFocus = (e) => {
+    let _value = e.target.value != "搜索内容..."?e.target.value:"";
+    this.setState({
+        value:_value
+    });
+  }
+
+  inputOnBlur = (e) => {
+    if(e.target.value == ""){
       this.setState({
-          value:e
+          value:"搜索内容..."
       });
+    }
   }
 
   btnSave=()=>{
-    // this.state.selectedList.push(data);
     this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
     this.setState({
       selectedList:[]
@@ -199,10 +217,11 @@ class SelectWidgetList extends Component {
        
        <div className={widget_right}>
           <div className={searchPanel}>
-              <FormControl className={form_control} value={this.state.value} onChange={this.inputOnChange}/>
-              <div className={search_icon_con}>
+              <FormControl className={form_control} value={this.state.value} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
+              <div className={search_icon_con} >
                   <span>|</span>
-                  <Icon type="uf-search" size="lg"  className={search_icon}>  搜索</Icon>
+                  <Icon type="search" className={search_icon} onClick={this.btnSearch} ></Icon>
+                  <span className={search_tit} onClick={this.btnSearch} >搜索</span>
               </div>
            </div>
            <div className={panel} >

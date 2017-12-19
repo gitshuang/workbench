@@ -43,6 +43,8 @@ const {
   changeQuickServiceDisplay,
   changeQuickServiceHidden,
   popMessage,
+  getLatestAccessList,
+  getPromotionServiceList
 } = actions;
 
 const defaultState = {
@@ -50,9 +52,24 @@ const defaultState = {
   quickServiceDisplay: false,
   messageList:[],
   messageShowNum:0,
+  latestAccessList:[],
+  promotionServiceList:[]
+};
+
+const createReducer = (key) => (state, { payload, error }) => {
+  if (error) {
+    return state;
+  } else {
+    return {
+      ...state,
+      [key]: payload,
+    };
+  }
 };
 
 const reducer = handleActions({
+  [getLatestAccessList]: createReducer('latestAccessList'),
+  [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
     return state;

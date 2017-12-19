@@ -3,6 +3,8 @@ import types from './types';
 import {
   getServiceList,
   getMessage,
+  getLatestAccessList,
+  getPromotionServiceList
 } from './api';
 
 const {
@@ -14,11 +16,15 @@ const {
   CHANGE_QUICK_SERVICE_DISPLAY,
   CHANGE_QUICK_SERVICE_HIDDEN,
   POP_MESSAGE,
+  GET_LATEST_ACCESS_LIST,
+  GET_PROMOTION_SERVICE_LIST,
 } = types;
 
 export default createActions({
     [GET_SERVICE_LIST]: getServiceList,
     [GET_MESSAGE]: getMessage,
+    [GET_LATEST_ACCESS_LIST]: getLatestAccessList,
+    [GET_PROMOTION_SERVICE_LIST]: getPromotionServiceList,
   },
   REQUEST_START,
   REQUEST_SUCCESS,
