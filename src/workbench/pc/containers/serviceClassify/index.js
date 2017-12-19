@@ -62,6 +62,7 @@ class serviceClassify extends Component {
       current: undefined,
       list2 : [],
       listAll : [],
+      allApplicationList:[]
     }
   }
 
@@ -79,6 +80,12 @@ class serviceClassify extends Component {
         if (error) {
           requestError(payload);
         }
+        payload.forEach((da,i)=>{
+          da.extend =false;
+        });
+        this.setState({
+          allApplicationList:payload
+        })
         requestSuccess();
       });
     }
@@ -90,9 +97,10 @@ class serviceClassify extends Component {
     })
   }
 
-  packUp = ()=>{
+  packUp = (data)=>{
+    data.extend = data.extend?false:true;
     this.setState({
-      extend:!this.state.extend
+        ...this.state
     })
   }
 
@@ -115,7 +123,7 @@ class serviceClassify extends Component {
     const { current ,extend} = this.state;
     const {
       allApplicationList
-    } = this.props;
+    } = this.state;
     if (current) {
       const label = allApplicationList.find(({
         labelId,
@@ -135,6 +143,7 @@ class serviceClassify extends Component {
         applicationCode,
         service,
       } = app;
+     
       return (
         <div key={applicationCode} >
           <header>
@@ -142,25 +151,30 @@ class serviceClassify extends Component {
               <img src={applicationIcon}/>
               <span>{ applicationName }</span>
             </div>
-            {/*<Icon type={extend?"pull-down":"upward"} title={ extend ? '收起' : '展开' } onClick={this.packUp}></Icon>*/}
+            <Icon type={app.extend?"pull-down":"upward"} title={ extend ? '收起' : '展开' } onClick={()=>{this.packUp(app)}}></Icon>
           </header>
-          <hgroup className="um-box">
-            {
-              service.map(({
-                serveName,
-                serveCode,
-                serveIcon,
-              }) => {
-                return (
-                  <GoTo
-                    key={serveCode}
-                    name={serveName}
-                    icon={serveIcon}
-                    to={`/serve/${serveCode}`} />
-                );
-              })
-            }
-          </hgroup>
+          {
+            !app.extend?(
+              <hgroup className="um-box">
+                {
+                  service.map(({
+                    serveName,
+                    serveCode,
+                    serveIcon,
+                  }) => {
+                    return (
+                      <GoTo
+                        key={serveCode}
+                        name={serveName}
+                        icon={serveIcon}
+                        to={`/serve/${serveCode}`} />
+                    );
+                  })
+                }
+              </hgroup>
+            ):null
+          }
+          
         </div>
       )
     })
