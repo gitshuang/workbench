@@ -142,7 +142,7 @@ class serviceClassify extends Component {
               <img src={applicationIcon}/>
               <span>{ applicationName }</span>
             </div>
-            <Icon type={extend?"pull-down":"upward"} title={ extend ? '收起' : '展开' } onClick={this.packUp}></Icon>
+            {/*<Icon type={extend?"pull-down":"upward"} title={ extend ? '收起' : '展开' } onClick={this.packUp}></Icon>*/}
           </header>
           <hgroup className="um-box">
             {
