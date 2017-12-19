@@ -1,7 +1,8 @@
 .content{
   /*overflow: hidden;*/
   background:rgba(230,233,233,1);
-  margin: 15px;
+  // margin: 15px;
+  padding:13px 14px;
   margin-top: 0;
   position: relative;
   overflow: auto;
@@ -12,20 +13,27 @@
   -webkit-box-pack: center;
   -webkit-box-align: center;
 }
+.home_file_item_dailog :global(.u-modal-content){
+  padding:16px;
+}
 .home_file_item_dailog :global(.u-modal-header){
     padding:8px 15px;
 }
 .home_file_item_dailog :global(.u-modal-body){
     padding:0;
-}
-.home_file_item_dailog :global(.u-modal-body){
-    padding:0;
+    margin-top:14px;
 }
 .home_file_item_dailog :global(.close){
-  top: -31px;
+  top: -35px;
+  right:0;
 }
 .home_file_item_dailog  :global(.u-modal-dialog){
   width: 850px;
+}
+.home_file_item_dailog :global(.u-modal-title){
+  font-size: 19px;
+  line-height: 25px;
+  color:rgba(71,77,84,1);
 }
 .home .u-modal{
   display: none !important;

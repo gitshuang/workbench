@@ -162,7 +162,7 @@ body {
   padding:0;
 }
 .manageDialogFolder .close{
-  top: -46px;
+  top: -26px;
   right: 20px;
 }
 .u-tabs-tab{
@@ -189,5 +189,5 @@ body {
   border:none;
 }
 .u-modal-body .close{
-  top:20px;
+  // top:20px;
 }

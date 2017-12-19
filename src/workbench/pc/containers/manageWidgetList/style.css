@@ -269,7 +269,9 @@
   padding-top: 6px;
   padding-left: 10px;
 }
-
+.pop_dialog_widge_list :global(.close){
+  top: 18px;
+}
 .edit_cont .btn{
   display: inline-block;
   vertical-align: middle;
