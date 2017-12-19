@@ -58,7 +58,7 @@ class serviceClassify extends Component {
     super(props);
     this.state = {
       value: "搜索应用",
-      isPackUp:false,
+      extend:true,
       current: undefined,
       list2 : [],
       listAll : [],
@@ -90,17 +90,11 @@ class serviceClassify extends Component {
     })
   }
 
-  // packUp = (flag,event)=>{
-  //   let appContainer = event.target.parentNode.parentNode;
-  //   if(!flag){
-  //     appContainer.lastChild.style.display = "none";
-  //   }else{
-  //     appContainer.lastChild.style.display = "flex";
-  //   }
-  //   this.setState({
-  //     isPackUp:!flag
-  //   })
-  // }
+  packUp = ()=>{
+    this.setState({
+      extend:!this.state.extend
+    })
+  }
 
   btnSearch=()=>{
     if(this.state.value != "搜索应用"){
@@ -118,7 +112,7 @@ class serviceClassify extends Component {
   }
   renderList() {
     let listAll = [];
-    const { current ,isPackUp} = this.state;
+    const { current ,extend} = this.state;
     const {
       allApplicationList
     } = this.props;
@@ -148,7 +142,7 @@ class serviceClassify extends Component {
               <img src={applicationIcon}/>
               <span>{ applicationName }</span>
             </div>
-            {/*<Icon type="upward" className={icon_close} onClick={ (e)=>{this.packUp(isPackUp,e)} }></Icon>*/}
+            <Icon type={extend?"pull-down":"upward"} title={ extend ? '收起' : '展开' } onClick={this.packUp}></Icon>
           </header>
           <hgroup className="um-box">
             {

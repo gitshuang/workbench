@@ -45,6 +45,9 @@
 	padding:20px 0;
 	box-sizing:border-box;
 }
+.menuBtnGroup :global(.u-button-group-vertical>.u-button:first-child:not(:last-child)){
+  border-radius:0;
+}
 .menuBtnGroup :global(.u-button){
 	display:block;
 	width:178px;
