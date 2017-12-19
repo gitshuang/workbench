@@ -82,7 +82,7 @@ class Home extends Component {
         return (
           <div className={page_home}>
             <HeaderPage list={list}/>
-            <ElementsWrapper items={list}>
+            <ElementsWrapper items={list} offset={-55} >
               {conts}
             </ElementsWrapper>
             <HomeFolderDialog />

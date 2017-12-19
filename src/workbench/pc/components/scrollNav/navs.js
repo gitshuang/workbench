@@ -27,7 +27,7 @@ const Navs = ({
                 to={target}
                 spy={true}
                 smooth={true}
-                offset={i==0?(-80):offset}
+                offset={i==0?(-90):offset}
                 duration={duration}
                 isDynamic={true}
                 delay={delay}>
