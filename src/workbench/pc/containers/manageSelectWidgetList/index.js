@@ -55,7 +55,7 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-    this.getServices(null);
+    this.getServices("");
   }
 
   getServices(serveName){
