@@ -49,7 +49,7 @@ class DropdownButton extends Component{
     dataItem.forEach((da,i) => {
         item.push(<MenuItem key={da.name} >{da.value}</MenuItem>);
     });
-    let _menus = <Menu className={menu_style} style={{ marginLeft:-88,marginTop:7,border:"none"}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
+    let _menus = <Menu className={menu_style} style={{ marginLeft:-85,marginTop:7,marginRight:-7}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
     let arrard = this.state.visible?"upward":"pull-down";
     return(<div className={dropdown_button_cont} >
          <div className={label_cont}>
