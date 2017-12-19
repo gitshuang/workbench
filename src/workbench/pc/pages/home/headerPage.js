@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
+import rootActions from 'store/root/actions';
 /*   actions   */
 import homeActions from 'store/root/home/actions';
-
+import Icon from 'components/icon';
 import Header from 'containers/header';
 import Navbar from 'components/scrollNav';
-import { logoImg, header } from './style.css';
+import { logoImg, header ,imgInner} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
-const { changeUserInfoDisplay,hideUserInfoDisplay } = homeActions;
+const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo } = homeActions;
+
+const {
+  requestStart,
+  requestSuccess,
+  requestError
+} = rootActions;
 
 @connect(
   mapStateToProps(
@@ -21,7 +28,11 @@ const { changeUserInfoDisplay,hideUserInfoDisplay } = homeActions;
   ),
   {
     changeUserInfoDisplay,
-    hideUserInfoDisplay
+    hideUserInfoDisplay,
+    getUserInfo,
+    requestStart,
+    requestSuccess,
+    requestError
   }
 )
 class HeaderPage extends Component {
@@ -34,11 +45,27 @@ class HeaderPage extends Component {
     return (<img src={logo || logoUrl} className={logoImg}/>);
   }
   componentDidMount() {
+    this.getUserInfo();
     setTimeout(() => {
       window.scrollTo(0, 1);
     },0);
     // scroll.scrollTo(50,this.Navbar);
   }
+
+  getUserInfo() {
+    const { userInfo: { name }, getUserInfo ,requestStart, requestSuccess, requestError} = this.props;
+    if (!name) {
+      requestStart();
+      getUserInfo().then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
+        } else {
+          requestSuccess();
+        }
+      });
+    }
+  }
+
   render() {
     const {
       changeUserInfoDisplay,
@@ -46,12 +73,20 @@ class HeaderPage extends Component {
       userInfoDisplay,
       list
     } = this.props;
+    
+    let img = this.props.userInfo.userAvator;
+    let imgIcon = null;
+    if(img){
+      imgIcon = <img src={img} className={imgInner} />
+    }else{
+      imgIcon =  <Icon type="staff" />;
+    }
     return (
       <div className={header}>
         <Header
           onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
           leftContent={this.getLeftContent()}
-          iconName={"staff"} >
+          iconName={imgIcon} >
           <span>首页</span>
         </Header>
         {

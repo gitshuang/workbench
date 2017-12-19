@@ -35,7 +35,7 @@ class Application extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{name:"添加应用"}]
+      brm: [{name:"全部应用及服务"}]
     }
     this.goBack = this.goBack.bind(this);
   }

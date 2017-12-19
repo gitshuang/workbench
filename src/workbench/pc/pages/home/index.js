@@ -21,6 +21,7 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
+    'userInfo',
     'workList',
     {
       namespace: 'home',

@@ -43,7 +43,6 @@ class DropdownButton extends Component{
   }
 
   render(){
-      debugger;
     let {label,dataItem,fun} = this.props;
     let item = [];
     dataItem.forEach((da,i) => {
@@ -57,6 +56,7 @@ class DropdownButton extends Component{
          </div>
           <div className={btn}>
             <Dropdown
+                getPopupContainer = {this.props.getPopupContainer}
                 trigger={['click']}
                 overlay={_menus}
                 animation="slide-up"
