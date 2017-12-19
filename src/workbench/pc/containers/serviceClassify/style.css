@@ -21,7 +21,7 @@
   width: 100%;
   height: 38px;
   line-height: 38px;
-  border-bottom: 1px solid rgba(204, 204, 204, 1);
+  border-bottom: 1px solid rgba(13,20,36,0.1);
   position: relative;
   margin: 5px 0;
   padding-bottom: 54px;
@@ -31,6 +31,7 @@
 	width:456px;
 	height:38px; 
 	border: 1px solid rgba(78,89,104,0.19);
+  color:rgba(78,89,104,0.19);
 }
 .wrap .um_content{
 	padding:20px 0;
