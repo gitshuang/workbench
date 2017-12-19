@@ -73,7 +73,8 @@ body{
 }
 :global(.u-message){
   left:50%;
-  transform: translate(-50% ,0);
+  top:50% !important;
+  transform: translate(-50% ,-50%);
   width:178px !important;
   height: 86px;
 }

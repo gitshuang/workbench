@@ -14,7 +14,6 @@ class Breadcrumbs extends Component {
   }
   render() {
     const { goback, data} = this.props;
-    debugger;
     return (
       <div className={breadcrumbClass} >
         <a onClick={goback} >返回</a>
