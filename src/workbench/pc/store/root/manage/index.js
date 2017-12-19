@@ -377,10 +377,10 @@ const reducer = handleActions({
     }
     const group = manageList[groupIndex];
     const newId = guid();
-
+    let _fileName = group.children?(group.children.length+1):1;
     const newdefaultFolder = {
       type: 2,
-      widgetName:"文件夹",
+      widgetName:"文件夹"+_fileName,
       children:[],
     };
     group.children = group.children.concat({

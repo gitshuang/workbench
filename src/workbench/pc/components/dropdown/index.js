@@ -43,7 +43,6 @@ class DropdownButton extends Component{
   }
 
   render(){
-      debugger;
     let {label,dataItem,fun} = this.props;
     let item = [];
     dataItem.forEach((da,i) => {

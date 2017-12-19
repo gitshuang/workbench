@@ -133,19 +133,19 @@ class UserInfoContainer extends Component {
       hideUserInfoDisplay();
     }
   }
-  componentWillMount() {
-    const { userInfo: { name }, getUserInfo } = this.props;
-    if (!name) {
-      requestStart();
-      getUserInfo().then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-        } else {
-          requestSuccess();
-        }
-      });
-    }
-  }
+  // componentWillMount() {
+  //   const { userInfo: { name }, getUserInfo } = this.props;
+  //   if (!name) {
+  //     requestStart();
+  //     getUserInfo().then(({ error, payload }) => {
+  //       if (error) {
+  //         requestError(payload);
+  //       } else {
+  //         requestSuccess();
+  //       }
+  //     });
+  //   }
+  // }
 
   // componentWillUnmount() {
   //   hideUserInfoDisplay();
@@ -191,7 +191,6 @@ class UserInfoContainer extends Component {
   }
 
   handleChange2 =(e)=>{
-    debugger;
     switch(e){
       case 'accountManagement' :
         window.open('https://idtest.yyuap.com/usercenter/usermng');
@@ -311,16 +310,11 @@ class UserInfoContainer extends Component {
           </div>
         </li>);
     })
-
-
-    // <Option name="language" value="language" >界面语言</Option>
-    // <Option name="message" value="message" >消息</Option>
-    // <Option name="cancel" value="cancel">注销</Option>
+ 
     let _menuDataItem =[
       {name:"language",value:"界面语言",fun:this.handleChange},
       {name:"message",value:"消息",fun:this.handleChange}
     ];
-
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>

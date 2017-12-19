@@ -45,6 +45,9 @@
     color: rgba(74,81,93,1);
     padding-left: 15px !important;
 }
+.menu_style li:hover{
+    color: rgba(225,76,70,1);
+}
 .menu_style li:first-child{
     /* border: none; */
 }
