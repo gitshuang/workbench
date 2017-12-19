@@ -41,13 +41,16 @@
     font-weight: bold;
 }
 .menu_style li{
-    border-top: 1px solid rgba(78,89,104,0.19);
+    border-top: 1px solid rgba(221,224,227,0.47);
+    color: rgba(74,81,93,1);
+    padding-left: 15px !important;
 }
 .menu_style li:first-child{
-    border: none;
+    /* border: none; */
 }
 .menu_style{
-    box-shadow:0;
+    box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
+    border: rgba(78,89,104,0.19);
 }
 
 /* 

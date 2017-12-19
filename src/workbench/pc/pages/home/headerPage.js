@@ -58,7 +58,7 @@ class HeaderPage extends Component {
           list.length > 1 ? (
             <Navbar
               items={list}
-              offset={-24}
+              offset={-55}
               duration={500}
               delay={0} />
           ) : null
