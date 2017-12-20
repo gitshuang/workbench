@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import Icon from 'components/icon';
+import DropdownButton from 'components/dropdown';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 
@@ -19,7 +20,7 @@ import img5 from 'assets/image/wgt/relation.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,select_cont
+  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,select_cont,logOut
 } from './style.css';
 
 const {
@@ -69,6 +70,7 @@ class UserInfoContainer extends Component {
     this.getPromotionServiceList();
 
     this.state = {
+      editPortrait:false,
       dataList:[
         // {"id":"1001","name":"结算中心","icon":"loan","usedService":"核算服务","lastTime":"1分钟前"},
         // {"id":"1001","name":"新增凭证","icon":"bill","usedService":"报账服务","lastTime":"30分钟前"}
@@ -123,7 +125,7 @@ class UserInfoContainer extends Component {
 
   handleClickOutside(e) {
     //在面板中操作不要关闭面板
-    if(event.target.getAttribute("class") == "u-select-dropdown-menu-item-active u-select-dropdown-menu-item"){
+    if(event.target.getAttribute("class") == "u-dropdown-menu-item-active u-dropdown-menu-item"){
       return;
     }
     const { hideUserInfoDisplay, userInfoDisplay } = this.props;
@@ -131,19 +133,19 @@ class UserInfoContainer extends Component {
       hideUserInfoDisplay();
     }
   }
-  componentWillMount() {
-    const { userInfo: { name }, getUserInfo } = this.props;
-    if (!name) {
-      requestStart();
-      getUserInfo().then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-        } else {
-          requestSuccess();
-        }
-      });
-    }
-  }
+  // componentWillMount() {
+  //   const { userInfo: { name }, getUserInfo } = this.props;
+  //   if (!name) {
+  //     requestStart();
+  //     getUserInfo().then(({ error, payload }) => {
+  //       if (error) {
+  //         requestError(payload);
+  //       } else {
+  //         requestSuccess();
+  //       }
+  //     });
+  //   }
+  // }
 
   // componentWillUnmount() {
   //   hideUserInfoDisplay();
@@ -182,9 +184,6 @@ class UserInfoContainer extends Component {
         break;
       case 'message' :
         alert("消息");
-        break;
-      case 'cancel' :
-        window.location.href = `/workbench/logout?SAMLRequest=true&service=${encodeURIComponent(`${window.location.origin}/workbench/`)}`;
         break;
       default :
         break;
@@ -234,6 +233,11 @@ class UserInfoContainer extends Component {
       );
     }
   }
+
+  logOut=()=>{
+    window.location.href = `/workbench/logout?SAMLRequest=true&service=${encodeURIComponent(`${window.location.origin}/workbench/`)}`;
+  }
+
   render() {
     const {
       userInfo: {
@@ -245,32 +249,40 @@ class UserInfoContainer extends Component {
         admin
       }
     } = this.props;
-    let renderAllow = null;
-    if(admin){
-      renderAllow =
-        <Select
-          defaultValue="帐号设置" name="456"
-          onChange={this.handleChange2}
-          getPopupContainer = {()=> document.getElementById("modalId")}
-        >
-          <Option name="userInfo" value="userInfo" >个人信息</Option>
-          <Option name="accountManagement" value="accountManagement" >帐号设置</Option>
-          <Option name="safetyPick" value="safetyPick" >安全评级</Option>
-          <Option name="password" value="password" >修改密码</Option>
-          {/* <Option name="cutuser" value="cutuser">切换企业帐号</Option> */}
-        </Select>
-    }else{
-      renderAllow = <Select
-        defaultValue="帐号设置" name="456"
-        onChange={this.handleChange2}
-        getPopupContainer = {()=> document.getElementById("modalId")}
-      >
-        <Option name="userInfo" value="userInfo" >个人信息</Option>
-        <Option name="accountManagement" value="accountManagement" >帐号设置</Option>
-        <Option name="safetyPick" value="safetyPick" >安全评级</Option>
-        <Option name="password" value="password" >修改密码</Option>
-      </Select>
-    }
+    
+    // if(admin){
+    //   renderAllow =
+    //     <Select
+    //       defaultValue="帐号设置" name="456"
+    //       onChange={this.handleChange2}
+    //       getPopupContainer = {()=> document.getElementById("modalId")}
+    //     >
+    //       <Option name="userInfo" value="userInfo" >个人信息</Option>
+    //       <Option name="accountManagement" value="accountManagement" >帐号设置</Option>
+    //       <Option name="safetyPick" value="safetyPick" >安全评级</Option>
+    //       <Option name="password" value="password" >修改密码</Option>
+    //       {/* <Option name="cutuser" value="cutuser">切换企业帐号</Option> */}
+    //     </Select>
+    // }else{
+    //   renderAllow = <Select
+    //     defaultValue="帐号设置" name="456"
+    //     onChange={this.handleChange2}
+    //     getPopupContainer = {()=> document.getElementById("modalId")}
+    //   >
+    //     <Option name="userInfo" value="userInfo" >个人信息</Option>
+    //     <Option name="accountManagement" value="accountManagement" >帐号设置</Option>
+    //     <Option name="safetyPick" value="safetyPick" >安全评级</Option>
+    //     <Option name="password" value="password" >修改密码</Option>
+    //   </Select>
+    // }
+
+    let _accountMenuDataItem =[
+      {name:"userInfo",value:"个人信息",fun:this.handleChange2},
+      {name:"accountManagement",value:"帐号设置",fun:this.handleChange2},
+      {name:"safetyPick",value:"安全评级",fun:this.handleChange2},
+      {name:"password",value:"修改密码",fun:this.handleChange2}
+    ];
+    let renderAllow = <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")} label="帐号设置" dataItem={_accountMenuDataItem} />
 
     let _li = [];//最近使用列表
     this.state.dataList.forEach((da,i)=>{
@@ -298,7 +310,11 @@ class UserInfoContainer extends Component {
           </div>
         </li>);
     })
-
+ 
+    let _menuDataItem =[
+      {name:"language",value:"界面语言",fun:this.handleChange},
+      {name:"message",value:"消息",fun:this.handleChange}
+    ];
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
@@ -306,15 +322,22 @@ class UserInfoContainer extends Component {
             <div className={imgOuter}>
               {this.getIcon(imgsrc)}
             </div>
-            <div className={editPortrait}>
+            {/* style={{display:this.state.editPortrait}} */}
+            <div className={editPortrait}  >
               <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>
+            <div className={userName}>{name}</div>
           </div>
-          <div className={userName}>{name}</div>
+          
+          <div className={logOut} onClick={this.logOut}>
+            <Icon type="derivation" />
+            <span>注销</span>
+          </div>
+
           <ul className={`${gloryIcon} ${clearfix}`}>
             <li>
               <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
-              <span>荣耀</span>
+              {/*<span>荣耀</span>*/}
             </li>
             {/* <li>
               <div className={`${iconContainer} ${icon2}`}><Icon type="favorite"></Icon></div>
@@ -322,7 +345,7 @@ class UserInfoContainer extends Component {
             </li> */}
             <li>
               <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
-              <span>动态</span>
+              {/*<span>动态</span>*/}
             </li>
           </ul>
         </div>
@@ -333,16 +356,8 @@ class UserInfoContainer extends Component {
               {renderAllow}
             </li>
             <li className={select_cont}>
-              <Select
-                defaultValue="系统设置" name="123"
-                onChange={this.handleChange}
-                getPopupContainer = {()=> document.getElementById("modalId")}
-              >
-                {/* <Option name="account"  value="account" >账号</Option> */}
-                <Option name="language" value="language" >界面语言</Option>
-                <Option name="message" value="message" >消息</Option>
-                <Option name="cancel" value="cancel">注销</Option>
-              </Select>
+              <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")}
+               label="系统设置" dataItem={_menuDataItem} />
             </li>
           </ul>
         </div>

@@ -1,8 +1,11 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { Breadcrumb } from 'tinper-bee';
-import { breadcrumbClass,breadcrumbBack } from './style.css';
+import { breadcrumbClass,breadcrumbBack ,itme_hover} from './style.css';
 
+/**
+ * data:{name:"",url:""}
+ */
 class Breadcrumbs extends Component {
 
   static propTypes = {
@@ -18,7 +21,8 @@ class Breadcrumbs extends Component {
         <Breadcrumb>
         {
           data.map(function(da,i){
-            return (<Breadcrumb.Item key={"item"+i}>{da.name}</Breadcrumb.Item>)
+            let itme = da.url?<Breadcrumb.Item className={itme_hover} key={"item"+i} href={da.url} >{da.name}</Breadcrumb.Item>:<Breadcrumb.Item key={"item"+i} >{da.name}</Breadcrumb.Item>
+            return (itme);
           })
         }
         </Breadcrumb>

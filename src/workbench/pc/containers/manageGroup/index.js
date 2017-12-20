@@ -16,6 +16,7 @@ import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
 import BeeIcon from 'bee-icon';
 import Checkbox from 'bee-checkbox';
+import {Message} from 'tinper-bee';
 import WidgetList from 'containers/manageWidgetList';
 import {
   widgetTitle,
@@ -229,8 +230,19 @@ class ManageGroup extends Component {
   }
   // 点击按钮执行 action   重新构造
   renameGroupFn = (index) => {
-    const { renameGroup } = this.props;
+    const { renameGroup, manageList } = this.props;
     const name = this.state.groupName;
+    if( name == manageList[index].widgetName){
+      this.renameGroupCancel(index);
+      return false;
+    }
+    let widgetNameArr = manageList.map((item,index)=>{
+      return item.widgetName
+    });
+    if( widgetNameArr.includes(name) ){
+      Message.create({content: '已有分组名',duration:2,position: 'top', color: "light"});
+      return false;
+    }
     renameGroup({
       index,
       name,
