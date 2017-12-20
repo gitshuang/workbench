@@ -135,22 +135,28 @@
   font-family: PingFangSC-Semibold;
   font-weight: bold;
   color: #474D54;
-  position: absolute;
+  /*position: absolute;
   left: 27px;
-  bottom: -25px;
+  bottom: -25px;*/
+  display:-webkit-box;
+  -webkit-box-align:center;
+  -webkit-box-pack:center;
 }
 .gloryIcon{
   /* position:absolute;
   right:21px;
   top:61px; */
   width: 100%;
-  margin-top: 30px;
-  padding-left: 117px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  // padding-left: 117px;
+  margin-bottom: 24px;
   box-sizing: border-box;
+  display:-webkit-box;
+  -webkit-box-align:center;
+  -webkit-box-pack:center;
 }
 .gloryIcon li{
-  float: left;
+  // float: left;
   width:62px;
   text-align:center;
   font-size:12px;

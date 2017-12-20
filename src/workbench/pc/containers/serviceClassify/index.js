@@ -151,7 +151,7 @@ class serviceClassify extends Component {
               <img src={applicationIcon}/>
               <span>{ applicationName }</span>
             </div>
-            <Icon type={app.extend?"pull-down":"upward"} title={ extend ? '收起' : '展开' } onClick={()=>{this.packUp(app)}}></Icon>
+            <Icon type={app.extend?"pull-down":"upward"} title={ app.extend ? '展开' : '收起' } onClick={()=>{this.packUp(app)}}></Icon>
           </header>
           {
             !app.extend?(
