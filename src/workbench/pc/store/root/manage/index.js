@@ -377,21 +377,32 @@ const reducer = handleActions({
     }
     const group = manageList[groupIndex];
     const newId = guid();
-    let _fileName = group.children?(group.children.length+1):1;
+    let num = 1;
+    group.children.forEach((da,i)=>{
+      da.type===2 && (num++);
+    })
+    let _fileName = group.children?(num):1;
     const newdefaultFolder = {
       type: 2,
       widgetName:"文件夹"+_fileName,
       children:[],
     };
-    group.children = group.children.concat({
+    let dataAfter = findById(manageList,afterId);
+    let temp = {
       ...newdefaultFolder,
       widgetId: newId,
       parentId:group.widgetId,
-    });
+    };
+    group.children.splice(group.children.indexOf(dataAfter),0,temp);
+    // group.children = group.children.concat({
+    //   ...newdefaultFolder,
+    //   widgetId: newId,
+    //   parentId:group.widgetId,
+    // });
     //拖拽创建文件夹
     if(typeof afterId !== "undefined"){
       let dataPre = findById(manageList,id);
-      let dataAfter = findById(manageList,afterId);
+      // let dataAfter = findById(manageList,afterId);
       let groupData = findById(manageList,newId);
       dataPre.parentId =groupData.widgetId;
       dataAfter.parentId =groupData.widgetId;

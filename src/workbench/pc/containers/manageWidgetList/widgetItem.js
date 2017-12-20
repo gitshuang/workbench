@@ -245,7 +245,7 @@ class WidgetItem extends Component {
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     if (isDragging) {
-      //return null
+      // return null
     }
     const {title} = this.state;
     return connectDragSource(connectDropTarget(
