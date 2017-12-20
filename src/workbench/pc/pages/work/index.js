@@ -200,7 +200,7 @@ export default class Work extends Component {
         if (error) {
           requestError(payload);
         }
-        Message.create({content: '从首页移除成功',duration:2,position: 'top', color: "success"});
+        Message.create({content: '移除成功',duration:2,position: 'top', color: "light"});
         requestSuccess();
       });
       return false;

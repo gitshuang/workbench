@@ -3,6 +3,7 @@ import Work from 'pages/work';
 import Application from 'pages/application';
 import Manage from 'pages/manage';
 import Page404 from 'pages/404';
+import Search from 'pages/search';
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
   {
     path: '/404',
     component:Page404
+  },
+  {
+    path: '/search',
+    component: Search,
   }
 ];
 

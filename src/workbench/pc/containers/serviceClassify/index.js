@@ -58,10 +58,11 @@ class serviceClassify extends Component {
     super(props);
     this.state = {
       value: "搜索应用",
-      isPackUp:false,
+      extend:true,
       current: undefined,
       list2 : [],
       listAll : [],
+      allApplicationList:[]
     }
   }
 
@@ -79,6 +80,12 @@ class serviceClassify extends Component {
         if (error) {
           requestError(payload);
         }
+        payload.forEach((da,i)=>{
+          da.extend =false;
+        });
+        this.setState({
+          allApplicationList:payload
+        })
         requestSuccess();
       });
     }
@@ -90,17 +97,12 @@ class serviceClassify extends Component {
     })
   }
 
-  // packUp = (flag,event)=>{
-  //   let appContainer = event.target.parentNode.parentNode;
-  //   if(!flag){
-  //     appContainer.lastChild.style.display = "none";
-  //   }else{
-  //     appContainer.lastChild.style.display = "flex";
-  //   }
-  //   this.setState({
-  //     isPackUp:!flag
-  //   })
-  // }
+  packUp = (data)=>{
+    data.extend = data.extend?false:true;
+    this.setState({
+        ...this.state
+    })
+  }
 
   btnSearch=()=>{
     if(this.state.value != "搜索应用"){
@@ -118,10 +120,10 @@ class serviceClassify extends Component {
   }
   renderList() {
     let listAll = [];
-    const { current ,isPackUp} = this.state;
+    const { current ,extend} = this.state;
     const {
       allApplicationList
-    } = this.props;
+    } = this.state;
     if (current) {
       const label = allApplicationList.find(({
         labelId,
@@ -141,6 +143,7 @@ class serviceClassify extends Component {
         applicationCode,
         service,
       } = app;
+     
       return (
         <div key={applicationCode} >
           <header>
@@ -148,25 +151,30 @@ class serviceClassify extends Component {
               <img src={applicationIcon}/>
               <span>{ applicationName }</span>
             </div>
-            {/*<Icon type="upward" className={icon_close} onClick={ (e)=>{this.packUp(isPackUp,e)} }></Icon>*/}
+            <Icon type={app.extend?"pull-down":"upward"} title={ app.extend ? '展开' : '收起' } onClick={()=>{this.packUp(app)}}></Icon>
           </header>
-          <hgroup className="um-box">
-            {
-              service.map(({
-                serveName,
-                serveCode,
-                serveIcon,
-              }) => {
-                return (
-                  <GoTo
-                    key={serveCode}
-                    name={serveName}
-                    icon={serveIcon}
-                    to={`/serve/${serveCode}`} />
-                );
-              })
-            }
-          </hgroup>
+          {
+            !app.extend?(
+              <hgroup className="um-box">
+                {
+                  service.map(({
+                    serveName,
+                    serveCode,
+                    serveIcon,
+                  }) => {
+                    return (
+                      <GoTo
+                        key={serveCode}
+                        name={serveName}
+                        icon={serveIcon}
+                        to={`/serve/${serveCode}`} />
+                    );
+                  })
+                }
+              </hgroup>
+            ):null
+          }
+          
         </div>
       )
     })

@@ -70,6 +70,7 @@ class UserInfoContainer extends Component {
     this.getPromotionServiceList();
 
     this.state = {
+      editPortrait:false,
       dataList:[
         // {"id":"1001","name":"结算中心","icon":"loan","usedService":"核算服务","lastTime":"1分钟前"},
         // {"id":"1001","name":"新增凭证","icon":"bill","usedService":"报账服务","lastTime":"30分钟前"}
@@ -132,19 +133,19 @@ class UserInfoContainer extends Component {
       hideUserInfoDisplay();
     }
   }
-  componentWillMount() {
-    const { userInfo: { name }, getUserInfo } = this.props;
-    if (!name) {
-      requestStart();
-      getUserInfo().then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-        } else {
-          requestSuccess();
-        }
-      });
-    }
-  }
+  // componentWillMount() {
+  //   const { userInfo: { name }, getUserInfo } = this.props;
+  //   if (!name) {
+  //     requestStart();
+  //     getUserInfo().then(({ error, payload }) => {
+  //       if (error) {
+  //         requestError(payload);
+  //       } else {
+  //         requestSuccess();
+  //       }
+  //     });
+  //   }
+  // }
 
   // componentWillUnmount() {
   //   hideUserInfoDisplay();
@@ -190,7 +191,6 @@ class UserInfoContainer extends Component {
   }
 
   handleChange2 =(e)=>{
-    debugger;
     switch(e){
       case 'accountManagement' :
         window.open('https://idtest.yyuap.com/usercenter/usermng');
@@ -310,16 +310,11 @@ class UserInfoContainer extends Component {
           </div>
         </li>);
     })
-
-
-    // <Option name="language" value="language" >界面语言</Option>
-    // <Option name="message" value="message" >消息</Option>
-    // <Option name="cancel" value="cancel">注销</Option>
+ 
     let _menuDataItem =[
       {name:"language",value:"界面语言",fun:this.handleChange},
       {name:"message",value:"消息",fun:this.handleChange}
     ];
-
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
@@ -327,20 +322,22 @@ class UserInfoContainer extends Component {
             <div className={imgOuter}>
               {this.getIcon(imgsrc)}
             </div>
-            <div className={editPortrait}>
+            {/* style={{display:this.state.editPortrait}} */}
+            <div className={editPortrait}  >
               <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>
             <div className={userName}>{name}</div>
-
-            <div className={logOut} onClick={this.logOut}>
-              <Icon type="derivation" />
-              <span>注销</span>
-            </div>
           </div>
+          
+          <div className={logOut} onClick={this.logOut}>
+            <Icon type="derivation" />
+            <span>注销</span>
+          </div>
+
           <ul className={`${gloryIcon} ${clearfix}`}>
             <li>
               <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
-              <span>荣耀</span>
+              {/*<span>荣耀</span>*/}
             </li>
             {/* <li>
               <div className={`${iconContainer} ${icon2}`}><Icon type="favorite"></Icon></div>
@@ -348,7 +345,7 @@ class UserInfoContainer extends Component {
             </li> */}
             <li>
               <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
-              <span>动态</span>
+              {/*<span>动态</span>*/}
             </li>
           </ul>
         </div>
@@ -361,16 +358,6 @@ class UserInfoContainer extends Component {
             <li className={select_cont}>
               <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")}
                label="系统设置" dataItem={_menuDataItem} />
-              {/* <Select
-                style={{clolr:"red"}}
-                defaultValue="系统设置" name="123"
-                onChange={this.handleChange}
-                getPopupContainer = {()=> document.getElementById("modalId")}
-              >
-                <Option name="language" value="language" >界面语言</Option>
-                <Option name="message" value="message" >消息</Option>
-                <Option name="cancel" value="cancel">注销</Option>
-              </Select> */}
             </li>
           </ul>
         </div>

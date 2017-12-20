@@ -162,7 +162,7 @@ body {
   padding:0;
 }
 .manageDialogFolder .close{
-  top: -46px;
+  top: -26px;
   right: 20px;
 }
 .u-tabs-tab{
@@ -178,13 +178,15 @@ body {
 .u-select-dropdown{
   /* padding-top: 16px; */
 }/*全屏弹窗*/
-.u-modal .u-modal-dialog{
+/* .u-modal .u-modal-dialog{
   margin:0;
 }
 .u-modal .u-modal-header{
   padding:0;
   border:none;
-}
+} */
 .u-modal-body .close{
-  top:20px;
+}
+.lebra-navbar-left-icon img{
+  margin-top: -12px !important;
 }

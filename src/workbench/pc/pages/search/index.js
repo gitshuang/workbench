@@ -6,7 +6,7 @@ import rootActions from 'store/root/actions';
 
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
-import ServiceClassify from 'containers/serviceClassify';
+import SearchResult from 'containers/searchResult';
 
 import {header,um_content,appBreadcrumb} from './style.css';
 
@@ -35,7 +35,7 @@ class Application extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{name:"全部应用及服务"}]
+      brm: [{name:"搜索结果页"}]
     }
     this.goBack = this.goBack.bind(this);
   }
@@ -51,7 +51,7 @@ class Application extends Component {
           <div className="um-header">
             <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} >
               <div>
-                <span>全部应用及服务</span>
+                <span>搜索结果页</span>
               </div>
             </Header>
             <div className={appBreadcrumb}>
@@ -60,7 +60,7 @@ class Application extends Component {
           </div>
         </div>
         <div className={um_content + " um-box um-content"}>
-          <ServiceClassify />
+          <SearchResult />
         </div>
       </div>
     );

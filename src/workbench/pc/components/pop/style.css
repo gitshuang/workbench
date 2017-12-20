@@ -4,8 +4,7 @@
 }
 .close{
     position: absolute;
-    // top: -22px;
-    top:0;
+    top: -42px;
     right: 22px;
     font-size: 18px;
     color: #757F8C;
