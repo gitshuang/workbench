@@ -1,13 +1,7 @@
 .select_widget_list{
-  // display: -webkit-box;
   position: relative;
   width: 100%;
   height: 100%;
-  /**
-  
-  margin-top: -26px;
-  padding-left: 10px;
-  **/
 }
 
 .widget_left{
@@ -22,7 +16,6 @@
 
 .widget_left .title{
   width: 100%;
-  // min-height:400px; 
   font-size:19px;
   font-family:MicrosoftYaHei;
   color:rgba(71,77,84,1);
