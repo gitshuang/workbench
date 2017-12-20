@@ -19,7 +19,12 @@ function makeMenus(menus,isTop) {
           className={sideBarMenu}
           key={id}
           style={{fontSize:'14px'}}
-          title={<span><img src={menuItemIcon} className={menuItem}/>{name}</span>}>
+          title={
+            <span>
+              {isTop?<img src={menuItemIcon} className={menuItem}/>:null}
+              {name}
+            </span>
+          }>
           { makeMenus(children) }
         </SubMenu>
       );
