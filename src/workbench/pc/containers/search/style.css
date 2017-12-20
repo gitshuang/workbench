@@ -40,6 +40,9 @@
   background: transparent;
   border:0 none;
 }
+.searchText::-webkit-input-placeholder{color:#ccc!important}
+.searchText::-moz-placeholder{color:#ccc!important}
+.searchText::-ms-input-placeholder{color:#ccc!important}
 .inputEnter {
   left: 0;
   width: 0;
@@ -81,3 +84,64 @@
   font-size: 10px;
   color: #fff;
 }
+.SearchWin {
+  left: -250px;
+  position: absolute;
+  top: 40px;
+  width:300px;
+height:0; 
+background:rgba(255,255,255,1);
+border-radius: 3px ; 
+  overflow: hidden;
+  border: 0;
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+}
+.SearchWin.showheight{ height: 425px;border: 1px solid rgba(78, 89, 104,.19);
+  box-shadow: 1px 2px 4px rgba(74, 81, 93,.25);
+}
+.SearchWin .searchWindom{float: left;
+  width: 300px;
+  margin-top: 13px;
+  padding-left:26px;
+  text-align: left;}
+.SearchWin .searchWindom h3 {font-size:14px;
+    font-family:'MicrosoftYaHei';
+    color:rgba(71,77,84,1);
+    line-height:19px;}
+.SearchWin .searchWindom ul li {
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+}
+.SearchWin .searchWindom ul li img { width: 36px; height: 36px; }
+.SearchWin .searchWindom div { float: left;font-size:12px;}
+.SearchWin .searchWindom .h_name{ margin-left: 16px; font-family:MicrosoftYaHei;    width: 145px; overflow: hidden}
+.SearchWin .searchWindom .h_name i,.SearchWin .searchWindom .h_name font { color: #0C64C3; font-style: normal}
+.SearchWin .searchWindom .h_name p:first-child{
+    color:#373C42;
+    line-height:17px;
+    font-weight: bold;
+  }
+.SearchWin .searchWindom .h_name p{max-width:145px;
+  height:16px; 
+  color:rgba(13,20,36,.47);
+  line-height:16px;float: left;
+  }
+.SearchWin .searchWindom .h_name p span:first-child{ margin-right: 10px;    width: 80px;
+  overflow: hidden;
+  height: 18px;
+ }
+.SearchWin .searchWindom .h_name p span { float: left;}
+.SearchWin .searchWindom .h_contact { width:24px;
+  height:24px; 
+  background:rgba(135,139,148,1);
+  opacity:70; margin-left: 6px; border-radius: 100%; text-align: center; line-height: 21px; cursor: pointer}
+.SearchWin .searchWindom .h_contact i { color: #fff; font-size: 16px;}
+.SearchWin .searchWindom .search_service .h_name p{ max-width: 185px;}
+.SearchWin .searchWindom .search_help{margin-top: 8px}
+.SearchWin .searchWindom .search_service .h_name {width: 185px;}
+.SearchWin .searchBtnAll {background: #fff; cursor: pointer; line-height: 39px;color: #007ACE; font-size: 12px; text-align: center; position: absolute;bottom:0;width: 100%;height: 39px;}
+.SearchWin .searchBtnAll:hover{ background: #EFF0F2; color: #474D54}

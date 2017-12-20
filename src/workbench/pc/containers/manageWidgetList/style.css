@@ -185,21 +185,6 @@
     width: 60px;
     height: 32px;
 }
-
-.form_control{
-    // -webkit-box-flex:1;
-    // width: 200px;
-}
-.save_btn{
-    // -webkit-box-flex:1;
-    // width: 60px;
-    // margin:0 10px 0 20px;
-}
-.close_btn{
-    // -webkit-box-flex:1;
-    // width: 60px;
-}
-
 .title_edit{
   position: absolute;
   left: 10px;
@@ -261,8 +246,7 @@
   width: 100%;
   padding-left:0;
   height: 100%;
-  // top: 23px;
-  // margin-top: 91px;
+  margin-top: 0px;
 }
 .pop_dialog_widge_list :global(.u-modal-content){
   height: 100%;
@@ -271,6 +255,9 @@
 }
 .pop_dialog_widge_list :global(.close){
   top: 18px;
+}
+.pop_dialog_widge_list :global(.u-modal .u-modal-dialog){
+  margin: 0px;
 }
 .edit_cont .btn{
   display: inline-block;

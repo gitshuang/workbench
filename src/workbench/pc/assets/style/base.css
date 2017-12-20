@@ -178,13 +178,13 @@ body {
 .u-select-dropdown{
   /* padding-top: 16px; */
 }/*全屏弹窗*/
-.u-modal .u-modal-dialog{
+/* .u-modal .u-modal-dialog{
   margin:0;
 }
 .u-modal .u-modal-header{
   padding:0;
   border:none;
-}
+} */
 .u-modal-body .close{
 }
 .lebra-navbar-left-icon img{
