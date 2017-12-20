@@ -13,13 +13,18 @@ const { Item } = Menu;
 function makeMenus(menus,isTop) {
   let result = [];
   menus.forEach(({ children, menuItemId: id, menuItemIcon, menuItemName: name }) => {
-    if (children) {
+    if (children && children.length) {
       result.push(
         <SubMenu
           className={sideBarMenu}
           key={id}
           style={{fontSize:'14px'}}
-          title={<span><img src={menuItemIcon} className={menuItem}/>{name}</span>}>
+          title={
+            <span>
+              {isTop?<img src={menuItemIcon} className={menuItem}/>:null}
+              {name}
+            </span>
+          }>
           { makeMenus(children) }
         </SubMenu>
       );
