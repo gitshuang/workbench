@@ -1,7 +1,6 @@
 {
   "status": 1,
-  "data": {
-    "workList": [
+  "data": [
       {
         "createTime": 1512370455000,
         "modifiedTime": null,
@@ -227,26 +226,6 @@
         "size": null,
         "primaryKey": "c1e4da66-02eb-4c92-a7ad-c37783edba06"
       }
-    ],
-    "metaData": {
-      "home": {
-        "properties": {
-          "header": {
-            "title": "首页",
-            "className":"redTheme"
-          },
-          "content": {
-            "background": "#ffffff"
-          },
-          "group":{
-            "titleStyle":{
-              "color": "#000",
-              "fontSize":"16px"
-            }
-          }
-        }
-      }
-    }
-  }
+    ]
 }
 
