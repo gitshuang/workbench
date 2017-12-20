@@ -136,8 +136,8 @@
   font-weight: bold;
   color: #474D54;
   position: absolute;
-  left: 13px;
-  bottom: -23px;
+  left: 27px;
+  bottom: -25px;
 }
 .gloryIcon{
   /* position:absolute;
@@ -145,7 +145,7 @@
   top:61px; */
   width: 100%;
   margin-top: 30px;
-  padding-left: 125px;
+  padding-left: 117px;
   margin-bottom: 20px;
   box-sizing: border-box;
 }
