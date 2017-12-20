@@ -33,6 +33,7 @@ class HomeWidgeList extends Component{
       openFolder,
       history,
       style,
+      groupMeta
     } = this.props;
     const list = children.map((child, i) => {
       const {
@@ -63,7 +64,7 @@ class HomeWidgeList extends Component{
       <div className={item} style={style} >
         {
           noTitle ? null : (
-            <div className={WidgetTitle} >
+            <div className={WidgetTitle} style={groupMeta&&groupMeta.titleStyle} >
               <div>{name}</div>
             </div>
           )

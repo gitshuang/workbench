@@ -115,7 +115,7 @@ const reducer = handleActions({
     } else {
       return {
         ...state,
-        manageList: payload,
+        manageList: payload.workList,
         currEditonlyId:""
       };
     }

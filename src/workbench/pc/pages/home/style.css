@@ -21,12 +21,32 @@
 }
 body{
   background-image:url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png");
-  background-repeat: no-repeat, no-repeat, no-repeat;  
-  background-position: 0% 100%, 100% 5%, 90% 100%; 
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: 0% 100%, 100% 5%, 90% 100%;
   background-attachment:fixed;
 }
 .imgInner{
   width:32px;
   height:32px;
-  border-radius:50%; 
+  border-radius:50%;
 }
+/*  下边是通过className  更改样式   */
+:global(.redTheme){
+  background-color: #E14C46;
+}
+:global(.redTheme .lebra-navbar-light .lebra-navbar-title){
+  color: #ffffff;
+}
+:global(.redTheme .lebra-navbar-right .iconfont){
+  color: #ffffff;
+}
+:global(.redTheme li a){
+  color: #ffffff;
+}
+:global(.redTheme li a:hover){
+  color: #ffffff;
+}
+:global(.redTheme li a:after){
+  border-color: #ffffff;
+}
+

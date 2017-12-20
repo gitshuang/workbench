@@ -23,6 +23,7 @@ const { requestStart, requestSuccess, requestError } = rootActions;
   mapStateToProps(
     'userInfo',
     'workList',
+    'metaData',
     {
       namespace: 'home',
     }
@@ -42,7 +43,13 @@ class Home extends Component {
     componentWillMount() {
         const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
         requestStart();
-        getWorkList().then(({error, payload}) => {
+      const param = {
+        componentCode:"demo",
+        viewCode:"demo",
+        deviceType:"PC",
+        lang:"US"
+      };
+        getWorkList(param).then(({error, payload}) => {
             if (error) {
                 requestError(payload);
             }
@@ -53,10 +60,11 @@ class Home extends Component {
     render() {
         const {
           workList,
+          metaData
         } = this.props;
-
         const list = [];
         const conts = [];
+        const groupMeta = metaData.home && metaData.home.properties.group;
         workList.forEach((da, i) => {
             const {
               widgetId: id,
@@ -77,13 +85,14 @@ class Home extends Component {
               target: `nav${id}`,
             });
             conts.push(
-              <WidgeList {...props} />
+              <WidgeList {...props} groupMeta={groupMeta}/>
             );
         })
+      let background = metaData.home && metaData.home.properties.content.background;
         return (
-          <div className={page_home}>
-            <HeaderPage list={list}/>
-            <ElementsWrapper items={list} offset={-55} >
+          <div className={page_home} style={{background:background}}>
+            <HeaderPage list={list} headerData={metaData.home && metaData.home.properties.header}/>
+            <ElementsWrapper items={list} offset={-55}>
               {conts}
             </ElementsWrapper>
             <HomeFolderDialog />

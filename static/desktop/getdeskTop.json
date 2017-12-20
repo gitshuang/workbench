@@ -229,23 +229,7 @@
       }
     ],
     "metaData": {
-      "home": {
-        "properties": {
-          "header": {
-            "title": "首页",
-            "className":"redTheme"
-          },
-          "content": {
-            "background": "#ffffff"
-          },
-          "group":{
-            "titleStyle":{
-              "color": "#000",
-              "fontSize":"16px"
-            }
-          }
-        }
-      }
+
     }
   }
 }

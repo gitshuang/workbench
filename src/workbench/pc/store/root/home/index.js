@@ -15,6 +15,7 @@ const {
 const defaultState = {
   userInfo: {},
   workList: [],
+  metaData: {},
   userInfoDisplay: false,
   curDisplayFolder: {
     widgetName: '',
@@ -36,7 +37,16 @@ const createReducer = (key) => (state, { payload, error }) => {
 
 const reducer = handleActions({
   [getUserInfo]: createReducer('userInfo'),
-  [getWorkList]: createReducer('workList'),
+  [getWorkList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      workList: payload.workList,
+      metaData: payload.metaData
+    };
+  },
   [setCutUser]: createReducer('setCutUser'),
   [changeUserInfoDisplay]: (state) => ({
     ...state,

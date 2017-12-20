@@ -71,18 +71,21 @@ class HeaderPage extends Component {
       changeUserInfoDisplay,
       hideUserInfoDisplay,
       userInfoDisplay,
-      list
+      list,
+      headerData
     } = this.props;
-    
+
     let img = this.props.userInfo.userAvator;
     let imgIcon = null;
+    let backgroundColor = headerData && headerData.backgroundColor;
+    let class2 = headerData && headerData.className;
     if(img){
       imgIcon = <img src={img} className={imgInner} />
     }else{
       imgIcon =  <Icon type="staff" />;
     }
     return (
-      <div className={header}>
+      <div className={`${header} ${class2}`} >
         <Header
           onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
           leftContent={this.getLeftContent()}
