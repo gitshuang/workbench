@@ -79,6 +79,7 @@ class HeaderPage extends Component {
     let imgIcon = null;
     let backgroundColor = headerData && headerData.backgroundColor;
     let class2 = headerData && headerData.className;
+    let title = headerData && headerData.title;
     if(img){
       imgIcon = <img src={img} className={imgInner} />
     }else{
@@ -90,7 +91,7 @@ class HeaderPage extends Component {
           onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
           leftContent={this.getLeftContent()}
           iconName={imgIcon} >
-          <span>首页</span>
+          <span>{title}</span>
         </Header>
         {
           list.length > 1 ? (
