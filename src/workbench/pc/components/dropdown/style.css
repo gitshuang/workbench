@@ -43,7 +43,7 @@
 .menu_style li{
     border-top: 1px solid rgba(221,224,227,0.47);
     color: rgba(74,81,93,1);
-    padding-left: 15px !important;
+    padding-left: 11px !important;
 }
 .menu_style li:hover{
     color: rgba(225,76,70,1);

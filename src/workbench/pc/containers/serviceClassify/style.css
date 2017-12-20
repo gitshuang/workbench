@@ -81,7 +81,7 @@
 .appContent header img{
   width:32px;
   height:32px;
-	background:rgba(216,216,216,1);
+	// background:rgba(216,216,216,1);
 	border-radius: 3px ;
 }
 .appContent header span{
@@ -133,7 +133,7 @@
 .link .icon{
   width:24px;
   height:24px;
-  background:rgba(194,199,199,1);
+  // background:rgba(194,199,199,1);
   border-radius: 3px ;
   margin-left: 16px;
   margin-right: 16px;
