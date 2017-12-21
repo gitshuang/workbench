@@ -4,7 +4,7 @@ import Dropdown from 'bee-dropdown';
 import Icon from 'components/icon';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
 // import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
-import {dropdown_button_cont,label_cont,btn,icon_style,menu_style} from './style.css';
+import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style} from './style.css';
 
 const propTypes = {
   label:"",
@@ -54,7 +54,7 @@ class DropdownButton extends Component{
          <div className={label_cont}>
             <label>{label}</label>
          </div>
-          <div className={btn}>
+          <div className={this.state.visible?btn_upward:btn_pull_down}>
             <Dropdown
                 getPopupContainer = {this.props.getPopupContainer}
                 trigger={['click']}

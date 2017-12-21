@@ -156,13 +156,12 @@
   color:#E14C46;
 }
 .gloryIcon .iconContainer{
-  width:36px;
-  height:36px;
+  width:28px;
+  height:28px;
   background:#E66C67;
   text-align:center;
-  border-radius:18px;
+  border-radius:14px;
   margin:0 auto;
-  margin-bottom: 5px;
 }
 .gloryIcon .icon2{
   background:#E8A76B;
@@ -172,7 +171,7 @@
 }
 .iconContainer :global(.iconfont){
   font-size:24px;
-  line-height:36px;
+  line-height:28px;
   color:#fff;
 }
 .active{
@@ -243,6 +242,12 @@
 .tabPane1 li,.tabPane2 li{
   padding-top:14px;
 }
+.tabPane2 li{
+  margin-right:42px;
+}
+.tabPane2 .line_end{
+  margin-right:0;
+}
 .tabPane1 li{
   display:flex;
   border-bottom: 1px solid #DDE0E3;
@@ -264,7 +269,7 @@
   display:block;
   width:60px;
   margin:0 auto;
-  margin-top:29px;
+  margin-top:12px;
   background:#fff;
   font-size:12px;
   font-family:MicrosoftYaHei;
@@ -307,6 +312,7 @@
   width:48px;
   height:48px;
   box-flex:1;
+  margin-left:19px;
 }
 .usedIcon>img{
   width: 100%;
@@ -324,7 +330,7 @@
   background:#fff;
 }
 .tabPane2{
-  padding: 0 13px;
+  padding: 0 19px;
 }
 .userBtnList :global(.u-button),.userBtnList :global(.u-select){
   width:91px;
@@ -352,11 +358,12 @@
 .wrap :global(.u-tabs-ink-bar){
   width:50% !important;
   height:6px;
-  max-width:24px;
+  min-width: 14px;
+  max-width:28px;
   max-height: 6px;
   background:#E14C46;
   border-radius:3px;
-  margin: 2px 12px;
+  margin: 2px 12px 0 34px;
 }
 .wrap :global(.u-tabs-nav-wrap){
   width:346px;
