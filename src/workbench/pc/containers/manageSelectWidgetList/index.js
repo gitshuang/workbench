@@ -14,7 +14,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {getSelectWidgetList,addDesk} = manageActions;
+const {getSelectWidgetList,addDesk,setCurrentSelectWidgetMap,deleteFolder} = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 import { select_widget_list,
@@ -27,12 +27,15 @@ panel_left,footer_btn,title,search_tit,active
   mapStateToProps(
     'manageList',
     'selectWidgetList',
+    'currentSelectWidgetMap',
     {
       namespace: 'manage',
     }
   ),
   {
     getSelectWidgetList,
+    setCurrentSelectWidgetMap,
+    deleteFolder,
     addDesk,
     requestSuccess,
     requestError,
@@ -91,6 +94,11 @@ class SelectWidgetList extends Component {
           this.getArrayToMap(data[i].children,dataMap,data[i].labelId);
         }else{
           dataMap[data[i].serveId] = data[i];
+          //恢复备份数据
+          let _currentSelectWidgetMap = this.props.currentSelectWidgetMap;
+            if(_currentSelectWidgetMap[data[i].serveId]){
+              dataMap[data[i].serveId].selected = _currentSelectWidgetMap[data[i].serveId].selected;
+            }
         }
     }
     return dataMap;
@@ -148,17 +156,12 @@ class SelectWidgetList extends Component {
   }
 
   onChange =(data,sele)=>{
-    // console.log(this.state.dataMap);
-    console.log(data);
-    if(sele == "3" ){
-      this.state.selectedList.push(data);
-    }else{
-      if(this.state.selectedList.length != 0){
-        let index = this.state.selectedList.findIndex(da=>da.serveId == data.serveId);
-        this.state.selectedList.splice(index,1);
-      }
-    }
     this.state.dataMap[data.serveId].selected = sele;
+    let obj = this.state.selectedList.find(da=>da.serveId == data.serveId);
+    if(!obj){
+      this.state.selectedList.push(data);
+    }
+    console.log(this.state.selectedList);
     this.setState({
         ...this.state,
         edit:true
@@ -188,6 +191,13 @@ class SelectWidgetList extends Component {
   }
 
   btnSave=()=>{
+    console.log(this.state.selectedList);
+    let {deleteFolder,requestError} = this.props;
+    this.state.selectedList.forEach((da,i)=>{
+      if(da.selected != "3"){
+        deleteFolder(da.serveId);
+      }
+    });
     this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
     this.setState({
       selectedList:[]

@@ -30,6 +30,7 @@ const {
   openFolder,
   closeFolder,
   getSelectWidgetList,
+  setCurrentSelectWidgetMap,
   openBatchMove,
   closeBatchMove,
   setEditState,
@@ -53,6 +54,7 @@ const defaultState = {
   selectWidgetList:[],
   selectGroup: [],
   currGroupIndex:0,
+  currentSelectWidgetMap:{},
   title:'',
   currEditonlyId:""
 };
@@ -135,29 +137,46 @@ const reducer = handleActions({
     };
 
     let newCar = [];
-
+    let currentSelectWidgetMap = state.currentSelectWidgetMap;
+    console.log("----currentSelectWidgetMap : ");
+    console.log( currentSelectWidgetMap);
     for(let da of dataList){
-      // if(da.selected){
-          let newCarObn = {...defaultCar};
-          newCarObn.widgetId = da.serveId;
-          newCarObn.widgetName = da.serveName;
-          newCarObn.serveCode = da.serveCode;
-          newCarObn.icon = da.serveIcon;
-          newCarObn.size = da.widgetTemplate.size;
-          newCar.push(newCarObn);
-      // }
+      let server = currentSelectWidgetMap[da.serveId];
+      if(server){
+        if(da.selected == "3"){
+          currentSelectWidgetMap[da.serveId].selected = da.selected;
+        }else{
+          debugger;
+          delete currentSelectWidgetMap[da.serveId];
+        }
+      }else{
+        currentSelectWidgetMap[da.serveId] = da;
+      }
+      if(da.selected == "3"){
+        let newCarObn = {...defaultCar};
+        newCarObn.widgetId = da.serveId;
+        newCarObn.widgetName = da.serveName;
+        newCarObn.serveCode = da.serveCode;
+        newCarObn.icon = da.serveIcon;
+        newCarObn.size = da.widgetTemplate.size;
+        newCar.push(newCarObn);
+      }
     }
     state.manageList.forEach((da,i)=>{
         if(da.widgetId == parentId){
           da.children = [...da.children,...newCar];
         }
     })
+    console.log("====currentSelectWidgetMap : ");
+    console.log(currentSelectWidgetMap);
     let newManageList = JSON.parse(JSON.stringify(state.manageList));
+
     return{
       ...state,
       manageList: newManageList,
       isEdit: true,
-      currEditonlyId:""
+      currEditonlyId:"",
+      currentSelectWidgetMap//备份本次勾选了哪些磁贴
     }
   },
   [getSelectWidgetList]: (state, { payload, error }) => {
@@ -170,6 +189,27 @@ const reducer = handleActions({
         currEditonlyId:""
       };
     }
+  },
+  [setCurrentSelectWidgetMap]: (state, { payload, error }) => {
+    debugger;
+    let {data,sele} = payload.data;
+    let currentSelectWidgetMap = state.currentSelectWidgetMap;
+    
+    let _currentSelectWidgetMap = null;
+    if(currentSelectWidgetMap !=null){
+      let server = currentSelectWidgetMap[data.serveId];
+      if(server){
+        currentSelectWidgetMap[data.serveId].selected = sele;
+      }else{
+        currentSelectWidgetMap[data.serveId] = this.state.dataMap[data.serveId];
+      }
+    }else{
+      _currentSelectWidgetMap[data.serveId] = this.state.dataMap[data.serveId];
+    }
+    return {
+      ...state,
+      currentSelectWidgetMap:_currentSelectWidgetMap
+    };
   },
   [batchDelect]: (state, {payload}) => {
     let manageList = state.manageList;

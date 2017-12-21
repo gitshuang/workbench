@@ -171,6 +171,7 @@ class WidgetItem extends Component {
     if(type === "pop"){
      delectServe({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
     }else{
+      debugger;
       deleteFolder(data.widgetId);
     }
     this.setState({
