@@ -33,8 +33,10 @@ class HomeWidgeList extends Component{
       openFolder,
       history,
       style,
-      groupMeta
+      groupMeta,
+      listMeta
     } = this.props;
+    // 新增元数据  控制groupTitle 样式
     const titleStyle = groupMeta && groupMeta.titleStyle && JSON.parse(groupMeta.titleStyle);
     const list = children.map((child, i) => {
       const {
@@ -58,7 +60,7 @@ class HomeWidgeList extends Component{
         }
       }
       return (
-        <Widget { ...props }/>
+        <Widget { ...props } listMeta={listMeta}/>
       );
     })
 		return(

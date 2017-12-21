@@ -43,7 +43,11 @@
 }
 .title_right{
     -webkit-box-align: center;
-    display: -webkit-box;
+    /*display: -webkit-box;*/
+  -webkit-box-flex:1.0;
+  -webkit-box-pack: start;
+  padding-left: 9px;
+  /*background: yellow;*/
 }
 
 .defaultArea{
@@ -66,12 +70,6 @@
   color: rgba(117,127,140,1);
 }
 **/
-.title_right{
-  -webkit-box-flex:1.0;
-  -webkit-box-pack: start;
-  padding-left: 9px;
-  /*background: yellow;*/
-}
 .widgetItem .content {
   position: relative;
 }
@@ -191,7 +189,7 @@
   position: absolute;
   left: 10px;
   top: 40px;
-} 
+}
 .pop_cont{
     font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';
     font-weight: 700;

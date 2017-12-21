@@ -245,16 +245,12 @@
           "backgroundSize": "200px "
         },
         "group": {
-          "titleStyle":"{\"fontSize\":\"16px\",\"color\":\"#000\"}"
+          "titleStyle":"{\"fontSize\":\"18px\",\"color\":\"#000\"}"
         },
         "list": {
-          "titleStyle": {
-            "fontSize": "18px",
-            "-webkit-box-pack": "end"
-          },
-          "imageStyle": {
-            "left": "0px"
-          }
+          "background":"{\"backgroundColor\":\"#fffffff\",\"backgroundImage\":\"url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514432055&di=d6fb9c4e441141423af585292c5cc1f5&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.kinker.cn%2Fsucai%2Fpic%2F19%2F58.png)\",\"backgroundPosition\":\"right\",\"backgroundRepeat\":\"no-repeat\",\"backgroundSize\":\"100px 100px\"}",
+          "titleStyle":"{\"fontSize\":\"16px\",\"textAlign\":\"right\",\"paddingRight\":\"10px\"}",
+          "imageStyle":"{\"left\":\"0px\"}"
         }
       },
       "code":"home",

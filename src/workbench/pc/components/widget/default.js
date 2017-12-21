@@ -43,6 +43,7 @@ class WidgetItem extends Component {
         icon,
       },
       clickHandler,
+      listMeta
     } = this.props;
 
     const style = {
@@ -50,14 +51,19 @@ class WidgetItem extends Component {
       backgroundImage: `url(${background})`,
     };
     console.log("icon____"+icon);
+    // 取元数据
+    const titleStyle = listMeta && listMeta.titleStyle && JSON.parse(listMeta.titleStyle);
+    const imageStyle = listMeta && listMeta.imageStyle && JSON.parse(listMeta.imageStyle);
+    const backStyle = listMeta && listMeta.background && JSON.parse(listMeta.background);
+    const mergeStyle = Object.assign(style,backStyle);
     return (
       <li className={`${widgetItem} ${defaultArea}`}
-        style={style}
+        style={mergeStyle}
         onClick={clickHandler} >
         <div className={title}>
-          <div className={title_right}>{name}</div>
+          <div className={title_right} style={titleStyle}>{name}</div>
         </div>
-        <img src={icon?icon:_default_icon} className={iconImg}/>
+        <img src={icon?icon:_default_icon} className={iconImg} style={imageStyle}/>
       </li>
     );
   }

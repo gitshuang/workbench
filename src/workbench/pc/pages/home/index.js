@@ -64,9 +64,11 @@ class Home extends Component {
       } = this.props;
     const list = [];
     const conts = [];
+    // 元数据拉过来的值
     const groupMeta = metaData.properties && metaData.properties.group;
     let contentStyle = metaData.properties && metaData.properties.content;
     const headerData = metaData.properties && metaData.properties.header;
+    const listMeta = metaData.properties && metaData.properties.list;
     workList.forEach((da, i) => {
       const {
         widgetId: id,
@@ -87,7 +89,7 @@ class Home extends Component {
         target: `nav${id}`,
       });
       conts.push(
-        <WidgeList {...props} groupMeta={groupMeta}/>
+        <WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} />
       );
     })
 
