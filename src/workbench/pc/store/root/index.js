@@ -28,7 +28,9 @@ function addMessage(message) {
       duration: null,
       closable: false,
       onClose: () => {
-        dispathMessageTypeHandler('popMessage');
+        dispathMessageTypeHandler({
+          type: 'popMessage'
+        });
       }
     });
   }

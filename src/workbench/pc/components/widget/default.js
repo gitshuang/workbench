@@ -49,7 +49,6 @@ class WidgetItem extends Component {
       ...widgetStyle[size - 1],
       backgroundImage: `url(${background})`,
     };
-    console.log("icon____"+icon);
     return (
       <li className={`${widgetItem} ${defaultArea}`}
         style={style}

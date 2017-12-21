@@ -1,4 +1,5 @@
 import { createActions as createReduxActions } from 'redux-actions';
+import ReactDOM from 'react-dom';
 
 export const noop = () => {};
 
@@ -259,3 +260,13 @@ export function avoidSameName(namaArr, name) {
     return name;
   }
 }
+
+export function getContext() {
+  if (window.diworkContext && typeof window.diworkContext === 'function') {
+    return window.diworkContext();
+  } else {
+    return {};
+  }
+}
+
+export const IS_REACT_16 = !!ReactDOM.createPortal;
