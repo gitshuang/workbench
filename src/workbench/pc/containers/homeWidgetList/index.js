@@ -35,6 +35,7 @@ class HomeWidgeList extends Component{
       style,
       groupMeta
     } = this.props;
+    const titleStyle = groupMeta && groupMeta.titleStyle && JSON.parse(groupMeta.titleStyle);
     const list = children.map((child, i) => {
       const {
         type,
@@ -64,7 +65,7 @@ class HomeWidgeList extends Component{
       <div className={item} style={style} >
         {
           noTitle ? null : (
-            <div className={WidgetTitle} style={groupMeta&&groupMeta.titleStyle} >
+            <div className={WidgetTitle} style={titleStyle} >
               <div>{name}</div>
             </div>
           )

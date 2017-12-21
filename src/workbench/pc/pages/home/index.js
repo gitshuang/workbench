@@ -36,69 +36,71 @@ const { requestStart, requestSuccess, requestError } = rootActions;
   }
 )
 class Home extends Component {
-    constructor(props) {
-      super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    componentWillMount() {
-        const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
-        requestStart();
-      const param = {
-        componentCode:"demo",
-        viewCode:"demo",
-        deviceType:"PC",
-        lang:"US"
+  componentWillMount() {
+    const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
+    requestStart();
+    const param = {
+      componentCode: "demo",
+      viewCode: "demo",
+      deviceType: "PC",
+      lang: "US"
+    };
+    getWorkList(param).then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      }
+      requestSuccess();
+    });
+  }
+
+  render() {
+    const {
+      workList,
+      metaData
+      } = this.props;
+    const list = [];
+    const conts = [];
+    const groupMeta = metaData.properties && metaData.properties.group;
+    let contentStyle = metaData.properties && metaData.properties.content;
+    const headerData = metaData.properties && metaData.properties.header;
+    workList.forEach((da, i) => {
+      const {
+        widgetId: id,
+        widgetName: name,
+        } = da;
+      const props = {
+        key: `nav${id}`,
+        data: da,
+        noTitle: !i
       };
-        getWorkList(param).then(({error, payload}) => {
-            if (error) {
-                requestError(payload);
-            }
-            requestSuccess();
-        });
-    }
+      if (i === workList.length - 1) {
+        props.style = {
+          height: window.innerHeight,
+        }
+      }
+      list.push({
+        label: name,
+        target: `nav${id}`,
+      });
+      conts.push(
+        <WidgeList {...props} groupMeta={groupMeta}/>
+      );
+    })
 
-    render() {
-        const {
-          workList,
-          metaData
-        } = this.props;
-        const list = [];
-        const conts = [];
-        const groupMeta = metaData.home && metaData.home.properties.group;
-        workList.forEach((da, i) => {
-            const {
-              widgetId: id,
-              widgetName: name,
-            } = da;
-            const props = {
-              key: `nav${id}`,
-              data: da,
-              noTitle: !i
-            };
-            if (i === workList.length - 1) {
-              props.style = {
-                height: window.innerHeight,
-              }
-            }
-            list.push({
-              label: name,
-              target: `nav${id}`,
-            });
-            conts.push(
-              <WidgeList {...props} groupMeta={groupMeta}/>
-            );
-        })
-      let background = metaData.home && metaData.home.properties.content.background;
-        return (
-          <div className={page_home} style={{background:background}}>
-            <HeaderPage list={list} headerData={metaData.home && metaData.home.properties.header}/>
-            <ElementsWrapper items={list} offset={-55}>
-              {conts}
-            </ElementsWrapper>
-            <HomeFolderDialog />
-          </div>
-        );
-    }
+    return (
+      <div className={page_home} style={contentStyle}>
+        <HeaderPage list={list} headerData={headerData}/>
+        <ElementsWrapper items={list} offset={-55}>
+          {conts}
+        </ElementsWrapper>
+        <HomeFolderDialog />
+      </div>
+    );
+  }
 }
 export default Home;
 

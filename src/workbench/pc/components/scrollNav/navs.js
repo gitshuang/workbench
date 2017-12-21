@@ -8,12 +8,12 @@ import {
   navs,
 } from './style.css';
 
-
 const Navs = ({
   items,
   offset,
   duration,
-  delay
+  delay,
+  color
 }) => {
   return (
     <div className={cover}>
@@ -23,6 +23,7 @@ const Navs = ({
             <li key={i}>
               <Link
                 className={link}
+                style={{color:color}}
                 activeClass={activeLink}
                 to={target}
                 spy={true}
