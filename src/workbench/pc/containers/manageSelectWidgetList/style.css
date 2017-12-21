@@ -58,7 +58,7 @@
   -webkit-box-flex:1;
   margin-left: 10px;
   overflow-y: scroll;
-  height: 381px;
+  height: 550px;
 }
 .panel_right::-webkit-scrollbar{
     width: 8px;
