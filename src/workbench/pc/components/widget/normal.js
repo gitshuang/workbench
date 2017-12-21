@@ -40,7 +40,7 @@ function getData(url, callback) {
     if (response.ok) {
       return response.text().then((text) => {
         if (text) {
-          this.tool = new WidgetTool(this.data.widgetId);
+          this.tool = new WidgetTool(this.props.data.widgetId);
           try {
             const fn = new Function(
               'React',
@@ -51,7 +51,7 @@ function getData(url, callback) {
             );
             const result = fn(
               React,
-              this.data,
+              this.props.data,
               this.tool,
               getContext(),
             );
