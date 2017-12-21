@@ -233,22 +233,20 @@
         "header": {
           "title":"工作台",
           "titleStyle":"{\"fontSize\":\"16px\",\"color\":\"#ffffff\"}",
-          "background":"{\"backgroundColor\":\"#E14C46\",\"backgroundImage\":\"url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514432055&di=d6fb9c4e441141423af585292c5cc1f5&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.kinker.cn%2Fsucai%2Fpic%2F19%2F58.png)\",\"backgroundPosition\":\"right\",\"backgroundRepeat\":\"no-repeat\",\"backgroundSize\":\"100px 100px\"}",
+          "background":"{\"backgroundColor\":\"#E14C46\",\"backgroundImage\":\"url(http://uapma.yonyou.com:8443/weixin/imagebox/yonyouCloud/header2.png)\",\"backgroundPosition\":\"center\",\"backgroundRepeat\":\"no-repeat\"}",
           "className": "redTheme",
           "color": "#ffffff"
         },
         "content": {
           "backgroundColor": "rgb(235,235,235)",
-          "backgroundImage": "url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513837599348&di=56e8f0f1c9b5f08260eac9bca7bdbe6b&imgtype=0&src=http%3A%2F%2Fbpic.ooopic.com%2F16%2F87%2F64%2F16876408-62fcba8b8db50fe231b90a195fd977ea-4.jpg)",
-          "backgroundPosition": "right",
-          "backgroundRepeat": "no-repeat",
-          "backgroundSize": "200px "
+          "backgroundImage": "url(http://uapma.yonyou.com:8443/weixin/imagebox/yonyouCloud/bg2.png)",
+          "backgroundPosition": "center top"
         },
         "group": {
-          "titleStyle":"{\"fontSize\":\"18px\",\"color\":\"#000\"}"
+          "titleStyle":"{\"fontSize\":\"18px\",\"color\":\"#ffffff\"}"
         },
         "list": {
-          "background":"{\"backgroundColor\":\"#fffffff\",\"backgroundImage\":\"url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514432055&di=d6fb9c4e441141423af585292c5cc1f5&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.kinker.cn%2Fsucai%2Fpic%2F19%2F58.png)\",\"backgroundPosition\":\"right\",\"backgroundRepeat\":\"no-repeat\",\"backgroundSize\":\"100px 100px\"}",
+          "background":"{\"backgroundColor\":\"#fffffff\",\"backgroundImage\":\"url(http://uapma.yonyou.com:8443/weixin/imagebox/yonyouCloud/maozi.png)\",\"backgroundPosition\":\"right\",\"backgroundRepeat\":\"no-repeat\",\"backgroundSize\":\"80px 80px\"}",
           "titleStyle":"{\"fontSize\":\"16px\",\"textAlign\":\"right\",\"paddingRight\":\"10px\"}",
           "imageStyle":"{\"left\":\"0px\"}"
         }
