@@ -448,7 +448,7 @@ class ManageGroup extends Component {
       //return null
     }
     return connectDragSource(connectDropTarget(
-      <div className={groupArea}>
+      <div className={`${groupArea} animated zoomIn`}>
         <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
           { groupTitle }
           <div>

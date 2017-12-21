@@ -239,7 +239,7 @@ class WidgeFileItem extends Component {
     const { connectDragSource, connectDropTarget,isDragging,drag } = this.props;
     const opacity = isDragging ? 0 : 1;
     if (isDragging) {
-      //return null
+      // return null
     }
     // ${isDragging ? 'rollOut':'slideInRight'}
     return connectDragSource(connectDropTarget(
