@@ -138,29 +138,21 @@ const reducer = handleActions({
 
     let newCar = [];
     let currentSelectWidgetMap = state.currentSelectWidgetMap;
-    console.log("----currentSelectWidgetMap : ");
-    console.log( currentSelectWidgetMap);
     for(let da of dataList){
+      da.selected = "1";
       let server = currentSelectWidgetMap[da.serveId];
       if(server){
-        if(da.selected == "3"){
-          currentSelectWidgetMap[da.serveId].selected = da.selected;
-        }else{
-          debugger;
-          delete currentSelectWidgetMap[da.serveId];
-        }
+        currentSelectWidgetMap[da.serveId].selected = da.selected;
       }else{
         currentSelectWidgetMap[da.serveId] = da;
       }
-      if(da.selected == "3"){
-        let newCarObn = {...defaultCar};
-        newCarObn.widgetId = da.serveId;
-        newCarObn.widgetName = da.serveName;
-        newCarObn.serveCode = da.serveCode;
-        newCarObn.icon = da.serveIcon;
-        newCarObn.size = da.widgetTemplate.size;
-        newCar.push(newCarObn);
-      }
+      let newCarObn = {...defaultCar};
+      newCarObn.widgetId = da.serveId;
+      newCarObn.widgetName = da.serveName;
+      newCarObn.serveCode = da.serveCode;
+      newCarObn.icon = da.serveIcon;
+      newCarObn.size = da.widgetTemplate.size;
+      newCar.push(newCarObn);
     }
     state.manageList.forEach((da,i)=>{
         if(da.widgetId == parentId){
@@ -312,11 +304,16 @@ const reducer = handleActions({
         children: [],
       })
     }
+    let children =  manageList[index].children;
+    children.forEach((da,i)=>{
+      delete state.currentSelectWidgetMap[da.widgetId]
+    })
     return{
       ...state,
       manageList: newList,
       isEdit: true,
-      currEditonlyId:""
+      currEditonlyId:"",
+      currentSelectWidgetMap:state.currentSelectWidgetMap
     }
   },
   [setCurrGroupIndex]: (state, { payload: index }) => {
@@ -495,11 +492,13 @@ const reducer = handleActions({
     manageList.splice(groupIndex, 1, {
       ...group,
     });
+    delete state.currentSelectWidgetMap[folderId];
     return{
       ...state,
       isEdit: true,
       manageList: [ ...manageList ],
-      currEditonlyId:""
+      currEditonlyId:"",
+      currentSelectWidgetMap:state.currentSelectWidgetMap
     }
   },
   [setFolderEdit]: (state, { payload: curEditFolderId }) => {

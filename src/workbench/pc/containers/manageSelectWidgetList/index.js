@@ -96,9 +96,9 @@ class SelectWidgetList extends Component {
           dataMap[data[i].serveId] = data[i];
           //恢复备份数据
           let _currentSelectWidgetMap = this.props.currentSelectWidgetMap;
-            if(_currentSelectWidgetMap[data[i].serveId]){
-              dataMap[data[i].serveId].selected = _currentSelectWidgetMap[data[i].serveId].selected;
-            }
+          if(_currentSelectWidgetMap[data[i].serveId]){
+            dataMap[data[i].serveId].selected = _currentSelectWidgetMap[data[i].serveId].selected;
+          }
         }
     }
     return dataMap;
@@ -157,9 +157,11 @@ class SelectWidgetList extends Component {
 
   onChange =(data,sele)=>{
     this.state.dataMap[data.serveId].selected = sele;
-    let obj = this.state.selectedList.find(da=>da.serveId == data.serveId);
-    if(!obj){
+    let index = this.state.selectedList.findIndex(da=>da.serveId == data.serveId);
+    if(index == -1 && sele == "3"){
       this.state.selectedList.push(data);
+    }else{
+      this.state.selectedList.splice(index,1);
     }
     console.log(this.state.selectedList);
     this.setState({
@@ -192,12 +194,12 @@ class SelectWidgetList extends Component {
 
   btnSave=()=>{
     console.log(this.state.selectedList);
-    let {deleteFolder,requestError} = this.props;
-    this.state.selectedList.forEach((da,i)=>{
-      if(da.selected != "3"){
-        deleteFolder(da.serveId);
-      }
-    });
+    // let {deleteFolder,requestError} = this.props;
+    // this.state.selectedList.forEach((da,i)=>{
+    //   if(da.selected != "3"){
+    //     deleteFolder(da.serveId);
+    //   }
+    // });
     this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
     this.setState({
       selectedList:[]
@@ -222,10 +224,9 @@ class SelectWidgetList extends Component {
     })
 
     return (<div className={select_widget_list}>
-       <div className={widget_left}>
+       {/* <div className={widget_left}>
           <div className={title}>添加服务</div> 
-       </div>
-       
+       </div> */}
        <div className={widget_right}>
           <div className={searchPanel}>
               <FormControl className={form_control} value={this.state.value} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
