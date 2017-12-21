@@ -4,6 +4,7 @@
   border: 1px solid #FFFFFF;
   border-radius: 100px;
   color: #fff;
+  overflow:hidden;
 }
 .page_home :global(.lebra-navbar-left-icon .iconfont){
   font-size: 31px;

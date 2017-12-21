@@ -242,16 +242,14 @@ class SelectWidgetList extends Component {
                   {btns}
                 </ButtonGroup>
               </div>
-
               <div className={panel_right}>
                  {list}
               </div>
-
-              <div className={footer_btn}>
-                {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
-                 <ButtonDefaultLine onClick={this.props.close} >取消</ButtonDefaultLine>
-              </div>
            </div>
+           <div className={footer_btn}>
+            {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
+              <ButtonDefaultLine onClick={this.props.close} >取消</ButtonDefaultLine>
+          </div>
        </div>
     </div>);
   }

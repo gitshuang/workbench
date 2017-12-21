@@ -9,12 +9,12 @@
     white-space: normal;
     word-break: break-all;
     font-size:15px;
-    color:rgba(136,136,136);
+    color:rgba(136,136,136,1);
     line-height: 32px;
 }
 
 .link:hover {
-    color: #4A515D;
+    color: rgba(71,77,84,1);
     text-decoration: unset;
 }
 .link:after{
@@ -22,15 +22,19 @@
     height: 8px;
 }
 .activeLink {
-    color: #4A515D;
+    color: rgba(71,77,84,1);
     text-decoration: unset;
     font-weight: bold;
+    font-size:15px;
+    font-family:MicrosoftYaHei-Bold;
+    color:rgba(71,77,84,1);
 }
 
 .activeLink:after{
     content: " ";
     border-bottom: 6px solid rgba(225,76,70,1);
-    max-width: 20px;
+    max-width: 28px;
+    min-width: 14px;
     width: 50%;
     height: 0;
     margin: 0 auto;
@@ -62,4 +66,8 @@
 .navs>li{
   height:48px;
   margin-right:34px;
+}
+/* jony */
+.content>div:first-child ul{
+    padding-top: 20px;
 }

@@ -3,7 +3,7 @@
   float: left;
   /*margin-top: 30px;*/
   margin-right: 10px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   margin-bottom: 10px;
   box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
   display: block;
@@ -44,9 +44,6 @@
 .title_right{
     -webkit-box-align: center;
     /*display: -webkit-box;*/
-  -webkit-box-flex:1.0;
-  -webkit-box-pack: start;
-  padding-left: 9px;
   /*background: yellow;*/
 }
 
@@ -55,10 +52,10 @@
 }
 .defaultArea .iconImg{
   position: absolute;
-  width: 50px;
-  height: 50px;
-  right: 50px;
-  bottom: 65px;
+  width: 40px;
+  height: 40px;
+  right: 33px;
+  bottom: 50px;
   transform: translate(50%,50%);
 }
 /**
@@ -70,6 +67,14 @@
   color: rgba(117,127,140,1);
 }
 **/
+
+.title_right{
+  -webkit-box-flex:1.0;
+  -webkit-box-pack: start;
+  padding-left: 9px;
+  font-size:14px;
+  color:rgba(71,77,84,1);
+}
 .widgetItem .content {
   position: relative;
 }
