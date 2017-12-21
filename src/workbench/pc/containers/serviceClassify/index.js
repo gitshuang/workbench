@@ -58,9 +58,7 @@ class serviceClassify extends Component {
     super(props);
     this.state = {
       value: "搜索应用",
-      extend:true,
       current: undefined,
-      list2 : [],
       listAll : [],
       allApplicationList:[]
     }
@@ -100,7 +98,7 @@ class serviceClassify extends Component {
   packUp = (data)=>{
     data.extend = data.extend?false:true;
     this.setState({
-        ...this.state
+      ...this.state
     })
   }
 
