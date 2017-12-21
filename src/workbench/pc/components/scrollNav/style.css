@@ -9,12 +9,12 @@
     white-space: normal;
     word-break: break-all;
     font-size:15px;
-    color:rgba(136,136,136);
+    color:rgba(136,136,136,1);
     line-height: 32px;
 }
 
 .link:hover {
-    color: #4A515D;
+    color: rgba(71,77,84,1);
     text-decoration: unset;
 }
 .link:after{
@@ -22,7 +22,7 @@
     height: 8px;
 }
 .activeLink {
-    color: #4A515D;
+    color: rgba(71,77,84,1);
     text-decoration: unset;
     font-weight: bold;
 }
@@ -53,7 +53,7 @@
   list-style: none
 }
 .content{
-  padding-top: 90px;
+  padding-top: 120px;
   padding-left: 67px;
   padding-right: 100px;
   width: 100%;

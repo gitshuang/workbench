@@ -70,7 +70,7 @@
   -webkit-box-flex:1.0;
   -webkit-box-pack: start;
   padding-left: 9px;
-  /*background: yellow;*/
+  color:rgba(71,77,84,1);
 }
 .widgetItem .content {
   position: relative;
