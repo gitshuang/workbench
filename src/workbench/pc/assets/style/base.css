@@ -166,7 +166,7 @@ body {
   right: 20px;
 }
 .u-tabs-tab{
-  padding-left: 0px !important;
+  // padding-left: 0px !important;
 }
 .u-checkbox span{
   padding-top: 4px;

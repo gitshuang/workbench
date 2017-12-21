@@ -127,7 +127,7 @@ class MoveToGroup extends Component {
     let content = (
       <div className= {container}>
         <div className={title}>
-          添加到：{way}
+          移动到：{way}
         </div>
         <div className={borderBox}>
           { this.makeSelectInterface(data, selectId) }
@@ -152,7 +152,7 @@ class MoveToGroup extends Component {
                 colors="danger"
                 disabled={!way && !inAddGroup}
                 className={saveBtn}
-                onClick={ this.save }>添加</Button>) : null
+                onClick={ this.save }>确定</Button>) : null
             }
             {
               onCancel ? (<Button

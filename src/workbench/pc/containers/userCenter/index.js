@@ -20,7 +20,7 @@ import img5 from 'assets/image/wgt/relation.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,select_cont,logOut
+  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,select_cont,logOut,line_end
 } from './style.css';
 
 const {
@@ -303,7 +303,7 @@ class UserInfoContainer extends Component {
 
     let lis = [];//推广服务列表
     this.state.promotionList.forEach((item,index)=>{
-      lis.push(<li key={index}>
+      lis.push(<li key={index} className={(index+1)%4 == 0?line_end:null}>
           <div className={serviceImg}>
             <section><img src={img1}/></section>
             <div className={serviceName}>{item.serveName}</div>
