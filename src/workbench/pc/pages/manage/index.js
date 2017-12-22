@@ -179,7 +179,6 @@ class Home extends Component {
   }
   // 返回操作
   goBack = () => {
-    debugger;
     this.configBack = true;
     this.props.history.replace(this.goToLocation);
   }
