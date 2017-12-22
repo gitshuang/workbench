@@ -13,7 +13,7 @@ class PopDialog extends Component{
     title: PropTypes.string,
     show: PropTypes.bool.isRequired,
     btns: PropTypes.array,
-    close: PropTypes.fun,
+    close: PropTypes.any,
     data: PropTypes.any,
   }
 

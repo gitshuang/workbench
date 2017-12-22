@@ -79,7 +79,7 @@ class HeaderPage extends Component {
     let imgIcon = null;
     //let class2 = headerData && headerData.className;
     let background = headerData && headerData.background && JSON.parse(headerData.background);
-    let titleContent = headerData && headerData.title
+    let titleContent = headerData && headerData.title;
     let titleStyle = headerData && headerData.titleStyle && JSON.parse(headerData.titleStyle);
     let color = headerData && headerData.color;
     if(img){
@@ -95,7 +95,7 @@ class HeaderPage extends Component {
           iconName={imgIcon}
           color={color}
         >
-          <span style={titleStyle}>{titleContent}</span>
+          <span style={titleStyle}>{titleContent ? titleContent: "首页"}</span>
         </Header>
         {
           list.length > 1 ? (
