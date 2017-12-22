@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
+import { getOpenServiceData } from 'public/regMessageTypeHandler';
 import actions from './actions';
 
 const {
@@ -24,7 +25,6 @@ const {
   setProductInfo,
 } = actions;
 
-
 const defaultState = {
   domainName: '',
   expandedSidebar: false,
@@ -46,6 +46,18 @@ const defaultState = {
   pinDisplay: false,   // pin是否显示
   widthBrm: true,
 };
+
+function appendSearchParam(url, params) {
+  if (url) {
+    console.log(url);
+    var urlObj = new URL(url);
+    Object.keys(params).forEach((name) => {
+      urlObj.searchParams.append(name, params[name]);
+    });
+    return urlObj.toString();
+  }
+  return url;
+}
 
 const reducer = handleActions({
   [addBrm]: (state, { payload: data }) => ({
@@ -82,28 +94,32 @@ const reducer = handleActions({
           title: name,
           serveCode,
           serveId,
-          url,
+          url: curTab.location,
         },
         brm
       }
     } else {
+      const location = appendSearchParam(url, {
+        ...getOpenServiceData(serveCode),
+        serveCode,
+      });
       return {
         ...state,
-        current:{
+        current: {
           ...defaultState.current,
           hasRelationFunc: state.current.hasRelationFunc,
           menuItemId: currentId,
           title: name,
           serveCode,
           serveId,
-          url,
+          url: location,
         },
         brm,
         tabs: [{
           id: currentId,
           serveCode,
           name,
-          location: url,
+          location,
         }].concat(tabs)
       }
     }

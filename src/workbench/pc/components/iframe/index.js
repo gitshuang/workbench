@@ -12,14 +12,16 @@ const propTypes = {
 class Iframe extends Component{
 
 	constructor(props) {
-        super(props);
-    }
+    super(props);
+  }
 
-    render() {
-
-       return (<iframe ref = {e => { this.iframe = e; }} title={this.props.title} src={this.props.url} className={iframe} ></iframe>);
-   }
-
+  render() {
+    const {
+      title,
+      url,
+    } = this.props;
+    return (<iframe title={title} src={url} className={iframe} />);
+  }
 }
 
 Iframe.propTypes = propTypes;
