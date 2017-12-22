@@ -24,6 +24,7 @@ import {
   search_help,
   showheight,
   searchBtnAll,
+  color
 } from './style.css';
 import _default_icon from 'assets/image/wgt/default.png';
 import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';

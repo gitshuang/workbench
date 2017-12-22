@@ -147,3 +147,7 @@ border-radius: 3px ;
 .SearchWin .searchWindom .search_service .h_name {width: 185px;}
 .SearchWin .searchBtnAll {background: #fff; cursor: pointer; line-height: 39px;color: #007ACE; font-size: 12px; text-align: center; position: absolute;bottom:0;width: 100%;height: 39px;}
 .SearchWin .searchBtnAll:hover{ background: #EFF0F2; color: #474D54}
+
+.color{
+  
+}
