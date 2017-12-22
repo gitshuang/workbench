@@ -80,9 +80,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     const { manageList } = props;
+    this.goToLocation = "/";
+    this.configBack = false;
     this.state = {
       showModal: false,
-      showCancelModal: false
+      showCancelModal: false,
+      currLocation:"",
     };
   }
   moveGroupDrag = (id, afterId) => {
@@ -94,10 +97,26 @@ class Home extends Component {
     const { moveServe } = this.props;
     moveServe(data);
   }
+
   componentDidMount() {
+    const { history} = this.props;
+
+    console.log(history);
+    history.block(location => {
+      const { isEdit} = this.props;
+      this.goToLocation =  location.pathname;
+      if((location.pathname != this.props.match.path) && isEdit && !this.configBack ){
+        this.setState({
+          showCancelModal: true
+        });
+        return false;
+      }
+    })
     this.getManageList();
   }
+  componentWillReceiveProps(nextProps){
 
+  }
   getManageList() {
     const {
       requestStart,
@@ -160,7 +179,9 @@ class Home extends Component {
   }
   // 返回操作
   goBack = () => {
-    this.props.history.goBack();
+    debugger;
+    this.configBack = true;
+    this.props.history.replace(this.goToLocation);
   }
   //批量删除
   batchDelectFn = () => {
@@ -175,6 +196,7 @@ class Home extends Component {
   }
   // 打开删除的弹窗
   popOpen = () => {
+    debugger;
     this.setState({
       showModal: true
     });
@@ -192,6 +214,7 @@ class Home extends Component {
       this.setState({
         showCancelModal: true
       });
+      return false;
     }else{
       this.goBack();
     }
