@@ -44,7 +44,7 @@ const reducer = handleActions({
     return {
       ...state,
       workList: payload.workList,
-      metaData: payload.metaData
+      metaData: JSON.parse(payload.metaData)
     };
   },
   [setCutUser]: createReducer('setCutUser'),
