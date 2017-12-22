@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
 import HTML5BackendGroup from 'react-dnd-html5-backend';
-import {ButtonDefaultLine,ButtonBrand} from 'components/button';
+import {ButtonDefaultLine,ButtonBrand,ButtonDefaultAlpha} from 'components/button';
 import Button from 'bee-button';
-
+import Icon from 'components/icon';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
@@ -33,7 +33,9 @@ import {
   batchArea,
   header,
   page_home,
-  cancelModal
+  cancelModal,
+  addBtn,
+  addGroupBtn
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -206,8 +208,11 @@ class Home extends Component {
     let list = [];
     if(manageList.length == 0){
       return (
-        <div>
-          <button onClick={()=>{addGroup(0)}}>添加按钮</button>
+        <div className={addBtn} >
+          <ButtonDefaultAlpha className={addGroupBtn} onClick={()=>{addGroup({index:0})}}>
+            <Icon type="add"></Icon>
+            添加组
+          </ButtonDefaultAlpha>
         </div>
       );
     }
