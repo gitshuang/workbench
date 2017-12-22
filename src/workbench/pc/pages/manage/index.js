@@ -45,6 +45,7 @@ const {
   moveGroup,
   moveServe,
   setEditState,
+  addGroup
 } = manageActions;
 
 @withRouter
@@ -68,6 +69,7 @@ const {
     moveGroup,
     moveServe,
     setEditState,
+    addGroup
   }
 )
 
@@ -199,11 +201,16 @@ class Home extends Component {
   }
 
   renderContent() {
-    let { manageList } = this.props;
+    const { manageList,addGroup } = this.props;
     //console.log(manageList)
-    //debugger;
     let list = [];
-    if(manageList.length == 0) return;
+    if(manageList.length == 0){
+      return (
+        <div>
+          <button onClick={()=>{addGroup(0)}}>添加按钮</button>
+        </div>
+      );
+    }
     manageList.map((item, index) =>{
       list.push(
         <ManageGroup

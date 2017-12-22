@@ -186,7 +186,7 @@ const reducer = handleActions({
     debugger;
     let {data,sele} = payload.data;
     let currentSelectWidgetMap = state.currentSelectWidgetMap;
-    
+
     let _currentSelectWidgetMap = null;
     if(currentSelectWidgetMap !=null){
       let server = currentSelectWidgetMap[data.serveId];
@@ -298,12 +298,12 @@ const reducer = handleActions({
     const newList =  manageList.filter((item,i) => {
       return index !== i;
     });
-    if (!newList.length) {
+    /*if (!newList.length) {
       newList.push({
         ...defaultGroup,
         children: [],
       })
-    }
+    }*/
     let children =  manageList[index].children;
     children.forEach((da,i)=>{
       delete state.currentSelectWidgetMap[da.widgetId]
