@@ -60,30 +60,34 @@ body{
   text-align: center;
   position: relative;
 }
+.titleArea span{
+  color:rgba(71,77,84,1);
+}
 .service, .pin {
   position: absolute;
   font-size:18px;
   font-weight:900;
 }
 .service {
-  right: -35px;
+  right: -27px;
 }
 .pin {
-  right: -70px;
+  right: -58px;
 }
 :global(.u-message){
-  left:50%;
-  top:50% !important;
-  transform: translate(-50% ,-50%);
-  width:178px !important;
-  height: 86px;
+  top:40px !important;
+}
+:global(.u-message-notice-light){
+  width:auto !important;
+  left: 50%;
+  transform: translate(-50%);
 }
 :global(.u-message-notice-close){
   display: none;
 }
 :global(.u-message-notice-description-content){
   padding:30px 0;
-  font-size: 18px;
+  font-size: 19px;
   line-height: 24px;
   margin-left: 55px;
 }

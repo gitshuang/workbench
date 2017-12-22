@@ -7,6 +7,7 @@ import Icon from 'components/icon';
 import DropdownButton from 'components/dropdown';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
+import { getStrLenSubstr } from '@u';
 
 import Button from 'bee-button';
 import Select from 'bee-select';
@@ -20,7 +21,7 @@ import img5 from 'assets/image/wgt/relation.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,select_cont,logOut
+  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,select_cont,logOut,line_end
 } from './style.css';
 
 const {
@@ -303,7 +304,7 @@ class UserInfoContainer extends Component {
 
     let lis = [];//推广服务列表
     this.state.promotionList.forEach((item,index)=>{
-      lis.push(<li key={index}>
+      lis.push(<li key={index} className={(index+1)%4 == 0?line_end:null}>
           <div className={serviceImg}>
             <section><img src={img1}/></section>
             <div className={serviceName}>{item.serveName}</div>
@@ -315,6 +316,7 @@ class UserInfoContainer extends Component {
       {name:"language",value:"界面语言",fun:this.handleChange},
       {name:"message",value:"消息",fun:this.handleChange}
     ];
+
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
@@ -326,11 +328,11 @@ class UserInfoContainer extends Component {
             <div className={editPortrait}  >
               <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>
-            <div className={userName}>{name}</div>
+            <div className={userName} title={name}>{getStrLenSubstr(name)}</div>
           </div>
           
           <div className={logOut} onClick={this.logOut}>
-            <Icon type="derivation" />
+            <Icon type="exit" />
             <span>注销</span>
           </div>
 

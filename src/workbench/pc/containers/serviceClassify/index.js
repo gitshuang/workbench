@@ -58,9 +58,7 @@ class serviceClassify extends Component {
     super(props);
     this.state = {
       value: "搜索应用",
-      extend:true,
       current: undefined,
-      list2 : [],
       listAll : [],
       allApplicationList:[]
     }
@@ -72,9 +70,8 @@ class serviceClassify extends Component {
       requestSuccess,
       requestError,
       getAllApplicationList,
-      allApplicationList,
     } = this.props;
-    if(allApplicationList.length == 0){
+    if(this.state.allApplicationList.length == 0){
       requestStart();
       getAllApplicationList().then(({error, payload}) => {
         if (error) {
@@ -100,7 +97,7 @@ class serviceClassify extends Component {
   packUp = (data)=>{
     data.extend = data.extend?false:true;
     this.setState({
-        ...this.state
+      ...this.state
     })
   }
 
@@ -143,7 +140,7 @@ class serviceClassify extends Component {
         applicationCode,
         service,
       } = app;
-     
+
       return (
         <div key={applicationCode} >
           <header>
@@ -174,7 +171,7 @@ class serviceClassify extends Component {
               </hgroup>
             ):null
           }
-          
+
         </div>
       )
     })
@@ -184,10 +181,8 @@ class serviceClassify extends Component {
     const btns = [];
     const {
       current,
+      allApplicationList,
     } = this.state;
-    const {
-      allApplicationList
-    } = this.props;
 
     btns.push(
       <Button className={ current ? '' : 'active' }
@@ -219,7 +214,7 @@ class serviceClassify extends Component {
   inputOnFocus = (e) => {
     let _value = e.target.value != "搜索应用"?e.target.value:"";
     this.setState({
-        value:_value 
+        value:_value
     });
   }
 

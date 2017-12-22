@@ -171,6 +171,7 @@ class WidgetItem extends Component {
     if(type === "pop"){
      delectServe({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
     }else{
+      debugger;
       deleteFolder(data.widgetId);
     }
     this.setState({
@@ -245,7 +246,7 @@ class WidgetItem extends Component {
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     if (isDragging) {
-      //return null
+      // return null
     }
     const {title} = this.state;
     return connectDragSource(connectDropTarget(

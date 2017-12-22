@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 import Modal from 'bee-modal';
-import Button from 'bee-button';
+import { IS_REACT_16 } from '@u';
 import Icon from 'components/icon';
 import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
-import {btn,close} from './style.css';
-
-const propTypes = {
-  title:"",
-        show:PropTypes.bool.isRequired,
-  btns:[{label:"",fun:null,className:""},{label:"",fun:null,className:""}],   //设置操作按钮
-        close:PropTypes.fun,
-  data:null
-};
+import { btn, closeBtn } from './style.css';
+import { setTimeout } from 'timers';
 
 class PopDialog extends Component{
-
-  constructor(props) {
-        super(props);
+  static propTypes = {
+    title: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+    btns: PropTypes.array,
+    close: PropTypes.any,
+    data: PropTypes.any,
   }
 
-  btnClick =(e,da)=>{
+  btnClick = (e, da) => {
     let _data = this.props.data ? this.props.data : this;
     if(da.fun){
       da.fun(_data)
@@ -28,7 +25,6 @@ class PopDialog extends Component{
   }
 
   render(){
-
     let _btns = [];
     if(this.props.btns){
         let _data = this.props.data ? this.props.data : this;
@@ -54,14 +50,145 @@ class PopDialog extends Component{
                 {this.props.children}
             </div>
 
-            <div className={`${close} close`} onClick={ this.props.close } ><Icon type="error3" /></div>
+            <div className={`${closeBtn} close`} onClick={ this.props.close } ><Icon type="error3" /></div>
           </Modal.Body>
 
           <Modal.Footer>
               {_btns}
           </Modal.Footer>
     </Modal>)}
-  }
+}
 
-PopDialog.PropTypes = propTypes;
+class DialogComponent extends Component{
+  static defaultProps = {
+    title: '',
+    content: '',
+    btns: [],
+  }
+  btnClickMaker(fn) {
+    const { close } = this.props;
+    if (fn && typeof fn === 'function') {
+      return () => {
+        fn(close);
+      };
+    } else {
+      return close;
+    }
+  }
+  render(){
+    const {
+      title,
+      content,
+      show,
+      btns,
+      close,
+    } = this.props;
+    return(
+      <Modal className="pop_dialog" backdrop={true} show={show}>
+        <Modal.Header>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            {content}
+          </div>
+          <div className={closeBtn} onClick={close} >
+            <Icon type="error3" />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          {
+            btns.map(({ type, label, fun }, i) => {
+              if (!label) {
+                return null;
+              }
+              let BtnComponent = ButtonDefaultAlpha;
+              switch(type) {
+                case 'brand':
+                  BtnComponent = ButtonBrand;
+                  break;
+                case 'warning':
+                  BtnComponent = ButtonWarning;
+                  break;
+                default:
+                  break;
+              }
+              return (
+                <BtnComponent
+                  key={i}
+                  className={btn}
+                  onClick={this.btnClickMaker(fun)} >
+                  {label}
+                </BtnComponent>
+              );
+            })
+          }
+        </Modal.Footer>
+      </Modal>
+    )
+  }
+}
+
+class Dialog {
+  constructor(options) {
+    this.div = document.createElement('div');
+    this.props = {
+      ...options,
+      close: this.close.bind(this),
+    };
+    document.body.appendChild(this.div);
+    this.render();
+  }
+  close = () => {
+    const {
+      props,
+      props: {
+        onClose,
+      },
+    } = this;
+    if (typeof onClose === 'function' && !onClose()) {
+      return;
+    }
+    props.show = show;
+    this.render().destroy();
+  }
+  render = () => {
+    const { props, div } = this;
+    ReactDOM.render(<DialogComponent { ...props } />, div);
+    return this;
+  }
+  destroy = () => {
+    const {
+      div,
+    } = this;
+    return new Promise(
+      (resolve) => {
+        setTimeout(() => {
+          const unmountResult = ReactDOM.unmountComponentAtNode(div);
+          if (unmountResult && div.parentNode) {
+            div.parentNode.removeChild(div);
+          }
+          resolve()
+        }, 1000);
+      }
+    );
+  }
+}
+
+let globalDialogInstance;
+function makeGlobalDialogInstance(options) {
+  globalDialogInstance = new Dialog(options)
+}
+function dialog(options) {
+  const dialogFactory = makeGlobalDialogInstance.bind(null, options);
+  if (globalDialogInstance) {
+    globalDialogInstance.destroy().then(dialogFactory);
+  } else {
+    dialogFactory();
+  }
+}
+// window.dialog = dialog;
 export default PopDialog;
+export {
+  dialog,
+};

@@ -33,7 +33,11 @@ class HomeWidgeList extends Component{
       openFolder,
       history,
       style,
+      groupMeta,
+      listMeta
     } = this.props;
+    // 新增元数据  控制groupTitle 样式
+    const titleStyle = groupMeta && groupMeta.titleStyle && JSON.parse(groupMeta.titleStyle);
     const list = children.map((child, i) => {
       const {
         type,
@@ -56,14 +60,14 @@ class HomeWidgeList extends Component{
         }
       }
       return (
-        <Widget { ...props }/>
+        <Widget { ...props } listMeta={listMeta}/>
       );
     })
 		return(
       <div className={item} style={style} >
         {
           noTitle ? null : (
-            <div className={WidgetTitle} >
+            <div className={WidgetTitle} style={titleStyle} >
               <div>{name}</div>
             </div>
           )

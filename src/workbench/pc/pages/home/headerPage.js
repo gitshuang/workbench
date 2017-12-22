@@ -71,23 +71,31 @@ class HeaderPage extends Component {
       changeUserInfoDisplay,
       hideUserInfoDisplay,
       userInfoDisplay,
-      list
+      list,
+      headerData
     } = this.props;
-    
+
     let img = this.props.userInfo.userAvator;
     let imgIcon = null;
+    //let class2 = headerData && headerData.className;
+    let background = headerData && headerData.background && JSON.parse(headerData.background);
+    let titleContent = headerData && headerData.title;
+    let titleStyle = headerData && headerData.titleStyle && JSON.parse(headerData.titleStyle);
+    let color = headerData && headerData.color;
     if(img){
       imgIcon = <img src={img} className={imgInner} />
     }else{
       imgIcon =  <Icon type="staff" />;
     }
     return (
-      <div className={header}>
+      <div className={`${header}`} style={background}>
         <Header
           onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
           leftContent={this.getLeftContent()}
-          iconName={imgIcon} >
-          <span>首页</span>
+          iconName={imgIcon}
+          color={color}
+        >
+          <span style={titleStyle}>{titleContent ? titleContent: "首页"}</span>
         </Header>
         {
           list.length > 1 ? (
@@ -95,7 +103,9 @@ class HeaderPage extends Component {
               items={list}
               offset={-55}
               duration={500}
-              delay={0} />
+              delay={0}
+              color={color}
+            />
           ) : null
         }
       </div>

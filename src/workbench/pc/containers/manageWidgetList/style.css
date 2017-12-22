@@ -1,10 +1,8 @@
 .widgetItem {
   position: relative;
   float: left;
-  /*margin-top: 30px;*/
   margin-right: 10px;
   margin-bottom: 10px;
-  /*box-shadow: 0 0 20px #b8c1c6;*/
   display: block;
   width:176px;
   height:176px;
@@ -12,17 +10,12 @@
   border-radius: 3px ;
   border:1px solid #F1F1F1;
   box-sizing: border-box;
-/*  overflow: auto;*/
   cursor: move;
 }
 .widgetFileItem{
   background: url("assets/image/wgt/folder_bg.png") no-repeat;
   background-size: 100% 100%;
-  background-position: center;
-  // display: -webkit-box;
-  // -webkit-box-flex : 1;
-  // -webkit-box-align:center;
-  // -webkit-box-pack:center;
+  background-position: center; 
   position:relative;
   border:none;
 }
@@ -44,7 +37,6 @@
 .title{
     height: 40px;
     line-height: 40px;
-    /*background: #ccc;*/
     display: -webkit-box;
 }
 .title_left,
@@ -112,25 +104,10 @@
   float: left;
   margin: 0 0 10px 10px;
 }
-.file_context div:nth-child(odd){
-
-}
-
-
 .file_context div:nth-child(even){
    opacity:56.53;
 }
-
-
-.widgetItemCont{
-  // height: 100px;
-}
-
-
-
-
 .footer{
-  // display: -webkit-box;
   height: 35px;
   width: 100%;
   padding:7px 8px;
@@ -165,7 +142,6 @@
   left: 0px;
   width: 100%;
 }
-
 .edit_cont{
   position: absolute;
   z-index: 1;
@@ -190,19 +166,6 @@
   left: 10px;
   top: 40px;
 }
-
-/**
-:global(.u-modal-dialog .u-modal-footer){
-    display: -webkit-box;
-    -webkit-box-pack: center;
-}
-:global(.u-modal-dialog .u-modal-footer .u-button){
-    min-width:10px !important;
-    margin-right: 10px;
-    width: 60px;
-    height: 32px;
-}
-**/
 .clearfix:after{
   content:"";
   display:block;
@@ -243,22 +206,48 @@
   color:#fff;
 }
 .pop_dialog_widge_list :global(.u-modal-dialog){
+  margin: 0px;
   width: 100%;
-  padding-left:0;
   height: 100%;
-  margin-top: 0px;
 }
 .pop_dialog_widge_list :global(.u-modal-content){
+  margin: 0px;
+  width: 100%;
   height: 100%;
-  padding-top: 6px;
-  padding-left: 10px;
+  padding-top: 21px;
+  padding-left: 24px;
 }
+.pop_dialog_widge_list :global(.u-modal-header),
+.pop_dialog_widge_list :global(.u-modal-body){
+  padding:0;
+}
+.pop_dialog_widge_list :global(.u-modal-header){
+  font-size:19px;
+  color:rgba(71,77,84,1);
+  line-height:25px;
+  margin-bottom: 14px;
+}
+
+.pop_dialog_widge_list :global(.u-modal-footer){
+  display: none;
+}
+
+
+/* 
+.pop_dialog_widge_list :global(.u-modal .u-modal-header){
+  padding:0px;
+}
+.pop_dialog_widge_list :global(.u-modal-dialog){
+  width: 100%;
+  height: 100%;
+}
+
 .pop_dialog_widge_list :global(.close){
   top: 18px;
 }
 .pop_dialog_widge_list :global(.u-modal .u-modal-dialog){
   margin: 0px;
-}
+} */
 .edit_cont .btn{
   display: inline-block;
   vertical-align: middle;

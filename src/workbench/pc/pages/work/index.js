@@ -200,7 +200,7 @@ export default class Work extends Component {
         if (error) {
           requestError(payload);
         }
-        Message.create({content: '移除成功',duration:2,position: 'top', color: "light"});
+        Message.create({content: '从首页移除成功！',duration:2,position: 'top', color: "light"});
         requestSuccess();
       });
       return false;
@@ -298,7 +298,7 @@ export default class Work extends Component {
                   title="添加到首页"
                   className={pin}
                   style={{
-                    right: hasRelationFunc ? '-70px' : '-35px',
+                    right: hasRelationFunc ? '-58px' : '-27px',
                   }}
                   type={pinType?"pin2":"pin"}
                   onClick={ this.pinDisplayFn }

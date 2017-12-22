@@ -4,7 +4,7 @@
   position: relative;
 }
 .search.searchExtend {
-  width: 46px;
+  width: 60px;
   text-align: right;
 }
 .searchExtend {
@@ -16,13 +16,14 @@
   line-height: 32px;
   cursor: pointer;
   display: inline-block;
+  margin-left:14px;
 }
 .searchBtn >i:hover {
   color:#2D3F5D;
 }
 .inputArea {
-  width: 250px;
-  left: -250px;
+  width: 236px;
+  left: -236px;
   position: absolute;
   top: 0;
   height: 32px;
@@ -70,10 +71,11 @@
 }
 
 .clearSearch {
-  background: rgba(0,0,0,.3);
+  background: #cfcfcf;
   width: 14px;
   height: 14px;
   border-radius: 10px;
+  margin-bottom:1px;
   line-height: 12px;
   text-align: center;
   display: inline-block;

@@ -14,7 +14,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {getSelectWidgetList,addDesk} = manageActions;
+const {getSelectWidgetList,addDesk,setCurrentSelectWidgetMap,deleteFolder} = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 import { select_widget_list,
@@ -27,12 +27,15 @@ panel_left,footer_btn,title,search_tit,active
   mapStateToProps(
     'manageList',
     'selectWidgetList',
+    'currentSelectWidgetMap',
     {
       namespace: 'manage',
     }
   ),
   {
     getSelectWidgetList,
+    setCurrentSelectWidgetMap,
+    deleteFolder,
     addDesk,
     requestSuccess,
     requestError,
@@ -91,6 +94,11 @@ class SelectWidgetList extends Component {
           this.getArrayToMap(data[i].children,dataMap,data[i].labelId);
         }else{
           dataMap[data[i].serveId] = data[i];
+          //恢复备份数据
+          let _currentSelectWidgetMap = this.props.currentSelectWidgetMap;
+          if(_currentSelectWidgetMap[data[i].serveId]){
+            dataMap[data[i].serveId].selected = _currentSelectWidgetMap[data[i].serveId].selected;
+          }
         }
     }
     return dataMap;
@@ -148,17 +156,14 @@ class SelectWidgetList extends Component {
   }
 
   onChange =(data,sele)=>{
-    // console.log(this.state.dataMap);
-    console.log(data);
-    if(sele == "3" ){
+    this.state.dataMap[data.serveId].selected = sele;
+    let index = this.state.selectedList.findIndex(da=>da.serveId == data.serveId);
+    if(index == -1 && sele == "3"){
       this.state.selectedList.push(data);
     }else{
-      if(this.state.selectedList.length != 0){
-        let index = this.state.selectedList.findIndex(da=>da.serveId == data.serveId);
-        this.state.selectedList.splice(index,1);
-      }
+      this.state.selectedList.splice(index,1);
     }
-    this.state.dataMap[data.serveId].selected = sele;
+    console.log(this.state.selectedList);
     this.setState({
         ...this.state,
         edit:true
@@ -188,6 +193,13 @@ class SelectWidgetList extends Component {
   }
 
   btnSave=()=>{
+    console.log(this.state.selectedList);
+    // let {deleteFolder,requestError} = this.props;
+    // this.state.selectedList.forEach((da,i)=>{
+    //   if(da.selected != "3"){
+    //     deleteFolder(da.serveId);
+    //   }
+    // });
     this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
     this.setState({
       selectedList:[]
@@ -212,10 +224,9 @@ class SelectWidgetList extends Component {
     })
 
     return (<div className={select_widget_list}>
-       <div className={widget_left}>
+       {/* <div className={widget_left}>
           <div className={title}>添加服务</div> 
-       </div>
-       
+       </div> */}
        <div className={widget_right}>
           <div className={searchPanel}>
               <FormControl className={form_control} value={this.state.value} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
@@ -231,16 +242,14 @@ class SelectWidgetList extends Component {
                   {btns}
                 </ButtonGroup>
               </div>
-
               <div className={panel_right}>
                  {list}
               </div>
-
-              <div className={footer_btn}>
-                {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
-                 <ButtonDefaultLine onClick={this.props.close} >取消</ButtonDefaultLine>
-              </div>
            </div>
+           <div className={footer_btn}>
+            {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
+              <ButtonDefaultLine onClick={this.props.close} >取消</ButtonDefaultLine>
+          </div>
        </div>
     </div>);
   }

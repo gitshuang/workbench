@@ -4,7 +4,7 @@ import store from 'store';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
 import Button from 'bee-button';
-import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { dispathMessageTypeHandler, parseType } from 'public/regMessageTypeHandler';
 import {closeNotice} from "./index.css";
 
 class Notice extends Component {
@@ -23,8 +23,9 @@ class Notice extends Component {
   handClick(i) {
     return (evt) => {
       // evt.stopPropagation();
-      const { type } = this.props.data.btns[i];
-      dispathMessageTypeHandler(type);
+      let { type } = this.props.data.btns[i];
+
+      dispathMessageTypeHandler(parseType(type));
       // return false;
     }
   }

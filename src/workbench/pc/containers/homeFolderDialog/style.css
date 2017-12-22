@@ -1,7 +1,6 @@
 .content{
   /*overflow: hidden;*/
   background:rgba(230,233,233,1);
-  // margin: 15px;
   padding:13px 14px;
   margin-top: 0;
   position: relative;
@@ -24,7 +23,7 @@
     margin-top:14px;
 }
 .home_file_item_dailog :global(.close){
-  top: -35px;
+  top: -55px;
   right:0;
 }
 .home_file_item_dailog  :global(.u-modal-dialog){

@@ -10,6 +10,7 @@
   border-radius:3px;
   box-shadow: 0px 3px 6px 0px rgba(74,81,93,0.25);
   box-sizing: content-box;
+  padding:0 5px;
 }
 .service {
   position: absolute;
@@ -17,7 +18,7 @@
   background: #fff;
   width:300px;
   height:271px;
-  padding:25px 10px 0;
+  padding:25px 0 0;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -34,8 +35,9 @@
   position: absolute;
   z-index: 9;
   bottom:0px;
+  left:1px;
   background: #F5F5F5;
-  width:300px;
+  width:309px;
   height:39px;
 }
 .service h4{
@@ -142,5 +144,5 @@
     line-height: 39px;
     text-align: center;
     cursor: pointer;
-    color: blue;
+    color: rgba(0,122,206,1);
 }

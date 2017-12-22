@@ -11,4 +11,5 @@ export default createTypes(
   'POP_MESSAGE',
   'GET_LATEST_ACCESS_LIST',
   'GET_PROMOTION_SERVICE_LIST',
+  'CHANGE_MESSAGE_TYPE',
 );

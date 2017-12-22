@@ -23,7 +23,7 @@
     -webkit-box-pack: center;
     -webkit-box-align: center;
 }
-.btn{
+.btn_upward,.btn_pull_down{
     display: inline-block;
     width:31px;
     margin: 0 auto;
@@ -33,12 +33,27 @@
     /* border-top-right-radius: 4px; */
     /* border-bottom-right-radius: 4px; */
     text-align: center;
-    background: rgba(252,237,236,1);
+    background:rgba(9,44,66,0.04);
+}
+.btn_upward{
+    background:rgba(252,237,236,1);
+}
+.btn_upward .icon_style{
+    color:rgba(225,76,70,1);
 }
 .icon_style{
-    color: rgba(225,76,70,1);
+    color: rgba(105,111,122,1);
     cursor: pointer;
     font-weight: bold;
+}
+.btn_pull_down:hover{
+    background:rgba(9,30,66,0.08);
+}
+.btn_pull_down:active{
+    background:rgba(252,237,236,1);
+}
+.btn_pull_down:active .icon_style{
+    color:rgba(225,76,70,1);
 }
 .menu_style li{
     border-top: 1px solid rgba(221,224,227,0.47);

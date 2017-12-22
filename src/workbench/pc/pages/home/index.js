@@ -23,6 +23,7 @@ const { requestStart, requestSuccess, requestError } = rootActions;
   mapStateToProps(
     'userInfo',
     'workList',
+    'metaData',
     {
       namespace: 'home',
     }
@@ -35,61 +36,76 @@ const { requestStart, requestSuccess, requestError } = rootActions;
   }
 )
 class Home extends Component {
-    constructor(props) {
-      super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    componentWillMount() {
-        const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
-        requestStart();
-        getWorkList().then(({error, payload}) => {
-            if (error) {
-                requestError(payload);
-            }
-            requestSuccess();
-        });
-    }
+  componentWillMount() {
+    const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
+    requestStart();
+    const param = {
+      componentCode: "yonyoucloud",
+      viewCode: "home",
+      deviceType: "PC",
+      lang: "US"
+    };
+    getWorkList(param).then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      }
+      requestSuccess();
+    });
+  }
+  renderMetadata = (name) => {
+    const {metaData} = this.props;
+    return metaData && metaData.properties && metaData.properties[name];
+  }
+  render() {
+    const {
+      workList,
+      metaData
+      } = this.props;
+    const list = [];
+    const conts = [];
+    // 元数据拉过来的值
+    const groupMeta = this.renderMetadata("group");
+    const contentStyle = this.renderMetadata("content");
+    const headerData = this.renderMetadata("header");
+    const listMeta = this.renderMetadata("list");
+    workList.forEach((da, i) => {
+      const {
+        widgetId: id,
+        widgetName: name,
+        } = da;
+      const props = {
+        key: `nav${id}`,
+        data: da,
+        noTitle: !i
+      };
+      if (i === workList.length - 1) {
+        props.style = {
+          height: window.innerHeight,
+        }
+      }
+      list.push({
+        label: name,
+        target: `nav${id}`,
+      });
+      conts.push(
+        <WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} />
+      );
+    })
 
-    render() {
-        const {
-          workList,
-        } = this.props;
-
-        const list = [];
-        const conts = [];
-        workList.forEach((da, i) => {
-            const {
-              widgetId: id,
-              widgetName: name,
-            } = da;
-            const props = {
-              key: `nav${id}`,
-              data: da,
-              noTitle: !i
-            };
-            if (i === workList.length - 1) {
-              props.style = {
-                height: window.innerHeight,
-              }
-            }
-            list.push({
-              label: name,
-              target: `nav${id}`,
-            });
-            conts.push(
-              <WidgeList {...props} />
-            );
-        })
-        return (
-          <div className={page_home}>
-            <HeaderPage list={list}/>
-            <ElementsWrapper items={list} offset={-55} >
-              {conts}
-            </ElementsWrapper>
-            <HomeFolderDialog />
-          </div>
-        );
-    }
+    return (
+      <div className={page_home} style={contentStyle}>
+        <HeaderPage list={list} headerData={headerData}/>
+        <ElementsWrapper items={list} offset={-55}>
+          {conts}
+        </ElementsWrapper>
+        <HomeFolderDialog />
+      </div>
+    );
+  }
 }
 export default Home;
 

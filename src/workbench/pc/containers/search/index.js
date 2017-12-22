@@ -261,13 +261,15 @@ class SearchContainer extends Component {
     })
     if (isShow) {
       item = (
-        <div className={inputArea} >
+        <div className={inputArea}  style={{borderColor:color}}>
           <input
             className={searchText}
             type="text"
             value={text}
-            onChange={this.onChangeHandler} 
-            placeholder="关键词"/>
+            onChange={this.onChangeHandler}
+            placeholder="关键词"
+            style={{color:color}}
+          />
         </div>
       ),
       
@@ -281,21 +283,21 @@ class SearchContainer extends Component {
         </div>
       )
     }
-   
-      
+
+
     return (
-      <div className={`${search} ${isShow? searchExtend : ''}`}>
+      <div className={`${search} ${isShow? searchExtend : ''}`}  style={{borderColor:color}}>
         {item}
         {searchWin}
         {
           isShow && text ? (
-            <div className={clearSearch} onClick={this.clearInput}>
+            <div className={clearSearch}  onClick={this.clearInput}>
               <Icon title="清空" type="error3"/>
             </div>
           ) : null
         }
         <div className={`tc ${searchBtn}`} onClick={this.search}>
-          <Icon title="搜索" type="search" />
+          <Icon title="搜索" type="search" style={{color:color}} />
         </div>
       </div>
     );
