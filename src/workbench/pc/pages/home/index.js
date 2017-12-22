@@ -56,7 +56,10 @@ class Home extends Component {
       requestSuccess();
     });
   }
-
+  renderMetadata = (name) => {
+    const {metaData} = this.props;
+    return metaData && metaData.properties && metaData.properties[name];
+  }
   render() {
     const {
       workList,
@@ -65,10 +68,10 @@ class Home extends Component {
     const list = [];
     const conts = [];
     // 元数据拉过来的值
-    const groupMeta = metaData.properties && metaData.properties.group;
-    let contentStyle = metaData.properties && metaData.properties.content;
-    const headerData = metaData.properties && metaData.properties.header;
-    const listMeta = metaData.properties && metaData.properties.list;
+    const groupMeta = this.renderMetadata("group");
+    const contentStyle = this.renderMetadata("content");
+    const headerData = this.renderMetadata("header");
+    const listMeta = this.renderMetadata("list");
     workList.forEach((da, i) => {
       const {
         widgetId: id,
