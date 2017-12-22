@@ -7,13 +7,15 @@ import {
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import routes from 'router';
 import store from 'store';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, getContext } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
 import rootActions from 'store/root/actions';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { initMessage } from 'public/message';
+import componentTool from 'public/componentTools';
+// import IM from 'IM';
 
 const {
   requestStart,
@@ -69,6 +71,9 @@ class Root extends Component {
       }
     });
     // timer(getMessage, 10000);
+    /*IM(new componentTool('IM'), getContext(), {
+      el: 'IM',
+    });*/
     regMessageTypeHandler.call(this);
     initMessage();
   }
