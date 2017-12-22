@@ -1,4 +1,5 @@
 import { createActions as createReduxActions } from 'redux-actions';
+import ReactDOM from 'react-dom';
 
 export const noop = () => {};
 
@@ -258,4 +259,30 @@ export function avoidSameName(namaArr, name) {
   } else {
     return name;
   }
+}
+
+export function getContext() {
+  if (window.diworkContext && typeof window.diworkContext === 'function') {
+    return window.diworkContext();
+  } else {
+    return {};
+  }
+}
+
+export const IS_REACT_16 = !!ReactDOM.createPortal;
+
+/**
+ * 汉子超过3位截取，其他字符8位数
+ * @param {*} str 
+ */
+export function getStrLenSubstr(str){
+  if(!str)return "";
+  let newStr = "";
+  var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+  if(reg.test(str)){
+    newStr = str.length>=3?str.substring(0,3)+"...":str;
+  }else{
+    newStr = str.substring(0,8)+"...";
+  }
+  return newStr;
 }

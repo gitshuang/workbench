@@ -1,24 +1,27 @@
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
+import { dialog } from 'components/pop';
 const { addBrm } = workActions;
 const { popMessage } = rootActions;
 
 import store from "store";
 
 const handlers = {
-  jump(url) {
-    this.props.history.push(url);
+  openService({ serviceCode, data }) {
+    if (serviceCode) {
+      this.props.history.push(`/serve/${serviceCode}`);
+    }
   },
-  notice(url) {
-    this.props.history.push(url);
+  openDialog(options) {
+    dialog(options);
   },
-  mail(url) {
-    this.props.history.push(url);
+  postDataToServe() {
+
   },
-  tips(url) {
-    this.props.history.push(url);
+  checkServeOpen() {
+
   },
-  test(data) {
+  addBrm(data) {
     store.dispatch(addBrm(data));
   },
   popMessage() {
@@ -34,17 +37,28 @@ export function regMessageTypeHandler() {
         });
     });
 }
-export function dispathMessageTypeHandler(type) {
-    const firstColonIndex = type.indexOf(':');
-    let detail;
-    if ( firstColonIndex !== -1) {
-      detail = type.slice(firstColonIndex + 1);
-      type = type.slice(0, firstColonIndex);
-    }
+export function dispathMessageTypeHandler({ type, detail }) {
+  if (type) {
     const event = new CustomEvent(type, {
       detail,
     });
     document.dispatchEvent(event);
+  } else {
+    throw new Error('dispathMessageTypeHandler need type');
+  }
+}
+
+export function parseType(type) {
+  const firstColonIndex = type.indexOf(':');
+  let detail;
+  if ( firstColonIndex !== -1) {
+    detail = type.slice(firstColonIndex + 1);
+    type = type.slice(0, firstColonIndex);
+  }
+  return {
+    type,
+    detail,
+  };
 }
 
 

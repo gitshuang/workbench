@@ -1,4 +1,4 @@
-import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { dispathMessageTypeHandler, parseType } from 'public/regMessageTypeHandler';
 
 //注册事件
 const eventKey = [
@@ -21,7 +21,7 @@ function messageHandler(e) {
 		return;
 	};
 	if(_data.messType == getEventKey(_data.messType)){
-        dispathMessageTypeHandler(_data.msg.data);
+    dispathMessageTypeHandler(parseType(_data.msg.data));
 	}
 }
 

@@ -3,13 +3,15 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { Loading } from 'tinper-bee';
+import { getContext } from '@u';
+import WidgetTool from 'public/componentTools';
 import {
   widgetItem,
   title,
   title_left,
   title_right,
   content,
-} from './style.css'
+} from './style.css';
 
 const widgetStyle = [
   // 小
@@ -38,10 +40,22 @@ function getData(url, callback) {
     if (response.ok) {
       return response.text().then((text) => {
         if (text) {
+          this.tool = new WidgetTool(this.props.data.widgetId);
           try {
-            var fn = new Function('React', 'return ' + text);
-            var result = fn(React);
-            callback(result)
+            const fn = new Function(
+              'React',
+              'widgetInstance',
+              'widgetTool',
+              'widgetContext',
+              'return ' + text,
+            );
+            const result = fn(
+              React,
+              this.props.data,
+              this.tool,
+              getContext(),
+            );
+            callback(result);
           } catch (e) {
             console.log(e);
           }
@@ -66,14 +80,19 @@ class WidgetItem extends Component {
     }
   }
   componentWillMount() {
-    const { data: { jsurl } } = this.props;
+    const { data:{ jsurl } } = this.props;
     if (jsurl) {
-      getData(jsurl, (result) => {
+      getData.call(this, jsurl, (result) => {
         this.setState({
           loaded: true,
           widget: result.default ? result.default : result,
         })
       })
+    }
+  }
+  componentWillUnmount() {
+    if (this.tool && typeof this.tool.destroy === 'function') {
+      this.tool.destroy();
     }
   }
   render() {

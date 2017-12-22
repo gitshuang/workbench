@@ -48,14 +48,16 @@ class WidgetItem extends Component {
 
     const style = {
       ...widgetStyle[size - 1],
-      backgroundImage: `url(${background})`,
+      backgroundImage: `url(${background})`
     };
+
     console.log("icon____"+icon);
     // 取元数据
     const titleStyle = listMeta && listMeta.titleStyle && JSON.parse(listMeta.titleStyle);
     const imageStyle = listMeta && listMeta.imageStyle && JSON.parse(listMeta.imageStyle);
     const backStyle = listMeta && listMeta.background && JSON.parse(listMeta.background);
     const mergeStyle = Object.assign(style,backStyle);
+
     return (
       <li className={`${widgetItem} ${defaultArea}`}
         style={mergeStyle}

@@ -7,6 +7,7 @@ import Icon from 'components/icon';
 import DropdownButton from 'components/dropdown';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
+import { getStrLenSubstr } from '@u';
 
 import Button from 'bee-button';
 import Select from 'bee-select';
@@ -315,6 +316,7 @@ class UserInfoContainer extends Component {
       {name:"language",value:"界面语言",fun:this.handleChange},
       {name:"message",value:"消息",fun:this.handleChange}
     ];
+
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
@@ -326,7 +328,7 @@ class UserInfoContainer extends Component {
             <div className={editPortrait}  >
               <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>
-            <div className={userName}>{name}</div>
+            <div className={userName} title={name}>{getStrLenSubstr(name)}</div>
           </div>
           
           <div className={logOut} onClick={this.logOut}>
