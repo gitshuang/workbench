@@ -48,8 +48,10 @@ class WidgetItem extends Component {
 
     const style = {
       ...widgetStyle[size - 1],
-      backgroundImage: `url(${background})`
     };
+    if (background) {
+      style.backgroundImage = `url(${background})`;
+    }
 
     console.log("icon____"+icon);
     // 取元数据

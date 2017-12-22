@@ -113,8 +113,15 @@ class WidgetItem extends Component {
       contentElm = (<Loading container={this} show={true} />);
     }
 
+    const style = {
+      ...widgetStyle[size - 1],
+    };
+    if (background) {
+      style.backgroundImage = `url(${background})`;
+    }
+
     return (
-      <li className={widgetItem} style={{...widgetStyle[size - 1], backgroundImage: background }} >
+      <li className={widgetItem} style={style} >
         <div className={title}>
           <div className={title_right}>{name}</div>
         </div>
