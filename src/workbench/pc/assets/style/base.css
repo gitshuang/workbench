@@ -47,11 +47,6 @@ body {
   border:none;
 	color:#E14C46;
 }
-.u-menu-submenu-open.u-menu-submenu-inline>.u-menu-submenu-title,:root .u-menu-submenu-inline>.u-menu-submenu-title:after{
-  // font-weight: bold;
-  // font-size:16px;
-  // color:#4A515D;
-}
 .u-menu-submenu-inline>.u-menu-submenu-title:after{
   font-size: 16px;
   transform: scale(.66667) rotate(-90deg);
@@ -166,7 +161,6 @@ body {
   right: 20px;
 }
 .u-tabs-tab{
-  // padding-left: 0px !important;
 }
 .u-checkbox span{
   padding-top: 4px;
@@ -189,4 +183,16 @@ body {
 }
 .lebra-navbar-left-icon img{
   margin-top: -12px !important;
+}
+
+/*滚动条垂直方向的宽度*/
+::-webkit-scrollbar
+{
+	width: 8px;
+}
+/* 垂直滚动条的滑动块 */
+::-webkit-scrollbar-thumb:vertical {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background:rgba(0,0,0,0.54);
+  border-radius: 100px ; 
 }
