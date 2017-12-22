@@ -37,7 +37,72 @@ class SearchContainer extends Component {
     this.state = {
       text: '',
       isShow: false,
-      isSearchWinShow: false
+      isSearchWinShow: false,
+      dataList:{
+        status:1,
+        data:[
+          {
+            type:'user',
+            renderurl:'',
+            contents:[
+              {
+                userId:'111xdd',
+                headimg:_default_icon,
+                username:'小<font>dd</font>',
+                phone:'1328222912',
+                email:'dxx@qq.com',
+                department:'市场部'
+              },
+              {
+                userId:'111xdd',
+                headimg:_default_icon,
+                username:'大<font>dd</font>',
+                phone:'142444252',
+                email:'gvvvv@qq.com',
+                department:'业务部'
+              }
+            ]
+          },
+          {
+            type:'service',
+            renderurl:'',
+            contents:[
+              {
+                id:'111xdd',
+                headimg:_default_icon,
+                title:'小<font>dd</font>',
+                brief:'办公协同、沟通协作等核心价值',
+                
+              },
+            ]
+          },
+          {
+            type:'help',
+            renderurl:'',
+            contents:[
+              {
+                id:'111xdd',
+                headimg:_default_icon,
+                title:'小<font>dd</font>',
+                size:'800kb',
+              }
+            ]
+          },
+          {
+            type:'other',
+            renderurl:'',
+            class:"其他",
+            contents:[
+              {
+                id:'111xdd',
+                headimg:_default_icon,
+                title:'其他分类<font>dd</font>',
+              }
+            ]
+          },
+          
+        ]
+      }
     };
     this.search = this.search.bind(this);
     this.goSearchPage = this.goSearchPage.bind(this);
@@ -97,8 +162,103 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const { isShow, text, isSearchWinShow} = this.state;
-    let item, searchWin;
+    const { isShow, text, isSearchWinShow, dataList} = this.state;
+    let item, searchWin, contenttype_user,contenttype_service,contenttype_help;
+    let contenttype_other=[];
+    function createMarkup(text) {
+      return {__html: text};
+    }
+    dataList.data.forEach((item,index)=>{
+      switch (item.type)
+      {
+        case "user":
+          let lis = [];
+          item.contents.forEach((item2,index2)=>{
+            lis.push(<li key={index2}>
+                  <div className={h_icon}><img src={item2.headimg}/></div>
+                  <div className={h_name}>
+                    <p><span dangerouslySetInnerHTML={createMarkup(item2.username)}></span><span>{item2.department}</span></p>
+                    <p>办公电话 : {item2.phone}</p>
+                  </div>
+                  <div className={h_contact}><Icon title="发邮件" type="e-mail" /></div>
+                  <div className={h_contact}><Icon title="发消息" type="chat" /></div>
+                </li>);
+          }),
+          contenttype_user = (
+            <div className={searchWindom}>
+              <h3>通讯录</h3>
+              <ul>
+                {lis}
+              </ul>
+            </div>
+          )
+          break;
+        case "service":
+          let lis2 = [];
+          item.contents.forEach((item2,index2)=>{
+            lis2.push(<li className={search_service} key={index2}>
+                  <div className={h_icon}><img src={yonyouSpace1}/></div>
+                  <div className={h_name}>
+                    <p><span dangerouslySetInnerHTML={createMarkup(item2.title)}></span></p>
+                    <p >{item2.brief}</p>
+                  </div>
+                </li>);
+          }),
+          contenttype_service= (
+            <div className={searchWindom}>
+              <h3>应用/服务</h3>
+              <ul>
+                {lis2}
+              </ul>
+            </div>
+          )
+          break;
+        case "help":
+          let lis3= [];
+          item.contents.forEach((item2,index2)=>{
+            lis3.push(<li key={index2}>
+                <div className={h_icon}><img src={_default_icon}/></div>
+                <div className={h_name}>
+                  <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item2.title)}></p>
+                </div>
+                <div className={search_help}>{item2.size}</div>
+              </li>);
+          }),
+          contenttype_help= (
+            <div className={searchWindom}>
+              <h3>帮助</h3>
+              <ul>
+                {lis3}
+              </ul>
+            </div>
+          )
+          break;
+        default:
+          let lis4 = [];
+          if(item.renderurl!=''){
+            item.contents.forEach((item2,index2)=>{
+              lis4.push(eval(item.renderurl));
+            })
+          }else{
+            item.contents.forEach((item2,index2)=>{
+              lis4.push(<li key={index2}>
+                  <div className={h_icon}><img src={_default_icon}/></div>
+                  <div className={h_name}>
+                    <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item2.title)}></p>
+                  </div>
+                </li>);
+            })
+          }
+          contenttype_other.push(
+            <div className={searchWindom} key={index}>
+              <h3>{item.class}</h3>
+              <ul>
+                {lis4}
+              </ul>
+            </div>
+          )
+      }
+    })
     if (isShow) {
       item = (
         <div className={inputArea} >
@@ -110,55 +270,13 @@ class SearchContainer extends Component {
             placeholder="关键词"/>
         </div>
       ),
+      
       searchWin = (
         <div className={`${SearchWin} ${isSearchWinShow? showheight : ''}`} >
-          <div className={searchWindom}>
-            <h3>通讯录</h3>
-            <ul>
-              <li >
-                <div className={h_icon}><img src={_default_icon}/></div>
-                <div className={h_name}>
-                  <p><span>我<font >{text}</font></span><span>市场部</span></p>
-                  <p>办公电话 : 18372893749</p>
-                </div>
-                <div className={h_contact}><Icon title="发邮件" type="e-mail" /></div>
-                <div className={h_contact}><Icon title="发消息" type="chat" /></div>
-              </li>
-              <li >
-                <div className={h_icon}><img src={_default_icon}/></div>
-                <div className={h_name}>
-                  <p><span>我<font >{text}</font></span><span>市场部</span></p>
-                  <p>办公电话 : 18372893749</p>
-                </div>
-                <div className={h_contact}><Icon title="发邮件" type="e-mail" /></div>
-                <div className={h_contact}><Icon title="发消息" type="chat" /></div>
-              </li>
-            </ul>
-          </div>
-          <div className={searchWindom}>
-            <h3>应用/服务</h3>
-            <ul>
-              <li className={search_service}>
-                <div className={h_icon}><img src={yonyouSpace1}/></div>
-                <div className={h_name}>
-                  <p><span>友<font >{text}</font></span></p>
-                  <p >办公协同、沟通协作等核心价值，高…</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div className={searchWindom}>
-            <h3>帮助</h3>
-            <ul>
-              <li >
-                <div className={h_icon}><img src={_default_icon}/></div>
-                <div className={h_name}>
-                  <p className={search_help}>报账产<font >{text}</font>文档.word</p>
-                </div>
-                <div className={search_help}>800kb</div>
-              </li>
-            </ul>
-          </div>
+          {contenttype_user}
+          {contenttype_service}
+          {contenttype_help}
+          {contenttype_other}
           <div className={searchBtnAll} onClick={this.goSearchPage}>查看全部</div>
         </div>
       )
