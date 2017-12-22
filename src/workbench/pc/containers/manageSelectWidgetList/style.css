@@ -99,7 +99,7 @@
   display: -webkit-box;
   -webkit-box-pack: end;
   padding-right: 150px;
-  background: rgba(26,32,38,0.6);
+  /* background: rgba(26,32,38,0.6); */
 }
 .footer_btn>div{
   margin-right: 8px;

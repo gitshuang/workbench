@@ -65,15 +65,19 @@ class serviceClassify extends Component {
   }
 
   componentWillMount() {
+    this.getServiceList("");
+  }
+
+  getServiceList(name){
     const {
       requestStart,
       requestSuccess,
       requestError,
       getAllApplicationList,
     } = this.props;
-    if(this.state.allApplicationList.length == 0){
+    // if(this.state.allApplicationList.length == 0){
       requestStart();
-      getAllApplicationList().then(({error, payload}) => {
+      getAllApplicationList(name).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         }
@@ -85,7 +89,7 @@ class serviceClassify extends Component {
         })
         requestSuccess();
       });
-    }
+    // }
   }
 
   handleClick = (labelId) => () => {
@@ -102,9 +106,10 @@ class serviceClassify extends Component {
   }
 
   btnSearch=()=>{
-    if(this.state.value != "搜索应用"){
+    // if(this.state.value != "搜索应用"){
       console.log(this.state.value);
-    }
+      this.getServiceList(this.state.value);
+    // }
   }
 
   onFormChange = (value) => {
