@@ -332,7 +332,7 @@ class UserInfoContainer extends Component {
           </div>
           
           <div className={logOut} onClick={this.logOut}>
-            <Icon type="derivation" />
+            <Icon type="exit" />
             <span>注销</span>
           </div>
 

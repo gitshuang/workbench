@@ -1,6 +1,6 @@
 import { get } from '@u';
 
-export const getAllApplicationList = () => get('/serve/getAllAppsGroupByLabels');
+export const getAllApplicationList = (appName) => get('/serve/getAllAppsGroupByLabels?appName='+appName);
 
 export const getAllApps = () => get('/application/getAllApps');
 

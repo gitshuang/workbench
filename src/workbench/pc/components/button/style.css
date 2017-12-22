@@ -29,6 +29,7 @@
 }
 .brand_btn:disabled{
   background:rgba(9,44,66,0.04);
+  color: #A5ADBA;
 }
 
 /** 默认**/

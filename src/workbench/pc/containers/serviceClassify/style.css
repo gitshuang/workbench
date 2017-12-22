@@ -5,12 +5,13 @@
 }
 .bg_wrap{
 	background:#fff;
-	// border:1px solid #DBDEE5;
-	// box-shadow: 0 6px 8px 0 rgba(74,81,93,0.25);
+	/* border:1px solid #DBDEE5;
+	box-shadow: 0 6px 8px 0 rgba(74,81,93,0.25); */
 	border-radius: 3px ;
 }
 .wrap{
   padding:27px 80px;
+  overflow-y: hidden;
 }
 .wrap :global(.u-button){
 	width:68px;
@@ -64,16 +65,16 @@
 .appContent{
 	padding-left: 16px;
 }
-.appContent::-webkit-scrollbar{
+/* .appContent::-webkit-scrollbar{
     width: 8px;
 }
 .appContent::-webkit-scrollbar-thumb{
     border-radius: 8px;
     background-color: #757575;
-}
+} */
 .appContent header{
 	padding-bottom:8px;
-	// margin-bottom: 16px;
+	/* margin-bottom: 16px; */
 	border-bottom:1px solid #DDE0E3;
 	display:flex;
 	position:relative;
@@ -81,7 +82,7 @@
 .appContent header img{
   width:32px;
   height:32px;
-	// background:rgba(216,216,216,1);
+	/* background:rgba(216,216,216,1); */
 	border-radius: 3px ;
 }
 .appContent header span{
@@ -133,7 +134,7 @@
 .link .icon{
   width:24px;
   height:24px;
-  // background:rgba(194,199,199,1);
+  /* background:rgba(194,199,199,1); */
   border-radius: 3px ;
   margin-left: 16px;
   margin-right: 16px;
