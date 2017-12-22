@@ -44,8 +44,8 @@ class Home extends Component {
     const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
     requestStart();
     const param = {
-      componentCode: "demo",
-      viewCode: "demo",
+      componentCode: "yonyoucloud",
+      viewCode: "home",
       deviceType: "PC",
       lang: "US"
     };
