@@ -26,6 +26,7 @@
     "bee-menus": "^1.0.2",
     "bee-modal": "^1.0.2",
     "bee-notification": "^1.0.0",
+    "bee-pagination": "^1.0.2",
     "bee-popconfirm": "^1.0.2",
     "bee-select": "^1.0.4",
     "bee-tabs": "^1.0.5",
