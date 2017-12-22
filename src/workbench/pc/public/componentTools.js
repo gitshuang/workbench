@@ -49,7 +49,7 @@ class Tool {
     }
   }
   destroy() {
-    tools[namespace] = null;
+    tools[this.namespace] = null;
   }
 };
 
