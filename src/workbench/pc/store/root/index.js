@@ -46,12 +46,14 @@ const {
   changeQuickServiceHidden,
   popMessage,
   getLatestAccessList,
-  getPromotionServiceList
+  getPromotionServiceList,
+  changeMessageType,
 } = actions;
 
 const defaultState = {
   serviceList: [],
   quickServiceDisplay: false,
+  messageType: false,
   messageList:[],
   messageShowNum:0,
   latestAccessList:[],
@@ -144,6 +146,10 @@ const reducer = handleActions({
     ...state,
     quickServiceDisplay: false,
   }),
+  [changeMessageType]: (state, { payload: messageType }) => ({
+    ...state,
+    messageType,
+  })
 }, defaultState);
 
 export default function (state, action) {

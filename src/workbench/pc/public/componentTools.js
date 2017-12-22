@@ -2,8 +2,9 @@ import { dispathMessageTypeHandler } from './regMessageTypeHandler';
 
 const tools = {};
 const openInterface = {
-  openServe: true,
+  openService: true,
   openDialog: true,
+  onMessage: true,
 };
 class Tool {
   constructor(namespace) {
