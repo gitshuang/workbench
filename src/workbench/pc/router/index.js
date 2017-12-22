@@ -23,6 +23,7 @@ const routes = [
   {
     path: '/manage',
     component: Manage,
+    exact: true
   },
   {
     path: '/404',
