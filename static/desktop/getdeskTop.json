@@ -227,33 +227,7 @@
         "size": null,
         "primaryKey": "c1e4da66-02eb-4c92-a7ad-c37783edba06"
       }
-    ],
-    "metaData": {
-      "properties": {
-        "header": {
-          "title":"工作台",
-          "titleStyle":"{\"fontSize\":\"16px\",\"color\":\"#ffffff\"}",
-          "background":"{\"backgroundColor\":\"#E14C46\",\"backgroundImage\":\"url(http://uapma.yonyou.com:8443/weixin/imagebox/yonyouCloud/header2.png)\",\"backgroundPosition\":\"center\",\"backgroundRepeat\":\"no-repeat\"}",
-          "className": "redTheme",
-          "color": "#ffffff"
-        },
-        "content": {
-          "backgroundColor": "rgb(235,235,235)",
-          "backgroundImage": "url(http://uapma.yonyou.com:8443/weixin/imagebox/yonyouCloud/bg2.png)",
-          "backgroundPosition": "center top"
-        },
-        "group": {
-          "titleStyle":"{\"fontSize\":\"18px\",\"color\":\"#ffffff\"}"
-        },
-        "list": {
-          "background":"{\"backgroundColor\":\"#fffffff\",\"backgroundImage\":\"url(http://uapma.yonyou.com:8443/weixin/imagebox/yonyouCloud/maozi.png)\",\"backgroundPosition\":\"right\",\"backgroundRepeat\":\"no-repeat\",\"backgroundSize\":\"80px 80px\"}",
-          "titleStyle":"{\"fontSize\":\"16px\",\"textAlign\":\"right\",\"paddingRight\":\"10px\"}",
-          "imageStyle":"{\"left\":\"0px\"}"
-        }
-      },
-      "code":"home",
-      "name":"home"
-    }
+    ]
   }
 }
 
