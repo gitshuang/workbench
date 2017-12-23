@@ -24,7 +24,6 @@ import {
   search_help,
   showheight,
   searchBtnAll,
-  color
 } from './style.css';
 import _default_icon from 'assets/image/wgt/default.png';
 import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
@@ -73,7 +72,7 @@ class SearchContainer extends Component {
                 headimg:_default_icon,
                 title:'小<font>dd</font>',
                 brief:'办公协同、沟通协作等核心价值',
-                
+
               },
             ]
           },
@@ -101,7 +100,7 @@ class SearchContainer extends Component {
               }
             ]
           },
-          
+
         ]
       }
     };
@@ -164,6 +163,7 @@ class SearchContainer extends Component {
 
   render() {
     const { isShow, text, isSearchWinShow, dataList} = this.state;
+    const {color} = this.props;
     let item, searchWin, contenttype_user,contenttype_service,contenttype_help;
     let contenttype_other=[];
     function createMarkup(text) {
@@ -273,7 +273,7 @@ class SearchContainer extends Component {
           />
         </div>
       ),
-      
+
       searchWin = (
         <div className={`${SearchWin} ${isSearchWinShow? showheight : ''}`} >
           {contenttype_user}
