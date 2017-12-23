@@ -41,7 +41,10 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    let metaData = payload.metaData ? JSON.parse(payload.metaData) : {};
+    let metaData = payload.metaData;
+    if(typeof metaData == "string"){
+      metaData = JSON.parse(payload.metaData)
+    }
     return {
       ...state,
       workList: payload.workList,
