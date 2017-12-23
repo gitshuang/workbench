@@ -9,6 +9,9 @@ import store from "store";
 const handlers = {
   openService({ serviceCode, data }) {
     if (serviceCode) {
+      if (data && typeof data === 'object') {
+        openServiceData[serviceCode] = data;
+      }
       this.props.history.push(`/serve/${serviceCode}`);
     }
   },
@@ -31,6 +34,8 @@ const handlers = {
     store.dispatch(changeMessageType(!!unreadTotalNum));
   }
 }
+
+const openServiceData = {};
 
 export function regMessageTypeHandler() {
     Object.keys(handlers).forEach((key) => {
@@ -64,5 +69,8 @@ export function parseType(type) {
   };
 }
 
-
-
+export function getOpenServiceData(serviceCode) {
+  const data = openServiceData[serviceCode];
+  delete openServiceData[serviceCode];
+  return data || {};
+}
