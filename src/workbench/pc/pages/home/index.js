@@ -62,8 +62,7 @@ class Home extends Component {
   }
   render() {
     const {
-      workList,
-      metaData
+      workList
       } = this.props;
     const list = [];
     const conts = [];
