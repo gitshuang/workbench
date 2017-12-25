@@ -54,6 +54,11 @@ body {
 .u-menu-inline .u-menu-submenu-active>.u-menu-submenu-title:after{
   color:#E14C46;
 }
+.u-menu-inline .u-menu-submenu-active>.u-menu-submenu-title{
+  font-weight:normal;
+  background: transparent;
+  cursor: default;
+}
 /** loading **/
 .u-loading-backdrop{
   z-index: 0;
@@ -148,7 +153,6 @@ body {
   border-radius: 2px ; 
   border: 1px solid rgba(78,89,104,0.19);
 }
-
 .input:hover{
   border: 2px solid #00CDC3;
 }
@@ -179,8 +183,6 @@ body {
   padding:0;
   border:none;
 } */
-.u-modal-body .close{
-}
 .lebra-navbar-left-icon img{
   margin-top: -12px !important;
 }

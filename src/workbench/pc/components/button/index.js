@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'bee-button';
-import {btn,brand_btn,default_btn,default_line_btn,default_alpha_btn,check_selected_btn,check_close_btn,danger_btn,warning_btn} from './style.css';
+import {btn,brand_btn,default_btn,default_line_btn,default_alpha_btn,check_selected_btn,check_close_btn,danger_btn,warning_btn,default_white_btn} from './style.css';
 
 //品牌色
 const ButtonBrand = ({ ...props }) => {
@@ -37,13 +37,19 @@ const ButtonCheckClose = ({ ...props }) => {
     return(<Button className={`${btn} ${check_close_btn}`} disabled={disabled} onClick={(e)=>{props.onClick(e,...props)}}>{children}</Button>);
 };
 
-//默认背景透明
+//默认白色背景带边框
+const ButtonDefaultWhite = ({ ...props }) => {
+    const { children ,disabled} = props;     
+    return(<Button className={`${btn} ${default_white_btn}`} disabled={disabled} onClick={(e)=>{props.onClick(e,...props)}}>{children}</Button>);
+};
+
+//危险
 const ButtonDanger = ({ ...props }) => {
     const { children ,disabled} = props;     
     return(<Button className={`${btn} ${danger_btn}`} disabled={disabled} onClick={(e)=>{props.onClick(e,...props)}}>{children}</Button>);
 };
 
-//默认背景透明
+//警告
 const ButtonWarning = ({ ...props }) => {
     const { children ,disabled} = props;     
     return(<Button className={`${btn} ${warning_btn}`} disabled={disabled} onClick={(e)=>{props.onClick(e,...props)}}>{children}</Button>);
@@ -51,7 +57,7 @@ const ButtonWarning = ({ ...props }) => {
 
 export default ButtonDefault;
 export { ButtonDanger,ButtonBrand,ButtonDefaultAlpha, ButtonDefaultLine,ButtonWarning,
-  ButtonCheckClose,ButtonCheckSelected};
+  ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite};
 
 /**
 参数

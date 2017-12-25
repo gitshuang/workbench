@@ -52,7 +52,7 @@
 
 /** 默认带边框 **/
 .default_line_btn{
-   color:rgba(255,255,255,1);
+  color:rgba(255,255,255,1);
   background:rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.8);
 }
@@ -99,6 +99,26 @@
   cursor: not-allowed;
 }
 
+/*默认白色背景带边框*/
+.default_white_btn{
+  font-family:MicrosoftYaHei;
+  color:rgba(71,77,84,1);
+  background:rgba(255,255,255,1);
+  border:1px solid rgba(78,89,104,0.25);
+}
+.default_white_btn:hover{
+  background:rgba(9,44,66,0.04);
+}
+.default_white_btn:active{
+  background:rgba(225,76,70,0.1);
+  border-color: rgba(225,76,70,0.05);
+  color:rgba(225,76,70,1);
+}
+.default_white_btn:disabled{
+  background:rgba(9,44,66,0.04);
+  color:rgba(165,173,186,1);
+  cursor: not-allowed;
+}
 
 /** 选用样式一 **/
 .check_selected_btn{

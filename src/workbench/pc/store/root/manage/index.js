@@ -38,12 +38,14 @@ const {
   setCurrGroupIndex,
   editTitle,
   setEditonlyId,
+  returnDefaultState
 } = actions;
 
 const defaultState = {
   curEditFolderId: '',
   manageList: [],
   isEdit: false,
+  isFocus:false,
   curDisplayFolder: {
     widgetName: '',
     children: [],
@@ -705,6 +707,7 @@ const reducer = handleActions({
     }
 
   },
+  [returnDefaultState]: state => defaultState,
 }, defaultState);
 
 export default reducer;

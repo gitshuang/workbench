@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'bee-button';
+import Menu, { SubMenu } from 'bee-menus';
 import { findPath } from '@u';
 /*  style */
 import {
@@ -12,6 +13,8 @@ import {
   selectedli,
   saveBtn,
 } from './style.css';
+
+const { Item } = Menu;
 
 class MoveToGroup extends Component {
   constructor(props) {
@@ -83,33 +86,64 @@ class MoveToGroup extends Component {
     this.props.onCancel();
   }
   makeSelectInterface(data, selectId) {
-    if (data.length) {
-      return (
-        <ul>
-          {
-            data.map(({ widgetId, widgetName, children, type }) => {
-              const classname = widgetId == selectId ? selectedli : "";
-              return (
-                <li key={widgetId}>
-                  <p
-                    onClick={this.handlerClick.bind(this, widgetId)}
-                    className={ classname }>
-                    { widgetName }
-                  </p>
-                  {
-                    children ?
-                      this.makeSelectInterface(children, selectId) :
-                      null
-                  }
-                </li>
-              );
-            })
-          }
-        </ul>
-      );
-    } else {
-      return null;
-    }
+    /*下拉菜单式*/
+    let result = [];
+    data.forEach(({widgetId,widgetName,children,type})=>{
+      const classname = widgetId == selectId ? selectedli : "";
+      if(children && children.length){
+        result.push(
+          <SubMenu
+            key={widgetId}
+            title={
+              <span
+                onClick={this.handlerClick.bind(this, widgetId)}
+                className={ classname }>
+                {widgetName}
+              </span>
+            }>
+            { this.makeSelectInterface(children,selectId) }
+          </SubMenu>
+        );
+      }else{
+        result.push(
+          <Item key={widgetId} className={ classname }>
+            <span
+              onClick={this.handlerClick.bind(this, widgetId)}>
+              { widgetName }
+            </span>
+          </Item>
+        );
+      }
+    });
+    return result;
+    /*默认展开式*/
+    // if (data.length) {
+    //   return (
+    //     <ul>
+    //       {
+    //         data.map(({ widgetId, widgetName, children, type }) => {
+    //           const classname = widgetId == selectId ? selectedli : "";
+    //           return (
+    //             <li key={widgetId}>
+    //               <p
+    //                 onClick={this.handlerClick.bind(this, widgetId)}
+    //                 className={ classname }>
+    //                 { widgetName }
+    //               </p>
+    //               {
+    //                 children ?
+    //                   this.makeSelectInterface(children, selectId) :
+    //                   null
+    //               }
+    //             </li>
+    //           );
+    //         })
+    //       }
+    //     </ul>
+    //   );
+    // } else {
+    //   return null;
+    // }
   }
   render() {
     const {
@@ -130,7 +164,14 @@ class MoveToGroup extends Component {
           移动到：{way}
         </div>
         <div className={borderBox}>
-          { this.makeSelectInterface(data, selectId) }
+          <Menu
+            onClick={this.handleClick}
+            style={{ width: '100%' }}
+            onOpenChange={this.onOpenChange}
+            mode="inline">
+            { this.makeSelectInterface(data, selectId) }
+          </Menu>
+          {/* { this.makeSelectInterface(data, selectId) } */}
           {inAddGroup ? (<div>
             <input type="text" ref="newGroupName"
               value={newGroupName}
