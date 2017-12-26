@@ -74,6 +74,7 @@ class ManageBatchMoveDialog extends Component {
             onSave={this.confirmFn}
             onCancel={this.cancelFn}
             onAddGroup={this.addNewGroup}
+            caller={"移动"}
           />
         </div>
     ) : null;
