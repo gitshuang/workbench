@@ -62,16 +62,16 @@ class Home extends Component {
   }
   render() {
     const {
-      workList,
-      metaData
+      workList
       } = this.props;
     const list = [];
     const conts = [];
     // 元数据拉过来的值
     const groupMeta = this.renderMetadata("group");
-    const contentStyle = this.renderMetadata("content");
+    const contentData = this.renderMetadata("content");
     const headerData = this.renderMetadata("header");
     const listMeta = this.renderMetadata("list");
+    const contentStyle = contentData && contentData.style && JSON.parse(contentData.style);
     workList.forEach((da, i) => {
       const {
         widgetId: id,

@@ -34,4 +34,5 @@ export default createTypes(
   'EDIT_TITLE',
   'SET_EDITONLY_ID',
   'SET_CURRENT_SELECT_WIDGET_MAP',
+  'RETURN_DEFAULT_STATE',
 );

@@ -29,7 +29,7 @@
 
 .addGroupBtn{
   /* display:flex; */
-  border: 1px solid #D9D9D9;
+  /* border: 1px solid #D9D9D9; */
   font-size:12px;
   color:rgba(71,77,84,1);
 }
@@ -80,14 +80,27 @@
 	color:#fff;
 }
 **/
+.titleInputArea .input{
+  /* width:176px;
+  height:22px;
+  padding:0 9px;
+	font-size:12px;
+  color:rgba(51,51,51,1);
+  float: left; */
+}
 .newGroupName{
 	width:176px;
 	height:22px;
-	border:1px solid #878B94;
 	padding:0 9px;
 	font-size:12px;
   color:rgba(51,51,51,1);
   float: left;
+}
+.newGroupName_focus{
+	border:2px solid rgba(0,205,195,1);
+}
+.newGroupName_blur{
+  border:1px solid #878B94;
 }
 .widgetTitle :global(.uf),.widgetTitle :global(.iconfont){
 	font-size:20px;
@@ -143,6 +156,10 @@
   margin-top: 0.5rem;
   background:rgba(79,86,98,0.1);
   cursor: move;
+}
+.addBtn :global(.u-button){
+  width: 100%;
+  margin: 0 0 16px 0;
 }
 .selectedBackClass{
   background:rgba(255,255,255,1) !important;

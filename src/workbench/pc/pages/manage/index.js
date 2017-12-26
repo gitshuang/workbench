@@ -48,7 +48,8 @@ const {
   moveGroup,
   moveServe,
   setEditState,
-  addGroup
+  addGroup,
+  returnDefaultState
 } = manageActions;
 
 @withRouter
@@ -72,7 +73,8 @@ const {
     moveGroup,
     moveServe,
     setEditState,
-    addGroup
+    addGroup,
+    returnDefaultState
   }
 )
 
@@ -98,6 +100,11 @@ class Home extends Component {
     moveServe(data);
   }
 
+  componentWillUnmount() {
+    const { returnDefaultState } = this.props;
+    returnDefaultState();
+  }
+  
   componentDidMount() {
     const { history} = this.props;
 

@@ -8,7 +8,7 @@ import Menu, { Item as MenuItem } from 'bee-menus';
 import Dropdown from 'bee-dropdown';
 import PopDialog from 'components/pop';
 import Button from 'bee-button';
-import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
+import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'components/button';
 
 import { mapStateToProps, avoidSameName } from '@u';
 import rootActions from 'store/root/actions';
@@ -32,6 +32,8 @@ import {
   icon,
   iconBox,
   btn,
+  newGroupName_focus,
+  newGroupName_blur
 } from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
@@ -168,7 +170,7 @@ class ManageGroup extends Component {
         const nameArr = manageList.map(({ widgetName }) => {
           return widgetName;
         });
-        const newGroupName = avoidSameName(nameArr, '默认分组');
+        const newGroupName = avoidSameName(nameArr, '分组');
         this.setState({
           groupName: newGroupName,
         });
@@ -206,6 +208,9 @@ class ManageGroup extends Component {
       this.refs.groupName.focus();
       this.refs.groupName.select();
     }, 0);
+    this.setState({
+      inFoucs: false,
+    })
   }
   // 点击取消编辑分组按钮
   renameGroupCancel = (index) => {
@@ -227,6 +232,9 @@ class ManageGroup extends Component {
         name: stateGroupName,
       });
     }
+    this.setState({
+      inFoucs: false,
+    })
   }
   // 点击按钮执行 action   重新构造
   renameGroupFn = (index) => {
@@ -268,11 +276,11 @@ class ManageGroup extends Component {
     })
   }
   // 输入框失焦
-  handleBlur = () => {
-    this.setState({
-      inFoucs: false,
-    })
-  }
+  // handleBlur = () => {
+  //   this.setState({
+  //     inFoucs: false,
+  //   })
+  // }
   // 选择框  选择
   selectFn = (index) => (e) => {
     let {
@@ -399,7 +407,7 @@ class ManageGroup extends Component {
         <div className={widgetTitle} >
           <div className={titleInputArea}>
             <input
-              className={`${newGroupName} input`}
+              className={`${inFoucs?newGroupName_focus:newGroupName_blur} ${newGroupName} input`}
               value={groupName}
               autoFocus="autofocus"
               onChange={this.editGroupName}
@@ -457,10 +465,10 @@ class ManageGroup extends Component {
         </section>
 
         <div className={addBtn} >
-          <ButtonDefaultAlpha className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
+          <ButtonDefaultWhite className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
             <Icon type="add"></Icon>
-            添加组
-          </ButtonDefaultAlpha>
+            添加分组
+          </ButtonDefaultWhite>
         </div>
         <PopDialog className="pop_dialog_delete" show={ showModal } type="delete" close={this.popClose} btns={pop_btn} data={{ index }}>
           <div className="pop_cont">

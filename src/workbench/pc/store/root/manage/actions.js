@@ -39,7 +39,8 @@ const {
   SET_CURR_GROUP_INDEX,
   EDIT_TITLE,
   SET_EDITONLY_ID,
-  SET_CURRENT_SELECT_WIDGET_MAP
+  SET_CURRENT_SELECT_WIDGET_MAP,
+  RETURN_DEFAULT_STATE
 } = types;
 
 const actions = createActions(
@@ -81,5 +82,6 @@ const actions = createActions(
   EDIT_TITLE,
   SET_EDITONLY_ID,
   SET_CURRENT_SELECT_WIDGET_MAP,
+  RETURN_DEFAULT_STATE
 );
 export default actions;
