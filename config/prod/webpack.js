@@ -97,8 +97,8 @@ module.exports = function (config) {
     devtool: config.productionSourceMap ? '#source-map' : false,
     output: {
       publicPath: config.assetsPublicPath,
-      filename: 'js/[name]-[chunkhash:8].js',
-      chunkFilename: 'js/chunk/[name]-[id]-[chunkhash:8].js'
+      filename: 'js/[name].js',
+      chunkFilename: 'js/chunk/[name]-[id].js'
     },
     plugins: [
       new webpack.DefinePlugin({
@@ -112,7 +112,7 @@ module.exports = function (config) {
       }),
       // extract css into its own file
       new ExtractTextPlugin({
-        filename: 'css/[name]-[chunkhash:8].css'
+        filename: 'css/[name].css'
       }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.
