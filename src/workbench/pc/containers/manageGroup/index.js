@@ -170,7 +170,7 @@ class ManageGroup extends Component {
         const nameArr = manageList.map(({ widgetName }) => {
           return widgetName;
         });
-        const newGroupName = avoidSameName(nameArr, '默认分组');
+        const newGroupName = avoidSameName(nameArr, '分组');
         this.setState({
           groupName: newGroupName,
         });
@@ -467,7 +467,7 @@ class ManageGroup extends Component {
         <div className={addBtn} >
           <ButtonDefaultWhite className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
             <Icon type="add"></Icon>
-            添加组
+            添加分组
           </ButtonDefaultWhite>
         </div>
         <PopDialog className="pop_dialog_delete" show={ showModal } type="delete" close={this.popClose} btns={pop_btn} data={{ index }}>
