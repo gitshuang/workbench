@@ -250,6 +250,7 @@ tabPane1,.tabPane2{
 
 .wrap :global(.um-content){
   background:#fff;
+  overflow: hidden;
 }
 .tabPane2{
   padding: 0 13px;
@@ -269,6 +270,7 @@ tabPane1,.tabPane2{
 }
 .tabContent :global(.u-tabs-tab){
   color:#666;
+  padding-left: 0;
 }
 .tabContent :global(.u-tabs-ink-bar){
   width:50% !important;

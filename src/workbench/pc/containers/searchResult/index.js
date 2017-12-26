@@ -196,6 +196,24 @@ class searchResult extends Component {
     })
     
   }
+  goDetail(type,item){
+    return (e) => {
+      e.stopPropagation();
+      console.log(type,item)
+    }
+  }
+  goemailDetail(item){
+    return (e) => {
+      e.stopPropagation();
+      console.log(item)
+    }
+  }
+  gochatDetail(item) {
+    return (e) => {
+      e.stopPropagation();
+      console.log(item)
+    }
+  }
   construct () {
     let lis=[];
 
@@ -206,18 +224,18 @@ class searchResult extends Component {
       switch (this.state.activetab)
       {
         case "user":
-          lis.push(<li key={index}>
+          lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
                 <div className={h_icon}><img src={item.headimg}/></div>
                 <div className={h_name}>
                   <p><span dangerouslySetInnerHTML={createMarkup(item.username)}></span><span>{item.department}</span></p>
                   <p>办公电话 : {item.phone}</p>
                 </div>
-                <div className={`${h_contact} ${mleft50}`}><Icon title="发邮件" type="e-mail" /></div>
-                <div className={h_contact}><Icon title="发消息" type="chat" /></div>
+                <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(item)}><Icon title="发邮件" type="e-mail" /></div>
+                <div className={h_contact} onClick={this.goemailDetail(item)}><Icon title="发消息" type="chat" /></div>
               </li>);
           break;
         case "service":
-          lis.push(<li className={search_service} key={index}>
+          lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
                   <div className={h_icon}><img src={yonyouSpace1}/></div>
                   <div className={h_name}>
                     <p><span dangerouslySetInnerHTML={createMarkup(item.title)}></span></p>
@@ -226,7 +244,7 @@ class searchResult extends Component {
                 </li>);
           break;
         case "help":
-            lis.push(<li key={index}>
+            lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
                 <div className={h_icon}><img src={_default_icon}/></div>
                 <div className={h_name}>
                   <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item.title)}></p>
@@ -235,7 +253,7 @@ class searchResult extends Component {
               </li>);
           break;
         default:
-            lis.push(<li key={index}>
+            lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
                 <div className={h_icon}><img src={_default_icon}/></div>
                 <div className={h_name}>
                   <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item.title)}></p>

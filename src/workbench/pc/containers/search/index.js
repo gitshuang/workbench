@@ -105,8 +105,12 @@ class SearchContainer extends Component {
       }
     };
     this.search = this.search.bind(this);
+    this.searchMin = this.searchMin.bind(this);
     this.goSearchPage = this.goSearchPage.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.goDetail = this.goDetail.bind(this);
+    this.goemailDetail = this.goemailDetail.bind(this);
+    this.gochatDetail = this.gochatDetail.bind(this);
   }
   goSearchPage() {
     var local= this.props.history.location.pathname;
@@ -115,9 +119,13 @@ class SearchContainer extends Component {
     }
   }
   onChangeHandler(e) {
+    var _this = this;
     this.setState({
       text: e.target.value
     })
+    setTimeout(function(){
+      _this.searchMin()
+    },0)
   }
   handleClickOutside(evt) {
     const _this = this;
@@ -137,13 +145,19 @@ class SearchContainer extends Component {
       })
     }
   }
-  search() {
+  searchMin() {
     const { isShow, text, isSearchWinShow } = this.state;
     if (isShow && text) {
       console.log(this.state.text)
       this.setState({
         isSearchWinShow: true,
       })
+    }
+  }
+  search() {
+    const { isShow, text, isSearchWinShow } = this.state;
+    if (isShow && text) {
+     
     } else if (isShow) {
       this.setState({
         isShow: false,
@@ -160,10 +174,29 @@ class SearchContainer extends Component {
       text: '',
     })
   }
+  goDetail(type,item){
+    return (e) => {
+      e.stopPropagation();
+      console.log(type,item)
+    }
+  }
+  goemailDetail(item){
+    return (e) => {
+      e.stopPropagation();
+      console.log(item)
+    }
+  }
+  gochatDetail(item) {
+    return (e) => {
+      e.stopPropagation();
+      console.log(item)
+    }
+  }
 
   render() {
     const { isShow, text, isSearchWinShow, dataList} = this.state;
     const {color} = this.props;
+    const _this = this;
     let item, searchWin, contenttype_user,contenttype_service,contenttype_help;
     let contenttype_other=[];
     function createMarkup(text) {
@@ -175,14 +208,14 @@ class SearchContainer extends Component {
         case "user":
           let lis = [];
           item.contents.forEach((item2,index2)=>{
-            lis.push(<li key={index2}>
+            lis.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={item2.headimg}/></div>
                   <div className={h_name}>
                     <p><span dangerouslySetInnerHTML={createMarkup(item2.username)}></span><span>{item2.department}</span></p>
                     <p>办公电话 : {item2.phone}</p>
                   </div>
-                  <div className={h_contact}><Icon title="发邮件" type="e-mail" /></div>
-                  <div className={h_contact}><Icon title="发消息" type="chat" /></div>
+                  <div className={h_contact} onClick={_this.goemailDetail(item2)}><Icon title="发邮件" type="e-mail" /></div>
+                  <div className={h_contact} onClick={_this.gochatDetail(item2)}><Icon title="发消息" type="chat" /></div>
                 </li>);
           }),
           contenttype_user = (
@@ -197,7 +230,7 @@ class SearchContainer extends Component {
         case "service":
           let lis2 = [];
           item.contents.forEach((item2,index2)=>{
-            lis2.push(<li className={search_service} key={index2}>
+            lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={yonyouSpace1}/></div>
                   <div className={h_name}>
                     <p><span dangerouslySetInnerHTML={createMarkup(item2.title)}></span></p>
@@ -217,7 +250,7 @@ class SearchContainer extends Component {
         case "help":
           let lis3= [];
           item.contents.forEach((item2,index2)=>{
-            lis3.push(<li key={index2}>
+            lis3.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                 <div className={h_icon}><img src={_default_icon}/></div>
                 <div className={h_name}>
                   <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item2.title)}></p>
@@ -236,20 +269,16 @@ class SearchContainer extends Component {
           break;
         default:
           let lis4 = [];
-          if(item.renderurl!=''){
+      
             item.contents.forEach((item2,index2)=>{
-              lis4.push(eval(item.renderurl));
-            })
-          }else{
-            item.contents.forEach((item2,index2)=>{
-              lis4.push(<li key={index2}>
+              lis4.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={_default_icon}/></div>
                   <div className={h_name}>
                     <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item2.title)}></p>
                   </div>
                 </li>);
             })
-          }
+          
           contenttype_other.push(
             <div className={searchWindom} key={index}>
               <h3>{item.class}</h3>
@@ -280,7 +309,7 @@ class SearchContainer extends Component {
           {contenttype_service}
           {contenttype_help}
           {contenttype_other}
-          <div className={searchBtnAll} onClick={this.goSearchPage}>查看全部</div>
+          <div className={searchBtnAll} onClick={this.goSearchPage}>查看更多结果                                                                                                 </div>
         </div>
       )
     }
