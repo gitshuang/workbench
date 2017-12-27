@@ -24,7 +24,7 @@
   vertical-align: middle;
 }
 .breadcrumbClass {
-  background:#fff;
+  /* background:#fff; */
   height:35px;
   line-height:35px;
   display:flex;

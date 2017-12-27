@@ -306,11 +306,11 @@ export default class Work extends Component {
               </div>
             </HeaderContainer>
           </div>
-        </div>
-        <div className={`um-content ${workArea}`}>
           {
             widthBrm ? <BreadcrumbContainer withSidebar={ type !== 1 }/> : null
           }
+        </div>
+        <div className={`um-content ${workArea}`}>
           { this.makeLayout() }
         </div>
         {
