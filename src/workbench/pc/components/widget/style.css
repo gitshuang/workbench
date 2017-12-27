@@ -15,6 +15,28 @@
   box-sizing: border-box;
   overflow: hidden;
 }
+
+/* XL尺寸 */
+@media screen and (device-width: 1441px){
+  .widgetItem{
+    margin-right: 8px;
+  }
+}
+/* L尺寸 */
+@media screen and (min-width: 1025px) and (max-width: 1440px) { /*手机*/
+  .widgetItem{
+    margin-right: 8px;
+  }
+}
+/* M尺寸 */
+@media screen and (min-width: 641px) and (max-width: 1024px) { /*手机*/
+  .widgetItem{
+    margin-right: 8px;
+  }
+}
+
+
+
 .widget_file_item{
   background: url("assets/image/wgt/folder_bg.png") no-repeat;
   background-size: 100% 100%;
