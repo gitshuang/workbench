@@ -21,6 +21,9 @@ module.exports = {
       '@u': paths('utils'),
     }
   },
+  externals: {
+    IM: 'InitEsnIM',
+  },
   module: {
     rules: [
       // {
