@@ -157,11 +157,13 @@ class MoveToGroup extends Component {
       onSave,
       onCancel,
       onAddGroup,
+      caller
     } = this.props;
+
     let content = (
       <div className= {container}>
         <div className={title}>
-          移动到：{way}
+          {caller}到：{way}
         </div>
         <div className={borderBox}>
           <Menu

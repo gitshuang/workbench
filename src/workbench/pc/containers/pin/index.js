@@ -139,6 +139,7 @@ class Pin extends Component {
           onSave={this.confirmFn}
           onCancel={this.cancelFn}
           onAddGroup={this.addNewGroup}
+          caller={"添加"}
         />
       </div>
     ) : null;

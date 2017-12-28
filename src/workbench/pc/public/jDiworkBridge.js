@@ -25,7 +25,6 @@ function messageHandler(e) {
 	}
 }
 
-export function initMessage(){
-
+export function initBridge(){
 	window.addEventListener('message', messageHandler);
 }

@@ -125,9 +125,7 @@ class WidgetItem extends Component {
         <div className={title}>
           <div className={title_right}>{name}</div>
         </div>
-        <div className={content}>
-          {contentElm}
-        </div>
+        {contentElm}
       </li>
     );
   }

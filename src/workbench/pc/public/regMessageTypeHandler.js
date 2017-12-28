@@ -38,12 +38,12 @@ const handlers = {
 const openServiceData = {};
 
 export function regMessageTypeHandler() {
-    Object.keys(handlers).forEach((key) => {
-        const handler = handlers[key];
-        document.addEventListener(key, ({detail}) => {
-            handler.call(this, detail);
-        });
+  Object.keys(handlers).forEach((key) => {
+    const handler = handlers[key];
+    document.addEventListener(key, ({detail}) => {
+      handler.call(this, detail);
     });
+  });
 }
 export function dispathMessageTypeHandler({ type, detail }) {
   if (type) {

@@ -13,9 +13,9 @@ import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
 import rootActions from 'store/root/actions';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
-import { initMessage } from 'public/message';
+import { initBridge } from 'public/jDiworkBridge';
 import componentTool from 'public/componentTools';
-// import IM from 'IM';
+import IM from 'IM';
 
 const {
   requestStart,
@@ -71,11 +71,11 @@ class Root extends Component {
       }
     });
     // timer(getMessage, 10000);
-    /*IM(new componentTool('IM'), getContext(), {
+    IM(new componentTool('IM'), getContext(), {
       el: 'IM',
-    });*/
+    });
     regMessageTypeHandler.call(this);
-    initMessage();
+    initBridge.call(this);
   }
   render() {
     const { userInfoDisplay, quickServiceDisplay } = this.props;
