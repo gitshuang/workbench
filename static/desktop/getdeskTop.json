@@ -423,65 +423,7 @@
       }
     ],
     "metaData": {
-      "properties": {
-        "header": {
-          "isRequired": "false",
-          "code": "header",
-          "color": "#ffffff",
-          "display": "block",
-          "type": "STRING",
-          "title": "工作台",
-          "isDefault": "false",
-          "isEditable": "false",
-          "background": "{\"backgroundColor\":\"#E14C46\",\"backgroundImage\":\"url(http://uapma.yonyou.com:8443/weixin/imagebox/yonyouCloud/header2.jpg)\",\"backgroundPosition\":\"center\",\"backgroundRepeat\":\"no-repeat\"}",
-          "name": "header",
-          "extendProperty": "",
-          "orderIndex": "1",
-          "style": "",
-          "titleStyle": "{\"fontSize\":\"16px\",\"color\":\"#ffffff\"}"
-        },
-        "list": {
-          "isRequired": "false",
-          "code": "list",
-          "display": "block",
-          "type": "STRING",
-          "imageStyle": "{\"left\":\"0px\"}",
-          "isDefault": "false",
-          "isEditable": "false",
-          "name": "list",
-          "extendProperty": "",
-          "orderIndex": "4",
-          "style": "",
-          "titleStyle": "{\"fontSize\":\"16px\",\"textAlign\":\"right\",\"paddingRight\":\"10px\"}"
-        },
-        "content": {
-          "isRequired": "false",
-          "code": "content",
-          "display": "block",
-          "type": "STRING",
-          "isDefault": "false",
-          "isEditable": "false",
-          "name": "content",
-          "extendProperty": "",
-          "orderIndex": "2",
-          "style": "{\"backgroundColor\": \"rgb(235,235,235)\",\"backgroundPosition\": \"center top\"}"
-        },
-        "group": {
-          "isRequired": "false",
-          "code": "group",
-          "display": "block",
-          "type": "STRING",
-          "isDefault": "false",
-          "isEditable": "false",
-          "name": "group",
-          "extendProperty": "",
-          "orderIndex": "3",
-          "style": "",
-          "titleStyle": "{\"fontSize\":\"18px\",\"color\":\"#ffffff\"}"
-        }
-      },
-      "code": "home",
-      "name": "home"
+      
     }
   }
 }
