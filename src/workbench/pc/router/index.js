@@ -14,11 +14,6 @@ const routes = [
     exact: true,
   },
   {
-    path: '/:type/:code/:subcode?',
-    component: Work,
-    exact: true,
-  },
-  {
     path: '/application',
     component: Application,
   },
@@ -36,15 +31,20 @@ const routes = [
     component: Search,
     routes:[
       {
-      path:'/search/searchlist/:type',
-      component:SearchOther
+        path:'/search',
+        component:SearchResult
       },
       {
-      path:'/search',
-      component:SearchResult
+        path:'/search/searchlist/:type',
+        component:SearchOther
       }
     ]
-  }
+  },
+  {
+    path: '/:type(app|serve)/:code/:subcode?',
+    component: Work,
+    exact: true,
+  },
 ];
 
 export default routes;
