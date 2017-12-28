@@ -65,8 +65,10 @@ class searchOther extends Component {
     }
   }
   componentWillMount() {
+    console.log(this.props.match.params.type)
+    const type = this.props.match.params.type
     const { keywords} = this.state
-    this.getSearchTpyeList(keywords)
+    this.getSearchTpyeList(keywords,type,1)
   }
   getSearchTpyeList(keywords,type,page){
     const {
@@ -94,11 +96,12 @@ class searchOther extends Component {
   }
   
   handleSelect(eventKey) {
-    const {value,activetab}=this.state
+    const type = this.props.match.params.type
+    const {keywords,activetab}=this.state
     this.setState({
       activePage: eventKey
     });
-     this.getSearchTpyeList(value,activetab,eventKey)
+     this.getSearchTpyeList(keywords,type,eventKey)
   }
  
   goDetail(type,item){
@@ -115,6 +118,7 @@ class searchOther extends Component {
       return {__html: text};
     }
     dataList.content.forEach((item,index)=>{
+      item = eval('(' + item + ')')
       lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
               <div className={h_icon}><img src={yonyouSpace1}/></div>
               <div className={h_name}>

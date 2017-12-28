@@ -121,7 +121,6 @@ class searchResult extends Component {
         })
         requestSuccess();
         this.getSearchTpyeList(keywords,payload.data[0].type,1)
-        window.sessionStorage.searchkeywords='';
       });
   }
   getSearchTpyeList(keywords,type,page){
@@ -182,6 +181,7 @@ class searchResult extends Component {
     if(this.state.value != "关键词"){
       console.log(this.state.value);
       this.getSearchMoreList(this.state.value)
+      window.sessionStorage.searchkeywords = this.state.value
     }
   }
   onFormChange = (value) => {
@@ -268,7 +268,7 @@ class searchResult extends Component {
       return {__html: text};
     }
     data.content.forEach((item,index)=>{
-      item = JSON.parse(item)
+      item= eval('(' + item + ')')
       switch (data.type)
       {
         case "user":

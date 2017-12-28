@@ -213,7 +213,7 @@ class SearchContainer extends Component {
         case "service":
           let lis2 = [];
           item.content.forEach((item2,index2)=>{
-            item2 = JSON.parse(item2)
+            item2 = eval('(' + item2 + ')')
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={item2.serveIcon}/></div>
                   <div className={h_name}>

@@ -1,28 +1,10 @@
 {
   "data":
         {
-            "content": [
-              {
-                "serveCode":"111xdd",
-                "serveId":"111xdd",
-                "serveIcon":"",
-                "serveName":"小<font>dd</font>",
-                "url":"https://www.google.com"
-              },
-              {
-                "serveCode":"131xdd",
-                "serveId":"113xdd",
-                "serveIcon":"",
-                "serveName":"小<font>vv</font>",
-                "url":"https://www.google.com"
-              },
-              {
-                "serveCode":"22xdd",
-                "serveId":"21xdd",
-                "serveIcon":"",
-                "serveName":"小<font>aa</font>",
-                "url":"https://www.google.com"
-              }
+          "content":[
+            "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
+            "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
+            "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}"
             ],
             "currentPage": 1,
             "pageSize": 2,

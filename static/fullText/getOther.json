@@ -3,57 +3,29 @@
   { 
       "content": [
           {
-              "content": [
-                {
-                "userId":"111xdd",
-                "headimg":"",
-                "username":"小<font>dd</font>",
-                "phone":"1328222912",
-                "email":"dxx@qq.com",
-                "department":"市场部",
-                "title":"友空间"
-              },
-              {
-                "userId":"111xdd",
-                "headimg":"",
-                "username":"小<font>dd</font>",
-                "phone":"1328222912",
-                "email":"dxx@qq.com",
-                "department":"市场部",
-                "title":"友空间"
-              }],
+            "content":[
+              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
+              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
+              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}"
+              ],
               "currentPage": 1,
               "pageSize": 15,
               "renderUrl": "应用",
               "total": 10,
-              "type": "serve",
+              "type": "service",
               "typeName": "应用"
           },
           {
-              "content": [
-                {
-                "userId":"111xdd",
-                "headimg":"",
-                "username":"小<font>dd</font>",
-                "phone":"1328222912",
-                "email":"dxx@qq.com",
-                "department":"市场部",
-                "title":"友空间"
-              },
-              {
-                "userId":"111xdd",
-                "headimg":"",
-                "username":"小<font>dd</font>",
-                "phone":"1328222912",
-                "email":"dxx@qq.com",
-                "department":"市场部",
-                "title":"友空间"
-              }],
+            "content":[
+              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
+              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
+              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serveCode':'serve_10','serveIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serveId':'serve_10','serveName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}"
+              ],
               "currentPage": 1,
               "pageSize": 15,
               "renderUrl": "应用",
               "total": 20,
-              "type": "serve2",
+              "type": "service",
               "typeName": "应用2"
           }
           
