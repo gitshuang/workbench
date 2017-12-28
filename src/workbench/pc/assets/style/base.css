@@ -66,9 +66,9 @@ body {
   z-index: 0;
 }
 
-.src-workbench-pc-pages-work-style__wrap--GLwgN .lebra-navbar-left-content img {
+/* .src-workbench-pc-pages-work-style__wrap--GLwgN .lebra-navbar-left-content img {
   display: none;
-}
+} */
 
 .u-modal-open .u-modal {
   overflow-y: hidden;
@@ -230,40 +230,4 @@ body {
 
 .lebra-navbar-left-icon img {
   margin-top: -12px !important;
-}
-
-.ipad_tabs_area {
-  white-space: nowrap;
-  overflow: hidden;
-  overflow-x: scroll;
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -webkit-overflow-scrolling: touch;
-  text-align: justify;
-}
-.ipad_tabs_area>ul {}
-.ipad_tabs_area>ul>li {
-  width: 160px;
-  height: 50px;
-  line-height: 50px;
-  margin-right: 2px;
-  background-color: #ccc;
-  position: relative;
-  display: inline-block;
-  text-align: center;
-  font-size: 13px;
-  color: #666;
-  font-weight: bold;
-  float: none;
-}
-.ipad_tabs_area>ul>li.active:after {
-  position: absolute;
-  right: 16px;
-  bottom: 8px;
-  left: 16px;
-  height: 5px;
-  background-color: #DD524D;
-  content: ' ';
-  transform: scaleY(0.5);
-  -webkit-transform: scaleY(0.5);
 }

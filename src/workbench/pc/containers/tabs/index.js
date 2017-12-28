@@ -18,7 +18,8 @@ import {
   tab,
   tabName,
   tabDelBtn,
-  moreBtnArrow
+  moreBtnArrow,
+  ipad_tabs_area
 } from './style.css';
 
 const {
@@ -185,7 +186,7 @@ class TabsContainer extends Component {
     if(equipment == "ipad"){
       tabs = totalTabs;
       mores = [];
-      ipad_tabsArea = "ipad_tabs_area";
+      ipad_tabsArea = ipad_tabs_area;//"ipad_tabs_area";
       _width.width = areaWidth;
     }else{
       let { tabs:_tabs, mores:_mores } = getTabsAndMores(totalTabs, areaWidth, curIndex);
@@ -239,7 +240,7 @@ class TabsContainer extends Component {
         { moreListElm }
       </div>
     ) : null;
-    
+
     return (
       <div ref="tabsArea" className={`${tabsArea} ${ipad_tabsArea}`} style={_width} >
         <ul className={tabsList}  >
