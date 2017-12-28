@@ -43,6 +43,7 @@ const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
   //   mores = totalTabs;
   //   hasMore = true;
   // }
+  console.log("tabWidth: " + tabWidth);
   let allLeng = totalTabs.length;
   let _areaWidth = areaWidth-tabMargin-moreBtnWidth;
   let currAllTbasWidth = allLeng*(tabWidth - tabMargin)-moreBtnWidth;
@@ -57,6 +58,8 @@ const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
     }else{
       tabWidth = areaTabWidth;
     }
+  }else{
+    tabWidth = 160;
   }
   return {
     tabs,
