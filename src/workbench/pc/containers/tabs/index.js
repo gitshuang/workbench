@@ -239,10 +239,10 @@ class TabsContainer extends Component {
         { moreListElm }
       </div>
     ) : null;
-
+    
     return (
-      <div ref="tabsArea" className={`${tabsArea} ${ipad_tabsArea}`} >
-        <ul className={tabsList} style={{width:areaWidth+"px"}} >
+      <div ref="tabsArea" className={`${tabsArea} ${ipad_tabsArea}`} style={_width} >
+        <ul className={tabsList}  >
           {
             tabs.map(({ id, name, serveCode }) => (
               <li
