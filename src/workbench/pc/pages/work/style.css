@@ -34,6 +34,7 @@ body{
   flex-direction: column;
   display: flex;
   margin-top: 83px;
+  overflow: hidden;
 }
 .sideBarArea {
   width: 200px;

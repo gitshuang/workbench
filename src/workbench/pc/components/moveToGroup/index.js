@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'bee-button';
 import Menu, { SubMenu } from 'bee-menus';
-import { findPath } from '@u';
+import { findPath, avoidSameName } from '@u';
 /*  style */
 import {
   container,
@@ -20,11 +20,17 @@ class MoveToGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newGroupName: '添加分组',      // 新分组名
+      newGroupName: "分组",      // 新分组名
       inAddGroup: false,        // 是否是打开新的分组
       way: '',          // 路径
       selectId: '',   // 选中的id
     }
+  }
+
+  componentWillMount() {
+  }
+  componentWillReceiveProps(nextProps) {
+
   }
   // 新分组名称的onchange
   setNewGroupName =(e) => {
@@ -50,8 +56,14 @@ class MoveToGroup extends Component {
   }
   // 点击添加分组
   addGroup = () => {
+    const { data } = this.props;
+    const nameArr = data.map(({ widgetName }) => {
+      return widgetName;
+    });
+    const newGroupName = avoidSameName(nameArr, '分组');
     this.setState({
       inAddGroup: true,
+      newGroupName
     });
     setTimeout(() => {
       this.refs.newGroupName.focus();
@@ -60,6 +72,7 @@ class MoveToGroup extends Component {
   }
   // 确认添加分组
   confirmAddGroup = () => {
+    console.log(this.state.newGroupName);
     this.props
       .onAddGroup(this.state.newGroupName)
       .then(({ error, payload }) => {
