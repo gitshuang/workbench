@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
-
+import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
 import SearchResult from 'containers/searchResult';
-
+import routes from 'router';
 import {header,um_content,appBreadcrumb} from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -16,7 +16,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
 
 
-class Application extends Component {
+class Search extends Component {
 
   constructor(props) {
     super(props);
@@ -46,11 +46,14 @@ class Application extends Component {
           </div>
         </div>
         <div className={um_content + " um-box um-content"}>
-          <SearchResult />
+        {this.props.routes.map((route, i) => (
+          <RouteWithSubRoutes key={i} {...route} />
+        ))}
+          
         </div>
       </div>
     );
   }
 }
 
-export default Application;
+export default Search;

@@ -84,9 +84,9 @@ class searchResult extends Component {
       Searchotherlist :{
         content:[]
       },
-      dataList :[{
+      dataList :{
         content:[]
-      }],
+      },
       activePage:1,
       pagesize:10,
       isShowPagination:true,
@@ -121,7 +121,6 @@ class searchResult extends Component {
         })
         requestSuccess();
         this.getSearchTpyeList(keywords,payload.data[0].type,1)
-        window.sessionStorage.searchkeywords='';
       });
   }
   getSearchTpyeList(keywords,type,page){
@@ -138,9 +137,9 @@ class searchResult extends Component {
         }
         this.setState({
           dataList:payload,
-          pagesize:payload[0].pagesize
+          pagesize:payload.pageSize
         })
-        if(payload[0].content.length>0){
+        if(payload.content.length>0){
           this.setState({
             isShowPagination:false,
           })
@@ -162,7 +161,7 @@ class searchResult extends Component {
         }
         this.setState({
           Searchotherlist:payload,
-          //pagesize:payload[0].pagesize
+          pagesize:payload.pageSize
         })
         if(payload.content.length>0){
           this.setState({
@@ -182,6 +181,7 @@ class searchResult extends Component {
     if(this.state.value != "关键词"){
       console.log(this.state.value);
       this.getSearchMoreList(this.state.value)
+      window.sessionStorage.searchkeywords = this.state.value
     }
   }
   onFormChange = (value) => {
@@ -242,12 +242,19 @@ class searchResult extends Component {
       console.log(type,item)
     }
   }
+  goOtherlist(item){
+    return () => {
+      console.log(item)
+      this.props.history.push('/search/searchlist/'+item.type);
+    }
+  }
   goemailDetail(item){
     return (e) => {
       e.stopPropagation();
       console.log(item)
     }
   }
+
   gochatDetail(item) {
     return (e) => {
       e.stopPropagation();
@@ -261,6 +268,7 @@ class searchResult extends Component {
       return {__html: text};
     }
     data.content.forEach((item,index)=>{
+      item= eval('(' + item + ')')
       switch (data.type)
       {
         case "user":
@@ -276,7 +284,7 @@ class searchResult extends Component {
           break;
         case "service":
           lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                  <div className={h_icon}><img src={yonyouSpace1}/></div>
+                  <div className={h_icon}><img src={item.serveIcon}/></div>
                   <div className={h_name}>
                     <p><span dangerouslySetInnerHTML={createMarkup(item.serveName)}></span></p>
                     <p >{item.serveName}</p>
@@ -307,15 +315,16 @@ class searchResult extends Component {
     const { value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist } = this.state;
     let otherlist = []
     let Morelist = []
+    const anifalse=false
     SearchMoreList.forEach((item,index) => {
 
       Morelist.push(
       <TabPane
-          tab={`${item.typeName}(${item.total})`}
+          tab={item.typeName}
           key={item.type}
           className={tabPane1}
       >
-          <ul className={recently}>{this.otherlistLi(dataList[0])}</ul>
+          <ul className={recently}>{this.otherlistLi(dataList)}</ul>
       </TabPane>)
     })
 
@@ -324,7 +333,7 @@ class searchResult extends Component {
       <h3>{item.typeName}</h3>
       {this.otherlistLi(item)}
       
-      <em>查看全部，共100条 ></em>
+      <em key={index} onClick={this.goOtherlist(item)}>查看全部，共{item.total}条 ></em>
     </ul>)
     })
                   
@@ -346,8 +355,8 @@ class searchResult extends Component {
                 defaultActiveKey={this.state.activetab}
                 activeKey={this.state.activetab}
                 className="demo-tabs"
-                contenttype="fade"
                 onChange={this.TabsClick}
+                animated={anifalse}
               >
               {Morelist}
               {

@@ -4,16 +4,13 @@ import Application from 'pages/application';
 import Manage from 'pages/manage';
 import Page404 from 'pages/404';
 import Search from 'pages/search';
+import SearchResult from 'containers/searchResult';
+import SearchOther from 'containers/searchOther';
 
 const routes = [
   {
     path: '/',
     component: Home,
-    exact: true,
-  },
-  {
-    path: '/:type/:code/:subcode?',
-    component: Work,
     exact: true,
   },
   {
@@ -32,7 +29,24 @@ const routes = [
   {
     path: '/search',
     component: Search,
-  }
+    routes:[
+      {
+        path:'/search',
+        component:SearchResult,
+        exact: true
+      },
+      {
+        path:'/search/searchlist/:type',
+        component:SearchOther,
+        exact: true
+      }
+    ]
+  },
+  {
+    path: '/:type(app|serve)/:code/:subcode?',
+    component: Work,
+    exact: true,
+  },
 ];
 
 export default routes;
