@@ -48,6 +48,26 @@
 .cover {
   padding-left: 56px;
 }
+
+/* XL尺寸 */
+@media screen and (device-width: 1441px){
+    .cover{
+        padding-left: 73px;
+    }
+}
+/* L尺寸 */
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+    .cover{
+        padding-left: 73px;
+    }
+}
+/* M尺寸 */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+    .cover{
+        padding-left: 40px;
+    }
+}
+
 .navs {
   margin: 0;
   padding-left: 0;
@@ -63,6 +83,28 @@
   width: 100%;
   box-sizing: border-box;
 }
+/* XL尺寸 */
+@media screen and (device-width: 1441px){
+    .content{
+        padding-left: 84px;
+        padding-right: 76px;
+    }
+}
+/* L尺寸 */
+@media screen and (min-width: 1025px) and (max-width: 1440px) { /*手机*/
+    .content{
+        padding-left: 84px;
+        padding-right: 76px;
+    }
+}
+/* M尺寸 */
+@media screen and (min-width: 641px) and (max-width: 1024px) { /*手机*/
+    .content{
+        padding-left: 52px;
+        padding-right: 48px;
+    }
+}
+
 .navs>li{
   height:48px;
   margin-right:25px;

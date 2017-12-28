@@ -6,7 +6,8 @@
 }
 .moreList{
   position: absolute;
-  bottom: 50px;
+  bottom: 46px;
+  right: -1px;
   width: 108px;
   border: 1px solid #D2D2D2;
   background: #fff;

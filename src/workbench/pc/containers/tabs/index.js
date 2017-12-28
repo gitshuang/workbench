@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import actions from 'store/root/work/actions';
 import Icon from 'components/icon';
-import { mapStateToProps } from '@u';
+import { mapStateToProps,browserRedirect } from '@u';
 import {
   moreList,
   more,
@@ -27,19 +27,35 @@ const {
   setTabs,
 } = actions;
 
-const tabWidth = 160;
+let tabWidth = 160;
+const minTabWidth = 104;
 const tabMargin = 1;
 const moreBtnWidth = 19;
-const deviation = 108;
+const deviation = 0;
 const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
   let mores = [];
   let tabs = totalTabs;
   let hasMore = false;
-  const maxTabsNum = Math.floor((areaWidth - deviation)/(tabWidth + tabMargin));
-  if (totalTabs.length > maxTabsNum) {
-    tabs = totalTabs.slice(0, maxTabsNum);
-    mores = totalTabs;
-    hasMore = true;
+  // const maxTabsNum = Math.floor((areaWidth - deviation)/(tabWidth + tabMargin));
+  // if (totalTabs.length > maxTabsNum) {
+  //   tabs = totalTabs.slice(0, maxTabsNum);
+  //   mores = totalTabs;
+  //   hasMore = true;
+  // }
+  let allLeng = totalTabs.length;
+  let _areaWidth = areaWidth-tabMargin-moreBtnWidth;
+  let currAllTbasWidth = allLeng*(tabWidth - tabMargin)-moreBtnWidth;
+  let areaTabWidth= _areaWidth/allLeng;
+  if(currAllTbasWidth >= areaWidth){
+    if(areaTabWidth <= minTabWidth){
+      let maxTabsNum =  Math.floor(_areaWidth/minTabWidth);
+      tabWidth = _areaWidth/maxTabsNum;
+      tabs = totalTabs.slice(0, maxTabsNum);
+      mores = totalTabs;
+      hasMore = true;
+    }else{
+      tabWidth = areaTabWidth;
+    }
   }
   return {
     tabs,
@@ -155,13 +171,29 @@ class TabsContainer extends Component {
     })
   }
   render() {
-    const { current: { menuItemId: currentId }, tabs: totalTabs } = this.props;
+    const { current: { menuItemId: currentId }, tabs: totalTabs} = this.props;
+    // ,tabWidth,minTabWidth
     const { width: areaWidth, moreIsShow } = this.state;
     const curIndex = totalTabs.findIndex(({ id }) => id === currentId);
     const totalTabsNum = totalTabs.length;
-    const { tabs, mores } = getTabsAndMores(totalTabs, areaWidth, curIndex);
+
+    let ipad_tabsArea = "";
+    let tabs = [], mores = [];
+    let equipment = browserRedirect();
+    console.log(equipment);
+    let _width = {};
+    if(equipment == "ipad"){
+      tabs = totalTabs;
+      mores = [];
+      ipad_tabsArea = "ipad_tabs_area";
+      _width.width = areaWidth;
+    }else{
+      let { tabs:_tabs, mores:_mores } = getTabsAndMores(totalTabs, areaWidth, curIndex);
+      tabs = _tabs;
+      mores = _mores;
+    }
     const moreListElm = moreIsShow ? (
-      <ul className={moreList}>
+      <ul className={moreList} >
         {
           mores.map(({ id, name, serveCode }) => (
             <li
@@ -207,9 +239,10 @@ class TabsContainer extends Component {
         { moreListElm }
       </div>
     ) : null;
+
     return (
-      <div ref="tabsArea" className={tabsArea}>
-        <ul className={tabsList}>
+      <div ref="tabsArea" className={`${tabsArea} ${ipad_tabsArea}`} >
+        <ul className={tabsList} style={{width:areaWidth+"px"}} >
           {
             tabs.map(({ id, name, serveCode }) => (
               <li
@@ -222,7 +255,7 @@ class TabsContainer extends Component {
                   }
                 )}
                 style={{
-                  width: tabWidth,
+                  width: tabWidth
                 }} >
                 <div className={tabName}> { name } </div>
                 <button
