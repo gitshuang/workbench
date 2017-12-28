@@ -32,11 +32,13 @@ const routes = [
     routes:[
       {
         path:'/search',
-        component:SearchResult
+        component:SearchResult,
+        exact: true
       },
       {
         path:'/search/searchlist/:type',
-        component:SearchOther
+        component:SearchOther,
+        exact: true
       }
     ]
   },

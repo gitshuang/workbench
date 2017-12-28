@@ -245,7 +245,7 @@ class searchResult extends Component {
   goOtherlist(item){
     return () => {
       console.log(item)
-      this.props.history.push('/search/'+item.type);
+      this.props.history.push('/search/searchlist/'+item.type);
     }
   }
   goemailDetail(item){
