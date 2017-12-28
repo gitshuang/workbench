@@ -23,7 +23,7 @@
                 "title":"友空间"
               }],
               "currentPage": 1,
-              "pagesize": 15,
+              "pageSize": 15,
               "renderUrl": "应用",
               "total": 10,
               "type": "serve",
@@ -50,15 +50,18 @@
                 "title":"友空间"
               }],
               "currentPage": 1,
-              "pagesize": 15,
+              "pageSize": 15,
               "renderUrl": "应用",
               "total": 20,
               "type": "serve2",
               "typeName": "应用2"
           }
           
-      ]
-
+      ],
+      "page":1,
+      "pageSize":2,
+      "size":6,
+      "total":60
   },
   "msg": "",
   "status": 1

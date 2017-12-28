@@ -25,7 +25,8 @@ import {
   bg_wrap,
   um_content,
   bg,
-  isdisplay
+  isdisplay,
+  recently
 } from './style.css';
 import _default_icon from 'assets/image/wgt/default.png';
 import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
@@ -126,7 +127,7 @@ class searchOther extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <ul>{lis}</ul>
+            <ul className={recently}>{lis}</ul>
             <div className={isShowPagination? isdisplay : ''}>
               <Pagination
                 prev

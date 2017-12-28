@@ -3,39 +3,33 @@
         {
             "content": [
               {
-                "userId":"111xdd",
-                "headimg":"",
-                "username":"小<font>dd</font>",
-                "phone":"1328222912",
-                "email":"dxx@qq.com",
-                "department":"市场部"
-
+                "serveCode":"111xdd",
+                "serveId":"111xdd",
+                "serveIcon":"",
+                "serveName":"小<font>dd</font>",
+                "url":"https://www.google.com"
               },
               {
-                "userId":"111xdd",
-                "headimg":"",
-                "username":"小<font>dd</font>",
-                "phone":"1328222912",
-                "email":"dxx@qq.com",
-                "department":"市场部"
-
+                "serveCode":"131xdd",
+                "serveId":"113xdd",
+                "serveIcon":"",
+                "serveName":"小<font>vv</font>",
+                "url":"https://www.google.com"
               },
               {
-                "userId":"111xdd",
-                "headimg":"",
-                "username":"小<font>dd</font>",
-                "phone":"1328222912",
-                "email":"dxx@qq.com",
-                "department":"市场部"
-
+                "serveCode":"22xdd",
+                "serveId":"21xdd",
+                "serveIcon":"",
+                "serveName":"小<font>aa</font>",
+                "url":"https://www.google.com"
               }
             ],
             "currentPage": 1,
             "pageSize": 2,
             "renderUrl": "应用/服务模板",
             "total": 100,
-            "type": "user",
-            "typeName": "通讯录"
+            "type": "service",
+            "typeName": "服务"
         },
   "msg": "",
   "status": 1

@@ -162,7 +162,7 @@ class searchResult extends Component {
         }
         this.setState({
           Searchotherlist:payload,
-          //pagesize:payload[0].pagesize
+          pagesize:payload.pageSize
         })
         if(payload.content.length>0){
           this.setState({
@@ -245,6 +245,7 @@ class searchResult extends Component {
   goOtherlist(item){
     return () => {
       console.log(item)
+      this.props.history.push('/search/'+item.type);
     }
   }
   goemailDetail(item){
@@ -352,8 +353,8 @@ class searchResult extends Component {
                 defaultActiveKey={this.state.activetab}
                 activeKey={this.state.activetab}
                 className="demo-tabs"
-                contenttype="fade"
                 onChange={this.TabsClick}
+                animated="false"
               >
               {Morelist}
               {

@@ -170,7 +170,8 @@
 .recently  li {
   float: left;
   width: 100%;
-  padding-bottom: 10px;
+  padding: 10px 0;
+  border-bottom:1px solid #dde0e3
 }
 .recently  li img { width: 36px; height: 36px; }
 .recently div { float: left;font-size:12px;}
