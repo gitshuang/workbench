@@ -268,6 +268,7 @@ class searchResult extends Component {
       return {__html: text};
     }
     data.content.forEach((item,index)=>{
+      item = JSON.parse(item)
       switch (data.type)
       {
         case "user":
@@ -283,7 +284,7 @@ class searchResult extends Component {
           break;
         case "service":
           lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                  <div className={h_icon}><img src={yonyouSpace1}/></div>
+                  <div className={h_icon}><img src={item.serveIcon}/></div>
                   <div className={h_name}>
                     <p><span dangerouslySetInnerHTML={createMarkup(item.serveName)}></span></p>
                     <p >{item.serveName}</p>

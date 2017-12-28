@@ -160,6 +160,7 @@ class SearchContainer extends Component {
     return (e) => {
       e.stopPropagation();
       console.log(type,item)
+      window.location.href=item.url
     }
   }
   goemailDetail(item){
@@ -189,7 +190,7 @@ class SearchContainer extends Component {
       {
         case "user":
           let lis = [];
-          item.contents.forEach((item2,index2)=>{
+          item.content.forEach((item2,index2)=>{
             lis.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={item2.headimg}/></div>
                   <div className={h_name}>
@@ -211,9 +212,10 @@ class SearchContainer extends Component {
           break;
         case "service":
           let lis2 = [];
-          item.contents.forEach((item2,index2)=>{
+          item.content.forEach((item2,index2)=>{
+            item2 = JSON.parse(item2)
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
-                  <div className={h_icon}><img src={yonyouSpace1}/></div>
+                  <div className={h_icon}><img src={item2.serveIcon}/></div>
                   <div className={h_name}>
                     <p><span dangerouslySetInnerHTML={createMarkup(item2.serveName)}></span></p>
                     <p >{item2.serveCode}</p>
@@ -231,7 +233,8 @@ class SearchContainer extends Component {
           break;
         case "help":
           let lis3= [];
-          item.contents.forEach((item2,index2)=>{
+          item.content.forEach((item2,index2)=>{
+            item2 = JSON.parse(item2)
             lis3.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                 <div className={h_icon}><img src={_default_icon}/></div>
                 <div className={h_name}>
@@ -252,7 +255,8 @@ class SearchContainer extends Component {
         default:
           let lis4 = [];
       
-            item.contents.forEach((item2,index2)=>{
+            item.content.forEach((item2,index2)=>{
+              item2 = JSON.parse(item2)
               lis4.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={_default_icon}/></div>
                   <div className={h_name}>
