@@ -1,0 +1,50 @@
+{
+  "data": 
+  {
+    "hasOther":true,
+    "data":[
+        {
+            "content": [
+              {
+                "serveCode":"111xdd",
+                "serveId":"111xdd",
+                "serveIcon":"",
+                "serveName":"小<font>dd</font>",
+                "url":"https://www.google.com"
+              },
+              {
+                "serveCode":"131xdd",
+                "serveId":"113xdd",
+                "serveIcon":"",
+                "serveName":"小<font>vv</font>",
+                "url":"https://www.google.com"
+              },
+              {
+                "serveCode":"22xdd",
+                "serveId":"21xdd",
+                "serveIcon":"",
+                "serveName":"小<font>aa</font>",
+                "url":"https://www.google.com"
+              }
+            ],
+            "currentPage": 1,
+            "pagesize": 15,
+            "renderUrl": "应用/服务模板",
+            "total": 100,
+            "type": "service",
+            "typeName": "服务"
+        },
+        {
+            "content": [],
+            "currentPage": 1,
+            "pagesize": 15,
+            "renderUrl": "null",
+            "total": 0,
+            "type": "user",
+            "typeName": "通讯录"
+        }
+    ]
+  },
+  "msg": "",
+  "status": 1
+}

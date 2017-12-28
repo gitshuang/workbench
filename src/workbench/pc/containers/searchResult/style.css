@@ -197,8 +197,10 @@
 .recently .search_service .h_name p{ max-width: 185px;}
 .recently .search_help{margin-top: 8px}
 .recently .search_service .h_name {width: 185px;}
-.recently {
-  
+.recently h3{
+  color: #4a515d;
+  padding: 20px 0 10px 0;
+  font-size: 12px;
 }
 .recently li:last-child{
   border-bottom:none;
@@ -250,7 +252,6 @@ tabPane1,.tabPane2{
 
 .wrap :global(.um-content){
   background:#fff;
-  overflow: hidden;
 }
 .tabPane2{
   padding: 0 13px;
@@ -293,8 +294,17 @@ tabPane1,.tabPane2{
   background:rgba(239,239,239,1);
   color: #E14C46;
 }
-.tabContent :global(.u-tabs-content){
+.tabContent :global(.u-tabs-tabpane){
+  overflow-x: hidden
 }
 .tabContent :global(.u-tabs-tab):hover{
   font-weight:900;
 }
+
+.recently em{    width: 100%;
+  font-size: 12px;
+  font-style: normal;
+  display: inline-block;
+  color: #007ace;
+  margin: 10px 0 0 185px;}
+  .isdisplay { display: none}

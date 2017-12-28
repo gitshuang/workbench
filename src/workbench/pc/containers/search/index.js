@@ -1,9 +1,12 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
+import { mapStateToProps } from '@u';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import { withRouter } from 'react-router-dom';
 import Icon from 'components/icon';
+import { connect } from 'react-redux';
+import searchActions from 'store/root/search/actions';
 import {
   search,
   searchExtend,
@@ -28,7 +31,25 @@ import {
 import _default_icon from 'assets/image/wgt/default.png';
 import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
 import { setTimeout } from 'timers';
+import rootActions from 'store/root/actions';
+const {getSearchSuggest} = searchActions;
+const {requestStart, requestSuccess, requestError} = rootActions;
 
+
+@connect(
+  mapStateToProps(
+    'SearchSuggestList',
+    {
+      namespace: 'search',
+    },
+  ),
+  {
+    requestStart,
+    requestSuccess,
+    requestError,
+    getSearchSuggest,
+  }
+)
 @withRouter
 @onClickOutside
 class SearchContainer extends Component {
@@ -38,71 +59,7 @@ class SearchContainer extends Component {
       text: '',
       isShow: false,
       isSearchWinShow: false,
-      dataList:{
-        status:1,
-        data:[
-          {
-            type:'user',
-            renderurl:'',
-            contents:[
-              {
-                userId:'111xdd',
-                headimg:_default_icon,
-                username:'小<font>dd</font>',
-                phone:'1328222912',
-                email:'dxx@qq.com',
-                department:'市场部'
-              },
-              {
-                userId:'111xdd',
-                headimg:_default_icon,
-                username:'大<font>dd</font>',
-                phone:'142444252',
-                email:'gvvvv@qq.com',
-                department:'业务部'
-              }
-            ]
-          },
-          {
-            type:'service',
-            renderurl:'',
-            contents:[
-              {
-                id:'111xdd',
-                headimg:_default_icon,
-                title:'小<font>dd</font>',
-                brief:'办公协同、沟通协作等核心价值',
-
-              },
-            ]
-          },
-          {
-            type:'help',
-            renderurl:'',
-            contents:[
-              {
-                id:'111xdd',
-                headimg:_default_icon,
-                title:'小<font>dd</font>',
-                size:'800kb',
-              }
-            ]
-          },
-          {
-            type:'other',
-            renderurl:'',
-            class:"其他",
-            contents:[
-              {
-                id:'111xdd',
-                headimg:_default_icon,
-                title:'其他分类<font>dd</font>',
-              }
-            ]
-          },
-
-        ]
-      }
+      SearchSuggestList:[]
     };
     this.search = this.search.bind(this);
     this.searchMin = this.searchMin.bind(this);
@@ -116,7 +73,31 @@ class SearchContainer extends Component {
     var local= this.props.history.location.pathname;
     if(local!='/search'){
       this.props.history.push('/search');
+      window.sessionStorage.searchkeywords = this.state.text;
     }
+  }
+  getSearchList(keyworks){
+    const {
+      requestStart,
+      requestSuccess,
+      requestError,
+      getSearchSuggest,
+    } = this.props;
+    // if(this.state.allApplicationList.length == 0){
+      requestStart();
+      getSearchSuggest(keyworks).then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        }
+        payload.forEach((da,i)=>{
+          da.extend =false;
+        });
+        this.setState({
+          SearchSuggestList:payload
+        })
+        requestSuccess();
+      });
+    // }
   }
   onChangeHandler(e) {
     var _this = this;
@@ -149,6 +130,7 @@ class SearchContainer extends Component {
     const { isShow, text, isSearchWinShow } = this.state;
     if (isShow && text) {
       console.log(this.state.text)
+      this.getSearchList(text)
       this.setState({
         isSearchWinShow: true,
       })
@@ -194,7 +176,7 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const { isShow, text, isSearchWinShow, dataList} = this.state;
+    const { isShow, text, isSearchWinShow, SearchSuggestList} = this.state;
     const {color} = this.props;
     const _this = this;
     let item, searchWin, contenttype_user,contenttype_service,contenttype_help;
@@ -202,7 +184,7 @@ class SearchContainer extends Component {
     function createMarkup(text) {
       return {__html: text};
     }
-    dataList.data.forEach((item,index)=>{
+    SearchSuggestList.forEach((item,index)=>{
       switch (item.type)
       {
         case "user":
@@ -233,14 +215,14 @@ class SearchContainer extends Component {
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={yonyouSpace1}/></div>
                   <div className={h_name}>
-                    <p><span dangerouslySetInnerHTML={createMarkup(item2.title)}></span></p>
-                    <p >{item2.brief}</p>
+                    <p><span dangerouslySetInnerHTML={createMarkup(item2.serveName)}></span></p>
+                    <p >{item2.serveCode}</p>
                   </div>
                 </li>);
           }),
           contenttype_service= (
             <div className={searchWindom}>
-              <h3>应用/服务</h3>
+              <h3>服务</h3>
               <ul>
                 {lis2}
               </ul>

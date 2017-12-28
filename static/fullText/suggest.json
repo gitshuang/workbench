@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "type":"service",
+      "renderurl":"",
+      "contents":[
+        {
+          "serveCode":"111xdd",
+          "serveId":"111xdd",
+          "serveIcon":"",
+          "serveName":"小<font>dd</font>",
+          "url":"https://www.google.com"
+        },
+        {
+          "serveCode":"131xdd",
+          "serveId":"113xdd",
+          "serveIcon":"",
+          "serveName":"小<font>vv</font>",
+          "url":"https://www.google.com"
+        },
+        {
+          "serveCode":"22xdd",
+          "serveId":"21xdd",
+          "serveIcon":"",
+          "serveName":"小<font>aa</font>",
+          "url":"https://www.google.com"
+        }
+      ]
+    }
+  ],
+  "status": 1
+}

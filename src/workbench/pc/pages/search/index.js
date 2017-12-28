@@ -14,21 +14,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 // const {changeUserInfoDisplay, getWorkList} = homeActions;
 
 @withRouter
-@connect(
-  mapStateToProps(
-    'widthBrm',
-    'current',
-    'domainName',
-    {
-      namespace: 'work'
-    }
-  ),
-  {
-    requestStart,
-    requestSuccess,
-    requestError,
-  }
-)
+
 
 class Application extends Component {
 

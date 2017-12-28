@@ -16,6 +16,11 @@ var api = [
   '/getManageList',
   '/getLatestAccess',
   '/getPromotionService',
+
+  '/fullText/suggest',
+  '/fullText/getMore',
+  '/fullText/search',
+  '/fullText/getOther',
 ]
 
 var rapApi = [

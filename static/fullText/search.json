@@ -1,0 +1,42 @@
+{
+  "data":[
+        {
+            "content": [
+              {
+                "userId":"111xdd",
+                "headimg":"",
+                "username":"小<font>dd</font>",
+                "phone":"1328222912",
+                "email":"dxx@qq.com",
+                "department":"市场部"
+
+              },
+              {
+                "userId":"111xdd",
+                "headimg":"",
+                "username":"小<font>dd</font>",
+                "phone":"1328222912",
+                "email":"dxx@qq.com",
+                "department":"市场部"
+
+              },
+              {
+                "userId":"111xdd",
+                "headimg":"",
+                "username":"小<font>dd</font>",
+                "phone":"1328222912",
+                "email":"dxx@qq.com",
+                "department":"市场部"
+
+              }
+            ],
+            "currentPage": 1,
+            "pagesize": 2,
+            "renderUrl": "应用/服务模板",
+            "total": 100,
+            "type": "user",
+            "typeName": "通讯录"
+        }],
+  "msg": "",
+  "status": 1
+}

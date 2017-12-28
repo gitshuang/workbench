@@ -1,0 +1,65 @@
+{
+  "data": 
+  { 
+      "content": [
+          {
+              "content": [
+                {
+                "userId":"111xdd",
+                "headimg":"",
+                "username":"小<font>dd</font>",
+                "phone":"1328222912",
+                "email":"dxx@qq.com",
+                "department":"市场部",
+                "title":"友空间"
+              },
+              {
+                "userId":"111xdd",
+                "headimg":"",
+                "username":"小<font>dd</font>",
+                "phone":"1328222912",
+                "email":"dxx@qq.com",
+                "department":"市场部",
+                "title":"友空间"
+              }],
+              "currentPage": 1,
+              "pagesize": 15,
+              "renderUrl": "应用",
+              "total": 100,
+              "type": "serve",
+              "typeName": "应用"
+          },
+          {
+              "content": [
+                {
+                "userId":"111xdd",
+                "headimg":"",
+                "username":"小<font>dd</font>",
+                "phone":"1328222912",
+                "email":"dxx@qq.com",
+                "department":"市场部",
+                "title":"友空间"
+              },
+              {
+                "userId":"111xdd",
+                "headimg":"",
+                "username":"小<font>dd</font>",
+                "phone":"1328222912",
+                "email":"dxx@qq.com",
+                "department":"市场部",
+                "title":"友空间"
+              }],
+              "currentPage": 1,
+              "pagesize": 15,
+              "renderUrl": "应用",
+              "total": 100,
+              "type": "serve2",
+              "typeName": "应用2"
+          }
+          
+      ]
+
+  },
+  "msg": "",
+  "status": 1
+}

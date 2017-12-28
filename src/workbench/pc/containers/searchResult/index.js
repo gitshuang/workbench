@@ -41,32 +41,34 @@ import {
   searchPanel,
   um_content,
   icon_close,
-  icon_open
+  isdisplay
 } from './style.css';
 import _default_icon from 'assets/image/wgt/default.png';
 import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
-import applicationActions from 'store/root/application/actions';
-// import manageActions from 'store/root/manage/actions';
+import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
-// const {getSelectWidgetList} = manageActions;
-const {getAllApplicationList} = applicationActions;
+const {getSearchMore, getSearch,getSearchOther} = searchActions;
 const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
+
 @connect(
   mapStateToProps(
-    'allApplicationList',
+    'SearchMoreList',
+    'SearchList',
+    'SearchOtherList',
     {
-      namespace: 'application',
+      namespace: 'search',
     },
   ),
   {
     requestStart,
     requestSuccess,
     requestError,
-    getAllApplicationList,
+    getSearchMore,
+    getSearch,
+    getSearchOther,
   }
 )
-
 class searchResult extends Component {
 
   constructor(props) {
@@ -75,92 +77,118 @@ class searchResult extends Component {
       value: "关键词",
       isPackUp:false,
       current: undefined,
-      activetab: 'user',
-      tabClass : [
-          {
-            name:'通讯录',
-            number:'2',
-            tabtype:'user',
-          },
-          {
-            name:'服务',
-            number:'2',
-            tabtype:'service',
-          },
-          {
-            name:'其他',
-            number:'2',
-            tabtype:'help',
-          },
-        ],
-      dataList :[
-          {
-            userId:'111xdd',
-            headimg:_default_icon,
-            username:'小<font>dd</font>',
-            phone:'1328222912',
-            email:'dxx@qq.com',
-            department:'市场部',
-            title:'友空间',
-            brief:'嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎',
-            size:'800'
-          },
-          {
-            userId:'111xdd',
-            headimg:_default_icon,
-            username:'大<font>dd</font>',
-            phone:'142444252',
-            email:'gvvvv@qq.com',
-            department:'业务部',
-            title:'友空间',
-            brief:'嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎',
-            size:'800'
-          }
-        ],
-      activePage:1
+      activetab: '',
+      SearchMoreList:[],
+      hasOther:false,
+      keywords:window.sessionStorage.searchkeywords,
+      Searchotherlist :{
+        content:[]
+      },
+      dataList :[{
+        content:[]
+      }],
+      activePage:1,
+      pagesize:10,
+      isShowPagination:true,
+    }
+  }
+  componentWillMount() {
+    const { keywords} = this.state
+    if(keywords!=undefined && keywords!=""){
+      this.setState({
+        value:keywords
+      })
+    this.getSearchMoreList(keywords)
     }
   }
 
-  componentWillMount() {
+  getSearchMoreList(keywords){
     const {
       requestStart,
       requestSuccess,
       requestError,
-      getAllApplicationList,
-      allApplicationList,
+      getSearchMore,
     } = this.props;
-    if(allApplicationList.length == 0){
       requestStart();
-      getAllApplicationList().then(({error, payload}) => {
+      getSearchMore(keywords).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         }
+        this.setState({
+          SearchMoreList:payload.data,
+          hasOther:payload.hasOther,
+          activetab:payload.data[0].type
+        })
         requestSuccess();
+        this.getSearchTpyeList(keywords,payload.data[0].type,1)
+        window.sessionStorage.searchkeywords='';
       });
-    }
   }
-
+  getSearchTpyeList(keywords,type,page){
+    const {
+      requestStart,
+      requestSuccess,
+      requestError,
+      getSearch,
+    } = this.props;
+      requestStart();
+      getSearch(keywords,type,page).then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        }
+        this.setState({
+          dataList:payload,
+          pagesize:payload[0].pagesize
+        })
+        if(payload[0].content.length>0){
+          this.setState({
+            isShowPagination:false,
+          })
+        }
+       requestSuccess();
+      });
+  }
+  getSearchOtherList(keywords,type,page){
+    const {
+      requestStart,
+      requestSuccess,
+      requestError,
+      getSearchOther,
+    } = this.props;
+      requestStart();
+      getSearchOther(keywords,type,page).then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        }
+        this.setState({
+          Searchotherlist:payload,
+          //pagesize:payload[0].pagesize
+        })
+        if(payload.content.length>0){
+          this.setState({
+            isShowPagination:false,
+          })
+        }
+       requestSuccess();
+      });
+  }
   handleClick = (labelId) => () => {
     this.setState({
       current: labelId,
     })
   }
 
-
-
   btnSearch=()=>{
     if(this.state.value != "关键词"){
       console.log(this.state.value);
+      this.getSearchMoreList(this.state.value)
     }
   }
-
   onFormChange = (value) => {
     this.setState({
       value
     })
   }
-
-
 
 
   //输入框修改data数据源
@@ -170,9 +198,15 @@ class searchResult extends Component {
     });
   }
   handleSelect(eventKey) {
+    const {value,activetab}=this.state
     this.setState({
       activePage: eventKey
     });
+    if(activetab=='other'){
+      this.getSearchOtherList(value,activetab,eventKey)
+    }else{
+     this.getSearchTpyeList(value,activetab,eventKey)
+    }
   }
   inputOnFocus = (e) => {
     let _value = e.target.value != "关键词"?e.target.value:"";
@@ -190,11 +224,17 @@ class searchResult extends Component {
   }
 
   TabsClick = (activetab) =>{
-    console.log(activetab)
+    const {value,activePage} = this.state
     this.setState({
-      activetab
+      activetab,
+      activePage:1
     })
-    
+    if(activetab=='other'){
+      this.getSearchOtherList(value,activetab,1)
+
+    }else{
+      this.getSearchTpyeList(value,activetab,1)
+    }
   }
   goDetail(type,item){
     return (e) => {
@@ -214,14 +254,14 @@ class searchResult extends Component {
       console.log(item)
     }
   }
-  construct () {
-    let lis=[];
 
+  otherlistLi(data){
+    var lis =[]
     function createMarkup(text) {
       return {__html: text};
     }
-    this.state.dataList.forEach((item,index)=>{
-      switch (this.state.activetab)
+    data.content.forEach((item,index)=>{
+      switch (data.type)
       {
         case "user":
           lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
@@ -238,8 +278,8 @@ class searchResult extends Component {
           lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
                   <div className={h_icon}><img src={yonyouSpace1}/></div>
                   <div className={h_name}>
-                    <p><span dangerouslySetInnerHTML={createMarkup(item.title)}></span></p>
-                    <p >{item.brief}</p>
+                    <p><span dangerouslySetInnerHTML={createMarkup(item.serveName)}></span></p>
+                    <p >{item.serveName}</p>
                   </div>
                 </li>);
           break;
@@ -261,22 +301,33 @@ class searchResult extends Component {
               </li>);
       }
     })
-    return this.state.tabClass.map((item) => {
-      return (
-          <TabPane
-          tab={`${item.name}(${item.number})`}
-          key={item.tabtype}
-          className={tabPane1}
-      >
-          <ul className={recently}>{lis}</ul>
-      </TabPane>)
-      })
+    return lis
   }
   render() {
-    const { value, options, current } = this.state;
-    
-   
-    
+    const { value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist } = this.state;
+    let otherlist = []
+    let Morelist = []
+    SearchMoreList.forEach((item,index) => {
+
+      Morelist.push(
+      <TabPane
+          tab={`${item.typeName}(${item.total})`}
+          key={item.type}
+          className={tabPane1}
+      >
+          <ul className={recently}>{this.otherlistLi(dataList[0])}</ul>
+      </TabPane>)
+    })
+
+    Searchotherlist.content.forEach((item,index) => {
+      otherlist.push(<ul className={`${recently} ${clearfix}`} key={index}>
+      <h3>{item.typeName}</h3>
+      {this.otherlistLi(item)}
+      
+      <em>查看全部，共100条 ></em>
+    </ul>)
+    })
+                  
     return (
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
@@ -292,66 +343,30 @@ class searchResult extends Component {
             <div className={"um-content" + ` ${tabContent}`}>
             
               <Tabs
-                defaultActiveKey="user"
+                defaultActiveKey={this.state.activetab}
+                activeKey={this.state.activetab}
                 className="demo-tabs"
                 contenttype="fade"
                 onChange={this.TabsClick}
               >
-              {this.construct()}
-                {/* <TabPane tab='通讯录(2)' key="1" className={tabPane1} >
-                  <ul className={recently}>
-                    <li >
-                      <div className={h_icon}><img src={_default_icon}/></div>
-                      <div className={h_name}>
-                        <p><span>我<font >嘎嘎</font></span><span>市场部</span></p>
-                        <p>办公电话 : 18372893749</p>
-                      </div>
-                      <div className={`${h_contact} ${mleft50}`}><Icon title="发邮件" type="e-mail" /></div>
-                      <div className={h_contact}><Icon title="发消息" type="chat" /></div>
-                    </li>
-                    <li >
-                      <div className={h_icon}><img src={_default_icon}/></div>
-                      <div className={h_name}>
-                        <p><span>我<font >嘎嘎</font></span><span>市场部</span></p>
-                        <p>办公电话 : 18372893749</p>
-                      </div>
-                      <div className={`${h_contact} ${mleft50}`}><Icon title="发邮件" type="e-mail" /></div>
-                      <div className={h_contact}><Icon title="发消息" type="chat" /></div>
-                    </li>
-                  </ul>
-                  {/* {this.state.dataList.length != 0 ?<Button onClick={this.handleClick}>清空列表</Button>:<Button>没有数据!</Button>}
-                </TabPane>
-                <TabPane tab='应用/服务(3)' key="2" className={tabPane1}>
-                  <ul className={`${recently} ${clearfix}`}>
-                    <li className={search_service}>
-                      <div className={h_icon}><img src={yonyouSpace1}/></div>
-                      <div className={h_name}>
-                        <p><span>友<font >嘎嘎</font></span></p>
-                        <p >办公协同、沟通协作等核心价值，高…</p>
-                      </div>
-                    </li>
-                  </ul>
-                </TabPane>
-                <TabPane tab='其他内容(3)' key="3" className={tabPane1}>
-                  <ul className={`${recently} ${clearfix}`}>
-                    <li >
-                      <div className={h_icon}><img src={_default_icon}/></div>
-                      <div className={h_name}>
-                        <p className={search_help}>报账产<font >嘎嘎</font>文档.word</p>
-                      </div>
-                      <div className={search_help}>800kb</div>
-                    </li>
-                  </ul>
-                </TabPane>  */}
+              {Morelist}
+              {
+                this.state.hasOther ? (
+                  <TabPane tab='其他内容' key="other" className={tabPane1}>
+                    {otherlist}
+                  </TabPane>
+                ) : null
+              }
+                
               </Tabs>
             </div>
-            <div>
+            <div className={isShowPagination? isdisplay : ''}>
               <Pagination
                 prev
                 next
                 size="sm"
                 gap={true}
-                items={10}
+                items={this.state.pagesize}
                 maxButtons={7}
                 activePage={this.state.activePage}
                 onSelect={this.handleSelect.bind(this)} />
