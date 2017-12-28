@@ -4,8 +4,8 @@ import Application from 'pages/application';
 import Manage from 'pages/manage';
 import Page404 from 'pages/404';
 import Search from 'pages/search';
-import SearchResult from 'containers/SearchResult';
-import SearchOther from 'containers/SearchOther';
+import SearchResult from 'containers/searchResult';
+import SearchOther from 'containers/searchOther';
 
 const routes = [
   {
