@@ -314,6 +314,7 @@ class searchResult extends Component {
     const { value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist } = this.state;
     let otherlist = []
     let Morelist = []
+    const anifalse=false
     SearchMoreList.forEach((item,index) => {
 
       Morelist.push(
@@ -354,7 +355,7 @@ class searchResult extends Component {
                 activeKey={this.state.activetab}
                 className="demo-tabs"
                 onChange={this.TabsClick}
-                animated="false"
+                animated={anifalse}
               >
               {Morelist}
               {
