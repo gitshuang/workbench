@@ -84,9 +84,9 @@ class searchResult extends Component {
       Searchotherlist :{
         content:[]
       },
-      dataList :[{
+      dataList :{
         content:[]
-      }],
+      },
       activePage:1,
       pagesize:10,
       isShowPagination:true,
@@ -138,9 +138,9 @@ class searchResult extends Component {
         }
         this.setState({
           dataList:payload,
-          pagesize:payload[0].pagesize
+          pagesize:payload.pageSize
         })
-        if(payload[0].content.length>0){
+        if(payload.content.length>0){
           this.setState({
             isShowPagination:false,
           })
@@ -242,12 +242,18 @@ class searchResult extends Component {
       console.log(type,item)
     }
   }
+  goOtherlist(item){
+    return () => {
+      console.log(item)
+    }
+  }
   goemailDetail(item){
     return (e) => {
       e.stopPropagation();
       console.log(item)
     }
   }
+
   gochatDetail(item) {
     return (e) => {
       e.stopPropagation();
@@ -311,11 +317,11 @@ class searchResult extends Component {
 
       Morelist.push(
       <TabPane
-          tab={`${item.typeName}(${item.total})`}
+          tab={item.typeName}
           key={item.type}
           className={tabPane1}
       >
-          <ul className={recently}>{this.otherlistLi(dataList[0])}</ul>
+          <ul className={recently}>{this.otherlistLi(dataList)}</ul>
       </TabPane>)
     })
 
@@ -324,7 +330,7 @@ class searchResult extends Component {
       <h3>{item.typeName}</h3>
       {this.otherlistLi(item)}
       
-      <em>查看全部，共100条 ></em>
+      <em key={index} onClick={this.goOtherlist(item)}>查看全部，共{item.total}条 ></em>
     </ul>)
     })
                   

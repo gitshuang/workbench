@@ -25,7 +25,7 @@
               "currentPage": 1,
               "pagesize": 15,
               "renderUrl": "应用",
-              "total": 100,
+              "total": 10,
               "type": "serve",
               "typeName": "应用"
           },
@@ -52,7 +52,7 @@
               "currentPage": 1,
               "pagesize": 15,
               "renderUrl": "应用",
-              "total": 100,
+              "total": 20,
               "type": "serve2",
               "typeName": "应用2"
           }

@@ -1,5 +1,5 @@
 {
-  "data":[
+  "data":
         {
             "content": [
               {
@@ -31,12 +31,12 @@
               }
             ],
             "currentPage": 1,
-            "pagesize": 2,
+            "pageSize": 2,
             "renderUrl": "应用/服务模板",
             "total": 100,
             "type": "user",
             "typeName": "通讯录"
-        }],
+        },
   "msg": "",
   "status": 1
 }

@@ -4,6 +4,8 @@ import Application from 'pages/application';
 import Manage from 'pages/manage';
 import Page404 from 'pages/404';
 import Search from 'pages/search';
+import SearchResult from 'containers/SearchResult';
+import SearchOther from 'containers/SearchOther';
 
 const routes = [
   {
@@ -32,6 +34,16 @@ const routes = [
   {
     path: '/search',
     component: Search,
+    routes:[
+      {
+      path:'/search/searchlist/:type',
+      component:SearchOther
+      },
+      {
+      path:'/search',
+      component:SearchResult
+      }
+    ]
   }
 ];
 

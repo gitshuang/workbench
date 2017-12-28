@@ -5,7 +5,8 @@
 }
 .bg_wrap{
 	background:#fff;
-	
+	// border:1px solid #DBDEE5;
+	// box-shadow: 0 6px 8px 0 rgba(74,81,93,0.25);
 	border-radius: 3px ;
 }
 .wrap{
@@ -270,7 +271,7 @@ tabPane1,.tabPane2{
 }
 .tabContent :global(.u-tabs-tab){
   color:#666;
-  padding-left: 14px;
+  padding-left: 0;
 }
 .tabContent :global(.u-tabs-ink-bar){
   width:50% !important;
@@ -300,12 +301,10 @@ tabPane1,.tabPane2{
   font-weight:900;
 }
 
-.recently em{   
+.recently em{    width: 100%;
   font-size: 12px;
   font-style: normal;
   display: inline-block;
   color: #007ace;
-  margin: 10px 0 0 185px;
-padding: 10px 0; 
-cursor: pointer}
+  margin: 10px 0 0 185px;}
   .isdisplay { display: none}
