@@ -46,10 +46,9 @@ class HeaderPage extends Component {
   }
   componentDidMount() {
     this.getUserInfo();
-    setTimeout(() => {
-      window.scrollTo(0, 1);
-    },0);
-    // scroll.scrollTo(50,this.Navbar);
+    // setTimeout(() => {
+    //   window.scrollTo(0, 1);
+    // },0); 
   }
 
   getUserInfo() {
