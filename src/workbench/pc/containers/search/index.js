@@ -7,6 +7,8 @@ import { withRouter } from 'react-router-dom';
 import Icon from 'components/icon';
 import { connect } from 'react-redux';
 import searchActions from 'store/root/search/actions';
+import SearchResult from 'containers/searchResult'
+
 import {
   search,
   searchExtend,
@@ -77,7 +79,7 @@ class SearchContainer extends Component {
       window.sessionStorage.searchkeywords = this.state.text;
     }else{
       window.sessionStorage.searchkeywords = this.state.text;
-      this.props.history.push('/search?v='+new Date().getTime());
+      console.log(SearchResult)
     }
   }
   getSearchList(keyworks){

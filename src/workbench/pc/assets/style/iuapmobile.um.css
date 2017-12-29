@@ -42,7 +42,7 @@
   bottom: 0;
   left: 0;
   display: -webkit-box;
-  display: box;
+   display: -moz-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-orient: vertical;
@@ -68,7 +68,7 @@
 }
 .um-footerbar {
   display: -webkit-box;
-  display: box;
+   display: -moz-box;
   display: -webkit-flex;
   display: flex;
   border: none;
@@ -77,13 +77,13 @@
 /*um-box*/
 .um-box {
   display: -webkit-box;
-  display: box;
+   display: -moz-box;
   display: -webkit-flex;
   display: flex;
 }
 .um-vbox {
   display: -webkit-box;
-  display: box;
+   display: -moz-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-orient: vertical;
@@ -93,7 +93,7 @@
 }
 .um-hbox {
   display: -webkit-box;
-  display: box;
+   display: -moz-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-orient: horizontal;
@@ -103,7 +103,7 @@
 }
 .um-box-justify {
   display: -webkit-box;
-  display: box;
+   display: -moz-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-pack: justify;
@@ -117,7 +117,7 @@
 }
 .um-box-center {
   display: -webkit-box;
-  display: box;
+   display: -moz-box;
   -webkit-box-align: center;
   box-align: center;
   -webkit-box-pack: center;
