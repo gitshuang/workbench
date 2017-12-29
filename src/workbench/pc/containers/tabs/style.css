@@ -152,7 +152,7 @@
   bottom: 8px;
   left: 16px;
   height: 5px;
-  background-color: #DD524D;
+  /* background-color: #DD524D; */
   content: ' ';
   transform: scaleY(0.5);
   -webkit-transform: scaleY(0.5);
