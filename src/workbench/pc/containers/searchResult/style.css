@@ -149,6 +149,7 @@
   top: 0px;
   left: 360px;
   display: flex;
+  cursor: pointer
 }
 .search_icon_con :global(.iconfont){
   color:#878B94;
@@ -188,6 +189,7 @@
 .recently .h_name p span:first-child{ margin-right: 10px;    width: 80px;
   overflow: hidden;
   height: 18px;
+  color: rgba(74,81,93,1);
  }
 .recently .h_name p span { float: left;}
 .recently .h_contact { width:24px;height:24px; background:rgba(135,139,148,1);opacity:70; margin-left: 20px; border-radius: 100%; text-align: center; line-height: 21px; cursor: pointer}
@@ -246,7 +248,7 @@ tabPane1,.tabPane2{
 }
 .tabPane1 li{
   display:flex;
-  border-bottom: 1px solid #DDE0E3;
+  border-bottom: 1px solid rgba(13,20,36,0.05);
 }
 
 .wrap :global(.um-content){
@@ -269,17 +271,16 @@ tabPane1,.tabPane2{
   overflow: hidden
 }
 .tabContent :global(.u-tabs-tab){
-  color:#666;
-  padding-left: 14px;
+  color:rgba(13,20,36,.6);
+  padding: 8px 0;
+  margin: 0 20px
 }
 .tabContent :global(.u-tabs-ink-bar){
-  width:50% !important;
   height:6px;
-  max-width:30px;
   max-height: 6px;
   background:#E14C46;
   border-radius:3px;
-  margin: 2px 12px;
+ 
 }
 .tabContent :global(.u-tabs-nav-wrap){
   width:100%;
@@ -309,3 +310,29 @@ tabPane1,.tabPane2{
 padding: 10px 0; 
 cursor: pointer}
   .isdisplay { display: none}
+
+.paginationClass :global(.active) a, 
+.paginationClass :global(.active) a:focus, 
+.paginationClass :global(.active) a:hover, 
+.paginationClass :global(.active) span, 
+.paginationClass :global(.active) span:focus, 
+.paginationClass :global(.active) span:hover{
+    border-color: #fcedec;
+    background: #fcedec;
+    color: #e14c46;
+  }
+.paginationClass :global(.disabled) a, 
+.paginationClass :global(.disabled) a:focus, 
+.paginationClass :global(.disabled) a:hover, 
+{
+  background: rgba(9,44,66,.04);
+  }
+.paginationClass li a{ width: 28px;
+  height: 28px;
+  background: rgba(9,30,66,.04);
+  border-color: #e9e7e7;
+  border-radius: 4px;
+  line-height: 28px;
+  padding: 0;}
+.paginationClass li a:hover{border-color:#fcedec}
+.paginationClass li:first-child a,.paginationClass li:last-child a{ border-radius: 4px}

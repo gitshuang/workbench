@@ -41,6 +41,7 @@ import {
   searchPanel,
   um_content,
   icon_close,
+  paginationClass,
   isdisplay
 } from './style.css';
 import _default_icon from 'assets/image/wgt/default.png';
@@ -240,6 +241,7 @@ class searchResult extends Component {
     return (e) => {
       e.stopPropagation();
       console.log(type,item)
+      window.location.href=item.url
     }
   }
   goOtherlist(item){
@@ -286,8 +288,7 @@ class searchResult extends Component {
           lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
                   <div className={h_icon}><img src={item.serveIcon}/></div>
                   <div className={h_name}>
-                    <p><span dangerouslySetInnerHTML={createMarkup(item.serveName)}></span></p>
-                    <p >{item.serveName}</p>
+                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item.serveName)}></span></p>
                   </div>
                 </li>);
           break;
@@ -369,8 +370,10 @@ class searchResult extends Component {
                 
               </Tabs>
             </div>
-            <div className={isShowPagination? isdisplay : ''}>
+            <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
               <Pagination
+                first
+                last
                 prev
                 next
                 size="sm"

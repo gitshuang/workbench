@@ -59,6 +59,7 @@ class SearchContainer extends Component {
       text: '',
       isShow: false,
       isSearchWinShow: false,
+      nosearchdata: false,
       SearchSuggestList:[]
     };
     this.search = this.search.bind(this);
@@ -74,6 +75,9 @@ class SearchContainer extends Component {
     if(local!='/search'){
       this.props.history.push('/search');
       window.sessionStorage.searchkeywords = this.state.text;
+    }else{
+      window.sessionStorage.searchkeywords = this.state.text;
+      this.props.history.push('/search?v='+new Date().getTime());
     }
   }
   getSearchList(keyworks){
@@ -89,9 +93,11 @@ class SearchContainer extends Component {
         if (error) {
           requestError(payload);
         }
-        payload.forEach((da,i)=>{
-          da.extend =false;
-        });
+        if(payload.length<1){
+          this.setState({
+            nosearchdata:true
+          })
+        }
         this.setState({
           SearchSuggestList:payload
         })
@@ -104,9 +110,15 @@ class SearchContainer extends Component {
     this.setState({
       text: e.target.value
     })
-    setTimeout(function(){
-      _this.searchMin()
-    },0)
+    if( e.target.value==""){
+      this.setState({
+        isSearchWinShow:false
+      })
+    }else{
+      setTimeout(function(){
+        _this.searchMin()
+      },0)
+    }
   }
   handleClickOutside(evt) {
     const _this = this;
@@ -177,7 +189,7 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const { isShow, text, isSearchWinShow, SearchSuggestList} = this.state;
+    const { isShow, text, isSearchWinShow, SearchSuggestList,nosearchdata} = this.state;
     const {color} = this.props;
     const _this = this;
     let item, searchWin, contenttype_user,contenttype_service,contenttype_help;
@@ -203,7 +215,7 @@ class SearchContainer extends Component {
           }),
           contenttype_user = (
             <div className={searchWindom}>
-              <h3>通讯录</h3>
+              <h3>{item.typeName}</h3>
               <ul>
                 {lis}
               </ul>
@@ -217,14 +229,13 @@ class SearchContainer extends Component {
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={item2.serveIcon}/></div>
                   <div className={h_name}>
-                    <p><span dangerouslySetInnerHTML={createMarkup(item2.serveName)}></span></p>
-                    <p >{item2.serveCode}</p>
+                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item2.serveName)}></span></p>
                   </div>
                 </li>);
           }),
           contenttype_service= (
             <div className={searchWindom}>
-              <h3>服务</h3>
+              <h3>{item.typeName}</h3>
               <ul>
                 {lis2}
               </ul>
@@ -245,7 +256,7 @@ class SearchContainer extends Component {
           }),
           contenttype_help= (
             <div className={searchWindom}>
-              <h3>帮助</h3>
+              <h3>{item.typeName}</h3>
               <ul>
                 {lis3}
               </ul>
@@ -267,7 +278,7 @@ class SearchContainer extends Component {
           
           contenttype_other.push(
             <div className={searchWindom} key={index}>
-              <h3>{item.class}</h3>
+              <h3>{item.typeName}</h3>
               <ul>
                 {lis4}
               </ul>
@@ -291,11 +302,17 @@ class SearchContainer extends Component {
 
       searchWin = (
         <div className={`${SearchWin} ${isSearchWinShow? showheight : ''}`} >
+         
           {contenttype_user}
           {contenttype_service}
           {contenttype_help}
           {contenttype_other}
-          <div className={searchBtnAll} onClick={this.goSearchPage}>查看更多结果                                                                                                 </div>
+          {
+            nosearchdata ? (
+              <em>没有搜索结果</em>
+            ) : <div className={searchBtnAll} onClick={this.goSearchPage}>查看更多结果</div>
+          }
+          
         </div>
       )
     }

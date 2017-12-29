@@ -309,3 +309,31 @@ tabPane1,.tabPane2{
   color: #007ace;
   margin: 10px 0 0 185px;}
   .isdisplay { display: none}
+
+.paginationClass :global(.active) a, 
+.paginationClass :global(.active) a:focus, 
+.paginationClass :global(.active) a:hover, 
+.paginationClass :global(.active) span, 
+.paginationClass :global(.active) span:focus, 
+.paginationClass :global(.active) span:hover{
+    border-color: #fcedec;
+    background: #fcedec;
+    color: #e14c46;
+  }
+.paginationClass :global(.disabled) a, 
+.paginationClass :global(.disabled) a:focus, 
+.paginationClass :global(.disabled) a:hover, 
+{
+  background: rgba(9,44,66,.04);
+  }
+.paginationClass li a{ width: 28px;
+  height: 28px;
+  background: rgba(9,30,66,.04);
+  border-color: #e9e7e7;
+  border-radius: 4px;
+  line-height: 28px;
+  padding: 0;}
+.paginationClass li a:hover{border-color:#fcedec}
+.paginationClass li:first-child a,.paginationClass li:last-child a{ border-radius: 4px}
+.search_ts {color: rgba(13,20,36,.47); margin-top: 8px;margin-left: 20%;}
+.paginationClass{margin:0 0 27px 80px;}

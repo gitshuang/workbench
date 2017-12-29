@@ -27,15 +27,20 @@ class Search extends Component {
   }
 
   goBack() {
-    this.props.history.replace('');
+    if(this.props.location.pathname.indexOf('searchlist')>-1){
+      this.props.history.push('/search');
+    }else{
+      this.props.history.replace('');
+    }
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} >
+            <Header onLeftClick={ this.goBack.bind(this) } iconName={"search"} >
               <div>
                 <span>搜索结果页</span>
               </div>
