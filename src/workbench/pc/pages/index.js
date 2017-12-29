@@ -14,7 +14,7 @@ import UserCenterContainer from 'containers/userCenter';
 import rootActions from 'store/root/actions';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { initBridge } from 'public/jDiworkBridge';
-import componentTool from 'public/componentTools';
+import componentTool, { trigger } from 'public/componentTools';
 import IM from 'IM';
 
 const {
@@ -77,12 +77,15 @@ class Root extends Component {
     regMessageTypeHandler.call(this);
     initBridge.call(this);
   }
+  clickHandler() {
+    trigger('IM', 'imHide');
+  }
   render() {
     const { userInfoDisplay, quickServiceDisplay } = this.props;
     const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'icon-application'} />) : null;
     const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>) : null;
     return (
-      <div>
+      <div onClick={this.clickHandler}>
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}

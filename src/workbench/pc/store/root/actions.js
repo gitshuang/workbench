@@ -19,6 +19,8 @@ const {
   GET_LATEST_ACCESS_LIST,
   GET_PROMOTION_SERVICE_LIST,
   CHANGE_MESSAGE_TYPE,
+  SHOW_IM,
+  HIDE_IM,
 } = types;
 
 export default createActions({
@@ -34,4 +36,6 @@ export default createActions({
   CHANGE_QUICK_SERVICE_HIDDEN,
   POP_MESSAGE,
   CHANGE_MESSAGE_TYPE,
+  SHOW_IM,
+  HIDE_IM,
 );

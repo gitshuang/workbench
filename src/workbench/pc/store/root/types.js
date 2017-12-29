@@ -12,4 +12,6 @@ export default createTypes(
   'GET_LATEST_ACCESS_LIST',
   'GET_PROMOTION_SERVICE_LIST',
   'CHANGE_MESSAGE_TYPE',
+  'SHOW_IM',
+  'HIDE_IM',
 );

@@ -5,6 +5,7 @@ import { mergeReducers } from '@u';
 import { Loading, Notification } from 'tinper-bee';
 import Notice from 'components/notice';
 import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { trigger } from 'public/componentTools';
 import home from './home';
 import work from './work';
 import application from './application';
@@ -48,6 +49,8 @@ const {
   getLatestAccessList,
   getPromotionServiceList,
   changeMessageType,
+  showIm,
+  hideIm,
 } = actions;
 
 const defaultState = {
@@ -57,7 +60,8 @@ const defaultState = {
   messageList:[],
   messageShowNum:0,
   latestAccessList:[],
-  promotionServiceList:[]
+  promotionServiceList:[],
+  imShowed: false,
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -149,7 +153,21 @@ const reducer = handleActions({
   [changeMessageType]: (state, { payload: messageType }) => ({
     ...state,
     messageType,
-  })
+  }),
+  [showIm]: (state) => {
+    trigger('IM', 'imShow');
+    return {
+      ...state,
+      imShowed: true,
+    };
+  },
+  [hideIm]: (state) => {
+    trigger('IM', 'imHide');
+    return {
+      ...state,
+      imShowed: false,
+    };
+  },
 }, defaultState);
 
 export default function (state, action) {

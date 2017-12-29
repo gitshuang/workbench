@@ -7,7 +7,6 @@ import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
 import styles from './index.css';
 import SearchContainer from 'containers/search';
-import { trigger } from 'public/componentTools';
 const {
   lebraNavbar,
   rightBtn,
@@ -15,16 +14,21 @@ const {
 const {
   changeQuickServiceDisplay,
   changeQuickServiceHidden,
+  showIm,
+  hideIm,
 } = actions;
 
 @connect(
   mapStateToProps(
     'quickServiceDisplay',
     'messageType',
+    'imShowed',
   ),
   {
     changeQuickServiceHidden,
     changeQuickServiceDisplay,
+    showIm,
+    hideIm,
   }
 )
 class HeaderContainer extends Component {
@@ -40,10 +44,19 @@ class HeaderContainer extends Component {
       changeQuickServiceDisplay();
     }
   }
-  toggleIM = () => {
-    trigger('IM', 'imToggle');
+  toggleIM = (e) => {
+    e.stopPropagation();
+    const {
+      imShowed,
+      showIm,
+      hideIm,
+    } = this.props;
+    if (imShowed) {
+      hideIm();
+    } else {
+      showIm();
+    }
   }
-
   render() {
     const {
       children,
@@ -64,7 +77,7 @@ class HeaderContainer extends Component {
         <Icon title="快捷应用" type="application" style={{"color":color}}/>
       </div>,
       <div className={`tc ${rightBtn}`} onClick={this.toggleIM}>
-        <Icon title="智能通讯" type="clock" style={{"color":color}}/>
+        <Icon title="智能通讯" type="clock" style={{color}}/>
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>
     );
