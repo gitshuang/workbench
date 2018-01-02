@@ -1,4 +1,4 @@
-import { dispathMessageTypeHandler } from './regMessageTypeHandler';
+import { dispatchMessageTypeHandler } from './regMessageTypeHandler';
 
 const tools = {};
 const openInterface = {
@@ -18,7 +18,7 @@ class Tool {
   }
   dispatch(action, params) {
     if (openInterface[action]) {
-      dispathMessageTypeHandler({
+      dispatchMessageTypeHandler({
         type: action,
         detail: params,
       });
