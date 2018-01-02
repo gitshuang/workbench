@@ -67,16 +67,18 @@ class HeaderContainer extends Component {
       rightContent,
       quickServiceDisplay,
       messageType,
-      color
+      color,
+      imShowed,
     } = this.props;
     const rightArray = Children.toArray(rightContent);
     let appClass = quickServiceDisplay ? "active tc" : "tc"
+    let imClass = imShowed ? "active tc" : "tc"
     const rightContents = rightArray.concat(
       <SearchContainer color={color} />,
       <div className={`${appClass} ${rightBtn}`} style={{marginRight:"15px"}} onClick = {this.openService} >
         <Icon title="快捷应用" type="application" style={{"color":color}}/>
       </div>,
-      <div className={`tc ${rightBtn}`} onClick={this.toggleIM}>
+      <div className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{color}}/>
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>
