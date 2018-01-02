@@ -23,6 +23,7 @@ const {
   requestError,
   getServiceList,
   getMessage,
+  hideIm,
 } = rootActions;
 
 function timer(fn, time) {
@@ -51,6 +52,7 @@ function timer(fn, time) {
     requestError,
     getServiceList,
     getMessage,
+    hideIm,
   }
 )
 class Root extends Component {
@@ -77,8 +79,11 @@ class Root extends Component {
     regMessageTypeHandler.call(this);
     initBridge.call(this);
   }
-  clickHandler() {
-    trigger('IM', 'imHide');
+  clickHandler = () => {
+    const {
+      hideIm,
+    } = this.props;
+    hideIm();
   }
   render() {
     const { userInfoDisplay, quickServiceDisplay } = this.props;
