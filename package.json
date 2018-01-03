@@ -14,6 +14,7 @@
     "array.prototype.find": "^2.0.4",
     "babel-runtime": "^6.26.0",
     "bee-autocomplete": "^1.0.1",
+    "bee-breadcrumb": "^1.0.0",
     "bee-button": "^1.0.2",
     "bee-button-group": "^1.0.0",
     "bee-checkbox": "^1.0.1",
@@ -24,6 +25,7 @@
     "bee-loading": "^1.0.2",
     "bee-loading-state": "^1.0.0",
     "bee-menus": "^1.0.2",
+    "bee-message": "^1.0.1",
     "bee-modal": "^1.0.2",
     "bee-notification": "^1.0.0",
     "bee-pagination": "^1.0.2",
@@ -51,7 +53,6 @@
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
-    "tinper-bee": "^1.0.2",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
