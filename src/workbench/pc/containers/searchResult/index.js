@@ -41,11 +41,13 @@ import {
   searchPanel,
   um_content,
   icon_close,
+  nodataClass,
   paginationClass,
   isdisplay
 } from './style.css';
 import _default_icon from 'assets/image/wgt/default.png';
 import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
+import nodata from 'assets/image/wgt/nodata.png';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 const {getSearchMore, getSearch,getSearchOther} = searchActions;
@@ -352,6 +354,15 @@ class searchResult extends Component {
             </div>
             <div className={"um-content" + ` ${tabContent}`}>
             
+              {
+                this.state.SearchMoreList.length<1 ? (
+                  <div className={nodataClass}>
+                    <img src={nodata}/>
+                    <p>暂无相关内容</p>
+                  </div>
+                ) : null
+              }
+             
               <Tabs
                 defaultActiveKey={this.state.activetab}
                 activeKey={this.state.activetab}
