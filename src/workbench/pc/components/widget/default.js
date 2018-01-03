@@ -2,7 +2,7 @@ import React, {
   Component
 } from 'react';
 import PropTypes from 'prop-types';
-import { Loading } from 'tinper-bee';
+import Loading from 'bee-loading';
 import Icon from 'components/icon';
 import {
   widgetItem,

@@ -7,7 +7,7 @@ import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 /*  components 组件 */
 import Icon from 'components/icon';
-import {Message} from 'tinper-bee';
+import Message from 'bee-message';
 /*  containers 容器组件  */
 import TabsContainer from 'containers/tabs';
 import HeaderContainer from 'containers/header';

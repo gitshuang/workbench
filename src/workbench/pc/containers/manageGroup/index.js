@@ -16,7 +16,7 @@ import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
 import BeeIcon from 'bee-icon';
 import Checkbox from 'bee-checkbox';
-import {Message} from 'tinper-bee';
+import Message from 'bee-message';
 import WidgetList from 'containers/manageWidgetList';
 import {
   widgetTitle,

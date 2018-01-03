@@ -4,7 +4,7 @@ import React, {
 import ReactDOM from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
-import { Loading } from 'tinper-bee';
+import Loading from 'bee-loading';
 import Icon from 'components/icon';
 import BeeIcon from 'bee-icon';
 import Checkbox from 'bee-checkbox';
