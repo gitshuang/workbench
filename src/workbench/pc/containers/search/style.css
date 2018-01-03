@@ -8,7 +8,7 @@
   text-align: right;
 }
 .searchExtend {
-  border-bottom: 2px solid #878B94;
+  border-bottom: 1px solid #878B94;
 }
 .searchBtn {
   width:32px;
@@ -28,7 +28,7 @@
   top: 0;
   height: 32px;
   overflow: hidden;
-  border-bottom: 2px solid #878B94;
+  border-bottom: 1px solid #878B94;
   box-sizing: content-box;
 }
 .searchText {
@@ -100,14 +100,15 @@ border-radius: 3px ;
   -webkit-transition: all .5s;
   -moz-transition: all .5s;
   -ms-transition: all .5s;
+  max-height:425px
 }
-.SearchWin.showheight{ height: 325px;border: 1px solid rgba(78, 89, 104,.19);
+.SearchWin.showheight{ height: auto;border: 1px solid rgba(78, 89, 104,.19);
   box-shadow: 1px 2px 4px rgba(74, 81, 93,.25);
 }
 .SearchWin .searchWindom{float: left;
   width: 300px;
   margin-top: 13px;
-  padding-left:26px;
+  padding:0 0 45px 26px;
   text-align: left;}
 .SearchWin .searchWindom h3 {font-size:14px;
     font-family:'MicrosoftYaHei';

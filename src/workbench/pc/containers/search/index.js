@@ -162,6 +162,7 @@ class SearchContainer extends Component {
       this.setState({
         isShow: true,
       })
+      
     }
     // this.props.history.push('/application');;
   }
@@ -296,8 +297,9 @@ class SearchContainer extends Component {
             type="text"
             value={text}
             onChange={this.onChangeHandler}
-            placeholder="关键词"
+            placeholder="搜索服务"
             style={{color:color}}
+            autoFocus={true}
           />
         </div>
       ),
