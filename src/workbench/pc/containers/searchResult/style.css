@@ -311,7 +311,7 @@ tabPane1,.tabPane2{
   margin: 10px 0 0 185px;
 padding: 10px 0; 
 cursor: pointer}
-  .isdisplay { display: none}
+.isdisplay { display: none}
 
 .paginationClass :global(.active) a, 
 .paginationClass :global(.active) a:focus, 

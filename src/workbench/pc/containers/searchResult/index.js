@@ -93,6 +93,7 @@ class searchResult extends Component {
       activePage:1,
       pagesize:10,
       isShowPagination:true,
+      isShownodataClass:true,
     }
   }
   componentWillMount() {
@@ -123,6 +124,11 @@ class searchResult extends Component {
           activetab:payload.data[0].type
         })
         requestSuccess();
+        if(payload.data.length<1){
+          this.setState({
+            isShownodataClass:false,
+          })
+        }
         this.getSearchTpyeList(keywords,payload.data[0].type,1)
       });
   }
@@ -315,7 +321,7 @@ class searchResult extends Component {
     return lis
   }
   render() {
-    const { value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist } = this.state;
+    const { value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist,isShownodataClass } = this.state;
     let otherlist = []
     let Morelist = []
     const anifalse=false
@@ -353,16 +359,10 @@ class searchResult extends Component {
               </div>
             </div>
             <div className={"um-content" + ` ${tabContent}`}>
-            
-              {
-                this.state.SearchMoreList.length<1 ? (
-                  <div className={nodataClass}>
-                    <img src={nodata}/>
-                    <p>暂无相关内容</p>
-                  </div>
-                ) : null
-              }
-             
+              <div className={`${nodataClass} ${isShownodataClass? isdisplay : ''}`}>
+                <img src={nodata}/>
+                <p>暂无相关内容</p>
+              </div>
               <Tabs
                 defaultActiveKey={this.state.activetab}
                 activeKey={this.state.activetab}
