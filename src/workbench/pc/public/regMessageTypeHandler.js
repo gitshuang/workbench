@@ -45,14 +45,14 @@ export function regMessageTypeHandler() {
     });
   });
 }
-export function dispathMessageTypeHandler({ type, detail }) {
+export function dispatchMessageTypeHandler({ type, detail }) {
   if (type) {
     const event = new CustomEvent(type, {
       detail,
     });
     document.dispatchEvent(event);
   } else {
-    throw new Error('dispathMessageTypeHandler need type');
+    throw new Error('dispatchMessageTypeHandler need type');
   }
 }
 

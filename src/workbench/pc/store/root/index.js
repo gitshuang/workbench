@@ -4,7 +4,7 @@ import { handleActions } from 'redux-actions';
 import { mergeReducers } from '@u';
 import { Loading, Notification } from 'tinper-bee';
 import Notice from 'components/notice';
-import { dispathMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { trigger } from 'public/componentTools';
 import home from './home';
 import work from './work';
@@ -29,7 +29,7 @@ function addMessage(message) {
       duration: null,
       closable: false,
       onClose: () => {
-        dispathMessageTypeHandler({
+        dispatchMessageTypeHandler({
           type: 'popMessage'
         });
       }
