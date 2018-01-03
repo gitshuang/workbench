@@ -60,7 +60,8 @@ class serviceClassify extends Component {
       value: "搜索应用",
       current: undefined,
       listAll : [],
-      allApplicationList:[]
+      allApplicationList:[],
+      allLabelGroups:[],
     }
   }
 
@@ -81,12 +82,14 @@ class serviceClassify extends Component {
         if (error) {
           requestError(payload);
         }
-        payload.forEach((da,i)=>{
-          da.extend =false;
-        });
+        // payload.forEach((da,i)=>{
+        //   da.extend =false;
+        // });
         this.setState({
-          allApplicationList:payload
+          allApplicationList:payload.applications,
+          allLabelGroups:payload.labelGroups
         })
+        console.log(this.state.allLabelGroups);
         requestSuccess();
       });
     // }
@@ -98,12 +101,12 @@ class serviceClassify extends Component {
     })
   }
 
-  packUp = (data)=>{
-    data.extend = data.extend?false:true;
-    this.setState({
-      ...this.state
-    })
-  }
+  // packUp = (data)=>{
+  //   data.extend = data.extend?false:true;
+  //   this.setState({
+  //     ...this.state
+  //   })
+  // }
 
   btnSearch=()=>{
     // if(this.state.value != "搜索应用"){
@@ -155,28 +158,23 @@ class serviceClassify extends Component {
             </div>
             <Icon type={app.extend?"pull-down":"upward"} title={ app.extend ? '展开' : '收起' } onClick={()=>{this.packUp(app)}}></Icon>
           </header>
-          {
-            !app.extend?(
-              <hgroup className="um-box">
-                {
-                  service.map(({
-                    serveName,
-                    serveCode,
-                    serveIcon,
-                  }) => {
-                    return (
-                      <GoTo
-                        key={serveCode}
-                        name={serveName}
-                        icon={serveIcon}
-                        to={`/serve/${serveCode}`} />
-                    );
-                  })
-                }
-              </hgroup>
-            ):null
-          }
-
+          <hgroup className="um-box">
+            {
+              service.map(({
+                serveName,
+                serveCode,
+                serveIcon,
+              }) => {
+                return (
+                  <GoTo
+                    key={serveCode}
+                    name={serveName}
+                    icon={serveIcon}
+                    to={`/serve/${serveCode}`} />
+                );
+              })
+            }
+          </hgroup>
         </div>
       )
     })
@@ -188,7 +186,6 @@ class serviceClassify extends Component {
       current,
       allApplicationList,
     } = this.state;
-
     btns.push(
       <Button className={ current ? '' : 'active' }
         onClick={this.handleClick()}
@@ -196,7 +193,7 @@ class serviceClassify extends Component {
         全部
       </Button>
     );
-
+    
     allApplicationList.forEach(({ labelId, labelName }) =>{
       btns.push(
         <Button className={ current === labelId ? 'active' : '' }
@@ -208,7 +205,20 @@ class serviceClassify extends Component {
     });
     return btns;
   }
-
+  renderLabelGroups(){
+    const labelbtns = [];
+    const {allLabelGroups} = this.state;
+    allLabelGroups.map(({ labels,labelGroupName }) =>{
+      labelbtns.push(
+        <Button 
+          shape="border"
+          key={labels[0].labelId}>
+          {labelGroupName}
+        </Button> 
+      );
+    });
+    return labelbtns;
+  }
   //输入框修改data数据源
   inputOnChange = (e) => {
     this.setState({
@@ -233,8 +243,9 @@ class serviceClassify extends Component {
 
   render() {
     const { value, options, current } = this.state;
-    const btns = this.renderBtns();
-    const list = this.renderList();
+    // const btns = this.renderBtns();
+    // const list = this.renderList();
+    const labelGroups = this.renderLabelGroups();
 
     return (
       <div className={bg+" um-content um-vbox"}>
@@ -248,14 +259,17 @@ class serviceClassify extends Component {
                   <span className={search_tit} onClick={this.btnSearch}>搜索</span>
               </div>
             </div>
+            <ButtonGroup>
+              {labelGroups}
+            </ButtonGroup>
             <div className={um_content}>
-              <div className={menuBtnGroup}>
+              <div className={ menuBtnGroup}>
                 <ButtonGroup vertical>
-                  {btns}
+                  {/* {btns} */}
                 </ButtonGroup>
               </div>
               <div className={appContent+" um-bf1 um-content"}>
-                {list}
+                {/* {list} */}
               </div>
             </div>
           </div>
