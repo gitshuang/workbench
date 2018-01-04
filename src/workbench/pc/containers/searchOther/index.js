@@ -67,7 +67,6 @@ class searchOther extends Component {
     }
   }
   componentWillMount() {
-    console.log(this.props.match.params.type)
     const type = this.props.match.params.type
     const { keywords} = this.state
     this.getSearchTpyeList(keywords,type,1)

@@ -9,7 +9,6 @@ import BreadcrumbContainer from 'components/breadcrumb';
 import SearchResult from 'containers/searchResult';
 import routes from 'router';
 import {header,um_content,appBreadcrumb} from './style.css';
-
 const {requestStart, requestSuccess, requestError} = rootActions;
 // const {changeUserInfoDisplay, getWorkList} = homeActions;
 
@@ -21,7 +20,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{name:"搜索结果"}]
+      brm: [{name:"搜索结果"}],
     }
     this.goBack = this.goBack.bind(this);
   }
@@ -32,10 +31,24 @@ class Search extends Component {
     }else{
       this.props.history.replace('');
     }
+    this.setState({
+        brm:[{name:"搜索结果"}],
+      });
+  }
+  shouldComponentUpdate() {
+    if(this.props.location.pathname.indexOf('searchlist')>-1){
+      this.setState({
+        brm:[{name:"搜索结果"},{name:"全部结果"}],
+      });
+    }else{
+      this.setState({
+        brm:[{name:"搜索结果"}],
+      });
+    }
+    return true; 
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="um-win">
         <div className={header}>
@@ -43,6 +56,7 @@ class Search extends Component {
             <Header onLeftClick={ this.goBack.bind(this) } iconName={"search"} >
               <div>
                 <span>搜索结果</span>
+                
               </div>
             </Header>
             <div className={appBreadcrumb}>

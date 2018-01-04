@@ -205,8 +205,7 @@ class searchResult extends Component {
   }
 
   btnSearch=()=>{
-    if(this.state.value != "搜索人员信息、应用、服务及其他内容"){
-      console.log(this.state.value);
+    if(this.state.value != "搜索人员信息、应用、服务及其他内容" && this.state.value !=''){
       this.getSearchMoreList(this.state.value)
       window.sessionStorage.searchkeywords = this.state.value
     }
