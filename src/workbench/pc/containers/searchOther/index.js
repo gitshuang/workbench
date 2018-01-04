@@ -113,6 +113,7 @@ class searchOther extends Component {
       window.location.href=item.url
     }
   }
+ 
   Datetimechange(ts){
     const timeNow = parseInt(new Date().getTime() / 1000, 10);
     const d = timeNow - ts / 1000;

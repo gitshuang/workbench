@@ -125,7 +125,7 @@ class SearchContainer extends Component {
   }
   onKeyup = (e) => {
     e.keyCode === 13 && this.goSearchPage()
-}
+  }
   handleClickOutside(evt) {
     const _this = this;
     const { isShow } = _this.state;

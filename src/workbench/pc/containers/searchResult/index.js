@@ -77,7 +77,7 @@ class searchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "关键词",
+      value: "搜索人员信息、应用、服务及其他内容",
       isPackUp:false,
       current: undefined,
       activetab: '',
@@ -205,7 +205,7 @@ class searchResult extends Component {
   }
 
   btnSearch=()=>{
-    if(this.state.value != "关键词"){
+    if(this.state.value != "搜索人员信息、应用、服务及其他内容"){
       console.log(this.state.value);
       this.getSearchMoreList(this.state.value)
       window.sessionStorage.searchkeywords = this.state.value
@@ -236,7 +236,7 @@ class searchResult extends Component {
     }
   }
   inputOnFocus = (e) => {
-    let _value = e.target.value != "关键词"?e.target.value:"";
+    let _value = e.target.value != "搜索人员信息、应用、服务及其他内容"?e.target.value:"";
     this.setState({
         value:_value 
     });
@@ -245,7 +245,7 @@ class searchResult extends Component {
   inputOnBlur = (e) => {
     if(e.target.value == ""){
       this.setState({
-          value:"关键词"
+          value:"搜索人员信息、应用、服务及其他内容"
       });
     }
   }
@@ -282,7 +282,9 @@ class searchResult extends Component {
       console.log(item)
     }
   }
-
+  onKeyup = (e) => {
+    e.keyCode === 13 && this.btnSearch()
+  }
   gochatDetail(item) {
     return (e) => {
       e.stopPropagation();
@@ -360,6 +362,9 @@ class searchResult extends Component {
     })
 
     Searchotherlist.content.forEach((item,index) => {
+      if(item.content.length<1){
+        return false
+      }
       otherlist.push(<ul className={`${recently} ${clearfix}`} key={index}>
       <h3>{item.typeName}</h3>
       {this.otherlistLi(item)}
@@ -373,7 +378,7 @@ class searchResult extends Component {
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} value={this.state.value} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
+              <FormControl className={serviceSearch} value={this.state.value} onKeyDown={this.onKeyup} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
