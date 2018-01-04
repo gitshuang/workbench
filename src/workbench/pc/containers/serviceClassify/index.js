@@ -159,7 +159,7 @@ class serviceClassify extends Component {
       const {appIds} = labelsArr[currentTab][currentApp];//当前选中tab
       appIds.map((item)=>{
         lis.push(
-          <li key={appItems_obj[item].code}>
+          <li key={appItems_obj[item].code} onClick={ ()=>{this.goToLink(appItems_obj[item].code)} }>
             <div className={appItemImg}><img src={appItems_obj[item].icon}/></div>
             <div className={appItem_describe}>
               <p className={appItem_tit}>{appItems_obj[item].name}</p>
