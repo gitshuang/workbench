@@ -5,6 +5,7 @@ const openInterface = {
   openService: true,
   openDialog: true,
   onMessage: true,
+  hideIm: true,
 };
 class Tool {
   constructor(namespace) {
