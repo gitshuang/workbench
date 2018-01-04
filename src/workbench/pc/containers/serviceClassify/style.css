@@ -42,7 +42,8 @@
  	width:180px;
 	min-height:470px;
 	border:1px solid #DDE0E3;
-	border-radius:3px;
+  border-radius:3px;
+  margin-top:8px;
 	padding:20px 0;
 	box-sizing:border-box;
 }
@@ -52,7 +53,7 @@
 .menuBtnGroup :global(.u-button){
 	display:block;
 	width:178px;
-	padding:3px 0 3px 23px ;
+  padding:3px 0 3px 23px ;
 	color:#4A515D;
 	text-align: left;
 	border-radius:0;

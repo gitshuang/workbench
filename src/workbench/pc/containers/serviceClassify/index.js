@@ -67,7 +67,7 @@ class serviceClassify extends Component {
       currentTab: 0,
       currentLabel: 0,
       currentApp: 0,
-      labelsArr : [],
+      labelsArr : [], //存放labels
       allApplicationList:[],
       allLabelGroups:[],
     }
@@ -140,7 +140,7 @@ class serviceClassify extends Component {
 
   renderList(){
     const lis = [];
-    const appItems_obj = {};//应用列表map
+    const appItems_obj = {};//转换后的数据Map
     const {labelsArr,currentTab,currentApp,allApplicationList,allLabelGroups} = this.state; 
     if(allApplicationList.length>0){
       allApplicationList.map((
@@ -156,7 +156,7 @@ class serviceClassify extends Component {
             'code':applicationCode
           };
       })
-      const {appIds} = labelsArr[currentTab][currentApp];//当前选中tab
+      const {appIds} = labelsArr[currentTab][currentApp];//当前需要显示的appId序列
       appIds.map((item)=>{
         lis.push(
           <li key={appItems_obj[item].code} onClick={ ()=>{this.goToLink(appItems_obj[item].code)} }>
@@ -233,7 +233,7 @@ class serviceClassify extends Component {
   }
 
   render() {
-    const { value, options, current } = this.state;
+    const { value } = this.state;
     const btns = this.renderBtns();
     const list = this.renderList();
     const labelGroups = this.renderLabelGroups();
@@ -250,16 +250,19 @@ class serviceClassify extends Component {
                   <span className={search_tit} onClick={this.btnSearch}>搜索</span>
               </div>
             </div>
-            <div className={topTabBtns}>
-              <ButtonGroup>
-                {labelGroups}
-              </ButtonGroup>
-            </div>
+            
             <div className={um_content}>
-              <div className={ menuBtnGroup}>
-                <ButtonGroup vertical>
-                  {btns}
-                </ButtonGroup>
+              <div>
+                <div className={topTabBtns}>
+                  <ButtonGroup>
+                    {labelGroups}
+                  </ButtonGroup>
+                </div>
+                <div className={ menuBtnGroup}>
+                  <ButtonGroup vertical>
+                    {btns}
+                  </ButtonGroup>
+                </div>
               </div>
               <div className={appContent+" um-bf1 um-content"}>
                 <ul className={`${appsList} ${clearfix}`}>
