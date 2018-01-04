@@ -2,7 +2,7 @@ import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
 import { dialog } from 'components/pop';
 const { addBrm } = workActions;
-const { popMessage, changeMessageType } = rootActions;
+const { popMessage, changeMessageType, hideIm } = rootActions;
 
 import store from "store";
 
@@ -30,9 +30,13 @@ const handlers = {
   popMessage() {
     store.dispatch(popMessage());
   },
+  // for IM
   onMessage({ unreadTotalNum }) {
     store.dispatch(changeMessageType(!!unreadTotalNum));
-  }
+  },
+  hideIm() {
+    store.dispatch(hideIm());
+  },
 }
 
 const openServiceData = {};
