@@ -57,6 +57,14 @@
 	text-align: left;
 	border-radius:0;
 }
+.topTabBtns :global(.u-button){
+  width: 77px;
+  height: 32px;
+	background:rgba(9,30,66,0.04);
+  color:rgba(71,77,84,1);
+  border: none;
+  margin-right: 3px;
+}
 .menuBtnGroup :global(.u-button):hover,
 .wrap :global(.u-button-group-vertical .active){
 	background:rgba(239,239,239,1);
@@ -64,8 +72,8 @@
 }
 .topTabBtns :global(.u-button):hover,
 .wrap :global(.u-button-group .active){
-	background:rgba(239,239,239,1);
-	color:#E14C46;
+	background:rgba(252,237,236,1);
+	color:rgba(225,76,70,1);
 }
 .appContent{
 	padding-left: 12px;

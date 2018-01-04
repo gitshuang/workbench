@@ -65,7 +65,7 @@
             "11114444",
             "app_1"
             ],
-          "labelId": "label3",
+          "labelId": "label2",
           "labelName": "财务云"
         },
         {
@@ -74,7 +74,7 @@
             "app_3",
             "app_4"
             ],
-          "labelId": "label4",
+          "labelId": "label3",
           "labelName": "协同云"
         }
       ],
@@ -84,6 +84,16 @@
       "labels": [
         {
           "appIds": [
+          "app_1",
+          "app_2",
+          "app_3",
+          "app_4"
+          ],
+        "labelId": "label4",
+        "labelName": "沟通"
+        },
+        {
+          "appIds": [
           "11112222",
           "11114444",
           "app_1",
@@ -91,8 +101,8 @@
           "app_3",
           "app_4"
           ],
-        "labelId": "label2",
-        "labelName": "沟通"
+        "labelId": "label5",
+        "labelName": "领域二"
         }
       ],
       "labelGroupName": "领域"

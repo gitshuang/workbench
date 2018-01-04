@@ -65,7 +65,7 @@ class serviceClassify extends Component {
     this.state = {
       value: "搜索应用",
       currentTab: 0,
-      currentLabel: 'label1',
+      currentLabel: 0,
       currentApp: 0,
       labelsArr : [],
       allApplicationList:[],
@@ -97,7 +97,6 @@ class serviceClassify extends Component {
           allApplicationList:payload.applications,
           allLabelGroups:payload.labelGroups
         })
-        // console.log(allLabelGroups);
         requestSuccess();
       });
     // }
@@ -105,12 +104,14 @@ class serviceClassify extends Component {
 
   handleChangeTab = (tabId) => () => {
     this.setState({
-      currentTab: tabId
+      currentTab: tabId,
+      currentLabel:0,
+      currentApp:0
     })
   }
   handleChangeLabel = (labelId,index) => ()=>{
     this.setState({
-      currentLabel: labelId,
+      currentLabel: index,
       currentApp: index
     })
   }
@@ -140,7 +141,7 @@ class serviceClassify extends Component {
   renderList(){
     const lis = [];
     const appItems_obj = {};//应用列表map
-    const {labelsArr,currentTab,currentApp,allApplicationList,allLabelGroups} = this.state;
+    const {labelsArr,currentTab,currentApp,allApplicationList,allLabelGroups} = this.state; 
     if(allApplicationList.length>0){
       allApplicationList.map((
         {
@@ -149,9 +150,12 @@ class serviceClassify extends Component {
           applicationIcon,
           applicationCode
         })=>{
-          appItems_obj[applicationId] = {'name':applicationName,'icon':applicationIcon,'code':applicationCode};
-        })
-      
+          appItems_obj[applicationId] = {
+            'name':applicationName,
+            'icon':applicationIcon,
+            'code':applicationCode
+          };
+      })
       const {appIds} = labelsArr[currentTab][currentApp];//当前选中tab
       appIds.map((item)=>{
         lis.push(
@@ -174,17 +178,18 @@ class serviceClassify extends Component {
     allLabelGroups.map(({labels},index)=>{
       labelsArr.push(allLabelGroups[index].labels);
     })
+    
     {
       labelsArr[currentTab] ? 
       (
         labelsArr[currentTab].map(({labelId,labelName},index)=>{
           btns.push(
-            <Button className={ currentLabel === labelId ? 'active' : '' }
+            <Button className={ currentLabel === index ? 'active' : '' }
               onClick={this.handleChangeLabel(labelId,index)}
               key={labelId}>
               {labelName}
             </Button>
-          );
+          )
         })
       ):null
     }
