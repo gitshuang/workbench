@@ -24,12 +24,12 @@ export const getSearch = (
 }
 export const getSearchOther = (
   keywords,
-  type,
+  contentsize,
   page
 ) => {
   return get('/fullText/getOther', { 
     keywords:keywords,
-    type:type,
+    contentsize:contentsize,
     page:page
    });
 }

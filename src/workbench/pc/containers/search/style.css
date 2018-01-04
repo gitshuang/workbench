@@ -89,7 +89,7 @@
 .SearchWin {
   left: -236px;
   position: absolute;
-  top: 40px;
+  top: 30px;
   width:300px;
 height:0; 
 background:rgba(255,255,255,1);
@@ -100,10 +100,11 @@ border-radius: 3px ;
   -webkit-transition: all .5s;
   -moz-transition: all .5s;
   -ms-transition: all .5s;
-  max-height:425px
+  max-height:425px;
+  
 }
-.SearchWin.showheight{ height: auto;border: 1px solid rgba(78, 89, 104,.19);
-  box-shadow: 1px 2px 4px rgba(74, 81, 93,.25);
+.SearchWin.showheight{height:auto;  border: 1px solid rgba(78, 89, 104,.19);
+  box-shadow: 1px 2px 4px rgba(74, 81, 93,.25);top: 40px;min-height: 40px;
 }
 .SearchWin .searchWindom{float: left;
   width: 300px;

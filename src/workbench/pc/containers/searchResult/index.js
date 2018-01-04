@@ -94,6 +94,7 @@ class searchResult extends Component {
       pagesize:10,
       isShowPagination:true,
       isShownodataClass:true,
+      isShownodataClassEach:true,
     }
   }
   componentWillMount() {
@@ -128,6 +129,10 @@ class searchResult extends Component {
           this.setState({
             isShownodataClass:false,
           })
+        }else{
+          this.setState({
+            isShowPagination:true,
+          })
         }
         this.getSearchTpyeList(keywords,payload.data[0].type,1)
       });
@@ -151,12 +156,19 @@ class searchResult extends Component {
         if(payload.content.length>0){
           this.setState({
             isShowPagination:false,
+            isShownodataClassEach:true,
+            
+          })
+        }else{
+          this.setState({
+            isShowPagination:true,
+            isShownodataClassEach:false,
           })
         }
        requestSuccess();
       });
   }
-  getSearchOtherList(keywords,type,page){
+  getSearchOtherList(keywords,contentsize,page){
     const {
       requestStart,
       requestSuccess,
@@ -164,7 +176,7 @@ class searchResult extends Component {
       getSearchOther,
     } = this.props;
       requestStart();
-      getSearchOther(keywords,type,page).then(({error, payload}) => {
+      getSearchOther(keywords,contentsize,page).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         }
@@ -175,6 +187,12 @@ class searchResult extends Component {
         if(payload.content.length>0){
           this.setState({
             isShowPagination:false,
+            isShownodataClassEach:true,
+          })
+        }else{
+          this.setState({
+            isShowPagination:true,
+            isShownodataClassEach:false,
           })
         }
        requestSuccess();
@@ -212,7 +230,7 @@ class searchResult extends Component {
       activePage: eventKey
     });
     if(activetab=='other'){
-      this.getSearchOtherList(value,activetab,eventKey)
+      this.getSearchOtherList(value,5,eventKey)
     }else{
      this.getSearchTpyeList(value,activetab,eventKey)
     }
@@ -239,7 +257,7 @@ class searchResult extends Component {
       activePage:1
     })
     if(activetab=='other'){
-      this.getSearchOtherList(value,activetab,1)
+      this.getSearchOtherList(value,5,1)
 
     }else{
       this.getSearchTpyeList(value,activetab,1)
@@ -321,7 +339,7 @@ class searchResult extends Component {
     return lis
   }
   render() {
-    const { value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist,isShownodataClass } = this.state;
+    const { value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist,isShownodataClass,isShownodataClassEach } = this.state;
     let otherlist = []
     let Morelist = []
     const anifalse=false
@@ -334,6 +352,10 @@ class searchResult extends Component {
           className={tabPane1}
       >
           <ul className={recently}>{this.otherlistLi(dataList)}</ul>
+          <div className={`${nodataClass} ${isShownodataClassEach ? isdisplay : ''}`}>
+                <img src={nodata}/>
+                <p>暂无相关内容</p>
+              </div>
       </TabPane>)
     })
 
@@ -375,6 +397,10 @@ class searchResult extends Component {
                 this.state.hasOther ? (
                   <TabPane tab='其他内容' key="other" className={tabPane1}>
                     {otherlist}
+                    <div className={`${nodataClass} ${isShownodataClassEach? isdisplay : ''}`}>
+                      <img src={nodata}/>
+                      <p>暂无相关内容</p>
+                    </div>
                   </TabPane>
                 ) : null
               }

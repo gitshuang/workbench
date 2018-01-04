@@ -21,7 +21,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{name:"搜索结果页"}]
+      brm: [{name:"搜索结果"}]
     }
     this.goBack = this.goBack.bind(this);
   }
@@ -42,7 +42,7 @@ class Search extends Component {
           <div className="um-header">
             <Header onLeftClick={ this.goBack.bind(this) } iconName={"search"} >
               <div>
-                <span>搜索结果页</span>
+                <span>搜索结果</span>
               </div>
             </Header>
             <div className={appBreadcrumb}>

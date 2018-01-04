@@ -68,6 +68,7 @@ class SearchContainer extends Component {
     this.searchMin = this.searchMin.bind(this);
     this.goSearchPage = this.goSearchPage.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onKeyup = this.onKeyup.bind(this);
     this.goDetail = this.goDetail.bind(this);
     this.goemailDetail = this.goemailDetail.bind(this);
     this.gochatDetail = this.gochatDetail.bind(this);
@@ -122,6 +123,9 @@ class SearchContainer extends Component {
       },0)
     }
   }
+  onKeyup = (e) => {
+    e.keyCode === 13 && this.goSearchPage()
+}
   handleClickOutside(evt) {
     const _this = this;
     const { isShow } = _this.state;
@@ -153,7 +157,7 @@ class SearchContainer extends Component {
   search() {
     const { isShow, text, isSearchWinShow } = this.state;
     if (isShow && text) {
-     
+     this.goSearchPage();
     } else if (isShow) {
       this.setState({
         isShow: false,
@@ -201,6 +205,9 @@ class SearchContainer extends Component {
       return {__html: text};
     }
     SearchSuggestList.forEach((item,index)=>{
+      if(item.content.length<1){
+        return false
+      }
       switch (item.type)
       {
         case "user":
@@ -297,9 +304,10 @@ class SearchContainer extends Component {
             type="text"
             value={text}
             onChange={this.onChangeHandler}
-            placeholder="搜索服务"
+            placeholder="搜索人员信息、应用、服务及其他内容"
             style={{color:color}}
             autoFocus={true}
+            onKeyDown={this.onKeyup}
           />
         </div>
       ),

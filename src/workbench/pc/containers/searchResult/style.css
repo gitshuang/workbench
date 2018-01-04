@@ -123,7 +123,7 @@
 	cursor: pointer;
 }
 .nodataClass img{ width:100%}
-.nodataClass{     width: 20%;text-align: center; margin-top: 20px}
+.nodataClass{     width: 20%;text-align: center; margin-top: 20px;}
 .nodataClass p{ color:rgba(74,81,93,.47); margin-top: -20px}
 .link .icon{
   width:24px;
