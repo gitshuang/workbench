@@ -27,7 +27,13 @@ import {
   searchPanel,
   um_content,
   icon_close,
-  icon_open
+  icon_open,
+  topTabBtns,
+  appsList,
+  appItemImg,
+  appItem_describe,
+  appItem_tit,
+  appItem_con
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -58,8 +64,10 @@ class serviceClassify extends Component {
     super(props);
     this.state = {
       value: "搜索应用",
-      current: undefined,
-      listAll : [],
+      currentTab: 0,
+      currentLabel: 'label1',
+      currentApp: 0,
+      labelsArr : [],
       allApplicationList:[],
       allLabelGroups:[],
     }
@@ -89,18 +97,23 @@ class serviceClassify extends Component {
           allApplicationList:payload.applications,
           allLabelGroups:payload.labelGroups
         })
-        console.log(this.state.allLabelGroups);
+        // console.log(allLabelGroups);
         requestSuccess();
       });
     // }
   }
 
-  handleClick = (labelId) => () => {
+  handleChangeTab = (tabId) => () => {
     this.setState({
-      current: labelId,
+      currentTab: tabId
     })
   }
-
+  handleChangeLabel = (labelId,index) => ()=>{
+    this.setState({
+      currentLabel: labelId,
+      currentApp: index
+    })
+  }
   // packUp = (data)=>{
   //   data.extend = data.extend?false:true;
   //   this.setState({
@@ -123,96 +136,69 @@ class serviceClassify extends Component {
   goToLink =(path)=>{
     this.props.history.push('/app/'+path);
   }
-  renderList() {
-    let listAll = [];
-    const { current ,extend} = this.state;
-    const {
-      allApplicationList
-    } = this.state;
-    if (current) {
-      const label = allApplicationList.find(({
-        labelId,
-      }) => {
-        return labelId === current;
-      });
-      listAll = label.children;
-    } else {
-      allApplicationList.forEach(({children}) => {
-        listAll = listAll.concat(children);
+
+  renderList(){
+    const lis = [];
+    const appItems_obj = {};//应用列表map
+    const {labelsArr,currentTab,currentApp,allApplicationList,allLabelGroups} = this.state;
+    if(allApplicationList.length>0){
+      allApplicationList.map((
+        {
+          applicationId,
+          applicationName,
+          applicationIcon,
+          applicationCode
+        })=>{
+          appItems_obj[applicationId] = {'name':applicationName,'icon':applicationIcon,'code':applicationCode};
+        })
+      
+      const {appIds} = labelsArr[currentTab][currentApp];//当前选中tab
+      appIds.map((item)=>{
+        lis.push(
+          <li key={appItems_obj[item].code}>
+            <div className={appItemImg}><img src={appItems_obj[item].icon}/></div>
+            <div className={appItem_describe}>
+              <p className={appItem_tit}>{appItems_obj[item].name}</p>
+              <p className={appItem_con}>沟通协作一步到位</p>
+            </div>
+          </li>
+        )
       })
     }
-    return listAll.map((app) => {
-      const {
-        applicationIcon,
-        applicationName,
-        applicationCode,
-        service,
-      } = app;
-
-      return (
-        <div key={applicationCode} >
-          <header>
-            <div onClick={ ()=>{this.goToLink(applicationCode)} }>
-              <img src={applicationIcon}/>
-              <span>{ applicationName }</span>
-            </div>
-            <Icon type={app.extend?"pull-down":"upward"} title={ app.extend ? '展开' : '收起' } onClick={()=>{this.packUp(app)}}></Icon>
-          </header>
-          <hgroup className="um-box">
-            {
-              service.map(({
-                serveName,
-                serveCode,
-                serveIcon,
-              }) => {
-                return (
-                  <GoTo
-                    key={serveCode}
-                    name={serveName}
-                    icon={serveIcon}
-                    to={`/serve/${serveCode}`} />
-                );
-              })
-            }
-          </hgroup>
-        </div>
-      )
-    })
-;
+    return lis;
   }
   renderBtns() {
     const btns = [];
-    const {
-      current,
-      allApplicationList,
-    } = this.state;
-    btns.push(
-      <Button className={ current ? '' : 'active' }
-        onClick={this.handleClick()}
-        key="all">
-        全部
-      </Button>
-    );
-    
-    allApplicationList.forEach(({ labelId, labelName }) =>{
-      btns.push(
-        <Button className={ current === labelId ? 'active' : '' }
-          onClick={this.handleClick(labelId)}
-          key={labelId}>
-          {labelName}
-        </Button>
-      );
-    });
+    const { labelsArr,currentTab,currentLabel, allLabelGroups} = this.state;
+    labelsArr.length = 0;
+    allLabelGroups.map(({labels},index)=>{
+      labelsArr.push(allLabelGroups[index].labels);
+    })
+    {
+      labelsArr[currentTab] ? 
+      (
+        labelsArr[currentTab].map(({labelId,labelName},index)=>{
+          btns.push(
+            <Button className={ currentLabel === labelId ? 'active' : '' }
+              onClick={this.handleChangeLabel(labelId,index)}
+              key={labelId}>
+              {labelName}
+            </Button>
+          );
+        })
+      ):null
+    }
     return btns;
   }
   renderLabelGroups(){
     const labelbtns = [];
-    const {allLabelGroups} = this.state;
-    allLabelGroups.map(({ labels,labelGroupName }) =>{
+    const {currentTab,allLabelGroups} = this.state;
+    allLabelGroups.map(({labelGroupName },index) =>{
       labelbtns.push(
-        <Button 
+        <Button className={ currentTab === index ? 'active' : '' }
+          onClick={this.handleChangeTab(index)}
           shape="border"
-          key={labels[0].labelId}>
+          key={index}>
           {labelGroupName}
         </Button> 
       );
@@ -243,8 +229,8 @@ class serviceClassify extends Component {
 
   render() {
     const { value, options, current } = this.state;
-    // const btns = this.renderBtns();
-    // const list = this.renderList();
+    const btns = this.renderBtns();
+    const list = this.renderList();
     const labelGroups = this.renderLabelGroups();
 
     return (
@@ -259,17 +245,21 @@ class serviceClassify extends Component {
                   <span className={search_tit} onClick={this.btnSearch}>搜索</span>
               </div>
             </div>
-            <ButtonGroup>
-              {labelGroups}
-            </ButtonGroup>
+            <div className={topTabBtns}>
+              <ButtonGroup>
+                {labelGroups}
+              </ButtonGroup>
+            </div>
             <div className={um_content}>
               <div className={ menuBtnGroup}>
                 <ButtonGroup vertical>
-                  {/* {btns} */}
+                  {btns}
                 </ButtonGroup>
               </div>
               <div className={appContent+" um-bf1 um-content"}>
-                {/* {list} */}
+                <ul className={`${appsList} ${clearfix}`}>
+                  {list}
+                </ul>
               </div>
             </div>
           </div>

@@ -58,6 +58,24 @@
             ],
           "labelId": "label1",
           "labelName": "全部"
+        },
+        {
+          "appIds": [
+            "11112222",
+            "11114444",
+            "app_1"
+            ],
+          "labelId": "label3",
+          "labelName": "财务云"
+        },
+        {
+          "appIds": [
+            "app_2",
+            "app_3",
+            "app_4"
+            ],
+          "labelId": "label4",
+          "labelName": "协同云"
         }
       ],
       "labelGroupName": "类别"
