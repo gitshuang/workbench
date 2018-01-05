@@ -202,7 +202,6 @@ class SelectWidgetList extends Component {
         da.active = false;
     })
     da.active = true;
-    debugger;
     this.setState({
       labelGroups:this.state.labelGroups,
       labels,
@@ -233,13 +232,11 @@ class SelectWidgetList extends Component {
   }
 
   btnUp=(data)=>{
-    debugger;
     this.state.allAppList.forEach((da,i)=>{
       if(da.applicationId == data.applicationId){
         da.extend = data.extend?false:true;
       }
     });
-    debugger;
     this.setState({
       ...this.state.allAppList
     });
