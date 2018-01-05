@@ -261,10 +261,12 @@ class SelectWidgetList extends Component {
       const {service:{serveId: id, serveName: name},widgetTemplate:{serviceType}} = item;
       let _b = item.extend;
       if(serviceType=="2"){
-        item.serveId = guid();
+        item.serveId = item.applicationId;
         item.serveName = item.applicationName;
         item.serviceType = "2";//2应用
         item.serveIcon = item.applicationIcon;
+        item.serveCode = item.applicationCode;
+        item.widgettemplateId = item.widgetTemplate.widgettemplateId;
         // item.extend = false;
         list.push(<ServerItem  key={`widget-title-${i}-${item.serveId}`} onChange={this.onChange} data={item} packUp={this.btnUp} /> );
       }
