@@ -3,9 +3,9 @@
         {
             "applicationName": "结算中心",
             "promotionServeId": "asdfasdfas223",
-            "serveIcon": "http://dummyimage.com/20x20",
-            "serveName": "友空间",
-            "serveUrl": "http://www.baidu.com",
+            "serviceIcon": "http://dummyimage.com/20x20",
+            "serviceName": "友空间",
+            "serviceUrl": "http://www.baidu.com",
             "accessTime":"12分钟"
         }
     ],

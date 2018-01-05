@@ -43,7 +43,7 @@ const routes = [
     ]
   },
   {
-    path: '/:type(app|serve)/:code/:subcode?',
+    path: '/:type(app|service)/:code/:subcode?',
     component: Work,
     exact: true,
   },

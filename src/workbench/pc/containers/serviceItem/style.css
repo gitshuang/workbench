@@ -1,4 +1,4 @@
-.serverItem{
+.serviceItem{
     width:160px;
     height:52px; 
     float: left;
@@ -17,16 +17,16 @@
     font-size: 14px;
     border: 1px solid rgba(78,89,104,0.19);
 }
-.serverItemTitle{
+.serviceItemTitle{
   width: 100%;    
   border-bottom: 1px solid rgba(13,20,36,0.1);
   display: -webkit-box;
 }
-.serverItemTitle .item_li_top{
+.serviceItemTitle .item_li_top{
   -webkit-box-flex: 11;
   height: 40px;
 }
-.serverItemTitle .item_footer{
+.serviceItemTitle .item_footer{
   -webkit-box-flex: 1;
   text-align: left;
   width: 50px;

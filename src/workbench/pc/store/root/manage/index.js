@@ -146,17 +146,17 @@ const reducer = handleActions({
     let currentSelectWidgetMap = state.currentSelectWidgetMap;
     for(let da of dataList){
       da.selected = "1";
-      let server = currentSelectWidgetMap[da.serveId];
-      if(server){
-        currentSelectWidgetMap[da.serveId].selected = da.selected;
+      let service = currentSelectWidgetMap[da.serviceId];
+      if(service){
+        currentSelectWidgetMap[da.serviceId].selected = da.selected;
       }else{
-        currentSelectWidgetMap[da.serveId] = da;
+        currentSelectWidgetMap[da.serviceId] = da;
       }
       let newCarObn = {...defaultCar};
-      newCarObn.widgetId = da.serveId;
-      newCarObn.widgetName = da.serveName;
-      newCarObn.serveCode = da.serveCode;
-      newCarObn.icon = da.serveIcon;
+      newCarObn.widgetId = da.serviceId;
+      newCarObn.widgetName = da.serviceName;
+      newCarObn.serviceCode = da.serviceCode;
+      newCarObn.icon = da.serviceIcon;
       newCarObn.size = da.widgetTemplate.size;
       newCar.push(newCarObn);
     }
@@ -185,8 +185,8 @@ const reducer = handleActions({
       payload.applications.forEach((da,i)=>{
         applicationsMap[da.applicationId] = da;
         let  _serviceMap = {};
-        da.service.forEach((serverDa,j)=>{
-          _serviceMap[serverDa.serveId] = serverDa;
+        da.service.forEach((serviceDa,j)=>{
+          _serviceMap[serviceDa.serviceId] = serviceDa;
           da.serviceMap = _serviceMap;
         })
       });
@@ -202,22 +202,22 @@ const reducer = handleActions({
   },
   [setCurrentSelectWidgetMap]: (state, { payload, error }) => {
     payload.forEach((da,i)=>{
-      let _server = state.applicationsMap[da.serveId];
-      if(_server){
-        _server.selected = "3";
+      let _service = state.applicationsMap[da.serviceId];
+      if(_service){
+        _service.selected = "3";
       }
     })
     // let {data,currentAppId,selected} = payload;
     // if(currentAppId == "all"){
     //   for(let key in state.applicationsMap){
     //     let _da = state.applicationsMap[key];
-    //     let _server = _da.service.find((server)=>server.serveId === data.serveId)
+    //     let _server = _da.service.find((server)=>server.serviceId === data.serviceId)
     //     _server?_server.selected = selected:"";
     //   }
     // }else{
     //   let currentApp = state.applicationsMap[currentAppId];
     //   if(currentApp){
-    //     let _server = currentApp_da.service.find((server)=>server.serveId === data.serveId)
+    //     let _server = currentApp_da.service.find((server)=>server.serviceId === data.serviceId)
     //     _server?_server.selected = selected:"";
     //   }
     // }
@@ -579,10 +579,10 @@ const reducer = handleActions({
     manageList,
     currEditonlyId:""
   }),
-  [addServe]: (state, { payload: { index: groupIndex, serve } }) => {
+  [addServe]: (state, { payload: { index: groupIndex, service } }) => {
     const { manageList } = state;
     const group = manageList[groupIndex];
-    group.children = group.children.concat(serve);
+    group.children = group.children.concat(service);
     manageList.splice(groupIndex, 1, {
       ...group,
     });

@@ -79,19 +79,19 @@ const actions = createActions(
         }
         return result;
       });
-      const { serveCode } = newTabs[newCurIndex];
+      const { serviceCode } = newTabs[newCurIndex];
       dispatch(setTabs(newTabs));
-      return serveCode;
+      return serviceCode;
     },
-    [UNSHIFT_TAB]: (serveCode) => (dispatch, getState) => {
+    [UNSHIFT_TAB]: (serviceCode) => (dispatch, getState) => {
       const state = getState();
       const {
         setTabs,
       } = actions;
       const { tabs: oldTabs, menus } = state.work;
       let index = -1;
-      const curTabIndex = oldTabs.findIndex(({ serveCode: tabServeCode }, i) => {
-        return serveCode === tabServeCode;
+      const curTabIndex = oldTabs.findIndex(({ serviceCode: tabServiceCode }, i) => {
+        return serviceCode === tabServiceCode;
       });
       const curTab = oldTabs[curTabIndex];
       const other = oldTabs.slice(0, curTabIndex).concat(oldTabs.slice(curTabIndex + 1));

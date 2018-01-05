@@ -71,7 +71,7 @@ class Pin extends Component {
     const {
       current: {
         title,
-        serveCode,
+        serviceCode,
       },
       setPinAdd,
       requestStart,
@@ -80,7 +80,7 @@ class Pin extends Component {
     } = this.props;
 
     setPinAdd(
-      serveCode,
+      serviceCode,
       title,
       parentId,
     ).then(({ error, payload }) => {

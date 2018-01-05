@@ -5,7 +5,7 @@ import Icon from 'components/icon';
 import ButtonGroup from 'bee-button-group';
 import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
-import ServerItem from 'containers/serverItem';
+import ServiceItem from 'containers/serviceItem';
 import FormControl from 'bee-form-control';
 import {ButtonBrand,ButtonDefaultAlpha,ButtonDefaultLine} from 'components/button';
 
@@ -14,7 +14,7 @@ import { mapStateToProps,guid} from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {getAllServesByLabelGroup,addDesk,setCurrentSelectWidgetMap,deleteFolder} = manageActions;
+const {getAllServicesByLabelGroup,addDesk,setCurrentSelectWidgetMap,deleteFolder} = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 import { select_widget_list,
@@ -31,13 +31,13 @@ panel_left,footer_btn,title,search_tit,active,btn_active
 
     'applicationsMap',
     'selectWidgetItem',
-    'allServesByLabelGroup',
+    'allServicesByLabelGroup',
     {
       namespace: 'manage',
     }
   ),
   {
-    getAllServesByLabelGroup,
+    getAllServicesByLabelGroup,
     setCurrentSelectWidgetMap,
     deleteFolder,
     addDesk,
@@ -73,16 +73,16 @@ class SelectWidgetList extends Component {
     this.getServices("");
   }
 
-  getServices(serveName){
+  getServices(serviceName){
     const {selectWidgetItem} = this.props;
     if(!selectWidgetItem){
-      let payload = this.props.allServesByLabelGroup;
+      let payload = this.props.allServicesByLabelGroup;
       this.setThisState(payload);
       return;
     };
     let self = this;
-    const { requestError, requestSuccess, getAllServesByLabelGroup } = this.props;
-    getAllServesByLabelGroup(serveName).then(({error, payload}) => {
+    const { requestError, requestSuccess, getAllServicesByLabelGroup } = this.props;
+    getAllServicesByLabelGroup(serviceName).then(({error, payload}) => {
       if (error) {
         requestError(payload);
       }
@@ -116,7 +116,7 @@ class SelectWidgetList extends Component {
   
   onChange=(data,sele)=>{
     data.selected = sele;
-    let index = this.state.selectedList.findIndex(da=>da.serveId == data.serveId);
+    let index = this.state.selectedList.findIndex(da=>da.serviceId == data.serviceId);
     if(index == -1 && sele == "3"){
       this.state.selectedList.push(data);
     }else{
@@ -212,7 +212,7 @@ class SelectWidgetList extends Component {
 
   onBtnOnclick =(data)=>{
     const {applicationsMap} = this.props;
-    const {allServesByLabelGroup:{applications}} = this.props;
+    const {allServicesByLabelGroup:{applications}} = this.props;
     let _data = [];
     if(data == "all"){
       applications.forEach((da,i)=>{
@@ -255,17 +255,17 @@ class SelectWidgetList extends Component {
 
     let list = [];
     allAppList.forEach((item, i) => {
-      const {service:{serveId: id, serveName: name},widgetTemplate:{serviceType}} = item;
+      const {service:{serviceId: id, serviceName: name},widgetTemplate:{serviceType}} = item;
       let _b = item.extend;
       if(serviceType=="2"){
-        item.serveId = item.applicationId;
-        item.serveName = item.applicationName;
+        item.serviceId = item.applicationId;
+        item.serviceName = item.applicationName;
         item.serviceType = "2";//2应用
-        item.serveIcon = item.applicationIcon;
-        item.serveCode = item.applicationCode;
+        item.serviceIcon = item.applicationIcon;
+        item.serviceCode = item.applicationCode;
         item.widgettemplateId = item.widgetTemplate.widgettemplateId;
         // item.extend = false;
-        list.push(<ServerItem  key={`widget-title-${i}-${item.serveId}`} onChange={this.onChange} data={item} packUp={this.btnUp} /> );
+        list.push(<ServerItem  key={`widget-title-${i}-${item.serviceId}`} onChange={this.onChange} data={item} packUp={this.btnUp} /> );
       }
       item.service.forEach((da,i)=>{
         da.extend = _b;

@@ -115,7 +115,7 @@ export default class Work extends Component {
         if (!subcode) {
           const {
             curServe: {
-              serveCode: subcode
+              serviceCode: subcode
             },
           } = payload;
           history.replace(`/${type}/${code}/${subcode}`);
@@ -184,7 +184,7 @@ export default class Work extends Component {
   pinDisplayFn = ()=> {
     const {
       current: {
-        serveCode,
+        serviceCode,
         },
       pinDisplayBlock,
       pinType,
@@ -196,7 +196,7 @@ export default class Work extends Component {
       } = this.props;
     if (pinType) {
       requestStart();
-      setPinCancel(serveCode).then(({error, payload}) => {
+      setPinCancel(serviceCode).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         }

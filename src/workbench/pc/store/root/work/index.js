@@ -19,9 +19,9 @@ const {
   delTab,
   addBrm,
   returnDefaultState,
-  getServeInfoWithDetail,
+  getServiceInfoWithDetail,
   setTabs,
-  changeServe,
+  changeService,
   setProductInfo,
 } = actions;
 
@@ -30,11 +30,11 @@ const defaultState = {
   expandedSidebar: false,
   current:{
     title: '',
-    serveCode: '',
-    serveId: '',
+    serviceCode: '',
+    serviceId: '',
     hasRelationFunc: true,
     relationUsers: [],
-    relationServes: [],
+    relationServices: [],
   },
   // 页面布局类型
   type: 1,
@@ -66,9 +66,9 @@ const reducer = handleActions({
        name:data
     })
   }),
-  [changeServe]: (state, { payload: code }) => {
+  [changeService]: (state, { payload: code }) => {
     const { menus, tabs } = state;
-    const menuPath = findPath(menus, 'children', 'serveCode', code);
+    const menuPath = findPath(menus, 'children', 'serviceCode', code);
     const current = menuPath.slice(-1)[0];
     if (!current) {
       return state;
@@ -76,11 +76,11 @@ const reducer = handleActions({
     const {
       menuItemId: currentId,
       menuItemName: name,
-      serve: {
+      service: {
         url,
       },
-      serveId,
-      serveCode,
+      serviceId,
+      serviceCode,
     } = current;
     const curTab = tabs.find(({id}) => id === currentId);
     const brm = menuPath.map(({menuItemName: name}) => ({name}));
@@ -92,16 +92,16 @@ const reducer = handleActions({
           hasRelationFunc: state.current.hasRelationFunc,
           menuItemId: currentId,
           title: name,
-          serveCode,
-          serveId,
+          serviceCode,
+          serviceId,
           url: curTab.location,
         },
         brm
       }
     } else {
       const location = appendSearchParam(url, {
-        ...getOpenServiceData(serveCode),
-        serveCode,
+        ...getOpenServiceData(serviceCode),
+        serviceCode,
       });
       return {
         ...state,
@@ -110,14 +110,14 @@ const reducer = handleActions({
           hasRelationFunc: state.current.hasRelationFunc,
           menuItemId: currentId,
           title: name,
-          serveCode,
-          serveId,
+          serviceCode,
+          serviceId,
           url: location,
         },
         brm,
         tabs: [{
           id: currentId,
-          serveCode,
+          serviceCode,
           name,
           location,
         }].concat(tabs)
@@ -166,22 +166,22 @@ const reducer = handleActions({
     ...state,
     tabs,
   }),
-  [getTitleService]: (state, { payload: serveInfo, error }) => {
+  [getTitleService]: (state, { payload: serviceInfo, error }) => {
     if (error) {
       return state;
     }
     const {
       hasWidget,
-      relationServes,
+      relationServices,
       relationUsers,
-      serveId,
-    } = serveInfo;
+      serviceId,
+    } = serviceInfo;
     const {
       current,
     } = state;
 
     let hasRelationFunc = true;
-    if (!(relationServes && relationServes.length) &&
+    if (!(relationServices && relationServices.length) &&
         !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
@@ -192,7 +192,7 @@ const reducer = handleActions({
         ...current,
         hasRelationFunc,
         relationUsers,
-        relationServes,
+        relationServices,
       },
     };
   },
@@ -205,8 +205,8 @@ const reducer = handleActions({
         hasTopNav: widthBrm,
         menuItems: menus,
       },
-      curServe: {
-        serveName: title,
+      curService: {
+        serviceName: title,
         hasWidget: pinType,
       },
     } = productInfo;

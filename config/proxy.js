@@ -1,12 +1,12 @@
 var path = require('path')
 var projectId = '29035'
 var api = [
-  '/serve/getAllServesGroupByLabels',
+  '/service/getAllServicesGroupByLabels',
   '/application/getAllApps',
   '/desktop/getdeskTop',
-  '/serve/getServeInfoByServeCode',
-  '/serve/getServeInfoByAppCode',
-  '/serve/getAllAppsGroupByLabels',
+  '/service/getServiceInfoByServiceCode',
+  '/service/getServiceInfoByAppCode',
+  '/service/getAllAppsGroupByLabels',
 
   '/user/setCutUser',
 
@@ -24,11 +24,11 @@ var api = [
 ]
 
 var rapApi = [
-    // '/serve/getAllServesGroupByLabels'
+    // '/service/getAllServicesGroupByLabels'
   '/user/getUserInfo',
-  '/widget/deleteByServeCode',
+  '/widget/deleteByServiceCode',
   '/widget/create',
-  '/serve/getServeInfoWithDetail',
+  '/service/getServiceInfoWithDetail',
   '/widget/getFolders',
   '/desktop/update',
 ];

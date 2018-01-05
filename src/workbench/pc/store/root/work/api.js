@@ -5,20 +5,20 @@ export const getProductInfo = (
   type
 ) => {
   if (type === 'app') {
-    return get('/serve/getServeInfoByAppCode', {
+    return get('/service/getServiceInfoByAppCode', {
       appCode: code,
     });
   }
-  return get('/serve/getServeInfoByServeCode', {
-    serveCode: code,
+  return get('/service/getServiceInfoByServiceCode', {
+    serviceCode: code,
   });
 }
-export const getTitleService = (serveCode) => {
-  return get('/serve/getServeInfoWithDetail', { serveCode });
+export const getTitleService = (serviceCode) => {
+  return get('/service/getServiceInfoWithDetail', { serviceCode });
 }
-export const setPinCancel = serveCode => post('/widget/deleteByServeCode', { serveCode });
+export const setPinCancel = serviceCode => post('/widget/deleteByServiceCode', { serviceCode });
 export const setPinAdd = (
-  serveCode,
+  serviceCode,
   widgetName,
   parentId,
   icon,
@@ -26,7 +26,7 @@ export const setPinAdd = (
 ) => post('/widget/create', {
   icon,
   parentId,
-  serveCode,
+  serviceCode,
   templateId,
   type: 3,
   widgetName,

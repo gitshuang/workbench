@@ -113,11 +113,11 @@ class TabsContainer extends Component {
       moreIsShow: false,
     });
   }
-  unshift(serveCode) {
-    this.props.unshiftTab(serveCode);
-    this.select(serveCode);
+  unshift(serviceCode) {
+    this.props.unshiftTab(serviceCode);
+    this.select(serviceCode);
   }
-  select(serveCode) {
+  select(serviceCode) {
     const {
       history,
       match: {
@@ -127,7 +127,7 @@ class TabsContainer extends Component {
         },
       },
     } = this.props;
-    history.push(`/${type}/${code}/${serveCode}`);
+    history.push(`/${type}/${code}/${serviceCode}`);
   }
   del(id) {
     const {
@@ -144,8 +144,8 @@ class TabsContainer extends Component {
     return (e) => {
       e.stopPropagation();
       if (tabs.length > 1) {
-        const serveCode = delTab(id);
-        history.replace(`/${type}/${code}/${serveCode}`);
+        const serviceCode = delTab(id);
+        history.replace(`/${type}/${code}/${serviceCode}`);
       } else {
         history.replace('');
       }
@@ -199,10 +199,10 @@ class TabsContainer extends Component {
     const moreListElm = moreIsShow ? (
       <ul className={moreList} >
         {
-          mores.map(({ id, name, serveCode }) => (
+          mores.map(({ id, name, serviceCode }) => (
             <li
               key={id}
-              onClick={this.unshift.bind(this, serveCode)}
+              onClick={this.unshift.bind(this, serviceCode)}
               className={cs(
                 more,
                 {
@@ -248,10 +248,10 @@ class TabsContainer extends Component {
       <div ref="tabsArea" className={`${tabsArea} ${ipad_tabsArea}`} style={_width} >
         <ul className={tabsList}  >
           {
-            tabs.map(({ id, name, serveCode }) => (
+            tabs.map(({ id, name, serviceCode }) => (
               <li
                 key={id}
-                onClick={this.select.bind(this, serveCode)}
+                onClick={this.select.bind(this, serviceCode)}
                 className={cs(
                   tab,
                   {

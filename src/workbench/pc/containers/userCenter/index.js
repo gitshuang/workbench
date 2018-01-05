@@ -287,7 +287,7 @@ class UserInfoContainer extends Component {
 
     let _li = [];//最近使用列表
     this.state.dataList.forEach((da,i)=>{
-      let applicationName = da.serve.application.applicationName;
+      let applicationName = da.service.application.applicationName;
         _li.push(<li key={i}>
           <div className={usedIcon}><img src={img1} /></div>
           <div className={`${used} ${clearfix}`}>
@@ -296,7 +296,7 @@ class UserInfoContainer extends Component {
                 <div className={usedTit}>{applicationName}</div>
                 <div className={lastTime}>{da.accessTime}</div>
               </div>
-              <div className={usedService}>{da.serve.serveName}</div>
+              <div className={usedService}>{da.service.serviceName}</div>
             </div>
           </div>
         </li>);
@@ -307,7 +307,7 @@ class UserInfoContainer extends Component {
       lis.push(<li key={index} className={(index+1)%4 == 0?line_end:null}>
           <div className={serviceImg}>
             <section><img src={img1}/></section>
-            <div className={serviceName}>{item.serveName}</div>
+            <div className={serviceName}>{item.serviceName}</div>
           </div>
         </li>);
     })
