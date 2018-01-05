@@ -18,10 +18,10 @@ const handlers = {
   openDialog(options) {
     dialog(options);
   },
-  postDataToServe() {
+  postDataToService() {
 
   },
-  checkServeOpen() {
+  checkServiceOpen() {
 
   },
   addBrm(data) {

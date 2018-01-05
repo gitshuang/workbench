@@ -3,7 +3,7 @@ import types from './types';
 import {
   setManageList,
   getManageList,
-  getAllServesByLabelGroup
+  getAllServicesByLabelGroup
 } from './api';
 
 const {
@@ -50,7 +50,7 @@ const actions = createActions(
   {
     [SET_MANAGE_LIST]: setManageList,
     [GET_MANAGE_LIST]: getManageList,
-    [GET_ALL_SERVES_BY_LABEL_GROUP]: getAllServesByLabelGroup,
+    [GET_ALL_SERVES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
   },
   BATCH_DELECT,
   ADD_GROUP,

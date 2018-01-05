@@ -101,10 +101,10 @@ const actions = createActions(
     [SET_CURRENT]: (code) => (dispatch, getState) =>{
       const state = getState();
       const {
-        changeServe,
+        changeService,
         getTitleService,
       } = actions;
-      dispatch(changeServe(code));
+      dispatch(changeService(code));
       dispatch(getTitleService(code));
     },
   },

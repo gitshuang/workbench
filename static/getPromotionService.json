@@ -2,7 +2,7 @@
     "data": [
         {
             "applicationName": "结算中心",
-            "promotionServeId": "asdfasdfas223",
+            "promotionServiceId": "asdfasdfas223",
             "serviceIcon": "http://dummyimage.com/20x20",
             "serviceName": "友空间",
             "serviceUrl": "http://www.baidu.com",

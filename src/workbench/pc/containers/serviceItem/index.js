@@ -64,4 +64,4 @@ class ServiceItem extends Component {
   }
 }
 
-export default ServerItem;
+export default ServiceItem;

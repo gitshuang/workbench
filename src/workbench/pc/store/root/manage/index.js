@@ -24,12 +24,12 @@ const {
   deleteFolder,
   renameFolder,
   splitFolder,
-  addServe,
-  delectServe,
-  moveServe,
+  addService,
+  delectService,
+  moveService,
   openFolder,
   closeFolder,
-  getAllServesByLabelGroup,
+  getAllServicesByLabelGroup,
   setCurrentSelectWidgetMap,
   openBatchMove,
   closeBatchMove,
@@ -62,7 +62,7 @@ const defaultState = {
 
   applicationsMap:{},
   selectWidgetItem:true,
-  allServesByLabelGroup:{}
+  allServicesByLabelGroup:{}
 };
 
 const findTreeById = (data, curId) => {
@@ -177,7 +177,7 @@ const reducer = handleActions({
       currentSelectWidgetMap//备份本次勾选了哪些磁贴
     }
   },
-  [getAllServesByLabelGroup]: (state, { payload, error }) => {
+  [getAllServicesByLabelGroup]: (state, { payload, error }) => {
     if (error) {
       return state;
     } else {
@@ -194,7 +194,7 @@ const reducer = handleActions({
       return {
         ...state,
         applicationsMap,
-        allServesByLabelGroup:payload,
+        allServicesByLabelGroup:payload,
         // selectWidgetList: payload,
         // currEditonlyId:""
       };
@@ -579,7 +579,7 @@ const reducer = handleActions({
     manageList,
     currEditonlyId:""
   }),
-  [addServe]: (state, { payload: { index: groupIndex, service } }) => {
+  [addService]: (state, { payload: { index: groupIndex, service } }) => {
     const { manageList } = state;
     const group = manageList[groupIndex];
     group.children = group.children.concat(service);
@@ -593,7 +593,7 @@ const reducer = handleActions({
       currEditonlyId:""
     }
   },
-  [delectServe]: (state, { payload: {index,folder,widgetId} }) => {
+  [delectService]: (state, { payload: {index,folder,widgetId} }) => {
     let manageList = state.manageList;
     let curDisplayFolder = state.curDisplayFolder;
 
@@ -634,7 +634,7 @@ const reducer = handleActions({
       // manageList: [...manageList],
     }
   },
-  [moveServe]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType,timeFlag} }) => {
+  [moveService]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType,timeFlag} }) => {
     let manageAllList = state.manageList;
     let sourceData= preParentId && findById(manageAllList,preParentId); //拖拽前 父级源对象
     let targetData = parentId && findById(manageAllList,parentId); //拖拽后 父级目标对象

@@ -67,7 +67,7 @@ class titleServiceContainer extends Component {
     const {
       titleServiceType,
       current: {
-        relationServes: service,
+        relationServices: service,
         relationUsers: contacts,
       },
     } = this.props;

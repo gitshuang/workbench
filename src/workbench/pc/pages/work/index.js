@@ -114,7 +114,7 @@ export default class Work extends Component {
       } else {
         if (!subcode) {
           const {
-            curServe: {
+            curService: {
               serviceCode: subcode
             },
           } = payload;

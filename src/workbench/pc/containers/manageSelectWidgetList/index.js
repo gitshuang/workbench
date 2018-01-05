@@ -265,11 +265,11 @@ class SelectWidgetList extends Component {
         item.serviceCode = item.applicationCode;
         item.widgettemplateId = item.widgetTemplate.widgettemplateId;
         // item.extend = false;
-        list.push(<ServerItem  key={`widget-title-${i}-${item.serviceId}`} onChange={this.onChange} data={item} packUp={this.btnUp} /> );
+        list.push(<ServiceItem  key={`widget-title-${i}-${item.serviceId}`} onChange={this.onChange} data={item} packUp={this.btnUp} /> );
       }
       item.service.forEach((da,i)=>{
         da.extend = _b;
-        list.push(<ServerItem  key={`widget-${guid()}`} onChange={this.onChange} data={da} /> );
+        list.push(<ServiceItem  key={`widget-${guid()}`} onChange={this.onChange} data={da} /> );
       });
     })
 
