@@ -42,7 +42,8 @@
  	width:180px;
 	min-height:470px;
 	border:1px solid #DDE0E3;
-	border-radius:3px;
+  border-radius:3px;
+  margin-top:8px;
 	padding:20px 0;
 	box-sizing:border-box;
 }
@@ -52,18 +53,31 @@
 .menuBtnGroup :global(.u-button){
 	display:block;
 	width:178px;
-	padding:3px 0 3px 23px ;
+  padding:3px 0 3px 23px ;
 	color:#4A515D;
 	text-align: left;
 	border-radius:0;
+}
+.topTabBtns :global(.u-button){
+  width: 77px;
+  height: 32px;
+	background:rgba(9,30,66,0.04);
+  color:rgba(71,77,84,1);
+  border: none;
+  margin-right: 3px;
 }
 .menuBtnGroup :global(.u-button):hover,
 .wrap :global(.u-button-group-vertical .active){
 	background:rgba(239,239,239,1);
 	color:#E14C46;
 }
+.topTabBtns :global(.u-button):hover,
+.wrap :global(.u-button-group .active){
+	background:rgba(252,237,236,1);
+	color:rgba(225,76,70,1);
+}
 .appContent{
-	padding-left: 16px;
+	padding-left: 12px;
 }
 /* .appContent::-webkit-scrollbar{
     width: 8px;
@@ -72,9 +86,8 @@
     border-radius: 8px;
     background-color: #757575;
 } */
-.appContent header{
+/* .appContent header{
 	padding-bottom:8px;
-	/* margin-bottom: 16px; */
 	border-bottom:1px solid #DDE0E3;
 	display:flex;
 	position:relative;
@@ -82,7 +95,6 @@
 .appContent header img{
   width:32px;
   height:32px;
-	/* background:rgba(216,216,216,1); */
 	border-radius: 3px ;
 }
 .appContent header span{
@@ -111,8 +123,37 @@
 .appContent hgroup{
   flex-wrap:wrap;
   padding-bottom: 48px;
+} */
+/*--新增--*/
+.appItemImg img{
+  width:30px;
+  height:30px;
+  margin:9px 9px;
 }
-
+.appsList li{
+  display: flex;
+  float:left;
+  width: 238px;
+  height: 98px;
+  padding: 9px;
+  margin:0 0 16px 8px;
+  border: 1px solid rgba(78,89,104,0.19);
+  border-radius:3px;
+  box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
+}
+.appsList li:hover{
+  background:rgba(225,76,70,0.1);
+  cursor:pointer;
+}
+.appItem_describe p{
+  margin:5px 0;
+}
+.appItem_describe .appItem_tit{
+  color:rgba(71,77,84,1);
+}
+.appItem_describe .appItem_con{
+  color:rgba(71,77,84,0.6);
+}
 .link {
   width:160px;
   height:52px;
