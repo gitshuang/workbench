@@ -18,6 +18,6 @@ export default createTypes(
   'ADD_BRM',
   'RETURN_DEFAULT_STATE',
   'SET_TABS',
-  'CHANGE_SERVE',
+  'CHANGE_SERVICE',
   'UNSHIFT_TAB'
 );
