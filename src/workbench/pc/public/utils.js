@@ -49,7 +49,7 @@ export const createActions = (namespaceObj, ...args) => {
 const getHost = (key = 'api') => {
   const hosts = {
     api: {
-      production: '/',
+      production: '',
       development: '',
     },
   };
