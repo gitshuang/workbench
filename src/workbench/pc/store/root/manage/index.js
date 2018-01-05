@@ -29,7 +29,7 @@ const {
   moveServe,
   openFolder,
   closeFolder,
-  getSelectWidgetList,
+  getAllServesByLabelGroup,
   setCurrentSelectWidgetMap,
   openBatchMove,
   closeBatchMove,
@@ -53,12 +53,16 @@ const defaultState = {
   folderModalDisplay: false,
   batchMoveModalDisplay: false,
   selectList:[],  // 勾选的服务列表
-  selectWidgetList:[],
+  // selectWidgetList:[],
   selectGroup: [],
   currGroupIndex:0,
   currentSelectWidgetMap:{},
   title:'',
-  currEditonlyId:""
+  currEditonlyId:"",
+
+  applicationsMap:{},
+  selectWidgetItem:true,
+  allServesByLabelGroup:{}
 };
 
 const findTreeById = (data, curId) => {
@@ -173,36 +177,54 @@ const reducer = handleActions({
       currentSelectWidgetMap//备份本次勾选了哪些磁贴
     }
   },
-  [getSelectWidgetList]: (state, { payload, error }) => {
+  [getAllServesByLabelGroup]: (state, { payload, error }) => {
     if (error) {
       return state;
     } else {
+      let applicationsMap ={};
+      payload.applications.forEach((da,i)=>{
+        applicationsMap[da.applicationId] = da;
+        let  _serviceMap = {};
+        da.service.forEach((serverDa,j)=>{
+          _serviceMap[serverDa.serveId] = serverDa;
+          da.serviceMap = _serviceMap;
+        })
+      });
+
       return {
         ...state,
-        selectWidgetList: payload,
-        currEditonlyId:""
+        applicationsMap,
+        allServesByLabelGroup:payload,
+        // selectWidgetList: payload,
+        // currEditonlyId:""
       };
     }
   },
   [setCurrentSelectWidgetMap]: (state, { payload, error }) => {
-    debugger;
-    let {data,sele} = payload.data;
-    let currentSelectWidgetMap = state.currentSelectWidgetMap;
-
-    let _currentSelectWidgetMap = null;
-    if(currentSelectWidgetMap !=null){
-      let server = currentSelectWidgetMap[data.serveId];
-      if(server){
-        currentSelectWidgetMap[data.serveId].selected = sele;
-      }else{
-        currentSelectWidgetMap[data.serveId] = this.state.dataMap[data.serveId];
+    payload.forEach((da,i)=>{
+      let _server = state.applicationsMap[da.serveId];
+      if(_server){
+        _server.selected = "3";
       }
-    }else{
-      _currentSelectWidgetMap[data.serveId] = this.state.dataMap[data.serveId];
-    }
+    })
+    // let {data,currentAppId,selected} = payload;
+    // if(currentAppId == "all"){
+    //   for(let key in state.applicationsMap){
+    //     let _da = state.applicationsMap[key];
+    //     let _server = _da.service.find((server)=>server.serveId === data.serveId)
+    //     _server?_server.selected = selected:"";
+    //   }
+    // }else{
+    //   let currentApp = state.applicationsMap[currentAppId];
+    //   if(currentApp){
+    //     let _server = currentApp_da.service.find((server)=>server.serveId === data.serveId)
+    //     _server?_server.selected = selected:"";
+    //   }
+    // }
     return {
       ...state,
-      currentSelectWidgetMap:_currentSelectWidgetMap
+      selectWidgetItem:false,
+      applicationsMap:state.applicationsMap
     };
   },
   [batchDelect]: (state, {payload}) => {

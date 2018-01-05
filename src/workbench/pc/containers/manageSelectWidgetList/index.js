@@ -7,33 +7,37 @@ import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
 import ServerItem from 'containers/serverItem';
 import FormControl from 'bee-form-control';
-import {ButtonBrand,ButtonDefaultAlpha} from 'components/button';
+import {ButtonBrand,ButtonDefaultAlpha,ButtonDefaultLine} from 'components/button';
 
 import { connect } from 'react-redux';
-import { mapStateToProps } from '@u';
+import { mapStateToProps,guid} from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {getSelectWidgetList,addDesk,setCurrentSelectWidgetMap,deleteFolder} = manageActions;
+const {getAllServesByLabelGroup,addDesk,setCurrentSelectWidgetMap,deleteFolder} = manageActions;
 const {requestStart, requestSuccess, requestError, } = rootActions;
 
 import { select_widget_list,
 widget_left,widget_right,search_icon,search_icon_con,
   searchPanel,panel,left,panel_right,button_group,form_control,icon,
-panel_left,footer_btn,title,search_tit,active
+panel_left,footer_btn,title,search_tit,active,btn_active
 } from './style.css'
+
 
 @connect(
   mapStateToProps(
     'manageList',
-    'selectWidgetList',
-    'currentSelectWidgetMap',
+    // 'currentSelectWidgetMap',
+
+    'applicationsMap',
+    'selectWidgetItem',
+    'allServesByLabelGroup',
     {
       namespace: 'manage',
     }
   ),
   {
-    getSelectWidgetList,
+    getAllServesByLabelGroup,
     setCurrentSelectWidgetMap,
     deleteFolder,
     addDesk,
@@ -45,13 +49,21 @@ class SelectWidgetList extends Component {
 
   constructor(props) {
     super(props);
+    
     this.state = ({
         activeKey: "1",
-        start: 0,
+        // start: 0,
         value:"搜索内容...",
-        dataList:[],  //存放数据源
-        dataListBack:[],
-        dataMap:null,    //存放转换后数据Map
+        data:{},//接口全部数据
+        labelGroups:[],//类型
+        labels:[],//菜单数据
+        // serverList:[],//服务数据
+        allAppList:[],
+
+        currentAppId:"all",//当前点击的服务、应用
+
+        // dataListBack:[],
+        // dataMap:null,    //存放转换后数据Map
         selectedList:[],
         edit:false
     })
@@ -62,101 +74,48 @@ class SelectWidgetList extends Component {
   }
 
   getServices(serveName){
+    const {selectWidgetItem} = this.props;
+    if(!selectWidgetItem){
+      let payload = this.props.allServesByLabelGroup;
+      this.setThisState(payload);
+      return;
+    };
     let self = this;
-    const { requestError, requestSuccess, getSelectWidgetList } = this.props;
-    getSelectWidgetList(serveName).then(({error, payload}) => {
+    const { requestError, requestSuccess, getAllServesByLabelGroup } = this.props;
+    getAllServesByLabelGroup(serveName).then(({error, payload}) => {
       if (error) {
         requestError(payload);
       }
-      let _dataMap = self.getArrayToMap(payload,{},0);
-      let _dataList = self.getDefaultSelectCheck(_dataMap,self.props.manageList,[]);
-      let _allDataList = self.getFindByTypeId("all");
-      self.setState({
-           dataMap:_dataMap,
-           dataList:_allDataList,
-           dataListBack:_allDataList
-      });
+      this.setThisState(payload);
       requestSuccess();
     });
   }
+
+  setThisState=(payload)=>{
+    payload.labelGroups[0].active = true;
+    const {labels,allAppList,currentAppId} = this.setDefaultList(payload.labelGroups[0]);
+      this.setState({
+        data:payload,
+
+        labelGroups:payload.labelGroups,
+        labels,
+        allAppList,
+        selectedList:[]
+        // currentAppId
+    })
+  }
+
+  // componentWillReceiveProps(nextProps){
+  // }
 
   btnSearch=()=>{
     // if(this.state.value != "搜索内容..."){
         this.getServices(this.state.value);
     // }
   }
- 
-  getArrayToMap(data,dataMap,parId){
-    if(!dataMap){dataMap = {}};
-    for(let i = 0;i<data.length;i++){
-        parId == 0 ? data[i].parId = data[i].labelId : data[i].parId = parId;
-        if(data[i].children && data[i].children.length != 0){
-          this.getArrayToMap(data[i].children,dataMap,data[i].labelId);
-        }else{
-          dataMap[data[i].serveId] = data[i];
-          //恢复备份数据
-          let _currentSelectWidgetMap = this.props.currentSelectWidgetMap;
-          if(_currentSelectWidgetMap[data[i].serveId]){
-            dataMap[data[i].serveId].selected = _currentSelectWidgetMap[data[i].serveId].selected;
-          }
-        }
-    }
-    return dataMap;
-  }
-
-  getDefaultSelectCheck(alllist,manageList,dataList) {
-    if(!dataList){dataList = []};
-    for(let i = 0;i<manageList.length;i++){
-      if(manageList[i].children && manageList[i].children.length != 0){
-        this.getDefaultSelectCheck(alllist,manageList[i].children,dataList);
-      }else{
-          let mapItem = alllist[manageList[i].serviceId];
-          if(mapItem && manageList[i].type != 2){
-            mapItem.selected  = "1";
-          }
-      }
-    }
-    return dataList;
-  }
-
-  //根据type进行查询合并数组子元素
-  getFindByTypeId(type){
-    const {selectWidgetList} = this.props;
-    let newSelectWidgetList = selectWidgetList;
-    let newDataList = [];
-    //深度复制。
-    if(type == "all"){
-        newSelectWidgetList.map(function(da,i){
-            newDataList = [...newDataList,...da.children];
-        })
-    }
-    return newDataList;
-  }
-
-  onBtnOnclick =(id)=>{
-    const {selectWidgetList} = this.props;
-    let parme = {};//设置参数
-    let _data = [];
-    if(id == "all"){
-        _data = this.state.dataListBack;
-    }else{
-        this.props.selectWidgetList.map(function(_da,i){
-            const {labelId: _id, lebalName: name} = _da;
-            if(_id == id){
-               _data = _da.children;
-            }
-        })
-    }
-    let dataList = [];
-    Object.assign(dataList,_data);
-    this.setState({
-      dataList:_data,
-      activeKey:''
-    });
-  }
-
-  onChange =(data,sele)=>{
-    this.state.dataMap[data.serveId].selected = sele;
+  
+  onChange=(data,sele)=>{
+    data.selected = sele;
     let index = this.state.selectedList.findIndex(da=>da.serveId == data.serveId);
     if(index == -1 && sele == "3"){
       this.state.selectedList.push(data);
@@ -166,7 +125,7 @@ class SelectWidgetList extends Component {
     console.log(this.state.selectedList);
     this.setState({
         ...this.state,
-        edit:true
+        edit:this.state.selectedList.length==0?false:true
     });
   }
 
@@ -193,34 +152,133 @@ class SelectWidgetList extends Component {
   }
 
   btnSave=()=>{
-    console.log(this.state.selectedList);
-    // let {deleteFolder,requestError} = this.props;
-    // this.state.selectedList.forEach((da,i)=>{
-    //   if(da.selected != "3"){
-    //     deleteFolder(da.serveId);
-    //   }
-    // });
+    const { requestError, requestSuccess, setCurrentSelectWidgetMap } = this.props;
+    setCurrentSelectWidgetMap(this.state.selectedList);
+
     this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
     this.setState({
+      edit:false,
       selectedList:[]
-    })
+    });
     this.props.close();
   }
 
+  btnClose=()=>{
+    console.log(this.state.selectedList);
+    this.state.selectedList.forEach((da,i)=>{
+      da.selected = "2";
+    })
+    this.setState({
+      ...this.state
+    });
+    this.props.close();
+  }
+
+  setDefaultList=(da)=>{
+    const {applicationsMap} = this.props;
+    let allAppList = [];
+    let currentAppId = "";
+    da.labels.forEach((lab,j)=>{
+      lab.appIds.forEach((app,i)=>{
+        let appObj = applicationsMap[app];
+        if(appObj){
+          appObj.extend = false;
+          // allService = [...allService,...appObj.service];
+          allAppList.push(appObj);
+          currentAppId = app;
+        }
+      })
+    });
+    return {
+      labels:da.labels,
+      allAppList,
+      currentAppId
+    }
+  }
+
+  btnTypeClick = (da)=>{
+    const {labels,allAppList,currentAppId} = this.setDefaultList(da);
+    this.state.labelGroups.forEach((da)=>{
+        da.active = false;
+    })
+    da.active = true;
+    debugger;
+    this.setState({
+      labelGroups:this.state.labelGroups,
+      labels,
+      allAppList,
+      activeKey:""
+    });
+  }
+
+  onBtnOnclick =(data)=>{
+    const {applicationsMap} = this.props;
+    const {allServesByLabelGroup:{applications}} = this.props;
+    let _data = [];
+    if(data == "all"){
+      applications.forEach((da,i)=>{
+        _data.push(da);
+      }); 
+    }else{
+      data.appIds.forEach((appId,i)=>{
+        _data.push(applicationsMap[appId]); 
+      })
+    }
+    console.log(" _data ");
+    console.log(_data);
+    this.setState({
+      allAppList:_data,
+      activeKey:''
+    });
+  }
+
+  btnUp=(data)=>{
+    debugger;
+    this.state.allAppList.forEach((da,i)=>{
+      if(da.applicationId == data.applicationId){
+        da.extend = data.extend?false:true;
+      }
+    });
+    debugger;
+    this.setState({
+      ...this.state.allAppList
+    });
+  }
+ 
   render() {
     let self = this;
-    const {selectWidgetList} = this.props;
-    const {dataList,activeKey} = this.state;
+    const {applicationsMap} = this.props;
+    const {labelGroups,labels,activeKey,allAppList} = this.state;
 
     let btns = [];
     btns.push(<Button key="10012" shape='border' className={ activeKey ? 'active' : '' } onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
-    selectWidgetList.map(function(da,i){
-        btns.push(<Button key={`button_li_${da.labelId}-${i}`} shape='border' onClick={()=>{self.onBtnOnclick(da.labelId)}}>{da.labelName}</Button>);
+    labels.map(function(da,i){
+        btns.push(<Button key={`button_li_${da.labelId}-${i}`} shape='border' onClick={()=>{self.onBtnOnclick(da)}}>{da.labelName}</Button>);
     });
+
     let list = [];
-    list = dataList.map((item, i) => {
-        const {serveId: id, serveName: name} = item;
-        return (<ServerItem  key={`widget-${id}-${i}`} onChange={this.onChange} data={self.state.dataMap[id]} id={id} /> );
+    allAppList.forEach((item, i) => {
+      const {service:{serveId: id, serveName: name},widgetTemplate:{serviceType}} = item;
+      let _b = item.extend;
+      if(serviceType=="2"){
+        item.serveId = item.applicationId;
+        item.serveName = item.applicationName;
+        item.serviceType = "2";//2应用
+        item.serveIcon = item.applicationIcon;
+        item.serveCode = item.applicationCode;
+        item.widgettemplateId = item.widgetTemplate.widgettemplateId;
+        // item.extend = false;
+        list.push(<ServerItem  key={`widget-title-${i}-${item.serveId}`} onChange={this.onChange} data={item} packUp={this.btnUp} /> );
+      }
+      item.service.forEach((da,i)=>{
+        da.extend = _b;
+        list.push(<ServerItem  key={`widget-${guid()}`} onChange={this.onChange} data={da} /> );
+      });
+    })
+
+    let btnGroup = [];
+    labelGroups.forEach((da,i)=>{
+      btnGroup.push(<Button key={`type-${i}`} className={da.active?btn_active:null} shape='border' onClick={()=>{this.btnTypeClick(da)}}>{da.labelGroupName}</Button>);
     })
 
     return (<div className={select_widget_list}>
@@ -238,6 +296,9 @@ class SelectWidgetList extends Component {
            </div>
            <div className={panel} >
               <div className={panel_left}>
+                <ButtonGroup className="btn_type">
+                  {btnGroup}
+                </ButtonGroup>
                 <ButtonGroup vertical>
                   {btns}
                 </ButtonGroup>
@@ -248,7 +309,7 @@ class SelectWidgetList extends Component {
            </div>
            <div className={footer_btn}>
             {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
-              <ButtonDefaultAlpha onClick={this.props.close} >取消</ButtonDefaultAlpha>
+              <ButtonDefaultAlpha onClick={this.btnClose} >取消</ButtonDefaultAlpha>
           </div>
        </div>
     </div>);

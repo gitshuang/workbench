@@ -49,10 +49,12 @@
 .panel_left{
   width: 244px;
   height: 100%;
-  min-height: 570px;
+  margin-top: 40px;
+  min-height: 530px;
   border: 1px solid rgba(78,89,104,0.19);
   border-radius: 3px;
   padding:20px 0;
+  position: relative;
 }
 .panel_right{
   -webkit-box-flex:1;
@@ -69,6 +71,7 @@
 }
 .panel_left>div{
   width: 100%;
+  margin-top: -30px;
 }
 .panel_left>div>button{
   height: 26px;
@@ -129,4 +132,17 @@
 .search_icon_con .search_tit{
   color:rgba(74,81,93,1);
   margin-left:8px;
+}
+.panel_left :global(.u-button-group){
+  margin-top: -111px;
+}
+.panel_left :global(.u-button-group>button){
+  width:77px;
+  height:32px; 
+  background:rgba(9,30,66,0.04);
+  border-radius: 3px 3px 0px 0px ;
+  margin-right: 2px;
+}
+.btn_active{
+  background:rgba(252,237,236,1) !important;
 }
