@@ -5,7 +5,8 @@ import Icon from 'components/icon';
 import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
 
-import { serverItem,item_li_top,item_footer,item_left,item_right} from './style.css'
+import { serverItem,serverItemTitle,item_li_top,item_footer,item_left,item_right,
+  icon,up_icon} from './style.css'
 
 class ServerItem extends Component {
 
@@ -15,11 +16,16 @@ class ServerItem extends Component {
   // 点击 本次取消
 
   constructor(props) {
-      super(props);
+      super(props); 
+  }
+
+  packUp=()=>{
+
   }
 
   render() {
-    const {serveId, serveName,selected} = this.props.data;
+    // const {serveId, serveName,selected} = this.props.data;
+    const {data:{serveId, serveName,selected ,serviceType,serveIcon,extend} }  = this.props;
     let btn = null;
     if(selected){
       if(selected == "1"){
@@ -38,13 +44,13 @@ class ServerItem extends Component {
        btn = (<div onClick={()=>{this.props.onChange(this.props.data,"3")}}  >
         <Icon title="未添加" type="pin" style={{cursor:"pointer"}} /> </div>);
     }
-    
 
+    let upIcon = serviceType=="2"?<Icon className={up_icon} type={extend?"pull-down":"upward"} title={ extend ? '展开' : '收起' } onClick={()=>{this.props.packUp(this.props.data)}}></Icon>:null;
+    let _style = serviceType=="2"?null:extend?{display:"none"}:null;
     return (
-       <div className={serverItem}>
+       <div className={serviceType=="2"?serverItemTitle:serverItem} style={{..._style}}>
             <div className={item_li_top}>
-
-
+                <img className={icon} src={serveIcon}/>
                 <div className={item_right}>
                     {serveName}
                 </div>
@@ -52,6 +58,7 @@ class ServerItem extends Component {
              <div className={item_footer}>
                 {btn}
              </div>
+             {upIcon}
        </div>
     );
   }

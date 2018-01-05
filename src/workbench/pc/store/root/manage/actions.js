@@ -3,7 +3,7 @@ import types from './types';
 import {
   setManageList,
   getManageList,
-  getSelectWidgetList
+  getAllServesByLabelGroup
 } from './api';
 
 const {
@@ -31,7 +31,7 @@ const {
   MOVE_SERVE,
   OPEN_FOLDER,
   CLOSE_FOLDER,
-  GET_SELECT_WIDGET_LIST,
+  GET_ALL_SERVES_BY_LABEL_GROUP,
   OPEN_BATCH_MOVE,
   CLOSE_BATCH_MOVE,
   SET_EDIT_STATE,
@@ -50,7 +50,7 @@ const actions = createActions(
   {
     [SET_MANAGE_LIST]: setManageList,
     [GET_MANAGE_LIST]: getManageList,
-    [GET_SELECT_WIDGET_LIST]: getSelectWidgetList,
+    [GET_ALL_SERVES_BY_LABEL_GROUP]: getAllServesByLabelGroup,
   },
   BATCH_DELECT,
   ADD_GROUP,
