@@ -4,7 +4,7 @@ var api = [
   '/service/getAllServicesGroupByLabels',//废弃
   '/service/getAllServicesByLabelGroup',
   '/application/getAllAppsbyLabelGroup',
-  '/application/getAllApps',
+  '/application/getShortcutApps',
   '/desktop/getdeskTop',
   '/service/getServiceInfoByServiceCode',
   '/service/getServiceInfoByAppCode',
