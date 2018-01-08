@@ -43,20 +43,10 @@
   -webkit-box-flex:1;
   line-height:33px;
 }
-/**
-.breadcrumbClass :global(.u-breadcrumb){
-  color: #9a9a9a;
-}
-**/
 .breadcrumbClass :global(.u-breadcrumb) li:last-child{
   color:#4A515D;
 }
-/* .breadcrumbClass :global(.u-breadcrumb) li:hover{
+.itmeHover:hover span{
   color:rgba(225,76,70,1);
-} */
-/* .breadcrumbClass :global(.u-breadcrumb>li+li:before){
-  color:#666;
-} */
-.itme_hover :global(.u-breadcrumb) li:hover{
-  color:rgba(225,76,70,1);
+  cursor: pointer;
 }

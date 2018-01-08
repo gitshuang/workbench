@@ -3,19 +3,20 @@ import { connect, Provider } from 'react-redux';
 import {
   HashRouter as Router,
   withRouter,
+  Switch,
 } from 'react-router-dom';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import routes from 'router';
 import store from 'store';
+import IM from 'IM';
 import { mapStateToProps, getContext } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
 import rootActions from 'store/root/actions';
-import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
-import { initBridge } from 'public/jDiworkBridge';
 import componentTool, { trigger } from 'public/componentTools';
-import IM from 'IM';
+import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
+import 'public/jDiworkBridge';
 
 const {
   requestStart,
@@ -76,8 +77,7 @@ class Root extends Component {
     IM(new componentTool('IM'), getContext(), {
       el: 'IM',
     });
-    regMessageTypeHandler.call(this);
-    initBridge.call(this);
+    regMessageTypeHandler(this);
   }
   clickHandler = () => {
     const {
@@ -91,9 +91,11 @@ class Root extends Component {
     const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>) : null;
     return (
       <div onClick={this.clickHandler}>
-        {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
-        ))}
+        <Switch>
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
+        </Switch>
         <TransitionGroup>
           <CSSTransitionGroup
             transitionName={ {

@@ -20,11 +20,6 @@ const routes = [
   {
     path: '/manage',
     component: Manage,
-    exact: true
-  },
-  {
-    path: '/404',
-    component:Page404
   },
   {
     path: '/search',
@@ -33,19 +28,24 @@ const routes = [
       {
         path:'/search',
         component:SearchResult,
-        exact: true
+        exact: true,
       },
       {
         path:'/search/searchlist/:type',
         component:SearchOther,
-        exact: true
       }
     ]
   },
   {
     path: '/:type(app|service)/:code/:subcode?',
     component: Work,
-    exact: true,
+  },
+  {
+    path: '/404',
+    component:Page404
+  },
+  {
+    component:Page404
   },
 ];
 

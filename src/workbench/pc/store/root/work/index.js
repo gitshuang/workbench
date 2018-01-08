@@ -18,6 +18,7 @@ const {
   setPinCancel,
   delTab,
   addBrm,
+  removeBrm,
   returnDefaultState,
   getServiceInfoWithDetail,
   setTabs,
@@ -60,12 +61,39 @@ function appendSearchParam(url, params) {
 }
 
 const reducer = handleActions({
-  [addBrm]: (state, { payload: data }) => ({
-    ...state,
-    brm:state.brm.concat({
-       name:data
-    })
-  }),
+  [addBrm]: (
+    state,
+    {
+      payload: {
+        name,
+        url: prevUrl,
+      }
+    }
+  ) => {
+    const newBrm = [...state.brm];
+    const last = newBrm[newBrm.length - 1];
+    newBrm[newBrm.length - 1] = {
+      ...last,
+      url: prevUrl,
+    };
+    return {
+      ...state,
+      brm: newBrm.concat({
+        name,
+      }),
+    };
+  },
+  [removeBrm]: (state, { payload: length }) => {
+    const newBrm = state.brm.slice(0, state.brm.length - length);
+    const last = newBrm[newBrm.length - 1];
+    newBrm[newBrm.length - 1] = {
+      name: last.name,
+    };
+    return {
+      ...state,
+      brm: newBrm,
+    }
+  },
   [changeService]: (state, { payload: code }) => {
     const { menus, tabs } = state;
     const menuPath = findPath(menus, 'children', 'serviceCode', code);

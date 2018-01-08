@@ -8,7 +8,6 @@ import workActions from 'store/root/work/actions';
 // 组件
 import TabsContainer from 'containers/tabs';
 import HeaderContainer from 'containers/header';
-import BreadcrumbContainer from 'containers/breadcrumb';
 import Icon from 'components/icon';
 import Pin from 'containers/pin';
 import Button from 'bee-button';
@@ -56,18 +55,10 @@ export default class Page404 extends Component {
         let iconName = <Icon title="返回首页" type="home" style={{fontSize:"24px"}}/>
         return (
           <div className={wrap + " um-win"}>
-            <div className="um-header">
-              <HeaderContainer onLeftClick={ this.goBack } iconName={iconName} leftContent={ domainName }>
-                <div className={"um-box"}>
-                  <span>404</span>
-                </div>
-              </HeaderContainer>
-            </div>
             <div className={`um-content ${page404_area}`}>
-              <BreadcrumbContainer/>
               <section>
                 <div className={remindWord}>很抱歉，当前访问的页面已丢失</div>
-                <Button shape="border" ><a href="###">返回首页</a></Button>
+                <Button shape="border" ><a href="/">返回首页</a></Button>
               </section>
             </div>
             <Pin outsideClickIgnoreClass={'icon-dingzhi'} />

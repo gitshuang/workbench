@@ -20,7 +20,7 @@ class Iframe extends Component{
       title,
       url,
     } = this.props;
-    return (<iframe title={title} src={url} className={iframe} />);
+    return (<iframe id={title} title={title} src={url} className={iframe} />);
   }
 }
 

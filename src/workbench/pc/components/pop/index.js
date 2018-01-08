@@ -134,7 +134,7 @@ class Dialog {
     this.div = document.createElement('div');
     this.props = {
       ...options,
-      close: this.close.bind(this),
+      close: options.close ? options.close.bind(this) : this.close.bind(this),
     };
     document.body.appendChild(this.div);
     this.render();
@@ -179,7 +179,7 @@ let globalDialogInstance;
 function makeGlobalDialogInstance(options) {
   globalDialogInstance = new Dialog(options)
 }
-function dialog(options) {
+function openGlobalDialog(options) {
   const dialogFactory = makeGlobalDialogInstance.bind(null, options);
   if (globalDialogInstance) {
     globalDialogInstance.destroy().then(dialogFactory);
@@ -187,8 +187,14 @@ function dialog(options) {
     dialogFactory();
   }
 }
+function closeGlobalDialog() {
+  if (globalDialogInstance) {
+    globalDialogInstance.close();
+  }
+}
 // window.dialog = dialog;
 export default PopDialog;
 export {
-  dialog,
+  openGlobalDialog,
+  closeGlobalDialog,
 };

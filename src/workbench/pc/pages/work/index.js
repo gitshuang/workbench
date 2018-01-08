@@ -39,7 +39,6 @@ const {
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
 const {
-  setMenus,
   setCurrent,
   titleServiceDisplay,
   pinDisplayBlock,

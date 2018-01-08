@@ -16,6 +16,7 @@ export default createTypes(
   'GET_PIN_GROUP',
   'SET_PIN_CANCEL',
   'ADD_BRM',
+  'REMOVE_BRM',
   'RETURN_DEFAULT_STATE',
   'SET_TABS',
   'CHANGE_SERVICE',

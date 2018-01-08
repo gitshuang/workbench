@@ -1,7 +1,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumb from 'bee-breadcrumb';
-import { breadcrumbClass,breadcrumbBack ,itme_hover} from './style.css';
+import { breadcrumbClass,breadcrumbBack ,itmeHover} from './style.css';
 
 /**
  * data:{name:"",url:""}
@@ -16,13 +16,19 @@ class Breadcrumbs extends Component {
     const { goback, data} = this.props;
     return (
       <div className={breadcrumbClass} >
-        <a onClick={goback} >返回</a>
+        <a onClick={() => { goback(-1) }} >返回</a>
         <span className={breadcrumbBack}>|</span>
         <Breadcrumb>
         {
-          data.map(function(da,i){
-            let itme = da.url?<Breadcrumb.Item className={itme_hover} key={"item"+i} href={da.url} >{da.name}</Breadcrumb.Item>:<Breadcrumb.Item key={"item"+i} >{da.name}</Breadcrumb.Item>
-            return (itme);
+          data.map(function({name, url},i){
+            return (
+              <Breadcrumb.Item
+               key={`item${i}`}
+               className={url ? `${itmeHover}` : ''}
+               onClick={url ? () => { goback(i) }: null}>
+                {name}
+              </Breadcrumb.Item>
+            );
           })
         }
         </Breadcrumb>

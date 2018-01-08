@@ -14,7 +14,10 @@ import {
   breadcrumbArea,
 } from './style.css';
 
-const {setExpandedSidebar} = actions;
+const {
+  setExpandedSidebar,
+  removeBrm,
+} = actions;
 
 @withRouter
 @connect(
@@ -26,6 +29,7 @@ const {setExpandedSidebar} = actions;
     ),
     {
         setExpandedSidebar,
+        removeBrm,
     }
 )
 class BreadcrumbContainer extends Component {
@@ -69,8 +73,21 @@ class BreadcrumbContainer extends Component {
           breadcrumbTab:""
         })
     }
-    goback = () => {
-      window.history.back();
+    goback = (index) => {
+      const { brm, removeBrm } = this.props;
+      const customBrm = brm.filter(({url})=>{
+        return url;
+      })
+      if (index < 0) {
+        window.history.back();
+        if (customBrm) {
+          removeBrm(1);
+        }
+      } else {
+        const length = brm.length - index - 1;
+        removeBrm(length);
+        window.history.go(-length);
+      }
     }
     render() {
       const { withSidebar } = this.props;

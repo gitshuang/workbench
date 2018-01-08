@@ -10,7 +10,6 @@ import IFrame from 'components/iframe';
 @connect(
   mapStateToProps(
     'tabs',
-    'menus',
     'current',
     {
       namespace: 'work',
@@ -21,7 +20,6 @@ class ContentContainer extends Component {
   static propTypes = {
     hasTab: PropTypes.bool,
     tabs: PropTypes.array,
-    menus: PropTypes.array,
     current: PropTypes.object,
   }
   constructor(props) {
@@ -29,22 +27,25 @@ class ContentContainer extends Component {
   }
 
   render() {
-    const { hasTab, current: { menuItemId: currentId, url: currentLocation, serviceCode: curServiceCode }, tabs, menus } = this.props;
+    const { hasTab, current: { menuItemId: currentId, url: currentLocation }, tabs } = this.props;
 
     if (hasTab) {
       return (
         <div className={contentArea} >
           {
-            tabs.map(({ id, location }) => (
-              <div key={id} className={cs(
-                content,
-                {
-                  [active]: currentId === id,
-                }
-              )} >
-                <IFrame title={id} url={location} />
-              </div>
-            ))
+            tabs.map(({ id, location }) => {
+              console.log(id)
+              return (
+                <div key={id} className={cs(
+                  content,
+                  {
+                    [active]: currentId === id,
+                  }
+                )} >
+                  <IFrame title={id} url={location} />
+                </div>
+              )}
+            )
           }
         </div>
       );

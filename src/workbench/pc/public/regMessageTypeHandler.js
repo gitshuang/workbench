@@ -1,11 +1,11 @@
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
-import { dialog } from 'components/pop';
+import { openGlobalDialog, closeGlobalDialog } from 'components/pop';
+import store from "store";
+import { postMessageToWin } from "@u";
+
 const { addBrm } = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
-
-import store from "store";
-
 const handlers = {
   openService({ serviceCode, data }) {
     if (serviceCode) {
@@ -16,13 +16,40 @@ const handlers = {
     }
   },
   openDialog(options) {
-    dialog(options);
+    openGlobalDialog(options);
   },
-  postDataToService() {
-
+  closeDialog() {
+    closeGlobalDialog();
   },
   checkServiceOpen() {
-
+    const state = store.getState();
+    const tabs = state.work.tabs;
+    const target = tabs.filter(({ serveCode })=>{
+      return serviceCode === serveCode;
+    })[0];
+    if (target) {
+      return true;
+    }
+    return false;
+  },
+  postDataToService({ serviceCode, data }) {
+    const state = store.getState();
+    const tabs = state.work.tabs;
+    const target = tabs.filter(({ serveCode })=>{
+      return serviceCode === serveCode;
+    })[0];
+    if (target) {
+      const { id } = target;
+      const frameElm = document.getElementById(id);
+      if (frameElm) {
+        postMessageToWin(frameElm.contentWindow, {
+          type: 'data',
+          data,
+        });
+        return true;
+      }
+    }
+    return false;
   },
   addBrm(data) {
     store.dispatch(addBrm(data));
@@ -41,20 +68,21 @@ const handlers = {
 
 const openServiceData = {};
 
-export function regMessageTypeHandler() {
-  Object.keys(handlers).forEach((key) => {
-    const handler = handlers[key];
-    document.addEventListener(key, ({detail}) => {
-      handler.call(this, detail);
-    });
-  });
+function bind(target, obj) {
+  Object.keys(obj).forEach((key) => {
+    if (typeof obj[key] === 'function') {
+      obj[key] = obj[key].bind(target);
+    }
+  })
 }
+
+export function regMessageTypeHandler(app) {
+  bind(app, handlers);
+}
+
 export function dispatchMessageTypeHandler({ type, detail }) {
-  if (type) {
-    const event = new CustomEvent(type, {
-      detail,
-    });
-    document.dispatchEvent(event);
+  if (type && handlers[type]) {
+    return handlers[type](detail);
   } else {
     throw new Error('dispatchMessageTypeHandler need type');
   }

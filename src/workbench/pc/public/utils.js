@@ -273,7 +273,7 @@ export const IS_REACT_16 = !!ReactDOM.createPortal;
 
 /**
  * 汉子超过3位截取，其他字符8位数
- * @param {*} str 
+ * @param {*} str
  */
 export function getStrLenSubstr(str){
   if(!str)return "";
@@ -287,31 +287,37 @@ export function getStrLenSubstr(str){
   return newStr;
 }
 
-export function browserRedirect() {  
-  var sUserAgent = navigator.userAgent.toLowerCase();  
-  var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";  
-  var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";  
-  var bIsMidp = sUserAgent.match(/midp/i) == "midp";  
-  var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";  
-  var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";  
-  var bIsAndroid = sUserAgent.match(/android/i) == "android";  
-  var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";  
-  var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";  
+export function browserRedirect() {
+  var sUserAgent = navigator.userAgent.toLowerCase();
+  var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+  var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+  var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+  var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+  var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+  var bIsAndroid = sUserAgent.match(/android/i) == "android";
+  var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+  var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 
-  if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) )  //判断是否有非pc的值存在  
-  {  
-      // alert("pc");  
-      //没有，则显示为pc  
+  if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) )  //判断是否有非pc的值存在
+  {
+      // alert("pc");
+      //没有，则显示为pc
       return ("pc");
-  }else{  
-    if(bIsIpad.length!=0){return ("ipad");}  
-    if(bIsIphoneOs.length!=0){return ("iphone os");}  
-    if(bIsMidp.length!=0){return ("midp");}  
-    if(bIsUc7.length!=0){return ("rv:1.2.3.4");}  
-    if(bIsUc.length!=0){return ("ucweb");}  
-    if(bIsAndroid.length!=0){return ("android");}  
-    if(bIsCE.length!=0){return ("windows ce");}  
-    if(bIsWM.length!=0){return ("windows mobile");}  
-    //显示对应的产品名称  
-  }  
-}  
+  }else{
+    if(bIsIpad.length!=0){return ("ipad");}
+    if(bIsIphoneOs.length!=0){return ("iphone os");}
+    if(bIsMidp.length!=0){return ("midp");}
+    if(bIsUc7.length!=0){return ("rv:1.2.3.4");}
+    if(bIsUc.length!=0){return ("ucweb");}
+    if(bIsAndroid.length!=0){return ("android");}
+    if(bIsCE.length!=0){return ("windows ce");}
+    if(bIsWM.length!=0){return ("windows mobile");}
+    //显示对应的产品名称
+  }
+}
+
+export function postMessageToWin(win, data) {
+  if (win && data) {
+    win.postMessage(JSON.stringify(data), '*');
+  }
+}
