@@ -31,11 +31,9 @@ class QuickServiceContainer extends Component {
   }
 
   componentDidMount(){
-    document.getElementById("list").addEventListener("scroll",this.onscrollFun);
-    let div = document.getElementById("list");
     const { serviceList } = this.props;
     let b = true;
-    b = serviceList.length >= 12?false:true;
+    b = serviceList.length < 12 ? true : false;
     this.setState({
       openAllstate:b
     })
@@ -53,10 +51,10 @@ class QuickServiceContainer extends Component {
     this.props.history.push('/application');
   }
 
-  onClickScroll = (e)=>{
-     let div = document.getElementById("list");
+  onClickScroll = (e) => {
+    let div = this.refs.list;
     const { serviceList } = this.props;
-    let bottom = serviceList.length*div.offsetHeight;
+    let bottom = serviceList.length * div.offsetHeight;
     let _top = 0;
     if(this.interval){
       clearInterval(this.interval);
@@ -75,7 +73,7 @@ class QuickServiceContainer extends Component {
   }
 
   onscrollFun =() =>{
-     let div = document.getElementById("list");
+     let div = this.refs.list;
      let scrollTop = div.scrollTop || div.pageYOffset || div.scrollTop;
      if(div.scrollHeight == div.clientHeight + scrollTop ) {
           this.setState({
@@ -98,7 +96,7 @@ class QuickServiceContainer extends Component {
     const { serviceList } = this.props;
     return (
       <div className={serviceContainer}>
-        <div className={service} id="list" >
+        <div className={service} ref="list" onScroll={this.onscrollFun}>
           <ul className="clearfix">
           {
             serviceList.map(({
@@ -116,9 +114,17 @@ class QuickServiceContainer extends Component {
           </ul>
         </div>
         {
-          this.state.openAllstate == false?<div className={serviceBtn}><button className="btn" onClick={this.onClickScroll}>更多应用</button></div>:<div className={link_cont}><a className="link" onClick={this.openAllAppList}>全部应用及服务</a></div>
+          this.state.openAllstate ?(
+            <div className={link_cont}>
+              <a className="link" onClick={this.openAllAppList}>全部应用及服务</a>
+            </div>
+          ) : (
+            <div className={serviceBtn}>
+              <button className="btn" onClick={this.onClickScroll}>更多应用</button>
+            </div>
+          )
         }
-        
+
       </div>
     );
   }
