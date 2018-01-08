@@ -44,7 +44,7 @@ class titleServiceContainer extends Component {
       titleServiceHidden();
     }
   }
-  handlerClickService(serveCode) {
+  handlerClickService(serviceCode) {
     const {
       history,
       match: {
@@ -55,11 +55,11 @@ class titleServiceContainer extends Component {
       },
       menus,
     } = this.props;
-    const menuPath = findPath(menus, 'children', 'serveCode', serveCode);
+    const menuPath = findPath(menus, 'children', 'serviceCode', serviceCode);
     if (menuPath.length) {
-      history.push(`/${type}/${code}/${serveCode}`);
+      history.push(`/${type}/${code}/${serviceCode}`);
     } else {
-      history.push(`/serve/${serveCode}`);
+      history.push(`/service/${serviceCode}`);
     }
     this.handleClickOutside();
   }
@@ -67,7 +67,7 @@ class titleServiceContainer extends Component {
     const {
       titleServiceType,
       current: {
-        relationServes: service,
+        relationServices: service,
         relationUsers: contacts,
       },
     } = this.props;
@@ -79,12 +79,12 @@ class titleServiceContainer extends Component {
               <h4>相关服务</h4>
               <ul className="clearfix">
                 {
-                  service.map(({ serveIcon, serveName, serveCode }, i) =>
-                    <li key={i} onClick={this.handlerClickService.bind(this, serveCode)}>
+                  service.map(({ serviceIcon, serviceName, serviceCode }, i) =>
+                    <li key={i} onClick={this.handlerClickService.bind(this, serviceCode)}>
                       <div className={serviceIcon}>
-                        <img src={serveIcon} className={uf_service} />
+                        <img src={serviceIcon} className={uf_service} />
                       </div>
-                      <span className={serviceName} title={serveName}>{serveName}</span>
+                      <span className={serviceName} title={serviceName}>{serviceName}</span>
                     </li>
                   )
                 }

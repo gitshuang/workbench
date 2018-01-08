@@ -3,7 +3,7 @@ import types from './types';
 import {
   setManageList,
   getManageList,
-  getAllServesByLabelGroup
+  getAllServicesByLabelGroup
 } from './api';
 
 const {
@@ -26,12 +26,12 @@ const {
   DELETE_FOLDER,
   RENAME_FOLDER,
   SPLIT_FOLDER,
-  ADD_SERVE,
-  DELECT_SERVE,
-  MOVE_SERVE,
+  ADD_SERVICE,
+  DELECT_SERVICE,
+  MOVE_SERVICE,
   OPEN_FOLDER,
   CLOSE_FOLDER,
-  GET_ALL_SERVES_BY_LABEL_GROUP,
+  GET_ALL_SERVICES_BY_LABEL_GROUP,
   OPEN_BATCH_MOVE,
   CLOSE_BATCH_MOVE,
   SET_EDIT_STATE,
@@ -50,7 +50,7 @@ const actions = createActions(
   {
     [SET_MANAGE_LIST]: setManageList,
     [GET_MANAGE_LIST]: getManageList,
-    [GET_ALL_SERVES_BY_LABEL_GROUP]: getAllServesByLabelGroup,
+    [GET_ALL_SERVICES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
   },
   BATCH_DELECT,
   ADD_GROUP,
@@ -69,9 +69,9 @@ const actions = createActions(
   DELETE_FOLDER,
   RENAME_FOLDER,
   SPLIT_FOLDER,
-  ADD_SERVE,
-  DELECT_SERVE,
-  MOVE_SERVE,
+  ADD_SERVICE,
+  DELECT_SERVICE,
+  MOVE_SERVICE,
   OPEN_FOLDER,
   CLOSE_FOLDER,
   OPEN_BATCH_MOVE,

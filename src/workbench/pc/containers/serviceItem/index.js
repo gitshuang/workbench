@@ -5,10 +5,10 @@ import Icon from 'components/icon';
 import Button from 'bee-button';
 import { Con, Row, Col } from 'bee-layout';
 
-import { serverItem,serverItemTitle,item_li_top,item_footer,item_left,item_right,
+import { serviceItem,serviceItemTitle,item_li_top,item_footer,item_left,item_right,
   icon,up_icon} from './style.css'
 
-class ServerItem extends Component {
+class ServiceItem extends Component {
 
   // 1，已存在，
   // 2，未添加，
@@ -24,8 +24,8 @@ class ServerItem extends Component {
   }
 
   render() {
-    // const {serveId, serveName,selected} = this.props.data;
-    const {data:{serveId, serveName,selected ,serviceType,serveIcon,extend} }  = this.props;
+    // const {serviceId, serviceName,selected} = this.props.data;
+    const {data:{serviceId, serviceName,selected ,serviceType,serviceIcon,extend} }  = this.props;
     let btn = null;
     if(selected){
       if(selected == "1"){
@@ -48,11 +48,11 @@ class ServerItem extends Component {
     let upIcon = serviceType=="2"?<Icon className={up_icon} type={extend?"pull-down":"upward"} title={ extend ? '展开' : '收起' } onClick={()=>{this.props.packUp(this.props.data)}}></Icon>:null;
     let _style = serviceType=="2"?null:extend?{display:"none"}:null;
     return (
-       <div className={serviceType=="2"?serverItemTitle:serverItem} style={{..._style}}>
+       <div className={serviceType=="2"?serviceItemTitle:serviceItem} style={{..._style}}>
             <div className={item_li_top}>
-                <img className={icon} src={serveIcon}/>
+                <img className={icon} src={serviceIcon}/>
                 <div className={item_right}>
-                    {serveName}
+                    {serviceName}
                 </div>
             </div>
              <div className={item_footer}>
@@ -64,4 +64,4 @@ class ServerItem extends Component {
   }
 }
 
-export default ServerItem;
+export default ServiceItem;

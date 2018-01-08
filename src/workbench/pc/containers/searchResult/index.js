@@ -313,9 +313,9 @@ class searchResult extends Component {
           break;
         case "service":
           lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                  <div className={h_icon}><img src={item.serveIcon}/></div>
+                  <div className={h_icon}><img src={item.serviceIcon}/></div>
                   <div className={h_name}>
-                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item.serveName)}></span></p>
+                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item.serviceName)}></span></p>
                   </div>
                 </li>);
           break;

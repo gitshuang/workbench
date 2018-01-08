@@ -45,7 +45,7 @@ class homeFolderDialog extends Component {
         } = this.props;
 
         const list = children.map((child, i) => {
-            const {type, widgetId, serveCode, jsurl } = child;
+            const {type, widgetId, serviceCode, jsurl } = child;
             const Widget = WidgetMaker(child);
             const props = {
                 key: `widget-${widgetId}-${i}`,
@@ -53,7 +53,7 @@ class homeFolderDialog extends Component {
             };
             if (type === 3 && !jsurl){
               props.clickHandler = () => {
-                history.push(`/serve/${serveCode}`);
+                history.push(`/service/${serviceCode}`);
               }
             }
             return (

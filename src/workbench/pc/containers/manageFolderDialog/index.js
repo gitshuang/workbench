@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import manageActions from 'store/root/manage/actions';
 import DialogContent from './dialogContent';
 
-const {moveServe,closeFolder } = manageActions;
+const {moveService,closeFolder } = manageActions;
 
 
 @connect(
@@ -22,7 +22,7 @@ const {moveServe,closeFolder } = manageActions;
     ),
     {
         closeFolder,
-        moveServe
+        moveService
     }
 )
 class ManageFolderDialog extends Component {
@@ -33,8 +33,8 @@ class ManageFolderDialog extends Component {
     }
     moveItemDrag = (id,preParentId,preType, afterId,parentId,afterType) => {
       let data = {id,preParentId,preType,afterId,parentId,afterType}
-      const { moveServe } = this.props;
-      moveServe(data);
+      const { moveService } = this.props;
+      moveService(data);
     }
     closeFolderDrag = () => {
       const { closeFolder } = this.props;

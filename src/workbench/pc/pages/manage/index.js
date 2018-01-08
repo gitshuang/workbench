@@ -46,7 +46,7 @@ const {
   batchDelect,
   openBatchMove,
   moveGroup,
-  moveServe,
+  moveService,
   setEditState,
   addGroup,
   returnDefaultState
@@ -71,7 +71,7 @@ const {
     batchDelect,
     openBatchMove,
     moveGroup,
-    moveServe,
+    moveService,
     setEditState,
     addGroup,
     returnDefaultState
@@ -96,8 +96,8 @@ class Home extends Component {
   }
   moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType) => {
     let data = {id,preParentId,preType,afterId,parentId,afterType}
-    const { moveServe } = this.props;
-    moveServe(data);
+    const { moveService } = this.props;
+    moveService(data);
   }
 
   componentWillUnmount() {

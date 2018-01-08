@@ -7,7 +7,7 @@ import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
 import manageActions from 'store/root/manage/actions';
 
-const {moveServe,closeFolder } = manageActions;
+const {moveService,closeFolder } = manageActions;
 
 const type='item';
 
@@ -47,7 +47,7 @@ function collectTaget(connect, monitor) {
     ),
     {
         closeFolder,
-        moveServe
+        moveService
     }
 )
 class DialogContent extends Component {
@@ -58,8 +58,8 @@ class DialogContent extends Component {
     }
     moveItemDrag = (id,preParentId,preType, afterId,parentId,afterType) => {
       let data = {id,preParentId,preType,afterId,parentId,afterType}
-      const { moveServe } = this.props;
-      moveServe(data);
+      const { moveService } = this.props;
+      moveService(data);
     }
     closeFolderDrag = () => {
       const { closeFolder } = this.props;

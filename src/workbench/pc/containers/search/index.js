@@ -237,9 +237,9 @@ class SearchContainer extends Component {
           item.content.forEach((item2,index2)=>{
             item2 = eval('(' + item2 + ')')
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
-                  <div className={h_icon}><img src={item2.serveIcon}/></div>
+                  <div className={h_icon}><img src={item2.serviceIcon}/></div>
                   <div className={h_name}>
-                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item2.serveName)}></span></p>
+                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item2.serviceName)}></span></p>
                   </div>
                 </li>);
           }),

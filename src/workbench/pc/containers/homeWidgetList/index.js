@@ -43,7 +43,7 @@ class HomeWidgeList extends Component{
         type,
         jsurl,
         widgetId,
-        serveCode,
+        serviceCode,
       } = child;
       const Widget = WidgetMaker(child);
       const props = {
@@ -56,7 +56,7 @@ class HomeWidgeList extends Component{
         }
       } else if (type === 3 && !jsurl){
         props.clickHandler = () => {
-          history.push(`/serve/${serveCode}`);
+          history.push(`/service/${serviceCode}`);
         }
       }
       return (

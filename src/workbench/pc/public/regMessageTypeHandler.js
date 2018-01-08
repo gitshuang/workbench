@@ -12,16 +12,16 @@ const handlers = {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
-      this.props.history.push(`/serve/${serviceCode}`);
+      this.props.history.push(`/service/${serviceCode}`);
     }
   },
   openDialog(options) {
     dialog(options);
   },
-  postDataToServe() {
+  postDataToService() {
 
   },
-  checkServeOpen() {
+  checkServiceOpen() {
 
   },
   addBrm(data) {

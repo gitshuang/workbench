@@ -1,26 +1,26 @@
 {
   "status": 1,
   "data": {
-    "serveName": "谷歌",
-    "serveCode": "google",
+    "serviceName": "谷歌",
+    "serviceCode": "google",
     "enable": true,
     "url": "https://www.google.com",
-    "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+    "serviceIcon": "https://www.baidu.com/img/bd_logo1.png",
     "hasWidget": true,
     "relationServes": [{
-        "serveName": "百度",
-        "serveCode": "baidu",
+        "serviceName": "百度",
+        "serviceCode": "baidu",
         "enable": true,
         "url": "https://www.baidu.com",
-        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serviceIcon": "https://www.baidu.com/img/bd_logo1.png",
         "hasWidget": false
       },
       {
-        "serveName": "360急速搜索",
-        "serveCode": "360",
+        "serviceName": "360急速搜索",
+        "serviceCode": "360",
         "enable": true,
         "url": "https://www.google.com",
-        "serveIcon": "https://www.baidu.com/img/bd_logo1.png",
+        "serviceIcon": "https://www.baidu.com/img/bd_logo1.png",
         "hasWidget": false
       }
     ],

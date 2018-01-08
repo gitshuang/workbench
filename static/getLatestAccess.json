@@ -7,11 +7,11 @@
                 "application": {
                     "applicationName": "结算中心"
                 },
-                "serveCode": "serve",
-                "serveName": "核算服务"
+                "serviceCode": "serve",
+                "serviceName": "核算服务"
             },
-            "serveIcon": "http://dummyimage.com/20x20",
-            "serveId": "serve_1"
+            "serviceIcon": "http://dummyimage.com/20x20",
+            "serviceId": "serve_1"
         }
     ],
     "msg": "",

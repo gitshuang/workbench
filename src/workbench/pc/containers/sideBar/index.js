@@ -82,7 +82,7 @@ class SideBarContainer extends Component {
       history,
       menus,
       current: {
-        serveCode: curServeCode,
+        serviceCode: curServiceCode,
       },
       match: {
         params: {
@@ -92,9 +92,9 @@ class SideBarContainer extends Component {
       },
     } = this.props;
     const menuPath = findPath(menus, 'children', 'menuItemId', id);
-    const { serveCode } = menuPath.slice(-1)[0];
-    if (serveCode !== curServeCode) {
-      history.push(`/${type}/${code}/${serveCode}`);
+    const { serviceCode } = menuPath.slice(-1)[0];
+    if (serviceCode !== curServiceCode) {
+      history.push(`/${type}/${code}/${serviceCode}`);
     }
   }
   onOpenChange = (openKeys) => {

@@ -27,7 +27,7 @@ const {
   ADD_BRM,
   RETURN_DEFAULT_STATE,
   SET_TABS,
-  CHANGE_SERVE,
+  CHANGE_SERVICE,
   UNSHIFT_TAB,
 } = types;
 
@@ -79,19 +79,19 @@ const actions = createActions(
         }
         return result;
       });
-      const { serveCode } = newTabs[newCurIndex];
+      const { serviceCode } = newTabs[newCurIndex];
       dispatch(setTabs(newTabs));
-      return serveCode;
+      return serviceCode;
     },
-    [UNSHIFT_TAB]: (serveCode) => (dispatch, getState) => {
+    [UNSHIFT_TAB]: (serviceCode) => (dispatch, getState) => {
       const state = getState();
       const {
         setTabs,
       } = actions;
       const { tabs: oldTabs, menus } = state.work;
       let index = -1;
-      const curTabIndex = oldTabs.findIndex(({ serveCode: tabServeCode }, i) => {
-        return serveCode === tabServeCode;
+      const curTabIndex = oldTabs.findIndex(({ serviceCode: tabServiceCode }, i) => {
+        return serviceCode === tabServiceCode;
       });
       const curTab = oldTabs[curTabIndex];
       const other = oldTabs.slice(0, curTabIndex).concat(oldTabs.slice(curTabIndex + 1));
@@ -101,10 +101,10 @@ const actions = createActions(
     [SET_CURRENT]: (code) => (dispatch, getState) =>{
       const state = getState();
       const {
-        changeServe,
+        changeService,
         getTitleService,
       } = actions;
-      dispatch(changeServe(code));
+      dispatch(changeService(code));
       dispatch(getTitleService(code));
     },
   },
@@ -115,7 +115,7 @@ const actions = createActions(
   PIN_DISPLAY_NONE,
   ADD_BRM,
   RETURN_DEFAULT_STATE,
-  CHANGE_SERVE,
+  CHANGE_SERVICE,
   SET_TABS,
   SET_PRODUCT_INFO,
 );

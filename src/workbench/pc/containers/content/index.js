@@ -29,7 +29,7 @@ class ContentContainer extends Component {
   }
 
   render() {
-    const { hasTab, current: { menuItemId: currentId, url: currentLocation, serveCode: curServeCode }, tabs, menus } = this.props;
+    const { hasTab, current: { menuItemId: currentId, url: currentLocation, serviceCode: curServiceCode }, tabs, menus } = this.props;
 
     if (hasTab) {
       return (
