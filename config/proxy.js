@@ -1,7 +1,9 @@
 var path = require('path')
 var projectId = '29035'
 var api = [
-  '/service/getAllServicesGroupByLabels',
+  '/service/getAllServicesGroupByLabels',//废弃
+  '/service/getAllServicesByLabelGroup',
+  '/application/getAllAppsbyLabelGroup',
   '/application/getAllApps',
   '/desktop/getdeskTop',
   '/service/getServiceInfoByServiceCode',
