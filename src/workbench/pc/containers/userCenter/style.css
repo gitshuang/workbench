@@ -133,6 +133,7 @@
   display:-webkit-box;
   -webkit-box-align:center;
   -webkit-box-pack:center;
+  overflow: hidden;
 }
 .gloryIcon{
   width: 100%;

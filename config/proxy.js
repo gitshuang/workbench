@@ -8,7 +8,7 @@ var api = [
   '/desktop/getdeskTop',
   '/service/getServiceInfoByServiceCode',
   '/service/getServiceInfoByAppCode',
-  '/service/getAllAppsGroupByLabels',
+  '/service/getAllAppsGroupByLabels',//废弃
 
   '/user/setCutUser',
 
