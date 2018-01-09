@@ -42,6 +42,7 @@ class HomeWidgeList extends Component{
       const {
         type,
         jsurl,
+        serviceType,
         widgetId,
         serviceCode,
       } = child;
@@ -55,8 +56,9 @@ class HomeWidgeList extends Component{
           openFolder(child);
         }
       } else if (type === 3 && !jsurl){
+        let _path = serviceType == "2"?`/app/${applicationCode}`:`/service/${serviceCode}`;
         props.clickHandler = () => {
-          history.push(`/service/${serviceCode}`);
+          history.push(_path);
         }
       }
       return (

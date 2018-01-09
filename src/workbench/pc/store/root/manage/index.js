@@ -115,7 +115,12 @@ function findById(manageList,id) {
 const reducer = handleActions({
 
   [setManageList]: (state, { payload, error }) => {
-    return state;
+    debugger;
+    return{
+      ...state,
+      selectWidgetItem:true
+    }
+    // return state;
   },
   [getManageList]: (state, { payload, error }) => {
     if (error) {
@@ -139,6 +144,7 @@ const reducer = handleActions({
       "parentId": parentId,
       "widgetName": "",
       "jsurl": "",
+      "serviceType":"",
       "size": 1
     };
 
@@ -158,6 +164,7 @@ const reducer = handleActions({
       newCarObn.serviceCode = da.serviceCode;
       newCarObn.icon = da.serviceIcon;
       newCarObn.size = da.widgetTemplate.size;
+      newCarObn.serviceType = da.widgetTemplate.serviceType;
       newCar.push(newCarObn);
     }
     state.manageList.forEach((da,i)=>{
@@ -165,8 +172,6 @@ const reducer = handleActions({
           da.children = [...da.children,...newCar];
         }
     })
-    console.log("====currentSelectWidgetMap : ");
-    console.log(currentSelectWidgetMap);
     let newManageList = JSON.parse(JSON.stringify(state.manageList));
 
     return{
