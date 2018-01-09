@@ -112,6 +112,19 @@ function findById(manageList,id) {
   }
   return data;
 }
+
+function getDefaultSelectCheck(alllist,manageList) {
+  for(let i = 0;i<manageList.length;i++){
+    if(manageList[i].children && manageList[i].children.length != 0){
+      getDefaultSelectCheck(alllist,manageList[i].children);
+    }else{
+        let mapItem = alllist[manageList[i].serviceId];
+        if(mapItem && manageList[i].type == 3){//表示服务和应用
+          mapItem.selected  = "1";
+        }
+    }
+  }
+}
 const reducer = handleActions({
 
   [setManageList]: (state, { payload, error }) => {
@@ -195,7 +208,7 @@ const reducer = handleActions({
           da.serviceMap = _serviceMap;
         })
       });
-
+      getDefaultSelectCheck(applicationsMap,state.manageList);//恢复选中磁铁
       return {
         ...state,
         applicationsMap,
