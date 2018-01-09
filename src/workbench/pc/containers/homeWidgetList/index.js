@@ -56,7 +56,7 @@ class HomeWidgeList extends Component{
           openFolder(child);
         }
       } else if (type === 3 && !jsurl){
-        let _path = serviceType == "2"?`/app/${applicationCode}`:`/service/${serviceCode}`;
+        let _path = serviceType == "2"?`/app/${serviceCode}`:`/service/${serviceCode}`;
         props.clickHandler = () => {
           history.push(_path);
         }
