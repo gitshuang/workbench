@@ -236,7 +236,7 @@ class UserInfoContainer extends Component {
   }
 
   logOut=()=>{
-    window.location.href = `/workbench/logout?service=${encodeURIComponent(`${window.location.origin}/`)}`;
+    window.location.href = `/logout?service=${encodeURIComponent(`${window.location.origin}/`)}`;
   }
 
   render() {
