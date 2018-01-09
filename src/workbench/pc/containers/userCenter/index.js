@@ -181,7 +181,7 @@ class UserInfoContainer extends Component {
         alert("账号");
         break;
       case 'language' :
-        alert("界面语言");
+        alert("功能建设中...");
         break;
       case 'message' :
         alert("消息");
