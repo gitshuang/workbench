@@ -36,3 +36,7 @@
   list-style: none;
   overflow: hidden;
 }
+.WidgetList li:hover{
+    cursor: pointer;
+    box-shadow: 0 6px 8px rgba(74,81,93,0.25);
+}
