@@ -266,7 +266,7 @@ class searchResult extends Component {
     return (e) => {
       e.stopPropagation();
       console.log(type,item)
-      window.location.href=item.url
+      this.props.history.push('/'+type+'/'+item.serviceCode);
     }
   }
   goOtherlist(item){
