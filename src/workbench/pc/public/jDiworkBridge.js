@@ -18,6 +18,7 @@ const handlerList = {
     const postMessageToWinProxy = (callbackId) => {
       postMessageToWin(this.source, {
         type: callbackId,
+        destroy: false,
       });
     };
     const options = event.detail.options;
