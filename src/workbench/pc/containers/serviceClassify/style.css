@@ -142,7 +142,8 @@
   box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
 }
 .appsList li:hover{
-  background:rgba(225,76,70,0.1);
+  /* background:rgba(225,76,70,0.1); */
+  box-shadow: 0 3px 6px 0 rgba(74,81,93,0.25);
   cursor:pointer;
 }
 .appItem_describe p{
