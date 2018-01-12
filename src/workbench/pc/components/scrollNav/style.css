@@ -22,13 +22,11 @@
     height: 8px;
 }
 .activeLink {
-    /* color: rgba(71,77,84,1); */
+    color: rgba(71,77,84,1);
     text-decoration: unset;
     font-weight: bold;
     font-size:15px;
     font-family:MicrosoftYaHei-Bold;
-    color:red;
-
 }
 
 .activeLink:after{
@@ -42,6 +40,7 @@
     margin-top: 2px;
     border-radius: 3px;
 }
+
 
 .item {
     width: 100%;

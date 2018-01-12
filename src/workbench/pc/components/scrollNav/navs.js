@@ -8,59 +8,46 @@ import {
   navs,
 } from './style.css';
 
+function addClass(elm) {
+  elm.setAttribute("class", `${link} ${activeLink}`);
+}
+
+function replaceClass(list, i) {
+  list = Array.prototype.slice.call(list.querySelectorAll('li a'), 0);
+  list.forEach((a) => {
+    a.setAttribute("class", link);
+  });
+  addClass(list[i]);
+}
+
 class Navs extends Component{
 
   constructor(props) {
     super(props);
-    this.flag = 0;
+    this.navClassNotInit = true;
   }
 
   componentDidMount() {
-    this.inter = setInterval(()=>{
-      let lis = document.getElementById("nav_links").getElementsByTagName("a");
-      if(this.flag == lis.length){
-        clearInterval(this.inter);
-        this.inter = null;
-        this.setFirstNavs();
-      }
-    },0);
-  }
-  
-  setFirstNavs =()=>{
-      let lis = document.getElementById("nav_links").getElementsByTagName("a");
-      let default_class = "";
-      let b = false; 
-      for(var i=0;i<lis.length;i++){
-        b = this.isContains(lis[i].getAttribute("class")); 
-        if(!b){
-          default_class = lis[i].getAttribute("class")
-        } 
-      }
-      lis[0].setAttribute("class",default_class + " active_link");
-      let _id = lis[0].getAttribute("id");
-      document.getElementById(_id).click(); 
-  }
-
-  isContains(str) {
-    let regx1 = (/active_link/);
-    return str.match(regx1)?true:false;
-  }
-
-  handleSetActive=(e,id)=>{
-    let lis = document.getElementById("nav_links").getElementsByTagName("a");
-    if(this.flag == lis.length){
-      for(var i=0;i<lis.length;i++){
-        let _class = lis[i].getAttribute("class");
-        lis[i].setAttribute("class", _class.replace((/active_link/g)," "));
-        if(lis[i].id == id){
-          lis[i].setAttribute("class", _class+=" active_link");
+    setTimeout(() => {
+      if (this.navClassNotInit) {
+        console.log('not init')
+        const firstA = this.refs.list.querySelector('li a');
+        if (firstA) {
+          addClass(firstA);
         }
       }
-      this.flag = 1;
-    }
-    this.flag++;
+    }, 500);
   }
 
+  handleSetActive(i) {
+    if (this.refs.list) {
+      console.log('has list');
+      this.navClassNotInit = false;
+      replaceClass(this.refs.list, i);
+    } else {
+      console.log('has no list');
+    }
+  }
   render(){
     let {
         items,
@@ -71,23 +58,21 @@ class Navs extends Component{
       } = this.props;
     return (
       <div className={cover}>
-        <ul className={navs} id="nav_links">
+        <ul className={navs} ref='list'>
           {
             items = items.map(({ label, target }, i) => (
               <li key={i}>
                 <Link
                   className={link}
                   style={{color:color}}
-                  // activeClass="active_link"
                   to={target}
                   spy={true}
                   smooth={true}
                   offset={i==0?(-90):offset}
                   duration={duration}
+                  onSetActive={(e)=>{ this.handleSetActive(i) }}
                   isDynamic={true}
                   id={target}
-                  onSetActive={(e)=>{this.handleSetActive(e,target)}}
-                  ignoreCancelEvents={false}
                   delay={delay}>
                   {label}
                 </Link>

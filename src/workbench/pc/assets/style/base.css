@@ -234,21 +234,3 @@ body {
 
 
 
-.active_link {
-  color: rgba(71,77,84,1);
-  text-decoration: unset;
-  font-weight: bold;
-  font-size:15px;
-  font-family:MicrosoftYaHei-Bold;
-}
-.active_link:after{
-  content: " ";
-  border-bottom: 6px solid rgba(225,76,70,1);
-  max-width: 28px;
-  min-width: 14px;
-  width: 50%;
-  height: 0;
-  margin: 0 auto;
-  margin-top: 2px;
-  border-radius: 3px;
-}
