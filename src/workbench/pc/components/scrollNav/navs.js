@@ -1,7 +1,5 @@
 import React,{Component} from 'react';
 import { Link ,animateScroll as scroll,scrollSpy,Events} from 'react-scroll';
-import { mapStateToProps } from '@u';
-import { connect } from 'react-redux';
 import {
   link,
   activeLink,
@@ -24,24 +22,6 @@ function replaceClass(list, i) {
   addClass(list[i]);
 }
 
-const once = (() => {
-  let notRun = true;
-  return (fn) => {
-    if (notRun) {
-      fn();
-      notRun = false;
-    }
-  }
-})();
-
-@connect(
-  mapStateToProps(
-    'workList',
-    {
-      namespace: 'home',
-    }
-  )
-)
 class Navs extends Component{
 
   constructor(props) {
@@ -49,20 +29,18 @@ class Navs extends Component{
     this.navClassNotInit = true;
   }
 
-  componentWillReceiveProps(nextProps) {
-    once(()=>{
-      setTimeout(() => {
-        if (this.navClassNotInit) {
-          console.log('not init')
-          const firstA = this.refs.list.querySelector('li a');
-          if (firstA) {
-            addClass(firstA);
-            window.scrollTo(0, 0);
-            notFirstInit = true;
-          }
+  componentDidMount() {
+    setTimeout(() => {
+      if (this.navClassNotInit) {
+        console.log('not init')
+        const firstA = this.refs.list.querySelector('li a');
+        if (firstA) {
+          addClass(firstA);
+          window.scrollTo(0,0);
+          notFirstInit = true;
         }
-      }, 500);
-    });
+      }
+    }, 500);
   }
 
   handleSetActive(i) {
@@ -74,7 +52,6 @@ class Navs extends Component{
       console.log('has no list');
     }
   }
-
   render(){
     let {
         items,
