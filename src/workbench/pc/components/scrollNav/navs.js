@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Link ,animateScroll as scroll,scrollSpy} from 'react-scroll';
+import { Link ,animateScroll as scroll,scrollSpy,Events} from 'react-scroll';
 import {
   link,
   activeLink,
@@ -12,24 +12,43 @@ class Navs extends Component{
 
   constructor(props) {
     super(props);
+
+    Events.scrollEvent.register('begin', function(to, element) {
+      console.log("begin", arguments);
+    });
+
+    Events.scrollEvent.register('end', function(to, element) {
+      console.log("end", arguments);
+      localStorage.setItem("nav",arguments[0]);
+    });
+
+    scrollSpy.update();
+
   }
 
   componentDidMount() {
     console.log("====componentDidMount=====" );
-
     setTimeout(() => {
       console.log("======setTimeout===" );
       let lis = document.getElementById("nav_links").getElementsByTagName("a");
+      let default_class = "";
       let b = false;
       for(var i=0;i<lis.length;i++){
         console.log(" lis[i].getAttribute : " + lis[i].getAttribute("class"));
         b = this.isContains(lis[i].getAttribute("class"));
-        console.log("b: " + b);
+        if(b){
+          default_class = lis[i].getAttribute("class");
+        }
       }
-      let newClass = lis[0].getAttribute("class");
-      newClass += " active_link";
-      b?"":lis[0].setAttribute("class",newClass);
-
+      for(var j=0;j<lis.length;j++){
+        if(lis[j].getAttribute("class").id == localStorage.getItem("nav")){
+          lis[j].setAttribute("class",default_class + " active_link")
+        }
+      }
+      // let newClass = lis[0].getAttribute("class");
+      // newClass += " active_link";
+      // console.log("lis[0] ",lis[0]);
+      // b?"":lis[0].setAttribute("class",newClass);
     },0);
   }
  
