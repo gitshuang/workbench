@@ -8,46 +8,56 @@ import {
   navs,
 } from './style.css';
 
-function addClass(elm) {
-  elm.setAttribute("class", `${link} ${activeLink}`);
-}
-
-function replaceClass(list, i) {
-  list = Array.prototype.slice.call(list.querySelectorAll('li a'), 0);
-  list.forEach((a) => {
-    a.setAttribute("class", link);
-  });
-  addClass(list[i]);
-}
-
 class Navs extends Component{
 
   constructor(props) {
     super(props);
-    this.navClassNotInit = true;
+
+    Events.scrollEvent.register('begin', function(to, element) {
+      console.log("begin", arguments);
+    });
+
+    Events.scrollEvent.register('end', function(to, element) {
+      console.log("end", arguments);
+      localStorage.setItem("nav",arguments[0]);
+    });
+
+    scrollSpy.update();
+
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      if (this.navClassNotInit) {
-        console.log('not init')
-        const firstA = this.refs.list.querySelector('li a');
-        if (firstA) {
-          addClass(firstA);
-        }
+  componentDidMount() { 
+    setTimeout(() => { 
+      let lis = document.getElementById("nav_links").getElementsByTagName("a");
+      let default_class = "";
+      let b = false; 
+      for(var i=0;i<lis.length;i++){
+        b = this.isContains(lis[i].getAttribute("class")); 
+        if(!b){
+          default_class = lis[i].getAttribute("class")
+        } 
       }
-    }, 500);
+      lis[0].setAttribute("class",default_class + " active_link");
+      scroll.scrollTo(1);
+    },0);
+  }
+ 
+  isContains(str) {
+    let regx1 = (/active_link/);
+    return str.match(regx1)?true:false;
   }
 
-  handleSetActive(i) {
-    if (this.refs.list) {
-      console.log('has list');
-      this.navClassNotInit = false;
-      replaceClass(this.refs.list, i);
-    } else {
-      console.log('has no list');
+  handleSetActive=(e,id)=>{
+    let lis = document.getElementById("nav_links").getElementsByTagName("a");
+    for(var i=0;i<lis.length;i++){
+      let _class = lis[i].getAttribute("class");
+      lis[i].setAttribute("class", _class.replace((/active_link/g)," "));
+      if(lis[i].id == id){
+        lis[i].setAttribute("class", _class+=" active_link");
+      }
     }
   }
+
   render(){
     let {
         items,
@@ -58,21 +68,22 @@ class Navs extends Component{
       } = this.props;
     return (
       <div className={cover}>
-        <ul className={navs} ref='list'>
+        <ul className={navs} id="nav_links">
           {
             items = items.map(({ label, target }, i) => (
               <li key={i}>
                 <Link
                   className={link}
                   style={{color:color}}
+                  // activeClass="active_link"
                   to={target}
                   spy={true}
                   smooth={true}
                   offset={i==0?(-90):offset}
                   duration={duration}
-                  onSetActive={(e)=>{ this.handleSetActive(i) }}
                   isDynamic={true}
                   id={target}
+                  onSetActive={(e)=>{this.handleSetActive(e,target)}}
                   delay={delay}>
                   {label}
                 </Link>
