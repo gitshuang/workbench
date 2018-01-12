@@ -12,18 +12,6 @@ class Navs extends Component{
 
   constructor(props) {
     super(props);
-
-    Events.scrollEvent.register('begin', function(to, element) {
-      console.log("begin", arguments);
-    });
-
-    Events.scrollEvent.register('end', function(to, element) {
-      console.log("end", arguments);
-      localStorage.setItem("nav",arguments[0]);
-    });
-
-    scrollSpy.update();
-
   }
 
   componentDidMount() { 
@@ -38,7 +26,8 @@ class Navs extends Component{
         } 
       }
       lis[0].setAttribute("class",default_class + " active_link");
-      scroll.scrollTo(1);
+      let _id = lis[0].getAttribute("id");
+      document.getElementById(_id).click(); 
     },0);
   }
  
@@ -84,6 +73,7 @@ class Navs extends Component{
                   isDynamic={true}
                   id={target}
                   onSetActive={(e)=>{this.handleSetActive(e,target)}}
+                  ignoreCancelEvents={false}
                   delay={delay}>
                   {label}
                 </Link>
