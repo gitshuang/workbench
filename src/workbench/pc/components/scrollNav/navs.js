@@ -12,12 +12,13 @@ class Navs extends Component{
 
   constructor(props) {
     super(props);
-    this.flag = false;
+    this.flag = 0;
   }
 
   componentDidMount() {
     this.inter = setInterval(()=>{
-      if(this.flag){
+      let lis = document.getElementById("nav_links").getElementsByTagName("a");
+      if(this.flag == lis.length){
         clearInterval(this.inter);
         this.inter = null;
         this.setFirstNavs();
@@ -54,7 +55,7 @@ class Navs extends Component{
         lis[i].setAttribute("class", _class+=" active_link");
       }
     }
-    this.flag = true;
+    this.flag++;
   }
 
   render(){
