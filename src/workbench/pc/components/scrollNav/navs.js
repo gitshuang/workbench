@@ -36,7 +36,7 @@ class Navs extends Component{
       for(var i=0;i<lis.length;i++){
         console.log(" lis[i].getAttribute : " + lis[i].getAttribute("class"));
         b = this.isContains(lis[i].getAttribute("class"));
-        if(b){
+        if(!b){
           default_class = lis[i].getAttribute("class");
         }
       }
