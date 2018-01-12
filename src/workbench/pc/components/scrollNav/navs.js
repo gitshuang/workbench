@@ -12,10 +12,20 @@ class Navs extends Component{
 
   constructor(props) {
     super(props);
+    this.flag = false;
   }
 
-  componentDidMount() { 
-    setTimeout(() => { 
+  componentDidMount() {
+    this.inter = setInterval(()=>{
+      if(this.flag){
+        clearInterval(this.inter);
+        this.inter = null;
+        this.setFirstNavs();
+      }
+    },0);
+  }
+  
+  setFirstNavs =()=>{
       let lis = document.getElementById("nav_links").getElementsByTagName("a");
       let default_class = "";
       let b = false; 
@@ -28,9 +38,8 @@ class Navs extends Component{
       lis[0].setAttribute("class",default_class + " active_link");
       let _id = lis[0].getAttribute("id");
       document.getElementById(_id).click(); 
-    },0);
   }
- 
+
   isContains(str) {
     let regx1 = (/active_link/);
     return str.match(regx1)?true:false;
@@ -45,6 +54,7 @@ class Navs extends Component{
         lis[i].setAttribute("class", _class+=" active_link");
       }
     }
+    this.flag = true;
   }
 
   render(){
