@@ -74,12 +74,12 @@ class QuickServiceContainer extends Component {
 
   onscrollFun =() =>{
      let div = this.refs.list;
-     let scrollTop = div.scrollTop || div.pageYOffset || div.scrollTop;
+     let scrollTop = Math.floor(div.scrollTop || div.pageYOffset || div.scrollTop);
      if(div.scrollHeight == div.clientHeight + scrollTop ) {
           this.setState({
             openAllstate:true
           })
-      }else{
+      }else{ 
         if(scrollTop <= 10){
           this.setState({
             openAllstate:false
