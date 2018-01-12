@@ -8,6 +8,8 @@ import {
   navs,
 } from './style.css';
 
+let notFirstInit = false;
+
 function addClass(elm) {
   elm.setAttribute("class", `${link} ${activeLink}`);
 }
@@ -34,13 +36,15 @@ class Navs extends Component{
         const firstA = this.refs.list.querySelector('li a');
         if (firstA) {
           addClass(firstA);
+          window.scrollTo(0,0);
+          notFirstInit = true;
         }
       }
     }, 500);
   }
 
   handleSetActive(i) {
-    if (this.refs.list) {
+    if (this.refs.list && notFirstInit) {
       console.log('has list');
       this.navClassNotInit = false;
       replaceClass(this.refs.list, i);
