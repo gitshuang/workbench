@@ -46,9 +46,6 @@ class Navs extends Component{
       replaceClass(this.refs.list, i);
     } else {
       console.log('has no list');
-      setTimeout(() => {
-        replaceClass(this.refs.list, i);
-      }, 0);
     }
   }
   render(){
