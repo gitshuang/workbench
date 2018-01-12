@@ -48,11 +48,13 @@ class Navs extends Component{
 
   handleSetActive=(e,id)=>{
     let lis = document.getElementById("nav_links").getElementsByTagName("a");
-    for(var i=0;i<lis.length;i++){
-      let _class = lis[i].getAttribute("class");
-      lis[i].setAttribute("class", _class.replace((/active_link/g)," "));
-      if(lis[i].id == id){
-        lis[i].setAttribute("class", _class+=" active_link");
+    if(this.flag == lis.length){
+      for(var i=0;i<lis.length;i++){
+        let _class = lis[i].getAttribute("class");
+        lis[i].setAttribute("class", _class.replace((/active_link/g)," "));
+        if(lis[i].id == id){
+          lis[i].setAttribute("class", _class+=" active_link");
+        }
       }
     }
     this.flag++;
