@@ -40,9 +40,9 @@ class Navs extends Component{
   }
 
   handleSetActive(i) {
-    this.navClassNotInit = false;
     if (this.refs.list) {
       console.log('has list');
+      this.navClassNotInit = false;
       replaceClass(this.refs.list, i);
     } else {
       console.log('has no list');
