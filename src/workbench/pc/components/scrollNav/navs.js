@@ -56,6 +56,7 @@ class Navs extends Component{
           lis[i].setAttribute("class", _class+=" active_link");
         }
       }
+      this.flag = 1;
     }
     this.flag++;
   }
