@@ -9,17 +9,31 @@ import {
 } from './style.css';
 
 class Navs extends Component{
-  componentDidMount() {
-    setTimeout(() => {
-      const firstA = this.refs.list.querySelector('li a');
-      if (firstA) {
-        let newClass = firstA.getAttribute("class");
-        newClass += ` ${activeLink}`;
-        firstA.setAttribute("class", newClass);
-      }
-    },0);
+
+  constructor(props) {
+    super(props);
+    this.navClassNotInit = true;
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      if (this.navClassNotInit) {
+        const firstA = this.refs.list.querySelector('li a');
+        if (firstA) {
+          firstA.setAttribute("class", `${link} ${activeLink}`);
+        }
+      }
+    }, 100);
+  }
+
+  handleSetActive(i) {
+    this.navClassNotInit = false;
+    const list = Array.prototype.slice.call(this.refs.list.querySelectorAll('li a'), 0);
+    list.forEach((a) => {
+      a.setAttribute("class", link);
+    });
+    list[i].setAttribute("class", `${link} ${activeLink}`);
+  }
   render(){
     let {
         items,
@@ -37,12 +51,12 @@ class Navs extends Component{
                 <Link
                   className={link}
                   style={{color:color}}
-                  activeClass={activeLink}
                   to={target}
                   spy={true}
                   smooth={true}
                   offset={i==0?(-90):offset}
                   duration={duration}
+                  onSetActive={(e)=>{ this.handleSetActive(i) }}
                   isDynamic={true}
                   id={target}
                   delay={delay}>
