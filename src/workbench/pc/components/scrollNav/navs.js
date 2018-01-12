@@ -8,6 +8,18 @@ import {
   navs,
 } from './style.css';
 
+function addClass(elm) {
+  elm.setAttribute("class", `${link} ${activeLink}`);
+}
+
+function replaceClass(list, i) {
+  list = Array.prototype.slice.call(list.querySelectorAll('li a'), 0);
+  list.forEach((a) => {
+    a.setAttribute("class", link);
+  });
+  addClass(list[i]);
+}
+
 class Navs extends Component{
 
   constructor(props) {
@@ -18,21 +30,26 @@ class Navs extends Component{
   componentDidMount() {
     setTimeout(() => {
       if (this.navClassNotInit) {
+        console.log('not init')
         const firstA = this.refs.list.querySelector('li a');
         if (firstA) {
-          firstA.setAttribute("class", `${link} ${activeLink}`);
+          addClass(firstA);
         }
       }
-    }, 100);
+    }, 500);
   }
 
   handleSetActive(i) {
     this.navClassNotInit = false;
-    const list = Array.prototype.slice.call(this.refs.list.querySelectorAll('li a'), 0);
-    list.forEach((a) => {
-      a.setAttribute("class", link);
-    });
-    list[i].setAttribute("class", `${link} ${activeLink}`);
+    if (this.refs.list) {
+      console.log('has list');
+      replaceClass(this.refs.list, i);
+    } else {
+      console.log('has no list');
+      setTimeout(() => {
+        replaceClass(this.refs.list, i);
+      }, 0);
+    }
   }
   render(){
     let {
