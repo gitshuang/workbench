@@ -39,6 +39,7 @@ class Navs extends Component{
         if(!b){
           default_class = lis[i].getAttribute("class");
         }
+        lis[i].setAttribute("class",default_class);
       }
       for(var j=0;j<lis.length;j++){
         if(lis[j].getAttribute("id") == localStorage.getItem("nav")){
