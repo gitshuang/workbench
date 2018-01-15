@@ -33,7 +33,6 @@ const type='item';
 var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
-    console.log(" aaa ",props,monitor, component);
     //let diffOffset = monitor.getDifferenceFromInitialOffset();
     // props.editTitle(props.id,props.data.widgetName);
     timestamp=new Date().getTime();
