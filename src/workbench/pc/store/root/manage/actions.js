@@ -40,7 +40,8 @@ const {
   EDIT_TITLE,
   SET_EDITONLY_ID,
   SET_CURRENT_SELECT_WIDGET_MAP,
-  RETURN_DEFAULT_STATE
+  RETURN_DEFAULT_STATE,
+  SET_DRAG_INPUT_STATE,
 } = types;
 
 const actions = createActions(
@@ -82,6 +83,7 @@ const actions = createActions(
   EDIT_TITLE,
   SET_EDITONLY_ID,
   SET_CURRENT_SELECT_WIDGET_MAP,
-  RETURN_DEFAULT_STATE
+  RETURN_DEFAULT_STATE,
+  SET_DRAG_INPUT_STATE,
 );
 export default actions;

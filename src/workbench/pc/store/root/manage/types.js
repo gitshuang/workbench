@@ -35,4 +35,5 @@ export default createTypes(
   'SET_EDITONLY_ID',
   'SET_CURRENT_SELECT_WIDGET_MAP',
   'RETURN_DEFAULT_STATE',
+  'SET_DRAG_INPUT_STATE',
 );

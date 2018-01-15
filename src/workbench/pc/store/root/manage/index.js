@@ -38,7 +38,8 @@ const {
   setCurrGroupIndex,
   editTitle,
   setEditonlyId,
-  returnDefaultState
+  returnDefaultState,
+  setDragInputState,
 } = actions;
 
 const defaultState = {
@@ -62,7 +63,9 @@ const defaultState = {
 
   applicationsMap:{},
   selectWidgetItem:true,
-  allServicesByLabelGroup:{}
+  allServicesByLabelGroup:{},
+
+  dragState:true //是否可拖拽
 };
 
 const findTreeById = (data, curId) => {
@@ -128,12 +131,17 @@ function getDefaultSelectCheck(alllist,manageList) {
 const reducer = handleActions({
 
   [setManageList]: (state, { payload, error }) => {
-    debugger;
     return{
       ...state,
       selectWidgetItem:true
     }
     // return state;
+  },
+  [setDragInputState]: (state, { payload:dragState }) => {
+    return{
+      ...state,
+      dragState
+    }
   },
   [getManageList]: (state, { payload, error }) => {
     if (error) {

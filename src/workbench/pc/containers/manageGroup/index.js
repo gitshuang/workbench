@@ -51,7 +51,8 @@ const {
   addFolder,
   selectListActions,
   selectGroupActions,
-  setEditonlyId
+  setEditonlyId,
+  setDragInputState
 } = manageActions;
 
 function findItemById(manageList,id) {
@@ -73,7 +74,9 @@ function findItemById(manageList,id) {
 const type='item';
 
 const itemSource = {
-  beginDrag(props) {
+  beginDrag(props,monitor) {
+    // return false;
+    // console.log(" aaa ",props);
     return { id: props.id,type:props.type,parentId:props.parentId,folderType:props.folderType };
   }
 };
@@ -120,6 +123,7 @@ function collectTaget(connect, monitor) {
     'selectGroup',
     'selectList',
     'currEditonlyId',
+    'dragState',
     {
       namespace:'manage'
     }
@@ -137,7 +141,8 @@ function collectTaget(connect, monitor) {
     addFolder,
     selectListActions,
     selectGroupActions,
-    setEditonlyId
+    setEditonlyId,
+    setDragInputState,
   }
 )
 class ManageGroup extends Component {
@@ -273,7 +278,15 @@ class ManageGroup extends Component {
   handleFocus = ()=>{
     this.setState({
       inFoucs: true,
-    })
+    });
+    const { setDragInputState,dragState } = this.props;
+    if(!dragState)return;
+    setDragInputState(false);
+  }
+  handleBlur = () => {
+    const { setDragInputState,dragState } = this.props;
+    if(dragState)return;
+    setDragInputState(true);
   }
   // 输入框失焦
   // handleBlur = () => {
@@ -392,7 +405,8 @@ class ManageGroup extends Component {
       connectDropTarget,
       isDragging,
       selectGroup,
-      currEditonlyId
+      currEditonlyId,
+      dragState
     } = this.props;
     const {
       inFoucs,
@@ -455,29 +469,29 @@ class ManageGroup extends Component {
     if (isDragging) {
       //return null
     }
-    return connectDragSource(connectDropTarget(
-      <div className={`${groupArea} animated zoomIn`}>
-        <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
-          { groupTitle }
-          <div>
-            <WidgetList index={index} data={children} parentId={this.props.data.widgetId}  />
-          </div>
-        </section>
 
-        <div className={addBtn} >
-          <ButtonDefaultWhite className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
-            <Icon type="add"></Icon>
-            添加分组
-          </ButtonDefaultWhite>
+    let _html = ( <div className={`${groupArea} animated zoomIn`}>
+      <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
+        { groupTitle }
+        <div>
+          <WidgetList index={index} data={children} parentId={this.props.data.widgetId}  />
         </div>
-        <PopDialog className="pop_dialog_delete" show={ showModal } type="delete" close={this.popClose} btns={pop_btn} data={{ index }}>
-          <div className="pop_cont">
-            <BeeIcon type="uf-exc-t" className="icon"/>
-            <span>您确认要删除此项?</span>
-          </div>
-        </PopDialog>
+      </section>
+
+      <div className={addBtn} >
+        <ButtonDefaultWhite className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
+          <Icon type="add"></Icon>
+          添加分组
+        </ButtonDefaultWhite>
       </div>
-    ));
+      <PopDialog className="pop_dialog_delete" show={ showModal } type="delete" close={this.popClose} btns={pop_btn} data={{ index }}>
+        <div className="pop_cont">
+          <BeeIcon type="uf-exc-t" className="icon"/>
+          <span>您确认要删除此项?</span>
+        </div>
+      </PopDialog>
+    </div>);
+    return dragState?connectDragSource(connectDropTarget(_html)):_html;
   }
 }
 
