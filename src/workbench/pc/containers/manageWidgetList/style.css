@@ -221,6 +221,12 @@
 .pop_dialog_widge_list :global(.u-modal-body){
   padding:0;
 }
+.pop_dialog_widge_list :global(.u-modal-body){
+  height: calc(100% - 89px);
+}
+.pop_dialog_widge_list :global(.u-modal-body)>div{
+  height: 100%;
+}
 .pop_dialog_widge_list :global(.u-modal-header){
   font-size:19px;
   color:rgba(71,77,84,1);

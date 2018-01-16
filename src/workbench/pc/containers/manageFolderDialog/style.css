@@ -24,7 +24,7 @@
   width: auto;
 }
 :global(div[role=dialog]){
-  // height:100%;
+  /* height:100%; */
 }
 :global( .manageDialogFolder .u-modal-dialog){
   margin:0px;
