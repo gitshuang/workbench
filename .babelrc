@@ -7,7 +7,7 @@
   "plugins": [
     ["transform-runtime", {
       "helpers": false,
-      "polyfill": true,
+      "polyfill": false,
       "regenerator": true
     }],
     "transform-decorators-legacy"
