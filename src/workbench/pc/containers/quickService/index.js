@@ -116,7 +116,7 @@ class QuickServiceContainer extends Component {
         {
           this.state.openAllstate ?(
             <div className={link_cont}>
-              <a className="link" onClick={this.openAllAppList}>全部应用及服务</a>
+              <a className="link" onClick={this.openAllAppList}>全部应用</a>
             </div>
           ) : (
             <div className={serviceBtn}>
