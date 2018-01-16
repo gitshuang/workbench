@@ -339,15 +339,9 @@ class UserInfoContainer extends Component {
           <ul className={`${gloryIcon} ${clearfix}`}>
             <li>
               <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
-              {/*<span>荣耀</span>*/}
             </li>
-            {/* <li>
-              <div className={`${iconContainer} ${icon2}`}><Icon type="favorite"></Icon></div>
-              <span>个人空间</span>
-            </li> */}
             <li>
               <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
-              {/*<span>动态</span>*/}
             </li>
           </ul>
         </div>

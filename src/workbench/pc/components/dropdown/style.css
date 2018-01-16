@@ -55,6 +55,11 @@
 .btn_pull_down:active .icon_style{
     color:rgba(225,76,70,1);
 }
+.btn_upward>div,.btn_pull_down>div{
+    display: inline-block;
+    width: 31px;
+    cursor: pointer;
+}
 .menu_style li{
     border-top: 1px solid rgba(221,224,227,0.47);
     color: rgba(74,81,93,1);

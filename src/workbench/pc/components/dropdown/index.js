@@ -48,12 +48,12 @@ class DropdownButton extends Component{
     dataItem.forEach((da,i) => {
         item.push(<MenuItem key={da.name} >{da.value}</MenuItem>);
     });
-    let _menus = <Menu className={menu_style} style={{ marginLeft:-85,marginTop:7,marginRight:-7}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
+    let _menus = <Menu className={menu_style} style={{ marginLeft:-78,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
     let arrard = this.state.visible?"upward":"pull-down";
     return(<div className={dropdown_button_cont} >
-         <div className={label_cont}>
+          <div className={label_cont}>
             <label>{label}</label>
-         </div>
+          </div>
           <div className={this.state.visible?btn_upward:btn_pull_down}>
             <Dropdown
                 getPopupContainer = {this.props.getPopupContainer}
@@ -61,7 +61,7 @@ class DropdownButton extends Component{
                 overlay={_menus}
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange} >
-                <Icon type={arrard} className={icon_style} />
+                <div><Icon type={arrard} className={icon_style} /></div>
             </Dropdown>
           </div>
       </div>)
