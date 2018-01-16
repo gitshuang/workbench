@@ -51,7 +51,7 @@ class SelectWidgetList extends Component {
     super(props);
     
     this.state = ({
-        activeKey: "1",
+        activeKey: undefined,
         // start: 0,
         value:"搜索内容...",
         data:{},//接口全部数据
@@ -223,11 +223,9 @@ class SelectWidgetList extends Component {
         _data.push(applicationsMap[appId]); 
       })
     }
-    console.log(" _data ");
-    console.log(_data);
     this.setState({
       allAppList:_data,
-      activeKey:''
+      activeKey:data.labelId
     });
   }
 
@@ -248,9 +246,9 @@ class SelectWidgetList extends Component {
     const {labelGroups,labels,activeKey,allAppList} = this.state;
 
     let btns = [];
-    btns.push(<Button key="10012" shape='border' className={ activeKey ? 'active' : '' } onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
+    btns.push(<Button key="10012" shape='border' className={ activeKey ? '' : 'active' } onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
     labels.map(function(da,i){
-        btns.push(<Button key={`button_li_${da.labelId}-${i}`} shape='border' onClick={()=>{self.onBtnOnclick(da)}}>{da.labelName}</Button>);
+        btns.push(<Button key={`button_li_${da.labelId}-${i}`} shape='border' className={ activeKey===da.labelId ? 'active' : '' } onClick={()=>{self.onBtnOnclick(da)}}>{da.labelName}</Button>);
     });
 
     let list = [];

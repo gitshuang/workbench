@@ -87,7 +87,7 @@
 .panel_left :global(.u-button-border:focus),.panel_left :global(.u-button-border:hover){
   color:#E14C46;
 }
-.panel_left :global(.u-button-group-vertical .active){
+.panel_left :global(.u-button-group-vertical .active),.panel_left :global(.u-button-group-vertical .u-button):active{
   background:#eee;
   color:#E14C46;
 }
