@@ -4,7 +4,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { widgetList, widgetItem, title, file_context, title_left,
   file_icon, title_right, context, bottom ,footer,
-  title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix,widgetFileItem,file_title_right,file_num,btn} from './style.css'
+  title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix,widgetFileItem,file_title_right,btn} from './style.css'
 import WidgetItem from './widgetItem';
 import Checkbox from 'bee-checkbox';
 import FormControl from 'bee-form-control';
@@ -19,7 +19,7 @@ import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit,openFolder,setEditonlyId } = manageActions;
+const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit,openFolder,setEditonlyId ,setDragInputState} = manageActions;
 
 const type='item';
 
@@ -67,6 +67,7 @@ function collectTaget(connect, monitor) {
     'selectGroup',
     'currEditonlyId',
     'drag',
+    'dragState',
     {
       namespace: 'manage',
     }
@@ -77,7 +78,8 @@ function collectTaget(connect, monitor) {
     setFolderEdit,selectListActions,selectGroupActions,
     cancelFolderEdit,
     openFolder,
-    setEditonlyId
+    setEditonlyId,
+    setDragInputState
   }
 )
 class WidgeFileItem extends Component {
@@ -206,12 +208,24 @@ class WidgeFileItem extends Component {
     }
     selectListActions(selectList2);
   }
+  //输入框聚焦更改背景颜色
+  handleFocus = ()=>{
+    const { setDragInputState,dragState } = this.props;
+    if(!dragState)return;
+    setDragInputState(false);
+  }
+  // 输入框失焦
+  handleBlur = () => {
+    const { setDragInputState,dragState } = this.props;
+    if(dragState)return;
+    setDragInputState(true);
+  }
 
   render() {
 
     const da = this.props.data;
     const id = da.widgetId;
-    const {selectList} = this.props;
+    const {selectList,dragState} = this.props;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     const pop_btn = [
       {label:"确认",fun:this.popSave,className:""},
@@ -219,7 +233,7 @@ class WidgeFileItem extends Component {
     ]   //设置操作按钮
 
     const edit = <div className={edit_cont}>
-      <FormControl className={`${form_control} input`} value={this.state.value} onChange={this.inputOnChange}/>
+      <FormControl className={`${form_control} input`} value={this.state.value} onChange={this.inputOnChange} onFocus={this.handleFocus} onBlur={this.handleBlur}/>
 
       <ButtonCheckSelected className={btn} onClick={this.save}><Icon type="right"></Icon></ButtonCheckSelected>
       <ButtonCheckClose className={btn} onClick={this.close}>
@@ -242,7 +256,7 @@ class WidgeFileItem extends Component {
       // return null
     }
     // ${isDragging ? 'rollOut':'slideInRight'}
-    return connectDragSource(connectDropTarget(
+    let _html = (
       <li name="file" className={`${widgetItem} ${widgetFileItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag} `} style={{...opacity }} onClick={this.props.onClick}>
         <div className={title}>
           <div className={[title_left,file_icon].join(' ')}></div>
@@ -254,9 +268,6 @@ class WidgeFileItem extends Component {
         {this.props.currEditonlyId == id ? edit : null }
         {this.props.currEditonlyId==id ? null : btns }
 
-        {/*<div className={file_num}>
-         (3)
-         </div>*/}
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } type="delete" close={this.popClose} data={da} btns={pop_btn} >
           <div className="pop_cont">
             <BeeIcon type="uf-exc-t" className="icon"/>
@@ -264,7 +275,8 @@ class WidgeFileItem extends Component {
           </div>
         </PopDialog>
       </li>
-    ));
+    );
+    return dragState?connectDragSource(connectDropTarget(_html)):_html;
   }
 }
 

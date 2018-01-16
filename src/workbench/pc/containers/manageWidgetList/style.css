@@ -199,12 +199,6 @@
 .widgetList li{
   overflow:hidden;
 }
-.file_num{
-  position:absolute;
-  right:8px;
-  bottom:8px;
-  color:#fff;
-}
 .pop_dialog_widge_list :global(.u-modal-dialog){
   margin: 0px;
   width: 100%;
