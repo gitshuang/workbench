@@ -169,7 +169,8 @@ class Dialog {
           if (unmountResult && div.parentNode) {
             div.parentNode.removeChild(div);
           }
-          resolve()
+          dialogIsOpen = false;
+          resolve();
         }, 1000);
       }
     );
@@ -177,12 +178,17 @@ class Dialog {
 }
 
 let globalDialogInstance;
+let dialogIsOpen = false;
 function makeGlobalDialogInstance(options) {
-  console.log(options)
   globalDialogInstance = new Dialog(options)
 }
 function openGlobalDialog(options) {
+  if (dialogIsOpen) {
+    return;
+  }
+  dialogIsOpen = true;
   const dialogFactory = makeGlobalDialogInstance.bind(null, options);
+  console.log(globalDialogInstance);
   if (globalDialogInstance) {
     globalDialogInstance.destroy().then(dialogFactory);
   } else {
