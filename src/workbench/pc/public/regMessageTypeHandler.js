@@ -21,10 +21,11 @@ const handlers = {
   closeDialog() {
     closeGlobalDialog();
   },
-  checkServiceOpen({ serviceCode }) {
+  checkServiceOpen({ serveCode }) {
     const state = store.getState();
+    console.log(state);
     const tabs = state.work.tabs;
-    const target = tabs.filter(({ serveCode })=>{
+    const target = tabs.filter(({ serviceCode })=>{
       return serviceCode === serveCode;
     })[0];
     if (target) {
@@ -32,11 +33,11 @@ const handlers = {
     }
     return false;
   },
-  postDataToService({ serviceCode, data }) {
+  postDataToService({ serveCode, data }) {
     const state = store.getState();
     const tabs = state.work.tabs;
-    const target = tabs.filter(({ serveCode })=>{
-      return serviceCode === serveCode;
+    const target = tabs.filter(({ serviceCode })=>{
+      return serveCode === serviceCode;
     })[0];
     if (target) {
       const { id } = target;
