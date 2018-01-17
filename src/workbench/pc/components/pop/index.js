@@ -151,7 +151,20 @@ class Dialog {
       return;
     }
     props.show = false;
-    this.render().destroy();
+    var pro =  new Promise(
+      (resolve) => {
+        setTimeout(() => {
+          const unmountResult = ReactDOM.unmountComponentAtNode(div);
+          if (unmountResult && div.parentNode) {
+            div.parentNode.removeChild(div);
+          }
+          dialogIsOpen = false;
+          resolve();
+        }, 1000);
+      }
+    );
+    this.render().pro.then(destroy);
+
   }
   render = () => {
     const { props, div } = this;
@@ -192,8 +205,7 @@ function openGlobalDialog(options) {
   if (globalDialogInstance) {
     globalDialogInstance.destroy();
   }
-    dialogFactory();
-  
+  dialogFactory();
 }
 function closeGlobalDialog() {
   if (globalDialogInstance) {
