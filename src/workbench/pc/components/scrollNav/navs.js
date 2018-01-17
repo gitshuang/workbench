@@ -36,7 +36,6 @@ class Navs extends Component{
         const firstA = this.refs.list.querySelector('li a');
         if (firstA) {
           addClass(firstA);
-          debugger;
           window.scrollTo(0,0);
           notFirstInit = true;
         }

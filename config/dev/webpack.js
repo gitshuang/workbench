@@ -14,6 +14,8 @@ module.exports = function (config) {
     entry: {
       main: [
         './scripts/dev-client',
+        'whatwg-fetch',
+        './src/workbench/pc/objectAssignPolyfill.js',
         './src/workbench/pc/main.js',
       ],
     },
@@ -76,7 +78,7 @@ module.exports = function (config) {
       ]
     },
     // cheap-module-eval-source-map is faster for development
-    devtool: '#cheap-module-eval-source-map',
+    devtool: '#eval-source-map',
     output: {
       publicPath: config.assetsPublicPath,
       filename: 'js/[name].js',
