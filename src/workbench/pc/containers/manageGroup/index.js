@@ -284,6 +284,9 @@ class ManageGroup extends Component {
     setDragInputState(false);
   }
   handleBlur = () => {
+    this.setState({
+      inFoucs: false,
+    });
     const { setDragInputState,dragState } = this.props;
     if(dragState)return;
     setDragInputState(true);
