@@ -42,7 +42,7 @@ const handlerList = {
       });
     }
   },
-  closeDialog() {
+  closeDialog(type, event) {
     dispatchMessageTypeHandler(event);
   },
   addBrm(type, event) {
