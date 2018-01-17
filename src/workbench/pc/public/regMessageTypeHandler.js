@@ -21,7 +21,8 @@ const handlers = {
   closeDialog() {
     closeGlobalDialog();
   },
-  checkServiceOpen({ serveCode }) {
+  checkServiceOpen({ serviceCode }) {
+    const serveCode = serviceCode;
     const state = store.getState();
     console.log(state);
     const tabs = state.work.tabs;
@@ -33,7 +34,8 @@ const handlers = {
     }
     return false;
   },
-  postDataToService({ serveCode, data }) {
+  postDataToService({ serviceCode, data }) {
+    const serveCode = serviceCode;
     const state = store.getState();
     const tabs = state.work.tabs;
     const target = tabs.filter(({ serviceCode })=>{
