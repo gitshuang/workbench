@@ -12,8 +12,6 @@
   padding-top: 1px;
   background-image:url("assets/image/wgt/usercenter_bg.png");
   background-repeat: no-repeat;
-  /* background-position: 0% 0%;
-  background-attachment:fixed; */
 }
 
 /*.outerContainer {*/
@@ -130,9 +128,11 @@
   font-family: PingFangSC-Semibold;
   font-weight: bold;
   color: #474D54;
-  display:-webkit-box;
+  /* display:-webkit-box;
   -webkit-box-align:center;
-  -webkit-box-pack:center;
+  -webkit-box-pack:center; */
+  display: flex;
+  justify-content:center;
   overflow: hidden;
 }
 .gloryIcon{
@@ -140,9 +140,11 @@
   margin-top: 5px;
   margin-bottom: 24px;
   box-sizing: border-box;
-  display:-webkit-box;
+  /* display:-webkit-box;
   -webkit-box-align:center;
-  -webkit-box-pack:center;
+  -webkit-box-pack:center; */
+  display: flex;
+  justify-content:center;
 }
 .gloryIcon li{
   width:62px;
@@ -251,16 +253,10 @@
 }
 .tabPane1 li{
   display:flex;
-  border-bottom: 1px solid #DDE0E3;
-}
-.recently {
-  border-bottom: 1px solid #dde0e3;
-}
-.recently li:last-child{
-  border-bottom:none;
+  border-bottom: 1px solid rgba(13,20,36,0.05);
 }
 .recently li:hover{
-  background:rgba(239,239,239,1);
+  background:rgba(9,30,66,0.04);
   cursor:pointer;
 }
 .recently li:hover .usedTit{
@@ -368,7 +364,7 @@
 }
 .wrap :global(.u-tabs-nav-wrap){
   width:346px;
-  border-bottom:1px solid #DDE0E3;
+  border-bottom:1px solid rgba(13,20,36,0.1);
 }
 .wrap :global(.u-select-arrow){
   font-size:14px;

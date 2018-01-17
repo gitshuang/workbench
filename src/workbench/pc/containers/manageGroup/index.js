@@ -283,6 +283,7 @@ class ManageGroup extends Component {
     if(!dragState)return;
     setDragInputState(false);
   }
+  //输入框失焦
   handleBlur = () => {
     this.setState({
       inFoucs: false,
@@ -291,12 +292,6 @@ class ManageGroup extends Component {
     if(dragState)return;
     setDragInputState(true);
   }
-  // 输入框失焦
-  // handleBlur = () => {
-  //   this.setState({
-  //     inFoucs: false,
-  //   })
-  // }
   // 选择框  选择
   selectFn = (index) => (e) => {
     let {
