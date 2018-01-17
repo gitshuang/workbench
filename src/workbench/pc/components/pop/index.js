@@ -64,6 +64,7 @@ class DialogComponent extends Component{
     title: '',
     content: '',
     btns: [],
+    show: true,
   }
   btnClickMaker(fn) {
     const { close } = this.props;
