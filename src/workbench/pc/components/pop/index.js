@@ -190,10 +190,10 @@ function openGlobalDialog(options) {
   const dialogFactory = makeGlobalDialogInstance.bind(null, options);
   console.log(globalDialogInstance);
   if (globalDialogInstance) {
-    globalDialogInstance.destroy().then(dialogFactory);
-  } else {
-    dialogFactory();
+    globalDialogInstance.destroy();
   }
+    dialogFactory();
+  
 }
 function closeGlobalDialog() {
   if (globalDialogInstance) {
