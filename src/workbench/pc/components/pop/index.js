@@ -159,7 +159,7 @@ class Dialog {
         }, 1000);
       }
     );
-    pro.then(destroy.bind(this));
+    pro.then(this.destroy.bind(this));
   }
   render = () => {
     const { props, div } = this;
