@@ -153,18 +153,13 @@ class Dialog {
     props.show = false;
     var pro =  new Promise(
       (resolve) => {
+        this.render();
         setTimeout(() => {
-          const unmountResult = ReactDOM.unmountComponentAtNode(div);
-          if (unmountResult && div.parentNode) {
-            div.parentNode.removeChild(div);
-          }
-          dialogIsOpen = false;
           resolve();
         }, 1000);
       }
     );
-    this.render().pro.then(destroy);
-
+    pro.then(destroy);
   }
   render = () => {
     const { props, div } = this;
@@ -175,18 +170,10 @@ class Dialog {
     const {
       div,
     } = this;
-    return new Promise(
-      (resolve) => {
-        setTimeout(() => {
-          const unmountResult = ReactDOM.unmountComponentAtNode(div);
-          if (unmountResult && div.parentNode) {
-            div.parentNode.removeChild(div);
-          }
-          dialogIsOpen = false;
-          resolve();
-        }, 1000);
-      }
-    );
+    const unmountResult = ReactDOM.unmountComponentAtNode(div);
+    if (unmountResult && div.parentNode) {
+      div.parentNode.removeChild(div);
+    }
   }
 }
 
