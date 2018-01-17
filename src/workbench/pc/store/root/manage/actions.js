@@ -42,7 +42,6 @@ const {
   SET_CURRENT_SELECT_WIDGET_MAP,
   RETURN_DEFAULT_STATE,
   SET_DRAG_INPUT_STATE,
-  SET_CURRT_BTN_OBJ,
 } = types;
 
 const actions = createActions(
@@ -86,6 +85,5 @@ const actions = createActions(
   SET_CURRENT_SELECT_WIDGET_MAP,
   RETURN_DEFAULT_STATE,
   SET_DRAG_INPUT_STATE,
-  SET_CURRT_BTN_OBJ,
 );
 export default actions;

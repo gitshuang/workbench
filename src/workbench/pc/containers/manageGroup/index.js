@@ -53,7 +53,6 @@ const {
   selectGroupActions,
   setEditonlyId,
   setDragInputState,
-  setCurrtBtnObj
 } = manageActions;
 
 function findItemById(manageList,id) {
@@ -76,8 +75,6 @@ const type='item';
 
 const itemSource = {
   beginDrag(props,monitor) {
-    // return false;
-    // console.log(" aaa ",props);
     return { id: props.id,type:props.type,parentId:props.parentId,folderType:props.folderType };
   }
 };
@@ -125,7 +122,6 @@ function collectTaget(connect, monitor) {
     'selectList',
     'currEditonlyId',
     'dragState',
-    'currtBtnObj',
     {
       namespace:'manage'
     }
@@ -145,7 +141,6 @@ function collectTaget(connect, monitor) {
     selectGroupActions,
     setEditonlyId,
     setDragInputState,
-    setCurrtBtnObj
   }
 )
 class ManageGroup extends Component {
