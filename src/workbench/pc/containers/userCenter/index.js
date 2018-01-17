@@ -126,9 +126,9 @@ class UserInfoContainer extends Component {
 
   handleClickOutside(e) {
     //在面板中操作不要关闭面板
-    if(event.target.getAttribute("class") == "u-dropdown-menu-item-active u-dropdown-menu-item"){
-      return;
-    }
+    // if(event.target.getAttribute("class") == "u-dropdown-menu-item-active u-dropdown-menu-item"){
+    //   return;
+    // }
     const { hideUserInfoDisplay, userInfoDisplay } = this.props;
     if(userInfoDisplay){
       hideUserInfoDisplay();

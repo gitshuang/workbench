@@ -52,7 +52,7 @@ const {
   selectListActions,
   selectGroupActions,
   setEditonlyId,
-  setDragInputState
+  setDragInputState,
 } = manageActions;
 
 function findItemById(manageList,id) {
@@ -75,8 +75,6 @@ const type='item';
 
 const itemSource = {
   beginDrag(props,monitor) {
-    // return false;
-    // console.log(" aaa ",props);
     return { id: props.id,type:props.type,parentId:props.parentId,folderType:props.folderType };
   }
 };
@@ -158,7 +156,7 @@ class ManageGroup extends Component {
     this.state = {
       groupName:  "",
       inFoucs: false,
-      showModal: false,
+      showModal: false
     }
   }
   componentWillMount() {
@@ -169,9 +167,10 @@ class ManageGroup extends Component {
       },
       manageList,
     } = this.props;
-
+ 
     if (isNew) {
       setTimeout(() => {
+
         const nameArr = manageList.map(({ widgetName }) => {
           return widgetName;
         });
@@ -181,6 +180,9 @@ class ManageGroup extends Component {
         });
         this.refs.groupName.focus();
         this.refs.groupName.select();
+        
+        const { checkFun ,currEditonlyId} = this.props;
+        checkFun(currEditonlyId+"_btn");
       }, 0);
     } else {
       this.setState({
@@ -188,6 +190,7 @@ class ManageGroup extends Component {
       });
     }
   }
+ 
   componentWillReceiveProps(nextProps) {
     if (
       this.props.currEditonlyId !== nextProps.currEditonlyId &&
@@ -283,6 +286,7 @@ class ManageGroup extends Component {
     if(!dragState)return;
     setDragInputState(false);
   }
+  //输入框失焦
   handleBlur = () => {
     this.setState({
       inFoucs: false,
@@ -291,12 +295,6 @@ class ManageGroup extends Component {
     if(dragState)return;
     setDragInputState(true);
   }
-  // 输入框失焦
-  // handleBlur = () => {
-  //   this.setState({
-  //     inFoucs: false,
-  //   })
-  // }
   // 选择框  选择
   selectFn = (index) => (e) => {
     let {
@@ -387,6 +385,10 @@ class ManageGroup extends Component {
       </Menu>
     );
 
+    // btnSelectedFun=()=>{
+    //    this.btn_selected.onClick()
+    // }
+
     return (
       <Dropdown
         trigger={['click']}
@@ -432,7 +434,7 @@ class ManageGroup extends Component {
               onBlur={this.handleBlur}
               ref="groupName" />
           </div>
-          <ButtonCheckSelected className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><Icon type="right"></Icon></ButtonCheckSelected>
+          <ButtonCheckSelected id={`${widgetId}_btn`} className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><Icon type="right"></Icon></ButtonCheckSelected>
           <ButtonCheckClose className={btn} onClick={ ()=>{this.renameGroupCancel(index)} }><Icon type="cancel"></Icon></ButtonCheckClose>
         </div>
       );

@@ -65,7 +65,7 @@ const defaultState = {
   selectWidgetItem:true,
   allServicesByLabelGroup:{},
 
-  dragState:true //是否可拖拽
+  dragState:true, //是否可拖拽
 };
 
 const findTreeById = (data, curId) => {

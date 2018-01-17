@@ -109,26 +109,6 @@
   position: relative;
 }
 
-.serviceContainer:before {
-  content: '';
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  border-bottom-color: #d2d2d2;
-  position: absolute;
-  margin-top: -21px;
-  margin-left: 243px;
-}
-.serviceContainer:after {
-  content: '';
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  border-bottom-color: #ffffff;
-  position: absolute;
-  margin-top: -20px;
-  margin-left: 243px;
-}
 .link_cont{
     position: absolute;
     z-index: 9;
