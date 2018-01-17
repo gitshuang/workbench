@@ -150,7 +150,7 @@ class Dialog {
     if (typeof onClose === 'function' && !onClose()) {
       return;
     }
-    props.show = show;
+    props.show = false;
     this.render().destroy();
   }
   render = () => {
