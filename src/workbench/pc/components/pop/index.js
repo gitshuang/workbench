@@ -129,7 +129,7 @@ class DialogComponent extends Component{
   }
 }
 
-class Dialog {
+class Dialog extends Component {
   constructor(options) {
     this.div = document.createElement('div');
     this.props = {
@@ -177,6 +177,7 @@ class Dialog {
 
 let globalDialogInstance;
 function makeGlobalDialogInstance(options) {
+  console.log(options);
   globalDialogInstance = new Dialog(options)
 }
 function openGlobalDialog(options) {
