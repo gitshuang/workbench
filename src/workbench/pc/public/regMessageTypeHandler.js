@@ -15,7 +15,7 @@ const handlers = {
       this.props.history.push(`/service/${serviceCode}`);
     }
   },
-  openDialog(options) {
+  openDialog({ options }) {
     openGlobalDialog(options);
   },
   closeDialog() {
