@@ -131,6 +131,7 @@ class DialogComponent extends Component{
 
 class Dialog extends Component {
   constructor(options) {
+    super();
     this.div = document.createElement('div');
     this.props = {
       ...options,
