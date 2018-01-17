@@ -183,10 +183,10 @@ function makeGlobalDialogInstance(options) {
   globalDialogInstance = new Dialog(options)
 }
 function openGlobalDialog(options) {
-  if (dialogIsOpen) {
-    return;
-  }
-  dialogIsOpen = true;
+  // if (dialogIsOpen) {
+  //   return;
+  // }
+  // dialogIsOpen = true;
   const dialogFactory = makeGlobalDialogInstance.bind(null, options);
   console.log(globalDialogInstance);
   if (globalDialogInstance) {
