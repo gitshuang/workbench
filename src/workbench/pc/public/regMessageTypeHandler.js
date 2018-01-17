@@ -24,7 +24,6 @@ const handlers = {
   checkServiceOpen({ serviceCode }) {
     const serveCode = serviceCode;
     const state = store.getState();
-    console.log(state);
     const tabs = state.work.tabs;
     const target = tabs.filter(({ serviceCode })=>{
       return serviceCode === serveCode;

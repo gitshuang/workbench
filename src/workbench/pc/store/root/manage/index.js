@@ -40,7 +40,6 @@ const {
   setEditonlyId,
   returnDefaultState,
   setDragInputState,
-  setCurrtBtnObj,
 } = actions;
 
 const defaultState = {
@@ -67,7 +66,6 @@ const defaultState = {
   allServicesByLabelGroup:{},
 
   dragState:true, //是否可拖拽
-  currtBtnObj:null
 };
 
 const findTreeById = (data, curId) => {
@@ -754,13 +752,6 @@ const reducer = handleActions({
     return{
       ...state,
       currEditonlyId,
-    }
-
-  },
-  [setCurrtBtnObj]: (state, { payload: currtBtnObj }) => {
-    return{
-      ...state,
-      currtBtnObj,
     }
 
   },
