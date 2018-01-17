@@ -152,6 +152,7 @@ class Home extends Component {
       setManageList,
       manageList,
     } = this.props;
+    this.checkBtn?this.checkBtn.click():null;
     requestStart();
     setManageList(manageList).then(({error, payload}) => {
       if (error) {
@@ -232,6 +233,13 @@ class Home extends Component {
     });
   }
 
+  // 返回确认按钮
+  checkFun =(id)=>{
+    let btn = document.getElementById(id);
+    console.log("===checkFun====== ",btn);
+    this.checkBtn = btn?btn:null;
+  }
+
   renderContent() {
     const { manageList,addGroup } = this.props;
     //console.log(manageList)
@@ -255,7 +263,9 @@ class Home extends Component {
           id={item.widgetId}
           type={item.type}
           moveGroupDrag={this.moveGroupDrag}
-          moveItemDrag={this.moveItemDrag} />
+          moveItemDrag={this.moveItemDrag} 
+          checkFun={this.checkFun}
+          />
       )
     });
     return list;

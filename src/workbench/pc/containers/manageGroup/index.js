@@ -52,7 +52,8 @@ const {
   selectListActions,
   selectGroupActions,
   setEditonlyId,
-  setDragInputState
+  setDragInputState,
+  setCurrtBtnObj
 } = manageActions;
 
 function findItemById(manageList,id) {
@@ -124,6 +125,7 @@ function collectTaget(connect, monitor) {
     'selectList',
     'currEditonlyId',
     'dragState',
+    'currtBtnObj',
     {
       namespace:'manage'
     }
@@ -143,6 +145,7 @@ function collectTaget(connect, monitor) {
     selectGroupActions,
     setEditonlyId,
     setDragInputState,
+    setCurrtBtnObj
   }
 )
 class ManageGroup extends Component {
@@ -158,7 +161,7 @@ class ManageGroup extends Component {
     this.state = {
       groupName:  "",
       inFoucs: false,
-      showModal: false,
+      showModal: false
     }
   }
   componentWillMount() {
@@ -169,9 +172,10 @@ class ManageGroup extends Component {
       },
       manageList,
     } = this.props;
-
+ 
     if (isNew) {
       setTimeout(() => {
+
         const nameArr = manageList.map(({ widgetName }) => {
           return widgetName;
         });
@@ -181,6 +185,9 @@ class ManageGroup extends Component {
         });
         this.refs.groupName.focus();
         this.refs.groupName.select();
+        
+        const { checkFun ,currEditonlyId} = this.props;
+        checkFun(currEditonlyId+"_btn");
       }, 0);
     } else {
       this.setState({
@@ -188,6 +195,7 @@ class ManageGroup extends Component {
       });
     }
   }
+ 
   componentWillReceiveProps(nextProps) {
     if (
       this.props.currEditonlyId !== nextProps.currEditonlyId &&
@@ -382,6 +390,10 @@ class ManageGroup extends Component {
       </Menu>
     );
 
+    // btnSelectedFun=()=>{
+    //    this.btn_selected.onClick()
+    // }
+
     return (
       <Dropdown
         trigger={['click']}
@@ -427,7 +439,7 @@ class ManageGroup extends Component {
               onBlur={this.handleBlur}
               ref="groupName" />
           </div>
-          <ButtonCheckSelected className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><Icon type="right"></Icon></ButtonCheckSelected>
+          <ButtonCheckSelected id={`${widgetId}_btn`} className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><Icon type="right"></Icon></ButtonCheckSelected>
           <ButtonCheckClose className={btn} onClick={ ()=>{this.renameGroupCancel(index)} }><Icon type="cancel"></Icon></ButtonCheckClose>
         </div>
       );

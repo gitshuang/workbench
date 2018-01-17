@@ -28,8 +28,9 @@ const ButtonDefaultAlpha = ({ ...props }) => {
 
 //默认背景透明
 const ButtonCheckSelected = ({ ...props }) => {
-    const { children ,disabled} = props;     
-    return(<Button className={`${btn} ${check_selected_btn}`} disabled={disabled} onClick={(e)=>{props.onClick(e,...props)}}>{children}</Button>);
+    const { children ,disabled,id} = props;
+    const attribute = id?{id}:{};
+    return(<Button {...attribute} className={`${btn} ${check_selected_btn}`} disabled={disabled} onClick={(e)=>{props.onClick(e,...props)}}>{children}</Button>);
 };
 //默认背景透明
 const ButtonCheckClose = ({ ...props }) => {
