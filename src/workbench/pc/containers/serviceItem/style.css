@@ -21,13 +21,14 @@
   width: 100%;    
   border-bottom: 1px solid rgba(13,20,36,0.1);
   display: -webkit-box;
+  display:flex;
 }
 .serviceItemTitle .item_li_top{
-  -webkit-box-flex: 11;
+  flex: 1;
   height: 40px;
 }
 .serviceItemTitle .item_footer{
-  -webkit-box-flex: 1;
+  /* flex: 1; */
   text-align: left;
   width: 50px;
   position: relative;
@@ -38,7 +39,8 @@
 
 .item_li_top{
 	height:100%;
-	display: -webkit-box;
+  display: -webkit-box;
+  display: flex;
 }
 
 
@@ -57,7 +59,7 @@
     width: 60px;
 }
 .item_right{
-	-webkit-box-flex: 1;
+	flex: 1;
 	padding-left: 10px;
 	padding-top: 10px;
 	box-sizing: border-box;

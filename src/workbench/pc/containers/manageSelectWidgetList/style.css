@@ -24,11 +24,10 @@
 }
 
 .searchPanel{
-  
   width: 100%;
   height: 38px;
   line-height: 38px;
-  border-bottom: 1px solid rgba(13,20,36,0.1);;
+  border-bottom: 1px solid rgba(13,20,36,0.1);
   position: relative;
   margin: 5px 0;
   padding-bottom: 54px;
@@ -44,7 +43,7 @@
 .panel{
   width: 100%;
   height: calc(100% - 60px);
-  display: -webkit-box;
+  display: flex;   
   position: relative;
   padding-top: 30px;
 }
@@ -59,11 +58,11 @@
   position: relative;
 }
 .panel_right{
-  -webkit-box-flex:1;
-  margin-left: 10px;
+  flex:1;
+  margin-left: 15px;
   overflow-y: scroll;
-  height: 100%;
-  /*height: 600px;*/
+  height: calc(100% + 48px);
+  padding-right: 5px;
 }
 .panel_right::-webkit-scrollbar{
     width: 8px;
@@ -104,6 +103,8 @@
   bottom: 0px;
   display: -webkit-box;
   -webkit-box-pack: end;
+  display:flex;
+  justify-content: flex-end;
   padding-right: 150px;
   background: rgba(255,255,255,0.8);
 }
@@ -138,6 +139,9 @@
 }
 .panel_left :global(.u-button-group){
   margin-top: -111px;
+}
+.panel_left :global(.u-button-group-vertical){
+  width: 242px;
 }
 .panel_left :global(.u-button-group>button){
   width:77px;

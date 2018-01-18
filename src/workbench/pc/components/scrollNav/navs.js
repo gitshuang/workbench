@@ -67,6 +67,7 @@ class Navs extends Component{
             items = items.map(({ label, target }, i) => (
               <li key={i}>
                 <Link
+                  data-content=""
                   className={link}
                   style={{color:color}}
                   to={target}
