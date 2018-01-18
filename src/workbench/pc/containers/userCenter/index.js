@@ -152,7 +152,7 @@ class UserInfoContainer extends Component {
   //   hideUserInfoDisplay();
   // }
   editAvatar = () => {
-    console.log('edit avatar');
+    window.open('https://idtest.yyuap.com/usercenter/user');
   }
   handleClick() {
       this.setState({

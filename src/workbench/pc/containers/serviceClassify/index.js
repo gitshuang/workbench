@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { mapStateToProps } from '@u';
+import { mapStateToProps ,guid} from '@u';
 import { withRouter } from 'react-router-dom';
 import Button from 'bee-button';
 import Icon from 'components/icon';
@@ -33,7 +33,7 @@ import {
   appItemImg,
   appItem_describe,
   appItem_tit,
-  appItem_con
+  appItem_con,
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -65,7 +65,7 @@ class serviceClassify extends Component {
     this.state = {
       value: "搜索应用",
       currentTab: 0,
-      currentLabel: 0,
+      currentLabel: undefined,
       currentApp: 0,
       labelsArr : [], //存放labels
       allApplicationList:[],
@@ -90,9 +90,6 @@ class serviceClassify extends Component {
         if (error) {
           requestError(payload);
         }
-        // payload.forEach((da,i)=>{
-        //   da.extend =false;
-        // });
         this.setState({
           allApplicationList:payload.applications,
           allLabelGroups:payload.labelGroups
@@ -105,22 +102,16 @@ class serviceClassify extends Component {
   handleChangeTab = (tabId) => () => {
     this.setState({
       currentTab: tabId,
-      currentLabel:0,
+      currentLabel:undefined,
       currentApp:0
     })
   }
-  handleChangeLabel = (labelId,index) => ()=>{
+  handleChangeLabel = (index) => ()=>{
     this.setState({
       currentLabel: index,
       currentApp: index
     })
   }
-  // packUp = (data)=>{
-  //   data.extend = data.extend?false:true;
-  //   this.setState({
-  //     ...this.state
-  //   })
-  // }
 
   btnSearch=()=>{
     // if(this.state.value != "搜索应用"){
@@ -134,14 +125,11 @@ class serviceClassify extends Component {
       value
     })
   }
-  goToLink =(path)=>{
-    this.props.history.push('/app/'+path);
-  }
 
   renderList(){
     const lis = [];
     const appItems_obj = {};//转换后的数据Map
-    const {labelsArr,currentTab,currentApp,allApplicationList,allLabelGroups} = this.state; 
+    const {labelsArr,currentTab,currentLabel,currentApp,allApplicationList,allLabelGroups} = this.state; 
     if(allApplicationList.length>0){
       allApplicationList.map((
         {
@@ -156,18 +144,30 @@ class serviceClassify extends Component {
             'code':applicationCode
           };
       })
-      const {appIds} = labelsArr[currentTab][currentApp];//当前需要显示的appId序列
-      appIds.map((item)=>{
-        lis.push(
-          <li key={appItems_obj[item].code} onClick={ ()=>{this.goToLink(appItems_obj[item].code)} }>
-            <div className={appItemImg}><img src={appItems_obj[item].icon}/></div>
-            <div className={appItem_describe}>
-              <p className={appItem_tit}>{appItems_obj[item].name}</p>
-              <p className={appItem_con}>沟通协作一步到位</p>
-            </div>
-          </li>
-        )
-      })
+      if(currentLabel===undefined){ //全部
+        allApplicationList.map(({applicationCode,applicationIcon,applicationName})=>{
+          lis.push(
+            <GoTo
+              key={`app-${guid()}`}
+              code={applicationCode}
+              icon={applicationIcon}
+              appName={applicationName}
+            />
+          )
+        })
+      }else{ //其它
+        const {appIds} = labelsArr[currentTab][currentApp];//当前需要显示的appId序列
+        appIds.map((item)=>{
+          lis.push(
+            <GoTo
+              key={`app-${guid()}`}
+              code={appItems_obj[item].code}
+              icon={appItems_obj[item].icon}
+              appName={appItems_obj[item].name}
+            />
+          )
+        })
+      }
     }
     return lis;
   }
@@ -178,14 +178,14 @@ class serviceClassify extends Component {
     allLabelGroups.map(({labels},index)=>{
       labelsArr.push(allLabelGroups[index].labels);
     })
-    
+    btns.push(<Button className={ currentLabel === undefined ? 'active' : '' } key="all" onClick={this.handleChangeLabel()}>全部</Button>);
     {
       labelsArr[currentTab] ? 
       (
         labelsArr[currentTab].map(({labelId,labelName},index)=>{
           btns.push(
             <Button className={ currentLabel === index ? 'active' : '' }
-              onClick={this.handleChangeLabel(labelId,index)}
+              onClick={this.handleChangeLabel(index)}
               key={labelId}>
               {labelName}
             </Button>
@@ -195,6 +195,7 @@ class serviceClassify extends Component {
     }
     return btns;
   }
+  //类别、领域
   renderLabelGroups(){
     const labelbtns = [];
     const {currentTab,allLabelGroups} = this.state;
@@ -233,7 +234,7 @@ class serviceClassify extends Component {
   }
 
   render() {
-    const { value } = this.state;
+    const { value,currentLabel } = this.state;
     const btns = this.renderBtns();
     const list = this.renderList();
     const labelGroups = this.renderLabelGroups();
