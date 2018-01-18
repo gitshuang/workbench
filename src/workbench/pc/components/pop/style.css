@@ -9,6 +9,7 @@
     font-size: 18px;
     color: #757F8C;
     cursor: pointer;
+    height: 30px !important;
 }
 /**
 .manageDialogFolder .close{
