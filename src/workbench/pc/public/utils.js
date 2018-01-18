@@ -275,14 +275,14 @@ export const IS_REACT_16 = !!ReactDOM.createPortal;
  * 汉子超过3位截取，其他字符8位数
  * @param {*} str
  */
-export function getStrLenSubstr(str){
+export function getStrLenSubstr(str,zh_len,cn_len,sl){
   if(!str)return "";
   let newStr = "";
   var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
   if(reg.test(str)){
-    newStr = str.length>=3?str.substring(0,3)+"...":str;
+    newStr = str.length>=zh_len?str.substring(0,zh_len)+ (sl?"":"...") :str;
   }else{
-    newStr = str.substring(0,8)+"...";
+    newStr = str.substring(0,cn_len)+(sl?"":"...");
   }
   return newStr;
 }

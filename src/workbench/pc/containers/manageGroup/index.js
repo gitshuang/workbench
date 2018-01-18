@@ -10,7 +10,7 @@ import PopDialog from 'components/pop';
 import Button from 'bee-button';
 import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'components/button';
 
-import { mapStateToProps, avoidSameName } from '@u';
+import { mapStateToProps, avoidSameName ,getStrLenSubstr} from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
@@ -273,8 +273,10 @@ class ManageGroup extends Component {
   }
   // 输入框的更改
   editGroupName = (e) =>{
+    let _groupName = e.target.value;
+    _groupName = getStrLenSubstr(_groupName,11,21,true)
     this.setState({
-      groupName: e.target.value
+      groupName:_groupName
     })
   }
   //输入框聚焦更改背景颜色
@@ -432,6 +434,7 @@ class ManageGroup extends Component {
               onChange={this.editGroupName}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
+              placeholder="分组名称,最多20个字符"
               ref="groupName" />
           </div>
           <ButtonCheckSelected id={`${widgetId}_btn`} className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><Icon type="right"></Icon></ButtonCheckSelected>

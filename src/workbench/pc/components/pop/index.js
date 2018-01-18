@@ -64,6 +64,7 @@ class DialogComponent extends Component{
     title: '',
     content: '',
     btns: [],
+    show: true,
   }
   btnClickMaker(fn) {
     const { close } = this.props;
@@ -129,9 +130,8 @@ class DialogComponent extends Component{
   }
 }
 
-class Dialog extends Component{
+class Dialog {
   constructor(options) {
-    super(options);
     this.div = document.createElement('div');
     this.props = {
       ...options,
@@ -150,8 +150,16 @@ class Dialog extends Component{
     if (typeof onClose === 'function' && !onClose()) {
       return;
     }
-    props.show = show;
-    this.render().destroy();
+    props.show = false;
+    var pro =  new Promise(
+      (resolve) => {
+        this.render();
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      }
+    );
+    pro.then(this.destroy.bind(this));
   }
   render = () => {
     const { props, div } = this;
@@ -162,32 +170,29 @@ class Dialog extends Component{
     const {
       div,
     } = this;
-    return new Promise(
-      (resolve) => {
-        setTimeout(() => {
-          const unmountResult = ReactDOM.unmountComponentAtNode(div);
-          if (unmountResult && div.parentNode) {
-            div.parentNode.removeChild(div);
-          }
-          resolve()
-        }, 1000);
-      }
-    );
+    const unmountResult = ReactDOM.unmountComponentAtNode(div);
+    if (unmountResult && div.parentNode) {
+      div.parentNode.removeChild(div);
+    }
   }
 }
 
 let globalDialogInstance;
+let dialogIsOpen = false;
 function makeGlobalDialogInstance(options) {
-  console.log(options)
   globalDialogInstance = new Dialog(options)
 }
 function openGlobalDialog(options) {
+  // if (dialogIsOpen) {
+  //   return;
+  // }
+  // dialogIsOpen = true;
   const dialogFactory = makeGlobalDialogInstance.bind(null, options);
+  console.log(globalDialogInstance);
   if (globalDialogInstance) {
-    globalDialogInstance.destroy().then(dialogFactory);
-  } else {
-    dialogFactory();
+    globalDialogInstance.destroy();
   }
+  dialogFactory();
 }
 function closeGlobalDialog() {
   if (globalDialogInstance) {
