@@ -22,7 +22,7 @@ module.exports = {
     }
   },
   externals: {
-    IM: 'InitEsnIM',
+    IM: 'typeof InitEsnIM === "undefined" ? function(){console.log("IM load fail")} : InitEsnIM',
   },
   module: {
     rules: [
