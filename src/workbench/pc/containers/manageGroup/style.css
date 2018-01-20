@@ -3,6 +3,7 @@
   line-height: 50px;
   color:rgba(136,136,136);
   margin-bottom:16px;
+  display: table;
 }
 .widgetTitle :global(.iconfont){
   font-size: 30px;
@@ -14,17 +15,17 @@
 }
 .addBtn{
 	display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
 
 .addGroupBtn{
@@ -111,8 +112,6 @@
 .widgetTitle :global(.iconfont):hover{
 	color:#242D3B;
 }
-
-
 .widgetTitle .btn{
   display: inline-block;
   vertical-align: middle;

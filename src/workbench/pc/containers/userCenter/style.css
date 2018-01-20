@@ -134,12 +134,11 @@
   display: flex;
   align-items: center;
   justify-content:center; 
+  display:table; /*IE9*/
+  margin: 0 auto;
   overflow: hidden;
 }
 .gloryIcon{
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 24px;
   box-sizing: border-box;
   display:-webkit-box;
   -webkit-box-align:center;
@@ -147,8 +146,13 @@
   display: flex;
   align-items: center;
   justify-content:center;
+  display:table; 
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 24px;
 }
 .gloryIcon li{
+  display: table-cell; 
   width:62px;
   text-align:center;
   font-size:12px;

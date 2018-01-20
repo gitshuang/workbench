@@ -74,6 +74,7 @@
   position: relative;
   height: 100%;
   display: flex;
+  display: table;
   list-style: none
 }
 .content{
@@ -106,8 +107,9 @@
 }
 
 .navs>li{
-  height:48px;
-  margin-right:25px;
+    display: inline-table;
+    height:48px;
+    margin-right:25px;
 }
 /* jony */
 .content>div:first-child ul{
