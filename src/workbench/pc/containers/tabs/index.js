@@ -27,13 +27,13 @@ const {
   unshiftTab,
   setTabs,
 } = actions;
-
+let tabWidth = 160;
 const minTabWidth = 104;
 const tabMargin = 1;
 const moreBtnWidth = 19;
 const deviation = 0;
 const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
-  let tabWidth = 160;
+  tabWidth = 160;
   let mores = [];
   let tabs = totalTabs;
   let hasMore = false;
