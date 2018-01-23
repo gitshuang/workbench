@@ -35,7 +35,7 @@ const {
 )
 @onClickOutside
 class titleServiceContainer extends Component {
-  handleClickOutside(evt) {
+  handleClickOutside(ev) {
     let oEvent= ev||event;
     const {
       titleServiceHidden,
