@@ -143,6 +143,7 @@ class Pin extends Component {
         />
       </div>
     ) : null;
+    
     return (
       <TransitionGroup>
         <CSSTransitionGroup

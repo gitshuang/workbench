@@ -53,7 +53,7 @@ class Search extends Component {
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={ this.goBack.bind(this) } iconName={"search"} >
+            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} >
               <div>
                 <span>搜索结果</span>
                 

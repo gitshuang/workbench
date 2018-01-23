@@ -39,6 +39,7 @@
     margin: 0 auto;
     margin-top: 2px;
     border-radius: 3px;
+    display: inline-block;
 }
 
 .item {

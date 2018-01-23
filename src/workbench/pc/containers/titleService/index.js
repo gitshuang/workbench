@@ -36,11 +36,12 @@ const {
 @onClickOutside
 class titleServiceContainer extends Component {
   handleClickOutside(evt) {
+    let oEvent= ev||event;
     const {
       titleServiceHidden,
       titleServiceType
     } = this.props;
-    if (titleServiceType) {
+    if (titleServiceType  && (oEvent.target).getAttribute("title") != "相关服务") {
       titleServiceHidden();
     }
   }
@@ -80,7 +81,7 @@ class titleServiceContainer extends Component {
               <ul className="clearfix">
                 {
                   service.map(({ serviceIcon, serviceName, serviceCode }, i) =>
-                    <li key={i} onClick={this.handlerClickService.bind(this, serviceCode)}>
+                    <li key={"xgfw_"+serviceId+i} onClick={this.handlerClickService.bind(this, serviceCode)}>
                       <div className={serviceIcon}>
                         <img src={serviceIcon} className={uf_service} />
                       </div>

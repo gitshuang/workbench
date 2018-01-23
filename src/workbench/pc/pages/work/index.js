@@ -41,6 +41,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 const {
   setCurrent,
   titleServiceDisplay,
+  titleServiceHidden,
   pinDisplayBlock,
   setPinCancel,
   getProductInfo,
@@ -76,6 +77,7 @@ const {
     requestError,
     getProductInfo,
     titleServiceDisplay,
+    titleServiceHidden,
     pinDisplayBlock,
     setPinCancel,
     returnDefaultState,
@@ -259,11 +261,21 @@ export default class Work extends Component {
     }
   }
 
+  btnOnclick =(e)=>{
+    const {titleServiceDisplay,titleServiceHidden,titleServiceType } = this.props;
+    console.log("---btnOnclick--",titleServiceType);
+    if(titleServiceType){
+      titleServiceHidden();
+    }else{
+      titleServiceDisplay();
+    }
+  }
+
   render() {
     const {
       pinType,
       pinDisplay,
-      titleServiceDisplay,
+   
       titleServiceType,
       current: {
         title,
@@ -286,12 +298,12 @@ export default class Work extends Component {
                   hasRelationFunc ?
                     (<Icon
                       title="相关服务"
-                      type="pull-down"
+                      type={titleServiceType?"upward":"pull-down"}
                       className={`
                         ${titleServiceType?title_service_display:""}
                         ${service}
                       `}
-                      onClick={ titleServiceDisplay }/>) : undefined
+                      onClick={ this.btnOnclick }></Icon>) : undefined
                 }
                 <Icon
                   title="添加到首页"
