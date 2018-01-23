@@ -87,7 +87,7 @@ body {
 
 .lebra-navbar-left-content {
   -webkit-box-flex: 1;
-  line-height: 36px;
+  /* line-height: 36px; */
 }
 
 .lebra-navbar-left-icon .iconfont {
