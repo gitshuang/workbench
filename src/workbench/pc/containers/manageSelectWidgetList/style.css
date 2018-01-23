@@ -45,24 +45,31 @@
   height: calc(100% - 60px);
   display:-webkit-box;
   display:-ms-flexbox;
-  display:flex;   
+  display:flex; 
+  display:table;  
   position: relative;
   padding-top: 30px;
 }
 .panel_left{
+  display: table-cell;
+  vertical-align: top;
   width: 244px;
+  position: relative;
+}
+.panel_left :global(.u-button-group-vertical){
   height: calc(100% - 40px);
-  margin-top: 40px;
-  /*min-height: 395px;*/
   border: 1px solid rgba(78,89,104,0.19);
   border-radius: 3px;
   padding:20px 0;
-  position: relative;
+  margin-top: 8px;
 }
 .panel_right{
+  display: table-cell;
   -webkit-box-flex:1;
-      -ms-flex:1;
-          flex:1;
+  -ms-flex:1;
+  flex:1;
+}
+.panel_right>div{
   margin-left: 15px;
   overflow-y: scroll;
   height: calc(100% + 48px);
@@ -75,10 +82,10 @@
     border-radius: 8px;
     background-color: #757575;
 }
-.panel_left>div{
+/* .panel_left>div{
   width: 100%;
-  margin-top: -30px;
-}
+  margin-top: 8px;
+} */
 .panel_left>div>button{
   height: 26px;
   text-align: left;
@@ -144,9 +151,6 @@
 .search_icon_con .search_tit{
   color:rgba(74,81,93,1);
   margin-left:8px;
-}
-.panel_left :global(.u-button-group){
-  margin-top: -111px;
 }
 .panel_left :global(.u-button-group-vertical){
   width: 242px;
