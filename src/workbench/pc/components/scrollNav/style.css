@@ -74,7 +74,6 @@
   position: relative;
   height: 100%;
   display: flex;
-  display: table;
   list-style: none
 }
 .content{

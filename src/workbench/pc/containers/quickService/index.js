@@ -65,9 +65,15 @@ class QuickServiceContainer extends Component {
             this.interval = null;
             _top = 0;
           }else{
-            div.scrollTo(0, (div.scrollTop + 3));
+            
+           if(div.pageYOffset){
+              div.pageYOffset = (div.pageYOffset+3);
+           }else if(div.scrollTo){
+              div.scrollTo(0, (div.scrollTop + 3));
+           }else{
+            div.scrollTop = (div.scrollTop+ 3);
+           }
             _top += 3;
-            // div.style.top = iv.scrollTop + 3;
           }
       })
     }

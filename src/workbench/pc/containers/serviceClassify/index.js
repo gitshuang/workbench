@@ -59,7 +59,7 @@ class serviceClassify extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "搜索应用",
+      value: "",
       currentTab: 0,
       currentLabel: undefined,
       currentApp: 0,
@@ -214,20 +214,16 @@ class serviceClassify extends Component {
     });
   }
 
-  inputOnFocus = (e) => {
-    let _value = e.target.value != "搜索应用"?e.target.value:"";
-    this.setState({
-        value:_value
-    });
-  }
+  // inputOnFocus = (e) => {
+  //   if(e.target.value != ""){
+  //     this.setState({
+  //         value:e.target.value
+  //     });
+  //   }
+  // }
 
-  inputOnBlur = (e) => {
-    if(e.target.value == ""){
-      this.setState({
-          value:"搜索应用"
-      });
-    }
-  }
+  // inputOnBlur = (e) => { 
+  // }
 
   render() {
     const { value,currentLabel } = this.state;
@@ -240,7 +236,7 @@ class serviceClassify extends Component {
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} value={this.state.value} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
+              <FormControl className={serviceSearch} placeholder="搜索应用22" value={this.state.value} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>

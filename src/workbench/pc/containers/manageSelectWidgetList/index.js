@@ -27,8 +27,6 @@ panel_left,footer_btn,title,search_tit,active,btn_active
 @connect(
   mapStateToProps(
     'manageList',
-    // 'currentSelectWidgetMap',
-
     'applicationsMap',
     'selectWidgetItem',
     'allServicesByLabelGroup',
@@ -53,7 +51,7 @@ class SelectWidgetList extends Component {
     this.state = ({
         activeKey: undefined,
         // start: 0,
-        value:"搜索内容...",
+        value:"",
         data:{},//接口全部数据
         labelGroups:[],//类型
         labels:[],//菜单数据
@@ -135,22 +133,7 @@ class SelectWidgetList extends Component {
         value:e
     });
   }
-
-  inputOnFocus = (e) => {
-    let _value = e.target.value != "搜索内容..."?e.target.value:"";
-    this.setState({
-        value:_value
-    });
-  }
-
-  inputOnBlur = (e) => {
-    if(e.target.value == ""){
-      this.setState({
-          value:"搜索内容..."
-      });
-    }
-  }
-
+ 
   btnSave=()=>{
     const { requestError, requestSuccess, setCurrentSelectWidgetMap } = this.props;
     setCurrentSelectWidgetMap(this.state.selectedList);
@@ -282,7 +265,7 @@ class SelectWidgetList extends Component {
        </div> */}
        <div className={widget_right}>
           <div className={searchPanel}>
-              <FormControl className={form_control} value={this.state.value} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
+              <FormControl className={form_control} placeholder="搜索内容..." value={this.state.value}  onChange={this.inputOnChange}/>
               <div className={search_icon_con} >
                   <span>|</span>
                   <Icon type="search" className={search_icon} onClick={this.btnSearch} ></Icon>
