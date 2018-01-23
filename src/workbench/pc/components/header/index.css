@@ -10,7 +10,7 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  display: table;
+  /* display: table; */
   text-align:center;
   vertical-align: middle;
   /* background-color: #108ee9; */
@@ -34,7 +34,7 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  display: table-cell !important;
+  /* display: table-cell !important; */
   position: relative;
 }
 :global(.lebra-navbar-left){
