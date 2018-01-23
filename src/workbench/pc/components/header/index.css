@@ -45,7 +45,7 @@
 }
 :global(.lebra-navbar-left-content){
   position: relative;
-  display: inline-table;
+  /* display: inline-table; */
   height: 28px;
   line-height: 28px;
 }
@@ -69,11 +69,11 @@
   justify-content: flex-end;
   font-size: 16px;
 }
-:global(.lebra-navbar-right>div){
+/* :global(.lebra-navbar-right>div){
   display:inline-table;
-}
+} */
 :global(.lebra-navbar-left-icon){
-  display: inline-table;
+  /* display: inline-table; */
   /* padding:4px 0; */
   color:#878B94;
 }

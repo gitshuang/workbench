@@ -35,7 +35,7 @@ class Application extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{name:"全部应用及服务"}]
+      brm: [{name:"全部应用"}]
     }
     this.goBack = this.goBack.bind(this);
   }
@@ -51,7 +51,7 @@ class Application extends Component {
           <div className="um-header">
             <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} >
               <div>
-                <span>全部应用及服务</span>
+                <span>全部应用</span>
               </div>
             </Header>
             <div className={appBreadcrumb}>
