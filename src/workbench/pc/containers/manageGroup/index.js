@@ -116,6 +116,20 @@ function collectTaget(connect, monitor) {
   }
 }
 
+Array.prototype.distinct = function (){
+  var arr = this,
+      i,obj = {},
+      result = [],
+      len = arr.length;
+  for(i = 0; i< arr.length; i++){
+    if(!obj[arr[i]]){  
+      obj[arr[i]] = 1;
+      result.push(arr[i]);
+    }
+  }
+  return result;
+};
+
 @connect(
   mapStateToProps(
     'manageList',
@@ -298,6 +312,7 @@ class ManageGroup extends Component {
     if(dragState)return;
     setDragInputState(true);
   }
+  
   // 选择框  选择
   selectFn = (index) => (e) => {
     let {
@@ -315,7 +330,11 @@ class ManageGroup extends Component {
     });
     if(checkFlag){
       selectGroup.push(index);
-      selectList = Array.from(new Set(selectList.concat(aa)));
+      if(!!window.ActiveXObject || "ActiveXObject" in window){ //ie?
+        selectList = Array.from(selectList.concat(aa).distinct());
+      }else{
+        selectList = Array.from(new Set(selectList.concat(aa)));
+      }
     }else{
       selectList = selectList.filter(v => !aa.includes(v));
       selectGroup =  selectGroup.filter((item,i) => {

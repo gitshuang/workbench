@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "animate.css": "^3.5.2",
+    "array.find": "^v1.0.7",
     "array.from": "^1.0.3",
     "array.prototype.find": "^2.0.4",
     "babel-runtime": "^6.26.0",

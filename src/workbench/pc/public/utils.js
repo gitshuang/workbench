@@ -282,7 +282,8 @@ export function getStrLenSubstr(str,zh_len,cn_len,sl){
   if(reg.test(str)){
     newStr = str.length>=zh_len?str.substring(0,zh_len)+ (sl?"":"...") :str;
   }else{
-    newStr = str.substring(0,cn_len)+(sl?"":"...");
+    newStr = str.length>=cn_len?str.substring(0,cn_len)+ (sl?"":"...") :str;
+    // newStr = str.substring(0,cn_len)+(sl?"":"...");
   }
   return newStr;
 }

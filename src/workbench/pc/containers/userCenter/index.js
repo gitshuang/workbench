@@ -328,9 +328,8 @@ class UserInfoContainer extends Component {
             <div className={editPortrait}  >
               <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>
-            {/* <div className={userName} title={name}>{getStrLenSubstr(name,3,8)}</div> */}
           </div>
-          <div className={userName} title={name}>{getStrLenSubstr(name,5,8)}</div>
+          <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
           <div className={logOut} onClick={this.logOut}>
             <Icon type="exit" />
             <span>注销</span>

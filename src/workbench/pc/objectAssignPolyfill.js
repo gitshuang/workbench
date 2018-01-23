@@ -1,5 +1,6 @@
 import objectAssign from 'object-assign';
 import arrayFrom from 'array.from';
+import arrayFind from 'array.find';
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function () { };
 if (typeof Object.assign === 'undefined') {
@@ -7,6 +8,9 @@ if (typeof Object.assign === 'undefined') {
 }
 if (typeof Array.from === 'undefined') {
     Array.from = arrayFrom;
+}
+if(typeof Array.find === 'undefined'){
+    Array.find = arrayFind;
 }
 if (!("classList" in document.documentElement)) {
   Object.defineProperty(HTMLElement.prototype, 'classList', {
