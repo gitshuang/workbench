@@ -1,7 +1,6 @@
 :global(.lebra-navbar){
   width: 100%;
   height: 45px;
-  padding: 0 15px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10,9 +9,6 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  /* display: table; */
-  text-align:center;
-  vertical-align: middle;
   /* background-color: #108ee9; */
   color: #fff;
 }
@@ -34,18 +30,15 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  /* display: table-cell !important; */
   position: relative;
 }
 :global(.lebra-navbar-left){
   width: 150px;
   font-size: 16px;
-  /* padding-top:8px; */
-  text-align: left;
+  padding-left:15px;
 }
 :global(.lebra-navbar-left-content){
   position: relative;
-  /* display: inline-table; */
   height: 28px;
   line-height: 28px;
 }
@@ -54,7 +47,6 @@
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  text-align: center;
   font-size: 16px;
   white-space: nowrap;
 }
@@ -69,12 +61,8 @@
   justify-content: flex-end;
   font-size: 16px;
 }
-/* :global(.lebra-navbar-right>div){
-  display:inline-table;
-} */
 :global(.lebra-navbar-left-icon){
-  /* display: inline-table; */
-  /* padding:4px 0; */
+  padding:4px 0;
   color:#878B94;
 }
 .workArea :global(.lebra-navbar-left-content > img){

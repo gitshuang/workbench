@@ -86,7 +86,6 @@ body {
 }
 
 .lebra-navbar-left-content {
-  /* display: table-cell; */
   -webkit-box-flex: 1;
   line-height: 36px;
 }
