@@ -43,7 +43,9 @@
 .panel{
   width: 100%;
   height: calc(100% - 60px);
-  display: flex;   
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;   
   position: relative;
   padding-top: 30px;
 }
@@ -58,7 +60,9 @@
   position: relative;
 }
 .panel_right{
-  flex:1;
+  -webkit-box-flex:1;
+      -ms-flex:1;
+          flex:1;
   margin-left: 15px;
   overflow-y: scroll;
   height: calc(100% + 48px);
@@ -103,8 +107,10 @@
   bottom: 0px;
   display: -webkit-box;
   -webkit-box-pack: end;
+  display:-ms-flexbox;
   display:flex;
-  justify-content: flex-end;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
   padding-right: 150px;
   background: rgba(255,255,255,0.8);
 }
@@ -117,6 +123,8 @@
   position: absolute;
   top: 0px;
   left: 360px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   cursor: pointer;
 }

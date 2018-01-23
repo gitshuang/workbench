@@ -234,7 +234,6 @@ class WidgeFileItem extends Component {
 
     const edit = <div className={edit_cont}>
       <FormControl className={`${form_control} input`} value={this.state.value} onChange={this.inputOnChange} onFocus={this.handleFocus} onBlur={this.handleBlur}/>
-
       <ButtonCheckSelected className={btn} onClick={this.save}><Icon type="right"></Icon></ButtonCheckSelected>
       <ButtonCheckClose className={btn} onClick={this.close}>
         <Icon type="cancel"></Icon>
@@ -259,7 +258,7 @@ class WidgeFileItem extends Component {
     let _html = (
       <li name="file" className={`${widgetItem} ${widgetFileItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag} `} style={{...opacity }} onClick={this.props.onClick}>
         <div className={title}>
-          <div className={[title_left,file_icon].join(' ')}></div>
+          {/* <div className={[title_left,file_icon].join(' ')}></div> */}
           <div className={`${title_right} ${file_title_right}`}> {da.widgetName} </div>
         </div>
         {/*<div name="file" className={[context,file_context].join(' ')}>

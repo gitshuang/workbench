@@ -330,7 +330,7 @@ class UserInfoContainer extends Component {
             </div>
             {/* <div className={userName} title={name}>{getStrLenSubstr(name,3,8)}</div> */}
           </div>
-          <div className={userName} title={name}>{getStrLenSubstr(name)}</div>
+          <div className={userName} title={name}>{getStrLenSubstr(name,5,8)}</div>
           <div className={logOut} onClick={this.logOut}>
             <Icon type="exit" />
             <span>注销</span>

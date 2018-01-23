@@ -299,7 +299,7 @@ class SelectWidgetList extends Component {
                 </ButtonGroup>
               </div>
               <div className={panel_right}>
-                 {list}
+                {list}
               </div>
            </div>
            <div className={footer_btn}>

@@ -1,6 +1,98 @@
 import objectAssign from 'object-assign';
+import arrayFrom from 'array.from';
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function () { };
 if (typeof Object.assign === 'undefined') {
   Object.assign = objectAssign;
+}
+if (typeof Array.from === 'undefined') {
+    Array.from = arrayFrom;
+}
+if (!("classList" in document.documentElement)) {
+  Object.defineProperty(HTMLElement.prototype, 'classList', {
+      get: function() {
+          var self = this;
+          function update(fn) {
+              return function(value) {
+                  var classes = self.className.split(/\s+/g),
+                      index = classes.indexOf(value);
+
+                  fn(classes, index, value);
+                  self.className = classes.join(" ");
+              }
+          }
+
+          return {
+              add: update(function(classes, index, value) {
+                  if (!~index) classes.push(value);
+              }),
+
+              remove: update(function(classes, index) {
+                  if (~index) classes.splice(index, 1);
+              }),
+
+              toggle: update(function(classes, index, value) {
+                  if (~index)
+                      classes.splice(index, 1);
+                  else
+                      classes.push(value);
+              }),
+
+              contains: function(value) {
+                  return !!~self.className.split(/\s+/g).indexOf(value);
+              },
+
+              item: function(i) {
+                  return self.className.split(/\s+/g)[i] || null;
+              }
+          };
+      }
+  });
+}
+if (!Array.prototype.includes) {
+    Object.defineProperty(Array.prototype, 'includes', {
+      value: function(searchElement, fromIndex) {
+  
+        // 1. Let O be ? ToObject(this value).
+        if (this == null) {
+          throw new TypeError('"this" is null or not defined');
+        }
+  
+        var o = Object(this);
+  
+        // 2. Let len be ? ToLength(? Get(O, "length")).
+        var len = o.length >>> 0;
+  
+        // 3. If len is 0, return false.
+        if (len === 0) {
+          return false;
+        }
+  
+        // 4. Let n be ? ToInteger(fromIndex).
+        //    (If fromIndex is undefined, this step produces the value 0.)
+        var n = fromIndex | 0;
+  
+        // 5. If n ≥ 0, then
+        //  a. Let k be n.
+        // 6. Else n < 0,
+        //  a. Let k be len + n.
+        //  b. If k < 0, let k be 0.
+        var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+  
+        // 7. Repeat, while k < len
+        while (k < len) {
+          // a. Let elementK be the result of ? Get(O, ! ToString(k)).
+          // b. If SameValueZero(searchElement, elementK) is true, return true.
+          // c. Increase k by 1.
+          // NOTE: === provides the correct "SameValueZero" comparison needed here.
+          if (o[k] === searchElement) {
+            return true;
+          }
+          k++;
+        }
+  
+        // 8. Return false
+        return false;
+      }
+    });
 }

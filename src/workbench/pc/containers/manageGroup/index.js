@@ -33,7 +33,8 @@ import {
   iconBox,
   btn,
   newGroupName_focus,
-  newGroupName_blur
+  newGroupName_blur,
+  widgetTitleInit
 } from './style.css';
 import 'assets/style/iuapmobile.um.css';
 const {
@@ -396,7 +397,7 @@ class ManageGroup extends Component {
         trigger={['click']}
         overlay={menu}
         animation="slide-up" >
-        <Icon title="更多" type="more" />
+        <div><Icon title="更多" type="more" /></div>
       </Dropdown>
     )
   }
@@ -443,12 +444,11 @@ class ManageGroup extends Component {
       );
     }else {
       groupTitle = (
-        <div className={`${widgetTitle} um-box-justify`} >
+        <div className={`${widgetTitle} ${widgetTitleInit} um-box-justify`} >
           <div>
             <Checkbox checked={checkType} onChange={ this.selectFn(index) }>{widgetName}</Checkbox>
           </div>
-
-          <div className="clearfix">
+          <div>
             <div className={iconBox}>
               <Icon title="重命名分组" type="record" onClick={ ()=>{this.openRenameGroupFn(widgetId)}} />
             </div>

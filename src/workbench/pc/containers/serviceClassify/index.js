@@ -30,10 +30,6 @@ import {
   icon_open,
   topTabBtns,
   appsList,
-  appItemImg,
-  appItem_describe,
-  appItem_tit,
-  appItem_con,
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';

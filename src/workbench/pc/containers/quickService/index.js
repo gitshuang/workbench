@@ -40,7 +40,6 @@ class QuickServiceContainer extends Component {
   }
 
   handleClickOutside() {
-    console.log('changeQuickServiceHidden');
     const { changeQuickServiceHidden, quickServiceDisplay } = this.props;
     if(quickServiceDisplay){
       changeQuickServiceHidden();

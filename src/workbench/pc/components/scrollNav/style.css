@@ -17,8 +17,8 @@
     color: rgba(71,77,84,1);
     text-decoration: unset;
 }
-.link:after,.Link after{
-    content: attr(data-content);
+.link:after{
+    content: '';
     height: 8px;
 }
 .activeLink {
@@ -29,8 +29,8 @@
     font-family:MicrosoftYaHei-Bold;
 }
 
-.activeLink:after,.activeLink after{
-    content: attr(data-content);
+.activeLink:after{
+    content: '';
     border: 3px solid rgba(225,76,70,1);
     max-width: 28px;
     min-width: 14px;

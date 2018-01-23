@@ -3,7 +3,7 @@
   line-height: 50px;
   color:rgba(136,136,136);
   margin-bottom:16px;
-  display: table;
+  display: flex;
 }
 .widgetTitle :global(.iconfont){
   font-size: 30px;
@@ -165,7 +165,6 @@
   border:2px solid rgba(0,205,195,1) !important;
 }
 .iconBox{
-  float: left;
   position: relative;
 }
 .iconBox p{
@@ -179,4 +178,21 @@
   left: 50%;
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
+}
+.widgetTitleInit>div{
+  display: flex;
+  align-items: flex-end;
+  justify-content:center;
+  display: table-cell;
+}
+/* IE9 */
+.widgetTitleInit{
+  display: table;
+  width: 100%;
+}
+.widgetTitleInit>div:nth-child(2){
+  width: 131px;
+}
+.widgetTitleInit>div:nth-child(2)>div{
+  display: inline-table;
 }

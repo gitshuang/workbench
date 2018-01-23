@@ -25,10 +25,15 @@ body{
 	padding:82px 23px 48px;
 }
 .umBoxJustify{
+  display: table;
+  width: 100%;
 	height:48px;
 	padding:10px 75px;
 	position:relative;
-	background:rgba(26,32,38,0.6);
+	background:rgba(43, 55, 66, 0.6);
+}
+.umBoxJustify>div{
+  display: table-cell;
 }
 /**
 .umBoxJustify button{
@@ -67,6 +72,9 @@ body{
 }
 .batchArea>div{
   margin-right: 8px;
+}
+.saveArea{
+  width: 193px;
 }
 .saveArea>div{
   margin-left:8px;
