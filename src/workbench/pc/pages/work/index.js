@@ -263,7 +263,6 @@ export default class Work extends Component {
 
   btnOnclick =(e)=>{
     const {titleServiceDisplay,titleServiceHidden,titleServiceType } = this.props;
-    console.log("---btnOnclick--",titleServiceType);
     if(titleServiceType){
       titleServiceHidden();
     }else{
