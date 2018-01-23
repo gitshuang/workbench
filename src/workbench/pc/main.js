@@ -9,5 +9,6 @@ import 'assets/style/animate.css';
 if (!window.Promise) {
   window.Promise = Promise;
 }
-
+window.React = React;
+window.ReactDOM = ReactDOM;
 ReactDOM.render(<App />, document.getElementById('root'));
