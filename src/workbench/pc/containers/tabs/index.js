@@ -28,12 +28,12 @@ const {
   setTabs,
 } = actions;
 
-let tabWidth = 160;
 const minTabWidth = 104;
 const tabMargin = 1;
 const moreBtnWidth = 19;
 const deviation = 0;
 const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
+  let tabWidth = 160;
   let mores = [];
   let tabs = totalTabs;
   let hasMore = false;
@@ -49,7 +49,7 @@ const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
   let currAllTbasWidth = allLeng*(tabWidth - tabMargin)-moreBtnWidth;
   let areaTabWidth= _areaWidth/allLeng;
   if(currAllTbasWidth >= areaWidth){
-    if(areaTabWidth <= minTabWidth){
+    if(areaTabWidth = minTabWidth){
       let maxTabsNum =  Math.floor(_areaWidth/minTabWidth);
       tabWidth = _areaWidth/maxTabsNum;
       tabs = totalTabs.slice(0, maxTabsNum);
