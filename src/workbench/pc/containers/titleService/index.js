@@ -81,7 +81,7 @@ class titleServiceContainer extends Component {
               <ul className="clearfix">
                 {
                   service.map(({ serviceIcon, serviceName, serviceCode }, i) =>
-                    <li key={"xgfw_"+serviceId+i} onClick={this.handlerClickService.bind(this, serviceCode)}>
+                    <li key={"xgfw_"+i} onClick={this.handlerClickService.bind(this, serviceCode)}>
                       <div className={serviceIcon}>
                         <img src={serviceIcon} className={uf_service} />
                       </div>
