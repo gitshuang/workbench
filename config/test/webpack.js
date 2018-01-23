@@ -12,6 +12,7 @@ module.exports = function (config) {
     entry: {
       main: [
         'whatwg-fetch',
+        './src/workbench/pc/objectAssignPolyfill.js',
         './src/workbench/pc/main.js',
       ],
     },
