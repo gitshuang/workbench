@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
-import "./index.css"
+import "./index.css";
 
 const defaultProps = {
   prefixCls: 'lebra-navbar',
@@ -40,7 +40,7 @@ class Header extends Component {
       prefixCls, className, children, mode, iconName, leftContent, rightContent, onLeftClick
     } = this.props;
 
-    const wrapCls = classnames(prefixCls, `${prefixCls}-${mode}`, className);
+    const wrapCls = classnames(prefixCls, `${prefixCls}-${mode}`, className,`${(!!window.ActiveXObject)?'ie_headerWrap':''}`);
 
     return (
       <div className={wrapCls} >
