@@ -28,6 +28,7 @@
   padding-bottom: 54px;
   position: relative;
 }
+/*ie*/
 .ie_searchPanel .search_icon_con>span,.ie_searchPanel .search_icon_con>i{ 
   float: left;
 }
@@ -42,7 +43,18 @@
   display:-webkit-box;
   display:-ms-flexbox;
   display:flex;
-  height:100%
+  height:100%;
+}
+/*ie*/
+.wrap .ie_um_content{
+  padding:20px 0;
+  height:100%;
+}
+.wrap .ie_um_content>div:first-child{
+  float: left;
+}
+.wrap .ie_um_content .menuBtnGroup{
+  min-height: 350px;
 }
 .menuBtnGroup{
  	width:180px;
@@ -96,45 +108,7 @@
     border-radius: 8px;
     background-color: #757575;
 } */
-/* .appContent header{
-	padding-bottom:8px;
-	border-bottom:1px solid #DDE0E3;
-	display:flex;
-	position:relative;
-}
-.appContent header img{
-  width:32px;
-  height:32px;
-	border-radius: 3px ;
-}
-.appContent header span{
-  display: inline-block;
-  font-size: 14px;
-  font-family: MicrosoftYaHei;
-  line-height: 32px;
-  color: rgba(74,81,93,1);
-  margin-left: 8px;
-}
-.appContent header span:hover{
-  color:#E14C46;
-  cursor: pointer;
-}
-.appContent header :global(.iconfont){
-	font-size:20px;
-	font-weight:bold;
-	color:#878B94;
-	position:absolute;
-	right:5px;
-	cursor:pointer;
-}
-.appContent header :global(.iconfont):hover{
-	color:#E14C46;
-}
-.appContent hgroup{
-  flex-wrap:wrap;
-  padding-bottom: 48px;
-} */
-/*--新增--*/
+
 .appItemImg img{
   width:30px;
   height:30px;
@@ -154,15 +128,12 @@
   -webkit-box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
 }   
 /* ie9 */
-/* .ie .appsList li{
-  display: table; 
+.appsList .ie_appsListItem{
+  display: table;
 }
-.ie .appsList li>div{
+.appsList .ie_appsListItem>div{
   display: table-cell;
   vertical-align: top;
-} */
-.otherBrowser .appsList li{
-  background: #4A515D;
 }
 .appsList li:hover{
   /* background:rgba(225,76,70,0.1); */

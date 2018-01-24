@@ -30,7 +30,8 @@ import {
   icon_open,
   topTabBtns,
   appsList,
-  ie_searchPanel
+  ie_searchPanel,
+  ie_um_content
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -245,7 +246,7 @@ class serviceClassify extends Component {
               </div>
             </div>
             
-            <div className={um_content}>
+            <div className={`${(!!window.ActiveXObject)?ie_um_content:um_content}`}>
               <div>
                 <div className={topTabBtns}>
                   <ButtonGroup>
