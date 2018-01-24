@@ -46,7 +46,7 @@
 
 .item_footer{
 	height: 30px;
-  line-height: 30px;
+  line-height: 24px;
 	text-align: right;
   position: absolute;
   right: 10px;
@@ -79,6 +79,9 @@
 }
 .item_footer i{
   font-size: 25px;
+}
+.serviceItem .item_footer span,.serviceItem .item_footer i{
+  display: table-row;
 }
 .icon{
   width:30px;

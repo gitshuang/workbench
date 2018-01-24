@@ -29,10 +29,19 @@ class ServiceItem extends Component {
     let btn = null;
     if(selected){
       if(selected == "1"){
-         btn = (<div >
-            <span>已添加</span>
-            <Icon title="已添加"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
-         </div>);
+        //  btn = (<div >
+        //     <span>已添加</span>
+        //     <Icon title="已添加"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
+        //  </div>);
+        {serviceType=="2"?
+          btn = (<div >
+                <span>已添加</span>
+                <Icon title="已添加"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
+            </div>):
+          btn = (<div >
+              <Icon title="已添加"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
+              <span>已添加</span>
+            </div>)};
       }else if(selected == "2"){
         btn = (<div onClick={()=>{this.props.onChange(this.props.data,"3")}}  >
         <Icon title="未添加" type="pin" style={{cursor:"pointer"}} /> </div>);

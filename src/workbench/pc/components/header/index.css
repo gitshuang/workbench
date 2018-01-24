@@ -33,7 +33,6 @@
   position: relative;
 }
 :global(.lebra-navbar-left){
-  width: 150px;
   font-size: 16px;
   padding-left:15px;
 }
@@ -54,7 +53,6 @@
   color: #000;
 }
 :global(.lebra-navbar-right){
-  width: 150px;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
@@ -62,7 +60,7 @@
   font-size: 16px;
 }
 :global(.lebra-navbar-left-icon){
-  padding:4px 0;
+  /* padding:4px 0; */
   color:#878B94;
 }
 .workArea :global(.lebra-navbar-left-content > img){

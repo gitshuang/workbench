@@ -100,3 +100,7 @@ if (!Array.prototype.includes) {
       }
     });
 }
+/* IE ? */
+if (!!window.ActiveXObject || "ActiveXObject" in window){
+    document.getElementsByTagName('body')[0].classList.add('ie');      
+}

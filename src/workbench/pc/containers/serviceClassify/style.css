@@ -39,11 +39,7 @@
   display:-webkit-box;
   display:-ms-flexbox;
   display:flex;
-  display: table; /* ie9 */
   height:100%
-}
-.wrap .um_content>div:first-child{
-  display: table-cell;
 }
 .menuBtnGroup{
  	width:180px;
@@ -145,7 +141,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  display: table; /* ie9 */
   float:left;
   width: 238px;
   height: 98px;
@@ -154,10 +149,17 @@
   border: 1px solid rgba(78,89,104,0.19);
   border-radius:3px;
   -webkit-box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
-          box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
+}   
+/* ie9 */
+/* .ie .appsList li{
+  display: table; 
 }
-.appsList li>div{
+.ie .appsList li>div{
   display: table-cell;
+  vertical-align: top;
+} */
+.otherBrowser .appsList li{
+  background: #4A515D;
 }
 .appsList li:hover{
   /* background:rgba(225,76,70,0.1); */
@@ -219,6 +221,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  vertical-align: middle;
   cursor:pointer;
 }
 .search_icon_con :global(.iconfont){
