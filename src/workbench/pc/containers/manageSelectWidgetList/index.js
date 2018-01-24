@@ -20,7 +20,7 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
 import { select_widget_list,
 widget_left,widget_right,search_icon,search_icon_con,
   searchPanel,panel,left,panel_right,button_group,form_control,icon,
-panel_left,footer_btn,title,search_tit,active,btn_active
+panel_left,footer_btn,title,search_tit,active,btn_active,ie_searchPanel
 } from './style.css'
 
 
@@ -264,7 +264,7 @@ class SelectWidgetList extends Component {
           <div className={title}>添加服务</div> 
        </div> */}
        <div className={widget_right}>
-          <div className={searchPanel}>
+          <div className={`${(!!window.ActiveXObject)?ie_searchPanel:searchPanel}`}>
               <FormControl className={form_control} placeholder="搜索内容..." value={this.state.value}  onChange={this.inputOnChange}/>
               <div className={search_icon_con} >
                   <span>|</span>
