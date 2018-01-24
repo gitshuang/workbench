@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
-import { mapStateToProps, findPath } from '@u';
+import { mapStateToProps, findPath,getStrLenSubstr} from '@u';
 import workActions from 'store/root/work/actions';
 import onClickOutside from 'react-onclickoutside';
 import {
@@ -85,7 +85,7 @@ class titleServiceContainer extends Component {
                       <div className={serviceIcon}>
                         <img src={serviceIcon} className={uf_service} />
                       </div>
-                      <span className={serviceName} title={serviceName}>{serviceName}</span>
+                      <span className={serviceName} title={serviceName}>{getStrLenSubstr(serviceName,3,10,true)}</span>
                     </li>
                   )
                 }
