@@ -62,7 +62,7 @@
   font-size: 16px;
 }
 :global(.lebra-navbar-left-icon){
-  padding:4px 0;
+  /* padding:4px 0; */
   color:#878B94;
 }
 .workArea :global(.lebra-navbar-left-content > img){

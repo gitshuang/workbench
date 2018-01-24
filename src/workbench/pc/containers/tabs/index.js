@@ -35,7 +35,7 @@ const moreBtnWidth = 19;
 const deviation = 0;
 const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
   let allLeng = totalTabs.length;
-  let tabWidth = areaWidth/allLeng;
+  tabWidth = areaWidth/allLeng;
   console.log(areaWidth);
   console.log(allLeng)
   console.log(tabWidth)
@@ -176,8 +176,7 @@ class TabsContainer extends Component {
     const { width: areaWidth, moreIsShow } = this.state;
     const curIndex = totalTabs.findIndex(({ id }) => id === currentId);
     const totalTabsNum = totalTabs.length;
-
-    let tabWidth = 160;
+ 
     let ipad_tabsArea = "";
     let tabs = [], mores = [];
     let equipment = browserRedirect();
@@ -189,10 +188,9 @@ class TabsContainer extends Component {
       ipad_tabsArea = ipad_tabs_area;//"ipad_tabs_area";
       _width.width = areaWidth;
     }else{
-      let { tabs:_tabs, mores:_mores ,tabWidth:_tabWidth} = getTabsAndMores(totalTabs, areaWidth, curIndex);
+      let { tabs:_tabs, mores:_mores } = getTabsAndMores(totalTabs, areaWidth, curIndex);
       tabs = _tabs;
       mores = _mores;
-      tabWidth = _tabWidth;
       console.log(",tabWidth",tabWidth);
     }
     const moreListElm = moreIsShow ? (
