@@ -36,6 +36,9 @@ body{
   margin-top: 83px;
   overflow: hidden;
 }
+.wrap :global(.lebra-navbar-left-icon){
+  padding:4px 0;
+}
 .sideBarArea {
   width: 200px;
 }
