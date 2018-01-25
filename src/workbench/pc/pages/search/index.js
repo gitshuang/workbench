@@ -45,20 +45,7 @@ class Search extends Component {
     }
     setSearchHeadData({appName,brm:[{name:appName}]});
   }
-
-  // shouldComponentUpdate() {
-  //   if(this.props.location.pathname.indexOf('searchlist')>-1){
-  //     this.setState({
-  //       brm:[{name:"搜索结果"},{name:"全部结果"}],
-  //     });
-  //   }else{
-  //     this.setState({
-  //       brm:[{name:"搜索结果"}],
-  //     });
-  //   }
-  //   return true; 
-  // }
-
+ 
   render() {
 
     let {appName ,brm }= this.props.searchHeadData;

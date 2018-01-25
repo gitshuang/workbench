@@ -112,8 +112,7 @@ class searchOther extends Component {
  
   goDetail(type,item){
     return (e) => {
-      e.stopPropagation();
-      console.log(type,item)
+      e.stopPropagation(); 
       this.props.history.push('/'+type+'/'+item.serviceCode);
     }
   }

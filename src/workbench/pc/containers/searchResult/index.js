@@ -267,8 +267,7 @@ class searchResult extends Component {
   }
   goDetail(type,item){
     return (e) => {
-      e.stopPropagation();
-      console.log(type,item)
+      e.stopPropagation(); 
       this.props.history.push('/'+type+'/'+item.serviceCode);
     }
   }
@@ -276,16 +275,10 @@ class searchResult extends Component {
     const {setSearchHeadData,searchHeadData:{brm}} = this.props;
     setSearchHeadData({appName:item.typeName,brm:[{name:brm[0].name},{name:item.typeName}]});
     this.props.history.push({pathname:`/search/searchlist`,state:item});
-
-    // return () => {
-      
-    //   // this.props.history.push('/search/searchlist/'+item.type);
-    // }
   }
   goemailDetail(item){
     return (e) => {
-      e.stopPropagation();
-      console.log(item)
+      e.stopPropagation(); 
     }
   }
   onKeyup = (e) => {
