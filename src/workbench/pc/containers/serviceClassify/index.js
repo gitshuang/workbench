@@ -112,10 +112,18 @@ class serviceClassify extends Component {
   }
 
   btnSearch=()=>{
-    // if(this.state.value != "搜索应用"){
-      console.log(this.state.value);
-      this.getServiceList(this.state.value);
-    // }
+    const { allApplicationList } = this.props;
+    const { value } = this.state;
+    if(!value){
+      this.getServiceList("");
+    }
+    //const allApplicationItem2 = this.state.allApplicationItem;
+    const newArr = allApplicationList.applications.filter((item,index) => {
+      return item.applicationName.indexOf(value) > -1 
+     });
+     this.setState({
+      allApplicationList: newArr
+    });
   }
 
   onFormChange = (value) => {
