@@ -85,7 +85,7 @@ class titleServiceContainer extends Component {
                       <div className={serviceIcon}>
                         <img src={serviceIcon} className={uf_service} />
                       </div>
-                      <span className={serviceName} title={serviceName}>{getStrLenSubstr(serviceName,3,10)}</span>
+                      <span className={serviceName} title={serviceName}>{getStrLenSubstr(serviceName,4,10)}</span>
                     </li>
                   )
                 }
