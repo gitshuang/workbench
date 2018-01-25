@@ -31,7 +31,7 @@ const routes = [
         exact: true,
       },
       {
-        path:'/search/searchlist/:type',
+        path:'/search/searchlist',
         component:SearchOther,
       }
     ]

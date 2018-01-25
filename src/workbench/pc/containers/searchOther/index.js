@@ -35,6 +35,7 @@ import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 const { getSearch} = searchActions;
+
 const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
 
@@ -66,11 +67,15 @@ class searchOther extends Component {
       isShowPagination:true,
     }
   }
+
   componentWillMount() {
-    const type = this.props.match.params.type
+    const {type,typeName} = this.props.location.state;
+    // const type = this.props.match.params.type
+    if(!type)return;
     const { keywords} = this.state
     this.getSearchTpyeList(keywords,type,1)
   }
+
   getSearchTpyeList(keywords,type,page){
     const {
       requestStart,
@@ -157,8 +162,8 @@ class searchOther extends Component {
             <div>共{dataList.total}条</div>
             <ul className={recently}>{lis}</ul>
             
-          </div>
-          <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
+
+            <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
               <Pagination
                 first
                 last
@@ -170,7 +175,8 @@ class searchOther extends Component {
                 maxButtons={7}
                 activePage={this.state.activePage}
                 onSelect={this.handleSelect.bind(this)} />
-            </div>
+            </div> 
+          </div> 
         </div>
       </div>
     )

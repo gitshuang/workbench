@@ -12,6 +12,7 @@ const {
   GET_SEARCH_MORE,
   GET_SEARCH,
   GET_SEARCH_OTHER,
+  SET_SEARCH_HEAD_DATA,
 } = types;
 
 const actions = createActions(
@@ -24,6 +25,7 @@ const actions = createActions(
     [GET_SEARCH]: getSearch,
     [GET_SEARCH_OTHER]: getSearchOther,
   },
+  SET_SEARCH_HEAD_DATA
 );
 
 export default actions;

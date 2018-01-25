@@ -313,6 +313,9 @@ padding: 10px 0;
 cursor: pointer}
 .isdisplay { display: none}
 
+.paginationClass{
+  margin-top: 10px;
+}
 .paginationClass :global(.active) a, 
 .paginationClass :global(.active) a:focus, 
 .paginationClass :global(.active) a:hover, 

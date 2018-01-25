@@ -309,7 +309,10 @@ tabPane1,.tabPane2{
   color: #007ace;
   margin: 10px 0 0 185px;}
   .isdisplay { display: none}
-
+  
+.paginationClass{
+  margin-top: 10px;
+}
 .paginationClass :global(.active) a, 
 .paginationClass :global(.active) a:focus, 
 .paginationClass :global(.active) a:hover, 
