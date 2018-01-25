@@ -23,7 +23,7 @@
   line-height:25px;
 }
 
-.searchPanel,.ie_searchPanel{
+.searchPanel{
   width: 100%;
   height: 38px;
   line-height: 38px;
@@ -32,9 +32,6 @@
   margin: 5px 0;
   padding-bottom: 54px;
   position: relative;
-}
-.ie_searchPanel .search_icon_con>span,.ie_searchPanel .search_icon_con>i{ 
-  float: left;
 }
 .form_control{
   width:472px;
@@ -48,13 +45,11 @@
   height: calc(100% - 60px);
   display:-webkit-box;
   display:-ms-flexbox;
-  display:flex; 
-  display:table;  
+  /* display:flex;  */
   position: relative;
   padding-top: 30px;
 }
 .panel_left{
-  display: table-cell;
   vertical-align: top;
   width: 244px;
   position: relative;

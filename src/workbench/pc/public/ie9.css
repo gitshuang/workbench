@@ -1,4 +1,4 @@
-/*首页Header*/
+/* 首页Header */
 .ie9 :global(.lebra-navbar){
   display: table;
 }
@@ -23,8 +23,60 @@
 .ie9 :global(.lebra-navbar) :global(.lebra-navbar-title){
   text-align: center;
 }
-/*工作页Header*/
-.ie9 :global(.work) :global(.lebra-navbar-title) :global(.pin),.ie9 :global(.work) :global(.lebra-navbar-title){
-  position: unset;
+.ie9 :global(.lebra-navbar) :global(.lebra-navbar-right){
+  text-align: right;
 }
-/*全部应用*/
+/* 全部应用 */
+.ie9 :global(.src-workbench-pc-containers-serviceClassify-style__search_icon_con--1gqNs)>span,.ie9 :global(.src-workbench-pc-containers-serviceClassify-style__search_icon_con--1gqNs)>i{ 
+  float: left;
+}
+.ie9 :global(.src-workbench-pc-containers-serviceClassify-style__wrap--1p0S3) :global(.src-workbench-pc-containers-serviceClassify-style__um_content--2LQAA){
+  padding:20px 0;
+  height:100%;
+}
+.ie9 :global(.src-workbench-pc-containers-serviceClassify-style__wrap--1p0S3) :global(.src-workbench-pc-containers-serviceClassify-style__um_content--2LQAA)>div:first-child{
+  float: left;
+}
+.ie9 :global(.src-workbench-pc-containers-serviceClassify-style__menuBtnGroup--3vSAq){
+  min-height: 350px;
+}
+.ie9 :global(.src-workbench-pc-containers-serviceClassify-style__appsList--3xOvX) li{
+  display: table;
+}
+.ie9 :global(.src-workbench-pc-containers-serviceClassify-style__appsList--3xOvX) li>div{
+  display: table-cell;
+  vertical-align: top;
+}
+/* 首页编辑-添加服务 */
+.ie9_pop :global(.src-workbench-pc-containers-manageSelectWidgetList-style__search_icon_con--H7RuM)>span,.ie9_pop :global(.src-workbench-pc-containers-manageSelectWidgetList-style__search_icon_con--H7RuM)>i{ 
+  float: left;
+}
+.ie9_pop :global(.src-workbench-pc-containers-manageSelectWidgetList-style__panel--nAj3i){
+  display: table;
+}
+.ie9_pop :global(.src-workbench-pc-containers-manageSelectWidgetList-style__panel--nAj3i)>div{
+  display: table-cell;
+}
+.ie9_pop :global(.src-workbench-pc-containers-serviceItem-style__serviceItemTitle--9Avw6){
+  display: table;
+}
+.ie9_pop :global(.src-workbench-pc-containers-serviceItem-style__serviceItemTitle--9Avw6)>:global(.src-workbench-pc-containers-serviceItem-style__item_footer--2QESm){
+  display: table-cell;
+  text-align: right;
+}
+.ie9_pop :global(.src-workbench-pc-containers-serviceItem-style__serviceItemTitle--9Avw6)>i{
+  display: table-cell;
+}
+.ie9_pop :global(.src-workbench-pc-containers-manageSelectWidgetList-style__panel_left--25CvX) :global(.u-button-group-vertical){
+  min-height: 395px;
+}
+.ie9_pop :global(.src-workbench-pc-containers-serviceItem-style__item_li_top--Kihlb)>img{
+  float:left;
+}
+.ie9_pop :global(.src-workbench-pc-containers-manageSelectWidgetList-style__panel_right--uqt58)>div{
+  height: 495px;
+}
+.ie9_pop :global(.src-workbench-pc-containers-manageSelectWidgetList-style__footer_btn--3X24A){
+  display: table;
+  text-align: right;
+}

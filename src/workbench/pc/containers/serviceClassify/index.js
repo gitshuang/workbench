@@ -29,9 +29,7 @@ import {
   icon_close,
   icon_open,
   topTabBtns,
-  appsList,
-  ie_searchPanel,
-  ie_um_content
+  appsList
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -237,7 +235,7 @@ class serviceClassify extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div className={`${(!!window.ActiveXObject)?ie_searchPanel:searchPanel}`}>
+            <div className={searchPanel}>
               <FormControl className={serviceSearch} placeholder="搜索应用" value={this.state.value} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
@@ -246,7 +244,7 @@ class serviceClassify extends Component {
               </div>
             </div>
             
-            <div className={`${(!!window.ActiveXObject)?ie_um_content:um_content}`}>
+            <div className={um_content}>
               <div>
                 <div className={topTabBtns}>
                   <ButtonGroup>

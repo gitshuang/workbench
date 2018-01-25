@@ -13,8 +13,3 @@ if (!window.Promise) {
 window.React = React;
 window.ReactDOM = ReactDOM;
 ReactDOM.render(<div className={`${(!!window.ActiveXObject)?ie9:ie9}`}><App /></div>, document.getElementById('root'));
-
-/* IE ? */
-// if (!!window.ActiveXObject || "ActiveXObject" in window){
-//   document.getElementsByTagName('body')[0].classList.add('ie');      
-// }

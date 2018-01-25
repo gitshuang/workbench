@@ -4,8 +4,7 @@ import {
   appItemImg,
   appItem_describe,
   appItem_tit,
-  appItem_con,
-  ie_appsListItem
+  appItem_con
 } from './style.css';
 
 @withRouter
@@ -20,7 +19,7 @@ class GoTo extends Component {
       appName,
     } = this.props;
     return (
-      <li onClick={ ()=>{this.goToLink(code)} } className={`${(!!window.ActiveXObject)?ie_appsListItem:''}`}>
+      <li onClick={ ()=>{this.goToLink(code)} }>
         <div className={appItemImg}><img src={icon}/></div>
         <div className={appItem_describe}>
           <p className={appItem_tit}>{appName}</p>
