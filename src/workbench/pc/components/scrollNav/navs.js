@@ -27,9 +27,85 @@ class Navs extends Component{
   constructor(props) {
     super(props);
     this.navClassNotInit = true;
+    this.tabsIndex = 0;
+    this.tabsWidth = 1;
   }
 
+  componentWillUnmount() {
+    Events.scrollEvent.remove('end');
+  }
+
+  setScrollLeft(){
+    this.tabsIndex = 0;
+    Events.scrollEvent.register('end', (to, element)=> {
+      if(to == null)return;
+      let {items} = this.props;
+      let _tabIndex = items.findIndex((da)=>da.target == to);
+      let _pnum = (_tabIndex>this.tabsIndex?1:-1);
+      if(_tabIndex != 0 && _tabIndex != this.tabsIndex){
+        let _num = (_tabIndex>this.tabsIndex?-1:1)+_tabIndex;
+        let nextTabsId = items[(_num)].target;
+        this.tabsWidth = (_pnum*document.getElementById((nextTabsId)).offsetWidth);
+        // document.getElementById("nav_ul").scrollLeft += this.tabsWidth;
+        console.log("this.tabsWidth",this.tabsWidth);
+        if(_tabIndex>this.tabsIndex){
+          this.startTime(document.getElementById("nav_ul"),this.tabsWidth,3);
+        }else{
+          this.startTimeEnd(document.getElementById("nav_ul"),this.tabsWidth,3);
+        }
+      }else if(_tabIndex == 0){
+        document.getElementById("nav_ul").scrollLeft = 0;
+      }else{} 
+      this.tabsIndex = _tabIndex;
+    });
+  }
+
+  startTimeEnd(div,end,sp){
+    end += div.scrollLeft; 
+    let _top = div.scrollLeft;
+    if(this.interval){
+      clearInterval(this.interval);
+    }else{
+      this.interval = setInterval(()=>{
+         let start = div.scrollLeft;
+         console.log(start+"___"+end);
+          if(_top<=end){
+            clearInterval(this.interval);
+            this.interval = null;
+            _top = 0;
+          }else{
+            let _scro = (div.scrollLeft- sp)<=end?end:(div.scrollLeft - sp);
+            div.scrollLeft = _scro;
+            _top -=  sp;
+          }
+      })
+    }
+  }
+
+  startTime(div,end,sp){
+    end += div.scrollLeft; 
+    let _top = div.scrollLeft;
+    if(this.interval){
+      clearInterval(this.interval);
+    }else{
+      this.interval = setInterval(()=>{
+         let start = div.scrollLeft;
+         console.log(start+"___"+end);
+          if(_top>=end){
+            clearInterval(this.interval);
+            this.interval = null;
+            _top = 0;
+          }else{
+            let _scro = (div.scrollLeft+ sp)>=end?end:(div.scrollLeft+ sp);
+            div.scrollLeft = _scro;
+            _top +=  sp;
+          }
+      })
+    }
+  }
+ 
   componentDidMount() {
+    this.setScrollLeft();
     setTimeout(() => {
       if (this.navClassNotInit) {
         console.log('not init')
@@ -44,6 +120,13 @@ class Navs extends Component{
   }
 
   handleSetActive(i) {
+   
+    // if(i>this.tabsIndex){
+    //   this.tabsWidth = this.tabsWidth*(1);
+    // }else{
+    //   this.tabsWidth = this.tabsWidth*(-1);
+    // }
+    // this.tabsIndex = i;
     if (this.refs.list && notFirstInit) {
       console.log('has list');
       this.navClassNotInit = false;
@@ -62,7 +145,7 @@ class Navs extends Component{
       } = this.props;
     return (
       <div className={cover}>
-        <ul className={navs} ref='list'>
+        <ul className={navs} ref='list' id="nav_ul">
           {
             items = items.map(({ label, target }, i) => (
               <li key={i}>
