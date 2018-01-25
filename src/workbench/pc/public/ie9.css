@@ -6,8 +6,11 @@
   display: table-cell;
   vertical-align: middle;
 }
-.ie9 :global(.lebra-navbar) :global(.lebra-navbar-left),.ie9 :global(.lebra-navbar) :global(.lebra-navbar-right){
+.ie9 :global(.lebra-navbar) :global(.lebra-navbar-left){
   width: 150px;
+}
+.ie9 :global(.lebra-navbar) :global(.lebra-navbar-right){
+  width: 250px;
 }
 .ie9 :global(.lebra-navbar) :global(.lebra-navbar-left)>span:first-child{
   float: left;

@@ -12,4 +12,4 @@ if (!window.Promise) {
 }
 window.React = React;
 window.ReactDOM = ReactDOM;
-ReactDOM.render(<div className={`${(!!window.ActiveXObject)?ie9:ie9}`}><App /></div>, document.getElementById('root'));
+ReactDOM.render(<div className={`${(!!window.ActiveXObject)?ie9:''}`}><App /></div>, document.getElementById('root'));

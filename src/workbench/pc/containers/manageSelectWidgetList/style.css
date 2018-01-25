@@ -45,7 +45,7 @@
   height: calc(100% - 60px);
   display:-webkit-box;
   display:-ms-flexbox;
-  /* display:flex;  */
+  display:flex; 
   position: relative;
   padding-top: 30px;
 }
@@ -62,7 +62,6 @@
   margin-top: 8px;
 }
 .panel_right{
-  display: table-cell;
   -webkit-box-flex:1;
   -ms-flex:1;
   flex:1;

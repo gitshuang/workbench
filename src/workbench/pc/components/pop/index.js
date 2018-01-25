@@ -41,7 +41,7 @@ class PopDialog extends Component{
             _btns.push(_button);
         })
     }
-    return(<Modal className={`${(!!window.ActiveXObject)?ie9_pop:ie9_pop} ${this.props.className?this.props.className:"pop_dialog"}`} backdrop={this.props.backdrop?false:true} show = { this.props.show } onHide = { this.props.close } >
+    return(<Modal className={`${(!!window.ActiveXObject)?ie9_pop:''} ${this.props.className?this.props.className:"pop_dialog"}`} backdrop={this.props.backdrop?false:true} show = { this.props.show } onHide = { this.props.close } >
           <Modal.Header>
               <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>
