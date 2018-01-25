@@ -109,10 +109,6 @@ class SelectWidgetList extends Component {
   btnSearch=()=>{
     
     const { value, data } = this.state;
-    if( value == "" ){
-      this.getServices();
-      return false;
-    }
     const newArr = data.applications.filter((item,index) => {
       return item.applicationName.indexOf(value) > -1 
     });

@@ -114,10 +114,6 @@ class serviceClassify extends Component {
   btnSearch=()=>{
     const { allApplicationList } = this.props;
     const { value } = this.state;
-    if(!value){
-      this.getServiceList("");
-    }
-    //const allApplicationItem2 = this.state.allApplicationItem;
     const newArr = allApplicationList.applications.filter((item,index) => {
       return item.applicationName.indexOf(value) > -1 
      });
