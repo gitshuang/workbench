@@ -8,7 +8,7 @@ import {
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import routes from 'router';
 import store from 'store';
-import IM from 'IM';
+// import IM from 'IM';
 import { mapStateToProps, getContext } from '@u';
 import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
@@ -74,9 +74,11 @@ class Root extends Component {
       }
     });
     // timer(getMessage, 10000);
+    /*
     IM(new componentTool('IM'), getContext(), {
       el: 'IM',
     });
+    */
     regMessageTypeHandler(this);
   }
   clickHandler = () => {
