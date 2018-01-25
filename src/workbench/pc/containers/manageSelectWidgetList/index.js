@@ -68,10 +68,10 @@ class SelectWidgetList extends Component {
   }
 
   componentDidMount() {
-    this.getServices("");
+    this.getServices();
   }
 
-  getServices(serviceName){
+  getServices(serviceName=""){
     const {selectWidgetItem} = this.props;
     if(!selectWidgetItem){
       let payload = this.props.allServicesByLabelGroup;
@@ -107,9 +107,18 @@ class SelectWidgetList extends Component {
   // }
 
   btnSearch=()=>{
-    // if(this.state.value != "搜索内容..."){
-        this.getServices(this.state.value);
-    // }
+    
+    const { value, data } = this.state;
+    if( value == "" ){
+      this.getServices();
+      return false;
+    }
+    const newArr = data.applications.filter((item,index) => {
+      return item.applicationName.indexOf(value) > -1 
+    });
+    this.setState({
+      allAppList: newArr
+    });
   }
   
   onChange=(data,sele)=>{
