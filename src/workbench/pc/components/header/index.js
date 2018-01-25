@@ -40,7 +40,7 @@ class Header extends Component {
       prefixCls, className, children, mode, iconName, leftContent, rightContent, onLeftClick
     } = this.props;
 
-    const wrapCls = classnames(prefixCls, `${prefixCls}-${mode}`, className,`${(!!window.ActiveXObject)?'ie_headerWrap':''}`);
+    const wrapCls = classnames(prefixCls, `${prefixCls}-${mode}`, className);
 
     return (
       <div className={wrapCls} >

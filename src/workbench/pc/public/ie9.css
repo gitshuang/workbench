@@ -1,0 +1,30 @@
+/*首页Header*/
+.ie9 :global(.lebra-navbar){
+  display: table;
+}
+.ie9 :global(.lebra-navbar)>div{
+  display: table-cell;
+  vertical-align: middle;
+}
+.ie9 :global(.lebra-navbar) :global(.lebra-navbar-left),.ie9 :global(.lebra-navbar) :global(.lebra-navbar-right){
+  width: 150px;
+}
+.ie9 :global(.lebra-navbar) :global(.lebra-navbar-left)>span:first-child{
+  float: left;
+}
+.ie9 :global(.lebra-navbar) :global(.lebra-navbar-right)>div{
+  display: inline-block;
+}
+.ie9 :global(.lebra-navbar) :global(.lebra-navbar-left-icon){
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+.ie9 :global(.lebra-navbar) :global(.lebra-navbar-title){
+  text-align: center;
+}
+/*工作页Header*/
+.ie9 :global(.work) :global(.lebra-navbar-title) :global(.pin),.ie9 :global(.work) :global(.lebra-navbar-title){
+  position: unset;
+}
+/*全部应用*/

@@ -13,7 +13,7 @@
   color: #fff;
 } 
 /*--ie--*/
-:global(.ie_headerWrap){
+/* :global(.ie_headerWrap){
   display: table;
 }
 :global(.ie_headerWrap)>div{
@@ -38,7 +38,7 @@
 }
 :global(.ie_headerWrap) :global(.lebra-navbar-title){
   text-align: center;
-}
+} */
 /*--ie--*/
 :global(.lebra-navbar-light){
   /* background: rgba(255,255,255,0.92); */
