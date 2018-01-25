@@ -50,7 +50,7 @@ import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
 import nodata from 'assets/image/wgt/nodata.png';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
-const {getSearchMore, getSearch,getSearchOther} = searchActions;
+const {getSearchMore, getSearch,getSearchOther,setSearchHeadData} = searchActions;
 const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
 
@@ -59,6 +59,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
     'SearchMoreList',
     'SearchList',
     'SearchOtherList',
+    'searchHeadData',
     {
       namespace: 'search',
     },
@@ -70,6 +71,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
     getSearchMore,
     getSearch,
     getSearchOther,
+    setSearchHeadData,
   }
 )
 class searchResult extends Component {
@@ -77,7 +79,7 @@ class searchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "搜索人员信息、应用、服务及其他内容",
+      value: "",
       isPackUp:false,
       current: undefined,
       activetab: '',
@@ -95,6 +97,7 @@ class searchResult extends Component {
       isShowPagination:true,
       isShownodataClass:true,
       isShownodataClassEach:true,
+      otherName:"其他内容(0)"
     }
   }
   componentWillMount() {
@@ -180,21 +183,23 @@ class searchResult extends Component {
         if (error) {
           requestError(payload);
         }
-        this.setState({
-          Searchotherlist:payload,
-          pagesize:payload.pageSize
+        let _count = 0;
+        payload.content.forEach((da)=>{
+          _count += da.pageSize
         })
+        let _newObj = {otherName:"其他内容("+_count+")"};
+        _newObj.Searchotherlist = payload;
+        _newObj.pagesize = payload.pageSize; 
         if(payload.content.length>0){
-          this.setState({
-            isShowPagination:false,
-            isShownodataClassEach:true,
-          })
+          _newObj.isShowPagination = false;
+          _newObj.isShownodataClassEach = true; 
         }else{
-          this.setState({
-            isShowPagination:true,
-            isShownodataClassEach:false,
-          })
+          _newObj.isShowPagination = true;
+          _newObj.isShownodataClassEach = false; 
         }
+        this.setState({
+          ..._newObj
+        })
        requestSuccess();
       });
   }
@@ -204,11 +209,9 @@ class searchResult extends Component {
     })
   }
 
-  btnSearch=()=>{
-    if(this.state.value != "搜索人员信息、应用、服务及其他内容" && this.state.value !=''){
-      this.getSearchMoreList(this.state.value)
-      window.sessionStorage.searchkeywords = this.state.value
-    }
+  btnSearch=()=>{ 
+    this.getSearchMoreList(this.state.value)
+    window.sessionStorage.searchkeywords = this.state.value
   }
   onFormChange = (value) => {
     this.setState({
@@ -234,20 +237,20 @@ class searchResult extends Component {
      this.getSearchTpyeList(value,activetab,eventKey)
     }
   }
-  inputOnFocus = (e) => {
-    let _value = e.target.value != "搜索人员信息、应用、服务及其他内容"?e.target.value:"";
-    this.setState({
-        value:_value 
-    });
-  }
+  // inputOnFocus = (e) => {
+  //   let _value = e.target.value != "搜索人员信息、应用、服务及其他内容"?e.target.value:"";
+  //   this.setState({
+  //       value:_value 
+  //   });
+  // }
 
-  inputOnBlur = (e) => {
-    if(e.target.value == ""){
-      this.setState({
-          value:"搜索人员信息、应用、服务及其他内容"
-      });
-    }
-  }
+  // inputOnBlur = (e) => {
+  //   if(e.target.value == ""){
+  //     this.setState({
+  //         value:"搜索人员信息、应用、服务及其他内容"
+  //     });
+  //   }
+  // }
 
   TabsClick = (activetab) =>{
     const {value,activePage} = this.state
@@ -264,21 +267,18 @@ class searchResult extends Component {
   }
   goDetail(type,item){
     return (e) => {
-      e.stopPropagation();
-      console.log(type,item)
+      e.stopPropagation(); 
       this.props.history.push('/'+type+'/'+item.serviceCode);
     }
   }
   goOtherlist(item){
-    return () => {
-      console.log(item)
-      this.props.history.push('/search/searchlist/'+item.type);
-    }
+    const {setSearchHeadData,searchHeadData:{brm}} = this.props;
+    setSearchHeadData({appName:item.typeName,brm:[{name:brm[0].name},{name:item.typeName}]});
+    this.props.history.push({pathname:`/search/searchlist`,state:item});
   }
   goemailDetail(item){
     return (e) => {
-      e.stopPropagation();
-      console.log(item)
+      e.stopPropagation(); 
     }
   }
   onKeyup = (e) => {
@@ -340,15 +340,14 @@ class searchResult extends Component {
     return lis
   }
   render() {
-    const { value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist,isShownodataClass,isShownodataClassEach } = this.state;
+    const { otherName,value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist,isShownodataClass,isShownodataClassEach } = this.state;
     let otherlist = []
     let Morelist = []
     const anifalse=false
     SearchMoreList.forEach((item,index) => {
-
       Morelist.push(
       <TabPane
-          tab={item.typeName}
+          tab={item.typeName+"("+item.pageSize+")"}
           key={item.type}
           className={tabPane1}
       >
@@ -368,7 +367,7 @@ class searchResult extends Component {
       <h3>{item.typeName}</h3>
       {this.otherlistLi(item)}
       
-      <em key={index} onClick={this.goOtherlist(item)}>查看全部，共{item.total}条 ></em>
+      <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部，共{item.total}条 ></em>
     </ul>)
     })
                   
@@ -377,7 +376,8 @@ class searchResult extends Component {
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} value={this.state.value} onKeyDown={this.onKeyup} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
+              <FormControl className={serviceSearch} placeholder="搜索人员信息、应用、服务及其他内容"
+               value={this.state.value} onKeyDown={this.onKeyup} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
@@ -399,7 +399,7 @@ class searchResult extends Component {
               {Morelist}
               {
                 this.state.hasOther ? (
-                  <TabPane tab='其他内容' key="other" className={tabPane1}>
+                  <TabPane tab={otherName} key="other" className={tabPane1}>
                     {otherlist}
                     <div className={`${nodataClass} ${isShownodataClassEach? isdisplay : ''}`}>
                       <img src={nodata}/>
@@ -410,8 +410,8 @@ class searchResult extends Component {
               }
                 
               </Tabs>
-            </div>
-            <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
+
+              <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
               <Pagination
                 first
                 last
@@ -424,6 +424,9 @@ class searchResult extends Component {
                 activePage={this.state.activePage}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
+            
+            </div>
+            
           </div>
         </div>
       </div>

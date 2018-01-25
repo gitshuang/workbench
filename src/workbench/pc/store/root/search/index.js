@@ -7,6 +7,7 @@ const {
   getSearchMore,
   getSearch,
   getSearchOther,
+  setSearchHeadData,
 } = actions;
 
 const defaultState = {
@@ -14,6 +15,7 @@ const defaultState = {
   SearchMoreList:[],
   SearchList:[],
   SearchOtherList:[],
+  searchHeadData:{appName:"搜索结果",brm:[{name:"搜索结果"}]}
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -31,7 +33,13 @@ const reducer = handleActions({
 	[getSearchSuggest]: createReducer('SearchSuggestList'),
 	[getSearchMore]: createReducer('SearchMoreList'),
 	[getSearch]: createReducer('SearchList'),
-	[getSearchOther]: createReducer('SearchOtherList'),
+  [getSearchOther]: createReducer('SearchOtherList'),
+  [setSearchHeadData]:(state,{payload:searchHeadData})=>{
+    return{
+      ...state,
+      searchHeadData
+    }
+  },
 }, defaultState);
 
 export default reducer;

@@ -10,6 +10,7 @@ import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { trigger } from 'public/componentTools';
 import home from './home';
 import work from './work';
+import search from './search';
 import application from './application';
 import manage from './manage';
 import actions from './actions';
@@ -177,6 +178,7 @@ export default function (state, action) {
   const pageState = {
     home: home(state ? state.home : undefined, action),
     work: work(state ? state.work : undefined, action),
+    search: search(state ? state.search : undefined, action),
     application: application(state ? state.application : undefined, action),
     manage: manage(state ? state.manage : undefined, action),
   };
