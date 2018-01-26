@@ -109,18 +109,25 @@ class SelectWidgetList extends Component {
   btnSearch=()=>{
     const { value, data } = this.state;
     let newArr = [];
-    if(value ==""){
-      newArr = data.applications
+    if( value == "" ){
+      newArr = data.applications;
     }else{
+      
       data.applications.forEach((item,index)=>{
-        item.service.forEach((list,key)=>{
-          if ( list.serviceName.indexOf(value) > -1 ){
-            item.service = item.service.filter((v,i)=>{
-              return i == key
-            });
-            newArr.push(item)
+        const newItem = {
+          ...item,
+          service: [],
+        };
+        let flag = false;
+        item.service.forEach( (list,key)=>{
+          if( list.serviceName.indexOf(value) > -1 ){
+            flag = true;
+            newItem.service.push(list);
           }
         });
+        if (flag || item.applicationName.indexOf(value) > -1 ) {
+          newArr.push(newItem);
+        }
       });
     }
     this.setState({
