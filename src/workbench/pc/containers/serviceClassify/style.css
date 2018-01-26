@@ -221,3 +221,24 @@
   clear: both;
   visibility: hidden;
 }
+/* ie9兼容 */
+:global(.ie9) .search_icon_con>span,:global(.ie9) .search_icon_con>i{ 
+  float: left;
+}
+:global(.ie9) .wrap .um_content{
+  padding:20px 0;
+  height:100%;
+}
+:global(.ie9) .wrap .um_content>div:first-child{
+  float: left;
+}
+:global(.ie9) .menuBtnGroup{
+  min-height: 350px;
+}
+:global(.ie9) .appsList li{
+  display: table;
+}
+:global(.ie9) .appsList li>div{
+  display: table-cell;
+  vertical-align: top;
+}

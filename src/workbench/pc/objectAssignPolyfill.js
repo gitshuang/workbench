@@ -1,6 +1,7 @@
 import objectAssign from 'object-assign';
 import arrayFrom from 'array.from';
 import arrayFind from 'array.find';
+import Symbol from 'es6-symbol';
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function () { };
 if (typeof Object.assign === 'undefined') {
@@ -11,6 +12,9 @@ if (typeof Array.from === 'undefined') {
 }
 if(typeof Array.find === 'undefined'){
     Array.find = arrayFind;
+}
+if(typeof window.Symbol === 'undefined'){
+    window.Symbol = Symbol;
 }
 if (!("classList" in document.documentElement)) {
   Object.defineProperty(HTMLElement.prototype, 'classList', {
