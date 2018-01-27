@@ -55,7 +55,6 @@ class Navs extends Component{
         let nextTabsId = items[(_num)].target;
         this.tabsWidth = (_pnum*document.getElementById((nextTabsId)).offsetWidth);
         // document.getElementById("nav_ul").scrollLeft += this.tabsWidth;
-        console.log("this.tabsWidth",this.tabsWidth);
         if(_tabIndex>this.tabsIndex){
           this.startTime(document.getElementById("nav_ul"),this.tabsWidth,3);
         }else{
@@ -63,20 +62,19 @@ class Navs extends Component{
         }
       }else if(_tabIndex == 0){
         document.getElementById("nav_ul").scrollLeft = 0;
-      }else{} 
+      }else{}
       this.tabsIndex = _tabIndex;
     });
   }
 
   startTimeEnd(div,end,sp){
-    end += div.scrollLeft; 
+    end += div.scrollLeft;
     let _top = div.scrollLeft;
     if(this.interval){
       clearInterval(this.interval);
     }else{
       this.interval = setInterval(()=>{
          let start = div.scrollLeft;
-         console.log(start+"___"+end);
           if(_top<=end){
             clearInterval(this.interval);
             this.interval = null;
@@ -91,14 +89,13 @@ class Navs extends Component{
   }
 
   startTime(div,end,sp){
-    end += div.scrollLeft; 
+    end += div.scrollLeft;
     let _top = div.scrollLeft;
     if(this.interval){
       clearInterval(this.interval);
     }else{
       this.interval = setInterval(()=>{
          let start = div.scrollLeft;
-         console.log(start+"___"+end);
           if(_top>=end){
             clearInterval(this.interval);
             this.interval = null;
@@ -111,7 +108,7 @@ class Navs extends Component{
       })
     }
   }
- 
+
   componentDidMount() {
     let ul = document.getElementById("nav_ul"); 
     let b = ul.scrollWidth > ul.clientWidth?true:false;
@@ -121,7 +118,6 @@ class Navs extends Component{
     this.setScrollLeft();
     setTimeout(() => {
       if (this.navClassNotInit) {
-        console.log('not init')
         const firstA = this.refs.list.querySelector('li a');
         if (firstA) {
           addClass(firstA);
@@ -134,11 +130,9 @@ class Navs extends Component{
 
   handleSetActive(i) {
     if (this.refs.list && notFirstInit) {
-      console.log('has list');
       this.navClassNotInit = false;
       replaceClass(this.refs.list, i);
     } else {
-      console.log('has no list');
     }
   } 
 

@@ -189,7 +189,6 @@ function openGlobalDialog(options) {
   // }
   // dialogIsOpen = true;
   const dialogFactory = makeGlobalDialogInstance.bind(null, options);
-  console.log(globalDialogInstance);
   if (globalDialogInstance) {
     globalDialogInstance.destroy();
   }

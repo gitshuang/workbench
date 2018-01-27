@@ -50,7 +50,6 @@ const defaultState = {
 
 function appendSearchParam(url, params) {
   if (url) {
-    console.log(url);
     var urlObj = new URL(url);
     Object.keys(params).forEach((name) => {
       urlObj.searchParams.append(name, params[name]);

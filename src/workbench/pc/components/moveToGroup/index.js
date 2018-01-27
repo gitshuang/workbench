@@ -72,7 +72,6 @@ class MoveToGroup extends Component {
   }
   // 确认添加分组
   confirmAddGroup = () => {
-    console.log(this.state.newGroupName);
     this.props
       .onAddGroup(this.state.newGroupName)
       .then(({ error, payload }) => {

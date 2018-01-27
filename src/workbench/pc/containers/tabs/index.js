@@ -36,9 +36,6 @@ const deviation = 0;
 const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
   let allLeng = totalTabs.length;
   tabWidth = areaWidth/allLeng;
-  console.log(areaWidth);
-  console.log(allLeng)
-  console.log(tabWidth)
   let mores = [];
   let tabs = totalTabs;
   let hasMore = false;
@@ -165,7 +162,6 @@ class TabsContainer extends Component {
     }, 300);
   }
   toggleMore() {
-    console.log("this.state.moreIsShow",this.state.moreIsShow);
     this.setState({
       moreIsShow: !this.state.moreIsShow,
     })
@@ -176,11 +172,10 @@ class TabsContainer extends Component {
     const { width: areaWidth, moreIsShow } = this.state;
     const curIndex = totalTabs.findIndex(({ id }) => id === currentId);
     const totalTabsNum = totalTabs.length;
- 
+
     let ipad_tabsArea = "";
     let tabs = [], mores = [];
     let equipment = browserRedirect();
-    console.log(equipment);
     let _width = {};
     if(equipment == "ipad"){
       tabs = totalTabs;
@@ -191,7 +186,6 @@ class TabsContainer extends Component {
       let { tabs:_tabs, mores:_mores } = getTabsAndMores(totalTabs, areaWidth, curIndex);
       tabs = _tabs;
       mores = _mores;
-      console.log(",tabWidth",tabWidth);
     }
     const moreListElm = moreIsShow ? (
       <ul className={moreList} >

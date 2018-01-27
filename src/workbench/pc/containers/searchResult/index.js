@@ -160,7 +160,7 @@ class searchResult extends Component {
           this.setState({
             isShowPagination:false,
             isShownodataClassEach:true,
-            
+
           })
         }else{
           this.setState({
@@ -189,13 +189,13 @@ class searchResult extends Component {
         })
         let _newObj = {otherName:"其他内容("+_count+")"};
         _newObj.Searchotherlist = payload;
-        _newObj.pagesize = payload.pageSize; 
+        _newObj.pagesize = payload.pageSize;
         if(payload.content.length>0){
           _newObj.isShowPagination = false;
-          _newObj.isShownodataClassEach = true; 
+          _newObj.isShownodataClassEach = true;
         }else{
           _newObj.isShowPagination = true;
-          _newObj.isShownodataClassEach = false; 
+          _newObj.isShownodataClassEach = false;
         }
         this.setState({
           ..._newObj
@@ -209,7 +209,7 @@ class searchResult extends Component {
     })
   }
 
-  btnSearch=()=>{ 
+  btnSearch=()=>{
     this.getSearchMoreList(this.state.value)
     window.sessionStorage.searchkeywords = this.state.value
   }
@@ -240,7 +240,7 @@ class searchResult extends Component {
   // inputOnFocus = (e) => {
   //   let _value = e.target.value != "搜索人员信息、应用、服务及其他内容"?e.target.value:"";
   //   this.setState({
-  //       value:_value 
+  //       value:_value
   //   });
   // }
 
@@ -267,7 +267,7 @@ class searchResult extends Component {
   }
   goDetail(type,item){
     return (e) => {
-      e.stopPropagation(); 
+      e.stopPropagation();
       this.props.history.push('/'+type+'/'+item.serviceCode);
     }
   }
@@ -278,7 +278,7 @@ class searchResult extends Component {
   }
   goemailDetail(item){
     return (e) => {
-      e.stopPropagation(); 
+      e.stopPropagation();
     }
   }
   onKeyup = (e) => {
@@ -366,11 +366,11 @@ class searchResult extends Component {
       otherlist.push(<ul className={`${recently} ${clearfix}`} key={index}>
       <h3>{item.typeName}</h3>
       {this.otherlistLi(item)}
-      
+
       <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部，共{item.total}条 ></em>
     </ul>)
     })
-                  
+
     return (
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
@@ -408,7 +408,7 @@ class searchResult extends Component {
                   </TabPane>
                 ) : null
               }
-                
+
               </Tabs>
 
               <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
@@ -424,9 +424,9 @@ class searchResult extends Component {
                 activePage={this.state.activePage}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
-            
+
             </div>
-            
+
           </div>
         </div>
       </div>

@@ -185,7 +185,6 @@ class WidgeFileItem extends Component {
         widgetId
         }
       } = this.props;
-    console.log(flag);
     let selectList2;
     if(!flag){
       selectList2 = selectList.filter((item,i) => {

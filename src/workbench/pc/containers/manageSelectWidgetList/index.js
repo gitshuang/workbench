@@ -47,7 +47,7 @@ class SelectWidgetList extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = ({
         activeKey: undefined,
         // start: 0,
@@ -112,7 +112,7 @@ class SelectWidgetList extends Component {
     if( value == "" ){
       newArr = data.applications;
     }else{
-      
+
       data.applications.forEach((item,index)=>{
         const newItem = {
           ...item,
@@ -134,7 +134,7 @@ class SelectWidgetList extends Component {
       allAppList: newArr
     });
   }
-  
+
   onChange=(data,sele)=>{
     data.selected = sele;
     let index = this.state.selectedList.findIndex(da=>da.serviceId == data.serviceId);
@@ -143,7 +143,6 @@ class SelectWidgetList extends Component {
     }else{
       this.state.selectedList.splice(index,1);
     }
-    console.log(this.state.selectedList);
     this.setState({
         ...this.state,
         edit:this.state.selectedList.length==0?false:true
@@ -156,7 +155,7 @@ class SelectWidgetList extends Component {
         value:e
     });
   }
- 
+
   btnSave=()=>{
     const { requestError, requestSuccess, setCurrentSelectWidgetMap } = this.props;
     setCurrentSelectWidgetMap(this.state.selectedList);
@@ -170,7 +169,6 @@ class SelectWidgetList extends Component {
   }
 
   btnClose=()=>{
-    console.log(this.state.selectedList);
     this.state.selectedList.forEach((da,i)=>{
       da.selected = "2";
     })
@@ -223,10 +221,10 @@ class SelectWidgetList extends Component {
     if(data == "all"){
       applications.forEach((da,i)=>{
         _data.push(da);
-      }); 
+      });
     }else{
       data.appIds.forEach((appId,i)=>{
-        _data.push(applicationsMap[appId]); 
+        _data.push(applicationsMap[appId]);
       })
     }
     this.setState({
@@ -245,7 +243,7 @@ class SelectWidgetList extends Component {
       ...this.state.allAppList
     });
   }
- 
+
   render() {
     let self = this;
     const {applicationsMap} = this.props;
@@ -284,7 +282,7 @@ class SelectWidgetList extends Component {
 
     return (<div className={select_widget_list}>
        {/* <div className={widget_left}>
-          <div className={title}>添加服务</div> 
+          <div className={title}>添加服务</div>
        </div> */}
        <div className={widget_right}>
           <div className={searchPanel}>
