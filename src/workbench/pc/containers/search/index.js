@@ -74,14 +74,11 @@ class SearchContainer extends Component {
     this.gochatDetail = this.gochatDetail.bind(this);
   }
   goSearchPage() {
-    var local= this.props.history.location.pathname;
-    if(local!='/search'){
-      this.props.history.push('/search');
-      window.sessionStorage.searchkeywords = this.state.text;
-    }else{
-      window.sessionStorage.searchkeywords = this.state.text;
-      console.log(SearchResult)
-    }
+    //todu 此处如果使用push，每次传进去的参数，始终是第一个参数。
+    let value = this.state.text;
+    this.props.history.push(`/search/${value}`);
+    // this.props.history.push({pathname:`/search`,state:{value:this.state.text}});
+    // replace
   }
   getSearchList(keyworks){
     const {
