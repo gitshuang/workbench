@@ -169,8 +169,8 @@ class Navs extends Component{
                   isDynamic={true}
                   id={target}
                   delay={delay}>
-                  {label}
-                  {/* {getStrLenSubstr(label,4,4)} */}
+                  {/* {label} */}
+                  {getStrLenSubstr(label,4,4)}
                 </Link>
               </li>
             ))
