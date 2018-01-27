@@ -7,7 +7,7 @@ import homeActions from 'store/root/home/actions';
 import Icon from 'components/icon';
 import Header from 'containers/header';
 import Navbar from 'components/scrollNav';
-import { logoImg, header ,imgInner} from './style.css';
+import { logoImg, header ,imgInner,all_btn,btn_disable} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
 const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo } = homeActions;
@@ -36,6 +36,15 @@ const {
   }
 )
 class HeaderPage extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      allBtn:false, //默认显示一行tab
+      btnShow:false
+    }
+  }
+
   getLeftContent() {
     const {
       userInfo: {
@@ -45,7 +54,16 @@ class HeaderPage extends Component {
     return (<img src={logo || logoUrl} className={logoImg}/>);
   }
   componentDidMount() {
-    this.getUserInfo();
+    // this.getUserInfo();
+ 
+      // let ul = document.getElementById("nav_ul");
+      // debugger;
+      // let b = ul.scrollWidth > ul.clientWidth?true:false;
+      // debugger;
+      // this.setState({
+      //   btnShow:b
+      // })
+
     // setTimeout(() => {
     //   window.scrollTo(0, 1);
     // },0); 
@@ -63,6 +81,19 @@ class HeaderPage extends Component {
         }
       });
     }
+  }
+
+  allBtnOnclick=()=>{
+    console.log("allBtn",this.state.allBtn);
+    this.setState({
+      allBtn:this.state.allBtn?false:true
+    })
+  }
+
+  btnShowFn = (btnShow)=>{
+    this.setState({
+      btnShow
+    });
   }
 
   render() {
@@ -86,6 +117,10 @@ class HeaderPage extends Component {
     }else{
       imgIcon =  <Icon type="staff" />;
     }
+
+    console.log("this.state.allBtn",this.state.allBtn);
+    const _btnShow = this.state.btnShow?null:btn_disable;
+
     return (
       <div className={`${header}`} style={background}>
         <Header
@@ -104,9 +139,15 @@ class HeaderPage extends Component {
               duration={500}
               delay={0}
               color={color}
+              allBtn={this.state.allBtn}
+              btnShowFn={this.btnShowFn}
             />
           ) : null
         }
+        <div className={`${all_btn} ${_btnShow}`} onClick={this.allBtnOnclick}>
+          {this.state.allBtn?"显示一行":"显示全部"}
+          <Icon type={this.state.allBtn?"upward":"pull-down"} />
+        </div>
       </div>
     );
   }

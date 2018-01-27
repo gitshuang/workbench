@@ -11,6 +11,7 @@ var api = [
   '/service/getAllAppsGroupByLabels',//废弃
 
   '/user/setCutUser',
+  '/user/getUserInfo',
 
   '/getMessage',
   '/getSelectWidgetList',

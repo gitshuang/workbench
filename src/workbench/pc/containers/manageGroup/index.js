@@ -454,7 +454,7 @@ class ManageGroup extends Component {
               onChange={this.editGroupName}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
-              placeholder="分组名称,最多20个字符"
+              placeholder="分组名称,最多4个字符"
               ref="groupName" />
           </div>
           <ButtonCheckSelected id={`${widgetId}_btn`} className={btn} onClick={ ()=>{this.renameGroupFn(index)} }><Icon type="right"></Icon></ButtonCheckSelected>

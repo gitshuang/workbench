@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
 import { Link ,animateScroll as scroll,scrollSpy,Events} from 'react-scroll';
+import { getStrLenSubstr} from '@u';
 import {
   link,
   activeLink,
   item,
   cover,
   navs,
+  all_btn_ul
 } from './style.css';
 
 let notFirstInit = false;
@@ -29,8 +31,13 @@ class Navs extends Component{
     this.navClassNotInit = true;
     this.tabsIndex = 0;
     this.tabsWidth = 1;
-  }
 
+
+    this.state = {
+      btnShow:false
+    }
+  }
+ 
   componentWillUnmount() {
     Events.scrollEvent.remove('end');
   }
@@ -38,7 +45,8 @@ class Navs extends Component{
   setScrollLeft(){
     this.tabsIndex = 0;
     Events.scrollEvent.register('end', (to, element)=> {
-      if(to == null)return;
+      if(to == null || this.props.allBtn)return;
+
       let {items} = this.props;
       let _tabIndex = items.findIndex((da)=>da.target == to);
       let _pnum = (_tabIndex>this.tabsIndex?1:-1);
@@ -105,6 +113,11 @@ class Navs extends Component{
   }
  
   componentDidMount() {
+    let ul = document.getElementById("nav_ul"); 
+    let b = ul.scrollWidth > ul.clientWidth?true:false;
+    console.log("nav_ul",b);
+    this.props.btnShowFn(b);
+
     this.setScrollLeft();
     setTimeout(() => {
       if (this.navClassNotInit) {
@@ -120,13 +133,6 @@ class Navs extends Component{
   }
 
   handleSetActive(i) {
-   
-    // if(i>this.tabsIndex){
-    //   this.tabsWidth = this.tabsWidth*(1);
-    // }else{
-    //   this.tabsWidth = this.tabsWidth*(-1);
-    // }
-    // this.tabsIndex = i;
     if (this.refs.list && notFirstInit) {
       console.log('has list');
       this.navClassNotInit = false;
@@ -134,18 +140,20 @@ class Navs extends Component{
     } else {
       console.log('has no list');
     }
-  }
+  } 
+
   render(){
     let {
         items,
         offset,
         duration,
         delay,
-        color
+        color,
+        allBtn
       } = this.props;
     return (
       <div className={cover}>
-        <ul className={navs} ref='list' id="nav_ul">
+        <ul className={`${navs} ${allBtn?null:all_btn_ul} `} ref='list' id="nav_ul">
           {
             items = items.map(({ label, target }, i) => (
               <li key={i}>
@@ -162,6 +170,7 @@ class Navs extends Component{
                   id={target}
                   delay={delay}>
                   {label}
+                  {/* {getStrLenSubstr(label,4,4)} */}
                 </Link>
               </li>
             ))
