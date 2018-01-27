@@ -133,7 +133,7 @@
   -webkit-box-pack:center;
   display: flex;
   align-items: center;
-  justify-content:center; 
+  justify-content:center;
   display:table; /*IE9*/
   margin: 0 auto;
   overflow: hidden;
@@ -146,13 +146,13 @@
   display: flex;
   align-items: center;
   justify-content:center;
-  display:table; 
+  display:table;
   margin: 0 auto;
   margin-top: 5px;
   margin-bottom: 24px;
 }
 .gloryIcon li{
-  display: table-cell; 
+  display: table-cell;
   width:62px;
   text-align:center;
   font-size:12px;
@@ -381,7 +381,7 @@
   color: #E14C46;
 } */
 /* .wrap :global(.u-tabs-content){
- 
+
 } */
 .wrap :global(.u-tabs-tab):hover{
   font-weight:900;
@@ -427,4 +427,9 @@
   color: rgba(117,127,140,1);
   margin-right: 5px;
   vertical-align: middle;
+}
+.tenantArea {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
 }

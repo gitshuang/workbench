@@ -54,8 +54,8 @@ class HeaderPage extends Component {
     return (<img src={logo || logoUrl} className={logoImg}/>);
   }
   componentDidMount() {
-    // this.getUserInfo();
- 
+    this.getUserInfo();
+
       // let ul = document.getElementById("nav_ul");
       // debugger;
       // let b = ul.scrollWidth > ul.clientWidth?true:false;
@@ -66,7 +66,7 @@ class HeaderPage extends Component {
 
     // setTimeout(() => {
     //   window.scrollTo(0, 1);
-    // },0); 
+    // },0);
   }
 
   getUserInfo() {

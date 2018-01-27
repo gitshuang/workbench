@@ -28,7 +28,7 @@ var api = [
 
 var rapApi = [
     // '/service/getAllServicesGroupByLabels'
-  '/user/getUserInfo',
+  // '/user/getUserInfo',
   '/widget/deleteByServiceCode',
   '/widget/create',
   '/service/getServiceInfoWithDetail',
