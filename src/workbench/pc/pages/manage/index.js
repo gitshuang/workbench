@@ -104,11 +104,10 @@ class Home extends Component {
     const { returnDefaultState } = this.props;
     returnDefaultState();
   }
-  
+
   componentDidMount() {
     const { history} = this.props;
 
-    console.log(history);
     history.block(location => {
       const { isEdit} = this.props;
       this.goToLocation =  location.pathname;
@@ -236,7 +235,6 @@ class Home extends Component {
   // 返回确认按钮
   checkFun =(id)=>{
     let btn = document.getElementById(id);
-    console.log("===checkFun====== ",btn);
     this.checkBtn = btn?btn:null;
   }
 
@@ -263,7 +261,7 @@ class Home extends Component {
           id={item.widgetId}
           type={item.type}
           moveGroupDrag={this.moveGroupDrag}
-          moveItemDrag={this.moveItemDrag} 
+          moveItemDrag={this.moveItemDrag}
           checkFun={this.checkFun}
           />
       )

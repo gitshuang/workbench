@@ -26,7 +26,7 @@ const routes = [
     component: Search,
     routes:[
       {
-        path:'/search',
+        path:'/search/:value',
         component:SearchResult,
         exact: true,
       },

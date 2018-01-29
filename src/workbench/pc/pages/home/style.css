@@ -51,3 +51,18 @@ body{
   border-color: #ffffff;
 }
 
+.all_btn{
+  /* border: 1px solid red; */
+  width: 100px;
+  height: 48px;
+  line-height: 40px;
+  position: absolute;
+  right: 0px;
+  top: 48px;
+  text-align:center;
+  color: #E14C46;
+}
+
+.btn_disable{
+  display: none;
+}

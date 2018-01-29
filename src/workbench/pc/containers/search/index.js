@@ -74,14 +74,11 @@ class SearchContainer extends Component {
     this.gochatDetail = this.gochatDetail.bind(this);
   }
   goSearchPage() {
-    var local= this.props.history.location.pathname;
-    if(local!='/search'){
-      this.props.history.push('/search');
-      window.sessionStorage.searchkeywords = this.state.text;
-    }else{
-      window.sessionStorage.searchkeywords = this.state.text;
-      console.log(SearchResult)
-    }
+    //todu 此处如果使用push，每次传进去的参数，始终是第一个参数。
+    let value = this.state.text;
+    this.props.history.push(`/search/${value}`);
+    // this.props.history.push({pathname:`/search`,state:{value:this.state.text}});
+    // replace
   }
   getSearchList(keyworks){
     const {
@@ -147,7 +144,6 @@ class SearchContainer extends Component {
   searchMin() {
     const { isShow, text, isSearchWinShow } = this.state;
     if (isShow && text) {
-      console.log(this.state.text)
       this.getSearchList(text)
       this.setState({
         isSearchWinShow: true,
@@ -166,7 +162,7 @@ class SearchContainer extends Component {
       this.setState({
         isShow: true,
       })
-      
+
     }
     // this.props.history.push('/application');;
   }
@@ -178,7 +174,6 @@ class SearchContainer extends Component {
   goDetail(type,item){
     return (e) => {
       e.stopPropagation();
-      console.log(type,item)
       this.props.history.push('/'+type+'/'+item.serviceCode);
     }
   }
@@ -275,7 +270,7 @@ class SearchContainer extends Component {
           break;
         default:
           let lis4 = [];
-      
+
             item.content.forEach((item2,index2)=>{
               item2 = JSON.parse(item2)
               lis4.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
@@ -285,7 +280,7 @@ class SearchContainer extends Component {
                   </div>
                 </li>);
             })
-          
+
           contenttype_other.push(
             <div className={searchWindom} key={index}>
               <h3>{item.typeName}</h3>
@@ -314,7 +309,7 @@ class SearchContainer extends Component {
 
       searchWin = (
         <div className={`${SearchWin} ${isSearchWinShow? showheight : ''}`} >
-         
+
           {contenttype_user}
           {contenttype_service}
           {contenttype_help}
@@ -324,7 +319,7 @@ class SearchContainer extends Component {
               <em>没有搜索结果</em>
             ) : <div className={searchBtnAll} onClick={this.goSearchPage}>查看更多结果</div>
           }
-          
+
         </div>
       )
     }

@@ -53,7 +53,6 @@ class WidgetItem extends Component {
       style.backgroundImage = `url(${background})`;
     }
 
-    console.log("icon____"+icon);
     // 取元数据
     const titleStyle = listMeta && listMeta.titleStyle && JSON.parse(listMeta.titleStyle);
     const imageStyle = listMeta && listMeta.imageStyle && JSON.parse(listMeta.imageStyle);

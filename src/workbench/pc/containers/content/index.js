@@ -34,7 +34,6 @@ class ContentContainer extends Component {
         <div className={contentArea} >
           {
             tabs.map(({ id, location }) => {
-              console.log(id)
               return (
                 <div key={id} className={cs(
                   content,

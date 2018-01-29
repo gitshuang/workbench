@@ -15,13 +15,10 @@ import Tabs, { TabPane } from 'bee-tabs';
 import onClickOutside from 'react-onclickoutside';
 import img1 from 'assets/image/wgt/yonyouSpace1.png';
 import img2 from 'assets/image/wgt/intelligent_logo.png';
-import img3 from 'assets/image/wgt/goldInstitute.png';
-import img4 from 'assets/image/wgt/salary_logo.png';
-import img5 from 'assets/image/wgt/relation.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer,usedIcon,icon1,icon2,icon3, defaultPic,select_cont,logOut,line_end
+  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea
 } from './style.css';
 
 const {
@@ -66,26 +63,15 @@ const {
 class UserInfoContainer extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+
     this.getLatestAccessList();
     this.getPromotionServiceList();
 
     this.state = {
-      editPortrait:false,
-      dataList:[
-        // {"id":"1001","name":"结算中心","icon":"loan","usedService":"核算服务","lastTime":"1分钟前"},
-        // {"id":"1001","name":"新增凭证","icon":"bill","usedService":"报账服务","lastTime":"30分钟前"}
-      ],
-      promotionList:[
-        // {"src":img1,"promotion_tit":"友空间"},
-        // {"src":img2,"promotion_tit":"智能服务"},
-        // {"src":img3,"promotion_tit":"友金所"},
-        // {"src":img4,"promotion_tit":"新福社"},
-        // {"src":img5,"promotion_tit":"相关服务"}
-      ]
+      dataList:[ ],
+      promotionList:[ ]
     }
   }
-
   static propTypes = {
     userInfo: PropTypes.object,
     getUserInfo: PropTypes.func,
@@ -94,7 +80,6 @@ class UserInfoContainer extends Component {
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
   }
-
   getLatestAccessList() {
     const {requestStart, requestSuccess, requestError,   getLatestAccessList} = this.props;
     requestStart();
@@ -108,7 +93,6 @@ class UserInfoContainer extends Component {
         requestSuccess();
     });
   }
-
   getPromotionServiceList() {
     const {requestStart, requestSuccess, requestError, getPromotionServiceList} = this.props;
     requestStart();
@@ -122,39 +106,16 @@ class UserInfoContainer extends Component {
         requestSuccess();
     });
   }
-
-
   handleClickOutside(e) {
-    //在面板中操作不要关闭面板
-    // if(event.target.getAttribute("class") == "u-dropdown-menu-item-active u-dropdown-menu-item"){
-    //   return;
-    // }
     const { hideUserInfoDisplay, userInfoDisplay } = this.props;
-    if(userInfoDisplay){
+    if (userInfoDisplay) {
       hideUserInfoDisplay();
     }
   }
-  // componentWillMount() {
-  //   const { userInfo: { name }, getUserInfo } = this.props;
-  //   if (!name) {
-  //     requestStart();
-  //     getUserInfo().then(({ error, payload }) => {
-  //       if (error) {
-  //         requestError(payload);
-  //       } else {
-  //         requestSuccess();
-  //       }
-  //     });
-  //   }
-  // }
-
-  // componentWillUnmount() {
-  //   hideUserInfoDisplay();
-  // }
   editAvatar = () => {
     window.open('https://idtest.yyuap.com/usercenter/user');
   }
-  handleClick() {
+  handleClick = () => {
       this.setState({
         dataList:[]
       })
@@ -174,23 +135,18 @@ class UserInfoContainer extends Component {
       requestSuccess();
     });
   }
-
   handleChange=(e)=>{
     switch(e){
-      case 'account' :
-        alert("账号");
-        break;
       case 'language' :
         alert("功能建设中...");
         break;
       case 'message' :
-        alert("消息");
+        alert("功能建设中...");
         break;
       default :
         break;
     }
   }
-
   handleChange2 =(e)=>{
     switch(e){
       case 'accountManagement' :
@@ -205,13 +161,9 @@ class UserInfoContainer extends Component {
       case 'password' :
         window.open('http://idtest.yyuap.com/usercenter/security');
         break;
-      case 'cutuser' :
-        this.setCutUserFn();
-        break;
       default :
         break;
     }
-
   }
   gotoManage() {
     const {
@@ -234,11 +186,21 @@ class UserInfoContainer extends Component {
       );
     }
   }
-
   logOut=()=>{
     window.location.href = `/logout?service=${encodeURIComponent(`${window.location.origin}/`)}`;
   }
-
+  changeTenant(tenantId){
+    const {
+      location: {
+        origin,
+        pathname,
+        hash,
+      },
+    } = window;
+    window.location.replace(
+      `${origin}${pathname}?tenantId=${tenantId}&switch=true${hash}`,
+    );
+  }
   render() {
     const {
       userInfo: {
@@ -247,36 +209,11 @@ class UserInfoContainer extends Component {
         gloriesNum: glory,
         redPacketsNum: redPackets,
         allowTenants,
-        admin
+        admin,
+        logo,
+        company,
       }
     } = this.props;
-    
-    // if(admin){
-    //   renderAllow =
-    //     <Select
-    //       defaultValue="帐号设置" name="456"
-    //       onChange={this.handleChange2}
-    //       getPopupContainer = {()=> document.getElementById("modalId")}
-    //     >
-    //       <Option name="userInfo" value="userInfo" >个人信息</Option>
-    //       <Option name="accountManagement" value="accountManagement" >帐号设置</Option>
-    //       <Option name="safetyPick" value="safetyPick" >安全评级</Option>
-    //       <Option name="password" value="password" >修改密码</Option>
-    //       {/* <Option name="cutuser" value="cutuser">切换企业帐号</Option> */}
-    //     </Select>
-    // }else{
-    //   renderAllow = <Select
-    //     defaultValue="帐号设置" name="456"
-    //     onChange={this.handleChange2}
-    //     getPopupContainer = {()=> document.getElementById("modalId")}
-    //   >
-    //     <Option name="userInfo" value="userInfo" >个人信息</Option>
-    //     <Option name="accountManagement" value="accountManagement" >帐号设置</Option>
-    //     <Option name="safetyPick" value="safetyPick" >安全评级</Option>
-    //     <Option name="password" value="password" >修改密码</Option>
-    //   </Select>
-    // }
-
     let _accountMenuDataItem =[
       {name:"userInfo",value:"个人信息",fun:this.handleChange2},
       {name:"accountManagement",value:"帐号设置",fun:this.handleChange2},
@@ -311,7 +248,7 @@ class UserInfoContainer extends Component {
           </div>
         </li>);
     })
- 
+
     let _menuDataItem =[
       {name:"language",value:"界面语言",fun:this.handleChange},
       {name:"message",value:"消息",fun:this.handleChange}
@@ -324,7 +261,6 @@ class UserInfoContainer extends Component {
             <div className={imgOuter}>
               {this.getIcon(imgsrc)}
             </div>
-            {/* style={{display:this.state.editPortrait}} */}
             <div className={editPortrait}  >
               <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
             </div>
@@ -350,11 +286,37 @@ class UserInfoContainer extends Component {
             <li>
               {renderAllow}
             </li>
-            <li className={select_cont}>
+            <li>
               <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")}
                label="系统设置" dataItem={_menuDataItem} />
             </li>
           </ul>
+        </div>
+        <div className={tenantArea}>
+          {
+            logo ? (
+              <div>
+                <img src={logo}/>
+              </div>
+            ) : null
+          }
+          <div>{company}</div>
+          <div>
+            <DropdownButton
+              getPopupContainer={() => document.getElementById("modalId")}
+              label="切换" dataItem={
+                allowTenants.map(({
+                  tenantId: name,
+                  tenantName: value,
+                }) => {
+                  return {
+                    name,
+                    value,
+                    fun: this.changeTenant,
+                  };
+                })
+              } />
+          </div>
         </div>
         <div className={"um-content" + ` ${tabContent}`}>
 

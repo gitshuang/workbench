@@ -85,7 +85,7 @@ class searchResult extends Component {
       activetab: '',
       SearchMoreList:[],
       hasOther:false,
-      keywords:window.sessionStorage.searchkeywords,
+      keywords:props.location.state?props.location.state.value:"",
       Searchotherlist :{
         content:[]
       },
@@ -100,14 +100,17 @@ class searchResult extends Component {
       otherName:"其他内容(0)"
     }
   }
-  componentWillMount() {
-    const { keywords} = this.state
-    if(keywords!=undefined && keywords!=""){
-      this.setState({
-        value:keywords
-      })
-    this.getSearchMoreList(keywords)
-    }
+  
+  componentDidMount() {
+    console.log(" ===componentDidMount=== "+this.props.match.params.value);
+    this.getSearchMoreList(this.props.match.params.value)
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(" -componentWillReceiveProps-- "+nextProps.match.params.value);
+    let keywords = nextProps.match.params?nextProps.match.params.value:"";
+    if(keywords == this.state.keywords)return;
+    this.getSearchMoreList(keywords);
   }
 
   getSearchMoreList(keywords){
@@ -117,7 +120,7 @@ class searchResult extends Component {
       requestError,
       getSearchMore,
     } = this.props;
-      requestStart();
+      // requestStart();
       getSearchMore(keywords).then(({error, payload}) => {
         if (error) {
           requestError(payload);
@@ -125,9 +128,11 @@ class searchResult extends Component {
         this.setState({
           SearchMoreList:payload.data,
           hasOther:payload.hasOther,
-          activetab:payload.data[0].type
+          activetab:payload.data[0].type,
+          keywords,
+          value:keywords
         })
-        requestSuccess();
+        // requestSuccess();
         if(payload.data.length<1){
           this.setState({
             isShownodataClass:false,
@@ -136,8 +141,8 @@ class searchResult extends Component {
           this.setState({
             isShowPagination:true,
           })
-        }
-        this.getSearchTpyeList(keywords,payload.data[0].type,1)
+        } 
+        this.getSearchTpyeList(keywords,payload.data[0].type,1);
       });
   }
   getSearchTpyeList(keywords,type,page){
@@ -147,7 +152,7 @@ class searchResult extends Component {
       requestError,
       getSearch,
     } = this.props;
-      requestStart();
+      // requestStart();
       getSearch(keywords,type,page).then(({error, payload}) => {
         if (error) {
           requestError(payload);
@@ -160,7 +165,7 @@ class searchResult extends Component {
           this.setState({
             isShowPagination:false,
             isShownodataClassEach:true,
-            
+
           })
         }else{
           this.setState({
@@ -189,13 +194,13 @@ class searchResult extends Component {
         })
         let _newObj = {otherName:"其他内容("+_count+")"};
         _newObj.Searchotherlist = payload;
-        _newObj.pagesize = payload.pageSize; 
+        _newObj.pagesize = payload.pageSize;
         if(payload.content.length>0){
           _newObj.isShowPagination = false;
-          _newObj.isShownodataClassEach = true; 
+          _newObj.isShownodataClassEach = true;
         }else{
           _newObj.isShowPagination = true;
-          _newObj.isShownodataClassEach = false; 
+          _newObj.isShownodataClassEach = false;
         }
         this.setState({
           ..._newObj
@@ -209,9 +214,8 @@ class searchResult extends Component {
     })
   }
 
-  btnSearch=()=>{ 
+  btnSearch=()=>{
     this.getSearchMoreList(this.state.value)
-    window.sessionStorage.searchkeywords = this.state.value
   }
   onFormChange = (value) => {
     this.setState({
@@ -240,7 +244,7 @@ class searchResult extends Component {
   // inputOnFocus = (e) => {
   //   let _value = e.target.value != "搜索人员信息、应用、服务及其他内容"?e.target.value:"";
   //   this.setState({
-  //       value:_value 
+  //       value:_value
   //   });
   // }
 
@@ -267,7 +271,7 @@ class searchResult extends Component {
   }
   goDetail(type,item){
     return (e) => {
-      e.stopPropagation(); 
+      e.stopPropagation();
       this.props.history.push('/'+type+'/'+item.serviceCode);
     }
   }
@@ -278,7 +282,7 @@ class searchResult extends Component {
   }
   goemailDetail(item){
     return (e) => {
-      e.stopPropagation(); 
+      e.stopPropagation();
     }
   }
   onKeyup = (e) => {
@@ -366,18 +370,18 @@ class searchResult extends Component {
       otherlist.push(<ul className={`${recently} ${clearfix}`} key={index}>
       <h3>{item.typeName}</h3>
       {this.otherlistLi(item)}
-      
+
       <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部，共{item.total}条 ></em>
     </ul>)
     })
-                  
+
     return (
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
               <FormControl className={serviceSearch} placeholder="搜索人员信息、应用、服务及其他内容"
-               value={this.state.value} onKeyDown={this.onKeyup} onFocus={this.inputOnFocus} onBlur={this.inputOnBlur} onChange={this.inputOnChange}/>
+               value={this.state.value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
@@ -408,7 +412,7 @@ class searchResult extends Component {
                   </TabPane>
                 ) : null
               }
-                
+
               </Tabs>
 
               <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
@@ -424,9 +428,9 @@ class searchResult extends Component {
                 activePage={this.state.activePage}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
-            
+
             </div>
-            
+
           </div>
         </div>
       </div>
