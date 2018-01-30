@@ -23,7 +23,12 @@ class EstablishContent extends Component {
   openTeam = () => {
     console.log(this.props);
     const { history } = this.props;
-    history.push('/createteam');
+    const { userInfo } = this.props;
+
+    let data = userInfo.allowTenants.length ? "home" : "login" ;
+    const path = '/createteam/' + data ;
+    debugger;
+    history.push(path);
   }
 
   render() {

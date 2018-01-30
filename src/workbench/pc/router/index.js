@@ -21,7 +21,7 @@ const routes = [
     component: Establish
   },
   {
-    path: '/createteam',
+    path: '/createteam/:data',
     component: CreateTeam
   },
   {
