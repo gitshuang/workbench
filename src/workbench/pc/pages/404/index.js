@@ -58,6 +58,8 @@ export default class Page404 extends Component {
             <div className={`um-content ${page404_area}`}>
               <section>
                 <div className={remindWord}>很抱歉，当前访问的页面已丢失</div>
+              </section>
+              <section>
                 <Button shape="border" ><a href="/">返回首页</a></Button>
               </section>
             </div>

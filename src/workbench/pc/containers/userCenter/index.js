@@ -174,7 +174,10 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
   accountManage(){
-    window.open('https://idtest.yyuap.com/usercenter/user');
+    window.open('https://idtest.yyuap.com/usercenter/usermng');
+  }
+  getUserOrder(){
+    window.open('https://idtest.yyuap.com/usercenter/myapp');
   }
   getIcon(imgsrc) {
     if (imgsrc) {
@@ -195,6 +198,15 @@ class UserInfoContainer extends Component {
     }else{
       return '团队'
     }
+  }
+  /* 邀请成员 */
+  inviteMember(){
+    const {
+      history,
+      hideUserInfoDisplay,
+    } = this.props;
+    history.push('/invitation');
+    hideUserInfoDisplay();
   }
   logOut=()=>{
     window.location.href = `/logout?service=${encodeURIComponent(`${window.location.origin}/`)}`;
@@ -293,7 +305,7 @@ class UserInfoContainer extends Component {
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
             <li><Button shape="border" size="sm" onClick={this.accountManage.bind(this)}>账号管理</Button></li>
-            <li><Button shape="border" size="sm" onClick={this.accountManage.bind(this)}>我的订单</Button></li>
+            <li><Button shape="border" size="sm" onClick={this.getUserOrder.bind(this)}>我的订单</Button></li>
             {/* <li>
               {renderAllow}
             </li>
@@ -338,7 +350,7 @@ class UserInfoContainer extends Component {
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
               <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>团队设置</Button></li>
-              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>邀请成员</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>邀请成员</Button></li>
             </ul>
           </div>
         </div>
