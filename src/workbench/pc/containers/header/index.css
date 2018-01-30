@@ -10,7 +10,7 @@
   color: #878b94;
 }
 :global(.lebra-navbar-left-content){
-  margin-left: 20px;
+  padding-left: 20px;
   font-size:14px;
   font-family:MicrosoftYaHei;
   color:#4a515d;

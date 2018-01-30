@@ -48,7 +48,7 @@ class Header extends Component {
           <span className={`${prefixCls}-left-icon`} aria-hidden="true" onClick={onLeftClick}>
             {typeof iconName === 'string' ? <Icon type={iconName}/> : iconName}
           </span>
-          <span className={`${prefixCls}-left-content`} >{leftContent}</span>
+          <span className={`${prefixCls}-left-content`} onClick={onLeftClick}>{leftContent}</span>
         </div>
         <div className={`${prefixCls}-title`} >{children}</div>
         <div className={`${prefixCls}-right`} >
