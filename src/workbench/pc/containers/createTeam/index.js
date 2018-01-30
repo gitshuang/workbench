@@ -19,14 +19,17 @@ class CreateTeamContent extends Component {
 
   onChange = (e) => {
     //const { value } = this.state;
-    if( e > 59 ){
+    const value = e.target.value;
+    if( value.length > 60 ){
       alert("123");
       return false;
     }
     this.setState({
-      value: e
+      value
     })
   }
+
+  imgChange = () => {}
 
   render() {
     return (
@@ -34,16 +37,19 @@ class CreateTeamContent extends Component {
         <h5>创建团队</h5>  
         <div className="um-box">
           <label>团队名称<span>*</span>：</label> 
-          <FormControl
+          <input
             className="um-bf1"
             placeholder="最多60个字符"
             value={this.state.value}
-            onChange={this.onChange}
+            onChange={(e)=>{this.onChange(e)}}
           />
         </div>
         <div className="um-box">
           <label>团队头像：</label>
-          <img id="imgSrc" />
+          <div>
+            <img id="imgSrc" />
+            <input type="file" onChange={this.imgChange} />
+          </div>
         </div>
         <div>
           <Checkbox colors="info">设置为默认登录团队</Checkbox>
