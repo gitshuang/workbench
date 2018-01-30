@@ -1,0 +1,21 @@
+.wrap{
+  width: 1240px;
+  margin: 0 auto;
+  padding: 200px;
+  text-align: center;
+}
+.wrap h5{
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.desc{
+  font-size: 16px;
+  margin-bottom: 40px; 
+}
+.box{
+  width: 400px;
+  height: 400px;
+  margin: 0 10px;
+  border: 1px solid #999;
+}
