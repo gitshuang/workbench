@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
-import EstablishContent from 'containers/Establish'
+import CreateTeamContent from 'containers/createTeam'
 
 @withRouter
-class Establish extends Component {
+class CreateTeam extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,11 +14,11 @@ class Establish extends Component {
     render(){
         return(
             <div>
-                <EstablishContent />   
+                <CreateTeamContent />    
             </div>
         )
        
     }
 }
 
-export default Establish;
+export default CreateTeam;

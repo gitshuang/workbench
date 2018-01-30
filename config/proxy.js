@@ -24,6 +24,7 @@ var api = [
   '/fullText/getMore',
   '/fullText/search',
   '/fullText/getOther',
+  '/getInvitationUrl',
 ]
 
 var rapApi = [
