@@ -7,7 +7,7 @@ import Search from 'pages/search';
 import SearchResult from 'containers/searchResult';
 import SearchOther from 'containers/searchOther';
 import Establish from 'pages/establish';
-import CreareTeam from 'pages/createteam';
+import CreateTeam from 'pages/createteam';
 import Invitation from 'pages/invitation';
 
 const routes = [
@@ -15,6 +15,14 @@ const routes = [
     path: '/',
     component: Home,
     exact: true,
+  },
+  {
+    path: '/establish',
+    component: Establish
+  },
+  {
+    path: '/createteam',
+    component: CreateTeam
   },
   {
     path: '/application',
@@ -51,17 +59,7 @@ const routes = [
     path: '/404',
     component:Page404
   },
-  {
-    path: '/establish',
-    component: Establish
-  },
-  {
-    path: '/creareteam',
-    component: CreareTeam
-  },
-  {
-    component:Page404
-  },
+  
 ];
 
 export default routes;

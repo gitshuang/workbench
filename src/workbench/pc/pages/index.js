@@ -14,6 +14,7 @@ import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'components/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
 import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
 import componentTool, { trigger } from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import 'public/jDiworkBridge';
@@ -26,6 +27,7 @@ const {
   getMessage,
   hideIm,
 } = rootActions;
+const { getUserInfo } = homeActions;
 
 function timer(fn, time) {
   let timerId = 0;
@@ -54,9 +56,16 @@ function timer(fn, time) {
     getServiceList,
     getMessage,
     hideIm,
+    getUserInfo
   }
 )
 class Root extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        loaded: false,
+    };
+}
   componentWillMount() {
     const {
       requestStart,
@@ -64,7 +73,26 @@ class Root extends Component {
       requestError,
       getServiceList,
       getMessage,
+      getUserInfo
     } = this.props;
+    const { history } = this.props;
+    getUserInfo().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      } else {
+        this.setState({
+          loaded: true
+        });
+        requestSuccess();
+        console.log(payload);
+        if(!payload.allowTenants.length){
+          history.replace('/establish');
+        }
+      }
+    });
+    
+    
+
     requestStart();
     getServiceList().then(({ error, payload }) => {
       if (error) {
@@ -86,15 +114,18 @@ class Root extends Component {
     hideIm();
   }
   render() {
+    if(!this.state.loaded) return null;
     const { userInfoDisplay, quickServiceDisplay } = this.props;
     const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'icon-application'} />) : null;
     const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'}/>) : null;
     return (
       <div onClick={this.clickHandler}>
         <Switch>
-          {routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
-          ))}
+          {
+            routes.map( (route, i) => {
+              return <RouteWithSubRoutes key={i} {...route} />
+            })
+        }
         </Switch>
         <TransitionGroup>
           <CSSTransitionGroup
@@ -125,6 +156,22 @@ class Root extends Component {
   }
 }
 
+class Es extends Component {
+  render(){
+    return (
+      <div>
+        <Switch>
+          {
+            <RouteWithSubRoutes key={0} {...routes[1]} />
+          }
+        </Switch>
+      </div>
+    )
+  }
+}
+
+// const userinfo = '';
+// { userinfo ? <Root /> : <Es /> }
 const App = () => (
   <Router>
     <Provider store={store} >

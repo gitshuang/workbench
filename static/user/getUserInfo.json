@@ -6,10 +6,7 @@
       "redPacketsNum": 0,
       "gloriesNum": 0,
       "allowTenants": [
-          {
-              "tenantName": "毛坤测试",
-              "tenantId": "gtzceot7"
-          }
+          
       ],
       "userAvator": "",
       "company": 1,
