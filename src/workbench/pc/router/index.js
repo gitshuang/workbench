@@ -8,6 +8,7 @@ import SearchResult from 'containers/searchResult';
 import SearchOther from 'containers/searchOther';
 import Establish from 'pages/establish';
 import CreareTeam from 'pages/createteam';
+import Invitation from 'pages/invitation';
 
 const routes = [
   {
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/manage',
     component: Manage,
+  },
+  {
+    path: '/invitation',
+    component: Invitation,
   },
   {
     path: '/search',
