@@ -18,7 +18,7 @@ import img2 from 'assets/image/wgt/intelligent_logo.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea
+  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList
 } from './style.css';
 
 const {
@@ -173,6 +173,9 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
+  accountManage(){
+    window.open('https://idtest.yyuap.com/usercenter/user');
+  }
   getIcon(imgsrc) {
     if (imgsrc) {
       return (
@@ -184,6 +187,13 @@ class UserInfoContainer extends Component {
           <Icon type="staff" />
         </div>
       );
+    }
+  }
+  getCompanyType(type){
+    if(type === 1){
+      return '企业'
+    }else{
+      return '团队'
     }
   }
   logOut=()=>{
@@ -282,42 +292,62 @@ class UserInfoContainer extends Component {
         </div>
         <div>
           <ul className={`${userBtnList} ${clearfix}`}>
-            <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
-            <li>
+            <li><Button shape="border" size="sm" onClick={this.accountManage.bind(this)}>账号管理</Button></li>
+            <li><Button shape="border" size="sm" onClick={this.accountManage.bind(this)}>我的订单</Button></li>
+            {/* <li>
               {renderAllow}
             </li>
             <li>
               <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")}
                label="系统设置" dataItem={_menuDataItem} />
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className={tenantArea}>
-          {
-            logo ? (
-              <div>
-                <img src={logo}/>
-              </div>
-            ) : null
-          }
-          <div>{company}</div>
           <div>
-            <DropdownButton
-              getPopupContainer={() => document.getElementById("modalId")}
-              label="切换" dataItem={
-                allowTenants.map(({
-                  tenantId: name,
-                  tenantName: value,
-                }) => {
-                  return {
-                    name,
-                    value,
-                    fun: this.changeTenant,
-                  };
-                })
-              } />
+            <div className={tenantPortrait}>
+              <div className={imgOuter}>
+                {this.getIcon(logo)}
+              </div>
+              {/* <div className={editPortrait}  >
+                <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
+              </div> */}
+            </div>
+            <div className={tenantDescribe}>
+              <div className={tenantName} title={name}>用友网络科技股份有限公司</div>
+              <div style={{'marginBottom':15}}>
+                <div className={companyType}>{this.getCompanyType(company)}</div>
+                <DropdownButton
+                    getPopupContainer={() => document.getElementById("modalId")}
+                    label="切换" dataItem={
+                      allowTenants.map(({
+                        tenantId: name,
+                        tenantName: value,
+                      }) => {
+                        return {
+                          name,
+                          value,
+                          fun: this.changeTenant,
+                        };
+                      })
+                    } />
+              </div>
+            </div>
+          </div>
+          <div>
+            <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
+              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>团队设置</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>邀请成员</Button></li>
+            </ul>
           </div>
         </div>
+        <div>
+            <ul className={`${createBtnList} ${clearfix}`}>
+              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>创建团队</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>创建企业</Button></li>
+            </ul>
+          </div>
         <div className={"um-content" + ` ${tabContent}`}>
 
           <Tabs
