@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 import { FormControl, Checkbox, Button } from 'tinper-bee';
 import {
   wrap,
 } from './index.css';
 
+@withRouter
 class CreateTeamContent extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +34,11 @@ class CreateTeamContent extends Component {
 
   imgChange = () => {}
 
+  create = () => {
+    const {history} = this.props;
+    history.replace('/');
+  }
+
   render() {
     return (
       <div className={wrap}>
@@ -55,7 +63,7 @@ class CreateTeamContent extends Component {
           <Checkbox colors="info">设置为默认登录团队</Checkbox>
         </div>
         <div>
-          <Button>创建</Button>
+          <Button onClick={this.create}>创建</Button>
         </div>
       </div>  
     )
