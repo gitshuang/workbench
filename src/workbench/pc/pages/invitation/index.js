@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { noop, get, post } from '@u';
 import rootActions from 'store/root/actions';
-
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
+import SuccessDialog from './successDialog';
 
 import {
   header,
@@ -22,6 +22,7 @@ import {
 const {requestStart, requestSuccess, requestError} = rootActions;
 
 const maxLength = 20;
+const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 
 @withRouter
 @connect(
@@ -39,6 +40,7 @@ class Invitation extends Component {
     this.state = {
       url: '',
       mails: ['', ''],
+      successDialogShow: false,
     }
     this.goBack = this.goBack.bind(this);
   }
@@ -54,7 +56,7 @@ class Invitation extends Component {
     });
   }
   goBack() {
-    this.props.history.go(-1);
+    this.props.history.replace('');
   }
   copyLink = () => {
     this.refs['shortUrl'].select();
@@ -75,22 +77,38 @@ class Invitation extends Component {
     });
   }
   submit = () => {
-    const mails = this.state.mails.filter(mail => mail);
-    console.log(mails);
-    /*
-    requestStart();
-    post('http://www.baidu.com', { mails }).then((data) => {
-      requestSuccess();
-      this.goBack();
-    }, (err)=>{
-      requestError(err);
-    });
-    */
+    const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
+    if (mails.length) {
+      /*
+      requestStart();
+      post('http://www.baidu.com', { mails }).then((data) => {
+        requestSuccess();
+        this.setState({
+          mails: ['', ''],
+          successDialogShow: false,
+        });
+      }, (err)=>{
+        requestError(err);
+      });
+      */
+        console.log(mails);
+        this.setState({
+          mails: ['', ''],
+          successDialogShow: true,
+        });
+    }
+  }
+  closeSuccessDialog = () => {
+    this.setState({
+      successDialogShow: false,
+    })
   }
   render() {
     const {
       url,
       mails,
+      errorDialogShow,
+      successDialogShow,
     } = this.state;
     return (
       <div className="um-win">
@@ -134,6 +152,7 @@ class Invitation extends Component {
             <button type="button" className={submitBtn} onClick={this.submit}>确定发送</button>
           </div>
         </div>
+        <SuccessDialog show={successDialogShow} close={this.closeSuccessDialog} />
       </div>
     );
   }
