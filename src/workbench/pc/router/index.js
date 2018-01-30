@@ -7,6 +7,7 @@ import Search from 'pages/search';
 import SearchResult from 'containers/searchResult';
 import SearchOther from 'containers/searchOther';
 import Establish from 'pages/establish';
+import CreareTeam from 'pages/createteam';
 
 const routes = [
   {
@@ -48,6 +49,10 @@ const routes = [
   {
     path: '/establish',
     component: Establish
+  },
+  {
+    path: '/creareteam',
+    component: CreareTeam
   },
   {
     component:Page404
