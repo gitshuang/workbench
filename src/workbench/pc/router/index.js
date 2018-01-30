@@ -6,6 +6,7 @@ import Page404 from 'pages/404';
 import Search from 'pages/search';
 import SearchResult from 'containers/searchResult';
 import SearchOther from 'containers/searchOther';
+import Establish from 'pages/establish';
 
 const routes = [
   {
@@ -43,6 +44,10 @@ const routes = [
   {
     path: '/404',
     component:Page404
+  },
+  {
+    path: '/establish',
+    component: Establish
   },
   {
     component:Page404
