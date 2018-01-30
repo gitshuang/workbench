@@ -6,7 +6,6 @@ import { IS_REACT_16 } from '@u';
 import Icon from 'components/icon';
 import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
 import { btn, closeBtn } from './style.css';
-import {ie9_pop} from '../../public/ie9.css';
 import { setTimeout } from 'timers';
 
 class PopDialog extends Component{
@@ -41,7 +40,7 @@ class PopDialog extends Component{
             _btns.push(_button);
         })
     }
-    return(<Modal className={`${(!!window.ActiveXObject)?ie9_pop:''} ${this.props.className?this.props.className:"pop_dialog"}`} backdrop={this.props.backdrop?false:true} show = { this.props.show } onHide = { this.props.close } >
+    return(<Modal className={`${(!!window.ActiveXObject)?'ie9_pop':''} ${this.props.className?this.props.className:"pop_dialog"}`} backdrop={this.props.backdrop?false:true} show = { this.props.show } onHide = { this.props.close } >
           <Modal.Header>
               <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>

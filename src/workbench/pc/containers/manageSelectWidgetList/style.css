@@ -163,8 +163,8 @@
 .btn_active{
   background:rgba(252,237,236,1) !important;
 }
-/* ie9兼容 */
-:global(.ie9_pop) .search_icon_con>span,.ie9_pop .search_icon_con>i{ 
+/* 首页编辑-添加服务 */
+:global(.ie9_pop) .search_icon_con>span,:global(.ie9_pop) .search_icon_con>i{ 
   float: left;
 }
 :global(.ie9_pop) .panel{
@@ -173,21 +173,8 @@
 :global(.ie9_pop) .panel>div{
   display: table-cell;
 }
-:global(.ie9_pop) .serviceItemTitle{
-  display: table;
-}
-:global(.ie9_pop) .serviceItemTitle>.item_footer{
-  display: table-cell;
-  text-align: right;
-}
-:global(.ie9_pop) .serviceItemTitle>i{
-  display: table-cell;
-}
 :global(.ie9_pop) .panel_left .u-button-group-vertical{
   min-height: 395px;
-}
-:global(.ie9_pop) .item_li_top>img{
-  float:left;
 }
 :global(.ie9_pop) .panel_right>div{
   height: 495px;

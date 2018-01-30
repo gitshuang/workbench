@@ -94,3 +94,17 @@
   font-size: 20px;
   cursor:pointer;
 }
+/* 首页编辑-添加服务 */
+:global(.ie9_pop) .serviceItemTitle{
+  display: table;
+}
+:global(.ie9_pop) .serviceItemTitle>.item_footer{
+  display: table-cell;
+  text-align: right;
+}
+:global(.ie9_pop) .serviceItemTitle>i{
+  display: table-cell;
+}
+:global(.ie9_pop) .item_li_top>img{
+  float:left;
+}
