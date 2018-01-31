@@ -61,12 +61,9 @@ class CreateTeamContent extends Component {
   }
 
   imgChange = (e) => {
-    // if(e.target.value.trim().length===0){
-    //   this.setState({
-    //     imgWarning: "请上传图片"
-    //   });
-    //   return false;
-    // }
+    if(e.target.value.trim().length===0){
+      return false;
+    }
     const { uploadApplication, requestStart, requestSuccess, requestError } = this.props;
     let val = e.target.value && e.target.value.substr(e.target.value.lastIndexOf("."));
     if(val && !val.match( /.jpg|.gif|.png|.bmp|.svg/i ) ){
@@ -80,7 +77,6 @@ class CreateTeamContent extends Component {
     this.setState({
       imgUrl
     });
-    debugger;
     const form = new FormData();
     form.append('btn_file', obj);
 
