@@ -10,7 +10,7 @@ import teamActions from 'store/root/team/actions';
 import { FormControl, Checkbox, Button } from 'tinper-bee';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { uploadApplication, creataTeam} = teamActions;
+const { uploadApplication, createTeam} = teamActions;
 import {
   wrap,
 } from './index.css';
@@ -28,7 +28,7 @@ import {
     requestSuccess,
     requestError,
     uploadApplication,
-    creataTeam
+    createTeam
   }
 )
 
@@ -99,7 +99,7 @@ class CreateTeamContent extends Component {
 
 
   create = () => {
-    const { history, creataTeam, requestStart, requestSuccess, requestError } = this.props;
+    const { history, createTeam, requestStart, requestSuccess, requestError } = this.props;
     const { value, backUrl } = this.state;
     if ( !value ){
       alert("请输入团队名称");
@@ -112,7 +112,7 @@ class CreateTeamContent extends Component {
       data.logo = backUrl;
     }
     requestStart();
-    creataTeam(data).then(({error, payload}) => {
+    createTeam(data).then(({error, payload}) => {
       if (error) {
         requestError(payload);
       } 

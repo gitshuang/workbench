@@ -4,7 +4,7 @@ import actions from './actions';
 
 const {
   uploadApplication,
-  creataTeam
+  createTeam
 } = actions;
 
 const defaultState = {
@@ -16,7 +16,7 @@ const defaultState = {
 const reducer = handleActions({
   // 
   [uploadApplication]: state => state,
-  [creataTeam]: (state, { payload, error }) => {
+  [createTeam]: (state, { payload, error }) => {
     if (error) {
       return state;
     }

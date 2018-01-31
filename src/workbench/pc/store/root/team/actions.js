@@ -3,7 +3,7 @@ import types from './types';
 
 import {
   uploadApplication,
-  creataTeam
+  createTeam
 } from './api';
 
 const {
@@ -17,6 +17,6 @@ export default createActions(
   },
   {
     [UPLOAD_APPLICATION]: uploadApplication,
-    [CREATE_TEAM]: creataTeam,
+    [CREATE_TEAM]: createTeam,
   },
 );
