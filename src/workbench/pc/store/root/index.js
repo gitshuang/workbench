@@ -55,6 +55,7 @@ const {
   changeMessageType,
   showIm,
   hideIm,
+  uploadApplication,
 } = actions;
 
 const defaultState = {
@@ -108,6 +109,7 @@ const reducer = handleActions({
       serviceList,
     };
   },
+  [uploadApplication]: state => state,
   [getMessage]: (state, { payload: message, error }) => {
     if (error) {
       return state;

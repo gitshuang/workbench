@@ -56,6 +56,7 @@ const getHost = (key = 'api') => {
   return hosts[key][process.env.NODE_ENV];
 };
 
+
 const fetchTools = {
   params(params) {
     try {
@@ -104,7 +105,7 @@ const fetchTools = {
       return Promise.reject(new Error('请求失败'));
     });
   },
-  options(method = 'get') {
+  options(method = 'get', options = {}) {
     return {
       method: method.toUpperCase(),
       credentials: 'include',
@@ -112,6 +113,7 @@ const fetchTools = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
+      ...options,
     };
   },
   url(url) {
@@ -131,6 +133,7 @@ export function post(oriUrl, oriParams = {}) {
     options: optionsMaker,
     url,
   } = fetchTools;
+  const data = params(oriParams);
   const options = optionsMaker('post');
   options.headers = {
     'Content-Type': 'application/json;charset=UTF-8',

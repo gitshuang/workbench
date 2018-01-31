@@ -14,4 +14,5 @@ export default createTypes(
   'CHANGE_MESSAGE_TYPE',
   'SHOW_IM',
   'HIDE_IM',
+  'UPLOAD_APPLICATION',
 );
