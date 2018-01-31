@@ -27,7 +27,6 @@ class EstablishContent extends Component {
 
     let data = userInfo.allowTenants.length ? "home" : "login" ;
     const path = '/createteam/' + data ;
-    debugger;
     history.push(path);
   }
 

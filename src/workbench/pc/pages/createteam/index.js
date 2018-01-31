@@ -26,7 +26,6 @@ class CreateTeam extends Component {
     render(){
         
         const { params } = this.props.match;
-        debugger;
         return(
             <div className="um-win">
                 
