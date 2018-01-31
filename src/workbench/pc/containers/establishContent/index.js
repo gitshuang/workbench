@@ -7,7 +7,6 @@ import {
   box
 } from './index.css';
 
-
 @withRouter
 class EstablishContent extends Component {
   constructor(props) {
@@ -26,8 +25,8 @@ class EstablishContent extends Component {
     const { history } = this.props;
     const { userInfo } = this.props;
 
-    let data = userInfo.allowTenants.length ? "home" : "login" ;
-    const path = '/createteam/' + data ;
+    //let data = userInfo.allowTenants.length ? "home" : "login" ;
+    const path = '/createteam/login';
     history.push(path);
   }
 
