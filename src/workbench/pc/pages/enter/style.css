@@ -1,0 +1,25 @@
+.page_enterprise :global(.u-form .u-label) {
+  width: 120px;
+  text-align: right;
+}
+
+.page_enterprise :global(.u-form-submit) {
+  padding-left: 120px;
+}
+
+.page_enterprise :global(.u-input-after) {
+  border: none!important;
+  background: none!important;
+}
+
+.page_enterprise :global(.u-input-after .u-button) {
+  height: 30px;
+  padding: 0;
+}
+
+.page_enterprise :global(.province),
+.page_enterprise :global(.city),
+.page_enterprise :global(.area) {
+    width: 120px;
+    margin-right: 10px;
+}

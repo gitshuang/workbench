@@ -4,7 +4,8 @@ import {
   getServiceList,
   getMessage,
   getLatestAccessList,
-  getPromotionServiceList
+  getPromotionServiceList,
+  uploadApplication
 } from './api';
 
 const {
@@ -21,6 +22,7 @@ const {
   CHANGE_MESSAGE_TYPE,
   SHOW_IM,
   HIDE_IM,
+  UPLOAD_APPLICATION
 } = types;
 
 export default createActions({
@@ -28,6 +30,7 @@ export default createActions({
     [GET_MESSAGE]: getMessage,
     [GET_LATEST_ACCESS_LIST]: getLatestAccessList,
     [GET_PROMOTION_SERVICE_LIST]: getPromotionServiceList,
+    [UPLOAD_APPLICATION]: uploadApplication,
   },
   REQUEST_START,
   REQUEST_SUCCESS,

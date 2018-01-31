@@ -9,7 +9,9 @@ const {
   hideUserInfoDisplay,
   openFolder,
   closeFolder,
-  setCutUser
+  setCutUser,
+  getSearchEnterList,
+  setCreateEnter
 } = actions;
 
 const defaultState = {
@@ -22,6 +24,7 @@ const defaultState = {
     children: [],
   },
   folderModalDisplay: false,
+  enterList:[]
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -69,7 +72,17 @@ const reducer = handleActions({
     ...state,
     folderModalDisplay: false,
   }),
+  [getSearchEnterList]: (state, { payload, error }) => {
+    return {
+      ...state,
+      enterList: payload,
+    };
+  },
+  [setCreateEnter]: (state, { payload, error }) => {
+    return{
+      ...state,
+    }
+  },
 }, defaultState);
-
 
 export default reducer;

@@ -9,6 +9,7 @@ import SearchOther from 'containers/searchOther';
 import Establish from 'pages/establish';
 import CreateTeam from 'pages/createteam';
 import Invitation from 'pages/invitation';
+import Enter from 'pages/enter';
 
 const routes = [
   {
@@ -35,6 +36,10 @@ const routes = [
   {
     path: '/invitation',
     component: Invitation,
+  },
+  {
+    path: '/enter',
+    component: Enter,
   },
   {
     path: '/search',

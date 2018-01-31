@@ -13,6 +13,7 @@ import work from './work';
 import search from './search';
 import application from './application';
 import manage from './manage';
+import team from './team';
 import actions from './actions';
 
 const notification = Notification.newInstance({
@@ -54,6 +55,7 @@ const {
   changeMessageType,
   showIm,
   hideIm,
+  uploadApplication,
 } = actions;
 
 const defaultState = {
@@ -107,6 +109,7 @@ const reducer = handleActions({
       serviceList,
     };
   },
+  [uploadApplication]: state => state,
   [getMessage]: (state, { payload: message, error }) => {
     if (error) {
       return state;
@@ -181,6 +184,7 @@ export default function (state, action) {
     search: search(state ? state.search : undefined, action),
     application: application(state ? state.application : undefined, action),
     manage: manage(state ? state.manage : undefined, action),
+    team: team(state ? state.team : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;

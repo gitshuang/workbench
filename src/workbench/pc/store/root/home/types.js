@@ -8,4 +8,6 @@ export default createTypes(
   'OPEN_FOLDER',
   'CLOSE_FOLDER',
   'SET_CUT_USER',
+  'GET_SEARCH_ENTER_LIST',
+  'SET_CREATE_ENTER'
 );

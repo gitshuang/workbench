@@ -44,7 +44,7 @@ class Establish extends Component {
         return (
             <div className="um-win">
                 
-                { userInfo.allowTenants.length 
+                { /*userInfo.allowTenants.length 
                     ? <div className="um-header" style={{background:"white"}}>
                         <Header onLeftClick={ this.goBack } iconName={"home"} >
                             <div>
@@ -53,7 +53,7 @@ class Establish extends Component {
                         </Header>
                     </div> 
                     : null 
-                }
+                */}
                 <div className="um-content">
                     <EstablishContent userInfo={ userInfo } />
                 </div>
