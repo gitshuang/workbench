@@ -1,18 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { mapStateToProps } from '@u';
 
+import rootActions from 'store/root/actions';
+import teamActions from 'store/root/team/actions';
+
+//
 import { FormControl, Checkbox, Button } from 'tinper-bee';
+
+const { requestStart, requestSuccess, requestError } = rootActions;
+const { uploadApplication, creataTeam} = teamActions;
 import {
   wrap,
 } from './index.css';
 
 @withRouter
+@connect(
+  mapStateToProps(
+    'teamData',
+    {
+      namespace: "team"
+    }
+  ),
+  {
+    requestStart,
+    requestSuccess,
+    requestError,
+    uploadApplication,
+    creataTeam
+  }
+)
+
 class CreateTeamContent extends Component {
   constructor(props) {
     super(props);
+    this.imgObj = {};
     this.state = {
       value: "",
+      imgWarning: "",
+      imgUrl: "",
+      backUrl : ""    // 上传成功后返回的url 
     }
   }
 
@@ -32,14 +60,70 @@ class CreateTeamContent extends Component {
     })
   }
 
-  imgChange = () => {}
+  imgChange = (e) => {
+    // if(e.target.value.trim().length===0){
+    //   this.setState({
+    //     imgWarning: "请上传图片"
+    //   });
+    //   return false;
+    // }
+    const { uploadApplication, requestStart, requestSuccess, requestError } = this.props;
+    let val = e.target.value && e.target.value.substr(e.target.value.lastIndexOf("."));
+    if(val && !val.match( /.jpg|.gif|.png|.bmp|.svg/i ) ){
+      this.setState({
+        imgWarning: "必须是一个图片"
+      });
+      return false;
+    }
+    let obj = this.refs.btn_file.files[0];
+    let imgUrl = window.URL.createObjectURL(obj);
+    this.setState({
+      imgUrl
+    });
+    debugger;
+    const form = new FormData();
+    form.append('btn_file', obj);
+
+    requestStart();
+    uploadApplication(form).then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      } 
+      const backUrl = payload.url;
+      this.setState({
+        backUrl: backUrl
+      });
+      requestSuccess();
+    });
+  }
+
 
   create = () => {
-    const {history} = this.props;
-    history.replace('/');
+    const { history, creataTeam, requestStart, requestSuccess, requestError } = this.props;
+    const { value, backUrl } = this.state;
+    if ( !value ){
+      alert("请输入团队名称");
+      return false;
+    }
+    let data = {
+      tenantName: value
+    };
+    if (backUrl) {
+      data.logo = backUrl;
+    }
+    requestStart();
+    creataTeam(data).then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      } 
+      requestSuccess();
+      history.replace('/');
+    });
+    
   }
 
   render() {
+    const { value, imgUrl, imgWarning } = this.state;
     return (
       <div className={wrap}>
         <h5>创建团队</h5>  
@@ -48,19 +132,21 @@ class CreateTeamContent extends Component {
           <input
             className="um-bf1"
             placeholder="最多60个字符"
-            value={this.state.value}
+            value={ value }
             onChange={(e)=>{this.onChange(e)}}
           />
         </div>
-        <div className="um-box">
+        <div className="um-box" style={{margin:"20px 0"}}>
           <label>团队头像：</label>
           <div>
-            <img id="imgSrc" />
-            <input type="file" onChange={this.imgChange} />
+            <div>
+              <img ref="imgSrc" src={ imgUrl } />
+            </div>
+            {
+              imgWarning ? <p>{ imgWarning }</p> : null
+            }
+            <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
           </div>
-        </div>
-        <div>
-          <Checkbox colors="info">设置为默认登录团队</Checkbox>
         </div>
         <div>
           <Button onClick={this.create}>创建</Button>

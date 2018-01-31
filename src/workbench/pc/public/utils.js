@@ -143,6 +143,26 @@ export function post(oriUrl, oriParams = {}) {
   return fetch(url(oriUrl), options);
 }
 
+export function postFileCros(oriUrl, file) {
+  const {
+    params,
+    fetch,
+    options: optionsMaker,
+    url,
+  } = fetchTools;
+  const options = optionsMaker('post', {
+    mode: 'cors',
+  });
+  delete options.headers;
+  try {
+    options.body = file;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+  console.log(options);
+  return fetch(url(oriUrl), options);
+}
+
 export function get(oriUrl, oriParams = {}) {
   const {
     params,
