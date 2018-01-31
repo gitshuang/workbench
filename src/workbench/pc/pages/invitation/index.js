@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { noop, get, post } from '@u';
+import { noop,mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
+import inviteActions from 'store/root/invitation/actions';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
 import SuccessDialog from './successDialog';
@@ -20,20 +21,27 @@ import {
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
+const {getInviteUsersJoinAddress, sendMessage} = inviteActions;
 
 const maxLength = 20;
 const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 
 @withRouter
 @connect(
-  () => ({}),
+  mapStateToProps(
+    'inviteJoinAddress',
+    {
+      namespace: 'invitation',
+    },
+  ),
   {
     requestStart,
     requestSuccess,
     requestError,
+    getInviteUsersJoinAddress,
+    sendMessage
   }
 )
-
 class Invitation extends Component {
   constructor(props) {
     super(props);
@@ -45,14 +53,17 @@ class Invitation extends Component {
     this.goBack = this.goBack.bind(this);
   }
   componentWillMount() {
-    get('/getInvitationUrl').then(({ url }) => {
-      requestSuccess();
-      this.setState({
-        url,
-      });
-      this.refs['shortUrl'].select();
-    }, (err) => {
-      requestError(err);
+    const {requestStart, requestSuccess, requestError,getInviteUsersJoinAddress} = this.props;
+    requestStart();
+    getInviteUsersJoinAddress().then(({error, payload}) => {
+        if (error) {
+          requestError(payload);
+        }
+        this.setState({
+          url:payload
+        });
+        this.refs['shortUrl'].select();
+        requestSuccess();
     });
   }
   goBack() {
@@ -77,11 +88,12 @@ class Invitation extends Component {
     });
   }
   submit = () => {
+    const {requestStart, requestSuccess, requestError,sendMessage} = this.props;
     const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
     if (mails.length) {
-      /*
+      
       requestStart();
-      post('http://www.baidu.com', { mails }).then((data) => {
+      sendMessage({ 'shortUrl':'http://www.baidu.com','mails':mails }).then((data) => {
         requestSuccess();
         this.setState({
           mails: ['', ''],
@@ -90,7 +102,7 @@ class Invitation extends Component {
       }, (err)=>{
         requestError(err);
       });
-      */
+      
         console.log(mails);
         this.setState({
           mails: ['', ''],

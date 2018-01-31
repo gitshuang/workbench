@@ -25,6 +25,9 @@ var api = [
   '/fullText/search',
   '/fullText/getOther',
   '/getInvitationUrl',
+
+  '/invite/getInviteUsersJoinAddress',
+  '/invite/sendMessage',
 ]
 
 var rapApi = [
