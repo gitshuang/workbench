@@ -7,6 +7,7 @@ import {
   box
 } from './index.css';
 
+
 @withRouter
 class EstablishContent extends Component {
   constructor(props) {

@@ -5,7 +5,7 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 
 import Header from 'containers/header';
-import EstablishContent from 'containers/establish';
+import EstablishContent from 'containers/establishContent'
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 
