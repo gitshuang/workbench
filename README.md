@@ -18,6 +18,6 @@ npm run build --report
 
 test
 
-2
+3
 ## TODO
 - [ ] .babelrc add component plugin.
