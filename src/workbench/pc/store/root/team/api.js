@@ -5,5 +5,5 @@ export const uploadApplication = (data) => postFileCros(
   data,
 );
 export const createTeam = (data) =>{
-  return post('/teamEnter/creataTeam',data);
+  return post('/teamEnter/createTeam',data);
 }
