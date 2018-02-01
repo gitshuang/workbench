@@ -39,11 +39,9 @@ const getTabsAndMores = (totalTabs, areaWidth, curIndex) => {
   let mores = [];
   let tabs = totalTabs;
   let hasMore = false;
-  console.log(" ====",tabWidth);
   if(tabWidth > 160){
     tabWidth = 160;
   }else{
-    console.log(tabWidth +" ------------ "+minTabWidth);
     if(tabWidth <= minTabWidth){
       // let maxTabsNum = Math.floor((areaWidth-moreBtnWidth)/allLeng);
       // tabWidth = (areaWidth-moreBtnWidth)/allLeng;
