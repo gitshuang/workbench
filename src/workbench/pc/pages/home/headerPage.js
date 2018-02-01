@@ -145,7 +145,7 @@ class HeaderPage extends Component {
           ) : null
         }
         <div className={`${all_btn} ${_btnShow}`} onClick={this.allBtnOnclick}>
-          {this.state.allBtn?"显示一行":"显示全部"}
+          {this.state.allBtn?"收起":"显示全部"}
           <Icon type={this.state.allBtn?"upward":"pull-down"} />
         </div>
       </div>
