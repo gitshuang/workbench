@@ -93,7 +93,7 @@ class Invitation extends Component {
     if (mails.length) {
       
       requestStart();
-      sendMessage({ 'shortUrl':'http://www.baidu.com','mails':mails }).then((data) => {
+      sendMessage({mails}).then((data) => {
         requestSuccess();
         this.setState({
           mails: ['', ''],

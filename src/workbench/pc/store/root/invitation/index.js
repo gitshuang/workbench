@@ -24,7 +24,7 @@ const createReducer = (key) => (state, { payload, error }) => {
 
 const reducer = handleActions({
   [getInviteUsersJoinAddress]: createReducer('inviteJoinAddress'),
-  [sendMessage]: createReducer('')
+  [sendMessage]: createReducer()
 }, defaultState);
 
 
