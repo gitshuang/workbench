@@ -80,6 +80,7 @@ class UserInfoContainer extends Component {
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
   }
+
   getLatestAccessList() {
     const {requestStart, requestSuccess, requestError,   getLatestAccessList} = this.props;
     requestStart();

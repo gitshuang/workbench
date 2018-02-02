@@ -28,6 +28,7 @@ var api = [
 
   '/invite/getInviteUsersJoinAddress',
   '/invite/sendMessage',
+  '/manager/teamEnter/createEnter',
 ]
 
 var rapApi = [

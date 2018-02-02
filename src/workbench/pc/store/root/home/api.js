@@ -10,5 +10,5 @@ export const getSearchEnterList = (param) => {
 export const setCutUser = () => get('/user/setCutUser');
 
 export const setCreateEnter = (list) => {
-  return post('/teamEnter/createEnter', list);
+  return post('/manager/teamEnter/createEnter', list);
 }

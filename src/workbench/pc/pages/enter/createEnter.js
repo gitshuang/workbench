@@ -64,12 +64,20 @@ class CreateTeam extends Component {
 
   checkForm = (flag,obj) => {
     let newData = [...obj,...this.state.optherData];
+    let _data = {};
+    let _guojia = newData.find((da)=>da.name == "guojia");
+    let _addressObj = newData.find((da)=>da.name == "address");
+    _addressObj["address"] = _guojia?_guojia:"中国"+ _addressObj?_addressObj.value.province + da.value.city + da.value.area:"";
+    newData.forEach((da,i)=>{
+      if(!da.name)return false;
+      _data[da.name] = da.value;
+    });
+    console.log("_data",_data);
     const {setCreateEnter} = this.props;
-    setCreateEnter(newData).then(({error, payload}) => {
+    setCreateEnter(_data).then(({error, payload}) => {
       if (error) {
         requestError(payload);
       }
-      //
     });
   }
 
@@ -113,7 +121,7 @@ class CreateTeam extends Component {
       <div className={demo3}> 
         <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>
             <FormItem showMast={true}  labelName="用户名:" isRequire={true} valuePropsName='value' errorMessage="请输入用户名" method="blur"  inline={true}>
-                <FormControl name="username"  placeholder="请输入用户名,最多60个字符"/>
+                <FormControl name="name"  placeholder="请输入用户名,最多60个字符"/>
             </FormItem>
 
             <FormItem showMast={true}  labelName="企业头像:" valuePropsName='value' method="blur"  inline={true}>
@@ -141,14 +149,12 @@ class CreateTeam extends Component {
             <FormItem showMast={true}  labelName="国家:" isRequire={false} valuePropsName='value' errorMessage="请选择国家" method="blur"  inline={true}>
                 <Select
                     size="lg"
-                    defaultValue="boyuzhou"
+                    defaultValue="zhcn"
                     style={{ width: 200, marginRight: 6 }} 
                     onChange={(e)=>{this.setOptherData({name:"guojia",value:e})} }
                     >
-                    <Option value="jack">boyuzhou</Option>
-                    <Option value="lucy">renhualiu</Option>
-                    <Option value="yiminghe">yuzhao</Option>
-                </Select> 
+                    <Option value="zhcn">中国</Option>
+                </Select>
             </FormItem> 
 
             <FormItem showMast={true} labelName="企业地址:"  method="change" isRequire={true} inline={true}>

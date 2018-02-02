@@ -5,11 +5,13 @@ import { mapStateToProps } from '@u';
 
 import rootActions from 'store/root/actions';
 import teamActions from 'store/root/team/actions';
+import homeActions from 'store/root/home/actions';
 
 //
 import { FormControl, Checkbox, Button } from 'tinper-bee';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
+const { changeUserInfoDisplay, getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
 import {
   wrap,
@@ -28,7 +30,9 @@ import {
     requestSuccess,
     requestError,
     uploadApplication,
-    createTeam
+    createTeam,
+    changeUserInfoDisplay,
+    getUserInfo
   }
 )
 
@@ -95,7 +99,7 @@ class CreateTeamContent extends Component {
 
 
   create = () => {
-    const { history, createTeam, requestStart, requestSuccess, requestError } = this.props;
+    const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
     const { value, backUrl } = this.state;
     if ( !value ){
       alert("请输入团队名称");
@@ -113,7 +117,9 @@ class CreateTeamContent extends Component {
         requestError(payload);
       } 
       requestSuccess();
+      getUserInfo();
       history.replace('/');
+      changeUserInfoDisplay();
     });
     
   }
