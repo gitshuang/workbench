@@ -121,8 +121,9 @@ class CreateTeamContent extends Component {
       // getUserInfo();
       // history.replace('/');
       // changeUserInfoDisplay();
-      localStorage.setItem('create', "1");
-      window.location.href = "/";
+      const tenantId = payload.tenantId;
+      localStorage.setItem('create', "1");  
+      window.location.href = "/?tenantId=" + tenantId + "&switch=true";
     });
     
   }
