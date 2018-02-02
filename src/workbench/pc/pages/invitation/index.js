@@ -97,7 +97,7 @@ class Invitation extends Component {
         requestSuccess();
         this.setState({
           mails: ['', ''],
-          successDialogShow: false,
+          // successDialogShow: false,
         }); 
       }, (err)=>{
         requestError(err);
@@ -122,6 +122,7 @@ class Invitation extends Component {
       errorDialogShow,
       successDialogShow,
     } = this.state;
+    console.log('successDialogShow : '+successDialogShow);
     return (
       <div className="um-win">
         <div className={header}>
