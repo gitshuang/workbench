@@ -43,7 +43,7 @@ class CreateTeam extends Component {
         type:"LegalPerson",
         optherData:[
           {name:"scale",value:"Ten"},
-          {name:"guojia",value:"jack"}
+          {name:"guojia",value:"中国"}
         ]
     };
   } 
@@ -67,7 +67,14 @@ class CreateTeam extends Component {
     let _data = {};
     let _guojia = newData.find((da)=>da.name == "guojia");
     let _addressObj = newData.find((da)=>da.name == "address");
-    _addressObj["address"] = _guojia?_guojia:"中国"+ _addressObj?_addressObj.value.province + da.value.city + da.value.area:"";
+    let _add = "";
+    if(_guojia){
+      _add = _guojia.value;
+    }
+    if(_addressObj){
+      _add += _addressObj.value.province + _addressObj.value.city + _addressObj.value.area
+    }
+    _addressObj["value"] = _add;
     newData.forEach((da,i)=>{
       if(!da.name)return false;
       _data[da.name] = da.value;
