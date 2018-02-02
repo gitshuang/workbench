@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, GetQueryString } from '@u';
 import rootActions from 'store/root/actions';
 /*   actions   */
 import homeActions from 'store/root/home/actions';
@@ -55,7 +55,13 @@ class HeaderPage extends Component {
   }
   componentDidMount() {
     this.getUserInfo();
-
+    const { changeUserInfoDisplay } = this.props;
+    //console.log(GetQueryString("create"));
+    // 判断是否localstorage中包含这个值
+    if(localStorage.getItem("create")) {
+      changeUserInfoDisplay();
+      localStorage.removeItem("create");
+    }
       // let ul = document.getElementById("nav_ul");
       // debugger;
       // let b = ul.scrollWidth > ul.clientWidth?true:false;
