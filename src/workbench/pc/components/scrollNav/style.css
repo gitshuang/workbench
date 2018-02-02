@@ -13,6 +13,7 @@
     line-height: 32px;
     /* border: 1px solid red; */
     box-sizing: border-box;
+    display: inline-block;
 }
 
 
@@ -30,6 +31,7 @@
     font-weight: bold;
     font-size:15px;
     font-family:MicrosoftYaHei-Bold;
+    display:inline-block;
 }
 
 .activeLink:after{
@@ -42,7 +44,7 @@
     margin: 0 auto;
     margin-top: 2px;
     border-radius: 3px;
-    display: inline-block;
+    display: block;
 }
 
 .item {
@@ -88,10 +90,9 @@
 .all_btn_ul{
     white-space: nowrap;
     overflow: hidden;
-    overflow-x: scroll; /* 1 */
+    /* overflow-x: scroll;  1 */
     /* border-bottom: 1px solid #DEE0E3; */
 }
-
 .navs::-webkit-scrollbar {
     display: none
 }
@@ -126,7 +127,7 @@
 
 .navs>li{
     display: inline-table;
-    height:48px;
+    height:44px;
     /* margin-right:25px; */
 }
 /* jony */

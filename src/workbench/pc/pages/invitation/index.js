@@ -93,12 +93,12 @@ class Invitation extends Component {
     if (mails.length) {
       
       requestStart();
-      sendMessage({mails}).then((data) => {
+      sendMessage(mails).then((data) => {
         requestSuccess();
         this.setState({
           mails: ['', ''],
           successDialogShow: false,
-        });
+        }); 
       }, (err)=>{
         requestError(err);
       });
