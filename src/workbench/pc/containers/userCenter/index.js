@@ -174,12 +174,20 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
-  gotoTeam = () => {
+  gotoCreateTeam = () => {
     const {
       history,
       hideUserInfoDisplay,
     } = this.props;
     history.push('/createteam/home');
+    hideUserInfoDisplay();
+  }
+  gotoCreateEnter = () => {
+    const {
+      history,
+      hideUserInfoDisplay,
+    } = this.props;
+    history.push('/createenter/home');
     hideUserInfoDisplay();
   }
   accountManage(){
@@ -374,8 +382,8 @@ class UserInfoContainer extends Component {
         </div>
         <div>
             <ul className={`${createBtnList} ${clearfix}`}>
-              <li><Button shape="border" size="sm" onClick={this.gotoTeam}>创建团队</Button></li>
-              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>创建企业</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.gotoCreateTeam}>创建团队</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.gotoCreateEnter}>创建企业</Button></li>
             </ul>
           </div>
         <div className={"um-content" + ` ${tabContent}`}>

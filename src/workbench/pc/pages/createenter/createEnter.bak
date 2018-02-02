@@ -46,8 +46,9 @@ class CreateTeam extends Component {
           {name:"guojia",value:"中国"}
         ]
     };
-  } 
+  }
 
+  /*
   componentWillMount() {
     const {requestStart, requestSuccess, requestError, getSearchEnterList} = this.props;
     requestStart();
@@ -61,6 +62,7 @@ class CreateTeam extends Component {
       requestSuccess();
     });
   }
+  */
 
   checkForm = (flag,obj) => {
     let newData = [...obj,...this.state.optherData];
@@ -111,7 +113,7 @@ class CreateTeam extends Component {
       ...this.state
     })
   }
- 
+
   getUrl=(obj)=>{
     this.setOptherData(obj);
   }
@@ -125,9 +127,9 @@ class CreateTeam extends Component {
     }
 
     return (
-      <div className={demo3}> 
+      <div className={demo3}>
         <Form submitCallBack={this.checkForm} afterSubmitBtn={cancel()}>
-            <FormItem showMast={true}  labelName="用户名:" isRequire={true} valuePropsName='value' errorMessage="请输入用户名" method="blur"  inline={true}>
+            <FormItem showMast={true}  labelName="企业名称:" isRequire={true} valuePropsName='value' errorMessage="请输入用户名" method="blur"  inline={true}>
                 <FormControl name="name"  placeholder="请输入用户名,最多60个字符"/>
             </FormItem>
 
@@ -137,14 +139,14 @@ class CreateTeam extends Component {
                 <ButtonBrand onClick={(e)=>{this.uploadImage(e)}} > <Icon type="uf-upload" />Upload</ButtonBrand>
               </Upload> */}
             </FormItem>
-            
+
             <FormItem showMast={true}  labelName="所属规模:" isRequire={false} valuePropsName='value' errorMessage="请选择所属规模" method="blur"  inline={true}>
                 <Select
                     size="lg"
                     defaultValue="Ten"
-                    style={{ width: 200, marginRight: 6 }} 
+                    style={{ width: 200, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"scale",value:e})} }
-                    > 
+                    >
                     <Option value="Ten">1-10人</Option>
                     <Option value="Hundred">10-100人</Option>
                     <Option value="FiveHundred">100-500人</Option>
@@ -157,12 +159,12 @@ class CreateTeam extends Component {
                 <Select
                     size="lg"
                     defaultValue="zhcn"
-                    style={{ width: 200, marginRight: 6 }} 
+                    style={{ width: 200, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"guojia",value:e})} }
                     >
                     <Option value="zhcn">中国</Option>
                 </Select>
-            </FormItem> 
+            </FormItem>
 
             <FormItem showMast={true} labelName="企业地址:"  method="change" isRequire={true} inline={true}>
                 <CitySelect name='address'/>
@@ -193,14 +195,14 @@ class CreateTeam extends Component {
             <FormItem showMast={true}  labelName="企业税号:" isRequire={true} valuePropsName='value' errorMessage="请输入企业税号" method="blur"  inline={true}>
                 <FormControl name="businessTax"  placeholder="请输入企业税号"/>
             </FormItem>
-            
+
             <FormItem showMast={true}  labelName="企业法人:" isRequire={true} valuePropsName='value' errorMessage="请输入企业法人" method="blur"  inline={true}>
                 <FormControl name="legalPerson"  placeholder="请输入企业法人"/>
-            </FormItem> 
-            
+            </FormItem>
+
             <FormItem showMast={true} labelName="企业类型:" isRequire={false} method="change" inline={true}>
                 <Radio.RadioGroup
-                   selectedValue={this.state.type} 
+                   selectedValue={this.state.type}
                    onChange={(e)=>{this.setOptherData({name:"type",value:e})} }
                     name="type">
                         <Radio value="LegalPerson" >法人企业</Radio>
@@ -209,7 +211,7 @@ class CreateTeam extends Component {
                         <Radio value="Other" >其他</Radio>
                 </Radio.RadioGroup>
             </FormItem>
-            
+
         </Form>
       </div>
     );
