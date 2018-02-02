@@ -111,15 +111,18 @@ class CreateTeamContent extends Component {
     if (backUrl) {
       data.logo = backUrl;
     }
+    
     requestStart();
     createTeam(data).then(({error, payload}) => {
       if (error) {
         requestError(payload);
       } 
       requestSuccess();
-      getUserInfo();
-      history.replace('/');
-      changeUserInfoDisplay();
+      // getUserInfo();
+      // history.replace('/');
+      // changeUserInfoDisplay();
+      localStorage.setItem('create', "1");
+      window.location.href = "/";
     });
     
   }

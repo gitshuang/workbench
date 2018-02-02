@@ -1,7 +1,7 @@
 import { createActions as createReduxActions } from 'redux-actions';
 import ReactDOM from 'react-dom';
 
-export const noop = () => {};
+export const noop = () => { };
 
 export const mergeReducers = (...reducers) =>
   (state, action) => reducers.reduce(
@@ -19,10 +19,10 @@ export const createTypes = (...types) => {
 export const createActions = (namespaceObj, ...args) => {
   let namespace = [];
   if (typeof namespaceObj === 'object' && namespaceObj.namespace) {
-    let [ actionMap, ...identityActions ] = args;
+    let [actionMap, ...identityActions] = args;
     namespace = namespaceObj.namespace.split('.');
     const result = {};
-    const space = namespace.reduce((obj, name)=>{
+    const space = namespace.reduce((obj, name) => {
       name = name.toUpperCase();
       obj[name] = {};
       return obj[name];
@@ -30,14 +30,14 @@ export const createActions = (namespaceObj, ...args) => {
     if (typeof actionMap === 'object') {
       Object.assign(space, actionMap);
     } else {
-      identityActions = [ actionMap ].concat(identityActions);
+      identityActions = [actionMap].concat(identityActions);
     }
     identityActions.reduce((obj, identity) => {
       obj[identity] = undefined;
       return obj;
     }, space);
     const actions = createReduxActions(result);
-    return namespace.reduce((action, space)=>{
+    return namespace.reduce((action, space) => {
       return action[space] ? action[space] : action;
     }, actions);
   } else {
@@ -140,7 +140,7 @@ export function post(oriUrl, oriParams = {}) {
   };
   try {
     options.body = JSON.stringify(oriParams);
-  } catch(e) {
+  } catch (e) {
     return Promise.reject(e);
   }
   return fetch(url(oriUrl), options);
@@ -223,9 +223,9 @@ export function mapStateToProps(...keys) {
 
 export function guid() {
   function S4() {
-    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   }
-  return `LS-${(S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4())}`;
+  return `LS-${(S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4())}`;
 }
 
 export function findPath(datas, childrenKey, compareKey, compareValue) {
@@ -243,7 +243,7 @@ export function findPath(datas, childrenKey, compareKey, compareValue) {
         value = compareKey.split('.').reduce((obj, key) => {
           return obj[key]
         }, child);
-      } catch(e) {
+      } catch (e) {
         console.log(e);
       }
       if (value === compareValue) {
@@ -298,14 +298,14 @@ export const IS_REACT_16 = !!ReactDOM.createPortal;
  * 汉子超过3位截取，其他字符8位数
  * @param {*} str
  */
-export function getStrLenSubstr(str,zh_len,cn_len,sl){
-  if(!str)return "";
+export function getStrLenSubstr(str, zh_len, cn_len, sl) {
+  if (!str) return "";
   let newStr = "";
-  var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
-  if(reg.test(str)){
-    newStr = str.length>zh_len?str.substring(0,zh_len)+ (sl?"":"...") :str;
-  }else{
-    newStr = str.length>cn_len?str.substring(0,cn_len)+ (sl?"":"...") :str;
+  var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+  if (reg.test(str)) {
+    newStr = str.length > zh_len ? str.substring(0, zh_len) + (sl ? "" : "...") : str;
+  } else {
+    newStr = str.length > cn_len ? str.substring(0, cn_len) + (sl ? "" : "...") : str;
     // newStr = str.substring(0,cn_len)+(sl?"":"...");
   }
   return newStr;
@@ -322,20 +322,20 @@ export function browserRedirect() {
   var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
   var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 
-  if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) )  //判断是否有非pc的值存在
+  if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM))  //判断是否有非pc的值存在
   {
-      // alert("pc");
-      //没有，则显示为pc
-      return ("pc");
-  }else{
-    if(bIsIpad.length!=0){return ("ipad");}
-    if(bIsIphoneOs.length!=0){return ("iphone os");}
-    if(bIsMidp.length!=0){return ("midp");}
-    if(bIsUc7.length!=0){return ("rv:1.2.3.4");}
-    if(bIsUc.length!=0){return ("ucweb");}
-    if(bIsAndroid.length!=0){return ("android");}
-    if(bIsCE.length!=0){return ("windows ce");}
-    if(bIsWM.length!=0){return ("windows mobile");}
+    // alert("pc");
+    //没有，则显示为pc
+    return ("pc");
+  } else {
+    if (bIsIpad.length != 0) { return ("ipad"); }
+    if (bIsIphoneOs.length != 0) { return ("iphone os"); }
+    if (bIsMidp.length != 0) { return ("midp"); }
+    if (bIsUc7.length != 0) { return ("rv:1.2.3.4"); }
+    if (bIsUc.length != 0) { return ("ucweb"); }
+    if (bIsAndroid.length != 0) { return ("android"); }
+    if (bIsCE.length != 0) { return ("windows ce"); }
+    if (bIsWM.length != 0) { return ("windows mobile"); }
     //显示对应的产品名称
   }
 }
@@ -344,4 +344,10 @@ export function postMessageToWin(win, data) {
   if (win && data) {
     win.postMessage(JSON.stringify(data), '*');
   }
+}
+// 获取location 参数
+export function GetQueryString(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) return unescape(r[2]); return null;
 }
