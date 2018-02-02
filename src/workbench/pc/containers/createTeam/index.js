@@ -11,7 +11,7 @@ import homeActions from 'store/root/home/actions';
 import { FormControl, Checkbox, Button } from 'tinper-bee';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { changeUserInfoDisplay } = homeActions;
+const { changeUserInfoDisplay, getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
 import {
   wrap,
@@ -31,7 +31,8 @@ import {
     requestError,
     uploadApplication,
     createTeam,
-    changeUserInfoDisplay
+    changeUserInfoDisplay,
+    getUserInfo
   }
 )
 
@@ -98,7 +99,7 @@ class CreateTeamContent extends Component {
 
 
   create = () => {
-    const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay } = this.props;
+    const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
     const { value, backUrl } = this.state;
     if ( !value ){
       alert("请输入团队名称");
@@ -116,6 +117,7 @@ class CreateTeamContent extends Component {
         requestError(payload);
       } 
       requestSuccess();
+      getUserInfo();
       history.replace('/');
       changeUserInfoDisplay();
     });
