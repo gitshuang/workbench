@@ -191,7 +191,11 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
   accountManage(){
-    window.open('https://idtest.yyuap.com/usercenter/usermng');
+    const {
+      history,
+      hideUserInfoDisplay,
+    } = this.props;
+    history.push('/account');
   }
   getUserOrder(){
     window.open('https://idtest.yyuap.com/usercenter/myapp');
