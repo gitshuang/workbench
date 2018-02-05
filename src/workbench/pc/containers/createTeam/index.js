@@ -44,7 +44,7 @@ class CreateTeamContent extends Component {
       value: "",
       imgWarning: "",
       imgUrl: "",
-      backUrl : ""    // 上传成功后返回的url 
+      backUrl : ""    // 上传成功后返回的url
     }
   }
 
@@ -56,7 +56,6 @@ class CreateTeamContent extends Component {
     //const { value } = this.state;
     const value = e.target.value;
     if( value.length > 60 ){
-      alert("123");
       return false;
     }
     this.setState({
@@ -88,7 +87,7 @@ class CreateTeamContent extends Component {
     uploadApplication(form).then(({error, payload}) => {
       if (error) {
         requestError(payload);
-      } 
+      }
       const backUrl = payload.url;
       this.setState({
         backUrl: backUrl
@@ -111,29 +110,31 @@ class CreateTeamContent extends Component {
     if (backUrl) {
       data.logo = backUrl;
     }
-    
+
     requestStart();
     createTeam(data).then(({error, payload}) => {
+      requestSuccess();
       if (error) {
         requestError(payload);
-      } 
-      requestSuccess();
+        return;
+      }
       // getUserInfo();
       // history.replace('/');
       // changeUserInfoDisplay();
+      const tenantId = payload.tenantId;
       localStorage.setItem('create', "1");
-      window.location.href = "/";
+      window.location.href = "/?tenantId=" + tenantId + "&switch=true";
     });
-    
+
   }
 
   render() {
     const { value, imgUrl, imgWarning } = this.state;
     return (
       <div className={wrap}>
-        <h5>创建团队</h5>  
+        <h5>创建团队</h5>
         <div className="um-box">
-          <label>团队名称<span>*</span>：</label> 
+          <label>团队名称<span>*</span>：</label>
           <input
             className="um-bf1"
             placeholder="最多60个字符"
@@ -156,7 +157,7 @@ class CreateTeamContent extends Component {
         <div>
           <Button onClick={this.create}>创建</Button>
         </div>
-      </div>  
+      </div>
     )
   }
 }

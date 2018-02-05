@@ -46,12 +46,16 @@ export const createActions = (namespaceObj, ...args) => {
   }
 }
 
-const getHost = (key = 'api') => {
+export const getHost = (key = 'api') => {
   const hosts = {
     api: {
       production: '',
       development: '',
     },
+    euc: {
+      production: 'https://euc.yonyoucloud.com',
+      development: 'https://idtest.yyuap.com',
+    }
   };
   return hosts[key][process.env.NODE_ENV];
 };
