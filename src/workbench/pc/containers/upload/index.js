@@ -36,7 +36,7 @@ class UploadPage extends Component {
     this.setState({
       applicationIcon: imgUrl,
     })
-    const {uploadApplication} = this.props;
+    // const {uploadApplication} = this.props;
     const from = new FormData();
     from.append('file', obj);
     uploadApplication(from).then(({url}) => {
