@@ -41,6 +41,7 @@ const {
   mapStateToProps(
     'userInfo',
     'userInfoDisplay',
+    'requestDisplay',
     'latestAccessList',
     'promotionServiceList',
     {
@@ -260,7 +261,8 @@ class UserInfoContainer extends Component {
         admin,
         logo,
         company,
-      }
+      },
+      requestDisplay
     } = this.props;
     let _accountMenuDataItem =[
       {name:"userInfo",value:"个人信息",fun:this.handleChange2},
@@ -372,12 +374,16 @@ class UserInfoContainer extends Component {
               </div>
             </div>
           </div>
-          <div>
+          <div style={{position:"relative"}}>
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
               <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>团队设置</Button></li>
               <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>邀请成员</Button></li>
             </ul>
+            {requestDisplay ?<div style={{position:"absolute"}}>
+            团队创建成功！快点邀请成员一起好好工作吧！
+            </div> : null }
+            
           </div>
         </div>
         <div>
