@@ -1,0 +1,52 @@
+.u-form .u-form-group{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.u-form .u-form-item{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.u-form-item{
+  min-height: 64px;
+}
+.u-form-item .u-select{
+  min-width: 100px;
+}
+.u-form .u-form-item{
+  min-height: 94px;
+}
+.u-form .u-form-item.u-form-inline{
+  min-height: 72px;
+}
+.u-form-error{
+  display: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #F22C1D;
+}
+.u-form-error.show{
+  display: block;
+}
+.u-form .u-form-submit{
+  margin-top: 10px;
+}
+.u-form .u-form-item.u-form-inline .u-input-group{
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+}
+.u-form-inline .u-label{
+  display: inline-block;
+}
+.u-form .u-row .u-label{
+  line-height: 40px;
+}
+.u-form-item.u-form-inline .u-input-group-outer{
+  display: inline-block;
+}
+.u-mast{
+  color: #F22C1D;
+  position: relative;
+  top: 2px;
+  margin-right: 2px;
+}

@@ -174,12 +174,20 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
-  gotoTeam = () => {
+  gotoCreateTeam = () => {
     const {
       history,
       hideUserInfoDisplay,
     } = this.props;
     history.push('/createteam/home');
+    hideUserInfoDisplay();
+  }
+  gotoCreateEnter = () => {
+    const {
+      history,
+      hideUserInfoDisplay,
+    } = this.props;
+    history.push('/createenter/home');
     hideUserInfoDisplay();
   }
   accountManage(){
@@ -201,12 +209,21 @@ class UserInfoContainer extends Component {
       );
     }
   }
-  getCompanyType(type){
-    if(type === 1){
-      return '企业'
-    }else{
-      return '团队'
+  getCompanyType(){
+    const { tenantid } = window.diworkContext();
+    const {
+      userInfo: {
+        allowTenants,
+      },
+    } = this.props;
+    const curTenant = allowTenants.filter((tenant) => {
+      return tenant.tenantId === tenantid;
+    })[0];
+    let type = '团队';
+    if (curTenant && !curTenant.team) {
+      type = '企业';
     }
+    return type;
   }
   /* 邀请成员 */
   inviteMember(){
@@ -335,9 +352,9 @@ class UserInfoContainer extends Component {
               </div> */}
             </div>
             <div className={tenantDescribe}>
-              <div className={tenantName} title={name}>用友网络科技股份有限公司</div>
+              <div className={tenantName} title={company}>{company}</div>
               <div style={{'marginBottom':15}}>
-                <div className={companyType}>{this.getCompanyType(company)}</div>
+                <div className={companyType}>{this.getCompanyType()}</div>
                 <DropdownButton
                     getPopupContainer={() => document.getElementById("modalId")}
                     label="切换" dataItem={
@@ -365,8 +382,8 @@ class UserInfoContainer extends Component {
         </div>
         <div>
             <ul className={`${createBtnList} ${clearfix}`}>
-              <li><Button shape="border" size="sm" onClick={this.gotoTeam}>创建团队</Button></li>
-              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>创建企业</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.gotoCreateTeam}>创建团队</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.gotoCreateEnter}>创建企业</Button></li>
             </ul>
           </div>
         <div className={"um-content" + ` ${tabContent}`}>

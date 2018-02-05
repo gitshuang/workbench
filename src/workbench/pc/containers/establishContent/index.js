@@ -14,25 +14,14 @@ import Company from 'assets/image/wgt/company.png';
 
 @withRouter
 class EstablishContent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-    }
-  }
-
-  componentWillMount() {
-
-  }
-  
   openTeam = () => {
-    console.log(this.props);
     const { history } = this.props;
-    const { userInfo } = this.props;
+    history.push('/createteam/login');
+  }
 
-    //let data = userInfo.allowTenants.length ? "home" : "login" ;
-    const path = '/createteam/login';
-    history.push(path);
+  openEnter = () => {
+    const { history } = this.props;
+    history.push('/createenter/login');
   }
 
   render() {
@@ -84,7 +73,7 @@ class EstablishContent extends Component {
             </div>
           </div>
         </div>
-      </div>  
+      </div>
     )
   }
 }
