@@ -216,7 +216,9 @@ body {
   /* padding-top: 16px; */
 }
 
-
+.input_phone .u-input-group{
+  display: inline-table !important;
+}
 /*全屏弹窗*/
 
 

@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Form, { FormItem } from 'bee-form';
 import Upload from 'containers/upload';
-import { FormControl, Radio } from 'tinper-bee';
+import { FormControl, Radio,Select } from 'tinper-bee';
 import { ButtonBrand } from 'components/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
+import 'assets/style/Form.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
@@ -15,7 +16,7 @@ class Nature extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.defaultValue,
+      value: props.defaultValue
     }
   }
   onChange = (value) => {
@@ -62,14 +63,26 @@ class SubmitBtn extends Component {
     setCreateEnter,
   }
 )
-class CreateTeam extends Component {
+class CreateEnter extends Component {
+
+  constructor(props) {
+    super(props);
+    this.tenantIndustry ={
+      name:"tenantIndustry",
+      value:"A",
+      verify:true,
+    }
+  }
+  
   checkForm = (flag, data) => {
+    const {setCreateEnter} = this.props;
+    data.push(this.tenantIndustry);
     if (flag) {
       requestStart();
       setCreateEnter(
         data.reduce(
           (obj, { value, name }) => {
-            obj[name] = value;
+            name?obj[name] = value:null;
             return obj;
           },
           {},
@@ -85,6 +98,11 @@ class CreateTeam extends Component {
         window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       });
     }
+  }
+
+
+  setOptherData(obj){
+    this.tenantIndustry.value = obj.value;
   }
 
   render() {
@@ -106,8 +124,38 @@ class CreateTeam extends Component {
                 <FormControl name="tenantEmail"  placeholder="请输入邮箱" />
             </FormItem>
 
-            <FormItem inputBefore="+86" showMast={true}  valuePropsName='value'  labelName="手机号:" isRequire={true} method="blur" htmlType="tel" errorMessage="手机号格式错误"  inline={true}>
-                <FormControl name="contactMobile"  placeholder="请输入手机号" />
+            <FormItem showMast={true}  labelName="所属行业:" isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                <Select
+                    size="lg"
+                    defaultValue="A"
+                    style={{ width: 200, marginRight: 6 }} 
+                    onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
+                    >
+                    <Option value="A">农、林、牧、渔业</Option>
+                    <Option value="B">采矿业</Option>
+                    <Option value="C">制造业</Option>
+                    <Option value="D">电力、热力、燃气及水的生产和供应业</Option>
+                    <Option value="S">环境和公共设施管理业、社会保障和社会组织</Option>
+                    <Option value="E">建筑业</Option>
+                    <Option value="G">交通运输、仓储业和邮政业</Option>
+                    <Option value="I">信息传输、计算机服务和软件业</Option>
+                    <Option value="F">批发和零售业</Option>
+                    <Option value="H">住宿、餐饮业</Option>
+                    <Option value="J">金融、保险业</Option>
+                    <Option value="K">房地产业</Option>
+                    <Option value="L">租赁和商务服务业</Option>
+                    <Option value="M">科学研究、技术服务和地质勘查业</Option>
+                    <Option value="N">水利、环境和公共设施管理业</Option>
+                    <Option value="O">居民服务和其他服务业</Option>
+                    <Option value="P">教育</Option>
+                    <Option value="Q">卫生、社会保障和社会服务业</Option>
+                    <Option value="R">文化、体育、娱乐业</Option>
+                    <Option value="T">国际组织</Option>
+                </Select>
+            </FormItem>
+
+            <FormItem inputBefore="+86" className="input_phone" showMast={true}  valuePropsName='value'  labelName="手机号:" isRequire={true} method="blur" htmlType="tel" errorMessage="手机号格式错误"  inline={true}>
+                <FormControl name="tenantTel"  placeholder="请输入手机号" />
             </FormItem>
 
             <FormItem showMast={true} labelName="企业性质:" isRequire={false} method="change" inline={true}>
@@ -119,4 +167,4 @@ class CreateTeam extends Component {
   }
 }
 
-export default CreateTeam;
+export default CreateEnter;

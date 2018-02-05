@@ -4,8 +4,10 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 
-import Header from 'containers/header';
+import Header from 'components/header';
 import EstablishContent from 'containers/establishContent'
+
+import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 
@@ -41,6 +43,7 @@ class Establish extends Component {
 
     render() {
         const { userInfo } = this.props;
+        const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
         return (
             <div className="um-win">
                 
@@ -54,6 +57,9 @@ class Establish extends Component {
                     </div> 
                     : null 
                 */}
+                <div className="um-header" style={{background:"white"}}>
+                    <Header leftContent = { leftContent } />
+                </div> 
                 <div className="um-content">
                     <EstablishContent userInfo={ userInfo } />
                 </div>

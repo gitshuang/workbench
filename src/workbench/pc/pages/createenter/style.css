@@ -23,3 +23,10 @@
     width: 120px;
     margin-right: 10px;
 }
+
+.page_enterprise :global(.u-input-group-addon){
+  width: auto;
+}
+.page_enterprise :global(.u-select-selection-rendered){
+  line-height: 38px;
+}
