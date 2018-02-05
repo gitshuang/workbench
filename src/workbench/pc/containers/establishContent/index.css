@@ -1,31 +1,83 @@
 .wrap{
-  width: 1240px;
+  width: 1100px;
   margin: 0 auto;
-  padding: 200px;
-  text-align: center;
 }
 .wrap h5{
-  font-size: 20px;
   font-weight: 600;
-  margin-bottom: 20px;
+  font-size:27px;
+  font-family:MicrosoftYaHei;
+  color:rgba(71,77,84,1);
+  line-height:36px;
+  margin-top: 27px;
+  margin-bottom: 14px;
 }
 .desc{
-  font-size: 16px;
-  margin-bottom: 40px; 
+  height:25px; 
+  font-size:19px;
+  font-family:MicrosoftYaHei;
+  color:rgba(13,20,36,0.47);
+  line-height:25px;
+  padding-left: 4px;
+  margin-bottom: 29px;
 }
 .box{
-  width: 400px;
-  height: 400px;
-  margin: 0 10px;
-  border: 1px solid #999;
-  padding: 20px;
+  width: 540px;
+  height: 580px;
+  border-radius: 3px ; 
+}
+.box:first-child{
+  background:rgba(94,102,112,1);
+  margin-right: 20px;
+}
+.box:last-child{
+  background:rgba(62,192,168,1);
+}
+.imageBox{
+  padding-top: 75px;
+  text-align: center;
+}
+.imageBox img{
+  width: 124px;
 }
 .box h6{
-  font-size: 16px;
-  margin-bottom: 20px;
+  margin-top: 15px; 
+  font-size:21px;
+  font-family:MicrosoftYaHei-Bold;
+  color:rgba(255,255,255,1);
+  line-height:27px;
+  text-align: center;
+}
+.content{
+  padding-top: 40px;
+  padding-left: 130px;
+  height: 260px;
+}
+.content p{
+  font-size:19px;
+  font-family:MicrosoftYaHei;
+  color:rgba(255,255,255,1);
+  line-height:25px;
+  margin-bottom: 25px;
+}
+.content li{
+  float: left;
+  width: 180px;
+  font-size:14px;
+  font-family:MicrosoftYaHei-Bold;
+  color:rgba(255,255,255,0.7);
+  line-height:15px;
+  margin-bottom: 15px;
+}
+.box:first-child .content li{
+  width: 160px;
 }
 .box button{
-  padding: 10px 20px;
-  width: 100px;
-  align-self: flex-end;
+  width:180px;
+  height:46px; 
+  border-radius: 2px ; 
+  color: rgba(255,255,255,1);
+  border: 1px solid #ffffff;
+  text-align: center;
+  line-height: 46px;
+  background: none;
 }
