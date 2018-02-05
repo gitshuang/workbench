@@ -69,7 +69,7 @@ class EstablishContent extends Component {
               </ul>  
             </div>
             <div style={{textAlign:"center"}}>
-              <button>开始创建</button>  
+              <button onClick={this.openEnter}>开始创建</button>  
             </div>
           </div>
         </div>
