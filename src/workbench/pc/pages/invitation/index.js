@@ -6,7 +6,10 @@ import rootActions from 'store/root/actions';
 import inviteActions from 'store/root/invitation/actions';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
+import {ButtonBrand} from 'components/button';
 import SuccessDialog from './successDialog';
+import Tabs, { TabPane } from 'bee-tabs';
+import FormControl from 'bee-form-control';
 
 import {
   header,
@@ -18,6 +21,8 @@ import {
   copyLinkBtn,
   addMailBtn,
   submitBtn,
+  tabPane1,
+  tabPane2
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -139,30 +144,41 @@ class Invitation extends Component {
         </div>
         <div className={`${wrap} um-content`}>
           <div className={content}>
-            <h2>发送链接邀请</h2>
-            <p>将链接发给小伙伴就可以啦</p>
-            <div className={urlArea}>
-              <input ref='shortUrl' type='text' value={url} readOnly/>
-              <button type="button" className={copyLinkBtn} onClick={this.copyLink}>复制链接</button>
-            </div>
-            <h2>邮件邀请</h2>
-            <ul className={mailList}>
-            {
-              mails.map((mail, i) => {
-                return (
-                  <li key={i}>
-                    <input type='text' value={mail} onChange={this.onMailChange(i)}/>
-                    {
-                      i + 1 === mails.length && mails.length < maxLength ? (
-                        <button className={addMailBtn} onClick={this.addMail}>+</button>
-                      ) : null
-                    }
-                  </li>
-                );
-              })
-            }
-            </ul>
-            <button type="button" className={submitBtn} onClick={this.submit}>确定发送</button>
+            <Tabs
+              defaultActiveKey="1"
+              onChange={this.callback}
+              className="demo-tabs"
+            >
+              <TabPane tab='链接邀请' key="1" className={tabPane1}>
+                <p>将链接发给小伙伴就可以啦</p>
+                <div className={urlArea}>
+                  <label>链接</label>
+                  <input ref='shortUrl' type='text' value={url} readOnly/>
+                </div>
+                <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >复制链接</ButtonBrand>
+              </TabPane>
+              <TabPane tab='邮件邀请' key="2" className={tabPane2}>
+                <p>输入邮箱地址并用 “;” 隔开</p>
+                {/* <FormControl componentClass='textarea' name="mailList" /> */}
+                <ul className={mailList}>
+                {
+                  mails.map((mail, i) => {
+                    return (
+                      <li key={i}>
+                        <input type='text' value={mail} onChange={this.onMailChange(i)}/>
+                        {
+                          i + 1 === mails.length && mails.length < maxLength ? (
+                            <button className={addMailBtn} onClick={this.addMail}>+</button>
+                          ) : null
+                        }
+                      </li>
+                    );
+                  })
+                }
+                </ul>
+                <ButtonBrand className={submitBtn} onClick={this.submit} >确定发送</ButtonBrand>
+              </TabPane>
+            </Tabs>
           </div>
         </div>
         <SuccessDialog show={successDialogShow} close={this.closeSuccessDialog} />
