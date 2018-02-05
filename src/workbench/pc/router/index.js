@@ -10,6 +10,7 @@ import Establish from 'pages/establish';
 import CreateTeam from 'pages/createteam';
 import CreateEnter from 'pages/createenter';
 import Invitation from 'pages/invitation';
+import Account from 'pages/account';
 
 const routes = [
   {
@@ -59,6 +60,10 @@ const routes = [
   {
     path: '/:type(app|service)/:code/:subcode?',
     component: Work,
+  },
+  {
+    path: '/account',
+    component: Account,
   },
   {
     path: '/404',
