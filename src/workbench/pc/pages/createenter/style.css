@@ -1,6 +1,6 @@
 .page_enterprise :global(.u-form .u-label) {
   width: 120px;
-  text-align: right;
+  text-align:left;
 }
 
 .page_enterprise :global(.u-form-submit) {
@@ -29,4 +29,61 @@
 }
 .page_enterprise :global(.u-select-selection-rendered){
   line-height: 38px;
+}
+
+.page_enterprise{
+  margin: 10px 120px;
+  background: #fff;
+  text-align: center;
+  /* padding-left: 100px; */
+  overflow: hidden;
+}
+
+.enter_title{
+  width:137px;
+  height:27px; 
+  font-size:21px;
+  color:rgba(71,77,84,1);
+  line-height:27px;
+  margin-left: 50px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  /* border-bottom: 1px solid rgba(13,20,36,1); */
+}
+
+.page_enterprise :global(.u-input-group .u-form-control){
+  width:338px;
+  height:36px;
+  background:rgba(255,255,255,1);
+  border-radius: 3px ; 
+}
+
+.hr{
+  background: rgba(13,20,36,0.1);
+  height: 1px;
+  margin-left: -100px;
+  border-top: none;
+  margin:0;
+  margin-bottom: 25px;
+}
+
+.enter_cont{
+
+}
+
+.page_enterprise :global(.u-input-group-addon){
+  display: none;
+}
+
+.page_enterprise :global(.u-form-submit>button) {
+  width:338px;
+  height:32px;
+  margin-left: -63px;
+}
+
+.page_enterprise :global(.u-form-group:nth-child(2)>div>div){
+  margin-left: -270px;
+}
+.page_enterprise :global(.u-form-group:nth-child(5)>div>div){
+  margin-left: -130px;
 }
