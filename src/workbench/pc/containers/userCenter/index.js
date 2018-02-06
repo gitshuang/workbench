@@ -225,7 +225,7 @@ class UserInfoContainer extends Component {
       return tenant.tenantId === tenantid;
     })[0];
     let type = '团队';
-    if (curTenant && !curTenant.team) {
+    if (curTenant && !curTenant.type) {
       type = '企业';
     }
     return type;
