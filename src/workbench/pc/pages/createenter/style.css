@@ -1,40 +1,36 @@
-.page_enterprise :global(.u-form .u-label) {
-  width: 120px;
-  text-align:left;
+.enter_form :global(.u-label) {
+  width: 75px;
+  text-align: right;
 }
 
-.page_enterprise :global(.u-form-submit) {
-  padding-left: 120px;
+.enter_form :global(.province),
+.enter_form :global(.city),
+.enter_form :global(.area) {
+  width: 90px!important;
 }
 
-.page_enterprise :global(.u-input-after) {
-  border: none!important;
-  background: none!important;
+.enter_form :global(.uf.uf-calendar) {
+  position: relative;
+  top: -4px;
+  right: 9px;
 }
 
-.page_enterprise :global(.u-button) {
-  height: 30px;
-  padding: 0;
+.enter_form :global(.u-form-submit) {
+  padding-left: 75px;
 }
 
-.page_enterprise :global(.province),
-.page_enterprise :global(.city),
-.page_enterprise :global(.area) {
-    width: 120px;
-    margin-right: 10px;
+.enter_form :global(textarea) {
+  min-height: 100px;
+  min-width: 300px;
 }
-
-.page_enterprise :global(.u-input-group-addon){
-  width: auto;
-}
-.page_enterprise :global(.u-select-selection-rendered){
-  line-height: 38px;
+.enter_form :global(.u-form-item){
+  width: 100%;
 }
 
 .page_enterprise{
   margin: 10px 120px;
   background: #fff;
-  text-align: center;
+  /* text-align: center; */
   /* padding-left: 100px; */
   overflow: hidden;
 }
@@ -51,13 +47,6 @@
   /* border-bottom: 1px solid rgba(13,20,36,1); */
 }
 
-.page_enterprise :global(.u-input-group .u-form-control){
-  width:338px;
-  height:36px;
-  background:rgba(255,255,255,1);
-  border-radius: 3px ; 
-}
-
 .hr{
   background: rgba(13,20,36,0.1);
   height: 1px;
@@ -68,22 +57,24 @@
 }
 
 .enter_cont{
-
+  width: 360px;
+  margin: 0 auto;
 }
 
-.page_enterprise :global(.u-input-group-addon){
-  display: none;
+.enter_form :global(.u-input-inner>input){
+  /* width:338px !important; */
+  height:36px;
+  background:rgba(255,255,255,1);
+  border-radius: 3px ; 
+  border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-.page_enterprise :global(.u-form-submit>button) {
-  width:338px;
-  height:32px;
-  margin-left: -63px;
+.enter_form :global(.u-input-before){
+  height:36px;
+  line-height: 36px;
 }
 
-.page_enterprise :global(.u-form-group:nth-child(2)>div>div){
-  margin-left: -270px;
-}
-.page_enterprise :global(.u-form-group:nth-child(5)>div>div){
-  margin-left: -130px;
+.enter_form :global(.u-select-lg .u-select-selection--single){
+  width: 271px;
+  border:1px solid RGBA(78, 89, 104, 0.2);
 }

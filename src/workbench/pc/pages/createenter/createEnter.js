@@ -8,6 +8,7 @@ import { ButtonBrand } from 'components/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import 'assets/style/Form.css';
+import { enter_form} from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
@@ -107,8 +108,10 @@ class CreateEnter extends Component {
 
   render() {
     return (
-        <Form submitCallBack={this.checkForm} showSubmit={false}>
-            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur"  inline={true}>
+        <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
+            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *</font></span>} 
+            isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur" 
+             inline={true}>
                 <FormControl name="tenantName"  placeholder="最多60个字符"/>
             </FormItem>
 
