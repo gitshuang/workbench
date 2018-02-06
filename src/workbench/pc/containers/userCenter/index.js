@@ -197,6 +197,7 @@ class UserInfoContainer extends Component {
       hideUserInfoDisplay,
     } = this.props;
     history.push('/account');
+    hideUserInfoDisplay();
   }
   getUserOrder(){
     window.open('https://idtest.yyuap.com/usercenter/myapp');
@@ -225,7 +226,7 @@ class UserInfoContainer extends Component {
       return tenant.tenantId === tenantid;
     })[0];
     let type = '团队';
-    if (curTenant && !curTenant.team) {
+    if (curTenant && !curTenant.type) {
       type = '企业';
     }
     return type;
