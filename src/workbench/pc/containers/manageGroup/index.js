@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 
-import Menu, { Item as MenuItem } from 'bee-menus';
-import Dropdown from 'bee-dropdown';
+import Menu, { Item as MenuItem } from 'bee/menus';
+import Dropdown from 'bee/dropdown';
 import PopDialog from 'components/pop';
-import Button from 'bee-button';
+import Button from 'bee/button';
 import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'components/button';
 
 import { mapStateToProps, avoidSameName ,getStrLenSubstr} from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 import Icon from 'components/icon';
-import BeeIcon from 'bee-icon';
-import Checkbox from 'bee-checkbox';
-import Message from 'bee-message';
+import BeeIcon from 'bee/icon';
+import Checkbox from 'bee/checkbox';
+import Message from 'bee/message';
 import WidgetList from 'containers/manageWidgetList';
 import {
   widgetTitle,

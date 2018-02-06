@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from 'bee-button';
-import Menu, { SubMenu } from 'bee-menus';
+import Button from 'bee/button';
+import Menu, { SubMenu } from 'bee/menus';
 import { findPath, avoidSameName } from '@u';
 /*  style */
 import {

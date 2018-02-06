@@ -9,9 +9,9 @@ import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import { getStrLenSubstr } from '@u';
 
-import Button from 'bee-button';
-import Select from 'bee-select';
-import Tabs, { TabPane } from 'bee-tabs';
+import Button from 'bee/button';
+// import Select from 'bee-select';
+import Tabs, { TabPane } from 'bee/tabs';
 import onClickOutside from 'react-onclickoutside';
 import img1 from 'assets/image/wgt/yonyouSpace1.png';
 import img2 from 'assets/image/wgt/intelligent_logo.png';

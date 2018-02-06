@@ -6,12 +6,12 @@ import { widgetList, widgetItem, title, file_context, title_left,
   file_icon, title_right, context, bottom ,footer,
   title_cont,form_control,edit_cont,save_btn,close_btn,title_edit,pop_cont,edit_btn,editDele,clearfix,widgetFileItem,file_title_right,btn} from './style.css'
 import WidgetItem from './widgetItem';
-import Checkbox from 'bee-checkbox';
-import FormControl from 'bee-form-control';
-import Button from 'bee-button';
+import Checkbox from 'bee/checkbox';
+import FormControl from 'bee/form-control';
+import Button from 'bee/button';
 import PopDialog from 'components/pop';
 import Icon from 'components/icon';
-import BeeIcon from 'bee-icon';
+import BeeIcon from 'bee/icon';
 import {ButtonDefaultLine,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
 
 import { connect } from 'react-redux';

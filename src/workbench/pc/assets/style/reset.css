@@ -80,7 +80,7 @@ ins {
 	text-decoration: none;
 }
 
-ul > li {
+ul > li,li {
 	list-style: none;
 }
 

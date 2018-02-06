@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
-import Modal from 'bee-modal';
+import Modal from 'bee/modal';
 import { IS_REACT_16 } from '@u';
 import Icon from 'components/icon';
 import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';

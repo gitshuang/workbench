@@ -10,7 +10,7 @@ import TabsContainer from 'containers/tabs';
 import HeaderContainer from 'containers/header';
 import Icon from 'components/icon';
 import Pin from 'containers/pin';
-import Button from 'bee-button';
+import Button from 'bee/button';
 
 import styles from './style.css';
 

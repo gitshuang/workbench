@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'bee-button';
+import Button from 'bee/button';
 import {btn,brand_btn,default_btn,default_line_btn,default_alpha_btn,check_selected_btn,check_close_btn,danger_btn,warning_btn,default_white_btn} from './style.css';
 
 //品牌色

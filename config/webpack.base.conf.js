@@ -18,7 +18,9 @@ module.exports = {
       'components': paths('components'),
       'router': paths('router'),
       'store': paths('store'),
+      'bee': paths('bee'),
       '@u': paths('utils'),
+      'node': paths('node'),
     }
   },
   externals: {
