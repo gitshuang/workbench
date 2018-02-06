@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CreateEnter from './createEnter';
 import Header from 'containers/header';
-import { page_enterprise } from './style.css';
+import { page_enterprise ,enter_title,enter_cont,hr} from './style.css';
 
 @withRouter
 class Enterprise extends Component {
@@ -32,7 +32,11 @@ class Enterprise extends Component {
             : null
         }
         <div className={`${page_enterprise} um-content`}>
-          <CreateEnter />
+          <div className={enter_title} >创建企业</div>
+          <hr className={hr}/>
+          <div className={enter_cont} >
+            <CreateEnter />
+          </div> 
         </div>
       </div>
     );
