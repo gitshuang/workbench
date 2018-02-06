@@ -234,5 +234,54 @@ body {
   margin-top: -12px !important;
 } */
 
+/* tagsInput */
+.react-tagsinput {
+  /* background-color: #fff; */
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  overflow: hidden;
+  padding-left: 8px;
+  padding-top: 8px;
+}
 
+.react-tagsinput--focused {
+  border-color: rgb(102,175,233);
+}
+
+.react-tagsinput-tag {
+  background-color: #DFE3E8;
+  border-radius: 3px;
+  /* border: 1px solid #DFE3E8; */
+  color: #474D54;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 5px;
+  margin-right: 8px;
+  padding: 5px 7px;
+}
+
+.react-tagsinput-remove {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.react-tagsinput-tag a::before {
+  /* content: " ×"; */
+}
+
+.react-tagsinput-input {
+  background: transparent;
+  border: 0;
+  color: #777;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  margin-top: 1px;
+  outline: none;
+  padding: 5px;
+  width: 80px;
+}
 
