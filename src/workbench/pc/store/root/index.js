@@ -15,6 +15,7 @@ import application from './application';
 import manage from './manage';
 import team from './team';
 import actions from './actions';
+import teamconfig from './teamconfig';
 
 const notification = Notification.newInstance({
   position: 'bottomRight',
@@ -185,6 +186,7 @@ export default function (state, action) {
     application: application(state ? state.application : undefined, action),
     manage: manage(state ? state.manage : undefined, action),
     team: team(state ? state.team : undefined, action),
+    teamconfig: teamconfig(state ? state.teamconfig : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;

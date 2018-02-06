@@ -41,9 +41,6 @@
   right: 0;
   bottom: 0;
   left: 0;
-  display: -webkit-box;
-   display: -moz-box;
-  display: -webkit-flex;
   display: flex;
   -webkit-box-orient: vertical;
   box-orient: vertical;
@@ -57,6 +54,7 @@
 }
 .um-content {
   overflow: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   -webkit-box-flex: 1;
   box-flex: 1;
@@ -64,27 +62,18 @@
   flex: 1;
   -webkit-transform-origin: top center;
   transform-origin: top center;
-  /*background: #e7e8ea;*/
+  background: #e7e8ea;
 }
 .um-footerbar {
-  display: -webkit-box;
-   display: -moz-box;
-  display: -webkit-flex;
   display: flex;
   border: none;
   border-radius: 0;
 }
 /*um-box*/
 .um-box {
-  display: -webkit-box;
-   display: -moz-box;
-  display: -webkit-flex;
   display: flex;
 }
 .um-vbox {
-  display: -webkit-box;
-   display: -moz-box;
-  display: -webkit-flex;
   display: flex;
   -webkit-box-orient: vertical;
   box-orient: vertical;
@@ -92,9 +81,6 @@
   flex-direction: column;
 }
 .um-hbox {
-  display: -webkit-box;
-   display: -moz-box;
-  display: -webkit-flex;
   display: flex;
   -webkit-box-orient: horizontal;
   box-orient: horizontal;
@@ -102,9 +88,6 @@
   flex-direction: row;
 }
 .um-box-justify {
-  display: -webkit-box;
-   display: -moz-box;
-  display: -webkit-flex;
   display: flex;
   -webkit-box-pack: justify;
   box-pack: justify;
@@ -116,9 +99,6 @@
   align-items: center;
 }
 .um-box-center {
-  display: -webkit-box;
-   display: -moz-box;
-  -webkit-box-align: center;
   box-align: center;
   -webkit-box-pack: center;
   box-pack: center;
@@ -128,6 +108,27 @@
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
+}
+.um-box-hc {
+  display: -webkit-box;
+  display: -moz-box;
+  -webkit-box-pack: center;
+  box-pack: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.um-box-vc {
+  display: -webkit-box;
+  display: -moz-box;
+  -webkit-box-align: center;
+  box-align: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
 }
 .um-bf1 {
   -webkit-box-flex: 1;
@@ -375,3 +376,35 @@
 .btn-block + .btn-block {
   margin-top: 5px;
 }
+
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 39.9px;
+  padding: 9px 12px;
+  font-size: 17px;
+  font-family: "Helvetica Neue", Helvetica, "Microsoft Yahei", STHeiTi, Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+  line-height: 1.5;
+  color: #555555;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: border-color ease-in-out 0.15s;
+}
+.form-control:focus {
+}
+.um-input-clear {
+  position: absolute;
+  right: 8px;
+  cursor: pointer;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  z-index: 2;
+  display: block;
+  color: #FFFFFF;
+  background: #cfcfcf;
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 12px;
+}
+

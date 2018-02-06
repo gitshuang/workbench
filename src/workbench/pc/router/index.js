@@ -11,6 +11,7 @@ import CreateTeam from 'pages/createteam';
 import CreateEnter from 'pages/createenter';
 import Invitation from 'pages/invitation';
 import Account from 'pages/account';
+import Teamconfig from 'pages/teamconfig';
 
 const routes = [
   {
@@ -25,6 +26,10 @@ const routes = [
   {
     path: '/createteam/:data',
     component: CreateTeam
+  },
+  {
+    path: '/teamconfig',
+    component: Teamconfig
   },
   {
     path: '/application',
