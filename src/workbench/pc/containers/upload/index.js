@@ -41,10 +41,10 @@ class UploadPage extends Component {
     from.append('file', obj);
     uploadApplication(from).then(({url}) => {
       this.setState({
-        applicationIcon: payload.url
+        applicationIcon: url
       });
       if (typeof this.props.onChange === 'function') {
-        this.props.onChange(payload.url);
+        this.props.onChange(url);
       }
     }, (e) => {
       console.log(e);

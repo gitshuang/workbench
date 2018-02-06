@@ -10,7 +10,7 @@ import Navbar from 'components/scrollNav';
 import { logoImg, header ,imgInner,all_btn,btn_disable} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
-const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo } = homeActions;
+const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay } = homeActions;
 
 const {
   requestStart,
@@ -29,6 +29,7 @@ const {
   {
     changeUserInfoDisplay,
     hideUserInfoDisplay,
+    changeRequestDisplay,
     getUserInfo,
     requestStart,
     requestSuccess,
@@ -55,11 +56,12 @@ class HeaderPage extends Component {
   }
   componentDidMount() {
     this.getUserInfo();
-    const { changeUserInfoDisplay } = this.props;
+    const { changeUserInfoDisplay,changeRequestDisplay } = this.props;
     //console.log(GetQueryString("create"));
     // 判断是否localstorage中包含这个值
     if(localStorage.getItem("create")) {
       changeUserInfoDisplay();
+      changeRequestDisplay();
       localStorage.removeItem("create");
     }
       // let ul = document.getElementById("nav_ul");

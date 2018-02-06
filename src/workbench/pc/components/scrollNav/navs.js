@@ -165,7 +165,7 @@ class Navs extends Component{
                   title={label}
                   delay={delay}>
                   {/* {label} */}
-                  {getStrLenSubstr(label,5,5)}
+                  {getStrLenSubstr(label,4,4)}
                 </Link>
               </li>
             ))
