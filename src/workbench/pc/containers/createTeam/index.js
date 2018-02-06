@@ -8,13 +8,16 @@ import teamActions from 'store/root/team/actions';
 import homeActions from 'store/root/home/actions';
 
 //
-import { FormControl, Checkbox, Button } from 'tinper-bee';
+import { FormControl, Checkbox, Button, Icon } from 'tinper-bee';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { changeUserInfoDisplay, getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
 import {
   wrap,
+  item,
+  image,
+  footer
 } from './index.css';
 
 @withRouter
@@ -133,28 +136,25 @@ class CreateTeamContent extends Component {
     return (
       <div className={wrap}>
         <h5>创建团队</h5>
-        <div className="um-box">
-          <label>团队名称<span>*</span>：</label>
+        <div className={item+" um-box"}>
+          <label>团队名称<span>*</span></label>
           <input
-            className="um-bf1"
             placeholder="最多60个字符"
             value={ value }
             onChange={(e)=>{this.onChange(e)}}
           />
         </div>
-        <div className="um-box" style={{margin:"20px 0"}}>
-          <label>团队头像：</label>
-          <div>
-            <div>
-              <img ref="imgSrc" src={ imgUrl } />
+        <div className={item+" um-box"}>
+          <label>团队头像</label>
+          <div className={image}>
+              { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
+              <div>
+                <Icon type="icon-copyreader" />  
+                <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
+              </div>
             </div>
-            {
-              imgWarning ? <p>{ imgWarning }</p> : null
-            }
-            <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
-          </div>
         </div>
-        <div>
+        <div className={footer}>
           <Button onClick={this.create}>创建</Button>
         </div>
       </div>

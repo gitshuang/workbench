@@ -1,25 +1,101 @@
 .wrap{
-  width: 1000px;
+  width: 1200px;
   margin: 0 auto;
-  padding: 200px;
+  background: #ffffff;
+  height:366px; 
+border-radius: 2px ; 
+margin-top: 8px;
+padding: 33px 50px 64px;
 }
 .wrap h5{
-  font-size: 20px;
   font-weight: 600;
   margin-bottom: 20px;
+  font-size:21px;
+  font-family:MicrosoftYaHei-Bold;
+  color:rgba(71,77,84,1);
+  line-height:27px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(13, 20, 36, 0.1);
+  padding-left: 350px;
 }
-.wrap img{
-  width: 100px;
-  height: 100px;
+.item{
+  padding-left: 343px;
+  margin-top: 24px;
 }
-.box{
-  width: 400px;
-  height: 400px;
-  margin: 0 10px;
-  border: 1px solid #999;
+.item label{
+  font-size:14px;
+  font-family:PingFangSC-Regular;
+  color:rgba(71,77,84,1);
+  line-height: 36px;
+  width: 70px;
+}
+.item label span{
+  color: #C4141B;
+}
+.item input{
+  width:338px;
+  height:36px; 
+  background:rgba(255,255,255,1);
+  border-radius: 3px ; 
+  outline: none;
+  padding: 0 10px;
+  border: 1px solid rgba(78, 89, 104, 0.2)
+}
+.image{
+  width: 64px;
+  height: 64px;
+  background: rgba(190,193,200,1);
+  border-radius: 100px ; 
+  position: relative;
+}
+.image img{
+  width: 64px;
+  height: 64px;
+  border-radius: 100px ; 
+}
+.image div{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background:rgba(0,0,0,0.6);
+  bottom: 0;
+  right: 0;
+  border-radius: 50% 50%;
+  text-align: center;
+  line-height: 24px;
+  padding-top: 2px;
+  cursor: pointer;
+}
+.image div i{
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+}
+.image input{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.footer{
+  margin-top: 32px;
+  border-top: 1px solid rgba(13, 20, 36, 0.1);
+  padding-top: 9px;
+  padding-left: 414px;
+  padding-bottom: 64px;
 }
 .wrap button{
-  display: block;
-  width: 100%;
-  height: 40px;
+  width:338px;
+height:32px; 
+background:rgba(225,76,70,1);
+border-radius: 3px ; 
+color: #ffffff;
+line-height: 32px;
+}
+.wrap button:hover{
+  background:rgba(225,76,70,1);
+  color: #ffffff;
 }
