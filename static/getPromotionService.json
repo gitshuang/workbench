@@ -1,0 +1,14 @@
+{
+    "data": [
+        {
+            "applicationName": "结算中心",
+            "promotionServiceId": "asdfasdfas223",
+            "serviceIcon": "http://dummyimage.com/20x20",
+            "serviceName": "友空间",
+            "serviceUrl": "http://www.baidu.com",
+            "accessTime":"12分钟"
+        }
+    ],
+    "msg": "",
+    "status": 1
+}

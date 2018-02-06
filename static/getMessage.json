@@ -1,0 +1,92 @@
+{
+  "data": [
+    {
+      "messageId": "001",
+      "content": "您收到了一封新邮件",
+      "title": "邮件",
+      "color": "light",
+      "position":"top",
+      "btns":[
+        {
+          "typeBtn": "查看",
+          "type":"mail:/work/3001",
+          "btnColor":"#1DCC77"
+        },
+        {
+          "typeBtn": "回复",
+          "type":"mail:/work/3001"
+        }
+      ],
+      "icon":"https://portal.yonyoucloud.com/workbench/user.png"
+    },
+    {
+      "messageId": "002",
+      "title": "通知",
+      "content": "明天下午李总召开会议，请您参加,紧急通知明天下午李总召开会议，请您参加，明天下午李总召开会议，请您参加，重要的事情说3遍",
+      "color": "light",
+      "btns":[
+        {
+          "typeBtn": "查看",
+          "type":"notice:/work/1101",
+          "btnColor":"#1DCC77"
+        },
+        {
+          "typeBtn": "回复",
+          "type":"notice:/work/1101",
+          "btnColor":"#D94343"
+        }
+      ],
+      "icon":"https://portal.yonyoucloud.com/workbench/user.png"
+    },
+    {
+      "messageId": "003",
+      "title": "审批",
+      "content": "别忘补考勤哦!!别忘补考勤哦!!别忘补考勤哦!!重要的事情说3遍",
+      "color": "light",
+      "btns":[
+        {
+          "typeBtn": "查看",
+          "type":"jump:/work/1103"
+        }
+      ],
+      "icon":"https://portal.yonyoucloud.com/workbench/user.png"
+    },
+    {
+      "messageId": "004",
+      "title": "张三",
+      "content": "别忘签到哦",
+      "color": "light",
+      "btns":[
+        {
+          "typeBtn": "签到",
+          "type":"tips:/work/4001",
+          "btnColor":"#D94343"
+        },
+        {
+          "typeBtn": "查看",
+          "type":"tips:/work/1103"
+        }
+      ],
+      "icon":"https://portal.yonyoucloud.com/workbench/user.png"
+    },
+    {
+      "messageId": "005",
+      "title": "审批",
+      "content": "某某填的单据需要您审批，烦请及时审批",
+      "color": "light",
+      "btns":[
+        {
+          "typeBtn": "批准",
+          "type":"tips:/work/1103"
+        },
+        {
+          "typeBtn": "拒绝",
+          "type":"tips:/work/4001",
+          "btnColor":"#D94343"
+        }
+      ],
+      "icon":"https://portal.yonyoucloud.com/workbench/user.png"
+    }
+  ],
+  "status": 1
+}

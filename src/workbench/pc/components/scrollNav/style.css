@@ -1,0 +1,141 @@
+.link {
+    display: flex;
+    padding: 0 10px;
+    cursor: pointer;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+    white-space: normal;
+    word-break: break-all;
+    font-size:15px;
+    color:rgba(136,136,136,1);
+    line-height: 32px;
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+
+.link:hover {
+    color: rgba(71,77,84,1);
+    text-decoration: unset;
+}
+.link:after{
+    content: '';
+    height: 8px;
+}
+.activeLink {
+    color: rgba(71,77,84,1);
+    text-decoration: unset;
+    font-weight: bold;
+    font-size:15px;
+    font-family:MicrosoftYaHei-Bold;
+    display:inline-block;
+}
+
+.activeLink:after{
+    content: '';
+    border: 3px solid rgba(225,76,70,1);
+    max-width: 28px;
+    min-width: 14px;
+    width: 50%;
+    height: 0;
+    margin: 0 auto;
+    margin-top: 2px;
+    border-radius: 3px;
+    display: block;
+}
+
+.item {
+    width: 100%;
+}
+.cover {
+  padding-left: 56px;
+  padding-right: 100px;
+}
+
+/* XL尺寸 */
+@media screen and (device-width: 1441px){
+    .cover{
+        padding-left: 73px;
+        padding-right: 73px;
+    }
+}
+/* L尺寸 */
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+    .cover{
+        padding-left: 52px;
+        padding-right: 102px;
+    }
+}
+/* M尺寸 */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+    .cover{
+        padding-left: 40px;
+        padding-right: 100px;
+    }
+}
+
+.navs {
+  margin: 0;
+  padding-left: 0;
+  position: relative;
+  height: 100%;
+  list-style: none;
+  display: inline-block;
+  /* border: 1px solid; */
+  width: 100%;
+  /* background: #ccc; */
+}
+.all_btn_ul{
+    white-space: nowrap;
+    overflow: hidden;
+    /* overflow-x: scroll;  1 */
+    /* border-bottom: 1px solid #DEE0E3; */
+}
+.navs::-webkit-scrollbar {
+    display: none
+}
+.content{
+  padding-top: 90px;
+  padding-left: 67px;
+  padding-right: 100px;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* XL尺寸 */
+@media screen and (device-width: 1441px){
+    .content{
+        padding-left: 84px;
+        padding-right: 76px;
+    }
+}
+/* L尺寸 */
+@media screen and (min-width: 1025px) and (max-width: 1440px) { /*手机*/
+    .content{
+        padding-left: 84px;
+        padding-right: 76px;
+    }
+}
+/* M尺寸 */
+@media screen and (min-width: 641px) and (max-width: 1024px) { /*手机*/
+    .content{
+        padding-left: 52px;
+        padding-right: 48px;
+    }
+}
+
+.navs>li{
+    display: inline-table;
+    height:44px;
+    /* margin-right:25px; */
+}
+/* jony */
+.content>div:first-child ul{
+    padding-top: 20px;
+}
+
+.all_btn{
+    border: 1px solid red;
+}

@@ -1,0 +1,19 @@
+{
+  "msg": 1,
+  "data": {
+      "userEmail": "",
+      "userId": "9ab8b615-a28c-43d6-9b3f-447be0d7299f",
+      "redPacketsNum": 0,
+      "gloriesNum": 0,
+      "allowTenants": [
+          1
+      ],
+      "userAvator": "",
+      "company": 1,
+      "userName": "maokunb",
+      "admin": false,
+      "userMobile": "181****9676",
+      "logo": "测试内容e6zu"
+  },
+  "status": 1
+}

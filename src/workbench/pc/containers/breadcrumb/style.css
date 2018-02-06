@@ -1,0 +1,48 @@
+.breadcrumbClass {
+  /* background: #fff; */
+  font-size:12px;
+}
+.breadcrumbClass :global(.iconfont) {
+  display:inline-block;
+  margin:-8px 0 0 14px;
+  vertical-align: middle;
+  line-height:27px;
+  color:#878B94;
+  cursor: pointer;
+  font-size:18px;
+  font-weight:bold;
+}
+.breadcrumbClass :global(.iconfont):hover{
+	color:#E14C46;
+}
+.menu_expended{
+  margin-left: 200px !important;
+}
+.breadcrumbClass section{
+  display: none;
+  width:200px;
+  height:38px;
+  padding:9px 17px;
+  border-radius: 0 3px 0 0;
+  background:#9FA4AE;
+  color:#fff;
+  font-size:14px;
+  position: relative;
+}
+.breadcrumbClass section :global(.iconfont){
+  margin:-2px 15px 0 0;
+  font-size:24px;
+  color:#fff;
+  position:absolute;
+  right:0;
+}
+.breadcrumbClass .breadcrumb_menu{
+  display: inline-block;
+}
+.breadcrumbClass .breadcrumb_tab{
+  display: none;
+}
+.breadcrumbArea{
+  margin-left: 15px;
+  display: inline-block;
+}

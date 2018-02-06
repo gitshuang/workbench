@@ -1,0 +1,113 @@
+{
+  "data": {
+    "applications": [
+      {
+      "applicationCode": "11112222",
+      "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e930.svg",
+      "applicationId": "11112222",
+      "applicationName": "通讯录",
+      "enable": true
+      },
+      {
+      "applicationCode": "11114444",
+      "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e90d.svg",
+      "applicationId": "11114444",
+      "applicationName": "日程",
+      "enable": true
+      },
+      {
+      "applicationCode": "app_1",
+      "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e97d.svg",
+      "applicationId": "app_1",
+      "applicationName": "系统管理",
+      "enable": true
+      },
+      {
+      "applicationCode": "app_2",
+      "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e98f.svg",
+      "applicationId": "app_2",
+      "applicationName": "权限管理",
+      "enable": true
+      },
+      {
+      "applicationCode": "app_3",
+      "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e93c.svg",
+      "applicationId": "app_3",
+      "applicationName": "组织管理",
+      "enable": true
+      },
+      {
+      "applicationCode": "app_4",
+      "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e982.svg",
+      "applicationId": "app_4",
+      "applicationName": "基础数据",
+      "enable": true
+      }
+    ],
+    "labelGroups": [
+      {
+      "labels": [
+        {
+          "appIds": [
+            "11112222",
+            "11114444",
+            "app_1",
+            "app_2",
+            "app_3",
+            "app_4"
+            ],
+          "labelId": "label1",
+          "labelName": "全部"
+        },
+        {
+          "appIds": [
+            "11112222",
+            "11114444",
+            "app_1"
+            ],
+          "labelId": "label2",
+          "labelName": "财务云"
+        },
+        {
+          "appIds": [
+            "app_2",
+            "app_3",
+            "app_4"
+            ],
+          "labelId": "label3",
+          "labelName": "协同云"
+        }
+      ],
+      "labelGroupName": "类别"
+      },
+      {
+      "labels": [
+        {
+          "appIds": [
+          "app_1",
+          "app_2",
+          "app_3",
+          "app_4"
+          ],
+        "labelId": "label4",
+        "labelName": "沟通"
+        },
+        {
+          "appIds": [
+          "11112222",
+          "11114444",
+          "app_1",
+          "app_2",
+          "app_3",
+          "app_4"
+          ],
+        "labelId": "label5",
+        "labelName": "领域二"
+        }
+      ],
+      "labelGroupName": "领域"
+      }
+    ]
+  },
+  "status": 1
+  }

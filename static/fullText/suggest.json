@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "type":"service",
+      "typeName":"服务",
+      "renderurl":"",
+      "content":[
+      "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
+      "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
+      "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}"
+      ]
+    }
+  ],
+  "status": 1
+}

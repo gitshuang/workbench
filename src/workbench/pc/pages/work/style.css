@@ -1,0 +1,116 @@
+body{
+  background-image:url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png");
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: 0% 100%, 100% 5%, 90% 100%;
+  background-attachment:fixed;
+}
+.header{
+    position: fixed!important;
+    width: 100%;
+    min-height: 44px;
+    background:url("assets/image/wgt/navBar_bg.png") no-repeat;
+    background-position: right;
+    background-color:rgba(255,255,255,0.92);
+    z-index: 100;
+}
+.header :global(.iconfont){
+  cursor: pointer;
+  color: rgba(135,139,148,1);
+}
+.header :global(.icon-pin2){
+  color: rgba(135,139,148,1)
+}
+.active {
+  color: red;
+}
+.workArea {
+  flex: 1;
+  display: flex;
+}
+.wrap :global(.icon-dingzhi.active){
+  color: red;
+}
+.wrap :global(.um-content) {
+  flex-direction: column;
+  display: flex;
+  margin-top: 83px;
+  overflow: hidden;
+}
+.wrap :global(.lebra-navbar-left-icon){
+  padding:4px 0;
+}
+.sideBarArea {
+  width: 200px;
+}
+.contentArea {
+  flex: 1;
+}
+.hasTab {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+}
+.tabArea {
+  height: 48px;
+}
+.title_service_display{
+  color:#E14C46 !important;
+}
+.work :global(.lebra-navbar-left){
+  padding-left: 7px;
+}
+.work :global(.lebra-navbar-left-content){
+  margin-left: 8px;
+}
+.titleArea {
+  text-align: center;
+  position: relative;
+}
+.titleArea span{
+  color:rgba(71,77,84,1);
+}
+.service, .pin {
+  /* position: absolute; */
+  font-size:18px;
+}
+.service {
+  /* right: -27px; */
+  margin-left: 9px;
+}
+.pin {
+  /* right: -58px; */
+  margin-left: 15px;
+}
+:global(.u-message){
+  top:40px !important;
+}
+:global(.u-message-notice-light){
+  width:auto !important;
+  left: 50%;
+  transform: translate(-50%);
+}
+:global(.u-message-notice-close){
+  display: none;
+}
+:global(.u-message-notice-description-content){
+  padding:30px 0;
+  font-size: 19px;
+  line-height: 24px;
+  margin-left: 55px;
+}
+:global(.u-message-notice-description-icon){
+  background: #00CB7C !important;
+  top:32px;
+  left:20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50%;
+}
+:global(.u-message-notice-description-icon .uf){
+  font-size: 12px;
+  color: #fff;
+  padding:0;
+}
+:global(.uf-notification:before){
+  content: "\e658";
+}

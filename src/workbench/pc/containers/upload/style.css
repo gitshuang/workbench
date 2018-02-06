@@ -1,0 +1,54 @@
+.upload_page{
+  position: relative;
+  margin-top: -16px;
+}
+
+.uploadImg {
+  width: 87px;
+  height: 26px;
+  background: rgba(225, 76, 70, 1);
+  border-radius: 3px;
+  margin-left: 127px;
+  margin-top: 8px;
+  color: rgba(255,255,255,1);
+  font-size: 12px;
+}
+
+.appImg{
+  /*background: rgba(186,191,197,0.18);*/
+  /* background: url("assets/image/uploadImg.svg") no-repeat; */
+
+  width:64px;
+  height:64px; 
+  background:rgba(190,193,200,1);
+  border-radius: 50%;
+}
+
+.appValidate{
+  color: rgb(244, 67, 54);
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.upload_page :global(.u-button){
+  padding: 0;
+}
+
+.edit{
+  width:24px;
+  height:24px; 
+  background:rgba(0,0,0,0.6);
+  position: absolute;
+  right: 0px;
+  bottom: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.edit i{
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  line-height: 24px;
+  display: block;
+}

@@ -1,0 +1,51 @@
+.lebraNavbar{
+  height: 48px;
+}
+:global(.lebra-navbar-left-icon){
+  width:32px;
+  height: 32px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  color: #878b94;
+}
+:global(.lebra-navbar-left-content){
+  padding-left: 20px;
+  font-size:14px;
+  font-family:MicrosoftYaHei;
+  color:#4a515d;
+}
+:global(.lebra-navbar-title){
+  font-size:14px;
+  font-family:MicrosoftYaHei;
+  color:#4a515d;
+  line-height:19px;
+}
+.rightBtn{
+  width:32px;
+  height: 32px;
+  line-height: 32px;
+  position: relative;
+  cursor: pointer;
+}
+:global(.lebra-navbar-right) :global(.iconfont){
+  font-size:20px;
+  font-weight:bold;
+  color: #878b94;
+  vertical-align: middle;
+}
+:global(.lebra-navbar-right) :global(.active) :global(.iconfont){
+  color: #e14c46;
+}
+:global(.lebra-navbar-right) :global(.CircleDot){
+  position: absolute;
+  width:6px;
+  height: 6px;
+  background: #e14c46;
+  border-radius: 50% 50%;
+  top:5px;
+  right:5px;
+}
+:global( .tc i:hover ){
+  color:#2D3F5D;
+}
