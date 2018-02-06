@@ -27,6 +27,10 @@
   /*-o-transform: translate3d(0,0,0);*/
   /*transform: translate3d(0,0,0);*/
 /*}*/
+.wrap>div:first-child{
+  border-bottom: 1px solid rgba(13,20,36,0.1);
+  margin-bottom: 24px;
+}
 .imgUser{
   position:relative;
   width: 70px;
@@ -149,7 +153,7 @@
   display:table;
   margin: 0 auto;
   margin-top: 5px;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 .gloryIcon li{
   display: table-cell;
@@ -206,13 +210,10 @@
 .userBtnList li{
   float : left;
 }
-.userBtnList li:nth-child(1)>button{
+.userBtnList li>button,.createBtnList li>button{
   border: none;
   background: rgba(9,44,66,0.04);
-  border-radius: 0;
-}
-.userBtnList li:nth-child(2){
-  margin-right: 8px;
+  border-radius: 2px;
 }
 .serviceImg img{
   width: 100%;
@@ -344,10 +345,6 @@
 .userBtnList :global(.u-select){
   height:26px;
 }
-.userBtnList{
-  margin-left: 33px;
-  margin-bottom:22px;
-}
 .wrap :global(.u-tabs-tab.u-tabs-tab-active){
   font-weight: bold;
   color:#4A515D;
@@ -430,16 +427,21 @@
 }
 /* tenant */
 .tenantArea {
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  padding: 15px;
+  border: 1px solid rgba(78,89,104,0.19);
+  border-radius: 3px;
+  box-shadow:0 1px 1px 0 rgba(74, 81, 93, 0.1);
+  padding: 34px 0 16px 43px;
 }
 .tenantArea>div:first-child{
   display: flex;
   flex-direction: row;
 }
 .tenantName{
-  margin-bottom: 28px;
+  margin: 8px 0;
+}
+.tenantDescribe{
+  width:100%;
+  margin-right: 5px;
 }
 .tenantDescribe>div{
   display: flex;
@@ -453,6 +455,9 @@
 .createBtnList li{
   float : left;
 }
+.createBtnList>div{
+  margin-bottom: 8px;
+}
 .createBtnList :global(.u-button){
   width:91px;
   height:32px;
@@ -461,8 +466,17 @@
 }
 .createBtnList{
   margin-left: 33px;
-  margin-top:22px;
+  margin-top:64px;
+}
+.tenantPortrait .imgOuter{
+  width: 64px;
+  height: 64px;
+  margin: 0 25px 44px 0;
 }
 .tenantPortrait .defaultPic i{
-  font-size: 70px;
+  font-size: 64px;
+}
+/* IE9个人中心 */
+:global(.ie9) .tenantArea>div:first-child{
+  float: left;
 }

@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "formal": "node scripts/formal.js"
   },
   "dependencies": {
     "animate.css": "^3.5.2",
@@ -22,7 +23,7 @@
     "bee-checkbox": "^1.0.1",
     "bee-city-select": "^1.0.1",
     "bee-dropdown": "^1.0.1",
-    "bee-form": "^1.0.25",
+    "bee-form": "^1.1.9",
     "bee-form-control": "^1.0.4",
     "bee-icon": "^1.0.3",
     "bee-layout": "^1.2.7",

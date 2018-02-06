@@ -1,7 +1,7 @@
 var webpackConfig = require('./webpack')
 
 var config = {
-  env: '"production"',
+  env: '"development"',
   assetsSubDirectory: 'static',
   // assetsPublicPath: 'https://cdn.yonyoucloud.com/',
   assetsPublicPath: 'http://workbench.yyuap.com/fe/',

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { ButtonBrand } from 'components/button';
 import { uploadApplication }from 'store/root/api';
-import { upload_page, appImg, appValidate, uploadImg } from './style.css';
+import Icon from 'components/icon';
+import { upload_page, appImg, appValidate, uploadImg ,edit} from './style.css';
 
 class UploadPage extends Component {
   constructor(props){
@@ -56,8 +57,8 @@ class UploadPage extends Component {
 		return(
 		  <div className={upload_page}>
         {
-          applicationIcon ? (
-            <img id="imgSrc" className={appImg} />
+          applicationIcon == ""? (
+            <div className={appImg} />
           ) : (
             <img id="imgSrc" src={applicationIcon} className={appImg} />
           )
@@ -68,7 +69,10 @@ class UploadPage extends Component {
           ) : null
         }
         <input type="file" ref="file" onChange={this.imgChange} style={{display:"none"}}/>
-        <ButtonBrand className={uploadImg} onClick={this.uploadImage}>上传图片</ButtonBrand>
+        <div className={edit} onClick={this.uploadImage} >
+          <Icon type="copyreader"/>
+        </div>
+        {/* <ButtonBrand className={uploadImg} onClick={this.uploadImage}>上传图片</ButtonBrand> */}
       </div>
 		)
 	}

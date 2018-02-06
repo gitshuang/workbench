@@ -9,7 +9,7 @@ import BreadcrumbContainer from 'components/breadcrumb';
 import {ButtonBrand} from 'components/button';
 import SuccessDialog from './successDialog';
 import Tabs, { TabPane } from 'bee-tabs';
-import FormControl from 'bee-form-control';
+import TagsInput from 'components/tagsInput';
 
 import {
   header,
@@ -52,7 +52,7 @@ class Invitation extends Component {
     super(props);
     this.state = {
       url: '',
-      mails: ['', ''],
+      mails: [],
       successDialogShow: false,
     }
     this.goBack = this.goBack.bind(this);
@@ -115,6 +115,9 @@ class Invitation extends Component {
         });
     }
   }
+  handleChange = (tags) => {
+    this.setState({mails:tags})
+  }
   closeSuccessDialog = () => {
     this.setState({
       successDialogShow: false,
@@ -127,7 +130,6 @@ class Invitation extends Component {
       errorDialogShow,
       successDialogShow,
     } = this.state;
-    console.log('successDialogShow : '+successDialogShow);
     return (
       <div className="um-win">
         <div className={header}>
@@ -159,8 +161,18 @@ class Invitation extends Component {
               </TabPane>
               <TabPane tab='邮件邀请' key="2" className={tabPane2}>
                 <p>输入邮箱地址并用 “;” 隔开</p>
-                {/* <FormControl componentClass='textarea' name="mailList" /> */}
-                <ul className={mailList}>
+                <TagsInput
+                  value={this.state.mails}
+                  addKeys={[13,186]} // enter,semicolon
+                  onlyUnique
+                  addOnPaste
+                  validationRegex={regMail}
+                  pasteSplit={data => {
+                    return data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())
+                  }}
+                  onChange={this.handleChange.bind(this)}
+                />
+                {/* <ul className={mailList}>
                 {
                   mails.map((mail, i) => {
                     return (
@@ -175,7 +187,7 @@ class Invitation extends Component {
                     );
                   })
                 }
-                </ul>
+                </ul> */}
                 <ButtonBrand className={submitBtn} onClick={this.submit} >确定发送</ButtonBrand>
               </TabPane>
             </Tabs>

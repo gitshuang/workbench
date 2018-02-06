@@ -84,6 +84,7 @@
   color: #474D54;
 }
 .urlArea input{
+  width:80%;
   margin-left: 48px;
   border:none;
   background:transparent;
