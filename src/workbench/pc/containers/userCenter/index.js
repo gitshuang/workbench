@@ -240,7 +240,8 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
   logOut=()=>{
-    window.location.href = `/logout?service=${encodeURIComponent(`${window.location.origin}/`)}`;
+    const { location: {origin} } = window;
+    window.location.href = `/logout?service=${encodeURIComponent(`${origin?origin:''}/`)}`;
   }
   changeTenant(tenantId){
     const {
@@ -334,19 +335,19 @@ class UserInfoContainer extends Component {
             </li>
           </ul>
         </div>
-        <div>
+        {/* <div>
           <ul className={`${userBtnList} ${clearfix}`}>
             <li><Button shape="border" size="sm" onClick={this.accountManage.bind(this)}>账号管理</Button></li>
             <li><Button shape="border" size="sm" onClick={this.getUserOrder.bind(this)}>我的订单</Button></li>
-            {/* <li>
+            <li>
               {renderAllow}
             </li>
             <li>
               <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")}
                label="系统设置" dataItem={_menuDataItem} />
-            </li> */}
+            </li>
           </ul>
-        </div>
+        </div> */}
         <div className={tenantArea}>
           <div>
             <div className={tenantPortrait}>
@@ -361,20 +362,6 @@ class UserInfoContainer extends Component {
               <div className={tenantName} title={company}>{company}</div>
               <div style={{'marginBottom':15}}>
                 <div className={companyType}>{this.getCompanyType()}</div>
-                <DropdownButton
-                    getPopupContainer={() => document.getElementById("modalId")}
-                    label="切换" dataItem={
-                      allowTenants.map(({
-                        tenantId: name,
-                        tenantName: value,
-                      }) => {
-                        return {
-                          name,
-                          value,
-                          fun: this.changeTenant,
-                        };
-                      })
-                    } />
               </div>
             </div>
           </div>
@@ -392,11 +379,25 @@ class UserInfoContainer extends Component {
         </div>
         <div>
             <ul className={`${createBtnList} ${clearfix}`}>
+              <DropdownButton
+                getPopupContainer={() => document.getElementById("modalId")}
+                label="切换" dataItem={
+                  allowTenants.map(({
+                    tenantId: name,
+                    tenantName: value,
+                  }) => {
+                    return {
+                      name,
+                      value,
+                      fun: this.changeTenant,
+                    };
+                  })
+                } />
               <li><Button shape="border" size="sm" onClick={this.gotoCreateTeam}>创建团队</Button></li>
               <li><Button shape="border" size="sm" onClick={this.gotoCreateEnter}>创建企业</Button></li>
             </ul>
           </div>
-        <div className={"um-content" + ` ${tabContent}`}>
+        {/* <div className={"um-content" + ` ${tabContent}`}>
 
           <Tabs
             defaultActiveKey="1"
@@ -415,7 +416,7 @@ class UserInfoContainer extends Component {
               </ul>
             </TabPane>
           </Tabs>
-        </div>
+        </div> */}
       </div>
     );
   }
