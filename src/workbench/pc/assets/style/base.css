@@ -236,12 +236,12 @@ body {
 
 /* tagsInput */
 .react-tagsinput {
-  /* background-color: #fff; */
+  height: 250px;
   border: 1px solid #ccc;
   border-radius: 3px;
   overflow: hidden;
-  padding-left: 8px;
-  padding-top: 8px;
+  padding:8px 0 0 8px;
+  margin-bottom: 8px;
 }
 
 .react-tagsinput--focused {
@@ -257,7 +257,7 @@ body {
   font-family: sans-serif;
   font-size: 13px;
   font-weight: 400;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   margin-right: 8px;
   padding: 5px 7px;
 }
@@ -267,9 +267,9 @@ body {
   font-weight: bold;
 }
 
-.react-tagsinput-tag a::before {
-  /* content: " ×"; */
-}
+/* .react-tagsinput-tag a::before {
+  content: " ×";
+} */
 
 .react-tagsinput-input {
   background: transparent;
@@ -282,6 +282,5 @@ body {
   margin-top: 1px;
   outline: none;
   padding: 5px;
-  width: 80px;
 }
 

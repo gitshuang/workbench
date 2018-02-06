@@ -251,7 +251,7 @@ class UserInfoContainer extends Component {
       },
     } = window;
     window.location.replace(
-      `${origin}${pathname}?tenantId=${tenantId}&switch=true${hash}`,
+      `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
     );
   }
   render() {
