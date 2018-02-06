@@ -307,9 +307,17 @@ export function getStrLenSubstr(str, zh_len, cn_len, sl) {
   let newStr = "";
   var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
   if (reg.test(str)) {
-    newStr = str.length > zh_len ? str.substring(0, zh_len) + (sl ? "" : "...") : str;
-  } else {
-    newStr = str.length > cn_len ? str.substring(0, cn_len) + (sl ? "" : "...") : str;
+    if(str.length == zh_len){
+      newStr = str;
+    }else{
+      newStr = str.length > zh_len ? str.substring(0, zh_len) + (sl ? "" : "...") : str;
+    }
+  } else { 
+    if(str.length == cn_len){
+      newStr = str;
+    }else{
+      newStr = str.length > cn_len ? str.substring(0, cn_len) + (sl ? "" : "...") : str;
+    }
     // newStr = str.substring(0,cn_len)+(sl?"":"...");
   }
   return newStr;

@@ -54,7 +54,7 @@ class QuickServiceContainer extends Component {
   onClickScroll = (e) => {
     let div = this.refs.list;
     const { serviceList } = this.props;
-    let bottom = serviceList.length * div.offsetHeight;
+    let bottom = div.offsetHeight;
     let _top = 0;
     if(this.interval){
       clearInterval(this.interval);
@@ -65,7 +65,6 @@ class QuickServiceContainer extends Component {
             this.interval = null;
             _top = 0;
           }else{
-            
            if(div.pageYOffset){
               div.pageYOffset = (div.pageYOffset+3);
            }else if(div.scrollTo){
