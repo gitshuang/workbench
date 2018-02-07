@@ -31,19 +31,21 @@
   border-bottom: 1px solid rgba(13,20,36,0.1);
   margin-bottom: 24px;
 }
+.userInfoPane{
+  display: flex;
+  margin-top: 70px;
+}
 .imgUser{
   position:relative;
-  width: 70px;
-  margin: 0 auto;
-  margin-top: 24px;
-  margin-bottom: 5px;
+  width: 64px;
+  margin-left: 32px;
 }
 .imgUser:hover .editPortrait{
   display: block;
 }
 .editPortrait{
-  width:70px;
-  height:70px;
+  width:64px;
+  height:64px;
   position:absolute;
   left:0;
   top:0;
@@ -61,15 +63,15 @@
   cursor:pointer;
 }
 .imgOuter{
-  width:70px;
-  height:70px;
+  width:64px;
+  height:64px;
   border:1px solid #ddd;
   border-radius:44px;
   overflow:hidden;
 }
 .imgInner{
-  width:70px;
-  height:70px;
+  width:64px;
+  height:64px;
 }
 .userInfo{
   float: left;
@@ -153,7 +155,7 @@
   display:table;
   margin: 0 auto;
   margin-top: 5px;
-  margin-bottom: 18px;
+  margin-bottom: 28px;
 }
 .gloryIcon li{
   display: table-cell;
@@ -398,11 +400,11 @@
 .defaultPic {
   background: #BEC1C8;
   border-radius: 50px;
-  width:70px;
-  height:70px;
-  font-size: 70px;
+  width:64px;
+  height:64px;
+  font-size: 64px;
   color: #fff;
-  line-height: 70px;
+  line-height: 64px;
   overflow: hidden;
 }
 .logOut{
@@ -420,6 +422,18 @@
 }
 
 .logOut >i{
+  font-size: 20px;
+  color: rgba(117,127,140,1);
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.userSetting{
+  position: absolute;
+  left: 16px;
+  top: 22px;
+  cursor: pointer;
+}
+.userSetting >i{
   font-size: 20px;
   color: rgba(117,127,140,1);
   margin-right: 5px;

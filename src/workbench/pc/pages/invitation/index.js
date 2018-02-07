@@ -101,7 +101,7 @@ class Invitation extends Component {
       sendMessage(mails).then((data) => {
         requestSuccess();
         this.setState({
-          mails: ['', ''],
+          mails: [],
           // successDialogShow: false,
         }); 
       }, (err)=>{

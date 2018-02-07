@@ -18,7 +18,7 @@ import img2 from 'assets/image/wgt/intelligent_logo.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList
+  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane
 } from './style.css';
 
 const {
@@ -313,28 +313,34 @@ class UserInfoContainer extends Component {
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
-          <div className={imgUser}>
-            <div className={imgOuter}>
-              {this.getIcon(imgsrc)}
-            </div>
-            <div className={editPortrait}  >
-              <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
-            </div>
+          <div className={userSetting} onClick={this.accountManage.bind(this)}>
+            <Icon type="setting" />
           </div>
-          <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
           <div className={logOut} onClick={this.logOut}>
             <Icon type="exit" />
             <span>注销</span>
           </div>
-
-          <ul className={`${gloryIcon} ${clearfix}`}>
-            <li>
-              <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
-            </li>
-            <li>
-              <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
-            </li>
-          </ul>
+          <div className={userInfoPane}>
+            <div className={imgUser}>
+              <div className={imgOuter}>
+                {this.getIcon(imgsrc)}
+              </div>
+              {/* <div className={editPortrait}  >
+                <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
+              </div> */}
+            </div>
+            <div>
+              <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
+              <ul className={`${gloryIcon} ${clearfix}`}>
+                <li>
+                  <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
+                </li>
+                <li>
+                  <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         {/* <div>
           <ul className={`${userBtnList} ${clearfix}`}>
@@ -355,9 +361,6 @@ class UserInfoContainer extends Component {
               <div className={imgOuter}>
                 {this.getIcon(logo)}
               </div>
-              {/* <div className={editPortrait}  >
-                <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
-              </div> */}
             </div>
             <div className={tenantDescribe}>
               <div className={tenantName} title={company}>{company}</div>
