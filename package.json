@@ -29,6 +29,8 @@
     "bee-modal": "^1.0.2",
     "bee-notification": "^1.0.0",
     "bee-pagination": "^1.0.2",
+    "bee-radio": "^1.0.3",
+    "bee-select": "^1.0.4",
     "bee-tabs": "^1.0.5",
     "classnames": "^2.2.5",
     "es6-symbol": "^3.1.1",
