@@ -12,3 +12,4 @@ export const setCutUser = () => get('/user/setCutUser');
 export const setCreateEnter = (list) => {
   return post('/manager/teamEnter/createEnter', list);
 }
+export const getEnterInfo = (param) => get('/enter/getEnterInfo?enterId='+param);

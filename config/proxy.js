@@ -12,7 +12,7 @@ var api = [
 
   '/user/setCutUser',
   '/user/getUserInfo',
-
+  
   '/getMessage',
   '/getSelectWidgetList',
   '/setManageList',
@@ -28,7 +28,9 @@ var api = [
 
   '/invite/getInviteUsersJoinAddress',
   '/invite/sendMessage',
+
   '/manager/teamEnter/createEnter',
+  '/enter/getEnterInfo',
 ]
 
 var rapApi = [
