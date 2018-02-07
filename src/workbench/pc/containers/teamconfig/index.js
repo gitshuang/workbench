@@ -74,10 +74,10 @@ class CreateTeamContent extends Component {
       imgWarning: "",       // 团队头像警告格式
       imgUrl: "",           //   基础设置  选择头像回显
       backUrl: "",          // 上传成功后返回的url
-      selectedValue1: "0",  //搜索可见
-      selectedValue2: "0",  //允许用户是否退出空间
-      request: "all",       //邀请成员权限
-      join: "allow",        //加入权限
+      searchAvalible: "true",  //搜索可见
+      selectedValue2: "false",  //允许用户是否退出空间
+      invitePermission: "1",       //邀请成员权限
+      joinPermission: "1",        //加入权限
       btnType: "web",       // 团队应用当前按钮
       deleteMemberId: "",   // 选择删除成员的ID
 
@@ -152,20 +152,20 @@ class CreateTeamContent extends Component {
   }
   // 基础设置  搜索可见是否
   handleRadioChange1 = (value) => {
-    this.setState({ selectedValue1: value });
+    this.setState({ searchAvalible: value });
   }
   // 基础设置    邀请成员权限
   handleChange1 = value => {
     console.log(`selected ${value}`);
     this.setState({
-      request: value
+      invitePermission: value
     });
   };
    // 基础设置加入权限
   handleChange2 = value => {
     console.log(`selected ${value}`);
     this.setState({
-      join: value
+      joinPermission: value
     });
   };
   // 基础设置  用户退空间 是否允许
@@ -174,18 +174,27 @@ class CreateTeamContent extends Component {
   }
   // 基础设置  保存
   create = () => {
-    const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
-    const { value, backUrl } = this.state;
+    const { tenantId, logo, createTeam, requestStart, requestSuccess, requestError } = this.props;
+    const { 
+      value, 
+      backUrl,
+      searchAvalible,  //搜索可见
+      selectedValue2,  //允许用户是否退出空间
+      invitePermission,       //邀请成员权限
+      joinPermission,        //加入权限
+    } = this.state;
     if (!value) {
       alert("请输入团队名称");
       return false;
     }
     let data = {
-      tenantName: value
+      tenantName: value,
+      tenantId: tenantId,
+      logo: backUrl || logo,
+      searchAvalible: Boolean(searchAvalible) ,
+      invitePermission: Number(invitePermission),
+      joinPermission: Number(joinPermission),
     };
-    if (backUrl) {
-      data.logo = backUrl;
-    }
 
     requestStart();
     createTeam(data).then(({ error, payload }) => {
@@ -232,12 +241,12 @@ class CreateTeamContent extends Component {
           <label>搜索可见</label>
           <div className="um-box-vc">
             <Radio.RadioGroup
-              name="yssorno"
-              selectedValue={this.state.selectedValue1}
+              name="searchAvalible"
+              selectedValue={this.state.searchAvalible}
               onChange={this.handleRadioChange1}
             >
-              <Radio value="0">否</Radio>
-              <Radio value="1">是</Radio>
+              <Radio value="false">否</Radio>
+              <Radio value="true">是</Radio>
             </Radio.RadioGroup>
           </div>
         </div>
@@ -245,13 +254,12 @@ class CreateTeamContent extends Component {
           <label>邀请成员权限</label>
           <div>
             <Select
-              defaultValue="all"
+              defaultValue="1"
               style={{ width: 200, marginRight: 6 }}
               onChange={this.handleChange1}
             >
-              <Option value="all">全员邀请</Option>
-              <Option value="member">所有成员</Option>
-              <Option value="enable">禁止邀请</Option>
+              <Option value="1">全员邀请</Option>
+              <Option value="2">全员禁止</Option>
             </Select>
           </div>
         </div>
@@ -259,12 +267,12 @@ class CreateTeamContent extends Component {
           <label>加入权限</label>
           <div>
             <Select
-              defaultValue="allow"
+              defaultValue="1"
               style={{ width: 200, marginRight: 6 }}
               onChange={this.handleChange2}
             >
-              <Option value="allow">所有用户都可申请加入</Option>
-              <Option value="enable">禁止用户申请加入</Option>
+              <Option value="1">所有用户都可申请加入</Option>
+              <Option value="2">禁止用户申请加入</Option>
             </Select>
           </div>
         </div>
@@ -276,8 +284,8 @@ class CreateTeamContent extends Component {
               selectedValue={this.state.selectedValue2}
               onChange={this.handleRadioChange2}
             >
-              <Radio value="0">禁止</Radio>
-              <Radio value="1">允许</Radio>
+              <Radio value="false">禁止</Radio>
+              <Radio value="true">允许</Radio>
             </Radio.RadioGroup>
           </div>
         </div>
