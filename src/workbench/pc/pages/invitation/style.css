@@ -60,6 +60,7 @@
 }
 .wrap :global(.u-tabs){
   width: 707px;
+  margin: 0 auto;
   border-bottom:none;
   overflow: hidden;
 }

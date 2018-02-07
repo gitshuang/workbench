@@ -350,7 +350,7 @@ class UserInfoContainer extends Component {
           </ul>
         </div> */}
         <div className={tenantArea}>
-          <div>
+          <div className={clearfix}>
             <div className={tenantPortrait}>
               <div className={imgOuter}>
                 {this.getIcon(logo)}

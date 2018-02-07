@@ -477,6 +477,6 @@
   font-size: 64px;
 }
 /* IE9个人中心 */
-:global(.ie9) .tenantArea>div:first-child{
+:global(.ie9) .tenantPortrait{
   float: left;
 }
