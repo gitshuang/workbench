@@ -10,7 +10,15 @@ import TeamRemoveModal from 'containers/teamRemoveModal';
 import TeamUpgradeModal from 'containers/teamUpgradeModal';
 
 
-import { Checkbox, Button, Icon, Tabs, Dropdown, Menu, Radio, Select } from 'tinper-bee';
+import { Radio, Select } from 'tinper-bee';
+import Checkbox from 'bee/checkbox';
+import Button from 'bee/button';
+import Icon from 'bee/icon';
+import Tabs from 'bee/tabs';
+import Dropdown from 'bee/dropdown';
+import Menu from 'bee/menus';
+//import Radio from 'bee/radio';
+//import Select from 'bee/select';
 const { TabPane } = Tabs;
 const { Item } = Menu;
 const Option = Select.Option;
