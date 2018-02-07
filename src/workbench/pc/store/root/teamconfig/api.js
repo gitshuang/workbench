@@ -7,3 +7,9 @@ export const uploadApplication = (data) => postFileCros(
 export const createTeam = (data) =>{
   return post('/manager/teamEnter/createTeam',data);
 }
+export const changeIdentity = (data) =>{
+  return post('/manager/teamEnter/createTeam',data);
+}
+export const removeUser = (id) =>{
+  return post('/manager/teamEnter/createTeam',{id});
+}

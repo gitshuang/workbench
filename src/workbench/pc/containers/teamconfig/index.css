@@ -81,6 +81,13 @@
 .content :global(.u-tabs-top){
   border: none;
 }
+.content :global(.u-tabs-top .u-tabs-tabpane-inactive){
+  height: auto;
+  min-height: 554px;
+}
+.content :global(.u-tabs-tabpane){
+  background: #ffffff;
+}
 .box{
   background: #ffffff;
   padding: 0 100px;
