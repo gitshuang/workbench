@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import actions from 'store/root/work/actions';
-import Menu, { SubMenu } from 'bee-menus';
+import Menu, { SubMenu } from 'bee/menus';
 // import { Scrollbars } from 'react-custom-scrollbars';
 import { mapStateToProps, findPath } from '@u';
 import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu} from './style.css';

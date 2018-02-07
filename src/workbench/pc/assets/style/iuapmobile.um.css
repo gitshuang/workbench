@@ -62,7 +62,7 @@
   flex: 1;
   -webkit-transform-origin: top center;
   transform-origin: top center;
-  background: #e7e8ea;
+  /* background: #e7e8ea; */
 }
 .um-footerbar {
   display: flex;

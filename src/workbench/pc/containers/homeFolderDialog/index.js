@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'bee-button';
+import Button from 'bee/button';
 import PopDialog from 'components/pop';
 import { withRouter } from 'react-router-dom'
 import WidgetMaker from 'components/widget';

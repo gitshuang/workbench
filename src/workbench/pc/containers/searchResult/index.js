@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
-import Button from 'bee-button';
+import Button from 'bee/button';
 import Icon from 'components/icon';
-import InputGroup from 'bee-input-group';
-import AutoComplete from 'bee-autocomplete';
-import FormControl from 'bee-form-control';
-import Menu from 'bee-menus';
-import ButtonGroup from 'bee-button-group';
+// import InputGroup from 'bee-input-group';
+// import AutoComplete from 'bee-autocomplete';
+import FormControl from 'bee/form-control';
+import Menu from 'bee/menus';
+// import ButtonGroup from 'bee/button-group';
 import GoTo from './goto';
-import Select from 'bee-select';
-import Tabs, { TabPane } from 'bee-tabs';
-import Pagination from 'bee-pagination';
+// import Select from 'bee-select';
+import Tabs, { TabPane } from 'bee/tabs';
+import Pagination from 'bee/pagination';
 
 import {
   bg,

@@ -2,8 +2,8 @@ import React from 'react';
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import { mergeReducers } from '@u';
-import Loading from 'bee-loading';
-import Notification from 'bee-notification';
+import Loading from 'bee/loading';
+import Notification from 'bee/notification';
 
 import Notice from 'components/notice';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';

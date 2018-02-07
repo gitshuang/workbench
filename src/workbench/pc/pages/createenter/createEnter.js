@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Form, { FormItem } from 'bee-form';
+import Form, { FormItem } from 'bee/form';
 import Upload from 'containers/upload';
 import { FormControl, Radio,Select } from 'tinper-bee';
 import { ButtonBrand } from 'components/button';

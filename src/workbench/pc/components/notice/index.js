@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import store from 'store';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
-import Button from 'bee-button';
+import Button from 'bee/button';
 import { dispatchMessageTypeHandler, parseType } from 'public/regMessageTypeHandler';
 import {closeNotice} from "./index.css";
 

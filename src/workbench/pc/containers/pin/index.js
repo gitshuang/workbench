@@ -9,7 +9,7 @@ import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 /*  comp */
 import MoveToGroup from 'components/moveToGroup';
-import Button from 'bee-button';
+import Button from 'bee/button';
 import Icon from 'components/icon';
 /*  style */
 import 'assets/style/iuapmobile.um.css'

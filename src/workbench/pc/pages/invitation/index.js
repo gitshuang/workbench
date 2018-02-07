@@ -8,7 +8,8 @@ import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
 import {ButtonBrand} from 'components/button';
 import SuccessDialog from './successDialog';
-import Tabs, { TabPane } from 'bee-tabs';
+import Tabs, { TabPane } from 'bee/tabs';
+import FormControl from 'bee/form-control';
 import TagsInput from 'components/tagsInput';
 
 import {
