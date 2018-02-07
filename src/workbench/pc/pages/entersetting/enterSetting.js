@@ -34,7 +34,7 @@ class Nature extends Component {
     this.setState({
       value
     });
-    this.props.onChange(value);
+    // this.props.onChange(value);
   }
   
   render() {
