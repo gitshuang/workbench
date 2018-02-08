@@ -94,6 +94,7 @@ background:rgba(225,76,70,1);
 border-radius: 3px ; 
 color: #ffffff;
 line-height: 32px;
+font-size: 14px;
 }
 .wrap button:hover{
   background:rgba(225,76,70,1);
