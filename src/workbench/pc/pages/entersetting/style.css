@@ -112,3 +112,7 @@
   width: 271px;
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
+
+.page_enterprise :global(.u-select .u-select-selection){
+  background: transparent;
+}
