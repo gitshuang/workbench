@@ -175,6 +175,14 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
+  gotoConfig = () => {
+    const {
+      history,
+      hideUserInfoDisplay,
+    } = this.props;
+    history.push('/teamconfig');
+    hideUserInfoDisplay();
+  }
   gotoCreateTeam = () => {
     const {
       history,
@@ -372,7 +380,7 @@ class UserInfoContainer extends Component {
           <div style={{position:"relative"}}>
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
-              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>团队设置</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.gotoConfig.bind(this)}>团队设置</Button></li>
               <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>邀请成员</Button></li>
             </ul>
             {requestDisplay ?<div style={{position:"absolute"}}>
