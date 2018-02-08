@@ -30,7 +30,7 @@ import {
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
-const {getInviteUsersJoinAddress, sendMessage, getQRCode} = inviteActions;
+const {getInviteUsersJoinAddress, sendMessage} = inviteActions;
 
 const maxLength = 20;
 const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
@@ -39,7 +39,6 @@ const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 @connect(
   mapStateToProps(
     'inviteJoinAddress',
-    'QRCode',
     {
       namespace: 'invitation',
     },
@@ -49,8 +48,7 @@ const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     requestSuccess,
     requestError,
     getInviteUsersJoinAddress,
-    sendMessage,
-    getQRCode
+    sendMessage
   }
 )
 class Invitation extends Component {
@@ -59,13 +57,12 @@ class Invitation extends Component {
     this.state = {
       url: '',
       mails: [],
-      QRCode:'',
       successDialogShow: false,
     }
     this.goBack = this.goBack.bind(this);
   }
   componentWillMount() {
-    const {requestStart, requestSuccess, requestError,getInviteUsersJoinAddress,getQRCode} = this.props;
+    const {requestStart, requestSuccess, requestError,getInviteUsersJoinAddress} = this.props;
     requestStart();
     getInviteUsersJoinAddress().then(({error, payload}) => {
         if (error) {
@@ -76,17 +73,6 @@ class Invitation extends Component {
         });
         this.refs['shortUrl'].select();
         requestSuccess();
-    });
-    debugger
-    requestStart();
-    getQRCode().then(({error, payload}) => {
-      if (error) {
-        requestError(payload);
-      }
-      this.setState({
-        QRCode:payload
-      });
-      requestSuccess();
     });
   }
   goBack() {
@@ -153,7 +139,6 @@ class Invitation extends Component {
     const {
       url,
       mails,
-      QRCode,
       errorDialogShow,
       successDialogShow,
     } = this.state;
@@ -221,7 +206,7 @@ class Invitation extends Component {
                 <div>
                   <span>扫描二维码直接进入团队</span>
                   <div className={qrCode} id="qrCode">
-                    <img src={QRCode}/>
+                    <img src='/invite/getQRCode'/>
                   </div>
                   <ButtonBrand className={printQrBtn} onClick={this.printQr}>打印二维码</ButtonBrand>
                 </div>
