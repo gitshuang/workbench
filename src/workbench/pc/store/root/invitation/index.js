@@ -4,11 +4,13 @@ import actions from './actions';
 
 const {
   getInviteUsersJoinAddress,
-  sendMessage
+  sendMessage,
+  getQRCode,
 } = actions;
 
 const defaultState = {
-  inviteJoinAddress:''
+  inviteJoinAddress:'',
+  QRCode:''
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -24,7 +26,8 @@ const createReducer = (key) => (state, { payload, error }) => {
 
 const reducer = handleActions({
   [getInviteUsersJoinAddress]: createReducer('inviteJoinAddress'),
-  [sendMessage]: createReducer()
+  [sendMessage]: createReducer(),
+  [getQRCode] : createReducer('QRCode'),
 }, defaultState);
 
 
