@@ -28,6 +28,7 @@ var api = [
 
   '/invite/getInviteUsersJoinAddress',
   '/invite/sendMessage',
+  '/invite/getQRCode',
 
   '/manager/teamEnter/createEnter',
   '/enter/getEnterInfo',

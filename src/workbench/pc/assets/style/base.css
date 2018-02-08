@@ -94,7 +94,7 @@ body {
   font-size: 20px;
 }
 
-.u-dropdown-menu {
+/* .u-dropdown-menu {
   box-shadow: 0 0 0 1px rgba(9, 30, 66, 0.08);
 }
 
@@ -115,7 +115,7 @@ body {
 .u-dropdown-menu>.u-dropdown-menu-item:active {
   cursor: pointer;
   color: #E14C46;
-}
+} */
 
 .u-select-arrow:before {
   color: #878B94;

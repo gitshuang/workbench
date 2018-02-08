@@ -15,7 +15,7 @@
 	margin-top: 85px;
 }
 .content {
-  height: 500px;
+  height: 515px;
   margin: 20px 65px 0;
   padding: 40px;
   background: #fff;
@@ -93,10 +93,22 @@
 .wrap :global(.u-form-control){
   height: 280px;
 }
-.tabPane1,.tabPane2{
+.tabPane1,.tabPane2,.tabPane3{
   padding-right: 107px;
+}
+.tabPane3>div:first-child{
+  width: 270px;
+  margin: 0 auto;
 }
 .wrap :global(.u-button){
   float: right;
   margin: 0;
+}
+.tabPane3 :global(.u-button){
+  width: 100%;
+}
+.qrCode img{
+  width: 270px;
+  height: 270px;
+  margin: 30px 0 20px;
 }
