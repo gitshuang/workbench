@@ -13,3 +13,12 @@ export const changeIdentity = (data) =>{
 export const removeUser = (id) =>{
   return post('/manager/teamEnter/createTeam',{id});
 }
+export const transferTeam = (id) =>{
+  return post('/manager/teamEnter/createTeam',{id});
+}
+export const dismissTeam = (id) =>{
+  return post('/manager/teamEnter/createTeam',{id});
+}
+export const exitTeam = (id) =>{
+  return post('/manager/teamEnter/createTeam',{id});
+}

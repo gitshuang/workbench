@@ -8,6 +8,9 @@ import teamconfigActions from 'store/root/teamconfig/actions';
 
 import TeamRemoveModal from 'containers/teamRemoveModal';
 import TeamUpgradeModal from 'containers/teamUpgradeModal';
+import TeamTransferModal from 'containers/teamTransferModal';
+import TeamDismissModal from 'containers/teamDismissModal';
+import TeamExitModal from 'containers/teamExitModal';
 
 
 //import { Radio, Select } from 'tinper-bee';
@@ -32,6 +35,9 @@ const {
   openRemoveModal,
   closeRemoveModal, 
   openUpgradeModal, 
+  openTransferModal,
+  openDismissModal,
+  openExitModal
 } = teamconfigActions;
 
 import {
@@ -57,6 +63,9 @@ import {
     'teamData',
     'removeModal',      //  团队成员删除弹窗开关
     'upgradeModal',     //  升级为企业弹窗开关
+    'transferModal',    //  移交团队弹窗开关
+    'dismissModal',     //  解散团队弹窗开关
+    'exitModal',        //  退出团队弹窗开关
     {
       namespace: "teamconfig"
     }
@@ -70,6 +79,9 @@ import {
     changeIdentity,         // 团队成员更换身份
     openRemoveModal,        // 团队成员打开删除弹窗
     openUpgradeModal,       // 打开升级为企业弹窗  
+    openTransferModal,      // 打开移交团队弹窗
+    openDismissModal,       // 打开解散团队弹窗
+    openExitModal           // 打开退出团队弹窗
   }
 )
 
@@ -425,7 +437,14 @@ class CreateTeamContent extends Component {
   }
 
   onSelect = ({ key }) => {
-    console.log(`${key} selected`);
+    const { openTransferModal,openDismissModal,openExitModal } = this.props;
+    if( key == "1" ){
+      openTransferModal();
+    }else if( key == "2" ){
+      openDismissModal();
+    }else{
+      openExitModal();
+    }
   }
 
   render() {
@@ -437,7 +456,7 @@ class CreateTeamContent extends Component {
         <Item key="3">退出团队</Item>
       </Menu>
     );
-    const { removeModal, upgradeModal } = this.props;
+    const { removeModal, upgradeModal, transferModal, dismissModal, exitModal } = this.props;
     return (
       <div className={wrap}>
         <div className={header}>
@@ -482,6 +501,15 @@ class CreateTeamContent extends Component {
         }
         {
           upgradeModal ? <TeamUpgradeModal /> : null
+        }
+        {
+          transferModal ? <TeamTransferModal /> : null
+        }
+        {
+          dismissModal ? <TeamDismissModal /> : null
+        }
+        {
+          exitModal ? <TeamExitModal /> : null
         }
       </div>
     )
