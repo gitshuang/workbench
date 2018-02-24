@@ -9,6 +9,7 @@ const {
   changeUserInfoDisplay,
   hideUserInfoDisplay,
   changeRequestDisplay,
+  closeRequestDisplay,
   openFolder,
   closeFolder,
   setCutUser,
@@ -67,6 +68,10 @@ const reducer = handleActions({
   [changeRequestDisplay]: (state) => ({
     ...state,
     requestDisplay: true,
+  }),
+  [closeRequestDisplay]: (state) => ({
+    ...state,
+    requestDisplay: false,
   }),
   [hideUserInfoDisplay]: (state) => ({
     ...state,

@@ -18,14 +18,16 @@ import img2 from 'assets/image/wgt/intelligent_logo.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane
+  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane,
+  popconfirm,popconfirm_content
 } from './style.css';
 
 const {
   getUserInfo,
   hideUserInfoDisplay,
   getWorkList,
-  setCutUser
+  setCutUser,
+  closeRequestDisplay
 } = homeActions;
 
 const {
@@ -57,7 +59,8 @@ const {
     getWorkList,
     setCutUser,
     getLatestAccessList,
-    getPromotionServiceList
+    getPromotionServiceList,
+    closeRequestDisplay
   }
 )
 @onClickOutside
@@ -264,6 +267,13 @@ class UserInfoContainer extends Component {
       `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
     );
   }
+
+  // 关闭创建成功后的弹窗
+  closeRequest = () => {
+    const {closeRequestDisplay} = this.props;
+    closeRequestDisplay();
+  }
+
   render() {
     const {
       userInfo: {
@@ -383,9 +393,18 @@ class UserInfoContainer extends Component {
               <li><Button shape="border" size="sm" onClick={this.gotoConfig.bind(this)}>团队设置</Button></li>
               <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>邀请成员</Button></li>
             </ul>
-            {requestDisplay ?<div style={{position:"absolute"}}>
-            团队创建成功！快点邀请成员一起好好工作吧！
-            </div> : null }
+            {
+              requestDisplay ?
+              <div className={popconfirm} style={{position:"absolute"}}>
+                <i className="arrow"></i>
+                <div className={popconfirm_content}>
+                  <p>团队创建成功！</p>
+                  <p>快点邀请成员一起好好工作吧！</p>
+                </div>
+                <div onClick={this.closeRequest}>以后再说</div>
+              </div> 
+              : null 
+            }
             
           </div>
         </div>

@@ -495,3 +495,69 @@
 :global(.ie9) .tenantPortrait{
   float: left;
 }
+
+
+.popconfirm{
+  position: absolute;
+  top: -36px;
+  right: -218px;
+  z-index: 1540;
+  max-width: 300px;
+  padding: 1px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-break: auto;
+  line-height: 1.42857143;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  font-size: 14px;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgb(224,224,224);
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.popconfirm > i{
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 10px;
+  top: 50%;
+  left: -10px;
+  margin-top: -11px;
+  border-left-width: 0;
+  border-right-color: rgb(224,224,224);
+}
+.popconfirm  i::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  left: -9px;
+  bottom: -10px;
+  border-left-width: 0;
+  border-right-color: #fff;
+  border-width: 10px;
+}
+.popconfirm_content{
+  padding: 15px;
+}
+.popconfirm_content + div{
+  padding: 15px;
+  padding-top: 0;
+  color: #0099ff;
+  cursor: pointer;
+}
