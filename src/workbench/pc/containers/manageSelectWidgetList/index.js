@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
-import ButtonGroup from 'bee-button-group';
-import Button from 'bee-button';
-import { Con, Row, Col } from 'bee-layout';
+import ButtonGroup from 'bee/button-group';
+import Button from 'bee/button';
+// import { Con, Row, Col } from 'bee-layout';
 import ServiceItem from 'containers/serviceItem';
-import FormControl from 'bee-form-control';
+import FormControl from 'bee/form-control';
 import {ButtonBrand,ButtonDefaultAlpha,ButtonDefaultLine} from 'components/button';
 
 import { connect } from 'react-redux';

@@ -12,6 +12,15 @@ class UploadPage extends Component {
       imgWarning:false,
     }
   }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.logo){
+      this.setState({
+        applicationIcon: nextProps.logo
+      })
+    }
+  }
+
   uploadImage = () => {
     this.refs.file.click();
   }

@@ -10,5 +10,6 @@ export default createTypes(
   'CLOSE_FOLDER',
   'SET_CUT_USER',
   'GET_SEARCH_ENTER_LIST',
-  'SET_CREATE_ENTER'
+  'SET_CREATE_ENTER',
+  'GET_ENTER_INFO',
 );

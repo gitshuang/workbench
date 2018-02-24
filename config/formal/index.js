@@ -3,7 +3,7 @@ var webpackConfig = require('./webpack')
 var config = {
   env: '"production"',
   assetsSubDirectory: 'static',
-  assetsPublicPath: 'http://workbenchdev.yyuap.com/fe/',
+  assetsPublicPath: 'https://cdn.yonyoucloud.com/pro/diwork/workbench/',
 
   productionSourceMap: true,
   // Gzip off by default as many popular static hosts such as

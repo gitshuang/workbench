@@ -8,7 +8,8 @@ import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
 import {ButtonBrand} from 'components/button';
 import SuccessDialog from './successDialog';
-import Tabs, { TabPane } from 'bee-tabs';
+import Tabs, { TabPane } from 'bee/tabs';
+import FormControl from 'bee/form-control';
 import TagsInput from 'components/tagsInput';
 
 import {
@@ -22,7 +23,10 @@ import {
   addMailBtn,
   submitBtn,
   tabPane1,
-  tabPane2
+  tabPane2,
+  tabPane3,
+  qrCode,
+  printQrBtn
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -101,7 +105,7 @@ class Invitation extends Component {
       sendMessage(mails).then((data) => {
         requestSuccess();
         this.setState({
-          mails: ['', ''],
+          mails: [],
           // successDialogShow: false,
         }); 
       }, (err)=>{
@@ -117,6 +121,14 @@ class Invitation extends Component {
   }
   handleChange = (tags) => {
     this.setState({mails:tags})
+  }
+  printQr = () => {
+    let newstr = document.getElementById("qrCode").innerHTML; 
+    let oldstr = document.body.innerHTML;
+    document.body.innerHTML = newstr; 
+    window.print(); 
+    document.body.innerHTML = oldstr; 
+    return false;
   }
   closeSuccessDialog = () => {
     this.setState({
@@ -189,6 +201,15 @@ class Invitation extends Component {
                 }
                 </ul> */}
                 <ButtonBrand className={submitBtn} onClick={this.submit} >确定发送</ButtonBrand>
+              </TabPane>
+              <TabPane tab='二维码邀请' key="3" className={tabPane3}>
+                <div>
+                  <span>扫描二维码直接进入团队</span>
+                  <div className={qrCode} id="qrCode">
+                    <img src='/invite/getQRCode'/>
+                  </div>
+                  <ButtonBrand className={printQrBtn} onClick={this.printQr}>打印二维码</ButtonBrand>
+                </div>
               </TabPane>
             </Tabs>
           </div>

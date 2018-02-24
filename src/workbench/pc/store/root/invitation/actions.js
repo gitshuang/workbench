@@ -13,6 +13,6 @@ export default createActions(
   },
   {
     [GET_INVITE_USERS_JOIN_ADDRESS]: getInviteUsersJoinAddress,
-    [SEND_MESSAGE]: sendMessage,
+    [SEND_MESSAGE]: sendMessage
   }
 );

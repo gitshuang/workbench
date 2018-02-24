@@ -31,7 +31,7 @@ module.exports = function (config) {
         },
         {
           test: /\.css$/,
-          include: [paths('assets')],
+          include: [paths('assets'), paths('node'), paths('bee')],
           use: [
             'style-loader',
             {
@@ -54,7 +54,7 @@ module.exports = function (config) {
         {
           test: /\.css$/,
           include: [paths('src')],
-          exclude: [paths('assets')],
+          exclude: [paths('assets'), paths('bee')],
           use: [
             'style-loader',
             {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { Button } from 'tinper-bee';
+// import { Button } from 'tinper-bee';
 import {
   wrap,
   desc,

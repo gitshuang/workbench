@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext,DragSource, DropTarget  } from 'react-dnd';
-import Button from 'bee-button';
+import Button from 'bee/button';
 import WidgetItem from 'containers/manageWidgetList/widgetItem';
 import { content } from './style.css';
 import { mapStateToProps } from '@u';

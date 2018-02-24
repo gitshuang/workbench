@@ -16,7 +16,9 @@ var paths = {
   store: resolve('store'),
   utils: resolve('public/utils.js'),
   static: path.join(__dirname, '../static'),
-  dist: path.join(__dirname, '../dist')
+  dist: path.join(__dirname, '../dist'),
+  bee: resolve('bee'),
+  node: path.join(__dirname, '../node_modules'),
 }
 
 module.exports = function (key) {

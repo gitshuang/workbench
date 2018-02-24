@@ -5,7 +5,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5BackendGroup from 'react-dnd-html5-backend';
 
 import {ButtonDefaultLine,ButtonBrand,ButtonDefaultAlpha} from 'components/button';
-import Button from 'bee-button';
+import Button from 'bee/button';
 import Icon from 'components/icon';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';

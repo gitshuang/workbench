@@ -1,0 +1,331 @@
+.wrap{
+  width: 1200px;
+  margin: 0 auto;
+  background: #ffffff;
+  height:366px; 
+  border-radius: 2px ; 
+  margin-top: 8px;
+  border: 1px solid rgba(78, 89, 104, 0.19);
+}
+.header{
+  width: 100%;
+  height:180px; 
+  background:rgba(94,102,112,1);
+  border-radius: 3px 3px 0px 0px ; 
+  padding-top: 46px;
+  text-align: center;
+}
+.header h2{
+  font-size:27px;
+  font-family:MicrosoftYaHei;
+  color:rgba(255,255,255,1);
+  line-height:36px;
+  margin-bottom: 18px;
+}
+.header button{
+  width:107px;
+  height:34px; 
+  line-height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  font-size:14px;
+  font-family:PingFangSC-Regular;
+  border-radius: 3px;
+  margin: 0 8px;
+  background: transparent;
+  color: #ffffff; 
+}
+.header button:hover{
+  background: transparent;
+  border: 1px solid #ffffff;
+}
+.header button i{
+  padding: 0;
+  margin: 0;
+}
+.content{
+
+}
+.content :global(.u-tabs-bar){
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.content :global(.u-tabs-tab){
+  padding-top: 13px;
+  padding-bottom: 13px;
+  font-size:15px;
+  font-family:MicrosoftYaHei;
+  color:rgba(176,178,183,1);
+}
+.content :global(.u-tabs-tab-active){
+  color:rgba(71,77,84,1);
+  font-weight: bold;
+}
+.content :global(.u-tabs-ink-bar){
+  background:rgba(225,76,70,1);
+  border-radius: 2px ; 
+  width: 14px;
+}
+.content :global(.u-tabs-top .u-tabs-nav-scroll){
+  width: 100%;
+  text-align: center;
+  box-align: center;
+  -webkit-box-pack: center;
+  box-pack: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.content :global(.u-tabs-top){
+  border: none;
+}
+.content :global(.u-tabs-top .u-tabs-tabpane-inactive){
+  height: auto;
+  min-height: 554px;
+}
+.content :global(.u-tabs-tabpane){
+  background: #ffffff;
+}
+.box{
+  background: #ffffff;
+  padding: 0 100px;
+}
+
+.item{
+  margin-top: 24px;
+}
+.item > label{
+  width: 364px;
+  padding-right: 10px;
+  text-align: right;
+  font-size:14px;
+  font-family:PingFangSC-Regular;
+  color:rgba(71,77,84,1);
+  line-height: 36px;
+}
+.item >label span{
+  color: #C4141B;
+}
+.item > div label{
+  margin-right: 40px;
+}
+.item input{
+  width:338px;
+  height:36px; 
+  background:rgba(255,255,255,1);
+  border-radius: 3px ; 
+  outline: none;
+  padding: 0 10px;
+  border: 1px solid rgba(78, 89, 104, 0.2)
+}
+.image{
+  width: 64px;
+  height: 64px;
+  background: rgba(190,193,200,1);
+  border-radius: 100px ; 
+  position: relative;
+}
+.image img{
+  width: 64px;
+  height: 64px;
+  border-radius: 100px ; 
+}
+.image div{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background:rgba(0,0,0,0.6);
+  bottom: 0;
+  right: 0;
+  border-radius: 50% 50%;
+  text-align: center;
+  line-height: 24px;
+  padding-top: 2px;
+  cursor: pointer;
+}
+.image div i{
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+}
+.image input{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.footer{
+  margin-top: 32px;
+  border-top: 1px solid rgba(13, 20, 36, 0.1);
+  padding-top: 9px;
+  padding-left: 364px;
+  padding-bottom: 92px;
+}
+.footer button{
+  width:80px;
+  height:32px; 
+  background:rgba(225,76,70,1);
+  border-radius: 3px ; 
+  color: #ffffff;
+  line-height: 32px;
+  font-size: 14px;
+}
+.footer button:hover{
+  background:rgba(225,76,70,1);
+  color: #ffffff;
+}
+
+.box2{
+  padding: 0 200px;
+  background: #ffffff;
+}
+.applicationBtns{
+  padding-top: 24px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(13, 20, 36, 0.1);
+  text-align: right;
+}
+.applicationBtns button{
+  padding: 0 19px;
+  line-height: 30px;
+  height: 32px;
+  margin-left: 2px;
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+}
+.applicationBtns span button{
+  color:rgba(71,77,84,1);
+  background: rgba(9,44,66,0.04);
+}
+.applicationBtns span button.active{
+  color:rgba(225,76,70,1);
+  background:rgba(252,237,236,1);
+}
+.applicationLists{
+  padding-bottom: 35px;
+}
+.applicationLists li{
+  padding: 16px 5px 16px 15px;
+  border-bottom: 1px solid rgba(13, 20, 36, 0.1);
+}
+.applicationLists li div:first-child{
+  width: 47px;
+  height: 47px;
+  background:rgba(202,205,212,1);
+  border-radius: 3px ; 
+  margin-right: 7px; 
+}
+.applicationLists li div:nth-child(2){
+  width: 195px;
+}
+.applicationLists li div:nth-child(2) h6{
+  font-size:14px;
+  font-family:PingFangSC-Regular;
+  color:rgba(71,77,84,1);
+  line-height:20px;
+  margin-bottom: 5px;
+}
+.applicationLists li div:nth-child(2) p{
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(176,178,183,1);
+  line-height:16px;
+}
+.applicationLists li div:nth-child(3){
+  padding-top: 26px;
+}
+.applicationLists li div:nth-child(3) p{
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(176,178,183,1);
+  line-height:16px;
+}
+.applicationLists li div:last-child{
+  padding-top: 7px;
+}
+.applicationLists li button{
+  width: 79px;
+  line-height: 30px;
+  height: 32px;
+  margin-left: 4px;
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(71,77,84,1);
+  background: rgba(9,44,66,0.04);
+}
+.box3{
+  padding: 0 200px;
+  background: #ffffff;
+}
+.memberBtns{
+  padding-top: 24px; 
+  padding-bottom: 14px;
+  text-align: right;
+}
+.memberBtns button{
+  padding: 0 19px;
+  line-height: 30px;
+  height: 32px;
+  margin-left: 2px;
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+}
+.box3 h5{
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(176,178,183,1);
+  line-height:16px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(13, 20, 36, 0.1);
+}
+.memberLists{
+  padding-bottom: 35px;
+}
+.memberLists li{
+  padding: 16px 5px 16px 15px;
+  border-bottom: 1px solid rgba(13, 20, 36, 0.1);
+}
+.memberLists li > div:first-child{
+  width: 32px;
+  height: 32px;
+  background:rgba(202,205,212,1);
+  border-radius: 32px; 
+  margin-right: 7px; 
+}
+.memberLists li > div:nth-child(2){
+  width: 245px;
+}
+.memberLists li > div:nth-child(2) p{
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(176,178,183,1);
+  line-height:16px;
+}
+.memberLists li > div:nth-child(3){
+  width: 240px;
+}
+.memberLists li > div:nth-child(3) p{
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(176,178,183,1);
+  line-height:16px;
+}
+.memberLists li > div:nth-child(4){
+}
+.memberLists li > div:last-child{
+}
+.memberLists li button{
+  width: 79px;
+  line-height: 30px;
+  height: 32px;
+  margin-left: 4px;
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(71,77,84,1);
+  background: rgba(9,44,66,0.04);
+}

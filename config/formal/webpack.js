@@ -28,7 +28,7 @@ module.exports = function (config) {
         },
         {
           test: /\.css$/,
-          include: [paths('assets')],
+          include: [paths('assets'), paths('node'), paths('bee')],
           use: ExtractTextPlugin.extract(
             Object.assign({
               fallback: {
@@ -62,7 +62,7 @@ module.exports = function (config) {
         {
           test: /\.css$/,
           include: [paths('src')],
-          exclude: [paths('assets')],
+          exclude: [paths('assets'), paths('bee')],
           use: ExtractTextPlugin.extract(
             Object.assign({
               fallback: {
@@ -98,8 +98,8 @@ module.exports = function (config) {
     devtool: config.productionSourceMap ? '#source-map' : false,
     output: {
       publicPath: config.assetsPublicPath,
-      filename: 'js/[name].js',
-      chunkFilename: 'js/chunk/[name]-[id].js'
+      filename: 'js/[name]-[chunkhash:8].js',
+      chunkFilename: 'js/chunk/[name]-[id]-[chunkhash:8].js'
     },
     plugins: [
       new webpack.DefinePlugin({
@@ -113,7 +113,7 @@ module.exports = function (config) {
       }),
       // extract css into its own file
       new ExtractTextPlugin({
-        filename: 'css/[name].css'
+        filename: 'css/[name]-[chunkhash:8].css'
       }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.

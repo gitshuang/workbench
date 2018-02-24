@@ -9,8 +9,10 @@ import SearchOther from 'containers/searchOther';
 import Establish from 'pages/establish';
 import CreateTeam from 'pages/createteam';
 import CreateEnter from 'pages/createenter';
+import EnterSetting from 'pages/entersetting';
 import Invitation from 'pages/invitation';
 import Account from 'pages/account';
+import Teamconfig from 'pages/teamconfig';
 
 const routes = [
   {
@@ -27,6 +29,10 @@ const routes = [
     component: CreateTeam
   },
   {
+    path: '/teamconfig',
+    component: Teamconfig
+  },
+  {
     path: '/application',
     component: Application,
   },
@@ -41,6 +47,10 @@ const routes = [
   {
     path: '/createenter/:data',
     component: CreateEnter,
+  },
+  {
+    path: '/entersetting',
+    component: EnterSetting,
   },
   {
     path: '/search',

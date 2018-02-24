@@ -4,6 +4,7 @@ import actions from './actions';
 
 const {
   getUserInfo,
+  getEnterInfo,
   getWorkList,
   changeUserInfoDisplay,
   hideUserInfoDisplay,
@@ -17,6 +18,7 @@ const {
 
 const defaultState = {
   userInfo: {},
+  enterInfo: {},
   workList: [],
   metaData: {},
   userInfoDisplay: false,
@@ -42,6 +44,7 @@ const createReducer = (key) => (state, { payload, error }) => {
 
 const reducer = handleActions({
   [getUserInfo]: createReducer('userInfo'),
+  [getEnterInfo]: createReducer('enterInfo'),
   [getWorkList]: (state, { payload, error }) => {
     if (error) {
       return state;

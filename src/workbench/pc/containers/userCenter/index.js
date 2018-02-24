@@ -9,16 +9,17 @@ import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import { getStrLenSubstr } from '@u';
 
-import Button from 'bee-button';
-import Select from 'bee-select';
-import Tabs, { TabPane } from 'bee-tabs';
+import Button from 'bee/button';
+// import Select from 'bee-select';
+import Tabs, { TabPane } from 'bee/tabs';
 import onClickOutside from 'react-onclickoutside';
 import img1 from 'assets/image/wgt/yonyouSpace1.png';
 import img2 from 'assets/image/wgt/intelligent_logo.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList
+  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane,
+  createBtn,
 } from './style.css';
 
 const {
@@ -175,15 +176,15 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
-  gotoCreateTeam = () => {
+  gotoConfig = () => {
     const {
       history,
       hideUserInfoDisplay,
     } = this.props;
-    history.push('/createteam/home');
+    history.push('/teamconfig');
     hideUserInfoDisplay();
   }
-  gotoCreateEnter = () => {
+  gotoCreate = () => {
     const {
       history,
       hideUserInfoDisplay,
@@ -313,28 +314,34 @@ class UserInfoContainer extends Component {
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
-          <div className={imgUser}>
-            <div className={imgOuter}>
-              {this.getIcon(imgsrc)}
-            </div>
-            <div className={editPortrait}  >
-              <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
-            </div>
+          <div className={userSetting} onClick={this.accountManage.bind(this)}>
+            <Icon type="setting" />
           </div>
-          <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
           <div className={logOut} onClick={this.logOut}>
             <Icon type="exit" />
             <span>注销</span>
           </div>
-
-          <ul className={`${gloryIcon} ${clearfix}`}>
-            <li>
-              <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
-            </li>
-            <li>
-              <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
-            </li>
-          </ul>
+          <div className={userInfoPane}>
+            <div className={imgUser}>
+              <div className={imgOuter}>
+                {this.getIcon(imgsrc)}
+              </div>
+              {/* <div className={editPortrait}  >
+                <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
+              </div> */}
+            </div>
+            <div>
+              <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
+              <ul className={`${gloryIcon} ${clearfix}`}>
+                <li>
+                  <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
+                </li>
+                <li>
+                  <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         {/* <div>
           <ul className={`${userBtnList} ${clearfix}`}>
@@ -350,14 +357,11 @@ class UserInfoContainer extends Component {
           </ul>
         </div> */}
         <div className={tenantArea}>
-          <div>
+          <div className={clearfix}>
             <div className={tenantPortrait}>
               <div className={imgOuter}>
                 {this.getIcon(logo)}
               </div>
-              {/* <div className={editPortrait}  >
-                <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
-              </div> */}
             </div>
             <div className={tenantDescribe}>
               <div className={tenantName} title={company}>{company}</div>
@@ -369,35 +373,43 @@ class UserInfoContainer extends Component {
           <div style={{position:"relative"}}>
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
-              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>团队设置</Button></li>
+              {
+                admin ? (
+                  <li>
+                    <Button
+                      shape="border"
+                      size="sm"
+                      onClick={this.gotoConfig.bind(this)}>
+                      {
+                        `${this.getCompanyType()}设置`
+                      }
+                    </Button>
+                  </li>
+                ) : null }
               <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>邀请成员</Button></li>
             </ul>
             {requestDisplay ?<div style={{position:"absolute"}}>
             团队创建成功！快点邀请成员一起好好工作吧！
             </div> : null }
-            
+
           </div>
         </div>
-        <div>
-            <ul className={`${createBtnList} ${clearfix}`}>
-              <DropdownButton
-                getPopupContainer={() => document.getElementById("modalId")}
-                label="切换" dataItem={
-                  allowTenants.map(({
-                    tenantId: name,
-                    tenantName: value,
-                  }) => {
-                    return {
-                      name,
-                      value,
-                      fun: this.changeTenant,
-                    };
-                  })
-                } />
-              <li><Button shape="border" size="sm" onClick={this.gotoCreateTeam}>创建团队</Button></li>
-              <li><Button shape="border" size="sm" onClick={this.gotoCreateEnter}>创建企业</Button></li>
-            </ul>
-          </div>
+        <div className={`${createBtnList} ${clearfix}`}>
+          <DropdownButton
+            getPopupContainer={() => document.getElementById("modalId")}
+            label="切换" dataItem={
+              allowTenants.map(({
+                tenantId: name,
+                tenantName: value,
+              }) => {
+                return {
+                  name,
+                  value,
+                  fun: this.changeTenant,
+                };
+              })
+            } />
+          <Button className={ createBtn } shape="border" size="sm" onClick={this.gotoCreateEnter}>创建团队/企业</Button></div>
         {/* <div className={"um-content" + ` ${tabContent}`}>
 
           <Tabs

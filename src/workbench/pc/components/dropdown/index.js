@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import Dropdown from 'bee-dropdown';
+import Dropdown from 'bee/dropdown';
 import Icon from 'components/icon';
-import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee-menus';
+import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee/menus';
 // import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
 import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style} from './style.css';
 

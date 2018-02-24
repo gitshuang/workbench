@@ -42,12 +42,14 @@
   right: 0px;
   bottom: 5px;
   border-radius: 50%;
+  padding-left: 3px;
+  padding-top: 1px;
   cursor: pointer;
 }
 
 .edit i{
   color: #fff;
-  font-size: 12px;
+  font-size: 18px;
   text-align: center;
   line-height: 24px;
   display: block;
