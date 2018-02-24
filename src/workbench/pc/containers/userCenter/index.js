@@ -230,7 +230,10 @@ class UserInfoContainer extends Component {
       return tenant.tenantId === tenantid;
     })[0];
     let type = '团队';
-    if (curTenant && !curTenant.type) {
+    // if (curTenant && !curTenant.type) {
+    //   type = '企业';
+    // }
+    if (curTenant && curTenant.type != 0 ) {
       type = '企业';
     }
     return type;
@@ -261,10 +264,17 @@ class UserInfoContainer extends Component {
     );
   }
 
-  // 关闭创建成功后的弹窗
+  // 关闭创建成功后的弹窗 
   closeRequest = () => {
     const {closeRequestDisplay} = this.props;
     closeRequestDisplay();
+  }
+ 
+  gotoCreateEnter =()=>{
+    const {
+      history, 
+    } = this.props;
+    history.push('/establishusercenter'); 
   }
 
   render() {

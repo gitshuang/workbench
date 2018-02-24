@@ -7,6 +7,7 @@ import Search from 'pages/search';
 import SearchResult from 'containers/searchResult';
 import SearchOther from 'containers/searchOther';
 import Establish from 'pages/establish';
+import EstablishUserCenter from 'pages/establishusercenter';
 import CreateTeam from 'pages/createteam';
 import CreateEnter from 'pages/createenter';
 import EnterSetting from 'pages/entersetting';
@@ -24,6 +25,10 @@ const routes = [
   {
     path: '/establish',
     component: Establish
+  },
+  {
+    path: '/establishusercenter',
+    component: EstablishUserCenter
   },
   {
     path: '/createteam/:data',
