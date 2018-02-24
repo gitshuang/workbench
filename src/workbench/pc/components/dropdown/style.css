@@ -1,18 +1,19 @@
 .dropdown_button_cont{
     display: -webkit-box;
 }
+
 .label_cont{
     display: inline-block;
-    width:76px;
+    width:148px;
     height:32px; 
     line-height: 32px;
     font-size:12px;
     color:rgba(74,81,93,1);
-
+    margin-left: -8px;
     /* border: 1px solid #ccc; */
     /* border-top-left-radius: 4px; */
     /* border-bottom-left-radius: 4px; */
-    margin-right: 2px;
+    /* margin-right: 2px; */
     vertical-align: top;
     background: rgba(9,44,66,0.04);
 }
@@ -66,7 +67,7 @@
     cursor: pointer;
 }
 .menu_style li{
-    border-top: 1px solid rgba(221,224,227,0.47);
+    /* border-top: 1px solid rgba(221,224,227,0.47); */
     color: rgba(74,81,93,1);
     padding-left: 11px !important;
 }
@@ -79,6 +80,9 @@
 .menu_style{
     box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
     border: rgba(78,89,104,0.19);
+}
+.drop_MenuItem{
+    background: red;
 }
 
 /* 

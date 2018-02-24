@@ -129,7 +129,6 @@ class CreateEnter extends Component {
 
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
-                    size="lg"
                     defaultValue="A"
                     style={{ width: 200, marginRight: 6 }} 
                     onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }

@@ -6,8 +6,107 @@
       "redPacketsNum": 0,
       "gloriesNum": 0,
       "allowTenants": [
-          1
-      ],
+        {
+            "tenantId": "b7uozdk2",
+            "tenantName": "34534",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "calk71za",
+            "tenantName": "4534",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "fdkisxjw",
+            "tenantName": "云工作台",
+            "logo": "https://cdn.yonyoucloud.com/pro/yht/cas/images/upload/aps/images/logo1492245844970.png",
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "gcksaj01",
+            "tenantName": "3333",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "gtzceot7",
+            "tenantName": "云工作台3.0测试环境",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "kffkvm3o",
+            "tenantName": "456",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "ozbsovv4",
+            "tenantName": "666666",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "texbp6sa",
+            "tenantName": "5645",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "wqqfu1b6",
+            "tenantName": "23423",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        },
+        {
+            "tenantId": "zi5audjj",
+            "tenantName": "64564",
+            "logo": null,
+            "admin": true,
+            "type": 0,
+            "certificated": false,
+            "status": 1,
+            "enterPrise": true
+        }
+    ],
       "userAvator": "",
       "company": 1,
       "userName": "maokunb",

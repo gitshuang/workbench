@@ -66,3 +66,9 @@ body{
 .btn_disable{
   display: none;
 }
+
+.logo_title{
+  font-size:17px;
+  color:rgba(71,77,84,1);
+  width:204px;
+}

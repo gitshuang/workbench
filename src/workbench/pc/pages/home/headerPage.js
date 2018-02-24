@@ -7,7 +7,7 @@ import homeActions from 'store/root/home/actions';
 import Icon from 'components/icon';
 import Header from 'containers/header';
 import Navbar from 'components/scrollNav';
-import { logoImg, header ,imgInner,all_btn,btn_disable} from './style.css';
+import { logoImg, header ,imgInner,all_btn,btn_disable,logo_title} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
 const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay } = homeActions;
@@ -52,7 +52,8 @@ class HeaderPage extends Component {
         logo,
       }
     } = this.props;
-    return (<img src={logo || logoUrl} className={logoImg}/>);
+    //return (<img src={logo || logoUrl} className={logoImg}/>);
+    return <div className={logo_title}>用友网络科技股份有限公司</div>
   }
   componentDidMount() {
     this.getUserInfo();

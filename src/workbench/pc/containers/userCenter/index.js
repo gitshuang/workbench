@@ -20,7 +20,7 @@ import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, log
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
   iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane,
   popconfirm,popconfirm_content,
-  createBtn,
+  createBtn,select_li
 } from './style.css';
 
 const {
@@ -392,7 +392,8 @@ class UserInfoContainer extends Component {
           </div>
           <div style={{position:"relative"}}>
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
-              <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
+              <li><Button shape="border" onClick={this.gotoManage.bind(this)}>
+              <Icon type="record" />首页编辑</Button></li>
               {
                 admin ? (
                   <li>
@@ -400,13 +401,16 @@ class UserInfoContainer extends Component {
                       shape="border"
                       size="sm"
                       onClick={this.gotoConfig.bind(this)}>
+                       <Icon type="staff" />
                       {
                         `${this.getCompanyType()}设置`
                       }
                     </Button>
                   </li>
                 ) : null }
-              <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>邀请成员</Button></li>
+              <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
+              <Icon type="add-friends" />
+              邀请成员</Button></li>
             </ul>
 
             {
@@ -424,7 +428,7 @@ class UserInfoContainer extends Component {
 
           </div>
         </div>
-        <div className={`${createBtnList} ${clearfix}`}>
+        <div className={`${createBtnList} ${clearfix}  ${select_li}`}>
           <DropdownButton
             getPopupContainer={() => document.getElementById("modalId")}
             label="切换" dataItem={

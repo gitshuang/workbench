@@ -4,7 +4,7 @@ import Dropdown from 'bee/dropdown';
 import Icon from 'components/icon';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee/menus';
 // import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
-import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style} from './style.css';
+import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style,drop_MenuItem} from './style.css';
 
 const propTypes = {
   label:"",
@@ -46,9 +46,9 @@ class DropdownButton extends Component{
     let {label,dataItem,fun} = this.props;
     let item = [];
     dataItem.forEach((da,i) => {
-        item.push(<MenuItem key={da.name} >{da.value}</MenuItem>);
+        item.push(<MenuItem key={da.name} >{da.value}&nbsp;&nbsp;&nbsp;&nbsp;{da.type == 1?"团队":"企业"} </MenuItem>);
     });
-    let _menus = <Menu className={menu_style} style={{ marginLeft:-78,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
+    let _menus = <Menu className={menu_style} style={{ marginLeft:-148,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
     let arrard = this.state.visible?"upward":"pull-down";
     return(<div className={dropdown_button_cont} >
           <div className={label_cont}>

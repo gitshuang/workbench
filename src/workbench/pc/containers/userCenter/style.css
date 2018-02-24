@@ -129,12 +129,13 @@
     background-color: #757575;
 }
 .userName{
-  height: 20px;
-  line-height: 20px;
+  height: 25px;
+  line-height:25px;
   font-size: 14px;
   font-family: PingFangSC-Semibold;
   font-weight: bold;
-  color: #474D54;
+  color:rgba(71,77,84,1);
+  font-size:18px;
   display:-webkit-box;
   -webkit-box-align:center;
   -webkit-box-pack:center;
@@ -453,6 +454,9 @@
 }
 .tenantName{
   margin: 8px 0;
+  font-size:14px;
+  color:rgba(71,77,84,1);
+  line-height:19px;
 }
 .tenantDescribe{
   width:100%;
@@ -463,24 +467,48 @@
 }
 .companyType{
   flex:1;
+  font-size: 12px;
+  color:#DADBDE;
 }
 .teamBtnList{
   margin-left: 0;
+}
+
+.teamBtnList :global(.u-button){
+  background: transparent;
+  line-height: 21px;
+  height:21px; 
+  font-size:12px;
+}
+.teamBtnList i{
+  font-size: 12px;
 }
 .createBtnList li{
   float : left;
 }
 .createBtnList>div{
   margin-bottom: 8px;
+  -webkit-box-pack: center;
 }
+
+/* .createBtnList>div>div:first-child{
+  width: 147px !important;
+  margin-left: -11px;
+} */
+
 .createBtnList :global(.u-button){
-  width:91px;
-  height:32px;
+  width:48px;
+  height:32px; 
+  line-height: 32px;
   margin-right:8px;
-  color:rgba(102,102,102,1);
+  font-size:12px;
+  /* color:rgba(102,102,102,1); */
 }
 .createBtnList{
-  margin-left: 33px;
+  /* margin-left: 33px; */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   margin-top:64px;
 }
 .tenantPortrait .imgOuter{
@@ -562,6 +590,7 @@
   cursor: pointer;
 }
 .createBtnList .createBtn {
-  width: 100%;
+  /* width: 100%; */
+  width: 180px;
 }
 

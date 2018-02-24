@@ -210,6 +210,8 @@ body {
 
 .u-select-dropdown .u-select-dropdown-menu-item {
   border-top: 1px solid rgba(78, 89, 104, 0.19);
+  font-size: 14px;
+  white-space:normal !important;
 }
 
 .u-select-dropdown {
