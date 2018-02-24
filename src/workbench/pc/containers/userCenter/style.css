@@ -213,7 +213,7 @@
 .userBtnList li{
   float : left;
 }
-.userBtnList li>button,.createBtnList li>button{
+.userBtnList li>button,.createBtnList button{
   border: none;
   background: rgba(9,44,66,0.04);
   border-radius: 2px;
@@ -561,3 +561,7 @@
   color: #0099ff;
   cursor: pointer;
 }
+.createBtnList .createBtn {
+  width: 100%;
+}
+
