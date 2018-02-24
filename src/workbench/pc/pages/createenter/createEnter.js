@@ -76,7 +76,7 @@ class CreateEnter extends Component {
   }
   
   checkForm = (flag, data) => {
-    const {setCreateEnter} = this.props;
+    const {setCreateEnter,updateenter} = this.props;
     data.push(this.tenantIndustry);
     if (flag) {
       requestStart();
@@ -87,7 +87,7 @@ class CreateEnter extends Component {
             return obj;
           },
           {},
-        ),
+        ),updateenter
       ).then(({ error, payload }) => {
         requestSuccess();
         if (error) {

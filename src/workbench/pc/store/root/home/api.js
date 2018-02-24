@@ -9,7 +9,12 @@ export const getSearchEnterList = (param) => {
 }
 export const setCutUser = () => get('/user/setCutUser');
 
-export const setCreateEnter = (list) => {
-  return post('/manager/teamEnter/createEnter', list);
+export const setCreateEnter = (list,updateType) => {
+  if(updateType){
+    return post('/manager/team/upgradeEnter', list);
+  }else{
+    return post('/manager/teamEnter/createEnter', list);
+  }
+  
 }
 export const getEnterInfo = (param) => get('/enter/getEnterInfo?enterId='+param);

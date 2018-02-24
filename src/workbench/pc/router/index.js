@@ -13,6 +13,7 @@ import EnterSetting from 'pages/entersetting';
 import Invitation from 'pages/invitation';
 import Account from 'pages/account';
 import Teamconfig from 'pages/teamconfig';
+import UpdateEnter from 'pages/updateenter';
 
 const routes = [
   {
@@ -31,6 +32,10 @@ const routes = [
   {
     path: '/teamconfig',
     component: Teamconfig
+  },
+  {
+    path: '/updateenter',
+    component: UpdateEnter
   },
   {
     path: '/application',

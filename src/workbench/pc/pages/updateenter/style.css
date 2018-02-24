@@ -1,0 +1,86 @@
+.enter_form :global(.u-label) {
+  width: 75px;
+  text-align: right;
+}
+
+.enter_form :global(.province),
+.enter_form :global(.city),
+.enter_form :global(.area) {
+  width: 90px!important;
+}
+
+.enter_form :global(.uf.uf-calendar) {
+  position: relative;
+  top: -4px;
+  right: 9px;
+}
+
+.enter_form :global(.u-form-submit) {
+  padding-left: 75px;
+}
+.enter_form :global(.u-form-submit>button) {
+  width:338px;
+  height:32px; 
+  background:rgba(225,76,70,1);
+  border-radius: 3px;
+  margin-left:-70px;
+}
+.enter_form :global(textarea) {
+  min-height: 100px;
+  min-width: 300px;
+}
+.enter_form :global(.u-form-item){
+  width: 100%;
+}
+
+.page_enterprise{
+  margin: 10px 120px;
+  background: #fff;
+  /* text-align: center; */
+  /* padding-left: 100px; */
+  overflow: hidden;
+}
+
+.enter_title{
+  width:137px;
+  height:27px; 
+  font-size:21px;
+  color:rgba(71,77,84,1);
+  line-height:27px;
+  margin-left:150px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  /* border-bottom: 1px solid rgba(13,20,36,1); */
+}
+
+.hr{
+  background: rgba(13,20,36,0.1);
+  height: 1px;
+  margin-left: -100px;
+  border-top: none;
+  margin:0;
+  margin-bottom: 25px;
+}
+
+.enter_cont{
+  width: 360px;
+  margin: 0 auto;
+}
+
+.enter_form :global(.u-input-inner>input){
+  /* width:338px !important; */
+  height:36px;
+  background:rgba(255,255,255,1);
+  border-radius: 3px ; 
+  border:1px solid RGBA(78, 89, 104, 0.2);
+}
+
+.enter_form :global(.u-input-before){
+  height:36px;
+  line-height: 36px;
+}
+
+.enter_form :global(.u-select-lg .u-select-selection--single){
+  width: 271px;
+  border:1px solid RGBA(78, 89, 104, 0.2);
+}
