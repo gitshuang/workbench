@@ -211,11 +211,11 @@ class CreateTeamContent extends Component {
       tenantName: value,
       tenantId: tenantId,
       logo: backUrl || logo,
-      searchAvalible: Boolean(searchAvalible) ,
+      searchAvalible: searchAvalible === "false" ? false : true,
       invitePermission: Number(invitePermission),
       joinPermission: Number(joinPermission),
+      allowExit: selectedValue2 === "false" ? false : true 
     };
-
     requestStart();
     createTeam(data).then(({ error, payload }) => {
       requestSuccess();
