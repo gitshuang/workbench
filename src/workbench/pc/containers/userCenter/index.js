@@ -18,7 +18,8 @@ import img2 from 'assets/image/wgt/intelligent_logo.png';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane
+  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane,
+  createBtn,
 } from './style.css';
 
 const {
@@ -183,15 +184,7 @@ class UserInfoContainer extends Component {
     history.push('/teamconfig');
     hideUserInfoDisplay();
   }
-  gotoCreateTeam = () => {
-    const {
-      history,
-      hideUserInfoDisplay,
-    } = this.props;
-    history.push('/createteam/home');
-    hideUserInfoDisplay();
-  }
-  gotoCreateEnter = () => {
+  gotoCreate = () => {
     const {
       history,
       hideUserInfoDisplay,
@@ -380,35 +373,43 @@ class UserInfoContainer extends Component {
           <div style={{position:"relative"}}>
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" size="sm" onClick={this.gotoManage.bind(this)}>首页编辑</Button></li>
-              <li><Button shape="border" size="sm" onClick={this.gotoConfig.bind(this)}>团队设置</Button></li>
+              {
+                admin ? (
+                  <li>
+                    <Button
+                      shape="border"
+                      size="sm"
+                      onClick={this.gotoConfig.bind(this)}>
+                      {
+                        `${this.getCompanyType()}设置`
+                      }
+                    </Button>
+                  </li>
+                ) : null }
               <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>邀请成员</Button></li>
             </ul>
             {requestDisplay ?<div style={{position:"absolute"}}>
             团队创建成功！快点邀请成员一起好好工作吧！
             </div> : null }
-            
+
           </div>
         </div>
-        <div>
-            <ul className={`${createBtnList} ${clearfix}`}>
-              <DropdownButton
-                getPopupContainer={() => document.getElementById("modalId")}
-                label="切换" dataItem={
-                  allowTenants.map(({
-                    tenantId: name,
-                    tenantName: value,
-                  }) => {
-                    return {
-                      name,
-                      value,
-                      fun: this.changeTenant,
-                    };
-                  })
-                } />
-              <li><Button shape="border" size="sm" onClick={this.gotoCreateTeam}>创建团队</Button></li>
-              <li><Button shape="border" size="sm" onClick={this.gotoCreateEnter}>创建企业</Button></li>
-            </ul>
-          </div>
+        <div className={`${createBtnList} ${clearfix}`}>
+          <DropdownButton
+            getPopupContainer={() => document.getElementById("modalId")}
+            label="切换" dataItem={
+              allowTenants.map(({
+                tenantId: name,
+                tenantName: value,
+              }) => {
+                return {
+                  name,
+                  value,
+                  fun: this.changeTenant,
+                };
+              })
+            } />
+          <Button className={ createBtn } shape="border" size="sm" onClick={this.gotoCreateEnter}>创建团队/企业</Button></div>
         {/* <div className={"um-content" + ` ${tabContent}`}>
 
           <Tabs
