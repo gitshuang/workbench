@@ -43,13 +43,13 @@
   bottom: 5px;
   border-radius: 50%;
   padding-left: 3px;
-  padding-top: 2px;
+  padding-top: 1px;
   cursor: pointer;
 }
 
 .edit i{
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   line-height: 24px;
   display: block;
