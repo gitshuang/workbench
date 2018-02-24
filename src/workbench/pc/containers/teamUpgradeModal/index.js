@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 // 加载公共模块
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions';
@@ -8,6 +9,7 @@ const { closeUpgradeModal } = teamconfigActions;
 
 import { Modal, Button } from 'tinper-bee';
 import { modal, form, cancelButton } from './index.css';
+@withRouter
 @connect(
   mapStateToProps(
     
@@ -38,7 +40,7 @@ class TeamUpgradeModal extends Component {
   // 删除确认
   configFn = () => {
     const { history } = this.props;
-    history.push("/createenter/team");
+    history.replace("/updateenter");
     this.cancelFn();
   }
 

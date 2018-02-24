@@ -5,7 +5,7 @@ export const uploadApplication = (data) => postFileCros(
   data,
 );
 export const createTeam = (data) =>{
-  return post('/manager/teamEnter/createTeam',data);
+  return post('/manager/team/setting',data);
 }
 export const changeIdentity = (data) =>{
   return post('/manager/teamEnter/createTeam',data);
