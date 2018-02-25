@@ -184,7 +184,6 @@ class UserInfoContainer extends Component {
       history,
       hideUserInfoDisplay,
     } = this.props;
-    debugger;
     const { tenantid } = window.diworkContext();
     history.push('/teamconfig/'+tenantid);
     hideUserInfoDisplay();
@@ -263,7 +262,6 @@ class UserInfoContainer extends Component {
         hash,
       },
     } = window;
-    debugger;
     window.location.replace(
       `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
     );
