@@ -539,12 +539,13 @@ class CreateTeamContent extends Component {
   // 设置团队成员 
   teamMember = () => {
     const { newUserList } = this.state;
+    const { userList } = this.props;
     return (
       <div className={box3}>
         <div className={memberBtns}>
           <Button colors="danger">邀请成员</Button>
         </div>
-        <h5>当前人数12人</h5>
+        <h5>当前人数{userList.totalElements}人</h5>
         <div className={memberLists}>
           <ul>
             {
@@ -552,7 +553,7 @@ class CreateTeamContent extends Component {
                 return (
                   <li className="um-box um-box-vc">
                     <div>
-                      <img src = {item.userAvator} />
+                      <img style={{display:"block",height:"100%"}} src = {item.userAvator} />
                     </div>
                     <div>
                       <p>{item.userName}</p>
