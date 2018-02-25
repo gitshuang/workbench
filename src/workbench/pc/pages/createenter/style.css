@@ -38,7 +38,12 @@
 .enter_form :global(.u-form-item){
   width: 100%;
 }
-
+.enter_form :global(.u-select-selection--single){
+  height: 36px !important;
+}
+.enter_form :global(.u-select-selection-rendered){
+  line-height: 36px !important;
+}
 .page_enterprise{
   margin: 10px 120px;
   background: #fff;
