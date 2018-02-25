@@ -57,8 +57,10 @@ import {
   applicationBtns,
   active,
   applicationLists,
+  memberTit,
   memberBtns,
   memberLists,
+  search,
 } from './index.css';
 
 @withRouter
@@ -123,6 +125,7 @@ class CreateTeamContent extends Component {
       cliApplication: [],     //  client 应用
       currApplication: [],    // 当前渲染的是哪个类别的应用列表
       newUserList: [],        // 当前用户列表
+      searchVal: "",          // 用户列表搜索关键字
     }
   }
 
@@ -136,7 +139,7 @@ class CreateTeamContent extends Component {
     
   }
   // 查询用户列表
-  queryUser = ( page = 1, size = 10, keyword = "", onlyAdmin = false ) => {
+  queryUser = ( keyword = "", onlyAdmin = false, page = 1, size = 10 ) => {
     const { getUserList, requestError, requestSuccess } = this.props;
     const param = {
       page, 
@@ -536,15 +539,67 @@ class CreateTeamContent extends Component {
     const {openRemoveModal} = this.props;
     openRemoveModal();
   }
+
+  // 更改search 内容
+  changeSearchFn = (e) => {
+    let searchVal = e.target.value;
+    this.setState({
+      searchVal
+    });
+  }
+  clearSearchFn =()=>{
+    this.setState({
+      searchVal: ""
+    });
+    this.queryUser();
+  }
+  // sousuo
+  searchFn = () =>{
+    // 点击搜索之后设置点击为true  从而判断点击分页是查询整还是搜索结果
+    const { searchVal } = this.state;
+    this.queryUser( searchVal );
+  }
+
+  changeCheck = (value) => {
+    console.log(value);
+    this.queryUser( "", value );
+  }
   // 设置团队成员 
   teamMember = () => {
     const { newUserList } = this.state;
     const { userList } = this.props;
     return (
       <div className={box3}>
-        <div className={memberBtns}>
-          <Button colors="danger">邀请成员</Button>
+        <div className = {memberTit+" um-box" }>
+          <div className={search + " um-box um-box-vc"}>
+            <div style={{position:"relative"}}>
+              <input
+                className="form-control"
+                type="text"
+                placeholder="姓名、手机号码、邮箱"
+                value={this.state.searchVal}
+                onChange={(e)=>{this.changeSearchFn(e)}}
+              />
+              {
+                this.state.searchVal.length ? <span className="um-input-clear icon-error3" onClick={this.clearSearchFn}></span> : null
+              }
+              
+            </div>
+
+            <div
+              className="um-bf1"
+              style={{textAlign:"center",cursor:"pointer" }}
+              onClick={this.searchFn}
+            >
+              <Icon type="uf-search"></Icon>
+            </div>
+          </div>
+          <div className={memberBtns + " um-bf1 um-box-vc"}>
+            <Checkbox colors="info" onChange={this.changeCheck}>只显示管理员</Checkbox>
+            <Button colors="danger">邀请成员</Button>
+          </div>
         </div>
+        
         <h5>当前人数{userList.totalElements}人</h5>
         <div className={memberLists}>
           <ul>

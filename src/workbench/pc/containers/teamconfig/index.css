@@ -262,10 +262,13 @@
   padding: 0 200px;
   background: #ffffff;
 }
-.memberBtns{
+.memberTit{
   padding-top: 24px; 
   padding-bottom: 14px;
+}
+.memberBtns{
   text-align: right;
+  justify-content:flex-end;
 }
 .memberBtns button{
   padding: 0 19px;
@@ -274,6 +277,11 @@
   margin-left: 2px;
   font-size:12px;
   font-family:MicrosoftYaHei;
+  margin-left: 32px;
+}
+.memberBtns :global(.u-checkbox .u-checkbox-label:before){
+  width: 14px;
+  height: 14px;
 }
 .box3 h5{
   font-size:12px;
@@ -328,4 +336,27 @@
   font-family:MicrosoftYaHei;
   color:rgba(71,77,84,1);
   background: rgba(9,44,66,0.04);
+}
+
+
+.search{
+  width:356px;
+  height:38px;
+  border-radius: 3px ;
+  border:1px solid rgba(223,227,232,1);
+}
+.search input{
+  border:none;
+  width:254px;
+  height: 24px;
+  font-size: 12px;
+  border-right: 1px solid rgba(223,227,232,1);
+  padding:0 10px;
+}
+
+.search i{
+  width:18px;
+  height: 18px;
+  font-size: 18px;
+  color: rgba(135,139,148,1);
 }
