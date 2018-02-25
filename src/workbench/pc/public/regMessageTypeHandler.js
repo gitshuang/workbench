@@ -7,8 +7,19 @@ import { postMessageToWin } from "@u";
 const { addBrm } = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
 const handlers = {
-  openService({ serviceCode, data }) {
-    if (serviceCode) {
+  openService({ serviceCode, data, tenantId }) {
+    if (tenantId) {
+      const {
+        location: {
+          origin,
+          pathname,
+          hash,
+        },
+      } = window;
+      window.location.replace(
+        `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${ serviceCode }`,
+      );
+    } else if (serviceCode) {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
