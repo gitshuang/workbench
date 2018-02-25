@@ -184,7 +184,9 @@ class UserInfoContainer extends Component {
       history,
       hideUserInfoDisplay,
     } = this.props;
-    history.push('/teamconfig');
+    debugger;
+    const { tenantid } = window.diworkContext();
+    history.push('/teamconfig/'+tenantid);
     hideUserInfoDisplay();
   }
   gotoCreate = () => {
@@ -249,8 +251,10 @@ class UserInfoContainer extends Component {
   }
   logOut=()=>{
     const { location: {origin} } = window;
+
     window.location.href = `/logout?service=${encodeURIComponent(`${origin?origin:''}/`)}`;
   }
+
   changeTenant(tenantId){
     const {
       location: {
@@ -259,6 +263,7 @@ class UserInfoContainer extends Component {
         hash,
       },
     } = window;
+    debugger;
     window.location.replace(
       `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
     );

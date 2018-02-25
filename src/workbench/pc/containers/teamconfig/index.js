@@ -67,9 +67,16 @@ import {
     'dismissModal',     //  解散团队弹窗开关
     'exitModal',        //  退出团队弹窗开关
     {
+      key: 'userInfo',
+      value: (teamconfig,ownProps,root) => {
+        return root.home.userInfo
+      }
+    },
+    {
       namespace: "teamconfig"
-    }
+    },
   ),
+  
   {
     requestStart,
     requestSuccess,
@@ -90,6 +97,7 @@ class CreateTeamContent extends Component {
     super(props);
     this.imgObj = {};
     this.state = {
+      tenantId: "",         // 团队id  直接取出来存到这里  
       value: "",            // 基础设置团队名称
       imgWarning: "",       // 团队头像警告格式
       imgUrl: "",           //   基础设置  选择头像回显
@@ -110,6 +118,23 @@ class CreateTeamContent extends Component {
     this.queryBasicConfig();
   }
 
+  componentDidMount() {
+    const { params } = this.props.match;
+    const tenantid = params.tenantid;
+    const {
+      userInfo: {
+        allowTenants,
+      },
+    } = this.props;
+    const curTenant = allowTenants.filter((tenant) => {
+      return tenant.tenantId === tenantid;
+    })[0];
+    this.setState({
+      tenantId: tenantid,
+      backUrl: curTenant && curTenant.logo,
+      value: curTenant && curTenant.tenantName
+    });
+  }
   // 查询用户列表
   queryUser = () => {
 
@@ -194,8 +219,9 @@ class CreateTeamContent extends Component {
   }
   // 基础设置  保存
   create = () => {
-    const { tenantId, logo, createTeam, requestStart, requestSuccess, requestError } = this.props;
+    const { createTeam, requestStart, requestSuccess, requestError } = this.props;
     const { 
+      tenantId, 
       value, 
       backUrl,
       searchAvalible,  //搜索可见
@@ -207,10 +233,12 @@ class CreateTeamContent extends Component {
       alert("请输入团队名称");
       return false;
     }
+    console.log(this.props)
+    debugger;
     let data = {
       tenantName: value,
       tenantId: tenantId,
-      logo: backUrl || logo,
+      logo: backUrl,
       searchAvalible: searchAvalible === "false" ? false : true,
       invitePermission: Number(invitePermission),
       joinPermission: Number(joinPermission),
@@ -236,7 +264,7 @@ class CreateTeamContent extends Component {
   
   // 基础设置
   baseConfig = () => {
-    const { value, imgUrl, imgWarning } = this.state;
+    const { value, backUrl, imgWarning } = this.state;
     return (
       <div className={box}>
         <div className={item + " um-box"}>
@@ -250,7 +278,7 @@ class CreateTeamContent extends Component {
         <div className={item + " um-box"}>
           <label>团队头像</label>
           <div className={image}>
-            {imgUrl ? <img ref="imgSrc" src={imgUrl} /> : null}
+            {backUrl ? <img ref="imgSrc" src={backUrl} /> : null}
             <div>
               <Icon type="icon-copyreader" />
               <input type="file" ref="btn_file" onChange={(e) => { this.imgChange(e) }} />
