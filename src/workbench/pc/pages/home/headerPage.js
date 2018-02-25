@@ -7,9 +7,9 @@ import homeActions from 'store/root/home/actions';
 import Icon from 'components/icon';
 import Header from 'containers/header';
 import Navbar from 'components/scrollNav';
-import { logoImg, header ,imgInner,all_btn,btn_disable,logo_title} from './style.css';
+import { logoImg, header ,imgInner,all_btn,btn_disable,logo_title,title_drop} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
-
+import DropdownButton from 'components/dropdown';
 const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay } = homeActions;
 
 const {
@@ -46,14 +46,43 @@ class HeaderPage extends Component {
     }
   }
 
+  changeTenant(tenantId){
+    const {
+      location: {
+        origin,
+        pathname,
+        hash,
+      },
+    } = window;
+    window.location.replace(
+      `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
+    );
+  }
+
   getLeftContent() {
     const {
       userInfo: {
         logo,
+        allowTenants
       }
     } = this.props;
+
+
     //return (<img src={logo || logoUrl} className={logoImg}/>);
-    return <div className={logo_title}>用友网络科技股份有限公司</div>
+    // return <div className={logo_title}>用友网络科技股份有限公司</div>
+    return (<DropdownButton
+    label="用友网络科技股份有限公司" type="home" dataItem={
+      allowTenants.map(({
+        tenantId: name,
+        tenantName: value,
+      }) => {
+        return {
+          name,
+          value,
+          fun: this.changeTenant,
+        };
+      })
+    } />);
   }
   componentDidMount() {
     this.getUserInfo();
@@ -105,6 +134,10 @@ class HeaderPage extends Component {
     });
   }
 
+  onLeftTitleClick=(e)=>{
+    
+  }
+  
   render() {
     const {
       changeUserInfoDisplay,
@@ -134,6 +167,7 @@ class HeaderPage extends Component {
       <div className={`${header}`} style={background}>
         <Header
           onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
+          onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
           iconName={imgIcon}
           color={color}

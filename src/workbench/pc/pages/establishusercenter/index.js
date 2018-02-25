@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
-import HeaderPage from './headerPage';
-import Header from 'components/header';
+// import HeaderPage from './headerPage';
+import Header from 'containers/header';
 import EstablishContent from 'containers/establishContent'
 import { page_home } from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
@@ -59,7 +59,12 @@ class EstablishUserCenter extends Component {
             <div className={`um-win ${page_home}`} >
                 <div className="um-header" style={{background:"white"}}>
                     {/* <Header leftContent = { leftContent } /> */}
-                    <HeaderPage headerData={headerData}/>
+                    {/* <HeaderPage headerData={headerData}/> */}
+                    <Header onLeftClick={ this.goBack } iconName={"home"} >
+                        <div>
+                            <span>欢迎页</span>
+                        </div>
+                    </Header>
                 </div>
                 <div className="um-content">
                     <EstablishContent userInfo={ userInfo } />

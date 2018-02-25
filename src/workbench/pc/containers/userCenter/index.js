@@ -431,7 +431,7 @@ class UserInfoContainer extends Component {
           </div>
         </div>
         <div className={`${createBtnList} ${clearfix}  ${select_li}`}>
-          <DropdownButton
+          {/* <DropdownButton
             getPopupContainer={() => document.getElementById("modalId")}
             label="切换" dataItem={
               allowTenants.map(({
@@ -445,7 +445,10 @@ class UserInfoContainer extends Component {
                 };
               })
             } />
-          <Button className={ createBtn } shape="border" size="sm" onClick={this.gotoCreateEnter}>创建团队/企业</Button></div>
+          <Button className={ createBtn } shape="border" size="sm" onClick={this.gotoCreateEnter}>创建团队/企业</Button>
+           */}
+          </div>
+        
         {/* <div className={"um-content" + ` ${tabContent}`}>
 
           <Tabs

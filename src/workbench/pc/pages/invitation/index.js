@@ -127,7 +127,7 @@ class Invitation extends Component {
     let oldstr = document.body.innerHTML;
     document.body.innerHTML = newstr; 
     window.print(); 
-    document.body.innerHTML = oldstr; 
+    document.body.innerHTML = oldstr;
     return false;
   }
   closeSuccessDialog = () => {

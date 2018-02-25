@@ -72,10 +72,10 @@ body{
   color:rgba(71,77,84,1);
   width:204px;
 }
-.page_home :global(.lebra-navbar-left){
+/* .page_home :global(.lebra-navbar-left){
   border-radius: 100px;
   border: 1px solid #E6E7E9;
   height: 32px;
   padding-left:0;
   margin-left: 15px;
-}
+} */
