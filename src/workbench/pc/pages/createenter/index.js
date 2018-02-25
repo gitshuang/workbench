@@ -16,7 +16,6 @@ class Enterprise extends Component {
   }
 
   render() {
-
     const { params } = this.props.match;
     const {  teamList  } = this.props;
     return (

@@ -16,12 +16,12 @@ import Company from 'assets/image/wgt/company.png';
 class EstablishContent extends Component {
   openTeam = () => {
     const { history } = this.props;
-    history.push('/createteam/login');
+    history.push('/createteam/home');
   }
 
   openEnter = () => {
     const { history } = this.props;
-    history.push('/createenter/login');
+    history.push('/createenter/home');
   }
 
   render() {
