@@ -10,12 +10,17 @@ export const uploadApplication = (data) => postFileCros(
 export const createTeam = (data) =>{
   return post('/manager/team/setting',data);
 }
-export const changeIdentity = (data) =>{
-  return post('/manager/teamEnter/createTeam',data);
+
+export const adminToUser = (userId) =>{
+  return post('/manager/team/changeAdmin2User',{userId});
+}
+export const userToAdmin = (userId) =>{
+  return post('/manager/team/changeUser2Admin',{userId});
 }
 export const removeUser = (id) =>{
   return post('/manager/teamEnter/createTeam',{id});
 }
+
 export const transferTeam = (id) =>{
   return post('/manager/teamEnter/createTeam',{id});
 }

@@ -7,7 +7,8 @@ const {
   uploadApplication,      // 图片上传
   createTeam,             // 保存
   
-  changeIdentity,         // 更改用户身份
+  userToAdmin,            // 用户升级管理员
+  adminToUser,            // 管理员降级用户
   openRemoveModal,        // 打开删除用户的弹窗
   closeRemoveModal,       // 关闭删除用户的弹窗     
   removeUser,             // 删除用户请求
@@ -28,12 +29,11 @@ const {
   exitTeam,                // 退出团队
 
   getAllApps,              //  获取所有应用
-  
 } = actions;
 
 const defaultState = {
   teamData : {},          //  保存成功之后 返回的团队信息
-  removeModal: false,     //  删除弹窗的判断
+  removeModal: false,     //  删除弹窗开关
   upgradeModal: false,    //  升级为企业弹窗开关
   transferModal: false,   //  移交团队弹窗开关
   dismissModal: false,    //  解散团队弹窗开关
@@ -63,7 +63,8 @@ const reducer = handleActions({
       teamData: payload
     };
   },
-  [changeIdentity]: state => state,
+  [userToAdmin]: state => state,
+  [adminToUser]: state => state,
 
   [openRemoveModal]: (state) => ({
     ...state,
