@@ -61,7 +61,7 @@ class Establish extends Component {
                     <Header leftContent = { leftContent } />
                 </div> 
                 <div className="um-content">
-                    <EstablishContent userInfo={ userInfo } />
+                    <EstablishContent userInfo={ userInfo } type="init"/>
                 </div>
             </div>
         )

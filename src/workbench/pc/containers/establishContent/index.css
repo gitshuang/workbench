@@ -18,7 +18,9 @@
   color:rgba(13,20,36,0.47);
   line-height:25px;
   padding-left: 4px;
-  margin-bottom: 29px;
+}
+.est_context{
+  margin-top: 29px;
 }
 .box{
   width: 540px;

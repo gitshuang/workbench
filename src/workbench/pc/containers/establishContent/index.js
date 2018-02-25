@@ -6,7 +6,8 @@ import {
   desc,
   box,
   imageBox,
-  content
+  content,
+  est_context
 } from './index.css';
 
 import Team from 'assets/image/wgt/team.png';
@@ -25,12 +26,19 @@ class EstablishContent extends Component {
   }
 
   render() {
-    const { userInfo } = this.props;
+    const { userInfo,type } = this.props;
+    let titleCont = null;
+    if(type && type == "init"){
+      titleCont = (<div>
+        <h5>欢迎来到用友Diwork</h5>  
+        <p className={desc}>创建您的团队或企业，邀请好友一起体验吧。您也可以联系好友邀请您加入他/她的团队或企业。</p>
+      </div>)
+    }
+
     return (
       <div className={wrap}>
-        <h5>Hi {userInfo.userName}，欢迎来到用友Diwork</h5>  
-        <p className={desc}>在正式使用之前，您需要先有所属的团队或企业。</p>
-        <div className="um-box">
+        {titleCont}
+        <div className={`${est_context} um-box`}>
           <div className={box}>
             <div className={imageBox}>
               <img src = {Team} />

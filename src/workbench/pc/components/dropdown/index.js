@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from "prop-types";
 import Dropdown from 'bee/dropdown';
 import Icon from 'components/icon';
@@ -11,6 +12,7 @@ const propTypes = {
   dataItem:[]
 };
 
+@withRouter
 class DropdownButton extends Component{
 
   constructor(props) {
@@ -34,6 +36,13 @@ class DropdownButton extends Component{
 
   //todu 后续需求变更后需要遍历找到对应的事件
   handleSelect = (e) => {
+    if(e.key == "td_2001"){ 
+        const {
+          history, 
+        } = this.props;
+        history.push('/establishusercenter'); 
+      return;
+    }
     if(this.props.dataItem[0].fun){
         this.props.dataItem[0].fun(e.key);
     }
@@ -43,19 +52,24 @@ class DropdownButton extends Component{
   }
 
   render(){
-    let {label,dataItem,fun} = this.props;
+    let {label,dataItem,fun,type} = this.props;
     let item = [];
     dataItem.forEach((da,i) => {
         item.push(<MenuItem key={da.name} >{da.value}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{da.type == 1?"团队":"企业"} </MenuItem>);
     });
-    let _menus = <Menu className={menu_style} style={{ marginLeft:-148,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
+    let _marginLeft = -148;
+    if(type && type == "home"){
+      item.push(<MenuItem key="td_2001" >创建团队/企业</MenuItem>);
+      _marginLeft = -228;
+    }
+    let _menus = <Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
     let arrard = this.state.visible?"upward":"pull-down";
     return(<div className={dropdown_button_cont} >
-          <div className={label_cont}>
+          <div className={`${label_cont} home_title`}>
             <label>{label}</label>
           </div>
-          <div className={this.state.visible?btn_upward:btn_pull_down}>
-            <Dropdown
+          <div className={`${this.state.visible?btn_upward:btn_pull_down} home_title_down `}>
+            <Dropdown overlayClassName="_btn_down"
                 getPopupContainer = {this.props.getPopupContainer}
                 trigger={['click']}
                 overlay={_menus}

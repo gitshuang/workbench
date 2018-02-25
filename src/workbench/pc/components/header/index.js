@@ -24,7 +24,8 @@ const propTypes = {
   ]),
   leftContent: PropTypes.any,
   rightContent: PropTypes.any,
-  onLeftClick: PropTypes.func
+  onLeftClick: PropTypes.func,
+  onLeftTitleClick: PropTypes.func
 }
 
 class Header extends Component {
@@ -37,9 +38,9 @@ class Header extends Component {
 
   render() {
     const {
-      prefixCls, className, children, mode, iconName, leftContent, rightContent, onLeftClick
+      prefixCls, className, children, mode, iconName, leftContent, rightContent, onLeftClick,onLeftTitleClick
     } = this.props;
-
+    
     const wrapCls = classnames(prefixCls, `${prefixCls}-${mode}`, className);
 
     return (
@@ -48,7 +49,7 @@ class Header extends Component {
           <span className={`${prefixCls}-left-icon`} aria-hidden="true" onClick={onLeftClick}>
             {typeof iconName === 'string' ? <Icon type={iconName}/> : iconName}
           </span>
-          <span className={`${prefixCls}-left-content`} onClick={onLeftClick}>{leftContent}</span>
+          <span className={`${prefixCls}-left-content`} onClick={onLeftTitleClick?onLeftTitleClick:onLeftClick}>{leftContent}</span>
         </div>
         <div className={`${prefixCls}-title`} >{children}</div>
         <div className={`${prefixCls}-right`} >

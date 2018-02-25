@@ -80,3 +80,26 @@ body{
   color:rgba(71,77,84,1);
   width:204px;
 }
+
+.title_drop{
+  font-size:17px;
+  color:rgba(71,77,84,1);
+  width:204px;
+}
+
+.header :global(.home_title){
+  font-size:17px;
+  color:rgba(71,77,84,1);
+  background: transparent;
+  width: auto;
+}
+.header :global(.home_title_down){
+  background: transparent;
+}
+:global(._btn_down) li:last-child {
+  font-size:22px;
+  border-top: 1px solid #ccc;
+  height: 40px;
+  line-height: 40px;
+}
+   

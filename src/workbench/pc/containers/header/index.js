@@ -62,6 +62,7 @@ class HeaderContainer extends Component {
       children,
       changeQuickServiceDisplay,
       onLeftClick,
+      onLeftTitleClick,
       iconName,
       leftContent,
       rightContent,
@@ -92,6 +93,7 @@ class HeaderContainer extends Component {
           rightContent={
             rightContents.map((child, i) => cloneElement(child, { key: i }))
           }
+          onLeftTitleClick={onLeftTitleClick?onLeftTitleClick:onLeftClick}
           onLeftClick={ onLeftClick }>
 
           { children }
