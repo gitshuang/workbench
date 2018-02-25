@@ -32,14 +32,16 @@ const {
   getTeamInfo,
   uploadApplication, 
   createTeam, 
-  changeIdentity,
+  userToAdmin,            // 用户升级管理员
+  adminToUser,            // 管理员降级用户
   openRemoveModal,
   closeRemoveModal, 
   openUpgradeModal, 
   openTransferModal,
   openDismissModal,
   openExitModal,
-  getAllApps
+  getAllApps,
+  getUserList
 } = teamconfigActions;
 
 import {
@@ -69,6 +71,7 @@ import {
     'dismissModal',     //  解散团队弹窗开关
     'exitModal',        //  退出团队弹窗开关
     'applicationlist',  //  应用列表
+    'userList',         //  用户列表
     {
       key: 'userInfo',
       value: (teamconfig,ownProps,root) => {
@@ -87,13 +90,15 @@ import {
     getTeamInfo,            // 获取团队基础信息
     uploadApplication,      // 上传
     createTeam,             // 保存团队基本设置
-    changeIdentity,         // 团队成员更换身份
+    userToAdmin,            // 用户升级管理员
+    adminToUser,            // 管理员降级用户
     openRemoveModal,        // 团队成员打开删除弹窗
     openUpgradeModal,       // 打开升级为企业弹窗  
     openTransferModal,      // 打开移交团队弹窗
     openDismissModal,       // 打开解散团队弹窗
     openExitModal,          // 打开退出团队弹窗
     getAllApps,             // 获取全部应用
+    getUserList,            // 获取用户列表
   }
 )
 
@@ -117,6 +122,7 @@ class CreateTeamContent extends Component {
       mobApplication: [],     //  移动端应用
       cliApplication: [],     //  client 应用
       currApplication: [],    // 当前渲染的是哪个类别的应用列表
+      newUserList: [],        // 当前用户列表
     }
   }
 
@@ -130,24 +136,24 @@ class CreateTeamContent extends Component {
     
   }
   // 查询用户列表
-  queryUser = () => {
-    const { getTeamInfo } = this.props;
-    getTeamInfo().then(({ error, payload }) => {
-      if (error) {
+  queryUser = ( page = 1, size = 10, keyword = "", onlyAdmin = false ) => {
+    const { getUserList, requestError, requestSuccess } = this.props;
+    const param = {
+      page, 
+      size,
+      keyword, 
+      onlyAdmin
+    }
+    getUserList( param ).then(({error, payload}) => {
+      if(error){
         requestError(payload);
+        return false;
       }
       this.setState({
-        tenantId: payload.tenantId,
-        value: payload.tenantName,
-        logo: payload.logo,
-        searchAvalible: payload.searchAvalible,
-        invitePermission: payload.invitePermission,
-        joinPermission: payload.joinPermission,
-        allowExit: payload.allowExit
-      });
+        newUserList: payload.content
+      })
       requestSuccess();
     });
-    
   }
 
   // 查询团队应用
@@ -179,7 +185,23 @@ class CreateTeamContent extends Component {
 
   // 查询基础设置
   queryBasicConfig = () => {
-
+    const { getTeamInfo, requestError, requestSuccess } = this.props;
+    getTeamInfo().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        tenantId: payload.tenantId,
+        value: payload.tenantName,
+        logo: payload.logo,
+        searchAvalible: payload.searchAvalible,
+        invitePermission: payload.invitePermission,
+        joinPermission: payload.joinPermission,
+        allowExit: payload.allowExit
+      });
+      requestSuccess();
+    });
+    
   }
 
 
@@ -333,7 +355,7 @@ class CreateTeamContent extends Component {
           <label>邀请成员权限</label>
           <div>
             <Select
-              defaultValue={invitePermission}
+              value={invitePermission}
               style={{ width: 200, marginRight: 6 }}
               onChange={this.handleChange1}
             >
@@ -346,7 +368,7 @@ class CreateTeamContent extends Component {
           <label>加入权限</label>
           <div>
             <Select
-              defaultValue={joinPermission}
+              value={joinPermission}
               style={{ width: 200, marginRight: 6 }}
               onChange={this.handleChange2}
             >
@@ -467,21 +489,47 @@ class CreateTeamContent extends Component {
   // 更换用户身份
   handleChange3 = (value,id) => {
     console.log(`selected ${value}`);
+    const { userToAdmin, adminToUser, requestError,requestSuccess } = this.props;
+    let { newUserList } = this.state;
     if(value == "deleteMember"){
       this.deleteMember(id);
       return false;
     }
-    const { changeIdentity,requestError,requestSuccess } = this.props;
-    changeIdentity(value).then(({ error, payload }) => {
+    if (value == "manage"){
+      userToAdmin( id ).then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
+        }
+        newUserList.forEach((item,index) => {
+          if (item.userId == id){
+            item.isAdmin = true
+          }
+        }); 
+        this.setState({
+          newUserList
+        });
+        requestSuccess();
+      });
+      return false;
+    }
+    adminToUser( id ).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       }
+      newUserList.forEach((item,index) => {
+        if (item.userId == id){
+          item.isAdmin = false
+        }
+      }); 
+      this.setState({
+        newUserList
+      });
       requestSuccess();
     });
+    
   };
   // 删除用户
-  deleteMember = (item) => {
-    const id = item || "";
+  deleteMember = (id) => {
     this.setState({
       deleteMemberId: id
     });
@@ -490,6 +538,7 @@ class CreateTeamContent extends Component {
   }
   // 设置团队成员 
   teamMember = () => {
+    const { newUserList } = this.state;
     return (
       <div className={box3}>
         <div className={memberBtns}>
@@ -498,28 +547,34 @@ class CreateTeamContent extends Component {
         <h5>当前人数12人</h5>
         <div className={memberLists}>
           <ul>
-            <li className="um-box um-box-vc">
-              <div>
-                <img src="" />
-              </div>
-              <div>
-                <p>笑笑笑</p>
-              </div>
-              <div>
-                <p>xiao@yonyou.com</p>
-              </div>
-              <div className="um-bf1  um-box-vc">
-                <Select
-                  defaultValue="manage"
-                  style={{ width: 100, marginRight: 6 }}
-                  onChange={ (e) => {this.handleChange3(e,1)} }
-                >
-                  <Option value="manage">管理员</Option>
-                  <Option value="member">成员</Option>
-                  <Option value="deleteMember">删除成员</Option>
-                </Select>
-              </div>
-            </li>
+            {
+              newUserList.map((item,index)=>{
+                return (
+                  <li className="um-box um-box-vc">
+                    <div>
+                      <img src = {item.userAvator} />
+                    </div>
+                    <div>
+                      <p>{item.userName}</p>
+                    </div>
+                    <div>
+                      <p>{item.userEmail}</p>
+                    </div>
+                    <div className="um-bf1  um-box-vc">
+                      <Select
+                        value={ item.isAdmin ? "manage" : "member" }
+                        style={{ width: 100, marginRight: 6 }}
+                        onChange={ (e) => {this.handleChange3(e,item.userId)} }
+                      >
+                        <Option value="manage">管理员</Option>
+                        <Option value="member">成员</Option>
+                        <Option value="deleteMember">删除成员</Option>
+                      </Select>
+                    </div>
+                  </li>
+                )
+              })
+            }
           </ul>
         </div>
       </div>

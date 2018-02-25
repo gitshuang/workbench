@@ -7,6 +7,7 @@ const {
   uploadApplication,      // 图片上传
   createTeam,             // 保存
   
+  getUserList,            // 获取userlist api
   userToAdmin,            // 用户升级管理员
   adminToUser,            // 管理员降级用户
   openRemoveModal,        // 打开删除用户的弹窗
@@ -39,6 +40,7 @@ const defaultState = {
   dismissModal: false,    //  解散团队弹窗开关
   exitModal: false,       //  退出团队弹窗开关
   applicationlist: [],    //  应用列表 
+  userList: {},           // 用户列表
 };
 
 
@@ -61,6 +63,15 @@ const reducer = handleActions({
     return {
       ...state,
       teamData: payload
+    };
+  },
+  [getUserList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      userList: payload
     };
   },
   [userToAdmin]: state => state,

@@ -5,6 +5,7 @@ import {
   getTeamInfo,
   uploadApplication,
   createTeam,
+  getUserList,
   adminToUser,
   userToAdmin,
   removeUser,
@@ -18,6 +19,7 @@ const {
   GET_TEAM_INFO,
   UPLOAD_APPLICATION,
   CREATE_TEAM,
+  GET_USER_LIST,
   ADMIN_TO_USER,
   USER_TO_ADMIN,
   OPEN_REMOVE_MODAL,
@@ -52,6 +54,7 @@ export default createActions(
     [GET_TEAM_INFO]:getTeamInfo,
     [ADMIN_TO_USER]:adminToUser,
     [USER_TO_ADMIN]:userToAdmin,
+    [GET_USER_LIST]:getUserList
   },
   OPEN_REMOVE_MODAL,
   CLOSE_REMOVE_MODAL,

@@ -1,0 +1,20 @@
+{
+    "data": {
+        "content": [
+            {
+                "isAdmin": true,
+                "userEmail": "测试内容8w48",
+                "userId": "测试内容4d1b",
+                "userMobile": "测试内容6i54",
+                "userName": "测试内容3h31",
+                "userAvator": ""
+            }
+        ],
+        "number": 1,
+        "size": 1,
+        "totalElements": 1,
+        "totalPages": 1
+    },
+    "msg": 1,
+    "status": 1
+}

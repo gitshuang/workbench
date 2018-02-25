@@ -2,7 +2,7 @@
   "msg": 1,
   "data":{
     "allowExit": "0",
-    "invitePermission": "0",
+    "invitePermission": "1",
     "joinPermission": "0",
     "logo": "测试内容nnr9",
     "searchAvalible": "0",

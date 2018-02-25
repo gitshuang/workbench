@@ -11,12 +11,21 @@ export const createTeam = (data) =>{
   return post('/manager/team/setting',data);
 }
 
+export const getUserList = (data) =>{
+  return get('/manager/team/queryUserPage',data);
+}
 export const adminToUser = (userId) =>{
   return post('/manager/team/changeAdmin2User',{userId});
 }
 export const userToAdmin = (userId) =>{
   return post('/manager/team/changeUser2Admin',{userId});
 }
+// export const adminToUser = (userId) =>{
+//   return get('/application/getAllAppsForTeam');
+// }
+// export const userToAdmin = (userId) =>{
+//   return get('/application/getAllAppsForTeam');
+// }
 export const removeUser = (id) =>{
   return post('/manager/teamEnter/createTeam',{id});
 }

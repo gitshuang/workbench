@@ -33,7 +33,8 @@ var api = [
   '/manager/teamEnter/createEnter',
   '/enter/getEnterInfo',
   '/application/getAllAppsForTeam',
-  '/manager/team/info'
+  '/manager/team/info',
+  '/manager/team/queryUserPage',
 ]
 
 var rapApi = [

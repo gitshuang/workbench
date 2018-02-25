@@ -4,6 +4,7 @@ export default createTypes(
 	'GET_TEAM_INFO',
 	'UPLOAD_APPLICATION',
 	'CREATE_TEAM',
+	'GET_USER_LIST',
 	'ADMIN_TO_USER',
   'USER_TO_ADMIN',
 	'OPEN_REMOVE_MODAL',
