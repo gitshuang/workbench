@@ -17,7 +17,9 @@
   top: -4px;
   right: 9px;
 }
-
+.enter_form :global(.u-form-control){
+  font-size: 14px;
+}
 .enter_form :global(.u-select){
   font-size: 14px;
 }
