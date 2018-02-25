@@ -8,7 +8,7 @@ const { addBrm } = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
 const handlers = {
   openService({ serviceCode, data, tenantId }) {
-    if (tenantId) {
+    if (tenantId && serviceCode) {
       const {
         location: {
           origin,
