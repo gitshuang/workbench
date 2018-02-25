@@ -1,6 +1,7 @@
 import { createTypes } from '@u';
 
 export default createTypes(
+	'GET_TEAM_INFO',
 	'UPLOAD_APPLICATION',
 	'CREATE_TEAM',
 	'CHANGE_IDENTITY',
@@ -18,4 +19,5 @@ export default createTypes(
   'OPEN_EXIT_MODAL',
 	'CLOSE_EXIT_MODAL',
 	'EXIT_TEAM',
+	'GET_ALL_APPS',
 );

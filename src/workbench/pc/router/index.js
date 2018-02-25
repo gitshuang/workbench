@@ -35,7 +35,7 @@ const routes = [
     component: CreateTeam
   },
   {
-    path: '/teamconfig/:tenantid',
+    path: '/teamconfig',
     component: Teamconfig
   },
   {

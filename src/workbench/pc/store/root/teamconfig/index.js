@@ -3,8 +3,10 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
+  getTeamInfo,            // 获取团队基础信息
   uploadApplication,      // 图片上传
   createTeam,             // 保存
+  
   changeIdentity,         // 更改用户身份
   openRemoveModal,        // 打开删除用户的弹窗
   closeRemoveModal,       // 关闭删除用户的弹窗     
@@ -24,6 +26,9 @@ const {
   openExitModal,           // 打开退出团队弹窗
   closeExitModal,          // 关闭退出团队弹窗
   exitTeam,                // 退出团队
+
+  getAllApps,              //  获取所有应用
+  
 } = actions;
 
 const defaultState = {
@@ -33,12 +38,21 @@ const defaultState = {
   transferModal: false,   //  移交团队弹窗开关
   dismissModal: false,    //  解散团队弹窗开关
   exitModal: false,       //  退出团队弹窗开关
+  applicationlist: [],    //  应用列表 
 };
-
 
 
 const reducer = handleActions({
   // 
+  [getTeamInfo]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      teamData: payload
+    };
+  },
   [uploadApplication]: state => state,
   [createTeam]: (state, { payload, error }) => {
     if (error) {
@@ -49,7 +63,6 @@ const reducer = handleActions({
       teamData: payload
     };
   },
-  
   [changeIdentity]: state => state,
 
   [openRemoveModal]: (state) => ({
@@ -126,6 +139,15 @@ const reducer = handleActions({
     }
     return {
       ...state
+    }
+  },
+  [getAllApps]: (state, { payload, error }) => {
+    if(error){
+      return state;
+    }
+    return {
+      ...state,
+      applicationlist: payload,
     }
   },
 }, defaultState);

@@ -1,0 +1,13 @@
+{
+  "msg": 1,
+  "data":{
+    "allowExit": false,
+    "invitePermission": 2,
+    "joinPermission": 2,
+    "logo": "测试内容nnr9",
+    "searchAvalible": false,
+    "tenantId": "测试内容cqnk",
+    "tenantName": "测试内容z3h4"
+  },
+  "status": 1
+}

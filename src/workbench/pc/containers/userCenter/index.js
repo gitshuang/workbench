@@ -184,8 +184,7 @@ class UserInfoContainer extends Component {
       history,
       hideUserInfoDisplay,
     } = this.props;
-    const { tenantid } = window.diworkContext();
-    history.push('/teamconfig/'+tenantid);
+    history.push('/teamconfig');
     hideUserInfoDisplay();
   }
   gotoCreate = () => {

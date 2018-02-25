@@ -29,6 +29,7 @@ const OptGroup = Select.OptGroup;
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { 
+  getTeamInfo,
   uploadApplication, 
   createTeam, 
   changeIdentity,
@@ -37,7 +38,8 @@ const {
   openUpgradeModal, 
   openTransferModal,
   openDismissModal,
-  openExitModal
+  openExitModal,
+  getAllApps
 } = teamconfigActions;
 
 import {
@@ -66,6 +68,7 @@ import {
     'transferModal',    //  移交团队弹窗开关
     'dismissModal',     //  解散团队弹窗开关
     'exitModal',        //  退出团队弹窗开关
+    'applicationlist',  //  应用列表
     {
       key: 'userInfo',
       value: (teamconfig,ownProps,root) => {
@@ -81,6 +84,7 @@ import {
     requestStart,
     requestSuccess,
     requestError,
+    getTeamInfo,            // 获取团队基础信息
     uploadApplication,      // 上传
     createTeam,             // 保存团队基本设置
     changeIdentity,         // 团队成员更换身份
@@ -88,7 +92,8 @@ import {
     openUpgradeModal,       // 打开升级为企业弹窗  
     openTransferModal,      // 打开移交团队弹窗
     openDismissModal,       // 打开解散团队弹窗
-    openExitModal           // 打开退出团队弹窗
+    openExitModal,          // 打开退出团队弹窗
+    getAllApps,             // 获取全部应用
   }
 )
 
@@ -101,14 +106,17 @@ class CreateTeamContent extends Component {
       value: "",            // 基础设置团队名称
       imgWarning: "",       // 团队头像警告格式
       imgUrl: "",           //   基础设置  选择头像回显
-      backUrl: "",          // 上传成功后返回的url
+      logo: "",          // 上传成功后返回的url
       searchAvalible: "true",  //搜索可见
-      selectedValue2: "false",  //允许用户是否退出空间
+      allowExit: "false",  //允许用户是否退出空间
       invitePermission: "1",       //邀请成员权限
       joinPermission: "1",        //加入权限
       btnType: "web",       // 团队应用当前按钮
       deleteMemberId: "",   // 选择删除成员的ID
-
+      webApplication: [],     //  web端应用
+      mobApplication: [],     //  移动端应用
+      cliApplication: [],     //  client 应用
+      currApplication: [],    // 当前渲染的是哪个类别的应用列表
     }
   }
 
@@ -119,30 +127,54 @@ class CreateTeamContent extends Component {
   }
 
   componentDidMount() {
-    const { params } = this.props.match;
-    const tenantid = params.tenantid;
-    const {
-      userInfo: {
-        allowTenants,
-      },
-    } = this.props;
-    const curTenant = allowTenants.filter((tenant) => {
-      return tenant.tenantId === tenantid;
-    })[0];
-    this.setState({
-      tenantId: tenantid,
-      backUrl: curTenant && curTenant.logo,
-      value: curTenant && curTenant.tenantName
-    });
+    
   }
   // 查询用户列表
   queryUser = () => {
-
+    const { getTeamInfo } = this.props;
+    getTeamInfo().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        tenantId: payload.tenantId,
+        value: payload.tenantName,
+        logo: payload.logo,
+        searchAvalible: String(payload.searchAvalible),
+        invitePermission: String(payload.invitePermission),
+        joinPermission: String(payload.joinPermission),
+        allowExit: String(payload.allowExit)
+      });
+      requestSuccess();
+    });
+    
   }
 
   // 查询团队应用
   queryApplication = () => {
-
+    const { getAllApps, requestError, requestSuccess } = this.props;
+    getAllApps().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      const webApplication = payload.filter((item)=>{
+        return item.webStatus;
+      });
+      const mobApplication = payload.filter((item)=>{
+        return item.phoneStatus;
+      });
+      const cliApplication = payload.filter((item)=>{
+        return item.clientStatus;
+      });
+      let currApplication = webApplication;
+      this.setState({
+        webApplication,
+        mobApplication,
+        cliApplication,
+        currApplication
+      })
+      requestSuccess();
+    });
   }
 
   // 查询基础设置
@@ -188,9 +220,9 @@ class CreateTeamContent extends Component {
       if (error) {
         requestError(payload);
       }
-      const backUrl = payload.url;
+      const logo = payload.url;
       this.setState({
-        backUrl: backUrl
+        logo: logo
       });
       requestSuccess();
     });
@@ -215,7 +247,7 @@ class CreateTeamContent extends Component {
   };
   // 基础设置  用户退空间 是否允许
   handleRadioChange2 = (value) => {
-    this.setState({ selectedValue2: value });
+    this.setState({ allowExit: value });
   }
   // 基础设置  保存
   create = () => {
@@ -223,9 +255,9 @@ class CreateTeamContent extends Component {
     const { 
       tenantId, 
       value, 
-      backUrl,
+      logo,
       searchAvalible,  //搜索可见
-      selectedValue2,  //允许用户是否退出空间
+      allowExit,  //允许用户是否退出空间
       invitePermission,       //邀请成员权限
       joinPermission,        //加入权限
     } = this.state;
@@ -234,15 +266,14 @@ class CreateTeamContent extends Component {
       return false;
     }
     console.log(this.props)
-    debugger;
     let data = {
       tenantName: value,
       tenantId: tenantId,
-      logo: backUrl,
+      logo: logo,
       searchAvalible: searchAvalible === "false" ? false : true,
       invitePermission: Number(invitePermission),
       joinPermission: Number(joinPermission),
-      allowExit: selectedValue2 === "false" ? false : true 
+      allowExit: allowExit === "false" ? false : true 
     };
     requestStart();
     createTeam(data).then(({ error, payload }) => {
@@ -264,7 +295,7 @@ class CreateTeamContent extends Component {
   
   // 基础设置
   baseConfig = () => {
-    const { value, backUrl, imgWarning } = this.state;
+    const { value, logo, imgWarning, invitePermission, joinPermission } = this.state;
     return (
       <div className={box}>
         <div className={item + " um-box"}>
@@ -278,7 +309,7 @@ class CreateTeamContent extends Component {
         <div className={item + " um-box"}>
           <label>团队头像</label>
           <div className={image}>
-            {backUrl ? <img ref="imgSrc" src={backUrl} /> : null}
+            {logo ? <img ref="imgSrc" src={logo} /> : null}
             <div>
               <Icon type="icon-copyreader" />
               <input type="file" ref="btn_file" onChange={(e) => { this.imgChange(e) }} />
@@ -302,7 +333,7 @@ class CreateTeamContent extends Component {
           <label>邀请成员权限</label>
           <div>
             <Select
-              defaultValue="1"
+              defaultValue={invitePermission}
               style={{ width: 200, marginRight: 6 }}
               onChange={this.handleChange1}
             >
@@ -315,7 +346,7 @@ class CreateTeamContent extends Component {
           <label>加入权限</label>
           <div>
             <Select
-              defaultValue="1"
+              defaultValue={joinPermission}
               style={{ width: 200, marginRight: 6 }}
               onChange={this.handleChange2}
             >
@@ -329,7 +360,7 @@ class CreateTeamContent extends Component {
           <div className="um-box-vc">
             <Radio.RadioGroup
               name="yssorno"
-              selectedValue={this.state.selectedValue2}
+              selectedValue={this.state.allowExit}
               onChange={this.handleRadioChange2}
             >
               <Radio value="false">禁止</Radio>
@@ -348,14 +379,49 @@ class CreateTeamContent extends Component {
  /* &&&&& 应用设置 &&&&&   */ 
   // 点击按钮切换不同的形态
   changeDuan = (type) => {
+    const { webApplication, mobApplication, cliApplication } = this.state;
+    
+    let currApplication = [];
+    if(type == "web"){
+      currApplication = webApplication
+    }else if(type=="mob"){
+      currApplication = mobApplication
+    }else{
+      currApplication = cliApplication;
+    }
     this.setState({
-      btnType: type
+      btnType: type,
+      currApplication
     });
   }
 
+  handelTime = (time) => {
+    const date = new Date(time);
+    const Y = date.getFullYear() + '-';
+    const M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    const D = date.getDate() + ' ';
+    return Y + M + D;
+  }
+
+  esitTime = (time) => {
+    const currTime = new Date().getTime();
+    if( currTime > time ){
+      return "已过期"
+    }
+    const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
+    // if(timeDiff > 10){
+    //   return false;
+    // }
+    return "还有"+Math.ceil(timeDiff)+"日过期"
+  }
+
+  openXufei = () => {
+    alert("续费")
+  }
   // 设置团队应用
   teamApplication = () => {
     const { btnType } = this.state;
+    const { currApplication } = this.state;
     return (
       <div className={box2}>
         <div className={applicationBtns}>
@@ -368,22 +434,27 @@ class CreateTeamContent extends Component {
         </div>
         <div className={applicationLists}>
           <ul>
-            <li className="um-box">
-              <div>
-                <img src="" />
-              </div>
-              <div>
-                <h6>应用名称</h6>
-                <p>到期时间：2018年18月18日</p>
-              </div>
-              <div>
-                <p>已过期</p>
-              </div>
-              <div className="um-bf1 tr">
-                <Button>续费</Button>
-                <Button>删除</Button>
-              </div>
-            </li>
+            {
+              currApplication.map( (item,index)=>{
+                return (
+                  <li className="um-box" key={index}>
+                    <div>
+                      <img src={item.applicationIcon} />
+                    </div>
+                    <div>
+                      <h6>{item.applicationName}</h6>
+                      <p>到期时间：{this.handelTime(item.expired)}</p>
+                    </div>
+                    <div>
+                      <p>{this.esitTime(item.expired)}</p>
+                    </div>
+                    <div className="um-bf1 tr">
+                      <Button onClick={this.openXufei}>续费</Button>
+                    </div>
+                  </li>
+                )
+              })
+            }
           </ul>
         </div>
       </div>
@@ -394,8 +465,12 @@ class CreateTeamContent extends Component {
 
  /* &&&&& 用户设置 &&&&&   */ 
   // 更换用户身份
-  handleChange3 = value => {
+  handleChange3 = (value,id) => {
     console.log(`selected ${value}`);
+    if(value == "deleteMember"){
+      this.deleteMember(id);
+      return false;
+    }
     const { changeIdentity,requestError,requestSuccess } = this.props;
     changeIdentity(value).then(({ error, payload }) => {
       if (error) {
@@ -436,15 +511,13 @@ class CreateTeamContent extends Component {
               <div className="um-bf1  um-box-vc">
                 <Select
                   defaultValue="manage"
-                  style={{ width: 80, marginRight: 6 }}
-                  onChange={()=>{this.handleChange3()}}
+                  style={{ width: 100, marginRight: 6 }}
+                  onChange={ (e) => {this.handleChange3(e,1)} }
                 >
                   <Option value="manage">管理员</Option>
                   <Option value="member">成员</Option>
+                  <Option value="deleteMember">删除成员</Option>
                 </Select>
-              </div>
-              <div className="tr">
-                <Button onClick={()=>{this.deleteMember()}}>删除</Button>
               </div>
             </li>
           </ul>

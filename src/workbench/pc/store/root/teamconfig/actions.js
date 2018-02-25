@@ -2,6 +2,7 @@ import { createActions } from '@u';
 import types from './types';
 
 import {
+  getTeamInfo,
   uploadApplication,
   createTeam,
   changeIdentity,
@@ -9,9 +10,11 @@ import {
   transferTeam,
   dismissTeam,
   exitTeam,
+  getAllApps,
 } from './api';
 
 const {
+  GET_TEAM_INFO,
   UPLOAD_APPLICATION,
   CREATE_TEAM,
   CHANGE_IDENTITY,
@@ -29,6 +32,7 @@ const {
   OPEN_EXIT_MODAL,
   CLOSE_EXIT_MODAL,
   EXIT_TEAM,
+  GET_ALL_APPS
 } = types;
 
 export default createActions(
@@ -43,6 +47,8 @@ export default createActions(
     [TRANSFER_TEAM]: transferTeam,
     [DISMISS_TEAM]: dismissTeam,
     [EXIT_TEAM]: exitTeam,
+    [GET_ALL_APPS]: getAllApps,
+    [GET_TEAM_INFO]:getTeamInfo,
   },
   OPEN_REMOVE_MODAL,
   CLOSE_REMOVE_MODAL,
