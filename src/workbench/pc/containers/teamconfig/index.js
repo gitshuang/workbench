@@ -107,8 +107,8 @@ class CreateTeamContent extends Component {
       imgWarning: "",       // 团队头像警告格式
       imgUrl: "",           //   基础设置  选择头像回显
       logo: "",          // 上传成功后返回的url
-      searchAvalible: "true",  //搜索可见
-      allowExit: "false",  //允许用户是否退出空间
+      searchAvalible: "",  //搜索可见
+      allowExit: "",  //允许用户是否退出空间
       invitePermission: "1",       //邀请成员权限
       joinPermission: "1",        //加入权限
       btnType: "web",       // 团队应用当前按钮
@@ -140,10 +140,10 @@ class CreateTeamContent extends Component {
         tenantId: payload.tenantId,
         value: payload.tenantName,
         logo: payload.logo,
-        searchAvalible: String(payload.searchAvalible),
-        invitePermission: String(payload.invitePermission),
-        joinPermission: String(payload.joinPermission),
-        allowExit: String(payload.allowExit)
+        searchAvalible: payload.searchAvalible,
+        invitePermission: payload.invitePermission,
+        joinPermission: payload.joinPermission,
+        allowExit: payload.allowExit
       });
       requestSuccess();
     });
@@ -270,10 +270,10 @@ class CreateTeamContent extends Component {
       tenantName: value,
       tenantId: tenantId,
       logo: logo,
-      searchAvalible: searchAvalible === "false" ? false : true,
-      invitePermission: Number(invitePermission),
-      joinPermission: Number(joinPermission),
-      allowExit: allowExit === "false" ? false : true 
+      searchAvalible: searchAvalible,
+      invitePermission: invitePermission,
+      joinPermission: joinPermission,
+      allowExit: allowExit 
     };
     requestStart();
     createTeam(data).then(({ error, payload }) => {
@@ -324,8 +324,8 @@ class CreateTeamContent extends Component {
               selectedValue={this.state.searchAvalible}
               onChange={this.handleRadioChange1}
             >
-              <Radio value="false">否</Radio>
-              <Radio value="true">是</Radio>
+              <Radio value="0">否</Radio>
+              <Radio value="1">是</Radio>
             </Radio.RadioGroup>
           </div>
         </div>
@@ -338,7 +338,7 @@ class CreateTeamContent extends Component {
               onChange={this.handleChange1}
             >
               <Option value="1">全员邀请</Option>
-              <Option value="2">全员禁止</Option>
+              <Option value="0">全员禁止</Option>
             </Select>
           </div>
         </div>
@@ -351,7 +351,7 @@ class CreateTeamContent extends Component {
               onChange={this.handleChange2}
             >
               <Option value="1">所有用户都可申请加入</Option>
-              <Option value="2">禁止用户申请加入</Option>
+              <Option value="0">禁止用户申请加入</Option>
             </Select>
           </div>
         </div>
@@ -363,8 +363,8 @@ class CreateTeamContent extends Component {
               selectedValue={this.state.allowExit}
               onChange={this.handleRadioChange2}
             >
-              <Radio value="false">禁止</Radio>
-              <Radio value="true">允许</Radio>
+              <Radio value="0">禁止</Radio>
+              <Radio value="1">允许</Radio>
             </Radio.RadioGroup>
           </div>
         </div>

@@ -1,11 +1,11 @@
 {
   "msg": 1,
   "data":{
-    "allowExit": false,
-    "invitePermission": 2,
-    "joinPermission": 2,
+    "allowExit": "0",
+    "invitePermission": "0",
+    "joinPermission": "0",
     "logo": "测试内容nnr9",
-    "searchAvalible": false,
+    "searchAvalible": "0",
     "tenantId": "测试内容cqnk",
     "tenantName": "测试内容z3h4"
   },
