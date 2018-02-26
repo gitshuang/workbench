@@ -644,7 +644,7 @@ class CreateTeamContent extends Component {
             {
               newUserList.map((item,index)=>{
                 return (
-                  <li className="um-box um-box-vc" key="index">
+                  <li className="um-box um-box-vc" key={index}>
                     <div>
                       <img style={{display:"block",height:"100%"}} src = {item.userAvator} />
                     </div>
