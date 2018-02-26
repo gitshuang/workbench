@@ -1,5 +1,6 @@
 .dropdown_button_cont{
-    display: -webkit-box;
+    /* display: -webkit-box; */
+    display: inline-flex;
 }
 
 .label_cont{
