@@ -564,26 +564,28 @@ class CreateTeamContent extends Component {
     });
   }
   clearSearchFn =()=>{
+    const { onlyAdmin } = this.state;
     this.setState({
       searchVal: ""
     });
     this.clickValue = "";
-    this.queryUser();
+    this.queryUser( "", onlyAdmin );
   }
   // sousuo
   searchFn = () =>{
     // 点击搜索之后设置点击为true  从而判断点击分页是查询整还是搜索结果
-    const { searchVal } = this.state;
+    const { searchVal, onlyAdmin } = this.state;
     this.clickValue = searchVal;
-    this.queryUser( searchVal );
+    this.queryUser( searchVal, onlyAdmin );
   }
   // 点击只显示管理员
   changeCheck = (value) => {
     console.log(value);
+
     this.setState({
       onlyAdmin: value
     });
-    this.queryUser( "", value );
+    this.queryUser( this.clickValue, value );
   }
 
   // 点击分页
