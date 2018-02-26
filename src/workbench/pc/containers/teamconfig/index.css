@@ -323,9 +323,8 @@
   color:rgba(176,178,183,1);
   line-height:16px;
 }
-.memberLists li > div:nth-child(4){
-}
 .memberLists li > div:last-child{
+  justify-content:flex-end;
 }
 .memberLists li button{
   width: 79px;
