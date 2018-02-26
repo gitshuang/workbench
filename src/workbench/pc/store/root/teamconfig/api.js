@@ -26,8 +26,8 @@ export const userToAdmin = (userId) =>{
 // export const userToAdmin = (userId) =>{
 //   return get('/application/getAllAppsForTeam');
 // }
-export const removeUser = (userIds) =>{
-  return post('/manager/team/removeUser',{userIds:[userIds]});
+export const removeUser = (id) =>{
+  return post('/manager/team/removeUser',{ "userIds":[id] } );
 }
 
 export const transferTeam = (id) =>{
