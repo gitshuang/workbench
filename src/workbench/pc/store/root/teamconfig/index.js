@@ -13,6 +13,7 @@ const {
   openRemoveModal,        // 打开删除用户的弹窗
   closeRemoveModal,       // 关闭删除用户的弹窗     
   removeUser,             // 删除用户请求
+  changePage,             // 点击分页更改页数
 
   openUpgradeModal,       // 打开升级为企业弹窗 
   closeUpgradeModal,      // 关闭升级为企业弹窗 
@@ -40,7 +41,8 @@ const defaultState = {
   dismissModal: false,    //  解散团队弹窗开关
   exitModal: false,       //  退出团队弹窗开关
   applicationlist: [],    //  应用列表 
-  userList: {},           // 用户列表
+  userList: {},           //  用户列表
+  activePage: 1,          //  当前页数
 };
 
 
@@ -93,6 +95,10 @@ const reducer = handleActions({
       ...state
     }
   },
+  [changePage]: (state, { payload: eventKey }) => ({
+    ...state,
+    activePage: eventKey
+  }),
 
   [openUpgradeModal]: (state) => ({
     ...state,

@@ -22,6 +22,7 @@ import Dropdown from 'bee/dropdown';
 import Menu from 'bee/menus';
 import Radio from 'bee/radio';
 import Select from 'bee/select';
+import Pagination from 'bee/pagination'
 const { TabPane } = Tabs;
 const { Item } = Menu;
 const Option = Select.Option;
@@ -41,7 +42,8 @@ const {
   openDismissModal,
   openExitModal,
   getAllApps,
-  getUserList
+  getUserList,
+  changePage,             // 改变用户列表页数
 } = teamconfigActions;
 
 import {
@@ -74,6 +76,7 @@ import {
     'exitModal',        //  退出团队弹窗开关
     'applicationlist',  //  应用列表
     'userList',         //  用户列表
+    'activePage',       //  用户列表页数
     {
       key: 'userInfo',
       value: (teamconfig,ownProps,root) => {
@@ -101,13 +104,14 @@ import {
     openExitModal,          // 打开退出团队弹窗
     getAllApps,             // 获取全部应用
     getUserList,            // 获取用户列表
+    changePage,             // 改变用户列表页数
   }
 )
 
 class CreateTeamContent extends Component {
   constructor(props) {
     super(props);
-    this.imgObj = {};
+    this.clickValue = "";
     this.state = {
       tenantId: "",         // 团队id  直接取出来存到这里  
       value: "",            // 基础设置团队名称
@@ -126,6 +130,7 @@ class CreateTeamContent extends Component {
       currApplication: [],    // 当前渲染的是哪个类别的应用列表
       newUserList: [],        // 当前用户列表
       searchVal: "",          // 用户列表搜索关键字
+      onlyAdmin: false,       // 是否只显示管理员
     }
   }
 
@@ -140,7 +145,7 @@ class CreateTeamContent extends Component {
   }
   // 查询用户列表
   queryUser = ( keyword = "", onlyAdmin = false, page = 1, size = 10 ) => {
-    const { getUserList, requestError, requestSuccess } = this.props;
+    const { getUserList, changePage, requestError, requestSuccess } = this.props;
     const param = {
       page, 
       size,
@@ -155,6 +160,7 @@ class CreateTeamContent extends Component {
       this.setState({
         newUserList: payload.content
       })
+      changePage(page);
       requestSuccess();
     });
   }
@@ -551,23 +557,45 @@ class CreateTeamContent extends Component {
     this.setState({
       searchVal: ""
     });
+    this.clickValue = "";
     this.queryUser();
   }
   // sousuo
   searchFn = () =>{
     // 点击搜索之后设置点击为true  从而判断点击分页是查询整还是搜索结果
     const { searchVal } = this.state;
+    this.clickValue = searchVal;
     this.queryUser( searchVal );
   }
-
+  // 点击只显示管理员
   changeCheck = (value) => {
     console.log(value);
+    this.setState({
+      onlyAdmin: value
+    });
     this.queryUser( "", value );
   }
+
+  // 点击分页
+  handleSelect = (eventKey)=> {
+    const { activePage } = this.props;
+    const { onlyAdmin } = this.state;
+    if( eventKey == activePage ){
+      return false;
+    }
+    // 增加此判断是为了  用户输入框输入信息  但是并没有点击查询   点击过查询的才会搜索之后的列表
+    if (this.clickValue){
+      this.queryUser( this.clickValue, onlyAdmin, eventKey );
+    }else{
+      this.queryUser( "", onlyAdmin, eventKey );
+    }
+  }
+
+
   // 设置团队成员 
   teamMember = () => {
     const { newUserList } = this.state;
-    const { userList } = this.props;
+    const { userList, activePage } = this.props;
     return (
       <div className={box3}>
         <div className = {memberTit+" um-box" }>
@@ -632,6 +660,20 @@ class CreateTeamContent extends Component {
               })
             }
           </ul>
+        </div>
+        <div className="um-box-center" style={{marginTop:"20px"}}>
+          <Pagination
+            first
+            last
+            prev
+            next
+            boundaryLinks
+            gap={true}
+            items={userList.totalPages}
+            maxButtons={10}
+            activePage={activePage}
+            onSelect={this.handleSelect.bind(this)}
+          />
         </div>
       </div>
     )
