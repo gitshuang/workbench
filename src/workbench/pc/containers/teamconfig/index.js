@@ -656,7 +656,7 @@ class CreateTeamContent extends Component {
                     </div>
                     <div className="um-bf1  um-box-vc">
                       <Select
-                        value={ item.isAdmin ? "manage" : "member" }
+                        value={ item.admin ? "manage" : "member" }
                         style={{ width: 100, marginRight: 6 }}
                         onChange={ (e) => {this.handleChange3(e,item.userId)} }
                       >
@@ -671,7 +671,7 @@ class CreateTeamContent extends Component {
             }
           </ul>
         </div>
-        <div className="um-box-center" style={{marginTop:"20px"}}>
+        <div className="um-box-center" style={{paddingBottom:"20px"}}>
           <Pagination
             first
             last
