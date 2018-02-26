@@ -29,12 +29,12 @@
   position: relative;
 }
 /*ie*/
-/* .ie_searchPanel .search_icon_con>span,.ie_searchPanel .search_icon_con>i{ 
+/* .ie_searchPanel .search_icon_con>span,.ie_searchPanel .search_icon_con>i{
   float: left;
 } */
 .serviceSearch{
 	width:472px;
-	height:38px; 
+	height:38px;
 	border: 1px solid #dee0e3;
   color:#bdbfc3;
 }
@@ -126,7 +126,7 @@
   border: 1px solid rgba(78,89,104,0.19);
   border-radius:3px;
   -webkit-box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
-}   
+}
 /* ie9 */
 /* .appsList .ie_appsListItem{
   display: table;
@@ -222,7 +222,7 @@
   visibility: hidden;
 }
 /* ie9兼容 */
-:global(.ie9) .search_icon_con>span,:global(.ie9) .search_icon_con>i{ 
+:global(.ie9) .search_icon_con>span,:global(.ie9) .search_icon_con>i{
   float: left;
 }
 :global(.ie9) .wrap .um_content{
@@ -241,4 +241,9 @@
 :global(.ie9) .appsList li>div{
   display: table-cell;
   vertical-align: top;
+}
+.wrap .openMarketBtn {
+  float: right;
+  background: #e14c46;
+  color: #fff;
 }
