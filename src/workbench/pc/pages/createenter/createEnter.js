@@ -8,7 +8,8 @@ import { ButtonBrand } from 'components/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import 'assets/style/Form.css';
-import { enter_form} from './style.css';
+import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom} from './style.css';
+import CitySelect from 'bee/city-select';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
@@ -71,12 +72,16 @@ class CreateEnter extends Component {
     this.tenantIndustry ={
       name:"tenantIndustry",
       value:"A",
-      verify:true,
+      verify:true
     }
+    this.address = "北京东城区";
   }
   
   checkForm = (flag, data) => {
     const {setCreateEnter,updateenter} = this.props;
+    let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
+    _tenantAddress.value = this.address + _tenantAddress.value;
+    // debugger;
     data.push(this.tenantIndustry);
     if (flag) {
       requestStart();
@@ -101,6 +106,9 @@ class CreateEnter extends Component {
     }
   }
 
+  onChange = (obj)=>{
+    this.address = obj.province + obj.city + obj.area;
+  }
 
   setOptherData(obj){
     this.tenantIndustry.value = obj.value;
@@ -109,28 +117,20 @@ class CreateEnter extends Component {
   render() {
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *</font></span>} 
+            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *&nbsp;</font></span>} 
             isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur" 
              inline={true}>
                 <FormControl name="tenantName"  placeholder="最多60个字符"/>
             </FormItem>
 
-            <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
+            <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *&nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
               <Upload name='logo'/>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>地址<font color='red'> *</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
-              <FormControl name="tenantAddress" placeholder="最多60个字符" />
-            </FormItem>
-
-            <FormItem showMast={false} valuePropsName='value'  labelName={<span>邮箱<font color='red'> *</font></span>} isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
-                <FormControl name="tenantEmail"  placeholder="请输入邮箱" />
-            </FormItem>
-
-            <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+            <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     defaultValue="A"
-                    style={{ width: 200, marginRight: 6 }} 
+                    style={{ width: 338, marginRight: 6 }} 
                     onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
                     >
                     <Option value="A">农、林、牧、渔业</Option>
@@ -156,13 +156,41 @@ class CreateEnter extends Component {
                 </Select>
             </FormItem>
 
-            <FormItem inputBefore="+86" className="input_phone" showMast={false}  valuePropsName='value'  labelName={<span>手机号<font color='red'> *</font></span>} isRequire={true} method="blur" htmlType="tel" errorMessage="手机号格式错误"  inline={true}>
-                <FormControl name="tenantTel"  placeholder="请输入手机号" />
+            <FormItem showMast={false} labelName={<span>企业地址<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
+              <CitySelect name='address' onChange={this.onChange}/>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>企业性质<font color='red'> *</font></span>} isRequire={false} method="change" inline={true}>
-              <Nature name="tenantNature" defaultValue='LegalPerson' />
+            <FormItem className={tenant_address} showMast={false} isRequire={true} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
+              <FormControl name="tenantAddress" placeholder="最多60个字符" />
             </FormItem>
+
+            <div className={lxr_hr}>
+              <hr />  
+            </div>
+
+            <div className={lxr_title}>
+              联系人信息：
+            </div>
+
+            <FormItem showMast={false} labelName={<span>姓名<font color='red'> *&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入联系人姓名" method="blur" inline={true}>
+              <FormControl name="linkman"  placeholder="请输入联系人姓名" />
+            </FormItem>
+
+            <FormItem showMast={false} valuePropsName='value'  labelName={<span>邮箱<font color='red'> *&nbsp;</font></span>} isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
+                <FormControl name="tenantEmail"  placeholder="请输入邮箱" />
+            </FormItem>
+
+            <FormItem inputBefore="+86" className="input_phone" showMast={false}  valuePropsName='value'  labelName={<span>手机号<font color='red'> *&nbsp;</font></span>} isRequire={true} method="blur" htmlType="tel" errorMessage="手机号格式错误"  inline={true}>
+                <FormControl name="tenantTel"  placeholder="请输入手机号" />
+            </FormItem>
+            
+            {/* <FormItem showMast={false} labelName={<span>企业性质<font color='red'> * </font></span>} isRequire={false} method="change" inline={true}>
+              <Nature name="tenantNature" defaultValue='LegalPerson' />
+            </FormItem> */}
+            {/* <div className={lxr_hr_bottom}>
+              <hr />  
+            </div> */}
+
             <SubmitBtn isSubmit />
         </Form>
     );

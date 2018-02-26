@@ -97,7 +97,7 @@ class Home extends Component {
     })
 
     return (
-      <div className={page_home} style={contentStyle}>
+      <div className={`${page_home} home`} style={contentStyle}>
         <HeaderPage list={list} headerData={headerData}/>
         <ElementsWrapper items={list} offset={-55}>
           {conts}
