@@ -16,7 +16,7 @@ class Account extends Component {
     return (
       <ApplicationWrap name='应用市场' brms={[{name: '全部应用'}]} goBack={this.goBack}>
         <div className={bg+" um-content um-vbox"}>
-          <iframe className={ frameElm } src={'/diwork-market'} />
+          <iframe className={frameElm} src={'/diwork-market/appMarket'} />
         </div>
       </ApplicationWrap>
     );
