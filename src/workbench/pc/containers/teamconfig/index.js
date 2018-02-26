@@ -521,7 +521,7 @@ class CreateTeamContent extends Component {
         }
         newUserList.forEach((item,index) => {
           if (item.userId == id){
-            item.isAdmin = true
+            item.admin = true
           }
         }); 
         this.setState({
@@ -537,7 +537,7 @@ class CreateTeamContent extends Component {
       }
       newUserList.forEach((item,index) => {
         if (item.userId == id){
-          item.isAdmin = false
+          item.admin = false
         }
       }); 
       this.setState({
