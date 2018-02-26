@@ -40,5 +40,5 @@ export const exitTeam = (id) =>{
   return post('/manager/teamEnter/createTeam',{id});
 }
 export const getAllApps = () =>{
-  return get('/application/getAllAppsForTeam');
+  return get('/manager/application/getAllAppsForTeam');
 }

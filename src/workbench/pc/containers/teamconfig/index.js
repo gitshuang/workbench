@@ -113,21 +113,25 @@ class CreateTeamContent extends Component {
     super(props);
     this.clickValue = "";
     this.state = {
-      tenantId: "",         // 团队id  直接取出来存到这里  
-      value: "",            // 基础设置团队名称
-      imgWarning: "",       // 团队头像警告格式
-      imgUrl: "",           //   基础设置  选择头像回显
-      logo: "",          // 上传成功后返回的url
-      searchAvalible: "",  //搜索可见
-      allowExit: "",  //允许用户是否退出空间
-      invitePermission: "1",       //邀请成员权限
-      joinPermission: "1",        //加入权限
-      btnType: "web",       // 团队应用当前按钮
-      deleteMemberId: "",   // 选择删除成员的ID
+
+      imgWarning: "",         // 团队头像警告格式
+      imgUrl: "",             // 基础设置  选择头像回显
+
+      tenantId: "",           // 团队id  直接取出来存到这里  
+      value: "",              // 基础设置团队名称
+      logo: "",               // 上传成功后返回的url
+      //searchAvalible: "",     // 搜索可见
+      allowExit: "",          // 允许用户是否退出空间
+      invitePermission: "1",  // 邀请成员权限
+      joinPermission: "1",    // 加入权限
+
+      btnType: "web",         // 团队应用当前按钮
+      deleteMemberId: "",     // 选择删除成员的ID
       webApplication: [],     //  web端应用
       mobApplication: [],     //  移动端应用
       cliApplication: [],     //  client 应用
       currApplication: [],    // 当前渲染的是哪个类别的应用列表
+
       newUserList: [],        // 当前用户列表
       searchVal: "",          // 用户列表搜索关键字
       onlyAdmin: false,       // 是否只显示管理员
@@ -135,14 +139,62 @@ class CreateTeamContent extends Component {
   }
 
   componentWillMount() {
-    this.queryUser();
-    this.queryApplication();
     this.queryBasicConfig();
+    this.queryApplication();
+    this.queryUser();
   }
 
   componentDidMount() {
     
   }
+
+  // 查询基础设置
+  queryBasicConfig = () => {
+    const { getTeamInfo, requestError, requestSuccess } = this.props;
+    getTeamInfo().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        tenantId: payload.tenantId,
+        value: payload.tenantName,
+        logo: payload.logo,
+        //searchAvalible: payload.searchAvalible,
+        invitePermission: payload.invitePermission,
+        joinPermission: payload.joinPermission,
+        allowExit: payload.allowExit
+      });
+      requestSuccess();
+    });
+  }
+
+   // 查询团队应用
+   queryApplication = () => {
+    const { getAllApps, requestError, requestSuccess } = this.props;
+    getAllApps().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      const webApplication = payload.filter((item)=>{
+        return item.webStatus;
+      });
+      const mobApplication = payload.filter((item)=>{
+        return item.phoneStatus;
+      });
+      const cliApplication = payload.filter((item)=>{
+        return item.clientStatus;
+      });
+      const currApplication = webApplication;
+      this.setState({
+        webApplication,
+        mobApplication,
+        cliApplication,
+        currApplication
+      })
+      requestSuccess();
+    });
+  }
+
   // 查询用户列表
   queryUser = ( keyword = "", onlyAdmin = false, page = 1, size = 10 ) => {
     const { getUserList, changePage, requestError, requestSuccess } = this.props;
@@ -165,53 +217,9 @@ class CreateTeamContent extends Component {
     });
   }
 
-  // 查询团队应用
-  queryApplication = () => {
-    const { getAllApps, requestError, requestSuccess } = this.props;
-    getAllApps().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      }
-      const webApplication = payload.filter((item)=>{
-        return item.webStatus;
-      });
-      const mobApplication = payload.filter((item)=>{
-        return item.phoneStatus;
-      });
-      const cliApplication = payload.filter((item)=>{
-        return item.clientStatus;
-      });
-      let currApplication = webApplication;
-      this.setState({
-        webApplication,
-        mobApplication,
-        cliApplication,
-        currApplication
-      })
-      requestSuccess();
-    });
-  }
+ 
 
-  // 查询基础设置
-  queryBasicConfig = () => {
-    const { getTeamInfo, requestError, requestSuccess } = this.props;
-    getTeamInfo().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      }
-      this.setState({
-        tenantId: payload.tenantId,
-        value: payload.tenantName,
-        logo: payload.logo,
-        searchAvalible: payload.searchAvalible,
-        invitePermission: payload.invitePermission,
-        joinPermission: payload.joinPermission,
-        allowExit: payload.allowExit
-      });
-      requestSuccess();
-    });
-    
-  }
+  
 
 
   // 基础设置  输入框改变
@@ -259,9 +267,9 @@ class CreateTeamContent extends Component {
     });
   }
   // 基础设置  搜索可见是否
-  handleRadioChange1 = (value) => {
-    this.setState({ searchAvalible: value });
-  }
+  // handleRadioChange1 = (value) => {
+  //   this.setState({ searchAvalible: value });
+  // }
   // 基础设置    邀请成员权限
   handleChange1 = value => {
     console.log(`selected ${value}`);
@@ -287,7 +295,7 @@ class CreateTeamContent extends Component {
       tenantId, 
       value, 
       logo,
-      searchAvalible,  //搜索可见
+      //searchAvalible,  //搜索可见
       allowExit,  //允许用户是否退出空间
       invitePermission,       //邀请成员权限
       joinPermission,        //加入权限
@@ -301,7 +309,7 @@ class CreateTeamContent extends Component {
       tenantName: value,
       tenantId: tenantId,
       logo: logo,
-      searchAvalible: searchAvalible,
+      //searchAvalible: searchAvalible,
       invitePermission: invitePermission,
       joinPermission: joinPermission,
       allowExit: allowExit 
@@ -347,6 +355,7 @@ class CreateTeamContent extends Component {
             </div>
           </div>
         </div>
+        {/*
         <div className={item + " um-box"}>
           <label>搜索可见</label>
           <div className="um-box-vc">
@@ -360,6 +369,7 @@ class CreateTeamContent extends Component {
             </Radio.RadioGroup>
           </div>
         </div>
+        */}
         <div className={item + " um-box"}>
           <label>邀请成员权限</label>
           <div>
@@ -634,7 +644,7 @@ class CreateTeamContent extends Component {
             {
               newUserList.map((item,index)=>{
                 return (
-                  <li className="um-box um-box-vc">
+                  <li className="um-box um-box-vc" key="index">
                     <div>
                       <img style={{display:"block",height:"100%"}} src = {item.userAvator} />
                     </div>
