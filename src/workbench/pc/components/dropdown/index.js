@@ -59,7 +59,7 @@ class DropdownButton extends Component{
     });
     let _marginLeft = -148;
     if(type && type == "home"){
-      item.push(<MenuItem key="td_2001" >创建团队\创建企业</MenuItem>);
+      item.push(<MenuItem key="td_2001" >创建团队 \ 创建企业</MenuItem>);
       _marginLeft = -188;
     }
     let _menus = <Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
