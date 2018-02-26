@@ -71,6 +71,7 @@ class HeaderPage extends Component {
     //return (<img src={logo || logoUrl} className={logoImg}/>);
     // return <div className={logo_title}>用友网络科技股份有限公司</div>
     return (<DropdownButton
+    getPopupContainer={() => document.getElementById("home_header")}
     label="用友网络科技股份有限公司" type="home" dataItem={
       allowTenants.map(({
         tenantId: name,
@@ -164,7 +165,7 @@ class HeaderPage extends Component {
     const _btnShow = this.state.btnShow?null:btn_disable;
 
     return (
-      <div className={`${header}`} style={background}>
+      <div className={`${header}`} style={background} id="home_header">
         <Header
           onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
           onLeftTitleClick={this.onLeftTitleClick}

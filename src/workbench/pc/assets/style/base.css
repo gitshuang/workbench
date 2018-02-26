@@ -87,13 +87,18 @@ body {
 
 .lebra-navbar-left-content {
   -webkit-box-flex: 1;
+  border-radius: 100px;
+  margin-left: 8px;
+  border: 1px solid #E6E7E9;
   /* line-height: 36px; */
 }
 
 .lebra-navbar-left-icon .iconfont {
   font-size: 20px;
 }
-
+.u-form-control{
+  font-size: 14px !important;
+}
 /* .u-dropdown-menu {
   box-shadow: 0 0 0 1px rgba(9, 30, 66, 0.08);
 }
