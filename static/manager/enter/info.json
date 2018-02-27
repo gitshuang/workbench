@@ -6,6 +6,9 @@
       "tenantNature":"IndividualPerson",
       "tenantEmail":"jonyshi@126.com",
       "tenantTel":"15666666666",
+      "joinPermission":0,
+      "tenantIndustry":"C",
+      "invitePermission":1,
       "logo":"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/05b27bb3-fc0a-486b-855c-3c317e56c5d4/632680F6-4B67-4F24-989D-50FA54A6097E.png"
   },
   "status": 1

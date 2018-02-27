@@ -31,7 +31,7 @@ var api = [
   '/invite/getQRCode',
 
   '/manager/teamEnter/createEnter',
-  '/enter/getEnterInfo',
+  '/manager/enter/info',
   '/manager/application/getAllAppsForTeam',
   '/manager/team/info',
   '/manager/team/queryUserPage',

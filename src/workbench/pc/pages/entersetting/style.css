@@ -38,7 +38,7 @@
   background: #fff;
   /* text-align: center; */
   /* padding-left: 100px; */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .enter_title{
    width: 100%;
@@ -48,7 +48,7 @@
    border-radius: 3px 3px 0px 0px;
    margin: 0 auto;
    text-align: center;
-   padding: 50px 0;
+   padding: 20px 0;
 }
 
 .title{
@@ -96,7 +96,7 @@
 }
 
 .enter_form :global(.u-input-inner>input){
-  /* width:338px !important; */
+  width:338px !important;
   height:36px;
   background:rgba(255,255,255,1);
   border-radius: 3px ; 
@@ -107,7 +107,12 @@
   height:36px;
   line-height: 36px;
 }
-
+.enter_form >span:nth-child(5) :global(.u-form-item){
+  margin-top: -20px;
+}
+.enter_form :global(.u-city-select){
+  display: inline-flex;
+}
 .enter_form :global(.u-select-lg .u-select-selection--single){
   width: 271px;
   border:1px solid RGBA(78, 89, 104, 0.2);
@@ -117,9 +122,57 @@
   background: transparent;
 }
 
+
+.enter_form :global(.u-select .u-select-arrow):before{
+  content: "\E964" !important;
+  font-family: 'iconfont' !important;
+}
+
+.tenant_address{
+  background: red;
+}
+
+.lxr_hr{
+  width:450px;
+  height:1px; 
+  background:rgba(13,20,36,1);
+  opacity:0.1;
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+.lxr_title{
+  margin-left: 76px;
+  margin-bottom: 20px;
+}
+.hr2{;
+  margin-top: -40px;
+  background:rgba(13,20,36,1) !important;
+  opacity:0.1;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.lxr_hr_bottom{ 
+  margin-left: -160px;
+  width:450px;
+  height:11px; 
+  background:rgba(13,20,36,1);
+  opacity:0.1;
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+
+.lxr_hr_bottom>hr{
+  width:100%;
+}
+
 .appBreadcrumb{
   padding-left: 23px;
   font-size: 12px;
   height:32px; 
   background:rgba(255,255,255,1);
+}
+
+:global(.enter_setting .u-form-submit)>button{
+  margin-left: 0px;
+  width:80px;
 }
