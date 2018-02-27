@@ -85,7 +85,7 @@ class searchResult extends Component {
       activetab: '',
       SearchMoreList:[],
       hasOther:false,
-      keywords:props.location.state?props.location.state.value:"",
+      keywords:props.match.params?props.match.params.value:"",
       Searchotherlist :{
         content:[]
       },
@@ -219,8 +219,11 @@ class searchResult extends Component {
     let nowUrl = window.location.href;
     let newUrl =  nowUrl.substring(0,nowUrl.indexOf('search/')+7).concat(this.state.value);
     window.location.href = newUrl;
-    //this.props.location.pathname = this.props.match.url = this.props.history.location.pathname = '/search/'+this.state.value;
-    this.getSearchMoreList(this.state.value)
+    this.setState({
+      keywords:this.state.value
+    }, function() {
+      this.getSearchMoreList(this.state.value)
+    })
   }
   onFormChange = (value) => {
     this.setState({
