@@ -121,29 +121,32 @@ class searchResult extends Component {
       getSearchMore,
     } = this.props;
       // requestStart();
-      getSearchMore(keywords).then(({error, payload}) => {
-        if (error) {
-          requestError(payload);
-        }
-        this.setState({
-          SearchMoreList:payload.data,
-          hasOther:payload.hasOther,
-          activetab:payload.data[0].type,
-          keywords,
-          value:keywords
-        })
-        // requestSuccess();
-        if(payload.data.length<1){
-          this.setState({
-            isShownodataClass:false,
-          })
-        }else{
-          this.setState({
-            isShowPagination:true,
-          })
-        } 
-        this.getSearchTpyeList(keywords,payload.data[0].type,1);
-      });
+      this.setState({keywords,value:keywords},function () {
+          getSearchMore(keywords).then(({error, payload}) => {
+            if (error) {
+              requestError(payload);
+            }
+            this.setState({
+              SearchMoreList:payload.data,
+              hasOther:payload.hasOther,
+              activetab:payload.data[0].type,
+              //keywords,
+              //value:keywords
+            })
+            // requestSuccess();
+            if(payload.data.length<1){
+              this.setState({
+                isShownodataClass:false,
+              })
+            }else{
+              this.setState({
+                isShowPagination:true,
+              })
+            } 
+            this.getSearchTpyeList(keywords,payload.data[0].type,1);
+          });
+      })
+      
   }
   getSearchTpyeList(keywords,type,page){
     const {
