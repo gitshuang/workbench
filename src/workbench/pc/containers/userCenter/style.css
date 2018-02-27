@@ -404,10 +404,11 @@
   border-radius: 50px;
   width:64px;
   height:64px;
-  font-size: 64px;
+  font-size: 30px;
   color: #fff;
   line-height: 64px;
   overflow: hidden;
+  padding-left: 16px;
 }
 .logOut{
   position: absolute;
@@ -517,7 +518,8 @@
   margin: 0 25px 44px 0;
 }
 .tenantPortrait .defaultPic i{
-  font-size: 64px;
+  font-size: 30px;
+  font-weight: 100;
 }
 /* IE9个人中心 */
 :global(.ie9) .tenantPortrait{
