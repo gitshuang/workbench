@@ -215,6 +215,11 @@ class searchResult extends Component {
   }
 
   btnSearch=()=>{
+    //修改URL、
+    let nowUrl = window.location.href;
+    let newUrl =  nowUrl.substring(0,nowUrl.indexOf('search/')+7).concat(this.state.value);
+    window.location.href = newUrl;
+    //this.props.location.pathname = this.props.match.url = this.props.history.location.pathname = '/search/'+this.state.value;
     this.getSearchMoreList(this.state.value)
   }
   onFormChange = (value) => {
