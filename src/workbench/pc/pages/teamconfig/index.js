@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Header from 'containers/header';
+import BreadcrumbContainer from 'components/breadcrumb';
 import TeamconfigContent from 'containers/teamconfig';
 
 @withRouter
@@ -32,6 +33,9 @@ class Teamconfig extends Component {
                             <span>团队设置</span>
                         </div>
                     </Header>
+                    <div style={{paddingLeft: "23px",fontSize: "12px"}}>
+                        <BreadcrumbContainer data={[{name:'团队设置'}]} goback={this.goBack}/>
+                    </div>
                 </div> 
                 <div className="um-content">
                     <TeamconfigContent />    
