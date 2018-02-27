@@ -9,6 +9,7 @@ import Icon from 'components/icon';
 import FormControl from 'bee/form-control';
 // import Menu from 'bee-menus';
 import ButtonGroup from 'bee/button-group';
+import { ButtonBrand } from 'components/button';
 import GoTo from './goto';
 
 import {
@@ -29,7 +30,8 @@ import {
   icon_close,
   icon_open,
   topTabBtns,
-  appsList
+  appsList,
+  openMarketBtn,
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -113,7 +115,7 @@ class serviceClassify extends Component {
     const { allApplicationList } = this.props;
     const { value } = this.state;
     const newArr = allApplicationList.applications.filter((item,index) => {
-      return item.applicationName.indexOf(value) > -1 
+      return item.applicationName.indexOf(value) > -1
      });
      this.setState({
       allApplicationList: newArr
@@ -129,7 +131,7 @@ class serviceClassify extends Component {
   renderList(){
     const lis = [];
     const appItems_obj = {};//转换后的数据Map
-    const {labelsArr,currentTab,currentLabel,currentApp,allApplicationList,allLabelGroups} = this.state; 
+    const {labelsArr,currentTab,currentLabel,currentApp,allApplicationList,allLabelGroups} = this.state;
     if(allApplicationList.length>0){
       allApplicationList.map((
         {
@@ -180,7 +182,7 @@ class serviceClassify extends Component {
     })
     btns.push(<Button className={ currentLabel === undefined ? 'active' : '' } key="all" onClick={this.handleChangeLabel()}>全部</Button>);
     {
-      labelsArr[currentTab] ? 
+      labelsArr[currentTab] ?
       (
         labelsArr[currentTab].map(({labelId,labelName},index)=>{
           btns.push(
@@ -206,7 +208,7 @@ class serviceClassify extends Component {
           shape="border"
           key={index}>
           {labelGroupName}
-        </Button> 
+        </Button>
       );
     });
     return labelbtns;
@@ -217,6 +219,9 @@ class serviceClassify extends Component {
         value:e
     });
   }
+  openMarket = () => {
+    this.props.history.push('/market')
+  }
 
   // inputOnFocus = (e) => {
   //   if(e.target.value != ""){
@@ -226,7 +231,7 @@ class serviceClassify extends Component {
   //   }
   // }
 
-  // inputOnBlur = (e) => { 
+  // inputOnBlur = (e) => {
   // }
 
   render() {
@@ -246,8 +251,9 @@ class serviceClassify extends Component {
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
                   <span className={search_tit} onClick={this.btnSearch}>搜索</span>
               </div>
+              <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>
             </div>
-            
+
             <div className={um_content}>
               <div>
                 <div className={topTabBtns}>

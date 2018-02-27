@@ -15,6 +15,7 @@ import Invitation from 'pages/invitation';
 import Account from 'pages/account';
 import Teamconfig from 'pages/teamconfig';
 import UpdateEnter from 'pages/updateenter';
+import Market from 'pages/market';
 
 const routes = [
   {
@@ -89,7 +90,10 @@ const routes = [
     path: '/404',
     component:Page404
   },
-
+  {
+    path: '/market',
+    component: Market,
+  },
 ];
 
 export default routes;
