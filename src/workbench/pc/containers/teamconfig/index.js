@@ -112,6 +112,7 @@ class CreateTeamContent extends Component {
   constructor(props) {
     super(props);
     this.clickValue = "";
+    this.tenantName = "";
     this.state = {
 
       imgWarning: "",         // 团队头像警告格式
@@ -164,6 +165,8 @@ class CreateTeamContent extends Component {
         joinPermission: payload.joinPermission,
         allowExit: payload.allowExit
       });
+      // 将默认的团队名称赋值变量
+      this.tenantName = payload.tenantName;
       requestSuccess();
     });
   }
@@ -471,7 +474,7 @@ class CreateTeamContent extends Component {
             <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>手机端</Button>
             <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PC客户端</Button>
           </span>
-          <Button colors="danger">添加应用</Button>
+          {/*<Button colors="danger">添加应用</Button>*/}
         </div>
         <div className={applicationLists}>
           <ul>
@@ -726,7 +729,7 @@ class CreateTeamContent extends Component {
     return (
       <div className={wrap}>
         <div className={header}>
-          <h2>用友网络用户体验小组</h2>
+          <h2>{this.tenantName}</h2>
           <div className="um-box um-box-center">
             <div>
               <Button onClick={this.openUpgradeModal}>升级为企业</Button>
