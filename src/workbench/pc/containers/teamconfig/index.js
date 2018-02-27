@@ -324,11 +324,8 @@ class CreateTeamContent extends Component {
         requestError(payload);
         return;
       }
-      // getUserInfo();
-      // history.replace('/');
-      // changeUserInfoDisplay();
       const tenantId = payload.tenantId;
-      localStorage.setItem('create', "1");
+      //localStorage.setItem('create', "1");
       window.location.href = "/?tenantId=" + tenantId + "&switch=true";
     });
 
