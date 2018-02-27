@@ -1,14 +1,14 @@
-.page_home :global(.lebra-navbar-left-icon){
+/* .page_home :global(.lebra-navbar-left-icon){
   background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
   background: #BEC1C8;
   border: 1px solid #FFFFFF;
   border-radius: 100px;
   color: #fff;
   overflow:hidden;
-}
-.page_home :global(.lebra-navbar-left-icon .iconfont){
+} */
+/* .page_home :global(.lebra-navbar-left-icon .iconfont){
   font-size: 31px;
-}
+} */
 .logoImg{
   max-height: 27px;
 }
@@ -79,3 +79,10 @@ body{
   padding-left:0;
   margin-left: 15px;
 } */
+
+.appBreadcrumb{
+  padding-left: 23px;
+  font-size: 12px;
+  height:32px; 
+  background:rgba(255,255,255,1);
+}

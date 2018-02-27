@@ -107,6 +107,11 @@
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
+.enter_form :global(.u-select .u-select-arrow):before{
+  content: "\E964" !important;
+  font-family: 'iconfont' !important;
+}
+
 .tenant_address{
   background: red;
 }
@@ -142,4 +147,11 @@
 
 .lxr_hr_bottom>hr{
   width:100%;
+}
+
+.appBreadcrumb{
+  padding-left: 23px;
+  font-size: 12px;
+  height:32px; 
+  background:rgba(255,255,255,1);
 }

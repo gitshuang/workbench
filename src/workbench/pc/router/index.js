@@ -60,7 +60,7 @@ const routes = [
     component: CreateEnter,
   },
   {
-    path: '/entersetting',
+    path: '/entersetting/:data',
     component: EnterSetting,
   },
   {

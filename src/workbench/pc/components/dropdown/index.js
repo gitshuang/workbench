@@ -23,6 +23,9 @@ class DropdownButton extends Component{
   }
 
   onVisibleChange=(visible)=> {
+    if(this.props.closeFun()){
+      this.props.closeFun();
+    }
     this.setState({
         visible: visible
     })

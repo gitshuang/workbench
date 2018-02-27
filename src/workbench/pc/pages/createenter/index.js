@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CreateEnter from './createEnter';
+import Breadcrumbs from 'components/breadcrumb';
 import Header from 'containers/header';
-import { page_enterprise ,enter_title,enter_cont,hr,hr2} from './style.css';
+import { page_enterprise ,enter_title,enter_cont,hr,hr2,appBreadcrumb} from './style.css';
 
 @withRouter
 class Enterprise extends Component {
@@ -30,6 +31,9 @@ class Enterprise extends Component {
           </div>
             : null
         }
+        <div className={appBreadcrumb}>
+          <Breadcrumbs data={[{ name:"创建企业" }]} goback={this.goBack}/>
+        </div> 
         <div className={`${page_enterprise} um-content`}>
           <div className={enter_title} >创建企业</div>
           <hr className={hr}/>

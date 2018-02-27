@@ -81,7 +81,6 @@ class CreateEnter extends Component {
     const {setCreateEnter,updateenter} = this.props;
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
     _tenantAddress.value = this.address + _tenantAddress.value;
-    // debugger;
     data.push(this.tenantIndustry);
     if (flag) {
       requestStart();

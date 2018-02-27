@@ -59,11 +59,23 @@ class HeaderPage extends Component {
     );
   }
 
+  closeFun = ()=>{
+    const {
+      changeUserInfoDisplay,
+      hideUserInfoDisplay,
+      userInfoDisplay
+    } = this.props;
+    if(userInfoDisplay){
+      hideUserInfoDisplay();
+    } 
+  }
+
   getLeftContent() {
     const {
       userInfo: {
         logo,
-        allowTenants
+        allowTenants,
+        company,
       }
     } = this.props;
 
@@ -72,7 +84,8 @@ class HeaderPage extends Component {
     // return <div className={logo_title}>用友网络科技股份有限公司</div>
     return (<DropdownButton
     getPopupContainer={() => document.getElementById("home_header")}
-    label="用友网络科技股份有限公司" type="home" dataItem={
+    closeFun={this.closeFun}
+    label={company} type="home" dataItem={
       allowTenants.map(({
         tenantId: name,
         tenantName: value,

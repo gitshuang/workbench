@@ -6,8 +6,9 @@ import rootActions from 'store/root/actions';
 // import HeaderPage from './headerPage';
 import Header from 'containers/header';
 import EstablishContent from 'containers/establishContent'
-import { page_home } from './style.css';
+import { page_home ,appBreadcrumb} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
+import Breadcrumbs from 'components/breadcrumb';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 
@@ -67,6 +68,9 @@ class EstablishUserCenter extends Component {
                     </Header>
                 </div>
                 <div className="um-content">
+                    <div className={appBreadcrumb}>
+                        <Breadcrumbs data={[{ name:"创建团队" }]} goback={this.goBack}/>
+                    </div>
                     <EstablishContent userInfo={ userInfo } />
                 </div>
             </div>
