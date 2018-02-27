@@ -180,7 +180,7 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
-  gotoConfig = (_curTenant) => {
+  gotoConfig = (curTenant) => { 
     if (curTenant && curTenant.type == 0 ) {//企业
       this.gotoEnter();
     }else{//团队
@@ -420,7 +420,7 @@ class UserInfoContainer extends Component {
                       shape="border"
                       size="sm"
                       onClick={()=>{this.gotoConfig(this._curTenant)}}>
-                       <Icon type="group" />
+                       <Icon type="staff" />
                       {
                         `${this.getCompanyType()}设置`
                       }
