@@ -450,10 +450,21 @@ class CreateTeamContent extends Component {
       return "已过期"
     }
     const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
-    // if(timeDiff > 10){
-    //   return false;
-    // }
+    if(timeDiff > 30){
+      return false;
+    }
     return "还有"+Math.ceil(timeDiff)+"日过期"
+  }
+  esitXufei = (time) => {
+    const currTime = new Date().getTime();
+    if( currTime > time ){
+      return true;
+    }
+    const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
+    if(timeDiff > 30){
+      return false;
+    }
+    return true;
   }
 
   openXufei = () => {
@@ -490,7 +501,10 @@ class CreateTeamContent extends Component {
                       <p>{this.esitTime(item.expired)}</p>
                     </div>
                     <div className="um-bf1 tr">
-                      <Button onClick={this.openXufei}>续费</Button>
+                      {
+                        this.esitXufei(item.expired) ? <Button onClick={this.openXufei}>续费</Button> : null
+                      }
+                      
                     </div>
                   </li>
                 )
