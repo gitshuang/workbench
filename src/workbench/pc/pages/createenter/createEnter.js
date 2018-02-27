@@ -69,19 +69,25 @@ class CreateEnter extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {};
     this.tenantIndustry ={
       name:"tenantIndustry",
       value:"A",
       verify:true
     }
-    this.address = "北京东城区";
+    this.address = "北京|北京|东城区|";
   }
   
   checkForm = (flag, data) => {
     const {setCreateEnter,updateenter} = this.props;
+    let _address = data.find((da)=>da.name == "address");
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
-    _tenantAddress.value = this.address + _tenantAddress.value;
-    data.push(this.tenantIndustry);
+    if(_address.value != ""){
+      
+      _tenantAddress.value = _address.value.province + "|" + _address.value.city  + "|" + _address.value.area + "|" + _tenantAddress.value;
+    }else{
+      _tenantAddress.value = this.address + _tenantAddress.value;
+    }
     if (flag) {
       requestStart();
       setCreateEnter(
@@ -109,8 +115,19 @@ class CreateEnter extends Component {
     this.address = obj.province + obj.city + obj.area;
   }
 
-  setOptherData(obj){
-    this.tenantIndustry.value = obj.value;
+  setUrl(name,url){
+    this.state[name] = url;
+    this.setState({
+      ...this.state
+    })
+  }
+
+  setOptherData=(obj)=>{
+    // this.tenantIndustry.value = obj.value;
+    this.state[obj.name] = obj.value;
+    this.setState({
+      ...this.state
+    })
   }
 
   render() {
@@ -123,12 +140,13 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *&nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo'/>
+              <Upload name='logo' onChange={(e)=>{this.setUrl("logo",e)}}  /> 
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     defaultValue="A"
+                    name="tenantIndustry"
                     style={{ width: 338, marginRight: 6 }} 
                     onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
                     >

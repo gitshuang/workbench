@@ -112,6 +112,9 @@ class CreateEnter extends Component {
         requestError(payload);
       }
       requestSuccess();
+      let _tenantAddress = payload.find((da)=>da.name == "tenantAddress");
+      let _addres = _tenantAddress.value.split("|");
+      payload["address"] = {province:_addres[0],city:_addres[1],area:_addres[2]};
       console.log("6666666",payload);
       this.setState({
         ...payload
@@ -121,10 +124,6 @@ class CreateEnter extends Component {
   
   checkForm = (flag, data) => {
     const {setCreateEnter} = this.props;
-    data.push(this.tenantIndustry);
-    data.push(this.invitePermission);
-    data.push(this.joinPermission);
-    if (flag) {
       requestStart();
       setCreateEnter(
         data.reduce(
@@ -154,9 +153,11 @@ class CreateEnter extends Component {
     })
   }
 
-  setOptherData(obj){
-    this[obj.name].value = obj.value;
-    // this.tenantIndustry.value = obj.value;
+  setOptherData=(obj)=>{
+    this.state[obj.name] = obj.value;
+    this.setState({
+      ...this.state
+    })
   }
 
   render() {
@@ -171,10 +172,11 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' logo={logo?logo:""}/>
+              <Upload name='logo' logo={logo?logo:""} getUrl={this.getUrl} onChange={this.getUrl}/>
             </FormItem>
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select 
+                    name="tenantIndustry"
                     defaultValue={tenantIndustry?tenantIndustry:"C"}
                     style={{ width: 338, marginRight: 6 }} 
                     onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
@@ -212,6 +214,7 @@ class CreateEnter extends Component {
  
             <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
+                    name="invitePermission"
                     defaultValue={invitePermission?invitePermission:"1"}
                     style={{ width: 338, marginRight: 6 }} 
                     onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
@@ -223,6 +226,7 @@ class CreateEnter extends Component {
             
             <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
+                    name="joinPermission"
                     defaultValue={joinPermission?joinPermission:"1"}
                     style={{ width: 338, marginRight: 6 }} 
                     onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }

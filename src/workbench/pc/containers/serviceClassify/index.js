@@ -249,10 +249,13 @@ class serviceClassify extends Component {
     const curTenant = allowTenants.filter((tenant) => {
       return tenant.tenantId === tenantid;
     })[0]; 
+    console.log("---userInfo",userInfo);
+    console.log("---curTenant",curTenant);
     let type = false;
     if ((curTenant && curTenant.type == 0) && admin ) {
       type = true;
     }
+    console.log("---type",type);
   }
 
   render() {
