@@ -11,6 +11,7 @@ module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     entry: {
       main: [
+        'webstorage-polyfill',
         'whatwg-fetch',
         './src/workbench/pc/objectAssignPolyfill.js',
         './src/workbench/pc/main.js',

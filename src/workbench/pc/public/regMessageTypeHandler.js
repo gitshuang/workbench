@@ -16,6 +16,7 @@ const handlers = {
           hash,
         },
       } = window;
+      window.localStorage.setItem('openServiceData', data);
       window.location.replace(
         `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${ serviceCode }`,
       );
@@ -115,7 +116,14 @@ export function parseType(type) {
 }
 
 export function getOpenServiceData(serviceCode) {
-  const data = openServiceData[serviceCode];
-  delete openServiceData[serviceCode];
-  return data || {};
+  let data = {};
+  if (typeof window.localStorage.getItem('openServiceData') !== 'undefined') {
+    data = window.localStorage.getItem('openServiceData');
+    window.localStorage.removeItem('openServiceData');
+  }
+  if (typeof openServiceData[serviceCode] !== 'undefined') {
+    data = openServiceData[serviceCode];
+    delete openServiceData[serviceCode];
+  }
+  return data;
 }
