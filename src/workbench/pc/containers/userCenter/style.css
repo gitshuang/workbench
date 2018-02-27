@@ -483,6 +483,7 @@
 }
 .teamBtnList i{
   font-size: 12px;
+  vertical-align: middle;
 }
 .createBtnList li{
   float : left;

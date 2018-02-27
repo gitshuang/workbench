@@ -90,3 +90,14 @@
 :global(.u-dropdown){
     margin-left: -88px;
 } */
+
+dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item){
+    position: relative;
+}
+._Menu_Item{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    color:rgba(74,81,93,0.8);
+}
+
