@@ -558,7 +558,6 @@ class CreateTeamContent extends Component {
     const {openRemoveModal} = this.props;
     openRemoveModal();
   }
-
   // 更改search 内容
   changeSearchFn = (e) => {
     let searchVal = e.target.value;
@@ -566,6 +565,7 @@ class CreateTeamContent extends Component {
       searchVal
     });
   }
+  // 清空输入框的value
   clearSearchFn =()=>{
     const { onlyAdmin } = this.state;
     this.setState({
@@ -589,6 +589,11 @@ class CreateTeamContent extends Component {
       onlyAdmin: value
     });
     this.queryUser( this.clickValue, value );
+  }
+  // 邀请成员
+  inviteMember = () => {
+    const { history } = this.props;
+    history.push("/invitation");
   }
 
   // 点击分页
@@ -639,7 +644,7 @@ class CreateTeamContent extends Component {
           </div>
           <div className={memberBtns + " um-bf1 um-box-vc"}>
             <Checkbox colors="info" onChange={this.changeCheck}>只显示管理员</Checkbox>
-            <Button colors="danger">邀请成员</Button>
+            <Button colors="danger" onClick={this.inviteMember}>邀请成员</Button>
           </div>
         </div>
         
