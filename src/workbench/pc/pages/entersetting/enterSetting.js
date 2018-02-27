@@ -143,7 +143,6 @@ class CreateEnter extends Component {
         localStorage.setItem('create', "1");
         window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       });
-    }
   }
 
   inputOnChange = (e,name)=>{
@@ -160,6 +159,13 @@ class CreateEnter extends Component {
     })
   }
 
+  setUrl(name,url){
+    this.state[name] = url;
+    this.setState({
+      ...this.state
+    })
+  }
+  
   render() {
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
       tenantIndustry,invitePermission,joinPermission} = this.state;
