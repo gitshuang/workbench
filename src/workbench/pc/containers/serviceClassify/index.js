@@ -259,7 +259,7 @@ class serviceClassify extends Component {
       type = true;
     }
     console.log("---type",type);
-    return _appType;
+    return type;
   }
 
   render() {
