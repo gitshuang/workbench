@@ -258,7 +258,6 @@ class serviceClassify extends Component {
     if ((curTenant && curTenant.type == 0) && admin ) {
       type = true;
     }
-    console.log("---type",type);
     return type;
   }
 

@@ -98,8 +98,10 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item){
 }
 ._Menu_Item{
     position: absolute;
-    right: 10px;
-    bottom: 5px;
-    color:rgba(74,81,93,0.8);
+    right: 2px;
+    bottom: 0px;
+    color: rgba(74,81,93,0.8);
+    line-height: 28px;
+    height: 28px;
 }
 
