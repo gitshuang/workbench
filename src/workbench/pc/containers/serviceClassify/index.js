@@ -45,12 +45,15 @@ const {requestStart, requestSuccess, requestError} = rootActions;
   mapStateToProps(
     'allApplicationList',
     {
+      key: 'userInfo',
+      value: (application,ownProps,root) => {
+        console.log(root);
+        return root.home.userInfo
+      }
+    }, 
+    {
       namespace: 'application',
     },
-    {
-        key: 'userInfo',
-        value: (root) => root.home.userInfo,
-    }
   ),
   {
     requestStart,
@@ -238,14 +241,16 @@ class serviceClassify extends Component {
   // inputOnBlur = (e) => {
   // }
 
-  getCompanyType(){
+  getCompanyType=()=>{
     const { tenantid } = window.diworkContext();
     const {
+      userInfo,
       userInfo: {
         allowTenants,
         admin,
       },
     } = this.props;
+    if(!userInfo){return false;}
     const curTenant = allowTenants.filter((tenant) => {
       return tenant.tenantId === tenantid;
     })[0]; 
