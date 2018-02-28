@@ -97,7 +97,8 @@ class searchResult extends Component {
       isShowPagination:true,
       isShownodataClass:true,
       isShownodataClassEach:true,
-      otherName:"其他内容(0)"
+      otherName:"其他内容"
+      //otherName:"其他内容(0)"
     }
   }
   
@@ -198,7 +199,7 @@ class searchResult extends Component {
         payload.content.forEach((da)=>{
           _count += da.pageSize
         })
-        let _newObj = {otherName:"其他内容("+_count+")"};
+        let _newObj = {otherName:"其他内容"};
         _newObj.Searchotherlist = payload;
         //_newObj.pagesize = payload.pageSize;
         _newObj.pagesize = payload.totalPages;//总页数
@@ -387,7 +388,7 @@ class searchResult extends Component {
       <h3>{item.typeName}</h3>
       {this.otherlistLi(item)}
 
-      <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部，共{item.total}条 ></em>
+      <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部 ></em>
     </ul>)
     })
 
