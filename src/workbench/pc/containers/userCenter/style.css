@@ -145,6 +145,7 @@
   display:table; /*IE9*/
   margin: 0 auto;
   overflow: hidden;
+  margin-left: 16px;
 }
 .gloryIcon{
   box-sizing: border-box;
