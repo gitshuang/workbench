@@ -81,6 +81,8 @@
 .menu_style{
     box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
     border: rgba(78,89,104,0.19);
+    overflow: auto;
+    max-height: 400px;
 }
 .drop_MenuItem{
     background: red;

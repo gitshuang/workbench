@@ -44,7 +44,15 @@ const createReducer = (key) => (state, { payload, error }) => {
 };
 
 const reducer = handleActions({
-  [getUserInfo]: createReducer('userInfo'),
+  [getUserInfo]: (state, { payload, error }) => {
+    payload.allowTenants.forEach((da)=>{
+        da.type = da.team;//需求变更，废弃team字段。
+    });
+    return {
+      ...state,
+      userInfo: payload
+    };
+  },
   [getEnterInfo]: createReducer('enterInfo'),
   [getWorkList]: (state, { payload, error }) => {
     if (error) {

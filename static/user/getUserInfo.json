@@ -1,118 +1,196 @@
 {
-  "msg": 1,
-  "data": {
-      "userEmail": "",
-      "userId": "9ab8b615-a28c-43d6-9b3f-447be0d7299f",
-      "redPacketsNum": 0,
-      "gloriesNum": 0,
-      "allowTenants": [
-        {
-            "tenantId": "b7uozdk2",
-            "tenantName": "34534",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "calk71za",
-            "tenantName": "4534",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "fdkisxjw",
-            "tenantName": "云工作台团队",
-            "logo": "https://cdn.yonyoucloud.com/pro/yht/cas/images/upload/aps/images/logo1492245844970.png",
-            "admin": true,
-            "type": 1,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "gcksaj01",
-            "tenantName": "3333",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "gtzceot7",
-            "tenantName": "云工作台3.0测试环境",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "kffkvm3o",
-            "tenantName": "456",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "ozbsovv4",
-            "tenantName": "666666",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "texbp6sa",
-            "tenantName": "5645",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "wqqfu1b6",
-            "tenantName": "23423",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        },
-        {
-            "tenantId": "zi5audjj",
-            "tenantName": "64564",
-            "logo": null,
-            "admin": true,
-            "type": 0,
-            "certificated": false,
-            "status": 1,
-            "enterPrise": true
-        }
-    ],
-      "userAvator": "",
-      "company": "用友网络科技股份有限公司公",
-      "userName": "maokunb",
-      "admin": true,
-      "userMobile": "181****9676",
-      "logo": "测试内容e6zu"
-  },
-  "status": 1
+    "status": 1,
+    "data": {
+        "company": "团队2001",
+        "userAvator": "https://cdn.yonyoucloud.com/dev/yht/avatar/style/images/avatar/0c294160-fad0-412c-b6c5-47b4bd28dda2/1513684377716.png",
+        "userEmail": "wangsh*****@yonyou.com",
+        "userName": "王石",
+        "userMobile": "158****6391",
+        "userId": "0c294160-fad0-412c-b6c5-47b4bd28dda2",
+        "userCode": "yy_6323278514397119500VYfYyY",
+        "roleIds": null,
+        "roles": null,
+        "logo": null,
+        "redPacketsNum": 0,
+        "gloriesNum": 0,
+        "allowTenants": [
+            {
+                "tenantId": "b7uozdk2",
+                "tenantName": "34534",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "calk71za",
+                "tenantName": "4534",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "dnth32dq",
+                "tenantName": "用友网络股份有限公司企业测试四",
+                "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f1be8f92-64a5-4b94-94f6-bf02d4ed3d08/c2481bb099b574f5%21400x400_big.png",
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "fdkisxjw",
+                "tenantName": "云工作台",
+                "logo": "https://cdn.yonyoucloud.com/pro/yht/cas/images/upload/aps/images/logo1492245844970.png",
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "feo9yvsx",
+                "tenantName": "用友软件测试企业账户三",
+                "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/e6a86994-9525-4749-947d-11b0092bec6f/c2481bb099b574f5%21400x400_big.png",
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "gcksaj01",
+                "tenantName": "3333",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "gtzceot7",
+                "tenantName": "云工作台3.0测试环境2",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "hp564zwv",
+                "tenantName": "团队测试账户一",
+                "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/e7b0e9eb-d754-4b7d-b545-3fb9da2709d1/c2481bb099b574f5%21400x400_big.png",
+                "admin": true,
+                "team": 1,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": false
+            },
+            {
+                "tenantId": "hy0s3xal",
+                "tenantName": "团队2001",
+                "logo": null,
+                "admin": true,
+                "team": 1,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": false
+            },
+            {
+                "tenantId": "kffkvm3o",
+                "tenantName": "456",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "lk6gdnal",
+                "tenantName": "团队测试账户001",
+                "logo": null,
+                "admin": true,
+                "team": 1,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": false
+            },
+            {
+                "tenantId": "mon35zum",
+                "tenantName": "用友工作台测试企业账户一",
+                "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/6ff5e8ee-dfc9-4f5a-8d4c-1f9678148cf4/c2481bb099b574f5%21400x400_big.png",
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "ozbsovv4",
+                "tenantName": "666666",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "texbp6sa",
+                "tenantName": "5645",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "wqqfu1b6",
+                "tenantName": "23423",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
+                "tenantId": "zi5audjj",
+                "tenantName": "64564",
+                "logo": null,
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            }
+        ],
+        "admin": true
+    }
 }
