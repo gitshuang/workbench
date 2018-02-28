@@ -123,7 +123,7 @@
 }
 
 
-.enter_form :global(.u-select .u-select-arrow):before{
+:global(.u-select .u-select-arrow):before{
   content: "\E964" !important;
   font-family: 'iconfont' !important;
 }

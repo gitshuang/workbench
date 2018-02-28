@@ -1,15 +1,21 @@
 {
-  "msg": 1,
+  "status": 1,
   "data": {
-      "userId": "9ab8b615-a28c-43d6-9b3f-447be0d7299f", 
-      "tenantName":"百度",
-      "tenantNature":"IndividualPerson",
-      "tenantEmail":"jonyshi@126.com",
-      "tenantTel":"15666666666",
-      "joinPermission":0,
-      "tenantIndustry":"C",
-      "invitePermission":1,
-      "logo":"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/05b27bb3-fc0a-486b-855c-3c317e56c5d4/632680F6-4B67-4F24-989D-50FA54A6097E.png"
-  },
-  "status": 1
+      "createTime": 1519815679311,
+      "modifiedTime": null,
+      "ts": null,
+      "creator": null,
+      "modifier": null,
+      "tenantId": "ouck9r85",
+      "tenantName": "测试账户五",
+      "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/26d92d0b-3b92-45ff-90b7-c3971dbb0af1/c2481bb099b574f5%21400x400_big.png",
+      "linkman": "ssss",
+      "tenantAddress": "山西|长治|长治县|方法",
+      "tenantEmail": "222@126.com",
+      "tenantIndustry": "C",
+      "tenantTel": "16554558785",
+      "invitePermission": null,
+      "joinPermission": null,
+      "allowExit": null
+  }
 }
