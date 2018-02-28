@@ -250,7 +250,7 @@ class searchResult extends Component {
       activePage: eventKey
     });
     if(activetab=='other'){
-      this.getSearchOtherList(value,5,eventKey)
+      this.getSearchOtherList(value,5,--eventKey)
     }else{
      this.getSearchTpyeList(value,activetab,--eventKey)
     }
@@ -277,10 +277,10 @@ class searchResult extends Component {
       activePage:1
     })
     if(activetab=='other'){
-      this.getSearchOtherList(value,5,1)
+      this.getSearchOtherList(value,5,0)
 
     }else{
-      this.getSearchTpyeList(value,activetab,1)
+      this.getSearchTpyeList(value,activetab,0)
     }
   }
   goDetail(type,item){
