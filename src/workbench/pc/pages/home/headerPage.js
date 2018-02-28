@@ -89,10 +89,12 @@ class HeaderPage extends Component {
       allowTenants.map(({
         tenantId: name,
         tenantName: value,
+        type
       }) => {
         return {
           name,
           value,
+          type,
           fun: this.changeTenant,
         };
       })

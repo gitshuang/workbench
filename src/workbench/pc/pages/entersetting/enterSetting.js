@@ -112,10 +112,11 @@ class CreateEnter extends Component {
         requestError(payload);
       }
       requestSuccess();
-      let _tenantAddress = payload.find((da)=>da.name == "tenantAddress");
-      let _addres = _tenantAddress.value.split("|");
-      payload["address"] = {province:_addres[0],city:_addres[1],area:_addres[2]};
-      console.log("6666666",payload);
+      let _tenantAddress = payload["tenantAddress"];
+      if(_tenantAddress){
+        let _addres = _tenantAddress.value.split("|");
+        payload["address"] = {province:_addres[0]?_addres[0]:"",city:_addres[1]?_addres[1]:"",area:_addres[2]?_addres[2]:""};
+      }
       this.setState({
         ...payload
       })
@@ -165,7 +166,7 @@ class CreateEnter extends Component {
       ...this.state
     })
   }
-  
+
   render() {
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
       tenantIndustry,invitePermission,joinPermission} = this.state;
