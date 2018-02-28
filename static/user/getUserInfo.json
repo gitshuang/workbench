@@ -28,10 +28,10 @@
         },
         {
             "tenantId": "fdkisxjw",
-            "tenantName": "云工作台",
+            "tenantName": "云工作台团队",
             "logo": "https://cdn.yonyoucloud.com/pro/yht/cas/images/upload/aps/images/logo1492245844970.png",
             "admin": true,
-            "type": 0,
+            "type": 1,
             "certificated": false,
             "status": 1,
             "enterPrise": true

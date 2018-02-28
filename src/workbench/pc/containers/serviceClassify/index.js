@@ -253,9 +253,7 @@ class serviceClassify extends Component {
     if(!userInfo){return false;}
     const curTenant = allowTenants.filter((tenant) => {
       return tenant.tenantId === tenantid;
-    })[0]; 
-    console.log("---userInfo",userInfo);
-    console.log("---curTenant",curTenant);
+    })[0];
     let type = false;
     if ((curTenant && curTenant.type == 0) && admin ) {
       type = true;
@@ -268,7 +266,7 @@ class serviceClassify extends Component {
     const btns = this.renderBtns();
     const list = this.renderList();
     const labelGroups = this.renderLabelGroups();
-    const type = this.getCompanyType();
+    const _appType = this.getCompanyType();
 
     return (
       <div className={bg+" um-content um-vbox"}>
@@ -281,7 +279,7 @@ class serviceClassify extends Component {
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
                   <span className={search_tit} onClick={this.btnSearch}>搜索</span>
               </div>
-              {type?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>:null}
+              {_appType?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>:null}
             </div>
 
             <div className={um_content}>
