@@ -114,7 +114,7 @@ class CreateEnter extends Component {
       requestSuccess();
       let _tenantAddress = payload["tenantAddress"];
       if(_tenantAddress){
-        let _addres = _tenantAddress.value.split("|");
+        let _addres = _tenantAddress.split("|");
         payload["address"] = {province:_addres[0]?_addres[0]:"",city:_addres[1]?_addres[1]:"",area:_addres[2]?_addres[2]:""};
       }
       this.setState({
