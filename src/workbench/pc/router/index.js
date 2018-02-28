@@ -73,6 +73,11 @@ const routes = [
         exact: true,
       },
       {
+        path:'/search/',
+        component:SearchResult,
+        exact: true,
+      },
+      {
         path:'/search/searchlist',
         component:SearchOther,
       }
