@@ -32,6 +32,7 @@
   background:rgba(225,76,70,1);
   border-radius: 3px;
   margin-left:-70px;
+  color:#fff;
 }
 .enter_form :global(textarea) {
   min-height: 100px;
