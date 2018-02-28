@@ -10,7 +10,7 @@
             "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}"
             ],
             "currentPage": 1,
-            "pageSize": 15,
+            "totalElements": 15,
             "renderUrl": "应用/服务模板",
             "total": 100,
             "type": "service",
@@ -19,7 +19,7 @@
         {
             "content": [],
             "currentPage": 1,
-            "pageSize": 15,
+            "totalElements": 15,
             "renderUrl": "null",
             "total": 0,
             "type": "user",

@@ -143,11 +143,12 @@ class searchResult extends Component {
                 isShowPagination:true,
               })
             } 
-            this.getSearchTpyeList(keywords,payload.data[0].type,1);
+            this.getSearchTpyeList(keywords,payload.data[0].type,0);
           });
       })
       
   }
+
   getSearchTpyeList(keywords,type,page){
     const {
       requestStart,
@@ -179,6 +180,7 @@ class searchResult extends Component {
        requestSuccess();
       });
   }
+
   getSearchOtherList(keywords,contentsize,page){
     const {
       requestStart,
@@ -211,6 +213,7 @@ class searchResult extends Component {
        requestSuccess();
       });
   }
+  
   handleClick = (labelId) => () => {
     this.setState({
       current: labelId,
@@ -249,7 +252,7 @@ class searchResult extends Component {
     if(activetab=='other'){
       this.getSearchOtherList(value,5,eventKey)
     }else{
-     this.getSearchTpyeList(value,activetab,eventKey)
+     this.getSearchTpyeList(value,activetab,--eventKey)
     }
   }
   // inputOnFocus = (e) => {
@@ -362,7 +365,7 @@ class searchResult extends Component {
     SearchMoreList.forEach((item,index) => {
       Morelist.push(
       <TabPane
-          tab={item.typeName+"("+item.pageSize+")"}
+          tab={item.typeName+"("+item.totalElements+")"}
           key={item.type}
           className={tabPane1}
       >
