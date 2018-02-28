@@ -163,7 +163,8 @@ class searchResult extends Component {
         }
         this.setState({
           dataList:payload,
-          pagesize:payload.pageSize
+          //pagesize:payload.pageSize
+          pagesize:payload.totalPages
         })
         if(payload.content.length>0){
           this.setState({
@@ -199,7 +200,8 @@ class searchResult extends Component {
         })
         let _newObj = {otherName:"其他内容("+_count+")"};
         _newObj.Searchotherlist = payload;
-        _newObj.pagesize = payload.pageSize;
+        //_newObj.pagesize = payload.pageSize;
+        _newObj.pagesize = payload.totalPages;//总页数
         if(payload.content.length>0){
           _newObj.isShowPagination = false;
           _newObj.isShownodataClassEach = true;
