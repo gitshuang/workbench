@@ -19,7 +19,7 @@
                 "{\"applicationId\":\"754c3e47-1de6-4a9f-9d7c-3a54b3567d54\",\"capable\":false,\"clientStatus\":false,\"createTime\":1516782381000,\"enable\":true,\"everyone\":false,\"hasWidget\":false,\"modifiedTime\":1516782826760,\"phoneStatus\":false,\"primaryKey\":\"e2c04461-9ff0-4533-ac5b-76dcfeccb5bd\",\"relationServices\":[],\"relationUsers\":[],\"selected\":false,\"serviceCode\":\"3eaa1dff-3efb-4905-b9ce-fac7846b5f8d\",\"serviceIcon\":\"\",\"serviceId\":\"e2c04461-9ff0-4533-ac5b-76dcfeccb5bd\",\"serviceName\":\"app测试1\",\"tenantId\":\"gtzceot7\",\"ts\":1516782381000,\"url\":\"baidu\",\"webStatus\":true}"
             ],
             "currentPage": 1,
-            "pageSize": 2,
+            "totalPages": 2,
             "renderUrl": "应用/服务模板",
             "total": 100,
             "type": "service",

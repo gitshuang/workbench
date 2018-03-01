@@ -41,3 +41,8 @@
 :global(.u-menu-item-active){
 	background:#fff;
 }
+
+:global(.u-menu-submenu-inline > .u-menu-submenu-title:after){
+  content: "\E964" !important;
+  font-family: 'iconfont' !important;
+}

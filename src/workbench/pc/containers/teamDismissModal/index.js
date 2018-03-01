@@ -6,11 +6,12 @@ import teamconfigActions from 'store/root/teamconfig/actions';
 // 定义actions
 const { dismissTeam, closeDismissModal } = teamconfigActions;
 
-import { Modal, Button } from 'tinper-bee';
+import Modal from 'bee/modal';
+import Button from 'bee/button';
 import { modal, form, cancelButton } from './index.css';
 @connect(
   mapStateToProps(
-    
+
   ),
   {
     dismissTeam,

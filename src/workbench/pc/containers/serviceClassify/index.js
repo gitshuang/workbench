@@ -45,6 +45,13 @@ const {requestStart, requestSuccess, requestError} = rootActions;
   mapStateToProps(
     'allApplicationList',
     {
+      key: 'userInfo',
+      value: (application,ownProps,root) => {
+        console.log(root);
+        return root.home.userInfo
+      }
+    }, 
+    {
       namespace: 'application',
     },
   ),
@@ -234,11 +241,32 @@ class serviceClassify extends Component {
   // inputOnBlur = (e) => {
   // }
 
+  getCompanyType=()=>{
+    const { tenantid } = window.diworkContext();
+    const {
+      userInfo,
+      userInfo: {
+        allowTenants,
+        admin,
+      },
+    } = this.props;
+    if(!userInfo){return false;}
+    const curTenant = allowTenants.filter((tenant) => {
+      return tenant.tenantId === tenantid;
+    })[0];
+    let type = false;
+    if ((curTenant && curTenant.type == 0) && admin ) {
+      type = true;
+    }
+    return type;
+  }
+
   render() {
     const { value,currentLabel } = this.state;
     const btns = this.renderBtns();
     const list = this.renderList();
     const labelGroups = this.renderLabelGroups();
+    const _appType = this.getCompanyType();
 
     return (
       <div className={bg+" um-content um-vbox"}>
@@ -251,7 +279,7 @@ class serviceClassify extends Component {
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
                   <span className={search_tit} onClick={this.btnSearch}>搜索</span>
               </div>
-              <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>
+              {_appType?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>:null}
             </div>
 
             <div className={um_content}>

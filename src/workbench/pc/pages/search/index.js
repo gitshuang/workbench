@@ -36,10 +36,10 @@ class Search extends Component {
   }
   
   goBack =()=> {
-    const {setSearchHeadData,searchHeadData:{brm}} = this.props;
+    const {setSearchHeadData,searchHeadData:{brm},searchHeadData:{searchValue}} = this.props;
     const appName = brm[0].name;
     if(this.props.location.pathname.indexOf('searchlist')>-1){
-      this.props.history.push('/search');
+      this.props.history.push(`/search/searchvalue/${!searchValue?'':searchValue}`);
     }else{
       this.props.history.replace('');
     }

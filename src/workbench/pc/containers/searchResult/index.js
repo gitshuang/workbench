@@ -85,7 +85,7 @@ class searchResult extends Component {
       activetab: '',
       SearchMoreList:[],
       hasOther:false,
-      keywords:props.location.state?props.location.state.value:"",
+      keywords:props.match.params?props.match.params.value:"",
       Searchotherlist :{
         content:[]
       },
@@ -97,7 +97,8 @@ class searchResult extends Component {
       isShowPagination:true,
       isShownodataClass:true,
       isShownodataClassEach:true,
-      otherName:"其他内容(0)"
+      otherName:"其他内容"
+      //otherName:"其他内容(0)"
     }
   }
   
@@ -121,30 +122,34 @@ class searchResult extends Component {
       getSearchMore,
     } = this.props;
       // requestStart();
-      getSearchMore(keywords).then(({error, payload}) => {
-        if (error) {
-          requestError(payload);
-        }
-        this.setState({
-          SearchMoreList:payload.data,
-          hasOther:payload.hasOther,
-          activetab:payload.data[0].type,
-          keywords,
-          value:keywords
-        })
-        // requestSuccess();
-        if(payload.data.length<1){
-          this.setState({
-            isShownodataClass:false,
-          })
-        }else{
-          this.setState({
-            isShowPagination:true,
-          })
-        } 
-        this.getSearchTpyeList(keywords,payload.data[0].type,1);
-      });
+      this.setState({keywords,value:keywords},function () {
+          getSearchMore(keywords).then(({error, payload}) => {
+            if (error) {
+              requestError(payload);
+            }
+            this.setState({
+              SearchMoreList:payload.data,
+              hasOther:payload.hasOther,
+              activetab:payload.data[0].type,
+              //keywords,
+              //value:keywords
+            })
+            // requestSuccess();
+            if(payload.data.length<1){
+              this.setState({
+                isShownodataClass:false,
+              })
+            }else{
+              this.setState({
+                isShowPagination:true,
+              })
+            } 
+            this.getSearchTpyeList(keywords,payload.data[0].type,0);
+          });
+      })
+      
   }
+
   getSearchTpyeList(keywords,type,page){
     const {
       requestStart,
@@ -159,7 +164,8 @@ class searchResult extends Component {
         }
         this.setState({
           dataList:payload,
-          pagesize:payload.pageSize
+          //pagesize:payload.pageSize
+          pagesize:payload.totalPages
         })
         if(payload.content.length>0){
           this.setState({
@@ -176,6 +182,7 @@ class searchResult extends Component {
        requestSuccess();
       });
   }
+
   getSearchOtherList(keywords,contentsize,page){
     const {
       requestStart,
@@ -192,9 +199,10 @@ class searchResult extends Component {
         payload.content.forEach((da)=>{
           _count += da.pageSize
         })
-        let _newObj = {otherName:"其他内容("+_count+")"};
+        let _newObj = {otherName:"其他内容"};
         _newObj.Searchotherlist = payload;
-        _newObj.pagesize = payload.pageSize;
+        //_newObj.pagesize = payload.pageSize;
+        _newObj.pagesize = payload.totalPages;//总页数
         if(payload.content.length>0){
           _newObj.isShowPagination = false;
           _newObj.isShownodataClassEach = true;
@@ -208,6 +216,7 @@ class searchResult extends Component {
        requestSuccess();
       });
   }
+  
   handleClick = (labelId) => () => {
     this.setState({
       current: labelId,
@@ -215,7 +224,16 @@ class searchResult extends Component {
   }
 
   btnSearch=()=>{
-    this.getSearchMoreList(this.state.value)
+    //修改URL、
+    let nowUrl = window.location.href;
+    let searchvalue = !this.state.value?'':this.state.value
+    let newUrl =  nowUrl.substring(0,nowUrl.indexOf('searchvalue/')+12).concat(searchvalue);
+    window.location.href = newUrl;
+    this.setState({
+      keywords:searchvalue
+    }, function() {
+      this.getSearchMoreList(this.state.value)
+    })
   }
   onFormChange = (value) => {
     this.setState({
@@ -236,9 +254,9 @@ class searchResult extends Component {
       activePage: eventKey
     });
     if(activetab=='other'){
-      this.getSearchOtherList(value,5,eventKey)
+      this.getSearchOtherList(value,5,--eventKey)
     }else{
-     this.getSearchTpyeList(value,activetab,eventKey)
+     this.getSearchTpyeList(value,activetab,--eventKey)
     }
   }
   // inputOnFocus = (e) => {
@@ -263,10 +281,10 @@ class searchResult extends Component {
       activePage:1
     })
     if(activetab=='other'){
-      this.getSearchOtherList(value,5,1)
+      this.getSearchOtherList(value,5,0)
 
     }else{
-      this.getSearchTpyeList(value,activetab,1)
+      this.getSearchTpyeList(value,activetab,0)
     }
   }
   goDetail(type,item){
@@ -277,8 +295,9 @@ class searchResult extends Component {
   }
   goOtherlist(item){
     const {setSearchHeadData,searchHeadData:{brm}} = this.props;
-    setSearchHeadData({appName:item.typeName,brm:[{name:brm[0].name},{name:item.typeName}]});
-    this.props.history.push({pathname:`/search/searchlist`,state:item});
+    setSearchHeadData({appName:item.typeName,brm:[{name:brm[0].name},{name:item.typeName}],searchValue:this.state.keywords});
+    //this.props.history.push({pathname:`/search/searchlist`,state:item});
+    this.props.history.push({pathname:`/search/searchlist/${!this.state.keywords?'':this.state.keywords}`,state:item});
   }
   goemailDetail(item){
     return (e) => {
@@ -351,7 +370,7 @@ class searchResult extends Component {
     SearchMoreList.forEach((item,index) => {
       Morelist.push(
       <TabPane
-          tab={item.typeName+"("+item.pageSize+")"}
+          tab={item.typeName+"("+item.totalElements+")"}
           key={item.type}
           className={tabPane1}
       >
@@ -371,7 +390,7 @@ class searchResult extends Component {
       <h3>{item.typeName}</h3>
       {this.otherlistLi(item)}
 
-      <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部，共{item.total}条 ></em>
+      <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部 ></em>
     </ul>)
     })
 

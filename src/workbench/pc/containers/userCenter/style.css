@@ -145,6 +145,7 @@
   display:table; /*IE9*/
   margin: 0 auto;
   overflow: hidden;
+  margin-left: 16px;
 }
 .gloryIcon{
   box-sizing: border-box;
@@ -404,10 +405,11 @@
   border-radius: 50px;
   width:64px;
   height:64px;
-  font-size: 64px;
+  font-size: 30px;
   color: #fff;
   line-height: 64px;
   overflow: hidden;
+  padding-left: 16px;
 }
 .logOut{
   position: absolute;
@@ -482,6 +484,7 @@
 }
 .teamBtnList i{
   font-size: 12px;
+  vertical-align: middle;
 }
 .createBtnList li{
   float : left;
@@ -517,7 +520,8 @@
   margin: 0 25px 44px 0;
 }
 .tenantPortrait .defaultPic i{
-  font-size: 64px;
+  font-size: 30px;
+  font-weight: 100;
 }
 /* IE9个人中心 */
 :global(.ie9) .tenantPortrait{

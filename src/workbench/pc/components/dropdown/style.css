@@ -81,6 +81,8 @@
 .menu_style{
     box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
     border: rgba(78,89,104,0.19);
+    overflow: auto;
+    max-height: 400px;
 }
 .drop_MenuItem{
     background: red;
@@ -90,3 +92,21 @@
 :global(.u-dropdown){
     margin-left: -88px;
 } */
+
+dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item){
+    position: relative;
+}
+._Menu_Item{
+    position: absolute;
+    right: 8px;
+    bottom: 0px;
+    color: rgba(74,81,93,0.8);
+    line-height: 28px;
+    height: 28px;
+}
+.create_ent{
+    position: fixed;
+    margin-top: -50px;
+    background: #fff;
+    width: 236px;
+}

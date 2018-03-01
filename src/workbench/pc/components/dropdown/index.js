@@ -5,7 +5,7 @@ import Dropdown from 'bee/dropdown';
 import Icon from 'components/icon';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee/menus';
 // import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
-import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style,drop_MenuItem} from './style.css';
+import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style,drop_MenuItem,_Menu_Item,create_ent} from './style.css';
 
 const propTypes = {
   label:"",
@@ -23,6 +23,9 @@ class DropdownButton extends Component{
   }
 
   onVisibleChange=(visible)=> {
+    if(this.props.closeFun()){
+      this.props.closeFun();
+    }
     this.setState({
         visible: visible
     })
@@ -55,11 +58,11 @@ class DropdownButton extends Component{
     let {label,dataItem,fun,type} = this.props;
     let item = [];
     dataItem.forEach((da,i) => {
-        item.push(<MenuItem key={da.name} >{da.value}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{da.type == 1?"团队":"企业"} </MenuItem>);
+        item.push(<MenuItem key={da.name} ><span title={da.value}>{da.value}</span><span className={_Menu_Item}>{da.type == 1?"团队":"企业"}</span></MenuItem>);
     });
     let _marginLeft = -148;
     if(type && type == "home"){
-      item.push(<MenuItem key="td_2001" >创建团队 \ 创建企业</MenuItem>);
+      item.push(<MenuItem key="td_2001" className={create_ent} >创建团队 \ 创建企业</MenuItem>);
       _marginLeft = -188;
     }
     let _menus = <Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
@@ -68,7 +71,9 @@ class DropdownButton extends Component{
           <div className={`${label_cont} home_title`}>
             <label>{label}</label>
           </div>
-          <div className={`${this.state.visible?btn_upward:btn_pull_down} home_title_down `}>
+          {/* getPopupContainer = {this.props.getPopupContainer} */}
+          {/* getPopupConptainer = {()=> document.getElementById("_dropdown_popcontainer")} */}
+          <div id="_dropdown_popcontainer" className={`${this.state.visible?btn_upward:btn_pull_down} home_title_down `}>
             <Dropdown overlayClassName="_btn_down"
                 getPopupContainer = {this.props.getPopupContainer}
                 trigger={['click']}

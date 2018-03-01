@@ -60,7 +60,7 @@ const routes = [
     component: CreateEnter,
   },
   {
-    path: '/entersetting',
+    path: '/entersetting/:data',
     component: EnterSetting,
   },
   {
@@ -68,14 +68,26 @@ const routes = [
     component: Search,
     routes:[
       {
-        path:'/search/:value',
+        path:'/search/searchValue/:value',
         component:SearchResult,
         exact: true,
       },
       {
-        path:'/search/searchlist',
+        path:'/search/searchValue/',
+        component:SearchResult,
+        exact: true,
+      },
+      {
+        path:'/search/searchlist/:value',
         component:SearchOther,
+        exact: true,
+      },
+      {
+        path:'/search/searchlist/',
+        component:SearchOther,
+        exact: true,
       }
+      
     ]
   },
   {

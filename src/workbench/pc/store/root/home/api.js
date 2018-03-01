@@ -17,4 +17,4 @@ export const setCreateEnter = (list,updateType) => {
   }
   
 }
-export const getEnterInfo = (param) => get('/enter/getEnterInfo?enterId='+param);
+export const getEnterInfo = (param) => get('/manager/enter/info?enterId='+param);

@@ -9,16 +9,32 @@ const { popMessage, changeMessageType, hideIm } = rootActions;
 const handlers = {
   openService({ serviceCode, data, tenantId }) {
     if (tenantId && serviceCode) {
-      const {
-        location: {
-          origin,
-          pathname,
-          hash,
-        },
-      } = window;
-      window.location.replace(
-        `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${ serviceCode }`,
-      );
+      openGlobalDialog({
+        title: '即将切换租户',
+        content: '是否切换租户？',
+        btns: [
+          {
+            type: 'brand',
+            label: '切换',
+            fun: () => {
+              const {
+                location: {
+                  origin,
+                  pathname,
+                  hash,
+                },
+              } = window;
+              window.localStorage.setItem('openServiceData', data);
+              window.location.replace(
+                `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${ serviceCode }`,
+              );
+            },
+          },
+          {
+            label: '不切换',
+          },
+        ],
+      });
     } else if (serviceCode) {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
@@ -115,7 +131,14 @@ export function parseType(type) {
 }
 
 export function getOpenServiceData(serviceCode) {
-  const data = openServiceData[serviceCode];
-  delete openServiceData[serviceCode];
-  return data || {};
+  let data = {};
+  if (typeof window.localStorage.getItem('openServiceData') !== 'undefined') {
+    data = window.localStorage.getItem('openServiceData');
+    window.localStorage.removeItem('openServiceData');
+  }
+  if (typeof openServiceData[serviceCode] !== 'undefined') {
+    data = openServiceData[serviceCode];
+    delete openServiceData[serviceCode];
+  }
+  return data;
 }

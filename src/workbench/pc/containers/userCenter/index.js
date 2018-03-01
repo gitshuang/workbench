@@ -72,6 +72,7 @@ class UserInfoContainer extends Component {
     this.getLatestAccessList();
     this.getPromotionServiceList();
 
+    this._curTenant = null;
     this.state = {
       dataList:[ ],
       promotionList:[ ]
@@ -179,7 +180,15 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
-  gotoConfig = () => {
+  gotoConfig = (curTenant) => { 
+    if (curTenant && curTenant.type == 0 ) {//企业
+      this.gotoEnter();
+    }else{//团队
+      this.gotoTeam();
+    }
+  }
+  //设置团队
+  gotoTeam = () => {
     const {
       history,
       hideUserInfoDisplay,
@@ -187,6 +196,16 @@ class UserInfoContainer extends Component {
     history.push('/teamconfig');
     hideUserInfoDisplay();
   }
+  //设置企业
+  gotoEnter = () => {
+    const {
+      history,
+      hideUserInfoDisplay,
+    } = this.props;
+    history.push('/entersetting/home');
+    hideUserInfoDisplay();
+  }
+
   gotoCreate = () => {
     const {
       history,
@@ -205,8 +224,23 @@ class UserInfoContainer extends Component {
   }
   getUserOrder(){
     window.open('https://idtest.yyuap.com/usercenter/myapp');
+  } 
+
+  getIcon=(imgsrc)=> {
+    if (imgsrc) {
+      return (
+        <img src={imgsrc} className={imgInner} />
+      );
+    } else {
+      return (
+        <div className={defaultPic} style={{background:this.props.bgColor}}>
+          <Icon type="group" />
+        </div>
+      );
+    }
   }
-  getIcon(imgsrc) {
+
+  getIcon1(imgsrc) {
     if (imgsrc) {
       return (
         <img src={imgsrc} className={imgInner} />
@@ -217,8 +251,9 @@ class UserInfoContainer extends Component {
           <Icon type="staff" />
         </div>
       );
-    }
+    } 
   }
+
   getCompanyType(){
     const { tenantid } = window.diworkContext();
     const {
@@ -230,12 +265,10 @@ class UserInfoContainer extends Component {
       return tenant.tenantId === tenantid;
     })[0];
     let type = '团队';
-    // if (curTenant && !curTenant.type) {
-    //   type = '企业';
-    // }
-    if (curTenant && curTenant.type != 0 ) {
+    if (curTenant && curTenant.type == 0 ) {
       type = '企业';
     }
+    this._curTenant = curTenant;
     return type;
   }
   /* 邀请成员 */
@@ -332,7 +365,7 @@ class UserInfoContainer extends Component {
       {name:"language",value:"界面语言",fun:this.handleChange},
       {name:"message",value:"消息",fun:this.handleChange}
     ];
-
+    
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
@@ -346,7 +379,7 @@ class UserInfoContainer extends Component {
           <div className={userInfoPane}>
             <div className={imgUser}>
               <div className={imgOuter}>
-                {this.getIcon(imgsrc)}
+                {this.getIcon1(imgsrc)}
               </div>
               {/* <div className={editPortrait}  >
                 <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
@@ -402,7 +435,7 @@ class UserInfoContainer extends Component {
                     <Button
                       shape="border"
                       size="sm"
-                      onClick={this.gotoConfig.bind(this)}>
+                      onClick={()=>{this.gotoConfig(this._curTenant)}}>
                        <Icon type="staff" />
                       {
                         `${this.getCompanyType()}设置`

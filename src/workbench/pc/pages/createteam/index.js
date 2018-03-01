@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import Breadcrumbs from 'components/breadcrumb';
 import Header from 'containers/header';
-import CreateTeamContent from 'containers/createTeam'
+import CreateTeamContent from 'containers/createTeam';
+import { appBreadcrumb} from './style.css';
 
 @withRouter
 class CreateTeam extends Component {
@@ -40,6 +41,10 @@ class CreateTeam extends Component {
                     : null 
                 }
                 <div className="um-content">
+                    <div className={appBreadcrumb}>
+                        <Breadcrumbs data={[{ name:"创建团队" }]} goback={this.goBack}/>
+                    </div>
+
                     <CreateTeamContent />    
                 </div>
             </div>
