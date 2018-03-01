@@ -80,6 +80,12 @@ const routes = [
       {
         path:'/search/searchlist/:value',
         component:SearchOther,
+        exact: true,
+      },
+      {
+        path:'/search/searchlist/',
+        component:SearchOther,
+        exact: true,
       }
       
     ]

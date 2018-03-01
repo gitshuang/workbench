@@ -226,10 +226,11 @@ class searchResult extends Component {
   btnSearch=()=>{
     //修改URL、
     let nowUrl = window.location.href;
-    let newUrl =  nowUrl.substring(0,nowUrl.indexOf('searchvalue/')+12).concat(this.state.value);
+    let searchvalue = !this.state.value?'':this.state.value
+    let newUrl =  nowUrl.substring(0,nowUrl.indexOf('searchvalue/')+12).concat(searchvalue);
     window.location.href = newUrl;
     this.setState({
-      keywords:this.state.value
+      keywords:searchvalue
     }, function() {
       this.getSearchMoreList(this.state.value)
     })
@@ -296,7 +297,7 @@ class searchResult extends Component {
     const {setSearchHeadData,searchHeadData:{brm}} = this.props;
     setSearchHeadData({appName:item.typeName,brm:[{name:brm[0].name},{name:item.typeName}],searchValue:this.state.keywords});
     //this.props.history.push({pathname:`/search/searchlist`,state:item});
-    this.props.history.push({pathname:`/search/searchlist/${this.state.keywords}`,state:item});
+    this.props.history.push({pathname:`/search/searchlist/${!this.state.keywords?'':this.state.keywords}`,state:item});
   }
   goemailDetail(item){
     return (e) => {
