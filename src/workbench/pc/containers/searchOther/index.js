@@ -74,6 +74,7 @@ class searchOther extends Component {
   }
 
   componentWillMount() {
+    const {setSearchHeadData} = this.props;
     const {type,typeName} = this.props.location.state?this.props.location.state :JSON.parse(window.sessionStorage.stateStorage);
     //为了让页面刷新仍然有数据且面包屑正常,持久化
     window.sessionStorage.stateStorage = this.props.location.state? JSON.stringify(this.props.location.state):window.sessionStorage.stateStorage;
