@@ -15,7 +15,8 @@ import TeamExitModal from 'containers/teamExitModal';
 
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
-import Icon from 'bee/icon';
+import BeeIcon from 'bee/icon';
+import Icon from 'components/icon';
 import Tabs from 'bee/tabs';
 import Dropdown from 'bee/dropdown';
 import Menu from 'bee/menus';
@@ -349,7 +350,7 @@ class CreateTeamContent extends Component {
           <div className={image}>
             {logo ? <img ref="imgSrc" src={logo} /> : null}
             <div>
-              <Icon type="icon-copyreader" />
+              <Icon type="copyreader" />
               <input type="file" ref="btn_file" onChange={(e) => { this.imgChange(e) }} />
             </div>
           </div>
@@ -649,7 +650,7 @@ class CreateTeamContent extends Component {
               style={{textAlign:"center",cursor:"pointer" }}
               onClick={this.searchFn}
             >
-              <Icon type="uf-search"></Icon>
+              <BeeIcon type="uf-search"></BeeIcon>
             </div>
           </div>
           <div className={memberBtns + " um-bf1 um-box-vc"}>
@@ -756,7 +757,7 @@ class CreateTeamContent extends Component {
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange}
               >
-                <Button className="um-box-vc um-box-center">相关操作<Icon type="icon-pull-down" /></Button>
+                <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
               </Dropdown>
             </div>
           </div>

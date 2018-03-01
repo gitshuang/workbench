@@ -9,17 +9,32 @@ const { popMessage, changeMessageType, hideIm } = rootActions;
 const handlers = {
   openService({ serviceCode, data, tenantId }) {
     if (tenantId && serviceCode) {
-      const {
-        location: {
-          origin,
-          pathname,
-          hash,
-        },
-      } = window;
-      window.localStorage.setItem('openServiceData', data);
-      window.location.replace(
-        `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${ serviceCode }`,
-      );
+      openGlobalDialog({
+        title: '即将切换租户',
+        content: '是否切换租户？',
+        btns: [
+          {
+            type: 'brand',
+            label: '切换',
+            fun: () => {
+              const {
+                location: {
+                  origin,
+                  pathname,
+                  hash,
+                },
+              } = window;
+              window.localStorage.setItem('openServiceData', data);
+              window.location.replace(
+                `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${ serviceCode }`,
+              );
+            },
+          },
+          {
+            label: '不切换',
+          },
+        ],
+      });
     } else if (serviceCode) {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
