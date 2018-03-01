@@ -78,12 +78,14 @@ class searchOther extends Component {
     const {type,typeName} = this.props.location.state?this.props.location.state :JSON.parse(window.sessionStorage.stateStorage);
     //为了让页面刷新仍然有数据且面包屑正常,持久化
     window.sessionStorage.stateStorage = this.props.location.state? JSON.stringify(this.props.location.state):window.sessionStorage.stateStorage;
-    if(window.sessionStorage.searchHeadData && JSON.parse(window.sessionStorage.searchHeadData).brm.length == 2){
+    if(this.props.location.state){
+      //通过这个可以判断是否页面刷新了，没刷新全懂重新赋值
+      window.sessionStorage.searchHeadData = JSON.stringify(this.props.searchHeadData);
+    }
+    if(!this.props.location.state && window.sessionStorage.searchHeadData && JSON.parse(window.sessionStorage.searchHeadData).brm.length == 2){
         //这里是刷新后，面包屑数据的bmr长度=1，是初始值
         let nowSearchHeadData = JSON.parse( window.sessionStorage.searchHeadData);
         setSearchHeadData({appName:typeName,brm:[{name:nowSearchHeadData.brm[0].name},{name:nowSearchHeadData.brm[1].name}],searchValue:nowSearchHeadData.searchValue});
-    }else{
-      window.sessionStorage.searchHeadData = JSON.stringify(this.props.searchHeadData);
     }
     if(!type)return;
     this.setState({type,typeName});

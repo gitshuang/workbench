@@ -22,6 +22,7 @@ import {
   clearSearch,
   SearchWin,
   searchWindom,
+  searchContent,
   h_icon,
   h_name,
   h_contact,
@@ -307,15 +308,16 @@ class SearchContainer extends Component {
 
       searchWin = (
         <div className={`${SearchWin} ${isSearchWinShow? showheight : ''}`} >
-
-          {contenttype_user}
-          {contenttype_service}
-          {contenttype_help}
-          {contenttype_other}
+            <div className={`${searchContent}`}>
+                {contenttype_user}
+                {contenttype_service}
+                {contenttype_help}
+                {contenttype_other}
+            </div>
           {
             nosearchdata ? (
               <em>没有搜索结果</em>
-            ) : <div className={searchBtnAll} onClick={this.goSearchPage}>查看更多结果</div>
+            ) : <div className={searchBtnAll} onClick={this.goSearchPage}>更多应用</div>
           }
 
         </div>
