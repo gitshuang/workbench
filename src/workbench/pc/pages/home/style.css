@@ -92,7 +92,7 @@ body{
   color:rgba(71,77,84,1);
   background: transparent;
   width: auto;
-  
+
 }
 .header :global(.home_title) > label{
   display: block;
@@ -113,9 +113,10 @@ body{
   line-height: 30px;
 
 
+  /*
   position: fixed;
   margin-top: -50px;
   background: #fff;
   width: 236px;
+  */
 }
-   
