@@ -171,7 +171,16 @@ class CreateEnter extends Component {
 
   render() {
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
-      tenantIndustry,invitePermission,joinPermission} = this.state;
+      tenantIndustry,invitePermission,joinPermission,address} = this.state;
+     
+      let newTenantAddress = "";
+      if(tenantAddress){
+        let _adds = tenantAddress.split("|");
+        newTenantAddress = _adds[_adds.length-1];
+      }
+      // let aaa = { province:'山西',city:'长治',area:'长治县'};
+      // defaultValue:{ province:'北京',city:'北京',area:'东城区'},
+      // console.log("address---",address);
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *</font></span>}
@@ -214,11 +223,13 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>企业地址<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
-              <CitySelect name='address' onChange={this.onChange}/>
+              {
+                address?<CitySelect name='address' onChange={this.onChange} value={address}/>:<CitySelect name='address' onChange={this.onChange}/>
+              }
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>地址<font color='red'> *</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
-              <FormControl name="tenantAddress" value={tenantAddress?tenantAddress:""} onChange={(e)=>{this.inputOnChange(e,"tenantAddress")}} placeholder="最多60个字符" />
+              <FormControl name="tenantAddress" value={newTenantAddress?newTenantAddress:tenantAddress} onChange={(e)=>{this.inputOnChange(e,"tenantAddress")}} placeholder="最多60个字符" />
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>

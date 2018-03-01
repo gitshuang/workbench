@@ -1,21 +1,21 @@
 {
   "status": 1,
   "data": {
-      "createTime": 1519815679311,
+      "createTime": 1519884665128,
       "modifiedTime": null,
       "ts": null,
       "creator": null,
       "modifier": null,
-      "tenantId": "ouck9r85",
-      "tenantName": "测试账户五",
-      "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/26d92d0b-3b92-45ff-90b7-c3971dbb0af1/c2481bb099b574f5%21400x400_big.png",
-      "linkman": "ssss",
-      "tenantAddress": "山西|长治|长治县|方法",
-      "tenantEmail": "222@126.com",
+      "tenantId": "dnth32dq",
+      "tenantName": "用友网络股份有限公司企业测试四",
+      "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f1be8f92-64a5-4b94-94f6-bf02d4ed3d08/c2481bb099b574f5%21400x400_big.png",
+      "linkman": "张一峰",
+      "tenantAddress": "山西|长治|长治县|长治县",
+      "tenantEmail": "zyf@216.com",
       "tenantIndustry": "C",
-      "tenantTel": "16554558785",
-      "invitePermission": null,
-      "joinPermission": null,
-      "allowExit": null
+      "tenantTel": "16878888857",
+      "invitePermission": "1",
+      "joinPermission": "1",
+      "allowExit": "1"
   }
 }

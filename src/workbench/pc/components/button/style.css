@@ -18,7 +18,7 @@
 /** 品牌红 **/
 button.brand_btn{
   background:rgba(225,76,70,1);
-  color:rgba(255,255,255,1);
+  color:rgba(255,255,255,1) ;
 }
 button.brand_btn:hover{
   background:rgba(210,61,55,1);
