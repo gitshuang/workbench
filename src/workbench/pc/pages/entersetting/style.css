@@ -101,7 +101,7 @@
 
 .enter_form :global(.u-input-inner>input){
   width:338px !important;
-  height:36px;
+  /* height:36px; */
   background:rgba(255,255,255,1);
   border-radius: 3px ;
   border:1px solid RGBA(78, 89, 104, 0.2);
