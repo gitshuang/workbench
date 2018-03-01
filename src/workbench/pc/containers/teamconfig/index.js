@@ -13,7 +13,6 @@ import TeamDismissModal from 'containers/teamDismissModal';
 import TeamExitModal from 'containers/teamExitModal';
 
 
-//import { Radio, Select } from 'tinper-bee';
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
 import Icon from 'bee/icon';
@@ -29,15 +28,15 @@ const Option = Select.Option;
 const OptGroup = Select.OptGroup;
 
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { 
+const {
   getTeamInfo,
-  uploadApplication, 
-  createTeam, 
+  uploadApplication,
+  createTeam,
   userToAdmin,            // 用户升级管理员
   adminToUser,            // 管理员降级用户
   openRemoveModal,
-  closeRemoveModal, 
-  openUpgradeModal, 
+  closeRemoveModal,
+  openUpgradeModal,
   openTransferModal,
   openDismissModal,
   openExitModal,
@@ -87,7 +86,7 @@ import {
       namespace: "teamconfig"
     },
   ),
-  
+
   {
     requestStart,
     requestSuccess,
@@ -98,7 +97,7 @@ import {
     userToAdmin,            // 用户升级管理员
     adminToUser,            // 管理员降级用户
     openRemoveModal,        // 团队成员打开删除弹窗
-    openUpgradeModal,       // 打开升级为企业弹窗  
+    openUpgradeModal,       // 打开升级为企业弹窗
     openTransferModal,      // 打开移交团队弹窗
     openDismissModal,       // 打开解散团队弹窗
     openExitModal,          // 打开退出团队弹窗
@@ -118,7 +117,7 @@ class CreateTeamContent extends Component {
       imgWarning: "",         // 团队头像警告格式
       imgUrl: "",             // 基础设置  选择头像回显
 
-      tenantId: "",           // 团队id  直接取出来存到这里  
+      tenantId: "",           // 团队id  直接取出来存到这里
       value: "",              // 基础设置团队名称
       logo: "",               // 上传成功后返回的url
       //searchAvalible: "",     // 搜索可见
@@ -146,7 +145,7 @@ class CreateTeamContent extends Component {
   }
 
   componentDidMount() {
-    
+
   }
 
   // 查询基础设置
@@ -202,9 +201,9 @@ class CreateTeamContent extends Component {
   queryUser = ( keyword = "", onlyAdmin = false, page = 1, size = 10 ) => {
     const { getUserList, changePage, requestError, requestSuccess } = this.props;
     const param = {
-      page, 
+      page,
       size,
-      keyword, 
+      keyword,
       onlyAdmin
     }
     getUserList( param ).then(({error, payload}) => {
@@ -220,9 +219,9 @@ class CreateTeamContent extends Component {
     });
   }
 
- 
 
-  
+
+
 
 
   // 基础设置  输入框改变
@@ -294,9 +293,9 @@ class CreateTeamContent extends Component {
   // 基础设置  保存
   create = () => {
     const { createTeam, requestStart, requestSuccess, requestError } = this.props;
-    const { 
-      tenantId, 
-      value, 
+    const {
+      tenantId,
+      value,
       logo,
       //searchAvalible,  //搜索可见
       allowExit,  //允许用户是否退出空间
@@ -315,7 +314,7 @@ class CreateTeamContent extends Component {
       //searchAvalible: searchAvalible,
       invitePermission: invitePermission,
       joinPermission: joinPermission,
-      allowExit: allowExit 
+      allowExit: allowExit
     };
     requestStart();
     createTeam(data).then(({ error, payload }) => {
@@ -331,7 +330,7 @@ class CreateTeamContent extends Component {
 
   }
 
-  
+
   // 基础设置
   baseConfig = () => {
     const { value, logo, imgWarning, invitePermission, joinPermission } = this.state;
@@ -417,11 +416,11 @@ class CreateTeamContent extends Component {
   }
 
 
- /* &&&&& 应用设置 &&&&&   */ 
+ /* &&&&& 应用设置 &&&&&   */
   // 点击按钮切换不同的形态
   changeDuan = (type) => {
     const { webApplication, mobApplication, cliApplication } = this.state;
-    
+
     let currApplication = [];
     if(type == "web"){
       currApplication = webApplication
@@ -504,7 +503,7 @@ class CreateTeamContent extends Component {
                       {
                         this.esitXufei(item.expired) ? <Button onClick={this.openXufei}>续费</Button> : null
                       }
-                      
+
                     </div>
                   </li>
                 )
@@ -518,7 +517,7 @@ class CreateTeamContent extends Component {
 
 
 
- /* &&&&& 用户设置 &&&&&   */ 
+ /* &&&&& 用户设置 &&&&&   */
   // 更换用户身份
   handleChange3 = (value,id) => {
     console.log(`selected ${value}`);
@@ -537,7 +536,7 @@ class CreateTeamContent extends Component {
           if (item.userId == id){
             item.admin = true
           }
-        }); 
+        });
         this.setState({
           newUserList
         });
@@ -553,13 +552,13 @@ class CreateTeamContent extends Component {
         if (item.userId == id){
           item.admin = false
         }
-      }); 
+      });
       this.setState({
         newUserList
       });
       requestSuccess();
     });
-    
+
   };
   // 删除用户
   deleteMember = (id) => {
@@ -623,7 +622,7 @@ class CreateTeamContent extends Component {
   }
 
 
-  // 设置团队成员 
+  // 设置团队成员
   teamMember = () => {
     const { newUserList } = this.state;
     const { userList, activePage } = this.props;
@@ -642,7 +641,7 @@ class CreateTeamContent extends Component {
               {
                 this.state.searchVal.length ? <span className="um-input-clear icon-error3" onClick={this.clearSearchFn}></span> : null
               }
-              
+
             </div>
 
             <div
@@ -658,7 +657,7 @@ class CreateTeamContent extends Component {
             <Button colors="danger" onClick={this.inviteMember}>邀请成员</Button>
           </div>
         </div>
-        
+
         <h5>当前人数{userList.totalElements}人</h5>
         <div className={memberLists}>
           <ul>
@@ -710,8 +709,8 @@ class CreateTeamContent extends Component {
     )
   }
 
-                     
- /* &&&&& 公共头部那里的方法集合  &&&&&   */ 
+
+ /* &&&&& 公共头部那里的方法集合  &&&&&   */
   // 打开升级为企业弹窗
   openUpgradeModal = () => {
     const { openUpgradeModal } = this.props;

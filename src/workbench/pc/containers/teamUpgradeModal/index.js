@@ -7,12 +7,13 @@ import teamconfigActions from 'store/root/teamconfig/actions';
 // 定义actions
 const { closeUpgradeModal } = teamconfigActions;
 
-import { Modal, Button } from 'tinper-bee';
+import Modal from 'bee/modal';
+import Button from 'bee/button';
 import { modal, form, cancelButton } from './index.css';
 @withRouter
 @connect(
   mapStateToProps(
-    
+
   ),
   {
     closeUpgradeModal

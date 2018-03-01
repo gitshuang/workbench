@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import EnterSetting from './enterSetting';
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
-import {Select } from 'tinper-bee';
+import Select from 'bee/select';
 import { page_enterprise ,enter_title,enter_cont,hr,hr2,title,appBreadcrumb
 ,enter_setting} from './style.css';
 
@@ -46,7 +46,7 @@ class Enterprise extends Component {
         }
         <div className={appBreadcrumb}>
           <Breadcrumbs data={[{ name:"设置企业" }]} goback={this.goBack}/>
-        </div> 
+        </div>
 
         <div className={`${page_enterprise} um-content`}>
           <div className={enter_title}>
@@ -58,7 +58,7 @@ class Enterprise extends Component {
                 <Option value="Ten">相关操作</Option>
                 <Option value="234">23123</Option>
             </Select>
-          </div> 
+          </div>
           <hr className={hr}/>
           <div className={`${enter_cont} enter_setting`} >
             <EnterSetting />

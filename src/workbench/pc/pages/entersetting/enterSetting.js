@@ -4,7 +4,9 @@ import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import Form, { FormItem } from 'bee-form';
 import Upload from 'containers/upload';
-import { FormControl, Radio,Select } from 'tinper-bee';
+import FormControl from 'bee/form-control';
+import Radio from 'bee/radio';
+import Select from 'bee/select';
 import { ButtonBrand } from 'components/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
@@ -38,7 +40,7 @@ class Nature extends Component {
     // this.props.onChange(value);
   }
 
-  
+
   render() {
     return (
       <Radio.RadioGroup
@@ -104,7 +106,7 @@ class CreateEnter extends Component {
     }
   }
 
-  componentWillMount(){ 
+  componentWillMount(){
     const { requestSuccess, requestError, getEnterInfo} = this.props;
     let param = "123";
     getEnterInfo(param).then(({error, payload}) => {
@@ -122,7 +124,7 @@ class CreateEnter extends Component {
       })
     });
   }
-  
+
   checkForm = (flag, data) => {
     const {setCreateEnter} = this.props;
       requestStart();
@@ -172,8 +174,8 @@ class CreateEnter extends Component {
       tenantIndustry,invitePermission,joinPermission} = this.state;
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *</font></span>} 
-            isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur" 
+            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *</font></span>}
+            isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur"
              inline={true}>
                 <FormControl name="tenantName" value={tenantName?tenantName:""} onChange={(e)=>{this.inputOnChange(e,"tenantName")}} placeholder="最多60个字符"/>
             </FormItem>
@@ -182,10 +184,10 @@ class CreateEnter extends Component {
               <Upload name='logo' logo={logo?logo:""} getUrl={this.getUrl} onChange={this.getUrl}/>
             </FormItem>
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
-                <Select 
+                <Select
                     name="tenantIndustry"
                     defaultValue={tenantIndustry?tenantIndustry:"C"}
-                    style={{ width: 338, marginRight: 6 }} 
+                    style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
                     >
                     <Option value="A">农、林、牧、渔业</Option>
@@ -218,24 +220,24 @@ class CreateEnter extends Component {
             <FormItem showMast={false} labelName={<span>地址<font color='red'> *</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
               <FormControl name="tenantAddress" value={tenantAddress?tenantAddress:""} onChange={(e)=>{this.inputOnChange(e,"tenantAddress")}} placeholder="最多60个字符" />
             </FormItem>
- 
+
             <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     name="invitePermission"
                     defaultValue={invitePermission?invitePermission:"1"}
-                    style={{ width: 338, marginRight: 6 }} 
+                    style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                     >
                     <Option value="1">全员邀请 </Option>
                     <Option value="0">全员禁止</Option>
                 </Select>
             </FormItem>
-            
+
             <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     name="joinPermission"
                     defaultValue={joinPermission?joinPermission:"1"}
-                    style={{ width: 338, marginRight: 6 }} 
+                    style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
                     >
                     <Option value="1">全员允许 </Option>
@@ -248,7 +250,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <div className={lxr_hr}>
-              <hr />  
+              <hr />
             </div>
 
             <div className={lxr_title}>

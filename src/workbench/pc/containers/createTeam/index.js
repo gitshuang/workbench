@@ -6,9 +6,10 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import teamActions from 'store/root/team/actions';
 import homeActions from 'store/root/home/actions';
-
-//
-import { FormControl, Checkbox, Button, Icon } from 'tinper-bee';
+import FormControl from 'bee/form-control';
+import Checkbox from 'bee/checkbox';
+import Button from 'bee/button';
+import Icon from 'bee/icon';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { changeUserInfoDisplay, getUserInfo } = homeActions;
@@ -149,7 +150,7 @@ class CreateTeamContent extends Component {
           <div className={image}>
               { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
               <div>
-                <Icon type="icon-copyreader" />  
+                <Icon type="icon-copyreader" />
                 <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
               </div>
             </div>

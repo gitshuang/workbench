@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Form, { FormItem } from 'bee/form';
 import Upload from 'containers/upload';
-import { FormControl, Radio,Select } from 'tinper-bee';
+import FormControl from 'bee/form-control';
+import Radio from 'bee/radio';
+import Select from 'bee/select';
 import { ButtonBrand } from 'components/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
@@ -77,13 +79,13 @@ class CreateEnter extends Component {
     }
     this.address = "北京|北京|东城区|";
   }
-  
+
   checkForm = (flag, data) => {
     const {setCreateEnter,updateenter} = this.props;
     let _address = data.find((da)=>da.name == "address");
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
     if(_address.value != ""){
-      
+
       _tenantAddress.value = _address.value.province + "|" + _address.value.city  + "|" + _address.value.area + "|" + _tenantAddress.value;
     }else{
       _tenantAddress.value = this.address + _tenantAddress.value;
@@ -133,21 +135,21 @@ class CreateEnter extends Component {
   render() {
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *&nbsp;</font></span>} 
-            isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur" 
+            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *&nbsp;</font></span>}
+            isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur"
              inline={true}>
                 <FormControl name="tenantName"  placeholder="最多60个字符"/>
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *&nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' onChange={(e)=>{this.setUrl("logo",e)}}  /> 
+              <Upload name='logo' onChange={(e)=>{this.setUrl("logo",e)}}  />
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     defaultValue="A"
                     name="tenantIndustry"
-                    style={{ width: 338, marginRight: 6 }} 
+                    style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
                     >
                     <Option value="A">农、林、牧、渔业</Option>
@@ -182,7 +184,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <div className={lxr_hr}>
-              <hr />  
+              <hr />
             </div>
 
             <div className={lxr_title}>
@@ -200,12 +202,12 @@ class CreateEnter extends Component {
             <FormItem inputBefore="+86" className="input_phone" showMast={false}  valuePropsName='value'  labelName={<span>手机号<font color='red'> *&nbsp;</font></span>} isRequire={true} method="blur" htmlType="tel" errorMessage="手机号格式错误"  inline={true}>
                 <FormControl name="tenantTel"  placeholder="请输入手机号" />
             </FormItem>
-            
+
             {/* <FormItem showMast={false} labelName={<span>企业性质<font color='red'> * </font></span>} isRequire={false} method="change" inline={true}>
               <Nature name="tenantNature" defaultValue='LegalPerson' />
             </FormItem> */}
             {/* <div className={lxr_hr_bottom}>
-              <hr />  
+              <hr />
             </div> */}
 
             <SubmitBtn isSubmit />
