@@ -34,7 +34,7 @@ import _default_icon from 'assets/image/wgt/default.png';
 import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
-const { getSearch} = searchActions;
+const { getSearch,setSearchHeadData} = searchActions;
 
 const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
@@ -42,6 +42,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
 @connect(
   mapStateToProps(
     'SearchList',
+    'searchHeadData',
     {
       namespace: 'search',
     },
@@ -51,6 +52,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
     requestSuccess,
     requestError,
     getSearch,
+    setSearchHeadData,
   }
 )
 class searchOther extends Component {
@@ -58,7 +60,10 @@ class searchOther extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keywords:window.sessionStorage.searchkeywords,
+      //keywords:window.sessionStorage.searchkeywords,
+      keywords:props.match.params?props.match.params.value:"",
+      type:'',
+      typeName:'',
       dataList :{
         content:[]
       },
@@ -69,11 +74,20 @@ class searchOther extends Component {
   }
 
   componentWillMount() {
-    const {type,typeName} = this.props.location.state;
-    // const type = this.props.match.params.type
+    const {type,typeName} = this.props.location.state?this.props.location.state :JSON.parse(window.sessionStorage.stateStorage);
+    //为了让页面刷新仍然有数据且面包屑正常,持久化
+    window.sessionStorage.stateStorage = this.props.location.state? JSON.stringify(this.props.location.state):window.sessionStorage.stateStorage;
+    if(window.sessionStorage.searchHeadData && JSON.parse(window.sessionStorage.searchHeadData).brm.length == 2){
+        //这里是刷新后，面包屑数据的bmr长度=1，是初始值
+        let nowSearchHeadData = JSON.parse( window.sessionStorage.searchHeadData);
+        setSearchHeadData({appName:typeName,brm:[{name:nowSearchHeadData.brm[0].name},{name:nowSearchHeadData.brm[1].name}],searchValue:nowSearchHeadData.searchValue});
+    }else{
+      window.sessionStorage.searchHeadData = JSON.stringify(this.props.searchHeadData);
+    }
     if(!type)return;
+    this.setState({type,typeName});
     const { keywords} = this.state
-    this.getSearchTpyeList(keywords,type,1)
+    this.getSearchTpyeList(keywords,type,0)
   }
 
   getSearchTpyeList(keywords,type,page){
@@ -90,7 +104,7 @@ class searchOther extends Component {
         }
         this.setState({
           dataList:payload,
-          pagesize:payload.pageSize
+          pagesize:payload.totalPages
         })
         if(payload.content.length>0){
           this.setState({
@@ -102,12 +116,12 @@ class searchOther extends Component {
   }
   
   handleSelect(eventKey) {
-    const type = this.props.match.params.type
+    const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab}=this.state
     this.setState({
       activePage: eventKey
     });
-     this.getSearchTpyeList(keywords,type,eventKey)
+     this.getSearchTpyeList(keywords,type,--eventKey)
   }
  
   goDetail(type,item){
@@ -160,8 +174,7 @@ class searchOther extends Component {
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div>共{dataList.total}条</div>
             <ul className={recently}>{lis}</ul>
-            
-
+           
             <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
               <Pagination
                 first

@@ -68,19 +68,20 @@ const routes = [
     component: Search,
     routes:[
       {
-        path:'/search/:value',
+        path:'/search/searchValue/:value',
         component:SearchResult,
         exact: true,
       },
       {
-        path:'/search/',
+        path:'/search/searchValue/',
         component:SearchResult,
         exact: true,
       },
       {
-        path:'/search/searchlist',
+        path:'/search/searchlist/:value',
         component:SearchOther,
       }
+      
     ]
   },
   {
