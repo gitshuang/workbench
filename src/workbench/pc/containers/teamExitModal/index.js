@@ -38,18 +38,23 @@ class TeamRemoveModal extends Component {
 
   // 删除确认
   configFn = () => {
-    const { exitTeam,isManage } = this.props;
-    if( isManage ){
-      this.setState({
-        isManage: true
-      });
-      return false;
-    }
-    exitTeam().then(({error, payload}) => {
+    const { exitTeam, isManage, userId } = this.props;
+    // if( isManage ){
+    //   this.setState({
+    //     isManage: true
+    //   });
+    //   return false;
+    // }
+    exitTeam(userId).then(({error, payload}) => {
+      this.cancelFn();
       if (error) {
         console.log(payload);
+        return false;
       }
-      this.cancelFn();
+      if(payload){
+
+      }
+      window.location.href = "/";
     });
   }
 
@@ -89,9 +94,8 @@ class TeamRemoveModal extends Component {
           <Modal.Title>退出团队</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div></div>
+        {this.renderModalBody()}
         </Modal.Body>
-          {this.renderModalBody()}
         <Modal.Footer>
           <Button colors="danger" onClick={this.configFn}>{this.state.isManage ? "移交" : "退出"}</Button>
           <button className={cancelButton} onClick={this.cancelFn}>取消</button>
