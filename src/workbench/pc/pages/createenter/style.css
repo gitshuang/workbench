@@ -52,7 +52,8 @@
   background: #fff;
   /* text-align: center; */
   /* padding-left: 100px; */
-  overflow: hidden;
+  overflow: auto;
+  padding-bottom: 50px;
 }
 
 .enter_title{

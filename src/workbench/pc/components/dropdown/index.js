@@ -5,7 +5,10 @@ import Dropdown from 'bee/dropdown';
 import Icon from 'components/icon';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee/menus';
 // import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
-import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style,drop_MenuItem,_Menu_Item,create_ent} from './style.css';
+import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style,
+  drop_MenuItem,_Menu_Item,create_ent,
+  menu_item,item_ul,item_li,li_title,li_right
+} from './style.css';
 
 const propTypes = {
   label:"",
@@ -53,19 +56,32 @@ class DropdownButton extends Component{
         visible: false
     });
   }
-
+  
+  
   render(){
     let {label,dataItem,fun,type} = this.props;
+
     let item = [];
     dataItem.forEach((da,i) => {
-        item.push(<MenuItem key={da.name} ><span title={da.value}>{da.value}</span><span className={_Menu_Item}>{da.type == 1?"团队":"企业"}</span></MenuItem>);
+        item.push(<div key={da.name} className={item_li}>
+        <div className={li_title}title={da.value}>{da.value}</div>
+        <div className={li_right}>{da.type == 1?"团队":"企业"}</div>
+
+        {/* <span title={da.value}>{da.value}</span><span className={_Menu_Item}>{da.type == 1?"团队":"企业"}</span>  */}
+        </div>);
     });
     let _marginLeft = -148;
     if(type && type == "home"){
-      item.push(<MenuItem key="td_2001" className={create_ent} >创建团队 \ 创建企业</MenuItem>);
+    //   item.push(<div key="td_2001" className={create_ent} >创建团队 \ 创建企业</div>);
       _marginLeft = -188;
     }
-    let _menus = <Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >{item}</Menu>;
+    let _menus = (<Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >
+       <MenuItem className={menu_item} > 
+          <div className={item_ul}>{item}</div>
+          <div key="td_2001" className={create_ent} >创建团队 \ 创建企业</div>
+       </MenuItem>
+    </Menu>);
+
     let arrard = this.state.visible?"upward":"pull-down";
     return(<div className={dropdown_button_cont} >
           <div className={`${label_cont} home_title`}>
