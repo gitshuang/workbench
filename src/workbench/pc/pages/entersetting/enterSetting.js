@@ -223,9 +223,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>企业地址<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
-              {
-                address?<CitySelect name='address' onChange={this.onChange} value={address}/>:<CitySelect name='address' onChange={this.onChange}/>
-              }
+              <CitySelect name='address' onChange={this.onChange} value={address} />
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>地址<font color='red'> *</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>

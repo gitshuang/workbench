@@ -105,8 +105,12 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item){
     height: 28px;
 }
 .create_ent{
-    position: fixed;
+    background:#fff;
+    position: fixed !important;
+    top: 414px;
+    width: 236px;
+    /* position: fixed;
     margin-top: -50px;
     background: #fff;
-    width: 236px;
+    width: 236px; */
 }
