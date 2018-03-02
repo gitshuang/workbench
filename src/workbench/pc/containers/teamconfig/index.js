@@ -777,7 +777,6 @@ class CreateTeamContent extends Component {
             </TabPane>
           </Tabs>
         </div>
-
         {
           removeModal ? <TeamRemoveModal
             deleteMemberId = { this.state.deleteMemberId }

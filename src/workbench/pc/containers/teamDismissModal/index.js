@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// 加载公共模块
+import { connect } from 'react-redux'; 
 import { mapStateToProps } from '@u';
-import teamconfigActions from 'store/root/teamconfig/actions';
-// 定义actions
+import teamconfigActions from 'store/root/teamconfig/actions'; 
 const { dismissTeam, closeDismissModal } = teamconfigActions;
+import PopDialog from 'components/pop';
+import {content} from './index.css';
 
-import Modal from 'bee/modal';
-import Button from 'bee/button';
-import { modal, form, cancelButton } from './index.css';
+
 @connect(
   mapStateToProps(
 
@@ -64,26 +62,29 @@ class TeamRemoveModal extends Component {
   }
 
   render() {
-    return (
-      <Modal
-        show = { true }
-        style={{ width: 400}}
-        onHide={ this.cancelFn }
-        className={modal}
+    return ( 
+      <PopDialog
+      className="team_dismiss_modal"
+      show={ true }
+      title="解散团队"
+      backup={false}
+      close={this.cancelFn} 
+      btns={[
+        {
+          label: '解散',
+          fun: this.configFn,
+        },
+        {
+          label: '取消',
+          fun: this.cancelFn,
+        }
+      ]} 
       >
-        <Modal.Header className="text-center" closeButton={true}>
-          <Modal.Title>解散团队</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+      <div className={content} >
           <h5>{this.state.title}</h5>
           <p>团队解散后系统将解散你和本团队内所有成员的关系并清除所有数据，请谨慎操作!</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button colors="danger" onClick={this.configFn}>解散</Button>
-          <button className={cancelButton} onClick={this.cancelFn}>取消</button>
-        </Modal.Footer>
-      </Modal>
+      </div>
+    </PopDialog>
     )
   }
 }

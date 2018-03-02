@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// 加载公共模块
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions';
-// 定义actions
 const { transferTeam, closeTransferModal } = teamconfigActions;
+import PopDialog from 'components/pop';
+import {content} from './index.css';
 
-import Modal from 'bee/modal';
-import Button from 'bee/button';
-import { modal, form, cancelButton } from './index.css';
 @connect(
   mapStateToProps(
 
@@ -56,25 +53,28 @@ class TeamTransferModal extends Component {
 
   render() {
     return (
-      <Modal
-        show = { true }
-        style={{ width: 400}}
-        onHide={ this.cancelFn }
-        className={modal}
-      >
-        <Modal.Header className="text-center" closeButton={true}>
-          <Modal.Title>移交团队</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>移交团队后您将不再有管理员权限。</p>
-          <p>请搜索被移交用户</p>
-          <div></div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button colors="danger" onClick={this.configFn}>删除</Button>
-          <button className={cancelButton} onClick={this.cancelFn}>取消</button>
-        </Modal.Footer>
-      </Modal>
+      <PopDialog
+          className="team_transfer_modal"
+          show={ true }
+          title="移交团队"
+          backup={false}
+          close={this.cancelFn} 
+          btns={[
+            {
+              label: '确定',
+              fun: this.configFn,
+            },
+            {
+              label: '取消',
+              fun: this.cancelFn,
+            }
+          ]} 
+          >
+          <div className={content} >
+            <p>移交团队后您将不再有管理员权限。</p>
+            <p>请搜索被移交用户</p>
+          </div>
+        </PopDialog>
     )
   }
 }

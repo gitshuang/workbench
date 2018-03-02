@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// 加载公共模块
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions';
-// 定义actions
 const { removeUser, closeRemoveModal } = teamconfigActions;
-
-import Modal from 'bee/modal';
-import Button from 'bee/button';
-import { modal, form, cancelButton } from './index.css';
+import PopDialog from 'components/pop';
+import {content} from './index.css';
 @connect(
   mapStateToProps(
 
@@ -57,24 +53,27 @@ class TeamRemoveModal extends Component {
 
   render() {
     return (
-      <Modal
-        show = { true }
-        style={{ width: 400}}
-        onHide={ this.cancelFn }
-        className={modal}
-      >
-        <Modal.Header className="text-center" closeButton={true}>
-          <Modal.Title>确认移除所选用户？</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button colors="danger" onClick={this.configFn}>删除</Button>
-          <button className={cancelButton} onClick={this.cancelFn}>取消</button>
-        </Modal.Footer>
-      </Modal>
+      <PopDialog
+          className="team_remove_modal"
+          show={ true }
+          title="确认移除所选用户?"
+          backup={false}
+          close={this.cancelFn} 
+          btns={[
+            {
+              label: '删除',
+              fun: this.configFn,
+            },
+            {
+              label: '取消',
+              fun: this.cancelFn,
+            }
+          ]} 
+          >
+          <div className={content} >
+            确认移除所选用户？
+          </div>
+        </PopDialog>
     )
   }
 }
