@@ -89,21 +89,6 @@ class CreateEnter extends Component {
     super(props);
     this.state = {
     }
-    this.tenantIndustry ={
-      name:"tenantIndustry",
-      value:"A",
-      verify:true,
-    }
-    this.invitePermission = {
-      name:"invitePermission",
-      value:"1",
-      verify:true,
-    }
-    this.joinPermission = {
-      name:"joinPermission",
-      value:"1",
-      verify:true,
-    }
   }
 
   componentWillMount(){
@@ -127,25 +112,41 @@ class CreateEnter extends Component {
 
   checkForm = (flag, data) => {
     const {setCreateEnter} = this.props;
-      requestStart();
-      setCreateEnter(
-        data.reduce(
-          (obj, { value, name }) => {
-            name?obj[name] = value:null;
-            return obj;
-          },
-          {},
-        ),"settingEnter"
-      ).then(({ error, payload }) => {
-        requestSuccess();
-        if (error) {
-          requestError(payload);
-          return;
-        }
-        const tenantId = payload.tenantId;
-        localStorage.setItem('create', "1");
-        window.location.href = "/?tenantId=" + tenantId + "&switch=true";
-      });
+    const {logo,tenantIndustry,tenantId,address,tenantAddress} = this.state;
+    let _logo = data.find((da)=>da.name == "logo");
+    if(!_logo.value && _logo.value == ""){
+      _logo.value = logo;
+    }
+
+    let _tenantIndustry = data.find((da)=>da.name == "tenantIndustry");
+    if(!_tenantIndustry.value && _tenantIndustry.value == ""){
+      _tenantIndustry.value = tenantIndustry;
+    }
+
+    let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
+      _tenantAddress.value = address.province+"|"+address.city+"|"+address.area+"|"+_tenantAddress.value;
+
+    data.push({name:"tenantId",value:tenantId});
+    // console.log("this.state",this.state);
+    requestStart();
+    setCreateEnter(
+      data.reduce(
+        (obj, { value, name }) => {
+          name?obj[name] = value:null;
+          return obj;
+        },
+        {},
+      ),"settingEnter"
+    ).then(({ error, payload }) => {
+      requestSuccess();
+      if (error) {
+        requestError(payload);
+        return;
+      }
+      const tenantId = payload.tenantId;
+      localStorage.setItem('create', "1");
+      window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+    });
   }
 
   inputOnChange = (e,name)=>{
