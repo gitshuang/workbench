@@ -44,6 +44,7 @@ class CreateTeamContent extends Component {
   constructor(props) {
     super(props);
     this.imgObj = {};
+    this.isClick = false;
     this.state = {
       value: "",
       imgWarning: "",
@@ -102,8 +103,13 @@ class CreateTeamContent extends Component {
 
 
   create = () => {
+    if(this.isClick){
+      return false;
+    }
     const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
     const { value, backUrl } = this.state;
+    
+    this.isClick = true;
     if ( !value ){
       alert("请输入团队名称");
       return false;
