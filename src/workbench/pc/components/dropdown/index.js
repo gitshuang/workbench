@@ -20,7 +20,8 @@ class DropdownButton extends Component{
   constructor(props) {
     super(props);
     this.state = {
-        visible: false
+        visible: false,
+        label:props.label
     }
   }
 
@@ -40,29 +41,30 @@ class DropdownButton extends Component{
   }
 
   //todu 后续需求变更后需要遍历找到对应的事件
-  handleSelect = (e) => {
-    if(e.key == "td_2001"){ 
-        const {
-          history, 
-        } = this.props;
-        history.push('/establishusercenter'); 
-      return;
-    }
-    if(this.props.dataItem[0].fun){
-        this.props.dataItem[0].fun(e.key);
-    }
+  handleSelect = (da) => {
+   if(!da)return;
+   da.fun(da.name);
+    // if(this.props.dataItem[0].fun){
+    //     this.props.dataItem[0].fun(da.name);
+    // }
     this.setState({
         visible: false
     });
   }
   
+  enterOnclick=()=>{
+      const {
+        history, 
+      } = this.props;
+      history.push('/establishusercenter');
+  }
   
   render(){
     let {label,dataItem,fun,type} = this.props;
-
+    // const {label } = this.state;
     let item = [];
     dataItem.forEach((da,i) => {
-        item.push(<div key={da.name} className={item_li}>
+        item.push(<div key={da.name} className={item_li}  onClick={(e)=>{this.handleSelect(da)}} >
         <div className={li_title}title={da.value}>{da.value}</div>
         <div className={li_right}>{da.type == 1?"团队":"企业"}</div>
         </div>);
@@ -71,10 +73,11 @@ class DropdownButton extends Component{
     if(type && type == "home"){
       _marginLeft = -183;
     }
-    let _menus = (<Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}} onSelect={(e)=>{this.handleSelect(e,fun)}} >
+    // onSelect={(e)=>{this.handleSelect(e,fun)}} 
+    let _menus = (<Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}}  >
        <MenuItem className={menu_item} > 
           <div className={item_ul}>{item}</div>
-          <div key="td_2001" className={create_ent} >创建团队 \ 创建企业</div>
+          <div className={create_ent} onClick={this.enterOnclick} >创建团队 \ 创建企业</div>
        </MenuItem>
     </Menu>);
 
