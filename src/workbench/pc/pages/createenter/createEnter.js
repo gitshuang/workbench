@@ -46,12 +46,14 @@ class SubmitBtn extends Component {
   click = () => {
     if (typeof this.props.onClick === 'function') {
       this.props.onClick();
-    }
+    } 
   }
   render() {
     return (
       <div className={'u-form-submit'}>
-        <ButtonBrand onClick={this.click} >创建</ButtonBrand>
+      {
+        this.props.disabled?<ButtonBrand  onClick={this.click} >创建</ButtonBrand>:<ButtonBrand disabled={true} >创建</ButtonBrand>
+      }
       </div>
     );
   }
@@ -71,7 +73,9 @@ class CreateEnter extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      disabled:true
+    };
     this.tenantIndustry ={
       name:"tenantIndustry",
       value:"A",
@@ -91,6 +95,9 @@ class CreateEnter extends Component {
       _tenantAddress.value = this.address + _tenantAddress.value;
     }
     if (flag) {
+      this.setState({
+        disabled:false
+      })
       requestStart();
       setCreateEnter(
         data.reduce(
@@ -101,6 +108,9 @@ class CreateEnter extends Component {
           {},
         ),updateenter
       ).then(({ error, payload }) => {
+        this.setState({
+          disabled:true
+        })
         requestSuccess();
         if (error) {
           requestError(payload);
@@ -210,7 +220,7 @@ class CreateEnter extends Component {
               <hr />
             </div> */}
 
-            <SubmitBtn isSubmit />
+            <SubmitBtn isSubmit disabled={this.state.disabled} />
         </Form>
     );
   }
