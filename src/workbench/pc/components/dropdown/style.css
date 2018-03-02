@@ -77,7 +77,7 @@
     box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
     border: rgba(78,89,104,0.19); 
     /* max-height: 400px; */
-    width: 228px;
+    width: 219px;
 }
 .drop_MenuItem{
     background: red;
@@ -103,13 +103,22 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 .create_ent{ 
     cursor: pointer;
     padding-left: 2px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #cccccc;
 }
 .menu_item{
     height: auto !important;
     padding: 0px !important; 
     padding-left: 2px;
+    background:#fff !important;
 }
+/* .menu_style :globle(.u-dropdown-menu > .u-dropdown-menu-item):hover{
+    background:#fff !important;
+}
+.menu_style :globle(.u-dropdown-menu > .u-dropdown-menu-item){
+    background:#fff !important;
+} */
+/* .u-input-group .u-form-control */
+
 .item_li{
     height: 30px;
     width: 100%;
