@@ -9,8 +9,8 @@ const EnhancedPagination = WrappedComponent => {
       constructor(props){
         super(props);
         this.state = {
-          pageJump:this.props.activePage,
-          activePage:this.props.activePage,
+          activePage:this.props.activePage,//当前的页码
+          dataNum:this.props.dataNumSelectActive,
         }
       }
 
@@ -24,7 +24,7 @@ const EnhancedPagination = WrappedComponent => {
         if(value > this.props.items || (value == 0 && value !== '')){
           alert('跳转的页数不合适');
         }else{
-          this.setState({pageJump:value,activePage:value},function(){
+          this.setState({activePage:value},function(){
             if(value!== '')this.props.onSelect(value)
           })
         }
@@ -32,8 +32,10 @@ const EnhancedPagination = WrappedComponent => {
 
       dataNumSelect = (e) =>{
         let value = e.target.value;
+        let dataNumValue = this.props.dataNumSelect[value].name
+        this.setState({dataNum:value})
         if(this.props.onDataNumSelect){
-          this.props.onDataNumSelect(value)
+          this.props.onDataNumSelect(dataNumValue)
         }
       }
 
@@ -45,15 +47,14 @@ const EnhancedPagination = WrappedComponent => {
             <div className="enhanced-pagination">
                 <WrappedComponent {...this.props} {...newProps}/>
                 <div className="data-select">
-                    <select name="data-num-select" id="" className="data-select" onChange={e=>this.dataNumSelect(e)}>
-                        <option>10条/页</option>
-                        <option>15条/页</option>
-                        <option>20条/页</option>
-                        <option>30条/页</option>
+                    <select  name="data-select" id="" className="data-select"  defaultValue='' value={this.state.dataNum} onChange={e=>this.dataNumSelect(e)}>
+                      {this.props.dataNumSelect.length > 0 && this.props.dataNumSelect.map((item, i) => {
+                      return <option key={i} value={item.id}>{item.name}</option>
+                      })}
                     </select>
                 </div>
                 <div className="page-jump">
-                    跳至<input className="page-jump-value" type='number' value={this.state.pageJump} onKeyDown={e=>this.onKeyup(e)} onChange={e=>this.setPageJump(e) }/>页
+                    跳至<input className="page-jump-value" type='number' value={this.state.activePage} onKeyDown={e=>this.onKeyup(e)} onChange={e=>this.setPageJump(e) }/>页
                 </div>
             </div>
         )

@@ -460,6 +460,8 @@ class searchResult extends Component {
                 maxButtons={7}
                 activePage={this.state.activePage}
                 onDataNumSelect={this.paginationNumSelect}
+                dataNumSelect={[{id:0,name:'5条/页'},{id:1,name:'10条/页'},{id:2,name:'15条/页'},{id:3,name:'20条/页'}]}
+                dataNumSelectActive={1}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
 
