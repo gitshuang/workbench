@@ -89,7 +89,6 @@ class CreateEnter extends Component {
     super(props);
     this.state = {
     }
-    this.url = "";
   }
 
   componentWillMount(){
@@ -114,10 +113,6 @@ class CreateEnter extends Component {
   checkForm = (flag, data) => {
     const {setCreateEnter} = this.props;
     const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
-    if(this.url != ""){
-      let _logo = data.find((da)=>da.name == "logo");
-      _logo.value = this.url;
-    }
 
     let _tenantIndustry = data.find((da)=>da.name == "tenantIndustry");
     if(!_tenantIndustry.value && _tenantIndustry.value == ""){
@@ -172,10 +167,7 @@ class CreateEnter extends Component {
       ...this.state
     })
   }
-
-  onChangeUpload=(url)=>{
-    this.url = url;
-  }
+ 
 
   setUrl(name,url){
     this.state[name] = url;
@@ -203,7 +195,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
+              <Upload name='logo' logo={logo?logo:""} />
             </FormItem>
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
