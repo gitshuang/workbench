@@ -12,7 +12,7 @@ import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import CitySelect from 'bee/city-select';
 import 'assets/style/Form.css';
-import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom,form_team} from './createTeam.css';
+import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom,team_cont,form_team} from './createTeam.css';
 
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -221,52 +221,53 @@ class CreateTeam extends Component {
       }
 
     return (
-        <div className={form_team}>
+        <div className={team_cont}> 
 
-          <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-              <FormItem showMast={false}  labelName={<span>团队名称<font color='red'> *</font></span>}
-              isRequire={true} valuePropsName='value' errorMessage="请输入团队名称" method="blur"
-              inline={true}>
-                  <FormControl name="tenantName" value={tenantName?tenantName:""} onChange={(e)=>{this.inputOnChange(e,"tenantName")}} placeholder="最多60个字符"/>
-              </FormItem>
+          <div className={form_team}>
+            <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
+                <FormItem showMast={false}  labelName={<span>团队名称<font color='red'> *</font></span>}
+                isRequire={true} valuePropsName='value' errorMessage="请输入团队名称" method="blur"
+                inline={true}>
+                    <FormControl name="tenantName" value={tenantName?tenantName:""} onChange={(e)=>{this.inputOnChange(e,"tenantName")}} placeholder="最多60个字符"/>
+                </FormItem>
 
-              <FormItem showMast={false}  labelName={<span>团队头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
-                <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
-              </FormItem>
+                <FormItem showMast={false}  labelName={<span>团队头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
+                  <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
+                </FormItem>
 
-              <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
-                  <Select
-                      name="invitePermission"
-                      defaultValue={invitePermission?invitePermission:"1"}
-                      style={{ width: 338, marginRight: 6 }}
-                      onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
-                      >
-                      <Option value="1">全员邀请 </Option>
-                      <Option value="2">全员禁止</Option>
-                      <Option value="0">仅管理员可邀请</Option>
-                  </Select>
-              </FormItem>
+                <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                    <Select
+                        name="invitePermission"
+                        defaultValue={invitePermission?invitePermission:"1"}
+                        style={{ width: 338, marginRight: 6 }}
+                        onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
+                        >
+                        <Option value="1">全员邀请 </Option>
+                        <Option value="2">全员禁止</Option>
+                        <Option value="0">仅管理员可邀请</Option>
+                    </Select>
+                </FormItem>
 
-              <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
-                  <Select
-                      name="joinPermission"
-                      defaultValue={joinPermission?joinPermission:"1"}
-                      style={{ width: 338, marginRight: 6 }}
-                      onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
-                      >
-                      <Option value="0">全员允许 </Option>
-                      <Option value="1">全员禁止</Option>
-                  </Select>
-              </FormItem>
+                <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                    <Select
+                        name="joinPermission"
+                        defaultValue={joinPermission?joinPermission:"1"}
+                        style={{ width: 338, marginRight: 6 }}
+                        onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
+                        >
+                        <Option value="0">全员允许 </Option>
+                        <Option value="1">全员禁止</Option>
+                    </Select>
+                </FormItem>
 
-              <FormItem showMast={false} labelName={<span>允许退出<font color='red'> *</font></span>} isRequire={false} method="change" inline={true}>
-                <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} />
-              </FormItem> 
-            
-              
-              
-              <SubmitBtn isSubmit />
-          </Form>
+                <FormItem showMast={false} labelName={<span>允许退出<font color='red'> *</font></span>} isRequire={false} method="change" inline={true}>
+                  <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} />
+                </FormItem> 
+                
+                <SubmitBtn isSubmit />
+            </Form>
+          </div>
+
           <div className={lxr_hr}>
             <hr />
           </div>

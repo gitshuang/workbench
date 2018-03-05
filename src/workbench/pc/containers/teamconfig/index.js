@@ -711,9 +711,10 @@ class CreateTeamContent extends Component {
 
   onSelectDrop = ({ key }) => {
     const { openTransferModal,openDismissModal,openExitModal } = this.props;
-    if( key == "1" ){
-      openTransferModal();
-    }else if( key == "2" ){
+    // if( key == "1" ){
+    //   // openTransferModal();
+    // }
+    if( key == "2" ){
       openDismissModal();
     }else{
       openExitModal();
@@ -724,7 +725,7 @@ class CreateTeamContent extends Component {
     const menu1 = (
       <Menu
         onSelect={this.onSelectDrop}>
-        <Item key="1">移交团队</Item>
+        {/* <Item key="1">移交团队</Item> */}
         <Item key="2">解散团队</Item>
         <Item key="3">退出团队</Item>
       </Menu>
@@ -755,7 +756,7 @@ class CreateTeamContent extends Component {
             defaultActiveKey="1"
           >
             <TabPane tab='基础设置' key="1">
-              <div className={`${team_cont}`} >
+              <div >
                 <CreateTeam />
               </div>
             </TabPane>
