@@ -268,7 +268,8 @@ tabPane1,.tabPane2{
 }
 .tabContent :global(.u-tabs){
   border-bottom:none;
-  overflow: hidden
+  overflow: hidden;
+  padding-top: 12px;
 }
 .tabContent :global(.u-tabs-tab){
   color:#666;
@@ -276,7 +277,7 @@ tabPane1,.tabPane2{
 }
 .tabContent :global(.u-tabs-ink-bar){
   width:50% !important;
-  height:6px;
+  height:6px!important;
   max-width:30px;
   max-height: 6px;
   background:#E14C46;

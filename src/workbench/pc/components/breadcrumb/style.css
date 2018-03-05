@@ -11,7 +11,8 @@
   color:#9a9a9a;
 }
 .breadcrumbClass a {
-  color:#9a9a9a;
+  /* color:#9a9a9a; */
+  color:rgba(136,136,136,1);
   cursor:pointer;
 }
 .breadcrumbClass ol>li+li:before {
@@ -44,7 +45,8 @@
   line-height:33px;
 }
 .breadcrumbClass :global(.u-breadcrumb) li:last-child{
-  color:#4A515D;
+  /* color:#4A515D; */
+  color: rgba(71,77,84,1);
 }
 .itmeHover:hover span{
   color:rgba(225,76,70,1);

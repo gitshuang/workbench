@@ -25,6 +25,7 @@
   padding-bottom: 30px;
   position: relative;
 }
+
 .serviceSearch{
 	width:456px;
 	height:38px; 
@@ -54,6 +55,10 @@
 .wrap :global(.u-button-group-vertical .active){
 	background:rgba(239,239,239,1);
 	color:#E14C46;
+}
+.wrap :global(.u-form-control){
+  font-size:12px!important;
+  color:rgba(71,77,84,1);
 }
 .appContent{
 	padding-left: 16px;
@@ -172,7 +177,7 @@
 .recently  li {
   float: left;
   width: 100%;
-  padding-bottom: 10px;
+  padding-bottom: 21px;
 }
 .recently  li img { width: 36px; height: 36px; }
 .recently div { float: left;font-size:12px;}
@@ -246,11 +251,11 @@ tabPane1,.tabPane2{
   
 }
 .tabPane1 li,.tabPane2 li{
-  padding-top:14px;
+  padding-top:15px;
 }
 .tabPane1 li{
   display:flex;
-  border-bottom: 1px solid rgba(13,20,36,0.05);
+  /* border-bottom: 1px solid rgba(13,20,36,0.05); */
 }
 
 .wrap :global(.um-content){
@@ -270,15 +275,19 @@ tabPane1,.tabPane2{
 }
 .tabContent :global(.u-tabs){
   border-bottom:none;
-  overflow: hidden
+  overflow: hidden;
+  padding-top: 12px;
 }
 .tabContent :global(.u-tabs-tab){
-  color:rgba(13,20,36,.6);
+  /* color:rgba(13,20,36,.6); */
   padding: 8px 0;
-  margin: 0 20px
+  margin: 0 20px;
+  /* color:rgba(74,81,93,1); */
+  color: #C0C2C6;
+  font-size: 12px;
 }
 .tabContent :global(.u-tabs-ink-bar){
-  height:6px;
+  height:6px!important;
   max-height: 6px;
   background:#E14C46;
   border-radius:3px;
@@ -308,8 +317,8 @@ tabPane1,.tabPane2{
   font-style: normal;
   display: inline-block;
   color: #007ace;
-  margin: 10px 0 0 185px;
-padding: 10px 0; 
+  margin: 2px 0 0 185px;
+padding: 0 0 10px 0; 
 cursor: pointer}
 .isdisplay { display: none}
 
