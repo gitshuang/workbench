@@ -89,6 +89,7 @@ class CreateEnter extends Component {
     super(props);
     this.state = {
     }
+    this.url = "";
   }
 
   componentWillMount(){
@@ -113,10 +114,10 @@ class CreateEnter extends Component {
   checkForm = (flag, data) => {
     const {setCreateEnter} = this.props;
     const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
-    // let _logo = data.find((da)=>da.name == "logo");
-    // if(!_logo.value && _logo.value == ""){
-    //   _logo.value = logo;
-    // }
+    if(this.url != ""){
+      let _logo = data.find((da)=>da.name == "logo");
+      _logo.value = this.url;
+    }
 
     let _tenantIndustry = data.find((da)=>da.name == "tenantIndustry");
     if(!_tenantIndustry.value && _tenantIndustry.value == ""){
@@ -173,10 +174,7 @@ class CreateEnter extends Component {
   }
 
   onChangeUpload=(url)=>{
-    console.log("----url",url);
-    this.setState({
-      logo:url
-    })
+    this.url = url;
   }
 
   setUrl(name,url){

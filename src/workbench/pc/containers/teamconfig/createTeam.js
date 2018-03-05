@@ -132,6 +132,7 @@ class CreateTeam extends Component {
     super(props);
     this.state = {
     }
+    this.url = "";
   }
 
   componentWillMount(){
@@ -150,7 +151,12 @@ class CreateTeam extends Component {
   checkForm = (flag, data) => {
     const {createTeam} = this.props;
     const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
- 
+  
+    if(this.url != ""){
+      let _logo = data.find((da)=>da.name == "logo");
+      _logo.value = this.url;
+    }
+
     let _joinPermission = data.find((da)=>da.name == "joinPermission");
     if(!_joinPermission.value && _joinPermission.value == ""){
       _joinPermission.value = joinPermission;
@@ -197,10 +203,7 @@ class CreateTeam extends Component {
   }
 
   onChangeUpload=(url)=>{
-    console.log("----url",url);
-    this.setState({
-      logo:url
-    })
+    this.url = ur;
   }
 
   setUrl(name,url){
