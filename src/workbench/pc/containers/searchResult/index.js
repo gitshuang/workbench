@@ -151,7 +151,7 @@ class searchResult extends Component {
       
   }
 
-  getSearchTpyeList(keywords,type,page){
+  getSearchTpyeList(keywords,type,page,size=10){
     const {
       requestStart,
       requestSuccess,
@@ -159,7 +159,7 @@ class searchResult extends Component {
       getSearch,
     } = this.props;
       // requestStart();
-      getSearch(keywords,type,page).then(({error, payload}) => {
+      getSearch(keywords,type,page,size).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         }
@@ -184,7 +184,7 @@ class searchResult extends Component {
       });
   }
 
-  getSearchOtherList(keywords,contentsize,page){
+  getSearchOtherList(keywords,contentsize,page,size=2){
     const {
       requestStart,
       requestSuccess,
@@ -192,7 +192,7 @@ class searchResult extends Component {
       getSearchOther,
     } = this.props;
       requestStart();
-      getSearchOther(keywords,contentsize,page).then(({error, payload}) => {
+      getSearchOther(keywords,contentsize,page,size).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         }
@@ -258,6 +258,19 @@ class searchResult extends Component {
       this.getSearchOtherList(value,5,--eventKey)
     }else{
      this.getSearchTpyeList(value,activetab,--eventKey)
+    }
+  }
+
+  //下面选择每页展示的数据条目数
+  paginationNumSelect = (dataNum) =>{
+   let reg = new RegExp("条\/页","g");
+   let dataPerPageNum  = dataNum.replace(reg,"");
+   const { value, activetab, activePage}=this.state
+    //console.log(value,activetab,activePage);
+    if(activetab=='other'){
+        this.getSearchOtherList(value,5,activePage,dataPerPageNum/5)
+    }else{
+        this.getSearchTpyeList(value,activetab,activePage,dataPerPageNum)
     }
   }
   // inputOnFocus = (e) => {
@@ -446,6 +459,7 @@ class searchResult extends Component {
                 items={this.state.pagesize}
                 maxButtons={7}
                 activePage={this.state.activePage}
+                onDataNumSelect={this.paginationNumSelect}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
 

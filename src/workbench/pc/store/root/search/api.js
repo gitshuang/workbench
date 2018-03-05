@@ -14,23 +14,27 @@ export const getSearchMore = (
 export const getSearch = (
   keywords,
   type,
-  page
+  page,
+  size
 ) => {
   return get('/fullText/search', { 
     keywords:keywords,
     type:type,
-    page:page
+    page:page,
+    size:size
   });
 }
 export const getSearchOther = (
   keywords,
   contentsize,
-  page
+  page,
+  size,
 ) => {
   return get('/fullText/getOther', { 
     keywords:keywords,
     contentsize:contentsize,
-    page:page
+    page:page,
+    size:size
    });
 }
 

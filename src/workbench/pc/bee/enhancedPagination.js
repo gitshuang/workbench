@@ -14,6 +14,10 @@ const EnhancedPagination = WrappedComponent => {
         }
       }
 
+      onKeyup = (e) =>{
+        e.keyCode === 13 && this.setPageJump(e)
+      }
+
       setPageJump = (e) =>{
         //console.log(e.target.value);
         let value = e.target.value;
@@ -35,14 +39,13 @@ const EnhancedPagination = WrappedComponent => {
 
       render() {
         const newProps = {
-          activePage:this.state.activePage*1
+          activePage:this.props.activePage*1
         }
         return (
             <div className="enhanced-pagination">
                 <WrappedComponent {...this.props} {...newProps}/>
                 <div className="data-select">
                     <select name="data-num-select" id="" className="data-select" onChange={e=>this.dataNumSelect(e)}>
-                        <option>5条/页</option>
                         <option>10条/页</option>
                         <option>15条/页</option>
                         <option>20条/页</option>
@@ -50,7 +53,7 @@ const EnhancedPagination = WrappedComponent => {
                     </select>
                 </div>
                 <div className="page-jump">
-                    跳至<input className="page-jump-value" type='number' value={this.state.pageJump} onChange={e=>this.setPageJump(e)}/>页
+                    跳至<input className="page-jump-value" type='number' value={this.state.pageJump} onKeyDown={e=>this.onKeyup(e)} onChange={e=>this.setPageJump(e) }/>页
                 </div>
             </div>
         )
