@@ -17,18 +17,28 @@ const EnhancedPagination = WrappedComponent => {
           dataNum:this.props.dataNumSelectActive,
         }
       }
+      
+      componentWillReceiveProps(nextProps){
+        //console.log('jiude',this.state.activePage,'xinde',nextProps.activePage);
+        if(this.state.activePage !== this.props.activePage){
+          this.setState({
+            activePage :nextProps.activePage,
+            dataNum:this.props.dataNumSelectActive,
+          })
+        }
+      }
 
       onKeyup = (e) =>{
         e.keyCode === 13 && this.setPageJump(e)
       }
 
       setPageJump = (e) =>{
-        //console.log(e.target.value);
         let value = e.target.value;
         if(value > this.props.items || (value == 0 && value !== '')){
           alert('跳转的页数不合适');
         }else{
-          this.setState({activePage:value},function(){
+          //注意这里要将下拉的数据还原
+          this.setState({activePage:value,dataNum:this.props.dataNumSelectActive},function(){
             if(value!== '')this.props.onSelect(value)
           })
         }

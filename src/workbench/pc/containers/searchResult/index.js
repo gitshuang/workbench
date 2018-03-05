@@ -268,9 +268,9 @@ class searchResult extends Component {
    const { value, activetab, activePage}=this.state
     //console.log(value,activetab,activePage);
     if(activetab=='other'){
-        this.getSearchOtherList(value,5,activePage,dataPerPageNum/5)
+        this.getSearchOtherList(value,5,activePage-1,dataPerPageNum/5)
     }else{
-        this.getSearchTpyeList(value,activetab,activePage,dataPerPageNum)
+        this.getSearchTpyeList(value,activetab,activePage-1,dataPerPageNum)
     }
   }
   // inputOnFocus = (e) => {

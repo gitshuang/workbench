@@ -12,7 +12,7 @@ import Menu from 'bee/menus';
 // import Select from 'bee-select';
 // import Tabs, { TabPane } from 'bee-tabs';
 import Pagination from 'bee/pagination';
-
+import EnhancedPagination from 'bee/enhancedPagination';
 import {
   mleft50,
   h_icon,
@@ -93,7 +93,7 @@ class searchOther extends Component {
     this.getSearchTpyeList(keywords,type,0)
   }
 
-  getSearchTpyeList(keywords,type,page){
+  getSearchTpyeList(keywords,type,page,size=10){
     const {
       requestStart,
       requestSuccess,
@@ -101,7 +101,7 @@ class searchOther extends Component {
       getSearch,
     } = this.props;
       requestStart();
-      getSearch(keywords,type,page).then(({error, payload}) => {
+      getSearch(keywords,type,page,size).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         }
@@ -127,6 +127,14 @@ class searchOther extends Component {
      this.getSearchTpyeList(keywords,type,--eventKey)
   }
  
+  paginationNumSelect = (dataNum) =>{
+    const type = this.props.match.params.type || this.state.type;
+    const {keywords,activetab,activePage}=this.state;
+    const reg = new RegExp("条\/页","g");
+    let dataPerPageNum  = dataNum.replace(reg,"");
+    this.getSearchTpyeList(keywords,type,activePage-1, dataPerPageNum)
+  }
+
   goDetail(type,item){
     return (e) => {
       e.stopPropagation(); 
@@ -179,7 +187,7 @@ class searchOther extends Component {
             <ul className={recently}>{lis}</ul>
            
             <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
-              <Pagination
+              <EnhancedPagination
                 first
                 last
                 prev
@@ -189,6 +197,9 @@ class searchOther extends Component {
                 items={this.state.pagesize}
                 maxButtons={7}
                 activePage={this.state.activePage}
+                onDataNumSelect={this.paginationNumSelect}
+                dataNumSelect={[{id:0,name:'5条/页'},{id:1,name:'10条/页'},{id:2,name:'15条/页'},{id:3,name:'20条/页'}]}
+                dataNumSelectActive={1}
                 onSelect={this.handleSelect.bind(this)} />
             </div> 
           </div> 
