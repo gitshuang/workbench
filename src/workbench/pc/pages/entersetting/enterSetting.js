@@ -113,10 +113,10 @@ class CreateEnter extends Component {
   checkForm = (flag, data) => {
     const {setCreateEnter} = this.props;
     const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
-    let _logo = data.find((da)=>da.name == "logo");
-    if(!_logo.value && _logo.value == ""){
-      _logo.value = logo;
-    }
+    // let _logo = data.find((da)=>da.name == "logo");
+    // if(!_logo.value && _logo.value == ""){
+    //   _logo.value = logo;
+    // }
 
     let _tenantIndustry = data.find((da)=>da.name == "tenantIndustry");
     if(!_tenantIndustry.value && _tenantIndustry.value == ""){
@@ -172,6 +172,13 @@ class CreateEnter extends Component {
     })
   }
 
+  onChangeUpload=(url)=>{
+    console.log("----url",url);
+    this.setState({
+      logo:url
+    })
+  }
+
   setUrl(name,url){
     this.state[name] = url;
     this.setState({
@@ -198,7 +205,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' logo={logo?logo:""} getUrl={this.getUrl} onChange={this.getUrl}/>
+              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
             </FormItem>
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
@@ -246,7 +253,7 @@ class CreateEnter extends Component {
                     onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                     >
                     <Option value="1">全员邀请 </Option>
-                    <Option value="1">全员禁止</Option>
+                    <Option value="2">全员禁止</Option>
                     <Option value="0">仅管理员可邀请</Option>
                 </Select>
             </FormItem>

@@ -51,6 +51,7 @@
 .header button i{
   padding: 0;
   margin: 0;
+  margin-top: 8px;
 }
 .content{
 
@@ -133,9 +134,9 @@
 .image{
   width: 64px;
   height: 64px;
-  background: rgba(190,193,200,1);
+  /* background: rgba(190,193,200,1);
   border-radius: 100px ; 
-  position: relative;
+  position: relative; */
 }
 .image img{
   width: 64px;
@@ -373,4 +374,9 @@
   height: 18px;
   font-size: 18px;
   color: rgba(135,139,148,1);
+}
+.team_cont{
+  width: 360px;
+  padding-top: 20px;
+  margin: 0 auto;
 }

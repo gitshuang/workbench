@@ -27,7 +27,7 @@
   height:32px;
   background:rgba(225,76,70,1);
   border-radius: 3px;
-  margin-left:-70px;
+  margin-left: 1px;
 }
 .enter_form :global(textarea) {
   min-height: 100px;
@@ -170,10 +170,10 @@
   background:rgba(255,255,255,1);
 }
 
-:global(.enter_setting .u-form-submit)>button{
+:global(.team_cont .u-form-submit)>button{
   margin-left: 0px;
   width:80px;
 }
-:global(.enter_setting .u-select-selection-rendered){
+:global(.team_cont .u-select-selection-rendered){
   line-height: 36px;
 }
