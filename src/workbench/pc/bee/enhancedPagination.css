@@ -1,0 +1,32 @@
+.enhanced-pagination{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+select.data-select {
+    outline: none;
+    -webkit-appearance: none;
+    height: 28px;
+    background: rgba(9,30,66,.04);
+    border-color: #e9e7e7;
+    border-radius: 4px;
+    line-height: 28px;
+    padding: 0 15px;
+    text-align: center;
+    font-size: 14px;
+}
+.page-jump {
+    font-size: 14px;
+}
+input.page-jump-value {
+    outline: none;
+    -webkit-appearance:  none;
+    background: rgba(9,30,66,.04);
+    border-radius: 4px;
+    line-height: 28px;
+    width: 80px;
+    margin: 0 6px;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #e9e7e7;
+}
