@@ -9,7 +9,7 @@ import Icon from 'components/icon';
 import FormControl from 'bee/form-control';
 import Menu from 'bee/menus';
 // import ButtonGroup from 'bee/button-group';
-import GoTo from './goto';
+//import GoTo from './goto';
 // import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee/tabs';
 import Pagination from 'bee/pagination';
