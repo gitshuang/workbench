@@ -1,3 +1,6 @@
+.form_team{
+  position: relative;
+}
 .enter_form{
   padding-bottom:15px;
 }
@@ -128,6 +131,7 @@
 .tenant_address{
   background: red;
 }
+
 
 .lxr_hr{
   width:450px;

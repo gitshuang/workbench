@@ -12,7 +12,7 @@ import TeamTransferModal from 'containers/teamTransferModal';
 import TeamDismissModal from 'containers/teamDismissModal';
 import TeamExitModal from 'containers/teamExitModal';
 
-import CreateTeam from './CreateTeam';
+import CreateTeam from './createTeam';
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
 import BeeIcon from 'bee/icon';
