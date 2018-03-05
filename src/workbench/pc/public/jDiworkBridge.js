@@ -1,4 +1,4 @@
-import { getContext, postMessageToWin } from '@u';
+import { getContext, postMessageToWin, getNewEvent } from '@u';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 //注册事件
@@ -71,6 +71,10 @@ const handlerList = {
       type,
       data,
     });
+  },
+  rootClick() {
+    const event = getNewEvent('mousedown');
+    window.document.getElementById('root').dispatchEvent(event);
   },
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 import Modal from 'bee/modal';
-import { IS_REACT_16 } from '@u';
+import { IS_REACT_16, IS_IE } from '@u';
 import Icon from 'components/icon';
 import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
 import { btn, closeBtn } from './style.css';
@@ -40,7 +40,7 @@ class PopDialog extends Component{
             _btns.push(_button);
         })
     }
-    return(<Modal className={`${(!!window.ActiveXObject)?'ie9_pop':''} ${this.props.className?this.props.className:"pop_dialog"}`} backdrop={this.props.backdrop?false:true} show = { this.props.show } onHide = { this.props.close } >
+    return (<Modal className={`${IS_IE?'ie9_pop':''} ${this.props.className?this.props.className:"pop_dialog"}`} backdrop={this.props.backdrop?false:true} show = { this.props.show } onHide = { this.props.close } >
           <Modal.Header>
               <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>

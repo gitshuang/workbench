@@ -60,6 +60,7 @@ export const getHost = (key = 'api') => {
   return hosts[key][process.env.NODE_ENV];
 };
 
+export const IS_IE = !!window.ActiveXObject;
 
 const fetchTools = {
   params(params) {
@@ -312,7 +313,7 @@ export function getStrLenSubstr(str, zh_len, cn_len, sl) {
     }else{
       newStr = str.length > zh_len ? str.substring(0, zh_len) + (sl ? "" : "...") : str;
     }
-  } else { 
+  } else {
     if(str.length == cn_len){
       newStr = str;
     }else{
@@ -362,4 +363,16 @@ export function GetQueryString(name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
   var r = window.location.search.substr(1).match(reg);
   if (r != null) return unescape(r[2]); return null;
+}
+
+export function getNewEvent(name) {
+  if (IS_IE) {
+    const evt = document.createEvent('CustomEvent');
+    evt.initCustomEvent(name, true, true, undefined);
+    return evt;
+  } else {
+    return new Event(name, {
+      bubbles: true,
+    });
+  }
 }

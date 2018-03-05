@@ -25,7 +25,6 @@ const {
   requestError,
   getServiceList,
   getMessage,
-  hideIm,
 } = rootActions;
 const { getUserInfo } = homeActions;
 
@@ -55,7 +54,6 @@ function timer(fn, time) {
     requestError,
     getServiceList,
     getMessage,
-    hideIm,
     getUserInfo
   }
 )
@@ -91,9 +89,6 @@ class Root extends Component {
         }
       }
     });
-    
-    
-
     requestStart();
     getServiceList().then(({ error, payload }) => {
       if (error) {
@@ -108,25 +103,18 @@ class Root extends Component {
     });
     regMessageTypeHandler(this);
   }
-  clickHandler = () => {
-    const {
-      hideIm,
-    } = this.props;
-    hideIm();
-  }
-
   randomNum(minNum,maxNum){
-      switch(arguments.length){ 
-          case 1: 
-              return parseInt(Math.random()*minNum+1,10); 
-          break; 
-          case 2: 
-              return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
-          break; 
-              default: 
-                  return 0; 
-              break; 
-      } 
+      switch(arguments.length){
+          case 1:
+              return parseInt(Math.random()*minNum+1,10);
+          break;
+          case 2:
+              return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10);
+          break;
+              default:
+                  return 0;
+              break;
+      }
   }
 
   gitBackgroundIcon(){
@@ -141,7 +129,7 @@ class Root extends Component {
     const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'icon-application'} />) : null;
     const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'} bgColor={this.bgColor}/>) : null;
     return (
-      <div onClick={this.clickHandler}>
+      <div>
         <Switch>
           {
             routes.map( (route, i) => {
