@@ -465,7 +465,13 @@
   margin-right: 5px;
 }
 .tenantDescribe>div{
-  display: flex;
+  /* display: flex;
+   */
+   display: block;
+   white-space: nowrap;
+   width: 186px;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }
 .companyType{
   flex:1;

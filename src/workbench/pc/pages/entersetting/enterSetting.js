@@ -112,7 +112,7 @@ class CreateEnter extends Component {
 
   checkForm = (flag, data) => {
     const {setCreateEnter} = this.props;
-    const {logo,tenantIndustry,tenantId,address,tenantAddress} = this.state;
+    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
     let _logo = data.find((da)=>da.name == "logo");
     if(!_logo.value && _logo.value == ""){
       _logo.value = logo;
@@ -126,8 +126,17 @@ class CreateEnter extends Component {
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
       _tenantAddress.value = address.province+"|"+address.city+"|"+address.area+"|"+_tenantAddress.value;
 
+    let _joinPermission = data.find((da)=>da.name == "joinPermission");
+    if(!_joinPermission.value && _joinPermission.value == ""){
+      _joinPermission.value = joinPermission;
+    }
+
+    let _invitePermission = data.find((da)=>da.name == "invitePermission");
+    if(!_invitePermission.value && _invitePermission.value == ""){
+      _invitePermission.value = invitePermission;
+    }
+
     data.push({name:"tenantId",value:tenantId});
-    // console.log("this.state",this.state);
     requestStart();
     setCreateEnter(
       data.reduce(
@@ -179,9 +188,7 @@ class CreateEnter extends Component {
         let _adds = tenantAddress.split("|");
         newTenantAddress = _adds[_adds.length-1];
       }
-      // let aaa = { province:'山西',city:'长治',area:'长治县'};
-      // defaultValue:{ province:'北京',city:'北京',area:'东城区'},
-      // console.log("address---",address);
+
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *</font></span>}
@@ -239,7 +246,8 @@ class CreateEnter extends Component {
                     onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                     >
                     <Option value="1">全员邀请 </Option>
-                    <Option value="0">全员禁止</Option>
+                    <Option value="1">全员禁止</Option>
+                    <Option value="0">仅管理员可邀请</Option>
                 </Select>
             </FormItem>
 
@@ -250,8 +258,8 @@ class CreateEnter extends Component {
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
                     >
-                    <Option value="1">全员允许 </Option>
-                    <Option value="0">全员禁止</Option>
+                    <Option value="0">全员允许 </Option>
+                    <Option value="1">全员禁止</Option>
                 </Select>
             </FormItem>
 

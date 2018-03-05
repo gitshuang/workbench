@@ -47,6 +47,12 @@
 .enter_form :global(.u-select-selection-rendered){
   line-height: 36px !important;
 }
+
+.enter_cont :global(.u-select-selection-rendered .u-select-selection-rendered){
+  line-height: 36px;
+}
+
+
 .page_enterprise{
   margin: 10px 120px;
   background: #fff;
@@ -54,6 +60,7 @@
   /* padding-left: 100px; */
   overflow: auto;
   padding-bottom: 50px;
+  min-width: 500px;
 }
 
 .enter_title{

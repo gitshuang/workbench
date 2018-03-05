@@ -1,11 +1,21 @@
 .wrap{
-  width: 1200px;
-  margin: 0 auto;
-  background: #ffffff;
-  height:366px; 
-  border-radius: 2px ; 
-  margin-top: 8px;
+  /* width: 1200px; */
+  /* margin: 0 auto; */
+  /* background: #ffffff; */
+  /* height:366px;  */
+  /* border-radius: 2px ;  */
+  /* margin-top: 8px; */
   border: 1px solid rgba(78, 89, 104, 0.19);
+
+
+  background: #ffffff; 
+  margin-top: 8px; 
+  margin: 10px 120px;
+  background: #fff;
+  min-width: 700px;
+  position: relative;
+
+
 }
 .header{
   width: 100%;

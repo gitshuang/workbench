@@ -40,6 +40,7 @@
 .page_enterprise{
   margin: 10px 120px;
   background: #fff;
+  min-width: 500px;
   /* text-align: center; */
   /* padding-left: 100px; */
   /* overflow: hidden; */
@@ -124,6 +125,7 @@
 
 .page_enterprise :global(.u-select .u-select-selection){
   background: transparent;
+  height: 36px;
 }
 
 
@@ -180,4 +182,7 @@
 :global(.enter_setting .u-form-submit)>button{
   margin-left: 0px;
   width:80px;
+}
+:global(.enter_setting .u-select-selection-rendered){
+  line-height: 36px;
 }

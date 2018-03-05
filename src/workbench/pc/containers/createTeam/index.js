@@ -18,7 +18,8 @@ import {
   wrap,
   item,
   image,
-  footer
+  footer,
+  create_team_cont,footer_hr
 } from './index.css';
 
 @withRouter
@@ -143,24 +144,28 @@ class CreateTeamContent extends Component {
     return (
       <div className={wrap}>
         <h5>创建团队</h5>
-        <div className={item+" um-box"}>
-          <label>团队名称<span>*</span></label>
-          <input
-            placeholder="最多60个字符"
-            value={ value }
-            onChange={(e)=>{this.onChange(e)}}
-          />
-        </div>
-        <div className={item+" um-box"}>
-          <label>团队头像</label>
-          <div className={image}>
-              { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
-              <div>
-                <Icon type="copyreader" />
-                <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
+        <hr />
+        <div className={create_team_cont}>
+          <div className={item+" um-box"}>
+            <label>团队名称<span>*</span></label>
+            <input
+              placeholder="最多60个字符"
+              value={ value }
+              onChange={(e)=>{this.onChange(e)}}
+            />
+          </div>
+          <div className={item+" um-box"}>
+            <label>团队头像</label>
+            <div className={image}>
+                { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
+                <div>
+                  <Icon type="copyreader" />
+                  <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
+                </div>
               </div>
-            </div>
+          </div>
         </div>
+        <hr className={footer_hr}/>
         <div className={footer}>
           <Button onClick={this.create}>创建</Button>
         </div>
