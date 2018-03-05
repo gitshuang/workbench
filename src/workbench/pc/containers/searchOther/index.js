@@ -70,6 +70,9 @@ class searchOther extends Component {
       activePage:1,
       pagesize:10,
       isShowPagination:true,
+      dataNumSelect:[{id:0,name:'5条/页'},{id:1,name:'10条/页'},{id:2,name:'15条/页'},{id:3,name:'20条/页'}],
+      dataNumSelectActive:1,//默认展示10条数据一页
+
     }
   }
 
@@ -124,15 +127,21 @@ class searchOther extends Component {
     this.setState({
       activePage: eventKey
     });
-     this.getSearchTpyeList(keywords,type,--eventKey)
+    let reg = new RegExp("条\/页","g");
+    let dataSize = this.state.dataNumSelect[this.state.dataNumSelectActive].name.replace(reg,"")
+     this.getSearchTpyeList(keywords,type,--eventKey,dataSize)
   }
  
-  paginationNumSelect = (dataNum) =>{
+  paginationNumSelect = (id,dataNum) =>{
     const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab,activePage}=this.state;
     const reg = new RegExp("条\/页","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
-    this.getSearchTpyeList(keywords,type,activePage-1, dataPerPageNum)
+    this.setState({
+      dataNumSelectActive:id
+    },function () {
+      this.getSearchTpyeList(keywords,type,activePage-1, dataPerPageNum)
+    })
   }
 
   goDetail(type,item){

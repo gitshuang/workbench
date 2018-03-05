@@ -19,11 +19,11 @@ const EnhancedPagination = WrappedComponent => {
       }
       
       componentWillReceiveProps(nextProps){
-        //console.log('jiude',this.state.activePage,'xinde',nextProps.activePage);
+        // //console.log('jiude',this.state.activePage,'xinde',nextProps.activePage);
         if(this.state.activePage !== this.props.activePage){
           this.setState({
             activePage :nextProps.activePage,
-            dataNum:this.props.dataNumSelectActive,
+            dataNum:this.state.dataNumSelectActive,
           })
         }
       }
@@ -38,8 +38,8 @@ const EnhancedPagination = WrappedComponent => {
           alert('跳转的页数不合适');
         }else{
           //注意这里要将下拉的数据还原
-          this.setState({activePage:value,dataNum:this.props.dataNumSelectActive},function(){
-            if(value!== '')this.props.onSelect(value)
+          this.setState({activePage:value},function(){
+            if(value!== '')this.props.onSelect(value*1)
           })
         }
       }
@@ -47,19 +47,19 @@ const EnhancedPagination = WrappedComponent => {
       dataNumSelect = (e) =>{
         let value = e.target.value;
         let dataNumValue = this.props.dataNumSelect[value].name
-        this.setState({dataNum:value})
+        this.setState({
+          dataNum:value
+        })
         if(this.props.onDataNumSelect){
-          this.props.onDataNumSelect(dataNumValue)
+          this.props.onDataNumSelect(e.target.value,dataNumValue)
         }
       }
 
       render() {
-        const newProps = {
-          activePage:this.props.activePage*1
-        }
+        
         return (
             <div className="enhanced-pagination">
-                <WrappedComponent {...this.props} {...newProps}/>
+                <WrappedComponent {...this.props} />
                 <div className="data-select">
                     <select  name="data-select" id="" className="data-select"  defaultValue='' value={this.state.dataNum} onChange={e=>this.dataNumSelect(e)}>
                       {this.props.dataNumSelect.length > 0 && this.props.dataNumSelect.map((item, i) => {

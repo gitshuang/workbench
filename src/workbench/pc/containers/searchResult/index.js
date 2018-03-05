@@ -98,7 +98,9 @@ class searchResult extends Component {
       isShowPagination:true,
       isShownodataClass:true,
       isShownodataClassEach:true,
-      otherName:"其他内容"
+      otherName:"其他内容",
+      dataNumSelect:[{id:0,name:'5条/页'},{id:1,name:'10条/页'},{id:2,name:'15条/页'},{id:3,name:'20条/页'}],
+      dataNumSelectActive:1,//默认展示10条数据一页
       //otherName:"其他内容(0)"
     }
   }
@@ -254,24 +256,30 @@ class searchResult extends Component {
     this.setState({
       activePage: eventKey
     });
+    let reg = new RegExp("条\/页","g");
+    let dataSize = this.state.dataNumSelect[this.state.dataNumSelectActive].name.replace(reg,"")
     if(activetab=='other'){
-      this.getSearchOtherList(value,5,--eventKey)
+      this.getSearchOtherList(value,5,--eventKey,dataSize)
     }else{
-     this.getSearchTpyeList(value,activetab,--eventKey)
+     this.getSearchTpyeList(value,activetab,--eventKey,dataSize)
     }
   }
 
   //下面选择每页展示的数据条目数
-  paginationNumSelect = (dataNum) =>{
+  paginationNumSelect = (id,dataNum) =>{
    let reg = new RegExp("条\/页","g");
    let dataPerPageNum  = dataNum.replace(reg,"");
-   const { value, activetab, activePage}=this.state
-    //console.log(value,activetab,activePage);
+   const { value, activetab, activePage}=this.state;
+   this.setState({
+     dataNumSelectActive:id
+   },function () {
     if(activetab=='other'){
         this.getSearchOtherList(value,5,activePage-1,dataPerPageNum/5)
     }else{
         this.getSearchTpyeList(value,activetab,activePage-1,dataPerPageNum)
     }
+   })
+  
   }
   // inputOnFocus = (e) => {
   //   let _value = e.target.value != "搜索人员信息、应用、服务及其他内容"?e.target.value:"";
@@ -460,8 +468,8 @@ class searchResult extends Component {
                 maxButtons={7}
                 activePage={this.state.activePage}
                 onDataNumSelect={this.paginationNumSelect}
-                dataNumSelect={[{id:0,name:'5条/页'},{id:1,name:'10条/页'},{id:2,name:'15条/页'},{id:3,name:'20条/页'}]}
-                dataNumSelectActive={1}
+                dataNumSelect={this.state.dataNumSelect}
+                dataNumSelectActive={this.state.dataNumSelectActive}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
 
