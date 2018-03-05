@@ -21,7 +21,7 @@
             "currentPage": 1,
             "totalPages": 2,
             "renderUrl": "应用/服务模板",
-            "total": 100,
+            "totalElements": 100,
             "type": "service",
             "typeName": "服务"
         },

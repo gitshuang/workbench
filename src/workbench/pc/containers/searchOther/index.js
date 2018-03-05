@@ -175,7 +175,7 @@ class searchOther extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div>共{dataList.total}条</div>
+            <div>共{dataList.totalElements}条</div>
             <ul className={recently}>{lis}</ul>
            
             <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
