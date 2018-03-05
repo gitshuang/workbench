@@ -14,6 +14,7 @@ select.data-select {
     padding: 0 15px;
     text-align: center;
     font-size: 14px;
+    margin: 0 6px;
 }
 .page-jump {
     font-size: 14px;

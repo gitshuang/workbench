@@ -15,7 +15,7 @@ const EnhancedPagination = WrappedComponent => {
       }
 
       setPageJump = (e) =>{
-        console.log(e.target.value);
+        //console.log(e.target.value);
         let value = e.target.value;
         if(value > this.props.items || (value == 0 && value !== '')){
           alert('跳转的页数不合适');
@@ -28,7 +28,7 @@ const EnhancedPagination = WrappedComponent => {
 
       dataNumSelect = (e) =>{
         let value = e.target.value;
-        if(this.props.dataNumSelect){
+        if(this.props.onDataNumSelect){
           this.props.onDataNumSelect(value)
         }
       }
