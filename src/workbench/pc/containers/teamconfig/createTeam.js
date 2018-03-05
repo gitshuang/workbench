@@ -203,7 +203,7 @@ class CreateTeam extends Component {
   }
 
   onChangeUpload=(url)=>{
-    this.url = ur;
+    this.url = url;
   }
 
   setUrl(name,url){

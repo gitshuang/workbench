@@ -69,8 +69,8 @@ class UserInfoContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.getLatestAccessList();
-    this.getPromotionServiceList();
+    // this.getLatestAccessList();
+    // this.getPromotionServiceList();
 
     this._curTenant = null;
     this.state = {
@@ -334,32 +334,32 @@ class UserInfoContainer extends Component {
     ];
     let renderAllow = <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")} label="帐号设置" dataItem={_accountMenuDataItem} />
 
-    let _li = [];//最近使用列表
-    this.state.dataList.forEach((da,i)=>{
-      let applicationName = da.service.application.applicationName;
-        _li.push(<li key={i}>
-          <div className={usedIcon}><img src={img1} /></div>
-          <div className={`${used} ${clearfix}`}>
-            <div className={`${usedModule} ${clearfix}`}>
-              <div className={`${module} ${clearfix}`}>
-                <div className={usedTit}>{applicationName}</div>
-                <div className={lastTime}>{da.accessTime}</div>
-              </div>
-              <div className={usedService}>{da.service.serviceName}</div>
-            </div>
-          </div>
-        </li>);
-    })
+    // let _li = [];//最近使用列表
+    // this.state.dataList.forEach((da,i)=>{
+    //   let applicationName = da.service.application.applicationName;
+    //     _li.push(<li key={i}>
+    //       <div className={usedIcon}><img src={img1} /></div>
+    //       <div className={`${used} ${clearfix}`}>
+    //         <div className={`${usedModule} ${clearfix}`}>
+    //           <div className={`${module} ${clearfix}`}>
+    //             <div className={usedTit}>{applicationName}</div>
+    //             <div className={lastTime}>{da.accessTime}</div>
+    //           </div>
+    //           <div className={usedService}>{da.service.serviceName}</div>
+    //         </div>
+    //       </div>
+    //     </li>);
+    // })
 
-    let lis = [];//推广服务列表
-    this.state.promotionList.forEach((item,index)=>{
-      lis.push(<li key={index} className={(index+1)%4 == 0?line_end:null}>
-          <div className={serviceImg}>
-            <section><img src={img1}/></section>
-            <div className={serviceName}>{item.serviceName}</div>
-          </div>
-        </li>);
-    })
+    // let lis = [];//推广服务列表
+    // this.state.promotionList.forEach((item,index)=>{
+    //   lis.push(<li key={index} className={(index+1)%4 == 0?line_end:null}>
+    //       <div className={serviceImg}>
+    //         <section><img src={img1}/></section>
+    //         <div className={serviceName}>{item.serviceName}</div>
+    //       </div>
+    //     </li>);
+    // })
 
     let _menuDataItem =[
       {name:"language",value:"界面语言",fun:this.handleChange},
