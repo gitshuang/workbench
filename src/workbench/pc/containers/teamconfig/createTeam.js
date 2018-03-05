@@ -196,7 +196,11 @@ class CreateTeam extends Component {
     })
   }
 
- 
+  onChangeUpload=(url)=>{
+     this.setState({
+       logo:url
+     })
+  }
 
   setUrl(name,url){
     this.state[name] = url;
@@ -227,7 +231,7 @@ class CreateTeam extends Component {
                 </FormItem>
 
                 <FormItem showMast={false}  labelName={<span>团队头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
-                  <Upload name='logo' logo={logo?logo:""} />
+                  <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
                 </FormItem>
 
                 <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>

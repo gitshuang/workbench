@@ -14,7 +14,7 @@ class UploadPage extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.logo){
+    if(nextProps.logo != this.state.applicationIcon){
       this.setState({
         applicationIcon: nextProps.logo
       })
@@ -43,16 +43,16 @@ class UploadPage extends Component {
     }
     let obj= this.refs.file.files[0];
     let imgUrl=window.URL.createObjectURL(obj);
-    this.setState({
-      applicationIcon: imgUrl,
-    })
+    // this.setState({
+    //   applicationIcon: imgUrl,
+    // })
     // const {uploadApplication} = this.props;
     const from = new FormData();
     from.append('file', obj);
     uploadApplication(from).then(({url}) => {
-      // this.setState({
-      //   applicationIcon: url
-      // });
+      this.setState({
+        applicationIcon: url
+      });
       if (typeof this.props.onChange === 'function') {
         this.props.onChange(url);
       }
