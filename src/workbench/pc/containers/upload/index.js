@@ -50,9 +50,9 @@ class UploadPage extends Component {
     const from = new FormData();
     from.append('file', obj);
     uploadApplication(from).then(({url}) => {
-      // this.setState({
-      //   applicationIcon: url
-      // });
+      this.setState({
+        applicationIcon: url
+      });
       if (typeof this.props.onChange === 'function') {
         this.props.onChange(url);
       }

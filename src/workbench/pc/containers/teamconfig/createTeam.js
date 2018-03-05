@@ -132,7 +132,6 @@ class CreateTeam extends Component {
     super(props);
     this.state = {
     }
-    this.url = "";
   }
 
   componentWillMount(){
@@ -151,12 +150,7 @@ class CreateTeam extends Component {
   checkForm = (flag, data) => {
     const {createTeam} = this.props;
     const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
-  
-    if(this.url != ""){
-      let _logo = data.find((da)=>da.name == "logo");
-      _logo.value = this.url;
-    }
-
+    
     let _joinPermission = data.find((da)=>da.name == "joinPermission");
     if(!_joinPermission.value && _joinPermission.value == ""){
       _joinPermission.value = joinPermission;
@@ -202,9 +196,7 @@ class CreateTeam extends Component {
     })
   }
 
-  onChangeUpload=(url)=>{
-    this.url = url;
-  }
+ 
 
   setUrl(name,url){
     this.state[name] = url;
@@ -235,7 +227,7 @@ class CreateTeam extends Component {
                 </FormItem>
 
                 <FormItem showMast={false}  labelName={<span>团队头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
-                  <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
+                  <Upload name='logo' logo={logo?logo:""} />
                 </FormItem>
 
                 <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
