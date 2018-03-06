@@ -5,9 +5,17 @@ import EnterSetting from './enterSetting';
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
 import Select from 'bee/select';
+import Dropdown from 'bee/dropdown';
+import Menu from 'bee/menus';
+import Button from 'bee/button';
+import { ButtonDefaultLine } from 'components/button';
+
+import Icon from 'components/icon';
+
 import { page_enterprise ,enter_title,enter_cont,hr,hr2,title,appBreadcrumb
 ,enter_setting} from './style.css';
 
+const { Item } = Menu;
 
 @withRouter
 class Enterprise extends Component {
@@ -28,10 +36,23 @@ class Enterprise extends Component {
     this.tenantIndustry.value = obj.value;
   }
 
+  setOption=()=>{
+
+  }
+
   render() {
 
     const { params } = this.props.match;
     // const {  teamList  } = this.props;
+    const menu1 = (
+      <Menu
+        onSelect={this.setOption}>
+        {/* <Item key="1">移交团队</Item> */}
+        <Item key="1">相关操作</Item>
+        <Item key="2">23123</Item>
+      </Menu>
+    );
+
     return (
       <div className="um-win">
         {
@@ -51,13 +72,13 @@ class Enterprise extends Component {
         <div className={`${page_enterprise} um-content`}>
           <div className={enter_title}>
             <div className={title}>用友网络科技股份有限公司</div>
-            <Select className="enter_title_select"
-                defaultValue="Ten"
-                onChange={(e)=>{this.setOptherData({name:"scale",value:e})} }
-                >
-                <Option value="Ten">相关操作</Option>
-                <Option value="234">23123</Option>
-            </Select>
+            <Dropdown
+                trigger={['click']}
+                overlay={menu1}
+                animation="slide-up"
+              >
+              <ButtonDefaultLine>相关操作<Icon type="pull-down" /></ButtonDefaultLine>
+            </Dropdown>
           </div>
           <hr className={hr}/>
           <div className={`${enter_cont} enter_setting`} >

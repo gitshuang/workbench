@@ -114,6 +114,11 @@ class CreateEnter extends Component {
     const {setCreateEnter} = this.props;
     const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
 
+    let _logo = data.find((da)=>da.name == "logo");
+    if(!_logo.value && _logo.value == ""){
+      _logo.value = logo;
+    }
+
     let _tenantIndustry = data.find((da)=>da.name == "tenantIndustry");
     if(!_tenantIndustry.value && _tenantIndustry.value == ""){
       _tenantIndustry.value = tenantIndustry;
@@ -132,6 +137,11 @@ class CreateEnter extends Component {
       _invitePermission.value = invitePermission;
     }
 
+    let _allowExit = data.find((da)=>da.name == "allowExit");
+    if(!_allowExit.value && _allowExit.value == ""){
+      _allowExit.value = allowExit;
+    }
+    
     data.push({name:"tenantId",value:tenantId});
     requestStart();
     setCreateEnter(
@@ -158,6 +168,12 @@ class CreateEnter extends Component {
     this.state[name] =  e;
     this.setState({
       ...this.state
+    })
+  }
+
+  allowExitChange=(value)=>{
+    this.setState({
+      allowExit:value
     })
   }
 
@@ -267,7 +283,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>允许退出<font color='red'> *</font></span>} isRequire={false} method="change" inline={true}>
-              <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} />
+              <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} onChange={this.allowExitChange} />
             </FormItem>
 
             <div className={lxr_hr}>

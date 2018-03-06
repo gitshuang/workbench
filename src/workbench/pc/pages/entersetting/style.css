@@ -177,3 +177,12 @@
 :global(.enter_setting .u-select-selection-rendered){
   line-height: 36px;
 }
+
+.enter_title>button{
+  width: 107px;
+}
+.enter_title i{
+  margin: 0;
+  margin-left: 8px;
+  vertical-align: middle;
+}

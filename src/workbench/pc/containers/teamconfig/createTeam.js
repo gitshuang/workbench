@@ -54,7 +54,7 @@ class Nature extends Component {
     this.setState({
       value
     });
-    // this.props.onChange(value);
+    this.props.onChange(value);
   }
 
 
@@ -149,8 +149,13 @@ class CreateTeam extends Component {
 
   checkForm = (flag, data) => {
     const {createTeam} = this.props;
-    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
+    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission,allowExit} = this.state;
     
+    let _logo = data.find((da)=>da.name == "logo");
+    if(!_logo.value && _logo.value == ""){
+      _logo.value = logo;
+    }
+
     let _joinPermission = data.find((da)=>da.name == "joinPermission");
     if(!_joinPermission.value && _joinPermission.value == ""){
       _joinPermission.value = joinPermission;
@@ -160,7 +165,11 @@ class CreateTeam extends Component {
     if(!_invitePermission.value && _invitePermission.value == ""){
       _invitePermission.value = invitePermission;
     }
-
+ 
+    let _allowExit = data.find((da)=>da.name == "allowExit");
+    if(!_allowExit.value && _allowExit.value == ""){
+      _allowExit.value = allowExit;
+    }
     data.push({name:"tenantId",value:tenantId});
     requestStart();
     createTeam(
@@ -193,6 +202,12 @@ class CreateTeam extends Component {
     this.state[obj.name] = obj.value;
     this.setState({
       ...this.state
+    })
+  }
+
+  allowExitChange=(value)=>{
+    this.setState({
+      allowExit:value
     })
   }
 
@@ -260,7 +275,7 @@ class CreateTeam extends Component {
                 </FormItem>
 
                 <FormItem showMast={false} labelName={<span>允许退出<font color='red'> *</font></span>} isRequire={false} method="change" inline={true}>
-                  <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} />
+                  <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} onChange={this.allowExitChange}/>
                 </FormItem> 
                 
                 <SubmitBtn isSubmit />
