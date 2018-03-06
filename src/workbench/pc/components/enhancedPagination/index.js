@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import "./enhancedPagination.css";
+
 import 'bee-pagination/build/Pagination.css';
-import Pagination from './pagination';
+import Pagination from 'bee/pagination';
+import "./style.css";
 //新增的三个
 //onDataNumSelect func 下拉选择每页展示的数据数的时候
 //dataNumSelect  array ，下拉的数据选择有哪些
@@ -56,10 +57,13 @@ const EnhancedPagination = WrappedComponent => {
       }
 
       render() {
-        
+        const newProps = {
+            maxButtons:5,
+            boundaryLinks:true
+        }
         return (
             <div className="enhanced-pagination">
-                <WrappedComponent {...this.props} />
+                <WrappedComponent {...this.props} {...newProps}/>
                 <div className="data-select">
                     <select  name="data-select" id="" className="data-select"  defaultValue='' value={this.state.dataNum} onChange={e=>this.dataNumSelect(e)}>
                       {this.props.dataNumSelect.length > 0 && this.props.dataNumSelect.map((item, i) => {

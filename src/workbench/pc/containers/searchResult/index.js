@@ -13,7 +13,7 @@ import Menu from 'bee/menus';
 // import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee/tabs';
 import Pagination from 'bee/pagination';
-import EnhancedPagination from 'bee/enhancedPagination';
+import EnhancedPagination from 'components/enhancedPagination';
 
 import {
   bg,
