@@ -1,9 +1,9 @@
-.enhanced-pagination{
+.enhanced_pagination{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-select.data-select {
+.data_select {
     outline: none;
     -webkit-appearance: none;
     height: 28px;
@@ -16,10 +16,10 @@ select.data-select {
     font-size: 14px;
     margin: 0 6px;
 }
-.page-jump {
+.page_jump {
     font-size: 14px;
 }
-input.page-jump-value {
+input.page_jump_value {
     outline: none;
     -webkit-appearance:  none;
     background: rgba(9,30,66,.04);

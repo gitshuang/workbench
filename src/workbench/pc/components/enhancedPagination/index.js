@@ -8,6 +8,9 @@ import "./style.css";
 //dataNumSelect  array ，下拉的数据选择有哪些
 //dataNumSelectActive number，默认选中的每页展示的数据数
 // 函数接受一个组件参数……
+import {enhanced_pagination,data_select,page_jump,page_jump_value
+  } from './style.css';
+
 const EnhancedPagination = WrappedComponent => {
     console.log('EnhancedPagination');
     return class extends Component {
@@ -62,17 +65,17 @@ const EnhancedPagination = WrappedComponent => {
             boundaryLinks:true
         }
         return (
-            <div className="enhanced-pagination">
+            <div className={enhanced_pagination}>
                 <WrappedComponent {...this.props} {...newProps}/>
-                <div className="data-select">
-                    <select  name="data-select" id="" className="data-select"  defaultValue='' value={this.state.dataNum} onChange={e=>this.dataNumSelect(e)}>
+                <div className="data-per-select">
+                    <select  name="data-select" id="" className={data_select} defaultValue='' value={this.state.dataNum} onChange={e=>this.dataNumSelect(e)}>
                       {this.props.dataNumSelect.length > 0 && this.props.dataNumSelect.map((item, i) => {
                       return <option key={i} value={item.id}>{item.name}</option>
                       })}
                     </select>
                 </div>
-                <div className="page-jump">
-                    跳至<input className="page-jump-value" type='number' value={this.state.activePage} onKeyDown={e=>this.onKeyup(e)} onChange={e=>this.setPageJump(e) }/>页
+                <div className={page_jump}>
+                    跳至<input className={page_jump_value} type='number' value={this.state.activePage} onKeyDown={e=>this.onKeyup(e)} onChange={e=>this.setPageJump(e) }/>页
                 </div>
             </div>
         )
