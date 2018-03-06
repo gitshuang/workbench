@@ -60,7 +60,7 @@ class DropdownButton extends Component{
   }
   
   render(){
-    let {label,dataItem,fun,type} = this.props;
+    let {label,dataItem,fun,type,marginLeft} = this.props;
     // const {label } = this.state;
     let item = [];
     dataItem.forEach((da,i) => {
@@ -71,7 +71,7 @@ class DropdownButton extends Component{
     });
     let _marginLeft = -148;
     if(type && type == "home"){
-      _marginLeft = -183;
+      _marginLeft = marginLeft?marginLeft:-183;
     }
     // onSelect={(e)=>{this.handleSelect(e,fun)}} 
     let _menus = (<Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}}  >

@@ -4,3 +4,17 @@
 .content{
   
 }
+
+.select_enter{
+  position: relative; /*top和left偏移各为50%*/
+  top: 50%;
+  left: 50%; /*translate(-50%,-50%) 偏移自身的宽和高的-50%*/
+  transform: translate(-50%, -50%); 
+  /* 注意这里启动了3D硬件加速哦 会增加耗电量的 （至于何是3D加速 请看 */
+}
+.select_enter>span{
+  margin-right: 10px;
+}
+.select_enter :global(.home_title){
+  width:189px !important;
+}

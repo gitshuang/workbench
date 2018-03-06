@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-import teamconfigActions from 'store/root/teamconfig/actions'; 
-const { exitTeam, closeExitModal } = teamconfigActions; 
+import teamconfigActions from 'store/root/teamconfig/actions';
+import homeActions from 'store/root/home/actions';
 import PopDialog from 'components/pop';
-import {content} from './index.css';
+import {content,select_enter} from './index.css';
+import DropdownButton from 'components/dropdown';
+
+const { exitTeam, closeExitModal } = teamconfigActions; 
+const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay } = homeActions;
 
 @withRouter
 @connect(
   mapStateToProps(
+    'userInfoDisplay',
     'userInfo',
     {
       namespace: 'home',
@@ -17,7 +22,9 @@ import {content} from './index.css';
   ),
   {
     exitTeam,
-    closeExitModal
+    closeExitModal,
+    changeUserInfoDisplay,
+    hideUserInfoDisplay
   }
 )
 class SelectEnter extends Component {
@@ -29,17 +36,63 @@ class SelectEnter extends Component {
     }
   }
 
-  componentWillMount() {
 
-  }
-
-  componentWillReceiveProps(nextProps) {
-
+  changeTenant(tenantId){
+    const {
+      location: {
+        origin,
+        pathname,
+        hash,
+      },
+    } = window;
+    window.location.replace(
+      `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
+    );
   }
  
+
+  closeFun = ()=>{
+    const {
+      changeUserInfoDisplay,
+      hideUserInfoDisplay,
+      userInfoDisplay
+    } = this.props;
+    if(userInfoDisplay){
+      hideUserInfoDisplay();
+    } 
+  }
+
   render() { 
+    const {
+      userInfo: {
+        logo,
+        allowTenants,
+        company,
+      }
+    } = this.props;
+
     return (
-       <div></div>
+       <div id="open_select" className={select_enter}>
+         <span>请选择企业:</span>
+         <DropdownButton
+         marginLeft={-187}
+          getPopupContainer={() => document.getElementById("open_select")}
+          closeFun={this.closeFun}
+          label={company} type="home" dataItem={
+            allowTenants.map(({
+              tenantId: name,
+              tenantName: value,
+              type
+            }) => {
+              return {
+                name,
+                value,
+                type,
+                fun: this.changeTenant,
+              };
+            })
+          } /> 
+       </div>
     )
   }
 }
