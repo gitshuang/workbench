@@ -74,7 +74,9 @@ class CreateEnter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      disabled:true
+      disabled:true,
+      logo:"",
+      tenantIndustry:"A"
     };
     this.tenantIndustry ={
       name:"tenantIndustry",
@@ -86,14 +88,21 @@ class CreateEnter extends Component {
 
   checkForm = (flag, data) => {
     const {setCreateEnter,updateenter} = this.props;
+    const {tenantIndustry} = this.state;
+
     let _address = data.find((da)=>da.name == "address");
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
-    if(_address.value != ""){
-
+    if(_address.value && _address.value != ""){ 
       _tenantAddress.value = _address.value.province + "|" + _address.value.city  + "|" + _address.value.area + "|" + _tenantAddress.value;
     }else{
       _tenantAddress.value = this.address + _tenantAddress.value;
     }
+
+    let _tenantIndustry = data.find((da)=>da.name == "tenantIndustry");
+    if(!_tenantIndustry.value && _tenantIndustry.value == ""){
+      _tenantIndustry.value = tenantIndustry;
+    }
+    
     if (flag) {
       this.setState({
         disabled:false
@@ -128,6 +137,7 @@ class CreateEnter extends Component {
   }
 
   setUrl(name,url){
+    debugger;
     this.state[name] = url;
     this.setState({
       ...this.state
@@ -135,14 +145,15 @@ class CreateEnter extends Component {
   }
 
   setOptherData=(obj)=>{
-    // this.tenantIndustry.value = obj.value;
     this.state[obj.name] = obj.value;
+    debugger;
     this.setState({
       ...this.state
     })
   }
 
   render() {
+    const {logo} = this.state;
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *&nbsp;</font></span>}
@@ -152,7 +163,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *&nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' onChange={(e)=>{this.setUrl("logo",e)}}  />
+              <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  />
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>

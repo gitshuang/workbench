@@ -38,7 +38,7 @@ class Enterprise extends Component {
           <div className={enter_title} >创建企业</div>
           <hr className={hr}/>
           <div className={enter_cont} >
-            <CreateEnter />
+            <CreateEnter  />
           </div> 
           <hr className={hr, hr2}/>
         </div>

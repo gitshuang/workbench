@@ -82,7 +82,7 @@ class Enterprise extends Component {
           </div>
           <hr className={hr}/>
           <div className={`${enter_cont} enter_setting`} >
-            <EnterSetting />
+            <EnterSetting updateenter="update_enter"/>
           </div>
           <hr className={hr, hr2}/>
         </div>

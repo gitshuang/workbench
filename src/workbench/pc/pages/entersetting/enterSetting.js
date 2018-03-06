@@ -111,7 +111,7 @@ class CreateEnter extends Component {
   }
 
   checkForm = (flag, data) => {
-    const {setCreateEnter} = this.props;
+    const {setCreateEnter,updateenter} = this.props;
     const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
 
     let _logo = data.find((da)=>da.name == "logo");
@@ -151,7 +151,7 @@ class CreateEnter extends Component {
           return obj;
         },
         {},
-      ),"settingEnter"
+      ),updateenter
     ).then(({ error, payload }) => {
       requestSuccess();
       if (error) {
@@ -217,7 +217,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
-            <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
+              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
             </FormItem>
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select

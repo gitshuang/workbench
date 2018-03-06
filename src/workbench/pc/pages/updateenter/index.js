@@ -32,7 +32,7 @@ class Updateenter extends Component {
           <div className={enter_title} >企业认证</div>
           <hr className={hr}/>
           <div className={enter_cont} >
-            <CreateEnter updateenter="updateenter"/>
+            <CreateEnter updateenter="upgrade_enter" />
           </div> 
         </div>
       </div>
