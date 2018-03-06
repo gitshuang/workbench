@@ -37,9 +37,10 @@ const EnhancedPagination = WrappedComponent => {
       }
 
       setPageJump = (e) =>{
+        let reg =  /^\+?[1-9][0-9]*$/;
         let value = e.target.value;
-        if(value > this.props.items || (value == 0 && value !== '')){
-          alert('跳转的页数不合适');
+        if((value < 1 && value!=='')||value > this.props.items || (value == 0 && value !== '')){
+          alert(value+'不在页码范围');
         }else{
           //注意这里要将下拉的数据还原
           this.setState({activePage:value},function(){
