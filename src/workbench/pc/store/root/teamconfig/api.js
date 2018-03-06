@@ -37,7 +37,7 @@ export const dismissTeam = (id) =>{
   return post('/manager/teamEnter/createTeam',{id});
 }
 export const exitTeam = (userId) =>{
-  return get('/manager/team/leave');
+  return post('/manager/team/leave');
 }
 export const getAllApps = () =>{
   return get('/manager/application/getAllAppsForTeam');
