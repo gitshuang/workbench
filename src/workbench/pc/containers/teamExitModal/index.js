@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions'; 
 const { exitTeam, closeExitModal } = teamconfigActions; 
 import PopDialog from 'components/pop';
 import {content} from './index.css';
 
+@withRouter
 @connect(
   mapStateToProps(
-
+    'userInfo',
+    {
+      namespace: 'home',
+    }
   ),
   {
     exitTeam,
     closeExitModal
   }
 )
-
-
 class TeamRemoveModal extends Component {
 
   constructor(props) {
@@ -36,24 +39,38 @@ class TeamRemoveModal extends Component {
 
   // 删除确认
   configFn = () => {
-    const { exitTeam, isManage, userId } = this.props;
-    // if( isManage ){
-    //   this.setState({
-    //     isManage: true
-    //   });
-    //   return false;
-    // }
+    const { exitTeam, isManage, userId ,userInfo} = this.props;
     exitTeam(userId).then(({error, payload}) => {
       this.cancelFn();
       if (error) {
         console.log(payload);
         return false;
+      } 
+      if(userInfo.allowTenants.length == 1){//进入该企业或团队
+        if(!userInfo.allowTenants)return;
+        this.changeTenant(userInfo.allowTenants[0].tenantId); 
+      }else if(userInfo.allowTenants.length == 0){
+        const {
+          history, 
+        } = this.props;
+        history.push('/establishusercenter');
+      }else if(userInfo.allowTenants.length > 1){
+        history.push('/');
       }
-      if(payload){
-
-      }
-      window.location.href = "/";
     });
+  }
+
+  changeTenant =(tenantId)=>{
+    const {
+      location: {
+        origin,
+        pathname,
+        hash,
+      },
+    } = window;
+    window.location.replace(
+      `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
+    );
   }
 
   // 取消

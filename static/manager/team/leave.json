@@ -1,0 +1,13 @@
+{
+  "msg": 1,
+  "data":{
+    "allowExit": "0",
+    "invitePermission": "1",
+    "joinPermission": "0",
+    "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f1be8f92-64a5-4b94-94f6-bf02d4ed3d08/c2481bb099b574f5%21400x400_big.png",
+    "searchAvalible": "0",
+    "tenantId": "1002",
+    "tenantName": "测试内容z3h4"
+  },
+  "status": 1
+}

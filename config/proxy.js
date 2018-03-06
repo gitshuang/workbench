@@ -34,6 +34,7 @@ var api = [
   '/manager/enter/info',
   '/manager/application/getAllAppsForTeam',
   '/manager/team/info',
+  '/manager/team/leave',
   '/manager/team/queryUserPage',
 ]
 

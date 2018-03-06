@@ -184,6 +184,13 @@ class CreateEnter extends Component {
     })
   }
  
+  onCityChange = (obj)=>{
+    // this.address = obj.province + obj.city + obj.area;
+    // defaultValue:{ province:'北京',city:'北京',area:'东城区'},
+    this.setState({
+      address:obj
+    })
+  }
 
   setUrl(name,url){
     this.state[name] = url;
@@ -250,7 +257,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>企业地址<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
-              <CitySelect name='address' onChange={this.onChange} value={address} />
+              <CitySelect name='address' onChange={this.onCityChange} value={address} />
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>地址<font color='red'> *</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
