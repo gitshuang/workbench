@@ -7,8 +7,9 @@ import Icon from 'components/icon';
 import DropdownButton from 'components/dropdown';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
+import teamconfigActions from 'store/root/teamconfig/actions';
 import { getStrLenSubstr } from '@u';
-
+import TeamExitModal from 'containers/teamExitModal';
 import Button from 'bee/button';
 // import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee/tabs';
@@ -39,6 +40,10 @@ const {
   getPromotionServiceList
 } = rootActions;
 
+const { 
+  openExitModal,
+} = teamconfigActions;
+
 @withRouter
 @connect(
   mapStateToProps(
@@ -47,6 +52,12 @@ const {
     'requestDisplay',
     'latestAccessList',
     'promotionServiceList',
+    {
+      key: 'exitModal',
+      value: (home,ownProps,root) => {
+        return root.teamconfig.exitModal
+      }
+    },
     {
       namespace: 'home',
     },
@@ -61,16 +72,14 @@ const {
     setCutUser,
     getLatestAccessList,
     getPromotionServiceList,
-    closeRequestDisplay
+    closeRequestDisplay,
+    openExitModal
   }
 )
 @onClickOutside
 class UserInfoContainer extends Component {
   constructor(props) {
     super(props);
-
-    // this.getLatestAccessList();
-    // this.getPromotionServiceList();
 
     this._curTenant = null;
     this.state = {
@@ -312,6 +321,11 @@ class UserInfoContainer extends Component {
     history.push('/establishusercenter'); 
   }
 
+  exitOnclick=()=>{
+    const { openExitModal } = this.props;
+    openExitModal(); 
+  }
+
   render() {
     const {
       userInfo: {
@@ -324,8 +338,10 @@ class UserInfoContainer extends Component {
         logo,
         company,
       },
-      requestDisplay
+      requestDisplay,
+      exitModal
     } = this.props;
+
     let _accountMenuDataItem =[
       {name:"userInfo",value:"个人信息",fun:this.handleChange2},
       {name:"accountManagement",value:"帐号设置",fun:this.handleChange2},
@@ -443,13 +459,22 @@ class UserInfoContainer extends Component {
                         `${_titleType}设置`
                       }
                     </Button>
+                    
                   </li>
-                ) : null }
+                ) : 
+                <li>
+                    <Button
+                      shape="border"
+                      size="sm"
+                      onClick={this.exitOnclick}>
+                      <Icon type="staff" />退出团队
+                    </Button>
+                    
+                  </li> }
               <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
               <Icon type="add-friends" />
               邀请成员</Button></li>
-            </ul>
-
+            </ul> 
             {
               requestDisplay ?
               <div className={popconfirm} style={{position:"absolute"}}>
@@ -465,45 +490,10 @@ class UserInfoContainer extends Component {
 
           </div>
         </div>
-        <div className={`${createBtnList} ${clearfix}  ${select_li}`}>
-          {/* <DropdownButton
-            getPopupContainer={() => document.getElementById("modalId")}
-            label="切换" dataItem={
-              allowTenants.map(({
-                tenantId: name,
-                tenantName: value,
-              }) => {
-                return {
-                  name,
-                  value,
-                  fun: this.changeTenant,
-                };
-              })
-            } />
-          <Button className={ createBtn } shape="border" size="sm" onClick={this.gotoCreateEnter}>创建团队/企业</Button>
-           */}
-          </div>
-        
-        {/* <div className={"um-content" + ` ${tabContent}`}>
 
-          <Tabs
-            defaultActiveKey="1"
-            onChange={this.callback}
-            className="demo-tabs"
-          >
-            <TabPane tab='最近使用' key="1" className={tabPane1}>
-              <ul className={recently}>
-                {_li}
-              </ul>
-              {this.state.dataList.length != 0 ?<Button onClick={this.handleClick}>清空列表</Button>:<Button>没有数据!</Button>}
-            </TabPane>
-            <TabPane tab='推广服务' key="2" className={tabPane2}>
-              <ul className={`${promotion} ${clearfix}`}>
-                {lis}
-              </ul>
-            </TabPane>
-          </Tabs>
-        </div> */}
+         {
+          exitModal ? <TeamExitModal isManage={userInfo.admin} userId={userInfo.userId} close={true}/> : null
+         }
       </div>
     );
   }

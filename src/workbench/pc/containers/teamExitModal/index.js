@@ -11,13 +11,20 @@ import SelectEnter from './selectEnter'
 @withRouter
 @connect(
   mapStateToProps(
-    'userInfo',
+    'exitModal',
     {
-      namespace: 'home',
-    }
+      key: 'userInfo',
+      value: (teamconfig,ownProps,root) => {
+        return root.home.userInfo
+      }
+    },
+    {
+      namespace: "teamconfig"
+    },
   ),
   {
     exitTeam,
+    closeExitModal,
     closeExitModal
   }
 )
@@ -28,6 +35,7 @@ class TeamRemoveModal extends Component {
     this.state = {
       isManage: 0,
       msg:"",
+      close:true
     }
   }
 
@@ -36,7 +44,11 @@ class TeamRemoveModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
+    if(nextProps.close != this.props.close){
+      this.setState({
+        close:nextProps.close
+      })
+    }
   }
 
   // 删除确认
@@ -82,14 +94,13 @@ class TeamRemoveModal extends Component {
 
   // 取消
   cancelFn = () => {
-    // const { closeExitModal ,exitModal} = this.props;
-    // closeExitModal();
+    const { closeExitModal ,exitModal} = this.props;
+    closeExitModal();
   }
  
   render() {
-
-    // const {isManage} = this.props;
-    const {msg,isManage} = this.state;
+    const {exitModal} = this.props;
+    const {msg,isManage,close} = this.state;
     let btnLabel = "确定";
     let _pop_title = "退出团队";
     let _cont = null;
@@ -121,7 +132,7 @@ class TeamRemoveModal extends Component {
     return (
       <PopDialog
           className="team_exit_modal"
-          show={ true }
+          show={ exitModal }
           title={_pop_title}
           backup={false}
           close={this.cancelFn} 

@@ -711,9 +711,6 @@ class CreateTeamContent extends Component {
 
   onSelectDrop = ({ key }) => {
     const { openTransferModal,openDismissModal,openExitModal } = this.props;
-    // if( key == "1" ){
-    //   // openTransferModal();
-    // }
     if( key == "2" ){
       openDismissModal();
     }else{
@@ -723,8 +720,7 @@ class CreateTeamContent extends Component {
 
   render() {
     const menu1 = (
-      <Menu
-        onSelect={this.onSelectDrop}>
+      <Menu onClick={this.onSelectDrop}>
         {/* <Item key="1">移交团队</Item> */}
         <Item key="2">解散团队</Item>
         <Item key="3">退出团队</Item>
@@ -784,7 +780,7 @@ class CreateTeamContent extends Component {
           dismissModal ? <TeamDismissModal /> : null
         }
         {
-          exitModal ? <TeamExitModal isManage={userInfo.admin} userId={userInfo.userId}/> : null
+          exitModal ? <TeamExitModal isManage={userInfo.admin} userId={userInfo.userId} close={true}/> : null
         }
       </div>
     )
