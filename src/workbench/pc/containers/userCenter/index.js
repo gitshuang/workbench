@@ -365,6 +365,8 @@ class UserInfoContainer extends Component {
       {name:"language",value:"界面语言",fun:this.handleChange},
       {name:"message",value:"消息",fun:this.handleChange}
     ];
+
+    let _titleType = this.getCompanyType();
     
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
@@ -421,7 +423,7 @@ class UserInfoContainer extends Component {
             <div className={tenantDescribe}>
               <div className={tenantName} title={company}>{company}</div>
               <div style={{'marginBottom':15}}>
-                <div className={companyType}>{this.getCompanyType()}</div>
+                <div className={companyType}>{_titleType}</div>
               </div>
             </div>
           </div>
@@ -438,7 +440,7 @@ class UserInfoContainer extends Component {
                       onClick={()=>{this.gotoConfig(this._curTenant)}}>
                        <Icon type="staff" />
                       {
-                        `${this.getCompanyType()}设置`
+                        `${_titleType}设置`
                       }
                     </Button>
                   </li>
@@ -453,7 +455,7 @@ class UserInfoContainer extends Component {
               <div className={popconfirm} style={{position:"absolute"}}>
                 <i className="arrow"></i>
                 <div className={popconfirm_content}>
-                  <p>团队创建成功！</p>
+                  <p>{_titleType}创建成功！</p>
                   <p>快点邀请成员一起好好工作吧！</p>
                 </div>
                 <div onClick={this.closeRequest}>以后再说</div>
