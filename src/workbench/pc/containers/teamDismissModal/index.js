@@ -120,7 +120,7 @@ class TeamDismissModal extends Component {
       _cont = (<div className={content} ><p>{_msg}</p></div>);
       _pop_title= {name};
     }else if(isManage == 2){//退出后选中企业/团队
-      _pop_title= "请重新选中企业或团队";
+      _pop_title= "请重新选择";
       _cont = <SelectEnter />;
     }
 

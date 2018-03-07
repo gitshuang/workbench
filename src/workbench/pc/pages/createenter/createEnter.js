@@ -156,17 +156,17 @@ class CreateEnter extends Component {
     const {logo} = this.state;
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *&nbsp;</font></span>}
+            <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> &nbsp;*&nbsp;</font></span>}
             isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur"
              inline={true}>
                 <FormControl name="tenantName"  placeholder="最多60个字符"/>
             </FormItem>
 
-            <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> *&nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
+            <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> &nbsp;*&nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
               <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  />
             </FormItem>
 
-            <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+            <FormItem showMast={false}  labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     defaultValue="A"
                     name="tenantIndustry"
@@ -196,7 +196,7 @@ class CreateEnter extends Component {
                 </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>企业地址<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>企业地址<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
               <CitySelect name='address' onChange={this.onChange}/>
             </FormItem>
 
@@ -212,15 +212,15 @@ class CreateEnter extends Component {
               联系人信息：
             </div>
 
-            <FormItem showMast={false} labelName={<span>姓名<font color='red'> *&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入联系人姓名" method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>姓名<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入联系人姓名" method="blur" inline={true}>
               <FormControl name="linkman"  placeholder="请输入联系人姓名" />
             </FormItem>
 
-            <FormItem showMast={false} valuePropsName='value'  labelName={<span>邮箱<font color='red'> *&nbsp;</font></span>} isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
+            <FormItem showMast={false} valuePropsName='value'  labelName={<span>邮箱<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
                 <FormControl name="tenantEmail"  placeholder="请输入邮箱" />
             </FormItem>
 
-            <FormItem inputBefore="+86" className="input_phone" showMast={false}  valuePropsName='value'  labelName={<span>手机号<font color='red'> *&nbsp;</font></span>} isRequire={true} method="blur" htmlType="tel" errorMessage="手机号格式错误"  inline={true}>
+            <FormItem inputBefore="+86" className="input_phone" showMast={false}  valuePropsName='value'  labelName={<span>手机号<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} method="blur" htmlType="tel" errorMessage="手机号格式错误"  inline={true}>
                 <FormControl name="tenantTel"  placeholder="请输入手机号" />
             </FormItem>
 

@@ -125,7 +125,7 @@ class TeamRemoveModal extends Component {
       _cont = (<div className={content} ><p>{_msg}</p></div>);
       _pop_title= name;
     }else if(isManage == 2){//退出后选中企业/团队
-      _pop_title= "请重新选中"+type;
+      _pop_title= "请重新选择"+type;
       _cont = <SelectEnter />
     }
     

@@ -147,7 +147,7 @@ class CreateTeamContent extends Component {
         <hr />
         <div className={create_team_cont}>
           <div className={item+" um-box"}>
-            <label>团队名称<span>*</span></label>
+            <label>团队名称<span>&nbsp;*&nbsp;</span></label>
             <input
               placeholder="最多60个字符"
               value={ value }
@@ -155,7 +155,7 @@ class CreateTeamContent extends Component {
             />
           </div>
           <div className={item+" um-box"}>
-            <label>团队头像</label>
+            <label>团队头像&nbsp; &nbsp; </label>
             <div className={image}>
                 { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
                 <div>

@@ -60,7 +60,7 @@ class DropdownButton extends Component{
   }
   
   render(){
-    let {label,dataItem,fun,type,marginLeft} = this.props;
+    let {label,dataItem,fun,type,marginLeft,lastIem} = this.props;
     // const {label } = this.state;
     let item = [];
     dataItem.forEach((da,i) => {
@@ -77,7 +77,7 @@ class DropdownButton extends Component{
     let _menus = (<Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}}  >
        <MenuItem className={menu_item} > 
           <div className={item_ul}>{item}</div>
-          <div className={create_ent} onClick={this.enterOnclick} >创建团队 \ 创建企业</div>
+          {lastIem?null:<div className={create_ent} onClick={this.enterOnclick} >创建团队 \ 创建企业</div>}
        </MenuItem>
     </Menu>);
 

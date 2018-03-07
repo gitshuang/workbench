@@ -202,17 +202,17 @@ class CreateTeam extends Component {
 
           <div className={form_team}>
             <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-                <FormItem showMast={false}  labelName={<span>团队名称<font color='red'> *</font></span>}
+                <FormItem showMast={false}  labelName={<span>团队名称<font color='red'> &nbsp;*&nbsp;</font></span>}
                 isRequire={true} valuePropsName='value' errorMessage="请输入团队名称" method="blur"
                 inline={true}>
                     <FormControl name="tenantName" value={tenantName?tenantName:""} onChange={(e)=>{this.inputOnChange(e,"tenantName")}} placeholder="最多60个字符"/>
                 </FormItem>
 
-                <FormItem showMast={false}  labelName={<span>团队头像<font color='red'> *</font></span>} valuePropsName='value' method="change"  inline={true}>
+                <FormItem showMast={false}  labelName={<span>团队头像<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
                   <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
                 </FormItem>
 
-                <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
                         name="invitePermission"
                         value={invitePermission}
@@ -225,7 +225,7 @@ class CreateTeam extends Component {
                     </Select>
                 </FormItem>
 
-                <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
                         name="joinPermission"
                         value={joinPermission}
@@ -237,7 +237,7 @@ class CreateTeam extends Component {
                     </Select>
                 </FormItem>
 
-                <FormItem showMast={false} labelName={<span>允许退出<font color='red'> *</font></span>} isRequire={false} method="change" inline={true}>
+                <FormItem showMast={false} labelName={<span>允许退出<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
                   {/* <Nature name="allowExit" defaultValue={allowExit} onChange={this.allowExitChange}/> */}
                    <Radio.RadioGroup name="allowExit" selectedValue={this.state.value} onChange={this.allowExitChange} selectedValue={allowExit?allowExit:"0"}>
                     <Radio value="0" >禁止</Radio>
