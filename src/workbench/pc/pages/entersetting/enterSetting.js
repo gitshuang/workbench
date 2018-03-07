@@ -89,7 +89,7 @@ class CreateEnter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address:{"province":"北京","city":"北京",area:"东城区"}
+      address:null,
     }
   }
 
@@ -113,7 +113,7 @@ class CreateEnter extends Component {
   // }
 
   componentWillReceiveProps(nextProps){
-    const {data} = nextProps; 
+    const {data} = nextProps;
     if(data == null)return;
     let _tenantAddress = data["tenantAddress"];
     if(_tenantAddress){
@@ -156,7 +156,7 @@ class CreateEnter extends Component {
     if(!_allowExit.value && _allowExit.value == ""){
       _allowExit.value = allowExit;
     }
-    
+
     data.push({name:"tenantId",value:tenantId});
     requestStart();
     setCreateEnter(
@@ -198,12 +198,14 @@ class CreateEnter extends Component {
       ...this.state
     })
   }
- 
+
   onCityChange = (obj)=>{
     // this.address = obj.province + obj.city + obj.area;
     // defaultValue:{ province:'北京',city:'北京',area:'东城区'},
     this.setState({
-      address:obj
+      address: {
+        ...obj,
+      },
     })
   }
 
@@ -224,13 +226,13 @@ class CreateEnter extends Component {
     const {btlLabel} = this.props;
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
       tenantIndustry,invitePermission,joinPermission,address} = this.state;
-     
+
       let newTenantAddress = "";
       if(tenantAddress){
         let _adds = tenantAddress.split("|");
         newTenantAddress = _adds[_adds.length-1];
       }
-
+      console.log(address)
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> *</font></span>}
@@ -272,11 +274,13 @@ class CreateEnter extends Component {
                     <Option value="T">国际组织</Option>
                 </Select>
             </FormItem>
-
-            <FormItem showMast={false} labelName={<span>企业地址<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
-              <CitySelect name='address' onChange={this.onCityChange} value={address} />
-            </FormItem>
-
+            {
+              address ? (
+                <FormItem showMast={false} labelName={<span>企业地址<font color='red'> *&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
+                  <CitySelect name='address' onChange={this.onCityChange} defaultValue={address}/>
+                </FormItem>
+              ) : <div/>
+            }
             <FormItem showMast={false} labelName={<span>地址<font color='red'> *</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
               <FormControl name="tenantAddress" value={newTenantAddress?newTenantAddress:tenantAddress} onChange={(e)=>{this.inputOnChange(e,"tenantAddress")}} placeholder="最多60个字符" />
             </FormItem>
