@@ -44,6 +44,7 @@ const defaultState = {
   userList: {},           //  用户列表
   activePage: 1,          //  当前页数
   exitTeamMsg:"",
+  dismissTeamMsg：""
 };
 
 
@@ -139,8 +140,9 @@ const reducer = handleActions({
     if(error){
       return state;
     }
-    return { 
+    return {
       ...state,
+      dismissTeamMsg:payload
     }
   },
 
