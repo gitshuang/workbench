@@ -70,7 +70,7 @@ class TeamDismissModal extends Component {
           isManage: 2
         })
       }
-      this.cancelFn();
+      // this.cancelFn();
     });
   }
 
