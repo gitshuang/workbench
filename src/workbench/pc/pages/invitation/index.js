@@ -76,7 +76,7 @@ class Invitation extends Component {
     });
   }
   goBack() {
-    this.props.history.replace('');
+    this.props.history.goBack();
   }
   copyLink = () => {
     this.refs['shortUrl'].select();
