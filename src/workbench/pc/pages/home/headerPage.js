@@ -67,7 +67,7 @@ class HeaderPage extends Component {
     } = this.props;
     if(userInfoDisplay){
       hideUserInfoDisplay();
-    } 
+    }
   }
 
   getLeftContent() {
@@ -101,7 +101,7 @@ class HeaderPage extends Component {
     } />);
   }
   componentDidMount() {
-    this.getUserInfo();
+    // this.getUserInfo();
     const { changeUserInfoDisplay,changeRequestDisplay } = this.props;
     //console.log(GetQueryString("create"));
     // 判断是否localstorage中包含这个值
@@ -123,6 +123,7 @@ class HeaderPage extends Component {
     // },0);
   }
 
+  /*
   getUserInfo() {
     const { userInfo: { name }, getUserInfo ,requestStart, requestSuccess, requestError} = this.props;
     if (!name) {
@@ -136,6 +137,7 @@ class HeaderPage extends Component {
       });
     }
   }
+  */
 
   allBtnOnclick=()=>{
     console.log("allBtn",this.state.allBtn);
@@ -151,9 +153,9 @@ class HeaderPage extends Component {
   }
 
   onLeftTitleClick=(e)=>{
-    
+
   }
-  
+
   render() {
     const {
       changeUserInfoDisplay,

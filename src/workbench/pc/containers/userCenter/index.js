@@ -25,7 +25,7 @@ import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, log
 } from './style.css';
 
 const {
-  getUserInfo,
+  // getUserInfo,
   hideUserInfoDisplay,
   getWorkList,
   setCutUser,
@@ -40,7 +40,7 @@ const {
   getPromotionServiceList
 } = rootActions;
 
-const { 
+const {
   openExitModal,
 } = teamconfigActions;
 
@@ -67,7 +67,7 @@ const {
     requestSuccess,
     requestError,
     hideUserInfoDisplay,
-    getUserInfo,
+    // getUserInfo,
     getWorkList,
     setCutUser,
     getLatestAccessList,
@@ -89,7 +89,7 @@ class UserInfoContainer extends Component {
   }
   static propTypes = {
     userInfo: PropTypes.object,
-    getUserInfo: PropTypes.func,
+    // getUserInfo: PropTypes.func,
     hideUserInfoDisplay: PropTypes.func,
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
@@ -189,7 +189,7 @@ class UserInfoContainer extends Component {
     history.push('/manage');
     hideUserInfoDisplay();
   }
-  gotoConfig = (curTenant) => { 
+  gotoConfig = (curTenant) => {
     if (curTenant && curTenant.type == 0 ) {//企业
       this.gotoEnter();
     }else{//团队
@@ -233,7 +233,7 @@ class UserInfoContainer extends Component {
   }
   getUserOrder(){
     window.open('https://idtest.yyuap.com/usercenter/myapp');
-  } 
+  }
 
   getIcon=(imgsrc)=> {
     if (imgsrc) {
@@ -260,7 +260,7 @@ class UserInfoContainer extends Component {
           <Icon type="staff" />
         </div>
       );
-    } 
+    }
   }
 
   getCompanyType(){
@@ -308,22 +308,22 @@ class UserInfoContainer extends Component {
     );
   }
 
-  // 关闭创建成功后的弹窗 
+  // 关闭创建成功后的弹窗
   closeRequest = () => {
     const {closeRequestDisplay} = this.props;
     closeRequestDisplay();
   }
- 
+
   gotoCreateEnter =()=>{
     const {
-      history, 
+      history,
     } = this.props;
-    history.push('/establishusercenter'); 
+    history.push('/establishusercenter');
   }
 
   exitOnclick=()=>{
     const { openExitModal } = this.props;
-    openExitModal(); 
+    openExitModal();
   }
 
   render() {
@@ -383,7 +383,7 @@ class UserInfoContainer extends Component {
     ];
 
     let _titleType = this.getCompanyType();
-    
+
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
@@ -459,9 +459,9 @@ class UserInfoContainer extends Component {
                         `${_titleType}设置`
                       }
                     </Button>
-                    
+
                   </li>
-                ) : 
+                ) :
                 <li>
                     <Button
                       shape="border"
@@ -469,12 +469,12 @@ class UserInfoContainer extends Component {
                       onClick={this.exitOnclick}>
                       <Icon type="staff" />退出团队
                     </Button>
-                    
+
                   </li> }
               <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
               <Icon type="add-friends" />
               邀请成员</Button></li>
-            </ul> 
+            </ul>
             {
               requestDisplay ?
               <div className={popconfirm} style={{position:"absolute"}}>
@@ -484,8 +484,8 @@ class UserInfoContainer extends Component {
                   <p>快点邀请成员一起好好工作吧！</p>
                 </div>
                 <div onClick={this.closeRequest}>以后再说</div>
-              </div> 
-              : null 
+              </div>
+              : null
             }
 
           </div>

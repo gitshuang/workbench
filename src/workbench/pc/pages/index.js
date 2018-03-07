@@ -61,7 +61,8 @@ class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        loaded: false,
+      loaded: false,
+      inited: false,
     };
 }
   componentWillMount() {
@@ -75,33 +76,36 @@ class Root extends Component {
     } = this.props;
     const { history } = this.props;
     this.bgColor = this.gitBackgroundIcon();
+    requestStart();
     getUserInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       } else {
+        requestSuccess();
         this.setState({
           loaded: true
         });
-        requestSuccess();
-        console.log(payload);
         if(!payload.allowTenants.length){
           history.replace('/establish');
+        } else {
+          this.setState({
+            inited: true
+          });
+          getServiceList().then(({ error, payload }) => {
+            if (error) {
+              requestError(payload);
+            } else {
+              requestSuccess();
+            }
+          });
+          IM(new componentTool('IM'), getContext(), {
+            el: 'IM',
+          });
+          regMessageTypeHandler(this);
         }
       }
     });
-    requestStart();
-    getServiceList().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        requestSuccess();
-      }
-    });
     // timer(getMessage, 10000);
-    IM(new componentTool('IM'), getContext(), {
-      el: 'IM',
-    });
-    regMessageTypeHandler(this);
   }
   randomNum(minNum,maxNum){
       switch(arguments.length){
@@ -124,7 +128,12 @@ class Root extends Component {
   }
 
   render() {
-    if(!this.state.loaded) return null;
+    if (!this.state.loaded) {
+      return null;
+    }
+    if (this.state.inited) {
+      return <Es />;
+    }
     const { userInfoDisplay, quickServiceDisplay } = this.props;
     const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'icon-application'} />) : null;
     const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'} bgColor={this.bgColor}/>) : null;
@@ -135,7 +144,7 @@ class Root extends Component {
             routes.map( (route, i) => {
               return <RouteWithSubRoutes key={i} {...route} />
             })
-        }
+          }
         </Switch>
         <TransitionGroup>
           <CSSTransitionGroup
@@ -171,9 +180,9 @@ class Es extends Component {
     return (
       <div>
         <Switch>
-          {
-            <RouteWithSubRoutes key={0} {...routes[1]} />
-          }
+          <RouteWithSubRoutes key={0} {...routes[1]} />
+          <RouteWithSubRoutes key={1} {...routes[3]} />
+          <RouteWithSubRoutes key={2} {...routes[9]} />
         </Switch>
       </div>
     )
