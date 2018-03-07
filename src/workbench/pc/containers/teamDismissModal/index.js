@@ -48,8 +48,7 @@ class TeamDismissModal extends Component {
       });
       return false;
     }
-    dismissTeam("dismissTeam").then(({error, payload}) => {
-      this.cancelFn();
+    dismissTeam("dismissTeam").then(({error, payload}) => { 
       if (error) {
         this.setState({
           isManage: 1,
@@ -70,6 +69,7 @@ class TeamDismissModal extends Component {
           isManage: 2
         })
       }
+      this.cancelFn();
     });
   }
 

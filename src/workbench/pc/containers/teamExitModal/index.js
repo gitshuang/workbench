@@ -54,8 +54,7 @@ class TeamRemoveModal extends Component {
   // 删除确认
   configFn = () => {
     const { exitTeam, isManage, userId ,userInfo} = this.props;
-    exitTeam(userId).then(({error, payload}) => {
-      this.cancelFn();
+    exitTeam(userId).then(({error, payload}) => { 
       if (error) {
         this.setState({
           isManage: 1,
@@ -76,6 +75,7 @@ class TeamRemoveModal extends Component {
           isManage: 2
         })
       }
+      this.cancelFn(); 
     });
   }
 
