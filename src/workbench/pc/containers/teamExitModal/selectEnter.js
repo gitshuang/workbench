@@ -71,6 +71,18 @@ class SelectEnter extends Component {
       }
     } = this.props;
 
+    let _dataItem = [];
+    allowTenants.forEach(({ tenantId: name, tenantName: value, type }) => {
+      if(company != value){
+        let obj = {
+          name,
+          value,
+          type,
+          fun: this.changeTenant,
+        };
+        _dataItem.push(obj);
+      }
+    }) 
     return (
        <div id="open_select" className={select_enter}>
          <span>请选择企业:</span>
@@ -78,20 +90,7 @@ class SelectEnter extends Component {
          marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
           closeFun={this.closeFun}
-          label={company} type="home" dataItem={
-            allowTenants.map(({
-              tenantId: name,
-              tenantName: value,
-              type
-            }) => {
-              return {
-                name,
-                value,
-                type,
-                fun: this.changeTenant,
-              };
-            })
-          } /> 
+          label={company} type="home" dataItem={_dataItem} /> 
        </div>
     )
   }

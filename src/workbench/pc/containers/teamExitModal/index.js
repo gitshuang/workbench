@@ -53,8 +53,8 @@ class TeamRemoveModal extends Component {
 
   // 删除确认
   configFn = () => {
-    const { exitTeam, isManage, userId ,userInfo} = this.props;
-    exitTeam(userId).then(({error, payload}) => { 
+    const { exitTeam, isManage, userId ,userInfo,data:{serverApi}} = this.props;
+    exitTeam(serverApi).then(({error, payload}) => { 
       if (error) {
         this.setState({
           isManage: 1,
@@ -99,18 +99,17 @@ class TeamRemoveModal extends Component {
   }
  
   render() {
-    const {exitModal} = this.props;
+    const {exitModal,type,data:{name,msg:_msg}} = this.props;
     const {msg,isManage,close} = this.state;
     let btnLabel = "确定";
-    let _pop_title = "退出团队";
+    let _pop_title = name;
     let _cont = null;
     let _btn = null;
 
     if(isManage == 0){//退出团队信息
-      btnLabel = "退出";
       _cont = (<div className={content} >
-            <h6>确认退出团队?</h6>
-            <p>团队解散后系统将解散你和本团队内所有成员的关系并清除所有数据，请谨慎操作!</p> 
+            <h6>确认{name}?</h6>
+            <p>{_msg}</p>
         </div>);
         _btn = [
           {
@@ -123,13 +122,13 @@ class TeamRemoveModal extends Component {
           }
         ];
     }else if(isManage == 1){//退出失败后显示信息
-      _cont = (<div className={content} ><p>{msg}</p></div>);
-      _pop_title= "退出团队";
+      _cont = (<div className={content} ><p>{_msg}</p></div>);
+      _pop_title= name;
     }else if(isManage == 2){//退出后选中企业/团队
-      _pop_title= "请重新选中企业或团队";
+      _pop_title= "请重新选中"+type;
       _cont = <SelectEnter />
     }
-
+    
     return (
       <PopDialog
           className="team_exit_modal"

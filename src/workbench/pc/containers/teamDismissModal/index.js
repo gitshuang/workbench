@@ -31,7 +31,7 @@ class TeamDismissModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "确认解散团队?",
+      title: "确认"+props.data.name+"?",
       isManage: 0,
       msg:"",
       close:true,
@@ -40,7 +40,7 @@ class TeamDismissModal extends Component {
   }
  
   configFn=()=>{
-    const { dismissTeam, isManage ,userInfo} = this.props;
+    const { dismissTeam, isManage ,userInfo,data:{serverApi}} = this.props;
     let { pro} = this.state;
     if(pro == "1"){
       this.setState({
@@ -49,7 +49,7 @@ class TeamDismissModal extends Component {
       });
       return false;
     }
-    dismissTeam("dismissTeam").then(({error, payload}) => { 
+    dismissTeam(serverApi).then(({error, payload}) => { 
       if (error) {
         this.setState({
           isManage: 1,
@@ -94,17 +94,17 @@ class TeamDismissModal extends Component {
   }
 
   render() {
+    const {type,data:{name,msg:_msg}} = this.props;
     const {msg,isManage,close,title} = this.state;
     let btnLabel = "确定";
-    let _pop_title = "退出团队";
+    let _pop_title = name;
     let _cont = null;
     let _btn = null;
 
     if(isManage == 0){//退出团队信息
-      btnLabel = "解散";
       _cont = (<div className={content} >
             <h5>{title}</h5>
-          <p>团队解散后系统将解散你和本团队内所有成员的关系并清除所有数据，请谨慎操作!</p>
+          <p>{_msg}</p>
         </div>);
         _btn = [
           {
@@ -117,35 +117,25 @@ class TeamDismissModal extends Component {
           }
         ];
     }else if(isManage == 1){//退出失败后显示信息
-      _cont = (<div className={content} ><p>{msg}</p></div>);
-      _pop_title= "退出团队";
+      _cont = (<div className={content} ><p>{_msg}</p></div>);
+      _pop_title= {name};
     }else if(isManage == 2){//退出后选中企业/团队
       _pop_title= "请重新选中企业或团队";
       _cont = <SelectEnter />;
     }
-    // {[
-    //   {
-    //     label: '解散',
-    //     fun: this.configFn,
-    //   },
-    //   {
-    //     label: '取消',
-    //     fun: this.cancelFn,
-    //   }
-    // ]} 
 
     return ( 
       <PopDialog
       className="team_dismiss_modal"
       show={ true }
-      title="解散团队"
+      title={name}
       backup={false}
       close={this.cancelFn} 
       btns={_btn}
       >
       <div className={content} >
           <h5>{this.state.title}</h5>
-          <p>团队解散后系统将解散你和本团队内所有成员的关系并清除所有数据，请谨慎操作!</p>
+          <p>{msg}</p>
       </div>
     </PopDialog>
     )

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-
+import EnterOption from 'containers/enterOption'
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 
@@ -10,8 +10,8 @@ import TeamManagerModal from 'containers/teamManagerModal';
 import TeamRemoveModal from 'containers/teamRemoveModal';
 import TeamUpgradeModal from 'containers/teamUpgradeModal';
 import TeamTransferModal from 'containers/teamTransferModal';
-import TeamDismissModal from 'containers/teamDismissModal';
-import TeamExitModal from 'containers/teamExitModal';
+// import TeamDismissModal from 'containers/teamDismissModal';
+// import TeamExitModal from 'containers/teamExitModal';
 
 import CreateTeam from './createTeam';
 import Checkbox from 'bee/checkbox';
@@ -708,13 +708,12 @@ class CreateTeamContent extends Component {
   }
 
   render() {
-    const menu1 = (
-      <Menu onClick={this.onSelectDrop}>
-        {/* <Item key="1">移交团队</Item> */}
-        <Item key="2">解散团队</Item>
-        <Item key="3">退出团队</Item>
-      </Menu>
-    );
+    // const menu1 = (
+    //   <Menu onClick={this.onSelectDrop}> 
+    //     <Item key="2">解散团队</Item>
+    //     <Item key="3">退出团队</Item>
+    //   </Menu>
+    // );
     const { managerModal, removeModal, upgradeModal, transferModal, dismissModal, exitModal, userInfo } = this.props;
     return (
       <div className={wrap}>
@@ -725,14 +724,20 @@ class CreateTeamContent extends Component {
               <Button onClick={this.openUpgradeModal}>升级为企业</Button>
             </div>
             <div>
-              <Dropdown
+              {/* <Dropdown
                 trigger={['click']}
                 overlay={menu1}
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange}
               >
                 <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
-              </Dropdown>
+              </Dropdown> */}
+
+               <EnterOption data={[
+                {name:"解散团队",value:"2",serverApi:"team/remove",msg:"解散后，当期团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
+                {name:"退出团队",value:"3",serverApi:"team/leave",msg:"退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
+              ]}  type="团队" />
+
             </div>
           </div>
         </div>
@@ -771,12 +776,12 @@ class CreateTeamContent extends Component {
         {
           transferModal ? <TeamTransferModal /> : null
         }
-        {
+        {/* {
           dismissModal ? <TeamDismissModal /> : null
         }
         {
           exitModal ? <TeamExitModal isManage={userInfo.admin} userId={userInfo.userId} close={true}/> : null
-        }
+        } */}
       </div>
     )
   }

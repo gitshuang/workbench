@@ -93,25 +93,6 @@ class CreateEnter extends Component {
     }
   }
 
-  // componentWillMount(){
-  //   const { requestSuccess, requestError, getEnterInfo} = this.props;
-  //   let param = "123";
-  //   getEnterInfo(param).then(({error, payload}) => {
-  //     if (error) {
-  //       requestError(payload);
-  //     }
-  //     requestSuccess();
-  //     let _tenantAddress = payload["tenantAddress"];
-  //     if(_tenantAddress){
-  //       let _addres = _tenantAddress.split("|");
-  //       payload["address"] = {province:_addres[0]?_addres[0]:"",city:_addres[1]?_addres[1]:"",area:_addres[2]?_addres[2]:""};
-  //     }
-  //     this.setState({
-  //       ...payload
-  //     })
-  //   });
-  // }
-
   componentWillReceiveProps(nextProps){
     const {data} = nextProps;
     if(data == null)return;
@@ -157,6 +138,14 @@ class CreateEnter extends Component {
       _allowExit.value = allowExit;
     }
 
+<<<<<<< HEAD
+=======
+    let _linkman = data.find((da)=>da.name == "linkman");
+    if(!_linkman.value && _linkman.value == ""){
+      _linkman.value = linkman;
+    }
+
+>>>>>>> 过滤掉当前团队、团队企业操作组件抽取
     data.push({name:"tenantId",value:tenantId});
     requestStart();
     setCreateEnter(
@@ -225,7 +214,7 @@ class CreateEnter extends Component {
   render() {
     const {btlLabel} = this.props;
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
-      tenantIndustry,invitePermission,joinPermission,address} = this.state;
+      tenantIndustry,invitePermission,joinPermission,address,linkman} = this.state; 
 
       let newTenantAddress = "";
       if(tenantAddress){
@@ -288,7 +277,8 @@ class CreateEnter extends Component {
             <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     name="invitePermission"
-                    defaultValue={invitePermission?invitePermission:"1"}
+                    defaultValue="1"
+                    value={invitePermission?invitePermission:"1"}
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                     >
@@ -301,7 +291,8 @@ class CreateEnter extends Component {
             <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     name="joinPermission"
-                    defaultValue={joinPermission?joinPermission:"1"}
+                    defaultValue="1"
+                    value={joinPermission?joinPermission:"1"} 
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
                     >
@@ -321,6 +312,10 @@ class CreateEnter extends Component {
             <div className={lxr_title}>
               联系人信息：
             </div>
+
+            <FormItem showMast={false} labelName={<span>姓名<font color='red'> *&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入联系人姓名" method="blur" inline={true}>
+              <FormControl name="linkman" value={linkman?linkman:""} placeholder="请输入联系人姓名" />
+            </FormItem>
 
             <FormItem showMast={false} valuePropsName='value'  labelName={<span>邮箱<font color='red'> *</font></span>} isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
                 <FormControl name="tenantEmail" value={tenantEmail?tenantEmail:""} onChange={(e)=>{this.inputOnChange(e,"tenantEmail")}} placeholder="请输入邮箱" />

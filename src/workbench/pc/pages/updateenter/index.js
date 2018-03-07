@@ -4,9 +4,10 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import EnterSetting from 'pages/entersetting/enterSetting';
 import Header from 'containers/header';
-import { page_enterprise ,enter_title,enter_cont,hr} from './style.css';
+import { page_enterprise ,enter_title,enter_cont,hr,appBreadcrumb} from './style.css';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
+import Breadcrumbs from 'components/breadcrumb';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { getTeamInfo } = teamconfigActions;
@@ -41,8 +42,7 @@ class Updateenter extends Component {
     getTeamInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
-      }
-      debugger;
+      } 
       this.setState({
         enterData:payload
       })
@@ -67,6 +67,10 @@ class Updateenter extends Component {
             </div>
           </Header>
         </div>
+        <div className={appBreadcrumb}>
+          <Breadcrumbs data={[{ name:"设置企业" }]} goback={this.goBack}/>
+        </div>
+
         <div className={`${page_enterprise} um-content`}>
           <div className={enter_title} >企业认证</div>
           <hr className={hr}/>
