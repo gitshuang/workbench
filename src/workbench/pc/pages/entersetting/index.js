@@ -59,8 +59,7 @@ class Enterprise extends Component {
       if (error) {
         requestError(payload);
       }
-      requestSuccess();
-      debugger;
+      requestSuccess(); 
       this.setState({
         enterData:payload
       })
