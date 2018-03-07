@@ -192,8 +192,10 @@
 }
 
 .box2{
-  padding: 0 200px;
-  background: #ffffff;
+  /* padding: 0 200px;  */
+  padding: 0 16%;
+  background: #fff;
+  min-width: 500px;
 }
 .applicationBtns{
   padding-top: 24px;
@@ -275,8 +277,9 @@
   background: rgba(9,44,66,0.04);
 }
 .box3{
-  padding: 0 200px;
+  padding: 0 16%;
   background: #ffffff;
+  min-width: 500px;
 }
 .memberTit{
   padding-top: 24px; 
@@ -286,14 +289,17 @@
   text-align: right;
   justify-content:flex-end;
 }
+.memberBtns>label{
+  min-width: 120px;
+}
+
 .memberBtns button{
-  padding: 0 19px;
+  padding: 0 9px;
   line-height: 30px;
   height: 32px;
-  margin-left: 2px;
-  font-size:12px;
-  font-family:MicrosoftYaHei;
+  font-family: MicrosoftYaHei;
   margin-left: 32px;
+  width: 80px;
 }
 .memberBtns :global(.u-checkbox .u-checkbox-label:before){
   width: 14px;
