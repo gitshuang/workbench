@@ -87,10 +87,10 @@ class Root extends Component {
         });
         if(!payload.allowTenants.length){
           history.replace('/establish');
-        } else {
           this.setState({
             inited: true
           });
+        } else {
           getServiceList().then(({ error, payload }) => {
             if (error) {
               requestError(payload);
