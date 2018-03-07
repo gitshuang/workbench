@@ -156,7 +156,8 @@ const reducer = handleActions({
       return state;
     }
     return {
-      ...state
+      ...state,
+      msg:payload
     }
   },
   [getAllApps]: (state, { payload, error }) => {
