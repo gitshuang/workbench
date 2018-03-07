@@ -381,3 +381,10 @@
   font-size: 18px;
   color: rgba(135,139,148,1);
 }
+.team_cont :global(.u-select-selection--single){
+  height: 36px !important;
+}
+
+.team_cont :global(.u-select-selection-rendered){
+  line-height: 29px;
+}
