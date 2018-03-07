@@ -100,18 +100,18 @@ class Invitation extends Component {
     const {requestStart, requestSuccess, requestError,sendMessage} = this.props;
     const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
     if (mails.length) {
-      
+
       requestStart();
       sendMessage(mails).then((data) => {
         requestSuccess();
         this.setState({
           mails: [],
           // successDialogShow: false,
-        }); 
+        });
       }, (err)=>{
         requestError(err);
       });
-      
+
         console.log(mails);
         this.setState({
           mails: ['', ''],
@@ -123,10 +123,10 @@ class Invitation extends Component {
     this.setState({mails:tags})
   }
   printQr = () => {
-    let newstr = document.getElementById("qrCode").innerHTML; 
+    let newstr = document.getElementById("qrCode").innerHTML;
     let oldstr = document.body.innerHTML;
-    document.body.innerHTML = newstr; 
-    window.print(); 
+    document.body.innerHTML = newstr;
+    window.print();
     document.body.innerHTML = oldstr;
     return false;
   }
@@ -176,6 +176,7 @@ class Invitation extends Component {
                 <TagsInput
                   value={this.state.mails}
                   addKeys={[13,186]} // enter,semicolon
+                  addOnBlur
                   onlyUnique
                   addOnPaste
                   validationRegex={regMail}
