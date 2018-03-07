@@ -150,7 +150,7 @@ class CreateTeam extends Component {
   checkForm = (flag, data) => {
     const {createTeam} = this.props;
     const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission,allowExit} = this.state;
-    
+
     let _logo = data.find((da)=>da.name == "logo");
     if(!_logo.value && _logo.value == ""){
       _logo.value = logo;
@@ -165,7 +165,7 @@ class CreateTeam extends Component {
     if(!_invitePermission.value && _invitePermission.value == ""){
       _invitePermission.value = invitePermission;
     }
- 
+
     let _allowExit = data.find((da)=>da.name == "allowExit");
     if(!_allowExit.value && _allowExit.value == ""){
       _allowExit.value = allowExit;
@@ -186,7 +186,7 @@ class CreateTeam extends Component {
         requestError(payload);
         return;
       }
-      const tenantId = payload.tenantId; 
+      const tenantId = payload.tenantId;
       window.location.href = "/?tenantId=" + tenantId + "&switch=true";
     });
   }
@@ -227,7 +227,7 @@ class CreateTeam extends Component {
   render() {
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
       tenantIndustry,invitePermission,joinPermission,address} = this.state;
-     
+
       let newTenantAddress = "";
       if(tenantAddress){
         let _adds = tenantAddress.split("|");
@@ -235,7 +235,7 @@ class CreateTeam extends Component {
       }
 
     return (
-        <div className={team_cont}> 
+        <div className={team_cont}>
 
           <div className={form_team}>
             <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
@@ -252,7 +252,7 @@ class CreateTeam extends Component {
                 <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
                         name="invitePermission"
-                        defaultValue={invitePermission?invitePermission:"1"}
+                        value={invitePermission}
                         style={{ width: 338, marginRight: 6 }}
                         onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                         >
@@ -265,7 +265,7 @@ class CreateTeam extends Component {
                 <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
                         name="joinPermission"
-                        defaultValue={joinPermission?joinPermission:"1"}
+                        value={joinPermission}
                         style={{ width: 338, marginRight: 6 }}
                         onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
                         >
@@ -275,9 +275,9 @@ class CreateTeam extends Component {
                 </FormItem>
 
                 <FormItem showMast={false} labelName={<span>允许退出<font color='red'> *</font></span>} isRequire={false} method="change" inline={true}>
-                  <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} onChange={this.allowExitChange}/>
-                </FormItem> 
-                
+                  <Nature name="allowExit" defaultValue={allowExit} onChange={this.allowExitChange}/>
+                </FormItem>
+
                 <SubmitBtn isSubmit />
             </Form>
           </div>
