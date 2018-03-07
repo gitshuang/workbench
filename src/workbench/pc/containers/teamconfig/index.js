@@ -663,8 +663,9 @@ class CreateTeamContent extends Component {
                     <div>
                       <p>{item.userEmail}</p>
                     </div>
-                    <div className="um-bf1  um-box-vc">
+                    <div className="um-bf1  um-box-vc ">
                       <Select
+                        dropdownClassName="teamselect"
                         value={ item.admin ? "manage" : "member" }
                         style={{ width: 100, marginRight: 6 }}
                         onChange={ (e) => {this.handleChange3(e,item.userId)} }
