@@ -34,7 +34,7 @@ export const transferTeam = (id) =>{
   return post('/manager/teamEnter/createTeam',{id});
 }
 export const dismissTeam = (id) =>{
-  return post('/manager/teamEnter/createTeam',{id});
+  return post('/manager/team/remove');
 }
 export const exitTeam = (userId) =>{
   return post('/manager/team/leave');

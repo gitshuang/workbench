@@ -46,6 +46,8 @@ const defaultState = {
   applicationlist: [],    //  应用列表 
   userList: {},           //  用户列表
   activePage: 1,          //  当前页数
+  exitTeamMsg:"",
+  dismissTeamMsg:""
 };
 
 
@@ -150,7 +152,8 @@ const reducer = handleActions({
       return state;
     }
     return {
-      ...state
+      ...state,
+      dismissTeamMsg:payload
     }
   },
 
@@ -168,7 +171,7 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      msg:payload
+      exitTeamMsg:payload
     }
   },
   [getAllApps]: (state, { payload, error }) => {

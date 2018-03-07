@@ -12,6 +12,7 @@ import SelectEnter from './selectEnter'
 @connect(
   mapStateToProps(
     'exitModal',
+    'exitTeamMsg',
     {
       key: 'userInfo',
       value: (teamconfig,ownProps,root) => {
@@ -24,7 +25,6 @@ import SelectEnter from './selectEnter'
   ),
   {
     exitTeam,
-    closeExitModal,
     closeExitModal
   }
 )
@@ -54,14 +54,13 @@ class TeamRemoveModal extends Component {
   // 删除确认
   configFn = () => {
     const { exitTeam, isManage, userId ,userInfo} = this.props;
-    exitTeam(userId).then(({error, payload}) => {
-      this.cancelFn();
+    exitTeam(userId).then(({error, payload}) => { 
       if (error) {
-        return false;
         this.setState({
           isManage: 1,
           msg:payload,
-        })
+        });
+        return false;
       }
       if(userInfo.allowTenants.length == 1){//进入该企业或团队
         if(!userInfo.allowTenants)return;
@@ -76,6 +75,7 @@ class TeamRemoveModal extends Component {
           isManage: 2
         })
       }
+      this.cancelFn(); 
     });
   }
 
@@ -123,9 +123,10 @@ class TeamRemoveModal extends Component {
           }
         ];
     }else if(isManage == 1){//退出失败后显示信息
-      _cont = (<div className={content} > dddddddd<p>{msg}</p></div>);
-      _pop_title= "请重新选中企业或团队";
+      _cont = (<div className={content} ><p>{msg}</p></div>);
+      _pop_title= "退出团队";
     }else if(isManage == 2){//退出后选中企业/团队
+      _pop_title= "请重新选中企业或团队";
       _cont = <SelectEnter />
     }
 
