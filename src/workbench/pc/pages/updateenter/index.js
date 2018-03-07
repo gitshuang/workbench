@@ -68,7 +68,7 @@ class Updateenter extends Component {
           </Header>
         </div>
         <div className={appBreadcrumb}>
-          <Breadcrumbs data={[{ name:"设置企业" }]} goback={this.goBack}/>
+          <Breadcrumbs data={[{ name:"企业认证" }]} goback={this.goBack}/>
         </div>
 
         <div className={`${page_enterprise} um-content`}>

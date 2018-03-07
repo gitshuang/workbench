@@ -315,7 +315,7 @@ class CreateEnter extends Component {
             </div>
 
             <FormItem showMast={false} labelName={<span>姓名<font color='red'> *&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入联系人姓名" method="blur" inline={true}>
-              <FormControl name="linkman" value={linkman?linkman:""} placeholder="请输入联系人姓名" />
+              <FormControl name="linkman" value={linkman?linkman:""} placeholder="请输入联系人姓名" onChange={(e)=>{this.inputOnChange(e,"linkman")}} placeholder="请输入联系人姓名" />
             </FormItem>
 
             <FormItem showMast={false} valuePropsName='value'  labelName={<span>邮箱<font color='red'> *</font></span>} isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
