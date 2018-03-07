@@ -139,8 +139,8 @@ const reducer = handleActions({
     if(error){
       return state;
     }
-    return {
-      ...state
+    return { 
+      ...state,
     }
   },
 
