@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import CreateEnter from './createEnter';
 import Breadcrumbs from 'components/breadcrumb';
 import Header from 'containers/header';
-import { page_enterprise ,enter_title,enter_cont,hr,hr2,appBreadcrumb} from './style.css';
+import { page_enterprise ,enter_title,enter_cont,hr,hr2,appBreadcrumb,home_none} from './style.css';
 
 @withRouter
 class Enterprise extends Component {
@@ -19,8 +19,9 @@ class Enterprise extends Component {
   render() {
     const { params } = this.props.match;
     const {  teamList  } = this.props;
+    let _class = params.data == "home"?home_none:"";
     return (
-      <div className="um-win">
+      <div className={`um-win ${_class}`}>
         {
           params.data == "home" ? <div className="um-header" style={{ background: "white" }}>
             <Header onLeftClick={this.goBack} iconName={"home"} >

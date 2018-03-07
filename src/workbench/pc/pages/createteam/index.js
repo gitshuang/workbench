@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Breadcrumbs from 'components/breadcrumb';
 import Header from 'containers/header';
 import CreateTeamContent from 'containers/createTeam';
-import { appBreadcrumb} from './style.css';
+import { appBreadcrumb,home_none} from './style.css';
 
 @withRouter
 class CreateTeam extends Component {
@@ -25,10 +25,10 @@ class CreateTeam extends Component {
     }
 
     render(){
-        
         const { params } = this.props.match;
+        let _class = params.data == "home"?home_none:"";
         return(
-            <div className="um-win">
+            <div className={`um-win ${_class}`}>
                 
                 { 
                     params.data == "home" ? <div className="um-header" style={{background:"white"}}>
