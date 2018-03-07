@@ -12,6 +12,7 @@ import SelectEnter from './selectEnter'
 @connect(
   mapStateToProps(
     'exitModal',
+    'exitTeamMsg',
     {
       key: 'userInfo',
       value: (teamconfig,ownProps,root) => {
@@ -57,11 +58,11 @@ class TeamRemoveModal extends Component {
     exitTeam(userId).then(({error, payload}) => {
       this.cancelFn();
       if (error) {
-        return false;
         this.setState({
           isManage: 1,
           msg:payload,
-        })
+        });
+        return false;
       }
       if(userInfo.allowTenants.length == 1){//进入该企业或团队
         if(!userInfo.allowTenants)return;
