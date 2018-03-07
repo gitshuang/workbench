@@ -71,7 +71,7 @@ class Updateenter extends Component {
           <div className={enter_title} >企业认证</div>
           <hr className={hr}/>
           <div className={enter_cont} >
-            <EnterSetting updateenter="upgrade_enter" data={enterData}/>
+            <EnterSetting updateenter="upgrade_enter" data={enterData} btlLabel="升级"/>
           </div> 
         </div>
       </div>

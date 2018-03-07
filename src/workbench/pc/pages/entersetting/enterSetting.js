@@ -59,9 +59,10 @@ class SubmitBtn extends Component {
     }
   }
   render() {
+    const {btlLabel} = this.props;
     return (
       <div className={'u-form-submit'}>
-        <ButtonBrand onClick={this.click} >保存</ButtonBrand>
+        <ButtonBrand onClick={this.click} >{btlLabel?btlLabel:"保存"}</ButtonBrand>
       </div>
     );
   }
@@ -219,6 +220,7 @@ class CreateEnter extends Component {
  }
 
   render() {
+    const {btlLabel} = this.props;
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
       tenantIndustry,invitePermission,joinPermission,address} = this.state;
      
@@ -327,7 +329,7 @@ class CreateEnter extends Component {
               <Nature name="tenantNature" defaultValue={tenantNature?tenantNature:"LegalPerson"} />
             </FormItem> */}
 
-            <SubmitBtn isSubmit />
+            <SubmitBtn isSubmit btlLabel={btlLabel}/>
         </Form>
     );
   }
