@@ -21,7 +21,7 @@ class Nature extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.defaultValue
+      value: props.defaultValue,
     }
   }
 
@@ -89,6 +89,7 @@ class CreateEnter extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      address:{"province":"北京","city":"北京",area:"东城区"}
     }
   }
 
