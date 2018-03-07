@@ -2,7 +2,7 @@
     "data": {
         "content": [
             {
-                "isAdmin": true,
+                "isAdmin": false,
                 "userEmail": "测试内容8w48",
                 "userId": "测试内容4d1b",
                 "userMobile": "测试内容6i54",

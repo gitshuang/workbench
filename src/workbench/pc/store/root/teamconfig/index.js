@@ -8,6 +8,8 @@ const {
   createTeam,             // 保存
   
   getUserList,            // 获取userlist api
+  openManagerModal,       // 打开用户升级管理员弹窗
+  closeManagerModal,      // 关闭用户升级管理员弹窗
   userToAdmin,            // 用户升级管理员
   adminToUser,            // 管理员降级用户
   openRemoveModal,        // 打开删除用户的弹窗
@@ -35,6 +37,7 @@ const {
 
 const defaultState = {
   teamData : {},          //  保存成功之后 返回的团队信息
+  managerModal: false,    //  升级管理员弹窗开关
   removeModal: false,     //  删除弹窗开关
   upgradeModal: false,    //  升级为企业弹窗开关
   transferModal: false,   //  移交团队弹窗开关
@@ -76,6 +79,14 @@ const reducer = handleActions({
       userList: payload
     };
   },
+  [openManagerModal]: (state) => ({
+    ...state,
+    managerModal: true
+  }),
+  [closeManagerModal]: (state) => ({
+    ...state,
+    managerModal: false
+  }),
   [userToAdmin]: state => state,
   [adminToUser]: state => state,
 

@@ -6,6 +6,7 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 
+import TeamManagerModal from 'containers/teamManagerModal';
 import TeamRemoveModal from 'containers/teamRemoveModal';
 import TeamUpgradeModal from 'containers/teamUpgradeModal';
 import TeamTransferModal from 'containers/teamTransferModal';
@@ -35,6 +36,7 @@ const {
   createTeam,
   userToAdmin,            // 用户升级管理员
   adminToUser,            // 管理员降级用户
+  openManagerModal,       
   openRemoveModal,
   closeRemoveModal,
   openUpgradeModal,
@@ -71,6 +73,7 @@ import {
 @connect(
   mapStateToProps(
     'teamData',
+    'managerModal',
     'removeModal',      //  团队成员删除弹窗开关
     'upgradeModal',     //  升级为企业弹窗开关
     'transferModal',    //  移交团队弹窗开关
@@ -99,6 +102,7 @@ import {
     createTeam,             // 保存团队基本设置
     userToAdmin,            // 用户升级管理员
     adminToUser,            // 管理员降级用户
+    openManagerModal,       // 打开升级管理员弹窗
     openRemoveModal,        // 团队成员打开删除弹窗
     openUpgradeModal,       // 打开升级为企业弹窗
     openTransferModal,      // 打开移交团队弹窗
@@ -129,7 +133,7 @@ class CreateTeamContent extends Component {
       joinPermission: "1",    // 加入权限
 
       btnType: "web",         // 团队应用当前按钮
-      deleteMemberId: "",     // 选择删除成员的ID
+      currMemberId: "",     // 选择删除成员的ID
       webApplication: [],     //  web端应用
       mobApplication: [],     //  移动端应用
       cliApplication: [],     //  client 应用
@@ -512,25 +516,17 @@ class CreateTeamContent extends Component {
     console.log(`selected ${value}`);
     const { userToAdmin, adminToUser, requestError,requestSuccess } = this.props;
     let { newUserList } = this.state;
+    this.setState({
+      currMemberId: id
+    });
     if(value == "deleteMember"){
-      this.deleteMember(id);
+      const {openRemoveModal} = this.props;
+      openRemoveModal();
       return false;
     }
     if (value == "manage"){
-      userToAdmin( id ).then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-        }
-        newUserList.forEach((item,index) => {
-          if (item.userId == id){
-            item.admin = true
-          }
-        });
-        this.setState({
-          newUserList
-        });
-        requestSuccess();
-      });
+      const { openManagerModal } = this.props;
+      openManagerModal();
       return false;
     }
     adminToUser( id ).then(({ error, payload }) => {
@@ -549,14 +545,6 @@ class CreateTeamContent extends Component {
     });
 
   };
-  // 删除用户
-  deleteMember = (id) => {
-    this.setState({
-      deleteMemberId: id
-    });
-    const {openRemoveModal} = this.props;
-    openRemoveModal();
-  }
   // 更改search 内容
   changeSearchFn = (e) => {
     let searchVal = e.target.value;
@@ -727,7 +715,7 @@ class CreateTeamContent extends Component {
         <Item key="3">退出团队</Item>
       </Menu>
     );
-    const { removeModal, upgradeModal, transferModal, dismissModal, exitModal, userInfo } = this.props;
+    const { managerModal, removeModal, upgradeModal, transferModal, dismissModal, exitModal, userInfo } = this.props;
     return (
       <div className={wrap}>
         <div className={header}>
@@ -766,8 +754,14 @@ class CreateTeamContent extends Component {
           </Tabs>
         </div>
         {
+          managerModal ? <TeamManagerModal
+            currMemberId = { this.state.currMemberId }
+            queryUser = { ()=>{this.queryUser()} }
+          /> : null
+        }
+        {
           removeModal ? <TeamRemoveModal
-            deleteMemberId = { this.state.deleteMemberId }
+            currMemberId = { this.state.currMemberId }
             queryUser = { ()=>{this.queryUser()} }
           /> : null
         }

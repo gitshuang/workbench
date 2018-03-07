@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions';
-const { removeUser, closeRemoveModal } = teamconfigActions;
+
+const { userToAdmin, closeManagerModal } = teamconfigActions;
 import PopDialog from 'components/pop';
 import {content} from './index.css';
 @connect(
@@ -10,13 +11,13 @@ import {content} from './index.css';
 
   ),
   {
-    removeUser,
-    closeRemoveModal
+    userToAdmin,
+    closeManagerModal
   }
 )
 
 
-class TeamRemoveModal extends Component {
+class TeamManagerModal extends Component {
 
   constructor(props) {
     super(props);
@@ -24,19 +25,10 @@ class TeamRemoveModal extends Component {
 
     }
   }
-
-  componentWillMount() {
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-
-  }
-
   // 删除确认
   configFn = () => {
-    const { removeUser, currMemberId, queryUser } = this.props;
-    removeUser(currMemberId).then(({error, payload}) => {
+    const { userToAdmin, currMemberId, queryUser } = this.props;
+    userToAdmin( currMemberId ).then(({ error, payload }) => {
       if (error) {
         console.log(payload);
       }
@@ -47,8 +39,8 @@ class TeamRemoveModal extends Component {
 
   // 取消
   cancelFn = () => {
-    const { closeRemoveModal } = this.props;
-    closeRemoveModal();
+    const { closeManagerModal } = this.props;
+    closeManagerModal();
   }
 
   render() {
@@ -56,12 +48,12 @@ class TeamRemoveModal extends Component {
       <PopDialog
           className="team_remove_modal"
           show={ true }
-          title="确认移除所选用户?"
+          title="设置管理员"
           backup={false}
           close={this.cancelFn} 
           btns={[
             {
-              label: '删除',
+              label: '设置管理员',
               fun: this.configFn,
             },
             {
@@ -71,10 +63,10 @@ class TeamRemoveModal extends Component {
           ]} 
           >
           <div className={content} >
-            确认移除所选用户？
+            确定设置当前用户为管理员？
           </div>
         </PopDialog>
     )
   }
 }
-export default TeamRemoveModal;
+export default TeamManagerModal;
