@@ -227,7 +227,6 @@ class CreateTeam extends Component {
   render() {
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
       tenantIndustry,invitePermission,joinPermission,address} = this.state;
-
       let newTenantAddress = "";
       if(tenantAddress){
         let _adds = tenantAddress.split("|");
@@ -256,7 +255,7 @@ class CreateTeam extends Component {
                         style={{ width: 338, marginRight: 6 }}
                         onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                         >
-                        <Option value="1">全员邀请 </Option>
+                        <Option value="1">全员邀请</Option>
                         <Option value="2">全员禁止</Option>
                         <Option value="0">仅管理员可邀请</Option>
                     </Select>

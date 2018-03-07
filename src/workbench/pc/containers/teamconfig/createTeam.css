@@ -180,11 +180,9 @@
   height:32px;
   background:rgba(255,255,255,1);
 }
-
-:global(.team_cont .u-form-submit)>button{
-  margin-left: 0px;
-  width:80px;
-}
-:global(.team_cont .u-select-selection-rendered){
+.team_cont :global( .u-select-selection-rendered){
   line-height: 36px;
+}
+.team_cont :global(.u-select-selection--single){
+  height: 36px !important;
 }

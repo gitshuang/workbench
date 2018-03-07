@@ -91,23 +91,36 @@ class CreateEnter extends Component {
     }
   }
 
-  componentWillMount(){
-    const { requestSuccess, requestError, getEnterInfo} = this.props;
-    let param = "123";
-    getEnterInfo(param).then(({error, payload}) => {
-      if (error) {
-        requestError(payload);
-      }
-      requestSuccess();
-      let _tenantAddress = payload["tenantAddress"];
-      if(_tenantAddress){
-        let _addres = _tenantAddress.split("|");
-        payload["address"] = {province:_addres[0]?_addres[0]:"",city:_addres[1]?_addres[1]:"",area:_addres[2]?_addres[2]:""};
-      }
-      this.setState({
-        ...payload
-      })
-    });
+  // componentWillMount(){
+  //   const { requestSuccess, requestError, getEnterInfo} = this.props;
+  //   let param = "123";
+  //   getEnterInfo(param).then(({error, payload}) => {
+  //     if (error) {
+  //       requestError(payload);
+  //     }
+  //     requestSuccess();
+  //     let _tenantAddress = payload["tenantAddress"];
+  //     if(_tenantAddress){
+  //       let _addres = _tenantAddress.split("|");
+  //       payload["address"] = {province:_addres[0]?_addres[0]:"",city:_addres[1]?_addres[1]:"",area:_addres[2]?_addres[2]:""};
+  //     }
+  //     this.setState({
+  //       ...payload
+  //     })
+  //   });
+  // }
+
+  componentWillReceiveProps(nextProps){
+    const {data} = nextProps; 
+    if(data == null)return;
+    let _tenantAddress = data["tenantAddress"];
+    if(_tenantAddress){
+      let _addres = _tenantAddress.split("|");
+      data["address"] = {province:_addres[0]?_addres[0]:"",city:_addres[1]?_addres[1]:"",area:_addres[2]?_addres[2]:""};
+    }
+    this.setState({
+        ...data
+    })
   }
 
   checkForm = (flag, data) => {
@@ -229,7 +242,8 @@ class CreateEnter extends Component {
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'> *</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     name="tenantIndustry"
-                    defaultValue={tenantIndustry?tenantIndustry:"C"}
+                    defaultValue="A"
+                    value={tenantIndustry?tenantIndustry:"A"}
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
                     >

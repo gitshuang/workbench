@@ -6,7 +6,7 @@ import rootActions from 'store/root/actions';
 // import HeaderPage from './headerPage';
 import Header from 'containers/header';
 import EstablishContent from 'containers/establishContent'
-import { page_home ,appBreadcrumb} from './style.css';
+import { page_home ,appBreadcrumb,establis_page} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 import Breadcrumbs from 'components/breadcrumb';
 
@@ -33,9 +33,6 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 class EstablishUserCenter extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-           
-        };
     }
 
     componentDidMount() {
@@ -57,7 +54,7 @@ class EstablishUserCenter extends Component {
         const { userInfo } = this.props;
         const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
         return (
-            <div className={`um-win ${page_home}`} >
+            <div className={`um-win ${page_home} ${establis_page}`} >
                 <div className="um-header" style={{background:"white"}}>
                     {/* <Header leftContent = { leftContent } /> */}
                     {/* <HeaderPage headerData={headerData}/> */}
