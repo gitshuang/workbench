@@ -1,7 +1,7 @@
 {
     "status": 1,
     "data": {
-        "company": "新[王石]企业账户一",
+        "company": "团队测试账户一修改1002",
         "userAvator": "https://cdn.yonyoucloud.com/dev/yht/avatar/style/images/avatar/0c294160-fad0-412c-b6c5-47b4bd28dda2/1513684377716.png",
         "userEmail": "wangsh*****@yonyou.com",
         "userName": "王石",
@@ -10,7 +10,7 @@
         "userCode": "yy_6323278514397119500VYfYyY",
         "roleIds": null,
         "roles": null,
-        "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/df0d62e4-f5fc-49fa-884a-71b43c44bbff/1001.png",
+        "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/5b099c7b-5dde-49e2-8417-79aa1e225170/1001.png",
         "redPacketsNum": 0,
         "gloriesNum": 0,
         "allowTenants": [
@@ -114,6 +114,17 @@
                 "enterPrise": false
             },
             {
+                "tenantId": "hvtsv4fp",
+                "tenantName": "ggggggg",
+                "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/240f7124-de6b-482a-bca8-f14bb1d2cde5/1001.png",
+                "admin": true,
+                "team": 1,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": false
+            },
+            {
                 "tenantId": "hy0s3xal",
                 "tenantName": "团队2001",
                 "logo": null,
@@ -134,17 +145,6 @@
                 "certificated": false,
                 "status": 1,
                 "enterPrise": true
-            },
-            {
-                "tenantId": "lk6gdnal",
-                "tenantName": "团队测试账户001",
-                "logo": null,
-                "admin": true,
-                "team": 1,
-                "type": 0,
-                "certificated": false,
-                "status": 1,
-                "enterPrise": false
             },
             {
                 "tenantId": "mon35zum",
@@ -213,6 +213,17 @@
                 "enterPrise": true
             },
             {
+                "tenantId": "ued7w3bj",
+                "tenantName": "9999",
+                "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/1b8f38d3-c2e4-48b3-9a76-2473fd93408e/1001.png",
+                "admin": true,
+                "team": 0,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": true
+            },
+            {
                 "tenantId": "wqqfu1b6",
                 "tenantName": "23423",
                 "logo": null,
@@ -246,6 +257,17 @@
                 "enterPrise": true
             },
             {
+                "tenantId": "zw5c00yu",
+                "tenantName": "王宁团队成员1",
+                "logo": null,
+                "admin": false,
+                "team": 1,
+                "type": 0,
+                "certificated": false,
+                "status": 1,
+                "enterPrise": false
+            },
+            {
                 "tenantId": "zxb0umwj",
                 "tenantName": "新[王石]企业账户一",
                 "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/df0d62e4-f5fc-49fa-884a-71b43c44bbff/1001.png",
@@ -253,10 +275,30 @@
                 "team": 0,
                 "type": 0,
                 "certificated": false,
-                "status": 0,
+                "status": 1,
                 "enterPrise": true
             }
         ],
+        "currentTeamConfig": {
+            "createTime": 1520424498887,
+            "modifiedTime": null,
+            "ts": null,
+            "creator": null,
+            "modifier": null,
+            "tenantId": "hp564zwv",
+            "tenantName": "团队测试账户一修改1002",
+            "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/5b099c7b-5dde-49e2-8417-79aa1e225170/1001.png",
+            "linkman": null,
+            "tenantAddress": null,
+            "tenantEmail": null,
+            "tenantIndustry": null,
+            "tenantTel": null,
+            "invitePermission": "0",
+            "joinPermission": "1",
+            "allowExit": "1",
+            "tenantSize": "A",
+            "terminal": "web"
+        },
         "admin": true
     }
 }

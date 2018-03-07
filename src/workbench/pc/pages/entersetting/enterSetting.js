@@ -17,41 +17,41 @@ import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom} from './style
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter,getEnterInfo } = homeActions;
 
-class Nature extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: props.defaultValue,
-    }
-  }
+// class Nature extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       value: props.defaultValue,
+//     }
+//   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.defaultValue != this.defaultValue){
-      this.setState({
-        value: nextProps.defaultValue
-      })
-    }
-  }
+//   componentWillReceiveProps(nextProps){
+//     if(nextProps.defaultValue != this.defaultValue){
+//       this.setState({
+//         value: nextProps.defaultValue
+//       })
+//     }
+//   }
 
-  onChange = (value) => {
-    this.setState({
-      value
-    });
-    // this.props.onChange(value);
-  }
+//   onChange = (value) => {
+//     this.setState({
+//       value
+//     });
+//     // this.props.onChange(value);
+//   }
 
 
-  render() {
-    return (
-      <Radio.RadioGroup
-        selectedValue={this.state.value}
-        onChange={this.onChange} >
-        <Radio value="0" >禁止</Radio>
-        <Radio value="1" >允许</Radio>
-      </Radio.RadioGroup>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <Radio.RadioGroup
+//         selectedValue={this.state.value}
+//         onChange={this.onChange} >
+//         <Radio value="0" >禁止</Radio>
+//         <Radio value="1" >允许</Radio>
+//       </Radio.RadioGroup>
+//     );
+//   }
+// }
 class SubmitBtn extends Component {
   click = () => {
     if (typeof this.props.onClick === 'function') {
@@ -299,7 +299,11 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>允许退出<font color='red'> *</font></span>} isRequire={false} method="change" inline={true}>
-              <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} onChange={this.allowExitChange} />
+              {/* <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} onChange={this.allowExitChange} /> */}
+              <Radio.RadioGroup name="allowExit" selectedValue={this.state.value} onChange={this.allowExitChange} selectedValue={allowExit?allowExit:"0"}>
+                <Radio value="0" >禁止</Radio>
+                <Radio value="1" >允许</Radio>
+              </Radio.RadioGroup> 
             </FormItem>
 
             <div className={lxr_hr}>

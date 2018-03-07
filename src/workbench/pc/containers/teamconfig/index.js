@@ -602,7 +602,21 @@ class CreateTeamContent extends Component {
   // 设置团队成员
   teamMember = () => {
     const { newUserList } = this.state;
-    const { userList, activePage } = this.props;
+    const {
+      userInfo: {
+        admin,
+        currentTeamConfig:{invitePermission}
+      },
+      userList, activePage
+    } = this.props;
+    
+    let _invitePermission = false;
+    if(invitePermission == "0"){
+      _invitePermission = admin;
+    }else if(invitePermission == "1"){
+      _invitePermission = true;
+    }
+
     return (
       <div className={box3}>
         <div className = {memberTit+" um-box" }>
@@ -631,7 +645,9 @@ class CreateTeamContent extends Component {
           </div>
           <div className={memberBtns + " um-bf1 um-box-vc"}>
             <Checkbox colors="info" onChange={this.changeCheck}>只显示管理员</Checkbox>
-            <Button colors="danger" onClick={this.inviteMember}>邀请成员</Button>
+            {
+              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>邀请成员</Button>:null
+            }
           </div>
         </div>
 

@@ -337,52 +337,35 @@ class UserInfoContainer extends Component {
         admin,
         logo,
         company,
+        currentTeamConfig:{allowExit,invitePermission}
       },
       requestDisplay,
       exitModal
     } = this.props;
-
-    let _accountMenuDataItem =[
-      {name:"userInfo",value:"个人信息",fun:this.handleChange2},
-      {name:"accountManagement",value:"帐号设置",fun:this.handleChange2},
-      {name:"safetyPick",value:"安全评级",fun:this.handleChange2},
-      {name:"password",value:"修改密码",fun:this.handleChange2}
-    ];
-    let renderAllow = <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")} label="帐号设置" dataItem={_accountMenuDataItem} />
-
-    // let _li = [];//最近使用列表
-    // this.state.dataList.forEach((da,i)=>{
-    //   let applicationName = da.service.application.applicationName;
-    //     _li.push(<li key={i}>
-    //       <div className={usedIcon}><img src={img1} /></div>
-    //       <div className={`${used} ${clearfix}`}>
-    //         <div className={`${usedModule} ${clearfix}`}>
-    //           <div className={`${module} ${clearfix}`}>
-    //             <div className={usedTit}>{applicationName}</div>
-    //             <div className={lastTime}>{da.accessTime}</div>
-    //           </div>
-    //           <div className={usedService}>{da.service.serviceName}</div>
-    //         </div>
-    //       </div>
-    //     </li>);
-    // })
-
-    // let lis = [];//推广服务列表
-    // this.state.promotionList.forEach((item,index)=>{
-    //   lis.push(<li key={index} className={(index+1)%4 == 0?line_end:null}>
-    //       <div className={serviceImg}>
-    //         <section><img src={img1}/></section>
-    //         <div className={serviceName}>{item.serviceName}</div>
-    //       </div>
-    //     </li>);
-    // })
-
-    let _menuDataItem =[
-      {name:"language",value:"界面语言",fun:this.handleChange},
-      {name:"message",value:"消息",fun:this.handleChange}
-    ];
-
+ 
     let _titleType = this.getCompanyType();
+
+    let _allowExit = null;
+    if(allowExit!="0"){
+      _allowExit = (<li>
+        <Button
+          shape="border"
+          size="sm"
+          onClick={this.exitOnclick}>
+          <Icon type="staff" />退出团队
+        </Button>
+      </li>);
+    };
+
+    // <Option value="1">全员邀请 </Option>
+    // <Option value="2">全员禁止</Option>
+    // <Option value="0">仅管理员可邀请</Option>
+    let _invitePermission = false;
+    if(invitePermission == "0"){
+      _invitePermission = admin;
+    }else if(invitePermission == "1"){
+      _invitePermission = true;
+    }
 
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
@@ -398,10 +381,7 @@ class UserInfoContainer extends Component {
             <div className={imgUser}>
               <div className={imgOuter}>
                 {this.getIcon1(imgsrc)}
-              </div>
-              {/* <div className={editPortrait}  >
-                <Icon type="copyreader" title="修改头像" onClick={this.editAvatar}></Icon>
-              </div> */}
+              </div> 
             </div>
             <div>
               <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
@@ -415,20 +395,7 @@ class UserInfoContainer extends Component {
               </ul>
             </div>
           </div>
-        </div>
-        {/* <div>
-          <ul className={`${userBtnList} ${clearfix}`}>
-            <li><Button shape="border" size="sm" onClick={this.accountManage.bind(this)}>账号管理</Button></li>
-            <li><Button shape="border" size="sm" onClick={this.getUserOrder.bind(this)}>我的订单</Button></li>
-            <li>
-              {renderAllow}
-            </li>
-            <li>
-              <DropdownButton getPopupContainer = {()=> document.getElementById("modalId")}
-               label="系统设置" dataItem={_menuDataItem} />
-            </li>
-          </ul>
-        </div> */}
+        </div> 
         <div className={tenantArea}>
           <div className={clearfix}>
             <div className={tenantPortrait}>
@@ -461,19 +428,14 @@ class UserInfoContainer extends Component {
                     </Button>
 
                   </li>
-                ) :
-                <li>
-                    <Button
-                      shape="border"
-                      size="sm"
-                      onClick={this.exitOnclick}>
-                      <Icon type="staff" />退出团队
-                    </Button>
-
-                  </li> }
-              <li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
-              <Icon type="add-friends" />
-              邀请成员</Button></li>
+                ) :_allowExit
+                }
+                
+              {
+                _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
+                <Icon type="add-friends" />
+                邀请成员</Button></li>):null
+              }
             </ul>
             {
               requestDisplay ?
