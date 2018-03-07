@@ -138,14 +138,11 @@ class CreateEnter extends Component {
       _allowExit.value = allowExit;
     }
 
-<<<<<<< HEAD
-=======
     let _linkman = data.find((da)=>da.name == "linkman");
     if(!_linkman.value && _linkman.value == ""){
       _linkman.value = linkman;
     }
-
->>>>>>> 过滤掉当前团队、团队企业操作组件抽取
+    
     data.push({name:"tenantId",value:tenantId});
     requestStart();
     setCreateEnter(
