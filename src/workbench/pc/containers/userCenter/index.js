@@ -72,7 +72,7 @@ const {
     setCutUser,
     getLatestAccessList,
     getPromotionServiceList,
-    // closeRequestDisplay,
+    closeRequestDisplay,
     // openExitModal
   }
 )
@@ -308,11 +308,11 @@ class UserInfoContainer extends Component {
   //   );
   // }
 
-  // // 关闭创建成功后的弹窗
-  // closeRequest = () => {
-  //   const {closeRequestDisplay} = this.props;
-  //   closeRequestDisplay();
-  // }
+  // 关闭创建成功后的弹窗[以后再说tip的关闭]
+  closeRequest = () => {
+    const {closeRequestDisplay} = this.props;
+    closeRequestDisplay();
+  }
 
   gotoCreateEnter =()=>{
     const {
