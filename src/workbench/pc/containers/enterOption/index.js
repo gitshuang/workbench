@@ -84,7 +84,7 @@ class EnterOption extends Component {
     return (
       <div className={enter_option}>
           {
-            compType=="userCenter"?<Button shape="border" onClick={this.onSelectDrop} ><Icon type="staff" />{"退出"+type}</Button>:(<Dropdown
+            compType=="userCenter"?<Button shape="border" onClick={()=>{this.onSelectDrop(data[0])}} ><Icon type="staff" />{"退出"+type}</Button>:(<Dropdown
               trigger={['click']}
               overlay={menus}
               animation="slide-up"
