@@ -17,10 +17,12 @@ class PopDialog extends Component{
     data: PropTypes.any,
   }
 
-  btnClick = (e, da) => {
+  btnClick = (evt, da) => {
+    let e = evt || window.event; 
+    window.event?e.cancelBubble=true:e.stopPropagation(); 
     let _data = this.props.data ? this.props.data : this;
     if(da.fun){
-      da.fun(_data)
+      da.fun(_data,e)
     }
   }
 

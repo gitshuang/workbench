@@ -436,7 +436,7 @@ class UserInfoContainer extends Component {
                   </li>
                 ) :_allowExit
                 }
-
+                
               {
                 _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
                 <Icon type="add-friends" />

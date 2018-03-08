@@ -52,7 +52,7 @@ class TeamRemoveModal extends Component {
   }
 
   // 删除确认
-  configFn = () => {
+  configFn = (da) => {
     const { exitTeam, isManage, userId ,userInfo,data:{serverApi}} = this.props;
     exitTeam(serverApi).then(({error, payload}) => { 
       if (error) {
