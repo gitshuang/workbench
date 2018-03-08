@@ -83,9 +83,7 @@ class EnterOption extends Component {
 
     return (
       <div className={enter_option}>
-          <Button shape="border" size="sm" onClick={()=>{this.onSelectDrop(data[0])}}><Icon type="staff" />{"退出"+type}</Button>
-
-          {/* {
+          {
             compType=="userCenter"?<Button shape="border" size="sm" ><Icon type="staff" />{"退出"+type}</Button>:(<Dropdown
               trigger={['click']}
               overlay={menus}
@@ -94,7 +92,7 @@ class EnterOption extends Component {
             >
               <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
             </Dropdown>)
-          } */}
+          }
           
           {
             dismissModal ? <TeamDismissModal type={type} data={this.data} /> : null
