@@ -13,7 +13,7 @@ import { ButtonDefaultLine } from 'components/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import Icon from 'components/icon';
-import EnterOption from 'containers/enterOption'
+import EnterOption from 'containers/enterOption';
 
 import { page_enterprise ,enter_title,enter_cont,hr,hr2,title,appBreadcrumb
 ,enter_setting} from './style.css';

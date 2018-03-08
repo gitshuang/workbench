@@ -100,6 +100,8 @@ class CreateEnter extends Component {
     if(_tenantAddress){
       let _addres = _tenantAddress.split("|");
       data["address"] = {province:_addres[0]?_addres[0]:"",city:_addres[1]?_addres[1]:"",area:_addres[2]?_addres[2]:""};
+    }else{
+      data["address"] ={province:"北京",city:"北京",area:"东城区"};
     }
     this.setState({
         ...data
@@ -160,7 +162,7 @@ class CreateEnter extends Component {
         return;
       }
       const tenantId = payload.tenantId;
-      localStorage.setItem('create', "1");
+      // localStorage.setItem('create', "1");
       window.location.href = "/?tenantId=" + tenantId + "&switch=true";
     });
   }

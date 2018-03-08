@@ -56,7 +56,12 @@ class EnterOption extends Component {
   }
 
   onSelectDrop = (da) => {
-    const { data,openTransferModal,openDismissModal,openExitModal } = this.props;
+    const { data,openTransferModal,openDismissModal,openExitModal ,compType} = this.props;
+    if(compType=="userCenter"){
+      this.data = da;
+      openExitModal();
+      return;
+    }
     let item = data.find((_da)=>_da.value ==da.key);
     const {key,serverApi} = item;
     this.data = item;
@@ -69,7 +74,7 @@ class EnterOption extends Component {
 
   render() {
     let lis = [];  
-    const { data,type ,dismissModal, exitModal ,userInfo} = this.props;
+    const { data,type,compType ,dismissModal, exitModal ,userInfo} = this.props;
     
     data.forEach((da)=>{
       lis.push(<Item key={da.value} id={da.serverApi} >{da.name}</Item>);
@@ -78,14 +83,19 @@ class EnterOption extends Component {
 
     return (
       <div className={enter_option}>
-          <Dropdown
-            trigger={['click']}
-            overlay={menus}
-            animation="slide-up"
-            onVisibleChange={this.onVisibleChange}
-          >
-            <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
-          </Dropdown>
+          <Button shape="border" size="sm" onClick={()=>{this.onSelectDrop(data[0])}}><Icon type="staff" />{"退出"+type}</Button>
+
+          {/* {
+            compType=="userCenter"?<Button shape="border" size="sm" ><Icon type="staff" />{"退出"+type}</Button>:(<Dropdown
+              trigger={['click']}
+              overlay={menus}
+              animation="slide-up"
+              onVisibleChange={this.onVisibleChange}
+            >
+              <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
+            </Dropdown>)
+          } */}
+          
           {
             dismissModal ? <TeamDismissModal type={type} data={this.data} /> : null
           }

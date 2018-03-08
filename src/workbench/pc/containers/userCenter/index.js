@@ -7,10 +7,10 @@ import Icon from 'components/icon';
 import DropdownButton from 'components/dropdown';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-import teamconfigActions from 'store/root/teamconfig/actions';
-import { getStrLenSubstr } from '@u';
-import TeamExitModal from 'containers/teamExitModal';
+// import teamconfigActions from 'store/root/teamconfig/actions';
+import { getStrLenSubstr } from '@u'; 
 import Button from 'bee/button';
+import EnterOption from 'containers/enterOption';
 // import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee/tabs';
 import onClickOutside from 'react-onclickoutside';
@@ -40,9 +40,9 @@ const {
   getPromotionServiceList
 } = rootActions;
 
-const {
-  openExitModal,
-} = teamconfigActions;
+// const {
+//   openExitModal,
+// } = teamconfigActions;
 
 @withRouter
 @connect(
@@ -52,12 +52,12 @@ const {
     'requestDisplay',
     'latestAccessList',
     'promotionServiceList',
-    {
-      key: 'exitModal',
-      value: (home,ownProps,root) => {
-        return root.teamconfig.exitModal
-      }
-    },
+    // {
+    //   key: 'exitModal',
+    //   value: (home,ownProps,root) => {
+    //     return root.teamconfig.exitModal
+    //   }
+    // },
     {
       namespace: 'home',
     },
@@ -72,8 +72,8 @@ const {
     setCutUser,
     getLatestAccessList,
     getPromotionServiceList,
-    closeRequestDisplay,
-    openExitModal
+    // closeRequestDisplay,
+    // openExitModal
   }
 )
 @onClickOutside
@@ -295,24 +295,24 @@ class UserInfoContainer extends Component {
     window.location.href = `/logout?service=${encodeURIComponent(`${origin?origin:''}/`)}`;
   }
 
-  changeTenant(tenantId){
-    const {
-      location: {
-        origin,
-        pathname,
-        hash,
-      },
-    } = window;
-    window.location.replace(
-      `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
-    );
-  }
+  // changeTenant(tenantId){
+  //   const {
+  //     location: {
+  //       origin,
+  //       pathname,
+  //       hash,
+  //     },
+  //   } = window;
+  //   window.location.replace(
+  //     `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true${hash}`,
+  //   );
+  // }
 
-  // 关闭创建成功后的弹窗
-  closeRequest = () => {
-    const {closeRequestDisplay} = this.props;
-    closeRequestDisplay();
-  }
+  // // 关闭创建成功后的弹窗
+  // closeRequest = () => {
+  //   const {closeRequestDisplay} = this.props;
+  //   closeRequestDisplay();
+  // }
 
   gotoCreateEnter =()=>{
     const {
@@ -321,10 +321,10 @@ class UserInfoContainer extends Component {
     history.push('/establishusercenter');
   }
 
-  exitOnclick=()=>{
-    const { openExitModal } = this.props;
-    openExitModal();
-  }
+  // exitOnclick=()=>{
+  //   const { openExitModal } = this.props;
+  //   openExitModal();
+  // }
 
   render() {
     const {
@@ -345,15 +345,21 @@ class UserInfoContainer extends Component {
  
     let _titleType = this.getCompanyType();
 
+    let comObj = {name:"退出团队",value:"3",serverApi:"team/leave",msg:"退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
+    if(_titleType == "企业"){
+      comObj = {name:"退出企业",value:"3",serverApi:"enter/leave",msg:"退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
+    }
+
     let _allowExit = null;
     if(allowExit!="0"){
       _allowExit = (<li>
-        <Button
+        {/* <Button
           shape="border"
           size="sm"
           onClick={this.exitOnclick}>
-          <Icon type="staff" />退出团队
-        </Button>
+          <Icon type="staff" />退出{_titleType}
+        </Button> */}
+        <EnterOption data={[comObj]}  type={_titleType} compType="userCenter" /> 
       </li>);
     };
 
@@ -430,7 +436,7 @@ class UserInfoContainer extends Component {
                   </li>
                 ) :_allowExit
                 }
-                
+
               {
                 _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
                 <Icon type="add-friends" />
@@ -452,10 +458,6 @@ class UserInfoContainer extends Component {
 
           </div>
         </div>
-
-         {
-          exitModal ? <TeamExitModal isManage={userInfo.admin} userId={userInfo.userId} close={true}/> : null
-         }
       </div>
     );
   }
