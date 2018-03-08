@@ -317,7 +317,7 @@ class SearchContainer extends Component {
           {
             nosearchdata ? (
               <em>没有搜索结果</em>
-            ) : <div className={searchBtnAll} onClick={this.goSearchPage}>更多应用</div>
+            ) : <div className={searchBtnAll} onClick={this.goSearchPage}>更多结果</div>
           }
 
         </div>
