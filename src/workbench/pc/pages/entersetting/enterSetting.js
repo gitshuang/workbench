@@ -142,7 +142,7 @@ class CreateEnter extends Component {
     if(!_linkman.value && _linkman.value == ""){
       _linkman.value = linkman;
     }
-    
+
     data.push({name:"tenantId",value:tenantId});
     requestStart();
     setCreateEnter(
@@ -211,14 +211,13 @@ class CreateEnter extends Component {
   render() {
     const {btlLabel} = this.props;
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
-      tenantIndustry,invitePermission,joinPermission,address,linkman} = this.state; 
+      tenantIndustry,invitePermission,joinPermission,address,linkman} = this.state;
 
       let newTenantAddress = "";
       if(tenantAddress){
         let _adds = tenantAddress.split("|");
         newTenantAddress = _adds[_adds.length-1];
       }
-      console.log(address)
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'>&nbsp;*&nbsp;</font></span>}
@@ -289,7 +288,7 @@ class CreateEnter extends Component {
                 <Select
                     name="joinPermission"
                     defaultValue="1"
-                    value={joinPermission?joinPermission:"1"} 
+                    value={joinPermission?joinPermission:"1"}
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
                     >
