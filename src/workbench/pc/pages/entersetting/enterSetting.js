@@ -110,7 +110,7 @@ class CreateEnter extends Component {
 
   checkForm = (flag, data) => {
     const {setCreateEnter,updateenter} = this.props;
-    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission} = this.state;
+    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission,allowExit,tenantTel} = this.state;
 
     let _logo = data.find((da)=>da.name == "logo");
     if(!_logo.value && _logo.value == ""){
@@ -143,6 +143,11 @@ class CreateEnter extends Component {
     let _linkman = data.find((da)=>da.name == "linkman");
     if(!_linkman.value && _linkman.value == ""){
       _linkman.value = linkman;
+    }
+
+    let _tenantTel = data.find((da)=>da.name == "tenantTel");
+    if(!_tenantTel.value && _tenantTel.value == ""){
+      _tenantTel.value = tenantTel;
     }
 
     data.push({name:"tenantId",value:tenantId});

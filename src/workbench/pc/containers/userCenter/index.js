@@ -7,7 +7,7 @@ import Icon from 'components/icon';
 import DropdownButton from 'components/dropdown';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-// import teamconfigActions from 'store/root/teamconfig/actions';
+import teamconfigActions from 'store/root/teamconfig/actions';
 import { getStrLenSubstr } from '@u'; 
 import Button from 'bee/button';
 import EnterOption from 'containers/enterOption';
@@ -40,9 +40,9 @@ const {
   getPromotionServiceList
 } = rootActions;
 
-// const {
-//   openExitModal,
-// } = teamconfigActions;
+const {
+  openExitModal,
+} = teamconfigActions;
 
 @withRouter
 @connect(
@@ -122,7 +122,10 @@ class UserInfoContainer extends Component {
         requestSuccess();
     });
   }
-  handleClickOutside(e) {
+  handleClickOutside(e) { 
+    if(e.target.getAttribute("type") == "button" || e.target.getAttribute("role") == "dialog"){
+      return;
+    }
     const { hideUserInfoDisplay, userInfoDisplay } = this.props;
     if (userInfoDisplay) {
       hideUserInfoDisplay();
@@ -436,6 +439,8 @@ class UserInfoContainer extends Component {
                   </li>
                 ) :_allowExit
                 }
+                
+                {_allowExit}
                 
               {
                 _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
