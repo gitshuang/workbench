@@ -16,6 +16,7 @@
       "tenantTel": "16878888857",
       "invitePermission": "1",
       "joinPermission": "1",
-      "allowExit": "0"
+      "allowExit": "0",
+      "tenantSize":"C"
   }
 }

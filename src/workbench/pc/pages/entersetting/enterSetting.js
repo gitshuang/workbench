@@ -275,6 +275,7 @@ class CreateEnter extends Component {
             <FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
                 <Select
                     defaultValue="A"
+                    value={tenantSize?tenantSize:"A"}
                     name="tenantSize"
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"tenantSize",value:e})} }
