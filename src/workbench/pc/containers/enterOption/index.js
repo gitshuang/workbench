@@ -74,10 +74,15 @@ class EnterOption extends Component {
 
   render() {
     let lis = [];  
-    const { data,type,compType ,dismissModal, exitModal ,userInfo} = this.props;
-    
+    const { data,type,compType ,dismissModal, exitModal ,userInfo,userInfo:{currentTeamConfig:{allowExit}}} = this.props;
     data.forEach((da)=>{
-      lis.push(<Item key={da.value} id={da.serverApi} >{da.name}</Item>);
+      if(da.id == "allowExit"){
+        if(allowExit == "1"){
+          lis.push(<Item key={da.value} id={da.serverApi} >{da.name}</Item>);
+        }
+      }else{
+        lis.push(<Item key={da.value} id={da.serverApi} >{da.name}</Item>);
+      }
     })
     let menus = (<Menu onClick={this.onSelectDrop}>{lis}</Menu>);
 

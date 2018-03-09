@@ -8,7 +8,9 @@
 .enter_form :global(.area) {
   width: 90px!important;
 }
-
+.enter_form  :global(.u-form-item .u-select){
+  min-width: 100px !important;
+}
 .enter_form :global(.u-input-before){
   line-height: 38px !important;
 }
@@ -37,6 +39,9 @@
 .enter_form :global(textarea) {
   min-height: 100px;
   min-width: 300px;
+}
+.enter_form :global(.u-radio){
+  margin-right: 18px;
 }
 .enter_form :global(.u-form-item){
   width: 100%;
@@ -168,4 +173,8 @@
 
 .home_none :global( .lebra-navbar-right)>div{
   display: none;
+}
+.home_none :global( .u-select-selection-selected-value){
+  color: RGBA(33, 43, 54, 1);
+  font-size: 14px;
 }

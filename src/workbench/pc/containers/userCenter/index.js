@@ -348,9 +348,9 @@ class UserInfoContainer extends Component {
  
     let _titleType = this.getCompanyType();
 
-    let comObj = {name:"退出团队",value:"3",serverApi:"team/leave",msg:"退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
+    let comObj = {id:"allowExit",name:"退出团队",value:"3",serverApi:"team/leave",msg:"退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
     if(_titleType == "企业"){
-      comObj = {name:"退出企业",value:"3",serverApi:"enter/leave",msg:"退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
+      comObj = {id:"allowExit",name:"退出企业",value:"3",serverApi:"enter/leave",msg:"退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
     }
 
     let _allowExit = null;

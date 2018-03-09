@@ -750,8 +750,8 @@ class CreateTeamContent extends Component {
               </Dropdown> */}
 
                <EnterOption data={[
-                {name:"解散团队",value:"2",serverApi:"team/remove",msg:"解散后，当期团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
-                {name:"退出团队",value:"3",serverApi:"team/leave",msg:"退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
+                {id:"aa",name:"解散团队",value:"2",serverApi:"team/remove",msg:"解散后，当期团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
+                {id:"allowExit",name:"退出团队",value:"3",serverApi:"team/leave",msg:"退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
               ]}  type="团队" />
 
             </div>

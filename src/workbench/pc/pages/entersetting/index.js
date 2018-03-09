@@ -113,8 +113,8 @@ class Enterprise extends Component {
           <div className={enter_title}>
             <div className={title}>用友网络科技股份有限公司</div> 
             <EnterOption data={[
-              {name:"解散企业",value:"2",serverApi:"enter/remove",msg:"解散后，当期企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
-              {name:"退出企业",value:"3",serverApi:"enter/leave",msg:"退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
+              {id:"aa",name:"解散企业",value:"2",serverApi:"enter/remove",msg:"解散后，当期企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
+              {id:"allowExit",name:"退出企业",value:"3",serverApi:"enter/leave",msg:"退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
             ]}  type="企业" />
 
           </div>

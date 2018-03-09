@@ -295,7 +295,7 @@
             "tenantTel": null,
             "invitePermission": "0",
             "joinPermission": "1",
-            "allowExit": "1",
+            "allowExit": "0",
             "tenantSize": "A",
             "terminal": "web"
         },

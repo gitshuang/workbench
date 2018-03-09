@@ -133,6 +133,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     overflow-y: auto;
     overflow-x: hidden; 
     max-height: 400px;
+    padding-left: 5px;
 }
 .li_title{
     display: block;
@@ -148,5 +149,6 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 .li_right{
     width: 50px;  
     text-align: center;
+    color: RGBA(74, 81, 93, 0.5);
 } 
  

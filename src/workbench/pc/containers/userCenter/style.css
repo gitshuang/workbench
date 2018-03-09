@@ -486,10 +486,12 @@
   background: transparent;
   line-height: 21px;
   height:21px; 
-  font-size:12px;
+  font-size:12px !important;
+  color:rgba(71,77,84,1);
 }
 .teamBtnList i{
-  font-size: 12px;
+  font-size: 15px; 
+  color: RGBA(117, 127, 140, 1);
   vertical-align: middle;
 }
 .createBtnList li{
@@ -574,7 +576,7 @@
   left: -10px;
   margin-top: -11px;
   border-left-width: 0;
-  border-right-color: rgb(224,224,224);
+  border-right-color:#fff;
 }
 .popconfirm  i::after{
   content: "";

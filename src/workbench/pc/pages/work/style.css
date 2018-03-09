@@ -113,4 +113,14 @@ body{
 }
 :global(.uf-notification:before){
   content: "\e658";
+
+}
+
+.work :global(.u-menu-submenu-inline>.u-menu-submenu-title:after){
+  right: unset;
+  left: 2px;
+  top: -6px;
+  color:RGBA(117, 127, 140, 1);
+  font-size:18px;
+  font-weight: 100;
 }
