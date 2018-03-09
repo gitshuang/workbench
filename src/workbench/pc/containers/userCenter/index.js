@@ -52,12 +52,12 @@ const {
     'requestDisplay',
     'latestAccessList',
     'promotionServiceList',
-    // {
-    //   key: 'exitModal',
-    //   value: (home,ownProps,root) => {
-    //     return root.teamconfig.exitModal
-    //   }
-    // },
+    {
+      key: 'exitModal',
+      value: (home,ownProps,root) => {
+        return root.teamconfig.exitModal
+      }
+    },
     {
       namespace: 'home',
     },
@@ -123,10 +123,14 @@ class UserInfoContainer extends Component {
     });
   }
   handleClickOutside(e) { 
-    if(e.target.getAttribute("type") == "button" || e.target.getAttribute("role") == "dialog"){
+    // if(e.target.getAttribute("type") == "button" || e.target.getAttribute("role") == "dialog"){
+    //   return;
+    // }
+    const { hideUserInfoDisplay, userInfoDisplay ,exitModal} = this.props;
+    if(exitModal){
+      debugger;
       return;
     }
-    const { hideUserInfoDisplay, userInfoDisplay } = this.props;
     if (userInfoDisplay) {
       hideUserInfoDisplay();
     }

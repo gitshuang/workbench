@@ -13,7 +13,7 @@ class Enterprise extends Component {
     super(props);
   }
   goBack = () => {
-    this.props.history.goBack();
+    this.props.history.replace('');
   }
 
   render() {

@@ -67,6 +67,7 @@ class DialogComponent extends Component{
     content: '',
     btns: [],
     show: true,
+    backdrop:true,
   }
   btnClickMaker(fn) {
     const { close } = this.props;
@@ -85,9 +86,10 @@ class DialogComponent extends Component{
       show,
       btns,
       close,
+      backdrop
     } = this.props;
     return(
-      <Modal className="pop_dialog" backdrop={true} show={show}>
+      <Modal className="pop_dialog" backdrop={backdrop} show={show}>
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

@@ -138,7 +138,7 @@ class TeamRemoveModal extends Component {
     return (
       <PopDialog
           className="team_exit_modal"
-          backdrop={false}
+          backdrop={"static"}
           show={ exitModal }
           title={_pop_title}
           backup={false}
