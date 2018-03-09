@@ -82,9 +82,6 @@ class Root extends Component {
         requestError(payload);
       } else {
         requestSuccess();
-        this.setState({
-          loaded: true
-        });
         if(!payload.allowTenants.length){
           history.replace('/establish');
           this.setState({
@@ -103,6 +100,9 @@ class Root extends Component {
           });
           regMessageTypeHandler(this);
         }
+        this.setState({
+          loaded: true
+        });
       }
     });
     // timer(getMessage, 10000);
