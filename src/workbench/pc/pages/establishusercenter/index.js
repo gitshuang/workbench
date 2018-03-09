@@ -40,8 +40,12 @@ class EstablishUserCenter extends Component {
     }
 
     goBack =()=>{
-        this.props.history.replace('');
+        this.props.history.goBack();
     }
+
+    goHome = () => {
+        this.props.history.replace('');
+      }
 
     renderMetadata = (name) => {
         const {metaData} = this.props;
@@ -58,7 +62,7 @@ class EstablishUserCenter extends Component {
                 <div className="um-header" style={{background:"white"}}>
                     {/* <Header leftContent = { leftContent } /> */}
                     {/* <HeaderPage headerData={headerData}/> */}
-                    <Header onLeftClick={ this.goBack } iconName={"home"} >
+                    <Header onLeftClick={ this.goHome } iconName={"home"} >
                         <div>
                             <span>欢迎页</span>
                         </div>

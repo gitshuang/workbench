@@ -71,6 +71,10 @@ class Enterprise extends Component {
     this.props.history.goBack();
   }
 
+  goHome = () => {
+    this.props.history.replace('');
+  }
+
   setOptherData(obj){
     this.tenantIndustry.value = obj.value;
   }
@@ -97,7 +101,7 @@ class Enterprise extends Component {
       <div className="um-win">
         {
           params.data == "home" ? <div className="um-header" style={{ background: "white" }}>
-            <Header onLeftClick={this.goBack} iconName={"home"} >
+            <Header onLeftClick={this.goHome} iconName={"home"} >
             <div>
               <span>设置企业</span>
             </div>

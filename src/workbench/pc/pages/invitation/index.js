@@ -78,6 +78,9 @@ class Invitation extends Component {
   goBack() {
     this.props.history.goBack();
   }
+  goHome = () => {
+    this.props.history.replace('');
+  }
   copyLink = () => {
     this.refs['shortUrl'].select();
     document.execCommand('copy');
@@ -146,7 +149,7 @@ class Invitation extends Component {
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} >
+            <Header onLeftClick={ this.goHome} iconName={"home"} >
               <div>
                 <span>邀请成员</span>
               </div>

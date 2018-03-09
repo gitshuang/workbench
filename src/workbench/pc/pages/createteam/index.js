@@ -23,6 +23,9 @@ class CreateTeam extends Component {
     goBack =()=>{
         this.props.history.goBack();
     }
+    goHome = () => {
+        this.props.history.replace('');
+    }
 
     render(){
         const { params } = this.props.match;
@@ -32,7 +35,7 @@ class CreateTeam extends Component {
                 
                 { 
                     params.data == "home" ? <div className="um-header" style={{background:"white"}}>
-                        <Header onLeftClick={ this.goBack } iconName={"home"} >
+                        <Header onLeftClick={ this.goHome } iconName={"home"} >
                             <div>
                                 <span>创建团队</span>
                             </div>

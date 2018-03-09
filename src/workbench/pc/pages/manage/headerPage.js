@@ -41,8 +41,12 @@ class HeaderPage extends Component {
     // return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
   }
   goback = () => {
+    this.props.history.goBack();
+  }
+  goHome = () => {
     this.props.history.replace('');
   }
+
   componentDidMount() {
     setTimeout(() => {
       window.scrollTo(0, 1)
@@ -59,7 +63,7 @@ class HeaderPage extends Component {
     return (
       <div className={header}>
         <Header
-          onLeftClick={ this.goback }
+          onLeftClick={ this.goHome }
           leftContent={this.getLeftContent()}
           iconName={iconName} >
           <span>首页编辑</span>

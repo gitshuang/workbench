@@ -45,6 +45,10 @@ class Search extends Component {
     }
     setSearchHeadData({appName,brm:[{name:appName}]});
   }
+
+  goHome = () => {
+    this.props.history.replace('');
+  }
  
   render() {
 
@@ -54,7 +58,7 @@ class Search extends Component {
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={ this.goBack.bind(this) } iconName={"home"} >
+            <Header onLeftClick={ this.goHome } iconName={"home"} >
               <div>
                 <span>{appName}</span>
               </div>

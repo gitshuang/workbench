@@ -21,14 +21,18 @@ class Teamconfig extends Component {
     }
 
     goBack =()=>{
-        this.props.history.replace("/");
+        this.props.history.goBack();
+    }
+
+    goHome = () => {
+        this.props.history.replace('');
     }
 
     render(){
         return(
             <div className="um-win">
                 <div className="um-header" style={{background:"white"}}>
-                    <Header onLeftClick={ this.goBack } iconName={"home"} >
+                    <Header onLeftClick={ this.goHome } iconName={"home"} >
                         <div>
                             <span>团队设置</span>
                         </div>
