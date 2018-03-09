@@ -75,11 +75,10 @@ const reducer = handleActions({
       ...last,
       url: prevUrl,
     };
+    let a = newBrm.concat({name})
     return {
       ...state,
-      brm: newBrm.concat({
-        name,
-      }),
+      brm: a
     };
   },
   [removeBrm]: (state, { payload: length }) => {
