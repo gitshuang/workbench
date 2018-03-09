@@ -201,8 +201,7 @@ class Home extends Component {
     openBatchMove();
   }
   // 打开删除的弹窗
-  popOpen = () => {
-    debugger;
+  popOpen = () => { 
     this.setState({
       showModal: true
     });

@@ -71,8 +71,7 @@ class SelectEnter extends Component {
       }
     } = this.props;
 
-    let _dataItem = [];
-    debugger;
+    let _dataItem = []; 
     allowTenants.forEach(({ tenantId: name, tenantName: value, type }) => {
       if(company != value){
         let obj = {

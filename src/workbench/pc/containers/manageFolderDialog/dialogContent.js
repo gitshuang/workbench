@@ -18,8 +18,6 @@ const itemTarget = {
     props.closeFolderDrag();
   },
   drop(props, monitor) {
-    //debugger;
-    //const draggedId = monitor.getItem().id;
   }
 };
 

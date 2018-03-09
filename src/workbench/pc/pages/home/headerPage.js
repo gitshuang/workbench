@@ -110,10 +110,8 @@ class HeaderPage extends Component {
       changeRequestDisplay();
       localStorage.removeItem("create");
     }
-      // let ul = document.getElementById("nav_ul");
-      // debugger;
-      // let b = ul.scrollWidth > ul.clientWidth?true:false;
-      // debugger;
+      // let ul = document.getElementById("nav_ul"); 
+      // let b = ul.scrollWidth > ul.clientWidth?true:false; 
       // this.setState({
       //   btnShow:b
       // })

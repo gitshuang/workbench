@@ -136,8 +136,7 @@ class CreateEnter extends Component {
     this.address = obj.province + obj.city + obj.area;
   }
 
-  setUrl(name,url){
-    debugger;
+  setUrl(name,url){ 
     this.state[name] = url;
     this.setState({
       ...this.state
@@ -145,8 +144,7 @@ class CreateEnter extends Component {
   }
 
   setOptherData=(obj)=>{
-    this.state[obj.name] = obj.value;
-    debugger;
+    this.state[obj.name] = obj.value; 
     this.setState({
       ...this.state
     })

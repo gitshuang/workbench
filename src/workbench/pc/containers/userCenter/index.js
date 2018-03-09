@@ -122,13 +122,9 @@ class UserInfoContainer extends Component {
         requestSuccess();
     });
   }
-  handleClickOutside(e) { 
-    // if(e.target.getAttribute("type") == "button" || e.target.getAttribute("role") == "dialog"){
-    //   return;
-    // }
+  handleClickOutside(e) {
     const { hideUserInfoDisplay, userInfoDisplay ,exitModal} = this.props;
-    if(exitModal){
-      debugger;
+    if(exitModal){ 
       return;
     }
     if (userInfoDisplay) {
@@ -442,9 +438,7 @@ class UserInfoContainer extends Component {
 
                   </li>
                 ) :_allowExit
-                }
-                
-                {_allowExit}
+                } 
                 
               {
                 _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>

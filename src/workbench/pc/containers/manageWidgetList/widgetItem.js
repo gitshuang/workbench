@@ -170,8 +170,7 @@ class WidgetItem extends Component {
     const { deleteFolder,type,currGroupIndex,delectService,parentId } = this.props;
     if(type === "pop"){
      delectService({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
-    }else{
-      // debugger;
+    }else{ 
       deleteFolder(data.widgetId);
     }
     this.setState({
