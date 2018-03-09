@@ -110,7 +110,7 @@ class CreateEnter extends Component {
 
   checkForm = (flag, data) => {
     const {setCreateEnter,updateenter} = this.props;
-    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission,allowExit,tenantTel} = this.state;
+    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission,allowExit,tenantTel,tenantSize} = this.state;
 
     let _logo = data.find((da)=>da.name == "logo");
     if(!_logo.value && _logo.value == ""){
@@ -148,6 +148,11 @@ class CreateEnter extends Component {
     let _tenantTel = data.find((da)=>da.name == "tenantTel");
     if(!_tenantTel.value && _tenantTel.value == ""){
       _tenantTel.value = tenantTel;
+    }
+
+    let _tenantSize = data.find((da)=>da.name == "tenantSize");
+    if(!_tenantSize.value && _tenantSize.value == ""){
+      _tenantSize.value = tenantSize;
     }
 
     data.push({name:"tenantId",value:tenantId});
@@ -218,7 +223,7 @@ class CreateEnter extends Component {
   render() {
     const {btlLabel} = this.props;
     const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
-      tenantIndustry,invitePermission,joinPermission,address,linkman} = this.state;
+      tenantIndustry,invitePermission,joinPermission,address,linkman,tenantSize} = this.state;
 
       let newTenantAddress = "";
       if(tenantAddress){
@@ -266,6 +271,24 @@ class CreateEnter extends Component {
                     <Option value="T">国际组织</Option>
                 </Select>
             </FormItem>
+
+            <FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
+                <Select
+                    defaultValue="A"
+                    name="tenantSize"
+                    style={{ width: 338, marginRight: 6 }}
+                    onChange={(e)=>{this.setOptherData({name:"tenantSize",value:e})} }
+                    >
+                    <Option value="A">0－50</Option>
+                    <Option value="B">51-100</Option>
+                    <Option value="C">101-200</Option>
+                    <Option value="D">201-500</Option> 
+                    <Option value="E">501-1000</Option>
+                    <Option value="F">1001－2000</Option>
+                    <Option value="G">>2000人</Option>
+                </Select>
+            </FormItem>
+
             {
               address ? (
                 <FormItem showMast={false} labelName={<span>企业地址<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>

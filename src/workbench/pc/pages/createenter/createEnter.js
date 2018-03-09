@@ -193,6 +193,23 @@ class CreateEnter extends Component {
                     <Option value="T">国际组织</Option>
                 </Select>
             </FormItem>
+ 
+             <FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
+                <Select
+                    defaultValue="A"
+                    name="tenantSize"
+                    style={{ width: 338, marginRight: 6 }}
+                    onChange={(e)=>{this.setOptherData({name:"tenantSize",value:e})} }
+                    >
+                    <Option value="A">0－50</Option>
+                    <Option value="B">51-100</Option>
+                    <Option value="C">101-200</Option>
+                    <Option value="D">201-500</Option> 
+                    <Option value="E">501-1000</Option>
+                    <Option value="F">1001－2000</Option>
+                    <Option value="G">>2000人</Option>
+                </Select>
+            </FormItem>
 
             <FormItem showMast={false} labelName={<span>企业地址<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
               <CitySelect name='address' onChange={this.onChange}/>

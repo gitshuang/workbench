@@ -14,7 +14,7 @@
 }
 
 .enter_form  :global(.u-form-item .u-select){
-  min-width: 100px !important;
+  min-width: 106px !important;
 }
 
 .enter_form :global(.uf.uf-calendar) {
@@ -109,11 +109,11 @@
   height:36px;
   line-height: 36px;
 }
-.enter_form >span:nth-child(5) :global(.u-form-item){
+/* .enter_form >span:nth-child(5) :global(.u-form-item){
   margin-top: -20px;
-}
+} */
 .enter_form :global(.u-city-select){
-  display: inline-flex;
+  display: inline-flex; 
 }
 .enter_form :global(.u-select-lg .u-select-selection--single){
   width: 271px;

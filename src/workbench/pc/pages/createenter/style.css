@@ -6,10 +6,10 @@
 .enter_form :global(.province),
 .enter_form :global(.city),
 .enter_form :global(.area) {
-  width: 90px!important;
+  width: 106px!important;
 }
 .enter_form  :global(.u-form-item .u-select){
-  min-width: 100px !important;
+  min-width: 106px !important;
 }
 .enter_form :global(.u-input-before){
   line-height: 38px !important;
@@ -108,9 +108,9 @@
   line-height: 36px;
   display: none;
 }
-.enter_form >span:nth-child(5) :global(.u-form-item){
+/* .enter_form >span:nth-child(5) :global(.u-form-item){
   margin-top: -20px;
-}
+} */
 
 .enter_form :global(.u-city-select){
   display: inline-flex;
@@ -178,3 +178,6 @@
   color: RGBA(33, 43, 54, 1);
   font-size: 14px;
 }
+.home_none :global( .tenant_size){
+  background: red;
+} 
