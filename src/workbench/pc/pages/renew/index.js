@@ -25,7 +25,7 @@ import {
 class Account extends Component {
 
   componentDidMount(){
-    this.props.addBrm({name:'应用详情',url:'/market/details'})
+    //this.props.addBrm({name:'应用详情',url:'/market/details'})
   }
  
 
