@@ -2,38 +2,53 @@ import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
 import { openGlobalDialog, closeGlobalDialog } from 'components/pop';
 import store from "store";
-import { postMessageToWin } from "@u";
+import { postMessageToWin, get } from "@u";
 
 const { addBrm } = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
 const handlers = {
   openService({ serviceCode, data, tenantId }) {
     if (tenantId && serviceCode) {
-      openGlobalDialog({
-        title: '即将切换租户',
-        content: '是否切换租户？',
-        btns: [
-          {
-            type: 'brand',
-            label: '切换',
-            fun: () => {
-              const {
+      get('/service/getServiceByTenantIdAndServiceCode', {
+        serviceCode,
+        tenantId,
+      }).then((data) => {
+        const { crossTenant, serveName, url } = data;
+        if (crossTenant) {
+          openGlobalDialog({
+            title: '即将切换租户',
+            content: '是否切换租户？',
+            btns: [
+              {
+                type: 'brand',
+                label: '切换',
+                fun: () => {
+                  const {
                 location: {
                   origin,
-                  pathname,
-                  hash,
+                    pathname,
+                    hash,
                 },
               } = window;
-              window.localStorage.setItem('openServiceData', data);
-              window.location.replace(
-                `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${ serviceCode }`,
-              );
-            },
-          },
-          {
-            label: '不切换',
-          },
-        ],
+                  window.localStorage.setItem('openServiceData', data);
+                  window.location.replace(
+                    `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${serviceCode}`,
+                  );
+                },
+              },
+              {
+                label: '不切换',
+              },
+            ],
+          });
+        } else {
+          openGlobalDialog({
+            title: serveName,
+            content: (<iframe style={{width: '100%', height: 300}} src={url} />),
+          })
+        }
+      }, (err) => {
+        console.log(err);
       });
     } else if (serviceCode) {
       if (data && typeof data === 'object') {

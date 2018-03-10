@@ -61,7 +61,7 @@
   border-top: 2px solid #A7A7A7;
   height: 46px;
   color: #888;
-  border-left: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
   background:rgba(246,247,248,1);
   box-sizing: border-box;
 }
