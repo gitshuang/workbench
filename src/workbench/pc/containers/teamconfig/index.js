@@ -459,8 +459,9 @@ class CreateTeamContent extends Component {
     return true;
   }
 
-  openXufei = () => {
-    alert("续费")
+  openXufei = (id) => {
+    const { history } = this.props;
+    history.push('/renew/'+ id);
   }
   // 设置团队应用
   teamApplication = () => {
@@ -494,7 +495,7 @@ class CreateTeamContent extends Component {
                     </div>
                     <div className="um-bf1 tr">
                       {
-                        this.esitXufei(item.expired) ? <Button onClick={this.openXufei}>续费</Button> : null
+                        this.esitXufei(item.expired) ? <Button onClick={()=>{this.openXufei(item.applicationId)}}>续费</Button> : null
                       }
 
                     </div>

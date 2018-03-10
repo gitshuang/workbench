@@ -16,6 +16,7 @@ import Account from 'pages/account';
 import Teamconfig from 'pages/teamconfig';
 import UpdateEnter from 'pages/updateenter';
 import Market from 'pages/market';
+import Renew from 'pages/renew';
 
 const routes = [
   {
@@ -106,6 +107,10 @@ const routes = [
     path: '/market',
     component: Market,
   },
+  {
+    path: '/renew/:id',
+    component: Renew
+  }
 ];
 
 export default routes;
