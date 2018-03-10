@@ -28,13 +28,20 @@ import {
 class Account extends Component {
 
   componentDidMount(){
-    if(this.props.brm.length >0){
-      this.props.addBrm({name:'应用市场',url:'/market'})
-
-    }else{
+    //[
+    //  [{name:'全部应用'},
+    //  [{name:'全部应用'},{name:"应用市场"}],
+    //  [{name:'全部应用'},{name:'应用市场'},{name:'应用详情'}]
+    //]
+    if(this.props.brm.length == 0){
       this.props.addBrm({name:'全部应用',url:'/application'})
       this.props.addBrm({name:'应用市场',url:'/market'})
+    }else if(this.props.brm.length  == 1){
+      this.props.addBrm({name:'应用市场',url:'/market'})
+    }else if(this.props.brm.length == 3){
+      this.props.popBrm(1);
     }
+    
   }
  
   goBack = (i) => {
