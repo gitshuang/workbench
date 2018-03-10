@@ -47,8 +47,8 @@ class Account extends Component {
     return (
       <ApplicationWrap name={brmVal.length <= 1?'应用市场':brmVal[brmVal.length-1].name} brms={brmVal.length == 0?[{name:'全部应用'}]:brmVal.slice(0,brmVal.length-1)} goBack={this.goBack}>
         <div className={bg+" um-content um-vbox"}>
-          <iframe className={frameElm} src={'http://localhost:3005'} />
-          {/* <iframe className={frameElm} src={'/diwork-market/appMarket'} /> */}
+          {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
+          <iframe className={frameElm} src={'/diwork-market/appMarket'} />
         </div>
       </ApplicationWrap>
     );
