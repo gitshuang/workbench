@@ -18,6 +18,7 @@ const {
   setPinCancel,
   delTab,
   addBrm,
+  popBrm,
   removeBrm,
   returnDefaultState,
   getServiceInfoWithDetail,
@@ -41,6 +42,7 @@ const defaultState = {
   type: 1,
   menus:[],
   brm:[],
+  brmBackIndex:-1,
   tabs:[],
   titleServiceType: false,
   pinType: false,       // 是否pin上
@@ -60,25 +62,38 @@ function appendSearchParam(url, params) {
 }
 
 const reducer = handleActions({
-  [addBrm]: (
-    state,
-    {
-      payload: {
-        name,
-        url: prevUrl,
-      }
-    }
-  ) => {
-    const newBrm = [...state.brm];
-    const last = newBrm[newBrm.length - 1];
-    newBrm[newBrm.length - 1] = {
-      ...last,
-      url: prevUrl,
-    };
-    let a = newBrm.concat({name})
+  [addBrm]:(state, { payload:data })=> {
+    let nowBrmLast = state.brm.length>0 ? state.brm[state.brm.length-1]:[];//brm的每一项都是一个数组，取最后一个
+    let topBrm = [...nowBrmLast,data];//合并后的最新一个数组面包屑
+    let newBrm = [...state.brm,topBrm]
     return {
       ...state,
-      brm: a
+      brm: newBrm
+    };
+  },
+  [popBrm]:(state, { payload: index })=> {
+    let newBrm = [...state.brm];
+    let backVal;
+    if(index == -1){
+      newBrm.pop();
+      backVal = 1;
+    }else{
+      let stateBrm = state.brm;
+      let popBrmName = stateBrm[stateBrm.length-1][index].name;//面包屑一直展示的是brm的最后一个元素
+      let item;
+      for(let i = 0;i<stateBrm.length ; i++){
+          item=stateBrm[i];
+          if(item[item.length-1].name == popBrmName){
+              backVal = stateBrm.length-1-i;
+              for(let j =stateBrm.length-1-i ; j>0;--j) newBrm.pop();
+              break;
+          }
+      }
+    }
+    return {
+      ...state,
+      brmBackIndex:backVal,
+      brm: newBrm
     };
   },
   [removeBrm]: (state, { payload: length }) => {
