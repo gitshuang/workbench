@@ -58,7 +58,7 @@
   border-radius: 100px ; 
   position: relative;
   background: rgba(190,193,200,1) url("assets/image/uploadImg.svg") no-repeat;
-  background-position: 11px;
+  background-position: 1px;
 }
 .image img{
   width: 64px;
