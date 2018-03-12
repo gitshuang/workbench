@@ -46,6 +46,11 @@ export const createActions = (namespaceObj, ...args) => {
   }
 }
 
+export const logout = () => {
+  const { location: { origin } } = window;
+  window.location.href = `/logout?service=${encodeURIComponent(`${origin ? origin : ''}/`)}`;
+}
+
 export const getHost = (key = 'api') => {
   const hosts = {
     api: {
@@ -101,6 +106,14 @@ const fetchTools = {
             const { status, data, msg } = result;
             if (status) {
               return Promise.resolve(data);
+            } else if (errorCode) {
+              switch (errorCode) {
+                case '000001':
+                  logout();
+                  break;
+                default:
+                  break;
+              }
             }
             return Promise.reject(msg);
           }

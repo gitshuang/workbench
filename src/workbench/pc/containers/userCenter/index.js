@@ -8,7 +8,7 @@ import DropdownButton from 'components/dropdown';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-import { getStrLenSubstr } from '@u'; 
+import { getStrLenSubstr, logout } from '@u';
 import Button from 'bee/button';
 import EnterOption from 'containers/enterOption';
 // import Select from 'bee-select';
@@ -124,7 +124,7 @@ class UserInfoContainer extends Component {
   }
   handleClickOutside(e) {
     const { hideUserInfoDisplay, userInfoDisplay ,exitModal} = this.props;
-    if(exitModal){ 
+    if(exitModal){
       return;
     }
     if (userInfoDisplay) {
@@ -292,11 +292,6 @@ class UserInfoContainer extends Component {
     history.push('/invitation');
     hideUserInfoDisplay();
   }
-  logOut=()=>{
-    const { location: {origin} } = window;
-
-    window.location.href = `/logout?service=${encodeURIComponent(`${origin?origin:''}/`)}`;
-  }
 
   // changeTenant(tenantId){
   //   const {
@@ -345,7 +340,7 @@ class UserInfoContainer extends Component {
       requestDisplay,
       exitModal
     } = this.props;
- 
+
     let _titleType = this.getCompanyType();
 
     let comObj = {id:"allowExit",name:"退出团队",value:"3",serverApi:"team/leave",msg:"退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
@@ -362,7 +357,7 @@ class UserInfoContainer extends Component {
           onClick={this.exitOnclick}>
           <Icon type="staff" />退出{_titleType}
         </Button> */}
-        <EnterOption data={[comObj]}  type={_titleType} compType="userCenter" /> 
+        <EnterOption data={[comObj]}  type={_titleType} compType="userCenter" />
       </li>);
     };
 
@@ -382,7 +377,7 @@ class UserInfoContainer extends Component {
           <div className={userSetting} onClick={this.accountManage.bind(this)}>
             <Icon type="setting" />
           </div>
-          <div className={logOut} onClick={this.logOut}>
+          <div className={logOut} onClick={logout}>
             <Icon type="exit" />
             <span>注销</span>
           </div>
@@ -390,7 +385,7 @@ class UserInfoContainer extends Component {
             <div className={imgUser}>
               <div className={imgOuter}>
                 {this.getIcon1(imgsrc)}
-              </div> 
+              </div>
             </div>
             <div>
               <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
@@ -404,7 +399,7 @@ class UserInfoContainer extends Component {
               </ul>
             </div>
           </div>
-        </div> 
+        </div>
         <div className={tenantArea}>
           <div className={clearfix}>
             <div className={tenantPortrait}>
@@ -438,8 +433,8 @@ class UserInfoContainer extends Component {
 
                   </li>
                 ) :_allowExit
-                } 
-                
+                }
+
               {
                 _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
                 <Icon type="add-friends" />
