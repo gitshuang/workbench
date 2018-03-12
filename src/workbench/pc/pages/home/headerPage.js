@@ -78,10 +78,6 @@ class HeaderPage extends Component {
         company,
       }
     } = this.props;
-
-
-    //return (<img src={logo || logoUrl} className={logoImg}/>);
-    // return <div className={logo_title}>用友网络科技股份有限公司</div>
     return (<DropdownButton
     getPopupContainer={() => document.getElementById("home_header")}
     closeFun={this.closeFun}

@@ -91,7 +91,7 @@ class CreateEnter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address:{province:"北京",city:"北京",area:"东城区"},
+      address:null,
       disabled:true,
     }
   }
@@ -126,7 +126,11 @@ class CreateEnter extends Component {
     }
 
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
+    if(address.province){
       _tenantAddress.value = address.province+"|"+address.city+"|"+address.area+"|"+_tenantAddress.value;
+    }else{
+      _tenantAddress.value =  "北京|北京|东城|"+_tenantAddress.value;
+    }
 
     let _joinPermission = data.find((da)=>da.name == "joinPermission");
     if(!_joinPermission.value && _joinPermission.value == ""){

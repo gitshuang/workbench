@@ -50,13 +50,12 @@ class HeaderPage extends Component {
     const {
       userInfo: {
         logo,
+        company
       }
     } = this.props;
-    // return (<img src={logo || logoUrl} className={logoImg}/>);
-    return <div className={logo_title}>用友网络科技股份有限公司</div>
+    return <div className={logo_title}>{company}</div>
   }
   componentDidMount() {
-    // this.getUserInfo();
     const { changeUserInfoDisplay,changeRequestDisplay } = this.props;
     // 判断是否localstorage中包含这个值
     if(localStorage.getItem("create")) {
