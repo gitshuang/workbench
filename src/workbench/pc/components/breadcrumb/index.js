@@ -12,22 +12,19 @@ class Breadcrumbs extends Component {
     goback: PropTypes.func,
     data:PropTypes.array
   }
-
+  //标配
+  goBack = () => {
+    this.props.history.replace('');
+  }
+  
   //需要新增一个回退函数
   enhancedGoBack = (url,i) =>{
-    let {goBackHistory } = this.props;
-    if(url){
-      this.props.goback(i)
-      if(i == -1){
-        JSON.stringify(goBackHistory)=='{}'? console.log("erroHistoryValue"):goBackHistory.go(-1);
-      }else{
-        let stateBrm = this.props.data;
-        let backVal = stateBrm.length-1-i;
-        JSON.stringify(goBackHistory)=='{}'? console.log("erroHistoryValue"):goBackHistory.go(-backVal);
-        //this.props.goBackHistory.go(-backVal);
-      }
+    let {goBackHistory,goback ,data} = this.props;
+    let backVal = data.length-1-i;
+    if(goback){
+      i==-1 ? goback(i,1) :goback(i,backVal)
     }else{
-      return null;
+      this.goBack();
     }
   }
 

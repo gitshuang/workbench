@@ -44,8 +44,10 @@ class Account extends Component {
     
   }
  
-  goBack = (i) => {
+  goBack = (i,backVal) => {
     this.props.popBrm(i);
+    backVal>0 && this.props.history.go(-backVal)
+
   }
 
   
@@ -54,7 +56,7 @@ class Account extends Component {
     let brmLastVal = brmVal.length > 0 && brmVal[brmVal.length-1];
     let brmLastLen = brmVal.length > 0 && brmVal[brmVal.length-1].length;
     return (
-      <ApplicationWrap name={brmVal.length>0 ? brmLastVal[brmLastLen-1].name:''} brms={brmVal.length>1?brmVal[brmVal.length-2]:[{name:''}]} goBackHistory={this.props.history} goBack={this.goBack}>
+      <ApplicationWrap name={brmVal.length>0 ? brmLastVal[brmLastLen-1].name:''} brms={brmVal.length>1?brmVal[brmVal.length-2]:[{name:''}]}  goBack={this.goBack}>
         <div className={bg+" um-content um-vbox"}>
           {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
           <iframe className={frameElm} src={'/diwork-market/appMarket'} />
