@@ -102,7 +102,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 }
 .create_ent{ 
     cursor: pointer;
-    padding-left: 2px;
+    padding-left: 9px;
     border-top: 1px solid #cccccc;
 }
 .menu_item{

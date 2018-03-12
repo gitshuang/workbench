@@ -93,36 +93,44 @@ body{
   top:40px !important;
 }
 :global(.u-message-notice-light){
-  width:auto !important;
+  width: 236px !important;
+  /* height: 34px; */
   left: 50%;
   transform: translate(-50%);
 }
 :global(.u-message-notice-close){
   display: none;
-}
+} 
 :global(.u-message-notice-description-content){
-  padding:30px 0;
-  font-size: 19px;
-  line-height: 24px;
-  margin-left: 55px;
+  /* padding:30px 0; */
+  font-size: 12px;
+  /* line-height: 24px; */
+  margin-left: 40px;
+  padding-top:10px;
 }
 :global(.u-message-notice-description-icon){
-  background: #00CB7C !important;
-  top:32px;
-  left:20px;
+  background:#fff !important;
+  top: 4px;
+  left: 18px;
   width: 20px;
   height: 20px;
   border-radius: 50% 50%;
 }
 :global(.u-message-notice-description-icon .uf){
-  font-size: 12px;
-  color: #fff;
+  font-size: 19px;
+  color: #FF4C4C4C;
   padding:0;
 }
+
 :global(.uf-notification:before){
-  content: "\e658";
+  content: "\e997";
 
 }
+
+:global(.u-message-notice-description){
+   height: 34px !important;
+}
+
 
 /* .work :global(.u-menu-submenu-inline>.u-menu-submenu-title:after){
   right: unset;

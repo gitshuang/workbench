@@ -10,6 +10,7 @@
     display: -webkit-box;
     justify-content: center;
     align-items: center;
+    margin-top: 16px;
 }
 .WidgetTitle>div:first-child{
     -webkit-box-flex: 1;

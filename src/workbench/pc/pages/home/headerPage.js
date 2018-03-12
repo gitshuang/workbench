@@ -189,7 +189,7 @@ class HeaderPage extends Component {
             <Navbar
               items={list}
               offset={-55}
-              duration={500}
+              duration={0}
               delay={0}
               color={color}
               allBtn={this.state.allBtn}
