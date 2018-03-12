@@ -56,9 +56,12 @@ class TeamRemoveModal extends Component {
     const { exitTeam, isManage, userId ,userInfo,data:{serverApi}} = this.props;
     exitTeam(serverApi).then(({error, payload}) => { 
       if (error) {
-        this.setState({
+        let obj = {
           isManage: 1,
           msg:payload,
+        };
+        this.setState({
+          ...obj
         });
         return false;
       }
