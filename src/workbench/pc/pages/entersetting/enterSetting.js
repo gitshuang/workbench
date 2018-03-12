@@ -118,7 +118,7 @@ class CreateEnter extends Component {
       data["address"] ={province:"北京",city:"北京",area:"东城区"};
     }
     let b = this.tenantSizeOption.find((da)=>da.value == data["tenantSize"]);
-    b?null:data["tenantSize"] = tenantSize[0].value;
+    b?null:data["tenantSize"] = this.tenantSizeOption[0].value;
     this.setState({
         ...data
     })
@@ -139,7 +139,7 @@ class CreateEnter extends Component {
     }
 
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
-    if(address.province){
+    if(address && address.province){
       _tenantAddress.value = address.province+"|"+address.city+"|"+address.area+"|"+_tenantAddress.value;
     }else{
       _tenantAddress.value =  "北京|北京|东城|"+_tenantAddress.value;
@@ -323,7 +323,7 @@ class CreateEnter extends Component {
                 <FormItem showMast={false} labelName={<span>企业地址<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
                   <CitySelect name='address' onChange={this.onCityChange} defaultValue={address}/>
                 </FormItem>
-              ) : <div/>
+              ) : <div />
             }
             <FormItem showMast={false} labelName={<span>地址<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
               <FormControl name="tenantAddress" value={newTenantAddress?newTenantAddress:tenantAddress} onChange={(e)=>{this.inputOnChange(e,"tenantAddress")}} placeholder="最多60个字符" />

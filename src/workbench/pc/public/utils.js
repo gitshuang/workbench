@@ -103,7 +103,7 @@ const fetchTools = {
             } catch (e) {
               return Promise.reject(new Error('接口返回数据无法解析'));
             }
-            const { status, data, msg } = result;
+            const { status, data, msg, errorCode } = result;
             if (status) {
               return Promise.resolve(data);
             } else if (errorCode) {
