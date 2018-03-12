@@ -15,6 +15,7 @@ class Application extends Component {
       name,
       children,
       brms,
+      goBackHistory,
       goBack,
     } = this.props;
     return (
@@ -27,7 +28,7 @@ class Application extends Component {
               </div>
             </Header>
             <div className={appBreadcrumb}>
-              <Breadcrumbs data={brms && brms.length ? [...brms, { name: name }] : [{ name: name }]} goback={goBack || this.goBack}/>
+              <Breadcrumbs data={brms && brms.length ? [...brms, { name: name }] : [{ name: name }]} goBackHistory ={goBackHistory||{}} goback={goBack || this.goBack}/>
             </div>
           </div>
         </div>

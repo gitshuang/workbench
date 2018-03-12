@@ -42,7 +42,7 @@ const defaultState = {
   type: 1,
   menus:[],
   brm:[],
-  brmBackIndex:-1,
+  brmBackVal:-1,
   tabs:[],
   titleServiceType: false,
   pinType: false,       // 是否pin上
@@ -76,7 +76,7 @@ const reducer = handleActions({
     let backVal;
     if(index == -1){
       newBrm.pop();
-      backVal = 1;
+      backVal = 0;
     }else{
       let stateBrm = state.brm;
       let popBrmName = stateBrm[stateBrm.length-1][index].name;//面包屑一直展示的是brm的最后一个元素
@@ -90,9 +90,10 @@ const reducer = handleActions({
           }
       }
     }
+    console.log(backVal);
     return {
       ...state,
-      brmBackIndex:backVal,
+      brmBackVal:backVal,
       brm: newBrm
     };
   },

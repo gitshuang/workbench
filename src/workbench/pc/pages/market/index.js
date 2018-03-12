@@ -15,7 +15,7 @@ import {
 @connect(
   mapStateToProps(
       'brm',
-      'brmBackIndex',
+      'brmBackVal',
       {
           namespace: 'work',
       },
@@ -46,23 +46,6 @@ class Account extends Component {
  
   goBack = (i) => {
     this.props.popBrm(i);
-    //跳转
-    if(i == -1){
-      this.props.history.go(-1);
-    }else{
-      let stateBrm = this.props.brm;
-      let popBrmName = stateBrm[stateBrm.length-1][i].name;//面包屑一直展示的是brm的最后一个元素
-      let item,backVal;
-      for(let i = 0;i<stateBrm.length ; i++){
-          item=stateBrm[i];
-          if(item[item.length-1].name == popBrmName){
-              backVal = stateBrm.length-1-i;
-              break;
-
-          }
-      }
-      this.props.history.go(-backVal);
-    }
   }
 
   
@@ -71,7 +54,7 @@ class Account extends Component {
     let brmLastVal = brmVal.length > 0 && brmVal[brmVal.length-1];
     let brmLastLen = brmVal.length > 0 && brmVal[brmVal.length-1].length;
     return (
-      <ApplicationWrap name={brmVal.length>0 ? brmLastVal[brmLastLen-1].name:'12'} brms={brmVal.length>1?brmVal[brmVal.length-2]:[{name:''}]} goBack={this.goBack}>
+      <ApplicationWrap name={brmVal.length>0 ? brmLastVal[brmLastLen-1].name:''} brms={brmVal.length>1?brmVal[brmVal.length-2]:[{name:''}]} goBackHistory={this.props.history} goBack={this.goBack}>
         <div className={bg+" um-content um-vbox"}>
           {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
           <iframe className={frameElm} src={'/diwork-market/appMarket'} />
