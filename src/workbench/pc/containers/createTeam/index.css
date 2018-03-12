@@ -54,9 +54,11 @@
 .image{
   width: 64px;
   height: 64px;
-  background: rgba(190,193,200,1);
+  /* background: rgba(190,193,200,1); */
   border-radius: 100px ; 
   position: relative;
+  background: rgba(190,193,200,1) url("assets/image/uploadImg.svg") no-repeat;
+  background-position: 11px;
 }
 .image img{
   width: 64px;
