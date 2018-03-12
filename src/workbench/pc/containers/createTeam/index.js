@@ -19,7 +19,8 @@ import {
   item,
   image,
   footer,
-  create_team_cont,footer_hr
+  create_team_cont,footer_hr,
+  upload
 } from './index.css';
 
 @withRouter
@@ -154,7 +155,7 @@ class CreateTeamContent extends Component {
               onChange={(e)=>{this.onChange(e)}}
             />
           </div>
-          <div className={item+" um-box"}>
+          <div className={`${item} um-box ${upload}`}>
             <label>团队头像&nbsp; &nbsp; </label>
             <div className={image}>
                 { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }

@@ -12,11 +12,22 @@
   padding-bottom:15px;
 }
 .enter_form :global(.u-label) {
-  width: 75px;
+  width: 85px;
   text-align: right;
   font-size: 14px;
-  /* color:#797D82; */
+  color:RGBA(71, 77, 84, 1);
 }
+.enter_form :global(.u-label>span) {
+  vertical-align: middle;
+}
+.enter_form :global(.u-label>span>font) {
+  vertical-align: middle;
+}
+.enter_form :global(.input) {
+  font-size: 14px;
+  color:rgba(33,43,54,1);
+}
+
 .enter_form :global(.province),
 .enter_form :global(.city),
 .enter_form :global(.area) {
@@ -113,9 +124,9 @@
   height:36px;
   line-height: 36px;
 }
-.enter_form >span:nth-child(5) :global(.u-form-item){
+/* .enter_form >span:nth-child(5) :global(.u-form-item){
   margin-top: -20px;
-}
+} */
 .enter_form :global(.u-city-select){
   display: inline-flex;
 }
@@ -141,12 +152,13 @@
 
 
 .lxr_hr{
-  width:100%;
   height:1px;
   background:rgba(13,20,36,1);
   opacity:0.1;
   margin-top: -77px;
   margin-bottom: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 .lxr_title{
   margin-left: 76px;
@@ -185,4 +197,7 @@
 }
 .team_cont :global(.u-select-selection--single){
   height: 36px !important;
+}
+.team_cont :global(.u-radio){
+  margin-right: 18px;
 }

@@ -73,8 +73,10 @@
 }
 .content :global(.u-tabs-ink-bar){
   background:rgba(225,76,70,1);
-  border-radius: 2px ; 
-  width: 14px;
+  border-radius: 2px ;
+  width: 14px !important;
+  height: 6px !important;
+  margin-left: 40px;
 }
 .content :global(.u-tabs-top .u-tabs-nav-scroll){
   width: 100%;
@@ -192,10 +194,12 @@
 }
 
 .box2{
-  /* padding: 0 200px;  */
-  padding: 0 16%;
-  background: #fff;
-  min-width: 500px;
+  background: #ffffff;
+  width: 700px;
+  margin: 0 auto;
+  color: rgba(176,178,183,1);
+  font-size: 14px;
+  padding: 0 5px;
 }
 .applicationBtns{
   padding-top: 24px;
@@ -277,9 +281,14 @@
   background: rgba(9,44,66,0.04);
 }
 .box3{
-  padding: 0 16%;
+  /* padding: 0 16%; */
   background: #ffffff;
-  min-width: 500px;
+  width: 700px;
+  /* border: 1px solid red; */
+  margin: 0 auto;
+  color:rgba(176,178,183,1);
+  font-size: 14px;
+  padding: 0 5px;
 }
 .memberTit{
   padding-top: 24px; 
@@ -305,13 +314,25 @@
   width: 14px;
   height: 14px;
 }
-.box3 h5{
+/* .box3 h5{
+  
+} */
+.table_title{
+  display: flex;
+
   font-size:12px;
   font-family:MicrosoftYaHei;
   color:rgba(176,178,183,1);
   line-height:16px;
   padding-bottom: 7px;
   border-bottom: 1px solid rgba(13, 20, 36, 0.1);
+}
+.table_title>div{
+  flex:1;
+}
+.table_permise{
+  text-align: right;
+  padding-right: 43px;
 }
 .memberLists{
   padding-bottom: 35px;
@@ -323,9 +344,15 @@
 .memberLists li > div:first-child{
   width: 32px;
   height: 32px;
+  line-height: 36px;
   background:rgba(202,205,212,1);
   border-radius: 32px; 
   margin-right: 7px; 
+  text-align: center;
+}
+.memberLists li i{
+  font-size: 16px;
+  padding-left: 2px;
 }
 .memberLists li > div:nth-child(2){
   width: 245px;
@@ -365,12 +392,13 @@
   height:38px;
   border-radius: 3px ;
   border:1px solid rgba(223,227,232,1);
+  color: rgba(135,139,148,1);
 }
 .search input{
   border:none;
   width:254px;
   height: 24px;
-  font-size: 12px;
+  font-size: 14px;
   border-right: 1px solid rgba(223,227,232,1);
   padding:0 10px;
 }
@@ -379,7 +407,11 @@
   width:18px;
   height: 18px;
   font-size: 18px;
-  color: rgba(135,139,148,1);
+}
+.search_label{
+  font-size: 12px;
+  vertical-align: middle;
+  padding-left: 10px;
 }
 :global(.teamselect  .u-select-dropdown-menu-item-selected:after){
   content: '\00a0';
@@ -399,4 +431,14 @@
 }
 :global(.teamselect .u-select-dropdown-menu-item:nth-child(2) ){
   border-top:1px solid #f7f7f7;
+}
+.option_sele :global(.u-select .u-select-selection){
+  background:rgba(9,44,66,0.04);
+  border:none;
+}
+.box3 :global(.u-select-selection-rendered){
+   margin-left: 31px;
+}
+.user_name{
+  color: RGBA(71, 77, 84, 1) !important;
 }

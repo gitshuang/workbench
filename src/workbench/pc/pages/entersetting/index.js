@@ -26,6 +26,7 @@ const { Item } = Menu;
 @withRouter
 @connect(
   mapStateToProps(
+    'userInfo',
     'enterInfo',
     {
       namespace: 'home',
@@ -84,17 +85,7 @@ class Enterprise extends Component {
   }
 
   render() {
-
-    const { params } = this.props.match;
-    // const {  teamList  } = this.props;
-
-    // const menu1 = (
-    //   <Menu
-    //     onSelect={this.setOption}>
-    //     <Item key="1">相关操作</Item>
-    //     <Item key="2">23123</Item>
-    //   </Menu>
-    // );
+    const {match:{params},userInfo:{company}   } = this.props; 
     const {enterData} = this.state;
 
     return (
@@ -115,7 +106,7 @@ class Enterprise extends Component {
 
         <div className={`${page_enterprise} um-content`}>
           <div className={enter_title}>
-            <div className={title}>用友网络科技股份有限公司</div> 
+            <div className={title}>{company}</div>
             <EnterOption data={[
               {id:"aa",name:"解散企业",value:"2",serverApi:"enter/remove",msg:"解散后，当期企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},
               {id:"allowExit",name:"退出企业",value:"3",serverApi:"enter/leave",msg:"退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"},

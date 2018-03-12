@@ -2,7 +2,12 @@
   width: 75px;
   text-align: right;
 }
-
+.enter_form :global(.u-label>span) {
+  vertical-align: middle;
+}
+.enter_form :global(.u-label>span>font) {
+  vertical-align: middle;
+}
 .enter_form :global(.province),
 .enter_form :global(.city),
 .enter_form :global(.area) {

@@ -40,6 +40,7 @@
 }
 .item label span{
   color: #C4141B;
+  vertical-align: middle;
 }
 .item input{
   width:338px;
@@ -113,4 +114,7 @@ font-size: 14px;
 
 .create_team_cont{
   padding-left: 30%;
+}
+.upload label{
+  line-height: 64px;
 }

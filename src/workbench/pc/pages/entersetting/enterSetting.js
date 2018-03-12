@@ -110,7 +110,7 @@ class CreateEnter extends Component {
 
   checkForm = (flag, data) => {
     const {setCreateEnter,updateenter} = this.props;
-    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission,allowExit,tenantTel,tenantSize} = this.state;
+    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission,allowExit,tenantTel,tenantSize,linkman} = this.state;
 
     let _logo = data.find((da)=>da.name == "logo");
     if(!_logo.value && _logo.value == ""){
@@ -171,7 +171,7 @@ class CreateEnter extends Component {
         requestError(payload);
         return;
       }
-      const tenantId = payload.tenantId;
+      // const tenantId = tenantId;
       // localStorage.setItem('create', "1");
       window.location.href = "/?tenantId=" + tenantId + "&switch=true";
     });

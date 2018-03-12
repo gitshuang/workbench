@@ -65,8 +65,12 @@ import {
   memberBtns,
   memberLists,
   search,
-
-  team_cont
+  search_label,
+  team_cont,
+  option_sele,
+  table_title,
+  table_permise,
+  user_name,
 } from './index.css';
 
 @withRouter
@@ -641,7 +645,9 @@ class CreateTeamContent extends Component {
               style={{textAlign:"center",cursor:"pointer" }}
               onClick={this.searchFn}
             >
-              <BeeIcon type="uf-search"></BeeIcon>
+              <BeeIcon type="uf-search">
+                <span className={search_label}>搜索</span>
+              </BeeIcon>
             </div>
           </div>
           <div className={memberBtns + " um-bf1 um-box-vc"}>
@@ -651,8 +657,11 @@ class CreateTeamContent extends Component {
             }
           </div>
         </div>
-
-        <h5>当前人数{userList.totalElements}人</h5>
+            
+        <div className={table_title}>
+          <div>当前人数{userList.totalElements}人</div>
+          <div className={table_permise}>成员权限</div>
+        </div>
         <div className={memberLists}>
           <ul>
             {
@@ -660,19 +669,21 @@ class CreateTeamContent extends Component {
                 return (
                   <li className="um-box um-box-vc" key={index}>
                     <div>
-                      <img style={{display:"block",height:"100%"}} src = {item.userAvator} />
+                      {
+                        item.userAvator?<img style={{display:"block",height:"100%"}} src = {item.userAvator} />:<Icon type="staff" />
+                      }
                     </div>
                     <div>
-                      <p>{item.userName}</p>
+                      <p className={user_name}>{item.userName}</p>
                     </div>
                     <div>
                       <p>{item.userEmail}</p>
                     </div>
-                    <div className="um-bf1  um-box-vc ">
+                    <div className={`${option_sele} um-bf1  um-box-vc `}>
                       <Select
                         dropdownClassName="teamselect"
                         value={ item.admin ? "manage" : "member" }
-                        style={{ width: 100, marginRight: 6 }}
+                        style={{ width: 88, marginRight: 6 }}
                         onChange={ (e) => {this.handleChange3(e,item.userId)} }
                       >
                         <Option value="manage">管理员</Option>

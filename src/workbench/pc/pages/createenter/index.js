@@ -17,8 +17,7 @@ class Enterprise extends Component {
   }
 
   render() {
-    const { params } = this.props.match;
-    const {  teamList  } = this.props;
+    const {match:{params},teamList } = this.props;
     let _class = params.data == "home"?home_none:"";
     return (
       <div className={`um-win ${_class}`}>
