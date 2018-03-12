@@ -442,6 +442,10 @@ class CreateTeamContent extends Component {
 
   // 是否渲染还有多少天到期
   esitTime = (time) => {
+    // 判断到期时间没有或者... 直接不继续
+    if(!time){
+      return false;
+    }
     const currTime = new Date().getTime();
     if( currTime > time ){
       return "已过期"
@@ -454,6 +458,10 @@ class CreateTeamContent extends Component {
   }
   // 续费按钮
   esitXufei = (time) => {
+    // 判断到期时间没有或者... 直接不继续
+    if(!time){
+      return false;
+    }
     const currTime = new Date().getTime();
     const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
     if(timeDiff > 30){
