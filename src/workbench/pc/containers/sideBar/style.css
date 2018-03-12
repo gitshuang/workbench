@@ -46,3 +46,21 @@
   content: "\E964" !important;
   font-family: 'iconfont' !important;
 }
+
+.sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title i){
+	-webkit-transform: rotate(-90deg) scale(1.0);
+	transform: rotate(-90deg) scale(1.0);
+	display: inline-block;
+
+	height: auto;
+	position: relative;
+	top: -6px;
+	left: -4px;
+}
+.sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline .u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title i){
+	top: -3px;
+	left: -4px;
+}
+:global(:root .u-menu-submenu-inline > .u-menu-submenu-title:after){
+	display: none;
+}

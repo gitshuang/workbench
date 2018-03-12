@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import actions from 'store/root/work/actions';
 import Menu, { SubMenu } from 'bee/menus';
+import Icon from 'components/icon';
 // import { Scrollbars } from 'react-custom-scrollbars';
 import { mapStateToProps, findPath } from '@u';
 import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu} from './style.css';
@@ -21,6 +22,7 @@ function makeMenus(menus,isTop) {
           style={{fontSize:'14px'}}
           title={
             <span>
+              <Icon type="forward2" />
               {isTop?<img src={menuItemIcon} className={menuItem}/>:null}
               {name}
             </span>
@@ -35,6 +37,7 @@ function makeMenus(menus,isTop) {
             {isTop?<img src={menuItemIcon} className={menuItem}/>:null}
             { name }
           </span>
+          
         </Item>
       );
     }

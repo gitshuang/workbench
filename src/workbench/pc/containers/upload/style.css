@@ -16,12 +16,13 @@
 
 .appImg{
   /*background: rgba(186,191,197,0.18);*/
-  /* background: url("assets/image/uploadImg.svg") no-repeat; */
+  background: rgba(190,193,200,1) url("assets/image/uploadImg.svg") no-repeat;
 
   width:64px;
   height:64px; 
-  background:rgba(190,193,200,1);
+  /* background:rgba(190,193,200,1); */
   border-radius: 50%;
+  background-position: 11px;
 }
 
 .appValidate{
