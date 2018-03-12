@@ -128,7 +128,7 @@ class TeamRemoveModal extends Component {
           }
         ];
     }else if(isManage == 1){//退出失败后显示信息
-      _cont = (<div className={content}><p>{msg}</p></div>);
+      _cont = (<div className={content}><p>{_msg}</p></div>);
       _pop_title= name;
     }else if(isManage == 2){//退出后选中企业/团队
       _pop_title= "请重新选择"+type;

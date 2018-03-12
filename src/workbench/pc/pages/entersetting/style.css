@@ -2,7 +2,7 @@
   padding-bottom:15px;
 }
 .enter_form :global(.u-label) {
-  width: 75px;
+  width: 85px;
   text-align: right;
   font-size: 14px;
   /* color:#797D82; */
@@ -184,7 +184,6 @@
 
 :global(.enter_setting .u-form-submit)>button{
   margin-left: 0px;
-  width:80px;
 }
 :global(.enter_setting .u-select-selection-rendered){
   line-height: 36px;

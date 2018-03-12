@@ -436,9 +436,9 @@
   background:rgba(9,44,66,0.04);
   border:none;
 }
-.box3 :global(.u-select-selection-rendered){
+/* .box3 :global(.u-select-selection-rendered){
    margin-left: 31px;
-}
+} */
 .user_name{
   color: RGBA(71, 77, 84, 1) !important;
 }

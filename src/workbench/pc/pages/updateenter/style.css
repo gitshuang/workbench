@@ -1,5 +1,5 @@
 .enter_form :global(.u-label) {
-  width: 75px;
+  width: 85px;
   text-align: right;
 }
 
@@ -81,10 +81,10 @@
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-.page_enterprise .u-form-submit>button {
+/* .page_enterprise .u-form-submit>button {
   margin-left: 0;
   width: 80px;
-}
+} */
 
 .page_enterprise :global(.u-form-submit){
   padding-left: 145px !important;

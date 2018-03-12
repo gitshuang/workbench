@@ -108,7 +108,7 @@ body{
   font-size: 12px;
   /* line-height: 24px; */
   margin-left: 40px;
-  padding-top:10px;
+  padding-top:8px;
 }
 :global(.u-message-notice-description-icon){
   background:#fff !important;
@@ -119,9 +119,10 @@ body{
   border-radius: 50% 50%;
 }
 :global(.u-message-notice-description-icon .uf){
-  font-size: 19px;
-  color: #FF4C4C4C;
+  font-size: 18px;
   padding:0;
+  font-family: 'iconfont' !important;
+  font-weight: bold;
 }
 
 :global(.uf-notification:before){

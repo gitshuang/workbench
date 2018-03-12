@@ -92,8 +92,19 @@ class CreateEnter extends Component {
     super(props);
     this.state = {
       address:null,
-      disabled:true,
+      disabled:true, 
     }
+
+    this.tenantSizeOption =[
+      {value:"A",label:"0-50"},
+      {value:"B",label:"51-100"},
+      {value:"C",label:"101-200"},
+      {value:"D",label:"201-500"},
+      {value:"E",label:"501-1000"},
+      {value:"F",label:"1001－2000"},
+      {value:"G",label:"2000人"},
+    ]
+
   }
 
   componentWillReceiveProps(nextProps){
@@ -106,6 +117,8 @@ class CreateEnter extends Component {
     }else{
       data["address"] ={province:"北京",city:"北京",area:"东城区"};
     }
+    let b = this.tenantSizeOption.find((da)=>da.value == data["tenantSize"]);
+    b?null:data["tenantSize"] = tenantSize[0].value;
     this.setState({
         ...data
     })
@@ -245,6 +258,12 @@ class CreateEnter extends Component {
         let _adds = tenantAddress.split("|");
         newTenantAddress = _adds[_adds.length-1];
       }
+
+      let _tenantSizeOption = [];
+      this.tenantSizeOption.forEach(({value,label},i)=>{
+        _tenantSizeOption.push(<Option key={value+"_"+i} value={value}>{label}</Option>);
+      })
+
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'>&nbsp;*&nbsp;</font></span>}
@@ -295,13 +314,7 @@ class CreateEnter extends Component {
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"tenantSize",value:e})} }
                     >
-                    <Option value="A">0－50</Option>
-                    <Option value="B">51-100</Option>
-                    <Option value="C">101-200</Option>
-                    <Option value="D">201-500</Option> 
-                    <Option value="E">501-1000</Option>
-                    <Option value="F">1001－2000</Option>
-                    <Option value="G">>2000人</Option>
+                    {_tenantSizeOption}
                 </Select>
             </FormItem>
 
