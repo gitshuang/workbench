@@ -440,6 +440,7 @@ class CreateTeamContent extends Component {
     return Y + M + D;
   }
 
+  // 是否渲染还有多少天到期
   esitTime = (time) => {
     const currTime = new Date().getTime();
     if( currTime > time ){
@@ -451,15 +452,16 @@ class CreateTeamContent extends Component {
     }
     return "还有"+Math.ceil(timeDiff)+"日过期"
   }
+  // 续费按钮
   esitXufei = (time) => {
     const currTime = new Date().getTime();
-    if( currTime > time ){
-      return true;
-    }
     const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
     if(timeDiff > 30){
       return false;
     }
+    // if( currTime > time ){
+    //   return true;
+    // }
     return true;
   }
 
