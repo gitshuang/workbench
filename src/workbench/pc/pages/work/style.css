@@ -43,11 +43,11 @@ body{
   width: 200px;
 }
 .marginLeft {
-  margin-top: 8px;
+  margin-left: 8px;
   border-left: 1px solid #4e596830;
 }
 .marginTop {
-  margin-left: 8px;
+  margin-top: 8px;
   border-top: 1px solid #4e596830;
 }
 .contentArea {
@@ -102,7 +102,7 @@ body{
 }
 :global(.u-message-notice-close){
   display: none;
-} 
+}
 :global(.u-message-notice-description-content){
   /* padding:30px 0; */
   font-size: 12px;
