@@ -15,14 +15,16 @@ class Breadcrumbs extends Component {
 
   //需要新增一个回退函数
   enhancedGoBack = (url,i) =>{
+    let {goBackHistory } = this.props;
     if(url){
       this.props.goback(i)
       if(i == -1){
-       this.props.goBackHistory.go(-1);
+        JSON.stringify(goBackHistory)=='{}'? console.log("erroHistoryValue"):goBackHistory.go(-1);
       }else{
         let stateBrm = this.props.data;
         let backVal = stateBrm.length-1-i;
-        this.props.goBackHistory.go(-backVal);
+        JSON.stringify(goBackHistory)=='{}'? console.log("erroHistoryValue"):goBackHistory.go(-backVal);
+        //this.props.goBackHistory.go(-backVal);
       }
     }else{
       return null;
