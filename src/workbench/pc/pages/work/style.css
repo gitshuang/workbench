@@ -42,21 +42,23 @@ body{
 .sideBarArea {
   width: 200px;
 }
+.marginLeft {
+  margin-top: 8px;
+  border-left: 1px solid #4e596830;
+}
+.marginTop {
+  margin-left: 8px;
+  border-top: 1px solid #4e596830;
+}
 .contentArea {
   flex: 1;
-  margin-top: 8px;
-  border-top: 1px solid #4e596830;
 }
 .hasTab {
   flex: 1;
   flex-direction: column;
   display: flex;
-  margin-left: 8px;
-  margin-top: 8px;
   border-radius: 3px 0 0 0;
   overflow: hidden;
-  border-left: 1px solid #4e596830;
-  border-top: 1px solid #4e596830;
 }
 .tabArea {
   height: 48px;

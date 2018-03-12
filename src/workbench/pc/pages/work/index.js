@@ -35,6 +35,8 @@ const {
   titleArea,
   service,
   pin,
+  marginTop,
+  marginLeft,
 } = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -218,7 +220,7 @@ export default class Work extends Component {
       switch (type) {
         case 1:
           return (
-            <div className={workArea}>
+            <div className={`${workArea} ${marginTop}`}>
               <ContentContainer />
             </div>
           );
@@ -232,7 +234,7 @@ export default class Work extends Component {
                   </div>
                 ) : null
               }
-              <div className={contentArea}>
+              <div className={`${contentArea} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
                 <ContentContainer />
               </div>
             </div>
@@ -247,7 +249,7 @@ export default class Work extends Component {
                   </div>
                 ) : null
               }
-              <div className={hasTab}>
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
                 <div className={contentArea}>
                   <ContentContainer hasTab={true}/>
                 </div>
@@ -274,7 +276,7 @@ export default class Work extends Component {
     const {
       pinType,
       pinDisplay,
-   
+
       titleServiceType,
       current: {
         title,
