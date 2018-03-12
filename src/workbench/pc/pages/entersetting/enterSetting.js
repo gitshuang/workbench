@@ -62,7 +62,9 @@ class SubmitBtn extends Component {
     const {btlLabel} = this.props;
     return (
       <div className={'u-form-submit'}>
-        <ButtonBrand onClick={this.click} >{btlLabel?btlLabel:"保存"}</ButtonBrand>
+      {
+        this.props.disabled?<ButtonBrand  onClick={this.click} >{btlLabel?btlLabel:"保存"}</ButtonBrand>:<ButtonBrand disabled={true} >{btlLabel?btlLabel:"保存"}</ButtonBrand>
+      }
       </div>
     );
   }
@@ -89,7 +91,8 @@ class CreateEnter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address:null,
+      address:{province:"北京",city:"北京",area:"东城区"},
+      disabled:true,
     }
   }
 
@@ -154,27 +157,35 @@ class CreateEnter extends Component {
     if(!_tenantSize.value && _tenantSize.value == ""){
       _tenantSize.value = tenantSize;
     }
+    if (flag) {
+      this.setState({
+        disabled:false
+      })
+      data.push({name:"tenantId",value:tenantId});
+      requestStart();
+      setCreateEnter(
+        data.reduce(
+          (obj, { value, name }) => {
+            name?obj[name] = value:null;
+            return obj;
+          },
+          {},
+        ),updateenter
+      ).then(({ error, payload }) => {
+        this.setState({
+          disabled:true
+        })
+        requestSuccess();
+        if (error) {
+          requestError(payload);
+          return;
+        }
+        // const tenantId = tenantId;
+        // localStorage.setItem('create', "1");
+        window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+      });
 
-    data.push({name:"tenantId",value:tenantId});
-    requestStart();
-    setCreateEnter(
-      data.reduce(
-        (obj, { value, name }) => {
-          name?obj[name] = value:null;
-          return obj;
-        },
-        {},
-      ),updateenter
-    ).then(({ error, payload }) => {
-      requestSuccess();
-      if (error) {
-        requestError(payload);
-        return;
-      }
-      // const tenantId = tenantId;
-      // localStorage.setItem('create', "1");
-      window.location.href = "/?tenantId=" + tenantId + "&switch=true";
-    });
+    }
   }
 
   inputOnChange = (e,name)=>{
@@ -360,7 +371,7 @@ class CreateEnter extends Component {
               <Nature name="tenantNature" defaultValue={tenantNature?tenantNature:"LegalPerson"} />
             </FormItem> */}
 
-            <SubmitBtn isSubmit btlLabel={btlLabel}/>
+            <SubmitBtn isSubmit btlLabel={btlLabel} disabled={this.state.disabled}/>
         </Form>
     );
   }
