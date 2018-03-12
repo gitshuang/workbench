@@ -8,8 +8,8 @@
   border: 1px solid rgba(78, 89, 104, 0.19);
 
 
-  background: #ffffff; 
-  margin-top: 8px; 
+  background: #ffffff;
+  margin-top: 8px;
   margin: 10px 120px;
   background: #fff;
   min-width: 700px;
@@ -19,9 +19,9 @@
 }
 .header{
   width: 100%;
-  height:180px; 
+  height:180px;
   background:rgba(94,102,112,1);
-  border-radius: 3px 3px 0px 0px ; 
+  border-radius: 3px 3px 0px 0px ;
   padding-top: 46px;
   text-align: center;
 }
@@ -34,7 +34,7 @@
 }
 .header button{
   width:107px;
-  height:34px; 
+  height:34px;
   line-height: 32px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   font-size:14px;
@@ -42,7 +42,7 @@
   border-radius: 3px;
   margin: 0 8px;
   background: transparent;
-  color: #ffffff; 
+  color: #ffffff;
 }
 .header button:hover{
   background: transparent;
@@ -126,9 +126,9 @@
 }
 .item input{
   width:338px;
-  height:36px; 
+  height:36px;
   background:rgba(255,255,255,1);
-  border-radius: 3px ; 
+  border-radius: 3px ;
   outline: none;
   padding: 0 10px;
   border: 1px solid rgba(78, 89, 104, 0.2)
@@ -137,13 +137,13 @@
   width: 64px;
   height: 64px;
   /* background: rgba(190,193,200,1);
-  border-radius: 100px ; 
+  border-radius: 100px ;
   position: relative; */
 }
 .image img{
   width: 64px;
   height: 64px;
-  border-radius: 100px ; 
+  border-radius: 100px ;
 }
 .image div{
   position: absolute;
@@ -181,9 +181,9 @@
 }
 .footer button{
   width:80px;
-  height:32px; 
+  height:32px;
   background:rgba(225,76,70,1);
-  border-radius: 3px ; 
+  border-radius: 3px ;
   color: #ffffff;
   line-height: 32px;
   font-size: 14px;
@@ -233,14 +233,16 @@
 .applicationLists li div:first-child{
   width: 47px;
   height: 47px;
+  border-radius: 3px ;
+  margin-right: 7px;
+}
+.applicationLists li div.nopic:first-child{
   background:rgba(202,205,212,1);
-  border-radius: 3px ; 
-  margin-right: 7px; 
 }
 .applicationLists li div:first-child img{
   width: 47px;
   height: 47px;
-  border-radius: 3px ; 
+  border-radius: 3px ;
 }
 .applicationLists li div:nth-child(2){
   width: 195px;
@@ -291,7 +293,7 @@
   padding: 0 5px;
 }
 .memberTit{
-  padding-top: 24px; 
+  padding-top: 24px;
   padding-bottom: 14px;
 }
 .memberBtns{
@@ -315,7 +317,7 @@
   height: 14px;
 }
 /* .box3 h5{
-  
+
 } */
 .table_title{
   display: flex;
@@ -346,8 +348,8 @@
   height: 32px;
   line-height: 36px;
   background:rgba(202,205,212,1);
-  border-radius: 32px; 
-  margin-right: 7px; 
+  border-radius: 32px;
+  margin-right: 7px;
   text-align: center;
 }
 .memberLists li i{
@@ -418,7 +420,7 @@
   display: inline-block;
   border: 2px solid #00B39E;
   border-top-width: 0;
-  border-right-width: 0; 
+  border-right-width: 0;
   width: 13px;
   height: 8px;
   -webkit-transform: rotate(-50deg);

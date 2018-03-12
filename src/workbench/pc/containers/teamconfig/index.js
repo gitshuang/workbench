@@ -36,7 +36,7 @@ const {
   createTeam,
   userToAdmin,            // 用户升级管理员
   adminToUser,            // 管理员降级用户
-  openManagerModal,       
+  openManagerModal,
   openRemoveModal,
   closeRemoveModal,
   openUpgradeModal,
@@ -71,6 +71,7 @@ import {
   table_title,
   table_permise,
   user_name,
+  nopic,
 } from './index.css';
 
 @withRouter
@@ -365,7 +366,7 @@ class CreateTeamContent extends Component {
   //             <input type="file" ref="btn_file" onChange={(e) => { this.imgChange(e) }} />
   //           </div>
   //         </div>
-  //       </div> 
+  //       </div>
   //       <div className={item + " um-box"}>
   //         <label>邀请成员权限</label>
   //         <div>
@@ -497,7 +498,7 @@ class CreateTeamContent extends Component {
               currApplication.map( (item,index)=>{
                 return (
                   <li className="um-box" key={index}>
-                    <div>
+                    <div className={`${item.applicationIcon ? nopic : ''}`}>
                       <img src={item.applicationIcon} />
                     </div>
                     <div>
@@ -624,7 +625,7 @@ class CreateTeamContent extends Component {
       },
       userList, activePage
     } = this.props;
-    
+
     let _invitePermission = false;
     if(invitePermission == "0"){
       _invitePermission = admin;
@@ -667,7 +668,7 @@ class CreateTeamContent extends Component {
             }
           </div>
         </div>
-            
+
         <div className={table_title}>
           <div>当前人数{userList.totalElements}人</div>
           <div className={table_permise}>成员权限</div>
@@ -747,7 +748,7 @@ class CreateTeamContent extends Component {
 
   render() {
     // const menu1 = (
-    //   <Menu onClick={this.onSelectDrop}> 
+    //   <Menu onClick={this.onSelectDrop}>
     //     <Item key="2">解散团队</Item>
     //     <Item key="3">退出团队</Item>
     //   </Menu>
