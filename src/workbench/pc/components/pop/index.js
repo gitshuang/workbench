@@ -71,7 +71,6 @@ class DialogComponent extends Component{
     backdrop:true,
   }
   btnClickMaker(fn,disable) {
-    debugger;
     if(disable)return;
     const { close } = this.props;
     if (fn && typeof fn === 'function') {

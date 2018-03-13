@@ -108,7 +108,6 @@ class CreateTeam extends Component {
       if (error) {
         requestError(payload);
       }
-      debugger;
       this.setState({
         ...payload
       })
