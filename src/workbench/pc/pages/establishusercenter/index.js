@@ -44,6 +44,8 @@ class EstablishUserCenter extends Component {
     }
 
     goHome = () => {
+        const {userInfo:{allowTenants}} = this.props;
+        if(allowTenants.length <= 0)return;
         this.props.history.replace('');
       }
 
@@ -55,14 +57,14 @@ class EstablishUserCenter extends Component {
     render() {
         const headerData = this.renderMetadata("header");
 
-        const { userInfo } = this.props;
+        const { userInfo ,userInfo:{allowTenants}} = this.props;
         const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
         return (
             <div className={`um-win ${page_home} ${establis_page}`} >
                 <div className="um-header" style={{background:"white"}}>
                     {/* <Header leftContent = { leftContent } /> */}
                     {/* <HeaderPage headerData={headerData}/> */}
-                    <Header onLeftClick={ this.goHome } iconName={"home"} >
+                    <Header onLeftClick={ this.goHome } iconName={allowTenants.length <= 0?"":"home"} >
                         <div>
                             <span>欢迎页</span>
                         </div>
@@ -70,7 +72,7 @@ class EstablishUserCenter extends Component {
                 </div>
                 <div className="um-content">
                     <div className={appBreadcrumb}>
-                        <Breadcrumbs data={[{ name:"创建团队" }]} goback={this.goBack}/>
+                        <Breadcrumbs data={[{ name:"创建团队/企业" }]} goback={this.goBack}/>
                     </div>
                     <EstablishContent userInfo={ userInfo } />
                 </div>

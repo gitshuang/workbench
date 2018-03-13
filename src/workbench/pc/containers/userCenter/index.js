@@ -449,7 +449,7 @@ class UserInfoContainer extends Component {
                   <p>{_titleType}创建成功！</p>
                   <p>快点邀请成员一起好好工作吧！</p>
                 </div>
-                <div onClick={this.closeRequest}>以后再说</div>
+                <div onClick={this.closeRequest}>我知道了</div>
               </div>
               : null
             }
