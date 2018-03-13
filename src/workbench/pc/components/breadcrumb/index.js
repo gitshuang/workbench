@@ -19,12 +19,17 @@ class Breadcrumbs extends Component {
   
   //需要新增一个回退函数
   enhancedGoBack = (url,i) =>{
-    let {goBackHistory,goback ,data} = this.props;
-    let backVal = data.length-1-i;
-    if(goback){
-      i==-1 ? goback(i,1) :goback(i,backVal)
+    let {goback ,data} = this.props;
+    let customBrmUrl = url;
+    if(!url){
+       return null;
     }else{
-      this.goBack();
+      let backVal = data.length-1-i;
+      if(goback){
+        i==-1 ? goback(i,1) :goback(i,backVal)
+      }else{
+        this.goBack();
+      }
     }
   }
 
