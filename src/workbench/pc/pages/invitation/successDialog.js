@@ -12,7 +12,7 @@ class ErrorDialog extends Component {
     } = this.props;
     return (
       <PopDialog
-        title={'上传成功'}
+        title={'邀请成员'}
         show={show}
         backup={true}
         close={close}
