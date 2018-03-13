@@ -6,7 +6,7 @@ import Menu, { SubMenu } from 'bee/menus';
 import Icon from 'components/icon';
 // import { Scrollbars } from 'react-custom-scrollbars';
 import { mapStateToProps, findPath } from '@u';
-import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu} from './style.css';
+import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu,first_item,last_item} from './style.css';
 
 const { Item } = Menu;
 
@@ -19,9 +19,9 @@ function makeMenus(menus,isTop) {
         <SubMenu
           className={sideBarMenu}
           key={id}
-          style={{fontSize:'14px'}}
+          style={{fontSize:'14px',background:'red'}}
           title={
-            <span>
+            <span className={isTop?first_item:last_item}>
               <Icon type="forward2" />
               {isTop?<img src={menuItemIcon} className={menuItem}/>:null}
               {name}
