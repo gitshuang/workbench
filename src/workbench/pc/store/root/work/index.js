@@ -71,15 +71,16 @@ const reducer = handleActions({
       brm: newBrm
     };
   },
-  [popBrm]:(state, { payload: index })=> {
+  [popBrm]:(state, { payload: data })=> {
     let newBrm = [...state.brm];
-    let backVal;
+    let backVal,index=data.index;
     if(index == -1){
-      newBrm.pop();
-      backVal = 0;
+        newBrm.pop();
+        backVal = 1;
     }else{
       let stateBrm = state.brm;
       let popBrmName = stateBrm[stateBrm.length-1][index].name;//面包屑一直展示的是brm的最后一个元素
+      let popBrmUrl = stateBrm[stateBrm.length-1][index].url;
       let item;
       for(let i = 0;i<stateBrm.length ; i++){
           item=stateBrm[i];
@@ -125,7 +126,12 @@ const reducer = handleActions({
       serviceCode,
     } = current;
     const curTab = tabs.find(({id}) => id === currentId);
-    const brm = menuPath.map(({menuItemName: name}) => ({name}));
+    let newBrm = []
+    menuPath.map(function(item,index) {
+      console.log(item.service)
+      newBrm.push({name:item.menuItemName,url:item.service&&item.service.url})
+    })
+    const brm = state.brm &&state.brm.length?[...state.brm,newBrm]:[newBrm];
     if (curTab) {
       return {
         ...state,

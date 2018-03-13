@@ -1,51 +1,25 @@
 {
   "status": 1,
   "data": {
-    "serviceName": "谷歌",
-    "serviceCode": "google",
+    "tenantId": "gtzceot7",
+    "serviceId": "serve_1",
+    "serviceName": "应用管理",
+    "serviceCode": "serve_1",
+    "applicationId": "app_1",
     "enable": true,
-    "url": "https://www.google.com",
-    "serviceIcon": "https://www.baidu.com/img/bd_logo1.png",
-    "hasWidget": true,
-    "relationServes": [{
-        "serviceName": "百度",
-        "serviceCode": "baidu",
-        "enable": true,
-        "url": "https://www.baidu.com",
-        "serviceIcon": "https://www.baidu.com/img/bd_logo1.png",
-        "hasWidget": false
-      },
-      {
-        "serviceName": "360急速搜索",
-        "serviceCode": "360",
-        "enable": true,
-        "url": "https://www.google.com",
-        "serviceIcon": "https://www.baidu.com/img/bd_logo1.png",
-        "hasWidget": false
-      }
-    ],
-    "relationUsers": [{
-        "company": null,
-        "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=806695075,861492878&fm=58&bpow=0&bpoh=0",
-        "userEmail": null,
-        "userName": "李彦宏",
-        "userMobile": null,
-        "userId": "111",
-        "allowTenants": null,
-        "redPacketsNum": 0,
-        "gloriesNum": 0
-      },
-      {
-        "company": null,
-        "userAvator": "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2825762689,1796178341&fm=58",
-        "userEmail": null,
-        "userName": "周鸿祎",
-        "userMobile": null,
-        "userId": "222",
-        "allowTenants": null,
-        "redPacketsNum": 0,
-        "gloriesNum": 0
-      }
-    ]
+    "url": "http://workbenchdev.yyuap.com/manager/#/application",
+    "serviceIcon": "https://cdn.yonyoucloud.com/pro/workbench/e97d.svg",
+    "capable": false,
+    "level": 0,
+    "teamMenbersUnuse": false,
+    "crossTenant": false,
+    "selected": false,
+    "clientStatus": true,
+    "webStatus": true,
+    "phoneStatus": true,
+    "everyone": false,
+    "hasWidget": false,
+    "relationServices": [],
+    "relationUsers": []
   }
 }

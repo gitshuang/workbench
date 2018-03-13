@@ -4,7 +4,7 @@ import { openGlobalDialog, closeGlobalDialog } from 'components/pop';
 import store from "store";
 import { postMessageToWin, get } from "@u";
 
-const { addBrm } = workActions;
+const { addBrm , popBrm} = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
 const handlers = {
   openService({ serviceCode, data, tenantId }) {
@@ -97,6 +97,9 @@ const handlers = {
   },
   addBrm(data) {
     store.dispatch(addBrm(data));
+  },
+  popBrm(data) {
+    store.dispatch(popBrm(data));
   },
   popMessage() {
     store.dispatch(popMessage());

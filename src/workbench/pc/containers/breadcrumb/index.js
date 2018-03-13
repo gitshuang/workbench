@@ -16,7 +16,8 @@ import {
 
 const {
   setExpandedSidebar,
-  removeBrm,
+ // removeBrm,
+  popBrm,
 } = actions;
 
 @withRouter
@@ -29,7 +30,8 @@ const {
     ),
     {
         setExpandedSidebar,
-        removeBrm,
+       // removeBrm,
+       popBrm
     }
 )
 class BreadcrumbContainer extends Component {
@@ -73,24 +75,27 @@ class BreadcrumbContainer extends Component {
           breadcrumbTab:""
         })
     }
-    goback = (index) => {
-      const { brm, removeBrm } = this.props;
-      const customBrm = brm.filter(({url})=>{
-        return url;
-      })
-      if (index < 0) {
-        window.history.back();
-        if (customBrm) {
-          removeBrm(1);
-        }
-      } else {
-        const length = brm.length - index - 1;
-        removeBrm(length);
-        window.history.go(-length);
-      }
+    goback = (index,backVal) => {
+      const { brm,popBrm } = this.props;
+      const customBrmUrl =index>=0 && brm && brm.length>0 && brm[brm.length-1][index].url;
+      popBrm({index:index,url:window.location.href});
+      this.props.history.go(-backVal)
+      // const customBrm = brm.filter(({url})=>{
+      //   return url;
+      // })
+      // if (index < 0) {
+      //   window.history.back();
+      //   if (customBrm) {
+      //     removeBrm(1);
+      //   }
+      // } else {
+      //   const length = brm.length - index - 1;
+      //   removeBrm(length);
+      //   window.history.go(-length);
+      // }
     }
     render() {
-      const { withSidebar } = this.props;
+      const { withSidebar ,brm} = this.props;
 
       return (
         <div className={breadcrumbClass}>
@@ -117,7 +122,7 @@ class BreadcrumbContainer extends Component {
             ) : null
           }
           <div className={breadcrumbArea}>
-            <Breadcrumbs data={this.props.brm} goback={this.goback}/>
+            <Breadcrumbs data={brm && brm.length ? brm[brm.length-1] : [{ name: '' }] } goback={this.goback}/>
           </div>
         </div>
       );

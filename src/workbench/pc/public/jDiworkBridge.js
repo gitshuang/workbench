@@ -51,6 +51,12 @@ const handlerList = {
       type,
     });
   },
+  popBrm(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
   checkServiceOpen(type, event) {
     const result = dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {

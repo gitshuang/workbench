@@ -39,15 +39,14 @@ class Account extends Component {
     }else if(this.props.brm.length  == 1){
       this.props.addBrm({name:'应用市场',url:'/market'})
     }else if(this.props.brm.length == 3){
-      this.props.popBrm(1);
+      this.props.popBrm({index:1,url:window.location.href});
     }
     
   }
  
   goBack = (i,backVal) => {
-    this.props.popBrm(i);
+    this.props.popBrm({index:i,url:window.location.href});
     backVal>0 && this.props.history.go(-backVal)
-
   }
 
   
