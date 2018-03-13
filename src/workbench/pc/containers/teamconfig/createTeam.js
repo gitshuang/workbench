@@ -42,7 +42,7 @@ class SubmitBtn extends Component {
   render() {
     return (
       <div className={'u-form-submit'}>
-        <ButtonBrand onClick={this.click} >保存</ButtonBrand>
+        <ButtonBrand onClick={this.click}>保存</ButtonBrand>
       </div>
     );
   }

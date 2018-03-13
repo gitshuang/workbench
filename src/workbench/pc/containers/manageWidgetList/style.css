@@ -132,7 +132,7 @@
   color:#E14C46;
 }
 .editDele :global(.iconfont){
-  line-height:23px;
+  line-height:28px;
 }
 .title_cont{
   position: absolute;
@@ -173,7 +173,7 @@
   visibility: hidden;
 }
 .clearfix i{
-  font-size: 22px;
+  font-size: 19px;
 }
 .addModule{
   float: left;

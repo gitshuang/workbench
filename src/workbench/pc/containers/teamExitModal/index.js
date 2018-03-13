@@ -35,7 +35,8 @@ class TeamRemoveModal extends Component {
     this.state = {
       isManage: 0,
       msg:"",
-      close:true
+      close:true,
+      disable:false
     }
   }
 
@@ -53,8 +54,14 @@ class TeamRemoveModal extends Component {
 
   // 删除确认
   configFn = (da) => {
+    this.setState({
+      disable:true
+    })
     const { exitTeam, isManage, userId ,userInfo,data:{serverApi}} = this.props;
-    exitTeam(serverApi).then(({error, payload}) => { 
+    exitTeam(serverApi).then(({error, payload}) => {
+      this.setState({
+        disable:false
+      })
       if (error) {
         this.setState({
           isManage: 1,
@@ -106,7 +113,7 @@ class TeamRemoveModal extends Component {
       name = data.name;
       _msg = data.msg;
     }
-    const {msg,isManage,close} = this.state;
+    const {msg,isManage,close,disable} = this.state;
     let btnLabel = "确定";
     let _pop_title = name;
     let _cont = null;
@@ -121,6 +128,7 @@ class TeamRemoveModal extends Component {
           {
             label: btnLabel,
             fun: this.configFn,
+            disable
           },
           {
             label: '取消',

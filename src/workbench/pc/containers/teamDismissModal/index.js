@@ -35,11 +35,15 @@ class TeamDismissModal extends Component {
       isManage: 0,
       msg:"",
       close:true,
-      pro:"1"
+      pro:"1",
+      disable:false
     }
   }
  
   configFn=()=>{
+    this.setState({
+      disable:true
+    })
     const { dismissTeam, isManage ,userInfo,data:{serverApi}} = this.props;
     let { pro} = this.state;
     if(pro == "1"){
@@ -49,7 +53,10 @@ class TeamDismissModal extends Component {
       });
       return false;
     }
-    dismissTeam(serverApi).then(({error, payload}) => { 
+    dismissTeam(serverApi).then(({error, payload}) => {
+      this.setState({
+        disable:false
+      })
       if (error) {
         this.setState({
           isManage: 1,
@@ -95,7 +102,7 @@ class TeamDismissModal extends Component {
 
   render() {
     const {type,data:{name,msg:_msg}} = this.props;
-    const {msg,isManage,close,title} = this.state;
+    const {msg,isManage,close,title,disable} = this.state;
     let btnLabel = "确定";
     let _pop_title = name;
     let _cont = null;
@@ -109,7 +116,8 @@ class TeamDismissModal extends Component {
         _btn = [
           {
             label: btnLabel,
-            fun: this.configFn
+            fun: this.configFn,
+            disable
           },
           {
             label: '取消',

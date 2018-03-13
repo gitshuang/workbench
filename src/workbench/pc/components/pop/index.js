@@ -31,13 +31,14 @@ class PopDialog extends Component{
     if(this.props.btns){
         let _data = this.props.data ? this.props.data : this;
         this.props.btns.map((da,i)=>{
+          console.log("--da.disable---",da.disable);
             let _className = da.className ? da.className : null;
             let _defultAlphaButton = <ButtonDefaultAlpha key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn}`} >{da.label}</ButtonDefaultAlpha>;
             let _button =  null;
             if(this.props.type == "delete"){
                _button = i===0?<ButtonWarning key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da)} } className={`${_className} ${btn}`} >{da.label}</ButtonWarning>:_defultAlphaButton;
             }else{
-               _button = i===0?<ButtonBrand key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn}`} >{da.label}</ButtonBrand>:_defultAlphaButton;
+               _button = i===0?<ButtonBrand key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn}`} disabled={da.disable?true:false} >{da.label}</ButtonBrand>:_defultAlphaButton;
             }
             _btns.push(_button);
         })
@@ -69,7 +70,9 @@ class DialogComponent extends Component{
     show: true,
     backdrop:true,
   }
-  btnClickMaker(fn) {
+  btnClickMaker(fn,disable) {
+    debugger;
+    if(disable)return;
     const { close } = this.props;
     if (fn && typeof fn === 'function') {
       return () => {
@@ -86,7 +89,7 @@ class DialogComponent extends Component{
       show,
       btns,
       close,
-      backdrop
+      backdrop,
     } = this.props;
     return(
       <Modal className="pop_dialog" backdrop={backdrop} show={show}>
@@ -103,7 +106,7 @@ class DialogComponent extends Component{
         </Modal.Body>
         <Modal.Footer>
           {
-            btns.map(({ type, label, fun }, i) => {
+            btns.map(({ type, label, fun ,disable}, i) => {
               if (!label) {
                 return null;
               }
@@ -119,10 +122,10 @@ class DialogComponent extends Component{
                   break;
               }
               return (
-                <BtnComponent
+                <BtnComponent disabled={disable?true:false}
                   key={i}
                   className={btn}
-                  onClick={this.btnClickMaker(fun)} >
+                  onClick={()=>{this.btnClickMaker(fun,_disable)}} >
                   {label}
                 </BtnComponent>
               );
