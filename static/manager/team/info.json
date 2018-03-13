@@ -1,13 +1,18 @@
 {
-  "msg": 1,
-  "data":{
-    "allowExit": "1",
-    "invitePermission": "2",
-    "joinPermission": "1",
-    "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f1be8f92-64a5-4b94-94f6-bf02d4ed3d08/c2481bb099b574f5%21400x400_big.png",
-    "searchAvalible": "1",
-    "tenantId": "1002",
-    "tenantName": "测试内容z3h4",
-  },
-  "status": 1
+    "status": 1,
+    "data": {
+        "tenantId": "kq66zk5n",
+        "tenantName": "测试",
+        "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f1be8f92-64a5-4b94-94f6-bf02d4ed3d08/c2481bb099b574f5%21400x400_big.png",
+        "linkman": null,
+        "tenantAddress": null,
+        "tenantEmail": null,
+        "tenantIndustry": null,
+        "tenantTel": null,
+        "invitePermission": "2",
+        "joinPermission": "1",
+        "allowExit": "1",
+        "tenantSize": null,
+        "terminal": "web"
+    }
 }

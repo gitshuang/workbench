@@ -42,7 +42,10 @@ class SubmitBtn extends Component {
   render() {
     return (
       <div className={'u-form-submit'}>
-        <ButtonBrand onClick={this.click}>保存</ButtonBrand>
+        {/* <ButtonBrand onClick={this.click}>保存</ButtonBrand> */}
+        {
+          this.props.disabled?<ButtonBrand  onClick={this.click} >保存</ButtonBrand>:<ButtonBrand disabled={true} >保存</ButtonBrand>
+        }
       </div>
     );
   }
@@ -95,6 +98,7 @@ class CreateTeam extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      disabled:true, 
     }
   }
 
@@ -104,6 +108,7 @@ class CreateTeam extends Component {
       if (error) {
         requestError(payload);
       }
+      debugger;
       this.setState({
         ...payload
       })
@@ -134,25 +139,30 @@ class CreateTeam extends Component {
     if(!_allowExit.value && _allowExit.value == ""){
       _allowExit.value = allowExit;
     }
-    data.push({name:"tenantId",value:tenantId});
-    requestStart();
-    createTeam(
-      data.reduce(
-        (obj, { value, name }) => {
-          name?obj[name] = value:null;
-          return obj;
-        },
-        {},
-      ),"settingEnter"
-    ).then(({ error, payload }) => {
-      requestSuccess();
-      if (error) {
-        requestError(payload);
-        return;
-      }
-      const tenantId = payload.tenantId;
-      window.location.href = "/?tenantId=" + tenantId + "&switch=true";
-    });
+    if (flag) {
+      this.setState({
+        disabled:false
+      })
+      data.push({name:"tenantId",value:tenantId});
+      requestStart();
+      createTeam(
+        data.reduce(
+          (obj, { value, name }) => {
+            name?obj[name] = value:null;
+            return obj;
+          },
+          {},
+        ),"settingEnter"
+      ).then(({ error, payload }) => {
+        requestSuccess();
+        if (error) {
+          requestError(payload);
+          return;
+        }
+        const tenantId = payload.tenantId;
+        window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+      });
+    }
   }
 
   inputOnChange = (e,name)=>{
@@ -214,8 +224,9 @@ class CreateTeam extends Component {
 
                 <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
+                        defaultValue="1"
                         name="invitePermission"
-                        value={invitePermission}
+                        value={invitePermission?invitePermission:"1"}
                         style={{ width: 338, marginRight: 6 }}
                         onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                         >
@@ -228,7 +239,8 @@ class CreateTeam extends Component {
                 <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
                         name="joinPermission"
-                        value={joinPermission}
+                        defaultValue="1"
+                        value={joinPermission?joinPermission:"1"}
                         style={{ width: 338, marginRight: 6 }}
                         onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
                         >
@@ -245,7 +257,7 @@ class CreateTeam extends Component {
                   </Radio.RadioGroup> 
                 </FormItem>
 
-                <SubmitBtn isSubmit />
+                <SubmitBtn isSubmit disabled={this.state.disabled}/>
             </Form>
           </div>
 
