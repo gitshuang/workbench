@@ -19,6 +19,7 @@
   margin: 20px 65px 0;
   padding: 40px;
   background: #fff;
+  min-width: 800px;
 }
 .content h2{
   font-size: 20px;
