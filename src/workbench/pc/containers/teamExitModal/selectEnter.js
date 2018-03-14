@@ -89,7 +89,7 @@ class SelectEnter extends Component {
          <DropdownButton
          marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
-          closeFun={this.closeFun} lastIem={true}
+          lastIem={true}
           label="请选择企业/团队" type="home" dataItem={_dataItem} /> 
        </div>
     )
