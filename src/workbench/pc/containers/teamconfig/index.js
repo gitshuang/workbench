@@ -699,7 +699,7 @@ class CreateTeamContent extends Component {
                       >
                         <Option value="manage">管理员</Option>
                         <Option value="member">成员</Option>
-                        <Option value="deleteMember">删除成员</Option>
+                        <Option value="deleteMember">移除成员</Option>
                       </Select>
                     </div>
                   </li>
