@@ -54,7 +54,7 @@ class TeamRemoveModal extends Component {
   }
 
   render() {
-    const {disable} = this.state;
+    const {disable,msg} = this.state;
     return (
       <PopDialog
           className="team_remove_modal"
