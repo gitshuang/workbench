@@ -6,12 +6,13 @@ import Menu, { SubMenu } from 'bee/menus';
 import Icon from 'components/icon';
 // import { Scrollbars } from 'react-custom-scrollbars';
 import { mapStateToProps, findPath } from '@u';
-import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu,first_item,last_item} from './style.css';
+import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu,item_1,item_2,item_3,item_4,last_item} from './style.css';
 
 const { Item } = Menu;
 
 //isTop:判断是否是一级菜单
-function makeMenus(menus,isTop) {
+function makeMenus(menus,isTop,i) {
+  i++;
   let result = [];
   menus.forEach(({ children, menuItemId: id, menuItemIcon, menuItemName: name }) => {
     if (children && children.length) {
@@ -21,19 +22,19 @@ function makeMenus(menus,isTop) {
           key={id}
           style={{fontSize:'14px',background:'red'}}
           title={
-            <span className={isTop?first_item:last_item}>
+            <span className={`item_${i}`}>
               <Icon type="forward2" />
               {isTop?<img src={menuItemIcon} className={menuItem}/>:null}
               {name}
             </span>
           }>
-          { makeMenus(children) }
+          { makeMenus(children,false,i) }
         </SubMenu>
       );
     } else {
       result.push(
         <Item key={id} style={isTop?{fontSize:'14px'}:null}>
-          <span>
+          <span className={`item_${i} ${last_item}`}>
             {isTop?<img src={menuItemIcon} className={menuItem}/>:null}
             { name }
           </span>
@@ -133,7 +134,7 @@ class SideBarContainer extends Component {
           selectedKeys={selectedKeys}
           mode="inline"
           className={sideMainMenu}>
-          { makeMenus(menus,isTop) }
+          { makeMenus(menus,isTop,0) }
         </Menu>
       </div>
     );

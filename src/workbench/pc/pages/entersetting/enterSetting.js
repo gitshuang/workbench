@@ -73,6 +73,7 @@ class SubmitBtn extends Component {
 @withRouter
 @connect(
   mapStateToProps(
+    'userInfo',
     'enterInfo',
     {
       namespace: 'home',
@@ -108,6 +109,7 @@ class CreateEnter extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    const {userInfo} = this.props;
     const {data} = nextProps;
     if(data == null)return;
     let _tenantAddress = data["tenantAddress"];
@@ -119,6 +121,19 @@ class CreateEnter extends Component {
     }
     let b = this.tenantSizeOption.find((da)=>da.value == data["tenantSize"]);
     b?null:data["tenantSize"] = this.tenantSizeOption[0].value;
+
+    if(!data["linkman"] || data["linkman"] == ""){
+      data["linkman"] = userInfo["userName"]
+    }
+
+    if(!data["tenantEmail"] || data["tenantEmail"] == ""){
+      data["tenantEmail"] = userInfo["userEmail"]
+    }
+
+    if(!data["tenantTel"] || data["tenantTel"] == ""){
+      data["tenantTel"] = userInfo["userMobile"]
+    }
+
     this.setState({
         ...data
     })

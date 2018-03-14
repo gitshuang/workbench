@@ -826,7 +826,7 @@
                             "modifier": null,
                             "tenantId": "gtzceot7",
                             "menuItemId": "item_2_18",
-                            "menuItemName": "员工信息9",
+                            "menuItemName": "员工信息",
                             "menuItemCode": "item_2_18",
                             "menuItemIcon": null,
                             "parentId": "item_1_5",
@@ -875,47 +875,7 @@
                                         "relationUsers": []
                                     },
                                     "serviceCode": "serve_32",
-                                    "children": [
-                                        {
-                                            "createTime": 1514786878000,
-                                            "modifiedTime": null,
-                                            "ts": null,
-                                            "creator": null,
-                                            "modifier": null,
-                                            "tenantId": "gtzceot7",
-                                            "menuItemId": "item_3_17",
-                                            "menuItemName": "员工类别子项",
-                                            "menuItemCode": "item_3_17",
-                                            "menuItemIcon": null,
-                                            "parentId": "item_2_18",
-                                            "menuBarId": "bar_1",
-                                            "menuItemDefault": true,
-                                            "serviceId": "serve_32",
-                                            "menuItemOrder": 0,
-                                            "url": null,
-                                            "service": {
-                                                "tenantId": "gtzceot7",
-                                                "serviceId": "serve_32",
-                                                "serviceName": "员工类别子项",
-                                                "serviceCode": "serve_32",
-                                                "applicationId": "app_4",
-                                                "enable": true,
-                                                "url": "http://uastest.yyuap.com/basedoc/pages/staffCategory/index.html",
-                                                "serviceIcon": "https://cdn.yonyoucloud.com/pro/workbench/e982.svg",
-                                                "capable": false,
-                                                "selected": false,
-                                                "clientStatus": true,
-                                                "webStatus": true,
-                                                "phoneStatus": true,
-                                                "everyone": false,
-                                                "hasWidget": false,
-                                                "relationServices": [],
-                                                "relationUsers": []
-                                            },
-                                            "serviceCode": "serve_32",
-                                            "children": []
-                                        }
-                                    ]
+                                    "children": []
                                 },
                                 {
                                     "createTime": 1514786878000,

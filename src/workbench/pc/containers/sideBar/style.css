@@ -56,17 +56,17 @@
 
 	height: auto;
 	position: relative;
-	top: -6px;
-	left: -2px;
+	top: -8px;
+	left: 2px;
 }
 .sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title >span){
 	margin-left: -5px;
 }
 .sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline .u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title i){
-	top: -3px;
-	left: -4px;
-	margin-left: -8px;
-	margin-right: -1px;
+	top: -5px;
+	left: 4px;
+	/* margin-left: -8px;
+	margin-right: -1px; */
 }
 :global(:root .u-menu-submenu-inline > .u-menu-submenu-title:after){
 	display: none;
@@ -74,23 +74,29 @@
 .sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline .u-menu-submenu-open.u-menu-submenu-inline){
 	margin-left:4px;
 }
-.first_item{ 
-	/* margin-left: -4px; */
-}
-.last_item{ 
-	margin-left: 1px;
-	font-size: 12px; 
-}
-.last_item i{
-	margin-right: 4px;
-	/* 
-	margin-left: -7px; */
-}
-
-.first_item :global(.u-menu-inline>.u-menu-item){
-	font-size:12px; 
-}
-
 :global(.u-menu-inline .u-menu-inline .u-menu-item-selected){
 	background:rgba(244,245,247,1) !important;
+}
+
+:global(.item_1){
+	/* color: red; */
+}
+
+:global(.item_2){
+	font-size: 12px;
+	margin-left: 7px;
+}
+:global(.item_2 i){
+	margin-right: 2px;
+}
+:global(.item_3){
+	font-size: 12px;
+	margin-left: -2px !important;
+}
+
+:global(.item_4){
+	font-size: 12px;
+}
+.last_item{
+	margin-left: 3px;
 }
