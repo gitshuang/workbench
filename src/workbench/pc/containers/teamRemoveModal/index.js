@@ -23,7 +23,7 @@ class TeamRemoveModal extends Component {
     this.state = {
       msg:"确认移除所选用户？",
       disable:false,
-      btn = [
+      btn:[
         {
           label: '删除',
           fun: this.configFn,
