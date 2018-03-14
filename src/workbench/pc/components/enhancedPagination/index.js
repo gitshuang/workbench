@@ -38,7 +38,7 @@ const EnhancedPagination = WrappedComponent => {
 
       setPageJump = (e) =>{
         let reg =  /^\+?[1-9][0-9]*$/;
-        let value = e.target.value*1;
+        let value = e.target.value;
         if((value < 1 && value!=='')||value > this.props.items || (value == 0 && value !== '')){
           return false;
         }else{
