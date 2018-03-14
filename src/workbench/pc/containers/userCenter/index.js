@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import Icon from 'components/icon';
-import DropdownButton from 'components/dropdown';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
@@ -434,7 +433,6 @@ class UserInfoContainer extends Component {
                   </li>
                 ) :_allowExit
                 }
-
               {
                 _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
                 <Icon type="add-friends" />

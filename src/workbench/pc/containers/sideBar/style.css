@@ -28,9 +28,11 @@
 .u-menu-inline .u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected {
 	border:none;
 }
-:global(.u-menu-sub.u-menu-inline>.u-menu-item){
+
+.sideBar :global(.u-menu-sub.u-menu-inline>.u-menu-item){
 	height:30px;
 	line-height: 30px;
+	margin-left: 18px;
 }
 :global(.u-menu-submenu-selected){
 	background:#fff;
@@ -55,28 +57,38 @@
 	height: auto;
 	position: relative;
 	top: -6px;
-	left: -4px;
+	left: -2px;
+}
+.sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title >span){
+	margin-left: -5px;
 }
 .sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline .u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title i){
 	top: -3px;
 	left: -4px;
-	margin-left: -8px; 
+	margin-left: -8px;
+	margin-right: -1px;
 }
 :global(:root .u-menu-submenu-inline > .u-menu-submenu-title:after){
 	display: none;
 }
-
-.first_item{
-	/* background: red; */
+.sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline .u-menu-submenu-open.u-menu-submenu-inline){
+	margin-left:4px;
 }
-.last_item{
-	/* background: #ccc; */
-	margin-left: -12px;
-	font-size: 12px;
+.first_item{ 
+	/* margin-left: -4px; */
+}
+.last_item{ 
+	margin-left: 1px;
+	font-size: 12px; 
+}
+.last_item i{
+	margin-right: 4px;
+	/* 
+	margin-left: -7px; */
 }
 
 .first_item :global(.u-menu-inline>.u-menu-item){
-	font-size:12px;
+	font-size:12px; 
 }
 
 :global(.u-menu-inline .u-menu-inline .u-menu-item-selected){
