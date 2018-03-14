@@ -20,7 +20,8 @@ import {
   image,
   footer,
   create_team_cont,footer_hr,
-  upload
+  upload,
+  name_error
 } from './index.css';
 
 @withRouter
@@ -51,7 +52,9 @@ class CreateTeamContent extends Component {
       value: "",
       imgWarning: "",
       imgUrl: "",
-      backUrl : ""    // 上传成功后返回的url
+      backUrl : "",    // 上传成功后返回的url
+      disabled:false, 
+      error:false
     }
   }
 
@@ -62,11 +65,16 @@ class CreateTeamContent extends Component {
   onChange = (e) => {
     //const { value } = this.state;
     const value = e.target.value;
-    if( value.length > 60 ){
+    if( value.length > 60 || value == ""){
+      this.setState({
+        value,
+        error:true
+      })
       return false;
     }
     this.setState({
-      value
+      value,
+      error:false
     })
   }
 
@@ -113,7 +121,10 @@ class CreateTeamContent extends Component {
     
     this.isClick = true;
     if ( !value ){
-      alert("请输入团队名称");
+      // alert("请输入团队名称");
+      this.setState({
+        error:true
+      })
       return false;
     }
     let data = {
@@ -122,9 +133,14 @@ class CreateTeamContent extends Component {
     if (backUrl) {
       data.logo = backUrl;
     }
-
+    this.setState({
+      disabled:true
+    })
     requestStart();
     createTeam(data).then(({error, payload}) => {
+      this.setState({
+        disabled:false
+      });
       requestSuccess();
       if (error) {
         requestError(payload);
@@ -141,7 +157,9 @@ class CreateTeamContent extends Component {
   }
 
   render() {
-    const { value, imgUrl, imgWarning } = this.state;
+    const { value, imgUrl, imgWarning ,disabled,error} = this.state;
+    let _error = error?"block":"none";
+    console.log("============_error",_error);
     return (
       <div className={wrap}>
         <h5>创建团队</h5>
@@ -155,6 +173,10 @@ class CreateTeamContent extends Component {
               onChange={(e)=>{this.onChange(e)}}
             />
           </div>
+          <div className={`${name_error} `} style={{display:`${_error} `}}>
+            请输入团队名称
+          </div>
+
           <div className={`${item} um-box ${upload}`}>
             <label>团队头像&nbsp; &nbsp; </label>
             <div className={image}>
@@ -168,7 +190,7 @@ class CreateTeamContent extends Component {
         </div>
         <hr className={footer_hr}/>
         <div className={footer}>
-          <Button onClick={this.create}>创建</Button>
+          <Button onClick={this.create} disabled={disabled} >创建</Button>
         </div>
       </div>
     )

@@ -21,30 +21,32 @@ class TeamRemoveModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      msg:"确认移除所选用户？",
+      disable:false
     }
   }
-
-  componentWillMount() {
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-
-  }
-
   // 删除确认
   configFn = () => {
+    this.setState({
+      disable:true
+    })
     const { removeUser, currMemberId, queryUser } = this.props;
     removeUser(currMemberId).then(({error, payload}) => {
+      this.setState({
+        disable:false
+      })
       if (error) {
+        this.setState({
+          msg:payload,
+        });
         console.log(payload);
+        return;
+      }else{
+        queryUser();
+        this.cancelFn();
       }
-      queryUser();
-      this.cancelFn();
     });
   }
-
   // 取消
   cancelFn = () => {
     const { closeRemoveModal } = this.props;
@@ -52,6 +54,7 @@ class TeamRemoveModal extends Component {
   }
 
   render() {
+    const {disable} = this.state;
     return (
       <PopDialog
           className="team_remove_modal"
@@ -63,6 +66,7 @@ class TeamRemoveModal extends Component {
             {
               label: '删除',
               fun: this.configFn,
+              disable
             },
             {
               label: '取消',
@@ -71,7 +75,7 @@ class TeamRemoveModal extends Component {
           ]} 
           >
           <div className={content} >
-            确认移除所选用户？
+              {msg}
           </div>
         </PopDialog>
     )

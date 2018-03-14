@@ -120,3 +120,8 @@ font-size: 14px;
 .upload label{
   line-height: 64px;
 }
+.name_error{
+  color: red;
+  margin-left: 73px;
+  margin-top: 5px;
+}
