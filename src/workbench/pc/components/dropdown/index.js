@@ -26,6 +26,7 @@ class DropdownButton extends Component{
   }
 
   onVisibleChange=(visible)=> {
+    let {type} = this.props;
     if(this.props.closeFun()){
       if(!type && type != "home"){
         this.props.closeFun();
