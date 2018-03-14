@@ -22,7 +22,18 @@ class TeamRemoveModal extends Component {
     super(props);
     this.state = {
       msg:"确认移除所选用户？",
-      disable:false
+      disable:false,
+      btn = [
+        {
+          label: '删除',
+          fun: this.configFn,
+          disable
+        },
+        {
+          label: '取消',
+          fun: this.cancelFn,
+        }
+      ]
     }
   }
   // 删除确认
@@ -38,6 +49,7 @@ class TeamRemoveModal extends Component {
       if (error) {
         this.setState({
           msg:payload,
+          btn:[]
         });
         console.log(payload);
         return;
@@ -54,7 +66,7 @@ class TeamRemoveModal extends Component {
   }
 
   render() {
-    const {disable,msg} = this.state;
+    const {disable,msg,btn} = this.state;
     return (
       <PopDialog
           className="team_remove_modal"
@@ -62,17 +74,7 @@ class TeamRemoveModal extends Component {
           title="确认移除所选用户?"
           backup={false}
           close={this.cancelFn} 
-          btns={[
-            {
-              label: '删除',
-              fun: this.configFn,
-              disable
-            },
-            {
-              label: '取消',
-              fun: this.cancelFn,
-            }
-          ]} 
+          btns={btn} 
           >
           <div className={content} >
               {msg}
