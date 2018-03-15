@@ -287,7 +287,7 @@ class CreateEnter extends Component {
                 <FormControl name="tenantName" value={tenantName?tenantName:""} onChange={(e)=>{this.inputOnChange(e,"tenantName")}} placeholder="最多60个字符"/>
             </FormItem>
 
-            <FormItem showMast={false}  labelName={<span>企业头像<font color='red'>&nbsp;*&nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
+            <FormItem showMast={false}  labelName={<span>企业头像 &nbsp;&nbsp;&nbsp; </span>} valuePropsName='value' method="change"  inline={true}>
               <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
             </FormItem>
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
@@ -335,7 +335,7 @@ class CreateEnter extends Component {
 
             {
               address ? (
-                <FormItem showMast={false} labelName={<span>企业地址<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
+                <FormItem showMast={false} labelName={<span>企业地址&nbsp;&nbsp;</span>} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
                   <CitySelect name='address' onChange={this.onCityChange} defaultValue={address}/>
                 </FormItem>
               ) : <div />

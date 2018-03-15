@@ -27,7 +27,7 @@ class TeamRemoveModal extends Component {
         {
           label: '删除',
           fun: this.configFn,
-          disable
+          disable:false
         },
         {
           label: '取消',

@@ -548,6 +548,7 @@ class CreateTeamContent extends Component {
     adminToUser( id ).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       newUserList.forEach((item,index) => {
         if (item.userId == id){
