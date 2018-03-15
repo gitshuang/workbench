@@ -56,14 +56,14 @@
 
 	height: auto;
 	position: relative;
-	top: -8px;
+	top: -4px;
 	left: 2px;
 }
 .sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title >span){
 	margin-left: -5px;
 }
 .sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline .u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title i){
-	top: -5px;
+	top: -4px;
 	left: 4px;
 	/* margin-left: -8px;
 	margin-right: -1px; */
@@ -79,6 +79,9 @@
 }
 
 :global(.item_1){
+	display: flex;
+    flex-direction: row;
+    align-items: center;
 	/* color: red; */
 }
 
