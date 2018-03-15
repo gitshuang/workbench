@@ -271,7 +271,7 @@ class ManageGroup extends Component {
       return item.widgetName
     });
     if( widgetNameArr.includes(name) ){
-      Message.create({content: '分组名称已存在!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto'}});
+      Message.create({content: '分组名称已存在!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto',top:80,left: 250}});
       return false;
     }
     renameGroup({
