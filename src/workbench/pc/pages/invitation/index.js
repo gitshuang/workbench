@@ -7,10 +7,12 @@ import inviteActions from 'store/root/invitation/actions';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
 import {ButtonBrand} from 'components/button';
+import Button from 'bee/button';
 import SuccessDialog from './successDialog';
 import Tabs, { TabPane } from 'bee/tabs';
 import FormControl from 'bee/form-control';
 import TagsInput from 'components/tagsInput';
+import Message from 'bee-message';
 
 import {
   header,
@@ -26,7 +28,8 @@ import {
   tabPane2,
   tabPane3,
   qrCode,
-  printQrBtn
+  printQrBtn,
+  tootip
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -58,6 +61,7 @@ class Invitation extends Component {
       url: '',
       mails: [],
       successDialogShow: false,
+      copy:false
     }
     this.goBack = this.goBack.bind(this);
   }
@@ -84,6 +88,8 @@ class Invitation extends Component {
   copyLink = () => {
     this.refs['shortUrl'].select();
     document.execCommand('copy');
+ 
+    Message.create({content: '链接复制成功，赶快发送给你的小伙伴吧!',duration:1.5,position: 'topLeft', color: "success",style:{height:'auto',top: 270,left: 300}});
   }
   onMailChange = (i) => (e) => {
     const value = e.target.value;
@@ -102,25 +108,26 @@ class Invitation extends Component {
   submit = () => {
     const {requestStart, requestSuccess, requestError,sendMessage} = this.props;
     const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
-    if (mails.length) {
-
-      requestStart();
-      sendMessage(mails).then((data) => {
-        requestSuccess();
-        this.setState({
-          mails: [],
-          // successDialogShow: false,
-        });
-      }, (err)=>{
-        requestError(err);
-      });
-
-        console.log(mails);
-        this.setState({
-          mails: ['', ''],
-          successDialogShow: true,
-        });
+    if (mails.length <= 0 ) {
+      Message.create({content: '请输入正确的邮件地址!',duration:1.5,position: 'topLeft', color: "warning",style:{height:'auto',top: 270,left: 300}});
+      return false;
     }
+    requestStart();
+    sendMessage(mails).then((data) => {
+    requestSuccess();
+    this.setState({
+      mails: [],
+      // successDialogShow: false,
+    });
+    }, (err)=>{
+    requestError(err);
+    });
+
+    console.log(mails);
+    this.setState({
+      mails: ['', ''],
+      successDialogShow: true,
+    }); 
   }
   handleChange = (tags) => {
     this.setState({mails:tags})
@@ -144,7 +151,15 @@ class Invitation extends Component {
       mails,
       errorDialogShow,
       successDialogShow,
+      copy
     } = this.state;
+
+    let tip = (
+      <div className={tootip}>
+        链接复制成功，赶快发送给你的小伙伴吧！
+      </div>
+  )
+
     return (
       <div className="um-win">
         <div className={header}>
@@ -173,6 +188,11 @@ class Invitation extends Component {
                   <input ref='shortUrl' type='text' value={url} readOnly/>
                 </div>
                 <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >复制链接</ButtonBrand>
+                
+                {/* <Tooltip trigger="click" rootClose placement="bottom" overlay={tip} onClick={this.copyLink} >
+                  <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >复制链接f</ButtonBrand>
+                </Tooltip> */}
+
               </TabPane>
               <TabPane tab='邮件邀请' key="2" className={tabPane2}>
                 <p>输入邮箱地址并用 “;” 隔开</p>
@@ -218,7 +238,7 @@ class Invitation extends Component {
             </Tabs>
           </div>
         </div>
-        <SuccessDialog show={successDialogShow} close={this.closeSuccessDialog} />
+        <SuccessDialog show={successDialogShow} close={this.closeSuccessDialog} /> 
       </div>
     );
   }

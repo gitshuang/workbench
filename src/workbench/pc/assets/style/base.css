@@ -281,3 +281,70 @@ body {
 .u-form-control{
   padding-left: 8px !important;
 }
+
+
+/***----------统一组价样式 Message 蓝湖交互----start------**/
+/* success 成功样式 */
+.u-message-notice-close{
+  display: none;
+}
+.u-message  .u-message-notice{
+  background:rgba(255,255,255,1);
+  box-shadow: 0px 10px 12px 0px rgba(74,81,93,0.25);
+  border-radius: 4px ; 
+}
+.u-message-notice{
+  background:rgba(255,255,255,1);
+  box-shadow: 0px 10px 12px 0px rgba(74,81,93,0.25);
+  border-radius: 4px ; 
+}
+.u-message-notice-success .u-message-notice-description-icon .uf{
+  font-size: 18px;
+  padding:0;
+  font-family: 'iconfont' !important;
+  font-weight: bold;
+  color:#00B39E;
+}
+.u-message-notice-success .u-message-notice-description-icon .uf-correct:before{
+  content: "\E9e7";
+  font-family: 'iconfont' !important;
+}
+.u-message-notice-success .u-message-notice-description-icon{
+  background: transparent !important;
+}
+.u-message-notice-success .u-message-notice-description-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#00B39E;
+}
+.u-message-notice-success .u-message-notice-description-content{
+  color:#474D54;
+  padding: 5px;
+}
+/* warning 失败样式 */
+.u-message-notice-warning .u-message-notice-description-icon .uf{
+  font-size: 18px;
+  padding:0;
+  font-family: 'iconfont' !important;
+  font-weight: bold;
+  color:#4C4C4C;
+}
+.u-message-notice-warning .u-message-notice-description-icon .uf-exc-t:before{
+  content: "\E997";
+  font-family: 'iconfont' !important;
+}
+.u-message-notice-warning .u-message-notice-description-icon{
+  background: transparent !important;
+}
+.u-message-notice-warning .u-message-notice-description-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#00B39E;
+}
+.u-message-notice-warning .u-message-notice-description-content{
+  color:#474D54;
+  padding: 5px;
+}
+/***----------统一组价样式 Message 蓝湖交互-----over-----**/

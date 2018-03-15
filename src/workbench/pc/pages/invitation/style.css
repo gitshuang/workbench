@@ -114,3 +114,11 @@
   margin: 30px 0 20px;
   border: 1px solid #ccc;
 }
+
+.tootip{
+  background: #000;
+  color: #fff;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+}

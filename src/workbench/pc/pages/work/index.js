@@ -202,8 +202,9 @@ export default class Work extends Component {
       setPinCancel(serviceCode).then(({error, payload}) => {
         if (error) {
           requestError(payload);
+          Message.create({content: '从首页移除失败!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto'}});  
         }
-        Message.create({content: '从首页移除成功！',duration:2,position: 'top', color: "light"});
+        Message.create({content: '从首页移除成功!',duration:1.5,position: 'topLeft',color: "success",style:{height:'auto'}});
         requestSuccess();
       });
       return false;
