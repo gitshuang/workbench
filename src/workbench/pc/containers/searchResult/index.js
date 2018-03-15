@@ -300,13 +300,14 @@ class searchResult extends Component {
     const {value,activePage} = this.state
     this.setState({
       activetab,
-      activePage:1
+      activePage:1,
     })
+    let reg = new RegExp("条\/页","g");
+    let dataPerPageNum = this.state.dataNumSelect[this.state.dataNumSelectActive].name.replace(reg,"");
     if(activetab=='other'){
-      this.getSearchOtherList(value,5,10)
-
+      this.getSearchOtherList(value,5,0,dataPerPageNum)
     }else{
-      this.getSearchTpyeList(value,activetab,0)
+      this.getSearchTpyeList(value,activetab,0,dataPerPageNum)
     }
   }
   goDetail(type,item){
