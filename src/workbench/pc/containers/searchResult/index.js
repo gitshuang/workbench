@@ -186,7 +186,7 @@ class searchResult extends Component {
       });
   }
 
-  getSearchOtherList(keywords,contentsize,page,size=2){
+  getSearchOtherList(keywords,contentsize,page,size=10){
     const {
       requestStart,
       requestSuccess,
@@ -274,7 +274,7 @@ class searchResult extends Component {
      dataNumSelectActive:id
    },function () {
     if(activetab=='other'){
-        this.getSearchOtherList(value,5,activePage-1,dataPerPageNum/5)
+        this.getSearchOtherList(value,5,activePage-1,dataPerPageNum)
     }else{
         this.getSearchTpyeList(value,activetab,activePage-1,dataPerPageNum)
     }
@@ -303,7 +303,7 @@ class searchResult extends Component {
       activePage:1
     })
     if(activetab=='other'){
-      this.getSearchOtherList(value,5,0)
+      this.getSearchOtherList(value,5,10)
 
     }else{
       this.getSearchTpyeList(value,activetab,0)
