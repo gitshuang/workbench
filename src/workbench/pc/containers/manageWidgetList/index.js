@@ -172,7 +172,7 @@ class WidgetList extends Component {
           <Icon title="添加服务" type="add"  />
         </div>
 
-        <PopDialog className={pop_dialog_widge_list} title="添加服务" close={this.popClose} backdrop={false} show = { this.state.showModal } data={_da} >
+        <PopDialog className={pop_dialog_widge_list} type="info" title="添加服务" close={this.popClose} backdrop={false} show = { this.state.showModal } data={_da} >
             <SelectWidgetList close={this.popClose} parentId={this.props.parentId} />
         </PopDialog>
 

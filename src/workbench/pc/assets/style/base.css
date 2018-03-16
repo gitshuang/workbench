@@ -137,10 +137,12 @@ body {
   width: 370px;
   height: 200px;
   margin: 0 auto;
-  top: 60px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
-  border: 1px solid rgba(78, 89, 104, 0.19);
-  box-shadow: 0 6px 8px 0 rgba(74, 81, 93, 0.25);
+  /* border: 1px solid rgba(78, 89, 104, 0.19);
+  box-shadow: 0 6px 8px 0 rgba(74, 81, 93, 0.25); */
   border-radius: 3px;
 }
 
