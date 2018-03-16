@@ -241,7 +241,7 @@ class SearchContainer extends Component {
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={item2.serviceId?item2.serviceIcon:item2.applicationIcon}/></div>
                   <div className={h_name}>
-                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item2.serviceName)}></span></p>
+                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item2.serviceId?item2.serviceName:item2.applicationName)}></span></p>
                   </div>
                 </li>);
           }),
