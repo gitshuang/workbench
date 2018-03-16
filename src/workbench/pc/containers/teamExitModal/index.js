@@ -115,13 +115,13 @@ class TeamRemoveModal extends Component {
     }
     const {msg,isManage,close,disable} = this.state;
     let btnLabel = "确定";
-    let _pop_title = name;
+    let _pop_title = "确认"+name+"?";
     let _cont = null;
     let _btn = null;
 
     if(isManage == 0){//退出团队信息
       _cont = (<div className={content} >
-            <h6>确认{name}?</h6>
+            {/* <h6>确认{name}?</h6> */}
             <p>{_msg}</p>
         </div>);
         _btn = [
@@ -137,7 +137,7 @@ class TeamRemoveModal extends Component {
         ];
     }else if(isManage == 1){//退出失败后显示信息
       _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title= name;
+      _pop_title= "确认"+name+"?";
     }else if(isManage == 2){//退出后选中企业/团队
       _pop_title= "请重新选择"+type;
       _cont = <SelectEnter />
@@ -146,6 +146,7 @@ class TeamRemoveModal extends Component {
     return (
       <PopDialog
           className="team_exit_modal"
+          type="warning"
           backdrop={"static"}
           show={ exitModal }
           title={_pop_title}

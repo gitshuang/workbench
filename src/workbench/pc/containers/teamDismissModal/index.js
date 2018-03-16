@@ -104,13 +104,13 @@ class TeamDismissModal extends Component {
     const {type,data:{name,msg:_msg}} = this.props;
     const {msg,isManage,close,title,disable} = this.state;
     let btnLabel = "确定";
-    let _pop_title = name;
+    let _pop_title = "确认"+name+"?";
     let _cont = null;
     let _btn = null;
 
     if(isManage == 0){//退出团队信息
       _cont = (<div className={content} >
-            <h5>{title}</h5>
+            {/* <h5>{title}</h5> */}
           <p>{_msg}</p>
         </div>);
         _btn = [
@@ -126,7 +126,7 @@ class TeamDismissModal extends Component {
         ];
     }else if(isManage == 1){//退出失败后显示信息
       _cont = (<div className={content} ><p>{msg}</p></div>);
-      _pop_title= {name};
+      _pop_title= {title};
     }else if(isManage == 2){//退出后选中企业/团队
       _pop_title= "请重新选择";
       _cont = <SelectEnter />;

@@ -53,7 +53,8 @@ class TeamUpgradeModal extends Component {
       <PopDialog
           className="team_upgrade_modal_dailog"
           show={ true }
-          title="升级为企业后您可以获得更多权限:"
+          type="success"
+          title="升级为企业后您可以获得更多权限"
           backup={false}
           close={this.cancelFn} 
           btns={[

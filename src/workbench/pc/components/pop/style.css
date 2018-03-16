@@ -4,16 +4,109 @@
 }
 .closeBtn{
     position: absolute;
-    top: -42px;
-    right: 22px;
+    top: -52px;
+    right: 14px;
     font-size: 18px;
     color: #757F8C;
     cursor: pointer;
     height: 30px !important;
 }
-/**
-.manageDialogFolder .close{
-  top: -46px;
-  right: 20px;
+:global(.u-modal.in .u-modal-dialog){
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin:0px;
+  color: #474D54;
 }
-**/
+:global(.u-modal-body){
+  padding-right: 40px !important;
+}
+/************************ error *************************/
+.pop_type.error :global(.u-modal-title .iconfont){
+  margin-right: 8px;
+  color: #4C4C4C;
+  font-weight: 900;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+}
+.pop_type.error :global(.u-modal .u-modal-title){
+  font-size: 17px;
+}
+.pop_type.error :global(.u-modal-body){
+  font-size: 14px;
+  padding:0px;
+  padding-left: 44px;
+}
+.pop_type.error :global(.u-modal-header){
+  padding-top: 30px;
+}
+.pop_type.error :global(.u-modal-footer .brand){
+  background: #4C4C4C;
+  color:rgba(255,255,255,1);
+}
+/************************ warning *************************/
+.pop_type.warning :global(.u-modal-title .iconfont){
+  margin-right: 8px;
+  color: #FF8B00;
+  font-weight: 900;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+}
+.pop_type.warning :global(.u-modal .u-modal-title){
+  font-size: 17px;
+}
+.pop_type.warning :global(.u-modal-body){
+  font-size: 14px;
+  padding:0px;
+  padding-left: 44px;
+}
+.pop_type.warning :global(.u-modal-header){
+  padding-top: 30px;
+}
+.pop_type.warning :global(.u-modal-footer .brand){
+  background: #FFAB00;
+  color:#474D54;
+}
+/************************ danger *************************/
+.pop_type.danger :global(.u-modal-title .iconfont){
+  margin-right: 8px;
+  color: #108EE9;
+  font-weight: 900;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+}
+.pop_type.danger :global(.u-modal .u-modal-title){
+  font-size: 17px;
+}
+.pop_type.danger :global(.u-modal-body){
+  font-size: 14px;
+  padding:0px;
+  padding-left: 44px;
+}
+.pop_type.danger :global(.u-modal-header){
+  padding-top: 30px;
+}
+/************************ success *************************/
+.pop_type.success :global(.u-modal-title .iconfont){
+  margin-right: 8px;
+  color: #00B39E;
+  font-weight: 900;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+}
+.pop_type.success :global(.u-modal .u-modal-title){
+  font-size: 17px;
+}
+.pop_type.success :global(.u-modal-body){
+  font-size: 14px;
+  padding:0px;
+  padding-left: 44px;
+}
+.pop_type.success :global(.u-modal-header){
+  padding-top: 30px;
+}
