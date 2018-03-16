@@ -173,7 +173,15 @@ class SearchContainer extends Component {
   goDetail(type,item){
     return (e) => {
       e.stopPropagation();
-      this.props.history.push('/'+type+'/'+item.serviceCode);
+      let code = "",_type="";
+      if(item.serviceId){
+        code = item.serviceCode;
+        _type = "service";
+      }else{
+        code = item.applicationCode;
+        _type = type;
+      }
+      this.props.history.push('/'+_type+'/'+code);
     }
   }
   goemailDetail(item){
@@ -229,9 +237,9 @@ class SearchContainer extends Component {
         case "service":
           let lis2 = [];
           item.content.forEach((item2,index2)=>{
-            item2 = eval('(' + item2 + ')')
+            item2 = eval('(' + item2 + ')') 
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
-                  <div className={h_icon}><img src={item2.serviceIcon}/></div>
+                  <div className={h_icon}><img src={item2.serviceId?item2.serviceIcon:item2.applicationIcon}/></div>
                   <div className={h_name}>
                     <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item2.serviceName)}></span></p>
                   </div>

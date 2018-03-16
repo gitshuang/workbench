@@ -312,8 +312,16 @@ class searchResult extends Component {
   }
   goDetail(type,item){
     return (e) => {
-      e.stopPropagation();
-      this.props.history.push('/'+type+'/'+item.serviceCode);
+      e.stopPropagation(); 
+      let code = "",_type="";
+      if(item.serviceId){
+        code = item.serviceCode;
+        _type = "service";
+      }else{
+        code = item.applicationCode;
+        _type = type;
+      }
+      this.props.history.push('/'+_type+'/'+code);
     }
   }
   goOtherlist(item){
@@ -359,7 +367,7 @@ class searchResult extends Component {
           break;
         case "service":
           lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                  <div className={h_icon}><img src={item.serviceIcon}/></div>
+                  <div className={h_icon}><img src={item.serviceId?item.serviceIcon:item.applicationIcon}/></div>
                   <div className={h_name}>
                     <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item.serviceName)}></span></p>
                   </div>
