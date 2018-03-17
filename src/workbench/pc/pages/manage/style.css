@@ -64,7 +64,7 @@ body{
 	position:fixed;
 	bottom: 0;
 }
-:global(.cancelModal button){
+/* :global(.cancelModal button){
   margin:0;
 }
 :global(.cancelModal button:first-child){
@@ -79,7 +79,7 @@ body{
 :global(.cancelModal button:nth-child(2)){
   background: rgba(225,76,70,1);
   color: rgba(255,255,255,1);
-}
+} */
 
 .addBtn{
   display: -webkit-box;

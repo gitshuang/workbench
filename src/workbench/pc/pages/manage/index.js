@@ -277,9 +277,9 @@ class Home extends Component {
       {label:"取消",fun:this.popClose,className:""}
     ]
     const pop_btn2 = [
-      {label:"不保存",fun:this.cancel,className:""},
-      {label:"保存",fun:this.save,className:""},
-      {label:"取消",fun:this.popCloseCancel,className:""}
+      {label:"不保存",fun:this.cancel,type:"defaultAlpha"},
+      {label:"保存",fun:this.save,type:"warning"},
+      {label:"取消",fun:this.popCloseCancel,type:"defaultAlpha"}
     ]
     const list = [];
     return (

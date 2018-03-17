@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Modal from 'bee/modal';
 import { IS_REACT_16, IS_IE } from '@u';
 import Icon from 'components/icon';
-import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha} from 'components/button';
+import {ButtonBrand,ButtonWarning,ButtonDefaultAlpha,ButtonDanger} from 'components/button';
 import { btn, closeBtn,pop_type, error,warning,danger,success} from './style.css';
 import { setTimeout } from 'timers';
 
@@ -55,23 +55,57 @@ class PopDialog extends Component{
     return "";
   }
 
+  //此方法类型，和窗口类型保持一致，且增加其他没有的类型，后续用到哪些可自动增加。
+  getButtonType=(type,da,key)=>{
+    let _className = da.className ? da.className : null;
+    switch(type){
+      case 'error':
+        return <ButtonDanger key={"danger_pop_btn"+key} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn} danger`} disabled={da.disable?true:false} >{da.label}</ButtonDanger>;
+      case 'warning':
+        return <ButtonWarning key={"warning_pop_btn"+key} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn} warning`} disabled={da.disable?true:false} >{da.label}</ButtonWarning>;
+      case 'danger':
+        return <ButtonBrand key={"brand_pop_btn"+key} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn} brand`} disabled={da.disable?true:false} >{da.label}</ButtonBrand>;
+      case 'defaultAlpha':
+        return <ButtonDefaultAlpha key={"brand_pop_btn"+key} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn} defaultalpha`} disabled={da.disable?true:false} >{da.label}</ButtonDefaultAlpha>;
+    }
+    return "";
+  }
+
+  getButtonList=()=>{
+    const {btns,data} = this.props;
+    let _btns = [];
+    if(!btns || btns.length == 0)return _btns;
+    btns.map((da,i)=>{
+      let _button = null;
+      if(da.type){
+        _button = this.getButtonType(da.type,da,i);
+      }else{
+        _button = i===0?this.getButtonType("danger",da,i):this.getButtonType("defaultAlpha",da,i);
+      }
+      _btns.push(_button);
+    })
+    return _btns;
+  }
+
   render(){
     const {type} = this.props;
-    let _btns = [];
-    if(this.props.btns){
-        let _data = this.props.data ? this.props.data : this;
-        this.props.btns.map((da,i)=>{
-            let _className = da.className ? da.className : null;
-            let _defultAlphaButton = <ButtonDefaultAlpha key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn} defaultalpha`} >{da.label}</ButtonDefaultAlpha>;
-            let _button =  null;
-            if(this.props.type == "delete"){
-               _button = i===0?<ButtonWarning key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da)} } className={`${_className} ${btn} warning`} >{da.label}</ButtonWarning>:_defultAlphaButton;
-            }else{
-               _button = i===0?<ButtonBrand key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn} brand`} disabled={da.disable?true:false} >{da.label}</ButtonBrand>:_defultAlphaButton;
-            }
-            _btns.push(_button);
-        })
-    }
+    let _btns = this.getButtonList();
+
+    // if(this.props.btns){
+    //     let _data = this.props.data ? this.props.data : this;
+    //     this.props.btns.map((da,i)=>{
+    //         let _className = da.className ? da.className : null;
+    //         let _defultAlphaButton = <ButtonDefaultAlpha key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn} defaultalpha`} >{da.label}</ButtonDefaultAlpha>;
+    //         let _button =  null;
+    //         if(this.props.type == "delete"){
+    //            _button = i===0?<ButtonWarning key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da)} } className={`${_className} ${btn} warning`} >{da.label}</ButtonWarning>:_defultAlphaButton;
+    //         }else{
+    //            _button = i===0?<ButtonBrand key={"pop_btn"+i} onClick={ (e) => { this.btnClick(e,da) } } className={`${_className} ${btn} brand`} disabled={da.disable?true:false} >{da.label}</ButtonBrand>:_defultAlphaButton;
+    //         }
+    //         _btns.push(_button);
+    //     })
+    // }
+
     // this.props.backdrop?false:true
     return (<Modal className={`${IS_IE?'ie9_pop':''} ${this.props.className?this.props.className:"pop_dialog"} ${pop_type} ${this.getTypeClass(this.props.type)}` } backdrop={false} show = { this.props.show } onHide = { this.props.close } >
           <Modal.Header>

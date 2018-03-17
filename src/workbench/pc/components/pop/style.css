@@ -45,10 +45,10 @@
 .pop_type.error :global(.u-modal-header){
   padding-top: 30px;
 }
-.pop_type.error :global(.u-modal-footer .brand){
+/* .pop_type.error :global(.u-modal-footer .brand){
   background: #4C4C4C;
   color:rgba(255,255,255,1);
-}
+} */
 /************************ warning *************************/
 .pop_type.warning :global(.u-modal-title .iconfont){
   margin-right: 8px;
@@ -69,10 +69,10 @@
 .pop_type.warning :global(.u-modal-header){
   padding-top: 30px;
 }
-.pop_type.warning :global(.u-modal-footer .brand){
+/* .pop_type.warning :global(.u-modal-footer .brand){
   background: #FFAB00;
   color:#474D54;
-}
+} */
 /************************ danger *************************/
 .pop_type.danger :global(.u-modal-title .iconfont){
   margin-right: 8px;
