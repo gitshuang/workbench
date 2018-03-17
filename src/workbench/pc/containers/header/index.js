@@ -57,6 +57,9 @@ class HeaderContainer extends Component {
       showIm();
     }
   }
+  stopMultipleCall = (e) => {
+    e.stopPropagation();
+  }
   render() {
     const {
       children,
@@ -79,7 +82,7 @@ class HeaderContainer extends Component {
       <div className={`${appClass} ${rightBtn}`} style={{marginRight:"15px"}} onClick = {this.openService} >
         <Icon title="快捷应用" type="application" style={{"color":color}}/>
       </div>,
-      <div className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
+      <div className={`${imClass} ${rightBtn}`} onClick={this.toggleIM} onMouseDown={this.stopMultipleCall}>
         <Icon title="智能通讯" type="clock" style={{color}}/>
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>
