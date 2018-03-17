@@ -60,15 +60,21 @@ class DropdownButton extends Component{
   }
   
   render(){
-    let {label,dataItem,fun,type,marginLeft,lastIem} = this.props;
+    let {label,dataItem,fun,type,marginLeft,lastIem,openMenu} = this.props;
     // const {label } = this.state;
     let item = [];
-    dataItem.forEach((da,i) => {
-        item.push(<div key={da.name} className={item_li}  onClick={(e)=>{this.handleSelect(da)}} >
-        <div className={li_title}title={da.value}>{da.value}</div>
-        <div className={li_right}>{da.type == 1?"团队":"企业"}</div>
-        </div>);
-    });
+    if(dataItem.length != 0){
+      dataItem.forEach((da,i) => {
+          item.push(<div key={da.name} className={item_li}  onClick={(e)=>{this.handleSelect(da)}} >
+          <div className={li_title} title={da.value}>{da.value}</div>
+          <div className={li_right}>{da.type == 1?"团队":"企业"}</div>
+          </div>);
+      });
+    }else{
+      item.push(<div key="item_1001" className={item_li} >
+        <div className={li_title} >数据正在加载中....</div> 
+      </div>);
+    }
     let _marginLeft = -148;
     if(type && type == "home"){
       _marginLeft = marginLeft?marginLeft:-183;
@@ -95,7 +101,7 @@ class DropdownButton extends Component{
                 overlay={_menus}
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange} >
-                <div><Icon type={arrard} className={icon_style} /></div>
+                <div><Icon type={arrard} className={icon_style} onClick={openMenu}/></div>
             </Dropdown>
           </div>
       </div>)

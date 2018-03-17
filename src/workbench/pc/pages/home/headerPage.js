@@ -10,7 +10,7 @@ import Navbar from 'components/scrollNav';
 import { logoImg, header ,imgInner,all_btn,btn_disable,logo_title,title_drop} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 import DropdownButton from 'components/dropdown';
-const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay } = homeActions;
+const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay ,getSearchEnterOrTeam} = homeActions;
 
 const {
   requestStart,
@@ -20,6 +20,7 @@ const {
 
 @connect(
   mapStateToProps(
+    'searchEnterOrTeamList',
     'userInfoDisplay',
     'userInfo',
     {
@@ -27,6 +28,7 @@ const {
     }
   ),
   {
+    getSearchEnterOrTeam,
     changeUserInfoDisplay,
     hideUserInfoDisplay,
     changeRequestDisplay,
@@ -70,16 +72,24 @@ class HeaderPage extends Component {
     }
   }
 
+  openMenu=()=>{
+    const {getSearchEnterOrTeam} = this.props;
+    getSearchEnterOrTeam();//调用新接口
+  }
+
   getLeftContent() {
     const {
       userInfo: {
         logo,
-        allowTenants,
+        // allowTenants,
         company,
-      }
+      },
+      searchEnterOrTeamList:allowTenants
     } = this.props;
+
     return (<DropdownButton
     getPopupContainer={() => document.getElementById("home_header")}
+    openMenu={this.openMenu}
     closeFun={this.closeFun}
     label={company} type="home" dataItem={
       allowTenants.map(({

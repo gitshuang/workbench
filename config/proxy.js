@@ -12,6 +12,7 @@ var api = [
 
   '/user/setCutUser',
   '/user/getUserInfo',
+  '/user/getCanLoginTenants',
   
   '/getMessage',
   '/getSelectWidgetList',

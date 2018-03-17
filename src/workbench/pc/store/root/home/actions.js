@@ -1,6 +1,6 @@
 import { createActions } from '@u';
 import types from './types';
-import { getUserInfo,getEnterInfo, getWorkList,setCutUser,getSearchEnterList,setCreateEnter } from './api';
+import { getUserInfo,getEnterInfo, getWorkList,setCutUser,getSearchEnterList,setCreateEnter,getSearchEnterOrTeam } from './api';
 
 const {
   GET_USER_INFO,
@@ -14,7 +14,8 @@ const {
   CLOSE_FOLDER,
   SET_CUT_USER,
   GET_SEARCH_ENTER_LIST,
-  SET_CREATE_ENTER
+  SET_CREATE_ENTER,
+  GET_SEARCH_ENTER_OR_TEAM
 } = types;
 
 export default createActions(
@@ -27,7 +28,8 @@ export default createActions(
     [GET_WORK_LIST]: getWorkList,
     [SET_CUT_USER]: setCutUser,
     [GET_SEARCH_ENTER_LIST]:getSearchEnterList,
-    [SET_CREATE_ENTER]:setCreateEnter
+    [SET_CREATE_ENTER]:setCreateEnter,
+    [GET_SEARCH_ENTER_OR_TEAM]:getSearchEnterOrTeam
   },
   CHANGE_USER_INFO_DISPLAY,
   CHANGE_REQUEST_DISPLAY,

@@ -19,3 +19,5 @@ export const setCreateEnter = (list,updateType) => {
   }
 }
 export const getEnterInfo = (param) => get('/manager/enter/info?enterId='+param);
+
+export const getSearchEnterOrTeam = () => get('/user/getCanLoginTenants');

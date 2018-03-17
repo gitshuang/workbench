@@ -14,7 +14,8 @@ const {
   closeFolder,
   setCutUser,
   getSearchEnterList,
-  setCreateEnter
+  setCreateEnter,
+  getSearchEnterOrTeam,
 } = actions;
 
 const defaultState = {
@@ -29,7 +30,8 @@ const defaultState = {
     children: [],
   },
   folderModalDisplay: false,
-  enterList:[]
+  enterList:[],
+  searchEnterOrTeamList:[],
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -66,6 +68,12 @@ const reducer = handleActions({
       ...state,
       workList: payload.workList,
       metaData: metaData
+    };
+  },
+  [getSearchEnterOrTeam]: (state, { payload, error }) => {
+    return {
+      ...state,
+      searchEnterOrTeamList: payload,
     };
   },
   [setCutUser]: createReducer('setCutUser'),

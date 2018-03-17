@@ -13,4 +13,5 @@ export default createTypes(
   'GET_SEARCH_ENTER_LIST',
   'SET_CREATE_ENTER',
   'GET_ENTER_INFO',
+  'GET_SEARCH_ENTER_OR_TEAM',
 );

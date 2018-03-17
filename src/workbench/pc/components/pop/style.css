@@ -11,6 +11,9 @@
     cursor: pointer;
     height: 30px !important;
 }
+:global(.u-modal.fade){
+  transition: none;
+}
 :global(.u-modal.in .u-modal-dialog){
   position: relative;
   top: 50%;

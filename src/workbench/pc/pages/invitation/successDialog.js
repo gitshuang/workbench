@@ -12,8 +12,10 @@ class ErrorDialog extends Component {
     } = this.props;
     return (
       <PopDialog
+        className="invitation_pop"
         title={'邀请成员'}
         show={show}
+        type="success"
         backup={true}
         close={close}
         btns={[
