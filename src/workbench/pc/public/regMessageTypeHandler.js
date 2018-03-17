@@ -3,6 +3,7 @@ import rootActions from 'store/root/actions';
 import { openGlobalDialog, closeGlobalDialog } from 'components/pop';
 import store from "store";
 import { postMessageToWin, get } from "@u";
+import {enter_or_team} from "./regMessageTypeHandler.css";
 
 const { addBrm , popBrm} = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
@@ -16,11 +17,12 @@ const handlers = {
         const { crossTenant, serveName, url } = data;
         if (crossTenant) {
           openGlobalDialog({
+            type:"warning",
+            className:enter_or_team, 
             title: '即将切换租户',
             content: '是否切换租户？',
             btns: [
               {
-                type: 'brand',
                 label: '切换',
                 fun: () => {
                   const {

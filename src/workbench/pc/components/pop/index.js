@@ -129,79 +129,84 @@ class PopDialog extends Component{
     </Modal>)}
 }
 
-class DialogComponent extends Component{
-  static defaultProps = {
-    title: '',
-    content: '',
-    btns: [],
-    show: true,
-    backdrop:true,
-  }
-  btnClickMaker(fn,disable) {
-    if(disable)return;
-    const { close } = this.props;
-    if (fn && typeof fn === 'function') {
-      return () => {
-        fn(close);
-      };
-    } else {
-      return close;
-    }
-  }
-  render(){
-    const {
-      title,
-      content,
-      show,
-      btns,
-      close,
-      backdrop,
-    } = this.props;
-    return(
-      <Modal className="pop_dialog" backdrop={backdrop} show={show}>
-        <Modal.Header>
-          <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            {content}
-          </div>
-          <div className={closeBtn} onClick={close} >
-            <Icon type="error3" />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          {
-            btns.map(({ type, label, fun ,disable}, i) => {
-              if (!label) {
-                return null;
-              }
-              let BtnComponent = ButtonDefaultAlpha;
-              switch(type) {
-                case 'brand':
-                  BtnComponent = ButtonBrand;
-                  break;
-                case 'warning':
-                  BtnComponent = ButtonWarning;
-                  break;
-                default:
-                  break;
-              }
-              return (
-                <BtnComponent disabled={disable?true:false}
-                  key={i}
-                  className={btn}
-                  onClick={()=>{this.btnClickMaker(fun,_disable)}} >
-                  {label}
-                </BtnComponent>
-              );
-            })
-          }
-        </Modal.Footer>
-      </Modal>
-    )
-  }
-}
+// const PopDialog = ({ ...props }) => {
+//   // const { children ,disabled} = props;
+//   return(<PopDialogComponent {...props} />)
+// };
+
+// class DialogComponent extends Component{
+//   static defaultProps = {
+//     title: '',
+//     content: '',
+//     btns: [],
+//     show: true,
+//     backdrop:true,
+//   }
+//   btnClickMaker(fn,disable) {
+//     if(disable)return;
+//     const { close } = this.props;
+//     if (fn && typeof fn === 'function') {
+//       return () => {
+//         fn(close);
+//       };
+//     } else {
+//       return close;
+//     }
+//   }
+//   render(){
+//     const {
+//       title,
+//       content,
+//       show,
+//       btns,
+//       close,
+//       backdrop,
+//     } = this.props;
+//     return(
+//       <Modal className="pop_dialog" backdrop={backdrop} show={show}>
+//         <Modal.Header>
+//           <Modal.Title>{title}</Modal.Title>
+//         </Modal.Header>
+//         <Modal.Body>
+//           <div>
+//             {content}
+//           </div>
+//           <div className={closeBtn} onClick={close} >
+//             <Icon type="error3" />
+//           </div>
+//         </Modal.Body>
+//         <Modal.Footer>
+//           {
+//             btns.map(({ type, label, fun ,disable}, i) => {
+//               if (!label) {
+//                 return null;
+//               }
+//               let BtnComponent = ButtonDefaultAlpha;
+//               switch(type) {
+//                 case 'brand':
+//                   BtnComponent = ButtonBrand;
+//                   break;
+//                 case 'warning':
+//                   BtnComponent = ButtonWarning;
+//                   break;
+//                 default:
+//                   break;
+//               }
+//               return (
+//                 <BtnComponent disabled={disable?true:false}
+//                   key={i}
+//                   className={btn}
+//                   onClick={()=>{this.btnClickMaker(fun,_disable)}} >
+//                   {label}
+//                 </BtnComponent>
+//               );
+//             })
+//           }
+//         </Modal.Footer>
+//       </Modal>
+//     )
+//   }
+// }
 
 class Dialog {
   constructor(options) {
@@ -236,7 +241,7 @@ class Dialog {
   }
   render = () => {
     const { props, div } = this;
-    ReactDOM.render(<DialogComponent { ...props } />, div);
+    ReactDOM.render(<PopDialog { ...props } show={true}>{this.props.content}</PopDialog>, div);
     return this;
   }
   destroy = () => {
