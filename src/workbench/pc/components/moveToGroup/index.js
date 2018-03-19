@@ -35,7 +35,8 @@ class MoveToGroup extends Component {
   // 新分组名称的onchange
   setNewGroupName =(e) => {
     this.setState({
-      newGroupName: e.target.value
+      newGroupName: e.target.value,
+      way: e.target.value
     })
   }
   //  点击每一行对应的操作
