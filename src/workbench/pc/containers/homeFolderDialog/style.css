@@ -7,11 +7,11 @@
   overflow: auto;
   height: 400px;
 }
-.home_file_item_dailog{
+/* .home_file_item_dailog{
   display: -webkit-box !important;
   -webkit-box-pack: center;
   -webkit-box-align: center;
-}
+} */
 .home_file_item_dailog :global(.u-modal-content){
   padding:16px;
 }

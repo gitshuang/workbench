@@ -77,7 +77,7 @@ class DropdownButton extends Component{
     }
     let _marginLeft = -148;
     if(type && type == "home"){
-      _marginLeft = marginLeft?marginLeft:-183;
+      _marginLeft = marginLeft?marginLeft:-192;
     }
     // onSelect={(e)=>{this.handleSelect(e,fun)}} 
     let _menus = (<Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}}  >

@@ -85,15 +85,15 @@ body {
   -webkit-box-flex: 1;
 }
 
-.lebra-navbar-left-content {
+/* .lebra-navbar-left-content {
   -webkit-box-flex: 1;
   border-radius: 100px;
   margin-left: 8px;
-  /* line-height: 36px; */
-}
-.home .lebra-navbar-left-content {
+  
+} */
+/* .home .lebra-navbar-left-content {
   border: 1px solid #E6E7E9;
-}
+} */
 
 .lebra-navbar-left-icon .iconfont {
   font-size: 20px;
