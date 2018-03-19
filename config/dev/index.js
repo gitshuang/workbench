@@ -3,6 +3,7 @@ const webpackConfig = require('./webpack');
 
 const config = {
   env: '"development"',
+  host: '""',
   assetsSubDirectory: 'static',
   assetsPublicPath: '/',
 

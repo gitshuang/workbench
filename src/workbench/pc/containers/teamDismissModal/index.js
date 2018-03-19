@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions'; 
 const { dismissTeam, closeDismissModal } = teamconfigActions; 
-import PopDialog from 'components/pop';
+import PopDialog from 'pub-comp/pop';
 import {content} from './index.css';
 import SelectEnter from '../teamExitModal/selectEnter'
 

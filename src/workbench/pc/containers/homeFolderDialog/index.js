@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from 'bee/button';
-import PopDialog from 'components/pop';
+import PopDialog from 'pub-comp/pop';
 import { withRouter } from 'react-router-dom'
 import WidgetMaker from 'components/widget';
 import { content ,home_file_item_dailog,close,home} from './style.css';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { ButtonBrand } from 'components/button';
+import { ButtonBrand } from 'pub-comp/button';
 import { uploadApplication }from 'store/root/api';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import { upload_page, appImg, appValidate, uploadImg ,edit} from './style.css';
 
 class UploadPage extends Component {

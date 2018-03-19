@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import "./index.css";
 
 const defaultProps = {

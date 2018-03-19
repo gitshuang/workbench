@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import actions from 'store/root/work/actions';
 import Menu, { SubMenu } from 'bee/menus';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 // import { Scrollbars } from 'react-custom-scrollbars';
 import { mapStateToProps, findPath } from '@u';
 import { sideBar ,menuItem,menuArrow,sideBarMenu,sideMainMenu,item_1,item_2,item_3,item_4,last_item} from './style.css';

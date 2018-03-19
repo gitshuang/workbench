@@ -6,7 +6,7 @@ import { mapStateToProps, findPath } from '@u';
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 /*  components 组件 */
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import Message from 'bee/message';
 /*  containers 容器组件  */
 import TabsContainer from 'containers/tabs';
@@ -202,7 +202,7 @@ export default class Work extends Component {
       setPinCancel(serviceCode).then(({error, payload}) => {
         if (error) {
           requestError(payload);
-          Message.create({content: '从首页移除失败!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto',top:15,left: 250}});  
+          Message.create({content: '从首页移除失败!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto',top:15,left: 250}});
         }
         Message.create({content: '从首页移除成功!',duration:1.5,position: 'topLeft',color: "success",style:{height:'auto',top:15,left: 250}});
         requestSuccess();

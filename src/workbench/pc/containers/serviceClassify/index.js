@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { mapStateToProps ,guid} from '@u';
 import { withRouter } from 'react-router-dom';
 import Button from 'bee/button';
-import Icon from 'components/icon';
-// import InputGroup from 'bee-input-group';
-// import AutoComplete from 'bee-autocomplete';
+import Icon from 'pub-comp/icon';
 import FormControl from 'bee/form-control';
-// import Menu from 'bee-menus';
 import ButtonGroup from 'bee/button-group';
-import { ButtonBrand } from 'components/button';
+import { ButtonBrand } from 'pub-comp/button';
 import GoTo from './goto';
 
 import {
@@ -50,7 +47,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
         console.log(root);
         return root.home.userInfo
       }
-    }, 
+    },
     {
       namespace: 'application',
     },

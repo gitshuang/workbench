@@ -9,10 +9,9 @@ import WidgetItem from './widgetItem';
 import Checkbox from 'bee/checkbox';
 import FormControl from 'bee/form-control';
 import Button from 'bee/button';
-import PopDialog from 'components/pop';
-import Icon from 'components/icon';
-import BeeIcon from 'bee/icon';
-import {ButtonDefaultLine,ButtonCheckClose,ButtonCheckSelected} from 'components/button';
+import PopDialog from 'pub-comp/pop';
+import Icon from 'pub-comp/icon';
+import {ButtonDefaultLine,ButtonCheckClose,ButtonCheckSelected} from 'pub-comp/button';
 
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
@@ -268,7 +267,6 @@ class WidgeFileItem extends Component {
 
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } type="delete" close={this.popClose} data={da} btns={pop_btn} >
           <div className="pop_cont">
-            <BeeIcon type="uf-exc-t" className="icon"/>
             <span>您确认要删除服务[{this.props.data.widgetName}]?</span>
           </div>
         </PopDialog>

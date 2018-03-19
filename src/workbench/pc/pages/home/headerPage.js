@@ -4,7 +4,7 @@ import { mapStateToProps, GetQueryString } from '@u';
 import rootActions from 'store/root/actions';
 /*   actions   */
 import homeActions from 'store/root/home/actions';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
 import Navbar from 'components/scrollNav';
 import { logoImg, header ,imgInner,all_btn,btn_disable,logo_title,title_drop} from './style.css';

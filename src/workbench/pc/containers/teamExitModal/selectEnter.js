@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import homeActions from 'store/root/home/actions';
-import PopDialog from 'components/pop';
+import PopDialog from 'pub-comp/pop';
 import {content,select_enter} from './index.css';
 import DropdownButton from 'components/dropdown';
 

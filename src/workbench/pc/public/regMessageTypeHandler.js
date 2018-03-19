@@ -1,6 +1,6 @@
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
-import { openGlobalDialog, closeGlobalDialog } from 'components/pop';
+import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
 import { postMessageToWin, get } from "@u";
 import {enter_or_team} from "./regMessageTypeHandler.css";

@@ -13,7 +13,7 @@ import rootActions from 'store/root/actions';
 import { wrap } from 'assets/style/base.css';
 import HeaderPage from './headerPage';
 import { page_home } from './style.css';
-import ButtonDefault,{ButtonBrand, ButtonDefaultLine,ButtonDefaultAlpha,ButtonWarning,ButtonDanger,} from 'components/button';
+import ButtonDefault,{ButtonBrand, ButtonDefaultLine,ButtonDefaultAlpha,ButtonWarning,ButtonDanger,} from 'pub-comp/button';
 
 const { getWorkList } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;

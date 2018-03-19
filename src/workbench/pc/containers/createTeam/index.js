@@ -9,7 +9,7 @@ import homeActions from 'store/root/home/actions';
 import FormControl from 'bee/form-control';
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { changeUserInfoDisplay, getUserInfo } = homeActions;

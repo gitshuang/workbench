@@ -16,8 +16,7 @@ import TeamTransferModal from 'containers/teamTransferModal';
 import CreateTeam from './createTeam';
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
-import BeeIcon from 'bee/icon';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import Tabs from 'bee/tabs';
 import Dropdown from 'bee/dropdown';
 import Menu from 'bee/menus';
@@ -657,9 +656,7 @@ class CreateTeamContent extends Component {
               style={{textAlign:"center",cursor:"pointer" }}
               onClick={this.searchFn}
             >
-              <BeeIcon type="uf-search">
-                <span className={search_label}>搜索</span>
-              </BeeIcon>
+              <span className={search_label}>搜索</span>
             </div>
           </div>
           <div className={memberBtns + " um-bf1 um-box-vc"}>

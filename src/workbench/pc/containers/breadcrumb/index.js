@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import Breadcrumbs from 'components/breadcrumb';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import { mapStateToProps } from '@u';
 import actions from 'store/root/work/actions';
 import {

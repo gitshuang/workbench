@@ -2,7 +2,7 @@ import React, { Component, Children, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from 'components/header';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
 import styles from './index.css';
@@ -35,7 +35,11 @@ class HeaderContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
   }
-
+  componentDidMount() {
+    this.refs.IM.addEventListener('mousedown', (e) => {
+      e.stopPropagation();
+    });
+  }
   openService = () => {
     const { changeQuickServiceDisplay, quickServiceDisplay, changeQuickServiceHidden } = this.props;
     if(quickServiceDisplay){
@@ -57,9 +61,6 @@ class HeaderContainer extends Component {
       showIm();
     }
   }
-  stopMultipleCall = (e) => {
-    e.stopPropagation();
-  }
   render() {
     const {
       children,
@@ -79,10 +80,10 @@ class HeaderContainer extends Component {
     let imClass = imShowed ? "active tc" : "tc"
     const rightContents = rightArray.concat(
       <SearchContainer color={color} />,
-      <div className={`${appClass} ${rightBtn}`} style={{marginRight:"15px"}} onClick = {this.openService} >
+      <div className={`application-btn ${appClass} ${rightBtn}`} style={{marginRight:"15px"}} onClick = {this.openService} >
         <Icon title="快捷应用" type="application" style={{"color":color}}/>
       </div>,
-      <div className={`${imClass} ${rightBtn}`} onClick={this.toggleIM} onMouseDown={this.stopMultipleCall}>
+      <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{color}}/>
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>

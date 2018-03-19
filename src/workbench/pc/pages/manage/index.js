@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
 import HTML5BackendGroup from 'react-dnd-html5-backend';
 
-import {ButtonDefaultLine,ButtonBrand,ButtonDefaultAlpha} from 'components/button';
+import {ButtonDefaultLine,ButtonBrand,ButtonDefaultAlpha} from 'pub-comp/button';
 import Button from 'bee/button';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
@@ -16,8 +16,7 @@ import Header from 'containers/header';
 import ManageGroup from 'containers/manageGroup';
 import ManageFolderDialog from 'containers/manageFolderDialog';
 import ManageBatchMoveDialog from 'containers/manageBatchMoveDialog';
-import PopDialog from 'components/pop';
-import 'assets/style/iuapmobile.um.css';
+import PopDialog from 'pub-comp/pop';
 
 
 import {
@@ -201,7 +200,7 @@ class Home extends Component {
     openBatchMove();
   }
   // 打开删除的弹窗
-  popOpen = () => { 
+  popOpen = () => {
     this.setState({
       showModal: true
     });

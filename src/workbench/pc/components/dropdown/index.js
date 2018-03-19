@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from "prop-types";
 import Dropdown from 'bee/dropdown';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import Menu, { Item as MenuItem, Divider, SubMenu, MenuItemGroup } from 'bee/menus';
 import {dropdown_button_cont,label_cont,btn_upward,btn_pull_down,icon_style,menu_style,
   drop_MenuItem,_Menu_Item,create_ent,
@@ -51,14 +51,14 @@ class DropdownButton extends Component{
         visible: false
     });
   }
-  
+
   enterOnclick=()=>{
       const {
-        history, 
+        history,
       } = this.props;
       history.push('/establishusercenter');
   }
-  
+
   render(){
     let {label,dataItem,fun,type,marginLeft,lastIem,openMenu} = this.props;
     // const {label } = this.state;
@@ -72,16 +72,16 @@ class DropdownButton extends Component{
       });
     }else{
       item.push(<div key="item_1001" className={item_li} >
-        <div className={li_title} >数据正在加载中....</div> 
+        <div className={li_title} >数据正在加载中....</div>
       </div>);
     }
     let _marginLeft = -148;
     if(type && type == "home"){
       _marginLeft = marginLeft?marginLeft:-192;
     }
-    // onSelect={(e)=>{this.handleSelect(e,fun)}} 
+    // onSelect={(e)=>{this.handleSelect(e,fun)}}
     let _menus = (<Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}}  >
-       <MenuItem className={menu_item} > 
+       <MenuItem className={menu_item} >
           <div className={item_ul}>{item}</div>
           {lastIem?null:<div className={create_ent} onClick={this.enterOnclick} >创建团队 \ 创建企业</div>}
        </MenuItem>
