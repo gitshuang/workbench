@@ -86,7 +86,6 @@ class HeaderPage extends Component {
       },
       searchEnterOrTeamList:allowTenants
     } = this.props;
-
     return (<DropdownButton
     getPopupContainer={() => document.getElementById("home_header")}
     openMenu={this.openMenu}
@@ -95,7 +94,7 @@ class HeaderPage extends Component {
       allowTenants.map(({
         tenantId: name,
         tenantName: value,
-        type
+        team:type
       }) => {
         return {
           name,

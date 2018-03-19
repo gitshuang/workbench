@@ -29,7 +29,8 @@ import {
   tabPane3,
   qrCode,
   printQrBtn,
-  tootip
+  tootip,
+  first_p
 } from './style.css';
 
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -43,8 +44,15 @@ const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
   mapStateToProps(
     'inviteJoinAddress',
     {
+      key: 'userInfo',
+      value: (invitation,ownProps,root) => {
+        return root.home.userInfo
+      }
+    },
+    {
       namespace: 'invitation',
     },
+    
   ),
   {
     requestStart,
@@ -61,10 +69,13 @@ class Invitation extends Component {
       url: '',
       mails: [],
       successDialogShow: false,
-      copy:false
+      copy:false,
+      userName:props.userInfo.userName,
+      invitationDesc:''
     }
     this.goBack = this.goBack.bind(this);
   }
+ 
   componentWillMount() {
     const {requestStart, requestSuccess, requestError,getInviteUsersJoinAddress} = this.props;
     requestStart();
@@ -145,13 +156,23 @@ class Invitation extends Component {
       successDialogShow: false,
     })
   }
+
+  setOptherData=(obj)=>{
+    this.state[obj.name] = obj.value; 
+    this.setState({
+      ...this.state
+    })
+  }
+
   render() {
     const {
       url,
       mails,
       errorDialogShow,
       successDialogShow,
-      copy
+      copy,
+      userName,
+      invitationDesc
     } = this.state;
 
     let tip = (
@@ -195,6 +216,14 @@ class Invitation extends Component {
 
               </TabPane>
               <TabPane tab='邮件邀请' key="2" className={tabPane2}>
+                
+                <p className={first_p}>给你的小伙伴捎句话吧:</p>
+                <FormControl placeholder="友空间-赋能个人、激活组织" value={invitationDesc} 
+                onChange={(e)=>{this.setOptherData({name:"invitationDesc",value:e})} }/>
+
+                <p>署名:</p>
+                <FormControl value={userName} onChange={(e)=>{this.setOptherData({name:"userName",value:e})} }/>
+
                 <p>输入邮箱地址并用 “;” 隔开</p>
                 <TagsInput
                   value={this.state.mails}

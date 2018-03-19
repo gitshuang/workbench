@@ -15,7 +15,7 @@
 	margin-top: 85px;
 }
 .content {
-  height: 515px;
+  /* height: 515px; */
   margin: 20px 65px 0;
   padding: 40px;
   background: #fff;
@@ -28,6 +28,10 @@
 }
 .content p{
   margin-bottom: 4px;
+  margin-top: 22px;
+}
+.first_p{
+  margin-top: 0px !important;
 }
 .urlArea{
   padding: 13px 0 13px 24px;
@@ -91,8 +95,8 @@
   border:none;
   background:transparent;
 }
-.wrap :global(.u-form-control){
-  height: 280px;
+.wrap .tabPane2 :global(.u-form-control){
+  height: 36px;
 }
 .tabPane1,.tabPane2,.tabPane3{
   padding-right: 107px;
