@@ -35,7 +35,7 @@ class Enterprise extends Component {
   }
 
   render() {
-    const {match:{params},teamList ,userInfo:{allowTenants}} = this.props;
+    const {match:{params},teamList ,userInfo:{allowTenants},userInfo} = this.props;
     let _class = params.data == "home"?home_none:"";
     return (
       <div className={`um-win ${_class}`}>
@@ -56,7 +56,7 @@ class Enterprise extends Component {
           <div className={enter_title} >创建企业</div>
           <hr className={hr}/>
           <div className={enter_cont} >
-            <CreateEnter  />
+            <CreateEnter userInfo={userInfo} />
           </div> 
           <hr className={hr, hr2}/>
         </div>

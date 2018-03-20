@@ -17,6 +17,6 @@
       "invitePermission": "1",
       "joinPermission": "1",
       "allowExit": "0",
-      "tenantSize":"0"
+      "tenantSize":null
   }
 }

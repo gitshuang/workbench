@@ -21,6 +21,7 @@ import {
   footer,
   create_team_cont,footer_hr,
   upload,
+  titlp_lab,
   name_error
 } from './index.css';
 
@@ -185,6 +186,7 @@ class CreateTeamContent extends Component {
                   <Icon type="copyreader" />
                   <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
                 </div>
+                <span className={titlp_lab}>{"图片大小<=200K​"}</span>
               </div>
           </div>
         </div>

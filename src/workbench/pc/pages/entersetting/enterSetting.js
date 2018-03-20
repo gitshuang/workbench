@@ -104,8 +104,32 @@ class CreateEnter extends Component {
       {value:"E",label:"501-1000"},
       {value:"F",label:"1001－2000"},
       {value:"G",label:">2000人"},
-    ]
+    ];
 
+    this.tenantIndustry =[
+      {value:"A",label:"农、林、牧、渔业"},
+      {value:"B",label:"采矿业"},
+      {value:"C",label:"制造业"},
+      {value:"D",label:"电力、热力、燃气及水的生产和供应业"},
+      {value:"S",label:"环境和公共设施管理业、社会保障和社会组织"},
+      {value:"E",label:"建筑业"},
+      {value:"G",label:"交通运输、仓储业和邮政业"},
+      {value:"I",label:"信息传输、计算机服务和软件业"},
+      {value:"F",label:"批发和零售业"},
+      {value:"H",label:"住宿、餐饮业"},
+      {value:"J",label:"金融、保险业"},
+      {value:"K",label:"房地产业"},
+      {value:"L",label:"租赁和商务服务业"},
+      {value:"M",label:"科学研究、技术服务和地质勘查业"},
+      {value:"N",label:"水利、环境和公共设施管理业"},
+      {value:"O",label:"居民服务和其他服务业"},
+      {value:"P",label:"教育"},
+      {value:"Q",label:"卫生、社会保障和社会服务业"},
+      {value:"R",label:"文化、体育、娱乐业"},
+      {value:"T",label:"国际组织"},
+      {value:"E",label:"建筑业"},
+      {value:"E",label:"建筑业"},
+    ]
   }
 
   componentWillReceiveProps(nextProps){
@@ -119,8 +143,12 @@ class CreateEnter extends Component {
     }else{
       data["address"] ={province:"北京",city:"北京",area:"东城区"};
     }
-    let b = this.tenantSizeOption.find((da)=>da.value == data["tenantSize"]);
-    b?null:data["tenantSize"] = this.tenantSizeOption[0].value;
+
+    // if(!data["tenantSize"] || data["tenantSize"] == "0"){
+    //   data["tenantSize"] = "-规模范围-";
+    // }
+    // let b = this.tenantSizeOption.find((da)=>da.value == data["tenantSize"]);
+    // b?null:data["tenantSize"] = this.tenantSizeOption[0].value;
 
     if(!data["linkman"] || data["linkman"] == ""){
       data["linkman"] = userInfo["userName"]
@@ -278,7 +306,8 @@ class CreateEnter extends Component {
       this.tenantSizeOption.forEach(({value,label},i)=>{
         _tenantSizeOption.push(<Option key={value+"_"+i} value={value}>{label}</Option>);
       })
-
+     
+    console.log("_tenantSize",tenantSize);
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'>&nbsp;*&nbsp;</font></span>}
@@ -288,50 +317,59 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像 &nbsp;&nbsp;&nbsp; </span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
+              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  tip="图片大小<=200K​"> 
+              </Upload> 
             </FormItem>
-            <FormItem showMast={false}  labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
-                <Select
-                    name="tenantIndustry"
-                    defaultValue="A"
-                    value={tenantIndustry?tenantIndustry:"A"}
-                    style={{ width: 338, marginRight: 6 }}
-                    onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
-                    >
-                    <Option value="A">农、林、牧、渔业</Option>
-                    <Option value="B">采矿业</Option>
-                    <Option value="C">制造业</Option>
-                    <Option value="D">电力、热力、燃气及水的生产和供应业</Option>
-                    <Option value="S">环境和公共设施管理业、社会保障和社会组织</Option>
-                    <Option value="E">建筑业</Option>
-                    <Option value="G">交通运输、仓储业和邮政业</Option>
-                    <Option value="I">信息传输、计算机服务和软件业</Option>
-                    <Option value="F">批发和零售业</Option>
-                    <Option value="H">住宿、餐饮业</Option>
-                    <Option value="J">金融、保险业</Option>
-                    <Option value="K">房地产业</Option>
-                    <Option value="L">租赁和商务服务业</Option>
-                    <Option value="M">科学研究、技术服务和地质勘查业</Option>
-                    <Option value="N">水利、环境和公共设施管理业</Option>
-                    <Option value="O">居民服务和其他服务业</Option>
-                    <Option value="P">教育</Option>
-                    <Option value="Q">卫生、社会保障和社会服务业</Option>
-                    <Option value="R">文化、体育、娱乐业</Option>
-                    <Option value="T">国际组织</Option>
-                </Select>
-            </FormItem>
-
-            <FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
-                <Select
-                    defaultValue="A"
-                    value={tenantSize?tenantSize:"A"}
-                    name="tenantSize"
-                    style={{ width: 338, marginRight: 6 }}
-                    onChange={(e)=>{this.setOptherData({name:"tenantSize",value:e})} }
-                    >
-                    {_tenantSizeOption}
-                </Select>
-            </FormItem>
+            
+            {
+              tenantIndustry?(<FormItem showMast={false}  labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                    <Select
+                        name="tenantIndustry"
+                        defaultValue="-所属行业-"
+                        value={tenantIndustry?tenantIndustry:"-所属行业-"}
+                        style={{ width: 338, marginRight: 6 }}
+                        onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
+                        >
+                        {
+                          this.tenantIndustry.map(({label,value})=>{return <Option value={value}>{label}</Option>})
+                        }
+                    </Select>
+                </FormItem>):(<FormItem showMast={false}  labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                    <Select
+                        name="tenantIndustry"
+                        defaultValue="-所属行业-"
+                        style={{ width: 338, marginRight: 6 }}
+                        onChange={(e)=>{this.setOptherData({name:"tenantIndustry",value:e})} }
+                        >
+                        {
+                          this.tenantIndustry.map(({label,value})=>{return <Option value={value}>{label}</Option>})
+                        }
+                    </Select>
+                </FormItem>)
+            }
+ 
+            {
+              tenantSize?(<FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
+                    <Select
+                        name="tenantSize"
+                        defaultValue="-规模范围-" 
+                        value={tenantSize}
+                        style={{ width: 338, marginRight: 6 }}
+                        onChange={(e)=>{this.setOptherData({name:"tenantSize",value:e})} }
+                        >
+                        {_tenantSizeOption}
+                    </Select>
+                </FormItem>):(<FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
+                    <Select
+                        name="tenantSize"
+                        defaultValue="-规模范围-"
+                        style={{ width: 338, marginRight: 6 }}
+                        onChange={(e)=>{this.setOptherData({name:"tenantSize",value:e})} }
+                        >
+                        {_tenantSizeOption}
+                    </Select>
+                </FormItem>)
+            }
 
             {
               address ? (
