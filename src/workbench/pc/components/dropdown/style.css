@@ -1,4 +1,4 @@
-.dropdown_button_cont{ 
+.dropdown_button_cont{
     display: table;
     border: 1px solid #E6E7E9;
     border-radius: 100px;
@@ -9,7 +9,7 @@
 .label_cont{
     margin-left: -8px;
     display: table-cell;
-} 
+}
 .btn_upward,.btn_pull_down{
     text-align: center;
 }
@@ -18,12 +18,13 @@
 }
 .btn_upward .icon_style{
     color:rgba(225,76,70,1);
-    
+
 }
 .icon_style{
     color: rgba(105,111,122,1);
     cursor: pointer;
     font-weight: bold;
+    vertical-align: middle;
 }
 .btn_pull_down:hover{
     background:rgba(9,30,66,0.08);
@@ -48,7 +49,7 @@
 
 .menu_style{
     box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
-    border: rgba(78,89,104,0.19); 
+    border: rgba(78,89,104,0.19);
     /* max-height: 400px; */
     width: 219px;
 }
@@ -56,7 +57,7 @@
     background: red;
 }
 
-/* 
+/*
 :global(.u-dropdown){
     margin-left: -88px;
 } */
@@ -71,16 +72,16 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     position: absolute;
     right: 8px;
     bottom: 0px;
-    color: rgba(74,81,93,0.8); 
+    color: rgba(74,81,93,0.8);
 }
-.create_ent{ 
+.create_ent{
     cursor: pointer;
     padding-left: 9px;
     border-top: 1px solid #cccccc;
 }
 .menu_item{
     height: auto !important;
-    padding: 0px !important; 
+    padding: 0px !important;
     padding-left: 2px;
     background:#fff !important;
 }
@@ -103,12 +104,12 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 }
 .item_ul{
     overflow-y: auto;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     max-height: 400px;
     padding-left: 5px;
 }
 .li_title{
-    width: 146px; 
+    width: 146px;
     padding-left: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -118,7 +119,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     float: left;
 }
 .li_right{
-    width: 50px;  
+    width: 50px;
     text-align: center;
     color: RGBA(74, 81, 93, 0.5);
     float: left;
