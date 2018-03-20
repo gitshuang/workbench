@@ -47,6 +47,7 @@ class Pin extends Component {
     }
   }
   componentDidMount() {
+    return;
     const { requestStart, requestSuccess, requestError, getPinGroup} = this.props;
     getPinGroup().then( ({ error, payload }) => {
       if (error) {
