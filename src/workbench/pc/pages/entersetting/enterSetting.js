@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
-import Form, { FormItem } from 'bee-form';
+import Form, { FormItem } from 'bee/form';
 import Upload from 'containers/upload';
 import FormControl from 'bee/form-control';
 import Radio from 'bee/radio';
 import Select from 'bee/select';
-import { ButtonBrand } from 'components/button';
+import { ButtonBrand } from 'pub-comp/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import CitySelect from 'bee/city-select';
@@ -93,7 +93,7 @@ class CreateEnter extends Component {
     super(props);
     this.state = {
       address:null,
-      disabled:true, 
+      disabled:true,
     }
 
     this.tenantSizeOption =[
@@ -376,7 +376,7 @@ class CreateEnter extends Component {
               <Radio.RadioGroup name="allowExit" selectedValue={this.state.value} onChange={this.allowExitChange} selectedValue={allowExit?allowExit:"0"}>
                 <Radio value="0" >禁止</Radio>
                 <Radio value="1" >允许</Radio>
-              </Radio.RadioGroup> 
+              </Radio.RadioGroup>
             </FormItem>
 
             <div className={lxr_hr}>

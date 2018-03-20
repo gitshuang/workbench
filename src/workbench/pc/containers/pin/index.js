@@ -10,9 +10,8 @@ import workActions from 'store/root/work/actions';
 /*  comp */
 import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee/button';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 /*  style */
-import 'assets/style/iuapmobile.um.css'
 import {
   pin,
   header,
@@ -143,7 +142,7 @@ class Pin extends Component {
         />
       </div>
     ) : null;
-    
+
     return (
       <TransitionGroup>
         <CSSTransitionGroup

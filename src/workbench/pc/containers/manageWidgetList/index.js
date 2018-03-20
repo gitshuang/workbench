@@ -3,15 +3,13 @@ import { Link } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
 import update from 'react/lib/update';
 import PropTypes from 'prop-types';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import Button from 'bee/button';
-// import Popconfirm from 'bee-popconfirm';
 import { widgetList, widgetItem, title, file_context, title_left,
   file_icon, title_right, context, bottom ,footer,clearfix,addModule,pop_dialog_widge_list} from './style.css'
 import WidgetItem from './widgetItem';
 import WidgeFileItem from './widgeFileItem';
-// import Checkbox from 'bee-checkbox';
-import PopDialog from 'components/pop';
+import PopDialog from 'pub-comp/pop';
 import SelectWidgetList from 'containers/manageSelectWidgetList';
 
 import { connect } from 'react-redux';

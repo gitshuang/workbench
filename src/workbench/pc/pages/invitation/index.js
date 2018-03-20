@@ -6,13 +6,13 @@ import rootActions from 'store/root/actions';
 import inviteActions from 'store/root/invitation/actions';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
-import {ButtonBrand} from 'components/button';
+import {ButtonBrand} from 'pub-comp/button';
 import Button from 'bee/button';
 import SuccessDialog from './successDialog';
 import Tabs, { TabPane } from 'bee/tabs';
 import FormControl from 'bee/form-control';
 import TagsInput from 'components/tagsInput';
-import Message from 'bee-message';
+import Message from 'bee/message';
 
 import {
   header,
@@ -52,7 +52,7 @@ const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     {
       namespace: 'invitation',
     },
-    
+
   ),
   {
     requestStart,
@@ -75,7 +75,7 @@ class Invitation extends Component {
     }
     this.goBack = this.goBack.bind(this);
   }
- 
+
   componentWillMount() {
     const {requestStart, requestSuccess, requestError,getInviteUsersJoinAddress} = this.props;
     requestStart();
@@ -99,7 +99,7 @@ class Invitation extends Component {
   copyLink = () => {
     this.refs['shortUrl'].select();
     document.execCommand('copy');
- 
+
     Message.create({content: '链接复制成功，赶快发送给你的小伙伴吧!',duration:1.5,position: 'topLeft', color: "success",style:{height:'auto',top: 270,left: 300}});
   }
   onMailChange = (i) => (e) => {
@@ -138,7 +138,7 @@ class Invitation extends Component {
     this.setState({
       mails: ['', ''],
       successDialogShow: true,
-    }); 
+    });
   }
   handleChange = (tags) => {
     this.setState({mails:tags})
@@ -158,7 +158,7 @@ class Invitation extends Component {
   }
 
   setOptherData=(obj)=>{
-    this.state[obj.name] = obj.value; 
+    this.state[obj.name] = obj.value;
     this.setState({
       ...this.state
     })
@@ -209,16 +209,16 @@ class Invitation extends Component {
                   <input ref='shortUrl' type='text' value={url} readOnly/>
                 </div>
                 <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >复制链接</ButtonBrand>
-                
+
                 {/* <Tooltip trigger="click" rootClose placement="bottom" overlay={tip} onClick={this.copyLink} >
                   <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >复制链接f</ButtonBrand>
                 </Tooltip> */}
 
               </TabPane>
               <TabPane tab='邮件邀请' key="2" className={tabPane2}>
-                
+
                 <p className={first_p}>给你的小伙伴捎句话吧:</p>
-                <FormControl placeholder="友空间-赋能个人、激活组织" value={invitationDesc} 
+                <FormControl placeholder="友空间-赋能个人、激活组织" value={invitationDesc}
                 onChange={(e)=>{this.setOptherData({name:"invitationDesc",value:e})} }/>
 
                 <p>署名:</p>
@@ -267,7 +267,7 @@ class Invitation extends Component {
             </Tabs>
           </div>
         </div>
-        <SuccessDialog show={successDialogShow} close={this.closeSuccessDialog} /> 
+        <SuccessDialog show={successDialogShow} close={this.closeSuccessDialog} />
       </div>
     );
   }

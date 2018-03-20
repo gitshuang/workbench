@@ -6,7 +6,7 @@ import Upload from 'containers/upload';
 import FormControl from 'bee/form-control';
 import Radio from 'bee/radio';
 import Select from 'bee/select';
-import { ButtonBrand } from 'components/button';
+import { ButtonBrand } from 'pub-comp/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import 'assets/style/Form.css';
@@ -46,7 +46,7 @@ class SubmitBtn extends Component {
   click = () => {
     if (typeof this.props.onClick === 'function') {
       this.props.onClick();
-    } 
+    }
   }
   render() {
     return (
@@ -92,7 +92,7 @@ class CreateEnter extends Component {
 
     let _address = data.find((da)=>da.name == "address");
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
-    if(_address.value && _address.value != ""){ 
+    if(_address.value && _address.value != ""){
       _tenantAddress.value = _address.value.province + "|" + _address.value.city  + "|" + _address.value.area + "|" + _tenantAddress.value;
     }else{
       _tenantAddress.value = this.address + _tenantAddress.value;
@@ -102,7 +102,7 @@ class CreateEnter extends Component {
     if(!_tenantIndustry.value && _tenantIndustry.value == ""){
       _tenantIndustry.value = tenantIndustry;
     }
-    
+
     if (flag) {
       this.setState({
         disabled:false
@@ -136,7 +136,7 @@ class CreateEnter extends Component {
     this.address = obj.province + obj.city + obj.area;
   }
 
-  setUrl(name,url){ 
+  setUrl(name,url){
     this.state[name] = url;
     this.setState({
       ...this.state
@@ -144,7 +144,7 @@ class CreateEnter extends Component {
   }
 
   setOptherData=(obj)=>{
-    this.state[obj.name] = obj.value; 
+    this.state[obj.name] = obj.value;
     this.setState({
       ...this.state
     })
@@ -193,7 +193,7 @@ class CreateEnter extends Component {
                     <Option value="T">国际组织</Option>
                 </Select>
             </FormItem>
- 
+
              <FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
                 <Select
                     defaultValue="A"
@@ -204,7 +204,7 @@ class CreateEnter extends Component {
                     <Option value="A">0－50</Option>
                     <Option value="B">51-100</Option>
                     <Option value="C">101-200</Option>
-                    <Option value="D">201-500</Option> 
+                    <Option value="D">201-500</Option>
                     <Option value="E">501-1000</Option>
                     <Option value="F">1001－2000</Option>
                     <Option value="G">>2000人</Option>

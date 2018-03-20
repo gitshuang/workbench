@@ -6,15 +6,14 @@ import PropTypes from 'prop-types';
 
 import Menu, { Item as MenuItem } from 'bee/menus';
 import Dropdown from 'bee/dropdown';
-import PopDialog from 'components/pop';
+import PopDialog from 'pub-comp/pop';
 import Button from 'bee/button';
-import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'components/button';
+import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'pub-comp/button';
 
 import { mapStateToProps, avoidSameName ,getStrLenSubstr} from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
-import Icon from 'components/icon';
-import BeeIcon from 'bee/icon';
+import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
 import Message from 'bee/message';
 import WidgetList from 'containers/manageWidgetList';
@@ -36,7 +35,6 @@ import {
   newGroupName_blur,
   widgetTitleInit
 } from './style.css';
-import 'assets/style/iuapmobile.um.css';
 const {
   requestStart,
   requestSuccess,
@@ -122,7 +120,7 @@ Array.prototype.distinct = function (){
       result = [],
       len = arr.length;
   for(i = 0; i< arr.length; i++){
-    if(!obj[arr[i]]){  
+    if(!obj[arr[i]]){
       obj[arr[i]] = 1;
       result.push(arr[i]);
     }
@@ -182,7 +180,7 @@ class ManageGroup extends Component {
       },
       manageList,
     } = this.props;
- 
+
     if (isNew) {
       setTimeout(() => {
 
@@ -195,7 +193,7 @@ class ManageGroup extends Component {
         });
         this.refs.groupName.focus();
         this.refs.groupName.select();
-        
+
         const { checkFun ,currEditonlyId} = this.props;
         checkFun(currEditonlyId+"_btn");
       }, 0);
@@ -205,7 +203,7 @@ class ManageGroup extends Component {
       });
     }
   }
- 
+
   componentWillReceiveProps(nextProps) {
     if (
       this.props.currEditonlyId !== nextProps.currEditonlyId &&
@@ -312,7 +310,7 @@ class ManageGroup extends Component {
     if(dragState)return;
     setDragInputState(true);
   }
-  
+
   // 选择框  选择
   selectFn = (index) => (e) => {
     let {
@@ -513,7 +511,6 @@ class ManageGroup extends Component {
       </div>
       <PopDialog className="pop_dialog_delete" show={ showModal } type="delete" close={this.popClose} btns={pop_btn} data={{ index }}>
         <div className="pop_cont">
-          <BeeIcon type="uf-exc-t" className="icon"/>
           <span>您确认要删除此项?</span>
         </div>
       </PopDialog>

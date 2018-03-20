@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import homeActions from 'store/root/home/actions';
 import Header from 'containers/header';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import BreadcrumbContainer from 'components/breadcrumb';
 import { logoImg, header } from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';

@@ -2,7 +2,7 @@ import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { serviceContainer,service,serviceGroup,serviceBtn,contentDiv,content ,link_cont} from './style.css';
+import { serviceContainer,service,serviceGroup,serviceBtn,contentDiv,content ,link_cont, btn} from './style.css';
 import onClickOutside from 'react-onclickoutside';
 import actions from 'store/root/actions';
 import { withRouter } from 'react-router-dom';
@@ -85,7 +85,7 @@ class QuickServiceContainer extends Component {
           this.setState({
             openAllstate:true
           })
-      }else{ 
+      }else{
         if(scrollTop <= 10){
           this.setState({
             openAllstate:false
@@ -122,11 +122,11 @@ class QuickServiceContainer extends Component {
         {
           this.state.openAllstate ?(
             <div className={link_cont} onClick={this.openAllAppList}>
-              <a className="link" >全部应用</a>
+              <a>全部应用</a>
             </div>
           ) : (
             <div className={serviceBtn}>
-              <button className="btn" onClick={this.onClickScroll}>更多应用</button>
+              <button className={btn} onClick={this.onClickScroll}>更多应用</button>
             </div>
           )
         }

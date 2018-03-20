@@ -4,11 +4,9 @@ import React, {
 import ReactDOM from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
-// import Loading from 'bee-loading';
-import Icon from 'components/icon';
-import BeeIcon from 'bee/icon';
+import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
-import PopDialog from 'components/pop';
+import PopDialog from 'pub-comp/pop';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
@@ -170,7 +168,7 @@ class WidgetItem extends Component {
     const { deleteFolder,type,currGroupIndex,delectService,parentId } = this.props;
     if(type === "pop"){
      delectService({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
-    }else{ 
+    }else{
       deleteFolder(data.widgetId);
     }
     this.setState({
@@ -266,7 +264,6 @@ class WidgetItem extends Component {
 
         <PopDialog className="pop_dialog_delete" show = { this.state.showModal } type="delete" close={this.popClose} data={this.props.data} btns={pop_btn} >
             <div className="pop_cont">
-              <BeeIcon type="uf-exc-t" className="icon"/>
               <span>您确认要删除此项服务?</span>
             </div>
         </PopDialog>

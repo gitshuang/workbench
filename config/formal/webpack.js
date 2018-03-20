@@ -29,7 +29,7 @@ module.exports = function (config) {
         },
         {
           test: /\.css$/,
-          include: [paths('assets'), paths('node'), paths('bee')],
+          include: [paths('assets'), paths('node')],
           use: ExtractTextPlugin.extract(
             Object.assign({
               fallback: {
@@ -63,7 +63,7 @@ module.exports = function (config) {
         {
           test: /\.css$/,
           include: [paths('src')],
-          exclude: [paths('assets'), paths('bee')],
+          exclude: [paths('assets')],
           use: ExtractTextPlugin.extract(
             Object.assign({
               fallback: {
@@ -104,7 +104,8 @@ module.exports = function (config) {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': config.env
+        'process.env.NODE_ENV': config.env,
+        'process.env.HOST': config.host,
       }),
       new webpack.optimize.UglifyJsPlugin({
         compress: {

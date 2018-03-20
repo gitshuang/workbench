@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PopDialog from 'components/pop';
+import PopDialog from 'pub-comp/pop';
 import {
   successContent,
 } from './style.css';

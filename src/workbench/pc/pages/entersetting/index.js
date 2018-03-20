@@ -9,10 +9,10 @@ import Select from 'bee/select';
 import Dropdown from 'bee/dropdown';
 import Menu from 'bee/menus';
 import Button from 'bee/button';
-import { ButtonDefaultLine } from 'components/button';
+import { ButtonDefaultLine } from 'pub-comp/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import EnterOption from 'containers/enterOption';
 
 import { page_enterprise ,enter_title,enter_cont,hr,hr2,title,appBreadcrumb

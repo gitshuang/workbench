@@ -8,7 +8,7 @@ import workActions from 'store/root/work/actions';
 // 组件
 import TabsContainer from 'containers/tabs';
 import HeaderContainer from 'containers/header';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import Pin from 'containers/pin';
 import Button from 'bee/button';
 

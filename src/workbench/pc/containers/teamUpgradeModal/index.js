@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions';
 const { closeUpgradeModal } = teamconfigActions;
-import PopDialog from 'components/pop';
+import PopDialog from 'pub-comp/pop';
 import {content} from './index.css';
 
 @withRouter

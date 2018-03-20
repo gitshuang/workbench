@@ -2,6 +2,7 @@ var webpackConfig = require('./webpack')
 
 var config = {
   env: '"production"',
+  host: '"/"',
   assetsSubDirectory: 'static',
   assetsPublicPath: 'https://cdn.yonyoucloud.com/pro/diwork/workbench/',
 

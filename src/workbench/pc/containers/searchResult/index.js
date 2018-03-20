@@ -3,17 +3,12 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import Button from 'bee/button';
-import Icon from 'components/icon';
-// import InputGroup from 'bee-input-group';
-// import AutoComplete from 'bee-autocomplete';
+import Icon from 'pub-comp/icon';
 import FormControl from 'bee/form-control';
 import Menu from 'bee/menus';
-// import ButtonGroup from 'bee/button-group';
-//import GoTo from './goto';
-// import Select from 'bee-select';
 import Tabs, { TabPane } from 'bee/tabs';
 import Pagination from 'bee/pagination';
-import EnhancedPagination from 'components/enhancedPagination';
+import EnhancedPagination from 'pub-comp/enhancedPagination';
 
 import {
   bg,
@@ -104,7 +99,7 @@ class searchResult extends Component {
       //otherName:"其他内容(0)"
     }
   }
-  
+
   componentDidMount() {
     console.log(" ===componentDidMount=== "+this.props.match.params.value);
     this.getSearchMoreList(this.props.match.params.value)
@@ -146,11 +141,11 @@ class searchResult extends Component {
               this.setState({
                 isShowPagination:true,
               })
-            } 
+            }
             this.getSearchTpyeList(keywords,payload.data[0].type,0);
           });
       })
-      
+
   }
 
   getSearchTpyeList(keywords,type,page,size=10){
@@ -219,7 +214,7 @@ class searchResult extends Component {
        requestSuccess();
       });
   }
-  
+
   handleClick = (labelId) => () => {
     this.setState({
       current: labelId,
@@ -279,7 +274,7 @@ class searchResult extends Component {
         this.getSearchTpyeList(value,activetab,activePage-1,dataPerPageNum)
     }
    })
-  
+
   }
   // inputOnFocus = (e) => {
   //   let _value = e.target.value != "搜索人员信息、应用、服务及其他内容"?e.target.value:"";
@@ -312,7 +307,7 @@ class searchResult extends Component {
   }
   goDetail(type,item){
     return (e) => {
-      e.stopPropagation(); 
+      e.stopPropagation();
       let code = "",_type="";
       if(item.serviceId){
         code = item.serviceCode;
@@ -467,14 +462,7 @@ class searchResult extends Component {
 
               <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
               <EnhancedPagination
-                first
-                last
-                prev
-                next
-                size="sm"
-                gap={true}
                 items={this.state.pagesize}
-                maxButtons={7}
                 activePage={this.state.activePage}
                 onDataNumSelect={this.paginationNumSelect}
                 dataNumSelect={this.state.dataNumSelect}

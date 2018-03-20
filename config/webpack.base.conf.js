@@ -18,9 +18,9 @@ module.exports = {
       'components': paths('components'),
       'router': paths('router'),
       'store': paths('store'),
-      'bee': paths('bee'),
-      '@u': paths('utils'),
-      'node': paths('node'),
+      'bee': '@diworkfe/public-components/build/bee',
+      '@u': '@diworkfe/public-components/build/utils',
+      'pub-comp': '@diworkfe/public-components/build',
     }
   },
   externals: {

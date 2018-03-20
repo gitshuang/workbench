@@ -4,7 +4,7 @@ import onClickOutside from 'react-onclickoutside';
 import { mapStateToProps } from '@u';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import { withRouter } from 'react-router-dom';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import { connect } from 'react-redux';
 import searchActions from 'store/root/search/actions';
 import SearchResult from 'containers/searchResult'
@@ -33,7 +33,6 @@ import {
 } from './style.css';
 import _default_icon from 'assets/image/wgt/default.png';
 import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
-import { setTimeout } from 'timers';
 import rootActions from 'store/root/actions';
 const {getSearchSuggest} = searchActions;
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -237,7 +236,7 @@ class SearchContainer extends Component {
         case "service":
           let lis2 = [];
           item.content.forEach((item2,index2)=>{
-            item2 = eval('(' + item2 + ')') 
+            item2 = eval('(' + item2 + ')')
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={item2.serviceId?item2.serviceIcon:item2.applicationIcon}/></div>
                   <div className={h_name}>

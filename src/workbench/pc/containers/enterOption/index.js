@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import Button from 'bee/button';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import Menu from 'bee/menus';
 import Dropdown from 'bee/dropdown';
 import rootActions from 'store/root/actions';

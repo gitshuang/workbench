@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import Button from 'bee/button';
-// import { Con, Row, Col } from 'bee-layout';
 
 import { serviceItem,serviceItemTitle,item_li_top,item_footer,item_left,item_right,
   icon,up_icon} from './style.css'
@@ -16,7 +15,7 @@ class ServiceItem extends Component {
   // 点击 本次取消
 
   constructor(props) {
-      super(props); 
+      super(props);
   }
 
   packUp=()=>{

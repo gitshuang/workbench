@@ -3,16 +3,10 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import Button from 'bee/button';
-import Icon from 'components/icon';
-// import InputGroup from 'bee-input-group';
-// import AutoComplete from 'bee-autocomplete';
-// import FormControl from 'bee-form-control';
+import Icon from 'pub-comp/icon';
 import Menu from 'bee/menus';
-// import ButtonGroup from 'bee/button-group';
-// import Select from 'bee-select';
-// import Tabs, { TabPane } from 'bee-tabs';
 import Pagination from 'bee/pagination';
-import EnhancedPagination from 'components/enhancedPagination';;
+import EnhancedPagination from 'pub-comp/enhancedPagination';;
 import {
   mleft50,
   h_icon,
@@ -120,7 +114,7 @@ class searchOther extends Component {
        requestSuccess();
       });
   }
-  
+
   handleSelect(eventKey) {
     const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab}=this.state
@@ -131,7 +125,7 @@ class searchOther extends Component {
     let dataSize = this.state.dataNumSelect[this.state.dataNumSelectActive].name.replace(reg,"")
      this.getSearchTpyeList(keywords,type,--eventKey,dataSize)
   }
- 
+
   paginationNumSelect = (id,dataNum) =>{
     const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab,activePage}=this.state;
@@ -146,11 +140,11 @@ class searchOther extends Component {
 
   goDetail(type,item){
     return (e) => {
-      e.stopPropagation(); 
+      e.stopPropagation();
       this.props.history.push('/'+type+'/'+item.serviceCode);
     }
   }
- 
+
   Datetimechange(ts){
     const timeNow = parseInt(new Date().getTime() / 1000, 10);
     const d = timeNow - ts / 1000;
@@ -194,24 +188,17 @@ class searchOther extends Component {
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div>共{dataList.totalElements}条</div>
             <ul className={recently}>{lis}</ul>
-           
+
             <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
               <EnhancedPagination
-                first
-                last
-                prev
-                next
-                size="sm"
-                gap={true}
                 items={this.state.pagesize}
-                maxButtons={7}
                 activePage={this.state.activePage}
                 onDataNumSelect={this.paginationNumSelect}
-                dataNumSelect={[{id:0,name:'5条/页'},{id:1,name:'10条/页'},{id:2,name:'15条/页'},{id:3,name:'20条/页'}]}
+                dataNumSelect={this.state.dataNumSelect}
                 dataNumSelectActive={1}
                 onSelect={this.handleSelect.bind(this)} />
-            </div> 
-          </div> 
+            </div>
+          </div>
         </div>
       </div>
     )

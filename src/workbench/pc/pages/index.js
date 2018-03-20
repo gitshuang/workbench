@@ -11,7 +11,7 @@ import store from 'store';
 import IM from 'IM';
 import { mapStateToProps, getContext } from '@u';
 import QuickServiceContainer from 'containers/quickService';
-import RouteWithSubRoutes from 'components/routeWithSubRoutes';
+import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
@@ -135,7 +135,7 @@ class Root extends Component {
       return <Es />;
     }
     const { userInfoDisplay, quickServiceDisplay } = this.props;
-    const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'icon-application'} />) : null;
+    const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass={'application-btn'} />) : null;
     const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass={'lebra-navbar-left'} bgColor={this.bgColor}/>) : null;
     return (
       <div>

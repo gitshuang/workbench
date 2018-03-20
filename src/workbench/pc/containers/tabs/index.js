@@ -3,7 +3,7 @@ import cs from 'classnames';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import actions from 'store/root/work/actions';
-import Icon from 'components/icon';
+import Icon from 'pub-comp/icon';
 import { mapStateToProps,browserRedirect } from '@u';
 import {
   moreList,

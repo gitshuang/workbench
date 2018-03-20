@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import searchActions from 'store/root/search/actions';
-import RouteWithSubRoutes from 'components/routeWithSubRoutes';
+import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
 import SearchResult from 'containers/searchResult';
@@ -26,7 +26,7 @@ const {setSearchHeadData} = searchActions;
     requestStart,
     requestSuccess,
     requestError,
-    setSearchHeadData, 
+    setSearchHeadData,
   }
 )
 class Search extends Component {
@@ -34,7 +34,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   goBack =()=> {
     const {setSearchHeadData,searchHeadData:{brm},searchHeadData:{searchValue}} = this.props;
     const appName = brm[0].name;
@@ -49,7 +49,7 @@ class Search extends Component {
   goHome = () => {
     this.props.history.replace('');
   }
- 
+
   render() {
 
     let {appName ,brm }= this.props.searchHeadData;
@@ -72,7 +72,7 @@ class Search extends Component {
         {this.props.routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
-          
+
         </div>
       </div>
     );
