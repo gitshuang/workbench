@@ -24,8 +24,9 @@
 }
 .box{
   width: 540px;
-  height: 580px;
+  /* height: 580px; */
   border-radius: 3px ; 
+  padding-bottom: 40px;
 }
 .box:first-child{
   background:rgba(94,102,112,1);
@@ -51,8 +52,9 @@
 }
 .content{
   padding-top: 40px;
-  padding-left: 130px;
+  padding-left: 30px;
   height: 260px;
+  margin-bottom: 20px;
 }
 .content p{
   font-size:19px;
@@ -63,7 +65,7 @@
 }
 .content li{
   float: left;
-  width: 180px;
+  width: 240px;
   font-size:14px;
   font-family:MicrosoftYaHei-Bold;
   color:rgba(255,255,255,0.7);
@@ -71,7 +73,7 @@
   margin-bottom: 15px;
 }
 .box:first-child .content li{
-  width: 160px;
+  width: 220px;
 }
 .box button{
   width:180px;
@@ -82,4 +84,7 @@
   text-align: center;
   line-height: 46px;
   background: none;
+}
+.enter_context_div{
+  padding-top: 16px;
 }

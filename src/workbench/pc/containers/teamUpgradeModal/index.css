@@ -53,3 +53,7 @@
 .content{
   
 }
+
+.content p{
+  line-height: 34px;
+}

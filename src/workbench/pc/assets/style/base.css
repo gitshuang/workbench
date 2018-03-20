@@ -130,19 +130,13 @@ body {
 /***----------统一组价样式 弹框----------**/
 
 .pop_dialog_delete {
-  /**
-  width: 416px;
-  height: 201px;
-  **/
   width: 370px;
   height: 200px;
-  margin: 0 auto;
+  margin: 0 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99999;
-  /* border: 1px solid rgba(78, 89, 104, 0.19);
-  box-shadow: 0 6px 8px 0 rgba(74, 81, 93, 0.25); */
   border-radius: 3px;
 }
 
@@ -287,6 +281,11 @@ body {
 
 /***----------统一组价样式 Message 蓝湖交互----start------**/
 /* success 成功样式 */
+.u-message{
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
 .u-message-notice-close{
   display: none;
 }

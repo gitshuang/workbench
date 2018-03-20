@@ -70,8 +70,8 @@ class Invitation extends Component {
       mails: [],
       successDialogShow: false,
       copy:false,
-      userName:props.userInfo.userName,
-      invitationDesc:''
+      creator:props.userInfo.userName,
+      message:''
     }
     this.goBack = this.goBack.bind(this);
   }
@@ -99,8 +99,8 @@ class Invitation extends Component {
   copyLink = () => {
     this.refs['shortUrl'].select();
     document.execCommand('copy');
-
-    Message.create({content: '链接复制成功，赶快发送给你的小伙伴吧!',duration:1.5,position: 'topLeft', color: "success",style:{height:'auto',top: 270,left: 300}});
+ 
+    Message.create({content: '链接复制成功，赶快发送给你的小伙伴吧!',duration:1.5,position: 'topLeft', color: "success"});
   }
   onMailChange = (i) => (e) => {
     const value = e.target.value;
@@ -118,13 +118,15 @@ class Invitation extends Component {
   }
   submit = () => {
     const {requestStart, requestSuccess, requestError,sendMessage} = this.props;
+    const {message,creator} = this.state;
     const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
     if (mails.length <= 0 ) {
-      Message.create({content: '请输入正确的邮件地址!',duration:1.5,position: 'topLeft', color: "warning",style:{height:'auto',top: 270,left: 300}});
+      Message.create({content: '请输入正确的邮件地址!',duration:1.5,position: 'topLeft', color: "warning"});
       return false;
     }
+    let parent = {"email":mails,message,creator};
     requestStart();
-    sendMessage(mails).then((data) => {
+    sendMessage(parent).then((data) => {
     requestSuccess();
     this.setState({
       mails: [],
@@ -171,8 +173,8 @@ class Invitation extends Component {
       errorDialogShow,
       successDialogShow,
       copy,
-      userName,
-      invitationDesc
+      creator,
+      message
     } = this.state;
 
     let tip = (
@@ -218,11 +220,11 @@ class Invitation extends Component {
               <TabPane tab='邮件邀请' key="2" className={tabPane2}>
 
                 <p className={first_p}>给你的小伙伴捎句话吧:</p>
-                <FormControl placeholder="友空间-赋能个人、激活组织" value={invitationDesc}
-                onChange={(e)=>{this.setOptherData({name:"invitationDesc",value:e})} }/>
+                <FormControl placeholder="友空间-赋能个人、激活组织" value={message} 
+                onChange={(e)=>{this.setOptherData({name:"message",value:e})} }/>
 
                 <p>署名:</p>
-                <FormControl value={userName} onChange={(e)=>{this.setOptherData({name:"userName",value:e})} }/>
+                <FormControl value={creator} onChange={(e)=>{this.setOptherData({name:"creator",value:e})} }/>
 
                 <p>输入邮箱地址并用 “;” 隔开</p>
                 <TagsInput

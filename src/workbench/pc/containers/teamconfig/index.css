@@ -292,6 +292,9 @@
   font-size: 14px;
   padding: 0 5px;
 }
+.box3 :global(.u-checkbox input[type='checkbox']){
+  left: 8px;
+}
 .memberTit{
   padding-top: 24px;
   padding-bottom: 14px;
