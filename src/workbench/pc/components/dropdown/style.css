@@ -98,6 +98,8 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     width: 100%;
     cursor: pointer;
     line-height: 30px;
+    display: inline;
+    white-space: nowrap;
 }
 .item_li:hover{
     background: RGBA(9, 30, 66, 0.04);
@@ -109,7 +111,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     padding-left: 5px;
 }
 .li_title{
-    width: 146px;
+    width: 99%;
     padding-left: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -117,10 +119,12 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     font-weight: normal;
     white-space: nowrap;
     float: left;
+    margin-right: -50px;
+    padding-right: 50px;
 }
 .li_right{
     width: 50px;
     text-align: center;
     color: RGBA(74, 81, 93, 0.5);
-    float: left;
+    float: right;
 }
