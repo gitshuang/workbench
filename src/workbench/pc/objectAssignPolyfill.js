@@ -145,3 +145,7 @@ if (!Array.prototype.findIndex) {
       }
     });
   }
+
+//   解决首页tab在ie9下面的点击报错问题。
+//   这实际上是由这个插件依赖于使用setTimeout将参数传递给文件animate-scroller.js中没有requestAnimationFrame（）的浏览器中的回调函数引起的，并且这已知在IE中不起作用，因此您看到的原因那种行为。
+(function(f){ window.setTimeout=f(window.setTimeout); window.setInterval=f(window.setInterval); })(function(f){return function(c,t){ var a=[].slice.call(arguments,2);return f(function(){c instanceof Function?c.apply(this,a):eval(c)},t)} });

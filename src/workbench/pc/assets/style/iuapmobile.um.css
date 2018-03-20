@@ -88,7 +88,7 @@
   flex-direction: row;
 }
 .um-box-justify {
-  display: flex;
+  /* display: flex;
   -webkit-box-pack: justify;
   box-pack: justify;
   -webkit-justify-content: space-between;
@@ -96,7 +96,7 @@
   -webkit-box-align: center;
   box-align: center;
   -webkit-align-items: center;
-  align-items: center;
+  align-items: center; */
 }
 .um-box-center {
   box-align: center;
