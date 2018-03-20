@@ -7,7 +7,7 @@
   vertical-align: middle;
 }
 :global(.ie9) .lebra-navbar .lebra-navbar-left{
-  width: 150px;
+  width: 300px;
 }
 :global(.ie9) .lebra-navbar .lebra-navbar-right{
   width: 250px;
@@ -22,10 +22,14 @@
   display: inline-block;
   width: 32px;
   height: 32px;
+  margin-right: 12px;
 }
 :global(.ie9) .lebra-navbar .lebra-navbar-title{
   text-align: center;
 }
 :global(.ie9) .lebra-navbar .lebra-navbar-right{
   text-align: right;
+}
+:global(.ie9) .lebra-navbar-left-content{
+  padding-left:0px;
 }
