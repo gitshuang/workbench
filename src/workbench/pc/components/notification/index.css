@@ -1,0 +1,55 @@
+/* :global( */
+
+.page{
+
+}
+.title_cont{
+
+}
+.warning_cont{
+
+}
+.success_cont{
+
+}
+.info_cont{
+
+}
+.error_cont{
+
+}
+
+
+.warning_cont :global(.u-notification-notice){
+  background:rgba(255,171,0,0.05);
+  box-shadow: 0px 10px 12px 0px rgba(74,81,93,0.25);
+  border-radius: 0px 0px 3px 3px ; 
+}
+.warning_cont  ._title{
+  color:rgba(255,139,0,1);
+  font-size:16px;
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+}
+.warning_cont  .title_cont{
+  font-size:16px;
+}
+.warning_cont  ._title i{
+  color:rgba(255,139,0,1);
+}
+.page p{
+  margin-top: 3px !important;
+  font-size: 14px;
+}
+._close{
+  position: absolute;
+  right: 10px;
+  top:4px;
+}
+/* :global(.u-notification-bottomRight){
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  bottom: inherit;
+} */

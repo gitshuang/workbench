@@ -14,6 +14,7 @@ import Tabs, { TabPane } from 'bee/tabs';
 import onClickOutside from 'react-onclickoutside';
 import img1 from 'assets/image/wgt/yonyouSpace1.png';
 import img2 from 'assets/image/wgt/intelligent_logo.png';
+import NotificationMess,{openMess} from 'components/notification';
 
 import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
@@ -283,12 +284,20 @@ class UserInfoContainer extends Component {
   }
   /* 邀请成员 */
   inviteMember(){
-    const {
-      history,
-      hideUserInfoDisplay,
-    } = this.props;
-    history.push('/invitation');
-    hideUserInfoDisplay();
+    // const {
+    //   history,
+    //   hideUserInfoDisplay,
+    // } = this.props;
+    // history.push('/invitation');
+    // hideUserInfoDisplay();
+
+
+
+    openMess({
+      title:"234",
+      type:"warning",
+      content:"欢迎光临！！！"
+    });
   }
 
   // changeTenant(tenantId){
@@ -450,7 +459,7 @@ class UserInfoContainer extends Component {
               </div>
               : null
             }
-
+             
           </div>
         </div>
       </div>
