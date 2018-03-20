@@ -295,7 +295,7 @@ class Home extends Component {
           {this.renderContent()}
         </div>
         <div className={um_footer}>
-          <div className={`${umBoxJustify} um-box-justify`}>
+          <div className={`${umBoxJustify}`}>
              <div className={`${batchArea}  horizontalParent`}>
               <ButtonDefaultLine onClick={this.batchDelectFn} disabled={selectList.length ? false:true} className="horizontal">删除</ButtonDefaultLine>
               <ButtonDefaultLine onClick={this.openGroupTo} disabled={selectList.length ? false:true} >移动到</ButtonDefaultLine>
