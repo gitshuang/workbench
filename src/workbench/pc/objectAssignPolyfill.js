@@ -150,7 +150,7 @@ if (!Array.prototype.findIndex) {
 //   这实际上是由这个插件依赖于使用setTimeout将参数传递给文件animate-scroller.js中没有requestAnimationFrame（）的浏览器中的回调函数引起的，并且这已知在IE中不起作用。
 var browser=navigator.appName;
 var b_version=navigator.appVersion;
-if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE9.0") 
-{
+if(browser=="Microsoft Internet Explorer" && b_version.match(/9./i)=="9.")
+{   alert("0000");
     (function(f){ window.setTimeout=f(window.setTimeout); window.setInterval=f(window.setInterval); })(function(f){return function(c,t){ var a=[].slice.call(arguments,2);return f(function(){c instanceof Function?c.apply(this,a):eval(c)},t)} });  
 }

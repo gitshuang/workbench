@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from 'pub-comp/icon';
 import Button from 'bee/button';
 import Notification from 'bee/notification';
-import {page,title_cont,warning_cont,success_cont,info_cont,error_cont,_title,_close} from "./index.css";
-
-
+import {page,notification_mess,notification_cont,title_cont,warning_cont,success_cont,info_cont,error_cont,_title,_close} from "./index.css";
 
 class NotificationMess extends Component {
 
@@ -23,7 +21,7 @@ class NotificationMess extends Component {
 
     this.notification = Notification.newInstance({
       position: 'bottomRight',
-      className:this.getTypeNotifica()
+      className:this.getTypeNotifica()+ " " + notification_mess
     });
   }
 
@@ -54,7 +52,7 @@ class NotificationMess extends Component {
         return "error4";
     }
   }
-
+  
   open=(options)=>{
     const {title,content} = this.props;
     const key = Date.now();
@@ -63,10 +61,9 @@ class NotificationMess extends Component {
         <div className={_title}>
           <Icon type={this.getTypeIcon()} />
           <span className={title_cont}>{title}</span>
-
-          <Icon type="close" className={_close} onClick={this.close(this, key)} />
+          <Icon type="error3" className={_close} onClick={this.close(this, key)} />
         </div>
-        <p>{content}</p>
+        <div className={notification_cont}>{content}</div>
         {/* <Button onClick={this.close(this, key)} size="sm" style={{ position: 'absolute', right: 15, bottom: 15}}>知道了</Button> */}
       </div>),
       key,
@@ -85,7 +82,6 @@ class NotificationMess extends Component {
 }
 export default NotificationMess;
 
-
 let _notification;
 function openMess(options){
   _notification = new NotificationMess(options);
@@ -95,3 +91,15 @@ export {
   openMess,
   close,
 };
+
+
+/** 
+组件使用方式
+import NotificationMess,{openMess} from 'components/notification';
+type 类型[warning,success,info,error]
+openMess({
+  title:"234",
+  type:"error",
+  content:"你所提交的信息已经审核失败，可以进入个人信箱查看原因， 如有疑问，请联系客服人员。"
+});
+**/

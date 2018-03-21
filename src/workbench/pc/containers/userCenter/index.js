@@ -295,8 +295,8 @@ class UserInfoContainer extends Component {
 
     openMess({
       title:"234",
-      type:"warning",
-      content:"欢迎光临！！！"
+      type:"error",
+      content:"你所提交的信息已经审核失败，可以进入个人信箱查看原因， 如有疑问，请联系客服人员。"
     });
   }
 
