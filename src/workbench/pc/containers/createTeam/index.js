@@ -160,13 +160,12 @@ class CreateTeamContent extends Component {
   render() {
     const { value, imgUrl, imgWarning ,disabled,error} = this.state;
     let _error = error?"block":"none";
-    console.log("============_error",_error);
     return (
       <div className={wrap}>
         <h5>创建团队</h5>
         <hr />
         <div className={create_team_cont}>
-          <div className={item+" um-box"}>
+          <div className={item+" um-box " }>
             <label>团队名称<span>&nbsp;*&nbsp;</span></label>
             <input
               placeholder="最多60个字符"

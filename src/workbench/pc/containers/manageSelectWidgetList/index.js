@@ -243,6 +243,12 @@ class SelectWidgetList extends Component {
     });
   }
 
+  onKeyup=(e)=>{ 
+    if(e.keyCode === 13){
+      this.btnSearch(e);
+    }
+  }
+
   render() {
     let self = this;
     const {applicationsMap} = this.props;
@@ -285,7 +291,7 @@ class SelectWidgetList extends Component {
        </div> */}
        <div className={widget_right}>
           <div className={searchPanel}>
-              <FormControl className={form_control} placeholder="搜索内容..." value={this.state.value}  onChange={this.inputOnChange}/>
+              <FormControl className={form_control} placeholder="搜索内容..." value={this.state.value} onKeyDown={this.onKeyup}  onChange={this.inputOnChange}/>
               <div className={search_icon_con} >
                   <span>|</span>
                   <Icon type="search" className={search_icon} onClick={this.btnSearch} ></Icon>
