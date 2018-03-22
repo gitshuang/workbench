@@ -41,7 +41,7 @@ class ContentContainer extends Component {
                     [active]: currentId === id,
                   }
                 )} >
-                  <IFrame title={id} url="http://localhost:3001" />
+                  <IFrame title={id} url={location} />
                 </div>
               )}
             )
@@ -52,7 +52,7 @@ class ContentContainer extends Component {
       return (
         <div className={contentArea} >
           <div className={`${content} ${active}`} >
-            <IFrame title={currentId} url="http://localhost:3001" />
+            <IFrame title={currentId} url={currentLocation} />
           </div>
         </div>
       );
