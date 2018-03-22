@@ -447,3 +447,12 @@
 .user_name{
   color: RGBA(71, 77, 84, 1) !important;
 }
+:global(.ie9) .wrap :global(.um-box.um-box-center){
+  display: inline;
+}
+:global(.ie9) .wrap :global(.um-box.um-box-center)>div{
+  display: table-cell; 
+} 
+:global(.ie9) .wrap :global(.um-box.um-box-center)>div:last-child{
+  display: inline-block;
+}

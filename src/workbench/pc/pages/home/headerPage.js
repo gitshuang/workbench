@@ -44,7 +44,16 @@ class HeaderPage extends Component {
     super(props);
     this.state = {
       allBtn:false, //默认显示一行tab
-      btnShow:false
+      btnShow:false,
+      allowTenants:[],
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.searchEnterOrTeamList != nextProps.searchEnterOrTeamList){
+      this.setState({
+        allowTenants:nextProps.searchEnterOrTeamList
+      })
     }
   }
 
@@ -81,11 +90,10 @@ class HeaderPage extends Component {
     const {
       userInfo: {
         logo,
-        // allowTenants,
         company,
       },
-      searchEnterOrTeamList:allowTenants
     } = this.props;
+    const {allowTenants} = this.state;
     return (<DropdownButton
     getPopupContainer={() => document.getElementById("home_header")}
     openMenu={this.openMenu}

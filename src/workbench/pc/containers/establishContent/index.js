@@ -38,7 +38,7 @@ class EstablishContent extends Component {
     return (
       <div className={wrap}>
         {titleCont}
-        <div className={`${est_context} um-box`}>
+        <div className={`${est_context}`}>
           <div className={box}>
             <div className={imageBox}>
               <img src = {Team} />
@@ -48,13 +48,13 @@ class EstablishContent extends Component {
               <p>我是团队管理者。需要赋能刷新我的部门或项目组。</p>
               <p>关键特性：</p>
               <ul className="clearfix">
-                <li>· 全功能团队即时沟通工具（IM）</li>
-                <li>· 小友智能虚拟个人助理</li>
-                <li>· 带有场景感知能力的日程中心</li>
-                <li>· 赋能型项目协作工具</li>
-                <li>· 员工权益中心</li>
-                <li>· 智慧找人与共享图书</li>
-                <li>· 工作圈、微邮等办公协作工具</li>
+                <li>全功能团队即时沟通工具（IM）</li>
+                <li>小友智能虚拟个人助理</li>
+                <li>带有场景感知能力的日程中心</li>
+                <li>赋能型项目协作工具</li>
+                <li>员工权益中心</li>
+                <li>智慧找人与共享图书</li>
+                <li>工作圈、微邮等办公协作工具</li>
               </ul>
             </div>
             <div style={{textAlign:"center"}}>
@@ -70,13 +70,13 @@ class EstablishContent extends Component {
               <p>我是企业管理者，需要把所有部门都刷新为赋能型组织并获得企业级服务。</p>
               <p>关键特性：</p>
               <ul className="clearfix">
-                <li>· 团队组织所具备的全部能力</li>
-                <li>· 企业级组织架构管理</li>
-                <li>· 更严格的企业成员管理</li>
-                <li>· 基于管理角色的应用权限管理</li>
-                <li>· 企业级统一基础档案与数据管控</li>
-                <li>· 基础假勤与薪资查询服务</li>
-                <li>· 企业级应用市场提供全方位数字化服务入口</li>
+                <li>团队组织所具备的全部能力</li>
+                <li>企业级组织架构管理</li>
+                <li>更严格的企业成员管理</li>
+                <li>基于管理角色的应用权限管理</li>
+                <li>企业级统一基础档案与数据管控</li>
+                <li>基础假勤与薪资查询服务</li>
+                <li>企业级应用市场提供全方位数字化服务入口</li>
               </ul>
             </div>
             <div style={{textAlign:"center"}}>

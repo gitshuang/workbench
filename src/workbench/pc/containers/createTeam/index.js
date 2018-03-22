@@ -21,6 +21,7 @@ import {
   footer,
   create_team_cont,footer_hr,
   upload,
+  titlp_lab,
   name_error
 } from './index.css';
 
@@ -159,13 +160,12 @@ class CreateTeamContent extends Component {
   render() {
     const { value, imgUrl, imgWarning ,disabled,error} = this.state;
     let _error = error?"block":"none";
-    console.log("============_error",_error);
     return (
       <div className={wrap}>
         <h5>创建团队</h5>
         <hr />
         <div className={create_team_cont}>
-          <div className={item+" um-box"}>
+          <div className={item+" um-box " }>
             <label>团队名称<span>&nbsp;*&nbsp;</span></label>
             <input
               placeholder="最多60个字符"
@@ -185,6 +185,7 @@ class CreateTeamContent extends Component {
                   <Icon type="copyreader" />
                   <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
                 </div>
+                <span className={titlp_lab}>{"图片大小<=200K​"}</span>
               </div>
           </div>
         </div>

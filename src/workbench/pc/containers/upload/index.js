@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ButtonBrand } from 'pub-comp/button';
 import { uploadApplication }from 'store/root/api';
 import Icon from 'pub-comp/icon';
-import { upload_page, appImg, appValidate, uploadImg ,edit} from './style.css';
+import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab} from './style.css';
 
 class UploadPage extends Component {
   constructor(props){
@@ -81,6 +81,10 @@ class UploadPage extends Component {
         <div className={edit} onClick={this.uploadImage} >
           <Icon type="copyreader"/>
         </div>
+        {
+          this.props.tip?<span className={titlp_lab}>{this.props.tip}</span>:''
+        }
+
         {/* <ButtonBrand className={uploadImg} onClick={this.uploadImage}>上传图片</ButtonBrand> */}
       </div>
 		)

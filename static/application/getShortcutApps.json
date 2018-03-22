@@ -233,46 +233,6 @@
             "service": [],
             "selected": false,
             "primaryKey": "app_2"
-        },
-        {
-            "ts": 1513666143000,
-            "tenantId": "gtzceot7",
-            "applicationId": "app_3",
-            "applicationName": "组织管理",
-            "applicationCode": "app_3",
-            "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e93c.svg",
-            "webStatus": false,
-            "clientStatus": false,
-            "phoneStatus": false,
-            "simpleStatus": false,
-            "enable": true,
-            "shortCut": false,
-            "applicaitonType": 0,
-            "orders": 0,
-            "hasWidget": false,
-            "service": [],
-            "selected": false,
-            "primaryKey": "app_3"
-        },
-        {
-            "ts": 1513666141000,
-            "tenantId": "gtzceot7",
-            "applicationId": "app_4",
-            "applicationName": "基础数据",
-            "applicationCode": "app_4",
-            "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e982.svg",
-            "webStatus": false,
-            "clientStatus": false,
-            "phoneStatus": false,
-            "simpleStatus": false,
-            "enable": true,
-            "shortCut": false,
-            "applicaitonType": 0,
-            "orders": 0,
-            "hasWidget": false,
-            "service": [],
-            "selected": false,
-            "primaryKey": "app_4"
         }
     ]
 }

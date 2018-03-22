@@ -258,6 +258,12 @@ class serviceClassify extends Component {
     return type;
   }
 
+  onKeyup=(e)=>{ 
+    if(e.keyCode === 13){
+      this.btnSearch(e);
+    }
+  }
+
   render() {
     const { value,currentLabel } = this.state;
     const btns = this.renderBtns();
@@ -270,7 +276,7 @@ class serviceClassify extends Component {
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} placeholder="搜索应用" value={this.state.value} onChange={this.inputOnChange}/>
+              <FormControl className={serviceSearch} placeholder="搜索应用" value={this.state.value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>

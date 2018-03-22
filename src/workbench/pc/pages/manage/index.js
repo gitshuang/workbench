@@ -35,7 +35,8 @@ import {
   page_home,
   cancelModal,
   addBtn,
-  addGroupBtn
+  addGroupBtn,
+  manager_save_pop
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -316,7 +317,7 @@ class Home extends Component {
             <span>您确认要批量删除吗?</span>
           </div>
         </PopDialog>
-        <PopDialog className="pop_dialog_delete cancelModal" type="warning" show = { this.state.showCancelModal } close={this.popCloseCancel} btns={pop_btn2} title={"是否保存最新修改？"} >
+        <PopDialog  className={`${manager_save_pop}`} type="warning" show = { this.state.showCancelModal } close={this.popCloseCancel} btns={pop_btn2} title={"是否保存最新修改？"} >
           <div>
             <span>点击不保存，则最新修改将丢失</span>
           </div>

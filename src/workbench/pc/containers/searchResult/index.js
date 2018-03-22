@@ -465,8 +465,8 @@ class searchResult extends Component {
                 items={this.state.pagesize}
                 activePage={this.state.activePage}
                 onDataNumSelect={this.paginationNumSelect}
-                dataNumSelect={this.state.dataNumSelect}
-                dataNumSelectActive={this.state.dataNumSelectActive}
+                // dataNumSelect={this.state.dataNumSelect}
+                // dataNumSelectActive={this.state.dataNumSelectActive}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
 

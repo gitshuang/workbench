@@ -21,3 +21,6 @@
 .enter_option button:hover{
   background: transparent;
 }
+.item_li{
+  cursor: pointer;
+}

@@ -100,6 +100,7 @@ class DropdownButton extends Component{
                 trigger={['click']}
                 overlay={_menus}
                 animation="slide-up"
+                onClick={openMenu}
                 onVisibleChange={this.onVisibleChange} >
                 <div><Icon type={arrard} className={icon_style} onClick={openMenu}/></div>
             </Dropdown>

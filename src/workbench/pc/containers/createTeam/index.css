@@ -125,3 +125,18 @@ font-size: 14px;
   margin-left: 73px;
   margin-top: 5px;
 }
+.titlp_lab{
+  position: absolute;
+  width: 150px;
+  top: 34px;
+  left: 81px;
+  padding-left: 15px;
+  color: red;
+  font-size: 12px;
+}
+:global(.ie9) .item label{
+  float: left;
+}
+:global(.ie9) .image{
+  display: table-cell;
+} 

@@ -26,6 +26,9 @@ body{
 .workArea {
   flex: 1;
   display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 }
 .wrap :global(.icon-dingzhi.active){
   color: red;

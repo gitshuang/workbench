@@ -11,6 +11,7 @@
     "formal": "node scripts/formal.js"
   },
   "dependencies": {
+    "@diworkfe/public-components": "git+http://git.yonyou.com/zhengxc/diwork-public-components.git#develop",
     "animate.css": "3.5.2",
     "array.find": "1.0.7",
     "array.from": "1.0.3",
@@ -35,8 +36,7 @@
     "redux-promise": "0.5.3",
     "redux-thunk": "2.2.0",
     "webstorage-polyfill": "1.0.1",
-    "whatwg-fetch": "2.0.3",
-    "@diworkfe/public-components": "git+http://git.yonyou.com/zhengxc/diwork-public-components.git#develop"
+    "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
     "autoprefixer": "7.1.6",

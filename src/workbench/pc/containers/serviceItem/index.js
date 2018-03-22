@@ -24,7 +24,7 @@ class ServiceItem extends Component {
 
   render() {
     // const {serviceId, serviceName,selected} = this.props.data;
-    const {data:{serviceId, serviceName,selected ,serviceType,serviceIcon,extend} }  = this.props;
+    const {data:{serviceId, serviceName,selected ,serviceType,serviceIcon,extend} ,arrow}  = this.props;
     let btn = null;
     if(selected){
       if(selected == "1"){
@@ -66,7 +66,9 @@ class ServiceItem extends Component {
              <div className={item_footer}>
                 {btn}
              </div>
-             {upIcon}
+             {
+               arrow?upIcon:''
+             }
        </div>
     );
   }

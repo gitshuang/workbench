@@ -43,7 +43,6 @@ class Account extends Component {
     const { params } = this.props.match;
     let brmVal = this.props.brm;
     const id = params.id;
-    console.log('1111112222226666渲染之前的brm的是多少呢',brmVal)
     return (
       <ApplicationWrap
         name = { brmVal.length <= 1 ? '应用详情' : brmVal[brmVal.length-1].name } 
