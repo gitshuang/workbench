@@ -211,14 +211,14 @@ class SearchContainer extends Component {
       }
       switch (item.type)
       {
-        case "user":
+        case "addressbook"://通讯录
           let lis = [];
           item.content.forEach((item2,index2)=>{
             lis.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
-                  <div className={h_icon}><img src={item2.headimg}/></div>
+                  <div className={h_icon}><img src={item2.userAvator}/></div>
                   <div className={h_name}>
-                    <p><span dangerouslySetInnerHTML={createMarkup(item2.username)}></span><span>{item2.department}</span></p>
-                    <p>办公电话 : {item2.phone}</p>
+                    <p><span dangerouslySetInnerHTML={createMarkup(item2.userName)}></span><span>{item2.orgName}</span></p>
+                    <p>办公电话 : {item2.userMobile}</p>
                   </div>
                   <div className={h_contact} onClick={_this.goemailDetail(item2)}><Icon title="发邮件" type="e-mail" /></div>
                   <div className={h_contact} onClick={_this.gochatDetail(item2)}><Icon title="发消息" type="chat" /></div>

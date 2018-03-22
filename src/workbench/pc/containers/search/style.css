@@ -144,17 +144,26 @@
     color:#373C42;
     line-height:17px;
     font-weight: bold;
+    display: flex;
+    padding-bottom: 5px;
   }
 .SearchWin .searchWindom .h_name p{max-width:145px;
-  height:16px; 
+  /* height:16px;  */
   color:rgba(13,20,36,.47);
   line-height:16px;float: left;
   }
-.SearchWin .searchWindom .h_name p span:first-child{ margin-right: 10px;    width: 80px;
-  overflow: hidden;
-  height: 18px;
+.SearchWin .searchWindom .h_name p span:first-child{ 
+    margin-right: 10px;
+    width: 75px;
+    /* height: 18px; */
  }
-.SearchWin .searchWindom .h_name p span { float: left;}
+.SearchWin .searchWindom .h_name p span { 
+  float: left;
+  white-space: nowrap;
+  max-width: 80px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .SearchWin .searchWindom .h_contact { width:24px;
   height:24px; 
   background:rgba(135,139,148,1);
