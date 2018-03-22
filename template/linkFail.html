@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="full-screen" content="true">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="viewport" content="width=375, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>链接失效</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -moz-box-sizing:border-box; /* Firefox */
+            -webkit-box-sizing:border-box; /* Safari */
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: rgba(230, 233, 233, 1);
+            text-align: center;;
+        }
+        .fail-content{
+            display: inline-block;
+            width: 100%;
+            max-width: 660px;
+            background: rgba(255,255,255,1);
+            border-radius: 3px;
+            text-align: center;
+            margin: 40px 0 0 0;
+        }
+        .fail-title {
+            font-size: 32px;
+            font-family: MicrosoftYaHei-Bold;
+            color: rgba(71,77,84,1);
+            line-height: 42px;
+            padding: 40px 0 100px;
+            padding: 40px 0 100px;
+            font-weight: bold;
+        }
+        .fail-info {
+            padding: 70px 0;
+            display: inline-block;
+        }
+        img.err-img {
+            width: 36px;
+            height: 36px;
+            /* display: inline-block; */
+            vertical-align: bottom;
+        }
+        .fail-info .info{
+            font-size: 32px;
+            font-family: MicrosoftYaHei;
+            color: rgba(71,77,84,1);
+            line-height: 32px;
+        }
+        .footer{
+            margin-top: 110px;
+            /* border-top: 1px solid rgba(13, 20, 36, 0.1); */
+            padding-top: 13px;
+            padding-bottom: 22px;
+        }
+        .footer p,.footer-link{
+            font-size:14px;
+            font-family:MicrosoftYaHei;
+            color:rgba(0,122,206,1);
+            line-height:19px;
+            display: block;
+            text-decoration: none;
+        }
+        .footer span{
+            font-size:12px;
+            font-family:MicrosoftYaHei;
+            color:rgba(74,81,93,1);
+            line-height:16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fail-content">
+        <div class="fail-title">
+            团队邀请
+        </div>
+        <div class="fail-info">
+            <img class="err-img" src="./linkFail@2x.png" >
+            <span class="info">对不清，链接已失效！</span>
+        </div>
+        <div class="footer">
+            <a href="http://www.baidu.com" class="footer-link">友空间</a>
+            <span>建议在电脑端打开此页面</span>        
+        </div>
+    </div>
+</body>
+
+</html>
