@@ -19,7 +19,7 @@ import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, log
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
   iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane,
   popconfirm,popconfirm_content,
-  createBtn,select_li
+  createBtn,select_li,new_name
 } from './style.css';
 
 const {
@@ -384,18 +384,19 @@ class UserInfoContainer extends Component {
               <div className={imgOuter}>
                 {this.getIcon1(imgsrc)}
               </div>
+              <div className={new_name} title={name}>{getStrLenSubstr(name,20,20)}</div>
             </div>
-            <div>
-              <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
-              <ul className={`${gloryIcon} ${clearfix}`}>
+            {/* <div>
+             <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
+               <ul className={`${gloryIcon} ${clearfix}`}>
                 <li>
                   <div className={`${iconContainer} ${icon1}`}><Icon title="荣耀" type="glory"></Icon></div>
                 </li>
                 <li>
                   <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
                 </li>
-              </ul>
-            </div>
+              </ul> 
+            </div>*/}
           </div>
         </div>
         <div className={tenantArea}>

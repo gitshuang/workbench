@@ -37,9 +37,12 @@
 }
 .imgUser{
   position:relative;
-  width: 64px;
+  /* width: 64px; */
+  display: table-cell;
+  vertical-align: middle;
   margin-left: 32px;
   margin-right:10px;
+  margin-bottom: 20px;
 }
 .imgUser:hover .editPortrait{
   display: block;
@@ -64,11 +67,18 @@
   cursor:pointer;
 }
 .imgOuter{
-  width:64px;
-  height:64px;
-  border:1px solid #ddd;
-  border-radius:44px;
-  overflow:hidden;
+  border: 1px solid #ddd;
+  border-radius: 44px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.new_name{
+  display: inline-block;
+  font-size:18px;
+  font-family:PingFangSC-Semibold;
+  color:rgba(71,77,84,1);
 }
 .imgInner{
   width:64px;
