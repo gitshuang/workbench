@@ -108,7 +108,6 @@
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  display: inline;
 }
 .um-box-hc {
   display: -webkit-box;

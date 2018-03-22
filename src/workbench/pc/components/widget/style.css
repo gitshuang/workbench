@@ -14,6 +14,7 @@
   border:1px solid #DBDEE5;
   box-sizing: border-box;
   overflow: hidden;
+  margin-top: 12px;/**为阴影预留**/
 }
 
 /* XL尺寸 */
