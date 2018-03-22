@@ -38,7 +38,7 @@ class EstablishContent extends Component {
     return (
       <div className={wrap}>
         {titleCont}
-        <div className={`${est_context} um-box`}>
+        <div className={`${est_context}`}>
           <div className={box}>
             <div className={imageBox}>
               <img src = {Team} />

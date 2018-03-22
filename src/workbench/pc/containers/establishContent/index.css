@@ -21,12 +21,18 @@
 }
 .est_context{
   margin-top: 29px;
+  /* display: -moz-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; */
 }
 .box{
   width: 540px;
   /* height: 580px; */
   border-radius: 3px ; 
   padding-bottom: 40px;
+  float: left;
 }
 .box:first-child{
   background:rgba(94,102,112,1);

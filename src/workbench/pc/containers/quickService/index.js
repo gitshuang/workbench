@@ -74,7 +74,7 @@ class QuickServiceContainer extends Component {
            }
             _top += 3;
           }
-      })
+      },10)
     }
   }
 
