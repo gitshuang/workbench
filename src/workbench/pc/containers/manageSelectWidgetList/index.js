@@ -262,7 +262,7 @@ class SelectWidgetList extends Component {
 
     let list = [];
     allAppList.forEach((item, i) => {
-      const {service:{serviceId: id, serviceName: name},widgetTemplate:{serviceType}} = item;
+      const {service,service:{serviceId: id, serviceName: name},widgetTemplate:{serviceType}} = item;
       let _b = item.extend;
       if(serviceType=="2"){
         item.serviceId = item.applicationId;
@@ -272,7 +272,7 @@ class SelectWidgetList extends Component {
         item.serviceCode = item.applicationCode;
         item.widgettemplateId = item.widgetTemplate.widgettemplateId;
         // item.extend = false;
-        list.push(<ServiceItem  key={`widget-title-${i}-${item.serviceId}`} onChange={this.onChange} data={item} packUp={this.btnUp} /> );
+        list.push(<ServiceItem  key={`widget-title-${i}-${item.serviceId}`} onChange={this.onChange} data={item} packUp={this.btnUp} arrow={service && service.length>0?true:false} /> );
       }
       item.service.forEach((da,i)=>{
         da.extend = _b;
