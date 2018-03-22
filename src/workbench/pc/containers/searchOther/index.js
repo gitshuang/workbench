@@ -194,8 +194,8 @@ class searchOther extends Component {
                 items={this.state.pagesize}
                 activePage={this.state.activePage}
                 onDataNumSelect={this.paginationNumSelect}
-                dataNumSelect={this.state.dataNumSelect}
-                dataNumSelectActive={1}
+                // dataNumSelect={this.state.dataNumSelect}
+                // dataNumSelectActive={1}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
           </div>
