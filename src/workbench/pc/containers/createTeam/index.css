@@ -134,3 +134,9 @@ font-size: 14px;
   color: red;
   font-size: 12px;
 }
+:global(.ie9) .item label{
+  float: left;
+}
+:global(.ie9) .image{
+  display: table-cell;
+} 

@@ -151,6 +151,6 @@ if (!Array.prototype.findIndex) {
 var browser=navigator.appName;
 var b_version=navigator.appVersion;
 if(browser=="Microsoft Internet Explorer" && b_version.match(/9./i)=="9.")
-{   alert("0000");
+{
     (function(f){ window.setTimeout=f(window.setTimeout); window.setInterval=f(window.setInterval); })(function(f){return function(c,t){ var a=[].slice.call(arguments,2);return f(function(){c instanceof Function?c.apply(this,a):eval(c)},t)} });  
 }
