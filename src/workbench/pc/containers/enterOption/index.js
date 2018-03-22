@@ -15,7 +15,7 @@ const { Item } = Menu;
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {openDismissModal,openExitModal} = teamconfigActions;
 
-import { enter_option} from './style.css';
+import { enter_option,item_li} from './style.css';
 
 @withRouter
 @connect(
@@ -78,10 +78,10 @@ class EnterOption extends Component {
     data.forEach((da)=>{
       if(da.id == "allowExit"){
         if(allowExit == "1"){
-          lis.push(<Item key={da.value} id={da.serverApi} >{da.name}</Item>);
+          lis.push(<Item className={item_li} key={da.value} id={da.serverApi} >{da.name}</Item>);
         }
       }else{
-        lis.push(<Item key={da.value} id={da.serverApi} >{da.name}</Item>);
+        lis.push(<Item className={item_li} key={da.value} id={da.serverApi} >{da.name}</Item>);
       }
     })
     let menus = (<Menu onClick={this.onSelectDrop}>{lis}</Menu>);

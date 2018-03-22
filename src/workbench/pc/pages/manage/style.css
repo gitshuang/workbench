@@ -101,3 +101,6 @@ body{
 .addGroupBtn :global(.iconfont){
   padding-right: 10px;
 }
+.manager_save_pop>div{
+  width: auto !important;
+}
