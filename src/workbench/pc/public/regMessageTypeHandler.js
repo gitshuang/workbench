@@ -8,7 +8,7 @@ import {enter_or_team} from "./regMessageTypeHandler.css";
 const { addBrm , popBrm} = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
 const handlers = {
-  openService({ serviceCode, data, tenantId }) {
+  openService({ serviceCode, data, type,tenantId }) {
     if (tenantId && serviceCode) {
       get('/service/getServiceByTenantIdAndServiceCode', {
         serviceCode,
@@ -56,7 +56,11 @@ const handlers = {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
-      this.props.history.push(`/service/${serviceCode}`);
+      if(type === 2 ){
+        this.props.history.push(`/app/${serviceCode}`);
+      }else{
+        this.props.history.push(`/service/${serviceCode}`);
+      }
     }
   },
   openDialog({ options }) {
