@@ -146,6 +146,8 @@
     font-weight: bold;
     display: flex;
     padding-bottom: 5px;
+    height: 22px;
+    width: 100%;
   }
 .SearchWin .searchWindom .h_name p{max-width:145px;
   /* height:16px;  */

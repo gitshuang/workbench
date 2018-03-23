@@ -214,6 +214,7 @@ class SearchContainer extends Component {
         case "addressbook"://通讯录
           let lis = [];
           item.content.forEach((item2,index2)=>{
+            item2 = eval('(' + item2 + ')')
             lis.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={item2.userAvator}/></div>
                   <div className={h_name}>
