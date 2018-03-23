@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom'
 import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
@@ -21,25 +22,56 @@ import rootActions from 'store/root/actions';
 const {deleteFolder, renameFolder, setFolderEdit,selectListActions,selectGroupActions,cancelFolderEdit,openFolder,setEditonlyId ,setDragInputState} = manageActions;
 
 const type='item';
-
 const itemSource = {
-  beginDrag(props) {
+  beginDrag(props) {    
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type};
-  }
+  },
+  // endDrag(props, monitor){
+  //   var timeEnough = new Date().getTime() - timestamp > 1500
+  //   return {timeEnough}
+  // }
 };
 
 
 const itemTarget = {
-  drop(props, monitor) {
+
+  drop(props, monitor,component) {
+    const ifIntoFile = props.moveLine;
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
     const preFolderType = monitor.getItem().folderType;
-
     //添加大于1.5s的标记 判断是否拖入文件夹里面
-    const timeFlag = (new Date().getTime() - timestamp > 1500);
+    const timeFlag = ifIntoFile=='center'//||(new Date().getTime() - timestamp > 1500);
     if (draggedId !== props.id && preFolderType!=="folder") {
-      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeFlag,props.data);
+      props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,ifIntoFile,timeFlag,props.data);
+    }
+    // return { moveLine: timeFlag }
+  },
+  // canDrop(props,monitor){
+  //   const draggedId = monitor.getItem().id;
+  //   const previousParentId = monitor.getItem().parentId;
+  //   const preType = monitor.getItem().type;
+  //   const preFolderType = monitor.getItem().folderType;
+  //   return (draggedId !== props.id && preType!==2) 
+  // },
+  hover(props, monitor, component){
+    const clientOffset = monitor.getClientOffset();
+    const componentRect = findDOMNode(component).getBoundingClientRect();
+    var xGap = componentRect.x-clientOffset.x;
+    var yGap = componentRect.y-clientOffset.y;
+    var moveLine = 'none'
+    if(Math.abs(xGap)<180){
+      if(Math.abs(xGap)<60){
+        moveLine = 'left'
+      }else if(Math.abs(xGap)<120){
+        moveLine = 'center'
+      }else{
+        moveLine = 'right'
+      }
+    }
+    if(new Date().getTime() % 50 == 0){
+      props.savePosition(props.id,moveLine);
     }
   }
 };
@@ -47,14 +79,23 @@ const itemTarget = {
 function collectSource(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
+    // offSet:monitor.getClientOffset(),
   };
 }
 
-
 function collectTaget(connect, monitor) {
+  // console.log('getClientOffset',monitor.getClientOffset())//边缘到进入的距离
+  // console.log('getInitialClientOffset',monitor.getInitialClientOffset())//鼠标点击的位置
+  // console.log('getDifferenceFromInitialOffset',monitor.getDifferenceFromInitialOffset())//鼠标点击到进入的距离
+  // console.log('getSourceClientOffset',monitor.getSourceClientOffset())//drag元素到进入时位置
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
+    isOver:monitor.isOver(),
+    canDrop:monitor.canDrop(),
+    getItemType:monitor.getItem(),
+    offSet:monitor.getDifferenceFromInitialOffset(),
+    offSet2:monitor.getClientOffset(),
   }
 }
 
@@ -98,16 +139,97 @@ class WidgeFileItem extends Component {
     this.state = {
       value:props.data.widgetName,
       editShow: ed,
-      showModal:false
+      showModal:false,
+      timer:0,
+      timeEnough:false,
+      position:{},
+      moveLine:'none',
     }
   }
 
+  // shouldComponentUpdate(nextProps,nextState){
+  //   if( this.props.moveLine == nextProps.moveLine){
+  //     return false
+  //   }
+  //   return true
+  // }
+
+  componentDidMount(){
+    var position =  findDOMNode(this).getBoundingClientRect();
+    this.setState({
+      position :{ 
+        x:position.x,
+        y:position.y,
+      }
+    })
+  }
   componentWillReceiveProps(nextProps){
     if(nextProps.curEditFolderId !== this.props.data.widgetId){
       this.setState({
         editShow:false
       })
     }
+    if( nextProps.isOver == true){
+      var position =  findDOMNode(this).getBoundingClientRect();
+      this.setState({
+        position :{ 
+          x:position.x,
+          y:position.y,
+        }
+      })
+    }
+    var { canDrop, isDragging , isOver ,getItemType} = this.props;
+    // if( nextProps.isOver == true && getItemType.type !== 2){
+    //   var timer = setTimeout(()=>{
+    //     this.setState({
+    //       timeEnough:true,
+    //     })
+    //   },1500)
+    //   this.setState({
+    //     timer 
+    //   })
+    // }else{
+    //   clearTimeout(this.state.timer);
+    //   this.setState({
+    //     timer: 0,
+    //     timeEnough:false,
+    //   })
+    // }
+    if( nextProps.isOver == true && nextProps.moveLine !== 'none' ){
+        if(nextProps.moveLine == 'left'){
+          this.setState({
+            moveLine : 'left',
+            timeEnough : false
+          })
+        }else if(nextProps.moveLine == 'center'){
+          this.setState({
+            timeEnough : true
+          })
+          if(getItemType.type == 2||getItemType.folderType=="folder"){
+            this.setState({
+              moveLine : 'none',
+              timeEnough : false,
+            })
+          }
+        }else{
+          this.setState({
+            moveLine : 'right',
+            timeEnough : false
+          })
+        }
+        if(getItemType.dragType =='dragInFolder'){
+          this.setState({
+            moveLine : 'none',
+            timeEnough : false,
+          })
+        }
+    }else{
+      this.setState({
+        moveLine : 'none',
+        timeEnough : false,
+      })
+    }
+
   }
   //点击文件夹编辑按钮
   fileEdit = (e) =>{
@@ -247,14 +369,60 @@ class WidgeFileItem extends Component {
         <div onClick={()=>{this.popSave(da)}}><Icon title="删除文件夹" type="dustbin" /></div>
       </div>
     </div>
-    const { connectDragSource, connectDropTarget,isDragging,drag } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,drag,isOver,canDrop,offSet,offSet2} = this.props;
+    const { position } = this.state;
     const opacity = isDragging ? 0 : 1;
+    var styleOver={},styleOverLine={};
     if (isDragging) {
       // return null
     }
     // ${isDragging ? 'rollOut':'slideInRight'}
+    if(isOver && canDrop ){
+      if(this.state.timeEnough){
+        styleOver = {
+          'opacity':'0.7',
+          'boxShadow': '0 0 0 5px #ddd,0 0 0 8px rgba(0,205,195,1)',
+          'transform': 'scale(1.01,1.01)',
+        }
+      }
+      // if(offSet){
+      //   if(offSet.x <0 ){
+      //     var styleOverLine = {
+      //       'transform': 'scale(1,1)',
+      //       'boxShadow' :'-5px 0 0 0 #ddd,-8px 0 0 0 #fff',
+      //     }
+      //   }
+      //   if(offSet.x >0 ){
+      //     var styleOverLine = {
+      //       'transform': 'scale(1,1)',
+      //       'boxShadow' :'5px 0 0 0 #ddd,8px 0 0 0 #fff',
+      //     }
+      //   }
+      // }
+      if(this.state.moveLine !=='none'  ){
+        if( this.state.moveLine == 'left' ){
+          styleOverLine = {
+            'transform': 'scale(1,1)',
+            'boxShadow' :'-3px 0 0 0 #ddd,-6px 0 0 0 rgba(0,205,195,1)',
+            'borderRadius':'0',
+          }
+        }
+        if( this.state.moveLine == 'right' ){
+          styleOverLine = {
+            'transform': 'scale(1,1)',
+            'boxShadow' :'3px 0 0 0 #ddd,6px 0 0 0 rgba(0,205,195,1)',
+            'borderRadius':'0',
+          }
+        }
+      }else{
+        styleOverLine = {
+          'transform': 'scale(1,1)',
+          'boxShadow' :'0 0 0 0 #ddd,0 0 0 0 #ddd',
+        }
+      }
+    }
     let _html = (
-      <li name="file" className={`${widgetItem} ${widgetFileItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag} `} style={{...opacity }} onClick={this.props.onClick}>
+      <li name="file" className={`${widgetItem} ${widgetFileItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag} `} style={{...opacity,...styleOverLine,...styleOver}} onClick={this.props.onClick}>
         <div className={title}>
           {/* <div className={[title_left,file_icon].join(' ')}></div> */}
           <div className={`${title_right} ${file_title_right}`}> {da.widgetName} </div>

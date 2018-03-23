@@ -660,7 +660,25 @@ const reducer = handleActions({
       // manageList: [...manageList],
     }
   },
-  [moveService]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType,timeFlag} }) => {
+  [moveService]: (state, { payload: {id,preParentId,preType,afterId,parentId,afterType,ifIntoFile,timeFlag,} }) => {
+    function isSameParent(preParentId,parentId){
+      return preParentId == parentId
+    }
+    function compareIndex(manageAllList,id,afterId,preParentId,parentId){
+      var parentData = {}, curIndex = 0, afterIndex = 0;
+      if( preParentId == parentId ){
+        parentData = findById(manageAllList,preParentId)
+      }
+      parentData.children.forEach((v,k)=>{
+        if(v.widgetId == id){
+          curIndex = k;
+        }
+        if(v.widgetId == afterId){
+          afterIndex = k;
+        }
+      })
+      return curIndex<afterIndex;
+    }
     let manageAllList = state.manageList;
     let sourceData= preParentId && findById(manageAllList,preParentId); //拖拽前 父级源对象
     let targetData = parentId && findById(manageAllList,parentId); //拖拽后 父级目标对象
@@ -677,13 +695,26 @@ const reducer = handleActions({
         itemIn.parentId = afterId;
       }
       itemAfter.children.push(itemIn); //添加
-    }else if((preType === 2 && preParentId !== parentId)|| (preType === 3 && afterType === 2 && preParentId !== parentId && !timeFlag)||(((preParentType===2 && afterParentType===1)||(preParentType===1 && afterParentType===1 && preParentId !== parentId)) && preType === 3 && afterType === 3)){
+    }else if(
+      (preType === 2 && preParentId !== parentId)|| 
+      (preType === 3 && afterType === 2 && preParentId !== parentId && !timeFlag)||
+      (
+        (
+          (preParentType===2 && afterParentType===1)||
+          (preParentType===1 && afterParentType===1 && preParentId !== parentId)
+        ) && preType === 3 && afterType === 3
+      )
+    ){
       //从文件夹里面往外面拖拽 或 跨分组拖拽
       sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
       if(preParentId !== parentId){
         itemIn.parentId = parentId;
       }
-      targetData.children.splice(targetData.children.indexOf(itemAfter),0,itemIn); //添加
+      if(ifIntoFile =='left'){
+        targetData.children.splice(targetData.children.indexOf(itemAfter),0,itemIn); //添加
+      }else{
+        targetData.children.splice(targetData.children.indexOf(itemAfter)+1,0,itemIn); //添加
+      }
     }else if(preParentId !== parentId && preType === 3 && afterType === 1){
       //跨分组拖拽 放到组内 而不是元素上
       sourceData.children.splice(sourceData.children.indexOf(itemIn),1); //删掉
@@ -691,6 +722,7 @@ const reducer = handleActions({
         itemIn.parentId = parentId;
       }
       targetData.children.splice(targetData.children.length,0,itemIn); //添加
+      
     }else {
       let dataPre = manageList.filter(({widgetId}) => widgetId === preParentId)[0].children;
       let data = manageList.filter(({widgetId}) => widgetId === parentId)[0].children;
@@ -698,13 +730,41 @@ const reducer = handleActions({
       const afterItem = data.filter(({widgetId}) => widgetId === afterId)[0];
       const itemIndex = data.indexOf(item);
       const afterIndex = data.indexOf(afterItem);
+      if(ifIntoFile =='left'){
+        if(itemIndex<afterIndex){
+          manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
+            $splice: [
+              [itemIndex, 1],
+              [afterIndex-1, 0, item]
+            ]
+          })
+        }else{
+          manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
+            $splice: [
+              [itemIndex, 1],
+              [afterIndex, 0, item]
+            ]
+          })
+        }
+      }else{
+        if(itemIndex<afterIndex){
+          manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
+            $splice: [
+              [itemIndex, 1],
+              [afterIndex, 0, item]
+            ]
+          })
+        }else{
+          manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
+            $splice: [
+              [itemIndex, 1],
+              [afterIndex+1, 0, item]
+            ]
+          })
+        }
 
-      manageList.filter(({widgetId}) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex, 0, item]
-          ]
-      })
+      }
+
     }
     let curDisplayFolder = state.curDisplayFolder;
     if(preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3){

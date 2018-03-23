@@ -1,6 +1,7 @@
 .content{
   overflow: auto;
   height: 400px;
+  padding-left:10px;
 }
 
 :global( .manageDialogFolder .folderDialog){

@@ -1,6 +1,7 @@
 import React, {
   Component
 } from 'react';
+import { findDOMNode } from 'react-dom'
 import ReactDOM from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
@@ -35,15 +36,12 @@ const itemSource = {
     // props.editTitle(props.id,props.data.widgetName);
     timestamp=new Date().getTime();
     window.timestamp = timestamp;
-    return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType,dragType:props.dragType};
+    return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType,dragType:props.dragType,props:props};
   },
-
   endDrag(props, monitor, component){
-    return monitor.getDifferenceFromInitialOffset();
+    return {offSetItem:monitor.getDifferenceFromInitialOffset()}
   }
 };
-
-
 const itemTarget = {
   //hover 悬浮调用 drop落在目标上时调用
   hover(props, monitor,component){
@@ -62,21 +60,41 @@ const itemTarget = {
         //props.editTitle(props.id,props.data.widgetName);
       }
     }
+    const clientOffset = monitor.getClientOffset();
+    const componentRect = findDOMNode(component).getBoundingClientRect();
+    var xGap = componentRect.x-clientOffset.x;
+    var yGap = componentRect.y-clientOffset.y;
+    var moveLine = 'none'
+    if(Math.abs(xGap)<180){
+      if(Math.abs(xGap)<60){
+        moveLine = 'left'
+      }else if(Math.abs(xGap)<120){
+        moveLine = 'center'
+      }else{
+        moveLine = 'right'
+      }
+    }
+    if(new Date().getTime() % 50 == 0){
+      props.savePosition(props.id,moveLine);
+    }
+
+
   },
   drop(props, monitor,component) {
+    const ifIntoFile = props.moveLine;
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
     const preFolderType = monitor.getItem().folderType;
     const dragType = monitor.getItem().dragType;
 
-    if (draggedId !== props.id && preType !==1  && ((preFolderType!=="folder" && props.folderType!=="folder") || (dragType==="dragInFolder" && props.dragType==="dragInFolder"))) {
-      let timeOut = (new Date().getTime() - timestamp > 1500);
-      if(timeOut && preType === 3 && props.data.type === 3){
+    if (draggedId !== props.id && preType !==1  && ((preFolderType!=="folder" && props.folderType!=="folder") || (dragType==="dragInFolder" && props.dragType =="dragInFolder"))) {
+      let timeOut = ifIntoFile=='center'//||(new Date().getTime() - timestamp > 1500);
+      if(timeOut && preType === 3 && props.data.type === 3 && preFolderType!=="folder"){
         //放上去停留大于2s创建文件夹
         props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeOut);
       }else {
-        props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type);
+        props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,ifIntoFile);
       }
     }
   }
@@ -85,14 +103,18 @@ const itemTarget = {
 function collectSource(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
   };
 }
 
 
 function collectTaget(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
+    isOver:monitor.isOver(),
+    canDrop:monitor.canDrop(),
+    offSet:monitor.getDifferenceFromInitialOffset(),
+    getItemType:monitor.getItem(),
   }
 }
 
@@ -160,9 +182,73 @@ class WidgetItem extends Component {
     this.state = {
       showModal:false,
       title:'',
+      timer:0,
+      timeEnough:false,
+      moveLine:'none',
     }
   }
 
+  // shouldComponentUpdate(nextProps,nextState){
+  //   if( this.props.moveLine == nextProps.moveLine){
+  //     return false
+  //   }
+  //   return true
+  // }
+  componentWillReceiveProps(nextProps){
+    var { canDrop, isDragging , isOver,getItemType,dragType} = this.props;
+    // if( nextProps.isOver == true ){
+    //   var timer = setTimeout(()=>{
+    //     this.setState({
+    //       timeEnough:true,
+    //     })
+    //   },1500)
+    //   this.setState({
+    //     timer 
+    //   })
+    // }else{
+    //   clearTimeout(this.state.timer);
+    //   this.setState({
+    //     timer: 0,
+    //     timeEnough:false,
+    //   })
+    // }
+    /*
+    */
+    if( nextProps.isOver == true && nextProps.moveLine !== 'none' ){
+      if(nextProps.moveLine == 'left'){
+        this.setState({
+          moveLine : 'left',
+          timeEnough : false
+        })
+      }else if(nextProps.moveLine == 'center'){
+        this.setState({
+          timeEnough : true
+        })
+        if(getItemType.type == 2 ||getItemType.dragType =='dragInFolder'){
+          this.setState({
+            moveLine : 'none',
+            timeEnough : false,
+          })
+        }
+      }else{
+        this.setState({
+          moveLine : 'right',
+          timeEnough : false,
+        })
+      }
+      if( getItemType.dragType =='dragInFolder' && !dragType){
+        this.setState({
+          moveLine : 'none',
+          timeEnough : false,
+        })
+      }
+    }else{
+      this.setState({
+        moveLine : 'none',
+        timeEnough : false,
+      })
+    }
+  }
 
   popSave = (data)=>{
     const { deleteFolder,type,currGroupIndex,delectService,parentId } = this.props;
@@ -245,9 +331,61 @@ class WidgetItem extends Component {
     if (isDragging) {
       // return null
     }
+    const { isOver, canDrop,offSet } = this.props;
+    var styleOverLine={},styleOver={};
+
+    if(isOver && canDrop){
+      if(this.state.timeEnough){
+        styleOver = {
+          'opacity':'0.7',
+          'boxShadow': '0 0 0 5px #ddd,0 0 0 8px rgba(0,205,195,1)',
+          'transform': 'scale(1.01,1.01)',
+          'borderRadius':'0',
+        }
+      }
+      // if(offSet){
+      //   var styleOverLine = {
+      //     'transform': 'scale(1,1)',
+      //     'boxShadow' :'5px 0 0 0 #ddd,8px 0 0 0 #fff',
+      //   }
+      //   if(offSet.x <0){
+      //     var styleOverLine = {
+      //       'transform': 'scale(1,1)',
+      //       'boxShadow' :'-5px 0 0 0 #ddd,-8px 0 0 0 #fff',
+      //     }
+      //   }
+        // if(offSet.x>0){
+        //   var styleOverLine = {
+        //     'transform': 'scale(1,1)',
+        //     'boxShadow' :'5px 0 0 0 #ddd,8px 0 0 0 #fff',
+        //   }
+        // }
+      // }
+      if(this.state.moveLine !=='none'  ){
+        if( this.state.moveLine == 'left' ){
+          styleOverLine = {
+            'transform': 'scale(1,1)',
+            'boxShadow' :'-3px 0 0 0 #ddd,-6px 0 0 0 rgba(0,205,195,1)',
+            'borderRadius':'0',
+          }
+        }
+        if( this.state.moveLine == 'right' ){
+          styleOverLine = {
+            'transform': 'scale(1,1)',
+            'boxShadow' :'3px 0 0 0 #ddd,6px 0 0 0 rgba(0,205,195,1)',
+            'borderRadius':'0',
+          }
+        }
+      }else{
+        styleOverLine = {
+          'transform': 'scale(1,1)',
+          'boxShadow' :'0 0 0 0 #ddd,0 0 0 0 #ddd',
+        }
+      }
+    }
     const {title} = this.state;
     return connectDragSource(connectDropTarget(
-      <li title={title} className={`${widgetItem} ${widget_node} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag}` } style={{...widgetStyle[size - 1],...opacity }} >
+      <li title={title} className={`${widgetItem} ${widget_node} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag}` } style={{...widgetStyle[size - 1],...opacity,...styleOverLine,...styleOver }} >
         <div className={title}>
           <div className={title_right}>{widgetName}</div>
         </div>

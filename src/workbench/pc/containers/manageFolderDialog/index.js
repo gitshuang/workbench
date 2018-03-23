@@ -30,9 +30,13 @@ class ManageFolderDialog extends Component {
     constructor(props) {
         super(props);
         this.moveItemDrag = this.moveItemDrag.bind(this);
+        this.state = {
+            moveLine:'none',
+            checkId:'',
+          }
     }
-    moveItemDrag = (id,preParentId,preType, afterId,parentId,afterType) => {
-      let data = {id,preParentId,preType,afterId,parentId,afterType}
+    moveItemDrag = (id,preParentId,preType, afterId,parentId,afterType,ifIntoFile) => {
+      let data = {id,preParentId,preType,afterId,parentId,afterType,ifIntoFile}
       const { moveService } = this.props;
       moveService(data);
     }
@@ -40,7 +44,19 @@ class ManageFolderDialog extends Component {
       const { closeFolder } = this.props;
       closeFolder();
     }
-
+    savePosition = (id,moveLine) => {
+        this.setState({
+          checkId:id,
+          moveLine:moveLine,
+        })
+      }
+    moveLine = (id,moveLinePara)=>{
+      if(id == this.state.checkId){
+        return moveLinePara;
+      }else{
+        return 'none'
+      }
+    }
     render() {
         const {curDisplayFolder: {widgetName: title, children, }, closeFolder, folderModalDisplay} = this.props;
         const list = children && children.map((child, i) => {
@@ -53,6 +69,8 @@ class ManageFolderDialog extends Component {
                 index: id,
                 preType: type,
                 moveItemDrag: this.moveItemDrag,
+                savePosition : this.savePosition,
+                moveLine : this.moveLine(id,this.state.moveLine),
             };
             return (
                 <WidgetItem { ...props } folderType={'folder'} type="pop" dragType="dragInFolder" closeFolderDrag={this.closeFolderDrag}/>
