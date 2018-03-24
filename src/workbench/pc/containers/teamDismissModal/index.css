@@ -4,3 +4,6 @@
 .content{
   
 }
+.select_enter_close :global(.close){
+  display: none;
+}

@@ -82,7 +82,7 @@ class DropdownButton extends Component{
     // onSelect={(e)=>{this.handleSelect(e,fun)}}
     let _menus = (<Menu className={menu_style} style={{ marginLeft:_marginLeft,marginTop:-1}}  >
        <MenuItem className={menu_item} >
-          <div className={item_ul}>{item}</div>
+          <div className={`${item_ul} open_item`}>{item}</div>
           {lastIem?null:<div className={create_ent} onClick={this.enterOnclick} >创建团队 \ 创建企业</div>}
        </MenuItem>
     </Menu>);
