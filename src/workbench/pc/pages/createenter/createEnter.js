@@ -106,7 +106,7 @@ class CreateEnter extends Component {
     if(!_tenantIndustry.value && _tenantIndustry.value == ""){
       _tenantIndustry.value = tenantIndustry;
     }
-    
+
     if (flag) {
       this.setState({
         disabled:false
@@ -148,7 +148,15 @@ class CreateEnter extends Component {
   }
 
   setOptherData=(obj)=>{
+    debugger;
     this.state[obj.name] = obj.value;
+    this.setState({
+      ...this.state
+    })
+  }
+
+  inputOnChange = (e,name)=>{
+    this.state[name] =  e;
     this.setState({
       ...this.state
     })
@@ -232,15 +240,15 @@ class CreateEnter extends Component {
             </div>
             
             <FormItem showMast={false} labelName={<span>姓名<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请输入联系人姓名" method="blur" inline={true}>
-              <FormControl name="linkman"  placeholder="请输入联系人姓名" value={linkman}/>
+              <FormControl name="linkman"  placeholder="请输入联系人姓名" value={linkman} onChange={(e)=>{this.inputOnChange(e,"linkman")}} />
             </FormItem>
 
             <FormItem showMast={false} valuePropsName='value'  labelName={<span>邮箱<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} method="blur" htmlType="email" errorMessage="邮箱格式错误"  inline={true}>
-                <FormControl name="tenantEmail"  placeholder="请输入邮箱" value={tenantEmail}/>
+                <FormControl name="tenantEmail"  placeholder="请输入邮箱" value={tenantEmail} onChange={(e)=>{this.inputOnChange(e,"tenantEmail")}} />
             </FormItem>
 
             <FormItem inputBefore="+86" className="input_phone" showMast={false}  valuePropsName='value'  labelName={<span>手机号<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} method="blur" htmlType="tel" errorMessage="手机号格式错误"  inline={true}>
-                <FormControl name="tenantTel"  placeholder="请输入手机号" value={tenantTel}/>
+                <FormControl name="tenantTel"  placeholder="请输入手机号" value={tenantTel} onChange={(e)=>{this.inputOnChange(e,"tenantTel")}} />
             </FormItem>
 
             {/* <FormItem showMast={false} labelName={<span>企业性质<font color='red'> * </font></span>} isRequire={false} method="change" inline={true}>
