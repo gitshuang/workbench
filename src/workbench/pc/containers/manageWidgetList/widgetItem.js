@@ -61,7 +61,11 @@ const itemTarget = {
       }
     }
     const clientOffset = monitor.getClientOffset();
-    const componentRect = findDOMNode(component).getBoundingClientRect();
+    var componentRect = 0;
+    if(component){
+      componentRect = findDOMNode(component).getBoundingClientRect();
+    }
+    // const componentRect = findDOMNode(component).getBoundingClientRect();
     var xGap = componentRect.x-clientOffset.x;
     var yGap = componentRect.y-clientOffset.y;
     var moveLine = 'none'
@@ -237,6 +241,12 @@ class WidgetItem extends Component {
         })
       }
       if( getItemType.dragType =='dragInFolder' && !dragType){
+        this.setState({
+          moveLine : 'none',
+          timeEnough : false,
+        })
+      }
+      if(getItemType.type ===1){
         this.setState({
           moveLine : 'none',
           timeEnough : false,

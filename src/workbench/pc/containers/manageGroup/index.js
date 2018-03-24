@@ -110,7 +110,9 @@ function collectSource(connect, monitor) {
 
 function collectTaget(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
+    isOver:monitor.isOver(),
+    getItemType:monitor.getItem(),
   }
 }
 
@@ -495,7 +497,16 @@ class ManageGroup extends Component {
       //return null
     }
 
-    let _html = ( <div className={`${groupArea} animated zoomIn`}>
+    var { isOver, getItemType} = this.props;
+    var overStyle = {};
+    if( isOver && getItemType.type === 1){
+      overStyle = {
+        'transform': 'scale(1,1)',
+        'boxShadow' :'0 0 0 3px #ddd,0 0 0 6px rgba(0,205,195,1)',
+        'borderRadius':'0',
+      }
+    }
+    let _html = ( <div className={`${groupArea} animated zoomIn`} style={{...overStyle}}> 
       <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
         { groupTitle }
         <div>

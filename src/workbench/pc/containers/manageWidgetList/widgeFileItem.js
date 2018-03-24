@@ -43,7 +43,7 @@ const itemTarget = {
     const preFolderType = monitor.getItem().folderType;
     //添加大于1.5s的标记 判断是否拖入文件夹里面
     const timeFlag = ifIntoFile=='center'//||(new Date().getTime() - timestamp > 1500);
-    if (draggedId !== props.id && preFolderType!=="folder") {
+    if (draggedId !== props.id && preFolderType!=="folder" && preType !==1) {
       props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,ifIntoFile,timeFlag,props.data);
     }
     // return { moveLine: timeFlag }
@@ -223,13 +223,18 @@ class WidgeFileItem extends Component {
             timeEnough : false,
           })
         }
+        if(getItemType.type === 1){
+          this.setState({
+            moveLine : 'none',
+            timeEnough : false,
+          })
+        }
     }else{
       this.setState({
         moveLine : 'none',
         timeEnough : false,
       })
     }
-
   }
   //点击文件夹编辑按钮
   fileEdit = (e) =>{
