@@ -229,7 +229,7 @@ class Invitation extends Component {
                 <p>输入邮箱地址并用 “;” 隔开</p>
                 <TagsInput
                   value={this.state.mails}
-                  addKeys={[13,186]} // enter,semicolon
+                  addKeys={[13,186,59]} // enter,semicolon:chrome186,firefox59
                   addOnBlur
                   onlyUnique
                   addOnPaste
