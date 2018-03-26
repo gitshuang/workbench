@@ -1,3 +1,8 @@
+* {
+  box-sizing: content-box;
+  -moz-box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+}
 /* ie9下首页Header */
 :global(.ie9) .lebra-navbar{
   display: table;

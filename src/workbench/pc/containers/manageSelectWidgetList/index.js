@@ -25,9 +25,8 @@ panel_left,footer_btn,title,search_tit,active,btn_active
 
 @connect(
   mapStateToProps(
-    'manageList',
     'applicationsMap',
-    'selectWidgetItem',
+    'manageList',
     'allServicesByLabelGroup',
     {
       namespace: 'manage',
@@ -59,13 +58,6 @@ class SelectWidgetList extends Component {
   }
 
   getServices(serviceName=""){
-    // const {selectWidgetItem} = this.props;
-    // if(!selectWidgetItem){
-    //   let payload = this.props.allServicesByLabelGroup;
-    //   this.setThisState(payload);
-    //   return;
-    // };
-    // let self = this;
     const { requestError, requestSuccess, getAllServicesByLabelGroup } = this.props;
     getAllServicesByLabelGroup(serviceName).then(({error, payload}) => {
       if (error) {
@@ -81,28 +73,10 @@ class SelectWidgetList extends Component {
         data:payload,
         applications:payload.applications
       })
-      // this.setThisState(payload);
       requestSuccess();
     });
   }
-
-  setThisState=(payload)=>{
-    payload.labelGroups[0].active = true;
-    const {labels,allAppList,currentAppId} = this.setDefaultList(payload.labelGroups[0]);
-      this.setState({
-        data:payload,
-
-        labelGroups:payload.labelGroups,
-        labels,
-        allAppList,
-        selectedList:[]
-        // currentAppId
-    })
-  }
-
-  // componentWillReceiveProps(nextProps){
-  // }
-
+  
   btnSearch=()=>{
     const {data:{applications},value} = this.state;
     let _applications = [];
@@ -159,21 +133,21 @@ class SelectWidgetList extends Component {
 
   btnSave=()=>{
     console.log(this.state);
-    const { requestError, requestSuccess, setCurrentSelectWidgetMap,applications } = this.props;
+    const {applications} = this.state;
+    const { requestError, requestSuccess, addDesk ,parentId} = this.props;
     let selectedList = [];
-
     for (var da of applications) { 
       if(da.selected == "3"){ 
          selectedList.push(da);
-      }else{
-        if(da.service.length == 0) continue;
-        let _ser = da.service.find((_da)=>_da.selected == "3"); 
-        if(_ser){
-          selectedList.push(da);
-        }
       }
+      if(da.service.length == 0) continue;
+      da.service.forEach((_da,j)=>{
+        if(_da.selected == "3"){
+          selectedList.push(_da);
+        }
+      });
     }
-    this.props.addDesk({dataList:selectedList,parentId:this.props.parentId});
+    addDesk({dataList:selectedList,parentId});
     this.setState({
       edit:false
     });
@@ -181,36 +155,9 @@ class SelectWidgetList extends Component {
   }
 
   btnClose=()=>{
-    this.state.selectedList.forEach((da,i)=>{
-      da.selected = "2";
-    })
-    this.setState({
-      ...this.state
-    });
     this.props.close();
   }
 
-  setDefaultList=(da)=>{
-    const {applicationsMap} = this.props;
-    let allAppList = [];
-    let currentAppId = "";
-    da.labels.forEach((lab,j)=>{
-      lab.appIds.forEach((app,i)=>{
-        let appObj = applicationsMap[app];
-        if(appObj){
-          appObj.extend = false;
-          // allService = [...allService,...appObj.service];
-          allAppList.push(appObj);
-          currentAppId = app;
-        }
-      })
-    });
-    return {
-      labels:da.labels,
-      allAppList,
-      currentAppId
-    }
-  }
 
   btnTypeClick = (da)=>{
     const {data:{labelGroups}} = this.state;
@@ -227,10 +174,12 @@ class SelectWidgetList extends Component {
     const {data,data:{labelGroups}} = this.state;
     let _applications = [];
     let activeLabelGroups = labelGroups.find((da)=>da.active);
+    activeLabelGroups.labels.forEach((da)=>{da.active=false});
     if(_data.labelId == "all"){
+      let allLabel = activeLabelGroups.labels.find((da)=>da.labelId == "all");
+      allLabel.active = true;
       _applications = data.applications;
     }else{
-      activeLabelGroups.labels.forEach((da)=>{da.active=false});
       let labels = activeLabelGroups.labels.find((da)=>da.labelId == _data.labelId);
       labels.active = true;
       labels.appIds.forEach((appId)=>{
@@ -262,7 +211,6 @@ class SelectWidgetList extends Component {
 
   render() {
     const {data:{labelGroups=[]},applications} = this.state;
-    const {applicationsMap} = this.props;
     let btns = [];
      labelGroups.forEach(({active,labels},i)=>{
       if(active){
