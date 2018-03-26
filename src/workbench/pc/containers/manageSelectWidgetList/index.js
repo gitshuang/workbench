@@ -159,16 +159,23 @@ class SelectWidgetList extends Component {
 
   btnSave=()=>{
     console.log(this.state);
-    const { requestError, requestSuccess, setCurrentSelectWidgetMap } = this.props;
+    const { requestError, requestSuccess, setCurrentSelectWidgetMap,applications } = this.props;
     let selectedList = [];
-    forEach((da,i)=>{
 
-    })
-    // setCurrentSelectWidgetMap(this.state.selectedList);
-    this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
+    for (var da of applications) { 
+      if(da.selected == "3"){ 
+         selectedList.push(da);
+      }else{
+        if(da.service.length == 0) continue;
+        let _ser = da.service.find((_da)=>_da.selected == "3"); 
+        if(_ser){
+          selectedList.push(da);
+        }
+      }
+    }
+    this.props.addDesk({dataList:selectedList,parentId:this.props.parentId});
     this.setState({
-      edit:false,
-      selectedList:[]
+      edit:false
     });
     this.props.close();
   }
