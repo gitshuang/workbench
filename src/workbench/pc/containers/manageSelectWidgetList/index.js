@@ -121,22 +121,32 @@ class SelectWidgetList extends Component {
 
   onChange=(data,sele)=>{
     const {applications} = this.state;
-    data.selected = sele;
-    let applicationIdObj = applications.find((da)=>da.applicationId == data.applicationId);
-    if(applicationIdObj){
-      applicationIdObj.selected = sele;
-    }else{
-      let serviceIdObj = applicationIdObj.service.find((da)=>da.serviceId == data.serviceId);
-      serviceIdObj.selected = sele;
+    let selectObj = null;
+    if(data.widgetTemplate.serviceType == "1"){//服务
+      selectObj = applications.find((da)=>da.applicationId == data.applicationId);
+      let _service = selectObj.service.find((da)=>da.serviceId == data.serviceId);
+      _service.selected = sele;
+    }if(data.widgetTemplate.serviceType == "2"){//应用
+      selectObj = applications.find((da)=>da.applicationId == data.applicationId);
+      selectObj.selected = sele;
     }
-    let _appBool = applications.find((da)=>da.selected == "3");
-    let _serverBool = null;
-    if(!_appBool){
-      _serverBool = applicationIdObj.service.find((da)=>da.selected == "3");
+
+    let _edit = false;
+    for (var da of applications) { 
+      if(da.selected == "3"){ 
+        _edit = true;break;
+      }else{
+        if(da.service.length == 0) continue; 
+        let _ser = da.service.find((_da)=>_da.selected == "3");
+        if(_ser){
+          _edit = true;
+          break;
+        }
+      }
     }
     this.setState({
       ...this.state,
-        edit:_appBool || _serverBool?true:false
+        edit:_edit
     });
   }
 
@@ -148,9 +158,13 @@ class SelectWidgetList extends Component {
   }
 
   btnSave=()=>{
+    console.log(this.state);
     const { requestError, requestSuccess, setCurrentSelectWidgetMap } = this.props;
+    let selectedList = [];
+    forEach((da,i)=>{
+
+    })
     // setCurrentSelectWidgetMap(this.state.selectedList);
-    debugger;
     this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
     this.setState({
       edit:false,
