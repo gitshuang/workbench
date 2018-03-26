@@ -1,5 +1,7 @@
 import 'webstorage-polyfill';
 import 'whatwg-fetch';
+import 'url-polyfill';
+import 'js-polyfills/typedarray';
 import objectAssign from 'object-assign';
 import arrayFrom from 'array.from';
 import arrayFind from 'array.find';
