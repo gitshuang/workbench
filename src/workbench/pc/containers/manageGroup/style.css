@@ -198,3 +198,6 @@
 .widgetTitleInit>div:nth-child(2)>div{
   display: inline-table;
 }
+.check_group :global(.u-checkbox input[type=checkbox]){
+  top:15px;
+}
