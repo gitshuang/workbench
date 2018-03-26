@@ -1,7 +1,11 @@
+import 'webstorage-polyfill';
+import 'whatwg-fetch';
 import objectAssign from 'object-assign';
 import arrayFrom from 'array.from';
 import arrayFind from 'array.find';
 import Symbol from 'es6-symbol';
+import Promise from 'promise-polyfill';
+
 if (typeof Object.assign === 'undefined') {
   Object.assign = objectAssign;
 }
@@ -13,6 +17,9 @@ if(typeof Array.find === 'undefined'){
 }
 if(typeof window.Symbol === 'undefined'){
     window.Symbol = Symbol;
+}
+if (!window.Promise) {
+  window.Promise = Promise;
 }
 if (!("classList" in document.documentElement)) {
   Object.defineProperty(HTMLElement.prototype, 'classList', {
@@ -151,6 +158,6 @@ if (!Array.prototype.findIndex) {
 var browser=navigator.appName;
 var b_version=navigator.appVersion;
 if(browser=="Microsoft Internet Explorer" && b_version.match(/9./i)=="9.")
-{   
-    (function(f){ window.setTimeout=f(window.setTimeout); window.setInterval=f(window.setInterval); })(function(f){return function(c,t){ var a=[].slice.call(arguments,2);return f(function(){c instanceof Function?c.apply(this,a):eval(c)},t)} });  
+{
+    (function(f){ window.setTimeout=f(window.setTimeout); window.setInterval=f(window.setInterval); })(function(f){return function(c,t){ var a=[].slice.call(arguments,2);return f(function(){c instanceof Function?c.apply(this,a):eval(c)},t)} });
 }
