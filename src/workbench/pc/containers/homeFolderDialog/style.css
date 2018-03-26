@@ -23,8 +23,8 @@
     margin-top:14px;
 }
 .home_file_item_dailog :global(.close){
-  top: -48px;
-  right:0;
+  top: 10px;
+  right:10px;
 }
 .home_file_item_dailog  :global(.u-modal-dialog){
   width: 850px;
