@@ -17,6 +17,7 @@
     "array.from": "1.0.3",
     "babel-runtime": "6.26.0",
     "classnames": "2.2.5",
+    "custom-event-polyfill": "^0.3.0",
     "es6-symbol": "3.1.1",
     "js-polyfills": "^0.1.42",
     "object-assign": "4.1.1",

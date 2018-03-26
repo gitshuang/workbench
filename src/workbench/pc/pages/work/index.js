@@ -141,7 +141,8 @@ export default class Work extends Component {
         },
       },
     } = this.props;
-    this.getProductInfo(code, type, subcode);
+    console.log('getProductInfo start')
+    this.getProductInfo(code, type, subcode).then(() => { console.log('getProductInfo success')});
   }
 
   componentWillReceiveProps(nextProps) {
