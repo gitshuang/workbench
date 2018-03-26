@@ -68,11 +68,12 @@
 }
 .imgOuter{
   border: 1px solid #ddd;
-  border-radius: 44px;
+  border-radius: 50%;
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
   margin-right: 10px;
+  height: 64px;
 }
 .new_name{
   display: inline-block;
