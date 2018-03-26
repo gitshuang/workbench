@@ -168,7 +168,6 @@ const reducer = handleActions({
       "serviceType":"",
       "size": 1
     };
-    debugger;
     let newCar = [];
     let currentSelectWidgetMap = state.currentSelectWidgetMap;
     for(let da of dataList){
