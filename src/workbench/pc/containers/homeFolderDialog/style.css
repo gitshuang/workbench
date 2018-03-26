@@ -22,10 +22,6 @@
     padding:0;
     margin-top:14px;
 }
-.home_file_item_dailog :global(.close){
-  top: 10px;
-  right:10px;
-}
 .home_file_item_dailog  :global(.u-modal-dialog){
   width: 850px;
 }
@@ -36,4 +32,9 @@
 }
 .home .u-modal{
   display: none !important;
+}
+.home_file_item_dailog li:hover{
+  cursor: pointer;
+  box-shadow: 0 1px 10px rgba(74,81,93,.7);
+  border-radius: 3px;
 }
