@@ -168,7 +168,7 @@ const reducer = handleActions({
       "serviceType":"",
       "size": 1
     };
-
+    debugger;
     let newCar = [];
     let currentSelectWidgetMap = state.currentSelectWidgetMap;
     for(let da of dataList){
@@ -194,12 +194,11 @@ const reducer = handleActions({
         }
     })
     let newManageList = JSON.parse(JSON.stringify(state.manageList));
-
     return{
       ...state,
       manageList: newManageList,
-      isEdit: true,
-      currEditonlyId:"",
+      // isEdit: true,
+      // currEditonlyId:"",
       currentSelectWidgetMap//备份本次勾选了哪些磁贴
     }
   },
