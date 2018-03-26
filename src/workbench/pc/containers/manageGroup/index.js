@@ -465,7 +465,7 @@ class ManageGroup extends Component {
       groupTitle = (
         <div className={`${widgetTitle} ${widgetTitleInit} um-box-justify`} >
           <div>
-            <Checkbox checked={checkType} onChange={ this.selectFn(index) }>{widgetName}</Checkbox>
+            <Checkbox checked={checkType} onChange={()=>{this.selectFn(index)} }>{widgetName}</Checkbox>
           </div>
           <div>
             <div className={iconBox}>
