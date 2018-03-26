@@ -111,13 +111,10 @@ export default class Work extends Component {
     this.setState({
       loaded: false,
     })
-    console.log('getProductInfo start')
     getProductInfo(code, type, subcode).then(({error, payload}) => {
       if (error) {
-        console.log('getProductInfo error')
         requestError(payload);
       } else {
-        console.log('getProductInfo error')
         if (!subcode) {
           const {
             curService: {
