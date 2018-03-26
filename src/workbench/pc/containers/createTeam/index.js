@@ -54,7 +54,7 @@ class CreateTeamContent extends Component {
       imgWarning: "",
       imgUrl: "",
       backUrl : "",    // 上传成功后返回的url
-      disabled:false, 
+      disabled:false,
       error:false
     }
   }
@@ -119,7 +119,7 @@ class CreateTeamContent extends Component {
     }
     const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
     const { value, backUrl } = this.state;
-    
+
     this.isClick = true;
     if ( !value ){
       // alert("请输入团队名称");
@@ -183,7 +183,7 @@ class CreateTeamContent extends Component {
                 { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
                 <div>
                   <Icon type="copyreader" />
-                  <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
+                <input type="file" ref="btn_file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>{ this.imgChange(e) }} />
                 </div>
                 <span className={titlp_lab}>{"图片大小<=200K​"}</span>
               </div>
