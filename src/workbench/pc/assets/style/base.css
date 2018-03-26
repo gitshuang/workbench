@@ -344,3 +344,7 @@ body {
   padding: 5px;
 }
 /***----------统一组价样式 Message 蓝湖交互-----over-----**/
+
+/***------------ie9下的input的叉号去掉-----------------**/
+input::-ms-clear{display:none;}
+input::-ms-reveal{display:none;}

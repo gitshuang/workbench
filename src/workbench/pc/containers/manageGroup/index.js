@@ -33,7 +33,8 @@ import {
   btn,
   newGroupName_focus,
   newGroupName_blur,
-  widgetTitleInit
+  widgetTitleInit,
+  check_group
 } from './style.css';
 const {
   requestStart,
@@ -464,8 +465,8 @@ class ManageGroup extends Component {
     }else {
       groupTitle = (
         <div className={`${widgetTitle} ${widgetTitleInit} um-box-justify`} >
-          <div>
-            <Checkbox checked={checkType} onChange={ this.selectFn(index) }>{widgetName}</Checkbox>
+          <div className={check_group}>
+            <Checkbox checked={checkType} onChange={()=>{this.selectFn(index)} }>{widgetName}</Checkbox>
           </div>
           <div>
             <div className={iconBox}>

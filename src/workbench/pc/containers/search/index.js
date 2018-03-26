@@ -178,7 +178,7 @@ class SearchContainer extends Component {
         _type = "service";
       }else{
         code = item.applicationCode;
-        _type = type;
+        _type = "app";
       }
       this.props.history.push('/'+_type+'/'+code);
     }

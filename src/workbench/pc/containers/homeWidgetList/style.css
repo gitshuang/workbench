@@ -36,9 +36,7 @@
 .WidgetList {
   list-style: none;
   overflow: hidden; 
-}
-.WidgetList li:first-child{
-  margin-left: 5px;
+  padding-left: 5px;
 }
 .WidgetList li:hover{
     cursor: pointer;
