@@ -162,7 +162,8 @@ class CreateTeamContent extends Component {
       const tenantId = payload.tenantId;
       // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       localStorage.setItem('create', "1");
-      this.setState({tenantId:tenantId})
+      this.setState({tenantId:tenantId});
+      this.goToLoading(tenantId)
     });
 
   }
