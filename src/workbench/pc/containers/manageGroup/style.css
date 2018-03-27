@@ -127,7 +127,7 @@
 .titleInputArea{
   position:relative;
   display: inline-block;
-  height: 22px;
+  /* height: 22px; */
   line-height: 22px;
   overflow: hidden;
   vertical-align: middle;
