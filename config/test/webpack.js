@@ -10,11 +10,7 @@ var paths = require('../paths')
 module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     entry: {
-      main: [
-        'whatwg-fetch',
-        './src/workbench/pc/objectAssignPolyfill.js',
-        './src/workbench/pc/main.js',
-      ],
+      main: './src/workbench/pc/main.js',
     },
     module: {
       rules: [

@@ -14,9 +14,6 @@ module.exports = function (config) {
     entry: {
       main: [
         './scripts/dev-client',
-        'webstorage-polyfill',
-        'whatwg-fetch',
-        './src/workbench/pc/objectAssignPolyfill.js',
         './src/workbench/pc/main.js',
       ],
     },

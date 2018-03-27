@@ -2,6 +2,9 @@ var paths = require('./paths')
 
 
 module.exports = {
+  entry: {
+    'polyfill': './src/workbench/pc/objectAssignPolyfill.js',
+  },
   output: {
     path: paths('dist'),
     publicPath: '/'

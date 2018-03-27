@@ -77,7 +77,7 @@ class UploadPage extends Component {
             <div className={appValidate}>{imgWarning}</div>
           ) : null
         }
-        <input type="file" ref="file" onChange={this.imgChange} style={{display:"none"}}/>
+        <input type="file" ref="file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={this.imgChange} style={{display:"none"}}/>
         <div className={edit} onClick={this.uploadImage} >
           <Icon type="copyreader"/>
         </div>
