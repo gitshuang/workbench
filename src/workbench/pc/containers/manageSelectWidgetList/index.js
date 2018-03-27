@@ -19,7 +19,7 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
 import { select_widget_list,
 widget_left,widget_right,search_icon,search_icon_con,
   searchPanel,panel,left,panel_right,button_group,form_control,icon,
-panel_left,footer_btn,title,search_tit,active,btn_active
+panel_left,footer_btn,title,search_tit,active,btn_active,btn_type,server_type
 } from './style.css'
 
 
@@ -254,14 +254,18 @@ class SelectWidgetList extends Component {
            </div>
            <div className={panel} >
               <div className={panel_left}>
-                <ButtonGroup className="btn_type"> 
-                  { 
-                    labelGroups.map((da,i)=><Button key={`type-${i}`} className={da.active?btn_active:null} shape='border' onClick={()=>{this.btnTypeClick(da)}}>{da.labelGroupName}</Button>)
-                  }
-                </ButtonGroup>
-                <ButtonGroup vertical>
-                  {btns}
-                </ButtonGroup>
+                <div className={btn_type}>
+                  <ButtonGroup > 
+                    { 
+                      labelGroups.map((da,i)=><Button key={`type-${i}`} className={da.active?btn_active:null} shape='border' onClick={()=>{this.btnTypeClick(da)}}>{da.labelGroupName}</Button>)
+                    }
+                  </ButtonGroup>
+                </div>
+                <div className={server_type}>
+                  <ButtonGroup vertical>
+                    {btns}
+                  </ButtonGroup>
+                </div>
               </div>
               <div className={panel_right}>
                 <div>{list}</div>
