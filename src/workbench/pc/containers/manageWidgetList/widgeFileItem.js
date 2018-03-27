@@ -85,10 +85,6 @@ function collectSource(connect, monitor) {
 }
 
 function collectTaget(connect, monitor) {
-  // console.log('getClientOffset',monitor.getClientOffset())//边缘到进入的距离
-  // console.log('getInitialClientOffset',monitor.getInitialClientOffset())//鼠标点击的位置
-  // console.log('getDifferenceFromInitialOffset',monitor.getDifferenceFromInitialOffset())//鼠标点击到进入的距离
-  // console.log('getSourceClientOffset',monitor.getSourceClientOffset())//drag元素到进入时位置
   return {
     connectDropTarget: connect.dropTarget(),
     isOver:monitor.isOver(),
