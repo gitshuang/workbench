@@ -125,8 +125,6 @@ function setDefaultSelected(manageList,applicationsMap){
     }else{
       if(da.children && da.children != 0){
         setDefaultSelected(da.children,applicationsMap);
-      }else{ 
-        // selectedServer?selectedServer.selected = "2":"";
       }
     }
   })
@@ -194,7 +192,9 @@ const reducer = handleActions({
           applicationsMap[serviceDa.serviceId] = serviceDa;
         })
       });
+      debugger;
       setDefaultSelected(state.manageList,applicationsMap);
+      debugger;
       return {
         ...state,
         applicationsMap,
