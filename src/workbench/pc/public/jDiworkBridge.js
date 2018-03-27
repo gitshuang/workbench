@@ -82,6 +82,9 @@ const handlerList = {
     const event = getNewEvent('mousedown');
     window.document.getElementById('root').dispatchEvent(event);
   },
+  refreshUserInfo(type, event) {
+    dispatchMessageTypeHandler(event);
+  },
 }
 
 function messageHandler({ detail, callbackId }, event) {
