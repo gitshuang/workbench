@@ -120,6 +120,7 @@ function setDefaultSelected(manageList,applicationsMap){
   manageList.forEach((da,i)=>{
     if(da && da.type == 3){//表示服务和应用
       if(applicationsMap[da.serviceId]){
+        console.log("da.serviceId : ",da.serviceId+"   "+da.serviceName);
         applicationsMap[da.serviceId].selected  = "1";
       }
     }else{
