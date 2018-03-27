@@ -83,13 +83,27 @@ class SelectWidgetList extends Component {
     if(value == ""){
       _applications = applications;
     }else{
-      applications.forEach((da)=>{ 
-        console.log("--",da.applicationName);
-        da.applicationName.indexOf(value)>=0?_applications.push(da):"";
-      })
+      this.getSearch(applications,_applications,value);
     }
     this.setState({
       applications:_applications
+    })
+  }
+
+  getSearch=(applications,_applications,value)=>{
+    const {applicationsMap} = this.props;
+    applications.forEach((da)=>{
+      let _name = da.serviceName?da.serviceName:da.applicationName;
+      if(_name.indexOf(value)>=0){
+        if(da.serviceType && da.serviceType == "2"){
+          _applications.push(da)
+        }else{
+          _applications.push(applicationsMap[da.applicationId]);
+        }
+      }
+      if(da.service && da.service.length > 0){
+        this.getSearch(da.service,_applications,value);
+      }
     })
   }
 
