@@ -11,7 +11,7 @@ import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
 
-import {checkBackData} from './checkTenantStatus'
+import {check} from './checkTenantStatus'
 import ProgressBar from 'bee/progressbar';
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { changeUserInfoDisplay, getUserInfo } = homeActions;
@@ -162,8 +162,8 @@ class CreateTeamContent extends Component {
       const tenantId = payload.tenantId;
       // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       localStorage.setItem('create', "1");
-      this.setState({tenantId:tenantId})
-      this.goToLoading(tenantId);
+      this.setState({tenantId:tenantId});
+      this.goToLoading(tenantId)
     });
 
   }
@@ -176,7 +176,7 @@ class CreateTeamContent extends Component {
         }else{
           self.setState({processValue:self.state.processValue+5})
         }
-    },300);
+    },600);
     check(tenantId,this.goToLoadingAfter,loadingInterVal);
   }
 
