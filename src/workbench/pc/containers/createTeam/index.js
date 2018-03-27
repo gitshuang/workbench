@@ -146,6 +146,7 @@ class CreateTeamContent extends Component {
     this.setState({
       disabled:true
     })
+    // this.goToLoading("tenantId")//测试去掉
     requestStart();
     createTeam(data).then(({error, payload}) => {
       this.setState({
@@ -171,7 +172,7 @@ class CreateTeamContent extends Component {
   goToLoading = (tenantId) =>{
     let self = this;
     var loadingInterVal = setInterval(function () {
-        if(self.state.processValue === 95) {
+        if(self.state.processValue === 95|| self.state.processValue === 100) {
           self.setState({processValue:95})
         }else{
           self.setState({processValue:self.state.processValue+5})
@@ -183,10 +184,10 @@ class CreateTeamContent extends Component {
   goToLoadingAfter = (loadingInterVal) =>{
     ProgressBar.done();
     this.setState({processValue:100})//直接结束
+    clearInterval(loadingInterVal);
     setTimeout(() => {
-      clearInterval(loadingInterVal);
       window.location.href  ="/?tenantId=" + this.state.tenantId + "&switch=true";
-    }, 300);
+    }, 600);
   }
 
   render() {
