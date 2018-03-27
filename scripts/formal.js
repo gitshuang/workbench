@@ -56,6 +56,7 @@ rm(assetsRoot, err => {
             index: namedChunks[entry].files[0].replace(/(^js\/)|(\.js$)/g, ''),
             manifest: namedChunks['manifest'].files[0],
             vendor: namedChunks['vendor'].files[0],
+            polyfill: namedChunks['polyfill'].files[0],
           })
         );
       } catch (e) {
