@@ -111,7 +111,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     padding-left: 5px;
 }
 .li_title{
-    width: 99%;
+    width: 76%;
     padding-left: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -119,12 +119,33 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     font-weight: normal;
     white-space: nowrap;
     float: left;
-    margin-right: -50px;
-    padding-right: 50px;
 }
 .li_right{
-    width: 50px;
+    /* width: 50px; */
     text-align: center;
     color: RGBA(74, 81, 93, 0.5);
     float: right;
+    padding-right: 10px;
 }
+
+
+
+:global(.home_title){
+    font-size:14px;
+    color:rgba(71,77,84,1);
+    background: transparent;
+    width: auto;
+  
+  }
+:global(.home_title) > label{
+    display: block;
+    white-space: nowrap;
+    width:180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+:global(.home_title_down){
+    background: transparent;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }

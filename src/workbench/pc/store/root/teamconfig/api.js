@@ -3,10 +3,7 @@ import { get, post, postFileCros } from '@u';
 export const getTeamInfo = () =>{
   return get('/manager/team/info');
 }
-export const uploadApplication = (data) => postFileCros(
-  'https://pubapi.yonyoucloud.com/file/upload/oss/workbench-image-path-applicationIcon',
-  data,
-);
+export const uploadApplication = (data) => postFileCros("https://pubapi.yonyoucloud.com/file/upload/oss/workbench-image-path-applicationIcon",data);
 export const createTeam = (data) =>{
   return post('/manager/team/setting',data);
 }

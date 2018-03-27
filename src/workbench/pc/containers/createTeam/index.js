@@ -11,6 +11,8 @@ import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
 
+import {checkBackData} from './checkTenantStatus'
+import ProgressBar from 'bee/progressbar';
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { changeUserInfoDisplay, getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
@@ -22,7 +24,11 @@ import {
   create_team_cont,footer_hr,
   upload,
   titlp_lab,
-  name_error
+  name_error,
+  process_loading,
+  process_loading_content,
+  opacityHidden,
+  opacityShow
 } from './index.css';
 
 @withRouter
@@ -54,8 +60,10 @@ class CreateTeamContent extends Component {
       imgWarning: "",
       imgUrl: "",
       backUrl : "",    // 上传成功后返回的url
-      disabled:false, 
-      error:false
+      disabled:false,
+      error:false,
+      processValue:0,//定义一个进度条的value
+      tenantId:'',//tenantId
     }
   }
 
@@ -114,12 +122,13 @@ class CreateTeamContent extends Component {
 
 
   create = () => {
+    
     if(this.isClick){
       return false;
     }
     const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
     const { value, backUrl } = this.state;
-    
+
     this.isClick = true;
     if ( !value ){
       // alert("请输入团队名称");
@@ -151,15 +160,36 @@ class CreateTeamContent extends Component {
       // history.replace('/');
       // changeUserInfoDisplay();
       const tenantId = payload.tenantId;
+      // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       localStorage.setItem('create', "1");
-      window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+      this.setState({tenantId:tenantId})
+      this.goToLoading(tenantId);
     });
 
+  }
+
+  goToLoading = (tenantId) =>{
+    let self = this;
+    var loadingInterVal = setInterval(function () {
+        if(self.state.processValue === 95) {
+          self.setState({processValue:95})
+        }else{
+          self.setState({processValue:self.state.processValue+5})
+        }
+    },300);
+    check(tenantId,this.goToLoadingAfter,loadingInterVal);
+  }
+
+  goToLoadingAfter = (loadingInterVal) =>{
+    this.setState({processValue:100})//直接结束
+    clearInterval(loadingInterVal);
+    window.location.href  ="/?tenantId=" + this.state.tenantId + "&switch=true";
   }
 
   render() {
     const { value, imgUrl, imgWarning ,disabled,error} = this.state;
     let _error = error?"block":"none";
+    let now = this.state.processValue;
     return (
       <div className={wrap}>
         <h5>创建团队</h5>
@@ -183,7 +213,7 @@ class CreateTeamContent extends Component {
                 { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
                 <div>
                   <Icon type="copyreader" />
-                  <input type="file" ref="btn_file" onChange={(e)=>{ this.imgChange(e) }} />
+                <input type="file" ref="btn_file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>{ this.imgChange(e) }} />
                 </div>
                 <span className={titlp_lab}>{"图片大小<=200K​"}</span>
               </div>
@@ -191,7 +221,11 @@ class CreateTeamContent extends Component {
         </div>
         <hr className={footer_hr}/>
         <div className={footer}>
-          <Button onClick={this.create} disabled={disabled} >创建</Button>
+          <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
+              <ProgressBar   className={ process_loading } striped={false} now = {now} label={`${now}%`} ></ProgressBar>
+              <Icon type="loading" />
+          </div>
+          <Button className={now?opacityHidden:''} onClick={this.create} disabled={disabled} >创建</Button>
         </div>
       </div>
     )

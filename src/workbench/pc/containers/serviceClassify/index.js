@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { mapStateToProps ,guid} from '@u';
+import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
@@ -32,24 +32,15 @@ import {
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
-// import manageActions from 'store/root/manage/actions';
 import rootActions from 'store/root/actions';
-// const {getSelectWidgetList} = manageActions;
 const {getAllApplicationList} = applicationActions;
 const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
-    'allApplicationList',
+    'userInfo',
     {
-      key: 'userInfo',
-      value: (application,ownProps,root) => {
-        console.log(root);
-        return root.home.userInfo
-      }
-    },
-    {
-      namespace: 'application',
+      namespace: 'home',
     },
   ),
   {
@@ -67,146 +58,149 @@ class serviceClassify extends Component {
     this.state = {
       value: "",
       currentTab: 0,
-      currentLabel: undefined,
-      currentApp: 0,
-      labelsArr : [], //存放labels
-      allApplicationList:[],
-      allLabelGroups:[],
+      currentLabel: -1,
+      currentApps: [],
+      apps:[],
+      appMaps: {},
+      tabs:[],
     }
   }
 
   componentWillMount() {
-    this.getServiceList("");
-  }
-
-  getServiceList(name){
     const {
       requestStart,
       requestSuccess,
       requestError,
       getAllApplicationList,
     } = this.props;
-    // if(this.state.allApplicationList.length == 0){
-      requestStart();
-      getAllApplicationList(name).then(({error, payload}) => {
-        if (error) {
-          requestError(payload);
-        }
-        this.setState({
-          allApplicationList:payload.applications,
-          allLabelGroups:payload.labelGroups
-        })
-        requestSuccess();
-      });
-    // }
-  }
-
-  handleChangeTab = (tabId) => () => {
-    this.setState({
-      currentTab: tabId,
-      currentLabel:undefined,
-      currentApp:0
-    })
-  }
-  handleChangeLabel = (index) => ()=>{
-    this.setState({
-      currentLabel: index,
-      currentApp: index
-    })
-  }
-
-  btnSearch=()=>{
-    const { allApplicationList } = this.props;
-    const { value } = this.state;
-    const newArr = allApplicationList.applications.filter((item,index) => {
-      return item.applicationName.indexOf(value) > -1
-     });
-     this.setState({
-      allApplicationList: newArr
+    requestStart();
+    getAllApplicationList().then(({error, payload}) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        apps: payload.applications,
+        appMaps: payload.applications.reduce((result, app) => {
+          const {
+            applicationId,
+            applicationName,
+            applicationIcon,
+            applicationCode,
+          } = app;
+          result[applicationId] = {
+            applicationName,
+            applicationIcon,
+            applicationCode,
+          };
+          return result;
+        }, {}),
+        tabs: payload.labelGroups,
+        currentApps: [...payload.applications],
+      })
+      requestSuccess();
     });
   }
 
-  onFormChange = (value) => {
+  changeCurrentApp = (currentTab, currentLabel) => {
+    const { apps, appMaps, tabs, value } = this.state;
+    let currentApps = [];
+    if (currentLabel === -1) {
+      currentApps = [...apps]
+    } else {
+      try {
+        const appIds = tabs[currentTab].labels[currentLabel].appIds;
+        currentApps = appIds.reduce((result, id) => {
+          const app = appMaps[id];
+          if (app) {
+            result.push(app);
+          }
+          return result;
+        }, []);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    if (value.trim()) {
+      this.btnSearch(currentApps);
+    } else {
+      this.setState({
+        currentApps,
+      });
+    }
+  }
+
+  handleChangeTab = (index) => () => {
     this.setState({
-      value
+      currentTab: index,
+      currentLabel: -1,
     })
+    this.changeCurrentApp(index, -1);
+  }
+
+  handleChangeLabel = (index) => () => {
+    this.setState({
+      currentLabel: index,
+    })
+    this.changeCurrentApp(this.state.currentTab, index);
+  }
+
+  btnSearch = (currentApps)=>{
+    const { value, apps, currentLabel } = this.state;
+    if (!currentApps) {
+      currentApps = this.state.currentApps;
+    }
+    if (value.trim()) {
+      this.setState({
+        currentApps: currentApps.filter(item => item.applicationName.indexOf(value) > -1)
+      });
+    } else {
+      this.handleChangeLabel(currentLabel)();
+    }
   }
 
   renderList(){
-    const lis = [];
-    const appItems_obj = {};//转换后的数据Map
-    const {labelsArr,currentTab,currentLabel,currentApp,allApplicationList,allLabelGroups} = this.state;
-    if(allApplicationList.length>0){
-      allApplicationList.map((
-        {
-          applicationId,
-          applicationName,
-          applicationIcon,
-          applicationCode
-        })=>{
-          appItems_obj[applicationId] = {
-            'name':applicationName,
-            'icon':applicationIcon,
-            'code':applicationCode
-          };
-      })
-      if(currentLabel===undefined){ //全部
-        allApplicationList.map(({applicationCode,applicationIcon,applicationName})=>{
-          lis.push(
-            <GoTo
-              key={`app-${guid()}`}
-              code={applicationCode}
-              icon={applicationIcon}
-              appName={applicationName}
-            />
-          )
-        })
-      }else{ //其它
-        const {appIds} = labelsArr[currentTab][currentApp];//当前需要显示的appId序列
-        appIds.map((item)=>{
-          lis.push(
-            <GoTo
-              key={`app-${guid()}`}
-              code={appItems_obj[item].code}
-              icon={appItems_obj[item].icon}
-              appName={appItems_obj[item].name}
-            />
-          )
-        })
-      }
-    }
-    return lis;
+    const { currentApps } = this.state;
+    return currentApps.map(({ applicationId, applicationCode, applicationIcon, applicationName })=>{
+      return (
+        <GoTo
+          key={applicationId}
+          code={applicationCode}
+          icon={applicationIcon}
+          appName={applicationName}
+        />
+      );
+    });
   }
-  renderBtns() {
-    const btns = [];
-    const { labelsArr,currentTab,currentLabel, allLabelGroups} = this.state;
-    labelsArr.length = 0;
-    allLabelGroups.map(({labels},index)=>{
-      labelsArr.push(allLabelGroups[index].labels);
-    })
-    btns.push(<Button className={ currentLabel === undefined ? 'active' : '' } key="all" onClick={this.handleChangeLabel()}>全部</Button>);
-    {
-      labelsArr[currentTab] ?
-      (
-        labelsArr[currentTab].map(({labelId,labelName},index)=>{
-          btns.push(
-            <Button className={ currentLabel === index ? 'active' : '' }
-              onClick={this.handleChangeLabel(index)}
-              key={labelId}>
-              {labelName}
-            </Button>
-          )
-        })
-      ):null
-    }
-    return btns;
+  renderLabels() {
+    const { tabs, currentTab, currentLabel } = this.state;
+    const labels = (tabs[currentTab] && tabs[currentTab].labels) || [];
+    console.log(labels);
+    return [
+      <Button
+        className={currentLabel === -1 ? 'active' : ''}
+        key="all"
+        onClick={this.handleChangeLabel(-1)}>
+        全部
+      </Button>,
+      ...labels.map(({ labelId, labelName }, index) => (
+        <Button
+          className={currentLabel === index ? 'active' : ''}
+          onClick={ this.handleChangeLabel(index) }
+          key={ labelId }>
+          { labelName }
+        </Button >
+      )),
+    ];
   }
   //类别、领域
-  renderLabelGroups(){
-    const labelbtns = [];
-    const {currentTab,allLabelGroups} = this.state;
-    allLabelGroups.map(({labelGroupName },index) =>{
-      labelbtns.push(
+  renderTabs(){
+    const {
+      currentTab,
+      tabs
+    } = this.state;
+
+    return tabs.map(({ labelGroupName }, index) => {
+      return (
         <Button className={ currentTab === index ? 'active' : '' }
           onClick={this.handleChangeTab(index)}
           shape="border"
@@ -215,28 +209,17 @@ class serviceClassify extends Component {
         </Button>
       );
     });
-    return labelbtns;
   }
   //输入框修改data数据源
-  inputOnChange = (e) => {
+  inputOnChange = (value) => {
     this.setState({
-        value:e
+        value,
     });
   }
+
   openMarket = () => {
     this.props.history.push('/market')
   }
-
-  // inputOnFocus = (e) => {
-  //   if(e.target.value != ""){
-  //     this.setState({
-  //         value:e.target.value
-  //     });
-  //   }
-  // }
-
-  // inputOnBlur = (e) => {
-  // }
 
   getCompanyType=()=>{
     const { tenantid } = window.diworkContext();
@@ -258,17 +241,17 @@ class serviceClassify extends Component {
     return type;
   }
 
-  onKeyup=(e)=>{ 
+  onKeyup=(e)=>{
     if(e.keyCode === 13){
-      this.btnSearch(e);
+      this.btnSearch();
     }
   }
 
   render() {
-    const { value,currentLabel } = this.state;
-    const btns = this.renderBtns();
+    const { value } = this.state;
+    const labels = this.renderLabels();
     const list = this.renderList();
-    const labelGroups = this.renderLabelGroups();
+    const tabs = this.renderTabs();
     const _appType = this.getCompanyType();
 
     return (
@@ -276,11 +259,11 @@ class serviceClassify extends Component {
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} placeholder="搜索应用" value={this.state.value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
+              <FormControl className={serviceSearch} placeholder="搜索应用" value={value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
-                  <span>|</span>
-                  <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
-                  <span className={search_tit} onClick={this.btnSearch}>搜索</span>
+                <span>|</span>
+                <Icon type="search" className={ufSearch} onClick={() => { this.btnSearch() }}></Icon>
+                <span className={search_tit} onClick={() => { this.btnSearch() }}>搜索</span>
               </div>
               {_appType?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>:null}
             </div>
@@ -289,12 +272,12 @@ class serviceClassify extends Component {
               <div>
                 <div className={topTabBtns}>
                   <ButtonGroup>
-                    {labelGroups}
+                    {tabs}
                   </ButtonGroup>
                 </div>
                 <div className={ menuBtnGroup}>
                   <ButtonGroup vertical>
-                    {btns}
+                    {labels}
                   </ButtonGroup>
                 </div>
               </div>

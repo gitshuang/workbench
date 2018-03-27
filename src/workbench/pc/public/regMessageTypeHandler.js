@@ -1,5 +1,6 @@
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home';
 import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
 import { postMessageToWin, get } from "@u";
@@ -7,8 +8,9 @@ import {enter_or_team} from "./regMessageTypeHandler.css";
 
 const { addBrm , popBrm} = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
+const { getUserInfo } = homeActions;
 const handlers = {
-  openService({ serviceCode, data, tenantId }) {
+  openService({ serviceCode, data, type,tenantId }) {
     if (tenantId && serviceCode) {
       get('/service/getServiceByTenantIdAndServiceCode', {
         serviceCode,
@@ -18,7 +20,7 @@ const handlers = {
         if (crossTenant) {
           openGlobalDialog({
             type:"warning",
-            className:enter_or_team, 
+            className:enter_or_team,
             title: '即将切换租户',
             content: '是否切换租户？',
             btns: [
@@ -56,7 +58,11 @@ const handlers = {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
-      this.props.history.push(`/service/${serviceCode}`);
+      if(type === 2 ){
+        this.props.history.push(`/app/${serviceCode}`);
+      }else{
+        this.props.history.push(`/service/${serviceCode}`);
+      }
     }
   },
   openDialog({ options }) {
@@ -112,6 +118,9 @@ const handlers = {
   },
   hideIm() {
     store.dispatch(hideIm());
+  },
+  refreshUserInfo() {
+    store.dispatch(getUserInfo());
   },
 }
 

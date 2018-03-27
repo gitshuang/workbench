@@ -314,7 +314,7 @@ class searchResult extends Component {
         _type = "service";
       }else{
         code = item.applicationCode;
-        _type = type;
+        _type = "app";
       }
       this.props.history.push('/'+_type+'/'+code);
     }
@@ -349,12 +349,12 @@ class searchResult extends Component {
       item= eval('(' + item + ')')
       switch (data.type)
       {
-        case "user":
+        case "addressbook"://通讯录 称为user
           lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                <div className={h_icon}><img src={item.headimg}/></div>
+                <div className={h_icon}><img src={item.userAvator}/></div>
                 <div className={h_name}>
-                  <p><span dangerouslySetInnerHTML={createMarkup(item.username)}></span><span>{item.department}</span></p>
-                  <p>办公电话 : {item.phone}</p>
+                  <p><span dangerouslySetInnerHTML={createMarkup(item.userName)}></span><span>{item.orgName}</span></p>
+                  <p>办公电话 : {item.userMobile}</p>
                 </div>
                 <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(item)}><Icon title="发邮件" type="e-mail" /></div>
                 <div className={h_contact} onClick={this.goemailDetail(item)}><Icon title="发消息" type="chat" /></div>

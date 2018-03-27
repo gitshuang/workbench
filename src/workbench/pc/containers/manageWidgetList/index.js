@@ -52,6 +52,8 @@ class WidgetList extends Component {
       super(props);
       this.state = {
         showModal:false,
+        moveLine:'none',
+        checkId:'',
       }
     }
 
@@ -67,8 +69,21 @@ class WidgetList extends Component {
         showModal:true
       })
   }
-  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType,timeFlag,dataFolder) => {
-    let data = {id,preParentId,preType,afterId,parentId,afterType,timeFlag,dataFolder}
+  savePosition = (id,moveLine) => {
+    this.setState({
+      checkId:id,
+      moveLine,
+    })
+  }
+  moveLine = (id,moveLinePara)=>{
+    if(id == this.state.checkId){
+      return moveLinePara;
+    }else{
+      return 'none'
+    }
+  }
+  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType,ifIntoFile,timeFlag,dataFolder) => {
+    let data = {id,preParentId,preType,afterId,parentId,afterType,ifIntoFile,timeFlag,dataFolder}
     const { moveService,openFolder } = this.props;
     moveService(data);
     preType === 3 && afterType === 2 && timeFlag && dataFolder && openFolder(dataFolder);
@@ -132,6 +147,8 @@ class WidgetList extends Component {
                 drag={drag}
                 propsIndex={index}
                 type={type}
+                savePosition = {this.savePosition}
+                moveLine = {this.moveLine(id,this.state.moveLine)}
                 moveItemDrag={this.moveItemDrag}
                 editTitle={this.editTitle}
                 onClick={(e)=>{this.widgeOnclick(e,item)}}
@@ -149,6 +166,8 @@ class WidgetList extends Component {
                 index={id}
                 propsIndex={index}
                 type={type}
+                savePosition = {this.savePosition}
+                moveLine = {this.moveLine(id,this.state.moveLine)}
                 moveItemDrag={this.moveItemDrag}
                 editTitle={this.editTitle}
                 addFolderDrag={this.addFolderDrag}
@@ -167,10 +186,10 @@ class WidgetList extends Component {
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >
-          <Icon title="添加服务" type="add"  />
+          <Icon title="添加快捷方式至首页" type="add"  />
         </div>
 
-        <PopDialog className={pop_dialog_widge_list} type="info" title="添加服务" close={this.popClose} backdrop={false} show = { this.state.showModal } data={_da} >
+        <PopDialog className={pop_dialog_widge_list} type="info" title="添加快捷方式至首页" close={this.popClose} backdrop={false} show = { this.state.showModal } data={_da} >
             <SelectWidgetList close={this.popClose} parentId={this.props.parentId} />
         </PopDialog>
 

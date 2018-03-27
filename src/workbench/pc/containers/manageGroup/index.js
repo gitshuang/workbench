@@ -33,7 +33,8 @@ import {
   btn,
   newGroupName_focus,
   newGroupName_blur,
-  widgetTitleInit
+  widgetTitleInit,
+  check_group
 } from './style.css';
 const {
   requestStart,
@@ -110,7 +111,9 @@ function collectSource(connect, monitor) {
 
 function collectTaget(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
+    isOver:monitor.isOver(),
+    getItemType:monitor.getItem(),
   }
 }
 
@@ -269,7 +272,7 @@ class ManageGroup extends Component {
       return item.widgetName
     });
     if( widgetNameArr.includes(name) ){
-      Message.create({content: '分组名称已存在!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto',top:80,left: 250}});
+      Message.create({content: '分组名称已存在!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto'}});
       return false;
     }
     renameGroup({
@@ -461,9 +464,10 @@ class ManageGroup extends Component {
       );
     }else {
       groupTitle = (
-        <div className={`${widgetTitle} ${widgetTitleInit} um-box-justify`} >
-          <div>
-            <Checkbox checked={checkType} onChange={ this.selectFn(index) }>{widgetName}</Checkbox>
+        // um-box-justify
+        <div className={`${widgetTitle} ${widgetTitleInit} `} >
+          <div className={check_group}>
+            <Checkbox checked={checkType} onChange={()=>{this.selectFn(index)} }>{widgetName}</Checkbox>
           </div>
           <div>
             <div className={iconBox}>
@@ -495,7 +499,16 @@ class ManageGroup extends Component {
       //return null
     }
 
-    let _html = ( <div className={`${groupArea} animated zoomIn`}>
+    var { isOver, getItemType} = this.props;
+    var overStyle = {};
+    if( isOver && getItemType.type === 1){
+      overStyle = {
+        'transform': 'scale(1,1)',
+        'boxShadow' :'0 0 0 3px #ddd,0 0 0 6px rgba(0,205,195,1)',
+        'borderRadius':'0',
+      }
+    }
+    let _html = ( <div className={`${groupArea} animated zoomIn`} style={{...overStyle}}> 
       <section style={{ ...opacity }} className={inFoucs ? selectedBackClass : ""} >
         { groupTitle }
         <div>

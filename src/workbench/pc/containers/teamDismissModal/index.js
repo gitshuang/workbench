@@ -4,7 +4,7 @@ import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions'; 
 const { dismissTeam, closeDismissModal } = teamconfigActions; 
 import PopDialog from 'pub-comp/pop';
-import {content} from './index.css';
+import {content,select_enter_close} from './index.css';
 import SelectEnter from '../teamExitModal/selectEnter'
 
 @connect(
@@ -107,6 +107,7 @@ class TeamDismissModal extends Component {
     let _pop_title = "确认"+name+"?";
     let _cont = null;
     let _btn = null;
+    let _select_enter = null;
 
     if(isManage == 0){//退出团队信息
       _cont = (<div className={content} >
@@ -129,12 +130,19 @@ class TeamDismissModal extends Component {
       _pop_title= {title};
     }else if(isManage == 2){//退出后选中企业/团队
       _pop_title= "请重新选择";
-      _cont = <SelectEnter />;
+      _cont = <SelectEnter />
+      _btn = null;
+      _select_enter = select_enter_close;
     }
+
+    _pop_title= "请重新选择";
+    _cont = <SelectEnter />
+    _btn = null;
+    _select_enter = select_enter_close;
 
     return ( 
       <PopDialog
-      className="team_dismiss_modal"
+      className={`team_dismiss_modal ${_select_enter} `}
       show={ true }
       title={name}
       backup={false}

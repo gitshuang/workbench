@@ -8,7 +8,7 @@ import Menu from 'bee/menus';
 import Dropdown from 'bee/dropdown';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-import TeamDismissModal from 'containers/teamDismissModal';
+// import TeamDismissModal from 'containers/teamDismissModal';
 import TeamExitModal from 'containers/teamExitModal';
 
 const { Item } = Menu;
@@ -20,7 +20,7 @@ import { enter_option,item_li} from './style.css';
 @withRouter
 @connect(
   mapStateToProps(
-    'dismissModal',     //  解散团队弹窗开关
+    // 'dismissModal',     //  解散团队弹窗开关
     'exitModal',        //  退出团队弹窗开关
     {
       key: 'userInfo',
@@ -65,11 +65,12 @@ class EnterOption extends Component {
     let item = data.find((_da)=>_da.value ==da.key);
     const {key,serverApi} = item;
     this.data = item;
-    if( key == "2" ){
-      openDismissModal();
-    }else{
-      openExitModal();
-    }
+    openExitModal();
+    // if( da.key == "2" ){
+    //   openDismissModal();
+    // }else{
+    //   openExitModal();
+    // }
   }
 
   render() {
@@ -99,9 +100,9 @@ class EnterOption extends Component {
             </Dropdown>)
           }
           
-          {
+          {/* {
             dismissModal ? <TeamDismissModal type={type} data={this.data} /> : null
-          }
+          } */}
           {
             exitModal ? <TeamExitModal type={type} data={this.data} isManage={userInfo.admin} userId={userInfo.userId} close={true}/> : null
           }

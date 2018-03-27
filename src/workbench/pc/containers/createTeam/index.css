@@ -96,6 +96,7 @@
   margin-top: 32px;
   padding-left: 30%;
   padding-bottom: 64px;
+  position: relative;
 }
 .footer>button{
   margin-left: 72px;
@@ -140,3 +141,42 @@ font-size: 14px;
 :global(.ie9) .image{
   display: table-cell;
 } 
+/*新增的requestloading*/
+.process_loading_content {
+  position: absolute;
+  top: 0;
+  left: 0;;
+  margin-left: calc(30% + 72px);
+  opacity: 0;
+}
+.process_loading_content :global(.iconfont){
+  position: absolute;
+  top:0;
+  right: 10px;
+  line-height: 32px;
+  color:#fff;
+  font-size: 20px;
+}
+.process_loading{
+  width: 338px;
+  height: 32px;
+  background-color: rgba(223,226,227,1);
+  border-radius: 3px;
+  position: relative;
+  box-shadow: none;
+}
+:global(.u-progress-bar){
+  background-color: #e14b46;
+  line-height: 32px;
+  font-size: 12px;
+}
+:global(.u-progress-label){
+  float: left;
+  padding: 0 20px;
+}
+.opacityShow{
+  opacity: 1!important;
+}
+.opacityHidden{
+  opacity: 0!important;
+}

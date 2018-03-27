@@ -5,7 +5,7 @@ import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions'; 
 const { exitTeam, closeExitModal } = teamconfigActions; 
 import PopDialog from 'pub-comp/pop';
-import {content} from './index.css';
+import {content,select_enter_close} from './index.css';
 import SelectEnter from './selectEnter'
 
 @withRouter
@@ -36,7 +36,8 @@ class TeamRemoveModal extends Component {
       isManage: 0,
       msg:"",
       close:true,
-      disable:false
+      disable:false,
+      next:false
     }
   }
 
@@ -64,7 +65,7 @@ class TeamRemoveModal extends Component {
       })
       if (error) {
         this.setState({
-          isManage: 1,
+          isManage: 3,
           msg:payload,
         });
         return false;
@@ -97,7 +98,6 @@ class TeamRemoveModal extends Component {
     window.location.replace(
       `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true`,
     );
-    // ${hash}
   }
 
   // 取消
@@ -117,35 +117,47 @@ class TeamRemoveModal extends Component {
     let btnLabel = "确定";
     let _pop_title = "确认"+name+"?";
     let _cont = null;
-    let _btn = null;
-
+    let _btn = [
+      {
+        label: btnLabel,
+        fun:null,
+        disable
+      },
+      {
+        label: '取消',
+        fun: this.cancelFn,
+      }
+    ];
+    let _select_enter = null;
     if(isManage == 0){//退出团队信息
       _cont = (<div className={content} >
-            {/* <h6>确认{name}?</h6> */}
             <p>{_msg}</p>
         </div>);
-        _btn = [
-          {
-            label: btnLabel,
-            fun: this.configFn,
-            disable
-          },
-          {
-            label: '取消',
-            fun: this.cancelFn,
-          }
-        ];
-    }else if(isManage == 1){//退出失败后显示信息
+        _btn[0].fun = ()=>{
+          this.setState({
+            isManage:1
+          })
+        }
+    }else if(isManage == 1){//提示是否需要退出或解散
       _cont = (<div className={content}><p>{msg}</p></div>);
       _pop_title= "确认"+name+"?";
+      _btn[0].fun = ()=>{
+         this.configFn();
+      }
+    }else if(isManage == 3){//退出失败后显示信息
+      _cont = (<div className={content}><p>{msg}</p></div>);
+      _pop_title= "确认"+name+"?";
+      _btn = null;
     }else if(isManage == 2){//退出后选中企业/团队
       _pop_title= "请重新选择"+type;
       _cont = <SelectEnter />
+      _btn = null;
+      _select_enter = select_enter_close;
     }
-    
+
     return (
       <PopDialog
-          className="team_exit_modal"
+          className={`team_exit_modal ${_select_enter} `}
           type="warning"
           backdrop={"static"}
           show={ exitModal }
