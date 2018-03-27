@@ -182,10 +182,11 @@ class CreateEnter extends Component {
     }
 
     let _tenantAddress = data.find((da)=>da.name == "tenantAddress");
+    let _value = _tenantAddress.value?_tenantAddress.value:"";
     if(address && address.province){
-      _tenantAddress.value = address.province+"|"+address.city+"|"+address.area+"|"+_tenantAddress.value;
+      _tenantAddress.value = address.province+"|"+address.city+"|"+address.area+"|"+_value;
     }else{
-      _tenantAddress.value =  "北京|北京|东城|"+_tenantAddress.value;
+      _tenantAddress.value =  "北京|北京|东城|"+_value;
     }
 
     let _joinPermission = data.find((da)=>da.name == "joinPermission");

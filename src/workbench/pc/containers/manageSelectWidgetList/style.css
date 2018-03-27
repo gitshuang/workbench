@@ -190,7 +190,7 @@
   min-height: 395px;
 }
 :global(.ie9_pop) .panel_right>div{
-  height: 495px;
+  height: 450px;
 }
 :global(.ie9_pop) .footer_btn{
   display: table;

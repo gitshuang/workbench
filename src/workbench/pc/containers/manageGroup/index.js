@@ -272,7 +272,7 @@ class ManageGroup extends Component {
       return item.widgetName
     });
     if( widgetNameArr.includes(name) ){
-      Message.create({content: '分组名称已存在!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto',top:80,left: 250}});
+      Message.create({content: '分组名称已存在!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto'}});
       return false;
     }
     renameGroup({
@@ -464,7 +464,8 @@ class ManageGroup extends Component {
       );
     }else {
       groupTitle = (
-        <div className={`${widgetTitle} ${widgetTitleInit} um-box-justify`} >
+        // um-box-justify
+        <div className={`${widgetTitle} ${widgetTitleInit} `} >
           <div className={check_group}>
             <Checkbox checked={checkType} onChange={()=>{this.selectFn(index)} }>{widgetName}</Checkbox>
           </div>
