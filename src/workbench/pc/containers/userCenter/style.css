@@ -44,6 +44,11 @@
   margin-right:10px;
   margin-bottom: 20px;
 }
+
+:global(.ie9) .imgUser{
+  display: block;
+}
+
 .imgUser:hover .editPortrait{
   display: block;
 }
