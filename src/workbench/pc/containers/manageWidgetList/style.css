@@ -237,6 +237,9 @@
 .pop_dialog_widge_list :global(.u-modal-dialog){
   padding-left: 0px !important;
 }
+.pop_dialog_widge_list :global(.close){
+  right: 40px;
+}
 /* 
 .pop_dialog_widge_list :global(.u-modal .u-modal-header){
   padding:0px;

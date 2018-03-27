@@ -125,9 +125,8 @@ function setDefaultSelected(manageList,applicationsMap){
     }else{
       if(da.children && da.children != 0){
         setDefaultSelected(da.children,applicationsMap);
-      }else{
-        debugger;
-        selectedServer?selectedServer.selected = "2":"";
+      }else{ 
+        // selectedServer?selectedServer.selected = "2":"";
       }
     }
   })
