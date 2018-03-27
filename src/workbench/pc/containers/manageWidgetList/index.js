@@ -186,10 +186,10 @@ class WidgetList extends Component {
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >
-          <Icon title="添加服务" type="add"  />
+          <Icon title="添加快捷方式至首页" type="add"  />
         </div>
 
-        <PopDialog className={pop_dialog_widge_list} type="info" title="添加服务" close={this.popClose} backdrop={false} show = { this.state.showModal } data={_da} >
+        <PopDialog className={pop_dialog_widge_list} type="info" title="添加快捷方式至首页" close={this.popClose} backdrop={false} show = { this.state.showModal } data={_da} >
             <SelectWidgetList close={this.popClose} parentId={this.props.parentId} />
         </PopDialog>
 

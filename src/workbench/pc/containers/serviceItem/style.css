@@ -1,6 +1,7 @@
 .serviceItem{
     width:160px;
-    height:52px; 
+    height:52px;
+    line-height: 38px;
     float: left;
     margin: 16px;
     margin-right: 0px;
@@ -26,13 +27,14 @@
 .serviceItemTitle .item_li_top{
   flex: 1;
   height: 40px;
+  line-height: 40px;
 }
 .serviceItemTitle .item_footer{
   /* flex: 1; */
   text-align: left;
   /* width: 50px; */
   position: relative;
-  right: 0px;
+  right: 35px;
   bottom: 0px;
   /* border: 1px solid red; */
 }
@@ -61,13 +63,16 @@
 .item_right{
 	flex: 1;
 	padding-left: 5px;
-	padding-top: 10px;
+	/* padding-top: 10px; */
 	box-sizing: border-box;
 
   font-size:12px;
   font-family:MicrosoftYaHei;
   color:rgba(71,77,84,1);
 
+}
+.item_footer_app{
+  right: 58px !important;
 }
 
 .item_footer span{
@@ -87,13 +92,16 @@
   width:30px;
   height: 30px;
 }
+.item_li_top  .icon{
+  margin-top: 4px;
+}
 .up_icon{
   color: rgba(117,127,140,1);
   width:14px;
   height:6px;
   font-size: 20px;
   cursor:pointer;
-  margin-left: 45px;
+  /* margin-left: 45px; */
   margin-right: 8px;
 }
 /* 首页编辑-添加服务 */

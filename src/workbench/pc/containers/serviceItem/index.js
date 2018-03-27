@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from 'pub-comp/icon';
 import Button from 'bee/button';
 
-import { serviceItem,serviceItemTitle,item_li_top,item_footer,item_left,item_right,
+import { serviceItem,serviceItemTitle,item_li_top,item_footer,item_footer_app,item_left,item_right,
   icon,up_icon} from './style.css'
 
 class ServiceItem extends Component {
@@ -24,7 +24,7 @@ class ServiceItem extends Component {
 
   render() {
     // const {serviceId, serviceName,selected} = this.props.data;
-    const {data:{serviceId, serviceName,selected ,serviceType,serviceIcon,extend} ,arrow}  = this.props;
+    const {data:{serviceId, serviceName,selected ,serviceType,serviceIcon,extend,service} ,arrow}  = this.props;
     let btn = null;
     if(selected){
       if(selected == "1"){
@@ -55,6 +55,7 @@ class ServiceItem extends Component {
 
     let upIcon = serviceType=="2"?<Icon className={up_icon} type={extend?"pull-down":"upward"} title={ extend ? '展开' : '收起' } onClick={()=>{this.props.packUp(this.props.data)}}></Icon>:null;
     let _style = serviceType=="2"?null:extend?{display:"none"}:null;
+    let _app = service && service.length == 0?item_footer_app:""
     return (
        <div className={serviceType=="2"?serviceItemTitle:serviceItem} style={{..._style}}>
             <div className={item_li_top}>
@@ -63,7 +64,7 @@ class ServiceItem extends Component {
                     {serviceName}
                 </div>
             </div>
-             <div className={item_footer}>
+             <div className={`${item_footer} ${_app}`}>
                 {btn}
              </div>
              {

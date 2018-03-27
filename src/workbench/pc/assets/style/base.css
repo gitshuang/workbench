@@ -297,13 +297,13 @@ body {
 .u-message-notice-success .u-message-notice-description-icon .uf{
   font-size: 18px;
   padding:0;
-  font-family: 'iconfont' !important;
+  font-family: 'icomoon' !important;
   font-weight: bold;
   color:#00B39E;
 }
 .u-message-notice-success .u-message-notice-description-icon .uf-correct:before{
-  content: "\E9e7";
-  font-family: 'iconfont' !important;
+  content: "\e9eb";
+  font-family: 'icomoon' !important;
 }
 .u-message-notice-success .u-message-notice-description-icon{
   background: transparent !important;
@@ -322,13 +322,14 @@ body {
 .u-message-notice-warning .u-message-notice-description-icon .uf{
   font-size: 18px;
   padding:0;
-  font-family: 'iconfont' !important;
+  font-family: 'icomoon' !important;
   font-weight: bold;
   color:#4C4C4C;
 }
 .u-message-notice-warning .u-message-notice-description-icon .uf-exc-t:before{
-  content: "\E997";
-  font-family: 'iconfont' !important;
+  content: "\E999";
+  /* notice */
+  font-family: 'icomoon' !important;
 }
 .u-message-notice-warning .u-message-notice-description-icon{
   background: transparent !important;
