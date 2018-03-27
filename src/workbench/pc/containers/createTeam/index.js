@@ -175,7 +175,7 @@ class CreateTeamContent extends Component {
         }else{
           self.setState({processValue:self.state.processValue+5})
         }
-    },300);
+    },600);
     check(tenantId,this.goToLoadingAfter,loadingInterVal);
   }
 
