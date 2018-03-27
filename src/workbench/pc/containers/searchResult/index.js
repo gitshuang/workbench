@@ -46,6 +46,9 @@ import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
 import nodata from 'assets/image/wgt/nodata.png';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { trigger } from 'public/componentTools';
+
 const {getSearchMore, getSearch,getSearchOther,setSearchHeadData} = searchActions;
 const {requestStart, requestSuccess, requestError} = rootActions;
 @withRouter
@@ -325,18 +328,30 @@ class searchResult extends Component {
     //this.props.history.push({pathname:`/search/searchlist`,state:item});
     this.props.history.push({pathname:`/search/searchlist/${!this.state.keywords?'':this.state.keywords}`,state:item});
   }
-  goemailDetail(item){
+  goemailDetail({ id, userId, userName }){
     return (e) => {
       e.stopPropagation();
+      dispatchMessageTypeHandler({
+        type: 'openService',
+        detail: {
+          serviceCode: 'XTWEIYOU0000000000',
+          data: {
+            genre: 4,
+            fromDiworkAddressList: `${userName}-${userId}`,
+          },
+        }
+      });
     }
   }
   onKeyup = (e) => {
     e.keyCode === 13 && this.btnSearch()
   }
-  gochatDetail(item) {
+  gochatDetail({ userId }) {
     return (e) => {
       e.stopPropagation();
-      console.log(item)
+      trigger('IM', 'switchChatTo', {
+        id: userId,
+      });
     }
   }
 
@@ -357,7 +372,7 @@ class searchResult extends Component {
                   <p>办公电话 : {item.userMobile}</p>
                 </div>
                 <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(item)}><Icon title="发邮件" type="e-mail" /></div>
-                <div className={h_contact} onClick={this.goemailDetail(item)}><Icon title="发消息" type="chat" /></div>
+                <div className={h_contact} onClick={this.gochatDetail(item)}><Icon title="发消息" type="chat" /></div>
               </li>);
           break;
         case "service":

@@ -8,6 +8,8 @@ import Icon from 'pub-comp/icon';
 import { connect } from 'react-redux';
 import searchActions from 'store/root/search/actions';
 import SearchResult from 'containers/searchResult'
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { trigger } from 'public/componentTools';
 
 import {
   search,
@@ -183,16 +185,27 @@ class SearchContainer extends Component {
       this.props.history.push('/'+_type+'/'+code);
     }
   }
-  goemailDetail(item){
+  goemailDetail({ id, userId, userName }){
     return (e) => {
       e.stopPropagation();
-      console.log(item)
+      dispatchMessageTypeHandler({
+        type: 'openService',
+        detail: {
+          serviceCode: 'XTWEIYOU0000000000',
+          data: {
+            genre:4,
+            fromDiworkAddressList: `${userName}-${userId}`,
+          },
+        }
+      });
     }
   }
-  gochatDetail(item) {
+  gochatDetail({ userId }) {
     return (e) => {
       e.stopPropagation();
-      console.log(item)
+      trigger('IM', 'switchChatTo', {
+        id: userId,
+      });
     }
   }
 
