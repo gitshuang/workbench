@@ -181,9 +181,12 @@ class CreateTeamContent extends Component {
   }
 
   goToLoadingAfter = (loadingInterVal) =>{
+    ProgressBar.done();
     this.setState({processValue:100})//直接结束
-    clearInterval(loadingInterVal);
-    window.location.href  ="/?tenantId=" + this.state.tenantId + "&switch=true";
+    setTimeout(() => {
+      clearInterval(loadingInterVal);
+      window.location.href  ="/?tenantId=" + this.state.tenantId + "&switch=true";
+    }, 300);
   }
 
   render() {
