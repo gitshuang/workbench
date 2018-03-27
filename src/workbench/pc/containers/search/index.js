@@ -185,7 +185,7 @@ class SearchContainer extends Component {
       this.props.history.push('/'+_type+'/'+code);
     }
   }
-  goemailDetail({ id, userId, userName }){
+  goemailDetail({ id, userId, userName, tenantId }){
     return (e) => {
       e.stopPropagation();
       dispatchMessageTypeHandler({
@@ -194,7 +194,7 @@ class SearchContainer extends Component {
           serviceCode: 'XTWEIYOU0000000000',
           data: {
             genre:4,
-            fromDiworkAddressList: `${userName}-${userId}`,
+            fromDiworkAddressList: `${userName}-${userId}-${tenantId}`,
           },
         }
       });
