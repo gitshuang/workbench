@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
-import HTML5BackendGroup from 'react-dnd-html5-backend';
+import judgedBackend from 'components/backend';
 
 import {ButtonDefaultLine,ButtonBrand,ButtonDefaultAlpha} from 'pub-comp/button';
 import Button from 'bee/button';
@@ -327,4 +327,4 @@ class Home extends Component {
   }
 }
 
-export default DragDropContext(HTML5BackendGroup)(Home);
+export default DragDropContext(judgedBackend)(Home);

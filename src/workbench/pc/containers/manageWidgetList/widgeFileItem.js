@@ -70,7 +70,7 @@ const itemTarget = {
         moveLine = 'right'
       }
     }
-    if(new Date().getTime() % 50 == 0){
+    if(new Date().getTime() % 10 == 0){
       props.savePosition(props.id,moveLine);
     }
   }
