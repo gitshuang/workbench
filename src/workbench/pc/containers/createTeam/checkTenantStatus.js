@@ -66,7 +66,7 @@ export function check (tenantId,successFunc,loadingInterValId) {
                 successFunc(loadingInterValId);
             } else {
                 setTimeout(function () {
-                   check() 
+                   check(tenantId,successFunc,loadingInterValId) 
                 }, 300)
             }
         } else {
