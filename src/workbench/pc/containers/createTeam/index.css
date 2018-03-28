@@ -180,3 +180,12 @@ font-size: 14px;
 .opacityHidden{
   opacity: 0!important;
 }
+.loading_desc{
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(110,110,119,1);
+  line-height:16px;
+  position: absolute;
+  left: 0;
+  top: 40px;
+}

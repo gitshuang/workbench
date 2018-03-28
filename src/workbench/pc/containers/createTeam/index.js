@@ -28,7 +28,8 @@ import {
   process_loading,
   process_loading_content,
   opacityHidden,
-  opacityShow
+  opacityShow,
+  loading_desc
 } from './index.css';
 
 @withRouter
@@ -138,7 +139,7 @@ class CreateTeamContent extends Component {
     this.setState({
       disabled:true
     })
-    // this.goToLoading("tenantId")//测试去掉
+    //this.goToLoading("tenantId")//测试去掉
     requestStart();
     createTeam(data).then(({error, payload}) => {
       this.setState({
@@ -220,6 +221,8 @@ class CreateTeamContent extends Component {
           <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
               <ProgressBar   className={ process_loading } striped={false} now = {now} label={`${now}%`} ></ProgressBar>
               <Icon type="loading" />
+              <span className={loading_desc}>正在配置团队信息…</span>
+
           </div>
           <Button className={now?opacityHidden:''} onClick={this.create} disabled={disabled} >创建</Button>
         </div>
