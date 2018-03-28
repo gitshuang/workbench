@@ -1,5 +1,5 @@
 .enter_form :global(.u-label) {
-  width: 85px;
+  width: 120px;
   text-align: right;
 }
 
@@ -59,8 +59,10 @@
 }
 
 .enter_cont{
-  width: 360px;
+  width: 600px;
   margin: 0 auto;
+  padding-left: 80px;
+  overflow: hidden;
 }
 
 .enter_form :global(.u-input-inner>input){
@@ -80,7 +82,12 @@
   width: 271px;
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
-
+.page_enterprise :global(.u-select-selection--single){
+  height: 36px !important;
+}
+.page_enterprise :global(.u-select-selection-rendered){
+  line-height: 33px;
+}
 /* .page_enterprise .u-form-submit>button {
   margin-left: 0;
   width: 80px;

@@ -383,7 +383,7 @@ class CreateEnter extends Component {
               <FormControl name="tenantAddress" value={newTenantAddress?newTenantAddress:tenantAddress} onChange={(e)=>{this.inputOnChange(e,"tenantAddress")}} placeholder="最多60个字符" />
             </FormItem>
 
-            <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+            <FormItem showMast={false}  labelName={<span>邀请加入规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     name="invitePermission"
                     defaultValue="1"
@@ -391,13 +391,13 @@ class CreateEnter extends Component {
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                     >
-                    <Option value="1">全员邀请 </Option>
-                    <Option value="2">全员禁止</Option>
+                    <Option value="1">全员可邀请 </Option>
+                    <Option value="2">禁止邀请</Option>
                     <Option value="0">仅管理员可邀请</Option>
                 </Select>
             </FormItem>
 
-            <FormItem showMast={false}  labelName={<span>申请权限<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+            <FormItem showMast={false}  labelName={<span>申请加入权限<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     name="joinPermission"
                     defaultValue="1"
@@ -405,12 +405,12 @@ class CreateEnter extends Component {
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
                     >
-                    <Option value="0">全员允许 </Option>
-                    <Option value="1">全员禁止</Option>
+                    <Option value="0">允许 </Option>
+                    <Option value="1">禁止</Option>
                 </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>允许退出<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>成员主动退出<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               {/* <Nature name="allowExit" defaultValue={allowExit?allowExit:"0"} onChange={this.allowExitChange} /> */}
               <Radio.RadioGroup name="allowExit" selectedValue={this.state.value} onChange={this.allowExitChange} selectedValue={allowExit?allowExit:"0"}>
                 <Radio value="0" >禁止</Radio>

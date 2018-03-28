@@ -1,5 +1,5 @@
 .enter_form :global(.u-label) {
-  width: 85px;
+  width: 120px;
   text-align: right;
 }
 .enter_form :global(.u-label>span) {
@@ -96,8 +96,10 @@
 }
 
 .enter_cont{
-  width: 360px;
+  width: 600px;
   margin: 0 auto;
+  padding-left: 80px;
+  overflow: hidden;
 }
 
 .enter_form :global(.u-input-inner>input){
