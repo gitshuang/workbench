@@ -9,11 +9,12 @@ import {content,select_enter} from './index.css';
 import DropdownButton from 'components/dropdown';
 
 const { exitTeam, closeExitModal } = teamconfigActions; 
-const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay } = homeActions;
+const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay,getSearchEnterOrTeam } = homeActions;
 
 @withRouter
 @connect(
   mapStateToProps(
+    'searchEnterOrTeamList',
     'userInfoDisplay',
     'userInfo',
     {
@@ -24,7 +25,8 @@ const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDis
     exitTeam,
     closeExitModal,
     changeUserInfoDisplay,
-    hideUserInfoDisplay
+    hideUserInfoDisplay,
+    getSearchEnterOrTeam
   }
 )
 class SelectEnter extends Component {
@@ -32,10 +34,17 @@ class SelectEnter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      allowTenants:[],
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    if(this.props.searchEnterOrTeamList != nextProps.searchEnterOrTeamList){
+      this.setState({
+        allowTenants:nextProps.searchEnterOrTeamList
+      })
+    }
+  }
 
   changeTenant(tenantId){
     const {
@@ -50,6 +59,11 @@ class SelectEnter extends Component {
     );
   }
  
+
+  openMenu=()=>{
+    const {getSearchEnterOrTeam} = this.props;
+    getSearchEnterOrTeam();//调用新接口
+  }
 
   closeFun = ()=>{
     const {
@@ -87,7 +101,8 @@ class SelectEnter extends Component {
        <div id="open_select" className={select_enter}>
          <span>请选择企业/团队:</span>
          <DropdownButton
-         marginLeft={-187}
+          openMenu={this.openMenu}
+          marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
           lastIem={true}
           label="请选择企业/团队" type="home" dataItem={_dataItem} /> 

@@ -154,7 +154,7 @@ class TeamRemoveModal extends Component {
       _btn = null;
       _select_enter = select_enter_close;
     }
-
+    
     return (
       <PopDialog
           className={`team_exit_modal ${_select_enter} `}
