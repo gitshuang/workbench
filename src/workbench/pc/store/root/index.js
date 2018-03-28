@@ -16,7 +16,7 @@ import manage from './manage';
 import team from './team';
 import actions from './actions';
 import teamconfig from './teamconfig';
-
+import {destoryLoadingFunc,createLoadingFunc} from 'pub-comp/loading';
 const notification = Notification.newInstance({
   position: 'bottomRight',
 });
@@ -86,14 +86,17 @@ const reducer = handleActions({
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
+    createLoadingFunc();
     return state;
   },
   [requestSuccess](state) {
     // Loading.destroy();
+    destoryLoadingFunc();
     return state;
   },
   [requestError](state, { payload: msg }) {
     // Loading.destroy();
+    destoryLoadingFunc();
     notification.notice({
       content: msg,
       duration: 4.5,
