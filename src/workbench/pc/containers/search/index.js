@@ -194,7 +194,7 @@ class SearchContainer extends Component {
           serviceCode: 'XTWEIYOU0000000000',
           data: {
             genre:4,
-            fromDiworkAddressList: `${userName}-${userId}-${tenantId}`,
+            fromDiworkAddressList: `${userName}---${userId}---${tenantId}`,
           },
         }
       });
@@ -204,7 +204,7 @@ class SearchContainer extends Component {
     return (e) => {
       e.stopPropagation();
       trigger('IM', 'switchChatTo', {
-        id: userId,
+        yht_id: userId,
       });
     }
   }
