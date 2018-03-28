@@ -150,7 +150,7 @@ class CreateEnter extends Component {
           processValue:_value
         });
     },600);
-    check(tenantId,this.goToLoadingAfter,loadingInterVal,tenantId);
+    check(tenantId,this.goToLoadingAfter(tenantId),loadingInterVal);
   }
 
   goToLoadingAfter = (loadingInterVal,tenantId) =>{
