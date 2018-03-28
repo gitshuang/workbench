@@ -79,7 +79,7 @@ class EstablishContent extends Component {
                 <li>企业级应用市场提供全方位数字化服务入口</li>
               </ul>
             </div>
-            <div style={{textAlign:"center"}}>
+            <div style={{textAlign:"center",marginTop:44}}>
               <button onClick={this.openEnter}>开始创建</button>
             </div>
           </div>

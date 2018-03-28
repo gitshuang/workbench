@@ -10,8 +10,11 @@ import { ButtonBrand } from 'pub-comp/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import 'assets/style/Form.css';
-import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom} from './style.css';
+import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom,process_loading,progress_bar} from './style.css';
 import CitySelect from 'bee/city-select';
+import Icon from 'pub-comp/icon';
+import {check} from './checkTenantStatus'
+import ProgressBar from 'bee/progressbar';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
@@ -80,7 +83,8 @@ class CreateEnter extends Component {
       tenantIndustry:"A",
       linkman:props.userInfo.userName,
       tenantEmail:props.userInfo.userEmail,
-      tenantTel:props.userInfo.userMobile
+      tenantTel:props.userInfo.userMobile,
+      processValue:0
     };
     this.tenantIndustry ={
       name:"tenantIndustry",
@@ -131,9 +135,31 @@ class CreateEnter extends Component {
         }
         const tenantId = payload.tenantId;
         localStorage.setItem('create', "1");
-        window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+        // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+        this.goToLoading(tenantId)
       });
     }
+  }
+
+
+  goToLoading = (tenantId) =>{
+    var loadingInterVal = setInterval(()=> {
+        const {processValue} = this.state;
+        let _value = processValue === 95|| processValue === 100?95:(processValue+5);
+        this.setState({
+          processValue:_value
+        });
+    },600);
+    check(tenantId,this.goToLoadingAfter,loadingInterVal,tenantId);
+  }
+
+  goToLoadingAfter = (loadingInterVal,tenantId) =>{
+    ProgressBar.done();
+    this.setState({processValue:100})//直接结束
+    clearInterval(loadingInterVal);
+    setTimeout(() => {
+      window.location.href  ="/?tenantId=" + tenantId + "&switch=true";
+    }, 600);
   }
 
   onChange = (obj)=>{
@@ -148,7 +174,6 @@ class CreateEnter extends Component {
   }
 
   setOptherData=(obj)=>{
-    debugger;
     this.state[obj.name] = obj.value;
     this.setState({
       ...this.state
@@ -161,10 +186,10 @@ class CreateEnter extends Component {
       ...this.state
     })
   }
-
   render() {
-    const {logo,linkman,tenantEmail,tenantTel} = this.state;
-    return (
+    const {logo,linkman,tenantEmail,tenantTel,processValue} = this.state;
+    let _butt = processValue != 0?(<div className={progress_bar}><ProgressBar className={ process_loading } striped={false} now = {processValue} label={`${processValue}%`} ></ProgressBar><Icon type="loading" /></div>):<SubmitBtn isSubmit disabled={this.state.disabled} />
+    return (<div>
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> &nbsp;*&nbsp;</font></span>}
             isRequire={true} valuePropsName='value' errorMessage="请输入企业名称" method="blur"
@@ -258,8 +283,12 @@ class CreateEnter extends Component {
               <hr />
             </div> */}
 
-            <SubmitBtn isSubmit disabled={this.state.disabled} />
+            {
+              _butt
+            }
         </Form>
+          
+        </div>
     );
   }
 }

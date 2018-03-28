@@ -186,3 +186,26 @@
 .home_none :global( .tenant_size){
   background: red;
 } 
+
+.process_loading{
+  width: 338px;
+  height: 32px;
+  background-color: rgba(223,226,227,1);
+  border-radius: 3px;
+  position: relative;
+  box-shadow: none;
+}
+:global(.u-progress-bar){
+  background-color: #e14b46;
+  line-height: 32px;
+  font-size: 12px;
+}
+.progress_bar{
+  position: relative;
+  margin-left: 90px;
+}
+.progress_bar i{
+  position: absolute;
+  right: -20px;
+  top: 10px;
+}
