@@ -26,6 +26,7 @@ const {requestStart, requestSuccess, requestError} = rootActions;
     },
   ),
   {
+    getSearchEnterOrTeam,
     exitTeam,
     closeExitModal,
     requestError,
