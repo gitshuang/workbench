@@ -219,11 +219,11 @@ class Invitation extends Component {
               </TabPane>
               <TabPane tab='邮件邀请' key="2" className={tabPane2}>
 
-                <p className={first_p}>给你的小伙伴捎句话吧:</p>
+                <p className={first_p}>给你的小伙伴捎句话吧</p>
                 <FormControl placeholder="友空间-赋能个人、激活组织" value={message} 
                 onChange={(e)=>{this.setOptherData({name:"message",value:e})} }/>
 
-                <p>署名:</p>
+                <p>署名</p>
                 <FormControl value={creator} onChange={(e)=>{this.setOptherData({name:"creator",value:e})} }/>
 
                 <p>输入邮箱地址并用 “;” 隔开</p>

@@ -207,13 +207,13 @@ class SelectWidgetList extends Component {
   }
 
   btnUp=(data)=>{
-    this.state.allAppList.forEach((da,i)=>{
+    this.state.applications.forEach((da,i)=>{
       if(da.applicationId == data.applicationId){
         da.extend = data.extend?false:true;
       }
     });
     this.setState({
-      ...this.state.allAppList
+      ...this.state.applications
     });
   }
 
