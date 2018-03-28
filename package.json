@@ -20,6 +20,7 @@
     "custom-event-polyfill": "^0.3.0",
     "es6-symbol": "3.1.1",
     "js-polyfills": "^0.1.42",
+    "mutation-observer": "^1.0.3",
     "object-assign": "4.1.1",
     "promise-polyfill": "6.0.2",
     "prop-types": "15.6.0",

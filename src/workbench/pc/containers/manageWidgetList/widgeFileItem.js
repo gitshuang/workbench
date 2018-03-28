@@ -58,8 +58,8 @@ const itemTarget = {
   hover(props, monitor, component){
     const clientOffset = monitor.getClientOffset();
     const componentRect = findDOMNode(component).getBoundingClientRect();
-    var xGap = componentRect.x-clientOffset.x;
-    var yGap = componentRect.y-clientOffset.y;
+    var xGap = componentRect.left-clientOffset.x;
+    var yGap = componentRect.top-clientOffset.y;
     var moveLine = 'none'
     if(Math.abs(xGap)<180){
       if(Math.abs(xGap)<60){
@@ -144,7 +144,7 @@ class WidgeFileItem extends Component {
   }
 
   // shouldComponentUpdate(nextProps,nextState){
-  //   if( this.props.moveLine == nextProps.moveLine){
+  //   if( nextProps.isOver && this.props.moveLine === nextProps.moveLine){
   //     return false
   //   }
   //   return true

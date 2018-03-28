@@ -1,4 +1,4 @@
-
+var MutationObserver = require('mutation-observer');
 function getEventClientOffset (e) {
     return {
       x: e.clientX,
@@ -218,7 +218,7 @@ function getEventClientOffset (e) {
       this.uninstallSourceNodeRemovalObserver()
   
       this.draggedSourceNode = node
-      this.draggedSourceNodeRemovalObserver = new window.MutationObserver(() => {
+      this.draggedSourceNodeRemovalObserver = new MutationObserver(() => {
         if (!node.parentElement) {
           this.resurrectSourceNode()
           this.uninstallSourceNodeRemovalObserver()
