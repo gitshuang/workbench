@@ -99,6 +99,7 @@
   width: 600px;
   margin: 0 auto;
   padding-left: 80px;
+  padding-bottom: 30px;
   overflow: hidden;
 }
 
@@ -207,10 +208,10 @@
   margin-left: 90px;
 }
 .progress_bar i{
-  position: absolute;
+  /* position: absolute;
   right: 190px;
   top: 10px;
-  color: #fff;
+  color: #fff; */
 }
 .enter_form :global(.progress_wrap){
   padding-bottom: 30px;
