@@ -80,6 +80,7 @@ class SearchContainer extends Component {
     let value = this.state.text;
     this.props.history.push(`/search/searchvalue/${value}`);
   }
+
   getSearchList(keyworks){
     const {
       requestStart,
@@ -93,6 +94,7 @@ class SearchContainer extends Component {
         if (error) {
           requestError(payload);
         }
+        requestSuccess();
         if(payload.length<1){
           this.setState({
             nosearchdata:true
@@ -101,7 +103,6 @@ class SearchContainer extends Component {
         this.setState({
           SearchSuggestList:payload
         })
-        requestSuccess();
       });
     // }
   }
