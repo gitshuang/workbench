@@ -186,7 +186,8 @@
   font-family:MicrosoftYaHei;
   display: flex;
   flex-direction: column;
-  width: 145px; 
+  width: 375px; 
+  min-width: 300px;
   overflow: hidden
 }
 .recently .h_name i,.recently .h_name font { color: #0C64C3; font-style: normal}
@@ -196,14 +197,16 @@
     font-weight: bold;
   }
 .recently .h_name p{
-  max-width:145px;
+  width: 100%;
   height:18px; 
   color:rgba(13,20,36,.47);
-  line-height:16px;float: left;
-  }
+  line-height:16px;
+  display: flex;
+  white-space: nowrap;
+}
 .recently .h_name p span:first-child{ 
   margin-right: 10px;   
-   max-width: 180px;
+  max-width: 180px;
   overflow: hidden;
   text-overflow: ellipsis;
   height: 18px;
@@ -215,7 +218,7 @@
 .recently .h_contact { width:24px;height:24px; background:rgba(135,139,148,1);opacity:70; margin-left: 20px; border-radius: 100%; text-align: center; line-height: 21px; cursor: pointer}
 .recently .mleft50{ margin-left: 150px;}
 .recently .h_contact i { color: #fff; font-size: 16px;line-height: 24px;}
-.recently .search_service .h_name p{ max-width: 185px;}
+
 .recently .search_help{margin-top: 8px}
 .recently .search_service .h_name {width: 185px;}
 .recently h3{
