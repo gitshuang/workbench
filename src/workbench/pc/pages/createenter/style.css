@@ -208,6 +208,10 @@
 }
 .progress_bar i{
   position: absolute;
-  right: -20px;
+  right: 190px;
   top: 10px;
+  color: #fff;
+}
+.enter_form :global(.progress_wrap){
+  padding-bottom: 30px;
 }
