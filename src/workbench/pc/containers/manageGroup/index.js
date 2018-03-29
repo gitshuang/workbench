@@ -214,9 +214,12 @@ class ManageGroup extends Component {
     ) {
       this.props.renameGroup({
         id: this.props.data.widgetId,
-        name: this.state.groupName,
+        name: this.state.groupName ==""?this.props.data.widgetName:this.state.groupName,
         dontChangeCurrEditonlyId: true,
       });
+      this.setState({
+        inFoucs:false
+       })
     }
   }
   // 添加文件夹
