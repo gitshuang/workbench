@@ -233,7 +233,7 @@ export default class Work extends Component {
       switch (type) {
         case 1:
           return (
-            <div className={`${workArea} ${marginTop}`} style={{height:(_height-20)+"px"}}>
+            <div className={`${marginTop}`}  style={{height:(_height-20)+"px",marginTop:94}}>
               <ContentContainer />
             </div>
           );
