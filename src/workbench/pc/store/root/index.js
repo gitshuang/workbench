@@ -86,17 +86,17 @@ const reducer = handleActions({
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
-    //createLoadingFunc();
+    createLoadingFunc();
     return state;
   },
   [requestSuccess](state) {
     // Loading.destroy();
-    //destoryLoadingFunc();
+    destoryLoadingFunc();
     return state;
   },
   [requestError](state, { payload: msg }) {
     // Loading.destroy();
-    //destoryLoadingFunc();
+    destoryLoadingFunc();
     notification.notice({
       content: msg,
       duration: 4.5,
