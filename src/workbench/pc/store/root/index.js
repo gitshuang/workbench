@@ -4,6 +4,7 @@ import { handleActions } from 'redux-actions';
 import { mergeReducers } from '@u';
 import Loading from 'bee/loading';
 import Notification from 'bee/notification';
+import { openMess } from 'pub-comp/notification';
 
 import Notice from 'components/notice';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
@@ -80,13 +81,12 @@ const createReducer = (key) => (state, { payload, error }) => {
     };
   }
 };
-
 const reducer = handleActions({
   [getLatestAccessList]: createReducer('latestAccessList'),
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc();
+    createLoadingFunc({text: '正在加载中...'});
     return state;
   },
   [requestSuccess](state) {
@@ -97,10 +97,11 @@ const reducer = handleActions({
   [requestError](state, { payload: msg }) {
     // Loading.destroy();
     destoryLoadingFunc();
-    notification.notice({
+    openMess({
+      title: '错误',
       content: msg,
+      type: 'error',
       duration: 4.5,
-      closable: false,
     });
     return state;
   },
