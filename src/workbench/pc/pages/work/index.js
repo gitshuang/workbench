@@ -228,7 +228,12 @@ export default class Work extends Component {
     const { loaded ,_height,deviationHeight} = this.state;
     const { expandedSidebar, type } = this.props;
     let _sideDeviationHeight = 100;
-  
+    
+    return (
+      <div className={`${workArea} ${marginTop}`} style={{height:(_height-_sideDeviationHeight)+"px",background:"yellow"}}>
+        <ContentContainer />
+      </div>
+    );
     if (loaded) {
       switch (type) {
         case 1:
@@ -238,20 +243,22 @@ export default class Work extends Component {
             </div>
           );
         case 2:
-          return (
-            <div style={{position:relative}}>
-              {
-                expandedSidebar ? (
-                  <div className={sideBarArea} style={{height:(_height-_sideDeviationHeight)+"px",background:"#000"}}>
-                    <SideBarContainer />
-                  </div>
-                ) : null
-              }
-              <div className={`${contentArea} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} >
+        return (
+          <div style={{position:relative}}>
+            {
+              expandedSidebar ? (
+                <div className={sideBarArea} style={{height:(_height-_sideDeviationHeight)+"px"}}>
+                  <SideBarContainer />
+                </div>
+              ) : null
+            }
+            <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-108)+"px"}}>
+              <div className={contentArea}>
                 <ContentContainer />
-              </div>
+              </div> 
             </div>
-          );
+          </div>
+        );
         case 3:
           return (
             <div style={{position:relative}}>
@@ -262,7 +269,7 @@ export default class Work extends Component {
                   </div>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-deviationHeight)+"px"}}>
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-158)+"px"}}>
                 <div className={contentArea}>
                   <ContentContainer hasTab={true}/>
                 </div>
