@@ -12,7 +12,7 @@ import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
 
 import {check} from './checkTenantStatus'
-import ProgressBar from 'bee/progressbar';
+import Progress from 'pub-comp/progress';
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { changeUserInfoDisplay, getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
@@ -62,7 +62,7 @@ class CreateTeamContent extends Component {
       backUrl : "",    // 上传成功后返回的url
       disabled:false,
       error:false,
-      processValue:0,//定义一个进度条的value
+      processValue:0,//0表示未开始，1表示开始progress
       tenantId:'',//tenantId
     }
   }
@@ -139,7 +139,7 @@ class CreateTeamContent extends Component {
     this.setState({
       disabled:true
     })
-    //this.goToLoading("tenantId")//测试去掉
+    //this.setState({tenantId:"tenantId",processValue:1});//测试去掉
     requestStart();
     createTeam(data).then(({error, payload}) => {
       this.setState({
@@ -156,33 +156,9 @@ class CreateTeamContent extends Component {
       const tenantId = payload.tenantId;
       // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       localStorage.setItem('create', "1");
-      this.setState({tenantId:tenantId});
-      this.goToLoading(tenantId)
+      this.setState({tenantId:tenantId,processValue:1});//把processValue变成1.那么就开是走progress
     });
-
   }
-
-  goToLoading = (tenantId) =>{
-    let self = this;
-    var loadingInterVal = setInterval(function () {
-        if(self.state.processValue === 95|| self.state.processValue === 100) {
-          self.setState({processValue:95})
-        }else{
-          self.setState({processValue:self.state.processValue+5})
-        }
-    },600);
-    check(tenantId,this.goToLoadingAfter,loadingInterVal);
-  }
-
-  goToLoadingAfter = (loadingInterVal) =>{
-    ProgressBar.done();
-    this.setState({processValue:100})//直接结束
-    clearInterval(loadingInterVal);
-    setTimeout(() => {
-      window.location.href  ="/?tenantId=" + this.state.tenantId + "&switch=true";
-    }, 600);
-  }
-
   render() {
     const { value, imgUrl, imgWarning ,disabled,error} = this.state;
     let _error = error?"block":"none";
@@ -219,10 +195,7 @@ class CreateTeamContent extends Component {
         <hr className={footer_hr}/>
         <div className={footer}>
           <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
-              <ProgressBar   className={ process_loading } striped={false} now = {now} label={`${now}%`} ></ProgressBar>
-              <Icon type="loading" />
-              <span className={loading_desc}>正在配置团队信息…</span>
-
+              <Progress check={check} tenantId={this.state.tenantId} startFlag={now} loadingDesc={'正在配置团队信息…'}/>
           </div>
           <Button className={now?opacityHidden:''} onClick={this.create} disabled={disabled} >创建</Button>
         </div>

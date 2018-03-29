@@ -1,3 +1,4 @@
+
 function loading () {
     var loadingElm = document.getElementById('loading')
     var loadingText = '.'
@@ -13,8 +14,9 @@ function loading () {
     }
     loop()
 }
-
-export function check (tenantId,successFunc,loadingInterValId) {
+//let fuuu = 0;
+export function check (tenantId,loadingFunc,successFunc) {
+  //  ++fuuu;
     var xhr = new XMLHttpRequest()
     xhr.onload = loop
     xhr.open('get', '/manager/teamEnter/check?tenantId='+tenantId+'&switch=true&ts='+new Date().getTime())
@@ -30,15 +32,17 @@ export function check (tenantId,successFunc,loadingInterValId) {
                 console.log(e)
             }
             if (result.data) {
-                successFunc(loadingInterValId);
+                successFunc();
             } else {
                 setTimeout(function () {
-                   check(tenantId,successFunc,loadingInterValId) 
+                   // if(fuuu == 45) {successFunc();return false;}
+                   loadingFunc();
+                   check(tenantId,loadingFunc,successFunc) 
                 }, 300)
             }
         } else {
             setTimeout(function () {
-                successFunc(loadingInterValId);
+                successFunc();
             }, 1000)
         }
     }

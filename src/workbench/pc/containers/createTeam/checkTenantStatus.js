@@ -14,40 +14,9 @@ function loading () {
     }
     loop()
 }
-
-// export let checkBackData = 0;
-// export function check () {
-//     var xhr = new XMLHttpRequest()
-//     xhr.onload = loop
-//     // xhr.open('get', '/manager/teamEnter/check?tenantId=${session.tenantId!''}&ts='+new Date().getTime())
-//     xhr.open('get', '/manager/teamEnter/check');
-//     xhr.send();
-//     function loop () {
-//         if (this.status == 200) {
-//             var result = {
-//                 data: false
-//             }
-//             try {
-//                 result = JSON.parse(this.responseText)
-//             } catch (e) {
-//                 console.log(e)
-//             }
-
-//             if (result.data) {
-//                 checkBackData =  1;//表示请求成功或者失败
-//                 window.location.reload();
-//             } else {
-//                 checkBackData =  2;//还要继续请求
-//             }
-//         } else {
-//             checkBackData =  1;//表示请求成功或者失败
-//             window.location.reload();
-//         }
-//     }
-// }
-
-
-export function check (tenantId,successFunc,loadingInterValId) {
+//let fuuu = 0;
+export function check (tenantId,loadingFunc,successFunc) {
+    //++fuuu;
     var xhr = new XMLHttpRequest()
     xhr.onload = loop
     xhr.open('get', '/manager/teamEnter/check?tenantId='+tenantId+'&ts='+new Date().getTime())
@@ -63,15 +32,17 @@ export function check (tenantId,successFunc,loadingInterValId) {
                 console.log(e)
             }
             if (result.data) {
-                successFunc(loadingInterValId);
+                successFunc();
             } else {
                 setTimeout(function () {
-                   check(tenantId,successFunc,loadingInterValId) 
+                  //  if(fuuu ==70) {successFunc();return false;}
+                   loadingFunc();
+                   check(tenantId,loadingFunc,successFunc) 
                 }, 300)
             }
         } else {
             setTimeout(function () {
-                successFunc(loadingInterValId);
+                successFunc();
             }, 1000)
         }
     }

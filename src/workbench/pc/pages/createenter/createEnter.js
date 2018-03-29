@@ -14,8 +14,7 @@ import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom,process_loadin
 import CitySelect from 'bee/city-select';
 import Icon from 'pub-comp/icon';
 import {check} from './checkTenantStatus'
-import ProgressBar from 'bee/progressbar';
-
+import Progress from 'pub-comp/progress';
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
 
@@ -84,7 +83,8 @@ class CreateEnter extends Component {
       linkman:props.userInfo.userName,
       tenantEmail:props.userInfo.userEmail,
       tenantTel:props.userInfo.userMobile,
-      processValue:0
+      processValue:0,//0表示未开始，1表示开始
+      tenantId:'',//企业id
     };
     this.tenantIndustry ={
       name:"tenantIndustry",
@@ -110,7 +110,7 @@ class CreateEnter extends Component {
     if(!_tenantIndustry.value && _tenantIndustry.value == ""){
       _tenantIndustry.value = tenantIndustry;
     }
-
+   // this.setState({tenantId:"tenantId",processValue:1});//测试用的，要注销
     if (flag) {
       this.setState({
         disabled:false
@@ -134,32 +134,12 @@ class CreateEnter extends Component {
           return;
         }
         const tenantId = payload.tenantId;
+        this.setState({tenantId:tenantId,processValue:1});
         localStorage.setItem('create', "1");
         // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
-        this.goToLoading(tenantId)
+       // this.goToLoading(tenantId)
       });
     }
-  }
-
-
-  goToLoading = (tenantId) =>{
-    var loadingInterVal = setInterval(()=> {
-        const {processValue} = this.state;
-        let _value = processValue === 95|| processValue === 100?95:(processValue+5);
-        this.setState({
-          processValue:_value
-        });
-    },600);
-    check(tenantId,this.goToLoadingAfter(tenantId),loadingInterVal);
-  }
-
-  goToLoadingAfter = (loadingInterVal,tenantId) =>{
-    ProgressBar.done();
-    this.setState({processValue:100})//直接结束
-    clearInterval(loadingInterVal);
-    setTimeout(() => {
-      window.location.href  ="/?tenantId=" + tenantId + "&switch=true";
-    }, 600);
   }
 
   onChange = (obj)=>{
@@ -187,8 +167,12 @@ class CreateEnter extends Component {
     })
   }
   render() {
-    const {logo,linkman,tenantEmail,tenantTel,processValue} = this.state;
-    let _butt = processValue != 0?(<div className={progress_bar}><ProgressBar className={ process_loading } striped={false} now = {processValue} label={`${processValue}%`} ></ProgressBar><Icon type="loading" /></div>):<SubmitBtn isSubmit disabled={this.state.disabled} />
+    const {logo,linkman,tenantEmail,tenantTel,processValue,tenantId} = this.state;
+    let _butt = processValue != 0
+    ?
+    (<div className={progress_bar}><Progress check={check} tenantId={tenantId} startFlag={processValue} loadingDesc={'正在配置企业信息…'} /></div>)
+    :
+    <SubmitBtn isSubmit disabled={this.state.disabled} />
     return (<div>
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'> &nbsp;*&nbsp;</font></span>}
