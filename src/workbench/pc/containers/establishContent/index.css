@@ -97,7 +97,7 @@
   background: none;
 }
 .enter_context_div{
-  padding-top: 16px;
+  /* padding-top: 16px; */
 }
 .wrap :global(.clearfix){
   margin-left: 20px;

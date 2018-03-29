@@ -162,5 +162,11 @@ var browser=navigator.appName;
 var b_version=navigator.appVersion;
 if(browser=="Microsoft Internet Explorer" && b_version.match(/9./i)=="9.")
 {
+    //console.log问题
+    window.console = window.console || (function(){ 
+        var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){}; 
+        return c; 
+    })();
+    //首页tab切换的setTimeout参数问题。
     (function(f){ window.setTimeout=f(window.setTimeout); window.setInterval=f(window.setInterval); })(function(f){return function(c,t){ var a=[].slice.call(arguments,2);return f(function(){c instanceof Function?c.apply(this,a):eval(c)},t)} });
 }
