@@ -89,7 +89,7 @@ class SearchContainer extends Component {
       getSearchSuggest,
     } = this.props;
     // if(this.state.allApplicationList.length == 0){
-      requestStart();
+      //requestStart();
       getSearchSuggest(keyworks).then(({error, payload}) => {
         if (error) {
           requestError(payload);
