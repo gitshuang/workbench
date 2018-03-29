@@ -115,6 +115,10 @@
   background:rgba(242,242,242,1);
   color: #878B94;
 }
+:global(.ie9) .footer{
+  width: 160px;
+}
+
 .footer>div{
   float: left;
   cursor:pointer;
