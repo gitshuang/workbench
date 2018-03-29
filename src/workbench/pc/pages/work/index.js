@@ -228,12 +228,11 @@ export default class Work extends Component {
     const { loaded ,_height,deviationHeight} = this.state;
     const { expandedSidebar, type } = this.props;
     let _sideDeviationHeight = 100;
- 
     if (loaded) {
       switch (type) {
         case 1:
           return (
-            <div className={`${workArea} ${marginTop}`} style={{height:(_height-20)+"px"}}>
+            <div className={`${marginTop}`}  style={{height:(_height-20)+"px",marginTop:94}}>
               <ContentContainer />
             </div>
           );
