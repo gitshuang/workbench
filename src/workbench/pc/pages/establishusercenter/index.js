@@ -66,7 +66,7 @@ class EstablishUserCenter extends Component {
                     {/* <HeaderPage headerData={headerData}/> */}
                     <Header onLeftClick={ this.goHome } iconName={allowTenants.length <= 0?"":"home"} >
                         <div>
-                            <span>欢迎页</span>
+                            <span>创建团队/企业</span>
                         </div>
                     </Header>
                 </div>

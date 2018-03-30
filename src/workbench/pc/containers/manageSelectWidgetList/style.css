@@ -42,10 +42,11 @@
 
 .panel{
   width: 100%;
-  height: calc(100% - 60px);
+  /* height: calc(100% - 60px); */
+  height: 100%;
   display:-webkit-box;
   display:-ms-flexbox;
-  display:flex; 
+  display:flex;
   position: relative;
   padding-top: 30px;
 }
@@ -70,7 +71,7 @@
 }
 .panel_right>div{
   margin-left: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 105px
 }
 .panel_right::-webkit-scrollbar{
     width: 8px;
@@ -174,6 +175,7 @@
 }
 .btn_active{
   background:rgba(252,237,236,1) !important;
+  color: #E14C46;
 }
 /* 首页编辑-添加服务 */
 :global(.ie9_pop) .search_icon_con>span,:global(.ie9_pop) .search_icon_con>i{ 

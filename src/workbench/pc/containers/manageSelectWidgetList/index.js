@@ -230,7 +230,7 @@ class SelectWidgetList extends Component {
       if(active){
         labels.forEach((da,j)=>{
           btns.push(<Button key={`button_li_${da.labelId}-${i}-${j}`} shape='border' 
-          className={ da.active? 'active' : '' } onClick={()=>{this.onBtnOnclick(da)}}>{da.labelName}</Button>);
+          className={ da.active? 'active' : '' } onClick={()=>{this.onBtnOnclick(da)}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{da.labelName}</Button>);
         })
       }
     })

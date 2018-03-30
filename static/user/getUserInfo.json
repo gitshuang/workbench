@@ -2,7 +2,7 @@
     "status": 1,
     "data": {
         "company": "云工作台3.0测试环境你是啊大大的",
-        "userAvator": "https://cdn.yonyoucloud.com/dev/yht/avatar/style/images/avatar/0c294160-fad0-412c-b6c5-47b4bd28dda2/1513684377716.png",
+        "userAvator": null,
         "userEmail": "wangsh@yonyou.com",
         "userName": "王石",
         "userMobile": "15810266391",
@@ -13,7 +13,7 @@
         "orgId": null,
         "orgName": null,
         "orgCode": null,
-        "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/79c0eabb-1256-44c1-9b47-515dd799a76e/timg.jpg",
+        "logo": null,
         "redPacketsNum": 0,
         "gloriesNum": 0,
         "allowTenants": [
@@ -351,7 +351,7 @@
         "currentTeamConfig": {
             "tenantId": "gtzceot7",
             "tenantName": "云工作台3.0测试环境你是啊大大的",
-            "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/79c0eabb-1256-44c1-9b47-515dd799a76e/timg.jpg",
+            "logo": null,
             "linkman": "18101319676",
             "tenantAddress": "北京|北京|海淀区|永腾南路用友产业园",
             "tenantEmail": "zhengxc@yonyou.com",

@@ -263,7 +263,7 @@ class Invitation extends Component {
                   <div className={qrCode} id="qrCode">
                     <img src='/invite/getQRCode'/>
                   </div>
-                  <ButtonBrand className={printQrBtn} >二维码</ButtonBrand>
+                  {/* <ButtonBrand className={printQrBtn} >二维码</ButtonBrand> */}
                 </div>
               </TabPane>
             </Tabs>
