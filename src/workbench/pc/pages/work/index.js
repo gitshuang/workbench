@@ -264,7 +264,7 @@ export default class Work extends Component {
                   </div>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-150)+"px"}}>
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-133)+"px"}}>
                 <div className={contentArea}>
                   <ContentContainer hasTab={true}/>
                 </div>
