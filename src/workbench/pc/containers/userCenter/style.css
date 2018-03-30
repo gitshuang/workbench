@@ -595,7 +595,7 @@
   left: -10px;
   margin-top: -11px;
   border-left-width: 0;
-  border-right-color:#fff;
+  border-right-color:rgb(224,224,224);
 }
 .popconfirm  i::after{
   content: "";
