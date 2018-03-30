@@ -142,10 +142,12 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    const { tenantid, userId } = window.diworkContext();
-    // if( payload.tenantid !== tenantid || payload.userId !== userId ){
-    //   logout();
-    // }
+    const info = window.diworkContext();
+    const { tenantid, userid } = info;
+    // userid 来避免localhost环境下一直刷新
+    if( userid && (payload.tenantId !== tenantid || payload.userId !== userid) ){
+      logout();
+    }
     return {
       ...state,
       isLogout: payload,
