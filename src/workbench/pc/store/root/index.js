@@ -142,9 +142,11 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    if(payload == "123"){
-      logout();
-    }
+    debugger;
+    const { tenantid, userId } = window.diworkContext();
+    // if( payload.tenantid !== tenantid || payload.userId !== userId ){
+    //   logout();
+    // }
     return {
       ...state,
       isLogout: payload,
