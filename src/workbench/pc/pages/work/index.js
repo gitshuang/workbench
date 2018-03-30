@@ -228,6 +228,7 @@ export default class Work extends Component {
     const { loaded ,_height,deviationHeight} = this.state;
     const { expandedSidebar, type } = this.props;
     let _sideDeviationHeight = 100;
+ 
     if (loaded) {
       switch (type) {
         case 1:

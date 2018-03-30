@@ -5,7 +5,8 @@ import {
   getMessage,
   getLatestAccessList,
   getPromotionServiceList,
-  uploadApplication
+  uploadApplication,
+  getPoll
 } from './api';
 
 const {
@@ -22,7 +23,8 @@ const {
   CHANGE_MESSAGE_TYPE,
   SHOW_IM,
   HIDE_IM,
-  UPLOAD_APPLICATION
+  UPLOAD_APPLICATION,
+  GET_POLL
 } = types;
 
 export default createActions({
@@ -31,6 +33,7 @@ export default createActions({
     [GET_LATEST_ACCESS_LIST]: getLatestAccessList,
     [GET_PROMOTION_SERVICE_LIST]: getPromotionServiceList,
     [UPLOAD_APPLICATION]: uploadApplication,
+    [GET_POLL]: getPoll,
   },
   REQUEST_START,
   REQUEST_SUCCESS,

@@ -15,4 +15,5 @@ export default createTypes(
   'SHOW_IM',
   'HIDE_IM',
   'UPLOAD_APPLICATION',
+  'GET_POLL'
 );

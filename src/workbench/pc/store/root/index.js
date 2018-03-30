@@ -1,7 +1,7 @@
 import React from 'react';
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
-import { mergeReducers } from '@u';
+import { mergeReducers, logout } from '@u';
 import Loading from 'bee/loading';
 import Notification from 'bee/notification';
 import { openMess } from 'pub-comp/notification';
@@ -58,6 +58,7 @@ const {
   showIm,
   hideIm,
   uploadApplication,
+  getPoll
 } = actions;
 
 const defaultState = {
@@ -69,6 +70,7 @@ const defaultState = {
   latestAccessList:[],
   promotionServiceList:[],
   imShowed: false,
+  isLogout: false
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -134,6 +136,18 @@ const reducer = handleActions({
       ...state,
       messageList: newMessageList,
       messageShowNum: newMessageShowNum,
+    };
+  },
+  [getPoll]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    if(payload == "123"){
+      logout();
+    }
+    return {
+      ...state,
+      isLogout: payload,
     };
   },
   [popMessage]: state => {

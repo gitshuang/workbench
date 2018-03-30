@@ -25,6 +25,7 @@ const {
   requestError,
   getServiceList,
   getMessage,
+  getPoll,
 } = rootActions;
 const { getUserInfo } = homeActions;
 
@@ -54,7 +55,8 @@ function timer(fn, time) {
     requestError,
     getServiceList,
     getMessage,
-    getUserInfo
+    getUserInfo,
+    getPoll
   }
 )
 class Root extends Component {
@@ -72,7 +74,8 @@ class Root extends Component {
       requestError,
       getServiceList,
       getMessage,
-      getUserInfo
+      getUserInfo,
+      getPoll
     } = this.props;
     const { history } = this.props;
     this.bgColor = this.gitBackgroundIcon();
@@ -105,8 +108,28 @@ class Root extends Component {
         });
       }
     });
-    // timer(getMessage, 10000);
+    timer(getPoll, 10000);
+    //this.getPoll();
   }
+
+  getPoll(){
+    let that = this;
+    let timerId;
+    const { getPoll } = this.props;
+    getPoll().then(({ error, payload }) => {
+      debugger;
+      if (error) {
+      } else {
+        clearTimeout(timerId);
+        if(payload ==="123"){
+          logout();
+        }else{
+          timerId = setTimeout(that.getPoll,10000);
+        }
+      }  
+    });
+  }
+
   randomNum(minNum,maxNum){
       switch(arguments.length){
           case 1:
