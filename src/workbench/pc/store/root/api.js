@@ -5,5 +5,5 @@ export const getLatestAccessList = () => get('/getLatestAccess');
 export const getPromotionServiceList = () => get('/getPromotionService');
 export const uploadApplication = (data) => postFileCros("https://pubapi.yonyoucloud.com/file/upload/oss/workbench-image-path-applicationIcon",data);
 export const getPoll = () => {
-  return get('/invite/getInviteUsersJoinAddress');
+  return get('/diwork-heartbeat/heartbeat/checkSession');
 } 
