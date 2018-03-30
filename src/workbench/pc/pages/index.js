@@ -36,7 +36,7 @@ function get_cookie(Name) {
     let sd = document.cookie.indexOf(search);
     if (sd!= -1) {
        sd += search.length;
-       end = document.cookie.indexOf(";", sd);
+       let end = document.cookie.indexOf(";", sd);
        if (end == -1)
         end = document.cookie.length;
         //unescape() 函数可对通过 escape() 编码的字符串进行解码。
@@ -50,9 +50,8 @@ function timer(fn, time) {
   let timerId = 0;
   
   function loop () {
-    const sessionId = get_cookie("wb_at");
-    console.log(sessionId);
-    fn(sessionId);
+    //const sessionId = get_cookie("Hm_lvt_yht");
+    fn();
     timerId = setTimeout(loop, time);
   }
   loop();
