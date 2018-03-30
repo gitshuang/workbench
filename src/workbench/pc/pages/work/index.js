@@ -227,8 +227,8 @@ export default class Work extends Component {
   makeLayout() {
     const { loaded ,_height,deviationHeight} = this.state;
     const { expandedSidebar, type } = this.props;
-    let _sideDeviationHeight = 100;
- 
+    let _sideDeviationHeight = 90;
+    
     if (loaded) {
       switch (type) {
         case 1:
@@ -247,7 +247,7 @@ export default class Work extends Component {
                   </div>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-108)+"px"}}>
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-97)+"px"}}>
                 <div className={contentArea}>
                   <ContentContainer />
                 </div> 
@@ -264,7 +264,7 @@ export default class Work extends Component {
                   </div>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-158)+"px"}}>
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-150)+"px"}}>
                 <div className={contentArea}>
                   <ContentContainer hasTab={true}/>
                 </div>
