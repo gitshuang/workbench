@@ -74,6 +74,8 @@ const reducer = handleActions({
     };
   },
   [getSearchEnterOrTeam]: (state, { payload, error }) => {
+    console.log("-----------------------");
+    console.log(payload);
     return {
       ...state,
       searchEnterOrTeamList: payload,
