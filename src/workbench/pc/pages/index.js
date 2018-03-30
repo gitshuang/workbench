@@ -31,8 +31,11 @@ const { getUserInfo } = homeActions;
 
 function timer(fn, time) {
   let timerId = 0;
+  
   function loop () {
-    fn();
+    const { tenantid } = window.diworkContext();
+    console.log(tenantid);
+    fn(tenantid);
     timerId = setTimeout(loop, time);
   }
   loop();
@@ -108,6 +111,7 @@ class Root extends Component {
         });
       }
     });
+    
     timer(getPoll, 10000);
     //this.getPoll();
   }
