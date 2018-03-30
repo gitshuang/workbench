@@ -98,7 +98,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     width: 100%;
     cursor: pointer;
     line-height: 30px;
-    display: inline;
+    /* display: inline; */
     white-space: nowrap;
 }
 .item_li:hover{
