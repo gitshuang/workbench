@@ -142,7 +142,6 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    debugger;
     const { tenantid, userId } = window.diworkContext();
     // if( payload.tenantid !== tenantid || payload.userId !== userId ){
     //   logout();
