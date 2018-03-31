@@ -60,6 +60,7 @@
   background: #ffffff;
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
+
 .content :global(.u-tabs-tab){
   padding-top: 13px;
   padding-bottom: 13px;
@@ -95,8 +96,11 @@
   border: none;
 }
 .content :global(.u-tabs-top .u-tabs-tabpane-inactive){
-  height: auto;
-  min-height: 554px;
+  /* height: auto; */
+  min-height: 500px;
+}
+:global(.ie9) .content :global(.u-tabs-top .u-tabs-tabpane-inactive){
+  min-height: auto;
 }
 .content :global(.u-tabs-tabpane){
   background: #ffffff;

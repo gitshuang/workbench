@@ -200,6 +200,7 @@ class Invitation extends Component {
         <div className={`${wrap} um-content`}>
           <div className={content}>
             <Tabs
+              destroyInactiveTabPane
               defaultActiveKey="1"
               onChange={this.callback}
               className="demo-tabs"

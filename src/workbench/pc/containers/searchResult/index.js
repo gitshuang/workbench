@@ -452,6 +452,7 @@ class searchResult extends Component {
                 <p>暂无相关内容</p>
               </div>
               <Tabs
+                destroyInactiveTabPane
                 defaultActiveKey={this.state.activetab}
                 activeKey={this.state.activetab}
                 className="demo-tabs"
