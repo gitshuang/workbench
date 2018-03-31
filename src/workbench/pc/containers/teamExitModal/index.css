@@ -29,3 +29,6 @@
 .select_enter_close :global(.close){
   display: none;
 }
+.select_enter>div{
+  margin-top: 15px;
+} 
