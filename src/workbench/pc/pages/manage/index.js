@@ -157,10 +157,10 @@ class Home extends Component {
       if (error) {
         requestError(payload);
       } else {
+        requestSuccess();
         this.goBack();
+        this.popCloseCancel();
       }
-      requestSuccess();
-      this.popCloseCancel();
     });
   }
   // 取消
