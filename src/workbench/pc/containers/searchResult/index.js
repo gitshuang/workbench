@@ -97,8 +97,7 @@ class searchResult extends Component {
       isShownodataClass:true,
       isShownodataClassEach:true,
       otherName:"其他内容",
-      dataNumSelect:[{id:0,name:'5条/页'},{id:1,name:'10条/页'},{id:2,name:'15条/页'},{id:3,name:'20条/页'}],
-      dataNumSelectActive:1,//默认展示10条数据一页
+      dataPerPageNum:10,
       //otherName:"其他内容(0)"
     }
   }
@@ -115,7 +114,7 @@ class searchResult extends Component {
     this.getSearchMoreList(keywords);
   }
 
-  getSearchMoreList(keywords){
+  getSearchMoreList(keywords,type,page,size){
     const {
       requestStart,
       requestSuccess,
@@ -124,7 +123,7 @@ class searchResult extends Component {
     } = this.props;
       // requestStart();
       this.setState({keywords,value:keywords},function () {
-          getSearchMore(keywords).then(({error, payload}) => {
+          getSearchMore(keywords,type,page,size).then(({error, payload}) => {
             if (error) {
               requestError(payload);
             }
@@ -145,7 +144,7 @@ class searchResult extends Component {
                 isShowPagination:true,
               })
             }
-            this.getSearchTpyeList(keywords,payload.data[0].type,0);
+            this.getSearchTpyeList(keywords,payload.data[0].type,page,size);
           });
       })
 
@@ -230,10 +229,11 @@ class searchResult extends Component {
     let searchvalue = !this.state.value?'':this.state.value
     let newUrl =  nowUrl.substring(0,nowUrl.indexOf('searchvalue/')+12).concat(searchvalue);
     window.location.href = newUrl;
+
     this.setState({
       keywords:searchvalue
     }, function() {
-      this.getSearchMoreList(this.state.value)
+      this.getSearchMoreList(this.state.value,this.state.activetab,this.state.activePage-1,this.state.dataPerPageNum*1)
     })
   }
   onFormChange = (value) => {
@@ -254,8 +254,7 @@ class searchResult extends Component {
     this.setState({
       activePage: eventKey
     });
-    let reg = new RegExp("条\/页","g");
-    let dataSize = this.state.dataNumSelect[this.state.dataNumSelectActive].name.replace(reg,"")
+    let dataSize = this.state.dataPerPageNum;
     if(activetab=='other'){
       this.getSearchOtherList(value,5,--eventKey,dataSize)
     }else{
@@ -269,7 +268,7 @@ class searchResult extends Component {
    let dataPerPageNum  = dataNum.replace(reg,"");
    const { value, activetab, activePage}=this.state;
    this.setState({
-     dataNumSelectActive:id
+     dataPerPageNum:dataPerPageNum
    },function () {
     if(activetab=='other'){
         this.getSearchOtherList(value,5,activePage-1,dataPerPageNum)
@@ -300,12 +299,11 @@ class searchResult extends Component {
       activetab,
       activePage:1,
     })
-    let reg = new RegExp("条\/页","g");
-    let dataPerPageNum = this.state.dataNumSelect[this.state.dataNumSelectActive].name.replace(reg,"");
+    let dataSize = this.state.dataPerPageNum
     if(activetab=='other'){
-      this.getSearchOtherList(value,5,0,dataPerPageNum)
+      this.getSearchOtherList(value,5,0,dataSize)
     }else{
-      this.getSearchTpyeList(value,activetab,0,dataPerPageNum)
+      this.getSearchTpyeList(value,activetab,0,dataSize)
     }
   }
   goDetail(type,item){
@@ -472,19 +470,14 @@ class searchResult extends Component {
                   </TabPane>
                 ) : null
               }
-
               </Tabs>
-
               <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
-              <EnhancedPagination
-                items={this.state.pagesize}
-                activePage={this.state.activePage}
-                onDataNumSelect={this.paginationNumSelect}
-                // dataNumSelect={this.state.dataNumSelect}
-                // dataNumSelectActive={this.state.dataNumSelectActive}
-                onSelect={this.handleSelect.bind(this)} />
-            </div>
-
+                <EnhancedPagination
+                  items={this.state.pagesize}
+                  activePage={this.state.activePage}
+                  onDataNumSelect={this.paginationNumSelect}
+                  onSelect={this.handleSelect.bind(this)} />
+              </div>
             </div>
 
           </div>
