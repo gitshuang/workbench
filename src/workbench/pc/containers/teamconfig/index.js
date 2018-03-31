@@ -780,6 +780,7 @@ class CreateTeamContent extends Component {
         </div>
         <div className={content}>
           <Tabs
+            destroyInactiveTabPane
             defaultActiveKey="1"
           >
             <TabPane tab='基础设置' key="1">

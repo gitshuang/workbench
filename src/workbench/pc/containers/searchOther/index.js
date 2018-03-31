@@ -174,14 +174,14 @@ class searchOther extends Component {
       lis.push(
         <li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
           <div className={h_icon}>
-            <img src={item.applicationIcon}/>
+            <img src={item.serviceIcon}/>
           </div>
           <div className={h_name}>
             <p className={search_help}>
-              <span dangerouslySetInnerHTML={createMarkup(item.applicationName)}></span>
+              <span dangerouslySetInnerHTML={createMarkup(item.serviceName)}></span>
             </p>
           </div>
-          <div className={search_ts}>{this.Datetimechange(item.modifiedTime)}</div>
+          <div className={search_ts}>{this.Datetimechange(item.createTime)}</div>
         </li>);
     })
     return (
