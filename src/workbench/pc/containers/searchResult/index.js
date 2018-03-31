@@ -326,7 +326,7 @@ class searchResult extends Component {
     //this.props.history.push({pathname:`/search/searchlist`,state:item});
     this.props.history.push({pathname:`/search/searchlist/${!this.state.keywords?'':this.state.keywords}`,state:item});
   }
-  goemailDetail({ id, userId, userName, tenantId }){
+  goemailDetail({ id, userId, name, tenantId }){
     return (e) => {
       e.stopPropagation();
       dispatchMessageTypeHandler({
@@ -335,7 +335,7 @@ class searchResult extends Component {
           serviceCode: 'XTWEIYOU0000000000',
           data: {
             genre: 4,
-            fromDiworkAddressList: `${userName}---${userId}---${tenantId}`,
+            fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
           },
         }
       });
@@ -354,20 +354,22 @@ class searchResult extends Component {
   }
 
   otherlistLi(data){
+    debugger;
     var lis =[]
     function createMarkup(text) {
       return {__html: text};
     }
+    
     data.content.forEach((item,index)=>{
       item= eval('(' + item + ')')
       switch (data.type)
       {
         case "addressbook"://通讯录 称为user
           lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                <div className={h_icon}><img src={item.userAvator}/></div>
+                <div className={h_icon}><img src={item.photo}/></div>
                 <div className={h_name}>
-                  <p><span dangerouslySetInnerHTML={createMarkup(item.userName)}></span><span>{item.orgName}</span></p>
-                  <p>办公电话 : {item.userMobile}</p>
+                  <p><span dangerouslySetInnerHTML={createMarkup(item.name)}></span>-<span>{item.orgName}</span></p>
+                  <p>办公电话 : {item.mobile}</p>
                 </div>
                 <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(item)}><Icon title="发邮件" type="e-mail" /></div>
                 <div className={h_contact} onClick={this.gochatDetail(item)}><Icon title="发消息" type="chat" /></div>
