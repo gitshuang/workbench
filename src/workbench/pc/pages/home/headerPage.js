@@ -83,7 +83,11 @@ class HeaderPage extends Component {
 
   openMenu=()=>{
     const {getSearchEnterOrTeam} = this.props;
-    getSearchEnterOrTeam();//调用新接口
+    getSearchEnterOrTeam().then(({payload, error}) => {
+      if (error) {
+        console.log('getSearchEnterOrTeam error:', payload);
+      }
+    });//调用新接口
   }
 
   getLeftContent() {
@@ -123,8 +127,8 @@ class HeaderPage extends Component {
       changeRequestDisplay();
       localStorage.removeItem("create");
     }
-      // let ul = document.getElementById("nav_ul"); 
-      // let b = ul.scrollWidth > ul.clientWidth?true:false; 
+      // let ul = document.getElementById("nav_ul");
+      // let b = ul.scrollWidth > ul.clientWidth?true:false;
       // this.setState({
       //   btnShow:b
       // })
