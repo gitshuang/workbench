@@ -90,6 +90,10 @@ class HeaderPage extends Component {
         return;
       }
       console.log('getSearchEnterOrTeam success');
+    }, (e) => {
+      console.log('getSearchEnterOrTeam catch');
+      console.log(e);
+      console.log(e.message);
     });//调用新接口
     console.log('getSearchEnterOrTeam send');
   }
