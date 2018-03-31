@@ -1,40 +1,48 @@
 {
-  "data": 
-  { 
-      "content": [
-          {
-            "content":[
-              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
-              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
-              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}"
-              ],
-              "currentPage": 1,
-              "pageSize": 15,
-              "renderUrl": "应用",
-              "total": 10,
-              "type": "service",
-              "typeName": "应用"
-          },
-          {
-            "content":[
-              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
-              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}",
-              "{'applicationId':'app_2','clientStatus':true,'enable':true,'hasWidget':false,'phoneStatus':true,'primaryKey':'serve_10','selected':false,'serviceCode':'serve_10','serviceIcon':'https://cdn.yonyoucloud.com/pro/workbench/e983.svg','serviceId':'serve_10','serviceName':'用户管理','tenantId':'gtzceot7','ts':1513666297000,'url':'http://workbenchdev.yyuap.com/manager/#/userManagement','webStatus':true}"
-              ],
-              "currentPage": 1,
-              "pageSize": 15,
-              "renderUrl": "应用",
-              "total": 20,
-              "type": "service",
-              "typeName": "应用2"
-          }
-          
-      ],
-      "page":1,
-      "totalPages":1,
-      "size":6,
-      "totalElements":60
-  },
-  "msg": "",
-  "status": 1
+  "status": 1,
+  "data": {
+    "content": [
+      {
+        "type": "service",
+        "typeName": "通讯录2",
+        "renderUrl": "11",
+        "content": [
+          "{\"relationUsers\":[],\"serviceIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/4d0a1ffc-c2dc-4330-ab17-1fcc0257f396/%E6%B7%98%E5%AE%9D%E5%86%85%E8%B4%AD.png\",\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"ae57f431-66db-4301-b00f-31bc24ca2146\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"测试图片1\",\"relationServices\":[],\"url\":\"https://90wu6i.axshare.com/\",\"teamMenbersUnuse\":false,\"createTime\":1517987314000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":false,\"applicationId\":\"25aab76e-961d-4595-9965-870ce222b722\",\"serviceId\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"ts\":1517987314000}",
+          "{\"applicationType\":1,\"clientStatus\":false,\"hasWidget\":false,\"applicationIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f289608a-bf28-4d04-959c-38dc5bc320f6/Penguins.jpg\",\"simpleStatus\":true,\"orgIds\":[],\"enable\":true,\"userIds\":[],\"phoneStatus\":true,\"webStatus\":true,\"applicationName\":\"个人应用1\",\"selected\":false,\"applicationDesc\":\"个人应用1\",\"orgNames\":[],\"everyone\":false,\"eternal\":false,\"shortCut\":false,\"createTime\":1520236673000,\"service\":[],\"tenantId\":\"gtzceot7\",\"userNames\":[],\"orders\":0,\"applicationId\":\"5d13b34f-69e8-4b8a-83ae-4f08f29743ac\",\"applicationCode\":\"b9443084-3e6f-4e45-ad5c-c6024acfbc2c\",\"primaryKey\":\"5d13b34f-69e8-4b8a-83ae-4f08f29743ac\"}",
+          "{\"relationUsers\":[],\"serviceIcon\":\"\",\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"3bfd419e-1033-451d-960d-8ba2e8859ebd\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"应用测试1\",\"relationServices\":[],\"url\":\"https://www.baidu.com\",\"teamMenbersUnuse\":false,\"createTime\":1516432607000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":true,\"applicationId\":\"2ea3fbea-e82f-4999-b764-9f602b9b0d73\",\"serviceId\":\"d957a47b-18b6-4654-8e7a-182abd12c209\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"d957a47b-18b6-4654-8e7a-182abd12c209\",\"ts\":1516432607000}",
+          "{\"relationUsers\":[],\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"fa12b1e1-5a60-4331-b510-64cb08684609\",\"ykjId\":122364,\"clientStatus\":true,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"创建一个1\",\"relationServices\":[],\"url\":\"https://www.baidu.com\",\"teamMenbersUnuse\":false,\"createTime\":1516343137000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":false,\"applicationId\":\"17b31b2b-e29e-4f4e-a3a1-08cd99317f5d\",\"serviceId\":\"2909f8bc-80c4-4d74-9168-e26b7cbd9fbb\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"2909f8bc-80c4-4d74-9168-e26b7cbd9fbb\",\"ts\":1516343137000}",
+          "{\"serviceIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/aecef12b-0f78-43b4-857a-523a92a65db7/1.jpg\",\"serviceCode\":\"947dcf71-65ca-4e32-a965-6c971b302893\",\"ykjId\":122549,\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"enable\":true,\"phoneStatus\":true,\"serviceId\":\"e698d5d4-8c4c-488d-842c-837ca6531864\",\"webStatus\":true,\"selected\":false,\"relationUsers\":[],\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceName\":\"百度一下吧1\",\"relationServices\":[],\"url\":\"https://www.baidu.com\",\"teamMenbersUnuse\":false,\"createTime\":1519735054000,\"crossTenant\":false,\"tenantId\":\"gtzceot7\",\"applicationId\":\"e095e141-daf9-494b-b6d5-ed54af2c0592\",\"primaryKey\":\"e698d5d4-8c4c-488d-842c-837ca6531864\",\"ts\":1519735054000}"
+        ]
+      },
+      {
+        "type": "service",
+        "typeName": "微邮",
+        "renderUrl": "“”",
+        "content": [
+          "{\"relationUsers\":[],\"serviceIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/4d0a1ffc-c2dc-4330-ab17-1fcc0257f396/%E6%B7%98%E5%AE%9D%E5%86%85%E8%B4%AD.png\",\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"ae57f431-66db-4301-b00f-31bc24ca2146\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"测试图片1\",\"relationServices\":[],\"url\":\"https://90wu6i.axshare.com/\",\"teamMenbersUnuse\":false,\"createTime\":1517987314000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":false,\"applicationId\":\"25aab76e-961d-4595-9965-870ce222b722\",\"serviceId\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"ts\":1517987314000}",
+          "{\"applicationType\":1,\"clientStatus\":false,\"hasWidget\":false,\"applicationIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f289608a-bf28-4d04-959c-38dc5bc320f6/Penguins.jpg\",\"simpleStatus\":true,\"orgIds\":[],\"enable\":true,\"userIds\":[],\"phoneStatus\":true,\"webStatus\":true,\"applicationName\":\"个人应用1\",\"selected\":false,\"applicationDesc\":\"个人应用1\",\"orgNames\":[],\"everyone\":false,\"eternal\":false,\"shortCut\":false,\"createTime\":1520236673000,\"service\":[],\"tenantId\":\"gtzceot7\",\"userNames\":[],\"orders\":0,\"applicationId\":\"5d13b34f-69e8-4b8a-83ae-4f08f29743ac\",\"applicationCode\":\"b9443084-3e6f-4e45-ad5c-c6024acfbc2c\",\"primaryKey\":\"5d13b34f-69e8-4b8a-83ae-4f08f29743ac\"}",
+          "{\"relationUsers\":[],\"serviceIcon\":\"\",\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"3bfd419e-1033-451d-960d-8ba2e8859ebd\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"应用测试1\",\"relationServices\":[],\"url\":\"https://www.baidu.com\",\"teamMenbersUnuse\":false,\"createTime\":1516432607000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":true,\"applicationId\":\"2ea3fbea-e82f-4999-b764-9f602b9b0d73\",\"serviceId\":\"d957a47b-18b6-4654-8e7a-182abd12c209\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"d957a47b-18b6-4654-8e7a-182abd12c209\",\"ts\":1516432607000}",
+          "{\"relationUsers\":[],\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"fa12b1e1-5a60-4331-b510-64cb08684609\",\"ykjId\":122364,\"clientStatus\":true,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"创建一个1\",\"relationServices\":[],\"url\":\"https://www.baidu.com\",\"teamMenbersUnuse\":false,\"createTime\":1516343137000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":false,\"applicationId\":\"17b31b2b-e29e-4f4e-a3a1-08cd99317f5d\",\"serviceId\":\"2909f8bc-80c4-4d74-9168-e26b7cbd9fbb\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"2909f8bc-80c4-4d74-9168-e26b7cbd9fbb\",\"ts\":1516343137000}",
+          "{\"serviceIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/aecef12b-0f78-43b4-857a-523a92a65db7/1.jpg\",\"serviceCode\":\"947dcf71-65ca-4e32-a965-6c971b302893\",\"ykjId\":122549,\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"enable\":true,\"phoneStatus\":true,\"serviceId\":\"e698d5d4-8c4c-488d-842c-837ca6531864\",\"webStatus\":true,\"selected\":false,\"relationUsers\":[],\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceName\":\"百度一下吧1\",\"relationServices\":[],\"url\":\"https://www.baidu.com\",\"teamMenbersUnuse\":false,\"createTime\":1519735054000,\"crossTenant\":false,\"tenantId\":\"gtzceot7\",\"applicationId\":\"e095e141-daf9-494b-b6d5-ed54af2c0592\",\"primaryKey\":\"e698d5d4-8c4c-488d-842c-837ca6531864\",\"ts\":1519735054000}"
+        ]
+      }
+    ],
+    "last": true,
+    "totalElements": 2,
+    "totalPages": 1,
+    "sort": [
+      {
+        "direction": "ASC",
+        "property": "orders",
+        "ignoreCase": false,
+        "nullHandling": "NATIVE",
+        "descending": false,
+        "ascending": true
+      }
+    ],
+    "first": true,
+    "numberOfElements": 2,
+    "size": 10,
+    "number": 0
+  }
 }
