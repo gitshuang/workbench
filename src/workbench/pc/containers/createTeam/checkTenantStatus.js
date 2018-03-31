@@ -36,7 +36,7 @@ export function check (tenantId,loadingFunc,successFunc) {
             } else {
                 setTimeout(function () {
                   //  if(fuuu ==70) {successFunc();return false;}
-                   loadingFunc();
+                   loadingFunc(tenantId);
                    check(tenantId,loadingFunc,successFunc) 
                 }, 300)
             }

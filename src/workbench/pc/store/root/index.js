@@ -144,7 +144,8 @@ const reducer = handleActions({
     }
     const info = window.diworkContext();
     const { tenantid, userid } = info;
-    // userid 来避免localhost环境下一直刷新
+    // 避免localhost环境下一直刷新
+    if (window.location.hostname == "localhost" ) return false;
     if( userid && (payload.tenantId !== tenantid || payload.userId !== userid) ){
       logout();
     }
