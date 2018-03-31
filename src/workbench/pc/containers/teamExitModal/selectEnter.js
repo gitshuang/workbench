@@ -99,7 +99,7 @@ class SelectEnter extends Component {
     }) 
     return (
        <div id="open_select" className={select_enter}>
-         <span>请选择企业/团队:</span>
+         <span>请选择想要进入的企业/团队:</span>
          <DropdownButton
           openMenu={this.openMenu}
           marginLeft={-187}

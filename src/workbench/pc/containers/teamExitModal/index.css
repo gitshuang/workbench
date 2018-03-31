@@ -11,12 +11,12 @@
   left: 50%;
   transform: translate(-50%, -50%);  */
 
-  height: 32px;
+  /* height: 32px; */
   line-height: 32px;
 }
 .select_enter>span{
   margin-right: 10px;
-  float: left;
+  /* float: left; */
 }
 .select_enter :global(.home_title){
   width:189px !important;

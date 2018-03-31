@@ -162,7 +162,7 @@ class TeamRemoveModal extends Component {
       _pop_title= "确认"+name+"?";
       _btn = null;
     }else if(isManage == 2){//退出后选中企业/团队
-      _pop_title= "请重新选择"+type;
+      _pop_title= "您已"+name;
       _cont = <SelectEnter />
       _btn = null;
       _select_enter = select_enter_close;
