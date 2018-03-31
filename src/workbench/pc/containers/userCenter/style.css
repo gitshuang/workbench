@@ -607,7 +607,7 @@
   border-style: solid;
   left: -9px;
   bottom: -10px;
-  border-left-width: 0;
+  /* border-left-width: 0; */
   border-right-color: #fff;
   border-width: 10px;
 }
