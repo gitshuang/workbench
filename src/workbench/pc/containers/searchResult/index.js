@@ -354,7 +354,6 @@ class searchResult extends Component {
   }
 
   otherlistLi(data){
-    debugger;
     var lis =[]
     function createMarkup(text) {
       return {__html: text};
