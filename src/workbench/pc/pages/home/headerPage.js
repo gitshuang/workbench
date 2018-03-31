@@ -83,11 +83,15 @@ class HeaderPage extends Component {
 
   openMenu=()=>{
     const {getSearchEnterOrTeam} = this.props;
+    console.log('getSearchEnterOrTeam start');
     getSearchEnterOrTeam().then(({payload, error}) => {
       if (error) {
         console.log('getSearchEnterOrTeam error:', payload);
+        return;
       }
+      console.log('getSearchEnterOrTeam success');
     });//调用新接口
+    console.log('getSearchEnterOrTeam send');
   }
 
   getLeftContent() {
