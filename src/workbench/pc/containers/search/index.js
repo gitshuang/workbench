@@ -186,7 +186,7 @@ class SearchContainer extends Component {
       this.props.history.push('/'+_type+'/'+code);
     }
   }
-  goemailDetail({ id, userId, userName, tenantId }){
+  goemailDetail({ id, userId, name, tenantId }){
     return (e) => {
       e.stopPropagation();
       dispatchMessageTypeHandler({
@@ -195,7 +195,7 @@ class SearchContainer extends Component {
           serviceCode: 'XTWEIYOU0000000000',
           data: {
             genre:4,
-            fromDiworkAddressList: `${userName}---${userId}---${tenantId}`,
+            fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
           },
         }
       });
@@ -230,10 +230,10 @@ class SearchContainer extends Component {
           item.content.forEach((item2,index2)=>{
             item2 = eval('(' + item2 + ')')
             lis.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
-                  <div className={h_icon}><img src={item2.userAvator}/></div>
+                  <div className={h_icon}><img src={item2.photo}/></div>
                   <div className={h_name}>
-                    <p><span dangerouslySetInnerHTML={createMarkup(item2.userName)}></span><span>{item2.orgName}</span></p>
-                    <p>办公电话 : {item2.userMobile}</p>
+                    <p><span dangerouslySetInnerHTML={createMarkup(item2.name)}></span>-<span>{item2.orgName}</span></p>
+                    <p>办公电话 : {item2.mobile}</p>
                   </div>
                   <div className={h_contact} onClick={_this.goemailDetail(item2)}><Icon title="发邮件" type="e-mail" /></div>
                   <div className={h_contact} onClick={_this.gochatDetail(item2)}><Icon title="发消息" type="chat" /></div>
