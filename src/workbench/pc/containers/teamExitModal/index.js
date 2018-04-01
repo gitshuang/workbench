@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import teamconfigActions from 'store/root/teamconfig/actions'; 
+import homeActions from 'store/root/home/actions';
+import rootActions from 'store/root/actions';
 const { exitTeam, closeExitModal } = teamconfigActions; 
 import PopDialog from 'pub-comp/pop';
 import {content,select_enter_close} from './index.css';
 import SelectEnter from './selectEnter'
+const {requestStart, requestSuccess, requestError} = rootActions;
+const { getSearchEnterOrTeam } = homeActions;
 
 @withRouter
 @connect(
@@ -14,9 +18,9 @@ import SelectEnter from './selectEnter'
     'exitModal',
     'exitTeamMsg',
     {
-      key: 'userInfo',
+      key: 'searchEnterOrTeamList',
       value: (teamconfig,ownProps,root) => {
-        return root.home.userInfo
+        return root.home.searchEnterOrTeamList
       }
     },
     {
@@ -24,8 +28,11 @@ import SelectEnter from './selectEnter'
     },
   ),
   {
+    getSearchEnterOrTeam,
     exitTeam,
-    closeExitModal
+    closeExitModal,
+    requestError,
+    requestSuccess
   }
 )
 class TeamRemoveModal extends Component {
@@ -37,7 +44,8 @@ class TeamRemoveModal extends Component {
       msg:"",
       close:true,
       disable:false,
-      next:false
+      next:false,
+      allowTenants:[],
     }
   }
 
@@ -52,13 +60,13 @@ class TeamRemoveModal extends Component {
       })
     }
   }
-
+ 
   // 删除确认
   configFn = (da) => {
     this.setState({
       disable:true
     })
-    const { exitTeam, isManage, userId ,userInfo,data:{serverApi}} = this.props;
+    const { exitTeam, isManage, userId ,data:{serverApi},getSearchEnterOrTeam} = this.props;
     exitTeam(serverApi).then(({error, payload}) => {
       this.setState({
         disable:false
@@ -70,20 +78,25 @@ class TeamRemoveModal extends Component {
         });
         return false;
       }
-      if(userInfo.allowTenants.length == 1){//进入该企业或团队
-        if(!userInfo.allowTenants)return;
-        this.changeTenant(userInfo.allowTenants[0].tenantId); 
-      }else if(userInfo.allowTenants.length == 0){
-        const {
-          history, 
-        } = this.props;
-        history.push('/establishusercenter');
-      }else if(userInfo.allowTenants.length > 1){
-        this.setState({
-          isManage: 2
-        })
-      }
-      // this.cancelFn(); 
+      getSearchEnterOrTeam().then(({error, payload}) => {
+          if (error) {
+            requestError(payload);
+          }
+          if(payload.length == 1){//进入该企业或团队
+            if(!payload)return;
+            this.changeTenant(payload[0].tenantId); 
+          }else if(payload.length == 0){
+            const {
+              history, 
+            } = this.props;
+            history.push('/establishusercenter');
+          }else if(payload.length > 1){
+            this.setState({
+              isManage: 2
+            })
+          }
+          requestSuccess();
+      });
     });
   }
 
@@ -149,12 +162,12 @@ class TeamRemoveModal extends Component {
       _pop_title= "确认"+name+"?";
       _btn = null;
     }else if(isManage == 2){//退出后选中企业/团队
-      _pop_title= "请重新选择"+type;
+      _pop_title= "您已"+name;
       _cont = <SelectEnter />
       _btn = null;
       _select_enter = select_enter_close;
     }
-
+    
     return (
       <PopDialog
           className={`team_exit_modal ${_select_enter} `}

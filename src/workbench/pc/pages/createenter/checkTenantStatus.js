@@ -16,10 +16,10 @@ function loading () {
 }
 //let fuuu = 0;
 export function check (tenantId,loadingFunc,successFunc) {
-    //++fuuu;
+  //  ++fuuu;
     var xhr = new XMLHttpRequest()
     xhr.onload = loop
-    xhr.open('get', '/manager/teamEnter/check?tenantId='+tenantId+'&ts='+new Date().getTime())
+    xhr.open('get', '/manager/teamEnter/check?tenantId='+tenantId+'&switch=true&ts='+new Date().getTime())
     xhr.send()
     function loop () {
         if (this.status == 200) {
@@ -35,7 +35,7 @@ export function check (tenantId,loadingFunc,successFunc) {
                 successFunc();
             } else {
                 setTimeout(function () {
-                  //  if(fuuu ==70) {successFunc();return false;}
+                   // if(fuuu == 45) {successFunc();return false;}
                    loadingFunc(tenantId);
                    check(tenantId,loadingFunc,successFunc) 
                 }, 300)

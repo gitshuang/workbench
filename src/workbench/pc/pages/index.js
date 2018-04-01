@@ -25,12 +25,31 @@ const {
   requestError,
   getServiceList,
   getMessage,
+  getPoll,
 } = rootActions;
 const { getUserInfo } = homeActions;
 
+function get_cookie(Name) {
+  var search = Name + "="//查询检索的值
+  var returnvalue = "";//返回值
+  if (document.cookie.length > 0) {
+    let sd = document.cookie.indexOf(search);
+    if (sd!= -1) {
+       sd += search.length;
+       let end = document.cookie.indexOf(";", sd);
+       if (end == -1)
+        end = document.cookie.length;
+       returnvalue=unescape(document.cookie.substring(sd, end))
+     }
+  } 
+  return returnvalue;
+}
+
 function timer(fn, time) {
   let timerId = 0;
+  
   function loop () {
+    //const sessionId = get_cookie("Hm_lvt_yht");
     fn();
     timerId = setTimeout(loop, time);
   }
@@ -54,7 +73,8 @@ function timer(fn, time) {
     requestError,
     getServiceList,
     getMessage,
-    getUserInfo
+    getUserInfo,
+    getPoll
   }
 )
 class Root extends Component {
@@ -72,7 +92,8 @@ class Root extends Component {
       requestError,
       getServiceList,
       getMessage,
-      getUserInfo
+      getUserInfo,
+      getPoll
     } = this.props;
     const { history } = this.props;
     this.bgColor = this.gitBackgroundIcon();
@@ -105,8 +126,29 @@ class Root extends Component {
         });
       }
     });
-    // timer(getMessage, 10000);
+    
+    timer(getPoll, 10000);
+    //this.getPoll();
   }
+
+  getPoll(){
+    let that = this;
+    let timerId;
+    const { getPoll } = this.props;
+    getPoll().then(({ error, payload }) => {
+      debugger;
+      if (error) {
+      } else {
+        clearTimeout(timerId);
+        if(payload ==="123"){
+          logout();
+        }else{
+          timerId = setTimeout(that.getPoll,10000);
+        }
+      }  
+    });
+  }
+
   randomNum(minNum,maxNum){
       switch(arguments.length){
           case 1:

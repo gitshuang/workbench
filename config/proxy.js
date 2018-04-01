@@ -37,6 +37,8 @@ var api = [
   '/manager/team/info',
   '/manager/team/leave',
   '/manager/team/queryUserPage',
+
+  '/diwork-heartbeat/heartbeat/checkSession',
 ]
 
 var rapApi = [

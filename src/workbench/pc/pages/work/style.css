@@ -23,12 +23,11 @@ body{
 .active {
   color: red;
 }
-.workArea {
-  flex: 1;
-  display: flex;
+.workArea { 
   height: 100%;
-  width: 100%;
-  overflow: auto;
+  width: 100%; 
+  position: relative;
+  overflow: hidden;
 }
 .wrap :global(.icon-dingzhi.active){
   color: red;
@@ -44,24 +43,29 @@ body{
 }
 .sideBarArea {
   width: 200px;
+  position: relative;
+  float: left;
+  background: #fff;
+  overflow-y: scroll;
 }
 .marginLeft {
-  margin-left: 8px;
-  border-left: 1px solid #4e596830;
+  margin-left: 210px !important;
+  margin-top: 86px !important; 
 }
 .marginTop {
-  margin-top: 8px;
-  border-top: 1px solid #4e596830;
+  margin-top: 8px; 
 }
 .contentArea {
-  flex: 1;
+  height: 100%;
+  width: 100%;
+  border-top: 1px solid #4e596830;
+  border-left: 1px solid #4e596830;
+  box-sizing: border-box;
 }
 .hasTab {
-  flex: 1;
-  flex-direction: column;
-  display: flex;
-  border-radius: 3px 0 0 0;
-  overflow: hidden;
+  border-radius: 3px 0 0 0; 
+  margin-top: 88px;
+  padding-top: 10px;
 }
 .tabArea {
   height: 48px;
@@ -94,3 +98,10 @@ body{
   /* right: -58px; */
   margin-left: 15px;
 }
+
+.work :global(.menu_work){
+  height: 38px;
+}
+/* .work :global(.menu_work section){
+  height: 20px;
+} */

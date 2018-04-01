@@ -62,7 +62,7 @@ const defaultState = {
   currEditonlyId:"",
 
   applicationsMap:{},
-  selectWidgetItem:true,
+  // selectWidgetItem:true,
   allServicesByLabelGroup:{},
 
   dragState:true, //是否可拖拽
@@ -114,20 +114,23 @@ function findById(manageList,id) {
     }
   }
   return data;
+} 
+
+function setDefaultSelected(manageList,applicationsMap){
+  manageList.forEach((da,i)=>{
+    if(da && da.type == 3){//表示服务和应用
+      if(applicationsMap[da.serviceId]){
+        console.log("da.serviceId : ",da.serviceId+"   "+da.serviceName);
+        applicationsMap[da.serviceId].selected  = "1";
+      }
+    }else{
+      if(da.children && da.children != 0){
+        setDefaultSelected(da.children,applicationsMap);
+      }
+    }
+  })
 }
 
-function getDefaultSelectCheck(alllist,manageList) {
-  for(let i = 0;i<manageList.length;i++){
-    if(manageList[i].children && manageList[i].children.length != 0){
-      getDefaultSelectCheck(alllist,manageList[i].children);
-    }else{
-        let mapItem = alllist[manageList[i].serviceId];
-        if(mapItem && manageList[i].type == 3){//表示服务和应用
-          mapItem.selected  = "1";
-        }
-    }
-  }
-}
 const reducer = handleActions({
 
   [setManageList]: (state, { payload, error }) => {
@@ -155,52 +158,28 @@ const reducer = handleActions({
     }
   },
   [addDesk]: (state, { payload: data}) => {
-
     const { dataList, parentId} = data ;
-    let defaultCar = {
-      "widgetId":"",
-      "icon": "",
-      "serviceCode": "",
-      "type": 3,
-      "parentId": parentId,
-      "widgetName": "",
-      "jsurl": "",
-      "serviceType":"",
-      "size": 1
-    };
-
-    let newCar = [];
-    let currentSelectWidgetMap = state.currentSelectWidgetMap;
-    for(let da of dataList){
-      da.selected = "1";
-      let service = currentSelectWidgetMap[da.serviceId];
-      if(service){
-        currentSelectWidgetMap[da.serviceId].selected = da.selected;
-      }else{
-        currentSelectWidgetMap[da.serviceId] = da;
-      }
-      let newCarObn = {...defaultCar};
-      newCarObn.widgetId = da.serviceId;
-      newCarObn.widgetName = da.serviceName;
-      newCarObn.serviceCode = da.serviceCode;
-      newCarObn.icon = da.serviceIcon;
-      newCarObn.size = da.widgetTemplate.size;
-      newCarObn.serviceType = da.widgetTemplate.serviceType;
-      newCar.push(newCarObn);
-    }
+    dataList.forEach((da)=>{
+      da.parentId = parentId;
+      da.type = 3;
+      da.size = 1;
+      da.widgetId = da.serviceId;
+      da.widgetName = da.serviceName;
+      da.serviceCode = da.serviceCode;
+      da.icon = da.serviceIcon;
+      da.size = da.widgetTemplate.size;
+      da.serviceType = da.widgetTemplate.serviceType;
+    });
     state.manageList.forEach((da,i)=>{
         if(da.widgetId == parentId){
-          da.children = [...da.children,...newCar];
+          da.children = [...da.children,...dataList];
         }
-    })
+    });
     let newManageList = JSON.parse(JSON.stringify(state.manageList));
-
     return{
       ...state,
-      manageList: newManageList,
+      manageList:newManageList,
       isEdit: true,
-      currEditonlyId:"",
-      currentSelectWidgetMap//备份本次勾选了哪些磁贴
     }
   },
   [getAllServicesByLabelGroup]: (state, { payload, error }) => {
@@ -210,47 +189,23 @@ const reducer = handleActions({
       let applicationsMap ={};
       payload.applications.forEach((da,i)=>{
         applicationsMap[da.applicationId] = da;
-        let  _serviceMap = {};
         da.service.forEach((serviceDa,j)=>{
-          _serviceMap[serviceDa.serviceId] = serviceDa;
-          da.serviceMap = _serviceMap;
+          applicationsMap[serviceDa.serviceId] = serviceDa;
         })
       });
-      getDefaultSelectCheck(applicationsMap,state.manageList);//恢复选中磁铁
+      debugger;
+      setDefaultSelected(state.manageList,applicationsMap);
+      debugger;
       return {
         ...state,
         applicationsMap,
         allServicesByLabelGroup:payload,
-        // selectWidgetList: payload,
-        // currEditonlyId:""
       };
     }
   },
   [setCurrentSelectWidgetMap]: (state, { payload, error }) => {
-    payload.forEach((da,i)=>{
-      let _service = state.applicationsMap[da.serviceId];
-      if(_service){
-        _service.selected = "3";
-      }
-    })
-    // let {data,currentAppId,selected} = payload;
-    // if(currentAppId == "all"){
-    //   for(let key in state.applicationsMap){
-    //     let _da = state.applicationsMap[key];
-    //     let _server = _da.service.find((server)=>server.serviceId === data.serviceId)
-    //     _server?_server.selected = selected:"";
-    //   }
-    // }else{
-    //   let currentApp = state.applicationsMap[currentAppId];
-    //   if(currentApp){
-    //     let _server = currentApp_da.service.find((server)=>server.serviceId === data.serviceId)
-    //     _server?_server.selected = selected:"";
-    //   }
-    // }
     return {
-      ...state,
-      selectWidgetItem:false,
-      applicationsMap:state.applicationsMap
+      ...state, 
     };
   },
   [batchDelect]: (state, {payload}) => {

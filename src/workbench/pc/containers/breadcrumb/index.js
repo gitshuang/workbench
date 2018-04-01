@@ -98,7 +98,7 @@ class BreadcrumbContainer extends Component {
       const { withSidebar ,brm} = this.props;
 
       return (
-        <div className={breadcrumbClass}>
+        <div className={`${breadcrumbClass} menu_work`}>
           {
             withSidebar ? (
               <section

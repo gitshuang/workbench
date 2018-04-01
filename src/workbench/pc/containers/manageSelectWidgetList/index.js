@@ -19,15 +19,14 @@ const {requestStart, requestSuccess, requestError, } = rootActions;
 import { select_widget_list,
 widget_left,widget_right,search_icon,search_icon_con,
   searchPanel,panel,left,panel_right,button_group,form_control,icon,
-panel_left,footer_btn,title,search_tit,active,btn_active
+panel_left,footer_btn,title,search_tit,active,btn_active,btn_type,server_type
 } from './style.css'
 
 
 @connect(
   mapStateToProps(
-    'manageList',
     'applicationsMap',
-    'selectWidgetItem',
+    'manageList',
     'allServicesByLabelGroup',
     {
       namespace: 'manage',
@@ -46,22 +45,10 @@ class SelectWidgetList extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = ({
-        activeKey: undefined,
-        // start: 0,
-        value:"",
         data:{},//接口全部数据
-        labelGroups:[],//类型
-        labels:[],//菜单数据
-        // serverList:[],//服务数据
-        allAppList:[],
-
-        currentAppId:"all",//当前点击的服务、应用
-
-        // dataListBack:[],
-        // dataMap:null,    //存放转换后数据Map
-        selectedList:[],
+        applications:[],
+        value:"",
         edit:false
     })
   }
@@ -71,80 +58,83 @@ class SelectWidgetList extends Component {
   }
 
   getServices(serviceName=""){
-    const {selectWidgetItem} = this.props;
-    if(!selectWidgetItem){
-      let payload = this.props.allServicesByLabelGroup;
-      this.setThisState(payload);
-      return;
-    };
-    let self = this;
     const { requestError, requestSuccess, getAllServicesByLabelGroup } = this.props;
     getAllServicesByLabelGroup(serviceName).then(({error, payload}) => {
       if (error) {
         requestError(payload);
       }
-      this.setThisState(payload);
+      const {labelGroups} = payload;
+      labelGroups.forEach((da,i)=>{
+        i === 0?da.active = true:da.active = false;
+        const {labels} = da;
+        labels.splice(0, 0, {labelName:"全部",labelId:"all",active:true}); 
+      });
+      this.setState({
+        data:payload,
+        applications:payload.applications
+      })
       requestSuccess();
     });
   }
-
-  setThisState=(payload)=>{
-    payload.labelGroups[0].active = true;
-    const {labels,allAppList,currentAppId} = this.setDefaultList(payload.labelGroups[0]);
-      this.setState({
-        data:payload,
-
-        labelGroups:payload.labelGroups,
-        labels,
-        allAppList,
-        selectedList:[]
-        // currentAppId
+  
+  btnSearch=()=>{
+    const {data:{applications},value} = this.state;
+    let _applications = [];
+    if(value == ""){
+      _applications = applications;
+    }else{
+      this.getSearch(applications,_applications,value);
+    }
+    this.setState({
+      applications:_applications
     })
   }
 
-  // componentWillReceiveProps(nextProps){
-  // }
-
-  btnSearch=()=>{
-    const { value, data } = this.state;
-    let newArr = [];
-    if( value == "" ){
-      newArr = data.applications;
-    }else{
-
-      data.applications.forEach((item,index)=>{
-        const newItem = {
-          ...item,
-          service: [],
-        };
-        let flag = false;
-        item.service.forEach( (list,key)=>{
-          if( list.serviceName.indexOf(value) > -1 ){
-            flag = true;
-            newItem.service.push(list);
-          }
-        });
-        if (flag || item.applicationName.indexOf(value) > -1 ) {
-          newArr.push(newItem);
+  getSearch=(applications,_applications,value)=>{
+    const {applicationsMap} = this.props;
+    applications.forEach((da)=>{
+      let _name = da.serviceName?da.serviceName:da.applicationName;
+      if(_name.indexOf(value)>=0){
+        if(da.serviceType && da.serviceType == "2"){
+          _applications.push(da)
+        }else{
+          _applications.push(applicationsMap[da.applicationId]);
         }
-      });
-    }
-    this.setState({
-      allAppList: newArr
-    });
+      }
+      if(da.service && da.service.length > 0){
+        this.getSearch(da.service,_applications,value);
+      }
+    })
   }
 
   onChange=(data,sele)=>{
-    data.selected = sele;
-    let index = this.state.selectedList.findIndex(da=>da.serviceId == data.serviceId);
-    if(index == -1 && sele == "3"){
-      this.state.selectedList.push(data);
-    }else{
-      this.state.selectedList.splice(index,1);
+    const {applications} = this.state;
+    let selectObj = null;
+    if(data.widgetTemplate.serviceType == "1"){//服务
+      selectObj = applications.find((da)=>da.applicationId == data.applicationId);
+      let _service = selectObj.service.find((da)=>da.serviceId == data.serviceId);
+      _service.selected = sele;
+    }if(data.widgetTemplate.serviceType == "2"){//应用
+      selectObj = applications.find((da)=>da.applicationId == data.applicationId);
+      selectObj.selected = sele;
+    }
+
+    let _edit = false;
+    for (var da of applications) { 
+      if(da.selected == "3"){ 
+        _edit = true;break;
+      }else{
+        if(da.service.length == 0) continue; 
+        let _ser = da.service.find((_da)=>_da.selected == "3");
+        if(_ser){
+          _edit = true;
+          break;
+        }
+      }
     }
     this.setState({
-        ...this.state,
-        edit:this.state.selectedList.length==0?false:true
+      ...this.state,
+        edit:_edit
     });
   }
 
@@ -156,90 +146,74 @@ class SelectWidgetList extends Component {
   }
 
   btnSave=()=>{
-    const { requestError, requestSuccess, setCurrentSelectWidgetMap } = this.props;
-    setCurrentSelectWidgetMap(this.state.selectedList);
-
-    this.props.addDesk({dataList:this.state.selectedList,parentId:this.props.parentId});
+    console.log(this.state);
+    const {applications} = this.state;
+    const { requestError, requestSuccess, addDesk ,parentId} = this.props;
+    let selectedList = [];
+    for (var da of applications) { 
+      if(da.selected == "3"){ 
+         selectedList.push(da);
+      }
+      if(da.service.length == 0) continue;
+      da.service.forEach((_da,j)=>{
+        if(_da.selected == "3"){
+          selectedList.push(_da);
+        }
+      });
+    }
+    addDesk({dataList:selectedList,parentId});
     this.setState({
-      edit:false,
-      selectedList:[]
+      edit:false
     });
     this.props.close();
   }
 
   btnClose=()=>{
-    this.state.selectedList.forEach((da,i)=>{
-      da.selected = "2";
-    })
-    this.setState({
-      ...this.state
-    });
     this.props.close();
   }
 
-  setDefaultList=(da)=>{
-    const {applicationsMap} = this.props;
-    let allAppList = [];
-    let currentAppId = "";
-    da.labels.forEach((lab,j)=>{
-      lab.appIds.forEach((app,i)=>{
-        let appObj = applicationsMap[app];
-        if(appObj){
-          appObj.extend = false;
-          // allService = [...allService,...appObj.service];
-          allAppList.push(appObj);
-          currentAppId = app;
-        }
-      })
-    });
-    return {
-      labels:da.labels,
-      allAppList,
-      currentAppId
-    }
-  }
 
   btnTypeClick = (da)=>{
-    const {labels,allAppList,currentAppId} = this.setDefaultList(da);
-    this.state.labelGroups.forEach((da)=>{
-        da.active = false;
+    const {data:{labelGroups}} = this.state;
+    labelGroups.forEach((_da,i)=>{
+      _da.labelGroupName == da.labelGroupName?_da.active = true:_da.active = false;
     })
-    da.active = true;
     this.setState({
-      labelGroups:this.state.labelGroups,
-      labels,
-      allAppList,
-      activeKey:""
-    });
+      ...this.setState
+    })
   }
 
-  onBtnOnclick =(data)=>{
+  onBtnOnclick =(_data)=>{
     const {applicationsMap} = this.props;
-    const {allServicesByLabelGroup:{applications}} = this.props;
-    let _data = [];
-    if(data == "all"){
-      applications.forEach((da,i)=>{
-        _data.push(da);
-      });
+    const {data,data:{labelGroups}} = this.state;
+    let _applications = [];
+    let activeLabelGroups = labelGroups.find((da)=>da.active);
+    activeLabelGroups.labels.forEach((da)=>{da.active=false});
+    if(_data.labelId == "all"){
+      let allLabel = activeLabelGroups.labels.find((da)=>da.labelId == "all");
+      allLabel.active = true;
+      _applications = data.applications;
     }else{
-      data.appIds.forEach((appId,i)=>{
-        _data.push(applicationsMap[appId]);
+      let labels = activeLabelGroups.labels.find((da)=>da.labelId == _data.labelId);
+      labels.active = true;
+      labels.appIds.forEach((appId)=>{
+        _applications.push(applicationsMap[appId]);
       })
     }
     this.setState({
-      allAppList:_data,
-      activeKey:data.labelId
-    });
+      ...this.state,
+      applications:_applications
+    })
   }
 
   btnUp=(data)=>{
-    this.state.allAppList.forEach((da,i)=>{
+    this.state.applications.forEach((da,i)=>{
       if(da.applicationId == data.applicationId){
         da.extend = data.extend?false:true;
       }
     });
     this.setState({
-      ...this.state.allAppList
+      ...this.state.applications
     });
   }
 
@@ -250,18 +224,18 @@ class SelectWidgetList extends Component {
   }
 
   render() {
-    let self = this;
-    const {applicationsMap} = this.props;
-    const {labelGroups,labels,activeKey,allAppList} = this.state;
-
+    const {data:{labelGroups=[]},applications} = this.state;
     let btns = [];
-    btns.push(<Button key="10012" shape='border' className={ activeKey ? '' : 'active' } onClick={()=>{this.onBtnOnclick("all")}}>全部</Button>);
-    labels.map(function(da,i){
-        btns.push(<Button key={`button_li_${da.labelId}-${i}`} shape='border' className={ activeKey===da.labelId ? 'active' : '' } onClick={()=>{self.onBtnOnclick(da)}}>{da.labelName}</Button>);
-    });
-
+     labelGroups.forEach(({active,labels},i)=>{
+      if(active){
+        labels.forEach((da,j)=>{
+          btns.push(<Button key={`button_li_${da.labelId}-${i}-${j}`} shape='border' 
+          className={ da.active? 'active' : '' } onClick={()=>{this.onBtnOnclick(da)}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{da.labelName}</Button>);
+        })
+      }
+    })
     let list = [];
-    allAppList.forEach((item, i) => {
+    applications.forEach((item, i) => {
       const {service,service:{serviceId: id, serviceName: name},widgetTemplate:{serviceType}} = item;
       let _b = item.extend;
       if(serviceType=="2"){
@@ -279,12 +253,6 @@ class SelectWidgetList extends Component {
         list.push(<ServiceItem  key={`widget-${guid()}`} onChange={this.onChange} data={da} /> );
       });
     })
-
-    let btnGroup = [];
-    labelGroups.forEach((da,i)=>{
-      btnGroup.push(<Button key={`type-${i}`} className={da.active?btn_active:null} shape='border' onClick={()=>{this.btnTypeClick(da)}}>{da.labelGroupName}</Button>);
-    })
-
     return (<div className={select_widget_list}>
        {/* <div className={widget_left}>
           <div className={title}>添加服务</div>
@@ -300,12 +268,18 @@ class SelectWidgetList extends Component {
            </div>
            <div className={panel} >
               <div className={panel_left}>
-                <ButtonGroup className="btn_type">
-                  {btnGroup}
-                </ButtonGroup>
-                <ButtonGroup vertical>
-                  {btns}
-                </ButtonGroup>
+                <div className={btn_type}>
+                  <ButtonGroup > 
+                    { 
+                      labelGroups.map((da,i)=><Button key={`type-${i}`} className={da.active?btn_active:null} shape='border' onClick={()=>{this.btnTypeClick(da)}}>{da.labelGroupName}</Button>)
+                    }
+                  </ButtonGroup>
+                </div>
+                <div className={server_type}>
+                  <ButtonGroup vertical>
+                    {btns}
+                  </ButtonGroup>
+                </div>
               </div>
               <div className={panel_right}>
                 <div>{list}</div>

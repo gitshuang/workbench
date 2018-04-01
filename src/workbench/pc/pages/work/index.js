@@ -19,6 +19,7 @@ import Pin from 'containers/pin';
 
 /*  style样式库组件  */
 import styles from './style.css';
+import { relative } from 'upath';
 
 /*  定义style  css-loader  */
 const {
@@ -91,6 +92,8 @@ export default class Work extends Component {
     super(props);
     this.state = {
       loaded: false,
+      height:0,
+      deviationHeight:143
     };
     this.goBack = this.goBack.bind(this);
   }
@@ -144,6 +147,13 @@ export default class Work extends Component {
     this.getProductInfo(code, type, subcode);
   }
 
+  componentDidMount() {
+    let _height = document.documentElement.clientHeight || document.body.clientHeight;
+    this.setState({
+      _height:_height
+    });
+  }
+  
   componentWillReceiveProps(nextProps) {
     const {
       match: {
@@ -215,42 +225,46 @@ export default class Work extends Component {
   }
 
   makeLayout() {
-    const { loaded } = this.state;
+    const { loaded ,_height,deviationHeight} = this.state;
     const { expandedSidebar, type } = this.props;
+    let _sideDeviationHeight = 90;
+    
     if (loaded) {
       switch (type) {
         case 1:
           return (
-            <div className={`${workArea} ${marginTop}`}>
+            <div className={`${marginTop}`}  style={{height:(_height-20)+"px",marginTop:94}}>
               <ContentContainer />
             </div>
           );
         case 2:
-          return (
-            <div className={workArea}>
+        return (
+          <div style={{position:relative}}>
               {
                 expandedSidebar ? (
-                  <div className={sideBarArea}>
+                  <div className={sideBarArea} style={{height:(_height-_sideDeviationHeight)+"px"}}>
                     <SideBarContainer />
                   </div>
                 ) : null
               }
-              <div className={`${contentArea} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
-                <ContentContainer />
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-97)+"px"}}>
+                <div className={contentArea}>
+                  <ContentContainer />
+                </div> 
               </div>
             </div>
           );
         case 3:
           return (
-            <div className={workArea}>
+            <div style={{position:relative}}>
               {
                 expandedSidebar ? (
-                  <div className={sideBarArea}>
+                  <div className={sideBarArea} style={{height:(_height-_sideDeviationHeight)+"px"}}>
                     <SideBarContainer />
                   </div>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-133)+"px"}}>
                 <div className={contentArea}>
                   <ContentContainer hasTab={true}/>
                 </div>
@@ -323,7 +337,7 @@ export default class Work extends Component {
             widthBrm ? <BreadcrumbContainer withSidebar={ type !== 1 }/> : null
           }
         </div>
-        <div className={`um-content ${workArea}`}>
+        <div className={`${workArea}`}>
           { this.makeLayout() }
         </div>
         {

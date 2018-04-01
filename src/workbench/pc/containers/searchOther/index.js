@@ -64,9 +64,7 @@ class searchOther extends Component {
       activePage:1,
       pagesize:10,
       isShowPagination:true,
-      dataNumSelect:[{id:0,name:'5条/页'},{id:1,name:'10条/页'},{id:2,name:'15条/页'},{id:3,name:'20条/页'}],
-      dataNumSelectActive:1,//默认展示10条数据一页
-
+      dataPerPageNum:10,//10条/页
     }
   }
 
@@ -121,8 +119,7 @@ class searchOther extends Component {
     this.setState({
       activePage: eventKey
     });
-    let reg = new RegExp("条\/页","g");
-    let dataSize = this.state.dataNumSelect[this.state.dataNumSelectActive].name.replace(reg,"")
+    let dataSize = this.state.dataPerPageNum;
      this.getSearchTpyeList(keywords,type,--eventKey,dataSize)
   }
 
@@ -132,7 +129,7 @@ class searchOther extends Component {
     const reg = new RegExp("条\/页","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
     this.setState({
-      dataNumSelectActive:id
+      dataPerPageNum:dataPerPageNum
     },function () {
       this.getSearchTpyeList(keywords,type,activePage-1, dataPerPageNum)
     })
@@ -174,13 +171,18 @@ class searchOther extends Component {
     }
     dataList.content.forEach((item,index)=>{
       item = eval('(' + item + ')')
-      lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
-              <div className={h_icon}><img src={yonyouSpace1}/></div>
-              <div className={h_name}>
-                <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item.serviceName)}></span></p>
-              </div>
-              <div className={search_ts}>{this.Datetimechange(item.ts)}</div>
-            </li>);
+      lis.push(
+        <li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
+          <div className={h_icon}>
+            <img src={item.serviceIcon}/>
+          </div>
+          <div className={h_name}>
+            <p className={search_help}>
+              <span dangerouslySetInnerHTML={createMarkup(item.serviceName)}></span>
+            </p>
+          </div>
+          <div className={search_ts}>{this.Datetimechange(item.createTime)}</div>
+        </li>);
     })
     return (
       <div className={bg+" um-content um-vbox"}>
@@ -194,8 +196,6 @@ class searchOther extends Component {
                 items={this.state.pagesize}
                 activePage={this.state.activePage}
                 onDataNumSelect={this.paginationNumSelect}
-                // dataNumSelect={this.state.dataNumSelect}
-                // dataNumSelectActive={1}
                 onSelect={this.handleSelect.bind(this)} />
             </div>
           </div>

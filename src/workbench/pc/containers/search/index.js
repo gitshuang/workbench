@@ -8,6 +8,8 @@ import Icon from 'pub-comp/icon';
 import { connect } from 'react-redux';
 import searchActions from 'store/root/search/actions';
 import SearchResult from 'containers/searchResult'
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { trigger } from 'public/componentTools';
 
 import {
   search,
@@ -78,6 +80,7 @@ class SearchContainer extends Component {
     let value = this.state.text;
     this.props.history.push(`/search/searchvalue/${value}`);
   }
+
   getSearchList(keyworks){
     const {
       requestStart,
@@ -86,11 +89,12 @@ class SearchContainer extends Component {
       getSearchSuggest,
     } = this.props;
     // if(this.state.allApplicationList.length == 0){
-      requestStart();
+      //requestStart();
       getSearchSuggest(keyworks).then(({error, payload}) => {
         if (error) {
           requestError(payload);
         }
+        requestSuccess();
         if(payload.length<1){
           this.setState({
             nosearchdata:true
@@ -99,7 +103,6 @@ class SearchContainer extends Component {
         this.setState({
           SearchSuggestList:payload
         })
-        requestSuccess();
       });
     // }
   }
@@ -183,16 +186,27 @@ class SearchContainer extends Component {
       this.props.history.push('/'+_type+'/'+code);
     }
   }
-  goemailDetail(item){
+  goemailDetail({ id, userId, name, tenantId }){
     return (e) => {
       e.stopPropagation();
-      console.log(item)
+      dispatchMessageTypeHandler({
+        type: 'openService',
+        detail: {
+          serviceCode: 'XTWEIYOU0000000000',
+          data: {
+            genre:4,
+            fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
+          },
+        }
+      });
     }
   }
-  gochatDetail(item) {
+  gochatDetail({ userId }) {
     return (e) => {
       e.stopPropagation();
-      console.log(item)
+      trigger('IM', 'switchChatTo', {
+        yht_id: userId,
+      });
     }
   }
 
@@ -216,10 +230,10 @@ class SearchContainer extends Component {
           item.content.forEach((item2,index2)=>{
             item2 = eval('(' + item2 + ')')
             lis.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
-                  <div className={h_icon}><img src={item2.userAvator}/></div>
+                  <div className={h_icon}><img src={item2.photo}/></div>
                   <div className={h_name}>
-                    <p><span dangerouslySetInnerHTML={createMarkup(item2.userName)}></span><span>{item2.orgName}</span></p>
-                    <p>办公电话 : {item2.userMobile}</p>
+                    <p><span dangerouslySetInnerHTML={createMarkup(item2.name)}></span>-<span>{item2.orgName}</span></p>
+                    <p>办公电话 : {item2.mobile}</p>
                   </div>
                   <div className={h_contact} onClick={_this.goemailDetail(item2)}><Icon title="发邮件" type="e-mail" /></div>
                   <div className={h_contact} onClick={_this.gochatDetail(item2)}><Icon title="发消息" type="chat" /></div>

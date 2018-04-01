@@ -108,13 +108,17 @@
 }
 .footer{
   height: 35px;
-  width: 100%;
+  width: 176px;
   padding:7px 8px;
   position: absolute;
   bottom: 0px;
   background:rgba(242,242,242,1);
   color: #878B94;
 }
+:global(.ie9) .footer{
+  width: 160px;
+}
+
 .footer>div{
   float: left;
   cursor:pointer;
@@ -236,6 +240,9 @@
 
 .pop_dialog_widge_list :global(.u-modal-dialog){
   padding-left: 0px !important;
+}
+.pop_dialog_widge_list :global(.close){
+  right: 40px;
 }
 /* 
 .pop_dialog_widge_list :global(.u-modal .u-modal-header){

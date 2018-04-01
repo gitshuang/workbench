@@ -74,7 +74,7 @@ function defaultPasteSplit (data) {
 
 const defaultInputProps = {
   className: 'react-tagsinput-input',
-  placeholder: 'Add a mail'
+  placeholder: '输入邮箱'
 }
 
 class TagsInput extends Component {

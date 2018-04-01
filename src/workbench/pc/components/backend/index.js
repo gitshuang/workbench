@@ -5,8 +5,8 @@ import HTML5BackendGroup from 'react-dnd-html5-backend';
 
 const createMouseBackend = (manager) => new MouseBackend(manager)
 
-const judgeIfSupH5 =  ()=>{
-    if (window.applicationCache && window.hasOwnProperty('ondrag')) {
+const judgeIfSupH5 = () => {
+    if (window.hasOwnProperty('applicationCache') && window.hasOwnProperty('ondrag')) {
       return true;
     } else {
       return false;

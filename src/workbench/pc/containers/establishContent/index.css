@@ -29,7 +29,7 @@
 }
 .box{
   width: 540px;
-  /* height: 580px; */
+  height: 650px;
   border-radius: 3px ; 
   padding-bottom: 40px;
   float: left;
@@ -60,7 +60,7 @@
   padding-top: 40px;
   /* padding-left: 30px; */
   margin: 0 20px;
-  height: 260px;
+  /* height: 260px; */
   margin-bottom: 20px;
 }
 .content p{
@@ -97,7 +97,7 @@
   background: none;
 }
 .enter_context_div{
-  padding-top: 16px;
+  /* padding-top: 16px; */
 }
 .wrap :global(.clearfix){
   margin-left: 20px;

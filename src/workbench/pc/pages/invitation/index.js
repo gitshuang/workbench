@@ -200,6 +200,7 @@ class Invitation extends Component {
         <div className={`${wrap} um-content`}>
           <div className={content}>
             <Tabs
+              destroyInactiveTabPane
               defaultActiveKey="1"
               onChange={this.callback}
               className="demo-tabs"
@@ -219,11 +220,11 @@ class Invitation extends Component {
               </TabPane>
               <TabPane tab='邮件邀请' key="2" className={tabPane2}>
 
-                <p className={first_p}>给你的小伙伴捎句话吧:</p>
+                <p className={first_p}>给你的小伙伴捎句话吧</p>
                 <FormControl placeholder="友空间-赋能个人、激活组织" value={message} 
                 onChange={(e)=>{this.setOptherData({name:"message",value:e})} }/>
 
-                <p>署名:</p>
+                <p>署名</p>
                 <FormControl value={creator} onChange={(e)=>{this.setOptherData({name:"creator",value:e})} }/>
 
                 <p>输入邮箱地址并用 “;” 隔开</p>
@@ -263,7 +264,7 @@ class Invitation extends Component {
                   <div className={qrCode} id="qrCode">
                     <img src='/invite/getQRCode'/>
                   </div>
-                  <ButtonBrand className={printQrBtn} >二维码</ButtonBrand>
+                  {/* <ButtonBrand className={printQrBtn} >二维码</ButtonBrand> */}
                 </div>
               </TabPane>
             </Tabs>

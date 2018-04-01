@@ -3,7 +3,7 @@
     border: 1px solid #E6E7E9;
     border-radius: 100px;
     padding-left: 13px;
-    margin-left: -5px;
+    margin-left: -5px; 
 }
 
 .label_cont{
@@ -98,7 +98,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     width: 100%;
     cursor: pointer;
     line-height: 30px;
-    display: inline;
+    /* display: inline; */
     white-space: nowrap;
 }
 .item_li:hover{

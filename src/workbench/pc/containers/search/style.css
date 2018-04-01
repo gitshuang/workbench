@@ -155,10 +155,15 @@
   line-height:16px;float: left;
   }
 .SearchWin .searchWindom .h_name p span:first-child{ 
-    margin-right: 10px;
-    width: 75px;
-    /* height: 18px; */
+     margin-right: 3px;
+   /*  width: 75px;
+   height: 18px; */
  }
+ .SearchWin .searchWindom .h_name p span:last-child{ 
+  color: #666666;
+/*  width: 75px;
+height: 18px; */
+}
 .SearchWin .searchWindom .h_name p span { 
   float: left;
   white-space: nowrap;

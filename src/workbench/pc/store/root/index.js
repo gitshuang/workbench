@@ -1,9 +1,10 @@
 import React from 'react';
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
-import { mergeReducers } from '@u';
+import { mergeReducers, logout } from '@u';
 import Loading from 'bee/loading';
 import Notification from 'bee/notification';
+import { openMess } from 'pub-comp/notification';
 
 import Notice from 'components/notice';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
@@ -16,7 +17,7 @@ import manage from './manage';
 import team from './team';
 import actions from './actions';
 import teamconfig from './teamconfig';
-
+import {destoryLoadingFunc,createLoadingFunc} from 'pub-comp/loading';
 const notification = Notification.newInstance({
   position: 'bottomRight',
 });
@@ -57,6 +58,7 @@ const {
   showIm,
   hideIm,
   uploadApplication,
+  getPoll
 } = actions;
 
 const defaultState = {
@@ -68,6 +70,7 @@ const defaultState = {
   latestAccessList:[],
   promotionServiceList:[],
   imShowed: false,
+  isLogout: false
 };
 
 const createReducer = (key) => (state, { payload, error }) => {
@@ -80,24 +83,27 @@ const createReducer = (key) => (state, { payload, error }) => {
     };
   }
 };
-
 const reducer = handleActions({
   [getLatestAccessList]: createReducer('latestAccessList'),
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
+    createLoadingFunc({text: '正在加载中...'});
     return state;
   },
   [requestSuccess](state) {
     // Loading.destroy();
+    destoryLoadingFunc();
     return state;
   },
   [requestError](state, { payload: msg }) {
     // Loading.destroy();
-    notification.notice({
+    destoryLoadingFunc();
+    openMess({
+      title: '错误',
       content: msg,
+      type: 'error',
       duration: 4.5,
-      closable: false,
     });
     return state;
   },
@@ -130,6 +136,22 @@ const reducer = handleActions({
       ...state,
       messageList: newMessageList,
       messageShowNum: newMessageShowNum,
+    };
+  },
+  [getPoll]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    const info = window.diworkContext();
+    const { tenantid, userid } = info;
+    // 避免localhost环境下一直刷新
+    if (tenantid == "tenantid" && userid == "userid" ) return false;
+    if( payload.tenantId !== tenantid || payload.userId !== userid ){
+      logout();
+    }
+    return {
+      ...state,
+      isLogout: payload,
     };
   },
   [popMessage]: state => {
