@@ -172,7 +172,9 @@ class ManageGroup extends Component {
     this.state = {
       groupName:  "",
       inFoucs: false,
-      showModal: false
+      showModal: false,
+      selectGroup: [],
+      selectList: [],
     }
   }
   componentWillMount() {
@@ -318,13 +320,13 @@ class ManageGroup extends Component {
   }
 
   // 选择框  选择
-  selectFn = (index) => (e) => {
+  selectFn = (e,index) => {
     let {
-      selectList,
       selectListActions,
       manageList,
-      selectGroupActions,
+      selectList,
       selectGroup,
+      selectGroupActions,
     } = this.props;
     //const checkFlag = e.target.checked;
     // 换成checkbox插件
@@ -470,7 +472,7 @@ class ManageGroup extends Component {
         // um-box-justify
         <div className={`${widgetTitle} ${widgetTitleInit} `} >
           <div className={check_group}>
-            <Checkbox checked={checkType} onChange={this.selectFn(index)}>{widgetName}</Checkbox>
+            <Checkbox checked={checkType} onChange={(e)=>{this.selectFn(e,index)}}>{widgetName}</Checkbox>
           </div>
           <div>
             <div className={iconBox}>

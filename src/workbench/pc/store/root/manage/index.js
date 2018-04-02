@@ -40,6 +40,7 @@ const {
   setEditonlyId,
   returnDefaultState,
   setDragInputState,
+  emptySelectGroup,
 } = actions;
 
 const defaultState = {
@@ -267,11 +268,10 @@ const reducer = handleActions({
     }
   },
   [selectGroupActions]: (state, {payload:selectGroup }) => {
-    let selectGroup2 = [];
-    Object.assign(selectGroup2,selectGroup)
+    debugger
     return {
       ...state,
-      selectGroup: selectGroup2,
+      selectGroup: [...selectGroup],
       currEditonlyId:""
     }
   },
@@ -771,6 +771,12 @@ const reducer = handleActions({
 
   },
   [returnDefaultState]: state => defaultState,
+  [emptySelectGroup]:(state) => {
+    return{
+      ...state,
+      selectGroup: [],
+    }
+  },
 }, defaultState);
 
 export default reducer;

@@ -127,7 +127,7 @@ class Root extends Component {
       }
     });
     
-    timer(getPoll, 10000);
+    //timer(getPoll, 10000);
     //this.getPoll();
   }
 
