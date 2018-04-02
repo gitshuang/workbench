@@ -422,17 +422,18 @@ class searchResult extends Component {
       </TabPane>)
     })
 
-    Searchotherlist.content.forEach((item,index) => {
-      if(item.content.length<1){
-        return false
-      }
-      otherlist.push(<ul className={`${recently} ${clearfix}`} key={index}>
-      <h3>{item.typeName}</h3>
-      {this.otherlistLi(item)}
+    //   其它注释掉
+    // Searchotherlist.content.forEach((item,index) => {
+    //   if(item.content.length<1){
+    //     return false
+    //   }
+    //   otherlist.push(<ul className={`${recently} ${clearfix}`} key={index}>
+    //   <h3>{item.typeName}</h3>
+    //   {this.otherlistLi(item)}
 
-      <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部 ></em>
-    </ul>)
-    })
+    //   <em key={index} onClick={()=>{this.goOtherlist(item)}}>查看全部 ></em>
+    // </ul>)
+    // })
 
     return (
       <div className={bg+" um-content um-vbox"}>
@@ -461,7 +462,7 @@ class searchResult extends Component {
                 animated={anifalse}
               >
               {Morelist}
-              {
+              {/*  注释掉其它
                 this.state.hasOther ? (
                   <TabPane tab={otherName} key="other" className={tabPane1}>
                     {otherlist}
@@ -471,7 +472,7 @@ class searchResult extends Component {
                     </div>
                   </TabPane>
                 ) : null
-              }
+              */ }
               </Tabs>
               <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
                 <EnhancedPagination

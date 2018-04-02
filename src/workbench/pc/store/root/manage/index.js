@@ -40,6 +40,7 @@ const {
   setEditonlyId,
   returnDefaultState,
   setDragInputState,
+  emptySelectGroup,
 } = actions;
 
 const defaultState = {
@@ -193,9 +194,7 @@ const reducer = handleActions({
           applicationsMap[serviceDa.serviceId] = serviceDa;
         })
       });
-      debugger;
       setDefaultSelected(state.manageList,applicationsMap);
-      debugger;
       return {
         ...state,
         applicationsMap,
@@ -267,11 +266,9 @@ const reducer = handleActions({
     }
   },
   [selectGroupActions]: (state, {payload:selectGroup }) => {
-    let selectGroup2 = [];
-    Object.assign(selectGroup2,selectGroup)
     return {
       ...state,
-      selectGroup: selectGroup2,
+      selectGroup: [...selectGroup],
       currEditonlyId:""
     }
   },
@@ -768,9 +765,36 @@ const reducer = handleActions({
       ...state,
       currEditonlyId,
     }
-
   },
-  [returnDefaultState]: state => defaultState,
+  [returnDefaultState]: state => ({
+        curEditFolderId: '',
+        manageList: [],
+        isEdit: false,
+        isFocus:false,
+        curDisplayFolder: {
+          widgetName: '',
+          children: [],
+        },
+        folderModalDisplay: false,
+        batchMoveModalDisplay: false,
+        selectList:[],  // 勾选的服务列表
+        // selectWidgetList:[],
+        selectGroup: [],
+        currGroupIndex:0,
+        currentSelectWidgetMap:{},
+        title:'',
+        currEditonlyId:"",
+      
+        applicationsMap:{},
+        // selectWidgetItem:true,
+        allServicesByLabelGroup:{},
+      
+        dragState:true, //是否可拖拽
+  }),
+  [emptySelectGroup]: (state) => ({
+      ...state,
+      selectGroup: [],
+  }),
 }, defaultState);
 
 export default reducer;

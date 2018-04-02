@@ -49,7 +49,8 @@ const {
   moveService,
   setEditState,
   addGroup,
-  returnDefaultState
+  returnDefaultState,
+  emptySelectGroup
 } = manageActions;
 
 @withRouter
@@ -74,7 +75,8 @@ const {
     moveService,
     setEditState,
     addGroup,
-    returnDefaultState
+    returnDefaultState,
+    emptySelectGroup
   }
 )
 
@@ -157,10 +159,10 @@ class Home extends Component {
       if (error) {
         requestError(payload);
       } else {
-        requestSuccess();
         this.goBack();
-        this.popCloseCancel();
       }
+      requestSuccess();
+      this.popCloseCancel();
     });
   }
   // 取消
@@ -187,6 +189,8 @@ class Home extends Component {
   // 返回操作
   goBack = () => {
     this.configBack = true;
+    const { emptySelectGroup } = this.props;
+    emptySelectGroup();
     this.props.history.replace(this.goToLocation);
   }
   //批量删除
@@ -237,7 +241,7 @@ class Home extends Component {
     this.checkBtn = btn?btn:null;
   }
 
-  renderContent() {
+  renderContent = () => {
     const { manageList,addGroup } = this.props;
     //console.log(manageList)
     let list = [];
@@ -250,21 +254,23 @@ class Home extends Component {
           </ButtonDefaultAlpha>
         </div>
       );
+    }else{
+      manageList.map((item, index) =>{
+        list.push(
+          <ManageGroup
+            data={item}
+            index={index}
+            key={item.widgetId}
+            id={item.widgetId}
+            type={item.type}
+            moveGroupDrag={this.moveGroupDrag}
+            moveItemDrag={this.moveItemDrag}
+            checkFun={this.checkFun}
+            />
+        )
+      });
     }
-    manageList.map((item, index) =>{
-      list.push(
-        <ManageGroup
-          data={item}
-          index={index}
-          key={item.widgetId}
-          id={item.widgetId}
-          type={item.type}
-          moveGroupDrag={this.moveGroupDrag}
-          moveItemDrag={this.moveItemDrag}
-          checkFun={this.checkFun}
-          />
-      )
-    });
+    
     return list;
   }
   render() {

@@ -98,6 +98,8 @@ class Root extends Component {
     const { history } = this.props;
     this.bgColor = this.gitBackgroundIcon();
     requestStart();
+
+    // 获取用户信息， 新用户跳转到加入组织页面， 
     getUserInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
@@ -109,6 +111,7 @@ class Root extends Component {
             inited: true
           });
         } else {
+
           getServiceList().then(({ error, payload }) => {
             if (error) {
               requestError(payload);
@@ -120,32 +123,13 @@ class Root extends Component {
             el: 'IM',
           });
           regMessageTypeHandler(this);
+          // 心跳
+          timer(getPoll, 10000);
         }
         this.setState({
           loaded: true
         });
       }
-    });
-    
-    timer(getPoll, 10000);
-    //this.getPoll();
-  }
-
-  getPoll(){
-    let that = this;
-    let timerId;
-    const { getPoll } = this.props;
-    getPoll().then(({ error, payload }) => {
-      debugger;
-      if (error) {
-      } else {
-        clearTimeout(timerId);
-        if(payload ==="123"){
-          logout();
-        }else{
-          timerId = setTimeout(that.getPoll,10000);
-        }
-      }  
     });
   }
 

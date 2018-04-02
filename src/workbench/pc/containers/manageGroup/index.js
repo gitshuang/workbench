@@ -172,7 +172,9 @@ class ManageGroup extends Component {
     this.state = {
       groupName:  "",
       inFoucs: false,
-      showModal: false
+      showModal: false,
+      selectGroup: [],
+      selectList: [],
     }
   }
   componentWillMount() {
@@ -318,13 +320,13 @@ class ManageGroup extends Component {
   }
 
   // 选择框  选择
-  selectFn = (index) => (e) => {
+  selectFn = (e,index) => {
     let {
-      selectList,
       selectListActions,
       manageList,
-      selectGroupActions,
+      selectList,
       selectGroup,
+      selectGroupActions,
     } = this.props;
     //const checkFlag = e.target.checked;
     // 换成checkbox插件
@@ -334,19 +336,21 @@ class ManageGroup extends Component {
     });
     if(checkFlag){
       selectGroup.push(index);
+      selectGroupActions(selectGroup);
       if(!!window.ActiveXObject || "ActiveXObject" in window){ //ie?
         selectList = Array.from(selectList.concat(aa).distinct());
       }else{
         selectList = Array.from(new Set(selectList.concat(aa)));
       }
+
     }else{
       selectList = selectList.filter(v => !aa.includes(v));
-      selectGroup =  selectGroup.filter((item,i) => {
+      const selectGroup2 =  selectGroup.filter((item,i) => {
         return index !== item;
       });
+      selectGroupActions(selectGroup2);
     }
     selectListActions(selectList);
-    selectGroupActions(selectGroup);
   }
   popOpen = () => {
     this.setState({
@@ -444,7 +448,7 @@ class ManageGroup extends Component {
       groupName,
       showModal,
     } = this.state;
-    const checkType = selectGroup.indexOf(index) >= 0 ? true : false
+    const checkType = selectGroup.indexOf(index) > -1 ? true : false
     const opacity = isDragging ? 0 : 1;
     let groupTitle;
     if( currEditonlyId == widgetId) {
@@ -470,7 +474,7 @@ class ManageGroup extends Component {
         // um-box-justify
         <div className={`${widgetTitle} ${widgetTitleInit} `} >
           <div className={check_group}>
-            <Checkbox checked={checkType} onChange={this.selectFn(index)}>{widgetName}</Checkbox>
+            <Checkbox checked={checkType} onChange={(e)=>{this.selectFn(e,index)}}>{widgetName}</Checkbox>
           </div>
           <div>
             <div className={iconBox}>
