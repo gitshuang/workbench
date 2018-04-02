@@ -71,6 +71,7 @@ import {
   table_permise,
   user_name,
   nopic,
+  team_tabs
 } from './index.css';
 
 @withRouter
@@ -502,7 +503,9 @@ class CreateTeamContent extends Component {
                     </div>
                     <div>
                       <h6>{item.applicationName}</h6>
-                      <p>到期时间：{this.handelTime(item.expired)}</p>
+                      {
+                        item.expired? <p>到期时间：{this.handelTime(item.expired)}</p>:""
+                      }
                     </div>
                     <div>
                       <p>{this.esitTime(item.expired)}</p>
@@ -635,9 +638,9 @@ class CreateTeamContent extends Component {
 
     return (
       <div className={box3}>
-        <div className = {memberTit+" um-box" }>
-          <div className={search + " um-box um-box-vc"}>
-            <div style={{position:"relative"}}>
+        <div className = {memberTit }>
+          <div className={search}>
+            <div style={{position:"relative",float:"left"}}>
               <input
                 className="form-control"
                 type="text"
@@ -652,14 +655,13 @@ class CreateTeamContent extends Component {
             </div>
 
             <div
-              className="um-bf1"
               style={{textAlign:"center",cursor:"pointer" }}
               onClick={this.searchFn}
             >
               <span className={search_label}>搜索</span>
             </div>
           </div>
-          <div className={memberBtns + " um-bf1 um-box-vc"}>
+          <div className={memberBtns}>
             <Checkbox colors="info" onChange={this.changeCheck}>只显示管理员</Checkbox>
             {
               _invitePermission?<Button colors="danger" onClick={this.inviteMember}>邀请成员</Button>:null
@@ -675,8 +677,9 @@ class CreateTeamContent extends Component {
           <ul>
             {
               newUserList.map((item,index)=>{
-                return (
-                  <li className="um-box um-box-vc" key={index}>
+                // um-box um-box-vc
+                return ( 
+                  <li className={`${team_tabs}`} key={index}>
                     <div>
                       {
                         item.userAvator?<img style={{display:"block",height:"100%"}} src = {item.userAvator} />:<Icon type="staff" />
