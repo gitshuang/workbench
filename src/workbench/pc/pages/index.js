@@ -109,6 +109,7 @@ class Root extends Component {
             inited: true
           });
         } else {
+
           getServiceList().then(({ error, payload }) => {
             if (error) {
               requestError(payload);
@@ -120,31 +121,13 @@ class Root extends Component {
             el: 'IM',
           });
           regMessageTypeHandler(this);
+
+          timer(getPoll, 10000);
         }
         this.setState({
           loaded: true
         });
       }
-    });
-    
-    //timer(getPoll, 10000);
-    //this.getPoll();
-  }
-
-  getPoll(){
-    let that = this;
-    let timerId;
-    const { getPoll } = this.props;
-    getPoll().then(({ error, payload }) => {
-      if (error) {
-      } else {
-        clearTimeout(timerId);
-        if(payload ==="123"){
-          logout();
-        }else{
-          timerId = setTimeout(that.getPoll,10000);
-        }
-      }  
     });
   }
 
