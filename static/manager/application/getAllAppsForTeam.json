@@ -22,6 +22,27 @@
             "webStatus": true
         },
         {
+          "applicationCode": "11112222",
+          "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e930.svg",
+          "applicationId": "11112222",
+          "applicationName": "通讯录",
+          "applicationType": 0,
+          "clientStatus": false,
+          "enable": false,
+          "eternal": false,
+          "expired": 1522081706656,
+          "hasWidget": false,
+          "modifiedTime": 1517986020000,
+          "orders": 59,
+          "phoneStatus": true,
+          "selected": false,
+          "shortCut": true,
+          "simpleStatus": true,
+          "tenantId": "gtzceot7",
+          "ts": 1513666096000,
+          "webStatus": true
+        },
+        {
             "applicationCode": "11114444",
             "applicationIcon": "https://cdn.yonyoucloud.com/pro/workbench/e90d.svg",
             "applicationId": "11114444",
