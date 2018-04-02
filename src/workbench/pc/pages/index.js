@@ -136,7 +136,6 @@ class Root extends Component {
     let timerId;
     const { getPoll } = this.props;
     getPoll().then(({ error, payload }) => {
-      debugger;
       if (error) {
       } else {
         clearTimeout(timerId);

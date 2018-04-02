@@ -194,9 +194,7 @@ const reducer = handleActions({
           applicationsMap[serviceDa.serviceId] = serviceDa;
         })
       });
-      debugger;
       setDefaultSelected(state.manageList,applicationsMap);
-      debugger;
       return {
         ...state,
         applicationsMap,
@@ -268,7 +266,6 @@ const reducer = handleActions({
     }
   },
   [selectGroupActions]: (state, {payload:selectGroup }) => {
-    debugger
     return {
       ...state,
       selectGroup: [...selectGroup],
