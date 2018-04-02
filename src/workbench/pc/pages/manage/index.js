@@ -159,10 +159,10 @@ class Home extends Component {
       if (error) {
         requestError(payload);
       } else {
-        requestSuccess();
         this.goBack();
-        this.popCloseCancel();
       }
+      requestSuccess();
+      this.popCloseCancel();
     });
   }
   // 取消
@@ -189,7 +189,7 @@ class Home extends Component {
   // 返回操作
   goBack = () => {
     this.configBack = true;
-    const {emptySelectGroup} = this.props;
+    const { emptySelectGroup } = this.props;
     emptySelectGroup();
     this.props.history.replace(this.goToLocation);
   }

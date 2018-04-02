@@ -98,6 +98,8 @@ class Root extends Component {
     const { history } = this.props;
     this.bgColor = this.gitBackgroundIcon();
     requestStart();
+
+    // 获取用户信息， 新用户跳转到加入组织页面， 
     getUserInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
@@ -121,7 +123,7 @@ class Root extends Component {
             el: 'IM',
           });
           regMessageTypeHandler(this);
-
+          // 心跳
           timer(getPoll, 10000);
         }
         this.setState({

@@ -336,19 +336,21 @@ class ManageGroup extends Component {
     });
     if(checkFlag){
       selectGroup.push(index);
+      selectGroupActions(selectGroup);
       if(!!window.ActiveXObject || "ActiveXObject" in window){ //ie?
         selectList = Array.from(selectList.concat(aa).distinct());
       }else{
         selectList = Array.from(new Set(selectList.concat(aa)));
       }
+
     }else{
       selectList = selectList.filter(v => !aa.includes(v));
-      selectGroup =  selectGroup.filter((item,i) => {
+      const selectGroup2 =  selectGroup.filter((item,i) => {
         return index !== item;
       });
+      selectGroupActions(selectGroup2);
     }
     selectListActions(selectList);
-    selectGroupActions(selectGroup);
   }
   popOpen = () => {
     this.setState({
@@ -446,7 +448,7 @@ class ManageGroup extends Component {
       groupName,
       showModal,
     } = this.state;
-    const checkType = selectGroup.indexOf(index) >= 0 ? true : false
+    const checkType = selectGroup.indexOf(index) > -1 ? true : false
     const opacity = isDragging ? 0 : 1;
     let groupTitle;
     if( currEditonlyId == widgetId) {
