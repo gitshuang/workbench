@@ -5,6 +5,7 @@ import { mapStateToProps } from '@u';
 import EnterOption from 'containers/enterOption'
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
+import EnhancedPagination from 'pub-comp/enhancedPagination';
 
 import TeamManagerModal from 'containers/teamManagerModal';
 import TeamRemoveModal from 'containers/teamRemoveModal';
@@ -146,6 +147,10 @@ class CreateTeamContent extends Component {
       newUserList: [],        // 当前用户列表
       searchVal: "",          // 用户列表搜索关键字
       onlyAdmin: false,       // 是否只显示管理员
+      
+      activePage:1,
+      pagesize:10,
+      dataPerPageNum:10,
     }
   }
 
@@ -223,7 +228,8 @@ class CreateTeamContent extends Component {
         return false;
       }
       this.setState({
-        newUserList: payload.content
+        newUserList: payload.content,
+        pagesize:payload.totalPages
       })
       changePage(page);
       requestSuccess();
@@ -608,14 +614,34 @@ class CreateTeamContent extends Component {
     if( eventKey == activePage ){
       return false;
     }
+    this.setState({
+      activePage: eventKey
+    });
+    let dataSize = this.state.dataPerPageNum;
     // 增加此判断是为了  用户输入框输入信息  但是并没有点击查询   点击过查询的才会搜索之后的列表
     if (this.clickValue){
-      this.queryUser( this.clickValue, onlyAdmin, eventKey );
+      this.queryUser( this.clickValue, onlyAdmin, eventKey ,dataSize);
     }else{
-      this.queryUser( "", onlyAdmin, eventKey );
+      this.queryUser( "", onlyAdmin, eventKey ,dataSize);
     }
   }
 
+    //下面选择每页展示的数据条目数
+  paginationNumSelect = (id,dataNum) =>{
+    let reg = new RegExp("条\/页","g");
+    let dataPerPageNum  = dataNum.replace(reg,"");
+    const { value, activetab, activePage}=this.state;
+    this.setState({
+      dataPerPageNum:dataPerPageNum
+    },function () {
+      if(activetab=='other'){
+          this.getSearchOtherList(value,5,activePage-1,dataPerPageNum)
+      }else{
+          this.getSearchTpyeList(value,activetab,activePage-1,dataPerPageNum)
+      }
+    })
+
+  }
 
   // 设置团队成员
   teamMember = () => {
@@ -709,7 +735,7 @@ class CreateTeamContent extends Component {
           </ul>
         </div>
         <div className="um-box-center" style={{paddingBottom:"20px"}}>
-          <Pagination
+          {/* <Pagination
             first
             last
             prev
@@ -720,7 +746,12 @@ class CreateTeamContent extends Component {
             maxButtons={10}
             activePage={activePage}
             onSelect={this.handleSelect.bind(this)}
-          />
+          /> */}
+           <EnhancedPagination
+                  items={this.state.pagesize}
+                  activePage={this.state.activePage}
+                  onDataNumSelect={this.paginationNumSelect}
+                  onSelect={this.handleSelect} />
         </div>
       </div>
     )
