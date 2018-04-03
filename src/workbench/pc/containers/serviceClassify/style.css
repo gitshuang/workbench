@@ -239,6 +239,10 @@
 :global(.ie9) .appsList li{
   display: table;
 }
+:global(.ie9) .appsList li>div>img{
+  height: 36px;
+  width: 36px;
+}
 :global(.ie9) .appsList li>div{
   display: table-cell;
   vertical-align: top;

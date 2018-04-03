@@ -92,6 +92,10 @@
   -webkit-justify-content: center;
   justify-content: center;
 }
+:global(.ie9) .content :global(.u-tabs-top .u-tabs-nav-scroll){
+  padding: 0 154px;
+  box-sizing: border-box;
+}
 .content :global(.u-tabs-top){
   border: none;
 }
@@ -204,6 +208,7 @@
   color: rgba(176,178,183,1);
   font-size: 14px;
   padding: 0 5px;
+  box-sizing: border-box;
 }
 .applicationBtns{
   padding-top: 24px;
@@ -367,7 +372,10 @@
 .memberLists li > div{
   display: inline-block;
 }
-
+.memberLists li > div >img{
+  width: 32px;
+  height: 32px;
+}
 .memberLists li > div:first-child{
   width: 32px;
   height: 32px;
