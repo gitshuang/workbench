@@ -318,7 +318,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像 &nbsp;&nbsp;&nbsp; </span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  tip="图片大小<=200K​"> 
+              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  tip=""> 
               </Upload> 
             </FormItem>
             
