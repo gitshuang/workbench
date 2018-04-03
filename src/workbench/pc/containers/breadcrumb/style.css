@@ -28,6 +28,8 @@
   color:#fff;
   font-size:14px;
   position: relative;
+  padding-left: 25px;
+  box-sizing: border-box;
 }
 .breadcrumbClass section :global(.iconfont){
   margin:-2px 15px 0 0;
