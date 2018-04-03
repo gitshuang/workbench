@@ -233,10 +233,11 @@
 .applicationLists li{
   padding: 16px 5px 16px 15px;
   border-bottom: 1px solid rgba(13, 20, 36, 0.1);
-  display: table-cell;
+  height: 80px;
 }
 .applicationLists li div{
   display: inline-block;
+  float: left;
 }
 .applicationLists li div:first-child{
   width: 47px;
@@ -360,7 +361,8 @@
 .memberLists li{
   padding: 16px 5px 16px 15px;
   border-bottom: 1px solid rgba(13, 20, 36, 0.1);
-  display: table-cell;
+  display: table;
+  width: 100%;
 }
 .memberLists li > div{
   display: inline-block;
@@ -389,7 +391,7 @@
   line-height:16px;
 }
 .memberLists li > div:nth-child(3){
-  width: 240px;
+  width: 285px;
 }
 .memberLists li > div:nth-child(3) p{
   font-size:12px;
@@ -474,8 +476,8 @@
   display: inline;
 }
 :global(.ie9) .wrap :global(.um-box.um-box-center)>div{
-  display: table-cell; 
-} 
+  display: table-cell;
+}
 :global(.ie9) .wrap :global(.um-box.um-box-center)>div:last-child{
   display: inline-block;
 }

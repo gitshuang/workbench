@@ -71,7 +71,6 @@ import {
   table_permise,
   user_name,
   nopic,
-  team_tabs
 } from './index.css';
 
 @withRouter
@@ -678,8 +677,8 @@ class CreateTeamContent extends Component {
             {
               newUserList.map((item,index)=>{
                 // um-box um-box-vc
-                return ( 
-                  <li className={`${team_tabs}`} key={index}>
+                return (
+                  <li key={index}>
                     <div>
                       {
                         item.userAvator?<img style={{display:"block",height:"100%"}} src = {item.userAvator} />:<Icon type="staff" />
