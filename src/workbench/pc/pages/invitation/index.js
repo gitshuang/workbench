@@ -124,7 +124,7 @@ class Invitation extends Component {
       Message.create({content: '请输入正确的邮件地址!',duration:1.5,position: 'topLeft', color: "warning"});
       return false;
     }
-    let parent = {"email":mails,message,creator};
+    let parent = {"email":mails,message:message == ''?"友空间-赋能个人、激活组织":message,creator};
     requestStart();
     sendMessage(parent).then((data) => {
     requestSuccess();

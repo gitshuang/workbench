@@ -119,9 +119,12 @@ class Root extends Component {
               requestSuccess();
             }
           });
-          IM(new componentTool('IM'), getContext(), {
-            el: 'IM',
-          });
+          var browser=navigator.appName;
+          if(browser!="Microsoft Internet Explorer"){
+            IM(new componentTool('IM'), getContext(), {
+              el: 'IM',
+            });
+          }
           regMessageTypeHandler(this);
           // 心跳
           timer(getPoll, 10000);
