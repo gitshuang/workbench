@@ -201,8 +201,9 @@
   height:18px; 
   color:rgba(13,20,36,.47);
   line-height:16px;
-  display: flex;
   white-space: nowrap;
+  overflow: hidden;
+text-overflow:ellipsis;
 }
 .recently .h_name p span:first-child{ 
   margin-right: 10px;   
