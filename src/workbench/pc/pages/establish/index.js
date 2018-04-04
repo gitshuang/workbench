@@ -10,7 +10,7 @@ import Icon from 'pub-comp/icon';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay ,getSearchEnterOrTeam} = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions; 
-import { logo,estab_lish,hidden} from './style.css';
+import { logo,estab_lish,hidden,imgInner} from './style.css';
 
 @withRouter
 @connect(
