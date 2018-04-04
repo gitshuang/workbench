@@ -45,6 +45,7 @@
     margin-top: 2px;
     border-radius: 3px;
     display: block;
+    background: rgba(225,76,70,1);
 }
 
 .item {
