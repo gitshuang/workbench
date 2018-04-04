@@ -8,7 +8,7 @@ import homeActions from 'store/root/home/actions';
 import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
 import EstablishContent from 'containers/establishContent'
-import { page_home ,appBreadcrumb,establis_page,hidden} from './style.css';
+import { page_home ,appBreadcrumb,establis_page,hidden,imgInner} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 import Breadcrumbs from 'components/breadcrumb';
 
