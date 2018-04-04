@@ -197,13 +197,13 @@ class MoveToGroup extends Component {
           </div>):null}
         </div>
 
-        <div className={`${footer} um-box-justify`}>
+        <div className={`${footer} um-box-justify`} style={{overflow:"hidden"}}>
           {
             onAddGroup ? (<div>
-              <Button onClick={this.addGroup} disabled={inAddGroup? true: false}>添加分组</Button>
+              <Button style={{float:"left"}} onClick={this.addGroup} disabled={inAddGroup? true: false}>添加分组</Button>
             </div>) : null
           }
-          <div>
+          <div style={{float:"right"}}>
             {
               onSave ? (<Button
                 colors="danger"
