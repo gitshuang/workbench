@@ -87,8 +87,7 @@ class Establish extends Component {
             imgIcon = <img src={img} className={imgInner} />
         }else{
             imgIcon =  <Icon type="staff" />;
-        }
-
+        } 
         return (
             <div className={`um-win   ${estab_lish} ${allowTenants.length <= 0?'':hidden}`} >
                 { /*userInfo.allowTenants.length 
@@ -105,7 +104,7 @@ class Establish extends Component {
                     {/* <Header leftContent = { leftContent } /> */} 
                     <Header iconName={allowTenants.length <= 0?imgIcon:"home"} onLeftClick={ this.goHome }  />
                     <div className={logo}>
-                        <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
+                        <img src = {logoUrl} style= {{width:"100px" }} />
                     </div>
                 </div> 
                 <div className="um-content">
