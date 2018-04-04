@@ -291,6 +291,8 @@ const reducer = handleActions({
     return{
       ...state,
       manageList: [...manageList],
+      selectGroup: [],
+      selectList: [],
       isEdit: true,
       currEditonlyId: newGroup.widgetId,
     }
@@ -313,6 +315,8 @@ const reducer = handleActions({
     return{
       ...state,
       manageList: newList,
+      selectGroup: [],
+      selectList: [],
       isEdit: true,
       currEditonlyId:"",
       currentSelectWidgetMap:state.currentSelectWidgetMap
@@ -369,6 +373,8 @@ const reducer = handleActions({
     return{
       ...state,
       isEdit: true,
+      selectGroup: [],
+      selectList: [],
       manageList,
       currEditonlyId:""
     }
@@ -393,6 +399,8 @@ const reducer = handleActions({
     return{
       ...state,
       manageList: [...newList],
+      selectGroup: [],
+      selectList: [],
       isEdit: true,
       currEditonlyId:""
     }
@@ -403,6 +411,8 @@ const reducer = handleActions({
     return{
       ...state,
       manageList: [...newList],
+      selectGroup: [],
+      selectList: [],
       isEdit: true,
       currEditonlyId:""
     }
