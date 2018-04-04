@@ -410,7 +410,7 @@ class searchResult extends Component {
     SearchMoreList.forEach((item,index) => {
       Morelist.push(
       <TabPane
-          tab={item.typeName+"("+item.totalElements+")"}
+          tab={item.typeName}
           key={item.type}
           className={tabPane1}
       >
