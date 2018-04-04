@@ -400,7 +400,7 @@ class searchResult extends Component {
               </li>);
       }
     })
-    return lis
+    return lis;
   }
   render() {
     const { otherName,value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist,isShownodataClass,isShownodataClassEach } = this.state;
