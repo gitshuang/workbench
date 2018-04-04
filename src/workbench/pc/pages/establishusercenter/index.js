@@ -91,7 +91,7 @@ componentWillMount() {
         const { userInfo } = this.props;
         // const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
 
-        let img = this.props.userInfo.userAvator;
+        let img = userInfo.userAvator;
         let imgIcon = null;
         if(img){
             imgIcon = <img src={img} className={imgInner} />
