@@ -353,6 +353,15 @@ class searchResult extends Component {
     }
   }
 
+  renderPro = (userProject) => {
+    const list = eval('(' + userProject + ')');
+    const _html = list.map((item,index)=>{
+      return item.name + '、';
+    });
+    const length = list.length;
+    return "项目：" + _html + "等" + length + "个相关项目";
+  }
+
   otherlistLi(data){
     var lis =[]
     function createMarkup(text) {
@@ -368,7 +377,8 @@ class searchResult extends Component {
                 <div className={h_icon}><img src={item.photo}/></div>
                 <div className={h_name}>
                   <p><span dangerouslySetInnerHTML={createMarkup(item.name)}></span>-<span>{item.orgName}</span></p>
-                  <p>办公电话 : {item.mobile}</p>
+                  <p style={{color:"#6E6E77"}}>办公电话 : {item.mobile}</p>
+                  {item.userProject && item.userProject.length ? <p style={{color:"#373C42",marginTop:"5px"}}>{this.renderPro(item.userProject)}</p> : null }
                 </div>
                 <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(item)}><Icon title="发邮件" type="e-mail" /></div>
                 <div className={h_contact} onClick={this.gochatDetail(item)}><Icon title="发消息" type="chat" /></div>
