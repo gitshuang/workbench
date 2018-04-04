@@ -104,7 +104,7 @@ class Establish extends Component {
                     {/* <Header leftContent = { leftContent } /> */} 
                     <Header iconName={allowTenants.length <= 0?imgIcon:"home"} onLeftClick={ this.goHome }  />
                     <div className={logo}>
-                        <img src = {logoUrl} style= {{width:"100px" }} />
+                        <img src = {logoUrl} style= {{width:"86px" }} />
                     </div>
                 </div> 
                 <div className="um-content">
