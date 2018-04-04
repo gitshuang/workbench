@@ -46,7 +46,7 @@ body{
   position: relative;
   float: left;
   background: #fff;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .marginLeft {
   margin-left: 210px !important;

@@ -89,7 +89,7 @@ componentWillMount() {
         const headerData = this.renderMetadata("header");
         const {allowTenants} = this.state;
         const { userInfo } = this.props;
-        const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
+        // const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
 
         let img = this.props.userInfo.userAvator;
         let imgIcon = null;
@@ -98,26 +98,10 @@ componentWillMount() {
         }else{
             imgIcon =  <Icon type="staff" />;
         }
-        imgIcon =  <Icon type="staff" />;
         
         return (
             <div className={`um-win ${page_home} ${establis_page} ${allowTenants.length <= 0?'':hidden}`} >
-                <div className="um-header" style={{background:"white"}}>
-
-                     {/* <Header
-                        onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
-                        onLeftTitleClick={this.goHome}
-                        leftContent={this.getLeftContent()}
-                        iconName={imgIcon}
-                        color={color}
-                    >
-                        <span style={titleStyle}>创建团队/企业</span>
-                    </Header> */}
-
-                    {/* <Header leftContent = { leftContent } /> */}
-                    {/* <HeaderPage headerData={headerData}/> */}
-
-                    {/* iconName={allowTenants.length <= 0?"":"home"} */}
+                <div className="um-header" style={{background:"white"}}> 
                     <Header
                     iconName={allowTenants.length <= 0?imgIcon:"home"}
                     onLeftClick={ this.goHome }  >
