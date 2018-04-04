@@ -3,51 +3,82 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
 // import HeaderPage from './headerPage';
+import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
 import EstablishContent from 'containers/establishContent'
-import { page_home ,appBreadcrumb,establis_page} from './style.css';
+import { page_home ,appBreadcrumb,establis_page,hidden} from './style.css';
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 import Breadcrumbs from 'components/breadcrumb';
 
+const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay ,getSearchEnterOrTeam} = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
 @withRouter
 @connect(
     mapStateToProps(
-        'metaData',
-        {
-            namespace: 'home',
-        },
+        'searchEnterOrTeamList',
+        'userInfoDisplay',
+        'metaData', 
         {
             key: 'userInfo',
-            value: (root) => root.home.userInfo,
+            value: (home,ownProps,root) => {
+                return root.home.userInfo
+            }
         },
+        {
+            namespace: 'home',
+        }, 
     ),
     {
+        getSearchEnterOrTeam,
+        changeUserInfoDisplay,
+        hideUserInfoDisplay,
         requestStart,
         requestSuccess,
         requestError,
     }
 )
 class EstablishUserCenter extends Component {
+
     constructor(props) {
         super(props);
+        this.state = { 
+            allowTenants:[],
+        }
     }
 
-    componentDidMount() {
-        console.log(this.props)
-    }
+componentWillMount() {
+    const {getSearchEnterOrTeam,requestError,requestSuccess} = this.props;
+    getSearchEnterOrTeam().then(({error, payload}) => {
+        if (error) {
+            requestError(payload);
+        }
+        this.setState({
+            allowTenants:payload
+        })
+        requestSuccess();
+    });
+}
 
     goBack =()=>{
         this.props.history.goBack();
     }
 
     goHome = () => {
-        const {userInfo:{allowTenants}} = this.props;
-        if(allowTenants.length <= 0)return;
-        this.props.history.replace('');
-      }
+        const {userInfoDisplay,hideUserInfoDisplay,changeUserInfoDisplay} = this.props;
+        const {allowTenants} = this.state;
+        if(allowTenants.length <= 0){ 
+            if(userInfoDisplay){
+                hideUserInfoDisplay();
+            }else{
+                changeUserInfoDisplay();
+            }
+        }else{
+            this.props.history.replace('/');    
+        }
+    }
 
     renderMetadata = (name) => {
         const {metaData} = this.props;
@@ -56,15 +87,40 @@ class EstablishUserCenter extends Component {
 
     render() {
         const headerData = this.renderMetadata("header");
-
-        const { userInfo ,userInfo:{allowTenants}} = this.props;
+        const {allowTenants} = this.state;
+        const { userInfo } = this.props;
         const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
+
+        let img = this.props.userInfo.userAvator;
+        let imgIcon = null;
+        if(img){
+            imgIcon = <img src={img} className={imgInner} />
+        }else{
+            imgIcon =  <Icon type="staff" />;
+        }
+        imgIcon =  <Icon type="staff" />;
+        
         return (
-            <div className={`um-win ${page_home} ${establis_page}`} >
+            <div className={`um-win ${page_home} ${establis_page} ${allowTenants.length <= 0?'':hidden}`} >
                 <div className="um-header" style={{background:"white"}}>
+
+                     {/* <Header
+                        onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
+                        onLeftTitleClick={this.goHome}
+                        leftContent={this.getLeftContent()}
+                        iconName={imgIcon}
+                        color={color}
+                    >
+                        <span style={titleStyle}>创建团队/企业</span>
+                    </Header> */}
+
                     {/* <Header leftContent = { leftContent } /> */}
                     {/* <HeaderPage headerData={headerData}/> */}
-                    <Header onLeftClick={ this.goHome } iconName={allowTenants.length <= 0?"":"home"} >
+
+                    {/* iconName={allowTenants.length <= 0?"":"home"} */}
+                    <Header
+                    iconName={allowTenants.length <= 0?imgIcon:"home"}
+                    onLeftClick={ this.goHome }  >
                         <div>
                             <span>创建团队/企业</span>
                         </div>

@@ -19,7 +19,7 @@ import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, log
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
   iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane,
   popconfirm,popconfirm_content,
-  createBtn,select_li,new_name
+  createBtn,select_li,new_name,hiden,show
 } from './style.css';
 
 const {
@@ -27,7 +27,8 @@ const {
   hideUserInfoDisplay,
   getWorkList,
   setCutUser,
-  closeRequestDisplay
+  closeRequestDisplay,
+  getSearchEnterOrTeam
 } = homeActions;
 
 const {
@@ -50,6 +51,7 @@ const {
     'requestDisplay',
     'latestAccessList',
     'promotionServiceList',
+    'searchEnterOrTeamList',
     {
       key: 'exitModal',
       value: (home,ownProps,root) => {
@@ -65,6 +67,7 @@ const {
     requestSuccess,
     requestError,
     hideUserInfoDisplay,
+    getSearchEnterOrTeam,
     // getUserInfo,
     getWorkList,
     setCutUser,
@@ -82,7 +85,8 @@ class UserInfoContainer extends Component {
     this._curTenant = null;
     this.state = {
       dataList:[ ],
-      promotionList:[ ]
+      promotionList:[ ],
+      allowTenants:[]
     }
   }
   static propTypes = {
@@ -92,6 +96,19 @@ class UserInfoContainer extends Component {
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
+  }
+
+  componentWillMount() {
+      const {getSearchEnterOrTeam,requestError,requestSuccess} = this.props;
+      getSearchEnterOrTeam().then(({error, payload}) => {
+          if (error) {
+              requestError(payload);
+          }
+          this.setState({
+              allowTenants:payload
+          })
+          requestSuccess();
+      });
   }
 
   getLatestAccessList() {
@@ -328,8 +345,7 @@ class UserInfoContainer extends Component {
         userName: name,
         userAvator: imgsrc,
         gloriesNum: glory,
-        redPacketsNum: redPackets,
-        allowTenants,
+        redPacketsNum: redPackets, 
         admin,
         logo,
         company,
@@ -338,6 +354,7 @@ class UserInfoContainer extends Component {
       requestDisplay,
       exitModal
     } = this.props;
+    const {allowTenants} = this.state;
 
     let _titleType = this.getCompanyType();
 
@@ -369,6 +386,7 @@ class UserInfoContainer extends Component {
       _invitePermission = true;
     }
 
+    let _class = allowTenants.length <= 0?hiden:show;
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
@@ -399,7 +417,7 @@ class UserInfoContainer extends Component {
             </div>*/}
           </div>
         </div>
-        <div className={tenantArea}>
+        <div className={`${tenantArea} ${_class}`}>
           <div className={clearfix}>
             <div className={tenantPortrait}>
               <div className={imgOuter}>

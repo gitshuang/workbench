@@ -625,3 +625,9 @@
   width: 180px;
 }
 
+.hiden{
+  display: none;
+}
+.show{
+  display: block;
+}

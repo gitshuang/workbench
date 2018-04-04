@@ -188,7 +188,7 @@ class CreateTeamContent extends Component {
                   <Icon type="copyreader" />
                 <input type="file" ref="btn_file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>{ this.imgChange(e) }} />
                 </div>
-                <span className={titlp_lab}>{"图片大小<=200K​"}</span>
+                {/* <span className={titlp_lab}>{"图片大小<=200K​"}</span> */}
               </div>
           </div>
         </div>
