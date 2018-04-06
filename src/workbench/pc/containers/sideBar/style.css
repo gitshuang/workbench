@@ -1,7 +1,7 @@
 .sideBar {
   /* width: 200px;
   height: 100%; */
-  background: #fff;
+  /* background: #F9FAFB; */
   /* overflow: auto; */
 }
 .menuItem{
@@ -34,8 +34,11 @@
 	line-height: 30px;
 	margin-left: 18px;
 }
-:global(.u-menu-submenu-selected){
-	background:#fff;
+.sideBar :global(.u-menu-submenu-selected){
+	background: #F9FAFB;
+}
+.sideBar :global(.u-menu-submenu-selected .u-menu-item-selected) {
+	background:#f4f5f7;
 }
 :global(.u-menu-submenu-active .u-menu-submenu-title){
 	background:#fff;
@@ -63,8 +66,11 @@
 :global(:root .u-menu-submenu-inline > .u-menu-submenu-title:after){
 	display: none;
 }
-:global(.u-menu-inline .u-menu-inline .u-menu-item-selected){
+/* :global(.u-menu-inline .u-menu-inline .u-menu-item-selected){
 	background:rgba(244,245,247,1) !important;
+} */
+.sideBar :global(.u-menu-submenu>.u-menu){
+  background: transparent; 
 }
 
 :global(.item_1){
