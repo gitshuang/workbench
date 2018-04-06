@@ -8,7 +8,8 @@ import {header,um_content,appBreadcrumb} from './style.css';
 @withRouter
 class Application extends Component {
   goBack = () => {
-    this.props.history.replace('');
+    // this.props.history.replace('');
+    this.props.history.goBack();
   }
   render() {
     const {
