@@ -210,6 +210,20 @@ class SearchContainer extends Component {
     }
   }
 
+  goAddress = (actibe,item) => {
+    const { id, name, userId, tenantId } = this.props;
+    dispatchMessageTypeHandler({
+      type: 'openService',
+      detail: {
+        serviceCode: 'XTTONGXUNLU0000000',
+        data: {
+          genre: 4,
+          fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
+        },
+      }
+    });
+  }
+
   render() {
     const { isShow, text, isSearchWinShow, SearchSuggestList,nosearchdata} = this.state;
     const {color} = this.props;
@@ -229,7 +243,7 @@ class SearchContainer extends Component {
           let lis = [];
           item.content.forEach((item2,index2)=>{
             item2 = eval('(' + item2 + ')')
-            lis.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
+            lis.push(<li key={index2} onClick={()=>{_this.goAddress(item.type,item2)}}>
                   <div className={h_icon}><img src={item2.photo}/></div>
                   <div className={h_name}>
                     <p><span dangerouslySetInnerHTML={createMarkup(item2.name)}></span>-<span>{item2.orgName}</span></p>

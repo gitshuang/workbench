@@ -326,6 +326,21 @@ class searchResult extends Component {
     //this.props.history.push({pathname:`/search/searchlist`,state:item});
     this.props.history.push({pathname:`/search/searchlist/${!this.state.keywords?'':this.state.keywords}`,state:item});
   }
+
+  goAddress = (actibe,item) => {
+    const { id, name, userId, tenantId } = this.props;
+    dispatchMessageTypeHandler({
+      type: 'openService',
+      detail: {
+        serviceCode: 'XTTONGXUNLU0000000',
+        data: {
+          genre: 4,
+          fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
+        },
+      }
+    });
+  }
+
   goemailDetail({ id, userId, name, tenantId }){
     return (e) => {
       e.stopPropagation();
@@ -389,7 +404,7 @@ class searchResult extends Component {
       switch (data.type)
       {
         case "addressbook"://通讯录 称为user
-          lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
+          lis.push(<li key={index} onClick={()=>{this.goAddress(this.state.activetab,item)}}>
                 <div className={h_icon}><img src={item.photo}/></div>
                 <div className={h_name}>
                   <p><span dangerouslySetInnerHTML={createMarkup(item.name)}></span><span>-{item.orgName}</span></p>
