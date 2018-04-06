@@ -89,7 +89,7 @@ class TeamRemoveModal extends Component {
             const {
               history, 
             } = this.props;
-            history.push('/establishusercenter');
+            history.push('/establish');
           }else if(payload.length > 1){
             this.setState({
               isManage: 2
