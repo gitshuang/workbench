@@ -326,6 +326,21 @@ class searchResult extends Component {
     //this.props.history.push({pathname:`/search/searchlist`,state:item});
     this.props.history.push({pathname:`/search/searchlist/${!this.state.keywords?'':this.state.keywords}`,state:item});
   }
+
+  goAddress = (actibe,item) => {
+    const { id, name, userId, tenantId } = this.props;
+    dispatchMessageTypeHandler({
+      type: 'openService',
+      detail: {
+        serviceCode: 'XTTONGXUNLU0000000',
+        data: {
+          genre: 4,
+          fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
+        },
+      }
+    });
+  }
+
   goemailDetail({ id, userId, name, tenantId }){
     return (e) => {
       e.stopPropagation();
@@ -355,11 +370,27 @@ class searchResult extends Component {
 
   renderPro = (userProject) => {
     const list = eval('(' + userProject + ')');
-    const _html = list.map((item,index)=>{
+    const arrItem = list.map((item,index)=>{
       return item.name + '、';
+    });
+    let _html = ""; 
+    arrItem.forEach((item,index)=>{
+      _html += item;
     });
     const length = list.length;
     return "项目：" + _html + "等" + length + "个相关项目";
+  }
+
+  rendHor = (userHonor) => {
+    const list = eval('(' + userHonor + ')');
+    const arrItem = list.map((item,index)=>{
+      return item.name + '、';
+    });
+    let _html = ""; 
+    arrItem.forEach((item,index)=>{
+      _html += item;
+    });
+    return "荣耀：" + _html;
   }
 
   otherlistLi(data){
@@ -373,12 +404,14 @@ class searchResult extends Component {
       switch (data.type)
       {
         case "addressbook"://通讯录 称为user
-          lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
+          lis.push(<li key={index} onClick={()=>{this.goAddress(this.state.activetab,item)}}>
                 <div className={h_icon}><img src={item.photo}/></div>
                 <div className={h_name}>
-                  <p><span dangerouslySetInnerHTML={createMarkup(item.name)}></span>-<span>{item.orgName}</span></p>
+                  <p><span dangerouslySetInnerHTML={createMarkup(item.name)}></span><span>-{item.orgName}</span></p>
                   <p style={{color:"#6E6E77"}}>办公电话 : {item.mobile}</p>
-                  {item.userProject && item.userProject.length ? <p style={{color:"#373C42",marginTop:"5px"}}>{this.renderPro(item.userProject)}</p> : null }
+                  <p style={{color:"#6E6E77"}}>邮箱 : {item.email}</p>
+                  {item.userProject  ? <p style={{color:"#373C42",marginTop:"5px"}}>{this.renderPro(item.userProject)}</p> : null }
+                  {item.userHonor ? <p style={{color:"#373C42"}}>{this.rendHor(item.userHonor)}</p> : null }
                 </div>
                 <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(item)}><Icon title="发邮件" type="e-mail" /></div>
                 <div className={h_contact} onClick={this.gochatDetail(item)}><Icon title="发消息" type="chat" /></div>
