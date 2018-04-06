@@ -13,10 +13,7 @@ import manageActions from 'store/root/manage/actions';
 
 import HeaderPage from './headerPage';
 import Header from 'containers/header';
-import ManageGroup from 'containers/manageGroup';
-import ManageFolderDialog from 'containers/manageFolderDialog';
-import ManageBatchMoveDialog from 'containers/manageBatchMoveDialog';
-import PopDialog from 'pub-comp/pop';
+import CreateManageModule from 'components/manageWidget/index'
 
 
 import {
@@ -41,17 +38,41 @@ import {
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {
+  addGroup,
+  delectGroup,
+  renameGroup,
+  moveGroup,
+  moveTopGroup,
+  moveBottomGroup,
+  addFolder,
+  selectListActions,
+  selectGroupActions,
+  setEditonlyId,
+  setDragInputState,
+  deleteFolder, 
+  renameFolder, 
+  setFolderEdit,
+  moveService, 
+  openFolder,
+  closeFolder,
+  setCurrGroupIndex,
+  editTitle,
+  delectService,
+  cancelFolderEdit, 
+  closeBatchMove, 
+  batchMove,
   setManageList,
   getManageList,
   batchDelect,
   openBatchMove,
-  moveGroup,
-  moveService,
   setEditState,
-  addGroup,
   returnDefaultState,
+  getAllServicesByLabelGroup,
+  addDesk,
+  setCurrentSelectWidgetMap,
   emptySelectGroup
 } = manageActions;
+
 
 @withRouter
 @connect(
@@ -59,6 +80,25 @@ const {
     'manageList',
     'isEdit',
     'selectList',
+    'batchMoveModalDisplay',
+    'curDisplayFolder',
+    'folderModalDisplay',
+    'selectGroup',
+    'currEditonlyId',
+    'dragState',
+    'curEditFolderId',
+    'drag',
+    'currGroupIndex',
+    'title',
+    'applicationsMap',
+    'allServicesByLabelGroup',
+    {
+      key: 'moveData',
+      value: ({ manageList }) => manageList.map(group => ({
+        ...group,
+        children: [],
+      })),
+    },
     {
       namespace: 'manage',
     }
@@ -76,9 +116,33 @@ const {
     setEditState,
     addGroup,
     returnDefaultState,
-    emptySelectGroup
+    closeBatchMove,
+    batchMove,
+    closeFolder,
+    delectGroup,
+    renameGroup,
+    moveTopGroup,
+    moveBottomGroup,
+    addFolder,
+    selectListActions,
+    selectGroupActions,
+    setEditonlyId,
+    setDragInputState,
+    openFolder,
+    deleteFolder,
+    renameFolder,
+    setFolderEdit,
+    setCurrGroupIndex,
+    editTitle,
+    cancelFolderEdit,
+    delectService,
+    getAllServicesByLabelGroup,
+    setCurrentSelectWidgetMap,
+    addDesk,
+    emptySelectGroup,
   }
 )
+
 
 class Home extends Component {
   constructor(props) {
@@ -240,96 +304,134 @@ class Home extends Component {
     this.checkBtn = btn?btn:null;
   }
 
-  renderContent = () => {
-    const { manageList,addGroup } = this.props;
-    //console.log(manageList)
-    let list = [];
-    if(manageList.length == 0){
-      return (
-        <div className={addBtn} >
-          <ButtonDefaultAlpha className={addGroupBtn} onClick={()=>{addGroup({index:0})}}>
-            <Icon type="add"></Icon>
-            添加组
-          </ButtonDefaultAlpha>
-        </div>
-      );
-    }else{
-      manageList.map((item, index) =>{
-        list.push(
-          <ManageGroup
-            data={item}
-            index={index}
-            key={item.widgetId}
-            id={item.widgetId}
-            type={item.type}
-            moveGroupDrag={this.moveGroupDrag}
-            moveItemDrag={this.moveItemDrag}
-            checkFun={this.checkFun}
-            />
-        )
-      });
-    }
-    
-    return list;
-  }
   render() {
-    const {
-      selectList,
-      isEdit,
-    } = this.props;
-    const pop_btn = [
-      {label:"确认",fun:this.batchDelectFn,className:""},
-      {label:"取消",fun:this.popClose,className:""}
-    ]
-    const pop_btn2 = [
-      {label:"不保存",fun:this.cancel,type:"defaultAlpha"},
-      {label:"保存",fun:this.save,type:"warning"},
-      {label:"取消",fun:this.popCloseCancel,type:"defaultAlpha"}
-    ]
     const list = [];
+    var {
+      manageList,
+      isEdit,
+      selectList,
+      batchMoveModalDisplay,
+      curDisplayFolder,
+      folderModalDisplay,
+      selectGroup,
+      currEditonlyId,
+      dragState,
+      curEditFolderId,
+      drag,
+      currGroupIndex,
+      title,
+      moveData,
+      requestStart,
+      requestSuccess,
+      requestError,
+      setManageList,
+      getManageList,
+      batchDelect,
+      openBatchMove,
+      moveGroup,
+      moveService,
+      setEditState,
+      addGroup,
+      returnDefaultState,
+      closeBatchMove,
+      batchMove,
+      closeFolder,
+      delectGroup,
+      renameGroup,
+      moveTopGroup,
+      moveBottomGroup,
+      addFolder,
+      selectListActions,
+      selectGroupActions,
+      setEditonlyId,
+      setDragInputState,
+      openFolder,
+      deleteFolder,
+      renameFolder,
+      setFolderEdit,
+      setCurrGroupIndex,
+      editTitle,
+      cancelFolderEdit,
+      delectService,
+      applicationsMap,
+      allServicesByLabelGroup,
+      getAllServicesByLabelGroup,
+      setCurrentSelectWidgetMap,
+      addDesk,
+    } = this.props;
+    var manageReduxParams = {
+      manageList,
+      isEdit,
+      selectList,
+      batchMoveModalDisplay,
+      curDisplayFolder,
+      folderModalDisplay,
+      selectGroup,
+      currEditonlyId,
+      dragState,
+      curEditFolderId,
+      drag,
+      currGroupIndex,
+      title,
+      moveData,
+      requestStart,
+      requestSuccess,
+      requestError,
+      setManageList,
+      getManageList,
+      batchDelect,
+      openBatchMove,
+      moveGroup,
+      moveService,
+      setEditState,
+      addGroup,
+      returnDefaultState,
+      closeBatchMove,
+      batchMove,
+      closeFolder,
+      delectGroup,
+      renameGroup,
+      moveTopGroup,
+      moveBottomGroup,
+      addFolder,
+      selectListActions,
+      selectGroupActions,
+      setEditonlyId,
+      setDragInputState,
+      openFolder,
+      deleteFolder,
+      renameFolder,
+      setFolderEdit,
+      setCurrGroupIndex,
+      editTitle,
+      cancelFolderEdit,
+      delectService,
+      applicationsMap,
+      allServicesByLabelGroup,
+      getAllServicesByLabelGroup,
+      setCurrentSelectWidgetMap,
+      addDesk,
+    } 
+    var manageOuterParams = {
+      showModal:this.state.showModal,
+      showCancelModal:this.state.showCancelModal,
+      popClose:this.popClose,
+      batchDelectFn:this.batchDelectFn,
+      cancel:this.cancel,
+      save:this.save,
+      popCloseCancel:this.popCloseCancel,
+      openGroupTo:this.openGroupTo,
+      popOpenCancel:this.popCloseCancel,
+      moveGroupDrag:this.moveGroupDrag,
+      moveItemDrag:this.moveItemDrag,
+    }
     return (
       <div className={page_home}>
-        {/*<div className={header}>
-          <div className="um-header">
-            <Header onLeftClick={ this.goBack } iconName={"back"} leftContent={"返回"}>
-              <span>首页编辑</span>
-            </Header>
-          </div>
-        </div>*/}
         <HeaderPage list={list} />
-        <div className={um_content}>
-          {this.renderContent()}
-        </div>
-        <div className={um_footer}>
-          <div className={`${umBoxJustify}`}>
-             <div className={`${batchArea}  horizontalParent`}>
-              <ButtonDefaultLine onClick={this.batchDelectFn} disabled={selectList.length ? false:true} className="horizontal">删除</ButtonDefaultLine>
-              <ButtonDefaultLine onClick={this.openGroupTo} disabled={selectList.length ? false:true} >移动到</ButtonDefaultLine>
-            </div>
-            <div className={`${saveArea}  horizontalParent`}>
-              <ButtonBrand disabled={!isEdit} onClick={this.save}>保存</ButtonBrand>
-              <ButtonDefaultLine onClick={this.popOpenCancel} >取消</ButtonDefaultLine>
-              {/*<ButtonDefaultLine onClick={this.goBack}>取消</ButtonDefaultLine>*/}
-            </div>
-          </div>
-        </div>
-        <div className="manageDialog">
-          <ManageFolderDialog />
-        </div>
-        <ManageBatchMoveDialog />
-        <PopDialog className="pop_dialog_delete" type="delete" show = { this.state.showModal } close={this.popClose} btns={pop_btn} >
-          <div>
-            <span>您确认要批量删除吗?</span>
-          </div>
-        </PopDialog>
-        <PopDialog  className={`${manager_save_pop}`} type="warning" show = { this.state.showCancelModal } close={this.popCloseCancel} btns={pop_btn2} title={"是否保存最新修改？"} >
-          <div>
-            <span>点击不保存，则最新修改将丢失</span>
-          </div>
-        </PopDialog>
+        <CreateManageModule {...manageReduxParams} {...manageOuterParams}/>
       </div>
     );
   }
 }
 
-export default DragDropContext(judgedBackend)(Home);
+export default Home;
