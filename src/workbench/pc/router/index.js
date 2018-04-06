@@ -17,6 +17,7 @@ import Teamconfig from 'pages/teamconfig';
 import UpdateEnter from 'pages/updateenter';
 import Market from 'pages/market';
 import Renew from 'pages/renew';
+import UserInfo from 'pages/userinfo';
 
 const routes = [
   {
@@ -98,6 +99,10 @@ const routes = [
   {
     path: '/account',
     component: Account,
+  },
+  {
+    path: '/userinfo',
+    component: UserInfo,
   },
   {
     path: '/404',
