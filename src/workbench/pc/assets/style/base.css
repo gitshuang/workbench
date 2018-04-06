@@ -42,6 +42,7 @@ body {
 .u-menu-inline .u-menu-selected {
   border: none;
   color: #E14C46;
+  background: #f4f5f7;
 }
 
 .u-menu-submenu-inline>.u-menu-submenu-title:after {
