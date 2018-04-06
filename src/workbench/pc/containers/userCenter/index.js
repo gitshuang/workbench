@@ -7,7 +7,7 @@ import Icon from 'pub-comp/icon';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-import { getStrLenSubstr, logout } from '@u';
+import { getStrLenSubstr, logout,getHost } from '@u';
 import Button from 'bee/button';
 import EnterOption from 'containers/enterOption';
 import Tabs, { TabPane } from 'bee/tabs';
@@ -19,7 +19,8 @@ import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, log
   used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
   iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane,
   popconfirm,popconfirm_content,
-  createBtn,select_li,new_name,hiden,show
+  createBtn,select_li,new_name,hiden,show,linkSetting,
+  enter_setting
 } from './style.css';
 
 const {
@@ -249,6 +250,16 @@ class UserInfoContainer extends Component {
     history.push('/account');
     hideUserInfoDisplay();
   }
+
+  gotoUserInfo=()=>{
+    const {
+      history,
+      hideUserInfoDisplay,
+    } = this.props;
+    history.push('/userinfo');
+    hideUserInfoDisplay();
+  }
+
   getUserOrder(){
     window.open('https://idtest.yyuap.com/usercenter/myapp');
   }
@@ -416,6 +427,12 @@ class UserInfoContainer extends Component {
               </ul> 
             </div>*/}
           </div>
+
+          <div className={linkSetting}>
+              <a href={`${getHost('order')}/ticket`} >我的工单</a><br/>
+              <a href={`${getHost('cloundyy')}`} style={{lineHeight:"33px"}} >用友云官网</a>
+          </div>
+
         </div>
         <div className={`${tenantArea} ${_class}`}>
           <div className={clearfix}>
@@ -435,22 +452,10 @@ class UserInfoContainer extends Component {
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" onClick={this.gotoManage.bind(this)}>
               <Icon type="record" />首页编辑</Button></li>
-              {
-                admin ? (
-                  <li>
-                    <Button
-                      shape="border"
-                      size="sm"
-                      onClick={()=>{this.gotoConfig(this._curTenant)}}>
-                       <Icon type="staff" />
-                      {
-                        `${_titleType}设置`
-                      }
-                    </Button>
 
-                  </li>
-                ) :_allowExit
-                }
+              <li><Button shape="border" onClick={this.gotoUserInfo}>
+              <Icon type="role-management" />员工信息</Button></li>
+
               {
                 _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
                 <Icon type="add-friends" />
@@ -471,6 +476,14 @@ class UserInfoContainer extends Component {
             }
 
           </div>
+
+          <div className={enter_setting} title={`${_titleType}设置`}>
+            {/* <Icon type="setting" /> */}
+            {
+              admin ? (<Icon type="setting" title={`${_titleType}设置`} onClick={()=>{this.gotoConfig(this._curTenant)}}/>) :_allowExit
+            }
+          </div>
+
         </div>
       </div>
     );
