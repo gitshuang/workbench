@@ -114,9 +114,10 @@
   bottom: 0px;
   background:rgba(242,242,242,1);
   color: #878B94;
+  box-sizing: border-box;
 }
 :global(.ie9) .footer{
-  width: 160px;
+  /* width: 160px; */
 }
 
 .footer>div{
