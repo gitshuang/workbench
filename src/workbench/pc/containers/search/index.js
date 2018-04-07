@@ -94,7 +94,6 @@ class SearchContainer extends Component {
         if (error) {
           requestError(payload);
         }
-        debugger;
         requestSuccess();
         if(payload.length<1){
           this.setState({
@@ -235,13 +234,15 @@ class SearchContainer extends Component {
       return {__html: text};
     }
     SearchSuggestList.forEach((item,index)=>{
+      if(item.content.length<1){
+        return false
+      }
       switch (item.type)
       {
         case "addressbook"://通讯录
           let lis = [];
           item.content.forEach((item2,index2)=>{
             item2 = eval('(' + item2 + ')');
-            debugger;
             lis.push(<li key={index2} onClick={()=>{_this.goAddress(item.type,item2)}}>
                   <div className={h_icon}><img src={item2.photo}/></div>
                   <div className={h_name}>
