@@ -376,15 +376,7 @@ class UserInfoContainer extends Component {
 
     let _allowExit = null;
     if(allowExit!="0"){
-      _allowExit = (<li>
-        {/* <Button
-          shape="border"
-          size="sm"
-          onClick={this.exitOnclick}>
-          <Icon type="staff" />退出{_titleType}
-        </Button> */}
-        <EnterOption data={[comObj]}  type={_titleType} compType="userCenter" />
-      </li>);
+      _allowExit = (<EnterOption data={[comObj]}  type={_titleType} compType="userCenter" />);
     };
 
     // <Option value="1">全员邀请 </Option>
@@ -461,6 +453,9 @@ class UserInfoContainer extends Component {
                 <Icon type="add-friends" />
                 邀请成员</Button></li>):null
               }
+
+              {admin ? null:_allowExit}
+
             </ul>
             {
               requestDisplay ?
@@ -480,7 +475,7 @@ class UserInfoContainer extends Component {
           <div className={enter_setting} title={`${_titleType}设置`}>
             {/* <Icon type="setting" /> */}
             {
-              admin ? (<Icon type="setting" title={`${_titleType}设置`} onClick={()=>{this.gotoConfig(this._curTenant)}}/>) :_allowExit
+              admin ? (<Icon type="setting" title={`${_titleType}设置`} onClick={()=>{this.gotoConfig(this._curTenant)}}/>) :null
             }
           </div>
 
