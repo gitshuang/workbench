@@ -94,6 +94,7 @@ class SearchContainer extends Component {
         if (error) {
           requestError(payload);
         }
+        debugger;
         requestSuccess();
         if(payload.length<1){
           this.setState({
@@ -234,19 +235,17 @@ class SearchContainer extends Component {
       return {__html: text};
     }
     SearchSuggestList.forEach((item,index)=>{
-      if(item.content.length<1){
-        return false
-      }
       switch (item.type)
       {
         case "addressbook"://通讯录
           let lis = [];
           item.content.forEach((item2,index2)=>{
-            item2 = eval('(' + item2 + ')')
+            item2 = eval('(' + item2 + ')');
+            debugger;
             lis.push(<li key={index2} onClick={()=>{_this.goAddress(item.type,item2)}}>
                   <div className={h_icon}><img src={item2.photo}/></div>
                   <div className={h_name}>
-                    <p><span dangerouslySetInnerHTML={createMarkup(item2.name)}></span>-<span>{item2.orgName}</span></p>
+                    <p><span>{item2.name}</span>-<span>{item2.orgName}</span></p>
                     <p>办公电话 : {item2.mobile}</p>
                   </div>
                   <div className={h_contact} onClick={_this.goemailDetail(item2)}><Icon title="发邮件" type="e-mail" /></div>
@@ -269,7 +268,9 @@ class SearchContainer extends Component {
             lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={item2.serviceId?item2.serviceIcon:item2.applicationIcon}/></div>
                   <div className={h_name}>
-                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item2.serviceId?item2.serviceName:item2.applicationName)}></span></p>
+                    <p className={search_help}>
+                      <span>{item2.serviceId?item2.serviceName:item2.applicationName}</span>
+                    </p>
                   </div>
                 </li>);
           }),
@@ -289,7 +290,7 @@ class SearchContainer extends Component {
             lis3.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                 <div className={h_icon}><img src={_default_icon}/></div>
                 <div className={h_name}>
-                  <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item2.title)}></p>
+                  <p className={search_help}>{item2.title}</p>
                 </div>
                 <div className={search_help}>{item2.size}</div>
               </li>);
@@ -311,7 +312,7 @@ class SearchContainer extends Component {
               lis4.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
                   <div className={h_icon}><img src={_default_icon}/></div>
                   <div className={h_name}>
-                    <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item2.title)}></p>
+                    <p className={search_help}>{item2.title}</p>
                   </div>
                 </li>);
             })
