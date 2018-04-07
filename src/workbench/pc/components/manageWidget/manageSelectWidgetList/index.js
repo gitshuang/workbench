@@ -94,18 +94,17 @@ class SelectWidgetList extends Component {
     }
 
     let _edit = false;
-    for (var da of applications) { 
+    applications.forEach((da,index)=>{
       if(da.selected == "3"){ 
-        _edit = true;break;
+        _edit = true;
       }else{
-        if(da.service.length == 0) continue; 
+        if(da.service.length == 0) return; 
         let _ser = da.service.find((_da)=>_da.selected == "3");
         if(_ser){
           _edit = true;
-          break;
         }
       }
-    }
+    })
     this.setState({
       ...this.state,
         edit:_edit
@@ -153,7 +152,7 @@ class SelectWidgetList extends Component {
       _da.labelGroupName == da.labelGroupName?_da.active = true:_da.active = false;
     })
     this.setState({
-      ...this.setState
+      ...this.state
     })
   }
 
@@ -260,7 +259,7 @@ class SelectWidgetList extends Component {
               </div>
            </div>
            <div className={footer_btn}>
-            {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand>:<ButtonBrand onClick={this.btnSave} disabled={true} >添加</ButtonBrand>}
+            {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand> : <ButtonBrand disabled={true} >添加2</ButtonBrand>}
               <ButtonDefaultAlpha onClick={this.btnClose} >取消</ButtonDefaultAlpha>
           </div>
        </div>
