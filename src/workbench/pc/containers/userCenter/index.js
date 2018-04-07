@@ -360,11 +360,17 @@ class UserInfoContainer extends Component {
         admin,
         logo,
         company,
-        currentTeamConfig:{allowExit,invitePermission}
+        currentTeamConfig
       },
       requestDisplay,
       exitModal
     } = this.props;
+    let allowExit = null;
+    let invitePermission = null;
+    if(currentTeamConfig){
+      allowExit = currentTeamConfig.allowExit;
+      invitePermission = currentTeamConfig.invitePermission;
+    }
     const {allowTenants} = this.state;
 
     let _titleType = this.getCompanyType();
@@ -375,7 +381,7 @@ class UserInfoContainer extends Component {
     }
 
     let _allowExit = null;
-    if(allowExit!="0"){
+    if(allowExit && allowExit!="0"){
       _allowExit = (<EnterOption data={[comObj]}  type={_titleType} compType="userCenter" />);
     };
 
@@ -383,9 +389,9 @@ class UserInfoContainer extends Component {
     // <Option value="2">全员禁止</Option>
     // <Option value="0">仅管理员可邀请</Option>
     let _invitePermission = false;
-    if(invitePermission == "0"){
+    if(invitePermission && invitePermission == "0"){
       _invitePermission = admin;
-    }else if(invitePermission == "1"){
+    }else if(invitePermission && invitePermission == "1"){
       _invitePermission = true;
     }
 
