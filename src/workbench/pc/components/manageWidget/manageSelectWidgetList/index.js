@@ -123,17 +123,17 @@ class SelectWidgetList extends Component {
     const {applications} = this.state;
     const { requestError, requestSuccess, addDesk ,parentId} = this.props;
     let selectedList = [];
-    for (var da of applications) { 
+    applications.forEach((da,index)=>{
       if(da.selected == "3"){ 
-         selectedList.push(da);
-      }
-      if(da.service.length == 0) continue;
-      da.service.forEach((_da,j)=>{
-        if(_da.selected == "3"){
-          selectedList.push(_da);
-        }
-      });
-    }
+        selectedList.push(da);
+     }
+     if(da.service.length == 0) return;
+     da.service.forEach((_da,j)=>{
+       if(_da.selected == "3"){
+         selectedList.push(_da);
+       }
+     });
+    })
     addDesk({dataList:selectedList,parentId});
     this.setState({
       edit:false
@@ -259,7 +259,7 @@ class SelectWidgetList extends Component {
               </div>
            </div>
            <div className={footer_btn}>
-            {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand> : <ButtonBrand disabled={true} >添加2</ButtonBrand>}
+            {this.state.edit?<ButtonBrand onClick={this.btnSave} >添加</ButtonBrand> : <ButtonBrand disabled={true} >添加</ButtonBrand>}
               <ButtonDefaultAlpha onClick={this.btnClose} >取消</ButtonDefaultAlpha>
           </div>
        </div>
