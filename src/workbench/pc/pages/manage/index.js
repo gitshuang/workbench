@@ -421,7 +421,7 @@ class Home extends Component {
       save:this.save,
       popCloseCancel:this.popCloseCancel,
       openGroupTo:this.openGroupTo,
-      popOpenCancel:this.popCloseCancel,
+      popOpenCancel:this.popOpenCancel,
       moveGroupDrag:this.moveGroupDrag,
       moveItemDrag:this.moveItemDrag,
     }
