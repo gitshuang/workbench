@@ -4,9 +4,6 @@ import PropTypes from "prop-types";
 
 const propTypes = {
   url:PropTypes.string,
-	// messageData:PropTypes.object,//message 数据
-	// messType:PropTypes.string,//message 事件key
-	// messageHandler:PropTypes.func //回调函数
 }
 
 class Iframe extends Component{
@@ -14,11 +11,17 @@ class Iframe extends Component{
   constructor(props) {
     super(props); 
     this.state = {
-      _height: "0px"
+      _height: 0
     }
-    window.onresize =()=>{
-      this.changeFrameHeight();   
-    }
+    window.addEventListener('onresize',this.changeFrameHeight);
+  }
+  
+  componentWillMount(){
+    this.changeFrameHeight();
+  }
+
+  componentWillUnmount(){
+    removeEventListener('onresize',this.changeFrameHeight);
   }
 
   changeFrameHeight=()=>{
