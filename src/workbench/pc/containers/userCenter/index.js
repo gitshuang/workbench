@@ -360,11 +360,17 @@ class UserInfoContainer extends Component {
         admin,
         logo,
         company,
-        currentTeamConfig:{allowExit,invitePermission}
+        currentTeamConfig
       },
       requestDisplay,
       exitModal
     } = this.props;
+    let allowExit = null;
+    let invitePermission = null;
+    if(currentTeamConfig){
+      allowExit = currentTeamConfig.allowExit;
+      invitePermission = currentTeamConfig.invitePermission;
+    }
     const {allowTenants} = this.state;
 
     let _titleType = this.getCompanyType();
@@ -375,25 +381,17 @@ class UserInfoContainer extends Component {
     }
 
     let _allowExit = null;
-    if(allowExit!="0"){
-      _allowExit = (<li>
-        {/* <Button
-          shape="border"
-          size="sm"
-          onClick={this.exitOnclick}>
-          <Icon type="staff" />退出{_titleType}
-        </Button> */}
-        <EnterOption data={[comObj]}  type={_titleType} compType="userCenter" />
-      </li>);
+    if(allowExit && allowExit!="0"){
+      _allowExit = (<EnterOption data={[comObj]}  type={_titleType} compType="userCenter" />);
     };
 
     // <Option value="1">全员邀请 </Option>
     // <Option value="2">全员禁止</Option>
     // <Option value="0">仅管理员可邀请</Option>
     let _invitePermission = false;
-    if(invitePermission == "0"){
+    if(invitePermission && invitePermission == "0"){
       _invitePermission = admin;
-    }else if(invitePermission == "1"){
+    }else if(invitePermission && invitePermission == "1"){
       _invitePermission = true;
     }
 
@@ -461,6 +459,9 @@ class UserInfoContainer extends Component {
                 <Icon type="add-friends" />
                 邀请成员</Button></li>):null
               }
+
+              {admin ? null:_allowExit}
+
             </ul>
             {
               requestDisplay ?
@@ -480,7 +481,7 @@ class UserInfoContainer extends Component {
           <div className={enter_setting} title={`${_titleType}设置`}>
             {/* <Icon type="setting" /> */}
             {
-              admin ? (<Icon type="setting" title={`${_titleType}设置`} onClick={()=>{this.gotoConfig(this._curTenant)}}/>) :_allowExit
+              admin ? (<Icon type="setting" title={`${_titleType}设置`} onClick={()=>{this.gotoConfig(this._curTenant)}}/>) :null
             }
           </div>
 

@@ -1,4 +1,6 @@
 .breadcrumbClass ol {
+  height:35px;
+  line-height: 37px;
   display:inline-block;
   background: none;
   margin:0;

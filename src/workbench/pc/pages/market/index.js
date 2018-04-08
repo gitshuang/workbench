@@ -5,6 +5,7 @@ import { mapStateToProps } from '@u';
 import { getHost } from '@u';
 import ApplicationWrap from 'containers/applicationWrap';
 import workActions from 'store/root/work/actions';
+import IFrame from 'components/iframe_other';
 const {addBrm,popBrm} = workActions;
 import {
   bg,
@@ -58,7 +59,7 @@ class Account extends Component {
       <ApplicationWrap name={brmVal.length>0 ? brmLastVal[brmLastLen-1].name:''} brms={brmVal.length>1?brmVal[brmVal.length-2]:[{name:''}]}  goBack={this.goBack}>
         <div className={bg+" um-content um-vbox"}>
           {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
-          <iframe className={frameElm} src={'/diwork-market/appMarket'} />
+          <IFrame  title="应用市场"  url={'/diwork-market/appMarket'} />
         </div>
       </ApplicationWrap>
     );
