@@ -31,9 +31,9 @@ class SelectWidgetList extends Component {
     this.getServices();
   }
 
-  getServices(serviceName=""){
+  getServices(){
     const { requestError, requestSuccess, getAllServicesByLabelGroup } = this.props;
-    getAllServicesByLabelGroup(serviceName).then(({error, payload}) => {
+    getAllServicesByLabelGroup().then(({error, payload}) => {
       if (error) {
         requestError(payload);
       }
