@@ -31,9 +31,9 @@ const widgetStyle = [
 
   function getFetchIe9(url, options = {}){
     if (window.XDomainRequest) {
-      if(url.indexOf("https") != -1){
-        url = url.replace(/https/, "http");
-      }
+      // if(url.indexOf("https") != -1){
+      //   url = url.replace(/https/, "http");
+      // }
       let fh = url.indexOf("?") == -1?"?":"&&";
       url += fh+"tm="+new Date().getTime();
       return new Promise((resolve, reject) => {
