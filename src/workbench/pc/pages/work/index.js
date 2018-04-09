@@ -233,7 +233,7 @@ export default class Work extends Component {
       switch (type) {
         case 1:
           return (
-            <div className={`${marginTop}`}  style={{height:(_height-20)+"px",marginTop:94}}>
+            <div className={`${marginTop}`}  style={{marginTop:94}}>
               <ContentContainer />
             </div>
           );
@@ -242,12 +242,12 @@ export default class Work extends Component {
           <div style={{position:relative}}>
               {
                 expandedSidebar ? (
-                  <div className={sideBarArea} style={{height:(_height-_sideDeviationHeight)+"px"}}>
+                  <div className={sideBarArea} >
                     <SideBarContainer />
                   </div>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-97)+"px"}}>
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} >
                 <div className={contentArea}>
                   <ContentContainer />
                 </div> 
@@ -259,12 +259,12 @@ export default class Work extends Component {
             <div style={{position:relative}}>
               {
                 expandedSidebar ? (
-                  <div className={sideBarArea} style={{height:(_height-_sideDeviationHeight)+"px"}}>
+                  <div className={sideBarArea} >
                     <SideBarContainer />
                   </div>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{height:(_height-137)+"px"}}>
+              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
                 <div className={contentArea}>
                   <ContentContainer hasTab={true}/>
                 </div>
