@@ -29,44 +29,92 @@ const widgetStyle = [
   }
 ];
 
-function getData(url, callback) {
-  fetch(url, {
-    method: 'GET',
-    cache: 'no-cache',
-    headers: {
-      'Content-Type': 'text/plain;charset=UTF-8',
-    },
-  }).then((response) => {
-    if (response.ok) {
-      return response.text().then((text) => {
-        if (text) {
-          this.tool = new WidgetTool(this.props.data.widgetId);
-          try {
-            const fn = new Function(
-              'React',
-              'widgetInstance',
-              'widgetTool',
-              'widgetContext',
-              'return ' + text,
-            );
-            const result = fn(
-              React,
-              this.props.data,
-              this.tool,
-              getContext(),
-            );
-            callback(result);
+  function getFetchIe9(url, options = {}){
+    if (window.XDomainRequest) {
+      if(url.indexOf("https") != -1){
+        url = url.replace(/https/, "http");
+      }
+      let fh = url.indexOf("?") == -1?"?":"&&";
+      url += fh+"tm="+new Date().getTime();
+      return new Promise((resolve, reject) => {
+        const method = options.method || 'get';
+        const timeout = options.timeout || 30000;
+        const XDR = new XDomainRequest();
+        XDR.open(method, url);
+        XDR.timeout = timeout;
+        XDR.onload = () => {
+          try { 
+            return resolve(XDR.responseText);
           } catch (e) {
-            console.log(e);
+            reject(e);
           }
-        } else {
-          return Promise.reject(new Error('接口未返回数据'));
+          return reject({});
+        };
+        XDR.onprogress = () => {};
+        XDR.ontimeout = () => reject('XDomainRequest timeout');
+        XDR.onerror = () => reject('XDomainRequest error');
+        setTimeout(() => {
+          XDR.send();
+        }, 0);
+      });
+    } else {
+    }
+  }
+
+  function getResultFetch(_this,text, callback) {
+    _this.tool = new WidgetTool(_this.props.data.widgetId);
+    try {
+      const fn = new Function(
+        'React',
+        'widgetInstance',
+        'widgetTool',
+        'widgetContext',
+        'return ' + text,
+      );
+      const result = fn(
+        React,
+        _this.props.data,
+        _this.tool,
+        getContext(),
+      );
+      callback(result);
+    } catch (e) {
+      console.log(e);
+    } 
+  }
+
+
+  function getData(url, callback) {
+    let browser=navigator.appName;
+    let b_version=navigator.appVersion;
+    let _resultPremise = null;
+    if(browser=="Microsoft Internet Explorer" && b_version.match(/9./i)=="9.")
+    {
+      getFetchIe9(url,{method:"get",timeout:3000}).then((text) => {
+        getResultFetch(this,text, callback);
+      });
+    }else{
+      fetch(url, {
+        method: 'GET',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'text/plain;charset=UTF-8',
+        },
+      }).then((response) => {
+        if (response.ok) {
+          return response.text().then((text) => {
+            if (text) {
+              getResultFetch(this,text, callback);
+            } else {
+              return Promise.reject(new Error('接口未返回数据'));
+            }
+          });
         }
+        return Promise.reject(new Error('请求失败'));
       });
     }
-    return Promise.reject(new Error('请求失败'));
-  });
-}
+  }
+
 
 class WidgetItem extends Component {
   static propTypes = {
@@ -86,7 +134,7 @@ class WidgetItem extends Component {
         this.setState({
           loaded: true,
           widget: result.default ? result.default : result,
-        })
+        });
       })
     }
   }
