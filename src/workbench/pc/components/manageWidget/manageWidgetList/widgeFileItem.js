@@ -393,8 +393,11 @@ class WidgeFileItem extends Component {
         }
       }
     }
+  
+    var { folderBgSrc } = this.props;
+    var pngImport = {  backgroundImage: `url("${folderBgSrc}")`,'backgroundRepeat':'no-repeat'}
     let _html = (
-      <li name="file" className={`${widgetItem} ${widgetFileItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag} `} style={{...opacity,...styleOverLine,...styleOver}} onClick={this.props.onClick}>
+      <li name="file" className={`${widgetItem} ${widgetFileItem} animated ${isDragging ? 'zoomOut':'zoomIn'} ${drag} `} style={{...opacity,...styleOverLine,...styleOver,...pngImport}} onClick={this.props.onClick}>
         <div className={title}>
           {/* <div className={[title_left,file_icon].join(' ')}></div> */}
           <div className={`${title_right} ${file_title_right}`}> {da.widgetName} </div>

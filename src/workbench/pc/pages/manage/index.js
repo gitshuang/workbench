@@ -13,8 +13,8 @@ import manageActions from 'store/root/manage/actions';
 
 import HeaderPage from './headerPage';
 import Header from 'containers/header';
-import CreateManageModule from 'components/manageWidget/index'
-
+import CreateManageModule from 'pub-comp/manageWidget'
+import folderBgSrc from "assets/image/wgt/folder_bg.png"
 
 import {
   HeaderLeft,
@@ -425,6 +425,7 @@ class Home extends Component {
       popOpenCancel:this.popOpenCancel,
       moveGroupDrag:this.moveGroupDrag,
       moveItemDrag:this.moveItemDrag,
+      folderBgSrc,
     }
     return (
       <div className={page_home}>

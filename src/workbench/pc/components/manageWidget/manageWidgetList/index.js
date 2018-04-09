@@ -117,6 +117,7 @@ class WidgetList extends Component {
       requestSuccess,
       requestError,
       currGroupIndex,
+      folderBgSrc
     } = this.props;
     var widgetItemProps ={
       manageList,
@@ -147,7 +148,8 @@ class WidgetList extends Component {
       cancelFolderEdit,
       openFolder,
       setEditonlyId,
-      setDragInputState
+      setDragInputState,
+      folderBgSrc
     }
     var selectWidgetListProps = {
       applicationsMap,

@@ -70,6 +70,7 @@ class CreateManageModule extends Component {
       addDesk,
       moveGroupDrag,
       moveItemDrag,
+      folderBgSrc,
     } = this.props;
     var manageProps = {
       manageList,
@@ -119,6 +120,7 @@ class CreateManageModule extends Component {
       setEditonlyId,
       setDragInputState,
       delectService,
+      folderBgSrc
     }
     var widgetSelectListProps={
       applicationsMap,

@@ -100,7 +100,8 @@ export default class Content extends Component{
       setEditonlyId,
       setDragInputState,
       delectService,
-      addDesk
+      addDesk,
+      folderBgSrc
     } = this.props;
     var widgetListProps = {
       manageList,
@@ -127,6 +128,7 @@ export default class Content extends Component{
       setEditonlyId,
       setDragInputState,
       delectService,
+      folderBgSrc,
     }
     var widgetSelectListProps={
       applicationsMap,

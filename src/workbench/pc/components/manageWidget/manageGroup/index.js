@@ -411,6 +411,7 @@ class ManageGroup extends Component {
       requestSuccess,
       requestError,
       delectService,
+      folderBgSrc
     } = this.props;
     var widgetListProps = {
       manageList,
@@ -437,6 +438,7 @@ class ManageGroup extends Component {
       setEditonlyId,
       setDragInputState,
       delectService,
+      folderBgSrc
     }
     var widgetSelectListProps={
       applicationsMap,
