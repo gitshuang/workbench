@@ -38,6 +38,7 @@ const {
   pin,
   marginTop,
   marginLeft,
+  iframe_cont
 } = styles;
 /* 声明actions */
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -233,7 +234,7 @@ export default class Work extends Component {
       switch (type) {
         case 1:
           return (
-            <div className={`${marginTop}`}  style={{marginTop:94}}>
+            <div className={`${marginTop} ${iframe_cont}`}  style={{marginTop:94}}>
               <ContentContainer />
             </div>
           );

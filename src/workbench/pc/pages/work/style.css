@@ -77,6 +77,13 @@ body{
   bottom: 0px;
   right: 0px;
 }
+.iframe_cont{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}
 .tabArea {
   height: 48px;
 }
