@@ -85,6 +85,12 @@ const handlerList = {
   refreshUserInfo(type, event) {
     dispatchMessageTypeHandler(event);
   },
+  switchChatTo(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
 }
 
 function messageHandler({ detail, callbackId }, event) {
