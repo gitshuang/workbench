@@ -18,7 +18,7 @@ const handlers = {
         tenantId,
       }).then((data) => {
         const { crossTenant, serveName, url } = data;
-        if (crossTenant) {
+        if (!crossTenant) {
           openGlobalDialog({
             type:"warning",
             className:enter_or_team,
@@ -50,7 +50,7 @@ const handlers = {
           openGlobalDialog({
             title: serveName,
             content: (<iframe style={{width: '100%', height: 300}} src={url} />),
-          })
+          });
         }
       }, (err) => {
         console.log(err);
