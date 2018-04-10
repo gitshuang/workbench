@@ -53,7 +53,7 @@ class EstablishContent extends Component {
                 <li>带有场景感知能力的日程中心</li>
                 <li>赋能型项目协作工具</li>
                 <li>员工权益中心</li>
-                <li>智慧找人与共享图书</li>
+                <li>智慧找人</li>
                 <li>工作圈、微邮等办公协作工具</li>
               </ul>
             </div>
