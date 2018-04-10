@@ -8,6 +8,7 @@ import {
   frameElm,
 } from './style.css';
 
+@withRouter
 class Account extends Component {
   render() {
     return (

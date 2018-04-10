@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import update from 'react/lib/update';
-import { guid } from '@u';
+import { guid,avoidSameName } from '@u';
 import actions from './actions';
 
 const {
@@ -431,18 +431,25 @@ const reducer = handleActions({
       da.type===2 && (num++);
     })
     let _fileName = group.children?(num):1;
+
+    var folderNameArr = [];
+    const nameArr = manageList.forEach((group,k)=>{
+      group.children.forEach((v,k)=>{
+        v.type===2 && folderNameArr.push(v.widgetName);
+      })
+    })
+    const newFolderName = avoidSameName(folderNameArr, '文件夹');
+    console.log('folderNameArr',folderNameArr);
     const newdefaultFolder = {
       type: 2,
-      widgetName:"文件夹"+_fileName,
+      widgetName:newFolderName,//"文件夹"+_fileName,
       children:[],
     };
-    let dataAfter = findById(manageList,afterId);
     let temp = {
       ...newdefaultFolder,
       widgetId: newId,
       parentId:group.widgetId,
     };
-    group.children.splice(group.children.indexOf(dataAfter),0,temp);
     // group.children = group.children.concat({
     //   ...newdefaultFolder,
     //   widgetId: newId,
@@ -450,6 +457,8 @@ const reducer = handleActions({
     // });
     //拖拽创建文件夹
     if(typeof afterId !== "undefined"){
+      let dataAfter = findById(manageList,afterId);
+      group.children.splice(group.children.indexOf(dataAfter),0,temp);
       let dataPre = findById(manageList,id);
       // let dataAfter = findById(manageList,afterId);
       let groupData = findById(manageList,newId);
@@ -471,6 +480,8 @@ const reducer = handleActions({
         group.children.splice(group.children.indexOf(dataPre),1);
         group.children.splice(group.children.indexOf(dataAfter),1);
       }
+    }else{
+      group.children.push(temp);
     }
     manageList.splice(groupIndex, 1, {
       ...group,

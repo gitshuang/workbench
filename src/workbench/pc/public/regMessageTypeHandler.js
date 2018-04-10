@@ -3,8 +3,9 @@ import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home';
 import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
-import { postMessageToWin, get } from "@u";
-import {enter_or_team} from "./regMessageTypeHandler.css";
+import { postMessageToWin, get, logout } from "@u";
+import { enter_or_team } from "./regMessageTypeHandler.css";
+import { trigger } from "./componentTools";
 
 const { addBrm , popBrm} = workActions;
 const { popMessage, changeMessageType, hideIm } = rootActions;
@@ -121,6 +122,14 @@ const handlers = {
   },
   refreshUserInfo() {
     store.dispatch(getUserInfo());
+  },
+  logout() {
+    logout();
+  },
+  switchChatTo({ yht_id }) {
+    trigger('IM', 'switchChatTo', {
+      yht_id,
+    });
   },
 }
 

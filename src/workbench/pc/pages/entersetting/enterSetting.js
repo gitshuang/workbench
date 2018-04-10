@@ -380,7 +380,7 @@ class CreateEnter extends Component {
               ) : <div />
             }
             <FormItem showMast={false} isRequire={false} valuePropsName='value' errorMessage="请输入企业地址" method="blur" inline={true}>
-              <FormControl name="tenantAddress" value={newTenantAddress?newTenantAddress:tenantAddress} onChange={(e)=>{this.inputOnChange(e,"tenantAddress")}} placeholder="最多60个字符" />
+              <FormControl name="tenantAddress" value={newTenantAddress?newTenantAddress:''} onChange={(e)=>{this.inputOnChange(e,"tenantAddress")}} placeholder="最多60个字符" />
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>邀请加入规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
