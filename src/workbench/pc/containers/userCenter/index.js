@@ -427,8 +427,8 @@ class UserInfoContainer extends Component {
           </div>
 
           <div className={linkSetting}>
-              <a href={`${getHost('order')}/ticket`} >我的工单</a><br/>
-              <a href={`${getHost('cloundyy')}`} style={{lineHeight:"33px"}} >用友云官网</a>
+              <a href={`${getHost('order')}/ticket`} target="_blank">我的工单</a><br/>
+              <a href={`${getHost('cloundyy')}`} target="_blank" style={{lineHeight:"33px"}} >用友云官网</a>
           </div>
 
         </div>
