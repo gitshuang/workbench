@@ -450,9 +450,11 @@ class UserInfoContainer extends Component {
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" onClick={this.gotoManage.bind(this)}>
               <Icon type="record" />首页编辑</Button></li>
-
-              <li><Button shape="border" onClick={this.gotoUserInfo}>
-              <Icon type="role-management" />员工信息</Button></li>
+              
+              {
+                _titleType == "企业"?(<li><Button shape="border" onClick={this.gotoUserInfo}>
+                <Icon type="role-management" />员工信息</Button></li>):null
+              }
 
               {
                 _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
