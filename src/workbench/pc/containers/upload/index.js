@@ -115,10 +115,10 @@ class UploadPage extends Component {
 		return(
 		  <div className={upload_page}>
         {
-          applicationIcon != ""? (
+          applicationIcon == ""? (
             <div className={`${appImg} imgsrc`} />
           ) : (
-            <img id="imgSrc" src="https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/e7dfca95-2935-4fe1-a647-227379a8c566/Tulips.jpg" className={`${appImg} imgsrc`} />
+            <img id="imgSrc" src={applicationIcon} className={`${appImg} imgsrc`} />
           )
         }
         {
