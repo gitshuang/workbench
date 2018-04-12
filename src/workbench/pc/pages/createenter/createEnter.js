@@ -215,7 +215,7 @@ class CreateEnter extends Component {
                 </Select>
             </FormItem>
 
-             <FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;* &nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
+             <FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
                 <Select
                     defaultValue="-规模范围-"
                     name="tenantSize"
