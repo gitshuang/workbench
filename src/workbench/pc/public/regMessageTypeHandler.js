@@ -16,8 +16,8 @@ const handlers = {
       get('/service/getServiceByTenantIdAndServiceCode', {
         serviceCode,
         tenantId,
-      }).then((data) => {
-        const { crossTenant, serveName, url } = data;
+      }).then((app) => {
+        const { crossTenant, serveName, url } = app;
         if (!crossTenant) {
           openGlobalDialog({
             type:"warning",
@@ -29,13 +29,17 @@ const handlers = {
                 label: '切换',
                 fun: () => {
                   const {
-                location: {
-                  origin,
-                    pathname,
-                    hash,
-                },
-              } = window;
-                  window.localStorage.setItem('openServiceData', data);
+                    location: {
+                      origin,
+                      pathname,
+                      hash,
+                    },
+                  } = window;
+                  try {
+                    window.localStorage.setItem('openServiceData', JSON.stringify(data));
+                  } catch(e) {
+                    console.log(e);
+                  }
                   window.location.replace(
                     `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${serviceCode}`,
                   );
@@ -173,7 +177,11 @@ export function parseType(type) {
 export function getOpenServiceData(serviceCode) {
   let data = {};
   if (typeof window.localStorage.getItem('openServiceData') !== 'undefined') {
-    data = window.localStorage.getItem('openServiceData');
+    try {
+      data = JSON.parse(window.localStorage.getItem('openServiceData'));
+    } catch(e) {
+      console.log(e);
+    }
     window.localStorage.removeItem('openServiceData');
   }
   if (typeof openServiceData[serviceCode] !== 'undefined') {
