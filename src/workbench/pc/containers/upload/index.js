@@ -79,7 +79,7 @@ class UploadPage extends Component {
     resp.json = JSON.parse(resp.responseText) || eval(`(${resp.responseText})`)
     let dataBack = resp.json || resp.responseText;
     if(dataBack) {
-      document.getElementById("imgSrc").src= dataBack.data.url;
+      // document.getElementById("imgSrc").src= dataBack.data.url;
       this.setState({
         applicationIcon: dataBack.data.url
       })
