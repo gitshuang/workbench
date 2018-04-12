@@ -58,7 +58,7 @@ class DropdownButton extends Component{
       } = this.props;
       history.push('/establishusercenter');
   }
-
+  
   render(){
     let {label,dataItem,fun,type,marginLeft,lastIem,openMenu} = this.props;
     // const {label } = this.state;
@@ -101,8 +101,9 @@ class DropdownButton extends Component{
                 trigger={['click']}
                 overlay={_menus}
                 animation="slide-up" 
+                onClick={openMenu}
                 onVisibleChange={this.onVisibleChange} >
-                <div><Icon type={arrard} className={icon_style} onClick={openMenu}/></div>
+                <div><Icon type={arrard} className={icon_style}  /></div>
             </Dropdown>
           </div>
       </div>)

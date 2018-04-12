@@ -405,8 +405,8 @@ class CreateEnter extends Component {
                     style={{ width: 338, marginRight: 6 }}
                     onChange={(e)=>{this.setOptherData({name:"joinPermission",value:e})} }
                     >
-                    <Option value="0">允许 </Option>
-                    <Option value="1">禁止</Option>
+                    <Option value="0">所有用户都可申请加入 </Option>
+                    <Option value="1">禁止用户申请加入</Option>
                 </Select>
             </FormItem>
 
