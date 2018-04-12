@@ -22,8 +22,8 @@ const handlers = {
           openGlobalDialog({
             type:"warning",
             className:enter_or_team,
-            title: '即将切换租户',
-            content: '是否切换租户？',
+            title: '切换团队/企业',
+            content: '需要切换到对应的团队/企业查看详情，是否切换?',
             btns: [
               {
                 label: '切换',
