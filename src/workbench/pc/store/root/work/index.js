@@ -29,7 +29,7 @@ const {
 
 const defaultState = {
   domainName: '',
-  expandedSidebar: false,
+  expandedSidebar: true,
   current:{
     title: '',
     serviceCode: '',

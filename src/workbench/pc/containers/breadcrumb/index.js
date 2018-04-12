@@ -52,7 +52,7 @@ class BreadcrumbContainer extends Component {
     componentWillReceiveProps() {
       const { withSidebar } = this.props;
       if (!withSidebar) {
-        this.closeMenu()
+        this.setExpended();
       }
     }
     setExpended() {
