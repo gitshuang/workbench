@@ -65,7 +65,10 @@
   height: 64px;
   border-radius: 100px ; 
 }
-.image div{
+/* .image div{
+  margin-top: 5px;
+} */
+/* .image div{
   position: absolute;
   width: 24px;
   height: 24px;
@@ -77,9 +80,9 @@
   line-height: 24px;
   padding-top: 2px;
   cursor: pointer;
-}
+} */
 .image div i{
-  color: #ffffff;
+  /* color: #ffffff; */
   padding: 0;
   margin: 0;
   font-size: 18px;
@@ -101,7 +104,7 @@
 .footer>button{
   margin-left: 72px;
 }
-.wrap button{
+/* .wrap button{
   width:338px;
 height:32px; 
 background:rgba(225,76,70,1);
@@ -113,10 +116,28 @@ font-size: 14px;
 .wrap button:hover{
   background:rgba(225,76,70,1);
   color: #ffffff;
+} */
+
+.submit_class{
+  width:338px;
+  height:32px; 
+  background:rgba(225,76,70,1);
+  border-radius: 3px ; 
+  color: #ffffff;
+  line-height: 32px;
+  font-size: 14px;
+}
+.submit_class:hover{
+  background:rgba(225,76,70,1);
+  color: #ffffff;
 }
 
 .create_team_cont{
   padding-left: 30%;
+  padding-bottom: 13px;
+}
+:global(.ie9) .create_team_cont{
+  padding-bottom: 33px;
 }
 .upload label{
   line-height: 64px;
@@ -189,3 +210,13 @@ font-size: 14px;
   left: 0;
   top: 40px;
 }
+.error_block{
+  display: block;
+}
+.error_none{
+  display: none;
+}
+
+/* :global(.ie9 .team_upload_div .uploadImgTeam){
+  bottom: -60px;
+} */

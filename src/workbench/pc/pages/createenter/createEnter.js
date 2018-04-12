@@ -10,7 +10,8 @@ import { ButtonBrand } from 'pub-comp/button';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import 'assets/style/Form.css';
-import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom,process_loading,progress_bar} from './style.css';
+import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom,process_loading,
+  enter_upload,progress_bar} from './style.css';
 import CitySelect from 'bee/city-select';
 import Icon from 'pub-comp/icon';
 import {check} from './checkTenantStatus'
@@ -182,7 +183,7 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
+              <Upload className={enter_upload} name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>

@@ -29,7 +29,9 @@ import {
   process_loading_content,
   opacityHidden,
   opacityShow,
-  loading_desc
+  loading_desc,
+  submit_class,
+  error_block,error_none
 } from './index.css';
 
 @withRouter
@@ -81,6 +83,47 @@ class CreateTeamContent extends Component {
       })
       return false;
     }
+    this.setState({
+      value,
+      error:false
+    })
+  }
+
+  // imgChange = (e) => {
+  //   if(e.target.value.trim().length===0){
+  //     return false;
+  //   }
+  //   const { uploadApplication, requestStart, requestSuccess, requestError } = this.props;
+  //   let val = e.target.value && e.target.value.substr(e.target.value.lastIndexOf("."));
+  //   if(val && !val.match( /.jpg|.gif|.png|.bmp|.svg/i ) ){
+  //     this.setState({
+  //       imgWarning: "必须是一个图片"
+  //     });
+  //     return false;
+  //   }
+  //   let obj = this.refs.btn_file.files[0];
+  //   let imgUrl = window.URL.createObjectURL(obj);
+  //   this.setState({
+  //     imgUrl
+  //   });
+  //   const form = new FormData();
+  //   form.append('btn_file', obj);
+
+  //   requestStart();
+  //   uploadApplication(form).then(({error, payload}) => {
+  //     if (error) {
+  //       requestError(payload);
+  //     }
+  //     const backUrl = payload.url;
+  //     this.setState({
+  //       backUrl: backUrl
+  //     });
+  //     requestSuccess();
+  //   });
+  // }
+
+  setUrl(name,url){
+    this.state[name] = url;
     this.setState({
       value,
       error:false
@@ -159,9 +202,11 @@ class CreateTeamContent extends Component {
       this.setState({tenantId:tenantId,processValue:1});//把processValue变成1.那么就开是走progress
     });
   }
+  
   render() {
-    const { value, imgUrl, imgWarning ,disabled,error} = this.state;
-    let _error = error?"block":"none";
+    const {logo, value, imgUrl, imgWarning ,disabled,error} = this.state;
+    // let _error = error?"block":"none";
+    let _error = error?error_block:error_none;
     let now = this.state.processValue;
     return (
       <div className={wrap}>
@@ -176,14 +221,15 @@ class CreateTeamContent extends Component {
               onChange={(e)=>{this.onChange(e)}}
             />
           </div>
-          <div className={`${name_error} `} style={{display:`${_error} `}}>
+          <div className={`${name_error} ${_error}`}>
             请输入团队名称
           </div>
 
           <div className={`${item} um-box ${upload}`}>
             <label>团队头像&nbsp; &nbsp; </label>
-            <div className={image}>
-                { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
+            <div className={`${image}`}>
+                <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
+                {/* { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
                 <div>
                   <Icon type="copyreader" />
                 <input type="file" ref="btn_file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>{ this.imgChange(e) }} />
@@ -197,7 +243,7 @@ class CreateTeamContent extends Component {
           <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
               <Progress check={check} tenantId={this.state.tenantId} startFlag={now} loadingDesc={'正在配置团队信息…'}/>
           </div>
-          <Button className={now?opacityHidden:''} onClick={this.create} disabled={disabled} >创建</Button>
+          <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >创建</Button>
         </div>
       </div>
     )
