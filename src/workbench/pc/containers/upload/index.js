@@ -3,7 +3,7 @@ import { ButtonBrand } from 'pub-comp/button';
 import { uploadApplication }from 'store/root/api';
 import Icon from 'pub-comp/icon';
 import {getHost} from '@u';
-import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab,form_btnFile,ie9_form} from './style.css';
+import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab,form_btnFile,ie9_form,uploadImgIe9} from './style.css';
 
 class UploadPage extends Component {
   constructor(props){
@@ -94,7 +94,7 @@ class UploadPage extends Component {
                 </form>
                 <iframe id="frameUpload" name="frameUpload" style={{'width':0,'height':0,'opacity':0}}></iframe>
             </div>
-            <ButtonBrand className={"uploadImg uploadImgIe9"} style={{'position':'absolute',bottom:'-59px'}} >上传图片</ButtonBrand>
+            <ButtonBrand className={`uploadImgTeam ${uploadImgIe9}`} >上传图片</ButtonBrand>
       </div>)
     }else{
       return (<div>
@@ -114,9 +114,9 @@ class UploadPage extends Component {
 		  <div className={upload_page}>
         {
           applicationIcon == ""? (
-            <div className={appImg} />
+            <div className={`${appImg} imgsrc`} />
           ) : (
-            <img id="imgSrc" src={applicationIcon} className={appImg} />
+            <img id="imgSrc" src={applicationIcon} className={`${appImg} imgsrc`} />
           )
         }
         {

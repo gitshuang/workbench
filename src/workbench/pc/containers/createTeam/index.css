@@ -216,3 +216,10 @@ font-size: 14px;
 .error_none{
   display: none;
 }
+:global(.ie9 .team_upload_div .imgsrc){
+  height: auto;
+}
+
+:global(.ie9 .team_upload_div .uploadImgTeam){
+  bottom: -60px;
+}

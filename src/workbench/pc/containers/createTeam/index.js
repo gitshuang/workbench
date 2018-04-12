@@ -192,7 +192,7 @@ class CreateTeamContent extends Component {
 
           <div className={`${item} um-box ${upload}`}>
             <label>团队头像&nbsp; &nbsp; </label>
-            <div className={image}>
+            <div className={`${image} team_upload_div`}>
                 <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
                 {/* { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
                 <div>

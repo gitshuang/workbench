@@ -24,9 +24,9 @@
   border-radius: 50%;
   background-position: 1px;
 }
-:global(.ie9) .appImg{
+/* :global(.ie9) .appImg{
   height:auto;
-}
+} */
 .appValidate{
   color: rgb(244, 67, 54);
   display: inline-block;
@@ -70,7 +70,7 @@
 /*form*/
 .form_btnFile{
   position:absolute;
-  top:0;
+  top:-45px;
   left: -60px;
   z-index:2001;
   opacity: 0;
@@ -80,4 +80,9 @@
 .ie9_form{
   padding-top: 15px;
   margin-top: 5px;
+}
+
+.uploadImgIe9{
+  position: absolute;
+  bottom: 0px;
 }
