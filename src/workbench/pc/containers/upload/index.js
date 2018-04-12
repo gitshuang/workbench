@@ -16,9 +16,11 @@ class UploadPage extends Component {
 
   componentWillReceiveProps(nextProps){
     if(nextProps.logo != this.state.applicationIcon){
-      this.setState({
-        applicationIcon: nextProps.logo
-      })
+      if(navigator.userAgent.indexOf("MSIE 9.0") < 0){// ie9下不用跟新
+        this.setState({
+          applicationIcon: nextProps.logo
+        })
+      } 
     }
   }
 
