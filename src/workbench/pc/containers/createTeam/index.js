@@ -29,7 +29,9 @@ import {
   process_loading_content,
   opacityHidden,
   opacityShow,
-  loading_desc
+  loading_desc,
+  submit_class,
+  error_block,error_none
 } from './index.css';
 
 @withRouter
@@ -165,9 +167,11 @@ class CreateTeamContent extends Component {
       this.setState({tenantId:tenantId,processValue:1});//把processValue变成1.那么就开是走progress
     });
   }
+  
   render() {
     const {logo, value, imgUrl, imgWarning ,disabled,error} = this.state;
-    let _error = error?"block":"none";
+    // let _error = error?"block":"none";
+    let _error = error?error_block:error_none;
     let now = this.state.processValue;
     return (
       <div className={wrap}>
@@ -182,7 +186,7 @@ class CreateTeamContent extends Component {
               onChange={(e)=>{this.onChange(e)}}
             />
           </div>
-          <div className={`${name_error} `} style={{display:`${_error} `}}>
+          <div className={`${name_error} ${_error}`}>
             请输入团队名称
           </div>
 
@@ -204,7 +208,7 @@ class CreateTeamContent extends Component {
           <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
               <Progress check={check} tenantId={this.state.tenantId} startFlag={now} loadingDesc={'正在配置团队信息…'}/>
           </div>
-          <Button className={now?opacityHidden:''} onClick={this.create} disabled={disabled} >创建</Button>
+          <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >创建</Button>
         </div>
       </div>
     )

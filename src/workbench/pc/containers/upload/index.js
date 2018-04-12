@@ -3,7 +3,7 @@ import { ButtonBrand } from 'pub-comp/button';
 import { uploadApplication }from 'store/root/api';
 import Icon from 'pub-comp/icon';
 import {getHost} from '@u';
-import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab,form_btnFile} from './style.css';
+import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab,form_btnFile,ie9_form} from './style.css';
 
 class UploadPage extends Component {
   constructor(props){
@@ -86,7 +86,7 @@ class UploadPage extends Component {
 
   getIe9Html=()=>{
     if(navigator.userAgent.indexOf("MSIE 9.0")>0){
-      return (<div className="ie9_form" style={{'position':'relative'}}>
+      return (<div className={ie9_form} style={{'position':'relative'}}>
             <div className="hidden_form"  >
                 <form id="upload-form" name="myform" action={`${getHost('upload')}/`} method="post" 
                 target="frameUpload" acceptCharset="utf-8" encType="multipart/form-data" >
@@ -94,7 +94,7 @@ class UploadPage extends Component {
                 </form>
                 <iframe id="frameUpload" name="frameUpload" style={{'width':0,'height':0,'opacity':0}}></iframe>
             </div>
-            <ButtonBrand className={"uploadImg uploadImgIe9"} style={{'position':'absolute',top:'0'}} >上传图片</ButtonBrand>
+            <ButtonBrand className={"uploadImg uploadImgIe9"} style={{'position':'absolute',bottom:'-59px'}} >上传图片</ButtonBrand>
       </div>)
     }else{
       return (<div>
