@@ -397,7 +397,7 @@ class CreateEnter extends Component {
                 </Select>
             </FormItem>
 
-            <FormItem showMast={false}  labelName={<span>申请加入权限<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+            <FormItem showMast={false}  labelName={<span>申请权限<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                 <Select
                     name="joinPermission"
                     defaultValue="1"
