@@ -126,9 +126,11 @@ const handlers = {
   logout() {
     logout();
   },
-  switchChatTo({ yht_id }) {
+  switchChatTo({ id, yht_id, type }) {
     trigger('IM', 'switchChatTo', {
+      id,
       yht_id,
+      type,
     });
   },
 }
