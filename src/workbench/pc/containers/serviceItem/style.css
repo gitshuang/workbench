@@ -103,7 +103,9 @@
   cursor:pointer;
   /* margin-left: 45px; */
   margin-right: 8px;
+  margin-top: 7px;
 }
+
 /* 首页编辑-添加服务 */
 :global(.ie9_pop) .serviceItemTitle{
   display: table;
