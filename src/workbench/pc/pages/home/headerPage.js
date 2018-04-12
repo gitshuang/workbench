@@ -82,6 +82,7 @@ class HeaderPage extends Component {
   }
 
   openMenu=()=>{
+    console.log(" ==openMenu homepage== ");
     const {getSearchEnterOrTeam} = this.props;
     getSearchEnterOrTeam();
   }
