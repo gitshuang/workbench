@@ -327,6 +327,8 @@ export default class Work extends Component {
                   className={pin}
                   style={{
                     right: hasRelationFunc ? '-58px' : '-27px',
+                    position: "absolute",
+                    top:"1px"
                   }}
                   type={pinType?"pin2":"pin"}
                   onClick={ this.pinDisplayFn }
