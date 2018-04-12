@@ -3,7 +3,7 @@ import { ButtonBrand } from 'pub-comp/button';
 import { uploadApplication }from 'store/root/api';
 import Icon from 'pub-comp/icon';
 import {getHost} from '@u';
-import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab} from './style.css';
+import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab,form_btnFile} from './style.css';
 
 class UploadPage extends Component {
   constructor(props){

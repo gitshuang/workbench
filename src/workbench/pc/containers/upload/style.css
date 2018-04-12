@@ -64,3 +64,14 @@
   color: red;
   font-size: 12px;
 }
+
+/*form*/
+.form_btnFile{
+  position:absolute;
+  top:0;
+  left: -60px;
+  z-index:2001;
+  opacity: 0;
+  /* opacity:0;
+  visibility:hidden */
+}
