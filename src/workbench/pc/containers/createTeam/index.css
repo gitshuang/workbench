@@ -66,6 +66,9 @@
   border-radius: 100px ; 
 }
 .image div{
+  margin-top: 0px;
+}
+/* .image div{
   position: absolute;
   width: 24px;
   height: 24px;
@@ -77,7 +80,7 @@
   line-height: 24px;
   padding-top: 2px;
   cursor: pointer;
-}
+} */
 .image div i{
   color: #ffffff;
   padding: 0;
