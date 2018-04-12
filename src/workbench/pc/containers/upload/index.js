@@ -3,7 +3,9 @@ import { ButtonBrand } from 'pub-comp/button';
 import { uploadApplication }from 'store/root/api';
 import Icon from 'pub-comp/icon';
 import {getHost} from '@u';
-import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab,form_btnFile,ie9_form,uploadImgIe9} from './style.css';
+import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab,
+  hidden_form
+  ,form_btnFile,ie9_form,uploadImgIe9} from './style.css';
 
 class UploadPage extends Component {
   constructor(props){
@@ -87,7 +89,7 @@ class UploadPage extends Component {
   getIe9Html=()=>{
     if(navigator.userAgent.indexOf("MSIE 9.0")>0){
       return (<div className={ie9_form} style={{'position':'relative'}}>
-            <div className="hidden_form"  >
+            <div className=`${hidden_form}`  >
                 <form id="upload-form" name="myform" action={`/manager/file/upload/oss/workbench-image-path-applicationIcon`} method="post" 
                 target="frameUpload" acceptCharset="utf-8" encType="multipart/form-data" >
                     <input id="btn_file" className={form_btnFile} type="file" name="file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>this.imgChange(e)}/>
@@ -113,10 +115,10 @@ class UploadPage extends Component {
 		return(
 		  <div className={upload_page}>
         {
-          applicationIcon == ""? (
+          applicationIcon != ""? (
             <div className={`${appImg} imgsrc`} />
           ) : (
-            <img id="imgSrc" src={applicationIcon} className={`${appImg} imgsrc`} />
+            <img id="imgSrc" src="https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/e7dfca95-2935-4fe1-a647-227379a8c566/Tulips.jpg" className={`${appImg} imgsrc`} />
           )
         }
         {

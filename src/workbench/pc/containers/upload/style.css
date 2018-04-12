@@ -71,18 +71,22 @@
 .form_btnFile{
   position:absolute;
   top:-45px;
-  left: -60px;
+  left: -46px;
   z-index:2001;
   opacity: 0;
   /* opacity:0;
   visibility:hidden */
 }
 .ie9_form{
-  padding-top: 15px;
-  margin-top: 5px;
+  /* padding-top: 15px; */
+  margin-top: -3px;
 }
 
 .uploadImgIe9{
   position: absolute;
   bottom: 0px;
+}
+
+.hidden_form{
+  display: none;
 }
