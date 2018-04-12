@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ButtonBrand } from 'pub-comp/button';
 import { uploadApplication }from 'store/root/api';
 import Icon from 'pub-comp/icon';
+import {getHost} from '@u';
 import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab} from './style.css';
 
 class UploadPage extends Component {
@@ -41,12 +42,18 @@ class UploadPage extends Component {
         imgWarning: false
       });
     }
+
+    if(navigator.userAgent.indexOf("MSIE 9.0")>0){
+      let formVal = document.getElementById('upload-form')  ;  
+      formVal.submit();  
+      window.attachEvent ?
+      document.getElementById('frameUpload').attachEvent('onload', this.handleOnLoad) :
+      document.getElementById('frameUpload').addEventListener('load', this.handleOnLoad)
+      return true;//后面的不再执行了  
+    }
+
     let obj= this.refs.file.files[0];
     let imgUrl=window.URL.createObjectURL(obj);
-    // this.setState({
-    //   applicationIcon: imgUrl,
-    // })
-    // const {uploadApplication} = this.props;
     const from = new FormData();
     from.append('file', obj);
     uploadApplication(from).then(({url}) => {
@@ -60,6 +67,46 @@ class UploadPage extends Component {
       console.log(e);
     });
   }
+
+  handleOnLoad = () =>{
+    const frame = document.getElementById('frameUpload')
+    const resp = {}
+    const content = frame.contentWindow ? frame.contentWindow.document.body : frame.contentDocument.document.body
+    if(!content) throw new Error('Your browser does not support async upload')
+    resp.responseText = content.innerHTML || 'null innerHTML'
+    resp.json = JSON.parse(resp.responseText) || eval(`(${resp.responseText})`)
+    let dataBack = resp.json || resp.responseText;
+    if(dataBack) {
+      document.getElementById("imgSrc").src= dataBack.data.url;
+      this.setState({
+        applicationIcon: dataBack.data.url
+      })
+    }
+  }
+
+  getIe9Html=()=>{
+    if(navigator.userAgent.indexOf("MSIE 9.0")>0){
+      return (<div className="ie9_form" style={{'position':'relative'}}>
+            <div className="hidden_form"  >
+                <form id="upload-form" name="myform" action={`${getHost('upload')}/`} method="post" 
+                target="frameUpload" acceptCharset="utf-8" encType="multipart/form-data" >
+                    <input id="btn_file" className={form_btnFile} type="file" name="file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>this.imgChange(e)}/>
+                </form>
+                <iframe id="frameUpload" name="frameUpload" style={{'width':0,'height':0,'opacity':0}}></iframe>
+            </div>
+            <ButtonBrand className={"uploadImg uploadImgIe9"} style={{'position':'absolute',top:'0'}} >上传图片</ButtonBrand>
+      </div>)
+    }else{
+      return (<div>
+        <input type="file" ref="file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={this.imgChange} style={{display:"none"}}/>
+        <div className={edit} onClick={this.uploadImage} >
+          <Icon type="copyreader"/>
+        </div>
+
+      </div>)
+    }
+  }
+
 
 	render(){
     const { applicationIcon, imgWarning } = this.state;
@@ -77,15 +124,12 @@ class UploadPage extends Component {
             <div className={appValidate}>{imgWarning}</div>
           ) : null
         }
-        <input type="file" ref="file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={this.imgChange} style={{display:"none"}}/>
-        <div className={edit} onClick={this.uploadImage} >
-          <Icon type="copyreader"/>
-        </div>
+        
+        {this.getIe9Html()}
+
         {
           this.props.tip?<span className={titlp_lab}>{this.props.tip}</span>:''
         }
-
-        {/* <ButtonBrand className={uploadImg} onClick={this.uploadImage}>上传图片</ButtonBrand> */}
       </div>
 		)
 	}
