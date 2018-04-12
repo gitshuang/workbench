@@ -71,21 +71,21 @@ class CreateTeamContent extends Component {
 
   }
 
-  // onChange = (e) => {
-  //   //const { value } = this.state;
-  //   const value = e.target.value;
-  //   if( value.length > 60 || value == ""){
-  //     this.setState({
-  //       value,
-  //       error:true
-  //     })
-  //     return false;
-  //   }
-  //   this.setState({
-  //     value,
-  //     error:false
-  //   })
-  // }
+  onChange = (e) => {
+    //const { value } = this.state;
+    const value = e.target.value;
+    if( value.length > 60 || value == ""){
+      this.setState({
+        value,
+        error:true
+      })
+      return false;
+    }
+    this.setState({
+      value,
+      error:false
+    })
+  }
 
   // imgChange = (e) => {
   //   if(e.target.value.trim().length===0){
