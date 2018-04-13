@@ -218,7 +218,10 @@
   padding-bottom: 30px;
 }
 
-
 .enter_upload{
+  position: relative;
+}
+
+.enter_form :global(.ie9_form_cont){
   position: relative;
 }

@@ -88,7 +88,7 @@ class UploadPage extends Component {
 
   getIe9Html=()=>{ 
     if(navigator.userAgent.indexOf("MSIE 9.0")>0){
-      return (<div className={ie9_form}>
+      return (<div className={`${ie9_form} ie9_form_cont`}>
             <div className={`${hidden_form}`}  >
                 <form id="upload-form" name="myform" action={`/manager/file/upload/oss/workbench-image-path-applicationIcon`} method="post" 
                 target="frameUpload" acceptCharset="utf-8" encType="multipart/form-data" >
