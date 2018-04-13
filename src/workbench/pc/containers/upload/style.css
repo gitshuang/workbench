@@ -1,6 +1,11 @@
 .upload_page{
   position: relative;
-  margin-top: -16px;
+  /* margin-top: -16px; */
+}
+.upload_page img{
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
 
 .uploadImg {
@@ -67,26 +72,39 @@
   font-size: 12px;
 }
 
-/*form*/
 .form_btnFile{
-  position:absolute;
-  top:-45px;
-  left: -46px;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 100%;
+  height: 60px;
+  opacity: 0;
   z-index:2001;
   opacity: 0;
-  /* opacity:0;
-  visibility:hidden */
 }
-.ie9_form{
-  /* padding-top: 15px; */
-  margin-top: -3px;
+.ie9_form{ 
+  position: absolute;
+  /* background: red; */
+  top: 0px;
+  right: 0px;
+  width: 64px;
+  height: 64px;
+  text-align: right;
+  line-height: 36px;
+  padding-right: 3px;
 }
 
 .uploadImgIe9{
-  position: absolute;
+  /* position: absolute;
   bottom: 0px;
+  margin-bottom: 15px; */
 }
 
 .hidden_form{
-  display: none;
+  /* display: none; */
+  position: relative;
+}
+
+.icon{
+  color: #fff;
 }

@@ -65,9 +65,9 @@
   height: 64px;
   border-radius: 100px ; 
 }
-.image div{
+/* .image div{
   margin-top: 5px;
-}
+} */
 /* .image div{
   position: absolute;
   width: 24px;
@@ -82,7 +82,7 @@
   cursor: pointer;
 } */
 .image div i{
-  color: #ffffff;
+  /* color: #ffffff; */
   padding: 0;
   margin: 0;
   font-size: 18px;
@@ -217,6 +217,6 @@ font-size: 14px;
   display: none;
 }
 
-:global(.ie9 .team_upload_div .uploadImgTeam){
+/* :global(.ie9 .team_upload_div .uploadImgTeam){
   bottom: -60px;
-}
+} */

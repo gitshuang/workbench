@@ -4,7 +4,7 @@ import { uploadApplication }from 'store/root/api';
 import Icon from 'pub-comp/icon';
 import {getHost} from '@u';
 import { upload_page, appImg, appValidate, uploadImg ,edit,titlp_lab,
-  hidden_form
+  hidden_form,icon
   ,form_btnFile,ie9_form,uploadImgIe9} from './style.css';
 
 class UploadPage extends Component {
@@ -44,7 +44,7 @@ class UploadPage extends Component {
         imgWarning: false
       });
     }
-
+    //todu 
     if(navigator.userAgent.indexOf("MSIE 9.0")>0){
       let formVal = document.getElementById('upload-form')  ;  
       formVal.submit();  
@@ -86,17 +86,17 @@ class UploadPage extends Component {
     }
   }
 
-  getIe9Html=()=>{
+  getIe9Html=()=>{ 
     if(navigator.userAgent.indexOf("MSIE 9.0")>0){
-      return (<div className={ie9_form} style={{'position':'relative'}}>
-            <div className=`${hidden_form}`  >
+      return (<div className={ie9_form}>
+            <div className={`${hidden_form}`}  >
                 <form id="upload-form" name="myform" action={`/manager/file/upload/oss/workbench-image-path-applicationIcon`} method="post" 
                 target="frameUpload" acceptCharset="utf-8" encType="multipart/form-data" >
                     <input id="btn_file" className={form_btnFile} type="file" name="file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>this.imgChange(e)}/>
                 </form>
                 <iframe id="frameUpload" name="frameUpload" style={{'width':0,'height':0,'opacity':0}}></iframe>
             </div>
-            <ButtonBrand className={`uploadImgTeam ${uploadImgIe9}`} >上传图片</ButtonBrand>
+            <Icon type="copyreader" className={icon}/>
       </div>)
     }else{
       return (<div>
@@ -121,12 +121,13 @@ class UploadPage extends Component {
             <img id="imgSrc" src={applicationIcon} className={`${appImg} imgsrc`} />
           )
         }
+
         {
           imgWarning ? (
             <div className={appValidate}>{imgWarning}</div>
           ) : null
         }
-        
+
         {this.getIe9Html()}
 
         {
