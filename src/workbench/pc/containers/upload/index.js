@@ -13,14 +13,18 @@ class UploadPage extends Component {
     this.state = {
       applicationIcon:"",
       imgWarning:false,
+      newApplicationIcon:false
     }
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.logo != this.state.applicationIcon){
-        this.setState({
-          applicationIcon: nextProps.logo
-        })
+    const {newApplicationIcon} = this.props;
+    if(!newApplicationIcon){
+      if(nextProps.logo != this.state.applicationIcon){
+          this.setState({
+            applicationIcon: nextProps.logo
+          })
+      }
     }
   }
 
@@ -81,6 +85,7 @@ class UploadPage extends Component {
     if(dataBack) {
       // document.getElementById("imgSrc").src= dataBack.data.url;
       this.setState({
+        newApplicationIcon:true,
         applicationIcon: dataBack.data.url
       })
     }
