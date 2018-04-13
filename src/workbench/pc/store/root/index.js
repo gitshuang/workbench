@@ -147,7 +147,7 @@ const reducer = handleActions({
     // 避免localhost环境下一直刷新
     if (tenantid == "tenantid" && userid == "userid" ) return false;
     if( payload.tenantId !== tenantid || payload.userId !== userid ){
-      logout();
+      window.location.reload();
     }
     return {
       ...state,

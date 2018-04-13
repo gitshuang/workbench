@@ -16,26 +16,30 @@ const handlers = {
       get('/service/getServiceByTenantIdAndServiceCode', {
         serviceCode,
         tenantId,
-      }).then((data) => {
-        const { crossTenant, serveName, url } = data;
+      }).then((app) => {
+        const { crossTenant, serveName, url } = app;
         if (!crossTenant) {
           openGlobalDialog({
             type:"warning",
             className:enter_or_team,
-            title: '即将切换租户',
-            content: '是否切换租户？',
+            title: '切换团队/企业',
+            content: '需要切换到对应的团队/企业查看详情，是否切换?',
             btns: [
               {
                 label: '切换',
                 fun: () => {
                   const {
-                location: {
-                  origin,
-                    pathname,
-                    hash,
-                },
-              } = window;
-                  window.localStorage.setItem('openServiceData', data);
+                    location: {
+                      origin,
+                      pathname,
+                      hash,
+                    },
+                  } = window;
+                  try {
+                    window.localStorage.setItem('openServiceData', JSON.stringify(data));
+                  } catch(e) {
+                    console.log(e);
+                  }
                   window.location.replace(
                     `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true#/service/${serviceCode}`,
                   );
@@ -126,9 +130,11 @@ const handlers = {
   logout() {
     logout();
   },
-  switchChatTo({ yht_id }) {
+  switchChatTo({ id, yht_id, type }) {
     trigger('IM', 'switchChatTo', {
+      id,
       yht_id,
+      type,
     });
   },
 }
@@ -171,7 +177,11 @@ export function parseType(type) {
 export function getOpenServiceData(serviceCode) {
   let data = {};
   if (typeof window.localStorage.getItem('openServiceData') !== 'undefined') {
-    data = window.localStorage.getItem('openServiceData');
+    try {
+      data = JSON.parse(window.localStorage.getItem('openServiceData'));
+    } catch(e) {
+      console.log(e);
+    }
     window.localStorage.removeItem('openServiceData');
   }
   if (typeof openServiceData[serviceCode] !== 'undefined') {

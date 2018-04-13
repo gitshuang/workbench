@@ -58,7 +58,7 @@ class DropdownButton extends Component{
       } = this.props;
       history.push('/establishusercenter');
   }
-
+  
   render(){
     let {label,dataItem,fun,type,marginLeft,lastIem,openMenu} = this.props;
     // const {label } = this.state;
@@ -94,15 +94,16 @@ class DropdownButton extends Component{
           </div>
           {/* getPopupContainer = {this.props.getPopupContainer} */}
           {/* getPopupConptainer = {()=> document.getElementById("_dropdown_popcontainer")} */}
+          {/* onClick={openMenu} */}
           <div id="_dropdown_popcontainer" className={`${this.state.visible?btn_upward:btn_pull_down} home_title_down `}>
             <Dropdown overlayClassName="_btn_down"
                 getPopupContainer = {this.props.getPopupContainer}
                 trigger={['click']}
                 overlay={_menus}
-                animation="slide-up"
+                animation="slide-up" 
                 onClick={openMenu}
                 onVisibleChange={this.onVisibleChange} >
-                <div><Icon type={arrard} className={icon_style} onClick={openMenu}/></div>
+                <div><Icon type={arrard} className={icon_style}  /></div>
             </Dropdown>
           </div>
       </div>)
