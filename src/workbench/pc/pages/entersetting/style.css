@@ -207,9 +207,8 @@
 }
 
 .enter_form :global(.ie9_form_cont){
-  position: absolute;
+  position: absolute !important;
 }
-
 .enter_form :global(.ie9_cont){
-  position: relative ;
+  position: relative !important;
 }
