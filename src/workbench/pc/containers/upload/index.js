@@ -87,8 +87,9 @@ class UploadPage extends Component {
   }
 
   getIe9Html=()=>{ 
+    let _icon =  applicationIcon != ''?'ie9_cont':'';
     if(navigator.userAgent.indexOf("MSIE 9.0")>0){
-      return (<div className={`${ie9_form} ie9_form_cont`}>
+      return (<div className={`${ie9_form} ie9_form_cont ${_icon}`}>
             <div className={`${hidden_form}`}  >
                 <form id="upload-form" name="myform" action={`/manager/file/upload/oss/workbench-image-path-applicationIcon`} method="post" 
                 target="frameUpload" acceptCharset="utf-8" encType="multipart/form-data" >
@@ -113,7 +114,7 @@ class UploadPage extends Component {
 	render(){
     const { applicationIcon, imgWarning } = this.state;
 		return(
-		  <div className={upload_page}>
+		  <div className={upload_page} style={{height:"64px",position:"relative"}}>
         {
           applicationIcon == ""? (
             <div className={`${appImg} imgsrc`} />
