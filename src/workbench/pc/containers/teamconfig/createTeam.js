@@ -221,7 +221,7 @@ class CreateTeam extends Component {
                   <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  />
                 </FormItem>
 
-                <FormItem showMast={false}  labelName={<span>邀请加入规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                <FormItem showMast={false}  labelName={<span>邀请规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
                         defaultValue="1"
                         name="invitePermission"
@@ -229,13 +229,13 @@ class CreateTeam extends Component {
                         style={{ width: 338, marginRight: 6 }}
                         onChange={(e)=>{this.setOptherData({name:"invitePermission",value:e})} }
                         >
-                        <Option value="1">全员可邀请</Option>
+                        <Option value="1">全员邀请</Option>
                         <Option value="2">禁止邀请</Option>
-                        <Option value="0">仅管理员可邀请</Option>
+                        <Option value="0">管理员邀请</Option>
                     </Select>
                 </FormItem>
 
-                <FormItem showMast={false}  labelName={<span>申请加入权限<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
+                <FormItem showMast={false}  labelName={<span>申请权限<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
                         name="joinPermission"
                         defaultValue="1"
@@ -248,7 +248,7 @@ class CreateTeam extends Component {
                     </Select>
                 </FormItem>
 
-                <FormItem showMast={false} labelName={<span>成员主动退出<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+                <FormItem showMast={false} labelName={<span>允许用户退出<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
                   {/* <Nature name="allowExit" defaultValue={allowExit} onChange={this.allowExitChange}/> */}
                    <Radio.RadioGroup name="allowExit" selectedValue={this.state.value} onChange={this.allowExitChange} selectedValue={allowExit?allowExit:"0"}>
                     <Radio value="0" >禁止</Radio>

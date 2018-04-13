@@ -110,7 +110,7 @@ module.exports = function (config) {
       }),
       // extract css into its own file
       new ExtractTextPlugin({
-        filename: 'css/[name]-[chunkhash:8].css'
+        filename: 'css/[name]-[chunkhash:4][hash:4].css'
       }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.

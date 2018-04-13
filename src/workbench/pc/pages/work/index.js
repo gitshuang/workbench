@@ -326,7 +326,9 @@ export default class Work extends Component {
                   title="添加到首页"
                   className={pin}
                   style={{
-                    right: hasRelationFunc ? '-58px' : '-27px',
+                    // right: hasRelationFunc ? '-27px' : '-27px',
+                    position: "absolute",
+                    top:"0px"
                   }}
                   type={pinType?"pin2":"pin"}
                   onClick={ this.pinDisplayFn }
