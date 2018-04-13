@@ -53,7 +53,8 @@ rm(assetsRoot, err => {
           ejs.render(template, {
             publicPath: options.output.publicPath,
             entry: entry,
-            index: namedChunks[entry].files[0].replace(/(^js\/)|(\.js$)/g, ''),
+            indexJs: namedChunks[entry].files[0],
+            indexCss: namedChunks[entry].files[1],
             manifest: namedChunks['manifest'].files[0],
             vendor: namedChunks['vendor'].files[0],
             polyfill: namedChunks['polyfill'].files[0],
