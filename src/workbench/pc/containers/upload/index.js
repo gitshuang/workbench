@@ -87,6 +87,7 @@ class UploadPage extends Component {
   }
 
   getIe9Html=()=>{ 
+    const { applicationIcon, imgWarning } = this.state;
     let _icon =  applicationIcon != ''?'ie9_cont':'';
     if(navigator.userAgent.indexOf("MSIE 9.0")>0){
       return (<div className={`${ie9_form} ie9_form_cont ${_icon}`}>
