@@ -1,6 +1,8 @@
 .upload_page{
   position: relative;
   /* margin-top: -16px; */
+  width: 64px;
+  height: 64px;
 }
 .upload_page img{
   position: absolute;
