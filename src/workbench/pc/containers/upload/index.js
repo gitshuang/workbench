@@ -115,7 +115,7 @@ class UploadPage extends Component {
 	render(){
     const { applicationIcon, imgWarning } = this.state;
 		return(
-		  <div className={upload_page}>
+		  <div className={upload_page} style={{height:"64px",position:"relative"}}>
         {
           applicationIcon == ""? (
             <div className={`${appImg} imgsrc`} />
