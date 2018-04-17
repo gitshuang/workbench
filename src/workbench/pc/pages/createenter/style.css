@@ -217,3 +217,14 @@
 .enter_form :global(.progress_wrap){
   padding-bottom: 30px;
 }
+
+.enter_upload{
+  position: relative;
+}
+
+.enter_form :global(.ie9_form_cont){
+  position: absolute !important;
+}
+.enter_form :global(.ie9_cont){
+  position: relative !important;
+}

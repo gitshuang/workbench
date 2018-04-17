@@ -1,6 +1,11 @@
 .upload_page{
   position: relative;
-  margin-top: -16px;
+  /* margin-top: -16px; */
+}
+.upload_page img{
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
 
 .uploadImg {
@@ -24,7 +29,9 @@
   border-radius: 50%;
   background-position: 1px;
 }
-
+/* :global(.ie9) .appImg{
+  height:auto;
+} */
 .appValidate{
   color: rgb(244, 67, 54);
   display: inline-block;
@@ -63,4 +70,41 @@
   padding-left: 15px;
   color: red;
   font-size: 12px;
+}
+
+.form_btnFile{
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 100%;
+  height: 60px;
+  opacity: 0;
+  z-index:2001;
+  opacity: 0;
+}
+.ie9_form{ 
+  position: absolute;
+  /* background: red; */
+  top: 0px;
+  right: 0px;
+  width: 64px;
+  height: 64px;
+  text-align: right;
+  line-height: 36px;
+  padding-right: 3px;
+}
+
+.uploadImgIe9{
+  /* position: absolute;
+  bottom: 0px;
+  margin-bottom: 15px; */
+}
+
+.hidden_form{
+  /* display: none; */
+  position: relative;
+}
+
+.icon{
+  color: #fff;
 }

@@ -205,3 +205,10 @@
   color: RGBA(33, 43, 54, 1);
   font-size: 14px;
 }
+
+.enter_form :global(.ie9_form_cont){
+  position: absolute !important;
+}
+.enter_form :global(.ie9_cont){
+  position: relative !important;
+}
