@@ -451,14 +451,14 @@ class CreateTeamContent extends Component {
   paginationNumSelect = (id,dataNum) =>{
     let reg = new RegExp("条\/页","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
-    const { value, activetab, activePage}=this.state;
+    const { searchVal,value, activetab, activePage}=this.state;
     this.setState({
       dataPerPageNum:dataPerPageNum
     },function () {
       if(activetab=='other'){
-          this.queryUser(value,5,activePage-1,dataPerPageNum)
+          this.queryUser(searchVal,5,activePage,dataPerPageNum)
       }else{
-          this.queryUser(value,activetab,activePage-1,dataPerPageNum)
+          this.queryUser(searchVal,activetab,activePage,dataPerPageNum)
       }
     })
 

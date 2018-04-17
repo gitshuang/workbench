@@ -109,6 +109,7 @@
 }
 .content :global(.u-tabs-tabpane){
   background: #ffffff;
+  overflow-x: hidden;
 }
 .box{
   background: #ffffff;
