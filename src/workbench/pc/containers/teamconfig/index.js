@@ -451,14 +451,14 @@ class CreateTeamContent extends Component {
   paginationNumSelect = (id,dataNum) =>{
     let reg = new RegExp("条\/页","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
-    const { value, activetab, activePage}=this.state;
+    const { searchVal,value, activetab, activePage}=this.state;
     this.setState({
       dataPerPageNum:dataPerPageNum
     },function () {
       if(activetab=='other'){
-          this.getSearchOtherList(value,5,activePage-1,dataPerPageNum)
+          this.queryUser(searchVal,5,activePage,dataPerPageNum)
       }else{
-          this.getSearchTpyeList(value,activetab,activePage-1,dataPerPageNum)
+          this.queryUser(searchVal,activetab,activePage,dataPerPageNum)
       }
     })
 
@@ -569,6 +569,8 @@ class CreateTeamContent extends Component {
             onSelect={this.handleSelect.bind(this)}
           /> */}
            <EnhancedPagination
+                  maxButtons={3}
+                  gap={true}
                   items={this.state.pagesize}
                   activePage={this.state.activePage}
                   onDataNumSelect={this.paginationNumSelect}
