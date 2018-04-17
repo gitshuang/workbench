@@ -120,8 +120,7 @@ function findById(manageList,id) {
 function setDefaultSelected(manageList,applicationsMap){
   manageList.forEach((da,i)=>{
     if(da && da.type == 3){//表示服务和应用
-      if(applicationsMap[da.serviceId]){
-        console.log("da.serviceId : ",da.serviceId+"   "+da.serviceName);
+      if(applicationsMap[da.serviceId]){ 
         applicationsMap[da.serviceId].selected  = "1";
       }
     }else{
@@ -438,8 +437,7 @@ const reducer = handleActions({
         v.type===2 && folderNameArr.push(v.widgetName);
       })
     })
-    const newFolderName = avoidSameName(folderNameArr, '文件夹');
-    console.log('folderNameArr',folderNameArr);
+    const newFolderName = avoidSameName(folderNameArr, '文件夹'); 
     const newdefaultFolder = {
       type: 2,
       widgetName:newFolderName,//"文件夹"+_fileName,

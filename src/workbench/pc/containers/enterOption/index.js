@@ -51,8 +51,7 @@ class EnterOption extends Component {
     this.data = null;
   }
   
-  onVisibleChange = (visible) => {
-    console.log(visible);
+  onVisibleChange = (visible) => { 
   }
 
   onSelectDrop = (da) => {

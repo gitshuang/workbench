@@ -50,8 +50,7 @@ class TeamRemoveModal extends Component {
         this.setState({
           msg:payload,
           btn:[]
-        });
-        console.log(payload);
+        }); 
         return;
       }else{
         queryUser();

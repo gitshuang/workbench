@@ -14,12 +14,7 @@ class Teamconfig extends Component {
         this.state = {
           
         };
-    }
-
-    componentDidMount() {
-        console.log(this.props)
-    }
-
+    } 
     goBack =()=>{
         this.props.history.goBack();
     }

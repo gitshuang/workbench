@@ -173,8 +173,7 @@ class serviceClassify extends Component {
   }
   renderLabels() {
     const { tabs, currentTab, currentLabel } = this.state;
-    const labels = (tabs[currentTab] && tabs[currentTab].labels) || [];
-    console.log(labels);
+    const labels = (tabs[currentTab] && tabs[currentTab].labels) || []; 
     return [
       <Button
         className={currentLabel === -1 ? 'active' : ''}

@@ -102,13 +102,11 @@ class searchResult extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log(" ===componentDidMount=== "+this.props.match.params.value);
+  componentDidMount() { 
     this.getSearchMoreList(this.props.match.params.value)
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log(" -componentWillReceiveProps-- "+nextProps.match.params.value);
+  componentWillReceiveProps(nextProps){ 
     let keywords = nextProps.match.params?nextProps.match.params.value:"";
     if(keywords == this.state.keywords)return;
     this.getSearchMoreList(keywords);

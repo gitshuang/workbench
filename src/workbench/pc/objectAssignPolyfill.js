@@ -162,7 +162,6 @@ var browser=navigator.appName;
 var b_version=navigator.appVersion;
 if(browser=="Microsoft Internet Explorer" && b_version.match(/9./i)=="9.")
 {
-    //console.log问题
     window.console = window.console || (function(){ 
         var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){}; 
         return c; 

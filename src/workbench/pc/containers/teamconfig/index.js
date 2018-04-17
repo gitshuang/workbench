@@ -236,11 +236,6 @@ class CreateTeamContent extends Component {
     });
   }
 
-
-
-
-
-
   // 基础设置  输入框改变
   onChange = (e) => {
     const value = e.target.value;
@@ -252,174 +247,6 @@ class CreateTeamContent extends Component {
     })
   }
 
-  // // 基础设置  图片更改
-  // imgChange = (e) => {
-  //   if (e.target.value.trim().length === 0) {
-  //     return false;
-  //   }
-  //   const { uploadApplication, requestStart, requestSuccess, requestError } = this.props;
-  //   let val = e.target.value && e.target.value.substr(e.target.value.lastIndexOf("."));
-  //   if (val && !val.match(/.jpg|.gif|.png|.bmp|.svg/i)) {
-  //     this.setState({
-  //       imgWarning: "必须是一个图片"
-  //     });
-  //     return false;
-  //   }
-  //   let obj = this.refs.btn_file.files[0];
-  //   let imgUrl = window.URL.createObjectURL(obj);
-  //   this.setState({
-  //     imgUrl
-  //   });
-  //   const form = new FormData();
-  //   form.append('btn_file', obj);
-
-  //   requestStart();
-  //   uploadApplication(form).then(({ error, payload }) => {
-  //     if (error) {
-  //       requestError(payload);
-  //     }
-  //     const logo = payload.url;
-  //     this.setState({
-  //       logo: logo
-  //     });
-  //     requestSuccess();
-  //   });
-  // }
-  // 基础设置  搜索可见是否
-  // handleRadioChange1 = (value) => {
-  //   this.setState({ searchAvalible: value });
-  // }
-  // 基础设置    邀请成员权限
-  // handleChange1 = value => {
-  //   console.log(`selected ${value}`);
-  //   this.setState({
-  //     invitePermission: value
-  //   });
-  // };
-  //  // 基础设置加入权限
-  // handleChange2 = value => {
-  //   console.log(`selected ${value}`);
-  //   this.setState({
-  //     joinPermission: value
-  //   });
-  // };
-  // 基础设置  用户退空间 是否允许
-  // handleRadioChange2 = (value) => {
-  //   this.setState({ allowExit: value });
-  // }
-
-  // // 基础设置  保存
-  // create = () => {
-  //   const { createTeam, requestStart, requestSuccess, requestError } = this.props;
-  //   const {
-  //     tenantId,
-  //     value,
-  //     logo,
-  //     //searchAvalible,  //搜索可见
-  //     allowExit,  //允许用户是否退出空间
-  //     invitePermission,       //邀请成员权限
-  //     joinPermission,        //加入权限
-  //   } = this.state;
-  //   if (!value) {
-  //     alert("请输入团队名称");
-  //     return false;
-  //   }
-  //   console.log(this.props)
-  //   let data = {
-  //     tenantName: value,
-  //     tenantId: tenantId,
-  //     logo: logo,
-  //     //searchAvalible: searchAvalible,
-  //     invitePermission: invitePermission,
-  //     joinPermission: joinPermission,
-  //     allowExit: allowExit
-  //   };
-  //   requestStart();
-  //   createTeam(data).then(({ error, payload }) => {
-  //     requestSuccess();
-  //     if (error) {
-  //       requestError(payload);
-  //       return;
-  //     }
-  //     const tenantId = payload.tenantId;
-  //     //localStorage.setItem('create', "1");
-  //     window.location.href = "/?tenantId=" + tenantId + "&switch=true";
-  //   });
-
-  // }
-
-
-  // // 基础设置
-  // baseConfig = () => {
-  //   const { value, logo, imgWarning, invitePermission, joinPermission } = this.state;
-  //   return (
-  //     <div className={box}>
-  //       <div className={item + " um-box"}>
-  //         <label>团队名称<span>*</span></label>
-  //         <input
-  //           placeholder="最多60个字符"
-  //           value={value}
-  //           onChange={(e) => { this.onChange(e) }}
-  //         />
-  //       </div>
-  //       <div className={item + " um-box"}>
-  //         <label>团队头像</label>
-  //         <div className={image}>
-  //           {logo ? <img ref="imgSrc" src={logo} /> : null}
-  //           <div>
-  //             <Icon type="copyreader" />
-  //             <input type="file" ref="btn_file" onChange={(e) => { this.imgChange(e) }} />
-  //           </div>
-  //         </div>
-  //       </div>
-  //       <div className={item + " um-box"}>
-  //         <label>邀请成员权限</label>
-  //         <div>
-  //           <Select
-  //             value={invitePermission}
-  //             style={{ width: 200, marginRight: 6 }}
-  //             onChange={this.handleChange1}
-  //           >
-  //             <Option value="1">全员邀请</Option>
-  //             <Option value="0">全员禁止</Option>
-  //           </Select>
-  //         </div>
-  //       </div>
-  //       <div className={item + " um-box"}>
-  //         <label>加入权限</label>
-  //         <div>
-  //           <Select
-  //             value={joinPermission}
-  //             style={{ width: 200, marginRight: 6 }}
-  //             onChange={this.handleChange2}
-  //           >
-  //             <Option value="1">所有用户都可申请加入</Option>
-  //             <Option value="0">禁止用户申请加入</Option>
-  //           </Select>
-  //         </div>
-  //       </div>
-  //       <div className={item + " um-box"}>
-  //         <label>允许用户退出空间</label>
-  //         <div className="um-box-vc">
-  //           <Radio.RadioGroup
-  //             name="yssorno"
-  //             selectedValue={this.state.allowExit}
-  //             onChange={this.handleRadioChange2}
-  //           >
-  //             <Radio value="0">禁止</Radio>
-  //             <Radio value="1">允许</Radio>
-  //           </Radio.RadioGroup>
-  //         </div>
-  //       </div>
-  //       <div className={footer}>
-  //         <Button onClick={this.create}>保存</Button>
-  //       </div>
-  //     </div>
-  //   )
-  // }
-
-
- /* &&&&& 应用设置 &&&&&   */
   // 点击按钮切换不同的形态
   changeDuan = (type) => {
     const { webApplication, mobApplication, cliApplication } = this.state;
@@ -530,13 +357,9 @@ class CreateTeamContent extends Component {
       </div>
     )
   }
-
-
-
- /* &&&&& 用户设置 &&&&&   */
+ 
   // 更换用户身份
-  handleChange3 = (value,id) => {
-    console.log(`selected ${value}`);
+  handleChange3 = (value,id) => { 
     const { userToAdmin, adminToUser, requestError,requestSuccess } = this.props;
     let { newUserList } = this.state;
     this.setState({
@@ -593,9 +416,7 @@ class CreateTeamContent extends Component {
     this.queryUser( searchVal, onlyAdmin );
   }
   // 点击只显示管理员
-  changeCheck = (value) => {
-    console.log(value);
-
+  changeCheck = (value) => { 
     this.setState({
       onlyAdmin: value
     });
@@ -764,8 +585,7 @@ class CreateTeamContent extends Component {
     const { openUpgradeModal } = this.props;
     openUpgradeModal();
   }
-  onVisibleChange = (visible) => {
-    console.log(visible);
+  onVisibleChange = (visible) => { 
   }
 
   onSelectDrop = ({ key }) => {
