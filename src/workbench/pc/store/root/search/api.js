@@ -9,7 +9,11 @@ export const getSearchSuggest = (
 export const getSearchMore = (
   keywords
 ) => {
-  return get('/fullText/getMore', { keywords });
+  const data = {
+    keywords: encodeURI(encodeURI(keywords)),
+    size: 10
+  };
+  return get('/fullText/getMore', data);
 }
 export const getSearch = (
   keywords,

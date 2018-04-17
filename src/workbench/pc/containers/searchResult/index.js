@@ -233,7 +233,8 @@ class searchResult extends Component {
     this.setState({
       keywords:searchvalue
     }, function() {
-      this.getSearchMoreList(this.state.value,this.state.activetab,this.state.activePage-1,this.state.dataPerPageNum*1)
+      //this.getSearchMoreList(this.state.value,this.state.activetab,this.state.activePage-1,this.state.dataPerPageNum*1)
+      this.getSearchMoreList(this.state.value)
     })
   }
   onFormChange = (value) => {
