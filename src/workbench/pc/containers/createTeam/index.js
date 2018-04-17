@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-
+import Upload from 'containers/upload';
 import rootActions from 'store/root/actions';
 import teamActions from 'store/root/team/actions';
 import homeActions from 'store/root/home/actions';
@@ -10,7 +10,6 @@ import FormControl from 'bee/form-control';
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
-
 import {check} from './checkTenantStatus'
 import Progress from 'pub-comp/progress';
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -125,44 +124,9 @@ class CreateTeamContent extends Component {
   setUrl(name,url){
     this.state[name] = url;
     this.setState({
-      value,
-      error:false
+      ...this.state
     })
   }
-
-  imgChange = (e) => {
-    if(e.target.value.trim().length===0){
-      return false;
-    }
-    const { uploadApplication, requestStart, requestSuccess, requestError } = this.props;
-    let val = e.target.value && e.target.value.substr(e.target.value.lastIndexOf("."));
-    if(val && !val.match( /.jpg|.gif|.png|.bmp|.svg/i ) ){
-      this.setState({
-        imgWarning: "必须是一个图片"
-      });
-      return false;
-    }
-    let obj = this.refs.btn_file.files[0];
-    let imgUrl = window.URL.createObjectURL(obj);
-    this.setState({
-      imgUrl
-    });
-    const form = new FormData();
-    form.append('btn_file', obj);
-
-    requestStart();
-    uploadApplication(form).then(({error, payload}) => {
-      if (error) {
-        requestError(payload);
-      }
-      const backUrl = payload.url;
-      this.setState({
-        backUrl: backUrl
-      });
-      requestSuccess();
-    });
-  }
-
 
   create = () => {
     const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
@@ -233,7 +197,7 @@ class CreateTeamContent extends Component {
                 <div>
                   <Icon type="copyreader" />
                 <input type="file" ref="btn_file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>{ this.imgChange(e) }} />
-                </div>
+                </div> */}
                 {/* <span className={titlp_lab}>{"图片大小<=200K​"}</span> */}
               </div>
           </div>

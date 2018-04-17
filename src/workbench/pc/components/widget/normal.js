@@ -34,7 +34,7 @@ const widgetStyle = [
       // if(url.indexOf("https") != -1){
       //   url = url.replace(/https/, "http");
       // }
-      let fh = url.indexOf("?") == -1?"?":"&&";
+      let fh = url.indexOf("?") == -1?"?":"&";
       url += fh+"tm="+new Date().getTime();
       return new Promise((resolve, reject) => {
         const method = options.method || 'get';
