@@ -61,6 +61,7 @@ class CreateTeamContent extends Component {
       imgWarning: "",
       imgUrl: "",
       backUrl : "",    // 上传成功后返回的url
+      logo:"",
       disabled:false,
       error:false,
       processValue:0,//0表示未开始，1表示开始progress
@@ -130,7 +131,7 @@ class CreateTeamContent extends Component {
 
   create = () => {
     const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
-    const { value, backUrl } = this.state;
+    const { value, logo } = this.state;
     if ( !value || value == ""){
       this.setState({
         error:true
@@ -140,8 +141,8 @@ class CreateTeamContent extends Component {
     let data = {
       tenantName: value
     };
-    if (backUrl) {
-      data.logo = backUrl;
+    if (logo) {
+      data.logo = logo;
     }
     this.setState({
       disabled:true
