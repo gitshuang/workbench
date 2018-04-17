@@ -356,7 +356,7 @@ class UserInfoContainer extends Component {
         userName: name,
         userAvator: imgsrc,
         gloriesNum: glory,
-        redPacketsNum: redPackets, 
+        redPacketsNum: redPackets,
         admin,
         logo,
         company,
@@ -399,9 +399,6 @@ class UserInfoContainer extends Component {
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
-          <div className={userSetting} onClick={this.accountManage.bind(this)}>
-            <Icon type="setting" />
-          </div>
           <div className={logOut} onClick={logout}>
             <Icon type="exit" />
             <span>注销</span>
@@ -411,7 +408,10 @@ class UserInfoContainer extends Component {
               <div className={imgOuter}>
                 {this.getIcon1(imgsrc)}
               </div>
-              <div className={new_name} title={name}>{getStrLenSubstr(name,20,20)}</div>
+              <div className={new_name} title={name}>{name}</div>
+              <div className={userSetting} onClick={this.accountManage.bind(this)}>
+                <Icon type="copyreader" />
+              </div>
             </div>
             {/* <div>
              <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
@@ -422,7 +422,7 @@ class UserInfoContainer extends Component {
                 <li>
                   <div className={`${iconContainer} ${icon3}`}><Icon title="动态" type="Internet2"></Icon></div>
                 </li>
-              </ul> 
+              </ul>
             </div>*/}
           </div>
 
@@ -450,7 +450,7 @@ class UserInfoContainer extends Component {
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" onClick={this.gotoManage.bind(this)}>
               <Icon type="record" />首页编辑</Button></li>
-              
+
               {
                 _titleType == "企业"?(<li><Button shape="border" onClick={this.gotoUserInfo}>
                 <Icon type="role-management" />员工信息</Button></li>):null
