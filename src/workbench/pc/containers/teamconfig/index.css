@@ -94,7 +94,7 @@
 }
 :global(.ie9) .content :global(.u-tabs-top .u-tabs-nav-scroll){
   /* padding: 0 154px; */
-  padding-left: 30%;
+  padding-left: 32%;
   box-sizing: border-box;
 }
 .content :global(.u-tabs-top){
@@ -365,22 +365,28 @@
   padding-bottom: 35px;
 }
 .memberLists li{
-  padding: 16px 5px 16px 15px;
+  /* padding: 16px 5px 16px 15px; */
   border-bottom: 1px solid rgba(13, 20, 36, 0.1);
   display: table;
   width: 100%;
+  height: 70px;
+  line-height: 70px;
+  padding-left: 15px;
+  box-sizing: border-box;
 }
 .memberLists li > div{
   display: inline-block;
+  vertical-align: middle;
 }
 .memberLists li > div >img{
   width: 32px;
   height: 32px;
+  border-radius: 50%;
 }
 .memberLists li > div:first-child{
   width: 32px;
   height: 32px;
-  line-height: 36px;
+  line-height: 35px;
   background:rgba(202,205,212,1);
   border-radius: 32px;
   margin-right: 7px;

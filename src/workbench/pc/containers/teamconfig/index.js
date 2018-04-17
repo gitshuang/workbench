@@ -456,9 +456,9 @@ class CreateTeamContent extends Component {
       dataPerPageNum:dataPerPageNum
     },function () {
       if(activetab=='other'){
-          this.getSearchOtherList(value,5,activePage-1,dataPerPageNum)
+          this.queryUser(value,5,activePage-1,dataPerPageNum)
       }else{
-          this.getSearchTpyeList(value,activetab,activePage-1,dataPerPageNum)
+          this.queryUser(value,activetab,activePage-1,dataPerPageNum)
       }
     })
 
@@ -569,6 +569,8 @@ class CreateTeamContent extends Component {
             onSelect={this.handleSelect.bind(this)}
           /> */}
            <EnhancedPagination
+                  maxButtons={3}
+                  gap={true}
                   items={this.state.pagesize}
                   activePage={this.state.activePage}
                   onDataNumSelect={this.paginationNumSelect}
