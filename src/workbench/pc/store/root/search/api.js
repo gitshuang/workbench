@@ -4,7 +4,10 @@ import { get } from '@u';
 export const getSearchSuggest = (
   keywords
 ) => {
-  return get('/fullText/suggest', { keywords });
+  const data = {
+    keywords: encodeURI(keywords)
+  };
+  return get('/fullText/suggest', data);
 }
 export const getSearchMore = (
   keywords
@@ -22,7 +25,7 @@ export const getSearch = (
   size
 ) => {
   return get('/fullText/search', { 
-    keywords:keywords,
+    keywords: encodeURI(keywords),
     type:type,
     page:page,
     size:size
@@ -35,7 +38,7 @@ export const getSearchOther = (
   size,
 ) => {
   return get('/fullText/getOther', { 
-    keywords:keywords,
+    keywords: encodeURI(keywords),
     contentsize:contentsize,
     page:page,
     size:size

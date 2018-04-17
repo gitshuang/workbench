@@ -85,6 +85,11 @@
   font-size:18px;
   font-family:PingFangSC-Semibold;
   color:rgba(71,77,84,1);
+  vertical-align: middle;
+  max-width: 222px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .imgInner{
   width:64px;
@@ -448,16 +453,15 @@
   vertical-align: middle;
 }
 .userSetting{
-  position: absolute;
-  left: 16px;
-  top: 22px;
+  display: inline-block;
   cursor: pointer;
+  vertical-align: middle;
+  margin-left: 5px;
 }
 .userSetting >i{
+  float: left;
   font-size: 20px;
   color: rgba(117,127,140,1);
-  margin-right: 5px;
-  vertical-align: middle;
 }
 /* tenant */
 .tenantArea {
@@ -502,12 +506,12 @@
 .teamBtnList :global(.u-button){
   background: transparent;
   line-height: 21px;
-  height:21px; 
+  height:21px;
   font-size:12px !important;
   color:rgba(71,77,84,1);
 }
 .teamBtnList i{
-  font-size: 15px; 
+  font-size: 15px;
   color: RGBA(117, 127, 140, 1);
   vertical-align: middle;
 }
@@ -526,7 +530,7 @@
 
 .createBtnList :global(.u-button){
   width:48px;
-  height:32px; 
+  height:32px;
   line-height: 32px;
   margin-right:8px;
   font-size:12px;
