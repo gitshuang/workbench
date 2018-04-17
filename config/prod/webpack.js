@@ -47,7 +47,6 @@ module.exports = function (config) {
                 {
                   loader: 'postcss-loader',
                   options: {
-                    ident: 'postcss',
                     sourceMap: false
                   }
                 }
