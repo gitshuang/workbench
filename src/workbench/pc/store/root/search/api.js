@@ -13,7 +13,7 @@ export const getSearchMore = (
   keywords
 ) => {
   const data = {
-    keywords: encodeURI(encodeURI(keywords)),
+    keywords: encodeURI(keywords),
     size: 10
   };
   return get('/fullText/getMore', data);
