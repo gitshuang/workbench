@@ -90,8 +90,7 @@ const reducer = handleActions({
               break;
           }
       }
-    }
-    console.log(backVal);
+    } 
     return {
       ...state,
       brmBackVal:backVal,
@@ -127,8 +126,7 @@ const reducer = handleActions({
     } = current;
     const curTab = tabs.find(({id}) => id === currentId);
     let newBrm = []
-    menuPath.map(function(item,index) {
-      console.log(item.service)
+    menuPath.map(function(item,index) { 
       newBrm.push({name:item.menuItemName,url:item.service&&item.service.url})
     })
     const brm = state.brm &&state.brm.length?[...state.brm,newBrm]:[newBrm];

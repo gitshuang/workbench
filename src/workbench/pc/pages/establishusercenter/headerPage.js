@@ -65,22 +65,7 @@ class HeaderPage extends Component {
     }
   }
 
-  // getUserInfo() {
-  //   const { userInfo: { name }, getUserInfo ,requestStart, requestSuccess, requestError} = this.props;
-  //   if (!name) {
-  //     requestStart();
-  //     getUserInfo().then(({ error, payload }) => {
-  //       if (error) {
-  //         requestError(payload);
-  //       } else {
-  //         requestSuccess();
-  //       }
-  //     });
-  //   }
-  // }
-
-  allBtnOnclick=()=>{
-    console.log("allBtn",this.state.allBtn);
+  allBtnOnclick=()=>{ 
     this.setState({
       allBtn:this.state.allBtn?false:true
     })
@@ -113,8 +98,6 @@ class HeaderPage extends Component {
     }else{
       imgIcon =  <Icon type="staff" />;
     }
-
-    console.log("this.state.allBtn",this.state.allBtn);
     const _btnShow = this.state.btnShow?null:btn_disable;
 
     return (

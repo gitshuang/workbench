@@ -27,11 +27,7 @@ class CreateTeam extends Component {
           
         };
     }
-
-    componentDidMount() {
-        console.log(this.props)
-    }
-
+ 
     goBack =()=>{
         this.props.history.goBack();
     }

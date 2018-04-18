@@ -307,8 +307,6 @@ class CreateEnter extends Component {
       this.tenantSizeOption.forEach(({value,label},i)=>{
         _tenantSizeOption.push(<Option key={value+"_"+i} value={value}>{label}</Option>);
       })
-     
-    console.log("_tenantSize",tenantSize);
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'>&nbsp;*&nbsp;</font></span>}

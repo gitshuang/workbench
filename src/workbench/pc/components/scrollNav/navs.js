@@ -112,7 +112,6 @@ class Navs extends Component{
   componentDidMount() {
     let ul = document.getElementById("nav_ul"); 
     let b = ul.scrollWidth > ul.clientWidth?true:false;
-    console.log("nav_ul",b);
     this.props.btnShowFn(b);
 
     this.setScrollLeft();

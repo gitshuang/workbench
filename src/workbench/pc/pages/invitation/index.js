@@ -134,9 +134,7 @@ class Invitation extends Component {
     });
     }, (err)=>{
     requestError(err);
-    });
-
-    console.log(mails);
+    }); 
     this.setState({
       mails: ['', ''],
       successDialogShow: true,

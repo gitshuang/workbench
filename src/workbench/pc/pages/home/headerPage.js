@@ -115,8 +115,7 @@ class HeaderPage extends Component {
   }
   componentDidMount() {
     this.getUserInfo();
-    const { changeUserInfoDisplay,changeRequestDisplay } = this.props;
-    //console.log(GetQueryString("create"));
+    const { changeUserInfoDisplay,changeRequestDisplay } = this.props; 
     // 判断是否localstorage中包含这个值
     if(localStorage.getItem("create")) {
       changeUserInfoDisplay();
@@ -148,8 +147,7 @@ class HeaderPage extends Component {
     }
   }
 
-  allBtnOnclick=()=>{
-    console.log("allBtn",this.state.allBtn);
+  allBtnOnclick=()=>{ 
     this.setState({
       allBtn:this.state.allBtn?false:true
     })
@@ -185,9 +183,7 @@ class HeaderPage extends Component {
       imgIcon = <img src={img} className={imgInner} />
     }else{
       imgIcon =  <Icon type="staff" />;
-    }
-
-    console.log("this.state.allBtn",this.state.allBtn);
+    } 
     const _btnShow = this.state.btnShow?null:btn_disable;
 
     return (
