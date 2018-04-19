@@ -48,7 +48,7 @@
 }
 .breadcrumbClass :global(.u-breadcrumb) li:last-child{
   /* color:#4A515D; */
-  color: rgba(71,77,84,1);
+  /* color: rgba(71,77,84,1); */
 }
 .itmeHover:hover span{
   color:rgba(225,76,70,1);
