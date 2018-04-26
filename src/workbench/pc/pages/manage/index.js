@@ -298,7 +298,6 @@ class Home extends Component {
       showCancelModal: false
     });
   }
-
   // 返回确认按钮
   checkFun =(id)=>{
     let btn = document.getElementById(id);

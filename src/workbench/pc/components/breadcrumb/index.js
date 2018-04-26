@@ -16,7 +16,7 @@ class Breadcrumbs extends Component {
   goBack = () => {
     this.props.history.replace('');
   }
-  
+
   //需要新增一个回退函数
   enhancedGoBack = (url,i) =>{
     let {goback ,data} = this.props;
@@ -43,13 +43,22 @@ class Breadcrumbs extends Component {
         <Breadcrumb>
         {
           data.map(function({name, url},i){
+            let itemProps = {
+              key: `item${i}`,
+              className: '',
+              children: name
+            };
+            if (i != data.length - 1 && url) {
+              itemProps = {
+                ...itemProps,
+                onClick: ()=>{
+                  return self.enhancedGoBack(url,i);
+                },
+                className: itmeHover,
+              };
+            }
             return (
-              <Breadcrumb.Item
-               key={`item${i}`}
-               className={url ? `${itmeHover}` : ''}
-               onClick={e=>self.enhancedGoBack(url,i)}>
-                {name}
-              </Breadcrumb.Item>
+              <Breadcrumb.Item {...itemProps}/>
             );
           })
         }

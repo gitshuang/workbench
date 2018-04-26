@@ -8,13 +8,13 @@ import PopDialog from 'pub-comp/pop';
 import {content,select_enter} from './index.css';
 import DropdownButton from 'components/dropdown';
 
-const { exitTeam, closeExitModal } = teamconfigActions; 
+const { exitTeam, closeExitModal } = teamconfigActions;
 const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay,getSearchEnterOrTeam } = homeActions;
 
 @withRouter
 @connect(
   mapStateToProps(
-    'searchEnterOrTeamList',
+    // 'searchEnterOrTeamList',
     'userInfoDisplay',
     'userInfo',
     {
@@ -33,11 +33,13 @@ class SelectEnter extends Component {
 
   constructor(props) {
     super(props);
+    /*
     this.state = {
       allowTenants:[],
     }
+    */
   }
-
+  /*
   componentWillReceiveProps(nextProps){
     if(this.props.searchEnterOrTeamList != nextProps.searchEnterOrTeamList){
       this.setState({
@@ -45,6 +47,7 @@ class SelectEnter extends Component {
       })
     }
   }
+  */
 
   changeTenant(tenantId){
     const {
@@ -58,12 +61,14 @@ class SelectEnter extends Component {
       `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true`,
     );
   }
- 
 
+
+  /*
   openMenu=()=>{
     const {getSearchEnterOrTeam} = this.props;
     getSearchEnterOrTeam();//调用新接口
   }
+  */
 
   closeFun = ()=>{
     const {
@@ -73,19 +78,20 @@ class SelectEnter extends Component {
     } = this.props;
     if(userInfoDisplay){
       hideUserInfoDisplay();
-    } 
+    }
   }
 
-  render() { 
+  render() {
     const {
       userInfo: {
         logo,
         allowTenants,
         company,
+        // searchEnterOrTeamList,
       }
     } = this.props;
 
-    let _dataItem = []; 
+    let _dataItem = [];
     allowTenants.forEach(({ tenantId: name, tenantName: value, type }) => {
       if(company != value){
         let obj = {
@@ -96,16 +102,16 @@ class SelectEnter extends Component {
         };
         _dataItem.push(obj);
       }
-    }) 
+    })
     return (
        <div id="open_select" className={select_enter}>
          <span>请选择想要进入的企业/团队:</span>
          <DropdownButton
-          openMenu={this.openMenu}
+          // openMenu={this.openMenu}
           marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
           lastIem={true}
-          label="请选择企业/团队" type="home" dataItem={_dataItem} /> 
+          label="请选择企业/团队" type="home" dataItem={_dataItem} />
        </div>
     )
   }

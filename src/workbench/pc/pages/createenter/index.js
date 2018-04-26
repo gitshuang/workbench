@@ -16,7 +16,7 @@ import { page_enterprise ,enter_title,enter_cont,hr,hr2,appBreadcrumb,home_none}
             namespace: 'home',
         },
     ),
-    { 
+    {
     }
 )
 class Enterprise extends Component {
@@ -51,14 +51,14 @@ class Enterprise extends Component {
         }
         <div className={appBreadcrumb}>
           <Breadcrumbs data={[{ name:"创建企业" }]} goback={this.goBack}/>
-        </div> 
+        </div>
         <div className={`${page_enterprise} um-content`}>
           <div className={enter_title} >创建企业</div>
           <hr className={hr}/>
           <div className={enter_cont} >
             <CreateEnter userInfo={userInfo} />
-          </div> 
-          <hr className={hr, hr2}/>
+          </div>
+          <hr className={`${hr} ${hr2}`}/>
         </div>
       </div>
     );
