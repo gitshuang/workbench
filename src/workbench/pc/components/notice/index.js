@@ -1,33 +1,30 @@
 /* notice */
-import React, {Component} from 'react';
-import store from 'store';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'pub-comp/icon';
 import Button from 'bee/button';
 import { dispatchMessageTypeHandler, parseType } from 'public/regMessageTypeHandler';
-import {closeNotice} from "./index.css";
+import { closeNotice } from './index.css';
 
 class Notice extends Component {
   static propTypes = {
     notice: PropTypes.string,
-    data: PropTypes.object,
+    data: PropTypes.shape({
+      content: PropTypes.string,
+      btns: PropTypes.array,
+      icon: PropTypes.string,
+    }),
   }
   static defaultProps = {
     notice: 'notice',
     data: {},
   }
-  constructor(props, context) {
-    super(props, context);
-  }
 
   handClick(i) {
-    return (evt) => {
-      // evt.stopPropagation();
-      let { type } = this.props.data.btns[i];
-
+    return () => {
+      const { type } = this.props.data.btns[i];
       dispatchMessageTypeHandler(parseType(type));
-      // return false;
-    }
+    };
   }
 
   render() {
@@ -36,21 +33,29 @@ class Notice extends Component {
       data: {
         content,
         btns,
-        icon
+        icon,
       },
     } = this.props;
 
     return (
       <div >
-        <img src={icon}/>
-        <Icon type="error3" className={closeNotice}></Icon>
+        <img alt="" src={icon} />
+        <Icon type="error3" className={closeNotice} />
         <p title={content}>{content}</p>
         {
           btns.map((btn, i) => (
-            <Button key={i} className={`${notice}Btn  btn`+i} size="sm" style={{ color: `${btn.btnColor}` }} onClick={ this.handClick(i) } >{btn.typeBtn}</Button>
+            <Button
+              key={i}
+              className={`${notice}Btn  btn${i}`}
+              size="sm"
+              style={{ color: `${btn.btnColor}` }}
+              onClick={this.handClick(i)}
+            >
+              {btn.typeBtn}
+            </Button>
           ))
         }
-        {/* <div className="hideAuto"><Icon type="xiaoxi" /></div> */}
+        {/* <div className='hideAuto'><Icon type='xiaoxi' /></div> */}
       </div>
     );
   }

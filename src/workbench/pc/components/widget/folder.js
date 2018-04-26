@@ -3,23 +3,34 @@ import PropTypes from 'prop-types';
 import {
   widgetItem,
   title,
-  file_context,
-  title_left,
-  file_icon,
-  title_right,
-  context,
-  file_num,
-  file_title_right,
-  widget_file_item
-} from './style.css'
+  titleRight,
+  fileNum,
+  fileTitleRight,
+  widgetFileItem,
+} from './style.css';
 
-const style={
-  'position':'absolute',
-  'right':'11px',
-  'bottom':'9px',
-  'color':'#fff'
-}
+const style = {
+  position: 'absolute',
+  right: '11px',
+  bottom: '9px',
+  color: '#fff',
+};
+
 class FolderWidget extends Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      background: PropTypes.string,
+      size: PropTypes.number,
+      widgetName: PropTypes.string,
+      icon: PropTypes.string,
+      type: PropTypes.number,
+    }),
+    clickHandler: PropTypes.string,
+  };
+  static defaultProps = {
+    data: {},
+    clickHandler: '',
+  };
   render() {
     const {
       data,
@@ -28,21 +39,23 @@ class FolderWidget extends Component {
     const {
       widgetName: name,
       children,
-      type
+      type,
     } = data;
     return (
-      <li className={`${widgetItem} ${type==2?widget_file_item:""}`} onClick={ clickHandler } >
+      <li
+        className={`${widgetItem} ${type === 2 ? widgetFileItem : ''}`}
+        onClick={clickHandler}
+        onKeyDown={clickHandler}
+        role="presentation"
+      >
         <div className={title}>
-          <div className={`${title_right} ${file_title_right}`}>{name}</div>
+          <div className={`${titleRight} ${fileTitleRight}`}>{name}</div>
         </div>
-        {/*<div className={[context, file_context].join(' ')} >
-          { children.map(() => (<div></div>)).slice(0, 9) }
-        </div>*/}
-        <div className={file_num} style={style}>
+        <div className={fileNum} style={style}>
           ({children.length})
         </div>
       </li>
-    )
+    );
   }
 }
 
