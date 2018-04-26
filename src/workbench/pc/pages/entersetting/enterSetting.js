@@ -245,8 +245,11 @@ class CreateEnter extends Component {
         }
         // const tenantId = tenantId;
         // localStorage.setItem('create', "1");
-        this.setState({ processValue: 1 });
-        // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+        if (updateenter === 'upgrade_enter') {
+          this.setState({ processValue: 1 });
+        } else {
+          window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+        }
       });
 
     }
