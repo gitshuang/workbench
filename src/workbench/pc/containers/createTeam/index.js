@@ -121,10 +121,9 @@ class CreateTeamContent extends Component {
   //   });
   // }
 
-  setUrl(name,url){
-    this.state[name] = url;
+  setUrl(backUrl){
     this.setState({
-      ...this.state
+      backUrl,
     })
   }
 
@@ -166,7 +165,7 @@ class CreateTeamContent extends Component {
       this.setState({tenantId:tenantId,processValue:1});//把processValue变成1.那么就开是走progress
     });
   }
-  
+
   render() {
     const {logo, value, imgUrl, imgWarning ,disabled,error} = this.state;
     // let _error = error?"block":"none";
@@ -192,7 +191,7 @@ class CreateTeamContent extends Component {
           <div className={`${item} um-box ${upload}`}>
             <label>团队头像&nbsp; &nbsp; </label>
             <div className={`${image}`}>
-                <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
+                <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl(e)}}  tip="" />
                 {/* { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
                 <div>
                   <Icon type="copyreader" />
