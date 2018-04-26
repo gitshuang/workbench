@@ -12,7 +12,8 @@ import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import CitySelect from 'bee/city-select';
 import 'assets/style/Form.css';
-import { enter_form,tenant_address,lxr_hr,lxr_title,lxr_hr_bottom} from './style.css';
+import Progress from 'pub-comp/progress';
+import { enter_form, tenant_address, lxr_hr, lxr_title, lxr_hr_bottom, progressBar } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter,getEnterInfo } = homeActions;
@@ -94,6 +95,7 @@ class CreateEnter extends Component {
     this.state = {
       address:null,
       disabled:true,
+      processValue: 0,
     }
 
     this.tenantSizeOption =[
@@ -243,7 +245,8 @@ class CreateEnter extends Component {
         }
         // const tenantId = tenantId;
         // localStorage.setItem('create', "1");
-        window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+        this.setState({ processValue: 1 });
+        // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       });
 
     }
@@ -292,10 +295,27 @@ class CreateEnter extends Component {
     })
  }
 
+  checkProgress = (tenantId, loadingFunc, successFunc) => {
+    let count = 0;
+    const loop = () => {
+      if (count > 10) {
+        window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+      } else {
+        count += 1;
+        loadingFunc();
+        setTimeout(loop, 300);
+      }
+    }
+    loop();
+  }
+
   render() {
     const {btlLabel} = this.props;
-    const {tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
-      tenantIndustry,invitePermission,joinPermission,address,linkman,tenantSize} = this.state;
+    const {
+      tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
+      tenantIndustry, invitePermission, joinPermission, address, linkman, tenantSize,
+      processValue, tenantId,
+    } = this.state;
 
       let newTenantAddress = "";
       if(tenantAddress){
@@ -307,6 +327,14 @@ class CreateEnter extends Component {
       this.tenantSizeOption.forEach(({value,label},i)=>{
         _tenantSizeOption.push(<Option key={value+"_"+i} value={value}>{label}</Option>);
       })
+      let submitBtn = <SubmitBtn isSubmit btlLabel={btlLabel} disabled={this.state.disabled} />;
+      if (processValue) {
+        submitBtn = (
+          <div className={progressBar}>
+            <Progress check={this.checkProgress} tenantId={tenantId} startFlag={processValue} loadingDesc={'正在升级企业…'} />
+          </div>
+        );
+      }
     return (
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
             <FormItem showMast={false}  labelName={<span>企业名称<font color='red'>&nbsp;*&nbsp;</font></span>}
@@ -316,10 +344,10 @@ class CreateEnter extends Component {
             </FormItem>
 
             <FormItem showMast={false}  labelName={<span>企业头像 &nbsp;&nbsp;&nbsp; </span>} valuePropsName='value' method="change"  inline={true}>
-              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  tip=""> 
-              </Upload> 
+              <Upload name='logo' logo={logo?logo:""} onChange={this.onChangeUpload}  tip="">
+              </Upload>
             </FormItem>
-            
+
             {
               tenantIndustry?(<FormItem showMast={false}  labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择所属行业" method="blur"  inline={true}>
                     <Select
@@ -346,12 +374,12 @@ class CreateEnter extends Component {
                     </Select>
                 </FormItem>)
             }
- 
+
             {
               tenantSize?(<FormItem showMast={false}  labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage="请选择规模范围" method="blur"  inline={true}>
                     <Select
                         name="tenantSize"
-                        defaultValue="-规模范围-" 
+                        defaultValue="-规模范围-"
                         value={tenantSize}
                         style={{ width: 338, marginRight: 6 }}
                         onChange={(e)=>{this.setOptherData({name:"tenantSize",value:e})} }
@@ -440,7 +468,7 @@ class CreateEnter extends Component {
               <Nature name="tenantNature" defaultValue={tenantNature?tenantNature:"LegalPerson"} />
             </FormItem> */}
 
-            <SubmitBtn isSubmit btlLabel={btlLabel} disabled={this.state.disabled}/>
+            { submitBtn }
         </Form>
     );
   }

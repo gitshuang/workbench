@@ -13,7 +13,7 @@ var api = [
   '/user/setCutUser',
   '/user/getUserInfo',
   '/user/getCanLoginTenants',
-  
+
   '/getMessage',
   '/getSelectWidgetList',
   '/setManageList',
@@ -37,6 +37,7 @@ var api = [
   '/manager/team/info',
   '/manager/team/leave',
   '/manager/team/queryUserPage',
+  '/manager/team/upgradeEnter',
 
   '/diwork-heartbeat/heartbeat/checkSession',
 ]
