@@ -61,22 +61,22 @@ function getFetchIe9(url, options = {}) {
 function getResultFetch(that, text, callback) {
   that.tool = new WidgetTool(that.props.data.widgetId);
   try {
-    // const fn = new Function(
-    //   'React',
-    //   'widgetInstance',
-    //   'widgetTool',
-    //   'widgetContext',
-    //   'return ' + text,
-    // );
+    const fn = new Function(
+      'React',
+      'widgetInstance',
+      'widgetTool',
+      'widgetContext',
+      'return ' + text,
+    );
 
-    // const result = fn(
-    //   React,
-    //   that.props.data,
-    //   that.tool,
-    //   getContext(),
-    // );
-    // callback(result);
-    callback(text);
+    const result = fn(
+      React,
+      that.props.data,
+      that.tool,
+      getContext(),
+    );
+    callback(result);
+    // callback(text);
   } catch (e) {
     console.log(e);
   }

@@ -23,9 +23,9 @@ ElementsWrapper.propTypes = {
 };
 ElementsWrapper.defaultProps = {
   children: [],
-  style: PropTypes.object,
-  className: PropTypes.string,
-  items: PropTypes.arrayOf(),
+  style: {},
+  className: '',
+  items: [],
 };
 
 export default ElementsWrapper;

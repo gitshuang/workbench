@@ -76,26 +76,26 @@ class Navs extends Component {
 
   setScrollLeft() {
     this.tabsIndex = 0;
-    Events.scrollEvent.register('end', (to) => {
-      if (to == null || this.props.allBtn) return;
+    // Events.scrollEvent.register('end', (to) => {
+    //   if (to == null || this.props.allBtn) return;
 
-      const { items } = this.props;
-      const TabIndex = items.findIndex(da => da.target === to);
-      const Pnum = (TabIndex > this.tabsIndex ? 1 : -1);
-      if (TabIndex !== 0 && TabIndex !== this.tabsIndex) {
-        const Num = (TabIndex > this.tabsIndex ? -1 : 1) + TabIndex;
-        const nextTabsId = items[(Num)].target;
-        this.tabsWidth = (Pnum * document.getElementById((nextTabsId)).offsetWidth);
-        if (TabIndex > this.tabsIndex) {
-          this.startTime(document.getElementById('nav_ul'), this.tabsWidth, 3);
-        } else {
-          this.startTimeEnd(document.getElementById('nav_ul'), this.tabsWidth, 3);
-        }
-      } else if (TabIndex === 0) {
-        document.getElementById('nav_ul').scrollLeft = 0;
-      }
-      this.tabsIndex = TabIndex;
-    });
+    //   const { items } = this.props;
+    //   const TabIndex = items.findIndex(da => da.target === to);
+    //   const Pnum = (TabIndex > this.tabsIndex ? 1 : -1);
+    //   if (TabIndex !== 0 && TabIndex !== this.tabsIndex) {
+    //     const Num = (TabIndex > this.tabsIndex ? -1 : 1) + TabIndex;
+    //     const nextTabsId = items[(Num)].target;
+    //     this.tabsWidth = (Pnum * document.getElementById((nextTabsId)).offsetWidth);
+    //     if (TabIndex > this.tabsIndex) {
+    //       this.startTime(document.getElementById('nav_ul'), this.tabsWidth, 3);
+    //     } else {
+    //       this.startTimeEnd(document.getElementById('nav_ul'), this.tabsWidth, 3);
+    //     }
+    //   } else if (TabIndex === 0) {
+    //     document.getElementById('nav_ul').scrollLeft = 0;
+    //   }
+    //   this.tabsIndex = TabIndex;
+    // });
   }
 
   startTimeEnd(div, end, sp) {
