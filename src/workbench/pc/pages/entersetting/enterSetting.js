@@ -328,7 +328,7 @@ class CreateEnter extends Component {
         _tenantSizeOption.push(<Option key={value+"_"+i} value={value}>{label}</Option>);
       })
       let submitBtn = <SubmitBtn isSubmit btlLabel={btlLabel} disabled={this.state.disabled} />;
-      if (processValue) {
+      if (processValue && upgrade_enter === 'upgrade_enter') {
         submitBtn = (
           <div className={progressBar}>
             <Progress check={this.checkProgress} tenantId={tenantId} startFlag={processValue} loadingDesc={'正在升级企业…'} />
