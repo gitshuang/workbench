@@ -61,7 +61,7 @@ class Enterprise extends Component {
       if (error) {
         requestError(payload);
       }
-      requestSuccess(); 
+      requestSuccess();
       this.setState({
         enterData:payload
       })
@@ -85,7 +85,7 @@ class Enterprise extends Component {
   }
 
   render() {
-    const {match:{params},userInfo:{company}   } = this.props; 
+    const {match:{params},userInfo:{company}   } = this.props;
     const {enterData} = this.state;
 
     return (
@@ -117,7 +117,7 @@ class Enterprise extends Component {
           <div className={`${enter_cont} enter_setting`} >
             <EnterSetting updateenter="update_enter" data={enterData}/>
           </div>
-          <hr className={hr, hr2}/>
+          <hr className={`${hr} ${hr2}`}/>
         </div>
       </div>
     );
