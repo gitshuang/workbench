@@ -60,7 +60,8 @@ class CreateTeamContent extends Component {
       value: "",
       imgWarning: "",
       imgUrl: "",
-      backUrl : "",    // 上传成功后返回的url
+      backUrl: "",    // 上传成功后返回的url
+      logo: "",
       disabled:false,
       error:false,
       processValue:0,//0表示未开始，1表示开始progress
@@ -124,6 +125,7 @@ class CreateTeamContent extends Component {
   setUrl(backUrl){
     this.setState({
       backUrl,
+      logo: backUrl,
     })
   }
 
