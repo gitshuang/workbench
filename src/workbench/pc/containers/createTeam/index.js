@@ -60,8 +60,8 @@ class CreateTeamContent extends Component {
       value: "",
       imgWarning: "",
       imgUrl: "",
-      backUrl: "",    // 上传成功后返回的url
-      logo: "",
+      backUrl : "",    // 上传成功后返回的url
+      logo:"",
       disabled:false,
       error:false,
       processValue:0,//0表示未开始，1表示开始progress
@@ -122,16 +122,16 @@ class CreateTeamContent extends Component {
   //   });
   // }
 
-  setUrl(backUrl){
+  setUrl(name,url){
+    this.state[name] = url;
     this.setState({
-      backUrl,
-      logo: backUrl,
+      ...this.state
     })
   }
 
   create = () => {
     const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
-    const { value, backUrl } = this.state;
+    const { value, logo } = this.state;
     if ( !value || value == ""){
       this.setState({
         error:true
@@ -141,8 +141,8 @@ class CreateTeamContent extends Component {
     let data = {
       tenantName: value
     };
-    if (backUrl) {
-      data.logo = backUrl;
+    if (logo) {
+      data.logo = logo;
     }
     this.setState({
       disabled:true
@@ -167,7 +167,7 @@ class CreateTeamContent extends Component {
       this.setState({tenantId:tenantId,processValue:1});//把processValue变成1.那么就开是走progress
     });
   }
-
+  
   render() {
     const {logo, value, imgUrl, imgWarning ,disabled,error} = this.state;
     // let _error = error?"block":"none";
@@ -193,7 +193,7 @@ class CreateTeamContent extends Component {
           <div className={`${item} um-box ${upload}`}>
             <label>团队头像&nbsp; &nbsp; </label>
             <div className={`${image}`}>
-                <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl(e)}}  tip="" />
+                <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
                 {/* { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
                 <div>
                   <Icon type="copyreader" />
