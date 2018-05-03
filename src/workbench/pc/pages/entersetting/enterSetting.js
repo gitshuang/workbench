@@ -171,7 +171,7 @@ class CreateEnter extends Component {
 
   checkForm = (flag, data) => {
     const {setCreateEnter,updateenter} = this.props;
-    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,invitePermission,allowExit,tenantTel,tenantSize,linkman} = this.state;
+    const {logo,tenantIndustry,tenantId,address,tenantAddress,joinPermission,highANDlower,invitePermission,allowExit,tenantTel,tenantSize,linkman} = this.state;
 
     let _logo = data.find((da)=>da.name == "logo");
     if(!_logo.value && _logo.value == ""){
@@ -194,6 +194,11 @@ class CreateEnter extends Component {
     let _joinPermission = data.find((da)=>da.name == "joinPermission");
     if(!_joinPermission.value && _joinPermission.value == ""){
       _joinPermission.value = joinPermission;
+    }
+
+    let _highANDlower = data.find((da)=>da.name == "highANDlower");
+    if(!_highANDlower.value && _highANDlower.value == ""){
+      _highANDlower.value = highANDlower;
     }
 
     let _invitePermission = data.find((da)=>da.name == "invitePermission");
@@ -316,7 +321,7 @@ class CreateEnter extends Component {
     const { btlLabel, updateenter } = this.props;
     const {
       tenantName,logo,tenantNature,allowExit,tenantEmail,tenantTel,tenantAddress,
-      tenantIndustry, invitePermission, joinPermission, address, linkman, tenantSize,
+      tenantIndustry, invitePermission, joinPermission,highANDlower, address, linkman, tenantSize,
       processValue, tenantId,
     } = this.state;
 
@@ -447,6 +452,22 @@ class CreateEnter extends Component {
               </Radio.RadioGroup>
             </FormItem>
 
+            <FormItem
+              showMast={false}
+              labelName={<span>上下级显示<font color="red">&nbsp;*&nbsp;</font></span>}
+              isRequire={false}
+              valuePropsName='value' errorMessage="请选择" method="blur"  inline={true}>
+                <Select
+                    name="highANDlower"
+                    defaultValue="1"
+                    value={highANDlower?highANDlower:"1"}
+                    style={{ width: 338, marginRight: 6 }}
+                    onChange={(e)=>{this.setOptherData({name:"highANDlower",value:e})} }
+                    >
+                    <Option value="0">根据组织机构负责人显示上下级 </Option>
+                    <Option value="1">根据导入的上下级关系显示上下级</Option>
+                </Select>
+            </FormItem>
             <div className={lxr_hr}>
               <hr />
             </div>

@@ -5,7 +5,7 @@ import ServiceClassify from 'containers/serviceClassify';
 class Application extends Component {
   render() {
     return (
-      <ApplicationWrap name='全部应用'>
+      <ApplicationWrap name="全部应用">
         <ServiceClassify />
       </ApplicationWrap>
     );
