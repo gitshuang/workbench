@@ -9,7 +9,6 @@ import { header, um_content, appBreadcrumb } from './style.css';
 class Application extends Component {
   goBack = () => {
     const { history } = this.props;
-    debugger;
     history.replace('');
   }
   render() {
