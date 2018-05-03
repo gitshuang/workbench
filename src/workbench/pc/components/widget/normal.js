@@ -8,6 +8,8 @@ import {
   title,
   titleRight,
 } from './style.css';
+import { findDOMNode } from 'react-dom'
+
 
 const widgetStyle = [
   // 小
@@ -122,18 +124,28 @@ class WidgetItem extends Component {
     }),
   }
   static defaultProps = {
-    data: {},
+    data:{},
+    viewport: {
+      top: 0,
+      height: 0
+    }
   }
-
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
       widget: null,
-    };
+      shouldLoad:false,
+    }
   }
-  componentWillMount() {
-    const { data: { jsurl } } = this.props;
+  componentWillMount() {}
+  componentWillUnmount() {
+    if (this.tool && typeof this.tool.destroy === 'function') {
+      this.tool.destroy();
+    }
+  }
+  loadWidget(){
+    const { data:{ jsurl } } = this.props;
     if (jsurl) {
       getData.call(this, jsurl, (result) => {
         this.setState({
@@ -143,11 +155,37 @@ class WidgetItem extends Component {
       });
     }
   }
-  componentWillUnmount() {
-    if (this.tool && typeof this.tool.destroy === 'function') {
-      this.tool.destroy();
+  setShowImage(show){
+    this.setState({
+      shouldLoad : !!(show)
+    })
+    this.props.loadOk();
+    this.loadWidget();
+  }
+  updataLoadState(top,height){
+    if (this.state.shouldLoad) {
+      return;
+    }
+    var min = this.props.viewport.top;
+    var max = this.props.viewport.top + this.props.viewport.height;
+
+    if ((min <= (top + height) && top <= max )) {
+      this.setShowImage(true);
     }
   }
+  componentDidMount(){
+    if( !this.state.shouldLoad && this.props.viewport ){
+      var el = findDOMNode(this.refs.normal_widget);
+      this.updataLoadState(el.offsetTop, el.offsetHeight)
+    }
+  }
+  componentDidUpdate(prevProps){
+    if( !this.state.shouldLoad && prevProps.viewport ){
+      var el = findDOMNode(this.refs.normal_widget);
+      this.updataLoadState(el.offsetTop, el.offsetHeight)
+    }
+  }
+
   render() {
     const {
       data: {
@@ -170,13 +208,15 @@ class WidgetItem extends Component {
     if (background) {
       style.backgroundImage = `url(${background})`;
     }
-
     return (
-      <li className={widgetItem} style={style} >
+      <li ref="normal_widget" className={widgetItem} style={style} >
+      {this.state.shouldLoad?(
+        <div>
         <div className={title}>
           <div className={titleRight}>{name}</div>
         </div>
         {contentElm}
+        </div>):(<Loading container={this} show={true} />)}
       </li>
     );
   }
