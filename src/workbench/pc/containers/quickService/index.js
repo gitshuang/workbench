@@ -14,6 +14,9 @@ const { changeQuickServiceHidden } = actions;
   mapStateToProps(
     'serviceList',
     'quickServiceDisplay',
+    {
+      "namespace":"root"
+    }
   ),
   {
     changeQuickServiceHidden,
@@ -105,7 +108,7 @@ class QuickServiceContainer extends Component {
         <div className={service} ref="list" onScroll={this.onscrollFun}>
           <ul className="clearfix">
           {
-            serviceList.map(({
+            serviceList && serviceList.map(({
               applicationCode,
               applicationIcon,
               applicationId,

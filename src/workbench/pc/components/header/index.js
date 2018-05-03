@@ -13,7 +13,7 @@ const defaultProps = {
   },
   className: '',
   children: '',
-  leftContent: [],
+  leftContent: '',
   rightContent: [],
   onLeftTitleClick: () => { },
 };
@@ -27,7 +27,7 @@ const propTypes = {
     PropTypes.object,
     PropTypes.string,
   ]),
-  leftContent: PropTypes.arrayOf(PropTypes.element),
+  leftContent: PropTypes.element,
   rightContent: PropTypes.arrayOf(PropTypes.element),
   onLeftClick: PropTypes.func,
   onLeftTitleClick: PropTypes.func,
