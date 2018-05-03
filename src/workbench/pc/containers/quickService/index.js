@@ -36,7 +36,7 @@ class QuickServiceContainer extends Component {
   componentDidMount(){
     const { serviceList } = this.props;
     let b = true;
-    b = serviceList.length <= 12 ? true : false;
+    b = serviceList && serviceList.length <= 12 ? true : false;
     this.setState({
       openAllstate:b
     })

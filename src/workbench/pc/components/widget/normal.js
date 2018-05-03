@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from 'bee/loading';
+import { getContext } from '@u';
 import WidgetTool from 'public/componentTools';
 import {
   widgetItem,
