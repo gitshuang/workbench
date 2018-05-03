@@ -14,8 +14,6 @@ import {
   default_icon
 } from './style.css'
 import _default_icon from 'assets/image/default.png';
-import { findDOMNode } from 'react-dom'
-import Loading from 'bee/loading';
 
 const widgetStyle = [
   // 小
@@ -34,41 +32,6 @@ const widgetStyle = [
 ];
 
 class WidgetItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      shouldLoad:false,
-    }
-  }
-  static defaultProps = {
-    viewport: {
-      top: 0,
-      height: 0
-    }
-  }
-  setShowImage(show){
-    this.setState({
-      shouldLoad : !!(show)
-    })
-    this.props.loadOk();
-  }
-  updataLoadState(top,height){
-    if (this.state.shouldLoad) {
-      return;
-    }
-    var min = this.props.viewport.top;
-    var max = this.props.viewport.top + this.props.viewport.height;
-    if ((min <= (top + height) && top <= max )) {
-      this.setShowImage(true);
-    }
-  }
-  componentDidUpdate(prevProps){
-    if( !this.state.shouldLoad && prevProps.viewport ){
-      var el = findDOMNode(this.refs.default_widget);
-      this.updataLoadState(el.offsetTop, el.offsetHeight)
-    }
-  }
-
   render() {
     const {
       data: {
@@ -96,8 +59,7 @@ class WidgetItem extends Component {
     const mergeStyle = Object.assign(style,backStyle);
 
     return (
-      // this.state.shouldLoad?(
-      <li ref="default_widget" className={`${widgetItem} ${defaultArea}`}
+      <li className={`${widgetItem} ${defaultArea}`}
         style={mergeStyle}
         onClick={clickHandler} >
         <div className={title}>
@@ -105,9 +67,6 @@ class WidgetItem extends Component {
         </div>
         <img src={icon?icon:_default_icon} className={iconImg} style={imageStyle}/>
       </li>
-      // ):(<li ref="default_widget" className={`${widgetItem} ${defaultArea}`} >
-      //         <Loading container={this} show={true} />
-      //       </li>)
     );
   }
 }

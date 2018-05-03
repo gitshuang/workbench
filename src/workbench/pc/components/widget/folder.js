@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom'
-import Loading from 'bee/loading';
 import {
   widgetItem,
   title,
@@ -22,40 +20,6 @@ const style={
   'color':'#fff'
 }
 class FolderWidget extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      shouldLoad:false,
-    }
-  }
-  static defaultProps = {
-    viewport: {
-      top: 0,
-      height: 0
-    }
-  }
-  setShowImage(show){
-    this.setState({
-      shouldLoad : !!(show)
-    })
-    this.props.loadOk();
-  }
-  updataLoadState(top,height){
-    if (this.state.shouldLoad) {
-      return;
-    }
-    var min = this.props.viewport.top;
-    var max = this.props.viewport.top + this.props.viewport.height;
-    if ((min <= (top + height) && top <= max )) {
-      this.setShowImage(true);
-    }
-  }
-  componentDidUpdate(prevProps){
-    if( !this.state.shouldLoad && prevProps.viewport ){
-      var el = findDOMNode(this.refs.folderl_widget);
-      this.updataLoadState(el.offsetTop, el.offsetHeight)
-    }
-  }
   render() {
     const {
       data,
@@ -67,7 +31,6 @@ class FolderWidget extends Component {
       type
     } = data;
     return (
-      this.state.shouldLoad?(
       <li className={`${widgetItem} ${type==2?widget_file_item:""}`} onClick={ clickHandler } >
         <div className={title}>
           <div className={`${title_right} ${file_title_right}`}>{name}</div>
@@ -78,9 +41,7 @@ class FolderWidget extends Component {
         <div className={file_num} style={style}>
           ({children.length})
         </div>
-      </li>):(<li ref="folder_widget" className={`${widgetItem} ${type==2?widget_file_item:""}`} >
-              <Loading container={this} show={true} />
-            </li>)
+      </li>
     )
   }
 }

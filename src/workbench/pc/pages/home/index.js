@@ -38,15 +38,8 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      viewport: {
-        top: 0,
-        height: 0,
-      },
-      lazyLoadNum:-1,
-    }
-    this.updateViewport = this.updateViewport.bind(this)
   }
+
   componentWillMount() {
     const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
     requestStart();
@@ -62,53 +55,11 @@ class Home extends Component {
       }
       requestSuccess();
     });
-
   }
   renderMetadata = (name) => {
     const {metaData} = this.props;
     return metaData && metaData.properties && metaData.properties[name];
   }
-  componentDidMount() {
-    window.addEventListener('scroll', this.updateViewport, false);
-    window.addEventListener('resize', this.updateViewport, false);
-    this.updateViewport();
-  }
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.updateViewport);
-    window.removeEventListener('resize', this.updateViewport);
-  }
-  componentDidUpdate(){
-    var total = 0
-    this.props.workList.forEach((v,k)=>{
-      total += v.children.length
-    });
-    if(this.state.lazyLoadNum === total){
-      window.removeEventListener('scroll', this.updateViewport);
-      window.removeEventListener('resize', this.updateViewport);
-    }
-  }
-
-  updateViewport=()=>{
-    if( this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
-    var self = this;
-    self.setState({
-      viewport: {
-        top: window.pageYOffset,
-        height: window.innerHeight
-      }
-    });
-    console.log('is updata')
-  }
-  loadOk = (()=>{
-    var self = this;
-    var count=0;
-    return function(){
-      ++count
-      self.setState({
-        lazyLoadNum:count,
-      })
-    };
-  })()
   render() {
     const {
       workList
@@ -141,11 +92,12 @@ class Home extends Component {
         target: `nav${id}`,
       });
       conts.push(
-        <WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} viewport={this.state.viewport} loadOk={this.loadOk}/>
+        <WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} />
       );
     })
+
     return (
-      <div ref='home' className={`${page_home} home`} style={contentStyle}>
+      <div className={`${page_home} home`} style={contentStyle}>
         <HeaderPage list={list} headerData={headerData}/>
         <ElementsWrapper items={list} offset={-55}>
           {conts}

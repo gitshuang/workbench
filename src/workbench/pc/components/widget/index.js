@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom'
 import FolderWidget from './folder';
 import defaultWidget from './default';
 import normalWidget from './normal';

@@ -62,7 +62,7 @@ class HomeWidgeList extends Component{
         }
       }
       return (
-        <Widget { ...props } listMeta={listMeta}  viewport={this.props.viewport} loadOk = {this.props.loadOk}/>
+        <Widget { ...props } listMeta={listMeta}/>
       );
     })
 		return(
