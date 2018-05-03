@@ -10,6 +10,7 @@ import searchActions from 'store/root/search/actions';
 import SearchResult from 'containers/searchResult'
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { trigger } from 'public/componentTools';
+import SearchItem from 'components/searchItem';
 
 import {
   search,
@@ -25,11 +26,6 @@ import {
   SearchWin,
   searchWindom,
   searchContent,
-  h_icon,
-  h_name,
-  h_contact,
-  search_service,
-  search_help,
   showheight,
   searchBtnAll,
 } from './style.css';
@@ -227,109 +223,27 @@ class SearchContainer extends Component {
   render() {
     const { isShow, text, isSearchWinShow, SearchSuggestList,nosearchdata} = this.state;
     const {color} = this.props;
-    const _this = this;
-    let item, searchWin, contenttype_user,contenttype_service,contenttype_help;
-    let contenttype_other=[];
-    function createMarkup(text) {
-      return {__html: text};
-    }
-    SearchSuggestList.forEach((item,index)=>{
-      if(item.content.length<1){
-        return false
-      }
-      switch (item.type)
-      {
-        case "addressbook"://通讯录
-          let lis = [];
-          item.content.forEach((item2,index2)=>{
-            item2 = eval('(' + item2 + ')');
-            lis.push(<li key={index2} onClick={()=>{_this.goAddress(item.type,item2)}}>
-                  <div className={h_icon}><img src={item2.photo}/></div>
-                  <div className={h_name}>
-                    <p><span>{item2.name}</span>-<span>{item2.orgName}</span></p>
-                    <p>办公电话 : {item2.mobile}</p>
-                  </div>
-                  <div className={h_contact} onClick={_this.goemailDetail(item2)}><Icon title="发邮件" type="e-mail" /></div>
-                  <div className={h_contact} onClick={_this.gochatDetail(item2)}><Icon title="发消息" type="chat" /></div>
-                </li>);
-          }),
-          contenttype_user = (
-            <div className={searchWindom}>
-              <h3>{item.typeName}</h3>
-              <ul>
-                {lis}
-              </ul>
-            </div>
-          )
-          break;
-        case "service":
-          let lis2 = [];
-          item.content.forEach((item2,index2)=>{
-            item2 = eval('(' + item2 + ')')
-            lis2.push(<li className={search_service} key={index2} onClick={_this.goDetail(item.type,item2)}>
-                  <div className={h_icon}><img src={item2.serviceId?item2.serviceIcon:item2.applicationIcon}/></div>
-                  <div className={h_name}>
-                    <p className={search_help}>
-                      <span>{item2.serviceId?item2.serviceName:item2.applicationName}</span>
-                    </p>
-                  </div>
-                </li>);
-          }),
-          contenttype_service= (
-            <div className={searchWindom}>
-              <h3>{item.typeName}</h3>
-              <ul>
-                {lis2}
-              </ul>
-            </div>
-          )
-          break;
-        case "help":
-          let lis3= [];
-          item.content.forEach((item2,index2)=>{
-            item2 = JSON.parse(item2)
-            lis3.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
-                <div className={h_icon}><img src={_default_icon}/></div>
-                <div className={h_name}>
-                  <p className={search_help}>{item2.title}</p>
-                </div>
-                <div className={search_help}>{item2.size}</div>
-              </li>);
-          }),
-          contenttype_help= (
-            <div className={searchWindom}>
-              <h3>{item.typeName}</h3>
-              <ul>
-                {lis3}
-              </ul>
-            </div>
-          )
-          break;
-        default:
-          let lis4 = [];
-
-            item.content.forEach((item2,index2)=>{
-              item2 = JSON.parse(item2)
-              lis4.push(<li key={index2} onClick={_this.goDetail(item.type,item2)}>
-                  <div className={h_icon}><img src={_default_icon}/></div>
-                  <div className={h_name}>
-                    <p className={search_help}>{item2.title}</p>
-                  </div>
-                </li>);
-            })
-
-          contenttype_other.push(
-            <div className={searchWindom} key={index}>
-              <h3>{item.typeName}</h3>
-              <ul>
-                {lis4}
-              </ul>
-            </div>
-          )
-      }
-    })
+    let inputWrap, searchWin;
+    const dataList = SearchSuggestList.map(({ typeName, content, type, renderUrl }, i) => {
+      return (
+        <div className={searchWindom} key={`type${i}`}>
+          <h3>{ typeName } </h3>
+          <ul>
+            {
+              content.map((item, j) => {
+                return (
+                  <li key={`item${j}`}>
+                    <SearchItem data={item} type={type} url={renderUrl} from="quick"/>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+      );
+    });
     if (isShow) {
-      item = (
+      inputWrap = (
         <div className={inputArea}  style={{borderColor:color}}>
           <input
             className={searchText}
@@ -342,15 +256,12 @@ class SearchContainer extends Component {
             onKeyDown={this.onKeyup}
           />
         </div>
-      ),
+      );
 
       searchWin = (
         <div className={`${SearchWin} ${isSearchWinShow? showheight : ''}`} >
             <div className={`${searchContent}`}>
-                {contenttype_user}
-                {contenttype_service}
-                {contenttype_help}
-                {contenttype_other}
+              { dataList }
             </div>
           {
             nosearchdata ? (
@@ -359,13 +270,12 @@ class SearchContainer extends Component {
           }
 
         </div>
-      )
+      );
     }
-
 
     return (
       <div className={`${search} ${isShow? searchExtend : ''}`}  style={{borderColor:color}}>
-        {item}
+        {inputWrap}
         {searchWin}
         {
           isShow && text ? (

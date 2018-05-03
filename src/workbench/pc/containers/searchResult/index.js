@@ -9,6 +9,7 @@ import Menu from 'bee/menus';
 import Tabs, { TabPane } from 'bee/tabs';
 import Pagination from 'bee/pagination';
 import EnhancedPagination from 'pub-comp/enhancedPagination';
+import SearchItem from 'components/searchItem';
 
 import {
   bg,
@@ -102,11 +103,11 @@ class searchResult extends Component {
     }
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     this.getSearchMoreList(this.props.match.params.value)
   }
 
-  componentWillReceiveProps(nextProps){ 
+  componentWillReceiveProps(nextProps){
     let keywords = nextProps.match.params?nextProps.match.params.value:"";
     if(keywords == this.state.keywords)return;
     this.getSearchMoreList(keywords);
@@ -241,7 +242,6 @@ class searchResult extends Component {
     })
   }
 
-
   //输入框修改data数据源
   inputOnChange = (e) => {
     this.setState({
@@ -275,22 +275,7 @@ class searchResult extends Component {
         this.getSearchTpyeList(value,activetab,activePage-1,dataPerPageNum)
     }
    })
-
   }
-  // inputOnFocus = (e) => {
-  //   let _value = e.target.value != "搜索人员信息、应用、服务及其他内容"?e.target.value:"";
-  //   this.setState({
-  //       value:_value
-  //   });
-  // }
-
-  // inputOnBlur = (e) => {
-  //   if(e.target.value == ""){
-  //     this.setState({
-  //         value:"搜索人员信息、应用、服务及其他内容"
-  //     });
-  //   }
-  // }
 
   TabsClick = (activetab) =>{
     const {value,activePage} = this.state
@@ -305,20 +290,7 @@ class searchResult extends Component {
       this.getSearchTpyeList(value,activetab,0,dataSize)
     }
   }
-  goDetail(type,item){
-    return (e) => {
-      e.stopPropagation();
-      let code = "",_type="";
-      if(item.serviceId){
-        code = item.serviceCode;
-        _type = "service";
-      }else{
-        code = item.applicationCode;
-        _type = "app";
-      }
-      this.props.history.push('/'+_type+'/'+code);
-    }
-  }
+
   goOtherlist(item){
     const {setSearchHeadData,searchHeadData:{brm}} = this.props;
     setSearchHeadData({appName:item.typeName,brm:[{name:brm[0].name},{name:item.typeName}],searchValue:this.state.keywords});
@@ -326,123 +298,18 @@ class searchResult extends Component {
     this.props.history.push({pathname:`/search/searchlist/${!this.state.keywords?'':this.state.keywords}`,state:item});
   }
 
-  goAddress = (actibe,item) => {
-    const { id, name, userId, tenantId } = this.props;
-    dispatchMessageTypeHandler({
-      type: 'openService',
-      detail: {
-        serviceCode: 'XTTONGXUNLU0000000',
-        data: {
-          genre: 4,
-          fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
-        },
-      }
-    });
-  }
-
-  goemailDetail({ id, userId, name, tenantId }){
-    return (e) => {
-      e.stopPropagation();
-      dispatchMessageTypeHandler({
-        type: 'openService',
-        detail: {
-          serviceCode: 'XTWEIYOU0000000000',
-          data: {
-            genre: 4,
-            fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
-          },
-        }
-      });
-    }
-  }
   onKeyup = (e) => {
     e.keyCode === 13 && this.btnSearch()
   }
-  gochatDetail({ userId }) {
-    return (e) => {
-      e.stopPropagation();
-      trigger('IM', 'switchChatTo', {
-        yht_id: userId,
-      });
-    }
-  }
-
-  renderPro = (userProject) => {
-    const list = eval('(' + userProject + ')');
-    const arrItem = list.map((item,index)=>{
-      return item.name + '、';
-    });
-    let _html = ""; 
-    arrItem.forEach((item,index)=>{
-      _html += item;
-    });
-    const length = list.length;
-    return "项目：" + _html + "等" + length + "个相关项目";
-  }
-
-  rendHor = (userHonor) => {
-    const list = eval('(' + userHonor + ')');
-    const arrItem = list.map((item,index)=>{
-      return item.name + '、';
-    });
-    let _html = ""; 
-    arrItem.forEach((item,index)=>{
-      _html += item;
-    });
-    return "荣耀：" + _html;
-  }
 
   otherlistLi(data){
-    var lis =[]
-    function createMarkup(text) {
-      return {__html: text};
-    }
-    
-    data.content.forEach((item,index)=>{
-      item= eval('(' + item + ')')
-      switch (data.type)
-      {
-        case "addressbook"://通讯录 称为user
-          lis.push(<li key={index} onClick={()=>{this.goAddress(this.state.activetab,item)}}>
-                <div className={h_icon}><img src={item.photo}/></div>
-                <div className={h_name}>
-                  <p><span dangerouslySetInnerHTML={createMarkup(item.name)}></span><span>-{item.orgName}</span></p>
-                  <p style={{color:"#6E6E77"}}>办公电话 : {item.mobile}</p>
-                  <p style={{color:"#6E6E77"}}>邮箱 : {item.email}</p>
-                  {item.userProject  ? <p style={{color:"#373C42",marginTop:"5px"}}>{this.renderPro(item.userProject)}</p> : null }
-                  {item.userHonor ? <p style={{color:"#373C42"}}>{this.rendHor(item.userHonor)}</p> : null }
-                </div>
-                <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(item)}><Icon title="发邮件" type="e-mail" /></div>
-                <div className={h_contact} onClick={this.gochatDetail(item)}><Icon title="发消息" type="chat" /></div>
-              </li>);
-          break;
-        case "service":
-          lis.push(<li className={search_service} key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                  <div className={h_icon}><img src={item.serviceId?item.serviceIcon:item.applicationIcon}/></div>
-                  <div className={h_name}>
-                    <p className={search_help}><span dangerouslySetInnerHTML={createMarkup(item.serviceId?item.serviceName:item.applicationName)}></span></p>
-                  </div>
-                </li>);
-          break;
-        case "help":
-            lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                <div className={h_icon}><img src={_default_icon}/></div>
-                <div className={h_name}>
-                  <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item.title)}></p>
-                </div>
-                <div className={search_help}>{item.size}</div>
-              </li>);
-          break;
-        default:
-            lis.push(<li key={index} onClick={this.goDetail(this.state.activetab,item)}>
-                <div className={h_icon}><img src={_default_icon}/></div>
-                <div className={h_name}>
-                  <p className={search_help}  dangerouslySetInnerHTML={createMarkup(item.title)}></p>
-                </div>
-              </li>);
-      }
-    })
-    return lis;
+    return data.content.map((item, index) => {
+      return (
+        <li key={index}>
+          <SearchItem data={item} type={data.type} url={data.renderUrl} from="full"/>
+        </li>
+      );
+    });
   }
   render() {
     const { otherName,value,  keywords, current ,SearchMoreList,dataList,isShowPagination,Searchotherlist,isShownodataClass,isShownodataClassEach } = this.state;
