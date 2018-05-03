@@ -85,7 +85,7 @@ class DropdownButton extends Component {
     const item = [];
     if (dataItem.length !== 0) {
       dataItem.forEach((da) => {
-        item.push(<div key={da.name} className={itemLi} onClick={(e) => { this.handleSelect(e, da); }} onKeyDown={(e) => { this.handleSelect(e, da); }} role="presentation"><div className={liTitle} title={da.value}>{da.value}</div><div className={liRight}>{da.type === 1 ? '团队' : '企业'}</div></div>);
+        item.push(<div key={da.name} className={itemLi} onClick={() => { this.handleSelect(da); }} onKeyDown={() => { this.handleSelect(da); }} role="presentation"><div className={liTitle} title={da.value}>{da.value}</div><div className={liRight}>{da.type === 1 ? '团队' : '企业'}</div></div>);
       });
     } else {
       item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >数据正在加载中....</div></div>);

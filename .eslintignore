@@ -1,8 +1,8 @@
 scripts/*.js
 config/*.js
-src/*
 src/workbench/pc/public/*
 src/workbench/pc/*.js
+src/workbench/pc/components/widget/*
 src/workbench/pc/containers/*
-src/workbench/pc/pages/*
 src/workbench/pc/store/*
+src/*
