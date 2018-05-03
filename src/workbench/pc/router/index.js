@@ -27,23 +27,23 @@ const routes = [
   },
   {
     path: '/establish',
-    component: Establish
+    component: Establish,
   },
   {
     path: '/establishusercenter',
-    component: EstablishUserCenter
+    component: EstablishUserCenter,
   },
   {
     path: '/createteam/:data',
-    component: CreateTeam
+    component: CreateTeam,
   },
   {
     path: '/teamconfig',
-    component: Teamconfig
+    component: Teamconfig,
   },
   {
     path: '/updateenter',
-    component: UpdateEnter
+    component: UpdateEnter,
   },
   {
     path: '/application',
@@ -68,29 +68,28 @@ const routes = [
   {
     path: '/search',
     component: Search,
-    routes:[
+    routes: [
       {
-        path:'/search/searchValue/:value',
-        component:SearchResult,
+        path: '/search/searchValue/:value',
+        component: SearchResult,
         exact: true,
       },
       {
-        path:'/search/searchValue/',
-        component:SearchResult,
+        path: '/search/searchValue/',
+        component: SearchResult,
         exact: true,
       },
       {
-        path:'/search/searchlist/:value',
-        component:SearchOther,
+        path: '/search/searchlist/:value',
+        component: SearchOther,
         exact: true,
       },
       {
-        path:'/search/searchlist/',
-        component:SearchOther,
+        path: '/search/searchlist/',
+        component: SearchOther,
         exact: true,
-      }
-      
-    ]
+      },
+    ],
   },
   {
     path: '/:type(app|service)/:code/:subcode?',
@@ -106,7 +105,7 @@ const routes = [
   },
   {
     path: '/404',
-    component:Page404
+    component: Page404,
   },
   {
     path: '/market',
@@ -114,8 +113,8 @@ const routes = [
   },
   {
     path: '/renew/:id',
-    component: Renew
-  }
+    component: Renew,
+  },
 ];
 
 export default routes;

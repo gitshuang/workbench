@@ -1,48 +1,60 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'pub-comp/icon';
+import defaultIcon from 'assets/image/default.png';
 import {
   widgetItem,
   title,
-  title_left,
-  title_right,
-  content,
+  titleRight,
   defaultArea,
   iconImg,
-  default_icon
-} from './style.css'
-import _default_icon from 'assets/image/default.png';
+} from './style.css';
 
 const widgetStyle = [
   // 小
   {
-    width: 176
+    width: 176,
   },
   // 中
   {
-    width: 360
+    width: 360,
   },
   // 大
   {
     width: 360,
-    height: 360
-  }
+    height: 360,
+  },
 ];
 
 class WidgetItem extends Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      background: PropTypes.string,
+      size: PropTypes.number,
+      widgetName: PropTypes.string,
+      icon: PropTypes.string,
+    }),
+    clickHandler: PropTypes.func,
+    listMeta: PropTypes.shape({
+      titleStyle: PropTypes.string,
+      imageStyle: PropTypes.string,
+      background: PropTypes.string,
+    }),
+  };
+  static defaultProps = {
+    data: {},
+    clickHandler: () => {},
+    listMeta: {},
+  };
   render() {
     const {
       data: {
         background,
-        widgetId: id,
         size,
         widgetName: name,
         icon,
       },
       clickHandler,
-      listMeta
+      listMeta,
     } = this.props;
 
     const style = {
@@ -56,16 +68,20 @@ class WidgetItem extends Component {
     const titleStyle = listMeta && listMeta.titleStyle && JSON.parse(listMeta.titleStyle);
     const imageStyle = listMeta && listMeta.imageStyle && JSON.parse(listMeta.imageStyle);
     const backStyle = listMeta && listMeta.background && JSON.parse(listMeta.background);
-    const mergeStyle = Object.assign(style,backStyle);
+    const mergeStyle = Object.assign(style, backStyle);
 
     return (
-      <li className={`${widgetItem} ${defaultArea}`}
+      <li
+        className={`${widgetItem} ${defaultArea}`}
         style={mergeStyle}
-        onClick={clickHandler} >
+        onClick={clickHandler}
+        onKeyDown={clickHandler}
+        role="presentation"
+      >
         <div className={title}>
-          <div className={title_right} style={titleStyle}>{name}</div>
+          <div className={titleRight} style={titleStyle}>{name}</div>
         </div>
-        <img src={icon?icon:_default_icon} className={iconImg} style={imageStyle}/>
+        <img alt="" src={icon || defaultIcon} className={iconImg} style={imageStyle} />
       </li>
     );
   }

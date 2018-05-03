@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import {iframe} from "./style.css";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { iframe } from './style.css';
+
 
 const propTypes = {
-	url:PropTypes.string,
-	// messageData:PropTypes.object,//message 数据
-	// messType:PropTypes.string,//message 事件key
-	// messageHandler:PropTypes.func //回调函数
-}
+  url: PropTypes.string,
+  title: PropTypes.string,
+};
+const defaultProps = {
+  url: '',
+  title: '',
+};
 
-class Iframe extends Component{
-
-	constructor(props) {
-    super(props);
-  }
-
+class Iframe extends Component {
   render() {
     const {
       title,
@@ -25,5 +23,6 @@ class Iframe extends Component{
 }
 
 Iframe.propTypes = propTypes;
+Iframe.defaultProps = defaultProps;
 
 export default Iframe;
