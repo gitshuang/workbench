@@ -145,7 +145,7 @@ const reducer = handleActions({
     const info = window.diworkContext();
     const { tenantid, userid } = info;
     // 避免localhost环境下一直刷新
-    if (tenantid == "tenantid" && userid == "userid" ) return false;
+    // if (tenantid == "tenantid" && userid == "userid" ) return false;
     if( payload.tenantId !== tenantid || payload.userId !== userid ){
       window.location.reload();
     }
