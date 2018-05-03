@@ -84,7 +84,7 @@
 }
 .enter_title :global(.u-select-selection)>div{
   line-height: 36px
-} 
+}
 /* .enter_title :global(.u-select-dropdown .u-select-dropdown-menu-item-selected){
   background: transparent !important;
 } */
@@ -121,7 +121,7 @@
   margin-top: -20px;
 } */
 .enter_form :global(.u-city-select){
-  display: inline-flex; 
+  display: inline-flex;
 }
 .enter_form :global(.u-select-lg .u-select-selection--single){
   width: 271px;
@@ -211,4 +211,9 @@
 }
 .enter_form :global(.ie9_cont){
   position: relative !important;
+}
+.progressBar {
+  position: relative;
+  margin-left: 90px;
+  height: 90px;
 }
