@@ -26,20 +26,20 @@ function replaceClass(list, i) {
 
 class Navs extends Component {
   static propTypes = {
-    allBtn: PropTypes.string,
-    items: PropTypes.arrayOf(),
+    allBtn: PropTypes.bool,
+    items: PropTypes.arrayOf(PropTypes.object),
     offset: PropTypes.number,
-    duration: PropTypes.string,
-    delay: PropTypes.string,
+    duration: PropTypes.number,
+    delay: PropTypes.number,
     color: PropTypes.string,
     btnShowFn: PropTypes.func,
   }
   static defaultProps = {
-    allBtn: '',
+    allBtn: false,
     items: [],
     offset: 0,
-    duration: '',
-    delay: '',
+    duration: 0,
+    delay: 0,
     color: '',
     btnShowFn: () => { },
   }

@@ -19,7 +19,7 @@ ElementsWrapper.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element),
   style: PropTypes.shape({}),
   className: PropTypes.string,
-  items: PropTypes.arrayOf(),
+  items: PropTypes.arrayOf(PropTypes.object),
 };
 ElementsWrapper.defaultProps = {
   children: [],

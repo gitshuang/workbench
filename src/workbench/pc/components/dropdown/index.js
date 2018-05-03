@@ -16,12 +16,12 @@ class DropdownButton extends Component {
       push: PropTypes.func,
     }),
     label: PropTypes.string,
-    dataItem: PropTypes.arrayOf(),
+    dataItem: PropTypes.arrayOf(PropTypes.object),
     closeFun: PropTypes.func,
     type: PropTypes.string,
     marginLeft: PropTypes.number,
     lastIem: PropTypes.string,
-    openMenu: PropTypes.string,
+    openMenu: PropTypes.func,
     getPopupContainer: PropTypes.func,
   };
   static defaultProps = {
@@ -32,7 +32,7 @@ class DropdownButton extends Component {
     type: '',
     marginLeft: 0,
     lastIem: '',
-    openMenu: '',
+    openMenu: () => {},
     getPopupContainer: () => { },
   };
 

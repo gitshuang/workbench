@@ -25,11 +25,11 @@ class FolderWidget extends Component {
       icon: PropTypes.string,
       type: PropTypes.number,
     }),
-    clickHandler: PropTypes.string,
+    clickHandler: PropTypes.func,
   };
   static defaultProps = {
     data: {},
-    clickHandler: '',
+    clickHandler: () => { },
   };
   render() {
     const {

@@ -12,8 +12,8 @@ const defaultProps = {
   onLeftClick() {
   },
   className: '',
-  children: [],
-  leftContent: [],
+  children: '',
+  leftContent: '',
   rightContent: [],
   onLeftTitleClick: () => { },
 };
@@ -21,14 +21,14 @@ const defaultProps = {
 const propTypes = {
   prefixCls: PropTypes.string,
   className: PropTypes.string,
-  children: PropTypes.arrayOf(),
+  children: PropTypes.element,
   mode: PropTypes.string,
   iconName: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
   ]),
-  leftContent: PropTypes.arrayOf(),
-  rightContent: PropTypes.arrayOf(),
+  leftContent: PropTypes.element,
+  rightContent: PropTypes.arrayOf(PropTypes.element),
   onLeftClick: PropTypes.func,
   onLeftTitleClick: PropTypes.func,
 };

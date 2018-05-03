@@ -33,7 +33,7 @@ class WidgetItem extends Component {
       widgetName: PropTypes.string,
       icon: PropTypes.string,
     }),
-    clickHandler: PropTypes.string,
+    clickHandler: PropTypes.func,
     listMeta: PropTypes.shape({
       titleStyle: PropTypes.string,
       imageStyle: PropTypes.string,
@@ -42,7 +42,7 @@ class WidgetItem extends Component {
   };
   static defaultProps = {
     data: {},
-    clickHandler: '',
+    clickHandler: () => {},
     listMeta: {},
   };
   render() {
