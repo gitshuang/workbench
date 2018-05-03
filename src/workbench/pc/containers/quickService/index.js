@@ -14,9 +14,6 @@ const { changeQuickServiceHidden } = actions;
   mapStateToProps(
     'serviceList',
     'quickServiceDisplay',
-    {
-      "namespace":"root"
-    }
   ),
   {
     changeQuickServiceHidden,
