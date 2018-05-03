@@ -346,7 +346,7 @@ export default class Work extends Component {
         {
           hasRelationFunc ? <TitleServiceContainer outsideClickIgnoreClass={'icon-xiala'}/> : null
         }
-        <Pin outsideClickIgnoreClass={'icon-dingzhi'}/>
+        <Pin outsideClickIgnoreClass="icon-dingzhi" />
       </div>
     );
   }
