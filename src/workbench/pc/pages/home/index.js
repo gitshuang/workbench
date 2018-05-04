@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { ElementsWrapper } from 'components/scrollNav';
-import Button from 'bee/button';
-// import ButtonGroup from 'bee/button-group';
+import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
-import Header from 'containers/header';
+
+import { ElementsWrapper } from 'components/scrollNav';
 import HomeFolderDialog from 'containers/homeFolderDialog';
 import WidgeList from 'containers/homeWidgetList';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-import { wrap } from 'assets/style/base.css';
 import HeaderPage from './headerPage';
-import { page_home } from './style.css';
-import ButtonDefault,{ButtonBrand, ButtonDefaultLine,ButtonDefaultAlpha,ButtonWarning,ButtonDanger,} from 'pub-comp/button';
+import { pageHome } from './style.css';
 
 const { getWorkList } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -26,30 +23,54 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     'metaData',
     {
       namespace: 'home',
-    }
+    },
   ),
   {
     requestStart,
     requestSuccess,
     requestError,
     getWorkList,
-  }
+  },
 )
 class Home extends Component {
+  static propTypes = {
+    requestStart: PropTypes.func,
+    requestSuccess: PropTypes.func,
+    requestError: PropTypes.func,
+    getWorkList: PropTypes.func,
+    metaData: PropTypes.shape({
+      groupMeta: PropTypes.object,
+      contentData: PropTypes.object,
+      headerData: PropTypes.object,
+      listMeta: PropTypes.object,
+    }),
+    workList: PropTypes.arrayOf(PropTypes.object),
+  };
+  static defaultProps = {
+    requestStart: () => {},
+    requestSuccess: () => {},
+    requestError: () => {},
+    getWorkList: () => {},
+    metaData: {},
+    workList: [],
+  };
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   componentWillMount() {
-    const {requestStart, requestSuccess, requestError, getWorkList} = this.props;
+    const {
+      requestStart, requestSuccess, requestError, getWorkList,
+    } = this.props;
     requestStart();
     const param = {
-      componentCode: "yonyoucloud",
-      viewCode: "home",
-      deviceType: "PC",
-      lang: "US"
+      componentCode: 'yonyoucloud',
+      viewCode: 'home',
+      deviceType: 'PC',
+      lang: 'US',
     };
-    getWorkList(param).then(({error, payload}) => {
+    getWorkList(param).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       }
@@ -57,48 +78,46 @@ class Home extends Component {
     });
   }
   renderMetadata = (name) => {
-    const {metaData} = this.props;
+    const { metaData } = this.props;
     return metaData && metaData.properties && metaData.properties[name];
   }
   render() {
     const {
-      workList
-      } = this.props;
+      workList,
+    } = this.props;
     const list = [];
     const conts = [];
     // 元数据拉过来的值
-    const groupMeta = this.renderMetadata("group");
-    const contentData = this.renderMetadata("content");
-    const headerData = this.renderMetadata("header");
-    const listMeta = this.renderMetadata("list");
+    const groupMeta = this.renderMetadata('group');
+    const contentData = this.renderMetadata('content');
+    const headerData = this.renderMetadata('header');
+    const listMeta = this.renderMetadata('list');
     const contentStyle = contentData && contentData.style && JSON.parse(contentData.style);
     workList.forEach((da, i) => {
       const {
         widgetId: id,
         widgetName: name,
-        } = da;
+      } = da;
       const props = {
         key: `nav${id}`,
         data: da,
-        noTitle: !i
+        noTitle: !i,
       };
       if (i === workList.length - 1) {
         props.style = {
           height: window.innerHeight,
-        }
+        };
       }
       list.push({
         label: name,
         target: `nav${id}`,
       });
-      conts.push(
-        <WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} />
-      );
-    })
+      conts.push(<WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} />);
+    });
 
     return (
-      <div className={`${page_home} home`} style={contentStyle}>
-        <HeaderPage list={list} headerData={headerData}/>
+      <div className={`${pageHome} home`} style={contentStyle}>
+        <HeaderPage list={list} headerData={headerData} />
         <ElementsWrapper items={list} offset={-55}>
           {conts}
         </ElementsWrapper>
