@@ -21,7 +21,7 @@ import { enterForm, lxrHr, lxrTitle, progressBar } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter, getEnterInfo } = homeActions;
-
+const { Option } = Select;
 
 @withRouter
 @connect(
@@ -52,12 +52,14 @@ class CreateEnter extends Component {
     }),
     setCreateEnter: PropTypes.func,
     updateenter: PropTypes.string,
+    btlLabel: PropTypes.string,
   };
   static defaultProps = {
     userInfo: {},
     data: {},
     setCreateEnter: () => { },
     updateenter: '',
+    btlLabel: '',
   };
   constructor(props) {
     super(props);
@@ -281,7 +283,7 @@ class CreateEnter extends Component {
     });
   }
 
-  checkProgress = (tenantId, loadingFunc, successFunc) => {
+  checkProgress = (tenantId, loadingFunc) => {
     let count = 0;
     const loop = () => {
       if (count > 10) {
@@ -298,152 +300,216 @@ class CreateEnter extends Component {
   render() {
     const { btlLabel, updateenter } = this.props;
     const {
-      tenantName, logo, tenantNature, allowExit, tenantEmail, tenantTel, tenantAddress,
+      tenantName, logo, allowExit, tenantEmail, tenantTel, tenantAddress,
       tenantIndustry, invitePermission, joinPermission, highANDlower, address, linkman, tenantSize,
       processValue, tenantId,
     } = this.state;
 
     let newTenantAddress = '';
     if (tenantAddress) {
-      let _adds = tenantAddress.split('|');
-      newTenantAddress = _adds[_adds.length - 1];
+      const adds = tenantAddress.split('|');
+      newTenantAddress = adds[adds.length - 1];
     }
 
-    let _tenantSizeOption = [];
+    const tenantSizeOptionS = [];
     this.tenantSizeOption.forEach(({ value, label }, i) => {
-      _tenantSizeOption.push(<Option key={value + '_' + i} value={value}>{label}</Option>);
-    })
+      tenantSizeOptionS.push(<Option key={`${value}_${i}`} value={value}>{label}</Option>);
+    });
     let submitBtn = <SubmitBtn isSubmit btlLabel={btlLabel} disabled={this.state.disabled} />;
     if (processValue && updateenter === 'upgrade_enter') {
       submitBtn = (
         <div className={progressBar}>
-          <Progress check={this.checkProgress} tenantId={tenantId} startFlag={processValue} loadingDesc={'正在升级企业…'} />
+          <Progress check={this.checkProgress} tenantId={tenantId} startFlag={processValue} loadingDesc="正在升级企业…" />
         </div>
       );
     }
     return (
       <Form submitCallBack={this.checkForm} showSubmit={false} className={enterForm}>
-        <FormItem showMast={false} labelName={<span>企业名称<font color='red'>&nbsp;*&nbsp;</font></span>}
-          isRequire={true} valuePropsName='value' errorMessage='请输入企业名称' method='blur'
-          inline={true}>
-          <FormControl name='tenantName' value={tenantName ? tenantName : ''} onChange={(e) => { this.inputOnChange(e, 'tenantName') }} placeholder='最多60个字符' />
+        <FormItem
+          showMast={false}
+          labelName={<span>企业名称<font color="red">&nbsp;*&nbsp;</font></span>}
+          isRequire
+          valuePropsName="value"
+          errorMessage="请输入企业名称"
+          method="blur"
+          inline
+        >
+          <FormControl name="tenantName" value={tenantName || ''} onChange={(e) => { this.inputOnChange(e, 'tenantName'); }} placeholder="最多60个字符" />
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>企业头像 &nbsp;&nbsp;&nbsp; </span>} valuePropsName='value' method='change' inline={true}>
-          <Upload name='logo' logo={logo ? logo : ''} onChange={this.onChangeUpload} tip=''>
-          </Upload>
+        <FormItem
+          showMast={false}
+          labelName={<span>企业头像 &nbsp;&nbsp;&nbsp; </span>}
+          valuePropsName="value"
+          method="change"
+          inline
+        >
+          <Upload name="logo" logo={logo || ''} onChange={this.onChangeUpload} tip="" />
         </FormItem>
 
         {
-          tenantIndustry ? (<FormItem showMast={false} labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage='请选择所属行业' method='blur' inline={true}>
-            <Select
-              name='tenantIndustry'
-              defaultValue='-所属行业-'
-              value={tenantIndustry ? tenantIndustry : '-所属行业-'}
-              style={{ width: 338, marginRight: 6 }}
-              onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }) }}
+          tenantIndustry ? (
+            <FormItem
+              showMast={false}
+              labelName={<span>所属行业<font color="red">&nbsp;*&nbsp;</font></span>}
+              isRequire
+              valuePropsName="value"
+              errorMessage="请选择所属行业"
+              method="blur"
+              inline
             >
-              {
-                this.tenantIndustry.map(({ label, value }) => { return <Option value={value}>{label}</Option> })
-              }
-            </Select>
-          </FormItem>) : (<FormItem showMast={false} labelName={<span>所属行业<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage='请选择所属行业' method='blur' inline={true}>
-            <Select
-              name='tenantIndustry'
-              defaultValue='-所属行业-'
-              style={{ width: 338, marginRight: 6 }}
-              onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }) }}
+              <Select
+                name="tenantIndustry"
+                defaultValue="-所属行业-"
+                value={tenantIndustry || '-所属行业-'}
+                style={{ width: 338, marginRight: 6 }}
+                onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
+              >
+                {
+                  this.tenantIndustry.map(({ label, value }) =>
+                    <Option value={value}>{label}</Option>)
+                }
+              </Select>
+            </FormItem>
+          ) : (
+            <FormItem
+              showMast={false}
+              labelName={<span>所属行业<font color="red">&nbsp;*&nbsp;</font></span>}
+              isRequire
+              valuePropsName="value"
+              errorMessage="请选择所属行业"
+              method="blur"
+              inline
             >
-              {
-                this.tenantIndustry.map(({ label, value }) => { return <Option value={value}>{label}</Option> })
-              }
-            </Select>
-          </FormItem>)
+              <Select
+                name="tenantIndustry"
+                defaultValue="-所属行业-"
+                style={{ width: 338, marginRight: 6 }}
+                onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
+              >
+                {
+                  this.tenantIndustry.map(({ label, value }) =>
+                    <Option value={value}>{label}</Option>)
+                }
+              </Select>
+            </FormItem>
+          )
         }
 
         {
-          tenantSize ? (<FormItem showMast={false} labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage='请选择规模范围' method='blur' inline={true}>
-            <Select
-              name='tenantSize'
-              defaultValue='-规模范围-'
-              value={tenantSize}
-              style={{ width: 338, marginRight: 6 }}
-              onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }) }}
+          tenantSize ? (
+            <FormItem
+              showMast={false}
+              labelName={<span>规模范围<font color="red">&nbsp;*&nbsp;</font></span>}
+              isRequire
+              valuePropsName="value"
+              errorMessage="请选择规模范围"
+              method="blur"
+              inline
             >
-              {_tenantSizeOption}
-            </Select>
-          </FormItem>) : (<FormItem showMast={false} labelName={<span>规模范围<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage='请选择规模范围' method='blur' inline={true}>
-            <Select
-              name='tenantSize'
-              defaultValue='-规模范围-'
-              style={{ width: 338, marginRight: 6 }}
-              onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }) }}
+              <Select
+                name="tenantSize"
+                defaultValue="-规模范围-"
+                value={tenantSize}
+                style={{ width: 338, marginRight: 6 }}
+                onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
+              >
+                {tenantSizeOptionS}
+              </Select>
+            </FormItem>
+          ) : (
+            <FormItem
+              showMast={false}
+              labelName={<span>规模范围<font color="red">&nbsp;*&nbsp;</font></span>}
+              isRequire
+              valuePropsName="value"
+              errorMessage="请选择规模范围"
+              method="blur"
+              inline
             >
-              {_tenantSizeOption}
-            </Select>
-          </FormItem>)
+              <Select
+                name="tenantSize"
+                defaultValue="-规模范围-"
+                style={{ width: 338, marginRight: 6 }}
+                onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
+              >
+                {tenantSizeOptionS}
+              </Select>
+            </FormItem>
+          )
         }
 
         {
           address ? (
-            <FormItem showMast={false} labelName={<span>企业地址&nbsp;&nbsp;</span>} isRequire={false} valuePropsName='value' errorMessage='请输入企业地址' method='blur' inline={true}>
-              <CitySelect name='address' onChange={this.onCityChange} defaultValue={address} />
+            <FormItem
+              showMast={false}
+              labelName={<span>企业地址&nbsp;&nbsp;</span>}
+              isRequire={false}
+              valuePropsName="value"
+              errorMessage="请输入企业地址"
+              method="blur"
+              inline
+            >
+              <CitySelect name="address" onChange={this.onCityChange} defaultValue={address} />
             </FormItem>
           ) : <div />
         }
-        <FormItem showMast={false} isRequire={false} valuePropsName='value' errorMessage='请输入企业地址' method='blur' inline={true}>
-          <FormControl name='tenantAddress' value={newTenantAddress ? newTenantAddress : ''} onChange={(e) => { this.inputOnChange(e, 'tenantAddress') }} placeholder='最多60个字符' />
+        <FormItem showMast={false} isRequire={false} valuePropsName="value" errorMessage="请输入企业地址" method="blur" inline>
+          <FormControl name="tenantAddress" value={newTenantAddress || ''} onChange={(e) => { this.inputOnChange(e, 'tenantAddress'); }} placeholder="最多60个字符" />
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>邀请规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage='请选择所属行业' method='blur' inline={true}>
+        <FormItem showMast={false} labelName={<span>邀请规则<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="请选择所属行业" method="blur" inline>
           <Select
-            name='invitePermission'
-            defaultValue='1'
-            value={invitePermission ? invitePermission : '1'}
+            name="invitePermission"
+            defaultValue="1"
+            value={invitePermission || '1'}
             style={{ width: 338, marginRight: 6 }}
-            onChange={(e) => { this.setOptherData({ name: 'invitePermission', value: e }) }}
+            onChange={(e) => { this.setOptherData({ name: 'invitePermission', value: e }); }}
           >
-            <Option value='1'>全员邀请 </Option>
-            <Option value='2'>禁止邀请</Option>
-            <Option value='0'>管理员邀请</Option>
+            <Option value="1">全员邀请 </Option>
+            <Option value="2">禁止邀请</Option>
+            <Option value="0">管理员邀请</Option>
           </Select>
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>申请权限<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage='请选择所属行业' method='blur' inline={true}>
+        <FormItem showMast={false} labelName={<span>申请权限<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="请选择所属行业" method="blur" inline>
           <Select
-            name='joinPermission'
-            defaultValue='1'
-            value={joinPermission ? joinPermission : '1'}
+            name="joinPermission"
+            defaultValue="1"
+            value={joinPermission || '1'}
             style={{ width: 338, marginRight: 6 }}
-            onChange={(e) => { this.setOptherData({ name: 'joinPermission', value: e }) }}
+            onChange={(e) => { this.setOptherData({ name: 'joinPermission', value: e }); }}
           >
-            <Option value='0'>所有用户都可申请加入 </Option>
-            <Option value='1'>禁止用户申请加入</Option>
+            <Option value="0">所有用户都可申请加入 </Option>
+            <Option value="1">禁止用户申请加入</Option>
           </Select>
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>允许用户退出<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} method='change' inline={true}>
-          {/* <Nature name='allowExit' defaultValue={allowExit?allowExit:'0'} onChange={this.allowExitChange} /> */}
-          <Radio.RadioGroup name='allowExit' selectedValue={this.state.value} onChange={this.allowExitChange} selectedValue={allowExit ? allowExit : '0'}>
-            <Radio value='0' >禁止</Radio>
-            <Radio value='1' >允许</Radio>
+        <FormItem showMast={false} labelName={<span>允许用户退出<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
+          <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || '0'}>
+            <Radio value="0" >禁止</Radio>
+            <Radio value="1" >允许</Radio>
           </Radio.RadioGroup>
         </FormItem>
 
         <FormItem
           showMast={false}
-          labelName={<span>上下级显示<font color='red'>&nbsp;*&nbsp;</font></span>}
+          labelName={<span>上下级显示<font color="red">&nbsp;*&nbsp;</font></span>}
           isRequire={false}
-          valuePropsName='value' errorMessage='请选择' method='blur' inline={true}>
+          valuePropsName="value"
+          errorMessage="请选择"
+          method="blur"
+          inline
+        >
           <Select
-            name='highANDlower'
-            defaultValue='1'
-            value={highANDlower ? highANDlower : '1'}
+            name="highANDlower"
+            defaultValue="1"
+            value={highANDlower || '1'}
             style={{ width: 338, marginRight: 6 }}
-            onChange={(e) => { this.setOptherData({ name: 'highANDlower', value: e }) }}
+            onChange={(e) => { this.setOptherData({ name: 'highANDlower', value: e }); }}
           >
-            <Option value='0'>根据组织机构负责人显示上下级 </Option>
-            <Option value='1'>根据导入的上下级关系显示上下级</Option>
+            <Option value="0">根据组织机构负责人显示上下级 </Option>
+            <Option value="1">根据导入的上下级关系显示上下级</Option>
           </Select>
         </FormItem>
         <div className={lxrHr}>
@@ -452,24 +518,30 @@ class CreateEnter extends Component {
 
         <div className={lxrTitle}>
           联系人信息：
-            </div>
+        </div>
 
-        <FormItem showMast={false} labelName={<span>姓名<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} valuePropsName='value' errorMessage='请输入联系人姓名' method='blur' inline={true}>
-          <FormControl name='linkman' value={linkman ? linkman : ''} placeholder='请输入联系人姓名' onChange={(e) => { this.inputOnChange(e, 'linkman') }} placeholder='请输入联系人姓名' />
+        <FormItem showMast={false} labelName={<span>姓名<font color="red">&nbsp;*&nbsp;</font></span>} isRequire valuePropsName="value" errorMessage="请输入联系人姓名" method="blur" inline>
+          <FormControl name="linkman" value={linkman || ''} placeholder="请输入联系人姓名" onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
         </FormItem>
 
-        <FormItem showMast={false} valuePropsName='value' labelName={<span>邮箱<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} method='blur' htmlType='email' errorMessage='邮箱格式错误' inline={true}>
-          <FormControl name='tenantEmail' value={tenantEmail ? tenantEmail : ''} onChange={(e) => { this.inputOnChange(e, 'tenantEmail') }} placeholder='请输入邮箱' />
+        <FormItem showMast={false} valuePropsName="value" labelName={<span>邮箱<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="email" errorMessage="邮箱格式错误" inline>
+          <FormControl name="tenantEmail" value={tenantEmail || ''} onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }} placeholder="请输入邮箱" />
         </FormItem>
 
-        <FormItem className='input_phone' showMast={false} valuePropsName='value' labelName={<span>手机号<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={true} method='blur' htmlType='tel' errorMessage='手机号格式错误' inline={true}>
-          <FormControl name='tenantTel' value={tenantTel ? tenantTel : ''} onChange={(e) => { this.inputOnChange(e, 'tenantTel') }} placeholder='请输入手机号' />
+        <FormItem className="input_phone" showMast={false} valuePropsName="value" labelName={<span>手机号<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="tel" errorMessage="手机号格式错误" inline>
+          <FormControl name="tenantTel" value={tenantTel || ''} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} placeholder="请输入手机号" />
         </FormItem>
 
-        {/* <FormItem showMast={false} labelName={<span>企业性质<font color='red'> *</font></span>} isRequire={false} method='change' inline={true}>
+        {
+          /*
+          <FormItem
+            showMast={false}
+            labelName={<span>企业性质<font color="red"> *</font></span>}
+            isRequire={false} method='change' inline>
               <Nature name='tenantNature' defaultValue={tenantNature?tenantNature:'LegalPerson'} />
-            </FormItem> */}
-
+          </FormItem>
+        */
+        }
         {submitBtn}
       </Form>
     );
