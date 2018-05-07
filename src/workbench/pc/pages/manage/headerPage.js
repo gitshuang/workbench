@@ -1,75 +1,68 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { mapStateToProps } from '@u';
-import homeActions from 'store/root/home/actions';
+import PropTypes from 'prop-types';
+
 import Header from 'containers/header';
 import Icon from 'pub-comp/icon';
 import BreadcrumbContainer from 'components/breadcrumb';
-import { logoImg, header } from './style.css';
-import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
+import { header } from './style.css';
 
-const { changeUserInfoDisplay,hideUserInfoDisplay} = homeActions;
 
 @withRouter
-@connect(
-  mapStateToProps(
-    'userInfoDisplay',
-    'userInfo',
-    {
-      namespace:'home',
-    }
-  ),
-  {
-    changeUserInfoDisplay,
-    hideUserInfoDisplay
-  }
-)
 class HeaderPage extends Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      goBack: PropTypes.func,
+      replace: PropTypes.func,
+    }),
+  };
+  static defaultProps = {
+    history: {},
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{name:"首页编辑"}]
-    }
-  }
-  getLeftContent() {
-    const {
-      userInfo: {
-        logo,
-      }
-    } = this.props;
-    // return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
-  }
-  goback = () => {
-    this.props.history.goBack();
-  }
-  goHome = () => {
-    this.props.history.replace('');
+      brm: [{ name: '首页编辑' }],
+    };
   }
 
   componentDidMount() {
     setTimeout(() => {
-      window.scrollTo(0, 1)
-    },0);
+      window.scrollTo(0, 1);
+    }, 0);
   }
+
+  getLeftContent = () => {
+    // const {
+    //   userInfo: {
+    //     logo,
+    //   },
+    // } = this.props;
+    // return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
+  }
+
+  goback = () => {
+    this.props.history.goBack();
+  }
+
+  goHome = () => {
+    this.props.history.replace('');
+  }
+
   render() {
-    const {
-      changeUserInfoDisplay,
-      hideUserInfoDisplay,
-      userInfoDisplay,
-      list,
-    } = this.props;
-    let iconName = <Icon type="home"/>
+    const iconName = <Icon type="home" />;
     return (
       <div className={header}>
         <Header
-          onLeftClick={ this.goHome }
+          onLeftClick={this.goHome}
           leftContent={this.getLeftContent()}
-          iconName={iconName} >
+          iconName={iconName}
+        >
           <span>首页编辑</span>
         </Header>
-        <div style={{paddingLeft:"23px","fontSize":"12px"}}>
-          <BreadcrumbContainer data={this.state.brm} goback={this.goback}/>
+        <div style={{ paddingLeft: '23px', fontSize: '12px' }}>
+          <BreadcrumbContainer data={this.state.brm} goback={this.goback} />
         </div>
       </div>
     );

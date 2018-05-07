@@ -5,15 +5,15 @@ import ApplicationWrap from 'containers/applicationWrap';
 import IFrame from 'components/iframe_other';
 import {
   bg,
-  frameElm,
 } from './style.css';
 
-class UserInfo extends Component { 
+@withRouter
+class UserInfo extends Component {
   render() {
     // let url = getHost('user')+"#/staff/personInfor-card";
     return (
-      <ApplicationWrap name='员工信息'>
-        <div className={bg+" um-content um-vbox"}> 
+      <ApplicationWrap name="员工信息">
+        <div className={`${bg} um-content um-vbox`}>
           <IFrame title="员工信息" url={`${getHost('user')}#/staff/personInfor-card`} />
         </div>
       </ApplicationWrap>

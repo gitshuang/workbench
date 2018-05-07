@@ -24,7 +24,7 @@ export default function check(tenantId, loadingFunc, successFunc) {
       try {
         result = JSON.parse(this.responseText);
       } catch (e) {
-        console.log(e);
+        console.log(e); // eslint-disable-line
       }
       if (result.data) {
         successFunc();
