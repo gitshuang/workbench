@@ -12,8 +12,8 @@ const defaultProps = {
   onLeftClick() {
   },
   className: '',
-  children: '',
-  leftContent: '',
+  children: null,
+  leftContent: null,
   rightContent: [],
   onLeftTitleClick: () => { },
 };

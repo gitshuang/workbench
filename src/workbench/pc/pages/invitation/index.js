@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { noop,mapStateToProps } from '@u';
+import PropTypes from 'prop-types';
+import { mapStateToProps } from '@u';
+
 import rootActions from 'store/root/actions';
 import inviteActions from 'store/root/invitation/actions';
-import Header from 'containers/header';
-import BreadcrumbContainer from 'components/breadcrumb';
-import {ButtonBrand} from 'pub-comp/button';
-import Button from 'bee/button';
-import SuccessDialog from './successDialog';
+
 import Tabs, { TabPane } from 'bee/tabs';
 import FormControl from 'bee/form-control';
-import TagsInput from 'components/tagsInput';
 import Message from 'bee/message';
+import { ButtonBrand } from 'pub-comp/button';
+import Header from 'containers/header';
+import TagsInput from 'components/tagsInput';
+import BreadcrumbContainer from 'components/breadcrumb';
+
+import SuccessDialog from './successDialog';
+
 
 import {
   header,
@@ -20,23 +24,18 @@ import {
   wrap,
   content,
   urlArea,
-  mailList,
   copyLinkBtn,
-  addMailBtn,
   submitBtn,
   tabPane1,
   tabPane2,
   tabPane3,
   qrCode,
-  printQrBtn,
-  tootip,
-  first_p
+  firstP,
 } from './style.css';
 
-const {requestStart, requestSuccess, requestError} = rootActions;
-const {getInviteUsersJoinAddress, sendMessage} = inviteActions;
+const { requestStart, requestSuccess, requestError } = rootActions;
+const { getInviteUsersJoinAddress, sendMessage } = inviteActions;
 
-const maxLength = 20;
 const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 
 @withRouter
@@ -45,9 +44,7 @@ const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     'inviteJoinAddress',
     {
       key: 'userInfo',
-      value: (invitation,ownProps,root) => {
-        return root.home.userInfo
-      }
+      value: (invitation, ownProps, root) => root.home.userInfo,
     },
     {
       namespace: 'invitation',
@@ -59,139 +56,176 @@ const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     requestSuccess,
     requestError,
     getInviteUsersJoinAddress,
-    sendMessage
-  }
+    sendMessage,
+  },
 )
 class Invitation extends Component {
+  static propTypes = {
+    getInviteUsersJoinAddress: PropTypes.func,
+    sendMessage: PropTypes.func,
+    requestStart: PropTypes.func,
+    requestSuccess: PropTypes.func,
+    requestError: PropTypes.func,
+    userInfo: PropTypes.shape({
+      userName: PropTypes.string,
+    }),
+    history: PropTypes.shape({
+      goBack: PropTypes.func,
+      replace: PropTypes.func,
+    }),
+  };
+  static defaultProps = {
+    getInviteUsersJoinAddress: () => {},
+    sendMessage: () => {},
+    requestStart: () => {},
+    requestSuccess: () => {},
+    requestError: () => {},
+    userInfo: {},
+    history: {},
+  };
   constructor(props) {
     super(props);
     this.state = {
       url: '',
       mails: [],
       successDialogShow: false,
-      copy:false,
-      creator:props.userInfo.userName,
-      message:''
-    }
+      copy: false,
+      creator: props.userInfo.userName,
+      message: '',
+    };
     this.goBack = this.goBack.bind(this);
   }
 
   componentWillMount() {
-    const {requestStart, requestSuccess, requestError,getInviteUsersJoinAddress} = this.props;
+    const {
+      requestStart, requestSuccess, requestError, getInviteUsersJoinAddress,
+    } = this.props;
     requestStart();
-    getInviteUsersJoinAddress().then(({error, payload}) => {
-        if (error) {
-          requestError(payload);
-        }
-        this.setState({
-          url:payload
-        });
-        this.refs['shortUrl'].select();
-        requestSuccess();
+    getInviteUsersJoinAddress().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        url: payload,
+      });
+      this.shortUrl.select();
+      requestSuccess();
     });
   }
-  goBack() {
-    this.props.history.goBack();
-  }
-  goHome = () => {
-    this.props.history.replace('');
-  }
-  copyLink = () => {
-    this.refs['shortUrl'].select();
-    document.execCommand('copy');
- 
-    Message.create({content: '链接复制成功，赶快发送给你的小伙伴吧!',duration:1.5,position: 'topLeft', color: "success"});
-  }
-  onMailChange = (i) => (e) => {
-    const value = e.target.value;
+
+  onMailChange = i => (e) => {
+    const { value } = e.target;
     const mails = [...this.state.mails];
     mails[i] = value;
     this.setState({
       mails,
     });
   }
+
+  setOptherData=(obj) => {
+    this.state[obj.name] = obj.value;
+    this.setState({
+      ...this.state,
+    });
+  }
+
+  goBack() {
+    this.props.history.goBack();
+  }
+
+  goHome = () => {
+    this.props.history.replace('');
+  }
+
+  copyLink = () => {
+    this.shortUrl.select();
+    document.execCommand('copy');
+
+    Message.create({
+      content: '链接复制成功，赶快发送给你的小伙伴吧!', duration: 1.5, position: 'topLeft', color: 'success',
+    });
+  }
+
   addMail = () => {
     const mails = [...this.state.mails, ''];
     this.setState({
       mails,
     });
   }
+
   submit = () => {
-    const {requestStart, requestSuccess, requestError,sendMessage} = this.props;
-    const {message,creator} = this.state;
+    const {
+      requestStart, requestSuccess, requestError, sendMessage,
+    } = this.props;
+    const { message, creator } = this.state;
     const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
-    if (mails.length <= 0 ) {
-      Message.create({content: '请输入正确的邮件地址!',duration:1.5,position: 'topLeft', color: "warning"});
-      return false;
+    if (mails.length <= 0) {
+      Message.create({
+        content: '请输入正确的邮件地址!', duration: 1.5, position: 'topLeft', color: 'warning',
+      });
+    } else {
+      const parent = { email: mails, message: message === '' ? '友空间-赋能个人、激活组织' : message, creator };
+      requestStart();
+      sendMessage(parent).then(() => {
+        requestSuccess();
+        this.setState({
+          mails: [],
+          // successDialogShow: false,
+        });
+      }, (err) => {
+        requestError(err);
+      });
+      this.setState({
+        mails: ['', ''],
+        successDialogShow: true,
+      });
     }
-    let parent = {"email":mails,message:message == ''?"友空间-赋能个人、激活组织":message,creator};
-    requestStart();
-    sendMessage(parent).then((data) => {
-    requestSuccess();
-    this.setState({
-      mails: [],
-      // successDialogShow: false,
-    });
-    }, (err)=>{
-    requestError(err);
-    }); 
-    this.setState({
-      mails: ['', ''],
-      successDialogShow: true,
-    });
   }
+
   handleChange = (tags) => {
-    this.setState({mails:tags})
+    this.setState({ mails: tags });
   }
+
   printQr = () => {
-    let newstr = document.getElementById("qrCode").innerHTML;
-    let oldstr = document.body.innerHTML;
+    const newstr = document.getElementById('qrCode').innerHTML;
+    const oldstr = document.body.innerHTML;
     document.body.innerHTML = newstr;
     window.print();
     document.body.innerHTML = oldstr;
     return false;
   }
+
   closeSuccessDialog = () => {
     this.setState({
       successDialogShow: false,
-    })
-  }
-
-  setOptherData=(obj)=>{
-    this.state[obj.name] = obj.value;
-    this.setState({
-      ...this.state
-    })
+    });
   }
 
   render() {
     const {
       url,
-      mails,
-      errorDialogShow,
       successDialogShow,
-      copy,
       creator,
-      message
+      message,
     } = this.state;
-
-    let tip = (
+    /*
+    const tip = (
       <div className={tootip}>
         链接复制成功，赶快发送给你的小伙伴吧！
       </div>
-  )
-
+    );
+    */
     return (
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={ this.goHome} iconName={"home"} >
+            <Header onLeftClick={this.goHome} iconName="home" >
               <div>
                 <span>邀请成员</span>
               </div>
             </Header>
             <div className={appBreadcrumb}>
-              <BreadcrumbContainer data={[{name:'邀请成员'}]} goback={this.goBack}/>
+              <BreadcrumbContainer data={[{ name: '邀请成员' }]} goback={this.goBack} />
             </div>
           </div>
         </div>
@@ -203,40 +237,37 @@ class Invitation extends Component {
               onChange={this.callback}
               className="demo-tabs"
             >
-              <TabPane tab='链接邀请' key="1" className={tabPane1}>
+              <TabPane tab="链接邀请" key="1" className={tabPane1}>
                 <p>将链接发给小伙伴就可以啦</p>
                 <div className={urlArea}>
-                  <label>链接</label>
-                  <input ref='shortUrl' type='text' value={url} readOnly/>
+                  <span>链接</span>
+                  <input ref={(c) => { this.shortUrl = c; }} type="text" value={url} readOnly />
                 </div>
                 <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >复制链接</ButtonBrand>
 
-                {/* <Tooltip trigger="click" rootClose placement="bottom" overlay={tip} onClick={this.copyLink} >
-                  <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >复制链接f</ButtonBrand>
-                </Tooltip> */}
-
               </TabPane>
-              <TabPane tab='邮件邀请' key="2" className={tabPane2}>
+              <TabPane tab="邮件邀请" key="2" className={tabPane2}>
 
-                <p className={first_p}>给你的小伙伴捎句话吧</p>
-                <FormControl placeholder="友空间-赋能个人、激活组织" value={message} 
-                onChange={(e)=>{this.setOptherData({name:"message",value:e})} }/>
+                <p className={firstP}>给你的小伙伴捎句话吧</p>
+                <FormControl
+                  placeholder="友空间-赋能个人、激活组织"
+                  value={message}
+                  onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
+                />
 
                 <p>署名</p>
-                <FormControl value={creator} onChange={(e)=>{this.setOptherData({name:"creator",value:e})} }/>
+                <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
                 <p>输入邮箱地址并用 “;” 隔开</p>
                 <TagsInput
                   value={this.state.mails}
-                  addKeys={[13,186,59]} // enter,semicolon:chrome186,firefox59
+                  addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
                   addOnBlur
                   onlyUnique
                   addOnPaste
                   validationRegex={regMail}
-                  pasteSplit={data => {
-                    return data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())
-                  }}
-                  onChange={this.handleChange.bind(this)}
+                  pasteSplit={data => data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())}
+                  onChange={this.handleChange}
                 />
                 {/* <ul className={mailList}>
                 {
@@ -256,11 +287,11 @@ class Invitation extends Component {
                 </ul> */}
                 <ButtonBrand className={submitBtn} onClick={this.submit} >确定发送</ButtonBrand>
               </TabPane>
-              <TabPane tab='二维码邀请' key="3" className={tabPane3}>
+              <TabPane tab="二维码邀请" key="3" className={tabPane3}>
                 <div>
                   <span>扫描二维码直接进入团队</span>
                   <div className={qrCode} id="qrCode">
-                    <img src='/invite/getQRCode'/>
+                    <img alt="" src="/invite/getQRCode" />
                   </div>
                   {/* <ButtonBrand className={printQrBtn} >二维码</ButtonBrand> */}
                 </div>
