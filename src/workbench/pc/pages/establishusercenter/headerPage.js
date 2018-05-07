@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { mapStateToProps, GetQueryString } from '@u';
-import rootActions from 'store/root/actions';
+import PropTypes from 'prop-types';
+import { mapStateToProps } from '@u';
+
 /*   actions   */
+import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
+
 import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
-import Navbar from 'components/scrollNav';
-import { logoImg, header ,imgInner,all_btn,btn_disable,logo_title} from './style.css';
-import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 
-const { changeUserInfoDisplay,hideUserInfoDisplay, getUserInfo, changeRequestDisplay } = homeActions;
+import { header, imgInner, allBtn, btnDisable, logoTitle } from './style.css';
+
+
+const {
+  changeUserInfoDisplay, hideUserInfoDisplay, getUserInfo, changeRequestDisplay,
+} = homeActions;
 
 const {
   requestStart,
   requestSuccess,
-  requestError
+  requestError,
 } = rootActions;
 
 @connect(
@@ -24,7 +29,7 @@ const {
     'userInfo',
     {
       namespace: 'home',
-    }
+    },
   ),
   {
     changeUserInfoDisplay,
@@ -33,47 +38,67 @@ const {
     getUserInfo,
     requestStart,
     requestSuccess,
-    requestError
-  }
+    requestError,
+  },
 )
 class HeaderPage extends Component {
-
-  constructor(props){
+  static propTypes = {
+    userInfoDisplay: PropTypes.bool,
+    hideUserInfoDisplay: PropTypes.func,
+    changeUserInfoDisplay: PropTypes.func,
+    changeRequestDisplay: PropTypes.func,
+    userInfo: PropTypes.shape({
+      userAvator: PropTypes.string,
+      company: PropTypes.string,
+    }),
+    headerData: PropTypes.shape({
+      background: PropTypes.string,
+    }),
+  };
+  static defaultProps = {
+    userInfoDisplay: true,
+    hideUserInfoDisplay: () => {},
+    changeUserInfoDisplay: () => {},
+    changeRequestDisplay: () => {},
+    userInfo: {},
+    headerData: {},
+  };
+  constructor(props) {
     super(props);
     this.state = {
-      allBtn:false, //默认显示一行tab
-      btnShow:false
+      allBtn: false, // 默认显示一行tab
+      btnShow: false,
+    };
+  }
+
+  componentDidMount() {
+    const { changeUserInfoDisplay, changeRequestDisplay } = this.props;
+    // 判断是否localstorage中包含这个值
+    if (localStorage.getItem('create')) {
+      changeUserInfoDisplay();
+      changeRequestDisplay();
+      localStorage.removeItem('create');
     }
   }
 
   getLeftContent() {
     const {
       userInfo: {
-        logo,
-        company
-      }
+        company,
+      },
     } = this.props;
-    return <div className={logo_title}>{company}</div>
-  }
-  componentDidMount() {
-    const { changeUserInfoDisplay,changeRequestDisplay } = this.props;
-    // 判断是否localstorage中包含这个值
-    if(localStorage.getItem("create")) {
-      changeUserInfoDisplay();
-      changeRequestDisplay();
-      localStorage.removeItem("create");
-    }
+    return <div className={logoTitle}>{company}</div>;
   }
 
-  allBtnOnclick=()=>{ 
+  allBtnOnclick=() => {
     this.setState({
-      allBtn:this.state.allBtn?false:true
-    })
+      allBtn: !this.state.allBtn,
+    });
   }
 
-  btnShowFn = (btnShow)=>{
+  btnShowFn = (btnShow) => {
     this.setState({
-      btnShow
+      btnShow,
     });
   }
 
@@ -82,38 +107,37 @@ class HeaderPage extends Component {
       changeUserInfoDisplay,
       hideUserInfoDisplay,
       userInfoDisplay,
-      list,
-      headerData
+      headerData,
     } = this.props;
 
-    let img = this.props.userInfo.userAvator;
+    const img = this.props.userInfo.userAvator;
     let imgIcon = null;
-    //let class2 = headerData && headerData.className;
-    let background = headerData && headerData.background && JSON.parse(headerData.background);
-    let titleContent = headerData && headerData.title;
-    let titleStyle = headerData && headerData.titleStyle && JSON.parse(headerData.titleStyle);
-    let color = headerData && headerData.color;
-    if(img){
-      imgIcon = <img src={img} className={imgInner} />
-    }else{
-      imgIcon =  <Icon type="staff" />;
+    // let class2 = headerData && headerData.className;
+    const background = headerData && headerData.background && JSON.parse(headerData.background);
+    const titleContent = headerData && headerData.title;
+    const titleStyle = headerData && headerData.titleStyle && JSON.parse(headerData.titleStyle);
+    const color = headerData && headerData.color;
+    if (img) {
+      imgIcon = <img alt="" src={img} className={imgInner} />;
+    } else {
+      imgIcon = <Icon type="staff" />;
     }
-    const _btnShow = this.state.btnShow?null:btn_disable;
+    const BtnShow = this.state.btnShow ? null : btnDisable;
 
     return (
       <div className={`${header}`} style={background}>
         <Header
-          onLeftClick={ userInfoDisplay?hideUserInfoDisplay:changeUserInfoDisplay }
+          onLeftClick={userInfoDisplay ? hideUserInfoDisplay : changeUserInfoDisplay}
           leftContent={this.getLeftContent()}
           iconName={imgIcon}
           color={color}
         >
-          <span style={titleStyle}>{titleContent ? titleContent: "首页"}</span>
+          <span style={titleStyle}>{titleContent || '首页'}</span>
         </Header>
-        
-        <div className={`${all_btn} ${_btnShow}`} onClick={this.allBtnOnclick}>
-          {this.state.allBtn?"收起":"显示全部"}
-          <Icon type={this.state.allBtn?"upward":"pull-down"} />
+
+        <div className={`${allBtn} ${BtnShow}`} onClick={this.allBtnOnclick} onKeyDown={this.allBtnOnclick} role="presentation">
+          {this.state.allBtn ? '收起' : '显示全部'}
+          <Icon type={this.state.allBtn ? 'upward' : 'pull-down'} />
         </div>
       </div>
     );
