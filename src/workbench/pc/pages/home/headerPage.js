@@ -54,7 +54,7 @@ class HeaderPage extends Component {
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
-    searchEnterOrTeamList: PropTypes.array,
+    searchEnterOrTeamList: PropTypes.arrayOf(PropTypes.object),
     userInfo: PropTypes.shape({
       name: PropTypes.string,
       company: PropTypes.string,
