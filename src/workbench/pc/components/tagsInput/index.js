@@ -134,7 +134,10 @@ class TagsInput extends Component {
     pasteSplit: PropTypes.func,
     tagProps: PropTypes.shape({}),
     onlyUnique: PropTypes.bool,
-    value: PropTypes.arrayOf(),
+    value: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ])),
     maxTags: PropTypes.number,
     validationRegex: PropTypes.instanceOf(RegExp),
     disabled: PropTypes.bool,
