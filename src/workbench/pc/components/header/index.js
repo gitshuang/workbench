@@ -27,7 +27,11 @@ const propTypes = {
     PropTypes.object,
     PropTypes.string,
   ]),
-  leftContent: PropTypes.element,
+  leftContent: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.element,
+  ]),
   rightContent: PropTypes.arrayOf(PropTypes.element),
   onLeftClick: PropTypes.func,
   onLeftTitleClick: PropTypes.func,
