@@ -1,20 +1,3 @@
-
-function loading() {  // eslint-disable-line
-  const loadingElm = document.getElementById('loading');
-  const loadingText = '.';
-  function loop() {
-    setTimeout(() => {
-      if (loadingElm.innerText.length === 3) {
-        loadingElm.innerText = loadingText;
-      } else {
-        loadingElm.innerText += loadingText;
-      }
-      loop();
-    }, 300);
-  }
-  loop();
-}
-// let fuuu = 0;
 function check(tenantId, loadingFunc, successFunc) {
   //  ++fuuu;
   const xhr = new XMLHttpRequest();
