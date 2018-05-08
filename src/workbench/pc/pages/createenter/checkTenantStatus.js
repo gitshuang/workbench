@@ -1,21 +1,26 @@
-/*
-function loading() {
-    var loadingElm = document.getElementById('loading')
-    var loadingText = '.'
-    function loop() {
-        setTimeout(function () {
-            if (loadingElm.innerText.length === 3) {
-                loadingElm.innerText = loadingText
-            } else {
-                loadingElm.innerText += loadingText
-            }
-            loop()
-        }, 300)
-    }
-    loop()
+
+function loading() {  // eslint-disable-line
+  const loadingElm = document.getElementById('loading');
+  const loadingText = '.';
+  function loop() {
+    setTimeout(() => {
+      if (loadingElm.innerText.length === 3) {
+        loadingElm.innerText = loadingText;
+      } else {
+        loadingElm.innerText += loadingText;
+      }
+      loop();
+    }, 300);
+  }
+  loop();
 }
-*/
-export default function check(tenantId, loadingFunc, successFunc) {
+// let fuuu = 0;
+function check(tenantId, loadingFunc, successFunc) {
+  //  ++fuuu;
+  const xhr = new XMLHttpRequest();
+  xhr.onload = loop; // eslint-disable-line
+  xhr.open('get', `/manager/teamEnter/check?tenantId=${tenantId}&switch=true&ts=${new Date().getTime()}`);
+  xhr.send();
   function loop() {
     if (this.status === 200) {
       let result = {
@@ -41,9 +46,6 @@ export default function check(tenantId, loadingFunc, successFunc) {
       }, 1000);
     }
   }
-  const xhr = new XMLHttpRequest();
-  xhr.onload = loop();
-  const date = new Date().getTime();
-  xhr.open('get', `/manager/teamEnter/check?tenantId=${tenantId}'&switch=true&ts='${date}`);
-  xhr.send();
 }
+
+export { check }; // eslint-disable-line
