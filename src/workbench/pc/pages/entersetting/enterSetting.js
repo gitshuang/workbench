@@ -367,7 +367,7 @@ class CreateEnter extends Component {
               >
                 {
                   this.tenantIndustry.map(({ label, value }) =>
-                    <Option value={value}>{label}</Option>)
+                    <Option key={value} value={value}>{label}</Option>)
                 }
               </Select>
             </FormItem>
@@ -389,7 +389,7 @@ class CreateEnter extends Component {
               >
                 {
                   this.tenantIndustry.map(({ label, value }) =>
-                    <Option value={value}>{label}</Option>)
+                    <Option key={value} value={value}>{label}</Option>)
                 }
               </Select>
             </FormItem>
