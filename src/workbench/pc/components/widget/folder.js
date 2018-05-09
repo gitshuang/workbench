@@ -93,9 +93,9 @@ class FolderWidget extends Component {
         this.state.shouldLoad?(
         <div>
           <div className={title}>
-            <div className={`${title_right} ${file_title_right}`}>{name}</div>
+            <div className={`${titleRight} ${fileTitleRight}`}>{name}</div>
           </div>
-          <div className={file_num} style={style}>
+          <div className={fileNum} style={style}>
             ({children.length})
           </div>
         </div>
