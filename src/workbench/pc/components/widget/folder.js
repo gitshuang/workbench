@@ -84,7 +84,7 @@ class FolderWidget extends Component {
     return (
       <li 
         ref="folder_widget" 
-        className={`${widgetItem} ${type === 2 ? widget_file_item : ""}`} 
+        className={`${widgetItem} ${type === 2 ? widgetFileItem : ""}`} 
         onClick={clickHandler} 
         onKeyDown={clickHandler}
         role="presentation"
