@@ -6,7 +6,7 @@ import {
   getLatestAccessList,
   getPromotionServiceList,
   uploadApplication,
-  getPoll
+  getPoll,
 } from './api';
 
 const {
@@ -24,10 +24,11 @@ const {
   SHOW_IM,
   HIDE_IM,
   UPLOAD_APPLICATION,
-  GET_POLL
+  GET_POLL,
 } = types;
 
-export default createActions({
+export default createActions(
+  {
     [GET_SERVICE_LIST]: getServiceList,
     [GET_MESSAGE]: getMessage,
     [GET_LATEST_ACCESS_LIST]: getLatestAccessList,

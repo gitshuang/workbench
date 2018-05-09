@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'pub-comp/thunk';
 import promise from 'redux-promise';
 import { createLogger } from 'redux-logger';
@@ -9,11 +9,11 @@ let middleware;
 if (process.env.NODE_ENV === 'production') {
   middleware = applyMiddleware(thunk, promise);
 } else {
-  //middleware = applyMiddleware(thunk, promise, );
-  middleware = applyMiddleware(createLogger(), thunk, promise, );
+  // middleware = applyMiddleware(thunk, promise, );
+  middleware = applyMiddleware(createLogger(), thunk, promise);
 }
 
-const preloadedState = {};
+// const preloadedState = {};
 
 const store = createStore(
   rootReducer,

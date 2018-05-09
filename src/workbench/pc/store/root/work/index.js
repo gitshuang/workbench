@@ -1,11 +1,9 @@
-import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
 import actions from './actions';
 
 const {
-  setCurrent,
   setExpandedSidebar,
   getTitleService,
   titleServiceDisplay,
@@ -16,12 +14,10 @@ const {
   setAddGroup,
   getPinGroup,
   setPinCancel,
-  delTab,
   addBrm,
   popBrm,
   removeBrm,
   returnDefaultState,
-  getServiceInfoWithDetail,
   setTabs,
   changeService,
   setProductInfo,
@@ -30,7 +26,7 @@ const {
 const defaultState = {
   domainName: '',
   expandedSidebar: true,
-  current:{
+  current: {
     title: '',
     serviceCode: '',
     serviceId: '',
@@ -40,19 +36,19 @@ const defaultState = {
   },
   // 页面布局类型
   type: 1,
-  menus:[],
-  brm:[],
-  brmBackVal:-1,
-  tabs:[],
+  menus: [],
+  brm: [],
+  brmBackVal: -1,
+  tabs: [],
   titleServiceType: false,
-  pinType: false,       // 是否pin上
-  pinDisplay: false,   // pin是否显示
+  pinType: false, // 是否pin上
+  pinDisplay: false, // pin是否显示
   widthBrm: true,
 };
 
 function appendSearchParam(url, params) {
   if (url) {
-    var urlObj = new URL(url);
+    const urlObj = new URL(url);
     Object.keys(params).forEach((name) => {
       urlObj.searchParams.append(name, params[name]);
     });
@@ -62,39 +58,41 @@ function appendSearchParam(url, params) {
 }
 
 const reducer = handleActions({
-  [addBrm]:(state, { payload:data })=> {
-    let nowBrmLast = state.brm.length>0 ? state.brm[state.brm.length-1]:[];//brm的每一项都是一个数组，取最后一个
-    let topBrm = [...nowBrmLast,data];//合并后的最新一个数组面包屑
-    let newBrm = [...state.brm,topBrm]
+  [addBrm]: (state, { payload: data }) => {
+    const nowBrmLast = state.brm.length > 0 ?
+      state.brm[state.brm.length - 1] :
+      [];// brm的每一项都是一个数组，取最后一个
+    const topBrm = [...nowBrmLast, data];// 合并后的最新一个数组面包屑
+    const newBrm = [...state.brm, topBrm];
     return {
       ...state,
-      brm: newBrm
+      brm: newBrm,
     };
   },
-  [popBrm]:(state, { payload: data })=> {
-    let newBrm = [...state.brm];
-    let backVal,index=data.index;
-    if(index == -1){
-        newBrm.pop();
-        backVal = 1;
-    }else{
-      let stateBrm = state.brm;
-      let popBrmName = stateBrm[stateBrm.length-1][index].name;//面包屑一直展示的是brm的最后一个元素
-      let popBrmUrl = stateBrm[stateBrm.length-1][index].url;
+  [popBrm]: (state, { payload: data }) => {
+    const newBrm = [...state.brm];
+    let backVal;
+    const { index } = data;
+    if (index === -1) {
+      newBrm.pop();
+      backVal = 1;
+    } else {
+      const stateBrm = state.brm;
+      const popBrmName = stateBrm[stateBrm.length - 1][index].name;// 面包屑一直展示的是brm的最后一个元素
       let item;
-      for(let i = 0;i<stateBrm.length ; i++){
-          item=stateBrm[i];
-          if(item[item.length-1].name == popBrmName){
-              backVal = stateBrm.length-1-i;
-              for(let j =stateBrm.length-1-i ; j>0;--j) newBrm.pop();
-              break;
-          }
+      for (let i = 0; i < stateBrm.length; i += 1) {
+        item = stateBrm[i];
+        if (item[item.length - 1].name === popBrmName) {
+          backVal = stateBrm.length - 1 - i;
+          for (let j = stateBrm.length - 1 - i; j > 0; --j) newBrm.pop();  // eslint-disable-line
+          break;
+        }
       }
-    } 
+    }
     return {
       ...state,
-      brmBackVal:backVal,
-      brm: newBrm
+      brmBackVal: backVal,
+      brm: newBrm,
     };
   },
   [removeBrm]: (state, { payload: length }) => {
@@ -106,7 +104,7 @@ const reducer = handleActions({
     return {
       ...state,
       brm: newBrm,
-    }
+    };
   },
   [changeService]: (state, { payload: code }) => {
     const { menus, tabs } = state;
@@ -124,12 +122,11 @@ const reducer = handleActions({
       serviceId,
       serviceCode,
     } = current;
-    const curTab = tabs.find(({id}) => id === currentId);
-    let newBrm = []
-    menuPath.map(function(item,index) { 
-      newBrm.push({name:item.menuItemName,url:item.service&&item.service.url})
-    })
-    const brm = state.brm &&state.brm.length?[...state.brm,newBrm]:[newBrm];
+    const curTab = tabs.find(({ id }) => id === currentId);
+    const newBrm = [];
+    menuPath.map(item =>
+      newBrm.push({ name: item.menuItemName, url: item.service && item.service.url }));
+    const brm = state.brm && state.brm.length ? [...state.brm, newBrm] : [newBrm];
     if (curTab) {
       return {
         ...state,
@@ -142,39 +139,38 @@ const reducer = handleActions({
           serviceId,
           url: curTab.location,
         },
-        brm
-      }
-    } else {
-      const location = appendSearchParam(url, {
-        ...getOpenServiceData(serviceCode),
-        serviceCode,
-      });
-      return {
-        ...state,
-        current: {
-          ...defaultState.current,
-          hasRelationFunc: state.current.hasRelationFunc,
-          menuItemId: currentId,
-          title: name,
-          serviceCode,
-          serviceId,
-          url: location,
-        },
         brm,
-        tabs: [{
-          id: currentId,
-          serviceCode,
-          name,
-          location,
-        }].concat(tabs)
-      }
+      };
     }
+    const location = appendSearchParam(url, {
+      ...getOpenServiceData(serviceCode),
+      serviceCode,
+    });
+    return {
+      ...state,
+      current: {
+        ...defaultState.current,
+        hasRelationFunc: state.current.hasRelationFunc,
+        menuItemId: currentId,
+        title: name,
+        serviceCode,
+        serviceId,
+        url: location,
+      },
+      brm,
+      tabs: [{
+        id: currentId,
+        serviceCode,
+        name,
+        location,
+      }].concat(tabs),
+    };
   },
   [setExpandedSidebar]: (state, { payload: expandedSidebar }) => ({
     ...state,
     expandedSidebar,
   }),
-  [setPinAdd]: (state, { payload, error }) => {
+  [setPinAdd]: (state, { error }) => {
     if (error) {
       return state;
     }
@@ -183,7 +179,7 @@ const reducer = handleActions({
       pinType: true,
     };
   },
-  [setAddGroup]: (state, { payload, error }) => {
+  [setAddGroup]: (state, { error }) => {
     if (error) {
       return state;
     }
@@ -191,7 +187,7 @@ const reducer = handleActions({
       ...state,
     };
   },
-  [getPinGroup]: (state, { payload, error }) => {
+  [getPinGroup]: (state, { error }) => {
     if (error) {
       return state;
     }
@@ -199,7 +195,7 @@ const reducer = handleActions({
       ...state,
     };
   },
-  [setPinCancel]: (state, { payload, error }) => {
+  [setPinCancel]: (state, { error }) => {
     if (error) {
       return state;
     }
@@ -220,7 +216,6 @@ const reducer = handleActions({
       hasWidget,
       relationServices,
       relationUsers,
-      serviceId,
     } = serviceInfo;
     const {
       current,
@@ -228,7 +223,7 @@ const reducer = handleActions({
 
     let hasRelationFunc = true;
     if (!(relationServices && relationServices.length) &&
-        !(relationUsers && relationUsers.length)) {
+      !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
     return {
@@ -242,7 +237,7 @@ const reducer = handleActions({
       },
     };
   },
-  [setProductInfo]: (state, { payload: productInfo}) => {
+  [setProductInfo]: (state, { payload: productInfo }) => {
     const {
       curMenuBar: {
         single,
@@ -252,7 +247,6 @@ const reducer = handleActions({
         menuItems: menus,
       },
       curService: {
-        serviceName: title,
         hasWidget: pinType,
       },
     } = productInfo;
@@ -271,7 +265,7 @@ const reducer = handleActions({
       type,
       pinType,
       tabs: [],
-    }
+    };
   },
   [titleServiceDisplay]: state => ({
     ...state,
@@ -289,7 +283,7 @@ const reducer = handleActions({
     ...state,
     pinDisplay: false,
   }),
-  [returnDefaultState]: state => defaultState,
+  [returnDefaultState]: () => defaultState,
 }, defaultState);
 
 export default reducer;

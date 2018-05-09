@@ -1,4 +1,4 @@
-import { createActions, findPath } from '@u';
+import { createActions } from '@u';
 import types from './types';
 import {
   getProductInfo,
@@ -38,7 +38,7 @@ const actions = createActions(
     namespace: 'work',
   },
   {
-    [GET_PRODUCT_INFO]: (code, type, subcode) => (dispatch, getState) => {
+    [GET_PRODUCT_INFO]: (code, type, subcode) => (dispatch) => {
       const {
         setProductInfo,
         setCurrent,
@@ -52,19 +52,17 @@ const actions = createActions(
           return {
             payload: data,
           };
-        }, (e) => {
-          return {
-            error: true,
-            payload: e,
-          };
-        })
+        }, e => ({
+          error: true,
+          payload: e,
+        }));
     },
     [GET_TITLE_SERVICE]: getTitleService,
     [SET_PIN_ADD]: setPinAdd,
     [SET_ADD_GROUP]: setAddGroup,
     [SET_PIN_CANCEL]: setPinCancel,
     [GET_PIN_GROUP]: getPinGroup,
-    [DEL_TAB]: (currentId) => (dispatch, getState) => {
+    [DEL_TAB]: currentId => (dispatch, getState) => {
       const state = getState();
       const {
         setTabs,
@@ -85,23 +83,20 @@ const actions = createActions(
       dispatch(setTabs(newTabs));
       return serviceCode;
     },
-    [UNSHIFT_TAB]: (serviceCode) => (dispatch, getState) => {
+    [UNSHIFT_TAB]: serviceCode => (dispatch, getState) => {
       const state = getState();
       const {
         setTabs,
       } = actions;
-      const { tabs: oldTabs, menus } = state.work;
-      let index = -1;
-      const curTabIndex = oldTabs.findIndex(({ serviceCode: tabServiceCode }, i) => {
-        return serviceCode === tabServiceCode;
-      });
+      const { tabs: oldTabs } = state.work;
+      const curTabIndex = oldTabs.findIndex(({ serviceCode: tabServiceCode }) =>
+        serviceCode === tabServiceCode);
       const curTab = oldTabs[curTabIndex];
       const other = oldTabs.slice(0, curTabIndex).concat(oldTabs.slice(curTabIndex + 1));
       const newTabs = [curTab].concat(other);
       dispatch(setTabs(newTabs));
     },
-    [SET_CURRENT]: (code) => (dispatch, getState) =>{
-      const state = getState();
+    [SET_CURRENT]: code => (dispatch) => {
       const {
         changeService,
         getTitleService,

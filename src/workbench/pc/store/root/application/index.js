@@ -1,28 +1,26 @@
-import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-	getAllApplicationList
+  getAllApplicationList,
 } = actions;
 
 const defaultState = {
-	allApplicationList: [],
+  allApplicationList: [],
 };
 
-const createReducer = (key) => (state, { payload, error }) => {
+const createReducer = key => (state, { payload, error }) => {
   if (error) {
     return state;
-  } else {
-    return {
-      ...state,
-      [key]: payload,
-    };
   }
+  return {
+    ...state,
+    [key]: payload,
+  };
 };
 
 const reducer = handleActions({
-	[getAllApplicationList]: createReducer('allApplicationList'),
+  [getAllApplicationList]: createReducer('allApplicationList'),
 }, defaultState);
 
 export default reducer;
