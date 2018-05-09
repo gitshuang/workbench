@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
 import actions from './actions';
 
@@ -30,19 +29,18 @@ const defaultState = {
     children: [],
   },
   folderModalDisplay: false,
-  enterList:[],
-  searchEnterOrTeamList:[],
+  enterList: [],
+  searchEnterOrTeamList: [],
 };
 
-const createReducer = (key) => (state, { payload, error }) => {
+const createReducer = key => (state, { payload, error }) => {
   if (error) {
     return state;
-  } else {
-    return {
-      ...state,
-      [key]: payload,
-    };
   }
+  return {
+    ...state,
+    [key]: payload,
+  };
 };
 
 const reducer = handleActions({
@@ -50,12 +48,12 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    payload.allowTenants.forEach((da)=>{
-        da.type = da.team;//需求变更，废弃team字段。
+    payload.allowTenants.forEach((da) => {
+      da.type = da.team;// 需求变更，废弃team字段。
     });
     return {
       ...state,
-      userInfo: payload
+      userInfo: payload,
     };
   },
   [getEnterInfo]: createReducer('enterInfo'),
@@ -63,14 +61,14 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    let metaData = payload.metaData;
-    if(typeof metaData == "string"){
-      metaData = JSON.parse(payload.metaData)
+    let { metaData } = payload;
+    if (typeof metaData === 'string') {
+      metaData = JSON.parse(payload.metaData);
     }
     return {
       ...state,
       workList: payload.workList,
-      metaData: metaData
+      metaData,
     };
   },
   [getSearchEnterOrTeam]: (state, { payload, error }) => {
@@ -83,43 +81,39 @@ const reducer = handleActions({
     };
   },
   [setCutUser]: createReducer('setCutUser'),
-  [changeUserInfoDisplay]: (state) => ({
+  [changeUserInfoDisplay]: state => ({
     ...state,
     userInfoDisplay: true,
   }),
-  [changeRequestDisplay]: (state) => ({
+  [changeRequestDisplay]: state => ({
     ...state,
     requestDisplay: true,
   }),
-  [closeRequestDisplay]: (state) => ({
+  [closeRequestDisplay]: state => ({
     ...state,
     requestDisplay: false,
   }),
-  [hideUserInfoDisplay]: (state) => ({
+  [hideUserInfoDisplay]: state => ({
     ...state,
     userInfoDisplay: false,
-    requestDisplay: false
+    requestDisplay: false,
   }),
   [openFolder]: (state, { payload: curDisplayFolder }) => ({
     ...state,
     curDisplayFolder,
     folderModalDisplay: true,
   }),
-  [closeFolder]: (state) => ({
+  [closeFolder]: state => ({
     ...state,
     folderModalDisplay: false,
   }),
-  [getSearchEnterList]: (state, { payload, error }) => {
-    return {
-      ...state,
-      enterList: payload,
-    };
-  },
-  [setCreateEnter]: (state, { payload, error }) => {
-    return{
-      ...state,
-    }
-  },
+  [getSearchEnterList]: (state, { payload }) => ({
+    ...state,
+    enterList: payload,
+  }),
+  [setCreateEnter]: state => ({
+    ...state,
+  }),
 }, defaultState);
 
 export default reducer;

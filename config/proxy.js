@@ -40,16 +40,18 @@ var api = [
   '/manager/team/upgradeEnter',
 
   '/diwork-heartbeat/heartbeat/checkSession',
+
+  '/widget/getFolders',
+  '/widget/deleteByServiceCode',
+  '/widget/create',
+  '/service/getServiceInfoWithDetail',
+  '/desktop/update',
 ]
 
 var rapApi = [
     // '/service/getAllServicesGroupByLabels'
   // '/user/getUserInfo',
-  '/widget/deleteByServiceCode',
-  '/widget/create',
-  '/service/getServiceInfoWithDetail',
-  '/widget/getFolders',
-  '/desktop/update',
+  
 ];
 
 function makeRapConfig(key) {

@@ -3,7 +3,7 @@ import types from './types';
 import { getAllApplicationList } from './api';
 
 const {
-	GET_ALL_APPLICATION_LIST,
+  GET_ALL_APPLICATION_LIST,
 } = types;
 
 export default createActions(

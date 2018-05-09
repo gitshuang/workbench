@@ -17,16 +17,14 @@ const { Item } = Menu;
 
 class MoveToGroup extends Component {
   static propTypes = {
-    data: PropTypes.shape({
-      widgetName: PropTypes.string,
-    }),
+    data: PropTypes.arrayOf(PropTypes.object),
     onAddGroup: PropTypes.func,
     onSave: PropTypes.func,
     onCancel: PropTypes.func,
     caller: PropTypes.string,
   };
   static defaultProps = {
-    data: {},
+    data: [],
     onAddGroup: () => { },
     onSave: () => { },
     onCancel: () => { },

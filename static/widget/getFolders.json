@@ -2,38 +2,101 @@
   "status": 1,
   "data": [
     {
-      "type": "1",
-      "widgetId": "f1",
-      "widgetName": "分组一",
-      "children": [
-        {
-          "type": "2",
-          "widgetId": "w1",
-          "widgetName": "文件夹一"
-        },
-        {
-          "type": "2",
-          "widgetId": "w2",
-          "widgetName": "文件夹二"
-        }
-      ]
+      "createTime": 1525765860000,
+      "modifiedTime": null,
+      "ts": null,
+      "creator": null,
+      "modifier": null,
+      "tenantId": "azwjep9l",
+      "widgetId": "cf19ac53-cda7-45db-ae4f-c6ead6c39aa1",
+      "templateId": null,
+      "widgetConfig": null,
+      "icon": null,
+      "serviceCode": null,
+      "serviceId": null,
+      "serviceType": null,
+      "widgetName": "工作",
+      "userId": "fdd3248e-f65e-46fd-9da2-6a886d7a0547",
+      "type": 1,
+      "parentId": null,
+      "orders": 0,
+      "children": [],
+      "jsurl": null,
+      "background": null,
+      "size": null
     },
     {
-      "type": "1",
-      "widgetId": "f2",
-      "widgetName": "分组二",
+      "createTime": 1525765860000,
+      "modifiedTime": null,
+      "ts": null,
+      "creator": null,
+      "modifier": null,
+      "tenantId": "azwjep9l",
+      "widgetId": "e8ed634f-effc-4d97-aa95-3bf5ba73917f",
+      "templateId": null,
+      "widgetConfig": null,
+      "icon": null,
+      "serviceCode": null,
+      "serviceId": null,
+      "serviceType": null,
+      "widgetName": "团队",
+      "userId": "fdd3248e-f65e-46fd-9da2-6a886d7a0547",
+      "type": 1,
+      "parentId": null,
+      "orders": 1,
       "children": [
         {
-          "type": "2",
-          "widgetId": "w3",
-          "widgetName": "文件夹三"
-        },
-        {
-          "type": "2",
-          "widgetId": "w4",
-          "widgetName": "文件夹四"
+          "createTime": 1525765860000,
+          "modifiedTime": null,
+          "ts": null,
+          "creator": null,
+          "modifier": null,
+          "tenantId": "azwjep9l",
+          "widgetId": "da8a53ea-f1ea-4908-a355-943893f44f70",
+          "templateId": null,
+          "widgetConfig": null,
+          "icon": null,
+          "serviceCode": null,
+          "serviceId": null,
+          "serviceType": null,
+          "widgetName": "新建文件夹",
+          "userId": "fdd3248e-f65e-46fd-9da2-6a886d7a0547",
+          "type": 2,
+          "parentId": "e8ed634f-effc-4d97-aa95-3bf5ba73917f",
+          "orders": 12,
+          "children": [],
+          "jsurl": null,
+          "background": null,
+          "size": null
         }
-      ]
+      ],
+      "jsurl": null,
+      "background": null,
+      "size": null
+    },
+    {
+      "createTime": 1525765860000,
+      "modifiedTime": null,
+      "ts": null,
+      "creator": null,
+      "modifier": null,
+      "tenantId": "azwjep9l",
+      "widgetId": "9a603ca3-49d6-4845-8560-a43a5795ca9d",
+      "templateId": null,
+      "widgetConfig": null,
+      "icon": null,
+      "serviceCode": null,
+      "serviceId": null,
+      "serviceType": null,
+      "widgetName": "个人",
+      "userId": "fdd3248e-f65e-46fd-9da2-6a886d7a0547",
+      "type": 1,
+      "parentId": null,
+      "orders": 2,
+      "children": [],
+      "jsurl": null,
+      "background": null,
+      "size": null
     }
   ]
 }

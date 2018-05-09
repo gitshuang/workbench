@@ -4,7 +4,7 @@ import { getInviteUsersJoinAddress, sendMessage } from './api';
 
 const {
   GET_INVITE_USERS_JOIN_ADDRESS,
-  SEND_MESSAGE
+  SEND_MESSAGE,
 } = types;
 
 export default createActions(
@@ -13,6 +13,6 @@ export default createActions(
   },
   {
     [GET_INVITE_USERS_JOIN_ADDRESS]: getInviteUsersJoinAddress,
-    [SEND_MESSAGE]: sendMessage
-  }
+    [SEND_MESSAGE]: sendMessage,
+  },
 );
