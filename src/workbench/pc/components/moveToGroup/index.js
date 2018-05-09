@@ -53,7 +53,7 @@ class MoveToGroup extends Component {
     });
   }
   //  点击每一行对应的操作
-  handlerClick(selectId) {
+  handlerClick = (selectId) => {
     const way = findPath(
       this.props.data,
       'children',
@@ -117,13 +117,13 @@ class MoveToGroup extends Component {
     }) => {
       const classname = widgetId === selectId ? selectedli : '';
       if (children && children.length) {
-        result.push(<SubMenu key={widgetId} title={<span onClick={() => { this.handlerClick(this, widgetId); }} onKeyDown={() => { this.handlerClick(this, widgetId); }} role="presentation" className={classname}>{widgetName}</span>}>{this.makeSelectInterface(children, selectId)}</SubMenu>);
+        result.push(<SubMenu key={widgetId} title={<span onClick={() => { this.handlerClick(widgetId); }} onKeyDown={() => { this.handlerClick(widgetId); }} role="presentation" className={classname}>{widgetName}</span>}>{this.makeSelectInterface(children, selectId)}</SubMenu>);
       } else {
         const pushOb = (
           <Item key={widgetId} className={classname}>
             <span
-              onClick={() => { this.handlerClick(this, widgetId); }}
-              onKeyDown={() => { this.handlerClick(this, widgetId); }}
+              onClick={() => { this.handlerClick(widgetId); }}
+              onKeyDown={() => { this.handlerClick(widgetId); }}
               role="presentation"
             >
               {widgetName}

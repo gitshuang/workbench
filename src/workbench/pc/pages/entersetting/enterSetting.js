@@ -181,6 +181,7 @@ class CreateEnter extends Component {
       highANDlower,
       invitePermission,
       allowExit,
+      watermark,
       tenantTel,
       tenantSize,
       linkman,
@@ -222,6 +223,11 @@ class CreateEnter extends Component {
     const AllowExit = data.find(da => da.name === 'allowExit');
     if (!AllowExit.value && AllowExit.value === '') {
       AllowExit.value = allowExit;
+    }
+
+    const Watermark = data.find(da => da.name === 'watermark');
+    if (!Watermark.value && Watermark.value === '') {
+      Watermark.value = watermark;
     }
 
     const Linkman = data.find(da => da.name === 'linkman');
@@ -283,6 +289,12 @@ class CreateEnter extends Component {
     });
   }
 
+  watermarkChange = (value) => {
+    this.setState({
+      watermark: value,
+    });
+  }
+
   checkProgress = (tenantId, loadingFunc) => {
     let count = 0;
     const loop = () => {
@@ -300,7 +312,7 @@ class CreateEnter extends Component {
   render() {
     const { btlLabel, updateenter } = this.props;
     const {
-      tenantName, logo, allowExit, tenantEmail, tenantTel, tenantAddress,
+      tenantName, logo, allowExit, watermark, tenantEmail, tenantTel, tenantAddress,
       tenantIndustry, invitePermission, joinPermission, highANDlower, address, linkman, tenantSize,
       processValue, tenantId,
     } = this.state;
@@ -512,6 +524,13 @@ class CreateEnter extends Component {
             <Option value="1">根据导入的上下级关系显示上下级</Option>
           </Select>
         </FormItem>
+        <FormItem showMast={false} labelName={<span>通讯录显示水印<font color="red"> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
+          <Radio.RadioGroup name="watermark" onChange={this.watermarkChange} selectedValue={watermark || '0'}>
+            <Radio value="0" >禁止</Radio>
+            <Radio value="1" >允许</Radio>
+          </Radio.RadioGroup>
+        </FormItem>
+
         <div className={lxrHr}>
           <hr />
         </div>
