@@ -162,7 +162,7 @@ class Home extends Component {
       conts.push(<WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} viewport={this.state.viewport} loadOk={this.loadOk}/>);
     });
     return (
-      <div ref='home' className={`${page_home} home`} style={contentStyle}>
+      <div ref='home' className={`${pageHome} home`} style={contentStyle}>
         <HeaderPage list={list} headerData={headerData}/>
         <ElementsWrapper items={list} offset={-55}>
           {conts}
