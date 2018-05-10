@@ -61,9 +61,9 @@ class Home extends Component {
         top: 0,
         height: 0,
       },
-      lazyLoadNum:-1,
-    }
-    this.updateViewport = this.updateViewport.bind(this)
+      lazyLoadNum: -1,
+    };
+    this.updateViewport = this.updateViewport.bind(this);
   }
   componentWillMount() {
     const {
@@ -82,52 +82,50 @@ class Home extends Component {
       }
       requestSuccess();
     });
-
-  }
-  renderMetadata = (name) => {
-    const { metaData } = this.props;
-    return metaData && metaData.properties && metaData.properties[name];
   }
   componentDidMount() {
     window.addEventListener('scroll', this.updateViewport, false);
     window.addEventListener('resize', this.updateViewport, false);
     this.updateViewport();
   }
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.updateViewport);
-    window.removeEventListener('resize', this.updateViewport);
-  }
-  componentDidUpdate(){
-    var total = 0
-    this.props.workList.forEach((v,k)=>{
-      total += v.children.length
+  componentDidUpdate() {
+    let total = 0;
+    this.props.workList.forEach((v) => {
+      total += v.children.length;
     });
-    if(this.state.lazyLoadNum === total){
+    if (this.state.lazyLoadNum === total) {
       window.removeEventListener('scroll', this.updateViewport);
       window.removeEventListener('resize', this.updateViewport);
     }
   }
-
-  updateViewport=()=>{
-    if( this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
-    var self = this;
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.updateViewport);
+    window.removeEventListener('resize', this.updateViewport);
+  }
+  updateViewport=() => {
+    const self = this;
+    // if (this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
     self.setState({
       viewport: {
         top: window.pageYOffset,
-        height: window.innerHeight
-      }
+        height: window.innerHeight,
+      },
     });
   }
-  loadOk = (()=>{
-    var self = this;
-    var count=0;
-    return function(){
-      ++count
+  loadOk = (() => {
+    const self = this;
+    let count = 0;
+    return () => {
+      count += 1;
       self.setState({
-        lazyLoadNum:count,
-      })
+        lazyLoadNum: count,
+      });
     };
   })()
+  renderMetadata = (name) => {
+    const { metaData } = this.props;
+    return metaData && metaData.properties && metaData.properties[name];
+  }
   render() {
     const {
       workList,
@@ -159,11 +157,17 @@ class Home extends Component {
         label: name,
         target: `nav${id}`,
       });
-      conts.push(<WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} viewport={this.state.viewport} loadOk={this.loadOk}/>);
+      conts.push(<WidgeList
+        groupMeta={groupMeta}
+        listMeta={listMeta}
+        {...props}
+        viewport={this.state.viewport}
+        loadOk={this.loadOk}
+      />);
     });
     return (
-      <div ref='home' className={`${pageHome} home`} style={contentStyle}>
-        <HeaderPage list={list} headerData={headerData}/>
+      <div className={`${pageHome} home`} style={contentStyle}>
+        <HeaderPage list={list} headerData={headerData} />
         <ElementsWrapper items={list} offset={-55}>
           {conts}
         </ElementsWrapper>

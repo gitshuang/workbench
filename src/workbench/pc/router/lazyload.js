@@ -1,33 +1,32 @@
-import React, { Component } from "react";
-import Loading from 'pub-comp/loading/loading.js';
+import React, { Component } from 'react';
+import Loading from 'pub-comp/loading/loading';
 
 export default function asyncComponent(importComponent) {
   class AsyncComponent extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        component: null
+        component: null,
       };
     }
-    asyncGetComp = ()=>{
-        var self = this;
-        new Promise(function(resolve,reject){
-            var asyncCom = importComponent();
-            resolve(asyncCom);
-        }).then(function(asyncCom){
-            const { default : component } = asyncCom;
-            self.setState({
-                component
-            })
-        })
+    componentDidMount() {
+      this.asyncGetComp();
     }
-    componentDidMount(){
-        this.asyncGetComp();
+    asyncGetComp = () => {
+      const self = this;
+      new Promise((resolve) => {
+        const asyncCom = importComponent();
+        resolve(asyncCom);
+      }).then((asyncCom) => {
+        const { default: component } = asyncCom;
+        self.setState({
+          component,
+        });
+      });
     }
-
     render() {
       const C = this.state.component;
-      return C ? <C {...this.props} /> : <Loading text='正在加载中...' />;
+      return C ? <C {...this.props} /> : <Loading text="正在加载中..." />;
     }
   }
   return AsyncComponent;
