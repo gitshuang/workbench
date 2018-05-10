@@ -69,7 +69,7 @@ function getResult(text) {
   // eslint-disable-next-line
   const fn = new Function(
     'React',
-    'tools',
+    'searchTool',
     `return ${text}`,
   );
   const result = fn(
