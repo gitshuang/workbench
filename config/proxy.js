@@ -46,12 +46,13 @@ var api = [
   '/widget/create',
   '/service/getServiceInfoWithDetail',
   '/desktop/update',
+  '/service/getServiceByTenantIdAndServiceCode',
 ]
 
 var rapApi = [
     // '/service/getAllServicesGroupByLabels'
   // '/user/getUserInfo',
-  
+
 ];
 
 function makeRapConfig(key) {

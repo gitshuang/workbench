@@ -4,7 +4,7 @@ import homeActions from 'store/root/home';
 import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
 import { postMessageToWin, get, logout } from "@u";
-import { enter_or_team } from "./regMessageTypeHandler.css";
+import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
 import { trigger } from "./componentTools";
 
 const { addBrm , popBrm} = workActions;
@@ -20,8 +20,8 @@ const handlers = {
         const { crossTenant, serveName, url } = app;
         if (!crossTenant) {
           openGlobalDialog({
-            type:"warning",
-            className:enter_or_team,
+            type: "warning",
+            className: enterOrTeam,
             title: '切换团队/企业',
             content: '需要切换到对应的团队/企业查看详情，是否切换?',
             btns: [
@@ -53,7 +53,8 @@ const handlers = {
         } else {
           openGlobalDialog({
             title: serveName,
-            content: (<iframe style={{width: '100%', height: 300}} src={url} />),
+            className: crossTenantDialog,
+            content: (<iframe className={iframeElm} src={url} />),
           });
         }
       }, (err) => {
@@ -138,7 +139,7 @@ const handlers = {
     });
   },
 }
-
+window.handlers = handlers;
 const openServiceData = {};
 
 function bind(target, obj) {
