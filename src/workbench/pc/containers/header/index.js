@@ -87,12 +87,12 @@ class HeaderContainer extends Component {
       <div className={`application-btn ${appClass} ${rightBtn}`} style={{marginRight:"15px"}} onClick = {this.openService} >
         <Icon title="快捷应用" type="application" style={{"color":color}}/>
       </div>,
-      <div ref="IM" className={`${imClass} ${rightBtn}`} style={{marginRight:"15px"}} onClick={this.toggleIM}>
+      <div ref="IM" className={`${imClass} ${rightBtn}`} style={{marginRight:"25px"}} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{color}}/>
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
       <div className={`${rightBtn}`} onClick={this.openWay}>
-        <Icon title="我的门户" type="clock" style={{color}} />
+        <Icon title="我的门户" type="change" style={{color}} />
       </div>
     );
     return (

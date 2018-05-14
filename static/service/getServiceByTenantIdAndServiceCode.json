@@ -1,11 +1,11 @@
 {
   "status": 1,
   "data": {
-    "crossTenant": false,
+    "crossTenant": true,
     "serveCode": "",
     "serveIcon": "",
     "serveId": 1,
-    "serveName": "",
-    "url": ""
+    "serveName": "test",
+    "url": "http://www.baidu.com/"
   }
 }
