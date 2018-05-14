@@ -66,6 +66,7 @@ const reducer = handleActions({
     let topBrm;
     if (data.name === nowBrmLast[nowBrmLast.length - 1].name) {
       nowBrmLast[nowBrmLast.length - 1] = data;
+      topBrm = [...nowBrmLast];
     } else {
       topBrm = [...nowBrmLast, data];// 合并后的最新一个数组面包屑
     }
