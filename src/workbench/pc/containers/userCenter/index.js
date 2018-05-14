@@ -428,8 +428,9 @@ class UserInfoContainer extends Component {
           </div>
 
           <div className={linkSetting}>
+            <a href={`${getHost('order')}/ticket/menu/router/myticket/KJ`} target="_blank" >下载客户端</a><br />
             <a href={`${getHost('order')}/ticket/menu/router/myticket/KJ`} target="_blank">问题与反馈</a><br />
-            <a href={`${getHost('cloundyy')}`} target="_blank" style={{ lineHeight: "33px" }} >用友云官网</a>
+            <a href={`${getHost('cloundyy')}`} target="_blank">用友云官网</a>
           </div>
 
         </div>
