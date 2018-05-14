@@ -56,9 +56,15 @@ class Home extends Component {
   };
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      viewport: {
+        top: 0,
+        height: 0,
+      },
+      lazyLoadNum: -1,
+    };
+    this.updateViewport = this.updateViewport.bind(this);
   }
-
   componentWillMount() {
     const {
       requestStart, requestSuccess, requestError, getWorkList,
@@ -77,6 +83,45 @@ class Home extends Component {
       requestSuccess();
     });
   }
+  componentDidMount() {
+    window.addEventListener('scroll', this.updateViewport, false);
+    window.addEventListener('resize', this.updateViewport, false);
+    this.updateViewport();
+  }
+  componentDidUpdate() {
+    let total = 0;
+    this.props.workList.forEach((v) => {
+      total += v.children.length;
+    });
+    if (this.state.lazyLoadNum === total) {
+      window.removeEventListener('scroll', this.updateViewport);
+      window.removeEventListener('resize', this.updateViewport);
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.updateViewport);
+    window.removeEventListener('resize', this.updateViewport);
+  }
+  updateViewport=() => {
+    const self = this;
+    // if (this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
+    self.setState({
+      viewport: {
+        top: window.pageYOffset,
+        height: window.innerHeight,
+      },
+    });
+  }
+  loadOk = (() => {
+    const self = this;
+    let count = 0;
+    return () => {
+      count += 1;
+      self.setState({
+        lazyLoadNum: count,
+      });
+    };
+  })()
   renderMetadata = (name) => {
     const { metaData } = this.props;
     return metaData && metaData.properties && metaData.properties[name];
@@ -112,9 +157,14 @@ class Home extends Component {
         label: name,
         target: `nav${id}`,
       });
-      conts.push(<WidgeList groupMeta={groupMeta} listMeta={listMeta} {...props} />);
+      conts.push(<WidgeList
+        groupMeta={groupMeta}
+        listMeta={listMeta}
+        {...props}
+        viewport={this.state.viewport}
+        loadOk={this.loadOk}
+      />);
     });
-
     return (
       <div className={`${pageHome} home`} style={contentStyle}>
         <HeaderPage list={list} headerData={headerData} />
