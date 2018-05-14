@@ -64,13 +64,14 @@ const reducer = handleActions({
       []; // brm的每一项都是一个数组，取最后一个
     /* 20180514修改一个浏览器的返回 再addBrm的问题 数组最后的name重复 */
     let topBrm;
+    let newBrm;
     if (data.name === nowBrmLast[nowBrmLast.length - 1].name) {
-      nowBrmLast[nowBrmLast.length - 1] = data;
-      topBrm = [...nowBrmLast];
+      state.brm[state.brm.length - 1][nowBrmLast.length - 1] = data;
+      newBrm = [...state.brm];
     } else {
       topBrm = [...nowBrmLast, data];// 合并后的最新一个数组面包屑
+      newBrm = [...state.brm, topBrm];
     }
-    const newBrm = [...state.brm, topBrm];
     return {
       ...state,
       brm: newBrm,
