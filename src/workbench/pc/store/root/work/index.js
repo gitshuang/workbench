@@ -61,8 +61,14 @@ const reducer = handleActions({
   [addBrm]: (state, { payload: data }) => {
     const nowBrmLast = state.brm.length > 0 ?
       state.brm[state.brm.length - 1] :
-      [];// brm的每一项都是一个数组，取最后一个
-    const topBrm = [...nowBrmLast, data];// 合并后的最新一个数组面包屑
+      []; // brm的每一项都是一个数组，取最后一个
+    /* 20180514修改一个浏览器的返回 再addBrm的问题 数组最后的name重复 */
+    let topBrm;
+    if (data.name === nowBrmLast[nowBrmLast.length - 1].name) {
+      nowBrmLast[nowBrmLast.length - 1] = data;
+    } else {
+      topBrm = [...nowBrmLast, data];// 合并后的最新一个数组面包屑
+    }
     const newBrm = [...state.brm, topBrm];
     return {
       ...state,
