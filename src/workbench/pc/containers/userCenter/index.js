@@ -7,7 +7,7 @@ import Icon from 'pub-comp/icon';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-import { getStrLenSubstr, logout,getHost } from '@u';
+import { getStrLenSubstr, logout, getHost } from '@u';
 import Button from 'bee/button';
 import EnterOption from 'containers/enterOption';
 import Tabs, { TabPane } from 'bee/tabs';
@@ -15,11 +15,12 @@ import onClickOutside from 'react-onclickoutside';
 import img1 from 'assets/image/wgt/yonyouSpace1.png';
 import img2 from 'assets/image/wgt/intelligent_logo.png';
 
-import { wrap, outerContainer, active, imgUser,imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn,userName,gloryValue,packetsValue,gloryKey,packetsKey,clearfix,userBtnList,serviceImg,serviceName,promotion,
-  used,usedModule,usedTit,lastTime,usedService,tabPane1,tabPane2,module,editPortrait,gloryIcon,select,selectTit,options,recently,
-  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea,tenantPortrait,tenantName,tenantDescribe,companyType,teamBtnList,createBtnList,userSetting,userInfoPane,
-  popconfirm,popconfirm_content,
-  createBtn,select_li,new_name,hiden,show,linkSetting,
+import {
+  wrap, outerContainer, active, imgUser, imgOuter, imgInner, userInfo, loginOut, tabContent, wrapBtn, userName, gloryValue, packetsValue, gloryKey, packetsKey, clearfix, userBtnList, serviceImg, serviceName, promotion,
+  used, usedModule, usedTit, lastTime, usedService, tabPane1, tabPane2, module, editPortrait, gloryIcon, select, selectTit, options, recently,
+  iconContainer, usedIcon, icon1, icon2, icon3, defaultPic, logOut, line_end, tenantArea, tenantPortrait, tenantName, tenantDescribe, companyType, teamBtnList, createBtnList, userSetting, userInfoPane,
+  popconfirm, popconfirm_content,
+  createBtn, select_li, new_name, hiden, show, linkSetting,
   enter_setting
 } from './style.css';
 
@@ -55,7 +56,7 @@ const {
     'searchEnterOrTeamList',
     {
       key: 'exitModal',
-      value: (home,ownProps,root) => {
+      value: (home, ownProps, root) => {
         return root.teamconfig.exitModal
       }
     },
@@ -85,9 +86,9 @@ class UserInfoContainer extends Component {
 
     this._curTenant = null;
     this.state = {
-      dataList:[ ],
-      promotionList:[ ],
-      allowTenants:[]
+      dataList: [],
+      promotionList: [],
+      allowTenants: []
     }
   }
   static propTypes = {
@@ -100,47 +101,47 @@ class UserInfoContainer extends Component {
   }
 
   componentWillMount() {
-      const {getSearchEnterOrTeam,requestError,requestSuccess} = this.props;
-      getSearchEnterOrTeam().then(({error, payload}) => {
-          if (error) {
-              requestError(payload);
-          }
-          this.setState({
-              allowTenants:payload
-          })
-          requestSuccess();
-      });
+    const { getSearchEnterOrTeam, requestError, requestSuccess } = this.props;
+    getSearchEnterOrTeam().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        allowTenants: payload
+      })
+      requestSuccess();
+    });
   }
 
   getLatestAccessList() {
-    const {requestStart, requestSuccess, requestError,   getLatestAccessList} = this.props;
+    const { requestStart, requestSuccess, requestError, getLatestAccessList } = this.props;
     requestStart();
-    getLatestAccessList().then(({error, payload}) => {
-        if (error) {
-            requestError(payload);
-        }
-        this.setState({
-          dataList:payload
-        })
-        requestSuccess();
+    getLatestAccessList().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        dataList: payload
+      })
+      requestSuccess();
     });
   }
   getPromotionServiceList() {
-    const {requestStart, requestSuccess, requestError, getPromotionServiceList} = this.props;
+    const { requestStart, requestSuccess, requestError, getPromotionServiceList } = this.props;
     requestStart();
-    getPromotionServiceList().then(({error, payload}) => {
-        if (error) {
-            requestError(payload);
-        }
-        this.setState({
-          promotionList:payload
-        })
-        requestSuccess();
+    getPromotionServiceList().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      this.setState({
+        promotionList: payload
+      })
+      requestSuccess();
     });
   }
   handleClickOutside(e) {
-    const { hideUserInfoDisplay, userInfoDisplay ,exitModal} = this.props;
-    if(exitModal){
+    const { hideUserInfoDisplay, userInfoDisplay, exitModal } = this.props;
+    if (exitModal) {
       return;
     }
     if (userInfoDisplay) {
@@ -151,17 +152,17 @@ class UserInfoContainer extends Component {
     window.open('https://idtest.yyuap.com/usercenter/user');
   }
   handleClick = () => {
-      this.setState({
-        dataList:[]
-      })
+    this.setState({
+      dataList: []
+    })
   }
-  setCutUserFn =() => {
-    const {setCutUser,getWorkList} = this.props;
-    setCutUser().then(({error, payload}) => {
+  setCutUserFn = () => {
+    const { setCutUser, getWorkList } = this.props;
+    setCutUser().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       } else {
-        getWorkList().then(({error, payload}) => {
+        getWorkList().then(({ error, payload }) => {
           if (error) {
             requestError(payload);
           }
@@ -170,33 +171,33 @@ class UserInfoContainer extends Component {
       requestSuccess();
     });
   }
-  handleChange=(e)=>{
-    switch(e){
-      case 'language' :
+  handleChange = (e) => {
+    switch (e) {
+      case 'language':
         alert("功能建设中...");
         break;
-      case 'message' :
+      case 'message':
         alert("功能建设中...");
         break;
-      default :
+      default:
         break;
     }
   }
-  handleChange2 =(e)=>{
-    switch(e){
-      case 'accountManagement' :
+  handleChange2 = (e) => {
+    switch (e) {
+      case 'accountManagement':
         window.open('https://idtest.yyuap.com/usercenter/usermng');
         break;
-      case 'userInfo' :
+      case 'userInfo':
         window.open('https://idtest.yyuap.com/usercenter/user');
         break;
-      case 'safetyPick' :
+      case 'safetyPick':
         window.open('http://idtest.yyuap.com/usercenter/securityscore');
         break;
-      case 'password' :
+      case 'password':
         window.open('http://idtest.yyuap.com/usercenter/security');
         break;
-      default :
+      default:
         break;
     }
   }
@@ -209,9 +210,9 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
   gotoConfig = (curTenant) => {
-    if (curTenant && curTenant.type == 0 ) {//企业
+    if (curTenant && curTenant.type == 0) {//企业
       this.gotoEnter();
-    }else{//团队
+    } else {//团队
       this.gotoTeam();
     }
   }
@@ -242,7 +243,7 @@ class UserInfoContainer extends Component {
     history.push('/createenter/home');
     hideUserInfoDisplay();
   }
-  accountManage(){
+  accountManage() {
     const {
       history,
       hideUserInfoDisplay,
@@ -251,7 +252,7 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
 
-  gotoUserInfo=()=>{
+  gotoUserInfo = () => {
     const {
       history,
       hideUserInfoDisplay,
@@ -260,18 +261,18 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
 
-  getUserOrder(){
+  getUserOrder() {
     window.open('https://idtest.yyuap.com/usercenter/myapp');
   }
 
-  getIcon=(imgsrc)=> {
+  getIcon = (imgsrc) => {
     if (imgsrc) {
       return (
         <img src={imgsrc} className={imgInner} />
       );
     } else {
       return (
-        <div className={defaultPic} style={{background:this.props.bgColor}}>
+        <div className={defaultPic} style={{ background: this.props.bgColor }}>
           <Icon type="group" />
         </div>
       );
@@ -292,7 +293,7 @@ class UserInfoContainer extends Component {
     }
   }
 
-  getCompanyType(){
+  getCompanyType() {
     const { tenantid } = window.diworkContext();
     const {
       userInfo: {
@@ -303,14 +304,14 @@ class UserInfoContainer extends Component {
       return tenant.tenantId === tenantid;
     })[0];
     let type = '团队';
-    if (curTenant && curTenant.type == 0 ) {
+    if (curTenant && curTenant.type == 0) {
       type = '企业';
     }
     this._curTenant = curTenant;
     return type;
   }
   /* 邀请成员 */
-  inviteMember(){
+  inviteMember() {
     const {
       history,
       hideUserInfoDisplay,
@@ -334,11 +335,11 @@ class UserInfoContainer extends Component {
 
   // 关闭创建成功后的弹窗[以后再说tip的关闭]
   closeRequest = () => {
-    const {closeRequestDisplay} = this.props;
+    const { closeRequestDisplay } = this.props;
     closeRequestDisplay();
   }
 
-  gotoCreateEnter =()=>{
+  gotoCreateEnter = () => {
     const {
       history,
     } = this.props;
@@ -367,35 +368,35 @@ class UserInfoContainer extends Component {
     } = this.props;
     let allowExit = null;
     let invitePermission = null;
-    if(currentTeamConfig){
+    if (currentTeamConfig) {
       allowExit = currentTeamConfig.allowExit;
       invitePermission = currentTeamConfig.invitePermission;
     }
-    const {allowTenants} = this.state;
+    const { allowTenants } = this.state;
 
     let _titleType = this.getCompanyType();
 
-    let comObj = {id:"allowExit",name:"退出团队",value:"3",serverApi:"team/leave",msg:"退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
-    if(_titleType == "企业"){
-      comObj = {id:"allowExit",name:"退出企业",value:"3",serverApi:"enter/leave",msg:"退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份"};
+    let comObj = { id: "allowExit", name: "退出团队", value: "3", serverApi: "team/leave", msg: "退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份" };
+    if (_titleType == "企业") {
+      comObj = { id: "allowExit", name: "退出企业", value: "3", serverApi: "enter/leave", msg: "退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份" };
     }
 
     let _allowExit = null;
-    if(allowExit && allowExit!="0"){
-      _allowExit = (<EnterOption data={[comObj]}  type={_titleType} compType="userCenter" />);
+    if (allowExit && allowExit != "0") {
+      _allowExit = (<EnterOption data={[comObj]} type={_titleType} compType="userCenter" />);
     };
 
     // <Option value="1">全员邀请 </Option>
     // <Option value="2">全员禁止</Option>
     // <Option value="0">仅管理员可邀请</Option>
     let _invitePermission = false;
-    if(invitePermission && invitePermission == "0"){
+    if (invitePermission && invitePermission == "0") {
       _invitePermission = admin;
-    }else if(invitePermission && invitePermission == "1"){
+    } else if (invitePermission && invitePermission == "1") {
       _invitePermission = true;
     }
 
-    let _class = allowTenants.length <= 0?hiden:show;
+    let _class = allowTenants.length <= 0 ? hiden : show;
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
         <div>
@@ -427,8 +428,8 @@ class UserInfoContainer extends Component {
           </div>
 
           <div className={linkSetting}>
-              <a href={`${getHost('order')}/ticket`} target="_blank">我的工单</a><br/>
-              <a href={`${getHost('cloundyy')}`} target="_blank" style={{lineHeight:"33px"}} >用友云官网</a>
+            <a href={`${getHost('order')}/ticket/menu/router/myticket/KJ`} target="_blank">问题与反馈</a><br />
+            <a href={`${getHost('cloundyy')}`} target="_blank" style={{ lineHeight: "33px" }} >用友云官网</a>
           </div>
 
         </div>
@@ -441,41 +442,41 @@ class UserInfoContainer extends Component {
             </div>
             <div className={tenantDescribe}>
               <div className={tenantName} title={company}>{company}</div>
-              <div style={{'marginBottom':15}}>
+              <div style={{ 'marginBottom': 15 }}>
                 <div className={companyType}>{_titleType}</div>
               </div>
             </div>
           </div>
-          <div style={{position:"relative"}}>
+          <div style={{ position: "relative" }}>
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" onClick={this.gotoManage.bind(this)}>
-              <Icon type="record" />首页编辑</Button></li>
+                <Icon type="record" />首页编辑</Button></li>
 
               {
-                _titleType == "企业"?(<li><Button shape="border" onClick={this.gotoUserInfo}>
-                <Icon type="role-management" />员工信息</Button></li>):null
+                _titleType == "企业" ? (<li><Button shape="border" onClick={this.gotoUserInfo}>
+                  <Icon type="role-management" />员工信息</Button></li>) : null
               }
 
               {
-                _invitePermission?(<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
-                <Icon type="add-friends" />
-                邀请成员</Button></li>):null
+                _invitePermission ? (<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
+                  <Icon type="add-friends" />
+                  邀请成员</Button></li>) : null
               }
 
-              {admin ? null:_allowExit}
+              {admin ? null : _allowExit}
 
             </ul>
             {
               requestDisplay ?
-              <div className={popconfirm} style={{position:"absolute"}}>
-                <i className="arrow"></i>
-                <div className={popconfirm_content}>
-                  <p>{_titleType}创建成功！</p>
-                  <p>快点邀请成员一起好好工作吧！</p>
+                <div className={popconfirm} style={{ position: "absolute" }}>
+                  <i className="arrow"></i>
+                  <div className={popconfirm_content}>
+                    <p>{_titleType}创建成功！</p>
+                    <p>快点邀请成员一起好好工作吧！</p>
+                  </div>
+                  <div onClick={this.closeRequest}>我知道了</div>
                 </div>
-                <div onClick={this.closeRequest}>我知道了</div>
-              </div>
-              : null
+                : null
             }
 
           </div>
@@ -483,7 +484,7 @@ class UserInfoContainer extends Component {
           <div className={enter_setting} title={`${_titleType}设置`}>
             {/* <Icon type="setting" /> */}
             {
-              admin ? (<Icon type="setting" title={`${_titleType}设置`} onClick={()=>{this.gotoConfig(this._curTenant)}}/>) :null
+              admin ? (<Icon type="setting" title={`${_titleType}设置`} onClick={() => { this.gotoConfig(this._curTenant) }} />) : null
             }
           </div>
 
