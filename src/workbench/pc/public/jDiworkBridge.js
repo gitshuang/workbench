@@ -1,6 +1,6 @@
 import { getContext, postMessageToWin, getNewEvent } from '@u';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
-
+import store from "store";
 //注册事件
 const keys = [
   'JDIWORK',
@@ -55,6 +55,13 @@ const handlerList = {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
       type,
+    });
+  },
+  getBrm(type, event) {
+    const data = store.getState().work.brm;
+    postMessageToWin(this.source, {
+      type,
+      data,
     });
   },
   checkServiceOpen(type, event) {
