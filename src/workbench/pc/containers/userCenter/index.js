@@ -429,7 +429,7 @@ class UserInfoContainer extends Component {
 
           <div className={linkSetting}>
             <a href={`${getHost('org')}/fe/download/download.html`} target="_blank" >下载客户端</a><br />
-            <a href={`${getHost('order')}/ticket/menu/router/myticket/KJ`} target="_blank">问题与反馈</a><br />
+            <a href={`http://workbenchdev.yyuap.com/fe/download/download.html`} target="_blank">问题与反馈</a><br />
             <a href={`${getHost('cloundyy')}`} target="_blank">用友云官网</a>
           </div>
 
