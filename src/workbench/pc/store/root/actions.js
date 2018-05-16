@@ -7,6 +7,7 @@ import {
   getPromotionServiceList,
   uploadApplication,
   getPoll,
+  getPortal,
 } from './api';
 
 const {
@@ -25,6 +26,7 @@ const {
   HIDE_IM,
   UPLOAD_APPLICATION,
   GET_POLL,
+  GET_PORTAL,
 } = types;
 
 export default createActions(
@@ -35,6 +37,7 @@ export default createActions(
     [GET_PROMOTION_SERVICE_LIST]: getPromotionServiceList,
     [UPLOAD_APPLICATION]: uploadApplication,
     [GET_POLL]: getPoll,
+    [GET_PORTAL]: getPortal,
   },
   REQUEST_START,
   REQUEST_SUCCESS,

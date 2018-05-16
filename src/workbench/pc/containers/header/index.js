@@ -16,6 +16,7 @@ const {
   changeQuickServiceHidden,
   showIm,
   hideIm,
+  getPortal,
 } = actions;
 
 @connect(
@@ -23,12 +24,14 @@ const {
     'quickServiceDisplay',
     'messageType',
     'imShowed',
+    'portalEnable',
   ),
   {
     changeQuickServiceHidden,
     changeQuickServiceDisplay,
     showIm,
     hideIm,
+    getPortal,
   }
 )
 class HeaderContainer extends Component {
@@ -61,9 +64,6 @@ class HeaderContainer extends Component {
       showIm();
     }
   }
-  openWay = () => {
-
-  }
   
   render() {
     const {
@@ -91,8 +91,10 @@ class HeaderContainer extends Component {
         <Icon title="智能通讯" type="clock" style={{color}}/>
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
-      <div className={`${rightBtn}`} onClick={this.openWay}>
-        <Icon title="我的门户" type="change" style={{color}} />
+      <div className={`${rightBtn}`}>
+        <a href={`http://ec.diwork.com/`} target="_blank" style={{"textDecoration": "none"}}>
+          <Icon title="我的门户" type="change" style={{color}} />
+        </a>
       </div>
     );
     return (

@@ -16,4 +16,5 @@ export default createTypes(
   'HIDE_IM',
   'UPLOAD_APPLICATION',
   'GET_POLL',
+  'GET_PORTAL',
 );
