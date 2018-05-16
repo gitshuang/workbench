@@ -56,6 +56,7 @@ const {
   hideIm,
   uploadApplication,
   getPoll,
+  getPortal,
 } = actions;
 
 const defaultState = {
@@ -68,6 +69,7 @@ const defaultState = {
   promotionServiceList: [],
   imShowed: false,
   isLogout: false,
+  portalEnable: false,
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -148,6 +150,15 @@ const reducer = handleActions({
     return {
       ...state,
       isLogout: payload,
+    };
+  },
+  [getPortal]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      portalEnable: payload.portalEnable,
     };
   },
   [popMessage]: (state) => {
