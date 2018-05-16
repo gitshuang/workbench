@@ -47,6 +47,8 @@ var api = [
   '/service/getServiceInfoWithDetail',
   '/desktop/update',
   '/service/getServiceByTenantIdAndServiceCode',
+
+  '/portalCtrl/getPortal'
 ]
 
 var rapApi = [
