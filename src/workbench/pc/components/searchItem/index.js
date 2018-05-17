@@ -79,7 +79,7 @@ function getResult(text) {
       trigger,
     },
   );
-  return result;
+  return result.default || result;
 }
 
 function getData({ url, type }) {
