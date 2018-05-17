@@ -2,7 +2,7 @@ import { get, post } from '@u';
 
 export const getProductInfo = (
   code,
-  type
+  type,
 ) => {
   if (type === 'app') {
     return get('/service/getServiceInfoByAppCode', {
@@ -12,10 +12,8 @@ export const getProductInfo = (
   return get('/service/getServiceInfoByServiceCode', {
     serviceCode: code,
   });
-}
-export const getTitleService = (serviceCode) => {
-  return get('/service/getServiceInfoWithDetail', { serviceCode });
-}
+};
+export const getTitleService = serviceCode => get('/service/getServiceInfoWithDetail', { serviceCode });
 export const setPinCancel = serviceCode => post('/widget/deleteByServiceCode', { serviceCode });
 export const setPinAdd = (
   serviceCode,
@@ -31,7 +29,7 @@ export const setPinAdd = (
   type: 3,
   widgetName,
 });
-export const setAddGroup = (widgetName) => post('/widget/create', {
+export const setAddGroup = widgetName => post('/widget/create', {
   type: 1,
   widgetName,
 });

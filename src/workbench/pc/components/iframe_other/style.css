@@ -7,13 +7,13 @@
 	/* flex: 1;
 	-ms-flex: 1; */
 }
-.iframe_cont{
+.iframeCont{
 	width: auto;
 	height: 100%;
 	/* flex: 1;
 	-ms-flex: 1; */
 }
-:global(.ie9) .iframe_cont{
+:global(.ie9) .iframeCont{
 	position: absolute;
 	top: 96px;
 	left: 0px;

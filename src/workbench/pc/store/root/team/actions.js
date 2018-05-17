@@ -3,12 +3,12 @@ import types from './types';
 
 import {
   uploadApplication,
-  createTeam
+  createTeam,
 } from './api';
 
 const {
   UPLOAD_APPLICATION,
-  CREATE_TEAM
+  CREATE_TEAM,
 } = types;
 
 export default createActions(

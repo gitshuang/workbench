@@ -1,4 +1,4 @@
-/* .page_home :global(.lebra-navbar-left-icon){
+/* .pageHome :global(.lebra-navbar-left-icon){
   background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
   background: #BEC1C8;
   border: 1px solid #FFFFFF;
@@ -6,7 +6,7 @@
   color: #fff;
   overflow:hidden;
 } */
-/* .page_home :global(.lebra-navbar-left-icon .iconfont){
+/* .pageHome :global(.lebra-navbar-left-icon .iconfont){
   font-size: 31px;
 } */
 .logoImg{
@@ -51,7 +51,7 @@ body{
   border-color: #ffffff;
 }
 
-.all_btn{
+.allBtn{
   /* border: 1px solid red; */
   width: 100px;
   height: 48px;
@@ -63,16 +63,16 @@ body{
   color: #E14C46;
 }
 
-.btn_disable{
+.btnDisable{
   display: none;
 }
 
-.logo_title{
+.logoTitle{
   font-size:17px;
   color:rgba(71,77,84,1);
   width:204px;
 }
-/* .page_home :global(.lebra-navbar-left){
+/* .pageHome :global(.lebra-navbar-left){
   border-radius: 100px;
   border: 1px solid #E6E7E9;
   height: 32px;
@@ -88,7 +88,7 @@ body{
 }
 
 
-.establis_page :global(.lebra-navbar-left-icon){
+.establisPage :global(.lebra-navbar-left-icon){
   background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
   background: #BEC1C8;
   border: 1px solid #FFFFFF;
@@ -96,7 +96,7 @@ body{
   color: #fff;
   overflow:hidden;
 }
-.establis_page :global(.lebra-navbar-left-icon .iconfont){
+.establisPage :global(.lebra-navbar-left-icon .iconfont){
   font-size: 31px;
 }
 

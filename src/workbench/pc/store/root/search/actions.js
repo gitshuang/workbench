@@ -1,4 +1,4 @@
-import { createActions, findPath } from '@u';
+import { createActions } from '@u';
 import types from './types';
 import {
   getSearchSuggest,
@@ -25,7 +25,7 @@ const actions = createActions(
     [GET_SEARCH]: getSearch,
     [GET_SEARCH_OTHER]: getSearchOther,
   },
-  SET_SEARCH_HEAD_DATA
+  SET_SEARCH_HEAD_DATA,
 );
 
 export default actions;

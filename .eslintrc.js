@@ -36,5 +36,26 @@ module.exports = {
     'react/prefer-stateless-function': 0,
     'react/no-array-index-key': 0,
     'jsx-a11y/anchor-is-valid': 0,
+    'jsx-a11y/no-noninteractive-element-interactions': [
+      'error',
+      {
+        handlers: [
+          'onClick',
+          'onMouseDown',
+          'onMouseUp',
+          'onKeyPress',
+          'onKeyDown',
+          'onKeyUp',
+        ],
+      },
+    ],
+    // 换行风格
+    'linebreak-style': [0 ,"windows"], 
+    // 外部作用域中的变量不能与它所包含的作用域中的变量或参数同名
+    "no-shadow": 0,
+    // 强制驼峰法命名
+    // "camelcase": 0,
+    // 标识符不能以_开头或结尾
+    // "no-underscore-dangle": 0, 
   }
 }

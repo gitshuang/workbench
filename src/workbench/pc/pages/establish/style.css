@@ -5,7 +5,7 @@
 }
 
 
-.estab_lish :global(.lebra-navbar-left-icon){
+.establish :global(.lebra-navbar-left-icon){
   background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
   background: #BEC1C8;
   border: 1px solid #FFFFFF;
@@ -13,7 +13,7 @@
   color: #fff;
   overflow:hidden;
 }
-.estab_lish :global(.lebra-navbar-left-icon .iconfont){
+.establish :global(.lebra-navbar-left-icon .iconfont){
   font-size: 31px;
 }
 

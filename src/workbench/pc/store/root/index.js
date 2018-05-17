@@ -1,14 +1,11 @@
 import React from 'react';
-import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions';
-import { mergeReducers, logout } from '@u';
-import Loading from 'bee/loading';
 import Notification from 'bee/notification';
 import { openMess } from 'pub-comp/notification';
-
-import Notice from 'components/notice';
+import { destoryLoadingFunc, createLoadingFunc } from 'pub-comp/loading';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { trigger } from 'public/componentTools';
+import Notice from 'components/notice';
 import home from './home';
 import work from './work';
 import search from './search';
@@ -17,7 +14,7 @@ import manage from './manage';
 import team from './team';
 import actions from './actions';
 import teamconfig from './teamconfig';
-import {destoryLoadingFunc,createLoadingFunc} from 'pub-comp/loading';
+
 const notification = Notification.newInstance({
   position: 'bottomRight',
 });
@@ -36,9 +33,9 @@ function addMessage(message) {
       closable: false,
       onClose: () => {
         dispatchMessageTypeHandler({
-          type: 'popMessage'
+          type: 'popMessage',
         });
-      }
+      },
     });
   }
 }
@@ -58,37 +55,38 @@ const {
   showIm,
   hideIm,
   uploadApplication,
-  getPoll
+  getPoll,
+  getPortal,
 } = actions;
 
 const defaultState = {
   serviceList: [],
   quickServiceDisplay: false,
   messageType: false,
-  messageList:[],
-  messageShowNum:0,
-  latestAccessList:[],
-  promotionServiceList:[],
+  messageList: [],
+  messageShowNum: 0,
+  latestAccessList: [],
+  promotionServiceList: [],
   imShowed: false,
-  isLogout: false
+  isLogout: false,
+  portalEnable: false,
 };
 
-const createReducer = (key) => (state, { payload, error }) => {
+const createReducer = key => (state, { payload, error }) => {
   if (error) {
     return state;
-  } else {
-    return {
-      ...state,
-      [key]: payload,
-    };
   }
+  return {
+    ...state,
+    [key]: payload,
+  };
 };
 const reducer = handleActions({
   [getLatestAccessList]: createReducer('latestAccessList'),
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc({text: '正在加载中...'});
+    createLoadingFunc({ text: '正在加载中...' });
     return state;
   },
   [requestSuccess](state) {
@@ -126,7 +124,7 @@ const reducer = handleActions({
     let newMessageShowNum = messageShowNum;
     const popNums = maxMessageShowNum - messageShowNum;
     if (popNums > 0) {
-      for (let i = 0, l = popNums; i < l; i++) {
+      for (let i = 0, l = popNums; i < l; i += 1) {
         newMessageShowNum += 1;
         addMessage(newMessageList.shift());
       }
@@ -145,8 +143,8 @@ const reducer = handleActions({
     const info = window.diworkContext();
     const { tenantid, userid } = info;
     // 避免localhost环境下一直刷新
-    if (tenantid == "tenantid" && userid == "userid" ) return false;
-    if( payload.tenantId !== tenantid || payload.userId !== userid ){
+    // if (tenantid == "tenantid" && userid == "userid" ) return false;
+    if (payload.tenantId !== tenantid || payload.userId !== userid) {
       window.location.reload();
     }
     return {
@@ -154,7 +152,16 @@ const reducer = handleActions({
       isLogout: payload,
     };
   },
-  [popMessage]: state => {
+  [getPortal]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      portalEnable: payload.portalEnable,
+    };
+  },
+  [popMessage]: (state) => {
     const { messageShowNum, messageList } = state;
     const newMessageList = messageList.concat([]);
     let newMessageShowNum = messageShowNum;
@@ -212,4 +219,4 @@ export default function (state, action) {
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;
-};
+}

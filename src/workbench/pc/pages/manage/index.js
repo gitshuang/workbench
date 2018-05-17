@@ -1,39 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { DragDropContext } from 'react-dnd';
-import judgedBackend from 'components/backend';
-
-import {ButtonDefaultLine,ButtonBrand,ButtonDefaultAlpha} from 'pub-comp/button';
-import Button from 'bee/button';
-import Icon from 'pub-comp/icon';
+import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
+
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
+
+import CreateManageModule from 'pub-comp/manageWidget';
+import folderBgSrc from 'assets/image/wgt/folder_bg.png';
 import HeaderPage from './headerPage';
-import Header from 'containers/header';
-import CreateManageModule from 'pub-comp/manageWidget'
-import folderBgSrc from "assets/image/wgt/folder_bg.png"
 
 import {
-  HeaderLeft,
-  umBoxJustify,
-  umBoxJustify1,
-  umBoxJustify2,
-  batchDeletion,
-  preserve,
-  cancel,
-  um_content,
-  um_footer,
-  saveArea,
-  batchArea,
-  header,
-  page_home,
-  cancelModal,
-  addBtn,
-  addGroupBtn,
-  manager_save_pop
+  pageHome,
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -49,17 +29,17 @@ const {
   selectGroupActions,
   setEditonlyId,
   setDragInputState,
-  deleteFolder, 
-  renameFolder, 
+  deleteFolder,
+  renameFolder,
   setFolderEdit,
-  moveService, 
+  moveService,
   openFolder,
   closeFolder,
   setCurrGroupIndex,
   editTitle,
   delectService,
-  cancelFolderEdit, 
-  closeBatchMove, 
+  cancelFolderEdit,
+  closeBatchMove,
   batchMove,
   setManageList,
   getManageList,
@@ -70,7 +50,7 @@ const {
   getAllServicesByLabelGroup,
   addDesk,
   setCurrentSelectWidgetMap,
-  emptySelectGroup
+  emptySelectGroup,
 } = manageActions;
 
 
@@ -101,7 +81,7 @@ const {
     },
     {
       namespace: 'manage',
-    }
+    },
   ),
   {
     requestStart,
@@ -140,30 +120,158 @@ const {
     setCurrentSelectWidgetMap,
     addDesk,
     emptySelectGroup,
-  }
+  },
 )
 
 
-class Home extends Component {
+class Manage extends Component {
+  static propTypes = {
+    requestStart: PropTypes.func,
+    requestSuccess: PropTypes.func,
+    requestError: PropTypes.func,
+    history: PropTypes.shape({
+      block: PropTypes.func,
+      replace: PropTypes.func,
+    }),
+    isEdit: PropTypes.bool,
+    match: PropTypes.shape({
+      path: PropTypes.string,
+    }),
+    manageList: PropTypes.arrayOf(PropTypes.object),
+    selectList: PropTypes.arrayOf(PropTypes.string),
+    batchMoveModalDisplay: PropTypes.bool,
+    curDisplayFolder: PropTypes.shape({
+      children: PropTypes.array,
+    }),
+    folderModalDisplay: PropTypes.bool,
+    selectGroup: PropTypes.arrayOf(PropTypes.number),
+    currEditonlyId: PropTypes.string,
+    dragState: PropTypes.bool,
+    curEditFolderId: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
+    drag: PropTypes.string,
+    currGroupIndex: PropTypes.number,
+    title: PropTypes.string,
+    moveData: PropTypes.arrayOf(PropTypes.object),
+    returnDefaultState: PropTypes.func,
+    getManageList: PropTypes.func,
+    moveGroup: PropTypes.func,
+    moveService: PropTypes.func,
+    setManageList: PropTypes.func,
+    setEditState: PropTypes.func,
+    emptySelectGroup: PropTypes.func,
+    batchDelect: PropTypes.func,
+    openBatchMove: PropTypes.func,
+    addGroup: PropTypes.func,
+    closeBatchMove: PropTypes.func,
+    batchMove: PropTypes.func,
+    closeFolder: PropTypes.func,
+    delectGroup: PropTypes.func,
+    renameGroup: PropTypes.func,
+    moveTopGroup: PropTypes.func,
+    moveBottomGroup: PropTypes.func,
+    addFolder: PropTypes.func,
+    selectListActions: PropTypes.func,
+    selectGroupActions: PropTypes.func,
+    setEditonlyId: PropTypes.func,
+    setDragInputState: PropTypes.func,
+    openFolder: PropTypes.func,
+    deleteFolder: PropTypes.func,
+    renameFolder: PropTypes.func,
+    setFolderEdit: PropTypes.func,
+    setCurrGroupIndex: PropTypes.func,
+    editTitle: PropTypes.func,
+    cancelFolderEdit: PropTypes.func,
+    delectService: PropTypes.func,
+    applicationsMap: PropTypes.objectOf(PropTypes.object),
+    allServicesByLabelGroup: PropTypes.objectOf(PropTypes.array),
+    getAllServicesByLabelGroup: PropTypes.func,
+    setCurrentSelectWidgetMap: PropTypes.func,
+    addDesk: PropTypes.func,
+  };
+  static defaultProps = {
+    requestStart: () => {},
+    requestSuccess: () => {},
+    requestError: () => {},
+    history: {},
+    isEdit: false,
+    match: {},
+    manageList: [],
+    selectList: [],
+    batchMoveModalDisplay: false,
+    curDisplayFolder: {},
+    folderModalDisplay: false,
+    selectGroup: [],
+    currEditonlyId: '',
+    dragState: false,
+    curEditFolderId: '',
+    drag: '',
+    currGroupIndex: 0,
+    title: '',
+    moveData: [],
+    returnDefaultState: () => {},
+    getManageList: () => {},
+    moveGroup: () => {},
+    moveService: () => {},
+    setManageList: () => {},
+    setEditState: () => {},
+    emptySelectGroup: () => {},
+    batchDelect: () => {},
+    openBatchMove: () => {},
+    addGroup: () => {},
+    closeBatchMove: () => {},
+    batchMove: () => {},
+    closeFolder: () => {},
+    delectGroup: () => {},
+    renameGroup: () => {},
+    moveTopGroup: () => {},
+    moveBottomGroup: () => {},
+    addFolder: () => {},
+    selectListActions: () => {},
+    selectGroupActions: () => {},
+    setEditonlyId: () => {},
+    setDragInputState: () => {},
+    openFolder: () => {},
+    deleteFolder: () => {},
+    renameFolder: () => {},
+    setFolderEdit: () => {},
+    setCurrGroupIndex: () => {},
+    editTitle: () => {},
+    cancelFolderEdit: () => {},
+    delectService: () => {},
+    applicationsMap: {},
+    allServicesByLabelGroup: {},
+    getAllServicesByLabelGroup: () => {},
+    setCurrentSelectWidgetMap: () => {},
+    addDesk: () => {},
+  };
+
   constructor(props) {
     super(props);
-    const { manageList } = props;
-    this.goToLocation = "/";
+    this.goToLocation = '/';
     this.configBack = false;
     this.state = {
       showModal: false,
       showCancelModal: false,
-      currLocation:"",
     };
   }
-  moveGroupDrag = (id, afterId) => {
-    const { moveGroup } = this.props;
-    moveGroup({ id, afterId });
-  }
-  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType) => {
-    let data = {id,preParentId,preType,afterId,parentId,afterType}
-    const { moveService } = this.props;
-    moveService(data);
+
+  componentDidMount() {
+    const { history } = this.props;
+
+    history.block((location) => {
+      const { isEdit } = this.props;
+      this.goToLocation = location.pathname;
+      if ((location.pathname !== this.props.match.path) && isEdit && !this.configBack) {
+        this.setState({
+          showCancelModal: true,
+        });
+      }
+    });
+
+    this.getManageList();
   }
 
   componentWillUnmount() {
@@ -171,24 +279,6 @@ class Home extends Component {
     returnDefaultState();
   }
 
-  componentDidMount() {
-    const { history} = this.props;
-
-    history.block(location => {
-      const { isEdit} = this.props;
-      this.goToLocation =  location.pathname;
-      if((location.pathname != this.props.match.path) && isEdit && !this.configBack ){
-        this.setState({
-          showCancelModal: true
-        });
-        return false;
-      }
-    })
-    this.getManageList();
-  }
-  componentWillReceiveProps(nextProps){
-
-  }
   getManageList() {
     const {
       requestStart,
@@ -197,7 +287,7 @@ class Home extends Component {
       getManageList,
     } = this.props;
     requestStart();
-    return getManageList().then(({error, payload}) => {
+    return getManageList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       }
@@ -206,7 +296,18 @@ class Home extends Component {
     });
   }
 
+  moveGroupDrag = (id, afterId) => {
+    const { moveGroup } = this.props;
+    moveGroup({ id, afterId });
+  }
 
+  moveItemDrag = (id, preParentId, preType, afterId, parentId, afterType) => {
+    const data = {
+      id, preParentId, preType, afterId, parentId, afterType,
+    };
+    const { moveService } = this.props;
+    moveService(data);
+  }
 
   //  保存
   save = () => {
@@ -217,9 +318,11 @@ class Home extends Component {
       setManageList,
       manageList,
     } = this.props;
-    this.checkBtn?this.checkBtn.click():null;
+    if (this.checkBtn) {
+      this.checkBtn.click();
+    }
     requestStart();
-    setManageList(manageList).then(({error, payload}) => {
+    setManageList(manageList).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       } else {
@@ -232,7 +335,7 @@ class Home extends Component {
   // 取消
   cancel = () => {
     const {
-      //isEdit,
+      // isEdit,
       setEditState,
     } = this.props;
     /*
@@ -245,7 +348,7 @@ class Home extends Component {
       });
     }else{
       this.goBack();
-    }*/
+    } */
     setEditState(false);
     this.popCloseCancel();
     this.goBack();
@@ -257,7 +360,7 @@ class Home extends Component {
     emptySelectGroup();
     this.props.history.replace(this.goToLocation);
   }
-  //批量删除
+  // 批量删除
   batchDelectFn = () => {
     const { batchDelect } = this.props;
     batchDelect();
@@ -271,42 +374,41 @@ class Home extends Component {
   // 打开删除的弹窗
   popOpen = () => {
     this.setState({
-      showModal: true
+      showModal: true,
     });
   }
   // 关闭删除的弹窗
   popClose = () => {
     this.setState({
-      showModal: false
+      showModal: false,
     });
   }
   // 打开取消的弹窗
   popOpenCancel = () => {
-    const {isEdit} = this.props;
-    if(isEdit){
+    const { isEdit } = this.props;
+    if (isEdit) {
       this.setState({
-        showCancelModal: true
+        showCancelModal: true,
       });
-      return false;
-    }else{
+    } else {
       this.goBack();
     }
   }
   // 关闭取消的弹窗
   popCloseCancel = () => {
     this.setState({
-      showCancelModal: false
+      showCancelModal: false,
     });
   }
   // 返回确认按钮
-  checkFun =(id)=>{
-    let btn = document.getElementById(id);
-    this.checkBtn = btn?btn:null;
+  checkFun = (id) => {
+    const btn = document.getElementById(id);
+    this.checkBtn = btn || null;
   }
 
   render() {
     const list = [];
-    var {
+    const {
       manageList,
       isEdit,
       selectList,
@@ -359,7 +461,7 @@ class Home extends Component {
       setCurrentSelectWidgetMap,
       addDesk,
     } = this.props;
-    var manageReduxParams = {
+    const manageReduxParams = {
       manageList,
       isEdit,
       selectList,
@@ -411,28 +513,28 @@ class Home extends Component {
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
       addDesk,
-    } 
-    var manageOuterParams = {
-      showModal:this.state.showModal,
-      showCancelModal:this.state.showCancelModal,
-      popClose:this.popClose,
-      batchDelectFn:this.batchDelectFn,
-      cancel:this.cancel,
-      save:this.save,
-      popCloseCancel:this.popCloseCancel,
-      openGroupTo:this.openGroupTo,
-      popOpenCancel:this.popOpenCancel,
-      moveGroupDrag:this.moveGroupDrag,
-      moveItemDrag:this.moveItemDrag,
+    };
+    const manageOuterParams = {
+      showModal: this.state.showModal,
+      showCancelModal: this.state.showCancelModal,
+      popClose: this.popClose,
+      batchDelectFn: this.batchDelectFn,
+      cancel: this.cancel,
+      save: this.save,
+      popCloseCancel: this.popCloseCancel,
+      openGroupTo: this.openGroupTo,
+      popOpenCancel: this.popOpenCancel,
+      moveGroupDrag: this.moveGroupDrag,
+      moveItemDrag: this.moveItemDrag,
       folderBgSrc,
-    }
+    };
     return (
-      <div className={page_home}>
+      <div className={pageHome}>
         <HeaderPage list={list} />
-        <CreateManageModule {...manageReduxParams} {...manageOuterParams}/>
+        <CreateManageModule {...manageReduxParams} {...manageOuterParams} />
       </div>
     );
   }
 }
 
-export default Home;
+export default Manage;

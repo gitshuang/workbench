@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { mapStateToProps, findPath } from '@u';
+import PropTypes from 'prop-types';
+import { mapStateToProps } from '@u';
+
 /*   actions   */
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
@@ -19,7 +21,6 @@ import Pin from 'containers/pin';
 
 /*  style样式库组件  */
 import styles from './style.css';
-import { relative } from 'upath';
 
 /*  定义style  css-loader  */
 const {
@@ -29,19 +30,18 @@ const {
   hasTab,
   tabArea,
   wrap,
-  title_service_display,
+  titleServiceDisplayStyle,
   header,
-  active,
   work,
   titleArea,
   service,
   pin,
   marginTop,
   marginLeft,
-  iframe_cont
+  iframeCont,
 } = styles;
 /* 声明actions */
-const {requestStart, requestSuccess, requestError} = rootActions;
+const { requestStart, requestSuccess, requestError } = rootActions;
 const {
   setCurrent,
   titleServiceDisplay,
@@ -49,8 +49,8 @@ const {
   pinDisplayBlock,
   setPinCancel,
   getProductInfo,
-  returnDefaultState
-  } = workActions;
+  returnDefaultState,
+} = workActions;
 
 
 @withRouter
@@ -67,13 +67,11 @@ const {
     'type',
     {
       key: 'domainName',
-      value: ({ domainName, type }) => {
-        return type === 1 ? '' : domainName;
-      },
+      value: ({ domainName, type }) => (type === 1 ? '' : domainName),
     },
     {
-      namespace: 'work'
-    }
+      namespace: 'work',
+    },
   ),
   {
     requestStart,
@@ -86,53 +84,66 @@ const {
     setPinCancel,
     returnDefaultState,
     setCurrent,
-  }
+  },
 )
 export default class Work extends Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      goBack: PropTypes.func,
+      replace: PropTypes.func,
+    }),
+    requestStart: PropTypes.func,
+    requestSuccess: PropTypes.func,
+    requestError: PropTypes.func,
+    getProductInfo: PropTypes.func,
+    titleServiceDisplay: PropTypes.func,
+    titleServiceHidden: PropTypes.func,
+    pinDisplayBlock: PropTypes.func,
+    setPinCancel: PropTypes.func,
+    returnDefaultState: PropTypes.func,
+    setCurrent: PropTypes.func,
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }),
+    current: PropTypes.shape({
+      serviceCode: PropTypes.string,
+    }),
+    pinType: PropTypes.bool,
+    pinDisplay: PropTypes.bool,
+    expandedSidebar: PropTypes.bool,
+    type: PropTypes.number,
+    titleServiceType: PropTypes.bool,
+    domainName: PropTypes.string,
+    widthBrm: PropTypes.bool,
+  };
+  static defaultProps = {
+    history: {},
+    requestStart: () => {},
+    requestSuccess: () => {},
+    requestError: () => {},
+    getProductInfo: () => {},
+    titleServiceDisplay: () => {},
+    titleServiceHidden: () => {},
+    pinDisplayBlock: () => {},
+    setPinCancel: () => {},
+    returnDefaultState: () => {},
+    setCurrent: () => {},
+    match: {},
+    current: {},
+    pinType: false,
+    pinDisplay: false,
+    expandedSidebar: false,
+    type: 1,
+    titleServiceType: false,
+    domainName: '',
+    widthBrm: false,
+  };
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
-      height:0,
-      deviationHeight:143
     };
     this.goBack = this.goBack.bind(this);
-  }
-
-  goBack() {
-    this.props.history.replace('');
-  }
-
-  getProductInfo(code, type, subcode) {
-    const {
-      getProductInfo,
-      requestStart,
-      requestError,
-      requestSuccess,
-      history,
-      } = this.props;
-    requestStart();
-    this.setState({
-      loaded: false,
-    })
-    getProductInfo(code, type, subcode).then(({error, payload}) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        if (!subcode) {
-          const {
-            curService: {
-              serviceCode: subcode
-            },
-          } = payload;
-          history.replace(`/${type}/${code}/${subcode}`);
-        }
-        this.setState({
-          loaded: true,
-        });
-      }
-      requestSuccess();
-    });
   }
 
   componentWillMount() {
@@ -146,15 +157,16 @@ export default class Work extends Component {
       },
     } = this.props;
     this.getProductInfo(code, type, subcode);
+    // const height = document.documentElement.clientHeight || document.body.clientHeight;
+    // this.setState({
+    //   height,
+    // });
   }
 
   componentDidMount() {
-    let _height = document.documentElement.clientHeight || document.body.clientHeight;
-    this.setState({
-      _height:_height
-    });
+
   }
-  
+
   componentWillReceiveProps(nextProps) {
     const {
       match: {
@@ -162,18 +174,17 @@ export default class Work extends Component {
           code: newCode,
           type: newType,
           subcode: newSubcode,
-          }
-        }
-      } = nextProps;
+        },
+      },
+    } = nextProps;
     const {
       match: {
         params: {
           code: oldCode,
           type: oldType,
           subcode: oldSubcode,
-          }
         },
-      menus,
+      },
       setCurrent,
     } = this.props;
     const typeChange = newType !== oldType;
@@ -195,11 +206,47 @@ export default class Work extends Component {
     returnDefaultState();
   }
 
-  pinDisplayFn = ()=> {
+  getProductInfo(code, type, subcode) {
+    const {
+      getProductInfo,
+      requestStart,
+      requestError,
+      requestSuccess,
+      history,
+    } = this.props;
+    requestStart();
+    this.setState({
+      loaded: false,
+    });
+    getProductInfo(code, type, subcode).then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      } else {
+        if (!subcode) {
+          const {
+            curService: {
+              serviceCode: subcode,
+            },
+          } = payload;
+          history.replace(`/${type}/${code}/${subcode}`);
+        }
+        this.setState({
+          loaded: true,
+        });
+      }
+      requestSuccess();
+    });
+  }
+
+  goBack() {
+    this.props.history.replace('');
+  }
+
+  pinDisplayFn = () => {
     const {
       current: {
         serviceCode,
-        },
+      },
       pinDisplayBlock,
       pinType,
       pinDisplay,
@@ -207,15 +254,19 @@ export default class Work extends Component {
       requestStart,
       requestError,
       requestSuccess,
-      } = this.props;
+    } = this.props;
     if (pinType) {
       requestStart();
-      setPinCancel(serviceCode).then(({error, payload}) => {
+      setPinCancel(serviceCode).then(({ error, payload }) => {
         if (error) {
           requestError(payload);
-          Message.create({content: '从首页移除失败!',duration:1.5,position: 'topLeft',color: "warning",style:{height:'auto',top:-340}});
+          Message.create({
+            content: '从首页移除失败!', duration: 1.5, position: 'topLeft', color: 'warning', style: { height: 'auto', top: -340 },
+          });
         }
-        Message.create({content: '从首页移除成功!',duration:1.5,position: 'topLeft',color: "success",style:{height:'auto',top:-340}});
+        Message.create({
+          content: '从首页移除成功!', duration: 1.5, position: 'topLeft', color: 'success', style: { height: 'auto', top: -340 },
+        });
         requestSuccess();
       });
       return false;
@@ -223,24 +274,24 @@ export default class Work extends Component {
     if (!pinDisplay) {
       pinDisplayBlock();
     }
+    return true;
   }
 
-  makeLayout() {
-    const { loaded ,_height,deviationHeight} = this.state;
+  makeLayout = () => {
+    const { loaded } = this.state;
     const { expandedSidebar, type } = this.props;
-    let _sideDeviationHeight = 90;
-    
+
     if (loaded) {
       switch (type) {
         case 1:
           return (
-            <div className={`${marginTop} ${iframe_cont}`}  style={{marginTop:94}}>
+            <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
               <ContentContainer />
             </div>
           );
         case 2:
-        return (
-          <div style={{position:relative}}>
+          return (
+            <div style={{ }}>
               {
                 expandedSidebar ? (
                   <div className={sideBarArea} >
@@ -251,13 +302,13 @@ export default class Work extends Component {
               <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} >
                 <div className={contentArea}>
                   <ContentContainer />
-                </div> 
+                </div>
               </div>
             </div>
           );
         case 3:
           return (
-            <div style={{position:relative}}>
+            <div style={{}}>
               {
                 expandedSidebar ? (
                   <div className={sideBarArea} >
@@ -267,7 +318,7 @@ export default class Work extends Component {
               }
               <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
                 <div className={contentArea}>
-                  <ContentContainer hasTab={true}/>
+                  <ContentContainer hasTab />
                 </div>
                 <div className={tabArea}>
                   <TabsContainer />
@@ -275,15 +326,18 @@ export default class Work extends Component {
               </div>
             </div>
           );
+        default:
+          return null;
       }
     }
+    return null;
   }
 
-  btnOnclick =(e)=>{
-    const {titleServiceDisplay,titleServiceHidden,titleServiceType } = this.props;
-    if(titleServiceType){
+  btnOnclick = () => {
+    const { titleServiceDisplay, titleServiceHidden, titleServiceType } = this.props;
+    if (titleServiceType) {
       titleServiceHidden();
-    }else{
+    } else {
       titleServiceDisplay();
     }
   }
@@ -291,8 +345,6 @@ export default class Work extends Component {
   render() {
     const {
       pinType,
-      pinDisplay,
-
       titleServiceType,
       current: {
         title,
@@ -301,52 +353,52 @@ export default class Work extends Component {
       domainName,
       widthBrm,
       type,
-      } = this.props;
-    const { loaded } = this.state;
-    let iconName = <Icon title="返回首页" type="home"/>
+    } = this.props;
+    const iconName = <Icon title="返回首页" type="home" />;
     return (
       <div className={`${wrap} um-win ${work}`}>
         <div className={header}>
           <div className="um-header">
-            <HeaderContainer onLeftClick={ this.goBack } iconName={iconName} leftContent={ domainName }>
+            <HeaderContainer onLeftClick={this.goBack} iconName={iconName} leftContent={domainName}>
               <div className={titleArea}>
                 <span>{ title }</span>
                 {
                   hasRelationFunc ?
                     (<Icon
                       title="相关服务"
-                      type={titleServiceType?"upward":"pull-down"}
+                      type={titleServiceType ? 'upward' : 'pull-down'}
                       className={`
-                        ${titleServiceType?title_service_display:""}
+                        ${titleServiceType ? titleServiceDisplayStyle : ''}
                         ${service}
                       `}
-                      onClick={ this.btnOnclick }></Icon>) : undefined
+                      onClick={this.btnOnclick}
+                    />) : undefined
                 }
                 <Icon
                   title="添加到首页"
                   className={pin}
                   style={{
                     // right: hasRelationFunc ? '-27px' : '-27px',
-                    position: "absolute",
-                    top:"0px"
+                    position: 'absolute',
+                    top: '0px',
                   }}
-                  type={pinType?"pin2":"pin"}
-                  onClick={ this.pinDisplayFn }
+                  type={pinType ? 'pin2' : 'pin'}
+                  onClick={this.pinDisplayFn}
                 />
               </div>
             </HeaderContainer>
           </div>
           {
-            widthBrm ? <BreadcrumbContainer withSidebar={ type !== 1 }/> : null
+            widthBrm ? <BreadcrumbContainer withSidebar={type !== 1} /> : null
           }
         </div>
         <div className={`${workArea}`}>
           { this.makeLayout() }
         </div>
         {
-          hasRelationFunc ? <TitleServiceContainer outsideClickIgnoreClass={'icon-xiala'}/> : null
+          hasRelationFunc ? <TitleServiceContainer outsideClickIgnoreClass="icon-xiala" /> : null
         }
-        <Pin outsideClickIgnoreClass={'icon-dingzhi'}/>
+        <Pin outsideClickIgnoreClass="icon-dingzhi" />
       </div>
     );
   }

@@ -163,7 +163,7 @@ class serviceClassify extends Component {
     return currentApps.map(({ applicationId, applicationCode, applicationIcon, applicationName })=>{
       return (
         <GoTo
-          key={applicationId}
+          key={`${applicationId}${applicationCode}`}
           code={applicationCode}
           icon={applicationIcon}
           appName={applicationName}

@@ -1,41 +1,21 @@
 import { get, post, postFileCros } from '@u';
 
-export const getTeamInfo = () =>{
-  return get('/manager/team/info');
-}
-export const uploadApplication = (data) => postFileCros("https://pubapi.yonyoucloud.com/file/upload/oss/workbench-image-path-applicationIcon",data);
-export const createTeam = (data) =>{
-  return post('/manager/team/setting',data);
-}
+export const getTeamInfo = () => get('/manager/team/info');
+export const uploadApplication = data => postFileCros('https://pubapi.yonyoucloud.com/file/upload/oss/workbench-image-path-applicationIcon', data);
+export const createTeam = data => post('/manager/team/setting', data);
 
-export const getUserList = (data) =>{
-  return get('/manager/team/queryUserPage',data);
-}
-export const adminToUser = (userId) =>{
-  return post('/manager/team/changeAdmin2User',{userId});
-}
-export const userToAdmin = (userId) =>{
-  return post('/manager/team/changeUser2Admin',{userId});
-}
+export const getUserList = data => get('/manager/team/queryUserPage', data);
+export const adminToUser = userId => post('/manager/team/changeAdmin2User', { userId });
+export const userToAdmin = userId => post('/manager/team/changeUser2Admin', { userId });
 // export const adminToUser = (userId) =>{
 //   return get('/application/getAllAppsForTeam');
 // }
 // export const userToAdmin = (userId) =>{
 //   return get('/application/getAllAppsForTeam');
 // }
-export const removeUser = (id) =>{
-  return post('/manager/team/removeUser',{ "userIds":[id] } );
-}
+export const removeUser = id => post('/manager/team/removeUser', { userIds: [id] });
 
-export const transferTeam = (id) =>{
-  return post('/manager/teamEnter/createTeam',{id});
-}
-export const dismissTeam = (url) =>{
-  return post('/manager/'+url);
-}
-export const exitTeam = (url) =>{
-  return post('/manager/'+url);
-}
-export const getAllApps = () =>{
-  return get('/manager/application/getAllAppsForTeam');
-}
+export const transferTeam = id => post('/manager/teamEnter/createTeam', { id });
+export const dismissTeam = url => post(`/manager/${url}`);
+export const exitTeam = url => post(`/manager/${url}`);
+export const getAllApps = () => get('/manager/application/getAllAppsForTeam');

@@ -3,7 +3,7 @@ import types from './types';
 import {
   setManageList,
   getManageList,
-  getAllServicesByLabelGroup
+  getAllServicesByLabelGroup,
 } from './api';
 
 const {
@@ -42,7 +42,7 @@ const {
   SET_CURRENT_SELECT_WIDGET_MAP,
   RETURN_DEFAULT_STATE,
   SET_DRAG_INPUT_STATE,
-  EMPTY_SELECT_GROUP
+  EMPTY_SELECT_GROUP,
 } = types;
 
 const actions = createActions(
@@ -86,6 +86,6 @@ const actions = createActions(
   SET_CURRENT_SELECT_WIDGET_MAP,
   RETURN_DEFAULT_STATE,
   SET_DRAG_INPUT_STATE,
-  EMPTY_SELECT_GROUP
+  EMPTY_SELECT_GROUP,
 );
 export default actions;
