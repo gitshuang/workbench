@@ -84,17 +84,19 @@ function getResult(text) {
 
 function getData({ url, type }) {
   const searchItemClass = searchItemClassMap[type];
-  if (searchItemClass) {
+  if (typeof searchItemClass === "undefined") {
+    searchItemClassMap[type] = getFetch(url).then((text) => {
+      try {
+        searchItemClassMap[type] = getResult(text);
+        return Promise.resolve(true);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }, e => Promise.reject(e));
+  } else if (!(searchItemClass instanceof Promise)) {
     return Promise.resolve(true);
   }
-  return getFetch(url).then((text) => {
-    try {
-      searchItemClassMap[type] = getResult(text);
-      return Promise.resolve(true);
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  }, e => Promise.reject(e));
+  return searchItemClassMap[type];
 }
 
 function getSearchItemClass(type) {
