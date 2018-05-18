@@ -166,6 +166,7 @@ class SearchContainer extends Component {
   clearInput = () => {
     this.setState({
       text: '',
+      isSearchWinShow:false
     })
   }
   goDetail(type,item){
