@@ -130,6 +130,10 @@ const routes = [
     component: Page404,
   },
   {
+    path: '/market/application/:id',
+    component: Market,
+  },
+  {
     path: '/market',
     component: Market,
   },
