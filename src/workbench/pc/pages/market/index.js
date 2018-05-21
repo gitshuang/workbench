@@ -33,12 +33,16 @@ class Account extends Component {
     history: PropTypes.shape({
       go: PropTypes.func,
     }),
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }),
   };
   static defaultProps = {
     brm: [],
     addBrm: () => {},
     popBrm: () => {},
     history: {},
+    match: {},
   };
 
   componentDidMount() {
@@ -69,11 +73,15 @@ class Account extends Component {
     const brmVal = this.props.brm;
     const brmLastVal = brmVal.length > 0 && brmVal[brmVal.length - 1];
     const brmLastLen = brmVal.length > 0 && brmVal[brmVal.length - 1].length;
+    const appId = this.props.match.params.id;
     return (
       <ApplicationWrap name={brmVal.length > 0 ? brmLastVal[brmLastLen - 1].name : ''} brms={brmVal.length > 1 ? brmVal[brmVal.length - 2] : [{ name: '' }]} goBack={this.goBack}>
         <div className={`${bg} um-content um-vbox`}>
           {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
-          <IFrame title="应用市场" url="/diwork-market/appMarket" />
+          {
+            appId ? (<IFrame title="应用市场" url={`/diwork-market/appMarke#/application/${appId}`} />) : (<IFrame title="应用市场" url="/diwork-market/appMarket" />)
+          }
+          {/* <IFrame title="应用市场" url="/diwork-market/appMarket" /> */}
         </div>
       </ApplicationWrap>
     );
