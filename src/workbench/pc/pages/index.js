@@ -11,7 +11,7 @@ import routes from 'router';
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
 import { mapStateToProps, getContext } from '@u';
-import QuickServiceContainer from 'containers/quickService';
+// import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
 import Es from 'pages/es';

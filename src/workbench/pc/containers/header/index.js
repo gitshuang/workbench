@@ -1,5 +1,6 @@
 import React, { Component, Children, cloneElement } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from 'components/header';
 import Icon from 'pub-comp/icon';
@@ -23,6 +24,7 @@ const {
   requestSuccess
 } = actions;
 
+@withRouter
 @connect(
   mapStateToProps(
     'quickServiceDisplay',
@@ -93,6 +95,15 @@ class HeaderContainer extends Component {
     }
   }
 
+  // 调用快捷应用  打开全部应用
+  openAllFn = () => {
+    this.props.history.push('/application');
+  }
+  // 调用快捷应用 点击单独每个应用
+  openServiceFn = (applicationCode) => {
+    this.props.history.push(`/app/${applicationCode}`);
+  }
+
   render() {
     const {
       children,
@@ -114,7 +125,7 @@ class HeaderContainer extends Component {
     let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <QuickApplication serviceList={serviceList} />,
+      <QuickApplication serviceList={serviceList} openAllFn={this.openAllFn} openServiceFn={this.openServiceFn} />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} style={{ marginRight: "25px" }} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>

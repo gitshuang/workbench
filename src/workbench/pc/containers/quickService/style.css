@@ -86,10 +86,6 @@
   width:30px;
   height: 30px;
   margin: 1px;
-  /* margin-left: 10%; */
-  /* margin-top: 10%; */
-  /* width: 80%; */
-  /* height: 80%; */
 }
 .serviceBtn button{
   border: none;
@@ -110,16 +106,16 @@
 }
 
 .link_cont{
-    position: absolute;
-    z-index: 9;
-    z-index: 9;
-    bottom: 0px;
-    width: 300px;
-    height: 39px;
-    line-height: 39px;
-    text-align: center;
-    cursor: pointer;
-    color: rgba(0,122,206,1);
+  position: absolute;
+  z-index: 9;
+  z-index: 9;
+  bottom: 0px;
+  width: 300px;
+  height: 39px;
+  line-height: 39px;
+  text-align: center;
+  cursor: pointer;
+  color: rgba(0,122,206,1);
 }
 .link_cont a{
   font-size: 12px;

@@ -131,7 +131,6 @@ class Applications extends Component {
               </div>
             )
         }
-
       </div>
     );
   }
