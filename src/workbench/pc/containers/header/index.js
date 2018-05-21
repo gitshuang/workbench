@@ -29,6 +29,7 @@ const {
     'messageType',
     'imShowed',
     'portalEnable',
+    'serviceList',
   ),
   {
     changeQuickServiceHidden,
@@ -43,6 +44,13 @@ const {
 class HeaderContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+    
+    };
   }
 
   componentWillMount() {
@@ -99,13 +107,14 @@ class HeaderContainer extends Component {
       color,
       imShowed,
       portalEnable,
+      serviceList
     } = this.props;
     const rightArray = Children.toArray(rightContent);
     let appClass = quickServiceDisplay ? "active tc" : "tc";
     let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <QuickApplication />,
+      <QuickApplication serviceList={serviceList} />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} style={{ marginRight: "25px" }} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>

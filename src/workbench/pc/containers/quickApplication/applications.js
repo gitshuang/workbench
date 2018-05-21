@@ -12,7 +12,7 @@ import {
   btn,
 } from './style.css';
 
-
+@onClickOutside
 class Applications extends Component {
 
   constructor(props) {
@@ -20,7 +20,7 @@ class Applications extends Component {
     // 定时器
     this.interval = null;
     this.state = {
-      openAllstate: false
+      openAllstate: false,
     }
   }
 
@@ -28,20 +28,32 @@ class Applications extends Component {
     const { serviceList } = this.props;
     const openAllstate = serviceList && serviceList.length <= 12 ? true : false;
     this.setState({
-      openAllstate
-    })
+      openAllstate,
+    });
   }
 
+  // open service 
+  openApp = (applicationCode) => {
+    const { openServiceFn } = this.props;
+    this.handleClickOutside();
+    // this.props.history.push(`/app/${applicationCode}`);
+    openServiceFn(applicationCode);
+  }
+
+  // outside click 事件 
   handleClickOutside() {
-    const { changeQuickServiceHidden, quickServiceDisplay } = this.props;
+    const { closeServiceModal, quickServiceDisplay } = this.props;
     if (quickServiceDisplay) {
-      changeQuickServiceHidden();
+      closeServiceModal();
     }
   }
 
+  // open allApplicatoin button click
   openAllAppList = () => {
+    const { openAllFn } = this.props;
     this.handleClickOutside();
-    this.props.history.push('/application');
+    //this.props.history.push('/application');
+    openAllFn();
   }
 
   onClickScroll = (e) => {
@@ -87,10 +99,6 @@ class Applications extends Component {
     }
   }
 
-  openApp = (applicationCode) => {
-    this.handleClickOutside();
-    this.props.history.push(`/app/${applicationCode}`);
-  }
   render() {
     const { serviceList } = this.props;
     return (

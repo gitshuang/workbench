@@ -1,7 +1,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'pub-comp/icon';
-import searchActions from 'store/root/search/actions';
+import Applications from './applications';
 
 import {
   aBtn,
@@ -16,13 +16,13 @@ class QuickApplication extends Component {
     };
   }
 
-  openService = () => {
+  openServiceModal = () => {
     this.setState({
       quickServiceDisplay: true,
     });
   }
 
-  closeService = () => {
+  closeServiceModal = () => {
     this.setState({
       quickServiceDisplay: false,
     });
@@ -30,17 +30,20 @@ class QuickApplication extends Component {
 
   render() {
     const { quickServiceDisplay } = this.state;
+    // const { serviceList, openServiceFn, openAllFn } = this.props;
     const appClass = quickServiceDisplay ? active : "";
     return (
       <div>
-        <div className={`${appClass} ${aBtn}`} onClick={this.openService} >
+        <div className={`${appClass} ${aBtn}`} onClick={this.openServiceModal} >
           <Icon title="快捷应用" type="application" />
         </div>
         {
           quickServiceDisplay
-          ? (
-            <div>1</div>
-          )
+          ? <Applications 
+              quickServiceDisplay={quickServiceDisplay} 
+              closeServiceModal={this.closeServiceModal}
+              {...this.props}
+            />
           : null
         }
       </div>

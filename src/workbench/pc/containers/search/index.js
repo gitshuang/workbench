@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 import Icon from 'pub-comp/icon';
 import { connect } from 'react-redux';
 import searchActions from 'store/root/search/actions';
-import SearchResult from 'containers/searchResult'
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { trigger } from 'public/componentTools';
 import SearchItem from 'components/searchItem';
