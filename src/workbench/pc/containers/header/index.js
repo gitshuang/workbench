@@ -1,5 +1,6 @@
 import React, { Component, Children, cloneElement } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from 'components/header';
 import Icon from 'pub-comp/icon';
@@ -7,6 +8,8 @@ import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
 import styles from './index.css';
 import SearchContainer from 'containers/search';
+import QuickApplication from 'containers/quickApplication';
+
 const {
   lebraNavbar,
   rightBtn,
@@ -21,12 +24,14 @@ const {
   requestSuccess
 } = actions;
 
+@withRouter
 @connect(
   mapStateToProps(
     'quickServiceDisplay',
     'messageType',
     'imShowed',
     'portalEnable',
+    'serviceList',
   ),
   {
     changeQuickServiceHidden,
@@ -41,6 +46,13 @@ const {
 class HeaderContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+    
+    };
   }
 
   componentWillMount() {
@@ -59,14 +71,16 @@ class HeaderContainer extends Component {
       e.stopPropagation();
     });
   }
-  openService = () => {
-    const { changeQuickServiceDisplay, quickServiceDisplay, changeQuickServiceHidden } = this.props;
-    if (quickServiceDisplay) {
-      changeQuickServiceHidden();
-    } else {
-      changeQuickServiceDisplay();
-    }
-  }
+
+  // openService = () => {
+  //   const { changeQuickServiceDisplay, quickServiceDisplay, changeQuickServiceHidden } = this.props;
+  //   if (quickServiceDisplay) {
+  //     changeQuickServiceHidden();
+  //   } else {
+  //     changeQuickServiceDisplay();
+  //   }
+  // }
+
   toggleIM = (e) => {
     e.stopPropagation();
     const {
@@ -79,6 +93,15 @@ class HeaderContainer extends Component {
     } else {
       showIm();
     }
+  }
+
+  // 调用快捷应用  打开全部应用
+  openAllFn = () => {
+    this.props.history.push('/application');
+  }
+  // 调用快捷应用 点击单独每个应用
+  openServiceFn = (applicationCode) => {
+    this.props.history.push(`/app/${applicationCode}`);
   }
 
   render() {
@@ -95,15 +118,14 @@ class HeaderContainer extends Component {
       color,
       imShowed,
       portalEnable,
+      serviceList
     } = this.props;
     const rightArray = Children.toArray(rightContent);
-    let appClass = quickServiceDisplay ? "active tc" : "tc"
-    let imClass = imShowed ? "active tc" : "tc"
+    let appClass = quickServiceDisplay ? "active tc" : "tc";
+    let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
-      <SearchContainer color={color} />,
-      <div className={`application-btn ${appClass} ${rightBtn}`} style={{ marginRight: "15px" }} onClick={this.openService} >
-        <Icon title="快捷应用" type="application" style={{ "color": color }} />
-      </div>,
+      <SearchContainer />,
+      <QuickApplication serviceList={serviceList} openAllFn={this.openAllFn} openServiceFn={this.openServiceFn} />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} style={{ marginRight: "25px" }} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>

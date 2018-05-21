@@ -11,7 +11,7 @@ import routes from 'router';
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
 import { mapStateToProps, getContext } from '@u';
-import QuickServiceContainer from 'containers/quickService';
+// import QuickServiceContainer from 'containers/quickService';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import UserCenterContainer from 'containers/userCenter';
 import Es from 'pages/es';
@@ -189,7 +189,7 @@ class Root extends Component {
       return <Es />;
     }
     const { userInfoDisplay, quickServiceDisplay } = this.props;
-    const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass="application-btn" />) : null;
+    // const itemQuickService = quickServiceDisplay ? (<QuickServiceContainer outsideClickIgnoreClass="application-btn" />) : null;
     const itemUserInfo = userInfoDisplay ? (<UserCenterContainer outsideClickIgnoreClass="lebra-navbar-left" bgColor={this.bgColor} />) : null;
     return (
       <div>
@@ -221,7 +221,7 @@ class Root extends Component {
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}
           >
-            { itemQuickService }
+            {/* { itemQuickService } */}
           </CSSTransitionGroup>
         </TransitionGroup>
       </div>
