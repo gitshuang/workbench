@@ -5,7 +5,7 @@
       {
         "type": "service",
         "typeName": "通讯录2",
-        "renderUrl": "11",
+        "renderUrl": "",
         "content": [
           "{\"relationUsers\":[],\"serviceIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/4d0a1ffc-c2dc-4330-ab17-1fcc0257f396/%E6%B7%98%E5%AE%9D%E5%86%85%E8%B4%AD.png\",\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"ae57f431-66db-4301-b00f-31bc24ca2146\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"测试图片1\",\"relationServices\":[],\"url\":\"https://90wu6i.axshare.com/\",\"teamMenbersUnuse\":false,\"createTime\":1517987314000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":false,\"applicationId\":\"25aab76e-961d-4595-9965-870ce222b722\",\"serviceId\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"ts\":1517987314000}",
           "{\"applicationType\":1,\"clientStatus\":false,\"hasWidget\":false,\"applicationIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f289608a-bf28-4d04-959c-38dc5bc320f6/Penguins.jpg\",\"simpleStatus\":true,\"orgIds\":[],\"enable\":true,\"userIds\":[],\"phoneStatus\":true,\"webStatus\":true,\"applicationName\":\"个人应用1\",\"selected\":false,\"applicationDesc\":\"个人应用1\",\"orgNames\":[],\"everyone\":false,\"eternal\":false,\"shortCut\":false,\"createTime\":1520236673000,\"service\":[],\"tenantId\":\"gtzceot7\",\"userNames\":[],\"orders\":0,\"applicationId\":\"5d13b34f-69e8-4b8a-83ae-4f08f29743ac\",\"applicationCode\":\"b9443084-3e6f-4e45-ad5c-c6024acfbc2c\",\"primaryKey\":\"5d13b34f-69e8-4b8a-83ae-4f08f29743ac\"}",
@@ -17,7 +17,7 @@
       {
         "type": "service",
         "typeName": "微邮",
-        "renderUrl": "“”",
+        "renderUrl": "",
         "content": [
           "{\"relationUsers\":[],\"serviceIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/4d0a1ffc-c2dc-4330-ab17-1fcc0257f396/%E6%B7%98%E5%AE%9D%E5%86%85%E8%B4%AD.png\",\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"ae57f431-66db-4301-b00f-31bc24ca2146\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"测试图片1\",\"relationServices\":[],\"url\":\"https://90wu6i.axshare.com/\",\"teamMenbersUnuse\":false,\"createTime\":1517987314000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":false,\"applicationId\":\"25aab76e-961d-4595-9965-870ce222b722\",\"serviceId\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"ts\":1517987314000}",
           "{\"applicationType\":1,\"clientStatus\":false,\"hasWidget\":false,\"applicationIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/f289608a-bf28-4d04-959c-38dc5bc320f6/Penguins.jpg\",\"simpleStatus\":true,\"orgIds\":[],\"enable\":true,\"userIds\":[],\"phoneStatus\":true,\"webStatus\":true,\"applicationName\":\"个人应用1\",\"selected\":false,\"applicationDesc\":\"个人应用1\",\"orgNames\":[],\"everyone\":false,\"eternal\":false,\"shortCut\":false,\"createTime\":1520236673000,\"service\":[],\"tenantId\":\"gtzceot7\",\"userNames\":[],\"orders\":0,\"applicationId\":\"5d13b34f-69e8-4b8a-83ae-4f08f29743ac\",\"applicationCode\":\"b9443084-3e6f-4e45-ad5c-c6024acfbc2c\",\"primaryKey\":\"5d13b34f-69e8-4b8a-83ae-4f08f29743ac\"}",

@@ -5,7 +5,7 @@
 }
 .bg_wrap{
 	background:#fff;
-	
+
 	border-radius: 3px ;
 }
 .wrap{
@@ -28,7 +28,7 @@
 
 .serviceSearch{
 	width:456px;
-	height:38px; 
+	height:38px;
 	border: 1px solid rgba(78,89,104,0.19);
 }
 .wrap .um_content{
@@ -174,69 +174,15 @@
   color:rgba(74,81,93,1);
   margin-left:8px;
 }
-.recently  li {
-  float: left;
-  width: 100%;
+.recently > li {
   padding-bottom: 21px;
 }
-.recently  li img { width: 36px; height: 36px; }
-.recently div { float: left;font-size:12px;}
-.recently .h_name{ 
-  margin-left: 16px; 
-  font-family:MicrosoftYaHei;
-  display: flex;
-  flex-direction: column;
-  width: 375px; 
-  min-width: 300px;
-  overflow: hidden
-}
-.recently .h_name i,.recently .h_name font { color: #0C64C3; font-style: normal}
-.recently .h_name p:first-child{
-    color:#373C42;
-    line-height:17px;
-    font-weight: bold;
-  }
-.recently .h_name p{
-  width: 100%;
-  height:18px; 
-  color:rgba(13,20,36,.47);
-  line-height:16px;
-  white-space: nowrap;
-  overflow: hidden;
-text-overflow:ellipsis;
-}
-.recently .h_name p span:first-child{ 
-  margin-right: 10px;   
-  max-width: 180px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 18px;
-  color: rgba(74,81,93,1);
- }
-.recently .h_name p span { 
-  float: left;
-}
-.recently .h_contact { width:24px;height:24px; background:rgba(135,139,148,1);opacity:70; margin-left: 20px; border-radius: 100%; text-align: center; line-height: 21px; cursor: pointer}
-.recently .mleft50{ margin-left: 150px;}
-.recently .h_contact i { color: #fff; font-size: 16px;line-height: 24px;}
 
-.recently .search_help{margin-top: 8px}
-.recently .search_service .h_name {width: 185px;}
-.recently h3{
-  color: #4a515d;
-  padding: 20px 0 10px 0;
-  font-size: 12px;
-}
-.recently li:last-child{
-  border-bottom:none;
-}
 .recently li:hover{
   background:rgba(239,239,239,1);
   cursor:pointer;
 }
-.recently li:hover .usedTit{
-  color:#E14C46;
-}
+
 .promotion li{
   float: left;
 }
@@ -265,7 +211,7 @@ text-overflow:ellipsis;
     background-color: #757575;
 }
 tabPane1,.tabPane2{
-  
+
 }
 .tabPane1 li,.tabPane2 li{
   padding-top:15px;
@@ -284,7 +230,7 @@ tabPane1,.tabPane2{
 .tabContent{
   display:inline-block;
   width: 100%;
-  
+
 }
 .tabContent :global(.u-tabs-tab.u-tabs-tab-active){
   font-weight: bold;
@@ -308,7 +254,7 @@ tabPane1,.tabPane2{
   max-height: 6px;
   background:#E14C46;
   border-radius:3px;
- 
+
 }
 .tabContent :global(.u-tabs-nav-wrap){
   width:100%;
@@ -329,32 +275,32 @@ tabPane1,.tabPane2{
   font-weight:900;
 }
 
-.recently em{   
+.recently em{
   font-size: 12px;
   font-style: normal;
   display: inline-block;
   color: #007ace;
   margin: 2px 0 0 185px;
-padding: 0 0 10px 0; 
+padding: 0 0 10px 0;
 cursor: pointer}
 .isdisplay { display: none}
 
 .paginationClass{
   margin-top: 10px;
 }
-.paginationClass :global(.active) a, 
-.paginationClass :global(.active) a:focus, 
-.paginationClass :global(.active) a:hover, 
-.paginationClass :global(.active) span, 
-.paginationClass :global(.active) span:focus, 
+.paginationClass :global(.active) a,
+.paginationClass :global(.active) a:focus,
+.paginationClass :global(.active) a:hover,
+.paginationClass :global(.active) span,
+.paginationClass :global(.active) span:focus,
 .paginationClass :global(.active) span:hover{
     border-color: #fcedec;
     background: #fcedec;
     color: #e14c46;
   }
-.paginationClass :global(.disabled) a, 
-.paginationClass :global(.disabled) a:focus, 
-.paginationClass :global(.disabled) a:hover, 
+.paginationClass :global(.disabled) a,
+.paginationClass :global(.disabled) a:focus,
+.paginationClass :global(.disabled) a:hover,
 {
   background: rgba(9,44,66,.04);
   }

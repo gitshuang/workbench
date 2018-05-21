@@ -166,8 +166,8 @@ class Home extends Component {
       />);
     });
     return (
-      <div className={`${pageHome} home`} style={contentStyle}>
-        <HeaderPage list={list} headerData={headerData} />
+      <div ref='home' className={`${pageHome} home`} style={contentStyle}>
+        <HeaderPage list={list} headerData={headerData}/>
         <ElementsWrapper items={list} offset={-55}>
           {conts}
         </ElementsWrapper>

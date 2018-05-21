@@ -8,6 +8,16 @@ const openInterface = {
   hideIm: true,
   logout: true,
 };
+
+function dispatch(action, params) {
+  if (openInterface[action]) {
+    dispatchMessageTypeHandler({
+      type: action,
+      detail: params,
+    });
+  }
+}
+
 class Tool {
   constructor(namespace) {
     if (namespace) {
@@ -18,14 +28,7 @@ class Tool {
       throw(new Error('need namespace'));
     }
   }
-  dispatch(action, params) {
-    if (openInterface[action]) {
-      dispatchMessageTypeHandler({
-        type: action,
-        detail: params,
-      });
-    }
-  }
+  dispatch = dispatch
   on(event, callback) {
     const { callbackLists } = this;
     const callbackList = callbackLists[event];
@@ -75,4 +78,5 @@ export default Tool;
 export {
   tools,
   trigger,
+  dispatch,
 };

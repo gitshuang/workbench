@@ -141,6 +141,22 @@ const handlers = {
 }
 window.handlers = handlers;
 const openServiceData = {};
+let initData = {};
+try {
+  if (window.location.search) {
+    const urlObj = new URL(window.location.href);
+    const keys = urlObj.searchParams.keys();
+    while(1) {
+      let { done, value: key } = keys.next();
+      if (done) {
+        break;
+      }
+      initData[key] = urlObj.searchParams.getAll(key);
+    }
+  }
+} catch(e) {
+  console.log(e.message);
+}
 
 function bind(target, obj) {
   Object.keys(obj).forEach((key) => {
@@ -177,16 +193,26 @@ export function parseType(type) {
 
 export function getOpenServiceData(serviceCode) {
   let data = {};
+  if (initData) {
+    data = initData;
+    initData = null;
+  }
   if (typeof window.localStorage.getItem('openServiceData') !== 'undefined') {
     try {
-      data = JSON.parse(window.localStorage.getItem('openServiceData'));
+      data = {
+        ...data,
+        ...JSON.parse(window.localStorage.getItem('openServiceData')),
+      };
     } catch(e) {
       console.log(e);
     }
     window.localStorage.removeItem('openServiceData');
   }
   if (typeof openServiceData[serviceCode] !== 'undefined') {
-    data = openServiceData[serviceCode];
+    data = {
+      ...data,
+      ...openServiceData[serviceCode],
+    };
     delete openServiceData[serviceCode];
   }
   return data;
