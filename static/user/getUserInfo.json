@@ -363,6 +363,6 @@
             "tenantSize": "A",
             "terminal": "web"
         },
-        "admin": false
+        "admin": true
     }
 }

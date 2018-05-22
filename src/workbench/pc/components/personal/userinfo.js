@@ -29,7 +29,6 @@ class Userinfo extends Component {
   };
   constructor(props) {
     super(props);
-    this.currType = null;
     this.state = {
      
     };
@@ -50,7 +49,9 @@ class Userinfo extends Component {
   }
 
   gotoConfig = () => {
-    if (this.currType === '企业') { // 企业
+    const { titleType } = this.props;
+    debugger;
+    if (titleType === '企业') { // 企业
       this.skipRouter('/entersetting/home');
     } else { // 团队
       this.skipRouter('/teamconfig');
@@ -60,23 +61,6 @@ class Userinfo extends Component {
   skipRouter = (path) => {
     const { skipRouter } = this.props;
     skipRouter(path);
-  }
-
-  // 判断是企业还是团队
-  getCompanyType = () => {
-    const { tenantid } = this.props;
-    const {
-      userInfo: {
-        allowTenants,
-      },
-    } = this.props;
-    const curTenant = allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
-    let name = '团队';
-    if (curTenant && curTenant.type == 0) {
-      name = '企业';
-    }
-    this.currType = name;
-    return name;
   }
 
   getIcon = (userAvator,type) => {
@@ -192,7 +176,7 @@ class Userinfo extends Component {
                 : null
               }
               {
-                admin  ? null : 
+                admin && allowExit === '0' ? null : 
                 <li>
                   <Button shape="border" onClick={this.props.openExitModal} >
                     <Icon type="staff" />{"退出" + titleType}
