@@ -7,8 +7,11 @@ import { mapStateToProps, getHost, logout } from '@u';
 /*   actions   */
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
+import teamconfigActions from 'store/root/teamconfig/actions';
+
 import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
+import TeamExitModal from 'containers/teamExitModal';
 import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
 import Personal from 'components/personal';
@@ -29,6 +32,8 @@ const {
   requestSuccess,
   requestError,
 } = rootActions;
+
+const { openExitModal } = teamconfigActions;
 
 @withRouter
 @connect(
@@ -57,6 +62,7 @@ const {
     requestError,
     getWorkList,
     setCutUser,
+    openExitModal,
   },
 )
 class HeaderPage extends Component {
@@ -107,6 +113,17 @@ class HeaderPage extends Component {
       allBtn: false, // 默认显示一行tab
       btnShow: false,
       allowTenants: [],
+      currType: null,
+      TeamData: [
+        {
+          id: 'allowExit', name: '退出企业', value: '3', serverApi: 'enter/leave',
+          msg: '退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
+        },
+        {
+          id: 'allowExit', name: '退出团队', value: '3', serverApi: 'team/leave',
+          msg: '退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
+        }
+      ],
     };
   }
 
@@ -216,7 +233,7 @@ class HeaderPage extends Component {
     }
   }
 
-  openMenu=() => {
+  openMenu = () => {
     const { getSearchEnterOrTeam } = this.props;
     getSearchEnterOrTeam();
   }
@@ -244,6 +261,26 @@ class HeaderPage extends Component {
   skipRouter = (path) => {
     const { history } = this.props;
     history.push(path);
+  }
+
+  openExitModal = () => {
+    const { openExitModal } = this.props;
+    openExitModal();
+  }
+
+  getCompanyType = () => {
+    const { tenantid } = window.diworkContext();
+    const {
+      userInfo: {
+        allowTenants,
+      },
+    } = this.props;
+    const curTenant = allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
+    let name = '团队';
+    if (curTenant && curTenant.type == 0) {
+      name = '企业';
+    }
+    return name;
   }
 
   render() {
@@ -284,13 +321,17 @@ class HeaderPage extends Component {
         name:"用友云官网"
       },
     ];
+    const titleType = this.getCompanyType();
+    const { TeamData } = this.state;
+    const CurrData = titleType == "企业" ? TeamData[0] : TeamData[1];
     const personal = <Personal 
       userInfo = {userInfo}
       requestDisplay = {requestDisplay}
       exitModal = {exitModal}
       closeRequestDisplay = {() => { this.closeRequestDisplay(); }}
+      openExitModal = {this.openExitModal}
       skipRouter = { this.skipRouter }
-      tenantid = {tenantid}
+      titleType = {titleType}
       hrefs = {hrefs}
       logout = {logout}
     />;
@@ -307,6 +348,16 @@ class HeaderPage extends Component {
         >
           <span style={titleStyle}>{titleContent || '首页'}</span>
         </Header>
+        {
+          exitModal ? 
+          <TeamExitModal 
+            type={titleType} 
+            data={CurrData} 
+            isManage={userInfo.admin} 
+            userId={userInfo.userId} 
+            close={true} 
+          /> : null
+        }
         {
           list.length > 1 ? (
             <Navbar

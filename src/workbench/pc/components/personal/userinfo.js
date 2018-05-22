@@ -50,7 +50,7 @@ class Userinfo extends Component {
   }
 
   gotoConfig = () => {
-    if (this.currType === 0) { // 企业
+    if (this.currType === '企业') { // 企业
       this.skipRouter('/entersetting/home');
     } else { // 团队
       this.skipRouter('/teamconfig');
@@ -75,7 +75,7 @@ class Userinfo extends Component {
     if (curTenant && curTenant.type == 0) {
       name = '企业';
     }
-    this.currType = curTenant && curTenant.type;
+    this.currType = name;
     return name;
   }
 
@@ -109,6 +109,7 @@ class Userinfo extends Component {
       hrefs,
       logout,
       editType,
+      titleType,
     } = this.props;
 
     // 允许用户退出空间， 0:禁止;1:允许
@@ -120,26 +121,6 @@ class Userinfo extends Component {
       invitePermission = currentTeamConfig.invitePermission;
     }
 
-    // 团队或者企业 
-    const _titleType = this.getCompanyType();
-    let comObj = null;
-    if (_titleType === '企业') {
-      comObj = {
-        id: 'allowExit', name: '退出企业', value: '3', serverApi: 'enter/leave',
-        msg: '退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
-      };
-    }else{
-      comObj = {
-        id: 'allowExit', name: '退出团队', value: '3', serverApi: 'team/leave',
-        msg: '退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
-      };
-    }
-
-    let _allowExit = null;
-    if (allowExit && allowExit != '0') {
-      _allowExit = <EnterOption data={[comObj]} type={_titleType} compType="userCenter" />;
-    }
-    debugger;
     let _invitePermission = false;
     if (invitePermission && invitePermission == '0') {
       _invitePermission = admin;
@@ -177,7 +158,7 @@ class Userinfo extends Component {
             <div className={tenantDescribe}>
               <div className={tenantName} title={company}>{company}</div>
               <div style={{ marginBottom: 15 }}>
-                <div className={companyType}>{_titleType}</div>
+                <div className={companyType}>{titleType}</div>
               </div>
             </div>
           </div>
@@ -193,7 +174,7 @@ class Userinfo extends Component {
                 : null
               }
               {
-                _titleType == '企业' ?
+                titleType == '企业' ?
                 <li>
                   <Button shape="border" onClick={() => { this.skipRouter('/userinfo') }}>
                     <Icon type="role-management" />员工信息
@@ -210,14 +191,21 @@ class Userinfo extends Component {
                 </li>
                 : null
               }
-              {admin ? null : _allowExit}
+              {
+                admin  ? null : 
+                <li>
+                  <Button shape="border" onClick={this.props.openExitModal} >
+                    <Icon type="staff" />{"退出" + titleType}
+                  </Button>
+                </li>
+              }
             </ul>
             {
               requestDisplay ?
               <div className={popconfirm} style={{ position: 'absolute' }}>
                 <i className="arrow" />
                 <div className={popconfirm_content}>
-                  <p>{_titleType}创建成功！</p>
+                  <p>{titleType}创建成功！</p>
                   <p>快点邀请成员一起好好工作吧！</p>
                 </div>
                 <div onClick={this.props.closeRequestDisplay}>我知道了</div>
@@ -226,9 +214,9 @@ class Userinfo extends Component {
             }
           </div>
 
-          <div className={enter_setting} title={`${_titleType}设置`}>
+          <div className={enter_setting} title={`${titleType}设置`}>
             {
-              admin ? (<Icon type="setting" title={`${_titleType}设置`} onClick={() => { this.gotoConfig(); }} />) : null
+              admin ? (<Icon type="setting" title={`${titleType}设置`} onClick={() => { this.gotoConfig(); }} />) : null
             }
           </div>
 

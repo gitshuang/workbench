@@ -13,9 +13,9 @@ import TeamExitModal from 'containers/teamExitModal';
 
 const { Item } = Menu;
 const { requestStart, requestSuccess, requestError } = rootActions;
-const {openDismissModal,openExitModal} = teamconfigActions;
+const { openDismissModal, openExitModal } = teamconfigActions;
 
-import { enter_option,item_li} from './style.css';
+import { enter_option, item_li } from './style.css';
 
 @withRouter
 @connect(
@@ -24,7 +24,7 @@ import { enter_option,item_li} from './style.css';
     'exitModal',        //  退出团队弹窗开关
     {
       key: 'userInfo',
-      value: (teamconfig,ownProps,root) => {
+      value: (teamconfig, ownProps, root) => {
         return root.home.userInfo
       }
     },
@@ -44,25 +44,26 @@ import { enter_option,item_li} from './style.css';
 
 class EnterOption extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = {
-      serverApi:""
+      serverApi: ""
     }
     this.data = null;
   }
-  
-  onVisibleChange = (visible) => { 
+
+  onVisibleChange = (visible) => {
   }
 
   onSelectDrop = (da) => {
-    const { data,openTransferModal,openDismissModal,openExitModal ,compType} = this.props;
-    if(compType=="userCenter"){
+    debugger;
+    const { data, openTransferModal, openDismissModal, openExitModal, compType } = this.props;
+    if (compType == "userCenter") {
       this.data = da;
       openExitModal();
       return;
     }
-    let item = data.find((_da)=>_da.value ==da.key);
-    const {key,serverApi} = item;
+    let item = data.find((_da) => _da.value == da.key);
+    const { key, serverApi } = item;
     this.data = item;
     openExitModal();
     // if( da.key == "2" ){
@@ -73,14 +74,14 @@ class EnterOption extends Component {
   }
 
   render() {
-    let lis = [];  
-    const { data,type,compType ,dismissModal, exitModal ,userInfo,userInfo:{currentTeamConfig:{allowExit}}} = this.props;
-    data.forEach((da)=>{
-      if(da.id == "allowExit"){
-        if(allowExit == "1"){
+    let lis = [];
+    const { data, type, compType, dismissModal, exitModal, userInfo, userInfo: { currentTeamConfig: { allowExit } } } = this.props;
+    data.forEach((da) => {
+      if (da.id == "allowExit") {
+        if (allowExit == "1") {
           lis.push(<Item className={item_li} key={da.value} id={da.serverApi} >{da.name}</Item>);
         }
-      }else{
+      } else {
         lis.push(<Item className={item_li} key={da.value} id={da.serverApi} >{da.name}</Item>);
       }
     })
@@ -88,25 +89,30 @@ class EnterOption extends Component {
 
     return (
       <div className={enter_option}>
-          {
-            compType=="userCenter"?<Button shape="border" onClick={()=>{this.onSelectDrop(data[0])}} ><Icon type="staff" />{"退出"+type}</Button>:(<Dropdown
-              trigger={['click']}
-              overlay={menus}
-              animation="slide-up"
-              onVisibleChange={this.onVisibleChange}
-            >
-              <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
-            </Dropdown>)
-          }
-          
-          {/* {
+        {
+          compType == "userCenter" ?
+          <Button shape="border" onClick={() => { this.onSelectDrop(data[0]) }} >
+            <Icon type="staff" />{"退出" + type}
+          </Button>
+          : 
+          <Dropdown
+            trigger={['click']}
+            overlay={menus}
+            animation="slide-up"
+            onVisibleChange={this.onVisibleChange}
+          >
+            <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
+          </Dropdown>
+        }
+
+        {/* {
             dismissModal ? <TeamDismissModal type={type} data={this.data} /> : null
           } */}
-          {
-            exitModal ? <TeamExitModal type={type} data={this.data} isManage={userInfo.admin} userId={userInfo.userId} close={true}/> : null
-          }
-          
-        </div>
+        {
+          exitModal ? <TeamExitModal type={type} data={this.data} isManage={userInfo.admin} userId={userInfo.userId} close={true} /> : null
+        }
+
+      </div>
     )
   }
 }
