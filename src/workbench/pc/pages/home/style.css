@@ -1,11 +1,3 @@
-/* .pageHome :global(.lebra-navbar-left){
-  border-radius: 100px;
-  border: 1px solid #E6E7E9;
-  height: 32px;
-  padding-left:0;
-  margin-left: 15px;
-} */
-
 .pageHome :global(.lebra-navbar-left-icon){
   background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
   background: #BEC1C8;
@@ -13,9 +5,6 @@
   border-radius: 100px;
   color: #fff;
   overflow:hidden;
-}
-.pageHome :global(.lebra-navbar-left-icon .iconfont){
-  font-size: 31px;
 }
 .logoImg{
   max-height: 27px;
@@ -38,25 +27,6 @@ body{
   width:32px;
   height:32px;
   border-radius:50%;
-}
-/*  下边是通过className  更改样式   */
-:global(.redTheme){
-  background-color: #E14C46;
-}
-:global(.redTheme .lebra-navbar-light .lebra-navbar-title){
-  color: #ffffff;
-}
-:global(.redTheme .lebra-navbar-right .iconfont){
-  color: #ffffff;
-}
-:global(.redTheme li a){
-  color: #ffffff;
-}
-:global(.redTheme li a:hover){
-  color: #ffffff;
-}
-:global(.redTheme li a:after){
-  border-color: #ffffff;
 }
 
 .allBtn{

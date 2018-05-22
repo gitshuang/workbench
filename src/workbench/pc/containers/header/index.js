@@ -15,8 +15,6 @@ const {
   rightBtn,
 } = styles;
 const {
-  changeQuickServiceDisplay,
-  changeQuickServiceHidden,
   showIm,
   hideIm,
   getPortal,
@@ -27,15 +25,12 @@ const {
 @withRouter
 @connect(
   mapStateToProps(
-    'quickServiceDisplay',
     'messageType',
     'imShowed',
     'portalEnable',
     'serviceList',
   ),
   {
-    changeQuickServiceHidden,
-    changeQuickServiceDisplay,
     showIm,
     hideIm,
     getPortal,
@@ -72,15 +67,6 @@ class HeaderContainer extends Component {
     });
   }
 
-  // openService = () => {
-  //   const { changeQuickServiceDisplay, quickServiceDisplay, changeQuickServiceHidden } = this.props;
-  //   if (quickServiceDisplay) {
-  //     changeQuickServiceHidden();
-  //   } else {
-  //     changeQuickServiceDisplay();
-  //   }
-  // }
-
   toggleIM = (e) => {
     e.stopPropagation();
     const {
@@ -107,13 +93,11 @@ class HeaderContainer extends Component {
   render() {
     const {
       children,
-      changeQuickServiceDisplay,
       onLeftClick,
       onLeftTitleClick,
       iconName,
       leftContent,
       rightContent,
-      quickServiceDisplay,
       messageType,
       color,
       imShowed,
@@ -121,11 +105,14 @@ class HeaderContainer extends Component {
       serviceList
     } = this.props;
     const rightArray = Children.toArray(rightContent);
-    let appClass = quickServiceDisplay ? "active tc" : "tc";
     let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <QuickApplication serviceList={serviceList} openAllFn={this.openAllFn} openServiceFn={this.openServiceFn} />,
+      <QuickApplication 
+        serviceList={serviceList} 
+        openAllFn={this.openAllFn} 
+        openServiceFn={this.openServiceFn} 
+      />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} style={{ marginRight: "25px" }} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>

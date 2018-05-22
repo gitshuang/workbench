@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { mapStateToProps } from '@u';
+import { withRouter } from 'react-router-dom';
+import { mapStateToProps, getHost, logout } from '@u';
 
 /*   actions   */
 import rootActions from 'store/root/actions';
@@ -10,12 +11,17 @@ import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
 import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
-import { header, imgInner, allBtn, btnDisable } from './style.css';
+import Personal from 'components/personal';
+import { header, allBtn, btnDisable } from './style.css';
 
 
 const {
   changeUserInfoDisplay,
-  hideUserInfoDisplay, getUserInfo, changeRequestDisplay, getSearchEnterOrTeam,
+  hideUserInfoDisplay, getUserInfo, 
+  changeRequestDisplay, closeRequestDisplay,
+  getSearchEnterOrTeam,
+  getWorkList,
+  setCutUser,
 } = homeActions;
 
 const {
@@ -24,11 +30,17 @@ const {
   requestError,
 } = rootActions;
 
+@withRouter
 @connect(
   mapStateToProps(
     'searchEnterOrTeamList',
     'userInfoDisplay',
     'userInfo',
+    'requestDisplay',
+    {
+      key: 'exitModal',
+      value: (home, ownProps, root) => root.teamconfig.exitModal,
+    },
     {
       namespace: 'home',
     },
@@ -38,10 +50,13 @@ const {
     changeUserInfoDisplay,
     hideUserInfoDisplay,
     changeRequestDisplay,
+    closeRequestDisplay,
     getUserInfo,
     requestStart,
     requestSuccess,
     requestError,
+    getWorkList,
+    setCutUser,
   },
 )
 class HeaderPage extends Component {
@@ -50,6 +65,7 @@ class HeaderPage extends Component {
     changeUserInfoDisplay: PropTypes.func,
     hideUserInfoDisplay: PropTypes.func,
     changeRequestDisplay: PropTypes.func,
+    closeRequestDisplay: PropTypes.func,
     getUserInfo: PropTypes.func,
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
@@ -74,6 +90,7 @@ class HeaderPage extends Component {
     changeUserInfoDisplay: () => {},
     hideUserInfoDisplay: () => {},
     changeRequestDisplay: () => {},
+    closeRequestDisplay: () => {},
     getUserInfo: () => {},
     requestStart: () => {},
     requestSuccess: () => {},
@@ -93,8 +110,11 @@ class HeaderPage extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getUserInfo();
+  }
+
+  componentDidMount() {
     const { changeUserInfoDisplay, changeRequestDisplay } = this.props;
     // 判断是否localstorage中包含这个值
     if (localStorage.getItem('create')) {
@@ -113,6 +133,23 @@ class HeaderPage extends Component {
   }
 
   onLeftTitleClick=() => {}
+
+  // 切换到企业管理账户 ，好像废弃了
+  setCutUserFn = () => {
+    const { setCutUser, getWorkList } = this.props;
+    setCutUser().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      } else {
+        getWorkList().then(({ error, payload }) => {
+          if (error) {
+            requestError(payload);
+          }
+        });
+      }
+      requestSuccess();
+    });
+  }
 
   getUserInfo() {
     const {
@@ -198,6 +235,17 @@ class HeaderPage extends Component {
   }
 
 
+  // 关闭创建完成的弹出层
+  closeRequestDisplay = () => {
+    const { closeRequestDisplay } = this.props;
+    closeRequestDisplay();
+  }
+
+  skipRouter = (path) => {
+    const { history } = this.props;
+    history.push(path);
+  }
+
   render() {
     const {
       changeUserInfoDisplay,
@@ -205,29 +253,56 @@ class HeaderPage extends Component {
       userInfoDisplay,
       list,
       headerData,
+      userInfo,
+      requestDisplay,
+      exitModal
     } = this.props;
 
-    const img = this.props.userInfo.userAvator;
-    let imgIcon = null;
+    // let imgIcon = null;
     // let class2 = headerData && headerData.className;
     const background = headerData && headerData.background && JSON.parse(headerData.background);
     const titleContent = headerData && headerData.title;
     const titleStyle = headerData && headerData.titleStyle && JSON.parse(headerData.titleStyle);
     const color = headerData && headerData.color;
-    if (img) {
-      imgIcon = <img alt="" src={img} className={imgInner} />;
-    } else {
-      imgIcon = <Icon type="staff" />;
-    }
+    // if (img) {
+    //   imgIcon = <img alt="" src={img} className={imgInner} />;
+    // } else {
+    //   imgIcon = <Icon type="staff" />;
+    // }
+    const { tenantid } = window.diworkContext();
+    const hrefs = [
+      {
+        href:`${getHost('org')}/download/download.html`,
+        name:"下载客户端"
+      },
+      {
+        href:`https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ`,
+        name:"问题与反馈"
+      },
+      {
+        href:`${getHost('cloundyy')}`,
+        name:"用友云官网"
+      },
+    ];
+    const personal = <Personal 
+      userInfo = {userInfo}
+      requestDisplay = {requestDisplay}
+      exitModal = {exitModal}
+      closeRequestDisplay = {() => { this.closeRequestDisplay(); }}
+      skipRouter = { this.skipRouter }
+      tenantid = {tenantid}
+      hrefs = {hrefs}
+      logout = {logout}
+    />;
     const BtnShow = this.state.btnShow ? null : btnDisable;
+
 
     return (
       <div className={`${header}`} style={background} id="home_header">
         <Header
-          onLeftClick={userInfoDisplay ? hideUserInfoDisplay : changeUserInfoDisplay}
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
-          iconName={imgIcon}
+          iconName={personal}
           color={color}
         >
           <span style={titleStyle}>{titleContent || '首页'}</span>
