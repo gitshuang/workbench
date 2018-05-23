@@ -176,7 +176,7 @@ class Userinfo extends Component {
                 : null
               }
               {
-                admin && allowExit === '0' ? null : 
+                admin || allowExit === '0' ? null : 
                 <li>
                   <Button shape="border" onClick={this.props.openExitModal} >
                     <Icon type="staff" />{"退出" + titleType}
