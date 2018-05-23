@@ -117,7 +117,7 @@ class CreateTeam extends Component {
 
   checkForm = (flag, data) => {
     const { createTeam } = this.props;
-    const { logo, tenantIndustry, tenantId, address, tenantAddress, joinPermission, invitePermission, allowExit, watermark } = this.state;
+    const { logo, tenantIndustry, tenantId, address, tenantAddress, joinPermission, invitePermission, allowExit, isWaterMark } = this.state;
 
     let _logo = data.find((da) => da.name == "logo");
     if (!_logo.value && _logo.value == "") {
@@ -138,9 +138,9 @@ class CreateTeam extends Component {
     if (!_allowExit.value && _allowExit.value == "") {
       _allowExit.value = allowExit;
     }
-    let _watermark = data.find((da) => da.name == "watermark");
+    let _watermark = data.find((da) => da.name == "isWaterMark");
     if (!_watermark.value && _watermark.value == "") {
-      _watermark.value = watermark;
+      _watermark.value = isWaterMark;
     }
     if (flag) {
       this.setState({
@@ -190,7 +190,7 @@ class CreateTeam extends Component {
 
   watermarkChange = (value) => {
     this.setState({
-      watermark: value
+      isWaterMark : value
     })
   }
 
@@ -208,7 +208,7 @@ class CreateTeam extends Component {
   }
 
   render() {
-    const { tenantName, logo, tenantNature, allowExit, watermark, tenantEmail, tenantTel, tenantAddress,
+    const { tenantName, logo, tenantNature, allowExit, isWaterMark, tenantEmail, tenantTel, tenantAddress,
       tenantIndustry, invitePermission, joinPermission, address } = this.state;
     let newTenantAddress = "";
     if (tenantAddress) {
@@ -259,14 +259,14 @@ class CreateTeam extends Component {
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>允许用户退出<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
-              <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit ? allowExit : "0"}>
+              <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || "0"}>
                 <Radio value="0" >禁止</Radio>
                 <Radio value="1" >允许</Radio>
               </Radio.RadioGroup>
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>通讯录显示水印<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
-              <Radio.RadioGroup name="watermark" onChange={this.watermarkChange} selectedValue={watermark || "0"}>
+              <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark || "1"}>
                 <Radio value="0" >禁止</Radio>
                 <Radio value="1" >允许</Radio>
               </Radio.RadioGroup>
