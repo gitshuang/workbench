@@ -18,7 +18,7 @@
       "joinPermission": "1",
       "allowExit": "0",
       "tenantSize": null,
-      "subordinateType": "2",
-      "isWaterMark": "1"
+      "subordinateType": 2,
+      "isWaterMark": 1
   }
 }
