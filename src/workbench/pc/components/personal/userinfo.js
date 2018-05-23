@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 
-import { connect } from 'react-redux';
-
 import Button from 'pub-comp/button';
 import Icon from 'pub-comp/icon';
 

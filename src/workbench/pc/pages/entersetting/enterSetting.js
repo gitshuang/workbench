@@ -514,12 +514,12 @@ class CreateEnter extends Component {
         >
           <Select
             name="subordinateType"
-            defaultValue={2}
+            defaultValue={0}
             value={subordinateType}
             style={{ width: 338, marginRight: 6 }}
             onChange={(e) => { this.setOptherData({ name: 'subordinateType', value: e }); }}
           >
-            <Option value={2}>根据组织机构负责人显示上下级 </Option>
+            <Option value={0}>根据组织机构负责人显示上下级 </Option>
             <Option value={1}>根据导入的上下级关系显示上下级</Option>
           </Select>
         </FormItem>
