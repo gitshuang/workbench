@@ -20,7 +20,7 @@ import SubmitBtn from './SubmitBtn';
 import { enterForm, lxrHr, lxrTitle, progressBar } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { setCreateEnter, getEnterInfo } = homeActions;
+const { setCreateEnter } = homeActions;
 const { Option } = Select;
 
 @withRouter
@@ -37,7 +37,6 @@ const { Option } = Select;
     requestSuccess,
     requestError,
     setCreateEnter,
-    getEnterInfo,
   },
 )
 class CreateEnter extends Component {
@@ -134,7 +133,6 @@ class CreateEnter extends Component {
     if (!data.tenantTel || data.tenantTel === '') {
       data.tenantTel = userInfo.userMobile;
     }
-
     this.setState({
       ...data,
     });
@@ -178,10 +176,10 @@ class CreateEnter extends Component {
       tenantId,
       address,
       joinPermission,
-      highANDlower,
+      subordinateType,
       invitePermission,
       allowExit,
-      watermark,
+      isWaterMark,
       tenantTel,
       tenantSize,
       linkman,
@@ -210,9 +208,9 @@ class CreateEnter extends Component {
       JoinPermission.value = joinPermission;
     }
 
-    const HighANDlower = data.find(da => da.name === 'highANDlower');
-    if (!HighANDlower.value && HighANDlower.value === '') {
-      HighANDlower.value = highANDlower;
+    const SubordinateType = data.find(da => da.name === 'subordinateType');
+    if (!SubordinateType.value && SubordinateType.value === '') {
+      SubordinateType.value = subordinateType;
     }
 
     const InvitePermission = data.find(da => da.name === 'invitePermission');
@@ -225,9 +223,9 @@ class CreateEnter extends Component {
       AllowExit.value = allowExit;
     }
 
-    const Watermark = data.find(da => da.name === 'watermark');
+    const Watermark = data.find(da => da.name === 'isWaterMark');
     if (!Watermark.value && Watermark.value === '') {
-      Watermark.value = watermark;
+      Watermark.value = isWaterMark;
     }
 
     const Linkman = data.find(da => da.name === 'linkman');
@@ -291,7 +289,7 @@ class CreateEnter extends Component {
 
   watermarkChange = (value) => {
     this.setState({
-      watermark: value,
+      isWaterMark: value,
     });
   }
 
@@ -312,8 +310,8 @@ class CreateEnter extends Component {
   render() {
     const { btlLabel, updateenter } = this.props;
     const {
-      tenantName, logo, allowExit, watermark, tenantEmail, tenantTel, tenantAddress,
-      tenantIndustry, invitePermission, joinPermission, highANDlower, address, linkman, tenantSize,
+      tenantName, logo, allowExit, isWaterMark, tenantEmail, tenantTel, tenantAddress,
+      tenantIndustry, invitePermission, joinPermission, subordinateType, address, linkman, tenantSize,
       processValue, tenantId,
     } = this.state;
 
@@ -514,18 +512,18 @@ class CreateEnter extends Component {
           inline
         >
           <Select
-            name="highANDlower"
+            name="subordinateType"
             defaultValue="1"
-            value={highANDlower || '1'}
+            value={subordinateType || '2'}
             style={{ width: 338, marginRight: 6 }}
-            onChange={(e) => { this.setOptherData({ name: 'highANDlower', value: e }); }}
+            onChange={(e) => { this.setOptherData({ name: 'subordinateType', value: e }); }}
           >
-            <Option value="0">根据组织机构负责人显示上下级 </Option>
+            <Option value="2">根据组织机构负责人显示上下级 </Option>
             <Option value="1">根据导入的上下级关系显示上下级</Option>
           </Select>
         </FormItem>
         <FormItem showMast={false} labelName={<span>通讯录显示水印<font color="red"> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
-          <Radio.RadioGroup name="watermark" onChange={this.watermarkChange} selectedValue={watermark || '0'}>
+          <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark || '1'}>
             <Radio value="0" >禁止</Radio>
             <Radio value="1" >允许</Radio>
           </Radio.RadioGroup>

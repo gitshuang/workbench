@@ -17,6 +17,8 @@
       "invitePermission": "1",
       "joinPermission": "1",
       "allowExit": "0",
-      "tenantSize":null
+      "tenantSize": null,
+      "subordinateType": "2",
+      "isWaterMark": "1"
   }
 }
