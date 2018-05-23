@@ -99,6 +99,7 @@ class CreateTeam extends Component {
     super(props);
     this.state = {
       disabled: true,
+      isWaterMark: 1,
     }
   }
 
@@ -266,9 +267,9 @@ class CreateTeam extends Component {
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>通讯录显示水印<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
-              <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark || "1"}>
-                <Radio value="0" >禁止</Radio>
-                <Radio value="1" >允许</Radio>
+              <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
+                <Radio value={0} >禁止</Radio>
+                <Radio value={1} >允许</Radio>
               </Radio.RadioGroup>
             </FormItem>
 
