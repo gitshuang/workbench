@@ -13,6 +13,7 @@
         "joinPermission": "1",
         "allowExit": "1",
         "tenantSize": null,
-        "terminal": "web"
+        "terminal": "web",
+        "isWaterMark": "1"
     }
 }
