@@ -28,18 +28,12 @@ function getClipboardData(e) {
 
 function defaultRenderTag(props) {
   const {
-    tag,
-    key,
-    disabled,
-    onRemove,
-    classNameRemove,
-    getTagDisplayValue, ...other
+    tag, key, disabled, onRemove, classNameRemove, getTagDisplayValue, ...other
   } = props;
   return (
     <span key={key} {...other}>
       {getTagDisplayValue(tag)}
-      {!disabled
-        &&
+      {!disabled &&
         <b
           className={classNameRemove}
           onClick={() => onRemove(key)}
@@ -55,18 +49,17 @@ defaultRenderTag.propTypes = {
   key: PropTypes.number,
   tag: PropTypes.string,
   onRemove: PropTypes.func,
-  disabled: PropTypes.bool,
   classNameRemove: PropTypes.string,
   getTagDisplayValue: PropTypes.func,
+  disabled: PropTypes.bool,
 };
-
 defaultRenderTag.defaultProps = {
   key: 0,
   tag: '',
-  onRemove: () => { },
-  disabled: false,
+  onRemove: () => {},
   classNameRemove: '',
-  getTagDisplayValue: () => { },
+  getTagDisplayValue: () => {},
+  disabled: false,
 };
 
 function defaultRenderInput({ addTag, ...props }) {
@@ -107,6 +100,7 @@ const defaultInputProps = {
 };
 
 class TagsInput extends Component {
+  /* istanbul ignore next */
   static propTypes = {
     focusedClassName: PropTypes.string,
     addKeys: PropTypes.arrayOf(PropTypes.oneOfType([
@@ -117,12 +111,8 @@ class TagsInput extends Component {
     addOnPaste: PropTypes.bool,
     currentValue: PropTypes.string,
     inputValue: PropTypes.string,
-    inputProps: PropTypes.shape({
-      onChange: PropTypes.func,
-      onFocus: PropTypes.func,
-      onBlur: PropTypes.func,
-    }),
-    onChange: PropTypes.func,
+    inputProps: PropTypes.object,
+    onChange: PropTypes.func.isRequired,
     onChangeInput: PropTypes.func,
     removeKeys: PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.number,
@@ -132,18 +122,14 @@ class TagsInput extends Component {
     renderTag: PropTypes.func,
     renderLayout: PropTypes.func,
     pasteSplit: PropTypes.func,
-    tagProps: PropTypes.shape({}),
+    tagProps: PropTypes.object,
     onlyUnique: PropTypes.bool,
-    value: PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-    ])),
+    value: PropTypes.array.isRequired,
     maxTags: PropTypes.number,
     validationRegex: PropTypes.instanceOf(RegExp),
     disabled: PropTypes.bool,
     tagDisplayProp: PropTypes.string,
     preventSubmit: PropTypes.bool,
-    onValidationReject: PropTypes.func,
   }
 
   static defaultProps = {
@@ -152,10 +138,6 @@ class TagsInput extends Component {
     addKeys: [9, 13],
     addOnBlur: false,
     addOnPaste: false,
-    currentValue: '',
-    inputValue: '',
-    onChange: () => { },
-    onChangeInput: () => { },
     inputProps: {},
     removeKeys: [8],
     renderInput: defaultRenderInput,
@@ -164,13 +146,11 @@ class TagsInput extends Component {
     pasteSplit: defaultPasteSplit,
     tagProps: { className: 'react-tagsinput-tag', classNameRemove: 'react-tagsinput-remove' },
     onlyUnique: false,
-    value: [],
     maxTags: -1,
     validationRegex: /.*/,
     disabled: false,
     tagDisplayProp: null,
     preventSubmit: true,
-    onValidationReject: () => { },
   }
 
   constructor(props) {
@@ -210,7 +190,7 @@ class TagsInput extends Component {
     });
   }
 
-  getTagDisplayValue(tag) {
+  _getTagDisplayValue(tag) {
     const { tagDisplayProp } = this.props;
 
     if (tagDisplayProp) {
@@ -220,7 +200,7 @@ class TagsInput extends Component {
     return tag;
   }
 
-  makeTagFun(tag) {
+  _makeTag(tag) {
     const { tagDisplayProp } = this.props;
 
     if (tagDisplayProp) {
@@ -232,7 +212,7 @@ class TagsInput extends Component {
     return tag;
   }
 
-  removeTagFun(index) {
+  _removeTag(index) {
     const value = this.props.value.concat([]);
     if (index > -1 && index < value.length) {
       const changed = value.splice(index, 1);
@@ -240,7 +220,7 @@ class TagsInput extends Component {
     }
   }
 
-  clearInputFun() {
+  _clearInput() {
     if (this.hasControlledInput()) {
       this.props.onChangeInput('');
     } else {
@@ -248,7 +228,7 @@ class TagsInput extends Component {
     }
   }
 
-  tagFun() {
+  _tag() {
     if (this.hasControlledInput()) {
       return this.props.inputValue;
     }
@@ -256,22 +236,21 @@ class TagsInput extends Component {
     return this.state.tag;
   }
 
-  addTagsFun(tags) {
+  _addTags(tags) {
     const {
       validationRegex, onChange, onValidationReject, onlyUnique, maxTags, value,
     } = this.props;
 
     if (onlyUnique) {
       tags = uniq(tags);
-      tags = tags.filter(tag =>
-        value.every(currentTag =>
-          this.getTagDisplayValue(currentTag) !== this.getTagDisplayValue(tag)));
+      tags = tags.filter(tag => value.every(currentTag =>
+        this._getTagDisplayValue(currentTag) !== this._getTagDisplayValue(tag)));
     }
 
-    const rejectedTags = tags.filter(tag => !validationRegex.test(this.getTagDisplayValue(tag)));
-    tags = tags.filter(tag => validationRegex.test(this.getTagDisplayValue(tag)));
+    const rejectedTags = tags.filter(tag => !validationRegex.test(this._getTagDisplayValue(tag)));
+    tags = tags.filter(tag => validationRegex.test(this._getTagDisplayValue(tag)));
     tags = tags.filter((tag) => {
-      const tagDisplayValue = this.getTagDisplayValue(tag);
+      const tagDisplayValue = this._getTagDisplayValue(tag);
       if (typeof tagDisplayValue.trim === 'function') {
         return tagDisplayValue.trim().length > 0;
       }
@@ -290,11 +269,11 @@ class TagsInput extends Component {
     if (tags.length > 0) {
       const newValue = value.concat(tags);
       const indexes = [];
-      for (let i = 0; i < tags.length; i += 1) {
+      for (let i = 0; i < tags.length; i++) {
         indexes.push(value.length + i);
       }
       onChange(newValue, tags, indexes);
-      this.clearInputFun();
+      this._clearInput();
       return true;
     }
 
@@ -302,17 +281,17 @@ class TagsInput extends Component {
       return false;
     }
 
-    this.clearInputFun();
+    this._clearInput();
     return false;
   }
 
-  shouldPreventDefaultEventOnAdd(added, empty, keyCode) {
+  _shouldPreventDefaultEventOnAdd(added, empty, keyCode) {
     if (added) {
       return true;
     }
 
     if (keyCode === 13) {
-      return (this.props.preventSubmit || (!this.props.preventSubmit && !empty));
+      return (this.props.preventSubmit || !this.props.preventSubmit && !empty);
     }
 
     return false;
@@ -335,22 +314,22 @@ class TagsInput extends Component {
   }
 
   accept() {
-    let tag = this.tagFun();
+    let tag = this._tag();
 
     if (tag !== '') {
-      tag = this.makeTagFun(tag);
-      return this.addTagsFun([tag]);
+      tag = this._makeTag(tag);
+      return this._addTags([tag]);
     }
 
     return false;
   }
 
   addTag(tag) {
-    return this.addTagsFun([tag]);
+    return this._addTags([tag]);
   }
 
   clearInput() {
-    this.clearInputFun();
+    this._clearInput();
   }
 
   handlePaste(e) {
@@ -363,9 +342,9 @@ class TagsInput extends Component {
     e.preventDefault();
 
     const data = getClipboardData(e);
-    const tags = pasteSplit(data).map(tag => this.makeTagFun(tag));
+    const tags = pasteSplit(data).map(tag => this._makeTag(tag));
 
-    this.addTagsFun(tags);
+    this._addTags(tags);
   }
 
   handleKeyDown(e) {
@@ -374,22 +353,23 @@ class TagsInput extends Component {
     }
 
     const { value, removeKeys, addKeys } = this.props;
-    const tag = this.tagFun();
+    const tag = this._tag();
     const empty = tag === '';
-    const { keyCode, key } = e;
+    const keyCode = e.keyCode;
+    const key = e.key;
     const add = addKeys.indexOf(keyCode) !== -1 || addKeys.indexOf(key) !== -1;
     const remove = removeKeys.indexOf(keyCode) !== -1 || removeKeys.indexOf(key) !== -1;
 
     if (add) {
       const added = this.accept();
-      if (this.shouldPreventDefaultEventOnAdd(added, empty, keyCode)) {
+      if (this._shouldPreventDefaultEventOnAdd(added, empty, keyCode)) {
         e.preventDefault();
       }
     }
 
     if (remove && value.length > 0 && empty) {
       e.preventDefault();
-      this.removeTagFun(value.length - 1);
+      this._removeTag(value.length - 1);
     }
   }
 
@@ -439,18 +419,18 @@ class TagsInput extends Component {
     }
 
     if (this.props.addOnBlur) {
-      const tag = this.makeTagFun(e.target.value);
-      this.addTagsFun([tag]);
+      const tag = this._makeTag(e.target.value);
+      this._addTags([tag]);
     }
   }
 
   handleRemove(tag) {
-    this.removeTagFun(tag);
+    this._removeTag(tag);
   }
 
   inputProps() {
     // eslint-disable-next-line
-    let { onChange, onFocus, onBlur, ...otherInputProps } = this.props.inputProps;
+    let { onChange, onFocus, onBlur, ...otherInputProps } = this.props.inputProps
 
     const props = {
       ...defaultInputProps,
@@ -464,14 +444,15 @@ class TagsInput extends Component {
     return props;
   }
 
-  inputValue = props => props.currentValue || props.inputValue || '';
+  inputValue(props) {
+    return props.currentValue || props.inputValue || '';
+  }
 
   hasControlledInput() {
     const { inputValue, onChangeInput } = this.props;
 
     return typeof onChangeInput === 'function' && typeof inputValue === 'string';
   }
-
 
   render() {
     /* eslint-disable */
@@ -504,41 +485,32 @@ class TagsInput extends Component {
     const { isFocused } = this.state;
 
     if (isFocused) {
-      className = `${className}' '${focusedClassName}`;
+      className += ` ${focusedClassName}`;
     }
 
-    const tagComponents = value.map((tag, index) => {
-      const onRemoveFun = () => { this.handleRemove(); };
-      return renderTag({
-        key: index,
-        tag,
-        onRemove: onRemoveFun,
-        disabled,
-        getTagDisplayValue: this.getTagDisplayValue,
-        ...tagProps,
-      });
-    });
+    const tagComponents = value.map((tag, index) => renderTag({
+      key: index,
+      tag,
+      onRemove: this.handleRemove.bind(this),
+      disabled,
+      getTagDisplayValue: this._getTagDisplayValue.bind(this),
+      ...tagProps,
+    }));
 
     const inputComponent = renderInput({
       ref: (r) => { this.input = r; },
-      value: this.tagFun(),
-      onPaste: this.handlePaste,
-      onKeyDown: this.handleKeyDown,
-      onChange: this.handleChange,
-      onFocus: this.handleOnFocus,
-      onBlur: this.handleOnBlur,
-      addTag: this.addTag,
+      value: this._tag(),
+      onPaste: this.handlePaste.bind(this),
+      onKeyDown: this.handleKeyDown.bind(this),
+      onChange: this.handleChange.bind(this),
+      onFocus: this.handleOnFocus.bind(this),
+      onBlur: this.handleOnBlur.bind(this),
+      addTag: this.addTag.bind(this),
       ...this.inputProps(),
     });
 
     return (
-      <div
-        ref={(r) => { this.div = r; }}
-        onClick={() => { this.handleClick(); }}
-        onKeyDown={() => { this.handleClick(); }}
-        className={className}
-        role="presentation"
-      >
+      <div ref={(r) => { this.div = r; }} onClick={this.handleClick.bind(this)} className={className}>
         {renderLayout(tagComponents, inputComponent)}
       </div>
     );

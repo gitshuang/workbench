@@ -2,14 +2,12 @@ import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import { mapStateToProps } from '@u';
-import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import { withRouter } from 'react-router-dom';
 import Icon from 'pub-comp/icon';
 import { connect } from 'react-redux';
 import searchActions from 'store/root/search/actions';
-import SearchResult from 'containers/searchResult'
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
-import { trigger } from 'public/componentTools';
+import { dispatch, trigger } from 'public/componentTools';
 import SearchItem from 'components/searchItem';
 
 import {
@@ -29,11 +27,9 @@ import {
   showheight,
   searchBtnAll,
 } from './style.css';
-import _default_icon from 'assets/image/wgt/default.png';
-import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
 import rootActions from 'store/root/actions';
-const {getSearchSuggest} = searchActions;
-const {requestStart, requestSuccess, requestError} = rootActions;
+const { getSearchSuggest } = searchActions;
+const { requestStart, requestSuccess, requestError } = rootActions;
 
 
 @connect(
@@ -60,7 +56,7 @@ class SearchContainer extends Component {
       isShow: false,
       isSearchWinShow: false,
       nosearchdata: false,
-      SearchSuggestList:[]
+      SearchSuggestList: []
     };
     this.search = this.search.bind(this);
     this.searchMin = this.searchMin.bind(this);
@@ -77,7 +73,7 @@ class SearchContainer extends Component {
     this.props.history.push(`/search/searchvalue/${value}`);
   }
 
-  getSearchList(keyworks){
+  getSearchList(keyworks) {
     const {
       requestStart,
       requestSuccess,
@@ -85,21 +81,21 @@ class SearchContainer extends Component {
       getSearchSuggest,
     } = this.props;
     // if(this.state.allApplicationList.length == 0){
-      //requestStart();
-      getSearchSuggest(keyworks).then(({error, payload}) => {
-        if (error) {
-          requestError(payload);
-        }
-        requestSuccess();
-        if(payload.length<1){
-          this.setState({
-            nosearchdata:true
-          })
-        }
+    //requestStart();
+    getSearchSuggest(keyworks).then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      }
+      requestSuccess();
+      if (payload.length < 1) {
         this.setState({
-          SearchSuggestList:payload
+          nosearchdata: true
         })
-      });
+      }
+      this.setState({
+        SearchSuggestList: payload
+      })
+    });
     // }
   }
   onChangeHandler(e) {
@@ -107,14 +103,14 @@ class SearchContainer extends Component {
     this.setState({
       text: e.target.value
     })
-    if( e.target.value==""){
+    if (e.target.value == "") {
       this.setState({
-        isSearchWinShow:false
+        isSearchWinShow: false
       })
-    }else{
-      setTimeout(function(){
+    } else {
+      setTimeout(function () {
         _this.searchMin()
-      },0)
+      }, 0)
     }
   }
   onKeyup = (e) => {
@@ -123,16 +119,16 @@ class SearchContainer extends Component {
   handleClickOutside(evt) {
     const _this = this;
     const { isShow } = _this.state;
-    if(isShow){
-      setTimeout(function(){
+    if (isShow) {
+      setTimeout(function () {
         _this.setState({
           isShow: false,
           text: '',
         })
-      },500)
+      }, 500)
     }
     const { isSearchWinShow } = _this.state;
-    if(isSearchWinShow){
+    if (isSearchWinShow) {
       _this.setState({
         isSearchWinShow: false,
       })
@@ -150,7 +146,7 @@ class SearchContainer extends Component {
   search() {
     const { isShow, text, isSearchWinShow } = this.state;
     if (isShow && text) {
-     this.goSearchPage();
+      this.goSearchPage();
     } else if (isShow) {
       this.setState({
         isShow: false,
@@ -166,23 +162,24 @@ class SearchContainer extends Component {
   clearInput = () => {
     this.setState({
       text: '',
+      isSearchWinShow: false
     })
   }
-  goDetail(type,item){
+  goDetail(type, item) {
     return (e) => {
       e.stopPropagation();
-      let code = "",_type="";
-      if(item.serviceId){
+      let code = "", _type = "";
+      if (item.serviceId) {
         code = item.serviceCode;
         _type = "service";
-      }else{
+      } else {
         code = item.applicationCode;
         _type = "app";
       }
-      this.props.history.push('/'+_type+'/'+code);
+      this.props.history.push('/' + _type + '/' + code);
     }
   }
-  goemailDetail({ id, userId, name, tenantId }){
+  goemailDetail({ id, userId, name, tenantId }) {
     return (e) => {
       e.stopPropagation();
       dispatchMessageTypeHandler({
@@ -190,7 +187,7 @@ class SearchContainer extends Component {
         detail: {
           serviceCode: 'XTWEIYOU0000000000',
           data: {
-            genre:4,
+            genre: 4,
             fromDiworkAddressList: `${name}---${userId}---${tenantId}`,
           },
         }
@@ -206,7 +203,7 @@ class SearchContainer extends Component {
     }
   }
 
-  goAddress = (actibe,item) => {
+  goAddress = (actibe, item) => {
     const { id, name, userId, tenantId } = this.props;
     dispatchMessageTypeHandler({
       type: 'openService',
@@ -221,19 +218,19 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const { isShow, text, isSearchWinShow, SearchSuggestList,nosearchdata} = this.state;
-    const {color} = this.props;
+    const { isShow, text, isSearchWinShow, SearchSuggestList, nosearchdata } = this.state;
+    const { color } = this.props;
     let inputWrap, searchWin;
     const dataList = SearchSuggestList.map(({ typeName, content, type, renderUrl }, i) => {
       return (
         <div className={searchWindom} key={`type${i}`}>
-          <h3>{ typeName } </h3>
+          <h3>{typeName} </h3>
           <ul>
             {
               content.map((item, j) => {
                 return (
                   <li key={`item${j}`}>
-                    <SearchItem data={item} type={type} url={renderUrl} from="quick"/>
+                    <SearchItem dispatch={dispatch} trigger={trigger} data={item} type={type} url={renderUrl} from="quick" />
                   </li>
                 );
               })
@@ -244,14 +241,14 @@ class SearchContainer extends Component {
     });
     if (isShow) {
       inputWrap = (
-        <div className={inputArea}  style={{borderColor:color}}>
+        <div className={inputArea} style={{ borderColor: color }}>
           <input
             className={searchText}
             type="text"
             value={text}
             onChange={this.onChangeHandler}
             placeholder="搜索人员信息、应用、服务及其他内容"
-            style={{color:color}}
+            style={{ color: color }}
             autoFocus={true}
             onKeyDown={this.onKeyup}
           />
@@ -259,10 +256,10 @@ class SearchContainer extends Component {
       );
 
       searchWin = (
-        <div className={`${SearchWin} ${isSearchWinShow? showheight : ''}`} >
-            <div className={`${searchContent}`}>
-              { dataList }
-            </div>
+        <div className={`${SearchWin} ${isSearchWinShow ? showheight : ''}`} >
+          <div className={`${searchContent}`}>
+            {dataList}
+          </div>
           {
             nosearchdata ? (
               <em>没有搜索结果</em>
@@ -274,18 +271,18 @@ class SearchContainer extends Component {
     }
 
     return (
-      <div className={`${search} ${isShow? searchExtend : ''}`}  style={{borderColor:color}}>
+      <div className={`${search} ${isShow ? searchExtend : ''}`} style={{ borderColor: color }}>
         {inputWrap}
         {searchWin}
         {
           isShow && text ? (
-            <div className={clearSearch}  onClick={this.clearInput}>
-              <Icon title="清空" type="error3"/>
+            <div className={clearSearch} onClick={this.clearInput}>
+              <Icon title="清空" type="error3" />
             </div>
           ) : null
         }
         <div className={`tc ${searchBtn}`} onClick={this.search}>
-          <Icon title="搜索" type="search" style={{color:color}} />
+          <Icon title="搜索" type="search" style={{ color: color }} />
         </div>
       </div>
     );
