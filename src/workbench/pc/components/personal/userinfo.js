@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 
 import Button from 'pub-comp/button';
 import Icon from 'pub-comp/icon';
-import EnterOption from 'containers/enterOption';
 
 import Href from './href';
 
@@ -50,7 +49,6 @@ class Userinfo extends Component {
 
   gotoConfig = () => {
     const { titleType } = this.props;
-    debugger;
     if (titleType === '企业') { // 企业
       this.skipRouter('/entersetting/home');
     } else { // 团队
