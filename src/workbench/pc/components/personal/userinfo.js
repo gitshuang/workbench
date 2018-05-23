@@ -22,9 +22,11 @@ import {
 class Userinfo extends Component {
   static propTypes = {
     editType: PropTypes.bool,
+    requestDisplay: PropTypes.bool,
   };
   static defaultProps = {
-    editType: true
+    editType: true,
+    requestDisplay: false,
   };
   constructor(props) {
     super(props);
