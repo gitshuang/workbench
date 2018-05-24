@@ -16,5 +16,5 @@ function gitBackgroundIcon() {
 }
 
 export {
-  gitBackgroundIcon
+  gitBackgroundIcon,
 };

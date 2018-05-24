@@ -10,6 +10,14 @@ import {
 } from './style.css';
 
 class Personal extends Component {
+  static propTypes = {
+    userInfo: PropTypes.shape({
+      userAvator: PropTypes.string,
+    }),
+  };
+  static defaultProps = {
+    userInfo: {},
+  };
   constructor(props) {
     super(props);
     this.bgColor = gitBackgroundIcon();
@@ -22,7 +30,7 @@ class Personal extends Component {
     const { userInfoDisplay } = this.state;
     if (userInfoDisplay) {
       this.closePersonalModal();
-    }else {
+    } else {
       this.openPersonalModal();
     }
   }
@@ -41,16 +49,23 @@ class Personal extends Component {
 
   render() {
     const { userInfoDisplay } = this.state;
-    const { 
-      userInfo:{
-        userAvator
-      }
+    const {
+      userInfo: {
+        userAvator,
+      },
     } = this.props;
     return (
       <div style={{ width: '100%', height: '100%' }}>
         {
           userAvator
-          ? <img alt="" src={userAvator} className={personalImg} onClick={this.handerClick} />
+          ? <img
+            alt={userAvator}
+            src={userAvator}
+            className={personalImg}
+            onClick={this.handerClick}
+            onKeyDown={this.handerClick}
+            role="presentation"
+          />
           : <Icon type="staff" className={personalImg} onClick={this.handerClick} />
         }
         <TransitionGroup>

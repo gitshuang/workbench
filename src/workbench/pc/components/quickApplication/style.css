@@ -121,7 +121,7 @@
   position: relative;
 }
 
-.link_cont{
+.linkCont{
   position: absolute;
   z-index: 9;
   z-index: 9;
@@ -133,7 +133,7 @@
   cursor: pointer;
   color: rgba(0,122,206,1);
 }
-.link_cont a{
+.linkCont a{
   font-size: 12px;
 }
 .btn {
