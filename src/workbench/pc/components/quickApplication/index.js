@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import Icon from 'pub-comp/icon';
 import Applications from './applications';
 
@@ -16,6 +17,15 @@ class QuickApplication extends Component {
     };
   }
 
+  handerClick = () => {
+    const { quickServiceDisplay } = this.state;
+    if (quickServiceDisplay) {
+      this.closeServiceModal();
+    }else {
+      this.openServiceModal();
+    }
+  }
+
   openServiceModal = () => {
     this.setState({
       quickServiceDisplay: true,
@@ -30,22 +40,35 @@ class QuickApplication extends Component {
 
   render() {
     const { quickServiceDisplay } = this.state;
-    // const { serviceList, openServiceFn, openAllFn } = this.props;
     const appClass = quickServiceDisplay ? active : "";
     return (
       <div>
-        <div className={`${appClass} ${aBtn}`} onClick={this.openServiceModal} >
+        <div className={`${appClass} ${aBtn}`} onClick={this.handerClick}>
           <Icon title="快捷应用" type="application" />
         </div>
-        {
-          quickServiceDisplay
-          ? <Applications 
-              quickServiceDisplay={quickServiceDisplay} 
-              closeServiceModal={this.closeServiceModal}
-              {...this.props}
-            />
-          : null
-        }
+        <TransitionGroup>
+          <CSSTransitionGroup
+            transitionName={{
+              enter: 'animated',
+              enterActive: 'fadeIn',
+              leave: 'animated',
+              leaveActive: 'fadeOut',
+            }}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            {
+              quickServiceDisplay
+              ? <Applications 
+                  quickServiceDisplay={quickServiceDisplay} 
+                  closeServiceModal={this.closeServiceModal}
+                  outsideClickIgnoreClass={aBtn}
+                  {...this.props}
+                />
+              : null
+            }
+          </CSSTransitionGroup>
+        </TransitionGroup>
       </div>
     );
   }
