@@ -14,11 +14,7 @@ import {
 @onClickOutside
 class Applications extends Component {
   static propTypes = {
-    serviceList: PropTypes.arrayOf({
-      applicationCode: PropTypes.string,
-      applicationIcon: PropTypes.string,
-      applicationName: PropTypes.string,
-    }),
+    serviceList: PropTypes.arrayOf(PropTypes.object),
     closeServiceModal: PropTypes.func,
     openAllFn: PropTypes.func,
     openServiceFn: PropTypes.func,
