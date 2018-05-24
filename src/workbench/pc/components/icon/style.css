@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'xingychb';
+  src:  url(./fonts/icomoon.eot);
+  src:  url(./fonts/icomoon.eot) format('embedded-opentype'),
+    /* url('fonts/icomoon.woff2') format('woff2'), */
+    url(./fonts/icomoon.ttf) format('truetype'),
+    url(./fonts/icomoon.woff) format('woff'),
+    url(./fonts/icomoon.svg) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.iconfont {
+  /* use !important to prevent issues with browser extensions that change ./fonts */
+  font-family: 'xingychb';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-application:before {
+  content: "\e908";
+}
+.icon-staff:before{
+  content: "\e943";
+}
+.icon-group:before {
+  content: "\e944";
+}
+.icon-exit:before {
+  content: "\e991";
+}
+.icon-copyreader:before {
+  content: "\e92d";
+}
+.icon-record:before {
+  content: "\e938";
+}
+.icon-role-management:before {
+  content: "\e983";
+}
+.icon-add-friends:before {
+  content: "\e906";
+}
+.icon-setting:before {
+  content: "\e93e";
+}
