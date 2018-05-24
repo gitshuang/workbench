@@ -9,7 +9,7 @@ import Menu from 'bee/menus';
 import Tabs, { TabPane } from 'bee/tabs';
 import Pagination from 'bee/pagination';
 import EnhancedPagination from 'pub-comp/enhancedPagination';
-import SearchItem from 'components/searchItem';
+import SearchItem from 'components/search';
 
 import {
   bg,
