@@ -4,6 +4,8 @@
   line-height: 32px;
   position: relative;
   cursor: pointer;
+  text-align: center;
+  margin-right: 15px;
 }
 .aBtn i:hover{
   color:#2D3F5D;
