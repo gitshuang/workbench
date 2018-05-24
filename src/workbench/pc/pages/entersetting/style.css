@@ -215,5 +215,11 @@
 .progressBar {
   position: relative;
   margin-left: 90px;
-  height: 90px;
+  width: 338px;
+  padding-bottom: 30px;
+}
+:global(.u-progress-bar){
+  background-color: #e14b46;
+  line-height: 32px;
+  font-size: 12px;
 }
