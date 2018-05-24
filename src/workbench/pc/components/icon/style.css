@@ -52,3 +52,9 @@
 .icon-setting:before {
   content: "\e93e";
 }
+.icon-error3:before {
+  content: "\e973";
+}
+.icon-search:before {
+  content: "\e93a";
+}

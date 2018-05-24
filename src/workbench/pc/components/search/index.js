@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'pub-comp/icon';
+import Icon from 'components/icon';
 import SearchItem from './searchItem';
 import {
   search,
