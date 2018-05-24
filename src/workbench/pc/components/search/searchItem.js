@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loading from 'bee/loading';
-import {
-  dispatch,
-  trigger,
-} from 'public/componentTools';
-
+import Loading from 'components/loading';
 import Normal from './normal';
 
 const searchItemClassMap = {};
@@ -65,7 +60,7 @@ function getFetch(url) {
   });
 }
 
-function getResult(text) {
+function getResult(text, dispatch, trigger) {
   // eslint-disable-next-line
   const fn = new Function(
     'React',
@@ -82,12 +77,12 @@ function getResult(text) {
   return result.default || result;
 }
 
-function getData({ url, type }) {
+function getData({ url, type, dispatch, trigger }) {
   const searchItemClass = searchItemClassMap[type];
   if (typeof searchItemClass === "undefined") {
     searchItemClassMap[type] = getFetch(url).then((text) => {
       try {
-        searchItemClassMap[type] = getResult(text);
+        searchItemClassMap[type] = getResult(text, dispatch, trigger);
         return Promise.resolve(true);
       } catch (e) {
         return Promise.reject(e);
@@ -127,9 +122,11 @@ class SearchItemWrap extends Component {
     const {
       url,
       type,
+      dispatch,
+      trigger,
     } = this.props;
     if (url) {
-      getData({ url, type }).then(() => {
+      getData({ url, type, dispatch, trigger }).then(() => {
         this.setState({
           loaded: true,
         });
