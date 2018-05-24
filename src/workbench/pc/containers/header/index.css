@@ -27,6 +27,7 @@
   line-height: 32px;
   position: relative;
   cursor: pointer;
+  text-align: center;
 }
 :global(.lebra-navbar-right) :global(.iconfont){
   font-size:20px;
