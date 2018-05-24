@@ -5,6 +5,9 @@
   position: relative;
   cursor: pointer;
 }
+.aBtn i:hover{
+  color:#2D3F5D;
+}
 .active i{
   color: #e14c46 !important;
 }
