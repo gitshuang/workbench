@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-
-import Button from 'pub-comp/button';
-import Icon from 'pub-comp/icon';
+import Icon from 'components/icon';
+import Button from 'components/button';
 
 import Href from './href';
-
-
 import {
   wrap, imgUser, imgOuter, imgInner, clearfix, userBtnList,
   defaultPic, logOut, tenantArea, tenantPortrait, tenantName,
   tenantDescribe, companyType, teamBtnList, userSetting, userInfoPane,
   popconfirm, popconfirm_content, new_name, hiden, show, linkSetting, enter_setting,
 } from './style.css';
-
 
 @onClickOutside
 class Userinfo extends Component {
