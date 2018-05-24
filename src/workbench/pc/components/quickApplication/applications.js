@@ -79,7 +79,7 @@ class Applications extends Component {
           }
           _top += 3;
         }
-      }, 10)
+      }, 10);
     }
   }
 
@@ -89,12 +89,12 @@ class Applications extends Component {
     if (div.scrollHeight == div.clientHeight + scrollTop) {
       this.setState({
         openAllstate: true
-      })
+      });
     } else {
       if (scrollTop <= 10) {
         this.setState({
           openAllstate: false
-        })
+        });
       }
     }
   }
