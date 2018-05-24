@@ -113,11 +113,11 @@ class HeaderContainer extends Component {
         openAllFn={this.openAllFn} 
         openServiceFn={this.openServiceFn} 
       />,
-      <div ref="IM" className={`${imClass} ${rightBtn}`} style={{ marginRight: "25px" }} onClick={this.toggleIM}>
+      <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
-      <div className={`${rightBtn}`} style= {{"display":portalEnable ? "block": "none"}}>
+      <div className={`${rightBtn}`} style= {{marginLeft: "20px","display":portalEnable ? "inline-block": "none"}}>
         <a href={`http://ec.diwork.com/`} target="_blank" style={{ "textDecoration": "none" }}>
           <Icon title="我的门户" type="change" style={{ color }} />
         </a>
