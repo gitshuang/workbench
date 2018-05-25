@@ -53,6 +53,7 @@ class Personal extends Component {
       userInfo: {
         userAvator,
       },
+      requestDisplay
     } = this.props;
     return (
       <div style={{ width: '100%', height: '100%' }}>
@@ -80,7 +81,7 @@ class Personal extends Component {
             transitionLeaveTimeout={300}
           >
             {
-              userInfoDisplay
+              userInfoDisplay || requestDisplay
               ? <Userinfo
                 bgColor={this.bgColor}
                 userInfoDisplay={userInfoDisplay}
