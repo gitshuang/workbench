@@ -124,6 +124,28 @@ class HeaderPage extends Component {
           msg: '退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
         }
       ],
+      routers:{
+        openEntersetting: '/entersetting/home',
+        openTeamconfig: '/teamconfig',
+        openAccount: '/account',
+        openManage: '/manage',
+        openUserinfo: '/userinfo',
+        openInvitation: '/invitation',
+      },
+      hrefs: [
+        {
+          href:`${getHost('org')}/download/download.html`,
+          name:"下载客户端"
+        },
+        {
+          href:`https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ`,
+          name:"问题与反馈"
+        },
+        {
+          href:`${getHost('cloundyy')}`,
+          name:"用友云官网"
+        },
+      ]
     };
   }
 
@@ -258,9 +280,16 @@ class HeaderPage extends Component {
     closeRequestDisplay();
   }
 
-  skipRouter = (path) => {
+  openNewRouter = (path) => {
     const { history } = this.props;
     history.push(path);
+  }
+
+  dispatch = (action) => {
+    const { routers } = this.state;
+    if(routers[action]){
+      this.openNewRouter(routers[action]);
+    }
   }
 
   openExitModal = () => {
@@ -307,22 +336,8 @@ class HeaderPage extends Component {
     //   imgIcon = <Icon type="staff" />;
     // }
     const { tenantid } = window.diworkContext();
-    const hrefs = [
-      {
-        href:`${getHost('org')}/download/download.html`,
-        name:"下载客户端"
-      },
-      {
-        href:`https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ`,
-        name:"问题与反馈"
-      },
-      {
-        href:`${getHost('cloundyy')}`,
-        name:"用友云官网"
-      },
-    ];
     const titleType = this.getCompanyType();
-    const { TeamData } = this.state;
+    const { TeamData, hrefs } = this.state;
     const CurrData = titleType == "企业" ? TeamData[0] : TeamData[1];
     const personal = <Personal 
       userInfo = {userInfo}
@@ -330,7 +345,7 @@ class HeaderPage extends Component {
       exitModal = {exitModal}
       closeRequestDisplay = {() => { this.closeRequestDisplay(); }}
       openExitModal = {this.openExitModal}
-      skipRouter = { this.skipRouter }
+      dispatch = { this.dispatch }
       titleType = {titleType}
       hrefs = {hrefs}
       logout = {logout}

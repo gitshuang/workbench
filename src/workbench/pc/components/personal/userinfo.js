@@ -17,11 +17,11 @@ class Userinfo extends Component {
   static propTypes = {
     editType: PropTypes.bool,
     requestDisplay: PropTypes.bool,
+    bgColor: PropTypes.string,
     userInfoDisplay: PropTypes.bool,
     exitModal: PropTypes.bool,
-    bgColor: PropTypes.string,
     closePersonalModal: PropTypes.func,
-    skipRouter: PropTypes.func,
+    dispatch: PropTypes.func,
     logout: PropTypes.func,
     titleType: PropTypes.string,
     userInfo: PropTypes.shape({
@@ -36,16 +36,27 @@ class Userinfo extends Component {
     hrefs: PropTypes.arrayOf(PropTypes.object),
   };
   static defaultProps = {
+    // 是否显示首页编辑选项  默认为true
     editType: true,
+    // 是否为创建成功团队或者企业显示的
     requestDisplay: false,
-    userInfoDisplay: false,
-    exitModal: false,
+    // 团队或者企业的头像背景色
     bgColor: 'RGBA(228, 97, 92, 1)',
+    // 是否显示个人中心弹层
+    userInfoDisplay: false,
+    // 是否打开了退出团队和企业的弹窗
+    exitModal: false,
+    // 关闭弹窗方法   组件内部调用
     closePersonalModal: () => {},
-    skipRouter: () => {},
+    // 路由跳转的方法 
+    dispatch: () => {},
+    // 退出登录
     logout: () => {},
+    // 是团队还是企业的判断条件
     titleType: '团队',
+    // 个人中心数据源
     userInfo: {},
+    // 左下角外链的集合
     hrefs: [],
   };
   constructor(props) {
@@ -82,17 +93,12 @@ class Userinfo extends Component {
   }
 
   gotoConfig = () => {
-    const { titleType } = this.props;
+    const { titleType, dispatch } = this.props;
     if (titleType === '企业') { // 企业
-      this.skipRouter('/entersetting/home');
+      dispatch('openEntersetting');
     } else { // 团队
-      this.skipRouter('/teamconfig');
+      dispatch('openTeamconfig');
     }
-  }
-
-  skipRouter = (path) => {
-    const { skipRouter } = this.props;
-    skipRouter(path);
   }
 
   render() {
@@ -111,6 +117,7 @@ class Userinfo extends Component {
       logout,
       editType,
       titleType,
+      dispatch,
     } = this.props;
 
     // 允许用户退出空间， 0:禁止;1:允许
@@ -138,7 +145,7 @@ class Userinfo extends Component {
                 {this.getIcon(userAvator)}
               </div>
               <div className={new_name} title={userName}>{userName}</div>
-              <div className={userSetting} onClick={() => { this.skipRouter('/account'); }}>
+              <div className={userSetting} onClick={ () => {dispatch('openAccount'); }}>
                 <Icon type="copyreader" />
               </div>
             </div>
@@ -163,7 +170,7 @@ class Userinfo extends Component {
               {
                 editType ?
                   <li>
-                    <Button shape="border" onClick={() => { this.skipRouter('/manage'); }}>
+                    <Button shape="border" onClick={() => { dispatch('openManage'); }}>
                       <Icon type="record" />首页编辑
                     </Button>
                   </li>
@@ -172,7 +179,7 @@ class Userinfo extends Component {
               {
                 titleType == '企业' ?
                   <li>
-                    <Button shape="border" onClick={() => { this.skipRouter('/userinfo'); }}>
+                    <Button shape="border" onClick={() => { dispatch('openUserinfo'); }}>
                       <Icon type="role-management" />员工信息
                     </Button>
                   </li>
@@ -181,7 +188,7 @@ class Userinfo extends Component {
               {
                 _invitePermission ?
                   <li>
-                    <Button shape="border" size="sm" onClick={() => { this.skipRouter('/invitation'); }}>
+                    <Button shape="border" size="sm" onClick={() => { dispatch('openInvitation'); }}>
                       <Icon type="add-friends" />邀请成员
                     </Button>
                   </li>

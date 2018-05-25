@@ -15,16 +15,16 @@ import {
 class Applications extends Component {
   static propTypes = {
     serviceList: PropTypes.arrayOf(PropTypes.object),
-    closeServiceModal: PropTypes.func,
     openAllFn: PropTypes.func,
     openServiceFn: PropTypes.func,
+    closeServiceModal: PropTypes.func,
     quickServiceDisplay: PropTypes.bool,
   };
   static defaultProps = {
     serviceList: [],
-    closeServiceModal: () => {},
     openAllFn: () => {},
     openServiceFn: () => {},
+    closeServiceModal: () => {},
     quickServiceDisplay: false,
   };
   constructor(props) {
