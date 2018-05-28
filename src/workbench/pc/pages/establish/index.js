@@ -9,6 +9,8 @@ import Header from 'components/header';
 import EstablishContent from 'containers/establishContent';
 import Icon from 'pub-comp/icon';
 
+import Personals from 'pages/home/personal';
+
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 import { logo, establish, hidden, imgInner } from './style.css';
 
@@ -86,15 +88,8 @@ class Establish extends Component {
   }
 
   goHome = () => {
-    const { userInfoDisplay, hideUserInfoDisplay, changeUserInfoDisplay } = this.props;
     const { allowTenants } = this.state;
-    if (allowTenants.length <= 0) {
-      if (userInfoDisplay) {
-        hideUserInfoDisplay();
-      } else {
-        changeUserInfoDisplay();
-      }
-    } else {
+    if (allowTenants.length > 0) {
       this.props.history.replace('/');
     }
   }
@@ -107,13 +102,7 @@ class Establish extends Component {
     const { userInfo } = this.props;
     const { allowTenants } = this.state;
     // const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
-    const img = userInfo.userAvator;
-    let imgIcon = null;
-    if (img) {
-      imgIcon = <img alt="" src={img} className={imgInner} />;
-    } else {
-      imgIcon = <Icon type="staff" />;
-    }
+    const iconname = allowTenants.length  ? 'home' : <Personals />;
     return (
       <div className={`um-win   ${establish} ${allowTenants.length <= 0 ? '' : hidden}`} >
         {
@@ -130,7 +119,7 @@ class Establish extends Component {
         }
         <div className="um-header" style={{ background: 'white', position: 'relative' }}>
           {/* <Header leftContent = { leftContent } /> */}
-          <Header iconName={allowTenants.length <= 0 ? imgIcon : 'home'} onLeftClick={this.goHome} />
+          <Header iconName={iconname} onLeftClick={this.goHome} />
           <div className={logo}>
             <img alt="" src={logoUrl} style={{ width: '86px' }} />
           </div>
