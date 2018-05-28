@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
+import { dispatch, trigger } from 'public/componentTools';
 import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
 import FormControl from 'bee/form-control';
@@ -9,7 +10,13 @@ import Menu from 'bee/menus';
 import Tabs, { TabPane } from 'bee/tabs';
 import Pagination from 'bee/pagination';
 import EnhancedPagination from 'pub-comp/enhancedPagination';
-import SearchItem from 'components/search';
+import SearchItem from 'diwork-business-components/dist/search/searchItem';
+
+import searchActions from 'store/root/search/actions';
+import rootActions from 'store/root/actions';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+
+import nodata from 'assets/image/wgt/nodata.png';
 
 import {
   bg,
@@ -42,13 +49,7 @@ import {
   paginationClass,
   isdisplay
 } from './style.css';
-import _default_icon from 'assets/image/wgt/default.png';
-import yonyouSpace1 from 'assets/image/wgt/yonyouSpace1.png';
-import nodata from 'assets/image/wgt/nodata.png';
-import searchActions from 'store/root/search/actions';
-import rootActions from 'store/root/actions';
-import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
-import { trigger } from 'public/componentTools';
+
 
 const {getSearchMore, getSearch,getSearchOther,setSearchHeadData} = searchActions;
 const {requestStart, requestSuccess, requestError} = rootActions;
@@ -306,7 +307,7 @@ class searchResult extends Component {
     return data.content.map((item, index) => {
       return (
         <li key={index}>
-          <SearchItem data={item} type={data.type} url={data.renderUrl} from="full"/>
+          <SearchItem dispatch={dispatch} trigger={trigger} data={item} type={data.type} url={data.renderUrl} from="full"/>
         </li>
       );
     });
