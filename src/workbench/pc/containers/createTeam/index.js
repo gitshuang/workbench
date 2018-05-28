@@ -145,19 +145,21 @@ class CreateTeamContent extends Component {
       data.logo = logo;
     }
     this.setState({
-      disabled:true
+      disabled: false
     })
     //this.setState({tenantId:"tenantId",processValue:1});//测试去掉
     requestStart();
     createTeam(data).then(({error, payload}) => {
       this.setState({
-        disabled:false
+        disabled: true
       });
-      requestSuccess();
       if (error) {
         requestError(payload);
         return;
       }
+      
+      requestSuccess();
+      
       // getUserInfo();
       // history.replace('/');
       // changeUserInfoDisplay();
