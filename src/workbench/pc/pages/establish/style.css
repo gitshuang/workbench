@@ -13,9 +13,6 @@
   color: #fff;
   overflow:hidden;
 }
-.establish :global(.lebra-navbar-left-icon .iconfont){
-  font-size: 31px;
-}
 
 .hidden :global(.lebra-navbar-left-icon){
   background: #FFFFFF;

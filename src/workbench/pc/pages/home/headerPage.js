@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { mapStateToProps, getHost, logout } from '@u';
+import { mapStateToProps } from '@u';
 
 /*   actions   */
 import rootActions from 'store/root/actions';
@@ -11,17 +11,17 @@ import teamconfigActions from 'store/root/teamconfig/actions';
 
 import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
-import TeamExitModal from 'containers/teamExitModal';
+
 import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
-import { Personal } from 'diwork-business-components';
+import Personals from './personal';
 import { header, allBtn, btnDisable } from './style.css';
 
 
 const {
   changeUserInfoDisplay,
-  hideUserInfoDisplay, getUserInfo, 
-  changeRequestDisplay, closeRequestDisplay,
+  hideUserInfoDisplay, getUserInfo,
+  changeRequestDisplay,
   getSearchEnterOrTeam,
   getWorkList,
   setCutUser,
@@ -41,11 +41,6 @@ const { openExitModal } = teamconfigActions;
     'searchEnterOrTeamList',
     'userInfoDisplay',
     'userInfo',
-    'requestDisplay',
-    {
-      key: 'exitModal',
-      value: (home, ownProps, root) => root.teamconfig.exitModal,
-    },
     {
       namespace: 'home',
     },
@@ -55,7 +50,6 @@ const { openExitModal } = teamconfigActions;
     changeUserInfoDisplay,
     hideUserInfoDisplay,
     changeRequestDisplay,
-    closeRequestDisplay,
     getUserInfo,
     requestStart,
     requestSuccess,
@@ -71,7 +65,6 @@ class HeaderPage extends Component {
     changeUserInfoDisplay: PropTypes.func,
     hideUserInfoDisplay: PropTypes.func,
     changeRequestDisplay: PropTypes.func,
-    closeRequestDisplay: PropTypes.func,
     getUserInfo: PropTypes.func,
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
@@ -96,7 +89,6 @@ class HeaderPage extends Component {
     changeUserInfoDisplay: () => {},
     hideUserInfoDisplay: () => {},
     changeRequestDisplay: () => {},
-    closeRequestDisplay: () => {},
     getUserInfo: () => {},
     requestStart: () => {},
     requestSuccess: () => {},
@@ -113,39 +105,6 @@ class HeaderPage extends Component {
       allBtn: false, // 默认显示一行tab
       btnShow: false,
       allowTenants: [],
-      currType: null,
-      TeamData: [
-        {
-          id: 'allowExit', name: '退出企业', value: '3', serverApi: 'enter/leave',
-          msg: '退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
-        },
-        {
-          id: 'allowExit', name: '退出团队', value: '3', serverApi: 'team/leave',
-          msg: '退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
-        }
-      ],
-      routers:{
-        openEntersetting: '/entersetting/home',
-        openTeamconfig: '/teamconfig',
-        openAccount: '/account',
-        openManage: '/manage',
-        openUserinfo: '/userinfo',
-        openInvitation: '/invitation',
-      },
-      hrefs: [
-        {
-          href:`${getHost('org')}/download/download.html`,
-          name:"下载客户端"
-        },
-        {
-          href:`https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ`,
-          name:"问题与反馈"
-        },
-        {
-          href:`${getHost('cloundyy')}`,
-          name:"用友云官网"
-        },
-      ]
     };
   }
 
@@ -174,21 +133,21 @@ class HeaderPage extends Component {
   onLeftTitleClick=() => {}
 
   // 切换到企业管理账户 ，好像废弃了
-  setCutUserFn = () => {
-    const { setCutUser, getWorkList } = this.props;
-    setCutUser().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        getWorkList().then(({ error, payload }) => {
-          if (error) {
-            requestError(payload);
-          }
-        });
-      }
-      requestSuccess();
-    });
-  }
+  // setCutUserFn = () => {
+  //   const { setCutUser, getWorkList } = this.props;
+  //   setCutUser().then(({ error, payload }) => {
+  //     if (error) {
+  //       requestError(payload);
+  //     } else {
+  //       getWorkList().then(({ error, payload }) => {
+  //         if (error) {
+  //           requestError(payload);
+  //         }
+  //       });
+  //     }
+  //     requestSuccess();
+  //   });
+  // }
 
   getUserInfo() {
     const {
@@ -273,85 +232,19 @@ class HeaderPage extends Component {
     });
   }
 
-
-  // 关闭创建完成的弹出层
-  closeRequestDisplay = () => {
-    const { closeRequestDisplay } = this.props;
-    closeRequestDisplay();
-  }
-
-  openNewRouter = (path) => {
-    const { history } = this.props;
-    history.push(path);
-  }
-
-  dispatch = (action) => {
-    const { routers } = this.state;
-    if(routers[action]){
-      this.openNewRouter(routers[action]);
-    }
-  }
-
-  openExitModal = () => {
-    const { openExitModal } = this.props;
-    openExitModal();
-  }
-
-  getCompanyType = () => {
-    const { tenantid } = window.diworkContext();
-    const {
-      userInfo: {
-        allowTenants,
-      },
-    } = this.props;
-    const curTenant = allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
-    let name = '团队';
-    if (curTenant && curTenant.type == 0) {
-      name = '企业';
-    }
-    return name;
-  }
-
   render() {
     const {
-      changeUserInfoDisplay,
-      hideUserInfoDisplay,
-      userInfoDisplay,
       list,
       headerData,
-      userInfo,
-      requestDisplay,
-      exitModal
     } = this.props;
 
-    // let imgIcon = null;
-    // let class2 = headerData && headerData.className;
     const background = headerData && headerData.background && JSON.parse(headerData.background);
     const titleContent = headerData && headerData.title;
     const titleStyle = headerData && headerData.titleStyle && JSON.parse(headerData.titleStyle);
     const color = headerData && headerData.color;
-    // if (img) {
-    //   imgIcon = <img alt="" src={img} className={imgInner} />;
-    // } else {
-    //   imgIcon = <Icon type="staff" />;
-    // }
-    const { tenantid } = window.diworkContext();
-    const titleType = this.getCompanyType();
-    const { TeamData, hrefs } = this.state;
-    const CurrData = titleType == "企业" ? TeamData[0] : TeamData[1];
-    const personal = <Personal 
-      userInfo = {userInfo}
-      requestDisplay = {requestDisplay}
-      exitModal = {exitModal}
-      closeRequestDisplay = {() => { this.closeRequestDisplay(); }}
-      openExitModal = {this.openExitModal}
-      dispatch = { this.dispatch }
-      titleType = {titleType}
-      hrefs = {hrefs}
-      logout = {logout}
-    />;
-    const BtnShow = this.state.btnShow ? null : btnDisable;
 
+    const personal = <Personals />;
+    const BtnShow = this.state.btnShow ? null : btnDisable;
 
     return (
       <div className={`${header}`} style={background} id="home_header">
@@ -363,16 +256,6 @@ class HeaderPage extends Component {
         >
           <span style={titleStyle}>{titleContent || '首页'}</span>
         </Header>
-        {
-          exitModal ? 
-          <TeamExitModal 
-            type={titleType} 
-            data={CurrData} 
-            isManage={userInfo.admin} 
-            userId={userInfo.userId} 
-            close={true} 
-          /> : null
-        }
         {
           list.length > 1 ? (
             <Navbar
