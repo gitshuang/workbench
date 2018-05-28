@@ -8,7 +8,7 @@ import { noop, mapStateToProps } from '@u';
 import actions from 'store/root/actions';
 import styles from './index.css';
 import SearchContainer from 'containers/search';
-import QuickApplication from 'components/quickApplication';
+import { QuickApplication } from 'diwork-business-components';
 
 const {
   lebraNavbar,

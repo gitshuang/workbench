@@ -3,7 +3,7 @@ import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { dispatch, trigger } from 'public/componentTools';
-import Search from 'components/search';
+import { Search } from 'diwork-business-components';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 
