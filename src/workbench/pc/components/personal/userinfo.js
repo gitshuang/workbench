@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import Icon from 'components/icon';
 import Button from 'components/button';
-
 import Href from './href';
 import {
   wrap, imgUser, imgOuter, imgInner, clearfix, userBtnList,
@@ -34,6 +33,8 @@ class Userinfo extends Component {
       allowTenants: PropTypes.array,
     }),
     hrefs: PropTypes.arrayOf(PropTypes.object),
+    openExitModal: PropTypes.func,
+    closeRequestDisplay: PropTypes.func,
   };
   static defaultProps = {
     // 是否显示首页编辑选项  默认为true
@@ -58,6 +59,10 @@ class Userinfo extends Component {
     userInfo: {},
     // 左下角外链的集合
     hrefs: [],
+    // 打开退出团队或者企业弹窗
+    openExitModal: () => {},
+    // 关闭显示创建团队成功弹窗
+    closeRequestDisplay: () => {},
   };
   constructor(props) {
     super(props);

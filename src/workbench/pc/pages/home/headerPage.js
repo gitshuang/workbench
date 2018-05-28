@@ -14,7 +14,7 @@ import Header from 'containers/header';
 import TeamExitModal from 'containers/teamExitModal';
 import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
-import Personal from 'components/personal';
+import { Personal } from 'diwork-business-components';
 import { header, allBtn, btnDisable } from './style.css';
 
 
