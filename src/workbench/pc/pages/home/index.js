@@ -10,6 +10,7 @@ import WidgeList from 'containers/homeWidgetList';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 import HeaderPage from './headerPage';
+import HomeMark from './mark';
 import { pageHome } from './style.css';
 
 const { getWorkList } = homeActions;
@@ -62,6 +63,7 @@ class Home extends Component {
         height: 0,
       },
       lazyLoadNum: -1,
+      homemark: false,
     };
     this.updateViewport = this.updateViewport.bind(this);
   }
@@ -122,10 +124,22 @@ class Home extends Component {
       });
     };
   })()
+
   renderMetadata = (name) => {
     const { metaData } = this.props;
     return metaData && metaData.properties && metaData.properties[name];
   }
+
+  linkTo = () => {
+
+  }
+
+  closeHomeMark = () => {
+    this.setState({
+      homemark: false
+    });
+  }
+
   render() {
     const {
       workList,
@@ -172,6 +186,14 @@ class Home extends Component {
           {conts}
         </ElementsWrapper>
         <HomeFolderDialog />
+        {
+          this.state.homemark ? <HomeMark 
+            linkTo={this.linkTo} 
+            homemark={this.state.homemark} 
+            closeHomeMark={this.closeHomeMark}
+            application = {'唯有'}
+            /> : null
+        }
       </div>
     );
   }
