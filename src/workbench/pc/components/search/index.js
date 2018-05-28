@@ -134,7 +134,7 @@ class Search extends Component {
     });
   }
   onMoreBtnClick = () => {
-    this.props.onMoreBtnClick(this.stats.text);
+    this.props.onMoreBtnClick(this.state.text);
   }
   render() {
     const { isShow, text, isSearchWinShow } = this.state;
