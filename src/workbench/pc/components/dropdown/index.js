@@ -77,6 +77,13 @@ class DropdownButton extends Component {
     history.push('/establishusercenter');
   }
 
+  manageOnclick = () => {
+    const {
+      history,
+    } = this.props;
+    history.push('/establishusercenter');
+  }
+
   render() {
     const {
       label, dataItem, type, marginLeft, lastIem, openMenu,
@@ -103,13 +110,23 @@ class DropdownButton extends Component {
             lastIem
               ? null
               : (
-                <div
-                  className={createEnt}
-                  onClick={this.enterOnclick}
-                  onKeyDown={this.enterOnclick}
-                  role="presentation"
-                >
-                  创建团队 \ 创建企业
+                <div>
+                  <div
+                    className={createEnt}
+                    onClick={this.enterOnclick}
+                    onKeyDown={this.enterOnclick}
+                    role="presentation"
+                  >
+                    创建团队 \ 企业
+                  </div>
+                  <div
+                    className={createEnt}
+                    onClick={this.manageOnclick}
+                    onKeyDown={this.manageOnclick}
+                    role="presentation"
+                  >
+                    管理团队 \ 企业
+                  </div>
                 </div>
               )
           }
