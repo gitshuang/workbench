@@ -1,6 +1,8 @@
 import { createActions } from '@u';
 import types from './types';
-import { getUserInfo, getEnterInfo, getWorkList, setCutUser, getSearchEnterList, setCreateEnter, getSearchEnterOrTeam } from './api';
+import { getUserInfo, getEnterInfo, getWorkList, setCutUser,
+  getSearchEnterList, setCreateEnter, getSearchEnterOrTeam, getApplicationList,
+} from './api';
 
 const {
   GET_USER_INFO,
@@ -16,6 +18,7 @@ const {
   GET_SEARCH_ENTER_LIST,
   SET_CREATE_ENTER,
   GET_SEARCH_ENTER_OR_TEAM,
+  GET_APPLICATION_LIST,
 } = types;
 
 export default createActions(
@@ -30,6 +33,7 @@ export default createActions(
     [GET_SEARCH_ENTER_LIST]: getSearchEnterList,
     [SET_CREATE_ENTER]: setCreateEnter,
     [GET_SEARCH_ENTER_OR_TEAM]: getSearchEnterOrTeam,
+    [GET_APPLICATION_LIST]: getApplicationList,
   },
   CHANGE_USER_INFO_DISPLAY,
   CHANGE_REQUEST_DISPLAY,

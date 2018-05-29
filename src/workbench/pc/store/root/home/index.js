@@ -15,6 +15,7 @@ const {
   getSearchEnterList,
   setCreateEnter,
   getSearchEnterOrTeam,
+  getApplicationList,
 } = actions;
 
 const defaultState = {
@@ -31,6 +32,7 @@ const defaultState = {
   folderModalDisplay: false,
   enterList: [],
   searchEnterOrTeamList: [],
+  applicationList: {},
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -114,6 +116,15 @@ const reducer = handleActions({
   [setCreateEnter]: state => ({
     ...state,
   }),
+  [getApplicationList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      applicationList: payload,
+    };
+  },
 }, defaultState);
 
 export default reducer;
