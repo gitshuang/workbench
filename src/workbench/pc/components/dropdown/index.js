@@ -81,7 +81,7 @@ class DropdownButton extends Component {
     const {
       history,
     } = this.props;
-    history.push('/establishusercenter');
+    history.push('/manageTeamEnter');
   }
 
   render() {
