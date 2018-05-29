@@ -40,6 +40,7 @@ const UpdateEnter = asyncComponent(() => import(/* webpackChunkName: "UpdateEnte
 const Market = asyncComponent(() => import(/* webpackChunkName: "Market" */'pages/market'));
 const Renew = asyncComponent(() => import(/* webpackChunkName: "Renew" */'pages/renew'));
 const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/userinfo'));
+const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/manageTeamEnter'));
 
 const routes = [
   {
@@ -140,6 +141,10 @@ const routes = [
   {
     path: '/renew/:id',
     component: Renew,
+  },
+  {
+    path: '/manageTeamEnter',
+    component: ManageTeamEnter,
   },
 ];
 

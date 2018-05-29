@@ -10,6 +10,7 @@
 .iframeCont{
 	width: auto;
 	height: 100%;
+	height: calc(100% - 5px);;
 	/* flex: 1;
 	-ms-flex: 1; */
 }
