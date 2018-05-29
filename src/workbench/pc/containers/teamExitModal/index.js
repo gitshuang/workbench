@@ -89,7 +89,8 @@ class TeamRemoveModal extends Component {
             const {
               history, 
             } = this.props;
-            history.push('/establish');
+            this.cancelFn();
+            history.replace('/establish');
           }else if(payload.length > 1){
             this.setState({
               isManage: 2
@@ -115,7 +116,7 @@ class TeamRemoveModal extends Component {
 
   // 取消
   cancelFn = () => {
-    const { closeExitModal ,exitModal} = this.props;
+    const { closeExitModal } = this.props;
     closeExitModal();
   }
  

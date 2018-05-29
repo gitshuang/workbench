@@ -55,7 +55,6 @@ class EnterOption extends Component {
   }
 
   onSelectDrop = (da) => {
-    debugger;
     const { data, openTransferModal, openDismissModal, openExitModal, compType } = this.props;
     if (compType == "userCenter") {
       this.data = da;
