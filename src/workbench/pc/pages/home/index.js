@@ -19,7 +19,6 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
-    'userInfo',
     'workList',
     'metaData',
     {
@@ -191,7 +190,6 @@ class Home extends Component {
             linkTo={this.linkTo} 
             homemark={this.state.homemark} 
             closeHomeMark={this.closeHomeMark}
-            application = {'唯有'}
             /> : null
         }
       </div>

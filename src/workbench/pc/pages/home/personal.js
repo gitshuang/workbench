@@ -100,7 +100,7 @@ class Personals extends Component {
         allowTenants,
       },
     } = this.state;
-    const curTenant = allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
+    const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
     let name = '团队';
     if (curTenant && curTenant.type == 0) {
       name = '企业';

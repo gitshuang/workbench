@@ -26,14 +26,12 @@ class HomeMark extends Component {
   }
 
   render() {
-    const {
-      application
-    } = this.props;
+  
     return(
       <div className={mark}>
         <p>
           <Icon type="notice" />
-          <span>您的应用“{application}”已到期，无法继续使用。</span>
+          <span>您有应用已到期或快到期，无法继续使用。</span>
           <b onClick={this.props.linkTo}>去续费>></b>
           <Icon type="error3" onClick={this.props.closeHomeMark}/>
         </p>
