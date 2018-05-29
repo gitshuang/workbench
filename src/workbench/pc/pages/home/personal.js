@@ -10,13 +10,12 @@ import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 
 
-const { closeRequestDisplay } = homeActions;
+const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
 
 @withRouter
 @connect(
   mapStateToProps(
-    'userInfo',
     'requestDisplay',
     {
       key: 'exitModal',
@@ -29,12 +28,14 @@ const { openExitModal } = teamconfigActions;
   {
     closeRequestDisplay,
     openExitModal,
+    getUserInfo,
   },
 )
 class Personals extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userInfo: {},
       routers: {
         openEntersetting: '/entersetting/home',
         openTeamconfig: '/teamconfig',
@@ -75,9 +76,19 @@ class Personals extends Component {
       ],
     };
   }
+  
   componentWillMount() {
-
+    const { getUserInfo } = this.props;
+    getUserInfo().then(({ error, payload }) => {
+      if (error) {
+        return;
+      }
+      this.setState({
+        userInfo: payload,
+      });
+    });
   }
+
   componentDidMount() {
 
   }
@@ -88,7 +99,7 @@ class Personals extends Component {
       userInfo: {
         allowTenants,
       },
-    } = this.props;
+    } = this.state;
     const curTenant = allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
     let name = '团队';
     if (curTenant && curTenant.type == 0) {
@@ -121,10 +132,10 @@ class Personals extends Component {
 
   render() {
     const {
-      userInfo,
       requestDisplay,
       exitModal,
     } = this.props;
+    const { userInfo } = this.state;
     const { hrefs, TeamData } = this.state;
 
     const titleType = this.getCompanyType();
