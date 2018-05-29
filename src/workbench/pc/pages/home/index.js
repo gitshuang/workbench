@@ -13,7 +13,7 @@ import HeaderPage from './headerPage';
 import HomeMark from './mark';
 import { pageHome } from './style.css';
 
-const { getWorkList } = homeActions;
+const { getWorkList, getApplicationList } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
 @withRouter
@@ -21,6 +21,7 @@ const { requestStart, requestSuccess, requestError } = rootActions;
   mapStateToProps(
     'workList',
     'metaData',
+    'userInfo',
     {
       namespace: 'home',
     },
@@ -30,6 +31,7 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     requestSuccess,
     requestError,
     getWorkList,
+    getApplicationList
   },
 )
 class Home extends Component {
@@ -45,12 +47,14 @@ class Home extends Component {
       listMeta: PropTypes.object,
     }),
     workList: PropTypes.arrayOf(PropTypes.object),
+    getApplicationList: PropTypes.func,
   };
   static defaultProps = {
     requestStart: () => {},
     requestSuccess: () => {},
     requestError: () => {},
     getWorkList: () => {},
+    getApplicationList: () => {},
     metaData: {},
     workList: [],
   };
@@ -63,12 +67,15 @@ class Home extends Component {
       },
       lazyLoadNum: -1,
       homemark: false,
+      applications: [],
     };
     this.updateViewport = this.updateViewport.bind(this);
   }
+
   componentWillMount() {
     const {
-      requestStart, requestSuccess, requestError, getWorkList,
+      requestStart, requestSuccess, requestError, getWorkList, getApplicationList,
+      userInfo,
     } = this.props;
     requestStart();
     const param = {
@@ -83,6 +90,28 @@ class Home extends Component {
       }
       requestSuccess();
     });
+    // 请求应用
+
+    const { admin } = userInfo;
+    const timeType = this.totalTime();
+    if (admin && timeType){
+      const time = new Date().getTime();
+      localStorage.setItem('time',time);
+      getApplicationList().then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
+        }
+        this.setState({
+          applications: payload.applications,
+        });
+        if(this.forTime(payload.applications)){
+          this.setState({
+            homemark: true
+          })
+        }
+        requestSuccess();
+      });
+    }
   }
   componentDidMount() {
     window.addEventListener('scroll', this.updateViewport, false);
@@ -103,6 +132,36 @@ class Home extends Component {
     window.removeEventListener('scroll', this.updateViewport);
     window.removeEventListener('resize', this.updateViewport);
   }
+
+  totalTime = () => {
+    const time = new Date().getTime();
+    const localTime = localStorage.getItem('time');
+    if (!localTime) return true;
+    const tol = Number(localTime) + (24*60*60*1000);
+    if(time > tol){
+      return true;
+    }
+    return false;
+  }
+
+  forTime = (applications) => {
+    let type = false;
+    for(var i=0;i<applications.length;i++){
+      const time = applications[i].expired;
+      if (!time) {
+        type = false;
+        continue;
+      }
+      const currTime = new Date().getTime();
+      const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
+      if (currTime > time || timeDiff <= 30) {
+        type = true;
+        break;
+      }
+    };
+    return type;
+  }
+
   updateViewport=() => {
     const self = this;
     // if (this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
@@ -113,6 +172,7 @@ class Home extends Component {
       },
     });
   }
+  
   loadOk = (() => {
     const self = this;
     let count = 0;
@@ -130,7 +190,8 @@ class Home extends Component {
   }
 
   linkTo = () => {
-
+    this.closeHomeMark();
+    this.props.history.push(`/app/application`);
   }
 
   closeHomeMark = () => {
