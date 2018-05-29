@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Personal } from 'diwork-business-components';
+// import Personal from 'components/personal';
 import { connect } from 'react-redux';
 import { mapStateToProps, getHost, logout } from '@u';
 import TeamExitModal from 'containers/teamExitModal';

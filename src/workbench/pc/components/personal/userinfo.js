@@ -127,15 +127,19 @@ class Userinfo extends Component {
 
     // 允许用户退出空间， 0:禁止;1:允许
     // 邀请权限  1全员允许/2全员禁止邀请0/只有管理员可邀请
-    const { allowExit, invitePermission } = currentTeamConfig;
 
     let _invitePermission = false;
-    if (invitePermission && invitePermission === '0') {
-      _invitePermission = admin;
-    } else if (invitePermission && invitePermission === '1') {
-      _invitePermission = true;
+    let _allowExit = "1";
+    if (currentTeamConfig){
+      const { allowExit, invitePermission } = currentTeamConfig;
+      if (invitePermission && invitePermission === '0') {
+        _invitePermission = admin;
+      } else if (invitePermission && invitePermission === '1') {
+        _invitePermission = true;
+      }
+      _allowExit = allowExit;
     }
-
+    
     const _class = allowTenants.length <= 0 ? hiden : show;
     return (
       <div id="modalId" className={`${wrap} ${clearfix}`} >
@@ -200,7 +204,7 @@ class Userinfo extends Component {
                 : null
               }
               {
-                admin || allowExit === '0' ? null :
+                admin || _allowExit === '0' ? null :
                 <li>
                   <Button shape="border" onClick={this.props.openExitModal} >
                     <Icon type="staff" />{`退出${titleType}`}
