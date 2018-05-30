@@ -41,7 +41,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [paths('src')],
+        include: [paths(`${goalFilePath}`)],
         options: {
           formatter: require('eslint-friendly-formatter')
         }

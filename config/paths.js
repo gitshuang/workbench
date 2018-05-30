@@ -20,7 +20,7 @@ var paths = {
   store: resolve('store'),
   utils: resolve('public/utils.js'),
   static: path.join(__dirname, '../static'),
-  dist: path.join(__dirname, '../dist'),
+  //dist: path.join(__dirname, '../dist'), // 因为要生成多个dist（中文，英文的 ）
   bee: resolve('bee'),
   node: path.join(__dirname, '../node_modules'),
 }
