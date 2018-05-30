@@ -1,0 +1,135 @@
+.serviceContainer {
+  position: fixed;
+  z-index: 999;
+  top: 50px;
+  right: 33px;
+  width:300px;
+  height:310px;
+  border:1px solid #DBDEE5;
+  background: #fff;
+  border-radius:3px;
+  box-shadow: 0px 3px 6px 0px rgba(74,81,93,0.25);
+  box-sizing: content-box;
+  padding:0 5px;
+}
+.service {
+  position: absolute;
+  z-index: 9;
+  background: #fff;
+  width:300px;
+  height:280px;
+  padding:25px 0 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/*定义滚动条宽高*/
+.service::-webkit-scrollbar{
+    width: 8px;
+}
+/*定义滑块，内阴影及圆角*/
+.service::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    background-color: #757575;
+}
+.serviceBtn{
+  position: absolute;
+  z-index: 9;
+  bottom:0px;
+  left:1px;
+  background: #F5F5F5;
+  width:309px;
+  height:39px;
+}
+.service h4{
+  font-weight: 500;
+  font-size: 14px;
+  padding-left: 9px;
+  padding-top: 14px;
+  line-height: 19px;
+}
+.service ul{
+  padding:0px;
+  width:300px;
+}
+.service .contentDiv{
+  float: left;
+  width: 48px;
+  height:69px;
+  text-align: center;
+  margin: 7.5px 13.5px 7.5px 13.5px;
+}
+.contentDiv:hover{
+  color:#E14C46;
+  cursor:pointer;
+}
+.service .content{
+  width: 48px;
+  height:16px;
+  font-size: 12px;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+.service ul li{
+  width:32px;
+  height:32px;
+  margin:0 8px 13px;
+  line-height: 32px;
+  text-align: center;
+  font-size:12px;
+  cursor: pointer;
+}
+.service ul li img {
+  float: left;
+  width:30px;
+  height: 30px;
+  margin: 1px;
+}
+.serviceBtn button{
+  border: none;
+  border-radius: 0;
+  font-size: 12px;
+  height: 39px;
+  color: #666666;
+  background:none;
+}
+.serviceBtn button:hover{
+  background:#e8e8e8;
+}
+:global(.quickServiceHidden){
+  display:none;
+}
+.serviceGroup{
+  position: relative;
+}
+
+.link_cont{
+  position: absolute;
+  z-index: 9;
+  z-index: 9;
+  bottom: 0px;
+  width: 300px;
+  height: 39px;
+  line-height: 39px;
+  text-align: center;
+  cursor: pointer;
+  color: rgba(0,122,206,1);
+}
+.link_cont a{
+  font-size: 12px;
+}
+.btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  padding: 9px 12px;
+  line-height: 1.5;
+}

@@ -1,0 +1,122 @@
+.serviceItem{
+    width:160px;
+    height:52px;
+    line-height: 38px;
+    float: left;
+    margin: 16px;
+    margin-right: 0px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    position: relative;
+    background:rgba(244,245,247,0.5);
+    border-radius: 3px ;
+
+    font-family: "$i18n{style.css0}$i18n-end Regular", $i18n{style.css1}$i18n-end;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    border: 1px solid rgba(78,89,104,0.19);
+}
+.serviceItemTitle{
+  width: 100%;    
+  border-bottom: 1px solid rgba(13,20,36,0.1);
+  display: -webkit-box;
+  display:flex;
+}
+.serviceItemTitle .item_li_top{
+  flex: 1;
+  height: 40px;
+  line-height: 40px;
+}
+.serviceItemTitle .item_footer{
+  /* flex: 1; */
+  text-align: left;
+  /* width: 50px; */
+  position: relative;
+  right: 35px;
+  bottom: 0px;
+  /* border: 1px solid red; */
+}
+
+.item_li_top{
+	height:100%;
+  display: -webkit-box;
+  display: flex;
+}
+
+
+.item_footer{
+	height: 30px;
+  line-height: 24px;
+	text-align: right;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  /* color: rgba(117,127,140,1); */
+}
+
+.item_left {
+    background: #ccc;
+    width: 60px;
+}
+.item_right{
+	flex: 1;
+	padding-left: 5px;
+	/* padding-top: 10px; */
+	box-sizing: border-box;
+
+  font-size:12px;
+  font-family:MicrosoftYaHei;
+  color:rgba(71,77,84,1);
+
+}
+.item_footer_app{
+  right: 58px !important;
+}
+
+.item_footer span{
+  font-family: "$i18n{style.css2}$i18n-end Regular", $i18n{style.css3}$i18n-end;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  color: rgb(153, 153, 153);
+}
+.item_footer i{
+  font-size: 25px;
+}
+.serviceItem .item_footer span,.serviceItem .item_footer i{
+  display: table-row;
+}
+.icon{
+  width:30px;
+  height: 30px;
+}
+.item_li_top  .icon{
+  margin-top: 4px;
+}
+.up_icon{
+  color: rgba(117,127,140,1);
+  width:14px;
+  height:6px;
+  font-size: 20px;
+  cursor:pointer;
+  /* margin-left: 45px; */
+  margin-right: 8px;
+  margin-top: 7px;
+}
+
+/* 首页编辑-添加服务 */
+:global(.ie9_pop) .serviceItemTitle{
+  display: table;
+}
+:global(.ie9_pop) .serviceItemTitle>.item_footer{
+  display: table-cell;
+  text-align: right;
+}
+:global(.ie9_pop) .serviceItemTitle>i{
+  display: table-cell;
+}
+:global(.ie9_pop) .item_li_top>img{
+  float:left;
+}

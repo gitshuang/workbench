@@ -6,8 +6,10 @@
   "private": true,
   "scripts": {
     "start": "node scripts/start.js",
+    "start_en": "node scripts/start.js LAN_TYPE=en",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "build_en": "node scripts/build.js LAN_TYPE=en",
     "formal": "node scripts/formal.js"
   },
   "dependencies": {

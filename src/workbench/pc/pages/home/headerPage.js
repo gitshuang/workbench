@@ -31,6 +31,7 @@ const {
   requestStart,
   requestSuccess,
   requestError,
+  setCurrent,
 } = rootActions;
 
 const { openExitModal } = teamconfigActions;
@@ -57,6 +58,7 @@ const { openExitModal } = teamconfigActions;
     getWorkList,
     setCutUser,
     openExitModal,
+    setCurrent,
   },
 )
 class HeaderPage extends Component {
@@ -231,7 +233,25 @@ class HeaderPage extends Component {
       btnShow,
     });
   }
-
+  changeLanguage = () => {
+    const cookieVal = document.cookie;
+    const langIndex = cookieVal.indexOf('langType=');
+    if (langIndex === -1) { // englishtransfer
+      document.cookie = 'langType="en"';
+      this.props.setCurrent('en_US');
+      alert('now lang is Chinese,change to english');
+    }
+    const langVal = cookieVal.substring(langIndex + 10, langIndex + 12);
+    if (langVal === 'en') {
+      document.cookie = 'langType="cn"';
+      this.props.setCurrent('zh_CN');
+      alert('now lang is en,change to chinese');
+    } else if (langVal === 'cn') {
+      document.cookie = 'langType="en"';
+      this.props.setCurrent('en_US');
+      alert('now lang is Chinese,change to english');
+    }
+  }
   render() {
     const {
       list,
@@ -248,6 +268,9 @@ class HeaderPage extends Component {
 
     return (
       <div className={`${header}`} style={background} id="home_header">
+        <div className="panel_web" onClick={this.changeLanguage}>
+            qiehuan
+        </div>
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}

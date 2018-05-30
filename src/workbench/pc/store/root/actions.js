@@ -8,6 +8,7 @@ import {
   uploadApplication,
   getPoll,
   getPortal,
+  setCurrent,
 } from './api';
 
 const {
@@ -27,6 +28,7 @@ const {
   UPLOAD_APPLICATION,
   GET_POLL,
   GET_PORTAL,
+  SET_CURRENT,
 } = types;
 
 export default createActions(
@@ -38,6 +40,7 @@ export default createActions(
     [UPLOAD_APPLICATION]: uploadApplication,
     [GET_POLL]: getPoll,
     [GET_PORTAL]: getPortal,
+    [SET_CURRENT]: setCurrent,
   },
   REQUEST_START,
   REQUEST_SUCCESS,

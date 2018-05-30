@@ -1,0 +1,49 @@
+
+.item {
+    width: 100%;
+    box-sizing: border-box;
+}
+.WidgetTitle{
+    height: 50px;
+    line-height: 26px;
+    color:rgba(71,77,84,0.6);
+    display: -webkit-box;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    /* margin-bottom: -10px; */
+}
+.WidgetTitle>div:first-child{
+    -webkit-box-flex: 1;
+    text-align: left;
+}
+
+.edit_cont{
+    display: -webkit-box;
+}
+.form_control{
+    -webkit-box-flex:1;
+    width: 200px;
+}
+.save_btn{
+    -webkit-box-flex:1;
+    width: 60px;
+    margin:0 10px 0 20px;
+}
+.close_btn{
+    -webkit-box-flex:1;
+    width: 60px;
+}
+.WidgetList {
+  list-style: none;
+  overflow: hidden; 
+  padding-left: 5px;
+}
+.WidgetList li:hover{
+    cursor: pointer;
+    /* box-shadow: 0 6px 8px rgba(74,81,93,0.25); */
+    -webkit-box-shadow:rgba(74,81,93,0.7)  0px 1px 10px; 
+    -moz-box-shadow: rgba(74,81,93,0.7)  0px 1px 10px; 
+    box-shadow:rgba(74,81,93,0.7)  0px 1px 10px;
+    border-radius: 3px;
+}

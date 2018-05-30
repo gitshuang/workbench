@@ -1,18 +1,21 @@
 var paths = require('./paths')
-
+var reg = /^LAN_TYPE\=/g;
+var goalFilePath = process.argv.length < 3? 'src' : process.argv[2].replace(reg,'');
+// 不再使用dist 而是使用zh_CN 和 en_US
+var outPut =  process.argv.length < 3 ? 'zh_CN' : `en_US`;
 
 module.exports = {
   entry: {
     'polyfill': './src/workbench/pc/objectAssignPolyfill.js',
   },
   output: {
-    path: paths('dist'),
+    path: paths(outPut),
     publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
-      '@': paths('src'),
+      '@': paths(`${goalFilePath}`),
       'assets': paths('assets'),
       'containers': paths('containers'),
       'public': paths('public'),

@@ -1,0 +1,73 @@
+/**
+ * Created by liuqnh on 2017/12/21.
+ */
+
+
+const fs = require('fs');
+const path = require('path');
+const lineReader = require('readline');
+
+var walk = function (dir, dir_i18n, done) {
+  let results = [];
+  const root = dir;
+  const root_i18n = dir_i18n;
+
+  fs.readdir(dir, (err, list) => {
+    if (err) return done(err);
+    let pending = list.length;
+    if (!pending) return done(null, results);
+    list.forEach((file) => {
+      file = path.resolve(dir, file);
+      fs.stat(file, (err, stat) => { // 来验证是否有这个文件
+        if (stat && stat.isDirectory()) { // 文件的嵌套
+          var half = file.substring(root.length, file.length);
+          if (!fs.existsSync(root_i18n + half)) {
+            fs.mkdirSync(root_i18n + half);
+          }
+          walk(file, root_i18n + half , (err, res) => {
+                        results = results.concat(res);
+                        if (!--pending) done(null, results);
+                    });
+        } else {
+          results.push(file);
+          let readLine = lineReader.createInterface({
+            input: fs.createReadStream(file),
+          });// 先创建一个实例
+          let count = 0;
+          var half = file.substring(root.length, file.length);
+          readLine.on('line', (line) => {
+              var spieces=line;// 拿到所有字符串
+              var re= /([\u4E00-\u9FA5]|[\uFE30-\uFFA0])+/g;
+              var regNote =/(^\s*\/\/|^\s*\/\*.*\*\/$)/g;
+              var replaced=''
+              var matchNote = spieces.match(regNote);
+              // 添加一个判断 是否是注释
+              if(matchNote){
+                replaced=replaced+spieces;
+              }else{
+                var match=spieces.match(re);//取到中文
+                if(match){ // 由此可见值校验前半段
+                    var replacement = '$i18n{' + match +'}$i18n-end' ;
+                    replaced=replaced+spieces.replace(re,replacement)
+                }else{
+                    replaced=replaced+spieces;
+                }
+              }
+              fs.appendFileSync(root_i18n+half, replaced+'\n');
+          });
+        }
+        if (!--pending) done(null, results);
+      });
+    });
+  });
+};
+
+
+const indir = process.argv[2]; // /Users/yaoxin/Downloads/workspace/cloud-os_manager_fe/src
+const rootpaths = indir.split(/\/|\\/);// [,Users,yaoxin,Downloads,workspace,cloud-os_manager_fe,src]
+const root_i18n = `${indir.substring(0, indir.length - rootpaths[rootpaths.length - 1].length)}i18n_addTags`; // /Users/yaoxin/Downloads/workspace/cloud-os_manager_fe/i18n
+if (!fs.existsSync(root_i18n)) { fs.mkdirSync(root_i18n); }
+walk(indir, root_i18n, (err, results) => {
+  if (err) throw err;
+});
+
