@@ -1,15 +1,41 @@
-import React, { Component, Children, cloneElement } from 'react';
+import React, { Component, Children, cloneElement  } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+import homeActions from 'store/root/home/actions';
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
 import { header, um_content, appBreadcrumb } from './style.css';
 
-
+const { getUserInfo } = homeActions;
 @withRouter
+@connect(mapStateToProps(),{ getUserInfo })
 class Application extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInfo: {},
+    };
+  }
+  componentWillMount() {
+    const { getUserInfo } = this.props;
+    getUserInfo().then(({ error, payload }) => {
+      if(error){
+        return false;
+      }
+      this.setState({
+        userInfo: payload
+      });
+    });
+  }
   goBack = () => {
     const { history } = this.props;
-    history.replace('');
+    const {userInfo} = this.state;
+    if (!userInfo.allowTenants.length) {
+      history.replace('/establish');
+    }else{
+      history.replace('');
+    }
   }
   render() {
     const {
