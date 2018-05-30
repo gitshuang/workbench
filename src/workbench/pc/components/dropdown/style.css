@@ -74,10 +74,19 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     bottom: 0px;
     color: rgba(74,81,93,0.8);
 }
+.fnbox{
+    border-top: 1px solid #DEE0E3;
+    padding-left: 15px;
+    padding-right: 15px;
+}
 .createEnt{
     cursor: pointer;
-    padding-left: 9px;
-    border-top: 1px solid #cccccc;
+    color:rgba(74,81,93,1);
+    line-height: 40px;
+    font-weight: 600;
+}
+.createEnt:first-child{
+    border-bottom: 1px solid #DEE0E3;
 }
 .menuItem{
     height: auto !important;
