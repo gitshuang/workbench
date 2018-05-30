@@ -6,7 +6,7 @@ import Icon from 'pub-comp/icon';
 import Menu, { Item as MenuItem } from 'bee/menus';
 import {
   dropdownButtonCont, labelCont, btnUpward, btnPullDown, iconStyle, menuStyle,
-  createEnt, menuItem, itemUl, itemLi, liTitle, liRight,
+  createEnt, menuItem, itemUl, itemLi, liTitle, liRight,fnbox
 } from './style.css';
 
 @withRouter
@@ -110,7 +110,7 @@ class DropdownButton extends Component {
             lastIem
               ? null
               : (
-                <div>
+                <div className={fnbox}>
                   <div
                     className={createEnt}
                     onClick={this.enterOnclick}
