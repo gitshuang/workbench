@@ -209,7 +209,7 @@ class Home extends Component {
 
   linkTo = () => {
     this.closeHomeMark();
-    this.props.history.push(`/app/application`);
+    this.props.history.push(`/app/GZTSYS`);
   }
 
   closeHomeMark = () => {
