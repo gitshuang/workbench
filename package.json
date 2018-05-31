@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@diworkfe/public-components": "git+http://git.yonyou.com/zhengxc/diwork-public-components.git#develop",
-    "diwork-business-components": "1.1.3",
+    "diwork-business-components": "1.1.4",
     "animate.css": "3.5.2",
     "array.find": "1.0.7",
     "array.from": "1.0.3",

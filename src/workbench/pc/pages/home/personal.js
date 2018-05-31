@@ -75,6 +75,25 @@ class Personals extends Component {
           msg: '退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
         },
       ],
+      language: {
+        show: true,
+        defaultValue: 'zh',
+        onChangeLanguage: (value) => {console.log(value)},
+        languageList: [
+          {
+            value: 'zh',
+            context: '简体中文'
+          },
+          {
+            value: 'en',
+            context: 'English'
+          },
+          {
+            value: 'eh',
+            context: '繁体中文'
+          },
+        ]
+      }
     };
   }
   
@@ -136,7 +155,7 @@ class Personals extends Component {
       requestDisplay,
       exitModal,
     } = this.props;
-    const { userInfo } = this.state;
+    const { userInfo, language } = this.state;
     const { hrefs, TeamData } = this.state;
 
     const titleType = this.getCompanyType();
@@ -153,6 +172,7 @@ class Personals extends Component {
           titleType={titleType}
           hrefs={hrefs}
           logout={logout}
+          language={language}
         />
         {
           exitModal ?
