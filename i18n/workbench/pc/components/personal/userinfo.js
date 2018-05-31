@@ -4,6 +4,7 @@ import onClickOutside from 'react-onclickoutside';
 import Icon from 'components/icon';
 import Button from 'components/button';
 import Href from './href';
+import Language from './language';
 import {
   wrap, imgUser, imgOuter, imgInner, clearfix, userBtnList,
   defaultPic, logOut, tenantArea, tenantPortrait, tenantName,
@@ -35,6 +36,12 @@ class Userinfo extends Component {
     hrefs: PropTypes.arrayOf(PropTypes.object),
     openExitModal: PropTypes.func,
     closeRequestDisplay: PropTypes.func,
+    language: PropTypes.shape({
+      show: PropTypes.bool,
+      defaultValue: PropTypes.string,
+      onChangeLanguage: PropTypes.func,
+      languageList: PropTypes.arrayOf(PropTypes.object),
+    }),
   };
   static defaultProps = {
     // 是否显示首页编辑选项  默认为true
@@ -63,6 +70,26 @@ class Userinfo extends Component {
     openExitModal: () => {},
     // 关闭显示创建团队成功弹窗
     closeRequestDisplay: () => {},
+    // 多语的数据集合
+    language: {
+      show: false,
+      defaultValue: 'zh',
+      onChangeLanguage: () => {},
+      languageList: [
+        {
+          value: 'zh',
+          context: '$i18n{userinfo.js1}$i18n-end'
+        },
+        {
+          value: 'en',
+          context: 'English'
+        },
+        {
+          value: 'eh',
+          context: '$i18n{userinfo.js2}$i18n-end'
+        },
+      ]
+    },
   };
   constructor(props) {
     super(props);
@@ -99,9 +126,9 @@ class Userinfo extends Component {
 
   gotoConfig = () => {
     const { titleType, dispatch } = this.props;
-    if (titleType === '$i18n{userinfo.js1}$i18n-end') { // $i18n{userinfo.js2}$i18n-end
+    if (titleType === '$i18n{userinfo.js3}$i18n-end') { // $i18n{userinfo.js4}$i18n-end
       dispatch('openEntersetting');
-    } else { // $i18n{userinfo.js3}$i18n-end
+    } else { // $i18n{userinfo.js5}$i18n-end
       dispatch('openTeamconfig');
     }
   }
@@ -123,6 +150,7 @@ class Userinfo extends Component {
       editType,
       titleType,
       dispatch,
+      language,
     } = this.props;
 
     // 允许用户退出空间， 0:禁止;1:允许
@@ -146,8 +174,16 @@ class Userinfo extends Component {
         <div>
           <div className={logOut} onClick={logout}>
             <Icon type="exit" />
-            <span>$i18n{userinfo.js4}$i18n-end</span>
+            <span>$i18n{userinfo.js6}$i18n-end</span>
           </div>
+          {
+            language && language.show ? <Language 
+              defaultValue={language.defaultValue}
+              onChangeLanguage={language.onChangeLanguage}
+              languageList={language.languageList}
+            /> : null
+          }
+          
           <div className={userInfoPane}>
             <div className={imgUser}>
               <div className={imgOuter}>
@@ -180,16 +216,16 @@ class Userinfo extends Component {
                 editType ?
                   <li>
                     <Button shape="border" onClick={() => { dispatch('openManage'); }}>
-                      <Icon type="record" />$i18n{userinfo.js5}$i18n-end
+                      <Icon type="record" />$i18n{userinfo.js7}$i18n-end
                     </Button>
                   </li>
                 : null
               }
               {
-                titleType == '$i18n{userinfo.js6}$i18n-end' ?
+                titleType == '$i18n{userinfo.js8}$i18n-end' ?
                   <li>
                     <Button shape="border" onClick={() => { dispatch('openUserinfo'); }}>
-                      <Icon type="role-management" />$i18n{userinfo.js7}$i18n-end
+                      <Icon type="role-management" />$i18n{userinfo.js9}$i18n-end
                     </Button>
                   </li>
                 : null
@@ -198,7 +234,7 @@ class Userinfo extends Component {
                 _invitePermission ?
                   <li>
                     <Button shape="border" size="sm" onClick={() => { dispatch('openInvitation'); }}>
-                      <Icon type="add-friends" />$i18n{userinfo.js8}$i18n-end
+                      <Icon type="add-friends" />$i18n{userinfo.js10}$i18n-end
                     </Button>
                   </li>
                 : null
@@ -207,7 +243,7 @@ class Userinfo extends Component {
                 admin || _allowExit === '0' ? null :
                 <li>
                   <Button shape="border" onClick={this.props.openExitModal} >
-                    <Icon type="staff" />{`$i18n{userinfo.js9}$i18n-end${titleType}`}
+                    <Icon type="staff" />{`$i18n{userinfo.js11}$i18n-end${titleType}`}
                   </Button>
                 </li>
               }
@@ -217,18 +253,18 @@ class Userinfo extends Component {
                 <div className={popconfirm} style={{ position: 'absolute' }}>
                   <i className="arrow" />
                   <div className={popconfirm_content}>
-                    <p>{titleType}$i18n{userinfo.js10}$i18n-end</p>
-                    <p>$i18n{userinfo.js11}$i18n-end</p>
+                    <p>{titleType}$i18n{userinfo.js12}$i18n-end</p>
+                    <p>$i18n{userinfo.js13}$i18n-end</p>
                   </div>
-                  <div onClick={this.props.closeRequestDisplay}>$i18n{userinfo.js12}$i18n-end</div>
+                  <div onClick={this.props.closeRequestDisplay}>$i18n{userinfo.js14}$i18n-end</div>
                 </div>
               : null
             }
           </div>
 
-          <div className={enter_setting} title={`${titleType}$i18n{userinfo.js13}$i18n-end`}>
+          <div className={enter_setting} title={`${titleType}$i18n{userinfo.js15}$i18n-end`}>
             {
-              admin ? (<Icon type="setting" title={`${titleType}$i18n{userinfo.js14}$i18n-end`} onClick={() => { this.gotoConfig(); }} />) : null
+              admin ? (<Icon type="setting" title={`${titleType}$i18n{userinfo.js16}$i18n-end`} onClick={() => { this.gotoConfig(); }} />) : null
             }
           </div>
 

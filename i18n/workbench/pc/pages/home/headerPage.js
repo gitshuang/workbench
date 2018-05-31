@@ -233,28 +233,6 @@ class HeaderPage extends Component {
       btnShow,
     });
   }
-  changeLanguage = () => {
-    const cookieVal = document.cookie;
-    const langIndex = cookieVal.indexOf('langType=');
-    if (langIndex === -1) { // englishtransfer
-      document.cookie = 'langType="en"';
-      this.props.setCurrent('en_US');
-      window.location.reload();
-      alert('now lang is Chinese,change to english');
-    }
-    const langVal = cookieVal.substring(langIndex + 10, langIndex + 12);
-    if (langVal === 'en') {
-      document.cookie = 'langType="cn"';
-      this.props.setCurrent('zh_CN');
-      window.location.reload();
-      alert('now lang is en,change to chinese');
-    } else if (langVal === 'cn') {
-      document.cookie = 'langType="en"';
-      alert('now lang is Chinese,change to english');
-      this.props.setCurrent('en_US');
-      window.location.reload();
-    }
-  }
   render() {
     const {
       list,
@@ -271,16 +249,13 @@ class HeaderPage extends Component {
 
     return (
       <div className={`${header}`} style={background} id="home_header">
-        <div className="panel_web" onClick={this.changeLanguage} style={{cursor:'pointer'}}>
-            $i18n{headerPage.js1}$i18n-end
-        </div>
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
           iconName={personal}
           color={color}
         >
-          <span style={titleStyle}>{titleContent || '$i18n{headerPage.js2}$i18n-end'}</span>
+          <span style={titleStyle}>{titleContent || '$i18n{headerPage.js1}$i18n-end'}</span>
         </Header>
         {
           list.length > 1 ? (
@@ -301,7 +276,7 @@ class HeaderPage extends Component {
           onKeyDown={this.allBtnOnclick}
           role="presentation"
         >
-          {this.state.allBtn ? '$i18n{headerPage.js3}$i18n-end' : '$i18n{headerPage.js4}$i18n-end'}
+          {this.state.allBtn ? '$i18n{headerPage.js2}$i18n-end' : '$i18n{headerPage.js3}$i18n-end'}
           <Icon type={this.state.allBtn ? 'upward' : 'pull-down'} />
         </div>
       </div>

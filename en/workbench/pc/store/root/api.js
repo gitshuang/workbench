@@ -8,3 +8,5 @@ export const uploadApplication = data => postFileCros('https://pubapi.yonyouclou
 export const getPoll = () => get('/diwork-heartbeat/heartbeat/checkSession');
 export const getPortal = () => get('/manager/portalCtrl/getPortal');
 export const setCurrent = type => post('/language/setCurrent', {langCode: type});
+export const getAllEnable = () => get('/language/getAllEnable');
+export const getCurrent = () => get('/language/current');

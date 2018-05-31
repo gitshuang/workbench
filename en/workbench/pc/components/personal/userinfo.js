@@ -4,6 +4,7 @@ import onClickOutside from 'react-onclickoutside';
 import Icon from 'components/icon';
 import Button from 'components/button';
 import Href from './href';
+import Language from './language';
 import {
   wrap, imgUser, imgOuter, imgInner, clearfix, userBtnList,
   defaultPic, logOut, tenantArea, tenantPortrait, tenantName,
@@ -35,6 +36,12 @@ class Userinfo extends Component {
     hrefs: PropTypes.arrayOf(PropTypes.object),
     openExitModal: PropTypes.func,
     closeRequestDisplay: PropTypes.func,
+    language: PropTypes.shape({
+      show: PropTypes.bool,
+      defaultValue: PropTypes.string,
+      onChangeLanguage: PropTypes.func,
+      languageList: PropTypes.arrayOf(PropTypes.object),
+    }),
   };
   static defaultProps = {
     // 是否显示首页编辑选项  默认为true
@@ -63,6 +70,26 @@ class Userinfo extends Component {
     openExitModal: () => {},
     // 关闭显示创建团队成功弹窗
     closeRequestDisplay: () => {},
+    // 多语的数据集合
+    language: {
+      show: false,
+      defaultValue: 'zh',
+      onChangeLanguage: () => {},
+      languageList: [
+        {
+          value: 'zh',
+          context: 'NoDictionary'
+        },
+        {
+          value: 'en',
+          context: 'English'
+        },
+        {
+          value: 'eh',
+          context: 'NoDictionary'
+        },
+      ]
+    },
   };
   constructor(props) {
     super(props);
@@ -123,6 +150,7 @@ class Userinfo extends Component {
       editType,
       titleType,
       dispatch,
+      language,
     } = this.props;
 
     // 允许用户退出空间， 0:禁止;1:允许
@@ -148,6 +176,14 @@ class Userinfo extends Component {
             <Icon type="exit" />
             <span>NoDictionary</span>
           </div>
+          {
+            language && language.show ? <Language 
+              defaultValue={language.defaultValue}
+              onChangeLanguage={language.onChangeLanguage}
+              languageList={language.languageList}
+            /> : null
+          }
+          
           <div className={userInfoPane}>
             <div className={imgUser}>
               <div className={imgOuter}>
