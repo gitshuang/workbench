@@ -145,7 +145,7 @@ class Personals extends Component {
         return;
       }
       this.setState({
-        language:{...this.state.language,defaultValue:payload.dislpayName}
+        language:{...this.state.language,defaultValue:payload.langCode}
       })
     });
    
