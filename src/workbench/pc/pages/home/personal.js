@@ -14,7 +14,7 @@ import { get } from 'http';
 
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
-const { setCurrent, getAllEnable} = rootActions;
+const { setCurrent, getAllEnable, getCurrent} = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
@@ -33,6 +33,7 @@ const { setCurrent, getAllEnable} = rootActions;
     getUserInfo,
     setCurrent,
     getAllEnable,
+    getCurrent,
   },
 )
 class Personals extends Component {
@@ -111,7 +112,9 @@ class Personals extends Component {
       });
     });
     //新增 添加多语的所有语言
-    this.getAllEnableFunc()
+    this.getAllEnableFunc();
+    //获取默认
+    this.getDefaultLang();
   }
  
   componentDidMount() {
@@ -125,33 +128,31 @@ class Personals extends Component {
         return;
       }
       let languageListVal = [],item={},defaultValue;
-      payload.data.map((item,index)=>{
+      payload.map((item,index)=>{
         item = {value:item.langCode, context:item.dislpayName}
         languageListVal.push(item);
       });
-      //同时获取默认的语言
-      const cookieVal = document.cookie;
-      const langIndex = cookieVal.indexOf('langType=');
-      if (langIndex === -1) { // englishtransfer
-          defaultValue = '简体中文'
-      }else{
-        defaultValue = cookieVal.substring(langIndex + 10, cookieVal.length);
-      }
+      
       this.setState({
-        language:{...this.state.language, defaultValue, languageList:languageListVal}
+        language:{...this.state.language, languageList:languageListVal}
       })
     });
+  }
+  getDefaultLang = () =>{
+    const {getCurrent} = this.props;
+    getCurrent().then(({ error, payload }) => {
+      if (error) {
+        return;
+      }
+      this.setState({
+        language:{...this.state.language,defaultValue:payload.dislpayName}
+      })
+    });
+   
   }
   onChangeLanguage = (value) =>{
     this.props.setCurrent(value);
     window.location.reload();
-    if(value === 'zh_CN'){
-      document.cookie = 'langType="简体中文"';
-    }else if(value === 'en_US'){
-      document.cookie = 'langType="english"';
-    }else{
-      document.cookie = 'langType="繁体中文"';
-    }
   }
   getCompanyType = () => {
     const { tenantid } = window.diworkContext();

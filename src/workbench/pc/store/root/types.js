@@ -19,4 +19,5 @@ export default createTypes(
   'GET_PORTAL',
   'SET_CURRENT',
   'GET_ALL_ENABLE',
+  'GET_CURRENT',
 );

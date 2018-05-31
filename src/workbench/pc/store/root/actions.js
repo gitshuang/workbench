@@ -10,6 +10,7 @@ import {
   getPortal,
   setCurrent,
   getAllEnable,
+  getCurrent,
 } from './api';
 
 const {
@@ -31,7 +32,7 @@ const {
   GET_PORTAL,
   SET_CURRENT,
   GET_ALL_ENABLE,
-  
+  GET_CURRENT,
 } = types;
 
 export default createActions(
@@ -45,6 +46,7 @@ export default createActions(
     [GET_PORTAL]: getPortal,
     [SET_CURRENT]: setCurrent,
     [GET_ALL_ENABLE]: getAllEnable,
+    [GET_CURRENT]: getCurrent,
   },
   REQUEST_START,
   REQUEST_SUCCESS,
