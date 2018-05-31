@@ -14,6 +14,7 @@ import manage from './manage';
 import team from './team';
 import actions from './actions';
 import teamconfig from './teamconfig';
+// import { setCurrent } from './api';
 
 const notification = Notification.newInstance({
   position: 'bottomRight',
@@ -57,6 +58,7 @@ const {
   uploadApplication,
   getPoll,
   getPortal,
+  setCurrent,
 } = actions;
 
 const defaultState = {
@@ -204,6 +206,7 @@ const reducer = handleActions({
       imShowed: false,
     };
   },
+  [setCurrent]: state => state,
 }, defaultState);
 
 export default function (state, action) {

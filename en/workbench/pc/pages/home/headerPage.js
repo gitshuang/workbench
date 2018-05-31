@@ -31,6 +31,7 @@ const {
   requestStart,
   requestSuccess,
   requestError,
+  setCurrent,
 } = rootActions;
 
 const { openExitModal } = teamconfigActions;
@@ -57,6 +58,7 @@ const { openExitModal } = teamconfigActions;
     getWorkList,
     setCutUser,
     openExitModal,
+    setCurrent,
   },
 )
 class HeaderPage extends Component {
@@ -102,7 +104,7 @@ class HeaderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allBtn: false, // NoDictionarytab
+      allBtn: false, // englishtab
       btnShow: false,
       allowTenants: [],
     };
@@ -231,7 +233,28 @@ class HeaderPage extends Component {
       btnShow,
     });
   }
-
+  changeLanguage = () => {
+    const cookieVal = document.cookie;
+    const langIndex = cookieVal.indexOf('langType=');
+    if (langIndex === -1) { // englishtransfer
+      document.cookie = 'langType="en"';
+      this.props.setCurrent('en_US');
+      window.location.reload();
+      alert('now lang is Chinese,change to english');
+    }
+    const langVal = cookieVal.substring(langIndex + 10, langIndex + 12);
+    if (langVal === 'en') {
+      document.cookie = 'langType="cn"';
+      this.props.setCurrent('zh_CN');
+      window.location.reload();
+      alert('now lang is en,change to chinese');
+    } else if (langVal === 'cn') {
+      document.cookie = 'langType="en"';
+      alert('now lang is Chinese,change to english');
+      this.props.setCurrent('en_US');
+      window.location.reload();
+    }
+  }
   render() {
     const {
       list,
@@ -248,13 +271,16 @@ class HeaderPage extends Component {
 
     return (
       <div className={`${header}`} style={background} id="home_header">
+        <div className="panel_web" onClick={this.changeLanguage} style={{cursor:'pointer'}}>
+            changelanguage
+        </div>
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
           iconName={personal}
           color={color}
         >
-          <span style={titleStyle}>{titleContent || 'NoDictionary'}</span>
+          <span style={titleStyle}>{titleContent || 'homepage'}</span>
         </Header>
         {
           list.length > 1 ? (
@@ -275,7 +301,7 @@ class HeaderPage extends Component {
           onKeyDown={this.allBtnOnclick}
           role="presentation"
         >
-          {this.state.allBtn ? 'NoDictionary' : 'NoDictionary'}
+          {this.state.allBtn ? 'fold,showAll' : 'fold,showAll'}
           <Icon type={this.state.allBtn ? 'upward' : 'pull-down'} />
         </div>
       </div>

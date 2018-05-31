@@ -28,33 +28,40 @@ var walk = function (dir, dir_i18n, done) {
                         results = results.concat(res);
                         if (!--pending) done(null, results);
                     });
-        } else {
+        } else { //这是单个文件
           results.push(file);
-          let readLine = lineReader.createInterface({
-            input: fs.createReadStream(file),
-          });// 先创建一个实例
-          let count = 0;
           var half = file.substring(root.length, file.length);
-          readLine.on('line', (line) => {
-              var spieces=line;// 拿到所有字符串
-              var re= /([\u4E00-\u9FA5]|[\uFE30-\uFFA0])+/g;
-              var regNote =/(^\s*\/\/|^\s*\/\*.*\*\/$)/g;
-              var replaced=''
-              var matchNote = spieces.match(regNote);
-              // 添加一个判断 是否是注释
-              if(matchNote){
-                replaced=replaced+spieces;
-              }else{
-                var match=spieces.match(re);//取到中文
-                if(match){ // 由此可见值校验前半段
-                    var replacement = '$i18n{' + match +'}$i18n-end' ;
-                    replaced=replaced+spieces.replace(re,replacement)
+          // 20180531新增判断如果不是js文件，则不用解析了
+          if(file.match(/.jpg|.gif|.png|.bmp|.svg/i)){
+            //fs.copyFileSync(file,root_i18n+half);
+            fs.writeFileSync(root_i18n+half, fs.readFileSync(file)); 
+          }else{
+            let readLine = lineReader.createInterface({
+              input: fs.createReadStream(file),
+            });// 先创建一个实例
+            let count = 0;
+            readLine.on('line', (line) => {
+                var spieces=line;// 拿到所有字符串
+                var re= /([\u4E00-\u9FA5]|[\uFE30-\uFFA0])+/g;
+                var regNote =/(^\s*\/\/|^\s*\/\*.*\*\/$)/g;
+                var replaced=''
+                var matchNote = spieces.match(regNote);
+                // 添加一个判断 是否是注释
+                if(matchNote){
+                  replaced=replaced+spieces;
                 }else{
-                    replaced=replaced+spieces;
+                  var match=spieces.match(re);//取到中文
+                  if(match){ // 由此可见值校验前半段
+                      var replacement = '$i18n{' + match +'}$i18n-end' ;
+                      replaced=replaced+spieces.replace(re,replacement)
+                  }else{
+                      replaced=replaced+spieces;
+                  }
                 }
-              }
-              fs.appendFileSync(root_i18n+half, replaced+'\n');
-          });
+                fs.appendFileSync(root_i18n+half, replaced+'\n');
+            });
+          }
+          
         }
         if (!--pending) done(null, results);
       });

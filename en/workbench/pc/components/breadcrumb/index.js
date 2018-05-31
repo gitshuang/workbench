@@ -52,7 +52,7 @@ class Breadcrumbs extends Component {
           onClick={() => this.enhancedGoBack('defaultUrl', -1)}
           onKeyDown={() => this.enhancedGoBack('defaultUrl', -1)}
           role="presentation"
-        >NoDictionary
+        >back
         </a>
         <span className={breadcrumbBack}>|</span>
         <Breadcrumb>

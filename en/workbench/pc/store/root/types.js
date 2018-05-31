@@ -17,4 +17,5 @@ export default createTypes(
   'UPLOAD_APPLICATION',
   'GET_POLL',
   'GET_PORTAL',
+  'SET_CURRENT',
 );

@@ -64,7 +64,7 @@ class searchOther extends Component {
       activePage:1,
       pagesize:10,
       isShowPagination:true,
-      dataPerPageNum:10,//10items,page/items,page
+      dataPerPageNum:10,//10NoDictionary/NoDictionary
     }
   }
 
@@ -126,7 +126,7 @@ class searchOther extends Component {
   paginationNumSelect = (id,dataNum) =>{
     const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab,activePage}=this.state;
-    const reg = new RegExp("items,page\/items,page","g");
+    const reg = new RegExp("NoDictionary\/NoDictionary","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
     this.setState({
       dataPerPageNum:dataPerPageNum
@@ -150,15 +150,15 @@ class searchOther extends Component {
     const dMinutes = parseInt(d / 60, 10);
     const dSeconds = parseInt(d, 10);
     if (dDays > 0 && dDays < 4) {
-      ts = `${dDays}day ago`;
+      ts = `${dDays}NoDictionary`;
     } else if (dDays <= 0 && dHours > 0) {
-      ts = `${dHours}h before`;
+      ts = `${dHours}NoDictionary`;
     } else if (dDays <= 0 && dHours <= 0 && dMinutes > 0) {
-      ts = `${dMinutes}min before`;
+      ts = `${dMinutes}NoDictionary`;
     } else if (dSeconds < 60) {
-      ts = 'just now';
+      ts = 'NoDictionary';
     } else if (dDays > 3) {
-      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/year,month,day|year,month,day/g, '-').replace(/year,month,day/g, ' ');
+      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/NoDictionary|NoDictionary/g, '-').replace(/NoDictionary/g, ' ');
     }
     return ts
   }
@@ -188,7 +188,7 @@ class searchOther extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div>total,items{dataList.totalElements}total,items</div>
+            <div>NoDictionary{dataList.totalElements}NoDictionary</div>
             <ul className={recently}>{lis}</ul>
 
             <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>

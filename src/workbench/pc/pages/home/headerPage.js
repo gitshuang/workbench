@@ -239,17 +239,20 @@ class HeaderPage extends Component {
     if (langIndex === -1) { // englishtransfer
       document.cookie = 'langType="en"';
       this.props.setCurrent('en_US');
+      window.location.reload();
       alert('now lang is Chinese,change to english');
     }
     const langVal = cookieVal.substring(langIndex + 10, langIndex + 12);
     if (langVal === 'en') {
       document.cookie = 'langType="cn"';
       this.props.setCurrent('zh_CN');
+      window.location.reload();
       alert('now lang is en,change to chinese');
     } else if (langVal === 'cn') {
       document.cookie = 'langType="en"';
-      this.props.setCurrent('en_US');
       alert('now lang is Chinese,change to english');
+      this.props.setCurrent('en_US');
+      window.location.reload();
     }
   }
   render() {
@@ -268,8 +271,8 @@ class HeaderPage extends Component {
 
     return (
       <div className={`${header}`} style={background} id="home_header">
-        <div className="panel_web" onClick={this.changeLanguage}>
-            qiehuan
+        <div className="panel_web" onClick={this.changeLanguage} style={{cursor:'pointer'}}>
+            切换语言
         </div>
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
