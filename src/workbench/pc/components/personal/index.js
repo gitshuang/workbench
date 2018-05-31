@@ -62,7 +62,7 @@ class Personal extends Component {
           ? <img
             alt={userAvator}
             src={userAvator}
-            className={personalImg}
+            className={`${personalImg} gnoreclass`}
             onClick={this.handerClick}
             onKeyDown={this.handerClick}
             role="presentation"
@@ -86,7 +86,7 @@ class Personal extends Component {
                 bgColor={this.bgColor}
                 userInfoDisplay={userInfoDisplay}
                 closePersonalModal={this.closePersonalModal}
-                outsideClickIgnoreClass={personalImg}
+                outsideClickIgnoreClass={`gnoreclass`}
                 {...this.props}
               />
               : null

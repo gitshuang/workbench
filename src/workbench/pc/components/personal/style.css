@@ -660,3 +660,27 @@
   line-height: 16px;
   margin-top: 10px;
 }
+
+
+.language{
+  position: absolute;
+  width: 110px;
+  right: 60px;
+  top: 20px;
+}
+.language :global(.u-select .u-select-selection){
+  border: none;
+}
+
+.language :global(.u-select .u-select-arrow){
+  right: auto;
+  left: 70px;
+}
+
+:global(.gnoreclass.u-select-dropdown){
+  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.2);
+}
+
+:global(.gnoreclass.u-select-dropdown .u-select-dropdown-menu-item){
+  border: none;
+}
