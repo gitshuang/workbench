@@ -151,8 +151,13 @@ class Personals extends Component {
    
   }
   onChangeLanguage = (value) =>{
-    this.props.setCurrent(value);
-    window.location.reload();
+    this.props.setCurrent(value).then(({ error, payload }) => {
+      if (error) {
+        return;
+      }
+      window.location.reload();
+    });;
+  
   }
   getCompanyType = () => {
     const { tenantid } = window.diworkContext();
