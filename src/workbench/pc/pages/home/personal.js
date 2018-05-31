@@ -9,11 +9,12 @@ import TeamExitModal from 'containers/teamExitModal';
 /*   actions   */
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-
+import rootActions from 'store/root/actions';
+import { get } from 'http';
 
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
-
+const { setCurrent, getAllEnable} = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
@@ -30,6 +31,8 @@ const { openExitModal } = teamconfigActions;
     closeRequestDisplay,
     openExitModal,
     getUserInfo,
+    setCurrent,
+    getAllEnable,
   },
 )
 class Personals extends Component {
@@ -78,19 +81,19 @@ class Personals extends Component {
       language: {
         show: true,
         defaultValue: 'zh',
-        onChangeLanguage: (value) => {console.log(value)},
+        onChangeLanguage: this.onChangeLanguage,
         languageList: [
           {
             value: 'zh',
-            context: '简体中文'
+            context: '简体中文1'
           },
           {
             value: 'en',
-            context: 'English'
+            context: 'English2'
           },
           {
             value: 'eh',
-            context: '繁体中文'
+            context: '繁体中文3'
           },
         ]
       }
@@ -107,12 +110,49 @@ class Personals extends Component {
         userInfo: payload,
       });
     });
+    //新增 添加多语的所有语言
+    this.getAllEnableFunc()
   }
-
+ 
   componentDidMount() {
 
   }
 
+  getAllEnableFunc = () =>{
+    const {getAllEnable} = this.props;
+    getAllEnable().then(({ error, payload }) => {
+      if (error) {
+        return;
+      }
+      let languageListVal = [],item={},defaultValue;
+      payload.data.map((item,index)=>{
+        item = {value:item.langCode, context:item.dislpayName}
+        languageListVal.push(item);
+      });
+      //同时获取默认的语言
+      const cookieVal = document.cookie;
+      const langIndex = cookieVal.indexOf('langType=');
+      if (langIndex === -1) { // englishtransfer
+          defaultValue = '简体中文'
+      }else{
+        defaultValue = cookieVal.substring(langIndex + 10, cookieVal.length);
+      }
+      this.setState({
+        language:{...this.state.language, defaultValue, languageList:languageListVal}
+      })
+    });
+  }
+  onChangeLanguage = (value) =>{
+    this.props.setCurrent(value);
+    window.location.reload();
+    if(value === 'zh_CN'){
+      document.cookie = 'langType="简体中文"';
+    }else if(value === 'en_US'){
+      document.cookie = 'langType="english"';
+    }else{
+      document.cookie = 'langType="繁体中文"';
+    }
+  }
   getCompanyType = () => {
     const { tenantid } = window.diworkContext();
     const {
@@ -172,7 +212,7 @@ class Personals extends Component {
           titleType={titleType}
           hrefs={hrefs}
           logout={logout}
-          language={language}
+          language={this.state.language}
         />
         {
           exitModal ?

@@ -9,6 +9,7 @@ import {
   getPoll,
   getPortal,
   setCurrent,
+  getAllEnable,
 } from './api';
 
 const {
@@ -29,6 +30,8 @@ const {
   GET_POLL,
   GET_PORTAL,
   SET_CURRENT,
+  GET_ALL_ENABLE,
+  
 } = types;
 
 export default createActions(
@@ -41,6 +44,7 @@ export default createActions(
     [GET_POLL]: getPoll,
     [GET_PORTAL]: getPortal,
     [SET_CURRENT]: setCurrent,
+    [GET_ALL_ENABLE]: getAllEnable,
   },
   REQUEST_START,
   REQUEST_SUCCESS,

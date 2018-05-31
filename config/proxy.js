@@ -49,7 +49,9 @@ var api = [
   '/desktop/update',
   '/service/getServiceByTenantIdAndServiceCode',
 
-  '/manager/portalCtrl/getPortal'
+  '/manager/portalCtrl/getPortal',
+  
+  '/language/getAllEnable'
 ]
 
 var rapApi = [

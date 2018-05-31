@@ -18,4 +18,5 @@ export default createTypes(
   'GET_POLL',
   'GET_PORTAL',
   'SET_CURRENT',
+  'GET_ALL_ENABLE',
 );

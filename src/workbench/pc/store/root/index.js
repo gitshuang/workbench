@@ -59,6 +59,7 @@ const {
   getPoll,
   getPortal,
   setCurrent,
+  getAllEnable,
 } = actions;
 
 const defaultState = {
@@ -207,6 +208,7 @@ const reducer = handleActions({
     };
   },
   [setCurrent]: state => state,
+  [getAllEnable]: state => state,
 }, defaultState);
 
 export default function (state, action) {
