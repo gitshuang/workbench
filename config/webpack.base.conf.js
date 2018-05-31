@@ -6,7 +6,7 @@ var outPut =  process.argv.length < 3 ? 'zh_CN' : `en_US`;
 
 module.exports = {
   entry: {
-    'polyfill': './src/workbench/pc/objectAssignPolyfill.js',
+    'polyfill': `./${goalFilePath}/workbench/pc/objectAssignPolyfill.js`,
   },
   output: {
     path: paths(outPut),
