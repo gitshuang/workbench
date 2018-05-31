@@ -7,4 +7,4 @@ export const getPromotionServiceList = () => get('/getPromotionService');
 export const uploadApplication = data => postFileCros('https://pubapi.yonyoucloud.com/file/upload/oss/workbench-image-path-applicationIcon', data);
 export const getPoll = () => get('/diwork-heartbeat/heartbeat/checkSession');
 export const getPortal = () => get('/manager/portalCtrl/getPortal');
-export const setCurrent = type => post('/language/setCurrent', type);
+export const setCurrent = type => post('/language/setCurrent', {langCode: type});
