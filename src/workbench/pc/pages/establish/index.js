@@ -15,7 +15,7 @@ import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
 import { logo, establish, hidden, imgInner } from './style.css';
 
 
-const { changeUserInfoDisplay, hideUserInfoDisplay, getSearchEnterOrTeam } = homeActions;
+const { getSearchEnterOrTeam } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
 @withRouter
@@ -34,8 +34,6 @@ const { requestStart, requestSuccess, requestError } = rootActions;
   ),
   {
     getSearchEnterOrTeam,
-    changeUserInfoDisplay,
-    hideUserInfoDisplay,
     requestStart,
     requestSuccess,
     requestError,
@@ -47,8 +45,6 @@ class Establish extends Component {
     requestError: PropTypes.func,
     requestSuccess: PropTypes.func,
     userInfoDisplay: PropTypes.bool,
-    hideUserInfoDisplay: PropTypes.func,
-    changeUserInfoDisplay: PropTypes.func,
     history: PropTypes.shape({
       replace: PropTypes.func,
     }),
@@ -61,8 +57,6 @@ class Establish extends Component {
     requestError: () => {},
     requestSuccess: () => {},
     userInfoDisplay: true,
-    hideUserInfoDisplay: () => {},
-    changeUserInfoDisplay: () => {},
     history: {},
     userInfo: {},
   };

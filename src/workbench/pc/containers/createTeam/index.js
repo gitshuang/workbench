@@ -13,7 +13,7 @@ import Icon from 'pub-comp/icon';
 import {check} from './checkTenantStatus'
 import Progress from 'pub-comp/progress';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { changeUserInfoDisplay, getUserInfo } = homeActions;
+const {  getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
 import {
   wrap,
@@ -47,7 +47,6 @@ import {
     requestError,
     uploadApplication,
     createTeam,
-    changeUserInfoDisplay,
     getUserInfo
   }
 )
@@ -130,7 +129,7 @@ class CreateTeamContent extends Component {
   }
 
   create = () => {
-    const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
+    const { history, createTeam, requestStart, requestSuccess, requestError, getUserInfo } = this.props;
     const { value, logo } = this.state;
     if ( !value || value == ""){
       this.setState({
@@ -159,10 +158,6 @@ class CreateTeamContent extends Component {
       }
       
       requestSuccess();
-      
-      // getUserInfo();
-      // history.replace('/');
-      // changeUserInfoDisplay();
       const tenantId = payload.tenantId;
       // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       localStorage.setItem('create', "1");

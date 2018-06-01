@@ -46,8 +46,6 @@ const {
   requestError,
   getServiceList,
   getMessage,
-  changeQuickServiceDisplay,
-  changeQuickServiceHidden,
   popMessage,
   getLatestAccessList,
   getPromotionServiceList,
@@ -61,7 +59,6 @@ const {
 
 const defaultState = {
   serviceList: [],
-  quickServiceDisplay: false,
   messageType: false,
   messageList: [],
   messageShowNum: 0,
@@ -178,14 +175,6 @@ const reducer = handleActions({
       messageShowNum: newMessageShowNum,
     };
   },
-  [changeQuickServiceDisplay]: state => ({
-    ...state,
-    quickServiceDisplay: true,
-  }),
-  [changeQuickServiceHidden]: state => ({
-    ...state,
-    quickServiceDisplay: false,
-  }),
   [changeMessageType]: (state, { payload: messageType }) => ({
     ...state,
     messageType,

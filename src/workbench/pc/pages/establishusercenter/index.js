@@ -14,7 +14,7 @@ import Breadcrumbs from 'components/breadcrumb';
 import { pageHome, appBreadcrumb, establisPage, hidden, imgInner } from './style.css';
 
 const {
-  changeUserInfoDisplay, hideUserInfoDisplay, getSearchEnterOrTeam,
+  getSearchEnterOrTeam,
 } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
@@ -22,7 +22,6 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 @connect(
   mapStateToProps(
     'searchEnterOrTeamList',
-    'userInfoDisplay',
     'metaData',
     {
       key: 'userInfo',
@@ -34,8 +33,6 @@ const { requestStart, requestSuccess, requestError } = rootActions;
   ),
   {
     getSearchEnterOrTeam,
-    changeUserInfoDisplay,
-    hideUserInfoDisplay,
     requestStart,
     requestSuccess,
     requestError,
@@ -46,9 +43,6 @@ class EstablishUserCenter extends Component {
     getSearchEnterOrTeam: PropTypes.func,
     requestError: PropTypes.func,
     requestSuccess: PropTypes.func,
-    userInfoDisplay: PropTypes.bool,
-    hideUserInfoDisplay: PropTypes.func,
-    changeUserInfoDisplay: PropTypes.func,
     history: PropTypes.shape({
       replace: PropTypes.func,
       goBack: PropTypes.func,
@@ -61,9 +55,6 @@ class EstablishUserCenter extends Component {
     getSearchEnterOrTeam: () => {},
     requestError: () => {},
     requestSuccess: () => {},
-    userInfoDisplay: true,
-    hideUserInfoDisplay: () => {},
-    changeUserInfoDisplay: () => {},
     history: {},
     userInfo: {},
   };
@@ -92,17 +83,11 @@ class EstablishUserCenter extends Component {
   }
 
   goHome = () => {
-    const { userInfoDisplay, hideUserInfoDisplay, changeUserInfoDisplay } = this.props;
     const { allowTenants } = this.state;
     if (allowTenants.length <= 0) {
-      if (userInfoDisplay) {
-        hideUserInfoDisplay();
-      } else {
-        changeUserInfoDisplay();
-      }
-    } else {
-      this.props.history.replace('/');
+      return false;
     }
+    this.props.history.replace('/');
   }
 
   render() {
