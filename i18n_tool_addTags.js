@@ -42,8 +42,8 @@ var walk = function (dir, dir_i18n, done) {
             let count = 0;
             readLine.on('line', (line) => {
                 var spieces=line;// 拿到所有字符串
-                var re= /([\u4E00-\u9FA5]|[\uFE30-\uFFA0])+/g;
-                var regNote =/(^\s*\/\/|^\s*\/\*.*\*\/$)/g;
+                var re= /[\u4E00-\u9FA5]+([\u4E00-\u9FA5]|[\（\）\《\》\——\；\？\?\，\,\。\.\“\”\！])+/g;
+                var regNote =/(^.*\/\/|^\s*\/\*.*\*\/$)/g; // 存在的问题：中文展示后面有注释
                 var replaced=''
                 var matchNote = spieces.match(regNote);
                 // 添加一个判断 是否是注释
