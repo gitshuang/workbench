@@ -190,7 +190,10 @@ class HeaderPage extends Component {
         hash,
       },
     } = window;
-    window.location.replace(`${origin || ''}${pathname || ''}?tenantId=${tenantId}&switch=true${hash}`);
+    const originUrl = origin || '';
+    const pathnameUrl = pathname || '';
+    const locationUrl = `${origin}${pathname}?tenantId=${tenantId}&switch=true${hash}`;
+    window.location.replace(locationUrl);
   }
 
   closeFun = () => {
