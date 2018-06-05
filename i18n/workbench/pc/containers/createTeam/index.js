@@ -60,11 +60,11 @@ class CreateTeamContent extends Component {
       value: "",
       imgWarning: "",
       imgUrl: "",
-      backUrl : "",    // $i18n{index.js0}$i18n-endurl
+      backUrl : "",    // 上传成功后返回的url
       logo:"",
       disabled:false,
       error:false,
-      processValue:0,//0$i18n{index.js1}$i18n-end1$i18n{index.js2}$i18n-endprogress
+      processValue:0,//0表示未开始，1表示开始progress
       tenantId:'',//tenantId
     }
   }
@@ -166,7 +166,7 @@ class CreateTeamContent extends Component {
       const tenantId = payload.tenantId;
       // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       localStorage.setItem('create', "1");
-      this.setState({tenantId:tenantId,processValue:1});//$i18n{index.js3}$i18n-endprocessValue$i18n{index.js4}$i18n-end1.$i18n{index.js5}$i18n-endprogress
+      this.setState({tenantId:tenantId,processValue:1});//把processValue变成1.那么就开是走progress
     });
   }
   
@@ -177,23 +177,23 @@ class CreateTeamContent extends Component {
     let now = this.state.processValue;
     return (
       <div className={wrap}>
-        <h5>$i18n{index.js6}$i18n-end</h5>
+        <h5>$i18n{index.js0}$i18n-end</h5>
         <hr />
         <div className={create_team_cont}>
           <div className={item+" um-box " }>
-            <label>$i18n{index.js7}$i18n-end<span>&nbsp;*&nbsp;</span></label>
+            <label>$i18n{index.js1}$i18n-end<span>&nbsp;*&nbsp;</span></label>
             <input
-              placeholder="$i18n{index.js8}$i18n-end60$i18n{index.js9}$i18n-end"
+              placeholder="$i18n{index.js2}$i18n-end"
               value={ value }
               onChange={(e)=>{this.onChange(e)}}
             />
           </div>
           <div className={`${name_error} ${_error}`}>
-            $i18n{index.js10}$i18n-end
+            $i18n{index.js3}$i18n-end
           </div>
 
           <div className={`${item} um-box ${upload}`}>
-            <label>$i18n{index.js11}$i18n-end&nbsp; &nbsp; </label>
+            <label>$i18n{index.js4}$i18n-end&nbsp; &nbsp; </label>
             <div className={`${image}`}>
                 <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
                 {/* { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
@@ -201,16 +201,16 @@ class CreateTeamContent extends Component {
                   <Icon type="copyreader" />
                 <input type="file" ref="btn_file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>{ this.imgChange(e) }} />
                 </div> */}
-                {/* <span className={titlp_lab}>{"$i18n{index.js12}$i18n-end<=200K​"}</span> */}
+                {/* <span className={titlp_lab}>{"$i18n{index.js5}$i18n-end<=200K​"}</span> */}
               </div>
           </div>
         </div>
         <hr className={footer_hr}/>
         <div className={footer}>
           <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
-              <Progress check={check} tenantId={this.state.tenantId} startFlag={now} loadingDesc={'$i18n{index.js13}$i18n-end…'}/>
+              <Progress check={check} tenantId={this.state.tenantId} startFlag={now} loadingDesc={'$i18n{index.js6}$i18n-end…'}/>
           </div>
-          <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >$i18n{index.js14}$i18n-end</Button>
+          <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >$i18n{index.js7}$i18n-end</Button>
         </div>
       </div>
     )

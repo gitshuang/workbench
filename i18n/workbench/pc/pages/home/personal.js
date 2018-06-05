@@ -86,7 +86,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: '$i18n{personal.js7}$i18n-end1'
+            context: '$i18n{personal.js7}$i18n-end'
           },
           {
             value: 'en',
@@ -94,7 +94,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: '$i18n{personal.js8}$i18n-end3'
+            context: '$i18n{personal.js8}$i18n-end'
           },
         ]
       }

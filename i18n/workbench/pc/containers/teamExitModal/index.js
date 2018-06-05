@@ -82,7 +82,7 @@ class TeamRemoveModal extends Component {
           if (error) {
             requestError(payload);
           }
-          if(payload.length == 1){//$i18n{index.js0}$i18n-end
+          if(payload.length == 1){//进入该企业或团队
             if(!payload)return;
             this.changeTenant(payload[0].tenantId); 
           }else if(payload.length == 0){
@@ -128,8 +128,8 @@ class TeamRemoveModal extends Component {
       _msg = data.msg;
     }
     const {msg,isManage,close,disable} = this.state;
-    let btnLabel = "$i18n{index.js1}$i18n-end";
-    let _pop_title = "$i18n{index.js2}$i18n-end"+name+"?";
+    let btnLabel = "$i18n{index.js0}$i18n-end";
+    let _pop_title = "$i18n{index.js1}$i18n-end"+name+"?";
     let _cont = null;
     let _btn = [
       {
@@ -138,12 +138,12 @@ class TeamRemoveModal extends Component {
         disable
       },
       {
-        label: '$i18n{index.js3}$i18n-end',
+        label: '$i18n{index.js2}$i18n-end',
         fun: this.cancelFn,
       }
     ];
     let _select_enter = null;
-    if(isManage == 0){//$i18n{index.js4}$i18n-end
+    if(isManage == 0){//退出团队信息
       _cont = (<div className={content} >
             <p>{_msg}</p>
         </div>);
@@ -152,18 +152,18 @@ class TeamRemoveModal extends Component {
             isManage:1
           })
         }
-    }else if(isManage == 1){//$i18n{index.js5}$i18n-end
+    }else if(isManage == 1){//提示是否需要退出或解散
       _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title= "$i18n{index.js6}$i18n-end"+name+"?";
+      _pop_title= "$i18n{index.js3}$i18n-end"+name+"?";
       _btn[0].fun = ()=>{
          this.configFn();
       }
-    }else if(isManage == 3){//$i18n{index.js7}$i18n-end
+    }else if(isManage == 3){//退出失败后显示信息
       _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title= "$i18n{index.js8}$i18n-end"+name+"?";
+      _pop_title= "$i18n{index.js4}$i18n-end"+name+"?";
       _btn = null;
-    }else if(isManage == 2){//$i18n{index.js9}$i18n-end/$i18n{index.js10}$i18n-end
-      _pop_title= "$i18n{index.js11}$i18n-end"+name;
+    }else if(isManage == 2){//退出后选中企业/团队
+      _pop_title= "$i18n{index.js5}$i18n-end"+name;
       _cont = <SelectEnter />
       _btn = null;
       _select_enter = select_enter_close;

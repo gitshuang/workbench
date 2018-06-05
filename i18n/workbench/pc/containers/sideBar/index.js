@@ -123,7 +123,7 @@ class SideBarContainer extends Component {
   render() {
     const { menus } = this.props;
     const { openKeys, selectedKeys } = this.state;
-    const isTop = true;//$i18n{index.js0}$i18n-end
+    const isTop = true;//标识是否是一级菜单
     return (
       <div className={sideBar} >
         <Menu

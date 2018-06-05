@@ -164,7 +164,7 @@ class Invitation extends Component {
         content: '$i18n{index.js1}$i18n-end!', duration: 1.5, position: 'topLeft', color: 'warning',
       });
     } else {
-      const parent = { email: mails, message: message === '' ? '$i18n{index.js2}$i18n-end-$i18n{index.js3}$i18n-end、$i18n{index.js4}$i18n-end' : message, creator };
+      const parent = { email: mails, message: message === '' ? '$i18n{index.js2}$i18n-end-$i18n{index.js3}$i18n-end' : message, creator };
       requestStart();
       sendMessage(parent).then(() => {
         requestSuccess();
@@ -211,7 +211,7 @@ class Invitation extends Component {
     /*
     const tip = (
       <div className={tootip}>
-        $i18n{index.js5}$i18n-end
+        $i18n{index.js4}$i18n-end
       </div>
     );
     */
@@ -221,11 +221,11 @@ class Invitation extends Component {
           <div className="um-header">
             <Header onLeftClick={this.goHome} iconName="home" >
               <div>
-                <span>$i18n{index.js6}$i18n-end</span>
+                <span>$i18n{index.js5}$i18n-end</span>
               </div>
             </Header>
             <div className={appBreadcrumb}>
-              <BreadcrumbContainer data={[{ name: '$i18n{index.js7}$i18n-end' }]} goback={this.goBack} />
+              <BreadcrumbContainer data={[{ name: '$i18n{index.js6}$i18n-end' }]} goback={this.goBack} />
             </div>
           </div>
         </div>
@@ -237,28 +237,28 @@ class Invitation extends Component {
               onChange={this.callback}
               className="demo-tabs"
             >
-              <TabPane tab="$i18n{index.js8}$i18n-end" key="1" className={tabPane1}>
-                <p>$i18n{index.js9}$i18n-end</p>
+              <TabPane tab="$i18n{index.js7}$i18n-end" key="1" className={tabPane1}>
+                <p>$i18n{index.js8}$i18n-end</p>
                 <div className={urlArea}>
-                  <span>$i18n{index.js10}$i18n-end</span>
+                  <span>$i18n{index.js9}$i18n-end</span>
                   <input ref={(c) => { this.shortUrl = c; }} type="text" value={url} readOnly />
                 </div>
-                <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >$i18n{index.js11}$i18n-end</ButtonBrand>
+                <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >$i18n{index.js10}$i18n-end</ButtonBrand>
 
               </TabPane>
-              <TabPane tab="$i18n{index.js12}$i18n-end" key="2" className={tabPane2}>
+              <TabPane tab="$i18n{index.js11}$i18n-end" key="2" className={tabPane2}>
 
-                <p className={firstP}>$i18n{index.js13}$i18n-end</p>
+                <p className={firstP}>$i18n{index.js12}$i18n-end</p>
                 <FormControl
-                  placeholder="$i18n{index.js14}$i18n-end-$i18n{index.js15}$i18n-end、$i18n{index.js16}$i18n-end"
+                  placeholder="$i18n{index.js13}$i18n-end-$i18n{index.js14}$i18n-end"
                   value={message}
                   onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
                 />
 
-                <p>$i18n{index.js17}$i18n-end</p>
+                <p>$i18n{index.js15}$i18n-end</p>
                 <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-                <p>$i18n{index.js18}$i18n-end “;” $i18n{index.js19}$i18n-end</p>
+                <p>$i18n{index.js16}$i18n-end “;” $i18n{index.js17}$i18n-end</p>
                 <TagsInput
                   value={this.state.mails}
                   addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
@@ -285,15 +285,15 @@ class Invitation extends Component {
                   })
                 }
                 </ul> */}
-                <ButtonBrand className={submitBtn} onClick={this.submit} >$i18n{index.js20}$i18n-end</ButtonBrand>
+                <ButtonBrand className={submitBtn} onClick={this.submit} >$i18n{index.js18}$i18n-end</ButtonBrand>
               </TabPane>
-              <TabPane tab="$i18n{index.js21}$i18n-end" key="3" className={tabPane3}>
+              <TabPane tab="$i18n{index.js19}$i18n-end" key="3" className={tabPane3}>
                 <div>
-                  <span>$i18n{index.js22}$i18n-end</span>
+                  <span>$i18n{index.js20}$i18n-end</span>
                   <div className={qrCode} id="qrCode">
                     <img alt="" src="/invite/getQRCode" />
                   </div>
-                  {/* <ButtonBrand className={printQrBtn} >$i18n{index.js23}$i18n-end</ButtonBrand> */}
+                  {/* <ButtonBrand className={printQrBtn} >$i18n{index.js21}$i18n-end</ButtonBrand> */}
                 </div>
               </TabPane>
             </Tabs>

@@ -71,7 +71,7 @@ class TeamTransferModal extends Component {
           ]} 
           >
           <div className={content} >
-            <p>$i18n{index.js3}$i18n-end。</p>
+            <p>$i18n{index.js3}$i18n-end</p>
             <p>$i18n{index.js4}$i18n-end</p>
           </div>
         </PopDialog>

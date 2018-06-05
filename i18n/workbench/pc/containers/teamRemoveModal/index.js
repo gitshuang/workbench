@@ -70,7 +70,7 @@ class TeamRemoveModal extends Component {
       <PopDialog
           className="team_remove_modal"
           show={ true }
-          title="$i18n{index.js3}$i18n-end?"
+          title="$i18n{index.js3}$i18n-end"
           backup={false}
           close={this.cancelFn} 
           btns={btn} 

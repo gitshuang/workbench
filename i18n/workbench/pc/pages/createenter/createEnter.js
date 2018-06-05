@@ -96,7 +96,7 @@ class CreateEnter extends Component {
       value: 'A',
       verify: true,
     };
-    this.address = '$i18n{createEnter.js4}$i18n-end|$i18n{createEnter.js5}$i18n-end|$i18n{createEnter.js6}$i18n-end|';
+    this.address = '$i18n{createEnter.js4}$i18n-end}|北京|$i18n{createEnter.js5}$i18n-end|';
   }
 
   onChange = (obj) => {
@@ -175,7 +175,7 @@ class CreateEnter extends Component {
     } = this.state;
     const Butt = processValue !== 0
       ?
-      (<div className={progressBar}><Progress check={check} tenantId={tenantId} startFlag={processValue} loadingDesc="$i18n{createEnter.js7}$i18n-end…" /></div>)
+      (<div className={progressBar}><Progress check={check} tenantId={tenantId} startFlag={processValue} loadingDesc="$i18n{createEnter.js6}$i18n-end…" /></div>)
       :
       <SubmitBtn isSubmit disabled={this.state.disabled} />;
     return (
@@ -183,19 +183,19 @@ class CreateEnter extends Component {
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enterForm}>
           <FormItem
             showMast={false}
-            labelName={<span>$i18n{createEnter.js8}$i18n-end<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>$i18n{createEnter.js7}$i18n-end<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="$i18n{createEnter.js9}$i18n-end"
+            errorMessage="$i18n{createEnter.js8}$i18n-end"
             method="blur"
             inline
           >
-            <FormControl name="tenantName" placeholder="$i18n{createEnter.js10}$i18n-end60$i18n{createEnter.js11}$i18n-end" />
+            <FormControl name="tenantName" placeholder="$i18n{createEnter.js9}$i18n-end" />
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>$i18n{createEnter.js12}$i18n-end<font color="red"> &nbsp; &nbsp;</font></span>}
+            labelName={<span>$i18n{createEnter.js10}$i18n-end<font color="red"> &nbsp; &nbsp;</font></span>}
             valuePropsName="value"
             method="change"
             inline
@@ -211,73 +211,73 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>$i18n{createEnter.js13}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>$i18n{createEnter.js11}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="$i18n{createEnter.js14}$i18n-end"
+            errorMessage="$i18n{createEnter.js12}$i18n-end"
             method="blur"
             inline
           >
             <Select
-              defaultValue="-$i18n{createEnter.js15}$i18n-end-"
+              defaultValue="-$i18n{createEnter.js13}$i18n-end-"
               name="tenantIndustry"
               style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
-              <Option value="A">$i18n{createEnter.js16}$i18n-end、$i18n{createEnter.js17}$i18n-end、$i18n{createEnter.js18}$i18n-end、$i18n{createEnter.js19}$i18n-end</Option>
-              <Option value="B">$i18n{createEnter.js20}$i18n-end</Option>
-              <Option value="C">$i18n{createEnter.js21}$i18n-end</Option>
-              <Option value="D">$i18n{createEnter.js22}$i18n-end、$i18n{createEnter.js23}$i18n-end、$i18n{createEnter.js24}$i18n-end</Option>
-              <Option value="S">$i18n{createEnter.js25}$i18n-end、$i18n{createEnter.js26}$i18n-end</Option>
-              <Option value="E">$i18n{createEnter.js27}$i18n-end</Option>
-              <Option value="G">$i18n{createEnter.js28}$i18n-end、$i18n{createEnter.js29}$i18n-end</Option>
-              <Option value="I">$i18n{createEnter.js30}$i18n-end、$i18n{createEnter.js31}$i18n-end</Option>
-              <Option value="F">$i18n{createEnter.js32}$i18n-end</Option>
-              <Option value="H">$i18n{createEnter.js33}$i18n-end、$i18n{createEnter.js34}$i18n-end</Option>
-              <Option value="J">$i18n{createEnter.js35}$i18n-end、$i18n{createEnter.js36}$i18n-end</Option>
-              <Option value="K">$i18n{createEnter.js37}$i18n-end</Option>
-              <Option value="L">$i18n{createEnter.js38}$i18n-end</Option>
-              <Option value="M">$i18n{createEnter.js39}$i18n-end、$i18n{createEnter.js40}$i18n-end</Option>
-              <Option value="N">$i18n{createEnter.js41}$i18n-end、$i18n{createEnter.js42}$i18n-end</Option>
-              <Option value="O">$i18n{createEnter.js43}$i18n-end</Option>
-              <Option value="P">$i18n{createEnter.js44}$i18n-end</Option>
-              <Option value="Q">$i18n{createEnter.js45}$i18n-end、$i18n{createEnter.js46}$i18n-end</Option>
-              <Option value="R">$i18n{createEnter.js47}$i18n-end、$i18n{createEnter.js48}$i18n-end、$i18n{createEnter.js49}$i18n-end</Option>
-              <Option value="T">$i18n{createEnter.js50}$i18n-end</Option>
+              <Option value="A">$i18n{createEnter.js14}$i18n-end</Option>
+              <Option value="B">$i18n{createEnter.js15}$i18n-end</Option>
+              <Option value="C">$i18n{createEnter.js16}$i18n-end</Option>
+              <Option value="D">$i18n{createEnter.js17}$i18n-end</Option>
+              <Option value="S">$i18n{createEnter.js18}$i18n-end</Option>
+              <Option value="E">$i18n{createEnter.js19}$i18n-end</Option>
+              <Option value="G">$i18n{createEnter.js20}$i18n-end</Option>
+              <Option value="I">$i18n{createEnter.js21}$i18n-end</Option>
+              <Option value="F">$i18n{createEnter.js22}$i18n-end</Option>
+              <Option value="H">$i18n{createEnter.js23}$i18n-end</Option>
+              <Option value="J">$i18n{createEnter.js24}$i18n-end</Option>
+              <Option value="K">$i18n{createEnter.js25}$i18n-end</Option>
+              <Option value="L">$i18n{createEnter.js26}$i18n-end</Option>
+              <Option value="M">$i18n{createEnter.js27}$i18n-end</Option>
+              <Option value="N">$i18n{createEnter.js28}$i18n-end</Option>
+              <Option value="O">$i18n{createEnter.js29}$i18n-end</Option>
+              <Option value="P">$i18n{createEnter.js30}$i18n-end</Option>
+              <Option value="Q">$i18n{createEnter.js31}$i18n-end</Option>
+              <Option value="R">$i18n{createEnter.js32}$i18n-end</Option>
+              <Option value="T">$i18n{createEnter.js33}$i18n-end</Option>
             </Select>
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>$i18n{createEnter.js51}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>$i18n{createEnter.js34}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="$i18n{createEnter.js52}$i18n-end"
+            errorMessage="$i18n{createEnter.js35}$i18n-end"
             method="blur"
             inline
           >
             <Select
-              defaultValue="-$i18n{createEnter.js53}$i18n-end-"
+              defaultValue="-$i18n{createEnter.js36}$i18n-end-"
               name="tenantSize"
               style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
-              <Option value="A">0$i18n{createEnter.js54}$i18n-end50</Option>
+              <Option value="A">0－50</Option>
               <Option value="B">51-100</Option>
               <Option value="C">101-200</Option>
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
-              <Option value="F">1001$i18n{createEnter.js55}$i18n-end2000</Option>
-              <Option value="G">2000$i18n{createEnter.js56}$i18n-end</Option>
+              <Option value="F">1001－2000</Option>
+              <Option value="G">2000人</Option>
             </Select>
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>$i18n{createEnter.js57}$i18n-end<font color="red">&nbsp;&nbsp;</font></span>}
+            labelName={<span>$i18n{createEnter.js37}$i18n-end<font color="red">&nbsp;&nbsp;</font></span>}
             isRequire={false}
             valuePropsName="value"
-            errorMessage="$i18n{createEnter.js58}$i18n-end"
+            errorMessage="$i18n{createEnter.js38}$i18n-end"
             method="blur"
             inline
           >
@@ -289,11 +289,11 @@ class CreateEnter extends Component {
             showMast={false}
             isRequire={false}
             valuePropsName="value"
-            errorMessage="$i18n{createEnter.js59}$i18n-end"
+            errorMessage="$i18n{createEnter.js39}$i18n-end"
             method="blur"
             inline
           >
-            <FormControl name="tenantAddress" placeholder="$i18n{createEnter.js60}$i18n-end60$i18n{createEnter.js61}$i18n-end" />
+            <FormControl name="tenantAddress" placeholder="$i18n{createEnter.js40}$i18n-end" />
           </FormItem>
 
           <div className={lxrHr}>
@@ -301,32 +301,32 @@ class CreateEnter extends Component {
           </div>
 
           <div className={lxrTitle}>
-            $i18n{createEnter.js62}$i18n-end
+            $i18n{createEnter.js41}$i18n-end
           </div>
 
           <FormItem
             showMast={false}
-            labelName={<span>$i18n{createEnter.js63}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>$i18n{createEnter.js42}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="$i18n{createEnter.js64}$i18n-end"
+            errorMessage="$i18n{createEnter.js43}$i18n-end"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="$i18n{createEnter.js65}$i18n-end" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl name="linkman" placeholder="$i18n{createEnter.js44}$i18n-end" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
           </FormItem>
 
           <FormItem
             showMast={false}
             valuePropsName="value"
-            labelName={<span>$i18n{createEnter.js66}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>$i18n{createEnter.js45}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             method="blur"
             htmlType="email"
-            errorMessage="$i18n{createEnter.js67}$i18n-end"
+            errorMessage="$i18n{createEnter.js46}$i18n-end"
             inline
           >
-            <FormControl name="tenantEmail" placeholder="$i18n{createEnter.js68}$i18n-end" value={tenantEmail} onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }} />
+            <FormControl name="tenantEmail" placeholder="$i18n{createEnter.js47}$i18n-end" value={tenantEmail} onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }} />
           </FormItem>
 
           <FormItem
@@ -334,20 +334,20 @@ class CreateEnter extends Component {
             className="input_phone"
             showMast={false}
             valuePropsName="value"
-            labelName={<span>$i18n{createEnter.js69}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>$i18n{createEnter.js48}$i18n-end<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             method="blur"
             htmlType="tel"
-            errorMessage="$i18n{createEnter.js70}$i18n-end"
+            errorMessage="$i18n{createEnter.js49}$i18n-end"
             inline
           >
-            <FormControl name="tenantTel" placeholder="$i18n{createEnter.js71}$i18n-end" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+            <FormControl name="tenantTel" placeholder="$i18n{createEnter.js50}$i18n-end" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
           </FormItem>
 
           { /*
             <FormItem
               showMast={false}
-              labelName={<span>$i18n{createEnter.js72}$i18n-end<font color='red'> * </font></span>}
+              labelName={<span>$i18n{createEnter.js51}$i18n-end<font color='red'> * </font></span>}
               isRequire={false} method="change" inline={true}
             >
               <Nature name="tenantNature" defaultValue='LegalPerson' />

@@ -66,7 +66,7 @@ class HeaderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allBtn: false, // $i18n{headerPage.js0}$i18n-endtab
+      allBtn: false, // 默认显示一行tab
       btnShow: false,
     };
   }
@@ -132,11 +132,11 @@ class HeaderPage extends Component {
           iconName={imgIcon}
           color={color}
         >
-          <span style={titleStyle}>{titleContent || '$i18n{headerPage.js1}$i18n-end'}</span>
+          <span style={titleStyle}>{titleContent || '$i18n{headerPage.js0}$i18n-end'}</span>
         </Header>
 
         <div className={`${allBtn} ${BtnShow}`} onClick={this.allBtnOnclick} onKeyDown={this.allBtnOnclick} role="presentation">
-          {this.state.allBtn ? '$i18n{headerPage.js2}$i18n-end' : '$i18n{headerPage.js3}$i18n-end'}
+          {this.state.allBtn ? '$i18n{headerPage.js1}$i18n-end' : '$i18n{headerPage.js2}$i18n-end'}
           <Icon type={this.state.allBtn ? 'upward' : 'pull-down'} />
         </div>
       </div>

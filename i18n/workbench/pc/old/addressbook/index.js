@@ -56,7 +56,7 @@ class Addressbook extends Component {
       _html += item;
     });
     const length = list.length;
-    return "$i18n{index.js0}$i18n-end" + _html + "$i18n{index.js1}$i18n-end" + length + "$i18n{index.js2}$i18n-end";
+    return "$i18n{index.js0}$i18n-end" + _html + "等" + length + "$i18n{index.js1}$i18n-end";
   }
   rendHor = (userHonor) => {
     let list = [];
@@ -72,7 +72,7 @@ class Addressbook extends Component {
     arrItem.forEach((item, index) => {
       _html += item;
     });
-    return "$i18n{index.js3}$i18n-end" + _html;
+    return "$i18n{index.js2}$i18n-end" + _html;
   }
   render() {
     const {
@@ -97,13 +97,13 @@ class Addressbook extends Component {
             <span dangerouslySetInnerHTML={{__html: name}} />
             <span>-{orgName}</span>
           </p>
-          <p style={{ color: "#6E6E77" }}>$i18n{index.js4}$i18n-end : {mobile}</p>
-          <p style={{ color: "#6E6E77" }}>$i18n{index.js5}$i18n-end : {email}</p>
+          <p style={{ color: "#6E6E77" }}>$i18n{index.js3}$i18n-end : {mobile}</p>
+          <p style={{ color: "#6E6E77" }}>$i18n{index.js4}$i18n-end : {email}</p>
           {userProject ? <p style={{ color: "#373C42", marginTop: "5px" }}>{this.renderPro(userProject)}</p> : null}
           {userHonor ? <p style={{ color: "#373C42" }}>{this.rendHor(userHonor)}</p> : null}
         </div>
-        <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(data)}><Icon title="$i18n{index.js6}$i18n-end" type="e-mail" /></div>
-        <div className={h_contact} onClick={this.gochatDetail(data)}><Icon title="$i18n{index.js7}$i18n-end" type="chat" /></div>
+        <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(data)}><Icon title="$i18n{index.js5}$i18n-end" type="e-mail" /></div>
+        <div className={h_contact} onClick={this.gochatDetail(data)}><Icon title="$i18n{index.js6}$i18n-end" type="chat" /></div>
       </div>
     );
   }

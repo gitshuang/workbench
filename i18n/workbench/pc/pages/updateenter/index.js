@@ -29,7 +29,7 @@ const { getTeamInfo } = teamconfigActions;
     requestStart,
     requestSuccess,
     requestError,
-    getTeamInfo, // $i18n{index.js0}$i18n-end
+    getTeamInfo, // 获取团队基础信息
   },
 )
 class Updateenter extends Component {
@@ -78,19 +78,19 @@ class Updateenter extends Component {
         <div className="um-header" style={{ background: 'white' }}>
           <Header onLeftClick={this.goBack} iconName="home" >
             <div>
-              <span>$i18n{index.js1}$i18n-end</span>
+              <span>$i18n{index.js0}$i18n-end</span>
             </div>
           </Header>
         </div>
         <div className={appBreadcrumb}>
-          <Breadcrumbs data={[{ name: '$i18n{index.js2}$i18n-end' }]} goback={this.goBack} />
+          <Breadcrumbs data={[{ name: '$i18n{index.js1}$i18n-end' }]} goback={this.goBack} />
         </div>
 
         <div className={`${pageEnterprise} um-content`}>
-          <div className={enterTitle} >$i18n{index.js3}$i18n-end</div>
+          <div className={enterTitle} >$i18n{index.js2}$i18n-end</div>
           <hr className={hr} />
           <div className={enterCont} >
-            <EnterSetting updateenter="upgrade_enter" data={enterData} btlLabel="$i18n{index.js4}$i18n-end" />
+            <EnterSetting updateenter="upgrade_enter" data={enterData} btlLabel="$i18n{index.js3}$i18n-end" />
           </div>
         </div>
       </div>

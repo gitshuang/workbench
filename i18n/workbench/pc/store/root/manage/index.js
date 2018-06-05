@@ -53,7 +53,7 @@ const defaultState = {
   },
   folderModalDisplay: false,
   batchMoveModalDisplay: false,
-  selectList: [], // $i18n{index.js0}$i18n-end
+  selectList: [], // 勾选的服务列表
   // selectWidgetList:[],
   selectGroup: [],
   currGroupIndex: 0,
@@ -65,7 +65,7 @@ const defaultState = {
   // selectWidgetItem:true,
   allServicesByLabelGroup: {},
 
-  dragState: true, // $i18n{index.js1}$i18n-end
+  dragState: true, // 是否可拖拽
 };
 
 const findTreeById = (data, curId) => {
@@ -114,7 +114,7 @@ function findById(manageList, id) {
 
 function setDefaultSelected(manageList, applicationsMap) {
   manageList.forEach((da) => {
-    if (da && da.type === 3) { // $i18n{index.js2}$i18n-end
+    if (da && da.type === 3) { // 表示服务和应用
       if (applicationsMap[da.serviceId]) {
         applicationsMap[da.serviceId].selected = '1';
       }
@@ -418,10 +418,10 @@ const reducer = handleActions({
         v.type === 2 && folderNameArr.push(v.widgetName);
       });
     });
-    const newFolderName = avoidSameName(folderNameArr, '$i18n{index.js3}$i18n-end');
+    const newFolderName = avoidSameName(folderNameArr, '$i18n{index.js0}$i18n-end');
     const newdefaultFolder = {
       type: 2,
-      widgetName: newFolderName, // "$i18n{index.js4}$i18n-end"+_fileName,
+      widgetName: newFolderName, // "文件夹"+_fileName,
       children: [],
     };
     const temp = {
@@ -636,8 +636,8 @@ const reducer = handleActions({
       return curIndex < afterIndex;
     }
     const manageAllList = state.manageList;
-    const sourceData = preParentId && findById(manageAllList, preParentId); // $i18n{index.js5}$i18n-end $i18n{index.js6}$i18n-end
-    const targetData = parentId && findById(manageAllList, parentId); // $i18n{index.js7}$i18n-end $i18n{index.js8}$i18n-end
+    const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
+    const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
     const preParentType = sourceData.type;
     const afterParentType = targetData.type;
     // 判断是否为文件夹里面元素拖拽
@@ -646,11 +646,11 @@ const reducer = handleActions({
     const itemAfter = findById(manageAllList, afterId);
     if (preType === 3 && afterType === 2 && timeFlag) {
       // 从外面拖入文件夹里面
-      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // $i18n{index.js9}$i18n-end
+      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
       if (preParentId !== afterId) {
         itemIn.parentId = afterId;
       }
-      itemAfter.children.push(itemIn); // $i18n{index.js10}$i18n-end
+      itemAfter.children.push(itemIn); // 添加
     } else if (
       (preType === 2 && preParentId !== parentId) ||
       (preType === 3 && afterType === 2 && preParentId !== parentId && !timeFlag) ||
@@ -662,22 +662,22 @@ const reducer = handleActions({
       )
     ) {
       // 从文件夹里面往外面拖拽 或 跨分组拖拽
-      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // $i18n{index.js11}$i18n-end
+      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
       if (preParentId !== parentId) {
         itemIn.parentId = parentId;
       }
       if (ifIntoFile == 'left') {
-        targetData.children.splice(targetData.children.indexOf(itemAfter), 0, itemIn); // $i18n{index.js12}$i18n-end
+        targetData.children.splice(targetData.children.indexOf(itemAfter), 0, itemIn); // 添加
       } else {
-        targetData.children.splice(targetData.children.indexOf(itemAfter) + 1, 0, itemIn); // $i18n{index.js13}$i18n-end
+        targetData.children.splice(targetData.children.indexOf(itemAfter) + 1, 0, itemIn); // 添加
       }
     } else if (preParentId !== parentId && preType === 3 && afterType === 1) {
       // 跨分组拖拽 放到组内 而不是元素上
-      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // $i18n{index.js14}$i18n-end
+      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
       if (preParentId !== parentId) {
         itemIn.parentId = parentId;
       }
-      targetData.children.splice(targetData.children.length, 0, itemIn); // $i18n{index.js15}$i18n-end
+      targetData.children.splice(targetData.children.length, 0, itemIn); // 添加
     } else {
       const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
       const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;
@@ -772,7 +772,7 @@ const reducer = handleActions({
     },
     folderModalDisplay: false,
     batchMoveModalDisplay: false,
-    selectList: [], // $i18n{index.js16}$i18n-end
+    selectList: [], // 勾选的服务列表
     // selectWidgetList:[],
     selectGroup: [],
     currGroupIndex: 0,
@@ -784,7 +784,7 @@ const reducer = handleActions({
     // selectWidgetItem:true,
     allServicesByLabelGroup: {},
 
-    dragState: true, // $i18n{index.js17}$i18n-end
+    dragState: true, // 是否可拖拽
   }),
   [emptySelectGroup]: state => ({
     ...state,

@@ -21,7 +21,7 @@ import { enter_option, item_li } from './style.css';
 @connect(
   mapStateToProps(
     // 'dismissModal',     //  解散团队弹窗开关
-    'exitModal',        //  $i18n{index.js0}$i18n-end
+    'exitModal',        //  退出团队弹窗开关
     {
       key: 'userInfo',
       value: (teamconfig, ownProps, root) => {
@@ -91,7 +91,7 @@ class EnterOption extends Component {
         {
           compType == "userCenter" ?
           <Button shape="border" onClick={() => { this.onSelectDrop(data[0]) }} >
-            <Icon type="staff" />{"$i18n{index.js1}$i18n-end" + type}
+            <Icon type="staff" />{"$i18n{index.js0}$i18n-end" + type}
           </Button>
           : 
           <Dropdown
@@ -100,7 +100,7 @@ class EnterOption extends Component {
             animation="slide-up"
             onVisibleChange={this.onVisibleChange}
           >
-            <Button className="um-box-vc um-box-center">$i18n{index.js2}$i18n-end<Icon type="pull-down" /></Button>
+            <Button className="um-box-vc um-box-center">$i18n{index.js1}$i18n-end<Icon type="pull-down" /></Button>
           </Dropdown>
         }
 

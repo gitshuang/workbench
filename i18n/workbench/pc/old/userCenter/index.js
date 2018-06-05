@@ -174,10 +174,10 @@ class UserInfoContainer extends Component {
   handleChange = (e) => {
     switch (e) {
       case 'language':
-        alert("$i18n{index.js0}$i18n-end...");
+        alert("$i18n{index.js0}$i18n-end");
         break;
       case 'message':
-        alert("$i18n{index.js1}$i18n-end...");
+        alert("$i18n{index.js1}$i18n-end");
         break;
       default:
         break;
@@ -210,9 +210,9 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
   gotoConfig = (curTenant) => {
-    if (curTenant && curTenant.type == 0) {//$i18n{index.js2}$i18n-end
+    if (curTenant && curTenant.type == 0) {//企业
       this.gotoEnter();
-    } else {//$i18n{index.js3}$i18n-end
+    } else {//团队
       this.gotoTeam();
     }
   }
@@ -303,9 +303,9 @@ class UserInfoContainer extends Component {
     const curTenant = allowTenants.filter((tenant) => {
       return tenant.tenantId === tenantid;
     })[0];
-    let type = '$i18n{index.js4}$i18n-end';
+    let type = '$i18n{index.js2}$i18n-end';
     if (curTenant && curTenant.type == 0) {
-      type = '$i18n{index.js5}$i18n-end';
+      type = '$i18n{index.js3}$i18n-end';
     }
     this._curTenant = curTenant;
     return type;
@@ -376,9 +376,9 @@ class UserInfoContainer extends Component {
 
     let _titleType = this.getCompanyType();
 
-    let comObj = { id: "allowExit", name: "$i18n{index.js6}$i18n-end", value: "3", serverApi: "team/leave", msg: "$i18n{index.js7}$i18n-end" };
-    if (_titleType == "$i18n{index.js8}$i18n-end") {
-      comObj = { id: "allowExit", name: "$i18n{index.js9}$i18n-end", value: "3", serverApi: "enter/leave", msg: "$i18n{index.js10}$i18n-end" };
+    let comObj = { id: "allowExit", name: "$i18n{index.js4}$i18n-end", value: "3", serverApi: "team/leave", msg: "$i18n{index.js5}$i18n-end" };
+    if (_titleType == "$i18n{index.js6}$i18n-end") {
+      comObj = { id: "allowExit", name: "$i18n{index.js7}$i18n-end", value: "3", serverApi: "enter/leave", msg: "$i18n{index.js8}$i18n-end" };
     }
 
     let _allowExit = null;
@@ -402,7 +402,7 @@ class UserInfoContainer extends Component {
         <div>
           <div className={logOut} onClick={logout}>
             <Icon type="exit" />
-            <span>$i18n{index.js11}$i18n-end</span>
+            <span>$i18n{index.js9}$i18n-end</span>
           </div>
           <div className={userInfoPane}>
             <div className={imgUser}>
@@ -418,19 +418,19 @@ class UserInfoContainer extends Component {
              <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
                <ul className={`${gloryIcon} ${clearfix}`}>
                 <li>
-                  <div className={`${iconContainer} ${icon1}`}><Icon title="$i18n{index.js12}$i18n-end" type="glory"></Icon></div>
+                  <div className={`${iconContainer} ${icon1}`}><Icon title="$i18n{index.js10}$i18n-end" type="glory"></Icon></div>
                 </li>
                 <li>
-                  <div className={`${iconContainer} ${icon3}`}><Icon title="$i18n{index.js13}$i18n-end" type="Internet2"></Icon></div>
+                  <div className={`${iconContainer} ${icon3}`}><Icon title="$i18n{index.js11}$i18n-end" type="Internet2"></Icon></div>
                 </li>
               </ul>
             </div>*/}
           </div>
 
           <div className={linkSetting}>
-            <a href={`${getHost('org')}/download/download.html`} target="_blank" >$i18n{index.js14}$i18n-end</a><br />
-            <a href="https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ" target="_blank">$i18n{index.js15}$i18n-end</a><br />
-            <a href={`${getHost('cloundyy')}`} target="_blank">$i18n{index.js16}$i18n-end</a>
+            <a href={`${getHost('org')}/download/download.html`} target="_blank" >$i18n{index.js12}$i18n-end</a><br />
+            <a href="https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ" target="_blank">问题与反馈</a><br />
+            <a href={`${getHost('cloundyy')}`} target="_blank">$i18n{index.js13}$i18n-end</a>
           </div>
 
         </div>
@@ -451,17 +451,17 @@ class UserInfoContainer extends Component {
           <div style={{ position: "relative" }}>
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" onClick={this.gotoManage.bind(this)}>
-                <Icon type="record" />$i18n{index.js17}$i18n-end</Button></li>
+                <Icon type="record" />$i18n{index.js14}$i18n-end</Button></li>
 
               {
-                _titleType == "$i18n{index.js18}$i18n-end" ? (<li><Button shape="border" onClick={this.gotoUserInfo}>
-                  <Icon type="role-management" />$i18n{index.js19}$i18n-end</Button></li>) : null
+                _titleType == "$i18n{index.js15}$i18n-end" ? (<li><Button shape="border" onClick={this.gotoUserInfo}>
+                  <Icon type="role-management" />$i18n{index.js16}$i18n-end</Button></li>) : null
               }
 
               {
                 _invitePermission ? (<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
                   <Icon type="add-friends" />
-                  $i18n{index.js20}$i18n-end</Button></li>) : null
+                  $i18n{index.js17}$i18n-end</Button></li>) : null
               }
 
               {admin ? null : _allowExit}
@@ -472,20 +472,20 @@ class UserInfoContainer extends Component {
                 <div className={popconfirm} style={{ position: "absolute" }}>
                   <i className="arrow"></i>
                   <div className={popconfirm_content}>
-                    <p>{_titleType}$i18n{index.js21}$i18n-end</p>
-                    <p>$i18n{index.js22}$i18n-end</p>
+                    <p>{_titleType}$i18n{index.js18}$i18n-end</p>
+                    <p>$i18n{index.js19}$i18n-end</p>
                   </div>
-                  <div onClick={this.closeRequest}>$i18n{index.js23}$i18n-end</div>
+                  <div onClick={this.closeRequest}>$i18n{index.js20}$i18n-end</div>
                 </div>
                 : null
             }
 
           </div>
 
-          <div className={enter_setting} title={`${_titleType}$i18n{index.js24}$i18n-end`}>
+          <div className={enter_setting} title={`${_titleType}$i18n{index.js21}$i18n-end`}>
             {/* <Icon type="setting" /> */}
             {
-              admin ? (<Icon type="setting" title={`${_titleType}$i18n{index.js25}$i18n-end`} onClick={() => { this.gotoConfig(this._curTenant) }} />) : null
+              admin ? (<Icon type="setting" title={`${_titleType}$i18n{index.js22}$i18n-end`} onClick={() => { this.gotoConfig(this._curTenant) }} />) : null
             }
           </div>
 

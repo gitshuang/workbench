@@ -48,12 +48,12 @@ class ServiceItem extends Component {
         btn = (<div onClick={()=>{this.props.onChange(this.props.data,"2")}}  >
         <Icon title="$i18n{index.js5}$i18n-end" type="pin2" style={{cursor:"pointer"}} /> </div>);
       }
-    }else{//$i18n{index.js6}$i18n-endselected$i18n{index.js7}$i18n-end2
+    }else{//如果没有selected，就显示2
        btn = (<div onClick={()=>{this.props.onChange(this.props.data,"3")}}  >
-        <Icon title="$i18n{index.js8}$i18n-end" type="pin" style={{cursor:"pointer"}} /> </div>);
+        <Icon title="$i18n{index.js6}$i18n-end" type="pin" style={{cursor:"pointer"}} /> </div>);
     }
 
-    let upIcon = serviceType=="2"?<Icon className={up_icon} type={extend?"pull-down":"upward"} title={ extend ? '$i18n{index.js9}$i18n-end' : '$i18n{index.js10}$i18n-end' } onClick={()=>{this.props.packUp(this.props.data)}}></Icon>:null;
+    let upIcon = serviceType=="2"?<Icon className={up_icon} type={extend?"pull-down":"upward"} title={ extend ? '$i18n{index.js7}$i18n-end' : '$i18n{index.js8}$i18n-end' } onClick={()=>{this.props.packUp(this.props.data)}}></Icon>:null;
     let _style = serviceType=="2"?null:extend?{display:"none"}:null;
     let _app = service && service.length == 0?item_footer_app:""
     return (

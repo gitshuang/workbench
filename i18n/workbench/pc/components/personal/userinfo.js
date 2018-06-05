@@ -126,9 +126,9 @@ class Userinfo extends Component {
 
   gotoConfig = () => {
     const { titleType, dispatch } = this.props;
-    if (titleType === '$i18n{userinfo.js3}$i18n-end') { // $i18n{userinfo.js4}$i18n-end
+    if (titleType === '企业') { // 企业
       dispatch('openEntersetting');
-    } else { // $i18n{userinfo.js5}$i18n-end
+    } else { // 团队
       dispatch('openTeamconfig');
     }
   }
@@ -174,7 +174,7 @@ class Userinfo extends Component {
         <div>
           <div className={logOut} onClick={logout}>
             <Icon type="exit" />
-            <span>$i18n{userinfo.js6}$i18n-end</span>
+            <span>$i18n{userinfo.js3}$i18n-end</span>
           </div>
           {
             language && language.show ? <Language 
@@ -216,16 +216,16 @@ class Userinfo extends Component {
                 editType ?
                   <li>
                     <Button shape="border" onClick={() => { dispatch('openManage'); }}>
-                      <Icon type="record" />$i18n{userinfo.js7}$i18n-end
+                      <Icon type="record" />$i18n{userinfo.js4}$i18n-end
                     </Button>
                   </li>
                 : null
               }
               {
-                titleType == '$i18n{userinfo.js8}$i18n-end' ?
+                titleType == '$i18n{userinfo.js5}$i18n-end' ?
                   <li>
                     <Button shape="border" onClick={() => { dispatch('openUserinfo'); }}>
-                      <Icon type="role-management" />$i18n{userinfo.js9}$i18n-end
+                      <Icon type="role-management" />$i18n{userinfo.js6}$i18n-end
                     </Button>
                   </li>
                 : null
@@ -234,7 +234,7 @@ class Userinfo extends Component {
                 _invitePermission ?
                   <li>
                     <Button shape="border" size="sm" onClick={() => { dispatch('openInvitation'); }}>
-                      <Icon type="add-friends" />$i18n{userinfo.js10}$i18n-end
+                      <Icon type="add-friends" />$i18n{userinfo.js7}$i18n-end
                     </Button>
                   </li>
                 : null
@@ -243,7 +243,7 @@ class Userinfo extends Component {
                 admin || _allowExit === '0' ? null :
                 <li>
                   <Button shape="border" onClick={this.props.openExitModal} >
-                    <Icon type="staff" />{`$i18n{userinfo.js11}$i18n-end${titleType}`}
+                    <Icon type="staff" />{`$i18n{userinfo.js8}$i18n-end${titleType}`}
                   </Button>
                 </li>
               }
@@ -253,18 +253,18 @@ class Userinfo extends Component {
                 <div className={popconfirm} style={{ position: 'absolute' }}>
                   <i className="arrow" />
                   <div className={popconfirm_content}>
-                    <p>{titleType}$i18n{userinfo.js12}$i18n-end</p>
-                    <p>$i18n{userinfo.js13}$i18n-end</p>
+                    <p>{titleType}$i18n{userinfo.js9}$i18n-end</p>
+                    <p>$i18n{userinfo.js10}$i18n-end</p>
                   </div>
-                  <div onClick={this.props.closeRequestDisplay}>$i18n{userinfo.js14}$i18n-end</div>
+                  <div onClick={this.props.closeRequestDisplay}>$i18n{userinfo.js11}$i18n-end</div>
                 </div>
               : null
             }
           </div>
 
-          <div className={enter_setting} title={`${titleType}$i18n{userinfo.js15}$i18n-end`}>
+          <div className={enter_setting} title={`${titleType}$i18n{userinfo.js12}$i18n-end`}>
             {
-              admin ? (<Icon type="setting" title={`${titleType}$i18n{userinfo.js16}$i18n-end`} onClick={() => { this.gotoConfig(); }} />) : null
+              admin ? (<Icon type="setting" title={`${titleType}$i18n{userinfo.js13}$i18n-end`} onClick={() => { this.gotoConfig(); }} />) : null
             }
           </div>
 

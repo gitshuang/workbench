@@ -168,7 +168,7 @@ class Search extends Component {
             type="text"
             value={text}
             onChange={this.onChangeHandler}
-            placeholder="$i18n{index.js0}$i18n-end、$i18n{index.js1}$i18n-end、$i18n{index.js2}$i18n-end"
+            placeholder="$i18n{index.js0}$i18n-end"
             autoFocus={true}
             onKeyDown={this.onKeyDown}
           />
@@ -182,9 +182,9 @@ class Search extends Component {
           </div>
           {
             list.length ? (
-              <div className={searchBtnAll} onClick={this.onMoreBtnClick}>$i18n{index.js3}$i18n-end</div>
+              <div className={searchBtnAll} onClick={this.onMoreBtnClick}>$i18n{index.js1}$i18n-end</div>
             ) : (
-              <em>$i18n{index.js4}$i18n-end</em>
+              <em>$i18n{index.js2}$i18n-end</em>
             )
           }
         </div>
@@ -198,12 +198,12 @@ class Search extends Component {
         {
           isShow && text ? (
             <div className={clearSearch} onClick={this.clearInput}>
-              <Icon title="$i18n{index.js5}$i18n-end" type="error3" />
+              <Icon title="$i18n{index.js3}$i18n-end" type="error3" />
             </div>
           ) : null
         }
         <div className={`tc ${searchBtn}`} onClick={this.search}>
-          <Icon title="$i18n{index.js6}$i18n-end" type="search" />
+          <Icon title="$i18n{index.js4}$i18n-end" type="search" />
         </div>
       </div>
     );

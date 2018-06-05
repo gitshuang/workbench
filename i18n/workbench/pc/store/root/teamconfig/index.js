@@ -2,49 +2,49 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-  getTeamInfo, // $i18n{index.js0}$i18n-end
-  uploadApplication, // $i18n{index.js1}$i18n-end
-  createTeam, // $i18n{index.js2}$i18n-end
+  getTeamInfo, // 获取团队基础信息
+  uploadApplication, // 图片上传
+  createTeam, // 保存
 
-  getUserList, // $i18n{index.js3}$i18n-enduserlist api
-  openManagerModal, // $i18n{index.js4}$i18n-end
-  closeManagerModal, // $i18n{index.js5}$i18n-end
-  userToAdmin, // $i18n{index.js6}$i18n-end
-  adminToUser, // $i18n{index.js7}$i18n-end
-  openRemoveModal, // $i18n{index.js8}$i18n-end
-  closeRemoveModal, // $i18n{index.js9}$i18n-end
-  removeUser, // $i18n{index.js10}$i18n-end
-  changePage, // $i18n{index.js11}$i18n-end
+  getUserList, // 获取userlist api
+  openManagerModal, // 打开用户升级管理员弹窗
+  closeManagerModal, // 关闭用户升级管理员弹窗
+  userToAdmin, // 用户升级管理员
+  adminToUser, // 管理员降级用户
+  openRemoveModal, // 打开删除用户的弹窗
+  closeRemoveModal, // 关闭删除用户的弹窗
+  removeUser, // 删除用户请求
+  changePage, // 点击分页更改页数
 
-  openUpgradeModal, // $i18n{index.js12}$i18n-end
-  closeUpgradeModal, // $i18n{index.js13}$i18n-end
+  openUpgradeModal, // 打开升级为企业弹窗
+  closeUpgradeModal, // 关闭升级为企业弹窗
 
-  openTransferModal, // $i18n{index.js14}$i18n-end
-  closeTransferModal, // $i18n{index.js15}$i18n-end
-  transferTeam, // $i18n{index.js16}$i18n-end
+  openTransferModal, // 打开移交团队弹窗
+  closeTransferModal, // 关闭移交团队弹窗
+  transferTeam, // 移交团队
 
-  openDismissModal, // $i18n{index.js17}$i18n-end
-  closeDismissModal, // $i18n{index.js18}$i18n-end
-  dismissTeam, // $i18n{index.js19}$i18n-end
+  openDismissModal, // 打开解散团队弹窗
+  closeDismissModal, // 关闭解散团队弹窗
+  dismissTeam, // 解散团队
 
-  openExitModal, // $i18n{index.js20}$i18n-end
-  closeExitModal, // $i18n{index.js21}$i18n-end
-  exitTeam, // $i18n{index.js22}$i18n-end
+  openExitModal, // 打开退出团队弹窗
+  closeExitModal, // 关闭退出团队弹窗
+  exitTeam, // 退出团队
 
-  getAllApps, //  $i18n{index.js23}$i18n-end
+  getAllApps, //  获取所有应用
 } = actions;
 
 const defaultState = {
-  teamData: {}, //  $i18n{index.js24}$i18n-end $i18n{index.js25}$i18n-end
-  managerModal: false, //  $i18n{index.js26}$i18n-end
-  removeModal: false, //  $i18n{index.js27}$i18n-end
-  upgradeModal: false, //  $i18n{index.js28}$i18n-end
-  transferModal: false, //  $i18n{index.js29}$i18n-end
-  dismissModal: false, //  $i18n{index.js30}$i18n-end
-  exitModal: false, //  $i18n{index.js31}$i18n-end
-  applicationlist: [], //  $i18n{index.js32}$i18n-end
-  userList: {}, //  $i18n{index.js33}$i18n-end
-  activePage: 1, //  $i18n{index.js34}$i18n-end
+  teamData: {}, //  保存成功之后 返回的团队信息
+  managerModal: false, //  升级管理员弹窗开关
+  removeModal: false, //  删除弹窗开关
+  upgradeModal: false, //  升级为企业弹窗开关
+  transferModal: false, //  移交团队弹窗开关
+  dismissModal: false, //  解散团队弹窗开关
+  exitModal: false, //  退出团队弹窗开关
+  applicationlist: [], //  应用列表
+  userList: {}, //  用户列表
+  activePage: 1, //  当前页数
   exitTeamMsg: '',
   dismissTeamMsg: '',
 };

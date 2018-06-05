@@ -202,7 +202,7 @@ class searchResult extends Component {
         let _newObj = {otherName:"$i18n{index.js1}$i18n-end"};
         _newObj.Searchotherlist = payload;
         //_newObj.pagesize = payload.pageSize;
-        _newObj.pagesize = payload.totalPages;//$i18n{index.js2}$i18n-end
+        _newObj.pagesize = payload.totalPages;//总页数
         if(payload.content.length>0){
           _newObj.isShowPagination = false;
           _newObj.isShownodataClassEach = true;
@@ -264,7 +264,7 @@ class searchResult extends Component {
 
   //下面选择每页展示的数据条目数
   paginationNumSelect = (id,dataNum) =>{
-   let reg = new RegExp("$i18n{index.js3}$i18n-end\/$i18n{index.js4}$i18n-end","g");
+   let reg = new RegExp("条\/页","g");
    let dataPerPageNum  = dataNum.replace(reg,"");
    const { value, activetab, activePage}=this.state;
    this.setState({
@@ -327,7 +327,7 @@ class searchResult extends Component {
           <ul className={recently}>{this.otherlistLi(dataList)}</ul>
           <div className={`${nodataClass} ${isShownodataClassEach ? isdisplay : ''}`}>
                 <img src={nodata}/>
-                <p>$i18n{index.js5}$i18n-end</p>
+                <p>$i18n{index.js2}$i18n-end</p>
               </div>
       </TabPane>)
     })
@@ -350,18 +350,18 @@ class searchResult extends Component {
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} placeholder="$i18n{index.js6}$i18n-end、$i18n{index.js7}$i18n-end、$i18n{index.js8}$i18n-end"
+              <FormControl className={serviceSearch} placeholder="$i18n{index.js3}$i18n-end"
                value={this.state.value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
-                  <span className={search_tit} onClick={this.btnSearch}>$i18n{index.js9}$i18n-end</span>
+                  <span className={search_tit} onClick={this.btnSearch}>$i18n{index.js4}$i18n-end</span>
               </div>
             </div>
             <div className={"um-content" + ` ${tabContent}`}>
               <div className={`${nodataClass} ${isShownodataClass? isdisplay : ''}`}>
                 <img src={nodata}/>
-                <p>$i18n{index.js10}$i18n-end</p>
+                <p>$i18n{index.js5}$i18n-end</p>
               </div>
               <Tabs
                 destroyInactiveTabPane
@@ -372,13 +372,13 @@ class searchResult extends Component {
                 animated={anifalse}
               >
               {Morelist}
-              {/*  $i18n{index.js11}$i18n-end
+              {/*  $i18n{index.js6}$i18n-end
                 this.state.hasOther ? (
                   <TabPane tab={otherName} key="other" className={tabPane1}>
                     {otherlist}
                     <div className={`${nodataClass} ${isShownodataClassEach? isdisplay : ''}`}>
                       <img src={nodata}/>
-                      <p>$i18n{index.js12}$i18n-end</p>
+                      <p>$i18n{index.js7}$i18n-end</p>
                     </div>
                   </TabPane>
                 ) : null

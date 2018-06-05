@@ -95,7 +95,7 @@ class DropdownButton extends Component {
         item.push(<div key={da.name} className={itemLi} onClick={() => { this.handleSelect(da); }} onKeyDown={() => { this.handleSelect(da); }} role="presentation"><div className={liTitle} title={da.value}>{da.value}</div><div className={liRight}>{da.type === 1 ? '$i18n{index.js0}$i18n-end' : '$i18n{index.js1}$i18n-end'}</div></div>);
       });
     } else {
-      item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >$i18n{index.js2}$i18n-end....</div></div>);
+      item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >$i18n{index.js2}$i18n-end</div></div>);
     }
     let marginLeft2 = -148;
     if (type && type === 'home') {

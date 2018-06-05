@@ -34,8 +34,8 @@ const {
   getTeamInfo,
   uploadApplication,
   createTeam,
-  userToAdmin,            // $i18n{index.js0}$i18n-end
-  adminToUser,            // $i18n{index.js1}$i18n-end
+  userToAdmin,            // 用户升级管理员
+  adminToUser,            // 管理员降级用户
   openManagerModal,
   openRemoveModal,
   closeRemoveModal,
@@ -45,7 +45,7 @@ const {
   openExitModal,
   getAllApps,
   getUserList,
-  changePage,             // $i18n{index.js2}$i18n-end
+  changePage,             // 改变用户列表页数
 } = teamconfigActions;
 
 import {
@@ -79,14 +79,14 @@ import {
   mapStateToProps(
     'teamData',
     'managerModal',
-    'removeModal',      //  $i18n{index.js3}$i18n-end
-    'upgradeModal',     //  $i18n{index.js4}$i18n-end
-    'transferModal',    //  $i18n{index.js5}$i18n-end
-    'dismissModal',     //  $i18n{index.js6}$i18n-end
-    'exitModal',        //  $i18n{index.js7}$i18n-end
-    'applicationlist',  //  $i18n{index.js8}$i18n-end
-    'userList',         //  $i18n{index.js9}$i18n-end
-    'activePage',       //  $i18n{index.js10}$i18n-end
+    'removeModal',      //  团队成员删除弹窗开关
+    'upgradeModal',     //  升级为企业弹窗开关
+    'transferModal',    //  移交团队弹窗开关
+    'dismissModal',     //  解散团队弹窗开关
+    'exitModal',        //  退出团队弹窗开关
+    'applicationlist',  //  应用列表
+    'userList',         //  用户列表
+    'activePage',       //  用户列表页数
     {
       key: 'userInfo',
       value: (teamconfig,ownProps,root) => {
@@ -102,20 +102,20 @@ import {
     requestStart,
     requestSuccess,
     requestError,
-    getTeamInfo,            // $i18n{index.js11}$i18n-end
-    uploadApplication,      // $i18n{index.js12}$i18n-end
-    createTeam,             // $i18n{index.js13}$i18n-end
-    userToAdmin,            // $i18n{index.js14}$i18n-end
-    adminToUser,            // $i18n{index.js15}$i18n-end
-    openManagerModal,       // $i18n{index.js16}$i18n-end
-    openRemoveModal,        // $i18n{index.js17}$i18n-end
-    openUpgradeModal,       // $i18n{index.js18}$i18n-end
-    openTransferModal,      // $i18n{index.js19}$i18n-end
-    openDismissModal,       // $i18n{index.js20}$i18n-end
-    openExitModal,          // $i18n{index.js21}$i18n-end
-    getAllApps,             // $i18n{index.js22}$i18n-end
-    getUserList,            // $i18n{index.js23}$i18n-end
-    changePage,             // $i18n{index.js24}$i18n-end
+    getTeamInfo,            // 获取团队基础信息
+    uploadApplication,      // 上传
+    createTeam,             // 保存团队基本设置
+    userToAdmin,            // 用户升级管理员
+    adminToUser,            // 管理员降级用户
+    openManagerModal,       // 打开升级管理员弹窗
+    openRemoveModal,        // 团队成员打开删除弹窗
+    openUpgradeModal,       // 打开升级为企业弹窗
+    openTransferModal,      // 打开移交团队弹窗
+    openDismissModal,       // 打开解散团队弹窗
+    openExitModal,          // 打开退出团队弹窗
+    getAllApps,             // 获取全部应用
+    getUserList,            // 获取用户列表
+    changePage,             // 改变用户列表页数
   }
 )
 
@@ -126,27 +126,27 @@ class CreateTeamContent extends Component {
     this.tenantName = "";
     this.state = {
 
-      imgWarning: "",         // $i18n{index.js25}$i18n-end
-      imgUrl: "",             // $i18n{index.js26}$i18n-end  $i18n{index.js27}$i18n-end
+      imgWarning: "",         // 团队头像警告格式
+      imgUrl: "",             // 基础设置  选择头像回显
 
-      tenantId: "",           // $i18n{index.js28}$i18n-endid  $i18n{index.js29}$i18n-end
-      value: "",              // $i18n{index.js30}$i18n-end
-      logo: "",               // $i18n{index.js31}$i18n-endurl
+      tenantId: "",           // 团队id  直接取出来存到这里
+      value: "",              // 基础设置团队名称
+      logo: "",               // 上传成功后返回的url
       //searchAvalible: "",     // 搜索可见
-      allowExit: "",          // $i18n{index.js32}$i18n-end
-      invitePermission: "1",  // $i18n{index.js33}$i18n-end
-      joinPermission: "1",    // $i18n{index.js34}$i18n-end
+      allowExit: "",          // 允许用户是否退出空间
+      invitePermission: "1",  // 邀请成员权限
+      joinPermission: "1",    // 加入权限
 
-      btnType: "web",         // $i18n{index.js35}$i18n-end
-      currMemberId: "",     // $i18n{index.js36}$i18n-endID
-      webApplication: [],     //  web$i18n{index.js37}$i18n-end
-      mobApplication: [],     //  $i18n{index.js38}$i18n-end
-      cliApplication: [],     //  client $i18n{index.js39}$i18n-end
-      currApplication: [],    // $i18n{index.js40}$i18n-end
+      btnType: "web",         // 团队应用当前按钮
+      currMemberId: "",     // 选择删除成员的ID
+      webApplication: [],     //  web端应用
+      mobApplication: [],     //  移动端应用
+      cliApplication: [],     //  client 应用
+      currApplication: [],    // 当前渲染的是哪个类别的应用列表
 
-      newUserList: [],        // $i18n{index.js41}$i18n-end
-      searchVal: "",          // $i18n{index.js42}$i18n-end
-      onlyAdmin: false,       // $i18n{index.js43}$i18n-end
+      newUserList: [],        // 当前用户列表
+      searchVal: "",          // 用户列表搜索关键字
+      onlyAdmin: false,       // 是否只显示管理员
       
       activePage:1,
       pagesize:10,
@@ -281,13 +281,13 @@ class CreateTeamContent extends Component {
     }
     const currTime = new Date().getTime();
     if( currTime > time ){
-      return "$i18n{index.js44}$i18n-end"
+      return "$i18n{index.js0}$i18n-end"
     }
     const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
     if(timeDiff > 30){
       return false;
     }
-    return "$i18n{index.js45}$i18n-end"+Math.ceil(timeDiff)+"$i18n{index.js46}$i18n-end"
+    return "$i18n{index.js1}$i18n-end"+Math.ceil(timeDiff)+"$i18n{index.js2}$i18n-end"
   }
   // 续费按钮
   esitXufei = (time) => {
@@ -318,11 +318,11 @@ class CreateTeamContent extends Component {
       <div className={box2}>
         <div className={applicationBtns}>
           <span>
-            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web$i18n{index.js47}$i18n-end</Button>
-            <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>$i18n{index.js48}$i18n-end</Button>
-            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PC$i18n{index.js49}$i18n-end</Button>
+            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web端</Button>
+            <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>$i18n{index.js3}$i18n-end</Button>
+            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PC$i18n{index.js4}$i18n-end</Button>
           </span>
-          {/*<Button colors="danger">$i18n{index.js50}$i18n-end</Button>*/}
+          {/*<Button colors="danger">$i18n{index.js5}$i18n-end</Button>*/}
         </div>
         <div className={applicationLists}>
           <ul>
@@ -336,7 +336,7 @@ class CreateTeamContent extends Component {
                     <div>
                       <h6>{item.applicationName}</h6>
                       {
-                        item.expired? <p>$i18n{index.js51}$i18n-end{this.handelTime(item.expired)}</p>:""
+                        item.expired? <p>$i18n{index.js6}$i18n-end{this.handelTime(item.expired)}</p>:""
                       }
                     </div>
                     <div>
@@ -344,7 +344,7 @@ class CreateTeamContent extends Component {
                     </div>
                     <div className="um-bf1 tr">
                       {
-                        this.esitXufei(item.expired) ? <Button onClick={()=>{this.openXufei(item.applicationId)}}>$i18n{index.js52}$i18n-end</Button> : null
+                        this.esitXufei(item.expired) ? <Button onClick={()=>{this.openXufei(item.applicationId)}}>$i18n{index.js7}$i18n-end</Button> : null
                       }
 
                     </div>
@@ -449,7 +449,7 @@ class CreateTeamContent extends Component {
 
     //下面选择每页展示的数据条目数
   paginationNumSelect = (id,dataNum) =>{
-    let reg = new RegExp("$i18n{index.js53}$i18n-end\/$i18n{index.js54}$i18n-end","g");
+    let reg = new RegExp("条\/页","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
     const { searchVal,value, activetab, activePage}=this.state;
     this.setState({
@@ -490,7 +490,7 @@ class CreateTeamContent extends Component {
               <input
                 className="form-control"
                 type="text"
-                placeholder="$i18n{index.js55}$i18n-end、$i18n{index.js56}$i18n-end、$i18n{index.js57}$i18n-end"
+                placeholder="$i18n{index.js8}$i18n-end"
                 value={this.state.searchVal}
                 onChange={(e)=>{this.changeSearchFn(e)}}
               />
@@ -504,20 +504,20 @@ class CreateTeamContent extends Component {
               style={{textAlign:"center",cursor:"pointer" }}
               onClick={this.searchFn}
             >
-              <span className={search_label}>$i18n{index.js58}$i18n-end</span>
+              <span className={search_label}>$i18n{index.js9}$i18n-end</span>
             </div>
           </div>
           <div className={memberBtns}>
-            <Checkbox colors="info" onChange={this.changeCheck}>$i18n{index.js59}$i18n-end</Checkbox>
+            <Checkbox colors="info" onChange={this.changeCheck}>$i18n{index.js10}$i18n-end</Checkbox>
             {
-              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>$i18n{index.js60}$i18n-end</Button>:null
+              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>$i18n{index.js11}$i18n-end</Button>:null
             }
           </div>
         </div>
 
         <div className={table_title}>
-          <div>$i18n{index.js61}$i18n-end{userList.totalElements}$i18n{index.js62}$i18n-end</div>
-          <div className={table_permise}>$i18n{index.js63}$i18n-end</div>
+          <div>$i18n{index.js12}$i18n-end{userList.totalElements}人</div>
+          <div className={table_permise}>$i18n{index.js13}$i18n-end</div>
         </div>
         <div className={memberLists}>
           <ul>
@@ -544,9 +544,9 @@ class CreateTeamContent extends Component {
                         style={{ width: 88, marginRight: 6 }}
                         onChange={ (e) => {this.handleChange3(e,item.userId)} }
                       >
-                        <Option value="manage">$i18n{index.js64}$i18n-end</Option>
-                        <Option value="member">$i18n{index.js65}$i18n-end</Option>
-                        <Option value="deleteMember">$i18n{index.js66}$i18n-end</Option>
+                        <Option value="manage">$i18n{index.js14}$i18n-end</Option>
+                        <Option value="member">$i18n{index.js15}$i18n-end</Option>
+                        <Option value="deleteMember">$i18n{index.js16}$i18n-end</Option>
                       </Select>
                     </div>
                   </li>
@@ -613,7 +613,7 @@ class CreateTeamContent extends Component {
           <h2>{this.tenantName}</h2>
           <div className="um-box um-box-center">
             <div>
-              <Button onClick={this.openUpgradeModal}>$i18n{index.js67}$i18n-end</Button>
+              <Button onClick={this.openUpgradeModal}>$i18n{index.js17}$i18n-end</Button>
             </div>
             <div>
               {/* <Dropdown
@@ -622,13 +622,13 @@ class CreateTeamContent extends Component {
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange}
               >
-                <Button className="um-box-vc um-box-center">$i18n{index.js68}$i18n-end<Icon type="pull-down" /></Button>
+                <Button className="um-box-vc um-box-center">$i18n{index.js18}$i18n-end<Icon type="pull-down" /></Button>
               </Dropdown> */}
 
                <EnterOption data={[
-                {id:"aa",name:"$i18n{index.js69}$i18n-end",value:"2",serverApi:"team/remove",msg:"$i18n{index.js70}$i18n-end"},
-                {id:"allowExit",name:"$i18n{index.js71}$i18n-end",value:"3",serverApi:"team/leave",msg:"$i18n{index.js72}$i18n-end"},
-              ]}  type="$i18n{index.js73}$i18n-end" />
+                {id:"aa",name:"$i18n{index.js19}$i18n-end",value:"2",serverApi:"team/remove",msg:"$i18n{index.js20}$i18n-end"},
+                {id:"allowExit",name:"$i18n{index.js21}$i18n-end",value:"3",serverApi:"team/leave",msg:"$i18n{index.js22}$i18n-end"},
+              ]}  type="$i18n{index.js23}$i18n-end" />
 
             </div>
           </div>
@@ -638,15 +638,15 @@ class CreateTeamContent extends Component {
             destroyInactiveTabPane
             defaultActiveKey="1"
           >
-            <TabPane tab='$i18n{index.js74}$i18n-end' key="1">
+            <TabPane tab='$i18n{index.js24}$i18n-end' key="1">
               <div >
                 <CreateTeam />
               </div>
             </TabPane>
-            <TabPane tab='$i18n{index.js75}$i18n-end' key="2">
+            <TabPane tab='$i18n{index.js25}$i18n-end' key="2">
               {this.teamApplication()}
             </TabPane>
-            <TabPane tab='$i18n{index.js76}$i18n-end' key="3">
+            <TabPane tab='$i18n{index.js26}$i18n-end' key="3">
               {this.teamMember()}
             </TabPane>
           </Tabs>

@@ -1,13 +1,4 @@
-{"key":"index.js0","value":"条,页"}
-{"key":"index.js1","value":"条,页"}
-{"key":"index.js2","value":"条,页"}
-{"key":"index.js3","value":"条,页"}
-{"key":"index.js4","value":"天前"}
-{"key":"index.js5","value":"小时前"}
-{"key":"index.js6","value":"分钟前"}
-{"key":"index.js7","value":"刚刚"}
-{"key":"index.js8","value":"年,月,日"}
-{"key":"index.js9","value":"年,月,日"}
-{"key":"index.js10","value":"年,月,日"}
-{"key":"index.js11","value":"共,条"}
-{"key":"index.js12","value":"共,条"}
+{"key":"index.js0","value":"day ago"}
+{"key":"index.js1","value":"hour ago"}
+{"key":"index.js2","value":"min ago"}
+{"key":"index.js3","value":"just now"}

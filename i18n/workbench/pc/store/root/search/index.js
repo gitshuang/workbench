@@ -14,7 +14,7 @@ const defaultState = {
   SearchMoreList: [],
   SearchList: [],
   SearchOtherList: [],
-  searchHeadData: { appName: '$i18n{index.js0}$i18n-end', brm: [{ name: '$i18n{index.js1}$i18n-end' }] },
+  searchHeadData: { appName: '$i18n{index.js0}$i18n-end}', brm: [{ name: '搜索结果' }] },
 };
 
 const createReducer = key => (state, { payload, error }) => {

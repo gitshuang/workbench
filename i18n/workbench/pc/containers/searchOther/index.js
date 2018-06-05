@@ -64,7 +64,7 @@ class searchOther extends Component {
       activePage:1,
       pagesize:10,
       isShowPagination:true,
-      dataPerPageNum:10,//10$i18n{index.js0}$i18n-end/$i18n{index.js1}$i18n-end
+      dataPerPageNum:10,//10条/页
     }
   }
 
@@ -126,7 +126,7 @@ class searchOther extends Component {
   paginationNumSelect = (id,dataNum) =>{
     const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab,activePage}=this.state;
-    const reg = new RegExp("$i18n{index.js2}$i18n-end\/$i18n{index.js3}$i18n-end","g");
+    const reg = new RegExp("条\/页","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
     this.setState({
       dataPerPageNum:dataPerPageNum
@@ -150,15 +150,15 @@ class searchOther extends Component {
     const dMinutes = parseInt(d / 60, 10);
     const dSeconds = parseInt(d, 10);
     if (dDays > 0 && dDays < 4) {
-      ts = `${dDays}$i18n{index.js4}$i18n-end`;
+      ts = `${dDays}$i18n{index.js0}$i18n-end`;
     } else if (dDays <= 0 && dHours > 0) {
-      ts = `${dHours}$i18n{index.js5}$i18n-end`;
+      ts = `${dHours}$i18n{index.js1}$i18n-end`;
     } else if (dDays <= 0 && dHours <= 0 && dMinutes > 0) {
-      ts = `${dMinutes}$i18n{index.js6}$i18n-end`;
+      ts = `${dMinutes}$i18n{index.js2}$i18n-end`;
     } else if (dSeconds < 60) {
-      ts = '$i18n{index.js7}$i18n-end';
+      ts = '$i18n{index.js3}$i18n-end';
     } else if (dDays > 3) {
-      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/$i18n{index.js8}$i18n-end|$i18n{index.js9}$i18n-end/g, '-').replace(/$i18n{index.js10}$i18n-end/g, ' ');
+      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ');
     }
     return ts
   }
@@ -188,7 +188,7 @@ class searchOther extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div>$i18n{index.js11}$i18n-end{dataList.totalElements}$i18n{index.js12}$i18n-end</div>
+            <div>共{dataList.totalElements}条</div>
             <ul className={recently}>{lis}</ul>
 
             <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>

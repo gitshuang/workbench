@@ -20,8 +20,8 @@ const {
   getTeamInfo,
   uploadApplication,
   createTeam,
-  userToAdmin,            // $i18n{createTeam.js0}$i18n-end
-  adminToUser,            // $i18n{createTeam.js1}$i18n-end
+  userToAdmin,            // 用户升级管理员
+  adminToUser,            // 管理员降级用户
   openRemoveModal,
   closeRemoveModal,
   openUpgradeModal,
@@ -30,7 +30,7 @@ const {
   openExitModal,
   getAllApps,
   getUserList,
-  changePage,             // $i18n{createTeam.js2}$i18n-end
+  changePage,             // 改变用户列表页数
 } = teamconfigActions;
 
 class SubmitBtn extends Component {
@@ -42,9 +42,9 @@ class SubmitBtn extends Component {
   render() {
     return (
       <div className={'u-form-submit'}>
-        {/* <ButtonBrand onClick={this.click}>$i18n{createTeam.js3}$i18n-end</ButtonBrand> */}
+        {/* <ButtonBrand onClick={this.click}>$i18n{createTeam.js0}$i18n-end</ButtonBrand> */}
         {
-          this.props.disabled ? <ButtonBrand onClick={this.click} >$i18n{createTeam.js4}$i18n-end</ButtonBrand> : <ButtonBrand disabled={true} >$i18n{createTeam.js5}$i18n-end</ButtonBrand>
+          this.props.disabled ? <ButtonBrand onClick={this.click} >$i18n{createTeam.js1}$i18n-end}</ButtonBrand> : <ButtonBrand disabled={true} >保存</ButtonBrand>
         }
       </div>
     );
@@ -55,14 +55,14 @@ class SubmitBtn extends Component {
 @connect(
   mapStateToProps(
     'teamData',
-    'removeModal',      //  $i18n{createTeam.js6}$i18n-end
-    'upgradeModal',     //  $i18n{createTeam.js7}$i18n-end
-    'transferModal',    //  $i18n{createTeam.js8}$i18n-end
-    'dismissModal',     //  $i18n{createTeam.js9}$i18n-end
-    'exitModal',        //  $i18n{createTeam.js10}$i18n-end
-    'applicationlist',  //  $i18n{createTeam.js11}$i18n-end
-    'userList',         //  $i18n{createTeam.js12}$i18n-end
-    'activePage',       //  $i18n{createTeam.js13}$i18n-end
+    'removeModal',      //  团队成员删除弹窗开关
+    'upgradeModal',     //  升级为企业弹窗开关
+    'transferModal',    //  移交团队弹窗开关
+    'dismissModal',     //  解散团队弹窗开关
+    'exitModal',        //  退出团队弹窗开关
+    'applicationlist',  //  应用列表
+    'userList',         //  用户列表
+    'activePage',       //  用户列表页数
     {
       key: 'userInfo',
       value: (teamconfig, ownProps, root) => {
@@ -78,19 +78,19 @@ class SubmitBtn extends Component {
     requestStart,
     requestSuccess,
     requestError,
-    getTeamInfo,            // $i18n{createTeam.js14}$i18n-end
-    uploadApplication,      // $i18n{createTeam.js15}$i18n-end
-    createTeam,             // $i18n{createTeam.js16}$i18n-end
-    userToAdmin,            // $i18n{createTeam.js17}$i18n-end
-    adminToUser,            // $i18n{createTeam.js18}$i18n-end
-    openRemoveModal,        // $i18n{createTeam.js19}$i18n-end
-    openUpgradeModal,       // $i18n{createTeam.js20}$i18n-end
-    openTransferModal,      // $i18n{createTeam.js21}$i18n-end
-    openDismissModal,       // $i18n{createTeam.js22}$i18n-end
-    openExitModal,          // $i18n{createTeam.js23}$i18n-end
-    getAllApps,             // $i18n{createTeam.js24}$i18n-end
-    getUserList,            // $i18n{createTeam.js25}$i18n-end
-    changePage,             // $i18n{createTeam.js26}$i18n-end
+    getTeamInfo,            // 获取团队基础信息
+    uploadApplication,      // 上传
+    createTeam,             // 保存团队基本设置
+    userToAdmin,            // 用户升级管理员
+    adminToUser,            // 管理员降级用户
+    openRemoveModal,        // 团队成员打开删除弹窗
+    openUpgradeModal,       // 打开升级为企业弹窗
+    openTransferModal,      // 打开移交团队弹窗
+    openDismissModal,       // 打开解散团队弹窗
+    openExitModal,          // 打开退出团队弹窗
+    getAllApps,             // 获取全部应用
+    getUserList,            // 获取用户列表
+    changePage,             // 改变用户列表页数
   }
 )
 class CreateTeam extends Component {
@@ -222,17 +222,17 @@ class CreateTeam extends Component {
 
         <div className={form_team}>
           <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js27}$i18n-end<font color='red'> &nbsp;*&nbsp;</font></span>}
-              isRequire={true} valuePropsName='value' errorMessage="$i18n{createTeam.js28}$i18n-end" method="blur"
+            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js2}$i18n-end<font color='red'> &nbsp;*&nbsp;</font></span>}
+              isRequire={true} valuePropsName='value' errorMessage="$i18n{createTeam.js3}$i18n-end" method="blur"
               inline={true}>
-              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="$i18n{createTeam.js29}$i18n-end60$i18n{createTeam.js30}$i18n-end" />
+              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="$i18n{createTeam.js4}$i18n-end" />
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js31}$i18n-end<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js5}$i18n-end<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
               <Upload name='logo' logo={logo ? logo : ""} onChange={this.onChangeUpload} />
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js32}$i18n-end<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="$i18n{createTeam.js33}$i18n-end" method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js6}$i18n-end<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="$i18n{createTeam.js7}$i18n-end" method="blur" inline={true}>
               <Select
                 defaultValue="1"
                 name="invitePermission"
@@ -240,13 +240,13 @@ class CreateTeam extends Component {
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: "invitePermission", value: e }) }}
               >
-                <Option value="1">$i18n{createTeam.js34}$i18n-end</Option>
-                <Option value="2">$i18n{createTeam.js35}$i18n-end</Option>
-                <Option value="0">$i18n{createTeam.js36}$i18n-end</Option>
+                <Option value="1">$i18n{createTeam.js8}$i18n-end</Option>
+                <Option value="2">$i18n{createTeam.js9}$i18n-end</Option>
+                <Option value="0">$i18n{createTeam.js10}$i18n-end</Option>
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js37}$i18n-end<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="$i18n{createTeam.js38}$i18n-end" method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js11}$i18n-end<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="$i18n{createTeam.js12}$i18n-end" method="blur" inline={true}>
               <Select
                 name="joinPermission"
                 defaultValue="1"
@@ -254,22 +254,22 @@ class CreateTeam extends Component {
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: "joinPermission", value: e }) }}
               >
-                <Option value="0">$i18n{createTeam.js39}$i18n-end </Option>
-                <Option value="1">$i18n{createTeam.js40}$i18n-end</Option>
+                <Option value="0">$i18n{createTeam.js13}$i18n-end </Option>
+                <Option value="1">$i18n{createTeam.js14}$i18n-end</Option>
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js41}$i18n-end<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js15}$i18n-end<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || "0"}>
-                <Radio value="0" >$i18n{createTeam.js42}$i18n-end</Radio>
-                <Radio value="1" >$i18n{createTeam.js43}$i18n-end</Radio>
+                <Radio value="0" >$i18n{createTeam.js16}$i18n-end</Radio>
+                <Radio value="1" >$i18n{createTeam.js17}$i18n-end</Radio>
               </Radio.RadioGroup>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js44}$i18n-end<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>$i18n{createTeam.js18}$i18n-end<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
-                <Radio value={0} >$i18n{createTeam.js45}$i18n-end</Radio>
-                <Radio value={1} >$i18n{createTeam.js46}$i18n-end</Radio>
+                <Radio value={0} >$i18n{createTeam.js19}$i18n-end</Radio>
+                <Radio value={1} >$i18n{createTeam.js20}$i18n-end</Radio>
               </Radio.RadioGroup>
             </FormItem>
 

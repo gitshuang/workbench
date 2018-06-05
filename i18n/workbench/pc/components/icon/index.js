@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import types from './style.css';//font$i18n{index.js0}$i18n-end
+import types from './style.css';//font字体库
 import sizes from './index.css';
 
 const propTypes = {

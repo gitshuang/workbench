@@ -41,8 +41,8 @@ const defaultState = {
   brmBackVal: -1,
   tabs: [],
   titleServiceType: false,
-  pinType: false, // $i18n{index.js0}$i18n-endpin$i18n{index.js1}$i18n-end
-  pinDisplay: false, // pin$i18n{index.js2}$i18n-end
+  pinType: false, // 是否pin上
+  pinDisplay: false, // pin是否显示
   widthBrm: true,
 };
 
@@ -61,7 +61,7 @@ const reducer = handleActions({
   [addBrm]: (state, { payload: data }) => {
     const nowBrmLast = state.brm.length > 0 ?
       state.brm[state.brm.length - 1] :
-      []; // brm$i18n{index.js3}$i18n-end
+      []; // brm的每一项都是一个数组，取最后一个
     /* 20180514修改一个浏览器的返回 再addBrm的问题 数组最后的name重复 */
     let topBrm;
     let newBrm;
@@ -69,7 +69,7 @@ const reducer = handleActions({
       state.brm[state.brm.length - 1][nowBrmLast.length - 1] = data;
       newBrm = [...state.brm];
     } else {
-      topBrm = [...nowBrmLast, data];// $i18n{index.js4}$i18n-end
+      topBrm = [...nowBrmLast, data];// 合并后的最新一个数组面包屑
       newBrm = [...state.brm, topBrm];
     }
     return {
@@ -86,7 +86,7 @@ const reducer = handleActions({
       backVal = 1;
     } else {
       const stateBrm = state.brm;
-      const popBrmName = stateBrm[stateBrm.length - 1][index].name;// $i18n{index.js5}$i18n-endbrm$i18n{index.js6}$i18n-end
+      const popBrmName = stateBrm[stateBrm.length - 1][index].name;// 面包屑一直展示的是brm的最后一个元素
       let item;
       for (let i = 0; i < stateBrm.length; i += 1) {
         item = stateBrm[i];

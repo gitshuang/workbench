@@ -12,7 +12,7 @@ export const setCreateEnter = (list, updateType) => {
     // 设置团队
   } else if (updateType === 'update_enter') {
     return post('/manager/enter/setting', list);
-  }// $i18n{api.js0}$i18n-end
+  }// 创建企业
   return post('/manager/teamEnter/createEnter', list);
 };
 export const getEnterInfo = param => get(`/manager/enter/info?enterId=${param}`);

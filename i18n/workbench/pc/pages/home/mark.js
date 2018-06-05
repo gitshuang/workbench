@@ -31,7 +31,7 @@ class HomeMark extends Component {
       <div className={mark}>
         <p>
           <Icon type="notice" />
-          <span>$i18n{mark.js0}$i18n-end。</span>
+          <span>$i18n{mark.js0}$i18n-end</span>
           <b onClick={this.props.linkTo}>$i18n{mark.js1}$i18n-end>></b>
           <Icon type="error3" onClick={this.props.closeHomeMark}/>
         </p>

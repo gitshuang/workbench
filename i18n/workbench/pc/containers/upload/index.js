@@ -51,7 +51,7 @@ class UploadPage extends Component {
       window.attachEvent ?
       document.getElementById('frameUpload').attachEvent('onload', this.handleOnLoad) :
       document.getElementById('frameUpload').addEventListener('load', this.handleOnLoad)
-      return true;//$i18n{index.js2}$i18n-end  
+      return true;//后面的不再执行了  
     }
 
     let obj= this.refs.file.files[0];

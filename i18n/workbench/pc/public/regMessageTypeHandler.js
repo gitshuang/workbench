@@ -23,7 +23,7 @@ const handlers = {
             type: "warning",
             className: enterOrTeam,
             title: '$i18n{regMessageTypeHandler.js0}$i18n-end/$i18n{regMessageTypeHandler.js1}$i18n-end',
-            content: '$i18n{regMessageTypeHandler.js2}$i18n-end/$i18n{regMessageTypeHandler.js3}$i18n-end?',
+            content: '$i18n{regMessageTypeHandler.js2}$i18n-end/$i18n{regMessageTypeHandler.js3}$i18n-end',
             btns: [
               {
                 label: '$i18n{regMessageTypeHandler.js4}$i18n-end',

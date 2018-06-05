@@ -87,7 +87,7 @@
   transform:rotate(90deg);
   -ms-transform:rotate(90deg); /* Internet Explorer */
   -moz-transform:rotate(90deg); /* Firefox */
-  -webkit-transform:rotate(90deg); /* Safari $i18n{style.css0}$i18n-end Chrome */
+  -webkit-transform:rotate(90deg); /* Safari 和 Chrome */
   -o-transform:rotate(90deg); /* Opera */
 }
 .tabName{

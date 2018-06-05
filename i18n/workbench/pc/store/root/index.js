@@ -90,7 +90,7 @@ const reducer = handleActions({
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc({ text: '$i18n{index.js0}$i18n-end...' });
+    createLoadingFunc({ text: '$i18n{index.js0}$i18n-end' });
     return state;
   },
   [requestSuccess](state) {

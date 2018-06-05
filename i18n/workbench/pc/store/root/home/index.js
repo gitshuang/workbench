@@ -51,7 +51,7 @@ const reducer = handleActions({
       return state;
     }
     payload.allowTenants.forEach((da) => {
-      da.type = da.team;// $i18n{index.js0}$i18n-endteam$i18n{index.js1}$i18n-end。
+      da.type = da.team;// 需求变更，废弃team字段。
     });
     return {
       ...state,
