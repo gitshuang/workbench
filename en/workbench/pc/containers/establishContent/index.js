@@ -67,16 +67,16 @@ class EstablishContent extends Component {
             </div>
             <h6>create enterprise for free</h6>
             <div className={`${content} ${enter_context_div}`}>
-              <p>enterprise manager,<br />&nbsp;&nbsp;&nbsp;All departments need to be refreshed as enabling organizations and enterprise-level services.</p>
+              <p>enterprise manager,<br />&nbsp;&nbsp;&nbsp;info1</p>
               <p>key properties:</p>
               <ul className="clearfix">
                 <li>All the capabilities of a team organization</li>
-                <li>Enterprise-level organizational architecture management</li>
-                <li>Stricter management of corporate members</li>
-                <li>Application permission management based on administrative roles</li>
-                <li>Enterprise level unified basic file and data control</li>
-                <li>Basic attendance and salary enquiry service</li>
-                <li>Enterprise - level application market provides a comprehensive digital service portal</li>
+                <li>info2</li>
+                <li>info3</li>
+                <li>info4</li>
+                <li>info5</li>
+                <li>info6</li>
+                <li>info7</li>
               </ul>
             </div>
             <div style={{textAlign:"center"}}>
