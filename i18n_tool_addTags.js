@@ -42,7 +42,7 @@ var walk = function (dir, dir_i18n, done) {
             let count = 0;
             readLine.on('line', (line) => {
                 var spieces=line;// 拿到所有字符串
-                var re= /[\u4E00-\u9FA5]+([\u4E00-\u9FA5]|[\（\）\《\》\——\；\？\?\，\,\。\.\“\”\！])+/g;
+                var re= /[\u4E00-\u9FA5]+([\u4E00-\u9FA5]|[\uFE30-\uFFA0]|[0-9]|[\?\,\。\.\、])+/g; 
                 var regNote =/(^.*\/\/|^\s*\/\*.*\*\/$)/g; // 存在的问题：中文展示后面有注释
                 var replaced=''
                 var matchNote = spieces.match(regNote);
@@ -51,9 +51,20 @@ var walk = function (dir, dir_i18n, done) {
                   replaced=replaced+spieces;
                 }else{
                   var match=spieces.match(re);//取到中文
+                  // 20180605 新增判断，如果一行代码多处匹配
                   if(match){ // 由此可见值校验前半段
-                      var replacement = '$i18n{' + match +'}$i18n-end' ;
-                      replaced=replaced+spieces.replace(re,replacement)
+                      if(match.length > 1){
+                        // 一行逐一替换
+                        var subMatch;
+                        replaced = spieces;
+                        match.map((item)=>{
+                            subMatch = '$i18n{' +item+'}$i18n-end' ;
+                            replaced = replaced.replace(item, subMatch);
+                        })
+                      }else{ //只有一处匹配那么全局替换就可以
+                        var replacement = '$i18n{' + match +'}$i18n-end' ;
+                        replaced=replaced+spieces.replace(re,replacement)
+                      }
                   }else{
                       replaced=replaced+spieces;
                   }
