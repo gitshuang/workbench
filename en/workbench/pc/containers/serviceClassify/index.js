@@ -264,7 +264,7 @@ class serviceClassify extends Component {
                 <Icon type="search" className={ufSearch} onClick={() => { this.btnSearch() }}></Icon>
                 <span className={search_tit} onClick={() => { this.btnSearch() }}>search</span>
               </div>
-              {_appType?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >app market</ButtonBrand>:null}
+              {_appType?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >market</ButtonBrand>:null}
             </div>
 
             <div className={um_content}>
