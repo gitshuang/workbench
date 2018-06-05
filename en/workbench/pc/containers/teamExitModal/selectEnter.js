@@ -66,7 +66,7 @@ class SelectEnter extends Component {
   /*
   openMenu=()=>{
     const {getSearchEnterOrTeam} = this.props;
-    getSearchEnterOrTeam();//NoDictionary
+    getSearchEnterOrTeam();//调用新接口
   }
   */
 
@@ -105,13 +105,13 @@ class SelectEnter extends Component {
     })
     return (
        <div id="open_select" className={select_enter}>
-         <span>NoDictionary/NoDictionary:</span>
+         <span>Please choose enterprise you want /tean:</span>
          <DropdownButton
           // openMenu={this.openMenu}
           marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
           lastIem={true}
-          label="NoDictionary/NoDictionary" type="home" dataItem={_dataItem} />
+          label="Please choose enterprise/tean" type="home" dataItem={_dataItem} />
        </div>
     )
   }

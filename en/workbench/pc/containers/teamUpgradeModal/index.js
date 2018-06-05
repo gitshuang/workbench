@@ -54,32 +54,32 @@ class TeamUpgradeModal extends Component {
           className="team_upgrade_modal_dailog"
           show={ true }
           type="success"
-          title="NoDictionary"
+          title="You can get more rights when you upgrade to an enterprise"
           backup={false}
           close={this.cancelFn} 
           btns={[
             {
-              label: 'NoDictionary',
+              label: 'update now',
               fun: this.configFn,
             },
             {
-              label: 'NoDictionary',
+              label: 'cancel',
               fun: this.cancelFn,
             }
           ]} 
           >
           <div className={content} >
-            <p>· NoDictionary</p>
+            <p>· Enterprise-level organizational architecture management</p>
 
-            <p>· NoDictionary</p>
+            <p>· Stricter management of corporate members</p>
 
-            <p>· NoDictionary</p>
+            <p>· Application permission management based on administrative roles</p>
 
-            <p>· NoDictionary</p>
+            <p>· Enterprise level unified basic file and data control</p>
 
-            <p>· NoDictionary</p>
+            <p>· Basic attendance and salary enquiry service</p>
 
-            <p>· NoDictionary</p>
+            <p>· Enterprise - level application market provides a comprehensive digital service portal</p>
           </div>
         </PopDialog>
     )

@@ -103,9 +103,9 @@ class BreadcrumbContainer extends Component {
             withSidebar ? (
               <section
                 className={this.state.breadcrumbMenu} >
-                NoDictionary
+                menu
                 <Icon
-                  title="NoDictionary"
+                  title="hidden menu"
                   type="error3"
                   className={closeMenu}
                   onClick={this.closeMenu} />
@@ -115,7 +115,7 @@ class BreadcrumbContainer extends Component {
           {
             withSidebar ? (
               <Icon
-                title="NoDictionary"
+                title="show menu"
                 type="tabulation"
                 className={this.state.breadcrumbTab}
                 onClick={this.setExpended} />

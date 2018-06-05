@@ -168,7 +168,7 @@ class Search extends Component {
             type="text"
             value={text}
             onChange={this.onChangeHandler}
-            placeholder="NoDictionary、NoDictionary、NoDictionary"
+            placeholder=" search members' info、app、service and other info "
             autoFocus={true}
             onKeyDown={this.onKeyDown}
           />
@@ -182,9 +182,9 @@ class Search extends Component {
           </div>
           {
             list.length ? (
-              <div className={searchBtnAll} onClick={this.onMoreBtnClick}>NoDictionary</div>
+              <div className={searchBtnAll} onClick={this.onMoreBtnClick}>more result </div>
             ) : (
-              <em>NoDictionary</em>
+              <em>no search result</em>
             )
           }
         </div>
@@ -198,12 +198,12 @@ class Search extends Component {
         {
           isShow && text ? (
             <div className={clearSearch} onClick={this.clearInput}>
-              <Icon title="NoDictionary" type="error3" />
+              <Icon title="clear" type="error3" />
             </div>
           ) : null
         }
         <div className={`tc ${searchBtn}`} onClick={this.search}>
-          <Icon title="NoDictionary" type="search" />
+          <Icon title="search" type="search" />
         </div>
       </div>
     );

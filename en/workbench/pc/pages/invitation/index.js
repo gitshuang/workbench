@@ -164,7 +164,7 @@ class Invitation extends Component {
         content: 'NoDictionary!', duration: 1.5, position: 'topLeft', color: 'warning',
       });
     } else {
-      const parent = { email: mails, message: message === '' ? 'NoDictionary-NoDictionary、NoDictionary' : message, creator };
+      const parent = { email: mails, message: message === '' ? 'NoDictionary-NoDictionary' : message, creator };
       requestStart();
       sendMessage(parent).then(() => {
         requestSuccess();
@@ -250,7 +250,7 @@ class Invitation extends Component {
 
                 <p className={firstP}>NoDictionary</p>
                 <FormControl
-                  placeholder="NoDictionary-NoDictionary、NoDictionary"
+                  placeholder="NoDictionary-NoDictionary"
                   value={message}
                   onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
                 />

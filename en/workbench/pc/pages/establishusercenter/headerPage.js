@@ -66,7 +66,7 @@ class HeaderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allBtn: false, // NoDictionarytab
+      allBtn: false, // 默认显示一行tab
       btnShow: false,
     };
   }

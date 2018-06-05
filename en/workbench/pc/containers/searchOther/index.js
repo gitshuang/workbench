@@ -64,7 +64,7 @@ class searchOther extends Component {
       activePage:1,
       pagesize:10,
       isShowPagination:true,
-      dataPerPageNum:10,//10NoDictionary/NoDictionary
+      dataPerPageNum:10,//10条/页
     }
   }
 
@@ -126,7 +126,7 @@ class searchOther extends Component {
   paginationNumSelect = (id,dataNum) =>{
     const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab,activePage}=this.state;
-    const reg = new RegExp("NoDictionary\/NoDictionary","g");
+    const reg = new RegExp("条\/页","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
     this.setState({
       dataPerPageNum:dataPerPageNum
@@ -158,7 +158,7 @@ class searchOther extends Component {
     } else if (dSeconds < 60) {
       ts = 'NoDictionary';
     } else if (dDays > 3) {
-      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/NoDictionary|NoDictionary/g, '-').replace(/NoDictionary/g, ' ');
+      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ');
     }
     return ts
   }
@@ -188,7 +188,7 @@ class searchOther extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div>NoDictionary{dataList.totalElements}NoDictionary</div>
+            <div>共{dataList.totalElements}条</div>
             <ul className={recently}>{lis}</ul>
 
             <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>

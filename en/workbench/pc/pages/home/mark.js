@@ -31,7 +31,7 @@ class HomeMark extends Component {
       <div className={mark}>
         <p>
           <Icon type="notice" />
-          <span>NoDictionary。</span>
+          <span>NoDictionary</span>
           <b onClick={this.props.linkTo}>NoDictionary>></b>
           <Icon type="error3" onClick={this.props.closeHomeMark}/>
         </p>

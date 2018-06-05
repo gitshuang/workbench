@@ -126,9 +126,9 @@ class Userinfo extends Component {
 
   gotoConfig = () => {
     const { titleType, dispatch } = this.props;
-    if (titleType === 'NoDictionary') { // NoDictionary
+    if (titleType === '企业') { // 企业
       dispatch('openEntersetting');
-    } else { // NoDictionary
+    } else { // 团队
       dispatch('openTeamconfig');
     }
   }

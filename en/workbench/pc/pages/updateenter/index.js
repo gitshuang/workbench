@@ -29,7 +29,7 @@ const { getTeamInfo } = teamconfigActions;
     requestStart,
     requestSuccess,
     requestError,
-    getTeamInfo, // NoDictionary
+    getTeamInfo, // 获取团队基础信息
   },
 )
 class Updateenter extends Component {

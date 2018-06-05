@@ -34,8 +34,8 @@ const {
   getTeamInfo,
   uploadApplication,
   createTeam,
-  userToAdmin,            // NoDictionary
-  adminToUser,            // NoDictionary
+  userToAdmin,            // 用户升级管理员
+  adminToUser,            // 管理员降级用户
   openManagerModal,
   openRemoveModal,
   closeRemoveModal,
@@ -45,7 +45,7 @@ const {
   openExitModal,
   getAllApps,
   getUserList,
-  changePage,             // NoDictionary
+  changePage,             // 改变用户列表页数
 } = teamconfigActions;
 
 import {
@@ -79,14 +79,14 @@ import {
   mapStateToProps(
     'teamData',
     'managerModal',
-    'removeModal',      //  NoDictionary
-    'upgradeModal',     //  NoDictionary
-    'transferModal',    //  NoDictionary
-    'dismissModal',     //  NoDictionary
-    'exitModal',        //  NoDictionary
-    'applicationlist',  //  NoDictionary
-    'userList',         //  NoDictionary
-    'activePage',       //  NoDictionary
+    'removeModal',      //  团队成员删除弹窗开关
+    'upgradeModal',     //  升级为企业弹窗开关
+    'transferModal',    //  移交团队弹窗开关
+    'dismissModal',     //  解散团队弹窗开关
+    'exitModal',        //  退出团队弹窗开关
+    'applicationlist',  //  应用列表
+    'userList',         //  用户列表
+    'activePage',       //  用户列表页数
     {
       key: 'userInfo',
       value: (teamconfig,ownProps,root) => {
@@ -102,20 +102,20 @@ import {
     requestStart,
     requestSuccess,
     requestError,
-    getTeamInfo,            // NoDictionary
-    uploadApplication,      // NoDictionary
-    createTeam,             // NoDictionary
-    userToAdmin,            // NoDictionary
-    adminToUser,            // NoDictionary
-    openManagerModal,       // NoDictionary
-    openRemoveModal,        // NoDictionary
-    openUpgradeModal,       // NoDictionary
-    openTransferModal,      // NoDictionary
-    openDismissModal,       // NoDictionary
-    openExitModal,          // NoDictionary
-    getAllApps,             // NoDictionary
-    getUserList,            // NoDictionary
-    changePage,             // NoDictionary
+    getTeamInfo,            // 获取团队基础信息
+    uploadApplication,      // 上传
+    createTeam,             // 保存团队基本设置
+    userToAdmin,            // 用户升级管理员
+    adminToUser,            // 管理员降级用户
+    openManagerModal,       // 打开升级管理员弹窗
+    openRemoveModal,        // 团队成员打开删除弹窗
+    openUpgradeModal,       // 打开升级为企业弹窗
+    openTransferModal,      // 打开移交团队弹窗
+    openDismissModal,       // 打开解散团队弹窗
+    openExitModal,          // 打开退出团队弹窗
+    getAllApps,             // 获取全部应用
+    getUserList,            // 获取用户列表
+    changePage,             // 改变用户列表页数
   }
 )
 
@@ -126,27 +126,27 @@ class CreateTeamContent extends Component {
     this.tenantName = "";
     this.state = {
 
-      imgWarning: "",         // NoDictionary
-      imgUrl: "",             // NoDictionary  NoDictionary
+      imgWarning: "",         // 团队头像警告格式
+      imgUrl: "",             // 基础设置  选择头像回显
 
-      tenantId: "",           // NoDictionaryid  NoDictionary
-      value: "",              // NoDictionary
-      logo: "",               // NoDictionaryurl
+      tenantId: "",           // 团队id  直接取出来存到这里
+      value: "",              // 基础设置团队名称
+      logo: "",               // 上传成功后返回的url
       //searchAvalible: "",     // 搜索可见
-      allowExit: "",          // NoDictionary
-      invitePermission: "1",  // NoDictionary
-      joinPermission: "1",    // NoDictionary
+      allowExit: "",          // 允许用户是否退出空间
+      invitePermission: "1",  // 邀请成员权限
+      joinPermission: "1",    // 加入权限
 
-      btnType: "web",         // NoDictionary
-      currMemberId: "",     // NoDictionaryID
-      webApplication: [],     //  webNoDictionary
-      mobApplication: [],     //  NoDictionary
-      cliApplication: [],     //  client NoDictionary
-      currApplication: [],    // NoDictionary
+      btnType: "web",         // 团队应用当前按钮
+      currMemberId: "",     // 选择删除成员的ID
+      webApplication: [],     //  web端应用
+      mobApplication: [],     //  移动端应用
+      cliApplication: [],     //  client 应用
+      currApplication: [],    // 当前渲染的是哪个类别的应用列表
 
-      newUserList: [],        // NoDictionary
-      searchVal: "",          // NoDictionary
-      onlyAdmin: false,       // NoDictionary
+      newUserList: [],        // 当前用户列表
+      searchVal: "",          // 用户列表搜索关键字
+      onlyAdmin: false,       // 是否只显示管理员
       
       activePage:1,
       pagesize:10,
@@ -281,13 +281,13 @@ class CreateTeamContent extends Component {
     }
     const currTime = new Date().getTime();
     if( currTime > time ){
-      return "NoDictionary"
+      return "expired"
     }
     const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
     if(timeDiff > 30){
       return false;
     }
-    return "NoDictionary"+Math.ceil(timeDiff)+"NoDictionary"
+    return "and"+Math.ceil(timeDiff)+"expired"
   }
   // 续费按钮
   esitXufei = (time) => {
@@ -318,11 +318,11 @@ class CreateTeamContent extends Component {
       <div className={box2}>
         <div className={applicationBtns}>
           <span>
-            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>WebNoDictionary</Button>
-            <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>NoDictionary</Button>
-            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PCNoDictionary</Button>
+            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web端</Button>
+            <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>phone</Button>
+            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PCweb</Button>
           </span>
-          {/*<Button colors="danger">NoDictionary</Button>*/}
+          {/*<Button colors="danger">add new app</Button>*/}
         </div>
         <div className={applicationLists}>
           <ul>
@@ -336,7 +336,7 @@ class CreateTeamContent extends Component {
                     <div>
                       <h6>{item.applicationName}</h6>
                       {
-                        item.expired? <p>NoDictionary{this.handelTime(item.expired)}</p>:""
+                        item.expired? <p>expired time:{this.handelTime(item.expired)}</p>:""
                       }
                     </div>
                     <div>
@@ -344,7 +344,7 @@ class CreateTeamContent extends Component {
                     </div>
                     <div className="um-bf1 tr">
                       {
-                        this.esitXufei(item.expired) ? <Button onClick={()=>{this.openXufei(item.applicationId)}}>NoDictionary</Button> : null
+                        this.esitXufei(item.expired) ? <Button onClick={()=>{this.openXufei(item.applicationId)}}>purchase</Button> : null
                       }
 
                     </div>
@@ -449,7 +449,7 @@ class CreateTeamContent extends Component {
 
     //下面选择每页展示的数据条目数
   paginationNumSelect = (id,dataNum) =>{
-    let reg = new RegExp("NoDictionary\/NoDictionary","g");
+    let reg = new RegExp("条\/页","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
     const { searchVal,value, activetab, activePage}=this.state;
     this.setState({
@@ -490,7 +490,7 @@ class CreateTeamContent extends Component {
               <input
                 className="form-control"
                 type="text"
-                placeholder="NoDictionary、NoDictionary、NoDictionary"
+                placeholder="name,phone,email"
                 value={this.state.searchVal}
                 onChange={(e)=>{this.changeSearchFn(e)}}
               />
@@ -504,20 +504,20 @@ class CreateTeamContent extends Component {
               style={{textAlign:"center",cursor:"pointer" }}
               onClick={this.searchFn}
             >
-              <span className={search_label}>NoDictionary</span>
+              <span className={search_label}>search</span>
             </div>
           </div>
           <div className={memberBtns}>
-            <Checkbox colors="info" onChange={this.changeCheck}>NoDictionary</Checkbox>
+            <Checkbox colors="info" onChange={this.changeCheck}>manager only</Checkbox>
             {
-              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>NoDictionary</Button>:null
+              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>inivite member</Button>:null
             }
           </div>
         </div>
 
         <div className={table_title}>
-          <div>NoDictionary{userList.totalElements}NoDictionary</div>
-          <div className={table_permise}>NoDictionary</div>
+          <div>total member{userList.totalElements}人</div>
+          <div className={table_permise}>root</div>
         </div>
         <div className={memberLists}>
           <ul>
@@ -544,9 +544,9 @@ class CreateTeamContent extends Component {
                         style={{ width: 88, marginRight: 6 }}
                         onChange={ (e) => {this.handleChange3(e,item.userId)} }
                       >
-                        <Option value="manage">NoDictionary</Option>
-                        <Option value="member">NoDictionary</Option>
-                        <Option value="deleteMember">NoDictionary</Option>
+                        <Option value="manage">manager</Option>
+                        <Option value="member">memeber</Option>
+                        <Option value="deleteMember">remove member</Option>
                       </Select>
                     </div>
                   </li>
@@ -613,7 +613,7 @@ class CreateTeamContent extends Component {
           <h2>{this.tenantName}</h2>
           <div className="um-box um-box-center">
             <div>
-              <Button onClick={this.openUpgradeModal}>NoDictionary</Button>
+              <Button onClick={this.openUpgradeModal}>update </Button>
             </div>
             <div>
               {/* <Dropdown
@@ -622,13 +622,13 @@ class CreateTeamContent extends Component {
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange}
               >
-                <Button className="um-box-vc um-box-center">NoDictionary<Icon type="pull-down" /></Button>
+                <Button className="um-box-vc um-box-center">relevant operation<Icon type="pull-down" /></Button>
               </Dropdown> */}
 
                <EnterOption data={[
-                {id:"aa",name:"NoDictionary",value:"2",serverApi:"team/remove",msg:"NoDictionary"},
-                {id:"allowExit",name:"NoDictionary",value:"3",serverApi:"team/leave",msg:"NoDictionary"},
-              ]}  type="NoDictionary" />
+                {id:"aa",name:"disband",value:"2",serverApi:"team/remove",msg:"After the dissolution, the application under the current team will no longer be used and the corresponding data will be deleted. Please confirm that the data has been backup"},
+                {id:"allowExit",name:"outparty",value:"3",serverApi:"team/leave",msg:"After exiting, your application under the current team will no longer be used and the corresponding data will be deleted. Please confirm that the data has been backup"},
+              ]}  type="team" />
 
             </div>
           </div>
@@ -638,15 +638,15 @@ class CreateTeamContent extends Component {
             destroyInactiveTabPane
             defaultActiveKey="1"
           >
-            <TabPane tab='NoDictionary' key="1">
+            <TabPane tab='basic setting' key="1">
               <div >
                 <CreateTeam />
               </div>
             </TabPane>
-            <TabPane tab='NoDictionary' key="2">
+            <TabPane tab='team app' key="2">
               {this.teamApplication()}
             </TabPane>
-            <TabPane tab='NoDictionary' key="3">
+            <TabPane tab='team member' key="3">
               {this.teamMember()}
             </TabPane>
           </Tabs>

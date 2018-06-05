@@ -86,7 +86,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: 'NoDictionary1'
+            context: 'NoDictionary'
           },
           {
             value: 'en',
@@ -94,7 +94,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: 'NoDictionary3'
+            context: 'NoDictionary'
           },
         ]
       }

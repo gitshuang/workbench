@@ -23,7 +23,7 @@ const handlers = {
             type: "warning",
             className: enterOrTeam,
             title: 'NoDictionary/NoDictionary',
-            content: 'NoDictionary/NoDictionary?',
+            content: 'NoDictionary/NoDictionary',
             btns: [
               {
                 label: 'NoDictionary',

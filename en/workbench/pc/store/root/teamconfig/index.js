@@ -2,49 +2,49 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-  getTeamInfo, // NoDictionary
-  uploadApplication, // NoDictionary
-  createTeam, // NoDictionary
+  getTeamInfo, // 获取团队基础信息
+  uploadApplication, // 图片上传
+  createTeam, // 保存
 
-  getUserList, // NoDictionaryuserlist api
-  openManagerModal, // NoDictionary
-  closeManagerModal, // NoDictionary
-  userToAdmin, // NoDictionary
-  adminToUser, // NoDictionary
-  openRemoveModal, // NoDictionary
-  closeRemoveModal, // NoDictionary
-  removeUser, // NoDictionary
-  changePage, // NoDictionary
+  getUserList, // 获取userlist api
+  openManagerModal, // 打开用户升级管理员弹窗
+  closeManagerModal, // 关闭用户升级管理员弹窗
+  userToAdmin, // 用户升级管理员
+  adminToUser, // 管理员降级用户
+  openRemoveModal, // 打开删除用户的弹窗
+  closeRemoveModal, // 关闭删除用户的弹窗
+  removeUser, // 删除用户请求
+  changePage, // 点击分页更改页数
 
-  openUpgradeModal, // NoDictionary
-  closeUpgradeModal, // NoDictionary
+  openUpgradeModal, // 打开升级为企业弹窗
+  closeUpgradeModal, // 关闭升级为企业弹窗
 
-  openTransferModal, // NoDictionary
-  closeTransferModal, // NoDictionary
-  transferTeam, // NoDictionary
+  openTransferModal, // 打开移交团队弹窗
+  closeTransferModal, // 关闭移交团队弹窗
+  transferTeam, // 移交团队
 
-  openDismissModal, // NoDictionary
-  closeDismissModal, // NoDictionary
-  dismissTeam, // NoDictionary
+  openDismissModal, // 打开解散团队弹窗
+  closeDismissModal, // 关闭解散团队弹窗
+  dismissTeam, // 解散团队
 
-  openExitModal, // NoDictionary
-  closeExitModal, // NoDictionary
-  exitTeam, // NoDictionary
+  openExitModal, // 打开退出团队弹窗
+  closeExitModal, // 关闭退出团队弹窗
+  exitTeam, // 退出团队
 
-  getAllApps, //  NoDictionary
+  getAllApps, //  获取所有应用
 } = actions;
 
 const defaultState = {
-  teamData: {}, //  NoDictionary NoDictionary
-  managerModal: false, //  NoDictionary
-  removeModal: false, //  NoDictionary
-  upgradeModal: false, //  NoDictionary
-  transferModal: false, //  NoDictionary
-  dismissModal: false, //  NoDictionary
-  exitModal: false, //  NoDictionary
-  applicationlist: [], //  NoDictionary
-  userList: {}, //  NoDictionary
-  activePage: 1, //  NoDictionary
+  teamData: {}, //  保存成功之后 返回的团队信息
+  managerModal: false, //  升级管理员弹窗开关
+  removeModal: false, //  删除弹窗开关
+  upgradeModal: false, //  升级为企业弹窗开关
+  transferModal: false, //  移交团队弹窗开关
+  dismissModal: false, //  解散团队弹窗开关
+  exitModal: false, //  退出团队弹窗开关
+  applicationlist: [], //  应用列表
+  userList: {}, //  用户列表
+  activePage: 1, //  当前页数
   exitTeamMsg: '',
   dismissTeamMsg: '',
 };

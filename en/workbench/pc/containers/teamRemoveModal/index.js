@@ -21,16 +21,16 @@ class TeamRemoveModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      msg:"NoDictionary",
+      msg:"Confirm removing the selected user?",
       disable:false,
       btn:[
         {
-          label: 'NoDictionary',
+          label: 'del',
           fun: this.configFn,
           disable:false
         },
         {
-          label: 'NoDictionary',
+          label: 'cancel',
           fun: this.cancelFn,
         }
       ]
@@ -70,7 +70,7 @@ class TeamRemoveModal extends Component {
       <PopDialog
           className="team_remove_modal"
           show={ true }
-          title="NoDictionary?"
+          title="Confirm removing the selected user?"
           backup={false}
           close={this.cancelFn} 
           btns={btn} 

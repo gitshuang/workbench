@@ -30,13 +30,13 @@ class UploadPage extends Component {
   imgChange = (e) => {
     if(e.target.value.trim().length===0){
       this.setState({
-        imgWarning: "NoDictionary"
+        imgWarning: "upload image"
       });
     }
     let val = e.target.value && e.target.value.substr(e.target.value.lastIndexOf("."));
     if(val && !val.match( /.jpg|.gif|.png|.bmp|.svg/i ) ){
       this.setState({
-        imgWarning: "NoDictionary"
+        imgWarning: "It has to be a picture "
       });
       return false;
     }else {
@@ -51,7 +51,7 @@ class UploadPage extends Component {
       window.attachEvent ?
       document.getElementById('frameUpload').attachEvent('onload', this.handleOnLoad) :
       document.getElementById('frameUpload').addEventListener('load', this.handleOnLoad)
-      return true;//NoDictionary  
+      return true;//后面的不再执行了  
     }
 
     let obj= this.refs.file.files[0];

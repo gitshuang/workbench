@@ -70,20 +70,20 @@ export {
 };
 
 /**
-NoDictionary
+parameter
 
-type: PropTypes.string, NoDictionary
-label: PropTypes.string, NoDictionary
-onClick:PropTypes.fun,   NoDictionary
-data:PropTypes.object   NoDictionaryObjectNoDictionary
+type: PropTypes.string, parameter
+label: PropTypes.string, show message
+onClick:PropTypes.fun,   button callback
+data:PropTypes.object   callback data,formalObjectcallback, formal
 
 <div style={{width:"500px",height:"600px",padding:"10px"}}>
-<ButtonBrand />  NoDictionary
-<ButtonDefault />  NoDictionary
-<ButtonDefaultLine /> NoDictionary
-<ButtonDefaultAlpha /> NoDictionary
-<ButtonWarning />   NoDictionary
-<ButtonDanger />  NoDictionary
+<ButtonBrand />  color
+<ButtonDefault />  button
+<ButtonDefaultLine /> border button
+<ButtonDefaultAlpha /> normal button
+<ButtonWarning />   warning
+<ButtonDanger />  danger
 
 </div>
 **/

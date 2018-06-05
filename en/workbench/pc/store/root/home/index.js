@@ -51,7 +51,7 @@ const reducer = handleActions({
       return state;
     }
     payload.allowTenants.forEach((da) => {
-      da.type = da.team;// NoDictionaryteamNoDictionary。
+      da.type = da.team;// 需求变更，废弃team字段。
     });
     return {
       ...state,

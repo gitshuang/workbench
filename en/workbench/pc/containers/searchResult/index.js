@@ -98,7 +98,7 @@ class searchResult extends Component {
       isShowPagination:true,
       isShownodataClass:true,
       isShownodataClassEach:true,
-      otherName:"NoDictionary",
+      otherName:"other content",
       dataPerPageNum:10,
       //otherName:"其他内容(0)"
     }
@@ -199,10 +199,10 @@ class searchResult extends Component {
         payload.content.forEach((da)=>{
           _count += da.pageSize
         })
-        let _newObj = {otherName:"NoDictionary"};
+        let _newObj = {otherName:"other content"};
         _newObj.Searchotherlist = payload;
         //_newObj.pagesize = payload.pageSize;
-        _newObj.pagesize = payload.totalPages;//NoDictionary
+        _newObj.pagesize = payload.totalPages;//总页数
         if(payload.content.length>0){
           _newObj.isShowPagination = false;
           _newObj.isShownodataClassEach = true;
@@ -264,7 +264,7 @@ class searchResult extends Component {
 
   //下面选择每页展示的数据条目数
   paginationNumSelect = (id,dataNum) =>{
-   let reg = new RegExp("NoDictionary\/NoDictionary","g");
+   let reg = new RegExp("条\/页","g");
    let dataPerPageNum  = dataNum.replace(reg,"");
    const { value, activetab, activePage}=this.state;
    this.setState({
@@ -327,7 +327,7 @@ class searchResult extends Component {
           <ul className={recently}>{this.otherlistLi(dataList)}</ul>
           <div className={`${nodataClass} ${isShownodataClassEach ? isdisplay : ''}`}>
                 <img src={nodata}/>
-                <p>NoDictionary</p>
+                <p>There is no relevant content</p>
               </div>
       </TabPane>)
     })
@@ -350,18 +350,18 @@ class searchResult extends Component {
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} placeholder="NoDictionary、NoDictionary、NoDictionary"
+              <FormControl className={serviceSearch} placeholder="Search personnel information application services and other content"
                value={this.state.value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                   <span>|</span>
                   <Icon type="search" className={ufSearch} onClick={this.btnSearch}></Icon>
-                  <span className={search_tit} onClick={this.btnSearch}>NoDictionary</span>
+                  <span className={search_tit} onClick={this.btnSearch}>Search</span>
               </div>
             </div>
             <div className={"um-content" + ` ${tabContent}`}>
               <div className={`${nodataClass} ${isShownodataClass? isdisplay : ''}`}>
                 <img src={nodata}/>
-                <p>NoDictionary</p>
+                <p>There is no relevant content</p>
               </div>
               <Tabs
                 destroyInactiveTabPane
@@ -372,13 +372,13 @@ class searchResult extends Component {
                 animated={anifalse}
               >
               {Morelist}
-              {/*  NoDictionary
+              {/*  annotation
                 this.state.hasOther ? (
                   <TabPane tab={otherName} key="other" className={tabPane1}>
                     {otherlist}
                     <div className={`${nodataClass} ${isShownodataClassEach? isdisplay : ''}`}>
                       <img src={nodata}/>
-                      <p>NoDictionary</p>
+                      <p>There is no relevant content</p>
                     </div>
                   </TabPane>
                 ) : null

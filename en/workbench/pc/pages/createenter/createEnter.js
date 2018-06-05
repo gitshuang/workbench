@@ -96,7 +96,7 @@ class CreateEnter extends Component {
       value: 'A',
       verify: true,
     };
-    this.address = 'NoDictionary|NoDictionary|NoDictionary|';
+    this.address = 'NoDictionary}|北京|NoDictionary|';
   }
 
   onChange = (obj) => {
@@ -190,7 +190,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <FormControl name="tenantName" placeholder="NoDictionary60NoDictionary" />
+            <FormControl name="tenantName" placeholder="NoDictionary" />
           </FormItem>
 
           <FormItem
@@ -224,25 +224,25 @@ class CreateEnter extends Component {
               style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
-              <Option value="A">NoDictionary、NoDictionary、NoDictionary、NoDictionary</Option>
+              <Option value="A">NoDictionary</Option>
               <Option value="B">NoDictionary</Option>
               <Option value="C">NoDictionary</Option>
-              <Option value="D">NoDictionary、NoDictionary、NoDictionary</Option>
-              <Option value="S">NoDictionary、NoDictionary</Option>
+              <Option value="D">NoDictionary</Option>
+              <Option value="S">NoDictionary</Option>
               <Option value="E">NoDictionary</Option>
-              <Option value="G">NoDictionary、NoDictionary</Option>
-              <Option value="I">NoDictionary、NoDictionary</Option>
+              <Option value="G">NoDictionary</Option>
+              <Option value="I">NoDictionary</Option>
               <Option value="F">NoDictionary</Option>
-              <Option value="H">NoDictionary、NoDictionary</Option>
-              <Option value="J">NoDictionary、NoDictionary</Option>
+              <Option value="H">NoDictionary</Option>
+              <Option value="J">NoDictionary</Option>
               <Option value="K">NoDictionary</Option>
               <Option value="L">NoDictionary</Option>
-              <Option value="M">NoDictionary、NoDictionary</Option>
-              <Option value="N">NoDictionary、NoDictionary</Option>
+              <Option value="M">NoDictionary</Option>
+              <Option value="N">NoDictionary</Option>
               <Option value="O">NoDictionary</Option>
               <Option value="P">NoDictionary</Option>
-              <Option value="Q">NoDictionary、NoDictionary</Option>
-              <Option value="R">NoDictionary、NoDictionary、NoDictionary</Option>
+              <Option value="Q">NoDictionary</Option>
+              <Option value="R">NoDictionary</Option>
               <Option value="T">NoDictionary</Option>
             </Select>
           </FormItem>
@@ -262,13 +262,13 @@ class CreateEnter extends Component {
               style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
-              <Option value="A">0NoDictionary50</Option>
+              <Option value="A">0－50</Option>
               <Option value="B">51-100</Option>
               <Option value="C">101-200</Option>
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
-              <Option value="F">1001NoDictionary2000</Option>
-              <Option value="G">2000NoDictionary</Option>
+              <Option value="F">1001－2000</Option>
+              <Option value="G">2000人</Option>
             </Select>
           </FormItem>
 
@@ -293,7 +293,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <FormControl name="tenantAddress" placeholder="NoDictionary60NoDictionary" />
+            <FormControl name="tenantAddress" placeholder="NoDictionary" />
           </FormItem>
 
           <div className={lxrHr}>

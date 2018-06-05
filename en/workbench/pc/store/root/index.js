@@ -90,7 +90,7 @@ const reducer = handleActions({
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc({ text: 'NoDictionary...' });
+    createLoadingFunc({ text: 'NoDictionary' });
     return state;
   },
   [requestSuccess](state) {

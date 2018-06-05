@@ -82,7 +82,7 @@ class TeamRemoveModal extends Component {
           if (error) {
             requestError(payload);
           }
-          if(payload.length == 1){//NoDictionary
+          if(payload.length == 1){//进入该企业或团队
             if(!payload)return;
             this.changeTenant(payload[0].tenantId); 
           }else if(payload.length == 0){
@@ -128,8 +128,8 @@ class TeamRemoveModal extends Component {
       _msg = data.msg;
     }
     const {msg,isManage,close,disable} = this.state;
-    let btnLabel = "NoDictionary";
-    let _pop_title = "NoDictionary"+name+"?";
+    let btnLabel = "confirm";
+    let _pop_title = "confirm"+name+"?";
     let _cont = null;
     let _btn = [
       {
@@ -138,12 +138,12 @@ class TeamRemoveModal extends Component {
         disable
       },
       {
-        label: 'NoDictionary',
+        label: 'cancle',
         fun: this.cancelFn,
       }
     ];
     let _select_enter = null;
-    if(isManage == 0){//NoDictionary
+    if(isManage == 0){//退出团队信息
       _cont = (<div className={content} >
             <p>{_msg}</p>
         </div>);
@@ -152,18 +152,18 @@ class TeamRemoveModal extends Component {
             isManage:1
           })
         }
-    }else if(isManage == 1){//NoDictionary
+    }else if(isManage == 1){//提示是否需要退出或解散
       _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title= "NoDictionary"+name+"?";
+      _pop_title= "confirm"+name+"?";
       _btn[0].fun = ()=>{
          this.configFn();
       }
-    }else if(isManage == 3){//NoDictionary
+    }else if(isManage == 3){//退出失败后显示信息
       _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title= "NoDictionary"+name+"?";
+      _pop_title= "confirm"+name+"?";
       _btn = null;
-    }else if(isManage == 2){//NoDictionary/NoDictionary
-      _pop_title= "NoDictionary"+name;
+    }else if(isManage == 2){//退出后选中企业/团队
+      _pop_title= "already"+name;
       _cont = <SelectEnter />
       _btn = null;
       _select_enter = select_enter_close;

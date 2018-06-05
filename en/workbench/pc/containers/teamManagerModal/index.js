@@ -48,22 +48,22 @@ class TeamManagerModal extends Component {
       <PopDialog
           className="team_remove_modal"
           show={ true }
-          title="NoDictionary"
+          title="manager set"
           backup={false}
           close={this.cancelFn} 
           btns={[
             {
-              label: 'NoDictionary',
+              label: 'manager set',
               fun: this.configFn,
             },
             {
-              label: 'NoDictionary',
+              label: 'cancel',
               fun: this.cancelFn,
             }
           ]} 
           >
           <div className={content} >
-            NoDictionary
+            Make sure the current user is set as an administrator?
           </div>
         </PopDialog>
     )

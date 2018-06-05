@@ -179,7 +179,7 @@ class serviceClassify extends Component {
         className={currentLabel === -1 ? 'active' : ''}
         key="all"
         onClick={this.handleChangeLabel(-1)}>
-        NoDictionary
+        all
       </Button>,
       ...labels.map(({ labelId, labelName }, index) => (
         <Button
@@ -258,13 +258,13 @@ class serviceClassify extends Component {
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} placeholder="NoDictionary" value={value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
+              <FormControl className={serviceSearch} placeholder="search app" value={value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
               <div className={search_icon_con}>
                 <span>|</span>
                 <Icon type="search" className={ufSearch} onClick={() => { this.btnSearch() }}></Icon>
-                <span className={search_tit} onClick={() => { this.btnSearch() }}>NoDictionary</span>
+                <span className={search_tit} onClick={() => { this.btnSearch() }}>search</span>
               </div>
-              {_appType?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >NoDictionary</ButtonBrand>:null}
+              {_appType?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >app market</ButtonBrand>:null}
             </div>
 
             <div className={um_content}>

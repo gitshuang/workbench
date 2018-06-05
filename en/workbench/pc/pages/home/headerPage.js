@@ -104,7 +104,7 @@ class HeaderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allBtn: false, // englishtab
+      allBtn: false, // 默认显示一行tab
       btnShow: false,
       allowTenants: [],
     };
@@ -255,7 +255,7 @@ class HeaderPage extends Component {
           iconName={personal}
           color={color}
         >
-          <span style={titleStyle}>{titleContent || 'changelanguage'}</span>
+          <span style={titleStyle}>{titleContent || 'NoDictionary'}</span>
         </Header>
         {
           list.length > 1 ? (
@@ -276,7 +276,7 @@ class HeaderPage extends Component {
           onKeyDown={this.allBtnOnclick}
           role="presentation"
         >
-          {this.state.allBtn ? 'homepage' : 'fold,showAll'}
+          {this.state.allBtn ? 'NoDictionary' : 'NoDictionary'}
           <Icon type={this.state.allBtn ? 'upward' : 'pull-down'} />
         </div>
       </div>

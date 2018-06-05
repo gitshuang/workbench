@@ -20,8 +20,8 @@ const {
   getTeamInfo,
   uploadApplication,
   createTeam,
-  userToAdmin,            // NoDictionary
-  adminToUser,            // NoDictionary
+  userToAdmin,            // 用户升级管理员
+  adminToUser,            // 管理员降级用户
   openRemoveModal,
   closeRemoveModal,
   openUpgradeModal,
@@ -30,7 +30,7 @@ const {
   openExitModal,
   getAllApps,
   getUserList,
-  changePage,             // NoDictionary
+  changePage,             // 改变用户列表页数
 } = teamconfigActions;
 
 class SubmitBtn extends Component {
@@ -42,9 +42,9 @@ class SubmitBtn extends Component {
   render() {
     return (
       <div className={'u-form-submit'}>
-        {/* <ButtonBrand onClick={this.click}>NoDictionary</ButtonBrand> */}
+        {/* <ButtonBrand onClick={this.click}>save</ButtonBrand> */}
         {
-          this.props.disabled ? <ButtonBrand onClick={this.click} >NoDictionary</ButtonBrand> : <ButtonBrand disabled={true} >NoDictionary</ButtonBrand>
+          this.props.disabled ? <ButtonBrand onClick={this.click} >save}</ButtonBrand> : <ButtonBrand disabled={true} >保存</ButtonBrand>
         }
       </div>
     );
@@ -55,14 +55,14 @@ class SubmitBtn extends Component {
 @connect(
   mapStateToProps(
     'teamData',
-    'removeModal',      //  NoDictionary
-    'upgradeModal',     //  NoDictionary
-    'transferModal',    //  NoDictionary
-    'dismissModal',     //  NoDictionary
-    'exitModal',        //  NoDictionary
-    'applicationlist',  //  NoDictionary
-    'userList',         //  NoDictionary
-    'activePage',       //  NoDictionary
+    'removeModal',      //  团队成员删除弹窗开关
+    'upgradeModal',     //  升级为企业弹窗开关
+    'transferModal',    //  移交团队弹窗开关
+    'dismissModal',     //  解散团队弹窗开关
+    'exitModal',        //  退出团队弹窗开关
+    'applicationlist',  //  应用列表
+    'userList',         //  用户列表
+    'activePage',       //  用户列表页数
     {
       key: 'userInfo',
       value: (teamconfig, ownProps, root) => {
@@ -78,19 +78,19 @@ class SubmitBtn extends Component {
     requestStart,
     requestSuccess,
     requestError,
-    getTeamInfo,            // NoDictionary
-    uploadApplication,      // NoDictionary
-    createTeam,             // NoDictionary
-    userToAdmin,            // NoDictionary
-    adminToUser,            // NoDictionary
-    openRemoveModal,        // NoDictionary
-    openUpgradeModal,       // NoDictionary
-    openTransferModal,      // NoDictionary
-    openDismissModal,       // NoDictionary
-    openExitModal,          // NoDictionary
-    getAllApps,             // NoDictionary
-    getUserList,            // NoDictionary
-    changePage,             // NoDictionary
+    getTeamInfo,            // 获取团队基础信息
+    uploadApplication,      // 上传
+    createTeam,             // 保存团队基本设置
+    userToAdmin,            // 用户升级管理员
+    adminToUser,            // 管理员降级用户
+    openRemoveModal,        // 团队成员打开删除弹窗
+    openUpgradeModal,       // 打开升级为企业弹窗
+    openTransferModal,      // 打开移交团队弹窗
+    openDismissModal,       // 打开解散团队弹窗
+    openExitModal,          // 打开退出团队弹窗
+    getAllApps,             // 获取全部应用
+    getUserList,            // 获取用户列表
+    changePage,             // 改变用户列表页数
   }
 )
 class CreateTeam extends Component {
@@ -222,17 +222,17 @@ class CreateTeam extends Component {
 
         <div className={form_team}>
           <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-            <FormItem showMast={false} labelName={<span>NoDictionary<font color='red'> &nbsp;*&nbsp;</font></span>}
-              isRequire={true} valuePropsName='value' errorMessage="NoDictionary" method="blur"
+            <FormItem showMast={false} labelName={<span>team name<font color='red'> &nbsp;*&nbsp;</font></span>}
+              isRequire={true} valuePropsName='value' errorMessage="name input" method="blur"
               inline={true}>
-              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="NoDictionary60NoDictionary" />
+              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="less than 60 bit" />
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>NoDictionary<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>avatar<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
               <Upload name='logo' logo={logo ? logo : ""} onChange={this.onChangeUpload} />
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>NoDictionary<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="NoDictionary" method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>invite role<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select your industry" method="blur" inline={true}>
               <Select
                 defaultValue="1"
                 name="invitePermission"
@@ -240,13 +240,13 @@ class CreateTeam extends Component {
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: "invitePermission", value: e }) }}
               >
-                <Option value="1">NoDictionary</Option>
-                <Option value="2">NoDictionary</Option>
-                <Option value="0">NoDictionary</Option>
+                <Option value="1">full invitation</Option>
+                <Option value="2">forbidden invitation</Option>
+                <Option value="0">manager invitation</Option>
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>NoDictionary<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="NoDictionary" method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>application root <font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select your industry" method="blur" inline={true}>
               <Select
                 name="joinPermission"
                 defaultValue="1"
@@ -254,22 +254,22 @@ class CreateTeam extends Component {
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: "joinPermission", value: e }) }}
               >
-                <Option value="0">NoDictionary </Option>
-                <Option value="1">NoDictionary</Option>
+                <Option value="0">allow </Option>
+                <Option value="1"> forbid</Option>
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>NoDictionary<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>allow user quit<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || "0"}>
-                <Radio value="0" >NoDictionary</Radio>
-                <Radio value="1" >NoDictionary</Radio>
+                <Radio value="0" > forbid</Radio>
+                <Radio value="1" >allow</Radio>
               </Radio.RadioGroup>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>NoDictionary<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>watermark in communication<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
-                <Radio value={0} >NoDictionary</Radio>
-                <Radio value={1} >NoDictionary</Radio>
+                <Radio value={0} > forbid</Radio>
+                <Radio value={1} >allow</Radio>
               </Radio.RadioGroup>
             </FormItem>
 

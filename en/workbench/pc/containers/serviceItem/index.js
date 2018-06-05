@@ -34,26 +34,26 @@ class ServiceItem extends Component {
         //  </div>);
         {serviceType=="2"?
           btn = (<div >
-                <span>NoDictionary</span>
-                <Icon title="NoDictionary"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
+                <span>Added</span>
+                <Icon title="Added"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
             </div>):
           btn = (<div >
-              <Icon title="NoDictionary"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
-              <span>NoDictionary</span>
+              <Icon title="Added"  type="pin2" style={{color:"rgba(117,127,140,1)"}} />
+              <span>Added</span>
             </div>)};
       }else if(selected == "2"){
         btn = (<div onClick={()=>{this.props.onChange(this.props.data,"3")}}  >
-        <Icon title="NoDictionary" type="pin" style={{cursor:"pointer"}} /> </div>);
+        <Icon title="not added" type="pin" style={{cursor:"pointer"}} /> </div>);
       }else if(selected == "3"){
         btn = (<div onClick={()=>{this.props.onChange(this.props.data,"2")}}  >
-        <Icon title="NoDictionary" type="pin2" style={{cursor:"pointer"}} /> </div>);
+        <Icon title="add" type="pin2" style={{cursor:"pointer"}} /> </div>);
       }
-    }else{//NoDictionaryselectedNoDictionary2
+    }else{//如果没有selected，就显示2
        btn = (<div onClick={()=>{this.props.onChange(this.props.data,"3")}}  >
-        <Icon title="NoDictionary" type="pin" style={{cursor:"pointer"}} /> </div>);
+        <Icon title="not added" type="pin" style={{cursor:"pointer"}} /> </div>);
     }
 
-    let upIcon = serviceType=="2"?<Icon className={up_icon} type={extend?"pull-down":"upward"} title={ extend ? 'NoDictionary' : 'NoDictionary' } onClick={()=>{this.props.packUp(this.props.data)}}></Icon>:null;
+    let upIcon = serviceType=="2"?<Icon className={up_icon} type={extend?"pull-down":"upward"} title={ extend ? 'open' : 'fold' } onClick={()=>{this.props.packUp(this.props.data)}}></Icon>:null;
     let _style = serviceType=="2"?null:extend?{display:"none"}:null;
     let _app = service && service.length == 0?item_footer_app:""
     return (

@@ -56,7 +56,7 @@ class Addressbook extends Component {
       _html += item;
     });
     const length = list.length;
-    return "NoDictionary" + _html + "NoDictionary" + length + "NoDictionary";
+    return "NoDictionary" + _html + "等" + length + "NoDictionary";
   }
   rendHor = (userHonor) => {
     let list = [];

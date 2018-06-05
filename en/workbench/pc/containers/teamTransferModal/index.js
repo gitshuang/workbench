@@ -56,23 +56,23 @@ class TeamTransferModal extends Component {
       <PopDialog
           className="team_transfer_modal"
           show={ true }
-          title="NoDictionary"
+          title="Handed over to the team"
           backup={false}
           close={this.cancelFn} 
           btns={[
             {
-              label: 'NoDictionary',
+              label: 'confirm',
               fun: this.configFn,
             },
             {
-              label: 'NoDictionary',
+              label: 'cancel',
               fun: this.cancelFn,
             }
           ]} 
           >
           <div className={content} >
-            <p>NoDictionary。</p>
-            <p>NoDictionary</p>
+            <p>You will no longer have administrator rights after you hand over the team</p>
+            <p>Please search for transferred users</p>
           </div>
         </PopDialog>
     )

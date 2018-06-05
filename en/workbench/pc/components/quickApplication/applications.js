@@ -140,11 +140,11 @@ class Applications extends Component {
               onKeyDown={this.openAllAppList}
               role="presentation"
             >
-              <a>NoDictionary</a>
+              <a>all applications</a>
             </div>
           ) : (
             <div className={serviceBtn}>
-              <button className={btn} onClick={this.onClickScroll}>NoDictionary</button>
+              <button className={btn} onClick={this.onClickScroll}>more applications</button>
             </div>
             )
         }

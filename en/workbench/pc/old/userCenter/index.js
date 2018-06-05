@@ -174,10 +174,10 @@ class UserInfoContainer extends Component {
   handleChange = (e) => {
     switch (e) {
       case 'language':
-        alert("NoDictionary...");
+        alert("NoDictionary");
         break;
       case 'message':
-        alert("NoDictionary...");
+        alert("NoDictionary");
         break;
       default:
         break;
@@ -210,9 +210,9 @@ class UserInfoContainer extends Component {
     hideUserInfoDisplay();
   }
   gotoConfig = (curTenant) => {
-    if (curTenant && curTenant.type == 0) {//NoDictionary
+    if (curTenant && curTenant.type == 0) {//企业
       this.gotoEnter();
-    } else {//NoDictionary
+    } else {//团队
       this.gotoTeam();
     }
   }
@@ -429,7 +429,7 @@ class UserInfoContainer extends Component {
 
           <div className={linkSetting}>
             <a href={`${getHost('org')}/download/download.html`} target="_blank" >NoDictionary</a><br />
-            <a href="https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ" target="_blank">NoDictionary</a><br />
+            <a href="https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ" target="_blank">问题与反馈</a><br />
             <a href={`${getHost('cloundyy')}`} target="_blank">NoDictionary</a>
           </div>
 

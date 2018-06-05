@@ -60,11 +60,11 @@ class CreateTeamContent extends Component {
       value: "",
       imgWarning: "",
       imgUrl: "",
-      backUrl : "",    // NoDictionaryurl
+      backUrl : "",    // 上传成功后返回的url
       logo:"",
       disabled:false,
       error:false,
-      processValue:0,//0NoDictionary1NoDictionaryprogress
+      processValue:0,//0表示未开始，1表示开始progress
       tenantId:'',//tenantId
     }
   }
@@ -166,7 +166,7 @@ class CreateTeamContent extends Component {
       const tenantId = payload.tenantId;
       // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       localStorage.setItem('create', "1");
-      this.setState({tenantId:tenantId,processValue:1});//NoDictionaryprocessValueNoDictionary1.NoDictionaryprogress
+      this.setState({tenantId:tenantId,processValue:1});//把processValue变成1.那么就开是走progress
     });
   }
   
@@ -177,23 +177,23 @@ class CreateTeamContent extends Component {
     let now = this.state.processValue;
     return (
       <div className={wrap}>
-        <h5>NoDictionary</h5>
+        <h5>create team</h5>
         <hr />
         <div className={create_team_cont}>
           <div className={item+" um-box " }>
-            <label>NoDictionary<span>&nbsp;*&nbsp;</span></label>
+            <label>team name<span>&nbsp;*&nbsp;</span></label>
             <input
-              placeholder="NoDictionary60NoDictionary"
+              placeholder="less than 60 bit"
               value={ value }
               onChange={(e)=>{this.onChange(e)}}
             />
           </div>
           <div className={`${name_error} ${_error}`}>
-            NoDictionary
+            name input
           </div>
 
           <div className={`${item} um-box ${upload}`}>
-            <label>NoDictionary&nbsp; &nbsp; </label>
+            <label>avatar&nbsp; &nbsp; </label>
             <div className={`${image}`}>
                 <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
                 {/* { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
@@ -201,16 +201,16 @@ class CreateTeamContent extends Component {
                   <Icon type="copyreader" />
                 <input type="file" ref="btn_file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>{ this.imgChange(e) }} />
                 </div> */}
-                {/* <span className={titlp_lab}>{"NoDictionary<=200K​"}</span> */}
+                {/* <span className={titlp_lab}>{"size of image<=200K​"}</span> */}
               </div>
           </div>
         </div>
         <hr className={footer_hr}/>
         <div className={footer}>
           <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
-              <Progress check={check} tenantId={this.state.tenantId} startFlag={now} loadingDesc={'NoDictionary…'}/>
+              <Progress check={check} tenantId={this.state.tenantId} startFlag={now} loadingDesc={'team info loading…'}/>
           </div>
-          <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >NoDictionary</Button>
+          <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >create</Button>
         </div>
       </div>
     )

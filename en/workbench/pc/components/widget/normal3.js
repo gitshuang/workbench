@@ -106,11 +106,11 @@ const widgetStyle = [
             if (text) {
               getResultFetch(this,text, callback);
             } else {
-              return Promise.reject(new Error('NoDictionary'));
+              return Promise.reject(new Error('no data back from api''));
             }
           });
         }
-        return Promise.reject(new Error('NoDictionary'));
+        return Promise.reject(new Error('request error''));
       });
     }
   }

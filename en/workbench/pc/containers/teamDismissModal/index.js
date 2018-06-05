@@ -31,7 +31,7 @@ class TeamDismissModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "NoDictionary"+props.data.name+"?",
+      title: "confirm"+props.data.name+"?",
       isManage: 0,
       msg:"",
       close:true,
@@ -48,7 +48,7 @@ class TeamDismissModal extends Component {
     let { pro} = this.state;
     if(pro == "1"){
       this.setState({
-        title:"NoDictionary",
+        title:"Please reconsider?",
         pro:"2"
       });
       return false;
@@ -64,7 +64,7 @@ class TeamDismissModal extends Component {
         });
         return false;
       }
-      if(userInfo.allowTenants.length == 1){//NoDictionary
+      if(userInfo.allowTenants.length == 1){//进入该企业或团队
         if(!userInfo.allowTenants)return;
         this.changeTenant(userInfo.allowTenants[0].tenantId); 
       }else if(userInfo.allowTenants.length == 0){
@@ -103,13 +103,13 @@ class TeamDismissModal extends Component {
   render() {
     const {type,data:{name,msg:_msg}} = this.props;
     const {msg,isManage,close,title,disable} = this.state;
-    let btnLabel = "NoDictionary";
-    let _pop_title = "NoDictionary"+name+"?";
+    let btnLabel = "confirm";
+    let _pop_title = "confirm"+name+"?";
     let _cont = null;
     let _btn = null;
     let _select_enter = null;
 
-    if(isManage == 0){//NoDictionary
+    if(isManage == 0){//退出团队信息
       _cont = (<div className={content} >
             {/* <h5>{title}</h5> */}
           <p>{_msg}</p>
@@ -121,21 +121,21 @@ class TeamDismissModal extends Component {
             disable
           },
           {
-            label: 'NoDictionary',
+            label: 'cancel',
             fun: this.cancelFn,
           }
         ];
-    }else if(isManage == 1){//NoDictionary
+    }else if(isManage == 1){//退出失败后显示信息
       _cont = (<div className={content} ><p>{msg}</p></div>);
       _pop_title= {title};
-    }else if(isManage == 2){//NoDictionary/NoDictionary
-      _pop_title= "NoDictionary";
+    }else if(isManage == 2){//退出后选中企业/团队
+      _pop_title= "choose";
       _cont = <SelectEnter />
       _btn = null;
       _select_enter = select_enter_close;
     }
 
-    _pop_title= "NoDictionary";
+    _pop_title= "choose";
     _cont = <SelectEnter />
     _btn = null;
     _select_enter = select_enter_close;

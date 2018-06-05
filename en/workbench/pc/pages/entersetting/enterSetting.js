@@ -75,30 +75,30 @@ class CreateEnter extends Component {
       { value: 'C', label: '101-200' },
       { value: 'D', label: '201-500' },
       { value: 'E', label: '501-1000' },
-      { value: 'F', label: '1001NoDictionary2000' },
-      { value: 'G', label: '>2000NoDictionary' },
+      { value: 'F', label: '1001－2000' },
+      { value: 'G', label: '>2000人' },
     ];
 
     this.tenantIndustry = [
-      { value: 'A', label: 'NoDictionary、NoDictionary、NoDictionary、NoDictionary' },
+      { value: 'A', label: 'NoDictionary' },
       { value: 'B', label: 'NoDictionary' },
       { value: 'C', label: 'NoDictionary' },
-      { value: 'D', label: 'NoDictionary、NoDictionary、NoDictionary' },
-      { value: 'S', label: 'NoDictionary、NoDictionary' },
+      { value: 'D', label: 'NoDictionary' },
+      { value: 'S', label: 'NoDictionary' },
       { value: 'E', label: 'NoDictionary' },
-      { value: 'G', label: 'NoDictionary、NoDictionary' },
-      { value: 'I', label: 'NoDictionary、NoDictionary' },
+      { value: 'G', label: 'NoDictionary' },
+      { value: 'I', label: 'NoDictionary' },
       { value: 'F', label: 'NoDictionary' },
-      { value: 'H', label: 'NoDictionary、NoDictionary' },
-      { value: 'J', label: 'NoDictionary、NoDictionary' },
+      { value: 'H', label: 'NoDictionary' },
+      { value: 'J', label: 'NoDictionary' },
       { value: 'K', label: 'NoDictionary' },
       { value: 'L', label: 'NoDictionary' },
-      { value: 'M', label: 'NoDictionary、NoDictionary' },
-      { value: 'N', label: 'NoDictionary、NoDictionary' },
+      { value: 'M', label: 'NoDictionary' },
+      { value: 'N', label: 'NoDictionary' },
       { value: 'O', label: 'NoDictionary' },
       { value: 'P', label: 'NoDictionary' },
-      { value: 'Q', label: 'NoDictionary、NoDictionary' },
-      { value: 'R', label: 'NoDictionary、NoDictionary、NoDictionary' },
+      { value: 'Q', label: 'NoDictionary' },
+      { value: 'R', label: 'NoDictionary' },
       { value: 'T', label: 'NoDictionary' },
       { value: 'E', label: 'NoDictionary' },
       { value: 'E', label: 'NoDictionary' },
@@ -114,7 +114,7 @@ class CreateEnter extends Component {
       const Addres = TenantAddress.split('|');
       data.address = { province: Addres[0] ? Addres[0] : '', city: Addres[1] ? Addres[1] : '', area: Addres[2] ? Addres[2] : '' };
     } else {
-      data.address = { province: 'NoDictionary', city: 'NoDictionary', area: 'NoDictionary' };
+      data.address = { province: 'NoDictionary}', city: '北京', area: 'NoDictionary' };
     }
 
     // if(!data['tenantSize'] || data['tenantSize'] == '0'){
@@ -201,7 +201,7 @@ class CreateEnter extends Component {
     if (address && address.province) {
       TenantAddress.value = `${address.province}|${address.city}|${address.area}|${Values}`;
     } else {
-      TenantAddress.value = `NoDictionary|NoDictionary|NoDictionary|${Values}`;
+      TenantAddress.value = `NoDictionary}|北京|NoDictionary|${Values}`;
     }
 
     const JoinPermission = data.find(da => da.name === 'joinPermission');
@@ -345,7 +345,7 @@ class CreateEnter extends Component {
           method="blur"
           inline
         >
-          <FormControl name="tenantName" value={tenantName || ''} onChange={(e) => { this.inputOnChange(e, 'tenantName'); }} placeholder="NoDictionary60NoDictionary" />
+          <FormControl name="tenantName" value={tenantName || ''} onChange={(e) => { this.inputOnChange(e, 'tenantName'); }} placeholder="NoDictionary" />
         </FormItem>
 
         <FormItem
@@ -466,7 +466,7 @@ class CreateEnter extends Component {
           ) : <div />
         }
         <FormItem showMast={false} isRequire={false} valuePropsName="value" errorMessage="NoDictionary" method="blur" inline>
-          <FormControl name="tenantAddress" value={newTenantAddress || ''} onChange={(e) => { this.inputOnChange(e, 'tenantAddress'); }} placeholder="NoDictionary60NoDictionary" />
+          <FormControl name="tenantAddress" value={newTenantAddress || ''} onChange={(e) => { this.inputOnChange(e, 'tenantAddress'); }} placeholder="NoDictionary" />
         </FormItem>
 
         <FormItem showMast={false} labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="NoDictionary" method="blur" inline>
