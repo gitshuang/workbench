@@ -44,6 +44,7 @@ class Personals extends Component {
         openManage: '/manage',
         openUserinfo: '/userinfo',
         openInvitation: '/invitation',
+        openDynamic: '/dynamic',
       },
       hrefs: [
         {
