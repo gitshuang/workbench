@@ -103,6 +103,10 @@ class CreateEnter extends Component {
       { value: 'E', label: '建筑业' },
       { value: 'E', label: '建筑业' },
     ];
+    //progressbar
+    this.loadingFunc=null;
+    this.successFunc = null;
+    this.timer = null;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -264,10 +268,10 @@ class CreateEnter extends Component {
           requestError(payload);
           return;
         }
-        // const tenantId = tenantId;
         // localStorage.setItem('create', '1');
         if (updateenter === 'upgrade_enter') {
           this.setState({ processValue: 1 });
+          if(tenantId !== '') this.checkProgress(this.successFunc);
         } else {
           window.location.href = `/?tenantId=${tenantId}&switch=true`;
         }
@@ -293,19 +297,29 @@ class CreateEnter extends Component {
       isWaterMark: value,
     });
   }
-
-  checkProgress = (tenantId, loadingFunc) => {
+  
+  checkProgress = () => {
     let count = 0;
     const loop = () => {
       if (count > 10) {
-        window.location.href = `/?tenantId=${tenantId}&switch=true`;
+        clearInterval(this.timer);
+        this.successFunc();
       } else {
         count += 1;
-        loadingFunc();
         setTimeout(loop, 300);
       }
     };
     loop();
+  }
+  successLoading = () =>{
+    const {tenantId} = this.state;
+    window.location.href = `/?tenantId=${tenantId}&switch=true`;
+  }
+
+  loadingCallBack = (loadingFunc,successFunc) =>{
+    this.timer = setInterval(loadingFunc, 500);
+    this.loadingFunc = loadingFunc;
+    this.successFunc = successFunc;
   }
 
   render() {
@@ -330,7 +344,7 @@ class CreateEnter extends Component {
     if (processValue && updateenter === 'upgrade_enter') {
       submitBtn = (
         <div className={progressBar}>
-          <Progress check={this.checkProgress} tenantId={tenantId} startFlag={processValue} loadingDesc="正在升级企业…" />
+          <Progress loadingCallBack={this.loadingCallBack} startFlag={processValue} successFunc={this.successLoading} loadingDesc="正在升级企业…" />
         </div>
       );
     }
