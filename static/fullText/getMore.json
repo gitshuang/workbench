@@ -39,6 +39,34 @@
         "numberOfElements": 0,
         "size": 0,
         "number": 0
+      },
+      {
+        "content": [],
+        "type": "addressboo",
+        "typeName": "通讯录3",
+        "renderUrl": "''",
+        "last": true,
+        "totalElements": 0,
+        "totalPages": 1,
+        "sort": null,
+        "first": true,
+        "numberOfElements": 0,
+        "size": 0,
+        "number": 0
+      },
+      {
+        "content": [],
+        "type": "addressbo",
+        "typeName": "通讯录4",
+        "renderUrl": "''",
+        "last": true,
+        "totalElements": 0,
+        "totalPages": 1,
+        "sort": null,
+        "first": true,
+        "numberOfElements": 0,
+        "size": 0,
+        "number": 0
       }
     ],
     "hasOther": true
