@@ -11,7 +11,7 @@ import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
 import {check} from './checkTenantStatus'
-import Progress from './q';
+import Progress from 'pub-comp/progress';
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {  getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
