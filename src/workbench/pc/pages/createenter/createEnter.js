@@ -97,10 +97,10 @@ class CreateEnter extends Component {
       verify: true,
     };
     this.address = '北京|北京|东城区|';
-     //progressbar
-     this.loadingFunc=null;
-     this.successFunc = null;
-     this.timer = null;
+    //progressbar
+    this.loadingFunc = null;
+    this.successFunc = null;
+    this.timer = null;
   }
 
   onChange = (obj) => {
@@ -122,7 +122,7 @@ class CreateEnter extends Component {
   }
 
   checkForm = (flag, data) => {
-    const { setCreateEnter, updateenter } = this.props;
+    const { setCreateEnter, updateenter, requestStart, requestSuccess, requestError, } = this.props;
     const { tenantIndustry } = this.state;
 
     const Address = data.find(da => da.name === 'address');
@@ -150,30 +150,30 @@ class CreateEnter extends Component {
         return obj;
       }, {});
       setCreateEnter(argu1, updateenter).then(({ error, payload }) => {
-        this.setState({
-          disabled: true,
-          processValue: 1,
-        });
-        requestSuccess();
         if (error) {
           requestError(payload);
           return;
         }
+        requestSuccess();
+        this.setState({
+          disabled: true,
+          processValue: 1,
+        });
         const { tenantId } = payload;
         localStorage.setItem('create', '1');
-        this.setState({tenantId:tenantId},()=>{
+        this.setState({ tenantId: tenantId }, () => {
           clearInterval(this.timer);
-          check(tenantId,this.loadingFunc,this.successFunc);
+          check(tenantId, this.loadingFunc, this.successFunc);
         });//把processValue变成1.那么就开是走progress
       });
     }
   }
-  successLoading = () =>{
-    const {tenantId} = this.state;
+  successLoading = () => {
+    const { tenantId } = this.state;
     window.location.href = `/?tenantId=${tenantId}&switch=true`;
   }
 
-  loadingCallBack = (loadingFunc,successFunc) =>{
+  loadingCallBack = (loadingFunc, successFunc) => {
     this.timer = setInterval(loadingFunc, 500);
     this.loadingFunc = loadingFunc;
     this.successFunc = successFunc;
