@@ -174,7 +174,7 @@ class CreateEnter extends Component {
   }
 
   checkForm = (flag, data) => {
-    const { setCreateEnter, updateenter } = this.props;
+    const { setCreateEnter, updateenter, requestStart, requestSuccess, requestError } = this.props;
     const {
       logo,
       tenantIndustry,
@@ -260,14 +260,14 @@ class CreateEnter extends Component {
         return obj;
       }, {});
       setCreateEnter(argu1, updateenter).then(({ error, payload }) => {
-        this.setState({
-          disabled: true,
-        });
-        requestSuccess();
         if (error) {
           requestError(payload);
           return;
         }
+        requestSuccess();
+        this.setState({
+          disabled: true,
+        });
         // localStorage.setItem('create', '1');
         if (updateenter === 'upgrade_enter') {
           this.setState({ processValue: 1 });
