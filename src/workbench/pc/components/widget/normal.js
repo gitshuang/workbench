@@ -124,17 +124,19 @@ class WidgetItem extends Component {
     }),
   }
   static defaultProps = {
-    data: {},
+    data:{},
+    viewport: {
+      top: 0,
+      height: 0
+    }
   }
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
       widget: null,
+      shouldLoad:false,
     }
-  }
-  componentWillMount() { 
-
   }
   componentWillUnmount() {
     if (this.tool && typeof this.tool.destroy === 'function') {
@@ -142,8 +144,30 @@ class WidgetItem extends Component {
     }
   }
 
-  componentDidMount() {
-    const { data: { jsurl } } = this.props;
+  componentDidMount(){
+    const { from } = this.props;
+    if(from === "folder"){
+      this.setState({
+        shouldLoad: true
+      });
+      this.loadWidget();
+      return false;
+    }
+    if( !this.state.shouldLoad && this.props.viewport ){
+      var el = findDOMNode(this.refs.normal_widget);
+      this.updataLoadState(el.offsetTop, el.offsetHeight)
+    }
+  }
+
+  componentDidUpdate(prevProps){
+    if( !this.state.shouldLoad && prevProps.viewport ){
+      var el = findDOMNode(this.refs.normal_widget);
+      this.updataLoadState(el.offsetTop, el.offsetHeight)
+    }
+  }
+
+  loadWidget(){
+    const { data:{ jsurl } } = this.props;
     if (jsurl) {
       getData.call(this, jsurl, (result) => {
         this.setState({
@@ -151,6 +175,26 @@ class WidgetItem extends Component {
           widget: result.default ? result.default : result,
         });
       });
+    }
+  }
+
+  setShowImage(show){
+    this.setState({
+      shouldLoad : !!(show)
+    })
+    this.props.loadOk();
+    this.loadWidget();
+  }
+
+  updataLoadState(top,height){
+    if (this.state.shouldLoad) {
+      return;
+    }
+    var min = this.props.viewport.top;
+    var max = this.props.viewport.top + this.props.viewport.height;
+
+    if ((min <= (top + height) && top <= max )) {
+      this.setShowImage(true);
     }
   }
 
@@ -178,12 +222,13 @@ class WidgetItem extends Component {
     }
     return (
       <li ref="normal_widget" className={widgetItem} style={style} >
+      {this.state.shouldLoad?(
         <div>
-          <div className={title}>
-            <div className={titleRight}>{name}</div>
-          </div>
-          {contentElm}
+        <div className={title}>
+          <div className={titleRight}>{name}</div>
         </div>
+        {contentElm}
+        </div>):(<Loading container={this} show={true} />)}
       </li>
     );
   }

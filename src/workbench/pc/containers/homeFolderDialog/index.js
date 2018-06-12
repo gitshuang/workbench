@@ -57,7 +57,7 @@ class homeFolderDialog extends Component {
         }
       }
       return (
-        <Widget {...props} />
+        <Widget {...props} from="folder"/>
       );
     });
     return (
