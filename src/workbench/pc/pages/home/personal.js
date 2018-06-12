@@ -52,7 +52,7 @@ class Personals extends Component {
           name: '下载客户端',
         },
         {
-          href: 'https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ',
+          href: '​​https://ticket.yonyoucloud.com/ticket/create/KJ',
           name: '问题与反馈',
         },
         {
