@@ -5,8 +5,6 @@ const {
   getUserInfo,
   getEnterInfo,
   getWorkList,
-  changeUserInfoDisplay,
-  hideUserInfoDisplay,
   changeRequestDisplay,
   closeRequestDisplay,
   openFolder,
@@ -23,7 +21,6 @@ const defaultState = {
   enterInfo: {},
   workList: [],
   metaData: {},
-  userInfoDisplay: false,
   requestDisplay: false,
   curDisplayFolder: {
     widgetName: '',
@@ -83,21 +80,12 @@ const reducer = handleActions({
     };
   },
   [setCutUser]: createReducer('setCutUser'),
-  [changeUserInfoDisplay]: state => ({
-    ...state,
-    userInfoDisplay: true,
-  }),
   [changeRequestDisplay]: state => ({
     ...state,
     requestDisplay: true,
   }),
   [closeRequestDisplay]: state => ({
     ...state,
-    requestDisplay: false,
-  }),
-  [hideUserInfoDisplay]: state => ({
-    ...state,
-    userInfoDisplay: false,
     requestDisplay: false,
   }),
   [openFolder]: (state, { payload: curDisplayFolder }) => ({

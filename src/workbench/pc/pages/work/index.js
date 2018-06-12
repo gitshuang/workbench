@@ -39,6 +39,7 @@ const {
   marginTop,
   marginLeft,
   iframeCont,
+  contenthasTab
 } = styles;
 /* 声明actions */
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -280,7 +281,6 @@ export default class Work extends Component {
   makeLayout = () => {
     const { loaded } = this.state;
     const { expandedSidebar, type } = this.props;
-
     if (loaded) {
       switch (type) {
         case 1:
@@ -317,7 +317,7 @@ export default class Work extends Component {
                 ) : null
               }
               <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
-                <div className={contentArea}>
+                <div className={`${contentArea} ${contenthasTab}`}>
                   <ContentContainer hasTab />
                 </div>
                 <div className={tabArea}>
