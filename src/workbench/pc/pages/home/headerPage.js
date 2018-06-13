@@ -19,8 +19,7 @@ import { header, allBtn, btnDisable } from './style.css';
 
 
 const {
-  changeUserInfoDisplay,
-  hideUserInfoDisplay, getUserInfo,
+  getUserInfo,
   changeRequestDisplay,
   getSearchEnterOrTeam,
   getWorkList,
@@ -40,7 +39,6 @@ const { openExitModal } = teamconfigActions;
 @connect(
   mapStateToProps(
     'searchEnterOrTeamList',
-    'userInfoDisplay',
     'userInfo',
     {
       namespace: 'home',
@@ -48,8 +46,6 @@ const { openExitModal } = teamconfigActions;
   ),
   {
     getSearchEnterOrTeam,
-    changeUserInfoDisplay,
-    hideUserInfoDisplay,
     changeRequestDisplay,
     getUserInfo,
     requestStart,
@@ -64,8 +60,6 @@ const { openExitModal } = teamconfigActions;
 class HeaderPage extends Component {
   static propTypes = {
     getSearchEnterOrTeam: PropTypes.func,
-    changeUserInfoDisplay: PropTypes.func,
-    hideUserInfoDisplay: PropTypes.func,
     changeRequestDisplay: PropTypes.func,
     getUserInfo: PropTypes.func,
     requestStart: PropTypes.func,
@@ -77,7 +71,6 @@ class HeaderPage extends Component {
       company: PropTypes.string,
       userAvator: PropTypes.string,
     }),
-    userInfoDisplay: PropTypes.bool,
     list: PropTypes.arrayOf(PropTypes.object),
     headerData: PropTypes.shape({
       background: PropTypes.string,
@@ -88,8 +81,6 @@ class HeaderPage extends Component {
   };
   static defaultProps = {
     getSearchEnterOrTeam: () => {},
-    changeUserInfoDisplay: () => {},
-    hideUserInfoDisplay: () => {},
     changeRequestDisplay: () => {},
     getUserInfo: () => {},
     requestStart: () => {},
@@ -97,7 +88,6 @@ class HeaderPage extends Component {
     requestError: () => {},
     searchEnterOrTeamList: [],
     userInfo: {},
-    userInfoDisplay: false,
     list: [],
     headerData: {},
   };
@@ -115,10 +105,9 @@ class HeaderPage extends Component {
   }
 
   componentDidMount() {
-    const { changeUserInfoDisplay, changeRequestDisplay } = this.props;
+    const {  changeRequestDisplay } = this.props;
     // 判断是否localstorage中包含这个值
     if (localStorage.getItem('create')) {
-      changeUserInfoDisplay();
       changeRequestDisplay();
       localStorage.removeItem('create');
     }
@@ -173,7 +162,7 @@ class HeaderPage extends Component {
         company,
       },
     } = this.props;
-    const { allowTenants } = this.state;
+    const { allowTenants } = this.state;DropdownButton
     return (<DropdownButton
       getPopupContainer={() => document.getElementById('home_header')}
       openMenu={this.openMenu}
@@ -203,17 +192,14 @@ class HeaderPage extends Component {
         hash,
       },
     } = window;
-    window.location.replace(`${origin || ''}${pathname || ''}?tenantId=${tenantId}&switch=true${hash}`);
+    const originUrl = origin || '';
+    const pathnameUrl = pathname || '';
+    const locationUrl = `${origin}${pathname}?tenantId=${tenantId}&switch=true${hash}`;
+    window.location.replace(locationUrl);
   }
 
   closeFun = () => {
-    const {
-      hideUserInfoDisplay,
-      userInfoDisplay,
-    } = this.props;
-    if (userInfoDisplay) {
-      hideUserInfoDisplay();
-    }
+    
   }
 
   openMenu = () => {

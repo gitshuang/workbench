@@ -207,6 +207,7 @@
 .progressBar{
   position: relative;
   margin-left: 90px;
+  cursor: not-allowed;
 }
 .progressBar i{
   /* position: absolute;
