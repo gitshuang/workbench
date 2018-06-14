@@ -264,6 +264,7 @@ export default class Work extends Component {
           Message.create({
             content: '从首页移除失败!', duration: 1.5, position: 'topLeft', color: 'warning', style: { height: 'auto', top: -340 },
           });
+          return false;
         }
         Message.create({
           content: '从首页移除成功!', duration: 1.5, position: 'topLeft', color: 'success', style: { height: 'auto', top: -340 },

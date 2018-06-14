@@ -103,6 +103,7 @@ class Home extends Component {
     getWorkList(param).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       requestSuccess();
     });
@@ -116,6 +117,7 @@ class Home extends Component {
       getApplicationList().then(({ error, payload }) => {
         if (error) {
           requestError(payload);
+          return false;
         }
         this.setState({
           applications: payload.applications,
