@@ -64,7 +64,9 @@ class searchResult extends Component {
       current: undefined,
       SearchMoreList: [],
 
-      dataList: [],
+      dataList: {
+        content: [],
+      },
       isShownodataClassEach: false,
       totalPages: 1,  // 总页数
       // 四个参数
@@ -124,13 +126,13 @@ class searchResult extends Component {
       if (error) {
         requestError(payload);
         this.setState({
-          dataList: [],
+          dataList: null,
           isShownodataClassEach: false
         });
         return false;
       }
       this.setState({
-        dataList: payload.content,
+        dataList: payload,
         totalPages: payload.totalPages,
         isShownodataClassEach: !!payload.content.length,
       });
@@ -203,7 +205,8 @@ class searchResult extends Component {
   }
 
   otherlistLi(data) {
-    return data.map((item, index) => (
+    if (!data) return null;
+    return data.content.map((item, index) => (
       <li key={index}>
         <SearchItem dispatch={dispatch} trigger={trigger} data={item} type={data.type} url={data.renderUrl} from="full" />
       </li>
