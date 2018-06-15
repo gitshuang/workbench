@@ -63,10 +63,8 @@ class searchResult extends Component {
     this.state = {
       current: undefined,
       SearchMoreList: [],
-      
-      dataList: {
-        content: [],
-      },
+
+      dataList: [],
       isShownodataClassEach: false,
       totalPages: 1,  // 总页数
       // 四个参数
@@ -95,7 +93,7 @@ class searchResult extends Component {
       requestError,
       getSearchMore,
     } = this.props;
-    const {dataPerPageNum} = this.state;
+    const { dataPerPageNum } = this.state;
     requestStart();
     this.setState({ keywords }, function () {
       getSearchMore(keywords).then(({ error, payload }) => {
@@ -126,12 +124,13 @@ class searchResult extends Component {
       if (error) {
         requestError(payload);
         this.setState({
+          dataList: [],
           isShownodataClassEach: false
         });
         return false;
       }
       this.setState({
-        dataList: payload,
+        dataList: payload.content,
         totalPages: payload.totalPages,
         isShownodataClassEach: !!payload.content.length,
       });
@@ -158,7 +157,7 @@ class searchResult extends Component {
     //   // this.getSearchMoreList(searchvalue);
     // });
     const { keywords, activetab, activePage, dataPerPageNum } = this.state;
-    this.getSearchTpyeList(keywords, activetab, activePage-1, dataPerPageNum);
+    this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
   }
 
   // 输入框修改data数据源
@@ -174,7 +173,7 @@ class searchResult extends Component {
     this.setState({
       activePage: eventKey,
     });
-    this.getSearchTpyeList(keywords, activetab, eventKey-1, dataPerPageNum);
+    this.getSearchTpyeList(keywords, activetab, eventKey - 1, dataPerPageNum);
   }
 
   // 下面选择每页展示的数据条目数
@@ -204,7 +203,7 @@ class searchResult extends Component {
   }
 
   otherlistLi(data) {
-    return data.content.map((item, index) => (
+    return data.map((item, index) => (
       <li key={index}>
         <SearchItem dispatch={dispatch} trigger={trigger} data={item} type={data.type} url={data.renderUrl} from="full" />
       </li>
