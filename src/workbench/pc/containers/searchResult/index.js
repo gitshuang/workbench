@@ -148,18 +148,18 @@ class searchResult extends Component {
 
   btnSearch = () => {
     // 修改URL、
-    // const nowUrl = window.location.href;
-    // const searchvalue = this.state.keywords || "";
-    // const newUrl = nowUrl.substring(0, nowUrl.indexOf('searchvalue/') + 12).concat(searchvalue);
-    // window.location.href = newUrl;
+    const nowUrl = window.location.href;
+    const searchvalue = this.state.keywords || "";
+    const newUrl = nowUrl.substring(0, nowUrl.indexOf('searchvalue/') + 12).concat(searchvalue);
+    window.location.href = newUrl;
 
-    // this.setState({
-    //   keywords: searchvalue,
-    // }, function () {
-    //   // this.getSearchMoreList(searchvalue);
-    // });
-    const { keywords, activetab, activePage, dataPerPageNum } = this.state;
-    this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
+    this.setState({
+      keywords: searchvalue,
+    }, function () {
+      this.getSearchMoreList(searchvalue);
+    });
+    // const { keywords, activetab, activePage, dataPerPageNum } = this.state;
+    // this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
   }
 
   // 输入框修改data数据源
