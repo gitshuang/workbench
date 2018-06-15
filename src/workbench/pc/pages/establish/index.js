@@ -70,6 +70,7 @@ class Establish extends Component {
     getSearchEnterOrTeam().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       this.setState({
         allowTenants: payload,

@@ -59,6 +59,7 @@ class Updateenter extends Component {
     getTeamInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       this.setState({
         enterData: payload,

@@ -77,7 +77,7 @@ class Pin extends Component {
       requestSuccess,
       requestError,
     } = this.props;
-
+    requestStart();
     setPinAdd(
       serviceCode,
       title,
@@ -87,6 +87,7 @@ class Pin extends Component {
         requestError(payload);
       }
       this.cancelFn();
+      requestSuccess();
     });
   }
 

@@ -79,6 +79,7 @@ class Enterprise extends Component {
     getEnterInfo(param).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       requestSuccess();
       this.setState({
