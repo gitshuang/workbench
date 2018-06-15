@@ -125,6 +125,9 @@ class searchResult extends Component {
     getSearch(keywords, type, page, size).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        this.setState({
+          isShownodataClassEach: false
+        });
         return false;
       }
       this.setState({
@@ -144,7 +147,6 @@ class searchResult extends Component {
 
   btnSearch = () => {
     // 修改URL、
-    debugger;
     // const nowUrl = window.location.href;
     // const searchvalue = this.state.keywords || "";
     // const newUrl = nowUrl.substring(0, nowUrl.indexOf('searchvalue/') + 12).concat(searchvalue);
