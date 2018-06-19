@@ -94,7 +94,7 @@ const routes = [
     component: Search,
     routes: [
       {
-        path: '/search/searchvalue/:value',
+        path: '/search/:id/:value',
         component: SearchResult,
         exact: true,
       },

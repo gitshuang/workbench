@@ -61,9 +61,7 @@ class searchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: undefined,
       SearchMoreList: [],
-
       dataList: {
         content: [],
       },
@@ -139,12 +137,6 @@ class searchResult extends Component {
       });
       // this.props.history.push(`/search/${type}/${keywords}`);
       requestSuccess();
-    });
-  }
-
-  handleClick = labelId => () => {
-    this.setState({
-      current: labelId,
     });
   }
 
