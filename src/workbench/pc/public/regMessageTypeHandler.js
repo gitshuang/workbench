@@ -68,7 +68,7 @@ const handlers = {
         this.props.history.push(`/app/${serviceCode}`);
       }else{
         if(data && data.url){
-          this.props.history.push(`${data.url}`);
+          window.location.href = data.url;
         }
         this.props.history.push(`/service/${serviceCode}`);
       }
