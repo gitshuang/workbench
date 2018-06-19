@@ -49,10 +49,10 @@ class Search extends Component {
     routes: PropTypes.arrayOf(PropTypes.object),
   };
   static defaultProps = {
-    requestStart: () => {},
-    requestSuccess: () => {},
-    requestError: () => {},
-    setSearchHeadData: () => {},
+    requestStart: () => { },
+    requestSuccess: () => { },
+    requestError: () => { },
+    setSearchHeadData: () => { },
     history: {},
     searchHeadData: {},
     location: {},
@@ -63,7 +63,7 @@ class Search extends Component {
     this.state = {};
   }
 
-  goBack =() => {
+  goBack = () => {
     const {
       setSearchHeadData, searchHeadData: { brm }, searchHeadData: { searchValue },
     } = this.props;
@@ -100,7 +100,7 @@ class Search extends Component {
         <div className={`${umContent} um-box um-content`}>
           {this.props.routes.map((route, i) => (
             <RouteWithSubRoutes key={i} {...route} />
-        ))}
+          ))}
 
         </div>
       </div>
