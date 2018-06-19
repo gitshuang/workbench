@@ -61,31 +61,37 @@ class searchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: undefined,
       SearchMoreList: [],
-
       dataList: {
         content: [],
       },
-      isShownodataClassEach: false,
+      isShownodataClassEach: false, // 当没数据或者请求失败  渲染无数据图片
       totalPages: 1,  // 总页数
       // 四个参数
       keywords: '', // 关键词
       activetab: '',  // 当前选中的是哪个类型
       activePage: 1,  // 当前是第几页
       dataPerPageNum: 10, // 每页显示几条
+
+      searchValue: '',
+      searchTab: '',
     };
   }
 
   componentWillMount() {
     const keywords = this.props.match.params.value || '';
-    this.getSearchMoreList(this.props.match.params.value);
+    this.getSearchMoreList(keywords);
   }
 
   componentWillReceiveProps(nextProps) {
-    const keywords = nextProps.match.params ? nextProps.match.params.value : '';
-    if (keywords == this.state.keywords) return;
-    this.getSearchMoreList(keywords);
+    const value = nextProps.match.params ? nextProps.match.params.value : '';
+    const id = nextProps.match.params ? nextProps.match.params.id : '';
+    const { searchValue, searchTab } = this.state;
+    console.log(this.state)
+    debugger;
+    if (searchValue === '' && searchTab === '') return;
+    if (value === searchValue && id === searchTab) return;
+    this.getSearchTpyeList(value, id, 0, 10);
   }
 
   getSearchMoreList = (keywords) => {
@@ -95,26 +101,26 @@ class searchResult extends Component {
       requestError,
       getSearchMore,
     } = this.props;
-    const { dataPerPageNum } = this.state;
     requestStart();
-    this.setState({ keywords }, function () {
+    this.setState({ keywords }, () => {
       getSearchMore(keywords).then(({ error, payload }) => {
         if (error) {
           requestError(payload);
           return false;
         }
         requestSuccess();
+        const activetab = payload.data[0].type;
         this.setState({
           SearchMoreList: payload.data,
-          activetab: payload.data[0].type,
+          activetab,
+        }, () => {
+          this.getSearchTpyeList(keywords, activetab, 0, 10);
         });
-
-        this.getSearchTpyeList(keywords, payload.data[0].type);
       });
     });
   }
 
-  getSearchTpyeList = (keywords, type, page = 0, size = 10) => {
+  getSearchTpyeList = (keywords, type, page, size) => {
     const {
       requestStart,
       requestSuccess,
@@ -122,44 +128,70 @@ class searchResult extends Component {
       getSearch,
     } = this.props;
     requestStart();
-    getSearch(keywords, type, page, size).then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-        this.setState({
-          dataList: null,
-          isShownodataClassEach: false
-        });
-        return false;
-      }
-      this.setState({
-        dataList: payload,
-        totalPages: payload.totalPages,
-        isShownodataClassEach: !!payload.content.length,
-      });
-      requestSuccess();
-    });
-  }
-
-  handleClick = labelId => () => {
     this.setState({
-      current: labelId,
-    });
+      searchValue: keywords,
+      searchTab: type,
+    }, () => {
+      getSearch(keywords, type, page, size).then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
+          this.setState({
+            dataList: null,
+            isShownodataClassEach: false
+          });
+          return false;
+        }
+        this.setState({
+          dataList: payload,
+          totalPages: payload.totalPages,
+          isShownodataClassEach: !!payload.content.length,
+        });
+        requestSuccess();
+      });
+    })
   }
 
   btnSearch = () => {
-    // 修改URL、
-    const nowUrl = window.location.href;
-    const searchvalue = this.state.keywords || "";
-    const newUrl = nowUrl.substring(0, nowUrl.indexOf('searchvalue/') + 12).concat(searchvalue);
-    window.location.href = newUrl;
+    const { keywords, activetab } = this.state;
+    this.props.history.push(`/search/${activetab}/${keywords}`);
+  }
 
+  // 点击tabs 分类
+  TabsClick = (activetab) => {
+    const { keywords } = this.state;
     this.setState({
-      keywords: searchvalue,
-    }, function () {
-      this.getSearchMoreList(searchvalue);
+      activetab,
+      activePage: 1,
+    }, () => {
+      this.props.history.push(`/search/${activetab}/${keywords}`);
     });
-    // const { keywords, activetab, activePage, dataPerPageNum } = this.state;
-    // this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
+  }
+
+  // 点击分页
+  handleSelect(eventKey) {
+    const { keywords, activetab, dataPerPageNum } = this.state;
+    this.setState({
+      activePage: eventKey,
+    }, () => {
+      this.getSearchTpyeList(keywords, activetab, eventKey - 1, dataPerPageNum);
+    });
+  }
+
+  // 下面选择每页展示的数据条目数
+  paginationNumSelect = (id, dataNum) => {
+    const reg = new RegExp('条\/页', 'g');
+    const dataPerPageNum = dataNum.replace(reg, '');
+    const { keywords, activePage, activetab } = this.state;
+    this.setState({
+      dataPerPageNum,
+    }, () => {
+      this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
+    });
+  }
+
+  // 输入框敲回车键
+  onKeyup = (e) => {
+    e.keyCode === 13 && this.btnSearch();
   }
 
   // 输入框修改data数据源
@@ -169,46 +201,19 @@ class searchResult extends Component {
     });
   }
 
-  // 点击分页
-  handleSelect(eventKey) {
-    const { keywords, activetab, dataPerPageNum } = this.state;
-    this.setState({
-      activePage: eventKey,
-    });
-    this.getSearchTpyeList(keywords, activetab, eventKey - 1, dataPerPageNum);
-  }
-
-  // 下面选择每页展示的数据条目数
-  paginationNumSelect = (id, dataNum) => {
-    const reg = new RegExp('条\/页', 'g');
-    const dataPerPageNum = dataNum.replace(reg, '');
-    const { keywords, activetab, activePage } = this.state;
-    this.setState({
-      dataPerPageNum,
-    }, function () {
-      this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
-    });
-  }
-
-  // 点击tabs 分类
-  TabsClick = (activetab) => {
-    const { keywords } = this.state;
-    this.setState({
-      activetab,
-      activePage: 1,
-    });
-    this.getSearchTpyeList(keywords, activetab);
-  }
-
-  onKeyup = (e) => {
-    e.keyCode === 13 && this.btnSearch();
-  }
-
+  // 渲染列表页面
   otherlistLi(data) {
     if (!data) return null;
     return data.content.map((item, index) => (
       <li key={index}>
-        <SearchItem dispatch={dispatch} trigger={trigger} data={item} type={data.type} url={data.renderUrl} from="full" />
+        <SearchItem
+          dispatch={dispatch}
+          trigger={trigger}
+          data={item}
+          type={data.type}
+          url={data.renderUrl}
+          from="full"
+        />
       </li>
     ));
   }
@@ -229,7 +234,7 @@ class searchResult extends Component {
         {
           isShownodataClassEach ? null :
             <div className={nodataClass}>
-              <img src={nodata} />
+              <img src={nodata} alt="暂无相关内容" />
               <p>暂无相关内容</p>
             </div>
         }

@@ -94,25 +94,25 @@ const routes = [
     component: Search,
     routes: [
       {
-        path: '/search/searchValue/:value',
+        path: '/search/:id/:value',
         component: SearchResult,
         exact: true,
       },
-      {
-        path: '/search/searchValue/',
-        component: SearchResult,
-        exact: true,
-      },
-      {
-        path: '/search/searchlist/:value',
-        component: SearchOther,
-        exact: true,
-      },
-      {
-        path: '/search/searchlist/',
-        component: SearchOther,
-        exact: true,
-      },
+      // {
+      //   path: '/search/searchValue/',
+      //   component: SearchResult,
+      //   exact: true,
+      // },
+      // {
+      //   path: '/search/searchlist/:value',
+      //   component: SearchOther,
+      //   exact: true,
+      // },
+      // {
+      //   path: '/search/searchlist/',
+      //   component: SearchOther,
+      //   exact: true,
+      // },
     ],
   },
   {
