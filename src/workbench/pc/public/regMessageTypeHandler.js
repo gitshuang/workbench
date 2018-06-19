@@ -67,6 +67,9 @@ const handlers = {
       if(type === 2 ){
         this.props.history.push(`/app/${serviceCode}`);
       }else{
+        if(data && data.url){
+          this.props.history.push(`${data.url}`);
+        }
         this.props.history.push(`/service/${serviceCode}`);
       }
     }
