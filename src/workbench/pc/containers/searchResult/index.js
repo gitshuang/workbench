@@ -88,7 +88,6 @@ class searchResult extends Component {
     const id = nextProps.match.params ? nextProps.match.params.id : '';
     const { searchValue, searchTab } = this.state;
     console.log(this.state)
-    debugger;
     if (searchValue === '' && searchTab === '') return;
     if (value === searchValue && id === searchTab) return;
     this.getSearchTpyeList(value, id, 0, 10);
@@ -152,7 +151,8 @@ class searchResult extends Component {
   }
 
   btnSearch = () => {
-    const { keywords, activetab } = this.state;
+    const { keywords, activetab, searchValue } = this.state;
+    if (searchValue === keywords) return;
     this.props.history.push(`/search/${activetab}/${keywords}`);
   }
 
