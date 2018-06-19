@@ -79,13 +79,14 @@ class searchResult extends Component {
 
   componentWillMount() {
     const keywords = this.props.match.params.value || '';
-    this.getSearchMoreList(this.props.match.params.value);
+    this.getSearchMoreList(keywords);
   }
 
   componentWillReceiveProps(nextProps) {
     const keywords = nextProps.match.params ? nextProps.match.params.value : '';
-    if (keywords == this.state.keywords) return;
-    this.getSearchMoreList(keywords);
+    debugger;
+    // if (keywords == this.state.keywords) return;
+    // this.getSearchMoreList(keywords);
   }
 
   getSearchMoreList = (keywords) => {
@@ -95,7 +96,6 @@ class searchResult extends Component {
       requestError,
       getSearchMore,
     } = this.props;
-    const { dataPerPageNum } = this.state;
     requestStart();
     this.setState({ keywords }, function () {
       getSearchMore(keywords).then(({ error, payload }) => {
@@ -135,7 +135,9 @@ class searchResult extends Component {
         dataList: payload,
         totalPages: payload.totalPages,
         isShownodataClassEach: !!payload.content.length,
+        keywords
       });
+      // this.props.history.push(`/search/${type}/${keywords}`);
       requestSuccess();
     });
   }
@@ -148,18 +150,21 @@ class searchResult extends Component {
 
   btnSearch = () => {
     // 修改URL、
-    const nowUrl = window.location.href;
-    const searchvalue = this.state.keywords || "";
-    const newUrl = nowUrl.substring(0, nowUrl.indexOf('searchvalue/') + 12).concat(searchvalue);
-    window.location.href = newUrl;
+    // const nowUrl = window.location.href;
+    
+    // this.props.history.push(`/search/0/${searchvalue}`);
+    //const newUrl = nowUrl.substring(0, nowUrl.indexOf('searchvalue/') + 12).concat(searchvalue);
+    //window.location.href = newUrl;
 
-    this.setState({
-      keywords: searchvalue,
-    }, function () {
-      this.getSearchMoreList(searchvalue);
-    });
-    // const { keywords, activetab, activePage, dataPerPageNum } = this.state;
-    // this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
+    // this.setState({
+    //   keywords: searchvalue,
+    // }, function () {
+    //   this.getSearchMoreList(searchvalue);
+    // });
+    const searchvalue = this.state.keywords || "";
+    const { keywords, activetab, activePage, dataPerPageNum } = this.state;
+    this.props.history.push(`/search/searchvalue/${keywords}`);
+    this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
   }
 
   // 输入框修改data数据源
