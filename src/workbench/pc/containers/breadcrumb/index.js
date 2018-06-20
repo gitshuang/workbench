@@ -48,13 +48,23 @@ class BreadcrumbContainer extends Component {
         }
         this.setExpended = this.setExpended.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
+        this.back = false;
+        this.backVal = 0;
     }
-    componentWillReceiveProps() {
+    componentWillReceiveProps(nextProps) {
       const { withSidebar } = this.props;
       if (!withSidebar) {
         this.setExpended();
       }
+      console.log(nextProps.brm)
     }
+    componentDidUpdate = () =>{
+      if(this.back){
+        this.back = false;
+        this.props.history.go(-this.backVal);
+      }
+    }
+   
     setExpended() {
         this.setExpandedSidebar(true);
         this.setState({
@@ -79,8 +89,10 @@ class BreadcrumbContainer extends Component {
       const { brm,popBrm } = this.props;
       const customBrmUrl = index>=0 && brm && brm.length>0 && brm[brm.length-1][index].url;
       popBrm({index:index,url:window.location.href});
-      // this.props.history.go(-backVal)
-      window.history.go(-backVal);
+      this.back = true;
+      this.backVal = backVal; 
+      //  this.props.history.go(-backVal)
+      // window.history.go(-backVal);
       // const customBrm = brm.filter(({url})=>{
       //   return url;
       // })

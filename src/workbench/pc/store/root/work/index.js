@@ -83,6 +83,7 @@ const reducer = handleActions({
     const { index } = data;
     if (index === -1) {
       newBrm.pop();
+      // delete newBrm[newBrm.length-1];
       backVal = 1;
     } else {
       const stateBrm = state.brm;
@@ -100,7 +101,7 @@ const reducer = handleActions({
     return {
       ...state,
       brmBackVal: backVal,
-      brm: newBrm,
+      brm: JSON.parse(JSON.stringify(newBrm)),
     };
   },
   [removeBrm]: (state, { payload: length }) => {
