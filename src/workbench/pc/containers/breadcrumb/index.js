@@ -77,9 +77,10 @@ class BreadcrumbContainer extends Component {
     }
     goback = (index,backVal) => {
       const { brm,popBrm } = this.props;
-      const customBrmUrl =index>=0 && brm && brm.length>0 && brm[brm.length-1][index].url;
+      const customBrmUrl = index>=0 && brm && brm.length>0 && brm[brm.length-1][index].url;
       popBrm({index:index,url:window.location.href});
-      this.props.history.go(-backVal)
+      // this.props.history.go(-backVal)
+      window.history.go(-backVal);
       // const customBrm = brm.filter(({url})=>{
       //   return url;
       // })
