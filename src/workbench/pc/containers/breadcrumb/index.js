@@ -61,7 +61,8 @@ class BreadcrumbContainer extends Component {
     componentDidUpdate = () =>{
       if(this.back){
         this.back = false;
-        this.props.history.go(-this.backVal);
+        //this.props.history.go(-this.backVal);
+        this.props.history.goBack();
       }
     }
    
