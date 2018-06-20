@@ -249,7 +249,7 @@ class searchResult extends Component {
             <div className={searchPanel}>
               <FormControl
                 className={serviceSearch}
-                placeholder="搜索人员信息、应用、服务及其他内容"
+                placeholder="搜索人员信息、服务及其他内容"
                 value={this.state.keywords}
                 onKeyDown={this.onKeyup}
                 onChange={this.inputOnChange}
