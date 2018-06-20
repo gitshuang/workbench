@@ -99,6 +99,8 @@ class SideBarContainer extends Component {
     const { serviceCode } = menuPath.slice(-1)[0];
     if (serviceCode !== curServiceCode) {
       history.push(`/${type}/${code}/${serviceCode}`);
+      alert(history.length);
+
     }
   }
   onOpenChange = (openKeys) => {
