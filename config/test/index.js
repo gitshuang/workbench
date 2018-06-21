@@ -1,11 +1,12 @@
 var webpackConfig = require('./webpack')
-
+// 不再使用dist 而是使用zh_CN 和 en_US
+var outPut =  process.argv.length < 3 ? 'zh_CN' : `en_US`;
 var config = {
   env: '"development"',
   host: '""',
   assetsSubDirectory: 'static',
   // assetsPublicPath: 'https://cdn.yonyoucloud.com/',
-  assetsPublicPath: 'http://workbenchdev.yyuap.com/fe/',
+  assetsPublicPath: `http://workbenchdev.yyuap.com/fe/${outPut}/`,
 
   productionSourceMap: true,
   // Gzip off by default as many popular static hosts such as

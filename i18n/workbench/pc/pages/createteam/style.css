@@ -1,0 +1,9 @@
+.appBreadcrumb{
+  padding-left: 23px;
+  font-size: 12px;
+  height:32px; 
+  background:rgba(255,255,255,1);
+}
+.homeNone :global( .lebra-navbar-right)>div{
+  display: none;
+}

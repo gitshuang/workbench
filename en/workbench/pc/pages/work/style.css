@@ -1,0 +1,124 @@
+body{
+  background-image:url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png");
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: 0% 100%, 100% 5%, 90% 100%;
+  background-attachment:fixed;
+}
+.header{
+    position: fixed!important;
+    width: 100%;
+    min-height: 44px;
+    background:url("assets/image/wgt/navBar_bg.png") no-repeat;
+    background-position: right;
+    background-color:rgba(255,255,255,0.92);
+    z-index: 100;
+}
+.header :global(.iconfont){
+  cursor: pointer;
+  color: rgba(135,139,148,1);
+}
+.header :global(.icon-pin2){
+  color: rgba(135,139,148,1)
+}
+.active {
+  color: red;
+}
+.workArea { 
+  height: 100%;
+  width: 100%; 
+  position: relative;
+  overflow: hidden;
+}
+.wrap :global(.icon-dingzhi.active){
+  color: red;
+}
+.wrap :global(.um-content) {
+  flex-direction: column;
+  display: flex;
+  margin-top: 86px;
+  overflow: hidden;
+}
+.wrap :global(.lebra-navbar-left-icon){
+  padding:4px 0;
+}
+.sideBarArea {
+  width: 200px;
+  /* position: relative; */
+  float: left;
+  background: #F9FAFB;
+  overflow-y: scroll;
+  position: absolute;
+  left: 0px;
+  top: 86px;
+  bottom: 0px;
+  right: 0px;
+}
+.marginLeft {
+  margin-left: 210px !important;
+  margin-top: 86px !important; 
+}
+.marginTop {
+  margin-top: 8px; 
+}
+.contentArea {
+  height: 100%;
+  width: 100%;
+  border-top: 1px solid #4e596830;
+  border-left: 1px solid #4e596830;
+  box-sizing: border-box;
+}
+.hasTab {
+  border-radius: 3px 0 0 0; 
+  margin-top: 88px;
+  padding-top: 10px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+.iframeCont{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+.tabArea {
+  height: 48px;
+}
+.titleServiceDisplayStyle{
+  color:#E14C46 !important;
+}
+.work :global(.lebra-navbar-left){
+  padding-left: 7px;
+}
+.work :global(.lebra-navbar-left-content){
+  margin-left: 8px;
+}
+.titleArea {
+  text-align: center;
+  position: relative;
+}
+.titleArea span{
+  color:rgba(71,77,84,1);
+}
+.service, .pin {
+  /* position: absolute; */
+  font-size:18px;
+}
+.service {
+  /* right: -27px; */
+  margin-left: 9px;
+}
+.pin {
+  /* right: -58px; */
+  margin-left: 15px;
+}
+
+.work :global(.menu_work){
+  height: 38px;
+}
+/* .work :global(.menu_work section){
+  height: 20px;
+} */

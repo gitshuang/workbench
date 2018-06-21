@@ -30,6 +30,7 @@ const {
   requestStart,
   requestSuccess,
   requestError,
+  setCurrent,
 } = rootActions;
 
 const { openExitModal } = teamconfigActions;
@@ -53,6 +54,7 @@ const { openExitModal } = teamconfigActions;
     getWorkList,
     setCutUser,
     openExitModal,
+    setCurrent,
   },
 )
 class HeaderPage extends Component {
@@ -217,7 +219,6 @@ class HeaderPage extends Component {
       btnShow,
     });
   }
-
   render() {
     const {
       list,

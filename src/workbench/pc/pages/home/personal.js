@@ -9,11 +9,12 @@ import TeamExitModal from 'containers/teamExitModal';
 /*   actions   */
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-
+import rootActions from 'store/root/actions';
+import { get } from 'http';
 
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
-
+const { setCurrent, getAllEnable, getCurrent} = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
@@ -30,6 +31,9 @@ const { openExitModal } = teamconfigActions;
     closeRequestDisplay,
     openExitModal,
     getUserInfo,
+    setCurrent,
+    getAllEnable,
+    getCurrent,
   },
 )
 class Personals extends Component {
@@ -79,19 +83,19 @@ class Personals extends Component {
       language: {
         show: true,
         defaultValue: 'zh',
-        onChangeLanguage: (value) => {console.log(value)},
+        onChangeLanguage: this.onChangeLanguage,
         languageList: [
           {
             value: 'zh',
-            context: '简体中文'
+            context: '简体中文1'
           },
           {
             value: 'en',
-            context: 'English'
+            context: 'English2'
           },
           {
             value: 'eh',
-            context: '繁体中文'
+            context: '繁体中文3'
           },
         ]
       }
@@ -108,12 +112,54 @@ class Personals extends Component {
         userInfo: payload,
       });
     });
+    //新增 添加多语的所有语言
+    this.getAllEnableFunc();
+    //获取默认
+    this.getDefaultLang();
   }
-
+ 
   componentDidMount() {
 
   }
 
+  getAllEnableFunc = () =>{
+    const {getAllEnable} = this.props;
+    getAllEnable().then(({ error, payload }) => {
+      if (error) {
+        return;
+      }
+      let languageListVal = [],item={},defaultValue;
+      payload.map((item,index)=>{
+        item = {value:item.langCode, context:item.dislpayName}
+        languageListVal.push(item);
+      });
+      
+      this.setState({
+        language:{...this.state.language, languageList:languageListVal}
+      })
+    });
+  }
+  getDefaultLang = () =>{
+    const {getCurrent} = this.props;
+    getCurrent().then(({ error, payload }) => {
+      if (error) {
+        return;
+      }
+      this.setState({
+        language:{...this.state.language,defaultValue:payload.langCode}
+      })
+    });
+   
+  }
+  onChangeLanguage = (value) =>{
+    this.props.setCurrent(value).then(({ error, payload }) => {
+      if (error) {
+        return;
+      }
+      window.location.reload();
+    });;
+  
+  }
   getCompanyType = () => {
     const { tenantid } = window.diworkContext();
     const {
@@ -173,7 +219,7 @@ class Personals extends Component {
           titleType={titleType}
           hrefs={hrefs}
           logout={logout}
-          language={language}
+          language={this.state.language}
         />
         {
           exitModal ?

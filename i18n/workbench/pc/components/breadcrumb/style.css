@@ -1,0 +1,56 @@
+.breadcrumbClass ol {
+  height:35px;
+  line-height: 37px;
+  display:inline-block;
+  background: none;
+  margin:0;
+  padding:0;
+  color:#888;
+  vertical-align: middle;
+  font-family: "Microsoft Yahei", STHeiTi, Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+}
+.breadcrumbClass ol li {
+  color:#9a9a9a;
+}
+.breadcrumbClass a {
+  /* color:#9a9a9a; */
+  color:rgba(136,136,136,1);
+  cursor:pointer;
+}
+.breadcrumbClass ol>li+li:before {
+  content: "\003e";
+}
+.breadcrumbClassIcon {
+  cursor:pointer;
+  color:#878B94;
+  margin:0 10px;
+  vertical-align: middle;
+}
+.breadcrumbClass {
+  /* background:#fff; */
+  height:35px;
+  line-height:35px;
+  display:flex;
+}
+.breadcrumbClass a{
+  display:inline-block;
+  -webkit-box-flex:1;
+  line-height:35px;
+}
+.breadcrumbClass a:hover{
+  color: rgba(225,76,70,1);
+}
+.breadcrumbBack {
+  margin:0 10px;
+  color:#9a9a9a;
+  -webkit-box-flex:1;
+  line-height:33px;
+}
+.breadcrumbClass :global(.u-breadcrumb) li:last-child{
+  /* color:#4A515D; */
+  /* color: rgba(71,77,84,1); */
+}
+.itmeHover:hover span{
+  color:rgba(225,76,70,1);
+  cursor: pointer;
+}

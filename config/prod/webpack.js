@@ -6,17 +6,18 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var baseWebpackConfig = require('../webpack.base.conf')
 var paths = require('../paths')
-
+var reg = /^LAN_TYPE\=/g;
+var  goalFilePath  = process.argv.length < 3? 'src' : process.argv[2].replace(reg,'');
 module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     entry: {
-      main: './src/workbench/pc/main.js',
+      main: `./${goalFilePath}/workbench/pc/main.js`,
     },
     module: {
       rules: [
         {
           test: /\.(js|jsx)$/,
-          include: [paths('src')],
+          include: [paths(`${goalFilePath}`)],
           loader: 'babel-loader',
           options: {
             compact: true,
@@ -56,7 +57,7 @@ module.exports = function (config) {
         },
         {
           test: /\.css$/,
-          include: [paths('src')],
+          include: [paths(`${goalFilePath}`)],
           exclude: [paths('assets')],
           use: ExtractTextPlugin.extract(
             Object.assign({
