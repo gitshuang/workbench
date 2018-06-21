@@ -131,6 +131,7 @@ class searchResult extends Component {
     this.setState({
       searchValue: keywords,
       searchTab: type,
+      activetab: type
     }, () => {
       getSearch(keywords, type, page, size).then(({ error, payload }) => {
         if (error) {

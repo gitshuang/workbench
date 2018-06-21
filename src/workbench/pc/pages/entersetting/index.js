@@ -109,24 +109,25 @@ class Enterprise extends Component {
     const { enterData } = this.state;
 
     return (
-      <div className="um-win">
-        {
-          params.data === 'home'
-          ?
-            <div className="um-header" style={{ background: 'white' }}>
-              <Header onLeftClick={this.goHome} iconName="home" >
-                <div>
-                  <span>设置企业</span>
-                </div>
-              </Header>
-            </div>
-          : null
-        }
-        <div className={appBreadcrumb}>
-          <Breadcrumbs data={[{ name: '设置企业' }]} goback={this.goBack} />
+      <div>
+        <div style={{position:"fixed",top:0,left:0,width:"100%",zIndex:"9999"}}>
+          {
+            params.data === 'home'
+            ?
+              <div className="um-header" style={{ background: 'white' }}>
+                <Header onLeftClick={this.goHome} iconName="home" >
+                  <div>
+                    <span>设置企业</span>
+                  </div>
+                </Header>
+              </div>
+            : null
+          }
+          <div className={appBreadcrumb}>
+            <Breadcrumbs data={[{ name: '设置企业' }]} goback={this.goBack} />
+          </div>
         </div>
-
-        <div className={`${pageEnterprise} um-content`}>
+        <div className={`${pageEnterprise}`}>
           <div className={enterTitle}>
             <div className={title}>{company}</div>
             <EnterOption
