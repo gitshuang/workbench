@@ -40,8 +40,8 @@ const UpdateEnter = asyncComponent(() => import(/* webpackChunkName: "UpdateEnte
 const Market = asyncComponent(() => import(/* webpackChunkName: "Market" */'pages/market'));
 const Renew = asyncComponent(() => import(/* webpackChunkName: "Renew" */'pages/renew'));
 const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/userinfo'));
-const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/manageTeamEnter'));
-const Dynamic = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/dynamic'));
+const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "ManageTeamEnter" */'pages/manageTeamEnter'));
+const Dynamic = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/dynamic'));
 
 const routes = [
   {
