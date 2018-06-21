@@ -131,7 +131,9 @@ class searchResult extends Component {
     this.setState({
       searchValue: keywords,
       searchTab: type,
-      activetab: type
+      // 下边这两个  主要是为了兼容 快速搜索触发nextprops后 更改参数
+      activetab: type,
+      keywords: keywords
     }, () => {
       getSearch(keywords, type, page, size).then(({ error, payload }) => {
         if (error) {
