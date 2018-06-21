@@ -62,7 +62,8 @@ class BreadcrumbContainer extends Component {
       if(this.back){
         this.back = false;
         //this.props.history.go(-this.backVal);
-        this.props.history.go(-2);
+        // alert(this.props.history.length)
+        this.props.history.go(-this.backVal-1);
       }
     }
    
