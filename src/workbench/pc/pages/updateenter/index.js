@@ -75,19 +75,20 @@ class Updateenter extends Component {
   render() {
     const { enterData } = this.state;
     return (
-      <div className="um-win">
-        <div className="um-header" style={{ background: 'white' }}>
-          <Header onLeftClick={this.goBack} iconName="home" >
-            <div>
-              <span>企业认证</span>
-            </div>
-          </Header>
+      <div>
+        <div style={{position:"fixed",top:0,left:0,width:"100%",zIndex:"9999"}}>
+          <div className="um-header" style={{ background: 'white' }}>
+            <Header onLeftClick={this.goBack} iconName="home" >
+              <div>
+                <span>企业认证</span>
+              </div>
+            </Header>
+          </div>
+          <div className={appBreadcrumb}>
+            <Breadcrumbs data={[{ name: '企业认证' }]} goback={this.goBack} />
+          </div>
         </div>
-        <div className={appBreadcrumb}>
-          <Breadcrumbs data={[{ name: '企业认证' }]} goback={this.goBack} />
-        </div>
-
-        <div className={`${pageEnterprise} um-content`}>
+        <div className={`${pageEnterprise}`}>
           <div className={enterTitle} >企业认证</div>
           <hr className={hr} />
           <div className={enterCont} >
