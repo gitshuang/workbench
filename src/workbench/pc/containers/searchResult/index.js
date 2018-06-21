@@ -42,7 +42,6 @@ const { requestStart, requestSuccess, requestError } = rootActions;
   mapStateToProps(
     'SearchMoreList',
     'SearchList',
-    'SearchOtherList',
     'searchHeadData',
     {
       namespace: 'search',
@@ -62,68 +61,66 @@ class searchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      current: undefined,
-      activetab: '',
       SearchMoreList: [],
-      hasOther: false,
-      keywords: '',
-      Searchotherlist: {
-        content: [],
-      },
       dataList: {
         content: [],
       },
-      activePage: 1,
-      pagesize: 1,
-      isShownodataClassEach: true,
-      dataPerPageNum: 10,
+      isShownodataClassEach: false, // 当没数据或者请求失败  渲染无数据图片
+      totalPages: 1,  // 总页数
+      // 四个参数
+      keywords: '', // 关键词
+      activetab: '',  // 当前选中的是哪个类型
+      activePage: 1,  // 当前是第几页
+      dataPerPageNum: 10, // 每页显示几条
+
+      searchValue: '',
+      searchTab: '',
     };
   }
 
   componentWillMount() {
-    this.getSearchMoreList(this.props.match.params.value);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const keywords = nextProps.match.params ? nextProps.match.params.value : '';
-    if (keywords == this.state.keywords) return;
+    const keywords = this.props.match.params.value || '';
     this.getSearchMoreList(keywords);
   }
 
-  onFormChange = (value) => {
-    this.setState({
-      value,
-    });
+  componentWillReceiveProps(nextProps) {
+    const value = nextProps.match.params ? nextProps.match.params.value : '';
+    const id = nextProps.match.params ? nextProps.match.params.id : '';
+    const { searchValue, searchTab } = this.state;
+    console.log(this.state)
+    if (searchValue === '' && searchTab === '') return;
+    if (value === searchValue && id === searchTab) return;
+    this.getSearchTpyeList(value, id, 0, 10);
   }
 
-  getSearchMoreList(keywords, type, page, size) {
+  getSearchMoreList = (keywords) => {
     const {
       requestStart,
       requestSuccess,
       requestError,
       getSearchMore,
     } = this.props;
-
+    const { id } = this.props.match.params;
     requestStart();
-    this.setState({ keywords, value: keywords }, function () {
-      getSearchMore(keywords, type, page, size).then(({ error, payload }) => {
+    this.setState({ keywords }, () => {
+      getSearchMore(keywords).then(({ error, payload }) => {
         if (error) {
           requestError(payload);
+          return false;
         }
         requestSuccess();
+        const activetab = id || payload.data[0].type;
         this.setState({
           SearchMoreList: payload.data,
-          hasOther: payload.hasOther,
-          activetab: payload.data[0].type,
+          activetab,
+        }, () => {
+          this.getSearchTpyeList(keywords, activetab, 0, 10);
         });
-
-        this.getSearchTpyeList(keywords, payload.data[0].type, page, size);
       });
     });
   }
 
-  getSearchTpyeList(keywords, type, page, size = 10) {
+  getSearchTpyeList = (keywords, type, page, size) => {
     const {
       requestStart,
       requestSuccess,
@@ -131,93 +128,100 @@ class searchResult extends Component {
       getSearch,
     } = this.props;
     requestStart();
-    getSearch(keywords, type, page, size).then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      }
-      this.setState({
-        dataList: payload,
-        pagesize: payload.totalPages,
-        isShownodataClassEach: !!payload.content.length,
-      });
-      requestSuccess();
-    });
-  }
-
-  handleClick = labelId => () => {
     this.setState({
-      current: labelId,
-    });
+      searchValue: keywords,
+      searchTab: type,
+    }, () => {
+      getSearch(keywords, type, page, size).then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
+          this.setState({
+            dataList: null,
+            isShownodataClassEach: false
+          });
+          return false;
+        }
+        this.setState({
+          dataList: payload,
+          totalPages: payload.totalPages,
+          isShownodataClassEach: !!payload.content.length,
+        });
+        requestSuccess();
+      });
+    })
   }
 
   btnSearch = () => {
-    // 修改URL、
-    const nowUrl = window.location.href;
-    const searchvalue = !this.state.value ? '' : this.state.value;
-    const newUrl = nowUrl.substring(0, nowUrl.indexOf('searchvalue/') + 12).concat(searchvalue);
-    window.location.href = newUrl;
+    const { keywords, activetab, searchValue } = this.state;
+    if (searchValue === keywords) return;
+    this.props.history.push(`/search/${activetab}/${keywords}`);
+  }
 
+  // 点击tabs 分类
+  TabsClick = (activetab) => {
+    const { keywords } = this.state;
     this.setState({
-      keywords: searchvalue,
-    }, function () {
-      this.getSearchMoreList(this.state.value);
+      activetab,
+      activePage: 1,
+    }, () => {
+      this.props.history.push(`/search/${activetab}/${keywords}`);
     });
   }
 
-  // 输入框修改data数据源
-  inputOnChange = (e) => {
-    this.setState({
-      value: e,
-    });
-  }
-
-  //
+  // 点击分页
   handleSelect(eventKey) {
-    const { value, activetab } = this.state;
+    const { keywords, activetab, dataPerPageNum } = this.state;
     this.setState({
       activePage: eventKey,
+    }, () => {
+      this.getSearchTpyeList(keywords, activetab, eventKey - 1, dataPerPageNum);
     });
-    const dataSize = this.state.dataPerPageNum;
-    this.getSearchTpyeList(value, activetab, --eventKey, dataSize);
   }
 
   // 下面选择每页展示的数据条目数
   paginationNumSelect = (id, dataNum) => {
     const reg = new RegExp('条\/页', 'g');
     const dataPerPageNum = dataNum.replace(reg, '');
-    const { value, activetab, activePage } = this.state;
+    const { keywords, activePage, activetab } = this.state;
     this.setState({
       dataPerPageNum,
-    }, function () {
-      this.getSearchTpyeList(value, activetab, activePage - 1, dataPerPageNum);
+    }, () => {
+      this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
     });
   }
 
-  TabsClick = (activetab) => {
-    const { value } = this.state;
-    this.setState({
-      activetab,
-      activePage: 1,
-    });
-    const dataSize = this.state.dataPerPageNum;
-    this.getSearchTpyeList(value, activetab, 0, dataSize);
-  }
-
+  // 输入框敲回车键
   onKeyup = (e) => {
     e.keyCode === 13 && this.btnSearch();
   }
 
+  // 输入框修改data数据源
+  inputOnChange = (e) => {
+    this.setState({
+      keywords: e,
+    });
+  }
+
+  // 渲染列表页面
   otherlistLi(data) {
+    if (!data) return null;
     return data.content.map((item, index) => (
       <li key={index}>
-        <SearchItem dispatch={dispatch} trigger={trigger} data={item} type={data.type} url={data.renderUrl} from="full" />
+        <SearchItem
+          dispatch={dispatch}
+          trigger={trigger}
+          data={item}
+          type={data.type}
+          url={data.renderUrl}
+          from="full"
+        />
       </li>
     ));
   }
 
   render() {
     const {
-      SearchMoreList, dataList, isShownodataClassEach, pagesize,
+      SearchMoreList, dataList, isShownodataClassEach, totalPages,
     } = this.state;
     const Morelist = [];
     const anifalse = false;
@@ -231,7 +235,7 @@ class searchResult extends Component {
         {
           isShownodataClassEach ? null :
             <div className={nodataClass}>
-              <img src={nodata} />
+              <img src={nodata} alt="暂无相关内容" />
               <p>暂无相关内容</p>
             </div>
         }
@@ -246,8 +250,8 @@ class searchResult extends Component {
             <div className={searchPanel}>
               <FormControl
                 className={serviceSearch}
-                placeholder="搜索人员信息、应用、服务及其他内容"
-                value={this.state.value}
+                placeholder="搜索人员信息、服务及其他内容"
+                value={this.state.keywords}
                 onKeyDown={this.onKeyup}
                 onChange={this.inputOnChange}
               />
@@ -269,9 +273,9 @@ class searchResult extends Component {
                 {Morelist}
               </Tabs>
               {
-                pagesize > 1 ? <div className={paginationClass}>
+                totalPages > 1 ? <div className={paginationClass}>
                   <EnhancedPagination
-                    items={pagesize}
+                    items={totalPages}
                     activePage={this.state.activePage}
                     onDataNumSelect={this.paginationNumSelect}
                     onSelect={this.handleSelect.bind(this)}

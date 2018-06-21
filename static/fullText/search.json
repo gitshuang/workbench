@@ -1,5 +1,6 @@
 {
     "status": 1,
+    "msg": "零零零零",
     "data": {
         "content": [
             "{\"relationUsers\":[],\"serviceIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/4d0a1ffc-c2dc-4330-ab17-1fcc0257f396/%E6%B7%98%E5%AE%9D%E5%86%85%E8%B4%AD.png\",\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"ae57f431-66db-4301-b00f-31bc24ca2146\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"测试图片1\",\"relationServices\":[],\"url\":\"https://90wu6i.axshare.com/\",\"teamMenbersUnuse\":false,\"createTime\":1517987314000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":false,\"applicationId\":\"25aab76e-961d-4595-9965-870ce222b722\",\"serviceId\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"f4b5648b-cba6-4fe8-9cca-3430663244bc\",\"ts\":1517987314000}",
@@ -14,7 +15,7 @@
         ],
         "type": "service",
         "typeName": "应用/服务",
-        "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/648c32de-69c4-4e08-812c-1cd5998be2a0.js",
+        "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/7e9019be-6af1-4d70-aa33-e08dd1f52979.js",
         "last": true,
         "totalElements": 52,
         "totalPages": 6,

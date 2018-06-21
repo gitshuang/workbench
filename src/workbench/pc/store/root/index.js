@@ -159,7 +159,7 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      portalEnable: payload.portalEnable,
+      portalEnable: payload,
     };
   },
   [popMessage]: (state) => {

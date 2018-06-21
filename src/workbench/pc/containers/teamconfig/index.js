@@ -170,6 +170,7 @@ class CreateTeamContent extends Component {
     getTeamInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       this.setState({
         tenantId: payload.tenantId,
@@ -192,6 +193,7 @@ class CreateTeamContent extends Component {
     getAllApps().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       const webApplication = payload.filter((item)=>{
         return item.webStatus;
