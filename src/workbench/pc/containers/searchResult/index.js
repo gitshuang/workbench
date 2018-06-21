@@ -100,6 +100,7 @@ class searchResult extends Component {
       requestError,
       getSearchMore,
     } = this.props;
+    const { id } = this.props.match.params;
     requestStart();
     this.setState({ keywords }, () => {
       getSearchMore(keywords).then(({ error, payload }) => {
@@ -108,7 +109,7 @@ class searchResult extends Component {
           return false;
         }
         requestSuccess();
-        const activetab = payload.data[0].type;
+        const activetab = id || payload.data[0].type;
         this.setState({
           SearchMoreList: payload.data,
           activetab,
