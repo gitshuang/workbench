@@ -174,13 +174,9 @@
   color:rgba(74,81,93,1);
   margin-left:8px;
 }
-.recently > li {
-  padding-bottom: 21px;
-}
 
 .recently li:hover{
   background:rgba(239,239,239,1);
-  cursor:pointer;
 }
 
 .promotion li{
@@ -209,16 +205,6 @@
 .tabPane1::-webkit-scrollbar-thumb{
     border-radius: 8px;
     background-color: #757575;
-}
-tabPane1,.tabPane2{
-
-}
-.tabPane1 li,.tabPane2 li{
-  padding-top:15px;
-}
-.tabPane1 li{
-  display:flex;
-  /* border-bottom: 1px solid rgba(13,20,36,0.05); */
 }
 
 .wrap :global(.um-content){
@@ -281,8 +267,9 @@ tabPane1,.tabPane2{
   display: inline-block;
   color: #007ace;
   margin: 2px 0 0 185px;
-padding: 0 0 10px 0;
-cursor: pointer}
+  padding: 0 0 10px 0;
+  cursor: pointer;
+}
 .isdisplay { display: none}
 
 .paginationClass{
@@ -294,22 +281,23 @@ cursor: pointer}
 .paginationClass :global(.active) span,
 .paginationClass :global(.active) span:focus,
 .paginationClass :global(.active) span:hover{
-    border-color: #fcedec;
-    background: #fcedec;
-    color: #e14c46;
-  }
+  border-color: #fcedec;
+  background: #fcedec;
+  color: #e14c46;
+}
 .paginationClass :global(.disabled) a,
 .paginationClass :global(.disabled) a:focus,
 .paginationClass :global(.disabled) a:hover,
 {
   background: rgba(9,44,66,.04);
-  }
+}
 .paginationClass li a{ width: 28px;
   height: 28px;
   background: rgba(9,30,66,.04);
   border-color: #e9e7e7;
   border-radius: 4px;
   line-height: 28px;
-  padding: 0;}
+  padding: 0;
+}
 .paginationClass li a:hover{border-color:#fcedec}
 .paginationClass li:first-child a,.paginationClass li:last-child a{ border-radius: 4px}
