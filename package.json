@@ -6,8 +6,11 @@
   "private": true,
   "scripts": {
     "start": "node scripts/start.js",
+    "start_en": "node scripts/start.js LAN_TYPE=en",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "test_en": "node scripts/test.js LAN_TYPE=en",
+    "build_en": "node scripts/build.js LAN_TYPE=en",
     "formal": "node scripts/formal.js"
   },
   "dependencies": {
@@ -19,6 +22,7 @@
     "babel-runtime": "6.26.0",
     "classnames": "2.2.5",
     "custom-event-polyfill": "^0.3.0",
+    "diwork-business-components": "^1.1.4",
     "es6-symbol": "3.1.1",
     "js-polyfills": "^0.1.42",
     "mutation-observer": "^1.0.3",

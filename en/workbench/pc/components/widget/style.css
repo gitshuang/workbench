@@ -1,0 +1,266 @@
+.widgetItem {
+  position: relative;
+  float: left;
+  /*margin-top: 30px;*/
+  margin-right: 10px;
+  /* margin-top: 10px; */
+  margin-bottom: 8px;
+  box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
+  display: block;
+  width:176px;
+  height:176px;
+  background:rgba(255,255,255,1);
+  border-radius: 3px ;
+  border:1px solid #DBDEE5;
+  /* box-sizing: content-box; */
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-top: 3px;
+  /* margin-top: 12px; */
+  /**为阴影预留**/
+}
+
+/* XL尺寸 */
+@media screen and (device-width: 1441px){
+  .widgetItem{
+    margin-right: 8px;
+  }
+}
+/* L尺寸 */
+@media screen and (min-width: 1025px) and (max-width: 1440px) { /*NoDictionary*/
+  .widgetItem{
+    margin-right: 8px;
+  }
+}
+/* M尺寸 */
+@media screen and (min-width: 641px) and (max-width: 1024px) { /*NoDictionary*/
+  .widgetItem{
+    margin-right: 8px;
+  }
+}
+
+
+
+.widgetFileItem{
+  background: url("assets/image/wgt/folder_bg.png") no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  border:none;
+}
+/*
+.widgetItem:after {
+  content: '\20';
+  width: 0;
+  overflow: hidden;
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+*/
+.widgetItem a {
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.title{
+    height: 42px;
+    line-height: 42px;
+    /*background: #ccc;*/
+    display: -webkit-box;
+}
+.titleRight{
+    -webkit-box-align: center;
+    /*display: -webkit-box;*/
+  /*background: yellow;*/
+}
+
+.defaultArea{
+  position: relative;
+}
+.defaultArea .iconImg{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 40px;
+  bottom: 50px;
+  transform: translate(50%,50%);
+}
+/**
+.defaultArea .default_icon{
+  width: auto;
+  bottom: 57px;
+  right: 50px;
+  font-size: 90px;
+  color: rgba(117,127,140,1);
+}
+**/
+
+.titleRight{
+  -webkit-box-flex:1.0;
+  -webkit-box-pack: start;
+  padding-left: 9px;
+  font-size:16px;
+  color:rgba(71,77,84,1);
+}
+.widgetItem .content {
+  position: relative;
+}
+.fileIcon{
+  background: url("assets/image/wgt/file.png") no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.context{
+  cursor:pointer;
+}
+.bottom{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    width: 100%;
+}
+.fileContext{
+    overflow: hidden;
+    height: 100px;
+    overflow-y: scroll;
+}
+.fileContext div{
+  width:47px;
+  height:40px;
+  background:rgba(184,194,200,1);
+  border-radius: 4px ;
+  border: 1px solid #B8C2C8;
+  float: left;
+  margin: 0 0 10px 10px;
+}
+.fileContext div:nth-child(odd){
+
+}
+
+
+.fileContext div:nth-child(even){
+   opacity:56.53;
+}
+
+
+
+
+
+.footer{
+   display: -webkit-box;
+   height: 35px;
+   width: 100%;
+  -webkit-box-align: center;
+  text-align: center;
+}
+
+.footer>div{
+  cursor:pointer;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-flex : 1;
+  -webkit-box-align:center;
+  -webkit-box-pack:center;
+}
+.footer>div:hover{
+  background: #ccc;
+}
+
+.titleCont{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+.editCont{
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+    top: 40px;
+    padding:5px;
+    box-sizing: border-box;
+    background: #fff;
+}
+.editBtn{
+   display: -webkit-box;
+  -webkit-box-pack: center;
+  margin: 10px 0;
+}
+.editBtn :global(.u-button){
+    min-width:10px !important;
+    margin-right: 10px;
+    width: 60px;
+    height: 32px;
+}
+
+.formControl{
+    // -webkit-box-flex:1;
+    // width: 200px;
+}
+.saveBtn{
+    // -webkit-box-flex:1;
+    // width: 60px;
+    // margin:0 10px 0 20px;
+}
+.closeBtn{
+    // -webkit-box-flex:1;
+    // width: 60px;
+}
+
+.titleEdit{
+  position: absolute;
+  left: 10px;
+  top: 40px;
+}
+.popCont{
+    font-family: 'NoDictionary}} Bold', '微软雅黑 Regular', '微软雅黑';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+}
+
+
+.footer{
+   display: -webkit-box;
+   height: 35px;
+   width: 100%;
+  -webkit-box-align: center;
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+}
+
+.footer>div{
+  cursor:pointer;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-flex : 1;
+  -webkit-box-align:center;
+  -webkit-box-pack:center;
+}
+.footer>div:hover{
+  background: #ccc;
+}
+// folder.js
+.widgetFileItem .fileNum{
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  color:#fff;
+}
+.fileTitleRight{
+  margin-top: 3px;
+  margin-left: 6px;
+  color:#fff;
+}

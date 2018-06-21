@@ -1,0 +1,26 @@
+{
+"status": 1,
+"data": [{
+  "id": "beb45cf1-0b2d-4b4e-b43b-7ae3d832857e",
+  "dislpayName": "简体中文",
+  "langCode": "zh_CN",
+  "langSequence": 0,
+  "enabled": true,
+  "default": true
+},
+{
+  "id": "bd74802d-f287-4585-acf8-9dc33c9e6611",
+  "dislpayName": "English",
+  "langCode": "en_US",
+  "langSequence": 1,
+  "enabled": true,
+  "default": false
+},
+{
+  "id": "8dcd07e2-6797-4e10-80fc-6d318be04a30",
+  "dislpayName": "繁体中文",
+  "langCode": "zh_TW",
+  "langSequence": 2,
+  "enabled": true,
+  "default": false
+}
