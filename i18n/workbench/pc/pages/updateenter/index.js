@@ -59,6 +59,7 @@ class Updateenter extends Component {
     getTeamInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       this.setState({
         enterData: payload,
@@ -74,19 +75,20 @@ class Updateenter extends Component {
   render() {
     const { enterData } = this.state;
     return (
-      <div className="um-win">
-        <div className="um-header" style={{ background: 'white' }}>
-          <Header onLeftClick={this.goBack} iconName="home" >
-            <div>
-              <span>$i18n{index.js0}$i18n-end</span>
-            </div>
-          </Header>
+      <div>
+        <div style={{position:"fixed",top:0,left:0,width:"100%",zIndex:"9999"}}>
+          <div className="um-header" style={{ background: 'white' }}>
+            <Header onLeftClick={this.goBack} iconName="home" >
+              <div>
+                <span>$i18n{index.js0}$i18n-end</span>
+              </div>
+            </Header>
+          </div>
+          <div className={appBreadcrumb}>
+            <Breadcrumbs data={[{ name: '$i18n{index.js1}$i18n-end' }]} goback={this.goBack} />
+          </div>
         </div>
-        <div className={appBreadcrumb}>
-          <Breadcrumbs data={[{ name: '$i18n{index.js1}$i18n-end' }]} goback={this.goBack} />
-        </div>
-
-        <div className={`${pageEnterprise} um-content`}>
+        <div className={`${pageEnterprise}`}>
           <div className={enterTitle} >$i18n{index.js2}$i18n-end</div>
           <hr className={hr} />
           <div className={enterCont} >

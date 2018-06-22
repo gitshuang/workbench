@@ -51,7 +51,6 @@ class TeamRemoveModal extends Component {
           msg:payload,
           btn:[]
         }); 
-        return;
       }else{
         queryUser();
         this.cancelFn();

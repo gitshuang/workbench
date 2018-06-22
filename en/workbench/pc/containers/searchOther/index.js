@@ -99,6 +99,7 @@ class searchOther extends Component {
       getSearch(keywords,type,page,size).then(({error, payload}) => {
         if (error) {
           requestError(payload);
+          return false;
         }
         this.setState({
           dataList:payload,

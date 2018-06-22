@@ -104,6 +104,7 @@ class Invitation extends Component {
     getInviteUsersJoinAddress().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       this.setState({
         url: payload,

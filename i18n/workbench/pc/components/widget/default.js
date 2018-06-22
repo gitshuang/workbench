@@ -57,12 +57,28 @@ class WidgetItem extends Component {
       shouldLoad:false,
     }
   }
-  setShowImage(show){
-    this.setState({
-      shouldLoad : !!(show)
-    })
-    this.props.loadOk();
+  
+  componentDidMount(){
+    const { from } = this.props;
+    if(from === "folder"){
+      this.setState({
+        shouldLoad: true
+      });
+      return false;
+    }
+    if( !this.state.shouldLoad && this.props.viewport ){
+      var el = findDOMNode(this.refs.default_widget);
+      this.updataLoadState(el.offsetTop, el.offsetHeight)
+    }
   }
+
+  componentDidUpdate(prevProps){
+    if( !this.state.shouldLoad && prevProps.viewport ){
+      var el = findDOMNode(this.refs.default_widget);
+      this.updataLoadState(el.offsetTop, el.offsetHeight)
+    }
+  }
+  
   updataLoadState(top,height){
     if (this.state.shouldLoad) {
       return;
@@ -73,17 +89,12 @@ class WidgetItem extends Component {
       this.setShowImage(true);
     }
   }
-  componentDidMount(){
-    if( !this.state.shouldLoad && this.props.viewport ){
-      var el = findDOMNode(this.refs.default_widget);
-      this.updataLoadState(el.offsetTop, el.offsetHeight)
-    }
-  }
-  componentDidUpdate(prevProps){
-    if( !this.state.shouldLoad && prevProps.viewport ){
-      var el = findDOMNode(this.refs.default_widget);
-      this.updataLoadState(el.offsetTop, el.offsetHeight)
-    }
+
+  setShowImage(show){
+    this.setState({
+      shouldLoad : !!(show)
+    })
+    this.props.loadOk();
   }
 
   render() {

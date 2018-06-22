@@ -48,6 +48,7 @@ class Personals extends Component {
         openManage: '/manage',
         openUserinfo: '/userinfo',
         openInvitation: '/invitation',
+        openDynamic: '/dynamic',
       },
       hrefs: [
         {
@@ -55,7 +56,7 @@ class Personals extends Component {
           name: '$i18n{personal.js0}$i18n-end',
         },
         {
-          href: 'https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ',
+          href: "https://ticket.yonyoucloud.com/ticket/create/KJ",
           name: '$i18n{personal.js1}$i18n-end',
         },
         {

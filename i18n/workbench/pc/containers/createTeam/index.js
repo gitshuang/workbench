@@ -13,7 +13,7 @@ import Icon from 'pub-comp/icon';
 import {check} from './checkTenantStatus'
 import Progress from 'pub-comp/progress';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { changeUserInfoDisplay, getUserInfo } = homeActions;
+const {  getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
 import {
   wrap,
@@ -47,7 +47,6 @@ import {
     requestError,
     uploadApplication,
     createTeam,
-    changeUserInfoDisplay,
     getUserInfo
   }
 )
@@ -67,6 +66,10 @@ class CreateTeamContent extends Component {
       processValue:0,//0表示未开始，1表示开始progress
       tenantId:'',//tenantId
     }
+    //progressbar
+    this.loadingFunc=null;
+    this.successFunc = null;
+    this.timer = null;
   }
 
   componentWillMount() {
@@ -130,7 +133,7 @@ class CreateTeamContent extends Component {
   }
 
   create = () => {
-    const { history, createTeam, requestStart, requestSuccess, requestError, changeUserInfoDisplay, getUserInfo } = this.props;
+    const { history, createTeam, requestStart, requestSuccess, requestError, getUserInfo } = this.props;
     const { value, logo } = this.state;
     if ( !value || value == ""){
       this.setState({
@@ -147,29 +150,41 @@ class CreateTeamContent extends Component {
     this.setState({
       disabled: false
     })
-    //this.setState({tenantId:"tenantId",processValue:1});//测试去掉
     requestStart();
+    let self = this;
     createTeam(data).then(({error, payload}) => {
       this.setState({
-        disabled: true
+        disabled: true,
+        processValue: 1,//开始progressbar
       });
+      // setTimeout(() => {
+      //   check('122',this.loadingFunc,this.successFunc);
+      // }, 2000);
       if (error) {
         requestError(payload);
         return;
       }
-      
       requestSuccess();
-      
-      // getUserInfo();
-      // history.replace('/');
-      // changeUserInfoDisplay();
       const tenantId = payload.tenantId;
-      // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       localStorage.setItem('create', "1");
-      this.setState({tenantId:tenantId,processValue:1});//把processValue变成1.那么就开是走progress
+      
+      this.setState({tenantId:tenantId},()=>{
+        clearInterval(this.timer);
+        check(tenantId,this.loadingFunc,this.successFunc);
+      });//把processValue变成1.那么就开是走progress
     });
   }
-  
+  successLoading = () =>{
+    const {tenantId} = this.state;
+    window.location.href = `/?tenantId=${tenantId}&switch=true`;
+  }
+
+  loadingCallBack = (loadingFunc,successFunc) =>{
+    this.timer = setInterval(loadingFunc, 500);
+    this.loadingFunc = loadingFunc;
+    this.successFunc = successFunc;
+  }
+
   render() {
     const {logo, value, imgUrl, imgWarning ,disabled,error} = this.state;
     // let _error = error?"block":"none";
@@ -208,7 +223,7 @@ class CreateTeamContent extends Component {
         <hr className={footer_hr}/>
         <div className={footer}>
           <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
-              <Progress check={check} tenantId={this.state.tenantId} startFlag={now} loadingDesc={'$i18n{index.js6}$i18n-end…'}/>
+              <Progress loadingCallBack={this.loadingCallBack} startFlag={now} successFunc={this.successLoading} loadingDesc={'$i18n{index.js6}$i18n-end…'}/>
           </div>
           <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >$i18n{index.js7}$i18n-end</Button>
         </div>

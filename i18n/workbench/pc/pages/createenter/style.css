@@ -64,24 +64,24 @@
 
 
 .pageEnterprise{
-  margin: 10px 120px;
+  margin: 90px 120px 0;
   background: #fff;
   /* text-align: center; */
   /* padding-left: 100px; */
-  overflow: auto;
+  /* overflow: auto; */
   padding-bottom: 50px;
   min-width: 500px;
 }
 
 .enterTitle{
-  height:27px;
+  /* height:27px; */
   font-size:21px;
   color:#474D54;
   font-weight: 600;
   line-height:27px; 
   width: 360px;
   margin: 0 auto;
-  margin-top: 30px;
+  padding-top: 30px;
   margin-bottom: 10px;
   /* border-bottom: 1px solid rgba(13,20,36,1); */
 }
@@ -207,6 +207,7 @@
 .progressBar{
   position: relative;
   margin-left: 90px;
+  cursor: not-allowed;
 }
 .progressBar i{
   /* position: absolute;

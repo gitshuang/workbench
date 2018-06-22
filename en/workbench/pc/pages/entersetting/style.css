@@ -50,9 +50,10 @@
 }
 
 .pageEnterprise{
-  margin: 10px 120px;
+  margin: 90px 120px 0;
   background: #fff;
   min-width: 500px;
+  padding-bottom: 50px;
   /* text-align: center; */
   /* padding-left: 100px; */
   /* overflow: hidden; */
@@ -217,6 +218,7 @@
   margin-left: 90px;
   width: 338px;
   padding-bottom: 30px;
+  cursor: not-allowed;
 }
 :global(.u-progress-bar){
   background-color: #e14b46;

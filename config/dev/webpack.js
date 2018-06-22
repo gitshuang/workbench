@@ -7,21 +7,22 @@ var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 var baseWebpackConfig = require('../webpack.base.conf')
 var paths = require('../paths')
-
+var reg = /^LAN_TYPE\=/g;
+var  goalFilePath  = process.argv.length < 3? 'src' : process.argv[2].replace(reg,'');
 module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     // add hot-reload related code to entry chunks
     entry: {
       main: [
         './scripts/dev-client',
-        './src/workbench/pc/main.js',
+        `./${goalFilePath}/workbench/pc/main.js`,
       ],
     },
     module: {
       rules: [
         {
           test: /\.(js|jsx)$/,
-          include: [paths('src')],
+          include: [paths(`${goalFilePath}`)],
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
@@ -51,7 +52,7 @@ module.exports = function (config) {
         },
         {
           test: /\.css$/,
-          include: [paths('src')],
+          include: [paths(`${goalFilePath}`)],
           exclude: [paths('assets')],
           use: [
             'style-loader',
