@@ -40,7 +40,8 @@ const UpdateEnter = asyncComponent(() => import(/* webpackChunkName: "UpdateEnte
 const Market = asyncComponent(() => import(/* webpackChunkName: "Market" */'pages/market'));
 const Renew = asyncComponent(() => import(/* webpackChunkName: "Renew" */'pages/renew'));
 const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/userinfo'));
-const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/manageTeamEnter'));
+const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "ManageTeamEnter" */'pages/manageTeamEnter'));
+const Dynamic = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/dynamic'));
 
 const routes = [
   {
@@ -93,25 +94,25 @@ const routes = [
     component: Search,
     routes: [
       {
-        path: '/search/searchValue/:value',
+        path: '/search/:id/:value',
         component: SearchResult,
         exact: true,
       },
-      {
-        path: '/search/searchValue/',
-        component: SearchResult,
-        exact: true,
-      },
-      {
-        path: '/search/searchlist/:value',
-        component: SearchOther,
-        exact: true,
-      },
-      {
-        path: '/search/searchlist/',
-        component: SearchOther,
-        exact: true,
-      },
+      // {
+      //   path: '/search/searchValue/',
+      //   component: SearchResult,
+      //   exact: true,
+      // },
+      // {
+      //   path: '/search/searchlist/:value',
+      //   component: SearchOther,
+      //   exact: true,
+      // },
+      // {
+      //   path: '/search/searchlist/',
+      //   component: SearchOther,
+      //   exact: true,
+      // },
     ],
   },
   {
@@ -145,6 +146,10 @@ const routes = [
   {
     path: '/manageTeamEnter',
     component: ManageTeamEnter,
+  },
+  {
+    path: '/dynamic',
+    component: Dynamic,
   },
 ];
 

@@ -14,7 +14,7 @@ import { header, imgInner, allBtn, btnDisable, logoTitle } from './style.css';
 
 
 const {
-  changeUserInfoDisplay, hideUserInfoDisplay, getUserInfo, changeRequestDisplay,
+  getUserInfo, changeRequestDisplay,
 } = homeActions;
 
 const {
@@ -25,15 +25,12 @@ const {
 
 @connect(
   mapStateToProps(
-    'userInfoDisplay',
     'userInfo',
     {
       namespace: 'home',
     },
   ),
   {
-    changeUserInfoDisplay,
-    hideUserInfoDisplay,
     changeRequestDisplay,
     getUserInfo,
     requestStart,
@@ -43,9 +40,6 @@ const {
 )
 class HeaderPage extends Component {
   static propTypes = {
-    userInfoDisplay: PropTypes.bool,
-    hideUserInfoDisplay: PropTypes.func,
-    changeUserInfoDisplay: PropTypes.func,
     changeRequestDisplay: PropTypes.func,
     userInfo: PropTypes.shape({
       userAvator: PropTypes.string,
@@ -56,9 +50,6 @@ class HeaderPage extends Component {
     }),
   };
   static defaultProps = {
-    userInfoDisplay: true,
-    hideUserInfoDisplay: () => {},
-    changeUserInfoDisplay: () => {},
     changeRequestDisplay: () => {},
     userInfo: {},
     headerData: {},
@@ -72,10 +63,9 @@ class HeaderPage extends Component {
   }
 
   componentDidMount() {
-    const { changeUserInfoDisplay, changeRequestDisplay } = this.props;
+    const { changeRequestDisplay } = this.props;
     // 判断是否localstorage中包含这个值
     if (localStorage.getItem('create')) {
-      changeUserInfoDisplay();
       changeRequestDisplay();
       localStorage.removeItem('create');
     }
@@ -104,9 +94,6 @@ class HeaderPage extends Component {
 
   render() {
     const {
-      changeUserInfoDisplay,
-      hideUserInfoDisplay,
-      userInfoDisplay,
       headerData,
     } = this.props;
 
@@ -127,7 +114,6 @@ class HeaderPage extends Component {
     return (
       <div className={`${header}`} style={background}>
         <Header
-          onLeftClick={userInfoDisplay ? hideUserInfoDisplay : changeUserInfoDisplay}
           leftContent={this.getLeftContent()}
           iconName={imgIcon}
           color={color}

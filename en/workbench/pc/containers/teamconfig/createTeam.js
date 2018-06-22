@@ -108,6 +108,7 @@ class CreateTeam extends Component {
     getTeamInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
+        return false;
       }
       this.setState({
         ...payload

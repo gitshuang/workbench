@@ -58,23 +58,25 @@ class Enterprise extends Component {
     const { match: { params }, userInfo: { allowTenants }, userInfo } = this.props;
     const classes = params.data === 'home' ? homeNone : '';
     return (
-      <div className={`um-win ${classes}`}>
-        {
-          params.data === 'home'
-          ?
-            <div className="um-header" style={{ background: 'white' }}>
-              <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'home'} >
-                <div>
-                  <span>$i18n{index.js0}$i18n-end</span>
-                </div>
-              </Header>
-            </div>
-          : null
-        }
-        <div className={appBreadcrumb}>
-          <Breadcrumbs data={[{ name: '$i18n{index.js1}$i18n-end' }]} goback={this.goBack} />
+      <div className={`${classes}`}>
+        <div style={{position:"fixed",top:0,left:0,width:"100%",zIndex:"9999"}}>
+          {
+            params.data === 'home'
+            ?
+              <div className="um-header" style={{ background: 'white' }}>
+                <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'home'} >
+                  <div>
+                    <span>$i18n{index.js0}$i18n-end</span>
+                  </div>
+                </Header>
+              </div>
+            : null
+          }
+          <div className={appBreadcrumb}>
+            <Breadcrumbs data={[{ name: '$i18n{index.js1}$i18n-end' }]} goback={this.goBack} />
+          </div>
         </div>
-        <div className={`${pageEnterprise} um-content`}>
+        <div className={`${pageEnterprise}`}>
           <div className={enterTitle} >$i18n{index.js2}$i18n-end</div>
           <hr className={hr} />
           <div className={enterCont} >

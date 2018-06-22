@@ -11,7 +11,7 @@ const {
 
 const defaultState = {
   SearchSuggestList: [],
-  SearchMoreList: [],
+  SearchMoreList: {},
   SearchList: [],
   SearchOtherList: [],
   searchHeadData: { appName: '$i18n{index.js0}$i18n-end}', brm: [{ name: '搜索结果' }] },

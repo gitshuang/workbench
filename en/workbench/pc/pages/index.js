@@ -65,7 +65,6 @@ class Root extends Component {
     getMessage: PropTypes.func,
     getUserInfo: PropTypes.func,
     getPoll: PropTypes.func,
-    userInfoDisplay: PropTypes.bool,
   };
   static defaultProps = {
     history: {},
@@ -76,7 +75,6 @@ class Root extends Component {
     getMessage: () => {},
     getUserInfo: () => {},
     getPoll: () => {},
-    userInfoDisplay: false,
   };
   constructor(props) {
     super(props);

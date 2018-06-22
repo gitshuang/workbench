@@ -81,6 +81,7 @@ class TeamRemoveModal extends Component {
       getSearchEnterOrTeam().then(({error, payload}) => {
           if (error) {
             requestError(payload);
+            return false;
           }
           if(payload.length == 1){//进入该企业或团队
             if(!payload)return;

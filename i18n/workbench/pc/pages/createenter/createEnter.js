@@ -97,6 +97,10 @@ class CreateEnter extends Component {
       verify: true,
     };
     this.address = '$i18n{createEnter.js4}$i18n-end}|北京|$i18n{createEnter.js5}$i18n-end|';
+    //progressbar
+    this.loadingFunc = null;
+    this.successFunc = null;
+    this.timer = null;
   }
 
   onChange = (obj) => {
@@ -118,7 +122,7 @@ class CreateEnter extends Component {
   }
 
   checkForm = (flag, data) => {
-    const { setCreateEnter, updateenter } = this.props;
+    const { setCreateEnter, updateenter, requestStart, requestSuccess, requestError, } = this.props;
     const { tenantIndustry } = this.state;
 
     const Address = data.find(da => da.name === 'address');
@@ -146,23 +150,34 @@ class CreateEnter extends Component {
         return obj;
       }, {});
       setCreateEnter(argu1, updateenter).then(({ error, payload }) => {
-        this.setState({
-          disabled: true,
-        });
-        requestSuccess();
         if (error) {
           requestError(payload);
           return;
         }
+        requestSuccess();
+        this.setState({
+          disabled: true,
+          processValue: 1,
+        });
         const { tenantId } = payload;
-        this.setState({ tenantId, processValue: 1 });
         localStorage.setItem('create', '1');
-        // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
-        // this.goToLoading(tenantId)
+        this.setState({ tenantId: tenantId }, () => {
+          clearInterval(this.timer);
+          check(tenantId, this.loadingFunc, this.successFunc);
+        });//把processValue变成1.那么就开是走progress
       });
     }
   }
+  successLoading = () => {
+    const { tenantId } = this.state;
+    window.location.href = `/?tenantId=${tenantId}&switch=true`;
+  }
 
+  loadingCallBack = (loadingFunc, successFunc) => {
+    this.timer = setInterval(loadingFunc, 500);
+    this.loadingFunc = loadingFunc;
+    this.successFunc = successFunc;
+  }
   inputOnChange = (e, name) => {
     this.state[name] = e;
     this.setState({
@@ -175,7 +190,7 @@ class CreateEnter extends Component {
     } = this.state;
     const Butt = processValue !== 0
       ?
-      (<div className={progressBar}><Progress check={check} tenantId={tenantId} startFlag={processValue} loadingDesc="$i18n{createEnter.js6}$i18n-end…" /></div>)
+      (<div className={progressBar}><Progress loadingCallBack={this.loadingCallBack} tenantId={tenantId} startFlag={processValue} successFunc={this.successLoading} loadingDesc="$i18n{createEnter.js6}$i18n-end…" /></div>)
       :
       <SubmitBtn isSubmit disabled={this.state.disabled} />;
     return (

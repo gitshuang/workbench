@@ -39,6 +39,7 @@ const {
   marginTop,
   marginLeft,
   iframeCont,
+  contenthasTab
 } = styles;
 /* 声明actions */
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -263,6 +264,7 @@ export default class Work extends Component {
           Message.create({
             content: '$i18n{index.js0}$i18n-end!', duration: 1.5, position: 'topLeft', color: 'warning', style: { height: 'auto', top: -340 },
           });
+          return false;
         }
         Message.create({
           content: '$i18n{index.js1}$i18n-end!', duration: 1.5, position: 'topLeft', color: 'success', style: { height: 'auto', top: -340 },
@@ -280,7 +282,6 @@ export default class Work extends Component {
   makeLayout = () => {
     const { loaded } = this.state;
     const { expandedSidebar, type } = this.props;
-
     if (loaded) {
       switch (type) {
         case 1:
@@ -317,7 +318,7 @@ export default class Work extends Component {
                 ) : null
               }
               <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
-                <div className={contentArea}>
+                <div className={`${contentArea} ${contenthasTab}`}>
                   <ContentContainer hasTab />
                 </div>
                 <div className={tabArea}>
