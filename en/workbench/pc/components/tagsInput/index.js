@@ -96,7 +96,7 @@ function defaultPasteSplit(data) {
 
 const defaultInputProps = {
   className: 'react-tagsinput-input',
-  placeholder: 'email input',',
+  placeholder: 'email input',
 };
 
 class TagsInput extends Component {
