@@ -89,7 +89,7 @@ function getResultFetch(that, text, callback) {
 function getData(url, callback) {
   const browser = navigator.appName;
   const bVersion = navigator.appVersion;
-  if (browser === 'Microsoft Internet Explorer' && bVersion.match(/9./i) === '9.') {
+  if (browser === 'Microsoft Internet Explorer' && bVersion.match(/9./i)[0] === '9.') {
     getFetchIe9(url, { method: 'get', timeout: 3000 }).then((text) => {
       getResultFetch(this, text, callback);
     });
