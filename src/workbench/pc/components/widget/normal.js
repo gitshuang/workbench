@@ -40,8 +40,8 @@ function getFetchIe9(url, options = {}) {
       const method = options.method || 'get';
       const timeout = options.timeout || 30000;
       const XDR = new XDomainRequest();
-      XDR.open(method, url);
       XDR.timeout = timeout;
+      XDR.open(method, url);
       XDR.onload = () => {
         try {
           return resolve(XDR.responseText);
@@ -53,9 +53,7 @@ function getFetchIe9(url, options = {}) {
       XDR.onprogress = () => { };
       XDR.ontimeout = () => Promise.reject(new Error('XDomainRequest timeout'));
       XDR.onerror = () => Promise.reject(new Error('XDomainRequest error'));
-      setTimeout(() => {
-        XDR.send();
-      }, 0);
+      XDR.send();
     });
   }
   return false;
