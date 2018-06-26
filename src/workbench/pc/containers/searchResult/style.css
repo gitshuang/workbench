@@ -29,7 +29,8 @@
 .serviceSearch{
 	width:456px;
 	height:38px;
-	border: 1px solid rgba(78,89,104,0.19);
+  border: 1px solid rgba(78,89,104,0.19);
+  transition: none;
 }
 .wrap .um_content{
 	padding:20px 0;
