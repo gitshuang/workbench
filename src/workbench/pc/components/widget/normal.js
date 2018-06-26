@@ -37,7 +37,7 @@ function getFetchIe9(url, options = {}) {
     const time = new Date().getTime();
     url = `${fh}tm=${time}`;
     return new Promise((resolve, reject) => {
-      const method = options.method || 'get';
+      const method = options.method || 'GET';
       const timeout = options.timeout || 30000;
       const XDR = new XDomainRequest();
       XDR.timeout = timeout;
@@ -54,6 +54,9 @@ function getFetchIe9(url, options = {}) {
       XDR.ontimeout = () => Promise.reject(new Error('XDomainRequest timeout'));
       XDR.onerror = () => Promise.reject(new Error('XDomainRequest error'));
       XDR.send();
+      setTimeout(() => {
+        XDR.send();
+      }, 0);
     });
   }
   return false;
@@ -88,7 +91,7 @@ function getData(url, callback) {
   const browser = navigator.appName;
   const bVersion = navigator.appVersion;
   if (browser === 'Microsoft Internet Explorer' && bVersion.match(/9./i)[0] === '9.') {
-    getFetchIe9(url, { method: 'get', timeout: 3000 }).then((text) => {
+    getFetchIe9(url, { method: 'GET', timeout: 3000 }).then((text) => {
       getResultFetch(this, text, callback);
     });
   } else {
