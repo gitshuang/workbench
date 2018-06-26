@@ -40,8 +40,9 @@ function getFetchIe9(url, options = {}) {
       const method = options.method || 'GET';
       const timeout = options.timeout || 30000;
       const XDR = new XDomainRequest();
-      XDR.timeout = timeout;
+      
       XDR.open(method, url);
+      XDR.timeout = timeout;
       XDR.onload = () => {
         try {
           return resolve(XDR.responseText);
