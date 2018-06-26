@@ -18,6 +18,7 @@
     "animate.css": "3.5.2",
     "array.find": "1.0.7",
     "array.from": "1.0.3",
+    "axios": "^0.18.0",
     "babel-runtime": "6.26.0",
     "classnames": "2.2.5",
     "custom-event-polyfill": "^0.3.0",
