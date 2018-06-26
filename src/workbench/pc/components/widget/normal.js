@@ -143,11 +143,6 @@ class WidgetItem extends Component {
   }
 
   componentDidMount(){
-    this.setState({
-      shouldLoad: true
-    });
-    this.loadWidget();
-    return;
     const { from } = this.props;
     if(from === "folder"){
       this.setState({
@@ -163,10 +158,10 @@ class WidgetItem extends Component {
   }
 
   componentDidUpdate(prevProps){
-    // if( !this.state.shouldLoad && prevProps.viewport ){
-    //   var el = findDOMNode(this.refs.normal_widget);
-    //   this.updataLoadState(el.offsetTop, el.offsetHeight)
-    // }
+    if( !this.state.shouldLoad && prevProps.viewport ){
+      var el = findDOMNode(this.refs.normal_widget);
+      this.updataLoadState(el.offsetTop, el.offsetHeight)
+    }
   }
 
   loadWidget(){
