@@ -97,17 +97,9 @@ function getData(url, callback) {
     //   getResultFetch(this, text, callback);
     // });
     axios.get(url).then((response) => {
-      if (response.ok) {
-        return response.text().then((text) => {
-          if (text) {
-            getResultFetch(this, text, callback);
-          } else {
-            return Promise.reject(new Error('接口未返回数据'));
-          }
-          return false;
-        });
+      if (response.statusText === "OK") {
+        getResultFetch(this, response.data, callback);
       }
-      return Promise.reject(new Error('请求失败'));
     });
   } else {
     fetch(url, {
