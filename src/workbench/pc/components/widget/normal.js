@@ -28,41 +28,6 @@ const widgetStyle = [
   },
 ];
 
-function getFetchIe9(url, options = {}) {
-  if (window.XDomainRequest) {
-    // if(url.indexOf("https") != -1){
-    //   url = url.replace(/https/, "http");
-    // }
-    const fh = url.indexOf('?') === -1 ? '?' : '&';
-    // url += fh + "tm=" + new Date().getTime();
-    const time = new Date().getTime();
-    url = `${fh}tm=${time}`;
-    return new Promise((resolve, reject) => {
-      const method = options.method || 'GET';
-      const timeout = options.timeout || 30000;
-      const XDR = new XDomainRequest();
-
-      XDR.open(method, url);
-      XDR.timeout = timeout;
-      XDR.onload = () => {
-        try {
-          return resolve(XDR.responseText);
-        } catch (e) {
-          reject(e);
-        }
-        return reject();
-      };
-      XDR.onprogress = () => { };
-      XDR.ontimeout = () => Promise.reject(new Error('XDomainRequest timeout'));
-      XDR.onerror = () => Promise.reject(new Error('XDomainRequest error'));
-      XDR.send();
-      setTimeout(() => {
-        XDR.send();
-      }, 0);
-    });
-  }
-  return false;
-}
 
 function getResultFetch(that, text, callback) {
   that.tool = new WidgetTool(that.props.data.widgetId);
@@ -93,13 +58,10 @@ function getData(url, callback) {
   const browser = navigator.appName;
   const bVersion = navigator.appVersion;
   if (browser === 'Microsoft Internet Explorer' && bVersion.match(/9./i)[0] === '9.') {
-    // getFetchIe9(url, { method: 'GET', timeout: 3000 }).then((text) => {
-    //   getResultFetch(this, text, callback);
-    // });
     axios.get(url).then((response) => {
-      if (response.statusText === "OK") {
         getResultFetch(this, response.data, callback);
-      }
+    }).catch((error)=>{
+      console.log(error);
     });
   } else {
     fetch(url, {
