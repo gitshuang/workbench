@@ -8,7 +8,7 @@ import {
   title,
   titleRight,
 } from './style.css';
-import axios form 'axios';
+import axios from 'axios';
 import { findDOMNode } from 'react-dom'
 
 
