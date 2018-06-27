@@ -126,7 +126,7 @@ class BreadcrumbContainer extends Component {
             withSidebar ? (
               <section
                 className={this.state.breadcrumbMenu} >
-                菜单
+                导航
                 <Icon
                   title="隐藏菜单"
                   type="error3"
