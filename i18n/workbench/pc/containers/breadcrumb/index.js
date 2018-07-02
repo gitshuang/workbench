@@ -50,6 +50,7 @@ class BreadcrumbContainer extends Component {
         this.closeMenu = this.closeMenu.bind(this);
         this.back = false;
         this.backVal = 0;
+        this.backClickUrl = '';//线上点击返回需要go(-2),其他需要go(-1)
     }
     componentWillReceiveProps(nextProps) {
       const { withSidebar } = this.props;
@@ -63,7 +64,12 @@ class BreadcrumbContainer extends Component {
         this.back = false;
         //this.props.history.go(-this.backVal);
         console.log('gozhiqian'+this.props.history.length)
-        this.props.history.go(-this.backVal-1);
+        if(this.backClickUrl === 'defaultUrl' ){ //点击的是返回
+          this.props.history.go(-this.backVal-1);
+        }else{
+          this.props.history.go(-this.backVal);
+
+        }
         console.log('gozhihou'+this.props.history.length)
       }
     }
@@ -88,12 +94,13 @@ class BreadcrumbContainer extends Component {
           breadcrumbTab:""
         })
     }
-    goback = (index,backVal) => {
+    goback = (index,backVal,url) => {
       const { brm,popBrm } = this.props;
       const customBrmUrl = index>=0 && brm && brm.length>0 && brm[brm.length-1][index].url;
       popBrm({index:index,url:window.location.href});
       this.back = true;
       this.backVal = backVal; 
+      this.backClickUrl = url;
       //  this.props.history.go(-backVal)
       // window.history.go(-backVal);
       // const customBrm = brm.filter(({url})=>{

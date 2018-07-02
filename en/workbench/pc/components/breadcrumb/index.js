@@ -34,9 +34,9 @@ class Breadcrumbs extends Component {
     const backVal = data.length - 1 - i;
     if (goback) {
       if (i === -1) {
-        goback(i, 1);
+        goback(i, 1,url);
       } else {
-        goback(i, backVal);
+        goback(i, backVal,url);
       }
     } else {
       this.goBack();

@@ -8,6 +8,7 @@ import {
   title,
   titleRight,
 } from './style.css';
+import axios from 'axios';
 import { findDOMNode } from 'react-dom'
 
 
@@ -27,39 +28,6 @@ const widgetStyle = [
   },
 ];
 
-function getFetchIe9(url, options = {}) {
-  if (window.XDomainRequest) {
-    // if(url.indexOf("https") != -1){
-    //   url = url.replace(/https/, "http");
-    // }
-    const fh = url.indexOf('?') === -1 ? '?' : '&';
-    // url += fh + "tm=" + new Date().getTime();
-    const time = new Date().getTime();
-    url = `${fh}tm=${time}`;
-    return new Promise((resolve, reject) => {
-      const method = options.method || 'get';
-      const timeout = options.timeout || 30000;
-      const XDR = new XDomainRequest();
-      XDR.open(method, url);
-      XDR.timeout = timeout;
-      XDR.onload = () => {
-        try {
-          return resolve(XDR.responseText);
-        } catch (e) {
-          reject(e);
-        }
-        return reject();
-      };
-      XDR.onprogress = () => { };
-      XDR.ontimeout = () => Promise.reject(new Error('XDomainRequest timeout'));
-      XDR.onerror = () => Promise.reject(new Error('XDomainRequest error'));
-      setTimeout(() => {
-        XDR.send();
-      }, 0);
-    });
-  }
-  return false;
-}
 
 function getResultFetch(that, text, callback) {
   that.tool = new WidgetTool(that.props.data.widgetId);
@@ -89,9 +57,11 @@ function getResultFetch(that, text, callback) {
 function getData(url, callback) {
   const browser = navigator.appName;
   const bVersion = navigator.appVersion;
-  if (browser === 'Microsoft Internet Explorer' && bVersion.match(/9./i) === '9.') {
-    getFetchIe9(url, { method: 'get', timeout: 3000 }).then((text) => {
-      getResultFetch(this, text, callback);
+  if (browser === 'Microsoft Internet Explorer' && bVersion.match(/9./i)[0] === '9.') {
+    axios.get(url).then((response) => {
+        getResultFetch(this, response.data, callback);
+    }).catch((error)=>{
+      console.log(error);
     });
   } else {
     fetch(url, {
@@ -124,7 +94,7 @@ class WidgetItem extends Component {
     }),
   }
   static defaultProps = {
-    data:{},
+    data: {},
     viewport: {
       top: 0,
       height: 0
@@ -135,7 +105,7 @@ class WidgetItem extends Component {
     this.state = {
       loaded: false,
       widget: null,
-      shouldLoad:false,
+      shouldLoad: false,
     }
   }
   componentWillUnmount() {
@@ -144,30 +114,30 @@ class WidgetItem extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { from } = this.props;
-    if(from === "folder"){
+    if (from === "folder") {
       this.setState({
         shouldLoad: true
       });
       this.loadWidget();
       return false;
     }
-    if( !this.state.shouldLoad && this.props.viewport ){
+    if (!this.state.shouldLoad && this.props.viewport) {
       var el = findDOMNode(this.refs.normal_widget);
       this.updataLoadState(el.offsetTop, el.offsetHeight)
     }
   }
 
-  componentDidUpdate(prevProps){
-    if( !this.state.shouldLoad && prevProps.viewport ){
+  componentDidUpdate(prevProps) {
+    if (!this.state.shouldLoad && prevProps.viewport) {
       var el = findDOMNode(this.refs.normal_widget);
       this.updataLoadState(el.offsetTop, el.offsetHeight)
     }
   }
 
-  loadWidget(){
-    const { data:{ jsurl } } = this.props;
+  loadWidget() {
+    const { data: { jsurl } } = this.props;
     if (jsurl) {
       getData.call(this, jsurl, (result) => {
         this.setState({
@@ -178,22 +148,22 @@ class WidgetItem extends Component {
     }
   }
 
-  setShowImage(show){
+  setShowImage(show) {
     this.setState({
-      shouldLoad : !!(show)
+      shouldLoad: !!(show)
     })
     this.props.loadOk();
     this.loadWidget();
   }
 
-  updataLoadState(top,height){
+  updataLoadState(top, height) {
     if (this.state.shouldLoad) {
       return;
     }
     var min = this.props.viewport.top;
     var max = this.props.viewport.top + this.props.viewport.height;
 
-    if ((min <= (top + height) && top <= max )) {
+    if ((min <= (top + height) && top <= max)) {
       this.setShowImage(true);
     }
   }
@@ -222,13 +192,13 @@ class WidgetItem extends Component {
     }
     return (
       <li ref="normal_widget" className={widgetItem} style={style} >
-      {this.state.shouldLoad?(
-        <div>
-        <div className={title}>
-          <div className={titleRight}>{name}</div>
-        </div>
-        {contentElm}
-        </div>):(<Loading container={this} show={true} />)}
+        {this.state.shouldLoad ? (
+          <div>
+            <div className={title}>
+              <div className={titleRight}>{name}</div>
+            </div>
+            {contentElm}
+          </div>) : (<Loading container={this} show={true} />)}
       </li>
     );
   }

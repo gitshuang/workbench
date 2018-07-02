@@ -151,6 +151,7 @@ const reducer = handleActions({
         brm,
       };
     }
+    // 此处更改了url
     const location = appendSearchParam(url, {
       ...getOpenServiceData(serviceCode),
       serviceCode,
