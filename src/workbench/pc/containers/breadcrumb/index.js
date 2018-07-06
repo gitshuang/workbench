@@ -16,140 +16,140 @@ import {
 
 const {
   setExpandedSidebar,
- // removeBrm,
+  // removeBrm,
   popBrm,
 } = actions;
 
 @withRouter
 @connect(
-    mapStateToProps(
-        'brm',
-        {
-            namespace: 'work',
-        },
-    ),
+  mapStateToProps(
+    'brm',
     {
-        setExpandedSidebar,
-       // removeBrm,
-       popBrm
-    }
+      namespace: 'work',
+    },
+  ),
+  {
+    setExpandedSidebar,
+    // removeBrm,
+    popBrm
+  }
 )
 class BreadcrumbContainer extends Component {
 
-    static propTypes = {
-        withSidebar: PropTypes.bool,
-    }
+  static propTypes = {
+    withSidebar: PropTypes.bool,
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            breadcrumbMenu:"",
-            breadcrumbTab:""
-        }
-        this.setExpended = this.setExpended.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
-        this.back = false;
-        this.backVal = 0;
-        this.backClickUrl = '';//线上点击返回需要go(-2),其他需要go(-1)
+  constructor(props) {
+    super(props);
+    this.state = {
+      breadcrumbMenu: "",
+      breadcrumbTab: ""
     }
-    componentWillReceiveProps(nextProps) {
-      const { withSidebar } = this.props;
-      if (!withSidebar) {
-        this.setExpended();
+    this.setExpended = this.setExpended.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.back = false;
+    this.backVal = 0;
+    this.backClickUrl = '';//线上点击返回需要go(-2),其他需要go(-1)
+  }
+  componentWillReceiveProps(nextProps) {
+    const { withSidebar } = this.props;
+    if (!withSidebar) {
+      this.setExpended();
+    }
+    console.log(nextProps.brm)
+  }
+  componentDidUpdate = () => {
+    if (this.back) {
+      this.back = false;
+      //this.props.history.go(-this.backVal);
+      console.log('gozhiqian' + this.props.history.length)
+      if (this.backClickUrl === 'defaultUrl') { //点击的是返回
+        this.props.history.go(-this.backVal - 1);
+      } else {
+        this.props.history.go(-this.backVal);
+
       }
-      console.log(nextProps.brm)
+      console.log('gozhihou' + this.props.history.length)
     }
-    componentDidUpdate = () =>{
-      if(this.back){
-        this.back = false;
-        //this.props.history.go(-this.backVal);
-        console.log('gozhiqian'+this.props.history.length)
-        if(this.backClickUrl === 'defaultUrl' ){ //点击的是返回
-          this.props.history.go(-this.backVal-1);
-        }else{
-          this.props.history.go(-this.backVal);
+  }
 
-        }
-        console.log('gozhihou'+this.props.history.length)
-      }
-    }
-   
-    setExpended() {
-        this.setExpandedSidebar(true);
-        this.setState({
-          breadcrumbMenu:breadcrumb_menu,
-          breadcrumbTab:breadcrumb_tab
-        })
-    }
-    setExpandedSidebar(state) {
-      const {setExpandedSidebar} = this.props;
-      setExpandedSidebar(state);
-      const evt = new CustomEvent('resize');
-      window.dispatchEvent(evt);
-    }
-    closeMenu(){
-        this.setExpandedSidebar(false);
-        this.setState({
-          breadcrumbMenu:"",
-          breadcrumbTab:""
-        })
-    }
-    goback = (index,backVal,url) => {
-      const { brm,popBrm } = this.props;
-      const customBrmUrl = index>=0 && brm && brm.length>0 && brm[brm.length-1][index].url;
-      popBrm({index:index,url:window.location.href});
-      this.back = true;
-      this.backVal = backVal; 
-      this.backClickUrl = url;
-      //  this.props.history.go(-backVal)
-      // window.history.go(-backVal);
-      // const customBrm = brm.filter(({url})=>{
-      //   return url;
-      // })
-      // if (index < 0) {
-      //   window.history.back();
-      //   if (customBrm) {
-      //     removeBrm(1);
-      //   }
-      // } else {
-      //   const length = brm.length - index - 1;
-      //   removeBrm(length);
-      //   window.history.go(-length);
-      // }
-    }
-    render() {
-      const { withSidebar ,brm} = this.props;
+  setExpended() {
+    this.setExpandedSidebar(true);
+    this.setState({
+      breadcrumbMenu: breadcrumb_menu,
+      breadcrumbTab: breadcrumb_tab
+    })
+  }
+  setExpandedSidebar(state) {
+    const { setExpandedSidebar } = this.props;
+    setExpandedSidebar(state);
+    const evt = new CustomEvent('resize');
+    window.dispatchEvent(evt);
+  }
+  closeMenu() {
+    this.setExpandedSidebar(false);
+    this.setState({
+      breadcrumbMenu: "",
+      breadcrumbTab: ""
+    })
+  }
+  goback = (index, backVal, url) => {
+    const { brm, popBrm } = this.props;
+    const customBrmUrl = index >= 0 && brm && brm.length > 0 && brm[brm.length - 1][index].url;
+    popBrm({ index: index, url: window.location.href });
+    this.back = true;
+    this.backVal = backVal;
+    this.backClickUrl = url;
+    //  this.props.history.go(-backVal)
+    // window.history.go(-backVal);
+    // const customBrm = brm.filter(({url})=>{
+    //   return url;
+    // })
+    // if (index < 0) {
+    //   window.history.back();
+    //   if (customBrm) {
+    //     removeBrm(1);
+    //   }
+    // } else {
+    //   const length = brm.length - index - 1;
+    //   removeBrm(length);
+    //   window.history.go(-length);
+    // }
+  }
+  render() {
+    const { withSidebar, brm } = this.props;
 
-      return (
-        <div className={`${breadcrumbClass} menu_work`}>
-          {
-            withSidebar ? (
-              <section
-                className={this.state.breadcrumbMenu} >
-                导航
+    return (
+      <div className={`${breadcrumbClass} menu_work`}>
+        {
+          withSidebar ? (
+            <section
+              className={this.state.breadcrumbMenu} >
+              导航
                 <Icon
-                  title="隐藏菜单"
-                  type="error3"
-                  className={closeMenu}
-                  onClick={this.closeMenu} />
-              </section>
-            ) : null
-          }
-          {
-            withSidebar ? (
-              <Icon
-                title="显示菜单"
-                type="tabulation"
-                className={this.state.breadcrumbTab}
-                onClick={this.setExpended} />
-            ) : null
-          }
-          <div className={breadcrumbArea}>
-            <Breadcrumbs data={brm && brm.length ? brm[brm.length-1] : [{ name: '' }] } goback={this.goback}/>
-          </div>
+                title="隐藏菜单"
+                type="error3"
+                className={closeMenu}
+                onClick={this.closeMenu} />
+            </section>
+          ) : null
+        }
+        {
+          withSidebar ? (
+            <Icon
+              title="显示菜单"
+              type="tabulation"
+              className={this.state.breadcrumbTab}
+              onClick={this.setExpended} />
+          ) : null
+        }
+        <div className={breadcrumbArea}>
+          <Breadcrumbs data={brm && brm.length ? brm[brm.length - 1] : [{ name: '' }]} goback={this.goback} />
         </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 export default BreadcrumbContainer;
