@@ -24,6 +24,7 @@ const {
 @connect(
   mapStateToProps(
     'brm',
+    'backUrl',
     {
       namespace: 'work',
     },
@@ -59,20 +60,20 @@ class BreadcrumbContainer extends Component {
     }
     console.log(nextProps.brm)
   }
-  componentDidUpdate = () => {
-    if (this.back) {
-      this.back = false;
-      //this.props.history.go(-this.backVal);
-      console.log('gozhiqian' + this.props.history.length)
-      if (this.backClickUrl === 'defaultUrl') { //点击的是返回
-        this.props.history.go(-this.backVal - 1);
-      } else {
-        this.props.history.go(-this.backVal);
+  // componentDidUpdate = () => {
+  //   if (this.back) {
+  //     this.back = false;
+  //     //this.props.history.go(-this.backVal);
+  //     console.log('gozhiqian' + this.props.history.length)
+  //     if (this.backClickUrl === 'defaultUrl') { //点击的是返回
+  //       this.props.history.go(-this.backVal - 1);
+  //     } else {
+  //       this.props.history.go(-this.backVal);
 
-      }
-      console.log('gozhihou' + this.props.history.length)
-    }
-  }
+  //     }
+  //     console.log('gozhihou' + this.props.history.length)
+  //   }
+  // }
 
   setExpended() {
     this.setExpandedSidebar(true);
@@ -95,12 +96,29 @@ class BreadcrumbContainer extends Component {
     })
   }
   goback = (index, backVal, url) => {
-    const { brm, popBrm } = this.props;
-    const customBrmUrl = index >= 0 && brm && brm.length > 0 && brm[brm.length - 1][index].url;
-    popBrm({ index: index, url: window.location.href });
-    this.back = true;
-    this.backVal = backVal;
-    this.backClickUrl = url;
+    const { backUrl, popBrm, history, match } = this.props;
+    popBrm({ index: index });
+    const { 
+      params: {
+        code,
+        type,
+      }, 
+    } = match;
+    backUrl.pop();
+    if(backUrl.length){
+      const currUrl = backUrl[backUrl.length-1];
+      history.replace(`/${type}/${code}/${currUrl}`);
+    }else{
+      history.replace('');
+    }
+    
+
+    // const { brm, popBrm } = this.props;
+    // // const customBrmUrl = index >= 0 && brm && brm.length > 0 && brm[brm.length - 1][index].url;
+    // popBrm({ index: index, url: window.location.href });
+    // this.back = true;
+    // this.backVal = backVal;
+    // this.backClickUrl = url;
     //  this.props.history.go(-backVal)
     // window.history.go(-backVal);
     // const customBrm = brm.filter(({url})=>{

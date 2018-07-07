@@ -44,6 +44,7 @@ const defaultState = {
   pinType: false, // 是否pin上
   pinDisplay: false, // pin是否显示
   widthBrm: true,
+  backUrl: [],
 };
 
 function appendSearchParam(url, params) {
@@ -116,7 +117,7 @@ const reducer = handleActions({
     };
   },
   [changeService]: (state, { payload: code }) => {
-    const { menus, tabs } = state;
+    const { menus, tabs, backUrl } = state;
     const menuPath = findPath(menus, 'children', 'serviceCode', code);
     const current = menuPath.slice(-1)[0];
     if (!current) {
@@ -136,6 +137,9 @@ const reducer = handleActions({
     menuPath.map(item =>
       newBrm.push({ name: item.menuItemName, url: item.service && item.service.url }));
     const brm = state.brm && state.brm.length ? [...state.brm, newBrm] : [newBrm];
+    if (backUrl[backUrl.length - 1] !== serviceCode) {
+      backUrl.push(serviceCode);
+    }
     if (curTab) {
       return {
         ...state,
@@ -149,6 +153,7 @@ const reducer = handleActions({
           url: curTab.location,
         },
         brm,
+        backUrl
       };
     }
     // 此处更改了url
@@ -168,6 +173,7 @@ const reducer = handleActions({
         url: location,
       },
       brm,
+      backUrl,
       tabs: [{
         id: currentId,
         serviceCode,

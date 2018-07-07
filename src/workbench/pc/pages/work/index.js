@@ -162,7 +162,10 @@ export default class Work extends Component {
   }
 
   componentDidMount() {
-
+    // const { history } = this.props;
+    // history.block((location) => {
+    //   console.log(location);
+    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -185,7 +188,6 @@ export default class Work extends Component {
       },
       setCurrent,
     } = this.props;
-    debugger
     const typeChange = newType !== oldType;
     const codeChange = newCode !== oldCode;
     const subcodeChange = newSubcode !== oldSubcode;
@@ -200,11 +202,13 @@ export default class Work extends Component {
     }
   }
 
+  // 从页面离开  直接清空state
   componentWillUnmount() {
     const { returnDefaultState } = this.props;
     returnDefaultState();
   }
 
+  // 获取地址
   getProductInfo(code, type, subcode) {
     const {
       getProductInfo,
@@ -280,7 +284,6 @@ export default class Work extends Component {
   makeLayout = () => {
     const { loaded } = this.state;
     const { expandedSidebar, type } = this.props;
-    debugger;
     if (loaded) {
       switch (type) {
         case 1:
