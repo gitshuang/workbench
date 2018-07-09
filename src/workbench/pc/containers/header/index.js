@@ -17,7 +17,6 @@ const {
 const {
   showIm,
   hideIm,
-  getPortal,
   requestError,
   requestSuccess
 } = actions;
@@ -33,7 +32,7 @@ const {
   {
     showIm,
     hideIm,
-    getPortal,
+    
     requestError,
     requestSuccess
   }
@@ -51,14 +50,7 @@ class HeaderContainer extends Component {
   }
 
   componentWillMount() {
-    const { getPortal, requestError, requestSuccess } = this.props;
-    getPortal().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        requestSuccess();
-      }
-    });
+    
   }
 
   componentDidMount() {

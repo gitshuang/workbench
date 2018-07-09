@@ -13,7 +13,6 @@ import Icon from 'pub-comp/icon';
 import {check} from './checkTenantStatus'
 import Progress from 'pub-comp/progress';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const {  getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
 import {
   wrap,
@@ -47,7 +46,6 @@ import {
     requestError,
     uploadApplication,
     createTeam,
-    getUserInfo
   }
 )
 
@@ -133,7 +131,7 @@ class CreateTeamContent extends Component {
   }
 
   create = () => {
-    const { history, createTeam, requestStart, requestSuccess, requestError, getUserInfo } = this.props;
+    const { history, createTeam, requestStart, requestSuccess, requestError } = this.props;
     const { value, logo } = this.state;
     if ( !value || value == ""){
       this.setState({

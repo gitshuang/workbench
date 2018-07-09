@@ -80,12 +80,12 @@ class HeaderPage extends Component {
     }),
   };
   static defaultProps = {
-    getSearchEnterOrTeam: () => {},
-    changeRequestDisplay: () => {},
-    getUserInfo: () => {},
-    requestStart: () => {},
-    requestSuccess: () => {},
-    requestError: () => {},
+    getSearchEnterOrTeam: () => { },
+    changeRequestDisplay: () => { },
+    getUserInfo: () => { },
+    requestStart: () => { },
+    requestSuccess: () => { },
+    requestError: () => { },
     searchEnterOrTeamList: [],
     userInfo: {},
     list: [],
@@ -101,11 +101,11 @@ class HeaderPage extends Component {
   }
 
   componentWillMount() {
-    this.getUserInfo();
+    // this.getUserInfo();
   }
 
   componentDidMount() {
-    const {  changeRequestDisplay } = this.props;
+    const { changeRequestDisplay } = this.props;
     // 判断是否localstorage中包含这个值
     if (localStorage.getItem('create')) {
       changeRequestDisplay();
@@ -121,7 +121,7 @@ class HeaderPage extends Component {
     }
   }
 
-  onLeftTitleClick=() => {}
+  onLeftTitleClick = () => { }
 
   // 切换到企业管理账户 ，好像废弃了
   // setCutUserFn = () => {
@@ -162,7 +162,7 @@ class HeaderPage extends Component {
         company,
       },
     } = this.props;
-    const { allowTenants } = this.state;DropdownButton
+    const { allowTenants } = this.state; DropdownButton
     return (<DropdownButton
       getPopupContainer={() => document.getElementById('home_header')}
       openMenu={this.openMenu}
@@ -170,17 +170,17 @@ class HeaderPage extends Component {
       label={company}
       type="home"
       dataItem={
-      allowTenants.map(({
-        tenantId: name,
-        tenantName: value,
-        team: type,
-      }) => ({
+        allowTenants.map(({
+          tenantId: name,
+          tenantName: value,
+          team: type,
+        }) => ({
           name,
           value,
           type,
           fun: this.changeTenant,
         }))
-    }
+      }
     />);
   }
 
@@ -199,7 +199,7 @@ class HeaderPage extends Component {
   }
 
   closeFun = () => {
-    
+
   }
 
   openMenu = () => {
@@ -208,7 +208,7 @@ class HeaderPage extends Component {
   }
 
 
-  allBtnOnclick=() => {
+  allBtnOnclick = () => {
     this.setState({
       allBtn: !this.state.allBtn,
     });

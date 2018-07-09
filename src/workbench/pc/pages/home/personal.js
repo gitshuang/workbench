@@ -10,7 +10,6 @@ import TeamExitModal from 'containers/teamExitModal';
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import rootActions from 'store/root/actions';
-import { get } from 'http';
 
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;

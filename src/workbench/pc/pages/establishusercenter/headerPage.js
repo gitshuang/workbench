@@ -14,7 +14,7 @@ import { header, imgInner, allBtn, btnDisable, logoTitle } from './style.css';
 
 
 const {
-  getUserInfo, changeRequestDisplay,
+  changeRequestDisplay,
 } = homeActions;
 
 const {
@@ -32,7 +32,6 @@ const {
   ),
   {
     changeRequestDisplay,
-    getUserInfo,
     requestStart,
     requestSuccess,
     requestError,
