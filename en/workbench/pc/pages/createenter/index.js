@@ -66,18 +66,18 @@ class Enterprise extends Component {
               <div className="um-header" style={{ background: 'white' }}>
                 <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'home'} >
                   <div>
-                    <span>NoDictionary</span>
+                    <span>Create Enterprise</span>
                   </div>
                 </Header>
               </div>
             : null
           }
           <div className={appBreadcrumb}>
-            <Breadcrumbs data={[{ name: 'NoDictionary' }]} goback={this.goBack} />
+            <Breadcrumbs data={[{ name: 'Create Enterprise' }]} goback={this.goBack} />
           </div>
         </div>
         <div className={`${pageEnterprise}`}>
-          <div className={enterTitle} >NoDictionary</div>
+          <div className={enterTitle} >Create Enterprise</div>
           <hr className={hr} />
           <div className={enterCont} >
             <CreateEnter userInfo={userInfo} />

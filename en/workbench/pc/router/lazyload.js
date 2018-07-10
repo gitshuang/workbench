@@ -26,7 +26,7 @@ export default function asyncComponent(importComponent) {
     }
     render() {
       const C = this.state.component;
-      return C ? <C {...this.props} /> : <Loading text="NoDictionary" />;
+      return C ? <C {...this.props} /> : <Loading text="Loading..." />;
     }
   }
   return AsyncComponent;

@@ -56,7 +56,7 @@ class Addressbook extends Component {
       _html += item;
     });
     const length = list.length;
-    return "NoDictionary" + _html + "等" + length + "NoDictionary";
+    return "Project:" + _html + "等" + length + "related projects";
   }
   rendHor = (userHonor) => {
     let list = [];
@@ -72,7 +72,7 @@ class Addressbook extends Component {
     arrItem.forEach((item, index) => {
       _html += item;
     });
-    return "NoDictionary" + _html;
+    return "Honor:" + _html;
   }
   render() {
     const {
@@ -97,13 +97,13 @@ class Addressbook extends Component {
             <span dangerouslySetInnerHTML={{__html: name}} />
             <span>-{orgName}</span>
           </p>
-          <p style={{ color: "#6E6E77" }}>NoDictionary : {mobile}</p>
-          <p style={{ color: "#6E6E77" }}>NoDictionary : {email}</p>
+          <p style={{ color: "#6E6E77" }}>Tel (O) : {mobile}</p>
+          <p style={{ color: "#6E6E77" }}>E-mail : {email}</p>
           {userProject ? <p style={{ color: "#373C42", marginTop: "5px" }}>{this.renderPro(userProject)}</p> : null}
           {userHonor ? <p style={{ color: "#373C42" }}>{this.rendHor(userHonor)}</p> : null}
         </div>
-        <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(data)}><Icon title="NoDictionary" type="e-mail" /></div>
-        <div className={h_contact} onClick={this.gochatDetail(data)}><Icon title="NoDictionary" type="chat" /></div>
+        <div className={`${h_contact} ${mleft50}`} onClick={this.goemailDetail(data)}><Icon title="E-mail" type="e-mail" /></div>
+        <div className={h_contact} onClick={this.gochatDetail(data)}><Icon title="Send Message" type="chat" /></div>
       </div>
     );
   }

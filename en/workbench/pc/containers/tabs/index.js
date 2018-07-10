@@ -204,7 +204,7 @@ class TabsContainer extends Component {
               )} >
               <div className={moreName}> { name } </div>
               <button
-                title={tabs.length === 1 ? "After close, will return to the yonyou cloud homepage" : ""}
+                title={tabs.length === 1 ? "Close and return to Yonyou Cloud homepage" : ""}
                 className={moreDelBtn}
                 type="button"
                 onClick={this.del(id)} >x</button>
@@ -214,8 +214,8 @@ class TabsContainer extends Component {
         <li
           onClick={this.closeAll}
           className={more}
-          title="After close, will return to the yonyou cloud homepage" >
-          <div className={moreName}>close the all pages</div>
+          title="Close and return to Yonyou Cloud homepage" >
+          <div className={moreName}>Close All Pages</div>
         </li>
       </ul>
     ) : null;
@@ -232,7 +232,7 @@ class TabsContainer extends Component {
           style= {{
             width: moreBtnWidth,
           }}
-          onClick={this.toggleMore}><Icon title="more" className={moreBtnArrow} type="upward"></Icon></button>
+          onClick={this.toggleMore}><Icon title="More" className={moreBtnArrow} type="upward"></Icon></button>
         { moreListElm }
       </div>
     ) : null;
@@ -260,7 +260,7 @@ class TabsContainer extends Component {
                   type="button"
                   onClick={this.del(id)} >
                   <Icon
-                    title={tabs.length === 1 ? "After close, will return to the yonyou cloud homepage" : ""}
+                    title={tabs.length === 1 ? "Close and return to Yonyou Cloud homepage" : ""}
                     type="error3" />
                 </button>
               </li>

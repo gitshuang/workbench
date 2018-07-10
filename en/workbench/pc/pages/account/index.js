@@ -9,9 +9,9 @@ import { bg } from './style.css';
 class Account extends Component {
   render() {
     return (
-      <ApplicationWrap name="NoDictionary">
+      <ApplicationWrap name="Account Management">
         <div className={`${bg} um-content um-vbox`}>
-          <IFrame title="NoDictionary" url={`${getHost('euc')}/diuser`} />
+          <IFrame title="Account Management" url={`${getHost('euc')}/diuser`} />
         </div>
       </ApplicationWrap>
     );

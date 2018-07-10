@@ -117,14 +117,14 @@ class Enterprise extends Component {
               <div className="um-header" style={{ background: 'white' }}>
                 <Header onLeftClick={this.goHome} iconName="home" >
                   <div>
-                    <span>NoDictionary</span>
+                    <span>Set Enterprise</span>
                   </div>
                 </Header>
               </div>
             : null
           }
           <div className={appBreadcrumb}>
-            <Breadcrumbs data={[{ name: 'NoDictionary' }]} goback={this.goBack} />
+            <Breadcrumbs data={[{ name: 'Set Enterprise' }]} goback={this.goBack} />
           </div>
         </div>
         <div className={`${pageEnterprise}`}>
@@ -134,20 +134,20 @@ class Enterprise extends Component {
               data={[
                 {
                   id: 'aa',
-                  name: 'NoDictionary',
+                  name: 'Dissolve Enterprise',
                   value: '2',
                   serverApi: 'enter/remove',
-                  msg: 'NoDictionary',
+                  msg: 'After an enterprise is dissolved, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
                 },
                 {
                   id: 'allowExit',
-                  name: 'NoDictionary',
+                  name: 'Quit from Enterprise',
                   value: '3',
                   serverApi: 'enter/leave',
-                  msg: 'NoDictionary',
+                  msg: 'After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
                 },
               ]}
-              type="NoDictionary"
+              type="Enterprise"
             />
 
           </div>

@@ -15,7 +15,6 @@ const { addBrm, popBrm } = workActions;
 @connect(
   mapStateToProps(
     'brm',
-    'brmBackVal',
     {
       namespace: 'work',
     },
@@ -52,10 +51,10 @@ class Account extends Component {
     //  [{name:'全部应用'},{name:'应用市场'},{name:'应用详情'}]
     // ]
     if (this.props.brm.length === 0) {
-      this.props.addBrm({ name: 'NoDictionary', url: '/application' });
-      this.props.addBrm({ name: 'NoDictionary', url: '/market' });
+      this.props.addBrm({ name: 'All Apps', url: '/application' });
+      this.props.addBrm({ name: 'App Market', url: '/market' });
     } else if (this.props.brm.length === 1) {
-      this.props.addBrm({ name: 'NoDictionary', url: '/market' });
+      this.props.addBrm({ name: 'App Market', url: '/market' });
     } else if (this.props.brm.length === 3) {
       this.props.popBrm({ index: 1, url: window.location.href });
     }
@@ -79,9 +78,9 @@ class Account extends Component {
         <div className={`${bg} um-content um-vbox`}>
           {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
           {
-            appId ? (<IFrame title="NoDictionary}" url={`/diwork-market/appMarket#/application/${appId}`} />) : (<IFrame title="应用市场" url="/diwork-market/appMarket" />)
+            appId ? (<IFrame title="App Market}" url={`/diwork-market/appMarket#/application/${appId}`} />) : (<IFrame title="应用市场" url="/diwork-market/appMarket" />)
           }
-          {/* <IFrame title="NoDictionary" url="/diwork-market/appMarket" /> */}
+          {/* <IFrame title="App Market" url="/diwork-market/appMarket" /> */}
         </div>
       </ApplicationWrap>
     );

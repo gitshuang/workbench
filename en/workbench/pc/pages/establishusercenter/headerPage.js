@@ -14,7 +14,7 @@ import { header, imgInner, allBtn, btnDisable, logoTitle } from './style.css';
 
 
 const {
-  getUserInfo, changeRequestDisplay,
+  changeRequestDisplay,
 } = homeActions;
 
 const {
@@ -32,7 +32,6 @@ const {
   ),
   {
     changeRequestDisplay,
-    getUserInfo,
     requestStart,
     requestSuccess,
     requestError,
@@ -118,11 +117,11 @@ class HeaderPage extends Component {
           iconName={imgIcon}
           color={color}
         >
-          <span style={titleStyle}>{titleContent || 'NoDictionary'}</span>
+          <span style={titleStyle}>{titleContent || 'Homepage'}</span>
         </Header>
 
         <div className={`${allBtn} ${BtnShow}`} onClick={this.allBtnOnclick} onKeyDown={this.allBtnOnclick} role="presentation">
-          {this.state.allBtn ? 'NoDictionary' : 'NoDictionary'}
+          {this.state.allBtn ? 'Hide' : 'Display All'}
           <Icon type={this.state.allBtn ? 'upward' : 'pull-down'} />
         </div>
       </div>

@@ -1,5 +1,5 @@
-{"key":"index.js0","value":"Handed over to the team"}
-{"key":"index.js1","value":"confirm"}
-{"key":"index.js2","value":"cancel"}
-{"key":"index.js3","value":"You will no longer have administrator rights after you hand over the team"}
-{"key":"index.js4","value":"Please search for transferred users"}
+{"key":"index.js0","value":"Hand over Team"}
+{"key":"index.js1","value":"OK"}
+{"key":"index.js2","value":"Cancel"}
+{"key":"index.js3","value":"After handing over a team, you'll no longer have the administrator permissions."}
+{"key":"index.js4","value":"Please search for the user to hand over to."}

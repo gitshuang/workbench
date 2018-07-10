@@ -65,7 +65,7 @@ class CreateTeam extends Component {
             <div className="um-header" style={{ background: 'white' }}>
               <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'home'} >
                 <div>
-                  <span>NoDictionary</span>
+                  <span>Create Team</span>
                 </div>
               </Header>
             </div>
@@ -73,7 +73,7 @@ class CreateTeam extends Component {
         }
         <div className="um-content">
           <div className={appBreadcrumb}>
-            <Breadcrumbs data={[{ name: 'NoDictionary' }]} goback={this.goBack} />
+            <Breadcrumbs data={[{ name: 'Create Team' }]} goback={this.goBack} />
           </div>
           <CreateTeamContent />
         </div>

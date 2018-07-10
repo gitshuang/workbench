@@ -30,13 +30,13 @@ class UploadPage extends Component {
   imgChange = (e) => {
     if(e.target.value.trim().length===0){
       this.setState({
-        imgWarning: "upload image"
+        imgWarning: "Please upload picture."
       });
     }
     let val = e.target.value && e.target.value.substr(e.target.value.lastIndexOf("."));
     if(val && !val.match( /.jpg|.gif|.png|.bmp|.svg/i ) ){
       this.setState({
-        imgWarning: "It has to be a picture "
+        imgWarning: "It must be a picture."
       });
       return false;
     }else {

@@ -25,6 +25,7 @@ const {
   getServiceList,
   getMessage,
   getPoll,
+  getPortal
 } = rootActions;
 const { getUserInfo } = homeActions;
 
@@ -51,6 +52,7 @@ function timer(fn, time) {
   getMessage,
   getUserInfo,
   getPoll,
+  getPortal
 })
 class Root extends Component {
   static propTypes = {
@@ -65,6 +67,7 @@ class Root extends Component {
     getMessage: PropTypes.func,
     getUserInfo: PropTypes.func,
     getPoll: PropTypes.func,
+    getPortal: PropTypes.func,
   };
   static defaultProps = {
     history: {},
@@ -75,6 +78,7 @@ class Root extends Component {
     getMessage: () => {},
     getUserInfo: () => {},
     getPoll: () => {},
+    getPortal: () => {},
   };
   constructor(props) {
     super(props);
@@ -91,6 +95,7 @@ class Root extends Component {
       getServiceList,
       getUserInfo,
       getPoll,
+      getPortal
     } = this.props;
     const { history } = this.props;
     requestStart();
@@ -127,6 +132,14 @@ class Root extends Component {
         this.setState({
           loaded: true,
         });
+      }
+    });
+
+    getPortal().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      } else {
+        requestSuccess();
       }
     });
   }

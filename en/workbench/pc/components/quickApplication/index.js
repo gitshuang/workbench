@@ -48,7 +48,7 @@ class QuickApplication extends Component {
           onKeyDown={this.handerClick}
           role="presentation"
         >
-          <Icon title="quick applications" type="application" />
+          <Icon title="App Shortcuts" type="application" />
         </div>
         <TransitionGroup>
           <CSSTransitionGroup

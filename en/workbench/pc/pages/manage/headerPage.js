@@ -23,7 +23,7 @@ class HeaderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{ name: 'NoDictionary' }],
+      brm: [{ name: 'Edit Homepage' }],
     };
   }
 
@@ -59,7 +59,7 @@ class HeaderPage extends Component {
           leftContent={this.getLeftContent()}
           iconName={iconName}
         >
-          <span>NoDictionary</span>
+          <span>Edit Homepage</span>
         </Header>
         <div style={{ paddingLeft: '23px', fontSize: '12px' }}>
           <BreadcrumbContainer data={this.state.brm} goback={this.goback} />

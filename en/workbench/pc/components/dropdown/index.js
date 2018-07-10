@@ -92,10 +92,10 @@ class DropdownButton extends Component {
     const item = [];
     if (dataItem.length !== 0) {
       dataItem.forEach((da) => {
-        item.push(<div key={da.name} className={itemLi} onClick={() => { this.handleSelect(da); }} onKeyDown={() => { this.handleSelect(da); }} role="presentation"><div className={liTitle} title={da.value}>{da.value}</div><div className={liRight}>{da.type === 1 ? 'NoDictionary' : 'NoDictionary'}</div></div>);
+        item.push(<div key={da.name} className={itemLi} onClick={() => { this.handleSelect(da); }} onKeyDown={() => { this.handleSelect(da); }} role="presentation"><div className={liTitle} title={da.value}>{da.value}</div><div className={liRight}>{da.type === 1 ? 'Team' : 'Enterprise'}</div></div>);
       });
     } else {
-      item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >NoDictionary</div></div>);
+      item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >Loading data...</div></div>);
     }
     let marginLeft2 = -148;
     if (type && type === 'home') {
@@ -117,7 +117,7 @@ class DropdownButton extends Component {
                     onKeyDown={this.enterOnclick}
                     role="presentation"
                   >
-                    NoDictionary \ NoDictionary
+                    Create Team \ Enterprise
                   </div>
                   <div
                     className={createEnt}
@@ -125,7 +125,7 @@ class DropdownButton extends Component {
                     onKeyDown={this.manageOnclick}
                     role="presentation"
                   >
-                    NoDictionary \ NoDictionary
+                    Manage Team \ Enterprise
                   </div>
                 </div>
               )

@@ -61,7 +61,7 @@ class Userinfo extends Component {
     // 退出登录
     logout: () => {},
     // 是团队还是企业的判断条件
-    titleType: 'NoDictionary',
+    titleType: 'Team',
     // 个人中心数据源
     userInfo: {},
     // 左下角外链的集合
@@ -78,7 +78,7 @@ class Userinfo extends Component {
       languageList: [
         {
           value: 'zh',
-          context: 'NoDictionary'
+          context: 'Simplified Chinese'
         },
         {
           value: 'en',
@@ -86,7 +86,7 @@ class Userinfo extends Component {
         },
         {
           value: 'eh',
-          context: 'NoDictionary'
+          context: 'Traditional Chinese'
         },
       ]
     },
@@ -174,7 +174,7 @@ class Userinfo extends Component {
         <div>
           <div className={logOut} onClick={logout}>
             <Icon type="exit" />
-            <span>NoDictionary</span>
+            <span>Log Off</span>
           </div>
           {
             language && language.show ? <Language 
@@ -216,16 +216,16 @@ class Userinfo extends Component {
                 editType ?
                   <li>
                     <Button shape="border" onClick={() => { dispatch('openManage'); }}>
-                      <Icon type="record" />NoDictionary
+                      <Icon type="record" />Edit Homepage
                     </Button>
                   </li>
                 : null
               }
               {
-                titleType == 'NoDictionary' ?
+                titleType == 'Enterprise' ?
                   <li>
                     <Button shape="border" onClick={() => { dispatch('openUserinfo'); }}>
-                      <Icon type="role-management" />NoDictionary
+                      <Icon type="role-management" />Employee Info
                     </Button>
                   </li>
                 : null
@@ -234,7 +234,7 @@ class Userinfo extends Component {
                 _invitePermission ?
                   <li>
                     <Button shape="border" size="sm" onClick={() => { dispatch('openInvitation'); }}>
-                      <Icon type="add-friends" />NoDictionary
+                      <Icon type="add-friends" />Invite Member
                     </Button>
                   </li>
                 : null
@@ -243,7 +243,7 @@ class Userinfo extends Component {
                 admin || _allowExit === '0' ? null :
                 <li>
                   <Button shape="border" onClick={this.props.openExitModal} >
-                    <Icon type="staff" />{`NoDictionary${titleType}`}
+                    <Icon type="staff" />{`Quit${titleType}`}
                   </Button>
                 </li>
               }
@@ -253,18 +253,18 @@ class Userinfo extends Component {
                 <div className={popconfirm} style={{ position: 'absolute' }}>
                   <i className="arrow" />
                   <div className={popconfirm_content}>
-                    <p>{titleType}NoDictionary</p>
-                    <p>NoDictionary</p>
+                    <p>{titleType}Created successfully.</p>
+                    <p>Invite members to work together.</p>
                   </div>
-                  <div onClick={this.props.closeRequestDisplay}>NoDictionary</div>
+                  <div onClick={this.props.closeRequestDisplay}>OK</div>
                 </div>
               : null
             }
           </div>
 
-          <div className={enter_setting} title={`${titleType}NoDictionary`}>
+          <div className={enter_setting} title={`${titleType}Settings`}>
             {
-              admin ? (<Icon type="setting" title={`${titleType}NoDictionary`} onClick={() => { this.gotoConfig(); }} />) : null
+              admin ? (<Icon type="setting" title={`${titleType}Settings`} onClick={() => { this.gotoConfig(); }} />) : null
             }
           </div>
 

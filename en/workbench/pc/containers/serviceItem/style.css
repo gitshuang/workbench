@@ -12,7 +12,7 @@
     background:rgba(244,245,247,0.5);
     border-radius: 3px ;
 
-    font-family: "NoDictionary} Regular", 微软雅黑;
+    font-family: "$i18n{Microsoft YaHei} Regular", 微软雅黑;
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
@@ -76,7 +76,7 @@
 }
 
 .item_footer span{
-  font-family: "NoDictionary} Regular", 微软雅黑;
+  font-family: "$i18n{Microsoft YaHei} Regular", 微软雅黑;
   font-weight: 400;
   font-style: normal;
   font-size: 12px;

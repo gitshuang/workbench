@@ -16,140 +16,152 @@ import {
 
 const {
   setExpandedSidebar,
- // removeBrm,
   popBrm,
 } = actions;
 
 @withRouter
 @connect(
-    mapStateToProps(
-        'brm',
-        {
-            namespace: 'work',
-        },
-    ),
+  mapStateToProps(
+    'brm',
+    'backUrl',
     {
-        setExpandedSidebar,
-       // removeBrm,
-       popBrm
-    }
+      namespace: 'work',
+    },
+  ),
+  {
+    setExpandedSidebar,
+    popBrm
+  }
 )
 class BreadcrumbContainer extends Component {
 
-    static propTypes = {
-        withSidebar: PropTypes.bool,
-    }
+  static propTypes = {
+    withSidebar: PropTypes.bool,
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            breadcrumbMenu:"",
-            breadcrumbTab:""
-        }
-        this.setExpended = this.setExpended.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
-        this.back = false;
-        this.backVal = 0;
-        this.backClickUrl = '';//线上点击返回需要go(-2),其他需要go(-1)
+  constructor(props) {
+    super(props);
+    this.state = {
+      breadcrumbMenu: "",
+      breadcrumbTab: ""
     }
-    componentWillReceiveProps(nextProps) {
-      const { withSidebar } = this.props;
-      if (!withSidebar) {
-        this.setExpended();
-      }
-      console.log(nextProps.brm)
-    }
-    componentDidUpdate = () =>{
-      if(this.back){
-        this.back = false;
-        //this.props.history.go(-this.backVal);
-        console.log('gozhiqian'+this.props.history.length)
-        if(this.backClickUrl === 'defaultUrl' ){ //点击的是返回
-          this.props.history.go(-this.backVal-1);
-        }else{
-          this.props.history.go(-this.backVal);
+    this.setExpended = this.setExpended.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.back = false;
+    this.backVal = 0;
+    this.backClickUrl = '';//线上点击返回需要go(-2),其他需要go(-1)
+  }
 
-        }
-        console.log('gozhihou'+this.props.history.length)
-      }
+  componentWillReceiveProps(nextProps) {
+    const { withSidebar } = this.props;
+    if (!withSidebar) {
+      this.setExpended();
     }
-   
-    setExpended() {
-        this.setExpandedSidebar(true);
-        this.setState({
-          breadcrumbMenu:breadcrumb_menu,
-          breadcrumbTab:breadcrumb_tab
-        })
-    }
-    setExpandedSidebar(state) {
-      const {setExpandedSidebar} = this.props;
-      setExpandedSidebar(state);
-      const evt = new CustomEvent('resize');
-      window.dispatchEvent(evt);
-    }
-    closeMenu(){
-        this.setExpandedSidebar(false);
-        this.setState({
-          breadcrumbMenu:"",
-          breadcrumbTab:""
-        })
-    }
-    goback = (index,backVal,url) => {
-      const { brm,popBrm } = this.props;
-      const customBrmUrl = index>=0 && brm && brm.length>0 && brm[brm.length-1][index].url;
-      popBrm({index:index,url:window.location.href});
-      this.back = true;
-      this.backVal = backVal; 
-      this.backClickUrl = url;
-      //  this.props.history.go(-backVal)
-      // window.history.go(-backVal);
-      // const customBrm = brm.filter(({url})=>{
-      //   return url;
-      // })
-      // if (index < 0) {
-      //   window.history.back();
-      //   if (customBrm) {
-      //     removeBrm(1);
-      //   }
-      // } else {
-      //   const length = brm.length - index - 1;
-      //   removeBrm(length);
-      //   window.history.go(-length);
-      // }
-    }
-    render() {
-      const { withSidebar ,brm} = this.props;
+  }
 
-      return (
-        <div className={`${breadcrumbClass} menu_work`}>
-          {
-            withSidebar ? (
-              <section
-                className={this.state.breadcrumbMenu} >
-                $i18n{index.js0}$i18n-end
+  setExpended() {
+    this.setExpandedSidebar(true);
+    this.setState({
+      breadcrumbMenu: breadcrumb_menu,
+      breadcrumbTab: breadcrumb_tab
+    })
+  }
+
+  setExpandedSidebar(state) {
+    const { setExpandedSidebar } = this.props;
+    setExpandedSidebar(state);
+    const evt = new CustomEvent('resize');
+    window.dispatchEvent(evt);
+  }
+
+  closeMenu() {
+    this.setExpandedSidebar(false);
+    this.setState({
+      breadcrumbMenu: "",
+      breadcrumbTab: ""
+    })
+  }
+
+  goback = (index) => {
+    const { backUrl, popBrm, history, match, brm } = this.props;
+    const {
+      params: {
+        code,
+        type,
+      },
+    } = match;
+    // 取brm 最后的值
+    const data = brm[brm.length - 1];
+
+    // TODO 现在只是做的 如果是面包屑点击 按照返回规则， 点击返回按钮只切换服务
+    if (index > -1) {
+      const key = index + 1 - data.length
+      history.go(key);
+      popBrm({ index: key });
+      return false;
+    }
+    // 下边 方法为 如果实现返回一级一级的   先注释  担心哪天被还原
+    // let flag = false;
+    // for (var i = data.length - 1; i >= 0; i--) {
+    //   if (data[i].addBrm) {
+    //     flag = true;
+    //     break;
+    //   }
+    // }
+    // if (flag) {
+    //   if (index > -1) {
+    //     const key = index + 1 - data.length
+    //     history.go(key);
+    //     popBrm({ index: key });
+    //   } else {
+    //     history.goBack();
+    //     popBrm({ index: -1 });
+    //   }
+    //   return false;
+    // } 
+    backUrl.pop();
+    if (backUrl.length) {
+      const currUrl = backUrl[backUrl.length - 1];
+      history.replace(`/${type}/${code}/${currUrl}`);
+    } else {
+      history.replace('');
+    }
+  }
+
+
+  render() {
+    const { withSidebar, brm } = this.props;
+
+    return (
+      <div className={`${breadcrumbClass} menu_work`}>
+        {
+          withSidebar ? (
+            <section
+              className={this.state.breadcrumbMenu} >
+              $i18n{index.js0}$i18n-end
                 <Icon
-                  title="$i18n{index.js1}$i18n-end"
-                  type="error3"
-                  className={closeMenu}
-                  onClick={this.closeMenu} />
-              </section>
-            ) : null
-          }
-          {
-            withSidebar ? (
-              <Icon
-                title="$i18n{index.js2}$i18n-end"
-                type="tabulation"
-                className={this.state.breadcrumbTab}
-                onClick={this.setExpended} />
-            ) : null
-          }
-          <div className={breadcrumbArea}>
-            <Breadcrumbs data={brm && brm.length ? brm[brm.length-1] : [{ name: '' }] } goback={this.goback}/>
-          </div>
+                title="$i18n{index.js1}$i18n-end"
+                type="error3"
+                className={closeMenu}
+                onClick={this.closeMenu} />
+            </section>
+          ) : null
+        }
+        {
+          withSidebar ? (
+            <Icon
+              title="$i18n{index.js2}$i18n-end"
+              type="tabulation"
+              className={this.state.breadcrumbTab}
+              onClick={this.setExpended} />
+          ) : null
+        }
+        <div className={breadcrumbArea}>
+          <Breadcrumbs data={brm && brm.length ? brm[brm.length - 1] : [{ name: '' }]} goback={this.goback} />
         </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 export default BreadcrumbContainer;

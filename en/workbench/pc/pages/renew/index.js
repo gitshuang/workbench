@@ -54,8 +54,8 @@ class Account extends Component {
     const { id } = params;
     return (
       <ApplicationWrap
-        name={brmVal.length <= 1 ? 'NoDictionary' : brmVal[brmVal.length - 1].name}
-        brms={brmVal.length === 0 ? [{ name: 'NoDictionary' }] : brmVal.slice(0, brmVal.length - 1)}
+        name={brmVal.length <= 1 ? 'App Details' : brmVal[brmVal.length - 1].name}
+        brms={brmVal.length === 0 ? [{ name: 'All Apps' }] : brmVal.slice(0, brmVal.length - 1)}
         goBack={this.goBack}
       >
         <div className={`${bg} um-content um-vbox`}>

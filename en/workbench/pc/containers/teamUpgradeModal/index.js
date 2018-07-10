@@ -54,32 +54,32 @@ class TeamUpgradeModal extends Component {
           className="team_upgrade_modal_dailog"
           show={ true }
           type="success"
-          title="You can get more rights when you upgrade to an enterprise"
+          title="After upgrading to an enterprise, you will get more permissions."
           backup={false}
           close={this.cancelFn} 
           btns={[
             {
-              label: 'update now',
+              label: 'Upgrade Now',
               fun: this.configFn,
             },
             {
-              label: 'cancel',
+              label: 'Cancel',
               fun: this.cancelFn,
             }
           ]} 
           >
           <div className={content} >
-            <p>· Enterprise-level organizational architecture management</p>
+            <p>· Enterprise level organization structure management</p>
 
-            <p>· Stricter management of corporate members</p>
+            <p>· Stricter enterprise member management</p>
 
-            <p>· Application permission management based on administrative roles</p>
+            <p>· Management role-based App permission management</p>
 
-            <p>· Enterprise level unified basic file and data control</p>
+            <p>· Enterprise-level uniform basic file and data control</p>
 
-            <p>· Basic attendance and salary enquiry service</p>
+            <p>· Basic Attendance and Salary Query Service</p>
 
-            <p>· Enterprise - level application market provides a comprehensive digital service portal</p>
+            <p>· Enterprise-level App market provides all-round digital service entrance</p>
           </div>
         </PopDialog>
     )

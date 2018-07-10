@@ -15,7 +15,6 @@ const { addBrm, popBrm } = workActions;
 @connect(
   mapStateToProps(
     'brm',
-    'brmBackVal',
     {
       namespace: 'work',
     },

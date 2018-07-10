@@ -80,19 +80,19 @@ class Updateenter extends Component {
           <div className="um-header" style={{ background: 'white' }}>
             <Header onLeftClick={this.goBack} iconName="home" >
               <div>
-                <span>NoDictionary</span>
+                <span>Enterprise Authentication</span>
               </div>
             </Header>
           </div>
           <div className={appBreadcrumb}>
-            <Breadcrumbs data={[{ name: 'NoDictionary' }]} goback={this.goBack} />
+            <Breadcrumbs data={[{ name: 'Enterprise Authentication' }]} goback={this.goBack} />
           </div>
         </div>
         <div className={`${pageEnterprise}`}>
-          <div className={enterTitle} >NoDictionary</div>
+          <div className={enterTitle} >Enterprise Authentication</div>
           <hr className={hr} />
           <div className={enterCont} >
-            <EnterSetting updateenter="upgrade_enter" data={enterData} btlLabel="NoDictionary" />
+            <EnterSetting updateenter="upgrade_enter" data={enterData} btlLabel="Upgrade" />
           </div>
         </div>
       </div>

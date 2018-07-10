@@ -76,12 +76,12 @@ function getData(url, callback) {
           if (text) {
             getResultFetch(this, text, callback);
           } else {
-            return Promise.reject(new Error('接口未返回数据'));
+            return Promise.reject(new Error('No data returned from the interface.'));
           }
           return false;
         });
       }
-      return Promise.reject(new Error('请求失败'));
+      return Promise.reject(new Error('Request failed.'));
     });
   }
 }

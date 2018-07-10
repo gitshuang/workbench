@@ -55,10 +55,10 @@ export default class Page404 extends Component {
       <div className={`${wrap} um-win`}>
         <div className={`um-content ${page404Area}`}>
           <section>
-            <div className={remindWord}>NoDictionary</div>
+            <div className={remindWord}>[object Object]</div>
           </section>
           <section>
-            <Button shape="border" ><a href="/">NoDictionary</a></Button>
+            <Button shape="border" ><a href="/">Homepage</a></Button>
           </section>
         </div>
         <Pin outsideClickIgnoreClass="icon-dingzhi" />
