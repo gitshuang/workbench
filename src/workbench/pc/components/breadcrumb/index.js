@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import Breadcrumb from 'bee/breadcrumb';
 import { breadcrumbClass, breadcrumbBack, itmeHover } from './style.css';
 
-/**
- * data:{name:"",url:""}
- */
 class Breadcrumbs extends Component {
   static propTypes = {
     goback: PropTypes.func,
@@ -26,18 +23,10 @@ class Breadcrumbs extends Component {
   }
 
   // 需要新增一个回退函数
-  enhancedGoBack = (url, i) => {
-    const { goback, data } = this.props;
-    if (!url) {
-      return;
-    }
-    const backVal = data.length - 1 - i;
+  enhancedGoBack = (i) => {
+    const { goback } = this.props;
     if (goback) {
-      if (i === -1) {
-        goback(i, 1, url);
-      } else {
-        goback(i, backVal, url);
-      }
+      goback(i);
     } else {
       this.goBack();
     }
@@ -49,8 +38,8 @@ class Breadcrumbs extends Component {
     return (
       <div className={breadcrumbClass} >
         <a
-          onClick={() => this.enhancedGoBack('defaultUrl', -1)}
-          onKeyDown={() => this.enhancedGoBack('defaultUrl', -1)}
+          onClick={() => this.enhancedGoBack(-1)}
+          onKeyDown={() => this.enhancedGoBack(-1)}
           role="presentation"
         >返回
         </a>
@@ -66,7 +55,7 @@ class Breadcrumbs extends Component {
               if (i !== data.length - 1 && url) {
                 itemProps = {
                   ...itemProps,
-                  onClick: () => self.enhancedGoBack(url, i),
+                  onClick: () => self.enhancedGoBack(i),
                   className: itmeHover,
                 };
               }

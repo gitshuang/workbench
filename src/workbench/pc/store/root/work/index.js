@@ -66,6 +66,7 @@ const reducer = handleActions({
     /* 20180514修改一个浏览器的返回 再addBrm的问题 数组最后的name重复 */
     let topBrm;
     let newBrm;
+    data.addBrm = true;
     if (nowBrmLast.length > 0 && data.name === nowBrmLast[nowBrmLast.length - 1].name) {
       state.brm[state.brm.length - 1][nowBrmLast.length - 1] = data;
       newBrm = [...state.brm];

@@ -7,11 +7,9 @@ import { mapStateToProps } from '@u';
 /*   actions   */
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
-import teamconfigActions from 'store/root/teamconfig/actions';
 
 import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
-
 import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
 import Personals from './personal';
@@ -19,21 +17,16 @@ import { header, allBtn, btnDisable } from './style.css';
 
 
 const {
-  getUserInfo,
   changeRequestDisplay,
   getSearchEnterOrTeam,
-  getWorkList,
-  setCutUser,
 } = homeActions;
 
 const {
   requestStart,
   requestSuccess,
   requestError,
-  setCurrent,
 } = rootActions;
 
-const { openExitModal } = teamconfigActions;
 
 @withRouter
 @connect(
@@ -47,21 +40,15 @@ const { openExitModal } = teamconfigActions;
   {
     getSearchEnterOrTeam,
     changeRequestDisplay,
-    getUserInfo,
     requestStart,
     requestSuccess,
     requestError,
-    getWorkList,
-    setCutUser,
-    openExitModal,
-    setCurrent,
   },
 )
 class HeaderPage extends Component {
   static propTypes = {
     getSearchEnterOrTeam: PropTypes.func,
     changeRequestDisplay: PropTypes.func,
-    getUserInfo: PropTypes.func,
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
@@ -82,7 +69,6 @@ class HeaderPage extends Component {
   static defaultProps = {
     getSearchEnterOrTeam: () => { },
     changeRequestDisplay: () => { },
-    getUserInfo: () => { },
     requestStart: () => { },
     requestSuccess: () => { },
     requestError: () => { },
@@ -100,9 +86,7 @@ class HeaderPage extends Component {
     };
   }
 
-  componentWillMount() {
-    // this.getUserInfo();
-  }
+  componentWillMount() { }
 
   componentDidMount() {
     const { changeRequestDisplay } = this.props;
@@ -122,39 +106,6 @@ class HeaderPage extends Component {
   }
 
   onLeftTitleClick = () => { }
-
-  // 切换到企业管理账户 ，好像废弃了
-  // setCutUserFn = () => {
-  //   const { setCutUser, getWorkList } = this.props;
-  //   setCutUser().then(({ error, payload }) => {
-  //     if (error) {
-  //       requestError(payload);
-  //     } else {
-  //       getWorkList().then(({ error, payload }) => {
-  //         if (error) {
-  //           requestError(payload);
-  //         }
-  //       });
-  //     }
-  //     requestSuccess();
-  //   });
-  // }
-
-  getUserInfo() {
-    const {
-      userInfo: { name }, getUserInfo, requestStart, requestSuccess, requestError,
-    } = this.props;
-    if (!name) {
-      requestStart();
-      getUserInfo().then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-        } else {
-          requestSuccess();
-        }
-      });
-    }
-  }
 
   getLeftContent() {
     const {
@@ -192,22 +143,18 @@ class HeaderPage extends Component {
         hash,
       },
     } = window;
-    const originUrl = origin || '';
-    const pathnameUrl = pathname || '';
     const locationUrl = `${origin}${pathname}?tenantId=${tenantId}&switch=true${hash}`;
     window.location.replace(locationUrl);
   }
 
-  closeFun = () => {
-
-  }
+  closeFun = () => { }
 
   openMenu = () => {
     const { getSearchEnterOrTeam } = this.props;
     getSearchEnterOrTeam();
   }
 
-
+  // 点击下拉
   allBtnOnclick = () => {
     this.setState({
       allBtn: !this.state.allBtn,

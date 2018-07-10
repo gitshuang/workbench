@@ -4,11 +4,12 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 
+import homeActions from 'store/root/home/actions';
+import rootActions from 'store/root/actions';
+
 import { ElementsWrapper } from 'components/scrollNav';
 import HomeFolderDialog from 'containers/homeFolderDialog';
 import WidgeList from 'containers/homeWidgetList';
-import homeActions from 'store/root/home/actions';
-import rootActions from 'store/root/actions';
 import HeaderPage from './headerPage';
 import HomeMark from './mark';
 import { pageHome } from './style.css';
