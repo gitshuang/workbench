@@ -91,7 +91,7 @@ class EnterOption extends Component {
         {
           compType == "userCenter" ?
           <Button shape="border" onClick={() => { this.onSelectDrop(data[0]) }} >
-            <Icon type="staff" />{"quit" + type}
+            <Icon type="staff" />{"Quit" + type}
           </Button>
           : 
           <Dropdown
@@ -100,7 +100,7 @@ class EnterOption extends Component {
             animation="slide-up"
             onVisibleChange={this.onVisibleChange}
           >
-            <Button className="um-box-vc um-box-center">operation<Icon type="pull-down" /></Button>
+            <Button className="um-box-vc um-box-center">Related Operations<Icon type="pull-down" /></Button>
           </Dropdown>
         }
 

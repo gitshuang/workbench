@@ -87,7 +87,7 @@ const reducer = handleActions({
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc({ text: 'NoDictionary' });
+    createLoadingFunc({ text: 'Loading...' });
     return state;
   },
   [requestSuccess](state) {
@@ -99,7 +99,7 @@ const reducer = handleActions({
     // Loading.destroy();
     destoryLoadingFunc();
     openMess({
-      title: 'NoDictionary',
+      title: 'Error',
       content: msg,
       type: 'error',
       duration: 4.5,

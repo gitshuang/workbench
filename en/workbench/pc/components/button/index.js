@@ -70,20 +70,20 @@ export {
 };
 
 /**
-parameter
+Parameter
 
-type: PropTypes.string, parameter
-label: PropTypes.string, show message
-onClick:PropTypes.fun,   button callback
-data:PropTypes.object   callback data,formalObjectcallback, formal
+type: PropTypes.string, Under development. Not available now
+label: PropTypes.string, Display Text
+onClick:PropTypes.fun,   noDictionnaryFlag
+data:PropTypes.object   noDictionnaryFlagObjectFormat
 
 <div style={{width:"500px",height:"600px",padding:"10px"}}>
-<ButtonBrand />  color
-<ButtonDefault />  button
-<ButtonDefaultLine /> border button
-<ButtonDefaultAlpha /> normal button
-<ButtonWarning />   warning
-<ButtonDanger />  danger
+<ButtonBrand />  Brand Color
+<ButtonDefault />  Common Button
+<ButtonDefaultLine /> Common Button (with border)
+<ButtonDefaultAlpha /> Common Button (no background)
+<ButtonWarning />   Warning
+<ButtonDanger />  Dangerous
 
 </div>
 **/

@@ -24,8 +24,8 @@ class SubmitBtn extends Component {
       <div className="u-form-submit">
         {
           this.props.disabled ?
-            <ButtonBrand onClick={this.click} >{btlLabel || 'NoDictionary'}</ButtonBrand>
-            : <ButtonBrand disabled>{btlLabel || 'NoDictionary'}</ButtonBrand>
+            <ButtonBrand onClick={this.click} >{btlLabel || 'Save'}</ButtonBrand>
+            : <ButtonBrand disabled>{btlLabel || 'Save'}</ButtonBrand>
         }
       </div>
     );

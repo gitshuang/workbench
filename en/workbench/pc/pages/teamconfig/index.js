@@ -36,11 +36,11 @@ class Teamconfig extends Component {
         <div className="um-header" style={{ background: 'white' }}>
           <Header onLeftClick={this.goHome} iconName="home" >
             <div>
-              <span>NoDictionary</span>
+              <span>Team Settings</span>
             </div>
           </Header>
           <div style={{ paddingLeft: '23px', fontSize: '12px' }}>
-            <BreadcrumbContainer data={[{ name: 'NoDictionary' }]} goback={this.goBack} />
+            <BreadcrumbContainer data={[{ name: 'Team Settings' }]} goback={this.goBack} />
           </div>
         </div>
         <div className="um-content">

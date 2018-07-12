@@ -9,9 +9,9 @@ import { bg } from './style.css';
 class Dynamic extends Component {
   render() {
     return (
-      <ApplicationWrap name="NoDictionary">
+      <ApplicationWrap name="Moments">
         <div className={`${bg} um-content um-vbox`}>
-          <IFrame title="NoDictionary" url={`${getHost('dynamic')}`} />
+          <IFrame title="Moments" url={`${getHost('dynamic')}`} />
         </div>
       </ApplicationWrap>
     );

@@ -22,11 +22,11 @@ const handlers = {
           openGlobalDialog({
             type: "warning",
             className: enterOrTeam,
-            title: 'NoDictionary/NoDictionary',
-            content: 'NoDictionary/NoDictionary',
+            title: 'Switch Team/Enterprise',
+            content: 'You need to switch to the corresponding team/enterprise to view details. Switch?',
             btns: [
               {
-                label: 'NoDictionary',
+                label: 'Switch',
                 fun: () => {
                   const {
                     location: {
@@ -46,7 +46,7 @@ const handlers = {
                 },
               },
               {
-                label: 'NoDictionary',
+                label: 'Do not switch',
               },
             ],
           });

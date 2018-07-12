@@ -5,7 +5,7 @@ import ServiceClassify from 'containers/serviceClassify';
 class Application extends Component {
   render() {
     return (
-      <ApplicationWrap name="NoDictionary">
+      <ApplicationWrap name="All Apps">
         <ServiceClassify />
       </ApplicationWrap>
     );

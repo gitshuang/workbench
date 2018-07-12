@@ -22,21 +22,21 @@ class ErrorDialog extends Component {
     return (
       <PopDialog
         className="invitation_pop"
-        title="NoDictionary"
+        title="Invite Member"
         show={show}
         type="success"
         backup
         close={close}
         btns={[
           {
-            label: 'NoDictionary',
+            label: 'OK',
             fun: close,
           },
         ]}
       >
         <div className={successContent} >
-          <p>NoDictionary</p>
-          <p>NoDictionary</p>
+          <p>Invitation sent</p>
+          <p>Notify your friends to check their mailboxes</p>
         </div>
       </PopDialog>
     );

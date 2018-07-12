@@ -22,8 +22,8 @@ class SubmitBtn extends Component {
         {
           this.props.disabled
           ?
-            <ButtonBrand onClick={this.click} >NoDictionary</ButtonBrand>
-          : <ButtonBrand disabled>NoDictionary</ButtonBrand>
+            <ButtonBrand onClick={this.click} >Create</ButtonBrand>
+          : <ButtonBrand disabled>Create</ButtonBrand>
         }
       </div>
     );

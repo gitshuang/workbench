@@ -34,7 +34,7 @@ class MoveToGroup extends Component {
     super(props);
     this.state = {
       // 新分组名
-      newGroupName: 'group',
+      newGroupName: '[object Object]',
       // 是否是打开新的分组
       inAddGroup: false,
       // 路径
@@ -70,7 +70,7 @@ class MoveToGroup extends Component {
   addGroup = () => {
     const { data } = this.props;
     const nameArr = data.map(({ widgetName }) => widgetName);
-    const newGroupName = avoidSameName(nameArr, 'group');
+    const newGroupName = avoidSameName(nameArr, '[object Object]');
     this.setState({
       inAddGroup: true,
       newGroupName,
@@ -181,7 +181,7 @@ class MoveToGroup extends Component {
     const content = (
       <div className={container}>
         <div className={title}>
-          {caller}to:{way}
+          {caller}To:{way}
         </div>
         <div className={borderBox}>
           <Menu
@@ -214,7 +214,7 @@ class MoveToGroup extends Component {
           {
             onAddGroup ? (
               <div>
-                <Button style={{ float: 'left' }} onClick={this.addGroup} disabled={inAddGroup}>add group</Button>
+                <Button style={{ float: 'left' }} onClick={this.addGroup} disabled={inAddGroup}>Add Group</Button>
               </div>
             ) : null
           }
@@ -226,7 +226,7 @@ class MoveToGroup extends Component {
                   disabled={!way && !inAddGroup}
                   className={saveBtn}
                   onClick={this.save}
-                >confirm
+                >OK
                 </Button>
               ) : null
             }
@@ -234,7 +234,7 @@ class MoveToGroup extends Component {
               onCancel ? (
                 <Button
                   onClick={this.cancel}
-                >cancel
+                >Cancel
                 </Button>
               ) : null
             }

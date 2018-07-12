@@ -151,13 +151,13 @@ class searchOther extends Component {
     const dMinutes = parseInt(d / 60, 10);
     const dSeconds = parseInt(d, 10);
     if (dDays > 0 && dDays < 4) {
-      ts = `${dDays}NoDictionary`;
+      ts = `${dDays}days ago`;
     } else if (dDays <= 0 && dHours > 0) {
-      ts = `${dHours}NoDictionary`;
+      ts = `${dHours}hours ago`;
     } else if (dDays <= 0 && dHours <= 0 && dMinutes > 0) {
-      ts = `${dMinutes}NoDictionary`;
+      ts = `${dMinutes}minutes ago`;
     } else if (dSeconds < 60) {
-      ts = 'NoDictionary';
+      ts = 'Just now';
     } else if (dDays > 3) {
       ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ');
     }

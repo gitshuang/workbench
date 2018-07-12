@@ -25,14 +25,14 @@ function getFetchIe9(url, options = {}) {
         return reject();
       };
       XDR.onprogress = () => { };
-      XDR.ontimeout = () => Promise.reject(new Error('NoDictionary'));
-      XDR.onerror = () => Promise.reject(new Error('NoDictionary'));
+      XDR.ontimeout = () => Promise.reject(new Error('Request failed.'));
+      XDR.onerror = () => Promise.reject(new Error('Request failed.'));
       setTimeout(() => {
         XDR.send();
       }, 0);
     });
   }
-  return Promise.reject(new Error('NoDictionary'));
+  return Promise.reject(new Error('Request failed.'));
 }
 
 function getFetch(url) {
@@ -53,10 +53,10 @@ function getFetch(url) {
         if (text) {
           return Promise.resolve(text);
         }
-        return Promise.reject(new Error('NoDictionary'));
+        return Promise.reject(new Error('No data returned from the interface.'));
       });
     }
-    return Promise.reject(new Error('NoDictionary'));
+    return Promise.reject(new Error('Request failed.'));
   });
 }
 

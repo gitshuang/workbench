@@ -132,14 +132,14 @@ class Pin extends Component {
           <div>
             <Icon type="yy-clud"></Icon>
           </div>
-          <p>Work page name</p>
+          <p>Worksheet Name</p>
         </div>
         <MoveToGroup
           data={this.state.menuData}
           onSave={this.confirmFn}
           onCancel={this.cancelFn}
           onAddGroup={this.addNewGroup}
-          caller={"add"}
+          caller={"Add"}
         />
       </div>
     ) : null;

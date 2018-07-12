@@ -41,7 +41,7 @@ class titleServiceContainer extends Component {
       titleServiceHidden,
       titleServiceType
     } = this.props;
-    if (titleServiceType  && (oEvent.target).getAttribute("title") != "relevant ") {
+    if (titleServiceType  && (oEvent.target).getAttribute("title") != "Related Service") {
       titleServiceHidden();
     }
   }
@@ -77,7 +77,7 @@ class titleServiceContainer extends Component {
         {
           service.length ? (
             <div className={services}>
-              <h4>relevant </h4>
+              <h4>Related Service</h4>
               <ul className="clearfix">
                 {
                   service.map(({ serviceIcon, serviceName, serviceCode }, i) =>
@@ -96,7 +96,7 @@ class titleServiceContainer extends Component {
         {
           contacts.length ? (
             <div>
-              <h4>relevant people</h4>
+              <h4>Related contacts</h4>
               <ul className="clearfix">
                 {
                   contacts.map(({ userAvator, userName }, i) =>

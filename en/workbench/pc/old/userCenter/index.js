@@ -174,10 +174,10 @@ class UserInfoContainer extends Component {
   handleChange = (e) => {
     switch (e) {
       case 'language':
-        alert("NoDictionary");
+        alert("Function under development...");
         break;
       case 'message':
-        alert("NoDictionary");
+        alert("Function under development...");
         break;
       default:
         break;
@@ -303,9 +303,9 @@ class UserInfoContainer extends Component {
     const curTenant = allowTenants.filter((tenant) => {
       return tenant.tenantId === tenantid;
     })[0];
-    let type = 'NoDictionary';
+    let type = 'Team';
     if (curTenant && curTenant.type == 0) {
-      type = 'NoDictionary';
+      type = 'Enterprise';
     }
     this._curTenant = curTenant;
     return type;
@@ -376,9 +376,9 @@ class UserInfoContainer extends Component {
 
     let _titleType = this.getCompanyType();
 
-    let comObj = { id: "allowExit", name: "NoDictionary", value: "3", serverApi: "team/leave", msg: "NoDictionary" };
-    if (_titleType == "NoDictionary") {
-      comObj = { id: "allowExit", name: "NoDictionary", value: "3", serverApi: "enter/leave", msg: "NoDictionary" };
+    let comObj = { id: "allowExit", name: "Quit from Team", value: "3", serverApi: "team/leave", msg: "After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up." };
+    if (_titleType == "Enterprise") {
+      comObj = { id: "allowExit", name: "Quit from Enterprise", value: "3", serverApi: "enter/leave", msg: "After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up." };
     }
 
     let _allowExit = null;
@@ -402,7 +402,7 @@ class UserInfoContainer extends Component {
         <div>
           <div className={logOut} onClick={logout}>
             <Icon type="exit" />
-            <span>NoDictionary</span>
+            <span>Log Off</span>
           </div>
           <div className={userInfoPane}>
             <div className={imgUser}>
@@ -418,19 +418,19 @@ class UserInfoContainer extends Component {
              <div className={userName} title={name}>{getStrLenSubstr(name,20,20)}</div>
                <ul className={`${gloryIcon} ${clearfix}`}>
                 <li>
-                  <div className={`${iconContainer} ${icon1}`}><Icon title="NoDictionary" type="glory"></Icon></div>
+                  <div className={`${iconContainer} ${icon1}`}><Icon title="Honor" type="glory"></Icon></div>
                 </li>
                 <li>
-                  <div className={`${iconContainer} ${icon3}`}><Icon title="NoDictionary" type="Internet2"></Icon></div>
+                  <div className={`${iconContainer} ${icon3}`}><Icon title="Moments" type="Internet2"></Icon></div>
                 </li>
               </ul>
             </div>*/}
           </div>
 
           <div className={linkSetting}>
-            <a href={`${getHost('org')}/download/download.html`} target="_blank" >NoDictionary</a><br />
+            <a href={`${getHost('org')}/download/download.html`} target="_blank" >Download Client</a><br />
             <a href="https://ticket.yonyoucloud.com/ticket/menu/router/myticket/KJ" target="_blank">问题与反馈</a><br />
-            <a href={`${getHost('cloundyy')}`} target="_blank">NoDictionary</a>
+            <a href={`${getHost('cloundyy')}`} target="_blank">Yonyou Cloud Official Website</a>
           </div>
 
         </div>
@@ -451,17 +451,17 @@ class UserInfoContainer extends Component {
           <div style={{ position: "relative" }}>
             <ul className={`${teamBtnList} ${userBtnList} ${clearfix}`}>
               <li><Button shape="border" onClick={this.gotoManage.bind(this)}>
-                <Icon type="record" />NoDictionary</Button></li>
+                <Icon type="record" />Edit Homepage</Button></li>
 
               {
-                _titleType == "NoDictionary" ? (<li><Button shape="border" onClick={this.gotoUserInfo}>
-                  <Icon type="role-management" />NoDictionary</Button></li>) : null
+                _titleType == "Enterprise" ? (<li><Button shape="border" onClick={this.gotoUserInfo}>
+                  <Icon type="role-management" />Employee Info</Button></li>) : null
               }
 
               {
                 _invitePermission ? (<li><Button shape="border" size="sm" onClick={this.inviteMember.bind(this)}>
                   <Icon type="add-friends" />
-                  NoDictionary</Button></li>) : null
+                  Invite Member</Button></li>) : null
               }
 
               {admin ? null : _allowExit}
@@ -472,20 +472,20 @@ class UserInfoContainer extends Component {
                 <div className={popconfirm} style={{ position: "absolute" }}>
                   <i className="arrow"></i>
                   <div className={popconfirm_content}>
-                    <p>{_titleType}NoDictionary</p>
-                    <p>NoDictionary</p>
+                    <p>{_titleType}Created successfully.</p>
+                    <p>Invite members now to work together with them.</p>
                   </div>
-                  <div onClick={this.closeRequest}>NoDictionary</div>
+                  <div onClick={this.closeRequest}>OK</div>
                 </div>
                 : null
             }
 
           </div>
 
-          <div className={enter_setting} title={`${_titleType}NoDictionary`}>
+          <div className={enter_setting} title={`${_titleType}Settings`}>
             {/* <Icon type="setting" /> */}
             {
-              admin ? (<Icon type="setting" title={`${_titleType}NoDictionary`} onClick={() => { this.gotoConfig(this._curTenant) }} />) : null
+              admin ? (<Icon type="setting" title={`${_titleType}Settings`} onClick={() => { this.gotoConfig(this._curTenant) }} />) : null
             }
           </div>
 

@@ -13,7 +13,6 @@ import Icon from 'pub-comp/icon';
 import {check} from './checkTenantStatus'
 import Progress from 'pub-comp/progress';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const {  getUserInfo } = homeActions;
 const { uploadApplication, createTeam} = teamActions;
 import {
   wrap,
@@ -47,7 +46,6 @@ import {
     requestError,
     uploadApplication,
     createTeam,
-    getUserInfo
   }
 )
 
@@ -133,7 +131,7 @@ class CreateTeamContent extends Component {
   }
 
   create = () => {
-    const { history, createTeam, requestStart, requestSuccess, requestError, getUserInfo } = this.props;
+    const { history, createTeam, requestStart, requestSuccess, requestError } = this.props;
     const { value, logo } = this.state;
     if ( !value || value == ""){
       this.setState({
@@ -192,23 +190,23 @@ class CreateTeamContent extends Component {
     let now = this.state.processValue;
     return (
       <div className={wrap}>
-        <h5>create team</h5>
+        <h5>Create Team</h5>
         <hr />
         <div className={create_team_cont}>
           <div className={item+" um-box " }>
-            <label>team name<span>&nbsp;*&nbsp;</span></label>
+            <label>Team Name<span>&nbsp;*&nbsp;</span></label>
             <input
-              placeholder="less than 60 bit"
+              placeholder="60 characters at most"
               value={ value }
               onChange={(e)=>{this.onChange(e)}}
             />
           </div>
           <div className={`${name_error} ${_error}`}>
-            name input
+            Please enter the team name.
           </div>
 
           <div className={`${item} um-box ${upload}`}>
-            <label>avatar&nbsp; &nbsp; </label>
+            <label>Team Profile Photo&nbsp; &nbsp; </label>
             <div className={`${image}`}>
                 <Upload name='logo' logo={logo?logo:""} onChange={(e)=>{this.setUrl("logo",e)}}  tip="" />
                 {/* { imgUrl ? <img ref="imgSrc" src={ imgUrl } /> : null }
@@ -216,16 +214,16 @@ class CreateTeamContent extends Component {
                   <Icon type="copyreader" />
                 <input type="file" ref="btn_file" accept="image/x-png,image/gif,image/jpeg,image/bmp" onChange={(e)=>{ this.imgChange(e) }} />
                 </div> */}
-                {/* <span className={titlp_lab}>{"size of image<=200K​"}</span> */}
+                {/* <span className={titlp_lab}>{"Picture Size<=200K​"}</span> */}
               </div>
           </div>
         </div>
         <hr className={footer_hr}/>
         <div className={footer}>
           <div className={ now ?`${process_loading_content} ${opacityShow}`: process_loading_content }>
-              <Progress loadingCallBack={this.loadingCallBack} startFlag={now} successFunc={this.successLoading} loadingDesc={'team info loading…'}/>
+              <Progress loadingCallBack={this.loadingCallBack} startFlag={now} successFunc={this.successLoading} loadingDesc={'Configuring team information…'}/>
           </div>
-          <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >create</Button>
+          <Button className={`${now?opacityHidden:''} ${submit_class}`} onClick={this.create} disabled={disabled} >Create</Button>
         </div>
       </div>
     )

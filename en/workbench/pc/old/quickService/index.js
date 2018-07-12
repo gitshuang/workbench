@@ -122,11 +122,11 @@ class QuickServiceContainer extends Component {
         {
           this.state.openAllstate ? (
             <div className={link_cont} onClick={this.openAllAppList}>
-              <a>NoDictionary</a>
+              <a>All Apps</a>
             </div>
           ) : (
               <div className={serviceBtn}>
-                <button className={btn} onClick={this.onClickScroll}>NoDictionary</button>
+                <button className={btn} onClick={this.onClickScroll}>More Apps</button>
               </div>
             )
         }

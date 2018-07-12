@@ -59,12 +59,12 @@ class SelectEnter extends Component {
     })
     return (
       <div id="open_select" className={select_enter}>
-        <span>Please choose enterprise you want /tean:</span>
+        <span>Please select the enterprise/team you want to join.:</span>
         <DropdownButton
           marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
           lastIem={true}
-          label="Please choose enterprise/tean" type="home" dataItem={_dataItem} />
+          label="Please select an enterprise/team." type="home" dataItem={_dataItem} />
       </div>
     )
   }

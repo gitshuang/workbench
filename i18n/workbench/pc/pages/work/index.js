@@ -119,16 +119,16 @@ export default class Work extends Component {
   };
   static defaultProps = {
     history: {},
-    requestStart: () => {},
-    requestSuccess: () => {},
-    requestError: () => {},
-    getProductInfo: () => {},
-    titleServiceDisplay: () => {},
-    titleServiceHidden: () => {},
-    pinDisplayBlock: () => {},
-    setPinCancel: () => {},
-    returnDefaultState: () => {},
-    setCurrent: () => {},
+    requestStart: () => { },
+    requestSuccess: () => { },
+    requestError: () => { },
+    getProductInfo: () => { },
+    titleServiceDisplay: () => { },
+    titleServiceHidden: () => { },
+    pinDisplayBlock: () => { },
+    setPinCancel: () => { },
+    returnDefaultState: () => { },
+    setCurrent: () => { },
     match: {},
     current: {},
     pinType: false,
@@ -139,6 +139,7 @@ export default class Work extends Component {
     domainName: '',
     widthBrm: false,
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -158,14 +159,13 @@ export default class Work extends Component {
       },
     } = this.props;
     this.getProductInfo(code, type, subcode);
-    // const height = document.documentElement.clientHeight || document.body.clientHeight;
-    // this.setState({
-    //   height,
-    // });
   }
 
   componentDidMount() {
-
+    // const { history } = this.props;
+    // history.block((location) => {
+    //   console.log(location);
+    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -202,11 +202,13 @@ export default class Work extends Component {
     }
   }
 
+  // 从页面离开  直接清空state
   componentWillUnmount() {
     const { returnDefaultState } = this.props;
     returnDefaultState();
   }
 
+  // 获取地址
   getProductInfo(code, type, subcode) {
     const {
       getProductInfo,
@@ -292,7 +294,7 @@ export default class Work extends Component {
           );
         case 2:
           return (
-            <div style={{ }}>
+            <div style={{}}>
               {
                 expandedSidebar ? (
                   <div className={sideBarArea} >
@@ -362,7 +364,7 @@ export default class Work extends Component {
           <div className="um-header">
             <HeaderContainer onLeftClick={this.goBack} iconName={iconName} leftContent={domainName}>
               <div className={titleArea}>
-                <span>{ title }</span>
+                <span>{title}</span>
                 {
                   hasRelationFunc ?
                     (<Icon
@@ -394,7 +396,7 @@ export default class Work extends Component {
           }
         </div>
         <div className={`${workArea}`}>
-          { this.makeLayout() }
+          {this.makeLayout()}
         </div>
         {
           hasRelationFunc ? <TitleServiceContainer outsideClickIgnoreClass="icon-xiala" /> : null

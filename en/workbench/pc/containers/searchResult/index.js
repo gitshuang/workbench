@@ -238,8 +238,8 @@ class searchResult extends Component {
         {
           isShownodataClassEach ? null :
             <div className={nodataClass}>
-              <img src={nodata} alt="other content" />
-              <p>other content</p>
+              <img src={nodata} alt="No related content." />
+              <p>No related content.</p>
             </div>
         }
 
@@ -253,7 +253,7 @@ class searchResult extends Component {
             <div className={searchPanel}>
               <FormControl
                 className={serviceSearch}
-                placeholder="There is no relevant content"
+                placeholder="Search personnel information, service, and other contents."
                 value={this.state.keywords}
                 onKeyDown={this.onKeyup}
                 onChange={this.inputOnChange}
@@ -261,7 +261,7 @@ class searchResult extends Component {
               <div className={search_icon_con}>
                 <span>|</span>
                 <Icon type="search" className={ufSearch} onClick={this.btnSearch} />
-                <span className={search_tit} onClick={this.btnSearch}>Search personnel information application services and other content</span>
+                <span className={search_tit} onClick={this.btnSearch}>Search</span>
               </div>
             </div>
             <div className={'um-content' + ` ${tabContent}`}>

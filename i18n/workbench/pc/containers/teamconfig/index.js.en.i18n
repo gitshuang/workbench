@@ -1,27 +1,27 @@
-{"key":"index.js0","value":"expired"}
-{"key":"index.js1","value":"and"}
-{"key":"index.js2","value":"expired"}
-{"key":"index.js3","value":"phone"}
-{"key":"index.js4","value":"web"}
-{"key":"index.js5","value":"add new app"}
-{"key":"index.js6","value":"expired time:"}
-{"key":"index.js7","value":"purchase"}
-{"key":"index.js8","value":"name,phone,email"}
-{"key":"index.js9","value":"search"}
-{"key":"index.js10","value":"manager only"}
-{"key":"index.js11","value":"inivite member"}
-{"key":"index.js12","value":"total member"}
-{"key":"index.js13","value":"root"}
-{"key":"index.js14","value":"manager"}
-{"key":"index.js15","value":"memeber"}
-{"key":"index.js16","value":"remove member"}
-{"key":"index.js17","value":"update "}
-{"key":"index.js18","value":"relevant operation"}
-{"key":"index.js19","value":"disband"}
-{"key":"index.js20","value":"After the dissolution, the application under the current team will no longer be used and the corresponding data will be deleted. Please confirm that the data has been backup"}
-{"key":"index.js21","value":"outparty"}
-{"key":"index.js22","value":"After exiting, your application under the current team will no longer be used and the corresponding data will be deleted. Please confirm that the data has been backup"}
-{"key":"index.js23","value":"team"}
-{"key":"index.js24","value":"basic setting"}
-{"key":"index.js25","value":"team app"}
-{"key":"index.js26","value":"team member"}
+{"key":"index.js0","value":"Expired"}
+{"key":"index.js1","value":"noDictionnaryFlag"}
+{"key":"index.js2","value":"days before expiration"}
+{"key":"index.js3","value":"Mobile"}
+{"key":"index.js4","value":"Client"}
+{"key":"index.js5","value":"Add App"}
+{"key":"index.js6","value":"Expiration Time:"}
+{"key":"index.js7","value":"Renewal"}
+{"key":"index.js8","value":"Name, Mobile No., Email"}
+{"key":"index.js9","value":"Search"}
+{"key":"index.js10","value":"Only display administrator"}
+{"key":"index.js11","value":"Invite Member"}
+{"key":"index.js12","value":"Current Person Qty"}
+{"key":"index.js13","value":"Member Permission"}
+{"key":"index.js14","value":"Administrator"}
+{"key":"index.js15","value":"Member"}
+{"key":"index.js16","value":"Remove Member"}
+{"key":"index.js17","value":"Upgrade to Enterprise"}
+{"key":"index.js18","value":"Related Operations"}
+{"key":"index.js19","value":"Dissolve Team"}
+{"key":"index.js20","value":"After a team is dissolved, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up."}
+{"key":"index.js21","value":"Quit from Team"}
+{"key":"index.js22","value":"After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up."}
+{"key":"index.js23","value":"Team"}
+{"key":"index.js24","value":"Basic Settings"}
+{"key":"index.js25","value":"Team App"}
+{"key":"index.js26","value":"Team Member"}

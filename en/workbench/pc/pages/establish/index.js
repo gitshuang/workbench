@@ -102,7 +102,7 @@ class Establish extends Component {
                 ? <div className="um-header" style={{background:"white"}}>
                     <Header onLeftClick={ this.goBack } iconName={"home"} >
                         <div>
-                            <span>NoDictionary</span>
+                            <span>Create Team</span>
                         </div>
                     </Header>
                 </div>

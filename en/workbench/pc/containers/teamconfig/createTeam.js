@@ -42,9 +42,9 @@ class SubmitBtn extends Component {
   render() {
     return (
       <div className={'u-form-submit'}>
-        {/* <ButtonBrand onClick={this.click}>save</ButtonBrand> */}
+        {/* <ButtonBrand onClick={this.click}>Save</ButtonBrand> */}
         {
-          this.props.disabled ? <ButtonBrand onClick={this.click} >save}</ButtonBrand> : <ButtonBrand disabled={true} >保存</ButtonBrand>
+          this.props.disabled ? <ButtonBrand onClick={this.click} >$i18n{Save}</ButtonBrand> : <ButtonBrand disabled={true} >保存</ButtonBrand>
         }
       </div>
     );
@@ -223,17 +223,17 @@ class CreateTeam extends Component {
 
         <div className={form_team}>
           <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-            <FormItem showMast={false} labelName={<span>team name<font color='red'> &nbsp;*&nbsp;</font></span>}
-              isRequire={true} valuePropsName='value' errorMessage="name input" method="blur"
+            <FormItem showMast={false} labelName={<span>Team Name<font color='red'> &nbsp;*&nbsp;</font></span>}
+              isRequire={true} valuePropsName='value' errorMessage="Please enter the team name." method="blur"
               inline={true}>
-              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="less than 60 bit" />
+              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="[object Object]" />
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>avatar<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>Team Profile Photo<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
               <Upload name='logo' logo={logo ? logo : ""} onChange={this.onChangeUpload} />
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>invite role<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select your industry" method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>Invitation Rules<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select an industry." method="blur" inline={true}>
               <Select
                 defaultValue="1"
                 name="invitePermission"
@@ -241,13 +241,13 @@ class CreateTeam extends Component {
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: "invitePermission", value: e }) }}
               >
-                <Option value="1">full invitation</Option>
-                <Option value="2">forbidden invitation</Option>
-                <Option value="0">manager invitation</Option>
+                <Option value="1">Invite All</Option>
+                <Option value="2">Forbid to invite</Option>
+                <Option value="0">Invited by Administrator</Option>
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>application root <font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select your industry" method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>Application Permission<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select an industry." method="blur" inline={true}>
               <Select
                 name="joinPermission"
                 defaultValue="1"
@@ -255,22 +255,22 @@ class CreateTeam extends Component {
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: "joinPermission", value: e }) }}
               >
-                <Option value="0">allow </Option>
-                <Option value="1"> forbid</Option>
+                <Option value="0">Allowed </Option>
+                <Option value="1">Prohibited</Option>
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>allow user quit<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>Allow users to quit<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || "0"}>
-                <Radio value="0" > forbid</Radio>
-                <Radio value="1" >allow</Radio>
+                <Radio value="0" >Prohibited</Radio>
+                <Radio value="1" >Allowed</Radio>
               </Radio.RadioGroup>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>watermark in communication<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>Display watermark in address book<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
-                <Radio value={0} > forbid</Radio>
-                <Radio value={1} >allow</Radio>
+                <Radio value={0} >Prohibited</Radio>
+                <Radio value={1} >Allowed</Radio>
               </Radio.RadioGroup>
             </FormItem>
 

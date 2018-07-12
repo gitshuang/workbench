@@ -42,10 +42,10 @@ class Nature extends Component {
       <Radio.RadioGroup
         selectedValue={this.state.value}
         onChange={this.onChange} >
-        <Radio value="LegalPerson" >NoDictionary</Radio>
-        <Radio value="IndividualPerson" >NoDictionary</Radio>
-        <Radio value="ResponsePerson" >NoDictionary</Radio>
-        <Radio value="Other" >NoDictionary</Radio>
+        <Radio value="LegalPerson" >Incorporated Enterprise</Radio>
+        <Radio value="IndividualPerson" >Individual Business</Radio>
+        <Radio value="ResponsePerson" >Individual Enterprise</Radio>
+        <Radio value="Other" >Other</Radio>
       </Radio.RadioGroup>
     );
   }
@@ -96,7 +96,7 @@ class CreateEnter extends Component {
       value: 'A',
       verify: true,
     };
-    this.address = 'NoDictionary}|北京|NoDictionary|';
+    this.address = '$i18n{Beijing}|北京|Dongcheng District|';
     //progressbar
     this.loadingFunc = null;
     this.successFunc = null;
@@ -190,7 +190,7 @@ class CreateEnter extends Component {
     } = this.state;
     const Butt = processValue !== 0
       ?
-      (<div className={progressBar}><Progress loadingCallBack={this.loadingCallBack} tenantId={tenantId} startFlag={processValue} successFunc={this.successLoading} loadingDesc="NoDictionary…" /></div>)
+      (<div className={progressBar}><Progress loadingCallBack={this.loadingCallBack} tenantId={tenantId} startFlag={processValue} successFunc={this.successLoading} loadingDesc="Configuring Enterprise Info…" /></div>)
       :
       <SubmitBtn isSubmit disabled={this.state.disabled} />;
     return (
@@ -198,19 +198,19 @@ class CreateEnter extends Component {
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enterForm}>
           <FormItem
             showMast={false}
-            labelName={<span>NoDictionary<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>Enterprise Name<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="NoDictionary"
+            errorMessage="Please enter enterprise name."
             method="blur"
             inline
           >
-            <FormControl name="tenantName" placeholder="NoDictionary" />
+            <FormControl name="tenantName" placeholder="No longer than 60 characters" />
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>NoDictionary<font color="red"> &nbsp; &nbsp;</font></span>}
+            labelName={<span>Enterprise Profile Photo<font color="red"> &nbsp; &nbsp;</font></span>}
             valuePropsName="value"
             method="change"
             inline
@@ -226,53 +226,53 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>Industry<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="NoDictionary"
+            errorMessage="Please select an industry."
             method="blur"
             inline
           >
             <Select
-              defaultValue="-NoDictionary-"
+              defaultValue="-Industry-"
               name="tenantIndustry"
               style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
-              <Option value="A">NoDictionary</Option>
-              <Option value="B">NoDictionary</Option>
-              <Option value="C">NoDictionary</Option>
-              <Option value="D">NoDictionary</Option>
-              <Option value="S">NoDictionary</Option>
-              <Option value="E">NoDictionary</Option>
-              <Option value="G">NoDictionary</Option>
-              <Option value="I">NoDictionary</Option>
-              <Option value="F">NoDictionary</Option>
-              <Option value="H">NoDictionary</Option>
-              <Option value="J">NoDictionary</Option>
-              <Option value="K">NoDictionary</Option>
-              <Option value="L">NoDictionary</Option>
-              <Option value="M">NoDictionary</Option>
-              <Option value="N">NoDictionary</Option>
-              <Option value="O">NoDictionary</Option>
-              <Option value="P">NoDictionary</Option>
-              <Option value="Q">NoDictionary</Option>
-              <Option value="R">NoDictionary</Option>
-              <Option value="T">NoDictionary</Option>
+              <Option value="A">Agriculture, Forestry, Animal Husbandry, and Fishery Industries</Option>
+              <Option value="B">Mining Industry</Option>
+              <Option value="C">Manufacturing</Option>
+              <Option value="D">Electricity/Heating Power/Gas/Water Production and Supply Industry</Option>
+              <Option value="S">Environment and Public Administration, Social Insurance, and Social Org</Option>
+              <Option value="E">Construction Industry</Option>
+              <Option value="G">Transportation, Warehousing and Postal Services</Option>
+              <Option value="I">Info Transmission, Computer Service and Software Industry</Option>
+              <Option value="F">Wholesale and Retail Trade</Option>
+              <Option value="H">Accommodation and Catering Industry</Option>
+              <Option value="J">Finance and Insurance Industries</Option>
+              <Option value="K">Real Estate Industry</Option>
+              <Option value="L">Leasing and Business Services</Option>
+              <Option value="M">Scientific Research, Technical Services and Geological Prospecting</Option>
+              <Option value="N">Water, Environment and Public Facilities Management Industry</Option>
+              <Option value="O">Resident Services and Other Services</Option>
+              <Option value="P">Education</Option>
+              <Option value="Q">Health, Social Security and Social Service Industry</Option>
+              <Option value="R">Culture, Sports and Recreation</Option>
+              <Option value="T">International Organization</Option>
             </Select>
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>Scale<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="NoDictionary"
+            errorMessage="Please select scale."
             method="blur"
             inline
           >
             <Select
-              defaultValue="-NoDictionary-"
+              defaultValue="-Scale-"
               name="tenantSize"
               style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
@@ -289,10 +289,10 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>NoDictionary<font color="red">&nbsp;&nbsp;</font></span>}
+            labelName={<span>Address<font color="red">&nbsp;&nbsp;</font></span>}
             isRequire={false}
             valuePropsName="value"
-            errorMessage="NoDictionary"
+            errorMessage="Please enter enterprise address."
             method="blur"
             inline
           >
@@ -304,11 +304,11 @@ class CreateEnter extends Component {
             showMast={false}
             isRequire={false}
             valuePropsName="value"
-            errorMessage="NoDictionary"
+            errorMessage="Please enter enterprise address."
             method="blur"
             inline
           >
-            <FormControl name="tenantAddress" placeholder="NoDictionary" />
+            <FormControl name="tenantAddress" placeholder="60 characters at most" />
           </FormItem>
 
           <div className={lxrHr}>
@@ -316,32 +316,32 @@ class CreateEnter extends Component {
           </div>
 
           <div className={lxrTitle}>
-            NoDictionary
+            Contact Info:
           </div>
 
           <FormItem
             showMast={false}
-            labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>Name<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="NoDictionary"
+            errorMessage="Please enter contact name."
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="NoDictionary" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl name="linkman" placeholder="Please enter contact name." value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
           </FormItem>
 
           <FormItem
             showMast={false}
             valuePropsName="value"
-            labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>Email<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             method="blur"
             htmlType="email"
-            errorMessage="NoDictionary"
+            errorMessage="Wrong e-mail format."
             inline
           >
-            <FormControl name="tenantEmail" placeholder="NoDictionary" value={tenantEmail} onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }} />
+            <FormControl name="tenantEmail" placeholder="Please enter e-mail address." value={tenantEmail} onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }} />
           </FormItem>
 
           <FormItem
@@ -349,20 +349,20 @@ class CreateEnter extends Component {
             className="input_phone"
             showMast={false}
             valuePropsName="value"
-            labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>Mobile<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             method="blur"
             htmlType="tel"
-            errorMessage="NoDictionary"
+            errorMessage="Wrong mobile No. format."
             inline
           >
-            <FormControl name="tenantTel" placeholder="NoDictionary" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+            <FormControl name="tenantTel" placeholder="Please enter mobile number." value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
           </FormItem>
 
           { /*
             <FormItem
               showMast={false}
-              labelName={<span>NoDictionary<font color='red'> * </font></span>}
+              labelName={<span>Enterprise Type<font color='red'> * </font></span>}
               isRequire={false} method="change" inline={true}
             >
               <Nature name="tenantNature" defaultValue='LegalPerson' />

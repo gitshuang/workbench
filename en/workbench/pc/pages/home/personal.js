@@ -10,7 +10,6 @@ import TeamExitModal from 'containers/teamExitModal';
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import rootActions from 'store/root/actions';
-import { get } from 'http';
 
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
@@ -53,31 +52,31 @@ class Personals extends Component {
       hrefs: [
         {
           href: `${getHost('org')}/download/download.html`,
-          name: 'NoDictionary',
+          name: 'Download Client',
         },
         {
           href: "https://ticket.yonyoucloud.com/ticket/create/KJ",
-          name: 'NoDictionary',
+          name: 'Questions and Feedbacks',
         },
         {
           href: `${getHost('cloundyy')}`,
-          name: 'NoDictionary',
+          name: 'Yonyou Cloud Official Website',
         },
       ],
       TeamData: [
         {
           id: 'allowExit',
-          name: 'NoDictionary',
+          name: 'Quit from Enterprise',
           value: '3',
           serverApi: 'enter/leave',
-          msg: 'NoDictionary',
+          msg: 'After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
         },
         {
           id: 'allowExit',
-          name: 'NoDictionary',
+          name: 'Quit from Team',
           value: '3',
           serverApi: 'team/leave',
-          msg: 'NoDictionary',
+          msg: 'After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
         },
       ],
       language: {
@@ -87,7 +86,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: 'NoDictionary'
+            context: 'Simplified Chinese 1'
           },
           {
             value: 'en',
@@ -95,7 +94,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: 'NoDictionary'
+            context: 'Traditional Chinese 3'
           },
         ]
       }
@@ -168,9 +167,9 @@ class Personals extends Component {
       },
     } = this.state;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
-    let name = 'NoDictionary';
+    let name = 'Team';
     if (curTenant && curTenant.type == 0) {
-      name = 'NoDictionary';
+      name = 'Enterprise';
     }
     return name;
   }
@@ -206,7 +205,7 @@ class Personals extends Component {
     const { hrefs, TeamData } = this.state;
 
     const titleType = this.getCompanyType();
-    const CurrData = titleType == 'NoDictionary' ? TeamData[0] : TeamData[1];
+    const CurrData = titleType == 'Enterprise' ? TeamData[0] : TeamData[1];
     return (
       <div>
         <Personal

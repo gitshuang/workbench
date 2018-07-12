@@ -17,7 +17,6 @@ const {
 const {
   showIm,
   hideIm,
-  getPortal,
   requestError,
   requestSuccess
 } = actions;
@@ -33,7 +32,7 @@ const {
   {
     showIm,
     hideIm,
-    getPortal,
+    
     requestError,
     requestSuccess
   }
@@ -51,14 +50,7 @@ class HeaderContainer extends Component {
   }
 
   componentWillMount() {
-    const { getPortal, requestError, requestSuccess } = this.props;
-    getPortal().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        requestSuccess();
-      }
-    });
+    
   }
 
   componentDidMount() {
@@ -114,12 +106,12 @@ class HeaderContainer extends Component {
         openServiceFn={this.openServiceFn} 
       />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
-        <Icon title="NoDictionary" type="clock" style={{ color }} />
+        <Icon title="Intelligent Communications" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
       <div className={`${rightBtn}`} style= {{marginLeft: "20px","display":portalEnable ? "inline-block": "none"}}>
         <a href={`http://ec.diwork.com/`} target="_blank" style={{ "textDecoration": "none" }}>
-          <Icon title="NoDictionary" type="change" style={{ color }} />
+          <Icon title="My Portal" type="change" style={{ color }} />
         </a>
       </div>
     );

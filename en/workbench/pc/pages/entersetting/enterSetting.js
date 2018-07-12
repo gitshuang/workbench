@@ -80,28 +80,28 @@ class CreateEnter extends Component {
     ];
 
     this.tenantIndustry = [
-      { value: 'A', label: 'NoDictionary' },
-      { value: 'B', label: 'NoDictionary' },
-      { value: 'C', label: 'NoDictionary' },
-      { value: 'D', label: 'NoDictionary' },
-      { value: 'S', label: 'NoDictionary' },
-      { value: 'E', label: 'NoDictionary' },
-      { value: 'G', label: 'NoDictionary' },
-      { value: 'I', label: 'NoDictionary' },
-      { value: 'F', label: 'NoDictionary' },
-      { value: 'H', label: 'NoDictionary' },
-      { value: 'J', label: 'NoDictionary' },
-      { value: 'K', label: 'NoDictionary' },
-      { value: 'L', label: 'NoDictionary' },
-      { value: 'M', label: 'NoDictionary' },
-      { value: 'N', label: 'NoDictionary' },
-      { value: 'O', label: 'NoDictionary' },
-      { value: 'P', label: 'NoDictionary' },
-      { value: 'Q', label: 'NoDictionary' },
-      { value: 'R', label: 'NoDictionary' },
-      { value: 'T', label: 'NoDictionary' },
-      { value: 'E', label: 'NoDictionary' },
-      { value: 'E', label: 'NoDictionary' },
+      { value: 'A', label: 'Agriculture, Forestry, Animal Husbandry, and Fishery Industries' },
+      { value: 'B', label: 'Mining Industry' },
+      { value: 'C', label: 'Manufacturing' },
+      { value: 'D', label: 'Electricity/Heating Power/Gas/Water Production and Supply Industry' },
+      { value: 'S', label: 'Environment and Public Administration, Social Insurance, and Social Org' },
+      { value: 'E', label: 'Construction Industry' },
+      { value: 'G', label: 'Transportation, Warehousing and Postal Services' },
+      { value: 'I', label: 'Info Transmission, Computer Service and Software Industry' },
+      { value: 'F', label: 'Wholesale and Retail Trade' },
+      { value: 'H', label: 'Accommodation and Catering Industry' },
+      { value: 'J', label: 'Finance and Insurance Industries' },
+      { value: 'K', label: 'Real Estate Industry' },
+      { value: 'L', label: 'Leasing and Business Services' },
+      { value: 'M', label: 'Scientific Research, Technical Services and Geological Prospecting' },
+      { value: 'N', label: 'Water, Environment and Public Facilities Management Industry' },
+      { value: 'O', label: 'Resident Services and Other Services' },
+      { value: 'P', label: 'Education' },
+      { value: 'Q', label: 'Health, Social Security and Social Service Industry' },
+      { value: 'R', label: 'Culture, Sports and Recreation' },
+      { value: 'T', label: 'International Organization' },
+      { value: 'E', label: 'Construction Industry' },
+      { value: 'E', label: 'Construction Industry' },
     ];
     //progressbar
     this.loadingFunc=null;
@@ -118,7 +118,7 @@ class CreateEnter extends Component {
       const Addres = TenantAddress.split('|');
       data.address = { province: Addres[0] ? Addres[0] : '', city: Addres[1] ? Addres[1] : '', area: Addres[2] ? Addres[2] : '' };
     } else {
-      data.address = { province: 'NoDictionary}', city: '北京', area: 'NoDictionary' };
+      data.address = { province: '$i18n{Beijing}', city: '北京', area: 'Dongcheng District' };
     }
 
     // if(!data['tenantSize'] || data['tenantSize'] == '0'){
@@ -205,7 +205,7 @@ class CreateEnter extends Component {
     if (address && address.province) {
       TenantAddress.value = `${address.province}|${address.city}|${address.area}|${Values}`;
     } else {
-      TenantAddress.value = `NoDictionary}|北京|NoDictionary|${Values}`;
+      TenantAddress.value = `$i18n{Beijing}|北京|Dongcheng|${Values}`;
     }
 
     const JoinPermission = data.find(da => da.name === 'joinPermission');
@@ -344,7 +344,7 @@ class CreateEnter extends Component {
     if (processValue && updateenter === 'upgrade_enter') {
       submitBtn = (
         <div className={progressBar}>
-          <Progress loadingCallBack={this.loadingCallBack} startFlag={processValue} successFunc={this.successLoading} loadingDesc="NoDictionary…" />
+          <Progress loadingCallBack={this.loadingCallBack} startFlag={processValue} successFunc={this.successLoading} loadingDesc="Upgrading enterprise…" />
         </div>
       );
     }
@@ -352,19 +352,19 @@ class CreateEnter extends Component {
       <Form submitCallBack={this.checkForm} showSubmit={false} className={enterForm}>
         <FormItem
           showMast={false}
-          labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+          labelName={<span>Enterprise Name<font color="red">&nbsp;*&nbsp;</font></span>}
           isRequire
           valuePropsName="value"
-          errorMessage="NoDictionary"
+          errorMessage="Please enter enterprise name."
           method="blur"
           inline
         >
-          <FormControl name="tenantName" value={tenantName || ''} onChange={(e) => { this.inputOnChange(e, 'tenantName'); }} placeholder="NoDictionary" />
+          <FormControl name="tenantName" value={tenantName || ''} onChange={(e) => { this.inputOnChange(e, 'tenantName'); }} placeholder="60 characters at most" />
         </FormItem>
 
         <FormItem
           showMast={false}
-          labelName={<span>NoDictionary &nbsp;&nbsp;&nbsp; </span>}
+          labelName={<span>Enterprise Profile Photo &nbsp;&nbsp;&nbsp; </span>}
           valuePropsName="value"
           method="change"
           inline
@@ -376,17 +376,17 @@ class CreateEnter extends Component {
           tenantIndustry ? (
             <FormItem
               showMast={false}
-              labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+              labelName={<span>Industry<font color="red">&nbsp;*&nbsp;</font></span>}
               isRequire
               valuePropsName="value"
-              errorMessage="NoDictionary"
+              errorMessage="Please select an industry."
               method="blur"
               inline
             >
               <Select
                 name="tenantIndustry"
-                defaultValue="-NoDictionary-"
-                value={tenantIndustry || '-NoDictionary-'}
+                defaultValue="-Industry-"
+                value={tenantIndustry || '-Industry-'}
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
               >
@@ -399,16 +399,16 @@ class CreateEnter extends Component {
           ) : (
             <FormItem
               showMast={false}
-              labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+              labelName={<span>Industry<font color="red">&nbsp;*&nbsp;</font></span>}
               isRequire
               valuePropsName="value"
-              errorMessage="NoDictionary"
+              errorMessage="Please select an industry."
               method="blur"
               inline
             >
               <Select
                 name="tenantIndustry"
-                defaultValue="-NoDictionary-"
+                defaultValue="-Industry-"
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
               >
@@ -425,16 +425,16 @@ class CreateEnter extends Component {
           tenantSize ? (
             <FormItem
               showMast={false}
-              labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+              labelName={<span>Scale<font color="red">&nbsp;*&nbsp;</font></span>}
               isRequire
               valuePropsName="value"
-              errorMessage="NoDictionary"
+              errorMessage="Please select scale."
               method="blur"
               inline
             >
               <Select
                 name="tenantSize"
-                defaultValue="-NoDictionary-"
+                defaultValue="-Scale-"
                 value={tenantSize}
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
@@ -445,16 +445,16 @@ class CreateEnter extends Component {
           ) : (
             <FormItem
               showMast={false}
-              labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+              labelName={<span>Scale<font color="red">&nbsp;*&nbsp;</font></span>}
               isRequire
               valuePropsName="value"
-              errorMessage="NoDictionary"
+              errorMessage="Please select scale."
               method="blur"
               inline
             >
               <Select
                 name="tenantSize"
-                defaultValue="-NoDictionary-"
+                defaultValue="-Scale-"
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
               >
@@ -468,10 +468,10 @@ class CreateEnter extends Component {
           address ? (
             <FormItem
               showMast={false}
-              labelName={<span>NoDictionary&nbsp;&nbsp;</span>}
+              labelName={<span>Address&nbsp;&nbsp;</span>}
               isRequire={false}
               valuePropsName="value"
-              errorMessage="NoDictionary"
+              errorMessage="Please enter enterprise address."
               method="blur"
               inline
             >
@@ -479,11 +479,11 @@ class CreateEnter extends Component {
             </FormItem>
           ) : <div />
         }
-        <FormItem showMast={false} isRequire={false} valuePropsName="value" errorMessage="NoDictionary" method="blur" inline>
-          <FormControl name="tenantAddress" value={newTenantAddress || ''} onChange={(e) => { this.inputOnChange(e, 'tenantAddress'); }} placeholder="NoDictionary" />
+        <FormItem showMast={false} isRequire={false} valuePropsName="value" errorMessage="Please enter enterprise address." method="blur" inline>
+          <FormControl name="tenantAddress" value={newTenantAddress || ''} onChange={(e) => { this.inputOnChange(e, 'tenantAddress'); }} placeholder="60 characters at most" />
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="NoDictionary" method="blur" inline>
+        <FormItem showMast={false} labelName={<span>Invitation Rules<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="Please select an industry." method="blur" inline>
           <Select
             name="invitePermission"
             defaultValue="1"
@@ -491,13 +491,13 @@ class CreateEnter extends Component {
             style={{ width: 338, marginRight: 6 }}
             onChange={(e) => { this.setOptherData({ name: 'invitePermission', value: e }); }}
           >
-            <Option value="1">NoDictionary </Option>
-            <Option value="2">NoDictionary</Option>
-            <Option value="0">NoDictionary</Option>
+            <Option value="1">Invite All </Option>
+            <Option value="2">Forbid to invite</Option>
+            <Option value="0">Invited by Administrator</Option>
           </Select>
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="NoDictionary" method="blur" inline>
+        <FormItem showMast={false} labelName={<span>Application Permission<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="Please select an industry." method="blur" inline>
           <Select
             name="joinPermission"
             defaultValue="1"
@@ -505,24 +505,24 @@ class CreateEnter extends Component {
             style={{ width: 338, marginRight: 6 }}
             onChange={(e) => { this.setOptherData({ name: 'joinPermission', value: e }); }}
           >
-            <Option value="0">NoDictionary </Option>
-            <Option value="1">NoDictionary</Option>
+            <Option value="0">All users can apply to join in </Option>
+            <Option value="1">Forbid users from applying to join in</Option>
           </Select>
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
+        <FormItem showMast={false} labelName={<span>Allow users to quit<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
           <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || '0'}>
-            <Radio value="0" >NoDictionary</Radio>
-            <Radio value="1" >NoDictionary</Radio>
+            <Radio value="0" >Prohibited</Radio>
+            <Radio value="1" >Allowed</Radio>
           </Radio.RadioGroup>
         </FormItem>
 
         <FormItem
           showMast={false}
-          labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>}
+          labelName={<span>Display Superior/Subordinate<font color="red">&nbsp;*&nbsp;</font></span>}
           isRequire={false}
           valuePropsName="value"
-          errorMessage="NoDictionary"
+          errorMessage="Please select."
           method="blur"
           inline
         >
@@ -533,14 +533,14 @@ class CreateEnter extends Component {
             style={{ width: 338, marginRight: 6 }}
             onChange={(e) => { this.setOptherData({ name: 'subordinateType', value: e }); }}
           >
-            <Option value={0}>NoDictionary </Option>
-            <Option value={1}>NoDictionary</Option>
+            <Option value={0}>Display superior/subordinate according to organization manager </Option>
+            <Option value={1}>Display superior/subordinate according to imported level sequence</Option>
           </Select>
         </FormItem>
-        <FormItem showMast={false} labelName={<span>NoDictionary<font color="red"> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
+        <FormItem showMast={false} labelName={<span>Display watermark in address book<font color="red"> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
           <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
-            <Radio value={0} >NoDictionary</Radio>
-            <Radio value={1} >NoDictionary</Radio>
+            <Radio value={0} >Prohibited</Radio>
+            <Radio value={1} >Allowed</Radio>
           </Radio.RadioGroup>
         </FormItem>
 
@@ -549,26 +549,26 @@ class CreateEnter extends Component {
         </div>
 
         <div className={lxrTitle}>
-          NoDictionary
+          Contact Info:
         </div>
 
-        <FormItem showMast={false} labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>} isRequire valuePropsName="value" errorMessage="NoDictionary" method="blur" inline>
-          <FormControl name="linkman" value={linkman || ''} placeholder="NoDictionary" onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+        <FormItem showMast={false} labelName={<span>Name<font color="red">&nbsp;*&nbsp;</font></span>} isRequire valuePropsName="value" errorMessage="Please enter contact name." method="blur" inline>
+          <FormControl name="linkman" value={linkman || ''} placeholder="Please enter contact name." onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
         </FormItem>
 
-        <FormItem showMast={false} valuePropsName="value" labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="email" errorMessage="NoDictionary" inline>
-          <FormControl name="tenantEmail" value={tenantEmail || ''} onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }} placeholder="NoDictionary" />
+        <FormItem showMast={false} valuePropsName="value" labelName={<span>E-mail<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="email" errorMessage="Wrong e-mail format." inline>
+          <FormControl name="tenantEmail" value={tenantEmail || ''} onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }} placeholder="Please enter e-mail address." />
         </FormItem>
 
-        <FormItem className="input_phone" showMast={false} valuePropsName="value" labelName={<span>NoDictionary<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="tel" errorMessage="NoDictionary" inline>
-          <FormControl name="tenantTel" value={tenantTel || ''} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} placeholder="NoDictionary" />
+        <FormItem className="input_phone" showMast={false} valuePropsName="value" labelName={<span>Mobile<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="tel" errorMessage="Wrong mobile No. format." inline>
+          <FormControl name="tenantTel" value={tenantTel || ''} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} placeholder="Please enter mobile number." />
         </FormItem>
 
         {
           /*
           <FormItem
             showMast={false}
-            labelName={<span>NoDictionary<font color="red"> *</font></span>}
+            labelName={<span>Enterprise Type<font color="red"> *</font></span>}
             isRequire={false} method='change' inline>
               <Nature name='tenantNature' defaultValue={tenantNature?tenantNature:'LegalPerson'} />
           </FormItem>

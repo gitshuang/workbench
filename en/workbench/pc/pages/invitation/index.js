@@ -143,7 +143,7 @@ class Invitation extends Component {
     document.execCommand('copy');
 
     Message.create({
-      content: 'NoDictionary!', duration: 1.5, position: 'topLeft', color: 'success',
+      content: 'Link copied. Send it to your friends now!', duration: 1.5, position: 'topLeft', color: 'success',
     });
   }
 
@@ -162,10 +162,10 @@ class Invitation extends Component {
     const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
     if (mails.length <= 0) {
       Message.create({
-        content: 'NoDictionary!', duration: 1.5, position: 'topLeft', color: 'warning',
+        content: 'Please input a correct email address.!', duration: 1.5, position: 'topLeft', color: 'warning',
       });
     } else {
-      const parent = { email: mails, message: message === '' ? 'NoDictionary-NoDictionary' : message, creator };
+      const parent = { email: mails, message: message === '' ? 'YouZone-Empowering Employees and Activating Organizations' : message, creator };
       requestStart();
       sendMessage(parent).then(() => {
         requestSuccess();
@@ -212,7 +212,7 @@ class Invitation extends Component {
     /*
     const tip = (
       <div className={tootip}>
-        NoDictionary
+        Link copied. Send it to your friends now
       </div>
     );
     */
@@ -222,11 +222,11 @@ class Invitation extends Component {
           <div className="um-header">
             <Header onLeftClick={this.goHome} iconName="home" >
               <div>
-                <span>NoDictionary</span>
+                <span>Invite Member</span>
               </div>
             </Header>
             <div className={appBreadcrumb}>
-              <BreadcrumbContainer data={[{ name: 'NoDictionary' }]} goback={this.goBack} />
+              <BreadcrumbContainer data={[{ name: 'Invite Member' }]} goback={this.goBack} />
             </div>
           </div>
         </div>
@@ -238,28 +238,28 @@ class Invitation extends Component {
               onChange={this.callback}
               className="demo-tabs"
             >
-              <TabPane tab="NoDictionary" key="1" className={tabPane1}>
-                <p>NoDictionary</p>
+              <TabPane tab="Invitation Link" key="1" className={tabPane1}>
+                <p>Send the link to your friends</p>
                 <div className={urlArea}>
-                  <span>NoDictionary</span>
+                  <span>Link</span>
                   <input ref={(c) => { this.shortUrl = c; }} type="text" value={url} readOnly />
                 </div>
-                <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >NoDictionary</ButtonBrand>
+                <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >Copy Link</ButtonBrand>
 
               </TabPane>
-              <TabPane tab="NoDictionary" key="2" className={tabPane2}>
+              <TabPane tab="Email Invitation" key="2" className={tabPane2}>
 
-                <p className={firstP}>NoDictionary</p>
+                <p className={firstP}>Send a message to your friends</p>
                 <FormControl
-                  placeholder="NoDictionary-NoDictionary"
+                  placeholder="YouZone-Empowering Employees and Activating Organizations"
                   value={message}
                   onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
                 />
 
-                <p>NoDictionary</p>
+                <p>Signature</p>
                 <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-                <p>NoDictionary “;” NoDictionary</p>
+                <p>Enter email addresses and separate them with “;” noDictionnaryFlag</p>
                 <TagsInput
                   value={this.state.mails}
                   addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
@@ -286,15 +286,15 @@ class Invitation extends Component {
                   })
                 }
                 </ul> */}
-                <ButtonBrand className={submitBtn} onClick={this.submit} >NoDictionary</ButtonBrand>
+                <ButtonBrand className={submitBtn} onClick={this.submit} >Confirm Sending</ButtonBrand>
               </TabPane>
-              <TabPane tab="NoDictionary" key="3" className={tabPane3}>
+              <TabPane tab="QR Code Invitation" key="3" className={tabPane3}>
                 <div>
-                  <span>NoDictionary</span>
+                  <span>Scan QR code to enter the team directly</span>
                   <div className={qrCode} id="qrCode">
                     <img alt="" src="/invite/getQRCode" />
                   </div>
-                  {/* <ButtonBrand className={printQrBtn} >NoDictionary</ButtonBrand> */}
+                  {/* <ButtonBrand className={printQrBtn} >QR Code</ButtonBrand> */}
                 </div>
               </TabPane>
             </Tabs>

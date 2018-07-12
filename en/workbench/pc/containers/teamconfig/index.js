@@ -283,13 +283,13 @@ class CreateTeamContent extends Component {
     }
     const currTime = new Date().getTime();
     if( currTime > time ){
-      return "expired"
+      return "Expired"
     }
     const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
     if(timeDiff > 30){
       return false;
     }
-    return "and"+Math.ceil(timeDiff)+"expired"
+    return "noDictionnaryFlag"+Math.ceil(timeDiff)+"days before expiration"
   }
   // 续费按钮
   esitXufei = (time) => {
@@ -321,10 +321,10 @@ class CreateTeamContent extends Component {
         <div className={applicationBtns}>
           <span>
             <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web端</Button>
-            <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>phone</Button>
-            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PCweb</Button>
+            <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>Mobile</Button>
+            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PCClient</Button>
           </span>
-          {/*<Button colors="danger">add new app</Button>*/}
+          {/*<Button colors="danger">Add App</Button>*/}
         </div>
         <div className={applicationLists}>
           <ul>
@@ -338,7 +338,7 @@ class CreateTeamContent extends Component {
                     <div>
                       <h6>{item.applicationName}</h6>
                       {
-                        item.expired? <p>expired time:{this.handelTime(item.expired)}</p>:""
+                        item.expired? <p>Expiration Time:{this.handelTime(item.expired)}</p>:""
                       }
                     </div>
                     <div>
@@ -346,7 +346,7 @@ class CreateTeamContent extends Component {
                     </div>
                     <div className="um-bf1 tr">
                       {
-                        this.esitXufei(item.expired) ? <Button onClick={()=>{this.openXufei(item.applicationId)}}>purchase</Button> : null
+                        this.esitXufei(item.expired) ? <Button onClick={()=>{this.openXufei(item.applicationId)}}>Renewal</Button> : null
                       }
 
                     </div>
@@ -492,7 +492,7 @@ class CreateTeamContent extends Component {
               <input
                 className="form-control"
                 type="text"
-                placeholder="name,phone,email"
+                placeholder="Name, Mobile No., Email"
                 value={this.state.searchVal}
                 onChange={(e)=>{this.changeSearchFn(e)}}
               />
@@ -506,20 +506,20 @@ class CreateTeamContent extends Component {
               style={{textAlign:"center",cursor:"pointer" }}
               onClick={this.searchFn}
             >
-              <span className={search_label}>search</span>
+              <span className={search_label}>Search</span>
             </div>
           </div>
           <div className={memberBtns}>
-            <Checkbox colors="info" onChange={this.changeCheck}>manager only</Checkbox>
+            <Checkbox colors="info" onChange={this.changeCheck}>Only display administrator</Checkbox>
             {
-              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>inivite member</Button>:null
+              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>Invite Member</Button>:null
             }
           </div>
         </div>
 
         <div className={table_title}>
-          <div>total member{userList.totalElements}人</div>
-          <div className={table_permise}>root</div>
+          <div>Current Person Qty{userList.totalElements}人</div>
+          <div className={table_permise}>Member Permission</div>
         </div>
         <div className={memberLists}>
           <ul>
@@ -546,9 +546,9 @@ class CreateTeamContent extends Component {
                         style={{ width: 88, marginRight: 6 }}
                         onChange={ (e) => {this.handleChange3(e,item.userId)} }
                       >
-                        <Option value="manage">manager</Option>
-                        <Option value="member">memeber</Option>
-                        <Option value="deleteMember">remove member</Option>
+                        <Option value="manage">Administrator</Option>
+                        <Option value="member">Member</Option>
+                        <Option value="deleteMember">Remove Member</Option>
                       </Select>
                     </div>
                   </li>
@@ -615,7 +615,7 @@ class CreateTeamContent extends Component {
           <h2>{this.tenantName}</h2>
           <div className="um-box um-box-center">
             <div>
-              <Button onClick={this.openUpgradeModal}>update </Button>
+              <Button onClick={this.openUpgradeModal}>Upgrade to Enterprise</Button>
             </div>
             <div>
               {/* <Dropdown
@@ -624,13 +624,13 @@ class CreateTeamContent extends Component {
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange}
               >
-                <Button className="um-box-vc um-box-center">relevant operation<Icon type="pull-down" /></Button>
+                <Button className="um-box-vc um-box-center">Related Operations<Icon type="pull-down" /></Button>
               </Dropdown> */}
 
                <EnterOption data={[
-                {id:"aa",name:"disband",value:"2",serverApi:"team/remove",msg:"After the dissolution, the application under the current team will no longer be used and the corresponding data will be deleted. Please confirm that the data has been backup"},
-                {id:"allowExit",name:"outparty",value:"3",serverApi:"team/leave",msg:"After exiting, your application under the current team will no longer be used and the corresponding data will be deleted. Please confirm that the data has been backup"},
-              ]}  type="team" />
+                {id:"aa",name:"Dissolve Team",value:"2",serverApi:"team/remove",msg:"After a team is dissolved, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up."},
+                {id:"allowExit",name:"Quit from Team",value:"3",serverApi:"team/leave",msg:"After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up."},
+              ]}  type="Team" />
 
             </div>
           </div>
@@ -640,15 +640,15 @@ class CreateTeamContent extends Component {
             destroyInactiveTabPane
             defaultActiveKey="1"
           >
-            <TabPane tab='basic setting' key="1">
+            <TabPane tab='Basic Settings' key="1">
               <div >
                 <CreateTeam />
               </div>
             </TabPane>
-            <TabPane tab='team app' key="2">
+            <TabPane tab='Team App' key="2">
               {this.teamApplication()}
             </TabPane>
-            <TabPane tab='team member' key="3">
+            <TabPane tab='Team Member' key="3">
               {this.teamMember()}
             </TabPane>
           </Tabs>

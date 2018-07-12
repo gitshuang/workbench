@@ -27,13 +27,13 @@
   }
 }
 /* L尺寸 */
-@media screen and (min-width: 1025px) and (max-width: 1440px) { /*NoDictionary*/
+@media screen and (min-width: 1025px) and (max-width: 1440px) { /*Mobile*/
   .widgetItem{
     margin-right: 8px;
   }
 }
 /* M尺寸 */
-@media screen and (min-width: 641px) and (max-width: 1024px) { /*NoDictionary*/
+@media screen and (min-width: 641px) and (max-width: 1024px) { /*Mobile*/
   .widgetItem{
     margin-right: 8px;
   }
@@ -224,7 +224,7 @@
   top: 40px;
 }
 .popCont{
-    font-family: 'NoDictionary}} Bold', '微软雅黑 Regular', '微软雅黑';
+    font-family: 'Microsoft YaHei}} Bold', '微软雅黑 Regular', '微软雅黑';
     font-weight: 700;
     font-style: normal;
     font-size: 16px;

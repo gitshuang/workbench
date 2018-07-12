@@ -23,7 +23,7 @@ class GoTo extends Component {
         <div className={appItemImg}><img src={icon}/></div>
         <div className={appItem_describe}>
           <p className={appItem_tit}>{appName}</p>
-          <p className={appItem_con}>The communication and cooperation step by step</p>
+          <p className={appItem_con}>Communication and collaboration in one step</p>
         </div>
       </li>
     )
