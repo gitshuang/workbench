@@ -67,9 +67,10 @@ const handlers = {
       if(type === 2 ){
         this.props.history.push(`/app/${serviceCode}`);
       }else{
-        if(data && data.url){
-          window.location.href = data.url;
-        }
+        //由于影响IM打开service的操作，这里暂时注释掉，待进一步确认再放开
+        // if(data && data.url){
+        //   window.location.href = data.url;
+        // }
         this.props.history.push(`/service/${serviceCode}`);
       }
     }
