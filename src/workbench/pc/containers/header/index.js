@@ -111,7 +111,7 @@ class HeaderContainer extends Component {
       </div>,
       <div className={`${rightBtn}`} style= {{marginLeft: "20px","display":portalEnable ? "inline-block": "none"}}>
         <a href={`http://ec.diwork.com/`} target="_blank" style={{ "textDecoration": "none" }}>
-          <Icon title="我的门户" type="change" style={{ color }} />
+          <Icon title="我的门户" type="home" style={{ color }} />
         </a>
       </div>
     );
