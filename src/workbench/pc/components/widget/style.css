@@ -102,7 +102,7 @@
   -webkit-box-pack: start;
   padding-left: 9px;
   font-size:16px;
-  color:rgba(71,77,84,1);
+  color:#111111;
 }
 .widgetItem .content {
   position: relative;

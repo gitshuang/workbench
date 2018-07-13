@@ -14,6 +14,7 @@ import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
 import Personals from './personal';
 import { header, allBtn, btnDisable } from './style.css';
+import logoUrl from 'assets/image/logo.svg';
 
 
 const {
@@ -180,6 +181,7 @@ class HeaderPage extends Component {
     const personal = <Personals />;
     const BtnShow = this.state.btnShow ? null : btnDisable;
 
+    const title = <img alt="" src={logoUrl} style={{ width: '86px' }} />
     return (
       <div className={`${header}`} style={background} id="home_header">
         <Header
@@ -188,7 +190,7 @@ class HeaderPage extends Component {
           iconName={personal}
           color={color}
         >
-          <span style={titleStyle}>{titleContent || '首页'}</span>
+          <span style={titleStyle}>{title || '首页'}</span>
         </Header>
         {
           list.length > 1 ? (

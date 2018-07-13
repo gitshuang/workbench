@@ -4,6 +4,8 @@
     border-radius: 100px;
     padding-left: 13px;
     margin-left: -5px; 
+    background:rgba(243,243,243,1);
+    height: 30px;
 }
 
 .labelCont{
@@ -18,7 +20,6 @@
 }
 .btnUpward .iconStyle{
     color:rgba(225,76,70,1);
-
 }
 .iconStyle{
     color: rgba(105,111,122,1);
@@ -38,6 +39,8 @@
 .btnUpward>div,.btnPullDown>div{
     /* display: inline-block; */
     width: 31px;
+    margin-left: 5px;
+    margin-right: 3px;
     cursor: pointer;
     vertical-align: middle;
 }
