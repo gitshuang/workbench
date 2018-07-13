@@ -49,7 +49,7 @@ class Application extends Component {
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={this.goBack} iconName={"home"} >
+            <Header onLeftClick={this.goBack} iconName={"computer"} >
               <div>
                 <span>{name}</span>
               </div>

@@ -63,7 +63,7 @@ class CreateTeam extends Component {
           params.data === 'home'
           ?
             <div className="um-header" style={{ background: 'white' }}>
-              <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'home'} >
+              <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'computer'} >
                 <div>
                   <span>创建团队</span>
                 </div>

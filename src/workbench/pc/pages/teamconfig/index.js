@@ -34,7 +34,7 @@ class Teamconfig extends Component {
     return (
       <div className="um-win">
         <div className="um-header" style={{ background: 'white' }}>
-          <Header onLeftClick={this.goHome} iconName="home" >
+          <Header onLeftClick={this.goHome} iconName="computer" >
             <div>
               <span>团队设置</span>
             </div>

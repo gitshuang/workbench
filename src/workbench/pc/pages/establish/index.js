@@ -94,7 +94,7 @@ class Establish extends Component {
     const { userInfo } = this.props;
     const { allowTenants } = this.state;
     // const leftContent = <img src = {logoUrl} style= {{ maxHeight: "27px" }} />
-    const iconname = allowTenants.length  ? 'home' : <Personals />;
+    const iconname = allowTenants.length  ? 'computer' : <Personals />;
     return (
       <div className={`um-win   ${establish} ${allowTenants.length <= 0 ? '' : hidden}`} >
         {

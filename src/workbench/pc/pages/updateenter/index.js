@@ -78,7 +78,7 @@ class Updateenter extends Component {
       <div>
         <div style={{position:"fixed",top:0,left:0,width:"100%",zIndex:"9999"}}>
           <div className="um-header" style={{ background: 'white' }}>
-            <Header onLeftClick={this.goBack} iconName="home" >
+            <Header onLeftClick={this.goBack} iconName="computer" >
               <div>
                 <span>企业认证</span>
               </div>

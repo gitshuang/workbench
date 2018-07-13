@@ -87,7 +87,7 @@ class Search extends Component {
       <div className="um-win">
         <div className={header}>
           <div className="um-header">
-            <Header onLeftClick={this.goHome} iconName="home" >
+            <Header onLeftClick={this.goHome} iconName="computer" >
               <div>
                 <span>{appName}</span>
               </div>

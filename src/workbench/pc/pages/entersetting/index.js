@@ -115,7 +115,7 @@ class Enterprise extends Component {
             params.data === 'home'
             ?
               <div className="um-header" style={{ background: 'white' }}>
-                <Header onLeftClick={this.goHome} iconName="home" >
+                <Header onLeftClick={this.goHome} iconName="computer" >
                   <div>
                     <span>设置企业</span>
                   </div>

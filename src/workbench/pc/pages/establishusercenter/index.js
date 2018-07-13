@@ -108,7 +108,7 @@ class EstablishUserCenter extends Component {
       <div className={`um-win ${pageHome} ${establisPage} ${allowTenants.length <= 0 ? '' : hidden}`} >
         <div className="um-header" style={{ background: 'white' }}>
           <Header
-            iconName={allowTenants.length <= 0 ? imgIcon : 'home'}
+            iconName={allowTenants.length <= 0 ? imgIcon : 'computer'}
             onLeftClick={this.goHome}
           >
             <div>
