@@ -17,7 +17,7 @@
 .hidden :global(.lebra-navbar-left-icon){
   background: #FFFFFF;
   border: 1px solid #FFFFFF;
-  color:rgba(135,139,148,1); 
+  /* color:#555555;  */
 }
 .hidden :global(.lebra-navbar-left-icon)>i{
   font-size: 20px !important;

@@ -64,7 +64,7 @@
 }
 :global(.lebra-navbar-left-icon){
   /* padding:4px 0; */
-  color:#878B94;
+  color:#555555;
 }
 .workArea :global(.lebra-navbar-left-content > img){
   display: none;
