@@ -103,7 +103,7 @@
   width: 100%;
   box-sizing: border-box;
   margin-top: 88px;
-  background-image: linear-gradient(to bottom right,#A8ABB0, #D8DADC);
+  background-image: linear-gradient(to bottom,#A8ABB0, #D8DADC);
 }
 .bg{
     padding-left: 67px;
