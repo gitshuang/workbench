@@ -1,6 +1,5 @@
 .breadcrumbClass {
-  /* background: #fff; */
-  font-size:12px;
+  font-size:14px;
 }
 .breadcrumbClass :global(.iconfont) {
   display:inline-block;

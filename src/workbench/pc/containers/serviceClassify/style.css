@@ -5,8 +5,6 @@
 }
 .bg_wrap{
 	background:#fff;
-	/* border:1px solid #DBDEE5;
-	box-shadow: 0 6px 8px 0 rgba(74,81,93,0.25); */
 	border-radius: 3px ;
 }
 .wrap{
@@ -28,10 +26,6 @@
   padding-bottom: 54px;
   position: relative;
 }
-/*ie*/
-/* .ie_searchPanel .search_icon_con>span,.ie_searchPanel .search_icon_con>i{
-  float: left;
-} */
 .serviceSearch{
 	width:472px;
 	height:38px;
@@ -45,17 +39,6 @@
   display:flex;
   height:100%;
 }
-/*ie*/
-/* .wrap .ie_um_content{
-  padding:20px 0;
-  height:100%;
-}
-.wrap .ie_um_content>div:first-child{
-  float: left;
-}
-.wrap .ie_um_content .menuBtnGroup{
-  min-height: 350px;
-} */
 .menuBtnGroup{
  	width:180px;
   /* min-height:470px; */
@@ -102,13 +85,6 @@
   padding-left: 12px;
   height: 100%;
 }
-/* .appContent::-webkit-scrollbar{
-    width: 8px;
-}
-.appContent::-webkit-scrollbar-thumb{
-    border-radius: 8px;
-    background-color: #757575;
-} */
 
 .appItemImg img{
   width:30px;
@@ -128,66 +104,20 @@
   border-radius:3px;
   -webkit-box-shadow: 0 1px 1px 0 rgba(74,81,93,0.1);
 }
-/* ie9 */
-/* .appsList .ie_appsListItem{
-  display: table;
-}
-.appsList .ie_appsListItem>div{
-  display: table-cell;
-  vertical-align: top;
-} */
 .appsList li:hover{
-  /* background:rgba(225,76,70,0.1); */
   -webkit-box-shadow: 0 3px 6px 0 rgba(74,81,93,0.25);
-          box-shadow: 0 3px 6px 0 rgba(74,81,93,0.25);
+  box-shadow: 0 3px 6px 0 rgba(74,81,93,0.25);
   cursor:pointer;
 }
 .appItem_describe p{
   margin:5px 0;
 }
 .appItem_describe .appItem_tit{
-  color:rgba(71,77,84,1);
+  color:#111111;
 }
 .appItem_describe .appItem_con{
-  color:rgba(71,77,84,0.6);
+  color:#888888;
 }
-/* .link {
-  width:160px;
-  height:52px;
-  background:rgba(244,245,247,0.5);
-  border-radius: 3px ;
-  display:flex;
-  align-items:center;
-  margin-right: 24px;
-  margin-top:16px;
-} */
-/*.link:nth-child(6){
-  margin-right: 0;
-}*/
-/* .link:hover{
-  background:rgba(225,76,70,0.1);
-	cursor: pointer;
-} */
-
-/* .link .icon{
-  width:24px;
-  height:24px;
-  border-radius: 3px ;
-  margin-left: 16px;
-  margin-right: 16px;
-}
-.link span{
-  height:16px;
-  font-size:12px;
-  font-family:MicrosoftYaHei;
-  color:rgba(71,77,84,1);
-  line-height:16px;
-
-}
-.link:hover span{
-	color:#E14C46;
-	cursor: pointer;
-} */
 .search_icon_con{
   height: 38px;
   position: absolute;

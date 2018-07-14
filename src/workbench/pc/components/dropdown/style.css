@@ -37,7 +37,6 @@
     color:rgba(225,76,70,1);
 }
 .btnUpward>div,.btnPullDown>div{
-    /* display: inline-block; */
     width: 31px;
     margin-left: 5px;
     margin-right: 3px;
@@ -45,25 +44,17 @@
     vertical-align: middle;
 }
 .menuStyle li{
-    /* border-top: 1px solid rgba(221,224,227,0.47); */
-    color: rgba(74,81,93,1);
-    /* padding-left: 11px !important; */
+    color: #555555;
 }
 
 .menuStyle{
     box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
     border: rgba(78,89,104,0.19);
-    /* max-height: 400px; */
     width: 219px;
 }
 .dropMenuItem{
     background: red;
 }
-
-/*
-:global(.u-dropdown){
-    margin-left: -88px;
-} */
 
 dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item){
     position: relative;
@@ -84,7 +75,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 }
 .createEnt{
     cursor: pointer;
-    color:rgba(74,81,93,1);
+    color:#111111;
     line-height: 40px;
     font-weight: 600;
 }
@@ -97,24 +88,16 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     padding-left: 2px;
     background:#fff !important;
 }
-/* .menuStyle :globle(.u-dropdown-menu > .u-dropdown-menu-item):hover{
-    background:#fff !important;
-}
-.menuStyle :globle(.u-dropdown-menu > .u-dropdown-menu-item){
-    background:#fff !important;
-} */
-/* .u-input-group .u-form-control */
 
 .itemLi{
     height: 30px;
     width: 100%;
     cursor: pointer;
     line-height: 30px;
-    /* display: inline; */
     white-space: nowrap;
 }
 .itemLi:hover{
-    background: RGBA(9, 30, 66, 0.04);
+    background: #F3F3F3;
 }
 .itemUl{
     overflow-y: auto;
@@ -133,31 +116,27 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     float: left;
 }
 .liRight{
-    /* width: 50px; */
     text-align: center;
-    color: RGBA(74, 81, 93, 0.5);
+    color: #888888;
     float: right;
     padding-right: 10px;
 }
-
-
 
 :global(.home_title){
     font-size:14px;
     color:rgba(71,77,84,1);
     background: transparent;
     width: auto;
-  
-  }
+}
 :global(.home_title) > span{
     display: block;
     white-space: nowrap;
     width:180px;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
+}
 :global(.home_title_down){
     background: transparent;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
-  }
+}

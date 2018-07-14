@@ -10,11 +10,10 @@
   font-family: "Microsoft Yahei", STHeiTi, Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
 }
 .breadcrumbClass ol li {
-  color:#9a9a9a;
+  color:#888;
 }
 .breadcrumbClass a {
-  /* color:#9a9a9a; */
-  color:rgba(136,136,136,1);
+  color:#888;
   cursor:pointer;
 }
 .breadcrumbClass ol>li+li:before {
@@ -27,7 +26,6 @@
   vertical-align: middle;
 }
 .breadcrumbClass {
-  /* background:#fff; */
   height:35px;
   line-height:35px;
   display:flex;
@@ -42,13 +40,12 @@
 }
 .breadcrumbBack {
   margin:0 10px;
-  color:#9a9a9a;
+  color:#888;
   -webkit-box-flex:1;
   line-height:33px;
 }
-.breadcrumbClass :global(.u-breadcrumb) li:last-child{
-  /* color:#4A515D; */
-  /* color: rgba(71,77,84,1); */
+.breadcrumbClass li:last-child{
+  color:#111111;
 }
 .itmeHover:hover span{
   color:rgba(225,76,70,1);

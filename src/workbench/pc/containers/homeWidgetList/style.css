@@ -5,12 +5,13 @@
 .WidgetTitle{
     height: 50px;
     line-height: 26px;
-    color:rgba(71,77,84,0.6);
+    color:#111111;
     display: -webkit-box;
     justify-content: center;
     align-items: center;
     margin-top: 16px;
-    /* margin-bottom: -10px; */
+    font-size: 15px;
+    font-weight: 600;
 }
 .WidgetTitle>div:first-child{
     -webkit-box-flex: 1;

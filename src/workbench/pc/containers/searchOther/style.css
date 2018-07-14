@@ -134,7 +134,7 @@
 }
 .link span{
   height:16px;
-  font-size:12px;
+  font-size:14px;
   font-family:MicrosoftYaHei;
   color:rgba(71,77,84,1);
   line-height:16px;
@@ -174,7 +174,7 @@
   border-bottom:1px solid #dde0e3
 }
 .recently  li img { width: 36px; height: 36px; }
-.recently div { float: left;font-size:12px;}
+.recently div { float: left;font-size:14px;}
 .recently .h_name{ margin-left: 16px; font-family:MicrosoftYaHei;    width: 145px; overflow: hidden}
 .recently .h_name i,.recently .h_name font { color: #0C64C3; font-style: normal}
 .recently .h_name p:first-child{
@@ -201,7 +201,7 @@
 .recently h3{
   color: #4a515d;
   padding: 20px 0 10px 0;
-  font-size: 12px;
+  font-size: 14px;
 }
 .recently li:last-child{
   border-bottom:none;
@@ -304,7 +304,7 @@ tabPane1,.tabPane2{
 }
 
 .recently em{    width: 100%;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   display: inline-block;
   color: #007ace;

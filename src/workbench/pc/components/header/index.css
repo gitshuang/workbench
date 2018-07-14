@@ -9,12 +9,10 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  /* background-color: #108ee9; */
   color: #fff;
   padding-right: 15px;
 } 
 :global(.lebra-navbar-light){
-  /* background: rgba(255,255,255,0.92); */
   color: #108ee9;
 }
 :global(.lebra-navbar-left), :global(.lebra-navbar-title), :global(.lebra-navbar-right){
@@ -52,8 +50,7 @@
   white-space: nowrap;
 }
 :global(.lebra-navbar-light) :global(.lebra-navbar-title){
-  /* color: #000; */
-  color: rgba(71,77,84,1);
+  color: #111111;
 }
 :global(.lebra-navbar-right){
   -webkit-box-pack: end;
@@ -63,7 +60,6 @@
   font-size: 16px;
 }
 :global(.lebra-navbar-left-icon){
-  /* padding:4px 0; */
   color:#555555;
 }
 .workArea :global(.lebra-navbar-left-content > img){

@@ -154,7 +154,7 @@ font-size: 14px;
   left: 81px;
   padding-left: 15px;
   color: red;
-  font-size: 12px;
+  font-size: 14px;
 }
 :global(.ie9) .item label{
   float: left;
@@ -189,7 +189,7 @@ font-size: 14px;
 :global(.u-progress-bar){
   background-color: #e14b46;
   line-height: 32px;
-  font-size: 12px;
+  font-size: 14px;
 }
 :global(.u-progress-label){
   float: left;
@@ -202,7 +202,7 @@ font-size: 14px;
   opacity: 0!important;
 }
 .loading_desc{
-  font-size:12px;
+  font-size:14px;
   font-family:MicrosoftYaHei;
   color:rgba(110,110,119,1);
   line-height:16px;

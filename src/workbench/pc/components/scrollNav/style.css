@@ -103,15 +103,8 @@
   width: 100%;
   box-sizing: border-box;
   margin-top: 88px;
-  background-image: linear-gradient(to bottom,#A8ABB0, #D8DADC);
-}
-.bg{
-    padding-left: 67px;
+  padding-left: 67px;
   padding-right: 100px;
-  background-image: url('assets/image/homeBg.png');
-  background-size: contain; 
-  background-repeat: repeat-x;
-  background-position: top center;
 }
 /* XL尺寸 */
 @media screen and (device-width: 1441px){

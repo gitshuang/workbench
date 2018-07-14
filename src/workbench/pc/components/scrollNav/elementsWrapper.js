@@ -9,11 +9,9 @@ const ElementsWrapper = ({
   className,
 }) => (
   <div className={content}>
-    <div className={bg}>
       {children.map((child, i) => (
         <Element style={style} className={className} name={items[i].target} key={i} >{child}</Element>
       ))}
-    </div>
   </div>
 );
 

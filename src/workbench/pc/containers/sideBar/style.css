@@ -80,7 +80,7 @@
 }
 
 :global(.item_2){
-	font-size: 12px;
+	font-size: 14px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -93,11 +93,11 @@
 	text-align:center;
 }
 :global(.item_3){
-	font-size: 12px;
+	font-size: 14px;
 	margin-left: -2px !important;
 }
 :global(.item_4){
-	font-size: 12px;
+	font-size: 14px;
 }
 .last_item{
 	margin-left: 6px;

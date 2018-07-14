@@ -180,7 +180,7 @@
 
 .appBreadcrumb{
   padding-left: 23px;
-  font-size: 12px;
+  font-size: 14px;
   height:32px;
   background:rgba(255,255,255,1);
 }
@@ -223,5 +223,5 @@
 :global(.u-progress-bar){
   background-color: #e14b46;
   line-height: 32px;
-  font-size: 12px;
+  font-size: 14px;
 }
