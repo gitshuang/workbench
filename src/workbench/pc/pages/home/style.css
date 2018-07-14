@@ -6,6 +6,12 @@
   background-repeat: repeat-x;
   background-position: top center;
 }
+:global(.um-win){
+  background-image: url('assets/image/homeBg.png');
+  background-size: contain; 
+  background-repeat: repeat-x;
+  background-position: top center;
+}
 
 .pageHome{
   overflow: hidden;
