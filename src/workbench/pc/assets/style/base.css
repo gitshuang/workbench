@@ -2,15 +2,17 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+/***------------ie9下的input的叉号去掉-----------------**/
+input::-ms-clear{display:none;}
+input::-ms-reveal{display:none;}
+
 html{
   width: 100%;
   min-height: 100%;
 }
 
 body {
-  /* position: relative; */
   width: 100%;
-  /* height: 100%; */
   min-height: 100%;
   box-sizing: border-box;
   margin: 0;
@@ -21,14 +23,33 @@ body {
   color: #555555;
 }
 
-.iconfont {
-  font-weight: bold;
-}
-
 .wrap {
   padding: 20px;
 }
 
+body .u-form-control{
+  color: #555555;
+  font-size: 14px;
+  padding-left: 8px;
+  border: 1px solid #D0D0D0;
+}
+
+body .u-button {
+  min-width: 5px;
+  padding: 0;
+  color: #555555;
+}
+
+body .iconfont{
+  font-size:20px;
+  font-weight:bold;
+  color: #555555;
+}
+
+.tc i:hover{
+  color:#2D3F5D;
+}
+/* 菜单 */
 .u-menu-inline > .u-menu-item {
   font-size: 14px;
   color: #4A515D;
@@ -72,23 +93,6 @@ body {
   overflow-y: hidden;
 }
 
-.lebra-navbar-left {
-  display: flex;
-}
-
-.lebra-navbar-left-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-  -webkit-box-flex: 1;
-}
-
-.lebra-navbar-left-icon .iconfont {
-  font-size: 20px;
-}
-.u-form-control{
-  font-size: 14px !important;
-}
 .u-select-arrow:before {
   color: #878B94;
 }
@@ -102,7 +106,6 @@ body {
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
 }
-
 
 /***----------统一组价样式----------**/
 
@@ -159,13 +162,6 @@ body {
   border: 2px solid #00CDC3;
 }
 
-.u-button {
-  min-width: 5px;
-  padding: 0;
-}
-
-.u-tabs-tab {}
-
 .u-checkbox span {
   padding-top: 4px;
   color: #111111;
@@ -177,8 +173,10 @@ body {
   white-space:normal !important;
 }
 
-.u-select-dropdown {
-  /* padding-top: 16px; */
+.u-select-dropdown .u-select-dropdown-menu-item-active,
+.u-select-dropdown .u-select-dropdown-menu-item:hover{
+  background:rgba(239,239,239,1);
+  color: #E14C46;
 }
 
 .input_phone .u-input-group{
@@ -233,10 +231,6 @@ body {
 
 .u-radio .u-radio-label:before{
   box-sizing: inherit;
-}
-
-.u-form-control{
-  padding-left: 8px !important;
 }
 
 
@@ -312,6 +306,51 @@ body {
 }
 /***----------统一组价样式 Message 蓝湖交互-----over-----**/
 
-/***------------ie9下的input的叉号去掉-----------------**/
-input::-ms-clear{display:none;}
-input::-ms-reveal{display:none;}
+
+/* 分页组件样式重构 */
+body .paginationClass{
+  margin-top: 10px;
+}
+body .paginationClass .active a,
+body .paginationClass .active a:focus,
+body .paginationClass .active a:hover,
+body .paginationClass .active span,
+body .paginationClass .active span:focus,
+body .paginationClass .active span:hover{
+  border-color: #fcedec;
+  background: #fcedec;
+  color: #e14c46;
+}
+body .paginationClass .disabled a,
+body .paginationClass .disabled a:focus,
+body .paginationClass .disabled a:hover{
+  background: rgba(9,44,66,.04);
+}
+body .paginationClass li a{ 
+  width: 28px;
+  height: 28px;
+  background: rgba(9,30,66,.04);
+  border-color: #e9e7e7;
+  border-radius: 4px;
+  line-height: 28px;
+  padding: 0;
+}
+body .paginationClass li a:hover{
+  border-color:#fcedec;
+}
+body .paginationClass li:first-child a,
+body .paginationClass li:last-child a{ 
+  border-radius: 4px;
+}
+body .paginationClass input{
+  width: 48px;
+  background: #ffffff;
+  border: 1px solid #D0D0D0;
+}
+body .paginationClass input::-webkit-outer-spin-button,
+body .paginationClass input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+body .paginationClass input[type="number"]{
+  -moz-appearance: textfield;
+}

@@ -13,13 +13,12 @@ import Header from 'containers/header';
 import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
 import Personals from './personal';
-import { header, allBtn, btnDisable } from './style.css';
+import { header, allBtn, btnDisable, create } from './style.css';
 import logoUrl from 'assets/image/logo.svg';
 
 
 const {
   changeRequestDisplay,
-  getSearchEnterOrTeam,
 } = homeActions;
 
 const {
@@ -32,14 +31,12 @@ const {
 @withRouter
 @connect(
   mapStateToProps(
-    'searchEnterOrTeamList',
     'userInfo',
     {
       namespace: 'home',
     },
   ),
   {
-    getSearchEnterOrTeam,
     changeRequestDisplay,
     requestStart,
     requestSuccess,
@@ -48,12 +45,10 @@ const {
 )
 class HeaderPage extends Component {
   static propTypes = {
-    getSearchEnterOrTeam: PropTypes.func,
     changeRequestDisplay: PropTypes.func,
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
-    searchEnterOrTeamList: PropTypes.arrayOf(PropTypes.object),
     userInfo: PropTypes.shape({
       name: PropTypes.string,
       company: PropTypes.string,
@@ -68,12 +63,10 @@ class HeaderPage extends Component {
     }),
   };
   static defaultProps = {
-    getSearchEnterOrTeam: () => { },
     changeRequestDisplay: () => { },
     requestStart: () => { },
     requestSuccess: () => { },
     requestError: () => { },
-    searchEnterOrTeamList: [],
     userInfo: {},
     list: [],
     headerData: {},
@@ -83,7 +76,6 @@ class HeaderPage extends Component {
     this.state = {
       allBtn: false, // 默认显示一行tab
       btnShow: false,
-      allowTenants: [],
     };
   }
 
@@ -99,41 +91,57 @@ class HeaderPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.searchEnterOrTeamList !== nextProps.searchEnterOrTeamList) {
+    if (this.props.userInfo !== nextProps.userInfo) {
       this.setState({
-        allowTenants: nextProps.searchEnterOrTeamList,
+        allowTenants: nextProps.userInfo.allowTenants,
       });
     }
   }
 
   onLeftTitleClick = () => { }
 
+  enterOnclick = () => {
+    const {
+      history,
+    } = this.props;
+    history.push('/establishusercenter');
+  }
+
   getLeftContent() {
     const {
       userInfo: {
         company,
+        allowTenants
       },
     } = this.props;
-    const { allowTenants } = this.state; DropdownButton
-    return (<DropdownButton
-      getPopupContainer={() => document.getElementById('home_header')}
-      openMenu={this.openMenu}
-      closeFun={this.closeFun}
-      label={company}
-      type="home"
-      dataItem={
-        allowTenants.map(({
-          tenantId: name,
-          tenantName: value,
-          team: type,
-        }) => ({
-          name,
-          value,
-          type,
-          fun: this.changeTenant,
-        }))
-      }
-    />);
+    if (!allowTenants) return null;
+    const dom = allowTenants.length
+      ?
+      <DropdownButton
+        getPopupContainer={() => document.getElementById('home_header')}
+        openMenu={this.openMenu}
+        closeFun={this.closeFun}
+        label={company}
+        type="home"
+        dataItem={
+          allowTenants.map(({
+            tenantId: name,
+            tenantName: value,
+            team: type,
+          }) => ({
+            name,
+            value,
+            type,
+            fun: this.changeTenant,
+          }))
+        }
+      />
+      :
+      <div className={create} onClick={this.enterOnclick}>
+        <Icon type="add" />
+        创建团队 \ 企业
+      </div>
+    return dom;
   }
 
   changeTenant = (tenantId) => {
@@ -150,10 +158,7 @@ class HeaderPage extends Component {
 
   closeFun = () => { }
 
-  openMenu = () => {
-    const { getSearchEnterOrTeam } = this.props;
-    getSearchEnterOrTeam();
-  }
+  openMenu = () => { }
 
   // 点击下拉
   allBtnOnclick = () => {

@@ -1,28 +1,13 @@
-.logo{
-    position: absolute;
-    left: 54px;
-    top: 6px;
-}
+.establish{
 
+}
 
 .establish :global(.lebra-navbar-left-icon){
-  background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
-  background: #BEC1C8;
-  border: 1px solid #FFFFFF;
-  border-radius: 100px;
-  color: #fff;
-  overflow:hidden;
+  cursor: auto;
 }
 
-.hidden :global(.lebra-navbar-left-icon){
-  background: #FFFFFF;
-  border: 1px solid #FFFFFF;
-  /* color:#555555;  */
-}
-.hidden :global(.lebra-navbar-left-icon)>i{
-  font-size: 20px !important;
-}
-.imgInner{
-  width:32px;
-  height:32px;
+.logo{
+  position: absolute;
+  left: 54px;
+  top: 6px;
 }

@@ -101,7 +101,6 @@ class Search extends Component {
           {this.props.routes.map((route, i) => (
             <RouteWithSubRoutes key={i} {...route} />
           ))}
-
         </div>
       </div>
     );

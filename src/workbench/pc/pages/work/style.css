@@ -1,9 +1,3 @@
-body{
-  /* background-image:url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png"),url("assets/image/wgt/wiget_bg.png");
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-position: 0% 100%, 100% 5%, 90% 100%;
-  background-attachment:fixed; */
-}
 .header{
     position: fixed!important;
     width: 100%;
@@ -15,7 +9,6 @@ body{
 }
 .header :global(.iconfont){
   cursor: pointer;
-  /* color: rgba(135,139,148,1); */
 }
 .header :global(.icon-pin2){
   color: rgba(135,139,148,1)

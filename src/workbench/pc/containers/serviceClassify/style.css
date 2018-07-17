@@ -12,7 +12,6 @@
   overflow-y: hidden;
 }
 .wrap :global(.u-button){
-	width:68px;
 	margin:0;
 	background:#fff;
 }
@@ -28,9 +27,8 @@
 }
 .serviceSearch{
 	width:472px;
-	height:38px;
+	height:32px;
 	border: 1px solid #dee0e3;
-  color:#bdbfc3;
 }
 .wrap .um_content{
 	padding:20px 0;
@@ -59,7 +57,6 @@
 	display:block;
 	width:178px;
   padding:3px 0 3px 23px ;
-	color:#4A515D;
 	text-align: left;
 	border-radius:0;
 }
@@ -67,7 +64,6 @@
   width: 77px;
   height: 32px;
 	background:rgba(9,30,66,0.04);
-  color:rgba(71,77,84,1);
   border: none;
   margin-right: 3px;
 }
@@ -130,9 +126,6 @@
   cursor:pointer;
 }
 .search_icon_con :global(.iconfont){
-  /* color:rgba(135,139,148,1); */
-  font-size:20px;
-  font-weight:bold;
   margin-left: 22px;
   line-height:40px;
 }

@@ -49,8 +49,8 @@ class Enterprise extends Component {
   }
 
   goHome = () => {
-    const { userInfo: { allowTenants } } = this.props;
-    if (allowTenants.length <= 0) return;
+    // const { userInfo: { allowTenants } } = this.props;
+    // if (allowTenants.length <= 0) return;
     this.props.history.replace('');
   }
 
@@ -64,7 +64,8 @@ class Enterprise extends Component {
             params.data === 'home'
             ?
               <div className="um-header" style={{ background: 'white' }}>
-                <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'computer'} >
+                {/* <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'computer'} > */}
+                <Header onLeftClick={this.goHome} iconName={'computer'} >
                   <div>
                     <span>创建企业</span>
                   </div>

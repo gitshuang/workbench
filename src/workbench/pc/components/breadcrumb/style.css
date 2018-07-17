@@ -10,10 +10,10 @@
   font-family: "Microsoft Yahei", STHeiTi, Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
 }
 .breadcrumbClass ol li {
-  color:#888;
+  color:#555;
 }
 .breadcrumbClass a {
-  color:#888;
+  color:#555;
   cursor:pointer;
 }
 .breadcrumbClass ol>li+li:before {

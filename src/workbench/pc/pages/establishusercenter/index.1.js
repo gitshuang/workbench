@@ -3,19 +3,20 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
+
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
-import Header from 'components/header';
-import EstablishContent from 'containers/establishContent';
+
 import Icon from 'pub-comp/icon';
+import Header from 'containers/header';
+import EstablishContent from 'containers/establishContent';
+import Breadcrumbs from 'components/breadcrumb';
 
-import Personals from 'pages/home/personal';
+import { pageHome, appBreadcrumb, imgInner } from './style.css';
 
-import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
-import { logo, establish, hidden, imgInner } from './style.css';
-
-
-const { getSearchEnterOrTeam } = homeActions;
+const {
+  getSearchEnterOrTeam,
+} = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
 @withRouter
@@ -38,7 +39,7 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     requestError,
   },
 )
-class Establish extends Component {
+class EstablishUserCenter extends Component {
   static propTypes = {
     getSearchEnterOrTeam: PropTypes.func,
     requestError: PropTypes.func,
@@ -57,7 +58,6 @@ class Establish extends Component {
     history: {},
     userInfo: {},
   };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -80,24 +80,41 @@ class Establish extends Component {
   }
 
 
+  goHome = () => {
+    this.props.history.replace('/');
+  }
+
   render() {
-    const { userInfo } = this.props;
     const { allowTenants } = this.state;
-    const iconname = <Personals />;
+    const { userInfo } = this.props;
+
+    const img = userInfo.userAvator;
+    const imgIcon = img
+      ? <img alt="" src={img} className={imgInner} />
+      : <Icon type="staff" />;
+
     return (
-      <div className={`um-win ${establish}`} >
-        <div className="um-header" style={{ background: 'white', position: 'relative' }}>
-          <Header iconName={iconname} />
-          <div className={logo}>
-            <img alt="" src={logoUrl} style={{ width: '86px' }} />
-          </div>
+      <div className={`um-win ${pageHome}`} >
+        <div className="um-header" style={{ background: 'white' }}>
+          <Header
+            // iconName={allowTenants.length <= 0 ? imgIcon : 'computer'}
+            iconName = "computer"
+            onLeftClick={this.goHome}
+          >
+            <div>
+              <span>创建团队/企业</span>
+            </div>
+          </Header>
         </div>
         <div className="um-content">
-          <EstablishContent userInfo={userInfo} type="init" />
+          <div className={appBreadcrumb}>
+            <Breadcrumbs data={[{ name: '创建团队/企业' }]} goback={this.goHome} />
+          </div>
+          <EstablishContent userInfo={userInfo} />
         </div>
       </div>
     );
   }
 }
 
-export default Establish;
+export default EstablishUserCenter;

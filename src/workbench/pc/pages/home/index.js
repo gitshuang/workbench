@@ -101,6 +101,7 @@ class Home extends Component {
       deviceType: 'PC',
       lang: 'US',
     };
+    // 请求磁贴
     getWorkList(param).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
@@ -108,8 +109,7 @@ class Home extends Component {
       }
       requestSuccess();
     });
-    // 请求应用
-
+    // 请求应用   判断是否有过期应用功能
     const { admin } = userInfo;
     const timeType = this.totalTime();
     if (admin && timeType){

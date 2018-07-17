@@ -34,13 +34,6 @@
   background-position: right;
   background-color:rgba(255,255,255,0.92);
 }
-body{
-  /* background: linear-gradient(to bottom, #A8ABB0 , #D8DADC); */
-  /* background-image:url("assets/image/wgt/wiget_bg.png");
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-position: 0% 100%, 100% 5%, 90% 100%;
-  background-attachment:fixed; */
-}
 .imgInner{
   width:32px;
   height:32px;
@@ -61,6 +54,19 @@ body{
 
 .btnDisable{
   display: none;
+}
+
+.create{
+  color: #E14C46;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.create :global(.iconfont){
+  position: relative;
+  top: 4px;
+  color: #E14C46;
+  margin-right: 8px;
 }
 
 .logo_title{

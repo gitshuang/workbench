@@ -92,9 +92,6 @@
   cursor: pointer;
 }
 .appContent header :global(.iconfont){
-	font-size:20px;
-	font-weight:bold;
-	color:#555555;
 	position:absolute;
 	right:5px;
 	cursor:pointer;
@@ -152,9 +149,6 @@
   display: flex;
 }
 .search_icon_con :global(.iconfont){
-  color:#555555;
-  font-size:20px;
-  font-weight:bold;
   margin-left: 10px;
   line-height:40px;
 }

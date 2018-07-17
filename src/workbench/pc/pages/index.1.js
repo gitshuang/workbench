@@ -11,10 +11,9 @@ import store from 'store';
 import IM from 'IM';  // eslint-disable-line
 import { getContext, mapStateToProps } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
-
+import Es from 'pages/es';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
-
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import 'public/jDiworkBridge';
@@ -32,7 +31,9 @@ const { getUserInfo } = homeActions;
 
 function timer(fn, time) {
   let timerId = 0;
+
   function loop() {
+    // const sessionId = get_cookie("Hm_lvt_yht");
     fn();
     timerId = setTimeout(loop, time);
   }
@@ -49,9 +50,9 @@ function timer(fn, time) {
   requestError,
   getServiceList,
   getMessage,
-  getPoll,
-  getPortal,
   getUserInfo,
+  getPoll,
+  getPortal
 })
 class Root extends Component {
   static propTypes = {
@@ -64,9 +65,9 @@ class Root extends Component {
     requestError: PropTypes.func,
     getServiceList: PropTypes.func,
     getMessage: PropTypes.func,
+    getUserInfo: PropTypes.func,
     getPoll: PropTypes.func,
     getPortal: PropTypes.func,
-    getUserInfo: PropTypes.func,
   };
   static defaultProps = {
     history: {},
@@ -75,9 +76,9 @@ class Root extends Component {
     requestError: () => {},
     getServiceList: () => {},
     getMessage: () => {},
+    getUserInfo: () => {},
     getPoll: () => {},
     getPortal: () => {},
-    getUserInfo: () => {},
   };
   constructor(props) {
     super(props);
@@ -92,28 +93,48 @@ class Root extends Component {
       requestSuccess,
       requestError,
       getServiceList,
-      getPortal,
       getUserInfo,
+      getPoll,
+      getPortal
     } = this.props;
+    const { history } = this.props;
     requestStart();
 
-    // 请求用户信息  看看是否有租户
+    // 获取用户信息， 新用户跳转到加入组织页面，
     getUserInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       } else {
         requestSuccess();
+        if (!payload.allowTenants.length) {
+          history.replace('/establish');
+          this.setState({
+            inited: true,
+          });
+        } else {
+          getServiceList().then(({ error, payload }) => {
+            if (error) {
+              requestError(payload);
+            } else {
+              requestSuccess();
+            }
+          });
+          const browser = navigator.appName;
+          if (browser !== 'Microsoft Internet Explorer') {
+            IM(new componentTool('IM'), getContext(), { // eslint-disable-line
+              el: 'IM',
+            });
+          }
+          regMessageTypeHandler(this);
+          // 心跳
+          timer(getPoll, 10000);
+        }
+        this.setState({
+          loaded: true,
+        });
       }
     });
-    // 请求快捷应用 
-    getServiceList().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        requestSuccess();
-      }
-    });
-    // 请求是否含有portal 跳转到友空间首页
+
     getPortal().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
@@ -123,20 +144,13 @@ class Root extends Component {
     });
   }
 
-  componentDidMount() {
-    const { getPoll } = this.props;
-    const browser = navigator.appName;
-    if (browser !== 'Microsoft Internet Explorer') {
-      IM(new componentTool('IM'), getContext(), { // eslint-disable-line
-        el: 'IM',
-      });
-    }
-    regMessageTypeHandler(this);
-    // 心跳
-    timer(getPoll, 10000);
-  }
-
   render() {
+    if (!this.state.loaded) {
+      return null;
+    }
+    if (this.state.inited) {
+      return <Es />;
+    }
     return (
       <div>
         <Switch>

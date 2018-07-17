@@ -16,19 +16,18 @@ import nodata from 'assets/image/wgt/nodata.png';
 
 import {
   bg,
-  recently,
-  tabPane1,
-  tabContent,
-  clearfix,
   bg_wrap,
   wrap,
+  clearfix,
+  searchPanel,
   serviceSearch,
+  search_icon_con,
   ufSearch,
   search_tit,
-  search_icon_con,
-  searchPanel,
+  tabContent,
   nodataClass,
-  paginationClass,
+  recently,
+  tabPane1,
 } from './style.css';
 
 
@@ -276,7 +275,7 @@ class searchResult extends Component {
                 {Morelist}
               </Tabs>
               {
-                totalPages > 1 ? <div className={paginationClass}>
+                totalPages > 1 ? <div className="paginationClass">
                   <EnhancedPagination
                     items={totalPages}
                     activePage={this.state.activePage}

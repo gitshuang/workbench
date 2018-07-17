@@ -15,6 +15,7 @@ import Company from 'assets/image/wgt/company.png';
 
 @withRouter
 class EstablishContent extends Component {
+  
   openTeam = () => {
     const { history } = this.props;
     history.push('/createteam/home');
@@ -26,7 +27,7 @@ class EstablishContent extends Component {
   }
 
   render() {
-    const { userInfo,type } = this.props;
+    const { type } = this.props;
     let titleCont = null;
     if(type && type == "init"){
       titleCont = (<div>

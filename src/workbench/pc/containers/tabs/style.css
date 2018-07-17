@@ -110,9 +110,6 @@
   top: 0;
   display: none;
 }
-.tabDelBtn :global(.iconfont){
-  font-weight:bold;
-}
 .tab:hover .tabDelBtn,
 .more:hover .moreDelBtn{
   display: block;
