@@ -63,6 +63,18 @@
             transform: translate(-50%,-50%);
         }
 
+        .logo{
+            position: absolute;
+            left: 0;
+            z-index: 2;
+            width: 128px;
+            top: -70px;
+        }
+        .logo img{
+            display: block;
+            width: 100%;
+        }
+
         .fail-title {
             margin: 47px 40px 0 ;
             position: relative;
@@ -139,6 +151,9 @@
 <body>
     <div class="um-win">
         <div class="fail-content">
+            <div class="logo">
+                <img src="./logo.png" alt="">
+            </div>
             <div class="fail-title">
                 <p class="title">团队邀请</p>
                 <div class="line"></div>
