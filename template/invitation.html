@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -moz-box-sizing:border-box; /* Firefox */
-            -webkit-box-sizing:border-box; /* Safari */
+            -moz-box-sizing: border-box;
+            /* Firefox */
+            -webkit-box-sizing: border-box;
+            /* Safari */
         }
 
         html,
@@ -19,128 +22,197 @@
             width: 100%;
             height: 100%;
             position: relative;
-            background-color: rgba(230, 233, 233, 1);
             text-align: center;
+            background-image: linear-gradient(to bottom, #A8ABB0, #D8DADC);
         }
+
+        .um-win {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: vertical;
+            box-orient: vertical;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            background-image: url('./homeBg.png');
+            background-size: contain;
+            background-repeat: repeat-x;
+            background-position: top center;
+        }
+
         .blue-info {
-            color: RGBA(12, 100, 195, 1);
+            color: #007ACE;
         }
-        .enterprise_space{
-        }
-        .invitation-body{
-            display: inline-block;
-            text-align: center;
-            width: 660px;
-            /* height: 580px; */
-            background: rgba(255,255,255,1);
-            border: 1px solid RGBA(78, 89, 104, 0.19);
+
+        .invitation-body {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            max-width: 660px;
+            background: #ffffff;
             border-radius: 3px;
-            margin: 50px 0;
+            text-align: center;
+            transform: translate(-50%,-50%);
         }
-        .invitation-top{
-            width: 50%;
-            margin-left: 25%;
+
+        .invitation-title {
+            margin: 47px 40px 0 ;
+            position: relative;
+            height: 42px;
         }
+
+        .title{
+            position: absolute;
+            left: 50%;
+            margin-left: -158px;
+            width: 316px;
+            background: #ffffff;
+            font-size:32px;
+            font-family:MicrosoftYaHei-Bold;
+            color:#111111;
+            font-weight: bold;
+            line-height:42px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .line{
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(13, 20, 36, 0.1)
+        }
+
         .top-content {
+            width: 312px;
             text-align: left;
-            color: rgba(110,110,119,1);
-            line-height: 31px;
+            color: #555555;
+            margin: 0 auto;
+            overflow: hidden;
         }
-        .invitation-top .invitation-title{
-            font-size: 32px;
-            font-family: MicrosoftYaHei-Bold;
-            color: rgba(71,77,84,1);
-            line-height: 42px;
-            padding: 47px 0 37px;
-        }
-        .invitation-top .invitation-info{
+
+        .invitation-info {
             font-size: 17px;
             font-family: MicrosoftYaHei;
-            color: rgba(71,77,84,1);
+            color: #555555;
             line-height: 32px;
-            padding-bottom: 20px;
+            margin-top: 38px;
+            margin-bottom: 10px;
         }
-        .invitation-top .invitation-sub-info,.invitation-top .invitation-from{
+
+        .invitation-top .invitation-sub-info,
+        .invitation-top .invitation-from {
             font-size: 17px;
             font-family: MicrosoftYaHei;
-            color: rgba(110,110,119,1);
+            color: rgba(110, 110, 119, 1);
             line-height: 31px;
         }
-        .invitation-top .invitation-from{
+
+        .invitation-top .invitation-from {
             padding-top: 20px;
             text-align: right;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .invitation-button {
             width: 180px;
             height: 46px;
-            background: rgba(225,76,70,1);
+            background: rgba(225, 76, 70, 1);
             border-radius: 2px;
             font-size: 17px;
             font-family: MicrosoftYaHei;
-            color: rgba(255,255,255,1);
+            color: rgba(255, 255, 255, 1);
             line-height: 46px;
             display: inline-block;
-            margin: 50px 0 48px 0;
+            margin: 50px 0 25px 0;
             cursor: pointer;
         }
+
         .footer-info {
-            width: 40%;
-            margin-left: 30%;
+            width: 80%;
+            margin-left: 10%;
             text-align: left;
+            padding-left: 20%;
+            border-top: 1px solid #D0D0D0;
+            padding-top: 20px;
+            margin-bottom: 35px;
         }
+
         .footer-info .invitation-address {
             font-size: 14px;
             font-family: MicrosoftYaHei;
-            color: rgba(71,77,84,1);
+            color: #555555;
             line-height: 19px;
             padding-bottom: 9px;
         }
+
         .footer-sub-info {
-            padding-top: 50px;
-            padding-bottom:10px;
+            padding-top: 8px;
+            padding-bottom: 10px;
+            background:rgba(243,243,243,1);
+            border-radius:0px 0px 2px 2px;
         }
-        .sub-info {
-            font-size: 12px;
+
+        .footer-link {
+            font-size: 16px;
             font-family: MicrosoftYaHei;
-            color: rgba(110,110,119,1);
-            line-height: 16px;
-            padding-top: 10px;
-        }
-        .footer-link{
-            font-size:14px;
-            font-family:MicrosoftYaHei;
-            color:rgba(0,122,206,1);
-            line-height:19px;
+            color: #007ACE;
+            line-height: 19px;
             display: block;
             text-decoration: none;
+            margin-bottom: 6px;
+        }
+
+        .sub-info {
+            font-size: 14px;
+            font-family: MicrosoftYaHei;
+            color: #888888;
+            line-height: 16px;
         }
     </style>
 </head>
-<body >
-   <div class="invitation-body" >
-        <div class="invitation-top">
-            <p class="invitation-title" >团队邀请</p>
-            <div class="top-content">
-                <div class="invitation-info">HI,</div>
-                <div class="invitation-sub-info">我在友空间创建了一个协作团队方便沟通 </div>
-                <div class="invitation-sub-info"><span  class="blue-info enterprise_space">【3YCloudiv_OS】</span>邀请您加入</div>
-                <div class="invitation-from ">——文小刀</div>
+
+<body>
+    <div class="um-win">
+        <div class="invitation-body">
+            <div class="invitation-top">
+                <div class="invitation-title">
+                    <p class="title">团队邀请</p>
+                    <div class="line"></div>
+                </div>
+                <div class="top-content">
+                    <div class="invitation-info">HI，BigerM (yumiaob@y</div>
+                    <div class="invitation-sub-info">我在友空间创建了一个协作团队方便沟通 </div>
+                    <div class="invitation-sub-info">
+                        <span class="blue-info enterprise_space">【3YCloudiv_OS】</span>邀请您加入</div>
+                    <div class="invitation-from ">——文小刀</div>
+                </div>
+            </div>
+            <span class="invitation-button">加入团队</span>
+            <div class="invitation-footer">
+                <div class="footer-info">
+                    <p class="invitation-address">团队地址</p>
+                    <p class="blue-info enterprise_address">http://yyuedteam.yonyou.com</p>
+                </div>
+                <div class="footer-sub-info">
+                    <a href="http://www.baidu.com" class="footer-link">友空间</a>
+                    <p class="sub-info">建议在电脑端打开此页面</p>
+                </div>
             </div>
         </div>
-        <span class="invitation-button">加入团队</span>
-        <div class="invitation-footer">
-           <div class="footer-info">
-                <p class="invitation-address">团队地址</p>
-                 <p class="blue-info enterprise_address">http://yyuedteam.yonyou.com</p>
-           </div>
-            <div class="footer-sub-info">
-                <a href="http://www.baidu.com" class="footer-link">友空间</a>
-                <p class="sub-info">建议在电脑端打开此页面</p>
-            </div>
-        </div>
-   </div>
+    </div>
 </body>
+
 </html>

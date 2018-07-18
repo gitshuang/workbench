@@ -15,7 +15,6 @@
   width: 120px;
   text-align: right;
   font-size: 14px;
-  color:RGBA(71, 77, 84, 1);
 }
 .enter_form :global(.u-label>span) {
   vertical-align: middle;

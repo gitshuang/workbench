@@ -13,7 +13,6 @@ import { pageEnterprise, enterTitle, enterCont, hr, hr2, appBreadcrumb, homeNone
 @connect(
   mapStateToProps(
     'userInfo',
-    'metaData',
     {
       namespace: 'home',
     },
@@ -49,13 +48,11 @@ class Enterprise extends Component {
   }
 
   goHome = () => {
-    // const { userInfo: { allowTenants } } = this.props;
-    // if (allowTenants.length <= 0) return;
     this.props.history.replace('');
   }
 
   render() {
-    const { match: { params }, userInfo: { allowTenants }, userInfo } = this.props;
+    const { match: { params }, userInfo } = this.props;
     const classes = params.data === 'home' ? homeNone : '';
     return (
       <div className={`${classes}`}>
@@ -64,7 +61,6 @@ class Enterprise extends Component {
             params.data === 'home'
             ?
               <div className="um-header" style={{ background: 'white' }}>
-                {/* <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'computer'} > */}
                 <Header onLeftClick={this.goHome} iconName={'computer'} >
                   <div>
                     <span>创建企业</span>

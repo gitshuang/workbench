@@ -1,21 +1,11 @@
 .wrap{
-  /* width: 1200px; */
-  /* margin: 0 auto; */
-  /* background: #ffffff; */
-  /* height:366px;  */
-  /* border-radius: 2px ;  */
-  /* margin-top: 8px; */
   border: 1px solid rgba(78, 89, 104, 0.19);
-
-
   background: #ffffff;
   margin-top: 8px;
   margin: 10px 120px;
   background: #fff;
   min-width: 700px;
   position: relative;
-
-
 }
 .header{
   width: 100%;
@@ -48,11 +38,6 @@
   background: transparent;
   border: 1px solid #ffffff;
 }
-.header button i{
-  padding: 0;
-  margin: 0;
-  margin-top: 8px;
-}
 .content{
 
 }
@@ -66,11 +51,10 @@
   padding-bottom: 13px;
   font-size:15px;
   font-family:MicrosoftYaHei;
-  color:rgba(176,178,183,1);
+  color:#111111;
 }
 .content :global(.u-tabs-tab-active){
-  color:rgba(71,77,84,1);
-  font-weight: bold;
+  color:#E14C46;
 }
 .content :global(.u-tabs-ink-bar){
   background:rgba(225,76,70,1);
@@ -207,7 +191,7 @@
   background: #ffffff;
   width: 700px;
   margin: 0 auto;
-  color: rgba(176,178,183,1);
+  /* color: rgba(176,178,183,1); */
   font-size: 14px;
   padding: 0 5px;
   box-sizing: border-box;
@@ -227,7 +211,6 @@
   font-family:MicrosoftYaHei;
 }
 .applicationBtns span button{
-  color:rgba(71,77,84,1);
   background: rgba(9,44,66,0.04);
 }
 .applicationBtns span button.active{
@@ -266,14 +249,14 @@
 .applicationLists li div:nth-child(2) h6{
   font-size:14px;
   font-family:PingFangSC-Regular;
-  color:rgba(71,77,84,1);
+  color:#111111;
   line-height:20px;
   margin-bottom: 5px;
 }
 .applicationLists li div:nth-child(2) p{
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(176,178,183,1);
+  color:#888888;
   line-height:16px;
 }
 .applicationLists li div:nth-child(3){
@@ -284,7 +267,7 @@
 .applicationLists li div:nth-child(3) p{
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(176,178,183,1);
+  /* color:rgba(176,178,183,1); */
   line-height:16px;
 }
 .applicationLists li div:last-child{
@@ -299,16 +282,13 @@
   margin-left: 4px;
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(71,77,84,1);
   background: rgba(9,44,66,0.04);
 }
 .box3{
-  /* padding: 0 16%; */
   background: #ffffff;
   width: 700px;
-  /* border: 1px solid red; */
   margin: 0 auto;
-  color:rgba(176,178,183,1);
+  /* color:rgba(176,178,183,1); */
   font-size: 14px;
   padding: 0 5px;
 }
@@ -318,12 +298,45 @@
 .memberTit{
   padding-top: 24px;
   padding-bottom: 14px;
-  display: table-cell;
+  overflow: hidden;
 }
+
+.search{
+  width:356px;
+  height:34px;
+  line-height: 32px;
+  border-radius: 3px ;
+  border:1px solid rgba(223,227,232,1);
+  float: left;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.search input{
+  border:none;
+  width:254px;
+  height: 32px;
+  font-size: 14px;
+  border-right: 1px solid rgba(223,227,232,1);
+  padding:0 10px;
+}
+
+.search i{
+  position: relative;
+  top: 3px;
+}
+.search_label{
+  padding-left: 10px;
+}
+.memberSearch{
+  width: 100px;
+  float: right;
+  cursor: pointer;
+  text-align: center;
+}
+
 .memberBtns{
   text-align: right;
-  /* justify-content:flex-end; */
-  display:inline-block;
+  float: right;
   margin-left: 90px;
 }
 .memberBtns>label{
@@ -347,10 +360,9 @@
 } */
 .table_title{
   display: flex;
-
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(176,178,183,1);
+  /* color:rgba(176,178,183,1); */
   line-height:16px;
   padding-bottom: 7px;
   border-bottom: 1px solid rgba(13, 20, 36, 0.1);
@@ -403,7 +415,7 @@
 .memberLists li > div:nth-child(2) p{
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(176,178,183,1);
+  /* color:rgba(176,178,183,1); */
   line-height:16px;
 }
 .memberLists li > div:nth-child(3){
@@ -412,7 +424,7 @@
 .memberLists li > div:nth-child(3) p{
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(176,178,183,1);
+  /* color:rgba(176,178,183,1); */
   line-height:16px;
 }
 .memberLists li > div:last-child{
@@ -425,40 +437,9 @@
   margin-left: 4px;
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(71,77,84,1);
   background: rgba(9,44,66,0.04);
 }
 
-
-.search{
-  width:356px;
-  height:38px;
-  line-height: 38px;
-  border-radius: 3px ;
-  border:1px solid rgba(223,227,232,1);
-  color: rgba(135,139,148,1);
-  display: inline-block;
-  box-sizing: border-box;
-}
-.search input{
-  border:none;
-  width:254px;
-  height: 36px;
-  font-size: 14px;
-  border-right: 1px solid rgba(223,227,232,1);
-  padding:0 10px;
-}
-
-.search i{
-  width:18px;
-  height: 18px;
-  font-size: 18px;
-}
-.search_label{
-  font-size: 14px;
-  vertical-align: middle;
-  padding-left: 10px;
-}
 :global(.teamselect  .u-select-dropdown-menu-item-selected:after){
   content: '\00a0';
   display: inline-block;
@@ -467,7 +448,7 @@
   border-right-width: 0;
   width: 13px;
   height: 8px;
-  -webkit-transform: rotate(-50deg);
+  transform: rotate(-50deg);
   position: absolute;
   top:10px;
   right: 10px;
@@ -482,11 +463,8 @@
   background:rgba(9,44,66,0.04);
   border:none;
 }
-/* .box3 :global(.u-select-selection-rendered){
-   margin-left: 31px;
-} */
 .user_name{
-  color: RGBA(71, 77, 84, 1) !important;
+  /* color: RGBA(71, 77, 84, 1) !important; */
 }
 :global(.ie9) .wrap :global(.um-box.um-box-center){
   display: inline;

@@ -25,7 +25,7 @@
             width: 100%;
             height: 100%;
             position: relative;
-            background-color: rgba(230, 233, 233, 1);
+            background-image: linear-gradient(to bottom,#A8ABB0, #D8DADC);
         }
         .um-win {
             position: absolute;
@@ -41,6 +41,10 @@
             box-orient: vertical;
             -webkit-flex-direction: column;
             flex-direction: column;
+            background-image: url('./homeBg.png');
+            background-size: contain; 
+            background-repeat: repeat-x;
+            background-position: top center;
         }
         .um-css3-center {
             position: absolute;
@@ -70,7 +74,8 @@
             background: #ffffff;
             font-size:32px;
             font-family:MicrosoftYaHei-Bold;
-            color:rgba(71,77,84,1);
+            color:#111111;
+            font-weight: bold;
             line-height:42px;
             text-align: center;
             z-index: 2;
@@ -85,14 +90,14 @@
             background: rgba(13, 20, 36, 0.1)
         }
         .content{
-            width: 50%;
+            width: 80%;
             margin: 0 auto;
-            text-align: left;
+            text-align: center;
         }
         .name{
             font-size:17px;
             font-family:MicrosoftYaHei;
-            color:rgba(71,77,84,1);
+            color:#555555;
             line-height:32px;
             margin-top: 37px;
             margin-bottom: 22px;
@@ -110,9 +115,9 @@
         .team{
             font-size:27px;
             font-family:MicrosoftYaHei-Bold;
-            color:rgba(71,77,84,1);
+            color:#007ACE;
             line-height:36px;
-            margin-top: 25px;
+            margin-top: 50px;
         }
         .button{
             margin-top: 88px;
@@ -130,23 +135,24 @@
             font-size: 16px;
         }
         .footer{
-            margin-top: 110px;
+            margin-top: 70px;
             border-top: 1px solid rgba(13, 20, 36, 0.1);
             padding-top: 13px;
-            padding-bottom: 22px;
+            padding-bottom: 10px;
         }
         .footer p,.footer-link{
-            font-size:14px;
+            font-size:16px;
             font-family:MicrosoftYaHei;
-            color:rgba(0,122,206,1);
-            line-height:19px;
+            color:#007ACE;
+            line-height: 20px;
             display: block;
             text-decoration: none;
+            margin-bottom: 6px;
         }
         .footer span{
-            font-size:12px;
+            font-size:14px;
             font-family:MicrosoftYaHei;
-            color:rgba(74,81,93,1);
+            color:#888888;
             line-height:16px;
         }
     </style>
@@ -156,12 +162,12 @@
     <div class="um-win">
         <div class="um-css3-center um-box">
             <div class="header">
-                <p class="title">邀请</p>
+                <p class="title">团队邀请</p>
                 <div class="line"></div>
             </div>
             <div class="content">
-                <h4 class="name">HI , maokunb(maokunb@yonyou.com)</h4>
-                <p class="request">邀请你加入团队:</p>
+                <h4 class="name">HI , maokunb(maokunb@yonyou.com)邀请你加入团队:</h4>
+                <p class="request"></p>
             </div>
             <h3 class="team">快快乐</h3>
             <form action="" method="post">

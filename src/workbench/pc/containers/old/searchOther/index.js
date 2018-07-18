@@ -192,7 +192,7 @@ class searchOther extends Component {
             <div>共{dataList.totalElements}条</div>
             <ul className={recently}>{lis}</ul>
 
-            <div className={`${paginationClass} ${isShowPagination? isdisplay : ''}`}>
+            <div className={`paginationClass ${isShowPagination? isdisplay : ''}`}>
               <EnhancedPagination
                 items={this.state.pagesize}
                 activePage={this.state.activePage}

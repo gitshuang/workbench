@@ -4,6 +4,6 @@
   height:32px; 
   background:rgba(255,255,255,1);
 }
-.homeNone :global( .lebra-navbar-right)>div{
+.homeNone :global( .lebra-navbar-right) > div{
   display: none;
 }

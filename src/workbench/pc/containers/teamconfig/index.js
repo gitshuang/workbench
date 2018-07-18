@@ -11,23 +11,16 @@ import TeamManagerModal from 'containers/teamManagerModal';
 import TeamRemoveModal from 'containers/teamRemoveModal';
 import TeamUpgradeModal from 'containers/teamUpgradeModal';
 import TeamTransferModal from 'containers/teamTransferModal';
-// import TeamDismissModal from 'containers/teamDismissModal';
-// import TeamExitModal from 'containers/teamExitModal';
 
 import CreateTeam from './createTeam';
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
+import { ButtonBrand } from 'pub-comp/button';
 import Icon from 'pub-comp/icon';
 import Tabs from 'bee/tabs';
-import Dropdown from 'bee/dropdown';
-import Menu from 'bee/menus';
-import Radio from 'bee/radio';
 import Select from 'bee/select';
-import Pagination from 'bee/pagination'
 const { TabPane } = Tabs;
-const { Item } = Menu;
 const Option = Select.Option;
-const OptGroup = Select.OptGroup;
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {
@@ -38,7 +31,6 @@ const {
   adminToUser,            // 管理员降级用户
   openManagerModal,
   openRemoveModal,
-  closeRemoveModal,
   openUpgradeModal,
   openTransferModal,
   openDismissModal,
@@ -52,12 +44,8 @@ import {
   wrap,
   header,
   content,
-  box,
   box2,
   box3,
-  item,
-  image,
-  footer,
   applicationBtns,
   active,
   applicationLists,
@@ -66,12 +54,12 @@ import {
   memberLists,
   search,
   search_label,
-  team_cont,
   option_sele,
   table_title,
   table_permise,
   user_name,
   nopic,
+  memberSearch
 } from './index.css';
 
 @withRouter
@@ -503,16 +491,17 @@ class CreateTeamContent extends Component {
             </div>
 
             <div
-              style={{textAlign:"center",cursor:"pointer" }}
+              className={memberSearch}
               onClick={this.searchFn}
             >
+              <Icon type="search" />
               <span className={search_label}>搜索</span>
             </div>
           </div>
           <div className={memberBtns}>
             <Checkbox colors="info" onChange={this.changeCheck}>只显示管理员</Checkbox>
             {
-              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>邀请成员</Button>:null
+              _invitePermission?<ButtonBrand onClick={this.inviteMember}>邀请成员</ButtonBrand>:null
             }
           </div>
         </div>
@@ -557,26 +546,15 @@ class CreateTeamContent extends Component {
             }
           </ul>
         </div>
-        <div className="um-box-center" style={{paddingBottom:"20px"}}>
-          {/* <Pagination
-            first
-            last
-            prev
-            next
-            boundaryLinks
+        <div className="um-box-center paginationClass" style={{paddingBottom:"20px"}}>
+          <EnhancedPagination
+            maxButtons={3}
             gap={true}
-            items={userList.totalPages}
-            maxButtons={10}
-            activePage={activePage}
-            onSelect={this.handleSelect.bind(this)}
-          /> */}
-           <EnhancedPagination
-                  maxButtons={3}
-                  gap={true}
-                  items={this.state.pagesize}
-                  activePage={this.state.activePage}
-                  onDataNumSelect={this.paginationNumSelect}
-                  onSelect={this.handleSelect} />
+            items={this.state.pagesize}
+            activePage={this.state.activePage}
+            onDataNumSelect={this.paginationNumSelect}
+            onSelect={this.handleSelect} 
+          />
         </div>
       </div>
     )

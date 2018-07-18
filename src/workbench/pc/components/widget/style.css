@@ -204,7 +204,7 @@
     height: 32px;
 }
 
-.formControl{
+/* .formControl{
     // -webkit-box-flex:1;
     // width: 200px;
 }
@@ -216,7 +216,7 @@
 .closeBtn{
     // -webkit-box-flex:1;
     // width: 60px;
-}
+} */
 
 .titleEdit{
   position: absolute;
@@ -252,7 +252,7 @@
 .footer>div:hover{
   background: #ccc;
 }
-// folder.js
+/* // folder.js */
 .widgetFileItem .fileNum{
   position:absolute;
   right:8px;

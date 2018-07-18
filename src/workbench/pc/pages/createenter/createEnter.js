@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
 
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
@@ -23,38 +24,10 @@ import {
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
 const { Option } = Select;
-/*
-class Nature extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: props.defaultValue
-    }
-  }
-  onChange = (value) => {
-    this.setState({
-      value
-    });
-    this.props.onChange(value);
-  }
-  render() {
-    return (
-      <Radio.RadioGroup
-        selectedValue={this.state.value}
-        onChange={this.onChange} >
-        <Radio value="LegalPerson" >法人企业</Radio>
-        <Radio value="IndividualPerson" >个体工商户</Radio>
-        <Radio value="ResponsePerson" >个人企业</Radio>
-        <Radio value="Other" >其他</Radio>
-      </Radio.RadioGroup>
-    );
-  }
-}
-*/
 
 @withRouter
 @connect(
-  () => ({}),
+  mapStateToProps(),
   {
     requestStart,
     requestSuccess,

@@ -33,17 +33,35 @@ body .u-form-control{
   padding-left: 8px;
   border: 1px solid #D0D0D0;
 }
-
-body .u-button {
+.u-button {
   min-width: 5px;
   padding: 0;
   color: #555555;
 }
-
 body .iconfont{
   font-size:20px;
   font-weight:bold;
   color: #555555;
+}
+body .u-select{
+  color: #555555;
+}
+body .u-progress-bar{
+  background-color: #e14b46;
+  line-height: 32px;
+  font-size: 14px;
+}
+body .u-progress-label{
+  float: left;
+  padding: 0 20px;
+}
+body .u-radio.is-checked .u-radio-label:before{
+  border-color: #4E5E68;
+  background:linear-gradient(180deg,rgba(255,255,255,1),rgba(249,250,251,1));
+  box-shadow:0px 1px 0px 0px rgba(22,29,37,0.05);
+}
+body .u-radio.is-checked .u-radio-label:after{
+  background:#4E5E68;
 }
 
 .tc i:hover{

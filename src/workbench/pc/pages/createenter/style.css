@@ -66,24 +66,19 @@
 .pageEnterprise{
   margin: 90px 120px 0;
   background: #fff;
-  /* text-align: center; */
-  /* padding-left: 100px; */
-  /* overflow: auto; */
   padding-bottom: 50px;
   min-width: 500px;
 }
 
 .enterTitle{
-  /* height:27px; */
   font-size:21px;
-  color:#474D54;
+  color: #111111;
   font-weight: 600;
   line-height:27px; 
   width: 360px;
   margin: 0 auto;
   padding-top: 30px;
   margin-bottom: 10px;
-  /* border-bottom: 1px solid rgba(13,20,36,1); */
 }
 
 .hr{

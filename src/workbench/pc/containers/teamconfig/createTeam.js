@@ -10,9 +10,8 @@ import Select from 'bee/select';
 import { ButtonBrand } from 'pub-comp/button';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-import CitySelect from 'bee/city-select';
 import 'assets/style/Form.css';
-import { enter_form, tenant_address, lxr_hr, lxr_title, lxr_hr_bottom, team_cont, form_team } from './createTeam.css';
+import { enter_form, lxr_hr, team_cont, form_team } from './createTeam.css';
 
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -23,7 +22,6 @@ const {
   userToAdmin,            // 用户升级管理员
   adminToUser,            // 管理员降级用户
   openRemoveModal,
-  closeRemoveModal,
   openUpgradeModal,
   openTransferModal,
   openDismissModal,
@@ -42,7 +40,6 @@ class SubmitBtn extends Component {
   render() {
     return (
       <div className={'u-form-submit'}>
-        {/* <ButtonBrand onClick={this.click}>保存</ButtonBrand> */}
         {
           this.props.disabled ? <ButtonBrand onClick={this.click} >保存</ButtonBrand> : <ButtonBrand disabled={true} >保存</ButtonBrand>
         }
