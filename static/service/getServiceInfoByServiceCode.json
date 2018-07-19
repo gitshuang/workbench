@@ -11,6 +11,7 @@
             "hasTopNav": true,
             "single": false,
             "applicationId": "11111111",
+            "fc":true,
             "menuItems": [
                 {
                     "createTime": null,
@@ -725,7 +726,7 @@
                                 "serviceCode": "serve_29",
                                 "applicationId": "app_4",
                                 "enable": true,
-                                "url": "http://workbenchdev.yyuap.com/basedoc-mc/pages/index.html#/manage",
+                                "url": "http://localhost:8081",
                                 "serviceIcon": "https://cdn.yonyoucloud.com/pro/workbench/e93d.svg",
                                 "capable": false,
                                 "selected": false,

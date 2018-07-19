@@ -100,7 +100,7 @@ class DropdownButton extends Component {
     }
     let marginLeft2 = -148;
     if (type && type === 'home') {
-      marginLeft2 = marginLeft || -192;
+      marginLeft2 = marginLeft || 7;
     }
     // onSelect={(e)=>{this.handleSelect(e,fun)}}
     const menus = (
@@ -137,24 +137,26 @@ class DropdownButton extends Component {
 
     const arrard = this.state.visible ? 'upward' : 'pull-down';
     return (
-      <div className={dropdownButtonCont} >
-        <div className={`${labelCont} home_title`}>
-          <span>{label}</span>
+      //调整布局，使其可以点击下拉面板即可展开和缩放
+      <Dropdown
+        overlayClassName="_btn_down"
+        getPopupContainer={this.props.getPopupContainer}
+        trigger={['click']}
+        overlay={menus}
+        animation="slide-up"
+        onClick={openMenu}
+        onVisibleChange={this.onVisibleChange}
+      >
+        <div className={dropdownButtonCont}>
+          <div className={`${labelCont} home_title`}>
+            <span>{label}</span>
+          </div>
+          <div id="_dropdown_popcontainer"
+               className={`${this.state.visible ? btnUpward : btnPullDown} home_title_down `}>
+            <div><Icon type={arrard} className={iconStyle}/></div>
+          </div>
         </div>
-        <div id="_dropdown_popcontainer" className={`${this.state.visible ? btnUpward : btnPullDown} home_title_down `}>
-          <Dropdown
-            overlayClassName="_btn_down"
-            getPopupContainer={this.props.getPopupContainer}
-            trigger={['click']}
-            overlay={menus}
-            animation="slide-up"
-            onClick={openMenu}
-            onVisibleChange={this.onVisibleChange}
-          >
-            <div><Icon type={arrard} className={iconStyle} /></div>
-          </Dropdown>
-        </div>
-      </div>
+      </Dropdown>
     );
   }
 }
