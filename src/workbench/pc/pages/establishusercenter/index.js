@@ -23,6 +23,10 @@ class EstablishUserCenter extends Component {
     this.props.history.replace('/');
   }
 
+  goBack = () => {
+    this.props.history.goBack();
+  }
+
   render() {
     return (
       <div className={`um-win`} >
@@ -36,7 +40,7 @@ class EstablishUserCenter extends Component {
             </div>
           </Header>
           <div className="appBreadcrumb">
-            <Breadcrumbs data={[{ name: '创建团队/企业' }]} goback={this.goHome} />
+            <Breadcrumbs data={[{ name: '创建团队/企业' }]} goback={this.goBack} />
           </div>
         </div>
         <div className="um-content content">
