@@ -44,10 +44,11 @@ class SelectEnter extends Component {
         company,
       }
     } = this.props;
-
+    let currentId = this.props.userInfo.currentTeamConfig.tenantId;
     let _dataItem = [];
     allowTenants.forEach(({ tenantId: name, tenantName: value, type }) => {
-      if (company != value) {
+      // if (company != value) {
+      if (currentId != name) {
         let obj = {
           name,
           value,
