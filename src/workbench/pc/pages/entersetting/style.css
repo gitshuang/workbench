@@ -178,13 +178,6 @@
   width:100%;
 }
 
-.appBreadcrumb{
-  padding-left: 23px;
-  font-size: 14px;
-  height:32px;
-  background:rgba(255,255,255,1);
-}
-
 :global(.enter_setting .u-form-submit)>button{
   margin-left: 0px;
 }

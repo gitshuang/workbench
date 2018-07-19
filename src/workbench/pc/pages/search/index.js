@@ -8,7 +8,7 @@ import searchActions from 'store/root/search/actions';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
-import { header, umContent, appBreadcrumb } from './style.css';
+import { umContent } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setSearchHeadData } = searchActions;
@@ -85,19 +85,17 @@ class Search extends Component {
 
     return (
       <div className="um-win">
-        <div className={header}>
-          <div className="um-header">
-            <Header onLeftClick={this.goHome} iconName="computer" >
-              <div>
-                <span>{appName}</span>
-              </div>
-            </Header>
-            <div className={appBreadcrumb}>
-              <BreadcrumbContainer data={brm} goback={this.goBack} />
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName="computer" >
+            <div>
+              <span>{appName}</span>
             </div>
+          </Header>
+          <div className="appBreadcrumb">
+            <BreadcrumbContainer data={brm} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${umContent} um-box um-content`}>
+        <div className={`${umContent} content um-box um-content`}>
           {this.props.routes.map((route, i) => (
             <RouteWithSubRoutes key={i} {...route} />
           ))}

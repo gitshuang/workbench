@@ -112,9 +112,6 @@
   line-height: 36px;
   display: none;
 }
-/* .enterForm >span:nth-child(5) :global(.u-form-item){
-  margin-top: -20px;
-} */
 
 .enterForm :global(.u-city-select){
   display: inline-flex;
@@ -124,11 +121,6 @@
   width: 271px;
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
-
-/*.enterForm :global(.u-select .u-select-arrow):before{
-  content: "\E964" !important;
-  font-family: 'iconfont' !important;
-}*/
 
 .tenantAddress{
   background: red;
@@ -168,24 +160,6 @@
   width:100%;
 }
 
-.appBreadcrumb{
-  padding-left: 23px;
-  font-size: 14px;
-  height:32px;
-  background:rgba(255,255,255,1);
-}
-
-.homeNone :global( .lebra-navbar-right)>div{
-  display: none;
-}
-.homeNone :global( .u-select-selection-selected-value){
-  color: RGBA(33, 43, 54, 1);
-  font-size: 14px;
-}
-.homeNone :global( .tenant_size){
-  background: red;
-} 
-
 .processLoading{
   width: 338px;
   height: 32px;
@@ -204,12 +178,7 @@
   margin-left: 90px;
   cursor: not-allowed;
 }
-.progressBar i{
-  /* position: absolute;
-  right: 190px;
-  top: 10px;
-  color: #fff; */
-}
+
 .enterForm :global(.progress_wrap){
   padding-bottom: 30px;
 }

@@ -17,4 +17,4 @@ rootElm.addEventListener('mousedown', (e) => {
     type: 'hideIm',
   });
 });
-ReactDOM.render(<div className={`${IS_IE ? 'ie9' : ''}`}><App /></div>, rootElm);
+ReactDOM.render(<div className={`${IS_IE ? 'ie9' : 'diwork'}`}><App /></div>, rootElm);

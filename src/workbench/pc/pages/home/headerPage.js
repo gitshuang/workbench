@@ -13,7 +13,7 @@ import Header from 'containers/header';
 import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
 import Personals from './personal';
-import { header, allBtn, btnDisable, create } from './style.css';
+import { allBtn, btnDisable, create } from './style.css';
 import logoUrl from 'assets/image/logo.svg';
 
 
@@ -188,7 +188,7 @@ class HeaderPage extends Component {
 
     const title = <img alt="" src={logoUrl} style={{ width: '86px' }} />
     return (
-      <div className={`${header}`} style={background} id="home_header">
+      <div className="header" style={background} id="home_header">
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}

@@ -6,7 +6,6 @@ import Breadcrumbs from 'components/breadcrumb';
 import Header from 'containers/header';
 import CreateTeamContent from 'containers/createTeam';
 
-import { appBreadcrumb, homeNone } from './style.css';
 
 @withRouter
 class CreateTeam extends Component {
@@ -40,25 +39,19 @@ class CreateTeam extends Component {
 
   render() {
     const { match: { params } } = this.props;
-    const classes = params.data === 'home' ? homeNone : '';
     return (
-      <div className={`um-win ${classes}`}>
-        {
-          params.data === 'home'
-          ?
-            <div className="um-header" style={{ background: 'white' }}>
-              <Header onLeftClick={this.goHome} iconName={'computer'} >
-                <div>
-                  <span>创建团队</span>
-                </div>
-              </Header>
+      <div className='um-win'>
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName={'computer'} >
+            <div>
+              <span>创建团队</span>
             </div>
-          : null
-        }
-        <div className="um-content">
-          <div className={appBreadcrumb}>
+          </Header>
+          <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '创建团队' }]} goback={this.goBack} />
           </div>
+        </div>
+        <div className="um-content content">
           <CreateTeamContent />
         </div>
       </div>

@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-
-import Icon from 'pub-comp/icon';
 import Header from 'containers/header';
 import EstablishContent from 'containers/establishContent';
 import Breadcrumbs from 'components/breadcrumb';
-
-import { pageHome, appBreadcrumb, imgInner } from './style.css';
-
 
 @withRouter
 class EstablishUserCenter extends Component {
@@ -30,8 +25,8 @@ class EstablishUserCenter extends Component {
 
   render() {
     return (
-      <div className={`um-win ${pageHome}`} >
-        <div className="um-header" style={{ background: 'white' }}>
+      <div className={`um-win`} >
+        <div className="um-header header">
           <Header
             iconName = "computer"
             onLeftClick={this.goHome}
@@ -40,11 +35,11 @@ class EstablishUserCenter extends Component {
               <span>创建团队/企业</span>
             </div>
           </Header>
-        </div>
-        <div className="um-content">
-          <div className={appBreadcrumb}>
+          <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '创建团队/企业' }]} goback={this.goHome} />
           </div>
+        </div>
+        <div className="um-content content">
           <EstablishContent  />
         </div>
       </div>

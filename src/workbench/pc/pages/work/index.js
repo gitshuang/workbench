@@ -31,7 +31,6 @@ const {
   tabArea,
   wrap,
   titleServiceDisplayStyle,
-  header,
   work,
   titleArea,
   service,
@@ -360,41 +359,40 @@ export default class Work extends Component {
     const iconName = <Icon title="返回首页" type="computer" />;
     return (
       <div className={`${wrap} um-win ${work}`}>
-        <div className={header}>
-          <div className="um-header">
-            <HeaderContainer onLeftClick={this.goBack} iconName={iconName} leftContent={domainName}>
-              <div className={titleArea}>
-                <span>{title}</span>
-                {
-                  hasRelationFunc ?
-                    (<Icon
-                      title="相关服务"
-                      type={titleServiceType ? 'upward' : 'pull-down'}
-                      className={`
-                        ${titleServiceType ? titleServiceDisplayStyle : ''}
-                        ${service}
-                      `}
-                      onClick={this.btnOnclick}
-                    />) : undefined
-                }
-                <Icon
-                  title="添加到首页"
-                  className={pin}
-                  style={{
-                    // right: hasRelationFunc ? '-27px' : '-27px',
-                    position: 'absolute',
-                    top: '0px',
-                  }}
-                  type={pinType ? 'pin2' : 'pin'}
-                  onClick={this.pinDisplayFn}
-                />
-              </div>
-            </HeaderContainer>
-          </div>
+        <div className="um-header header">
+          <HeaderContainer onLeftClick={this.goBack} iconName={iconName} leftContent={domainName}>
+            <div className={titleArea}>
+              <span>{title}</span>
+              {
+                hasRelationFunc ?
+                  (<Icon
+                    title="相关服务"
+                    type={titleServiceType ? 'upward' : 'pull-down'}
+                    className={`
+                      ${titleServiceType ? titleServiceDisplayStyle : ''}
+                      ${service}
+                    `}
+                    onClick={this.btnOnclick}
+                  />) : undefined
+              }
+              <Icon
+                title="添加到首页"
+                className={pin}
+                style={{
+                  // right: hasRelationFunc ? '-27px' : '-27px',
+                  position: 'absolute',
+                  top: '0px',
+                }}
+                type={pinType ? 'pin2' : 'pin'}
+                onClick={this.pinDisplayFn}
+              />
+            </div>
+          </HeaderContainer>
           {
             widthBrm ? <BreadcrumbContainer withSidebar={type !== 1} /> : null
           }
         </div>
+          
         <div className={`${workArea}`}>
           {this.makeLayout()}
         </div>
