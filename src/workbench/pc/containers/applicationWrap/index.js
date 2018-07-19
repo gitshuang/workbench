@@ -33,8 +33,12 @@ class Application extends Component {
     if (!userInfo.allowTenants.length) {
       history.replace('/establish');
     } else {
-      history.replace('');
+      history.goBack();
     }
+  }
+  goHome = () => {
+    const { history } = this.props;
+    history.replace('');
   }
   render() {
     const {
@@ -46,7 +50,7 @@ class Application extends Component {
     return (
       <div className="um-win">
         <div className="um-header header">
-          <Header onLeftClick={this.goBack} iconName={"computer"} >
+          <Header onLeftClick={this.goHome} iconName={"computer"} >
             <div>
               <span>{name}</span>
             </div>
