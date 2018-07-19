@@ -128,7 +128,7 @@ class Invitation extends Component {
     });
   }
 
-  goBack() {
+  goBack = () => {
     this.props.history.goBack();
   }
 

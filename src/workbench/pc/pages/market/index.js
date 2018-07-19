@@ -61,11 +61,13 @@ class Account extends Component {
   }
 
   goBack = (i, backVal) => {
-    this.props.popBrm({ index: i });
-    this.props.history.goBack();
-    // if (backVal > 0) {
-    //   this.props.history.go(-backVal);
-    // }
+    if (backVal > 1) {
+      this.props.history.go(-backVal);
+      this.props.popBrm({ index: -backVal });
+    }else{
+      this.props.popBrm({ index: i });
+      this.props.history.goBack();
+    }
   }
 
 

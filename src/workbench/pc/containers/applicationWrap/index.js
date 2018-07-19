@@ -27,6 +27,7 @@ class Application extends Component {
       });
     });
   }
+
   goBack = () => {
     const { history } = this.props;
     history.goBack();
@@ -37,10 +38,12 @@ class Application extends Component {
     //   history.goBack();
     // }
   }
+
   goHome = () => {
     const { history } = this.props;
     history.replace('');
   }
+  
   render() {
     const {
       name,
