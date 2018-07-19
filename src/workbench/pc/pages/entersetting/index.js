@@ -13,7 +13,7 @@ import EnterOption from 'containers/enterOption';
 import EnterSetting from './enterSetting';
 
 import {
-  pageEnterprise, enterTitle, enterCont, hr, hr2, title, appBreadcrumb,
+  pageEnterprise, enterTitle, enterCont, hr, hr2, title, 
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -110,24 +110,17 @@ class Enterprise extends Component {
 
     return (
       <div>
-        <div style={{position:"fixed",top:0,left:0,width:"100%",zIndex:"9999"}}>
-          {
-            params.data === 'home'
-            ?
-              <div className="um-header" style={{ background: 'white' }}>
-                <Header onLeftClick={this.goHome} iconName="computer" >
-                  <div>
-                    <span>设置企业</span>
-                  </div>
-                </Header>
-              </div>
-            : null
-          }
-          <div className={appBreadcrumb}>
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName="computer" >
+            <div>
+              <span>设置企业</span>
+            </div>
+          </Header>
+          <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '设置企业' }]} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${pageEnterprise}`}>
+        <div className={`${pageEnterprise} content`}>
           <div className={enterTitle}>
             <div className={title}>{company}</div>
             <EnterOption

@@ -7,7 +7,7 @@ import { mapStateToProps } from '@u';
 import Breadcrumbs from 'components/breadcrumb';
 import Header from 'containers/header';
 import CreateEnter from './createEnter';
-import { pageEnterprise, enterTitle, enterCont, hr, hr2, appBreadcrumb, homeNone } from './style.css';
+import { pageEnterprise, enterTitle, enterCont, hr, hr2 } from './style.css';
 
 @withRouter
 @connect(
@@ -25,9 +25,6 @@ class Enterprise extends Component {
       goBack: PropTypes.func,
       replace: PropTypes.func,
     }),
-    match: PropTypes.shape({
-      params: PropTypes.object,
-    }),
     userInfo: PropTypes.shape({
       allowTenants: PropTypes.array,
     }),
@@ -35,7 +32,6 @@ class Enterprise extends Component {
   static defaultProps = {
     history: {},
     userInfo: {},
-    match: {},
   };
   constructor(props) {
     super(props);
@@ -52,28 +48,24 @@ class Enterprise extends Component {
   }
 
   render() {
-    const { match: { params }, userInfo } = this.props;
-    const classes = params.data === 'home' ? homeNone : '';
+    const { userInfo } = this.props;
     return (
-      <div className={`${classes}`}>
-        <div style={{position:"fixed",top:0,left:0,width:"100%",zIndex:"9999"}}>
-          {
-            params.data === 'home'
-            ?
-              <div className="um-header" style={{ background: 'white' }}>
-                <Header onLeftClick={this.goHome} iconName={'computer'} >
-                  <div>
-                    <span>创建企业</span>
-                  </div>
-                </Header>
-              </div>
-            : null
-          }
-          <div className={appBreadcrumb}>
+      <div>
+        <div className="header um-header">
+          <Header
+            iconName = "computer"
+            onLeftClick={this.goHome}
+          >
+            <div>
+              <span>创建企业</span>
+            </div>
+          </Header>
+          <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '创建企业' }]} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${pageEnterprise}`}>
+        
+        <div className={`${pageEnterprise} content`}>
           <div className={enterTitle} >创建企业</div>
           <hr className={hr} />
           <div className={enterCont} >

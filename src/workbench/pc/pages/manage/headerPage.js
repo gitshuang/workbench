@@ -53,7 +53,7 @@ class HeaderPage extends Component {
   render() {
     const iconName = <Icon type="computer" />;
     return (
-      <div className={header}>
+      <div className="header">
         <Header
           onLeftClick={this.goHome}
           leftContent={this.getLeftContent()}

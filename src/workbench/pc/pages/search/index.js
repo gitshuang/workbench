@@ -8,7 +8,7 @@ import searchActions from 'store/root/search/actions';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
-import { header, umContent, appBreadcrumb } from './style.css';
+import { umContent } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setSearchHeadData } = searchActions;
@@ -64,16 +64,17 @@ class Search extends Component {
   }
 
   goBack = () => {
-    const {
-      setSearchHeadData, searchHeadData: { brm }, searchHeadData: { searchValue },
-    } = this.props;
-    const appName = brm[0].name;
-    if (this.props.location.pathname.indexOf('searchlist') > -1) {
-      this.props.history.push(`/search/searchvalue/${!searchValue ? '' : searchValue}`);
-    } else {
-      this.props.history.replace('');
-    }
-    setSearchHeadData({ appName, brm: [{ name: appName }] });
+    // const {
+    //   setSearchHeadData, searchHeadData: { brm }, searchHeadData: { searchValue },
+    // } = this.props;
+    // const appName = brm[0].name;
+    // if (this.props.location.pathname.indexOf('searchlist') > -1) {
+    //   this.props.history.push(`/search/searchvalue/${!searchValue ? '' : searchValue}`);
+    // } else {
+    //   this.props.history.replace('');
+    // }
+    // setSearchHeadData({ appName, brm: [{ name: appName }] });
+    this.props.history.goBack();
   }
 
   goHome = () => {
@@ -85,19 +86,17 @@ class Search extends Component {
 
     return (
       <div className="um-win">
-        <div className={header}>
-          <div className="um-header">
-            <Header onLeftClick={this.goHome} iconName="computer" >
-              <div>
-                <span>{appName}</span>
-              </div>
-            </Header>
-            <div className={appBreadcrumb}>
-              <BreadcrumbContainer data={brm} goback={this.goBack} />
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName="computer" >
+            <div>
+              <span>{appName}</span>
             </div>
+          </Header>
+          <div className="appBreadcrumb">
+            <BreadcrumbContainer data={brm} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${umContent} um-box um-content`}>
+        <div className={`${umContent} content um-box um-content`}>
           {this.props.routes.map((route, i) => (
             <RouteWithSubRoutes key={i} {...route} />
           ))}

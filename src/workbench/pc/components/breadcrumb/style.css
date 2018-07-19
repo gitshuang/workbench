@@ -1,9 +1,32 @@
 .breadcrumbClass{
   font-size: 14px;
+  height:32px;
+  line-height:32px;
+  display:flex;
 }
+
+.breadcrumbClass a {
+  color:#555;
+  cursor:pointer;
+  display:inline-block;
+  -webkit-box-flex:1;
+  line-height:32px;
+}
+
+.breadcrumbClass a:hover{
+  color: rgba(225,76,70,1);
+}
+
+.breadcrumbBack {
+  margin:0 10px;
+  color:#888;
+  -webkit-box-flex:1;
+  line-height:32px;
+}
+
 .breadcrumbClass ol {
-  height:35px;
-  line-height: 37px;
+  height:32px;
+  line-height: 32px;
   display:inline-block;
   background: none;
   margin:0;
@@ -15,41 +38,15 @@
 .breadcrumbClass ol li {
   color:#555;
 }
-.breadcrumbClass a {
-  color:#555;
-  cursor:pointer;
-}
-.breadcrumbClass ol>li+li:before {
+
+.breadcrumbClass ol > li + li:before {
   content: "\003e";
 }
-.breadcrumbClassIcon {
-  cursor:pointer;
-  color:#555555;
-  margin:0 10px;
-  vertical-align: middle;
-}
-.breadcrumbClass {
-  height:35px;
-  line-height:35px;
-  display:flex;
-}
-.breadcrumbClass a{
-  display:inline-block;
-  -webkit-box-flex:1;
-  line-height:35px;
-}
-.breadcrumbClass a:hover{
-  color: rgba(225,76,70,1);
-}
-.breadcrumbBack {
-  margin:0 10px;
-  color:#888;
-  -webkit-box-flex:1;
-  line-height:33px;
-}
+
 .breadcrumbClass li:last-child{
   color:#111111;
 }
+
 .itmeHover:hover span{
   color:rgba(225,76,70,1);
   cursor: pointer;
