@@ -78,9 +78,12 @@ class Account extends Component {
         <div className={`${bg} um-content um-vbox`}>
           {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
           {
-            appId ? (<IFrame title="应用市场" url={`/diwork-market/appMarket#/application/${appId}`} />) : (<IFrame title="应用市场" url="/diwork-market/appMarket" />)
+            appId
+            ? 
+            <IFrame title="应用市场" url={`/diwork-market/appMarket#/application/${appId}`} />
+            :
+            <IFrame title="应用市场" url="/diwork-market/appMarket" />
           }
-          {/* <IFrame title="应用市场" url="/diwork-market/appMarket" /> */}
         </div>
       </ApplicationWrap>
     );
