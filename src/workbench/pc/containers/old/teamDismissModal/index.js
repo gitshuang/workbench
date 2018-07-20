@@ -10,7 +10,6 @@ import SelectEnter from '../teamExitModal/selectEnter'
 @connect(
   mapStateToProps(
     'dismissTeamMsg',
-    'dismissModal',
     {
       key: 'userInfo',
       value: (teamconfig, ownProps, root) => {

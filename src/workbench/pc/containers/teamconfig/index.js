@@ -32,8 +32,6 @@ const {
   openManagerModal,
   openRemoveModal,
   openUpgradeModal,
-  openTransferModal,
-  openDismissModal,
   openExitModal,
   getAllApps,
   getUserList,
@@ -70,8 +68,6 @@ import {
     'removeModal',      //  团队成员删除弹窗开关
     'upgradeModal',     //  升级为企业弹窗开关
     'transferModal',    //  移交团队弹窗开关
-    'dismissModal',     //  解散团队弹窗开关
-    'exitModal',        //  退出团队弹窗开关
     'applicationlist',  //  应用列表
     'userList',         //  用户列表
     'activePage',       //  用户列表页数
@@ -98,8 +94,6 @@ import {
     openManagerModal,       // 打开升级管理员弹窗
     openRemoveModal,        // 团队成员打开删除弹窗
     openUpgradeModal,       // 打开升级为企业弹窗
-    openTransferModal,      // 打开移交团队弹窗
-    openDismissModal,       // 打开解散团队弹窗
     openExitModal,          // 打开退出团队弹窗
     getAllApps,             // 获取全部应用
     getUserList,            // 获取用户列表
@@ -111,13 +105,13 @@ class CreateTeamContent extends Component {
   constructor(props) {
     super(props);
     this.clickValue = "";
-    this.tenantName = "";
     this.state = {
 
       imgWarning: "",         // 团队头像警告格式
       imgUrl: "",             // 基础设置  选择头像回显
 
       tenantId: "",           // 团队id  直接取出来存到这里
+      tenantName: '',
       value: "",              // 基础设置团队名称
       logo: "",               // 上传成功后返回的url
       //searchAvalible: "",     // 搜索可见
@@ -162,6 +156,7 @@ class CreateTeamContent extends Component {
       }
       this.setState({
         tenantId: payload.tenantId,
+        tenantName: payload.tenantName,
         value: payload.tenantName,
         logo: payload.logo,
         //searchAvalible: payload.searchAvalible,
@@ -170,7 +165,6 @@ class CreateTeamContent extends Component {
         allowExit: payload.allowExit
       });
       // 将默认的团队名称赋值变量
-      this.tenantName = payload.tenantName;
       requestSuccess();
     });
   }
@@ -463,7 +457,7 @@ class CreateTeamContent extends Component {
         admin,
         currentTeamConfig: { invitePermission }
       },
-      userList, activePage
+      userList,
     } = this.props;
 
     let _invitePermission = false;
@@ -570,21 +564,13 @@ class CreateTeamContent extends Component {
   }
   onVisibleChange = (visible) => { }
 
-  onSelectDrop = ({ key }) => {
-    const { openTransferModal, openDismissModal, openExitModal } = this.props;
-    if (key == "2") {
-      openDismissModal();
-    } else {
-      openExitModal();
-    }
-  }
 
   render() {
-    const { managerModal, removeModal, upgradeModal, transferModal, dismissModal, exitModal, userInfo } = this.props;
+    const { managerModal, removeModal, upgradeModal, transferModal } = this.props;
     return (
       <div className={wrap}>
         <div className={header}>
-          <h2>{this.tenantName}</h2>
+          <h2>{this.state.tenantName}</h2>
           <div className="um-box um-box-center">
             <div>
               <Button onClick={this.openUpgradeModal}>升级为企业</Button>
@@ -648,12 +634,6 @@ class CreateTeamContent extends Component {
         {
           transferModal ? <TeamTransferModal /> : null
         }
-        {/* {
-          dismissModal ? <TeamDismissModal /> : null
-        }
-        {
-          exitModal ? <TeamExitModal isManage={userInfo.admin} userId={userInfo.userId} close={true}/> : null
-        } */}
       </div>
     )
   }
