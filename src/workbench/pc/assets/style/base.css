@@ -8,6 +8,7 @@ input::-ms-reveal{display:none;}
 
 html{
   width: 100%;
+  height: auto !important;
   min-height: 100%;
 }
 
@@ -58,6 +59,9 @@ body .u-form-control{
   min-width: 5px;
   padding: 0;
   color: #555555;
+}
+body .u-button-danger{
+  color: #ffffff;
 }
 body .iconfont{
   font-size:20px;

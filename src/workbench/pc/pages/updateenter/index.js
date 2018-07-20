@@ -68,6 +68,10 @@ class Updateenter extends Component {
     });
   }
 
+  goHome = () => {
+    this.props.history.replace('');
+  }
+
   goBack = () => {
     this.props.history.goBack();
   }
@@ -77,7 +81,7 @@ class Updateenter extends Component {
     return (
       <div>
         <div className="um-header header">
-          <Header onLeftClick={this.goBack} iconName="computer" >
+          <Header onLeftClick={this.goHome} iconName="computer" >
             <div>
               <span>企业认证</span>
             </div>

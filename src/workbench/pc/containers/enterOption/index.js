@@ -8,8 +8,9 @@ import Menu from 'bee/menus';
 import Dropdown from 'bee/dropdown';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-// import TeamDismissModal from 'containers/teamDismissModal';
 import TeamExitModal from 'containers/teamExitModal';
+
+// import TeamDismissModal from 'containers/teamDismissModal';
 
 const { Item } = Menu;
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -51,20 +52,20 @@ class EnterOption extends Component {
     this.data = null;
   }
 
-  onVisibleChange = (visible) => {
-  }
+  onVisibleChange = (visible) => {}
 
   onSelectDrop = (da) => {
-    const { data, openTransferModal, openDismissModal, openExitModal, compType } = this.props;
+    const { data, openDismissModal, openExitModal, compType } = this.props;
     if (compType == "userCenter") {
       this.data = da;
       openExitModal();
       return;
     }
     let item = data.find((_da) => _da.value == da.key);
-    const { key, serverApi } = item;
     this.data = item;
     openExitModal();
+
+    // const { key, serverApi } = item;
     // if( da.key == "2" ){
     //   openDismissModal();
     // }else{
@@ -90,27 +91,27 @@ class EnterOption extends Component {
       <div className={enter_option}>
         {
           compType == "userCenter" ?
-          <Button shape="border" onClick={() => { this.onSelectDrop(data[0]) }} >
-            <Icon type="staff" />{"退出" + type}
-          </Button>
-          : 
-          <Dropdown
-            trigger={['click']}
-            overlay={menus}
-            animation="slide-up"
-            onVisibleChange={this.onVisibleChange}
-          >
-            <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
-          </Dropdown>
+            <Button shape="border" onClick={() => { this.onSelectDrop(data[0]) }} >
+              <Icon type="staff" />{"退出" + type}
+            </Button>
+            :
+            <Dropdown
+              trigger={['click']}
+              overlay={menus}
+              animation="slide-up"
+              onVisibleChange={this.onVisibleChange}
+            >
+              <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
+            </Dropdown>
         }
-
-        {/* {
-            dismissModal ? <TeamDismissModal type={type} data={this.data} /> : null
-          } */}
         {
           exitModal ? <TeamExitModal type={type} data={this.data} isManage={userInfo.admin} userId={userInfo.userId} close={true} /> : null
         }
 
+
+        {
+          // dismissModal ? <TeamDismissModal type={type} data={this.data} /> : null
+        }
       </div>
     )
   }

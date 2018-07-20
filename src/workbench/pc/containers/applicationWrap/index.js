@@ -29,12 +29,17 @@ class Application extends Component {
   }
   goBack = () => {
     const { history } = this.props;
-    const { userInfo } = this.state;
-    if (!userInfo.allowTenants.length) {
-      history.replace('/establish');
-    } else {
-      history.replace('');
-    }
+    history.goBack();
+    // const { userInfo } = this.state;
+    // if (!userInfo.allowTenants.length) {
+    //   history.replace('/establish');
+    // } else {
+    //   history.goBack();
+    // }
+  }
+  goHome = () => {
+    const { history } = this.props;
+    history.replace('');
   }
   render() {
     const {
@@ -46,13 +51,16 @@ class Application extends Component {
     return (
       <div className="um-win">
         <div className="um-header header">
-          <Header onLeftClick={this.goBack} iconName={"computer"} >
+          <Header onLeftClick={this.goHome} iconName={"computer"} >
             <div>
               <span>{name}</span>
             </div>
           </Header>
           <div className="appBreadcrumb">
-            <Breadcrumbs data={brms && brms.length ? [...brms, { name: name }] : [{ name: name }]} goback={goBack || this.goBack} />
+            <Breadcrumbs 
+              data={brms && brms.length ? [...brms, { name: name }] : [{ name: name }]} 
+              goback={goBack || this.goBack} 
+            />
           </div>
         </div>
         <div className={`content um-box um-content`}>
