@@ -49,13 +49,11 @@ class CreateTeam extends Component {
   }
 
   goHome = () => {
-    const { userInfo: { allowTenants } } = this.props;
-    if (allowTenants.length <= 0) return;
     this.props.history.replace('');
   }
 
   render() {
-    const { match: { params }, userInfo: { allowTenants } } = this.props;
+    const { match: { params } } = this.props;
     const classes = params.data === 'home' ? homeNone : '';
     return (
       <div className={`um-win ${classes}`}>
@@ -63,7 +61,7 @@ class CreateTeam extends Component {
           params.data === 'home'
           ?
             <div className="um-header" style={{ background: 'white' }}>
-              <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'computer'} >
+              <Header onLeftClick={this.goHome} iconName={'computer'} >
                 <div>
                   <span>创建团队</span>
                 </div>

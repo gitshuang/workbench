@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-import teamconfigActions from 'store/root/teamconfig/actions'; 
+import teamconfigActions from 'store/root/teamconfig/actions';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
-const { exitTeam, closeExitModal } = teamconfigActions; 
+const { exitTeam, closeExitModal } = teamconfigActions;
 import PopDialog from 'pub-comp/pop';
-import {content,select_enter_close} from './index.css';
+import { content, select_enter_close } from './index.css';
 import SelectEnter from './selectEnter'
-const {requestStart, requestSuccess, requestError} = rootActions;
+const { requestStart, requestSuccess, requestError } = rootActions;
 const { getSearchEnterOrTeam } = homeActions;
 
 @withRouter
@@ -19,7 +19,7 @@ const { getSearchEnterOrTeam } = homeActions;
     'exitTeamMsg',
     {
       key: 'searchEnterOrTeamList',
-      value: (teamconfig,ownProps,root) => {
+      value: (teamconfig, ownProps, root) => {
         return root.home.searchEnterOrTeamList
       }
     },
@@ -41,11 +41,11 @@ class TeamRemoveModal extends Component {
     super(props);
     this.state = {
       isManage: 0,
-      msg:"",
-      close:true,
-      disable:false,
-      next:false,
-      allowTenants:[],
+      msg: "",
+      close: true,
+      disable: false,
+      next: false,
+      allowTenants: [],
     }
   }
 
@@ -54,55 +54,55 @@ class TeamRemoveModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.close != this.props.close){
+    if (nextProps.close != this.props.close) {
       this.setState({
-        close:nextProps.close
+        close: nextProps.close
       })
     }
   }
- 
+
   // 删除确认
   configFn = (da) => {
     this.setState({
-      disable:true
+      disable: true
     })
-    const { exitTeam, isManage, userId ,data:{serverApi},getSearchEnterOrTeam} = this.props;
-    exitTeam(serverApi).then(({error, payload}) => {
+    const { exitTeam, isManage, userId, data: { serverApi }, getSearchEnterOrTeam } = this.props;
+    exitTeam(serverApi).then(({ error, payload }) => {
       this.setState({
-        disable:false
+        disable: false
       })
       if (error) {
         this.setState({
           isManage: 3,
-          msg:payload,
+          msg: payload,
         });
         return false;
       }
-      getSearchEnterOrTeam().then(({error, payload}) => {
-          if (error) {
-            requestError(payload);
-            return false;
-          }
-          if(payload.length == 1){//进入该企业或团队
-            if(!payload)return;
-            this.changeTenant(payload[0].tenantId); 
-          }else if(payload.length == 0){
-            const {
-              history, 
-            } = this.props;
-            this.cancelFn();
-            history.replace('/establish');
-          }else if(payload.length > 1){
-            this.setState({
-              isManage: 2
-            })
-          }
-          requestSuccess();
+      getSearchEnterOrTeam().then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
+          return false;
+        }
+        requestSuccess();
+        if (payload.length == 1) {//进入该企业或团队
+          if (!payload) return;
+          this.changeTenant(payload[0].tenantId);
+        } else if (payload.length == 0) {
+          const {
+            history,
+          } = this.props;
+          this.cancelFn();
+          history.replace('/');
+        } else if (payload.length > 1) {
+          this.setState({
+            isManage: 2
+          });
+        }
       });
     });
   }
 
-  changeTenant =(tenantId)=>{
+  changeTenant = (tenantId) => {
     const {
       location: {
         origin,
@@ -111,7 +111,7 @@ class TeamRemoveModal extends Component {
       },
     } = window;
     window.location.replace(
-      `${origin?origin:''}${pathname?pathname:''}?tenantId=${tenantId}&switch=true`,
+      `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true`,
     );
   }
 
@@ -120,22 +120,22 @@ class TeamRemoveModal extends Component {
     const { closeExitModal } = this.props;
     closeExitModal();
   }
- 
+
   render() {
-    const {exitModal,type,data} = this.props;
-    let {name  ,_msg  } = "";
-    if(data){
+    const { exitModal, type, data } = this.props;
+    let { name, _msg } = "";
+    if (data) {
       name = data.name;
       _msg = data.msg;
     }
-    const {msg,isManage,close,disable} = this.state;
+    const { msg, isManage, close, disable } = this.state;
     let btnLabel = "确定";
-    let _pop_title = "确认"+name+"?";
+    let _pop_title = "确认" + name + "?";
     let _cont = null;
     let _btn = [
       {
         label: btnLabel,
-        fun:null,
+        fun: null,
         disable
       },
       {
@@ -144,45 +144,45 @@ class TeamRemoveModal extends Component {
       }
     ];
     let _select_enter = null;
-    if(isManage == 0){//退出团队信息
+    if (isManage == 0) {//退出团队信息
       _cont = (<div className={content} >
-            <p>{_msg}</p>
-        </div>);
-        _btn[0].fun = ()=>{
-          this.setState({
-            isManage:1
-          })
-        }
-    }else if(isManage == 1){//提示是否需要退出或解散
-      _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title= "确认"+name+"?";
-      _btn[0].fun = ()=>{
-         this.configFn();
+        <p>{_msg}</p>
+      </div>);
+      _btn[0].fun = () => {
+        this.setState({
+          isManage: 1
+        })
       }
-    }else if(isManage == 3){//退出失败后显示信息
+    } else if (isManage == 1) {//提示是否需要退出或解散
       _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title= "确认"+name+"?";
+      _pop_title = "确认" + name + "?";
+      _btn[0].fun = () => {
+        this.configFn();
+      }
+    } else if (isManage == 3) {//退出失败后显示信息
+      _cont = (<div className={content}><p>{msg}</p></div>);
+      _pop_title = "确认" + name + "?";
       _btn = null;
-    }else if(isManage == 2){//退出后选中企业/团队
-      _pop_title= "您已"+name;
+    } else if (isManage == 2) {//退出后选中企业/团队
+      _pop_title = "您已" + name;
       _cont = <SelectEnter />
       _btn = null;
       _select_enter = select_enter_close;
     }
-    
+
     return (
       <PopDialog
-          className={`team_exit_modal ${_select_enter} `}
-          type="warning"
-          backdrop={"static"}
-          show={ exitModal }
-          title={_pop_title}
-          backup={false}
-          close={this.cancelFn} 
-          btns={_btn} 
-          >
-          {_cont}
-        </PopDialog>
+        className={`team_exit_modal ${_select_enter} `}
+        type="warning"
+        backdrop={"static"}
+        show={exitModal}
+        title={_pop_title}
+        backup={false}
+        close={this.cancelFn}
+        btns={_btn}
+      >
+        {_cont}
+      </PopDialog>
     )
   }
 }

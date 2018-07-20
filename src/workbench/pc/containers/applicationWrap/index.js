@@ -31,19 +31,13 @@ class Application extends Component {
   goBack = () => {
     const { history } = this.props;
     history.goBack();
-    // const { userInfo } = this.state;
-    // if (!userInfo.allowTenants.length) {
-    //   history.replace('/establish');
-    // } else {
-    //   history.goBack();
-    // }
   }
 
   goHome = () => {
     const { history } = this.props;
     history.replace('');
   }
-  
+
   render() {
     const {
       name,
@@ -60,9 +54,9 @@ class Application extends Component {
             </div>
           </Header>
           <div className="appBreadcrumb">
-            <Breadcrumbs 
-              data={brms && brms.length ? [...brms, { name: name }] : [{ name: name }]} 
-              goback={goBack || this.goBack} 
+            <Breadcrumbs
+              data={brms && brms.length ? [...brms, { name: name }] : [{ name: name }]}
+              goback={goBack || this.goBack}
             />
           </div>
         </div>
