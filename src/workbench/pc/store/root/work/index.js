@@ -262,6 +262,7 @@ const reducer = handleActions({
         menuBarName: domainName,
         hasTopNav: widthBrm,
         menuItems: menus,
+        workspaceStyle
       },
       curService: {
         hasWidget: pinType,
@@ -273,6 +274,9 @@ const reducer = handleActions({
     }
     if (hasTab) {
       type = 3;
+    }
+    if (workspaceStyle && workspaceStyle === 'acc') {
+      type = 4;
     }
     return {
       ...state,
