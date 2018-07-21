@@ -48,7 +48,6 @@ class ContentContainer extends Component {
 
   render() {
     const {hasTab, current, tabs, type, menus} = this.props;
-    console.log(JSON.stringify(current));
     if (type === 4) {
       return (<div className={contentArea}>
         <div className={`${content} ${active}`}>
