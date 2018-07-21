@@ -64,19 +64,16 @@
 
 .logo_title{
   font-size:17px;
-  color:rgba(71,77,84,1);
   width:204px;
 }
 
 .title_drop{
   font-size:17px;
-  color:rgba(71,77,84,1);
   width:204px;
 }
 
 .header :global(.home_title){
   font-size:14px;
-  color:rgba(71,77,84,1);
   background: transparent;
   width: auto;
 

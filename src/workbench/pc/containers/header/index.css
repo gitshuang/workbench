@@ -30,6 +30,10 @@
   vertical-align: middle;
 }
 
+:global(.lebra-navbar-right .iconfont:hover){
+  color: #111111;
+}
+
 :global(.lebra-navbar-right) :global(.active) :global(.iconfont){
   color: #e14c46;
 }

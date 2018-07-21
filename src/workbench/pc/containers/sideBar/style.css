@@ -32,16 +32,16 @@
 	margin-left: 18px;
 }
 .sideBar :global(.u-menu-submenu-selected){
-	background: #F9FAFB;
+	background: #ffffff;
 }
 .sideBar :global(.u-menu-submenu-selected .u-menu-item-selected) {
-	background:#f4f5f7;
+	background: #f3f3f3;
 }
 :global(.u-menu-submenu-active .u-menu-submenu-title){
-	background:#fff;
+	/* background:#f3f3f3; */
 }
 :global(.u-menu-item-active){
-	background:#fff;
+	background:#f3f3f3;
 }
 
 :global(.u-menu-submenu-inline > .u-menu-submenu-title:after){

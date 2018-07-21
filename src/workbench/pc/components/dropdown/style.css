@@ -27,8 +27,9 @@
     font-weight: bold;
     vertical-align: middle;
 }
-.btnPullDown:hover{
-    background:rgba(9,30,66,0.08);
+.btnPullDown:hover .iconStyle{
+    /* background:rgba(9,30,66,0.08); */
+    color: #E14C46;
 }
 .btnPullDown:active{
     background:rgba(252,237,236,1);
@@ -69,18 +70,29 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     color: rgba(74,81,93,0.8);
 }
 .fnbox{
-    border-top: 1px solid #DEE0E3;
-    padding-left: 15px;
-    padding-right: 15px;
+    border-top: 1px solid #d0d0d0;
 }
 .createEnt{
     cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
     color:#111111;
     line-height: 40px;
     font-weight: 600;
+    position: relative;
 }
-.createEnt:first-child{
-    border-bottom: 1px solid #DEE0E3;
+.createEnt:hover{
+    background: #F3F3F3;
+}
+.createEnt:first-child::after{
+    content: '';
+    position: absolute;
+    width: 189px;
+    left: 15px;
+    bottom: 0px;
+    height: 1px;
+    background: #d0d0d0;
+    /* border-bottom: 1px solid #DEE0E3; */
 }
 .menuItem{
     height: auto !important;
@@ -124,7 +136,6 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 
 :global(.home_title){
     font-size:14px;
-    color:rgba(71,77,84,1);
     background: transparent;
     width: auto;
 }
