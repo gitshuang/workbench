@@ -70,7 +70,10 @@ const defaultState = {
   promotionServiceList: [],
   imShowed: false,
   isLogout: false,
-  portalEnable: false,
+  portalInfo: {
+    openStatus: false,
+    portalUrl: ''
+  },
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -159,7 +162,7 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      portalEnable: payload,
+      portalInfo: payload,
     };
   },
   [popMessage]: (state) => {
