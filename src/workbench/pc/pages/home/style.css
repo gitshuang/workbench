@@ -1,15 +1,19 @@
 :global(#root){
   width: 100%;
-  height: auto;
   min-height: 100%;
+  background: linear-gradient(180deg,#a8abb0,#d8dadc);
+}
+
+:global(.diwork){
   background-image: url('assets/image/homeBg.png');
-  background-size: contain; 
+  /* background-size: contain;  */
   background-repeat: repeat-x;
   background-position: top center;
 }
+
 :global(.um-win){
   background-image: url('assets/image/homeBg.png');
-  background-size: contain; 
+  /* background-size: contain;  */
   background-repeat: repeat-x;
   background-position: top center;
 }
