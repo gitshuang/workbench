@@ -33,6 +33,7 @@ const defaultState = {
     hasRelationFunc: true,
     relationUsers: [],
     relationServices: [],
+    ext1: ''
   },
   // 页面布局类型
   type: 1,
@@ -152,6 +153,7 @@ const reducer = handleActions({
           serviceCode,
           serviceId,
           url: curTab.location,
+          ext1: state.current.ext1
         },
         brm,
         backUrl
@@ -172,6 +174,7 @@ const reducer = handleActions({
         serviceCode,
         serviceId,
         url: location,
+        ext1: state.current.ext1
       },
       brm,
       backUrl,
@@ -233,6 +236,7 @@ const reducer = handleActions({
       hasWidget,
       relationServices,
       relationUsers,
+      ext1
     } = serviceInfo;
     const {
       current,
@@ -251,6 +255,7 @@ const reducer = handleActions({
         hasRelationFunc,
         relationUsers,
         relationServices,
+        ext1
       },
     };
   },
