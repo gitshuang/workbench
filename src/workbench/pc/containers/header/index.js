@@ -26,7 +26,7 @@ const {
   mapStateToProps(
     'messageType',
     'imShowed',
-    'portalEnable',
+    'portalInfo',
     'serviceList',
   ),
   {
@@ -93,10 +93,11 @@ class HeaderContainer extends Component {
       messageType,
       color,
       imShowed,
-      portalEnable,
+      portalInfo,
       serviceList
     } = this.props;
     const rightArray = Children.toArray(rightContent);
+    const { openStatus, portalUrl } = portalInfo; 
     let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
       <SearchContainer />,
@@ -109,8 +110,8 @@ class HeaderContainer extends Component {
         <Icon title="智能通讯" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
-      <div className={`${rightBtn}`} style= {{marginLeft: "20px","display":portalEnable ? "inline-block": "none"}}>
-        <a href={`http://ec.diwork.com/`} target="_blank" style={{ "textDecoration": "none" }}>
+      <div className={`${rightBtn}`} style= {{marginLeft: "20px","display":openStatus ? "inline-block": "none"}}>
+        <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
           <Icon title="我的门户" type="home" style={{ color }} />
         </a>
       </div>
