@@ -8,13 +8,11 @@ input::-ms-reveal{display:none;}
 
 html{
   width: 100%;
-  height: auto !important;
   min-height: 100%;
 }
 
 body {
   width: 100%;
-  height: auto !important;
   min-height: 100%;
   box-sizing: border-box;
   margin: 0;
