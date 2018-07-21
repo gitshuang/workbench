@@ -22,11 +22,17 @@
   overflow: hidden;
 }
 .pageHome :global(.lebra-navbar-left-icon){
-  background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
+  /*background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
   background: #BEC1C8;
+  */
+  background:rgba(202,205,212,1);
   border: 1px solid #FFFFFF;
   border-radius: 100px;
   color: #fff;
+  line-height: 60px;
+}
+.pageHome :global(.lebra-navbar-left-icon .iconfont){
+  color:#fff
 }
 .logoImg{
   max-height: 27px;
