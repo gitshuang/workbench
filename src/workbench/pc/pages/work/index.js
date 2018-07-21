@@ -287,6 +287,11 @@ export default class Work extends Component {
     if (loaded) {
       switch (type) {
         case 1:
+          return (
+            <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
+              <ContentContainer />
+            </div>
+          );
         case 4:
           return (
             <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
