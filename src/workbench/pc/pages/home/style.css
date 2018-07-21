@@ -29,7 +29,8 @@
   border: 1px solid #FFFFFF;
   border-radius: 100px;
   color: #fff;
-  line-height: 60px;
+  overflow: hidden;
+  /* line-height: 60px; */
 }
 .pageHome :global(.lebra-navbar-left-icon .iconfont){
   color:#fff
