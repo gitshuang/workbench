@@ -20,6 +20,7 @@
     "everyone": false,
     "hasWidget": false,
     "relationServices": [],
-    "relationUsers": []
+    "relationUsers": [],
+    "ext1":"{'accbook':true}"
   }
 }
