@@ -14,6 +14,7 @@
     /* border: 1px solid red; */
     box-sizing: border-box;
     display: inline-block;
+    transition:all 0.3s;
 }
 
 
@@ -60,21 +61,21 @@
 /* XL尺寸 */
 @media screen and (device-width: 1441px){
     .cover{
-        padding-left: 73px;
+        padding-left: 60px;
         padding-right: 73px;
     }
 }
 /* L尺寸 */
 @media screen and (min-width: 1025px) and (max-width: 1440px) {
     .cover{
-        padding-left: 52px;
+        padding-left: 60px;
         padding-right: 102px;
     }
 }
 /* M尺寸 */
 @media screen and (min-width: 641px) and (max-width: 1024px) {
     .cover{
-        padding-left: 40px;
+        padding-left: 60px;
         padding-right: 100px;
     }
 }
@@ -103,20 +104,20 @@
   width: 100%;
   box-sizing: border-box;
   margin-top: 88px;
-  padding-left: 67px;
+  padding-left: 60px;
   padding-right: 100px;
 }
 /* XL尺寸 */
 @media screen and (device-width: 1441px){
     .content{
-        padding-left: 84px;
+        padding-left: 60px;
         padding-right: 76px;
     }
 }
 /* L尺寸 */
 @media screen and (min-width: 1025px) and (max-width: 1440px) { /*手机*/
     .content{
-        padding-left: 84px;
+        padding-left: 60px;
         padding-right: 76px;
     }
 }
