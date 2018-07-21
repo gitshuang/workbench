@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 
+
 /*   actions   */
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
@@ -286,6 +287,7 @@ export default class Work extends Component {
     if (loaded) {
       switch (type) {
         case 1:
+        case 4:
           return (
             <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
               <ContentContainer />
@@ -389,10 +391,10 @@ export default class Work extends Component {
             </div>
           </HeaderContainer>
           {
-            widthBrm ? <BreadcrumbContainer withSidebar={type !== 1} /> : null
+            widthBrm ? <BreadcrumbContainer withSidebar={type !== 1 && type !== 4}/> : null
           }
         </div>
-          
+
         <div className={`${workArea}`}>
           {this.makeLayout()}
         </div>
