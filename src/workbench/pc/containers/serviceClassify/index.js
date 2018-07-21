@@ -75,6 +75,7 @@ class serviceClassify extends Component {
         requestError(payload);
         return false;
       }
+      requestSuccess();
       this.setState({
         apps: payload.applications,
         appMaps: payload.applications.reduce((result, app) => {
@@ -94,7 +95,6 @@ class serviceClassify extends Component {
         tabs: payload.labelGroups,
         currentApps: [...payload.applications],
       })
-      requestSuccess();
     });
   }
 

@@ -10,18 +10,16 @@ import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import TeamExitModal from 'containers/teamExitModal';
 
-// import TeamDismissModal from 'containers/teamDismissModal';
 
 const { Item } = Menu;
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { openDismissModal, openExitModal } = teamconfigActions;
+const {  openExitModal } = teamconfigActions;
 
 import { enter_option, item_li } from './style.css';
 
 @withRouter
 @connect(
   mapStateToProps(
-    // 'dismissModal',     //  解散团队弹窗开关
     'exitModal',        //  退出团队弹窗开关
     {
       key: 'userInfo',
@@ -38,7 +36,6 @@ import { enter_option, item_li } from './style.css';
     requestStart,
     requestSuccess,
     requestError,
-    openDismissModal,
     openExitModal
   }
 )
@@ -52,10 +49,10 @@ class EnterOption extends Component {
     this.data = null;
   }
 
-  onVisibleChange = (visible) => {}
+  onVisibleChange = (visible) => { }
 
   onSelectDrop = (da) => {
-    const { data, openDismissModal, openExitModal, compType } = this.props;
+    const { data, openExitModal, compType } = this.props;
     if (compType == "userCenter") {
       this.data = da;
       openExitModal();
@@ -64,18 +61,11 @@ class EnterOption extends Component {
     let item = data.find((_da) => _da.value == da.key);
     this.data = item;
     openExitModal();
-
-    // const { key, serverApi } = item;
-    // if( da.key == "2" ){
-    //   openDismissModal();
-    // }else{
-    //   openExitModal();
-    // }
   }
 
   render() {
     let lis = [];
-    const { data, type, compType, dismissModal, exitModal, userInfo, userInfo: { currentTeamConfig: { allowExit } } } = this.props;
+    const { data, type, compType, exitModal, userInfo, userInfo: { currentTeamConfig: { allowExit } } } = this.props;
     data.forEach((da) => {
       if (da.id == "allowExit") {
         if (allowExit == "1") {
@@ -106,11 +96,6 @@ class EnterOption extends Component {
         }
         {
           exitModal ? <TeamExitModal type={type} data={this.data} isManage={userInfo.admin} userId={userInfo.userId} close={true} /> : null
-        }
-
-
-        {
-          // dismissModal ? <TeamDismissModal type={type} data={this.data} /> : null
         }
       </div>
     )

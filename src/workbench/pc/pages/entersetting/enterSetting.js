@@ -13,6 +13,7 @@ import Radio from 'bee/radio';
 import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
 import Progress from 'pub-comp/progress';
+
 import Upload from 'containers/upload';
 
 import 'assets/style/Form.css';

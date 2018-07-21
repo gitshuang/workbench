@@ -95,9 +95,10 @@ class BreadcrumbContainer extends Component {
 
     // TODO 现在只是做的 如果是面包屑点击 按照返回规则， 点击返回按钮只切换服务
     if (index > -1) {
+      // key 最大为0 
       const key = index + 1 - data.length
       history.go(key);
-      popBrm({ index: key });
+      popBrm({ index: -key });
       return false;
     }
     // 下边 方法为 如果实现返回一级一级的   先注释  担心哪天被还原
