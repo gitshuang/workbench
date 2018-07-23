@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
 import actions from './actions';
+import func from '../../../utils/utils'
 
 const {
   setExpandedSidebar,
@@ -21,6 +22,7 @@ const {
   setTabs,
   changeService,
   setProductInfo,
+  popUrl
 } = actions;
 
 const defaultState = {
@@ -139,8 +141,16 @@ const reducer = handleActions({
     menuPath.map(item =>
       newBrm.push({ name: item.menuItemName, url: item.service && item.service.url }));
     const brm = state.brm && state.brm.length ? [...state.brm, newBrm] : [newBrm];
-    if (backUrl[backUrl.length - 1] !== serviceCode) {
-      backUrl.push(serviceCode);
+    // if (backUrl[backUrl.length - 1] !== serviceCode) {
+    //   backUrl.push(serviceCode);
+    // }
+    if (backUrl.length > 0) {
+      const lastHashParam = backUrl[backUrl.length - 1];
+      if (lastHashParam && lastHashParam.subCode && lastHashParam.subCode !== serviceCode) {
+        func.setBackUrl(backUrl);
+      }
+    } else {
+      func.setBackUrl(backUrl);
     }
     if (curTab) {
       return {
@@ -310,6 +320,17 @@ const reducer = handleActions({
     pinDisplay: false,
   }),
   [returnDefaultState]: () => defaultState,
+  [popUrl]: (state, { error }) => {
+    if (error) {
+      return state;
+    }
+    const backUrl = state.backUrl;
+    backUrl.pop();
+    return {
+      ...state,
+      backUrl,
+    };
+  },
 }, defaultState);
 
 export default reducer;
