@@ -14,7 +14,11 @@
   padding-left: 14px;
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:#4a515d;
+  color:#555555;
+}
+
+:global(.lebra-navbar-left-icon .iconfont:hover){
+  color: #e14c46;
 }
 
 .rightBtn{
@@ -31,9 +35,6 @@
   transition: color .3s;
 }
 
-:global(.lebra-navbar-right .iconfont:hover){
-  color: #111111;
-}
 :global(.lebra-navbar-right) :global(.iconfont:hover){
   color: #e14c46;
 }
