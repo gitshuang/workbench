@@ -1,0 +1,46 @@
+.HomePageHeader{
+    display: flex;
+    font-size: 22px;
+    font-family: PingFangSC-Regular;
+    color: rgba(51,51,51,1);
+    line-height: 30px;
+    padding: 25px 0;
+    background: rgba(255,255,255,1);
+    opacity: 0.9;
+    z-index:999;
+}
+.HomePageHeader .leftCon{
+    width: 30%;
+}
+.HomePageHeader .middleCon{
+    width: 50%;
+   
+}
+.middleCon :global(.middleItem){
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
+}
+.HomePageHeader .rightCon{
+    width: 20%;
+}
+.HomePageHeader .rightCon :global(span.loginBtn),
+.HomePageHeader .rightCon :global(span.registryBtn) {
+    width: 120px;
+    height: 50px;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    line-height: 50px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+.HomePageHeader .rightCon :global(span.loginBtn){
+    background: rgba(255,45,45,1);
+    color: rgba(255,255,255,1);
+}
+.HomePageHeader .rightCon :global(span.registryBtn) {
+    color:rgba(255,45,45,1);
+    background:#fff;
+}

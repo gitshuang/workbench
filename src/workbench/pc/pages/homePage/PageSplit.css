@@ -1,0 +1,24 @@
+.amPage{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+:global(.amBg){
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+:global(.PageFirst .amBg){
+    background: url('./pageFirstBg.png') no-repeat;
+    background-size: cover;
+}
+:global(.PageSecond .amBg){
+    background: url('./pageSecondBg.png') no-repeat;
+    background-size: cover;
+
+}
