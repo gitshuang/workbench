@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import Header from './Header.js';
+import MainNav from './MainNav.js';
+import TopNav from './TopNav.js';
 import PageFirst from './PageFirst.js';
 import PageSecond from './PageSecond.js';
+import LoginPng from './login.png';
 import{
   HomePagePanel,
   rightDotMenu,
@@ -16,6 +18,7 @@ class HomePage extends Component {
       alldata:[1,2,3,4,5,6,7],
       preTime:new Date().getTime(),//上次执行的时间
       duration:1200,//执行的间隔
+      loginModalShow:false,//登录的modal是否展示
     }
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
@@ -28,7 +31,7 @@ class HomePage extends Component {
     //W3C
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
   }
-
+  
   scrollFunc = function (e) {
       let {preTime, duration,curIndex, alldata} = this.state;
       //如果动画还没执行完，则return
@@ -66,7 +69,6 @@ class HomePage extends Component {
         this.amBody.classList.add(`animation${preIndex+1}`);
       })
   }
-
   movePrev =()=>{
     let preIndex = this.state.curIndex;
     this.setState({curIndex:preIndex-1},()=>{
@@ -83,7 +85,6 @@ class HomePage extends Component {
       curIndex:index
     });
   }
-
   renderDot = () =>{
     let {alldata,curIndex} = this.state;
     return alldata.map((item,index)=>{
@@ -92,35 +93,50 @@ class HomePage extends Component {
       )
     })
   }
-
+  loginClick = () =>{
+    document.removeEventListener("DOMMouseScroll", this.scrollFunc);
+    window.onmousewheel = document.onmousewheel = null;
+    this.setState({loginModalShow:true})
+  }
+  closeLoginMoal = () =>{
+    if (document.addEventListener) {
+        document.addEventListener('DOMMouseScroll', this.scrollFunc, false);
+    }
+    //W3C
+    window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
+    this.setState({loginModalShow:false})
+  }
   render() {
-    let {curIndex} = this.state;
+    let {curIndex,loginModalShow} = this.state;
     return (
         <div className={HomePagePanel}>
-        <Header btnShow={curIndex === 1}/>
-        <div className={rightDotMenu}>
-            {this.renderDot()}
-        </div>
-        <div className="HomeHeader"></div>
-        <div ref={(ref) =>{this.amBody = ref}}className={`${HomeOnePage} amBody animation0`}>
-            <div className="videoContainer"></div>
-            {/* 
-              {curIndex === 0 && <PageFirst />}
-            {curIndex === 1 && <PageSecond />}
-            {curIndex === 2 && <PageFirst />}
-            {curIndex === 3 && <PageSecond />}
-            {curIndex === 4 && <PageFirst />}
-            {curIndex === 5 && <PageSecond />}
-            {curIndex === 6 && <PageFirst />}
-          */}
-            <PageFirst/>
-            <PageSecond />
-            <PageFirst />
-            <PageSecond />
-            <PageFirst />
-            <PageSecond />
-            <PageFirst />
-        </div>
+          <TopNav />
+          <MainNav btnShow={curIndex === 1} loginClick={this.loginClick}/>
+          <div className={rightDotMenu}>
+              {!loginModalShow && this.renderDot()}
+          </div>
+          <div ref={(ref) =>{this.amBody = ref}}className={`${HomeOnePage} amBody animation0`}>
+              <div className="videoContainer"></div>
+              <PageFirst/>
+              <PageSecond />
+              <PageFirst />
+              <PageSecond />
+              <PageFirst />
+              <PageSecond />
+              <PageFirst />
+          </div>
+            {
+              loginModalShow&&(
+                <div className="popbox">
+                  <div className="popmask"></div>
+                  {/* <div className="loginbox"></div> */}
+                  <div className="close" onClick={this.closeLoginMoal}>X</div>
+                  <img src={LoginPng} alt="" className="loginFake">
+                    
+                  </img>
+                </div>
+              )
+            }
         </div>
     );
   }

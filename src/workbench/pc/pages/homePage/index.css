@@ -75,3 +75,42 @@ body,.HomePagePanel{
     transition: 500ms ease;
     transform: translate3d(0px, -700%, 0px);
 }
+/*下面是登陆的内部*/
+:global(.popbox .loginbox .iframe), 
+:global(.popbox .loginbox iframe), 
+:global(.popbox .popmask) {
+    width: 100%;
+    height: 100%;
+}
+:global(.popbox .popmask){
+    visibility: hidden;
+    display: block;
+    position: fixed;
+    z-index: 997;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+}
+:global(.stat-login .loginbox), 
+:global(.popbox .popmask) {
+    visibility: visible;
+}
+
+:global(.popbox img.loginFake) {
+    position: absolute;
+    top:30%;
+    left: 50%;
+    margin-left: -150px;
+    z-index: 998;
+    width: 300px;
+    height: auto;
+}
+:global(.popbox .close){
+    position: absolute;
+    top:30%;
+    left: calc(50% + 160px);
+    color:#fff;
+    font-size: 22px;
+    z-index:999;
+    cursor: pointer;
+}

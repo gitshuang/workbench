@@ -1,0 +1,69 @@
+.MainNav{
+    display: flex;
+    background: rgba(255,255,255,1);
+    opacity: 0.9;
+    z-index:999;
+    height: 80px;
+    line-height: 80px;
+}
+.MainNav .headerDesc{
+    color:rgba(113,113,113,1);
+    font-size: 22px;
+    padding-left: 10px;
+    border-left: 1px solid rgba(113,113,113,1);
+}
+.MainNav .leftCon{
+    width: 30%;
+}
+.MainNav .middleCon{
+    width: 50%;
+   
+}
+.middleCon :global(.middleItem){
+    font-size: 22px;
+    font-family: PingFangSC-Regular;
+    color: rgba(51,51,51,1);
+    line-height: 30px;
+    display: inline-block;
+    padding: 0 20px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+.MainNav .rightCon{
+    width: 20%;
+}
+.MainNav .rightCon :global(span.loginBtn),
+.MainNav .rightCon :global(span.registryBtn) {
+    width: 120px;
+    height: 50px;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    line-height: 50px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+.MainNav .rightCon :global(span.loginBtn){
+    background: rgba(255,45,45,1);
+    color: rgba(255,255,255,1);
+}
+.MainNav .rightCon :global(span.registryBtn) {
+    color:rgba(255,45,45,1);
+    background:#fff;
+}
+/*TopNav的样式*/
+.TopNav{
+    height:40px;
+    background:rgba(0,0,0,1);
+    opacity:0.9;
+    line-height: 40px;
+    text-align: right;
+}
+.TopNav :global(.TopNavLink) {
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    color: rgba(255,255,255,1);
+    text-decoration: none;
+    padding: 0 20px;
+}
