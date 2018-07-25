@@ -149,10 +149,15 @@ const reducer = handleActions({
     // 避免localhost环境下一直刷新
     // if (tenantid == "tenantid" && userid == "userid" ) return false;
     if (!payload.tenantId || !tenantid) {
-      return state;
+      return false;
     }
     if (payload.tenantId !== tenantid || payload.userId !== userid) {
       window.location.reload();
+    }
+
+    return{
+      ...state,
+      isLogout: payload
     }
 
   },
