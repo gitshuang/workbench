@@ -47,7 +47,7 @@
     "url-polyfill": "^1.0.11",
     "webstorage-polyfill": "1.0.1",
     "whatwg-fetch": "2.0.3",
-    "ficloud-workbench": "0.1.13"
+    "ficloud-workbench": "^0.1.12"
   },
   "devDependencies": {
     "autoprefixer": "7.1.6",
