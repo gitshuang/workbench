@@ -6,9 +6,16 @@ import store from "store";
 import { postMessageToWin, get, logout } from "@u";
 import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
 import { trigger } from "./componentTools";
+import {
+  getProductInfo
+} from 'store/root/work/api';
 
-const { addBrm , popBrm} = workActions;
-const { popMessage, changeMessageType, hideIm } = rootActions;
+const {addBrm, popBrm} = workActions;
+const {
+  popMessage,
+  changeMessageType,
+  hideIm
+} = rootActions;
 const { getUserInfo } = homeActions;
 const handlers = {
   openService({ serviceCode, data, type,tenantId }) {
@@ -64,15 +71,25 @@ const handlers = {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
-      if(type === 2 ){
-        this.props.history.push(`/app/${serviceCode}`);
-      }else{
-        //由于影响IM打开service的操作，这里暂时注释掉，待进一步确认再放开
-        // if(data && data.url){
-        //   window.location.href = data.url;
-        // }
-        this.props.history.push(`/service/${serviceCode}`);
-      }
+      let typeVal = type === "2" ? 'app' : 'service';
+      getProductInfo(serviceCode, typeVal).then((data) => {
+          const {
+            curService: {
+              serviceCode: subCode,
+              url
+            },
+            curMenuBar: {
+              workspaceStyle
+            }
+          } = data;
+          if (workspaceStyle === '_blank') {
+            window.open(url)
+          } else {
+            this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
+          }
+      }, (err) => {
+        console.log(err);
+      });
     }
   },
   openDialog({ options }) {
