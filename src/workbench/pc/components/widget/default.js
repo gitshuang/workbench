@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types';
-import defaultIcon from 'assets/image/default.png';
+import default1Icon from 'assets/image/default1.png';
+import default2Icon from 'assets/image/default2.png';
+import default3Icon from 'assets/image/default3.png';
+import default4Icon from 'assets/image/default4.png';
+
 import {
   widgetItem,
   title,
@@ -54,10 +58,15 @@ class WidgetItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shouldLoad:false,
+      shouldLoad: false,
+      defaultImgIndex: -1
     }
   }
-  
+
+  componentWillMount() {
+    this.setState({defaultImgIndex: parseInt(Math.random() * 4 + 1, 10)})
+  }
+
   componentDidMount(){
     const { from } = this.props;
     if(from === "folder"){
@@ -78,7 +87,7 @@ class WidgetItem extends Component {
       this.updataLoadState(el.offsetTop, el.offsetHeight)
     }
   }
-  
+
   updataLoadState(top,height){
     if (this.state.shouldLoad) {
       return;
@@ -122,19 +131,20 @@ class WidgetItem extends Component {
     const backStyle = listMeta && listMeta.background && JSON.parse(listMeta.background);
     const mergeStyle = Object.assign(style, backStyle);
 
+    const defaultImgArray = [default1Icon, default2Icon, default3Icon, default4Icon];
     return (
       <li ref="default_widget" className={`${widgetItem} ${defaultArea}`}
         style={mergeStyle}
         onClick={clickHandler}
         onKeyDown={clickHandler}
-        role="presentation" 
+        role="presentation"
       >
         {this.state.shouldLoad?(
           <div>
             <div className={title}>
               <div className={titleRight} style={titleStyle}>{name}</div>
             </div>
-            <img alt="" src={icon || defaultIcon} className={iconImg} style={imageStyle}/>
+            <img alt="" src={icon || defaultImgArray[this.state.defaultImgIndex - 1]} className={iconImg} style={imageStyle}/>
           </div>):(
           <Loading container={this} show={true} />)
         }
