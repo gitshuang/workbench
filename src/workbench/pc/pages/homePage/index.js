@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import MainNav from './MainNav.js';
-import TopNav from './TopNav.js';
-import PageFirst from './PageFirst.js';
-import PageSecond from './PageSecond.js';
+import MainNav from './navs/MainNav.js';
+import TopNav from './navs/TopNav.js';
+import PageFirst from './pages/PageFirst.js';
+import PageSecond from './pages/PageSecond.js';
+import PageSeven from './pages/PageSeven.js';
 import LoginPng from './login.png';
 import{
   HomePagePanel,
@@ -123,7 +124,7 @@ class HomePage extends Component {
               <PageSecond />
               <PageFirst />
               <PageSecond />
-              <PageFirst />
+              <PageSeven />
           </div>
             {
               loginModalShow&&(
@@ -132,7 +133,6 @@ class HomePage extends Component {
                   {/* <div className="loginbox"></div> */}
                   <div className="close" onClick={this.closeLoginMoal}>X</div>
                   <img src={LoginPng} alt="" className="loginFake">
-                    
                   </img>
                 </div>
               )

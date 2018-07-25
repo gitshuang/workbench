@@ -10,6 +10,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    min-width: 1200px;
 }
 .amBg{
     position: absolute;
@@ -33,6 +34,10 @@
 }
 :global(.PageSecond) .amBg{
     background-image: url('./pageSecondBg.png') ;
+}
+:global(.PageSeven) .amBg{
+    background-image: url('./pageSevenBg.png') ;
+    
 }
 /*firstPage的内容部分*/
 :global(.mainContent.viewOne  .laymid) {
@@ -99,6 +104,109 @@
     background-position: -10px 0;
     background-size: 100% 100%;
 }
+/*第7个也是最后一个*/
+:global(.mainContent.viewSeven  .laymid) {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 420px;
+    height: 200px;
+    margin-left: -195px;
+    margin-top: -40px;
+}
+:global(.mainContent.viewSeven  .laymid .logo) {
+    background-image: url(https://i.alipayobjects.com/i/ecmng/png/201501/4JdkvPYoOr.png);
+    margin-bottom: 10px;
+    width: 420px;
+    height: 88px;
+    background-repeat: no-repeat;
+    background-position: -10px 0;
+    background-size: 100% 100%;
+}
+:global(.mainContent.viewSeven .laymid .clearfix) {
+    zoom: 1;
+}
+:global(.mainContent.viewSeven .laymid .clickMe){
+    text-align: center;
+    padding-top: 36px;
+}
+:global(.mainContent.viewSeven .laymid .clickBtn) {
+    width: 180px;
+    height: 60px;
+    font-size:22px;
+    font-family: PingFangSC-Regular;
+    line-height: 60px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+:global(.mainContent.viewSeven .laymid .loginBtn){
+    background: rgba(255,45,45,1);
+    color: rgba(255,255,255,1);
+    margin-right: 20px;
+}
+:global(.mainContent.viewSeven .laymid .registryBtn) {
+    color:rgba(255,45,45,1);
+    background:#fff;
+}
+:global(.PageSeven  .mainFooter) {
+    width: 100%;
+    height: 260px;
+    background: #4c515a;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color:#fff;
+    font-size:18px;
+}
+:global(.PageSeven .mainFooterCon:after){
+content:'';
+display: inline-block;
+clear: both;
+}
+
+:global(.PageSeven .mainFooterCon .title) {
+    padding: 20px;
+    display: inline-block;
+}
+
+:global(.PageSeven  .footerSection) {
+   float: left;
+}
+:global(.PageSeven  .sectionOne){
+    width: 35%;
+    text-align: right;
+}
+:global(.PageSeven  .sectionTwo){
+    width: 30%;
+}
+:global(.PageSeven  .sectionThird){
+    width: 35%;
+    text-align: left;
+}
+:global(.PageSeven  .sectionOne .directives) {
+    padding: 0 10px;
+}
+:global(.PageSeven  .sectionTwo .directives) {
+    float: left;
+    width: 33%;
+    box-sizing: border-box;
+    padding: 0 10px;
+ }
+ :global(.PageSeven  .sectionThird .directives){
+    display:block;
+}
+:global(.PageSeven  .copyright) {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom:0;
+    background: #434750;
+    padding:15px 0;
+    text-align: center
+    
+ }
 /*页面里面具体的文字效果*/
 .words{
     visibility: hidden;

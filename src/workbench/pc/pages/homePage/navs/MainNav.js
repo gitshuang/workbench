@@ -21,7 +21,7 @@ export default function MainNavPanel(props){
         {
             props.btnShow &&(
             <div className={rightCon}>
-                <span className="loginBtn" onClick={props.loginClick}>登陆</span>
+                <span className="loginBtn" onClick={props.loginClick}>登录</span>
                 <span className="registryBtn">注册</span>
             </div>
             )

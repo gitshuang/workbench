@@ -10,6 +10,8 @@ body,.HomePagePanel{
     margin:0;
     padding:0;
     overflow: hidden;
+    min-width: 1200px;
+
 }
 /*正文内容*/
 .HomeOnePage {
