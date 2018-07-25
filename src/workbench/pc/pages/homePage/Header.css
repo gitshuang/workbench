@@ -9,6 +9,11 @@
     opacity: 0.9;
     z-index:999;
 }
+.HomePageHeader .headerDesc{
+    color:rgba(113,113,113,1);
+    padding-left: 10px;
+    border-left: 1px solid rgba(113,113,113,1);
+}
 .HomePageHeader .leftCon{
     width: 30%;
 }

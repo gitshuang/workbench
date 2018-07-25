@@ -1,24 +1,120 @@
+
+
+
 .amPage{
     width: 100%;
     height: 100%;
     overflow: hidden;
     position: relative;
     z-index: 1;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
-:global(.amBg){
+.amBg{
     position: absolute;
     z-index: -1;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-}
-:global(.PageFirst .amBg){
-    background: url('./pageFirstBg.png') no-repeat;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
-:global(.PageSecond .amBg){
-    background: url('./pageSecondBg.png') no-repeat;
-    background-size: cover;
 
+.amPage :global(.mainContent){
+    width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+}
+:global(.PageFirst) .amBg{
+    background-image: url('./pageFirstBg.png') ;
+}
+:global(.PageSecond) .amBg{
+    background-image: url('./pageSecondBg.png') ;
+}
+/*firstPage的内容部分*/
+:global(.mainContent.viewOne  .laymid) {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 420px;
+    height: 200px;
+    margin-left: -195px;
+    margin-top: -40px;
+}
+:global(.mainContent.viewOne  .laymid .logo) {
+    background-image: url(https://i.alipayobjects.com/i/ecmng/png/201501/4JdkvPYoOr.png);
+    margin-bottom: 10px;
+    width: 420px;
+    height: 88px;
+    background-repeat: no-repeat;
+    background-position: -10px 0;
+    background-size: 100% 100%;
+}
+:global(.mainContent.viewOne .laymid .clearfix) {
+    zoom: 1;
+}
+:global(.mainContent.viewOne .laymid .clickMe){
+    text-align: center;
+    padding-top: 36px;
+}
+:global(.mainContent.viewOne .laymid .clickBtn) {
+    width: 180px;
+    height: 60px;
+    font-size:22px;
+    font-family: PingFangSC-Regular;
+    line-height: 60px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+:global(.mainContent.viewOne .laymid .loginBtn){
+    background: rgba(255,45,45,1);
+    color: rgba(255,255,255,1);
+    margin-right: 20px;
+}
+:global(.mainContent.viewOne .laymid .registryBtn) {
+    color:rgba(255,45,45,1);
+    background:#fff;
+}
+/*secondPage样式*/
+:global(.mainContent.viewTwo  .laymid) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 420px;
+    height: 200px;
+    margin-left: -195px;
+    margin-top: -40px;
+}
+:global(.mainContent.viewTwo  .laymid .logo) {
+    background-image: url(https://i.alipayobjects.com/i/ecmng/png/201501/4JdkvPYoOr.png);
+    margin-bottom: 10px;
+    width: 420px;
+    height: 88px;
+    background-repeat: no-repeat;
+    background-position: -10px 0;
+    background-size: 100% 100%;
+}
+/*页面里面具体的文字效果*/
+.words{
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: 11;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+
+:global(.animation0 .viewOne)  .words{
+    opacity: 1;
+    visibility: visible;
+    transition: 1s 1s opacity;
+    top: 30%;
+    left: 50%;
+    width: 360px;
+    margin-left:-180px;
 }
