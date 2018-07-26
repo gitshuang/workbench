@@ -105,7 +105,7 @@ class HomeWidgeList extends Component{
           openFolder(child);
         }
       } else if (type === 3 && !jsurl){
-        let typeVal = serviceType === "2" ? 'app' : 'service';
+        let typeVal = serviceType === 2 ? 'app' : 'service';
         props.clickHandler = () => {
           this.getProductInfo(serviceCode, typeVal)
         }
