@@ -154,8 +154,12 @@ class searchResult extends Component {
   }
 
   btnSearch = () => {
-    const { keywords, activetab, searchValue } = this.state;
+    const { activetab, searchValue } = this.state;
+    let { keywords } = this.state;
     if (searchValue === keywords) return;
+    if (keywords === "") {
+      keywords = " ";
+    }
     this.props.history.push(`/search/${activetab}/${keywords}`);
   }
 
