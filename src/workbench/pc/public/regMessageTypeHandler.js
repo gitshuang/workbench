@@ -71,7 +71,7 @@ const handlers = {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
-      let typeVal = type === "2" ? 'app' : 'service';
+      let typeVal = type === 2 ? 'app' : 'service';
       getProductInfo(serviceCode, typeVal).then((data) => {
           const {
             curService: {
