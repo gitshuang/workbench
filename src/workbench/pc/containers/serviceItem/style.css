@@ -63,14 +63,11 @@
 .item_right{
 	flex: 1;
 	padding-left: 5px;
-	/* padding-top: 10px; */
 	box-sizing: border-box;
-
   font-size:14px;
   font-family:MicrosoftYaHei;
-  color:rgba(71,77,84,1);
-
 }
+
 .item_footer_app{
   right: 58px !important;
 }

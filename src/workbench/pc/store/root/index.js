@@ -70,7 +70,10 @@ const defaultState = {
   promotionServiceList: [],
   imShowed: false,
   isLogout: false,
-  portalEnable: false,
+  portalInfo: {
+    openStatus: false,
+    portalUrl: ''
+  },
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -145,13 +148,18 @@ const reducer = handleActions({
     const { tenantid, userid } = info;
     // 避免localhost环境下一直刷新
     // if (tenantid == "tenantid" && userid == "userid" ) return false;
+    if (!payload.tenantId || !tenantid) {
+      return false;
+    }
     if (payload.tenantId !== tenantid || payload.userId !== userid) {
       window.location.reload();
     }
-    return {
+
+    return{
       ...state,
-      isLogout: payload,
-    };
+      isLogout: payload
+    }
+
   },
   [getPortal]: (state, { payload, error }) => {
     if (error) {
@@ -159,7 +167,7 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      portalEnable: payload,
+      portalInfo: payload,
     };
   },
   [popMessage]: (state) => {

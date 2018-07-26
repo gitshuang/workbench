@@ -69,7 +69,7 @@
 }
 .menuBtnGroup :global(.u-button):hover,
 .wrap :global(.u-button-group-vertical .active){
-	background:rgba(239,239,239,1);
+	background:#f3f3f3;
 	color:#E14C46;
 }
 .topTabBtns :global(.u-button):hover,
