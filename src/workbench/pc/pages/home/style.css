@@ -1,15 +1,19 @@
 :global(#root){
   width: 100%;
-  height: auto;
   min-height: 100%;
+  background: linear-gradient(180deg,#a8abb0,#d8dadc);
+}
+
+:global(.diwork){
   background-image: url('assets/image/homeBg.png');
-  background-size: contain; 
+  /* background-size: contain;  */
   background-repeat: repeat-x;
   background-position: top center;
 }
+
 :global(.um-win){
   background-image: url('assets/image/homeBg.png');
-  background-size: contain; 
+  /* background-size: contain;  */
   background-repeat: repeat-x;
   background-position: top center;
 }
@@ -18,11 +22,18 @@
   overflow: hidden;
 }
 .pageHome :global(.lebra-navbar-left-icon){
-  background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
+  /*background-image: linear-gradient(-180deg, #B4BFC5 3%, #DBE1E4 98%);
   background: #BEC1C8;
+  */
+  background:rgba(202,205,212,1);
   border: 1px solid #FFFFFF;
   border-radius: 100px;
   color: #fff;
+  overflow: hidden;
+  /* line-height: 60px; */
+}
+.pageHome :global(.lebra-navbar-left-icon .iconfont){
+  /* color:#fff */
 }
 .logoImg{
   max-height: 27px;
@@ -64,19 +75,16 @@
 
 .logo_title{
   font-size:17px;
-  color:rgba(71,77,84,1);
   width:204px;
 }
 
 .title_drop{
   font-size:17px;
-  color:rgba(71,77,84,1);
   width:204px;
 }
 
 .header :global(.home_title){
   font-size:14px;
-  color:rgba(71,77,84,1);
   background: transparent;
   width: auto;
 

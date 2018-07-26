@@ -1,39 +1,11 @@
 .content{
-  /*overflow: hidden;*/
   background:rgba(230,233,233,1);
-  /* padding:13px 20px; */
-  /* margin-top: 0; */
   position: relative;
   overflow: auto;
   height: 400px;
   padding-left: 10px;
   padding-top: 10px;
 }
-/* .home_file_item_dailog{
-  display: -webkit-box !important;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-} */
-/* .home_file_item_dailog :global(.u-modal-content){
-  padding:16px;
-  padding-left: 50px;
-} */
-/* .home_file_item_dailog :global(.u-modal-header){
-    padding:8px 15px;
-    padding-left: 0px;
-}
-.home_file_item_dailog :global(.u-modal-body){
-    padding:0;
-    margin-top:14px;
-}
-.home_file_item_dailog  :global(.u-modal-dialog){
-  width: 850px;
-}
-.home_file_item_dailog :global(.u-modal-title){
-  font-size: 19px;
-  line-height: 25px;
-  color:rgba(71,77,84,1);
-} */
 .home .u-modal{
   display: none !important;
 }

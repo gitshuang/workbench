@@ -226,7 +226,7 @@ class serviceClassify extends Component {
         admin,
       },
     } = this.props;
-    if (!userInfo) { return false; }
+    if ( !Object.keys(userInfo).length ) { return false; }
     const curTenant = allowTenants.filter((tenant) => {
       return tenant.tenantId === tenantid;
     })[0];

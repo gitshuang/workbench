@@ -14,7 +14,7 @@
 }
 
 .breadcrumbClass a:hover{
-  color: rgba(225,76,70,1);
+  color: #E14C46;
 }
 
 .breadcrumbBack {
@@ -48,6 +48,6 @@
 }
 
 .itmeHover:hover span{
-  color:rgba(225,76,70,1);
+  color:#E14C46;
   cursor: pointer;
 }

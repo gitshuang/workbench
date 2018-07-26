@@ -22,7 +22,7 @@
     "babel-runtime": "6.26.0",
     "classnames": "2.2.5",
     "custom-event-polyfill": "^0.3.0",
-    "diwork-business-components": "^1.1.4",
+    "diwork-business-components": "^1.2.13",
     "es6-symbol": "3.1.1",
     "exceljs": "^1.5.1",
     "js-polyfills": "^0.1.42",
@@ -47,7 +47,7 @@
     "url-polyfill": "^1.0.11",
     "webstorage-polyfill": "1.0.1",
     "whatwg-fetch": "2.0.3",
-    "ficloud-workbench": "0.1.13"
+    "ficloud-workbench": "^0.1.12"
   },
   "devDependencies": {
     "autoprefixer": "7.1.6",

@@ -1,5 +1,8 @@
 {
-  "data": true,
+  "data": {
+    "openStatus": true,
+    "portalUrl": "http://ec.diwork.com/"
+  },
   "msg": "测试内容n1w1",
   "status": 1
 }

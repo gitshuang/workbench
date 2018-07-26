@@ -22,7 +22,7 @@
 .sideBarArea {
   width: 200px;
   float: left;
-  background: #F9FAFB;
+  background: #ffffff;
   overflow-y: scroll;
   position: absolute;
   left: 0px;
@@ -40,8 +40,8 @@
 .contentArea {
   height: 100%;
   width: 100%;
-  border-top: 1px solid #4e596830;
-  border-left: 1px solid #4e596830;
+  border-top: 1px solid #d0d0d0;
+  border-left: 1px solid #d0d0d0;
   box-sizing: border-box;
 }
 .contenthasTab{
@@ -90,7 +90,6 @@
   position: relative;
 }
 .titleArea span{
-  color:rgba(71,77,84,1);
 }
 .service, .pin {
   font-size:18px;
