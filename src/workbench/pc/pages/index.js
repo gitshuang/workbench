@@ -114,13 +114,13 @@ class Root extends Component {
       }
     });
     // 请求是否含有portal 跳转到友空间首页
-    getPortal().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        requestSuccess();
-      }
-    });
+    // getPortal().then(({ error, payload }) => {
+    //   if (error) {
+    //     requestError(payload);
+    //   } else {
+    //     requestSuccess();
+    //   }
+    // });
   }
 
   componentDidMount() {
