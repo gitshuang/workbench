@@ -110,17 +110,21 @@ function messageHandler({ detail, callbackId }, event) {
 window.addEventListener('message', (event) => {
   if (event.data) {
     let data = event.data;
-    try {
-      if (typeof data === 'string') {
-        data = JSON.parse(data);
+    //兼容财务云组件消息处理
+    if (typeof data === 'string' && data.indexOf('fc|parent__Messenger__') > -1) {
+    }else{
+      try {
+        if (typeof data === 'string') {
+          data = JSON.parse(data);
+        }
+      } catch(e) {
+        console.log(e);
+        return;
       }
-    } catch(e) {
-      console.log(e);
-      return;
-    }
-    const { messType } = data;
-    if (messType && keys.indexOf(messType) > -1) {
-      messageHandler(data, event);
+      const { messType } = data;
+      if (messType && keys.indexOf(messType) > -1) {
+        messageHandler(data, event);
+      }
     }
   }
 });
