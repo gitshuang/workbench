@@ -15,6 +15,7 @@
     box-sizing: border-box;
     display: inline-block;
     transition:all 0.3s;
+    font-weight: 500;
 }
 
 
@@ -29,7 +30,6 @@
 .activeLink {
     color: #E14C46;
     text-decoration: unset;
-    font-weight: 500;
     font-size:15px;
     display:inline-block;
 }
