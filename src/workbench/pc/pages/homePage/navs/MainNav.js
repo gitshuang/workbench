@@ -23,7 +23,7 @@ export default function MainNavPanel(props){
             props.btnShow &&(
             <div className={rightCon}>
                 <a className="loginBtn" onClick={props.loginClick}>登录</a>
-                <a className="registryBtn" target="_blank" href="http://idtest.yyuap.com/register?sysid=market&mode=light&yhtrealservice=http://www.diwork.com">注册</a>
+                <a className="registryBtn" target="_blank" href={props.registryUrl}>注册</a>
             </div>
             )
         }

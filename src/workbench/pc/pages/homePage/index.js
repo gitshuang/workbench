@@ -13,7 +13,10 @@ import{
   rightDotMenu,
   HomeOnePage
 } from './index.css'
-
+const  CAS_SERVER = "https://idtest.yyuap.com",
+yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
+_destUrl="http://www.diwork.com",
+yhthtmlUrl=window.yhthtmlUrl;
 class HomePage extends Component {
   constructor(props){
     super(props);
@@ -26,6 +29,8 @@ class HomePage extends Component {
     }
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
+    this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + _destUrl;
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtrealservice=' + _destUrl + '&yhtdesturl=' + yhthtmlUrl);
   }
 
   componentDidMount(){
@@ -116,19 +121,19 @@ class HomePage extends Component {
     return (
         <div className={HomePagePanel}>
           <TopNav />
-          <MainNav btnShow={btnShow} loginClick={this.loginClick}/>
+          <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl}/>
           <div className={rightDotMenu}>
               {!loginModalShow && this.renderDot()}
           </div>
           <div ref={(ref) =>{this.amBody = ref}}className={`${HomeOnePage} amBody animation0`}>
               <div className="videoContainer"></div>
-              <PageFirst loginClick={this.loginClick}/>
+              <PageFirst loginClick={this.loginClick} registryUrl={this.registryUrl}/>
               <PageSecond loginModalShow={loginModalShow}/>
               <PageThird loginModalShow={loginModalShow}/>
               <PageFour loginModalShow={loginModalShow}/>
               <PageFive loginModalShow={loginModalShow}/>
               <PageSix loginModalShow={loginModalShow}/>
-              <PageSeven loginClick={this.loginClick}/>
+              <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl}/>
           </div>
           {curIndex!==6 && !loginModalShow && <div className="goNextArrow" onClick={this.moveNext}> </div>}
             {
@@ -137,7 +142,7 @@ class HomePage extends Component {
                   <div className="close" onClick={this.closeLoginMoal}>×</div>
                   <div id="yhtFrameLogin" className="loginFramePanel">
                     <iframe id="yhtloginIframe"
-                      src="https://idtest.yyuap.com/cas/login?sysid=market&mode=light&service=https%3A%2F%2Fidtest.yyuap.com%2Fcas%2Fiframeloginredirect%3Fyhtrealservice%3Dhttp%3A%2F%2Fwww.baidu.com%26yhtdesturl%3Dundefined" 
+                      src={this.loginUrl}
                       width="390px" height= "356" name="yhtloginIframe" 
                       scrolling="No"  
                       noresize="noresize" 
