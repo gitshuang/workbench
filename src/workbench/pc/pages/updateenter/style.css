@@ -65,28 +65,24 @@
 }
 
 .enter_form :global(.u-input-inner>input){
-  /* width:338px !important; */
   height:36px;
   background:rgba(255,255,255,1);
   border-radius: 3px ; 
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-.enter_form :global(.u-input-before){
-  height:36px;
-  line-height: 36px;
-}
+
 
 .enter_form :global(.u-select-lg .u-select-selection--single){
   width: 271px;
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
-.pageEnterprise :global(.u-select-selection--single){
+/* .pageEnterprise :global(.u-select-selection--single){
   height: 36px !important;
 }
 .pageEnterprise :global(.u-select-selection-rendered){
   line-height: 33px;
-}
+} */
 /* .pageEnterprise .u-form-submit>button {
   margin-left: 0;
   width: 80px;

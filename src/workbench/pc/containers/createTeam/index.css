@@ -36,7 +36,7 @@
 .item label{
   font-size:14px;
   font-family:PingFangSC-Regular;
-  line-height: 36px;
+  line-height: 32px;
   min-width: 70px;
 }
 :global(.ie9) .item label{
@@ -48,12 +48,8 @@
 }
 .item input{
   width:338px;
-  height:36px; 
   background:rgba(255,255,255,1);
   border-radius: 3px ; 
-  outline: none;
-  padding: 0 10px;
-  border: 1px solid rgba(78, 89, 104, 0.2)
 }
 
 .name_error{

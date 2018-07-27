@@ -93,9 +93,6 @@
 .enter_title :global(.u-select-selection)>div{
   line-height: 36px
 } 
-/* .enter_title :global(.u-select-dropdown .u-select-dropdown-menu-item-selected){
-  background: transparent !important;
-} */
 
 .hr{
   background: rgba(13,20,36,0.1);
@@ -113,21 +110,12 @@
   overflow: hidden;
 }
 
-.enter_form :global(.u-input-inner>input){
-  width:338px !important;
-  height:36px;
+.enter_form :global(.u-input-inner > input){
+  width:338px;
   background:rgba(255,255,255,1);
   border-radius: 3px ;
-  border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-.enter_form :global(.u-input-before){
-  height:36px;
-  line-height: 36px;
-}
-/* .enter_form >span:nth-child(5) :global(.u-form-item){
-  margin-top: -20px;
-} */
 .enter_form :global(.u-city-select){
   display: inline-flex;
 }
@@ -141,16 +129,9 @@
   height: 36px;
 }
 
-
-/*.enter_form :global(.u-select .u-select-arrow):before{
-  content: "\E964" !important;
-  font-family: 'iconfont' !important;
-}*/
-
 .tenant_address{
   background: red;
 }
-
 
 .lxr_hr{
   height:1px;
@@ -192,12 +173,6 @@
   font-size: 14px;
   height:32px;
   background:rgba(255,255,255,1);
-}
-.team_cont :global( .u-select-selection-rendered){
-  line-height: 36px;
-}
-.team_cont :global(.u-select-selection--single){
-  height: 36px !important;
 }
 .team_cont :global(.u-radio){
   margin-right: 18px;
