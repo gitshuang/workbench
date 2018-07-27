@@ -165,7 +165,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    background-image: url(/img/footer-c5bb0820.png);
+    background-image: url('./images/footer.png');
     width: 100%;
     height: 100%;
     background-position: bottom left;
@@ -249,7 +249,7 @@ clear: both;
 :global(.animation4 .viewFive)  .words{
     opacity: 1;
     visibility: visible;
-    transition: 1s .8s opacity;
+    transition: 1s .6s opacity;
     top: 40%;
     left: 10%;
 }
@@ -258,7 +258,7 @@ clear: both;
 :global(.animation5 .viewThree)  .words{
     opacity: 1;
     visibility: visible;
-    transition: 1s .8s opacity;
+    transition: 1s .6s opacity;
     top: 40%;
     right: 18%;
 }

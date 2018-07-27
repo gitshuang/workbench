@@ -123,13 +123,14 @@ class HomePage extends Component {
           <div ref={(ref) =>{this.amBody = ref}}className={`${HomeOnePage} amBody animation0`}>
               <div className="videoContainer"></div>
               <PageFirst loginClick={this.loginClick}/>
-              <PageSecond />
-              <PageThird />
-              <PageFour />
-              <PageFive />
-              <PageSix />
+              <PageSecond loginModalShow={loginModalShow}/>
+              <PageThird loginModalShow={loginModalShow}/>
+              <PageFour loginModalShow={loginModalShow}/>
+              <PageFive loginModalShow={loginModalShow}/>
+              <PageSix loginModalShow={loginModalShow}/>
               <PageSeven loginClick={this.loginClick}/>
           </div>
+          {curIndex!==6 && !loginModalShow && <div className="goNextArrow" onClick={this.moveNext}> </div>}
             {
               loginModalShow&&(
                 <div className="popbox">

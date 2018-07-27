@@ -124,3 +124,16 @@ body,.HomePagePanel{
     z-index:999;
     cursor: pointer;
 }
+:global(.goNextArrow){
+    background-image: url('./pages/images/arrowdown.png');
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50% , -50%);
+    cursor: pointer;
+}
