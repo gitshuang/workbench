@@ -22,7 +22,8 @@ const {
   setTabs,
   changeService,
   setProductInfo,
-  popUrl
+  popUrl,
+  resetHistory
 } = actions;
 
 const defaultState = {
@@ -331,6 +332,19 @@ const reducer = handleActions({
       backUrl,
     };
   },
+  [resetHistory]: (state, {error}) => {
+    if (error) {
+      return state;
+    }
+    const backUrl = state.backUrl;
+    while (backUrl && backUrl.length > 0) {
+      backUrl.pop();
+    }
+    return {
+      ...state,
+      backUrl
+    };
+  }
 }, defaultState);
 
 export default reducer;
