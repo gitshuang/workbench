@@ -31,7 +31,8 @@ const {
   SET_TABS,
   CHANGE_SERVICE,
   UNSHIFT_TAB,
-  POP_URL
+  POP_URL,
+  RESET_HISTORY
 } = types;
 
 const actions = createActions(
@@ -118,7 +119,8 @@ const actions = createActions(
   CHANGE_SERVICE,
   SET_TABS,
   SET_PRODUCT_INFO,
-  POP_URL
+  POP_URL,
+  RESET_HISTORY
 );
 
 export default actions;
