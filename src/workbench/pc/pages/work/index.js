@@ -51,6 +51,7 @@ const {
   setPinCancel,
   getProductInfo,
   returnDefaultState,
+  resetHistory
 } = workActions;
 
 
@@ -66,6 +67,7 @@ const {
     'titleServiceType',
     'expandedSidebar',
     'type',
+    'backUrl',
     {
       key: 'domainName',
       value: ({ domainName, type }) => (type === 1 ? '' : domainName),
@@ -85,6 +87,7 @@ const {
     setPinCancel,
     returnDefaultState,
     setCurrent,
+    resetHistory
   },
 )
 export default class Work extends Component {
@@ -242,6 +245,7 @@ export default class Work extends Component {
   }
 
   goBack() {
+    this.props.resetHistory();
     this.props.history.replace('');
   }
 
