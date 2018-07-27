@@ -117,9 +117,6 @@ sub {
 
 /*because legend doesn't inherit in IE */
 
-legend {
-  color: #000;
-}
 
 button::-moz-focus-inner {
   padding: 0;
