@@ -9,6 +9,7 @@ import actions from 'store/root/actions';
 import styles from './index.css';
 import SearchContainer from 'containers/search';
 import { QuickApplication } from 'diwork-business-components';
+import { openService } from '../../public/regMessageTypeHandler';
 
 const {
   lebraNavbar,
@@ -32,7 +33,7 @@ const {
   {
     showIm,
     hideIm,
-    
+
     requestError,
     requestSuccess
   }
@@ -45,12 +46,12 @@ class HeaderContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    
+
     };
   }
 
   componentWillMount() {
-    
+
   }
 
   componentDidMount() {
@@ -79,7 +80,8 @@ class HeaderContainer extends Component {
   }
   // 调用快捷应用 点击单独每个应用
   openServiceFn = (applicationCode) => {
-    this.props.history.push(`/app/${applicationCode}`);
+    openService(applicationCode, 2);
+    // this.props.history.push(`/app/${applicationCode}`);
   }
 
   render() {
@@ -97,14 +99,14 @@ class HeaderContainer extends Component {
       serviceList
     } = this.props;
     const rightArray = Children.toArray(rightContent);
-    const { openStatus, portalUrl } = portalInfo; 
+    const { openStatus, portalUrl } = portalInfo;
     let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <QuickApplication 
-        serviceList={serviceList} 
-        openAllFn={this.openAllFn} 
-        openServiceFn={this.openServiceFn} 
+      <QuickApplication
+        serviceList={serviceList}
+        openAllFn={this.openAllFn}
+        openServiceFn={this.openServiceFn}
       />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{ color }} />

@@ -11,8 +11,7 @@
       "hasTopNav": true,
       "single": false,
       "applicationId": "11111111",
-      "workspaceStyle": "a",
-      "blank":false,
+      "workspaceStyle": "acc",
       "menuItems": [
         {
           "createTime": null,
