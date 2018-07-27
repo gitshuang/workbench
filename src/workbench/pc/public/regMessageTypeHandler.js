@@ -1,14 +1,15 @@
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home';
-import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
+import {openGlobalDialog, closeGlobalDialog} from 'pub-comp/pop';
 import store from "store";
-import { postMessageToWin, get, logout } from "@u";
-import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
-import { trigger } from "./componentTools";
+import {postMessageToWin, get, logout} from "@u";
+import {enterOrTeam, crossTenantDialog, iframeElm} from "./regMessageTypeHandler.css";
+import {trigger} from "./componentTools";
 import {
   getProductInfo
 } from 'store/root/work/api';
+import {openMessage} from 'components/message';
 
 const {addBrm, popBrm} = workActions;
 const {
@@ -16,15 +17,15 @@ const {
   changeMessageType,
   hideIm
 } = rootActions;
-const { getUserInfo } = homeActions;
+const {getUserInfo} = homeActions;
 const handlers = {
-  openService({ serviceCode, data, type,tenantId }) {
+  openService({serviceCode, data, type, tenantId}) {
     if (tenantId && serviceCode) {
       get('/service/getServiceByTenantIdAndServiceCode', {
         serviceCode,
         tenantId,
       }).then((app) => {
-        const { crossTenant, serveName, url } = app;
+        const {crossTenant, serveName, url} = app;
         if (!crossTenant) {
           openGlobalDialog({
             type: "warning",
@@ -44,7 +45,7 @@ const handlers = {
                   } = window;
                   try {
                     window.localStorage.setItem('openServiceData', JSON.stringify(data));
-                  } catch(e) {
+                  } catch (e) {
                     console.log(e);
                   }
                   window.location.replace(
@@ -61,7 +62,7 @@ const handlers = {
           openGlobalDialog({
             title: serveName,
             className: crossTenantDialog,
-            content: (<iframe className={iframeElm} src={url} />),
+            content: (<iframe className={iframeElm} src={url}/>),
           });
         }
       }, (err) => {
@@ -73,36 +74,36 @@ const handlers = {
       }
       let typeVal = type === 2 ? 'app' : 'service';
       getProductInfo(serviceCode, typeVal).then((data) => {
-          const {
-            curService: {
-              serviceCode: subCode,
-              url
-            },
-            curMenuBar: {
-              workspaceStyle
-            }
-          } = data;
-          if (workspaceStyle === '_blank') {
-            window.open(url)
-          } else {
-            this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
+        const {
+          curService: {
+            serviceCode: subCode,
+            url
+          },
+          curMenuBar: {
+            workspaceStyle
           }
+        } = data;
+        if (workspaceStyle === '_blank') {
+          window.open(url)
+        } else {
+          this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
+        }
       }, (err) => {
         console.log(err);
       });
     }
   },
-  openDialog({ options }) {
+  openDialog({options}) {
     openGlobalDialog(options);
   },
   closeDialog() {
     closeGlobalDialog();
   },
-  checkServiceOpen({ serviceCode }) {
+  checkServiceOpen({serviceCode}) {
     const serveCode = serviceCode;
     const state = store.getState();
     const tabs = state.work.tabs;
-    const target = tabs.filter(({ serviceCode })=>{
+    const target = tabs.filter(({serviceCode}) => {
       return serviceCode === serveCode;
     })[0];
     if (target) {
@@ -110,15 +111,15 @@ const handlers = {
     }
     return false;
   },
-  postDataToService({ serviceCode, data }) {
+  postDataToService({serviceCode, data}) {
     const serveCode = serviceCode;
     const state = store.getState();
     const tabs = state.work.tabs;
-    const target = tabs.filter(({ serviceCode })=>{
+    const target = tabs.filter(({serviceCode}) => {
       return serveCode === serviceCode;
     })[0];
     if (target) {
-      const { id } = target;
+      const {id} = target;
       const frameElm = document.getElementById(id);
       if (frameElm) {
         postMessageToWin(frameElm.contentWindow, {
@@ -140,7 +141,7 @@ const handlers = {
     store.dispatch(popMessage());
   },
   // for IM
-  onMessage({ unreadTotalNum }) {
+  onMessage({unreadTotalNum}) {
     store.dispatch(changeMessageType(!!unreadTotalNum));
   },
   hideIm() {
@@ -152,13 +153,16 @@ const handlers = {
   logout() {
     logout();
   },
-  switchChatTo({ id, yht_id, type }) {
+  switchChatTo({id, yht_id, type}) {
     trigger('IM', 'switchChatTo', {
       id,
       yht_id,
       type,
     });
   },
+  openMessage(param) {
+    openMessage(param);
+  }
 }
 window.handlers = handlers;
 const openServiceData = {};
@@ -167,15 +171,15 @@ try {
   if (window.location.search) {
     const urlObj = new URL(window.location.href);
     const keys = urlObj.searchParams.keys();
-    while(1) {
-      let { done, value: key } = keys.next();
+    while (1) {
+      let {done, value: key} = keys.next();
       if (done) {
         break;
       }
       initData[key] = urlObj.searchParams.getAll(key);
     }
   }
-} catch(e) {
+} catch (e) {
   console.log(e.message);
 }
 
@@ -191,7 +195,7 @@ export function regMessageTypeHandler(app) {
   bind(app, handlers);
 }
 
-export function dispatchMessageTypeHandler({ type, detail }) {
+export function dispatchMessageTypeHandler({type, detail}) {
   if (type && handlers[type]) {
     return handlers[type](detail);
   } else {
@@ -202,7 +206,7 @@ export function dispatchMessageTypeHandler({ type, detail }) {
 export function parseType(type) {
   const firstColonIndex = type.indexOf(':');
   let detail;
-  if ( firstColonIndex !== -1) {
+  if (firstColonIndex !== -1) {
     detail = type.slice(firstColonIndex + 1);
     type = type.slice(0, firstColonIndex);
   }
@@ -224,7 +228,7 @@ export function getOpenServiceData(serviceCode) {
         ...data,
         ...JSON.parse(window.localStorage.getItem('openServiceData')),
       };
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
     window.localStorage.removeItem('openServiceData');
@@ -237,4 +241,8 @@ export function getOpenServiceData(serviceCode) {
     delete openServiceData[serviceCode];
   }
   return data;
+}
+
+export function openService(serviceCode, type) {
+  handlers.openService({serviceCode, type});
 }
