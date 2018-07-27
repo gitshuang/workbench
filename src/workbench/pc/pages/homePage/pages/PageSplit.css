@@ -30,13 +30,13 @@
     height: 100%;
 }
 :global(.PageFirst) .amBg{
-    background-image: url('./pageFirstBg.png') ;
+    background-image: url('./images/1.png') ;
 }
 :global(.PageSecond) .amBg{
-    background-image: url('./pageSecondBg.png') ;
+    background-image: url('./images/2.png') ;
 }
 :global(.PageSeven) .amBg{
-    background-image: url('./pageSevenBg.png') ;
+    background-image: url('./images/7.png') ;
     
 }
 /*firstPage的内容部分*/

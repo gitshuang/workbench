@@ -5,12 +5,13 @@ import{
   middleCon,
   rightCon,
 } from './MainNav.css';
+import Logo from './logo1.png';
 export default function MainNavPanel(props){
   return(
     <div className={MainNav}>
         <div className={leftCon}>
-          <img src="https://yyy.yonyoucloud.com/ycm-appmonitor/img/logo/site_logo.svg" alt="" className="companylogo"/>
-          <span className={headerDesc}>数字化工作入口</span>
+          <img src={Logo} alt="" className="companylogo"/>
+          {/* <span className={headerDesc}>数字化工作入口</span> */}
         </div>
         <div className={middleCon}>
           <a href="http://www.yonyoucloud.com" className="middleItem">我们</a>

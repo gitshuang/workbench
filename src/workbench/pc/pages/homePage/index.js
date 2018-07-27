@@ -129,11 +129,17 @@ class HomePage extends Component {
             {
               loginModalShow&&(
                 <div className="popbox">
+                  <div className="close" onClick={this.closeLoginMoal}>×</div>
+                  <div id="yhtFrameLogin" className="loginFramePanel">
+                    <iframe id="yhtloginIframe"
+                      src="https://idtest.yyuap.com/cas/login?sysid=market&mode=light&service=https%3A%2F%2Fidtest.yyuap.com%2Fcas%2Fiframeloginredirect%3Fyhtrealservice%3Dhttp%3A%2F%2Fwww.baidu.com%26yhtdesturl%3Dundefined" 
+                      width="390px" height= "356" name="yhtloginIframe" 
+                      scrolling="No"  
+                      noresize="noresize" 
+                      frameborder="0">
+                    </iframe>
+                  </div>
                   <div className="popmask"></div>
-                  {/* <div className="loginbox"></div> */}
-                  <div className="close" onClick={this.closeLoginMoal}>X</div>
-                  <img src={LoginPng} alt="" className="loginFake">
-                  </img>
                 </div>
               )
             }

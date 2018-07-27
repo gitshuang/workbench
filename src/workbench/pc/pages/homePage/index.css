@@ -98,20 +98,28 @@ body,.HomePagePanel{
     visibility: visible;
 }
 
-:global(.popbox img.loginFake) {
+:global(.popbox .loginFramePanel) {
     position: absolute;
-    top:30%;
+    top: 30%;
     left: 50%;
-    margin-left: -150px;
+    margin-left: -215px;
     z-index: 998;
-    width: 300px;
-    height: auto;
+    width: 430px;
+    background: #fff;
+    height: 400px;
+}
+:global(iframe#yhtloginIframe) {
+    margin-left: 20px;
+    margin-top: 30px;
+    border: none;
+    width: 390px;
 }
 :global(.popbox .close){
     position: absolute;
     top:30%;
-    left: calc(50% + 160px);
-    color:#fff;
+    left:50%;
+    margin-left:-200px; 
+    color:#ddd;
     font-size: 22px;
     z-index:999;
     cursor: pointer;
