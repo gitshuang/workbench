@@ -29,13 +29,13 @@
 .sideBar :global(.u-menu-sub.u-menu-inline>.u-menu-item){
 	height:30px;
 	line-height: 30px;
-	margin-left: 18px;
+	/* margin-left: 18px; */
 }
 .sideBar :global(.u-menu-submenu-selected){
 	background: #ffffff;
 }
 .sideBar :global(.u-menu-submenu-selected .u-menu-item-selected) {
-	background: #f3f3f3;
+	background: #e4e4e4;
 }
 :global(.u-menu-submenu-active .u-menu-submenu-title){
 	/* background:#f3f3f3; */
@@ -54,8 +54,8 @@
 	margin-left: -1px;	
 }
 .sideBar :global(.u-menu-submenu-open.u-menu-submenu-inline > .u-menu-submenu-title i){
-	-webkit-transform: rotate(-90deg) scale(1.0);
-	transform: rotate(-90deg) scale(1.0);
+	-webkit-transform: rotate(90deg) scale(1.0);
+	transform: rotate(90deg) scale(1.0);
 	display: inline-block;
 	height: auto;
 	position: relative;
@@ -92,7 +92,7 @@
 }
 :global(.item_3){
 	font-size: 14px;
-	margin-left: -2px !important;
+	margin-left: 18px !important;
 }
 :global(.item_4){
 	font-size: 14px;

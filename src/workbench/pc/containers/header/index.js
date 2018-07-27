@@ -103,20 +103,20 @@ class HeaderContainer extends Component {
     let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <QuickApplication
-        serviceList={serviceList}
-        openAllFn={this.openAllFn}
-        openServiceFn={this.openServiceFn}
+      <div className={`${rightBtn}`} style= {{marginRight: "15px"}}>
+        <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
+          <Icon title="我的门户" type="home" style={{ color }} />
+        </a>
+      </div>,
+      <QuickApplication 
+        serviceList={serviceList} 
+        openAllFn={this.openAllFn} 
+        openServiceFn={this.openServiceFn} 
       />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
-      <div className={`${rightBtn}`} style= {{marginLeft: "20px","display":openStatus ? "inline-block": "none"}}>
-        <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
-          <Icon title="我的门户" type="home" style={{ color }} />
-        </a>
-      </div>
     );
     return (
       <Header
