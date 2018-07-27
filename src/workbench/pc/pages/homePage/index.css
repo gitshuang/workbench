@@ -52,30 +52,37 @@ body,.HomePagePanel{
 :global(.animation1){
     transition: 500ms ease;
     transform: translate3d(0px, -100%, 0px);
+    top:-100%\9;
 }
 :global(.animation2){
     transition: 500ms ease;
     transform: translate3d(0px, -200%, 0px);
+    top:-200%\9;
 }
 :global(.animation3){
     transition: 500ms ease;
     transform: translate3d(0px, -300%, 0px);
+    top:-300%\9;
 }
 :global(.animation4){
     transition: 500ms ease;
     transform: translate3d(0px, -400%, 0px);
+    top:-400%\9;
 }
 :global(.animation5){
     transition: 500ms ease;
     transform: translate3d(0px, -500%, 0px);
+    top:-500%\9;
 }
 :global(.animation6){
     transition: 500ms ease;
     transform: translate3d(0px, -600%, 0px);
+    top:-600%\9;
 }
 :global(.animation7){
     transition: 500ms ease;
     transform: translate3d(0px, -700%, 0px);
+    top:-700%\9;
 }
 /*下面是登陆的内部*/
 :global(.popbox .loginbox .iframe), 

@@ -161,6 +161,7 @@
     color:rgba(255,45,45,1);
     background:#fff;
 }
+
 :global(.PageSeven .mainFooter){
     position: absolute;
     left: 0;
@@ -230,6 +231,7 @@ clear: both;
     text-align: center
     
  } */
+
 /*页面里面具体的文字效果*/
 .words{
     visibility: hidden;
