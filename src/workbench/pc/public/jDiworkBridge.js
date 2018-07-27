@@ -98,6 +98,12 @@ const handlerList = {
       type,
     });
   },
+  openMessage(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  }
 }
 
 function messageHandler({ detail, callbackId }, event) {

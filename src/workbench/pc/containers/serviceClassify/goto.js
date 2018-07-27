@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { openService } from '../../public/regMessageTypeHandler';
 import {
   appItemImg,
   appItem_describe,
@@ -10,7 +11,8 @@ import {
 @withRouter
 class GoTo extends Component {
   goToLink = (path) => {
-    this.props.history.push('/app/'+path);
+    openService(path, 2);
+    // this.props.history.push('/app/'+path);
   }
   render() {
     const {

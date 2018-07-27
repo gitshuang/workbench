@@ -402,7 +402,7 @@ body .paginationClass .disabled a:focus,
 body .paginationClass .disabled a:hover{
   background: rgba(9,44,66,.04);
 }
-body .paginationClass li a{ 
+body .paginationClass li a{
   width: 28px;
   height: 28px;
   background: rgba(9,30,66,.04);
@@ -415,7 +415,7 @@ body .paginationClass li a:hover{
   border-color:#fcedec;
 }
 body .paginationClass li:first-child a,
-body .paginationClass li:last-child a{ 
+body .paginationClass li:last-child a{
   border-radius: 4px;
 }
 body .paginationClass input{
@@ -429,4 +429,9 @@ body .paginationClass input::-webkit-inner-spin-button {
 }
 body .paginationClass input[type="number"]{
   -moz-appearance: textfield;
+}
+
+.u-message {
+  top: 102px!important;
+  width: 100%;
 }
