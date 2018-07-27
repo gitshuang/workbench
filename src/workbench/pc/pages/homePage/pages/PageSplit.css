@@ -35,25 +35,36 @@
 :global(.PageSecond) .amBg{
     background-image: url('./images/2.png') ;
 }
-:global(.PageSeven) .amBg{
-    background-image: url('./images/7.png') ;
-    
+:global(.PageThird) .amBg{
+    background-image: url('./images/3.png') ;
 }
+:global(.PageFour) .amBg{
+    background-image: url('./images/4.png') ;
+}
+:global(.PageFive) .amBg{
+    background-image: url('./images/6.png') ;  
+}
+:global(.PageSix) .amBg{
+    background-image: url('./images/5.png') ;  
+}
+:global(.PageSeven) .amBg{
+    background-image: url('./images/7.png') ;  
+}
+
 /*firstPage的内容部分*/
 :global(.mainContent.viewOne  .laymid) {
     position: absolute;
-    top: 30%;
+    top: 45%;
     left: 50%;
-    width: 420px;
+    width: 826px;
     height: 200px;
-    margin-left: -195px;
+    margin-left: -418px;
     margin-top: -40px;
 }
 :global(.mainContent.viewOne  .laymid .logo) {
-    background-image: url(https://i.alipayobjects.com/i/ecmng/png/201501/4JdkvPYoOr.png);
+    background-image: url('./images/slogan1.png');
     margin-bottom: 10px;
-    width: 420px;
-    height: 88px;
+    height: 141px;
     background-repeat: no-repeat;
     background-position: -10px 0;
     background-size: 100% 100%;
@@ -63,7 +74,7 @@
 }
 :global(.mainContent.viewOne .laymid .clickMe){
     text-align: center;
-    padding-top: 36px;
+    padding-top: 46px;
 }
 :global(.mainContent.viewOne .laymid .clickBtn) {
     width: 180px;
@@ -150,7 +161,19 @@
     color:rgba(255,45,45,1);
     background:#fff;
 }
-:global(.PageSeven  .mainFooter) {
+:global(.PageSeven .mainFooter){
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: url(/img/footer-c5bb0820.png);
+    width: 100%;
+    height: 100%;
+    background-position: bottom left;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+/* :global(.PageSeven  .mainFooter) {
     width: 100%;
     height: 260px;
     background: #4c515a;
@@ -206,7 +229,7 @@ clear: both;
     padding:15px 0;
     text-align: center
     
- }
+ } */
 /*页面里面具体的文字效果*/
 .words{
     visibility: hidden;
@@ -215,14 +238,42 @@ clear: both;
     z-index: 11;
     background-position: 0 0;
     background-repeat: no-repeat;
+    font-family: PingFangSC-Regular;
+    color: rgba(255,255,255,1);
+    line-height: 33px;
+    font-size: 24px;
 }
-
-:global(.animation0 .viewOne)  .words{
+/*第2,4,5页*/
+:global(.animation1 .viewTwo)  .words,
+:global(.animation3 .viewFour)  .words,
+:global(.animation4 .viewFive)  .words{
     opacity: 1;
     visibility: visible;
-    transition: 1s 1s opacity;
-    top: 30%;
-    left: 50%;
-    width: 360px;
-    margin-left:-180px;
+    transition: 1s .8s opacity;
+    top: 40%;
+    left: 10%;
+}
+/*第3，6页*/
+:global(.animation2 .viewThree)  .words,
+:global(.animation5 .viewThree)  .words{
+    opacity: 1;
+    visibility: visible;
+    transition: 1s .8s opacity;
+    top: 40%;
+    right: 18%;
+}
+
+
+/*单个页面的样式*/
+:global(.oneArtical .wordsTitle),
+:global(.oneArtical .wordsCon){
+    display: block;
+} 
+:global(.oneArtical .wordsTitle) {
+    font-size: 55px;
+    line-height: 77px;
+    padding-bottom: 20px;
+}
+:global(.oneArtical .wordsCon) {
+    max-width: 611px;
 }

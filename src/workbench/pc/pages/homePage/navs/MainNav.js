@@ -14,16 +14,16 @@ export default function MainNavPanel(props){
           {/* <span className={headerDesc}>数字化工作入口</span> */}
         </div>
         <div className={middleCon}>
-          <a href="http://www.yonyoucloud.com" className="middleItem">我们</a>
-          <a href="http://www.yonyoucloud.com" className="middleItem">服务支持</a>
-          <a href="http://www.yonyoucloud.com" className="middleItem">开放平台</a>
-          <a href="http://www.yonyoucloud.com" className="middleItem">联系我们</a>
+          <a href="http://www.diwork.com" className="middleItem">我们</a>
+          <a href="http://www.diwork.com" className="middleItem">服务支持</a>
+          <a href="http://www.diwork.com" className="middleItem">开放平台</a>
+          <a href="http://www.diwork.com" className="middleItem">联系我们</a>
         </div>
         {
             props.btnShow &&(
             <div className={rightCon}>
-                <span className="loginBtn" onClick={props.loginClick}>登录</span>
-                <span className="registryBtn">注册</span>
+                <a className="loginBtn" onClick={props.loginClick}>登录</a>
+                <a className="registryBtn" target="_blank" href="http://idtest.yyuap.com/register?sysid=market&mode=light&yhtrealservice=http://www.diwork.com">注册</a>
             </div>
             )
         }

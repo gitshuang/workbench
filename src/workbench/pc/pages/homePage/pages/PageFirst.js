@@ -12,8 +12,8 @@ export default function PageFirst(props){
             <div className="laymid">
               <div className="logo"></div>
               <div className="clickMe clearfix">
-                <a href="http://www.yonyoucloud.com" className="loginBtn clickBtn ">登录</a>
-                <a href="http://www.yonyoucloud.com" className="registryBtn clickBtn">注册</a>
+                <span className="loginBtn clickBtn " onClick={props.loginClick}>登录</span>
+                <a target="_blank" href="http://idtest.yyuap.com/register?sysid=market&mode=light&yhtrealservice=http://www.diwork.com"  className="registryBtn clickBtn">注册</a>
               </div>
             </div>
           </div>

@@ -3,8 +3,11 @@ import MainNav from './navs/MainNav.js';
 import TopNav from './navs/TopNav.js';
 import PageFirst from './pages/PageFirst.js';
 import PageSecond from './pages/PageSecond.js';
+import PageThird from './pages/PageThird.js';
+import PageFour from './pages/PageFour.js';
+import PageFive from './pages/PageFive.js';
+import PageSix from './pages/PageSix.js';
 import PageSeven from './pages/PageSeven.js';
-import LoginPng from './login.png';
 import{
   HomePagePanel,
   rightDotMenu,
@@ -109,22 +112,23 @@ class HomePage extends Component {
   }
   render() {
     let {curIndex,loginModalShow} = this.state;
+    let btnShow =(curIndex !== 0 && curIndex !== 6)
     return (
         <div className={HomePagePanel}>
           <TopNav />
-          <MainNav btnShow={curIndex === 1} loginClick={this.loginClick}/>
+          <MainNav btnShow={btnShow} loginClick={this.loginClick}/>
           <div className={rightDotMenu}>
               {!loginModalShow && this.renderDot()}
           </div>
           <div ref={(ref) =>{this.amBody = ref}}className={`${HomeOnePage} amBody animation0`}>
               <div className="videoContainer"></div>
-              <PageFirst/>
+              <PageFirst loginClick={this.loginClick}/>
               <PageSecond />
-              <PageFirst />
-              <PageSecond />
-              <PageFirst />
-              <PageSecond />
-              <PageSeven />
+              <PageThird />
+              <PageFour />
+              <PageFive />
+              <PageSix />
+              <PageSeven loginClick={this.loginClick}/>
           </div>
             {
               loginModalShow&&(
