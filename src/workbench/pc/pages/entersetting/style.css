@@ -5,7 +5,6 @@
   width: 120px;
   text-align: right;
   font-size: 14px;
-  /* color:#797D82; */
 }
 .enterForm :global(.u-label>span) {
   vertical-align: middle;
@@ -108,16 +107,12 @@
 
 .enterForm :global(.u-input-inner>input){
   width:338px !important;
-  height:36px;
   background:rgba(255,255,255,1);
   border-radius: 3px ;
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-.enterForm :global(.u-input-before){
-  height:36px;
-  line-height: 36px;
-}
+
 /* .enterForm >span:nth-child(5) :global(.u-form-item){
   margin-top: -20px;
 } */

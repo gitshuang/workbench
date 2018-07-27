@@ -1,5 +1,5 @@
 .active {
-  color: red;
+  color: #E14C46;
 }
 .workArea { 
   height: 100%;
@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 .wrap :global(.icon-dingzhi.active){
-  color: red;
+  color: #E14C46;
 }
 .wrap :global(.um-content) {
   flex-direction: column;

@@ -87,15 +87,7 @@
   bottom: 50px;
   transform: translate(50%,50%);
 }
-/**
-.defaultArea .default_icon{
-  width: auto;
-  bottom: 57px;
-  right: 50px;
-  font-size: 90px;
-  color: rgba(117,127,140,1);
-}
-**/
+
 
 .titleRight{
   -webkit-box-flex:1.0;

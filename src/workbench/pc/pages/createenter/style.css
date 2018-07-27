@@ -16,9 +16,7 @@
 .enterForm  :global(.u-form-item .u-select){
   min-width: 106px !important;
 }
-.enterForm :global(.u-input-before){
-  line-height: 38px !important;
-}
+
 .enterForm :global(.uf.uf-calendar) {
   position: relative;
   top: -4px;
@@ -51,12 +49,12 @@
 .enterForm :global(.u-form-item){
   width: 100%;
 }
-.enterForm :global(.u-select-selection--single){
+/* .enterForm :global(.u-select-selection--single){
   height: 36px !important;
 }
 .enterForm :global(.u-select-selection-rendered){
   line-height: 36px !important;
-}
+} */
 
 .enterCont :global(.u-select-selection-rendered .u-select-selection-rendered){
   line-height: 36px;
@@ -101,17 +99,10 @@
 
 .enterForm :global(.u-input-inner>input){
   width:338px !important;
-  height:36px;
   background:rgba(255,255,255,1);
   border-radius: 3px ;
-  border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-.enterForm :global(.u-input-before){
-  height:36px;
-  line-height: 36px;
-  display: none;
-}
 
 .enterForm :global(.u-city-select){
   display: inline-flex;
