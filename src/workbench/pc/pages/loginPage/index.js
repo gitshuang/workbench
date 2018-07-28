@@ -18,9 +18,8 @@ import{
 
 const  CAS_SERVER = "https://idtest.yyuap.com",
 yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
-_destUrl="http://www.diwork.com",
+_destUrl="http://workbench.yyuap.com/loginYht",
 yhthtmlUrl=window.yhthtmlUrl;
-
 
 class LoginPage extends Component {
   constructor(props){
@@ -35,7 +34,7 @@ class LoginPage extends Component {
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
     this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + _destUrl;
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtrealservice=' + _destUrl + '&yhtdesturl=' + yhthtmlUrl);
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?serviceurl=' + _destUrl + '&yhtdesturl=' + yhthtmlUrl);
   }
 
   componentDidMount(){
