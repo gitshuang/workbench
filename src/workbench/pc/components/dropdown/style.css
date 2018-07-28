@@ -51,7 +51,7 @@
 .menuStyle{
     box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
     border: rgba(78,89,104,0.19);
-    width: 219px;
+    width: 233px;
 }
 .dropMenuItem{
     background: red;
@@ -74,8 +74,8 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 }
 .createEnt{
     cursor: pointer;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 13px;
+    padding-right: 13px;
     color:#111111;
     line-height: 40px;
     font-weight: 600;
@@ -87,8 +87,9 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 .createEnt:first-child::after{
     content: '';
     position: absolute;
-    width: 189px;
-    left: 15px;
+    /* width: 189px; */
+    left: 13px;
+    right: 13px;
     bottom: 0px;
     height: 1px;
     background: #d0d0d0;
@@ -115,11 +116,11 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 400px;
-    padding-left: 5px;
+    /* padding-left: 5px; */
 }
 .liTitle{
     width: 76%;
-    padding-left: 5px;
+    padding-left: 13px;
     overflow: hidden;
     text-overflow: ellipsis;
     clear: both;

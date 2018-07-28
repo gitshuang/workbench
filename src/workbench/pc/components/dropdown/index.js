@@ -104,7 +104,8 @@ class DropdownButton extends Component {
     }
     // onSelect={(e)=>{this.handleSelect(e,fun)}}
     const menus = (
-      <Menu className={menuStyle} style={{ marginLeft: marginLeft2, marginTop: -1 }}>
+      // <Menu className={menuStyle} style={{ marginLeft: marginLeft2, marginTop: -1 }}>
+      <Menu className={menuStyle} >
         <MenuItem className={menuItem} >
           <div className={`${itemUl} open_item`}>{item}</div>
           {
