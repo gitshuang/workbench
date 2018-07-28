@@ -13,10 +13,15 @@ import{
   rightDotMenu,
   HomeOnePage
 } from './index.css';
+
+
+
 const  CAS_SERVER = "https://idtest.yyuap.com",
 yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
 _destUrl="http://www.diwork.com",
 yhthtmlUrl=window.yhthtmlUrl;
+
+
 class LoginPage extends Component {
   constructor(props){
     super(props);
@@ -115,9 +120,7 @@ class LoginPage extends Component {
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
     this.setState({loginModalShow:false})
   }
-  osFeLoginCallBack = () =>{
-    window.location.reload();
-  }
+  
   render() {
     let {curIndex,loginModalShow} = this.state;
     let btnShow =(curIndex !== 0 && curIndex !== 6);
