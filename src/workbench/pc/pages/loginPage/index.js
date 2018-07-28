@@ -33,8 +33,8 @@ class LoginPage extends Component {
     }
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
-    this.registryUrl = CAS_SERVER + '/register?sysid=diwork&mode=light&yhtrealservice=' + _destUrl;
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?serviceurl=' + _destUrl + '&yhtdesturl=' + yhthtmlUrl);
+    this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + _destUrl;
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?serviceurl=' + _destUrl + '&yhtdesturl=' + yhthtmlUrl);
   }
 
   componentDidMount(){
