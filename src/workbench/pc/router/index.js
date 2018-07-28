@@ -43,7 +43,7 @@ const routes = [
   {
     path: '/loginpage',
     component:LoginPage,
-  },//必须放在第一位因为有引用
+  },
   {
     path: '/',
     component: Home,

@@ -12,7 +12,7 @@ import{
   HomePagePanel,
   rightDotMenu,
   HomeOnePage
-} from './index.css'
+} from './index.css';
 const  CAS_SERVER = "https://idtest.yyuap.com",
 yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
 _destUrl="http://www.diwork.com",
@@ -115,9 +115,13 @@ class LoginPage extends Component {
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
     this.setState({loginModalShow:false})
   }
+  osFeLoginCallBack = () =>{
+    window.location.reload();
+  }
   render() {
     let {curIndex,loginModalShow} = this.state;
-    let btnShow =(curIndex !== 0 && curIndex !== 6)
+    let btnShow =(curIndex !== 0 && curIndex !== 6);
+    // window.aaa = this.osFeLoginCallBack;
     return (
         <div className={HomePagePanel}>
           <TopNav />
