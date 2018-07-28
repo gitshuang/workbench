@@ -193,7 +193,7 @@ class Home extends Component {
       },
     });
   }
-  
+
   loadOk = (() => {
     const self = this;
     let count = 0;
@@ -245,7 +245,7 @@ class Home extends Component {
       };
       if (i === workList.length - 1) {
         props.style = {
-          height: window.innerHeight,
+          height: 1000,
         };
       }
       list.push({
@@ -268,9 +268,9 @@ class Home extends Component {
         </ElementsWrapper>
         <HomeFolderDialog />
         {
-          this.state.homemark ? <HomeMark 
-            linkTo={this.linkTo} 
-            homemark={this.state.homemark} 
+          this.state.homemark ? <HomeMark
+            linkTo={this.linkTo}
+            homemark={this.state.homemark}
             closeHomeMark={this.closeHomeMark}
             /> : null
         }
