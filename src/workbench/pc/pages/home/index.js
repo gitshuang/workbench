@@ -245,7 +245,7 @@ class Home extends Component {
       };
       if (i === workList.length - 1) {
         props.style = {
-          height: window.innerHeight + 2000,
+          height: window.innerHeight + 4000,
         };
       }
       list.push({
