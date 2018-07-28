@@ -17,6 +17,7 @@ import homeActions from 'store/root/home/actions';
 
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
+import LoginPage from 'pages/loginpage';
 import 'public/jDiworkBridge';
 
 const {
@@ -85,8 +86,13 @@ class Root extends Component {
       loaded: false,
       inited: false,
     };
+    this.isLogin = window.os_fe_isLogin && window.os_fe_isLogin();
   }
   componentWillMount() {
+    if(!this.isLogin){
+      this.props.history.push('./loginpage');
+      return false
+    }
     const {
       requestStart,
       requestSuccess,
@@ -124,6 +130,7 @@ class Root extends Component {
   }
 
   componentDidMount() {
+    if(!this.isLogin) return false;
     const { getPoll } = this.props;
     const browser = navigator.appName;
     if (browser !== 'Microsoft Internet Explorer') {
@@ -137,13 +144,23 @@ class Root extends Component {
   }
 
   render() {
+    let onlyLogin = {path:'/',component:LoginPage}
     return (
       <div>
-        <Switch>
-          {
-            routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
-          }
-        </Switch>
+       {
+         this.isLogin?
+         (
+          <Switch>
+            {
+              routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+            }
+          </Switch>
+         ):(
+          <Switch>
+            <RouteWithSubRoutes key={'login'} {...onlyLogin} />
+          </Switch>
+         )
+       }
       </div>
     );
   }
