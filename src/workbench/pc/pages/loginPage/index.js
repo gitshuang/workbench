@@ -17,7 +17,7 @@ const  CAS_SERVER = "https://idtest.yyuap.com",
 yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
 _destUrl="http://www.diwork.com",
 yhthtmlUrl=window.yhthtmlUrl;
-class HomePage extends Component {
+class LoginPage extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -158,4 +158,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default LoginPage;

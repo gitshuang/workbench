@@ -85,8 +85,13 @@ class Root extends Component {
       loaded: false,
       inited: false,
     };
+    this.isLogin = window.os_fe_isLogin && window.os_fe_isLogin();
   }
   componentWillMount() {
+    if(!this.isLogin){
+      this.props.history.push('./loginpage');
+      return false
+    }
     const {
       requestStart,
       requestSuccess,
@@ -124,6 +129,7 @@ class Root extends Component {
   }
 
   componentDidMount() {
+    if(!this.isLogin) return false;
     const { getPoll } = this.props;
     const browser = navigator.appName;
     if (browser !== 'Microsoft Internet Explorer') {
