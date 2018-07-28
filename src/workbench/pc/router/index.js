@@ -1,6 +1,6 @@
 import Home from 'pages/home';
 import asyncComponent from './lazyload';
-import LoginPage from 'pages/loginpage';
+import LoginPage from 'pages/loginPage';
 const Page404 = asyncComponent(() => import(/* webpackChunkName: "Page404" */'pages/404'));
 // 工作页
 const Work = asyncComponent(() => import(/* webpackChunkName: "Work" */'pages/work'));

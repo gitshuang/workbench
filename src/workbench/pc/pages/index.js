@@ -17,7 +17,7 @@ import homeActions from 'store/root/home/actions';
 
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
-import LoginPage from 'pages/loginpage';
+import LoginPage from 'pages/loginPage';
 import 'public/jDiworkBridge';
 
 const {
@@ -90,7 +90,6 @@ class Root extends Component {
   }
   componentWillMount() {
     if(!this.isLogin){
-      this.props.history.push('./loginpage');
       return false
     }
     const {
