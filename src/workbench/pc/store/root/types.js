@@ -21,5 +21,5 @@ export default createTypes(
   'GET_ALL_ENABLE',
   'GET_CURRENT',
   'SHOW_DIALOG',
-  'CLOSE_DIALOG'
+  'CLOSE_DIALOG_NEW'
 );

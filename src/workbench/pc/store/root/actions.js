@@ -34,7 +34,7 @@ const {
   GET_ALL_ENABLE,
   GET_CURRENT,
   SHOW_DIALOG,
-  CLOSE_DIALOG
+  CLOSE_DIALOG_NEW
 } = types;
 
 export default createActions(
@@ -60,5 +60,5 @@ export default createActions(
   SHOW_IM,
   HIDE_IM,
   SHOW_DIALOG,
-  CLOSE_DIALOG
+  CLOSE_DIALOG_NEW
 );

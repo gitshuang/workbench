@@ -110,7 +110,7 @@ const handlerList = {
       type,
     });
   },
-  closeDialog(type, event) {
+  closeDialogNew(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
       type,

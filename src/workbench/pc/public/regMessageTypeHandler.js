@@ -17,7 +17,7 @@ const {
   changeMessageType,
   hideIm,
   showDialog,
-  closeDialog
+  closeDialogNew
 } = rootActions;
 const {getUserInfo} = homeActions;
 const handlers = {
@@ -168,8 +168,8 @@ const handlers = {
   showDialog(data) {
     store.dispatch(showDialog(data));
   },
-  closeDialog() {
-    store.dispatch(closeDialog());
+  closeDialogNew() {
+    store.dispatch(closeDialogNew());
   }
 }
 window.handlers = handlers;
