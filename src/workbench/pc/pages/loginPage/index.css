@@ -41,7 +41,7 @@ body,.HomePagePanel{
     cursor: pointer;
 }
 .HomePagePanel .rightDotMenu :global(.menudot.active){
-    background: rgba(255,45,45,1);
+    background: #EB4046;
 }
 
 /*animation*/

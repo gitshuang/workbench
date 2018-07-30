@@ -52,17 +52,17 @@
     cursor: pointer;
 }
 .MainNav .rightCon :global(a.loginBtn){
-    background: rgba(255,45,45,1);
+    background: #EB4046;
     color: rgba(255,255,255,1);
 }
 .MainNav .rightCon :global(a.registryBtn) {
-    color:rgba(255,45,45,1);
+    color:#EB4046;
     background:#fff;
 }
 /*TopNav的样式*/
 .TopNav{
     height:40px;
-    background:rgba(0,0,0,1);
+    background:#666;
     opacity:0.9;
     line-height: 40px;
     text-align: right;
@@ -70,7 +70,12 @@
 .TopNav :global(.TopNavLink) {
     font-size: 18px;
     font-family: PingFangSC-Regular;
-    color: rgba(255,255,255,1);
+    color: rgba(255,255,255);
+    opacity: .8;
     text-decoration: none;
     padding: 0 20px;
+    transition: opacity .5s;
+}
+.TopNav :global(.TopNavLink:hover){
+  opacity: 1;
 }

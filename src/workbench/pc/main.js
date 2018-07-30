@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import App from 'pages';
 import { IS_IE } from '@u';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
-// import 'assets/style/reset.css';
-// import 'assets/style/animate.css';
-// import 'assets/style/iuapmobile.um.css';
-// import 'assets/style/base.css';
-// import 'assets/style/ie9.css';
+import 'assets/style/reset.css';
+import 'assets/style/animate.css';
+import 'assets/style/iuapmobile.um.css';
+import 'assets/style/base.css';
+import 'assets/style/ie9.css';
 const osFeLoginCallBack = () =>{
   window.location.reload();
 }
