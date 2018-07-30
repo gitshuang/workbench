@@ -15,7 +15,8 @@ import{
 } from './index.css';
 
 const  CAS_SERVER = "https://idtest.yyuap.com",
-yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
+//yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
+yhtssoisloginUrl ='http://workbenchdev.yyuap.com/login.html',
 _destUrl="http://workbenchdev.yyuap.com/yhtssoislogin", //只有这个不是登陆成功后跳转的链接
 realservice="http://workbenchdev.yyuap.com";
 
