@@ -18,6 +18,7 @@ import homeActions from 'store/root/home/actions';
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import 'public/jDiworkBridge';
+import BasicDialog from 'containers/basicDialog/';
 
 const {
   requestStart,
@@ -105,7 +106,7 @@ class Root extends Component {
         requestSuccess();
       }
     });
-    // 请求快捷应用 
+    // 请求快捷应用
     getServiceList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
@@ -144,6 +145,7 @@ class Root extends Component {
             routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
           }
         </Switch>
+        <BasicDialog/>
       </div>
     );
   }
