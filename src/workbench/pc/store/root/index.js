@@ -60,7 +60,7 @@ const {
   getAllEnable,
   getCurrent,
   showDialog,
-  closeDialog
+  closeDialogNew
 } = actions;
 
 const defaultState = {
@@ -236,7 +236,7 @@ const reducer = handleActions({
       dialogMsg: msg
     }
   },
-  [closeDialog]: (state) => ({...state, showModal: false}),
+  [closeDialogNew]: (state) => ({...state, showModal: false}),
 }, defaultState);
 
 export default function (state, action) {

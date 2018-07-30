@@ -16,19 +16,19 @@ const {showDialog, closeDialog} = rootActions;
   ),
   {
     showDialog,
-    closeDialog
+    closeDialogNew
   }
 )
 class PopDialogComp extends Component {
 
   render() {
-    const {dialogType, dialogMsg, dialogTitle, showModal, closeDialog} = this.props;
+    const {dialogType, dialogMsg, dialogTitle, showModal, closeDialogNew} = this.props;
     let btnLabel = "确定";
     let _btn = [
       {
         label: btnLabel,
         fun: () => {
-          closeDialog();
+          closeDialogNew();
         },
         type: dialogType === "success" ? null : dialogType,
         className: 'basic_dialog_modal u-button'
@@ -43,7 +43,7 @@ class PopDialogComp extends Component {
         show={showModal}
         title={title}
         backup={false}
-        close={closeDialog}
+        close={closeDialogNew}
         btns={_btn}
       >
         <div className="content_div"><p className="content_p">{dialogMsg}</p></div>
