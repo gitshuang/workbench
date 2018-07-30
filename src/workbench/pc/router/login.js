@@ -1,6 +1,6 @@
 import LoginPage from 'pages/loginPage';
 import Service from 'pages/loginPage/service';
-
+import AboutUs from 'pages/loginPage/aboutus';
 const loginRoutes = [
     {
       path: '/',
@@ -10,6 +10,10 @@ const loginRoutes = [
     {
       path:'/service',
       component:Service,
+    },
+    {
+      path:'/aboutus',
+      component:AboutUs,
     }
   ]
 
