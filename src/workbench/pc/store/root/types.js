@@ -20,4 +20,6 @@ export default createTypes(
   'SET_CURRENT',
   'GET_ALL_ENABLE',
   'GET_CURRENT',
+  'SHOW_DIALOG',
+  'CLOSE_DIALOG_NEW'
 );

@@ -103,6 +103,18 @@ const handlerList = {
     postMessageToWin(this.source, {
       type,
     });
+  },
+  showDialog(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
+  closeDialogNew(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
   }
 }
 
