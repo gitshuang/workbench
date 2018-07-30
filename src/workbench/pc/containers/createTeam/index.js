@@ -143,6 +143,7 @@ class CreateTeamContent extends Component {
           <div className={item + " um-box "}>
             <label>团队名称<span>&nbsp;*&nbsp;</span></label>
             <input
+              className="u-form-control"
               placeholder="最多60个字符"
               value={value}
               onChange={(e) => { this.onChange(e) }}
