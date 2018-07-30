@@ -243,11 +243,6 @@ class Home extends Component {
         data: da,
         noTitle: !i,
       };
-      if (i === workList.length - 1) {
-        props.style = {
-          height: window.innerHeight + 4000,
-        };
-      }
       list.push({
         label: name,
         target: `nav${id}`,
@@ -258,6 +253,7 @@ class Home extends Component {
         {...props}
         viewport={this.state.viewport}
         loadOk={this.loadOk}
+        lastIndex={ i === workList.length - 1 ? true : false }
       />);
     });
     return (
