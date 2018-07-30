@@ -54,6 +54,10 @@ body .u-form-control{
   font-size: 14px;
   padding-left: 8px;
   border: 1px solid #D0D0D0;
+  height: 32px;
+}
+body .u-form-control:focus{
+  border: 1px solid #00CDC3;
 }
 .u-button {
   min-width: 5px;
@@ -89,6 +93,38 @@ body .u-radio.is-checked .u-radio-label:before{
 body .u-radio.is-checked .u-radio-label:after{
   background:#4E5E68;
 }
+body .u-select-selection--single{
+  height: 32px;
+}
+body .u-select-selection-rendered{
+  line-height: 32px;
+}
+body .u-select-focused .u-select-selection, 
+body .u-select-selection:focus, 
+body .u-select-selection:active{
+  border-color: #00CDC3;
+}
+body .u-select-open .u-select-selection{
+  border-color: #00CDC3;
+}
+
+body .u-select-dropdown .u-select-dropdown-menu-item-active,
+body .u-select-dropdown .u-select-dropdown-menu-item:hover{
+  background: #f3f3f3;
+  color: #E14C46;
+  font-weight: normal;
+}
+
+body .u-select-dropdown .u-select-dropdown-menu-item-selected,
+body .u-select-dropdown .u-select-dropdown-menu-item-selected:hover{
+  color: #e14b46;
+  background: #e4e4e4;
+  font-weight: normal;
+}
+
+body .u-menu{
+  color: #555555;
+}
 
 .tc i:hover{
   color:#111111;
@@ -96,17 +132,17 @@ body .u-radio.is-checked .u-radio-label:after{
 /* 菜单 */
 .u-menu-inline > .u-menu-item {
   font-size: 14px;
-  color: #4A515D;
+  color: #555555;
   cursor: pointer;
 }
 
 .u-menu-inline > .u-menu-submenu > .u-menu-submenu-title {
-  color: #4A515D;
+  color: #555555;
   cursor: pointer;
 }
 
-.u-menu-inline .u-menu-inline .u-menu-item-selected,
-.u-menu-inline .u-menu-selected {
+.u-menu-inline .u-menu-selected,
+.u-menu-inline .u-menu-inline .u-menu-item-selected {
   border: none;
   color: #E14C46;
   /* background: #f4f5f7; */
@@ -145,6 +181,7 @@ body .u-radio.is-checked .u-radio-label:after{
   transform: rotate(-180deg);
   color: #E14C46;
 }
+
 
 .u-input-group .u-form-control:last-child {
   border-bottom-left-radius: 3px;
@@ -217,11 +254,6 @@ body .u-radio.is-checked .u-radio-label:after{
   white-space:normal !important;
 }
 
-.u-select-dropdown .u-select-dropdown-menu-item-active,
-.u-select-dropdown .u-select-dropdown-menu-item:hover{
-  background: #f3f3f3;
-  color: #E14C46;
-}
 
 .input_phone .u-input-group{
   display: inline-table !important;

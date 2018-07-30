@@ -47,21 +47,23 @@ class BreadcrumbContainer extends Component {
       breadcrumbMenu: "",
       breadcrumbTab: ""
     }
-    this.setExpended = this.setExpended.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
     this.back = false;
     this.backVal = 0;
     this.backClickUrl = '';//线上点击返回需要go(-2),其他需要go(-1)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { withSidebar } = this.props;
-    if (!withSidebar) {
-      this.setExpended();
-    }
+  componentDidMount(){
+    this.setExpended();
   }
 
-  setExpended() {
+  // componentWillReceiveProps(nextProps) {
+  //   const { withSidebar } = this.props;
+  //   if (!withSidebar) {
+  //     this.setExpended();
+  //   }
+  // }
+
+  setExpended = () => {
     this.setExpandedSidebar(true);
     this.setState({
       breadcrumbMenu: breadcrumb_menu,
@@ -76,7 +78,7 @@ class BreadcrumbContainer extends Component {
     window.dispatchEvent(evt);
   }
 
-  closeMenu() {
+  closeMenu = () => {
     this.setExpandedSidebar(false);
     this.setState({
       breadcrumbMenu: "",

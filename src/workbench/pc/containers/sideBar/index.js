@@ -4,7 +4,10 @@ import { withRouter } from 'react-router-dom';
 import Menu, { SubMenu } from 'bee/menus';
 import Icon from 'pub-comp/icon';
 import { mapStateToProps, findPath } from '@u';
-import { sideBar, menuItem, sideBarMenu, sideMainMenu, last_item } from './style.css';
+import { 
+  sideBar, menuItem, sideBarMenu, sideMainMenu, last_item,
+  menuArrow, item_1, item_2, item_3, item_4,
+} from './style.css';
 
 const { Item } = Menu;
 

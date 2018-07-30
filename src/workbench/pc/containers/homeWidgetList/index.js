@@ -11,7 +11,7 @@ import {
 import homeActions from 'store/root/home/actions';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-const {openFolder} = homeActions;
+const { openFolder } = homeActions;
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
 
@@ -32,13 +32,28 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     getProductInfo
   }
 )
-class HomeWidgeList extends Component{
+class HomeWidgeList extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      blank: false
+      blank: false,
+      lastStyle: {
+        height: window.innerHeight
+      },
     };
+  }
+
+  componentDidMount(){
+    const { lastW } = this.refs;
+    // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100 
+    if( lastW && (lastW.offsetHeight > window.innerHeight)){
+      this.setState({
+        lastStyle:{
+          height: lastW.offsetHeight + 100
+        }
+      });
+    }
   }
 
   getProductInfo = (code, type) => {
@@ -50,7 +65,7 @@ class HomeWidgeList extends Component{
       history,
     } = this.props;
     requestStart();
-    getProductInfo(code, type).then(({error, payload}) => {
+    getProductInfo(code, type).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       } else {
@@ -73,7 +88,7 @@ class HomeWidgeList extends Component{
     });
   }
 
-	render(){
+  render() {
     const {
       data: {
         widgetName: name,
@@ -83,7 +98,8 @@ class HomeWidgeList extends Component{
       openFolder,
       style,
       groupMeta,
-      listMeta
+      listMeta,
+      lastIndex,
     } = this.props;
     // 新增元数据  控制groupTitle 样式
     const titleStyle = groupMeta && groupMeta.titleStyle && JSON.parse(groupMeta.titleStyle);
@@ -104,17 +120,17 @@ class HomeWidgeList extends Component{
         props.clickHandler = () => {
           openFolder(child);
         }
-      } else if (type === 3 && !jsurl){
+      } else if (type === 3 && !jsurl) {
         let typeVal = serviceType === 2 ? 'app' : 'service';
         props.clickHandler = () => {
           this.getProductInfo(serviceCode, typeVal)
         }
       }
       return (
-        <Widget { ...props } listMeta={listMeta}  viewport={this.props.viewport} loadOk = {this.props.loadOk}/>
+        <Widget {...props} listMeta={listMeta} viewport={this.props.viewport} loadOk={this.props.loadOk} />
       );
     })
-		return(
+    return (
       <div className={item} style={style} >
         {
           noTitle ? null : (
@@ -123,12 +139,21 @@ class HomeWidgeList extends Component{
             </div>
           )
         }
-        <div className={WidgetCont}>
-          <ul className={WidgetList}>{list}</ul>
-        </div>
+        {
+          lastIndex 
+          ? 
+          <div className={WidgetCont} style={this.state.lastStyle}>
+            <ul className={WidgetList} ref="lastW">{list}</ul>
+          </div> 
+          : 
+          <div className={WidgetCont}>
+            <ul className={WidgetList}>{list}</ul>
+          </div>
+        }
+
       </div>
     );
-	}
+  }
 }
 
 export default HomeWidgeList;
