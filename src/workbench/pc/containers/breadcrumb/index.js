@@ -54,12 +54,16 @@ class BreadcrumbContainer extends Component {
     this.backClickUrl = '';//线上点击返回需要go(-2),其他需要go(-1)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { withSidebar } = this.props;
-    if (!withSidebar) {
-      this.setExpended();
-    }
+  componentDidMount(){
+    this.setExpended();
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   const { withSidebar } = this.props;
+  //   if (!withSidebar) {
+  //     this.setExpended();
+  //   }
+  // }
 
   setExpended() {
     this.setExpandedSidebar(true);
@@ -76,7 +80,7 @@ class BreadcrumbContainer extends Component {
     window.dispatchEvent(evt);
   }
 
-  closeMenu() {
+  closeMenu = () => {
     this.setExpandedSidebar(false);
     this.setState({
       breadcrumbMenu: "",
