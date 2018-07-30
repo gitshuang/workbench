@@ -115,6 +115,7 @@ body,.ServicePanel{
 /*第三部分*/
 .serviceThree{
     background:rgba(243,243,243,1);
+    padding:58px 0 40px 0;
 }
 .serviceThree :global(.title){
     display: inline-block;
@@ -124,16 +125,32 @@ body,.ServicePanel{
     line-height:45px;
     text-align: center;
     width: 100%;
-    padding: 68px 0 20px 0;
+    padding-bottom: 20px ;
+}
+.serviceThree :global(.processCon:after){
+    content: '';
+    display: block;
+    clear: both;
 }
 .serviceThree :global(.process) {
     width: 33%;
-    display: inline-block;
     text-align: center;
     padding: 0 30px;
     position: relative;
     font-family: PingFangSC-Regular;
+    float: left;
+    z-index:1;
+}
 
+.serviceThree :global(.process:not(:last-child):after){
+    content:'';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    top:24px;
+    left: 50%;
+    z-index:-1;
 }
 .serviceThree :global(.process span),
 .serviceThree :global(.process .processDot) {
@@ -174,4 +191,19 @@ body,.ServicePanel{
     background-size: contain;
     background-repeat: no-repeat;
     z-index: -1;
+}
+/*第四个页面*/
+.serviceFour{
+    background: #fff;
+    padding: 60px 0 30px 0;
+}
+.serviceFour :global(.title){
+    font-size:32px;
+    font-family:PingFangSC-Regular;
+    color:rgba(51,51,51,1);
+    line-height:45px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 30px;
 }
