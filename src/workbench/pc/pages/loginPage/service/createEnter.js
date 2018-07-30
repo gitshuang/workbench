@@ -14,7 +14,7 @@ import CitySelect from 'bee/city-select';
 import Progress from 'pub-comp/progress';
 import 'assets/style/Form.css';
 import {
-  enterForm, progressBar,
+  applyForm, applyBtn,
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -141,7 +141,7 @@ class CreateEnter extends Component {
     } = this.state;
     return (
       <div>
-        <Form submitCallBack={this.checkForm} showSubmit={false} className={enterForm}>
+        <Form submitCallBack={this.checkForm} showSubmit={false} className={applyForm}>
         <FormItem
             showMast={false}
             labelName={<span>姓名</span>}
@@ -233,7 +233,7 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>所在省市<font color="red">&nbsp;&nbsp;</font></span>}
+            labelName={<span>所在省市</span>}
             isRequire={false}
             valuePropsName="value"
             errorMessage="请输入所在省市"
@@ -242,11 +242,8 @@ class CreateEnter extends Component {
           >
             <CitySelect name="address" onChange={this.onChange} />
           </FormItem>
-
-         
-         
         </Form>
-
+            <div className={applyBtn}>立即申请</div>
       </div>
     );
   }

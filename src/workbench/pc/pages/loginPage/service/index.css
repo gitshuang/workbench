@@ -181,7 +181,7 @@ body,.ServicePanel{
 }
 
 .ServicePanel :global(.mainFooter){
-    position: absolute;
+    /* position: absolute;
     left: 0;
     top: 0;
     background-image: url('../pages/images/footer.png');
@@ -190,12 +190,16 @@ body,.ServicePanel{
     background-position: bottom left;
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: -1;
+    z-index: -1; */
+}
+.ServicePanel :global(.mainFooter .footerImg){
+    width: 100%;
+    height: auto;
 }
 /*第四个页面*/
 .serviceFour{
     background: #fff;
-    padding: 60px 0 30px 0;
+    padding: 60px 0 80px 0;
 }
 .serviceFour :global(.title){
     font-size:32px;
@@ -206,4 +210,8 @@ body,.ServicePanel{
     width: 100%;
     text-align: center;
     padding-bottom: 30px;
+}
+.serviceFour :global(.applyService){
+    width: 510px;
+    margin: 0 auto;
 }

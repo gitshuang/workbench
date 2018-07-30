@@ -7,6 +7,7 @@ import icon3 from './images/icon3.png';
 import icon4 from './images/icon4.png';
 import dot from './images/dot.png';
 import CreateEnter from './createEnter';
+import footerPng from '../pages/images/footer.png'
 import{
   ServicePanel,
   serviceThree,
@@ -36,7 +37,13 @@ class Service extends Component {
     window.onmousewheel = document.onmousewheel = null;
     this.setState({loginModalShow:true})
   }
-  
+
+  scrollToAnchor = (anchorName) => {
+    if (anchorName) {
+        let anchorElement = document.getElementById(anchorName);
+        if(anchorElement) { anchorElement.scrollIntoView({behavior: 'smooth'}); }
+    }
+  }
   render() {
     
     return (
@@ -47,7 +54,7 @@ class Service extends Component {
                   <div className="mainContent">
                       <span className="title">定制服务</span>
                       <span className="desc">专家咨询团队提供一对一解决方案</span>
-                      <div className="serviceBtn">马上定制</div>
+                      <div className="serviceBtn" onClick={()=>this.scrollToAnchor('apply')}>马上定制</div>
                   </div>
             </div>
             <div className="serviceTwo">
@@ -107,14 +114,16 @@ class Service extends Component {
                       </div>
                   </div>
             </div>
-            <div className={serviceFour}>
+            <div className={serviceFour} id="apply">
                   <div className="mainContent">
                       <span className="title">申请服务</span>
-                      <CreateEnter />
+                      <div className="applyService">
+                         <CreateEnter />
+                      </div>
                   </div>
             </div>
             <div className="mainFooter mainFooterFake">
-            
+              <img src={footerPng} alt="" className="footerImg"/>
             </div>
         </div>
     );
