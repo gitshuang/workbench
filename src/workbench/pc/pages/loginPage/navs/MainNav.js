@@ -7,6 +7,11 @@ import{
 } from './MainNav.css';
 import Logo from './logo1.png';
 export default function MainNavPanel(props){
+  function open(type){
+    if(type =='service'){
+      props.history.push('/service')
+    }
+  }
   return(
     <div className={MainNav}>
         <div className={leftCon}>
@@ -14,10 +19,10 @@ export default function MainNavPanel(props){
           {/* <span className={headerDesc}>数字化工作入口</span> */}
         </div>
         <div className={middleCon}>
-          <a href="http://www.diwork.com" className="middleItem">我们</a>
-          <a href="http://www.diwork.com" className="middleItem">服务支持</a>
-          <a href="http://www.diwork.com" className="middleItem">开放平台</a>
-          <a href="http://www.diwork.com" className="middleItem">联系我们</a>
+          <a href="http://www.diwork.com" className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`}>我们</a>
+          <a  className={`middleItem ${props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{open('service')}}>服务支持</a>
+          <a href="http://www.diwork.com" className={`middleItem ${props.activeIndex*1 === 3?'actived':null}`}>开放平台</a>
+          <a href="http://www.diwork.com" className={`middleItem ${props.activeIndex*1 === 4?'actived':null}`}>联系我们</a>
         </div>
         {
             props.btnShow &&(

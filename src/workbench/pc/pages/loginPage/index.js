@@ -14,12 +14,10 @@ import{
   HomeOnePage
 } from './index.css';
 
-
-
 const  CAS_SERVER = "https://idtest.yyuap.com",
 yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
-_destUrl="http://workbenchdev.yyuap.com/loginYht",
-yhthtmlUrl=window.yhthtmlUrl;
+_destUrl="http://workbenchdev.yyuap.com/yhtssoislogin", //只有这个不是登陆成功后跳转的链接
+realservice="http://workbenchdev.yyuap.com";
 
 class LoginPage extends Component {
   constructor(props){
@@ -33,8 +31,8 @@ class LoginPage extends Component {
     }
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + _destUrl;
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?serviceurl=' + _destUrl + '&yhtdesturl=' + yhthtmlUrl);
+    this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
   }
 
   componentDidMount(){
@@ -43,6 +41,8 @@ class LoginPage extends Component {
     }
     //W3C
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
+    document.getElementById('root').className = 'rootSpec';
+    document.getElementsByTagName('body')[0].className = 'bodySpec';
   }
   
   scrollFunc = function (e) {
@@ -127,7 +127,7 @@ class LoginPage extends Component {
     return (
         <div className={HomePagePanel}>
           <TopNav />
-          <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl}/>
+          <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history}/>
           <div className={rightDotMenu}>
               {!loginModalShow && this.renderDot()}
           </div>

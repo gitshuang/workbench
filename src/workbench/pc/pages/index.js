@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from 'router';
+import loginRoutes from 'router/login.js';
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
 import { getContext, mapStateToProps } from '@u';
@@ -86,7 +87,7 @@ class Root extends Component {
       loaded: false,
       inited: false,
     };
-    this.isLogin = 1|| window.os_fe_isLogin && window.os_fe_isLogin();
+    this.isLogin =1||window.os_fe_isLogin && window.os_fe_isLogin();
   }
   componentWillMount() {
     if(!this.isLogin){
@@ -143,7 +144,6 @@ class Root extends Component {
   }
 
   render() {
-    let onlyLogin = {path:'/',component:LoginPage}
     return (
       <div>
        {
@@ -156,7 +156,9 @@ class Root extends Component {
           </Switch>
          ):(
           <Switch>
-            <RouteWithSubRoutes key={'login'} {...onlyLogin} />
+            {
+              loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+            }
           </Switch>
          )
        }

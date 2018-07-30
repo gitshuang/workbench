@@ -154,11 +154,13 @@
 :global(.mainContent.viewSeven .laymid .loginBtn){
     background: #EB4046;
     color: rgba(255,255,255,1);
+    border: 2px solid #EB4046;
     margin-right: 20px;
 }
 :global(.mainContent.viewSeven .laymid .registryBtn) {
     color:#EB4046;
-    background:#fff;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,1);
 }
 
 :global(.PageSeven .mainFooter){

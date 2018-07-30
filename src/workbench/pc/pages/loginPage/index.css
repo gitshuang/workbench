@@ -1,7 +1,13 @@
-#root {
-    width: 100%;
-    min-height: 100%;
-    background:#fff;
+:global(.rootSpec){
+    min-height: 0!important;
+   overflow: hidden;
+
+}
+:global(.bodySpec){
+   height: 0!important;
+   min-height: 0!important;
+   overflow: hidden;
+
 }
 /*注意还有amPage amBg*/
 body,.HomePagePanel{
@@ -27,7 +33,7 @@ body,.HomePagePanel{
     text-align: center;
     position: fixed;
     top:50%;
-    margin-top:-140px;
+    margin-top:-40px;
     right:40px;
 }
 .HomePagePanel .rightDotMenu :global(.menudot){
