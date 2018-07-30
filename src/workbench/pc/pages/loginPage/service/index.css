@@ -1,7 +1,7 @@
-:global(.rootSpec){
+:global(.rootSpec2){
     min-height: 0!important;
 }
-:global(.bodySpec){
+:global(.bodySpec2){
    height: 0!important;
    min-height: 0!important;
 

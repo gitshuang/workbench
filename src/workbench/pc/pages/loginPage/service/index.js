@@ -26,8 +26,8 @@ class Service extends Component {
   }
 
   componentDidMount(){
-    document.getElementById('root').className = 'rootSpec';
-    document.getElementsByTagName('body')[0].className = 'bodySpec';
+    document.getElementById('root').className = 'rootSpec2';
+    document.getElementsByTagName('body')[0].className = 'bodySpec2';
   }
   loginClick = () =>{
     document.removeEventListener("DOMMouseScroll", this.scrollFunc);
