@@ -6,11 +6,13 @@ import icon2 from './images/icon2.png';
 import icon3 from './images/icon3.png';
 import icon4 from './images/icon4.png';
 import dot from './images/dot.png';
+import CreateEnter from './createEnter';
 import{
   ServicePanel,
   serviceThree,
   tipTitle,
-  tipCon
+  tipCon,
+  serviceFour,
 } from './index.css';
 
 const  CAS_SERVER = "https://idtest.yyuap.com",
@@ -105,9 +107,10 @@ class Service extends Component {
                       </div>
                   </div>
             </div>
-            <div className="serviceFour">
+            <div className={serviceFour}>
                   <div className="mainContent">
-                      
+                      <span className="title">申请服务</span>
+                      <CreateEnter />
                   </div>
             </div>
             <div className="mainFooter mainFooterFake">

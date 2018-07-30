@@ -88,7 +88,7 @@ class Root extends Component {
       loaded: false,
       inited: false,
     };
-    this.isLogin =window.os_fe_isLogin && window.os_fe_isLogin();
+    this.isLogin =1 || window.os_fe_isLogin && window.os_fe_isLogin();
   }
   componentWillMount() {
     if(!this.isLogin){
