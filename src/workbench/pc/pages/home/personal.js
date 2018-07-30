@@ -191,7 +191,7 @@ class Personals extends Component {
     if (routers[action]) {
       this.openNewRouter(routers[action]);
     }else if(active === "openEntersetting"){  // 如果是打开企业   先暂时在这里处理一下。
-      openService('GZTSYS001', 2);
+      openService('sysentersetting', 2);
     }else {
 
     }

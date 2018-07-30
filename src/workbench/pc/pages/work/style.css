@@ -1,3 +1,30 @@
+.wrap :global(.icon-dingzhi.active){
+  color: #E14C46;
+}
+
+.wrap :global(.um-content) {
+  flex-direction: column;
+  display: flex;
+  margin-top: 86px;
+  overflow: hidden;
+}
+
+.wrap :global(.lebra-navbar-left-icon){
+  padding:4px 0;
+}
+
+.work :global(.lebra-navbar-left){
+  padding-left: 7px;
+}
+
+.work :global(.lebra-navbar-left-content){
+  margin-left: 8px;
+}
+
+.work :global(.menu_work){
+  height: 38px;
+}
+
 .active {
   color: #E14C46;
 }
@@ -7,18 +34,7 @@
   position: relative;
   overflow: hidden;
 }
-.wrap :global(.icon-dingzhi.active){
-  color: #E14C46;
-}
-.wrap :global(.um-content) {
-  flex-direction: column;
-  display: flex;
-  margin-top: 86px;
-  overflow: hidden;
-}
-.wrap :global(.lebra-navbar-left-icon){
-  padding:4px 0;
-}
+
 .sideBarArea {
   width: 200px;
   float: left;
@@ -79,18 +95,13 @@
 .titleServiceDisplayStyle{
   color:#E14C46 !important;
 }
-.work :global(.lebra-navbar-left){
-  padding-left: 7px;
-}
-.work :global(.lebra-navbar-left-content){
-  margin-left: 8px;
-}
+
 .titleArea {
   text-align: center;
   position: relative;
 }
-.titleArea span{
-}
+.titleArea span{}
+
 .service, .pin {
   font-size:18px;
 }
@@ -99,8 +110,4 @@
 }
 .pin {
   margin-left: 15px;
-}
-
-.work :global(.menu_work){
-  height: 38px;
 }
