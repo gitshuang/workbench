@@ -399,7 +399,21 @@ body .paginationClass input[type="number"]{
   -moz-appearance: textfield;
 }
 
+/*---------轻提示与弹框全局样式---------*/
 .u-message {
-  top: 102px!important;
+  top: 102px !important;
   width: 100%;
 }
+
+.u-message-notice-description-content {
+  margin-left: 30px
+}
+
+.basic_dialog_modal .close {
+  right: 3px;
+}
+
+.basic_dialog_modal .iconfont:last-child {
+  color: rgba(136,136,136,1)!important;
+}
+/*---------轻提示与弹框全局样式---------*/

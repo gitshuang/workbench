@@ -33,6 +33,8 @@ const {
   SET_CURRENT,
   GET_ALL_ENABLE,
   GET_CURRENT,
+  SHOW_DIALOG,
+  CLOSE_DIALOG
 } = types;
 
 export default createActions(
@@ -57,4 +59,6 @@ export default createActions(
   CHANGE_MESSAGE_TYPE,
   SHOW_IM,
   HIDE_IM,
+  SHOW_DIALOG,
+  CLOSE_DIALOG
 );

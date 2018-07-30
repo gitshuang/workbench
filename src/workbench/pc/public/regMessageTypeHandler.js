@@ -15,7 +15,9 @@ const {addBrm, popBrm} = workActions;
 const {
   popMessage,
   changeMessageType,
-  hideIm
+  hideIm,
+  showDialog,
+  closeDialog
 } = rootActions;
 const {getUserInfo} = homeActions;
 const handlers = {
@@ -162,6 +164,12 @@ const handlers = {
   },
   openMessage(param) {
     openMessage(param);
+  },
+  showDialog(data) {
+    store.dispatch(showDialog(data));
+  },
+  closeDialog() {
+    store.dispatch(closeDialog());
   }
 }
 window.handlers = handlers;

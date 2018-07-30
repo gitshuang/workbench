@@ -1,7 +1,7 @@
 import React from 'react';
 import { handleActions } from 'redux-actions';
 import Notification from 'bee/notification';
-import { openMess } from 'pub-comp/notification';
+// import { openMess } from 'pub-comp/notification';
 import { destoryLoadingFunc, createLoadingFunc } from 'pub-comp/loading';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { trigger } from 'public/componentTools';
@@ -59,6 +59,8 @@ const {
   setCurrent,
   getAllEnable,
   getCurrent,
+  showDialog,
+  closeDialog
 } = actions;
 
 const defaultState = {
@@ -74,6 +76,10 @@ const defaultState = {
     openStatus: false,
     portalUrl: ''
   },
+  showModal: false,
+  dialogType: '',
+  dialogTitle: '',
+  dialogMsg: ''
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -101,13 +107,20 @@ const reducer = handleActions({
   [requestError](state, { payload: msg }) {
     // Loading.destroy();
     destoryLoadingFunc();
-    openMess({
-      title: '错误',
-      content: msg,
-      type: 'error',
-      duration: 4.5,
-    });
-    return state;
+    // openMess({
+    //   title: '错误',
+    //   content: msg,
+    //   type: 'error',
+    //   duration: 4.5,
+    // });
+    //修改全局错误弹框为dialog且非自动关闭模式
+    return {
+      ...state,
+      showModal: true,
+      dialogType: 'error',
+      dialogTitle: '错误',
+      dialogMsg: msg
+    };
   },
   [getServiceList]: (state, { payload: serviceList, error }) => {
     if (error) {
@@ -208,6 +221,22 @@ const reducer = handleActions({
   [setCurrent]: state => state,
   [getAllEnable]: state => state,
   [getCurrent]: state => state,
+  [showDialog]: (state, {payload: dialogData}) => {
+    let {type} = dialogData;
+    const {title, msg} = dialogData;
+    const typeArray = ['warning', 'success', 'error'];
+    if (!typeArray.find((ele) => (ele === type))) {
+      type = 'success';
+    }
+    return {
+      ...state,
+      showModal: true,
+      dialogType: type || 'success',
+      dialogTitle: title || '信息',
+      dialogMsg: msg
+    }
+  },
+  [closeDialog]: (state) => ({...state, showModal: false}),
 }, defaultState);
 
 export default function (state, action) {
