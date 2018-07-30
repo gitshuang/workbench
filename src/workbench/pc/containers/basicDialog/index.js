@@ -5,7 +5,7 @@ import PopDialog from 'pub-comp/pop';
 import rootActions from 'store/root/actions';
 import {titleStyle} from './style.css'
 
-const {showDialog, closeDialog} = rootActions;
+const {showDialog, closeDialogNew} = rootActions;
 
 @connect(
   mapStateToProps(
