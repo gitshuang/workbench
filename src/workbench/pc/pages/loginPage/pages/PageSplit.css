@@ -108,7 +108,7 @@
 /*第7个也是最后一个*/
 :global(.mainContent.viewSeven  .laymid) {
     position: absolute;
-    top: 30%;
+    top: 0;
     left: 50%;
     width: 620px;
     height: 200px;

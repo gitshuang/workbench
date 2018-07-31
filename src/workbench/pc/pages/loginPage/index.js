@@ -34,8 +34,19 @@ class LoginPage extends Component {
     this.scrollFunc = this.scrollFunc.bind(this);
     this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;
     this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+    this.sevenSpace ;
   }
-
+  componentWillMount(){
+     //最后因为footer屏幕居中手动计算，图片1677-358
+    let dom = document.documentElement ||document.body ;
+    let screenWidth = dom.clientWidth ;
+    let screenHeight = dom.clientHeight ;
+    let header = 110;
+    let footer =Math.round((screenWidth*358)/1677);
+    let fontHeight = 200;
+    let space =Math.round((screenHeight + header-footer- fontHeight)/2);
+    this.sevenSpace = space;
+  }
   componentDidMount(){
     if (document.addEventListener) {
         document.addEventListener('DOMMouseScroll', this.scrollFunc, false);
@@ -124,12 +135,15 @@ class LoginPage extends Component {
   render() {
     let {curIndex,loginModalShow} = this.state;
     let btnShow =(curIndex !== 0 && curIndex !== 6);
-    // window.aaa = this.osFeLoginCallBack;
+    let sevenStyle = {
+      top:0,
+      marginTop:this.sevenSpace+'px'
+    }
     return (
         <div className={HomePagePanel}>
           <TopNav />
           <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'}/>
-          <div className={rightDotMenu}>
+          <div className={rightDotMenu} style={curIndex== 6?{marginTop:`${this.sevenSpace + 15}px`,top:0}:null} >
               {!loginModalShow && this.renderDot()}
           </div>
           <div ref={(ref) =>{this.amBody = ref}}className={`${HomeOnePage} amBody animation0`}>
@@ -140,7 +154,7 @@ class LoginPage extends Component {
               <PageFour loginModalShow={loginModalShow}/>
               <PageFive loginModalShow={loginModalShow}/>
               <PageSix loginModalShow={loginModalShow}/>
-              <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex}/>
+              <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace}/>
           </div>
           {curIndex!==6 && !loginModalShow && <div className="goNextArrow" onClick={this.moveNext}> </div>}
             {

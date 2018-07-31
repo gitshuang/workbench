@@ -6,21 +6,13 @@ import{
   }from './PageSplit.css'
   import footerPng from './images/footer.png'
   export default function PageSeven(props){
-      //最后因为footer屏幕居中手动计算，图片1677-358
-      let style={};
-      if(props.curIndex === 6){
-        let screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
-        let actualFooterH =Math.round((screenWidth*358)/1677);
-        let space =Math.round((110 + actualFooterH)/2);
-        style={marginTop:`-${space}px`}
-      }
       return(
          <div className={`${amPage} PageSeven `}>
            <div className={amBg} ></div>
             <div className="mainContent viewSeven">
-              <div className={`laymid ${props.curIndex ===6?'active':null}`}>
+              <div className={`laymid`} style={{marginTop:`${props.sevenSpace}px`}}>
                 {/* <div className="logo"></div> */}
-                <div className="mainTitle">相信美好，立刻开始数字化工作〞</div>
+                <div className="mainTitle">“相信美好，立刻开始数字化工作”</div>
                 <div className="clickMe clearfix">
                   <span  className="loginBtn clickBtn " onClick={props.loginClick}>登录</span>
                   <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">立即注册</a>
