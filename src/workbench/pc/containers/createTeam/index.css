@@ -87,10 +87,11 @@
   font-size: 14px;
 }
 .submit_class:hover{
-  background:rgba(225,76,70,1);
-  color: #ffffff;
+  background:#D23D37;
 }
-
+.submit_class:active{
+  background: #B2332E;
+}
 
 /*新增的requestloading*/
 .process_loading_content {

@@ -107,6 +107,7 @@
 }
 .appItem_describe p{
   margin:5px 0;
+  margin-top: 13px;
 }
 .appItem_describe .appItem_tit{
   color:#111111;

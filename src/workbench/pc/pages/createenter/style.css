@@ -29,14 +29,14 @@
   font-size: 15px;
 }
 .enterForm :global(.u-form-submit) {
-  padding-left: 147px;
+  padding-left: 118px;
 }
 .enterForm :global(.u-form-submit>button) {
   width:338px;
   height:32px;
   background:rgba(225,76,70,1);
   border-radius: 3px;
-  margin-left:-30px;
+  margin: 0px;
   color:#fff;
 }
 .enterForm :global(textarea) {
@@ -95,6 +95,7 @@
   padding-bottom: 30px;
   margin-bottom: 30px;
   overflow: hidden;
+  position: relative;
 }
 
 .enterForm :global(.u-input-inner>input){
@@ -103,6 +104,9 @@
   border-radius: 3px ;
 }
 
+.enterForm :global(.input_phone .u-input-inner > input){
+  width:302px !important;
+}
 
 .enterForm :global(.u-city-select){
   display: inline-flex;
@@ -118,7 +122,8 @@
 }
 
 .lxrHr{
-  width:450px;
+  /* position: absolute; */
+  width:600px;
   height:1px;
   background:rgba(13,20,36,1);
   opacity:0.4;
@@ -159,6 +164,32 @@
   position: relative;
   box-shadow: none;
 }
+.progressBar :global(.iconfont){
+  color: #fff;
+
+}
+
+@keyframes rotate{
+	from{transform: rotate(0deg);}
+  to{transform: rotate(360deg);}
+}
+@-webkit-keyframes rotate{
+	from{-webkit-transform: rotate(0deg);}
+	to{-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotate{
+	from{-moz-transform: rotate(0deg);}
+	to{-moz-transform: rotate(360deg);}
+}
+@-ms-keyframes rotate{
+	from{-ms-transform: rotate(0deg);}
+	to{-ms-transform: rotate(360deg);}
+}
+@-o-keyframes rotate{
+	from{-o-transform: rotate(0deg);}
+	to{-o-transform: rotate(360deg);}
+}
+
 :global(.u-progress-bar){
   background-color: #e14b46;
   line-height: 32px;
@@ -166,7 +197,7 @@
 }
 .progressBar{
   position: relative;
-  margin-left: 90px;
+  margin-left: 118px;
   cursor: not-allowed;
 }
 

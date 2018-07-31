@@ -18,35 +18,43 @@
   visibility: hidden;
 }
 .searchPanel{
-  width: 100%;
+  width:456px;
   margin: 5px 0;
   position: relative;
 }
 
 .serviceSearch{
-	width:456px;
+  width: 360px;
 	height:32px;
   transition: none;
+  border-radius: 3px 0 0 3px;
 }
 
 .search_icon_con{
+  width: 95px;
   height: 32px;
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 360px;
   display: flex;
-  cursor: pointer
-}
-.search_icon_con :global(.iconfont){
-  margin-left: 10px;
-  line-height:32px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #d0d0d0;
+  border-left: none;
 }
 .search_icon_con > span{
-  box-flex:1;
   line-height:32px;
+  margin-left: 4px;
 }
-.search_icon_con .search_tit{
-  margin-left:8px;
+.search_icon_con:hover{
+  background: #f3f3f3;
+}
+.search_icon_con:hover span{
+  color: #E14C46;
+}
+.search_icon_con:hover :global(.iconfont){
+  color: #E14C46;
 }
 
 
