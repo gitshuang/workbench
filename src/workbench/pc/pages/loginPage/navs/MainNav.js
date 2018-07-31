@@ -10,6 +10,8 @@ export default function MainNavPanel(props){
   function open(type){
     if(type =='service'){
       props.history.push('/service')
+    }else if(type == 'aboutus'){
+      props.history.push('/aboutus')
     }
   }
   return(
@@ -22,7 +24,7 @@ export default function MainNavPanel(props){
           <a href="http://www.diwork.com" className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`}>我们</a>
           <a  className={`middleItem ${props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{open('service')}}>服务支持</a>
           <a href="http://www.diwork.com" className={`middleItem ${props.activeIndex*1 === 3?'actived':null}`}>开放平台</a>
-          <a href="http://www.diwork.com" className={`middleItem ${props.activeIndex*1 === 4?'actived':null}`}>联系我们</a>
+          <a  className={`middleItem ${props.activeIndex*1 === 4?'actived':null}`} onClick={()=>{open('aboutus')}}>联系我们</a>
         </div>
         {
             props.btnShow &&(

@@ -90,10 +90,12 @@
     background: #EB4046;
     color: rgba(255,255,255,1);
     margin-right: 20px;
+    border:2px solid #EB4046;
 }
 :global(.mainContent.viewOne .laymid .registryBtn) {
     color:#EB4046;
-    background:#fff;
+    background:transparent;
+    border:2px solid #fff;
 }
 /*secondPage样式*/
 :global(.mainContent.viewTwo  .laymid) {

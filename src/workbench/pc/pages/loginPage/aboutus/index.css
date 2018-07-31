@@ -23,7 +23,6 @@ body,.AboutUsPanel{
 .AboutUsPanel :global(.mainCon){
     background: #fff;
     width: 100%;
-    padding-bottom:50px;
 }
 .AboutUsPanel :global(.mainCon .title){
     font-size: 28px;
@@ -33,10 +32,18 @@ body,.AboutUsPanel{
     width: 60%;
     margin-left: 20%;
     text-align: center;
-    padding: 60px;
+    padding: 106px 0 32px 0;
     border-bottom: 1px solid #ddd;
 }
-.AboutUsPanel :global(.mainCon .lefCon){
+.AboutUsPanel :global(.absoutUsCon){
+    position: relative;
+    width: 100%;
+    padding-top: 28px;
+    box-sizing: content-box;
+    min-height: 400px;
+    padding-bottom:120px;
+}
+.AboutUsPanel :global(.absoutUsCon .lefCon){
     width: 30%;
     text-align: left;
     margin-left: 20%;
@@ -55,7 +62,12 @@ body,.AboutUsPanel{
     line-height: 36px;
 }
 
-.AboutUsPanel :global(.rightCon){
+.AboutUsPanel :global(.absoutUsCon .rightCon){
+    display: inline-block;
     width: 30%;
-    margin-left: 50%;
+    margin-left: 55%;
+    height: 400px;
+    position: absolute;
+    right: 20%;
+    top: 28px;
 }
