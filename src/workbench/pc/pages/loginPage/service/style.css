@@ -1,5 +1,6 @@
 .applyForm {
   padding-bottom: 30px;
+  margin-left: -70px;
 }
 .applyForm :global(.u-input-inner>input){
   width: 370px!important;
@@ -13,6 +14,7 @@
   width: 370px;
   background: rgba(255,255,255,1);
   border: 1px solid rgba(221,221,221,1);
+  border-radius:0px;
 }
 .applyForm :global(.u-city-select .u-select .u-select-selection),
 .applyForm :global(.u-form-item .u-select){
@@ -31,7 +33,7 @@
 }
 .applyForm :global(.u-form-inline .u-label) {
   display: inline-block;
-  font-size: 18px;
+  font-size: 16px;
   font-family: PingFangSC-Regular;
   color: rgba(51,51,51,1);
   line-height: 50px;
@@ -39,8 +41,14 @@
   width: 140px;
   padding-right: 30px;
 }
+body  .applyForm :global(.u-form-control),
+body  .applyForm :global(.u-form-item .u-select){
+  border-radius: 0!important;
+  font-size:16px;
+}
 .applyForm :global(.area.u-select.u-select-enabled){
   display: none;
+
 }
 
 .applyBtn{
@@ -53,5 +61,5 @@
     text-align: center;
     /* margin: 0 auto; */
     cursor: pointer;
-    float: right;
+    margin-left: 70px;
 }

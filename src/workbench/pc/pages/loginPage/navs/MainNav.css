@@ -5,6 +5,7 @@
     z-index:999;
     height: 80px;
     line-height: 80px;
+    border-bottom:1px solid #eee;
 }
 .MainNav .headerDesc{
     color:rgba(113,113,113,1);
