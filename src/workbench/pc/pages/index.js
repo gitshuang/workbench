@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from 'router';
+import loginRoutes from 'router/login.js';
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
 import { getContext, mapStateToProps } from '@u';
@@ -17,6 +18,7 @@ import homeActions from 'store/root/home/actions';
 
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
+import LoginPage from 'pages/loginPage';
 import 'public/jDiworkBridge';
 import BasicDialog from 'containers/basicDialog/';
 
@@ -86,8 +88,12 @@ class Root extends Component {
       loaded: false,
       inited: false,
     };
+    this.isLogin =window.os_fe_isLogin && window.os_fe_isLogin();
   }
   componentWillMount() {
+    if(!this.isLogin){
+      return false
+    }
     const {
       requestStart,
       requestSuccess,
@@ -125,6 +131,7 @@ class Root extends Component {
   }
 
   componentDidMount() {
+    if(!this.isLogin) return false;
     const { getPoll } = this.props;
     const browser = navigator.appName;
     if (browser !== 'Microsoft Internet Explorer') {
@@ -140,12 +147,22 @@ class Root extends Component {
   render() {
     return (
       <div>
-        <Switch>
-          {
-            routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
-          }
-        </Switch>
-        <BasicDialog/>
+       {
+         this.isLogin?
+         (
+          <Switch>
+            {
+              routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+            }
+          </Switch>
+         ):(
+          <Switch>
+            {
+              loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+            }
+          </Switch>
+         )
+       }
       </div>
     );
   }

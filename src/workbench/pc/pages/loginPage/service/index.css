@@ -1,0 +1,228 @@
+:global(.rootSpec2){
+    min-height: 0!important;
+}
+:global(.bodySpec2){
+   height: 0!important;
+   min-height: 0!important;
+
+}
+/*注意还有amPage amBg*/
+body,.ServicePanel{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+    overflow: auto;
+    min-width: 1200px;
+
+}
+.ServicePanel :global(.serviceOne){
+    background:url('./images/banner.png') no-repeat ;
+    background-position: 0 0;
+    width: 100%;
+    height: 470px;
+    background-size: cover;
+    font-family:PingFangSC-Medium;
+    color:rgba(255,255,255,1);
+}
+.ServicePanel :global(.serviceOne .mainContent){
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.ServicePanel :global(.serviceOne .title){
+    display: block;
+    font-size:38px;
+    color:rgba(255,255,255,1);
+    line-height:53px;
+    padding-bottom: 18px;
+}
+.ServicePanel :global(.serviceOne .desc){
+    display: block;
+    font-size:20px;
+    color:rgba(255,255,255,1);
+    line-height:28px;
+    padding-bottom:43px;
+
+}
+.ServicePanel :global(.serviceOne .serviceBtn){
+    width:160px;
+    height:50px;
+    background:#EB4046;
+    font-size:18px;
+    line-height:50px;
+    text-align: center;
+    cursor: pointer;
+}
+/*第二部分*/
+.ServicePanel :global(.serviceTwo){
+    background: #fff;
+    padding:98px 0;
+}
+.ServicePanel :global(.serviceTwo .mainContent) {
+    margin: 0 10%;
+    position: relative;
+    
+}
+.ServicePanel :global(.serviceTwo .mainContent:before) {
+  content:'';
+  position:absolute;
+  width: 100%;
+  height: 1px;
+  background: rgba(216,216,216,1);;
+  top:50%;
+  left: 0;
+}
+.ServicePanel :global(.serviceTwo .mainContent:after) {
+    content:'';
+    position:absolute;
+    width: 1px;
+    height: 100%;
+    background: rgba(216,216,216,1);;
+    top:0;
+    left: 50%;
+  }
+.ServicePanel :global(.serviceTwo .twoItem){
+    width: 50%;
+    background: #fff;
+    height: 100px;
+    padding: 20px;
+    display: inline-block;
+}
+.ServicePanel :global(.serviceTwo .leftTop),
+.ServicePanel :global(.serviceTwo .rightTop){
+    padding-top:0px;
+}
+.ServicePanel :global(.serviceTwo .leftBottom),
+.ServicePanel :global(.serviceTwo .rightBottom){
+    padding-bottom:0px;
+}
+.ServicePanel :global(.serviceTwo .rightTop),
+.ServicePanel :global(.serviceTwo .rightBottom){
+    padding-left: 13%;
+}
+ .ServicePanel :global(.serviceTwo .twoItem .icon ),
+ .ServicePanel :global(.serviceTwo .twoItem .con ){
+     float: left;
+ }
+ .ServicePanel :global(.serviceTwo .twoItem .con){
+     padding-left:20px;
+     width: 80%;
+    font-family: PingFangSC-Regular;
+ }
+ .ServicePanel :global(.serviceTwo .con .title ){
+    display: block;
+    font-size: 22px;
+    color: rgba(51,51,51,1);
+    line-height: 60px;
+    margin-top: -3px;
+}
+.ServicePanel :global(.serviceTwo .con .subcon) {
+    display: block;
+    font-size: 16px;
+    color: rgba(153,153,153,1);
+    line-height: 22px;
+}
+/*第三部分*/
+.serviceThree{
+    background:rgba(243,243,243,1);
+    padding:58px 0 46px 0;
+}
+.serviceThree :global(.title){
+    display: inline-block;
+    font-size: 28px;
+    font-family: PingFangSC-Regular;
+    color: rgba(51,51,51,1);
+    line-height: 40px;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 30px;
+}
+.serviceThree :global(.processCon){
+    width: 80%;
+    margin-left: 10%;
+}
+.serviceThree :global(.processCon:after){
+    content: '';
+    display: block;
+    clear: both;
+}
+.serviceThree :global(.process) {
+    width: 33%;
+    text-align: center;
+    padding: 0 30px;
+    position: relative;
+    font-family: PingFangSC-Regular;
+    float: left;
+    z-index:1;
+}
+
+.serviceThree :global(.process:not(:last-child):after){
+    content:'';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    top:24px;
+    left: 50%;
+    z-index:-1;
+}
+.serviceThree :global(.process span),
+.serviceThree :global(.process .processDot) {
+    display: block;
+}
+.serviceThree :global(.processDot) {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+}
+.serviceThree :global(.dotNum) {
+    font-size: 18px;
+    color: rgba(255,255,255,1);
+    line-height: 48px;
+    margin-top: -48px;
+}
+.tipTitle {
+    font-size: 20px;
+    color: rgba(51,51,51,1);
+    line-height: 28px;
+    padding: 27px 0 10px 0;
+}
+.tipCon {
+    font-size: 16px;
+    color: rgba(153,153,153,1);
+    line-height: 22px;
+    display: inline-block;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.ServicePanel :global(.mainFooter){
+   overflow: hidden;
+}
+.ServicePanel :global(.mainFooter .footerImg){
+    width: 100%;
+    height: auto;
+    margin-bottom:-5px;
+}
+/*第四个页面*/
+.serviceFour{
+    background: #fff;
+    padding: 90px 0 80px 0;
+}
+.serviceFour :global(.title){
+    font-size: 28px;
+    font-family: PingFangSC-Regular;
+    color: rgba(51,51,51,1);
+    line-height: 40px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 30px;
+}
+.serviceFour :global(.applyService){
+    width: 510px;
+    margin: 0 auto;
+}
