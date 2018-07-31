@@ -111,10 +111,13 @@ class HeaderPage extends Component {
     const {
       userInfo: {
         company,
-        allowTenants
+        allowTenants,
+        currentTeamConfig,
       },
     } = this.props;
-    if (!allowTenants) return null;
+    if (!allowTenants || !currentTeamConfig) return null;
+    const { tenantId } = currentTeamConfig;
+    debugger
     const dom = allowTenants.length
       ?
       <DropdownButton
@@ -122,6 +125,7 @@ class HeaderPage extends Component {
         openMenu={this.openMenu}
         closeFun={this.closeFun}
         label={company}
+        tenantId={tenantId}
         type="home"
         dataItem={
           allowTenants.map(({

@@ -55,6 +55,7 @@ body .u-form-control{
   padding-left: 8px;
   border: 1px solid #D0D0D0;
   height: 32px;
+  transition: none;
 }
 body .u-form-control:focus{
   border: 1px solid #00CDC3;
@@ -111,7 +112,7 @@ body .u-select-open .u-select-selection{
 body .u-select-dropdown .u-select-dropdown-menu-item-active,
 body .u-select-dropdown .u-select-dropdown-menu-item:hover{
   background: #f3f3f3;
-  color: #E14C46;
+  /* color: #E14C46; */
   font-weight: normal;
 }
 
@@ -425,22 +426,25 @@ body .paginationClass .active span:hover{
 body .paginationClass .disabled a,
 body .paginationClass .disabled a:focus,
 body .paginationClass .disabled a:hover{
-  background: rgba(9,44,66,.04);
+  background: #f3f3f3;
+  color: #bfbfbf;
+  border: 1px solid #f3f3f3;
 }
-body .paginationClass li a{
+body .paginationClass li a{ 
   width: 28px;
   height: 28px;
-  background: rgba(9,30,66,.04);
-  border-color: #e9e7e7;
+  background: #e4e4e4;
+  border-color: #e4e4e4;
   border-radius: 4px;
   line-height: 28px;
   padding: 0;
 }
 body .paginationClass li a:hover{
-  border-color:#fcedec;
+  border-color:#f3f3f3;
+  background: #f3f3f3;
 }
 body .paginationClass li:first-child a,
-body .paginationClass li:last-child a{
+body .paginationClass li:last-child a{ 
   border-radius: 4px;
 }
 body .paginationClass input{

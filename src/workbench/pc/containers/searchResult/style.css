@@ -42,6 +42,7 @@
   cursor: pointer;
   border: 1px solid #d0d0d0;
   border-left: none;
+  border-radius: 0 3px 3px 0;
 }
 .search_icon_con > span{
   line-height:32px;
