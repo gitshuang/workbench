@@ -12,11 +12,13 @@ export default function MainNavPanel(props){
       props.history.push('/service')
     }else if(type == 'aboutus'){
       props.history.push('/aboutus')
+    }else if(type == 'login'){
+      props.history.push('/')
     }
   }
   return(
     <div className={MainNav}>
-        <div className={leftCon}>
+        <div className={leftCon} onClick={()=>{open('login')}}>
           <img src={Logo} alt="" className="companylogo"/>
           {/* <span className={headerDesc}>数字化工作入口</span> */}
         </div>

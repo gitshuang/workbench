@@ -140,7 +140,7 @@ class LoginPage extends Component {
               <PageFour loginModalShow={loginModalShow}/>
               <PageFive loginModalShow={loginModalShow}/>
               <PageSix loginModalShow={loginModalShow}/>
-              <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl}/>
+              <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex}/>
           </div>
           {curIndex!==6 && !loginModalShow && <div className="goNextArrow" onClick={this.moveNext}> </div>}
             {

@@ -29,21 +29,21 @@ body,.HomePagePanel{
     z-index: -1;
 }
 .HomePagePanel .rightDotMenu {
-    width: 40px;
+    width: 12px;
     text-align: center;
     position: fixed;
     top:50%;
-    margin-top:-40px;
-    right:40px;
+    margin-top:-36px;
+    right:30px;
 }
 .HomePagePanel .rightDotMenu :global(.menudot){
-    width: 20px;
-    height: 20px;
+    width: 12px;
+    height: 12px;
     background: #fff;
     border-radius: 10px;
     display: block;
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     cursor: pointer;
 }
 .HomePagePanel .rightDotMenu :global(.menudot.active){
