@@ -181,20 +181,12 @@ body,.ServicePanel{
 }
 
 .ServicePanel :global(.mainFooter){
-    /* position: absolute;
-    left: 0;
-    top: 0;
-    background-image: url('../pages/images/footer.png');
-    width: 100%;
-    height: 100%;
-    background-position: bottom left;
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: -1; */
+   overflow: hidden;
 }
 .ServicePanel :global(.mainFooter .footerImg){
     width: 100%;
     height: auto;
+    margin-bottom:-5px;
 }
 /*第四个页面*/
 .serviceFour{

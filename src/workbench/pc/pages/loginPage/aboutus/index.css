@@ -14,16 +14,18 @@ body,.AboutUsPanel{
     padding:0;
     overflow: auto;
     min-width: 1200px;
+    background: #fff;
 
 }
-.AboutUsPanel :global(.mainFooter .footerImg){
-    width: 100%;
-    height: auto;
-}
-.AboutUsPanel :global(.mainCon){
-    background: #fff;
-    width: 100%;
-}
+.AboutUsPanel :global(.mainFooter){
+    overflow: hidden;
+ }
+ .AboutUsPanel :global(.mainFooter .footerImg){
+     width: 100%;
+     height: auto;
+     margin-bottom:-5px;
+ }
+
 .AboutUsPanel :global(.mainCon .title){
     font-size: 28px;
     font-family: PingFangSC-Regular;
