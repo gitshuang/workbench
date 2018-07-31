@@ -93,7 +93,7 @@
     border:2px solid #EB4046;
 }
 :global(.mainContent.viewOne .laymid .registryBtn) {
-    color:#EB4046;
+    color:#fff;
     background:transparent;
     border:2px solid #fff;
 }
