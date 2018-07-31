@@ -86,17 +86,7 @@
     cursor: pointer;
     text-decoration: none;
 }
-:global(.mainContent.viewOne .laymid .loginBtn){
-    background: #EB4046;
-    color: rgba(255,255,255,1);
-    margin-right: 20px;
-    border:2px solid #EB4046;
-}
-:global(.mainContent.viewOne .laymid .registryBtn) {
-    color:#fff;
-    background:transparent;
-    border:2px solid #fff;
-}
+
 /*secondPage样式*/
 :global(.mainContent.viewTwo  .laymid) {
     position: absolute;
@@ -153,16 +143,18 @@
     cursor: pointer;
     text-decoration: none;
 }
+:global(.mainContent.viewOne .laymid .loginBtn),
 :global(.mainContent.viewSeven .laymid .loginBtn){
     background: #EB4046;
     color: rgba(255,255,255,1);
-    border: 2px solid #EB4046;
     margin-right: 20px;
+    border:2px solid #EB4046;
 }
-:global(.mainContent.viewSeven .laymid .registryBtn) {
-    color:#EB4046;
+:global(.mainContent.viewSeven .laymid .registryBtn),
+:global(.mainContent.viewOne .laymid .registryBtn) {
     background: transparent;
     border: 2px solid rgba(255,255,255,1);
+    color:#fff;
 }
 
 :global(.PageSeven .mainFooter){
