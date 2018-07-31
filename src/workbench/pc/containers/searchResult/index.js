@@ -262,7 +262,6 @@ class searchResult extends Component {
                 onChange={this.inputOnChange}
               />
               <div className={search_icon_con}>
-                <span>|</span>
                 <Icon type="search" className={ufSearch} onClick={this.btnSearch} />
                 <span className={search_tit} onClick={this.btnSearch}>搜索</span>
               </div>

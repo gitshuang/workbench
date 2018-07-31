@@ -126,6 +126,16 @@ body .u-menu{
   color: #555555;
 }
 
+body .u-form-item .u-input-group-outer .u-input-before, 
+body .u-form-item .u-input-group-outer .u-input-after{
+  background: #f3f3f3;
+  color: #bfbfbf;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px 0 0 3px;
+  line-height: 30px;
+  border-right: none;
+}
+
 .tc i:hover{
   color:#111111;
 }
@@ -138,6 +148,11 @@ body .u-menu{
 
 .u-menu-inline > .u-menu-submenu > .u-menu-submenu-title {
   color: #555555;
+  cursor: pointer;
+}
+
+.u-menu-inline > .u-menu-submenu > .u-menu-submenu-title .iconfont:hover {
+  color: #111111;
   cursor: pointer;
 }
 
@@ -173,10 +188,20 @@ body .u-menu{
   overflow-y: hidden;
 }
 
-.u-select-arrow:before {
-  color: #878B94;
+.u-select:hover .u-select-selection-selected-value{
+  color: #E14C46;
 }
 
+.u-select:hover .u-select-arrow:before{
+  color: #E14C46;
+}
+
+.u-select-arrow:before {
+  color: #555555;
+}
+.u-select-open .u-select-selection-selected-value{
+  color: #E14C46;
+}
 .u-select-open .u-select-arrow:before {
   transform: rotate(-180deg);
   color: #E14C46;

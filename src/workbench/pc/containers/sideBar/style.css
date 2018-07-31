@@ -60,12 +60,19 @@
 	height: auto;
 	position: relative;
 }
+
 :global(:root .u-menu-submenu-inline > .u-menu-submenu-title:after){
 	display: none;
 }
 /* :global(.u-menu-inline .u-menu-inline .u-menu-item-selected){
 	background:rgba(244,245,247,1) !important;
 } */
+
+.sideBar :global(.u-menu-inline .u-menu-item-selected, .u-menu-inline .u-menu-selected),
+.sideBar :global(.u-menu-submenu-active.u-menu-submenu-inline>.u-menu-submenu-title:after){
+	background: #e4e4e4;
+	color: #E14C46;
+}
 .sideBar :global(.u-menu-submenu>.u-menu){
   background: transparent; 
 }
@@ -75,6 +82,7 @@
 	flex-direction: row;
 	align-items: center;
 	font-size: 14px;
+	color: #111111;
 }
 
 :global(.item_2){
@@ -82,6 +90,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	color: #555555;
 }
 :global(.item_2 i){
 	margin-right: 4px;
