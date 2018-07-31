@@ -1,0 +1,305 @@
+
+
+.amPage{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: 1200px;
+}
+.amBg{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.amPage :global(.mainContent){
+    width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+}
+:global(.PageFirst) .amBg{
+    background-image: url('./images/1.png') ;
+}
+:global(.PageSecond) .amBg{
+    background-image: url('./images/2.png') ;
+}
+:global(.PageThird) .amBg{
+    background-image: url('./images/3.png') ;
+}
+:global(.PageFour) .amBg{
+    background-image: url('./images/4.png') ;
+}
+:global(.PageFive) .amBg{
+    background-image: url('./images/6.png') ;  
+}
+:global(.PageSix) .amBg{
+    background-image: url('./images/5.png') ;  
+}
+:global(.PageSeven) .amBg{
+    background-image: url('./images/7.png') ;  
+}
+
+/*firstPage的内容部分*/
+:global(.mainContent.viewOne  .laymid) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 480px;
+    margin-left: -240px;
+    margin-top: -44px;
+}
+
+:global(.mainContent.viewOne  .laymid .logo) {
+    background-image: url('./images/slogan.png');
+    margin-bottom: 10px;
+    background-repeat: no-repeat;
+    height: 82px;
+    background-size: contain;
+}
+:global(.mainContent.viewOne .laymid .clearfix) {
+    zoom: 1;
+}
+:global(.mainContent.viewOne .laymid .clickMe){
+    text-align: center;
+    padding-top: 46px;
+}
+:global(.mainContent.viewOne .laymid .clickBtn) {
+    width: 160px;
+    height: 50px;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    line-height: 50px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/*secondPage样式*/
+:global(.mainContent.viewTwo  .laymid) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 420px;
+    height: 200px;
+    margin-left: -195px;
+    margin-top: -40px;
+}
+:global(.mainContent.viewTwo  .laymid .logo) {
+    background-image: url(https://i.alipayobjects.com/i/ecmng/png/201501/4JdkvPYoOr.png);
+    margin-bottom: 10px;
+    width: 420px;
+    height: 88px;
+    background-repeat: no-repeat;
+    background-position: -10px 0;
+    background-size: 100% 100%;
+}
+/*第7个也是最后一个*/
+:global(.mainContent.viewSeven  .laymid) {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 620px;
+    height: 200px;
+    margin-left: -310px;
+    margin-top: -40px;
+}
+:global(.viewSeven .mainTitle){
+    font-size: 40px;
+    line-height: 56px;
+    padding-bottom: 20px;
+    letter-spacing: 1px;
+    color: #fff;
+ }
+:global(.mainContent.viewSeven  .laymid .logo) {
+    background-image: url(https://i.alipayobjects.com/i/ecmng/png/201501/4JdkvPYoOr.png);
+    margin-bottom: 10px;
+    width: 420px;
+    height: 88px;
+    background-repeat: no-repeat;
+    background-position: -10px 0;
+    background-size: 100% 100%;
+}
+:global(.mainContent.viewSeven .laymid .clearfix) {
+    zoom: 1;
+}
+:global(.mainContent.viewSeven .laymid .clickMe){
+    text-align: center;
+    padding-top: 40px;
+}
+:global(.mainContent.viewSeven .laymid .clickBtn) {
+    width: 160px;
+    height: 50px;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    line-height: 50px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+:global(.mainContent.viewOne .laymid .loginBtn),
+:global(.mainContent.viewSeven .laymid .loginBtn){
+    background: #EB4046;
+    color: rgba(255,255,255,1);
+    margin-right: 20px;
+    border:1px solid #EB4046;
+}
+:global(.mainContent.viewSeven .laymid .registryBtn),
+:global(.mainContent.viewOne .laymid .registryBtn) {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,1);
+    color:#fff;
+}
+:global(.PageSeven .mainFooter){
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+ }
+ 
+ :global(.PageSeven .mainFooter .footerImg){
+     width: 100%;
+     height: auto;
+     margin-bottom:-5px;
+ }
+/* :global(.PageSeven .mainFooter){
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: url('./images/footer.png');
+    width: 100%;
+    height: 100%;
+    background-position: bottom left;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+} */
+/* :global(.PageSeven  .mainFooter) {
+    width: 100%;
+    height: 260px;
+    background: #4c515a;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color:#fff;
+    font-size:18px;
+}
+:global(.PageSeven .mainFooterCon:after){
+content:'';
+display: inline-block;
+clear: both;
+}
+
+:global(.PageSeven .mainFooterCon .title) {
+    padding: 20px;
+    display: inline-block;
+}
+
+:global(.PageSeven  .footerSection) {
+   float: left;
+}
+:global(.PageSeven  .sectionOne){
+    width: 35%;
+    text-align: right;
+}
+:global(.PageSeven  .sectionTwo){
+    width: 30%;
+}
+:global(.PageSeven  .sectionThird){
+    width: 35%;
+    text-align: left;
+}
+:global(.PageSeven  .sectionOne .directives) {
+    padding: 0 10px;
+}
+:global(.PageSeven  .sectionTwo .directives) {
+    float: left;
+    width: 33%;
+    box-sizing: border-box;
+    padding: 0 10px;
+ }
+ :global(.PageSeven  .sectionThird .directives){
+    display:block;
+}
+:global(.PageSeven  .copyright) {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom:0;
+    background: #434750;
+    padding:15px 0;
+    text-align: center
+    
+ } */
+
+ /**/
+
+/*页面里面具体的文字效果*/
+.words{
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: 11;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    font-family: PingFangSC-Regular;
+    color: rgba(255,255,255,1);
+    line-height: 33px;
+    font-size: 20px;
+}
+/*第2,4,5页*/
+:global(.animation1 .viewTwo)  .words,
+:global(.animation3 .viewFour)  .words,
+:global(.animation4 .viewFive)  .words{
+    opacity: 1;
+    visibility: visible;
+    transition: 1s .6s opacity;
+    top: 50%;
+    left: 6%;
+    min-height: 175px;
+}
+:global(.animation1 .viewTwo)  .words,
+:global(.animation3 .viewFour)  .words,
+:global(.animation4 .viewFive)  .words,
+:global(.animation2 .viewThree)  .words,
+:global(.animation5 .viewThree)  .words{
+    margin-top:-44px;
+}
+/*第3，6页*/
+:global(.animation2 .viewThree)  .words,
+:global(.animation5 .viewThree)  .words{
+    opacity: 1;
+    visibility: visible;
+    transition: 1s .6s opacity;
+    top: 50%;
+    right: 18%;
+    min-height: 175px;
+}
+
+/*单个页面的样式*/
+:global(.oneArtical .wordsTitle),
+:global(.oneArtical .wordsCon){
+    display: block;
+} 
+:global(.oneArtical .wordsTitle) {
+    font-size: 40px;
+    line-height: 56px;
+    padding-bottom: 20px;
+    letter-spacing: 1px;
+}
+:global(.oneArtical .wordsCon) {
+    max-width: 460px;
+    padding-left:20px;
+}
