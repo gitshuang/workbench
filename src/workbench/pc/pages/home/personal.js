@@ -11,6 +11,8 @@ import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import rootActions from 'store/root/actions';
 
+import { openService } from 'public/regMessageTypeHandler';
+
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
 const { setCurrent, getAllEnable, getCurrent} = rootActions;
@@ -41,7 +43,7 @@ class Personals extends Component {
     this.state = {
       userInfo: {},
       routers: {
-        openEntersetting: '/entersetting/home',
+        // openEntersetting: '/entersetting/home',
         openTeamconfig: '/teamconfig',
         openAccount: '/account',
         openManage: '/manage',
@@ -188,6 +190,10 @@ class Personals extends Component {
     const { routers } = this.state;
     if (routers[action]) {
       this.openNewRouter(routers[action]);
+    }else if(action === "openEntersetting"){  // 如果是打开企业   先暂时在这里处理一下。
+      openService('GZTSYS001');
+    }else {
+
     }
   }
 

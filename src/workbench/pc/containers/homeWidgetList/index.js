@@ -46,13 +46,13 @@ class HomeWidgeList extends Component {
 
   componentDidMount(){
     const { lastW } = this.refs;
-    console.log(lastW);
+    // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100 
     if( lastW && (lastW.offsetHeight > window.innerHeight)){
       this.setState({
         lastStyle:{
-          height: lastW.offsetHeight
+          height: lastW.offsetHeight + 100
         }
-      })
+      });
     }
   }
 
@@ -142,8 +142,8 @@ class HomeWidgeList extends Component {
         {
           lastIndex 
           ? 
-          <div className={WidgetCont} ref="lastW" style={this.state.lastStyle}>
-            <ul className={WidgetList}>{list}</ul>
+          <div className={WidgetCont} style={this.state.lastStyle}>
+            <ul className={WidgetList} ref="lastW">{list}</ul>
           </div> 
           : 
           <div className={WidgetCont}>
