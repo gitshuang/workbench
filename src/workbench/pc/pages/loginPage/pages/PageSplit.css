@@ -41,10 +41,10 @@
     background-image: url('./images/4.png') ;
 }
 :global(.PageFive) .amBg{
-    background-image: url('./images/6.png') ;  
+    background-image: url('./images/5.png') ;  
 }
 :global(.PageSix) .amBg{
-    background-image: url('./images/5.png') ;  
+    background-image: url('./images/6.png') ;  
 }
 :global(.PageSeven) .amBg{
     background-image: url('./images/7.png') ;  
@@ -78,7 +78,7 @@
     width: 160px;
     height: 50px;
     font-size: 18px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     line-height: 50px;
     display: inline-block;
     text-align: center;
@@ -111,14 +111,14 @@
     top: 0;
     left: 50%;
     width: 620px;
-    height: 200px;
+    height: 150px;
     margin-left: -310px;
     margin-top: -40px;
 }
 :global(.viewSeven .mainTitle){
     font-size: 40px;
     line-height: 56px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     letter-spacing: 1px;
     color: #fff;
  }
@@ -136,13 +136,13 @@
 }
 :global(.mainContent.viewSeven .laymid .clickMe){
     text-align: center;
-    padding-top: 40px;
+    /* padding-top: 40px; */
 }
 :global(.mainContent.viewSeven .laymid .clickBtn) {
     width: 160px;
     height: 50px;
     font-size: 18px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     line-height: 50px;
     display: inline-block;
     text-align: center;
@@ -151,10 +151,16 @@
 }
 :global(.mainContent.viewOne .laymid .loginBtn),
 :global(.mainContent.viewSeven .laymid .loginBtn){
-    background: #EB4046;
+    background: #e50113;
     color: rgba(255,255,255,1);
     margin-right: 20px;
-    border:1px solid #EB4046;
+    border:1px solid #e50113;
+    transition: all 0.3s;
+}
+:global(.mainContent.viewOne .laymid .loginBtn:hover),
+:global(.mainContent.viewSeven .laymid .loginBtn:hover){
+    background: #cf0010;
+    border-color:#cf0010;
 }
 :global(.mainContent.viewSeven .laymid .registryBtn),
 :global(.mainContent.viewOne .laymid .registryBtn) {
@@ -162,7 +168,7 @@
     border: 1px solid rgba(255,255,255,1);
     color:#fff;
 }
-:global(.PageSeven .mainFooter){
+/* :global(.PageSeven .mainFooter){
     position: absolute;
     left: 0;
     bottom: 0;
@@ -173,6 +179,24 @@
      width: 100%;
      height: auto;
      margin-bottom:-5px;
+ } */
+ :global(.PageSeven .mainFooter){
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    height: 360px;
+    width: 100%;
+    background: linear-gradient(#535353 85%, #3e3e3e 15%);
+ }
+ :global(.PageSeven .mainFooter .footerImg){
+    width: 1200px;
+    height: 360px;
+    margin-bottom: -5px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -600px;
  }
 /* :global(.PageSeven .mainFooter){
     position: absolute;
@@ -254,7 +278,7 @@ clear: both;
     z-index: 11;
     background-position: 0 0;
     background-repeat: no-repeat;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(255,255,255,1);
     line-height: 33px;
     font-size: 20px;
@@ -284,7 +308,7 @@ clear: both;
     visibility: visible;
     transition: 1s .6s opacity;
     top: 50%;
-    right: 18%;
+    right: 10%;
     min-height: 175px;
 }
 

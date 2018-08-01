@@ -1,13 +1,13 @@
-:global(.rootSpec3){
+/* :global(.rootSpec3){
     min-height: 0!important;
 }
 :global(.bodySpec3){
    height: 0!important;
    min-height: 0!important;
 
-}
+} */
 /*注意还有amPage amBg*/
-body,.AboutUsPanel{
+.AboutUsPanel{
     width: 100%;
     height: 100%;
     margin:0;
@@ -17,18 +17,34 @@ body,.AboutUsPanel{
     background: #fff;
 
 }
-.AboutUsPanel :global(.mainFooter){
+/* .AboutUsPanel :global(.mainFooter){
     overflow: hidden;
  }
  .AboutUsPanel :global(.mainFooter .footerImg){
      width: 100%;
      height: auto;
      margin-bottom:-5px;
+ } */
+ .AboutUsPanel :global(.mainFooter){
+    height: 360px;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(#535353 85%, #3e3e3e 15%);
+ }
+ .AboutUsPanel :global(.mainFooter .footerImg){
+    width: 1200px;
+    height: 360px;
+    margin-bottom: -5px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -600px;
  }
 
 .AboutUsPanel :global(.mainCon .title){
     font-size: 28px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(51,51,51,1);
     line-height: 40px;
     width: 60%;
@@ -49,7 +65,7 @@ body,.AboutUsPanel{
     width: 30%;
     text-align: left;
     margin-left: 20%;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
 }
 .AboutUsPanel :global(.lefCon .subtitle) {
     font-size: 24px;

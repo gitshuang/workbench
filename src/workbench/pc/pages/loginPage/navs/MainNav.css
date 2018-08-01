@@ -8,19 +8,23 @@
     border-bottom:1px solid #eee;
 }
 .MainNav .headerDesc{
-    color:rgba(113,113,113,1);
-    font-size: 22px;
-    padding-left: 10px;
-    border-left: 1px solid rgba(113,113,113,1);
+    color: #777;
+    font-size: 18px;
+    line-height: 80px;
+    padding-left: 14px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
 }
 .MainNav .leftCon{
     width: 25%;
 }
 .leftCon :global(img.companylogo) {
-    height: 34px;
-    width: 229px;
-    margin-top: 23px;
-    margin-left: 20px;
+    height: 46px;
+    width: 114px;
+    margin-top: 20px;
+    margin-left: 38px;
     cursor: pointer;
 }
 .MainNav .middleCon{
@@ -30,7 +34,7 @@
 }
 .middleCon :global(.middleItem){
     font-size: 18px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(51,51,51,1);
     display: inline-block;
     text-align: center;
@@ -43,20 +47,20 @@
     box-sizing: border-box;
 }
 .middleCon :global(.middleItem.actived) {
-    color:#EB4046;
-    border-bottom: 4px solid #EB4046;
+    color:#eb1d15;
+    /* border-bottom: 4px solid #eb1d15; */
 }
 .MainNav .rightCon{
     width: 25%;
     text-align: right;
-    padding-right: 4px;
+    padding-right: 20px;
 }
 .MainNav .rightCon :global(a.loginBtn),
 .MainNav .rightCon :global(a.registryBtn) {
     width: 100px;
     height: 34px;
     font-size: 16px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     line-height: 34px;
     display: inline-block;
     text-decoration: none;
@@ -64,12 +68,16 @@
     cursor: pointer;
 }
 .MainNav .rightCon :global(a.loginBtn){
-    background: #EB4046;
+    background: #e50113;
     color: rgba(255,255,255,1);
     margin-right: 15px;
+    transition: all 0.3s;
+}
+.MainNav .rightCon :global(a.loginBtn:hover){
+    background: #cf0010;
 }
 .MainNav .rightCon :global(a.registryBtn) {
-    color:#EB4046;
+    color:#eb1d15;
     background:transparent;
 }
 /*TopNav的样式*/
@@ -79,10 +87,11 @@
     opacity:0.9;
     line-height: 40px;
     text-align: right;
+    padding-right: 18px;
 }
 .TopNav :global(.TopNavLink) {
     font-size: 14px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(255,255,255);
     opacity: .8;
     text-decoration: none;

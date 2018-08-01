@@ -1,13 +1,13 @@
-:global(.rootSpec2){
+/* :global(.rootSpec2){
     min-height: 0!important;
 }
 :global(.bodySpec2){
    height: 0!important;
    min-height: 0!important;
 
-}
+} */
 /*注意还有amPage amBg*/
-body,.ServicePanel{
+.ServicePanel{
     width: 100%;
     height: 100%;
     margin:0;
@@ -22,7 +22,7 @@ body,.ServicePanel{
     width: 100%;
     height: 470px;
     background-size: cover;
-    font-family:PingFangSC-Medium;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color:rgba(255,255,255,1);
 }
 .ServicePanel :global(.serviceOne .mainContent){
@@ -50,7 +50,7 @@ body,.ServicePanel{
 .ServicePanel :global(.serviceOne .serviceBtn){
     width:160px;
     height:50px;
-    background:#EB4046;
+    background:#eb1d15;
     font-size:18px;
     line-height:50px;
     text-align: center;
@@ -62,7 +62,8 @@ body,.ServicePanel{
     padding:98px 0;
 }
 .ServicePanel :global(.serviceTwo .mainContent) {
-    margin: 0 10%;
+    width: 1200px;
+    margin: 0 auto;
     position: relative;
     
 }
@@ -85,7 +86,7 @@ body,.ServicePanel{
     left: 50%;
   }
 .ServicePanel :global(.serviceTwo .twoItem){
-    width: 50%;
+    width: 600px;
     background: #fff;
     height: 100px;
     padding: 20px;
@@ -101,7 +102,7 @@ body,.ServicePanel{
 }
 .ServicePanel :global(.serviceTwo .rightTop),
 .ServicePanel :global(.serviceTwo .rightBottom){
-    padding-left: 13%;
+    padding-left: 10%;
 }
  .ServicePanel :global(.serviceTwo .twoItem .icon ),
  .ServicePanel :global(.serviceTwo .twoItem .con ){
@@ -110,7 +111,7 @@ body,.ServicePanel{
  .ServicePanel :global(.serviceTwo .twoItem .con){
      padding-left:20px;
      width: 80%;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
  }
  .ServicePanel :global(.serviceTwo .con .title ){
     display: block;
@@ -133,7 +134,7 @@ body,.ServicePanel{
 .serviceThree :global(.title){
     display: inline-block;
     font-size: 28px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(51,51,51,1);
     line-height: 40px;
     text-align: center;
@@ -154,7 +155,7 @@ body,.ServicePanel{
     text-align: center;
     padding: 0 30px;
     position: relative;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     float: left;
     z-index:1;
 }
@@ -199,14 +200,30 @@ body,.ServicePanel{
     margin: 0 auto;
 }
 
-.ServicePanel :global(.mainFooter){
+/* .ServicePanel :global(.mainFooter){
    overflow: hidden;
 }
 .ServicePanel :global(.mainFooter .footerImg){
     width: 100%;
     height: auto;
     margin-bottom:-5px;
-}
+} */
+.ServicePanel :global(.mainFooter){
+    height: 360px;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(#535353 85%, #3e3e3e 15%);
+ }
+ .ServicePanel :global(.mainFooter .footerImg){
+    width: 1200px;
+    height: 360px;
+    margin-bottom: -5px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -600px;
+ }
 /*第四个页面*/
 .serviceFour{
     background: #fff;
@@ -214,7 +231,7 @@ body,.ServicePanel{
 }
 .serviceFour :global(.title){
     font-size: 28px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(51,51,51,1);
     line-height: 40px;
     display: inline-block;
@@ -225,4 +242,7 @@ body,.ServicePanel{
 .serviceFour :global(.applyService){
     width: 510px;
     margin: 0 auto;
+}
+.ServicePanel  :global(.u-form-control:focus){
+    border:1px solid #666
 }
