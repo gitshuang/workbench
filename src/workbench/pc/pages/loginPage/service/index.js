@@ -97,19 +97,19 @@ class Service extends Component {
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">1</span>
                             <span className={tipTitle}>填写信息</span>
-                            <soan className={tipCon}>录入您的个人信息，方便我 们与您取得联系</soan>
+                            <span className={tipCon}>录入您的个人信息，方便我们与您取得联系</span>
                         </div>
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">2</span>
                             <span className={tipTitle}>电话沟通</span>
-                            <soan className={tipCon}>售前人员将与您取得联系， 和您讨论定制需求</soan>
+                            <span className={tipCon}>售前人员将与您取得联系，和您讨论定制需求</span>
                         </div>
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">3</span>
                             <span className={tipTitle}>专家团队上门</span>
-                            <soan className={tipCon}>根据您的需求，我们可以提 供专家团队上门解决方案</soan>
+                            <span className={tipCon}>根据您的需求，我们可以提供专家团队上门解决方案</span>
                         </div>
                       </div>
                   </div>

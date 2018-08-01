@@ -34,7 +34,7 @@ body,.AboutUsPanel{
     width: 60%;
     margin-left: 20%;
     text-align: center;
-    padding: 106px 0 32px 0;
+    padding: 72px 0 32px 0;
     border-bottom: 1px solid #ddd;
 }
 .AboutUsPanel :global(.absoutUsCon){
@@ -52,10 +52,10 @@ body,.AboutUsPanel{
     font-family: PingFangSC-Regular;
 }
 .AboutUsPanel :global(.lefCon .subtitle) {
-    font-size: 28px;
+    font-size: 24px;
     color: rgba(51,51,51,1);
-    line-height: 60px;
-    padding: 20px 0;
+    line-height: 33px;
+    padding: 46px 0 20px 0;
 }
 .AboutUsPanel :global(.lefCon span){
     display: block;
