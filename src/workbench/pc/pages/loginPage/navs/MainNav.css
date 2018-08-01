@@ -8,17 +8,21 @@
     border-bottom:1px solid #eee;
 }
 .MainNav .headerDesc{
-    color:rgba(113,113,113,1);
-    font-size: 22px;
+    color: #777;
+    font-size: 14px;
+    line-height: 80px;
     padding-left: 10px;
-    border-left: 1px solid rgba(113,113,113,1);
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
 }
 .MainNav .leftCon{
     width: 25%;
 }
 .leftCon :global(img.companylogo) {
     height: 34px;
-    width: 229px;
+    width: 85px;
     margin-top: 23px;
     margin-left: 20px;
     cursor: pointer;
@@ -44,7 +48,7 @@
 }
 .middleCon :global(.middleItem.actived) {
     color:#EB4046;
-    border-bottom: 4px solid #EB4046;
+    /* border-bottom: 4px solid #EB4046; */
 }
 .MainNav .rightCon{
     width: 25%;

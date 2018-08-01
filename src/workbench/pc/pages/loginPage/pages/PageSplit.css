@@ -41,10 +41,10 @@
     background-image: url('./images/4.png') ;
 }
 :global(.PageFive) .amBg{
-    background-image: url('./images/6.png') ;  
+    background-image: url('./images/5.png') ;  
 }
 :global(.PageSix) .amBg{
-    background-image: url('./images/5.png') ;  
+    background-image: url('./images/6.png') ;  
 }
 :global(.PageSeven) .amBg{
     background-image: url('./images/7.png') ;  
@@ -111,7 +111,7 @@
     top: 0;
     left: 50%;
     width: 620px;
-    height: 200px;
+    height: 150px;
     margin-left: -310px;
     margin-top: -40px;
 }
@@ -136,7 +136,7 @@
 }
 :global(.mainContent.viewSeven .laymid .clickMe){
     text-align: center;
-    padding-top: 40px;
+    /* padding-top: 40px; */
 }
 :global(.mainContent.viewSeven .laymid .clickBtn) {
     width: 160px;
