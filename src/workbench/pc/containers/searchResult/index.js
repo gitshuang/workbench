@@ -8,7 +8,7 @@ import Tabs, { TabPane } from 'bee/tabs';
 import Icon from 'pub-comp/icon';
 import EnhancedPagination from 'pub-comp/enhancedPagination';
 import SearchItem from 'diwork-business-components/dist/search/searchItem';
-
+// import SearchItem from './searchItem';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 
@@ -210,7 +210,7 @@ class searchResult extends Component {
 
   // 渲染列表页面
   otherlistLi(data) {
-    if (!data) return null;
+    if (data.content.length === 0) return null;
     return data.content.map((item, index) => (
       <li key={index}>
         <SearchItem
@@ -231,13 +231,15 @@ class searchResult extends Component {
     } = this.state;
     const Morelist = [];
     const anifalse = false;
+    if(SearchMoreList.length === 0) return null;
+    const renderItems = this.otherlistLi(dataList);
     SearchMoreList.forEach((item) => {
       Morelist.push(<TabPane
         tab={item.typeName}
         key={item.type}
         className={tabPane1}
       >
-        <ul className={recently}>{this.otherlistLi(dataList)}</ul>
+        <ul className={recently}>{renderItems}</ul>
         {
           isShownodataClassEach ? null :
             <div className={nodataClass}>
