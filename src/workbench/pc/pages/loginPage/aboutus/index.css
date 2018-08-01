@@ -17,13 +17,29 @@ body,.AboutUsPanel{
     background: #fff;
 
 }
-.AboutUsPanel :global(.mainFooter){
+/* .AboutUsPanel :global(.mainFooter){
     overflow: hidden;
  }
  .AboutUsPanel :global(.mainFooter .footerImg){
      width: 100%;
      height: auto;
      margin-bottom:-5px;
+ } */
+ .AboutUsPanel :global(.mainFooter){
+    height: 360px;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(#535353 85%, #3e3e3e 15%);
+ }
+ .AboutUsPanel :global(.mainFooter .footerImg){
+    width: 1200px;
+    height: 360px;
+    margin-bottom: -5px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -600px;
  }
 
 .AboutUsPanel :global(.mainCon .title){
