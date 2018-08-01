@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getHost } from '@u';
 import MainNav from './navs/MainNav.js';
 import TopNav from './navs/TopNav.js';
 import PageFirst from './pages/PageFirst.js';
@@ -16,9 +17,9 @@ import{
 
 const  CAS_SERVER = "https://idtest.yyuap.com",
 //yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
-yhtssoisloginUrl ='http://workbenchdev.yyuap.com/login.html',
-_destUrl="http://workbenchdev.yyuap.com/yhtssoislogin", //只有这个不是登陆成功后跳转的链接
-realservice="http://workbenchdev.yyuap.com";
+yhtssoisloginUrl = window.location.origin + '/login_light.html',
+_destUrl=`${getHost('api')}/yhtssoislogin`, //只有这个不是登陆成功后跳转的链接
+realservice= getHost('api');
 
 class LoginPage extends Component {
   constructor(props){
@@ -33,7 +34,8 @@ class LoginPage extends Component {
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
     this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+    // this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl);
     this.sevenSpace ;
   }
   componentWillMount(){
