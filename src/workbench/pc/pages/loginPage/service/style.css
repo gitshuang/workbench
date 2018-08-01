@@ -34,7 +34,7 @@
 .applyForm :global(.u-form-inline .u-label) {
   display: inline-block;
   font-size: 16px;
-  font-family: PingFangSC-Regular;
+  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
   color: rgba(51,51,51,1);
   line-height: 50px;
   text-align: right;
@@ -55,7 +55,7 @@ body  .applyForm :global(.u-form-item .u-select){
   width: 370px;
     height: 50px;
     font-size: 18px;
-    background: #EB4046;
+    background: #eb1d15;
     line-height: 50px;
     color: #fff;
     text-align: center;
