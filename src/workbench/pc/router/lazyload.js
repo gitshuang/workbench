@@ -26,7 +26,7 @@ export default function asyncComponent(importComponent) {
     }
     render() {
       const C = this.state.component;
-      return C ? <C {...this.props} /> : <Loading text="正在加载中..." />;
+      return C ? <C {...this.props} /> : null;
     }
   }
   return AsyncComponent;
