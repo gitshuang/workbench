@@ -18,7 +18,6 @@ import homeActions from 'store/root/home/actions';
 
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
-import LoginPage from 'pages/loginPage';
 import 'public/jDiworkBridge';
 import BasicDialog from 'containers/basicDialog/';
 
@@ -163,6 +162,7 @@ class Root extends Component {
           </Switch>
          )
        }
+       <BasicDialog/>
       </div>
     );
   }

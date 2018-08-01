@@ -35,8 +35,8 @@
   color: #ffffff;
 }
 .header button:hover{
-  background: transparent;
-  border: 1px solid #ffffff;
+  background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
 }
 .content{
 
@@ -52,6 +52,9 @@
   font-size:15px;
   font-family:MicrosoftYaHei;
   color:#111111;
+}
+.content :global(.u-tabs-tab:hover){
+  color: #E14C46;
 }
 .content :global(.u-tabs-tab-active){
   color:#E14C46;
@@ -210,7 +213,7 @@
   font-family:MicrosoftYaHei;
 }
 .applicationBtns span button{
-  background: rgba(9,44,66,0.04);
+  background: #e4e4e4
 }
 .applicationBtns span button.active{
   color:rgba(225,76,70,1);
@@ -272,7 +275,6 @@
 .applicationLists li div:last-child{
   padding-top: 7px;
   width: 220px;
-  text-align: center;
 }
 .applicationLists li button{
   width: 79px;
@@ -281,7 +283,7 @@
   margin-left: 4px;
   font-size:14px;
   font-family:MicrosoftYaHei;
-  background: rgba(9,44,66,0.04);
+  background: #e4e4e4;
 }
 .box3{
   background: #ffffff;
@@ -436,7 +438,7 @@
   margin-left: 4px;
   font-size:14px;
   font-family:MicrosoftYaHei;
-  background: rgba(9,44,66,0.04);
+  background: #e4e4e4;
 }
 
 :global(.teamselect  .u-select-dropdown-menu-item-selected:after){
@@ -459,8 +461,11 @@
   border-top:1px solid #f7f7f7;
 }
 .option_sele :global(.u-select .u-select-selection){
-  background:rgba(9,44,66,0.04);
+  background: #e4e4e4;
   border:none;
+}
+.option_sele :global(.u-select .u-select-selection:hover){
+  background: #f3f3f3;
 }
 .user_name{
   /* color: RGBA(71, 77, 84, 1) !important; */

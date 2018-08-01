@@ -46,7 +46,7 @@ class EstablishContent extends Component {
             </div>
             <h6>免费创建团队</h6>
             <div className={content}>
-              <p>我是团队管理者,<br />&nbsp;&nbsp;&nbsp;需要赋能刷新我的部门或项目组。</p>
+              <p>我是团队管理者,<br />需要赋能刷新我的部门或项目组。</p>
               <p>关键特性：</p>
               <ul className="clearfix">
                 <li>全功能团队即时沟通工具（IM）</li>
@@ -68,7 +68,7 @@ class EstablishContent extends Component {
             </div>
             <h6>免费创建企业</h6>
             <div className={`${content} ${enter_context_div}`}>
-              <p>我是企业管理者,<br />&nbsp;&nbsp;&nbsp;需要把所有部门都刷新为赋能型组织并获得企业级服务。</p>
+              <p>我是企业管理者,<br />需要把所有部门都刷新为赋能型组织并获得企业级服务。</p>
               <p>关键特性：</p>
               <ul className="clearfix">
                 <li>团队组织所具备的全部能力</li>

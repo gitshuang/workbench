@@ -55,6 +55,7 @@ body .u-form-control{
   padding-left: 8px;
   border: 1px solid #D0D0D0;
   height: 32px;
+  transition: none;
 }
 body .u-form-control:focus{
   border: 1px solid #00CDC3;
@@ -111,7 +112,7 @@ body .u-select-open .u-select-selection{
 body .u-select-dropdown .u-select-dropdown-menu-item-active,
 body .u-select-dropdown .u-select-dropdown-menu-item:hover{
   background: #f3f3f3;
-  color: #E14C46;
+  /* color: #E14C46; */
   font-weight: normal;
 }
 
@@ -126,6 +127,16 @@ body .u-menu{
   color: #555555;
 }
 
+body .u-form-item .u-input-group-outer .u-input-before, 
+body .u-form-item .u-input-group-outer .u-input-after{
+  background: #f3f3f3;
+  color: #bfbfbf;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px 0 0 3px;
+  line-height: 30px;
+  border-right: none;
+}
+
 .tc i:hover{
   color:#111111;
 }
@@ -138,6 +149,11 @@ body .u-menu{
 
 .u-menu-inline > .u-menu-submenu > .u-menu-submenu-title {
   color: #555555;
+  cursor: pointer;
+}
+
+.u-menu-inline > .u-menu-submenu > .u-menu-submenu-title .iconfont:hover {
+  color: #111111;
   cursor: pointer;
 }
 
@@ -173,10 +189,20 @@ body .u-menu{
   overflow-y: hidden;
 }
 
-.u-select-arrow:before {
-  color: #878B94;
+.u-select:hover .u-select-selection-selected-value{
+  color: #E14C46;
 }
 
+.u-select:hover .u-select-arrow:before{
+  color: #E14C46;
+}
+
+.u-select-arrow:before {
+  color: #555555;
+}
+.u-select-open .u-select-selection-selected-value{
+  color: #E14C46;
+}
 .u-select-open .u-select-arrow:before {
   transform: rotate(-180deg);
   color: #E14C46;
@@ -400,22 +426,25 @@ body .paginationClass .active span:hover{
 body .paginationClass .disabled a,
 body .paginationClass .disabled a:focus,
 body .paginationClass .disabled a:hover{
-  background: rgba(9,44,66,.04);
+  background: #f3f3f3;
+  color: #bfbfbf;
+  border: 1px solid #f3f3f3;
 }
-body .paginationClass li a{
+body .paginationClass li a{ 
   width: 28px;
   height: 28px;
-  background: rgba(9,30,66,.04);
-  border-color: #e9e7e7;
+  background: #e4e4e4;
+  border-color: #e4e4e4;
   border-radius: 4px;
   line-height: 28px;
   padding: 0;
 }
 body .paginationClass li a:hover{
-  border-color:#fcedec;
+  border-color:#f3f3f3;
+  background: #f3f3f3;
 }
 body .paginationClass li:first-child a,
-body .paginationClass li:last-child a{
+body .paginationClass li:last-child a{ 
   border-radius: 4px;
 }
 body .paginationClass input{

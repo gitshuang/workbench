@@ -6,7 +6,8 @@ import Icon from 'pub-comp/icon';
 import Menu, { Item as MenuItem } from 'bee/menus';
 import {
   dropdownButtonCont, labelCont, btnUpward, btnPullDown, iconStyle, menuStyle,
-  createEnt, menuItem, itemUl, itemLi, liTitle, liRight,fnbox
+  createEnt, menuItem, itemUl, itemLi, liTitle, liRight,fnbox,
+  currLi
 } from './style.css';
 
 @withRouter
@@ -87,13 +88,24 @@ class DropdownButton extends Component {
 
   render() {
     const {
-      label, dataItem, type, marginLeft, lastIem, openMenu,
+      label, dataItem, type, marginLeft, lastIem, openMenu, tenantId
     } = this.props;
     // const {label } = this.state;
     const item = [];
     if (dataItem.length !== 0) {
       dataItem.forEach((da) => {
-        item.push(<div key={da.name} className={itemLi} onClick={() => { this.handleSelect(da); }} onKeyDown={() => { this.handleSelect(da); }} role="presentation"><div className={liTitle} title={da.value}>{da.value}</div><div className={liRight}>{da.type === 1 ? '团队' : '企业'}</div></div>);
+        item.push(
+          <div 
+            key={da.name} 
+            className={da.name === tenantId ? `${currLi} ${itemLi}` : itemLi} 
+            onClick={() => { this.handleSelect(da); }} 
+            onKeyDown={() => { this.handleSelect(da); }} 
+            role="presentation"
+          >
+            <div className={liTitle} title={da.value}>{da.value}</div>
+            <div className={liRight}>{da.type === 1 ? '团队' : '企业'}</div>
+          </div>
+        );
       });
     } else {
       item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >数据正在加载中....</div></div>);

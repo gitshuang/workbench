@@ -96,7 +96,7 @@ const reducer = handleActions({
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc({ text: '正在加载中...' });
+    createLoadingFunc({ text: '加载中...' });
     return state;
   },
   [requestSuccess](state) {

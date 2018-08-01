@@ -15,7 +15,7 @@ const { Item } = Menu;
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {  openExitModal } = teamconfigActions;
 
-import { enter_option, item_li } from './style.css';
+import { enter_option, item_li, up } from './style.css';
 
 @withRouter
 @connect(
@@ -44,12 +44,17 @@ class EnterOption extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      serverApi: ""
+      serverApi: "",
+      visible: false
     }
     this.data = null;
   }
 
-  onVisibleChange = (visible) => { }
+  onVisibleChange = (visible) => { 
+    this.setState({
+      visible
+    });
+  }
 
   onSelectDrop = (da) => {
     const { data, openExitModal, compType } = this.props;
@@ -91,7 +96,7 @@ class EnterOption extends Component {
               animation="slide-up"
               onVisibleChange={this.onVisibleChange}
             >
-              <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" /></Button>
+              <Button className="um-box-vc um-box-center">相关操作<Icon type="pull-down" className={this.state.visible ? up : ''} /></Button>
             </Dropdown>
         }
         {

@@ -152,3 +152,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
 }
+.currLi{
+    background: #e4e4e4;
+    color: #E14C46;
+}
