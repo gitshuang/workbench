@@ -30,8 +30,8 @@ class AboutUs extends Component {
     this.markerPosition = {longitude: 116.234732, latitude: 40.068463};
   }
   componentDidMount(){
-    document.getElementById('root').className = 'rootSpec3';
-    document.getElementsByTagName('body')[0].className = 'bodySpec3';
+    document.getElementById('root').className = '';
+    document.getElementsByTagName('body')[0].className = '';
   }
   
   render() {

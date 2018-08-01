@@ -10,7 +10,7 @@
 
 }
 /*注意还有amPage amBg*/
-body,.HomePagePanel{
+.HomePagePanel{
     width: 100%;
     height: 100%;
     margin:0;
