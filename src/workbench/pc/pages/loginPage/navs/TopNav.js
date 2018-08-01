@@ -4,8 +4,8 @@ import{
   export default function TopNavPanel(props){
     return(
       <div className={TopNav}>
-            <a href="http://www.diwork.com"  className="TopNavLink">用友云官网</a>
-            <a href="http://www.diwork.com"  className="TopNavLink">下载</a>
+            <a href="https://www.yonyoucloud.com" target="_blank" className="TopNavLink">用友云官网</a>
+            <a  href="https://www.yonyoucloud.com"  target="_blank" className="TopNavLink">下载</a>
       </div>
     )
   }
