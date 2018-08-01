@@ -10,14 +10,19 @@ import{
          <div className={`${amPage} PageSeven `}>
            <div className={amBg} ></div>
             <div className="mainContent viewSeven">
-              <div className={`laymid`} style={{marginTop:`${props.sevenSpace}px`}}>
-                {/* <div className="logo"></div> */}
-                <div className="mainTitle">“相信美好，立刻开始数字化工作”</div>
-                <div className="clickMe clearfix">
-                  <span  className="loginBtn clickBtn " onClick={props.loginClick}>登录</span>
-                  <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">立即注册</a>
+            {
+              !props.loginModalShow &&(
+                <div className={`laymid`} style={{marginTop:`${props.sevenSpace}px`}}>
+                  {/* <div className="logo"></div> */}
+                  <div className="mainTitle">“相信美好，立刻开始数字化工作”</div>
+                  <div className="clickMe clearfix">
+                    <span  className="loginBtn clickBtn " onClick={props.loginClick}>登录</span>
+                    <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">立即注册</a>
+                  </div>
                 </div>
-              </div>
+              )
+            }
+              
             </div>
             <div className="mainFooter mainFooterFake">
               <img src={footerPng} alt="" className="footerImg"/>

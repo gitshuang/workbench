@@ -47,7 +47,7 @@ body,.HomePagePanel{
     cursor: pointer;
 }
 .HomePagePanel .rightDotMenu :global(.menudot.active){
-    background: #EB4046;
+    background: #eb1d15;
 }
 
 /*animation*/
@@ -104,7 +104,7 @@ body,.HomePagePanel{
     z-index: 997;
     top: 0;
     left: 0;
-    background: rgba(0,0,0,0.6);
+    background: transparent;
 }
 :global(.stat-login .loginbox), 
 :global(.popbox .popmask) {
@@ -115,27 +115,30 @@ body,.HomePagePanel{
     position: absolute;
     top: 30%;
     left: 50%;
-    margin-left: -215px;
+    margin-left: -200px;
     z-index: 998;
-    width: 430px;
-    background: #fff;
-    height: 400px;
+    width: 400px;
+    background: rgba(0, 0, 0, 0.6);
+    height: 388px;
+    border-radius: 8px;
 }
 :global(iframe#yhtloginIframe) {
-    margin-left: 20px;
-    margin-top: 30px;
     border: none;
-    width: 390px;
+    width: 400px;
 }
 :global(.popbox .close){
     position: absolute;
-    top:30%;
-    left:50%;
-    margin-left:-200px; 
-    color:#ddd;
-    font-size: 22px;
-    z-index:999;
+    top: 30%;
+    left: 50%;
+    margin-left: 0;
+    color: #ddd;
+    z-index: 999;
     cursor: pointer;
+    background-image: url(./close.png);
+    width: 12px;
+    height: 12px;
+    margin-left: -185px;
+    margin-top: 15px;
 }
 :global(.goNextArrow){
     background-image: url('./pages/images/arrowdown.png');

@@ -20,7 +20,7 @@ export default function MainNavPanel(props){
     <div className={MainNav}>
         <div className={leftCon} onClick={()=>{open('login')}}>
           <img src={Logo} alt="" className="companylogo"/>
-          {/* <span className={headerDesc}>数字化工作入口</span> */}
+          <span className={headerDesc}>数字化工作入口</span>
         </div>
         <div className={middleCon}>
           <a  className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{open('login')}}>我们</a>

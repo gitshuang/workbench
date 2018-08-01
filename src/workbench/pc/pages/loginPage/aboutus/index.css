@@ -28,7 +28,7 @@ body,.AboutUsPanel{
 
 .AboutUsPanel :global(.mainCon .title){
     font-size: 28px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(51,51,51,1);
     line-height: 40px;
     width: 60%;
@@ -49,7 +49,7 @@ body,.AboutUsPanel{
     width: 30%;
     text-align: left;
     margin-left: 20%;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
 }
 .AboutUsPanel :global(.lefCon .subtitle) {
     font-size: 24px;

@@ -43,7 +43,7 @@ class LoginPage extends Component {
     let screenHeight = dom.clientHeight ;
     let header = 110;
     let footer =Math.round((screenWidth*358)/1677);
-    let fontHeight = 200;
+    let fontHeight = 150;
     let space =Math.round((screenHeight + header-footer- fontHeight)/2);
     this.sevenSpace = space;
   }
@@ -148,19 +148,19 @@ class LoginPage extends Component {
           </div>
           <div ref={(ref) =>{this.amBody = ref}}className={`${HomeOnePage} amBody animation0`}>
               <div className="videoContainer"></div>
-              <PageFirst loginClick={this.loginClick} registryUrl={this.registryUrl}/>
+              <PageFirst loginClick={this.loginClick} registryUrl={this.registryUrl} loginModalShow={loginModalShow}/>
               <PageSecond loginModalShow={loginModalShow}/>
               <PageThird loginModalShow={loginModalShow}/>
               <PageFour loginModalShow={loginModalShow}/>
               <PageFive loginModalShow={loginModalShow}/>
               <PageSix loginModalShow={loginModalShow}/>
-              <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace}/>
+              <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace} loginModalShow={loginModalShow}/>
           </div>
           {curIndex!==6 && !loginModalShow && <div className="goNextArrow" onClick={this.moveNext}> </div>}
             {
               loginModalShow&&(
                 <div className="popbox">
-                  <div className="close" onClick={this.closeLoginMoal}>×</div>
+                  <div className="close" onClick={this.closeLoginMoal}></div>
                   <div id="yhtFrameLogin" className="loginFramePanel">
                     <iframe id="yhtloginIframe"
                       src={this.loginUrl}

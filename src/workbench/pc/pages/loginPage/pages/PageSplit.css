@@ -41,10 +41,10 @@
     background-image: url('./images/4.png') ;
 }
 :global(.PageFive) .amBg{
-    background-image: url('./images/6.png') ;  
+    background-image: url('./images/5.png') ;  
 }
 :global(.PageSix) .amBg{
-    background-image: url('./images/5.png') ;  
+    background-image: url('./images/6.png') ;  
 }
 :global(.PageSeven) .amBg{
     background-image: url('./images/7.png') ;  
@@ -78,7 +78,7 @@
     width: 160px;
     height: 50px;
     font-size: 18px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     line-height: 50px;
     display: inline-block;
     text-align: center;
@@ -111,7 +111,7 @@
     top: 0;
     left: 50%;
     width: 620px;
-    height: 200px;
+    height: 150px;
     margin-left: -310px;
     margin-top: -40px;
 }
@@ -136,13 +136,13 @@
 }
 :global(.mainContent.viewSeven .laymid .clickMe){
     text-align: center;
-    padding-top: 40px;
+    /* padding-top: 40px; */
 }
 :global(.mainContent.viewSeven .laymid .clickBtn) {
     width: 160px;
     height: 50px;
     font-size: 18px;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     line-height: 50px;
     display: inline-block;
     text-align: center;
@@ -151,10 +151,10 @@
 }
 :global(.mainContent.viewOne .laymid .loginBtn),
 :global(.mainContent.viewSeven .laymid .loginBtn){
-    background: #EB4046;
+    background: #eb1d15;
     color: rgba(255,255,255,1);
     margin-right: 20px;
-    border:1px solid #EB4046;
+    border:1px solid #eb1d15;
 }
 :global(.mainContent.viewSeven .laymid .registryBtn),
 :global(.mainContent.viewOne .laymid .registryBtn) {
@@ -254,7 +254,7 @@ clear: both;
     z-index: 11;
     background-position: 0 0;
     background-repeat: no-repeat;
-    font-family: PingFangSC-Regular;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(255,255,255,1);
     line-height: 33px;
     font-size: 20px;
@@ -284,7 +284,7 @@ clear: both;
     visibility: visible;
     transition: 1s .6s opacity;
     top: 50%;
-    right: 18%;
+    right: 10%;
     min-height: 175px;
 }
 
