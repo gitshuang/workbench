@@ -118,7 +118,7 @@
 :global(.viewSeven .mainTitle){
     font-size: 40px;
     line-height: 56px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     letter-spacing: 1px;
     color: #fff;
  }
@@ -168,7 +168,7 @@
     border: 1px solid rgba(255,255,255,1);
     color:#fff;
 }
-:global(.PageSeven .mainFooter){
+/* :global(.PageSeven .mainFooter){
     position: absolute;
     left: 0;
     bottom: 0;
@@ -179,6 +179,24 @@
      width: 100%;
      height: auto;
      margin-bottom:-5px;
+ } */
+ :global(.PageSeven .mainFooter){
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    height: 360px;
+    width: 100%;
+    background: linear-gradient(#535353 85%, #3e3e3e 15%);
+ }
+ :global(.PageSeven .mainFooter .footerImg){
+    width: 1200px;
+    height: 360px;
+    margin-bottom: -5px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -600px;
  }
 /* :global(.PageSeven .mainFooter){
     position: absolute;

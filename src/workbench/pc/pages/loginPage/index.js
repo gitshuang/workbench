@@ -39,10 +39,11 @@ class LoginPage extends Component {
   componentWillMount(){
      //最后因为footer屏幕居中手动计算，图片1677-358
     let dom = document.documentElement ||document.body ;
-    let screenWidth = dom.clientWidth ;
+    // let screenWidth = dom.clientWidth ;
     let screenHeight = dom.clientHeight ;
     let header = 110;
-    let footer =Math.round((screenWidth*358)/1677);
+    // let footer =Math.round((screenWidth*358)/1677);
+    let footer = 360;//这边确定
     let fontHeight = 150;
     let space =Math.round((screenHeight + header-footer- fontHeight)/2);
     this.sevenSpace = space;
