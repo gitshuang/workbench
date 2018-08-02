@@ -3,6 +3,7 @@ import MainNav from '../navs/MainNav.js';
 import TopNav from '../navs/TopNav.js';
 import footerPng from '../pages/images/footer.png';
 import { Map, Marker } from 'react-amap';
+import Footer from '../footer/index.js';
 
 import{
   AboutUsPanel,
@@ -38,7 +39,7 @@ class AboutUs extends Component {
     
     return (
         <div className={AboutUsPanel}>
-            <TopNav />
+            {/* <TopNav /> */}
             <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'4'} history={this.props.history}/>
            <div className="mainCon">
                 <div className="title">联系我们</div>
@@ -62,8 +63,11 @@ class AboutUs extends Component {
                     </div>
                 </div>
            </div>
-            <div className="mainFooter mainFooterFake">
+            {/* <div className="mainFooter mainFooterFake">
               <img src={footerPng} alt="" className="footerImg"/>
+            </div> */}
+            <div className="mainFooter ">
+              <Footer/>
             </div>
         </div>
     );
