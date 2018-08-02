@@ -40,7 +40,7 @@
     width: 120px;
     height: 120px;
     cursor: pointer;
-
+    position: relative;
 }
 :global(.allIcons .iconItem .iconInner){
     display: inline-block;
@@ -56,18 +56,29 @@
 :global(.allIcons .iconItem .iconInner:hover){
     filter: opacity(1);
 }
+
+:global(.iconOne){
+    background-position: 507px 213px;
+}
+:global(.iconTwo){
+    background-position: 367px 213px;
+}
+:global(.iconThree){
+    background-position: 228px 213px;
+}
+:global(.iconFour){
+    background-position: 88px 212px;
+}
+/* 特殊的二维码 */
 :global(.allIcons .iconItem.codeItem){
     position: absolute;
     left: 0;
     top: 120px;
-    opacity: 0;
     transform: translateY(0);
     transition: transform 0.3s ease;
 }
 /* 动画 */
 :global(.iconItem.codeItem.fadeIn){
-    height: 120px;
-    opacity: 1;
     transform: translate(0,-100%);
 }
 :global(.allIcons .iconItem .iconInner2 ){
@@ -81,18 +92,18 @@
     background-image: url(./mdowncode.png);
     
 }
+/* 小的二维码 */
+:global(.iconItem .lgCode){
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background-image: url('./lg_code1.png');
+    background-position: center;
+    background-size:contain;
 
-:global(.iconOne){
-    background-position: 507px 213px;
-}
-:global(.iconTwo){
-    background-position: 367px 213px;
-}
-:global(.iconThree){
-    background-position: 228px 213px;
-}
-:global(.iconFour){
-    background-position: 88px 212px;
 }
 /*下面的描述*/
 :global(.iconItem .iconDesc){

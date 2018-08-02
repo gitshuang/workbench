@@ -3,6 +3,7 @@ import MainNav from '../navs/MainNav.js';
 import TopNav from '../navs/TopNav.js';
 import footerPng from '../pages/images/footer.png';
 import { Map, Marker } from 'react-amap';
+import Footer from '../footer/index.js';
 
 import{
   AboutUsPanel,
@@ -62,8 +63,11 @@ class AboutUs extends Component {
                     </div>
                 </div>
            </div>
-            <div className="mainFooter mainFooterFake">
+            {/* <div className="mainFooter mainFooterFake">
               <img src={footerPng} alt="" className="footerImg"/>
+            </div> */}
+            <div className="mainFooter ">
+              <Footer/>
             </div>
         </div>
     );

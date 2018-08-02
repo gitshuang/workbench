@@ -9,8 +9,11 @@ import{
 class Footer extends Component {
   constructor(props){
     super(props);
+    this.state = {
+        preTime:new Date().getTime(),//上次执行的时间
+        duration:300,// 0.3内不改变
+    }
     this.iconCode  = null;//二维码的code
-    this.iconCodeTimeVal = null ; //防抖动
   }
   componentWillMount(){
     
@@ -19,15 +22,18 @@ class Footer extends Component {
     
   }
   hover =(e) =>{
-    if(!this.iconCodeTimeVal){
-        this.iconCodeTimeVal = 1;
-        this.iconCode.className = 'iconItem codeItem fadeIn ';
+    let {preTime, duration} = this.state;
+    //如果动画还没执行完，则return
+    var now = new Date().getTime();
+    if( preTime && now < preTime  + duration){
+        return;
     }
+    this.setState({preTime:now});
+    this.iconCode.className = 'iconItem codeItem fadeIn ';
   }
   hoverLeave = () =>{
       setTimeout(() => {
-        this.iconCode.className = 'iconItem codeItem ';
-        this.iconCodeTimeVal = null;
+        this.iconCode.className = 'iconItem codeItem fadeOut';
       }, 2000);
   }
   
@@ -39,9 +45,10 @@ class Footer extends Component {
                 <div className="topSection topOne">
                     <span className="title">客户端下载</span>
                     <div className="allIcons">
-                        <span className="iconItem diff" onMouseEnter={this.hover} onMouseLeave={this.hoverLeave}>
+                        <span className="iconItem" onMouseEnter={this.hover} onMouseLeave={this.hoverLeave}>
                             <span className="iconInner iconOne"></span>
                             <span className="iconDesc">移动端</span>
+                            <span className="lgCode"></span>
                         </span>
                         <span className="iconItem">
                             <span className="iconInner iconTwo"></span>

@@ -184,11 +184,18 @@
     position: absolute;
     left: 0;
     bottom: 0px;
+    height: 306px;
+    width: 100%;
+ }
+ :global(.PageSeven .mainFooter.mainFooterFake){
+    position: absolute;
+    left: 0;
+    bottom: 0px;
     height: 360px;
     width: 100%;
     background: linear-gradient(#535353 85%, #3e3e3e 15%);
  }
- :global(.PageSeven .mainFooter .footerImg){
+ :global(.PageSeven .mainFooter.mainFooterFake .footerImg){
     width: 1200px;
     height: 360px;
     margin-bottom: -5px;
