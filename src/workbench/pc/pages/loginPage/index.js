@@ -17,7 +17,7 @@ import{
 
 const  CAS_SERVER = "https://idtest.yyuap.com",
 //yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
-yhtssoisloginUrl = window.location.origin + '/login_light.html',
+yhtssoisloginUrl = window.location.origin + '/login_light.jsp',
 _destUrl=`${getHost('api')}/yhtssoislogin`, //只有这个不是登陆成功后跳转的链接
 realservice= getHost('api');
 
