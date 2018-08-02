@@ -69,7 +69,7 @@ class searchResult extends Component {
       // 四个参数
       keywords: '', // 关键词
       activetab: '',  // 当前选中的是哪个类型
-      activePage: 0,  // 当前是第几页
+      activePage: 1,  // 当前是第几页
       dataPerPageNum: 10, // 每页显示几条
 
       searchValue: '',
