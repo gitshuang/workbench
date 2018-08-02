@@ -144,7 +144,7 @@ class LoginPage extends Component {
     }
     return (
         <div className={HomePagePanel}>
-          <TopNav />
+          {/* <TopNav /> */}
           <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'}/>
           <div className={rightDotMenu} style={curIndex== 6?{marginTop:`${this.sevenSpace + 15}px`,top:0}:null} >
               {!loginModalShow && this.renderDot()}

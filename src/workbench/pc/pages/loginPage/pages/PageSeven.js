@@ -1,4 +1,4 @@
-
+import Footer from '../footer/index.js';
 import{
     amPage,
     amBg,
@@ -24,8 +24,11 @@ import{
             }
               
             </div>
-            <div className="mainFooter mainFooterFake">
+            {/* <div className="mainFooter mainFooterFake">
               <img src={footerPng} alt="" className="footerImg"/>
+            </div> */}
+            <div className="mainFooter">
+                <Footer/>
             </div>
             {/* <div className="mainFooter">
                <div className="mainFooterCon">

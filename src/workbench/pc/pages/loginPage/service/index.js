@@ -7,7 +7,8 @@ import icon3 from './images/icon3.png';
 import icon4 from './images/icon4.png';
 import dot from './images/dot.png';
 import CreateEnter from './createEnter';
-import footerPng from '../pages/images/footer.png'
+import footerPng from '../pages/images/footer.png';
+import Footer from '../footer/index.js';
 import{
   ServicePanel,
   serviceThree,
@@ -48,7 +49,7 @@ class Service extends Component {
     
     return (
         <div className={ServicePanel}>
-            <TopNav />
+            {/* <TopNav /> */}
             <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'2'} history={this.props.history}/>
             <div className="serviceOne">
                   <div className="mainContent">
@@ -122,8 +123,11 @@ class Service extends Component {
                       </div>
                   </div>
             </div>
-            <div className="mainFooter mainFooterFake">
+            {/* <div className="mainFooter mainFooterFake">
               <img src={footerPng} alt="" className="footerImg"/>
+            </div> */}
+            <div className="mainFooter">
+                <Footer />
             </div>
         </div>
     );
