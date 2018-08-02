@@ -65,11 +65,11 @@ class searchResult extends Component {
         content: [],
       },
       isShownodataClassEach: false, // 当没数据或者请求失败  渲染无数据图片
-      totalPages: 1,  // 总页数
+      totalPages: 0,  // 总页数
       // 四个参数
       keywords: '', // 关键词
       activetab: '',  // 当前选中的是哪个类型
-      activePage: 1,  // 当前是第几页
+      activePage: 0,  // 当前是第几页
       dataPerPageNum: 10, // 每页显示几条
 
       searchValue: '',
@@ -86,7 +86,6 @@ class searchResult extends Component {
     const value = nextProps.match.params ? nextProps.match.params.value : '';
     const id = nextProps.match.params ? nextProps.match.params.id : '';
     const { searchValue, searchTab } = this.state;
-    console.log(this.state)
     if (searchValue === '' && searchTab === '') return;
     if (value === searchValue && id === searchTab) return;
     this.getSearchTpyeList(value, id, 0, 10);
@@ -138,17 +137,21 @@ class searchResult extends Component {
         if (error) {
           requestError(payload);
           this.setState({
-            dataList: null,
+            dataList: {
+              content: [],
+            },
+            totalPages: 0,
             isShownodataClassEach: false
           });
           return false;
         }
+        requestSuccess();
         this.setState({
           dataList: payload,
           totalPages: payload.totalPages,
           isShownodataClassEach: !!payload.content.length,
         });
-        requestSuccess();
+
       });
     })
   }
@@ -157,7 +160,7 @@ class searchResult extends Component {
     const { activetab, searchValue } = this.state;
     let { keywords } = this.state;
     if (searchValue === keywords) return;
-    if (keywords === "") {
+    if(keywords === ""){
       keywords = " ";
     }
     this.props.history.push(`/search/${activetab}/${keywords}`);
@@ -165,7 +168,10 @@ class searchResult extends Component {
 
   // 点击tabs 分类
   TabsClick = (activetab) => {
-    const { keywords } = this.state;
+    let { keywords } = this.state;
+    if(keywords === ""){
+      keywords = " ";
+    }
     this.setState({
       activetab,
       activePage: 1,
@@ -210,7 +216,7 @@ class searchResult extends Component {
 
   // 渲染列表页面
   otherlistLi(data) {
-    if (data.content.length === 0) return null;
+    if (!data || data.content.length === 0) return null;
     return data.content.map((item, index) => (
       <li key={index}>
         <SearchItem
@@ -231,7 +237,7 @@ class searchResult extends Component {
     } = this.state;
     const Morelist = [];
     const anifalse = false;
-    if(SearchMoreList.length === 0) return null;
+    if (SearchMoreList.length === 0) return null;
     const renderItems = this.otherlistLi(dataList);
     SearchMoreList.forEach((item) => {
       Morelist.push(<TabPane
