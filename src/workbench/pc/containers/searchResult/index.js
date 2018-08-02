@@ -7,8 +7,8 @@ import FormControl from 'bee/form-control';
 import Tabs, { TabPane } from 'bee/tabs';
 import Icon from 'pub-comp/icon';
 import EnhancedPagination from 'pub-comp/enhancedPagination';
-// import SearchItem from 'diwork-business-components/dist/search/searchItem';
-import SearchItem from './searchItem';
+import SearchItem from 'diwork-business-components/dist/search/searchItem';
+// import SearchItem from './searchItem';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 
