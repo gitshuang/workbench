@@ -26,12 +26,17 @@
      margin-bottom:-5px;
  } */
  .AboutUsPanel :global(.mainFooter){
+    height: 306px;
+    width: 100%;
+    position: relative;
+ }
+ .AboutUsPanel :global(.mainFooter.mainFooterFake){
     height: 360px;
     width: 100%;
     position: relative;
     background: linear-gradient(#535353 85%, #3e3e3e 15%);
  }
- .AboutUsPanel :global(.mainFooter .footerImg){
+ .AboutUsPanel :global(.mainFooter.mainFooterFake .footerImg){
     width: 1200px;
     height: 360px;
     margin-bottom: -5px;
