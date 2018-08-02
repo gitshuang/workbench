@@ -208,13 +208,13 @@
     height: auto;
     margin-bottom:-5px;
 } */
-.ServicePanel :global(.mainFooter){
+.ServicePanel :global(.mainFooter.mainFooterFake){
     height: 360px;
     width: 100%;
     position: relative;
     background: linear-gradient(#535353 85%, #3e3e3e 15%);
  }
- .ServicePanel :global(.mainFooter .footerImg){
+ .ServicePanel :global(.mainFooter.mainFooterFake .footerImg){
     width: 1200px;
     height: 360px;
     margin-bottom: -5px;
