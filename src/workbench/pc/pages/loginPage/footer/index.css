@@ -1,6 +1,6 @@
 .FooterConPanel{
     width: 100%;
-    height:306px;
+    /* height:306px; */
     background:rgba(62,62,62,1);
     color:#fff;
     font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
@@ -104,6 +104,9 @@
     background-position: center;
     background-size:contain;
 
+}
+:global(.allIcons .diff){
+    float: left;
 }
 /*下面的描述*/
 :global(.iconItem .iconDesc){
