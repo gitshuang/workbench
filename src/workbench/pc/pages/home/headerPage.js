@@ -117,7 +117,6 @@ class HeaderPage extends Component {
     } = this.props;
     if (!allowTenants || !currentTeamConfig) return null;
     const { tenantId } = currentTeamConfig;
-    debugger
     const dom = allowTenants.length
       ?
       <DropdownButton
