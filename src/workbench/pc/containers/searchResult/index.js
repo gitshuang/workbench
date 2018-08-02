@@ -7,8 +7,8 @@ import FormControl from 'bee/form-control';
 import Tabs, { TabPane } from 'bee/tabs';
 import Icon from 'pub-comp/icon';
 import EnhancedPagination from 'pub-comp/enhancedPagination';
-// import SearchItem from 'diwork-business-components/dist/search/searchItem';
-import SearchItem from './searchItem';
+import SearchItem from 'diwork-business-components/dist/search/searchItem';
+// import SearchItem from './searchItem';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 
@@ -64,7 +64,7 @@ class searchResult extends Component {
       dataList: {
         content: [],
       },
-      isShownodataClassEach: false, // 当没数据或者请求失败  渲染无数据图片
+      isShownodataClassEach: true, // 当没数据或者请求失败  渲染无数据图片
       totalPages: 0,  // 总页数
       // 四个参数
       keywords: '', // 关键词
@@ -175,6 +175,11 @@ class searchResult extends Component {
     this.setState({
       activetab,
       activePage: 1,
+      dataList: {
+        content: [],
+      },
+      totalPages: 0,
+      isShownodataClassEach: true,
     }, () => {
       this.props.history.push(`/search/${activetab}/${keywords}`);
     });

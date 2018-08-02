@@ -55,7 +55,6 @@ function getData({ url, type, dispatch, trigger }) {
   const searchItemClass = searchItemClassMap[type];
   if (typeof searchItemClass === "undefined") {
     searchItemClassMap[type] = getFetch(url).then((text) => {
-      console.log(1)
       try {
         searchItemClassMap[type] = getResult(text, dispatch, trigger);
         return Promise.resolve(true);
@@ -63,14 +62,14 @@ function getData({ url, type, dispatch, trigger }) {
         return Promise.reject(e);
       }
     }, e => Promise.reject(e));
+  } else if (!(searchItemClass instanceof Promise)) {
+    return Promise.resolve(true);
   }
-  console.log(searchItemClassMap[type]);
   return searchItemClassMap[type];
 }
 
 function getSearchItemClass(type) {
   const searchItemClass = searchItemClassMap[type];
-  debugger
   return searchItemClass || Normal;
 }
 
