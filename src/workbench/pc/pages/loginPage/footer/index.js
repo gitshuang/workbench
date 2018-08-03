@@ -90,8 +90,8 @@ class Footer extends Component {
                 </div>
              </div>
              <div className={FooterBottom}>
-                <span className="police">京公网安备 11010802020548号</span>
-                <span className="company">用友网络科技股份有限公司 © Copyright 2017 京ICP备15057199号</span>
+                {/* <span className="police">京公网安备 11010802020548号</span> */}
+                <span className="company">用友网络科技股份有限公司 © Copyright 2017 京ICP备05007539号-24</span>
              </div>
         </div>
     );
