@@ -6,6 +6,7 @@ import{
   rightCon,
 } from './MainNav.css';
 import Logo from './logo1.png';
+import LogoSvg from './logo.svg';
 export default function MainNavPanel(props){
   function open(type){
     if(type =='service'){
@@ -18,9 +19,11 @@ export default function MainNavPanel(props){
   }
   return(
     <div className={MainNav}>
-        <div className={leftCon} onClick={()=>{open('login')}}>
-          <img src={Logo} alt="" className="companylogo"/>
+        <div className={leftCon} >
+          {/* <img src={Logo} alt="" className="companylogo"/> */}
+          <iframe src={LogoSvg} width='100px' height='66px' frameBorder='0' className="companylogoSvg" onClick={()=>{open('login')}}/>
           <span className={headerDesc}>数字化工作入口</span>
+          <div className="leftConFake" onClick={()=>{open('login')}}></div>
         </div>
         <div className={middleCon}>
           <a  className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{open('login')}}>首页</a>

@@ -3,22 +3,43 @@
     background: rgba(255,255,255,0.9);
     opacity: 0.9;
     z-index:999;
-    height: 80px;
-    line-height: 80px;
+    height: 70px;
+    line-height: 70px;
     border-bottom:1px solid #eee;
 }
 .MainNav .headerDesc{
     color: #777;
-    font-size: 18px;
-    line-height: 80px;
+    font-size: 20px;
+    line-height: 70px;
     padding-left: 14px;
     height: 100%;
     display: inline-block;
     vertical-align: top;
     cursor: pointer;
+    position: relative;
+}
+.MainNav .headerDesc:before{
+    content:'';
+    width:1px;
+    height: 40px;
+    position: absolute;
+    top: 15px;
+    left: 0px;
+    background: #d0d0d0;
 }
 .MainNav .leftCon{
     width: 25%;
+    padding-left: 30px;
+    position: relative;
+}
+.MainNav .leftCon :global(.leftConFake){
+    width: 100%;
+    height: 70px;
+    background: transparent;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
 }
 .leftCon :global(img.companylogo) {
     height: 46px;
@@ -26,6 +47,13 @@
     margin-top: 20px;
     margin-left: 38px;
     cursor: pointer;
+}
+.leftCon :global(.companylogoSvg){
+    outline: none;
+    border:none;
+    margin-right: 10px;
+    margin-top: 0;
+
 }
 .MainNav .middleCon{
     width: 50%;
@@ -36,7 +64,6 @@
     font-size: 18px;
     font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color: rgba(51,51,51,1);
-    display: inline-block;
     text-align: center;
     cursor: pointer;
     text-decoration: none;
