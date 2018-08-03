@@ -10,20 +10,20 @@ import LogoSvg from './logo.svg';
 export default function MainNavPanel(props){
   function open(type){
     if(type =='service'){
-      props.history.push('/service')
+      props.activeIndex!=='2'&&  props.history.push('/service')
     }else if(type == 'aboutus'){
-      props.history.push('/aboutus')
+      props.activeIndex!=='4'&&props.history.push('/aboutus')
     }else if(type == 'login'){
-      props.history.push('/')
+      props.activeIndex!=='1' &&props.history.push('/')
     }
   }
   return(
     <div className={MainNav}>
-        <div className={leftCon} >
+        <div className={leftCon} onClick={()=>{open('login')}} >
           {/* <img src={Logo} alt="" className="companylogo"/> */}
-          <iframe src={LogoSvg} width='100px' height='66px' frameBorder='0' className="companylogoSvg" onClick={()=>{open('login')}}/>
+          <img src={LogoSvg} className="companylogoSvg"/>
           <span className={headerDesc}>数字化工作入口</span>
-          <div className="leftConFake" onClick={()=>{open('login')}}></div>
+          {/* <div className="leftConFake" onClick={()=>{open('login')}}></div> */}
         </div>
         <div className={middleCon}>
           <a  className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{open('login')}}>首页</a>

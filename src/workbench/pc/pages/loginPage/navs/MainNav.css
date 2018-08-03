@@ -31,6 +31,8 @@
     width: 25%;
     padding-left: 30px;
     position: relative;
+    cursor: pointer;
+
 }
 .MainNav .leftCon :global(.leftConFake){
     width: 100%;
@@ -46,9 +48,10 @@
     width: 114px;
     margin-top: 20px;
     margin-left: 38px;
-    cursor: pointer;
 }
 .leftCon :global(.companylogoSvg){
+    width:100px;
+    height: 60px;
     outline: none;
     border:none;
     margin-right: 10px;
