@@ -64,7 +64,7 @@ class Service extends Component {
                         <img src={icon1} alt="" className="icon"/>
                         <div className="con">
                              <span className="title">免费咨询</span>
-                             <span className="subcon">专家团队，根据企业需求，提供产品方</span>
+                             <span className="subcon">专家团队，根据企业需求，提供产品方案</span>
                         </div>
                       </div>
                       <div className="rightTop twoItem">
@@ -85,14 +85,14 @@ class Service extends Component {
                         <img src={icon4} alt="" className="icon"/>
                         <div className="con">
                              <span className="title">上门演示</span>
-                             <span className="subcon">专家团队，根据企业需求，提供产品方</span>
+                             <span className="subcon">遍布全国的专业售前团队，整装待命</span>
                         </div>
                       </div>
                   </div>
             </div>
             <div className={serviceThree}>
                   <div className="mainContent">
-                      <span className="title">流程服务</span>
+                      <span className="title">服务流程</span>
                       <div className="processCon">
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
