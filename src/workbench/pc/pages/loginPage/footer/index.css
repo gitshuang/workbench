@@ -142,7 +142,7 @@ display: block;
     width: 1200px;
     margin: 0 auto;  
 }
-.FooterBottom span{
+/* .FooterBottom span{
     display: inline-block;
     width: 50%;
     line-height: 48px;
@@ -151,8 +151,13 @@ display: block;
 }
 .FooterBottom :global(span.police){
     text-align: left;
-}
+} */
 .FooterBottom :global(span.company){
-    text-align: right
+    display: inline-block;
+    width: 100%;
+    line-height: 48px;
+    font-size:14px;
+    color:rgba(204,204,204,1);
+    text-align: center;
 
 }
