@@ -53,7 +53,7 @@
     background-image: url(./icon.png);
     transition:all 0.3s;
 }
-:global(.allIcons .iconItem .iconInner:hover){
+:global(.allIcons .iconItem:hover .iconInner){
     filter: opacity(1);
 }
 
@@ -142,7 +142,7 @@ display: block;
     width: 1200px;
     margin: 0 auto;  
 }
-.FooterBottom span{
+/* .FooterBottom span{
     display: inline-block;
     width: 50%;
     line-height: 48px;
@@ -151,8 +151,13 @@ display: block;
 }
 .FooterBottom :global(span.police){
     text-align: left;
-}
+} */
 .FooterBottom :global(span.company){
-    text-align: right
+    display: inline-block;
+    width: 100%;
+    line-height: 48px;
+    font-size:14px;
+    color:rgba(204,204,204,1);
+    text-align: center;
 
 }
