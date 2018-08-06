@@ -115,8 +115,7 @@ class HeaderPage extends Component {
         currentTeamConfig,
       },
     } = this.props;
-    if (!allowTenants || !currentTeamConfig) return null;
-    const { tenantId } = currentTeamConfig;
+    const tenantId = currentTeamConfig && currentTeamConfig.tenantId;
     const dom = allowTenants.length
       ?
       <DropdownButton
