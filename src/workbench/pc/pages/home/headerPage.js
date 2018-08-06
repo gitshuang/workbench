@@ -116,7 +116,7 @@ class HeaderPage extends Component {
       },
     } = this.props;
     const tenantId = currentTeamConfig && currentTeamConfig.tenantId;
-    const dom = allowTenants.length
+    const dom = allowTenants && allowTenants.length
       ?
       <DropdownButton
         getPopupContainer={() => document.getElementById('home_header')}
