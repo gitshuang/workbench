@@ -46,7 +46,11 @@ class HeaderContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      quickText: {
+        title: '快捷应用',
+        all: '全部应用',
+        more: '更多应用'
+      }
     };
   }
 
@@ -99,7 +103,7 @@ class HeaderContainer extends Component {
       serviceList
     } = this.props;
     const rightArray = Children.toArray(rightContent);
-    const { openStatus, portalUrl } = portalInfo;
+    const { portalUrl } = portalInfo;
     let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
       <SearchContainer />,
@@ -108,7 +112,8 @@ class HeaderContainer extends Component {
           <Icon title="我的门户" type="home" style={{ color }} />
         </a>
       </div>,
-      <QuickApplication 
+      <QuickApplication
+        quickText={this.state.quickText}
         serviceList={serviceList} 
         openAllFn={this.openAllFn} 
         openServiceFn={this.openServiceFn} 
