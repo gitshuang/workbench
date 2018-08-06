@@ -201,7 +201,7 @@ class HeaderPage extends Component {
           <span style={titleStyle}>{title || '首页'}</span>
         </Header>
         {
-          list.length > 1 ? (
+          list.length >= 1 ? (
             <Navbar
               items={list}
               offset={-55}
