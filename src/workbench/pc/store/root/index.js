@@ -157,22 +157,20 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    const info = window.diworkContext();
+    const info = {};
     const { tenantid, userid } = info;
     // 避免localhost环境下一直刷新
     // if (tenantid == "tenantid" && userid == "userid" ) return false;
     if (!payload.tenantId || !tenantid) {
-      return false;
+      return state;
     }
     if (payload.tenantId !== tenantid || payload.userId !== userid) {
       window.location.reload();
     }
-
     return{
       ...state,
       isLogout: payload
     }
-
   },
   [getPortal]: (state, { payload, error }) => {
     if (error) {
