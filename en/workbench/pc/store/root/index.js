@@ -48,8 +48,6 @@ const {
   getServiceList,
   getMessage,
   popMessage,
-  getLatestAccessList,
-  getPromotionServiceList,
   changeMessageType,
   showIm,
   hideIm,
@@ -68,8 +66,6 @@ const defaultState = {
   messageType: false,
   messageList: [],
   messageShowNum: 0,
-  latestAccessList: [],
-  promotionServiceList: [],
   imShowed: false,
   isLogout: false,
   portalInfo: {
@@ -92,8 +88,6 @@ const createReducer = key => (state, { payload, error }) => {
   };
 };
 const reducer = handleActions({
-  [getLatestAccessList]: createReducer('latestAccessList'),
-  [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
     createLoadingFunc({ text: 'loading data...' });

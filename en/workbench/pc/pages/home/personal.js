@@ -20,6 +20,7 @@ const { setCurrent, getAllEnable, getCurrent } = rootActions;
 @connect(
   mapStateToProps(
     'requestDisplay',
+    'userInfo',
     {
       key: 'exitModal',
       value: (home, ownProps, root) => root.teamconfig.exitModal,
@@ -41,8 +42,8 @@ class Personals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: {},
       currType: 0,
+      userInfo: {},
       personalText: {
         name: 'Enterprise',
         edit: '首页编辑_en',
@@ -81,7 +82,22 @@ class Personals extends Component {
           name: 'Yonyou Cloud Official Website',
         },
       ],
-      TeamData: {},
+      TeamData: [
+        {
+          id: 'allowExit',
+          name: 'Simplified Chinese 1',
+          value: '3',
+          serverApi: 'enter/leave',
+          msg: 'Traditional Chinese 3',
+        },
+        {
+          id: 'allowExit',
+          name: 'Enterprise',
+          value: '3',
+          serverApi: 'team/leave',
+          msg: 'Quit from Enterprise',
+        },
+      ],
       language: {
         show: true,
         defaultValue: 'zh',
@@ -89,7 +105,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: 'Simplified Chinese 1'
+            context: 'After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.'
           },
           {
             value: 'en',
@@ -97,7 +113,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: 'Traditional Chinese 3'
+            context: 'Team'
           },
         ]
       }
@@ -112,17 +128,15 @@ class Personals extends Component {
       }
       this.setState({
         userInfo: payload,
+      },()=>{
+        this.getCompanyType();
       });
+
     });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
     this.getDefaultLang();
-  }
-
-  componentDidMount() {
-    // 获取当前是企业还是团队
-    this.getCompanyType();
   }
 
   getAllEnableFunc = () => {
@@ -171,33 +185,13 @@ class Personals extends Component {
         allowTenants,
       },
     } = this.state;
-    let { TeamData, personalText, } = this.state;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
-    if (!curTenant) return;
-    const currType = curTenant.type;
-    if (currType == 0) {
-      personalText.name = 'Enterprise';
-      TeamData = {
-        id: 'allowExit',
-        name: 'Quit from Enterprise',
-        value: '3',
-        serverApi: 'enter/leave',
-        msg: 'After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
-      }
-    } else {
-      personalText.name = 'Team';
-      TeamData = {
-        id: 'allowExit',
-        name: 'Quit from Team',
-        value: '3',
-        serverApi: 'team/leave',
-        msg: 'After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
-      };
+    let currType = 1;
+    if (curTenant && curTenant.type == 0) {
+      currType = 0;
     }
     this.setState({
-      currType,
-      personalText,
-      TeamData,
+      currType
     });
   }
 
@@ -232,7 +226,11 @@ class Personals extends Component {
       requestDisplay,
       exitModal,
     } = this.props;
-    const { userInfo, language, hrefs, TeamData, personalText, currType } = this.state;
+    const { userInfo, language, hrefs, TeamData, currType } = this.state;
+    let { personalText } = this.state;
+
+    const currData = currType == 0 ? TeamData[0] : TeamData[1];
+    personalText.name = currType == 0 ? 'Quit from Team' : 'After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.';
 
     return (
       <div>
@@ -252,7 +250,7 @@ class Personals extends Component {
         {
           exitModal ?
             <TeamExitModal
-              data={TeamData}
+              data={currData}
               isManage={userInfo.admin}
               userId={userInfo.userId}
               close

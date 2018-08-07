@@ -20,6 +20,7 @@ const { setCurrent, getAllEnable, getCurrent } = rootActions;
 @connect(
   mapStateToProps(
     'requestDisplay',
+    'userInfo',
     {
       key: 'exitModal',
       value: (home, ownProps, root) => root.teamconfig.exitModal,
@@ -41,8 +42,8 @@ class Personals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: {},
       currType: 0,
+      userInfo: {},
       personalText: {
         name: '$i18n{personal.js0}$i18n-end',
         edit: '$i18n{personal.js1}$i18n-end',
@@ -81,7 +82,22 @@ class Personals extends Component {
           name: '$i18n{personal.js14}$i18n-end',
         },
       ],
-      TeamData: {},
+      TeamData: [
+        {
+          id: 'allowExit',
+          name: '$i18n{personal.js15}$i18n-end',
+          value: '3',
+          serverApi: 'enter/leave',
+          msg: '$i18n{personal.js16}$i18n-end',
+        },
+        {
+          id: 'allowExit',
+          name: '$i18n{personal.js17}$i18n-end',
+          value: '3',
+          serverApi: 'team/leave',
+          msg: '$i18n{personal.js18}$i18n-end',
+        },
+      ],
       language: {
         show: true,
         defaultValue: 'zh',
@@ -89,7 +105,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: '$i18n{personal.js15}$i18n-end'
+            context: '$i18n{personal.js19}$i18n-end'
           },
           {
             value: 'en',
@@ -97,7 +113,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: '$i18n{personal.js16}$i18n-end'
+            context: '$i18n{personal.js20}$i18n-end'
           },
         ]
       }
@@ -112,17 +128,15 @@ class Personals extends Component {
       }
       this.setState({
         userInfo: payload,
+      },()=>{
+        this.getCompanyType();
       });
+
     });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
     this.getDefaultLang();
-  }
-
-  componentDidMount() {
-    // 获取当前是企业还是团队
-    this.getCompanyType();
   }
 
   getAllEnableFunc = () => {
@@ -171,33 +185,13 @@ class Personals extends Component {
         allowTenants,
       },
     } = this.state;
-    let { TeamData, personalText, } = this.state;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
-    if (!curTenant) return;
-    const currType = curTenant.type;
-    if (currType == 0) {
-      personalText.name = '$i18n{personal.js17}$i18n-end';
-      TeamData = {
-        id: 'allowExit',
-        name: '$i18n{personal.js18}$i18n-end',
-        value: '3',
-        serverApi: 'enter/leave',
-        msg: '$i18n{personal.js19}$i18n-end',
-      }
-    } else {
-      personalText.name = '$i18n{personal.js20}$i18n-end';
-      TeamData = {
-        id: 'allowExit',
-        name: '$i18n{personal.js21}$i18n-end',
-        value: '3',
-        serverApi: 'team/leave',
-        msg: '$i18n{personal.js22}$i18n-end',
-      };
+    let currType = 1;
+    if (curTenant && curTenant.type == 0) {
+      currType = 0;
     }
     this.setState({
-      currType,
-      personalText,
-      TeamData,
+      currType
     });
   }
 
@@ -232,7 +226,11 @@ class Personals extends Component {
       requestDisplay,
       exitModal,
     } = this.props;
-    const { userInfo, language, hrefs, TeamData, personalText, currType } = this.state;
+    const { userInfo, language, hrefs, TeamData, currType } = this.state;
+    let { personalText } = this.state;
+
+    const currData = currType == 0 ? TeamData[0] : TeamData[1];
+    personalText.name = currType == 0 ? '$i18n{personal.js21}$i18n-end' : '$i18n{personal.js22}$i18n-end';
 
     return (
       <div>
@@ -252,7 +250,7 @@ class Personals extends Component {
         {
           exitModal ?
             <TeamExitModal
-              data={TeamData}
+              data={currData}
               isManage={userInfo.admin}
               userId={userInfo.userId}
               close
