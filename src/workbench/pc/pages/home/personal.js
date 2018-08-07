@@ -128,21 +128,15 @@ class Personals extends Component {
       }
       this.setState({
         userInfo: payload,
+      },()=>{
+        this.getCompanyType();
       });
+
     });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
     this.getDefaultLang();
-  }
-
-  componentDidMount() {
-    // 获取当前是企业还是团队
-    // this.getCompanyType();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // if (nextProps.userInfo)
   }
 
   getAllEnableFunc = () => {
@@ -196,7 +190,9 @@ class Personals extends Component {
     if (curTenant && curTenant.type == 0) {
       currType = 0;
     }
-    return currType;
+    this.setState({
+      currType
+    });
   }
 
   closeRequestDisplay = () => {
@@ -230,18 +226,11 @@ class Personals extends Component {
       requestDisplay,
       exitModal,
     } = this.props;
-    const { userInfo, language, hrefs, TeamData, } = this.state;
+    const { userInfo, language, hrefs, TeamData, currType } = this.state;
     let { personalText } = this.state;
-    let CurrData = {};
 
-    const currType = this.getCompanyType();
-    if(currType === 0){
-      CurrData = TeamData[0];
-      personalText.name = '企业';
-    }else {
-      CurrData = TeamData[1];
-      personalText.name = '团队';
-    }
+    const currData = currType == 0 ? TeamData[0] : TeamData[1];
+    personalText.name = currType == 0 ? '企业' : '团队';
 
     return (
       <div>
@@ -261,7 +250,7 @@ class Personals extends Component {
         {
           exitModal ?
             <TeamExitModal
-              data={CurrData}
+              data={currData}
               isManage={userInfo.admin}
               userId={userInfo.userId}
               close
