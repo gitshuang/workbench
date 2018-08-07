@@ -11,30 +11,95 @@ import {
 import homeActions from 'store/root/home/actions';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-const {openFolder} = homeActions;
+const { openFolder } = homeActions;
+import workActions from 'store/root/work/actions';
+import rootActions from 'store/root/actions';
+
+const {
+  getProductInfo
+} = workActions;
+
+const { requestStart, requestSuccess, requestError } = rootActions;
 
 @withRouter
 @connect(
   mapStateToProps(),
   {
     openFolder,
+    requestStart,
+    requestSuccess,
+    requestError,
+    getProductInfo
   }
 )
-class HomeWidgeList extends Component{
-	render(){
+class HomeWidgeList extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      blank: false,
+      lastStyle: {
+        height: window.innerHeight
+      },
+    };
+  }
+
+  componentDidMount(){
+    const { lastW } = this.refs;
+    // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100 
+    if( lastW && (lastW.offsetHeight > window.innerHeight)){
+      this.setState({
+        lastStyle:{
+          height: lastW.offsetHeight + 100
+        }
+      });
+    }
+  }
+
+  getProductInfo = (code, type) => {
+    const {
+      getProductInfo,
+      requestStart,
+      requestError,
+      requestSuccess,
+      history,
+    } = this.props;
+    requestStart();
+    getProductInfo(code, type).then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+      } else {
+        const {
+          curService: {
+            serviceCode,
+            url
+          },
+          curMenuBar: {
+            workspaceStyle
+          }
+        } = payload;
+        if (workspaceStyle === '_blank') {
+          window.open(url)
+        } else {
+          history.replace(`/${type}/${code}/${serviceCode}`);
+        }
+      }
+      requestSuccess();
+    });
+  }
+
+  render() {
     const {
       data: {
         widgetName: name,
-        widgetId: id,
-        children,
-        type,
+        children
       },
       noTitle,
       openFolder,
-      history,
       style,
       groupMeta,
-      listMeta
+      listMeta,
+      lastIndex,
     } = this.props;
     // 新增元数据  控制groupTitle 样式
     const titleStyle = groupMeta && groupMeta.titleStyle && JSON.parse(groupMeta.titleStyle);
@@ -55,17 +120,17 @@ class HomeWidgeList extends Component{
         props.clickHandler = () => {
           openFolder(child);
         }
-      } else if (type === 3 && !jsurl){
-        let _path = serviceType == "2"?`/app/${serviceCode}`:`/service/${serviceCode}`;
+      } else if (type === 3 && !jsurl) {
+        let typeVal = serviceType === 2 ? 'app' : 'service';
         props.clickHandler = () => {
-          history.push(_path);
+          this.getProductInfo(serviceCode, typeVal)
         }
       }
       return (
-        <Widget { ...props } listMeta={listMeta}  viewport={this.props.viewport} loadOk = {this.props.loadOk}/>
+        <Widget {...props} listMeta={listMeta} viewport={this.props.viewport} loadOk={this.props.loadOk} />
       );
     })
-		return(
+    return (
       <div className={item} style={style} >
         {
           noTitle ? null : (
@@ -74,12 +139,21 @@ class HomeWidgeList extends Component{
             </div>
           )
         }
-        <div className={WidgetCont}>
-          <ul className={WidgetList}>{list}</ul>
-        </div>
+        {
+          lastIndex 
+          ? 
+          <div className={WidgetCont} style={this.state.lastStyle}>
+            <ul className={WidgetList} ref="lastW">{list}</ul>
+          </div> 
+          : 
+          <div className={WidgetCont}>
+            <ul className={WidgetList}>{list}</ul>
+          </div>
+        }
+
       </div>
     );
-	}
+  }
 }
 
 export default HomeWidgeList;

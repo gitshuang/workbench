@@ -1,27 +1,30 @@
 {"key":"index.js0","value":"Expired"}
-{"key":"index.js1","value":"noDictionnaryFlag"}
+{"key":"index.js1","value":"还有_en"}
 {"key":"index.js2","value":"days before expiration"}
-{"key":"index.js3","value":"Mobile"}
-{"key":"index.js4","value":"Client"}
-{"key":"index.js5","value":"Add App"}
-{"key":"index.js6","value":"Expiration Time:"}
-{"key":"index.js7","value":"Renewal"}
-{"key":"index.js8","value":"Name, Mobile No., Email"}
-{"key":"index.js9","value":"Search"}
-{"key":"index.js10","value":"Only display administrator"}
-{"key":"index.js11","value":"Invite Member"}
-{"key":"index.js12","value":"Current Person Qty"}
-{"key":"index.js13","value":"Member Permission"}
-{"key":"index.js14","value":"Administrator"}
-{"key":"index.js15","value":"Member"}
-{"key":"index.js16","value":"Remove Member"}
-{"key":"index.js17","value":"Upgrade to Enterprise"}
-{"key":"index.js18","value":"Related Operations"}
-{"key":"index.js19","value":"Dissolve Team"}
-{"key":"index.js20","value":"After a team is dissolved, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up."}
-{"key":"index.js21","value":"Quit from Team"}
-{"key":"index.js22","value":"After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up."}
-{"key":"index.js23","value":"Team"}
-{"key":"index.js24","value":"Basic Settings"}
-{"key":"index.js25","value":"Team App"}
-{"key":"index.js26","value":"Team Member"}
+{"key":"index.js3","value":"端_en"}
+{"key":"index.js4","value":"Mobile"}
+{"key":"index.js5","value":"Client"}
+{"key":"index.js6","value":"Add App"}
+{"key":"index.js7","value":"Expiration Time:"}
+{"key":"index.js8","value":"Renewal"}
+{"key":"index.js9","value":"Items"}
+{"key":"index.js10","value":"Page"}
+{"key":"index.js11","value":"Name, Mobile No., Email"}
+{"key":"index.js12","value":"Search"}
+{"key":"index.js13","value":"Only display administrator"}
+{"key":"index.js14","value":"Invite Member"}
+{"key":"index.js15","value":"当前人_en"}
+{"key":"index.js16","value":"Member Permission"}
+{"key":"index.js17","value":"Administrator"}
+{"key":"index.js18","value":"Member"}
+{"key":"index.js19","value":"Remove Member"}
+{"key":"index.js20","value":"Upgrade to Enterprise"}
+{"key":"index.js21","value":"Related Operations"}
+{"key":"index.js22","value":"Team"}
+{"key":"index.js23","value":"Dissolve Team"}
+{"key":"index.js24","value":"After a team is dissolved, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up."}
+{"key":"index.js25","value":"Quit from Team"}
+{"key":"index.js26","value":"After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up."}
+{"key":"index.js27","value":"Basic Settings"}
+{"key":"index.js28","value":"Team App"}
+{"key":"index.js29","value":"Team Member"}

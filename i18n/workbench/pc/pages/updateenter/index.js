@@ -68,6 +68,10 @@ class Updateenter extends Component {
     });
   }
 
+  goHome = () => {
+    this.props.history.replace('');
+  }
+
   goBack = () => {
     this.props.history.goBack();
   }
@@ -76,19 +80,17 @@ class Updateenter extends Component {
     const { enterData } = this.state;
     return (
       <div>
-        <div style={{position:"fixed",top:0,left:0,width:"100%",zIndex:"9999"}}>
-          <div className="um-header" style={{ background: 'white' }}>
-            <Header onLeftClick={this.goBack} iconName="home" >
-              <div>
-                <span>$i18n{index.js0}$i18n-end</span>
-              </div>
-            </Header>
-          </div>
-          <div className={appBreadcrumb}>
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName="computer" >
+            <div>
+              <span>$i18n{index.js0}$i18n-end</span>
+            </div>
+          </Header>
+          <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '$i18n{index.js1}$i18n-end' }]} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${pageEnterprise}`}>
+        <div className={`${pageEnterprise} content`}>
           <div className={enterTitle} >$i18n{index.js2}$i18n-end</div>
           <hr className={hr} />
           <div className={enterCont} >

@@ -61,9 +61,12 @@ class Account extends Component {
   }
 
   goBack = (i, backVal) => {
-    this.props.popBrm({ index: i, url: window.location.href });
-    if (backVal > 0) {
+    if (backVal > 1) {
       this.props.history.go(-backVal);
+      this.props.popBrm({ index: -backVal });
+    }else{
+      this.props.popBrm({ index: i });
+      this.props.history.goBack();
     }
   }
 
@@ -74,13 +77,20 @@ class Account extends Component {
     const brmLastLen = brmVal.length > 0 && brmVal[brmVal.length - 1].length;
     const appId = this.props.match.params.id;
     return (
-      <ApplicationWrap name={brmVal.length > 0 ? brmLastVal[brmLastLen - 1].name : ''} brms={brmVal.length > 1 ? brmVal[brmVal.length - 2] : [{ name: '' }]} goBack={this.goBack}>
+      <ApplicationWrap 
+        name={brmVal.length > 0 ? brmLastVal[brmLastLen - 1].name : ''} 
+        brms={brmVal.length > 1 ? brmVal[brmVal.length - 2] : [{ name: '' }]} 
+        goBack={this.goBack}
+      >
         <div className={`${bg} um-content um-vbox`}>
           {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
           {
-            appId ? (<IFrame title="$i18n{index.js3}$i18n-end}" url={`/diwork-market/appMarket#/application/${appId}`} />) : (<IFrame title="应用市场" url="/diwork-market/appMarket" />)
+            appId
+            ? 
+            <IFrame title="$i18n{index.js3}$i18n-end" url={`/diwork-market/appMarket#/application/${appId}`} />
+            :
+            <IFrame title="$i18n{index.js4}$i18n-end" url="/diwork-market/appMarket" />
           }
-          {/* <IFrame title="$i18n{index.js4}$i18n-end" url="/diwork-market/appMarket" /> */}
         </div>
       </ApplicationWrap>
     );

@@ -6,7 +6,8 @@ import Icon from 'pub-comp/icon';
 import Menu, { Item as MenuItem } from 'bee/menus';
 import {
   dropdownButtonCont, labelCont, btnUpward, btnPullDown, iconStyle, menuStyle,
-  createEnt, menuItem, itemUl, itemLi, liTitle, liRight,fnbox
+  createEnt, menuItem, itemUl, itemLi, liTitle, liRight,fnbox,
+  currLi
 } from './style.css';
 
 @withRouter
@@ -70,6 +71,7 @@ class DropdownButton extends Component {
     });
   }
 
+  // 创建团队/ 企业
   enterOnclick = () => {
     const {
       history,
@@ -86,24 +88,36 @@ class DropdownButton extends Component {
 
   render() {
     const {
-      label, dataItem, type, marginLeft, lastIem, openMenu,
+      label, dataItem, type, marginLeft, lastIem, openMenu, tenantId
     } = this.props;
     // const {label } = this.state;
     const item = [];
     if (dataItem.length !== 0) {
       dataItem.forEach((da) => {
-        item.push(<div key={da.name} className={itemLi} onClick={() => { this.handleSelect(da); }} onKeyDown={() => { this.handleSelect(da); }} role="presentation"><div className={liTitle} title={da.value}>{da.value}</div><div className={liRight}>{da.type === 1 ? '$i18n{index.js0}$i18n-end' : '$i18n{index.js1}$i18n-end'}</div></div>);
+        item.push(
+          <div 
+            key={da.name} 
+            className={da.name === tenantId ? `${currLi} ${itemLi}` : itemLi} 
+            onClick={() => { this.handleSelect(da); }} 
+            onKeyDown={() => { this.handleSelect(da); }} 
+            role="presentation"
+          >
+            <div className={liTitle} title={da.value}>{da.value}</div>
+            <div className={liRight}>{da.type === 1 ? '$i18n{index.js0}$i18n-end' : '$i18n{index.js1}$i18n-end'}</div>
+          </div>
+        );
       });
     } else {
       item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >$i18n{index.js2}$i18n-end</div></div>);
     }
     let marginLeft2 = -148;
     if (type && type === 'home') {
-      marginLeft2 = marginLeft || -192;
+      marginLeft2 = marginLeft || 7;
     }
     // onSelect={(e)=>{this.handleSelect(e,fun)}}
     const menus = (
-      <Menu className={menuStyle} style={{ marginLeft: marginLeft2, marginTop: -1 }}>
+      // <Menu className={menuStyle} style={{ marginLeft: marginLeft2, marginTop: -1 }}>
+      <Menu className={menuStyle} >
         <MenuItem className={menuItem} >
           <div className={`${itemUl} open_item`}>{item}</div>
           {
@@ -136,24 +150,26 @@ class DropdownButton extends Component {
 
     const arrard = this.state.visible ? 'upward' : 'pull-down';
     return (
-      <div className={dropdownButtonCont} >
-        <div className={`${labelCont} home_title`}>
-          <span>{label}</span>
+      //调整布局，使其可以点击下拉面板即可展开和缩放
+      <Dropdown
+        overlayClassName="_btn_down"
+        getPopupContainer={this.props.getPopupContainer}
+        trigger={['click']}
+        overlay={menus}
+        animation="slide-up"
+        onClick={openMenu}
+        onVisibleChange={this.onVisibleChange}
+      >
+        <div className={dropdownButtonCont}>
+          <div className={`${labelCont} home_title`}>
+            <span>{label}</span>
+          </div>
+          <div id="_dropdown_popcontainer"
+               className={`${this.state.visible ? btnUpward : btnPullDown} home_title_down `}>
+            <div><Icon type={arrard} className={iconStyle}/></div>
+          </div>
         </div>
-        <div id="_dropdown_popcontainer" className={`${this.state.visible ? btnUpward : btnPullDown} home_title_down `}>
-          <Dropdown
-            overlayClassName="_btn_down"
-            getPopupContainer={this.props.getPopupContainer}
-            trigger={['click']}
-            overlay={menus}
-            animation="slide-up"
-            onClick={openMenu}
-            onVisibleChange={this.onVisibleChange}
-          >
-            <div><Icon type={arrard} className={iconStyle} /></div>
-          </Dropdown>
-        </div>
-      </div>
+      </Dropdown>
     );
   }
 }

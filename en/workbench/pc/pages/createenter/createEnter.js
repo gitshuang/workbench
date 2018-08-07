@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
 
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
@@ -23,38 +24,10 @@ import {
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
 const { Option } = Select;
-/*
-class Nature extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: props.defaultValue
-    }
-  }
-  onChange = (value) => {
-    this.setState({
-      value
-    });
-    this.props.onChange(value);
-  }
-  render() {
-    return (
-      <Radio.RadioGroup
-        selectedValue={this.state.value}
-        onChange={this.onChange} >
-        <Radio value="LegalPerson" >Incorporated Enterprise</Radio>
-        <Radio value="IndividualPerson" >Individual Business</Radio>
-        <Radio value="ResponsePerson" >Individual Enterprise</Radio>
-        <Radio value="Other" >Other</Radio>
-      </Radio.RadioGroup>
-    );
-  }
-}
-*/
 
 @withRouter
 @connect(
-  () => ({}),
+  mapStateToProps(),
   {
     requestStart,
     requestSuccess,
@@ -96,7 +69,7 @@ class CreateEnter extends Component {
       value: 'A',
       verify: true,
     };
-    this.address = '$i18n{Beijing}|北京|Dongcheng District|';
+    this.address = '北京|北京|东城区|_en';
     //progressbar
     this.loadingFunc = null;
     this.successFunc = null;
@@ -283,7 +256,7 @@ class CreateEnter extends Component {
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
               <Option value="F">1001－2000</Option>
-              <Option value="G">2000人</Option>
+              <Option value="G">2000人_en</Option>
             </Select>
           </FormItem>
 
@@ -308,7 +281,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <FormControl name="tenantAddress" placeholder="60 characters at most" />
+            <FormControl name="tenantAddress" placeholder="No longer than 60 characters" />
           </FormItem>
 
           <div className={lxrHr}>

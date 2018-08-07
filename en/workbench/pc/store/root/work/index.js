@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
 import actions from './actions';
+import func from '../../../utils/utils'
 
 const {
   setExpandedSidebar,
@@ -21,6 +22,8 @@ const {
   setTabs,
   changeService,
   setProductInfo,
+  popUrl,
+  resetHistory
 } = actions;
 
 const defaultState = {
@@ -33,6 +36,7 @@ const defaultState = {
     hasRelationFunc: true,
     relationUsers: [],
     relationServices: [],
+    ext1: ''
   },
   // 页面布局类型
   type: 1,
@@ -138,8 +142,16 @@ const reducer = handleActions({
     menuPath.map(item =>
       newBrm.push({ name: item.menuItemName, url: item.service && item.service.url }));
     const brm = state.brm && state.brm.length ? [...state.brm, newBrm] : [newBrm];
-    if (backUrl[backUrl.length - 1] !== serviceCode) {
-      backUrl.push(serviceCode);
+    // if (backUrl[backUrl.length - 1] !== serviceCode) {
+    //   backUrl.push(serviceCode);
+    // }
+    if (backUrl.length > 0) {
+      const lastHashParam = backUrl[backUrl.length - 1];
+      if (lastHashParam && lastHashParam.subCode && lastHashParam.subCode !== serviceCode) {
+        func.setBackUrl(backUrl);
+      }
+    } else {
+      func.setBackUrl(backUrl);
     }
     if (curTab) {
       return {
@@ -152,6 +164,7 @@ const reducer = handleActions({
           serviceCode,
           serviceId,
           url: curTab.location,
+          ext1: state.current.ext1
         },
         brm,
         backUrl
@@ -172,6 +185,7 @@ const reducer = handleActions({
         serviceCode,
         serviceId,
         url: location,
+        ext1: state.current.ext1
       },
       brm,
       backUrl,
@@ -233,6 +247,7 @@ const reducer = handleActions({
       hasWidget,
       relationServices,
       relationUsers,
+      ext1
     } = serviceInfo;
     const {
       current,
@@ -251,6 +266,7 @@ const reducer = handleActions({
         hasRelationFunc,
         relationUsers,
         relationServices,
+        ext1
       },
     };
   },
@@ -262,6 +278,7 @@ const reducer = handleActions({
         menuBarName: domainName,
         hasTopNav: widthBrm,
         menuItems: menus,
+        workspaceStyle
       },
       curService: {
         hasWidget: pinType,
@@ -273,6 +290,9 @@ const reducer = handleActions({
     }
     if (hasTab) {
       type = 3;
+    }
+    if (workspaceStyle && workspaceStyle === 'acc') {
+      type = 4;
     }
     return {
       ...state,
@@ -301,6 +321,30 @@ const reducer = handleActions({
     pinDisplay: false,
   }),
   [returnDefaultState]: () => defaultState,
+  [popUrl]: (state, { error }) => {
+    if (error) {
+      return state;
+    }
+    const backUrl = state.backUrl;
+    backUrl.pop();
+    return {
+      ...state,
+      backUrl,
+    };
+  },
+  [resetHistory]: (state, {error}) => {
+    if (error) {
+      return state;
+    }
+    const backUrl = state.backUrl;
+    while (backUrl && backUrl.length > 0) {
+      backUrl.pop();
+    }
+    return {
+      ...state,
+      backUrl
+    };
+  }
 }, defaultState);
 
 export default reducer;

@@ -15,6 +15,7 @@ import Company from 'assets/image/wgt/company.png';
 
 @withRouter
 class EstablishContent extends Component {
+  
   openTeam = () => {
     const { history } = this.props;
     history.push('/createteam/home');
@@ -26,12 +27,12 @@ class EstablishContent extends Component {
   }
 
   render() {
-    const { userInfo,type } = this.props;
+    const { type } = this.props;
     let titleCont = null;
     if(type && type == "init"){
       titleCont = (<div>
         <h5>Welcome to YouZone</h5>
-        <p className={desc}>Create your team or enterprise, and invite your friends to experience now./You can also contact your friends and ask them to invite you to join in their teams or enterprises.</p>
+        <p className={desc}>创建您的团队或企业，邀请好友一起体验吧。您也可以联系好友邀请您加入他/她的团队或企业。_en</p>
       </div>)
     }
 
@@ -45,10 +46,10 @@ class EstablishContent extends Component {
             </div>
             <h6>Create a team for free</h6>
             <div className={content}>
-              <p>I'm a team manager,<br />&nbsp;&nbsp;&nbsp;and I need the authorization to refresh my department or project group.</p>
+              <p>I'm a team manager,<br />and I need the authorization to refresh my department or project group.</p>
               <p>Key Features:</p>
               <ul className="clearfix">
-                <li>Team instant communication tool with rich functionsIM）</li>
+                <li>Team instant communication tool with rich functionsIM)</li>
                 <li>Xiaoyou, your intelligent virtual personal assistant</li>
                 <li>Context-aware schedule center</li>
                 <li>Empowerment-style project collaboration tools</li>
@@ -67,7 +68,7 @@ class EstablishContent extends Component {
             </div>
             <h6>Create an enterprise for free</h6>
             <div className={`${content} ${enter_context_div}`}>
-              <p>I'm an enterprise manager,<br />&nbsp;&nbsp;&nbsp;and I need to refresh all the departments to empowerment-style organizations and get enterprise-level services.</p>
+              <p>I'm an enterprise manager,<br />and I need to refresh all the departments to empowerment-style organizations and get enterprise-level services.</p>
               <p>Key Features:</p>
               <ul className="clearfix">
                 <li>All capabilities of team organizations</li>

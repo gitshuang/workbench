@@ -8,7 +8,7 @@ import Tabs, { TabPane } from 'bee/tabs';
 import Icon from 'pub-comp/icon';
 import EnhancedPagination from 'pub-comp/enhancedPagination';
 import SearchItem from 'diwork-business-components/dist/search/searchItem';
-
+// import SearchItem from './searchItem';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 
@@ -16,19 +16,18 @@ import nodata from 'assets/image/wgt/nodata.png';
 
 import {
   bg,
-  recently,
-  tabPane1,
-  tabContent,
-  clearfix,
   bg_wrap,
   wrap,
+  clearfix,
+  searchPanel,
   serviceSearch,
+  search_icon_con,
   ufSearch,
   search_tit,
-  search_icon_con,
-  searchPanel,
+  tabContent,
   nodataClass,
-  paginationClass,
+  recently,
+  tabPane1,
 } from './style.css';
 
 
@@ -65,8 +64,8 @@ class searchResult extends Component {
       dataList: {
         content: [],
       },
-      isShownodataClassEach: false, // 当没数据或者请求失败  渲染无数据图片
-      totalPages: 1,  // 总页数
+      isShownodataClassEach: true, // 当没数据或者请求失败  渲染无数据图片
+      totalPages: 0,  // 总页数
       // 四个参数
       keywords: '', // 关键词
       activetab: '',  // 当前选中的是哪个类型
@@ -87,7 +86,6 @@ class searchResult extends Component {
     const value = nextProps.match.params ? nextProps.match.params.value : '';
     const id = nextProps.match.params ? nextProps.match.params.id : '';
     const { searchValue, searchTab } = this.state;
-    console.log(this.state)
     if (searchValue === '' && searchTab === '') return;
     if (value === searchValue && id === searchTab) return;
     this.getSearchTpyeList(value, id, 0, 10);
@@ -139,33 +137,49 @@ class searchResult extends Component {
         if (error) {
           requestError(payload);
           this.setState({
-            dataList: null,
+            dataList: {
+              content: [],
+            },
+            totalPages: 0,
             isShownodataClassEach: false
           });
           return false;
         }
+        requestSuccess();
         this.setState({
           dataList: payload,
           totalPages: payload.totalPages,
           isShownodataClassEach: !!payload.content.length,
         });
-        requestSuccess();
+
       });
     })
   }
 
   btnSearch = () => {
-    const { keywords, activetab, searchValue } = this.state;
+    const { activetab, searchValue } = this.state;
+    let { keywords } = this.state;
     if (searchValue === keywords) return;
+    if(keywords === ""){
+      keywords = " ";
+    }
     this.props.history.push(`/search/${activetab}/${keywords}`);
   }
 
   // 点击tabs 分类
   TabsClick = (activetab) => {
-    const { keywords } = this.state;
+    let { keywords } = this.state;
+    if(keywords === ""){
+      keywords = " ";
+    }
     this.setState({
       activetab,
       activePage: 1,
+      dataList: {
+        content: [],
+      },
+      totalPages: 0,
+      isShownodataClassEach: true,
     }, () => {
       this.props.history.push(`/search/${activetab}/${keywords}`);
     });
@@ -183,7 +197,7 @@ class searchResult extends Component {
 
   // 下面选择每页展示的数据条目数
   paginationNumSelect = (id, dataNum) => {
-    const reg = new RegExp('条\/页', 'g');
+    const reg = new RegExp('Items\/Page', 'g');
     const dataPerPageNum = dataNum.replace(reg, '');
     const { keywords, activePage, activetab } = this.state;
     this.setState({
@@ -207,7 +221,7 @@ class searchResult extends Component {
 
   // 渲染列表页面
   otherlistLi(data) {
-    if (!data) return null;
+    if (!data || data.content.length === 0) return null;
     return data.content.map((item, index) => (
       <li key={index}>
         <SearchItem
@@ -228,13 +242,15 @@ class searchResult extends Component {
     } = this.state;
     const Morelist = [];
     const anifalse = false;
+    if (SearchMoreList.length === 0) return null;
+    const renderItems = this.otherlistLi(dataList);
     SearchMoreList.forEach((item) => {
       Morelist.push(<TabPane
         tab={item.typeName}
         key={item.type}
         className={tabPane1}
       >
-        <ul className={recently}>{this.otherlistLi(dataList)}</ul>
+        <ul className={recently}>{renderItems}</ul>
         {
           isShownodataClassEach ? null :
             <div className={nodataClass}>
@@ -259,7 +275,6 @@ class searchResult extends Component {
                 onChange={this.inputOnChange}
               />
               <div className={search_icon_con}>
-                <span>|</span>
                 <Icon type="search" className={ufSearch} onClick={this.btnSearch} />
                 <span className={search_tit} onClick={this.btnSearch}>Search</span>
               </div>
@@ -276,7 +291,7 @@ class searchResult extends Component {
                 {Morelist}
               </Tabs>
               {
-                totalPages > 1 ? <div className={paginationClass}>
+                totalPages > 1 ? <div className="paginationClass">
                   <EnhancedPagination
                     items={totalPages}
                     activePage={this.state.activePage}

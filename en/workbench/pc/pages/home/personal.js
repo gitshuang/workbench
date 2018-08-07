@@ -11,13 +11,16 @@ import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import rootActions from 'store/root/actions';
 
+import { openService } from 'public/regMessageTypeHandler';
+
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
-const { setCurrent, getAllEnable, getCurrent} = rootActions;
+const { setCurrent, getAllEnable, getCurrent } = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
     'requestDisplay',
+    'userInfo',
     {
       key: 'exitModal',
       value: (home, ownProps, root) => root.teamconfig.exitModal,
@@ -39,10 +42,26 @@ class Personals extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currType: 0,
       userInfo: {},
+      personalText: {
+        name: 'Enterprise',
+        edit: '首页编辑_en',
+        info: '员工信息_en',
+        invitation: '邀请成员_en',
+        exit: '退出_en',
+        markTitle: '创建成功_en',
+        markDes: '快点邀请成员一起好好工作吧_en',
+        do: '我知道了_en',
+        set: '设置_en',
+        logout: '注销_en',
+        account: '账户管理_en',
+        dynamic: '动态_en',
+      },
+
       routers: {
-        openEntersetting: '/entersetting/home',
-        openTeamconfig: '/teamconfig',
+        // openEntersetting: '/entersetting/home',
+        openConfig: '/teamconfig',
         openAccount: '/account',
         openManage: '/manage',
         openUserinfo: '/userinfo',
@@ -66,17 +85,17 @@ class Personals extends Component {
       TeamData: [
         {
           id: 'allowExit',
-          name: 'Quit from Enterprise',
+          name: 'Simplified Chinese 1',
           value: '3',
           serverApi: 'enter/leave',
-          msg: 'After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
+          msg: 'Traditional Chinese 3',
         },
         {
           id: 'allowExit',
-          name: 'Quit from Team',
+          name: 'Enterprise',
           value: '3',
           serverApi: 'team/leave',
-          msg: 'After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
+          msg: 'Quit from Enterprise',
         },
       ],
       language: {
@@ -86,7 +105,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: 'Simplified Chinese 1'
+            context: 'After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.'
           },
           {
             value: 'en',
@@ -94,13 +113,13 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: 'Traditional Chinese 3'
+            context: 'Team'
           },
         ]
       }
     };
   }
-  
+
   componentWillMount() {
     const { getUserInfo } = this.props;
     getUserInfo().then(({ error, payload }) => {
@@ -109,56 +128,56 @@ class Personals extends Component {
       }
       this.setState({
         userInfo: payload,
+      },()=>{
+        this.getCompanyType();
       });
+
     });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
     this.getDefaultLang();
   }
- 
-  componentDidMount() {
 
-  }
-
-  getAllEnableFunc = () =>{
-    const {getAllEnable} = this.props;
+  getAllEnableFunc = () => {
+    const { getAllEnable } = this.props;
     getAllEnable().then(({ error, payload }) => {
       if (error) {
         return;
       }
-      let languageListVal = [],item={},defaultValue;
-      payload.map((item,index)=>{
-        item = {value:item.langCode, context:item.dislpayName}
+      let languageListVal = [], item = {}, defaultValue;
+      payload.map((item, index) => {
+        item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
-      
+
       this.setState({
-        language:{...this.state.language, languageList:languageListVal}
+        language: { ...this.state.language, languageList: languageListVal }
       })
     });
   }
-  getDefaultLang = () =>{
-    const {getCurrent} = this.props;
+
+  getDefaultLang = () => {
+    const { getCurrent } = this.props;
     getCurrent().then(({ error, payload }) => {
       if (error) {
         return;
       }
       this.setState({
-        language:{...this.state.language,defaultValue:payload.langCode}
-      })
+        language: { ...this.state.language, defaultValue: payload.langCode }
+      });
     });
-   
   }
-  onChangeLanguage = (value) =>{
+
+  onChangeLanguage = (value) => {
     this.props.setCurrent(value).then(({ error, payload }) => {
       if (error) {
         return;
       }
       window.location.reload();
     });;
-  
   }
+
   getCompanyType = () => {
     const { tenantid } = window.diworkContext();
     const {
@@ -167,11 +186,13 @@ class Personals extends Component {
       },
     } = this.state;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
-    let name = 'Team';
+    let currType = 1;
     if (curTenant && curTenant.type == 0) {
-      name = 'Enterprise';
+      currType = 0;
     }
-    return name;
+    this.setState({
+      currType
+    });
   }
 
   closeRequestDisplay = () => {
@@ -185,7 +206,11 @@ class Personals extends Component {
   }
 
   dispatch = (action) => {
-    const { routers } = this.state;
+    const { routers, currType } = this.state;
+    if (action === "openConfig" && currType == 0) {
+      openService('GZTSYS001');
+      return false;
+    }
     if (routers[action]) {
       this.openNewRouter(routers[action]);
     }
@@ -201,29 +226,31 @@ class Personals extends Component {
       requestDisplay,
       exitModal,
     } = this.props;
-    const { userInfo, language } = this.state;
-    const { hrefs, TeamData } = this.state;
+    const { userInfo, language, hrefs, TeamData, currType } = this.state;
+    let { personalText } = this.state;
 
-    const titleType = this.getCompanyType();
-    const CurrData = titleType == 'Enterprise' ? TeamData[0] : TeamData[1];
+    const currData = currType == 0 ? TeamData[0] : TeamData[1];
+    personalText.name = currType == 0 ? 'Quit from Team' : 'After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.';
+
     return (
       <div>
         <Personal
+          currType={currType}
+          personalText={personalText}
           userInfo={userInfo}
           requestDisplay={requestDisplay}
           exitModal={exitModal}
           closeRequestDisplay={this.closeRequestDisplay}
           openExitModal={this.openExitModal}
           dispatch={this.dispatch}
-          titleType={titleType}
           hrefs={hrefs}
           logout={logout}
-          language={this.state.language}
+          language={language}
         />
         {
           exitModal ?
             <TeamExitModal
-              data={CurrData}
+              data={currData}
               isManage={userInfo.admin}
               userId={userInfo.userId}
               close

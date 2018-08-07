@@ -11,23 +11,16 @@ import TeamManagerModal from 'containers/teamManagerModal';
 import TeamRemoveModal from 'containers/teamRemoveModal';
 import TeamUpgradeModal from 'containers/teamUpgradeModal';
 import TeamTransferModal from 'containers/teamTransferModal';
-// import TeamDismissModal from 'containers/teamDismissModal';
-// import TeamExitModal from 'containers/teamExitModal';
 
 import CreateTeam from './createTeam';
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
+import { ButtonBrand } from 'pub-comp/button';
 import Icon from 'pub-comp/icon';
 import Tabs from 'bee/tabs';
-import Dropdown from 'bee/dropdown';
-import Menu from 'bee/menus';
-import Radio from 'bee/radio';
 import Select from 'bee/select';
-import Pagination from 'bee/pagination'
 const { TabPane } = Tabs;
-const { Item } = Menu;
 const Option = Select.Option;
-const OptGroup = Select.OptGroup;
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {
@@ -38,10 +31,7 @@ const {
   adminToUser,            // 管理员降级用户
   openManagerModal,
   openRemoveModal,
-  closeRemoveModal,
   openUpgradeModal,
-  openTransferModal,
-  openDismissModal,
   openExitModal,
   getAllApps,
   getUserList,
@@ -52,12 +42,8 @@ import {
   wrap,
   header,
   content,
-  box,
   box2,
   box3,
-  item,
-  image,
-  footer,
   applicationBtns,
   active,
   applicationLists,
@@ -66,12 +52,12 @@ import {
   memberLists,
   search,
   search_label,
-  team_cont,
   option_sele,
   table_title,
   table_permise,
   user_name,
   nopic,
+  memberSearch
 } from './index.css';
 
 @withRouter
@@ -82,14 +68,12 @@ import {
     'removeModal',      //  团队成员删除弹窗开关
     'upgradeModal',     //  升级为企业弹窗开关
     'transferModal',    //  移交团队弹窗开关
-    'dismissModal',     //  解散团队弹窗开关
-    'exitModal',        //  退出团队弹窗开关
     'applicationlist',  //  应用列表
     'userList',         //  用户列表
     'activePage',       //  用户列表页数
     {
       key: 'userInfo',
-      value: (teamconfig,ownProps,root) => {
+      value: (teamconfig, ownProps, root) => {
         return root.home.userInfo
       }
     },
@@ -110,8 +94,6 @@ import {
     openManagerModal,       // 打开升级管理员弹窗
     openRemoveModal,        // 团队成员打开删除弹窗
     openUpgradeModal,       // 打开升级为企业弹窗
-    openTransferModal,      // 打开移交团队弹窗
-    openDismissModal,       // 打开解散团队弹窗
     openExitModal,          // 打开退出团队弹窗
     getAllApps,             // 获取全部应用
     getUserList,            // 获取用户列表
@@ -123,13 +105,13 @@ class CreateTeamContent extends Component {
   constructor(props) {
     super(props);
     this.clickValue = "";
-    this.tenantName = "";
     this.state = {
 
       imgWarning: "",         // 团队头像警告格式
       imgUrl: "",             // 基础设置  选择头像回显
 
       tenantId: "",           // 团队id  直接取出来存到这里
+      tenantName: '',
       value: "",              // 基础设置团队名称
       logo: "",               // 上传成功后返回的url
       //searchAvalible: "",     // 搜索可见
@@ -147,10 +129,10 @@ class CreateTeamContent extends Component {
       newUserList: [],        // 当前用户列表
       searchVal: "",          // 用户列表搜索关键字
       onlyAdmin: false,       // 是否只显示管理员
-      
-      activePage:1,
-      pagesize:10,
-      dataPerPageNum:10,
+
+      activePage: 1,
+      pagesize: 10,
+      dataPerPageNum: 10,
     }
   }
 
@@ -174,6 +156,7 @@ class CreateTeamContent extends Component {
       }
       this.setState({
         tenantId: payload.tenantId,
+        tenantName: payload.tenantName,
         value: payload.tenantName,
         logo: payload.logo,
         //searchAvalible: payload.searchAvalible,
@@ -182,26 +165,25 @@ class CreateTeamContent extends Component {
         allowExit: payload.allowExit
       });
       // 将默认的团队名称赋值变量
-      this.tenantName = payload.tenantName;
       requestSuccess();
     });
   }
 
-   // 查询团队应用
-   queryApplication = () => {
+  // 查询团队应用
+  queryApplication = () => {
     const { getAllApps, requestError, requestSuccess } = this.props;
     getAllApps().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
         return false;
       }
-      const webApplication = payload.filter((item)=>{
+      const webApplication = payload.filter((item) => {
         return item.webStatus;
       });
-      const mobApplication = payload.filter((item)=>{
+      const mobApplication = payload.filter((item) => {
         return item.phoneStatus;
       });
-      const cliApplication = payload.filter((item)=>{
+      const cliApplication = payload.filter((item) => {
         return item.clientStatus;
       });
       const currApplication = webApplication;
@@ -216,7 +198,7 @@ class CreateTeamContent extends Component {
   }
 
   // 查询用户列表
-  queryUser = ( keyword = "", onlyAdmin = false, page = 1, size = 10 ) => {
+  queryUser = (keyword = "", onlyAdmin = false, page = 1, size = 10) => {
     const { getUserList, changePage, requestError, requestSuccess } = this.props;
     const param = {
       page,
@@ -224,14 +206,14 @@ class CreateTeamContent extends Component {
       keyword,
       onlyAdmin
     }
-    getUserList( param ).then(({error, payload}) => {
-      if(error){
+    getUserList(param).then(({ error, payload }) => {
+      if (error) {
         requestError(payload);
         return false;
       }
       this.setState({
         newUserList: payload.content,
-        pagesize:payload.totalPages
+        pagesize: payload.totalPages
       })
       changePage(page);
       requestSuccess();
@@ -254,11 +236,11 @@ class CreateTeamContent extends Component {
     const { webApplication, mobApplication, cliApplication } = this.state;
 
     let currApplication = [];
-    if(type == "web"){
+    if (type == "web") {
       currApplication = webApplication
-    }else if(type=="mob"){
+    } else if (type == "mob") {
       currApplication = mobApplication
-    }else{
+    } else {
       currApplication = cliApplication;
     }
     this.setState({
@@ -270,7 +252,7 @@ class CreateTeamContent extends Component {
   handelTime = (time) => {
     const date = new Date(time);
     const Y = date.getFullYear() + '-';
-    const M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
     const D = date.getDate() + ' ';
     return Y + M + D;
   }
@@ -278,28 +260,28 @@ class CreateTeamContent extends Component {
   // 是否渲染还有多少天到期
   esitTime = (time) => {
     // 判断到期时间没有或者... 直接不继续
-    if(!time){
+    if (!time) {
       return false;
     }
     const currTime = new Date().getTime();
-    if( currTime > time ){
+    if (currTime > time) {
       return "$i18n{index.js0}$i18n-end"
     }
     const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
-    if(timeDiff > 30){
+    if (timeDiff > 30) {
       return false;
     }
-    return "$i18n{index.js1}$i18n-end"+Math.ceil(timeDiff)+"$i18n{index.js2}$i18n-end"
+    return "$i18n{index.js1}$i18n-end" + Math.ceil(timeDiff) + "$i18n{index.js2}$i18n-end"
   }
   // 续费按钮
   esitXufei = (time) => {
     // 判断到期时间没有或者... 直接不继续
-    if(!time){
+    if (!time) {
       return false;
     }
     const currTime = new Date().getTime();
     const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
-    if(timeDiff > 30){
+    if (timeDiff > 30) {
       return false;
     }
     // if( currTime > time ){
@@ -310,8 +292,9 @@ class CreateTeamContent extends Component {
 
   openXufei = (id) => {
     const { history } = this.props;
-    history.push('/renew/'+ id);
+    history.push('/renew/' + id);
   }
+
   // 设置团队应用
   teamApplication = () => {
     const { btnType } = this.state;
@@ -320,16 +303,16 @@ class CreateTeamContent extends Component {
       <div className={box2}>
         <div className={applicationBtns}>
           <span>
-            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web端</Button>
-            <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>$i18n{index.js3}$i18n-end</Button>
-            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PC$i18n{index.js4}$i18n-end</Button>
+            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web$i18n{index.js3}$i18n-end</Button>
+            <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>$i18n{index.js4}$i18n-end</Button>
+            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PC$i18n{index.js5}$i18n-end</Button>
           </span>
-          {/*<Button colors="danger">$i18n{index.js5}$i18n-end</Button>*/}
+          {/*<Button colors="danger">$i18n{index.js6}$i18n-end</Button>*/}
         </div>
         <div className={applicationLists}>
           <ul>
             {
-              currApplication.map( (item,index)=>{
+              currApplication.map((item, index) => {
                 return (
                   <li className="um-box" key={index}>
                     <div className={`${item.applicationIcon ? nopic : ''}`}>
@@ -338,7 +321,7 @@ class CreateTeamContent extends Component {
                     <div>
                       <h6>{item.applicationName}</h6>
                       {
-                        item.expired? <p>$i18n{index.js6}$i18n-end{this.handelTime(item.expired)}</p>:""
+                        item.expired ? <p>$i18n{index.js7}$i18n-end{this.handelTime(item.expired)}</p> : ""
                       }
                     </div>
                     <div>
@@ -346,7 +329,7 @@ class CreateTeamContent extends Component {
                     </div>
                     <div className="um-bf1 tr">
                       {
-                        this.esitXufei(item.expired) ? <Button onClick={()=>{this.openXufei(item.applicationId)}}>$i18n{index.js7}$i18n-end</Button> : null
+                        this.esitXufei(item.expired) ? <Button onClick={() => { this.openXufei(item.applicationId) }}>$i18n{index.js8}$i18n-end</Button> : null
                       }
 
                     </div>
@@ -359,31 +342,31 @@ class CreateTeamContent extends Component {
       </div>
     )
   }
- 
+
   // 更换用户身份
-  handleChange3 = (value,id) => { 
-    const { userToAdmin, adminToUser, requestError,requestSuccess } = this.props;
+  handleChange3 = (value, id) => {
+    const { userToAdmin, adminToUser, requestError, requestSuccess } = this.props;
     let { newUserList } = this.state;
     this.setState({
       currMemberId: id
     });
-    if(value == "deleteMember"){
-      const {openRemoveModal} = this.props;
+    if (value == "deleteMember") {
+      const { openRemoveModal } = this.props;
       openRemoveModal();
       return false;
     }
-    if (value == "manage"){
+    if (value == "manage") {
       const { openManagerModal } = this.props;
       openManagerModal();
       return false;
     }
-    adminToUser( id ).then(({ error, payload }) => {
+    adminToUser(id).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
         return false;
       }
-      newUserList.forEach((item,index) => {
-        if (item.userId == id){
+      newUserList.forEach((item, index) => {
+        if (item.userId == id) {
           item.admin = false
         }
       });
@@ -402,27 +385,27 @@ class CreateTeamContent extends Component {
     });
   }
   // 清空输入框的value
-  clearSearchFn =()=>{
+  clearSearchFn = () => {
     const { onlyAdmin } = this.state;
     this.setState({
       searchVal: ""
     });
     this.clickValue = "";
-    this.queryUser( "", onlyAdmin );
+    this.queryUser("", onlyAdmin);
   }
   // sousuo
-  searchFn = () =>{
+  searchFn = () => {
     // 点击搜索之后设置点击为true  从而判断点击分页是查询整还是搜索结果
     const { searchVal, onlyAdmin } = this.state;
     this.clickValue = searchVal;
-    this.queryUser( searchVal, onlyAdmin );
+    this.queryUser(searchVal, onlyAdmin);
   }
   // 点击只显示管理员
-  changeCheck = (value) => { 
+  changeCheck = (value) => {
     this.setState({
       onlyAdmin: value
     });
-    this.queryUser( this.clickValue, value );
+    this.queryUser(this.clickValue, value);
   }
   // 邀请成员
   inviteMember = () => {
@@ -431,10 +414,10 @@ class CreateTeamContent extends Component {
   }
 
   // 点击分页
-  handleSelect = (eventKey)=> {
+  handleSelect = (eventKey) => {
     const { activePage } = this.props;
     const { onlyAdmin } = this.state;
-    if( eventKey == activePage ){
+    if (eventKey == activePage) {
       return false;
     }
     this.setState({
@@ -442,25 +425,25 @@ class CreateTeamContent extends Component {
     });
     let dataSize = this.state.dataPerPageNum;
     // 增加此判断是为了  用户输入框输入信息  但是并没有点击查询   点击过查询的才会搜索之后的列表
-    if (this.clickValue){
-      this.queryUser( this.clickValue, onlyAdmin, eventKey ,dataSize);
-    }else{
-      this.queryUser( "", onlyAdmin, eventKey ,dataSize);
+    if (this.clickValue) {
+      this.queryUser(this.clickValue, onlyAdmin, eventKey, dataSize);
+    } else {
+      this.queryUser("", onlyAdmin, eventKey, dataSize);
     }
   }
 
-    //下面选择每页展示的数据条目数
-  paginationNumSelect = (id,dataNum) =>{
-    let reg = new RegExp("条\/页","g");
-    let dataPerPageNum  = dataNum.replace(reg,"");
-    const { searchVal,value, activetab, activePage}=this.state;
+  //下面选择每页展示的数据条目数
+  paginationNumSelect = (id, dataNum) => {
+    let reg = new RegExp("$i18n{index.js9}$i18n-end\/$i18n{index.js10}$i18n-end", "g");
+    let dataPerPageNum = dataNum.replace(reg, "");
+    const { searchVal, value, activetab, activePage } = this.state;
     this.setState({
-      dataPerPageNum:dataPerPageNum
-    },function () {
-      if(activetab=='other'){
-          this.queryUser(searchVal,5,activePage,dataPerPageNum)
-      }else{
-          this.queryUser(searchVal,activetab,activePage,dataPerPageNum)
+      dataPerPageNum: dataPerPageNum
+    }, function () {
+      if (activetab == 'other') {
+        this.queryUser(searchVal, 5, activePage, dataPerPageNum)
+      } else {
+        this.queryUser(searchVal, activetab, activePage, dataPerPageNum)
       }
     })
 
@@ -472,29 +455,29 @@ class CreateTeamContent extends Component {
     const {
       userInfo: {
         admin,
-        currentTeamConfig:{invitePermission}
+        currentTeamConfig: { invitePermission }
       },
-      userList, activePage
+      userList,
     } = this.props;
 
     let _invitePermission = false;
-    if(invitePermission == "0"){
+    if (invitePermission == "0") {
       _invitePermission = admin;
-    }else if(invitePermission == "1"){
+    } else if (invitePermission == "1") {
       _invitePermission = true;
     }
 
     return (
       <div className={box3}>
-        <div className = {memberTit }>
+        <div className={memberTit}>
           <div className={search}>
-            <div style={{position:"relative",float:"left"}}>
+            <div style={{ position: "relative", float: "left" }}>
               <input
                 className="form-control"
                 type="text"
-                placeholder="$i18n{index.js8}$i18n-end"
+                placeholder="$i18n{index.js11}$i18n-end"
                 value={this.state.searchVal}
-                onChange={(e)=>{this.changeSearchFn(e)}}
+                onChange={(e) => { this.changeSearchFn(e) }}
               />
               {
                 this.state.searchVal.length ? <span className="um-input-clear icon-error3" onClick={this.clearSearchFn}></span> : null
@@ -503,34 +486,35 @@ class CreateTeamContent extends Component {
             </div>
 
             <div
-              style={{textAlign:"center",cursor:"pointer" }}
+              className={memberSearch}
               onClick={this.searchFn}
             >
-              <span className={search_label}>$i18n{index.js9}$i18n-end</span>
+              <Icon type="search" />
+              <span className={search_label}>$i18n{index.js12}$i18n-end</span>
             </div>
           </div>
           <div className={memberBtns}>
-            <Checkbox colors="info" onChange={this.changeCheck}>$i18n{index.js10}$i18n-end</Checkbox>
+            <Checkbox colors="info" onChange={this.changeCheck}>$i18n{index.js13}$i18n-end</Checkbox>
             {
-              _invitePermission?<Button colors="danger" onClick={this.inviteMember}>$i18n{index.js11}$i18n-end</Button>:null
+              _invitePermission ? <ButtonBrand onClick={this.inviteMember}>$i18n{index.js14}$i18n-end</ButtonBrand> : null
             }
           </div>
         </div>
 
         <div className={table_title}>
-          <div>$i18n{index.js12}$i18n-end{userList.totalElements}人</div>
-          <div className={table_permise}>$i18n{index.js13}$i18n-end</div>
+          <div>$i18n{index.js15}$i18n-end数}{userList.totalElements}人</div>
+          <div className={table_permise}>$i18n{index.js16}$i18n-end</div>
         </div>
         <div className={memberLists}>
           <ul>
             {
-              newUserList.map((item,index)=>{
+              newUserList.map((item, index) => {
                 // um-box um-box-vc
                 return (
                   <li key={index}>
                     <div>
                       {
-                        item.userAvator?<img style={{display:"block",height:"100%"}} src = {item.userAvator} />:<Icon type="staff" />
+                        item.userAvator ? <img style={{ display: "block", height: "100%" }} src={item.userAvator} /> : <Icon type="staff" />
                       }
                     </div>
                     <div>
@@ -542,13 +526,13 @@ class CreateTeamContent extends Component {
                     <div className={`${option_sele} um-bf1  um-box-vc `}>
                       <Select
                         dropdownClassName="teamselect"
-                        value={ item.admin ? "manage" : "member" }
+                        value={item.admin ? "manage" : "member"}
                         style={{ width: 88, marginRight: 6 }}
-                        onChange={ (e) => {this.handleChange3(e,item.userId)} }
+                        onChange={(e) => { this.handleChange3(e, item.userId) }}
                       >
-                        <Option value="manage">$i18n{index.js14}$i18n-end</Option>
-                        <Option value="member">$i18n{index.js15}$i18n-end</Option>
-                        <Option value="deleteMember">$i18n{index.js16}$i18n-end</Option>
+                        <Option value="manage">$i18n{index.js17}$i18n-end</Option>
+                        <Option value="member">$i18n{index.js18}$i18n-end</Option>
+                        <Option value="deleteMember">$i18n{index.js19}$i18n-end</Option>
                       </Select>
                     </div>
                   </li>
@@ -557,65 +541,39 @@ class CreateTeamContent extends Component {
             }
           </ul>
         </div>
-        <div className="um-box-center" style={{paddingBottom:"20px"}}>
-          {/* <Pagination
-            first
-            last
-            prev
-            next
-            boundaryLinks
+        <div className="um-box-center paginationClass" style={{ paddingBottom: "20px" }}>
+          <EnhancedPagination
+            maxButtons={3}
             gap={true}
-            items={userList.totalPages}
-            maxButtons={10}
-            activePage={activePage}
-            onSelect={this.handleSelect.bind(this)}
-          /> */}
-           <EnhancedPagination
-                  maxButtons={3}
-                  gap={true}
-                  items={this.state.pagesize}
-                  activePage={this.state.activePage}
-                  onDataNumSelect={this.paginationNumSelect}
-                  onSelect={this.handleSelect} />
+            items={this.state.pagesize}
+            activePage={this.state.activePage}
+            onDataNumSelect={this.paginationNumSelect}
+            onSelect={this.handleSelect}
+          />
         </div>
       </div>
     )
   }
 
 
- /* &&&&& 公共头部那里的方法集合  &&&&&   */
+  /* &&&&& 公共头部那里的方法集合  &&&&&   */
   // 打开升级为企业弹窗
   openUpgradeModal = () => {
     const { openUpgradeModal } = this.props;
     openUpgradeModal();
   }
-  onVisibleChange = (visible) => { 
-  }
+  onVisibleChange = (visible) => { }
 
-  onSelectDrop = ({ key }) => {
-    const { openTransferModal,openDismissModal,openExitModal } = this.props;
-    if( key == "2" ){
-      openDismissModal();
-    }else{
-      openExitModal();
-    }
-  }
 
   render() {
-    // const menu1 = (
-    //   <Menu onClick={this.onSelectDrop}>
-    //     <Item key="2">解散团队</Item>
-    //     <Item key="3">退出团队</Item>
-    //   </Menu>
-    // );
-    const { managerModal, removeModal, upgradeModal, transferModal, dismissModal, exitModal, userInfo } = this.props;
+    const { managerModal, removeModal, upgradeModal, transferModal } = this.props;
     return (
       <div className={wrap}>
         <div className={header}>
-          <h2>{this.tenantName}</h2>
+          <h2>{this.state.tenantName}</h2>
           <div className="um-box um-box-center">
             <div>
-              <Button onClick={this.openUpgradeModal}>$i18n{index.js17}$i18n-end</Button>
+              <Button onClick={this.openUpgradeModal}>$i18n{index.js20}$i18n-end</Button>
             </div>
             <div>
               {/* <Dropdown
@@ -624,13 +582,18 @@ class CreateTeamContent extends Component {
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange}
               >
-                <Button className="um-box-vc um-box-center">$i18n{index.js18}$i18n-end<Icon type="pull-down" /></Button>
+                <Button className="um-box-vc um-box-center">$i18n{index.js21}$i18n-end<Icon type="pull-down" /></Button>
               </Dropdown> */}
 
-               <EnterOption data={[
-                {id:"aa",name:"$i18n{index.js19}$i18n-end",value:"2",serverApi:"team/remove",msg:"$i18n{index.js20}$i18n-end"},
-                {id:"allowExit",name:"$i18n{index.js21}$i18n-end",value:"3",serverApi:"team/leave",msg:"$i18n{index.js22}$i18n-end"},
-              ]}  type="$i18n{index.js23}$i18n-end" />
+              <EnterOption
+                type="$i18n{index.js22}$i18n-end"
+                data={
+                  [
+                    { id: "aa", name: "$i18n{index.js23}$i18n-end", value: "2", serverApi: "team/remove", msg: "$i18n{index.js24}$i18n-end" },
+                    { id: "allowExit", name: "$i18n{index.js25}$i18n-end", value: "3", serverApi: "team/leave", msg: "$i18n{index.js26}$i18n-end" },
+                  ]
+                }
+              />
 
             </div>
           </div>
@@ -640,29 +603,29 @@ class CreateTeamContent extends Component {
             destroyInactiveTabPane
             defaultActiveKey="1"
           >
-            <TabPane tab='$i18n{index.js24}$i18n-end' key="1">
+            <TabPane tab='$i18n{index.js27}$i18n-end' key="1">
               <div >
                 <CreateTeam />
               </div>
             </TabPane>
-            <TabPane tab='$i18n{index.js25}$i18n-end' key="2">
+            <TabPane tab='$i18n{index.js28}$i18n-end' key="2">
               {this.teamApplication()}
             </TabPane>
-            <TabPane tab='$i18n{index.js26}$i18n-end' key="3">
+            <TabPane tab='$i18n{index.js29}$i18n-end' key="3">
               {this.teamMember()}
             </TabPane>
           </Tabs>
         </div>
         {
           managerModal ? <TeamManagerModal
-            currMemberId = { this.state.currMemberId }
-            queryUser = { ()=>{this.queryUser()} }
+            currMemberId={this.state.currMemberId}
+            queryUser={() => { this.queryUser() }}
           /> : null
         }
         {
           removeModal ? <TeamRemoveModal
-            currMemberId = { this.state.currMemberId }
-            queryUser = { ()=>{this.queryUser()} }
+            currMemberId={this.state.currMemberId}
+            queryUser={() => { this.queryUser() }}
           /> : null
         }
         {
@@ -671,12 +634,6 @@ class CreateTeamContent extends Component {
         {
           transferModal ? <TeamTransferModal /> : null
         }
-        {/* {
-          dismissModal ? <TeamDismissModal /> : null
-        }
-        {
-          exitModal ? <TeamExitModal isManage={userInfo.admin} userId={userInfo.userId} close={true}/> : null
-        } */}
       </div>
     )
   }

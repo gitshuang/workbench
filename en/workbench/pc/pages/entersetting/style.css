@@ -5,7 +5,6 @@
   width: 120px;
   text-align: right;
   font-size: 14px;
-  /* color:#797D82; */
 }
 .enterForm :global(.u-label>span) {
   vertical-align: middle;
@@ -39,7 +38,6 @@
   height:32px;
   background:rgba(225,76,70,1);
   border-radius: 3px;
-  margin-left:-70px;
 }
 .enterForm :global(textarea) {
   min-height: 100px;
@@ -108,16 +106,12 @@
 
 .enterForm :global(.u-input-inner>input){
   width:338px !important;
-  height:36px;
   background:rgba(255,255,255,1);
   border-radius: 3px ;
-  border:1px solid RGBA(78, 89, 104, 0.2);
+  /* border:1px solid RGBA(78, 89, 104, 0.2); */
 }
 
-.enterForm :global(.u-input-before){
-  height:36px;
-  line-height: 36px;
-}
+
 /* .enterForm >span:nth-child(5) :global(.u-form-item){
   margin-top: -20px;
 } */
@@ -126,7 +120,7 @@
 }
 .enterForm :global(.u-select-lg .u-select-selection--single){
   width: 271px;
-  border:1px solid RGBA(78, 89, 104, 0.2);
+  /* border:1px solid RGBA(78, 89, 104, 0.2); */
 }
 
 .pageEnterprise :global(.u-select .u-select-selection){
@@ -145,7 +139,7 @@
 }
 
 .lxrHr{
-  width:450px;
+  width: 520px;
   height:1px;
   background:rgba(13,20,36,1);
   opacity:0.4;
@@ -157,7 +151,7 @@
   margin-bottom: 20px;
   font-size: 17px;
 }
-.hr2{;
+.hr2{
   margin-top: -65px;
   background:rgba(13,20,36,1) !important;
   opacity:0.4;
@@ -176,13 +170,6 @@
 
 .lxrHrBottom>hr{
   width:100%;
-}
-
-.appBreadcrumb{
-  padding-left: 23px;
-  font-size: 12px;
-  height:32px;
-  background:rgba(255,255,255,1);
 }
 
 :global(.enter_setting .u-form-submit)>button{
@@ -215,13 +202,16 @@
 }
 .progressBar {
   position: relative;
-  margin-left: 90px;
+  margin-left: 118px;
   width: 338px;
   padding-bottom: 30px;
   cursor: not-allowed;
 }
+.progressBar :global(.iconfont){
+  color: #fff;
+}
 :global(.u-progress-bar){
   background-color: #e14b46;
   line-height: 32px;
-  font-size: 12px;
+  font-size: 14px;
 }

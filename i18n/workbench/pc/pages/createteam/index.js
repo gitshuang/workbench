@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { mapStateToProps } from '@u';
+
 import Breadcrumbs from 'components/breadcrumb';
 import Header from 'containers/header';
 import CreateTeamContent from 'containers/createTeam';
-import { appBreadcrumb, homeNone } from './style.css';
+
 
 @withRouter
-@connect(
-  mapStateToProps(
-    'userInfo',
-    'metaData',
-    {
-      namespace: 'home',
-    },
-  ),
-  {},
-)
 class CreateTeam extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -28,14 +17,10 @@ class CreateTeam extends Component {
     match: PropTypes.shape({
       params: PropTypes.object,
     }),
-    userInfo: PropTypes.shape({
-      allowTenants: PropTypes.array,
-    }),
   };
   static defaultProps = {
     history: {},
     match: {},
-    userInfo: {},
   };
   constructor(props) {
     super(props);
@@ -49,32 +34,24 @@ class CreateTeam extends Component {
   }
 
   goHome = () => {
-    const { userInfo: { allowTenants } } = this.props;
-    if (allowTenants.length <= 0) return;
     this.props.history.replace('');
   }
 
   render() {
-    const { match: { params }, userInfo: { allowTenants } } = this.props;
-    const classes = params.data === 'home' ? homeNone : '';
+    const { match: { params } } = this.props;
     return (
-      <div className={`um-win ${classes}`}>
-        {
-          params.data === 'home'
-          ?
-            <div className="um-header" style={{ background: 'white' }}>
-              <Header onLeftClick={this.goHome} iconName={allowTenants.length <= 0 ? '' : 'home'} >
-                <div>
-                  <span>$i18n{index.js0}$i18n-end</span>
-                </div>
-              </Header>
+      <div className='um-win'>
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName={'computer'} >
+            <div>
+              <span>$i18n{index.js0}$i18n-end</span>
             </div>
-          : null
-        }
-        <div className="um-content">
-          <div className={appBreadcrumb}>
+          </Header>
+          <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '$i18n{index.js1}$i18n-end' }]} goback={this.goBack} />
           </div>
+        </div>
+        <div className="um-content content">
           <CreateTeamContent />
         </div>
       </div>
