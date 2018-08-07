@@ -1,7 +1,7 @@
 import React from 'react';
 import { handleActions } from 'redux-actions';
 import Notification from 'bee/notification';
-import { openMess } from 'pub-comp/notification';
+// import { openMess } from 'pub-comp/notification';
 import { destoryLoadingFunc, createLoadingFunc } from 'pub-comp/loading';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { trigger } from 'public/componentTools';
@@ -59,6 +59,8 @@ const {
   setCurrent,
   getAllEnable,
   getCurrent,
+  showDialog,
+  closeDialogNew
 } = actions;
 
 const defaultState = {
@@ -70,7 +72,14 @@ const defaultState = {
   promotionServiceList: [],
   imShowed: false,
   isLogout: false,
-  portalEnable: false,
+  portalInfo: {
+    openStatus: false,
+    portalUrl: ''
+  },
+  showModal: false,
+  dialogType: '',
+  dialogTitle: '',
+  dialogMsg: ''
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -87,7 +96,7 @@ const reducer = handleActions({
   [getPromotionServiceList]: createReducer('promotionServiceList'),
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc({ text: 'Loading...' });
+    createLoadingFunc({ text: 'loading data...' });
     return state;
   },
   [requestSuccess](state) {
@@ -98,13 +107,20 @@ const reducer = handleActions({
   [requestError](state, { payload: msg }) {
     // Loading.destroy();
     destoryLoadingFunc();
-    openMess({
-      title: 'Error',
-      content: msg,
-      type: 'error',
-      duration: 4.5,
-    });
-    return state;
+    // openMess({
+    //   title: '错误',
+    //   content: msg,
+    //   type: 'error',
+    //   duration: 4.5,
+    // });
+    //修改全局错误弹框为dialog且非自动关闭模式
+    return {
+      ...state,
+      showModal: true,
+      dialogType: 'error',
+      dialogTitle: 'Error',
+      dialogMsg: msg
+    };
   },
   [getServiceList]: (state, { payload: serviceList, error }) => {
     if (error) {
@@ -141,17 +157,20 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    const info = window.diworkContext();
+    const info = {};
     const { tenantid, userid } = info;
     // 避免localhost环境下一直刷新
     // if (tenantid == "tenantid" && userid == "userid" ) return false;
+    if (!payload.tenantId || !tenantid) {
+      return state;
+    }
     if (payload.tenantId !== tenantid || payload.userId !== userid) {
       window.location.reload();
     }
-    return {
+    return{
       ...state,
-      isLogout: payload,
-    };
+      isLogout: payload
+    }
   },
   [getPortal]: (state, { payload, error }) => {
     if (error) {
@@ -159,7 +178,7 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      portalEnable: payload,
+      portalInfo: payload,
     };
   },
   [popMessage]: (state) => {
@@ -200,6 +219,22 @@ const reducer = handleActions({
   [setCurrent]: state => state,
   [getAllEnable]: state => state,
   [getCurrent]: state => state,
+  [showDialog]: (state, {payload: dialogData}) => {
+    let {type} = dialogData;
+    const {title, msg} = dialogData;
+    const typeArray = ['warning', 'success', 'error'];
+    if (!typeArray.find((ele) => (ele === type))) {
+      type = 'success';
+    }
+    return {
+      ...state,
+      showModal: true,
+      dialogType: type || 'success',
+      dialogTitle: title || '信息_en',
+      dialogMsg: msg
+    }
+  },
+  [closeDialogNew]: (state) => ({...state, showModal: false}),
 }, defaultState);
 
 export default function (state, action) {

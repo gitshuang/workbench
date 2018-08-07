@@ -9,6 +9,7 @@ import actions from 'store/root/actions';
 import styles from './index.css';
 import SearchContainer from 'containers/search';
 import { QuickApplication } from 'diwork-business-components';
+import { openService } from '../../public/regMessageTypeHandler';
 
 const {
   lebraNavbar,
@@ -26,13 +27,13 @@ const {
   mapStateToProps(
     'messageType',
     'imShowed',
-    'portalEnable',
+    'portalInfo',
     'serviceList',
   ),
   {
     showIm,
     hideIm,
-    
+
     requestError,
     requestSuccess
   }
@@ -45,12 +46,12 @@ class HeaderContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    
+
     };
   }
 
   componentWillMount() {
-    
+
   }
 
   componentDidMount() {
@@ -79,7 +80,8 @@ class HeaderContainer extends Component {
   }
   // 调用快捷应用 点击单独每个应用
   openServiceFn = (applicationCode) => {
-    this.props.history.push(`/app/${applicationCode}`);
+    openService(applicationCode, 2);
+    // this.props.history.push(`/app/${applicationCode}`);
   }
 
   render() {
@@ -93,13 +95,19 @@ class HeaderContainer extends Component {
       messageType,
       color,
       imShowed,
-      portalEnable,
+      portalInfo,
       serviceList
     } = this.props;
     const rightArray = Children.toArray(rightContent);
+    const { openStatus, portalUrl } = portalInfo;
     let imClass = imShowed ? "active tc" : "tc";
     const rightContents = rightArray.concat(
       <SearchContainer />,
+      <div className={`${rightBtn}`} style= {{marginRight: "15px"}}>
+        <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
+          <Icon title="My Portal" type="home" style={{ color }} />
+        </a>
+      </div>,
       <QuickApplication 
         serviceList={serviceList} 
         openAllFn={this.openAllFn} 
@@ -109,11 +117,6 @@ class HeaderContainer extends Component {
         <Icon title="Intelligent Communications" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
-      <div className={`${rightBtn}`} style= {{marginLeft: "20px","display":portalEnable ? "inline-block": "none"}}>
-        <a href={`http://ec.diwork.com/`} target="_blank" style={{ "textDecoration": "none" }}>
-          <Icon title="My Portal" type="change" style={{ color }} />
-        </a>
-      </div>
     );
     return (
       <Header

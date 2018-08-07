@@ -19,8 +19,6 @@ import SuccessDialog from './successDialog';
 
 
 import {
-  header,
-  appBreadcrumb,
   wrap,
   content,
   urlArea,
@@ -130,7 +128,7 @@ class Invitation extends Component {
     });
   }
 
-  goBack() {
+  goBack = () => {
     this.props.history.goBack();
   }
 
@@ -218,19 +216,17 @@ class Invitation extends Component {
     */
     return (
       <div className="um-win">
-        <div className={header}>
-          <div className="um-header">
-            <Header onLeftClick={this.goHome} iconName="home" >
-              <div>
-                <span>Invite Member</span>
-              </div>
-            </Header>
-            <div className={appBreadcrumb}>
-              <BreadcrumbContainer data={[{ name: 'Invite Member' }]} goback={this.goBack} />
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName="computer" >
+            <div>
+              <span>Invite Member</span>
             </div>
+          </Header>
+          <div className="appBreadcrumb">
+            <BreadcrumbContainer data={[{ name: 'Invite Member' }]} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${wrap} um-content`}>
+        <div className={`${wrap} um-content content`}>
           <div className={content}>
             <Tabs
               destroyInactiveTabPane
@@ -259,7 +255,7 @@ class Invitation extends Component {
                 <p>Signature</p>
                 <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-                <p>Enter email addresses and separate them with “;” noDictionnaryFlag</p>
+                <p>Enter email addresses and separate them with “;” 隔开_en</p>
                 <TagsInput
                   value={this.state.mails}
                   addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59

@@ -27,6 +27,9 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 @withRouter
 class SearchContainer extends Component {
   goSearchPage = (text) => {
+    if(text === ""){
+      text = " ";
+    }
     this.props.history.push(`/search/addressbook/${text}`);
   }
   getSearchList = (keyworks) => {

@@ -8,19 +8,18 @@ import Menu from 'bee/menus';
 import Dropdown from 'bee/dropdown';
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-// import TeamDismissModal from 'containers/teamDismissModal';
 import TeamExitModal from 'containers/teamExitModal';
+
 
 const { Item } = Menu;
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { openDismissModal, openExitModal } = teamconfigActions;
+const {  openExitModal } = teamconfigActions;
 
-import { enter_option, item_li } from './style.css';
+import { enter_option, item_li, up } from './style.css';
 
 @withRouter
 @connect(
   mapStateToProps(
-    // 'dismissModal',     //  解散团队弹窗开关
     'exitModal',        //  退出团队弹窗开关
     {
       key: 'userInfo',
@@ -37,7 +36,6 @@ import { enter_option, item_li } from './style.css';
     requestStart,
     requestSuccess,
     requestError,
-    openDismissModal,
     openExitModal
   }
 )
@@ -46,35 +44,33 @@ class EnterOption extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      serverApi: ""
+      serverApi: "",
+      visible: false
     }
     this.data = null;
   }
 
-  onVisibleChange = (visible) => {
+  onVisibleChange = (visible) => { 
+    this.setState({
+      visible
+    });
   }
 
   onSelectDrop = (da) => {
-    const { data, openTransferModal, openDismissModal, openExitModal, compType } = this.props;
+    const { data, openExitModal, compType } = this.props;
     if (compType == "userCenter") {
       this.data = da;
       openExitModal();
       return;
     }
     let item = data.find((_da) => _da.value == da.key);
-    const { key, serverApi } = item;
     this.data = item;
     openExitModal();
-    // if( da.key == "2" ){
-    //   openDismissModal();
-    // }else{
-    //   openExitModal();
-    // }
   }
 
   render() {
     let lis = [];
-    const { data, type, compType, dismissModal, exitModal, userInfo, userInfo: { currentTeamConfig: { allowExit } } } = this.props;
+    const { data, type, compType, exitModal, userInfo, userInfo: { currentTeamConfig: { allowExit } } } = this.props;
     data.forEach((da) => {
       if (da.id == "allowExit") {
         if (allowExit == "1") {
@@ -90,27 +86,22 @@ class EnterOption extends Component {
       <div className={enter_option}>
         {
           compType == "userCenter" ?
-          <Button shape="border" onClick={() => { this.onSelectDrop(data[0]) }} >
-            <Icon type="staff" />{"$i18n{index.js0}$i18n-end" + type}
-          </Button>
-          : 
-          <Dropdown
-            trigger={['click']}
-            overlay={menus}
-            animation="slide-up"
-            onVisibleChange={this.onVisibleChange}
-          >
-            <Button className="um-box-vc um-box-center">$i18n{index.js1}$i18n-end<Icon type="pull-down" /></Button>
-          </Dropdown>
+            <Button shape="border" onClick={() => { this.onSelectDrop(data[0]) }} >
+              <Icon type="staff" />{"$i18n{index.js0}$i18n-end" + type}
+            </Button>
+            :
+            <Dropdown
+              trigger={['click']}
+              overlay={menus}
+              animation="slide-up"
+              onVisibleChange={this.onVisibleChange}
+            >
+              <Button className="um-box-vc um-box-center">$i18n{index.js1}$i18n-end<Icon type="pull-down" className={this.state.visible ? up : ''} /></Button>
+            </Dropdown>
         }
-
-        {/* {
-            dismissModal ? <TeamDismissModal type={type} data={this.data} /> : null
-          } */}
         {
           exitModal ? <TeamExitModal type={type} data={this.data} isManage={userInfo.admin} userId={userInfo.userId} close={true} /> : null
         }
-
       </div>
     )
   }

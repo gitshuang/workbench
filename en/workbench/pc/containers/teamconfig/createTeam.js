@@ -2,35 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
+
 import Form, { FormItem } from 'bee/form';
 import Upload from 'containers/upload';
 import FormControl from 'bee/form-control';
 import Radio from 'bee/radio';
 import Select from 'bee/select';
 import { ButtonBrand } from 'pub-comp/button';
+import { openMess } from 'pub-comp/notification';
+
 import rootActions from 'store/root/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
-import CitySelect from 'bee/city-select';
+
 import 'assets/style/Form.css';
-import { enter_form, tenant_address, lxr_hr, lxr_title, lxr_hr_bottom, team_cont, form_team } from './createTeam.css';
+import { enter_form, lxr_hr, team_cont, form_team } from './createTeam.css';
 
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {
   getTeamInfo,
-  uploadApplication,
   createTeam,
-  userToAdmin,            // 用户升级管理员
-  adminToUser,            // 管理员降级用户
-  openRemoveModal,
-  closeRemoveModal,
-  openUpgradeModal,
-  openTransferModal,
-  openDismissModal,
-  openExitModal,
-  getAllApps,
-  getUserList,
-  changePage,             // 改变用户列表页数
 } = teamconfigActions;
 
 class SubmitBtn extends Component {
@@ -42,9 +33,12 @@ class SubmitBtn extends Component {
   render() {
     return (
       <div className={'u-form-submit'}>
-        {/* <ButtonBrand onClick={this.click}>Save</ButtonBrand> */}
         {
-          this.props.disabled ? <ButtonBrand onClick={this.click} >$i18n{Save}</ButtonBrand> : <ButtonBrand disabled={true} >保存</ButtonBrand>
+          this.props.disabled
+          ? 
+          <ButtonBrand onClick={this.click} >Save</ButtonBrand>
+          :
+          <ButtonBrand disabled={true} >Save</ButtonBrand>
         }
       </div>
     );
@@ -53,44 +47,13 @@ class SubmitBtn extends Component {
 
 @withRouter
 @connect(
-  mapStateToProps(
-    'teamData',
-    'removeModal',      //  团队成员删除弹窗开关
-    'upgradeModal',     //  升级为企业弹窗开关
-    'transferModal',    //  移交团队弹窗开关
-    'dismissModal',     //  解散团队弹窗开关
-    'exitModal',        //  退出团队弹窗开关
-    'applicationlist',  //  应用列表
-    'userList',         //  用户列表
-    'activePage',       //  用户列表页数
-    {
-      key: 'userInfo',
-      value: (teamconfig, ownProps, root) => {
-        return root.home.userInfo
-      }
-    },
-    {
-      namespace: "teamconfig"
-    },
-  ),
-
+  mapStateToProps(),
   {
     requestStart,
     requestSuccess,
     requestError,
     getTeamInfo,            // 获取团队基础信息
-    uploadApplication,      // 上传
     createTeam,             // 保存团队基本设置
-    userToAdmin,            // 用户升级管理员
-    adminToUser,            // 管理员降级用户
-    openRemoveModal,        // 团队成员打开删除弹窗
-    openUpgradeModal,       // 打开升级为企业弹窗
-    openTransferModal,      // 打开移交团队弹窗
-    openDismissModal,       // 打开解散团队弹窗
-    openExitModal,          // 打开退出团队弹窗
-    getAllApps,             // 获取全部应用
-    getUserList,            // 获取用户列表
-    changePage,             // 改变用户列表页数
   }
 )
 class CreateTeam extends Component {
@@ -119,7 +82,7 @@ class CreateTeam extends Component {
 
   checkForm = (flag, data) => {
     const { createTeam } = this.props;
-    const { logo, tenantIndustry, tenantId, address, tenantAddress, joinPermission, invitePermission, allowExit, isWaterMark } = this.state;
+    const { logo, tenantId, joinPermission, invitePermission, allowExit, isWaterMark } = this.state;
 
     let _logo = data.find((da) => da.name == "logo");
     if (!_logo.value && _logo.value == "") {
@@ -159,13 +122,21 @@ class CreateTeam extends Component {
           {},
         ), "settingEnter"
       ).then(({ error, payload }) => {
-        requestSuccess();
+        this.setState({disabled: true});
         if (error) {
           requestError(payload);
           return;
         }
-        const tenantId = payload.tenantId;
-        window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+        requestSuccess();
+        openMess({
+          content: 'Save',
+          duration: 2,
+          type: 'success',
+          closable: false,
+        });
+        
+        // const tenantId = payload.tenantId;
+        // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       });
     }
   }
@@ -210,13 +181,7 @@ class CreateTeam extends Component {
   }
 
   render() {
-    const { tenantName, logo, tenantNature, allowExit, isWaterMark, tenantEmail, tenantTel, tenantAddress,
-      tenantIndustry, invitePermission, joinPermission, address } = this.state;
-    let newTenantAddress = "";
-    if (tenantAddress) {
-      let _adds = tenantAddress.split("|");
-      newTenantAddress = _adds[_adds.length - 1];
-    }
+    const { tenantName, logo, allowExit, isWaterMark, invitePermission, joinPermission } = this.state;
 
     return (
       <div className={team_cont}>

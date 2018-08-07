@@ -101,6 +101,7 @@ class Home extends Component {
       deviceType: 'PC',
       lang: 'US',
     };
+    // 请求磁贴
     getWorkList(param).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
@@ -108,8 +109,7 @@ class Home extends Component {
       }
       requestSuccess();
     });
-    // 请求应用
-
+    // 请求应用   判断是否有过期应用功能
     const { admin } = userInfo;
     const timeType = this.totalTime();
     if (admin && timeType){
@@ -193,7 +193,7 @@ class Home extends Component {
       },
     });
   }
-  
+
   loadOk = (() => {
     const self = this;
     let count = 0;
@@ -243,11 +243,6 @@ class Home extends Component {
         data: da,
         noTitle: !i,
       };
-      if (i === workList.length - 1) {
-        props.style = {
-          height: window.innerHeight,
-        };
-      }
       list.push({
         label: name,
         target: `nav${id}`,
@@ -258,6 +253,7 @@ class Home extends Component {
         {...props}
         viewport={this.state.viewport}
         loadOk={this.loadOk}
+        lastIndex={ i === workList.length - 1 ? true : false }
       />);
     });
     return (
@@ -268,9 +264,9 @@ class Home extends Component {
         </ElementsWrapper>
         <HomeFolderDialog />
         {
-          this.state.homemark ? <HomeMark 
-            linkTo={this.linkTo} 
-            homemark={this.state.homemark} 
+          this.state.homemark ? <HomeMark
+            linkTo={this.linkTo}
+            homemark={this.state.homemark}
             closeHomeMark={this.closeHomeMark}
             /> : null
         }

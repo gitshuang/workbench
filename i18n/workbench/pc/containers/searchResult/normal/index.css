@@ -1,0 +1,15 @@
+.wrap {
+  height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wrap h3{
+  display: inline-block;
+  font-size: 12px;
+  margin: 8px 0 0 0;
+  padding: 0 0 0 16px;
+  color: #373c42;
+  line-height: 17px;
+  font-weight: 700;
+}

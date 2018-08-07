@@ -50,7 +50,7 @@ var walk = function (dir, dir_i18n, lan, done) {
                 if (content[i] === '') continue;//空行
                 const obj = JSON.parse(content[i]);
                 //写入xlsx
-                ws1.addRow([fileFDic, fileSplit[fileSplit.length-1], obj["key"], projectName, '', obj["value"], '', '']);
+                ws1.addRow([fileFDic, fileSplit[fileSplit.length - 1], obj["key"], projectName, '', obj["value"], '', '']);
               }
             }
           }
@@ -59,12 +59,9 @@ var walk = function (dir, dir_i18n, lan, done) {
         if (!--pending) done(null, results);
       });
     });
-   
+
   });
-  workbook.xlsx.writeFile(`${excelName}.xlsx`)
-  .then(function () {
-    console.log(`生成${excelName}.xlsx`);
-  });
+  
 };
 
 var lansRecursive = function (path, lans) {
@@ -93,7 +90,7 @@ const lan = process.argv[4] || 'cn';
 //add header
 let ws1 = workbook.addWorksheet(excelName);
 ws1.addRow(['文件目录', '文件名', 'key', '应用名称', '模块与功能结点', '简体中文', '英文', '繁体中文']);
-const projectName = indir.split('/')[indir.split('/').length-2];
+const projectName = indir.split('/')[indir.split('/').length - 2];
 const rootpaths = indir.split(/\/|\\/);
 const root_i18n = indir;
 if (!fs.existsSync(root_i18n)) { fs.mkdirSync(root_i18n); }
@@ -102,4 +99,9 @@ if (!fs.existsSync(root_lan)) { fs.mkdirSync(root_lan); }
 walk(indir, root_lan, lan, (err, results) => {
   if (err) throw err;
 });
-
+setTimeout(() => {
+  workbook.xlsx.writeFile(`${excelName}.xlsx`)
+    .then(function () {
+      console.log(`生成${excelName}.xlsx`);
+    });
+}, 2000);

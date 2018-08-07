@@ -12,10 +12,6 @@ import CreateManageModule from 'pub-comp/manageWidget';
 import folderBgSrc from 'assets/image/wgt/folder_bg.png';
 import HeaderPage from './headerPage';
 
-import {
-  pageHome,
-} from './style.css';
-
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {
   addGroup,
@@ -529,7 +525,7 @@ class Manage extends Component {
       folderBgSrc,
     };
     return (
-      <div className={pageHome}>
+      <div>
         <HeaderPage list={list} />
         <CreateManageModule {...manageReduxParams} {...manageOuterParams} />
       </div>

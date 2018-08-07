@@ -154,6 +154,7 @@ class Navs extends Component {
       color,
       allBtn,
     } = this.props;
+    if (!items.length) return null;
     return (
       <div className={cover}>
         <ul
