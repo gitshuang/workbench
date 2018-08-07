@@ -9,7 +9,7 @@ import actions from 'store/root/actions';
 import styles from './index.css';
 import SearchContainer from 'containers/search';
 import { QuickApplication } from 'diwork-business-components';
-import { openService } from '../../public/regMessageTypeHandler';
+import { openService } from 'public/regMessageTypeHandler';
 
 const {
   lebraNavbar,
@@ -29,11 +29,16 @@ const {
     'imShowed',
     'portalInfo',
     'serviceList',
+    {
+      key: 'userInfo',
+      value: (home, ownProps, root) => {
+        return root.home.userInfo
+      }
+    },
   ),
   {
     showIm,
     hideIm,
-
     requestError,
     requestSuccess
   }
@@ -46,7 +51,11 @@ class HeaderContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      quickText: {
+        title: '快捷应用',
+        all: '全部应用',
+        more: '更多应用'
+      }
     };
   }
 
@@ -96,19 +105,22 @@ class HeaderContainer extends Component {
       color,
       imShowed,
       portalInfo,
-      serviceList
+      serviceList,
+      userInfo,
     } = this.props;
     const rightArray = Children.toArray(rightContent);
-    const { openStatus, portalUrl } = portalInfo;
+    const { portalUrl } = portalInfo;
     let imClass = imShowed ? "active tc" : "tc";
+    const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <div className={`${rightBtn}`} style= {{marginRight: "15px"}}>
+      <div className={`${rightBtn}`} style= {{marginRight: "15px",display:homeStyle}}>
         <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
           <Icon title="我的门户" type="home" style={{ color }} />
         </a>
       </div>,
-      <QuickApplication 
+      <QuickApplication
+        quickText={this.state.quickText}
         serviceList={serviceList} 
         openAllFn={this.openAllFn} 
         openServiceFn={this.openServiceFn} 
