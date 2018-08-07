@@ -8,8 +8,9 @@ import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 
 const { getSearchSuggest } = searchActions;
-const { requestStart, requestSuccess, requestError } = rootActions;
+const { requestError } = rootActions;
 
+@withRouter
 @connect(
   mapStateToProps(
     'SearchSuggestList',
@@ -18,43 +19,55 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     },
   ),
   {
-    requestStart,
-    requestSuccess,
     requestError,
     getSearchSuggest,
   }
 )
-@withRouter
 class SearchContainer extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchText: {
+        placeholder: '搜索人员信息、服务及其他内容_en',
+        more: '更多结果_en',
+        none: '没有搜索结果_en',
+        clear: '清空_en',
+        search: '搜索_en',
+      },
+    };
+  }
+
   goSearchPage = (text) => {
     if(text === ""){
       text = " ";
     }
     this.props.history.push(`/search/addressbook/${text}`);
   }
+
   getSearchList = (keyworks) => {
-    const {
-      requestStart,
-      requestSuccess,
-      requestError,
-      getSearchSuggest,
-    } = this.props;
+    const { requestError, getSearchSuggest, } = this.props;
     getSearchSuggest(keyworks).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       }
     });
   }
+
   render() {
     const { SearchSuggestList } = this.props;
-    return (<Search
-      list={SearchSuggestList}
-      onChange={this.getSearchList}
-      onEnter={this.goSearchPage}
-      onSearch={this.goSearchPage}
-      onMoreBtnClick={this.goSearchPage}
-      dispatch={dispatch}
-      trigger={trigger} />
+    const { searchText } = this.state;
+    return (
+      <Search
+        list={SearchSuggestList}
+        onChange={this.getSearchList}
+        onEnter={this.goSearchPage}
+        onSearch={this.goSearchPage}
+        onMoreBtnClick={this.goSearchPage}
+        dispatch={dispatch}
+        trigger={trigger} 
+        searchText={searchText}
+      />
     );
   }
 }

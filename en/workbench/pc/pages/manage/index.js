@@ -11,6 +11,7 @@ import manageActions from 'store/root/manage/actions';
 import CreateManageModule from 'pub-comp/manageWidget';
 import folderBgSrc from 'assets/image/wgt/folder_bg.png';
 import HeaderPage from './headerPage';
+import LanguagesJSON from '../../utils/languages';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {
@@ -523,6 +524,7 @@ class Manage extends Component {
       moveGroupDrag: this.moveGroupDrag,
       moveItemDrag: this.moveItemDrag,
       folderBgSrc,
+			languagesJSON: LanguagesJSON
     };
     return (
       <div>
