@@ -20,6 +20,7 @@ const { setCurrent, getAllEnable, getCurrent } = rootActions;
 @connect(
   mapStateToProps(
     'requestDisplay',
+    'userInfo',
     {
       key: 'exitModal',
       value: (home, ownProps, root) => root.teamconfig.exitModal,
@@ -41,8 +42,8 @@ class Personals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: {},
       currType: 0,
+      userInfo: {},
       personalText: {
         name: '企业',
         edit: '首页编辑',
@@ -81,7 +82,22 @@ class Personals extends Component {
           name: '用友云官网',
         },
       ],
-      TeamData: {},
+      TeamData: [
+        {
+          id: 'allowExit',
+          name: '退出企业',
+          value: '3',
+          serverApi: 'enter/leave',
+          msg: '退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
+        },
+        {
+          id: 'allowExit',
+          name: '退出团队',
+          value: '3',
+          serverApi: 'team/leave',
+          msg: '退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
+        },
+      ],
       language: {
         show: true,
         defaultValue: 'zh',
@@ -122,7 +138,11 @@ class Personals extends Component {
 
   componentDidMount() {
     // 获取当前是企业还是团队
-    this.getCompanyType();
+    // this.getCompanyType();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // if (nextProps.userInfo)
   }
 
   getAllEnableFunc = () => {
@@ -171,34 +191,12 @@ class Personals extends Component {
         allowTenants,
       },
     } = this.state;
-    let { TeamData, personalText, } = this.state;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
-    if (!curTenant) return;
-    const currType = curTenant.type;
-    if (currType == 0) {
-      personalText.name = '企业';
-      TeamData = {
-        id: 'allowExit',
-        name: '退出企业',
-        value: '3',
-        serverApi: 'enter/leave',
-        msg: '退出后，您在当前企业下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
-      }
-    } else {
-      personalText.name = '团队';
-      TeamData = {
-        id: 'allowExit',
-        name: '退出团队',
-        value: '3',
-        serverApi: 'team/leave',
-        msg: '退出后，您在当前团队下的应用将不能再使用，相应的数据也将被删除，请确认数据已备份',
-      };
+    let currType = 1;
+    if (curTenant && curTenant.type == 0) {
+      currType = 0;
     }
-    this.setState({
-      currType,
-      personalText,
-      TeamData,
-    });
+    return currType;
   }
 
   closeRequestDisplay = () => {
@@ -232,7 +230,18 @@ class Personals extends Component {
       requestDisplay,
       exitModal,
     } = this.props;
-    const { userInfo, language, hrefs, TeamData, personalText, currType } = this.state;
+    const { userInfo, language, hrefs, TeamData, } = this.state;
+    let { personalText } = this.state;
+    let CurrData = {};
+
+    const currType = this.getCompanyType();
+    if(currType === 0){
+      CurrData = TeamData[0];
+      personalText.name = '企业';
+    }else {
+      CurrData = TeamData[1];
+      personalText.name = '团队';
+    }
 
     return (
       <div>
@@ -252,7 +261,7 @@ class Personals extends Component {
         {
           exitModal ?
             <TeamExitModal
-              data={TeamData}
+              data={CurrData}
               isManage={userInfo.admin}
               userId={userInfo.userId}
               close

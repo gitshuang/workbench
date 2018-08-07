@@ -19,17 +19,17 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 
 Date.prototype.format = function (fmt) {
   var o = {
-      "M+": this.getMonth() + 1, //月份
-      "d+": this.getDate(), //日
-      "h+": this.getHours(), //小时
-      "m+": this.getMinutes(), //分
-      "s+": this.getSeconds(), //秒
-      "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-      "S": this.getMilliseconds() //毫秒
+    "M+": this.getMonth() + 1, //月份
+    "d+": this.getDate(), //日
+    "h+": this.getHours(), //小时
+    "m+": this.getMinutes(), //分
+    "s+": this.getSeconds(), //秒
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+    "S": this.getMilliseconds() //毫秒
   };
   if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
   for (var k in o)
-      if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
   return fmt;
 }
 
@@ -67,11 +67,11 @@ class Home extends Component {
     getApplicationList: PropTypes.func,
   };
   static defaultProps = {
-    requestStart: () => {},
-    requestSuccess: () => {},
-    requestError: () => {},
-    getWorkList: () => {},
-    getApplicationList: () => {},
+    requestStart: () => { },
+    requestSuccess: () => { },
+    requestError: () => { },
+    getWorkList: () => { },
+    getApplicationList: () => { },
     metaData: {},
     workList: [],
   };
@@ -112,9 +112,9 @@ class Home extends Component {
     // 请求应用   判断是否有过期应用功能
     const { admin } = userInfo;
     const timeType = this.totalTime();
-    if (admin && timeType){
+    if (admin && timeType) {
       const time = new Date().format("yyyy-MM-dd");
-      localStorage.setItem('time',time);
+      localStorage.setItem('time', time);
       getApplicationList().then(({ error, payload }) => {
         if (error) {
           requestError(payload);
@@ -123,7 +123,7 @@ class Home extends Component {
         this.setState({
           applications: payload.applications,
         });
-        if(this.forTime(payload.applications)){
+        if (this.forTime(payload.applications)) {
           this.setState({
             homemark: true
           })
@@ -159,7 +159,7 @@ class Home extends Component {
     let day1 = new Date();
     day1.setDate(day1.getDate() - 1);
     const s1 = day1.format("yyyy-MM-dd");
-    if(s1 == localTime || s1 > localTime){
+    if (s1 == localTime || s1 > localTime) {
       return true;
     }
     return false;
@@ -167,7 +167,7 @@ class Home extends Component {
 
   forTime = (applications) => {
     let type = false;
-    for(var i=0;i<applications.length;i++){
+    for (var i = 0; i < applications.length; i++) {
       const time = applications[i].expired;
       if (!time) {
         type = false;
@@ -183,7 +183,7 @@ class Home extends Component {
     return type;
   }
 
-  updateViewport=() => {
+  updateViewport = () => {
     const self = this;
     // if (this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
     self.setState({
@@ -253,12 +253,12 @@ class Home extends Component {
         {...props}
         viewport={this.state.viewport}
         loadOk={this.loadOk}
-        lastIndex={ i === workList.length - 1 ? true : false }
+        lastIndex={i === workList.length - 1 ? true : false}
       />);
     });
     return (
       <div ref='home' className={`${pageHome} home`} style={contentStyle}>
-        <HeaderPage list={list} headerData={headerData}/>
+        <HeaderPage list={list} headerData={headerData} />
         <ElementsWrapper items={list} offset={-55}>
           {conts}
         </ElementsWrapper>
@@ -268,7 +268,7 @@ class Home extends Component {
             linkTo={this.linkTo}
             homemark={this.state.homemark}
             closeHomeMark={this.closeHomeMark}
-            /> : null
+          /> : null
         }
       </div>
     );
