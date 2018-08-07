@@ -38,7 +38,7 @@ class TeamUpgradeModal extends Component {
   // 删除确认
   configFn = () => {
     const { history } = this.props;
-    history.replace("/updateenter");
+    history.push("/updateenter");
     this.cancelFn();
   }
 

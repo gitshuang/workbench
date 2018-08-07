@@ -11,6 +11,7 @@ import workActions from 'store/root/work/actions';
 import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
+import LanguagesJSON from '../../utils/languages';
 /*  style */
 import {
   pin,
@@ -139,7 +140,8 @@ class Pin extends Component {
           onSave={this.confirmFn}
           onCancel={this.cancelFn}
           onAddGroup={this.addNewGroup}
-          caller={"Add"}
+          caller={LanguagesJSON.add}
+					languagesJSON={LanguagesJSON}
         />
       </div>
     ) : null;

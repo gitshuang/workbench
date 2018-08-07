@@ -44,10 +44,11 @@ class SelectEnter extends Component {
         company,
       }
     } = this.props;
-
+    let currentId = this.props.userInfo.currentTeamConfig.tenantId;
     let _dataItem = [];
     allowTenants.forEach(({ tenantId: name, tenantName: value, type }) => {
-      if (company != value) {
+      // if (company != value) {
+      if (currentId != name) {
         let obj = {
           name,
           value,
@@ -59,12 +60,12 @@ class SelectEnter extends Component {
     })
     return (
       <div id="open_select" className={select_enter}>
-        <span>Please select the enterprise/team you want to join.:</span>
+        <span>请选择想要进入的企业/团队_en:</span>
         <DropdownButton
           marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
           lastIem={true}
-          label="Please select an enterprise/team." type="home" dataItem={_dataItem} />
+          label="请选择企业/团队_en" type="computer" dataItem={_dataItem} />
       </div>
     )
   }

@@ -1,46 +1,43 @@
 import Home from 'pages/home';
 import asyncComponent from './lazyload';
-
-// import Work from 'pages/work';
-// import Application from 'pages/application';
-// import Manage from 'pages/manage';
-// import Page404 from 'pages/404';
-// import Search from 'pages/search';
-// import SearchResult from 'containers/searchResult';
-// import SearchOther from 'containers/searchOther';
-// import Establish from 'pages/establish';
-// import EstablishUserCenter from 'pages/establishusercenter';
-// import CreateTeam from 'pages/createteam';
-// import CreateEnter from 'pages/createenter';
-// import EnterSetting from 'pages/entersetting';
-// import Invitation from 'pages/invitation';
-// import Account from 'pages/account';
-// import Teamconfig from 'pages/teamconfig';
-// import UpdateEnter from 'pages/updateenter';
-// import Market from 'pages/market';
-// import Renew from 'pages/renew';
-// import UserInfo from 'pages/userinfo';
-
-const Work = asyncComponent(() => import(/* webpackChunkName: "Work" */'pages/work'));
-const Application = asyncComponent(() => import(/* webpackChunkName: "Application" */'pages/application'));
-const Manage = asyncComponent(() => import(/* webpackChunkName: "Manage" */'pages/manage'));
+import LoginPage from 'pages/loginPage';
+import Service from 'pages/loginPage/service/index.js'
 const Page404 = asyncComponent(() => import(/* webpackChunkName: "Page404" */'pages/404'));
+// 工作页
+const Work = asyncComponent(() => import(/* webpackChunkName: "Work" */'pages/work'));
+// 全部应用
+const Application = asyncComponent(() => import(/* webpackChunkName: "Application" */'pages/application'));
+// 首页编辑
+const Manage = asyncComponent(() => import(/* webpackChunkName: "Manage" */'pages/manage'));
+// 搜索
 const Search = asyncComponent(() => import(/* webpackChunkName: "Search" */'pages/search'));
+// 原来设计的 现在其实是搜索的组件
 const SearchResult = asyncComponent(() => import(/* webpackChunkName: "SearchResult" */'containers/searchResult'));
-const SearchOther = asyncComponent(() => import(/* webpackChunkName: "SearchOther" */'containers/searchOther'));
-const Establish = asyncComponent(() => import(/* webpackChunkName: "Establish" */'pages/establish'));
+// 创建团队/企业
 const EstablishUserCenter = asyncComponent(() => import(/* webpackChunkName: "EstablishUserCenter" */'pages/establishusercenter'));
+// 创建团队
 const CreateTeam = asyncComponent(() => import(/* webpackChunkName: "CreateTeam" */'pages/createteam'));
+// 创建企业
 const CreateEnter = asyncComponent(() => import(/* webpackChunkName: "CreateEnter" */'pages/createenter'));
-const EnterSetting = asyncComponent(() => import(/* webpackChunkName: "EnterSetting" */'pages/entersetting'));
-const Invitation = asyncComponent(() => import(/* webpackChunkName: "Invitation" */'pages/invitation'));
-const Account = asyncComponent(() => import(/* webpackChunkName: "Account" */'pages/account'));
+// 团队设置
 const Teamconfig = asyncComponent(() => import(/* webpackChunkName: "Teamconfig" */'pages/teamconfig'));
+// 团队升级为企业
 const UpdateEnter = asyncComponent(() => import(/* webpackChunkName: "UpdateEnter" */'pages/updateenter'));
+// 企业设置，
+const EnterSetting = asyncComponent(() => import(/* webpackChunkName: "EnterSetting" */'pages/entersetting'));
+// 邀请成员
+const Invitation = asyncComponent(() => import(/* webpackChunkName: "Invitation" */'pages/invitation'));
+// 账号管理
+const Account = asyncComponent(() => import(/* webpackChunkName: "Account" */'pages/account'));
+// 应用市场
 const Market = asyncComponent(() => import(/* webpackChunkName: "Market" */'pages/market'));
+// 续费
 const Renew = asyncComponent(() => import(/* webpackChunkName: "Renew" */'pages/renew'));
+// 员工信息
 const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/userinfo'));
+// 管理团队/企业
 const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "ManageTeamEnter" */'pages/manageTeamEnter'));
+// 动态
 const Dynamic = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/dynamic'));
 
 const routes = [
@@ -50,24 +47,12 @@ const routes = [
     exact: true,
   },
   {
-    path: '/establish',
-    component: Establish,
+    path: '/404',
+    component: Page404,
   },
   {
-    path: '/establishusercenter',
-    component: EstablishUserCenter,
-  },
-  {
-    path: '/createteam/:data',
-    component: CreateTeam,
-  },
-  {
-    path: '/teamconfig',
-    component: Teamconfig,
-  },
-  {
-    path: '/updateenter',
-    component: UpdateEnter,
+    path: '/:type(app|service)/:code/:subcode?',
+    component: Work,
   },
   {
     path: '/application',
@@ -78,18 +63,6 @@ const routes = [
     component: Manage,
   },
   {
-    path: '/invitation',
-    component: Invitation,
-  },
-  {
-    path: '/createenter/:data',
-    component: CreateEnter,
-  },
-  {
-    path: '/entersetting/:data',
-    component: EnterSetting,
-  },
-  {
     path: '/search',
     component: Search,
     routes: [
@@ -98,50 +71,55 @@ const routes = [
         component: SearchResult,
         exact: true,
       },
-      // {
-      //   path: '/search/searchValue/',
-      //   component: SearchResult,
-      //   exact: true,
-      // },
-      // {
-      //   path: '/search/searchlist/:value',
-      //   component: SearchOther,
-      //   exact: true,
-      // },
-      // {
-      //   path: '/search/searchlist/',
-      //   component: SearchOther,
-      //   exact: true,
-      // },
     ],
   },
   {
-    path: '/:type(app|service)/:code/:subcode?',
-    component: Work,
+    path: '/establishusercenter',
+    component: EstablishUserCenter,
+  },
+  {
+    path: '/createteam/:data',
+    component: CreateTeam,
+  },
+  {
+    path: '/createenter/:data',
+    component: CreateEnter,
+  },
+  {
+    path: '/teamconfig',
+    component: Teamconfig,
+  },
+  {
+    path: '/updateenter',
+    component: UpdateEnter,
+  },
+  {
+    path: '/entersetting/:data',
+    component: EnterSetting,
+  },
+  {
+    path: '/invitation',
+    component: Invitation,
   },
   {
     path: '/account',
     component: Account,
   },
   {
-    path: '/userinfo',
-    component: UserInfo,
-  },
-  {
-    path: '/404',
-    component: Page404,
+    path: '/market',
+    component: Market,
   },
   {
     path: '/market/application/:id',
     component: Market,
   },
   {
-    path: '/market',
-    component: Market,
-  },
-  {
     path: '/renew/:id',
     component: Renew,
+  },
+  {
+    path: '/userinfo',
+    component: UserInfo,
   },
   {
     path: '/manageTeamEnter',
@@ -151,6 +129,14 @@ const routes = [
     path: '/dynamic',
     component: Dynamic,
   },
+  {
+    path:'/loginpage',
+    component:LoginPage,
+  },
+  {
+    path:'/service',
+    component:Service,
+  }
 ];
 
 export default routes;

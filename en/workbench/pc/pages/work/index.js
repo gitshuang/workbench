@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 
+
 /*   actions   */
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
@@ -31,7 +32,6 @@ const {
   tabArea,
   wrap,
   titleServiceDisplayStyle,
-  header,
   work,
   titleArea,
   service,
@@ -51,6 +51,7 @@ const {
   setPinCancel,
   getProductInfo,
   returnDefaultState,
+  resetHistory
 } = workActions;
 
 
@@ -66,6 +67,7 @@ const {
     'titleServiceType',
     'expandedSidebar',
     'type',
+    'backUrl',
     {
       key: 'domainName',
       value: ({ domainName, type }) => (type === 1 ? '' : domainName),
@@ -85,6 +87,7 @@ const {
     setPinCancel,
     returnDefaultState,
     setCurrent,
+    resetHistory
   },
 )
 export default class Work extends Component {
@@ -242,6 +245,7 @@ export default class Work extends Component {
   }
 
   goBack() {
+    this.props.resetHistory();
     this.props.history.replace('');
   }
 
@@ -287,6 +291,12 @@ export default class Work extends Component {
     if (loaded) {
       switch (type) {
         case 1:
+          return (
+            <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
+              <ContentContainer />
+            </div>
+          );
+        case 4:
           return (
             <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
               <ContentContainer />
@@ -357,44 +367,43 @@ export default class Work extends Component {
       widthBrm,
       type,
     } = this.props;
-    const iconName = <Icon title="Homepage" type="home" />;
+    const iconName = <Icon title="Homepage" type="computer" />;
     return (
       <div className={`${wrap} um-win ${work}`}>
-        <div className={header}>
-          <div className="um-header">
-            <HeaderContainer onLeftClick={this.goBack} iconName={iconName} leftContent={domainName}>
-              <div className={titleArea}>
-                <span>{title}</span>
-                {
-                  hasRelationFunc ?
-                    (<Icon
-                      title="Related Service"
-                      type={titleServiceType ? 'upward' : 'pull-down'}
-                      className={`
-                        ${titleServiceType ? titleServiceDisplayStyle : ''}
-                        ${service}
-                      `}
-                      onClick={this.btnOnclick}
-                    />) : undefined
-                }
-                <Icon
-                  title="Add to Homepage"
-                  className={pin}
-                  style={{
-                    // right: hasRelationFunc ? '-27px' : '-27px',
-                    position: 'absolute',
-                    top: '0px',
-                  }}
-                  type={pinType ? 'pin2' : 'pin'}
-                  onClick={this.pinDisplayFn}
-                />
-              </div>
-            </HeaderContainer>
-          </div>
+        <div className="um-header header">
+          <HeaderContainer onLeftClick={this.goBack} iconName={iconName} leftContent={domainName}>
+            <div className={titleArea}>
+              <span>{title}</span>
+              {
+                hasRelationFunc ?
+                  (<Icon
+                    title="Related Service"
+                    type={titleServiceType ? 'upward' : 'pull-down'}
+                    className={`
+                      ${titleServiceType ? titleServiceDisplayStyle : ''}
+                      ${service}
+                    `}
+                    onClick={this.btnOnclick}
+                  />) : undefined
+              }
+              <Icon
+                title="Add to Homepage"
+                className={pin}
+                style={{
+                  // right: hasRelationFunc ? '-27px' : '-27px',
+                  position: 'absolute',
+                  top: '0px',
+                }}
+                type={pinType ? 'pin2' : 'pin'}
+                onClick={this.pinDisplayFn}
+              />
+            </div>
+          </HeaderContainer>
           {
-            widthBrm ? <BreadcrumbContainer withSidebar={type !== 1} /> : null
+            widthBrm ? <BreadcrumbContainer withSidebar={type !== 1 && type !== 4}/> : null
           }
         </div>
+
         <div className={`${workArea}`}>
           {this.makeLayout()}
         </div>

@@ -15,7 +15,6 @@
   width: 120px;
   text-align: right;
   font-size: 14px;
-  color:RGBA(71, 77, 84, 1);
 }
 .enter_form :global(.u-label>span) {
   vertical-align: middle;
@@ -41,7 +40,7 @@
 }
 
 .enter_form :global(.u-form-submit) {
-  padding-left: 75px;
+  padding-left: 110px;
 }
 .enter_form :global(.u-form-submit>button) {
   width:338px;
@@ -94,9 +93,6 @@
 .enter_title :global(.u-select-selection)>div{
   line-height: 36px
 } 
-/* .enter_title :global(.u-select-dropdown .u-select-dropdown-menu-item-selected){
-  background: transparent !important;
-} */
 
 .hr{
   background: rgba(13,20,36,0.1);
@@ -114,21 +110,12 @@
   overflow: hidden;
 }
 
-.enter_form :global(.u-input-inner>input){
+.enter_form :global(.u-input-inner > input){
   width:338px !important;
-  height:36px;
   background:rgba(255,255,255,1);
   border-radius: 3px ;
-  border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-.enter_form :global(.u-input-before){
-  height:36px;
-  line-height: 36px;
-}
-/* .enter_form >span:nth-child(5) :global(.u-form-item){
-  margin-top: -20px;
-} */
 .enter_form :global(.u-city-select){
   display: inline-flex;
 }
@@ -142,16 +129,9 @@
   height: 36px;
 }
 
-
-/*.enter_form :global(.u-select .u-select-arrow):before{
-  content: "\E964" !important;
-  font-family: 'iconfont' !important;
-}*/
-
 .tenant_address{
   background: red;
 }
-
 
 .lxr_hr{
   height:1px;
@@ -167,7 +147,7 @@
   margin-bottom: 20px;
   font-size: 17px;
 }
-.hr2{;
+.hr2{
   margin-top: -65px;
   background:rgba(13,20,36,1) !important;
   opacity:0.4;
@@ -190,15 +170,9 @@
 
 .appBreadcrumb{
   padding-left: 23px;
-  font-size: 12px;
+  font-size: 14px;
   height:32px;
   background:rgba(255,255,255,1);
-}
-.team_cont :global( .u-select-selection-rendered){
-  line-height: 36px;
-}
-.team_cont :global(.u-select-selection--single){
-  height: 36px !important;
 }
 .team_cont :global(.u-radio){
   margin-right: 18px;

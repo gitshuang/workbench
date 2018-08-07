@@ -13,6 +13,7 @@ import Radio from 'bee/radio';
 import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
 import Progress from 'pub-comp/progress';
+
 import Upload from 'containers/upload';
 
 import 'assets/style/Form.css';
@@ -75,8 +76,8 @@ class CreateEnter extends Component {
       { value: 'C', label: '101-200' },
       { value: 'D', label: '201-500' },
       { value: 'E', label: '501-1000' },
-      { value: 'F', label: '1001－2000' },
-      { value: 'G', label: '>2000人' },
+      { value: 'F', label: '1001-2000' },
+      { value: 'G', label: '>2000人_en' },
     ];
 
     this.tenantIndustry = [
@@ -205,7 +206,7 @@ class CreateEnter extends Component {
     if (address && address.province) {
       TenantAddress.value = `${address.province}|${address.city}|${address.area}|${Values}`;
     } else {
-      TenantAddress.value = `$i18n{Beijing}|北京|Dongcheng|${Values}`;
+      TenantAddress.value = `北京|北京|东城|_en${Values}`;
     }
 
     const JoinPermission = data.find(da => da.name === 'joinPermission');

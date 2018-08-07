@@ -33,17 +33,17 @@ class Teamconfig extends Component {
   render() {
     return (
       <div className="um-win">
-        <div className="um-header" style={{ background: 'white' }}>
-          <Header onLeftClick={this.goHome} iconName="home" >
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName="computer" >
             <div>
               <span>Team Settings</span>
             </div>
           </Header>
-          <div style={{ paddingLeft: '23px', fontSize: '12px' }}>
+          <div className="appBreadcrumb">
             <BreadcrumbContainer data={[{ name: 'Team Settings' }]} goback={this.goBack} />
           </div>
         </div>
-        <div className="um-content">
+        <div className="um-content content">
           <TeamconfigContent />
         </div>
       </div>

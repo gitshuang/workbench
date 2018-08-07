@@ -15,7 +15,9 @@
 }
 
 .enter_option button i{
-  margin-top: 8px;
+  margin-top:3px;
+  color: #ffffff;
+  transition: all 0.3s;
 }
 
 .enter_option button:hover{
@@ -23,4 +25,9 @@
 }
 .item_li{
   cursor: pointer;
+}
+
+.up{
+  transform: rotate(-180deg);
+  transition: all 0.3s;
 }

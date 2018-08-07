@@ -32,7 +32,7 @@ var walk = function (dir, dir_i18n, done) {
           results.push(file);
           var half = file.substring(root.length, file.length);
           // 20180531新增判断如果不是js文件，则不用解析了
-          if(file.match(/.jpg|.gif|.png|.bmp|.svg/i)){
+          if(file.match(/.jpg|.gif|.png|.bmp|.svg|.css|.woff/i)){
             //fs.copyFileSync(file,root_i18n+half);
             fs.writeFileSync(root_i18n+half, fs.readFileSync(file)); 
           }else{
@@ -42,7 +42,7 @@ var walk = function (dir, dir_i18n, done) {
             let count = 0;
             readLine.on('line', (line) => {
                 var spieces=line;// 拿到所有字符串
-                var re= /[\u4E00-\u9FA5]+([\u4E00-\u9FA5]|[\uFE30-\uFFA0]|[0-9]|[\?\,\。\.\、])+/g; 
+                var re= /([\u4E00-\u9FA5]|[\uFE30-\uFFA0])+([\u4E00-\u9FA5]|[\uFE30-\uFFA0]|[0-9]|[\?\,\。\.\、\|\/])*/g; 
                 var regNote =/(^.*\/\/|^\s*\/\*.*\*\/$)/g; // 存在的问题：中文展示后面有注释
                 var replaced=''
                 var matchNote = spieces.match(regNote);

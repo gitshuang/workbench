@@ -17,6 +17,7 @@ import {
 const {
   setExpandedSidebar,
   popBrm,
+  popUrl
 } = actions;
 
 @withRouter
@@ -30,7 +31,8 @@ const {
   ),
   {
     setExpandedSidebar,
-    popBrm
+    popBrm,
+    popUrl
   }
 )
 class BreadcrumbContainer extends Component {
@@ -45,21 +47,23 @@ class BreadcrumbContainer extends Component {
       breadcrumbMenu: "",
       breadcrumbTab: ""
     }
-    this.setExpended = this.setExpended.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
     this.back = false;
     this.backVal = 0;
     this.backClickUrl = '';//线上点击返回需要go(-2),其他需要go(-1)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { withSidebar } = this.props;
-    if (!withSidebar) {
-      this.setExpended();
-    }
+  componentDidMount(){
+    this.setExpended();
   }
 
-  setExpended() {
+  // componentWillReceiveProps(nextProps) {
+  //   const { withSidebar } = this.props;
+  //   if (!withSidebar) {
+  //     this.setExpended();
+  //   }
+  // }
+
+  setExpended = () => {
     this.setExpandedSidebar(true);
     this.setState({
       breadcrumbMenu: breadcrumb_menu,
@@ -74,7 +78,7 @@ class BreadcrumbContainer extends Component {
     window.dispatchEvent(evt);
   }
 
-  closeMenu() {
+  closeMenu = () => {
     this.setExpandedSidebar(false);
     this.setState({
       breadcrumbMenu: "",
@@ -83,21 +87,22 @@ class BreadcrumbContainer extends Component {
   }
 
   goback = (index) => {
-    const { backUrl, popBrm, history, match, brm } = this.props;
-    const {
-      params: {
-        code,
-        type,
-      },
-    } = match;
+    const { backUrl, popBrm, history, match, brm, popUrl } = this.props;
+    // const {
+    //   params: {
+    //     code,
+    //     type,
+    //   },
+    // } = match;
     // 取brm 最后的值
     const data = brm[brm.length - 1];
 
     // TODO 现在只是做的 如果是面包屑点击 按照返回规则， 点击返回按钮只切换服务
     if (index > -1) {
+      // key 最大为0
       const key = index + 1 - data.length
       history.go(key);
-      popBrm({ index: key });
+      popBrm({ index: -key });
       return false;
     }
     // 下边 方法为 如果实现返回一级一级的   先注释  担心哪天被还原
@@ -118,11 +123,12 @@ class BreadcrumbContainer extends Component {
     //     popBrm({ index: -1 });
     //   }
     //   return false;
-    // } 
-    backUrl.pop();
+    // }
+    // backUrl.pop();
+    popUrl();
     if (backUrl.length) {
       const currUrl = backUrl[backUrl.length - 1];
-      history.replace(`/${type}/${code}/${currUrl}`);
+      history.replace(`/${currUrl.type}/${currUrl.code}/${currUrl.subCode}`);
     } else {
       history.replace('');
     }
@@ -157,7 +163,10 @@ class BreadcrumbContainer extends Component {
           ) : null
         }
         <div className={breadcrumbArea}>
-          <Breadcrumbs data={brm && brm.length ? brm[brm.length - 1] : [{ name: '' }]} goback={this.goback} />
+          <Breadcrumbs
+            data={brm && brm.length ? brm[brm.length - 1] : [{ name: '' }]}
+            goback={this.goback}
+          />
         </div>
       </div>
     );
