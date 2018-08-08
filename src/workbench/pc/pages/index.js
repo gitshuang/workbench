@@ -4,6 +4,7 @@ import {
   HashRouter as Router,
   withRouter,
   Switch,
+	Route
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from 'router';
@@ -43,6 +44,11 @@ function timer(fn, time) {
     clearTimeout(timerId);
   };
 }
+
+const NoMatch = ({history}) => {
+	history.replace('');
+	return <div/>
+};
 
 @withRouter
 @connect(mapStateToProps(), {
@@ -84,7 +90,7 @@ class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     };
     this.isLogin = window.os_fe_isLogin && window.os_fe_isLogin();
     // this.isLogin = true;
@@ -158,25 +164,16 @@ class Root extends Component {
   }
 
   render() {
-    
+
     return (
       <div>
-        {
-          this.isLogin ?
-            (
-              <Switch>
-                {
-                  routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
-                }
-              </Switch>
-            ) : (
-              <Switch>
-                {
-                  loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
-                }
-              </Switch>
-            )
-        }
+				<Switch>
+					{
+						this.isLogin ? routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />) :
+							loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+					}
+					<Route component={NoMatch}/>
+				</Switch>
         <BasicDialog />
       </div>
     );
