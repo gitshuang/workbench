@@ -110,7 +110,6 @@ class Root extends Component {
         requestError(payload);
       } else {
         requestSuccess();
-        payload.allowTenants = [];
         if (!payload.allowTenants.length) {
           this.props.history.replace('/establish');
         } else {
