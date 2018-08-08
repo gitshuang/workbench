@@ -45,7 +45,7 @@ function timer(fn, time) {
 }
 
 @withRouter
-@connect(mapStateToProps(),{
+@connect(mapStateToProps(), {
   requestStart,
   requestSuccess,
   requestError,
@@ -72,27 +72,26 @@ class Root extends Component {
   };
   static defaultProps = {
     history: {},
-    requestStart: () => {},
-    requestSuccess: () => {},
-    requestError: () => {},
-    getServiceList: () => {},
-    getMessage: () => {},
-    getPoll: () => {},
-    getPortal: () => {},
-    getUserInfo: () => {},
+    requestStart: () => { },
+    requestSuccess: () => { },
+    requestError: () => { },
+    getServiceList: () => { },
+    getMessage: () => { },
+    getPoll: () => { },
+    getPortal: () => { },
+    getUserInfo: () => { },
   };
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
-      inited: false,
+      
     };
-    this.isLogin =window.os_fe_isLogin && window.os_fe_isLogin();
+    this.isLogin = window.os_fe_isLogin && window.os_fe_isLogin();
     // this.isLogin = true;
   }
   componentWillMount() {
-    if(!this.isLogin){
-      return false
+    if (!this.isLogin) {
+      return false;
     }
     const {
       requestStart,
@@ -101,6 +100,7 @@ class Root extends Component {
       getServiceList,
       getPortal,
       getUserInfo,
+      getPoll
     } = this.props;
     requestStart();
 
@@ -110,60 +110,75 @@ class Root extends Component {
         requestError(payload);
       } else {
         requestSuccess();
-      }
-    });
-    // 请求快捷应用
-    getServiceList().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        requestSuccess();
-      }
-    });
-    // 请求是否含有portal 跳转到友空间首页
-    getPortal().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        requestSuccess();
+        payload.allowTenants = [];
+        if (!payload.allowTenants.length) {
+          this.props.history.replace('/establish');
+        } else {
+          // 请求快捷应用
+          getServiceList().then(({ error, payload }) => {
+            if (error) {
+              requestError(payload);
+            } else {
+              requestSuccess();
+            }
+          });
+          // 请求是否含有portal 跳转到友空间首页
+          getPortal().then(({ error, payload }) => {
+            if (error) {
+              requestError(payload);
+            } else {
+              requestSuccess();
+            }
+          });
+          const browser = navigator.appName;
+          if (browser !== 'Microsoft Internet Explorer') {
+            IM(new componentTool('IM'), getContext(), { // eslint-disable-line
+              el: 'IM',
+            });
+          }
+          regMessageTypeHandler(this);
+          // 心跳
+          timer(getPoll, 10000);
+        }
       }
     });
   }
 
   componentDidMount() {
-    if(!this.isLogin) return false;
-    const { getPoll } = this.props;
-    const browser = navigator.appName;
-    if (browser !== 'Microsoft Internet Explorer') {
-      IM(new componentTool('IM'), getContext(), { // eslint-disable-line
-        el: 'IM',
-      });
-    }
-    regMessageTypeHandler(this);
-    // 心跳
-    timer(getPoll, 10000);
+    // if(!this.isLogin) return false;
+    // const { getPoll } = this.props;
+    // const browser = navigator.appName;
+    // if (browser !== 'Microsoft Internet Explorer') {
+    //   IM(new componentTool('IM'), getContext(), { // eslint-disable-line
+    //     el: 'IM',
+    //   });
+    // }
+    // regMessageTypeHandler(this);
+    // // 心跳
+    // timer(getPoll, 10000);
   }
 
   render() {
+    
     return (
       <div>
-       {
-         this.isLogin?
-         (
-          <Switch>
-            {
-              routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
-            }
-          </Switch>
-         ):(
-          <Switch>
-            {
-              loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
-            }
-          </Switch>
-         )
-       }
-       <BasicDialog/>
+        {
+          this.isLogin ?
+            (
+              <Switch>
+                {
+                  routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+                }
+              </Switch>
+            ) : (
+              <Switch>
+                {
+                  loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+                }
+              </Switch>
+            )
+        }
+        <BasicDialog />
       </div>
     );
   }
