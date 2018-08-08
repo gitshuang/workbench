@@ -7,12 +7,11 @@ import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import Header from 'components/header';
 import EstablishContent from 'containers/establishContent';
-import Icon from 'pub-comp/icon';
 
 import Personals from 'pages/home/personal';
 
 import logoUrl from 'assets/image/wgt/yonyou_logo.svg';
-import { logo, establish, hidden, imgInner } from './style.css';
+import { logo, establish, } from './style.css';
 
 
 const { getSearchEnterOrTeam } = homeActions;
@@ -61,7 +60,7 @@ class Establish extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allowTenants: [],
+      
     };
   }
 
@@ -72,9 +71,6 @@ class Establish extends Component {
         requestError(payload);
         return false;
       }
-      this.setState({
-        allowTenants: payload,
-      });
       requestSuccess();
     });
   }
@@ -82,7 +78,6 @@ class Establish extends Component {
 
   render() {
     const { userInfo } = this.props;
-    const { allowTenants } = this.state;
     const iconname = <Personals />;
     return (
       <div className={`um-win ${establish}`} >
