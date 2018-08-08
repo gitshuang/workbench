@@ -46,9 +46,9 @@ class Personals extends Component {
       userInfo: {},
       personalText: {
         name: 'Enterprise',
-        edit: '首页编辑_en',
-        info: '员工信息_en',
-        invitation: '邀请成员_en',
+        edit: 'en首页编辑_en',
+        info: 'en员工信息_en',
+        invitation: 'en邀请成员_en',
         exit: '退出_en',
         markTitle: '创建成功_en',
         markDes: '快点邀请成员一起好好工作吧_en',
