@@ -6,6 +6,7 @@ import Header from 'components/header';
 import EstablishContent from 'containers/establishContent';
 import Personals from 'pages/home/personal';
 import logoUrl from 'assets/image/logo.svg';
+import { wrap } from './index.css';
 
 @withRouter
 class Establish extends Component {
@@ -33,7 +34,7 @@ class Establish extends Component {
   render() {
     const iconname = <Personals />;
     return (
-      <div className={`um-win`} >
+      <div className={`um-win ${wrap}`} >
         <div className="um-header" style={{ background: 'white', position: 'relative' }}>
           <Header iconName={iconname}>
             <img alt="" src={logoUrl} style={{ width: '86px' }} />
