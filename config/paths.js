@@ -12,13 +12,12 @@ switch (process.argv[2].replace(reg,'')) {
     outPut='en_US'
     break;
   case "tw":
-    outPut='en_US'
+    outPut='zh_TW'
     break;
   default:
     outPut='zh_CN'
     break;
 }
-var outPut =  process.argv.length < 3 ? 'zh_CN' : `en_US`;
 function resolve (dir) {
   return path.join(__dirname, `../${goalFilePath}/workbench/pc/`, dir)
 }

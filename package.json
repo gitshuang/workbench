@@ -13,7 +13,8 @@
     "test_en": "node scripts/test.js LAN_TYPE=en",
     "daily": "node scripts/daily.js LAN_TYPE=src",
     "daily_en": "node scripts/daily.js LAN_TYPE=en",
-    "formal": "node scripts/formal.js LAN_TYPE=src"
+    "formal": "node scripts/formal.js LAN_TYPE=src",
+    "formal_en": "node scripts/formal.js LAN_TYPE=en"
   },
   "dependencies": {
     "@diworkfe/public-components": "git+http://git.yonyou.com/iuap_ap/diwork-public-components.git#develop",
