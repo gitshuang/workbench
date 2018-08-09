@@ -1,0 +1,87 @@
+.enter_form :global(.u-label) {
+  width: 120px;
+  text-align: right;
+}
+
+.enter_form :global(.province),
+.enter_form :global(.city),
+.enter_form :global(.area) {
+  width: 90px!important;
+}
+
+.enter_form :global(.uf.uf-calendar) {
+  position: relative;
+  top: -4px;
+  right: 9px;
+}
+
+.enter_form :global(.u-form-submit) {
+  padding-left: 75px;
+}
+.enter_form :global(.u-form-submit>button) {
+  width:338px;
+  height:32px; 
+  background:rgba(225,76,70,1);
+  border-radius: 3px;
+}
+.enter_form :global(textarea) {
+  min-height: 100px;
+  min-width: 300px;
+}
+.enter_form :global(.u-form-item){
+  width: 100%;
+}
+
+.pageEnterprise{
+  margin: 90px 120px 0;
+  background: #fff;
+}
+
+.enterTitle{
+  /* height:27px;  */
+  font-size:21px;
+  line-height:27px; 
+  width: 360px;
+  margin: 0 auto; 
+  padding-top: 30px;
+  padding-bottom: 10px; 
+}
+
+.hr{
+  background: rgba(13,20,36,0.1);
+  height: 1px;
+  margin-left: -100px;
+  border-top: none;
+  margin:0;
+  margin-bottom: 25px;
+}
+
+.enterCont{
+  width: 600px;
+  margin: 0 auto;
+  padding-left: 80px;
+  overflow: hidden;
+}
+
+.enter_form :global(.u-input-inner>input){
+  height:36px;
+  background:rgba(255,255,255,1);
+  border-radius: 3px ; 
+}
+
+
+
+.enter_form :global(.u-select-lg .u-select-selection--single){
+  width: 271px;
+}
+
+.pageEnterprise :global(.u-form-submit){
+  padding-left: 110px;
+}
+
+.appBreadcrumb{
+  padding-left: 23px;
+  font-size: 14px;
+  height:32px;
+  background:rgba(255,255,255,1);
+}

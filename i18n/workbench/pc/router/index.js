@@ -14,6 +14,8 @@ const Search = asyncComponent(() => import(/* webpackChunkName: "Search" */'page
 // 原来设计的 现在其实是搜索的组件
 const SearchResult = asyncComponent(() => import(/* webpackChunkName: "SearchResult" */'containers/searchResult'));
 // 创建团队/企业
+const Establish = asyncComponent(() => import(/* webpackChunkName: "Establish" */'pages/establish'));
+// 创建团队/企业
 const EstablishUserCenter = asyncComponent(() => import(/* webpackChunkName: "EstablishUserCenter" */'pages/establishusercenter'));
 // 创建团队
 const CreateTeam = asyncComponent(() => import(/* webpackChunkName: "CreateTeam" */'pages/createteam'));
@@ -72,6 +74,10 @@ const routes = [
         exact: true,
       },
     ],
+  },
+  {
+    path: '/establish',
+    component: Establish,
   },
   {
     path: '/establishusercenter',

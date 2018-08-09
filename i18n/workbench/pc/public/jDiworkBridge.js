@@ -51,6 +51,10 @@ const handlerList = {
       type,
     });
   },
+	addBrm_prevent(type, event) {
+		dispatchMessageTypeHandler(event);
+		window.brmClickPrevent = {type, source: this.source};
+	},
   popBrm(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
