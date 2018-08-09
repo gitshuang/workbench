@@ -117,11 +117,28 @@ class MoveToGroup extends Component {
     }) => {
       const classname = widgetId === selectId ? selectedli : '';
       if (children && children.length) {
-        result.push(<SubMenu key={widgetId} title={<span onClick={() => { this.handlerClick(widgetId); }} onKeyDown={() => { this.handlerClick(widgetId); }} role="presentation" className={classname}>{widgetName}</span>}>{this.makeSelectInterface(children, selectId)}</SubMenu>);
+        result.push(
+          <SubMenu 
+            key={widgetId} 
+            classname={classname}
+            title={
+              <span onClick={() => { this.handlerClick(widgetId); }} 
+                onKeyDown={() => { this.handlerClick(widgetId); }} 
+                role="presentation" 
+                style = {{display:"block"}}
+                className={classname}
+              >
+                {widgetName}
+              </span>
+            }
+          >
+            {this.makeSelectInterface(children, selectId)}
+          </SubMenu>);
       } else {
         const pushOb = (
           <Item key={widgetId} className={classname}>
-            <span
+            <span 
+              style = {{display:"block"}}
               onClick={() => { this.handlerClick(widgetId); }}
               onKeyDown={() => { this.handlerClick(widgetId); }}
               role="presentation"

@@ -18,14 +18,10 @@ import {
   ufSearch,
   appContent,
   menuBtnGroup,
-  link,
-  icon,
   search_tit,
   search_icon_con,
   searchPanel,
   um_content,
-  icon_close,
-  icon_open,
   topTabBtns,
   appsList,
   openMarketBtn,
@@ -33,8 +29,8 @@ import {
 
 import applicationActions from 'store/root/application/actions';
 import rootActions from 'store/root/actions';
-const {getAllApplicationList} = applicationActions;
-const {requestStart, requestSuccess, requestError} = rootActions;
+const { getAllApplicationList } = applicationActions;
+const { requestStart, requestSuccess, requestError } = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
@@ -60,9 +56,9 @@ class serviceClassify extends Component {
       currentTab: 0,
       currentLabel: -1,
       currentApps: [],
-      apps:[],
+      apps: [],
       appMaps: {},
-      tabs:[],
+      tabs: [],
     }
   }
 
@@ -74,11 +70,12 @@ class serviceClassify extends Component {
       getAllApplicationList,
     } = this.props;
     requestStart();
-    getAllApplicationList().then(({error, payload}) => {
+    getAllApplicationList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
         return false;
       }
+      requestSuccess();
       this.setState({
         apps: payload.applications,
         appMaps: payload.applications.reduce((result, app) => {
@@ -98,7 +95,6 @@ class serviceClassify extends Component {
         tabs: payload.labelGroups,
         currentApps: [...payload.applications],
       })
-      requestSuccess();
     });
   }
 
@@ -145,7 +141,7 @@ class serviceClassify extends Component {
     this.changeCurrentApp(this.state.currentTab, index);
   }
 
-  btnSearch = (currentApps)=>{
+  btnSearch = (currentApps) => {
     const { value, apps, currentLabel } = this.state;
     if (!currentApps) {
       currentApps = this.state.currentApps;
@@ -159,9 +155,9 @@ class serviceClassify extends Component {
     }
   }
 
-  renderList(){
+  renderList() {
     const { currentApps } = this.state;
-    return currentApps.map(({ applicationId, applicationCode, applicationIcon, applicationName })=>{
+    return currentApps.map(({ applicationId, applicationCode, applicationIcon, applicationName }) => {
       return (
         <GoTo
           key={`${applicationId}${applicationCode}`}
@@ -174,7 +170,7 @@ class serviceClassify extends Component {
   }
   renderLabels() {
     const { tabs, currentTab, currentLabel } = this.state;
-    const labels = (tabs[currentTab] && tabs[currentTab].labels) || []; 
+    const labels = (tabs[currentTab] && tabs[currentTab].labels) || [];
     return [
       <Button
         className={currentLabel === -1 ? 'active' : ''}
@@ -185,15 +181,15 @@ class serviceClassify extends Component {
       ...labels.map(({ labelId, labelName }, index) => (
         <Button
           className={currentLabel === index ? 'active' : ''}
-          onClick={ this.handleChangeLabel(index) }
-          key={ labelId }>
-          { labelName }
+          onClick={this.handleChangeLabel(index)}
+          key={labelId}>
+          {labelName}
         </Button >
       )),
     ];
   }
   //类别、领域
-  renderTabs(){
+  renderTabs() {
     const {
       currentTab,
       tabs
@@ -201,7 +197,7 @@ class serviceClassify extends Component {
 
     return tabs.map(({ labelGroupName }, index) => {
       return (
-        <Button className={ currentTab === index ? 'active' : '' }
+        <Button className={currentTab === index ? 'active' : ''}
           onClick={this.handleChangeTab(index)}
           shape="border"
           key={index}>
@@ -213,7 +209,7 @@ class serviceClassify extends Component {
   //输入框修改data数据源
   inputOnChange = (value) => {
     this.setState({
-        value,
+      value,
     });
   }
 
@@ -221,7 +217,7 @@ class serviceClassify extends Component {
     this.props.history.push('/market')
   }
 
-  getCompanyType=()=>{
+  getCompanyType = () => {
     const { tenantid } = window.diworkContext();
     const {
       userInfo,
@@ -230,19 +226,19 @@ class serviceClassify extends Component {
         admin,
       },
     } = this.props;
-    if(!userInfo){return false;}
+    if ( !Object.keys(userInfo).length ) { return false; }
     const curTenant = allowTenants.filter((tenant) => {
       return tenant.tenantId === tenantid;
     })[0];
     let type = false;
-    if ((curTenant && curTenant.type == 0) && admin ) {
+    if ((curTenant && curTenant.type == 0) && admin) {
       type = true;
     }
     return type;
   }
 
-  onKeyup=(e)=>{
-    if(e.keyCode === 13){
+  onKeyup = (e) => {
+    if (e.keyCode === 13) {
       this.btnSearch();
     }
   }
@@ -255,17 +251,17 @@ class serviceClassify extends Component {
     const _appType = this.getCompanyType();
 
     return (
-      <div className={bg+" um-content um-vbox"}>
-        <div className={bg_wrap+" um-content um-vbox"}>
+      <div className={bg + " um-vbox"}>
+        <div className={bg_wrap + " um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
-              <FormControl className={serviceSearch} placeholder="Search App" value={value} onKeyDown={this.onKeyup} onChange={this.inputOnChange}/>
+              <FormControl className={serviceSearch} placeholder="Search App" value={value} onKeyDown={this.onKeyup} onChange={this.inputOnChange} />
               <div className={search_icon_con}>
                 <span>|</span>
                 <Icon type="search" className={ufSearch} onClick={() => { this.btnSearch() }}></Icon>
                 <span className={search_tit} onClick={() => { this.btnSearch() }}>Search</span>
               </div>
-              {_appType?<ButtonBrand className={openMarketBtn} onClick={this.openMarket} >App Market</ButtonBrand>:null}
+              {_appType ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >App Market</ButtonBrand> : null}
             </div>
 
             <div className={um_content}>
@@ -275,13 +271,13 @@ class serviceClassify extends Component {
                     {tabs}
                   </ButtonGroup>
                 </div>
-                <div className={ menuBtnGroup}>
+                <div className={menuBtnGroup}>
                   <ButtonGroup vertical>
                     {labels}
                   </ButtonGroup>
                 </div>
               </div>
-              <div className={appContent+" um-bf1 um-content"}>
+              <div className={appContent + " um-bf1 um-content"}>
                 <ul className={`${appsList} ${clearfix}`}>
                   {list}
                 </ul>

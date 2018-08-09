@@ -19,8 +19,6 @@ import SuccessDialog from './successDialog';
 
 
 import {
-  header,
-  appBreadcrumb,
   wrap,
   content,
   urlArea,
@@ -130,7 +128,7 @@ class Invitation extends Component {
     });
   }
 
-  goBack() {
+  goBack = () => {
     this.props.history.goBack();
   }
 
@@ -218,19 +216,17 @@ class Invitation extends Component {
     */
     return (
       <div className="um-win">
-        <div className={header}>
-          <div className="um-header">
-            <Header onLeftClick={this.goHome} iconName="home" >
-              <div>
-                <span>$i18n{index.js5}$i18n-end</span>
-              </div>
-            </Header>
-            <div className={appBreadcrumb}>
-              <BreadcrumbContainer data={[{ name: '$i18n{index.js6}$i18n-end' }]} goback={this.goBack} />
+        <div className="um-header header">
+          <Header onLeftClick={this.goHome} iconName="computer" >
+            <div>
+              <span>$i18n{index.js5}$i18n-end</span>
             </div>
+          </Header>
+          <div className="appBreadcrumb">
+            <BreadcrumbContainer data={[{ name: '$i18n{index.js6}$i18n-end' }]} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${wrap} um-content`}>
+        <div className={`${wrap} um-content content`}>
           <div className={content}>
             <Tabs
               destroyInactiveTabPane

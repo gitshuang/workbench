@@ -15,11 +15,12 @@ import { openService } from 'public/regMessageTypeHandler';
 
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
-const { setCurrent, getAllEnable, getCurrent} = rootActions;
+const { setCurrent, getAllEnable, getCurrent } = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
     'requestDisplay',
+    'userInfo',
     {
       key: 'exitModal',
       value: (home, ownProps, root) => root.teamconfig.exitModal,
@@ -41,10 +42,26 @@ class Personals extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currType: 0,
       userInfo: {},
+      personalText: {
+        name: '企业',
+        edit: '首页编辑',
+        info: '员工信息',
+        invitation: '邀请成员',
+        exit: '退出',
+        markTitle: '创建成功',
+        markDes: '快点邀请成员一起好好工作吧',
+        do: '我知道了',
+        set: '设置',
+        logout: '注销',
+        account: '账户管理',
+        dynamic: '动态',
+      },
+
       routers: {
         // openEntersetting: '/entersetting/home',
-        openTeamconfig: '/teamconfig',
+        openConfig: '/teamconfig',
         openAccount: '/account',
         openManage: '/manage',
         openUserinfo: '/userinfo',
@@ -102,7 +119,7 @@ class Personals extends Component {
       }
     };
   }
-  
+
   componentWillMount() {
     const { getUserInfo } = this.props;
     getUserInfo().then(({ error, payload }) => {
@@ -111,56 +128,56 @@ class Personals extends Component {
       }
       this.setState({
         userInfo: payload,
+      },()=>{
+        this.getCompanyType();
       });
+
     });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
     this.getDefaultLang();
   }
- 
-  componentDidMount() {
 
-  }
-
-  getAllEnableFunc = () =>{
-    const {getAllEnable} = this.props;
+  getAllEnableFunc = () => {
+    const { getAllEnable } = this.props;
     getAllEnable().then(({ error, payload }) => {
       if (error) {
         return;
       }
-      let languageListVal = [],item={},defaultValue;
-      payload.map((item,index)=>{
-        item = {value:item.langCode, context:item.dislpayName}
+      let languageListVal = [], item = {}, defaultValue;
+      payload.map((item, index) => {
+        item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
-      
+
       this.setState({
-        language:{...this.state.language, languageList:languageListVal}
+        language: { ...this.state.language, languageList: languageListVal }
       })
     });
   }
-  getDefaultLang = () =>{
-    const {getCurrent} = this.props;
+
+  getDefaultLang = () => {
+    const { getCurrent } = this.props;
     getCurrent().then(({ error, payload }) => {
       if (error) {
         return;
       }
       this.setState({
-        language:{...this.state.language,defaultValue:payload.langCode}
-      })
+        language: { ...this.state.language, defaultValue: payload.langCode }
+      });
     });
-   
   }
-  onChangeLanguage = (value) =>{
+
+  onChangeLanguage = (value) => {
     this.props.setCurrent(value).then(({ error, payload }) => {
       if (error) {
         return;
       }
       window.location.reload();
     });;
-  
   }
+
   getCompanyType = () => {
     const { tenantid } = window.diworkContext();
     const {
@@ -169,11 +186,13 @@ class Personals extends Component {
       },
     } = this.state;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
-    let name = '团队';
+    let currType = 1;
     if (curTenant && curTenant.type == 0) {
-      name = '企业';
+      currType = 0;
     }
-    return name;
+    this.setState({
+      currType
+    });
   }
 
   closeRequestDisplay = () => {
@@ -187,13 +206,13 @@ class Personals extends Component {
   }
 
   dispatch = (action) => {
-    const { routers } = this.state;
+    const { routers, currType } = this.state;
+    if (action === "openConfig" && currType == 0) {
+      openService('GZTSYS001');
+      return false;
+    }
     if (routers[action]) {
       this.openNewRouter(routers[action]);
-    }else if(action === "openEntersetting"){  // 如果是打开企业   先暂时在这里处理一下。
-      openService('GZTSYS001');
-    }else {
-
     }
   }
 
@@ -206,30 +225,35 @@ class Personals extends Component {
     const {
       requestDisplay,
       exitModal,
+      dynamicHide,
     } = this.props;
-    const { userInfo, language } = this.state;
-    const { hrefs, TeamData } = this.state;
+    const { userInfo, language, hrefs, TeamData, currType } = this.state;
+    let { personalText } = this.state;
 
-    const titleType = this.getCompanyType();
-    const CurrData = titleType == '企业' ? TeamData[0] : TeamData[1];
+    const currData = currType == 0 ? TeamData[0] : TeamData[1];
+    personalText.name = currType == 0 ? '企业' : '团队';
+
+    const dynamicType = !dynamicHide;
     return (
       <div>
         <Personal
+          currType={currType}
+          personalText={personalText}
           userInfo={userInfo}
           requestDisplay={requestDisplay}
           exitModal={exitModal}
           closeRequestDisplay={this.closeRequestDisplay}
           openExitModal={this.openExitModal}
           dispatch={this.dispatch}
-          titleType={titleType}
           hrefs={hrefs}
           logout={logout}
-          language={this.state.language}
+          language={language}
+          dynamicType={dynamicType}
         />
         {
           exitModal ?
             <TeamExitModal
-              data={CurrData}
+              data={currData}
               isManage={userInfo.admin}
               userId={userInfo.userId}
               close

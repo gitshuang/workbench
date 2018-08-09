@@ -44,10 +44,11 @@ class SelectEnter extends Component {
         company,
       }
     } = this.props;
-
+    let currentId = this.props.userInfo.currentTeamConfig.tenantId;
     let _dataItem = [];
     allowTenants.forEach(({ tenantId: name, tenantName: value, type }) => {
-      if (company != value) {
+      // if (company != value) {
+      if (currentId != name) {
         let obj = {
           name,
           value,
@@ -59,12 +60,12 @@ class SelectEnter extends Component {
     })
     return (
       <div id="open_select" className={select_enter}>
-        <span>$i18n{selectEnter.js0}$i18n-end/$i18n{selectEnter.js1}$i18n-end:</span>
+        <span>$i18n{selectEnter.js0}$i18n-end:</span>
         <DropdownButton
           marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
           lastIem={true}
-          label="$i18n{selectEnter.js2}$i18n-end/$i18n{selectEnter.js3}$i18n-end" type="home" dataItem={_dataItem} />
+          label="$i18n{selectEnter.js1}$i18n-end" type="computer" dataItem={_dataItem} />
       </div>
     )
   }

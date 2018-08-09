@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { openService } from '../../public/regMessageTypeHandler';
 import {
   appItemImg,
   appItem_describe,
@@ -10,7 +11,8 @@ import {
 @withRouter
 class GoTo extends Component {
   goToLink = (path) => {
-    this.props.history.push('/app/'+path);
+    openService(path, 2);
+    // this.props.history.push('/app/'+path);
   }
   render() {
     const {
@@ -23,7 +25,7 @@ class GoTo extends Component {
         <div className={appItemImg}><img src={icon}/></div>
         <div className={appItem_describe}>
           <p className={appItem_tit}>{appName}</p>
-          <p className={appItem_con}>Communication and collaboration in one step</p>
+          {/* <p className={appItem_con}>Communication and collaboration in one step</p> */}
         </div>
       </li>
     )

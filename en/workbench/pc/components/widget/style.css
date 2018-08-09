@@ -11,7 +11,7 @@
   height:176px;
   background:rgba(255,255,255,1);
   border-radius: 3px ;
-  border:1px solid #DBDEE5;
+  /* border:1px solid #DBDEE5; */
   /* box-sizing: content-box; */
   overflow: hidden;
   box-sizing: border-box;
@@ -27,13 +27,13 @@
   }
 }
 /* L尺寸 */
-@media screen and (min-width: 1025px) and (max-width: 1440px) { /*Mobile*/
+@media screen and (min-width: 1025px) and (max-width: 1440px) { /*手机*/
   .widgetItem{
     margin-right: 8px;
   }
 }
 /* M尺寸 */
-@media screen and (min-width: 641px) and (max-width: 1024px) { /*Mobile*/
+@media screen and (min-width: 641px) and (max-width: 1024px) { /*手机*/
   .widgetItem{
     margin-right: 8px;
   }
@@ -87,22 +87,14 @@
   bottom: 50px;
   transform: translate(50%,50%);
 }
-/**
-.defaultArea .default_icon{
-  width: auto;
-  bottom: 57px;
-  right: 50px;
-  font-size: 90px;
-  color: rgba(117,127,140,1);
-}
-**/
+
 
 .titleRight{
   -webkit-box-flex:1.0;
   -webkit-box-pack: start;
   padding-left: 9px;
   font-size:16px;
-  color:rgba(71,77,84,1);
+  color:#111111;
 }
 .widgetItem .content {
   position: relative;
@@ -204,7 +196,7 @@
     height: 32px;
 }
 
-.formControl{
+/* .formControl{
     // -webkit-box-flex:1;
     // width: 200px;
 }
@@ -216,7 +208,7 @@
 .closeBtn{
     // -webkit-box-flex:1;
     // width: 60px;
-}
+} */
 
 .titleEdit{
   position: absolute;
@@ -224,7 +216,7 @@
   top: 40px;
 }
 .popCont{
-    font-family: 'Microsoft YaHei}} Bold', '微软雅黑 Regular', '微软雅黑';
+    font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';
     font-weight: 700;
     font-style: normal;
     font-size: 16px;
@@ -252,7 +244,7 @@
 .footer>div:hover{
   background: #ccc;
 }
-// folder.js
+/* // folder.js */
 .widgetFileItem .fileNum{
   position:absolute;
   right:8px;
@@ -260,7 +252,7 @@
   color:#fff;
 }
 .fileTitleRight{
-  margin-top: 3px;
-  margin-left: 6px;
+  /* margin-top: 3px; */
+  /* margin-left: 6px; */
   color:#fff;
 }

@@ -15,6 +15,7 @@ import Company from 'assets/image/wgt/company.png';
 
 @withRouter
 class EstablishContent extends Component {
+  
   openTeam = () => {
     const { history } = this.props;
     history.push('/createteam/home');
@@ -26,12 +27,12 @@ class EstablishContent extends Component {
   }
 
   render() {
-    const { userInfo,type } = this.props;
+    const { type } = this.props;
     let titleCont = null;
     if(type && type == "init"){
       titleCont = (<div>
         <h5>$i18n{index.js0}$i18n-end</h5>
-        <p className={desc}>$i18n{index.js1}$i18n-end/$i18n{index.js2}$i18n-end</p>
+        <p className={desc}>$i18n{index.js1}$i18n-end</p>
       </div>)
     }
 
@@ -43,12 +44,12 @@ class EstablishContent extends Component {
             <div className={imageBox}>
               <img src = {Team} />
             </div>
-            <h6>$i18n{index.js3}$i18n-end</h6>
+            <h6>$i18n{index.js2}$i18n-end</h6>
             <div className={content}>
-              <p>$i18n{index.js4}$i18n-end<br />&nbsp;&nbsp;&nbsp;$i18n{index.js5}$i18n-end</p>
-              <p>$i18n{index.js6}$i18n-end</p>
+              <p>$i18n{index.js3}$i18n-end<br />$i18n{index.js4}$i18n-end</p>
+              <p>$i18n{index.js5}$i18n-end</p>
               <ul className="clearfix">
-                <li>$i18n{index.js7}$i18n-endIM）</li>
+                <li>$i18n{index.js6}$i18n-endIM$i18n{index.js7}$i18n-end</li>
                 <li>$i18n{index.js8}$i18n-end</li>
                 <li>$i18n{index.js9}$i18n-end</li>
                 <li>$i18n{index.js10}$i18n-end</li>
@@ -67,7 +68,7 @@ class EstablishContent extends Component {
             </div>
             <h6>$i18n{index.js15}$i18n-end</h6>
             <div className={`${content} ${enter_context_div}`}>
-              <p>$i18n{index.js16}$i18n-end<br />&nbsp;&nbsp;&nbsp;$i18n{index.js17}$i18n-end</p>
+              <p>$i18n{index.js16}$i18n-end<br />$i18n{index.js17}$i18n-end</p>
               <p>$i18n{index.js18}$i18n-end</p>
               <ul className="clearfix">
                 <li>$i18n{index.js19}$i18n-end</li>

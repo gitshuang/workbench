@@ -22,4 +22,6 @@ export default createTypes(
   'SET_TABS',
   'CHANGE_SERVICE',
   'UNSHIFT_TAB',
+  'POP_URL',
+  'RESET_HISTORY'
 );

@@ -418,7 +418,7 @@ const reducer = handleActions({
         v.type === 2 && folderNameArr.push(v.widgetName);
       });
     });
-    const newFolderName = avoidSameName(folderNameArr, 'NoDictionary');
+    const newFolderName = avoidSameName(folderNameArr, 'Folder');
     const newdefaultFolder = {
       type: 2,
       widgetName: newFolderName, // "文件夹"+_fileName,

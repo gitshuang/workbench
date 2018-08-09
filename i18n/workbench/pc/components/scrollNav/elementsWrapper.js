@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Element } from 'react-scroll';
-import { content } from './style.css';
+import { content, bg } from './style.css';
 
 const ElementsWrapper = ({
   children,
@@ -9,9 +9,9 @@ const ElementsWrapper = ({
   className,
 }) => (
   <div className={content}>
-    {children.map((child, i) => (
-      <Element style={style} className={className} name={items[i].target} key={i} >{child}</Element>
-    ))}
+      {children.map((child, i) => (
+        <Element style={style} className={className} name={items[i].target} key={i} >{child}</Element>
+      ))}
   </div>
 );
 

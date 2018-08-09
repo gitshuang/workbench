@@ -1,5 +1,5 @@
-{"key":"index.js0","value":{"richText":[{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","charset":134},"text":"G"},{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","charset":134},"text":"roup"}]}}
-{"key":"index.js1","value":{"richText":[{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","charset":134},"text":"G"},{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","charset":134},"text":"roup"}]}}
+{"key":"index.js0","value":{"richText":[{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","family":2},"text":"G"},{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","family":2},"text":"roup"}]}}
+{"key":"index.js1","value":{"richText":[{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","family":2},"text":"G"},{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","family":2},"text":"roup"}]}}
 {"key":"index.js2","value":"To:"}
 {"key":"index.js3","value":"Add Group"}
 {"key":"index.js4","value":"OK"}

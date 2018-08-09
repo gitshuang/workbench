@@ -1,53 +1,183 @@
+*{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/***------------ie9下的input的叉号去掉-----------------**/
+input::-ms-clear{display:none;}
+input::-ms-reveal{display:none;}
+
+html{
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
 body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
-  background-color: rgba(230, 233, 233, 1);
-  font-size: 15px;
-}
-
-.iconfont {
-  font-weight: bold;
+  background: linear-gradient(to bottom,#A8ABB0, #D8DADC);
+  font-size: 14px;
+  color: #555555;
 }
 
 .wrap {
   padding: 20px;
 }
 
-.u-menu-inline>.u-menu-item {
-  font-size: 12px;
-  color: #4A515D;
+.header{
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  background:url("../image/wgt/navBar_bg.png") no-repeat;
+  background-position: right;
+  background-color:#ffffff;
+}
+
+.content{
+  margin-top: 80px;
+}
+
+.appBreadcrumb{
+  padding-left: 23px;
+  font-size: 14px;
+}
+
+body .u-form-control{
+  color: #555555;
+  font-size: 14px;
+  padding-left: 8px;
+  border: 1px solid #D0D0D0;
+  height: 32px;
+  transition: none;
+}
+body .u-form-control:focus{
+  border: 1px solid #00CDC3;
+}
+.u-button {
+  min-width: 5px;
+  padding: 0;
+  color: #555555;
+}
+body .u-button-danger{
+  color: #ffffff;
+}
+body .iconfont{
+  font-size:20px;
+  font-weight:bold;
+  color: #555555;
+}
+body .u-select{
+  color: #555555;
+  font-size: 14px;
+}
+body .u-progress-bar{
+  background-color: #e14b46;
+  line-height: 32px;
+  font-size: 14px;
+}
+body .u-progress-label{
+  float: left;
+  padding: 0 20px;
+}
+body .u-radio.is-checked .u-radio-label:before{
+  border-color: #4E5E68;
+  background:linear-gradient(180deg,rgba(255,255,255,1),rgba(249,250,251,1));
+  box-shadow:0px 1px 0px 0px rgba(22,29,37,0.05);
+}
+body .u-radio.is-checked .u-radio-label:after{
+  background:#4E5E68;
+}
+body .u-select-selection--single{
+  height: 32px;
+}
+body .u-select-selection-rendered{
+  line-height: 32px;
+}
+body .u-select-focused .u-select-selection, 
+body .u-select-selection:focus, 
+body .u-select-selection:active{
+  border-color: #00CDC3;
+}
+body .u-select-open .u-select-selection{
+  border-color: #00CDC3;
+}
+
+body .u-select-dropdown .u-select-dropdown-menu-item-active,
+body .u-select-dropdown .u-select-dropdown-menu-item:hover{
+  background: #f3f3f3;
+  /* color: #E14C46; */
+  font-weight: normal;
+}
+
+body .u-select-dropdown .u-select-dropdown-menu-item-selected,
+body .u-select-dropdown .u-select-dropdown-menu-item-selected:hover{
+  color: #e14b46;
+  background: #e4e4e4;
+  font-weight: normal;
+}
+
+body .u-menu{
+  color: #555555;
+}
+
+body .u-form-item .u-input-group-outer .u-input-before, 
+body .u-form-item .u-input-group-outer .u-input-after{
+  background: #f3f3f3;
+  color: #bfbfbf;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px 0 0 3px;
+  line-height: 30px;
+  border-right: none;
+}
+
+.tc i:hover{
+  color:#111111;
+}
+/* 菜单 */
+.u-menu-inline > .u-menu-item {
+  font-size: 14px;
+  color: #555555;
   cursor: pointer;
 }
 
-.u-menu-inline>.u-menu-submenu>.u-menu-submenu-title {
-  /* font-size: 14px; */
-  color: #4A515D;
+.u-menu-inline > .u-menu-submenu > .u-menu-submenu-title {
+  color: #555555;
   cursor: pointer;
 }
 
-.u-menu-inline .u-menu-inline .u-menu-item-selected,
-.u-menu-inline .u-menu-selected {
+.u-menu-inline > .u-menu-submenu > .u-menu-submenu-title .iconfont:hover {
+  color: #111111;
+  cursor: pointer;
+}
+
+.u-menu-inline .u-menu-selected,
+.u-menu-inline .u-menu-inline .u-menu-item-selected {
   border: none;
   color: #E14C46;
-  background: #f4f5f7;
+  /* background: #f4f5f7; */
 }
 
-.u-menu-submenu-inline>.u-menu-submenu-title:after {
+.u-menu-submenu-inline >.u-menu-submenu-title:after {
   font-size: 16px;
   transform: scale(.66667) rotate(-90deg);
 }
 
-.u-menu-inline .u-menu-submenu-active>.u-menu-submenu-title:after {
+.u-menu-inline .u-menu-submenu-active > .u-menu-submenu-title:after {
   color: #E14C46;
 }
 
-.u-menu-inline .u-menu-submenu-active>.u-menu-submenu-title {
+.u-menu-inline .u-menu-submenu-active > .u-menu-submenu-title {
   font-weight: normal;
   background: transparent;
   cursor: default;
 }
-
 
 /** loading **/
 
@@ -55,55 +185,34 @@ body {
   z-index: 0;
 }
 
-/* .src-workbench-pc-pages-work-style__wrap--GLwgN .lebra-navbar-left-content img {
-  display: none;
-} */
-
 .u-modal-open .u-modal {
   overflow-y: hidden;
 }
 
-.lebra-navbar-left {
-  display: flex;
+.u-select:hover .u-select-selection-selected-value{
+  color: #E14C46;
 }
 
-.lebra-navbar-left-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-  -webkit-box-flex: 1;
+.u-select:hover .u-select-arrow:before{
+  color: #E14C46;
 }
 
-/* .lebra-navbar-left-content {
-  -webkit-box-flex: 1;
-  border-radius: 100px;
-  margin-left: 8px;
-
-} */
-/* .home .lebra-navbar-left-content {
-  border: 1px solid #E6E7E9;
-} */
-
-.lebra-navbar-left-icon .iconfont {
-  font-size: 20px;
-}
-.u-form-control{
-  font-size: 14px !important;
-}
 .u-select-arrow:before {
-  color: #878B94;
+  color: #555555;
 }
-
+.u-select-open .u-select-selection-selected-value{
+  color: #E14C46;
+}
 .u-select-open .u-select-arrow:before {
   transform: rotate(-180deg);
   color: #E14C46;
 }
 
+
 .u-input-group .u-form-control:last-child {
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
 }
-
 
 /***----------统一组价样式----------**/
 
@@ -160,16 +269,9 @@ body {
   border: 2px solid #00CDC3;
 }
 
-.u-button {
-  min-width: 5px;
-  padding: 0;
-}
-
-.u-tabs-tab {}
-
 .u-checkbox span {
   padding-top: 4px;
-  color: #888;
+  color: #111111;
 }
 
 .u-select-dropdown .u-select-dropdown-menu-item {
@@ -178,29 +280,13 @@ body {
   white-space:normal !important;
 }
 
-.u-select-dropdown {
-  /* padding-top: 16px; */
-}
 
 .input_phone .u-input-group{
   display: inline-table !important;
 }
-/*全屏弹窗*/
-
-
-/* .u-modal .u-modal-dialog{
-  margin:0;
-}
-.u-modal .u-modal-header{
-  padding:0;
-  border:none;
-} */
-
-/* .lebra-navbar-left-icon img {
-  margin-top: -12px !important;
-} */
 
 /* tagsInput */
+
 .react-tagsinput {
   height: 250px;
   border: 1px solid #ccc;
@@ -217,11 +303,10 @@ body {
 .react-tagsinput-tag {
   background-color: #DFE3E8;
   border-radius: 3px;
-  /* border: 1px solid #DFE3E8; */
   color: #474D54;
   display: inline-block;
   font-family: sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   margin-bottom: 8px;
   margin-right: 8px;
@@ -233,36 +318,21 @@ body {
   font-weight: bold;
 }
 
-/* .react-tagsinput-tag a::before {
-  content: " ×";
-} */
-
 .react-tagsinput-input {
   background: transparent;
   border: 0;
   color: #777;
   font-family: sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   margin-bottom: 6px;
   margin-top: 1px;
   outline: none;
   padding: 5px;
 }
-*{
-  /* box-sizing: border-box; */
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-body{
-  box-sizing: border-box;
-}
 
 .u-radio .u-radio-label:before{
   box-sizing: inherit;
-}
-
-.u-form-control{
-  padding-left: 8px !important;
 }
 
 
@@ -338,6 +408,73 @@ body{
 }
 /***----------统一组价样式 Message 蓝湖交互-----over-----**/
 
-/***------------ie9下的input的叉号去掉-----------------**/
-input::-ms-clear{display:none;}
-input::-ms-reveal{display:none;}
+
+/* 分页组件样式重构 */
+body .paginationClass{
+  margin-top: 10px;
+}
+body .paginationClass .active a,
+body .paginationClass .active a:focus,
+body .paginationClass .active a:hover,
+body .paginationClass .active span,
+body .paginationClass .active span:focus,
+body .paginationClass .active span:hover{
+  border-color: #fcedec;
+  background: #fcedec;
+  color: #e14c46;
+}
+body .paginationClass .disabled a,
+body .paginationClass .disabled a:focus,
+body .paginationClass .disabled a:hover{
+  background: #f3f3f3;
+  color: #bfbfbf;
+  border: 1px solid #f3f3f3;
+}
+body .paginationClass li a{ 
+  width: 28px;
+  height: 28px;
+  background: #e4e4e4;
+  border-color: #e4e4e4;
+  border-radius: 4px;
+  line-height: 28px;
+  padding: 0;
+}
+body .paginationClass li a:hover{
+  border-color:#f3f3f3;
+  background: #f3f3f3;
+}
+body .paginationClass li:first-child a,
+body .paginationClass li:last-child a{ 
+  border-radius: 4px;
+}
+body .paginationClass input{
+  width: 48px;
+  background: #ffffff;
+  border: 1px solid #D0D0D0;
+}
+body .paginationClass input::-webkit-outer-spin-button,
+body .paginationClass input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+body .paginationClass input[type="number"]{
+  -moz-appearance: textfield;
+}
+
+/*---------轻提示与弹框全局样式---------*/
+.u-message {
+  top: 102px !important;
+  width: 100%;
+}
+
+.u-message-notice-description-content {
+  margin-left: 30px
+}
+
+.basic_dialog_modal .close {
+  right: 3px;
+}
+
+.basic_dialog_modal .iconfont:last-child {
+  color: rgba(136,136,136,1)!important;
+}
+/*---------轻提示与弹框全局样式---------*/

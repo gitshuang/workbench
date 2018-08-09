@@ -1,16 +1,12 @@
 .breadcrumbClass {
-  /* background: #fff; */
-  font-size:12px;
+  font-size:14px;
 }
 .breadcrumbClass :global(.iconfont) {
   display:inline-block;
   margin:-8px 0 0 14px;
   vertical-align: middle;
   line-height:27px;
-  color:#878B94;
   cursor: pointer;
-  font-size:18px;
-  font-weight:bold;
 }
 .breadcrumbClass :global(.iconfont):hover{
 	color:#E14C46;
@@ -28,7 +24,7 @@
   color:#fff;
   font-size:14px;
   position: relative;
-  padding-left: 25px;
+  padding-left: 16px;
   box-sizing: border-box;
 }
 .breadcrumbClass section :global(.iconfont){

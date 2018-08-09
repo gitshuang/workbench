@@ -91,11 +91,11 @@ class HeaderPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.userInfo !== nextProps.userInfo) {
-      this.setState({
-        allowTenants: nextProps.userInfo.allowTenants,
-      });
-    }
+    // if (this.props.userInfo !== nextProps.userInfo) {
+    //   this.setState({
+    //     allowTenants: nextProps.userInfo.allowTenants,
+    //   });
+    // }
   }
 
   onLeftTitleClick = () => { }
@@ -115,9 +115,8 @@ class HeaderPage extends Component {
         currentTeamConfig,
       },
     } = this.props;
-    if (!allowTenants || !currentTeamConfig) return null;
-    const { tenantId } = currentTeamConfig;
-    const dom = allowTenants.length
+    const tenantId = currentTeamConfig && currentTeamConfig.tenantId;
+    const dom = allowTenants && allowTenants.length
       ?
       <DropdownButton
         getPopupContainer={() => document.getElementById('home_header')}
@@ -201,7 +200,7 @@ class HeaderPage extends Component {
           <span style={titleStyle}>{title || '首页'}</span>
         </Header>
         {
-          list.length > 1 ? (
+          list.length >= 1 ? (
             <Navbar
               items={list}
               offset={-55}

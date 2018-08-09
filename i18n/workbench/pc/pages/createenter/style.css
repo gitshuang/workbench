@@ -16,9 +16,7 @@
 .enterForm  :global(.u-form-item .u-select){
   min-width: 106px !important;
 }
-.enterForm :global(.u-input-before){
-  line-height: 38px !important;
-}
+
 .enterForm :global(.uf.uf-calendar) {
   position: relative;
   top: -4px;
@@ -31,14 +29,14 @@
   font-size: 15px;
 }
 .enterForm :global(.u-form-submit) {
-  padding-left: 147px;
+  padding-left: 118px;
 }
 .enterForm :global(.u-form-submit>button) {
   width:338px;
   height:32px;
   background:rgba(225,76,70,1);
   border-radius: 3px;
-  margin-left:-30px;
+  margin: 0px;
   color:#fff;
 }
 .enterForm :global(textarea) {
@@ -51,12 +49,12 @@
 .enterForm :global(.u-form-item){
   width: 100%;
 }
-.enterForm :global(.u-select-selection--single){
+/* .enterForm :global(.u-select-selection--single){
   height: 36px !important;
 }
 .enterForm :global(.u-select-selection-rendered){
   line-height: 36px !important;
-}
+} */
 
 .enterCont :global(.u-select-selection-rendered .u-select-selection-rendered){
   line-height: 36px;
@@ -66,24 +64,19 @@
 .pageEnterprise{
   margin: 90px 120px 0;
   background: #fff;
-  /* text-align: center; */
-  /* padding-left: 100px; */
-  /* overflow: auto; */
   padding-bottom: 50px;
   min-width: 500px;
 }
 
 .enterTitle{
-  /* height:27px; */
   font-size:21px;
-  color:#474D54;
+  color: #111111;
   font-weight: 600;
   line-height:27px; 
   width: 360px;
   margin: 0 auto;
   padding-top: 30px;
   margin-bottom: 10px;
-  /* border-bottom: 1px solid rgba(13,20,36,1); */
 }
 
 .hr{
@@ -102,24 +95,18 @@
   padding-bottom: 30px;
   margin-bottom: 30px;
   overflow: hidden;
+  position: relative;
 }
 
 .enterForm :global(.u-input-inner>input){
   width:338px !important;
-  height:36px;
   background:rgba(255,255,255,1);
   border-radius: 3px ;
-  border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-.enterForm :global(.u-input-before){
-  height:36px;
-  line-height: 36px;
-  display: none;
+.enterForm :global(.input_phone .u-input-inner > input){
+  width:302px !important;
 }
-/* .enterForm >span:nth-child(5) :global(.u-form-item){
-  margin-top: -20px;
-} */
 
 .enterForm :global(.u-city-select){
   display: inline-flex;
@@ -130,17 +117,13 @@
   border:1px solid RGBA(78, 89, 104, 0.2);
 }
 
-/*.enterForm :global(.u-select .u-select-arrow):before{
-  content: "\E964" !important;
-  font-family: 'iconfont' !important;
-}*/
-
 .tenantAddress{
   background: red;
 }
 
 .lxrHr{
-  width:450px;
+  /* position: absolute; */
+  width:600px;
   height:1px;
   background:rgba(13,20,36,1);
   opacity:0.4;
@@ -152,7 +135,7 @@
   margin-bottom: 20px;
   font-size: 17px;
 }
-.hr2{;
+.hr2{
   margin-top: -105px;
   background:rgba(13,20,36,1) !important;
   opacity:0.4;
@@ -173,24 +156,6 @@
   width:100%;
 }
 
-.appBreadcrumb{
-  padding-left: 23px;
-  font-size: 12px;
-  height:32px;
-  background:rgba(255,255,255,1);
-}
-
-.homeNone :global( .lebra-navbar-right)>div{
-  display: none;
-}
-.homeNone :global( .u-select-selection-selected-value){
-  color: RGBA(33, 43, 54, 1);
-  font-size: 14px;
-}
-.homeNone :global( .tenant_size){
-  background: red;
-} 
-
 .processLoading{
   width: 338px;
   height: 32px;
@@ -199,22 +164,43 @@
   position: relative;
   box-shadow: none;
 }
+.progressBar :global(.iconfont){
+  color: #fff;
+
+}
+
+@keyframes rotate{
+	from{transform: rotate(0deg);}
+  to{transform: rotate(360deg);}
+}
+@-webkit-keyframes rotate{
+	from{-webkit-transform: rotate(0deg);}
+	to{-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotate{
+	from{-moz-transform: rotate(0deg);}
+	to{-moz-transform: rotate(360deg);}
+}
+@-ms-keyframes rotate{
+	from{-ms-transform: rotate(0deg);}
+	to{-ms-transform: rotate(360deg);}
+}
+@-o-keyframes rotate{
+	from{-o-transform: rotate(0deg);}
+	to{-o-transform: rotate(360deg);}
+}
+
 :global(.u-progress-bar){
   background-color: #e14b46;
   line-height: 32px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .progressBar{
   position: relative;
-  margin-left: 90px;
+  margin-left: 118px;
   cursor: not-allowed;
 }
-.progressBar i{
-  /* position: absolute;
-  right: 190px;
-  top: 10px;
-  color: #fff; */
-}
+
 .enterForm :global(.progress_wrap){
   padding-bottom: 30px;
 }

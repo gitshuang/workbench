@@ -1,52 +1,50 @@
-{"key":"createEnter.js0","value":"Incorporated Enterprise"}
-{"key":"createEnter.js1","value":"Individual Business"}
-{"key":"createEnter.js2","value":"Individual Enterprise"}
-{"key":"createEnter.js3","value":"Other"}
-{"key":"createEnter.js4","value":"$i18n{Beijing"}
-{"key":"createEnter.js5","value":"Dongcheng District"}
-{"key":"createEnter.js6","value":"Configuring Enterprise Info"}
-{"key":"createEnter.js7","value":"Enterprise Name"}
-{"key":"createEnter.js8","value":"Please enter enterprise name."}
-{"key":"createEnter.js9","value":"No longer than 60 characters"}
-{"key":"createEnter.js10","value":"Enterprise Profile Photo"}
-{"key":"createEnter.js11","value":"Industry"}
-{"key":"createEnter.js12","value":"Please select an industry."}
-{"key":"createEnter.js13","value":"Industry"}
-{"key":"createEnter.js14","value":"Agriculture, Forestry, Animal Husbandry, and Fishery Industries"}
-{"key":"createEnter.js15","value":"Mining Industry"}
-{"key":"createEnter.js16","value":"Manufacturing"}
-{"key":"createEnter.js17","value":"Electricity/Heating Power/Gas/Water Production and Supply Industry"}
-{"key":"createEnter.js18","value":"Environment and Public Administration, Social Insurance, and Social Org"}
-{"key":"createEnter.js19","value":"Construction Industry"}
-{"key":"createEnter.js20","value":"Transportation, Warehousing and Postal Services"}
-{"key":"createEnter.js21","value":"Info Transmission, Computer Service and Software Industry"}
-{"key":"createEnter.js22","value":"Wholesale and Retail Trade"}
-{"key":"createEnter.js23","value":"Accommodation and Catering Industry"}
-{"key":"createEnter.js24","value":"Finance and Insurance Industries"}
-{"key":"createEnter.js25","value":"Real Estate Industry"}
-{"key":"createEnter.js26","value":"Leasing and Business Services"}
-{"key":"createEnter.js27","value":"Scientific Research, Technical Services and Geological Prospecting"}
-{"key":"createEnter.js28","value":"Water, Environment and Public Facilities Management Industry"}
-{"key":"createEnter.js29","value":"Resident Services and Other Services"}
-{"key":"createEnter.js30","value":"Education"}
-{"key":"createEnter.js31","value":"Health, Social Security and Social Service Industry"}
-{"key":"createEnter.js32","value":"Culture, Sports and Recreation"}
-{"key":"createEnter.js33","value":"International Organization"}
-{"key":"createEnter.js34","value":"Scale"}
-{"key":"createEnter.js35","value":"Please select scale."}
-{"key":"createEnter.js36","value":"Scale"}
-{"key":"createEnter.js37","value":"Address"}
-{"key":"createEnter.js38","value":"Please enter enterprise address."}
-{"key":"createEnter.js39","value":"Please enter enterprise address."}
-{"key":"createEnter.js40","value":"60 characters at most"}
-{"key":"createEnter.js41","value":"Contact Info:"}
-{"key":"createEnter.js42","value":"Name"}
-{"key":"createEnter.js43","value":"Please enter contact name."}
-{"key":"createEnter.js44","value":"Please enter contact name."}
-{"key":"createEnter.js45","value":"Email"}
-{"key":"createEnter.js46","value":"Wrong e-mail format."}
-{"key":"createEnter.js47","value":"Please enter e-mail address."}
-{"key":"createEnter.js48","value":"Mobile"}
-{"key":"createEnter.js49","value":"Wrong mobile No. format."}
-{"key":"createEnter.js50","value":"Please enter mobile number."}
-{"key":"createEnter.js51","value":"Enterprise Type"}
+{"key":"createEnter.js0","value":"北京|北京|东城区|_en"}
+{"key":"createEnter.js1","value":"Configuring Enterprise Info"}
+{"key":"createEnter.js2","value":"Enterprise Name"}
+{"key":"createEnter.js3","value":"Please enter enterprise name."}
+{"key":"createEnter.js4","value":"No longer than 60 characters"}
+{"key":"createEnter.js5","value":"Enterprise Profile Photo"}
+{"key":"createEnter.js6","value":"Industry"}
+{"key":"createEnter.js7","value":"Please select an industry."}
+{"key":"createEnter.js8","value":"Industry"}
+{"key":"createEnter.js9","value":"Agriculture, Forestry, Animal Husbandry, and Fishery Industries"}
+{"key":"createEnter.js10","value":"Mining Industry"}
+{"key":"createEnter.js11","value":"Manufacturing"}
+{"key":"createEnter.js12","value":"Electricity/Heating Power/Gas/Water Production and Supply Industry"}
+{"key":"createEnter.js13","value":"Environment and Public Administration, Social Insurance, and Social Org"}
+{"key":"createEnter.js14","value":"Construction Industry"}
+{"key":"createEnter.js15","value":"Transportation, Warehousing and Postal Services"}
+{"key":"createEnter.js16","value":"Info Transmission, Computer Service and Software Industry"}
+{"key":"createEnter.js17","value":"Wholesale and Retail Trade"}
+{"key":"createEnter.js18","value":"Accommodation and Catering Industry"}
+{"key":"createEnter.js19","value":"Finance and Insurance Industries"}
+{"key":"createEnter.js20","value":"Real Estate Industry"}
+{"key":"createEnter.js21","value":"Leasing and Business Services"}
+{"key":"createEnter.js22","value":"Scientific Research, Technical Services and Geological Prospecting"}
+{"key":"createEnter.js23","value":"Water, Environment and Public Facilities Management Industry"}
+{"key":"createEnter.js24","value":"Resident Services and Other Services"}
+{"key":"createEnter.js25","value":"Education"}
+{"key":"createEnter.js26","value":"Health, Social Security and Social Service Industry"}
+{"key":"createEnter.js27","value":"Culture, Sports and Recreation"}
+{"key":"createEnter.js28","value":"International Organization"}
+{"key":"createEnter.js29","value":"Scale"}
+{"key":"createEnter.js30","value":"Please select scale."}
+{"key":"createEnter.js31","value":"Scale"}
+{"key":"createEnter.js32","value":"－50"}
+{"key":"createEnter.js33","value":"－2000"}
+{"key":"createEnter.js34","value":"人_en"}
+{"key":"createEnter.js35","value":"Address"}
+{"key":"createEnter.js36","value":"Please enter enterprise address."}
+{"key":"createEnter.js37","value":"Please enter enterprise address."}
+{"key":"createEnter.js38","value":"No longer than 60 characters"}
+{"key":"createEnter.js39","value":"Contact Info:"}
+{"key":"createEnter.js40","value":"Name"}
+{"key":"createEnter.js41","value":"Please enter contact name."}
+{"key":"createEnter.js42","value":"Please enter contact name."}
+{"key":"createEnter.js43","value":"Email"}
+{"key":"createEnter.js44","value":"Wrong e-mail format."}
+{"key":"createEnter.js45","value":"Please enter e-mail address."}
+{"key":"createEnter.js46","value":"Mobile"}
+{"key":"createEnter.js47","value":"Wrong mobile No. format."}
+{"key":"createEnter.js48","value":"Please enter mobile number."}
+{"key":"createEnter.js49","value":"Enterprise Type"}

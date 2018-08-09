@@ -1,21 +1,22 @@
 {"key":"createTeam.js0","value":"Save"}
-{"key":"createTeam.js1","value":"$i18n{Save"}
-{"key":"createTeam.js2","value":"Team Name"}
-{"key":"createTeam.js3","value":"Please enter the team name."}
-{"key":"createTeam.js4","value":{"richText":[{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","charset":134},"text":"60 characters"},{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","charset":134},"text":" at most"}]}}
-{"key":"createTeam.js5","value":"Team Profile Photo"}
-{"key":"createTeam.js6","value":"Invitation Rules"}
-{"key":"createTeam.js7","value":"Please select an industry."}
-{"key":"createTeam.js8","value":"Invite All"}
-{"key":"createTeam.js9","value":"Forbid to invite"}
-{"key":"createTeam.js10","value":"Invited by Administrator"}
-{"key":"createTeam.js11","value":"Application Permission"}
-{"key":"createTeam.js12","value":"Please select an industry."}
-{"key":"createTeam.js13","value":"Allowed"}
-{"key":"createTeam.js14","value":"Prohibited"}
-{"key":"createTeam.js15","value":"Allow users to quit"}
-{"key":"createTeam.js16","value":"Prohibited"}
-{"key":"createTeam.js17","value":"Allowed"}
-{"key":"createTeam.js18","value":"Display watermark in address book"}
-{"key":"createTeam.js19","value":"Prohibited"}
-{"key":"createTeam.js20","value":"Allowed"}
+{"key":"createTeam.js1","value":"Save"}
+{"key":"createTeam.js2","value":"Save"}
+{"key":"createTeam.js3","value":"Team Name"}
+{"key":"createTeam.js4","value":"Please enter the team name."}
+{"key":"createTeam.js5","value":{"richText":[{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","family":2},"text":"60 characters"},{"font":{"size":11,"color":{"indexed":8},"name":"Calibri","family":2},"text":" at most"}]}}
+{"key":"createTeam.js6","value":"Team Profile Photo"}
+{"key":"createTeam.js7","value":"Invitation Rules"}
+{"key":"createTeam.js8","value":"Please select an industry."}
+{"key":"createTeam.js9","value":"Invite All"}
+{"key":"createTeam.js10","value":"Forbid to invite"}
+{"key":"createTeam.js11","value":"Invited by Administrator"}
+{"key":"createTeam.js12","value":"Application Permission"}
+{"key":"createTeam.js13","value":"Please select an industry."}
+{"key":"createTeam.js14","value":"Allowed"}
+{"key":"createTeam.js15","value":"Prohibited"}
+{"key":"createTeam.js16","value":"Allow users to quit"}
+{"key":"createTeam.js17","value":"Prohibited"}
+{"key":"createTeam.js18","value":"Allowed"}
+{"key":"createTeam.js19","value":"Display watermark in address book"}
+{"key":"createTeam.js20","value":"Prohibited"}
+{"key":"createTeam.js21","value":"Allowed"}
