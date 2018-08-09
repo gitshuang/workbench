@@ -32,7 +32,7 @@ class Establish extends Component {
 
 
   render() {
-    const iconname = <Personals />;
+    const iconname = <Personals dynamicHide={true} />;
     return (
       <div className={`um-win ${wrap}`} >
         <div className="um-header" style={{ background: 'white', position: 'relative' }}>
