@@ -8,9 +8,11 @@
     "start": "node scripts/start.js",
     "start_en": "node scripts/start.js LAN_TYPE=en",
     "build": "node scripts/build.js",
+    "build_en": "node scripts/build.js LAN_TYPE=en",
     "test": "node scripts/test.js",
     "test_en": "node scripts/test.js LAN_TYPE=en",
-    "build_en": "node scripts/build.js LAN_TYPE=en",
+    "daily": "node scripts/daily.js",
+    "daily_en": "node scripts/daily.js LAN_TYPE=en",
     "formal": "node scripts/formal.js"
   },
   "dependencies": {
