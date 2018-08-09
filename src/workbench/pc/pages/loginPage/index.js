@@ -15,7 +15,7 @@ import{
   HomeOnePage
 } from './index.css';
 
-const  CAS_SERVER = "https://user-daily.yyuap.com",
+const  CAS_SERVER = getHost('euc'),//"https://user-daily.yyuap.com",
 //yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
 yhtssoisloginUrl = window.location.origin + '/login_light.jsp',
 _destUrl=`${getHost('api')}/yhtssoislogin`, //只有这个不是登陆成功后跳转的链接

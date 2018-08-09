@@ -2,7 +2,7 @@ var webpackConfig = require('./webpack')
 // 不再使用dist 而是使用zh_CN 和 en_US
 var outPut =  process.argv.length < 3 ? 'zh_CN' : `en_US`;
 var config = {
-  env: '"development"',
+  env: '"daily"',
   host: '""',
   assetsSubDirectory: 'static',
   // assetsPublicPath: 'https://cdn.yonyoucloud.com/',
