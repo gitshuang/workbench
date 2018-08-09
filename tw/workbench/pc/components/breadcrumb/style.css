@@ -1,0 +1,53 @@
+.breadcrumbClass{
+  font-size: 14px;
+  height:32px;
+  line-height:32px;
+  display:flex;
+}
+
+.breadcrumbClass a {
+  color:#555;
+  cursor:pointer;
+  display:inline-block;
+  -webkit-box-flex:1;
+  line-height:32px;
+}
+
+.breadcrumbClass a:hover{
+  color: #E14C46;
+}
+
+.breadcrumbBack {
+  margin:0 10px;
+  color:#888;
+  -webkit-box-flex:1;
+  line-height:32px;
+}
+
+.breadcrumbClass ol {
+  height:32px;
+  line-height: 32px;
+  display:inline-block;
+  background: none;
+  margin:0;
+  padding:0;
+  color:#888;
+  vertical-align: middle;
+  font-family: "Microsoft Yahei", STHeiTi, Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+}
+.breadcrumbClass ol li {
+  color:#555;
+}
+
+.breadcrumbClass ol > li + li:before {
+  content: "\003e";
+}
+
+.breadcrumbClass li:last-child{
+  color:#111111;
+}
+
+.itmeHover:hover span{
+  color:#E14C46;
+  cursor: pointer;
+}

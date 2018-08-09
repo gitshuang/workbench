@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumb from 'bee/breadcrumb';
+import {postMessageToWin} from '@u';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { breadcrumbClass, breadcrumbBack, itmeHover } from './style.css';
 
 /**
@@ -66,7 +68,21 @@ class Breadcrumbs extends Component {
               if (i !== data.length - 1 && url) {
                 itemProps = {
                   ...itemProps,
-                  onClick: () => self.enhancedGoBack(url, i),
+                  onClick: () => {
+										//增加面包屑点击逻辑，将iframe内部跳转逻辑交给iframe内部通过postmessage注册的回调函数
+										if (window.brmClickPrevent && window.brmClickPrevent.type) {
+											postMessageToWin(window.brmClickPrevent.source, {
+												type: window.brmClickPrevent.type,
+											});
+											dispatchMessageTypeHandler({
+												type: 'popBrm',
+												detail: {index: -1}
+											});
+											window.brmClickPrevent = null;
+										}else{
+											self.enhancedGoBack(url, i);
+										}
+									},
                   className: itmeHover,
                 };
               }

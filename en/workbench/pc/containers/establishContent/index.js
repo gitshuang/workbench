@@ -31,7 +31,7 @@ class EstablishContent extends Component {
     let titleCont = null;
     if(type && type == "init"){
       titleCont = (<div>
-        <h5>Welcome to YouZone</h5>
+        <h5>欢迎来到用友云_en</h5>
         <p className={desc}>创建您的团队或企业，邀请好友一起体验吧。您也可以联系好友邀请您加入他/她的团队或企业。_en</p>
       </div>)
     }

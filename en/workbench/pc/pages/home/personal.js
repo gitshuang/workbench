@@ -46,9 +46,9 @@ class Personals extends Component {
       userInfo: {},
       personalText: {
         name: 'Enterprise',
-        edit: 'en首页编辑_en',
-        info: 'en员工信息_en',
-        invitation: 'en邀请成员_en',
+        edit: '首页编辑_en',
+        info: '员工信息_en',
+        invitation: '邀请成员_en',
         exit: '退出_en',
         markTitle: '创建成功_en',
         markDes: '快点邀请成员一起好好工作吧_en',
@@ -85,17 +85,17 @@ class Personals extends Component {
       TeamData: [
         {
           id: 'allowExit',
-          name: 'Simplified Chinese 1',
+          name: 'Quit from Enterprise',
           value: '3',
           serverApi: 'enter/leave',
-          msg: 'Traditional Chinese 3',
+          msg: 'After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
         },
         {
           id: 'allowExit',
-          name: 'Enterprise',
+          name: 'Quit from Team',
           value: '3',
           serverApi: 'team/leave',
-          msg: 'Quit from Enterprise',
+          msg: 'After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.',
         },
       ],
       language: {
@@ -105,7 +105,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: 'After quitting from an enterprise, the Apps under the enterprise will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.'
+            context: 'Simplified Chinese 1'
           },
           {
             value: 'en',
@@ -113,7 +113,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: 'Team'
+            context: 'Traditional Chinese 3'
           },
         ]
       }
@@ -225,13 +225,15 @@ class Personals extends Component {
     const {
       requestDisplay,
       exitModal,
+      dynamicHide,
     } = this.props;
     const { userInfo, language, hrefs, TeamData, currType } = this.state;
     let { personalText } = this.state;
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
-    personalText.name = currType == 0 ? 'Quit from Team' : 'After quitting from a team, the Apps under the team will no longer be available, and the corresponding data will be deleted. Please confirm that the data has been backed up.';
+    personalText.name = currType == 0 ? 'Enterprise' : 'Team';
 
+    const dynamicType = !dynamicHide;
     return (
       <div>
         <Personal
@@ -246,6 +248,7 @@ class Personals extends Component {
           hrefs={hrefs}
           logout={logout}
           language={language}
+          dynamicType={dynamicType}
         />
         {
           exitModal ?

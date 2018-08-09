@@ -92,7 +92,7 @@ class TeamRemoveModal extends Component {
             history,
           } = this.props;
           this.cancelFn();
-          history.replace('/');
+          window.location.replace(window.location.origin);
         } else if (payload.length > 1) {
           this.setState({
             isManage: 2
