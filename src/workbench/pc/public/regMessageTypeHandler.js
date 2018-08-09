@@ -204,6 +204,9 @@ export function regMessageTypeHandler(app) {
 }
 
 export function dispatchMessageTypeHandler({type, detail}) {
+	if (type.lastIndexOf('_prevent') > 0) {
+		type = type.substring(0, type.lastIndexOf('_prevent'));
+	}
   if (type && handlers[type]) {
     return handlers[type](detail);
   } else {

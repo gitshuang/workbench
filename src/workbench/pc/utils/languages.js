@@ -33,7 +33,8 @@ const manageWidget = {
 	group_name_exists: '分组名称已存在！',
 	move_down: '下移',
 	move_up: '上移',
-	more: '更多'
+	more: '更多',
+	save_latest_or_not: '是否保存最新修改？'
 };
 
 export default {
