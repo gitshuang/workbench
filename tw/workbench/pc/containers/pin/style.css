@@ -1,0 +1,33 @@
+.pin{
+  top: 60px;
+  width:300px;
+  background:rgba(255,255,255,1);
+  border:1px solid #DBDEE5;
+  border-radius: 3px ;
+  box-shadow: 0px 3px 6px 0px rgba(74,81,93,0.25);
+  padding: 16px;
+  z-index: 9999;
+}
+.header :global(.iconfont){
+  font-size:40px;
+  color:#D99710;
+  display:block;
+  margin:3px;
+}
+.pin :global(.um-box){
+  -webkit-align-items: center;
+  align-items: center;
+}
+.header div{
+  width:48px;
+  height: 48px;
+  margin-right: 8px;
+}
+.header p{
+  width:70px;
+  height:19px;
+  font-size:14px;
+  font-family:MicrosoftYaHei;
+  color:rgba(74,81,93,1);
+  line-height:19px;
+}

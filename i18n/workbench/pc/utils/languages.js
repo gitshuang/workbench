@@ -33,7 +33,8 @@ const manageWidget = {
 	group_name_exists: '$i18n{languages.js30}$i18n-end',
 	move_down: '$i18n{languages.js31}$i18n-end',
 	move_up: '$i18n{languages.js32}$i18n-end',
-	more: '$i18n{languages.js33}$i18n-end'
+	more: '$i18n{languages.js33}$i18n-end',
+	save_latest_or_not: '$i18n{languages.js34}$i18n-end'
 };
 
 export default {

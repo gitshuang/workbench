@@ -5,13 +5,20 @@
   "author": "zhengxingcheng <xingcheng.zheng@gmail.com>",
   "private": true,
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "node scripts/start.js LAN_TYPE=src",
     "start_en": "node scripts/start.js LAN_TYPE=en",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
-    "test_en": "node scripts/test.js LAN_TYPE=en",
+    "build": "node scripts/build.js LAN_TYPE=src",
     "build_en": "node scripts/build.js LAN_TYPE=en",
-    "formal": "node scripts/formal.js"
+    "test": "node scripts/test.js LAN_TYPE=src",
+    "test_en": "node scripts/test.js LAN_TYPE=en",
+    "daily": "node scripts/daily.js LAN_TYPE=src",
+    "daily_en": "node scripts/daily.js LAN_TYPE=en",
+    "formal": "node scripts/formal.js LAN_TYPE=src",
+    "formal_en": "node scripts/formal.js LAN_TYPE=en",
+    "start_tw": "node scripts/start.js LAN_TYPE=tw",
+    "build_tw": "node scripts/build.js LAN_TYPE=tw",
+    "test_tw": "node scripts/test.js LAN_TYPE=tw",
+    "formal_tw": "node scripts/formal.js  LAN_TYPE=tw"
   },
   "dependencies": {
     "@diworkfe/public-components": "git+http://git.yonyou.com/iuap_ap/diwork-public-components.git#develop",
