@@ -14,6 +14,8 @@
     padding:0;
     /* overflow: auto; */
     min-width: 1200px;
+    padding-top: 70px;
+    position: relative;
 
 }
 .ServicePanel :global(.serviceOne){
@@ -31,6 +33,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    padding-top: 100px\9;
+
 }
 .ServicePanel :global(.serviceOne .title){
     display: block;
@@ -55,6 +60,7 @@
     line-height:50px;
     text-align: center;
     cursor: pointer;
+    margin: 0 auto;
 }
 /*第二部分*/
 .ServicePanel :global(.serviceTwo){
@@ -91,6 +97,7 @@
     height: 100px;
     padding: 20px;
     display: inline-block;
+    box-sizing: border-box;
 }
 .ServicePanel :global(.serviceTwo .leftTop),
 .ServicePanel :global(.serviceTwo .rightTop){
@@ -151,6 +158,7 @@
     clear: both;
 }
 .serviceThree :global(.process) {
+    box-sizing: border-box;
     width: 33%;
     text-align: center;
     padding: 0 30px;
@@ -242,6 +250,12 @@
 .serviceFour :global(.applyService){
     width: 510px;
     margin: 0 auto;
+    transform: translateX(-70px);
+}
+.serviceFour :global(.applyService:after){
+   content:'';
+   display: inline-block;
+   clear: both;
 }
 .ServicePanel  :global(.u-form-control:focus){
     border:1px solid #666

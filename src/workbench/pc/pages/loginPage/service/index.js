@@ -118,9 +118,9 @@ class Service extends Component {
             <div className={serviceFour} id="apply">
                   <div className="mainContent">
                       <span className="title">申请服务</span>
-                      <div className="applyService">
-                         <CreateEnter />
-                      </div>
+                      {/* <div className="applyService">
+                      </div> */}
+                      <CreateEnter />
                   </div>
             </div>
             {/* <div className="mainFooter mainFooterFake">

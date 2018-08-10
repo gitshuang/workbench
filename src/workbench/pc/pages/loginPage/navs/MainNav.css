@@ -1,11 +1,16 @@
 .MainNav{
     display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
     background: rgba(255,255,255,0.9);
     opacity: 0.9;
     z-index:999;
     height: 70px;
     line-height: 70px;
     border-bottom:1px solid #eee;
+    min-width: 1200px;
 }
 .MainNav .headerDesc{
     color: #777;
@@ -26,6 +31,12 @@
     top: 15px;
     left: 0px;
     background: #d0d0d0;
+}
+.MainNav .leftCon,
+.MainNav .rightCon,
+.MainNav .middleCon{
+    box-sizing: border-box;
+    float: left;
 }
 .MainNav .leftCon{
     width: 25%;
