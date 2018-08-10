@@ -91,11 +91,11 @@ class HeaderPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.userInfo !== nextProps.userInfo) {
-      this.setState({
-        allowTenants: nextProps.userInfo.allowTenants,
-      });
-    }
+    // if (this.props.userInfo !== nextProps.userInfo) {
+    //   this.setState({
+    //     allowTenants: nextProps.userInfo.allowTenants,
+    //   });
+    // }
   }
 
   onLeftTitleClick = () => { }

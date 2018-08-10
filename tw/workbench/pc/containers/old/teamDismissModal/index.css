@@ -1,0 +1,9 @@
+:global(.team_dismiss_modal .u-modal-dialog){
+  width: 400px !important;
+}
+.content{
+  
+}
+.select_enter_close :global(.close){
+  display: none;
+}

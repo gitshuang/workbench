@@ -225,6 +225,7 @@ class Personals extends Component {
     const {
       requestDisplay,
       exitModal,
+      dynamicHide,
     } = this.props;
     const { userInfo, language, hrefs, TeamData, currType } = this.state;
     let { personalText } = this.state;
@@ -232,6 +233,7 @@ class Personals extends Component {
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
     personalText.name = currType == 0 ? '$i18n{personal.js21}$i18n-end' : '$i18n{personal.js22}$i18n-end';
 
+    const dynamicType = !dynamicHide;
     return (
       <div>
         <Personal
@@ -246,6 +248,7 @@ class Personals extends Component {
           hrefs={hrefs}
           logout={logout}
           language={language}
+          dynamicType={dynamicType}
         />
         {
           exitModal ?
