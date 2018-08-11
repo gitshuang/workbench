@@ -405,7 +405,7 @@ export default class Work extends Component {
         </div>
 
         <div className={`${workArea}`}>
-          {/* {this.makeLayout()} */}
+          {this.makeLayout()}
         </div>
         {
           hasRelationFunc ? <TitleServiceContainer outsideClickIgnoreClass="icon-xiala" /> : null
