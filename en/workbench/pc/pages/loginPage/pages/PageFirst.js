@@ -14,8 +14,8 @@ export default function PageFirst(props){
               <div className="laymid">
                 <div className="logo"></div>
                 <div className="clickMe clearfix">
-                  <span className="loginBtn clickBtn " onClick={props.loginClick}>loginPageDefault</span>
-                  <a target="_blank" href={props.registryUrl}  className="registryBtn clickBtn">loginPageDefault</a>
+                  <span className="loginBtn clickBtn " onClick={props.loginClick}>Log In</span>
+                  <a target="_blank" href={props.registryUrl}  className="registryBtn clickBtn">Sign Up</a>
                 </div>
               </div>
             )

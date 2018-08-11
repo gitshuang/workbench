@@ -29,11 +29,11 @@ class SearchContainer extends Component {
     super(props);
     this.state = {
       searchText: {
-        placeholder: '搜索人员信息、服务及其他内容_en',
-        more: '更多结果_en',
-        none: '没有搜索结果_en',
-        clear: '清空_en',
-        search: '搜索_en',
+        placeholder: '[object Object]',
+        more: 'More Results',
+        none: 'No result found',
+        clear: 'Clear',
+        search: 'Search',
       },
     };
   }

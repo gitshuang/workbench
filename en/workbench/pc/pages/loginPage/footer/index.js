@@ -46,17 +46,17 @@ class Footer extends Component {
         <div className={FooterConPanel}>
              <div className="footerTop">
                 <div className="topSection topOne">
-                    <span className="title">loginPageDefault</span>
+                    <span className="title">Download Client</span>
                     <div className="allIcons">
                         <div className="diff" onMouseEnter={this.hover} onMouseLeave={this.hoverLeave}>
                             <span className="iconItem" >
                                 <span className="iconInner iconOne"></span>
-                                <span className="iconDesc">loginPageDefault</span>
+                                <span className="iconDesc">Mobile</span>
                                 <span className="lgCode"></span>
                             </span>
                             <span className="iconItem codeItem " ref={(ref)=>{this.iconCode = ref;}}>
                                 <span className="iconInner2 iconCode"></span>
-                                <span className="iconDesc">loginPageDefault</span>
+                                <span className="iconDesc">Scan to Download Client</span>
                             </span>
                         </div>
                         <span className="iconItem">
@@ -77,21 +77,21 @@ class Footer extends Component {
                 </div>
                 <div className="topSection toptwo">
                     <div className="topTwoItem">
-                        <span className="title">loginPageDefault</span>
-                        <span className="con">loginPageDefault</span>
-                        <span className="con">loginPageDefault</span>
-                        <span className="con">loginPageDefault</span>
+                        <span className="title">Yonyou Group</span>
+                        <span className="con">Yonyou Official Website</span>
+                        <span className="con">Yonyou Cloud Official Website</span>
+                        <span className="con">Yonyou Cloud Market</span>
                     </div>
                     <div className="topTwoItem">
-                        <span className="title">loginPageDefault</span>
-                        <span className="con">loginPageDefault-86393388loginPageDefault</span>
-                        <span className="con">loginPageDefaultesnservice@yonyou.com</span>
+                        <span className="title">Contact Us</span>
+                        <span className="con">Hotline: 010-86393388Ext. No. 4</span>
+                        <span className="con">Email:esnservice@yonyou.com</span>
                     </div>
                 </div>
              </div>
              <div className={FooterBottom}>
-                {/* <span className="police">loginPageDefault 11010802020548loginPageDefault</span> */}
-                <span className="company">loginPageDefault © Copyright 2017 loginPageDefaultICPloginPageDefault-24</span>
+                {/* <span className="police">Beijing Computer Information Network International Networking Unit Filing 11010802020548No.</span> */}
+                <span className="company">Yonyou Network Technology Co., Ltd © Copyright 2017 BeijingICPICP No. 5007539-24</span>
              </div>
         </div>
     );

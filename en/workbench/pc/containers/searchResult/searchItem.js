@@ -27,10 +27,10 @@ function getFetch(url) {
         if (text) {
           return Promise.resolve(text);
         }
-        return Promise.reject(new Error('接口未返回数据_en'));
+        return Promise.reject(new Error('No data returned'));
       });
     }
-    return Promise.reject(new Error('沟通协作一步到位_en'));
+    return Promise.reject(new Error('Request failed'));
   });
 }
 

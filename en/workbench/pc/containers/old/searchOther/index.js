@@ -127,7 +127,7 @@ class searchOther extends Component {
   paginationNumSelect = (id,dataNum) =>{
     const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab,activePage}=this.state;
-    const reg = new RegExp("条_en\/页_en","g");
+    const reg = new RegExp("[object Object]\/Page","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
     this.setState({
       dataPerPageNum:dataPerPageNum
@@ -151,15 +151,15 @@ class searchOther extends Component {
     const dMinutes = parseInt(d / 60, 10);
     const dSeconds = parseInt(d, 10);
     if (dDays > 0 && dDays < 4) {
-      ts = `${dDays}天前_en`;
+      ts = `${dDays}days ago`;
     } else if (dDays <= 0 && dHours > 0) {
-      ts = `${dHours}小时前_en`;
+      ts = `${dHours}hours ago`;
     } else if (dDays <= 0 && dHours <= 0 && dMinutes > 0) {
-      ts = `${dMinutes}分钟前_en`;
+      ts = `${dMinutes}minutes ago`;
     } else if (dSeconds < 60) {
-      ts = '刚刚_en';
+      ts = 'Just now';
     } else if (dDays > 3) {
-      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/年|月/_eng, '-').replace(/日/_eng, ' ');
+      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/Year | Month/g, '-').replace(/Day/g, ' ');
     }
     return ts
   }
@@ -189,7 +189,7 @@ class searchOther extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div>共_en{dataList.totalElements}条_en</div>
+            <div>In total{dataList.totalElements}[object Object]</div>
             <ul className={recently}>{lis}</ul>
 
             <div className={`paginationClass ${isShowPagination? isdisplay : ''}`}>
