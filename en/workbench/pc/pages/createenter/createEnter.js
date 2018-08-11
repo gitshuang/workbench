@@ -69,7 +69,7 @@ class CreateEnter extends Component {
       value: 'A',
       verify: true,
     };
-    this.address = '北京|北京|东城区|_en';
+    this.address = 'Beijing | Beijing | Dongcheng District |';
     //progressbar
     this.loadingFunc = null;
     this.successFunc = null;
@@ -256,7 +256,7 @@ class CreateEnter extends Component {
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
               <Option value="F">1001－2000</Option>
-              <Option value="G">2000人_en</Option>
+              <Option value="G">2000[object Object]</Option>
             </Select>
           </FormItem>
 

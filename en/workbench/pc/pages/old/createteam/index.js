@@ -63,7 +63,7 @@ class CreateTeam extends Component {
             <div className="um-header" style={{ background: 'white' }}>
               <Header onLeftClick={this.goHome} iconName={'computer'} >
                 <div>
-                  <span>创建团队_en</span>
+                  <span>Create Team</span>
                 </div>
               </Header>
             </div>
@@ -71,7 +71,7 @@ class CreateTeam extends Component {
         }
         <div className="um-content">
           <div className={appBreadcrumb}>
-            <Breadcrumbs data={[{ name: '创建团队_en' }]} goback={this.goBack} />
+            <Breadcrumbs data={[{ name: 'Create Team' }]} goback={this.goBack} />
           </div>
           <CreateTeamContent />
         </div>

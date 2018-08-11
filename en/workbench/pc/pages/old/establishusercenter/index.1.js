@@ -102,13 +102,13 @@ class EstablishUserCenter extends Component {
             onLeftClick={this.goHome}
           >
             <div>
-              <span>创建团队/企业_en</span>
+              <span>Create Team/Enterprise</span>
             </div>
           </Header>
         </div>
         <div className="um-content">
           <div className={appBreadcrumb}>
-            <Breadcrumbs data={[{ name: '创建团队/企业_en' }]} goback={this.goHome} />
+            <Breadcrumbs data={[{ name: 'Create Team/Enterprise' }]} goback={this.goHome} />
           </div>
           <EstablishContent userInfo={userInfo} />
         </div>

@@ -12,9 +12,9 @@ import{
             {
                 !props.loginModalShow &&(
                     <div className={`oneArtical ${words}`}>
-                        <span className="wordsTitle">“loginPageDefault”</span>
-                        <span className="wordsCon">loginPageDefault loginPageDefault</span>
-                        <span className="wordsCon">loginPageDefault </span>
+                        <span className="wordsTitle">“I am a financial manager.”</span>
+                        <span className="wordsCon">At the end of each month and each year, we always have to work overtime on various financial statements.</span>
+                        <span className="wordsCon">Yonyou Cloud enables us to track the company's financial data in real-time every day, really making finance a part of the business. </span>
                         {/* <span className="wordsCon"></span> */}
                     </div>
                 )

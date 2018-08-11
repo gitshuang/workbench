@@ -77,7 +77,7 @@ class CreateEnter extends Component {
       { value: 'D', label: '201-500' },
       { value: 'E', label: '501-1000' },
       { value: 'F', label: '1001-2000' },
-      { value: 'G', label: '>2000人_en' },
+      { value: 'G', label: '>2000[object Object]' },
     ];
 
     this.tenantIndustry = [
@@ -206,7 +206,7 @@ class CreateEnter extends Component {
     if (address && address.province) {
       TenantAddress.value = `${address.province}|${address.city}|${address.area}|${Values}`;
     } else {
-      TenantAddress.value = `北京|北京|东城|_en${Values}`;
+      TenantAddress.value = `Beijing | Beijing | Dongcheng District |${Values}`;
     }
 
     const JoinPermission = data.find(da => da.name === 'joinPermission');

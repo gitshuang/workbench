@@ -14,10 +14,10 @@ import{
               !props.loginModalShow &&(
                 <div className={`laymid`} style={{marginTop:`${props.sevenSpace}px`}}>
                   {/* <div className="logo"></div> */}
-                  <div className="mainTitle">“loginPageDefault”</div>
+                  <div className="mainTitle">“[object Object]”</div>
                   <div className="clickMe clearfix">
-                    <span  className="loginBtn clickBtn " onClick={props.loginClick}>loginPageDefault</span>
-                    <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">loginPageDefault</a>
+                    <span  className="loginBtn clickBtn " onClick={props.loginClick}>Log In</span>
+                    <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">Sign Up</a>
                   </div>
                 </div>
               )
@@ -33,32 +33,32 @@ import{
             {/* <div className="mainFooter">
                <div className="mainFooterCon">
                   <div className="footerSection sectionOne">
-                    <span className="title">loginPageDefault</span>
+                    <span className="title">Premium Merchant Services</span>
                     <div className="sub">
-                      <span className="directives">loginPageDefault</span>
-                      <span className="directives">loginPageDefault</span>
-                      <span className="directives">loginPageDefaultApp</span>
+                      <span className="directives">Subscriptions</span>
+                      <span className="directives">Service Account</span>
+                      <span className="directives">Yonyou CloudApp</span>
                     </div>
                   </div>
                   <div className="footerSection sectionTwo">
-                    <span className="title">loginPageDefault</span>
+                    <span className="title">Around-the-clock operation and maintenance guarantee</span>
                     <div className="sub">
-                      <span className="directives">loginPageDefault
-                          <li className="item">loginPageDefault</li>
-                          <li className="item">loginPageDefault</li>
+                      <span className="directives">Service and Support
+                          <li className="item">Online Customer Service</li>
+                          <li className="item">Help Center</li>
                       </span>
-                      <span className="directives">loginPageDefault
-                          <li className="item">loginPageDefault</li>
-                          <li className="item">loginPageDefault</li>
-                          <li className="item">loginPageDefault</li>
+                      <span className="directives">Quick Entrance
+                          <li className="item">Free Registration</li>
+                          <li className="item">Latest Events</li>
+                          <li className="item">Cloud Market</li>
                       </span>
-                      <span className="directives">loginPageDefault</span>
+                      <span className="directives">Others</span>
                     </div>
                   </div>
                   <div className="footerSection sectionThird">
-                    <span className="title">loginPageDefault</span>
+                    <span className="title">Multi-channel Service Support</span>
                     <div className="sub">
-                      <span className="directives">loginPageDefault
+                      <span className="directives">Pre-sales Customer Service
                       </span>
                       <span className="directives">010-2323231998
                       </span>

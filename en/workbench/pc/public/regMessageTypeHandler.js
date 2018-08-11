@@ -32,8 +32,8 @@ const handlers = {
           openGlobalDialog({
             type: "warning",
             className: enterOrTeam,
-            title: '切换团队/企业_en',
-            content: '需要切换到对应的团队/企业查看详情，是否切换?_en',
+            title: 'Switch Team/Enterprise',
+            content: 'You need to switch to the corresponding team/enterprise to view details. Switch?',
             btns: [
               {
                 label: 'Switch',
