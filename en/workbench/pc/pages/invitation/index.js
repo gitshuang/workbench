@@ -255,7 +255,7 @@ class Invitation extends Component {
                 <p>Signature</p>
                 <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-                <p>Enter email addresses and separate them with “;” 隔开_en</p>
+                <p>Enter email addresses and separate them with “;” Separate</p>
                 <TagsInput
                   value={this.state.mails}
                   addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59

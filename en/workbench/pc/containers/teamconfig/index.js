@@ -271,7 +271,7 @@ class CreateTeamContent extends Component {
     if (timeDiff > 30) {
       return false;
     }
-    return "还有_en" + Math.ceil(timeDiff) + "days before expiration"
+    return "And" + Math.ceil(timeDiff) + "days before expiration"
   }
   // 续费按钮
   esitXufei = (time) => {
@@ -303,7 +303,7 @@ class CreateTeamContent extends Component {
       <div className={box2}>
         <div className={applicationBtns}>
           <span>
-            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web端_en</Button>
+            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>WebVersion</Button>
             <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>Mobile</Button>
             <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PCClient</Button>
           </span>
@@ -502,7 +502,7 @@ class CreateTeamContent extends Component {
         </div>
 
         <div className={table_title}>
-          <div>当前人_en数}{userList.totalElements}人</div>
+          <div>Current person count数}{userList.totalElements}人</div>
           <div className={table_permise}>Member Permission</div>
         </div>
         <div className={memberLists}>

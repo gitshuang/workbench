@@ -141,7 +141,7 @@ class HeaderPage extends Component {
       :
       <div className={create} onClick={this.enterOnclick}>
         <Icon type="add" />
-        创建团队_en \ 企业_en
+        Create Team \ Enterprise
       </div>
     return dom;
   }

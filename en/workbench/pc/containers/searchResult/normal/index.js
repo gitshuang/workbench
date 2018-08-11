@@ -10,7 +10,7 @@ class Normal extends Component {
   render() {
     return (
       <div className={wrap} onClick={this.goDetail} onKeyDown={this.goDetail} role="presentation">
-        <h3>未知搜索结果_en</h3>
+        <h3>Unknown Search Results</h3>
       </div>
     );
   }

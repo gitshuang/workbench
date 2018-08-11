@@ -22,20 +22,20 @@ export default function MainNavPanel(props){
         <div className={leftCon} onClick={()=>{open('login')}} >
           {/* <img src={Logo} alt="" className="companylogo"/> */}
           <img src={LogoSvg} className="companylogoSvg"/>
-          <span className={headerDesc}>loginPageDefault</span>
+          <span className={headerDesc}>Digital Portal</span>
           {/* <div className="leftConFake" onClick={()=>{open('login')}}></div> */}
         </div>
         <div className={middleCon}>
-          <a  className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{open('login')}}>loginPageDefault</a>
-          <a  className={`middleItem ${props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{open('service')}}>loginPageDefault</a>
+          <a  className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{open('login')}}>Homepage</a>
+          <a  className={`middleItem ${props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{open('service')}}>Service Support</a>
           <a   href="https://open.yonyoucloud.com" target="_blank" className={`middleItem ${props.activeIndex*1 === 3?'actived':null}`}>开放平台</a>
-          <a  className={`middleItem ${props.activeIndex*1 === 4?'actived':null}`} onClick={()=>{open('aboutus')}}>loginPageDefault</a>
+          <a  className={`middleItem ${props.activeIndex*1 === 4?'actived':null}`} onClick={()=>{open('aboutus')}}>Contact Us</a>
         </div>
         {
             props.btnShow &&(
             <div className={rightCon}>
-                <a className="loginBtn" onClick={props.loginClick}>loginPageDefault</a>
-                <a className="registryBtn" target="_blank" href={props.registryUrl}>loginPageDefault</a>
+                <a className="loginBtn" onClick={props.loginClick}>Log In</a>
+                <a className="registryBtn" target="_blank" href={props.registryUrl}>Sign Up Now</a>
             </div>
             )
         }

@@ -65,7 +65,7 @@ class CreateEnter extends Component {
       value: 'A',
       verify: true,
     };
-    this.address = 'loginPageDefault';
+    this.address = 'Beijing | Beijing | Dongcheng District |';
     //progressbar
     this.loadingFunc = null;
     this.successFunc = null;
@@ -140,110 +140,108 @@ class CreateEnter extends Component {
       logo, linkman, tenantEmail, tenantTel, processValue, tenantId,
     } = this.state;
     return (
-      <div>
+      <div className="applyService">
         <Form submitCallBack={this.checkForm} showSubmit={false} className={applyForm}>
         <FormItem
             showMast={false}
-            labelName={<span>loginPageDefault</span>}
+            labelName={<span>Name</span>}
             isRequire
             valuePropsName="value"
-            errorMessage="loginPageDefault"
+            errorMessage="Please enter contact name"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="loginPageDefault" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl name="linkman" placeholder="Please enter contact name" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
           </FormItem>
 
           <FormItem
             className="input_phone"
             showMast={false}
             valuePropsName="value"
-            labelName={<span>loginPageDefault</span>}
+            labelName={<span>Mobile</span>}
             isRequire
             method="blur"
             htmlType="tel"
-            errorMessage="loginPageDefault"
+            errorMessage="Wrong mobile No. format"
             inline
           >
-            <FormControl name="tenantTel" placeholder="loginPageDefault" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+            <FormControl name="tenantTel" placeholder="Please enter mobile number" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>loginPageDefault</span>}
+            labelName={<span>Industry</span>}
             isRequire
             valuePropsName="value"
-            errorMessage="loginPageDefault"
+            errorMessage="Please choose an industry"
             method="blur"
             inline
           >
             <Select
-              defaultValue="-loginPageDefault-"
+              defaultValue="-Industry-"
               name="tenantIndustry"
-              style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
-              <Option value="A">loginPageDefault</Option>
-              <Option value="B">loginPageDefault</Option>
-              <Option value="C">loginPageDefault</Option>
-              <Option value="D">loginPageDefault</Option>
-              <Option value="S">loginPageDefault</Option>
-              <Option value="E">loginPageDefault</Option>
-              <Option value="G">loginPageDefault</Option>
-              <Option value="I">loginPageDefault</Option>
-              <Option value="F">loginPageDefault</Option>
-              <Option value="H">loginPageDefault</Option>
-              <Option value="J">loginPageDefault</Option>
-              <Option value="K">loginPageDefault</Option>
-              <Option value="L">loginPageDefault</Option>
-              <Option value="M">loginPageDefault</Option>
-              <Option value="N">loginPageDefault</Option>
-              <Option value="O">loginPageDefault</Option>
-              <Option value="P">loginPageDefault</Option>
-              <Option value="Q">loginPageDefault</Option>
-              <Option value="R">loginPageDefault</Option>
-              <Option value="T">loginPageDefault</Option>
+              <Option value="A">Agriculture, Forestry, Animal Husbandry, and Fishery Industries</Option>
+              <Option value="B">Mining Industry</Option>
+              <Option value="C">Manufacturing</Option>
+              <Option value="D">Electricity/Heating Power/Gas/Water Production and Supply Industry</Option>
+              <Option value="S">Environment and Public Administration, Social Insurance, and Social Org</Option>
+              <Option value="E">Construction Industry</Option>
+              <Option value="G">Transportation, Warehousing and Postal Services</Option>
+              <Option value="I">Info Transmission, Computer Service and Software Industry</Option>
+              <Option value="F">Wholesale and Retail Trade</Option>
+              <Option value="H">Accommodation and Catering Industry</Option>
+              <Option value="J">Finance and Insurance Industries</Option>
+              <Option value="K">Real Estate Industry</Option>
+              <Option value="L">Leasing and Business Services</Option>
+              <Option value="M">Scientific Research, Technical Services and Geological Prospecting</Option>
+              <Option value="N">Water, Environment and Public Facilities Management Industry</Option>
+              <Option value="O">Resident Services and Other Services</Option>
+              <Option value="P">Education</Option>
+              <Option value="Q">Health, Social Security and Social Service Industry</Option>
+              <Option value="R">Culture, Sports and Recreation</Option>
+              <Option value="T">International Organization</Option>
             </Select>
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>loginPageDefault</span>}
+            labelName={<span>Size</span>}
             isRequire
             valuePropsName="value"
-            errorMessage="loginPageDefault"
+            errorMessage="Please choose scale"
             method="blur"
             inline
           >
             <Select
-              defaultValue="-loginPageDefault-"
+              defaultValue="-Scale-"
               name="tenantSize"
-              style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
-              <Option value="A">0loginPageDefault</Option>
+              <Option value="A">0-50</Option>
               <Option value="B">51-100</Option>
               <Option value="C">101-200</Option>
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
-              <Option value="F">1001loginPageDefault</Option>
-              <Option value="G">2000loginPageDefault</Option>
+              <Option value="F">1001-2000</Option>
+              <Option value="G">2000People</Option>
             </Select>
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>loginPageDefault</span>}
+            labelName={<span>Province/City</span>}
             isRequire={false}
             valuePropsName="value"
-            errorMessage="loginPageDefault"
+            errorMessage="Please enter province/city"
             method="blur"
             inline
           >
             <CitySelect name="address" onChange={this.onChange} />
           </FormItem>
         </Form>
-            <div className={applyBtn}>loginPageDefault</div>
+            <div className={applyBtn}>Apply</div>
       </div>
     );
   }
