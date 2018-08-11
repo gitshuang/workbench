@@ -52,7 +52,7 @@ class HeaderContainer extends Component {
     super(props);
     this.state = {
       quickText: {
-        title: '[object Object]',
+        title: 'Favorites',
         all: 'All Apps',
         more: 'More Apps'
       }
