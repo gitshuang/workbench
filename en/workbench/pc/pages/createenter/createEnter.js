@@ -174,16 +174,16 @@ class CreateEnter extends Component {
             labelName={<span>Enterprise Name<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="Please enter enterprise name."
+            errorMessage="Please enter enterprise name"
             method="blur"
             inline
           >
-            <FormControl name="tenantName" placeholder="No longer than 60 characters" />
+            <FormControl name="tenantName" placeholder="No more than 60 chars" />
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>Enterprise Profile Photo<font color="red"> &nbsp; &nbsp;</font></span>}
+            labelName={<span>Photo<font color="red"> &nbsp; &nbsp;</font></span>}
             valuePropsName="value"
             method="change"
             inline
@@ -281,7 +281,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <FormControl name="tenantAddress" placeholder="No longer than 60 characters" />
+            <FormControl name="tenantAddress" placeholder="No more than 60 chars" />
           </FormItem>
 
           <div className={lxrHr}>
@@ -289,7 +289,7 @@ class CreateEnter extends Component {
           </div>
 
           <div className={lxrTitle}>
-            Contact Info:
+            Contact:
           </div>
 
           <FormItem

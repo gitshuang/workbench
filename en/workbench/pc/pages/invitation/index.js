@@ -255,7 +255,7 @@ class Invitation extends Component {
                 <p>Signature</p>
                 <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-                <p>Enter email addresses and separate them with “;” Separate</p>
+                <p>Enter email addresses and separate them with “;” noDictionnaryFlag</p>
                 <TagsInput
                   value={this.state.mails}
                   addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
@@ -282,7 +282,7 @@ class Invitation extends Component {
                   })
                 }
                 </ul> */}
-                <ButtonBrand className={submitBtn} onClick={this.submit} >Confirm Sending</ButtonBrand>
+                <ButtonBrand className={submitBtn} onClick={this.submit} >Send</ButtonBrand>
               </TabPane>
               <TabPane tab="QR Code Invitation" key="3" className={tabPane3}>
                 <div>
