@@ -224,7 +224,7 @@ const reducer = handleActions({
       ...state,
       showModal: true,
       dialogType: type || 'success',
-      dialogTitle: title || '信息_en',
+      dialogTitle: title || 'Message',
       dialogMsg: msg
     }
   },

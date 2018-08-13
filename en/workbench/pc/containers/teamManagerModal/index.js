@@ -63,7 +63,7 @@ class TeamManagerModal extends Component {
           ]} 
           >
           <div className={content} >
-            Are you sure you wish to set the current user as an administrator?
+            Confirm to set the current user as an administrator?
           </div>
         </PopDialog>
     )

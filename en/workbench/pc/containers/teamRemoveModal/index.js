@@ -21,7 +21,7 @@ class TeamRemoveModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      msg:"Are you sure you wish to remove the selected user?",
+      msg:"Confirm to remove the selected user?",
       disable:false,
       btn:[
         {
@@ -69,7 +69,7 @@ class TeamRemoveModal extends Component {
       <PopDialog
           className="team_remove_modal"
           show={ true }
-          title="Are you sure you wish to remove the selected user?"
+          title="Confirm to remove the selected user?"
           backup={false}
           close={this.cancelFn} 
           btns={btn} 
