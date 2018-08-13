@@ -399,9 +399,9 @@ export default class Work extends Component {
               />
             </div>
           </HeaderContainer>
-          {/* {
+          {
             widthBrm ? <BreadcrumbContainer withSidebar={type !== 1 && type !== 4}/> : null
-          } */}
+          }
         </div>
 
         <div className={`${workArea}`}>
