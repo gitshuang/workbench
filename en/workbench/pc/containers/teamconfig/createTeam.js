@@ -191,10 +191,10 @@ class CreateTeam extends Component {
             <FormItem showMast={false} labelName={<span>Team Name<font color='red'> &nbsp;*&nbsp;</font></span>}
               isRequire={true} valuePropsName='value' errorMessage="Please enter the team name." method="blur"
               inline={true}>
-              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="[object Object]" />
+              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="No more than 60 chars" />
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>Team Profile Photo<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>Photo<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
               <Upload name='logo' logo={logo ? logo : ""} onChange={this.onChangeUpload} />
             </FormItem>
 
@@ -207,12 +207,12 @@ class CreateTeam extends Component {
                 onChange={(e) => { this.setOptherData({ name: "invitePermission", value: e }) }}
               >
                 <Option value="1">Invite All</Option>
-                <Option value="2">Forbid to invite</Option>
-                <Option value="0">Invited by Administrator</Option>
+                <Option value="2">Invite not Allowed</Option>
+                <Option value="0">Invite by Administrator</Option>
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>Application Permission<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select an industry." method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>Allow to Apply<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select an industry." method="blur" inline={true}>
               <Select
                 name="joinPermission"
                 defaultValue="1"
@@ -225,7 +225,7 @@ class CreateTeam extends Component {
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>Allow users to quit<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>Users' Quit<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || "0"}>
                 <Radio value="0" >Prohibited</Radio>
                 <Radio value="1" >Allowed</Radio>

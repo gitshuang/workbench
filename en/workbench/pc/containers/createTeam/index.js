@@ -144,7 +144,7 @@ class CreateTeamContent extends Component {
             <label>Team Name<span>&nbsp;*&nbsp;</span></label>
             <input
               className="u-form-control"
-              placeholder="60 characters at most"
+              placeholder="No more than 60 chars"
               value={value}
               onChange={(e) => { this.onChange(e) }}
             />
@@ -154,7 +154,7 @@ class CreateTeamContent extends Component {
           </div>
 
           <div className={`${item} um-box ${upload}`}>
-            <label>Team Profile Photo&nbsp; &nbsp; </label>
+            <label>Photo&nbsp; &nbsp; </label>
             <div>
               <Upload
                 name='logo'
