@@ -32,7 +32,7 @@ class EstablishContent extends Component {
     if(type && type == "init"){
       titleCont = (<div>
         <h5>Welcome to Yonyou Cloud</h5>
-        <p className={desc}>[object Object]</p>
+        <p className={desc}>Create your team or enterprise, and invite your friends to experience now. You can also contact your friends and join in their teams/enterprises.</p>
       </div>)
     }
 
@@ -49,7 +49,7 @@ class EstablishContent extends Component {
               <p>I'm a team manager.<br />I need to empower my department or project group.</p>
               <p>Key Features:</p>
               <ul className="clearfix">
-                <li>An All-in-one IM tool for teamsIM)</li>
+                <li>An All-in-one IM tool for teams(IM)</li>
                 <li>Xiaoyou, an intelligent virtual personal assistant</li>
                 <li>Context-aware schedule center</li>
                 <li>An empowering project collaboration tool</li>

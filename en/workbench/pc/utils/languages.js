@@ -17,7 +17,7 @@ const manageWidget = {
 	to: 'To',
 	notSave: 'Do Not Save',
 	confirm_to_delete_batch: 'Confirm to batch delete?',
-	notSave_to_lose_new_modify: '[object Object]',
+	notSave_to_lose_new_modify: 'The modifications will be lost if you click Do Not Save',
 	addQuick_to_home: 'Add Shortcut to Homepage',
 	all: 'All',
 	search: 'Search',
