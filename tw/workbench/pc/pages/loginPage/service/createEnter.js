@@ -140,7 +140,7 @@ class CreateEnter extends Component {
       logo, linkman, tenantEmail, tenantTel, processValue, tenantId,
     } = this.state;
     return (
-      <div>
+      <div className="applyService">
         <Form submitCallBack={this.checkForm} showSubmit={false} className={applyForm}>
         <FormItem
             showMast={false}
@@ -180,7 +180,6 @@ class CreateEnter extends Component {
             <Select
               defaultValue="-所屬行業-"
               name="tenantIndustry"
-              style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
               <Option value="A">農、林、牧、漁業</Option>
@@ -218,7 +217,6 @@ class CreateEnter extends Component {
             <Select
               defaultValue="-規模範圍-"
               name="tenantSize"
-              style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
               <Option value="A">0－50</Option>
