@@ -77,7 +77,7 @@ class Service extends Component {
                       <div className="leftBottom twoItem">
                         <img src={icon3} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">[object Object]</span>
+                             <span className="title">Exclusive Customizations</span>
                              <span className="subcon">Product modules can be deployed in your exclusive computer room, eliminating your security concerns</span>
                         </div>
                       </div>

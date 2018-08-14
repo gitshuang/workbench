@@ -46,7 +46,7 @@ class AboutUs extends Component {
                 <div className="absoutUsCon">
                     <div className="lefCon">
                         <span className="subtitle">Beijing Headquarters</span>
-                        <span className="desc">[object Object]</span>
+                        <span className="desc">Address: Yonyou Industry Park, No.68 Beiqing Road, Haidian District, Beijing</span>
                         <span className="desc">Tel: 010-86393388Ext. No. 4</span>
                         <span className="desc">Email:esnservice@yonyou.com</span>
 

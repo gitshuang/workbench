@@ -127,7 +127,7 @@ class searchOther extends Component {
   paginationNumSelect = (id,dataNum) =>{
     const type = this.props.match.params.type || this.state.type;
     const {keywords,activetab,activePage}=this.state;
-    const reg = new RegExp("[object Object]\/Page","g");
+    const reg = new RegExp("Entries\/Page","g");
     let dataPerPageNum  = dataNum.replace(reg,"");
     this.setState({
       dataPerPageNum:dataPerPageNum
@@ -189,7 +189,7 @@ class searchOther extends Component {
       <div className={bg+" um-content um-vbox"}>
         <div className={bg_wrap+" um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div>In total{dataList.totalElements}[object Object]</div>
+            <div>In total{dataList.totalElements}Entries</div>
             <ul className={recently}>{lis}</ul>
 
             <div className={`paginationClass ${isShowPagination? isdisplay : ''}`}>
