@@ -119,7 +119,7 @@ class CreateEnter extends Component {
       const Addres = TenantAddress.split('|');
       data.address = { province: Addres[0] ? Addres[0] : '', city: Addres[1] ? Addres[1] : '', area: Addres[2] ? Addres[2] : '' };
     } else {
-      data.address = { province: '$i18n{Beijing}', city: '北京', area: 'Dongcheng District' };
+      data.address = { province: 'Beijing', city: 'Beijing', area: 'Dongcheng District' };
     }
 
     // if(!data['tenantSize'] || data['tenantSize'] == '0'){
@@ -353,10 +353,10 @@ class CreateEnter extends Component {
       <Form submitCallBack={this.checkForm} showSubmit={false} className={enterForm}>
         <FormItem
           showMast={false}
-          labelName={<span>Enterprise Name<font color="red">&nbsp;*&nbsp;</font></span>}
+          labelName={<span>Name<font color="red">&nbsp;*&nbsp;</font></span>}
           isRequire
           valuePropsName="value"
-          errorMessage="Please enter enterprise name."
+          errorMessage="Please enter enterprise name"
           method="blur"
           inline
         >
@@ -380,7 +380,7 @@ class CreateEnter extends Component {
               labelName={<span>Industry<font color="red">&nbsp;*&nbsp;</font></span>}
               isRequire
               valuePropsName="value"
-              errorMessage="Please select an industry."
+              errorMessage="Please choose an industry"
               method="blur"
               inline
             >
@@ -403,7 +403,7 @@ class CreateEnter extends Component {
               labelName={<span>Industry<font color="red">&nbsp;*&nbsp;</font></span>}
               isRequire
               valuePropsName="value"
-              errorMessage="Please select an industry."
+              errorMessage="Please choose an industry"
               method="blur"
               inline
             >
@@ -426,16 +426,16 @@ class CreateEnter extends Component {
           tenantSize ? (
             <FormItem
               showMast={false}
-              labelName={<span>Scale<font color="red">&nbsp;*&nbsp;</font></span>}
+              labelName={<span>Staff<font color="red">&nbsp;*&nbsp;</font></span>}
               isRequire
               valuePropsName="value"
-              errorMessage="Please select scale."
+              errorMessage="Please choose scale"
               method="blur"
               inline
             >
               <Select
                 name="tenantSize"
-                defaultValue="-Scale-"
+                defaultValue="-Staff-"
                 value={tenantSize}
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
@@ -446,16 +446,16 @@ class CreateEnter extends Component {
           ) : (
             <FormItem
               showMast={false}
-              labelName={<span>Scale<font color="red">&nbsp;*&nbsp;</font></span>}
+              labelName={<span>Staff<font color="red">&nbsp;*&nbsp;</font></span>}
               isRequire
               valuePropsName="value"
-              errorMessage="Please select scale."
+              errorMessage="Please choose scale"
               method="blur"
               inline
             >
               <Select
                 name="tenantSize"
-                defaultValue="-Scale-"
+                defaultValue="-Staff-"
                 style={{ width: 338, marginRight: 6 }}
                 onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
               >
@@ -484,7 +484,7 @@ class CreateEnter extends Component {
           <FormControl name="tenantAddress" value={newTenantAddress || ''} onChange={(e) => { this.inputOnChange(e, 'tenantAddress'); }} placeholder="No more than 60 chars" />
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>Invitation Rules<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="Please select an industry." method="blur" inline>
+        <FormItem showMast={false} labelName={<span>Invitation Rules<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="Please choose an industry" method="blur" inline>
           <Select
             name="invitePermission"
             defaultValue="1"
@@ -498,7 +498,7 @@ class CreateEnter extends Component {
           </Select>
         </FormItem>
 
-        <FormItem showMast={false} labelName={<span>Allow to Apply<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="Please select an industry." method="blur" inline>
+        <FormItem showMast={false} labelName={<span>Allow to Apply<font color="red">&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName="value" errorMessage="Please choose an industry" method="blur" inline>
           <Select
             name="joinPermission"
             defaultValue="1"
@@ -506,8 +506,8 @@ class CreateEnter extends Component {
             style={{ width: 338, marginRight: 6 }}
             onChange={(e) => { this.setOptherData({ name: 'joinPermission', value: e }); }}
           >
-            <Option value="0">All users can apply to join in </Option>
-            <Option value="1">Forbid users from applying to join in</Option>
+            <Option value="0">Allow all users to apply </Option>
+            <Option value="1">Forbid users to apply</Option>
           </Select>
         </FormItem>
 
@@ -538,7 +538,7 @@ class CreateEnter extends Component {
             <Option value={1}>Based on imported reporting relationship</Option>
           </Select>
         </FormItem>
-        <FormItem showMast={false} labelName={<span>Display watermark in address book<font color="red"> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
+        <FormItem showMast={false} labelName={<span>Display watermark in contacts<font color="red"> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline>
           <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
             <Radio value={0} >Prohibited</Radio>
             <Radio value={1} >Allowed</Radio>
@@ -553,16 +553,16 @@ class CreateEnter extends Component {
           Contact:
         </div>
 
-        <FormItem showMast={false} labelName={<span>Name<font color="red">&nbsp;*&nbsp;</font></span>} isRequire valuePropsName="value" errorMessage="Please enter contact name." method="blur" inline>
-          <FormControl name="linkman" value={linkman || ''} placeholder="Please enter contact name." onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+        <FormItem showMast={false} labelName={<span>Name<font color="red">&nbsp;*&nbsp;</font></span>} isRequire valuePropsName="value" errorMessage="Please enter contact name" method="blur" inline>
+          <FormControl name="linkman" value={linkman || ''} placeholder="Please enter contact name" onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
         </FormItem>
 
-        <FormItem showMast={false} valuePropsName="value" labelName={<span>E-mail<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="email" errorMessage="Wrong e-mail format." inline>
+        <FormItem showMast={false} valuePropsName="value" labelName={<span>Email<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="email" errorMessage="Wrong e-mail format." inline>
           <FormControl name="tenantEmail" value={tenantEmail || ''} onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }} placeholder="Please enter e-mail address." />
         </FormItem>
 
-        <FormItem className="input_phone" showMast={false} valuePropsName="value" labelName={<span>Mobile<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="tel" errorMessage="Wrong mobile No. format." inline>
-          <FormControl name="tenantTel" value={tenantTel || ''} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} placeholder="Please enter mobile number." />
+        <FormItem className="input_phone" showMast={false} valuePropsName="value" labelName={<span>Mobile<font color="red">&nbsp;*&nbsp;</font></span>} isRequire method="blur" htmlType="tel" errorMessage="Wrong mobile No. format" inline>
+          <FormControl name="tenantTel" value={tenantTel || ''} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} placeholder="Please enter mobile number" />
         </FormItem>
 
         {

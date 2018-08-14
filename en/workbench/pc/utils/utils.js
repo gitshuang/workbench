@@ -8,7 +8,7 @@ function getHashParameters() {
 }
 
 /**
- * Set return path array, which is only available toreducerUse
+ * Set return path array, which is only available toreducer 
  * @param backUrl
  */
 function setBackUrl(backUrl) {

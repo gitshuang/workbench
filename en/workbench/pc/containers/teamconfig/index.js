@@ -134,10 +134,10 @@ class CreateTeamContent extends Component {
       pagesize: 10,
       dataPerPageNum: 10,
       dataNumSelect: [
-        { id: 0, name: '5entries/page',value:5},
-        { id: 1, name: '10entries/page', value:10},
-        { id: 2, name: '15entries/page',value:15 },
-        { id: 3, name: '20entries/page',value:20 }
+        { id: 0, name: '5 per page',value:5},
+        { id: 1, name: '10 per page', value:10},
+        { id: 2, name: '15 per page',value:15 },
+        { id: 3, name: '20 per page',value:20 }
       ],
       dataNum:1,
       enhancedPaginationText:{
@@ -282,7 +282,7 @@ class CreateTeamContent extends Component {
     if (timeDiff > 30) {
       return false;
     }
-    return "And" + Math.ceil(timeDiff) + "days before expiration"
+    return " " + Math.ceil(timeDiff) + "days before expiration"
   }
   // 续费按钮
   esitXufei = (time) => {
@@ -509,7 +509,7 @@ class CreateTeamContent extends Component {
             </div>
           </div>
           <div className={memberBtns}>
-            <Checkbox colors="info" onChange={this.changeCheck}>Only display administrator</Checkbox>
+            <Checkbox colors="info" onChange={this.changeCheck}>Only Display Administrator</Checkbox>
             {
               _invitePermission ? <ButtonBrand onClick={this.inviteMember}>Invite Member</ButtonBrand> : null
             }

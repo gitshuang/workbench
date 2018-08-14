@@ -163,7 +163,7 @@ class Invitation extends Component {
         content: 'Please input a correct email address.!', duration: 1.5, position: 'topLeft', color: 'warning',
       });
     } else {
-      const parent = { email: mails, message: message === '' ? 'YouZone-Empowering Employees and Activating Organizations' : message, creator };
+      const parent = { email: mails, message: message === '' ? 'YouZone-Empowering Employees Organizations' : message, creator };
       requestStart();
       sendMessage(parent).then(() => {
         requestSuccess();
@@ -247,7 +247,7 @@ class Invitation extends Component {
 
                 <p className={firstP}>Send a message to your friends</p>
                 <FormControl
-                  placeholder="YouZone-Empowering Employees and Activating Organizations"
+                  placeholder="YouZone-Empowering Employees Organizations"
                   value={message}
                   onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
                 />
@@ -255,7 +255,7 @@ class Invitation extends Component {
                 <p>Signature</p>
                 <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-                <p>Enter email addresses and separate them with “;”  </p>
+                <p>Enter email addresses and separate them with “;” Separate</p>
                 <TagsInput
                   value={this.state.mails}
                   addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59

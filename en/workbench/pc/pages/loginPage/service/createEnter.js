@@ -215,7 +215,7 @@ class CreateEnter extends Component {
             inline
           >
             <Select
-              defaultValue="-Scale-"
+              defaultValue="-Staff-"
               name="tenantSize"
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
@@ -225,7 +225,7 @@ class CreateEnter extends Component {
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
               <Option value="F">1001-2000</Option>
-              <Option value="G">2000People</Option>
+              <Option value="G">2000people</Option>
             </Select>
           </FormItem>
 

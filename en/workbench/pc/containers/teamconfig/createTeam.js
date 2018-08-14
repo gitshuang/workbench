@@ -129,7 +129,7 @@ class CreateTeam extends Component {
         }
         requestSuccess();
         openMess({
-          content: 'Save',
+          content: 'Saved successfully.',
           duration: 2,
           type: 'success',
           closable: false,
@@ -198,7 +198,7 @@ class CreateTeam extends Component {
               <Upload name='logo' logo={logo ? logo : ""} onChange={this.onChangeUpload} />
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>Invitation Rules<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select an industry." method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>Invitation Rules<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please choose an industry" method="blur" inline={true}>
               <Select
                 defaultValue="1"
                 name="invitePermission"
@@ -212,7 +212,7 @@ class CreateTeam extends Component {
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>Allow to Apply<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please select an industry." method="blur" inline={true}>
+            <FormItem showMast={false} labelName={<span>Allow to Apply<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="Please choose an industry" method="blur" inline={true}>
               <Select
                 name="joinPermission"
                 defaultValue="1"
@@ -232,7 +232,7 @@ class CreateTeam extends Component {
               </Radio.RadioGroup>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>Display watermark in address book<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<span>Display watermark in contacts<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
                 <Radio value={0} >Prohibited</Radio>
                 <Radio value={1} >Allowed</Radio>
