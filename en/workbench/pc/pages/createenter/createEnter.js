@@ -171,7 +171,7 @@ class CreateEnter extends Component {
         <Form submitCallBack={this.checkForm} showSubmit={false} className={enterForm}>
           <FormItem
             showMast={false}
-            labelName={<span>Enterprise Name<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>Name<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
             errorMessage="Please enter enterprise name"
@@ -202,7 +202,7 @@ class CreateEnter extends Component {
             labelName={<span>Industry<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="Please select an industry."
+            errorMessage="Please choose an industry"
             method="blur"
             inline
           >
@@ -237,25 +237,25 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>Scale<font color="red">&nbsp;*&nbsp;</font></span>}
+            labelName={<span>Staff<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="Please select scale."
+            errorMessage="Please choose scale"
             method="blur"
             inline
           >
             <Select
-              defaultValue="-Scale-"
+              defaultValue="-Staff-"
               name="tenantSize"
               style={{ width: 338, marginRight: 6 }}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
-              <Option value="A">0－50</Option>
+              <Option value="A">0-50</Option>
               <Option value="B">51-100</Option>
               <Option value="C">101-200</Option>
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
-              <Option value="F">1001－2000</Option>
+              <Option value="F">1001-2000</Option>
               <Option value="G">2000people</Option>
             </Select>
           </FormItem>
@@ -297,11 +297,11 @@ class CreateEnter extends Component {
             labelName={<span>Name<font color="red">&nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="Please enter contact name."
+            errorMessage="Please enter contact name"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="Please enter contact name." value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl name="linkman" placeholder="Please enter contact name" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
           </FormItem>
 
           <FormItem
@@ -326,10 +326,10 @@ class CreateEnter extends Component {
             isRequire
             method="blur"
             htmlType="tel"
-            errorMessage="Wrong mobile No. format."
+            errorMessage="Wrong mobile No. format"
             inline
           >
-            <FormControl name="tenantTel" placeholder="Please enter mobile number." value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+            <FormControl name="tenantTel" placeholder="Please enter mobile number" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
           </FormItem>
 
           { /*

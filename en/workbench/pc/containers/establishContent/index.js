@@ -49,7 +49,7 @@ class EstablishContent extends Component {
               <p>I'm a team manager.<br />I need to empower my department or project group.</p>
               <p>Key Features:</p>
               <ul className="clearfix">
-                <li>An All-in-one IM tool for teams(IM)</li>
+                <li>An All-in-one IM tool for teams (IM)</li>
                 <li>Xiaoyou, an intelligent virtual personal assistant</li>
                 <li>Context-aware schedule center</li>
                 <li>An empowering project collaboration tool</li>
@@ -76,8 +76,8 @@ class EstablishContent extends Component {
                 <li>Stricter enterprise member management</li>
                 <li>Role-based application permission management</li>
                 <li>Enterprise-level uniform basic file and data control</li>
-                <li>Basic attendance and salary query service</li>
-                <li>Enterprise-level application market provides a portal for a full of range digital services</li>
+                <li>Basic Attendance and Salary Query Service</li>
+                <li>Enterprise-level App market provides all-round digital service entrance</li>
               </ul>
             </div>
             <div style={{textAlign:"center"}}>

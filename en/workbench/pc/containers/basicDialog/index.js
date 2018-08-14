@@ -23,7 +23,7 @@ class PopDialogComp extends Component {
 
   render() {
     const {dialogType, dialogMsg, dialogTitle, showModal, closeDialogNew} = this.props;
-    let btnLabel = "Confirm";
+    let btnLabel = "OK";
     let _btn = [
       {
         label: btnLabel,
