@@ -197,7 +197,7 @@ class HeaderPage extends Component {
           iconName={personal}
           color={color}
         >
-          <span style={titleStyle}>{title || 'Homepage'}</span>
+          <span style={titleStyle}>{title || 'Home'}</span>
         </Header>
         {
           list.length >= 1 ? (

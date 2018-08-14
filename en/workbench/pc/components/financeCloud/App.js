@@ -17,7 +17,7 @@ class App extends React.Component {
           'modifier': '530b1b30-c7da-45e8-913f-a47cb5c0ea64',
           'tenantId': 'vspcvrrj',
           'menuItemId': '81ce9334-2c2d-4741-9b77-22549d360dc6',
-          'menuItemName': 'Homepage',
+          'menuItemName': 'Home',
           'menuItemCode': 'yzbmenu001',
           'menuItemIcon': '',
           'parentId': null,
@@ -33,7 +33,7 @@ class App extends React.Component {
             'creator': '530b1b30-c7da-45e8-913f-a47cb5c0ea64',
             'tenantId': 'vspcvrrj',
             'serviceId': 'f8ad578f-3d07-42f3-87d0-1d0e93fdd0af',
-            'title': ' Homepage',
+            'title': ' Home',
             'serviceCode': 'mywork',
             'applicationId': 'b32b0b8a-47f7-4c24-9413-aa72b80fadb0',
             'enable': true,
@@ -318,7 +318,7 @@ class App extends React.Component {
       ],
       current: {
         menuItemId: '81ce9334-2c2d-4741-9b77-22549d360dc6',
-        title: 'Homepage',
+        title: 'Home',
         //服务编码，唯一确定一个service
         serviceCode: 'mywork',
         serviceId: 'f8ad578f-3d07-42f3-87d0-1d0e93fdd0af',

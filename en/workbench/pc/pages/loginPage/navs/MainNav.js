@@ -35,7 +35,7 @@ export default function MainNavPanel(props){
             props.btnShow &&(
             <div className={rightCon}>
                 <a className="loginBtn" onClick={props.loginClick}>Log In</a>
-                <a className="registryBtn" target="_blank" href={props.registryUrl}>Sign Up Now</a>
+                <a className="registryBtn" target="_blank" href={props.registryUrl}>Sign Up</a>
             </div>
             )
         }

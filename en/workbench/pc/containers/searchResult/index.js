@@ -75,10 +75,10 @@ class searchResult extends Component {
       searchValue: '',
       searchTab: '',
       dataNumSelect: [
-        { id: 0, name: '5entries/page',value:5},
-        { id: 1, name: '10entries/page', value:10},
-        { id: 2, name: '15entries/page',value:15 },
-        { id: 3, name: '20entries/page',value:20 }
+        { id: 0, name: '5 per page',value:5},
+        { id: 1, name: '10 per page', value:10},
+        { id: 2, name: '15 per page',value:15 },
+        { id: 3, name: '20 per page',value:20 }
       ],
       dataNum:1,
       enhancedPaginationText:{
@@ -287,7 +287,7 @@ class searchResult extends Component {
             <div className={searchPanel}>
               <FormControl
                 className={serviceSearch}
-                placeholder="Search personnel information, service, and other contents."
+                placeholder="Personnel Info, service, and others"
                 value={this.state.keywords}
                 onKeyDown={this.onKeyup}
                 onChange={this.inputOnChange}
