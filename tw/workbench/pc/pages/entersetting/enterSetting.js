@@ -119,7 +119,7 @@ class CreateEnter extends Component {
       const Addres = TenantAddress.split('|');
       data.address = { province: Addres[0] ? Addres[0] : '', city: Addres[1] ? Addres[1] : '', area: Addres[2] ? Addres[2] : '' };
     } else {
-      data.address = { province: '$i18n{北京}', city: '北京', area: '東城區' };
+      data.address = { province: '北京', city: '北京', area: '東城區' };
     }
 
     // if(!data['tenantSize'] || data['tenantSize'] == '0'){

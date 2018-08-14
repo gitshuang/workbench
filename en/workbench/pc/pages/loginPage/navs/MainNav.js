@@ -26,7 +26,7 @@ export default function MainNavPanel(props){
           {/* <div className="leftConFake" onClick={()=>{open('login')}}></div> */}
         </div>
         <div className={middleCon}>
-          <a  className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{open('login')}}>Homepage</a>
+          <a  className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{open('login')}}>Home</a>
           <a  className={`middleItem ${props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{open('service')}}>Service Support</a>
           <a   href="https://open.yonyoucloud.com" target="_blank" className={`middleItem ${props.activeIndex*1 === 3?'actived':null}`}>开放平台</a>
           <a  className={`middleItem ${props.activeIndex*1 === 4?'actived':null}`} onClick={()=>{open('aboutus')}}>Contact Us</a>

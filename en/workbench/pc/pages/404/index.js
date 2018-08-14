@@ -55,7 +55,7 @@ export default class Page404 extends Component {
       <div className={`${wrap} um-win`}>
         <div className={`um-content ${page404Area}`}>
           <section>
-            <div className={remindWord}>[object Object]</div>
+            <div className={remindWord}>Sorry, this page is not available.</div>
           </section>
           <section>
             <Button shape="border" ><a href="/">Homepage</a></Button>
