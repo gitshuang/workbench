@@ -29,7 +29,7 @@ class SearchContainer extends Component {
     super(props);
     this.state = {
       searchText: {
-        placeholder: '[object Object]',
+        placeholder: 'Search personnel information, service, and other contents.',
         more: 'More Results',
         none: 'No result found',
         clear: 'Clear',
