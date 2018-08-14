@@ -90,7 +90,7 @@ const createReducer = key => (state, { payload, error }) => {
 const reducer = handleActions({
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc({ text: 'loading data...' });
+    createLoadingFunc({ text: 'Loading data…' });
     return state;
   },
   [requestSuccess](state) {

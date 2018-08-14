@@ -14,7 +14,7 @@ import{
               !props.loginModalShow &&(
                 <div className={`laymid`} style={{marginTop:`${props.sevenSpace}px`}}>
                   {/* <div className="logo"></div> */}
-                  <div className="mainTitle">“[object Object]”</div>
+                  <div className="mainTitle">“Trust us, and start digital working right away”</div>
                   <div className="clickMe clearfix">
                     <span  className="loginBtn clickBtn " onClick={props.loginClick}>Log In</span>
                     <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">Sign Up</a>
