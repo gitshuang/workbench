@@ -18,7 +18,7 @@ class FinanceCloudComponents extends Component {
     const {menuItems, current, updateCurrent} = this.props;
 
     return (
-      <FinanceCloud menuItems={menuItems} current={current} updateCurrent={updateCurrent}/>
+      <FinanceCloud env={process.env.NODE_ENV} menuItems={menuItems} current={current} updateCurrent={updateCurrent}/>
     );
   }
 
