@@ -57,6 +57,8 @@ class serviceClassify extends Component {
       currentLabel: -1,
       currentApps: [],
       apps: [],
+      search: false,
+      searchApps: [],
       appMaps: {},
       tabs: [],
     }
@@ -137,6 +139,8 @@ class serviceClassify extends Component {
   handleChangeLabel = (index) => () => {
     this.setState({
       currentLabel: index,
+      searchApps: [],
+      search: false,
     })
     this.changeCurrentApp(this.state.currentTab, index);
   }
@@ -148,7 +152,8 @@ class serviceClassify extends Component {
     }
     if (value.trim()) {
       this.setState({
-        currentApps: currentApps.filter(item => item.applicationName.indexOf(value) > -1)
+        search: true,
+        searchApps: currentApps.filter(item => item.applicationName.toLowerCase().indexOf(value.toLowerCase()) > -1)
       });
     } else {
       this.handleChangeLabel(currentLabel)();
@@ -156,8 +161,14 @@ class serviceClassify extends Component {
   }
 
   renderList() {
-    const { currentApps } = this.state;
-    return currentApps.map(({ applicationId, applicationCode, applicationIcon, applicationName }) => {
+    const { currentApps, searchApps, search } = this.state;
+    let newArr = [];
+    if(search){
+      newArr = searchApps;
+    }else{
+      newArr = currentApps;
+    }
+    return newArr.map(({ applicationId, applicationCode, applicationIcon, applicationName }) => {
       return (
         <GoTo
           key={`${applicationId}${applicationCode}`}
