@@ -11,7 +11,7 @@ import Form, { FormItem } from 'bee/form';
 import FormControl from 'bee/form-control';
 import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
-import Progress from 'pub-comp/progress';
+import { openMess } from 'pub-comp/notification';
 import 'assets/style/Form.css';
 import {
   applyForm, applyBtn,
@@ -50,30 +50,18 @@ class CreateEnter extends Component {
     super(props);
     this.state = {
       disabled: true,
-      logo: '',
       tenantIndustry: 'A',
-      linkman: props.userInfo.userName,
-      tenantEmail: props.userInfo.userEmail,
-      tenantTel: props.userInfo.userMobile,
-      // 0表示未开始，1表示开始
-      processValue: 0,
-      // 企业id
-      tenantId: '',
-    };
-    this.tenantIndustry = {
-      name: 'tenantIndustry',
-      value: 'A',
-      verify: true,
+      tenantSize:'A',//staff的范围
+      linkman: '',
+      companyname:'',
+      tenantTel:'',
     };
     this.address = '北京|北京|东城区|';
-    //progressbar
-    this.loadingFunc = null;
-    this.successFunc = null;
-    this.timer = null;
   }
 
   onChange = (obj) => {
     this.address = obj.province + obj.city + obj.area;
+    alert(this.address)
   }
 
   
@@ -135,39 +123,42 @@ class CreateEnter extends Component {
       ...this.state,
     });
   }
+
+  submitService = () =>{
+    let{tenantIndustry, tenantSize,companyname, linkman, tenantTel} = this.state;
+    if(tenantIndustry== ''||tenantSize==''||companyname==''||linkman==''||tenantTel==''){
+      openMess({
+        content: '选项不可为空',
+        duration: 2,
+        type: 'warning',
+        closable: false,
+      });
+    }
+
+  }
   render() {
     const {
-      logo, linkman, tenantEmail, tenantTel, processValue, tenantId,
+      tenantIndustry, tenantSize,companyname, linkman,  tenantTel,
     } = this.state;
+    let disabled = false;
+    if(tenantIndustry==''||tenantSize == ''|| companyname == '' || linkman == ''|| tenantTel=='' || !(/^1[34578][0-9]{9}$/).test(tenantTel)){
+      disabled = true;
+    }
     return (
       <div className="applyService">
         <Form submitCallBack={this.checkForm} showSubmit={false} className={applyForm}>
         <FormItem
             showMast={false}
-            labelName={<span>姓名</span>}
+            labelName={<span>企业名称</span>}
             isRequire
             valuePropsName="value"
-            errorMessage="请输入联系人姓名"
+            errorMessage="请输入企业名称"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="请输入联系人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl ref={ref=>this.companyRef = ref}name="companyname" placeholder="请输入企业名称" value={companyname} onChange={(e) => { this.inputOnChange(e, 'companyname'); }} />
           </FormItem>
-
-          <FormItem
-            className="input_phone"
-            showMast={false}
-            valuePropsName="value"
-            labelName={<span>手机号</span>}
-            isRequire
-            method="blur"
-            htmlType="tel"
-            errorMessage="手机号格式错误"
-            inline
-          >
-            <FormControl name="tenantTel" placeholder="请输入手机号" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
-          </FormItem>
-
+        
           <FormItem
             showMast={false}
             labelName={<span>行业</span>}
@@ -180,6 +171,7 @@ class CreateEnter extends Component {
             <Select
               defaultValue="-所属行业-"
               name="tenantIndustry"
+              style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
               <Option value="A">农、林、牧、渔业</Option>
@@ -217,6 +209,7 @@ class CreateEnter extends Component {
             <Select
               defaultValue="-规模范围-"
               name="tenantSize"
+              style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
               <Option value="A">0－50</Option>
@@ -240,8 +233,41 @@ class CreateEnter extends Component {
           >
             <CitySelect name="address" onChange={this.onChange} />
           </FormItem>
+          <FormItem
+            showMast={false}
+            labelName={<span>联系人</span>}
+            isRequire
+            valuePropsName="value"
+            errorMessage="请输入联系人姓名"
+            method="blur"
+            inline
+          >
+            <FormControl name="linkman" placeholder="请输入联系人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+          </FormItem>
+
+          <FormItem
+            className="input_phone"
+            showMast={false}
+            valuePropsName="value"
+            labelName={<span>手机号</span>}
+            isRequire
+            method="blur"
+            htmlType="tel"
+            errorMessage="手机号格式错误"
+            inline
+          >
+            <FormControl name="tenantTel" placeholder="请输入手机号" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+          </FormItem>
+
         </Form>
-            <div className={applyBtn}>立即申请</div>
+        {
+          disabled?
+          <div className={`${applyBtn} disabled`} >立即申请</div>
+          :
+          <div className={applyBtn} onClick={this.submitService}>立即申请</div>
+
+        }
+            {/* <div className={applyBtn} onClick={this.submitService}>立即申请</div> */}
       </div>
     );
   }

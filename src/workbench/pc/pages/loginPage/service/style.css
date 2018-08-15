@@ -52,6 +52,9 @@ body  .applyForm :global(.u-form-item .u-select){
   display: none;
 
 }
+.applyBtn:global(.disabled){
+  background: #ddd;
+}
 
 .applyBtn{
   width: 370px;

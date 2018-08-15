@@ -46,8 +46,8 @@ class Footer extends Component {
         <div className={FooterConPanel}>
              <div className="footerTop">
                 <div className="topSection topOne">
-                    <span className="title">客户端下载</span>
-                    <div className="allIcons">
+                    <span className="title" >客户端下载</span>
+                    <a className="allIcons" href="http://ec.yonyoucloud.com/html/index/down.html " target="_blank">
                         <div className="diff" onMouseEnter={this.hover} onMouseLeave={this.hoverLeave}>
                             <span className="iconItem" >
                                 <span className="iconInner iconOne"></span>
@@ -73,25 +73,25 @@ class Footer extends Component {
                             <span className="iconDesc">Win xp</span>
                         </span>
                         
-                    </div>
+                    </a>
                 </div>
                 <div className="topSection toptwo">
                     <div className="topTwoItem">
                         <span className="title">用友集团</span>
-                        <span className="con">用友官网</span>
-                        <span className="con">用友云官网</span>
-                        <span className="con">用友云市场</span>
+                        <a className="con" href="http://www.yonyou.com" target="_blank">用友官网</a>
+                        <a className="con" href="http://www.yonyoucloud.com" target="_blank">用友云官网</a>
+                        <a className="con" href="http://market.yonyoucloud.com" target="_blank">用友云市场</a>
                     </div>
                     <div className="topTwoItem">
                         <span className="title">联系我们</span>
-                        <span className="con">热线电话：010-86393388转4</span>
+                        <span className="con">热线电话：010-86393388</span>
                         <span className="con">联系邮箱：esnservice@yonyou.com</span>
                     </div>
                 </div>
              </div>
              <div className={FooterBottom}>
                 {/* <span className="police">京公网安备 11010802020548号</span> */}
-                <span className="company">用友网络科技股份有限公司 © Copyright 2017 京ICP备05007539号-24</span>
+                <span className="company">用友网络科技股份有限公司 © Copyright 2018 京ICP备05007539号-24</span>
              </div>
         </div>
     );
