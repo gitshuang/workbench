@@ -4,21 +4,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 
+import loginpageActions from 'store/root/loginpage/actions';
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
+
+
 
 import Form, { FormItem } from 'bee/form';
 import FormControl from 'bee/form-control';
 import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
-import Progress from 'pub-comp/progress';
+import { openMess } from 'pub-comp/notification';
 import 'assets/style/Form.css';
 import {
   applyForm, applyBtn,
 } from './style.css';
 
+const {applyService} = loginpageActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { setCreateEnter } = homeActions;
 const { Option } = Select;
 
 @withRouter
@@ -28,52 +30,30 @@ const { Option } = Select;
     requestStart,
     requestSuccess,
     requestError,
-    setCreateEnter,
+    applyService,
   },
 )
+
 class CreateEnter extends Component {
-  static propTypes = {
-    userInfo: PropTypes.shape({
-      userName: PropTypes.string,
-      userEmail: PropTypes.string,
-      userMobile: PropTypes.string,
-    }),
-    setCreateEnter: PropTypes.func,
-    updateenter: PropTypes.string,
-  };
-  static defaultProps = {
-    userInfo: {},
-    setCreateEnter: () => { },
-    updateenter: '',
-  };
   constructor(props) {
     super(props);
     this.state = {
-      disabled: true,
-      logo: '',
+      flag: false,
       tenantIndustry: 'A',
-      linkman: props.userInfo.userName,
-      tenantEmail: props.userInfo.userEmail,
-      tenantTel: props.userInfo.userMobile,
-      // 0表示未开始，1表示开始
-      processValue: 0,
-      // 企业id
-      tenantId: '',
+      tenantSize:'A',//staff的范围
+      linkman: '',
+      companyname:'',
+      tenantTel:'',
     };
-    this.tenantIndustry = {
-      name: 'tenantIndustry',
-      value: 'A',
-      verify: true,
-    };
-    this.address = 'Beijing | Beijing | Dongcheng District |';
-    //progressbar
-    this.loadingFunc = null;
-    this.successFunc = null;
-    this.timer = null;
+    // this.address = '北京|北京|东城区|';
+    this.province = 'Beijing';
+    this.city = 'Beijing';
   }
 
   onChange = (obj) => {
-    this.address = obj.province + obj.city + obj.area;
+    // this.address = obj.province + obj.city;
+    this.province =  obj.province;
+    this.city= obj.city;
   }
 
   
@@ -84,50 +64,6 @@ class CreateEnter extends Component {
       ...this.state,
     });
   }
-
-  checkForm = (flag, data) => {
-    const { setCreateEnter, updateenter, requestStart, requestSuccess, requestError, } = this.props;
-    const { tenantIndustry } = this.state;
-
-    const Address = data.find(da => da.name === 'address');
-    const TenantAddress = data.find(da => da.name === 'tenantAddress');
-    if (Address.value && Address.value !== '') {
-      TenantAddress.value = `${Address.value.province}|${Address.value.city}|${Address.value.area}|${TenantAddress.value}`;
-    } else {
-      TenantAddress.value = this.address + TenantAddress.value;
-    }
-
-    const TenantIndustry = data.find(da => da.name === 'tenantIndustry');
-    if (!TenantIndustry.value && TenantIndustry.value === '') {
-      TenantIndustry.value = tenantIndustry;
-    }
-    // this.setState({tenantId:"tenantId",processValue:1});//测试用的，要注销
-    if (flag) {
-      this.setState({
-        disabled: false,
-      });
-      requestStart();
-      const argu1 = data.reduce((obj, { value, name }) => {
-        if (name) {
-          obj[name] = value;
-        }
-        return obj;
-      }, {});
-      setCreateEnter(argu1, updateenter).then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-          return;
-        }
-        requestSuccess();
-        this.setState({
-          disabled: true,
-          processValue: 1,
-        });
-        const { tenantId } = payload;
-        localStorage.setItem('create', '1');
-      });
-    }
-  }
   
   inputOnChange = (e, name) => {
     this.state[name] = e;
@@ -135,42 +71,66 @@ class CreateEnter extends Component {
       ...this.state,
     });
   }
+
+  submitService = () =>{
+    let{tenantIndustry, tenantSize,companyname, linkman, tenantTel} = this.state;
+    const { applyService, requestStart, requestSuccess, requestError, } = this.props;
+    if(tenantIndustry== ''||tenantSize==''||companyname==''||linkman==''||tenantTel==''){
+      return false;
+    }
+    let param = {
+      conpanyName:companyname,
+      contactName:linkman,
+      phoneNumber:tenantTel,
+      trade:tenantIndustry,
+      scale:tenantSize,
+      province:this.province,
+      city:this.city,
+    }
+    this.setState({flag:true});
+    requestStart()
+    applyService(param).then(({ error, payload }) => {
+      if (error) {
+        this.setState({
+          flag: false, // 可以再提交一次
+        });
+        requestError(payload);
+        return;
+      }
+      this.setState({
+        flag: false,
+      });
+      requestSuccess();
+      window.location.reload();
+    });
+
+  }
   render() {
     const {
-      logo, linkman, tenantEmail, tenantTel, processValue, tenantId,
+      flag,tenantIndustry, tenantSize,companyname, linkman,  tenantTel,
     } = this.state;
+    let disabled = false;
+    if(flag ||tenantIndustry==''||tenantSize == ''|| companyname == '' || linkman == ''|| tenantTel=='' || !(/^1[34578][0-9]{9}$/).test(tenantTel)){
+      disabled = true;
+    }
     return (
       <div className="applyService">
-        <Form submitCallBack={this.checkForm} showSubmit={false} className={applyForm}>
+        <Form  className={applyForm} showSubmit={false}>
         <FormItem
             showMast={false}
-            labelName={<span>Name</span>}
+            labelName={<span>Enterprise Name<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="Please enter contact name"
+            errorMessage="Please enter enterprise name"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="Please enter contact name" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl ref={ref=>this.companyRef = ref}name="companyname" placeholder="Please enter enterprise name" value={companyname} onChange={(e) => { this.inputOnChange(e, 'companyname'); }} />
           </FormItem>
-
-          <FormItem
-            className="input_phone"
-            showMast={false}
-            valuePropsName="value"
-            labelName={<span>Mobile</span>}
-            isRequire
-            method="blur"
-            htmlType="tel"
-            errorMessage="Wrong mobile No. format"
-            inline
-          >
-            <FormControl name="tenantTel" placeholder="Please enter mobile number" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
-          </FormItem>
-
+        
           <FormItem
             showMast={false}
-            labelName={<span>Industry</span>}
+            labelName={<span>Industry<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
             errorMessage="Please choose an industry"
@@ -180,6 +140,7 @@ class CreateEnter extends Component {
             <Select
               defaultValue="-Industry-"
               name="tenantIndustry"
+              style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
               <Option value="A">Agriculture, Forestry, Animal Husbandry, and Fishery Industries</Option>
@@ -207,7 +168,7 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>Size</span>}
+            labelName={<span>Size<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
             errorMessage="Please choose scale"
@@ -217,6 +178,7 @@ class CreateEnter extends Component {
             <Select
               defaultValue="-Staff-"
               name="tenantSize"
+              style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
               <Option value="A">0-50</Option>
@@ -231,7 +193,7 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>Province/City</span>}
+            labelName={<span>Province/City<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire={false}
             valuePropsName="value"
             errorMessage="Please enter province/city"
@@ -240,8 +202,41 @@ class CreateEnter extends Component {
           >
             <CitySelect name="address" onChange={this.onChange} />
           </FormItem>
+          <FormItem
+            showMast={false}
+            labelName={<span><font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire
+            valuePropsName="value"
+            errorMessage="Please enter contact name"
+            method="blur"
+            inline
+          >
+            <FormControl name="linkman" placeholder="Please enter contact name" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+          </FormItem>
+
+          <FormItem
+            className="input_phone"
+            showMast={false}
+            valuePropsName="value"
+            labelName={<span>Mobile<font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire
+            method="blur"
+            htmlType="tel"
+            errorMessage="Wrong mobile No. format"
+            inline
+          >
+            <FormControl name="tenantTel" placeholder="Please enter mobile number" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+          </FormItem>
+
         </Form>
-            <div className={applyBtn}>Apply</div>
+        {
+          disabled?
+          <div className={`${applyBtn} disabled`} >Apply</div>
+          :
+          <div className={applyBtn}  onClick={this.submitService}>Apply</div>
+
+        }
+            {/* <div className={applyBtn} onClick={this.submitService}>Apply</div> */}
       </div>
     );
   }
