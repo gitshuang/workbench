@@ -47,8 +47,8 @@ class AboutUs extends Component {
                     <div className="lefCon">
                         <span className="subtitle">北京總部</span>
                         <span className="desc">地址：北京市海澱區北清路68號用友產業園</span>
-                        <span className="desc">電話：010-86393388轉4</span>
-                        <span className="desc">郵箱：esnservice@yonyou.com</span>
+                        <span className="desc">電話：010-62438888</span>
+                        <span className="desc">郵箱：diwork@yonyou.com</span>
 
                     </div>
                     <div className="rightCon">

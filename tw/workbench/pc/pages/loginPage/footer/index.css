@@ -20,7 +20,7 @@
     
 }
 
-.FooterConPanel :global(.topSection span.title) {
+.FooterConPanel :global(.topSection .title) {
     font-size: 20px;
     line-height: 28px;
     padding-bottom: 36px;
@@ -28,8 +28,11 @@
 }
 /*第一个部分修改*/
 :global(.allIcons){
+    display: block;
+    text-decoration: none;
     position: relative;
     overflow: hidden;
+    color:#fff;
 }
 :global(.allIcons .iconItem){
     border: 1px solid rgba(255,255,255,0.2);
@@ -129,10 +132,13 @@
 :global(.topSection.toptwo .topTwoItem:first-child){
     padding-right: 91px;
 }
-:global(.topTwoItem span){
+:global(.topTwoItem span),
+:global(.topTwoItem a){
 display: block;
 }
-:global(.topTwoItem span.con){
+:global(.topTwoItem .con){
+    cursor: pointer;
+    text-decoration: none;
     font-size: 16px;
     color: rgba(204,204,204,1);
     line-height: 30px;

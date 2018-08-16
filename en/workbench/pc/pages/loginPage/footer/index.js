@@ -46,8 +46,8 @@ class Footer extends Component {
         <div className={FooterConPanel}>
              <div className="footerTop">
                 <div className="topSection topOne">
-                    <span className="title">Download Client</span>
-                    <div className="allIcons">
+                    <span className="title" >Download Client</span>
+                    <a className="allIcons" href="http://ec.yonyoucloud.com/html/index/down.html " target="_blank">
                         <div className="diff" onMouseEnter={this.hover} onMouseLeave={this.hoverLeave}>
                             <span className="iconItem" >
                                 <span className="iconInner iconOne"></span>
@@ -73,25 +73,25 @@ class Footer extends Component {
                             <span className="iconDesc">Win xp</span>
                         </span>
                         
-                    </div>
+                    </a>
                 </div>
                 <div className="topSection toptwo">
                     <div className="topTwoItem">
                         <span className="title">Yonyou Group</span>
-                        <span className="con">Yonyou Official Website</span>
-                        <span className="con">Yonyou Cloud Official Website</span>
-                        <span className="con">Yonyou Cloud Market</span>
+                        <a className="con" href="http://www.yonyou.com" target="_blank">用友官网</a>
+                        <a className="con" href="http://www.yonyoucloud.com" target="_blank">用友云官网</a>
+                        <a className="con" href="http://market.yonyoucloud.com" target="_blank">用友云市场</a>
                     </div>
                     <div className="topTwoItem">
                         <span className="title">Contact Us</span>
-                        <span className="con">Hotline: 010-86393388Ext. No. 4</span>
-                        <span className="con">Email:esnservice@yonyou.com</span>
+                        <span className="con">Hotline: 010-62438888</span>
+                        <span className="con">Email:diwork@yonyou.com</span>
                     </div>
                 </div>
              </div>
              <div className={FooterBottom}>
                 {/* <span className="police">Beijing Computer Information Network International Networking Unit Filing 11010802020548No.</span> */}
-                <span className="company">Yonyou Network Technology Co., Ltd © Copyright 2017 BeijingICPICP No. 5007539-24</span>
+                <span className="company">Yonyou Network Technology Co., Ltd © Copyright 2018 BeijingICPICP No. 5007539-24</span>
              </div>
         </div>
     );
