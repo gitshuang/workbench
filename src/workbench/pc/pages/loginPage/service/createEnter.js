@@ -4,21 +4,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 
+import loginpageActions from 'store/root/loginpage/actions';
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
+
+
 
 import Form, { FormItem } from 'bee/form';
 import FormControl from 'bee/form-control';
 import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
-import Progress from 'pub-comp/progress';
+import { openMess } from 'pub-comp/notification';
 import 'assets/style/Form.css';
 import {
   applyForm, applyBtn,
 } from './style.css';
 
+const {applyService} = loginpageActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { setCreateEnter } = homeActions;
 const { Option } = Select;
 
 @withRouter
@@ -28,52 +30,30 @@ const { Option } = Select;
     requestStart,
     requestSuccess,
     requestError,
-    setCreateEnter,
+    applyService,
   },
 )
+
 class CreateEnter extends Component {
-  static propTypes = {
-    userInfo: PropTypes.shape({
-      userName: PropTypes.string,
-      userEmail: PropTypes.string,
-      userMobile: PropTypes.string,
-    }),
-    setCreateEnter: PropTypes.func,
-    updateenter: PropTypes.string,
-  };
-  static defaultProps = {
-    userInfo: {},
-    setCreateEnter: () => { },
-    updateenter: '',
-  };
   constructor(props) {
     super(props);
     this.state = {
-      disabled: true,
-      logo: '',
+      flag: false,
       tenantIndustry: 'A',
-      linkman: props.userInfo.userName,
-      tenantEmail: props.userInfo.userEmail,
-      tenantTel: props.userInfo.userMobile,
-      // 0表示未开始，1表示开始
-      processValue: 0,
-      // 企业id
-      tenantId: '',
+      tenantSize:'A',//staff的范围
+      linkman: '',
+      companyname:'',
+      tenantTel:'',
     };
-    this.tenantIndustry = {
-      name: 'tenantIndustry',
-      value: 'A',
-      verify: true,
-    };
-    this.address = '北京|北京|东城区|';
-    //progressbar
-    this.loadingFunc = null;
-    this.successFunc = null;
-    this.timer = null;
+    // this.address = '北京|北京|东城区|';
+    this.province = '北京';
+    this.city = '北京';
   }
 
   onChange = (obj) => {
-    this.address = obj.province + obj.city + obj.area;
+    // this.address = obj.province + obj.city;
+    this.province =  obj.province;
+    this.city= obj.city;
   }
 
   
@@ -84,50 +64,6 @@ class CreateEnter extends Component {
       ...this.state,
     });
   }
-
-  checkForm = (flag, data) => {
-    const { setCreateEnter, updateenter, requestStart, requestSuccess, requestError, } = this.props;
-    const { tenantIndustry } = this.state;
-
-    const Address = data.find(da => da.name === 'address');
-    const TenantAddress = data.find(da => da.name === 'tenantAddress');
-    if (Address.value && Address.value !== '') {
-      TenantAddress.value = `${Address.value.province}|${Address.value.city}|${Address.value.area}|${TenantAddress.value}`;
-    } else {
-      TenantAddress.value = this.address + TenantAddress.value;
-    }
-
-    const TenantIndustry = data.find(da => da.name === 'tenantIndustry');
-    if (!TenantIndustry.value && TenantIndustry.value === '') {
-      TenantIndustry.value = tenantIndustry;
-    }
-    // this.setState({tenantId:"tenantId",processValue:1});//测试用的，要注销
-    if (flag) {
-      this.setState({
-        disabled: false,
-      });
-      requestStart();
-      const argu1 = data.reduce((obj, { value, name }) => {
-        if (name) {
-          obj[name] = value;
-        }
-        return obj;
-      }, {});
-      setCreateEnter(argu1, updateenter).then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-          return;
-        }
-        requestSuccess();
-        this.setState({
-          disabled: true,
-          processValue: 1,
-        });
-        const { tenantId } = payload;
-        localStorage.setItem('create', '1');
-      });
-    }
-  }
   
   inputOnChange = (e, name) => {
     this.state[name] = e;
@@ -135,42 +71,66 @@ class CreateEnter extends Component {
       ...this.state,
     });
   }
+
+  submitService = () =>{
+    let{tenantIndustry, tenantSize,companyname, linkman, tenantTel} = this.state;
+    const { applyService, requestStart, requestSuccess, requestError, } = this.props;
+    if(tenantIndustry== ''||tenantSize==''||companyname==''||linkman==''||tenantTel==''){
+      return false;
+    }
+    let param = {
+      conpanyName:companyname,
+      contactName:linkman,
+      phoneNumber:tenantTel,
+      trade:tenantIndustry,
+      scale:tenantSize,
+      province:this.province,
+      city:this.city,
+    }
+    this.setState({flag:true});
+    requestStart()
+    applyService(param).then(({ error, payload }) => {
+      if (error) {
+        this.setState({
+          flag: false, // 可以再提交一次
+        });
+        requestError(payload);
+        return;
+      }
+      this.setState({
+        flag: false,
+      });
+      requestSuccess();
+      window.location.reload();
+    });
+
+  }
   render() {
     const {
-      logo, linkman, tenantEmail, tenantTel, processValue, tenantId,
+      flag,tenantIndustry, tenantSize,companyname, linkman,  tenantTel,
     } = this.state;
+    let disabled = false;
+    if(flag ||tenantIndustry==''||tenantSize == ''|| companyname == '' || linkman == ''|| tenantTel=='' || !(/^1[34578][0-9]{9}$/).test(tenantTel)){
+      disabled = true;
+    }
     return (
       <div className="applyService">
-        <Form submitCallBack={this.checkForm} showSubmit={false} className={applyForm}>
+        <Form  className={applyForm} showSubmit={false}>
         <FormItem
             showMast={false}
-            labelName={<span>姓名</span>}
+            labelName={<span>企业名称<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="请输入联系人姓名"
+            errorMessage="请输入企业名称"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="请输入联系人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl ref={ref=>this.companyRef = ref}name="companyname" placeholder="请输入企业名称" value={companyname} onChange={(e) => { this.inputOnChange(e, 'companyname'); }} />
           </FormItem>
-
-          <FormItem
-            className="input_phone"
-            showMast={false}
-            valuePropsName="value"
-            labelName={<span>手机号</span>}
-            isRequire
-            method="blur"
-            htmlType="tel"
-            errorMessage="手机号格式错误"
-            inline
-          >
-            <FormControl name="tenantTel" placeholder="请输入手机号" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
-          </FormItem>
-
+        
           <FormItem
             showMast={false}
-            labelName={<span>行业</span>}
+            labelName={<span>行业<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
             errorMessage="请选择所属行业"
@@ -180,6 +140,7 @@ class CreateEnter extends Component {
             <Select
               defaultValue="-所属行业-"
               name="tenantIndustry"
+              style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
               <Option value="A">农、林、牧、渔业</Option>
@@ -207,7 +168,7 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>规模</span>}
+            labelName={<span>规模<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
             errorMessage="请选择规模范围"
@@ -217,6 +178,7 @@ class CreateEnter extends Component {
             <Select
               defaultValue="-规模范围-"
               name="tenantSize"
+              style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
               <Option value="A">0－50</Option>
@@ -231,7 +193,7 @@ class CreateEnter extends Component {
 
           <FormItem
             showMast={false}
-            labelName={<span>所在省市</span>}
+            labelName={<span>所在省市<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire={false}
             valuePropsName="value"
             errorMessage="请输入所在省市"
@@ -240,8 +202,41 @@ class CreateEnter extends Component {
           >
             <CitySelect name="address" onChange={this.onChange} />
           </FormItem>
+          <FormItem
+            showMast={false}
+            labelName={<span>联系人<font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire
+            valuePropsName="value"
+            errorMessage="请输入联系人姓名"
+            method="blur"
+            inline
+          >
+            <FormControl name="linkman" placeholder="请输入联系人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+          </FormItem>
+
+          <FormItem
+            className="input_phone"
+            showMast={false}
+            valuePropsName="value"
+            labelName={<span>手机号<font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire
+            method="blur"
+            htmlType="tel"
+            errorMessage="手机号格式错误"
+            inline
+          >
+            <FormControl name="tenantTel" placeholder="请输入手机号" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+          </FormItem>
+
         </Form>
-            <div className={applyBtn}>立即申请</div>
+        {
+          disabled?
+          <div className={`${applyBtn} disabled`} >立即申请</div>
+          :
+          <div className={applyBtn}  onClick={this.submitService}>立即申请</div>
+
+        }
+            {/* <div className={applyBtn} onClick={this.submitService}>立即申请</div> */}
       </div>
     );
   }
