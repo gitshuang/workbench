@@ -79,7 +79,7 @@ class CreateEnter extends Component {
       return false;
     }
     let param = {
-      conpanyName:companyname,
+      companyName:companyname,
       contactName:linkman,
       phoneNumber:tenantTel,
       trade:tenantIndustry,
@@ -204,7 +204,7 @@ class CreateEnter extends Component {
           </FormItem>
           <FormItem
             showMast={false}
-            labelName={<span><font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>联系人<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
             errorMessage="請輸入連絡人姓名"
