@@ -47,8 +47,8 @@ class AboutUs extends Component {
                     <div className="lefCon">
                         <span className="subtitle">Beijing Headquarters</span>
                         <span className="desc">Address: Yonyou Industry Park, No.68 Beiqing Road, Haidian District, Beijing</span>
-                        <span className="desc">Tel: 010-86393388Ext. No. 4</span>
-                        <span className="desc">Email:esnservice@yonyou.com</span>
+                        <span className="desc">Tel: 010-62438888</span>
+                        <span className="desc">Email:diwork@yonyou.com</span>
 
                     </div>
                     <div className="rightCon">
