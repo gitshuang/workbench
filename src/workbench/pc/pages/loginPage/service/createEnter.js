@@ -79,7 +79,7 @@ class CreateEnter extends Component {
       return false;
     }
     let param = {
-      conpanyName:companyname,
+      companyName:companyname,
       contactName:linkman,
       phoneNumber:tenantTel,
       trade:tenantIndustry,
