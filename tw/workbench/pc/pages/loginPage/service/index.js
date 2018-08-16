@@ -17,15 +17,15 @@ import{
   serviceFour,
 } from './index.css';
 
-const  CAS_SERVER = "https://idtest.yyuap.com",
-realservice="http://workbenchdev.yyuap.com";
+// const  CAS_SERVER = "https://idtest.yyuap.com",
+// realservice="http://workbenchdev.yyuap.com";
 class Service extends Component {
   constructor(props){
     super(props);
     this.state = {
      
     }
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;
+    // this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;
  
   }
 
@@ -46,11 +46,10 @@ class Service extends Component {
     }
   }
   render() {
-    
     return (
         <div className={ServicePanel}>
             {/* <TopNav /> */}
-            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'2'} history={this.props.history}/>
+            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={''} activeIndex={'2'} history={this.props.history}/>
             <div className="serviceOne">
                   <div className="mainContent">
                       <span className="title">定制服務</span>
