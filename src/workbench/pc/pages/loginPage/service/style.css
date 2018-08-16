@@ -52,6 +52,24 @@ body  .applyForm :global(.u-form-item .u-select){
   display: none;
 
 }
+.applyForm :global(.u-form-submit-btn.u-button-primary){
+  width: 370px;
+  height: 50px;
+  font-size: 18px;
+  background: #eb1d15;
+  line-height: 50px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  float: right;
+  border: 1px solid #eb1d15;
+  border-radius: 0;
+  position: absolute;
+  right: 0;
+  bottom: -34px;
+  opacity: 0;
+  visibility: hidden;
+}
 .applyBtn:global(.disabled){
   background: #ddd;
 }

@@ -84,8 +84,8 @@ class Footer extends Component {
                     </div>
                     <div className="topTwoItem">
                         <span className="title">联系我们</span>
-                        <span className="con">热线电话：010-86393388</span>
-                        <span className="con">联系邮箱：esnservice@yonyou.com</span>
+                        <span className="con">热线电话：010-62438888</span>
+                        <span className="con">联系邮箱：diwork@yonyou.com</span>
                     </div>
                 </div>
              </div>
