@@ -517,7 +517,7 @@ class CreateTeamContent extends Component {
         </div>
 
         <div className={table_title}>
-          <div>當前人数{userList.totalElements}人</div>
+          <div>當前人數{userList.totalElements}人</div>
           <div className={table_permise}>成員許可權</div>
         </div>
         <div className={memberLists}>
