@@ -1,9 +1,10 @@
 .applyForm {
   padding-bottom: 30px;
-  margin-left: -70px;
+  width:510px;
 }
 .applyForm :global(.u-input-inner>input){
   width: 370px!important;
+  box-sizing: border-box;
   height: 50px;
   background: rgba(255,255,255,1);
   border: 1px solid rgba(221,221,221,1);
@@ -33,6 +34,7 @@
 }
 .applyForm :global(.u-form-inline .u-label) {
   display: inline-block;
+  box-sizing: border-box;
   font-size: 16px;
   font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
   color: rgba(51,51,51,1);
@@ -50,6 +52,27 @@ body  .applyForm :global(.u-form-item .u-select){
   display: none;
 
 }
+.applyForm :global(.u-form-submit-btn.u-button-primary){
+  width: 370px;
+  height: 50px;
+  font-size: 18px;
+  background: #eb1d15;
+  line-height: 50px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  float: right;
+  border: 1px solid #eb1d15;
+  border-radius: 0;
+  position: absolute;
+  right: 0;
+  bottom: -34px;
+  opacity: 0;
+  visibility: hidden;
+}
+.applyBtn:global(.disabled){
+  background: #ddd;
+}
 
 .applyBtn{
   width: 370px;
@@ -59,7 +82,6 @@ body  .applyForm :global(.u-form-item .u-select){
     line-height: 50px;
     color: #fff;
     text-align: center;
-    /* margin: 0 auto; */
     cursor: pointer;
-    margin-left: 70px;
+    float: right;
 }

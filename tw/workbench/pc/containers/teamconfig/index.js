@@ -133,6 +133,17 @@ class CreateTeamContent extends Component {
       activePage: 1,
       pagesize: 10,
       dataPerPageNum: 10,
+      dataNumSelect: [
+        { id: 0, name: '5條/頁',value:5},
+        { id: 1, name: '10條/頁', value:10},
+        { id: 2, name: '15條/頁',value:15 },
+        { id: 3, name: '20條/頁',value:20 }
+      ],
+      dataNum:1,
+      enhancedPaginationText:{
+        jump:'條/頁',
+        jumpPage:'頁'
+      }
     }
   }
 
@@ -398,7 +409,9 @@ class CreateTeamContent extends Component {
     // 点击搜索之后设置点击为true  从而判断点击分页是查询整还是搜索结果
     const { searchVal, onlyAdmin } = this.state;
     this.clickValue = searchVal;
-    this.queryUser(searchVal, onlyAdmin);
+    this.setState({dataNum:1,dataPerPageNum:10, activePage:1},()=>{
+      this.queryUser(searchVal, onlyAdmin);
+    })
   }
   // 点击只显示管理员
   changeCheck = (value) => {
@@ -434,11 +447,13 @@ class CreateTeamContent extends Component {
 
   //下面选择每页展示的数据条目数
   paginationNumSelect = (id, dataNum) => {
-    let reg = new RegExp("條\/頁", "g");
-    let dataPerPageNum = dataNum.replace(reg, "");
+    // let reg = new RegExp("条\/页", "g");
+    // let dataPerPageNum = dataNum.replace(reg, "");
+    let dataPerPageNum = dataNum;
     const { searchVal, value, activetab, activePage } = this.state;
     this.setState({
-      dataPerPageNum: dataPerPageNum
+      dataPerPageNum: dataPerPageNum,
+      dataNum:id,
     }, function () {
       if (activetab == 'other') {
         this.queryUser(searchVal, 5, activePage, dataPerPageNum)
@@ -451,7 +466,7 @@ class CreateTeamContent extends Component {
 
   // 设置团队成员
   teamMember = () => {
-    const { newUserList } = this.state;
+    const { newUserList, dataNumSelect, dataNum, enhancedPaginationText } = this.state;
     const {
       userInfo: {
         admin,
@@ -502,7 +517,7 @@ class CreateTeamContent extends Component {
         </div>
 
         <div className={table_title}>
-          <div>當前$i18n{人数}{userList.totalElements}人</div>
+          <div>當前人數{userList.totalElements}人</div>
           <div className={table_permise}>成員許可權</div>
         </div>
         <div className={memberLists}>
@@ -549,6 +564,9 @@ class CreateTeamContent extends Component {
             activePage={this.state.activePage}
             onDataNumSelect={this.paginationNumSelect}
             onSelect={this.handleSelect}
+            dataNumSelect={dataNumSelect}
+            dataNum={dataNum}
+            enhancedPaginationText={enhancedPaginationText}
           />
         </div>
       </div>

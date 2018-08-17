@@ -76,12 +76,12 @@ function getData(url, callback) {
           if (text) {
             getResultFetch(this, text, callback);
           } else {
-            return Promise.reject(new Error('No data returned from the interface.'));
+            return Promise.reject(new Error('No data returned'));
           }
           return false;
         });
       }
-      return Promise.reject(new Error('Request failed.'));
+      return Promise.reject(new Error('Request failed'));
     });
   }
 }

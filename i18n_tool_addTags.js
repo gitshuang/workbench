@@ -54,13 +54,21 @@ var walk = function (dir, dir_i18n, done) {
                   // 20180605 新增判断，如果一行代码多处匹配
                   if(match){ // 由此可见值校验前半段
                       if(match.length > 1){
-                        // 一行逐一替换
-                        var subMatch;
-                        replaced = spieces;
-                        match.map((item)=>{
-                            subMatch = '$i18n{' +item+'}$i18n-end' ;
-                            replaced = replaced.replace(item, subMatch);
-                        })
+                       // 一行逐一替换
+                       var subMatch;
+                       var replaced;
+                       var tempReplace = spieces ;
+                       var subReplace; 
+                       var endFlag;
+                       match.map((item)=>{
+                           subMatch = '$i18n{' +item+'}$i18n-end' ;
+                           endFlag  = tempReplace.indexOf(item)+ item.length;
+                           subReplace = tempReplace.substring(0,endFlag);
+                           tempReplace  = tempReplace.substring(endFlag);
+                           subReplace = subReplace.replace(new RegExp(item,'g'), subMatch);
+                           replaced += subReplace
+                       });
+                       replaced += tempReplace;
                       }else{ //只有一处匹配那么全局替换就可以
                         var replacement = '$i18n{' + match +'}$i18n-end' ;
                         replaced=replaced+spieces.replace(re,replacement)

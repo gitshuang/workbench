@@ -57,6 +57,8 @@ class serviceClassify extends Component {
       currentLabel: -1,
       currentApps: [],
       apps: [],
+      search: false,
+      searchApps: [],
       appMaps: {},
       tabs: [],
     }
@@ -137,6 +139,8 @@ class serviceClassify extends Component {
   handleChangeLabel = (index) => () => {
     this.setState({
       currentLabel: index,
+      searchApps: [],
+      search: false,
     })
     this.changeCurrentApp(this.state.currentTab, index);
   }
@@ -148,7 +152,8 @@ class serviceClassify extends Component {
     }
     if (value.trim()) {
       this.setState({
-        currentApps: currentApps.filter(item => item.applicationName.indexOf(value) > -1)
+        search: true,
+        searchApps: currentApps.filter(item => item.applicationName.toLowerCase().indexOf(value.toLowerCase()) > -1)
       });
     } else {
       this.handleChangeLabel(currentLabel)();
@@ -156,8 +161,14 @@ class serviceClassify extends Component {
   }
 
   renderList() {
-    const { currentApps } = this.state;
-    return currentApps.map(({ applicationId, applicationCode, applicationIcon, applicationName }) => {
+    const { currentApps, searchApps, search } = this.state;
+    let newArr = [];
+    if(search){
+      newArr = searchApps;
+    }else{
+      newArr = currentApps;
+    }
+    return newArr.map(({ applicationId, applicationCode, applicationIcon, applicationName }) => {
       return (
         <GoTo
           key={`${applicationId}${applicationCode}`}
@@ -256,10 +267,10 @@ class serviceClassify extends Component {
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div className={searchPanel}>
               <FormControl className={serviceSearch} placeholder="搜索应用" value={value} onKeyDown={this.onKeyup} onChange={this.inputOnChange} />
-              <div className={search_icon_con}>
+              <div className={search_icon_con} onClick={() => { this.btnSearch() }}>
                 <span>|</span>
-                <Icon type="search" className={ufSearch} onClick={() => { this.btnSearch() }}></Icon>
-                <span className={search_tit} onClick={() => { this.btnSearch() }}>搜索</span>
+                <Icon type="search" className={ufSearch} ></Icon>
+                <span className={search_tit}>搜索</span>
               </div>
               {_appType ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand> : null}
             </div>

@@ -4,21 +4,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 
+import loginpageActions from 'store/root/loginpage/actions';
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
+
+
 
 import Form, { FormItem } from 'bee/form';
 import FormControl from 'bee/form-control';
 import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
-import Progress from 'pub-comp/progress';
+import { openMess } from 'pub-comp/notification';
 import 'assets/style/Form.css';
 import {
   applyForm, applyBtn,
 } from './style.css';
 
+const {applyService} = loginpageActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { setCreateEnter } = homeActions;
 const { Option } = Select;
 
 @withRouter
@@ -28,52 +30,30 @@ const { Option } = Select;
     requestStart,
     requestSuccess,
     requestError,
-    setCreateEnter,
+    applyService,
   },
 )
+
 class CreateEnter extends Component {
-  static propTypes = {
-    userInfo: PropTypes.shape({
-      userName: PropTypes.string,
-      userEmail: PropTypes.string,
-      userMobile: PropTypes.string,
-    }),
-    setCreateEnter: PropTypes.func,
-    updateenter: PropTypes.string,
-  };
-  static defaultProps = {
-    userInfo: {},
-    setCreateEnter: () => { },
-    updateenter: '',
-  };
   constructor(props) {
     super(props);
     this.state = {
-      disabled: true,
-      logo: '',
+      flag: false,
       tenantIndustry: 'A',
-      linkman: props.userInfo.userName,
-      tenantEmail: props.userInfo.userEmail,
-      tenantTel: props.userInfo.userMobile,
-      // 0表示未开始，1表示开始
-      processValue: 0,
-      // 企业id
-      tenantId: '',
+      tenantSize:'A',//staff的范围
+      linkman: '',
+      companyname:'',
+      tenantTel:'',
     };
-    this.tenantIndustry = {
-      name: 'tenantIndustry',
-      value: 'A',
-      verify: true,
-    };
-    this.address = 'loginPageDefault';
-    //progressbar
-    this.loadingFunc = null;
-    this.successFunc = null;
-    this.timer = null;
+    // this.address = '北京|北京|东城区|';
+    this.province = 'Beijing';
+    this.city = 'Beijing';
   }
 
   onChange = (obj) => {
-    this.address = obj.province + obj.city + obj.area;
+    // this.address = obj.province + obj.city;
+    this.province =  obj.province;
+    this.city= obj.city;
   }
 
   
@@ -84,50 +64,6 @@ class CreateEnter extends Component {
       ...this.state,
     });
   }
-
-  checkForm = (flag, data) => {
-    const { setCreateEnter, updateenter, requestStart, requestSuccess, requestError, } = this.props;
-    const { tenantIndustry } = this.state;
-
-    const Address = data.find(da => da.name === 'address');
-    const TenantAddress = data.find(da => da.name === 'tenantAddress');
-    if (Address.value && Address.value !== '') {
-      TenantAddress.value = `${Address.value.province}|${Address.value.city}|${Address.value.area}|${TenantAddress.value}`;
-    } else {
-      TenantAddress.value = this.address + TenantAddress.value;
-    }
-
-    const TenantIndustry = data.find(da => da.name === 'tenantIndustry');
-    if (!TenantIndustry.value && TenantIndustry.value === '') {
-      TenantIndustry.value = tenantIndustry;
-    }
-    // this.setState({tenantId:"tenantId",processValue:1});//测试用的，要注销
-    if (flag) {
-      this.setState({
-        disabled: false,
-      });
-      requestStart();
-      const argu1 = data.reduce((obj, { value, name }) => {
-        if (name) {
-          obj[name] = value;
-        }
-        return obj;
-      }, {});
-      setCreateEnter(argu1, updateenter).then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-          return;
-        }
-        requestSuccess();
-        this.setState({
-          disabled: true,
-          processValue: 1,
-        });
-        const { tenantId } = payload;
-        localStorage.setItem('create', '1');
-      });
-    }
-  }
   
   inputOnChange = (e, name) => {
     this.state[name] = e;
@@ -135,115 +71,172 @@ class CreateEnter extends Component {
       ...this.state,
     });
   }
+
+  submitService = () =>{
+    let{tenantIndustry, tenantSize,companyname, linkman, tenantTel} = this.state;
+    const { applyService, requestStart, requestSuccess, requestError, } = this.props;
+    if(tenantIndustry== ''||tenantSize==''||companyname==''||linkman==''||tenantTel==''){
+      return false;
+    }
+    let param = {
+      companyName:companyname,
+      contactName:linkman,
+      phoneNumber:tenantTel,
+      trade:tenantIndustry,
+      scale:tenantSize,
+      province:this.province,
+      city:this.city,
+    }
+    this.setState({flag:true});
+    requestStart()
+    applyService(param).then(({ error, payload }) => {
+      if (error) {
+        this.setState({
+          flag: false, // 可以再提交一次
+        });
+        requestError(payload);
+        return;
+      }
+      this.setState({
+        flag: false,
+      });
+      requestSuccess();
+      window.location.reload();
+    });
+
+  }
   render() {
     const {
-      logo, linkman, tenantEmail, tenantTel, processValue, tenantId,
+      flag,tenantIndustry, tenantSize,companyname, linkman,  tenantTel,
     } = this.state;
+    let disabled = false;
+    if(flag ||tenantIndustry==''||tenantSize == ''|| companyname == '' || linkman == ''|| tenantTel=='' || !(/^1[34578][0-9]{9}$/).test(tenantTel)){
+      disabled = true;
+    }
     return (
-      <div>
-        <Form submitCallBack={this.checkForm} showSubmit={false} className={applyForm}>
+      <div className="applyService">
+        <Form  className={applyForm} showSubmit={false}>
         <FormItem
             showMast={false}
-            labelName={<span>loginPageDefault</span>}
+            labelName={<span>Enterprise Name<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="loginPageDefault"
+            errorMessage="Please enter enterprise name"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="loginPageDefault" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl ref={ref=>this.companyRef = ref}name="companyname" placeholder="Please enter enterprise name" value={companyname} onChange={(e) => { this.inputOnChange(e, 'companyname'); }} />
+          </FormItem>
+        
+          <FormItem
+            showMast={false}
+            labelName={<span>Industry<font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire
+            valuePropsName="value"
+            errorMessage="Please choose an industry"
+            method="blur"
+            inline
+          >
+            <Select
+              defaultValue="-Industry-"
+              name="tenantIndustry"
+              style={{width:'370px'}}
+              onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
+            >
+              <Option value="A">Agriculture, Forestry, Animal Husbandry, and Fishery Industries</Option>
+              <Option value="B">Mining Industry</Option>
+              <Option value="C">Manufacturing</Option>
+              <Option value="D">Electricity/Heating Power/Gas/Water Production and Supply Industry</Option>
+              <Option value="S">Environment and Public Administration, Social Insurance, and Social Org</Option>
+              <Option value="E">Construction Industry</Option>
+              <Option value="G">Transportation, Warehousing and Postal Services</Option>
+              <Option value="I">Info Transmission, Computer Service and Software Industry</Option>
+              <Option value="F">Wholesale and Retail Trade</Option>
+              <Option value="H">Accommodation and Catering Industry</Option>
+              <Option value="J">Finance and Insurance Industries</Option>
+              <Option value="K">Real Estate Industry</Option>
+              <Option value="L">Leasing and Business Services</Option>
+              <Option value="M">Scientific Research, Technical Services and Geological Prospecting</Option>
+              <Option value="N">Water, Environment and Public Facilities Management Industry</Option>
+              <Option value="O">Resident Services and Other Services</Option>
+              <Option value="P">Education</Option>
+              <Option value="Q">Health, Social Security and Social Service Industry</Option>
+              <Option value="R">Culture, Sports and Recreation</Option>
+              <Option value="T">International Organization</Option>
+            </Select>
+          </FormItem>
+
+          <FormItem
+            showMast={false}
+            labelName={<span>Size<font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire
+            valuePropsName="value"
+            errorMessage="Please choose scale"
+            method="blur"
+            inline
+          >
+            <Select
+              defaultValue="-Staff-"
+              name="tenantSize"
+              style={{width:'370px'}}
+              onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
+            >
+              <Option value="A">0-50</Option>
+              <Option value="B">51-100</Option>
+              <Option value="C">101-200</Option>
+              <Option value="D">201-500</Option>
+              <Option value="E">501-1000</Option>
+              <Option value="F">1001-2000</Option>
+              <Option value="G">2000people</Option>
+            </Select>
+          </FormItem>
+
+          <FormItem
+            showMast={false}
+            labelName={<span>Province/City<font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire={false}
+            valuePropsName="value"
+            errorMessage="Please enter province/city"
+            method="blur"
+            inline
+          >
+            <CitySelect name="address" onChange={this.onChange} />
+          </FormItem>
+          <FormItem
+            showMast={false}
+            labelName={<span>Contact<font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire
+            valuePropsName="value"
+            errorMessage="Please enter contact name"
+            method="blur"
+            inline
+          >
+            <FormControl name="linkman" placeholder="Please enter contact name" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
           </FormItem>
 
           <FormItem
             className="input_phone"
             showMast={false}
             valuePropsName="value"
-            labelName={<span>loginPageDefault</span>}
+            labelName={<span>Mobile<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             method="blur"
             htmlType="tel"
-            errorMessage="loginPageDefault"
+            errorMessage="Wrong mobile No. format"
             inline
           >
-            <FormControl name="tenantTel" placeholder="loginPageDefault" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+            <FormControl name="tenantTel" placeholder="Please enter mobile number" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
           </FormItem>
 
-          <FormItem
-            showMast={false}
-            labelName={<span>loginPageDefault</span>}
-            isRequire
-            valuePropsName="value"
-            errorMessage="loginPageDefault"
-            method="blur"
-            inline
-          >
-            <Select
-              defaultValue="-loginPageDefault-"
-              name="tenantIndustry"
-              style={{ width: 338, marginRight: 6 }}
-              onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
-            >
-              <Option value="A">loginPageDefault</Option>
-              <Option value="B">loginPageDefault</Option>
-              <Option value="C">loginPageDefault</Option>
-              <Option value="D">loginPageDefault</Option>
-              <Option value="S">loginPageDefault</Option>
-              <Option value="E">loginPageDefault</Option>
-              <Option value="G">loginPageDefault</Option>
-              <Option value="I">loginPageDefault</Option>
-              <Option value="F">loginPageDefault</Option>
-              <Option value="H">loginPageDefault</Option>
-              <Option value="J">loginPageDefault</Option>
-              <Option value="K">loginPageDefault</Option>
-              <Option value="L">loginPageDefault</Option>
-              <Option value="M">loginPageDefault</Option>
-              <Option value="N">loginPageDefault</Option>
-              <Option value="O">loginPageDefault</Option>
-              <Option value="P">loginPageDefault</Option>
-              <Option value="Q">loginPageDefault</Option>
-              <Option value="R">loginPageDefault</Option>
-              <Option value="T">loginPageDefault</Option>
-            </Select>
-          </FormItem>
-
-          <FormItem
-            showMast={false}
-            labelName={<span>loginPageDefault</span>}
-            isRequire
-            valuePropsName="value"
-            errorMessage="loginPageDefault"
-            method="blur"
-            inline
-          >
-            <Select
-              defaultValue="-loginPageDefault-"
-              name="tenantSize"
-              style={{ width: 338, marginRight: 6 }}
-              onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
-            >
-              <Option value="A">0loginPageDefault</Option>
-              <Option value="B">51-100</Option>
-              <Option value="C">101-200</Option>
-              <Option value="D">201-500</Option>
-              <Option value="E">501-1000</Option>
-              <Option value="F">1001loginPageDefault</Option>
-              <Option value="G">2000loginPageDefault</Option>
-            </Select>
-          </FormItem>
-
-          <FormItem
-            showMast={false}
-            labelName={<span>loginPageDefault</span>}
-            isRequire={false}
-            valuePropsName="value"
-            errorMessage="loginPageDefault"
-            method="blur"
-            inline
-          >
-            <CitySelect name="address" onChange={this.onChange} />
-          </FormItem>
         </Form>
-            <div className={applyBtn}>loginPageDefault</div>
+        {
+          disabled?
+          <div className={`${applyBtn} disabled`} >Apply</div>
+          :
+          <div className={applyBtn}  onClick={this.submitService}>Apply</div>
+
+        }
+            {/* <div className={applyBtn} onClick={this.submitService}>Apply</div> */}
       </div>
     );
   }

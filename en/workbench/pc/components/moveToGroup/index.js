@@ -34,7 +34,7 @@ class MoveToGroup extends Component {
     super(props);
     this.state = {
       // 新分组名
-      newGroupName: '[object Object]',
+      newGroupName: 'Group',
       // 是否是打开新的分组
       inAddGroup: false,
       // 路径
@@ -70,7 +70,7 @@ class MoveToGroup extends Component {
   addGroup = () => {
     const { data } = this.props;
     const nameArr = data.map(({ widgetName }) => widgetName);
-    const newGroupName = avoidSameName(nameArr, '[object Object]');
+    const newGroupName = avoidSameName(nameArr, 'Group');
     this.setState({
       inAddGroup: true,
       newGroupName,

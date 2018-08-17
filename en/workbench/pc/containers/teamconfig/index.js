@@ -133,6 +133,17 @@ class CreateTeamContent extends Component {
       activePage: 1,
       pagesize: 10,
       dataPerPageNum: 10,
+      dataNumSelect: [
+        { id: 0, name: '5 per page',value:5},
+        { id: 1, name: '10 per page', value:10},
+        { id: 2, name: '15 per page',value:15 },
+        { id: 3, name: '20 per page',value:20 }
+      ],
+      dataNum:1,
+      enhancedPaginationText:{
+        jump:'Go to',
+        jumpPage:'Page'
+      }
     }
   }
 
@@ -271,7 +282,7 @@ class CreateTeamContent extends Component {
     if (timeDiff > 30) {
       return false;
     }
-    return "还有_en" + Math.ceil(timeDiff) + "days before expiration"
+    return " " + Math.ceil(timeDiff) + "days before expiration"
   }
   // 续费按钮
   esitXufei = (time) => {
@@ -303,7 +314,7 @@ class CreateTeamContent extends Component {
       <div className={box2}>
         <div className={applicationBtns}>
           <span>
-            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web端_en</Button>
+            <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>WebVersion</Button>
             <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>Mobile</Button>
             <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PCClient</Button>
           </span>
@@ -398,7 +409,9 @@ class CreateTeamContent extends Component {
     // 点击搜索之后设置点击为true  从而判断点击分页是查询整还是搜索结果
     const { searchVal, onlyAdmin } = this.state;
     this.clickValue = searchVal;
-    this.queryUser(searchVal, onlyAdmin);
+    this.setState({dataNum:1,dataPerPageNum:10, activePage:1},()=>{
+      this.queryUser(searchVal, onlyAdmin);
+    })
   }
   // 点击只显示管理员
   changeCheck = (value) => {
@@ -434,11 +447,13 @@ class CreateTeamContent extends Component {
 
   //下面选择每页展示的数据条目数
   paginationNumSelect = (id, dataNum) => {
-    let reg = new RegExp("Items\/Page", "g");
-    let dataPerPageNum = dataNum.replace(reg, "");
+    // let reg = new RegExp("条\/页", "g");
+    // let dataPerPageNum = dataNum.replace(reg, "");
+    let dataPerPageNum = dataNum;
     const { searchVal, value, activetab, activePage } = this.state;
     this.setState({
-      dataPerPageNum: dataPerPageNum
+      dataPerPageNum: dataPerPageNum,
+      dataNum:id,
     }, function () {
       if (activetab == 'other') {
         this.queryUser(searchVal, 5, activePage, dataPerPageNum)
@@ -451,7 +466,7 @@ class CreateTeamContent extends Component {
 
   // 设置团队成员
   teamMember = () => {
-    const { newUserList } = this.state;
+    const { newUserList, dataNumSelect, dataNum, enhancedPaginationText } = this.state;
     const {
       userInfo: {
         admin,
@@ -494,7 +509,7 @@ class CreateTeamContent extends Component {
             </div>
           </div>
           <div className={memberBtns}>
-            <Checkbox colors="info" onChange={this.changeCheck}>Only display administrator</Checkbox>
+            <Checkbox colors="info" onChange={this.changeCheck}>Only Display Administrator</Checkbox>
             {
               _invitePermission ? <ButtonBrand onClick={this.inviteMember}>Invite Member</ButtonBrand> : null
             }
@@ -502,7 +517,7 @@ class CreateTeamContent extends Component {
         </div>
 
         <div className={table_title}>
-          <div>当前人_en数}{userList.totalElements}人</div>
+          <div>Current person count{userList.totalElements}people</div>
           <div className={table_permise}>Member Permission</div>
         </div>
         <div className={memberLists}>
@@ -549,6 +564,9 @@ class CreateTeamContent extends Component {
             activePage={this.state.activePage}
             onDataNumSelect={this.paginationNumSelect}
             onSelect={this.handleSelect}
+            dataNumSelect={dataNumSelect}
+            dataNum={dataNum}
+            enhancedPaginationText={enhancedPaginationText}
           />
         </div>
       </div>

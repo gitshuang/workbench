@@ -54,12 +54,12 @@ class TeamUpgradeModal extends Component {
           className="team_upgrade_modal_dailog"
           show={ true }
           type="success"
-          title="After upgrading to an enterprise, you will get more permissions."
+          title="After upgrading to an enterprise, you will get more privileges"
           backup={false}
           close={this.cancelFn} 
           btns={[
             {
-              label: 'Upgrade Now',
+              label: 'Upgrade',
               fun: this.configFn,
             },
             {
@@ -73,7 +73,7 @@ class TeamUpgradeModal extends Component {
 
             <p>· Stricter enterprise member management</p>
 
-            <p>· Management role-based App permission management</p>
+            <p>· Role-based application permission management</p>
 
             <p>· Enterprise-level uniform basic file and data control</p>
 

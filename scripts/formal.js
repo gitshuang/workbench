@@ -33,7 +33,25 @@ rm(assetsRoot, err => {
 
     var namedChunks = stats.compilation.namedChunks;
     var options = stats.compilation.options;
-    var htmlDir = path.join(__dirname, '..', 'dist')
+    //这边修改一下，因为dist被zh_CN zh_TW en_US取代了
+    //var htmlDir = path.join(__dirname, '..', 'dist')
+    var reg = /^LAN_TYPE\=/g;
+    var outPut ;
+    switch (process.argv[2].replace(reg,'')) {
+      case "src":
+        outPut='zh_CN';
+        break;
+      case "en":
+        outPut='en_US';
+        break;
+      case "tw":
+        outPut='zh_TW';
+        break;
+      default:
+        outPut='zh_CN';
+        break;
+    }
+    var htmlDir = path.join(__dirname, '..', outPut)
     Object.keys(webpackConfig.entry).forEach(function(entry){
       var templatePath = path.join(__dirname, '..', 'template', `${entry}.ejs`)
       var defaultTemplatePath = path.join(__dirname, '..', 'template', 'default.ejs')

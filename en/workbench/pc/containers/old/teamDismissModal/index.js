@@ -30,7 +30,7 @@ class TeamDismissModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "确认_en" + props.data.name + "?",
+      title: "Confirm" + props.data.name + "?",
       isManage: 0,
       msg: "",
       close: true,
@@ -47,7 +47,7 @@ class TeamDismissModal extends Component {
     let { pro } = this.state;
     if (pro == "1") {
       this.setState({
-        title: "不再想想了？_en",
+        title: "Later?",
         pro: "2"
       });
       return false;
@@ -101,8 +101,8 @@ class TeamDismissModal extends Component {
   render() {
     const { type, data: { name, msg: _msg } } = this.props;
     const { msg, isManage, close, title, disable } = this.state;
-    let btnLabel = "确定_en";
-    let _pop_title = "确认_en" + name + "?";
+    let btnLabel = "OK";
+    let _pop_title = "Confirm" + name + "?";
     let _cont = null;
     let _btn = null;
     let _select_enter = null;
@@ -119,7 +119,7 @@ class TeamDismissModal extends Component {
           disable
         },
         {
-          label: '取消_en',
+          label: 'Cancel',
           fun: this.cancelFn,
         }
       ];
@@ -127,13 +127,13 @@ class TeamDismissModal extends Component {
       _cont = (<div className={content} ><p>{msg}</p></div>);
       _pop_title = { title };
     } else if (isManage == 2) {//退出后选中企业/团队
-      _pop_title = "请重新选择_en";
+      _pop_title = "Please choose again";
       _cont = <SelectEnter />
       _btn = null;
       _select_enter = select_enter_close;
     }
 
-    _pop_title = "请重新选择_en";
+    _pop_title = "Please choose again";
     _cont = <SelectEnter />
     _btn = null;
     _select_enter = select_enter_close;

@@ -22,7 +22,7 @@ class AboutUs extends Component {
     super(props);
     this.markerEvents = {
         click: (e) => {
-          console.log("loginPageDefault");
+          console.log("You clicked this icon; call parameter:");
           console.log(e);
         }
     }
@@ -42,13 +42,13 @@ class AboutUs extends Component {
             {/* <TopNav /> */}
             <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'4'} history={this.props.history}/>
            <div className="mainCon">
-                <div className="title">loginPageDefault</div>
+                <div className="title">Contact Us</div>
                 <div className="absoutUsCon">
                     <div className="lefCon">
-                        <span className="subtitle">loginPageDefault</span>
-                        <span className="desc">loginPageDefault</span>
-                        <span className="desc">loginPageDefault-86393388loginPageDefault</span>
-                        <span className="desc">loginPageDefaultesnservice@yonyou.com</span>
+                        <span className="subtitle">Beijing Headquarters</span>
+                        <span className="desc">Address: Yonyou Industry Park, No.68 Beiqing Road, Haidian District, Beijing</span>
+                        <span className="desc">Tel: 010-62438888</span>
+                        <span className="desc">Email:diwork@yonyou.com</span>
 
                     </div>
                     <div className="rightCon">

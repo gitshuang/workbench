@@ -17,15 +17,15 @@ import{
   serviceFour,
 } from './index.css';
 
-const  CAS_SERVER = "https://idtest.yyuap.com",
-realservice="http://workbenchdev.yyuap.com";
+// const  CAS_SERVER = "https://idtest.yyuap.com",
+// realservice="http://workbenchdev.yyuap.com";
 class Service extends Component {
   constructor(props){
     super(props);
     this.state = {
      
     }
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;
+    // this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;
  
   }
 
@@ -46,16 +46,15 @@ class Service extends Component {
     }
   }
   render() {
-    
     return (
         <div className={ServicePanel}>
             {/* <TopNav /> */}
-            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'2'} history={this.props.history}/>
+            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={''} activeIndex={'2'} history={this.props.history}/>
             <div className="serviceOne">
                   <div className="mainContent">
-                      <span className="title">loginPageDefault</span>
-                      <span className="desc">loginPageDefault</span>
-                      <div className="serviceBtn" onClick={()=>this.scrollToAnchor('apply')}>loginPageDefault</div>
+                      <span className="title">Customization Services</span>
+                      <span className="desc">One-on-one solutions provided by expert teams</span>
+                      <div className="serviceBtn" onClick={()=>this.scrollToAnchor('apply')}>Customize</div>
                   </div>
             </div>
             <div className="serviceTwo">
@@ -63,64 +62,64 @@ class Service extends Component {
                       <div className="leftTop twoItem">
                         <img src={icon1} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">loginPageDefault</span>
-                             <span className="subcon">loginPageDefaultloginPageDefault</span>
+                             <span className="title">Free Consultation</span>
+                             <span className="subcon">Expert teams provide product solutions according to enterprise requirements </span>
                         </div>
                       </div>
                       <div className="rightTop twoItem">
                         <img src={icon2} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">loginPageDefault</span>
-                             <span className="subcon">loginPageDefault</span>
+                             <span className="title">Product Module Customization</span>
+                             <span className="subcon">Provide product deployment solutions, that you're free to choose the products you need</span>
                         </div>
                       </div>
                       <div className="leftBottom twoItem">
                         <img src={icon3} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">loginPageDefault</span>
-                             <span className="subcon">loginPageDefault</span>
+                             <span className="title">Exclusive Customizations</span>
+                             <span className="subcon">Product modules can be deployed in your exclusive computer room, eliminating your security concerns</span>
                         </div>
                       </div>
                       <div className="rightBottom twoItem">
                         <img src={icon4} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">loginPageDefault</span>
-                             <span className="subcon">loginPageDefault</span>
+                             <span className="title">On-site Demonstration</span>
+                             <span className="subcon">Professional pre-sales team across the country, ready to go anytime</span>
                         </div>
                       </div>
                   </div>
             </div>
             <div className={serviceThree}>
                   <div className="mainContent">
-                      <span className="title">loginPageDefault</span>
+                      <span className="title">Service Process</span>
                       <div className="processCon">
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">1</span>
-                            <span className={tipTitle}>loginPageDefault</span>
-                            <span className={tipCon}>loginPageDefault</span>
+                            <span className={tipTitle}>Fill in Information</span>
+                            <span className={tipCon}>Enter your personal information so that we can get in touch with you</span>
                         </div>
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">2</span>
-                            <span className={tipTitle}>loginPageDefault</span>
-                            <span className={tipCon}>loginPageDefault</span>
+                            <span className={tipTitle}>Telephone Communication</span>
+                            <span className={tipCon}>Pre-sales staff will get in touch with you to discuss your customization needs</span>
                         </div>
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">3</span>
-                            <span className={tipTitle}>loginPageDefault</span>
-                            <span className={tipCon}>loginPageDefault</span>
+                            <span className={tipTitle}>Expert Team On-site Services</span>
+                            <span className={tipCon}>According to your needs, we can provide expert team on-site solutions</span>
                         </div>
                       </div>
                   </div>
             </div>
             <div className={serviceFour} id="apply">
                   <div className="mainContent">
-                      <span className="title">loginPageDefault</span>
-                      <div className="applyService">
-                         <CreateEnter />
-                      </div>
+                      <span className="title">Service Application</span>
+                      {/* <div className="applyService">
+                      </div> */}
+                      <CreateEnter />
                   </div>
             </div>
             {/* <div className="mainFooter mainFooterFake">

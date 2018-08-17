@@ -12,9 +12,9 @@ import{
             {
                 !props.loginModalShow &&(
                     <div className={`oneArtical ${words}`}>
-                        <span className="wordsTitle">“loginPageDefault”</span>
-                        <span className="wordsCon">loginPageDefault</span>
-                        <span className="wordsCon">loginPageDefault </span>
+                        <span className="wordsTitle">“I am a research and development engineer.”</span>
+                        <span className="wordsCon">Yonyou Cloud improves</span>
+                        <span className="wordsCon">my work efficiency, and facilitates team communication and collaboration. </span>
                     </div>
                 )
             }

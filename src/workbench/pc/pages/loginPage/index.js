@@ -14,12 +14,14 @@ import{
   rightDotMenu,
   HomeOnePage
 } from './index.css';
+const windowLocationOrigin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');//ie8-ie10不兼容的原因
 
 const  CAS_SERVER = getHost('euc'),//"https://user-daily.yyuap.com",
 //yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
-yhtssoisloginUrl = window.location.origin + '/login_light.jsp',
+yhtssoisloginUrl = windowLocationOrigin + '/login_light.jsp',
 _destUrl=`${getHost('api')}/yhtssoislogin`, //只有这个不是登陆成功后跳转的链接
-realservice= getHost('api');
+realservice= windowLocationOrigin;
+
 class LoginPage extends Component {
   constructor(props){
     super(props);
@@ -32,7 +34,7 @@ class LoginPage extends Component {
     }
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;  ;
+    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice);
     this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
     if(process.env.NODE_ENV == 'daily'){
       this.loginUrl = 'https://sso-daily.yyuap.com'+ '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl);

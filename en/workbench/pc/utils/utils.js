@@ -1,5 +1,5 @@
 /**
- * 获取_enhash地址_en#后面的路径数组_en
+ * ObtainhashAddress#Path array below
  * @returns {string[]}
  */
 function getHashParameters() {
@@ -8,7 +8,7 @@ function getHashParameters() {
 }
 
 /**
- * 设置返回路径数组，仅供_enreducer使用_en
+ * Set return path array, which is only available toreducer 
  * @param backUrl
  */
 function setBackUrl(backUrl) {

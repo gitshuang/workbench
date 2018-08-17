@@ -141,7 +141,7 @@ class HeaderPage extends Component {
       :
       <div className={create} onClick={this.enterOnclick}>
         <Icon type="add" />
-        创建团队_en \ 企业_en
+        Create Team \ Enterprise
       </div>
     return dom;
   }
@@ -197,7 +197,7 @@ class HeaderPage extends Component {
           iconName={personal}
           color={color}
         >
-          <span style={titleStyle}>{title || 'Homepage'}</span>
+          <span style={titleStyle}>{title || 'Home'}</span>
         </Header>
         {
           list.length >= 1 ? (

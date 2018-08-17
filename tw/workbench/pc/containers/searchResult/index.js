@@ -74,6 +74,17 @@ class searchResult extends Component {
 
       searchValue: '',
       searchTab: '',
+      dataNumSelect: [
+        { id: 0, name: '5條/頁',value:5},
+        { id: 1, name: '10條/頁', value:10},
+        { id: 2, name: '15條/頁',value:15 },
+        { id: 3, name: '20條/頁',value:20 }
+      ],
+      dataNum:1,
+      enhancedPaginationText:{
+        jump:'跳至',
+        jumpPage:'頁'
+      }
     };
   }
 
@@ -163,7 +174,9 @@ class searchResult extends Component {
     if(keywords === ""){
       keywords = " ";
     }
-    this.props.history.push(`/search/${activetab}/${keywords}`);
+    this.setState({dataNum:1,dataPerPageNum:10,activePage:1},()=>{
+      this.props.history.push(`/search/${activetab}/${keywords}`);
+    })
   }
 
   // 点击tabs 分类
@@ -179,6 +192,8 @@ class searchResult extends Component {
         content: [],
       },
       totalPages: 0,
+      dataNum:1,
+      dataPerPageNum:10,
       isShownodataClassEach: true,
     }, () => {
       this.props.history.push(`/search/${activetab}/${keywords}`);
@@ -197,11 +212,13 @@ class searchResult extends Component {
 
   // 下面选择每页展示的数据条目数
   paginationNumSelect = (id, dataNum) => {
-    const reg = new RegExp('條\/頁', 'g');
-    const dataPerPageNum = dataNum.replace(reg, '');
+    // const reg = new RegExp('条\/页', 'g');
+    // const dataPerPageNum = dataNum.replace(reg, '');
+    const dataPerPageNum = dataNum;
     const { keywords, activePage, activetab } = this.state;
     this.setState({
       dataPerPageNum,
+      dataNum:id,
     }, () => {
       this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
     });
@@ -239,6 +256,7 @@ class searchResult extends Component {
   render() {
     const {
       SearchMoreList, dataList, isShownodataClassEach, totalPages,
+      dataNum, dataNumSelect, enhancedPaginationText,
     } = this.state;
     const Morelist = [];
     const anifalse = false;
@@ -297,6 +315,9 @@ class searchResult extends Component {
                     activePage={this.state.activePage}
                     onDataNumSelect={this.paginationNumSelect}
                     onSelect={this.handleSelect.bind(this)}
+                    dataNumSelect={dataNumSelect}
+                    dataNum={dataNum}
+                    enhancedPaginationText={enhancedPaginationText}
                   />
                 </div> : null
               }

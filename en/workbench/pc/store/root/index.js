@@ -90,7 +90,7 @@ const createReducer = key => (state, { payload, error }) => {
 const reducer = handleActions({
   [requestStart](state) {
     // Loading.create();
-    createLoadingFunc({ text: 'loading data...' });
+    createLoadingFunc({ text: 'Loading data...' });
     return state;
   },
   [requestSuccess](state) {
@@ -224,7 +224,7 @@ const reducer = handleActions({
       ...state,
       showModal: true,
       dialogType: type || 'success',
-      dialogTitle: title || '信息_en',
+      dialogTitle: title || 'Message',
       dialogMsg: msg
     }
   },

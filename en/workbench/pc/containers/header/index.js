@@ -52,9 +52,9 @@ class HeaderContainer extends Component {
     super(props);
     this.state = {
       quickText: {
-        title: '快捷应用_en',
-        all: '全部应用_en',
-        more: '更多应用_en'
+        title: 'Favorites',
+        all: 'All Apps',
+        more: 'More Apps'
       }
     };
   }
@@ -126,7 +126,7 @@ class HeaderContainer extends Component {
         openServiceFn={this.openServiceFn} 
       />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
-        <Icon title="Intelligent Communications" type="clock" style={{ color }} />
+        <Icon title="Intelligent IM" type="clock" style={{ color }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
     );
