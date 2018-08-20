@@ -4,10 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 
 import teamconfigActions from 'store/root/teamconfig/actions';
-import rootActions from 'store/root/actions';
-
 const { exitTeam, closeExitModal } = teamconfigActions;
-const { requestSuccess, requestError } = rootActions;
 
 import PopDialog from 'pub-comp/pop';
 import { content, select_enter_close } from './index.css';
@@ -24,8 +21,6 @@ import SelectEnter from './selectEnter'
   {
     exitTeam,
     closeExitModal,
-    requestError,
-    requestSuccess
   }
 )
 class TeamRemoveModal extends Component {
