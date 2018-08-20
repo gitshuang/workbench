@@ -93,7 +93,7 @@ class Root extends Component {
 
     };
     this.isLogin = window.os_fe_isLogin && window.os_fe_isLogin();
-    // this.isLogin = true;
+    this.isLogin = true;
   }
   componentWillMount() {
     if (!this.isLogin) {
