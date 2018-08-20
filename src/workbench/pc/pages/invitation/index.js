@@ -247,7 +247,7 @@ class Invitation extends Component {
 
                 <p className={firstP}>给你的小伙伴捎句话吧</p>
                 <FormControl
-                  placeholder="友空间-赋能个人、激活组织"
+                  placeholder="用友云-赋能个人、激活组织"
                   value={message}
                   onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
                 />

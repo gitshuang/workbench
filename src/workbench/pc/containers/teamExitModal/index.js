@@ -2,37 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
+
 import teamconfigActions from 'store/root/teamconfig/actions';
-import homeActions from 'store/root/home/actions';
-import rootActions from 'store/root/actions';
 const { exitTeam, closeExitModal } = teamconfigActions;
+
 import PopDialog from 'pub-comp/pop';
 import { content, select_enter_close } from './index.css';
 import SelectEnter from './selectEnter'
-const { requestStart, requestSuccess, requestError } = rootActions;
-const { getSearchEnterOrTeam } = homeActions;
 
 @withRouter
 @connect(
   mapStateToProps(
     'exitModal',
-    'exitTeamMsg',
-    {
-      key: 'searchEnterOrTeamList',
-      value: (teamconfig, ownProps, root) => {
-        return root.home.searchEnterOrTeamList
-      }
-    },
     {
       namespace: "teamconfig"
     },
   ),
   {
-    getSearchEnterOrTeam,
     exitTeam,
     closeExitModal,
-    requestError,
-    requestSuccess
   }
 )
 class TeamRemoveModal extends Component {
@@ -45,7 +33,6 @@ class TeamRemoveModal extends Component {
       close: true,
       disable: false,
       next: false,
-      allowTenants: [],
     }
   }
 
@@ -66,7 +53,7 @@ class TeamRemoveModal extends Component {
     this.setState({
       disable: true
     })
-    const { exitTeam, isManage, userId, data: { serverApi }, getSearchEnterOrTeam } = this.props;
+    const { exitTeam, data: { serverApi }, } = this.props;
     exitTeam(serverApi).then(({ error, payload }) => {
       this.setState({
         disable: false
@@ -78,42 +65,43 @@ class TeamRemoveModal extends Component {
         });
         return false;
       }
-      getSearchEnterOrTeam().then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-          return false;
-        }
-        requestSuccess();
-        if (payload.length == 1) {//进入该企业或团队
-          if (!payload) return;
-          this.changeTenant(payload[0].tenantId);
-        } else if (payload.length == 0) {
-          const {
-            history,
-          } = this.props;
-          this.cancelFn();
-          window.location.replace(window.location.origin);
-        } else if (payload.length > 1) {
-          this.setState({
-            isManage: 2
-          });
-        }
-      });
+      window.location.replace(window.location.origin);
+      // getSearchEnterOrTeam().then(({ error, payload }) => {
+      //   if (error) {
+      //     requestError(payload);
+      //     return false;
+      //   }
+      //   requestSuccess();
+      //   if (payload.length == 1) {//进入该企业或团队
+      //     if (!payload) return;
+      //     this.changeTenant(payload[0].tenantId);
+      //   } else if (payload.length == 0) {
+      //     const {
+      //       history,
+      //     } = this.props;
+      //     this.cancelFn();
+      //     window.location.replace(window.location.origin);
+      //   } else if (payload.length > 1) {
+      //     this.setState({
+      //       isManage: 2
+      //     });
+      //   }
+      // });
     });
   }
 
-  changeTenant = (tenantId) => {
-    const {
-      location: {
-        origin,
-        pathname,
-        hash,
-      },
-    } = window;
-    window.location.replace(
-      `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true`,
-    );
-  }
+  // changeTenant = (tenantId) => {
+  //   const {
+  //     location: {
+  //       origin,
+  //       pathname,
+  //       hash,
+  //     },
+  //   } = window;
+  //   window.location.replace(
+  //     `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true`,
+  //   );
+  // }
 
   // 取消
   cancelFn = () => {
@@ -122,13 +110,13 @@ class TeamRemoveModal extends Component {
   }
 
   render() {
-    const { exitModal, type, data } = this.props;
+    const { exitModal, data } = this.props;
     let { name, _msg } = "";
     if (data) {
       name = data.name;
       _msg = data.msg;
     }
-    const { msg, isManage, close, disable } = this.state;
+    const { msg, isManage, disable } = this.state;
     let btnLabel = "确定";
     let _pop_title = "确认" + name + "?";
     let _cont = null;
