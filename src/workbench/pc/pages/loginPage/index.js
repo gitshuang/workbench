@@ -37,7 +37,7 @@ class LoginPage extends Component {
     this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice);
     this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
     if(process.env.NODE_ENV == 'daily'){
-      this.loginUrl = 'https://sso-daily.yyuap.com'+ '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl);
+      this.loginUrl = 'https://sso-daily.yyuap.com'+ '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
     }
     this.sevenSpace ;
   }
