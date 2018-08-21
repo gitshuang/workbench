@@ -159,7 +159,7 @@ class searchOther extends Component {
     } else if (dSeconds < 60) {
       ts = 'Just now';
     } else if (dDays > 3) {
-      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/Year | Month/g, '-').replace(/Day/g, ' ');
+      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/Year | Month/|Year | Month/g, '-').replace(/Day/g, ' ');
     }
     return ts
   }

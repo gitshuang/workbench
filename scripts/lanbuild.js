@@ -4,8 +4,8 @@ var path = require('path')
 var type = process.argv[2]*1;
 
 var basepath = path.join(__dirname,'../src');//根目录
-var enDir = path.join(__dirname,'../manager_fe_20180816.xlsx'); //翻译人员翻译完成
-var twDir = path.join(__dirname,'../manager_fe_20180816_tw.xlsx'); //翻译人员翻译完成
+var enDir = path.join(__dirname,'../os_fe_20180816.xlsx'); //翻译人员翻译完成
+var twDir = path.join(__dirname,'../os_fe_20180816_tw.xlsx'); //翻译人员翻译完成
 
 var i18n_addTags = path.join(__dirname,'../i18n_addTags');//生成的1
 var i18n_ = path.join(__dirname,'../i18n');//生成2
