@@ -14,6 +14,7 @@ const osFeLoginCallBack = () =>{
 window.React = React;
 window.ReactDOM = ReactDOM;
 window.os_fe_loginCallback= osFeLoginCallBack;
+window._ya_ = window._ya || [];
 const rootElm = document.getElementById('root');
 rootElm.addEventListener('mousedown', (e) => {
   dispatchMessageTypeHandler({
