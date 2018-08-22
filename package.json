@@ -19,6 +19,7 @@
     "build_tw": "node scripts/build.js LAN_TYPE=tw",
     "test_tw": "node scripts/test.js LAN_TYPE=tw",
     "formal_tw": "node scripts/formal.js  LAN_TYPE=tw",
+    "daily_tw": "node scripts/daily.js LAN_TYPE=tw",
     "dic": "node scripts/lanbuild.js 1",
     "dic2": "node scripts/lanbuild.js 2"
   },
