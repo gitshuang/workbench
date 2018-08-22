@@ -247,7 +247,7 @@ class Invitation extends Component {
 
                 <p className={firstP}>Send a message to your friends</p>
                 <FormControl
-                  placeholder="YouZone-Empowering Employees Organizations"
+                  placeholder="Yonyou Cloud-Empowering Employees Organizations"
                   value={message}
                   onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
                 />

@@ -159,7 +159,7 @@ class searchOther extends Component {
     } else if (dSeconds < 60) {
       ts = '剛剛';
     } else if (dDays > 3) {
-      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ');
+      ts = new Date(parseInt(ts, 10)).toLocaleString().replace(/年|月/|年|月/g, '-').replace(/日/g, ' ');
     }
     return ts
   }

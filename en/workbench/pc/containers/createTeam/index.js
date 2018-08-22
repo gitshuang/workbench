@@ -145,6 +145,7 @@ class CreateTeamContent extends Component {
             <input
               className="u-form-control"
               placeholder="No more than 60 chars"
+              maxLength="60"
               value={value}
               onChange={(e) => { this.onChange(e) }}
             />

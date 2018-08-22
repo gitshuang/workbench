@@ -4,7 +4,7 @@
   margin-top: 8px;
   margin: 10px 120px;
   background: #fff;
-  min-width: 700px;
+  min-width: 820px;
   position: relative;
 }
 .header{
@@ -21,6 +21,8 @@
   color:rgba(255,255,255,1);
   line-height:36px;
   margin-bottom: 18px;
+  word-break: break-all;
+  white-space: normal;
 }
 .header button{
   width:107px;

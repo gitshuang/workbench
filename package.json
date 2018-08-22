@@ -18,7 +18,10 @@
     "start_tw": "node scripts/start.js LAN_TYPE=tw",
     "build_tw": "node scripts/build.js LAN_TYPE=tw",
     "test_tw": "node scripts/test.js LAN_TYPE=tw",
-    "formal_tw": "node scripts/formal.js  LAN_TYPE=tw"
+    "formal_tw": "node scripts/formal.js  LAN_TYPE=tw",
+    "daily_tw": "node scripts/daily.js LAN_TYPE=tw",
+    "dic": "node scripts/lanbuild.js 1",
+    "dic2": "node scripts/lanbuild.js 2"
   },
   "dependencies": {
     "@diworkfe/public-components": "git+http://git.yonyou.com/iuap_ap/diwork-public-components.git#develop",
@@ -34,6 +37,7 @@
     "exceljs": "^1.5.1",
     "ficloud-workbench": "^0.1.12",
     "js-polyfills": "^0.1.42",
+    "lanbuild": "^1.0.1",
     "mutation-observer": "^1.0.3",
     "object-assign": "4.1.1",
     "promise-polyfill": "6.0.2",
