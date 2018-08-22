@@ -29,15 +29,16 @@
 .active {
   color: #E14C46;
 }
-.workArea { 
+.workArea {
   height: 100%;
-  width: 100%; 
+  width: 100%;
   position: relative;
   overflow: hidden;
 }
 
 .sideBarArea {
   width: 220px;
+	height: 100%;
   float: left;
   background: #ffffff;
   overflow-y: scroll;
@@ -48,11 +49,11 @@
   right: 0px;
 }
 .marginLeft {
-  margin-left: 230px !important;
-  margin-top: 86px !important; 
+  margin-left: 230px ;
+  margin-top: 86px !important;
 }
 .marginTop {
-  margin-top: 8px; 
+  margin-top: 8px;
 }
 .contentArea {
   height: 100%;
@@ -70,7 +71,7 @@
   right: 0;
 }
 .hasTab {
-  border-radius: 3px 0 0 0; 
+  border-radius: 3px 0 0 0;
   margin-top: 88px;
   padding-top: 10px;
   position: absolute;
@@ -112,3 +113,5 @@
 .pin {
   margin-left: 15px;
 }
+
+
