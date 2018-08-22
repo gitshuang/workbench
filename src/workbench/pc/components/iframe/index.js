@@ -17,8 +17,9 @@ class Iframe extends Component {
     const {
       title,
       url,
+			onLoad
     } = this.props;
-    return (<iframe id={title} title={title} src={url} className={iframe} />);
+		return (<iframe onLoad={onLoad} id={title} title={title} src={url} className={iframe}/>);
   }
 }
 
