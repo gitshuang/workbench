@@ -92,7 +92,7 @@ class Root extends Component {
     this.state = {
 
     };
-    this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin())||((window.location.hostname.indexOf('localhost')>-1) );
+    this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin())|| process.env.LOCALHOST;
     // this.isLogin = true;
   }
   componentWillMount() {
