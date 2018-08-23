@@ -3,7 +3,8 @@ const webpackConfig = require('./webpack');
 
 const config = {
   env: '"development"',
-  host: '"localhost"',
+  host: '""',
+  localhost: true,
   assetsSubDirectory: 'static',
   assetsPublicPath: '/',
   proxyTable,
