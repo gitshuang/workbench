@@ -3,15 +3,14 @@ const webpackConfig = require('./webpack');
 
 const config = {
   env: '"development"',
-  host: '""',
+  host: '"localhost"',
   assetsSubDirectory: 'static',
   assetsPublicPath: '/',
-
-  proxyTable: proxyTable,
+  proxyTable,
   autoOpenBrowser: false,
   port: 3000,
-}
+};
 
-config.webpackConfig = webpackConfig(config)
+config.webpackConfig = webpackConfig(config);
 
-module.exports = config
+module.exports = config;
