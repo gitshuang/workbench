@@ -1,16 +1,17 @@
-var path = require('path')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-var baseWebpackConfig = require('../webpack.base.conf')
-var paths = require('../paths')
-var reg = /^LAN_TYPE\=/g;
-var  goalFilePath  = process.argv.length < 3? 'src' : process.argv[2].replace(reg,'');
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const baseWebpackConfig = require('../webpack.base.conf');
+const paths = require('../paths');
+
+const reg = /^LAN_TYPE\=/g;
+const goalFilePath = process.argv.length < 3 ? 'src' : process.argv[2].replace(reg, '');
 module.exports = function (config) {
-  var webpackConfig = merge(baseWebpackConfig, {
+  const webpackConfig = merge(baseWebpackConfig, {
     // add hot-reload related code to entry chunks
     entry: {
       main: [
@@ -38,17 +39,17 @@ module.exports = function (config) {
               options: {
                 modules: false,
                 importLoaders: 1,
-                sourceMap: false
-              }
+                sourceMap: false,
+              },
             },
             {
               loader: 'postcss-loader',
               options: {
                 ident: 'postcss',
-                sourceMap: false
-              }
-            }
-          ]
+                sourceMap: false,
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,
@@ -62,47 +63,46 @@ module.exports = function (config) {
                 modules: true,
                 localIdentName: '[path][name]__[local]--[hash:base64:5]',
                 importLoaders: 1,
-                sourceMap: false
-              }
+                sourceMap: false,
+              },
             },
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap: false
-              }
-            }
-          ]
+                sourceMap: false,
+              },
+            },
+          ],
         },
-      ]
+      ],
     },
     // cheap-module-eval-source-map is faster for development
     devtool: '#eval-source-map',
     output: {
       publicPath: config.assetsPublicPath,
       filename: 'js/[name].js',
-      chunkFilename: 'js/chunk/[name]-[id].js'
+      chunkFilename: 'js/chunk/[name]-[id].js',
     },
     plugins: [
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': config.env,
         'process.env.HOST': config.host,
+        'process.env.LOCALHOST': config.localhost,
       }),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
-        minChunks: function (module, count) {
+        minChunks(module, count) {
           // any required modules inside node_modules are extracted to vendor
           return (
             module.resource &&
             /\.js$/.test(module.resource) &&
-            module.resource.indexOf(
-              path.join(__dirname, '../../node_modules')
-            ) === 0
-          )
-        }
+            module.resource.indexOf(path.join(__dirname, '../../node_modules')) === 0
+          );
+        },
       }),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'manifest',
-        chunks: ['vendor']
+        chunks: ['vendor'],
       }),
       // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
       new webpack.HotModuleReplacementPlugin(),
@@ -116,5 +116,5 @@ module.exports = function (config) {
       }),
     ],
   });
-  return webpackConfig
-}
+  return webpackConfig;
+};
