@@ -1,26 +1,20 @@
 import React, {Component} from 'react';
-import store from '../../../store';
 import Img from './download.svg';
 import * as style from './index.css'
+
+import request from '../../../utils/request';
+
+import {getContentType, getUrlWithParams, getDataProObj} from '../../../utils/request';
 
 class PeGoal extends Component {
 	constructor() {
 		super();
 		this.state = {
-			using: '60',
-			total: '100',
-			rate: 5,
 			width: 126,
 			strokeWidth: 8,
 			status: 10,
-			delay: 0,
-			activity: 10,
-			delaycnt: 0
+			getStatus: null
 		};
-		// goal_finish_rate 完成率
-		// goal_delay_rate 延期率
-		// goal_activity_cnt 活跃数
-		// goal_finish_cnt  完成数
 		this.relativeStrokeWidth = this.relativeStrokeWidth.bind(this)
 		this.trackPath = this.trackPath.bind(this)
 		this.stroke = this.stroke.bind(this)
@@ -29,30 +23,60 @@ class PeGoal extends Component {
 	}
 
 	componentDidMount() {
-		const xhr = new XMLHttpRequest();
-		// xhr.open("GET", "/performance-okr/pm/obj/queryPsnGoalStatis ", true);
-		xhr.open("GET", "http://hrcloud.yyuap.com/performance-okr/pm/obj/queryPsnGoalStatis ", true);
-		xhr.withCredentials = true; //支持跨域发送cookies
-		xhr.send();
-		xhr.onreadystatechange = () => {
-			if (xhr.readyState === 4 && xhr.status === 200) {
-				let getStatus = JSON.parse(xhr.responseText);
-				let data = getStatus.data;
-				this.setState({
-					rate: Math.round(data.goal_finish_rate * 100),
-					delay: Math.round(data.goal_delay_rate * 100),
-					activity: Math.round(data.goal_activity_cnt),
-					delaycnt: data.goal_delay_cnt
-				})
-			} else {
-				this.setState({
-					scale: 0
-				})
+		this.getData();
+	}
+
+	renderLeftContent = (getStatus) => {
+		if (getStatus) {
+			const renderArray = [];
+			for (let i = 1; i <= 3; i++) {
+				const dataProp = this.props[`dataProp_${i}`];
+				const dataDesc = this.props[`dataProp_${i}_desc`];
+				const dataType = this.props[`dataProp_${i}_type`];
+				const dataColor = this.props[`dataProp_${i}_color`];
+				const data = getDataProObj(dataProp, getStatus);
+				if (dataProp) {
+					renderArray.push(<div key={i} className={style["goal-li"]}>
+						<div className={style["goal-label"]}>
+							{dataDesc ? dataDesc + ' ' + '：' + ' ' : ''}
+						</div>
+						<div className={style["goal-val"]} style={dataColor ? {color: dataColor} : {}}>
+							{dataProp ? ((dataType && dataType === '%') ? (Math.round(data * 100) + ' %') : data) : ''}
+						</div>
+					</div>);
+				}
 			}
+			return renderArray;
 		}
-		this.setState({
-			scale: 10
-		})
+		return <div/>
+	}
+
+	getData = () => {
+
+		const {params, method, contentType} = this.props;
+
+		let {dataUrl} = this.props;
+
+		const options = {
+			method: method || 'GET',
+			headers: {
+				'content-type': getContentType(contentType)
+			},
+		};
+
+		if (params && method && method.toString().toLocaleUpperCase() === 'POST' && getContentType(contentType) === 'application/json') {
+			options.body = JSON.stringify(eval('(' + params + ')'));
+		} else {
+			dataUrl = getUrlWithParams(dataUrl, params);
+		}
+
+		request(`${dataUrl}`, options, (getStatus) => {
+			this.setState({getStatus});
+			this.setState({
+				scale: 0
+			})
+		});
+
 	}
 
 	reRreshPage(e) {
@@ -102,40 +126,14 @@ class PeGoal extends Component {
 
 	render() {
 		let pathStyle = this.circlePathStyle()
+		const {dataProp, dataDesc} = this.props;
+		console.log(JSON.stringify(this.state.getStatus));
 		return (
 			<div className={style.goal}>
 				<div className="my-content-goal">
 					<div className={style["my-content-goal"] + " " + style["my-content-goal-left"]}>
-						<div className={style["goal-title"]}>
-							我的目标
-						</div>
 						<ul className={style["goal-ul"]}>
-							<div className={style["goal-li"]}>
-								<div className={style["goal-label"]}>
-									当前活动目标 ：
-								</div>
-								<div className={style["goal-val"]}>
-									{this.state.activity}
-								</div>
-							</div>
-							<div className={style["goal-li"]}>
-								<div className={style["goal-label"]}>
-									目标按时达成率 ：
-								</div>
-								<div className={style["goal-val"]}>
-									{/*30%*/}
-									{this.state.rate} %
-								</div>
-							</div>
-							<div className={style["goal-li"]}>
-								<div className={style["goal-label"]}>
-									目标逾期率 ：
-								</div>
-								<div className={style["goal-val"] + ' ' + style["goal-val-warning"]}>
-									{/*70%*/}
-									{this.state.delay} %
-								</div>
-							</div>
+							{this.renderLeftContent(this.state.getStatus)}
 						</ul>
 						<div className="my-content-goal goal-refresh">
 							<a onClick={this.reRreshPage}>
@@ -144,15 +142,15 @@ class PeGoal extends Component {
 						</div>
 					</div>
 					<div className={"my-content-goal " + style["my-content-goal-right"]}>
-						<svg viewBox="0 0 100 100" style={{width: "100px", height: "100px", transform: "translateY(40px)"}}>
+						<svg viewBox="0 0 100 100" style={{width: "100px", height: "100px", transform: "translateY(0px)"}}>
 							<path d={this.trackPath()} stroke="rgba(131,140,151,1)" strokeWidth={this.relativeStrokeWidth()}
 										fill="none"></path>
 							<path d={this.trackPath()} strokeLinecap="round" stroke={this.stroke()}
 										strokeWidth={this.relativeStrokeWidth()} fill="none" style={pathStyle}></path>
 						</svg>
 						<div className={style["sn-progress-text"]}>
-							<div>{this.state.delaycnt}</div>
-							<div className={style["sn-progress-info"]}>已逾期</div>
+							<div style={{color: 'black'}}>{getDataProObj(dataProp, this.state.getStatus)}</div>
+							<div className={style["sn-progress-info"]}>{dataDesc}</div>
 						</div>
 					</div>
 				</div>
