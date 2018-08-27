@@ -47,6 +47,9 @@ export function getContentType(contentType) {
  * @returns {*}
  */
 export function getDataProObj(dataPro, getStatus) {
+	if (!(dataPro && getStatus)) {
+		return null;
+	}
 	if (dataPro.indexOf('.') > 0) {
 		const preStr = dataPro.substring(0, dataPro.indexOf('.'));
 		const subStr = dataPro.substring(dataPro.indexOf('.') + 1);
