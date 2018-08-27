@@ -4,10 +4,12 @@ import { withRouter } from 'react-router-dom';
 import Menu, { SubMenu } from 'bee/menus';
 import Icon from 'pub-comp/icon';
 import { mapStateToProps, findPath } from '@u';
-import { 
+import {
   sideBar, menuItem, sideBarMenu, sideMainMenu, last_item,
 
 } from './style.css';
+
+import { pushYA } from '../../utils/utils';
 
 const { Item } = Menu;
 
@@ -104,6 +106,7 @@ class SideBarContainer extends Component {
     if (serviceCode !== curServiceCode) {
       history.push(`/${type}/${code}/${serviceCode}`);
       console.log('sideBar' + history.length)
+			pushYA(serviceCode);
     }
   }
 
@@ -127,7 +130,7 @@ class SideBarContainer extends Component {
       selectedKeys,
     }
   }
-  
+
   render() {
     const { menus } = this.props;
     const { openKeys, selectedKeys } = this.state;

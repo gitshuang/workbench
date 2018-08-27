@@ -4,23 +4,28 @@ import FinanceCloud from 'ficloud-workbench';
 import 'ficloud-workbench/dist/ficloud-workbench.css';
 
 class FinanceCloudComponents extends Component {
-  static propTypes = {
-    menuItems: PropTypes.array,
-    current: PropTypes.object,
-    updateCurrent: PropTypes.func
-  }
+	static propTypes = {
+		menuItems: PropTypes.array,
+		current: PropTypes.object,
+		updateCurrent: PropTypes.func
+	}
 
-  constructor(props) {
-    super(props);
-  }
+	constructor(props) {
+		super(props);
+	}
 
-  render() {
-    const {menuItems, current, updateCurrent} = this.props;
+	componentDidMount() {
+		const {onLoad} = this.props;
+		onLoad && onLoad();
+	}
 
-    return (
-      <FinanceCloud env={process.env.NODE_ENV} menuItems={menuItems} current={current} updateCurrent={updateCurrent}/>
-    );
-  }
+	render() {
+		const {menuItems, current, updateCurrent} = this.props;
+
+		return (
+			<FinanceCloud env={process.env.NODE_ENV} menuItems={menuItems} current={current} updateCurrent={updateCurrent}/>
+		);
+	}
 
 }
 

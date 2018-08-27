@@ -509,15 +509,15 @@ class CreateTeamContent extends Component {
             </div>
           </div>
           <div className={memberBtns}>
-            <Checkbox colors="info" onChange={this.changeCheck}>Only Display Administrator</Checkbox>
+            <Checkbox colors="info" onChange={this.changeCheck}>Display Admin Only</Checkbox>
             {
-              _invitePermission ? <ButtonBrand onClick={this.inviteMember}>Invite Member</ButtonBrand> : null
+              _invitePermission ? <ButtonBrand onClick={this.inviteMember}>Invite</ButtonBrand> : null
             }
           </div>
         </div>
 
         <div className={table_title}>
-          <div>Current person count{userList.totalElements}people</div>
+          <div>Current Users{userList.totalElements} People</div>
           <div className={table_permise}>Member Permission</div>
         </div>
         <div className={memberLists}>
@@ -545,9 +545,9 @@ class CreateTeamContent extends Component {
                         style={{ width: 88, marginRight: 6 }}
                         onChange={(e) => { this.handleChange3(e, item.userId) }}
                       >
-                        <Option value="manage">Administrator</Option>
+                        <Option value="manage">Admin</Option>
                         <Option value="member">Member</Option>
-                        <Option value="deleteMember">Remove Member</Option>
+                        <Option value="deleteMember">Remove</Option>
                       </Select>
                     </div>
                   </li>

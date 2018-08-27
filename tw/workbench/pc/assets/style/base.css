@@ -100,8 +100,8 @@ body .u-select-selection--single{
 body .u-select-selection-rendered{
   line-height: 32px;
 }
-body .u-select-focused .u-select-selection, 
-body .u-select-selection:focus, 
+body .u-select-focused .u-select-selection,
+body .u-select-selection:focus,
 body .u-select-selection:active{
   border-color: #00CDC3;
 }
@@ -127,7 +127,7 @@ body .u-menu{
   color: #555555;
 }
 
-body .u-form-item .u-input-group-outer .u-input-before, 
+body .u-form-item .u-input-group-outer .u-input-before,
 body .u-form-item .u-input-group-outer .u-input-after{
   background: #f3f3f3;
   color: #bfbfbf;
@@ -430,7 +430,7 @@ body .paginationClass .disabled a:hover{
   color: #bfbfbf;
   border: 1px solid #f3f3f3;
 }
-body .paginationClass li a{ 
+body .paginationClass li a{
   width: 28px;
   height: 28px;
   background: #e4e4e4;
@@ -444,7 +444,7 @@ body .paginationClass li a:hover{
   background: #f3f3f3;
 }
 body .paginationClass li:first-child a,
-body .paginationClass li:last-child a{ 
+body .paginationClass li:last-child a{
   border-radius: 4px;
 }
 body .paginationClass input{
@@ -478,3 +478,20 @@ body .paginationClass input[type="number"]{
   color: rgba(136,136,136,1)!important;
 }
 /*---------轻提示与弹框全局样式---------*/
+
+.react-resizable {
+	position: relative;
+}
+
+.react-resizable-handle {
+	position: absolute;
+	width: 20px;
+	height: 100%;
+	bottom: 0;
+	right: -10px;
+	cursor: col-resize;
+}
+
+.u-tooltip {
+	z-index: 2000;
+}

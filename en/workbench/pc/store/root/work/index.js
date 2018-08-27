@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
 import actions from './actions';
-import func from '../../../utils/utils'
+import {setBackUrl} from '../../../utils/utils'
 
 const {
   setExpandedSidebar,
@@ -49,6 +49,8 @@ const defaultState = {
   pinDisplay: false, // pin是否显示
   widthBrm: true,
   backUrl: [],
+	productInfo: {},
+	pinGroup:[]
 };
 
 function appendSearchParam(url, params) {
@@ -148,10 +150,10 @@ const reducer = handleActions({
     if (backUrl.length > 0) {
       const lastHashParam = backUrl[backUrl.length - 1];
       if (lastHashParam && lastHashParam.subCode && lastHashParam.subCode !== serviceCode) {
-        func.setBackUrl(backUrl);
+        setBackUrl(backUrl);
       }
     } else {
-      func.setBackUrl(backUrl);
+      setBackUrl(backUrl);
     }
     if (curTab) {
       return {
@@ -218,14 +220,15 @@ const reducer = handleActions({
       ...state,
     };
   },
-  [getPinGroup]: (state, { error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-    };
-  },
+	[getPinGroup]: (state, {error, payload: pinGroup}) => {
+		if (error) {
+			return state;
+		}
+		return {
+			...state,
+			pinGroup
+		};
+	},
   [setPinCancel]: (state, { error }) => {
     if (error) {
       return state;
@@ -247,28 +250,42 @@ const reducer = handleActions({
       hasWidget,
       relationServices,
       relationUsers,
-      ext1
+      ext1,
+			url,
+			serviceCode
     } = serviceInfo;
     const {
       current,
+			tabs
     } = state;
-
-    let hasRelationFunc = true;
+		let hasRelationFunc = true;
     if (!(relationServices && relationServices.length) &&
       !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
-    return {
-      ...state,
-      pinType: hasWidget,
-      current: {
-        ...current,
-        hasRelationFunc,
-        relationUsers,
-        relationServices,
-        ext1
-      },
-    };
+    const location = appendSearchParam(url, {
+			...getOpenServiceData(serviceCode),
+			serviceCode,
+		});
+    //这里做一个兼容，工作页内iframe地址从getDetail获取
+		let tab = {};
+		if (tabs.length > 0) {
+			tab = tabs.shift();
+			tab.location = location;
+		}
+		return {
+			...state,
+			pinType: hasWidget,
+			current: {
+				...current,
+				hasRelationFunc,
+				relationUsers,
+				relationServices,
+				ext1,
+				url: location
+			},
+			tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs))
+		};
   },
   [setProductInfo]: (state, { payload: productInfo }) => {
     const {
@@ -302,6 +319,7 @@ const reducer = handleActions({
       type,
       pinType,
       tabs: [],
+			productInfo
     };
   },
   [titleServiceDisplay]: state => ({

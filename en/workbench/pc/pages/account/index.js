@@ -10,9 +10,9 @@ class Account extends Component {
   render() {
     const { locale } = getContext();
     return (
-      <ApplicationWrap name="Account Management">
+      <ApplicationWrap name="Account Mgmt">
         <div className={`${bg} um-content um-vbox`}>
-          <IFrame title="Account Management" url={`${getHost('euc')}/diuser?locale=${locale}`} />
+          <IFrame title="Account Mgmt" url={`${getHost('euc')}/diuser?locale=${locale}`} />
         </div>
       </ApplicationWrap>
     );

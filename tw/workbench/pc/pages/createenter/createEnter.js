@@ -178,7 +178,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <FormControl maxLength="10" name="tenantName" placeholder="最多60個字元" />
+            <FormControl maxLength="60" name="tenantName" placeholder="最多60個字元" />
           </FormItem>
 
           <FormItem
