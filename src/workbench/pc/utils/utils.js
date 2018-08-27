@@ -36,7 +36,9 @@ export function setBackUrl(backUrl) {
  */
 export function pushYA(serviceCode) {
 	const {profile, tenantid, userid} = getContext();
-	window._ya_.push(['_trackEvent', 'operator', 'Profile|userId|tenantId|serviceCode', profile + '|' + userid + '|' + tenantid + '|' + serviceCode]);
+	if (window._ya) {
+		window._ya.push(['_trackEvent', 'operator', 'profile|userId|tenantId|serviceCode', profile + '|' + userid + '|' + tenantid + '|' + serviceCode]);
+	}
 }
 
 /**
