@@ -55,7 +55,7 @@ class Personals extends Component {
         do: 'OK',
         set: ' Settings',
         logout: 'Log Out',
-        account: 'Account Management',
+        account: 'Account Mgmt',
         dynamic: 'Moments',
       },
 
@@ -105,7 +105,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: 'Simplified Chinese 1'
+            context: 'Simplified Chinese'
           },
           {
             value: 'en',
@@ -113,7 +113,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: 'Traditional Chinese 3'
+            context: 'Traditional Chinese'
           },
         ]
       }

@@ -11,7 +11,7 @@ class ManageTeamEnter extends Component {
     return (
       <ApplicationWrap name="Manage Team\Enterprise">
         <div className={`${bg} um-content um-vbox`}>
-          <IFrame title="Account Management" url={`${getHost('manageTeamEnter')}`} />
+          <IFrame title="Account Mgmt" url={`${getHost('manageTeamEnter')}`} />
         </div>
       </ApplicationWrap>
     );

@@ -10,6 +10,7 @@ import {
   getProductInfo
 } from 'store/root/work/api';
 import {openMessage} from 'components/message';
+import {pushYA} from "../utils/utils";
 
 const {addBrm, popBrm} = workActions;
 const {
@@ -90,6 +91,7 @@ const handlers = {
         } else {
           this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
         }
+				pushYA(subCode);
       }, (err) => {
         console.log(err);
       });

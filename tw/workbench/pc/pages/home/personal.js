@@ -105,7 +105,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: '簡體中文1'
+            context: '简体中文'
           },
           {
             value: 'en',
@@ -113,7 +113,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: '繁體中文3'
+            context: '繁体中文'
           },
         ]
       }

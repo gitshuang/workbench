@@ -15,6 +15,8 @@ const { openFolder } = homeActions;
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
 
+import {pushYA} from "../../utils/utils";
+
 const {
   getProductInfo
 } = workActions;
@@ -46,7 +48,7 @@ class HomeWidgeList extends Component {
 
   componentDidMount(){
     const { lastW } = this.refs;
-    // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100 
+    // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100
     if( lastW && (lastW.offsetHeight > window.innerHeight)){
       this.setState({
         lastStyle:{
@@ -83,6 +85,7 @@ class HomeWidgeList extends Component {
         } else {
           history.replace(`/${type}/${code}/${serviceCode}`);
         }
+        pushYA(serviceCode);
       }
       requestSuccess();
     });
@@ -120,7 +123,7 @@ class HomeWidgeList extends Component {
         props.clickHandler = () => {
           openFolder(child);
         }
-      } else if (type === 3 && !jsurl) {
+      } else if ((type === 3||type === 4||type === 5||type === 6||type === 7) && !jsurl) {
         let typeVal = serviceType === 2 ? 'app' : 'service';
         props.clickHandler = () => {
           this.getProductInfo(serviceCode, typeVal)
@@ -140,12 +143,12 @@ class HomeWidgeList extends Component {
           )
         }
         {
-          lastIndex 
-          ? 
+          lastIndex
+          ?
           <div className={WidgetCont} style={this.state.lastStyle}>
             <ul className={WidgetList} ref="lastW">{list}</ul>
-          </div> 
-          : 
+          </div>
+          :
           <div className={WidgetCont}>
             <ul className={WidgetList}>{list}</ul>
           </div>

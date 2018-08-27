@@ -25,6 +25,7 @@ const { pinDisplayNone, setPinAdd, setAddGroup, getPinGroup } = workActions;
   mapStateToProps(
     'pinDisplay',
     'current',
+		'pinGroup',
     {
       "namespace":"work"
     }
@@ -47,19 +48,29 @@ class Pin extends Component {
       menuData: []
     }
   }
-  componentDidMount() {
-    const { requestStart, requestSuccess, requestError, getPinGroup} = this.props;
-    getPinGroup().then( ({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      }
-      let menuData = [];
-      Object.assign(menuData, payload);
-      this.setState({
-        menuData,
-      });
-    })
-  }
+
+	componentDidMount() {
+		// const {requestStart, requestSuccess, requestError, getPinGroup} = this.props;
+		// getPinGroup().then( ({ error, payload }) => {
+		//   if (error) {
+		//     requestError(payload);
+		//   }
+		//   let menuData = [];
+		//   Object.assign(menuData, payload);
+		//   this.setState({
+		//     menuData,
+		//   });
+		// })
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const {
+			pinGroup
+		} = nextProps;
+		this.setState({
+			menuData: pinGroup,
+		});
+	}
 
   handleClickOutside(evt) {
     const {  pinDisplayNone, pinDisplay  } = this.props;

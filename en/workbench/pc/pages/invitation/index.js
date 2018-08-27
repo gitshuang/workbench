@@ -234,7 +234,7 @@ class Invitation extends Component {
               onChange={this.callback}
               className="demo-tabs"
             >
-              <TabPane tab="Invitation Link" key="1" className={tabPane1}>
+              <TabPane tab="Link" key="1" className={tabPane1}>
                 <p>Send the link to your friends</p>
                 <div className={urlArea}>
                   <span>Link</span>
@@ -243,7 +243,7 @@ class Invitation extends Component {
                 <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >Copy Link</ButtonBrand>
 
               </TabPane>
-              <TabPane tab="Email Invitation" key="2" className={tabPane2}>
+              <TabPane tab="Email" key="2" className={tabPane2}>
 
                 <p className={firstP}>Send a message to your friends</p>
                 <FormControl
@@ -284,7 +284,7 @@ class Invitation extends Component {
                 </ul> */}
                 <ButtonBrand className={submitBtn} onClick={this.submit} >Send</ButtonBrand>
               </TabPane>
-              <TabPane tab="QR Code Invitation" key="3" className={tabPane3}>
+              <TabPane tab="QR Code" key="3" className={tabPane3}>
                 <div>
                   <span>Scan QR code to enter the team directly</span>
                   <div className={qrCode} id="qrCode">
