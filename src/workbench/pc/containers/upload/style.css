@@ -1,13 +1,5 @@
 .upload_page{
   position: relative;
-  /* margin-top: -16px; */
-  width: 64px;
-  height: 64px;
-}
-.upload_page img{
-  position: absolute;
-  top: 0px;
-  left: 0px;
 }
 
 .uploadImg {
@@ -49,7 +41,8 @@
   height:24px; 
   background:rgba(0,0,0,0.6);
   position: absolute;
-  right: 0px;
+  left: 40px;
+  top: 36px;
   bottom: 5px;
   border-radius: 50%;
   padding-left: 3px;
