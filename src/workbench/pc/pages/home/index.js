@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
+import { openService } from 'public/regMessageTypeHandler';
 
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
@@ -212,7 +213,7 @@ class Home extends Component {
 
   linkTo = () => {
     this.closeHomeMark();
-    this.props.history.push(`/app/GZTSYS`);
+    openService('GZTSYS010');
   }
 
   closeHomeMark = () => {
