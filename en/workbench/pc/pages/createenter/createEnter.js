@@ -178,7 +178,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <FormControl maxLength="10" name="tenantName" placeholder="No more than 60 chars" />
+            <FormControl maxLength="60" name="tenantName" placeholder="No more than 60 chars" />
           </FormItem>
 
           <FormItem

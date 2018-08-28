@@ -58,7 +58,7 @@ export default class Page404 extends Component {
             <div className={remindWord}>Sorry, this page is not available.</div>
           </section>
           <section>
-            <Button shape="border" ><a href="/">Homepage</a></Button>
+            <Button shape="border" ><a href="/">Home</a></Button>
           </section>
         </div>
         <Pin outsideClickIgnoreClass="icon-dingzhi" />

@@ -1,0 +1,97 @@
+.wrap {
+    position: relative;
+    width:176px;
+    height:134px;
+    background:rgba(255,255,255,1);
+    box-shadow: 0px 1px 1px 0px rgba(74,81,93,0.1);
+    border-radius: 3px ;
+    overflow: hidden;
+}
+.titleContainer {
+    /*height: 42px;*/
+    /*line-height: 42px;*/
+    display: -webkit-box;
+}
+.title{
+    margin-top: 14px;
+    -webkit-box-flex: 1.0;
+    -webkit-box-pack: start;
+    line-height: 21px;
+    padding-left: 8px;
+    font-size: 16px;
+    color: #111111;
+    font-family: 'tahoma','Hiragino Sans GB','arial','Heiti SC','Microsoft YaHei','sans-serif';
+}
+.conLeft{
+    width:176px;
+    height: 134px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+.iconL {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    left: 123px;
+    top: 19px;
+    /*background: url('./left.png') 0 0 no-repeat #fff;*/
+    /*background-size:100% 100%;*/
+}
+
+.textL {
+    height:43px;
+    width: calc(100% - 8px);
+    font-size:32px;
+    font-family:Helvetica;
+    color:#555555;
+    line-height:43px;
+    position: absolute;
+    right: 6px;
+    bottom:30px;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.textL_below {
+    height:19px;
+    font-size:14px;
+    font-family: 'tahoma','Hiragino Sans GB','arial','Heiti SC','Microsoft YaHei','sans-serif';
+    color:#888888;
+    line-height:19px;
+    position: absolute;
+    right: 6px;
+    bottom: 8px;
+}
+.text_icon_down{
+    display: inline-block;
+    margin-right: 8px;
+    margin-bottom: -2px;
+    position: relative;
+    height: 0px;
+    width: 0px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 12px solid #00B39E;
+}
+.text_icon_up{
+    display: inline-block;
+    margin-right: 8px;
+    position: relative;
+    height: 0px;
+    width: 0px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 12px solid #E14C46;
+}
+.svg {
+    width: 16px;
+    height: 19px;
+    cursor: pointer;
+    opacity: 0.4;
+    position: absolute;
+    left: 9px;
+    bottom: 5px;
+}

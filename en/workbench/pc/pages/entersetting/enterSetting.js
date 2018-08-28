@@ -520,7 +520,7 @@ class CreateEnter extends Component {
 
         <FormItem
           showMast={false}
-          labelName={<span>Display Superior/Subordinate<font color="red">&nbsp;*&nbsp;</font></span>}
+          labelName={<span>Display Supr./Sub.<font color="red">&nbsp;*&nbsp;</font></span>}
           isRequire={false}
           valuePropsName="value"
           errorMessage="Please select."

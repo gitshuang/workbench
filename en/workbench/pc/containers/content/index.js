@@ -8,7 +8,8 @@ import IFrame from 'components/iframe';
 import {withRouter} from 'react-router-dom';
 import FinanceCloudContent from 'components/financeCloud'
 
-// import FinanceCloudContent from 'components/financeCloud/App'
+import workActions from 'store/root/work/actions';
+const { getPinGroup } = workActions;
 
 @withRouter
 @connect(
@@ -21,6 +22,7 @@ import FinanceCloudContent from 'components/financeCloud'
       namespace: 'work',
     },
   ),
+	{getPinGroup}
 )
 class ContentContainer extends Component {
   static propTypes = {
@@ -47,11 +49,11 @@ class ContentContainer extends Component {
   }
 
   render() {
-    const {hasTab, current, tabs, type, menus} = this.props;
+    const {hasTab, current, tabs, type, menus, getPinGroup} = this.props;
     if (type === 4) {
       return (<div className={contentArea}>
         <div className={`${content} ${active}`}>
-          <FinanceCloudContent current={{...current, extendDesc: current.ext1}} menuItems={menus}
+          <FinanceCloudContent onLoad={getPinGroup} env={process.env.NODE_ENV} current={{...current, extendDesc: current.ext1}} menuItems={menus}
                                updateCurrent={this.updateCurrent}/>
         </div>
       </div>);
@@ -68,7 +70,7 @@ class ContentContainer extends Component {
                       [active]: current.menuItemId === id,
                     }
                   )}>
-                    <IFrame title={id} url={location}/>
+                    <IFrame onLoad={getPinGroup} title={id} url={location}/>
                   </div>
                 )
               }
@@ -80,7 +82,7 @@ class ContentContainer extends Component {
       return (
         <div className={contentArea}>
           <div className={`${content} ${active}`}>
-            <IFrame title={current.menuItemId} url={current.url}/>
+            <IFrame onLoad={getPinGroup} title={current.menuItemId} url={current.url}/>
           </div>
         </div>
       );
