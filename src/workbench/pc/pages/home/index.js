@@ -92,8 +92,7 @@ class Home extends Component {
 
   componentWillMount() {
     const {
-      requestStart, requestSuccess, requestError, getWorkList, getApplicationList,
-      userInfo,
+      requestStart, requestSuccess, requestError, getWorkList,
     } = this.props;
     requestStart();
     const param = {
@@ -110,8 +109,30 @@ class Home extends Component {
       }
       requestSuccess();
     });
+  }
+  componentDidMount() {
+    window.addEventListener('scroll', this.updateViewport, false);
+    window.addEventListener('resize', this.updateViewport, false);
+    this.updateViewport();
+  }
+  componentDidUpdate() {
+    let total = 0;
+    this.props.workList.forEach((v) => {
+      total += v.children.length;
+    });
+    if (this.state.lazyLoadNum === total) {
+      window.removeEventListener('scroll', this.updateViewport);
+      window.removeEventListener('resize', this.updateViewport);
+    }
+
+    
     // 请求应用   判断是否有过期应用功能
-    const { admin } = userInfo;
+    const {
+      getApplicationList,
+      userInfo: {
+        admin
+      }, 
+    } = this.props;
     const timeType = this.totalTime();
     if (admin && timeType) {
       const time = new Date().format("yyyy-MM-dd");
@@ -131,21 +152,6 @@ class Home extends Component {
         }
         requestSuccess();
       });
-    }
-  }
-  componentDidMount() {
-    window.addEventListener('scroll', this.updateViewport, false);
-    window.addEventListener('resize', this.updateViewport, false);
-    this.updateViewport();
-  }
-  componentDidUpdate() {
-    let total = 0;
-    this.props.workList.forEach((v) => {
-      total += v.children.length;
-    });
-    if (this.state.lazyLoadNum === total) {
-      window.removeEventListener('scroll', this.updateViewport);
-      window.removeEventListener('resize', this.updateViewport);
     }
   }
   componentWillUnmount() {
