@@ -23,8 +23,6 @@
 
 .appValidate{
   color: rgb(244, 67, 54);
-  display: inline-block;
-  margin-left: 10px;
 }
 
 .upload_page :global(.u-button){
