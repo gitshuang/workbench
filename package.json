@@ -37,7 +37,7 @@
     "exceljs": "^1.5.1",
     "ficloud-workbench": "latest",
     "js-polyfills": "^0.1.42",
-    "lanbuild": "^1.0.1",
+    "lanbuild": "^1.0.6",
     "mutation-observer": "^1.0.3",
     "object-assign": "4.1.1",
     "promise-polyfill": "6.0.2",
