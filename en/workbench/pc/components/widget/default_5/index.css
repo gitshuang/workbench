@@ -1,11 +1,10 @@
 .goal {
     position: absolute;
-    margin-top:-42px;
     width:362px;
-    height:176px;
+    height:136px;
     background:rgba(255,255,255,1);
     box-shadow:0px 1px 1px 0px rgba(74,81,93,0.1);
-    border:1px solid rgba(208,208,208,0.19);
+    /*border:1px solid rgba(208,208,208,0.19);*/
     border-radius: 3px ;
     overflow: hidden;
     font-family: 'tahoma','Hiragino Sans GB','arial','Heiti SC','Microsoft YaHei','sans-serif';
@@ -79,7 +78,7 @@
 }
 .sn-progress-text {
     position: absolute;
-    top: 60%;
+    top: 22%;
     left: 0;
     width: 100%;
     text-align: center;

@@ -2,27 +2,15 @@
 
 }
 .enter_option button{
-  width: 107px;
-  height: 34px;
-  line-height: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-  font-family: PingFangSC-Regular;
-  border-radius: 3px;
-  margin: 0 auto;
-  background: transparent;
-  color: #ffffff;
+
 }
 
 .enter_option button i{
-  margin-top:3px;
+  position: relative;
   color: #ffffff;
   transition: all 0.3s;
 }
 
-.enter_option button:hover{
-  background: transparent;
-}
 .item_li{
   cursor: pointer;
 }

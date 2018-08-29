@@ -208,7 +208,7 @@ class CreateTeam extends Component {
               >
                 <Option value="1">Invite All</Option>
                 <Option value="2">Invite not Allowed</Option>
-                <Option value="0">Invite by Administrator</Option>
+                <Option value="0">Invite by Admin</Option>
               </Select>
             </FormItem>
 
@@ -232,7 +232,7 @@ class CreateTeam extends Component {
               </Radio.RadioGroup>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>Display watermark in contacts<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<div><span>Display watermark in contacts</span><font color='red'> &nbsp;*&nbsp;</font></div>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
                 <Radio value={0} >Prohibited</Radio>
                 <Radio value={1} >Allowed</Radio>

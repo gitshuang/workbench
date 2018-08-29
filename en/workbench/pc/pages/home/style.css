@@ -39,13 +39,20 @@
 
 .allBtn{
   width: 100px;
-  height: 48px;
-  line-height: 40px;
+  height: 40px;
+  line-height: 35px;
   position: absolute;
   right: 0px;
   top: 48px;
   text-align:center;
   color: #E14C46;
+  cursor: pointer;
+}
+
+.allBtn i{
+  position: relative;
+  top: 3px;
+  color: #E14C46 !important;
 }
 
 .btnDisable{

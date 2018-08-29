@@ -542,7 +542,7 @@ class CreateTeamContent extends Component {
                       <Select
                         dropdownClassName="teamselect"
                         value={item.admin ? "manage" : "member"}
-                        style={{ width: 88, marginRight: 6 }}
+                        style={{ width: 98, marginRight: 6 }}
                         onChange={(e) => { this.handleChange3(e, item.userId) }}
                       >
                         <Option value="manage">Admin</Option>
@@ -600,7 +600,7 @@ class CreateTeamContent extends Component {
                 animation="slide-up"
                 onVisibleChange={this.onVisibleChange}
               >
-                <Button className="um-box-vc um-box-center">Related Operations<Icon type="pull-down" /></Button>
+                <Button className="um-box-vc um-box-center">Operations<Icon type="pull-down" /></Button>
               </Dropdown> */}
 
               <EnterOption

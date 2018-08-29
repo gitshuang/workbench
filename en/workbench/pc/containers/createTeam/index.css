@@ -37,7 +37,8 @@
   font-size:14px;
   font-family:PingFangSC-Regular;
   line-height: 32px;
-  min-width: 70px;
+  width: 100px;
+  text-align: right;
 }
 :global(.ie9) .item label{
   float: left;
