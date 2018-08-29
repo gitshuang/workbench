@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import {
   wrap,
-  desc,
+  en,
   box,
   imageBox,
   content,
   est_context,
-  enter_context_div
 } from './index.css';
 
 import Team from 'assets/image/wgt/team.png';
@@ -27,18 +26,21 @@ class EstablishContent extends Component {
   }
 
   render() {
-    const { type } = this.props;
-    let titleCont = null;
-    if(type && type == "init"){
-      titleCont = (<div>
-        <h5>欢迎来到用友云</h5>
-        <p className={desc}>创建您的团队或企业，邀请好友一起体验吧。您也可以联系好友邀请您加入他/她的团队或企业。</p>
-      </div>)
-    }
-
+    // const { type } = this.props;
+    // console.log(process.env.LUN);
+    // debugger;
+    // let titleCont = null;
+    // if(type && type == "init"){
+    //   titleCont = (<div>
+    //     <h5>欢迎来到用友云</h5>
+    //     <p className={desc}>创建您的团队或企业，邀请好友一起体验吧。您也可以联系好友邀请您加入他/她的团队或企业。</p>
+    //   </div>)
+    // }
+    // {titleCont}
+    const { locale  } = window.diworkContext();
+    const enstyle = locale === 'en_US' ? en : '';
     return (
-      <div className={wrap}>
-        {titleCont}
+      <div className={`${wrap} ${enstyle}`}>
         <div className={`${est_context}`}>
           <div className={box}>
             <div className={imageBox}>
@@ -67,7 +69,7 @@ class EstablishContent extends Component {
               <img src = {Company} />
             </div>
             <h6>免费创建企业</h6>
-            <div className={`${content} ${enter_context_div}`}>
+            <div className={`${content}`}>
               <p>我是企业管理者,<br />需要把所有部门都刷新为赋能型组织并获得企业级服务。</p>
               <p>关键特性：</p>
               <ul className="clearfix">

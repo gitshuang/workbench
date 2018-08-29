@@ -87,6 +87,7 @@ module.exports = function (config) {
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': config.env,
         'process.env.HOST': config.host,
+        'process.env.LUN': JSON.stringify(goalFilePath),
         'process.env.LOCALHOST': config.localhost,
       }),
       new webpack.optimize.CommonsChunkPlugin({
