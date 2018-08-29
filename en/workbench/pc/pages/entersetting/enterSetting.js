@@ -494,7 +494,7 @@ class CreateEnter extends Component {
           >
             <Option value="1">Invite All </Option>
             <Option value="2">Invite not Allowed</Option>
-            <Option value="0">Invite by Administrator</Option>
+            <Option value="0">Invite by Admin</Option>
           </Select>
         </FormItem>
 

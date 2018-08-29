@@ -1,13 +1,5 @@
 .upload_page{
   position: relative;
-  /* margin-top: -16px; */
-  width: 64px;
-  height: 64px;
-}
-.upload_page img{
-  position: absolute;
-  top: 0px;
-  left: 0px;
 }
 
 .uploadImg {
@@ -22,22 +14,15 @@
 }
 
 .appImg{
-  /*background: rgba(186,191,197,0.18);*/
   background: rgba(190,193,200,1) url("assets/image/uploadImg.svg") no-repeat;
-
   width:64px;
   height:64px; 
-  /* background:rgba(190,193,200,1); */
   border-radius: 50%;
   background-position: 1px;
 }
-/* :global(.ie9) .appImg{
-  height:auto;
-} */
+
 .appValidate{
   color: rgb(244, 67, 54);
-  display: inline-block;
-  margin-left: 10px;
 }
 
 .upload_page :global(.u-button){
@@ -49,7 +34,8 @@
   height:24px; 
   background:rgba(0,0,0,0.6);
   position: absolute;
-  right: 0px;
+  left: 40px;
+  top: 36px;
   bottom: 5px;
   border-radius: 50%;
   padding-left: 3px;
@@ -64,6 +50,7 @@
   line-height: 24px;
   display: block;
 }
+
 .titlp_lab{
   position: absolute;
   width: 150px;
@@ -84,9 +71,9 @@
   z-index:2001;
   opacity: 0;
 }
+
 .ie9_form{ 
   position: absolute;
-  /* background: red; */
   top: 0px;
   right: 0px;
   width: 64px;
@@ -96,14 +83,7 @@
   padding-right: 3px;
 }
 
-.uploadImgIe9{
-  /* position: absolute;
-  bottom: 0px;
-  margin-bottom: 15px; */
-}
-
 .hidden_form{
-  /* display: none; */
   position: relative;
 }
 

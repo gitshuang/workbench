@@ -542,7 +542,7 @@ class CreateTeamContent extends Component {
                       <Select
                         dropdownClassName="teamselect"
                         value={item.admin ? "manage" : "member"}
-                        style={{ width: 88, marginRight: 6 }}
+                        style={{ width: 98, marginRight: 6 }}
                         onChange={(e) => { this.handleChange3(e, item.userId) }}
                       >
                         <Option value="manage">管理員</Option>

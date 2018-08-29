@@ -11,7 +11,7 @@ import EnterSetting from 'pages/entersetting/enterSetting';
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
 
-import { pageEnterprise, enterTitle, enterCont, hr, appBreadcrumb } from './style.css';
+import { content, pageEnterprise, enterTitle, enterCont, hr } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { getTeamInfo } = teamconfigActions;
@@ -90,11 +90,13 @@ class Updateenter extends Component {
             <Breadcrumbs data={[{ name: '企業認證' }]} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${pageEnterprise} content`}>
-          <div className={enterTitle} >企業認證</div>
-          <hr className={hr} />
-          <div className={enterCont} >
-            <EnterSetting updateenter="upgrade_enter" data={enterData} btlLabel="升級" />
+        <div className={content}>
+          <div className={`${pageEnterprise} content`}>
+            <div className={enterTitle} >企業認證</div>
+            <hr className={hr} />
+            <div className={enterCont} >
+              <EnterSetting updateenter="upgrade_enter" data={enterData} btlLabel="升級" />
+            </div>
           </div>
         </div>
       </div>

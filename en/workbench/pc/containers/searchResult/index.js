@@ -83,7 +83,7 @@ class searchResult extends Component {
       dataNum:1,
       enhancedPaginationText:{
         jump:'Go to',
-        jumpPage:'Page'
+        jumpPage:' '
       }
     };
   }

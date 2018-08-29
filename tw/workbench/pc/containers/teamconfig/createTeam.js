@@ -232,7 +232,7 @@ class CreateTeam extends Component {
               </Radio.RadioGroup>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>通訊錄顯示浮水印<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
+            <FormItem showMast={false} labelName={<div><span>通訊錄顯示浮水印</span><font color='red'> &nbsp;*&nbsp;</font></div>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
                 <Radio value={0} >禁止</Radio>
                 <Radio value={1} >允許</Radio>

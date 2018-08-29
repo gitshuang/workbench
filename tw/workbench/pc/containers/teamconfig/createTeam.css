@@ -3,7 +3,7 @@
   padding-top: 20px; 
 }
 .form_team{
-  width: 480px;
+  width: 100%;
   padding-top: 20px;
   margin: 0 auto;
   position: relative;
@@ -12,7 +12,7 @@
   padding-bottom:15px;
 }
 .enter_form :global(.u-label) {
-  width: 120px;
+  width: 40%;
   text-align: right;
   font-size: 14px;
 }
@@ -40,7 +40,7 @@
 }
 
 .enter_form :global(.u-form-submit) {
-  padding-left: 110px;
+  padding-left: 40%;
 }
 .enter_form :global(.u-form-submit>button) {
   width:338px;

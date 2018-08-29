@@ -96,7 +96,7 @@ class EnterOption extends Component {
               animation="slide-up"
               onVisibleChange={this.onVisibleChange}
             >
-              <Button className="um-box-vc um-box-center">Related Operations<Icon type="pull-down" className={this.state.visible ? up : ''} /></Button>
+              <Button className="um-box-vc um-box-center">Operations<Icon type="pull-down" className={this.state.visible ? up : ''} /></Button>
             </Dropdown>
         }
         {

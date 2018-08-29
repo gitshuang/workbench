@@ -25,7 +25,7 @@
   white-space: normal;
 }
 .header button{
-  width:107px;
+  padding: 0 10px;
   height:34px;
   line-height: 32px;
   border: 1px solid rgba(255, 255, 255, 0.8);

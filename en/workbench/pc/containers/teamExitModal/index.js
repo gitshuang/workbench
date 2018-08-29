@@ -66,42 +66,8 @@ class TeamRemoveModal extends Component {
         return false;
       }
       window.location.replace(window.location.origin);
-      // getSearchEnterOrTeam().then(({ error, payload }) => {
-      //   if (error) {
-      //     requestError(payload);
-      //     return false;
-      //   }
-      //   requestSuccess();
-      //   if (payload.length == 1) {//进入该企业或团队
-      //     if (!payload) return;
-      //     this.changeTenant(payload[0].tenantId);
-      //   } else if (payload.length == 0) {
-      //     const {
-      //       history,
-      //     } = this.props;
-      //     this.cancelFn();
-      //     window.location.replace(window.location.origin);
-      //   } else if (payload.length > 1) {
-      //     this.setState({
-      //       isManage: 2
-      //     });
-      //   }
-      // });
     });
   }
-
-  // changeTenant = (tenantId) => {
-  //   const {
-  //     location: {
-  //       origin,
-  //       pathname,
-  //       hash,
-  //     },
-  //   } = window;
-  //   window.location.replace(
-  //     `${origin ? origin : ''}${pathname ? pathname : ''}?tenantId=${tenantId}&switch=true`,
-  //   );
-  // }
 
   // 取消
   cancelFn = () => {
