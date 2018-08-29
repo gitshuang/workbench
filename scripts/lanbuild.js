@@ -9,6 +9,7 @@ var twDir = path.join(__dirname,'../os_fe_20180816_tw.xlsx'); //翻译人员翻�
 
 var i18n_addTags = path.join(__dirname,'../i18n_addTags');//生成的1
 var i18n_ = path.join(__dirname,'../i18n');//生成2
+var codePath = path.join(i18n_,'workbench/pc/');
 var defaultDir = path.join(__dirname,'../default.xlsx'); //生成3
 var enDirNew = path.join(__dirname,'../manager_new_en.xlsx'); //生成4
 var twDirNew = path.join(__dirname,'../manager_new_tw.xlsx'); //生成5
@@ -19,4 +20,4 @@ var managerAddTagsReg = /([\u4E00-\u9FA5]|[\uFE30-\uFFA0])+([\u4E00-\u9FA5]|[\uF
 var appStoreAddTagsReg = /[\u4E00-\u9FA5]+([\u4E00-\u9FA5]|[\uFE30-\uFFA0]|[0-9]|[\?\,\。\.\、])*/g;
 var osfeAddTagsReg =  /([\u4E00-\u9FA5]|[\uFE30-\uFFA0])+([\u4E00-\u9FA5]|[\uFE30-\uFFA0]|[0-9]|[\?\,\。\.\、\|\/])*/g; 
 
-lanbuild({type,basepath,i18n_addTags,i18n_,enDir,twDir,defaultDir,enDirNew,twDirNew,addTagsReg:osfeAddTagsReg});
+lanbuild({type,basepath,i18n_addTags,i18n_,enDir,twDir,defaultDir,enDirNew,twDirNew,codePath,addTagsReg:osfeAddTagsReg});
