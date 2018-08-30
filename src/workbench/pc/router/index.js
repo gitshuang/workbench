@@ -39,6 +39,8 @@ const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'
 const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "ManageTeamEnter" */'pages/manageTeamEnter'));
 // 动态
 const Dynamic = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/dynamic'));
+// 个人主页
+const HomePage = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/homepage'));
 
 const routes = [
   {
@@ -132,7 +134,11 @@ const routes = [
   {
     path: '/dynamic',
     component: Dynamic,
-  }
+  },
+  {
+    path: '/homepage/:label/:id',
+    component: HomePage,
+  },
 ];
 
 export default routes;
