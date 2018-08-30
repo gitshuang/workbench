@@ -30,7 +30,7 @@ export default function MainNavPanel(props){
         <div className={middleCon}>
           <a  className={`middleItem ${props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{open('login')}}>首頁</a>
           <a  className={`middleItem ${props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{open('service')}}>服務支援</a>
-          <a  className={`middleItem ${props.activeIndex*1 === 3?'actived':null}`} onClick={()=>{open('open')}}>  </a>
+          <a  className={`middleItem ${props.activeIndex*1 === 3?'actived':null}`} onClick={()=>{open('open')}}> 開放平台 </a>
           <a  className={`middleItem ${props.activeIndex*1 === 4?'actived':null}`} onClick={()=>{open('aboutus')}}>聯繫我們</a>
         </div>
         {

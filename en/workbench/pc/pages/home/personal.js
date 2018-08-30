@@ -46,7 +46,7 @@ class Personals extends Component {
       userInfo: {},
       personalText: {
         name: 'Enterprise',
-        edit: 'Homepage',
+        edit: 'Home',
         info: 'Emp. Info',
         invitation: 'Invite Member',
         exit: 'Quit',
