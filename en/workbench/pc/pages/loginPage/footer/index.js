@@ -90,7 +90,7 @@ class Footer extends Component {
                 </div>
              </div>
              <div className={FooterBottom}>
-                {/* <span className="police">Beijing Computer Information Network International Networking Unit Filing 11010802020548No.</span> */}
+                <span className="police"> Beijing Computer Information Network International Networking Unit Filing 11010802021935No.</span>
                 <span className="company">Yonyou Network Technology Co., Ltd © Copyright 2018 BeijingICPICP No. 5007539-24</span>
              </div>
         </div>
