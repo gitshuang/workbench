@@ -1,7 +1,5 @@
 import Home from 'pages/home';
 import asyncComponent from './lazyload';
-import LoginPage from 'pages/loginPage';
-import Service from 'pages/loginPage/service/index.js'
 const Page404 = asyncComponent(() => import(/* webpackChunkName: "Page404" */'pages/404'));
 // 工作页
 const Work = asyncComponent(() => import(/* webpackChunkName: "Work" */'pages/work'));
@@ -134,14 +132,6 @@ const routes = [
   {
     path: '/dynamic',
     component: Dynamic,
-  },
-  {
-    path:'/loginpage',
-    component:LoginPage,
-  },
-  {
-    path:'/service',
-    component:Service,
   }
 ];
 
