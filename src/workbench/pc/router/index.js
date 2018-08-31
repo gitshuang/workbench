@@ -136,7 +136,7 @@ const routes = [
     component: Dynamic,
   },
   {
-    path: '/homepage/:label/:id',
+    path: '/homepage/:userId/:key',
     component: HomePage,
   },
 ];

@@ -14,6 +14,7 @@ import manage from './manage';
 import team from './team';
 import actions from './actions';
 import teamconfig from './teamconfig';
+import homepage from './homepage';
 // import { setCurrent } from './api';
 
 const notification = Notification.newInstance({
@@ -241,6 +242,7 @@ export default function (state, action) {
     manage: manage(state ? state.manage : undefined, action),
     team: team(state ? state.team : undefined, action),
     teamconfig: teamconfig(state ? state.teamconfig : undefined, action),
+    homepage: homepage(state ? state.homepage : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;

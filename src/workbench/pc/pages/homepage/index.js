@@ -2,25 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, getHost } from '@u';
 
 import rootActions from 'store/root/actions';
+import homepageActions from 'store/root/homepage/actions';
 
+import Button from 'pub-comp/button';
+// import Tabs, { TabPane } from 'bee/tabs';
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
-import Upload from 'containers/upload';
+import IFrame from 'components/iframe_other';
 
-import { umContent, content, user, info } from './style.css';
+import { umContent, content, user, info, tabContent, active } from './style.css';
 import bg from 'assets/image/homepage.png';
+import userinfo from 'assets/image/userinfo.png';
+
 const { requestStart, requestSuccess, requestError } = rootActions;
+const { getUserInfo } = homepageActions;
 
 @withRouter
 @connect(
-  mapStateToProps(),
+  mapStateToProps(
+    'userInfo',
+    {
+      namespace: 'homepage',
+    },
+  ),
   {
     requestStart,
     requestSuccess,
     requestError,
+    getUserInfo,
   },
 )
 class HomePage extends Component {
@@ -28,6 +40,7 @@ class HomePage extends Component {
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
+    getUserInfo: PropTypes.func,
     history: PropTypes.shape({
       go: PropTypes.func,
       push: PropTypes.func,
@@ -37,21 +50,73 @@ class HomePage extends Component {
       pathname: PropTypes.string,
     }),
     routes: PropTypes.arrayOf(PropTypes.object),
+    userInfo: PropTypes.shape({
+      userAvator: PropTypes.string,
+      name: PropTypes.string,
+    }),
+    match: PropTypes.shape({
+
+    }),
   };
   static defaultProps = {
     requestStart: () => { },
     requestSuccess: () => { },
     requestError: () => { },
+    getUserInfo: () => { },
     history: {},
     location: {},
     routes: [],
-    logo: '',
+    userInfo:{
+      userAvator: '',
+      userName: ''
+    },
+    match: {}
   };
   constructor(props) {
     super(props);
+    this.userId = '';
     this.state = {
-      brm: [{ name: '个人主页' }]
+      brm: [{ name: '个人主页' }],
+      activetab: 'info',
+      iframeUrl: '',
+      items: [
+        {
+          key: 'info',
+          label: '资料',
+        },
+        {
+          key: 'speak',
+          label: '发言',
+        },
+        {
+          key: 'honor',
+          label: '荣耀',
+        }
+      ],
     };
+  }
+
+  componentWillMount(){
+    const { 
+      getUserInfo,
+      requestStart,
+      requestSuccess,
+      requestError,
+    } = this.props;
+    const { key, userId } = this.props.match.params;
+    this.setState({
+      activetab: key, 
+      iframeUrl: getHost(key),
+    });
+    this.userId = userId;
+    requestStart()
+    getUserInfo(userId).then(({ error, payload }) => {
+      if (error) {
+        requestError(error);
+        return false;
+      }
+      requestSuccess();
+    });
   }
 
   goBack = () => {
@@ -62,52 +127,79 @@ class HomePage extends Component {
     this.props.history.replace('');
   }
 
-  setUrl = (url) => {
+  // 点击tabs 分类
+  TabsClick = (activetab) => {
     this.setState({
-      logo: url
+      activetab,
+      iframeUrl: getHost(activetab),
+    }, () => {
+      this.props.history.push(`/homepage/${this.userId}/${activetab}`);
+    });
+  }
+
+  renderTabs = () => {
+    const { items, activetab } = this.state;
+    return items.map(item =>{
+      return (
+        <li 
+          key={item.key}
+          onClick = {()=>{this.TabsClick(item.key)}}
+          className={item.key === activetab ? active : ''}
+        >
+          {item.label}
+        </li>
+      )
     });
   }
 
   render() {
-    const { brm } = this.state;
+    const { brm, activetab, iframeUrl } = this.state;
+    const {
+      userInfo: {
+        userAvator,
+        userName
+      },
+    } = this.props;
     return (
       <div className="um-win">
         <div className="um-header header">
           <Header onLeftClick={this.goHome} iconName="computer" >
             <div>
-              <span>个人主页</span>
+              <span>{`${userName}的个人主页`}</span>
             </div>
           </Header>
           <div className="appBreadcrumb">
             <BreadcrumbContainer data={brm} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${umContent} content um-box um-content`}>
-          <div className={content}>
+        <div className={`${umContent} content um-vbox um-content`}>
+          <div className={`${content} um-vbox um-content`}>
             <div className={user}>
               <img src={bg} />
               <div className={info}>
                 <dl className="clearfix">
                   <dt>
-                  <Upload
-                    name='logo'
-                    logo={""}
-                    onChange={(e) => { this.setUrl("logo", e) }}
-                    tip=''
-                  />
+                    <img src={userAvator || userinfo} alt /> 
                   </dt>
                   <dd>
-                    <h5>于水水</h5>
+                    <h5>{userName}</h5>
                     <h6></h6>
                     <div>
-                      <button>发消息</button>
-                      <button>发邮件</button>
+                      <Button onClick={this.sendMessage}>发消息</Button>
+                      <Button onClick={this.sendEmail}>发邮件</Button>
                     </div>
                   </dd>
                 </dl>
               </div>
             </div>
-            
+            <div className={`${tabContent} um-content um-vbox`}>
+              <ul>
+                {this.renderTabs()}
+              </ul>
+              <div className="um-content">
+                <IFrame title={activetab} url={`${iframeUrl}?userId=${this.userId}`} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
