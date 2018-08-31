@@ -173,10 +173,10 @@ const reducer = handleActions({
       };
     }
     // 此处更改了url
-    const location = appendSearchParam(url, {
-      ...getOpenServiceData(serviceCode),
-      serviceCode,
-    });
+    // const location = appendSearchParam(url, {
+    //   ...getOpenServiceData(serviceCode),
+    //   serviceCode,
+    // });
     return {
       ...state,
       current: {
@@ -186,7 +186,7 @@ const reducer = handleActions({
         title: name,
         serviceCode,
         serviceId,
-        url: location,
+        url,
         ext1: state.current.ext1
       },
       brm,
