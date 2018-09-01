@@ -10,7 +10,7 @@ import {
   getProductInfo
 } from 'store/root/work/api';
 import {openMessage} from 'components/message';
-import {pushYA} from "../utils/utils";
+import {pushYA, appendSearchParam} from "../utils/utils";
 
 const {addBrm, popBrm} = workActions;
 const {
@@ -76,7 +76,7 @@ const handlers = {
         openServiceData[serviceCode] = data;
       }
       let typeVal = type === 2 ? 'app' : 'service';
-      getProductInfo(serviceCode, typeVal).then((data) => {
+      getProductInfo(serviceCode, typeVal).then((payload) => {
         const {
           curService: {
             serviceCode: subCode,
@@ -85,11 +85,12 @@ const handlers = {
           curMenuBar: {
             workspaceStyle
           }
-        } = data;
+        } = payload;
         const locationProtocol = window.location.protocol;
-        
+        const origin = window.location.origin;
         if (workspaceStyle === '_blank' ||(locationProtocol ==='https:' && url.split(':')[0] ==="http")) {
-          window.open(url)
+          const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`,data);
+          window.open(location);
         } else {
           this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
         }

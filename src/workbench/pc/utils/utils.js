@@ -58,3 +58,14 @@ export function getSumSign() {
 	}
 
 }
+
+export function appendSearchParam(url, params) {
+  if (url) {
+    const urlObj = new URL(url);
+    Object.keys(params).forEach((name) => {
+      urlObj.searchParams.append(name, params[name]);
+    });
+    return urlObj.toString();
+  }
+  return url;
+}
