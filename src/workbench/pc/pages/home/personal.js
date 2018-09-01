@@ -116,7 +116,15 @@ class Personals extends Component {
             context: '繁体中文'
           },
         ]
-      }
+      },
+      icons: [
+        {
+          type: 'Internet2',
+          title: '动态',
+          background: 'blue',
+          arguments: 'openDynamic',
+        },
+      ],
     };
   }
 
@@ -225,7 +233,7 @@ class Personals extends Component {
     const {
       requestDisplay,
       exitModal,
-      dynamicHide,
+      icons
     } = this.props;
     const { userInfo, language, hrefs, TeamData, currType } = this.state;
     let { personalText } = this.state;
@@ -233,7 +241,6 @@ class Personals extends Component {
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
     personalText.name = currType == 0 ? '企业' : '团队';
 
-    const dynamicType = !dynamicHide;
     return (
       <div>
         <Personal
@@ -248,7 +255,7 @@ class Personals extends Component {
           hrefs={hrefs}
           logout={logout}
           language={language}
-          dynamicType={dynamicType}
+          icons={icons || this.state.icons}
         />
         {
           exitModal ?

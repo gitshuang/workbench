@@ -97,13 +97,37 @@ class HomePage extends Component {
   }
 
   componentWillMount(){
+    const { key, userId } = this.props.match.params;
+    this.getUserInfo(key, userId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // const userId = nextProps.match.params ? nextProps.match.params.userId : '';
+    // const key = nextProps.match.params ? nextProps.match.params.key : '';
+    // const { activetab } = this.state;
+    // // 如果 新的key 和  新的userId  和之前的同时保持一致  则返回  
+    // if(key === activetab && this.userId === userId) return;
+    // // 如果新的key  和  当前保存的  activetab  不一致  设定为新的
+    // if(this.userId === userId && key !== activetab){
+    //   this.setState({
+    //     activetab: key,
+    //     iframeUrl: getHost(key),
+    //   });
+    //   return false;
+    // }
+    // // 当userId  发生变化  重新加载
+    // if(this.userId !== userId){
+    //   this.getUserInfo(key, userId);
+    // }
+  }
+
+  getUserInfo = (key, userId) => {
     const { 
       getUserInfo,
       requestStart,
       requestSuccess,
       requestError,
     } = this.props;
-    const { key, userId } = this.props.match.params;
     this.setState({
       activetab: key, 
       iframeUrl: getHost(key),

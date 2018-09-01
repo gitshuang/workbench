@@ -22,7 +22,7 @@ class Establish extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      icons: []
     };
   }
 
@@ -32,7 +32,7 @@ class Establish extends Component {
 
 
   render() {
-    const iconname = <Personals dynamicHide={true} />;
+    const iconname = <Personals icons={this.state.icons} />;
     return (
       <div className={`um-win ${wrap}`} >
         <div className="um-header" style={{ background: 'white', position: 'relative' }}>
