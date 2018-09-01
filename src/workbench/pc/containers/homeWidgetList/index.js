@@ -80,7 +80,8 @@ class HomeWidgeList extends Component {
             workspaceStyle
           }
         } = payload;
-        if (workspaceStyle === '_blank') {
+        const locationProtocol = window.location.protocol;
+        if (workspaceStyle === '_blank' ||(locationProtocol ==='https:' && url.split(':')[0] ==="http")) {
           window.open(url)
         } else {
           history.replace(`/${type}/${code}/${serviceCode}`);
