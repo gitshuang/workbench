@@ -185,7 +185,7 @@ class HeaderPage extends Component {
     const titleStyle = headerData && headerData.titleStyle && JSON.parse(headerData.titleStyle);
     const color = headerData && headerData.color;
 
-    const personal = <Personals />;
+    const personal = <Personals icons={[]}/>;
     const BtnShow = this.state.btnShow ? null : btnDisable;
 
     const title = <a href=""><img alt="" src={logoUrl} style={{ width: '86px' }} /></a>

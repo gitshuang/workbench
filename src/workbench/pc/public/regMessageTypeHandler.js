@@ -86,7 +86,9 @@ const handlers = {
             workspaceStyle
           }
         } = data;
-        if (workspaceStyle === '_blank') {
+        const locationProtocol = window.location.protocol;
+        
+        if (workspaceStyle === '_blank' ||(locationProtocol ==='https:' && url.split(':')[0] ==="http")) {
           window.open(url)
         } else {
           this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
