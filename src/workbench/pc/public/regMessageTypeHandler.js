@@ -86,6 +86,8 @@ const handlers = {
             workspaceStyle
           }
         } = data;
+        const locationProtocol = window.location.protocol;
+        
         if (workspaceStyle === '_blank' ||(locationProtocol ==='https:' && url.split(':')[0] ==="http")) {
           window.open(url)
         } else {
