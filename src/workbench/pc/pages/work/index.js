@@ -152,7 +152,7 @@ export default class Work extends Component {
     this.state = {
 			loaded: false,
 			width: 220,
-			marginLeftState: marginLeft
+			marginLeftState: 230,
     };
     this.goBack = this.goBack.bind(this);
   }
@@ -193,6 +193,7 @@ export default class Work extends Component {
           subcode: newSubcode,
         },
       },
+      expandedSidebar: newExpandedSidebar,
     } = nextProps;
     const {
       match: {
@@ -203,10 +204,29 @@ export default class Work extends Component {
         },
       },
       setCurrent,
+      expandedSidebar: oldExpandedSidebar,
     } = this.props;
     const typeChange = newType !== oldType;
     const codeChange = newCode !== oldCode;
     const subcodeChange = newSubcode !== oldSubcode;
+    // 增加判断sidebar  是否是展开
+    if(newExpandedSidebar !== oldExpandedSidebar){
+      const section = document.querySelector('section');
+      if(!newExpandedSidebar){
+        this.setState({
+          marginLeftState: 0,
+          width: 0
+        });
+      }else{
+        this.setState({
+          marginLeftState: 230,
+          width: 220
+        });
+        if (section) {
+          section.setAttribute("style", "width:220px")
+        }
+      }
+    }
     if (typeChange || codeChange) {
       this.getProductInfo(newCode, newType, newSubcode);
     } else if (subcodeChange) {
@@ -346,7 +366,7 @@ export default class Work extends Component {
 									</ResizableBox>
                 ) : null
               }
-							<div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} style={{marginLeft: this.state.marginLeftState}}>
+							<div className={`${hasTab} ${marginTop} ${marginLeft}`} style={{marginLeft: this.state.marginLeftState}}>
                 <div className={contentArea}>
                   <ContentContainer />
                 </div>
@@ -375,8 +395,7 @@ export default class Work extends Component {
 									</ResizableBox>
                 ) : null
               }
-							<div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}
-									 style={{marginLeft: expandedSidebar ? this.state.marginLeftState : 0}}>
+							<div className={`${hasTab} ${marginTop} ${marginLeft}`} style={{marginLeft: this.state.marginLeftState}}>
 								<div className={`${contentArea} ${contenthasTab}`}>
 									<ContentContainer hasTab/>
 								</div>
