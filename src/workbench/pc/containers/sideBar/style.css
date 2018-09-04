@@ -54,7 +54,7 @@
 .sideBar :global(.u-menu-inline .u-menu-item-selected),
 .sideBar :gloabl(.u-menu-inline .u-menu-selected),
 .sideBar :global(.u-menu-submenu-active.u-menu-submenu-inline>.u-menu-submenu-title:after){
-	background: #e4e4e4;
+	background: #e4e4e4!important;
 	color: #E14C46;
 }
 .sideBar :global(.u-menu-inline .u-menu-item-selected span){
