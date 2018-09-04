@@ -4,7 +4,7 @@
     {
       "type": "addressbook",
       "typeName": "通讯录",
-      "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/4690d500-a2e7-4561-8f8f-43f1c43fb480.js",
+      "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/f52208c6-05cf-48ff-83dc-241c853515bc.js",
       "content": [
         "{\"createTime\":1521699960800,\"creator\":\"\",\"emno\":\"\",\"id\":\"gtzceot7_1fa9092c-105a-4028-8402-206d735e78f3\",\"modifiedTime\":1521699960800,\"modifier\":\"\",\"orgName\":\"啊按照默认部门\",\"phone\":\"\",\"primaryKey\":\"gtzceot7_1fa9092c-105a-4028-8402-206d735e78f3\",\"shortName\":\"\",\"tenantId\":\"gtzceot7\",\"ts\":1521699960800,\"type\":\"\",\"typeName\":\"\",\"photo\":\"\",\"userCode\":\"yy_6305883904586810369JFLkz6\",\"userEmail\":\"wuqiongf@yonyou.com\",\"userId\":\"1fa9092c-105a-4028-8402-206d735e78f3\",\"userInfo\":\"{\\\"gloriesNum\\\":0,\\\"userAvatorNew\\\":\\\"\\\",\\\"userAvator\\\":\\\"\\\",\\\"mobile\\\":\\\"13693373753\\\",\\\"admin\\\":false,\\\"userEmail\\\":\\\"wuqiongf@yonyou.com\\\",\\\"redPacketsNum\\\":0,\\\"name\\\":\\\"吴琼\\\",\\\"userId\\\":\\\"1fa9092c-105a-4028-8402-206d735e78f3\\\",\\\"userCode\\\":\\\"yy_6305883904586810369JFLkz6\\\"}\",\"mobile\":\"13693373753\",\"name\":\"吴琼\",\"userNamePinyin\":\"wuqiong\"}",
         "{\"createTime\":1521699960782,\"creator\":\"\",\"emno\":\"\",\"id\":\"gtzceot7_055b18e9-d732-4e8e-9caa-16d1e9a1637e\",\"modifiedTime\":1521699960782,\"modifier\":\"\",\"orgName\":\"啊按照默认部门\",\"phone\":\"\",\"primaryKey\":\"gtzceot7_055b18e9-d732-4e8e-9caa-16d1e9a1637e\",\"shortName\":\"\",\"tenantId\":\"gtzceot7\",\"ts\":1521699960782,\"type\":\"\",\"typeName\":\"\",\"photo\":\"\",\"userCode\":\"wujdk7ft5fu7\",\"userEmail\":\"wujd@yonyou.com\",\"userId\":\"055b18e9-d732-4e8e-9caa-16d1e9a1637e\",\"userInfo\":\"{\\\"gloriesNum\\\":0,\\\"userAvatorNew\\\":\\\"\\\",\\\"userAvator\\\":\\\"\\\",\\\"mobile\\\":\\\"18515109689\\\",\\\"admin\\\":false,\\\"userEmail\\\":\\\"wujd@yonyou.com\\\",\\\"redPacketsNum\\\":0,\\\"name\\\":\\\"吴惊道\\\",\\\"userId\\\":\\\"055b18e9-d732-4e8e-9caa-16d1e9a1637e\\\",\\\"userCode\\\":\\\"wujdk7ft5fu7\\\"}\",\"mobile\":\"18515109689\",\"name\":\"吴惊道\",\"userNamePinyin\":\"wujingdao\"}",
@@ -13,7 +13,7 @@
     },
     {
       "type": "service",
-      "typeName": "应用/服务",
+      "typeName": "应用",
       "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/7e9019be-6af1-4d70-aa33-e08dd1f52979.js",
       "content": [
         "{\"relationUsers\":[],\"serviceIcon\":\"\",\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceCode\":\"6e882ed2-f06e-408b-9c5d-89371242c61f\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"serviceName\":\"高铁web\",\"relationServices\":[],\"url\":\"http://www.baidu.com\",\"teamMenbersUnuse\":false,\"createTime\":1516153183000,\"crossTenant\":false,\"enable\":true,\"tenantId\":\"gtzceot7\",\"phoneStatus\":false,\"applicationId\":\"ff266884-beeb-48d0-8643-696bf1c4df55\",\"serviceId\":\"e85dfde7-7f0f-4805-be2b-e9f56d3ccfd0\",\"webStatus\":true,\"selected\":false,\"primaryKey\":\"e85dfde7-7f0f-4805-be2b-e9f56d3ccfd0\",\"ts\":1516153183000}",

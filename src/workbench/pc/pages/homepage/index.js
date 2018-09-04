@@ -4,6 +4,9 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getHost } from '@u';
 
+import { trigger } from 'public/componentTools';
+import { openService } from 'public/regMessageTypeHandler';
+
 import rootActions from 'store/root/actions';
 import homepageActions from 'store/root/homepage/actions';
 
@@ -66,15 +69,14 @@ class HomePage extends Component {
     history: {},
     location: {},
     routes: [],
-    userInfo:{
+    userInfo: {
       userAvator: '',
-      userName: ''
+      userName: '',
     },
     match: {}
   };
   constructor(props) {
     super(props);
-    this.userId = '';
     this.state = {
       brm: [{ name: '个人主页' }],
       activetab: 'info',
@@ -96,7 +98,7 @@ class HomePage extends Component {
     };
   }
 
-  componentWillMount(){
+  componentWillMount() {
     const { key, userId } = this.props.match.params;
     this.getUserInfo(key, userId);
   }
@@ -122,17 +124,16 @@ class HomePage extends Component {
   }
 
   getUserInfo = (key, userId) => {
-    const { 
+    const {
       getUserInfo,
       requestStart,
       requestSuccess,
       requestError,
     } = this.props;
     this.setState({
-      activetab: key, 
+      activetab: key,
       iframeUrl: getHost(key),
     });
-    this.userId = userId;
     requestStart()
     getUserInfo(userId).then(({ error, payload }) => {
       if (error) {
@@ -153,21 +154,38 @@ class HomePage extends Component {
 
   // 点击tabs 分类
   TabsClick = (activetab) => {
+    const { userId } = this.props.userInfo;
+    const { activetab: prevactivetab } = this.state;
+    if (prevactivetab === activetab) {
+      alert(1)
+      return false;
+    }
     this.setState({
       activetab,
       iframeUrl: getHost(activetab),
     }, () => {
-      this.props.history.push(`/homepage/${this.userId}/${activetab}`);
+      this.props.history.push(`/homepage/${userId}/${activetab}`);
     });
+  }
+
+  sendMessage = () => {
+    const { userId } = this.props.userInfo;
+    trigger('IM', 'switchChatTo', {
+      yht_id: userId,
+    });
+  }
+
+  sendEmail = () => {
+    openService('XTWEIYOU0000000000');
   }
 
   renderTabs = () => {
     const { items, activetab } = this.state;
-    return items.map(item =>{
+    return items.map(item => {
       return (
-        <li 
+        <li
           key={item.key}
-          onClick = {()=>{this.TabsClick(item.key)}}
+          onClick={() => { this.TabsClick(item.key) }}
           className={item.key === activetab ? active : ''}
         >
           {item.label}
@@ -181,7 +199,9 @@ class HomePage extends Component {
     const {
       userInfo: {
         userAvator,
-        userName
+        userName,
+        company,
+        userId
       },
     } = this.props;
     return (
@@ -203,11 +223,11 @@ class HomePage extends Component {
               <div className={info}>
                 <dl className="clearfix">
                   <dt>
-                    <img src={userAvator || userinfo} alt /> 
+                    <img src={userAvator || userinfo} alt />
                   </dt>
                   <dd>
                     <h5>{userName}</h5>
-                    <h6></h6>
+                    <h6>{company}</h6>
                     <div>
                       <Button onClick={this.sendMessage}>发消息</Button>
                       <Button onClick={this.sendEmail}>发邮件</Button>
@@ -221,7 +241,7 @@ class HomePage extends Component {
                 {this.renderTabs()}
               </ul>
               <div className="um-content">
-                <IFrame title={activetab} url={`${iframeUrl}?userId=${this.userId}`} />
+                <IFrame title={activetab} url={`${iframeUrl}?userId=${userId}`} />
               </div>
             </div>
           </div>
