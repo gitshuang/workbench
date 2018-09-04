@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { mapStateToProps, getHost, logout } from '@u';
 import TeamExitModal from 'containers/teamExitModal';
 
+import Icon from 'pub-comp/icon';
+
 /*   actions   */
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
@@ -119,10 +121,14 @@ class Personals extends Component {
       },
       icons: [
         {
-          type: 'Internet2',
-          title: '动态',
+          element: <Icon title="动态" type="Internet2" />,
           background: 'blue',
           arguments: 'openDynamic',
+        },
+        {
+          element: <Icon title="荣耀" type="glory" />,
+          background: 'red',
+          arguments: 'openHomepage',
         },
       ],
     };
@@ -214,9 +220,14 @@ class Personals extends Component {
   }
 
   dispatch = (action) => {
-    const { routers, currType } = this.state;
+    const { routers, currType, userInfo } = this.state;
+    const { history } = this.props;
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
+      return false;
+    }
+    if(action === "openHomepage"){
+      history.push(`/homepage/${userInfo.userId}/honor`);
       return false;
     }
     if (routers[action]) {

@@ -8,7 +8,7 @@
         ],
         "type": "addressbook",
         "typeName": "通讯录",
-        "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/92afaee0-ddd8-4f02-9826-22d732696fe5.js",
+        "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/f52208c6-05cf-48ff-83dc-241c853515bc.js",
         "last": true,
         "totalElements": 1,
         "totalPages": 1,
@@ -21,7 +21,7 @@
       {
         "content": [],
         "type": "service",
-        "typeName": "应用/服务",
+        "typeName": "应用",
         "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/74c230eb-531d-4530-8430-728bbf64bae2.js",
         "last": true,
         "totalElements": 0,
