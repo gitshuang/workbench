@@ -57,6 +57,9 @@
 	background: #e4e4e4!important;
 	color: #E14C46;
 }
+.sideBar :global(.u-menu-inline .u-menu-item-selected){
+	background: #e4e4e4!important;
+}
 .sideBar :global(.u-menu-inline .u-menu-item-selected span){
 	color: #E14C46;
 }
