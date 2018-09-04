@@ -14,7 +14,7 @@
             "{\"modifiedTime\":1516956898000,\"serviceIcon\":\"https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/3ac6a47e-07a4-429c-96a2-aeab58361381/1ARaY3-3.jpg\",\"serviceCode\":\"3eaa1dff-3efb-4905-b9ce-fac7846b5f8d\",\"clientStatus\":false,\"hasWidget\":false,\"capable\":false,\"enable\":true,\"phoneStatus\":false,\"serviceId\":\"e2c04461-9ff0-4533-ac5b-76dcfeccb5bd\",\"webStatus\":true,\"selected\":false,\"relationUsers\":[],\"simpleApplicationStatus\":false,\"everyone\":false,\"level\":0,\"serviceName\":\"app测试1\",\"relationServices\":[],\"url\":\"baidu\",\"teamMenbersUnuse\":false,\"createTime\":1516782381000,\"crossTenant\":false,\"tenantId\":\"gtzceot7\",\"applicationId\":\"754c3e47-1de6-4a9f-9d7c-3a54b3567d54\",\"primaryKey\":\"e2c04461-9ff0-4533-ac5b-76dcfeccb5bd\",\"ts\":1516782381000}"
         ],
         "type": "service",
-        "typeName": "应用/服务",
+        "typeName": "应用",
         "renderUrl": "https://cdn.yonyoucloud.com/diwork/widget/7e9019be-6af1-4d70-aa33-e08dd1f52979.js",
         "last": true,
         "totalElements": 52,
