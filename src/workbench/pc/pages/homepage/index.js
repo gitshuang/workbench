@@ -100,17 +100,40 @@ class HomePage extends Component {
 
   componentWillMount() {
     const { key, userId } = this.props.match.params;
-    this.getUserInfo(key, userId);
+    this.setState({
+      activetab: key,
+      iframeUrl: getHost(key),
+    });
+    this.getUserInfo(userId);
   }
 
   componentWillReceiveProps(nextProps) {
-    // const userId = nextProps.match.params ? nextProps.match.params.userId : '';
+    const newUserId = nextProps.match.params ? nextProps.match.params.userId : '';
+    const key = nextProps.match.params ? nextProps.match.params.key : '';
+    const { activetab } = this.state;
+    const {
+      userInfo: {
+        userId
+      }
+    } = this.props;
+
+    if (userId && newUserId && newUserId !== userId) {
+      this.getUserInfo(newUserId);
+    }
+
+    if (activetab && key && key !== activetab) {
+      this.setState({
+        activetab: key,
+        iframeUrl: getHost(key),
+      });
+    }
+
     // const key = nextProps.match.params ? nextProps.match.params.key : '';
     // const { activetab } = this.state;
-    // // 如果 新的key 和  新的userId  和之前的同时保持一致  则返回  
-    // if(key === activetab && this.userId === userId) return;
+    // 如果 新的key 和  新的userId  和之前的同时保持一致  则返回  
+    // if (key === activetab && this.userId === userId) return;
     // // 如果新的key  和  当前保存的  activetab  不一致  设定为新的
-    // if(this.userId === userId && key !== activetab){
+    // if (this.userId === userId && key !== activetab) {
     //   this.setState({
     //     activetab: key,
     //     iframeUrl: getHost(key),
@@ -118,22 +141,19 @@ class HomePage extends Component {
     //   return false;
     // }
     // // 当userId  发生变化  重新加载
-    // if(this.userId !== userId){
+    // if (this.userId !== userId) {
     //   this.getUserInfo(key, userId);
     // }
   }
 
-  getUserInfo = (key, userId) => {
+  getUserInfo = (userId) => {
     const {
       getUserInfo,
       requestStart,
       requestSuccess,
       requestError,
     } = this.props;
-    this.setState({
-      activetab: key,
-      iframeUrl: getHost(key),
-    });
+
     requestStart()
     getUserInfo(userId).then(({ error, payload }) => {
       if (error) {

@@ -236,9 +236,13 @@ class searchResult extends Component {
     });
   }
 
-  openHomepage = (userId) => {
+  openHomepage = (userId,type) => {
     const { history } = this.props;
-    history.push(`/homepage/${userId}/info`);
+    if(type){
+      history.push(`/homepage/${userId}/${type}`);
+    }else{
+      history.push(`/homepage/${userId}/info`);
+    }
   }
 
   // 渲染列表页面
