@@ -177,7 +177,6 @@ class HomePage extends Component {
     const { userId } = this.props.userInfo;
     const { activetab: prevactivetab } = this.state;
     if (prevactivetab === activetab) {
-      alert(1)
       return false;
     }
     this.setState({
