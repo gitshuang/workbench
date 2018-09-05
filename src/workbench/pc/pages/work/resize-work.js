@@ -23,6 +23,7 @@ import Pin from 'containers/pin';
 /*  style样式库组件  */
 import styles from './style.css';
 
+import { ResizableBox } from 'react-resizable';
 
 /*  定义style  css-loader  */
 const {
@@ -150,6 +151,9 @@ export default class Work extends Component {
     super(props);
     this.state = {
 			loaded: false,
+			width: 220,
+      marginLeftState: 230,
+      height: 500,
     };
     this.goBack = this.goBack.bind(this);
   }
@@ -193,6 +197,7 @@ export default class Work extends Component {
           subcode: newSubcode,
         },
       },
+      expandedSidebar: newExpandedSidebar,
     } = nextProps;
     const {
       match: {
@@ -203,10 +208,29 @@ export default class Work extends Component {
         },
       },
       setCurrent,
+      expandedSidebar: oldExpandedSidebar,
     } = this.props;
     const typeChange = newType !== oldType;
     const codeChange = newCode !== oldCode;
     const subcodeChange = newSubcode !== oldSubcode;
+    // 增加判断sidebar  是否是展开
+    if(newExpandedSidebar !== oldExpandedSidebar){
+      const section = document.querySelector('section');
+      if(!newExpandedSidebar){
+        this.setState({
+          marginLeftState: 0,
+          width: 0
+        });
+      }else{
+        this.setState({
+          marginLeftState: 230,
+          width: 220
+        });
+        if (section) {
+          section.setAttribute("style", "width:220px")
+        }
+      }
+    }
     if (typeChange || codeChange) {
       this.getProductInfo(newCode, newType, newSubcode);
     } else if (subcodeChange) {
@@ -299,8 +323,18 @@ export default class Work extends Component {
   }
 
 
+	onResize = (event, {element, size}) => {
+  	this.setState({width: size.width, marginLeftState: size.width + 10});
+		const section = document.querySelector('section');
+		if (section) {
+			section.setAttribute("style", "width:" + size.width + "px")
+		}
+	};
+
   makeLayout = () => {
 		const { expandedSidebar, type } = this.props;
+		const header = document.querySelector('.um-header');
+		const iframe = document.querySelector('iframe');
 		  switch (type) {
         case 1:
           return (
@@ -316,15 +350,27 @@ export default class Work extends Component {
           );
         case 2:
           return (
-            <div style={{}}>
+            <div style={{height: "100%"}}>
               {
                 expandedSidebar ? (
-                  <div className={sideBarArea} >
-                    <SideBarContainer />
-                  </div>
+									<ResizableBox width={this.state.width} axis="x"
+																height={this.state.width}
+																minConstraints={[220, 150]} maxConstraints={[document.body.offsetWidth / 3, 300]}
+																onResize={this.onResize}
+																onResizeStart={() => {
+																	iframe && iframe.setAttribute('style', 'pointer-events:none')
+																}}
+																onResizeStop={() => {
+																	iframe && iframe.setAttribute('style', 'pointer-events:auto')
+																}}
+									>
+										<div className={sideBarArea} style={{width: this.state.width}}>
+											<SideBarContainer className="text"/>
+										</div>
+									</ResizableBox>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} >
+							<div className={`${hasTab} ${marginTop} ${marginLeft}`} style={{marginLeft: this.state.marginLeftState}}>
                 <div className={contentArea}>
                   <ContentContainer />
                 </div>
@@ -333,22 +379,34 @@ export default class Work extends Component {
           );
         case 3:
           return (
-            <div style={{}}>
+            <div style={{height: "100%"}}>
               {
                 expandedSidebar ? (
-                  <div className={sideBarArea} >
-                    <SideBarContainer />
-                  </div>
+									<ResizableBox width={this.state.width} axis="x"
+																height={this.state.width}
+																minConstraints={[220, 150]} maxConstraints={[document.body.offsetWidth / 3, 300]}
+																onResize={this.onResize}
+																onResizeStart={() => {
+																	iframe && iframe.setAttribute('style', 'pointer-events:none')
+																}}
+																onResizeStop={() => {
+																	iframe && iframe.setAttribute('style', 'pointer-events:auto')
+																}}
+									>
+										<div className={sideBarArea} style={{width: this.state.width}}>
+											<SideBarContainer/>
+										</div>
+									</ResizableBox>
                 ) : null
               }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
-                <div className={`${contentArea} ${contenthasTab}`}>
-                  <ContentContainer hasTab />
-                </div>
-                <div className={tabArea}>
-                  <TabsContainer />
-                </div>
-              </div>
+							<div className={`${hasTab} ${marginTop} ${marginLeft}`} style={{marginLeft: this.state.marginLeftState}}>
+								<div className={`${contentArea} ${contenthasTab}`}>
+									<ContentContainer hasTab/>
+								</div>
+								<div className={tabArea}>
+									<TabsContainer/>
+								</div>
+							</div>
             </div>
           );
         default:
