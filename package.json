@@ -32,7 +32,7 @@
     "babel-runtime": "6.26.0",
     "classnames": "2.2.5",
     "custom-event-polyfill": "^0.3.0",
-    "diwork-business-components": "^1.2.31",
+    "diwork-business-components": "^1.2.37",
     "es6-symbol": "3.1.1",
     "exceljs": "^1.5.1",
     "ficloud-workbench": "latest",
