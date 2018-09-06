@@ -48,7 +48,10 @@ class LoginPage extends Component {
   componentDidMount() {
   
   }
-
+  lanCallBack = (lanCode) =>{
+    this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
+    this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+  }
   
   loginClick = () => {
     this.setState({ loginModalShow: true })
@@ -68,8 +71,8 @@ class LoginPage extends Component {
     }
     return (
       <div className={HomePagePanel}>
-        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} />
-        <div ref={(ref) => { this.amBody = ref }} className={`${HomeOnePage} amBody animation0`}>
+        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} lanCallBack={this.lanCallBack}/>
+        <div className={`${HomeOnePage} amBody`}>
           <div className="videoContainer"></div>
           <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace} loginModalShow={loginModalShow} />
         </div>

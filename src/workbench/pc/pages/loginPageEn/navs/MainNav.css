@@ -43,6 +43,7 @@
     padding-left: 30px;
     position: relative;
     cursor: pointer;
+    white-space: nowrap;
 
 }
 .MainNav .leftCon :global(.leftConFake){
@@ -146,19 +147,13 @@
   opacity: 1;
 }
 /*多语*/
-.language{
-    position: absolute;
-    width: 110px;
-    right: 40px;
-    top: 20px;
-  }
-  .language :global(.u-select .u-select-selection){
+  .languageClass :global(.u-select .u-select-selection){
     border: none;
   }
   
-  .language :global(.u-select .u-select-arrow){
+  .languageClass :global(.u-select .u-select-arrow){
     right: auto;
-    left: 70px;
+    left: 80px;
   }
   
   :global(.gnoreclass.u-select-dropdown){

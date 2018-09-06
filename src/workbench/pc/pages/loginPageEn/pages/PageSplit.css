@@ -110,7 +110,7 @@
     position: absolute;
     top: 0;
     left: 50%;
-    width: 620px;
+    width: 600px;
     height: 150px;
     margin-left: -310px;
     margin-top: -40px;
@@ -118,10 +118,20 @@
 :global(.viewSeven .mainTitle){
     font-size: 40px;
     line-height: 56px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     letter-spacing: 1px;
     color: #fff;
+    text-align: center;
  }
+:global(.viewSeven .mainCon){
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(255,255,255,1);
+    line-height: 33px;
+    text-align: center;
+    padding-bottom: 42px;
+
+}
 :global(.mainContent.viewSeven  .laymid .logo) {
     background-image: url(https://i.alipayobjects.com/i/ecmng/png/201501/4JdkvPYoOr.png);
     margin-bottom: 10px;

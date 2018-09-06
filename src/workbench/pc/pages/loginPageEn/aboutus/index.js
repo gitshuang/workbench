@@ -42,13 +42,13 @@ class AboutUs extends Component {
             {/* <TopNav /> */}
             <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'4'} history={this.props.history}/>
            <div className="mainCon">
-                <div className="title">联系我们</div>
+                <div className="title">Contact Us</div>
                 <div className="absoutUsCon">
                     <div className="lefCon">
-                        <span className="subtitle">北京总部</span>
-                        <span className="desc">地址：北京市海淀区北清路68号用友产业园</span>
-                        <span className="desc">电话：010-62438888</span>
-                        <span className="desc">邮箱：diwork@yonyou.com</span>
+                        <span className="subtitle">Beijing Headquarters</span>
+                        <span className="desc">Address：Yonyou software Park, No. 68 Beiqing Road, Haidian District, Beijing, China</span>
+                        <span className="desc">Phone：010-62438888</span>
+                        <span className="desc">Mail：diwork@yonyou.com</span>
 
                     </div>
                     <div className="rightCon">

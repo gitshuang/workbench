@@ -1,6 +1,7 @@
 .applyForm {
   padding-bottom: 30px;
-  width:510px;
+  /* width:510px; */
+  width: 570px;
 }
 .applyForm :global(.u-input-inner>input){
   width: 370px!important;
@@ -40,7 +41,7 @@
   color: rgba(51,51,51,1);
   line-height: 50px;
   text-align: right;
-  width: 140px;
+  width: 200px;
   padding-right: 30px;
 }
 body  .applyForm :global(.u-form-control),

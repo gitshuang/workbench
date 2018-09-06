@@ -52,9 +52,9 @@ class Service extends Component {
             <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={''} activeIndex={'2'} history={this.props.history}/>
             <div className="serviceOne">
                   <div className="mainContent">
-                      <span className="title">定制服务</span>
-                      <span className="desc">专家咨询团队提供一对一解决方案</span>
-                      <div className="serviceBtn" onClick={()=>this.scrollToAnchor('apply')}>马上定制</div>
+                      <span className="title">Customized Service</span>
+                      <span className="desc">The expert consulting team provides one-to-one solutions</span>
+                      <div className="serviceBtn" onClick={()=>this.scrollToAnchor('apply')}>Customize Now</div>
                   </div>
             </div>
             <div className="serviceTwo">
@@ -62,61 +62,61 @@ class Service extends Component {
                       <div className="leftTop twoItem">
                         <img src={icon1} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">免费咨询</span>
-                             <span className="subcon">专家团队，根据企业需求，提供产品方案</span>
+                             <span className="title">Free Consultation</span>
+                             <span className="subcon">The expert consulting team provides product solutions according to business needs.</span>
                         </div>
                       </div>
                       <div className="rightTop twoItem">
                         <img src={icon2} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">产品模块定制</span>
-                             <span className="subcon">提供产品部署方案，可随意选择需要的产品</span>
+                             <span className="title">Product Modular Customization</span>
+                             <span className="subcon">Provide product development plans, choose any product according to business needs.</span>
                         </div>
                       </div>
                       <div className="leftBottom twoItem">
                         <img src={icon3} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">专属化定制</span>
-                             <span className="subcon">产品模块可部署到专属机房，免去您的安全担忧</span>
+                             <span className="title">Exclusive Customization</span>
+                             <span className="subcon">Product modules can be deployed to exclusive computer labs, eliminating your security concerns.</span>
                         </div>
                       </div>
                       <div className="rightBottom twoItem">
                         <img src={icon4} alt="" className="icon"/>
                         <div className="con">
-                             <span className="title">上门演示</span>
-                             <span className="subcon">遍布全国的专业售前团队，整装待命</span>
+                             <span className="title">On-Site Demonstration</span>
+                             <span className="subcon">Professional pre-sales team all over the country and ready to go.</span>
                         </div>
                       </div>
                   </div>
             </div>
             <div className={serviceThree}>
                   <div className="mainContent">
-                      <span className="title">服务流程</span>
+                      <span className="title">Service Process</span>
                       <div className="processCon">
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">1</span>
-                            <span className={tipTitle}>填写信息</span>
-                            <span className={tipCon}>录入您的个人信息，方便我们与您取得联系</span>
+                            <span className={tipTitle}>Information</span>
+                            <span className={tipCon}>Enter your personal information so that we can get in touch with you. </span>
                         </div>
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">2</span>
-                            <span className={tipTitle}>电话沟通</span>
-                            <span className={tipCon}>售前人员将与您取得联系，和您讨论定制需求</span>
+                            <span className={tipTitle}>Communication</span>
+                            <span className={tipCon}>The pre-sales staff will contact you to discuss your customization needs.</span>
                         </div>
                         <div className="process">
                             <img src={dot} alt="" className="processDot"/>
                             <span className="dotNum">3</span>
-                            <span className={tipTitle}>专家团队上门</span>
-                            <span className={tipCon}>根据您的需求，我们可以提供专家团队上门解决方案</span>
+                            <span className={tipTitle}>On-Site Service</span>
+                            <span className={tipCon}>The expert consulting team provides on-site solutions according to your business needs. </span>
                         </div>
                       </div>
                   </div>
             </div>
             <div className={serviceFour} id="apply">
                   <div className="mainContent">
-                      <span className="title">申请服务</span>
+                      <span className="title">Applicaiton</span>
                       {/* <div className="applyService">
                       </div> */}
                       <CreateEnter />

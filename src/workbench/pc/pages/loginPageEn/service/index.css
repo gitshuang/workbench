@@ -129,9 +129,9 @@
 }
 .ServicePanel :global(.serviceTwo .con .subcon) {
     display: block;
-    font-size: 16px;
-    color: rgba(153,153,153,1);
-    line-height: 22px;
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
 }
 /*第三部分*/
 .serviceThree{
@@ -248,7 +248,7 @@
     padding-bottom: 30px;
 }
 .serviceFour :global(.applyService){
-    width: 510px;
+    width: 570px;
     margin: 0 auto;
     transform: translateX(-70px);
 }

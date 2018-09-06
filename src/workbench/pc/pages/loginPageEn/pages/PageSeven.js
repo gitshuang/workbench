@@ -14,10 +14,11 @@ import{
               !props.loginModalShow &&(
                 <div className={`laymid`} style={{marginTop:`${props.sevenSpace}px`}}>
                   {/* <div className="logo"></div> */}
-                  <div className="mainTitle">“相信美好，立刻开始数字化工作”</div>
+                  <div className="mainTitle">Where Digital Work Begins</div>
+                  <div className="mainCon">A powerful new digital workspace integrating HR , Finance, Collabration tools..., all in yonyou cloud</div>
                   <div className="clickMe clearfix">
-                    <span  className="loginBtn clickBtn " onClick={props.loginClick}>登录</span>
-                    <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">立即注册</a>
+                    <span  className="loginBtn clickBtn " onClick={props.loginClick}>Sign in</span>
+                    <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">Get started</a>
                   </div>
                 </div>
               )

@@ -11,7 +11,7 @@ import rootActions from 'store/root/actions';
 
 import Form, { FormItem } from 'bee/form';
 import FormControl from 'bee/form-control';
-import Select from 'bee/select';
+import Select from 'bee-select';
 import CitySelect from 'bee/city-select';
 import { openMess } from 'pub-comp/notification';
 import 'assets/style/Form.css';
@@ -46,8 +46,8 @@ class CreateEnter extends Component {
       tenantTel:'',
     };
     // this.address = '北京|北京|东城区|';
-    this.province = '北京';
-    this.city = '北京';
+    this.province = 'Beijing';
+    this.city = 'Beijing';
   }
 
   onChange = (obj) => {
@@ -118,85 +118,85 @@ class CreateEnter extends Component {
         <Form  className={applyForm} showSubmit={false}>
         <FormItem
             showMast={false}
-            labelName={<span>企业名称<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>Company Name <font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="请输入企业名称"
+            errorMessage="Please enter Company Name "
             method="blur"
             inline
           >
-            <FormControl ref={ref=>this.companyRef = ref}name="companyname" placeholder="请输入企业名称" value={companyname} onChange={(e) => { this.inputOnChange(e, 'companyname'); }} />
+            <FormControl ref={ref=>this.companyRef = ref}name="companyname" placeholder="Please enter Company Name " value={companyname} onChange={(e) => { this.inputOnChange(e, 'companyname'); }} />
           </FormItem>
         
           <FormItem
             showMast={false}
-            labelName={<span>行业<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>Industry<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="请选择所属行业"
+            errorMessage="Please choose an industry"
             method="blur"
             inline
           >
             <Select
-              defaultValue="-所属行业-"
+              defaultValue="-Industry-"
               name="tenantIndustry"
               style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
-              <Option value="A">农、林、牧、渔业</Option>
-              <Option value="B">采矿业</Option>
-              <Option value="C">制造业</Option>
-              <Option value="D">电力、热力、燃气及水的生产和供应业</Option>
-              <Option value="S">环境和公共设施管理业、社会保障和社会组织</Option>
-              <Option value="E">建筑业</Option>
-              <Option value="G">交通运输、仓储业和邮政业</Option>
-              <Option value="I">信息传输、计算机服务和软件业</Option>
-              <Option value="F">批发和零售业</Option>
-              <Option value="H">住宿、餐饮业</Option>
-              <Option value="J">金融、保险业</Option>
-              <Option value="K">房地产业</Option>
-              <Option value="L">租赁和商务服务业</Option>
-              <Option value="M">科学研究、技术服务和地质勘查业</Option>
-              <Option value="N">水利、环境和公共设施管理业</Option>
-              <Option value="O">居民服务和其他服务业</Option>
-              <Option value="P">教育</Option>
-              <Option value="Q">卫生、社会保障和社会服务业</Option>
-              <Option value="R">文化、体育、娱乐业</Option>
-              <Option value="T">国际组织</Option>
+              <Option value="A">Agriculture, Forestry, Animal Husbandry, and Fishery Industries</Option>
+              <Option value="B">Mining Industry</Option>
+              <Option value="C">Manufacturing</Option>
+              <Option value="D">Electricity/Heating Power/Gas/Water Production and Supply Industry</Option>
+              <Option value="S">Environment and Public Administration, Social Insurance, and Social Org</Option>
+              <Option value="E">Construction Industry</Option>
+              <Option value="G">Transportation, Warehousing and Postal Services</Option>
+              <Option value="I">Info Transmission, Computer Service and Software Industry</Option>
+              <Option value="F">Wholesale and Retail Trade</Option>
+              <Option value="H">Accommodation and Catering Industry</Option>
+              <Option value="J">Finance and Insurance Industries</Option>
+              <Option value="K">Real Estate Industry</Option>
+              <Option value="L">Leasing and Business Services</Option>
+              <Option value="M">Scientific Research, Technical Services and Geological Prospecting</Option>
+              <Option value="N">Water, Environment and Public Facilities Management Industry</Option>
+              <Option value="O">Resident Services and Other Services</Option>
+              <Option value="P">Education</Option>
+              <Option value="Q">Health, Social Security and Social Service Industry</Option>
+              <Option value="R">Culture, Sports and Recreation</Option>
+              <Option value="T">International Organization</Option>
             </Select>
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>规模<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>Company Scale <font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="请选择规模范围"
+            errorMessage="Please Scale Range"
             method="blur"
             inline
           >
             <Select
-              defaultValue="-规模范围-"
+              defaultValue="-Scale Range-"
               name="tenantSize"
               style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
             >
-              <Option value="A">0－50</Option>
+              <Option value="A">0-50</Option>
               <Option value="B">51-100</Option>
               <Option value="C">101-200</Option>
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
-              <Option value="F">1001－2000</Option>
-              <Option value="G">2000人</Option>
+              <Option value="F">1001-2000</Option>
+              <Option value="G">2000people</Option>
             </Select>
           </FormItem>
 
           <FormItem
             showMast={false}
-            labelName={<span>所在省市<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>Province/City<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire={false}
             valuePropsName="value"
-            errorMessage="请输入所在省市"
+            errorMessage="Please enter province/city"
             method="blur"
             inline
           >
@@ -204,39 +204,39 @@ class CreateEnter extends Component {
           </FormItem>
           <FormItem
             showMast={false}
-            labelName={<span>联系人<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>Contact<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="请输入联系人姓名"
+            errorMessage="Please enter contact name"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="请输入联系人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl name="linkman" placeholder="Please enter the contact name" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
           </FormItem>
 
           <FormItem
             className="input_phone"
             showMast={false}
             valuePropsName="value"
-            labelName={<span>手机号<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>Cellphone <font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             method="blur"
             htmlType="tel"
-            errorMessage="手机号格式错误"
+            errorMessage="Wrong mobile No. format"
             inline
           >
-            <FormControl name="tenantTel" placeholder="请输入手机号" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+            <FormControl name="tenantTel" placeholder="Please enter the cellphone number" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
           </FormItem>
 
         </Form>
         {
           disabled?
-          <div className={`${applyBtn} disabled`} >立即申请</div>
+          <div className={`${applyBtn} disabled`} >Apply Now</div>
           :
-          <div className={applyBtn}  onClick={this.submitService}>立即申请</div>
+          <div className={applyBtn}  onClick={this.submitService}>Apply</div>
 
         }
-            {/* <div className={applyBtn} onClick={this.submitService}>立即申请</div> */}
+            {/* <div className={applyBtn} onClick={this.submitService}>Apply</div> */}
       </div>
     );
   }
