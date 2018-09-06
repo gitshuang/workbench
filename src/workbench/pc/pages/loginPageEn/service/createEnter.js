@@ -11,7 +11,7 @@ import rootActions from 'store/root/actions';
 
 import Form, { FormItem } from 'bee/form';
 import FormControl from 'bee/form-control';
-import Select from 'bee-select';
+import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
 import { openMess } from 'pub-comp/notification';
 import 'assets/style/Form.css';

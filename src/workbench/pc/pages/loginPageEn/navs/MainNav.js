@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
-import Select from 'bee-select';
+import Select from 'bee/select';
 import{
   MainNav,
   headerDesc,
