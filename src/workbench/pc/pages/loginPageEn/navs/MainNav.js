@@ -32,7 +32,6 @@ class  MainNavPanel extends Component{
   constructor(props){
     super(props);
     this.state = {
-      ajaxFlag:false,
       defaultValue: 'zh_CN',
       languageList: [
         {
@@ -82,7 +81,6 @@ class  MainNavPanel extends Component{
       }
       this.setState({
         defaultValue: payload.langCode,
-        ajaxFlag:true,
       },()=>{
         lanCallBack(payload.langCode)
       });
@@ -93,11 +91,10 @@ class  MainNavPanel extends Component{
   onChangeLanguage = (value) => {
     this.props.setCurrent(value).then(({ error, payload }) => {
       if (error) {
-        window.location.reload();
         return;
       }
       window.location.reload();
-    });;
+    });
   }
   open =(type)=>{
     if(type =='service'){
@@ -129,24 +126,20 @@ class  MainNavPanel extends Component{
             <a  className={`middleItem ${this.props.activeIndex*1 === 4?'actived':null}`} onClick={()=>{this.open('aboutus')}}>Contact</a>
           </div>
            <div className={`${rightCon} ${languageClass}`}>
-           {
-             ajaxFlag && (
-              <Select
-                  defaultValue={defaultValue}
-                  onChange={this.handleChange}
-                  dropdownClassName={"gnoreclass"}
-                  style={{width:"110px"}}
-                >
-                {
-                  languageList.map((item,index)=>{
-                    return (
-                      <Option value={item.value} key={index}>{item.context}</Option>
-                    )
-                  })
-                }
+            <Select
+                    value={defaultValue}
+                    onChange={this.handleChange}
+                    dropdownClassName={"gnoreclass"}
+                    style={{width:"110px"}}
+                  >
+                  {
+                    languageList.map((item,index)=>{
+                      return (
+                        <Option value={item.value} key={index}>{item.context}</Option>
+                      )
+                    })
+                  }
               </Select>
-             )
-           }
              
            
           </div>
