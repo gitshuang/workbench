@@ -1,6 +1,6 @@
-import LoginPage from 'pages/loginPage';
-import Service from 'pages/loginPage/service';
-import AboutUs from 'pages/loginPage/aboutus';
+import LoginPage from 'pages/loginPageEn';
+import Service from 'pages/loginPageEn/service';
+import AboutUs from 'pages/loginPageEn/aboutus';
 const loginRoutes = [
     {
       path: '/',
