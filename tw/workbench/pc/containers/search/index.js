@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, getContext } from '@u';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { dispatch, trigger } from 'public/componentTools';
@@ -54,6 +54,11 @@ class SearchContainer extends Component {
     });
   }
 
+  openHomepage = (userId) => {
+    const { history } = this.props;
+    history.push(`/homepage/${userId}/info`);
+  }
+
   render() {
     const { SearchSuggestList } = this.props;
     const { searchText } = this.state;
@@ -67,6 +72,7 @@ class SearchContainer extends Component {
         dispatch={dispatch}
         trigger={trigger} 
         searchText={searchText}
+        handleClick={this.openHomepage}
       />
     );
   }

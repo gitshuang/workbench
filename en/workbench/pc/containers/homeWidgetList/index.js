@@ -15,7 +15,7 @@ const { openFolder } = homeActions;
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
 
-import {pushYA} from "../../utils/utils";
+import { pushYA, appendSearchParam } from "../../utils/utils";
 
 const {
   getProductInfo
@@ -46,12 +46,12 @@ class HomeWidgeList extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { lastW } = this.refs;
     // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100
-    if( lastW && (lastW.offsetHeight > window.innerHeight)){
+    if (lastW && (lastW.offsetHeight > window.innerHeight)) {
       this.setState({
-        lastStyle:{
+        lastStyle: {
           height: lastW.offsetHeight + 100
         }
       });
@@ -80,8 +80,11 @@ class HomeWidgeList extends Component {
             workspaceStyle
           }
         } = payload;
-        if (workspaceStyle === '_blank') {
-          window.open(url)
+        const locationProtocol = window.location.protocol;
+        const origin = window.location.origin;
+        if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
+          const location = `${origin}/service/open/${type}/${code}`;
+          window.open(location);
         } else {
           history.replace(`/${type}/${code}/${serviceCode}`);
         }
@@ -123,7 +126,7 @@ class HomeWidgeList extends Component {
         props.clickHandler = () => {
           openFolder(child);
         }
-      } else if ((type === 3||type === 4||type === 5||type === 6||type === 7) && !jsurl) {
+      } else if ((type === 3 || type === 4 || type === 5 || type === 6 || type === 7) && !jsurl) {
         let typeVal = serviceType === 2 ? 'app' : 'service';
         props.clickHandler = () => {
           this.getProductInfo(serviceCode, typeVal)
@@ -144,14 +147,14 @@ class HomeWidgeList extends Component {
         }
         {
           lastIndex
-          ?
-          <div className={WidgetCont} style={this.state.lastStyle}>
-            <ul className={WidgetList} ref="lastW">{list}</ul>
-          </div>
-          :
-          <div className={WidgetCont}>
-            <ul className={WidgetList}>{list}</ul>
-          </div>
+            ?
+            <div className={WidgetCont} style={this.state.lastStyle}>
+              <ul className={WidgetList} ref="lastW">{list}</ul>
+            </div>
+            :
+            <div className={WidgetCont}>
+              <ul className={WidgetList}>{list}</ul>
+            </div>
         }
 
       </div>

@@ -236,6 +236,15 @@ class searchResult extends Component {
     });
   }
 
+  openHomepage = (userId,type) => {
+    const { history } = this.props;
+    if(type){
+      history.push(`/homepage/${userId}/${type}`);
+    }else{
+      history.push(`/homepage/${userId}/info`);
+    }
+  }
+
   // 渲染列表页面
   otherlistLi(data) {
     if (!data || data.content.length === 0) return null;
@@ -248,6 +257,7 @@ class searchResult extends Component {
           type={data.type}
           url={data.renderUrl}
           from="full"
+          handleClick={this.openHomepage}
         />
       </li>
     ));
