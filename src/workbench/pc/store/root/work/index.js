@@ -186,7 +186,7 @@ const reducer = handleActions({
         title: name,
         serviceCode,
         serviceId,
-        url,
+        // url,
         ext1: state.current.ext1
       },
       brm,
@@ -195,7 +195,7 @@ const reducer = handleActions({
         id: currentId,
         serviceCode,
         name,
-        location,
+        // location,
       }].concat(tabs),
     };
   },

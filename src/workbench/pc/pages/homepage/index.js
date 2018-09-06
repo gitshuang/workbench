@@ -117,33 +117,17 @@ class HomePage extends Component {
       }
     } = this.props;
 
+    // 当前窗口搜索其他人做更改
     if (userId && newUserId && newUserId !== userId) {
       this.getUserInfo(newUserId);
     }
-
+    // 点击返回按钮  让地址栏和tabs 保持一致
     if (activetab && key && key !== activetab) {
       this.setState({
         activetab: key,
         iframeUrl: getHost(key),
       });
     }
-
-    // const key = nextProps.match.params ? nextProps.match.params.key : '';
-    // const { activetab } = this.state;
-    // 如果 新的key 和  新的userId  和之前的同时保持一致  则返回  
-    // if (key === activetab && this.userId === userId) return;
-    // // 如果新的key  和  当前保存的  activetab  不一致  设定为新的
-    // if (this.userId === userId && key !== activetab) {
-    //   this.setState({
-    //     activetab: key,
-    //     iframeUrl: getHost(key),
-    //   });
-    //   return false;
-    // }
-    // // 当userId  发生变化  重新加载
-    // if (this.userId !== userId) {
-    //   this.getUserInfo(key, userId);
-    // }
   }
 
   getUserInfo = (userId) => {
@@ -198,6 +182,10 @@ class HomePage extends Component {
     openService('XTWEIYOU0000000000');
   }
 
+  sendHonor = () => {
+    console.log(1);
+  }
+
   renderTabs = () => {
     const { items, activetab } = this.state;
     return items.map(item => {
@@ -250,6 +238,7 @@ class HomePage extends Component {
                     <div>
                       <Button onClick={this.sendMessage}>发消息</Button>
                       <Button onClick={this.sendEmail}>发邮件</Button>
+                      <Button onClick={this.sendHonor}>发荣耀</Button>
                     </div>
                   </dd>
                 </dl>
