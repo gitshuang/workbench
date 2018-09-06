@@ -36,15 +36,15 @@ class  MainNavPanel extends Component{
       languageList: [
         {
           value: 'zh_CN',
-          context: '简体中文1'
+          context: '1'
         },
         {
           value: 'en_US',
-          context: 'English2'
+          context: '2'
         },
         {
           value: 'zh_TW',
-          context: '繁体中文3'
+          context: '3'
         },
       ],
     }

@@ -22,7 +22,6 @@ class AboutUs extends Component {
     super(props);
     this.markerEvents = {
         click: (e) => {
-          console.log("你点击了这个图标；调用参数为：");
           console.log(e);
         }
     }
@@ -46,9 +45,9 @@ class AboutUs extends Component {
                 <div className="absoutUsCon">
                     <div className="lefCon">
                         <span className="subtitle">Beijing Headquarters</span>
-                        <span className="desc">Address：Yonyou software Park, No. 68 Beiqing Road, Haidian District, Beijing, China</span>
-                        <span className="desc">Phone：010-62438888</span>
-                        <span className="desc">Mail：diwork@yonyou.com</span>
+                        <span className="desc">Address:Yonyou software Park, No. 68 Beiqing Road, Haidian District, Beijing, China</span>
+                        <span className="desc">Phone:010-62438888</span>
+                        <span className="desc">Mail:diwork@yonyou.com</span>
 
                     </div>
                     <div className="rightCon">
