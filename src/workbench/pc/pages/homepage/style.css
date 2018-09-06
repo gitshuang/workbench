@@ -59,12 +59,13 @@
   font-size:14px;
   font-family:PingFangSC-Regular;
   border-radius: 3px;
-  margin: 0;
+	margin-right: 10px;
+	margin-left: 0;
   background: transparent;
   color: #ffffff;
 }
 .info button:first-child{
-	margin-right: 10px; 
+	/* margin-right: 10px;  */
 }
 .info button:hover{
 	color: #ffffff;
