@@ -38,10 +38,10 @@ class LoginPage extends Component {
     let dom = document.documentElement || document.body;
     // let screenWidth = dom.clientWidth ;
     let screenHeight = dom.clientHeight;
-    let header = 110;
+    let header = 66;
     // let footer =Math.round((screenWidth*358)/1677);
-    let footer = 360;//这边确定
-    let fontHeight = 150;
+    let footer = 306;//这边确定
+    let fontHeight = 225;
     let space = Math.round((screenHeight + header - footer - fontHeight) / 2);
     this.sevenSpace = space;
   }

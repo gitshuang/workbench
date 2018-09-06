@@ -91,9 +91,9 @@ class  MainNavPanel extends Component{
   }
 
   onChangeLanguage = (value) => {
-    const {lanCallBack } = this.props;
     this.props.setCurrent(value).then(({ error, payload }) => {
       if (error) {
+        window.location.reload();
         return;
       }
       window.location.reload();
