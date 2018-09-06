@@ -51,7 +51,8 @@ var api = [
 
   '/manager/portalCtrl/getPortal',
   
-  '/language/getAllEnable'
+  '/language/getAllEnable',
+  '/language/current'
 ]
 
 var rapApi = [

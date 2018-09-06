@@ -102,7 +102,13 @@ class BreadcrumbContainer extends Component {
       // key 最大为0
       const key = index + 1 - data.length
       history.go(key);
-      popBrm({ index: -key });
+      // popBrm({ index: -key });
+      //修改，index有两种值-1，直接回退1，>=0就是选中breadcrumbs的下标
+      if(key === -1){
+        popBrm({ index: key });
+      }else{
+        popBrm({ index });
+      }
       return false;
     }
     // 下边 方法为 如果实现返回一级一级的   先注释  担心哪天被还原

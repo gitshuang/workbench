@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { mapStateToProps, getHost, logout } from '@u';
 import TeamExitModal from 'containers/teamExitModal';
 
+import Icon from 'pub-comp/icon';
+
 /*   actions   */
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
@@ -116,7 +118,19 @@ class Personals extends Component {
             context: '繁体中文'
           },
         ]
-      }
+      },
+      icons: [
+        {
+          element: <Icon title="動態" type="Internet2" />,
+          background: 'blue',
+          arguments: 'openDynamic',
+        },
+        {
+          element: <Icon title="榮耀" type="glory" />,
+          background: 'red',
+          arguments: 'openHomepage',
+        },
+      ],
     };
   }
 
@@ -206,9 +220,14 @@ class Personals extends Component {
   }
 
   dispatch = (action) => {
-    const { routers, currType } = this.state;
+    const { routers, currType, userInfo } = this.state;
+    const { history } = this.props;
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
+      return false;
+    }
+    if(action === "openHomepage"){
+      history.push(`/homepage/${userInfo.userId}/honor`);
       return false;
     }
     if (routers[action]) {
@@ -225,7 +244,7 @@ class Personals extends Component {
     const {
       requestDisplay,
       exitModal,
-      dynamicHide,
+      icons
     } = this.props;
     const { userInfo, language, hrefs, TeamData, currType } = this.state;
     let { personalText } = this.state;
@@ -233,7 +252,6 @@ class Personals extends Component {
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
     personalText.name = currType == 0 ? '企業' : '團隊';
 
-    const dynamicType = !dynamicHide;
     return (
       <div>
         <Personal
@@ -248,7 +266,7 @@ class Personals extends Component {
           hrefs={hrefs}
           logout={logout}
           language={language}
-          dynamicType={dynamicType}
+          icons={icons || this.state.icons}
         />
         {
           exitModal ?

@@ -1,0 +1,11 @@
+{
+    "status": 1,
+    "data": {
+        "id": "ae7f9972-c827-4244-832a-b6bf24721680",
+        "dislpayName": "english",
+        "langCode": "en_US",
+        "langSequence": 1,
+        "enabled": true,
+        "default": true
+    }
+}

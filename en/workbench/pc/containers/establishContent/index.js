@@ -52,7 +52,7 @@ class EstablishContent extends Component {
               <p>Key Features:</p>
               <ul className="clearfix">
                 <li>An All-in-one IM tool for teams (IM)</li>
-                <li>Xiaoyou, an intelligent virtual personal assistant</li>
+                <li>YouBot, an intelligent virtual personal assistant</li>
                 <li>Context-aware schedule center</li>
                 <li>An empowering project collaboration tool</li>
                 <li>Employee Benefits Center</li>
