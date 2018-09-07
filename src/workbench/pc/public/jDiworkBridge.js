@@ -119,6 +119,18 @@ const handlerList = {
     postMessageToWin(this.source, {
       type,
     });
+  },
+  openFrame(type, event){
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source,{
+      type,
+    });
+  },
+  closeFrame(type, event){
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source,{
+      type,
+    });
   }
 }
 

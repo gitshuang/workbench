@@ -60,7 +60,9 @@ const {
   getAllEnable,
   getCurrent,
   showDialog,
-  closeDialogNew
+  closeDialogNew,
+  openFrame,
+  closeFrame,
 } = actions;
 
 const defaultState = {
@@ -76,7 +78,16 @@ const defaultState = {
   showModal: false,
   dialogType: '',
   dialogTitle: '',
-  dialogMsg: ''
+  dialogMsg: '',
+  showFrame: false,
+  frameParam: {
+    id: 'honor',
+    url: 'http://www.baidu.com',
+    rect: {
+      width: '100%',
+      height: '100%',
+    }
+  },
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -221,6 +232,20 @@ const reducer = handleActions({
     }
   },
   [closeDialogNew]: (state) => ({...state, showModal: false}),
+  [openFrame]: (state, {payload: param}) => {
+    return {
+      ...state,
+      showFrame: true,
+      frameParam: param,
+    }
+  },
+  [closeDialogNew]: (state) => {
+    return {
+      ...state,
+      showFrame: false,
+      frameParam: {}
+    }
+  },
 }, defaultState);
 
 export default function (state, action) {

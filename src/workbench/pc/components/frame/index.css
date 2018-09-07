@@ -1,0 +1,23 @@
+.frame{
+
+}
+.frame :global(.u-modal-dialog){
+  width: 100%;
+  height: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: none !important;
+}
+.frame :global(.u-modal-dialog .u-modal-content){
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+.frame iframe{
+  width: 100%;
+  height: 100%;
+  border: none;
+  height: calc(100% - 2px);
+}

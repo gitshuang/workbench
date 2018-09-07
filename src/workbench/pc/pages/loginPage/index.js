@@ -137,6 +137,10 @@ class LoginPage extends Component {
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
     this.setState({ loginModalShow: false })
   }
+  lanCallBack = (lanCode) =>{
+    this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
+    this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+  }
 
   render() {
     let { curIndex, loginModalShow } = this.state;
@@ -148,7 +152,7 @@ class LoginPage extends Component {
     return (
       <div className={HomePagePanel}>
         {/* <TopNav /> */}
-        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} />
+        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} lanCallBack={this.lanCallBack}/>
         <div className={rightDotMenu} style={curIndex == 6 ? { marginTop: `${this.sevenSpace + 15}px`, top: 0 } : null} >
           {!loginModalShow && this.renderDot()}
         </div>
