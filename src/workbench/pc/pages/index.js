@@ -21,6 +21,7 @@ import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import 'public/jDiworkBridge';
 import BasicDialog from 'containers/basicDialog/';
+import Frame from 'components/frame/';
 
 const {
   requestStart,
@@ -175,6 +176,7 @@ class Root extends Component {
 					<Route component={NoMatch}/>
 				</Switch>
         <BasicDialog />
+        {/* <Frame /> */}
       </div>
     );
   }
