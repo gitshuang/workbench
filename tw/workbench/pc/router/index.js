@@ -1,7 +1,5 @@
 import Home from 'pages/home';
 import asyncComponent from './lazyload';
-import LoginPage from 'pages/loginPage';
-import Service from 'pages/loginPage/service/index.js'
 const Page404 = asyncComponent(() => import(/* webpackChunkName: "Page404" */'pages/404'));
 // 工作页
 const Work = asyncComponent(() => import(/* webpackChunkName: "Work" */'pages/work'));
@@ -41,6 +39,8 @@ const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'
 const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "ManageTeamEnter" */'pages/manageTeamEnter'));
 // 动态
 const Dynamic = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/dynamic'));
+// 个人主页
+const HomePage = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/homepage'));
 
 const routes = [
   {
@@ -136,13 +136,9 @@ const routes = [
     component: Dynamic,
   },
   {
-    path:'/loginpage',
-    component:LoginPage,
+    path: '/homepage/:userId/:key',
+    component: HomePage,
   },
-  {
-    path:'/service',
-    component:Service,
-  }
 ];
 
 export default routes;
