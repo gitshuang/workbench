@@ -189,10 +189,6 @@ class HomePage extends Component {
     openIframe({
       id: 'honor',
       url: url,
-      rect: {
-        w: '50%',
-        h: '50%'
-      },
       backdrop: true,
       pageParam: {
         name: 'malong',
