@@ -81,11 +81,11 @@ const defaultState = {
   dialogMsg: '',
   showFrame: false,
   frameParam: {
-    id: 'honor',
-    url: 'http://www.baidu.com',
+    backdrop: true,
+    backdropStyle: {},
     rect: {
-      width: '100%',
-      height: '100%',
+      w: '100%',
+      h: '100%',
     }
   },
 };

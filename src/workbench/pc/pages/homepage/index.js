@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { mapStateToProps, getHost } from '@u';
 
 import { trigger } from 'public/componentTools';
-import { openService } from 'public/regMessageTypeHandler';
+import { openService, openIframe, getPageParam } from 'public/regMessageTypeHandler';
 
 import rootActions from 'store/root/actions';
 import homepageActions from 'store/root/homepage/actions';
@@ -180,10 +180,24 @@ class HomePage extends Component {
 
   sendEmail = () => {
     openService('XTWEIYOU0000000000');
+    // getPageParam
   }
 
   sendHonor = () => {
     console.log(1);
+    openIframe({
+      id: 'honor',
+      url: 'http://workbench.yyuap.com/diwork-market/appMarket',
+      rect: {
+        w: '50%',
+        h: '50%'
+      },
+      backdrop: true,
+      pageParam: {
+        name: 'test',
+        userId: '123123',
+      }
+    });
   }
 
   renderTabs = () => {

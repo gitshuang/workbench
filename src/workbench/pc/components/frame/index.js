@@ -19,30 +19,32 @@ class Frame extends Component {
   };
   static defaultProps = {
     frameParam: {
-      id: 'honor',
-      url: 'http://www.baidu.com',
-      rect: {
-        width: '100%',
-        height: '100%',
-      }
+      
     },
   };
 
 
   render() {
-    const { id, url, rect, } = this.props.frameParam;
+    const { id, url, rect, backdrop, backdropStyle } = this.props.frameParam;
     const Style = {
-      // width: rect.width,
-      // height: rect.height
+      width: rect.w,
+      height: rect.h
     }
     return (
-      <div style={Style}>
+      <div>
         <Modal
           className={frame}
           show
-          backdrop={false}
+          backdrop={backdrop}
+          animation={true}
+          backdropStyle={backdropStyle}
         >
-          <iframe id={id} title={id} src={url} />
+          <iframe 
+            id={id} 
+            title={id} 
+            src={url}
+            style={Style}
+          />
         </Modal>
       </div>
     )
