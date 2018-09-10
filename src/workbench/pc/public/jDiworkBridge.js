@@ -131,7 +131,14 @@ const handlerList = {
     postMessageToWin(this.source,{
       type,
     });
-  }
+  },
+  getPageParam(type, event) {
+    const data = store.getState().frameParam.pageParam;
+    postMessageToWin(this.source, {
+      type,
+      data,
+    });
+  },
 }
 
 function messageHandler({ detail, callbackId }, event) {

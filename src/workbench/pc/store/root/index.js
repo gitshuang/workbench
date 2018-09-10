@@ -81,12 +81,7 @@ const defaultState = {
   dialogMsg: '',
   showFrame: false,
   frameParam: {
-    id: 'honor',
-    url: 'http://www.baidu.com',
-    rect: {
-      width: '100%',
-      height: '100%',
-    }
+    
   },
 };
 
@@ -239,7 +234,7 @@ const reducer = handleActions({
       frameParam: param,
     }
   },
-  [closeDialogNew]: (state) => {
+  [closeFrame]: (state) => {
     return {
       ...state,
       showFrame: false,
