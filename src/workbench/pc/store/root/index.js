@@ -239,7 +239,7 @@ const reducer = handleActions({
       frameParam: param,
     }
   },
-  [closeDialogNew]: (state) => {
+  [closeFrame]: (state) => {
     return {
       ...state,
       showFrame: false,
