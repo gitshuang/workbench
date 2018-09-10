@@ -31,6 +31,7 @@ class LoginPage extends Component {
       preTime: new Date().getTime(),//上次执行的时间
       duration: 1200,//执行的间隔
       loginModalShow: false,//登录的modal是否展示
+      pagesRef:[],//放7个分页
     }
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
@@ -95,10 +96,17 @@ class LoginPage extends Component {
   }
   moveNext = () => {
     let preIndex = this.state.curIndex;
+    if(preIndex < 5  && !this.state.pagesRef[preIndex+2]._loaded){
+      // 从第二张图片开始加载3,preIndex=0，3加载4，4加载5
+      let imgVal = preIndex+3;
+      let img  = require('./pages/images/'+ imgVal+'.png');
+      this.state.pagesRef[preIndex+2].children[0].style.backgroundImage = `url(${img})`
+    }
     this.setState({ curIndex: preIndex + 1 }, () => {
       this.amBody.classList.remove(`animation${preIndex}`);
       this.amBody.classList.add(`animation${preIndex + 1}`);
-    })
+    });
+    
   }
   movePrev = () => {
     let preIndex = this.state.curIndex;
@@ -143,7 +151,7 @@ class LoginPage extends Component {
   }
 
   render() {
-    let { curIndex, loginModalShow } = this.state;
+    let { curIndex, loginModalShow, pagesRef } = this.state;
     let btnShow = (curIndex !== 0 && curIndex !== 6);
     let sevenStyle = {
       top: 0,
@@ -158,13 +166,13 @@ class LoginPage extends Component {
         </div>
         <div ref={(ref) => { this.amBody = ref }} className={`${HomeOnePage} amBody animation0`}>
           <div className="videoContainer"></div>
-          <PageFirst loginClick={this.loginClick} registryUrl={this.registryUrl} loginModalShow={loginModalShow} />
-          <PageSecond loginModalShow={loginModalShow} />
-          <PageThird loginModalShow={loginModalShow} />
-          <PageFour loginModalShow={loginModalShow} />
-          <PageFive loginModalShow={loginModalShow} />
-          <PageSix loginModalShow={loginModalShow} />
-          <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace} loginModalShow={loginModalShow} />
+          <PageFirst loginClick={this.loginClick} registryUrl={this.registryUrl} loginModalShow={loginModalShow} pagesRef={pagesRef}/>
+          <PageSecond loginModalShow={loginModalShow} pagesRef={pagesRef}/>
+          <PageThird loginModalShow={loginModalShow} pagesRef={pagesRef}/>
+          <PageFour loginModalShow={loginModalShow} pagesRef={pagesRef}/>
+          <PageFive loginModalShow={loginModalShow} pagesRef={pagesRef}/>
+          <PageSix loginModalShow={loginModalShow} pagesRef={pagesRef}/>
+          <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace} loginModalShow={loginModalShow} pagesRef={pagesRef}/>
         </div>
         {curIndex !== 6 && !loginModalShow && <div className="goNextArrow" onClick={this.moveNext}> </div>}
         {

@@ -34,7 +34,7 @@
 :global(.PageSecond) .amBg{
     background-image: url('./images/2.png') ;
 }
-:global(.PageThird) .amBg{
+/* :global(.PageThird) .amBg{
     background-image: url('./images/3.png') ;
 }
 :global(.PageFour) .amBg{
@@ -48,7 +48,7 @@
 }
 :global(.PageSeven) .amBg{
     background-image: url('./images/7.png') ;  
-}
+} */
 
 /*firstPage的内容部分*/
 :global(.mainContent.viewOne  .laymid) {
