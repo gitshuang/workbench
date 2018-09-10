@@ -180,22 +180,23 @@ class HomePage extends Component {
 
   sendEmail = () => {
     openService('XTWEIYOU0000000000');
-    // getPageParam
   }
 
   sendHonor = () => {
-    console.log(1);
+    // console.log(1);
+    const { userId } = this.props.userInfo;
+    const url = getHost("sendHonor");
     openIframe({
       id: 'honor',
-      url: '/diwork-market/appMarket',
+      url: url,
       rect: {
         w: '50%',
         h: '50%'
       },
       backdrop: true,
       pageParam: {
-        name: 'test',
-        userId: '123123',
+        name: 'malong',
+        userId: userId,
       }
     });
   }

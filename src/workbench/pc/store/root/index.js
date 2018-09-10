@@ -81,12 +81,7 @@ const defaultState = {
   dialogMsg: '',
   showFrame: false,
   frameParam: {
-    backdrop: true,
-    backdropStyle: {},
-    rect: {
-      w: '100%',
-      h: '100%',
-    }
+    
   },
 };
 

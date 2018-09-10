@@ -22,13 +22,20 @@ class Frame extends Component {
       
     },
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      w: '100%',
+      h: '100%',
+    };
+  }
 
 
   render() {
     const { id, url, rect, backdrop, backdropStyle } = this.props.frameParam;
     const Style = {
-      width: rect.w,
-      height: rect.h
+      width: rect && rect.w || this.state.w,
+      height: rect && rect.h || this.state.h,
     }
     return (
       <div>
