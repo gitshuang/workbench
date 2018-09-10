@@ -187,7 +187,7 @@ class HomePage extends Component {
     console.log(1);
     openIframe({
       id: 'honor',
-      url: 'http://workbench.yyuap.com/diwork-market/appMarket',
+      url: '/diwork-market/appMarket',
       rect: {
         w: '50%',
         h: '50%'

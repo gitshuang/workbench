@@ -133,7 +133,7 @@ const handlerList = {
     });
   },
   getPageParam(type, event) {
-    const data = store.getState().brm.pageParam;
+    const data = store.getState().frameParam.pageParam;
     postMessageToWin(this.source, {
       type,
       data,
