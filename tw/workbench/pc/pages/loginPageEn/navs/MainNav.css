@@ -1,8 +1,8 @@
 .MainNav{
     display: flex;
-    position: absolute;
-    left: 0;
-    top: 0;
+    position: relative;
+    /* left: 0;
+    top: 0; */
     width: 100%;
     background: rgba(255,255,255);
     z-index: 999;
