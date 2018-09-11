@@ -39,7 +39,7 @@ class AboutUs extends Component {
     return (
         <div className={AboutUsPanel}>
             {/* <TopNav /> */}
-            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'4'} history={this.props.history}/>
+            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'4'} history={this.props.history} lanCallBack={()=>{}} />
            <div className="mainCon">
                 <div className="title">Contact Us</div>
                 <div className="absoutUsCon">

@@ -9,6 +9,8 @@ import {
 import PropTypes from 'prop-types';
 import routes from 'router';
 import loginRoutes from 'router/login.js';
+import loginRoutesEn from 'router/loginEn.js';//由于官方首页多语下两套设计：中繁和英文
+import loginPage from './loginPage';
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
 import { getContext, mapStateToProps } from '@u';
@@ -30,7 +32,8 @@ const {
   getServiceList,
   getMessage,
   getPoll,
-  getPortal
+  getPortal,
+  getCurrent
 } = rootActions;
 const { getUserInfo } = homeActions;
 
@@ -63,6 +66,7 @@ const NoMatch = ({ history }) => {
     getPoll,
     getPortal,
     getUserInfo,
+    getCurrent,
   })
 class Root extends Component {
   static propTypes = {
@@ -93,8 +97,10 @@ class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      lanAjax:false,//请求语言之后才显示页面
+      defaultLan:'zh_CN',//默认是中文
     };
+    // this.defaultLan ='zh_CN';//默认是中文
     this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin()) || process.env.LOCALHOST;
     // this.isLogin = true;
   }
@@ -153,6 +159,10 @@ class Root extends Component {
   }
 
   componentDidMount() {
+    if (!this.isLogin) {
+      this.getCurrentLan()
+      return false;
+    }
     // if(!this.isLogin) return false;
     // const { getPoll } = this.props;
     // const browser = navigator.appName;
@@ -166,14 +176,29 @@ class Root extends Component {
     // timer(getPoll, 10000);
   }
 
+  getCurrentLan = () => {
+    const { getCurrent } = this.props;
+    getCurrent().then(({ error, payload }) => {
+      if (error) {
+        return;
+      }
+      this.setState({defaultLan:payload.langCode,lanAjax:true});
+    });
+    
+  }
   render() {
+    if(!this.isLogin && !this.state.lanAjax) return null;
     const { showFrame } = this.props;
+    let duoyuRoutes = loginRoutes;
+    if(this.state.defaultLan ==='en_US'){
+      duoyuRoutes = loginRoutesEn
+    }
     return (
       <div>
         <Switch>
           {
-            this.isLogin ? routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />) :
-              loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+            this.isLogin ? routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />) : 
+            duoyuRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
           }
           <Route component={NoMatch} />
         </Switch>
