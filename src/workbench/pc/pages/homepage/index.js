@@ -145,7 +145,7 @@ class HomePage extends Component {
     requestStart();
     getUserInfo(userId).then(({ error, payload }) => {
       if (error) {
-        requestError(error);
+        requestError(payload);
         return false;
       }
       requestSuccess();
