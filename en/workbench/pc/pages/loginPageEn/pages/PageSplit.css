@@ -91,34 +91,37 @@
     background-size: 100% 100%;
 } */
 /*第7个也是最后一个*/
-:global(.mainContent.viewSeven  .laymid) {
+:global(.mainContent.viewSevenEn  .laymid) {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 600px;
+    width: 700px;
     height: 150px;
-    margin-left: -310px;
+    margin-left: -360px;
     margin-top: 250px;
 
 }
-:global(.viewSeven .mainTitle){
-    font-size: 32px;
-    line-height: 45px;
+:global(.viewSevenEn .mainTitle){
+    font-size: 52px;
+    line-height: 52px;
     padding-bottom: 20px;
     letter-spacing: 1px;
     color: #fff;
     text-align: center;
  }
-:global(.viewSeven .mainCon){
-    font-size: 24px;
+:global(.viewSevenEn .mainCon),
+:global(.viewSevenEn .mainCon2){
+    font-size: 18px;
     font-weight: 400;
     color: rgba(255,255,255,1);
     line-height: 33px;
     text-align: center;
-    padding-bottom: 42px;
 
 }
-:global(.mainContent.viewSeven  .laymid .logo) {
+:global(.viewSevenEn .mainCon2){
+    padding-bottom:44px;
+}
+:global(.mainContent.viewSevenEn  .laymid .logo) {
     background-image: url(https://i.alipayobjects.com/i/ecmng/png/201501/4JdkvPYoOr.png);
     margin-bottom: 10px;
     width: 420px;
@@ -127,14 +130,14 @@
     background-position: -10px 0;
     background-size: 100% 100%;
 }
-:global(.mainContent.viewSeven .laymid .clearfix) {
+:global(.mainContent.viewSevenEn .laymid .clearfix) {
     zoom: 1;
 }
-:global(.mainContent.viewSeven .laymid .clickMe){
+:global(.mainContent.viewSevenEn .laymid .clickMe){
     text-align: center;
     /* padding-top: 40px; */
 }
-:global(.mainContent.viewSeven .laymid .clickBtn) {
+:global(.mainContent.viewSevenEn .laymid .clickBtn) {
     width: 160px;
     height: 50px;
     font-size: 18px;
@@ -146,7 +149,7 @@
     text-decoration: none;
 }
 :global(.mainContent.viewOne .laymid .loginBtn),
-:global(.mainContent.viewSeven .laymid .loginBtn){
+:global(.mainContent.viewSevenEn .laymid .loginBtn){
     background: #e50113;
     color: rgba(255,255,255,1);
     margin-right: 20px;
@@ -154,11 +157,11 @@
     transition: all 0.3s;
 }
 :global(.mainContent.viewOne .laymid .loginBtn:hover),
-:global(.mainContent.viewSeven .laymid .loginBtn:hover){
+:global(.mainContent.viewSevenEn .laymid .loginBtn:hover){
     background: #cf0010;
     border-color:#cf0010;
 }
-:global(.mainContent.viewSeven .laymid .registryBtn),
+:global(.mainContent.viewSevenEn .laymid .registryBtn),
 :global(.mainContent.viewOne .laymid .registryBtn) {
     background: transparent;
     border: 1px solid rgba(255,255,255,1);
