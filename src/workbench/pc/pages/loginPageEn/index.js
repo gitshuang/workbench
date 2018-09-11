@@ -26,31 +26,32 @@ class LoginPage extends Component {
       loginModalShow: false,//登录的modal是否展示
     }
     this.amBody = null;
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice);
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice) +'&locale=en_US';
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+'&locale=en_US';
     if (process.env.NODE_ENV == 'daily') {
-      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+'&locale=en_US';
     }
     this.sevenSpace;
   }
   componentWillMount() {
-    //最后因为footer屏幕居中手动计算，图片1677-358
-    let dom = document.documentElement || document.body;
-    // let screenWidth = dom.clientWidth ;
-    let screenHeight = dom.clientHeight;
-    let header = 66;
-    // let footer =Math.round((screenWidth*358)/1677);
-    let footer = 306;//这边确定
-    let fontHeight = 225;
-    let space = Math.round((screenHeight + header - footer - fontHeight) / 2);
-    this.sevenSpace = space;
+    // //最后因为footer屏幕居中手动计算，图片1677-358
+    // let dom = document.documentElement || document.body;
+    // // let screenWidth = dom.clientWidth ;
+    // let screenHeight = dom.clientHeight;
+    // let header = 66;
+    // // let footer =Math.round((screenWidth*358)/1677);
+    // let footer = 306;//这边确定
+    // let fontHeight = 225;
+    // let space = Math.round((screenHeight + header - footer - fontHeight) / 2);
+    // this.sevenSpace = space;
   }
   componentDidMount() {
   
   }
   lanCallBack = (lanCode) =>{
-    this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
-    this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+    // this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
+    // this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+    // 这里不需要，因为切换语言之后就会走loginPage
   }
   
   loginClick = () => {
@@ -84,9 +85,9 @@ class LoginPage extends Component {
                 <iframe id="yhtloginIframe"
                   src={this.loginUrl}
                   width="390px" height="356" name="yhtloginIframe"
-                  scrolling="No"
-                  noresize="noresize"
-                  frameborder="0">
+                  scrolling="Yes"
+                  // noresize="noresize"
+                  frameBorder="0">
                 </iframe>
               </div>
               <div className="popmask"></div>

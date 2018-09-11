@@ -7,27 +7,27 @@
 
 } */
 /*注意还有amPage amBg*/
-.ServicePanel{
+.ServicePanelEn{
     width: 100%;
     height: 100%;
     margin:0;
     padding:0;
     /* overflow: auto; */
     min-width: 1200px;
-    padding-top: 66px;
+    /* padding-top: 66px; */
     position: relative;
 
 }
-.ServicePanel :global(.serviceOne){
+.ServicePanelEn :global(.serviceOne){
     background:url('./images/banner.png') no-repeat ;
     background-position: 0 0;
     width: 100%;
-    height: 470px;
+    height: 378px;
     background-size: cover;
     font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     color:rgba(255,255,255,1);
 }
-.ServicePanel :global(.serviceOne .mainContent){
+.ServicePanelEn :global(.serviceOne .mainContent){
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -37,14 +37,14 @@
     padding-top: 100px\9;
 
 }
-.ServicePanel :global(.serviceOne .title){
+.ServicePanelEn :global(.serviceOne .title){
     display: block;
     font-size: 28px;
     color: rgba(255,255,255,1);
     line-height: 40px;
     padding-bottom: 8px;
 }
-.ServicePanel :global(.serviceOne .desc){
+.ServicePanelEn :global(.serviceOne .desc){
     display: block;
     font-size: 16px;
     color: rgba(255,255,255,1);
@@ -52,7 +52,7 @@
     padding-bottom: 36px;
 
 }
-.ServicePanel :global(.serviceOne .serviceBtn){
+.ServicePanelEn :global(.serviceOne .serviceBtn){
     width:160px;
     height:50px;
     background:#eb1d15;
@@ -63,17 +63,17 @@
     margin: 0 auto;
 }
 /*第二部分*/
-.ServicePanel :global(.serviceTwo){
+.ServicePanelEn :global(.serviceTwo){
     background: #fff;
     padding:98px 0;
 }
-.ServicePanel :global(.serviceTwo .mainContent) {
+.ServicePanelEn :global(.serviceTwo .mainContent) {
     width: 1200px;
     margin: 0 auto;
     position: relative;
     
 }
-.ServicePanel :global(.serviceTwo .mainContent:before) {
+.ServicePanelEn :global(.serviceTwo .mainContent:before) {
   content:'';
   position:absolute;
   width: 100%;
@@ -82,7 +82,7 @@
   top:50%;
   left: 0;
 }
-.ServicePanel :global(.serviceTwo .mainContent:after) {
+.ServicePanelEn :global(.serviceTwo .mainContent:after) {
     content:'';
     position:absolute;
     width: 1px;
@@ -91,7 +91,7 @@
     top:0;
     left: 50%;
   }
-.ServicePanel :global(.serviceTwo .twoItem){
+.ServicePanelEn :global(.serviceTwo .twoItem){
     width: 600px;
     background: #fff;
     height: 100px;
@@ -99,35 +99,35 @@
     display: inline-block;
     box-sizing: border-box;
 }
-.ServicePanel :global(.serviceTwo .leftTop),
-.ServicePanel :global(.serviceTwo .rightTop){
+.ServicePanelEn :global(.serviceTwo .leftTop),
+.ServicePanelEn :global(.serviceTwo .rightTop){
     padding-top:0px;
 }
-.ServicePanel :global(.serviceTwo .leftBottom),
-.ServicePanel :global(.serviceTwo .rightBottom){
+.ServicePanelEn :global(.serviceTwo .leftBottom),
+.ServicePanelEn :global(.serviceTwo .rightBottom){
     padding-bottom:0px;
 }
-.ServicePanel :global(.serviceTwo .rightTop),
-.ServicePanel :global(.serviceTwo .rightBottom){
+.ServicePanelEn :global(.serviceTwo .rightTop),
+.ServicePanelEn :global(.serviceTwo .rightBottom){
     padding-left: 10%;
 }
- .ServicePanel :global(.serviceTwo .twoItem .icon ),
- .ServicePanel :global(.serviceTwo .twoItem .con ){
+ .ServicePanelEn :global(.serviceTwo .twoItem .icon ),
+ .ServicePanelEn :global(.serviceTwo .twoItem .con ){
      float: left;
  }
- .ServicePanel :global(.serviceTwo .twoItem .con){
+ .ServicePanelEn :global(.serviceTwo .twoItem .con){
      padding-left:20px;
      width: 80%;
     font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
  }
- .ServicePanel :global(.serviceTwo .con .title ){
+ .ServicePanelEn :global(.serviceTwo .con .title ){
     display: block;
     font-size: 20px;
     color: rgba(51,51,51,1);
     line-height: 28px;
     padding-bottom:6px;
 }
-.ServicePanel :global(.serviceTwo .con .subcon) {
+.ServicePanelEn :global(.serviceTwo .con .subcon) {
     display: block;
     font-size: 14px;
     color: #999;
@@ -208,21 +208,21 @@
     margin: 0 auto;
 }
 
-/* .ServicePanel :global(.mainFooter){
+/* .ServicePanelEn :global(.mainFooter){
    overflow: hidden;
 }
-.ServicePanel :global(.mainFooter .footerImg){
+.ServicePanelEn :global(.mainFooter .footerImg){
     width: 100%;
     height: auto;
     margin-bottom:-5px;
 } */
-.ServicePanel :global(.mainFooter.mainFooterFake){
+.ServicePanelEn :global(.mainFooter.mainFooterFake){
     height: 360px;
     width: 100%;
     position: relative;
     background: linear-gradient(#535353 85%, #3e3e3e 15%);
  }
- .ServicePanel :global(.mainFooter.mainFooterFake .footerImg){
+ .ServicePanelEn :global(.mainFooter.mainFooterFake .footerImg){
     width: 1200px;
     height: 360px;
     margin-bottom: -5px;
@@ -257,6 +257,6 @@
    display: inline-block;
    clear: both;
 }
-.ServicePanel  :global(.u-form-control:focus){
+.ServicePanelEn  :global(.u-form-control:focus){
     border:1px solid #666
 }

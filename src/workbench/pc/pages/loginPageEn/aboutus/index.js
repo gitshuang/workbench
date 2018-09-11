@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MainNav from '../navs/MainNav.js';
 import TopNav from '../navs/TopNav.js';
-import footerPng from '../pages/images/footer.png';
+// import footerPng from '../pages/images/footer.png';
 import { Map, Marker } from 'react-amap';
 import Footer from '../footer/index.js';
 
@@ -39,7 +39,7 @@ class AboutUs extends Component {
     return (
         <div className={AboutUsPanel}>
             {/* <TopNav /> */}
-            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'4'} history={this.props.history}/>
+            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'4'} history={this.props.history} lanCallBack={()=>{}} />
            <div className="mainCon">
                 <div className="title">Contact Us</div>
                 <div className="absoutUsCon">
