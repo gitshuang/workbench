@@ -1,26 +1,27 @@
 import React from 'react';
 import { handleActions } from 'redux-actions';
 import Notification from 'bee/notification';
-// import { openMess } from 'pub-comp/notification';
 import { destoryLoadingFunc, createLoadingFunc } from 'pub-comp/loading';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { trigger } from 'public/componentTools';
 import Notice from 'components/notice';
+import actions from './actions';
+
 import home from './home';
 import work from './work';
 import search from './search';
 import application from './application';
 import manage from './manage';
 import team from './team';
-import actions from './actions';
 import teamconfig from './teamconfig';
 import homepage from './homepage';
-// import { setCurrent } from './api';
 
 const notification = Notification.newInstance({
   position: 'bottomRight',
 });
+
 const maxMessageShowNum = 3;
+
 function addMessage(message) {
   if (message) {
     const {
@@ -59,7 +60,9 @@ const {
   getAllEnable,
   getCurrent,
   showDialog,
-  closeDialogNew
+  closeDialogNew,
+  openFrame,
+  closeFrame,
 } = actions;
 
 const defaultState = {
@@ -68,7 +71,6 @@ const defaultState = {
   messageList: [],
   messageShowNum: 0,
   imShowed: false,
-  isLogout: false,
   portalInfo: {
     openStatus: false,
     portalUrl: ''
@@ -76,7 +78,11 @@ const defaultState = {
   showModal: false,
   dialogType: '',
   dialogTitle: '',
-  dialogMsg: ''
+  dialogMsg: '',
+  showFrame: false,
+  frameParam: {
+    
+  },
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -90,25 +96,15 @@ const createReducer = key => (state, { payload, error }) => {
 };
 const reducer = handleActions({
   [requestStart](state) {
-    // Loading.create();
     createLoadingFunc({ text: '載入中...' });
     return state;
   },
   [requestSuccess](state) {
-    // Loading.destroy();
     destoryLoadingFunc();
     return state;
   },
   [requestError](state, { payload: msg }) {
-    // Loading.destroy();
     destoryLoadingFunc();
-    // openMess({
-    //   title: '错误',
-    //   content: msg,
-    //   type: 'error',
-    //   duration: 4.5,
-    // });
-    //修改全局错误弹框为dialog且非自动关闭模式
     return {
       ...state,
       showModal: true,
@@ -152,10 +148,12 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    const info = {};
+    const info = window.diworkContext();
     const { tenantid, userid } = info;
     // 避免localhost环境下一直刷新
-    // if (tenantid == "tenantid" && userid == "userid" ) return false;
+    if (payload.tenantId == "tenantid" && payload.userId == "userid" ){
+       return state;
+    }
     if (!payload.tenantId || !tenantid) {
       return state;
     }
@@ -164,7 +162,6 @@ const reducer = handleActions({
     }
     return{
       ...state,
-      isLogout: payload
     }
   },
   [getPortal]: (state, { payload, error }) => {
@@ -230,6 +227,20 @@ const reducer = handleActions({
     }
   },
   [closeDialogNew]: (state) => ({...state, showModal: false}),
+  [openFrame]: (state, {payload: param}) => {
+    return {
+      ...state,
+      showFrame: true,
+      frameParam: param,
+    }
+  },
+  [closeFrame]: (state) => {
+    return {
+      ...state,
+      showFrame: false,
+      frameParam: {}
+    }
+  },
 }, defaultState);
 
 export default function (state, action) {

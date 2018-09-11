@@ -6,7 +6,7 @@ import{
 }from './PageSplit.css'
 export default function PageFirst(props){
     return(
-       <div className={`${amPage} PageFirst `}>
+       <div className={`${amPage} PageFirst `} ref={ref=>props.pagesRef[0] = ref}>
          <div className={amBg} ></div>
           <div className="mainContent viewOne">
           {

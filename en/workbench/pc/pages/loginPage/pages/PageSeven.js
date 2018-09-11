@@ -7,7 +7,7 @@ import{
   import footerPng from './images/footer.png'
   export default function PageSeven(props){
       return(
-         <div className={`${amPage} PageSeven `}>
+         <div className={`${amPage} PageSeven `} ref={ref=>props.pagesRef[6] = ref}>
            <div className={amBg} ></div>
             <div className="mainContent viewSeven">
             {

@@ -4,7 +4,7 @@ import {
   HashRouter as Router,
   withRouter,
   Switch,
-	Route
+  Route
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from 'router';
@@ -21,6 +21,7 @@ import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import 'public/jDiworkBridge';
 import BasicDialog from 'containers/basicDialog/';
+import Frame from 'components/frame/';
 
 const {
   requestStart,
@@ -45,22 +46,24 @@ function timer(fn, time) {
   };
 }
 
-const NoMatch = ({history}) => {
-	history.replace('');
-	return <div/>
+const NoMatch = ({ history }) => {
+  history.replace('');
+  return <div />
 };
 
 @withRouter
-@connect(mapStateToProps(), {
-  requestStart,
-  requestSuccess,
-  requestError,
-  getServiceList,
-  getMessage,
-  getPoll,
-  getPortal,
-  getUserInfo,
-})
+@connect(mapStateToProps(
+  'showFrame',
+), {
+    requestStart,
+    requestSuccess,
+    requestError,
+    getServiceList,
+    getMessage,
+    getPoll,
+    getPortal,
+    getUserInfo,
+  })
 class Root extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -92,7 +95,7 @@ class Root extends Component {
     this.state = {
 
     };
-    this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin())|| process.env.LOCALHOST;
+    this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin()) || process.env.LOCALHOST;
     // this.isLogin = true;
   }
   componentWillMount() {
@@ -164,17 +167,18 @@ class Root extends Component {
   }
 
   render() {
-
+    const { showFrame } = this.props;
     return (
       <div>
-				<Switch>
-					{
-						this.isLogin ? routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />) :
-							loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
-					}
-					<Route component={NoMatch}/>
-				</Switch>
+        <Switch>
+          {
+            this.isLogin ? routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />) :
+              loginRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+          }
+          <Route component={NoMatch} />
+        </Switch>
         <BasicDialog />
+        {showFrame ? <Frame /> : null}
       </div>
     );
   }

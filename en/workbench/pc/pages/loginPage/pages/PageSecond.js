@@ -6,7 +6,7 @@ import{
   }from './PageSplit.css'
   export default function PageSecond(props){
       return(
-         <div className={`${amPage} PageSecond `}>
+         <div className={`${amPage} PageSecond `} ref={ref=>props.pagesRef[1] = ref}>
            <div className={amBg} ></div>
             <div className="mainContent viewTwo">
             {

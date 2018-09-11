@@ -18,7 +18,9 @@ const {
   changeMessageType,
   hideIm,
   showDialog,
-  closeDialogNew
+  closeDialogNew,
+  openFrame,
+  closeFrame,
 } = rootActions;
 const {getUserInfo} = homeActions;
 const handlers = {
@@ -175,6 +177,12 @@ const handlers = {
   },
   closeDialogNew() {
     store.dispatch(closeDialogNew());
+  },
+  openFrame(data) {
+    store.dispatch(openFrame(data));
+  },
+  closeFrame() {
+    store.dispatch(closeFrame());
   }
 }
 window.handlers = handlers;
@@ -261,4 +269,8 @@ export function getOpenServiceData(serviceCode) {
 
 export function openService(serviceCode, type) {
   handlers.openService({serviceCode, type});
+}
+
+export function openIframe(data) {
+  handlers.openFrame(data);
 }
