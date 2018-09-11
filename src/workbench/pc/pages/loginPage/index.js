@@ -199,9 +199,8 @@ class LoginPage extends Component {
                 <iframe id="yhtloginIframe"
                   src={this.loginUrl}
                   width="390px" height="356" name="yhtloginIframe"
-                  scrolling="No"
-                  noresize="noresize"
-                  frameborder="0">
+                  scrolling="Yes"
+                  frameBorder="0">
                 </iframe>
               </div>
               <div className="popmask"></div>

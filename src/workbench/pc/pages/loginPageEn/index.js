@@ -85,7 +85,7 @@ class LoginPage extends Component {
                 <iframe id="yhtloginIframe"
                   src={this.loginUrl}
                   width="390px" height="356" name="yhtloginIframe"
-                  scrolling="No"
+                  scrolling="Yes"
                   // noresize="noresize"
                   frameBorder="0">
                 </iframe>
