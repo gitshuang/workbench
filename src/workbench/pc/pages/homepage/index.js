@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { mapStateToProps, getHost } from '@u';
+import { mapStateToProps, getHost, getContext } from '@u';
 
 import { trigger } from 'public/componentTools';
 import { openService, openIframe, getPageParam } from 'public/regMessageTypeHandler';
@@ -79,6 +79,7 @@ class HomePage extends Component {
     super(props);
     this.state = {
       brm: [{ name: '个人主页' }],
+      isSelf: false,
       activetab: 'info',
       iframeUrl: '',
       items: [
@@ -137,8 +138,11 @@ class HomePage extends Component {
       requestSuccess,
       requestError,
     } = this.props;
-
-    requestStart()
+    const { userid } = getContext();
+    this.setState({
+      isSelf: !!(userId === userid),
+    });
+    requestStart();
     getUserInfo(userId).then(({ error, payload }) => {
       if (error) {
         requestError(error);
@@ -246,11 +250,17 @@ class HomePage extends Component {
                   <dd>
                     <h5>{userName}</h5>
                     <h6>{company}</h6>
-                    <div>
-                      <Button onClick={this.sendMessage}>发消息</Button>
-                      <Button onClick={this.sendEmail}>发邮件</Button>
-                      <Button onClick={this.sendHonor}>发荣耀</Button>
-                    </div>
+                    {
+                      this.state.isSelf
+                        ?
+                        null
+                        :
+                        <div>
+                          <Button onClick={this.sendMessage}>发消息</Button>
+                          <Button onClick={this.sendEmail}>发邮件</Button>
+                          <Button onClick={this.sendHonor}>发荣耀</Button>
+                        </div>
+                    }
                   </dd>
                 </dl>
               </div>
