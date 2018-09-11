@@ -10,7 +10,7 @@ import CreateEnter from './createEnter';
 // import footerPng from '../pages/images/footer.png';
 import Footer from '../footer/index.js';
 import{
-  ServicePanel,
+  ServicePanelEn,
   serviceThree,
   tipTitle,
   tipCon,
@@ -47,7 +47,7 @@ class Service extends Component {
   }
   render() {
     return (
-        <div className={ServicePanel}>
+        <div className={ServicePanelEn}>
             {/* <TopNav /> */}
             <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={''} activeIndex={'2'} history={this.props.history} lanCallBack={()=>{}}/>
             <div className="serviceOne">

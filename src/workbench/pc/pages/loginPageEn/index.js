@@ -34,16 +34,16 @@ class LoginPage extends Component {
     this.sevenSpace;
   }
   componentWillMount() {
-    //最后因为footer屏幕居中手动计算，图片1677-358
-    let dom = document.documentElement || document.body;
-    // let screenWidth = dom.clientWidth ;
-    let screenHeight = dom.clientHeight;
-    let header = 66;
-    // let footer =Math.round((screenWidth*358)/1677);
-    let footer = 306;//这边确定
-    let fontHeight = 225;
-    let space = Math.round((screenHeight + header - footer - fontHeight) / 2);
-    this.sevenSpace = space;
+    // //最后因为footer屏幕居中手动计算，图片1677-358
+    // let dom = document.documentElement || document.body;
+    // // let screenWidth = dom.clientWidth ;
+    // let screenHeight = dom.clientHeight;
+    // let header = 66;
+    // // let footer =Math.round((screenWidth*358)/1677);
+    // let footer = 306;//这边确定
+    // let fontHeight = 225;
+    // let space = Math.round((screenHeight + header - footer - fontHeight) / 2);
+    // this.sevenSpace = space;
   }
   componentDidMount() {
   
