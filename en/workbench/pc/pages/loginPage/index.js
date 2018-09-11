@@ -101,6 +101,7 @@ class LoginPage extends Component {
       let imgVal = preIndex+3;
       let img  = require('./pages/images/'+ imgVal+'.png');
       this.state.pagesRef[preIndex+2].children[0].style.backgroundImage = `url(${img})`
+      this.state.pagesRef[preIndex+2]._loaded = true;
     }
     this.setState({ curIndex: preIndex + 1 }, () => {
       this.amBody.classList.remove(`animation${preIndex}`);
@@ -110,6 +111,13 @@ class LoginPage extends Component {
   }
   movePrev = () => {
     let preIndex = this.state.curIndex;
+    if(!this.state.pagesRef[preIndex-1]._loaded){
+      // 从第二张图片开始加载3,preIndex=0，3加载4，4加载5
+      let imgVal = preIndex-1+1;
+      let img  = require('./pages/images/'+ imgVal+'.png');
+      this.state.pagesRef[preIndex-1].children[0].style.backgroundImage = `url(${img})`;
+      this.state.pagesRef[preIndex-1]._loaded = true;
+    }
     this.setState({ curIndex: preIndex - 1 }, () => {
       this.amBody.classList.remove(`animation${preIndex}`);
       this.amBody.classList.add(`animation${preIndex - 1}`);
@@ -117,6 +125,14 @@ class LoginPage extends Component {
 
   }
   changePage = (index) => {
+    //添加图片懒加载的
+    if(!this.state.pagesRef[index]._loaded){
+      // 从第二张图片开始加载3,preIndex=0，3加载4，4加载5
+      let imgVal = index+1;
+      let img  = require('./pages/images/'+ imgVal+'.png');
+      this.state.pagesRef[index].children[0].style.backgroundImage = `url(${img})`;
+      this.state.pagesRef[index]._loaded = true;
+    }
     if (this.state.curIndex === index) return;
     this.amBody.classList.remove(`animation${this.state.curIndex}`);
     this.amBody.classList.add(`animation${index}`);
@@ -183,9 +199,8 @@ class LoginPage extends Component {
                 <iframe id="yhtloginIframe"
                   src={this.loginUrl}
                   width="390px" height="356" name="yhtloginIframe"
-                  scrolling="No"
-                  noresize="noresize"
-                  frameborder="0">
+                  scrolling="Yes"
+                  frameBorder="0">
                 </iframe>
               </div>
               <div className="popmask"></div>

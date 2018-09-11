@@ -12,7 +12,8 @@
     min-width: 1200px;
 }
 .amBg{
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     z-index: -1;
     top: 0;
     left: 0;
@@ -28,26 +29,10 @@
     margin: 0 auto;
     height: 100%;
 }
-:global(.PageFirst) .amBg{
-    background-image: url('./images/1.png') ;
-}
-:global(.PageSecond) .amBg{
-    background-image: url('./images/2.png') ;
-}
-:global(.PageThird) .amBg{
-    background-image: url('./images/3.png') ;
-}
-:global(.PageFour) .amBg{
-    background-image: url('./images/4.png') ;
-}
-:global(.PageFive) .amBg{
-    background-image: url('./images/5.png') ;  
-}
-:global(.PageSix) .amBg{
-    background-image: url('./images/6.png') ;  
-}
-:global(.PageSeven) .amBg{
+
+:global(.PageSevenEn) .amBg{
     background-image: url('./images/7.png') ;  
+    height: 705px;
 }
 
 /*firstPage的内容部分*/
@@ -60,13 +45,13 @@
     margin-top: -44px;
 }
 
-:global(.mainContent.viewOne  .laymid .logo) {
+/* :global(.mainContent.viewOne  .laymid .logo) {
     background-image: url('./images/slogan.png');
     margin-bottom: 10px;
     background-repeat: no-repeat;
     height: 82px;
     background-size: contain;
-}
+} */
 :global(.mainContent.viewOne .laymid .clearfix) {
     zoom: 1;
 }
@@ -87,7 +72,7 @@
 }
 
 /*secondPage样式*/
-:global(.mainContent.viewTwo  .laymid) {
+/* :global(.mainContent.viewTwo  .laymid) {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -104,7 +89,7 @@
     background-repeat: no-repeat;
     background-position: -10px 0;
     background-size: 100% 100%;
-}
+} */
 /*第7个也是最后一个*/
 :global(.mainContent.viewSeven  .laymid) {
     position: absolute;
@@ -113,7 +98,8 @@
     width: 600px;
     height: 150px;
     margin-left: -310px;
-    margin-top: -40px;
+    margin-top: 250px;
+
 }
 :global(.viewSeven .mainTitle){
     font-size: 32px;
@@ -178,26 +164,27 @@
     border: 1px solid rgba(255,255,255,1);
     color:#fff;
 }
-/* :global(.PageSeven .mainFooter){
+/* :global(.PageSevenEn .mainFooter){
     position: absolute;
     left: 0;
     bottom: 0;
     overflow: hidden;
  }
  
- :global(.PageSeven .mainFooter .footerImg){
+ :global(.PageSevenEn .mainFooter .footerImg){
      width: 100%;
      height: auto;
      margin-bottom:-5px;
  } */
- :global(.PageSeven .mainFooter){
-    position: absolute;
+ :global(.PageSevenEn .mainFooter){
+    /* position: absolute; */
+    position: relative;
     left: 0;
     bottom: 0px;
     height: 306px;
     width: 100%;
  }
- :global(.PageSeven .mainFooter.mainFooterFake){
+ :global(.PageSevenEn .mainFooter.mainFooterFake){
     position: absolute;
     left: 0;
     bottom: 0px;
@@ -205,7 +192,7 @@
     width: 100%;
     background: linear-gradient(#535353 85%, #3e3e3e 15%);
  }
- :global(.PageSeven .mainFooter.mainFooterFake .footerImg){
+ :global(.PageSevenEn .mainFooter.mainFooterFake .footerImg){
     width: 1200px;
     height: 360px;
     margin-bottom: -5px;
@@ -215,7 +202,7 @@
     left: 50%;
     margin-left: -600px;
  }
-/* :global(.PageSeven .mainFooter){
+/* :global(.PageSevenEn .mainFooter){
     position: absolute;
     left: 0;
     top: 0;
@@ -227,7 +214,7 @@
     background-repeat: no-repeat;
     z-index: -1;
 } */
-/* :global(.PageSeven  .mainFooter) {
+/* :global(.PageSevenEn  .mainFooter) {
     width: 100%;
     height: 260px;
     background: #4c515a;
@@ -237,44 +224,44 @@
     color:#fff;
     font-size:18px;
 }
-:global(.PageSeven .mainFooterCon:after){
+:global(.PageSevenEn .mainFooterCon:after){
 content:'';
 display: inline-block;
 clear: both;
 }
 
-:global(.PageSeven .mainFooterCon .title) {
+:global(.PageSevenEn .mainFooterCon .title) {
     padding: 20px;
     display: inline-block;
 }
 
-:global(.PageSeven  .footerSection) {
+:global(.PageSevenEn  .footerSection) {
    float: left;
 }
-:global(.PageSeven  .sectionOne){
+:global(.PageSevenEn  .sectionOne){
     width: 35%;
     text-align: right;
 }
-:global(.PageSeven  .sectionTwo){
+:global(.PageSevenEn  .sectionTwo){
     width: 30%;
 }
-:global(.PageSeven  .sectionThird){
+:global(.PageSevenEn  .sectionThird){
     width: 35%;
     text-align: left;
 }
-:global(.PageSeven  .sectionOne .directives) {
+:global(.PageSevenEn  .sectionOne .directives) {
     padding: 0 10px;
 }
-:global(.PageSeven  .sectionTwo .directives) {
+:global(.PageSevenEn  .sectionTwo .directives) {
     float: left;
     width: 33%;
     box-sizing: border-box;
     padding: 0 10px;
  }
- :global(.PageSeven  .sectionThird .directives){
+ :global(.PageSevenEn  .sectionThird .directives){
     display:block;
 }
-:global(.PageSeven  .copyright) {
+:global(.PageSevenEn  .copyright) {
     width: 100%;
     position: absolute;
     left: 0;
