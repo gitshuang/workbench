@@ -49,7 +49,7 @@ class Service extends Component {
     return (
         <div className={ServicePanel}>
             {/* <TopNav /> */}
-            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={''} activeIndex={'2'} history={this.props.history}/>
+            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={''} activeIndex={'2'} history={this.props.history} lanCallBack={()=>{}} />
             <div className="serviceOne">
                   <div className="mainContent">
                       <span className="title">定制服務</span>
