@@ -53,7 +53,7 @@
     margin-top: 32px;
     margin-left: 36px;
     filter: opacity(0.8);
-    background-image: url(./icon.png);
+    background-image: url(../../loginPage/footer/icon.png);
     transition:all 0.3s;
 }
 :global(.allIcons .iconItem:hover .iconInner){
@@ -92,7 +92,7 @@
     margin-top: 7px;
     margin-left: 24px;
     background-size: contain;
-    background-image: url(./mdowncode.png);
+    background-image: url(../../loginPage/footer/mdowncode.png);
     
 }
 /* 小的二维码 */
@@ -103,7 +103,7 @@
     top: 0;
     width: 40px;
     height: 40px;
-    background-image: url('./lg_code1.png');
+    background-image: url('../../loginPage/footer/lg_code1.png');
     background-position: center;
     background-size:contain;
 

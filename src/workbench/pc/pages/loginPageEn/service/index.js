@@ -7,7 +7,7 @@ import icon3 from './images/icon3.png';
 import icon4 from './images/icon4.png';
 import dot from './images/dot.png';
 import CreateEnter from './createEnter';
-import footerPng from '../pages/images/footer.png';
+// import footerPng from '../pages/images/footer.png';
 import Footer from '../footer/index.js';
 import{
   ServicePanel,

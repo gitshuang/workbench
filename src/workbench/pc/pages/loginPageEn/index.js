@@ -26,10 +26,10 @@ class LoginPage extends Component {
       loginModalShow: false,//登录的modal是否展示
     }
     this.amBody = null;
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice);
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice) +'&locale=en_US';
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+'&locale=en_US';
     if (process.env.NODE_ENV == 'daily') {
-      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+'&locale=en_US';
     }
     this.sevenSpace;
   }
@@ -49,8 +49,9 @@ class LoginPage extends Component {
   
   }
   lanCallBack = (lanCode) =>{
-    this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
-    this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+    // this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
+    // this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+    // 这里不需要，因为切换语言之后就会走loginPage
   }
   
   loginClick = () => {

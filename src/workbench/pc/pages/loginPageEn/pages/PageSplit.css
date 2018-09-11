@@ -28,26 +28,10 @@
     margin: 0 auto;
     height: 100%;
 }
-:global(.PageFirst) .amBg{
-    background-image: url('./images/1.png') ;
-}
-:global(.PageSecond) .amBg{
-    background-image: url('./images/2.png') ;
-}
-:global(.PageThird) .amBg{
-    background-image: url('./images/3.png') ;
-}
-:global(.PageFour) .amBg{
-    background-image: url('./images/4.png') ;
-}
-:global(.PageFive) .amBg{
-    background-image: url('./images/5.png') ;  
-}
-:global(.PageSix) .amBg{
-    background-image: url('./images/6.png') ;  
-}
+
 :global(.PageSeven) .amBg{
     background-image: url('./images/7.png') ;  
+    background-position-y: 66px;
 }
 
 /*firstPage的内容部分*/
@@ -60,13 +44,13 @@
     margin-top: -44px;
 }
 
-:global(.mainContent.viewOne  .laymid .logo) {
+/* :global(.mainContent.viewOne  .laymid .logo) {
     background-image: url('./images/slogan.png');
     margin-bottom: 10px;
     background-repeat: no-repeat;
     height: 82px;
     background-size: contain;
-}
+} */
 :global(.mainContent.viewOne .laymid .clearfix) {
     zoom: 1;
 }

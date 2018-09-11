@@ -134,14 +134,14 @@
     color: #ddd;
     z-index: 999;
     cursor: pointer;
-    background-image: url(./close.png);
+    background-image: url(../loginPage/close.png);
     width: 12px;
     height: 12px;
     margin-left: -185px;
     margin-top: 15px;
 }
 :global(.goNextArrow){
-    background-image: url('./pages/images/arrowdown.png');
+    /* background-image: url('./pages/images/arrowdown.png'); */
     width: 40px;
     height: 40px;
     background-size: contain;
