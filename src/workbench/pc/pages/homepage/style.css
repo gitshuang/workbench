@@ -19,6 +19,7 @@
 	left: 50%;
 	top: 24%;
 	transform: translate(-50%);
+	margin-left: -36px;
 }
 .info dt{
 	float: left;
@@ -115,6 +116,8 @@
 	background: #E14C46;
 }
 
+
+/*
 .tabContent :global(.u-tabs-top .u-tabs-nav-scroll){
 	width: 100%;
 }
@@ -165,3 +168,4 @@
   border-radius: 8px;
   background-color: #757575;
 }
+
