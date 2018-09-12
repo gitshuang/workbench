@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import{
-    FooterConPanel,
+    FooterConPanelEn,
     FooterBottom
 } from './index.css';
 
@@ -27,15 +27,15 @@ class Footer extends Component {
         clearTimeout(this.timeVal);
     }else{
         //是个空的
-        if(this.iconCode.className !== 'iconItem codeItem fadeIn '){
-            this.iconCode.className = 'iconItem codeItem fadeIn ';
+        if(this.iconCode.className !== 'iconItemEn codeItem fadeIn '){
+            this.iconCode.className = 'iconItemEn codeItem fadeIn ';
 
         }
     }
   }
   hoverLeave = () =>{
       this.timeVal = setTimeout(() => {
-        this.iconCode.className = 'iconItem codeItem';
+        this.iconCode.className = 'iconItemEn codeItem';
         this.timeVal = null;
       }, 2000);
   }
@@ -43,32 +43,32 @@ class Footer extends Component {
   render() {
    
     return (
-        <div className={FooterConPanel}>
+        <div className={FooterConPanelEn}>
              <div className="footerTop">
                 <div className="topSection topOne">
                     <span className="title" >Downloads</span>
                     <a className="allIcons" href="http://ec.yonyoucloud.com/html/index/down.html " target="_blank">
                         <div className="diff" onMouseEnter={this.hover} onMouseLeave={this.hoverLeave}>
-                            <span className="iconItem" >
+                            <span className="iconItemEn" >
                                 <span className="iconInner iconOne"></span>
                                 <span className="iconDesc">Mobile</span>
                                 <span className="lgCode"></span>
                             </span>
-                            <span className="iconItem codeItem " ref={(ref)=>{this.iconCode = ref;}}>
+                            <span className="iconItemEn codeItem " ref={(ref)=>{this.iconCode = ref;}}>
                                 <span className="iconInner2 iconCode"></span>
                                 <span className="iconDesc">Scan to download the cliend end</span>
                             </span>
                         </div>
-                        <span className="iconItem">
+                        <span className="iconItemEn">
                             <span className="iconInner iconTwo"></span>
                             <span className="iconDesc">Mac</span>
                         </span>
-                        <span className="iconItem">
+                        <span className="iconItemEn">
                             <span className="iconInner iconThree"></span>
                             <span className="iconDesc">Windows</span>
                         </span>
                         
-                        <span className="iconItem">
+                        <span className="iconItemEn">
                             <span className="iconInner iconFour"></span>
                             <span className="iconDesc">Win xp</span>
                         </span>
