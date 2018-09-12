@@ -288,11 +288,12 @@ body .u-form-item .u-input-group-outer .u-input-after{
 /* tagsInput */
 
 .react-tagsinput {
+  width: 600px;
   height: 250px;
   border: 1px solid #ccc;
   border-radius: 3px;
   overflow: hidden;
-  padding:8px 0 0 8px;
+  padding:8px;
   margin-bottom: 8px;
 }
 

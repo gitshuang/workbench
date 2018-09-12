@@ -29,6 +29,7 @@ import {
   tabPane3,
   qrCode,
   firstP,
+  btnboxIe
 } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -282,7 +283,9 @@ class Invitation extends Component {
                   })
                 }
                 </ul> */}
-                <ButtonBrand className={submitBtn} onClick={this.submit} >确定发送</ButtonBrand>
+                <div className={btnboxIe}>
+                  <ButtonBrand className={submitBtn} onClick={this.submit} >确定发送</ButtonBrand>
+                </div>
               </TabPane>
               <TabPane tab="二维码邀请" key="3" className={tabPane3}>
                 <div>

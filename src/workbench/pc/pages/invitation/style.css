@@ -25,6 +25,7 @@
   border-radius: 3px;
   background: rgba(0,205,195,0.09);
   margin-bottom: 8px;
+  margin-right: 107px;
 }
 .mailList{
   margin-bottom: 10px;
@@ -84,9 +85,10 @@
 }
 .wrap .tabPane2 :global(.u-form-control){
   height: 36px;
+  width: 600px;
 }
 .tabPane1,.tabPane2,.tabPane3{
-  padding-right: 107px;
+  /* padding-right: 107px; */
 }
 .tabPane3>div:first-child{
   width: 270px;
@@ -97,8 +99,19 @@
   margin: 0;
   color: #fff;
 }
+.tabPane1 :global(.u-button){
+  margin-right: 107px;
+}
 .tabPane3 :global(.u-button){
   width: 100%;
+  margin: 0;
+}
+.btnboxIe{
+  /* float: left; */
+  /* padding: 0 8px; */
+  width: 600px;
+  overflow: hidden;
+  padding-left: 18px;
 }
 .qrCode img{
   width: 270px;
