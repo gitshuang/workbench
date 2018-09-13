@@ -9,6 +9,9 @@ import {
   setCurrent,
   getAllEnable,
   getCurrent,
+  setCurrentNot,
+  getAllEnableNot,
+  getCurrentNot,
 } from './api';
 
 const {
@@ -29,6 +32,9 @@ const {
   SET_CURRENT,
   GET_ALL_ENABLE,
   GET_CURRENT,
+  SET_CURRENT_NOT,
+  GET_ALL_ENABLE_NOT,
+  GET_CURRENT_NOT,
   SHOW_DIALOG,
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
@@ -45,6 +51,9 @@ export default createActions(
     [SET_CURRENT]: setCurrent,
     [GET_ALL_ENABLE]: getAllEnable,
     [GET_CURRENT]: getCurrent,
+    [SET_CURRENT_NOT]: setCurrentNot,
+    [GET_ALL_ENABLE_NOT]: getAllEnableNot,
+    [GET_CURRENT_NOT]: getCurrentNot,
   },
   REQUEST_START,
   REQUEST_SUCCESS,

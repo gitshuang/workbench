@@ -14,7 +14,7 @@ import{
   languageClass,
 } from './MainNav.css';
 import LogoSvg from './logo.svg';
-const { setCurrent, getAllEnable, getCurrent } = rootActions;
+const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
@@ -23,9 +23,9 @@ const { setCurrent, getAllEnable, getCurrent } = rootActions;
       },
     ),
     {
-      setCurrent,
-      getAllEnable,
-      getCurrent,
+      setCurrentNot,
+      getAllEnableNot,
+      getCurrentNot,
     },
   )
 class  MainNavPanel extends Component{
@@ -57,8 +57,8 @@ class  MainNavPanel extends Component{
   }
 
   getAllEnableFunc = () => {
-    const { getAllEnable } = this.props;
-    getAllEnable().then(({ error, payload }) => {
+    const { getAllEnableNot } = this.props;
+    getAllEnableNot().then(({ error, payload }) => {
       if (error) {
         return;
       }
@@ -74,8 +74,8 @@ class  MainNavPanel extends Component{
   }
 
   getCurrentLan = () => {
-    const { getCurrent,lanCallBack } = this.props;
-    getCurrent().then(({ error, payload }) => {
+    const { getCurrentNot,lanCallBack } = this.props;
+    getCurrentNot().then(({ error, payload }) => {
       if (error) {
         return;
       }
@@ -89,7 +89,7 @@ class  MainNavPanel extends Component{
   }
 
   onChangeLanguage = (value) => {
-    this.props.setCurrent(value).then(({ error, payload }) => {
+    this.props.setCurrentNot(value).then(({ error, payload }) => {
       if (error) {
         return;
       }
