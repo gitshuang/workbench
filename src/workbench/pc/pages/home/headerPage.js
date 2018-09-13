@@ -188,7 +188,7 @@ class HeaderPage extends Component {
     const personal = <Personals />;
     const BtnShow = this.state.btnShow ? null : btnDisable;
 
-    const title = <a href=""><img alt="" src={logoUrl} style={{ width: '145px' }} /></a>
+    const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop:'8px', width: '145px' }} /></a>
     return (
       <div className="header" style={background} id="home_header">
         <Header
