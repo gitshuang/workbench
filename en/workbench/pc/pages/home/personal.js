@@ -57,7 +57,7 @@ class Personals extends Component {
         do: 'OK',
         set: ' Settings',
         logout: 'Log Out',
-        account: 'Account Mgmt',
+        account: '',
         dynamic: 'Moments',
       },
 

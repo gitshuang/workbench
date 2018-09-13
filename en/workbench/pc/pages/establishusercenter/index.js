@@ -32,7 +32,7 @@ class EstablishUserCenter extends Component {
       <div className={`um-win`} >
         <div className="um-header header">
           <Header
-            iconName = "computer"
+            iconName = "home"
             onLeftClick={this.goHome}
           >
             <div>
