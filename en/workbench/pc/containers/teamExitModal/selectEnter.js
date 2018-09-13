@@ -65,7 +65,7 @@ class SelectEnter extends Component {
           marginLeft={-187}
           getPopupContainer={() => document.getElementById("open_select")}
           lastIem={true}
-          label="Please choose an enterprise/team" type="computer" dataItem={_dataItem} />
+          label="Please choose an enterprise/team" type="home" dataItem={_dataItem} />
       </div>
     )
   }

@@ -229,7 +229,7 @@ class HomePage extends Component {
     return (
       <div className="um-win">
         <div className="um-header header">
-          <Header onLeftClick={this.goHome} iconName="computer" >
+          <Header onLeftClick={this.goHome} iconName="home" >
             <div>
               <span>{`${userName}s homepage`}</span>
             </div>
