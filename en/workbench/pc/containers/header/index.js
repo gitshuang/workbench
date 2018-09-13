@@ -116,7 +116,7 @@ class HeaderContainer extends Component {
       <SearchContainer />,
       <div className={`${rightBtn}`} style= {{marginRight: "15px",display:homeStyle}}>
         <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
-          <Icon title="My Portal" type="home" style={{ color }} />
+          <Icon title="My Portal" type="Friends-space" style={{ color }} />
         </a>
       </div>,
       <QuickApplication
