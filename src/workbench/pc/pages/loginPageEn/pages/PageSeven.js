@@ -18,8 +18,8 @@ export default function PageSeven(props) {
               <div className="mainCon">A new powerful digital workspace integrating HR , </div>
               <div className="mainCon2">Finance, Collaboration tools..., all in yonyou cloud</div>
               <div className="clickMe clearfix">
-                <span className="loginBtn clickBtn " onClick={props.loginClick}>Sign in</span>
-                <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">Get started</a>
+                <span className="loginBtn clickBtn " onClick={props.loginClick}>Sign In</span>
+                <a target="_blank" href={props.registryUrl} className="registryBtn clickBtn">Get Started</a>
               </div>
             </div>
           )

@@ -56,7 +56,7 @@ class Footer extends Component {
                             </span>
                             <span className="iconItemEn codeItem " ref={(ref)=>{this.iconCode = ref;}}>
                                 <span className="iconInner2 iconCode"></span>
-                                <span className="iconDesc">Scan to download the cliend end</span>
+                                <span className="iconDesc">Scan to download the Mobile App</span>
                             </span>
                         </div>
                         <span className="iconItemEn">

@@ -1,4 +1,4 @@
-* {
+.ie9{
   box-sizing: content-box;
   -moz-box-sizing: inherit;
   -webkit-box-sizing: inherit;
