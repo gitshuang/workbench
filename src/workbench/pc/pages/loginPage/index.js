@@ -97,6 +97,13 @@ class LoginPage extends Component {
   moveNext = () => {
     let preIndex = this.state.curIndex;
     if(preIndex < 5  && !this.state.pagesRef[preIndex+2]._loaded){
+      if(!this.state.pagesRef[preIndex+1]._loaded){
+        //表示本身图片都没有被加载
+        let imgVal = preIndex+2;
+        let img  = require('./pages/images/'+ imgVal+'.png');
+        this.state.pagesRef[preIndex+1].children[0].style.backgroundImage = `url(${img})`
+        this.state.pagesRef[preIndex+1]._loaded = true;
+      }
       // 从第二张图片开始加载3,preIndex=0，3加载4，4加载5
       let imgVal = preIndex+3;
       let img  = require('./pages/images/'+ imgVal+'.png');
