@@ -59,6 +59,9 @@ const {
   setCurrent,
   getAllEnable,
   getCurrent,
+  setCurrentNot,
+  getAllEnableNot,
+  getCurrentNot,
   showDialog,
   closeDialogNew,
   openFrame,
@@ -211,6 +214,9 @@ const reducer = handleActions({
   [setCurrent]: state => state,
   [getAllEnable]: state => state,
   [getCurrent]: state => state,
+  [setCurrentNot]: state => state,
+  [getAllEnableNot]: state => state,
+  [getCurrentNot]: state => state,
   [showDialog]: (state, {payload: dialogData}) => {
     let {type} = dialogData;
     const {title, msg} = dialogData;

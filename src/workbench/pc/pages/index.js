@@ -33,7 +33,7 @@ const {
   getMessage,
   getPoll,
   getPortal,
-  getCurrent
+  getCurrentNot
 } = rootActions;
 const { getUserInfo } = homeActions;
 
@@ -66,7 +66,7 @@ const NoMatch = ({ history }) => {
     getPoll,
     getPortal,
     getUserInfo,
-    getCurrent,
+    getCurrentNot,
   })
 class Root extends Component {
   static propTypes = {
@@ -177,8 +177,8 @@ class Root extends Component {
   }
 
   getCurrentLan = () => {
-    const { getCurrent } = this.props;
-    getCurrent().then(({ error, payload }) => {
+    const { getCurrentNot } = this.props;
+    getCurrentNot().then(({ error, payload }) => {
       if (error) {
         return;
       }
