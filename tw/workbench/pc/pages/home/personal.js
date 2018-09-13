@@ -57,7 +57,7 @@ class Personals extends Component {
         do: '我知道了',
         set: '設置',
         logout: '註銷',
-        account: '',
+        account: '賬號管理',
         dynamic: '動態',
       },
 
