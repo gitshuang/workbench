@@ -435,7 +435,7 @@ export default class Work extends Component {
       widthBrm,
       type,
     } = this.props;
-    const iconName = <Icon title="返回首页" type="computer" />;
+    const iconName = <Icon title="返回首页" type="home" />;
     return (
       <div className={`${wrap} um-win ${work}`}>
         <div className="um-header header">

@@ -218,7 +218,7 @@ class Invitation extends Component {
     return (
       <div className="um-win">
         <div className="um-header header">
-          <Header onLeftClick={this.goHome} iconName="computer" >
+          <Header onLeftClick={this.goHome} iconName="home" >
             <div>
               <span>邀请成员</span>
             </div>

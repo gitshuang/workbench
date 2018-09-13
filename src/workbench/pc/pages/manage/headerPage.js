@@ -51,13 +51,13 @@ class HeaderPage extends Component {
   }
 
   render() {
-    const iconName = <Icon type="computer" />;
+    // const iconName = <Icon type="home" />;
     return (
       <div className="header">
         <Header
           onLeftClick={this.goHome}
           leftContent={this.getLeftContent()}
-          iconName={iconName}
+          iconName="home"
         >
           <span>首页编辑</span>
         </Header>
