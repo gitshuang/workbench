@@ -50,7 +50,6 @@ export default class Page404 extends Component {
   }
 
   render() {
-    // let iconName = <Icon title="返回首页" type="home" style={{ fontSize: "24px" }} />
     return (
       <div className={`${wrap} um-win`}>
         <div className={`um-content ${page404Area}`}>

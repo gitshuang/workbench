@@ -590,10 +590,10 @@ class CreateTeamContent extends Component {
         <div className={header}>
           <h2>{this.state.tenantName}</h2>
           <div className="um-box um-box-center">
-            <div>
+            <div style={{float:"left"}}>
               <Button onClick={this.openUpgradeModal}>升级为企业</Button>
             </div>
-            <div>
+            <div style={{float:"left"}}>
               {/* <Dropdown
                 trigger={['click']}
                 overlay={menu1}

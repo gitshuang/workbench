@@ -47,6 +47,10 @@ class HeaderContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
   }
+  
+  static defaultProps = {
+    iconName: "home",
+  }
 
   constructor(props) {
     super(props);
