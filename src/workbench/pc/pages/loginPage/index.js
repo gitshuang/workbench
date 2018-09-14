@@ -173,10 +173,11 @@ class LoginPage extends Component {
       // 友空间使用的是zh_HK
       this.registryUrl = this.registryUrl + `&locale=zh_HK`;
       this.loginUrl = this.loginUrl + `&locale=zh_HK`;
-      return false;
+    }else{
+      this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
+      this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
     }
-    this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
-    this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+    
   }
   render() {
     let { curIndex, loginModalShow, pagesRef } = this.state;
