@@ -169,8 +169,16 @@ class LoginPage extends Component {
     this.setState({ loginModalShow: false })
   }
   lanCallBack = (lanCode) =>{
-    this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
-    this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+    lanCallBack = (lanCode) =>{
+      if(lanCode.toLowerCase() === 'zh_tw'){
+        // 友空间使用的是zh_HK
+        this.registryUrl = this.registryUrl + `&locale=zh_HK`;
+        this.loginUrl = this.loginUrl + `&locale=zh_HK`;
+        return false;
+      }
+      this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
+      this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
+    }
   }
 
   render() {
