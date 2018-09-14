@@ -53,7 +53,6 @@ class Enterprise extends Component {
       <div>
         <div className="header um-header">
           <Header
-            iconName = "home"
             onLeftClick={this.goHome}
           >
             <div>
