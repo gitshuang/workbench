@@ -32,10 +32,11 @@ class LoginPage extends Component {
       duration: 1200,//执行的间隔
       loginModalShow: false,//登录的modal是否展示
       pagesRef:[],//放7个分页
+      lanChangeFlag:0,//为了解决bug：registryUrl写在this上而没有写在state上，所以callback函数修改url但是不会重新渲染
     }
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice);
+    this.registryUrl = CAS_SERVER + '/register?sysid=market&service=' + encodeURIComponent(realservice);
     this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
     if (process.env.NODE_ENV == 'daily') {
       this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
@@ -177,7 +178,7 @@ class LoginPage extends Component {
       this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
       this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
     }
-    
+    this.setState({lanChangeFlag:++this.state.lanChangeFlag})
   }
   render() {
     let { curIndex, loginModalShow, pagesRef } = this.state;
