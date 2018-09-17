@@ -57,6 +57,7 @@ const NoMatch = ({ history }) => {
 @withRouter
 @connect(mapStateToProps(
   'showFrame',
+  'showModal',
 ), {
     requestStart,
     requestSuccess,
@@ -202,7 +203,7 @@ class Root extends Component {
           }
           <Route component={NoMatch} />
         </Switch>
-        <BasicDialog />
+        {showModal? <BasicDialog />: null}
         {showFrame ? <Frame /> : null}
       </div>
     );
