@@ -48,7 +48,7 @@ class Application extends Component {
     return (
       <div className="um-win">
         <div className="um-header header">
-          <Header onLeftClick={this.goHome} iconName={"home"} >
+          <Header onLeftClick={this.goHome} >
             <div>
               <span>{name}</span>
             </div>
