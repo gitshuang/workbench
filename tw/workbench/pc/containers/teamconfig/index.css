@@ -24,6 +24,11 @@
   word-break: break-all;
   white-space: normal;
 }
+.header :global(.um-box.um-box-center){
+  float: left;
+  margin-left: 50%;
+  transform: translate(-50%);
+}
 .header button{
   padding: 0 10px;
   height:34px;

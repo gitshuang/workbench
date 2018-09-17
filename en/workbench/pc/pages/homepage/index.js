@@ -229,7 +229,7 @@ class HomePage extends Component {
     return (
       <div className="um-win">
         <div className="um-header header">
-          <Header onLeftClick={this.goHome} iconName="home" >
+          <Header onLeftClick={this.goHome} >
             <div>
               <span>{`${userName}s homepage`}</span>
             </div>
@@ -258,7 +258,7 @@ class HomePage extends Component {
                         <div>
                           <Button onClick={this.sendMessage}>Message</Button>
                           <Button onClick={this.sendEmail}>Email</Button>
-                          <Button onClick={this.sendHonor}>Honor</Button>
+                          <Button onClick={this.sendHonor}>Send Honor</Button>
                         </div>
                     }
                   </dd>
