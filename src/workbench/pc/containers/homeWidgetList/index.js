@@ -48,27 +48,37 @@ class HomeWidgeList extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateViewport, false);
-    this.updateViewport();
+    // this.updateViewport();
   }
 
   componentDidUpdate() {
-    // this.updateViewport();
+    if(this.state.update){
+      return false;
+    }
+    this.updateViewport();
   }  
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateViewport, false);
+    this.setState({
+      update: false,
+    })
   }
 
   updateViewport = () => {
-    const lastW = document.getElementById("lastW");
-    // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100
-    if (lastW && (lastW.offsetHeight > window.innerHeight)) {
-      this.setState({
-        lastStyle: {
-          height: lastW.offsetHeight + 100
-        }
-      });
-    }
+    this.setState({
+      update: true,
+    },()=> {
+      const lastW = document.getElementById("lastW");
+      // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100
+      if (lastW && (lastW.offsetHeight > window.innerHeight)) {
+        this.setState({
+          lastStyle: {
+            height: lastW.offsetHeight + 100
+          }
+        });
+      }
+    });
   }
 
   getProductInfo = (code, type) => {
