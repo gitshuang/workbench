@@ -31,8 +31,8 @@ class HomeMark extends Component {
       <div className={mark}>
         <p>
           <Icon type="notice" />
-          <span>Some of your Apps are expired or will expire soon, and cannot be used any longer.</span>
-          <b onClick={this.props.linkTo}>Renewal>></b>
+          <span>Some of your Apps have expired or will expire soon.</span>
+          <b onClick={this.props.linkTo}>Renew>></b>
           <Icon type="error3" onClick={this.props.closeHomeMark}/>
         </p>
       </div>
