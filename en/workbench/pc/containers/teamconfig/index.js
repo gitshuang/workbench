@@ -332,7 +332,7 @@ class CreateTeamContent extends Component {
                     <div>
                       <h6>{item.applicationName}</h6>
                       {
-                        item.expired ? <p>Expiration Time:{this.handelTime(item.expired)}</p> : ""
+                        item.expired ? <p>Expiration:{this.handelTime(item.expired)}</p> : ""
                       }
                     </div>
                     <div>
@@ -340,7 +340,7 @@ class CreateTeamContent extends Component {
                     </div>
                     <div className="um-bf1 tr">
                       {
-                        this.esitXufei(item.expired) ? <Button onClick={() => { this.openXufei(item.applicationId) }}>Renewal</Button> : null
+                        this.esitXufei(item.expired) ? <Button onClick={() => { this.openXufei(item.applicationId) }}>Renew</Button> : null
                       }
 
                     </div>
@@ -590,10 +590,10 @@ class CreateTeamContent extends Component {
         <div className={header}>
           <h2>{this.state.tenantName}</h2>
           <div className="um-box um-box-center">
-            <div>
+            <div style={{float:"left"}}>
               <Button onClick={this.openUpgradeModal}>Upgrade to Enterprise</Button>
             </div>
-            <div>
+            <div style={{float:"left"}}>
               {/* <Dropdown
                 trigger={['click']}
                 overlay={menu1}

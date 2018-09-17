@@ -111,7 +111,7 @@ class Enterprise extends Component {
     return (
       <div>
         <div className="um-header header">
-          <Header onLeftClick={this.goHome} iconName="home" >
+          <Header onLeftClick={this.goHome} >
             <div>
               <span>Set Enterprise</span>
             </div>
