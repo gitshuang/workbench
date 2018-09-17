@@ -13,7 +13,7 @@ import{
   rightCon,
   languageClass,
 } from './MainNav.css';
-import LogoSvg from './logo.svg';
+import LogoSvg from './logoen.svg';
 const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
 @withRouter
 @connect(
@@ -117,7 +117,7 @@ class  MainNavPanel extends Component{
       <div className={MainNav} id="MainNav">
           <div className={leftCon} onClick={()=>{open('login')}} >
             <img src={LogoSvg} className="companylogoSvg"/>
-            <span className={headerDesc}>Digital Workspace</span>
+            {/* <span className={headerDesc}>Digital Workspace</span> */}
           </div>
           <div className={middleCon}>
             <a  className={`middleItem ${this.props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{this.open('login')}}>Home</a>
