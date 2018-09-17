@@ -189,7 +189,7 @@ class Root extends Component {
   }
   render() {
     if(!this.isLogin && !this.state.lanAjax) return null;
-    const { showFrame } = this.props;
+    const { showFrame, showModal } = this.props;
     let duoyuRoutes = loginRoutes;
     if(this.state.defaultLan ==='en_US'){
       duoyuRoutes = loginRoutesEn
