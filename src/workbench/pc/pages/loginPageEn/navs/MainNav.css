@@ -56,19 +56,14 @@
     top: 0px;
     cursor: pointer;
 }
-.leftCon :global(img.companylogo) {
-    height: 46px;
-    width: 114px;
-    margin-top: 20px;
-    margin-left: 38px;
-}
+
 .leftCon :global(.companylogoSvg){
-    width:100px;
-    height: 60px;
+    width: auto;
+    height: 44px;
     outline: none;
-    border:none;
+    border: none;
     margin-right: 10px;
-    margin-top: 0;
+    margin-top: 12px;
 
 }
 .MainNav .middleCon{
