@@ -52,7 +52,7 @@ class HomeWidgeList extends Component {
   }
 
   componentDidUpdate() {
-    this.updateViewport();
+    // this.updateViewport();
   }  
 
   componentWillUnmount() {
