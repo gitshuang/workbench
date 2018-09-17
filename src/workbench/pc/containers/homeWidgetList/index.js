@@ -48,11 +48,11 @@ class HomeWidgeList extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateViewport, false);
-    this.updateViewport();
+    // this.updateViewport();
   }
 
   componentDidUpdate() {
-    // this.updateViewport();
+    this.updateViewport();
   }  
 
   componentWillUnmount() {
