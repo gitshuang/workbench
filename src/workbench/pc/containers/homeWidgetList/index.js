@@ -47,38 +47,39 @@ class HomeWidgeList extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.updateViewport, false);
-    // this.updateViewport();
+    window.addEventListener('resize', this.updateHeight, false);
+    this.updateHeight();
   }
 
-  componentDidUpdate() {
-    if(this.state.update){
-      return false;
+  componentWillReceiveProps(nextProps) {
+    // alert(1);
+    if(nextProps.lastIndex && this.props.data.children.length !== nextProps.data.children.length){
+      console.log(this.props.data.children.length)
+      console.log(nextProps.data.children.length);
+      this.updateHeight();
     }
-    this.updateViewport();
-  }  
+    
+    // console.log(this.props.children.length);
+    // debugger;
+    // if(nextProps.lastIndex === this.props.lastIndex){
+    //   console.log();
+    // }
+  }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateViewport, false);
-    this.setState({
-      update: false,
-    })
+    window.removeEventListener('resize', this.updateHeight, false);
   }
 
-  updateViewport = () => {
-    this.setState({
-      update: true,
-    },()=> {
-      const lastW = document.getElementById("lastW");
-      // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100
-      if (lastW && (lastW.offsetHeight > window.innerHeight)) {
-        this.setState({
-          lastStyle: {
-            height: lastW.offsetHeight + 100
-          }
-        });
-      }
-    });
+  updateHeight = () => {
+    const lastW = document.getElementById("lastW");
+    // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100
+    if (lastW && (lastW.offsetHeight > window.innerHeight)) {
+      this.setState({
+        lastStyle: {
+          height: lastW.offsetHeight + 100
+        }
+      });
+    }
   }
 
   getProductInfo = (code, type) => {
