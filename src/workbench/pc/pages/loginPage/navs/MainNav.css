@@ -4,8 +4,8 @@
     left: 0;
     top: 0;
     width: 100%;
-    background: rgba(255,255,255,0.9);
-    opacity: 0.9;
+    background: rgba(255,255,255,1);
+    /* opacity: 0.9; */
     z-index:999;
     height: 70px;
     line-height: 70px;
@@ -62,7 +62,7 @@
 }
 .leftCon :global(.companylogoSvg){
     width:100px;
-    height: 60px;
+    height: 66px;
     outline: none;
     border:none;
     margin-right: 10px;
@@ -144,4 +144,8 @@
 }
 .TopNav :global(.TopNavLink:hover){
   opacity: 1;
+}
+
+.MainNav :global(.u-select .u-select-selection){
+    border:none;
 }
