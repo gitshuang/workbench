@@ -98,7 +98,7 @@ class HomePage extends Component {
       ],
     };
     this.style = {
-      height: '500px'
+      height: window.innerHeight - 119
     }
   }
 
@@ -112,10 +112,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    const winH = window.innerHeight;
-    const userH = document.getElementById("user").offsetHeight;
-    const iframeH = winH - userH - 120;
-    this.style.height = iframeH;
+    
   }
 
   componentWillReceiveProps(nextProps) {
