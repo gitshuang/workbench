@@ -39,46 +39,16 @@ class HomeWidgeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blank: false,
-      lastStyle: {
-        height: window.innerHeight
-      },
-      isupdate: false
+      
+    };
+    this.lastStyle = {
+      paddingBottom: '80px',
+      minHeight: window.innerHeight
     };
   }
 
   componentDidMount() {
-    // window.addEventListener('resize', this.updateHeight, false);
-    // this.updateHeight();
-    // 目前这个方法 比较奇葩   实际上应该放到didupdate  但是也不好使
-    // setTimeout(()=>{
-    //   this.updateHeight();
-    // },200);
-  }
-
-  componentWillUnmount() {
-    // window.removeEventListener('resize', this.updateHeight, false);
-  }
-
-  componentDidUpdate() {
-    // this.updateHeight();
-  }
-
-  updateHeight = () => {
-    const lastW = document.getElementById("lastW");
-    const lastdiv = document.getElementById("lastdiv");
-    if (lastW && (lastW.offsetHeight > window.innerHeight)) {
-      lastdiv.setAttribute('height',lastW.offsetHeight);
-    }
-    // const lastW = document.getElementById("lastW");
-    // // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100
-    // if (lastW && (lastW.offsetHeight > window.innerHeight)) {
-    //   this.setState({
-    //     lastStyle: {
-    //       height: lastW.offsetHeight + 100
-    //     }
-    //   });
-    // }
+    
   }
 
   getProductInfo = (code, type) => {
@@ -171,8 +141,8 @@ class HomeWidgeList extends Component {
         {
           lastIndex
             ?
-            <div className={WidgetCont} id="lastdiv">
-              <ul className={WidgetList} id="lastW">{list}</ul>
+            <div className={WidgetCont} style={this.lastStyle}>
+              <ul className={WidgetList}>{list}</ul>
             </div>
             :
             <div className={WidgetCont}>
