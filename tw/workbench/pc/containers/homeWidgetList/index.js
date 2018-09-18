@@ -39,36 +39,16 @@ class HomeWidgeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blank: false,
-      lastStyle: {
-        height: window.innerHeight
-      },
+      
+    };
+    this.lastStyle = {
+      paddingBottom: '80px',
+      minHeight: window.innerHeight
     };
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.updateViewport, false);
-    this.updateViewport();
-  }
-
-  componentDidUpdate() {
-    // this.updateViewport();
-  }  
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateViewport, false);
-  }
-
-  updateViewport = () => {
-    const lastW = document.getElementById("lastW");
-    // 当子集<UL>元素超过了一屏的高度的时候   将父级  高度设置为子集高度 + 100
-    if (lastW && (lastW.offsetHeight > window.innerHeight)) {
-      this.setState({
-        lastStyle: {
-          height: lastW.offsetHeight + 100
-        }
-      });
-    }
+    
   }
 
   getProductInfo = (code, type) => {
@@ -161,8 +141,8 @@ class HomeWidgeList extends Component {
         {
           lastIndex
             ?
-            <div className={WidgetCont} style={this.state.lastStyle}>
-              <ul className={WidgetList} id="lastW">{list}</ul>
+            <div className={WidgetCont} style={this.lastStyle}>
+              <ul className={WidgetList}>{list}</ul>
             </div>
             :
             <div className={WidgetCont}>

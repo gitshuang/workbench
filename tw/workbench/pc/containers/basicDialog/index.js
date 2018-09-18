@@ -78,7 +78,7 @@ class PopDialogComp extends Component {
 				className="basic_dialog_modal"
 				type={dialogType}
 				backdrop={"static"}
-				show={showModal}
+				show={true}
 				title={title}
 				backup={false}
 				close={closeDialogNew}

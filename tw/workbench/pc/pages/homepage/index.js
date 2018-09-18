@@ -97,6 +97,9 @@ class HomePage extends Component {
         }
       ],
     };
+    this.style = {
+      height: window.innerHeight - 119
+    }
   }
 
   componentWillMount() {
@@ -106,6 +109,10 @@ class HomePage extends Component {
       iframeUrl: getHost(key),
     });
     this.getUserInfo(userId);
+  }
+
+  componentDidMount() {
+    
   }
 
   componentWillReceiveProps(nextProps) {
@@ -227,8 +234,8 @@ class HomePage extends Component {
       },
     } = this.props;
     return (
-      <div className="um-win">
-        <div className="um-header header">
+      <div className='um-win' style={{overflow: 'auto'}}>
+        <div className="header">
           <Header onLeftClick={this.goHome} >
             <div>
               <span>{`${userName}的個人主頁`}</span>
@@ -238,9 +245,9 @@ class HomePage extends Component {
             <BreadcrumbContainer data={brm} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${umContent} content um-vbox um-content`}>
-          <div className={`${content} um-vbox um-content`}>
-            <div className={user}>
+        <div className={`${umContent} content`}>
+          <div className={`${content}`}>
+            <div className={user} id='user'>
               <img src={bg} />
               <div className={info}>
                 <dl className="clearfix">
@@ -265,11 +272,11 @@ class HomePage extends Component {
                 </dl>
               </div>
             </div>
-            <div className={`${tabContent} um-content um-vbox`}>
+            <div className={`${tabContent}`}>
               <ul>
                 {this.renderTabs()}
               </ul>
-              <div className="um-content">
+              <div style={this.style}>
                 <IFrame title={activetab} url={`${iframeUrl}?userId=${userId}`} />
               </div>
             </div>

@@ -57,6 +57,7 @@ const NoMatch = ({ history }) => {
 @withRouter
 @connect(mapStateToProps(
   'showFrame',
+  'showModal',
 ), {
     requestStart,
     requestSuccess,
@@ -188,7 +189,7 @@ class Root extends Component {
   }
   render() {
     if(!this.isLogin && !this.state.lanAjax) return null;
-    const { showFrame } = this.props;
+    const { showFrame, showModal } = this.props;
     let duoyuRoutes = loginRoutes;
     if(this.state.defaultLan ==='en_US'){
       duoyuRoutes = loginRoutesEn
@@ -202,7 +203,7 @@ class Root extends Component {
           }
           <Route component={NoMatch} />
         </Switch>
-        <BasicDialog />
+        {showModal? <BasicDialog />: null}
         {showFrame ? <Frame /> : null}
       </div>
     );
