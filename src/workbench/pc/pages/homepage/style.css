@@ -80,6 +80,7 @@
 
 .tabContent ul{
 	width: 100%;
+	height: 37px;
 	overflow: hidden;
 	display: flex;
 	border-bottom: 1px solid #d3d3d3;
@@ -89,6 +90,7 @@
 .tabContent ul li{
 	float: left;
 	padding: 8px 10px;
+	line-height: 20px;
   margin: 0 40px;
 	font-size: 14px;
 	position: relative;
@@ -114,49 +116,6 @@
 }
 .tabContent ul li.active::after{
 	background: #E14C46;
-}
-
-
-/*
-.tabContent :global(.u-tabs-top .u-tabs-nav-scroll){
-	width: 100%;
-}
-
-.tabContent :global(.u-tabs-tab.u-tabs-tab-active){
-  color:#E14C46;
-}
-
-.tabContent :global(.u-tabs){
-  border-bottom:none;
-  overflow: hidden;
-  padding-top: 6px;
-}
-
-.tabContent :global(.u-tabs-tab){
-  
-}
-.tabContent :global(.u-tabs-tab):hover{
-  color: #E14C46;
-}
-
-.tabContent :global(.u-tabs-ink-bar){
-  height:6px;
-  background:#E14C46;
-  border-radius:3px;
-}
-
-.tabContent :global(.u-tabs-nav-wrap){
-  border-bottom:1px solid #DDE0E3;
-}
-
-.tabContent :global(.u-select-arrow){
-  font-size:14px;
-  color:#E14C46;
-}
-
-.tabContent :global(.u-tabs-nav){
-	left: 50%;
-	transform: translate(-50%);
 }
 
 /*定义滚动条宽高*/
