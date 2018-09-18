@@ -14,7 +14,7 @@ import Navbar from 'components/scrollNav';
 import DropdownButton from 'components/dropdown';
 import Personals from './personal';
 import { allBtn, btnDisable, create } from './style.css';
-import logoUrl from 'assets/image/logo.png';
+import logoUrl from 'assets/image/logo2.svg';
 
 
 const {
