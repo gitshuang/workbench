@@ -149,7 +149,7 @@ export default class Work extends Component {
   constructor(props) {
     super(props);
     this.state = {
-			loaded: false,
+			
     };
     this.goBack = this.goBack.bind(this);
   }
@@ -234,9 +234,6 @@ export default class Work extends Component {
       history,
     } = this.props;
     requestStart();
-    this.setState({
-      loaded: false,
-    });
     getProductInfo(code, type, subcode).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
@@ -249,9 +246,6 @@ export default class Work extends Component {
           } = payload;
           history.replace(`/${type}/${code}/${subcode}`);
         }
-        this.setState({
-          loaded: true,
-        });
       }
       requestSuccess();
     });

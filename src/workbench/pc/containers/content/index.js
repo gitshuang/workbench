@@ -1,15 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
-import {connect} from 'react-redux';
-import {mapStateToProps} from '@u';
-import {content, contentArea, active} from './style.css';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+import { content, contentArea, active,load } from './style.css';
 import IFrame from 'components/iframe';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import FinanceCloudContent from 'components/financeCloud'
 
 import workActions from 'store/root/work/actions';
 const { getPinGroup } = workActions;
+import loading from 'assets/image/default.png';
 
 @withRouter
 @connect(
@@ -22,7 +23,7 @@ const { getPinGroup } = workActions;
       namespace: 'work',
     },
   ),
-	{getPinGroup}
+  { getPinGroup }
 )
 class ContentContainer extends Component {
   static propTypes = {
@@ -33,6 +34,39 @@ class ContentContainer extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isReady: false
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    const {
+      match: {
+        params: {
+          code: newCode,
+          type: newType,
+          subcode: newSubcode,
+        },
+      },
+    } = nextProps;
+    const {
+      match: {
+        params: {
+          code: oldCode,
+          type: oldType,
+          subcode: oldSubcode,
+        },
+      },
+    } = this.props;
+    // 判断新旧type true为变化诶
+    const typeChange = newType !== oldType;
+    const codeChange = newCode !== oldCode;
+    const subcodeChange = newSubcode !== oldSubcode;
+    if(typeChange || codeChange || subcodeChange){
+      this.setState({
+        isReady: false
+      });
+    }
   }
 
   updateCurrent = (serviceCode) => {
@@ -45,48 +79,69 @@ class ContentContainer extends Component {
       },
       history
     } = this.props;
-    history.replace(`/${type}/${code}/${serviceCode}`)
+    history.replace(`/${type}/${code}/${serviceCode}`);
+  }
+
+  getPinGroup = () => {
+    const { getPinGroup } = this.props;
+    this.setState({
+      isReady: true
+    });
+    getPinGroup();
+  }
+
+
+  renderHtml() {
+    const { hasTab, current, tabs, type, menus, getPinGroup } = this.props;
+    if (type === 4) {
+      return (
+        <div className={`${content} ${active}`}>
+          <FinanceCloudContent
+            onLoad={getPinGroup}
+            env={process.env.NODE_ENV}
+            current={{ ...current, extendDesc: current.ext1 }}
+            menuItems={menus}
+            updateCurrent={this.updateCurrent}
+          />
+        </div>
+      );
+    }
+    if (hasTab) {
+      return tabs.map(({ id, location }) => {
+        return (
+          <div key={id} className={cs(
+            content,
+            {
+              [active]: current.menuItemId === id,
+            }
+          )}>
+            <IFrame onLoad={getPinGroup} title={id} url={location} />
+          </div>
+        )
+      })
+    } else {
+      return (
+        <div className={`${content} ${active}`} >
+          <IFrame onLoad={this.getPinGroup} title={current.menuItemId} url={current.url} />
+        </div>
+      );
+    }
   }
 
   render() {
-    const {hasTab, current, tabs, type, menus, getPinGroup} = this.props;
-    if (type === 4) {
-      return (<div className={contentArea}>
-        <div className={`${content} ${active}`}>
-          <FinanceCloudContent onLoad={getPinGroup} env={process.env.NODE_ENV} current={{...current, extendDesc: current.ext1}} menuItems={menus}
-                               updateCurrent={this.updateCurrent}/>
-        </div>
-      </div>);
-    }
-    if (hasTab) {
-      return (
-        <div className={contentArea}>
-          {
-            tabs.map(({id, location}) => {
-                return (
-                  <div key={id} className={cs(
-                    content,
-                    {
-                      [active]: current.menuItemId === id,
-                    }
-                  )}>
-                    <IFrame onLoad={getPinGroup} title={id} url={location}/>
-                  </div>
-                )
-              }
-            )
-          }
-        </div>
-      );
-    } else {
-      return (
-        <div className={contentArea}>
-          <div className={`${content} ${active}`}>
-            <IFrame onLoad={getPinGroup} title={current.menuItemId} url={current.url}/>
+    return (
+      <div className={contentArea}>
+        {this.renderHtml()}
+        {
+          !this.state.isReady ? 
+          <div className={load}>
+            <img src={loading}  />
           </div>
-        </div>
-      );
-    }
+          : null
+        }
+        
+      </div>
+    )
   }
 }
 
