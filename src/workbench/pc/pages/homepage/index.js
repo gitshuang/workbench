@@ -98,7 +98,7 @@ class HomePage extends Component {
       ],
     };
     this.style = {
-      height: window.innerHeight - 119
+      height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
     }
   }
 
