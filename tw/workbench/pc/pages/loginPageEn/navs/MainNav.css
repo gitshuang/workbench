@@ -47,6 +47,9 @@
     white-space: nowrap;
 
 }
+.MainNav .rightCon.languageClass :global(.u-select .u-select-arrow){
+    left:70px;
+}
 .MainNav .leftCon :global(.leftConFake){
     width: 100%;
     height: 70px;

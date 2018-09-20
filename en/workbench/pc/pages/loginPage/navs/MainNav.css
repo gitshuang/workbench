@@ -38,6 +38,9 @@
     box-sizing: border-box;
     float: left;
 }
+.MainNav .rightCon.languageClass :global(.u-select .u-select-arrow){
+    left:70px;
+}
 .MainNav .leftCon{
     width: 25%;
     padding-left: 30px;
