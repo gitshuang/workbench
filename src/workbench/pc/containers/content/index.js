@@ -37,6 +37,7 @@ class ContentContainer extends Component {
     this.state = {
       isReady: false
     }
+    this.t = null;
   }
 
   componentWillReceiveProps(nextProps){
@@ -63,6 +64,7 @@ class ContentContainer extends Component {
     const codeChange = newCode !== oldCode;
     const subcodeChange = newSubcode !== oldSubcode;
     if(typeChange || codeChange || subcodeChange){
+      clearTimeout(this.t);
       this.setState({
         isReady: false
       });
@@ -84,20 +86,22 @@ class ContentContainer extends Component {
 
   getPinGroup = () => {
     const { getPinGroup } = this.props;
-    this.setState({
-      isReady: true
-    });
+    this.t = setTimeout( ()=>{
+      this.setState({
+        isReady: true
+      });
+    },100);
     getPinGroup();
   }
 
 
   renderHtml() {
-    const { hasTab, current, tabs, type, menus, getPinGroup } = this.props;
+    const { hasTab, current, tabs, type, menus } = this.props;
     if (type === 4) {
       return (
         <div className={`${content} ${active}`}>
           <FinanceCloudContent
-            onLoad={getPinGroup}
+            onLoad={this.getPinGroup}
             env={process.env.NODE_ENV}
             current={{ ...current, extendDesc: current.ext1 }}
             menuItems={menus}
@@ -115,7 +119,7 @@ class ContentContainer extends Component {
               [active]: current.menuItemId === id,
             }
           )}>
-            <IFrame onLoad={getPinGroup} title={id} url={location} />
+            <IFrame onLoad={this.getPinGroup} title={id} url={location} />
           </div>
         )
       })
