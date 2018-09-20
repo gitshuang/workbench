@@ -20,7 +20,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom,#A8ABB0, #D8DADC);
+  /* background: linear-gradient(to bottom,#A8ABB0, #D8DADC); */
+  background: #ffffff;
   left: 0;
   top: 0;
   z-index: 2;

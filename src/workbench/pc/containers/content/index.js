@@ -10,7 +10,7 @@ import FinanceCloudContent from 'components/financeCloud'
 
 import workActions from 'store/root/work/actions';
 const { getPinGroup } = workActions;
-import loading from 'assets/image/default.png';
+import loading from 'assets/image/loading.gif';
 
 @withRouter
 @connect(
