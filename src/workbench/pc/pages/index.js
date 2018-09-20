@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import routes from 'router';
 import loginRoutes from 'router/login.js';
 import loginRoutesEn from 'router/loginEn.js';//由于官方首页多语下两套设计：中繁和英文
-import loginPage from './loginPage';
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
 import { getContext, mapStateToProps } from '@u';
@@ -98,8 +97,8 @@ class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lanAjax:false,//请求语言之后才显示页面
-      defaultLan:'zh_CN',//默认是中文
+      lanAjax: false,//请求语言之后才显示页面
+      defaultLan: 'zh_CN',//默认是中文
     };
     // this.defaultLan ='zh_CN';//默认是中文
     this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin()) || process.env.LOCALHOST;
@@ -183,27 +182,30 @@ class Root extends Component {
       if (error) {
         return;
       }
-      this.setState({defaultLan:payload.langCode,lanAjax:true});
+      this.setState({ defaultLan: payload.langCode, lanAjax: true });
     });
-    
+
   }
   render() {
-    if(!this.isLogin && !this.state.lanAjax) return null;
+    if (!this.isLogin && !this.state.lanAjax) return null;
     const { showFrame, showModal } = this.props;
     let duoyuRoutes = loginRoutes;
-    if(this.state.defaultLan ==='en_US'){
+    if (this.state.defaultLan === 'en_US') {
       duoyuRoutes = loginRoutesEn
     }
     return (
       <div>
         <Switch>
           {
-            this.isLogin ? routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />) : 
-            duoyuRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+            this.isLogin 
+            ? 
+              routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />) 
+            :
+              duoyuRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
           }
           <Route component={NoMatch} />
         </Switch>
-        {showModal? <BasicDialog />: null}
+        {showModal ? <BasicDialog /> : null}
         {showFrame ? <Frame /> : null}
       </div>
     );
