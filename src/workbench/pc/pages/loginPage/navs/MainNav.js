@@ -107,15 +107,19 @@ class  MainNavPanel extends Component{
       window.open('https://open.diwork.com');
     }
   }
+  goToHome = () =>{
+    this.props.match && this.props.match.path!=='/'&&this.props.history.push('/');
+
+  }
   handleChange =(value) =>{
     // const { onChangeLanguage } = this.props.language;
     this.onChangeLanguage(value);
   }
   render(){
-    const {defaultValue, languageList, ajaxFlag}  = this.state;
+    const {defaultValue, languageList}  = this.state;
     return(
       <div className={MainNav} id="MainNav">
-          <div className={leftCon} onClick={()=>{open('login')}} >
+          <div className={leftCon} onClick={this.goToHome} >
             <img src={LogoSvg} className="companylogoSvg"/>
             <span className={headerDesc}>数字化工作入口</span>
           </div>
@@ -138,7 +142,7 @@ class  MainNavPanel extends Component{
                       value={defaultValue}
                       onChange={this.handleChange}
                       dropdownClassName={"gnoreclass"}
-                      style={{width:"110px"}}
+                      style={{width:"90px"}}
                     >
                     {
                       languageList.map((item,index)=>{
