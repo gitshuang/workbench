@@ -139,7 +139,10 @@ class ContentContainer extends Component {
         {
           !this.state.isReady ? 
           <div className={load}>
-            <img src={loading}  />
+            <div>
+              <img src={loading}  />
+              <p>加载中...</p>
+            </div>
           </div>
           : null
         }

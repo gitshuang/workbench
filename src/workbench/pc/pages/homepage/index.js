@@ -115,8 +115,10 @@ class HomePage extends Component {
 
   componentDidMount() {
     const { history } = this.props;
+    history.listen((location) => {
+      console.log(location);
+    });
     history.block((location) => {
-      debugger;
       console.log(location);
     });
   }
