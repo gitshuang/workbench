@@ -187,17 +187,17 @@ class HomePage extends Component {
   }
 
   goBack = () => {
-    const { history } = this.props;
-    if(this.historys.length){
-      // 将historys 去掉最后一个  并取出来
-      const lastHistory = this.historys.pop();
-      // 设定pop为true
-      this.pop = true;
-      history.replace(`/homepage/${lastHistory}/info`);
-    }else{
-      history.replace('');
-    }
-    // this.props.history.goBack();
+    // const { history } = this.props;
+    // // 设定pop为true
+    // this.pop = true;
+    // if(this.historys.length){
+    //   // 将historys 去掉最后一个  并取出来
+    //   const lastHistory = this.historys.pop();
+    //   history.replace(`/homepage/${lastHistory}/info`);
+    // }else{
+    //   history.replace('');
+    // }
+    this.props.history.goBack();
   }
 
   goHome = () => {
