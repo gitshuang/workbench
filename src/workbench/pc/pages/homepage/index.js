@@ -153,7 +153,12 @@ class HomePage extends Component {
   }
 
   historyActions = (userId) => {
+    // 判断如果是因为去掉pop引起的变化 就不再追加  避免死循环
+    if(this.pop){
+      return false;
+    }
     this.historys.push(userId);
+    this.pop = false;
   }
 
   getUserInfo = (userId) => {
@@ -184,7 +189,10 @@ class HomePage extends Component {
   goBack = () => {
     const { history } = this.props;
     if(this.historys.length){
+      // 将historys 去掉最后一个  并取出来
       const lastHistory = this.historys.pop();
+      // 设定pop为true
+      this.pop = true;
       history.replace(`/homepage/${lastHistory}/info`);
     }else{
       history.replace('');
