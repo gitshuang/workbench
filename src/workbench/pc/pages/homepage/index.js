@@ -78,28 +78,28 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{ name: '个人主页' }],
       isSelf: false,
       activetab: 'info',
       iframeUrl: '',
-      items: [
-        {
-          key: 'info',
-          label: '资料',
-        },
-        {
-          key: 'speak',
-          label: '发言',
-        },
-        {
-          key: 'honor',
-          label: '荣耀',
-        }
-      ],
     };
     this.style = {
       height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
     };
+    this.items = [
+      {
+        key: 'info',
+        label: '资料',
+      },
+      {
+        key: 'speak',
+        label: '发言',
+      },
+      {
+        key: 'honor',
+        label: '荣耀',
+      }
+    ];
+    this.brm = [{ name: '个人主页' }];
     this.isRe = false;
     this.historys = [];
   }
@@ -116,6 +116,7 @@ class HomePage extends Component {
   componentDidMount() {
     const { history } = this.props;
     history.block((location) => {
+      debugger;
       console.log(location);
     });
   }
@@ -235,8 +236,8 @@ class HomePage extends Component {
   }
 
   renderTabs = () => {
-    const { items, activetab } = this.state;
-    return items.map(item => {
+    const { activetab } = this.state;
+    return this.items.map(item => {
       return (
         <li
           key={item.key}
@@ -250,7 +251,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { brm, activetab, iframeUrl } = this.state;
+    const { activetab, iframeUrl } = this.state;
     const {
       userInfo: {
         userAvator,
@@ -268,7 +269,7 @@ class HomePage extends Component {
             </div>
           </Header>
           <div className="appBreadcrumb">
-            <BreadcrumbContainer data={brm} goback={this.goBack} />
+            <BreadcrumbContainer data={this.brm} goback={this.goBack} />
           </div>
         </div>
         <div className={`${umContent} content`}>
