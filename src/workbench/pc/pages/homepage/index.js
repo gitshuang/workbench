@@ -96,10 +96,12 @@ class HomePage extends Component {
           label: '荣耀',
         }
       ],
+      history: [],
     };
     this.style = {
       height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
-    }
+    };
+    this.isRe = false;
   }
 
   componentWillMount() {
@@ -112,7 +114,10 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    
+    const { history } = this.props;
+    history.block((location) => {
+      console.log(location);
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -124,10 +129,12 @@ class HomePage extends Component {
         userId
       }
     } = this.props;
+    
 
     // 当前窗口搜索其他人做更改
-    if (userId && newUserId && newUserId !== userId) {
+    if (userId && newUserId && newUserId !== userId && !this.isRe) {
       this.getUserInfo(newUserId);
+      this.historyActions(userId, newUserId);
     }
     // 点击返回按钮  让地址栏和tabs 保持一致
     if (activetab && key && key !== activetab) {
@@ -136,6 +143,16 @@ class HomePage extends Component {
         iframeUrl: getHost(key),
       });
     }
+  }
+
+  componentWillUnmount() {
+    
+  }
+
+  historyActions = (userId,newUserId) => {
+    console.log(userId);
+    console.log(newUserId);
+    debugger;
   }
 
   getUserInfo = (userId) => {
@@ -149,8 +166,10 @@ class HomePage extends Component {
     this.setState({
       isSelf: !!(userId === userid),
     });
+    this.isRe = true;
     requestStart();
     getUserInfo(userId).then(({ error, payload }) => {
+      this.isRe = false;
       if (error) {
         requestError(payload);
         return false;
