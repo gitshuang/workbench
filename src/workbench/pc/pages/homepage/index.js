@@ -96,12 +96,12 @@ class HomePage extends Component {
           label: '荣耀',
         }
       ],
-      history: [],
     };
     this.style = {
       height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
     };
     this.isRe = false;
+    this.historys = [];
   }
 
   componentWillMount() {
@@ -134,7 +134,7 @@ class HomePage extends Component {
     // 当前窗口搜索其他人做更改
     if (userId && newUserId && newUserId !== userId && !this.isRe) {
       this.getUserInfo(newUserId);
-      this.historyActions(userId, newUserId);
+      this.historyActions(userId);
     }
     // 点击返回按钮  让地址栏和tabs 保持一致
     if (activetab && key && key !== activetab) {
@@ -149,9 +149,8 @@ class HomePage extends Component {
     
   }
 
-  historyActions = (userId,newUserId) => {
-    console.log(userId);
-    console.log(newUserId);
+  historyActions = (userId) => {
+    this.historys.push(userId);
   }
 
   getUserInfo = (userId) => {
@@ -162,23 +161,32 @@ class HomePage extends Component {
       requestError,
     } = this.props;
     const { userid } = getContext();
+    // 判断是不是本人
     this.setState({
       isSelf: !!(userId === userid),
     });
+    // 为了控制nexprops不再重复请求
     this.isRe = true;
     requestStart();
     getUserInfo(userId).then(({ error, payload }) => {
-      this.isRe = false;
       if (error) {
         requestError(payload);
         return false;
       }
       requestSuccess();
+      this.isRe = false;
     });
   }
 
   goBack = () => {
-    this.props.history.goBack();
+    const { history } = this.props;
+    if(this.historys.length){
+      const lastHistory = this.historys.pop();
+      history.replace(`/homepage/${lastHistory}/info`);
+    }else{
+      history.replace('');
+    }
+    // this.props.history.goBack();
   }
 
   goHome = () => {
