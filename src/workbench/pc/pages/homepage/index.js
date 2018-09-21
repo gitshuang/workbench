@@ -152,7 +152,6 @@ class HomePage extends Component {
   historyActions = (userId,newUserId) => {
     console.log(userId);
     console.log(newUserId);
-    debugger;
   }
 
   getUserInfo = (userId) => {
