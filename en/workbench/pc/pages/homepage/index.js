@@ -136,15 +136,14 @@ class HomePage extends Component {
         this.historys.push(userId);
       }
     }
-    // const key = nextProps.match.params ? nextProps.match.params.key : '';
-    // const { activetab } = this.state;
-    // 点击返回按钮  让地址栏和tabs 保持一致
-    // if (activetab && key && key !== activetab) {
-    //   this.setState({
-    //     activetab: key,
-    //     iframeUrl: getHost(key),
-    //   });
-    // }
+    const key = nextProps.match.params ? nextProps.match.params.key : '';
+    const { activetab } = this.state;
+    // 切换用户  让地址栏和tabs 保持一致
+    if (activetab && key && key !== activetab) {
+      this.setState({
+        activetab: key,
+      });
+    }
   }
 
   componentWillUnmount() {
