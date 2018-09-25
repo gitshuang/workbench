@@ -102,6 +102,7 @@ class HomePage extends Component {
     this.brm = [{ name: '个人主页' }];
     this.isRe = false;
     this.historys = [];
+    this.storageArr = [];
   }
 
   componentWillMount() {
@@ -137,7 +138,10 @@ class HomePage extends Component {
     // 当前窗口搜索其他人做更改
     if (userId && newUserId && newUserId !== userId && !this.isRe) {
       this.getUserInfo(newUserId);
-      this.historyActions(userId);
+      // 数组保证长度 -1, 所以将userid传递  为了实现倒退到最后一个直接跳出
+      if(!this.storageArr.includes(newUserId)){
+        this.historys.push(userId);
+      }
     }
     // 点击返回按钮  让地址栏和tabs 保持一致
     if (activetab && key && key !== activetab) {
@@ -150,15 +154,6 @@ class HomePage extends Component {
 
   componentWillUnmount() {
     
-  }
-
-  historyActions = (userId) => {
-    // 判断如果是因为去掉pop引起的变化 就不再追加  避免死循环
-    if(this.pop){
-      return false;
-    }
-    this.historys.push(userId);
-    this.pop = false;
   }
 
   getUserInfo = (userId) => {
@@ -183,21 +178,23 @@ class HomePage extends Component {
       }
       requestSuccess();
       this.isRe = false;
+      // 每次请求都将userId 存储
+      this.storageArr.push(userId);
     });
   }
 
   goBack = () => {
-    // const { history } = this.props;
-    // // 设定pop为true
-    // this.pop = true;
-    // if(this.historys.length){
-    //   // 将historys 去掉最后一个  并取出来
-    //   const lastHistory = this.historys.pop();
-    //   history.replace(`/homepage/${lastHistory}/info`);
-    // }else{
-    //   history.replace('');
-    // }
-    this.props.history.goBack();
+    const { history } = this.props;
+    // 设定pop为true
+    this.pop = true;
+    if(this.historys.length){
+      // 将historys 去掉最后一个  并取出来
+      const lastHistory = this.historys.pop();
+      history.replace(`/homepage/${lastHistory}/info`);
+    }else{
+      history.replace('');
+    }
+    // this.props.history.goBack();
   }
 
   goHome = () => {
