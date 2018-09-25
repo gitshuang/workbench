@@ -59,8 +59,8 @@ function getData(url, callback) {
   const bVersion = navigator.appVersion;
   if (browser === 'Microsoft Internet Explorer' && bVersion.match(/9./i)[0] === '9.') {
     axios.get(url).then((response) => {
-        getResultFetch(this, response.data, callback);
-    }).catch((error)=>{
+      getResultFetch(this, response.data, callback);
+    }).catch((error) => {
       console.log(error);
     });
   } else {

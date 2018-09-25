@@ -88,33 +88,19 @@ class Home extends Component {
       applications: [],
     };
     this.updateViewport = this.updateViewport.bind(this);
+    this.workRe = false;
   }
 
   componentWillMount() {
-    const {
-      requestStart, requestSuccess, requestError, getWorkList,
-    } = this.props;
-    requestStart();
-    const param = {
-      componentCode: 'yonyoucloud',
-      viewCode: 'home',
-      deviceType: 'PC',
-      lang: 'US',
-    };
-    // 请求磁贴
-    getWorkList(param).then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-        return false;
-      }
-      requestSuccess();
-    });
+    
   }
+
   componentDidMount() {
     window.addEventListener('scroll', this.updateViewport, false);
     window.addEventListener('resize', this.updateViewport, false);
     this.updateViewport();
   }
+
   componentDidUpdate() {
     let total = 0;
     this.props.workList.forEach((v) => {
@@ -130,9 +116,33 @@ class Home extends Component {
     const {
       getApplicationList,
       userInfo: {
-        admin
-      }, 
+        admin,
+        allowTenants, // 920新增 
+      },
+      workList 
     } = this.props;
+    // 920修改  为了避免无租户情况下请求  先暂时这么搞。 后续无租户不跳转了再调整
+    if( !this.workRe && !workList.length  &&  allowTenants && allowTenants.length){
+      const {
+        requestStart, requestSuccess, requestError, getWorkList,
+      } = this.props;
+      this.workRe = true;
+      requestStart();
+      const param = {
+        componentCode: 'yonyoucloud',
+        viewCode: 'home',
+        deviceType: 'PC',
+        lang: 'US',
+      };
+      // 请求磁贴
+      getWorkList(param).then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
+          return false;
+        }
+        requestSuccess();
+      });
+    }
     const timeType = this.totalTime();
     if (admin && timeType) {
       const time = new Date().format("yyyy-MM-dd");
@@ -154,6 +164,7 @@ class Home extends Component {
       });
     }
   }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.updateViewport);
     window.removeEventListener('resize', this.updateViewport);

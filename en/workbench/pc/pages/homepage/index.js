@@ -78,28 +78,31 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brm: [{ name: 'Homepage' }],
       isSelf: false,
       activetab: 'info',
       iframeUrl: '',
-      items: [
-        {
-          key: 'info',
-          label: 'Profile',
-        },
-        {
-          key: 'speak',
-          label: 'Post',
-        },
-        {
-          key: 'honor',
-          label: 'Honor',
-        }
-      ],
     };
     this.style = {
       height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
-    }
+    };
+    this.items = [
+      {
+        key: 'info',
+        label: 'Profile',
+      },
+      {
+        key: 'speak',
+        label: 'Post',
+      },
+      {
+        key: 'honor',
+        label: 'Honor',
+      }
+    ];
+    this.brm = [{ name: 'Homepage' }];
+    this.isRe = false;
+    this.historys = [];
+    this.storageArr = [];
   }
 
   componentWillMount() {
@@ -112,7 +115,8 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    
+    window.history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', this.forbidBack);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -124,10 +128,15 @@ class HomePage extends Component {
         userId
       }
     } = this.props;
+    
 
     // 当前窗口搜索其他人做更改
-    if (userId && newUserId && newUserId !== userId) {
+    if (userId && newUserId && newUserId !== userId && !this.isRe) {
       this.getUserInfo(newUserId);
+      // 数组保证长度 -1, 所以将userid传递  为了实现倒退到最后一个直接跳出
+      if(!this.storageArr.includes(newUserId)){
+        this.historys.push(userId);
+      }
     }
     // 点击返回按钮  让地址栏和tabs 保持一致
     if (activetab && key && key !== activetab) {
@@ -138,6 +147,16 @@ class HomePage extends Component {
     }
   }
 
+  componentWillUnmount() {
+    // 本来是将这个清空， 担心是搜索之后点击更多结果，然后跳转过来的。点击返回就会直接跳出了
+    // this.storageArr = [];
+    window.removeEventListener('popstate', this.forbidBack);
+  }
+
+  forbidBack = (e) => {
+    history.pushState(null, null, document.URL);
+  }
+
   getUserInfo = (userId) => {
     const {
       getUserInfo,
@@ -146,9 +165,12 @@ class HomePage extends Component {
       requestError,
     } = this.props;
     const { userid } = getContext();
+    // 判断是不是本人
     this.setState({
       isSelf: !!(userId === userid),
     });
+    // 为了控制nexprops不再重复请求
+    this.isRe = true;
     requestStart();
     getUserInfo(userId).then(({ error, payload }) => {
       if (error) {
@@ -156,11 +178,24 @@ class HomePage extends Component {
         return false;
       }
       requestSuccess();
+      this.isRe = false;
+      // 每次请求都将userId 存储
+      this.storageArr.push(userId);
     });
   }
 
   goBack = () => {
-    this.props.history.goBack();
+    const { history } = this.props;
+    // 设定pop为true
+    this.pop = true;
+    if(this.historys.length){
+      // 将historys 去掉最后一个  并取出来
+      const lastHistory = this.historys.pop();
+      history.replace(`/homepage/${lastHistory}/info`);
+    }else{
+      history.replace('');
+    }
+    // this.props.history.goBack();
   }
 
   goHome = () => {
@@ -209,8 +244,8 @@ class HomePage extends Component {
   }
 
   renderTabs = () => {
-    const { items, activetab } = this.state;
-    return items.map(item => {
+    const { activetab } = this.state;
+    return this.items.map(item => {
       return (
         <li
           key={item.key}
@@ -224,7 +259,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { brm, activetab, iframeUrl } = this.state;
+    const { activetab, iframeUrl } = this.state;
     const {
       userInfo: {
         userAvator,
@@ -242,7 +277,7 @@ class HomePage extends Component {
             </div>
           </Header>
           <div className="appBreadcrumb">
-            <BreadcrumbContainer data={brm} goback={this.goBack} />
+            <BreadcrumbContainer data={this.brm} goback={this.goBack} />
           </div>
         </div>
         <div className={`${umContent} content`}>

@@ -59,7 +59,7 @@ class HomeWidgeList extends Component {
       requestSuccess,
       history,
     } = this.props;
-    requestStart();
+    // requestStart();
     getProductInfo(code, type).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
