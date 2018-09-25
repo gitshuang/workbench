@@ -5,10 +5,12 @@ import { iframe, iframeCont } from './style.css';
 const propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
+  style: PropTypes.shape({}),
 };
 const defaultProps = {
   url: '',
   title: '',
+  style: {}
 };
 
 class Iframe extends Component {
@@ -16,9 +18,10 @@ class Iframe extends Component {
     const {
       title,
       url,
+      style
     } = this.props;
     return (
-      <div className={iframeCont}>
+      <div className={iframeCont} style={style}>
         <iframe id={title} title={title} src={url} className={iframe} />
       </div>
     );

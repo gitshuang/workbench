@@ -80,7 +80,7 @@ class HomePage extends Component {
     this.state = {
       isSelf: false,
       activetab: 'info',
-      iframeUrl: '',
+      // iframeUrl: '',
     };
     this.style = {
       height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
@@ -89,14 +89,17 @@ class HomePage extends Component {
       {
         key: 'info',
         label: 'Profile',
+        url: getHost('info'),
       },
       {
         key: 'speak',
         label: 'Post',
+        url: getHost('speak'),
       },
       {
         key: 'honor',
         label: 'Honor',
+        url: getHost('honor'),
       }
     ];
     this.brm = [{ name: 'Homepage' }];
@@ -109,51 +112,46 @@ class HomePage extends Component {
     const { key, userId } = this.props.match.params;
     this.setState({
       activetab: key,
-      iframeUrl: getHost(key),
+      // iframeUrl: getHost(key),
     });
     this.getUserInfo(userId);
   }
 
   componentDidMount() {
-    window.history.pushState(null, null, document.URL);
     window.addEventListener('popstate', this.forbidBack);
   }
 
   componentWillReceiveProps(nextProps) {
     const newUserId = nextProps.match.params ? nextProps.match.params.userId : '';
-    const key = nextProps.match.params ? nextProps.match.params.key : '';
-    const { activetab } = this.state;
     const {
       userInfo: {
         userId
       }
     } = this.props;
-    
-
     // 当前窗口搜索其他人做更改
     if (userId && newUserId && newUserId !== userId && !this.isRe) {
       this.getUserInfo(newUserId);
       // 数组保证长度 -1, 所以将userid传递  为了实现倒退到最后一个直接跳出
-      if(!this.storageArr.includes(newUserId)){
+      if (!this.storageArr.includes(newUserId)) {
         this.historys.push(userId);
       }
     }
+    // const key = nextProps.match.params ? nextProps.match.params.key : '';
+    // const { activetab } = this.state;
     // 点击返回按钮  让地址栏和tabs 保持一致
-    if (activetab && key && key !== activetab) {
-      this.setState({
-        activetab: key,
-        iframeUrl: getHost(key),
-      });
-    }
+    // if (activetab && key && key !== activetab) {
+    //   this.setState({
+    //     activetab: key,
+    //     iframeUrl: getHost(key),
+    //   });
+    // }
   }
 
   componentWillUnmount() {
-    // 本来是将这个清空， 担心是搜索之后点击更多结果，然后跳转过来的。点击返回就会直接跳出了
-    // this.storageArr = [];
     window.removeEventListener('popstate', this.forbidBack);
   }
 
-  forbidBack = (e) => {
+  forbidBack = () => {
     history.pushState(null, null, document.URL);
   }
 
@@ -188,11 +186,11 @@ class HomePage extends Component {
     const { history } = this.props;
     // 设定pop为true
     this.pop = true;
-    if(this.historys.length){
+    if (this.historys.length) {
       // 将historys 去掉最后一个  并取出来
       const lastHistory = this.historys.pop();
       history.replace(`/homepage/${lastHistory}/info`);
-    }else{
+    } else {
       history.replace('');
     }
     // this.props.history.goBack();
@@ -211,7 +209,7 @@ class HomePage extends Component {
     }
     this.setState({
       activetab,
-      iframeUrl: getHost(activetab),
+      // iframeUrl: getHost(activetab),
     }, () => {
       this.props.history.push(`/homepage/${userId}/${activetab}`);
     });
@@ -258,18 +256,34 @@ class HomePage extends Component {
     });
   }
 
+  renderIframe = () => {
+    const { activetab } = this.state;
+    const { userInfo: {
+      userId
+    } } = this.props;
+    return this.items.map(item => {
+      return (
+        <IFrame
+          title={item.key}
+          url={`${item.url}?userId=${userId}`}
+          style={{ display: item.key === activetab ? 'block' : 'none' }}
+        />
+      )
+    });
+  }
+
   render() {
-    const { activetab, iframeUrl } = this.state;
+    // const { activetab, iframeUrl } = this.state;
     const {
       userInfo: {
         userAvator,
         userName,
         company,
-        userId
+        // userId
       },
     } = this.props;
     return (
-      <div className='um-win' style={{overflow: 'auto'}}>
+      <div className='um-win' style={{ overflow: 'auto' }}>
         <div className="header">
           <Header onLeftClick={this.goHome} >
             <div>
@@ -312,7 +326,7 @@ class HomePage extends Component {
                 {this.renderTabs()}
               </ul>
               <div style={this.style}>
-                <IFrame title={activetab} url={`${iframeUrl}?userId=${userId}`} />
+                {this.renderIframe()}
               </div>
             </div>
           </div>
