@@ -144,11 +144,11 @@ class Root extends Component {
               requestSuccess();
             }
           });
-          const browser = navigator.appName;
+          // const browser = navigator.appName;
+          // if (browser !== 'Microsoft Internet Explorer') {}
           IM(new componentTool('IM'), getContext(), { // eslint-disable-line
             el: 'IM',
           });
-          // if (browser !== 'Microsoft Internet Explorer') {}
           regMessageTypeHandler(this);
           // 心跳
           timer(getPoll, 10000);
