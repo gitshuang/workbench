@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { content, contentArea, active,load } from './style.css';
+import { content, contentArea, active, load } from './style.css';
 import IFrame from 'components/iframe';
 import { withRouter } from 'react-router-dom';
 import FinanceCloudContent from 'components/financeCloud'
@@ -40,7 +40,7 @@ class ContentContainer extends Component {
     this.t = null;
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     const {
       match: {
         params: {
@@ -63,7 +63,7 @@ class ContentContainer extends Component {
     const typeChange = newType !== oldType;
     const codeChange = newCode !== oldCode;
     const subcodeChange = newSubcode !== oldSubcode;
-    if(typeChange || codeChange || subcodeChange){
+    if (typeChange || codeChange || subcodeChange) {
       clearTimeout(this.t);
       this.setState({
         isReady: false
@@ -86,11 +86,11 @@ class ContentContainer extends Component {
 
   getPinGroup = () => {
     const { getPinGroup } = this.props;
-    this.t = setTimeout( ()=>{
+    this.t = setTimeout(() => {
       this.setState({
         isReady: true
       });
-    },100);
+    }, 100);
     getPinGroup();
   }
 
@@ -101,7 +101,7 @@ class ContentContainer extends Component {
       return (
         <div className={`${content} ${active}`}>
           <FinanceCloudContent
-            onLoad={this.getPinGroup}
+            onLoad={getPinGroup}
             env={process.env.NODE_ENV}
             current={{ ...current, extendDesc: current.ext1 }}
             menuItems={menus}
@@ -119,7 +119,7 @@ class ContentContainer extends Component {
               [active]: current.menuItemId === id,
             }
           )}>
-            <IFrame onLoad={this.getPinGroup} title={id} url={location} />
+            <IFrame onLoad={getPinGroup} title={id} url={location} />
           </div>
         )
       })
@@ -127,6 +127,16 @@ class ContentContainer extends Component {
       return (
         <div className={`${content} ${active}`} >
           <IFrame onLoad={this.getPinGroup} title={current.menuItemId} url={current.url} />
+          {
+            !this.state.isReady ?
+              <div className={load}>
+                <div>
+                  <img src={loading} />
+                  <p>加载中...</p>
+                </div>
+              </div>
+              : null
+          }
         </div>
       );
     }
@@ -136,17 +146,6 @@ class ContentContainer extends Component {
     return (
       <div className={contentArea}>
         {this.renderHtml()}
-        {
-          !this.state.isReady ? 
-          <div className={load}>
-            <div>
-              <img src={loading}  />
-              <p>加载中...</p>
-            </div>
-          </div>
-          : null
-        }
-        
       </div>
     )
   }

@@ -115,13 +115,8 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    const { history } = this.props;
-    history.listen((location) => {
-      console.log(location);
-    });
-    history.block((location) => {
-      console.log(location);
-    });
+    window.history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', this.forbidBack);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -153,7 +148,13 @@ class HomePage extends Component {
   }
 
   componentWillUnmount() {
-    
+    // 本来是将这个清空， 担心是搜索之后点击更多结果，然后跳转过来的。点击返回就会直接跳出了
+    // this.storageArr = [];
+    window.removeEventListener('popstate', this.forbidBack);
+  }
+
+  forbidBack = (e) => {
+    history.pushState(null, null, document.URL);
   }
 
   getUserInfo = (userId) => {
