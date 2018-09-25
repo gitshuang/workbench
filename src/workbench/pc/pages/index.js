@@ -145,11 +145,10 @@ class Root extends Component {
             }
           });
           const browser = navigator.appName;
-          if (browser !== 'Microsoft Internet Explorer') {
-            IM(new componentTool('IM'), getContext(), { // eslint-disable-line
-              el: 'IM',
-            });
-          }
+          IM(new componentTool('IM'), getContext(), { // eslint-disable-line
+            el: 'IM',
+          });
+          // if (browser !== 'Microsoft Internet Explorer') {}
           regMessageTypeHandler(this);
           // 心跳
           timer(getPoll, 10000);
