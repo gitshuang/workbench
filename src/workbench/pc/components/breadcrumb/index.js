@@ -50,13 +50,13 @@ class Breadcrumbs extends Component {
     const self = this;
     return (
       <div className={breadcrumbClass} >
-        <a
+        {/* <a
           onClick={() => this.enhancedGoBack('defaultUrl', -1)}
           onKeyDown={() => this.enhancedGoBack('defaultUrl', -1)}
           role="presentation"
         >返回
         </a>
-        <span className={breadcrumbBack}>|</span>
+        <span className={breadcrumbBack}>|</span> */}
         <Breadcrumb>
           {
             data.map(({ name, url }, i) => {
