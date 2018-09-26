@@ -146,18 +146,17 @@ class Root extends Component {
           });
           // const browser = navigator.appName;
           // if (browser !== 'Microsoft Internet Explorer') {}
-          // IM(new componentTool('IM'), getContext(), { // eslint-disable-line
-          //   el: 'IM',
-          // });
-          const t = setInterval(()=>{
-            console.log(111111)
-            if(window.InitEsnIM){
-              clearInterval(t);
-              InitEsnIM(new componentTool('IM'), getContext(), { // eslint-disable-line
-                el: 'IM',
-              });
-            } 
-          },1);
+          IM(new componentTool('IM'), getContext(), { // eslint-disable-line
+            el: 'IM',
+          });
+          // const t = setInterval(()=>{
+          //   if(window.InitEsnIM){
+          //     clearInterval(t);
+          //     InitEsnIM(new componentTool('IM'), getContext(), { // eslint-disable-line
+          //       el: 'IM',
+          //     });
+          //   } 
+          // },5);
           regMessageTypeHandler(this);
           // 心跳
           timer(getPoll, 10000);
