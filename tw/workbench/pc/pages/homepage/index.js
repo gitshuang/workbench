@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { mapStateToProps, getHost, getContext } from '@u';
 
 import { trigger } from 'public/componentTools';
-import { openService, openIframe, getPageParam } from 'public/regMessageTypeHandler';
+import { openService, openIframe } from 'public/regMessageTypeHandler';
 
 import rootActions from 'store/root/actions';
 import homepageActions from 'store/root/homepage/actions';
