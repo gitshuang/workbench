@@ -1,1 +1,3 @@
-var InitEsnIM = function() {}
+var InitEsnIM = function() {
+    console.log("initim");
+}

@@ -85,7 +85,8 @@ class ContentContainer extends Component {
   }
 
   getPinGroup = () => {
-    const { getPinGroup } = this.props;
+    const { getPinGroup,current } = this.props;
+    if(!current.url) return false;
     this.t = setTimeout(() => {
       this.setState({
         isReady: true
