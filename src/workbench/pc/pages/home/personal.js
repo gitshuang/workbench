@@ -227,7 +227,6 @@ class Personals extends Component {
       return false;
     }
     if(action === "openHomepage"){
-      // history.push(`/homepage/${userInfo.userId}/honor`);
       openHomePage({
         userId: userInfo.userId,
         key: 'honor'
