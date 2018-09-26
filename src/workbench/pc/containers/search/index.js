@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { mapStateToProps, getContext } from '@u';
+import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { dispatch, trigger } from 'public/componentTools';
