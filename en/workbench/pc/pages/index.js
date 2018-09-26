@@ -149,6 +149,14 @@ class Root extends Component {
           IM(new componentTool('IM'), getContext(), { // eslint-disable-line
             el: 'IM',
           });
+          // const t = setInterval(()=>{
+          //   if(window.InitEsnIM){
+          //     clearInterval(t);
+          //     InitEsnIM(new componentTool('IM'), getContext(), { // eslint-disable-line
+          //       el: 'IM',
+          //     });
+          //   } 
+          // },5);
           regMessageTypeHandler(this);
           // 心跳
           timer(getPoll, 10000);

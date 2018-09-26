@@ -82,7 +82,7 @@ const handlerList = {
       data: result,
     });
   },
-  getContext(type, event) {
+  getContext(type) {
     const data = getContext();
     postMessageToWin(this.source, {
       type,
@@ -132,11 +132,17 @@ const handlerList = {
       type,
     });
   },
-  getPageParam(type, event) {
+  getPageParam(type) {
     const data = store.getState().frameParam.pageParam;
     postMessageToWin(this.source, {
       type,
       data,
+    });
+  },
+  openHomePage(type, event){
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source,{
+      type,
     });
   },
 }

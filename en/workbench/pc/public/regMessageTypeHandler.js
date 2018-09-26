@@ -1,18 +1,17 @@
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home';
-import {openGlobalDialog, closeGlobalDialog} from 'pub-comp/pop';
+import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
-import {postMessageToWin, get, logout} from "@u";
-import {enterOrTeam, crossTenantDialog, iframeElm} from "./regMessageTypeHandler.css";
-import {trigger} from "./componentTools";
+import { postMessageToWin, get, logout } from "@u";
+import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
+import { trigger } from "./componentTools";
 import {
   getProductInfo
 } from 'store/root/work/api';
-import {openMessage} from 'components/message';
-import {pushYA, appendSearchParam} from "../utils/utils";
-
-const {addBrm, popBrm} = workActions;
+import { openMessage } from 'components/message';
+import { pushYA, appendSearchParam } from "../utils/utils";
+const { addBrm, popBrm } = workActions;
 const {
   popMessage,
   changeMessageType,
@@ -22,15 +21,15 @@ const {
   openFrame,
   closeFrame,
 } = rootActions;
-const {getUserInfo} = homeActions;
+const { getUserInfo } = homeActions;
 const handlers = {
-  openService({serviceCode, data, type, tenantId}) {
+  openService({ serviceCode, data, type, tenantId }) {
     if (tenantId && serviceCode) {
       get('/service/getServiceByTenantIdAndServiceCode', {
         serviceCode,
         tenantId,
       }).then((app) => {
-        const {crossTenant, serveName, url} = app;
+        const { crossTenant, serveName, url } = app;
         if (!crossTenant) {
           openGlobalDialog({
             type: "warning",
@@ -67,7 +66,7 @@ const handlers = {
           openGlobalDialog({
             title: serveName,
             className: crossTenantDialog,
-            content: (<iframe className={iframeElm} src={url}/>),
+            content: (<iframe className={iframeElm} src={url} />),
           });
         }
       }, (err) => {
@@ -90,29 +89,29 @@ const handlers = {
         } = payload;
         const locationProtocol = window.location.protocol;
         const origin = window.location.origin;
-        if (workspaceStyle === '_blank' ||(locationProtocol ==='https:' && url.split(':')[0] ==="http")) {
-          const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`,data);
+        if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
+          const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`, data);
           window.open(location);
         } else {
           this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
         }
-				pushYA(subCode);
+        pushYA(subCode);
       }, (err) => {
         console.log(err);
       });
     }
   },
-  openDialog({options}) {
+  openDialog({ options }) {
     openGlobalDialog(options);
   },
   closeDialog() {
     closeGlobalDialog();
   },
-  checkServiceOpen({serviceCode}) {
+  checkServiceOpen({ serviceCode }) {
     const serveCode = serviceCode;
     const state = store.getState();
     const tabs = state.work.tabs;
-    const target = tabs.filter(({serviceCode}) => {
+    const target = tabs.filter(({ serviceCode }) => {
       return serviceCode === serveCode;
     })[0];
     if (target) {
@@ -120,15 +119,15 @@ const handlers = {
     }
     return false;
   },
-  postDataToService({serviceCode, data}) {
+  postDataToService({ serviceCode, data }) {
     const serveCode = serviceCode;
     const state = store.getState();
     const tabs = state.work.tabs;
-    const target = tabs.filter(({serviceCode}) => {
+    const target = tabs.filter(({ serviceCode }) => {
       return serveCode === serviceCode;
     })[0];
     if (target) {
-      const {id} = target;
+      const { id } = target;
       const frameElm = document.getElementById(id);
       if (frameElm) {
         postMessageToWin(frameElm.contentWindow, {
@@ -150,7 +149,7 @@ const handlers = {
     store.dispatch(popMessage());
   },
   // for IM
-  onMessage({unreadTotalNum}) {
+  onMessage({ unreadTotalNum }) {
     store.dispatch(changeMessageType(!!unreadTotalNum));
   },
   hideIm() {
@@ -162,7 +161,7 @@ const handlers = {
   logout() {
     logout();
   },
-  switchChatTo({id, yht_id, type}) {
+  switchChatTo({ id, yht_id, type }) {
     trigger('IM', 'switchChatTo', {
       id,
       yht_id,
@@ -183,6 +182,15 @@ const handlers = {
   },
   closeFrame() {
     store.dispatch(closeFrame());
+  },
+  openHomePage(data) {
+    try {
+      if (!data.userId) throw "Id";
+      const key = data.key || 'info';
+      this.props.history.push(`/homepage/${data.userId}/${key}`);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 window.handlers = handlers;
@@ -193,7 +201,7 @@ try {
     const urlObj = new URL(window.location.href);
     const keys = urlObj.searchParams.keys();
     while (1) {
-      let {done, value: key} = keys.next();
+      let { done, value: key } = keys.next();
       if (done) {
         break;
       }
@@ -216,10 +224,10 @@ export function regMessageTypeHandler(app) {
   bind(app, handlers);
 }
 
-export function dispatchMessageTypeHandler({type, detail}) {
-	if (type.lastIndexOf('_prevent') > 0) {
-		type = type.substring(0, type.lastIndexOf('_prevent'));
-	}
+export function dispatchMessageTypeHandler({ type, detail }) {
+  if (type.lastIndexOf('_prevent') > 0) {
+    type = type.substring(0, type.lastIndexOf('_prevent'));
+  }
   if (type && handlers[type]) {
     return handlers[type](detail);
   } else {
@@ -268,9 +276,13 @@ export function getOpenServiceData(serviceCode) {
 }
 
 export function openService(serviceCode, type) {
-  handlers.openService({serviceCode, type});
+  handlers.openService({ serviceCode, type });
 }
 
 export function openIframe(data) {
   handlers.openFrame(data);
+}
+
+export function openHomePage(data) {
+  handlers.openHomePage(data);
 }
