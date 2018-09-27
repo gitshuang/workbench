@@ -185,7 +185,7 @@ const handlers = {
   },
   openHomePage(data) {
     try {
-      if (!data.userId) throw "Id";
+      if (!data.userId) throw "NOT NULL";
       const key = data.key || 'info';
       this.props.history.push(`/homepage/${data.userId}/${key}`);
     } catch (err) {
