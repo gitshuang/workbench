@@ -233,6 +233,13 @@ class Personals extends Component {
       });
       return false;
     }
+    if(action === "openDynamic"){
+      openHomePage({
+        userId: userInfo.userId,
+        key: 'speak'
+      });
+      return false;
+    }
     if (routers[action]) {
       this.openNewRouter(routers[action]);
     }
