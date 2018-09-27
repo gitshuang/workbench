@@ -247,7 +247,7 @@ class Manage extends Component {
 
   constructor(props) {
     super(props);
-    this.goToLocation = '/';
+    this.goToLocation = '';
     this.configBack = false;
     this.state = {
       showModal: false,
