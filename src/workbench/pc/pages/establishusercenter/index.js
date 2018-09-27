@@ -20,7 +20,7 @@ class EstablishUserCenter extends Component {
   }
 
   goHome = () => {
-    this.props.history.replace('/');
+    this.props.history.replace('');
   }
 
   goBack = () => {
