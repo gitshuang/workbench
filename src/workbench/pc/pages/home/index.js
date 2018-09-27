@@ -168,6 +168,7 @@ class Home extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.updateViewport);
     window.removeEventListener('resize', this.updateViewport);
+    this.workRe = false;
   }
 
   totalTime = () => {
