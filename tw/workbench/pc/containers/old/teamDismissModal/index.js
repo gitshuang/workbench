@@ -70,7 +70,7 @@ class TeamDismissModal extends Component {
         const {
           history,
         } = this.props;
-        history.replace('/');
+        history.replace('');
       } else if (userInfo.allowTenants.length > 1) {
         this.setState({
           isManage: 2
