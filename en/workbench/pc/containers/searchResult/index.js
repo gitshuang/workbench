@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import { dispatch, trigger } from 'public/componentTools';
+import { openHomePage } from 'public/regMessageTypeHandler';
 import FormControl from 'bee/form-control';
 import Tabs, { TabPane } from 'bee/tabs';
 import Icon from 'pub-comp/icon';
@@ -236,13 +237,11 @@ class searchResult extends Component {
     });
   }
 
-  openHomepage = (userId,type) => {
-    const { history } = this.props;
-    if(type){
-      history.push(`/homepage/${userId}/${type}`);
-    }else{
-      history.push(`/homepage/${userId}/info`);
-    }
+  openHomepage = (userId,key) => {
+    openHomePage({
+      userId,
+      key,
+    });
   }
 
   // 渲染列表页面

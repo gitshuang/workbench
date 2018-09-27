@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumb from 'bee/breadcrumb';
-import {postMessageToWin} from '@u';
+import { postMessageToWin } from '@u';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { breadcrumbClass, breadcrumbBack, itmeHover } from './style.css';
 
@@ -15,11 +15,13 @@ class Breadcrumbs extends Component {
     history: PropTypes.shape({
       replace: PropTypes.func,
     }),
+    isBack: PropTypes.bool,
   }
   static defaultProps = {
     goback: () => { },
     data: [],
     history: {},
+    isBack: false,
   };
 
   // 标配
@@ -46,17 +48,22 @@ class Breadcrumbs extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, isBack } = this.props;
     const self = this;
     return (
       <div className={breadcrumbClass} >
-        <a
-          onClick={() => this.enhancedGoBack('defaultUrl', -1)}
-          onKeyDown={() => this.enhancedGoBack('defaultUrl', -1)}
-          role="presentation"
-        >返回
-        </a>
-        <span className={breadcrumbBack}>|</span>
+        {
+          isBack ? null :
+            <div style={{ float: "left" }}>
+              <a
+                onClick={() => this.enhancedGoBack('defaultUrl', -1)}
+                onKeyDown={() => this.enhancedGoBack('defaultUrl', -1)}
+                role="presentation"
+              >返回
+            </a>
+              <span className={breadcrumbBack}>|</span>
+            </div>
+        }
         <Breadcrumb>
           {
             data.map(({ name, url }, i) => {
@@ -69,20 +76,20 @@ class Breadcrumbs extends Component {
                 itemProps = {
                   ...itemProps,
                   onClick: () => {
-										//增加面包屑点击逻辑，将iframe内部跳转逻辑交给iframe内部通过postmessage注册的回调函数
-										if (window.brmClickPrevent && window.brmClickPrevent.type) {
-											postMessageToWin(window.brmClickPrevent.source, {
-												type: window.brmClickPrevent.type,
-											});
-											dispatchMessageTypeHandler({
-												type: 'popBrm',
-												detail: {index: -1}
-											});
-											window.brmClickPrevent = null;
-										}else{
-											self.enhancedGoBack(url, i);
-										}
-									},
+                    //增加面包屑点击逻辑，将iframe内部跳转逻辑交给iframe内部通过postmessage注册的回调函数
+                    if (window.brmClickPrevent && window.brmClickPrevent.type) {
+                      postMessageToWin(window.brmClickPrevent.source, {
+                        type: window.brmClickPrevent.type,
+                      });
+                      dispatchMessageTypeHandler({
+                        type: 'popBrm',
+                        detail: { index: -1 }
+                      });
+                      window.brmClickPrevent = null;
+                    } else {
+                      self.enhancedGoBack(url, i);
+                    }
+                  },
                   className: itmeHover,
                 };
               }

@@ -172,6 +172,7 @@ class BreadcrumbContainer extends Component {
           <Breadcrumbs
             data={brm && brm.length ? brm[brm.length - 1] : [{ name: '' }]}
             goback={this.goback}
+            isBack
           />
         </div>
       </div>

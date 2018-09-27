@@ -13,7 +13,7 @@ import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import rootActions from 'store/root/actions';
 
-import { openService } from 'public/regMessageTypeHandler';
+import { openService, openHomePage } from 'public/regMessageTypeHandler';
 
 const { closeRequestDisplay, getUserInfo } = homeActions;
 const { openExitModal } = teamconfigActions;
@@ -227,7 +227,10 @@ class Personals extends Component {
       return false;
     }
     if(action === "openHomepage"){
-      history.push(`/homepage/${userInfo.userId}/honor`);
+      openHomePage({
+        userId: userInfo.userId,
+        key: 'honor'
+      });
       return false;
     }
     if (routers[action]) {
