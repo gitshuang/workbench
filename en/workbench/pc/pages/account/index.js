@@ -9,10 +9,11 @@ import { bg } from './style.css';
 class Account extends Component {
   render() {
     const { locale } = getContext();
+    
     return (
       <ApplicationWrap name="Account Mgmt">
         <div className={`${bg} um-content um-vbox`}>
-          <IFrame title="Account Mgmt" url={`${getHost('euc')}/diuser?locale=${locale}`} />
+          <IFrame title="Account Mgmt" url={`${getHost('euc')}/diuser?locale=${locale === "zh_TW" ? "zh_HK" : locale}`} />
         </div>
       </ApplicationWrap>
     );
