@@ -89,17 +89,17 @@ class HomePage extends Component {
       {
         key: 'info',
         label: '資料',
-        url: getHost('info'),
+        url: `${getHost('info')}&`,
       },
       {
         key: 'speak',
         label: '發言',
-        url: getHost('speak'),
+        url: `${getHost('speak')}&`,
       },
       {
         key: 'honor',
         label: '榮耀',
-        url: getHost('honor'),
+        url: `${getHost('honor')}?`,
       }
     ];
     this.brm = [{ name: '個人主頁' }];
@@ -264,7 +264,7 @@ class HomePage extends Component {
       return (
         <IFrame
           title={item.key}
-          url={`${item.url}?userId=${userId}`}
+          url={`${item.url}userId=${userId}`}
           style={{ display: item.key === activetab ? 'block' : 'none' }}
         />
       )

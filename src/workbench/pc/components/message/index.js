@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Message from 'bee/message';
 import Icon from 'pub-comp/icon';
 import {messageClass} from './style.css';
-import {closeMenu} from "../../containers/breadcrumb/style.css";
 
 
 const propTypes = {
