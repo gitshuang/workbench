@@ -155,7 +155,6 @@ class HomePage extends Component {
   }
 
   urlPack = (url) => {
-    debugger
     return url.indexOf('?') > -1 ? `${url}&` : `${url}?`
   }
 
