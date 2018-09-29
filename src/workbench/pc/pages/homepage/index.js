@@ -193,6 +193,7 @@ class HomePage extends Component {
     if (this.historys.length) {
       // 将historys 去掉最后一个  并取出来
       const lastHistory = this.historys.pop();
+      this.storageArr.pop();
       history.replace(`/homepage/${lastHistory}/info`);
     } else {
       history.replace('');
