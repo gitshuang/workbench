@@ -80,7 +80,6 @@ class HomePage extends Component {
     this.state = {
       isSelf: false,
       activetab: 'info',
-      iframeUrl: '',
     };
     this.style = {
       height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
@@ -89,17 +88,17 @@ class HomePage extends Component {
       {
         key: 'info',
         label: '资料',
-        // url: `${getHost('info')}&`,
+        url: `${getHost('info')}&`,
       },
       {
         key: 'speak',
         label: '发言',
-        // url: `${getHost('speak')}&`,
+        url: `${getHost('speak')}&`,
       },
       {
         key: 'honor',
         label: '荣耀',
-        // url: `${getHost('honor')}?`,
+        url: `${getHost('honor')}?`,
       }
     ];
     this.brm = [{ name: '个人主页' }];
@@ -112,7 +111,6 @@ class HomePage extends Component {
     const { key, userId } = this.props.match.params;
     this.setState({
       activetab: key,
-      iframeUrl: this.urlPack(getHost(key)),
     });
     this.getUserInfo(userId);
   }
@@ -142,7 +140,6 @@ class HomePage extends Component {
     if (activetab && key && key !== activetab) {
       this.setState({
         activetab: key,
-        iframeUrl: this.urlPack(getHost(key)),
       });
     }
   }
@@ -153,10 +150,6 @@ class HomePage extends Component {
 
   forbidBack = () => {
     history.pushState(null, null, document.URL);
-  }
-
-  urlPack = (url) => {
-    return url.indexOf('?') > -1 ? `${url}&` : `${url}?`
   }
 
   getUserInfo = (userId) => {
@@ -198,7 +191,6 @@ class HomePage extends Component {
     } else {
       history.replace('');
     }
-    // this.props.history.goBack();
   }
 
   goHome = () => {
@@ -214,7 +206,6 @@ class HomePage extends Component {
     }
     this.setState({
       activetab,
-      iframeUrl: this.urlPack(getHost(activetab)),
     }, () => {
       this.props.history.push(`/homepage/${userId}/${activetab}`);
     });
@@ -232,7 +223,6 @@ class HomePage extends Component {
   }
 
   sendHonor = () => {
-    // console.log(1);
     const { userId } = this.props.userInfo;
     const url = getHost("sendHonor");
     openIframe({
@@ -278,7 +268,6 @@ class HomePage extends Component {
   }
 
   render() {
-    const { activetab, iframeUrl } = this.state;
     const {
       userInfo: {
         userAvator,
@@ -287,6 +276,7 @@ class HomePage extends Component {
         userId
       },
     } = this.props;
+    if (!userId) return null;
     return (
       <div className='um-win' style={{ overflow: 'auto' }}>
         <div className="header">
@@ -331,15 +321,7 @@ class HomePage extends Component {
                 {this.renderTabs()}
               </ul>
               <div style={this.style}>
-                {/* {this.renderIframe()} */}
-                {
-                  iframeUrl ? 
-                  < IFrame
-                    title={activetab}
-                    url={`${iframeUrl}userId=${userId}`}
-                  />
-                  : null
-                }
+                {this.renderIframe()}
               </div>
             </div>
           </div>
