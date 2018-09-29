@@ -112,6 +112,8 @@ class HomePage extends Component {
       iframeUrl: this.urlPack(getHost(key)),
     });
     this.getUserInfo(userId);
+    // 加载页面将userId 传入
+    this.storageArr.push(userId);
   }
 
   componentDidMount() {
@@ -131,6 +133,7 @@ class HomePage extends Component {
       // 数组保证长度 -1, 所以将userid传递  为了实现倒退到最后一个直接跳出
       if (!this.storageArr.includes(newUserId)) {
         this.historys.push(userId);
+        this.storageArr.push(newUserId);
       }
     }
     const key = nextProps.match.params ? nextProps.match.params.key : '';
@@ -178,8 +181,6 @@ class HomePage extends Component {
       }
       requestSuccess();
       this.isRe = false;
-      // 每次请求都将userId 存储
-      this.storageArr.push(userId);
     });
   }
 
@@ -254,22 +255,6 @@ class HomePage extends Component {
         >
           {item.label}
         </li>
-      )
-    });
-  }
-
-  renderIframe = () => {
-    const { activetab } = this.state;
-    const { userInfo: {
-      userId
-    } } = this.props;
-    return this.items.map(item => {
-      return (
-        <IFrame
-          title={item.key}
-          url={`${item.url}userId=${userId}`}
-          style={{ display: item.key === activetab ? 'block' : 'none' }}
-        />
       )
     });
   }
