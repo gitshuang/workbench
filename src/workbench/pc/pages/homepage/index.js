@@ -331,10 +331,14 @@ class HomePage extends Component {
               </ul>
               <div style={this.style}>
                 {/* {this.renderIframe()} */}
-                <IFrame
-                  title={activetab}
-                  url={`${iframeUrl}userId=${userId}`}
-                />
+                {
+                  iframeUrl ? 
+                  < IFrame
+                    title={activetab}
+                    url={`${iframeUrl}userId=${userId}`}
+                  />
+                  : null
+                }
               </div>
             </div>
           </div>
