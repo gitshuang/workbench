@@ -142,6 +142,7 @@ class HomePage extends Component {
     if (activetab && key && key !== activetab) {
       this.setState({
         activetab: key,
+        iframeUrl: this.urlPack(getHost(key)),
       });
     }
   }
