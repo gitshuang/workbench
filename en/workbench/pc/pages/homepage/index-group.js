@@ -80,7 +80,6 @@ class HomePage extends Component {
     this.state = {
       isSelf: false,
       activetab: 'info',
-      iframeUrl: '',
     };
     this.style = {
       height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
@@ -88,18 +87,21 @@ class HomePage extends Component {
     this.items = [
       {
         key: 'info',
-        label: '資料',
+        label: '',
+        url: `${getHost('info')}&`,
       },
       {
         key: 'speak',
-        label: '發言',
+        label: '',
+        url: `${getHost('speak')}&`,
       },
       {
         key: 'honor',
-        label: '榮耀',
+        label: '',
+        url: `${getHost('honor')}?`,
       }
     ];
-    this.brm = [{ name: '個人主頁' }];
+    this.brm = [{ name: '' }];
     this.isRe = false;
     this.historys = [];
     this.storageArr = [];
@@ -109,7 +111,6 @@ class HomePage extends Component {
     const { key, userId } = this.props.match.params;
     this.setState({
       activetab: key,
-      iframeUrl: this.urlPack(getHost(key)),
     });
     this.getUserInfo(userId);
     // 加载页面将userId 传入
@@ -142,7 +143,6 @@ class HomePage extends Component {
     if (activetab && key && key !== activetab) {
       this.setState({
         activetab: key,
-        iframeUrl: this.urlPack(getHost(key)),
       });
     }
   }
@@ -153,10 +153,6 @@ class HomePage extends Component {
 
   forbidBack = () => {
     history.pushState(null, null, document.URL);
-  }
-
-  urlPack = (url) => {
-    return url.indexOf('?') > -1 ? `${url}&` : `${url}?`
   }
 
   getUserInfo = (userId) => {
@@ -181,6 +177,7 @@ class HomePage extends Component {
       }
       requestSuccess();
       this.isRe = false;
+      // 每次请求都将userId 存储
     });
   }
 
@@ -196,7 +193,6 @@ class HomePage extends Component {
     } else {
       history.replace('');
     }
-    // this.props.history.goBack();
   }
 
   goHome = () => {
@@ -212,7 +208,6 @@ class HomePage extends Component {
     }
     this.setState({
       activetab,
-      iframeUrl: this.urlPack(getHost(activetab)),
     }, () => {
       this.props.history.push(`/homepage/${userId}/${activetab}`);
     });
@@ -230,7 +225,6 @@ class HomePage extends Component {
   }
 
   sendHonor = () => {
-    // console.log(1);
     const { userId } = this.props.userInfo;
     const url = getHost("sendHonor");
     openIframe({
@@ -259,8 +253,23 @@ class HomePage extends Component {
     });
   }
 
+  renderIframe = () => {
+    const { activetab } = this.state;
+    const { userInfo: {
+      userId
+    } } = this.props;
+    return this.items.map(item => {
+      return (
+        <IFrame
+          title={item.key}
+          url={`${item.url}userId=${userId}`}
+          style={{ display: item.key === activetab ? 'block' : 'none' }}
+        />
+      )
+    });
+  }
+
   render() {
-    const { activetab, iframeUrl } = this.state;
     const {
       userInfo: {
         userAvator,
@@ -275,7 +284,7 @@ class HomePage extends Component {
         <div className="header">
           <Header onLeftClick={this.goHome} >
             <div>
-              <span>{`${userName}的個人主頁`}</span>
+              <span>{`${userName}`}</span>
             </div>
           </Header>
           <div className="appBreadcrumb">
@@ -300,9 +309,9 @@ class HomePage extends Component {
                         null
                         :
                         <div>
-                          <Button onClick={this.sendMessage}>發消息</Button>
-                          <Button onClick={this.sendEmail}>發郵件</Button>
-                          <Button onClick={this.sendHonor}>發榮耀</Button>
+                          <Button onClick={this.sendMessage}></Button>
+                          <Button onClick={this.sendEmail}></Button>
+                          <Button onClick={this.sendHonor}></Button>
                         </div>
                     }
                   </dd>
@@ -314,11 +323,7 @@ class HomePage extends Component {
                 {this.renderTabs()}
               </ul>
               <div style={this.style}>
-                {/* {this.renderIframe()} */}
-                < IFrame
-                  title={activetab}
-                  url={`${iframeUrl}userId=${userId}`}
-                />
+                {this.renderIframe()}
               </div>
             </div>
           </div>

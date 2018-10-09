@@ -80,7 +80,7 @@ class HomePage extends Component {
     this.state = {
       isSelf: false,
       activetab: 'info',
-      // iframeUrl: '',
+      iframeUrl: '',
     };
     this.style = {
       height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
@@ -89,17 +89,14 @@ class HomePage extends Component {
       {
         key: 'info',
         label: 'Profile',
-        url: `${getHost('info')}&`,
       },
       {
         key: 'speak',
         label: 'Post',
-        url: `${getHost('speak')}&`,
       },
       {
         key: 'honor',
         label: 'Honor',
-        url: `${getHost('honor')}?`,
       }
     ];
     this.brm = [{ name: 'Homepage' }];
@@ -112,9 +109,11 @@ class HomePage extends Component {
     const { key, userId } = this.props.match.params;
     this.setState({
       activetab: key,
-      // iframeUrl: getHost(key),
+      iframeUrl: this.urlPack(getHost(key)),
     });
     this.getUserInfo(userId);
+    // 加载页面将userId 传入
+    this.storageArr.push(userId);
   }
 
   componentDidMount() {
@@ -134,6 +133,7 @@ class HomePage extends Component {
       // 数组保证长度 -1, 所以将userid传递  为了实现倒退到最后一个直接跳出
       if (!this.storageArr.includes(newUserId)) {
         this.historys.push(userId);
+        this.storageArr.push(newUserId);
       }
     }
     const key = nextProps.match.params ? nextProps.match.params.key : '';
@@ -142,6 +142,7 @@ class HomePage extends Component {
     if (activetab && key && key !== activetab) {
       this.setState({
         activetab: key,
+        iframeUrl: this.urlPack(getHost(key)),
       });
     }
   }
@@ -152,6 +153,10 @@ class HomePage extends Component {
 
   forbidBack = () => {
     history.pushState(null, null, document.URL);
+  }
+
+  urlPack = (url) => {
+    return url.indexOf('?') > -1 ? `${url}&` : `${url}?`
   }
 
   getUserInfo = (userId) => {
@@ -176,8 +181,6 @@ class HomePage extends Component {
       }
       requestSuccess();
       this.isRe = false;
-      // 每次请求都将userId 存储
-      this.storageArr.push(userId);
     });
   }
 
@@ -188,6 +191,7 @@ class HomePage extends Component {
     if (this.historys.length) {
       // 将historys 去掉最后一个  并取出来
       const lastHistory = this.historys.pop();
+      this.storageArr.pop();
       history.replace(`/homepage/${lastHistory}/info`);
     } else {
       history.replace('');
@@ -208,7 +212,7 @@ class HomePage extends Component {
     }
     this.setState({
       activetab,
-      // iframeUrl: getHost(activetab),
+      iframeUrl: this.urlPack(getHost(activetab)),
     }, () => {
       this.props.history.push(`/homepage/${userId}/${activetab}`);
     });
@@ -255,32 +259,17 @@ class HomePage extends Component {
     });
   }
 
-  renderIframe = () => {
-    const { activetab } = this.state;
-    const { userInfo: {
-      userId
-    } } = this.props;
-    return this.items.map(item => {
-      return (
-        <IFrame
-          title={item.key}
-          url={`${item.url}userId=${userId}`}
-          style={{ display: item.key === activetab ? 'block' : 'none' }}
-        />
-      )
-    });
-  }
-
   render() {
-    // const { activetab, iframeUrl } = this.state;
+    const { activetab, iframeUrl } = this.state;
     const {
       userInfo: {
         userAvator,
         userName,
         company,
-        // userId
+        userId
       },
     } = this.props;
+    if (!userId) return null;
     return (
       <div className='um-win' style={{ overflow: 'auto' }}>
         <div className="header">
@@ -325,7 +314,11 @@ class HomePage extends Component {
                 {this.renderTabs()}
               </ul>
               <div style={this.style}>
-                {this.renderIframe()}
+                {/* {this.renderIframe()} */}
+                < IFrame
+                  title={activetab}
+                  url={`${iframeUrl}userId=${userId}`}
+                />
               </div>
             </div>
           </div>
