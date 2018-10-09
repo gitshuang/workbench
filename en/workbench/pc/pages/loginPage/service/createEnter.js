@@ -143,24 +143,24 @@ class CreateEnter extends Component {
               style={{width:'370px'}}
               onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
             >
-              <Option value="A">Agriculture, Forestry, Animal Husbandry, and Fishery Industries</Option>
-              <Option value="B">Mining Industry</Option>
+              <Option value="A">Agriculture, Forestry, Animal Husbandry, and Fishery</Option>
+              <Option value="B">Mining</Option>
               <Option value="C">Manufacturing</Option>
-              <Option value="D">Electricity/Heating Power/Gas/Water Production and Supply Industry</Option>
+              <Option value="D">Electricity/Heating Power/Gas/Water Production and Supply</Option>
               <Option value="S">Environment and Public Administration, Social Insurance, and Social Org</Option>
-              <Option value="E">Construction Industry</Option>
+              <Option value="E">Construction</Option>
               <Option value="G">Transportation, Warehousing and Postal Services</Option>
-              <Option value="I">Info Transmission, Computer Service and Software Industry</Option>
+              <Option value="I">Info Transmission, Computer Service and Software</Option>
               <Option value="F">Wholesale and Retail Trade</Option>
-              <Option value="H">Accommodation and Catering Industry</Option>
-              <Option value="J">Finance and Insurance Industries</Option>
-              <Option value="K">Real Estate Industry</Option>
+              <Option value="H">Accommodation and Catering</Option>
+              <Option value="J">Finance and Insurance</Option>
+              <Option value="K">Real Estate</Option>
               <Option value="L">Leasing and Business Services</Option>
               <Option value="M">Scientific Research, Technical Services and Geological Prospecting</Option>
-              <Option value="N">Water, Environment and Public Facilities Management Industry</Option>
+              <Option value="N">Water, Environment and Public Facilities Management</Option>
               <Option value="O">Resident Services and Other Services</Option>
               <Option value="P">Education</Option>
-              <Option value="Q">Health, Social Security and Social Service Industry</Option>
+              <Option value="Q">Health, Social Security and Social Service</Option>
               <Option value="R">Culture, Sports and Recreation</Option>
               <Option value="T">International Organization</Option>
             </Select>

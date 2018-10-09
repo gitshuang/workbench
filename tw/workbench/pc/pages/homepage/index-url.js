@@ -88,18 +88,18 @@ class HomePage extends Component {
     this.items = [
       {
         key: 'info',
-        label: '資料',
+        label: '',
       },
       {
         key: 'speak',
-        label: '發言',
+        label: '',
       },
       {
         key: 'honor',
-        label: '榮耀',
+        label: '',
       }
     ];
-    this.brm = [{ name: '個人主頁' }];
+    this.brm = [{ name: '' }];
     this.isRe = false;
     this.historys = [];
     this.storageArr = [];
@@ -275,7 +275,7 @@ class HomePage extends Component {
         <div className="header">
           <Header onLeftClick={this.goHome} >
             <div>
-              <span>{`${userName}的個人主頁`}</span>
+              <span>{`${userName}`}</span>
             </div>
           </Header>
           <div className="appBreadcrumb">
@@ -300,9 +300,9 @@ class HomePage extends Component {
                         null
                         :
                         <div>
-                          <Button onClick={this.sendMessage}>發消息</Button>
-                          <Button onClick={this.sendEmail}>發郵件</Button>
-                          <Button onClick={this.sendHonor}>發榮耀</Button>
+                          <Button onClick={this.sendMessage}></Button>
+                          <Button onClick={this.sendEmail}></Button>
+                          <Button onClick={this.sendHonor}></Button>
                         </div>
                     }
                   </dd>
