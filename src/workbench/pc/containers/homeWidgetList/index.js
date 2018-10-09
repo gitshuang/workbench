@@ -15,7 +15,7 @@ const { openFolder } = homeActions;
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
 
-import { pushYA, appendSearchParam } from "../../utils/utils";
+import { pushYA } from "../../utils/utils";
 
 const {
   getProductInfo
