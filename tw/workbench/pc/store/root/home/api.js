@@ -2,9 +2,8 @@ import { get, post } from '@u';
 
 export const getUserInfo = () => get('/user/getUserInfo');
 export const getWorkList = param => get('/desktop/getdeskTop', param);
-export const getSearchEnterList = param => get('/desktop/getdeskTop', param);
-export const setCutUser = () => get('/user/setCutUser');
 
+// 企业中设置
 export const setCreateEnter = (list, updateType) => {
   // 团队升级企业
   if (updateType === 'upgrade_enter') {
@@ -15,6 +14,7 @@ export const setCreateEnter = (list, updateType) => {
   }// 创建企业
   return post('/manager/teamEnter/createEnter', list);
 };
+// 获取企业信息
 export const getEnterInfo = param => get(`/manager/enter/info?enterId=${param}`);
 
 export const getSearchEnterOrTeam = () => get('/user/getCanLoginTenants');

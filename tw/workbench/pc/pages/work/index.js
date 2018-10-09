@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
-
-
 /*   actions   */
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';

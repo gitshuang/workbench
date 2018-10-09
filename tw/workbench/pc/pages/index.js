@@ -100,9 +100,7 @@ class Root extends Component {
       lanAjax: false,//请求语言之后才显示页面
       defaultLan: 'zh_CN',//默认是中文
     };
-    // this.defaultLan ='zh_CN';//默认是中文
     this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin()) || process.env.LOCALHOST;
-    // this.isLogin = true;
   }
   componentWillMount() {
     if (!this.isLogin) {

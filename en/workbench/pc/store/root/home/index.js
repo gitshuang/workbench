@@ -9,8 +9,6 @@ const {
   closeRequestDisplay,
   openFolder,
   closeFolder,
-  setCutUser,
-  getSearchEnterList,
   setCreateEnter,
   getSearchEnterOrTeam,
   getApplicationList,
@@ -27,7 +25,6 @@ const defaultState = {
     children: [],
   },
   folderModalDisplay: false,
-  enterList: [],
   searchEnterOrTeamList: [],
   applicationList: {},
 };
@@ -60,13 +57,16 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    let { metaData } = payload;
+    let { metaData, workList } = payload;
     if (typeof metaData === 'string') {
       metaData = JSON.parse(payload.metaData);
     }
+    const list = workList.filter((item) => {
+      return item.children.length;
+    });
     return {
       ...state,
-      workList: payload.workList,
+      workList: list,
       metaData,
     };
   },
@@ -79,7 +79,6 @@ const reducer = handleActions({
       searchEnterOrTeamList: payload,
     };
   },
-  [setCutUser]: createReducer('setCutUser'),
   [changeRequestDisplay]: state => ({
     ...state,
     requestDisplay: true,
@@ -96,10 +95,6 @@ const reducer = handleActions({
   [closeFolder]: state => ({
     ...state,
     folderModalDisplay: false,
-  }),
-  [getSearchEnterList]: (state, { payload }) => ({
-    ...state,
-    enterList: payload,
   }),
   [setCreateEnter]: state => ({
     ...state,
