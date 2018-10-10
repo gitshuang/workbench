@@ -90,8 +90,9 @@ const handlers = {
         const locationProtocol = window.location.protocol;
         const origin = window.location.origin;
         if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
-          const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`, data);
-          window.open(location);
+          // const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`, data);
+          // window.open(location);
+          window.open(url);
         } else {
           this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
         }
