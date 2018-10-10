@@ -3,7 +3,7 @@ import Button from 'bee/button';
 import PopDialog from 'pub-comp/pop';
 import { withRouter } from 'react-router-dom'
 import WidgetMaker from 'components/widget';
-import { content, home_file_item_dailog, close, home } from './style.css';
+import { content, home_file_item_dailog, close, home, noDataStyle } from './style.css';
 import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
 import homeActions from 'store/root/home/actions';
@@ -60,6 +60,7 @@ class homeFolderDialog extends Component {
         <Widget {...props} from="folder"/>
       );
     });
+    const noData = <div className={noDataStyle}>该文件夹为空</div>;
     return (
       <div className={home}>
         <PopDialog
@@ -69,7 +70,7 @@ class homeFolderDialog extends Component {
           backup={false}
           close={closeFolder} >
           <div className={content} >
-            {list}
+            {list.length ? list : noData}
           </div>
         </PopDialog>
       </div>
