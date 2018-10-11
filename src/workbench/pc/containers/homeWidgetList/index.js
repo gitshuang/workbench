@@ -27,9 +27,7 @@ class HomeWidgeList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
     this.lastStyle = {
       paddingBottom: '80px',
       minHeight: window.innerHeight
@@ -70,7 +68,8 @@ class HomeWidgeList extends Component {
         props.clickHandler = () => {
           openFolder(child);
         }
-      } else if ((type === 3 || type === 4 || type === 5 || type === 6 || type === 7) && !jsurl) {
+        // } else if ((type === 3 || type === 4 || type === 5 || type === 6 || type === 7) && !jsurl) {
+      } else if (type > 2 && !jsurl) {
         props.clickHandler = () => {
           openService(serviceCode, serviceType);
         }
@@ -99,7 +98,6 @@ class HomeWidgeList extends Component {
               <ul className={WidgetList}>{list}</ul>
             </div>
         }
-
       </div>
     );
   }
