@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { openService } from '../../public/regMessageTypeHandler';
+import { openService } from 'public/regMessageTypeHandler';
 import {
   appItemImg,
   appItem_describe,
