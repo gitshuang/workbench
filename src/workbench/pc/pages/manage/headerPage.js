@@ -3,10 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Header from 'containers/header';
-import Icon from 'pub-comp/icon';
 import BreadcrumbContainer from 'components/breadcrumb';
-import { header } from './style.css';
-
 
 @withRouter
 class HeaderPage extends Component {
@@ -33,15 +30,6 @@ class HeaderPage extends Component {
     }, 0);
   }
 
-  getLeftContent = () => {
-    // const {
-    //   userInfo: {
-    //     logo,
-    //   },
-    // } = this.props;
-    // return (<img src={logo || logoUrl} onClick={this.goback} className={logoImg}/>);
-  }
-
   goback = () => {
     this.props.history.goBack();
   }
@@ -55,7 +43,6 @@ class HeaderPage extends Component {
       <div className="header">
         <Header
           onLeftClick={this.goHome}
-          // leftContent={this.getLeftContent()}
         >
           <span>首页编辑</span>
         </Header>
@@ -66,6 +53,4 @@ class HeaderPage extends Component {
     );
   }
 }
-
-
 export default HeaderPage;
