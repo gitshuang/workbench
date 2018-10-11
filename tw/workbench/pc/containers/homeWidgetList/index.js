@@ -76,8 +76,9 @@ class HomeWidgeList extends Component {
         const locationProtocol = window.location.protocol;
         const origin = window.location.origin;
         if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
-          const location = `${origin}/service/open/${type}/${code}`;
-          window.open(location);
+          // const location = `${origin}/service/open/${type}/${code}`;
+          // window.open(location);
+          window.open(url);
         } else {
           history.replace(`/${type}/${code}/${serviceCode}`);
         }
