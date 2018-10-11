@@ -34,7 +34,8 @@ const manageWidget = {
 	move_down: 'Move Down',
 	move_up: 'Move Up',
 	more: 'More',
-	save_latest_or_not: 'Save the latest modification?'
+	save_latest_or_not: 'Save the latest modification?',
+	noDataGroup: ''
 };
 
 export default {

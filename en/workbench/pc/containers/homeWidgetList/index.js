@@ -1,46 +1,33 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
+import { mapStateToProps } from '@u';
+import { openService } from 'public/regMessageTypeHandler';
+// 加载components
 import WidgetMaker from 'components/widget';
+// 加载样式 
 import {
   WidgetCont,
   WidgetTitle,
   item,
   WidgetList,
 } from './style.css';
+// 加载actions
 import homeActions from 'store/root/home/actions';
-import { connect } from 'react-redux';
-import { mapStateToProps } from '@u';
 const { openFolder } = homeActions;
-import workActions from 'store/root/work/actions';
-import rootActions from 'store/root/actions';
-
-import { pushYA } from "../../utils/utils";
-
-const {
-  getProductInfo
-} = workActions;
-
-const { requestStart, requestSuccess, requestError } = rootActions;
 
 @withRouter
 @connect(
   mapStateToProps(),
   {
     openFolder,
-    requestStart,
-    requestSuccess,
-    requestError,
-    getProductInfo
   }
 )
 class HomeWidgeList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      
-    };
+    this.state = {};
     this.lastStyle = {
       paddingBottom: '80px',
       minHeight: window.innerHeight
@@ -48,43 +35,7 @@ class HomeWidgeList extends Component {
   }
 
   componentDidMount() {
-    
-  }
 
-  getProductInfo = (code, type) => {
-    const {
-      getProductInfo,
-      requestStart,
-      requestError,
-      requestSuccess,
-      history,
-    } = this.props;
-    // requestStart();
-    getProductInfo(code, type).then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        const {
-          curService: {
-            serviceCode,
-            url
-          },
-          curMenuBar: {
-            workspaceStyle
-          }
-        } = payload;
-        const locationProtocol = window.location.protocol;
-        const origin = window.location.origin;
-        if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
-          const location = `${origin}/service/open/${type}/${code}`;
-          window.open(location);
-        } else {
-          history.replace(`/${type}/${code}/${serviceCode}`);
-        }
-        pushYA(serviceCode);
-      }
-      requestSuccess();
-    });
   }
 
   render() {
@@ -96,12 +47,10 @@ class HomeWidgeList extends Component {
       noTitle,
       openFolder,
       style,
-      groupMeta,
       listMeta,
       lastIndex,
     } = this.props;
     // 新增元数据  控制groupTitle 样式
-    const titleStyle = groupMeta && groupMeta.titleStyle && JSON.parse(groupMeta.titleStyle);
     const list = children.map((child, i) => {
       const {
         type,
@@ -119,10 +68,10 @@ class HomeWidgeList extends Component {
         props.clickHandler = () => {
           openFolder(child);
         }
-      } else if ((type === 3 || type === 4 || type === 5 || type === 6 || type === 7) && !jsurl) {
-        let typeVal = serviceType === 2 ? 'app' : 'service';
+        // } else if ((type === 3 || type === 4 || type === 5 || type === 6 || type === 7) && !jsurl) {
+      } else if (type > 2 && !jsurl) {
         props.clickHandler = () => {
-          this.getProductInfo(serviceCode, typeVal)
+          openService(serviceCode, serviceType);
         }
       }
       return (
@@ -133,7 +82,7 @@ class HomeWidgeList extends Component {
       <div className={item} style={style} >
         {
           noTitle ? null : (
-            <div className={WidgetTitle} style={titleStyle} >
+            <div className={WidgetTitle}>
               <div>{name}</div>
             </div>
           )
@@ -149,7 +98,6 @@ class HomeWidgeList extends Component {
               <ul className={WidgetList}>{list}</ul>
             </div>
         }
-
       </div>
     );
   }

@@ -23,3 +23,10 @@
 .home_file_item_dailog  :global(.u-modal-dialog){
   width: 800px;
 }
+.noDataStyle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  font-size: 16px;
+}
