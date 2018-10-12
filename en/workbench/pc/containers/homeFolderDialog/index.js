@@ -60,7 +60,7 @@ class homeFolderDialog extends Component {
         <Widget {...props} from="folder"/>
       );
     });
-    const noData = <div className={noDataStyle}></div>;
+    const noData = <div className={noDataStyle}>The folder is empty</div>;
     return (
       <div className={home}>
         <PopDialog
