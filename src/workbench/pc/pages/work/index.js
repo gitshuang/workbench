@@ -221,7 +221,7 @@ export default class Work extends Component {
       history,
     } = this.props;
     // requestStart();
-    getProductInfo(code, type, subcode).then(({ error, payload }) => {
+    getProductInfo(code, type).then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       } else {
