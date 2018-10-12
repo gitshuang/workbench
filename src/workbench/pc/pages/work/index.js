@@ -66,7 +66,7 @@ const {
     'expandedSidebar',
     'type',
     'backUrl',
-		'productInfo',
+    'productInfo',
     {
       key: 'domainName',
       value: ({ domainName, type }) => (type === 1 ? '' : domainName),
@@ -118,7 +118,7 @@ export default class Work extends Component {
     titleServiceType: PropTypes.bool,
     domainName: PropTypes.string,
     widthBrm: PropTypes.bool,
-		productInfo: PropTypes.object
+    productInfo: PropTypes.object
   };
   static defaultProps = {
     history: {},
@@ -141,13 +141,13 @@ export default class Work extends Component {
     titleServiceType: false,
     domainName: '',
     widthBrm: false,
-		productInfo: {}
-	};
+    productInfo: {}
+  };
 
   constructor(props) {
     super(props);
     this.state = {
-			
+
     };
     this.goBack = this.goBack.bind(this);
   }
@@ -161,25 +161,14 @@ export default class Work extends Component {
           subcode,
         },
       },
-			setCurrent,
-			productInfo
-		} = this.props;
-		if (!productInfo.curMenuBar) {
-			this.getProductInfo(code, type, subcode);
-		} else {
-			setCurrent(subcode);
+      setCurrent,
+      productInfo
+    } = this.props;
+    if (!productInfo.curMenuBar) {
+      this.getProductInfo(code, type, subcode);
+    } else {
+      setCurrent(subcode);
     }
-    this.setState({
-      height: document.body.offsetHeight - 86
-    });
-	}
-
-
-  componentDidMount() {
-    // const { history } = this.props;
-    // history.block((location) => {
-    //   console.log(location);
-    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -290,62 +279,61 @@ export default class Work extends Component {
     return true;
   }
 
-
   makeLayout = () => {
-		const { expandedSidebar, type } = this.props;
-		  switch (type) {
-        case 1:
-          return (
-            <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
-              <ContentContainer />
-            </div>
-          );
-        case 4:
-          return (
-            <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
-              <ContentContainer />
-            </div>
-          );
-        case 2:
-          return (
-            <div style={{}}>
-              {
-                expandedSidebar ? (
-                  <div className={sideBarArea} >
-                    <SideBarContainer />
-                  </div>
-                ) : null
-              }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} >
-                <div className={contentArea}>
-                  <ContentContainer />
+    const { expandedSidebar, type } = this.props;
+    switch (type) {
+      case 1:
+        return (
+          <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
+            <ContentContainer />
+          </div>
+        );
+      case 4:
+        return (
+          <div className={`${marginTop} ${iframeCont}`} style={{ marginTop: 94 }}>
+            <ContentContainer />
+          </div>
+        );
+      case 2:
+        return (
+          <div>
+            {
+              expandedSidebar ? (
+                <div className={sideBarArea} >
+                  <SideBarContainer />
                 </div>
+              ) : null
+            }
+            <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`} >
+              <div className={contentArea}>
+                <ContentContainer />
               </div>
             </div>
-          );
-        case 3:
-          return (
-            <div style={{}}>
-              {
-                expandedSidebar ? (
-                  <div className={sideBarArea} >
-                    <SideBarContainer />
-                  </div>
-                ) : null
-              }
-              <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
-                <div className={`${contentArea} ${contenthasTab}`}>
-                  <ContentContainer hasTab />
+          </div>
+        );
+      case 3:
+        return (
+          <div>
+            {
+              expandedSidebar ? (
+                <div className={sideBarArea} >
+                  <SideBarContainer />
                 </div>
-                <div className={tabArea}>
-                  <TabsContainer />
-                </div>
+              ) : null
+            }
+            <div className={`${hasTab} ${marginTop} ${expandedSidebar ? marginLeft : ''}`}>
+              <div className={`${contentArea} ${contenthasTab}`}>
+                <ContentContainer hasTab />
+              </div>
+              <div className={tabArea}>
+                <TabsContainer />
               </div>
             </div>
-          );
-        default:
-          return null;
-      }
+          </div>
+        );
+      default:
+        return null;
+    }
   }
 
   btnOnclick = () => {
@@ -391,7 +379,6 @@ export default class Work extends Component {
                 title="添加到首页"
                 className={pin}
                 style={{
-                  // right: hasRelationFunc ? '-27px' : '-27px',
                   position: 'absolute',
                   top: '0px',
                 }}
@@ -401,7 +388,7 @@ export default class Work extends Component {
             </div>
           </HeaderContainer>
           {
-            widthBrm ? <BreadcrumbContainer withSidebar={type !== 1 && type !== 4}/> : null
+            widthBrm ? <BreadcrumbContainer withSidebar={type !== 1 && type !== 4} /> : null
           }
         </div>
 
