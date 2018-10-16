@@ -18,7 +18,6 @@ const defaultState = {
   userInfo: {},
   enterInfo: {},
   workList: [],
-  metaData: {},
   requestDisplay: false,
   curDisplayFolder: {
     widgetName: '',
@@ -57,17 +56,13 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    let { metaData, workList } = payload;
-    if (typeof metaData === 'string') {
-      metaData = JSON.parse(payload.metaData);
-    }
+    let { workList } = payload;
     const list = workList.filter((item) => {
       return item.children.length;
     });
     return {
       ...state,
       workList: list,
-      metaData,
     };
   },
   [getSearchEnterOrTeam]: (state, { payload, error }) => {

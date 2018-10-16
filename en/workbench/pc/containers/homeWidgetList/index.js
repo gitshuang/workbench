@@ -47,7 +47,6 @@ class HomeWidgeList extends Component {
       noTitle,
       openFolder,
       style,
-      listMeta,
       lastIndex,
     } = this.props;
     // 新增元数据  控制groupTitle 样式
@@ -75,7 +74,7 @@ class HomeWidgeList extends Component {
         }
       }
       return (
-        <Widget {...props} listMeta={listMeta} viewport={this.props.viewport} loadOk={this.props.loadOk} />
+        <Widget {...props} viewport={this.props.viewport} loadOk={this.props.loadOk} />
       );
     })
     return (
