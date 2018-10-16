@@ -34,7 +34,8 @@ const manageWidget = {
 	move_down: '下移',
 	move_up: '上移',
 	more: '更多',
-	save_latest_or_not: '是否保存最新修改？'
+	save_latest_or_not: '是否保存最新修改？',
+	noDataGroup: '无内容的分组在首页不可见'
 };
 
 export default {

@@ -106,7 +106,6 @@ class HeaderContainer extends Component {
       leftContent,
       rightContent,
       messageType,
-      color,
       imShowed,
       portalInfo,
       serviceList,
@@ -120,7 +119,7 @@ class HeaderContainer extends Component {
       <SearchContainer />,
       <div className={`${rightBtn}`} style= {{marginRight: "15px",display:homeStyle}}>
         <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
-          <Icon title="我的門戶" type="Friends-space" style={{ color }} />
+          <Icon title="我的門戶" type="Friends-space" style={{ fontSize: "18px" }} />
         </a>
       </div>,
       <QuickApplication
@@ -130,7 +129,7 @@ class HeaderContainer extends Component {
         openServiceFn={this.openServiceFn} 
       />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
-        <Icon title="智慧通訊" type="clock" style={{ color }} />
+        <Icon title="智慧通訊" type="clock" style={{  }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
     );

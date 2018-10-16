@@ -55,12 +55,6 @@ class HeaderPage extends Component {
       userAvator: PropTypes.string,
     }),
     list: PropTypes.arrayOf(PropTypes.object),
-    headerData: PropTypes.shape({
-      background: PropTypes.string,
-      title: PropTypes.string,
-      titleStyle: PropTypes.string,
-      color: PropTypes.string,
-    }),
   };
   static defaultProps = {
     changeRequestDisplay: () => { },
@@ -69,7 +63,6 @@ class HeaderPage extends Component {
     requestError: () => { },
     userInfo: {},
     list: [],
-    headerData: {},
   };
   constructor(props) {
     super(props);
@@ -177,27 +170,19 @@ class HeaderPage extends Component {
   render() {
     const {
       list,
-      headerData,
     } = this.props;
-
-    const background = headerData && headerData.background && JSON.parse(headerData.background);
-    const titleContent = headerData && headerData.title;
-    const titleStyle = headerData && headerData.titleStyle && JSON.parse(headerData.titleStyle);
-    const color = headerData && headerData.color;
 
     const personal = <Personals />;
     const BtnShow = this.state.btnShow ? null : btnDisable;
-
-    const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop:'8px', width: '145px' }} /></a>
+    const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop:'8px', width: '145px' }} /></a>;
     return (
-      <div className="header" style={background} id="home_header">
+      <div className="header" id="home_header">
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
           iconName={personal}
-          color={color}
         >
-          <span style={titleStyle}>{title || '首頁'}</span>
+          <span>{title || '首頁'}</span>
         </Header>
         {
           list.length >= 1 ? (
@@ -206,7 +191,6 @@ class HeaderPage extends Component {
               offset={-55}
               duration={500}
               delay={0}
-              color={color}
               allBtn={this.state.allBtn}
               btnShowFn={this.btnShowFn}
             />

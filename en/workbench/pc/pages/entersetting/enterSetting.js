@@ -77,7 +77,7 @@ class CreateEnter extends Component {
       { value: 'D', label: '201-500' },
       { value: 'E', label: '501-1000' },
       { value: 'F', label: '1001-2000' },
-      { value: 'G', label: '>2000people' },
+      { value: 'G', label: '>2000 people' },
     ];
 
     this.tenantIndustry = [

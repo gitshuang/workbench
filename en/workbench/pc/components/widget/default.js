@@ -40,16 +40,10 @@ class WidgetItem extends Component {
       icon: PropTypes.string,
     }),
     clickHandler: PropTypes.func,
-    listMeta: PropTypes.shape({
-      titleStyle: PropTypes.string,
-      imageStyle: PropTypes.string,
-      background: PropTypes.string,
-    }),
   };
   static defaultProps = {
     data: {},
     clickHandler: () => {},
-    listMeta: {},
     viewport: {
       top: 0,
       height: 0
@@ -115,7 +109,6 @@ class WidgetItem extends Component {
         icon,
       },
       clickHandler,
-      listMeta,
     } = this.props;
 
     const style = {
@@ -125,16 +118,9 @@ class WidgetItem extends Component {
       style.backgroundImage = `url(${background})`;
     }
 
-    // 取元数据
-    const titleStyle = listMeta && listMeta.titleStyle && JSON.parse(listMeta.titleStyle);
-    const imageStyle = listMeta && listMeta.imageStyle && JSON.parse(listMeta.imageStyle);
-    const backStyle = listMeta && listMeta.background && JSON.parse(listMeta.background);
-    const mergeStyle = Object.assign(style, backStyle);
-
     const defaultImgArray = [default1Icon, default2Icon, default3Icon, default4Icon];
     return (
       <li ref="default_widget" className={`${widgetItem} ${defaultArea}`}
-        style={mergeStyle}
         onClick={clickHandler}
         onKeyDown={clickHandler}
         role="presentation"
@@ -142,9 +128,9 @@ class WidgetItem extends Component {
         {this.state.shouldLoad?(
           <div>
             <div className={title}>
-              <div className={titleRight} style={titleStyle}>{name}</div>
+              <div className={titleRight}>{name}</div>
             </div>
-            <img alt="" src={icon || defaultImgArray[this.state.defaultImgIndex - 1]} className={iconImg} style={imageStyle}/>
+            <img alt="" src={icon || defaultImgArray[this.state.defaultImgIndex - 1]} className={iconImg} />
           </div>):(
           <Loading container={this} show={true} />)
         }

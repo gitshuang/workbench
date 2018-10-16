@@ -31,7 +31,6 @@ class Navs extends Component {
     offset: PropTypes.number,
     duration: PropTypes.number,
     delay: PropTypes.number,
-    color: PropTypes.string,
     btnShowFn: PropTypes.func,
   }
   static defaultProps = {
@@ -40,7 +39,6 @@ class Navs extends Component {
     offset: 0,
     duration: 0,
     delay: 0,
-    color: '',
     btnShowFn: () => { },
   }
   constructor(props) {
@@ -151,7 +149,6 @@ class Navs extends Component {
       offset,
       duration,
       delay,
-      color,
       allBtn,
     } = this.props;
     if (!items.length) return null;
@@ -169,7 +166,6 @@ class Navs extends Component {
                 <li key={i}>
                   <Link
                     className={link}
-                    style={{ color }}
                     to={target}
                     spy
                     smooth

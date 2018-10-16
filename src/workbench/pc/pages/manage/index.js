@@ -7,7 +7,6 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
-
 import CreateManageModule from 'pub-comp/manageWidget';
 import folderBgSrc from 'assets/image/wgt/folder_bg.png';
 import HeaderPage from './headerPage';

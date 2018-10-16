@@ -38,7 +38,6 @@ Date.prototype.format = function (fmt) {
 @connect(
   mapStateToProps(
     'workList',
-    'metaData',
     'userInfo',
     {
       namespace: 'home',
@@ -58,12 +57,6 @@ class Home extends Component {
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
     getWorkList: PropTypes.func,
-    metaData: PropTypes.shape({
-      groupMeta: PropTypes.object,
-      contentData: PropTypes.object,
-      headerData: PropTypes.object,
-      listMeta: PropTypes.object,
-    }),
     workList: PropTypes.arrayOf(PropTypes.object),
     getApplicationList: PropTypes.func,
   };
@@ -73,7 +66,6 @@ class Home extends Component {
     requestError: () => { },
     getWorkList: () => { },
     getApplicationList: () => { },
-    metaData: {},
     workList: [],
   };
   constructor(props) {
@@ -213,11 +205,6 @@ class Home extends Component {
     };
   })()
 
-  renderMetadata = (name) => {
-    const { metaData } = this.props;
-    return metaData && metaData.properties && metaData.properties[name];
-  }
-
   linkTo = () => {
     this.closeHomeMark();
     openService('GZTSYS010');
@@ -235,12 +222,6 @@ class Home extends Component {
     } = this.props;
     const list = [];
     const conts = [];
-    // 元数据拉过来的值
-    const groupMeta = this.renderMetadata('group');
-    const contentData = this.renderMetadata('content');
-    const headerData = this.renderMetadata('header');
-    const listMeta = this.renderMetadata('list');
-    const contentStyle = contentData && contentData.style && JSON.parse(contentData.style);
     workList.forEach((da, i) => {
       const {
         widgetId: id,
@@ -256,8 +237,6 @@ class Home extends Component {
         target: `nav${id}`,
       });
       conts.push(<WidgeList
-        groupMeta={groupMeta}
-        listMeta={listMeta}
         {...props}
         viewport={this.state.viewport}
         loadOk={this.loadOk}
@@ -265,8 +244,8 @@ class Home extends Component {
       />);
     });
     return (
-      <div ref='home' className={`${pageHome} home`} style={contentStyle}>
-        <HeaderPage list={list} headerData={headerData} />
+      <div ref='home' className={`${pageHome} home`}>
+        <HeaderPage list={list} />
         <ElementsWrapper items={list} offset={-55}>
           {conts}
         </ElementsWrapper>

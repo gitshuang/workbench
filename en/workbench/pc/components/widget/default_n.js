@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {findDOMNode} from 'react-dom'
+import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types';
 
 import {
@@ -42,17 +42,11 @@ class WidgetItem extends Component {
 			icon: PropTypes.string,
 		}),
 		clickHandler: PropTypes.func,
-		listMeta: PropTypes.shape({
-			titleStyle: PropTypes.string,
-			imageStyle: PropTypes.string,
-			background: PropTypes.string,
-		}),
 	};
 	static defaultProps = {
 		data: {},
 		clickHandler: () => {
 		},
-		listMeta: {},
 		viewport: {
 			top: 0,
 			height: 0
@@ -68,11 +62,11 @@ class WidgetItem extends Component {
 	}
 
 	componentWillMount() {
-		this.setState({defaultImgIndex: parseInt(Math.random() * 4 + 1, 10)})
+		this.setState({ defaultImgIndex: parseInt(Math.random() * 4 + 1, 10) })
 	}
 
 	componentDidMount() {
-		const {from} = this.props;
+		const { from } = this.props;
 		if (from === "folder") {
 			this.setState({
 				shouldLoad: true
@@ -111,20 +105,20 @@ class WidgetItem extends Component {
 	}
 
 	renderWidget = (type) => {
-		const {data} = this.props;
+		const { data } = this.props;
 		switch (type) {
 			case 4:
-				return <Default_4 {...data}/>;
+				return <Default_4 {...data} />;
 			case 5:
-				return <Default_5 {...data}/>;
+				return <Default_5 {...data} />;
 			case 6:
-				return <Default_6 {...data}/>;
+				return <Default_6 {...data} />;
 			case 7:
-				return <Default_7 {...data}/>;
+				return <Default_7 {...data} />;
 			case 8:
-				return <Default_8 {...data}/>;
+				return <Default_8 {...data} />;
 			case 9:
-				return <Default_9 {...data}/>;
+				return <Default_9 {...data} />;
 		}
 	}
 
@@ -137,7 +131,6 @@ class WidgetItem extends Component {
 				type
 			},
 			clickHandler,
-			listMeta
 		} = this.props;
 
 		const style = {
@@ -146,17 +139,11 @@ class WidgetItem extends Component {
 		if (background) {
 			style.backgroundImage = `url(${background})`;
 		}
-
-		// 取元数据
-		const backStyle = listMeta && listMeta.background && JSON.parse(listMeta.background);
-		const mergeStyle = Object.assign(style, backStyle);
-
 		return (
 			<li ref="default_widget" className={`${widgetItem}`}
-					style={mergeStyle}
-					onClick={clickHandler}
-					onKeyDown={clickHandler}
-					role="presentation"
+				onClick={clickHandler}
+				onKeyDown={clickHandler}
+				role="presentation"
 			>
 				{this.state.shouldLoad ? (<div>
 					<div className={title}>
@@ -164,7 +151,7 @@ class WidgetItem extends Component {
 					</div>
 					{this.renderWidget(type)}
 				</div>) : (
-					<Loading container={this} show={true}/>)
+						<Loading container={this} show={true} />)
 				}
 			</li>
 		);
