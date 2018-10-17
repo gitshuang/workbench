@@ -28,6 +28,4 @@ function check(tenantId, loadingFunc, successFunc) {
     }
   }
 }
-
 export { check }; // eslint-disable-line
-

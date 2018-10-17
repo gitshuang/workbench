@@ -59,46 +59,6 @@
 .enterCont :global(.u-select-selection-rendered .u-select-selection-rendered){
   line-height: 36px;
 }
-
-
-.pageEnterprise{
-  margin: 90px 120px 0;
-  background: #fff;
-  padding-bottom: 50px;
-  min-width: 500px;
-  overflow: hidden;
-}
-
-.enterTitle{
-  font-size:21px;
-  color: #111111;
-  font-weight: 600;
-  line-height:27px; 
-  width: 360px;
-  margin: 0 auto;
-  padding-top: 30px;
-  margin-bottom: 10px;
-}
-
-.hr{
-  background: rgba(13,20,36,0.1);
-  height: 1px;
-  margin-left: 30px;
-  border-top: none;
-  margin-bottom: 25px;
-  width: 90%;
-}
-
-.enterCont{
-  width: 600px;
-  margin: 0 auto;
-  padding-left: 80px;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
-  overflow: hidden;
-  position: relative;
-}
-
 .enterForm :global(.u-input-inner>input){
   width:338px !important;
   background:rgba(255,255,255,1);
@@ -191,11 +151,6 @@
 	to{-o-transform: rotate(360deg);}
 }
 
-:global(.u-progress-bar){
-  background-color: #e14b46;
-  line-height: 32px;
-  font-size: 14px;
-}
 .progressBar{
   position: relative;
   margin-left: 118px;
@@ -215,4 +170,60 @@
 }
 .enterForm :global(.ie9_cont){
   position: relative !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pageEnterprise{
+  margin: 10px 120px 0;
+  background: #fff;
+  /* padding-bottom: 50px; */
+  min-width: 800px;
+  overflow: hidden;
+}
+
+.enterTitle{
+  font-size:21px;
+  color: #111111;
+  font-weight: 600;
+  line-height:27px; 
+  width: 360px;
+  margin: 0 auto;
+  padding-top: 30px;
+  margin-bottom: 10px;
+}
+
+.hr{
+  background: rgba(13,20,36,0.1);
+  height: 1px;
+  margin-left: 30px;
+  border-top: none;
+  margin-bottom: 25px;
+  width: 90%;
+}
+
+.enterCont{
+  /* width: 600px; */
+  margin: 0 auto;
+  /* padding-left: 80px; */
+  padding-bottom: 30px;
+  /* margin-bottom: 30px; */
+  overflow: hidden;
+  position: relative;
 }
