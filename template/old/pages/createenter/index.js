@@ -7,19 +7,16 @@ import { mapStateToProps } from '@u';
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
 
-import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
-import teamconfigActions from 'store/root/teamconfig/actions';
-
-import EnterContent from 'pub-comp/enterContent';
+import EnterContent from 'containers/enterContent';
 import { uploadApplication } from 'store/root/api';
 
-
-import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
-
+import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
-const { getTeamInfo } = teamconfigActions;
+
+import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
+import 'assets/style/Form.css';
 
 @withRouter
 @connect(
@@ -33,52 +30,35 @@ const { getTeamInfo } = teamconfigActions;
     requestStart,
     requestSuccess,
     requestError,
-    getTeamInfo, // 获取团队基础信息
-    setCreateEnter,
+    setCreateEnter
   },
 )
-class Updateenter extends Component {
+class Enterprise extends Component {
   static propTypes = {
     history: PropTypes.shape({
       goBack: PropTypes.func,
+      replace: PropTypes.func,
     }),
-    getTeamInfo: PropTypes.func,
-    requestError: PropTypes.func,
-    requestSuccess: PropTypes.func,
+    userInfo: PropTypes.shape({
+      allowTenants: PropTypes.array,
+    }),
   };
   static defaultProps = {
     history: {},
-    getTeamInfo: () => { },
-    requestError: () => { },
-    requestSuccess: () => { },
+    userInfo: {},
   };
   constructor(props) {
     super(props);
     this.state = {
-      enterData: null,
     };
-  }
-
-  componentWillMount() {
-    const { getTeamInfo, requestError, requestSuccess } = this.props;
-    getTeamInfo().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-        return false;
-      }
-      this.setState({
-        enterData: payload,
-      });
-      requestSuccess();
-    });
-  }
-
-  goHome = () => {
-    this.props.history.replace('');
   }
 
   goBack = () => {
     this.props.history.goBack();
+  }
+
+  goHome = () => {
+    this.props.history.replace('');
   }
 
   handleClick = (param, fn) => {
@@ -102,38 +82,35 @@ class Updateenter extends Component {
   }
 
   render() {
-    const { enterData } = this.state;
     const { userInfo } = this.props;
     return (
       <div style={{ overflow: "hidden" }}>
-        <div className="um-header header">
-          <Header onLeftClick={this.goHome}>
+        <div className="header um-header">
+          <Header
+            onLeftClick={this.goHome}
+          >
             <div>
-              <span>企业认证</span>
+              <span>创建企业</span>
             </div>
           </Header>
           <div className="appBreadcrumb">
-            <Breadcrumbs data={[{ name: '企业认证' }]} goback={this.goBack} />
+            <Breadcrumbs data={[{ name: '创建企业' }]} goback={this.goBack} />
           </div>
         </div>
+
         <div className="content">
           <div className={pageEnterprise}>
             <div className={enterTitle} >创建企业</div>
             <hr className={hr} />
             <div className={enterCont} >
-              {
-                enterData && userInfo ?
-                  <EnterContent
-                    data={enterData}
-                    userInfo={userInfo}
-                    _from="update"
-                    handleClickFn={this.handleClick}
-                    buttonText="升级"
-                    loadingDesc="正在升级企业..."
-                    uploadApplication={uploadApplication}
-                  /> : null
-              }
-
+              <EnterContent
+                userInfo={userInfo}
+                _from="create"
+                handleClickFn={this.handleClick}
+                buttonText="创建"
+                loadingDesc="正在创建企业..."
+                uploadApplication={uploadApplication}
+              />
             </div>
           </div>
         </div>
@@ -141,5 +118,5 @@ class Updateenter extends Component {
     );
   }
 }
-export default Updateenter;
+export default Enterprise;
 

@@ -3,7 +3,6 @@ import types from './types';
 
 import {
   getTeamInfo,
-  uploadApplication,
   createTeam,
   getUserList,
   adminToUser,
@@ -47,7 +46,6 @@ export default createActions(
     namespace: 'teamconfig',
   },
   {
-    [UPLOAD_APPLICATION]: uploadApplication,
     [CREATE_TEAM]: createTeam,
     [REMOVE_USER]: removeUser,
     [TRANSFER_TEAM]: transferTeam,

@@ -23,8 +23,6 @@ const CreateEnter = asyncComponent(() => import(/* webpackChunkName: "CreateEnte
 const Teamconfig = asyncComponent(() => import(/* webpackChunkName: "Teamconfig" */'pages/teamconfig'));
 // 团队升级为企业
 const UpdateEnter = asyncComponent(() => import(/* webpackChunkName: "UpdateEnter" */'pages/updateenter'));
-// 企业设置，
-const EnterSetting = asyncComponent(() => import(/* webpackChunkName: "EnterSetting" */'pages/entersetting'));
 // 邀请成员
 const Invitation = asyncComponent(() => import(/* webpackChunkName: "Invitation" */'pages/invitation'));
 // 账号管理
@@ -98,10 +96,6 @@ const routes = [
   {
     path: '/updateenter',
     component: UpdateEnter,
-  },
-  {
-    path: '/entersetting/:data',
-    component: EnterSetting,
   },
   {
     path: '/invitation',
