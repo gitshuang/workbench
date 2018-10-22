@@ -18,7 +18,7 @@ import { enterForm, line, infoTitle, progressBar } from './style.css';
 
 const { Option } = Select;
 
-class CreateEnter extends Component {
+class EnterContent extends Component {
   static propTypes = {
     userInfo: PropTypes.shape({
       userName: PropTypes.string,
@@ -85,30 +85,27 @@ class CreateEnter extends Component {
   componentDidMount() {
     const { data, userInfo, _from } = this.props;
     // 如果来自创建 ， 只做将userInfo信息灌入到组件中显示
-    if (_from === 'create') {
-      this.setState({
-        linkman: userInfo.userName,
-        tenantEmail: userInfo.userEmail,
-        tenantTel: userInfo.userMobile,
-      });
-    } else {
-      const { tenantAddress } = data;
-      // 将 地址综合 赋值到 address 和 address和 addressInput 上
-      if (tenantAddress) {
-        const Addres = tenantAddress.split('|');
-        data.address = {
-          province: Addres[0] || '',
-          city: Addres[1] || '',
-          area: Addres[2] || '',
-        };
-        data.addressInput = Addres[Addres.length - 1]
-      }
-      this.setState({
-        ...data,
-      });
+    if (_from === "create" || _from === "update") {
+      data.linkman = userInfo.userName;
+      data.tenantEmail = userInfo.userEmail;
+      data.tenantTel = userInfo.userMobile;
     }
+    const { tenantAddress } = data;
+    // 将 地址综合 赋值到 address 和 address和 addressInput 上
+    if (tenantAddress) {
+      const Addres = tenantAddress.split('|');
+      data.address = {
+        province: Addres[0] || '',
+        city: Addres[1] || '',
+        area: Addres[2] || '',
+      };
+      data.addressInput = Addres[Addres.length - 1]
+    }
+    
+    this.setState({
+      ...data,
+    });
   }
-
   // 切换企业地址
   onCityChange = (obj) => {
     this.setState({
@@ -182,12 +179,14 @@ class CreateEnter extends Component {
           disabled: false,
         });
         // 当请求成功才走下一步
-        if (!error && _from !== "setting") {
+        if (!error && (_from === "update" || _from === "create")) {
           // 当创建企业/ 团队升级为企业   需要滚动条  并且检测 
           this.setState({
             startFlag: true,
+            tenantId: payload.tenantId,
+          }, () => {
+            check(payload.tenantId, this.loadingFunc, this.successFunc);
           });
-          check(payload.tenantId, this.loadingFunc, this.successFunc);
         }
       });
     }
@@ -502,4 +501,4 @@ class CreateEnter extends Component {
   }
 }
 
-export default CreateEnter;
+export default EnterContent;
