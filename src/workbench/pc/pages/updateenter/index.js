@@ -11,7 +11,7 @@ import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 
-import EnterContent from 'containers/enterContent';
+import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
 
 
