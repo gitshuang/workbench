@@ -85,10 +85,13 @@ class EnterContent extends Component {
   componentDidMount() {
     const { data, userInfo, _from } = this.props;
     // 如果来自创建 ， 只做将userInfo信息灌入到组件中显示
-    if (_from === "create" || _from === "update") {
-      data.linkman = userInfo.userName;
-      data.tenantEmail = userInfo.userEmail;
-      data.tenantTel = userInfo.userMobile;
+    if (_from === "create") {
+      this.setState({
+        linkman: userInfo.userName,
+        tenantEmail: userInfo.userEmail,
+        tenantTel: userInfo.userMobile,
+      });
+      return false;
     }
     const { tenantAddress } = data;
     // 将 地址综合 赋值到 address 和 address和 addressInput 上
@@ -101,7 +104,10 @@ class EnterContent extends Component {
       };
       data.addressInput = Addres[Addres.length - 1]
     }
-    
+    data.linkman = data.linkman || userInfo.userName;
+    data.tenantEmail = data.tenantEmail || userInfo.userEmail;
+    data.tenantTel = data.tenantTel || userInfo.userMobile;
+
     this.setState({
       ...data,
     });
@@ -124,18 +130,18 @@ class EnterContent extends Component {
 
   // select 更改
   setOptherData = (obj) => {
-    this.state[obj.name] = obj.value;
+    const { name, value } = obj;
     this.setState({
-      ...this.state,
+      [name]: value,
     });
   }
-
+  // 更改是否允许用户退出
   allowExitChange = (value) => {
     this.setState({
       allowExit: value,
     });
   }
-
+  // 通讯录显示水印
   watermarkChange = (value) => {
     this.setState({
       isWaterMark: value,
@@ -144,24 +150,36 @@ class EnterContent extends Component {
 
   // 更改输入框的值
   inputOnChange = (e, name) => {
-    this.state[name] = e;
     this.setState({
-      ...this.state,
+      [name]: e,
     });
   }
 
+  // 这个方法是点击了提交按钮执行的，form组件封的有点疯
   checkForm = (flag, data) => {
     const { handleClickFn, _from } = this.props;
     const {
       tenantId,
       address,
       addressInput,
+      allowExit,
+      isWaterMark
     } = this.state;
 
     if (flag) {
       this.setState({
         disabled: true,
       });
+      // 这个form表单组件有点坑， 还得自己完善兼容性  radio的两个 
+      const AllowExit = data.find(da => da.name === 'allowExit');
+      if (!AllowExit.value && AllowExit.value === '') {
+        AllowExit.value = allowExit;
+      }
+      const Watermark = data.find(da => da.name === 'isWaterMark');
+      if (!Watermark.value && Watermark.value === '') {
+        Watermark.value = isWaterMark;
+      }
+      // 将地址 组合  真实上传的参数
       const TenantAddress = `${address.province}|${address.city}|${address.area}|${addressInput}`;
       data.push({ name: 'tenantAddress', value: TenantAddress });
       data.push({ name: 'tenantId', value: tenantId });
@@ -171,7 +189,6 @@ class EnterContent extends Component {
         }
         return obj;
       }, {});
-
 
       handleClickFn(param, ({ error, payload }) => {
         // 只要是回调都将按钮的disabled 设定为false
@@ -330,99 +347,100 @@ class EnterContent extends Component {
           />
         </FormItem>
 
-        {_from === "create" ? <div></div>
-          : <div>
-            <FormItem
-              showMast={false}
-              labelName={<span>邀请规则<font color="red">&nbsp;*&nbsp;</font></span>}
-              isRequire={false}
-              valuePropsName="value"
-              inline
+        {_from === "create" ? <div></div> :
+          <FormItem
+            showMast={false}
+            labelName={<span>邀请规则<font color="red">&nbsp;*&nbsp;</font></span>}
+            isRequire={false}
+            valuePropsName="value"
+            inline
+          >
+            <Select
+              name="invitePermission"
+              defaultValue="1"
+              value={invitePermission || '1'}
+              style={{ width: 338, marginRight: 6 }}
+              onChange={(e) => { this.setOptherData({ name: 'invitePermission', value: e }); }}
             >
-              <Select
-                name="invitePermission"
-                defaultValue="1"
-                value={invitePermission || '1'}
-                style={{ width: 338, marginRight: 6 }}
-                onChange={(e) => { this.setOptherData({ name: 'invitePermission', value: e }); }}
-              >
-                <Option value="1">全员邀请 </Option>
-                <Option value="2">禁止邀请</Option>
-                <Option value="0">管理员邀请</Option>
-              </Select>
-            </FormItem>
-
-            <FormItem
-              showMast={false}
-              labelName={<span>申请权限<font color="red">&nbsp;*&nbsp;</font></span>}
-              isRequire={false}
-              valuePropsName="value"
-              inline
+              <Option value="1">全员邀请 </Option>
+              <Option value="2">禁止邀请</Option>
+              <Option value="0">管理员邀请</Option>
+            </Select>
+          </FormItem>
+        }
+        {_from === "create" ? <div></div> :
+          <FormItem
+            showMast={false}
+            labelName={<span>申请权限<font color="red">&nbsp;*&nbsp;</font></span>}
+            isRequire={false}
+            valuePropsName="value"
+            inline
+          >
+            <Select
+              name="joinPermission"
+              defaultValue="1"
+              value={joinPermission || '1'}
+              style={{ width: 338, marginRight: 6 }}
+              onChange={(e) => { this.setOptherData({ name: 'joinPermission', value: e }); }}
             >
-              <Select
-                name="joinPermission"
-                defaultValue="1"
-                value={joinPermission || '1'}
-                style={{ width: 338, marginRight: 6 }}
-                onChange={(e) => { this.setOptherData({ name: 'joinPermission', value: e }); }}
-              >
-                <Option value="0">所有用户都可申请加入 </Option>
-                <Option value="1">禁止用户申请加入</Option>
-              </Select>
-            </FormItem>
-
-            <FormItem
-              showMast={false}
-              labelName={<span>允许用户退出<font color="red">&nbsp;*&nbsp;</font></span>}
-              isRequire={false}
-              inline
+              <Option value="0">所有用户都可申请加入 </Option>
+              <Option value="1">禁止用户申请加入</Option>
+            </Select>
+          </FormItem>
+        }
+        {_from === "create" ? <div></div> :
+          <FormItem
+            showMast={false}
+            labelName={<span>允许用户退出<font color="red">&nbsp;*&nbsp;</font></span>}
+            isRequire={false}
+            inline
+          >
+            <Radio.RadioGroup
+              name="allowExit"
+              onChange={this.allowExitChange}
+              selectedValue={allowExit || '0'}
             >
-              <Radio.RadioGroup
-                name="allowExit"
-                onChange={this.allowExitChange}
-                selectedValue={allowExit || '0'}
-              >
-                <Radio value="0" >禁止</Radio>
-                <Radio value="1" >允许</Radio>
-              </Radio.RadioGroup>
-            </FormItem>
-
-            <FormItem
-              showMast={false}
-              labelName={<span>上下级显示<font color="red">&nbsp;*&nbsp;</font></span>}
-              isRequire={false}
-              valuePropsName="value"
-              inline
+              <Radio value="0" >禁止</Radio>
+              <Radio value="1" >允许</Radio>
+            </Radio.RadioGroup>
+          </FormItem>
+        }
+        {_from === "create" ? <div></div> :
+          <FormItem
+            showMast={false}
+            labelName={<span>上下级显示<font color="red">&nbsp;*&nbsp;</font></span>}
+            isRequire={false}
+            valuePropsName="value"
+            inline
+          >
+            <Select
+              name="subordinateType"
+              defaultValue={0}
+              value={subordinateType || 0}
+              style={{ width: 338, marginRight: 6 }}
+              onChange={(e) => { this.setOptherData({ name: 'subordinateType', value: e }); }}
             >
-              <Select
-                name="subordinateType"
-                defaultValue={0}
-                value={subordinateType || 0}
-                style={{ width: 338, marginRight: 6 }}
-                onChange={(e) => { this.setOptherData({ name: 'subordinateType', value: e }); }}
-              >
-                <Option value={0}>根据组织机构负责人显示上下级 </Option>
-                <Option value={1}>根据导入的上下级关系显示上下级</Option>
-              </Select>
-            </FormItem>
-
-            <FormItem
-              showMast={false}
-              labelName={<span>通讯录显示水印<font color="red"> &nbsp;*&nbsp;</font></span>}
-              isRequire={false}
-              inline
+              <Option value={0}>根据组织机构负责人显示上下级 </Option>
+              <Option value={1}>根据导入的上下级关系显示上下级</Option>
+            </Select>
+          </FormItem>
+        }
+        {_from === "create" ? <div></div> :
+          <FormItem
+            showMast={false}
+            labelName={<span>通讯录显示水印<font color="red"> &nbsp;*&nbsp;</font></span>}
+            isRequire={false}
+            inline
+          >
+            <Radio.RadioGroup
+              name="isWaterMark"
+              onChange={this.watermarkChange}
+              selectedValue={isWaterMark}
             >
-              <Radio.RadioGroup
-                name="isWaterMark"
-                onChange={this.watermarkChange}
-                selectedValue={isWaterMark}
-              >
-                <Radio value={0} >禁止</Radio>
-                <Radio value={1} >允许</Radio>
-              </Radio.RadioGroup>
-            </FormItem>
-
-          </div>
+              <Radio value={0} >禁止</Radio>
+              <Radio value={1} >允许</Radio>
+            </Radio.RadioGroup>
+          </FormItem>
         }
 
         <div className={line}></div>
