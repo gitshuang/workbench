@@ -89,7 +89,7 @@ class Updateenter extends Component {
       setCreateEnter
     } = this.props;
     requestStart();
-    setCreateEnter(param, "create").then(({ error, payload }) => {
+    setCreateEnter(param, "update").then(({ error, payload }) => {
       // 此处调用callback
       fn({ error, payload });
       if (error) {
@@ -97,7 +97,6 @@ class Updateenter extends Component {
         return;
       }
       requestSuccess();
-      localStorage.setItem('create', '1');
     });
   }
 
