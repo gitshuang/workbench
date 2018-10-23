@@ -256,7 +256,7 @@ class CreateEnter extends Component {
               <Option value="D">201-500</Option>
               <Option value="E">501-1000</Option>
               <Option value="F">1001-2000</Option>
-              <Option value="G">2000people</Option>
+              <Option value="G">2000 people</Option>
             </Select>
           </FormItem>
 

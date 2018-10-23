@@ -11,7 +11,7 @@ import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 
-import EnterContent from 'containers/enterContent';
+import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
 
 
@@ -89,7 +89,7 @@ class Updateenter extends Component {
       setCreateEnter
     } = this.props;
     requestStart();
-    setCreateEnter(param, "create").then(({ error, payload }) => {
+    setCreateEnter(param, "update").then(({ error, payload }) => {
       // 此处调用callback
       fn({ error, payload });
       if (error) {
@@ -97,7 +97,6 @@ class Updateenter extends Component {
         return;
       }
       requestSuccess();
-      localStorage.setItem('create', '1');
     });
   }
 
@@ -122,7 +121,7 @@ class Updateenter extends Component {
             <hr className={hr} />
             <div className={enterCont} >
               {
-                enterData && userInfo ?
+                enterData ?
                   <EnterContent
                     data={enterData}
                     userInfo={userInfo}

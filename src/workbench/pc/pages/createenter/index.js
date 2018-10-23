@@ -7,7 +7,7 @@ import { mapStateToProps } from '@u';
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
 
-import EnterContent from 'containers/enterContent';
+import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
 
 import rootActions from 'store/root/actions';

@@ -63,8 +63,25 @@ class LoginPage extends Component {
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
     document.getElementById('root').className = 'rootSpec';
     document.getElementsByTagName('body')[0].className = 'bodySpec';
-  }
+    this.getQueryString('autoLogin')==='true'&& this.loginClick();
 
+  }
+  
+  componentWillUnmount(){
+    if (document.removeEventListener) {
+      document.removeEventListener('DOMMouseScroll', this.scrollFunc, false);
+    }
+    //W3C
+    window.onmousewheel = document.onmousewheel = null;//IE/Opera/Chrome
+    document.getElementById('root').className = '';
+    document.getElementsByTagName('body')[0].className = '';
+  }
+  getQueryString = (name) => {  
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+    var r = window.location.href.substr(1).match(reg);  
+    if (r != null) return unescape(r[2]).toString().toLocaleLowerCase();  
+    return null;  
+} 
   scrollFunc = function (e) {
     let { preTime, duration, curIndex, alldata } = this.state;
     //如果动画还没执行完，则return
@@ -157,7 +174,7 @@ class LoginPage extends Component {
     })
   }
   loginClick = () => {
-    document.removeEventListener("DOMMouseScroll", this.scrollFunc);
+    document.removeEventListener && document.removeEventListener("DOMMouseScroll", this.scrollFunc);
     window.onmousewheel = document.onmousewheel = null;
     this.setState({ loginModalShow: true })
   }

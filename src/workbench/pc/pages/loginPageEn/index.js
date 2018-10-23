@@ -26,34 +26,29 @@ class LoginPage extends Component {
       loginModalShow: false,//登录的modal是否展示
     }
     this.amBody = null;
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice) +'&locale=en_US';
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+'&locale=en_US';
+    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice) + '&locale=en_US';
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice) + '&locale=en_US';
     if (process.env.NODE_ENV == 'daily') {
-      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+'&locale=en_US';
+      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice) + '&locale=en_US';
     }
     this.sevenSpace;
   }
   componentWillMount() {
-    // //最后因为footer屏幕居中手动计算，图片1677-358
-    // let dom = document.documentElement || document.body;
-    // // let screenWidth = dom.clientWidth ;
-    // let screenHeight = dom.clientHeight;
-    // let header = 66;
-    // // let footer =Math.round((screenWidth*358)/1677);
-    // let footer = 306;//这边确定
-    // let fontHeight = 225;
-    // let space = Math.round((screenHeight + header - footer - fontHeight) / 2);
-    // this.sevenSpace = space;
+    this.getQueryString('autoLogin') === 'true' && this.loginClick();
   }
   componentDidMount() {
-  
+
   }
-  lanCallBack = (lanCode) =>{
-    // this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
-    // this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
-    // 这里不需要，因为切换语言之后就会走loginPage
+  getQueryString = (name) => {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.href.substr(1).match(reg);
+    if (r != null) return unescape(r[2]).toString().toLocaleLowerCase();
+    return null;
   }
-  
+  lanCallBack = () => {
+
+  }
+
   loginClick = () => {
     this.setState({ loginModalShow: true })
   }
@@ -72,7 +67,7 @@ class LoginPage extends Component {
     }
     return (
       <div className={HomePagePanel}>
-        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} lanCallBack={this.lanCallBack}/>
+        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} lanCallBack={this.lanCallBack} />
         <div className={`${HomeOnePage} amBody`}>
           <div className="videoContainer"></div>
           <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace} loginModalShow={loginModalShow} />
