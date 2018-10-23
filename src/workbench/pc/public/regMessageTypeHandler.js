@@ -11,7 +11,7 @@ import {
 } from 'store/root/work/api';
 import { openMessage } from 'components/message';
 import { pushYA, appendSearchParam } from "../utils/utils";
-const { addBrm, popBrm } = workActions;
+const { addBrm, popBrm, setProductInfo } = workActions;
 const {
   popMessage,
   changeMessageType,
@@ -94,7 +94,8 @@ const handlers = {
           // window.open(location);
           window.open(url);
         } else {
-          this.props.history.replace(`/${typeVal}/${serviceCode}/${subCode}`);
+          store.dispatch(setProductInfo(payload));
+          this.props.history.push(`/${typeVal}/${serviceCode}/${subCode}`);
         }
         pushYA(subCode);
       }, (err) => {
