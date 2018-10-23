@@ -121,7 +121,7 @@ class Updateenter extends Component {
             <hr className={hr} />
             <div className={enterCont} >
               {
-                enterData && userInfo ?
+                enterData ?
                   <EnterContent
                     data={enterData}
                     userInfo={userInfo}
