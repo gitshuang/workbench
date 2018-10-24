@@ -182,6 +182,7 @@ export default class Work extends Component {
           subcode: newSubcode,
         },
       },
+      productInfo: newProductInfo
     } = nextProps;
     const {
       match: {
@@ -198,7 +199,10 @@ export default class Work extends Component {
     const subcodeChange = newSubcode !== oldSubcode;
     // 当跳转到其它的服务里边 
     if (typeChange || codeChange) {
-      this.getProductInfo(newCode, newType, newSubcode);
+      // 多加一层判断 为了防止是openService 打开的已经发送了请求的情况
+      if (!newProductInfo.curMenuBar) {
+        this.getProductInfo(newCode, newType, newSubcode);
+      }
     } else if (subcodeChange) {
       if (newSubcode) {
         setCurrent(newSubcode);
