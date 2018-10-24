@@ -63,7 +63,8 @@ class LoginPage extends Component {
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
     document.getElementById('root').className = 'rootSpec';
     document.getElementsByTagName('body')[0].className = 'bodySpec';
-    this.getQueryString('autoLogin')==='true'&& this.loginClick();
+    alert( this.getQueryString('autoLogin').indexOf('true')>-1)
+    this.getQueryString('autoLogin').indexOf('true')>-1&& this.loginClick();
 
   }
   
@@ -78,6 +79,7 @@ class LoginPage extends Component {
   }
   getQueryString = (name) => {  
     var reg = new RegExp("(^|&|\\?)" + name + "=([^&]*)(&|$)", "i");  
+    // var r = 'http://workbench.yyuap.com/?autoLogin=false#/'.substr(1).match(reg); 
     var r =window.location.href.substr(1).match(reg);  
     if (r != null) return unescape(r[2]).toString().toLocaleLowerCase();  
     return null;  
