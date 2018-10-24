@@ -40,7 +40,7 @@ class LoginPage extends Component {
 
   }
   getQueryString = (name) => {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var reg = new RegExp("(^|&|\\?)" + name + "=([^&]*)(&|$)", "i");  
     var r = window.location.href.substr(1).match(reg);
     if (r != null) return unescape(r[2]).toString().toLocaleLowerCase();
     return null;
