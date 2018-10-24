@@ -35,20 +35,23 @@ class LoginPage extends Component {
   }
   componentWillMount() {
   }
-
+  getQueryString = (name) => {
+    var reg = new RegExp("(^|&|\\?)" + name + "=([^&]*)(&|$)", "i");  
+    var r = window.location.href.substr(1).match(reg);
+    // var r = 'http://workbench.yyuap.com/?autoLogin=true#/'.match(reg)
+    if (r != null) return unescape(r[2]).toString().toLocaleLowerCase();
+    return null;
+  }
   componentDidMount() {
-    if(this.getQueryString('autoLogin')&&this.getQueryString('autoLogin').indexOf('true')>-1) this.loginClick();
-
+    console.log('en',this.getQueryString('autoLogin'))
+    if(this.getQueryString('autoLogin')&&this.getQueryString('autoLogin').indexOf('true')>-1){
+      this.loginClick();
+    }
   }
   componentWillReceiveProps(){
 
   }
-  getQueryString = (name) => {
-    var reg = new RegExp("(^|&|\\?)" + name + "=([^&]*)(&|$)", "i");  
-    var r = window.location.href.substr(1).match(reg);
-    if (r != null) return unescape(r[2]).toString().toLocaleLowerCase();
-    return null;
-  }
+  
   lanCallBack = () => {
 
   }
