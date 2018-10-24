@@ -102,10 +102,10 @@ class SideBarContainer extends Component {
       },
     } = this.props;
     const menuPath = findPath(menus, 'children', 'menuItemId', id);
+    console.log(menuPath);
     const { serviceCode } = menuPath.slice(-1)[0];
     if (serviceCode !== curServiceCode) {
       history.push(`/${type}/${code}/${serviceCode}`);
-      console.log('sideBar' + history.length)
 			pushYA(serviceCode);
     }
   }

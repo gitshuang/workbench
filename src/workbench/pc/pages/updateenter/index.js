@@ -117,7 +117,7 @@ class Updateenter extends Component {
         </div>
         <div className="content">
           <div className={pageEnterprise}>
-            <div className={enterTitle} >创建企业</div>
+            <div className={enterTitle} >企业认证</div>
             <hr className={hr} />
             <div className={enterCont} >
               {

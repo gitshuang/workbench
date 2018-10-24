@@ -2,7 +2,7 @@ import { createActions } from '@u';
 import types from './types';
 import {
   getProductInfo,
-  getTitleService,
+  getServiceInfoWithDetail,
   setPinCancel,
   setPinAdd,
   setAddGroup,
@@ -15,7 +15,7 @@ const {
   DEL_TAB,
   GET_PRODUCT_INFO,
   SET_PRODUCT_INFO,
-  GET_TITLE_SERVICE,
+  GET_SERVICE_INFO_WITH_DETAIL,
   TITLE_SERVICE_DISPLAY,
   TITLE_SERVICE_HIDDEN,
   PIN_DISPLAY_BLOCK,
@@ -59,7 +59,7 @@ const actions = createActions(
           payload: e,
         }));
     },
-    [GET_TITLE_SERVICE]: getTitleService,
+    [GET_SERVICE_INFO_WITH_DETAIL]: getServiceInfoWithDetail,
     [SET_PIN_ADD]: setPinAdd,
     [SET_ADD_GROUP]: setAddGroup,
     [SET_PIN_CANCEL]: setPinCancel,
@@ -101,10 +101,10 @@ const actions = createActions(
     [SET_CURRENT]: code => (dispatch) => {
       const {
         changeService,
-        getTitleService,
+        getServiceInfoWithDetail,
       } = actions;
       dispatch(changeService(code));
-      dispatch(getTitleService(code));
+      dispatch(getServiceInfoWithDetail(code));
     }
   },
   SET_EXPANDED_SIDEBAR,

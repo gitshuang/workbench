@@ -4,32 +4,37 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 
-import rootActions from 'store/root/actions';
-import teamconfigActions from 'store/root/teamconfig/actions';
-
-import EnterSetting from 'pages/entersetting/enterSetting';
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
 
-import { content, pageEnterprise, enterTitle, enterCont, hr } from './style.css';
+import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
+import teamconfigActions from 'store/root/teamconfig/actions';
+
+import EnterContent from 'pub-comp/enterContent';
+import { uploadApplication } from 'store/root/api';
+
+
+import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
+const { setCreateEnter } = homeActions;
 const { getTeamInfo } = teamconfigActions;
 
 @withRouter
 @connect(
   mapStateToProps(
-    'teamData',
+    'userInfo',
     {
-      namespace: 'teamconfig',
+      namespace: 'home',
     },
   ),
-
   {
     requestStart,
     requestSuccess,
     requestError,
     getTeamInfo, // 获取团队基础信息
+    setCreateEnter,
   },
 )
 class Updateenter extends Component {
@@ -43,9 +48,9 @@ class Updateenter extends Component {
   };
   static defaultProps = {
     history: {},
-    getTeamInfo: () => {},
-    requestError: () => {},
-    requestSuccess: () => {},
+    getTeamInfo: () => { },
+    requestError: () => { },
+    requestSuccess: () => { },
   };
   constructor(props) {
     super(props);
@@ -76,10 +81,30 @@ class Updateenter extends Component {
     this.props.history.goBack();
   }
 
+  handleClick = (param, fn) => {
+    const {
+      requestStart,
+      requestSuccess,
+      requestError,
+      setCreateEnter
+    } = this.props;
+    requestStart();
+    setCreateEnter(param, "update").then(({ error, payload }) => {
+      // 此处调用callback
+      fn({ error, payload });
+      if (error) {
+        requestError(payload);
+        return;
+      }
+      requestSuccess();
+    });
+  }
+
   render() {
     const { enterData } = this.state;
+    const { userInfo } = this.props;
     return (
-      <div>
+      <div style={{ overflow: "hidden" }}>
         <div className="um-header header">
           <Header onLeftClick={this.goHome}>
             <div>
@@ -90,12 +115,24 @@ class Updateenter extends Component {
             <Breadcrumbs data={[{ name: '企業認證' }]} goback={this.goBack} />
           </div>
         </div>
-        <div className={content}>
-          <div className={`${pageEnterprise} content`}>
+        <div className="content">
+          <div className={pageEnterprise}>
             <div className={enterTitle} >企業認證</div>
             <hr className={hr} />
             <div className={enterCont} >
-              <EnterSetting updateenter="upgrade_enter" data={enterData} btlLabel="升級" />
+              {
+                enterData ?
+                  <EnterContent
+                    data={enterData}
+                    userInfo={userInfo}
+                    _from="update"
+                    handleClickFn={this.handleClick}
+                    buttonText="升級"
+                    loadingDesc="正在升級企業..."
+                    uploadApplication={uploadApplication}
+                  /> : null
+              }
+
             </div>
           </div>
         </div>

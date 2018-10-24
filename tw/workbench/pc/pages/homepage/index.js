@@ -289,7 +289,7 @@ class HomePage extends Component {
               <div className={info}>
                 <dl className="clearfix">
                   <dt>
-                    <img src={userAvator || userinfo} alt />
+                    <img src={userAvator || userinfo} />
                   </dt>
                   <dd>
                     <h5>{userName}</h5>

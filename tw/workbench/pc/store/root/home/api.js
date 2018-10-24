@@ -6,10 +6,10 @@ export const getWorkList = param => get('/desktop/getdeskTop', param);
 // 企业中设置
 export const setCreateEnter = (list, updateType) => {
   // 团队升级企业
-  if (updateType === 'upgrade_enter') {
+  if (updateType === 'update') {
     return post('/manager/team/upgradeEnter', list);
     // 设置团队
-  } else if (updateType === 'update_enter') {
+  } else if (updateType === 'setting') {
     return post('/manager/enter/setting', list);
   }// 创建企业
   return post('/manager/teamEnter/createEnter', list);

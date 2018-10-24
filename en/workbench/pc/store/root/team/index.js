@@ -2,7 +2,6 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-  uploadApplication,
   createTeam,
 } = actions;
 
@@ -13,7 +12,6 @@ const defaultState = {
 
 const reducer = handleActions({
   //
-  [uploadApplication]: state => state,
   [createTeam]: (state, { payload, error }) => {
     if (error) {
       return state;
