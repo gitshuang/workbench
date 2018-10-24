@@ -100,7 +100,7 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      applicationList: payload,
+      applicationList: payload.expiTip,
     };
   },
 }, defaultState);
