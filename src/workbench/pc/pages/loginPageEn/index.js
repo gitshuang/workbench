@@ -34,7 +34,7 @@ class LoginPage extends Component {
     this.sevenSpace;
   }
   componentWillMount() {
-    this.getQueryString('autoLogin') === 'true' && this.loginClick();
+    this.getQueryString('autoLogin').indexOf('true')>-1&& this.loginClick();
   }
   componentDidMount() {
 
