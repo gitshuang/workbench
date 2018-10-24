@@ -63,7 +63,10 @@ class LoginPage extends Component {
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
     document.getElementById('root').className = 'rootSpec';
     document.getElementsByTagName('body')[0].className = 'bodySpec';
-    if(this.getQueryString('autoLogin')&&this.getQueryString('autoLogin').indexOf('true')>-1) this.loginClick();
+    console.log(this.getQueryString('autoLogin')&&this.getQueryString('autoLogin').indexOf('true')>-1)
+    if(this.getQueryString('autoLogin')&&this.getQueryString('autoLogin').indexOf('true')>-1){
+      this.loginClick();
+    }
 
   }
   
