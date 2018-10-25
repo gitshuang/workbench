@@ -13,6 +13,7 @@ import teamconfigActions from 'store/root/teamconfig/actions';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
+import { texts } from 'components/entertext';
 
 
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
@@ -130,6 +131,7 @@ class Updateenter extends Component {
                     buttonText="升级"
                     loadingDesc="正在升级企业..."
                     uploadApplication={uploadApplication}
+                    texts={texts}
                   /> : null
               }
 

@@ -9,6 +9,7 @@ import Breadcrumbs from 'components/breadcrumb';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
+import { texts } from 'components/entertext';
 
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
@@ -110,6 +111,7 @@ class Enterprise extends Component {
                 buttonText=""
                 loadingDesc=""
                 uploadApplication={uploadApplication}
+                texts={texts}
               />
             </div>
           </div>
