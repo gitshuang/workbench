@@ -108,7 +108,7 @@ class Enterprise extends Component {
                 userInfo={userInfo}
                 _from="create"
                 handleClickFn={this.handleClick}
-                buttonText=""
+                buttonText="Create "
                 loadingDesc=""
                 uploadApplication={uploadApplication}
                 texts={texts}
