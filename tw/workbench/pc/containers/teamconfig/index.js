@@ -25,7 +25,6 @@ const Option = Select.Option;
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {
   getTeamInfo,
-  uploadApplication,
   createTeam,
   userToAdmin,            // 用户升级管理员
   adminToUser,            // 管理员降级用户
@@ -87,7 +86,6 @@ import {
     requestSuccess,
     requestError,
     getTeamInfo,            // 获取团队基础信息
-    uploadApplication,      // 上传
     createTeam,             // 保存团队基本设置
     userToAdmin,            // 用户升级管理员
     adminToUser,            // 管理员降级用户

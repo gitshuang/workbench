@@ -164,9 +164,11 @@ export default class Work extends Component {
       setCurrent,
       productInfo
     } = this.props;
+    // 打开openService 进来的 已经请求，不是openService的再请求
     if (!productInfo.curMenuBar) {
       this.getProductInfo(code, type, subcode);
     } else {
+      // 请求之后的赋值操作，包括了 changeService 和 getWithDetail 两个事件
       setCurrent(subcode);
     }
   }
@@ -180,6 +182,7 @@ export default class Work extends Component {
           subcode: newSubcode,
         },
       },
+      productInfo: newProductInfo
     } = nextProps;
     const {
       match: {
@@ -194,8 +197,12 @@ export default class Work extends Component {
     const typeChange = newType !== oldType;
     const codeChange = newCode !== oldCode;
     const subcodeChange = newSubcode !== oldSubcode;
+    // 当跳转到其它的服务里边 
     if (typeChange || codeChange) {
-      this.getProductInfo(newCode, newType, newSubcode);
+      // 多加一层判断 为了防止是openService 打开的已经发送了请求的情况
+      if (!newProductInfo.curMenuBar) {
+        this.getProductInfo(newCode, newType, newSubcode);
+      }
     } else if (subcodeChange) {
       if (newSubcode) {
         setCurrent(newSubcode);

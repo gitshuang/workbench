@@ -4,10 +4,20 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 
-import Breadcrumbs from 'components/breadcrumb';
 import Header from 'containers/header';
-import CreateEnter from './createEnter';
-import { pageEnterprise, enterTitle, enterCont, hr, hr2 } from './style.css';
+import Breadcrumbs from 'components/breadcrumb';
+
+import EnterContent from 'pub-comp/enterContent';
+import { uploadApplication } from 'store/root/api';
+import { texts } from 'components/entertext';
+
+import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
+const { requestStart, requestSuccess, requestError } = rootActions;
+const { setCreateEnter } = homeActions;
+
+import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
+import 'assets/style/Form.css';
 
 @withRouter
 @connect(
@@ -17,7 +27,12 @@ import { pageEnterprise, enterTitle, enterCont, hr, hr2 } from './style.css';
       namespace: 'home',
     },
   ),
-  {},
+  {
+    requestStart,
+    requestSuccess,
+    requestError,
+    setCreateEnter
+  },
 )
 class Enterprise extends Component {
   static propTypes = {
@@ -47,10 +62,30 @@ class Enterprise extends Component {
     this.props.history.replace('');
   }
 
+  handleClick = (param, fn) => {
+    const {
+      requestStart,
+      requestSuccess,
+      requestError,
+      setCreateEnter
+    } = this.props;
+    requestStart();
+    setCreateEnter(param, "create").then(({ error, payload }) => {
+      // 此处调用callback
+      fn({ error, payload });
+      if (error) {
+        requestError(payload);
+        return;
+      }
+      requestSuccess();
+      localStorage.setItem('create', '1');
+    });
+  }
+
   render() {
     const { userInfo } = this.props;
     return (
-      <div>
+      <div style={{ overflow: "hidden" }}>
         <div className="header um-header">
           <Header
             onLeftClick={this.goHome}
@@ -63,14 +98,23 @@ class Enterprise extends Component {
             <Breadcrumbs data={[{ name: 'Create Enterprise' }]} goback={this.goBack} />
           </div>
         </div>
-        
-        <div className={`${pageEnterprise} content`}>
-          <div className={enterTitle} >Create Enterprise</div>
-          <hr className={hr} />
-          <div className={enterCont} >
-            <CreateEnter userInfo={userInfo} />
+
+        <div className="content">
+          <div className={pageEnterprise}>
+            <div className={enterTitle} >Create Enterprise</div>
+            <hr className={hr} />
+            <div className={enterCont} >
+              <EnterContent
+                userInfo={userInfo}
+                _from="create"
+                handleClickFn={this.handleClick}
+                buttonText=""
+                loadingDesc=""
+                uploadApplication={uploadApplication}
+                texts={texts}
+              />
+            </div>
           </div>
-          <hr className={`${hr} ${hr2}`} />
         </div>
       </div>
     );

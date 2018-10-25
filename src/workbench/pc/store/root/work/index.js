@@ -2,11 +2,11 @@ import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
 import actions from './actions';
-import {setBackUrl} from '../../../utils/utils'
+import { setBackUrl } from '../../../utils/utils'
 
 const {
   setExpandedSidebar,
-  getTitleService,
+  getServiceInfoWithDetail,
   titleServiceDisplay,
   titleServiceHidden,
   pinDisplayBlock,
@@ -33,10 +33,11 @@ const defaultState = {
     title: '',
     serviceCode: '',
     serviceId: '',
-    hasRelationFunc: true,
-    relationUsers: [],
-    relationServices: [],
-    ext1: ''
+    hasRelationFunc: true,    // 是否显示相关服务下拉框
+    relationUsers: [],        // 下拉框 相关联系人
+    relationServices: [],     // 下拉框  相关服务
+    ext1: '',
+    url: '',
   },
   // 页面布局类型
   type: 1,
@@ -49,8 +50,8 @@ const defaultState = {
   pinDisplay: false, // pin是否显示
   widthBrm: true,
   backUrl: [],
-	productInfo: {},
-	pinGroup:[]
+  productInfo: {},
+  pinGroup: []
 };
 
 function appendSearchParam(url, params) {
@@ -160,34 +161,22 @@ const reducer = handleActions({
         ...state,
         current: {
           ...defaultState.current,
-          hasRelationFunc: state.current.hasRelationFunc,
           menuItemId: currentId,
-          title: name,
-          serviceCode,
-          serviceId,
-          url: curTab.location,
-          ext1: state.current.ext1
+          //   hasRelationFunc: state.current.hasRelationFunc,
+          //   title: name,
+          //   serviceCode,
+          //   serviceId,
+          //   ext1: state.current.ext1
         },
         brm,
         backUrl
       };
     }
-    // 此处更改了url
-    // const location = appendSearchParam(url, {
-    //   ...getOpenServiceData(serviceCode),
-    //   serviceCode,
-    // });
     return {
       ...state,
       current: {
         ...defaultState.current,
-        hasRelationFunc: state.current.hasRelationFunc,
         menuItemId: currentId,
-        title: name,
-        serviceCode,
-        serviceId,
-        // url,
-        ext1: state.current.ext1
       },
       brm,
       backUrl,
@@ -220,15 +209,15 @@ const reducer = handleActions({
       ...state,
     };
   },
-	[getPinGroup]: (state, {error, payload: pinGroup}) => {
-		if (error) {
-			return state;
-		}
-		return {
-			...state,
-			pinGroup
-		};
-	},
+  [getPinGroup]: (state, { error, payload: pinGroup }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      pinGroup
+    };
+  },
   [setPinCancel]: (state, { error }) => {
     if (error) {
       return state;
@@ -242,7 +231,7 @@ const reducer = handleActions({
     ...state,
     tabs,
   }),
-  [getTitleService]: (state, { payload: serviceInfo, error }) => {
+  [getServiceInfoWithDetail]: (state, { payload: serviceInfo, error }) => {
     if (error) {
       return state;
     }
@@ -251,41 +240,46 @@ const reducer = handleActions({
       relationServices,
       relationUsers,
       ext1,
-			url,
-			serviceCode
+      url,
+      serviceCode,
+      serviceId,
+      serviceName,
     } = serviceInfo;
     const {
       current,
-			tabs
+      tabs
     } = state;
-		let hasRelationFunc = true;
-    if (!(relationServices && relationServices.length) &&
-      !(relationUsers && relationUsers.length)) {
+    let hasRelationFunc = true;
+    if (!(relationServices && relationServices.length) && !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
     const location = appendSearchParam(url, {
-			...getOpenServiceData(serviceCode),
-			serviceCode,
-		});
+      ...getOpenServiceData(serviceCode),
+      serviceCode,
+    });
     //这里做一个兼容，工作页内iframe地址从getDetail获取
-		let tab = {};
-		if (tabs.length > 0) {
-			tab = tabs.shift();
-			tab.location = location;
-		}
-		return {
-			...state,
-			pinType: hasWidget,
-			current: {
-				...current,
-				hasRelationFunc,
-				relationUsers,
-				relationServices,
-				ext1,
-				url: location
-			},
-			tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs))
-		};
+    let tab = {};
+    if (tabs.length > 0) {
+      tab = tabs.shift();
+      tab.location = location;
+    }
+    return {
+      ...state,
+      pinType: hasWidget,
+      current: {
+        ...current,
+        title: serviceName,
+        serviceCode,
+        serviceId,
+        hasRelationFunc,
+        relationUsers,
+        relationServices,
+        ext1,
+        url: location,
+
+      },
+      tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs))
+    };
   },
   [setProductInfo]: (state, { payload: productInfo }) => {
     const {
@@ -319,7 +313,7 @@ const reducer = handleActions({
       type,
       pinType,
       tabs: [],
-			productInfo
+      productInfo
     };
   },
   [titleServiceDisplay]: state => ({
@@ -350,7 +344,7 @@ const reducer = handleActions({
       backUrl,
     };
   },
-  [resetHistory]: (state, {error}) => {
+  [resetHistory]: (state, { error }) => {
     if (error) {
       return state;
     }

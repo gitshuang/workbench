@@ -3,7 +3,6 @@ import actions from './actions';
 
 const {
   getTeamInfo, // 获取团队基础信息
-  uploadApplication, // 图片上传
   createTeam, // 保存
 
   getUserList, // 获取userlist api
@@ -61,7 +60,6 @@ const reducer = handleActions({
       teamData: payload,
     };
   },
-  [uploadApplication]: state => state,
   [createTeam]: (state, { payload, error }) => {
     if (error) {
       return state;

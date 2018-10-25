@@ -115,7 +115,7 @@ class Root extends Component {
       getUserInfo,
       getPoll
     } = this.props;
-    requestStart();
+    // requestStart();
 
     // 请求用户信息  看看是否有租户
     getUserInfo().then(({ error, payload }) => {
@@ -131,7 +131,7 @@ class Root extends Component {
             if (error) {
               requestError(payload);
             } else {
-              requestSuccess();
+              // requestSuccess();
             }
           });
           // 请求是否含有portal 跳转到友空间首页
@@ -139,7 +139,7 @@ class Root extends Component {
             if (error) {
               requestError(payload);
             } else {
-              requestSuccess();
+              // requestSuccess();
             }
           });
           // const browser = navigator.appName;
