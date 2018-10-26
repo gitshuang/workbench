@@ -11,7 +11,7 @@ const windowLocationOrigin = window.location.protocol + "//" + window.location.h
 
 const CAS_SERVER = getHost('euc'),//"https://user-daily.yyuap.com",
   //yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
-  yhtssoisloginUrl = windowLocationOrigin + '/login_light.jsp',
+  yhtssoisloginUrl = windowLocationOrigin + '/login_light',
   _destUrl = `${getHost('api')}/yhtssoislogin`, //只有这个不是登陆成功后跳转的链接
   realservice = windowLocationOrigin;
 
