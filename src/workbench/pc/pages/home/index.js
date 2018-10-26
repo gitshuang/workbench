@@ -135,9 +135,9 @@ class Home extends Component {
           return false;
         }
         this.setState({
-          applications: payload.applications,
+          applications: payload.expiTip.applications,
         });
-        if (this.forTime(payload.applications)) {
+        if (this.forTime(payload.expiTip.applications)) {
           this.setState({
             homemark: true
           })
