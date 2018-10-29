@@ -28,8 +28,8 @@ class HomeMark extends Component {
   render() {
     let {newAppNum,willExpiredNum,expiredNum} = this.props;
     const newApp = newAppNum >0?`您的企业新增了${newAppNum}个应用，`:null,
-    willExpired=willExpiredNum>0?`有${willExpiredNum}个应用即将到期，`:null,
-    expired = expiredNum>0 ?`${newAppNum}个应用已到期，`:null;
+    willExpired=willExpiredNum > 0?`有${willExpiredNum}个应用即将到期，`:null,
+    expired = expiredNum>0 ?`${expiredNum}个应用已到期，`:null;
     return(
       <div className={mark}>
         <p>
