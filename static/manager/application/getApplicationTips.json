@@ -2472,6 +2472,7 @@
                     "strategy": null
                 }
             ]
-        }
+        },
+        "addTip":10
     }
 }
