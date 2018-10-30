@@ -41,6 +41,7 @@ module.exports = {
       'bee': '@diworkfe/public-components/build/bee',
       '@u': '@diworkfe/public-components/build/utils',
       'pub-comp': '@diworkfe/public-components/build',
+      'yutils': paths('yutils'),
     }
   },
   externals: {
