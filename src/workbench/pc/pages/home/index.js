@@ -185,11 +185,11 @@ class Home extends Component {
       }
       const currTime = new Date().getTime();
       const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
-      if (currTime > time || timeDiff <= 30) {
+      if (timeDiff <= 30) {
         type = true;
         ++willExpiredNum;
         // break;
-      }else if (time > currTime) {
+      }else if (currTime > time) {
         type = true;
         ++expiredNum;
         // break;
