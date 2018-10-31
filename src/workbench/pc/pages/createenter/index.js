@@ -11,7 +11,7 @@ import EnterContent from 'components/enterContent';
 
 // import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
-import { texts } from 'components/entertext';
+import { texts } from 'yutils/entertext';
 
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';

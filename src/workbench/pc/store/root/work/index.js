@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
 import actions from './actions';
-import { setBackUrl } from '../../../utils/utils'
+import { setBackUrl } from 'yutils/utils'
 
 const {
   setExpandedSidebar,

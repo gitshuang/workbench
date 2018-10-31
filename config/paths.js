@@ -37,6 +37,7 @@ var paths = {
   //dist: path.join(__dirname, '../dist'), // 因为要生成多个dist（中文，英文的 ）
   bee: resolve('bee'),
   node: path.join(__dirname, '../node_modules'),
+  yutils: resolve('utils'),
 }
 paths[outPut] =  path.join(__dirname, `../${outPut}`);
 module.exports = function (key) {

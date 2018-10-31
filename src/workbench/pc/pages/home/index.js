@@ -15,7 +15,7 @@ import HeaderPage from './headerPage';
 import HomeMark from './mark';
 import { pageHome } from './style.css';
 
-const { getWorkList, getApplicationList } = homeActions;
+const { getWorkList, getApplicationList, clearApplicationTips } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
 Date.prototype.format = function (fmt) {
@@ -48,7 +48,8 @@ Date.prototype.format = function (fmt) {
     requestSuccess,
     requestError,
     getWorkList,
-    getApplicationList
+    getApplicationList,
+    clearApplicationTips
   },
 )
 class Home extends Component {
@@ -77,6 +78,9 @@ class Home extends Component {
       },
       lazyLoadNum: -1,
       homemark: false,
+      newAppNum:0,// 判断应用开通时间在7天(含)之内
+      willExpiredNum:0,// 即将过期应用个数
+      expiredNum:0,//过期应用个数 
       applications: [],
     };
     this.updateViewport = this.updateViewport.bind(this);
@@ -137,9 +141,13 @@ class Home extends Component {
         this.setState({
           applications: payload.expiTip.applications,
         });
-        if (this.forTime(payload.expiTip.applications)) {
+        let {willExpiredNum,expiredNum} = this.forTime(payload.expiTip.applications)
+        if (willExpiredNum|| payload.addTip ) {
           this.setState({
-            homemark: true
+            homemark: true,
+            newAppNum: payload.addTip || 0,
+            willExpiredNum,
+            expiredNum
           })
         }
         requestSuccess();
@@ -167,6 +175,8 @@ class Home extends Component {
 
   forTime = (applications) => {
     let type = false;
+    let willExpiredNum = 0;
+    let expiredNum = 0;
     for (var i = 0; i < applications.length; i++) {
       const time = applications[i].expired;
       if (!time) {
@@ -175,12 +185,18 @@ class Home extends Component {
       }
       const currTime = new Date().getTime();
       const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
-      if (currTime > time || timeDiff <= 30) {
+      if (timeDiff <= 30) {
         type = true;
-        break;
+        ++willExpiredNum;
+        // break;
+      }else if (currTime > time) {
+        type = true;
+        ++expiredNum;
+        // break;
       }
     };
-    return type;
+    // return type;
+    return {willExpiredNum,expiredNum};
   }
 
   updateViewport = () => {
@@ -206,8 +222,17 @@ class Home extends Component {
   })()
 
   linkTo = () => {
-    this.closeHomeMark();
-    openService('GZTSYS010');
+    const {clearApplicationTips} = this.props;
+    clearApplicationTips().then(({ error, payload }) => {
+      if (error) {
+        requestError(payload);
+        return false;
+      }
+      this.closeHomeMark();
+      requestSuccess();
+      openService('GZTSYS010');
+    });
+
   }
 
   closeHomeMark = () => {
@@ -254,6 +279,9 @@ class Home extends Component {
           this.state.homemark ? <HomeMark
             linkTo={this.linkTo}
             homemark={this.state.homemark}
+            newAppNum={this.state.newAppNum}
+            willExpiredNum={this.state.willExpiredNum}
+            expiredNum={this.state.expiredNum}
             closeHomeMark={this.closeHomeMark}
           /> : null
         }
