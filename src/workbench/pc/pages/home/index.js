@@ -189,7 +189,7 @@ class Home extends Component {
         type = true;
         ++willExpiredNum;
         // break;
-      }else if (currTime > time || timeDiff > 30) {
+      }else if (time > currTime) {
         type = true;
         ++expiredNum;
         // break;
