@@ -109,7 +109,7 @@ class Enterprise extends Component {
                 _from="create"
                 handleClickFn={this.handleClick}
                 buttonText="Create "
-                loadingDesc=""
+                loadingDesc="Creating enterprise…"
                 uploadApplication={uploadApplication}
                 texts={texts}
               />

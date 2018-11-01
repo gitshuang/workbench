@@ -129,7 +129,7 @@ class Updateenter extends Component {
                     _from="update"
                     handleClickFn={this.handleClick}
                     buttonText="Upgrade"
-                    loadingDesc=""
+                    loadingDesc="Upgrading enterprise…"
                     uploadApplication={uploadApplication}
                     texts={texts}
                   /> : null
