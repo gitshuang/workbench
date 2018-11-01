@@ -65,6 +65,56 @@ const texts = {
         { value: "E", label: "501-1000" },
         { value: "F", label: "1001－2000" },
         { value: "G", label: ">2000人" },
+    ],
+    country: [
+        {
+            "countryCode": "61",
+            "name": "澳大利亚",
+        },
+        {
+            "countryCode": "95",
+            "name": "缅甸",
+        },
+        {
+            "countryCode": "86",
+            "name": "中国",
+        },
+        {
+            "countryCode": "852",
+            "name": "中国香港特别行政区",
+        },
+        {
+            "countryCode": "62",
+            "name": "印度尼西亚",
+        },
+        {
+            "countryCode": "853",
+            "name": "中国澳门特别行政区",
+        },
+        {
+            "countryCode": "60",
+            "name": "马来西亚",
+        },
+        {
+            "countryCode": "63",
+            "name": "菲律宾",
+        },
+        {
+            "countryCode": "65",
+            "name": "新加坡",
+        },
+        {
+            "countryCode": "886",
+            "name": "中国台湾",
+        },
+        {
+            "countryCode": "66",
+            "name": "泰国",
+        },
+        {
+            "countryCode": "84",
+            "name": "越南",
+        }
     ]
 };
 

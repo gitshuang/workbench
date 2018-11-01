@@ -44,11 +44,7 @@ class EnterContent extends Component {
       disabled: false,                // 按钮是否可点击， true为不可点击 
       startFlag: false,                // process 0～1 
       tenantId: '',                   // 租户ID
-      address: {
-        province: '北京',
-        city: '北京',
-        area: '东城区',
-      },                              // 企业地址 
+      address: null,                // 企业地址 
       addressInput: '',               // 企业地址 (60个字输入框)
 
       tenantName: '',                 // 企业名称
@@ -64,7 +60,7 @@ class EnterContent extends Component {
       isWaterMark: 1,                 // 通讯录是否显示水印      number类型
 
       linkman: '',                    // 姓名
-      countryCode: '+86',                // 国家代号
+      countryCode: '86',              // 国家代号
       tenantTel: '',                  // 手机号
       tenantEmail: '',                // 邮箱
       charged: false,                 // new -  企业是否为付费
@@ -84,6 +80,11 @@ class EnterContent extends Component {
         linkman: userInfo.userName,
         tenantEmail: userInfo.userEmail,
         tenantTel: userInfo.userMobile,
+        address: {
+          province: '北京',
+          city: '北京',
+          area: '东城区',
+        },
       });
       return false;
     }
@@ -92,16 +93,16 @@ class EnterContent extends Component {
     if (tenantAddress) {
       const Addres = tenantAddress.split('|');
       data.address = {
-        province: Addres[0] || '',
-        city: Addres[1] || '',
-        area: Addres[2] || '',
+        province: Addres[0] || '北京',
+        city: Addres[1] || '北京',
+        area: Addres[2] || '东城区',
       };
       data.addressInput = Addres[Addres.length - 1]
     }
     data.linkman = data.linkman || userInfo.userName;
     data.tenantEmail = data.tenantEmail || userInfo.userEmail;
-    data.tenantTel = data.tenantTel || userInfo.userMobile;
-
+    data.countryCode = data.tenantTel ? data.tenantTel.substring(0, data.tenantTel.length - 11) : '86';
+    data.tenantTel = data.tenantTel ? data.tenantTel.substring(data.tenantTel.length - 11) : userInfo.userMobile;
     this.setState({
       ...data,
     });
@@ -186,6 +187,7 @@ class EnterContent extends Component {
         }
         return obj;
       }, {});
+      param.tenantTel = `${param.countryCode}${param.tenantTel}`;
 
       handleClickFn(param, ({ error, payload }) => {
         // 只要是回调都将按钮的disabled 设定为false
@@ -331,19 +333,19 @@ class EnterContent extends Component {
             }
           </Select>
         </FormItem>
-
-        <FormItem
-          showMast={false}
-          labelName={<span>{texts.addressLabel}&nbsp;&nbsp;</span>}
-          isRequire={false}
-          valuePropsName="value"
-          errorMessage={texts.addressError}
-          method="blur"
-          inline
-        >
-          <CitySelect name="address" onChange={this.onCityChange} defaultValue={address} />
-        </FormItem>
-
+        {
+          address ? <FormItem
+            showMast={false}
+            labelName={<span>{texts.addressLabel}&nbsp;&nbsp;</span>}
+            isRequire={false}
+            valuePropsName="value"
+            errorMessage={texts.addressError}
+            method="blur"
+            inline
+          >
+            <CitySelect name="address" onChange={this.onCityChange} defaultValue={address} />
+          </FormItem> : <div />
+        }
         <FormItem
           showMast={false}
           isRequire={false}
@@ -503,20 +505,21 @@ class EnterContent extends Component {
         >
           <Select
             name="countryCode"
-            defaultValue={"+86"}
-            value={countryCode || 0}
+            defaultValue={"86"}
+            value={countryCode}
             style={{ width: 112, marginRight: 6 }}
             onChange={(e) => { this.setOptherData({ name: 'countryCode', value: e }); }}
           >
-            <Option value={"+86"}>中国</Option>
-            <Option value={"+66"}>泰国</Option>
+            {
+              texts.country.map(({ countryCode, name }) =>
+                <Option value={countryCode}>{name}</Option>)
+            }
           </Select>
         </FormItem>
-        <div className={code}>{countryCode}</div>
         <FormItem
           className={inputPhone}
           valuePropsName="value"
-          isRequire 
+          isRequire
           method="blur"
           htmlType="tel"
           errorMessage={texts.tenantTelError}
@@ -529,7 +532,8 @@ class EnterContent extends Component {
           >
           </FormControl>
         </FormItem>
-        <div className="clear" style={{clear: "both"}}></div>
+        <div className={code}>{`+${countryCode}`}</div>
+        <div className="clear" style={{ clear: "both" }}></div>
         {
           startFlag ?
             <div className={progressBar}>
