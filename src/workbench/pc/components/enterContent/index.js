@@ -11,7 +11,6 @@ import Progress from 'pub-comp/progress';
 import Upload from './upload';
 import { check } from './checkTenantStatus';
 import SubmitBtn from './button';
-// import { tenantIndustry, tenantSizeOption } from './state';
 import { enterForm, line, infoTitle, progressBar, country, code, inputPhone, } from './style.css';
 
 const { Option } = Select;
@@ -42,7 +41,7 @@ class EnterContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      disabled: false,                // 按钮是否可点击， true为不可点击  （todo现在反了）
+      disabled: false,                // 按钮是否可点击， true为不可点击 
       startFlag: false,                // process 0～1 
       tenantId: '',                   // 租户ID
       address: {
@@ -68,12 +67,8 @@ class EnterContent extends Component {
       countryCode: '+86',                // 国家代号
       tenantTel: '',                  // 手机号
       tenantEmail: '',                // 邮箱
+      charged: false,                 // new -  企业是否为付费
     };
-
-    // 所属行业
-    //this.tenantIndustry = this.props.texts.tenantIndustry;
-    // 规模范围
-    //this.tenantSizeOption = this.props.texts.tenantSizeOption;
 
     // progressbar
     this.loadingFunc = null;
@@ -249,6 +244,8 @@ class EnterContent extends Component {
       linkman,                    // 姓名
       tenantTel,                  // 手机号
       tenantEmail,                // 邮箱
+      countryCode,                // 国区编号
+      charged,                    // 是否免费企业
     } = this.state;
 
     return (
@@ -363,7 +360,7 @@ class EnterContent extends Component {
           />
         </FormItem>
 
-        {_from === "create" ? <div></div> :
+        {_from === "create" || !charged ? <div></div> :
           <FormItem
             showMast={false}
             labelName={<span>{texts.invitePermissionLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
@@ -404,7 +401,7 @@ class EnterContent extends Component {
             </Select>
           </FormItem>
         }
-        {_from === "create" ? <div></div> :
+        {_from === "create" || !charged ? <div></div> :
           <FormItem
             showMast={false}
             labelName={<span>{texts.allowExitLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
@@ -507,7 +504,7 @@ class EnterContent extends Component {
           <Select
             name="countryCode"
             defaultValue={"+86"}
-            value={this.state.countryCode || 0}
+            value={countryCode || 0}
             style={{ width: 112, marginRight: 6 }}
             onChange={(e) => { this.setOptherData({ name: 'countryCode', value: e }); }}
           >
@@ -515,7 +512,7 @@ class EnterContent extends Component {
             <Option value={"+66"}>泰国</Option>
           </Select>
         </FormItem>
-        <div className={code}>{this.state.countryCode}</div>
+        <div className={code}>{countryCode}</div>
         <FormItem
           className={inputPhone}
           valuePropsName="value"
