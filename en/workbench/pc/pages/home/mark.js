@@ -26,13 +26,17 @@ class HomeMark extends Component {
   }
 
   render() {
-  
+    let {newAppNum,willExpiredNum,expiredNum} = this.props;
+    const newApp = newAppNum >0?`${newAppNum}`:null,
+    willExpired=willExpiredNum > 0?`${willExpiredNum}`:null,
+    expired = expiredNum>0 ?`${expiredNum}`:null;
     return(
       <div className={mark}>
         <p>
           <Icon type="notice" />
-          <span>Some of your Apps have expired or will expire soon.</span>
-          <b onClick={this.props.linkTo}>Renew>></b>
+          {/* <span>Some of your Apps have expired or will expire soon.</span> */}
+          <span>{newApp}{willExpired}{expired}<b onClick={this.props.linkTo}></b></span>
+          
           <Icon type="error3" onClick={this.props.closeHomeMark}/>
         </p>
       </div>

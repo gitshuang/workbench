@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Img from './download.svg';
-import request from '../../../utils/request';
+import request from 'yutils/request';
 
-import {getContentType, getUrlWithParams, getDataProObj} from '../../../utils/request';
+import {getContentType, getUrlWithParams, getDataProObj} from 'yutils/request';
 
 import {
 	wrap,

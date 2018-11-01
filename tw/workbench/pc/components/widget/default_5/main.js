@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import Img from './download.svg';
 import * as style from './index.css'
 
-import request from '../../../utils/request';
+import request from 'yutils/request';
 
-import {getContentType, getUrlWithParams, getDataProObj} from '../../../utils/request';
+import {getContentType, getUrlWithParams, getDataProObj} from 'yutils/request';
 
 class PeGoal extends Component {
 	constructor() {

@@ -12,6 +12,7 @@ const {
   setCreateEnter,
   getSearchEnterOrTeam,
   getApplicationList,
+  clearApplicationTips
 } = actions;
 
 const defaultState = {
@@ -103,6 +104,9 @@ const reducer = handleActions({
       applicationList: payload.expiTip,
     };
   },
+  [clearApplicationTips]: state => ({
+    ...state,
+  }),
 }, defaultState);
 
 export default reducer;
