@@ -31,7 +31,7 @@ const {
   getServiceList,
   getMessage,
   getPoll,
-  getPortal,
+  // getPortal,
   getCurrentNot
 } = rootActions;
 const { getUserInfo } = homeActions;
@@ -64,7 +64,7 @@ const NoMatch = ({ history }) => {
     getServiceList,
     getMessage,
     getPoll,
-    getPortal,
+    // getPortal,
     getUserInfo,
     getCurrentNot,
   })
@@ -80,7 +80,7 @@ class Root extends Component {
     getServiceList: PropTypes.func,
     getMessage: PropTypes.func,
     getPoll: PropTypes.func,
-    getPortal: PropTypes.func,
+    // getPortal: PropTypes.func,
     getUserInfo: PropTypes.func,
   };
   static defaultProps = {
@@ -91,7 +91,7 @@ class Root extends Component {
     getServiceList: () => { },
     getMessage: () => { },
     getPoll: () => { },
-    getPortal: () => { },
+    // getPortal: () => { },
     getUserInfo: () => { },
   };
   constructor(props) {
@@ -111,7 +111,7 @@ class Root extends Component {
       requestSuccess,
       requestError,
       getServiceList,
-      getPortal,
+      // getPortal,
       getUserInfo,
       getPoll
     } = this.props;
@@ -135,13 +135,13 @@ class Root extends Component {
             }
           });
           // 请求是否含有portal 跳转到友空间首页
-          getPortal().then(({ error, payload }) => {
-            if (error) {
-              requestError(payload);
-            } else {
-              // requestSuccess();
-            }
-          });
+          // getPortal().then(({ error, payload }) => {
+          //   if (error) {
+          //     requestError(payload);
+          //   } else {
+          //     // requestSuccess();
+          //   }
+          // });
           // const browser = navigator.appName;
           // if (browser !== 'Microsoft Internet Explorer') {}
           IM(new componentTool('IM'), getContext(), { // eslint-disable-line
