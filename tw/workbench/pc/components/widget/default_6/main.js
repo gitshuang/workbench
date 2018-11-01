@@ -3,10 +3,10 @@ import Img from './download.svg';
 import {wrap, titleContainer, title, conLeft, iconL, textL, textL_below, conRight, iconR, svg} from './index.css'
 import Utils from './utils';
 
-import request from '../../../utils/request';
+import request from 'yutils/request';
 
-import {getContentType, getUrlWithParams, getDataProObj} from '../../../utils/request';
-import {getSumSign} from '../../../utils/utils';
+import {getContentType, getUrlWithParams, getDataProObj} from 'yutils/request';
+import {getSumSign} from 'yutils/utils';
 
 class MyBill extends Component {
 	constructor() {

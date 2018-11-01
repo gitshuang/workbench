@@ -11,4 +11,5 @@ export default createTypes(
   'GET_ENTER_INFO',
   'GET_SEARCH_ENTER_OR_TEAM',
   'GET_APPLICATION_LIST',
+  'CLEAR_APPLICATION_TIPS',
 );

@@ -142,7 +142,7 @@ class Home extends Component {
           applications: payload.expiTip.applications,
         });
         let {willExpiredNum,expiredNum} = this.forTime(payload.expiTip.applications)
-        if (willExpiredNum|| payload.addTip ) {
+        if (willExpiredNum || expiredNum || payload.addTip ) {
           this.setState({
             homemark: true,
             newAppNum: payload.addTip || 0,
@@ -185,7 +185,7 @@ class Home extends Component {
       }
       const currTime = new Date().getTime();
       const timeDiff = (time - currTime) / 1000 / 60 / 60 / 24;
-      if (timeDiff <= 30) {
+      if (time > currTime && timeDiff <= 30) {
         type = true;
         ++willExpiredNum;
         // break;

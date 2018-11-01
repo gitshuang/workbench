@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Img from './download.svg';
-import request from '../../../utils/request';
+import request from 'yutils/request';
 
-import {getContentType, getUrlWithParams, getDataProObj} from '../../../utils/request';
+import {getContentType, getUrlWithParams, getDataProObj} from 'yutils/request';
 
 import {
 	wrap,
@@ -17,7 +17,7 @@ import {
 	svg
 } from './index.css';
 import {iconR} from "../default_6/index.css";
-import {getSumSign} from "../../../utils/utils";
+import {getSumSign} from "yutils/utils";
 import Utils from "../default_6/utils";
 
 class FinanceAnalysis extends Component {
