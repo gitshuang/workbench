@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from 'components/header';
 import Icon from 'pub-comp/icon';
-import { noop, mapStateToProps } from '@u';
+import { mapStateToProps, getHost } from '@u';
 import actions from 'store/root/actions';
 import styles from './index.css';
 import SearchContainer from 'containers/search';
@@ -112,7 +112,8 @@ class HeaderContainer extends Component {
       userInfo,
     } = this.props;
     const rightArray = Children.toArray(rightContent);
-    const { portalUrl } = portalInfo;
+    // const { portalUrl } = portalInfo;
+    const portalUrl = getHost('yzone');
     let imClass = imShowed ? "active tc" : "tc";
     const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
     const rightContents = rightArray.concat(

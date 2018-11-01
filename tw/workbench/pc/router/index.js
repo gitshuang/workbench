@@ -35,8 +35,6 @@ const Renew = asyncComponent(() => import(/* webpackChunkName: "Renew" */'pages/
 const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'pages/userinfo'));
 // 管理团队/企业
 const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "ManageTeamEnter" */'pages/manageTeamEnter'));
-// 动态
-const Dynamic = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/dynamic'));
 // 个人主页
 const HomePage = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/homepage'));
 
@@ -124,10 +122,6 @@ const routes = [
   {
     path: '/manageTeamEnter',
     component: ManageTeamEnter,
-  },
-  {
-    path: '/dynamic',
-    component: Dynamic,
   },
   {
     path: '/homepage/:userId/:key',

@@ -65,6 +65,56 @@ const texts = {
         { value: "E", label: "501-1000" },
         { value: "F", label: "1001-2000" },
         { value: "G", label: ">2000 people" },
+    ],
+    country: [
+        {
+            "countryCode": "61",
+            "name": "Australia",
+        },
+        {
+            "countryCode": "95",
+            "name": "Burma",
+        },
+        {
+            "countryCode": "86",
+            "name": "China",
+        },
+        {
+            "countryCode": "852",
+            "name": "Hong Kong, China",
+        },
+        {
+            "countryCode": "62",
+            "name": "Indonesia",
+        },
+        {
+            "countryCode": "853",
+            "name": "Macao, China",
+        },
+        {
+            "countryCode": "60",
+            "name": "Malaysia",
+        },
+        {
+            "countryCode": "63",
+            "name": "Philippines",
+        },
+        {
+            "countryCode": "65",
+            "name": "Singapore",
+        },
+        {
+            "countryCode": "886",
+            "name": "Taiwan, China",
+        },
+        {
+            "countryCode": "66",
+            "name": "Thailand",
+        },
+        {
+            "countryCode": "84",
+            "name": "Vietnam",
+        }
     ]
 };
 
