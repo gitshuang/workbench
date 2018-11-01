@@ -7,20 +7,19 @@ import { mapStateToProps } from '@u';
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
 
-import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
-import teamconfigActions from 'store/root/teamconfig/actions';
-
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
 import { texts } from 'yutils/entertext';
 
-
-import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
-
+import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
+import teamconfigActions from 'store/root/teamconfig/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { setCreateEnter } = homeActions;
 const { getTeamInfo } = teamconfigActions;
+
+import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
+import 'assets/style/Form.css';
 
 @withRouter
 @connect(
