@@ -9,7 +9,7 @@ import {
 
 } from './style.css';
 
-import { pushYA } from '../../utils/utils';
+import { pushYA } from 'yutils/utils';
 
 const { Item } = Menu;
 

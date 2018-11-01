@@ -11,7 +11,7 @@ import workActions from 'store/root/work/actions';
 import MoveToGroup from 'components/moveToGroup';
 import Button from 'bee/button';
 import Icon from 'pub-comp/icon';
-import LanguagesJSON from '../../utils/languages';
+import LanguagesJSON from 'yutils/languages';
 /*  style */
 import {
   pin,

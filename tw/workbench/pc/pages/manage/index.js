@@ -10,7 +10,7 @@ import manageActions from 'store/root/manage/actions';
 import CreateManageModule from 'pub-comp/manageWidget';
 import folderBgSrc from 'assets/image/wgt/folder_bg.png';
 import HeaderPage from './headerPage';
-import LanguagesJSON from '../../utils/languages';
+import LanguagesJSON from 'yutils/languages';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {

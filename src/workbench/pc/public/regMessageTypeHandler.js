@@ -10,7 +10,7 @@ import {
   getProductInfo
 } from 'store/root/work/api';
 import { openMessage } from 'components/message';
-import { pushYA, appendSearchParam } from "../utils/utils";
+import { pushYA, appendSearchParam } from "yutils/utils";
 const { addBrm, popBrm, setProductInfo } = workActions;
 const {
   popMessage,

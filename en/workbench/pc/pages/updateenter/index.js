@@ -13,7 +13,7 @@ import teamconfigActions from 'store/root/teamconfig/actions';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
-import { texts } from 'components/entertext';
+import { texts } from 'yutils/entertext';
 
 
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
@@ -129,7 +129,7 @@ class Updateenter extends Component {
                     _from="update"
                     handleClickFn={this.handleClick}
                     buttonText="Upgrade"
-                    loadingDesc=""
+                    loadingDesc="Upgrading enterprise…"
                     uploadApplication={uploadApplication}
                     texts={texts}
                   /> : null
