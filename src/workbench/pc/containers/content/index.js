@@ -83,8 +83,10 @@ class ContentContainer extends Component {
     if (typeChange || codeChange || subcodeChange) {
       this.setState({
         isReady: false,
+        time: false,
+      },()=>{
+        this.setTime();
       });
-      this.setTime();
     }
   }
 
