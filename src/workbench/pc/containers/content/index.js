@@ -35,9 +35,26 @@ class ContentContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isReady: false
+      isReady: false,
+      time: false,
     }
     this.t = null;
+  }
+
+  componentDidMount() {
+    this.setTime();
+  }
+
+  setTime = () => {
+    clearTimeout(this.t);
+    this.t = null;
+    this.t = setTimeout(() => {
+      if (!this.state.time) {
+        this.setState({
+          time: true
+        });
+      }
+    }, 500);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,10 +81,10 @@ class ContentContainer extends Component {
     const codeChange = newCode !== oldCode;
     const subcodeChange = newSubcode !== oldSubcode;
     if (typeChange || codeChange || subcodeChange) {
-      clearTimeout(this.t);
       this.setState({
-        isReady: false
+        isReady: false,
       });
+      this.setTime();
     }
   }
 
@@ -87,17 +104,17 @@ class ContentContainer extends Component {
   getPinGroup = () => {
     const { getPinGroup, current } = this.props;
     if (!current.url) return false;
-    this.t = setTimeout(() => {
-      this.setState({
-        isReady: true
-      });
-    }, 100);
+    this.setState({
+      isReady: true,
+      time: false
+    });
     getPinGroup();
   }
 
 
   renderHtml() {
     const { hasTab, current, tabs, type, menus } = this.props;
+    const { isReady, time } = this.state;
     if (type === 4) {
       return (
         <div className={`${content} ${active}`}>
@@ -129,7 +146,7 @@ class ContentContainer extends Component {
         <div className={`${content} ${active}`} >
           <IFrame onLoad={this.getPinGroup} title={current.menuItemId} url={current.url} />
           {
-            !this.state.isReady ?
+            !isReady && time ?
               <div className={load}>
                 <div>
                   <img src={loading} />
