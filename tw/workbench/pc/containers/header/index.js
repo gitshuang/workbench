@@ -130,7 +130,7 @@ class HeaderContainer extends Component {
         openServiceFn={this.openServiceFn} 
       />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
-        <Icon title="智慧通訊" type="clock" style={{  }} />
+        <Icon title="智能通訊" type="clock" style={{  }} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
     );

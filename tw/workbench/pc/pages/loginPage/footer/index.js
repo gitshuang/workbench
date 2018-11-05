@@ -46,7 +46,7 @@ class Footer extends Component {
         <div className={FooterConPanel}>
              <div className="footerTop">
                 <div className="topSection topOne">
-                    <span className="title" >用戶端下載</span>
+                    <span className="title" >客戶端下載</span>
                     <a className="allIcons" href="http://ec.yonyoucloud.com/html/index/down.html " target="_blank">
                         <div className="diff" onMouseEnter={this.hover} onMouseLeave={this.hoverLeave}>
                             <span className="iconItem" >
@@ -56,7 +56,7 @@ class Footer extends Component {
                             </span>
                             <span className="iconItem codeItem " ref={(ref)=>{this.iconCode = ref;}}>
                                 <span className="iconInner2 iconCode"></span>
-                                <span className="iconDesc">掃描下載用戶端</span>
+                                <span className="iconDesc">掃描下載客戶端</span>
                             </span>
                         </div>
                         <span className="iconItem">

@@ -1,5 +1,5 @@
 /**
- * 解析response为JSON对象
+ * 解析response為JSON對象
  *
  * @param response
  * @returns {*}
@@ -9,7 +9,7 @@ function parseJSON(response) {
 }
 
 /**
- * http状态监测
+ * http狀態監測
  *
  * @param response
  * @returns {*}
@@ -40,7 +40,7 @@ export function getContentType(contentType) {
 }
 
 /**
- * 获取数据属性值，规则如下：getStatus={data:{a:1}}，dataPro=data.a，则调用此方法返回getStatus['data']['a']，也就是'1'
+ * 獲取數據屬性值，規則如下：getStatus={data:{a:1}}，dataPro=data.a，則調用此方法返回getStatus['data']['a']，也就是'1'
  *
  * @param dataPro
  * @param getStatus

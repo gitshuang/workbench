@@ -204,14 +204,14 @@ class CreateEnter extends Component {
           </FormItem>
           <FormItem
             showMast={false}
-            labelName={<span>联系人<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>聯繫人<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="請輸入連絡人姓名"
+            errorMessage="請輸入聯繫人姓名"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="請輸入連絡人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl name="linkman" placeholder="請輸入聯繫人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
           </FormItem>
 
           <FormItem

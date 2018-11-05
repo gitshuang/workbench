@@ -108,7 +108,7 @@ class DropdownButton extends Component {
         );
       });
     } else {
-      item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >資料正在載入中....</div></div>);
+      item.push(<div key="item_1001" className={itemLi} ><div className={liTitle} >數據正在加載中....</div></div>);
     }
     let marginLeft2 = -148;
     if (type && type === 'home') {

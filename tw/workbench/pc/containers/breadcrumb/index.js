@@ -162,7 +162,7 @@ class BreadcrumbContainer extends Component {
         {
           withSidebar ? (
             <Icon
-              title="顯示功能表"
+              title="顯示菜單"
               type="tabulation"
               className={this.state.breadcrumbTab}
               onClick={this.setExpended} />

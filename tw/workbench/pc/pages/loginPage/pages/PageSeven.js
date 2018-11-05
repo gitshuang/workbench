@@ -43,7 +43,7 @@ import{
                   <div className="footerSection sectionTwo">
                     <span className="title">全年運維保障</span>
                     <div className="sub">
-                      <span className="directives">服務與支援
+                      <span className="directives">服務與支持
                           <li className="item">線上客服</li>
                           <li className="item">幫助中心</li>
                       </span>
@@ -56,7 +56,7 @@ import{
                     </div>
                   </div>
                   <div className="footerSection sectionThird">
-                    <span className="title">多管道服務支援</span>
+                    <span className="title">多管道服務支持</span>
                     <div className="sub">
                       <span className="directives">售前客服
                       </span>

@@ -99,7 +99,7 @@ const createReducer = key => (state, { payload, error }) => {
 };
 const reducer = handleActions({
   [requestStart](state) {
-    createLoadingFunc({ text: '載入中...' });
+    createLoadingFunc({ text: '加載中...' });
     return state;
   },
   [requestSuccess](state) {

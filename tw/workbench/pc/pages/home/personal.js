@@ -57,7 +57,7 @@ class Personals extends Component {
         do: '我知道了',
         set: '設置',
         logout: '註銷',
-        account: '賬號管理',
+        account: '帳號管理',
         dynamic: '動態',
       },
 
@@ -73,7 +73,7 @@ class Personals extends Component {
       hrefs: [
         {
           href: `${getHost('org')}/download/download.html`,
-          name: '下載用戶端',
+          name: '下載客戶端',
         },
         {
           href: "https://ticket.yonyoucloud.com/ticket/create/KJ",
@@ -90,14 +90,14 @@ class Personals extends Component {
           name: '退出企業',
           value: '3',
           serverApi: 'enter/leave',
-          msg: '退出後，您在當前企業下的應用將不能再使用，相應的資料也將被刪除，請確認資料已備份',
+          msg: '退出後，您在當前企業下的應用將不能再使用，相應的數據也將被刪除，請確認數據已備份',
         },
         {
           id: 'allowExit',
           name: '退出團隊',
           value: '3',
           serverApi: 'team/leave',
-          msg: '退出後，您在當前團隊下的應用將不能再使用，相應的資料也將被刪除，請確認資料已備份',
+          msg: '退出後，您在當前團隊下的應用將不能再使用，相應的數據也將被刪除，請確認數據已備份',
         },
       ],
       language: {
@@ -107,7 +107,7 @@ class Personals extends Component {
         languageList: [
           {
             value: 'zh',
-            context: '简体中文'
+            context: '簡體中文'
           },
           {
             value: 'en',
@@ -115,7 +115,7 @@ class Personals extends Component {
           },
           {
             value: 'eh',
-            context: '繁体中文'
+            context: '繁體中文'
           },
         ]
       },

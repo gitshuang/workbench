@@ -76,7 +76,7 @@ function getData(url, callback) {
           if (text) {
             getResultFetch(this, text, callback);
           } else {
-            return Promise.reject(new Error('介面未返回資料'));
+            return Promise.reject(new Error('介面未返回數據'));
           }
           return false;
         });
