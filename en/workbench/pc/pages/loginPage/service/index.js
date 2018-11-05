@@ -25,7 +25,7 @@ class Service extends Component {
     this.state = {
      
     }
-    // this.registryUrl = CAS_SERVER + '/register?sysid=market&mode=light&yhtrealservice=' + realservice;
+    // this.registryUrl = CAS_SERVER + '/register?sysid=diwork&mode=light&yhtrealservice=' + realservice;
  
   }
 
