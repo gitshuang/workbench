@@ -20,7 +20,7 @@ const CAS_SERVER = getHost('euc'),//"https://user-daily.yyuap.com",
   //yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
   yhtssoisloginUrl = windowLocationOrigin + '/login_light',
   _destUrl = `${getHost('api')}/yhtssoislogin`, //只有这个不是登陆成功后跳转的链接
-  realservice = windowLocationOrigin + '&autologin=true#/';
+  realservice = windowLocationOrigin;
 
 class LoginPage extends Component {
   constructor(props) {
@@ -37,9 +37,9 @@ class LoginPage extends Component {
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
     this.registryUrl = CAS_SERVER + '/register?sysid=diwork&service=' + encodeURIComponent(realservice);
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+'&autoLogin=true' ;
     if (process.env.NODE_ENV == 'daily') {
-      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice);
+      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+'&autoLogin=true' ;
     }
     this.sevenSpace;
   }
