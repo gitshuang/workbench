@@ -8,7 +8,7 @@ const loginRoutes = [
       exact: true,
     },
     {
-      path:'/service',
+      path:'/service/:lan',
       component:Service,
     },
     {

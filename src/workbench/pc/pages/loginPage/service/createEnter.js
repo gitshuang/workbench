@@ -59,10 +59,6 @@ class CreateEnter extends Component {
     })
   }
 
-  componentDidMount(){
-    console.log(this.props)
-  }
-
   setOptherData = (obj) => {
     this.state[obj.name] = obj.value;
     this.setState({
@@ -205,7 +201,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang='zh_CN'/>
+            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang={this.props.match&&this.props.match.params.lan?this.props.match.params.lan:'zh_CN'}/>
           </FormItem>
           <FormItem
             showMast={false}

@@ -98,7 +98,7 @@ class  MainNavPanel extends Component{
   }
   open =(type)=>{
     if(type =='service'){
-      this.props.activeIndex!=='2'&&  this.props.history.push('/service')
+      this.props.activeIndex!=='2'&&  this.props.history.push({pathname:`/service/${this.state.defaultValue}`})
     }else if(type == 'aboutus'){
       this.props.activeIndex!=='4'&&this.props.history.push('/aboutus')
     }else if(type == 'login'){
