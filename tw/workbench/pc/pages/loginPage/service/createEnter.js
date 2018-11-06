@@ -210,9 +210,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            {/* <CitySelect name="address" onChange={this.onChange} /> */}
-            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang='zh_CN'/>
-
+            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang={this.props.match&&this.props.match.params.lan?this.props.match.params.lan:'zh_CN'}/>
           </FormItem>
           <FormItem
             showMast={false}
