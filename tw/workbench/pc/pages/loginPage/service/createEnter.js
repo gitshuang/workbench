@@ -25,7 +25,9 @@ const { Option } = Select;
 
 @withRouter
 @connect(
-  mapStateToProps(),
+  mapStateToProps(
+    'currLan',
+  ),
   {
     requestStart,
     requestSuccess,
@@ -49,24 +51,15 @@ class CreateEnter extends Component {
         city:'北京',
       }
     };
-    // this.address = '北京|北京|东城区|';
-    // this.province = '北京';
-    // this.city = '北京';
   }
-
   onChange = (obj) => {
-    // this.address = obj.province + obj.city;
-    // this.province =  obj.province;
-    // this.city= obj.city;
     this.setState({
-      defaultValue:{
-        province:obj.province,
-        city:obj.city,
-      }
-  })
+        defaultValue:{
+          province:obj.province,
+          city:obj.city,
+        }
+    })
   }
-
-  
 
   setOptherData = (obj) => {
     this.state[obj.name] = obj.value;
@@ -210,7 +203,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang={this.props.match&&this.props.match.params.lan?this.props.match.params.lan:'zh_CN'}/>
+            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang={this.props.currLan}/>
           </FormItem>
           <FormItem
             showMast={false}
