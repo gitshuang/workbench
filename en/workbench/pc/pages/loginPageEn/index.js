@@ -26,10 +26,10 @@ class LoginPage extends Component {
       loginModalShow: false,//登录的modal是否展示
     }
     this.amBody = null;
-    this.registryUrl = CAS_SERVER + '/register?sysid=market&locale=zh_CN&service=' + encodeURIComponent(realservice) + '&locale=en_US';
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice) + '&locale=en_US';
+    this.registryUrl = CAS_SERVER + '/register?sysid=diwork&locale=zh_CN&service=' + encodeURIComponent(realservice) + '&locale=en_US';
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice) + '&locale=en_US';
     if (process.env.NODE_ENV == 'daily') {
-      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=market&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice) + '&locale=en_US';
+      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice) + '&locale=en_US';
     }
     this.sevenSpace;
   }
