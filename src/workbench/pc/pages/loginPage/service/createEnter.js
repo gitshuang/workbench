@@ -25,7 +25,9 @@ const { Option } = Select;
 
 @withRouter
 @connect(
-  mapStateToProps(),
+  mapStateToProps(
+    'currLan',
+  ),
   {
     requestStart,
     requestSuccess,
@@ -201,7 +203,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang={this.props.match&&this.props.match.params.lan?this.props.match.params.lan:'zh_CN'}/>
+            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang={this.props.currLan}/>
           </FormItem>
           <FormItem
             showMast={false}
