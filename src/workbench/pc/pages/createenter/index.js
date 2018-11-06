@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, getContext } from '@u';
 
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
@@ -84,6 +84,7 @@ class Enterprise extends Component {
 
   render() {
     const { userInfo } = this.props;
+    const { locale } = getContext(); 
     return (
       <div style={{ overflow: "hidden" }}>
         <div className="header um-header">
@@ -112,6 +113,7 @@ class Enterprise extends Component {
                 loadingDesc="正在创建企业..."
                 uploadApplication={uploadApplication}
                 texts={texts}
+                lang={locale}
               />
             </div>
           </div>
