@@ -221,8 +221,8 @@ class Personals extends Component {
   }
 
   dispatch = (action) => {
-    const { routers, currType, userInfo } = this.props;
-    const { history } = this.props;
+    const { routers, currType } = this.state;
+    const { history, userInfo } = this.props;
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
       return false;
