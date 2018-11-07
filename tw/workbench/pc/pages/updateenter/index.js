@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, getContext } from '@u';
 
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
@@ -103,6 +103,7 @@ class Updateenter extends Component {
   render() {
     const { enterData } = this.state;
     const { userInfo } = this.props;
+    const { locale } = getContext(); 
     return (
       <div style={{ overflow: "hidden" }}>
         <div className="um-header header">
@@ -131,6 +132,7 @@ class Updateenter extends Component {
                     loadingDesc="正在升級企業..."
                     uploadApplication={uploadApplication}
                     texts={texts}
+                    lang={locale}
                   /> : null
               }
 
