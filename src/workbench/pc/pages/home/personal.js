@@ -135,18 +135,19 @@ class Personals extends Component {
   }
 
   componentWillMount() {
-    const { getUserInfo } = this.props;
-    getUserInfo().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      this.setState({
-        userInfo: payload,
-      },()=>{
-        this.getCompanyType();
-      });
+    // const { getUserInfo } = this.props;
+    // getUserInfo().then(({ error, payload }) => {
+    //   if (error) {
+    //     return;
+    //   }
+    //   this.setState({
+    //     userInfo: payload,
+    //   },()=>{
+    //     this.getCompanyType();
+    //   });
 
-    });
+    // });
+    this.getCompanyType();
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
@@ -198,7 +199,7 @@ class Personals extends Component {
       userInfo: {
         allowTenants,
       },
-    } = this.state;
+    } = this.props;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
     let currType = 1;
     if (curTenant && curTenant.type == 0) {
@@ -220,7 +221,7 @@ class Personals extends Component {
   }
 
   dispatch = (action) => {
-    const { routers, currType, userInfo } = this.state;
+    const { routers, currType, userInfo } = this.props;
     const { history } = this.props;
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
@@ -254,9 +255,10 @@ class Personals extends Component {
     const {
       requestDisplay,
       exitModal,
-      icons
+      icons,
+      userInfo,
     } = this.props;
-    const { userInfo, language, hrefs, TeamData, currType } = this.state;
+    const {  language, hrefs, TeamData, currType } = this.state;
     let { personalText } = this.state;
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
