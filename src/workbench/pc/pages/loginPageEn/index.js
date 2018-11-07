@@ -27,9 +27,9 @@ class LoginPage extends Component {
     }
     this.amBody = null;
     this.registryUrl = CAS_SERVER + '/register?sysid=diwork&locale=zh_CN&service=' + encodeURIComponent(realservice) + '&locale=en_US';
-    this.loginUrl = CAS_SERVER + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+ '&locale=en_US';
+    this.loginUrl = CAS_SERVER + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice) + '&locale=en_US';
     if (process.env.NODE_ENV == 'daily') {
-      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice)+ '&locale=en_US';
+      this.loginUrl = 'https://sso-daily.yyuap.com' + '/cas/login?sysid=diwork&mode=light&service=' + encodeURIComponent(yhtssoisloginUrl + '?yhtdesturl=' + _destUrl + '&yhtrealservice=' + realservice) + '&locale=en_US';
     }
     this.sevenSpace;
   }

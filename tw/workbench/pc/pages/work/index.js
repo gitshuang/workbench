@@ -200,9 +200,9 @@ export default class Work extends Component {
     // 当跳转到其它的服务里边 
     if (typeChange || codeChange) {
       // 多加一层判断 为了防止是openService 打开的已经发送了请求的情况
-      if (!newProductInfo.curMenuBar) {
+      // if (!newProductInfo.curMenuBar) {
         this.getProductInfo(newCode, newType, newSubcode);
-      }
+      // }
     } else if (subcodeChange) {
       if (newSubcode) {
         setCurrent(newSubcode);
