@@ -96,6 +96,7 @@ class  MainNavPanel extends Component{
       window.location.reload();
     });
   }
+
   open =(type)=>{
     if(type =='service'){
       this.props.activeIndex!=='2'&&  this.props.history.push('/service')
