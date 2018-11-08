@@ -84,7 +84,7 @@ class Enterprise extends Component {
 
   render() {
     const { userInfo } = this.props;
-    const { locale } = getContext(); 
+    const { locale } = getContext();
     return (
       <div style={{ overflow: "hidden" }}>
         <div className="header um-header">
@@ -105,16 +105,18 @@ class Enterprise extends Component {
             <div className={enterTitle} >创建企业</div>
             <hr className={hr} />
             <div className={enterCont} >
-              <EnterContent
-                userInfo={userInfo}
-                _from="create"
-                handleClickFn={this.handleClick}
-                buttonText="创建"
-                loadingDesc="正在创建企业..."
-                uploadApplication={uploadApplication}
-                texts={texts}
-                lang={locale}
-              />
+              {
+                userInfo.userName ? <EnterContent
+                  userInfo={userInfo}
+                  _from="create"
+                  handleClickFn={this.handleClick}
+                  buttonText="创建"
+                  loadingDesc="正在创建企业..."
+                  uploadApplication={uploadApplication}
+                  texts={texts}
+                  lang={locale}
+                /> : null
+              }
             </div>
           </div>
         </div>
