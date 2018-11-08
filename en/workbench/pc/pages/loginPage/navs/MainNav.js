@@ -18,9 +18,7 @@ const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
-      {
-        namespace: 'home',
-      },
+      'currLan',
     ),
     {
       setCurrentNot,
@@ -74,7 +72,14 @@ class  MainNavPanel extends Component{
   }
 
   getCurrentLan = () => {
-    const { getCurrentNot,lanCallBack } = this.props;
+    const { getCurrentNot,lanCallBack,currLan} = this.props;
+    if(currLan){
+      this.setState({
+        defaultValue: currLan,
+      })
+      lanCallBack(currLan);
+      return false;
+    }
     getCurrentNot().then(({ error, payload }) => {
       if (error) {
         return;
@@ -85,7 +90,6 @@ class  MainNavPanel extends Component{
         lanCallBack(payload.langCode)
       });
     });
-    
   }
 
   onChangeLanguage = (value) => {
