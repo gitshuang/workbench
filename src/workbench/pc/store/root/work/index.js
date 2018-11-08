@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
+import { appendSearchParam, changeURLArg } from "yutils/utils";
 import actions from './actions';
 import { setBackUrl } from 'yutils/utils'
 
@@ -53,33 +54,6 @@ const defaultState = {
   productInfo: {},
   pinGroup: []
 };
-
-function appendSearchParam(url, params) {
-  if (url) {
-    const urlObj = new URL(url);
-    Object.keys(params).forEach((name) => {
-      urlObj.searchParams.append(name, params[name]);
-    });
-    return urlObj.toString();
-  }
-  return url;
-}
-
-function changeURLArg(url, arg, arg_val) {
-  var pattern = arg + '=([^&]*)';
-  var replaceText = arg + '=' + arg_val;
-  if (url.match(pattern)) {
-    var tmp = '/(' + arg + '=)([^&]*)/gi';
-    tmp = url.replace(eval(tmp), replaceText);
-    return tmp;
-  } else {
-    if (url.match('[\?]')) {
-      return url + '&' + replaceText;
-    } else {
-      return url + '?' + replaceText;
-    }
-  }
-}
 
 const reducer = handleActions({
   [addBrm]: (state, { payload: data }) => {
@@ -298,8 +272,7 @@ const reducer = handleActions({
         relationUsers,
         relationServices,
         ext1,
-        // url: location,
-
+        url: location,
       },
       tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs))
     };
