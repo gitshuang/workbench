@@ -106,7 +106,8 @@ class Enterprise extends Component {
             <hr className={hr} />
             <div className={enterCont} >
               {
-                userInfo.userName ? <EnterContent
+                Object.keys(userInfo).length > 0
+                ? <EnterContent
                   userInfo={userInfo}
                   _from="create"
                   handleClickFn={this.handleClick}
