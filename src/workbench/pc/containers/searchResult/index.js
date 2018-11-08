@@ -4,9 +4,9 @@ import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import { dispatch, trigger } from 'public/componentTools';
 import { openHomePage } from 'public/regMessageTypeHandler';
-import FormControl from 'bee/form-control';
+
 import Tabs, { TabPane } from 'bee/tabs';
-import Icon from 'pub-comp/icon';
+import SearchInput from 'pub-comp/searchInput';
 import EnhancedPagination from 'pub-comp/enhancedPagination';
 import SearchItem from 'diwork-business-components/dist/search/searchItem';
 // import SearchItem from './searchItem';
@@ -14,23 +14,16 @@ import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
 
 import nodata from 'assets/image/wgt/nodata.png';
-
 import {
   bg,
   bg_wrap,
   wrap,
   clearfix,
-  searchPanel,
-  serviceSearch,
-  search_icon_con,
-  ufSearch,
-  search_tit,
   tabContent,
   nodataClass,
   recently,
   tabPane1,
 } from './style.css';
-
 
 const {
   getSearchMore, getSearch, getSearchOther, setSearchHeadData,
@@ -293,19 +286,15 @@ class searchResult extends Component {
       <div className={`${bg} um-content um-vbox`}>
         <div className={`${bg_wrap} um-content um-vbox`}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div className={searchPanel}>
-              <FormControl
-                className={serviceSearch}
-                placeholder="搜索人员信息、服务及其他内容"
-                value={this.state.keywords}
-                onKeyDown={this.onKeyup}
-                onChange={this.inputOnChange}
-              />
-              <div className={search_icon_con}>
-                <Icon type="search" className={ufSearch} onClick={this.btnSearch} />
-                <span className={search_tit} onClick={this.btnSearch}>搜索</span>
-              </div>
-            </div>
+            <SearchInput
+              onKeyDown = {this.onKeyup}
+              onChange = {this.inputOnChange}
+              keywords = {this.state.keywords}
+              onClick = {this.btnSearch}
+              placeholder = "搜索人员信息、服务及其他内容"
+              btnText = "搜索"
+            />
+            
             <div className={'um-content' + ` ${tabContent}`}>
               <Tabs
                 destroyInactiveTabPane
