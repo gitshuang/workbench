@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Button from 'bee/button';
 import SearchInput from 'pub-comp/searchInput';
 import ButtonGroup from 'bee/button-group';
+import { ButtonBrand } from 'pub-comp/button';
 import GoTo from './goto';
 
 import {
@@ -17,6 +18,8 @@ import {
   um_content,
   topTabBtns,
   appsList,
+  openMarketBtn,
+  left
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -257,6 +260,7 @@ class serviceClassify extends Component {
       <div className={bg + " um-vbox"}>
         <div className={bg_wrap + " um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
+            <div style={{overflow: "hidden"}}>
             <SearchInput
               onKeyDown={this.onKeyup}
               onChange={this.inputOnChange}
@@ -264,7 +268,10 @@ class serviceClassify extends Component {
               onClick={this.btnSearch}
               placeholder="Search App"
               btnText="Search"
+              classname={left}
             />
+            {_appType ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >App Market</ButtonBrand> : null}
+            </div>
             <div className={um_content}>
               <div>
                 <div className={topTabBtns}>
