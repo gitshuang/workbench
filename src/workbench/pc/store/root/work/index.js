@@ -65,6 +65,22 @@ function appendSearchParam(url, params) {
   return url;
 }
 
+function changeURLArg(url, arg, arg_val) {
+  var pattern = arg + '=([^&]*)';
+  var replaceText = arg + '=' + arg_val;
+  if (url.match(pattern)) {
+    var tmp = '/(' + arg + '=)([^&]*)/gi';
+    tmp = url.replace(eval(tmp), replaceText);
+    return tmp;
+  } else {
+    if (url.match('[\?]')) {
+      return url + '&' + replaceText;
+    } else {
+      return url + '?' + replaceText;
+    }
+  }
+}
+
 const reducer = handleActions({
   [addBrm]: (state, { payload: data }) => {
     const nowBrmLast = state.brm.length > 0 ?
@@ -140,6 +156,7 @@ const reducer = handleActions({
       serviceId,
       serviceCode,
     } = current;
+    debugger;
     const curTab = tabs.find(({ id }) => id === currentId);
     const newBrm = [];
     menuPath.map(item =>
@@ -156,12 +173,19 @@ const reducer = handleActions({
     } else {
       setBackUrl(backUrl);
     }
+    // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
+    const location = appendSearchParam(current.service.url, {
+      ...getOpenServiceData(serviceCode),
+      serviceCode,
+    });
     if (curTab) {
       return {
         ...state,
         current: {
           ...defaultState.current,
           menuItemId: currentId,
+
+          url: current.service.lisenceBeforeOpen ? '' : location,
           //   hasRelationFunc: state.current.hasRelationFunc,
           //   title: name,
           //   serviceCode,
@@ -177,6 +201,7 @@ const reducer = handleActions({
       current: {
         ...defaultState.current,
         menuItemId: currentId,
+        url: current.service.lisenceBeforeOpen ? '' : location,
       },
       brm,
       backUrl,
