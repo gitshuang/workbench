@@ -176,4 +176,8 @@
   float: right;
   background: #e14c46;
   color: #fff;
+  margin-top: 5px;
+}
+.left{
+  float: left;
 }
