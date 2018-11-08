@@ -174,10 +174,7 @@ const reducer = handleActions({
       setBackUrl(backUrl);
     }
     // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
-    const location = appendSearchParam(current.service.url, {
-      ...getOpenServiceData(serviceCode),
-      serviceCode,
-    });
+    const location = changeURLArg(url, 'serviceCode', serviceCode,);
     if (curTab) {
       return {
         ...state,
@@ -209,7 +206,7 @@ const reducer = handleActions({
         id: currentId,
         serviceCode,
         name,
-        // location,
+        location,
       }].concat(tabs),
     };
   },
@@ -278,10 +275,11 @@ const reducer = handleActions({
     if (!(relationServices && relationServices.length) && !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
-    const location = appendSearchParam(url, {
-      ...getOpenServiceData(serviceCode),
-      serviceCode,
-    });
+    // const location = appendSearchParam(url, {
+    //   ...getOpenServiceData(serviceCode),
+    //   serviceCode,
+    // });
+    const location = changeURLArg(url, 'serviceCode', serviceCode,);
     //这里做一个兼容，工作页内iframe地址从getDetail获取
     let tab = {};
     if (tabs.length > 0) {
@@ -300,7 +298,7 @@ const reducer = handleActions({
         relationUsers,
         relationServices,
         ext1,
-        url: location,
+        // url: location,
 
       },
       tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs))
