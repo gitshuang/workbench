@@ -44,6 +44,7 @@ class Personals extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isGetUserInfo: false,
       currType: 0,
       userInfo: {},
       personalText: {
@@ -155,7 +156,8 @@ class Personals extends Component {
 
   componentDidUpdate() {
     const { userInfo } = this.props;
-    if (Object.keys(userInfo).length === 0) {
+    const { isGetUserInfo } = this.state;
+    if (Object.keys(userInfo).length === 0 || isGetUserInfo) {
       return false;
     }
     this.getCompanyType(userInfo);
@@ -211,7 +213,8 @@ class Personals extends Component {
       currType = 0;
     }
     this.setState({
-      currType
+      currType,
+      isGetUserInfo: true,
     });
   }
 
