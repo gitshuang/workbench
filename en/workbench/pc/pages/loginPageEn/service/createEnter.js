@@ -44,16 +44,26 @@ class CreateEnter extends Component {
       linkman: '',
       companyname:'',
       tenantTel:'',
+      defaultValue:{
+        province:'Beijing',
+        city:'Beijing',
+      }
     };
     // this.address = '北京|北京|东城区|';
-    this.province = 'Beijing';
-    this.city = 'Beijing';
+    // this.province = 'Beijing';
+    // this.city = 'Beijing';
   }
 
   onChange = (obj) => {
     // this.address = obj.province + obj.city;
-    this.province =  obj.province;
-    this.city= obj.city;
+    // this.province =  obj.province;
+    // this.city= obj.city;
+    this.setState({
+        defaultValue:{
+          province:obj.province,
+          city:obj.city,
+        }
+    })
   }
 
   
@@ -200,7 +210,7 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <CitySelect name="address" onChange={this.onChange} />
+            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang='en_US'/>
           </FormItem>
           <FormItem
             showMast={false}

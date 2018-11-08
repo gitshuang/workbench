@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import Button from 'bee/button';
-import Icon from 'pub-comp/icon';
-import FormControl from 'bee/form-control';
+import SearchInput from 'pub-comp/searchInput';
 import ButtonGroup from 'bee/button-group';
-import { ButtonBrand } from 'pub-comp/button';
 import GoTo from './goto';
 
 import {
@@ -14,17 +12,11 @@ import {
   bg_wrap,
   wrap,
   clearfix,
-  serviceSearch,
-  ufSearch,
   appContent,
   menuBtnGroup,
-  search_tit,
-  search_icon_con,
-  searchPanel,
   um_content,
   topTabBtns,
   appsList,
-  openMarketBtn,
 } from './style.css';
 
 import applicationActions from 'store/root/application/actions';
@@ -163,9 +155,9 @@ class serviceClassify extends Component {
   renderList() {
     const { currentApps, searchApps, search } = this.state;
     let newArr = [];
-    if(search){
+    if (search) {
       newArr = searchApps;
-    }else{
+    } else {
       newArr = currentApps;
     }
     return newArr.map(({ applicationId, applicationCode, applicationIcon, applicationName }) => {
@@ -237,7 +229,7 @@ class serviceClassify extends Component {
         admin,
       },
     } = this.props;
-    if ( !Object.keys(userInfo).length ) { return false; }
+    if (!Object.keys(userInfo).length) { return false; }
     const curTenant = allowTenants.filter((tenant) => {
       return tenant.tenantId === tenantid;
     })[0];
@@ -265,16 +257,14 @@ class serviceClassify extends Component {
       <div className={bg + " um-vbox"}>
         <div className={bg_wrap + " um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div className={searchPanel}>
-              <FormControl className={serviceSearch} placeholder="Search App" value={value} onKeyDown={this.onKeyup} onChange={this.inputOnChange} />
-              <div className={search_icon_con} onClick={() => { this.btnSearch() }}>
-                <span>|</span>
-                <Icon type="search" className={ufSearch} ></Icon>
-                <span className={search_tit}>Search</span>
-              </div>
-              {_appType ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >App Market</ButtonBrand> : null}
-            </div>
-
+            <SearchInput
+              onKeyDown={this.onKeyup}
+              onChange={this.inputOnChange}
+              keywords={value}
+              onClick={this.btnSearch}
+              placeholder="Search App"
+              btnText="Search"
+            />
             <div className={um_content}>
               <div>
                 <div className={topTabBtns}>

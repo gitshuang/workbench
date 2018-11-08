@@ -96,7 +96,7 @@ class titleServiceContainer extends Component {
         {
           contacts.length ? (
             <div>
-              <h4>相關連絡人</h4>
+              <h4>相關聯繫人</h4>
               <ul className="clearfix">
                 {
                   contacts.map(({ userAvator, userName }, i) =>

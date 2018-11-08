@@ -27,7 +27,7 @@ function getFetch(url) {
         if (text) {
           return Promise.resolve(text);
         }
-        return Promise.reject(new Error('介面未返回資料'));
+        return Promise.reject(new Error('介面未返回數據'));
       });
     }
     return Promise.reject(new Error('請求失敗'));

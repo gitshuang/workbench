@@ -31,7 +31,6 @@ const {
   getServiceList,
   getMessage,
   getPoll,
-  getPortal,
   getCurrentNot
 } = rootActions;
 const { getUserInfo } = homeActions;
@@ -54,20 +53,22 @@ const NoMatch = ({ history }) => {
 };
 
 @withRouter
-@connect(mapStateToProps(
-  'showFrame',
-  'showModal',
-), {
+@connect(
+  mapStateToProps(
+    'showFrame',
+    'showModal',
+  ),
+  {
     requestStart,
     requestSuccess,
     requestError,
     getServiceList,
     getMessage,
     getPoll,
-    getPortal,
     getUserInfo,
     getCurrentNot,
-  })
+  }
+)
 class Root extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -80,7 +81,6 @@ class Root extends Component {
     getServiceList: PropTypes.func,
     getMessage: PropTypes.func,
     getPoll: PropTypes.func,
-    getPortal: PropTypes.func,
     getUserInfo: PropTypes.func,
   };
   static defaultProps = {
@@ -91,7 +91,6 @@ class Root extends Component {
     getServiceList: () => { },
     getMessage: () => { },
     getPoll: () => { },
-    getPortal: () => { },
     getUserInfo: () => { },
   };
   constructor(props) {
@@ -107,22 +106,17 @@ class Root extends Component {
       return false;
     }
     const {
-      requestStart,
-      requestSuccess,
       requestError,
       getServiceList,
-      getPortal,
       getUserInfo,
       getPoll
     } = this.props;
-    // requestStart();
 
     // 请求用户信息  看看是否有租户
     getUserInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
       } else {
-        requestSuccess();
         if (!payload.allowTenants.length) {
           this.props.history.replace('/establish');
         } else {
@@ -130,31 +124,11 @@ class Root extends Component {
           getServiceList().then(({ error, payload }) => {
             if (error) {
               requestError(payload);
-            } else {
-              // requestSuccess();
             }
           });
-          // 请求是否含有portal 跳转到友空间首页
-          getPortal().then(({ error, payload }) => {
-            if (error) {
-              requestError(payload);
-            } else {
-              // requestSuccess();
-            }
-          });
-          // const browser = navigator.appName;
-          // if (browser !== 'Microsoft Internet Explorer') {}
           IM(new componentTool('IM'), getContext(), { // eslint-disable-line
             el: 'IM',
           });
-          // const t = setInterval(()=>{
-          //   if(window.InitEsnIM){
-          //     clearInterval(t);
-          //     InitEsnIM(new componentTool('IM'), getContext(), { // eslint-disable-line
-          //       el: 'IM',
-          //     });
-          //   } 
-          // },5);
           regMessageTypeHandler(this);
           // 心跳
           timer(getPoll, 10000);
@@ -165,20 +139,8 @@ class Root extends Component {
 
   componentDidMount() {
     if (!this.isLogin) {
-      this.getCurrentLan()
-      return false;
+      this.getCurrentLan();
     }
-    // if(!this.isLogin) return false;
-    // const { getPoll } = this.props;
-    // const browser = navigator.appName;
-    // if (browser !== 'Microsoft Internet Explorer') {
-    //   IM(new componentTool('IM'), getContext(), { // eslint-disable-line
-    //     el: 'IM',
-    //   });
-    // }
-    // regMessageTypeHandler(this);
-    // // 心跳
-    // timer(getPoll, 10000);
   }
 
   getCurrentLan = () => {
@@ -202,10 +164,10 @@ class Root extends Component {
       <div>
         <Switch>
           {
-            this.isLogin 
-            ? 
-              routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />) 
-            :
+            this.isLogin
+              ?
+              routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+              :
               duoyuRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
           }
           <Route component={NoMatch} />

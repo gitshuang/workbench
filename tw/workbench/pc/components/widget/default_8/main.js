@@ -41,7 +41,7 @@ class PeMy extends Component {
 			try {
 				data = getDataProObj(dataProp, getStatus);
 			} catch (e) {
-				console.log('属性计算错误：' + 'getStatus.' + dataProp);
+				console.log('屬性計算錯誤：' + 'getStatus.' + dataProp);
 			}
 			try {
 				data = parseInt(data, 10);

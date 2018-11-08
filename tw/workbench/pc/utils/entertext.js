@@ -1,12 +1,12 @@
 const texts = {
-    placeholder1: "最多60個字符",
+    placeholder1: "最多60個字元",
     radio1: "禁止",
     radio2: "允許",
     tenantNameLabel: "企業名稱",
     tenantNameError: "請輸入企業名稱",
     logoLabel: "企業頭像",
     logoError: "請上傳圖片",
-    logoError2: "必須是壹個圖片",
+    logoError2: "必須是一個圖片",
     tenantIndustryLabel: "所屬行業",
     tenantIndustryError: "請選擇所屬行業",
     tenantSizeLabel: "規模範圍",
@@ -17,17 +17,17 @@ const texts = {
     invitePermissionO1: "全員邀請",
     invitePermissionO2: "禁止邀請",
     invitePermissionO3: "管理員邀請",
-    joinPermissionLabel: "申請權限",
+    joinPermissionLabel: "申請許可權",
     joinPermissionO1: "所有用戶都可申請加入",
     joinPermissionO2: "禁止用戶申請加入",
     allowExitLabel: "允許用戶退出",
     subordinateTypeLabel: "上下級顯示",
     subordinateTypeO1: "根據組織機構負責人顯示上下級",
-    subordinateTypeO2: "根據導入的上下級關系顯示上下級",
-    isWaterMarkLabel: "通訊錄顯示水印",
-    infoTitle: "聯系人信息",
+    subordinateTypeO2: "根據導入的上下級關係顯示上下級",
+    isWaterMarkLabel: "通訊錄顯示浮水印",
+    infoTitle: "聯繫人資訊",
     linkmanLabel: "姓名",
-    linkmanError: "請輸入聯系人姓名",
+    linkmanError: "請輸入聯繫人姓名",
     tenantEmailLabel: "郵箱",
     tenantEmailError: "郵箱格式錯誤",
     tenantEmailPlace: "請輸入郵箱",
@@ -65,6 +65,56 @@ const texts = {
         { value: "E", label: "501-1000" },
         { value: "F", label: "1001－2000" },
         { value: "G", label: ">2000人" },
+    ],
+    country: [
+        {
+            "countryCode": "61",
+            "name": "澳大利亞",
+        },
+        {
+            "countryCode": "95",
+            "name": "緬甸",
+        },
+        {
+            "countryCode": "86",
+            "name": "中國",
+        },
+        {
+            "countryCode": "852",
+            "name": "中國香港特別行政區",
+        },
+        {
+            "countryCode": "62",
+            "name": "印尼",
+        },
+        {
+            "countryCode": "853",
+            "name": "中國澳門特別行政區",
+        },
+        {
+            "countryCode": "60",
+            "name": "馬來西亞",
+        },
+        {
+            "countryCode": "63",
+            "name": "菲律賓",
+        },
+        {
+            "countryCode": "65",
+            "name": "新加坡",
+        },
+        {
+            "countryCode": "886",
+            "name": "中國臺灣",
+        },
+        {
+            "countryCode": "66",
+            "name": "泰國",
+        },
+        {
+            "countryCode": "84",
+            "name": "越南",
+        }
     ]
 };
 

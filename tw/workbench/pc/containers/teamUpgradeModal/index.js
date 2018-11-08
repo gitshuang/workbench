@@ -75,7 +75,7 @@ class TeamUpgradeModal extends Component {
 
             <p>· 基於管理角色的應用許可權管理</p>
 
-            <p>· 企業級統一基礎檔案與資料管控</p>
+            <p>· 企業級統一基礎檔案與數據管控</p>
 
             <p>· 基礎假勤與薪資查詢服務</p>
 

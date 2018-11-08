@@ -139,7 +139,7 @@ class CreateTeamContent extends Component {
       ],
       dataNum:1,
       enhancedPaginationText:{
-        jump:'條/頁',
+        jump:'跳至',
         jumpPage:'頁'
       }
     }
@@ -314,7 +314,7 @@ class CreateTeamContent extends Component {
           <span>
             <Button className={btnType == "web" ? active : ""} onClick={() => { this.changeDuan('web') }}>Web端</Button>
             <Button className={btnType == "mob" ? active : ""} onClick={() => { this.changeDuan('mob') }}>手機端</Button>
-            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PC用戶端</Button>
+            <Button className={btnType == "khd" ? active : ""} onClick={() => { this.changeDuan('khd') }}>PC客戶端</Button>
           </span>
           {/*<Button colors="danger">添加應用</Button>*/}
         </div>
@@ -605,8 +605,8 @@ class CreateTeamContent extends Component {
                 type="團隊"
                 data={
                   [
-                    { id: "aa", name: "解散團隊", value: "2", serverApi: "team/remove", msg: "解散後，當期團隊下的應用將不能再使用，相應的資料也將被刪除，請確認資料已備份" },
-                    { id: "allowExit", name: "退出團隊", value: "3", serverApi: "team/leave", msg: "退出後，您在當前團隊下的應用將不能再使用，相應的資料也將被刪除，請確認資料已備份" },
+                    { id: "aa", name: "解散團隊", value: "2", serverApi: "team/remove", msg: "解散後，當期團隊下的應用將不能再使用，相應的數據也將被刪除，請確認數據已備份" },
+                    { id: "allowExit", name: "退出團隊", value: "3", serverApi: "team/leave", msg: "退出後，您在當前團隊下的應用將不能再使用，相應的數據也將被刪除，請確認數據已備份" },
                   ]
                 }
               />

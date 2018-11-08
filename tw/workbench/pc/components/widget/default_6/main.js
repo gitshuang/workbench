@@ -46,13 +46,13 @@ class MyBill extends Component {
 			try {
 				leftData = getDataProObj(leftDataProp, getStatus);
 			} catch (e) {
-				console.log('属性计算错误：' + 'getStatus.' + leftDataProp);
+				console.log('屬性計算錯誤：' + 'getStatus.' + leftDataProp);
 			}
 			let rightData = 0;
 			try {
 				rightData = getDataProObj(rightDataProp, getStatus);
 			} catch (e) {
-				console.log('属性计算错误：' + 'getStatus.' + rightData);
+				console.log('屬性計算錯誤：' + 'getStatus.' + rightData);
 			}
 
 			this.setState({

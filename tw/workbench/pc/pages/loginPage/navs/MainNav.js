@@ -18,9 +18,7 @@ const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
-      {
-        namespace: 'home',
-      },
+      'currLan',
     ),
     {
       setCurrentNot,
@@ -74,7 +72,14 @@ class  MainNavPanel extends Component{
   }
 
   getCurrentLan = () => {
-    const { getCurrentNot,lanCallBack } = this.props;
+    const { getCurrentNot,lanCallBack,currLan} = this.props;
+    if(currLan){
+      this.setState({
+        defaultValue: currLan,
+      })
+      lanCallBack(currLan);
+      return false;
+    }
     getCurrentNot().then(({ error, payload }) => {
       if (error) {
         return;
@@ -85,7 +90,6 @@ class  MainNavPanel extends Component{
         lanCallBack(payload.langCode)
       });
     });
-    
   }
 
   onChangeLanguage = (value) => {
@@ -96,6 +100,7 @@ class  MainNavPanel extends Component{
       window.location.reload();
     });
   }
+
   open =(type)=>{
     if(type =='service'){
       this.props.activeIndex!=='2'&&  this.props.history.push('/service')
@@ -125,8 +130,8 @@ class  MainNavPanel extends Component{
           </div>
           <div className={middleCon}>
             <a  className={`middleItem ${this.props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{this.open('login')}}>首頁</a>
-            <a  className={`middleItem ${this.props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{this.open('service')}}>服務支援</a>
-            <a  className={`middleItem ${this.props.activeIndex*1 === 3?'actived':null}`} onClick={()=>{this.open('open')}}>開放平台</a>
+            <a  className={`middleItem ${this.props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{this.open('service')}}>服務支持</a>
+            <a  className={`middleItem ${this.props.activeIndex*1 === 3?'actived':null}`} onClick={()=>{this.open('open')}}>開放平臺</a>
             <a  className={`middleItem ${this.props.activeIndex*1 === 4?'actived':null}`} onClick={()=>{this.open('aboutus')}}>聯繫我們</a>
           </div>
           {

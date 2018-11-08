@@ -1,7 +1,7 @@
 import {getContext} from '@u';
 
 /**
- * 獲取hash地址#後面的路徑陣列
+ * 獲取hash地址#後面的路徑數組
  * @returns {string[]}
  */
 function getHashParameters() {
@@ -10,7 +10,7 @@ function getHashParameters() {
 }
 
 /**
- * 設置返回路徑陣列，僅供reducer使用
+ * 設置返回路徑數組，僅供reducer使用
  * @param backUrl
  */
 export function setBackUrl(backUrl) {
@@ -30,7 +30,7 @@ export function setBackUrl(backUrl) {
 }
 
 /**
- * 操作日志
+ * 操作日誌
  *
  * @param serviceCode
  */
@@ -42,7 +42,7 @@ export function pushYA(serviceCode) {
 }
 
 /**
- * 获取金额符号
+ * 獲取金額符號
  */
 export function getSumSign() {
 	const {locale} = getContext();

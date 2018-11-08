@@ -25,7 +25,9 @@ const { Option } = Select;
 
 @withRouter
 @connect(
-  mapStateToProps(),
+  mapStateToProps(
+    'currLan',
+  ),
   {
     requestStart,
     requestSuccess,
@@ -44,19 +46,20 @@ class CreateEnter extends Component {
       linkman: '',
       companyname:'',
       tenantTel:'',
+      defaultValue:{
+        province:'北京',
+        city:'北京',
+      }
     };
-    // this.address = '北京|北京|东城区|';
-    this.province = '北京';
-    this.city = '北京';
   }
-
   onChange = (obj) => {
-    // this.address = obj.province + obj.city;
-    this.province =  obj.province;
-    this.city= obj.city;
+    this.setState({
+        defaultValue:{
+          province:obj.province,
+          city:obj.city,
+        }
+    })
   }
-
-  
 
   setOptherData = (obj) => {
     this.state[obj.name] = obj.value;
@@ -200,18 +203,18 @@ class CreateEnter extends Component {
             method="blur"
             inline
           >
-            <CitySelect name="address" onChange={this.onChange} />
+            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang={this.props.currLan}/>
           </FormItem>
           <FormItem
             showMast={false}
-            labelName={<span>联系人<font color="red"> &nbsp;*&nbsp;</font></span>}
+            labelName={<span>聯繫人<font color="red"> &nbsp;*&nbsp;</font></span>}
             isRequire
             valuePropsName="value"
-            errorMessage="請輸入連絡人姓名"
+            errorMessage="請輸入聯繫人姓名"
             method="blur"
             inline
           >
-            <FormControl name="linkman" placeholder="請輸入連絡人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+            <FormControl name="linkman" placeholder="請輸入聯繫人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
           </FormItem>
 
           <FormItem

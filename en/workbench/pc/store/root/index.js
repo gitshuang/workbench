@@ -86,6 +86,7 @@ const defaultState = {
   frameParam: {
     
   },
+  currLan:'zh_CN',//当前的语言
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -216,7 +217,13 @@ const reducer = handleActions({
   [getCurrent]: state => state,
   [setCurrentNot]: state => state,
   [getAllEnableNot]: state => state,
-  [getCurrentNot]: state => state,
+  [getCurrentNot]: (state,{payload}) => {
+    // console.log('payload',payload.langCode)
+    return {
+      ...state,
+      currLan:payload.langCode
+    }
+  },
   [showDialog]: (state, {payload: dialogData}) => {
     let {type} = dialogData;
     const {title, msg} = dialogData;

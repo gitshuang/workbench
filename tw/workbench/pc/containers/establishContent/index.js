@@ -77,7 +77,7 @@ class EstablishContent extends Component {
                 <li>企業級組織架構管理</li>
                 <li>更嚴格的企業成員管理</li>
                 <li>基於管理角色的應用許可權管理</li>
-                <li>企業級統一基礎檔案與資料管控</li>
+                <li>企業級統一基礎檔案與數據管控</li>
                 <li>基礎假勤與薪資查詢服務</li>
                 <li>企業級應用市場提供全方位數位化服務入口</li>
               </ul>

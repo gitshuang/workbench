@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, getContext } from '@u';
 
 import Header from 'containers/header';
 import Breadcrumbs from 'components/breadcrumb';
@@ -84,6 +84,7 @@ class Enterprise extends Component {
 
   render() {
     const { userInfo } = this.props;
+    const { locale } = getContext();
     return (
       <div style={{ overflow: "hidden" }}>
         <div className="header um-header">
@@ -104,15 +105,19 @@ class Enterprise extends Component {
             <div className={enterTitle} >Create Enterprise</div>
             <hr className={hr} />
             <div className={enterCont} >
-              <EnterContent
-                userInfo={userInfo}
-                _from="create"
-                handleClickFn={this.handleClick}
-                buttonText="Create "
-                loadingDesc="Creating enterprise…"
-                uploadApplication={uploadApplication}
-                texts={texts}
-              />
+              {
+                Object.keys(userInfo).length > 0
+                ? <EnterContent
+                  userInfo={userInfo}
+                  _from="create"
+                  handleClickFn={this.handleClick}
+                  buttonText="Create "
+                  loadingDesc="Creating enterprise…"
+                  uploadApplication={uploadApplication}
+                  texts={texts}
+                  lang={locale}
+                /> : null
+              }
             </div>
           </div>
         </div>

@@ -58,7 +58,7 @@ class FinanceAnalysis extends Component {
 			try {
 				basicData = getDataProObj(dataProp, getStatus);
 			} catch (e) {
-				console.log('属性计算错误：' + 'getStatus.' + dataProp);
+				console.log('屬性計算錯誤：' + 'getStatus.' + dataProp);
 			}
 
 			this.setState({

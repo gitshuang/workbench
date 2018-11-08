@@ -142,7 +142,7 @@ class Invitation extends Component {
     document.execCommand('copy');
 
     Message.create({
-      content: '連結複製成功，趕快發送給你的小夥伴吧!', duration: 1.5, position: 'topLeft', color: 'success',
+      content: '鏈接複製成功，趕快發送給你的小夥伴吧!', duration: 1.5, position: 'topLeft', color: 'success',
     });
   }
 
@@ -161,7 +161,7 @@ class Invitation extends Component {
     const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
     if (mails.length <= 0) {
       Message.create({
-        content: '請輸入正確的郵寄地址!', duration: 1.5, position: 'topLeft', color: 'warning',
+        content: '請輸入正確的郵件地址!', duration: 1.5, position: 'topLeft', color: 'warning',
       });
     } else {
       const parent = { email: mails, message: message === '' ? '友空間-賦能個人、啟動組織' : message, creator };
@@ -211,7 +211,7 @@ class Invitation extends Component {
     /*
     const tip = (
       <div className={tootip}>
-        連結複製成功，趕快發送給你的小夥伴吧！
+        鏈接複製成功，趕快發送給你的小夥伴吧！
       </div>
     );
     */
@@ -235,13 +235,13 @@ class Invitation extends Component {
               onChange={this.callback}
               className="demo-tabs"
             >
-              <TabPane tab="連結邀請" key="1" className={tabPane1}>
-                <p>將連結發給小夥伴就可以啦</p>
+              <TabPane tab="鏈接邀請" key="1" className={tabPane1}>
+                <p>將鏈接發給小夥伴就可以啦</p>
                 <div className={urlArea}>
-                  <span>連結</span>
+                  <span>鏈接</span>
                   <input ref={(c) => { this.shortUrl = c; }} type="text" value={url} readOnly />
                 </div>
-                <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >複製連結</ButtonBrand>
+                <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >複製鏈接</ButtonBrand>
 
               </TabPane>
               <TabPane tab="郵件邀請" key="2" className={tabPane2}>
@@ -256,7 +256,7 @@ class Invitation extends Component {
                 <p>署名</p>
                 <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-                <p>輸入郵箱位址並用 “;” 隔開</p>
+                <p>輸入郵箱地址並用 “;” 隔開</p>
                 <TagsInput
                   value={this.state.mails}
                   addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
