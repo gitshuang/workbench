@@ -147,11 +147,18 @@ class Personals extends Component {
     //   });
 
     // });
-    this.getCompanyType();
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
     this.getDefaultLang();
+  }
+
+  componentDidUpdate() {
+    const { userInfo } = this.props;
+    if (Object.keys(userInfo).length === 0) {
+      return false;
+    }
+    this.getCompanyType(userInfo);
   }
 
   getAllEnableFunc = () => {
@@ -193,13 +200,11 @@ class Personals extends Component {
     });;
   }
 
-  getCompanyType = () => {
+  getCompanyType = (userInfo) => {
     const { tenantid } = window.diworkContext();
     const {
-      userInfo: {
-        allowTenants,
-      },
-    } = this.props;
+      allowTenants,
+    } = userInfo;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
     let currType = 1;
     if (curTenant && curTenant.type == 0) {
@@ -227,14 +232,14 @@ class Personals extends Component {
       openService('GZTSYS001');
       return false;
     }
-    if(action === "openHomepage"){
+    if (action === "openHomepage") {
       openHomePage({
         userId: userInfo.userId,
         key: 'honor'
       });
       return false;
     }
-    if(action === "openDynamic"){
+    if (action === "openDynamic") {
       openHomePage({
         userId: userInfo.userId,
         key: 'speak'
@@ -258,7 +263,7 @@ class Personals extends Component {
       icons,
       userInfo,
     } = this.props;
-    const {  language, hrefs, TeamData, currType } = this.state;
+    const { language, hrefs, TeamData, currType } = this.state;
     let { personalText } = this.state;
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
