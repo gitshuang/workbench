@@ -44,6 +44,7 @@ class Personals extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isGetUserInfo: false,
       currType: 0,
       userInfo: {},
       personalText: {
@@ -135,22 +136,31 @@ class Personals extends Component {
   }
 
   componentWillMount() {
-    const { getUserInfo } = this.props;
-    getUserInfo().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      this.setState({
-        userInfo: payload,
-      },()=>{
-        this.getCompanyType();
-      });
+    // const { getUserInfo } = this.props;
+    // getUserInfo().then(({ error, payload }) => {
+    //   if (error) {
+    //     return;
+    //   }
+    //   this.setState({
+    //     userInfo: payload,
+    //   },()=>{
+    //     this.getCompanyType();
+    //   });
 
-    });
+    // });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
     this.getDefaultLang();
+  }
+
+  componentDidUpdate() {
+    const { userInfo } = this.props;
+    const { isGetUserInfo } = this.state;
+    if (Object.keys(userInfo).length === 0 || isGetUserInfo) {
+      return false;
+    }
+    this.getCompanyType(userInfo);
   }
 
   getAllEnableFunc = () => {
@@ -192,20 +202,19 @@ class Personals extends Component {
     });;
   }
 
-  getCompanyType = () => {
+  getCompanyType = (userInfo) => {
     const { tenantid } = window.diworkContext();
     const {
-      userInfo: {
-        allowTenants,
-      },
-    } = this.state;
+      allowTenants,
+    } = userInfo;
     const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
     let currType = 1;
     if (curTenant && curTenant.type == 0) {
       currType = 0;
     }
     this.setState({
-      currType
+      currType,
+      isGetUserInfo: true,
     });
   }
 
@@ -220,20 +229,20 @@ class Personals extends Component {
   }
 
   dispatch = (action) => {
-    const { routers, currType, userInfo } = this.state;
-    const { history } = this.props;
+    const { routers, currType } = this.state;
+    const { history, userInfo } = this.props;
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
       return false;
     }
-    if(action === "openHomepage"){
+    if (action === "openHomepage") {
       openHomePage({
         userId: userInfo.userId,
         key: 'honor'
       });
       return false;
     }
-    if(action === "openDynamic"){
+    if (action === "openDynamic") {
       openHomePage({
         userId: userInfo.userId,
         key: 'speak'
@@ -254,9 +263,10 @@ class Personals extends Component {
     const {
       requestDisplay,
       exitModal,
-      icons
+      icons,
+      userInfo,
     } = this.props;
-    const { userInfo, language, hrefs, TeamData, currType } = this.state;
+    const { language, hrefs, TeamData, currType } = this.state;
     let { personalText } = this.state;
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
