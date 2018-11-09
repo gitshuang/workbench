@@ -126,6 +126,7 @@ const reducer = handleActions({
       menuItemName: name,
       service: {
         url,
+        lisenceBeforeOpen
       },
       serviceId,
       serviceCode,
@@ -147,7 +148,11 @@ const reducer = handleActions({
       setBackUrl(backUrl);
     }
     // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
-    const location = changeURLArg(url, 'serviceCode', serviceCode,);
+    const location = appendSearchParam(url, {
+      ...getOpenServiceData(serviceCode),
+      serviceCode,
+    });
+    // const location = changeURLArg(url, 'serviceCode', serviceCode,);
     if (curTab) {
       return {
         ...state,
@@ -155,7 +160,7 @@ const reducer = handleActions({
           ...defaultState.current,
           menuItemId: currentId,
 
-          url: current.service.lisenceBeforeOpen ? '' : location,
+          url: lisenceBeforeOpen ? '' : location,
           //   hasRelationFunc: state.current.hasRelationFunc,
           //   title: name,
           //   serviceCode,
@@ -171,7 +176,7 @@ const reducer = handleActions({
       current: {
         ...defaultState.current,
         menuItemId: currentId,
-        url: current.service.lisenceBeforeOpen ? '' : location,
+        url: lisenceBeforeOpen ? '' : location,
       },
       brm,
       backUrl,
@@ -248,11 +253,11 @@ const reducer = handleActions({
     if (!(relationServices && relationServices.length) && !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
-    // const location = appendSearchParam(url, {
-    //   ...getOpenServiceData(serviceCode),
-    //   serviceCode,
-    // });
-    const location = changeURLArg(url, 'serviceCode', serviceCode,);
+    const location = appendSearchParam(url, {
+      ...getOpenServiceData(serviceCode),
+      serviceCode,
+    });
+    // const location = changeURLArg(url, 'serviceCode', serviceCode,);
     //这里做一个兼容，工作页内iframe地址从getDetail获取
     let tab = {};
     if (tabs.length > 0) {
