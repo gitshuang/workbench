@@ -16,7 +16,6 @@ import { getContext, mapStateToProps } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
 
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
@@ -33,7 +32,6 @@ const {
   getPoll,
   getCurrentNot
 } = rootActions;
-const { getUserInfo } = homeActions;
 
 function timer(fn, time) {
   let timerId = 0;
@@ -65,7 +63,6 @@ const NoMatch = ({ history }) => {
     getServiceList,
     getMessage,
     getPoll,
-    getUserInfo,
     getCurrentNot,
   }
 )
@@ -81,7 +78,6 @@ class Root extends Component {
     getServiceList: PropTypes.func,
     getMessage: PropTypes.func,
     getPoll: PropTypes.func,
-    getUserInfo: PropTypes.func,
   };
   static defaultProps = {
     history: {},
@@ -91,7 +87,6 @@ class Root extends Component {
     getServiceList: () => { },
     getMessage: () => { },
     getPoll: () => { },
-    getUserInfo: () => { },
   };
   constructor(props) {
     super(props);
@@ -108,33 +103,25 @@ class Root extends Component {
     const {
       requestError,
       getServiceList,
-      getUserInfo,
       getPoll
     } = this.props;
-
-    // 请求用户信息  看看是否有租户
-    getUserInfo().then(({ error, payload }) => {
-      if (error) {
-        requestError(payload);
-      } else {
-        if (!payload.allowTenants.length) {
-          this.props.history.replace('/establish');
-        } else {
-          // 请求快捷应用
-          getServiceList().then(({ error, payload }) => {
-            if (error) {
-              requestError(payload);
-            }
-          });
-          IM(new componentTool('IM'), getContext(), { // eslint-disable-line
-            el: 'IM',
-          });
-          regMessageTypeHandler(this);
-          // 心跳
-          timer(getPoll, 10000);
+    const { tenantid } = getContext();
+    if (!tenantid) {
+      this.props.history.replace('/establish');
+    } else {
+      // 请求快捷应用
+      getServiceList().then(({ error, payload }) => {
+        if (error) {
+          requestError(payload);
         }
-      }
-    });
+      });
+      IM(new componentTool('IM'), getContext(), { // eslint-disable-line
+        el: 'IM',
+      });
+      regMessageTypeHandler(this);
+      // 心跳
+      timer(getPoll, 10000);
+    }
   }
 
   componentDidMount() {

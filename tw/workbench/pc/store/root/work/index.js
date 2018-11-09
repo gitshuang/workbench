@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
+import { appendSearchParam, changeURLArg } from "yutils/utils";
 import actions from './actions';
 import { setBackUrl } from 'yutils/utils'
 
@@ -53,17 +54,6 @@ const defaultState = {
   productInfo: {},
   pinGroup: []
 };
-
-function appendSearchParam(url, params) {
-  if (url) {
-    const urlObj = new URL(url);
-    Object.keys(params).forEach((name) => {
-      urlObj.searchParams.append(name, params[name]);
-    });
-    return urlObj.toString();
-  }
-  return url;
-}
 
 const reducer = handleActions({
   [addBrm]: (state, { payload: data }) => {
@@ -156,12 +146,16 @@ const reducer = handleActions({
     } else {
       setBackUrl(backUrl);
     }
+    // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
+    const location = changeURLArg(url, 'serviceCode', serviceCode,);
     if (curTab) {
       return {
         ...state,
         current: {
           ...defaultState.current,
           menuItemId: currentId,
+
+          url: current.service.lisenceBeforeOpen ? '' : location,
           //   hasRelationFunc: state.current.hasRelationFunc,
           //   title: name,
           //   serviceCode,
@@ -177,6 +171,7 @@ const reducer = handleActions({
       current: {
         ...defaultState.current,
         menuItemId: currentId,
+        url: current.service.lisenceBeforeOpen ? '' : location,
       },
       brm,
       backUrl,
@@ -184,7 +179,7 @@ const reducer = handleActions({
         id: currentId,
         serviceCode,
         name,
-        // location,
+        location,
       }].concat(tabs),
     };
   },
@@ -253,10 +248,11 @@ const reducer = handleActions({
     if (!(relationServices && relationServices.length) && !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
-    const location = appendSearchParam(url, {
-      ...getOpenServiceData(serviceCode),
-      serviceCode,
-    });
+    // const location = appendSearchParam(url, {
+    //   ...getOpenServiceData(serviceCode),
+    //   serviceCode,
+    // });
+    const location = changeURLArg(url, 'serviceCode', serviceCode,);
     //这里做一个兼容，工作页内iframe地址从getDetail获取
     let tab = {};
     if (tabs.length > 0) {
@@ -276,7 +272,6 @@ const reducer = handleActions({
         relationServices,
         ext1,
         url: location,
-
       },
       tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs))
     };

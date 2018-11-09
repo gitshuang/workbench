@@ -130,7 +130,6 @@ const reducer = handleActions({
       serviceId,
       serviceCode,
     } = current;
-    debugger;
     const curTab = tabs.find(({ id }) => id === currentId);
     const newBrm = [];
     menuPath.map(item =>
