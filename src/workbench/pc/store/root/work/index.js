@@ -149,10 +149,10 @@ const reducer = handleActions({
       setBackUrl(backUrl);
     }
     // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
-    const location = lisenceBeforeOpen || !isSetPro ? '' : appendSearchParam(url, {
+    const location = !lisenceBeforeOpen || isSetPro ? appendSearchParam(url, {
       ...getOpenServiceData(serviceCode),
       serviceCode,
-    });
+    }) : '';
     if (curTab) {
       return {
         ...state,
