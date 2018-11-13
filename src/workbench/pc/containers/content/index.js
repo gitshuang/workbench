@@ -6,7 +6,7 @@ import { mapStateToProps } from '@u';
 import { content, contentArea, active, load } from './style.css';
 import IFrame from 'components/iframe';
 import { withRouter } from 'react-router-dom';
-import FinanceCloudContent from 'components/financeCloud'
+// import FinanceCloudContent from 'components/financeCloud'
 
 import workActions from 'store/root/work/actions';
 const { getPinGroup } = workActions;
@@ -120,13 +120,13 @@ class ContentContainer extends Component {
     if (type === 4) {
       return (
         <div className={`${content} ${active}`}>
-          <FinanceCloudContent
+          {/* <FinanceCloudContent
             onLoad={getPinGroup}
             env={process.env.NODE_ENV}
             current={{ ...current, extendDesc: current.ext1 }}
             menuItems={menus}
             updateCurrent={this.updateCurrent}
-          />
+          /> */}
         </div>
       );
     }
