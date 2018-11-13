@@ -3,7 +3,6 @@ import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { dispatch, trigger } from 'public/componentTools';
-import { openHomePage } from 'public/regMessageTypeHandler';
 import { Search } from 'diwork-business-components';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
@@ -55,10 +54,6 @@ class SearchContainer extends Component {
     });
   }
 
-  openHomepage = (userId) => {
-    openHomePage({userId});
-  }
-
   render() {
     const { SearchSuggestList } = this.props;
     const { searchText } = this.state;
@@ -72,7 +67,6 @@ class SearchContainer extends Component {
         dispatch={dispatch}
         trigger={trigger} 
         searchText={searchText}
-        handleClick={this.openHomepage}
       />
     );
   }

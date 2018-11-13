@@ -52,7 +52,8 @@ const defaultState = {
   widthBrm: true,
   backUrl: [],
   productInfo: {},
-  pinGroup: []
+  pinGroup: [],
+  isSetPro: false,  // 是否是从外边通过getProductinfo进来的 第一次显示
 };
 
 const reducer = handleActions({
@@ -115,7 +116,7 @@ const reducer = handleActions({
     };
   },
   [changeService]: (state, { payload: code }) => {
-    const { menus, tabs, backUrl } = state;
+    const { menus, tabs, backUrl, isSetPro } = state;
     const menuPath = findPath(menus, 'children', 'serviceCode', code);
     const current = menuPath.slice(-1)[0];
     if (!current) {
@@ -148,19 +149,17 @@ const reducer = handleActions({
       setBackUrl(backUrl);
     }
     // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
-    const location = appendSearchParam(url, {
+    const location = !lisenceBeforeOpen || isSetPro ? appendSearchParam(url, {
       ...getOpenServiceData(serviceCode),
       serviceCode,
-    });
-    // const location = changeURLArg(url, 'serviceCode', serviceCode,);
+    }) : '';
     if (curTab) {
       return {
         ...state,
         current: {
           ...defaultState.current,
           menuItemId: currentId,
-
-          url: lisenceBeforeOpen ? '' : location,
+          url: location,
           //   hasRelationFunc: state.current.hasRelationFunc,
           //   title: name,
           //   serviceCode,
@@ -176,7 +175,7 @@ const reducer = handleActions({
       current: {
         ...defaultState.current,
         menuItemId: currentId,
-        url: lisenceBeforeOpen ? '' : location,
+        url: location,
       },
       brm,
       backUrl,
@@ -278,7 +277,8 @@ const reducer = handleActions({
         ext1,
         url: location,
       },
-      tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs))
+      tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs)),
+      isSetPro: false,
     };
   },
   [setProductInfo]: (state, { payload: productInfo }) => {
@@ -313,7 +313,8 @@ const reducer = handleActions({
       type,
       pinType,
       tabs: [],
-      productInfo
+      productInfo,
+      isSetPro: true,
     };
   },
   [titleServiceDisplay]: state => ({

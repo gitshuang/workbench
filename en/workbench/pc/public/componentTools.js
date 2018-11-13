@@ -7,6 +7,7 @@ const openInterface = {
   onMessage: true,
   hideIm: true,
   logout: true,
+  openHomePage: true,
 };
 
 function dispatch(action, params) {
