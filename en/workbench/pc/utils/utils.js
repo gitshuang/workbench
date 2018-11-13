@@ -1,4 +1,4 @@
-import {getContext} from '@u';
+import { getContext } from '@u';
 
 /**
  * ObtainhashAddress#Path array below
@@ -35,7 +35,7 @@ export function setBackUrl(backUrl) {
  * @param serviceCode
  */
 export function pushYA(serviceCode) {
-	const {profile, tenantid, userid} = getContext();
+	const { profile, tenantid, userid } = getContext();
 	if (window._ya) {
 		window._ya.push(['_trackEvent', 'operator', 'profile|userId|tenantId|serviceCode', profile + '|' + userid + '|' + tenantid + '|' + serviceCode]);
 	}
@@ -45,7 +45,7 @@ export function pushYA(serviceCode) {
  * Obtain Amt Sign
  */
 export function getSumSign() {
-	const {locale} = getContext();
+	const { locale } = getContext();
 	switch (locale) {
 		case 'zh_CN':
 			return '￥';
@@ -63,12 +63,28 @@ export function appendSearchParam(url, params) {
 	if (!params) {
 		return url;
 	}
-  if (url) {
-    const urlObj = new URL(url);
-    Object.keys(params).forEach((name) => {
-      urlObj.searchParams.append(name, params[name]);
-    });
-    return urlObj.toString();
-  }
-  return url;
+	if (url) {
+		const urlObj = new URL(url);
+		Object.keys(params).forEach((name) => {
+			urlObj.searchParams.append(name, params[name]);
+		});
+		return urlObj.toString();
+	}
+	return url;
+}
+
+export function changeURLArg(url, arg, arg_val) {
+	var pattern = arg + '=([^&]*)';
+	var replaceText = arg + '=' + arg_val;
+	if (url.match(pattern)) {
+		var tmp = '/(' + arg + '=)([^&]*)/gi';
+		tmp = url.replace(eval(tmp), replaceText);
+		return tmp;
+	} else {
+		if (url.match('[\?]')) {
+			return url + '&' + replaceText;
+		} else {
+			return url + '?' + replaceText;
+		}
+	}
 }

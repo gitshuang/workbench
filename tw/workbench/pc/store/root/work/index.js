@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { findPath } from '@u';
 import { getOpenServiceData } from 'public/regMessageTypeHandler';
+import { appendSearchParam, changeURLArg } from "yutils/utils";
 import actions from './actions';
 import { setBackUrl } from 'yutils/utils'
 
@@ -51,19 +52,9 @@ const defaultState = {
   widthBrm: true,
   backUrl: [],
   productInfo: {},
-  pinGroup: []
+  pinGroup: [],
+  isSetPro: false,  // 是否是从外边通过getProductinfo进来的 第一次显示
 };
-
-function appendSearchParam(url, params) {
-  if (url) {
-    const urlObj = new URL(url);
-    Object.keys(params).forEach((name) => {
-      urlObj.searchParams.append(name, params[name]);
-    });
-    return urlObj.toString();
-  }
-  return url;
-}
 
 const reducer = handleActions({
   [addBrm]: (state, { payload: data }) => {
@@ -125,7 +116,7 @@ const reducer = handleActions({
     };
   },
   [changeService]: (state, { payload: code }) => {
-    const { menus, tabs, backUrl } = state;
+    const { menus, tabs, backUrl, isSetPro } = state;
     const menuPath = findPath(menus, 'children', 'serviceCode', code);
     const current = menuPath.slice(-1)[0];
     if (!current) {
@@ -136,6 +127,7 @@ const reducer = handleActions({
       menuItemName: name,
       service: {
         url,
+        lisenceBeforeOpen
       },
       serviceId,
       serviceCode,
@@ -156,12 +148,18 @@ const reducer = handleActions({
     } else {
       setBackUrl(backUrl);
     }
+    // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
+    const location = !lisenceBeforeOpen || isSetPro ? appendSearchParam(url, {
+      ...getOpenServiceData(serviceCode),
+      serviceCode,
+    }) : '';
     if (curTab) {
       return {
         ...state,
         current: {
           ...defaultState.current,
           menuItemId: currentId,
+          url: location,
           //   hasRelationFunc: state.current.hasRelationFunc,
           //   title: name,
           //   serviceCode,
@@ -177,6 +175,7 @@ const reducer = handleActions({
       current: {
         ...defaultState.current,
         menuItemId: currentId,
+        url: location,
       },
       brm,
       backUrl,
@@ -184,7 +183,7 @@ const reducer = handleActions({
         id: currentId,
         serviceCode,
         name,
-        // location,
+        location,
       }].concat(tabs),
     };
   },
@@ -257,6 +256,7 @@ const reducer = handleActions({
       ...getOpenServiceData(serviceCode),
       serviceCode,
     });
+    // const location = changeURLArg(url, 'serviceCode', serviceCode,);
     //这里做一个兼容，工作页内iframe地址从getDetail获取
     let tab = {};
     if (tabs.length > 0) {
@@ -276,9 +276,9 @@ const reducer = handleActions({
         relationServices,
         ext1,
         url: location,
-
       },
-      tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs))
+      tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs)),
+      isSetPro: false,
     };
   },
   [setProductInfo]: (state, { payload: productInfo }) => {
@@ -313,7 +313,8 @@ const reducer = handleActions({
       type,
       pinType,
       tabs: [],
-      productInfo
+      productInfo,
+      isSetPro: true,
     };
   },
   [titleServiceDisplay]: state => ({
