@@ -24,8 +24,10 @@ import {
 
 import applicationActions from 'store/root/application/actions';
 import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
 const { getAllApplicationList } = applicationActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
+const { getUserInfo } = homeActions;
 @withRouter
 @connect(
   mapStateToProps(
@@ -39,6 +41,7 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     requestSuccess,
     requestError,
     getAllApplicationList,
+    getUserInfo
   }
 )
 
@@ -65,8 +68,10 @@ class serviceClassify extends Component {
       requestSuccess,
       requestError,
       getAllApplicationList,
+      getUserInfo
     } = this.props;
     requestStart();
+    getUserInfo();
     getAllApplicationList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
@@ -255,22 +260,23 @@ class serviceClassify extends Component {
     const list = this.renderList();
     const tabs = this.renderTabs();
     const _appType = this.getCompanyType();
+    const { locale } = window.diworkContext();
 
     return (
       <div className={bg + " um-vbox"}>
         <div className={bg_wrap + " um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div style={{overflow: "hidden"}}>
-            <SearchInput
-              onKeyDown={this.onKeyup}
-              onChange={this.inputOnChange}
-              keywords={value}
-              onClick={this.btnSearch}
-              placeholder="搜索应用"
-              btnText="搜索"
-              classname={left}
-            />
-            {_appType ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand> : null}
+            <div style={{ overflow: "hidden" }}>
+              <SearchInput
+                onKeyDown={this.onKeyup}
+                onChange={this.inputOnChange}
+                keywords={value}
+                onClick={this.btnSearch}
+                placeholder="搜索应用"
+                btnText="搜索"
+                classname={left}
+              />
+              {_appType && locale === "zh_CN" ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand> : null}
             </div>
             <div className={um_content}>
               <div>
