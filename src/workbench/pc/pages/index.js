@@ -100,7 +100,7 @@ class Root extends Component {
       defaultLan: 'zh_CN',//默认是中文
     };
     this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin()) || process.env.LOCALHOST;
-    this.userInfo = window.getUserInfo();
+    this.userInfo = window.getUserInfo && window.getUserInfo();
   }
   componentWillMount() {
     if (!this.isLogin) {
