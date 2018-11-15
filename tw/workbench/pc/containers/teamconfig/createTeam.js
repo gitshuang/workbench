@@ -81,7 +81,7 @@ class CreateTeam extends Component {
   }
 
   checkForm = (flag, data) => {
-    const { createTeam } = this.props;
+    const { createTeam, changeTenantName } = this.props;
     const { logo, tenantId, joinPermission, invitePermission, allowExit, isWaterMark } = this.state;
 
     let _logo = data.find((da) => da.name == "logo");
@@ -127,6 +127,7 @@ class CreateTeam extends Component {
           requestError(payload);
           return;
         }
+        changeTenantName(payload.tenantName);
         requestSuccess();
         openMess({
           content: '保存成功',

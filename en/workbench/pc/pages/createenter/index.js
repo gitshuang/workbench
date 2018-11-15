@@ -31,7 +31,7 @@ import 'assets/style/Form.css';
     requestStart,
     requestSuccess,
     requestError,
-    setCreateEnter
+    setCreateEnter,
   },
 )
 class Enterprise extends Component {
@@ -52,6 +52,10 @@ class Enterprise extends Component {
     super(props);
     this.state = {
     };
+  }
+
+  componentWillMount() {
+ 
   }
 
   goBack = () => {

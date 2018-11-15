@@ -132,15 +132,15 @@ class CreateTeamContent extends Component {
       pagesize: 10,
       dataPerPageNum: 10,
       dataNumSelect: [
-        { id: 0, name: '5條/頁',value:5},
-        { id: 1, name: '10條/頁', value:10},
-        { id: 2, name: '15條/頁',value:15 },
-        { id: 3, name: '20條/頁',value:20 }
+        { id: 0, name: '5條/頁', value: 5 },
+        { id: 1, name: '10條/頁', value: 10 },
+        { id: 2, name: '15條/頁', value: 15 },
+        { id: 3, name: '20條/頁', value: 20 }
       ],
-      dataNum:1,
-      enhancedPaginationText:{
-        jump:'跳至',
-        jumpPage:'頁'
+      dataNum: 1,
+      enhancedPaginationText: {
+        jump: '跳至',
+        jumpPage: '頁'
       }
     }
   }
@@ -153,6 +153,10 @@ class CreateTeamContent extends Component {
 
   componentDidMount() {
 
+  }
+
+  changeTenantName = (value) => {
+    this.setState({tenantName: value});
   }
 
   // 查询基础设置
@@ -407,7 +411,7 @@ class CreateTeamContent extends Component {
     // 点击搜索之后设置点击为true  从而判断点击分页是查询整还是搜索结果
     const { searchVal, onlyAdmin } = this.state;
     this.clickValue = searchVal;
-    this.setState({dataNum:1,dataPerPageNum:10, activePage:1},()=>{
+    this.setState({ dataNum: 1, dataPerPageNum: 10, activePage: 1 }, () => {
       this.queryUser(searchVal, onlyAdmin);
     })
   }
@@ -451,7 +455,7 @@ class CreateTeamContent extends Component {
     const { searchVal, value, activetab, activePage } = this.state;
     this.setState({
       dataPerPageNum: dataPerPageNum,
-      dataNum:id,
+      dataNum: id,
     }, function () {
       if (activetab == 'other') {
         this.queryUser(searchVal, 5, activePage, dataPerPageNum)
@@ -582,16 +586,17 @@ class CreateTeamContent extends Component {
 
 
   render() {
-    const { managerModal, removeModal, upgradeModal, transferModal } = this.props;
+    const { managerModal, removeModal, upgradeModal, transferModal, userInfo } = this.props;
+    if (Object.keys(userInfo).length === 0) return null;
     return (
       <div className={wrap}>
         <div className={header}>
           <h2>{this.state.tenantName}</h2>
           <div className="um-box um-box-center">
-            <div style={{float:"left"}}>
+            <div style={{ float: "left" }}>
               <Button onClick={this.openUpgradeModal}>升級為企業</Button>
             </div>
-            <div style={{float:"left"}}>
+            <div style={{ float: "left" }}>
               {/* <Dropdown
                 trigger={['click']}
                 overlay={menu1}
@@ -621,7 +626,7 @@ class CreateTeamContent extends Component {
           >
             <TabPane tab='基礎設置' key="1">
               <div >
-                <CreateTeam />
+                <CreateTeam changeTenantName={this.changeTenantName}/>
               </div>
             </TabPane>
             <TabPane tab='團隊應用' key="2">

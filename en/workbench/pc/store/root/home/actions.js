@@ -7,6 +7,7 @@ import { getUserInfo, getEnterInfo, getWorkList,
 
 const {
   GET_USER_INFO,
+  SET_USER_INFO,
   GET_ENTER_INFO,
   GET_WORK_LIST,
   CHANGE_REQUEST_DISPLAY,
@@ -32,6 +33,7 @@ export default createActions(
     [GET_APPLICATION_LIST]: getApplicationList,
     [CLEAR_APPLICATION_TIPS]:clearApplicationTips,
   },
+  SET_USER_INFO,
   CHANGE_REQUEST_DISPLAY,
   CLOSE_REQUEST_DISPLAY,
   OPEN_FOLDER,
