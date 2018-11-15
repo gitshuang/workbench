@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { mapStateToProps } from '@u';
 
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
 import TeamconfigContent from 'containers/teamconfig';
-import homeActions from 'store/root/home/actions';
-const { getUserInfo } = homeActions;
 
 @withRouter
-@connect(mapStateToProps(), { getUserInfo })
 class Teamconfig extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -29,8 +24,7 @@ class Teamconfig extends Component {
   }
 
   componentWillMount() {
-    const { getUserInfo } = this.props;
-    getUserInfo();
+
   }
 
   goBack = () => {

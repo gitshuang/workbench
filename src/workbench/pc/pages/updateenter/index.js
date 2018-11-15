@@ -15,7 +15,7 @@ import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { setCreateEnter, getUserInfo } = homeActions;
+const { setCreateEnter } = homeActions;
 const { getTeamInfo } = teamconfigActions;
 
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
@@ -35,7 +35,6 @@ import 'assets/style/Form.css';
     requestError,
     getTeamInfo, // 获取团队基础信息
     setCreateEnter,
-    getUserInfo
   },
 )
 class Updateenter extends Component {
@@ -61,8 +60,7 @@ class Updateenter extends Component {
   }
 
   componentWillMount() {
-    const { getTeamInfo, requestError, requestSuccess, getUserInfo } = this.props;
-    getUserInfo();
+    const { getTeamInfo, requestError, requestSuccess } = this.props;
     getTeamInfo().then(({ error, payload }) => {
       if (error) {
         requestError(payload);

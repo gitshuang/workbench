@@ -27,7 +27,6 @@ import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 const { getAllApplicationList } = applicationActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { getUserInfo } = homeActions;
 @withRouter
 @connect(
   mapStateToProps(
@@ -41,7 +40,6 @@ const { getUserInfo } = homeActions;
     requestSuccess,
     requestError,
     getAllApplicationList,
-    getUserInfo
   }
 )
 
@@ -68,10 +66,8 @@ class serviceClassify extends Component {
       requestSuccess,
       requestError,
       getAllApplicationList,
-      getUserInfo
     } = this.props;
     requestStart();
-    getUserInfo();
     getAllApplicationList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);

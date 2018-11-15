@@ -3,6 +3,7 @@ import actions from './actions';
 
 const {
   getUserInfo,
+  setUserInfo,
   getEnterInfo,
   getWorkList,
   changeRequestDisplay,
@@ -52,6 +53,7 @@ const reducer = handleActions({
       userInfo: payload,
     };
   },
+  [setUserInfo]: createReducer('userInfo'),
   [getEnterInfo]: createReducer('enterInfo'),
   [getWorkList]: (state, { payload, error }) => {
     if (error) {

@@ -14,7 +14,7 @@ import { texts } from 'yutils/entertext';
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { setCreateEnter, getUserInfo } = homeActions;
+const { setCreateEnter } = homeActions;
 
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
 import 'assets/style/Form.css';
@@ -32,7 +32,6 @@ import 'assets/style/Form.css';
     requestSuccess,
     requestError,
     setCreateEnter,
-    getUserInfo
   },
 )
 class Enterprise extends Component {
@@ -56,8 +55,7 @@ class Enterprise extends Component {
   }
 
   componentWillMount() {
-    const { getUserInfo } = this.props;
-    getUserInfo();
+ 
   }
 
   goBack = () => {

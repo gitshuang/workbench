@@ -16,6 +16,7 @@ import { getContext, mapStateToProps } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 
 import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
 
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
@@ -32,6 +33,7 @@ const {
   getPoll,
   getCurrentNot
 } = rootActions;
+const { setUserInfo, } = homeActions;
 
 function timer(fn, time) {
   let timerId = 0;
@@ -63,6 +65,7 @@ const NoMatch = ({ history }) => {
     getServiceList,
     getMessage,
     getPoll,
+    setUserInfo,
     getCurrentNot,
   }
 )
@@ -78,6 +81,7 @@ class Root extends Component {
     getServiceList: PropTypes.func,
     getMessage: PropTypes.func,
     getPoll: PropTypes.func,
+    setUserInfo: PropTypes.func,
   };
   static defaultProps = {
     history: {},
@@ -87,6 +91,7 @@ class Root extends Component {
     getServiceList: () => { },
     getMessage: () => { },
     getPoll: () => { },
+    setUserInfo: () => { },
   };
   constructor(props) {
     super(props);
@@ -95,6 +100,7 @@ class Root extends Component {
       defaultLan: 'zh_CN',//默认是中文
     };
     this.isLogin = (window.os_fe_isLogin && window.os_fe_isLogin()) || process.env.LOCALHOST;
+    this.userInfo = window.getUserInfo();
   }
   componentWillMount() {
     if (!this.isLogin) {
@@ -103,12 +109,15 @@ class Root extends Component {
     const {
       requestError,
       getServiceList,
-      getPoll
+      getPoll,
+      setUserInfo
     } = this.props;
     const { tenantid } = getContext();
     if (!tenantid) {
       this.props.history.replace('/establish');
     } else {
+
+      setUserInfo(this.userInfo);
       // 请求快捷应用
       getServiceList().then(({ error, payload }) => {
         if (error) {

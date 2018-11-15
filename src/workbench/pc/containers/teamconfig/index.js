@@ -155,6 +155,10 @@ class CreateTeamContent extends Component {
 
   }
 
+  changeTenantName = (value) => {
+    this.setState({tenantName: value});
+  }
+
   // 查询基础设置
   queryBasicConfig = () => {
     const { getTeamInfo, requestError, requestSuccess } = this.props;
@@ -622,7 +626,7 @@ class CreateTeamContent extends Component {
           >
             <TabPane tab='基础设置' key="1">
               <div >
-                <CreateTeam />
+                <CreateTeam changeTenantName={this.changeTenantName}/>
               </div>
             </TabPane>
             <TabPane tab='团队应用' key="2">
