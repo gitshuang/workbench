@@ -78,15 +78,43 @@ class Home extends Component {
       },
       lazyLoadNum: -1,
       homemark: false,
-      newAppNum:0,// 判断应用开通时间在7天(含)之内
-      willExpiredNum:0,// 即将过期应用个数
-      expiredNum:0,//过期应用个数 
+      newAppNum: 0,// 判断应用开通时间在7天(含)之内
+      willExpiredNum: 0,// 即将过期应用个数
+      expiredNum: 0,//过期应用个数 
       applications: [],
     };
     this.updateViewport = this.updateViewport.bind(this);
   }
 
   componentWillMount() {
+
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.updateViewport, false);
+    window.addEventListener('resize', this.updateViewport, false);
+    this.updateViewport();
+    this.getWorkList();
+    this.getApplicationList();
+  }
+
+  componentDidUpdate() {
+    let total = 0;
+    this.props.workList.forEach((v) => {
+      total += v.children.length;
+    });
+    if (this.state.lazyLoadNum === total) {
+      window.removeEventListener('scroll', this.updateViewport);
+      window.removeEventListener('resize', this.updateViewport);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.updateViewport);
+    window.removeEventListener('resize', this.updateViewport);
+  }
+
+  getWorkList = () => {
     const {
       requestStart, requestSuccess, requestError, getWorkList,
     } = this.props;
@@ -106,22 +134,8 @@ class Home extends Component {
       requestSuccess();
     });
   }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.updateViewport, false);
-    window.addEventListener('resize', this.updateViewport, false);
-    this.updateViewport();
-  }
-
-  componentDidUpdate() {
-    let total = 0;
-    this.props.workList.forEach((v) => {
-      total += v.children.length;
-    });
-    if (this.state.lazyLoadNum === total) {
-      window.removeEventListener('scroll', this.updateViewport);
-      window.removeEventListener('resize', this.updateViewport);
-    }
+  
+  getApplicationList = () => {
     // 请求应用   判断是否有过期应用功能
     const {
       getApplicationList,
@@ -141,8 +155,8 @@ class Home extends Component {
         this.setState({
           applications: payload.expiTip.applications,
         });
-        let {willExpiredNum,expiredNum} = this.forTime(payload.expiTip.applications)
-        if (willExpiredNum || expiredNum || payload.addTip ) {
+        let { willExpiredNum, expiredNum } = this.forTime(payload.expiTip.applications)
+        if (willExpiredNum || expiredNum || payload.addTip) {
           this.setState({
             homemark: true,
             newAppNum: payload.addTip || 0,
@@ -153,11 +167,6 @@ class Home extends Component {
         requestSuccess();
       });
     }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.updateViewport);
-    window.removeEventListener('resize', this.updateViewport);
   }
 
   totalTime = () => {
@@ -189,14 +198,14 @@ class Home extends Component {
         type = true;
         ++willExpiredNum;
         // break;
-      }else if (currTime > time) {
+      } else if (currTime > time) {
         type = true;
         ++expiredNum;
         // break;
       }
     };
     // return type;
-    return {willExpiredNum,expiredNum};
+    return { willExpiredNum, expiredNum };
   }
 
   updateViewport = () => {
@@ -222,7 +231,7 @@ class Home extends Component {
   })()
 
   linkTo = () => {
-    const {clearApplicationTips} = this.props;
+    const { clearApplicationTips } = this.props;
     clearApplicationTips().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
