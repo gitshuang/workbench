@@ -53,7 +53,15 @@ const reducer = handleActions({
       userInfo: payload,
     };
   },
-  [setUserInfo]: createReducer('userInfo'),
+  [setUserInfo]: (state, { payload, }) => {
+    payload.allowTenants.forEach((da) => {
+      da.type = da.team;// 需求变更，废弃team字段。
+    });
+    return {
+      ...state,
+      userInfo: payload,
+    };
+  },
   [getEnterInfo]: createReducer('enterInfo'),
   [getWorkList]: (state, { payload, error }) => {
     if (error) {

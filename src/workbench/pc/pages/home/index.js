@@ -98,7 +98,9 @@ class Home extends Component {
     window.addEventListener('scroll', this.updateViewport, false);
     window.addEventListener('resize', this.updateViewport, false);
     this.updateViewport();
+    // 请求列表
     this.getWorkList();
+    // 判断是否到期应用，包含多少个到期应用
     this.getApplicationList();
   }
 
