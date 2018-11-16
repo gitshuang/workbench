@@ -60,6 +60,7 @@ class Home extends Component {
     getWorkList: PropTypes.func,
     workList: PropTypes.arrayOf(PropTypes.object),
     getApplicationList: PropTypes.func,
+    userInfo: PropTypes.shape({}),
   };
   static defaultProps = {
     requestStart: () => { },
@@ -68,6 +69,9 @@ class Home extends Component {
     getWorkList: () => { },
     getApplicationList: () => { },
     workList: [],
+    userInfo: {
+      admin: false,
+    },
   };
   constructor(props) {
     super(props);
