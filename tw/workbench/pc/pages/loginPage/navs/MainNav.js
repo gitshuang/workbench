@@ -65,6 +65,7 @@ class  MainNavPanel extends Component{
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
+      console.log('languageList',languageListVal,'defaultValue',currentLan)
       this.setState({
         languageList: languageListVal,
         defaultValue: currentLan,
