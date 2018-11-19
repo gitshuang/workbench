@@ -14,7 +14,7 @@ import{
   languageClass,
 } from './MainNav.css';
 import LogoSvg from './logoen.svg';
-const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
+const { setCurrentNot } = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
@@ -64,6 +64,7 @@ class  MainNavPanel extends Component{
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
+      console.log(languageListVal,currentLan)
       this.setState({
         languageList: languageListVal,
         defaultValue: currentLan,
