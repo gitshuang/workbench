@@ -246,7 +246,8 @@ const reducer = handleActions({
     } = serviceInfo;
     const {
       current,
-      tabs
+      tabs,
+      isSetPro
     } = state;
     let hasRelationFunc = true;
     if (!(relationServices && relationServices.length) && !(relationUsers && relationUsers.length)) {
@@ -263,20 +264,24 @@ const reducer = handleActions({
       tab = tabs.shift();
       tab.location = location;
     }
+    const newCurr = {
+      ...current,
+      title: serviceName,
+      serviceCode,
+      serviceId,
+      hasRelationFunc,
+      relationUsers,
+      relationServices,
+      ext1,
+      // url: location,
+    }
+    if(!isSetPro){
+      newCurr.url = location;
+    }
     return {
       ...state,
       pinType: hasWidget,
-      current: {
-        ...current,
-        title: serviceName,
-        serviceCode,
-        serviceId,
-        hasRelationFunc,
-        relationUsers,
-        relationServices,
-        ext1,
-        url: location,
-      },
+      current: newCurr,
       tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs)),
       isSetPro: false,
     };
