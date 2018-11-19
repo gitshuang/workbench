@@ -141,14 +141,10 @@ class Root extends Component {
 
   getCurrentLan = () => {
     // const { getCurrentNot } = this.props;
-    let langArr = window.getEnableLangVOs && window.getEnableLangVOs();
-    if(langArr.length){
+    let currentLan = window.getCurrentLangCode && window.getCurrentLangCode();
+    if(currentLan){
         // 减少ajax请求
-        langArr.map(item=>{
-          if(item.default){
-            this.setState({ defaultLan: item.langCode, lanAjax: true });
-          }
-        });
+        this.setState({ defaultLan: currentLan, lanAjax: true });
         return false;
     }
     // getCurrentNot().then(({ error, payload }) => {

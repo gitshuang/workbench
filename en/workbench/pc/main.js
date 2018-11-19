@@ -16,7 +16,12 @@ const osFeLoginCallBack = () =>{
 //   {"default":true,"dislpayName":"English","enabled":true,"id":"7761a8d9-2d62-4c1c-ab18-5a84f29afb5d","langCode":"en_US","langSequence":2},
 //   {"default":false,"dislpayName":"繁体中文","enabled":true,"id":"8d255f23-83b8-490b-b620-f17dea0ed20f","langCode":"zh_TW","langSequence":3}];
 // }
+// function getCurrentLangCode() {
+//   return 'zh_CN';
+// }
+
 // window.getEnableLangVOs = getEnableLangVOs;
+// window.getCurrentLangCode = getCurrentLangCode;
 window.React = React;
 window.ReactDOM = ReactDOM;
 window.os_fe_loginCallback= osFeLoginCallBack;
