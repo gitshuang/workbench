@@ -56,7 +56,7 @@ class  MainNavPanel extends Component{
   getAllEnableFunc = () => {
     let allLanArr = window.getEnableLangVOs && window.getEnableLangVOs();
     let languageListVal = [],currentLan;
-    if (allLanArr.length) {
+    if (allLanArr && allLanArr.length) {
       allLanArr.map((item) => {
         if(item.default){
           currentLan = item.langCode;
@@ -67,7 +67,7 @@ class  MainNavPanel extends Component{
       this.setState({
         languageList: languageListVal,
         defaultValue: currentLan,
-      }, () => { lanCallBack(currentLan) })
+      }, () => { this.props.lanCallBack(currentLan) })
     }
   }
 
