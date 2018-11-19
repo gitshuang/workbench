@@ -148,35 +148,38 @@ const reducer = handleActions({
     } else {
       setBackUrl(backUrl);
     }
-    // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
-    const location = !lisenceBeforeOpen || isSetPro ? appendSearchParam(url, {
-      ...getOpenServiceData(serviceCode),
-      serviceCode,
-    }) : '';
+
+    const newCurr = {
+      ...defaultState.current,
+      menuItemId: currentId,
+      //   url: location,
+      //   hasRelationFunc: state.current.hasRelationFunc,
+      //   title: name,
+      //   serviceCode,
+      //   serviceId,
+      //   ext1: state.current.ext1
+    }
+
+    if(!lisenceBeforeOpen || isSetPro){
+      // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
+      const location = appendSearchParam(url, {
+        ...getOpenServiceData(serviceCode),
+        serviceCode,
+      });
+      newCurr.url = location;
+    }
+    
     if (curTab) {
       return {
         ...state,
-        current: {
-          ...defaultState.current,
-          menuItemId: currentId,
-          url: location,
-          //   hasRelationFunc: state.current.hasRelationFunc,
-          //   title: name,
-          //   serviceCode,
-          //   serviceId,
-          //   ext1: state.current.ext1
-        },
+        current: newCurr,
         brm,
         backUrl
       };
     }
     return {
       ...state,
-      current: {
-        ...defaultState.current,
-        menuItemId: currentId,
-        url: location,
-      },
+      current: newCurr,
       brm,
       backUrl,
       tabs: [{
@@ -254,10 +257,7 @@ const reducer = handleActions({
     if (!(relationServices && relationServices.length) && !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
-    const location = appendSearchParam(url, {
-      ...getOpenServiceData(serviceCode),
-      serviceCode,
-    });
+
     // const location = changeURLArg(url, 'serviceCode', serviceCode,);
     //这里做一个兼容，工作页内iframe地址从getDetail获取
     let tab = {};
@@ -277,7 +277,11 @@ const reducer = handleActions({
       // url: location,
     }
     // 当不是第一次加载，并且是默认需要获取详情的url
-    if(!isSetPro && lisenceBeforeOpen){
+    if (!isSetPro && lisenceBeforeOpen) {
+      const location = appendSearchParam(url, {
+        ...getOpenServiceData(serviceCode),
+        serviceCode,
+      });
       newCurr.url = location;
     }
     return {
