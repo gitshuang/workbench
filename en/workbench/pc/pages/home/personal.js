@@ -163,8 +163,8 @@ class Personals extends Component {
   getAllEnableFunc = () => {
     const{locale,multilist} = window.diworkContext();
     let languageListVal = [];
-    if (multilist && multilist.length) {
-      multilist.map((item) => {
+    if (multilist && JSON.parse(multilist).length) {
+      JSON.parse(multilist).map((item) => {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
