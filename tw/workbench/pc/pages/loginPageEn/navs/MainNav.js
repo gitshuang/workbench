@@ -55,18 +55,16 @@ class  MainNavPanel extends Component{
   }
   getAllEnableFunc = () => {
     let allLanArr = window.getEnableLangVOs && window.getEnableLangVOs();
-    let languageListVal = [],currentLan;
+    let languageListVal = [];
+    let currentLan=window.getCurrentLangCode && window.getCurrentLangCode();
     if (allLanArr && allLanArr.length) {
       allLanArr.map((item) => {
-        if(item.default){
-          currentLan = item.langCode;
-        }
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
       this.setState({
         languageList: languageListVal,
-        defaultValue: currentLan,
+        defaultValue: currentLan ? currentLan : 'zh_CN',
       }, () => { this.props.lanCallBack(currentLan) })
     }
   }
