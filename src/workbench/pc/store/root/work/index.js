@@ -243,6 +243,7 @@ const reducer = handleActions({
       serviceCode,
       serviceId,
       serviceName,
+      lisenceBeforeOpen,  // 新增 为了判断是否已经在changeservice赋值过url
     } = serviceInfo;
     const {
       current,
@@ -275,7 +276,8 @@ const reducer = handleActions({
       ext1,
       // url: location,
     }
-    if(!isSetPro){
+    // 当不是第一次加载，并且是默认需要获取详情的url
+    if(!isSetPro && lisenceBeforeOpen){
       newCurr.url = location;
     }
     return {
