@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import Select from 'bee/select';
-import{
+import {
   MainNav,
   headerDesc,
   leftCon,
@@ -14,20 +14,20 @@ import{
   languageClass,
 } from './MainNav.css';
 import LogoSvg from './logo.svg';
-const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
+const { setCurrentNot } = rootActions;
 @withRouter
 @connect(
-    mapStateToProps(
-      'currLan',
-    ),
-    {
-      setCurrentNot,
-      getAllEnableNot,
-      getCurrentNot,
-    },
-  )
-class  MainNavPanel extends Component{
-  constructor(props){
+  mapStateToProps(
+    'currLan',
+  ),
+  {
+    setCurrentNot,
+    // getAllEnableNot,
+    // getCurrentNot,
+  },
+)
+class MainNavPanel extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       defaultValue: 'zh_CN',
@@ -55,41 +55,21 @@ class  MainNavPanel extends Component{
   }
 
   getAllEnableFunc = () => {
-    const { getAllEnableNot } = this.props;
-    getAllEnableNot().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      let languageListVal = [], item = {}, defaultValue;
-      payload.map((item, index) => {
+    let allLanArr = window.getEnableLangVOs && window.getEnableLangVOs();
+    let languageListVal = [],currentLan;
+    if (allLanArr && allLanArr.length) {
+      allLanArr.map((item) => {
+        if(item.default){
+          currentLan = item.langCode;
+        }
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
       this.setState({
-        languageList: languageListVal
-      },()=>{this.getCurrentLan();})
-    });
-  }
-
-  getCurrentLan = () => {
-    const { getCurrentNot,lanCallBack,currLan} = this.props;
-    if(currLan){
-      this.setState({
-        defaultValue: currLan,
-      })
-      lanCallBack(currLan);
-      return false;
+        languageList: languageListVal,
+        defaultValue: currentLan,
+      }, () => { this.props.lanCallBack(currentLan)  })
     }
-    getCurrentNot().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      this.setState({
-        defaultValue: payload.langCode,
-      },()=>{
-        lanCallBack(payload.langCode)
-      });
-    });
   }
 
   onChangeLanguage = (value) => {
@@ -101,71 +81,71 @@ class  MainNavPanel extends Component{
     });
   }
 
-  open =(type)=>{
-    if(type =='service'){
-      this.props.activeIndex!=='2'&&  this.props.history.push('/service')
-    }else if(type == 'aboutus'){
-      this.props.activeIndex!=='4'&&this.props.history.push('/aboutus')
-    }else if(type == 'login'){
-      this.props.activeIndex!=='1' &&this.props.history.push('/')
-    }else if(type == 'open'){
+  open = (type) => {
+    if (type == 'service') {
+      this.props.activeIndex !== '2' && this.props.history.push('/service')
+    } else if (type == 'aboutus') {
+      this.props.activeIndex !== '4' && this.props.history.push('/aboutus')
+    } else if (type == 'login') {
+      this.props.activeIndex !== '1' && this.props.history.push('/')
+    } else if (type == 'open') {
       window.open('https://open.diwork.com');
     }
   }
-  goToHome = () =>{
-    this.props.match && this.props.match.path!=='/'&&this.props.history.push('/');
+  goToHome = () => {
+    this.props.match && this.props.match.path !== '/' && this.props.history.push('/');
 
   }
-  handleChange =(value) =>{
+  handleChange = (value) => {
     // const { onChangeLanguage } = this.props.language;
     this.onChangeLanguage(value);
   }
-  render(){
-    const {defaultValue, languageList}  = this.state;
-    return(
+  render() {
+    const { defaultValue, languageList } = this.state;
+    return (
       <div className={MainNav} id="MainNav">
-          <div className={leftCon} onClick={this.goToHome} >
-            <img src={LogoSvg} className="companylogoSvg"/>
-            <span className={headerDesc}>Digital Portal</span>
-          </div>
-          <div className={middleCon}>
-            <a  className={`middleItem ${this.props.activeIndex*1 === 1?'actived':null}`} onClick={()=>{this.open('login')}}>Home</a>
-            <a  className={`middleItem ${this.props.activeIndex*1 === 2?'actived':null}`} onClick={()=>{this.open('service')}}>Service Support</a>
-            <a  className={`middleItem ${this.props.activeIndex*1 === 3?'actived':null}`} onClick={()=>{this.open('open')}}>Open Platform</a>
-            <a  className={`middleItem ${this.props.activeIndex*1 === 4?'actived':null}`} onClick={()=>{this.open('aboutus')}}>Contact Us</a>
-          </div>
-          {
-            this.props.btnShow ?
+        <div className={leftCon} onClick={this.goToHome} >
+          <img src={LogoSvg} className="companylogoSvg" />
+          <span className={headerDesc}>Digital Portal</span>
+        </div>
+        <div className={middleCon}>
+          <a className={`middleItem ${this.props.activeIndex * 1 === 1 ? 'actived' : null}`} onClick={() => { this.open('login') }}>Home</a>
+          <a className={`middleItem ${this.props.activeIndex * 1 === 2 ? 'actived' : null}`} onClick={() => { this.open('service') }}>Service Support</a>
+          <a className={`middleItem ${this.props.activeIndex * 1 === 3 ? 'actived' : null}`} onClick={() => { this.open('open') }}>Open Platform</a>
+          <a className={`middleItem ${this.props.activeIndex * 1 === 4 ? 'actived' : null}`} onClick={() => { this.open('aboutus') }}>Contact Us</a>
+        </div>
+        {
+          this.props.btnShow ?
             (
-            <div className={rightCon}>
+              <div className={rightCon}>
                 <a className="loginBtn" onClick={this.props.loginClick}>Log In</a>
                 <a className="registryBtn" target="_blank" href={this.props.registryUrl}>Sign Up</a>
-            </div>
-            ):(
+              </div>
+            ) : (
               <div className={`${rightCon} ${languageClass}`}>
                 <Select
-                      value={defaultValue}
-                      onChange={this.handleChange}
-                      dropdownClassName={"gnoreclass"}
-                      style={{width:"90px"}}
-                    >
-                    {
-                      languageList.map((item,index)=>{
-                        return (
-                          <Option value={item.value} key={index}>{item.context}</Option>
-                        )
-                      })
-                    }
+                  value={defaultValue}
+                  onChange={this.handleChange}
+                  dropdownClassName={"gnoreclass"}
+                  style={{ width: "90px" }}
+                >
+                  {
+                    languageList.map((item, index) => {
+                      return (
+                        <Option value={item.value} key={index}>{item.context}</Option>
+                      )
+                    })
+                  }
                 </Select>
-               
-             
-            </div>
+
+
+              </div>
             )
 
         }
 
-          
-          </div>
+
+      </div>
     )
   }
 

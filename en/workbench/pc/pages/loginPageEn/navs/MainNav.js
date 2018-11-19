@@ -14,7 +14,7 @@ import{
   languageClass,
 } from './MainNav.css';
 import LogoSvg from './logoen.svg';
-const { setCurrentNot} = rootActions;
+const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
@@ -22,8 +22,8 @@ const { setCurrentNot} = rootActions;
     ),
     {
       setCurrentNot,
-      // getAllEnableNot,
-      // getCurrentNot,
+      getAllEnableNot,
+      getCurrentNot,
     },
   )
 class  MainNavPanel extends Component{
@@ -53,7 +53,6 @@ class  MainNavPanel extends Component{
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
   }
-
   getAllEnableFunc = () => {
     let allLanArr = window.getEnableLangVOs && window.getEnableLangVOs();
     let languageListVal = [],currentLan;
