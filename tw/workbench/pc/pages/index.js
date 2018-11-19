@@ -31,7 +31,7 @@ const {
   getServiceList,
   getMessage,
   getPoll,
-  getCurrentNot
+  // getCurrentNot
 } = rootActions;
 const { setUserInfo, } = homeActions;
 
@@ -66,7 +66,7 @@ const NoMatch = ({ history }) => {
     getMessage,
     getPoll,
     setUserInfo,
-    getCurrentNot,
+    // getCurrentNot,
   }
 )
 class Root extends Component {
@@ -140,15 +140,26 @@ class Root extends Component {
   }
 
   getCurrentLan = () => {
-    const { getCurrentNot } = this.props;
-    getCurrentNot().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      this.setState({ defaultLan: payload.langCode, lanAjax: true });
-    });
+    // const { getCurrentNot } = this.props;
+    let langArr = window.getEnableLangVOs && window.getEnableLangVOs();
+    if(langArr.length){
+        // 减少ajax请求
+        langArr.map(item=>{
+          if(item.default){
+            this.setState({ defaultLan: item.langCode, lanAjax: true });
+          }
+        });
+        return false;
+    }
+    // getCurrentNot().then(({ error, payload }) => {
+    //   if (error) {
+    //     return;
+    //   }
+    //   this.setState({ defaultLan: payload.langCode, lanAjax: true });
+    // });
 
   }
+
   render() {
     if (!this.isLogin && !this.state.lanAjax) return null;
     const { showFrame, showModal } = this.props;
