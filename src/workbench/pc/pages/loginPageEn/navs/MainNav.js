@@ -14,7 +14,7 @@ import{
   languageClass,
 } from './MainNav.css';
 import LogoSvg from './logoen.svg';
-const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
+const { setCurrentNot } = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
@@ -22,8 +22,8 @@ const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
     ),
     {
       setCurrentNot,
-      getAllEnableNot,
-      getCurrentNot,
+      // getAllEnableNot,
+      // getCurrentNot,
     },
   )
 class  MainNavPanel extends Component{
