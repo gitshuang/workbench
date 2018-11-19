@@ -22,8 +22,8 @@ const { setCurrentNot } = rootActions;
     ),
     {
       setCurrentNot,
-      getAllEnableNot,
-      getCurrentNot,
+      // getAllEnableNot,
+      // getCurrentNot,
     },
   )
 class  MainNavPanel extends Component{
@@ -62,7 +62,6 @@ class  MainNavPanel extends Component{
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
-      console.log(languageListVal,currentLan)
       this.setState({
         languageList: languageListVal,
         defaultValue: currentLan ? currentLan : 'zh_CN',
