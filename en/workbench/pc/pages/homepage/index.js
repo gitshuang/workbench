@@ -275,7 +275,7 @@ class HomePage extends Component {
         <div className="header">
           <Header onLeftClick={this.goHome} >
             <div>
-              <span>{`${userName}s homepage`}</span>
+              <span>{`${userName}homepage`}</span>
             </div>
           </Header>
           <div className="appBreadcrumb">

@@ -15,7 +15,7 @@ import rootActions from 'store/root/actions';
 
 import { openService, openHomePage } from 'public/regMessageTypeHandler';
 
-const { closeRequestDisplay, getUserInfo } = homeActions;
+const { closeRequestDisplay } = homeActions;
 const { openExitModal } = teamconfigActions;
 const { setCurrent, getAllEnable, getCurrent } = rootActions;
 @withRouter
@@ -34,7 +34,7 @@ const { setCurrent, getAllEnable, getCurrent } = rootActions;
   {
     closeRequestDisplay,
     openExitModal,
-    getUserInfo,
+    // getUserInfo,
     setCurrent,
     getAllEnable,
     getCurrent,
@@ -135,22 +135,31 @@ class Personals extends Component {
   }
 
   componentWillMount() {
-    const { getUserInfo } = this.props;
-    getUserInfo().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      this.setState({
-        userInfo: payload,
-      },()=>{
-        this.getCompanyType();
-      });
+    // const { getUserInfo } = this.props;
+    // getUserInfo().then(({ error, payload }) => {
+    //   if (error) {
+    //     return;
+    //   }
+    //   this.setState({
+    //     userInfo: payload,
+    //   },()=>{
+    //     this.getCompanyType();
+    //   });
 
-    });
+    // });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
     //获取默认
     this.getDefaultLang();
+  }
+
+  componentDidMount() {
+    const { userInfo } = this.props;
+    this.setState({
+      userInfo: userInfo,
+    }, () => {
+      this.getCompanyType();
+    });
   }
 
   getAllEnableFunc = () => {
@@ -221,19 +230,18 @@ class Personals extends Component {
 
   dispatch = (action) => {
     const { routers, currType, userInfo } = this.state;
-    const { history } = this.props;
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
       return false;
     }
-    if(action === "openHomepage"){
+    if (action === "openHomepage") {
       openHomePage({
         userId: userInfo.userId,
         key: 'honor'
       });
       return false;
     }
-    if(action === "openDynamic"){
+    if (action === "openDynamic") {
       openHomePage({
         userId: userInfo.userId,
         key: 'speak'

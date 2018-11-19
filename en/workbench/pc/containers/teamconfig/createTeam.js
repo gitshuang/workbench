@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 
+import { refreshUserInfo } from 'public/regMessageTypeHandler';
+
 import Form, { FormItem } from 'bee/form';
 import Upload from 'containers/upload';
 import FormControl from 'bee/form-control';
@@ -35,10 +37,10 @@ class SubmitBtn extends Component {
       <div className={'u-form-submit'}>
         {
           this.props.disabled
-          ? 
-          <ButtonBrand onClick={this.click} >Save</ButtonBrand>
-          :
-          <ButtonBrand disabled={true} >Save</ButtonBrand>
+            ?
+            <ButtonBrand onClick={this.click} >Save</ButtonBrand>
+            :
+            <ButtonBrand disabled={true} >Save</ButtonBrand>
         }
       </div>
     );
@@ -122,12 +124,15 @@ class CreateTeam extends Component {
           {},
         ), "settingEnter"
       ).then(({ error, payload }) => {
-        this.setState({disabled: true});
+        this.setState({ disabled: true });
         if (error) {
           requestError(payload);
           return;
         }
+        // 改变当前页面上边的团队名称
         changeTenantName(payload.tenantName);
+        // 重新拉取userinfo 
+        refreshUserInfo();
         requestSuccess();
         openMess({
           content: 'Saved successfully.',
@@ -135,7 +140,7 @@ class CreateTeam extends Component {
           type: 'success',
           closable: false,
         });
-        
+
         // const tenantId = payload.tenantId;
         // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
       });
@@ -164,7 +169,7 @@ class CreateTeam extends Component {
 
   watermarkChange = (value) => {
     this.setState({
-      isWaterMark : value
+      isWaterMark: value
     })
   }
 
