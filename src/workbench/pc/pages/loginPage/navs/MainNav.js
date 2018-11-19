@@ -60,9 +60,6 @@ class MainNavPanel extends Component {
     let currentLan=window.getCurrentLangCode && window.getCurrentLangCode();;
     if (allLanArr && allLanArr.length) {
       allLanArr.map((item) => {
-        if(item.default){
-          currentLan = item.langCode;
-        }
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
