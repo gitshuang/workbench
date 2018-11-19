@@ -161,10 +161,10 @@ class Personals extends Component {
   }
 
   getAllEnableFunc = () => {
-    let allLanArr = window.getEnableLangVOs && window.getEnableLangVOs();
+    const{locale,multilist} = window.diworkContext();
     let languageListVal = [];
-    if (allLanArr && allLanArr.length) {
-      allLanArr.map((item) => {
+    if (multilist && multilist.length) {
+      multilist.map((item) => {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
@@ -172,15 +172,14 @@ class Personals extends Component {
         language: { ...this.state.language, languageList: languageListVal }
       }, () => {
         //获取默认
-        this.getDefaultLang();
+        this.getDefaultLang(locale);
       })
     }
   }
 
-  getDefaultLang = () => {
-    let currentLan = window.getCurrentLangCode && window.getCurrentLangCode();;
+  getDefaultLang = (locale) => {
     this.setState({
-      language: { ...this.state.language, defaultValue: currentLan ? currentLan : 'zh_CN' }
+      language: { ...this.state.language, defaultValue: locale ? locale : 'zh_CN' }
     });
   }
 
