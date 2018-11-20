@@ -3,6 +3,7 @@ import actions from './actions';
 
 const {
   getUserInfo,
+  setUserInfo,
   getEnterInfo,
   getWorkList,
   changeRequestDisplay,
@@ -44,6 +45,15 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
+    payload.allowTenants.forEach((da) => {
+      da.type = da.team;// 需求变更，废弃team字段。
+    });
+    return {
+      ...state,
+      userInfo: payload,
+    };
+  },
+  [setUserInfo]: (state, { payload, }) => {
     payload.allowTenants.forEach((da) => {
       da.type = da.team;// 需求变更，废弃team字段。
     });

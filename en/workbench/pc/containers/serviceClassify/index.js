@@ -24,6 +24,7 @@ import {
 
 import applicationActions from 'store/root/application/actions';
 import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
 const { getAllApplicationList } = applicationActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 @withRouter
@@ -255,22 +256,23 @@ class serviceClassify extends Component {
     const list = this.renderList();
     const tabs = this.renderTabs();
     const _appType = this.getCompanyType();
+    const { locale } = window.diworkContext();
 
     return (
       <div className={bg + " um-vbox"}>
         <div className={bg_wrap + " um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div style={{overflow: "hidden"}}>
-            <SearchInput
-              onKeyDown={this.onKeyup}
-              onChange={this.inputOnChange}
-              keywords={value}
-              onClick={this.btnSearch}
-              placeholder="Search App"
-              btnText="Search"
-              classname={left}
-            />
-            {_appType ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >App Market</ButtonBrand> : null}
+            <div style={{ overflow: "hidden" }}>
+              <SearchInput
+                onKeyDown={this.onKeyup}
+                onChange={this.inputOnChange}
+                keywords={value}
+                onClick={this.btnSearch}
+                placeholder="Search App"
+                btnText="Search"
+                classname={left}
+              />
+              {_appType && locale === "zh_CN" ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >App Market</ButtonBrand> : null}
             </div>
             <div className={um_content}>
               <div>

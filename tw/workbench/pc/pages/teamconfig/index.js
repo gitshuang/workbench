@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import Header from 'containers/header';
 import BreadcrumbContainer from 'components/breadcrumb';
 import TeamconfigContent from 'containers/teamconfig';
@@ -20,6 +21,10 @@ class Teamconfig extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentWillMount() {
+
   }
 
   goBack = () => {

@@ -15,9 +15,9 @@ import rootActions from 'store/root/actions';
 
 import { openService, openHomePage } from 'public/regMessageTypeHandler';
 
-const { closeRequestDisplay, getUserInfo } = homeActions;
+const { closeRequestDisplay } = homeActions;
 const { openExitModal } = teamconfigActions;
-const { setCurrent, getAllEnable, getCurrent } = rootActions;
+const { setCurrent } = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
@@ -34,10 +34,10 @@ const { setCurrent, getAllEnable, getCurrent } = rootActions;
   {
     closeRequestDisplay,
     openExitModal,
-    getUserInfo,
+    // getUserInfo,
     setCurrent,
-    getAllEnable,
-    getCurrent,
+    // getAllEnable,
+    // getCurrent,
   },
 )
 class Personals extends Component {
@@ -135,51 +135,51 @@ class Personals extends Component {
   }
 
   componentWillMount() {
-    const { getUserInfo } = this.props;
-    getUserInfo().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      this.setState({
-        userInfo: payload,
-      },()=>{
-        this.getCompanyType();
-      });
+    // const { getUserInfo } = this.props;
+    // getUserInfo().then(({ error, payload }) => {
+    //   if (error) {
+    //     return;
+    //   }
+    //   this.setState({
+    //     userInfo: payload,
+    //   },()=>{
+    //     this.getCompanyType();
+    //   });
 
-    });
+    // });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
-    //获取默认
-    this.getDefaultLang();
+  }
+
+  componentDidMount() {
+    const { userInfo } = this.props;
+    this.setState({
+      userInfo: userInfo,
+    }, () => {
+      this.getCompanyType();
+    });
   }
 
   getAllEnableFunc = () => {
-    const { getAllEnable } = this.props;
-    getAllEnable().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      let languageListVal = [], item = {}, defaultValue;
-      payload.map((item, index) => {
+    const{locale,multilist} = window.diworkContext();
+    let languageListVal = [];
+    if (multilist && JSON.parse(multilist).length) {
+      JSON.parse(multilist).map((item) => {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
-
       this.setState({
         language: { ...this.state.language, languageList: languageListVal }
+      }, () => {
+        //获取默认
+        this.getDefaultLang(locale);
       })
-    });
+    }
   }
 
-  getDefaultLang = () => {
-    const { getCurrent } = this.props;
-    getCurrent().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      this.setState({
-        language: { ...this.state.language, defaultValue: payload.langCode }
-      });
+  getDefaultLang = (locale) => {
+    this.setState({
+      language: { ...this.state.language, defaultValue: locale ? locale : 'zh_CN' }
     });
   }
 
@@ -221,19 +221,18 @@ class Personals extends Component {
 
   dispatch = (action) => {
     const { routers, currType, userInfo } = this.state;
-    const { history } = this.props;
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
       return false;
     }
-    if(action === "openHomepage"){
+    if (action === "openHomepage") {
       openHomePage({
         userId: userInfo.userId,
         key: 'honor'
       });
       return false;
     }
-    if(action === "openDynamic"){
+    if (action === "openDynamic") {
       openHomePage({
         userId: userInfo.userId,
         key: 'speak'
@@ -261,7 +260,7 @@ class Personals extends Component {
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
     personalText.name = currType == 0 ? '企业' : '团队';
-
+    console.log(2233333, language.defaultValue, language.languageList[0])
     return (
       <div>
         <Personal

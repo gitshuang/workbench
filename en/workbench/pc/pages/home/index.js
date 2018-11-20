@@ -18,22 +18,6 @@ import { pageHome } from './style.css';
 const { getWorkList, getApplicationList, clearApplicationTips } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
-Date.prototype.format = function (fmt) {
-  var o = {
-    "M+": this.getMonth() + 1, //月份
-    "d+": this.getDate(), //日
-    "h+": this.getHours(), //小时
-    "m+": this.getMinutes(), //分
-    "s+": this.getSeconds(), //秒
-    "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-    "S": this.getMilliseconds() //毫秒
-  };
-  if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-  for (var k in o)
-    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-  return fmt;
-}
-
 @withRouter
 @connect(
   mapStateToProps(
@@ -60,6 +44,7 @@ class Home extends Component {
     getWorkList: PropTypes.func,
     workList: PropTypes.arrayOf(PropTypes.object),
     getApplicationList: PropTypes.func,
+    userInfo: PropTypes.shape({}),
   };
   static defaultProps = {
     requestStart: () => { },
@@ -68,6 +53,9 @@ class Home extends Component {
     getWorkList: () => { },
     getApplicationList: () => { },
     workList: [],
+    userInfo: {
+      admin: false,
+    },
   };
   constructor(props) {
     super(props);
@@ -78,15 +66,45 @@ class Home extends Component {
       },
       lazyLoadNum: -1,
       homemark: false,
-      newAppNum:0,// 判断应用开通时间在7天(含)之内
-      willExpiredNum:0,// 即将过期应用个数
-      expiredNum:0,//过期应用个数 
+      newAppNum: 0,// 判断应用开通时间在7天(含)之内
+      willExpiredNum: 0,// 即将过期应用个数
+      expiredNum: 0,//过期应用个数 
       applications: [],
     };
     this.updateViewport = this.updateViewport.bind(this);
   }
 
   componentWillMount() {
+
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.updateViewport, false);
+    window.addEventListener('resize', this.updateViewport, false);
+    this.updateViewport();
+    // 请求列表
+    this.getWorkList();
+    // 判断是否到期应用，包含多少个到期应用
+    this.getApplicationList();
+  }
+
+  componentDidUpdate() {
+    let total = 0;
+    this.props.workList.forEach((v) => {
+      total += v.children.length;
+    });
+    if (this.state.lazyLoadNum === total) {
+      window.removeEventListener('scroll', this.updateViewport);
+      window.removeEventListener('resize', this.updateViewport);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.updateViewport);
+    window.removeEventListener('resize', this.updateViewport);
+  }
+
+  getWorkList = () => {
     const {
       requestStart, requestSuccess, requestError, getWorkList,
     } = this.props;
@@ -106,22 +124,8 @@ class Home extends Component {
       requestSuccess();
     });
   }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.updateViewport, false);
-    window.addEventListener('resize', this.updateViewport, false);
-    this.updateViewport();
-  }
-
-  componentDidUpdate() {
-    let total = 0;
-    this.props.workList.forEach((v) => {
-      total += v.children.length;
-    });
-    if (this.state.lazyLoadNum === total) {
-      window.removeEventListener('scroll', this.updateViewport);
-      window.removeEventListener('resize', this.updateViewport);
-    }
+  
+  getApplicationList = () => {
     // 请求应用   判断是否有过期应用功能
     const {
       getApplicationList,
@@ -141,8 +145,8 @@ class Home extends Component {
         this.setState({
           applications: payload.expiTip.applications,
         });
-        let {willExpiredNum,expiredNum} = this.forTime(payload.expiTip.applications)
-        if (willExpiredNum || expiredNum || payload.addTip ) {
+        let { willExpiredNum, expiredNum } = this.forTime(payload.expiTip.applications)
+        if (willExpiredNum || expiredNum || payload.addTip) {
           this.setState({
             homemark: true,
             newAppNum: payload.addTip || 0,
@@ -153,11 +157,6 @@ class Home extends Component {
         requestSuccess();
       });
     }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.updateViewport);
-    window.removeEventListener('resize', this.updateViewport);
   }
 
   totalTime = () => {
@@ -189,14 +188,14 @@ class Home extends Component {
         type = true;
         ++willExpiredNum;
         // break;
-      }else if (currTime > time) {
+      } else if (currTime > time) {
         type = true;
         ++expiredNum;
         // break;
       }
     };
     // return type;
-    return {willExpiredNum,expiredNum};
+    return { willExpiredNum, expiredNum };
   }
 
   updateViewport = () => {
@@ -222,7 +221,7 @@ class Home extends Component {
   })()
 
   linkTo = () => {
-    const {clearApplicationTips} = this.props;
+    const { clearApplicationTips } = this.props;
     clearApplicationTips().then(({ error, payload }) => {
       if (error) {
         requestError(payload);

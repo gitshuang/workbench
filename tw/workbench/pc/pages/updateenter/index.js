@@ -122,7 +122,7 @@ class Updateenter extends Component {
             <hr className={hr} />
             <div className={enterCont} >
               {
-                enterData ?
+                enterData && Object.keys(userInfo).length > 0 ?
                   <EnterContent
                     data={enterData}
                     userInfo={userInfo}

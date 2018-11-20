@@ -1,6 +1,6 @@
 import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home';
+import homeActions from 'store/root/home/actions';
 import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
 import { postMessageToWin, get, logout } from "@u";
@@ -287,4 +287,7 @@ export function openIframe(data) {
 
 export function openHomePage(data) {
   handlers.openHomePage(data);
+}
+export function refreshUserInfo(){
+  handlers.refreshUserInfo();
 }

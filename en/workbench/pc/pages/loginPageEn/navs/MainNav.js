@@ -14,7 +14,7 @@ import{
   languageClass,
 } from './MainNav.css';
 import LogoSvg from './logoen.svg';
-const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
+const { setCurrentNot } = rootActions;
 @withRouter
 @connect(
     mapStateToProps(
@@ -22,8 +22,8 @@ const { setCurrentNot, getAllEnableNot, getCurrentNot } = rootActions;
     ),
     {
       setCurrentNot,
-      getAllEnableNot,
-      getCurrentNot,
+      // getAllEnableNot,
+      // getCurrentNot,
     },
   )
 class  MainNavPanel extends Component{
@@ -53,44 +53,20 @@ class  MainNavPanel extends Component{
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
   }
-
   getAllEnableFunc = () => {
-    const { getAllEnableNot } = this.props;
-    getAllEnableNot().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      let languageListVal = [], item = {}, defaultValue;
-      payload.map((item, index) => {
+    let allLanArr = window.getEnableLangVOs && window.getEnableLangVOs();
+    let languageListVal = [];
+    let currentLan=window.getCurrentLangCode && window.getCurrentLangCode();
+    if (allLanArr && allLanArr.length) {
+      allLanArr.map((item) => {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
       this.setState({
-        languageList: languageListVal
-      },()=>{this.getCurrentLan();})
-    });
-  }
-
-  getCurrentLan = () => {
-    const { getCurrentNot,lanCallBack,currLan} = this.props;
-    if(currLan){
-      this.setState({
-        defaultValue: currLan,
-      })
-      lanCallBack(currLan);
-      return false;
+        languageList: languageListVal,
+        defaultValue: currentLan ? currentLan : 'zh_CN',
+      }, () => { this.props.lanCallBack(currentLan) })
     }
-    getCurrentNot().then(({ error, payload }) => {
-      if (error) {
-        return;
-      }
-      this.setState({
-        defaultValue: payload.langCode,
-      },()=>{
-        lanCallBack(payload.langCode)
-      });
-    });
-    
   }
 
   onChangeLanguage = (value) => {
