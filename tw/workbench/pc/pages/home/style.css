@@ -131,6 +131,7 @@
 .mark p i{
   float: left;
   font-size: 24px;
+  color: #ff8800;
 }
 .mark p span{
   /* float: left; */

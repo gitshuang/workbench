@@ -1,4 +1,4 @@
-:global(.u-modal.in .u-modal-dialog) {
+:global(.basic_dialog_modal .u-modal.in .u-modal-dialog) {
   min-width: 0px;
 }
 
