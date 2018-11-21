@@ -116,7 +116,7 @@ class Root extends Component {
     if (!tenantid) {
       this.props.history.replace('/establish');
     } else {
-
+      // 将ftl文件header中的userinfo赋值到store中
       setUserInfo(this.userInfo);
       // 请求快捷应用
       getServiceList().then(({ error, payload }) => {
@@ -142,10 +142,10 @@ class Root extends Component {
   getCurrentLan = () => {
     // const { getCurrentNot } = this.props;
     let currentLan = window.getCurrentLangCode && window.getCurrentLangCode();
-    if(currentLan){
-        // 减少ajax请求
-        this.setState({ defaultLan: currentLan, lanAjax: true });
-        return false;
+    if (currentLan) {
+      // 减少ajax请求
+      this.setState({ defaultLan: currentLan, lanAjax: true });
+      return false;
     }
     // getCurrentNot().then(({ error, payload }) => {
     //   if (error) {

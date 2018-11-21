@@ -29,9 +29,7 @@ const {
   requestSuccess,
   requestError,
   getServiceList,
-  getMessage,
   getPoll,
-  // getCurrentNot
 } = rootActions;
 const { setUserInfo, } = homeActions;
 
@@ -63,10 +61,8 @@ const NoMatch = ({ history }) => {
     requestSuccess,
     requestError,
     getServiceList,
-    getMessage,
     getPoll,
     setUserInfo,
-    // getCurrentNot,
   }
 )
 class Root extends Component {
@@ -79,7 +75,6 @@ class Root extends Component {
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
     getServiceList: PropTypes.func,
-    getMessage: PropTypes.func,
     getPoll: PropTypes.func,
     setUserInfo: PropTypes.func,
   };
@@ -89,7 +84,6 @@ class Root extends Component {
     requestSuccess: () => { },
     requestError: () => { },
     getServiceList: () => { },
-    getMessage: () => { },
     getPoll: () => { },
     setUserInfo: () => { },
   };
@@ -116,7 +110,7 @@ class Root extends Component {
     if (!tenantid) {
       this.props.history.replace('/establish');
     } else {
-
+      // 将ftl文件header中的userinfo赋值到store中
       setUserInfo(this.userInfo);
       // 请求快捷应用
       getServiceList().then(({ error, payload }) => {
@@ -140,20 +134,12 @@ class Root extends Component {
   }
 
   getCurrentLan = () => {
-    // const { getCurrentNot } = this.props;
     let currentLan = window.getCurrentLangCode && window.getCurrentLangCode();
-    if(currentLan){
-        // 减少ajax请求
-        this.setState({ defaultLan: currentLan, lanAjax: true });
-        return false;
+    if (currentLan) {
+      // 减少ajax请求
+      this.setState({ defaultLan: currentLan, lanAjax: true });
+      return false;
     }
-    // getCurrentNot().then(({ error, payload }) => {
-    //   if (error) {
-    //     return;
-    //   }
-    //   this.setState({ defaultLan: payload.langCode, lanAjax: true });
-    // });
-
   }
 
   render() {

@@ -159,16 +159,17 @@ const reducer = handleActions({
       //   serviceId,
       //   ext1: state.current.ext1
     }
+    let location = "";
 
-    if(!lisenceBeforeOpen || isSetPro){
+    if (!lisenceBeforeOpen || isSetPro) {
       // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
-      const location = appendSearchParam(url, {
+      location = appendSearchParam(url, {
         ...getOpenServiceData(serviceCode),
         serviceCode,
       });
       newCurr.url = location;
     }
-    
+
     if (curTab) {
       return {
         ...state,
@@ -257,13 +258,10 @@ const reducer = handleActions({
     if (!(relationServices && relationServices.length) && !(relationUsers && relationUsers.length)) {
       hasRelationFunc = false;
     }
-
-    // const location = changeURLArg(url, 'serviceCode', serviceCode,);
     //这里做一个兼容，工作页内iframe地址从getDetail获取
     let tab = {};
     if (tabs.length > 0) {
       tab = tabs.shift();
-      tab.location = location;
     }
     const newCurr = {
       ...current,
@@ -274,7 +272,6 @@ const reducer = handleActions({
       relationUsers,
       relationServices,
       ext1,
-      // url: location,
     }
     // 当不是第一次加载，并且是默认需要获取详情的url
     if (!isSetPro && lisenceBeforeOpen) {
@@ -283,6 +280,7 @@ const reducer = handleActions({
         serviceCode,
       });
       newCurr.url = location;
+      tab.location = location;
     }
     return {
       ...state,
