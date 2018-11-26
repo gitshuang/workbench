@@ -169,19 +169,19 @@ class Personals extends Component {
         languageListVal.push(item);
       });
       this.setState({
-        language: { ...this.state.language, languageList: languageListVal }
+        language: { ...this.state.language, languageList: languageListVal,defaultValue: locale ? locale : 'zh_CN' }
       }, () => {
         //获取默认
-        this.getDefaultLang(locale);
+        //this.getDefaultLang(locale);
       })
     }
   }
 
-  getDefaultLang = (locale) => {
-    this.setState({
-      language: { ...this.state.language, defaultValue: locale ? locale : 'zh_CN' }
-    });
-  }
+  // getDefaultLang = (locale) => {
+  //   this.setState({
+  //     language: { ...this.state.language, defaultValue: locale ? locale : 'zh_CN' }
+  //   });
+  // }
 
   onChangeLanguage = (value) => {
     this.props.setCurrent(value).then(({ error, payload }) => {
