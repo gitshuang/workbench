@@ -168,8 +168,11 @@ class Personals extends Component {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
+      let newObj = Object.assign({},this.state.language);
+      newObj.languageList = languageListVal;
+      newObj.defaultValue = locale ? locale : 'zh_CN' ;
       this.setState({
-        language: { ...this.state.language, languageList: languageListVal,defaultValue: locale ? locale : 'zh_CN' }
+        language: newObj,
       }, () => {
         //获取默认
         //this.getDefaultLang(locale);
@@ -260,6 +263,8 @@ class Personals extends Component {
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
     personalText.name = currType == 0 ? '企业' : '团队';
+    const{locale} = window.diworkContext();
+    if(language.defaultValue !== locale) return null;
     console.log(2233333, language.defaultValue, language.languageList[0])
     return (
       <div>
