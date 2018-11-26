@@ -263,6 +263,8 @@ class Personals extends Component {
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
     personalText.name = currType == 0 ? '企业' : '团队';
+    const{locale} = window.diworkContext();
+    if(language.defaultValue !== locale) return null;
     console.log(2233333, language.defaultValue, language.languageList[0])
     return (
       <div>
