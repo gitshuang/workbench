@@ -168,8 +168,11 @@ class Personals extends Component {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
+      let newObj = Object.assign({},this.state.language);
+      newObj.languageList = languageListVal;
+      newObj.defaultValue = locale ? locale : 'zh_CN' ;
       this.setState({
-        language: { ...this.state.language, languageList: languageListVal,defaultValue: locale ? locale : 'zh_CN' }
+        language: newObj,
       }, () => {
         //获取默认
         //this.getDefaultLang(locale);
