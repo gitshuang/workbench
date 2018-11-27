@@ -168,20 +168,23 @@ class Personals extends Component {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
+      let newObj = Object.assign({},this.state.language);
+      newObj.languageList = languageListVal;
+      newObj.defaultValue = locale ? locale : 'zh_CN' ;
       this.setState({
-        language: { ...this.state.language, languageList: languageListVal }
+        language: newObj,
       }, () => {
         //获取默认
-        this.getDefaultLang(locale);
+        //this.getDefaultLang(locale);
       })
     }
   }
 
-  getDefaultLang = (locale) => {
-    this.setState({
-      language: { ...this.state.language, defaultValue: locale ? locale : 'zh_CN' }
-    });
-  }
+  // getDefaultLang = (locale) => {
+  //   this.setState({
+  //     language: { ...this.state.language, defaultValue: locale ? locale : 'zh_CN' }
+  //   });
+  // }
 
   onChangeLanguage = (value) => {
     this.props.setCurrent(value).then(({ error, payload }) => {
@@ -260,7 +263,9 @@ class Personals extends Component {
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
     personalText.name = currType == 0 ? '企業' : '團隊';
-    console.log(2233333, language.defaultValue, language.languageList[0])
+    const{locale} = window.diworkContext();
+    if(language.defaultValue !== locale) return null;
+    // console.log(2233333, language.defaultValue, language.languageList[0])
     return (
       <div>
         <Personal

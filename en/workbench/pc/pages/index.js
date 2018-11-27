@@ -107,11 +107,12 @@ class Root extends Component {
       setUserInfo
     } = this.props;
     const { tenantid } = getContext();
+    // 将ftl文件header中的userinfo赋值到store中
+    setUserInfo(this.userInfo);
     if (!tenantid) {
       this.props.history.replace('/establish');
     } else {
-      // 将ftl文件header中的userinfo赋值到store中
-      setUserInfo(this.userInfo);
+      
       // 请求快捷应用
       getServiceList().then(({ error, payload }) => {
         if (error) {

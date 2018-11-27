@@ -115,6 +115,7 @@ class CreateTeam extends Component {
       })
       data.push({ name: "tenantId", value: tenantId });
       requestStart();
+  
       createTeam(
         data.reduce(
           (obj, { value, name }) => {
@@ -135,7 +136,7 @@ class CreateTeam extends Component {
         refreshUserInfo();
         requestSuccess();
         openMess({
-          content: 'Saved successfully.',
+          title: 'Saved successfully.',
           duration: 2,
           type: 'success',
           closable: false,
@@ -227,20 +228,20 @@ class CreateTeam extends Component {
                 onChange={(e) => { this.setOptherData({ name: "joinPermission", value: e }) }}
               >
                 <Option value="0">Allowed </Option>
-                <Option value="1">Prohibited</Option>
+                <Option value="1">Forbidden</Option>
               </Select>
             </FormItem>
 
             <FormItem showMast={false} labelName={<span>Users' Quit<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || "0"}>
-                <Radio value="0" >Prohibited</Radio>
+                <Radio value="0" >Forbidden</Radio>
                 <Radio value="1" >Allowed</Radio>
               </Radio.RadioGroup>
             </FormItem>
 
             <FormItem showMast={false} labelName={<div><span>Display watermark in contacts</span><font color='red'> &nbsp;*&nbsp;</font></div>} isRequire={false} method="change" inline={true}>
               <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
-                <Radio value={0} >Prohibited</Radio>
+                <Radio value={0} >Forbidden</Radio>
                 <Radio value={1} >Allowed</Radio>
               </Radio.RadioGroup>
             </FormItem>

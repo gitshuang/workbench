@@ -262,7 +262,7 @@ class serviceClassify extends Component {
       <div className={bg + " um-vbox"}>
         <div className={bg_wrap + " um-content um-vbox"}>
           <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div style={{ overflow: "hidden" }}>
+            <div>
               <SearchInput
                 onKeyDown={this.onKeyup}
                 onChange={this.inputOnChange}
