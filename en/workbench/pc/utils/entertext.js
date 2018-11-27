@@ -1,6 +1,6 @@
 const texts = {
     placeholder1: "No more than 60 chars",
-    radio1: "Prohibited",
+    radio1: "Forbidden",
     radio2: "Allowed",
     tenantNameLabel: "Enterprise Name",
     tenantNameError: "Please enter enterprise name",
