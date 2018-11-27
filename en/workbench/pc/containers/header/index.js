@@ -93,8 +93,8 @@ class HeaderContainer extends Component {
   }
   // 调用快捷应用 点击单独每个应用
   openServiceFn = (applicationCode) => {
-    // openService(applicationCode, 2);
-    this.props.history.push(`/app/${applicationCode}`);
+    openService(applicationCode, 2);
+    // this.props.history.push(`/app/${applicationCode}`);
   }
 
   render() {

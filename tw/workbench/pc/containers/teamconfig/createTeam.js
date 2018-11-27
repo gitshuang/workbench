@@ -115,6 +115,7 @@ class CreateTeam extends Component {
       })
       data.push({ name: "tenantId", value: tenantId });
       requestStart();
+  
       createTeam(
         data.reduce(
           (obj, { value, name }) => {
@@ -135,7 +136,7 @@ class CreateTeam extends Component {
         refreshUserInfo();
         requestSuccess();
         openMess({
-          content: '保存成功',
+          title: '保存成功',
           duration: 2,
           type: 'success',
           closable: false,
