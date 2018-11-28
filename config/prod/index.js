@@ -1,22 +1,5 @@
-var webpackConfig = require('./webpack')
-// 不再使用dist 而是使用zh_CN 和 en_US
-// var outPut =  process.argv.length < 3 ? 'zh_CN' : `en_US`;
-var reg = /^LAN_TYPE\=/g;
-var outPut ;
-switch (process.argv[2].replace(reg,'')) {
-  case "src":
-    outPut='zh_CN';
-    break;
-  case "en":
-    outPut='en_US';
-    break;
-  case "tw":
-    outPut='zh_TW';
-    break;
-  default:
-    outPut='zh_CN';
-    break;
-}
+var webpackConfig = require('../webpack.build.js');
+var outPut = require('../outPut');
 var config = {
   env: '"development"',
   host: '""',

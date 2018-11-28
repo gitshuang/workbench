@@ -6,8 +6,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var baseWebpackConfig = require('../webpack.base.conf')
 var paths = require('../paths')
-var reg = /^LAN_TYPE\=/g;
-var  goalFilePath  = process.argv.length < 3? 'src' : process.argv[2].replace(reg,'');
+var goalFilePath = require('../goalFilePath');
+
 module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     entry: {

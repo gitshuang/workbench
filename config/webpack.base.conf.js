@@ -1,23 +1,6 @@
-var paths = require('./paths')
-var reg = /^LAN_TYPE\=/g;
-var goalFilePath = process.argv.length < 3? 'src' : process.argv[2].replace(reg,'');
-// 不再使用dist 而是使用zh_CN 和 en_US
-// var outPut =  process.argv.length < 3 ? 'zh_CN' : `en_US`;
-var outPut ;
-switch (process.argv[2].replace(reg,'')) {
-  case "src":
-    outPut='zh_CN'
-    break;
-  case "en":
-    outPut='en_US'
-    break;
-  case "tw":
-    outPut='zh_TW'
-    break;
-  default:
-    outPut='zh_CN'
-    break;
-}
+var paths = require('./paths');
+const goalFilePath = require('./goalFilePath');
+var outPut = require('./outPut');
 module.exports = {
   entry: {
     'polyfill': `./${goalFilePath}/workbench/pc/objectAssignPolyfill.js`,
@@ -31,23 +14,23 @@ module.exports = {
     alias: {
       '@': paths(`${goalFilePath}`),
       'assets': paths('assets'),
-      'containers': paths('containers'),
-      'public': paths('public'),
-      'pages': paths('pages'),
-      'api': paths('api'),
       'components': paths('components'),
+      'containers': paths('containers'),
+      'pages': paths('pages'),
+      'public': paths('public'),
       'router': paths('router'),
       'store': paths('store'),
+      'yutils': paths('yutils'),
       'bee': '@diworkfe/public-components/build/bee',
       '@u': '@diworkfe/public-components/build/utils',
       'pub-comp': '@diworkfe/public-components/build',
-      'yutils': paths('yutils'),
+      // 'api': paths('api'),
     }
   },
   externals: {
     IM: {
       type: 'var',
-      var : 'typeof InitEsnIM === "undefined" ? function(){console.log("IM load fail")} : InitEsnIM',
+      var: 'typeof InitEsnIM === "undefined" ? function(){console.log("IM load fail")} : InitEsnIM',
     },
   },
   module: {
