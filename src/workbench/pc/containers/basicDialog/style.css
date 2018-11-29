@@ -9,7 +9,7 @@
 
 :global(.basic_dialog_modal .u-modal-content) {
   width: 370px;
-  height: 200px
+  /* height: 200px */
 }
 
 :global(.basic_dialog_modal .u-button) {
@@ -25,7 +25,7 @@
 
 :global(.basic_dialog_modal .u-modal-body) {
   margin-top: 0px;
-  height: 60px;
+  /* height: 60px; */
 }
 
 :global(.basic_dialog_modal .u-modal-footer) {
