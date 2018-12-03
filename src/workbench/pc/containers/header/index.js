@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from 'components/header';
 import Icon from 'pub-comp/icon';
-import { mapStateToProps, getHost } from '@u';
+import { mapStateToProps, getHost, getContext } from '@u';
 import actions from 'store/root/actions';
 import styles from './index.css';
 import SearchContainer from 'containers/search';
@@ -55,11 +55,7 @@ class HeaderContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quickText: {
-        title: '快捷应用',
-        all: '全部应用',
-        more: '更多应用'
-      }
+
     };
   }
 
@@ -107,13 +103,12 @@ class HeaderContainer extends Component {
       rightContent,
       messageType,
       imShowed,
-      portalInfo,
       serviceList,
       userInfo,
     } = this.props;
     const rightArray = Children.toArray(rightContent);
-    // const { portalUrl } = portalInfo;
     const portalUrl = getHost('yzone');
+    const { locale } = getContext();
     let imClass = imShowed ? "active tc" : "tc";
     const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
     const rightContents = rightArray.concat(
@@ -124,7 +119,7 @@ class HeaderContainer extends Component {
         </a>
       </div>,
       <QuickApplication
-        quickText={this.state.quickText}
+        locale={locale}
         serviceList={serviceList} 
         openAllFn={this.openAllFn} 
         openServiceFn={this.openServiceFn} 
