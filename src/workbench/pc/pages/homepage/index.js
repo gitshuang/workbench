@@ -271,8 +271,8 @@ class HomePage extends Component {
     } = this.props;
     if (!userId) return null;
     return (
-      <div className='um-win' style={{ overflow: 'auto' }}>
-        <div className="header">
+      <div className='' style={{ overflow: 'auto' }}>
+        {/* <div className="header">
           <Header onLeftClick={this.goHome} >
             <div>
               <span>{`${userName}的个人主页`}</span>
@@ -281,7 +281,7 @@ class HomePage extends Component {
           <div className="appBreadcrumb">
             <BreadcrumbContainer data={this.brm} goback={this.goBack} />
           </div>
-        </div>
+        </div> */}
         <div className={`${umContent} content`}>
           <div className={`${content}`}>
             <div className={user} id='user'>

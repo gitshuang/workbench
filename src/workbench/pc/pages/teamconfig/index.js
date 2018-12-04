@@ -37,8 +37,8 @@ class Teamconfig extends Component {
 
   render() {
     return (
-      <div className="um-win">
-        <div className="um-header header">
+      <div className="">
+        {/* <div className=" header">
           <Header onLeftClick={this.goHome}>
             <div>
               <span>团队设置</span>
@@ -47,8 +47,8 @@ class Teamconfig extends Component {
           <div className="appBreadcrumb">
             <BreadcrumbContainer data={[{ name: '团队设置' }]} goback={this.goBack} />
           </div>
-        </div>
-        <div className="um-content content">
+        </div> */}
+        <div className=" content">
           <TeamconfigContent />
         </div>
       </div>

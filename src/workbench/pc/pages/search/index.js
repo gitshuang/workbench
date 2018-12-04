@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import SearchResult from 'containers/searchResult';
 import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import searchActions from 'store/root/search/actions';
@@ -85,8 +86,8 @@ class Search extends Component {
     const { appName, brm } = this.props.searchHeadData;
 
     return (
-      <div className="um-win">
-        <div className="um-header header">
+      <div className="">
+        <div className=" header">
           <Header onLeftClick={this.goHome}>
             <div>
               <span>{appName}</span>
@@ -96,10 +97,8 @@ class Search extends Component {
             <BreadcrumbContainer data={brm} goback={this.goBack} />
           </div>
         </div>
-        <div className={`${umContent} content um-box um-content`}>
-          {this.props.routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
-          ))}
+        <div className={`${umContent} content um-box `}>
+          <SearchResult />
         </div>
       </div>
     );

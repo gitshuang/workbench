@@ -2,14 +2,16 @@ import React, { Component, Children, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Header from 'components/header';
-import Icon from 'pub-comp/icon';
 import { mapStateToProps, getHost } from '@u';
+import Icon from 'pub-comp/icon';
+import { openService } from 'public/regMessageTypeHandler';
+import { QuickApplication } from 'diwork-business-components';
+import Header from 'components/header';
+import Personal from './personal';
+import SearchContainer from './search';
+
 import actions from 'store/root/actions';
 import styles from './index.css';
-import SearchContainer from 'containers/search';
-import { QuickApplication } from 'diwork-business-components';
-import { openService } from 'public/regMessageTypeHandler';
 
 const {
   lebraNavbar,
@@ -27,27 +29,21 @@ const {
   mapStateToProps(
     'messageType',
     'imShowed',
-    'portalInfo',
     'serviceList',
-    {
-      key: 'userInfo',
-      value: (home, ownProps, root) => {
-        return root.home.userInfo
-      }
-    },
+    'userInfo',
   ),
   {
     showIm,
     hideIm,
     requestError,
-    requestSuccess
+    requestSuccess,
   }
 )
 class HeaderContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
   }
-  
+
   static defaultProps = {
     iconName: "home",
   }
@@ -89,7 +85,16 @@ class HeaderContainer extends Component {
 
   // 调用快捷应用  打开全部应用
   openAllFn = () => {
-    this.props.history.push('/application');
+    // this.props.history.push('/application');
+    openService({
+      id: 'application',
+      type: 'local',
+      url: 'Application',
+      title: '全部应用',
+    });
+  }
+  openService = () => {
+    openService('abcdefg');
   }
   // 调用快捷应用 点击单独每个应用
   openServiceFn = (applicationCode) => {
@@ -107,31 +112,34 @@ class HeaderContainer extends Component {
       rightContent,
       messageType,
       imShowed,
-      portalInfo,
       serviceList,
       userInfo,
     } = this.props;
     const rightArray = Children.toArray(rightContent);
-    // const { portalUrl } = portalInfo;
     const portalUrl = getHost('yzone');
     let imClass = imShowed ? "active tc" : "tc";
     const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <div className={`${rightBtn}`} style= {{marginRight: "15px",display:homeStyle}}>
+      <div className={`${rightBtn}`} style={{ marginRight: "15px", display: homeStyle }}>
         <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
           <Icon title="我的门户" type="Friends-space" style={{ fontSize: "18px" }} />
         </a>
       </div>,
+
       <QuickApplication
         quickText={this.state.quickText}
-        serviceList={serviceList} 
-        openAllFn={this.openAllFn} 
-        openServiceFn={this.openServiceFn} 
+        serviceList={serviceList}
+        openAllFn={this.openAllFn}
+        openServiceFn={this.openServiceFn}
       />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
-        <Icon title="智能通讯" type="clock" style={{  }} />
+        <Icon title="智能通讯" type="clock" style={{}} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
+      </div>,
+      <Personal />,
+      <div style={{ width: '50px', textAlign: "center" }} onClick={this.openService}>
+        <Icon type="bill" />
       </div>,
     );
     return (

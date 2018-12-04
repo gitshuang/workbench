@@ -25,9 +25,6 @@ import 'assets/style/Form.css';
 @connect(
   mapStateToProps(
     'userInfo',
-    {
-      namespace: 'home',
-    },
   ),
   {
     requestStart,
@@ -106,7 +103,7 @@ class Updateenter extends Component {
     const { locale } = getContext(); 
     return (
       <div style={{ overflow: "hidden" }}>
-        <div className="um-header header">
+        {/* <div className=" header">
           <Header onLeftClick={this.goHome}>
             <div>
               <span>企业认证</span>
@@ -115,7 +112,7 @@ class Updateenter extends Component {
           <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '企业认证' }]} goback={this.goBack} />
           </div>
-        </div>
+        </div> */}
         <div className="content">
           <div className={pageEnterprise}>
             <div className={enterTitle} >企业认证</div>

@@ -10,7 +10,7 @@ class ManageTeamEnter extends Component {
   render() {
     return (
       <ApplicationWrap name="管理团队\企业">
-        <div className={`${bg} um-content um-vbox`}>
+        <div className={`${bg}  um-vbox`}>
           <IFrame title="帐号管理" url={`${getHost('manageTeamEnter')}`} />
         </div>
       </ApplicationWrap>

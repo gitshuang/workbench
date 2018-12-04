@@ -33,8 +33,8 @@ class Application extends Component {
       goBack,
     } = this.props;
     return (
-      <div className="um-win">
-        <div className="um-header header">
+      <div className="">
+        {/* <div>
           <Header onLeftClick={this.goHome} >
             <div>
               <span>{name}</span>
@@ -46,8 +46,8 @@ class Application extends Component {
               goback={goBack || this.goBack}
             />
           </div>
-        </div>
-        <div className={`content um-box um-content`}>
+        </div> */}
+        <div className={`content um-box `}>
           {
             Children.map(children, (child) => cloneElement(child))
           }

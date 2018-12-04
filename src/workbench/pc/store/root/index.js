@@ -47,6 +47,8 @@ const {
   requestStart,
   requestSuccess,
   requestError,
+  getUserInfo,
+  setUserInfo,
   getServiceList,
   getMessage,
   popMessage,
@@ -66,9 +68,18 @@ const {
   closeDialogNew,
   openFrame,
   closeFrame,
+
+  changeActive,
+  addTabs,
+  changeTabsRouter,
 } = actions;
 
 const defaultState = {
+  userInfo: {},
+  tabs: [
+
+  ],
+  activeCarrier: 'home',
   serviceList: [],
   messageType: false,
   messageList: [],
@@ -115,6 +126,27 @@ const reducer = handleActions({
       dialogType: 'error',
       dialogTitle: '错误',
       dialogMsg: msg
+    };
+  },
+  [getUserInfo]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    payload.allowTenants.forEach((da) => {
+      da.type = da.team;// 需求变更，废弃team字段。
+    });
+    return {
+      ...state,
+      userInfo: payload,
+    };
+  },
+  [setUserInfo]: (state, { payload, }) => {
+    payload.allowTenants.forEach((da) => {
+      da.type = da.team;// 需求变更，废弃team字段。
+    });
+    return {
+      ...state,
+      userInfo: payload,
     };
   },
   [getServiceList]: (state, { payload: serviceList, error }) => {
@@ -253,6 +285,42 @@ const reducer = handleActions({
       showFrame: false,
       frameParam: {}
     }
+  },
+  [changeActive]: (state, { payload, }) => {
+    return {
+      ...state,
+      activeCarrier: payload,
+    };
+  },
+  [addTabs]: (state, { payload, }) => {
+    const { tabs } = state;
+    const isF = tabs.find((item) => {
+      return item.id === payload.id
+    });
+    if (isF && tabs.length) {
+      return {
+        ...state,
+        activeCarrier: payload.id
+      }
+    }
+    return {
+      ...state,
+      tabs: [payload, ...tabs],
+      activeCarrier: payload.id
+    };
+  },
+  [changeTabsRouter]: (state, { payload, }) => {
+    const { tabs } = state;
+    const index = tabs.findIndex((item) => {
+      return item.id === payload.id;
+    });
+    if (index > -1) {
+      tabs.splice(index, 1, payload);
+    }
+    return {
+      ...state,
+      tabs: [...tabs],
+    };
   },
 }, defaultState);
 

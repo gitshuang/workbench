@@ -1,8 +1,9 @@
 import { createTypes } from '@u';
 
 export default createTypes(
-  'GET_USER_INFO',
-  'SET_USER_INFO',
+  'CHANGE_ACTIVE',
+  'ADD_TABS',
+  'CHANGE_TABS_ROUTER',
   'GET_WORK_LIST',
   'CHANGE_REQUEST_DISPLAY',
   'CLOSE_REQUEST_DISPLAY',

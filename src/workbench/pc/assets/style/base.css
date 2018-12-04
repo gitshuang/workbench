@@ -25,8 +25,28 @@ body {
   color: #555555;
 }
 
+#root{
+  width: 100%;
+  min-height: 100%;
+  background: linear-gradient(180deg,#a8abb0,#d8dadc);
+}
+.diwork{
+  background-image: url('../image/homeBg.png');
+  background-repeat: repeat-x;
+  background-position: top center;
+  min-height: 100%;
+}
+
+.um-win{
+  background-image: url('../image/homeBg.png');
+  background-repeat: repeat-x;
+  background-position: top center;
+}
+
 .wrap {
-  padding: 20px;
+  width: 100%;
+  height: 100%;
+  padding-top: 90px;
 }
 
 .header{
@@ -38,12 +58,13 @@ body {
   background:url("../image/wgt/navBar_bg.png") no-repeat;
   background-position: right;
   background-color:#ffffff;
+  height: 88px;
 }
 
 .content{
-  margin-top: 80px;
   overflow-x: auto;
 }
+
 
 .appBreadcrumb{
   padding-left: 23px;

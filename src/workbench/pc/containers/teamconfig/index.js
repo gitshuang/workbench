@@ -73,7 +73,7 @@ import {
     {
       key: 'userInfo',
       value: (teamconfig, ownProps, root) => {
-        return root.home.userInfo
+        return root.userInfo
       }
     },
     {

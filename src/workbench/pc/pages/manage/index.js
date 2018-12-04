@@ -10,6 +10,7 @@ import manageActions from 'store/root/manage/actions';
 import CreateManageModule from 'pub-comp/manageWidget';
 import folderBgSrc from 'assets/image/wgt/folder_bg.png';
 import HeaderPage from './headerPage';
+import {win} from './style.css';
 import LanguagesJSON from 'yutils/languages';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -526,8 +527,8 @@ class Manage extends Component {
 			languagesJSON: LanguagesJSON
     };
     return (
-      <div>
-        <HeaderPage list={list} />
+      <div className={win}>
+        {/* <HeaderPage list={list} /> */}
         <CreateManageModule {...manageReduxParams} {...manageOuterParams} />
       </div>
     );

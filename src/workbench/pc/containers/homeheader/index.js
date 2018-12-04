@@ -3,18 +3,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
-
+// 公共组件
+import Icon from 'pub-comp/icon';
 /*   actions   */
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 
-import Icon from 'pub-comp/icon';
-// import Header from 'containers/header';
-import Navbar from 'components/scrollNav';
+// 业务组件
 import DropdownButton from 'components/dropdown';
-// import Personals from './personal';
-import { allBtn, btnDisable, create } from './style.css';
-// import logoUrl from 'assets/image/logo2.svg';
+import Menu from './menu';
+import Tabmenu from './tabs';
+import Header from 'containers/header';
+import { menus, create } from './style.css';
+import logoUrl from 'assets/image/logo2.svg';
 
 
 const {
@@ -25,6 +26,8 @@ const {
   requestStart,
   requestSuccess,
   requestError,
+  changeActive,
+  changeTabsRouter,
 } = rootActions;
 
 
@@ -32,15 +35,18 @@ const {
 @connect(
   mapStateToProps(
     'userInfo',
+    'activeCarrier',
   ),
   {
     changeRequestDisplay,
     requestStart,
     requestSuccess,
     requestError,
+    changeActive,
+    changeTabsRouter
   },
 )
-class HeaderPage extends Component {
+class Homeheader extends Component {
   static propTypes = {
     changeRequestDisplay: PropTypes.func,
     requestStart: PropTypes.func,
@@ -51,7 +57,6 @@ class HeaderPage extends Component {
       company: PropTypes.string,
       userAvator: PropTypes.string,
     }),
-    list: PropTypes.arrayOf(PropTypes.object),
   };
   static defaultProps = {
     changeRequestDisplay: () => { },
@@ -59,7 +64,6 @@ class HeaderPage extends Component {
     requestSuccess: () => { },
     requestError: () => { },
     userInfo: {},
-    list: [],
   };
   constructor(props) {
     super(props);
@@ -110,8 +114,6 @@ class HeaderPage extends Component {
       ?
       <DropdownButton
         getPopupContainer={() => document.getElementById('home_header')}
-        openMenu={this.openMenu}
-        closeFun={this.closeFun}
         label={company}
         tenantId={tenantId}
         type="home"
@@ -148,10 +150,6 @@ class HeaderPage extends Component {
     window.location.replace(locationUrl);
   }
 
-  closeFun = () => { }
-
-  openMenu = () => { }
-
   // 点击下拉
   allBtnOnclick = () => {
     this.setState({
@@ -164,46 +162,48 @@ class HeaderPage extends Component {
       btnShow,
     });
   }
-  render() {
-    const {
-      list,
-    } = this.props;
 
-    // const personal = <Personals />;
-    const BtnShow = this.state.btnShow ? null : btnDisable;
-    // const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop:'8px', width: '145px' }} /></a>;
+  changeRouter = () => {
+    const { changeTabsRouter } = this.props;
+    changeTabsRouter({
+      id: 'create',
+      type: 'local',
+      url: 'CreateEnter',
+      title: '创建企业',
+    });
+  }
+
+
+  render() {
+    const { changeActive, activeCarrier } = this.props;
+    const menu = <Icon type='master' />;
+    const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '145px' }} /></a>;
     return (
-      <div className="" id="home_header">
-        {/* <Header
+      <div className="header" id="home_header">
+        <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
-          iconName={personal}
+          iconName={menu}
         >
           <span>{title || '首页'}</span>
-        </Header> */}
-        {
-          list.length >= 1 ? (
-            <Navbar
-              items={list}
-              offset={0}
-              duration={500}
-              delay={0}
-              allBtn={this.state.allBtn}
-              btnShowFn={this.btnShowFn}
-            />
-          ) : null
-        }
-        <div
-          className={`${allBtn} ${BtnShow}`}
-          onClick={this.allBtnOnclick}
-          onKeyDown={this.allBtnOnclick}
-          role="presentation"
-        >
-          {this.state.allBtn ? '收起' : '显示全部'}
-          <Icon type={this.state.allBtn ? 'upward' : 'pull-down'} />
+        </Header>
+        <div className={menus}>
+          <div
+            style={{ width: '50px', textAlign: "center", lineHeight: '40px' }}
+            onClick={() => { this.changeRouter() }}
+          >
+            <Icon type="record" />
+          </div>
+          <div
+            onClick={() => { changeActive('home') }}
+            style={{ background: activeCarrier === "home" ? 'red' : 'none', width: '50px', textAlign: "center", lineHeight: '40px' }}
+          >
+            <Icon type="home" />
+          </div>
+          <Tabmenu />
         </div>
       </div>
     );
   }
 }
-export default HeaderPage;
+export default Homeheader;

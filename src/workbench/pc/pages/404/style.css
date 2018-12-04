@@ -5,7 +5,7 @@
 .wrap :global(.icon-dingzhi.active){
   color: red;
 }
-.wrap :global(.um-content) {
+.wrap :global(.) {
   flex-direction: column;
   display: flex;
 }

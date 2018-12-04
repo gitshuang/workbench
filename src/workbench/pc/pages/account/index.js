@@ -12,7 +12,7 @@ class Account extends Component {
     
     return (
       <ApplicationWrap name="帐号管理">
-        <div className={`${bg} um-content um-vbox`}>
+        <div className={`${bg}  um-vbox`}>
           <IFrame title="帐号管理" url={`${getHost('euc')}/diuser?locale=${locale === "zh_TW" ? "zh_HK" : locale}`} />
         </div>
       </ApplicationWrap>

@@ -24,16 +24,12 @@ import {
 
 import applicationActions from 'store/root/application/actions';
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
 const { getAllApplicationList } = applicationActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 @withRouter
 @connect(
   mapStateToProps(
     'userInfo',
-    {
-      namespace: 'home',
-    },
   ),
   {
     requestStart,
@@ -260,9 +256,9 @@ class serviceClassify extends Component {
 
     return (
       <div className={bg + " um-vbox"}>
-        <div className={bg_wrap + " um-content um-vbox"}>
-          <div className={`${wrap} ${clearfix} um-content um-vbox`}>
-            <div style={{ overflow: "hidden" }}>
+        <div className={bg_wrap + "  um-vbox"}>
+          <div className={`${wrap} ${clearfix}  um-vbox`}>
+            <div>
               <SearchInput
                 onKeyDown={this.onKeyup}
                 onChange={this.inputOnChange}
@@ -272,7 +268,8 @@ class serviceClassify extends Component {
                 btnText="搜索"
                 classname={left}
               />
-              {_appType && locale === "zh_CN" ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand> : null}
+              <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>
+              {/* {_appType && locale === "zh_CN" ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand> : null} */}
             </div>
             <div className={um_content}>
               <div>
@@ -287,7 +284,7 @@ class serviceClassify extends Component {
                   </ButtonGroup>
                 </div>
               </div>
-              <div className={appContent + " um-bf1 um-content"}>
+              <div className={appContent + " um-bf1 "}>
                 <ul className={`${appsList} ${clearfix}`}>
                   {list}
                 </ul>

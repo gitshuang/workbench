@@ -40,8 +40,8 @@ class CreateTeam extends Component {
   render() {
     const { match: { params } } = this.props;
     return (
-      <div className='um-win'>
-        <div className="um-header header">
+      <div className=''>
+        {/* <div className=" header">
           <Header onLeftClick={this.goHome} >
             <div>
               <span>创建团队</span>
@@ -50,8 +50,8 @@ class CreateTeam extends Component {
           <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '创建团队' }]} goback={this.goBack} />
           </div>
-        </div>
-        <div className="um-content content">
+        </div> */}
+        <div className=" content">
           <CreateTeamContent />
         </div>
       </div>

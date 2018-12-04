@@ -22,7 +22,12 @@ const { setCurrent } = rootActions;
 @connect(
   mapStateToProps(
     'requestDisplay',
-    'userInfo',
+    {
+      key: 'userInfo',
+      value: (home, ownProps, root) => {
+        return root.userInfo
+      }
+    },
     {
       key: 'exitModal',
       value: (home, ownProps, root) => root.teamconfig.exitModal,
@@ -34,10 +39,7 @@ const { setCurrent } = rootActions;
   {
     closeRequestDisplay,
     openExitModal,
-    // getUserInfo,
     setCurrent,
-    // getAllEnable,
-    // getCurrent,
   },
 )
 class Personals extends Component {
@@ -161,7 +163,7 @@ class Personals extends Component {
   }
 
   getAllEnableFunc = () => {
-    const{locale,multilist} = window.diworkContext();
+    const { locale, multilist } = window.diworkContext();
     let languageListVal = [];
     if (multilist && JSON.parse(multilist).length) {
       JSON.parse(multilist).map((item) => {
@@ -169,19 +171,19 @@ class Personals extends Component {
         languageListVal.push(item);
       });
       this.setState({
-        language: { ...this.state.language, languageList: languageListVal,defaultValue: locale ? locale : 'zh_CN' }
+        language: { ...this.state.language, languageList: languageListVal }
       }, () => {
         //获取默认
-        //this.getDefaultLang(locale);
+        this.getDefaultLang(locale);
       })
     }
   }
 
-  // getDefaultLang = (locale) => {
-  //   this.setState({
-  //     language: { ...this.state.language, defaultValue: locale ? locale : 'zh_CN' }
-  //   });
-  // }
+  getDefaultLang = (locale) => {
+    this.setState({
+      language: { ...this.state.language, defaultValue: locale ? locale : 'zh_CN' }
+    });
+  }
 
   onChangeLanguage = (value) => {
     this.props.setCurrent(value).then(({ error, payload }) => {
@@ -221,6 +223,15 @@ class Personals extends Component {
 
   dispatch = (action) => {
     const { routers, currType, userInfo } = this.state;
+    if (action === "openConfig") {
+      openService({
+        id: 'teamconfig',
+        type: 'local',
+        url: 'Teamconfig',
+        title: '团队设置',
+      });
+      return false;
+    }
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
       return false;

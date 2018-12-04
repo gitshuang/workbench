@@ -13,7 +13,7 @@ class UserInfo extends Component {
     // let url = getHost('user')+"#/staff/personInfor-card";
     return (
       <ApplicationWrap name="员工信息">
-        <div className={`${bg} um-content um-vbox`}>
+        <div className={`${bg}  um-vbox`}>
           <IFrame title="员工信息" url={`${getHost('user')}#/staff/personInfor-card`} />
         </div>
       </ApplicationWrap>

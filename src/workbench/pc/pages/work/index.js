@@ -365,8 +365,8 @@ export default class Work extends Component {
       type,
     } = this.props;
     return (
-      <div className={`${wrap} um-win ${work}`}>
-        <div className="um-header header">
+      <div className={`${wrap}  ${work}`}>
+        <div className=" header">
           <HeaderContainer onLeftClick={this.goBack} leftContent={domainName}>
             <div className={titleArea}>
               <span>{title}</span>

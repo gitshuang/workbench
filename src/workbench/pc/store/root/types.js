@@ -4,6 +4,8 @@ export default createTypes(
   'REQUEST_START',
   'REQUEST_SUCCESS',
   'REQUEST_ERROR',
+  'GET_USER_INFO',
+  'SET_USER_INFO',
   'GET_SERVICE_LIST',
   'GET_MESSAGE',
   'CHANGE_QUICK_SERVICE_DISPLAY',
@@ -25,4 +27,7 @@ export default createTypes(
   'CLOSE_DIALOG_NEW',
   'OPEN_FRAME',
   'CLOSE_FRAME',
+  'CHANGE_ACTIVE',
+  'ADD_TABS',
+  'CHANGE_TABS_ROUTER',
 );

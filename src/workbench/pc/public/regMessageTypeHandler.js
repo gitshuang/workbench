@@ -7,7 +7,8 @@ import { postMessageToWin, get, logout } from "@u";
 import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
 import { trigger } from "./componentTools";
 import {
-  getProductInfo
+  getProductInfo,
+  getServiceInfoWithDetail,
 } from 'store/root/work/api';
 import { openMessage } from 'components/message';
 import { pushYA, appendSearchParam } from "yutils/utils";
@@ -20,8 +21,13 @@ const {
   closeDialogNew,
   openFrame,
   closeFrame,
+  getUserInfo,
+  addTabs,
+  changeTabsRouter
 } = rootActions;
-const { getUserInfo } = homeActions;
+const {
+  
+} = homeActions;
 const handlers = {
   openService({ serviceCode, data, type, tenantId }) {
     if (tenantId && serviceCode) {
@@ -73,29 +79,61 @@ const handlers = {
         console.log(err);
       });
     } else if (serviceCode) {
+      // 打开本地
+      if (typeof serviceCode === "object") {
+        store.dispatch(addTabs(serviceCode));
+        return false;
+      }
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
-      let typeVal = type === 2 ? 'app' : 'service';
-      getProductInfo(serviceCode, typeVal).then((payload) => {
+      // let typeVal = type === 2 ? 'app' : 'service';
+      // getProductInfo(serviceCode, typeVal).then((payload) => {
+      //   const {
+      //     curService: {
+      //       serviceCode: subCode,
+      //       url
+      //     },
+      //     curMenuBar: {
+      //       workspaceStyle
+      //     }
+      //   } = payload;
+      //   const locationProtocol = window.location.protocol;
+      //   const origin = window.location.origin;
+      //   if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
+      //     // const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`, data);
+      //     // window.open(location);
+      //     window.open(url);
+      //   } else {
+      //     store.dispatch(setProductInfo(payload));
+      //     this.props.history.push(`/${typeVal}/${serviceCode}/${subCode}`);
+      //   }
+      //   pushYA(subCode);
+      // }, (err) => {
+      //   console.log(err);
+      // });
+      getServiceInfoWithDetail(serviceCode).then((payload) => {
         const {
-          curService: {
-            serviceCode: subCode,
-            url
-          },
-          curMenuBar: {
-            workspaceStyle
-          }
+          serviceId,
+          serviceName,
+          url,
+          workspaceStyle,
+          serviceCode: subCode,
         } = payload;
         const locationProtocol = window.location.protocol;
-        const origin = window.location.origin;
         if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
-          // const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`, data);
-          // window.open(location);
           window.open(url);
         } else {
-          store.dispatch(setProductInfo(payload));
-          this.props.history.push(`/${typeVal}/${serviceCode}/${subCode}`);
+          const locations = appendSearchParam(url, {
+            ...getOpenServiceData(serviceCode),
+            serviceCode,
+          });
+          store.dispatch(addTabs({
+            id: serviceId,
+            type: 'service',
+            url: locations,
+            title: serviceName,
+          }));
         }
         pushYA(subCode);
       }, (err) => {
@@ -187,12 +225,17 @@ const handlers = {
   },
   openHomePage(data) {
     try {
-      if (!data.userId) throw "NOT NULL";
+      if (!data.userId) {
+        throw new Error("userId is required");
+      }
       const key = data.key || 'info';
       this.props.history.push(`/homepage/${data.userId}/${key}`);
     } catch (err) {
       console.log(err);
     }
+  },
+  setServiceRouter(data){
+    store.dispatch(changeTabsRouter());
   }
 }
 window.handlers = handlers;
@@ -288,6 +331,6 @@ export function openIframe(data) {
 export function openHomePage(data) {
   handlers.openHomePage(data);
 }
-export function refreshUserInfo(){
+export function refreshUserInfo() {
   handlers.refreshUserInfo();
 }

@@ -82,7 +82,7 @@ class Account extends Component {
         brms={brmVal.length > 1 ? brmVal[brmVal.length - 2] : [{ name: '' }]} 
         goBack={this.goBack}
       >
-        <div className={`${bg} um-content um-vbox`}>
+        <div className={`${bg}  um-vbox`}>
           {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
           {
             appId

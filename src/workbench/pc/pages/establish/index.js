@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Header from 'components/header';
 import EstablishContent from 'containers/establishContent';
-import Personals from 'pages/home/personal';
+// import Personals from 'pages/home/personal';
 import logoUrl from 'assets/image/logo.svg';
 import { wrap } from './index.css';
 
@@ -32,15 +32,15 @@ class Establish extends Component {
 
 
   render() {
-    const iconname = <Personals icons={this.state.icons} />;
+    // const iconname = <Personals icons={this.state.icons} />;
     return (
-      <div className={`um-win ${wrap}`} >
-        <div className="um-header" style={{ background: 'white', position: 'relative' }}>
+      <div className={` ${wrap}`} >
+        {/* <div className="" style={{ background: 'white', position: 'relative' }}>
           <Header iconName={iconname}>
             <img alt="" src={logoUrl} style={{ width: '86px' }} />
           </Header>
-        </div>
-        <div className="um-content">
+        </div> */}
+        <div className="">
           <EstablishContent type="init" />
         </div>
       </div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import { openService } from 'public/regMessageTypeHandler';
 import Dropdown from 'bee/dropdown';
 import Icon from 'pub-comp/icon';
 import Menu, { Item as MenuItem } from 'bee/menus';
@@ -76,14 +78,26 @@ class DropdownButton extends Component {
     const {
       history,
     } = this.props;
-    history.push('/establishusercenter');
+    // history.push('/establishusercenter');
+    openService({
+      id: 'create',
+      type: 'local',
+      url: 'EstablishUserCenter',
+      title: '创建企业/团队',
+    });
   }
 
   manageOnclick = () => {
     const {
       history,
     } = this.props;
-    history.push('/manageTeamEnter');
+    openService({
+      id: 'ManageTeamEnter',
+      type: 'local',
+      url: 'ManageTeamEnter',
+      title: '管理应用',
+    });
+    // history.push('/manageTeamEnter');
   }
 
   render() {

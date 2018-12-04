@@ -43,12 +43,14 @@ const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     'inviteJoinAddress',
     {
       key: 'userInfo',
-      value: (invitation, ownProps, root) => root.home.userInfo,
+      value: (home, ownProps, root) => {
+        return root.userInfo
+      }
     },
     {
       namespace: 'invitation',
     },
-
+    
   ),
   {
     requestStart,
@@ -216,8 +218,8 @@ class Invitation extends Component {
     );
     */
     return (
-      <div className="um-win">
-        <div className="um-header header">
+      <div className="">
+        {/* <div className=" header">
           <Header onLeftClick={this.goHome} >
             <div>
               <span>邀请成员</span>
@@ -226,8 +228,8 @@ class Invitation extends Component {
           <div className="appBreadcrumb">
             <BreadcrumbContainer data={[{ name: '邀请成员' }]} goback={this.goBack} />
           </div>
-        </div>
-        <div className={`${wrap} um-content content`}>
+        </div> */}
+        <div className={`${wrap}  content`}>
           <div className={content}>
             <Tabs
               destroyInactiveTabPane

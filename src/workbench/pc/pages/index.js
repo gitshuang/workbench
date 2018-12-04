@@ -16,7 +16,6 @@ import { getContext, mapStateToProps } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
 
 import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
@@ -30,8 +29,8 @@ const {
   requestError,
   getServiceList,
   getPoll,
+  setUserInfo
 } = rootActions;
-const { setUserInfo, } = homeActions;
 
 function timer(fn, time) {
   let timerId = 0;
@@ -107,11 +106,12 @@ class Root extends Component {
       setUserInfo
     } = this.props;
     const { tenantid } = getContext();
+    // 将ftl文件header中的userinfo赋值到store中
+    setUserInfo(this.userInfo);
     if (!tenantid) {
       this.props.history.replace('/establish');
     } else {
-      // 将ftl文件header中的userinfo赋值到store中
-      setUserInfo(this.userInfo);
+      
       // 请求快捷应用
       getServiceList().then(({ error, payload }) => {
         if (error) {
@@ -155,7 +155,9 @@ class Root extends Component {
           {
             this.isLogin
               ?
-              routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+              routes.map((route, i) => {
+                return <RouteWithSubRoutes key={i} {...route} />
+              })
               :
               duoyuRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
           }
@@ -169,11 +171,13 @@ class Root extends Component {
 }
 
 const App = () => (
-  <Router>
+  
     <Provider store={store} >
-      <Root />
+      <Router>
+         <Root />
+      </Router>
     </Provider>
-  </Router>
+  
 );
 
 export default App;

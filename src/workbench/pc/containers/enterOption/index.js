@@ -23,8 +23,8 @@ import { enter_option, item_li, up } from './style.css';
     'exitModal',        //  退出团队弹窗开关
     {
       key: 'userInfo',
-      value: (teamconfig, ownProps, root) => {
-        return root.home.userInfo
+      value: (home, ownProps, root) => {
+        return root.userInfo
       }
     },
     {

@@ -10,9 +10,6 @@ import { select_enter } from './index.css';
 @connect(
   mapStateToProps(
     'userInfo',
-    {
-      namespace: 'home',
-    }
   ),
   {
   }

@@ -1,6 +1,5 @@
 import { get, post } from '@u';
 
-export const getUserInfo = () => get('/user/getUserInfo');
 export const getWorkList = param => get('/desktop/getdeskTop', param);
 
 // 企业中设置

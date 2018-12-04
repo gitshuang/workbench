@@ -23,9 +23,6 @@ import 'assets/style/Form.css';
 @connect(
   mapStateToProps(
     'userInfo',
-    {
-      namespace: 'home',
-    },
   ),
   {
     requestStart,
@@ -91,7 +88,7 @@ class Enterprise extends Component {
     const { locale } = getContext();
     return (
       <div style={{ overflow: "hidden" }}>
-        <div className="header um-header">
+        {/* <div className="header ">
           <Header
             onLeftClick={this.goHome}
           >
@@ -102,7 +99,7 @@ class Enterprise extends Component {
           <div className="appBreadcrumb">
             <Breadcrumbs data={[{ name: '创建企业' }]} goback={this.goBack} />
           </div>
-        </div>
+        </div> */}
 
         <div className="content">
           <div className={pageEnterprise}>

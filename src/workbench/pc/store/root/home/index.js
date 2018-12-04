@@ -2,8 +2,6 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
-  getUserInfo,
-  setUserInfo,
   getEnterInfo,
   getWorkList,
   changeRequestDisplay,
@@ -17,7 +15,6 @@ const {
 } = actions;
 
 const defaultState = {
-  userInfo: {},
   enterInfo: {},
   workList: [],
   requestDisplay: false,
@@ -41,27 +38,6 @@ const createReducer = key => (state, { payload, error }) => {
 };
 
 const reducer = handleActions({
-  [getUserInfo]: (state, { payload, error }) => {
-    if (error) {
-      return state;
-    }
-    payload.allowTenants.forEach((da) => {
-      da.type = da.team;// 需求变更，废弃team字段。
-    });
-    return {
-      ...state,
-      userInfo: payload,
-    };
-  },
-  [setUserInfo]: (state, { payload, }) => {
-    payload.allowTenants.forEach((da) => {
-      da.type = da.team;// 需求变更，废弃team字段。
-    });
-    return {
-      ...state,
-      userInfo: payload,
-    };
-  },
   [getEnterInfo]: createReducer('enterInfo'),
   [getWorkList]: (state, { payload, error }) => {
     if (error) {

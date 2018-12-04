@@ -6,6 +6,7 @@ import teamconfigActions from 'store/root/teamconfig/actions';
 const { closeUpgradeModal } = teamconfigActions;
 import PopDialog from 'pub-comp/pop';
 import {content} from './index.css';
+import { openService } from 'public/regMessageTypeHandler';
 
 @withRouter
 @connect(
@@ -13,7 +14,7 @@ import {content} from './index.css';
 
   ),
   {
-    closeUpgradeModal
+    closeUpgradeModal,
   }
 )
 
@@ -37,8 +38,15 @@ class TeamUpgradeModal extends Component {
 
   // 删除确认
   configFn = () => {
-    const { history } = this.props;
-    history.push("/updateenter");
+    
+    openService({
+      id: 'updateenter',
+      type: 'local',
+      url: 'UpdateEnter',
+      title: '升级企业',
+    });
+    // const { history, } = this.props;
+    // history.push("/updateenter");
     this.cancelFn();
   }
 

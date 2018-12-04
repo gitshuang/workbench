@@ -2,7 +2,7 @@
   color: #E14C46;
 }
 
-.wrap :global(.um-content) {
+.wrap :global(.) {
   flex-direction: column;
   display: flex;
   margin-top: 86px;

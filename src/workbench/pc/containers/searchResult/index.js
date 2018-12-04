@@ -283,9 +283,9 @@ class searchResult extends Component {
     });
 
     return (
-      <div className={`${bg} um-content um-vbox`}>
-        <div className={`${bg_wrap} um-content um-vbox`}>
-          <div className={`${wrap} ${clearfix} um-content um-vbox`}>
+      <div className={`${bg}  um-vbox`}>
+        <div className={`${bg_wrap}  um-vbox`}>
+          <div className={`${wrap} ${clearfix}  um-vbox`}>
             <SearchInput
               onKeyDown = {this.onKeyup}
               onChange = {this.inputOnChange}
@@ -295,7 +295,7 @@ class searchResult extends Component {
               btnText = "搜索"
             />
             
-            <div className={'um-content' + ` ${tabContent}`}>
+            <div className={'' + ` ${tabContent}`}>
               <Tabs
                 destroyInactiveTabPane
                 defaultActiveKey={this.state.activetab}

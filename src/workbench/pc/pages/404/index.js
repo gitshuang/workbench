@@ -51,8 +51,8 @@ export default class Page404 extends Component {
 
   render() {
     return (
-      <div className={`${wrap} um-win`}>
-        <div className={`um-content ${page404Area}`}>
+      <div className={`${wrap} `}>
+        <div className={` ${page404Area}`}>
           <section>
             <div className={remindWord}>很抱歉，当前访问的页面已丢失</div>
           </section>

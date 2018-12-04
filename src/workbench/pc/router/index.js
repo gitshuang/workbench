@@ -1,5 +1,8 @@
+import React from 'react';
+import Wrap from 'pages/wrap';
 import Home from 'pages/home';
 import asyncComponent from './lazyload';
+
 const Page404 = asyncComponent(() => import(/* webpackChunkName: "Page404" */'pages/404'));
 // 工作页
 const Work = asyncComponent(() => import(/* webpackChunkName: "Work" */'pages/work'));
@@ -40,93 +43,122 @@ const HomePage = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'p
 
 const routes = [
   {
-    path: '/',
-    component: Home,
-    exact: true,
+    path: '/establishusercenter',
+    component: EstablishUserCenter,
   },
+  // {
+  //   path: '/application',
+  //   component: Application,
+  // },
+  // {
+  //   path: '/manage',
+  //   component: Manage,
+  // },
+  // {
+  //   path: '/404',
+  //   component: Page404,
+  // },
+  // {
+  //   path: '/:type(app|service)/:code/:subcode?',
+  //   component: Work,
+  // },
   {
-    path: '/404',
-    component: Page404,
-  },
-  {
-    path: '/:type(app|service)/:code/:subcode?',
-    component: Work,
-  },
-  {
-    path: '/application',
-    component: Application,
-  },
-  {
-    path: '/manage',
-    component: Manage,
-  },
-  {
-    path: '/search',
+    path: '/search/:id/:value',
     component: Search,
+  },
+  // {
+  //   path: '/establish',
+  //   component: Establish,
+  // },
+  // {
+  //   path: '/createteam/:data',
+  //   component: CreateTeam,
+  // },
+  // {
+  //   path: '/createenter/:data',
+  //   component: CreateEnter,
+  // },
+  // {
+  //   path: '/teamconfig',
+  //   component: Teamconfig,
+  // },
+  // {
+  //   path: '/updateenter',
+  //   component: UpdateEnter,
+  // },
+  // {
+  //   path: '/invitation',
+  //   component: Invitation,
+  // },
+  // {
+  //   path: '/account',
+  //   component: Account,
+  // },
+  // {
+  //   path: '/market',
+  //   component: Market,
+  // },
+  // {
+  //   path: '/market/application/:id',
+  //   component: Market,
+  // },
+  // {
+  //   path: '/renew/:id',
+  //   component: Renew,
+  // },
+  // {
+  //   path: '/userinfo',
+  //   component: UserInfo,
+  // },
+  // {
+  //   path: '/manageTeamEnter',
+  //   component: ManageTeamEnter,
+  // },
+  // {
+  //   path: '/homepage/:userId/:key',
+  //   component: HomePage,
+  // },
+
+
+  
+  {
+    path: '/',
+    component: Wrap,
+    // exact: true,
     routes: [
       {
-        path: '/search/:id/:value',
-        component: SearchResult,
+        path: '/',
+        component: Home,
+        exact: true,
+      },
+      {
+        path: '/manage',
+        component: Manage,
         exact: true,
       },
     ],
   },
-  {
-    path: '/establish',
-    component: Establish,
-  },
-  {
-    path: '/establishusercenter',
-    component: EstablishUserCenter,
-  },
-  {
-    path: '/createteam/:data',
-    component: CreateTeam,
-  },
-  {
-    path: '/createenter/:data',
-    component: CreateEnter,
-  },
-  {
-    path: '/teamconfig',
-    component: Teamconfig,
-  },
-  {
-    path: '/updateenter',
-    component: UpdateEnter,
-  },
-  {
-    path: '/invitation',
-    component: Invitation,
-  },
-  {
-    path: '/account',
-    component: Account,
-  },
-  {
-    path: '/market',
-    component: Market,
-  },
-  {
-    path: '/market/application/:id',
-    component: Market,
-  },
-  {
-    path: '/renew/:id',
-    component: Renew,
-  },
-  {
-    path: '/userinfo',
-    component: UserInfo,
-  },
-  {
-    path: '/manageTeamEnter',
-    component: ManageTeamEnter,
-  },
-  {
-    path: '/homepage/:userId/:key',
-    component: HomePage,
-  },
 ];
 
+export const Pages = {
+  Page404: <Page404 />,
+  Work: <Work />,
+  Application: <Application />,
+  Manage: <Manage />,
+  Search: <Search />,
+  SearchResult: <SearchResult />,
+  Establish: <Establish />,
+  EstablishUserCenter: <EstablishUserCenter />,
+  CreateTeam: <CreateTeam />,
+  CreateEnter: <CreateEnter />,
+  Teamconfig: <Teamconfig />,
+  UpdateEnter: <UpdateEnter />,
+  Invitation: <Invitation />,
+  Account: <Account />,
+  Market: <Market />,
+  Renew: <Renew />,
+  UserInfo: <UserInfo />,
+  ManageTeamEnter: <ManageTeamEnter />,
+  HomePage: <HomePage />
+}
 export default routes;

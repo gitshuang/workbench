@@ -52,7 +52,7 @@ class Account extends Component {
         name={brmVal.length <= 1 ? '应用详情' : brmVal[brmVal.length - 1].name}
         brms={brmVal.length === 0 ? [{ name: '全部应用' }] : brmVal.slice(0, brmVal.length - 1)}
       >
-        <div className={`${bg} um-content um-vbox`}>
+        <div className={`${bg}  um-vbox`}>
           {/* <iframe className={frameElm} src={'http://localhost:3005/#/application/'+id} /> */}
           {
             <iframe title="applicaton" className={frameElm} src={`/diwork-market/appMarket/#/application/${id}`} />

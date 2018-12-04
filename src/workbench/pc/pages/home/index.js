@@ -11,7 +11,7 @@ import rootActions from 'store/root/actions';
 import { ElementsWrapper } from 'components/scrollNav';
 import HomeFolderDialog from 'containers/homeFolderDialog';
 import WidgeList from 'containers/homeWidgetList';
-import HeaderPage from './headerPage';
+// import HeaderPage from './headerPage';
 import HomeMark from './mark';
 import { pageHome } from './style.css';
 
@@ -22,7 +22,12 @@ const { requestStart, requestSuccess, requestError } = rootActions;
 @connect(
   mapStateToProps(
     'workList',
-    'userInfo',
+    {
+      key: 'userInfo',
+      value: (home, ownProps, root) => {
+        return root.userInfo
+      }
+    },
     {
       namespace: 'home',
     },
@@ -240,6 +245,11 @@ class Home extends Component {
     });
   }
 
+  changeRouter = () => {
+    const { history } = this.props;
+    history.replace('/manage');
+  }
+
   render() {
     const {
       workList,
@@ -269,8 +279,9 @@ class Home extends Component {
     });
     return (
       <div ref='home' className={`${pageHome} home`}>
-        <HeaderPage list={list} />
-        <ElementsWrapper items={list} offset={-55}>
+        {/* <HeaderPage list={list} /> */}
+        <div style={{ background: "red", height: "20px", position: "absolute", top: '100px',zIndex: "111111" }} onClick={this.changeRouter}>切换到编辑</div>
+        <ElementsWrapper items={list} offset={0}>
           {conts}
         </ElementsWrapper>
         <HomeFolderDialog />
