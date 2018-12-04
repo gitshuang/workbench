@@ -105,13 +105,13 @@ class Root extends Component {
       getPoll,
       setUserInfo
     } = this.props;
-    const { tenantid } = getContext();
     // 将ftl文件header中的userinfo赋值到store中
     setUserInfo(this.userInfo);
+
+    const { tenantid } = getContext();
     if (!tenantid) {
       this.props.history.replace('/establish');
     } else {
-      
       // 请求快捷应用
       getServiceList().then(({ error, payload }) => {
         if (error) {
@@ -134,7 +134,7 @@ class Root extends Component {
   }
 
   getCurrentLan = () => {
-    let currentLan = window.getCurrentLangCode && window.getCurrentLangCode();
+    const currentLan = window.getCurrentLangCode && window.getCurrentLangCode();
     if (currentLan) {
       // 减少ajax请求
       this.setState({ defaultLan: currentLan, lanAjax: true });
@@ -145,10 +145,7 @@ class Root extends Component {
   render() {
     if (!this.isLogin && !this.state.lanAjax) return null;
     const { showFrame, showModal } = this.props;
-    let duoyuRoutes = loginRoutes;
-    if (this.state.defaultLan === 'en_US') {
-      duoyuRoutes = loginRoutesEn
-    }
+    const duoyuRoutes = this.state.defaultLan === 'en_US' ? loginRoutesEn : loginRoutes;
     return (
       <div>
         <Switch>
@@ -171,13 +168,11 @@ class Root extends Component {
 }
 
 const App = () => (
-  
-    <Provider store={store} >
-      <Router>
-         <Root />
-      </Router>
-    </Provider>
-  
+  <Provider store={store} >
+    <Router>
+      <Root />
+    </Router>
+  </Provider>
 );
 
 export default App;

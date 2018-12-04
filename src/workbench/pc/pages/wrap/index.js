@@ -57,7 +57,7 @@ class Wrap extends Component {
   rendercontent = () => {
     const { tabs, activeCarrier } = this.props;
     if (tabs && tabs.length) {
-      return tabs.map((item, index) => {
+      return tabs.map(item => {
         const dis = item.id === activeCarrier ? 'block' : 'none';
         return (
           <div className='' style={{ display: dis }} key={item.id}>
