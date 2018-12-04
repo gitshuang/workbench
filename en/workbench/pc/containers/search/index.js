@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { mapStateToProps } from '@u';
+import { mapStateToProps, getContext } from '@u';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { dispatch, trigger } from 'public/componentTools';
@@ -28,18 +28,12 @@ class SearchContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: {
-        placeholder: 'Personnel Info, service, and others',
-        more: 'More Results',
-        none: 'No result found',
-        clear: 'Clear',
-        search: 'Search',
-      },
+      
     };
   }
 
   goSearchPage = (text) => {
-    if(text === ""){
+    if (text === "") {
       text = " ";
     }
     this.props.history.push(`/search/addressbook/${text}`);
@@ -56,7 +50,7 @@ class SearchContainer extends Component {
 
   render() {
     const { SearchSuggestList } = this.props;
-    const { searchText } = this.state;
+    const { locale } = getContext();
     return (
       <Search
         list={SearchSuggestList}
@@ -65,8 +59,8 @@ class SearchContainer extends Component {
         onSearch={this.goSearchPage}
         onMoreBtnClick={this.goSearchPage}
         dispatch={dispatch}
-        trigger={trigger} 
-        searchText={searchText}
+        trigger={trigger}
+        locale={locale}
       />
     );
   }

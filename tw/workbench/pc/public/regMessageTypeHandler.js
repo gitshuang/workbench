@@ -281,13 +281,6 @@ export function openService(serviceCode, type) {
   handlers.openService({ serviceCode, type });
 }
 
-export function openIframe(data) {
-  handlers.openFrame(data);
-}
-
 export function openHomePage(data) {
   handlers.openHomePage(data);
-}
-export function refreshUserInfo(){
-  handlers.refreshUserInfo();
 }
