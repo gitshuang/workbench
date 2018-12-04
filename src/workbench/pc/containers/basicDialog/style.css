@@ -24,7 +24,7 @@
 }
 
 :global(.basic_dialog_modal .u-modal-body) {
-  margin-top: 0px;
+  /* margin-top: 0px; */
   /* height: 60px; */
 }
 
