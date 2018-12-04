@@ -2,7 +2,7 @@ import React, { Component, Children, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { mapStateToProps, getHost } from '@u';
+import { mapStateToProps, getHost, getContext } from '@u';
 import Icon from 'pub-comp/icon';
 import { openService } from 'public/regMessageTypeHandler';
 import { QuickApplication } from 'diwork-business-components';
@@ -51,11 +51,7 @@ class HeaderContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quickText: {
-        title: '快捷应用',
-        all: '全部应用',
-        more: '更多应用'
-      }
+
     };
   }
 
@@ -117,6 +113,7 @@ class HeaderContainer extends Component {
     } = this.props;
     const rightArray = Children.toArray(rightContent);
     const portalUrl = getHost('yzone');
+    const { locale } = getContext();
     let imClass = imShowed ? "active tc" : "tc";
     const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
     const rightContents = rightArray.concat(
@@ -128,7 +125,7 @@ class HeaderContainer extends Component {
       </div>,
 
       <QuickApplication
-        quickText={this.state.quickText}
+        locale={locale}
         serviceList={serviceList}
         openAllFn={this.openAllFn}
         openServiceFn={this.openServiceFn}

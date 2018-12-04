@@ -256,8 +256,8 @@ class serviceClassify extends Component {
 
     return (
       <div className={bg + " um-vbox"}>
-        <div className={bg_wrap + "  um-vbox"}>
-          <div className={`${wrap} ${clearfix}  um-vbox`}>
+        <div className={bg_wrap + " um-content um-vbox"}>
+          <div className={`${wrap} ${clearfix} um-content um-vbox`}>
             <div>
               <SearchInput
                 onKeyDown={this.onKeyup}
@@ -269,7 +269,7 @@ class serviceClassify extends Component {
                 classname={left}
               />
               <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>
-              {/* {_appType && locale === "zh_CN" ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand> : null} */}
+              {_appType && locale === "zh_CN" ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand> : null}
             </div>
             <div className={um_content}>
               <div>

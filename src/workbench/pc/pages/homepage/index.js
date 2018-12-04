@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { mapStateToProps, getHost, getContext } from '@u';
 
 import { trigger } from 'public/componentTools';
-import { openService, openIframe } from 'public/regMessageTypeHandler';
+import { openService, dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 import rootActions from 'store/root/actions';
 import homepageActions from 'store/root/homepage/actions';
@@ -233,13 +233,16 @@ class HomePage extends Component {
     // console.log(1);
     const { userId } = this.props.userInfo;
     const url = getHost("sendHonor");
-    openIframe({
-      id: 'honor',
-      url: url,
-      backdrop: true,
-      pageParam: {
-        name: 'malong',
-        userId: userId,
+    dispatchMessageTypeHandler({
+      type: 'openFrame',
+      detail: {
+        id: 'honor',
+        url: url,
+        backdrop: true,
+        pageParam: {
+          name: 'malong',
+          userId: userId,
+        }
       }
     });
   }

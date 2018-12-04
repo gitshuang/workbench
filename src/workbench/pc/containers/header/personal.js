@@ -48,21 +48,6 @@ class Personals extends Component {
     this.state = {
       currType: 0,
       userInfo: {},
-      personalText: {
-        name: '企业',
-        edit: '首页编辑',
-        info: '员工信息',
-        invitation: '邀请成员',
-        exit: '退出',
-        markTitle: '创建成功',
-        markDes: '快点邀请成员一起好好工作吧',
-        do: '我知道了',
-        set: '设置',
-        logout: '注销',
-        account: '账号管理',
-        dynamic: '动态',
-      },
-
       routers: {
         // openEntersetting: '/entersetting/home',
         openConfig: '/teamconfig',
@@ -170,8 +155,11 @@ class Personals extends Component {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
+      let newObj = Object.assign({}, this.state.language);
+      newObj.languageList = languageListVal;
+      newObj.defaultValue = locale ? locale : 'zh_CN';
       this.setState({
-        language: { ...this.state.language, languageList: languageListVal }
+        language: newObj,
       }, () => {
         //获取默认
         this.getDefaultLang(locale);
@@ -267,16 +255,14 @@ class Personals extends Component {
       icons
     } = this.props;
     const { userInfo, language, hrefs, TeamData, currType } = this.state;
-    let { personalText } = this.state;
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
-    personalText.name = currType == 0 ? '企业' : '团队';
-    console.log(2233333, language.defaultValue, language.languageList[0])
+    const { locale } = window.diworkContext();
+    if (language.defaultValue !== locale) return null;
     return (
       <div>
         <Personal
           currType={currType}
-          personalText={personalText}
           userInfo={userInfo}
           requestDisplay={requestDisplay}
           exitModal={exitModal}
@@ -287,6 +273,7 @@ class Personals extends Component {
           logout={logout}
           language={language}
           icons={icons || this.state.icons}
+          locale={locale}
         />
         {
           exitModal ?
