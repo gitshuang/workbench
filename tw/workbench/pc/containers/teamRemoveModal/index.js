@@ -50,7 +50,7 @@ class TeamRemoveModal extends Component {
         this.setState({
           msg:payload,
           btn:[{
-            label: '',
+            label: '知道了',
             fun: this.cancelFn,
           }]
         }); 
