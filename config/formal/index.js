@@ -1,4 +1,4 @@
-var webpackConfig = require('../webpack.formal.js');
+var webpackConfig = require('../webpack.build.js');
 var outPut = require('../outPut');
 var config = {
   env: '"production"',

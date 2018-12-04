@@ -93,8 +93,8 @@ module.exports = function (config) {
     devtool: config.productionSourceMap ? '#source-map' : false,
     output: {
       publicPath: config.assetsPublicPath,
-      filename: 'js/[name].js',
-      chunkFilename: 'js/chunk/[name]-[id].js'
+      filename: config.env === 'production' ? 'js/[name]-[chunkhash:8].js' : 'js/[name].js',
+      chunkFilename: config.env === 'production' ? 'js/chunk/[name]-[id]-[chunkhash:8].js' : 'js/chunk/[name]-[id].js'
     },
     plugins: [
       new webpack.DefinePlugin({
