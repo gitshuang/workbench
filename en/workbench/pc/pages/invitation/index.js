@@ -10,6 +10,7 @@ import inviteActions from 'store/root/invitation/actions';
 import Tabs, { TabPane } from 'bee/tabs';
 import FormControl from 'bee/form-control';
 import Message from 'bee/message';
+import { openMess } from 'pub-comp/notification';
 import { ButtonBrand } from 'pub-comp/button';
 import Header from 'containers/header';
 import TagsInput from 'components/tagsInput';
@@ -141,8 +142,14 @@ class Invitation extends Component {
     this.shortUrl.select();
     document.execCommand('copy');
 
-    Message.create({
-      content: 'Link copied. Send it to your friends now!', duration: 1.5, position: 'topLeft', color: 'success',
+    // Message.create({
+    //   content: '链接复制成功，赶快发送给你的小伙伴吧!', duration: 100.5, position: 'topLeft', color: 'success',
+    // });
+    openMess({
+      title: 'Link copied. Send it to your friends now!',
+      duration: 2,
+      type: 'success',
+      closable: false,
     });
   }
 
@@ -160,8 +167,14 @@ class Invitation extends Component {
     const { message, creator } = this.state;
     const mails = this.state.mails.filter(mail => mail && regMail.test(mail));
     if (mails.length <= 0) {
-      Message.create({
-        content: 'Please input a correct email address.!', duration: 1.5, position: 'topLeft', color: 'warning',
+      // Message.create({
+      //   content: '请输入正确的邮件地址!', duration: 1.5, position: 'topLeft', color: 'warning'
+      // });
+      openMess({
+        title: 'Please input a correct email address.!',
+        duration: 1.5,
+        type: 'error',
+        closable: false,
       });
     } else {
       const parent = { email: mails, message: message === '' ? 'YouZone-Empowering Employees Organizations' : message, creator };

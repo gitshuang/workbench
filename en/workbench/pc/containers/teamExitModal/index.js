@@ -84,7 +84,7 @@ class TeamRemoveModal extends Component {
     }
     const { msg, isManage, disable } = this.state;
     let btnLabel = "OK";
-    let _pop_title = "Confirm" + name + "?";
+    let _pop_title = "Confirm to " + name + "?";
     let _cont = null;
     let _btn = [
       {
@@ -109,13 +109,13 @@ class TeamRemoveModal extends Component {
       }
     } else if (isManage == 1) {//提示是否需要退出或解散
       _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title = "Confirm" + name + "?";
+      _pop_title = "Confirm to " + name + "?";
       _btn[0].fun = () => {
         this.configFn();
       }
     } else if (isManage == 3) {//退出失败后显示信息
       _cont = (<div className={content}><p>{msg}</p></div>);
-      _pop_title = "Confirm" + name + "?";
+      _pop_title = "Confirm to " + name + "?";
       _btn = null;
     } else if (isManage == 2) {//退出后选中企业/团队
       _pop_title = "You've" + name;

@@ -47,6 +47,7 @@ class TeamManagerModal extends Component {
     return (
       <PopDialog
           className="team_remove_modal"
+          type="warning"
           show={ true }
           title="设置管理员"
           backup={false}

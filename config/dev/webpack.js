@@ -2,14 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const baseWebpackConfig = require('../webpack.base.conf');
 const paths = require('../paths');
+const goalFilePath = require('../goalFilePath');
 
-const reg = /^LAN_TYPE\=/g;
-const goalFilePath = process.argv.length < 3 ? 'src' : process.argv[2].replace(reg, '');
 module.exports = function (config) {
   const webpackConfig = merge(baseWebpackConfig, {
     // add hot-reload related code to entry chunks
@@ -61,7 +58,7 @@ module.exports = function (config) {
               loader: 'css-loader',
               options: {
                 modules: true,
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                localIdentName: '[local]--[hash:base64:5]',
                 importLoaders: 1,
                 sourceMap: false,
               },

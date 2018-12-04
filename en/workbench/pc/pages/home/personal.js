@@ -46,21 +46,6 @@ class Personals extends Component {
     this.state = {
       currType: 0,
       userInfo: {},
-      personalText: {
-        name: 'Enterprise',
-        edit: 'Home',
-        info: 'Emp. Info',
-        invitation: 'Invite Member',
-        exit: 'Quit',
-        markTitle: ' created successfully',
-        markDes: 'Invite others to join and work together',
-        do: 'OK',
-        set: ' Settings',
-        logout: 'Log Out',
-        account: 'Account Mgmt',
-        dynamic: 'Moments',
-      },
-
       routers: {
         // openEntersetting: '/entersetting/home',
         openConfig: '/teamconfig',
@@ -161,16 +146,16 @@ class Personals extends Component {
   }
 
   getAllEnableFunc = () => {
-    const{locale,multilist} = window.diworkContext();
+    const { locale, multilist } = window.diworkContext();
     let languageListVal = [];
     if (multilist && JSON.parse(multilist).length) {
       JSON.parse(multilist).map((item) => {
         item = { value: item.langCode, context: item.dislpayName }
         languageListVal.push(item);
       });
-      let newObj = Object.assign({},this.state.language);
+      let newObj = Object.assign({}, this.state.language);
       newObj.languageList = languageListVal;
-      newObj.defaultValue = locale ? locale : 'zh_CN' ;
+      newObj.defaultValue = locale ? locale : 'zh_CN';
       this.setState({
         language: newObj,
       }, () => {
@@ -259,18 +244,14 @@ class Personals extends Component {
       icons
     } = this.props;
     const { userInfo, language, hrefs, TeamData, currType } = this.state;
-    let { personalText } = this.state;
 
     const currData = currType == 0 ? TeamData[0] : TeamData[1];
-    personalText.name = currType == 0 ? 'Enterprise' : 'Team';
-    const{locale} = window.diworkContext();
-    if(language.defaultValue !== locale) return null;
-    // console.log(2233333, language.defaultValue, language.languageList[0])
+    const { locale } = window.diworkContext();
+    if (language.defaultValue !== locale) return null;
     return (
       <div>
         <Personal
           currType={currType}
-          personalText={personalText}
           userInfo={userInfo}
           requestDisplay={requestDisplay}
           exitModal={exitModal}
@@ -281,6 +262,7 @@ class Personals extends Component {
           logout={logout}
           language={language}
           icons={icons || this.state.icons}
+          locale={locale}
         />
         {
           exitModal ?

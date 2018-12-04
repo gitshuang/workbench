@@ -49,7 +49,10 @@ class TeamRemoveModal extends Component {
       if (error) {
         this.setState({
           msg:payload,
-          btn:[]
+          btn:[{
+            label: '知道了',
+            fun: this.cancelFn,
+          }]
         }); 
       }else{
         queryUser();
@@ -68,6 +71,7 @@ class TeamRemoveModal extends Component {
     return (
       <PopDialog
           className="team_remove_modal"
+          type="warning"
           show={ true }
           title="確認移除所選用戶?"
           backup={false}

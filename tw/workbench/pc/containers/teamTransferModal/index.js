@@ -55,6 +55,7 @@ class TeamTransferModal extends Component {
     return (
       <PopDialog
           className="team_transfer_modal"
+          type="warning"
           show={ true }
           title="移交團隊"
           backup={false}

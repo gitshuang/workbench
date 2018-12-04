@@ -50,17 +50,13 @@ var api = [
   '/service/getServiceByTenantIdAndServiceCode',
 
   '/manager/portalCtrl/getPortal',
-  
+
   '/language/getAllEnable',
   '/language/current',
   '/manager/application/getApplicationTips',
 ]
 
-var rapApi = [
-    // '/service/getAllServicesGroupByLabels'
-  // '/user/getUserInfo',
-
-];
+var rapApi = [];
 
 function makeRapConfig(key) {
   var config = {
@@ -75,7 +71,7 @@ function makeRapConfig(key) {
 function makeStaticConfig(key) {
   var config = {
     target: 'http://localhost:3000/static',
-    pathRewrite: function(path, req) {
+    pathRewrite: function (path, req) {
       return key + '.json';
     }
   };
@@ -87,14 +83,14 @@ function makeStaticConfig(key) {
 function addApi() {
   var obj = {};
   var options = Array.prototype.slice.call(arguments, 0);
-  options.forEach(function(options) {
+  options.forEach(function (options) {
     var makeConfig = options[0]
     var apis = options[1]
-    apis.forEach(function(api) {
+    apis.forEach(function (api) {
       obj[api] = makeConfig(api)
     })
   })
   return obj;
 }
 
-module.exports = addApi([makeStaticConfig, api],[makeRapConfig,rapApi])
+module.exports = addApi([makeStaticConfig, api], [makeRapConfig, rapApi])

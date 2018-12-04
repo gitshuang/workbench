@@ -1,13 +1,12 @@
-var path = require('path')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var baseWebpackConfig = require('../webpack.base.conf')
-var paths = require('../paths')
-var reg = /^LAN_TYPE\=/g;
-var  goalFilePath  = process.argv.length < 3? 'src' : process.argv[2].replace(reg,'');
+var path = require('path');
+var webpack = require('webpack');
+var merge = require('webpack-merge');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+var baseWebpackConfig = require('./webpack.base.conf');
+var paths = require('./paths');
+var goalFilePath = require('./goalFilePath');
+
 module.exports = function (config) {
   var webpackConfig = merge(baseWebpackConfig, {
     entry: {
@@ -39,7 +38,7 @@ module.exports = function (config) {
                   loader: 'css-loader',
                   options: {
                     modules: false,
-                    localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                    localIdentName: '[local]--[hash:base64:5]',
                     importLoaders: 1,
                     minimize: true,
                     sourceMap: true,
@@ -72,7 +71,7 @@ module.exports = function (config) {
                   loader: 'css-loader',
                   options: {
                     modules: true,
-                    localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                    localIdentName: '[local]--[hash:base64:5]',
                     importLoaders: 1,
                     minimize: true,
                     sourceMap: true,
@@ -128,7 +127,7 @@ module.exports = function (config) {
             module.resource &&
             /\.js$/.test(module.resource) &&
             module.resource.indexOf(
-              path.join(__dirname, '../../node_modules')
+              path.join(__dirname, '../node_modules')
             ) === 0
           )
         }

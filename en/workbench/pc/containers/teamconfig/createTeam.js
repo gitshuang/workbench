@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { withRouter } from 'react-router-dom';
 
-import { refreshUserInfo } from 'public/regMessageTypeHandler';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 import Form, { FormItem } from 'bee/form';
 import Upload from 'containers/upload';
@@ -133,7 +133,9 @@ class CreateTeam extends Component {
         // 改变当前页面上边的团队名称
         changeTenantName(payload.tenantName);
         // 重新拉取userinfo 
-        refreshUserInfo();
+        dispatchMessageTypeHandler({
+          type: 'refreshUserInfo',
+        });
         requestSuccess();
         openMess({
           title: 'Saved successfully.',

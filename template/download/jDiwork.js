@@ -22,12 +22,9 @@
     'http://workbenchdev.yyuap.com',
     'https://www.diwork.com',
     'https://workbench-daily.yyuap.com',
-    window.location.origin,
+    window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : ''),
   ];
-  // ie9下的substring
-  const windowLocationOrigin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');//ie8-ie10不兼容的原因
-  originList.push(windowLocationOrigin);
-  
+
   var getUid = function () {
     return ++uid;
   };
@@ -167,8 +164,18 @@
       }
     }
   };
+  var postMessage = function(){
+
+  }
   var postToDiwork = function (data) {
     data.messType = messType;
+    var origin = window.top.location.origin;
+    var param = JSON.stringify(data);
+    
+    if (originList.indexOf(origin) < 0) {
+      window.parent.postMessage(JSON.stringify(data), '*');
+      return;
+    }
     window.top.postMessage(JSON.stringify(data), '*');
   };
   var ready = function (callback) {
@@ -358,7 +365,7 @@
       console.log('function switchChatTo need id or yht_id');
     }
   };
-  var openHomePage = function(data,callback){
+  var openHomePage = function (data, callback) {
     postToDiwork({
       detail: data,
       callbackId: reg('openHomePage', callback || function () {
@@ -424,7 +431,7 @@
     closeFrame: closeFrame,
     getPageParam: getPageParam,
     modifyBrm: modifyBrm,
-    switchChatTo:switchChatTo,
+    switchChatTo: switchChatTo,
     openHomePage: openHomePage,
   };
 });

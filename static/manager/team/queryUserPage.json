@@ -43,7 +43,7 @@
                 "logo": null,
                 "redPacketsNum": 0,
                 "gloriesNum": 0,
-                "admin": false
+                "admin": true
             },
             {
                 "company": null,

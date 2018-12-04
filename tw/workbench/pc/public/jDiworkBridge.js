@@ -4,7 +4,7 @@ import store from "store";
 //注册事件
 const keys = [
   'JDIWORK',
-	// "TEST_IFRAME_EVENT"  //测试数据的api注册
+  // "TEST_IFRAME_EVENT"  //测试数据的api注册
 ];
 
 const handlerList = {
@@ -51,10 +51,10 @@ const handlerList = {
       type,
     });
   },
-	addBrm_prevent(type, event) {
-		dispatchMessageTypeHandler(event);
-		window.brmClickPrevent = {type, source: this.source};
-	},
+  addBrm_prevent(type, event) {
+    dispatchMessageTypeHandler(event);
+    window.brmClickPrevent = { type, source: this.source };
+  },
   popBrm(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
@@ -120,15 +120,15 @@ const handlerList = {
       type,
     });
   },
-  openFrame(type, event){
+  openFrame(type, event) {
     dispatchMessageTypeHandler(event);
-    postMessageToWin(this.source,{
+    postMessageToWin(this.source, {
       type,
     });
   },
-  closeFrame(type, event){
+  closeFrame(type, event) {
     dispatchMessageTypeHandler(event);
-    postMessageToWin(this.source,{
+    postMessageToWin(this.source, {
       type,
     });
   },
@@ -139,9 +139,15 @@ const handlerList = {
       data,
     });
   },
-  openHomePage(type, event){
+  openHomePage(type, event) {
     dispatchMessageTypeHandler(event);
-    postMessageToWin(this.source,{
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
+  execScript(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
       type,
     });
   },
@@ -159,12 +165,12 @@ window.addEventListener('message', (event) => {
     let data = event.data;
     //兼容财务云组件消息处理
     if (typeof data === 'string' && data.indexOf('fc|parent__Messenger__') > -1) {
-    }else{
+    } else {
       try {
         if (typeof data === 'string') {
           data = JSON.parse(data);
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e);
         return;
       }
