@@ -63,7 +63,7 @@ class PopDialogComp extends Component {
 				fun: () => {
 					closeDialogNew();
 				},
-				type: dialogType === "success" ? null : dialogType,
+				type: null,//dialogType === "success" ? null : dialogType,
 				className: 'basic_dialog_modal u-button'
 			}
 		];
