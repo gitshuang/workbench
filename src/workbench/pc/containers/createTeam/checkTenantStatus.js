@@ -1,9 +1,9 @@
 
-function loading () {
+function loading() {
     var loadingElm = document.getElementById('loading')
     var loadingText = '.'
-    function loop () {
-        setTimeout(function(){
+    function loop() {
+        setTimeout(function () {
             if (loadingElm.innerText.length === 3) {
                 loadingElm.innerText = loadingText
             } else {
@@ -14,14 +14,14 @@ function loading () {
     }
     loop()
 }
-//let fuuu = 0;
-export function check (tenantId,loadingFunc,successFunc) {
-    //++fuuu;
+let t = null;
+export function check(tenantId, loadingFunc, successFunc) {
+    clearTimeout(t);
     var xhr = new XMLHttpRequest()
-    xhr.onload = loop
-    xhr.open('get', '/manager/teamEnter/check?tenantId='+tenantId+'&ts='+new Date().getTime())
+    xhr.onload = loop;
+    xhr.open('get', '/manager/teamEnter/check?tenantId=' + tenantId + '&ts=' + new Date().getTime())
     xhr.send()
-    function loop () {
+    function loop() {
         if (this.status == 200) {
             var result = {
                 data: false
@@ -34,10 +34,10 @@ export function check (tenantId,loadingFunc,successFunc) {
             if (result.data) {
                 successFunc();
             } else {
-                setTimeout(function () {
-                  //  if(fuuu ==70) {successFunc();return false;}
-                   loadingFunc(tenantId);
-                   check(tenantId,loadingFunc,successFunc) 
+                t = setTimeout(function () {
+                    //  if(fuuu ==70) {successFunc();return false;}
+                    loadingFunc(tenantId);
+                    check(tenantId, loadingFunc, successFunc)
                 }, 300)
             }
         } else {
