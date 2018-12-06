@@ -14,9 +14,7 @@ function loading() {
     }
     loop()
 }
-let t = null;
 export function check(tenantId, loadingFunc, successFunc) {
-    clearTimeout(t);
     var xhr = new XMLHttpRequest()
     xhr.onload = loop;
     xhr.open('get', '/manager/teamEnter/check?tenantId=' + tenantId + '&ts=' + new Date().getTime())
@@ -34,7 +32,7 @@ export function check(tenantId, loadingFunc, successFunc) {
             if (result.data) {
                 successFunc();
             } else {
-                t = setTimeout(function () {
+                setTimeout(function () {
                     //  if(fuuu ==70) {successFunc();return false;}
                     loadingFunc(tenantId);
                     check(tenantId, loadingFunc, successFunc)

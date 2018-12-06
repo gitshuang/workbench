@@ -55,7 +55,7 @@
 
 .name_error{
   color: red;
-  margin-left: 73px;
+  margin-left: 100px;
   margin-top: 5px;
 }
 
@@ -73,9 +73,10 @@
   padding-bottom: 64px;
   position: relative;
 }
-.footer > button{
-  margin-left: 72px;
-  color: #ffffff;
+.footer > div{
+  margin-left: 100px;
+  position: relative;
+  min-height: 32px;
 }
 
 .submit_class{
@@ -99,8 +100,7 @@
   position: absolute;
   top: 0;
   left: 0;;
-  margin-left: calc(30% + 72px);
-  opacity: 0;
+  /* opacity: 0; */
 }
 .process_loading_content :global(.iconfont){
   position: absolute;
