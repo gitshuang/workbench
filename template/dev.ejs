@@ -16,22 +16,32 @@
   <title>cloud os</title>
   <link rel="manifest" href="./manifest.json">
   <script>
+
+
     function diworkContext() {
       return {
-        tenantid: 'gtzceot9',
+        tenantid: 'fwks151y',
         userid: '01227318-cb67-4560-9965-66f466f2b3e7',
         theme: '',
         username: '',
-        locale: 'zh',
+        locale: 'zh_CN',
         timezone: '',
         appcode: 'diwork',
-        profile: 'test'
+        profile: 'daily',
+        multilist: '[{"default":true,"dislpayName":"简体中文","enabled":true,"id":"042f78bc-ae81-44a5-8071-bf0b8757525d","langCode":"zh_CN","langSequence":1},{"default":false,"dislpayName":"English","enabled":true,"id":"d3b0afb0-c3a5-49bf-8ab6-01b9ca604d99","langCode":"en_US","langSequence":2},{"default":false,"dislpayName":"繁体中文","enabled":true,"id":"d54c073f-0821-4de7-bb9e-3440f4d48b37","langCode":"zh_TW","langSequence":3}]'
       }
     }
 
+    //获取用户信息
     function getUserInfo() {
-      return { "admin": true, "allowTenants": [{ "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "s9lymxx5", "tenantName": "345432", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": false, "status": 1, "team": 1, "tenantId": "y269ioyq", "tenantName": "ceshi", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "qmde37a2", "tenantName": "o34", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "piquxbty", "tenantName": "b", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "b8dk64hs", "tenantName": "11111", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "p64hh3k9", "tenantName": "dsfd", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "o2tdumkm", "tenantName": "bbb", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "befpv66p", "tenantName": "9201d", "type": 0 }, { "admin": false, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "on4a7td6", "tenantName": "用友集团集成", "type": 0 }, { "admin": false, "certificated": false, "enterPrise": false, "logo": "https://file-cdn.yonyoucloud.com/workbench-image-path-applicationIcon/9d3a77db-d5e5-4c8e-9397-8659d6dc25b3/1.png", "status": 1, "team": 1, "tenantId": "fnby0djv", "tenantName": "你好你好你好你好你好你好你好你好你好你好", "type": 0 }, { "admin": false, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "bvlyg08i", "tenantName": "用友集团", "type": 0 }], "company": "345432", "currentTeamConfig": { "allowExit": "1", "charged": false, "invitePermission": "0", "isWaterMark": 1, "joinPermission": "0", "linkman": "邢永超", "subordinateType": 0, "tenantAddress": "北京|北京|东城区|", "tenantEmail": "xingychb@yonyou.com", "tenantId": "s9lymxx5", "tenantIndustry": "A", "tenantName": "345432", "tenantSize": "A", "tenantTel": "8618601969283", "terminal": "web" }, "gloriesNum": 0, "redPacketsNum": 0, "userAvator": "https://cdn.yonyoucloud.com/dev/yht/avatar/style/images/avatar/fdd3248e-f65e-46fd-9da2-6a886d7a0547/original/original.png", "userAvatorNew": "https://cdn.yonyoucloud.com/dev/yht/avatar/style/images/avatar/fdd3248e-f65e-46fd-9da2-6a886d7a0547/original/original.png", "userCode": "xingychbk7ft5fu7", "userEmail": "xingychb@yonyou.com", "userId": "fdd3248e-f65e-46fd-9da2-6a886d7a0547", "userMobile": "18601969283", "userName": "邢永超" };
+      return { "admin": true, "allowTenants": [{ "admin": true, "certificated": false, "enterPrise": false, "status": 1, "team": 1, "tenantId": "fwks151y", "tenantName": "小团队", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "m6xtsjv5", "tenantName": "大大大小", "type": 0 }, { "admin": true, "certificated": false, "enterPrise": true, "status": 1, "team": 0, "tenantId": "ym107v89", "tenantName": "小小方", "type": 0 }], "company": "小团队", "currentTeamConfig": { "allowExit": "1", "charged": false, "invitePermission": "0", "isWaterMark": 1, "joinPermission": "0", "subordinateType": 0, "tenantId": "fwks151y", "tenantName": "小团队", "terminal": "web" }, "gloriesNum": 0, "redPacketsNum": 0, "userAvator": "", "userAvatorNew": "", "userCode": "YHT-1527-17381517820503069", "userEmail": "407951113@qq.com", "userId": "01227318-cb67-4560-9965-66f466f2b3e7", "userMobile": "", "userName": "邢" };
     }
+
+    function os_fe_isLogin() {
+      return true;
+    }
+
+
 
   </script>
   <!-- <script src='/static/register.js'></script> -->

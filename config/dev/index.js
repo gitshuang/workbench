@@ -1,5 +1,5 @@
 const proxyTable = require('../proxy');
-const webpackConfig = require('./webpack');
+const webpackConfig = require('../webpack.dev');
 
 const config = {
   env: '"development"',
