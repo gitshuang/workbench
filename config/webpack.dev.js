@@ -3,9 +3,9 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const baseWebpackConfig = require('../webpack.base.conf');
-const paths = require('../paths');
-const goalFilePath = require('../goalFilePath');
+const baseWebpackConfig = require('./webpack.base.conf');
+const paths = require('./paths');
+const goalFilePath = require('./goalFilePath');
 
 module.exports = function (config) {
   const webpackConfig = merge(baseWebpackConfig, {
