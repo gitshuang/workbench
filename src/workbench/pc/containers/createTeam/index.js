@@ -23,8 +23,6 @@ import {
   footer,
   footer_hr,
   process_loading_content,
-  opacityHidden,
-  opacityShow,
   submit_class,
 } from './index.css';
 
