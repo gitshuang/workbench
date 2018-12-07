@@ -81,11 +81,11 @@ class HomePage extends Component {
       isSelf: false,
       activetab: 'info',
       iframeUrl: '',
-      style:{
-        height:window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
+      style: {
+        height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
       }
     };
-   
+
     this.items = [
       {
         key: 'info',
@@ -121,9 +121,7 @@ class HomePage extends Component {
     window.addEventListener('popstate', this.forbidBack);
     window.addEventListener('resize', this.resizeFrame, false);
   }
-  resizeFrame=()=>{
-    this.setState({style:{height:window.innerHeight - 118}})
-  }
+
   componentWillReceiveProps(nextProps) {
     const newUserId = nextProps.match.params ? nextProps.match.params.userId : '';
     const {
@@ -153,6 +151,10 @@ class HomePage extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('popstate', this.forbidBack);
+  }
+
+  resizeFrame = () => {
+    this.setState({ style: { height: window.innerHeight - 118 } })
   }
 
   forbidBack = () => {
@@ -267,7 +269,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { activetab, iframeUrl,style } = this.state;
+    const { activetab, iframeUrl, style } = this.state;
     const {
       userInfo: {
         userAvator,
