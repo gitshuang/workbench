@@ -19,12 +19,6 @@
 .pageHome{
   overflow: hidden;
 }
-.pageHome :global(.lebra-navbar-left-icon){
-  background:rgba(202,205,212,1);
-  border: 1px solid #FFFFFF;
-  border-radius: 100px;
-  color: #fff;
-}
 
 .logoImg{
   max-height: 27px;
