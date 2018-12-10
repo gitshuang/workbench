@@ -1,0 +1,32 @@
+.content{
+  background:rgba(230,233,233,1);
+  position: relative;
+  overflow: auto;
+  height: 400px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.home .u-modal{
+  display: none !important;
+}
+.home_file_item_dailog :global(.u-modal-footer){
+  display: none !important;
+}
+.home_file_item_dailog :global(.u-modal-body){
+  padding-right:15px !important;
+}
+.home_file_item_dailog li:hover{
+  cursor: pointer;
+  box-shadow: 0 1px 10px rgba(74,81,93,.7);
+  border-radius: 3px;
+}
+.home_file_item_dailog  :global(.u-modal-dialog){
+  width: 800px;
+}
+.noDataStyle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  font-size: 16px;
+}

@@ -1,0 +1,109 @@
+.cover {
+    min-height: 40px;
+    padding-left: 56px;
+    padding-right: 100px;
+    box-sizing: border-box;
+}
+  
+.navs {
+    position: relative;
+    background: #ffffff;
+}
+
+.allBtnUl{
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.navs::-webkit-scrollbar {
+    display: none
+}
+
+.navs > li{
+    display: inline-block;
+    height:40px;
+    margin-right:25px;
+    padding: 0 10px;
+}
+
+.link {
+    height: 100%;
+    font-size:15px;
+    font-weight: 500;
+    color:#555555;
+    line-height: 34px;
+    cursor: pointer;
+    display: block;
+}
+
+.link:hover {
+    text-decoration: unset;
+    color: #E14C46;
+}
+
+.activeLink {
+    color: #E14C46;
+}
+
+.activeLink:after{
+    content: '';
+    border: 3px solid rgba(225,76,70,1);
+    max-width: 28px;
+    min-width: 14px;
+    width: 5px;
+    height: 0;
+    margin: 0 auto;
+    border-radius: 3px;
+    display: block;
+    background: rgba(225,76,70,1);
+}
+
+.content{
+    width: 100%;
+    box-sizing: border-box;
+    /* margin-top: 88px; */
+    padding-left: 56px;
+    padding-right: 100px;
+}
+
+.content > div:first-child ul{
+    padding-top: 20px;
+}
+
+.all_btn{
+    border: 1px solid red;
+}
+
+/* XL尺寸 */
+@media screen and (device-width: 1441px){
+    .cover{
+        padding-left: 60px;
+        padding-right: 73px;
+    }
+    .content{
+        padding-left: 60px;
+        padding-right: 76px;
+    }
+}
+/* L尺寸 */
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+    .cover{
+        padding-left: 60px;
+        padding-right: 102px;
+    }
+    .content{
+        padding-left: 60px;
+        padding-right: 76px;
+    }
+}
+/* M尺寸 */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+    .cover{
+        padding-left: 60px;
+        padding-right: 100px;
+    }
+    .content{
+        padding-left: 52px;
+        padding-right: 48px;
+    }
+}

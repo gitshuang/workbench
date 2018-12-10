@@ -1,0 +1,98 @@
+:global(.notice){
+  position: absolute;
+}
+:global(.noticeBtn){
+  position: absolute;
+  padding: 0px;
+  font-size: 1rem;
+  min-width: 3rem;
+  right: 5px;
+  bottom: 5px;
+}
+:global(.noticeBtn2){
+  position: absolute;
+  padding: 0px;
+  font-size: 1rem;
+  min-width: 3rem;
+  right: 35px;
+  bottom: 5px;
+}
+:global(.u-notification-notice){
+  width: 330px;
+  height: 93px;
+}
+:global(.u-notification-notice-title){
+  margin-bottom: -20px;
+  margin-left: 60px;
+  color: #333333;
+  font-size:14px;
+  font-weight: bold;
+}
+:global(.u-notification-notice-content) :global(.u-notification-notice-description) img{
+  float: left;
+}
+:global(.u-notification-notice-content) :global(.u-notification-notice-description) :global(.noticeBtn){
+  background: #fff;
+  color:#468CE3;
+  font-size: 14px;
+  min-width: 28px;
+  width:28px;
+  height:21px;
+  right: 28px;
+  bottom: 11px;
+}
+:global(.btn0){
+  right: 28px !important;
+}
+:global(.btn1){
+  right: 68px !important;
+}
+:global(.u-notification-notice-content) :global(.u-notification-notice-description) p{
+  float: left;
+  margin-top: 26px;
+  margin-left: 10px;
+  width: 217px;
+  color: #333333;
+  font-size:14px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  /*display: -webkit-box;*/
+  /*-webkit-box-orient: vertical;*/
+  /*-webkit-line-clamp: 2;*/
+}
+:global(.hideAuto){
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  float: right;
+  margin-top: -5px;
+  padding-left: 10px;
+}
+a:global(.u-notification-notice-close){
+  font-size: 25px;
+  font-weight: normal;
+  width: 14px;
+  height: 14px;
+  line-height: 11px;
+  color: #BDBDBD;
+  right: 9px;
+  top: 10px;
+  display: none;
+}
+:global(.u-notification-topRight){
+  top: 130px;
+  right: 30px;
+}
+:global(.u-notification-bottomRight) {
+  /* top: 480px; */
+}
+:global(.closeNotice){
+  font-size:14px;
+}
+:global(.u-notification-notice-description) :global(.iconfont){
+  cursor: pointer;
+}
+:global(.u-notification-notice-description) :global(.iconfont):hover{
+  color:#E14C46;
+}

@@ -1,0 +1,147 @@
+
+:global(#root){
+  width: 100%;
+  min-height: 100%;
+  background: linear-gradient(180deg,#a8abb0,#d8dadc);
+}
+
+:global(.diwork){
+  background-image: url('assets/image/homeBg.png');
+  background-repeat: repeat-x;
+  background-position: top center;
+}
+.wrap {
+
+}
+.content{
+  
+}
+.pageHome{
+  overflow: hidden;
+}
+
+.logoImg{
+  max-height: 27px;
+}
+
+.imgInner{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+}
+
+.allBtn{
+  width: 100px;
+  height: 40px;
+  line-height: 35px;
+  position: absolute;
+  right: 0px;
+  top: 48px;
+  text-align:center;
+  color: #E14C46;
+  cursor: pointer;
+}
+
+.allBtn i{
+  position: relative;
+  top: 3px;
+  color: #E14C46 !important;
+}
+
+.btnDisable{
+  display: none;
+}
+
+.create{
+  color: #E14C46;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.create :global(.iconfont){
+  position: relative;
+  top: 4px;
+  color: #E14C46;
+  margin-right: 8px;
+}
+
+.logo_title{
+  font-size:17px;
+  width:204px;
+}
+
+.title_drop{
+  font-size:17px;
+  width:204px;
+}
+
+.header :global(.home_title){
+  font-size:14px;
+  background: transparent;
+  width: auto;
+
+}
+.header :global(.home_title) > label{
+  display: block;
+  white-space: nowrap;
+  width:180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.header :global(.home_title_down){
+  background: transparent;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.mark{
+  position: absolute;
+  left: 50%;
+  top: 92px;
+  width: 600px;
+  min-height: 50px;
+  padding:0 0 12px 0;
+  /* height:50px; */
+  /* height: 78px; */
+  transform: translate(-50%);
+  margin-left:-300px\9;
+  background:rgba(255,251,242,1);
+  box-shadow:0px 10px 12px 0px rgba(74,81,93,0.25);
+  border-radius:0px 0px 3px 3px;
+  border:1px solid rgba(255,171,0,0.5);
+  border-top: 3px solid rgba(255,171,0,1);
+  z-index: 99999;
+}
+.mark p{
+  padding-top: 13px;
+  line-height: 24px;
+  font-size:16px;
+  padding-left: 20px;
+  padding-right: 10px;
+  color:rgba(255,139,0,1);
+  overflow: hidden;
+}
+.mark p i{
+  float: left;
+  font-size: 24px;
+  color: #ff8800;
+}
+.mark p span{
+  /* float: left; */
+  margin-left: 12px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+.mark p b{
+  /* float: left; */
+  font-size:16px;
+  font-family:MicrosoftYaHei;
+  color:rgba(0,122,206,1);
+  font-weight: 500;
+  cursor: pointer;
+}
+.mark p i:last-child{
+  float: right;
+  color: #757f8c;
+  cursor: pointer;
+}

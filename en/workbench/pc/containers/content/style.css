@@ -1,0 +1,50 @@
+.contentArea {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.content {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.content.active {
+  display: block;
+}
+.content iframe {
+  width: 100%;
+  height: 100%;
+  border: 0 none;
+}
+.load{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* background: linear-gradient(to bottom,#A8ABB0, #D8DADC); */
+  background: #ffffff;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+.load > div{
+  width: 110px;
+  height: 110px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 6px;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -55px;
+  margin-top: -55px;
+  text-align: center;
+  padding-top: 25px;
+}
+.load img{
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+  /* display: block;
+  width: 100%;
+  height: 100%; */
+}
