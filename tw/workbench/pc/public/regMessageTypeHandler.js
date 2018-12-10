@@ -187,11 +187,10 @@ const handlers = {
   },
   openHomePage(data) {
     try {
-      if (!data.userId) throw "NOT NULL";
       const key = data.key || 'info';
       this.props.history.push(`/homepage/${data.userId}/${key}`);
     } catch (err) {
-      console.log(err);
+      throw new Error("userId is require");
     }
   }
 }
