@@ -82,9 +82,8 @@ body .u-form-control{
 body .u-form-control:focus{
   border: 1px solid #00CDC3;
 }
-.u-button {
-  min-width: 5px;
-  padding: 0;
+button.u-button {
+  will-change: auto;
   color: #555555;
 }
 body .u-button-danger{
