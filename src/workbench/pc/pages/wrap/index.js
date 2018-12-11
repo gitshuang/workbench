@@ -8,7 +8,6 @@ import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import { Pages } from 'router';
 
 import Homeheader from 'containers/homeheader';
-import 'containers/homecontent'
 import Iframe from 'components/iframe_other';
 
 @withRouter
