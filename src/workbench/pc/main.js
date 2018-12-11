@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'pages';
-import { IS_IE } from '@u';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import 'assets/style/reset.css';
 import 'assets/style/animate.css';
@@ -20,4 +19,4 @@ rootElm.addEventListener('mousedown', (e) => {
     type: 'hideIm',
   });
 });
-ReactDOM.render(<div className={`${IS_IE ? 'ie9' : 'diwork'}`}><App /></div>, rootElm);
+ReactDOM.render(<App />, rootElm);

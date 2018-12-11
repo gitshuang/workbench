@@ -12,7 +12,7 @@ import loginRoutes from 'router/login.js';
 import loginRoutesEn from 'router/loginEn.js';//由于官方首页多语下两套设计：中繁和英文
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
-import { getContext, mapStateToProps } from '@u';
+import { getContext, mapStateToProps, IS_IE } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 
 import rootActions from 'store/root/actions';
@@ -147,7 +147,7 @@ class Root extends Component {
     const { showFrame, showModal } = this.props;
     const duoyuRoutes = this.state.defaultLan === 'en_US' ? loginRoutesEn : loginRoutes;
     return (
-      <div>
+      <div className={`${IS_IE ? 'ie9' : 'diwork'}`}>
         <Switch>
           {
             this.isLogin
