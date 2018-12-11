@@ -274,6 +274,8 @@ class Personals extends Component {
           language={language}
           icons={icons || this.state.icons}
           locale={locale}
+          animatedType="Right"
+          modalStyle={{right: 0}}
         />
         {
           exitModal ?
