@@ -81,10 +81,11 @@ class HomePage extends Component {
       isSelf: false,
       activetab: 'info',
       iframeUrl: '',
+      style: {
+        height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
+      }
     };
-    this.style = {
-      height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
-    };
+
     this.items = [
       {
         key: 'info',
@@ -118,6 +119,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     window.addEventListener('popstate', this.forbidBack);
+    window.addEventListener('resize', this.resizeFrame, false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -149,6 +151,10 @@ class HomePage extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('popstate', this.forbidBack);
+  }
+
+  resizeFrame = () => {
+    this.setState({ style: { height: window.innerHeight - 118 } })
   }
 
   forbidBack = () => {
@@ -263,7 +269,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { activetab, iframeUrl } = this.state;
+    const { activetab, iframeUrl, style } = this.state;
     const {
       userInfo: {
         userAvator,
@@ -316,7 +322,7 @@ class HomePage extends Component {
               <ul>
                 {this.renderTabs()}
               </ul>
-              <div style={this.style}>
+              <div style={style}>
                 {/* {this.renderIframe()} */}
                 < IFrame
                   title={activetab}

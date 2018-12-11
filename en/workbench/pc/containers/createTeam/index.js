@@ -23,8 +23,6 @@ import {
   footer,
   footer_hr,
   process_loading_content,
-  opacityHidden,
-  opacityShow,
   submit_class,
 } from './index.css';
 
@@ -45,9 +43,8 @@ class CreateTeamContent extends Component {
     this.state = {
       value: "",
       logo: "",
-      disabled: false,
       error: false,
-      processValue: 0,//0表示未开始，1表示开始progress
+      startFlag: false,//0表示未开始，1表示开始progress
       tenantId: '',//tenantId
     }
     //progressbar
@@ -97,19 +94,15 @@ class CreateTeamContent extends Component {
     if (logo) {
       data.logo = logo;
     }
-    this.setState({
-      disabled: false
-    });
     requestStart();
     createTeam(data).then(({ error, payload }) => {
-      this.setState({
-        disabled: true,
-        processValue: 1,//开始progressbar
-      });
       if (error) {
         requestError(payload);
         return;
       }
+      this.setState({
+        startFlag: true,//开始progressbar
+      });
       requestSuccess();
       const tenantId = payload.tenantId;
       localStorage.setItem('create', "1");
@@ -117,7 +110,7 @@ class CreateTeamContent extends Component {
       this.setState({ tenantId: tenantId }, () => {
         clearInterval(this.timer);
         check(tenantId, this.loadingFunc, this.successFunc);
-      });//把processValue变成1.那么就开是走progress
+      });//把startFlag变成1.那么就开是走progress
     });
   }
   successLoading = () => {
@@ -132,8 +125,7 @@ class CreateTeamContent extends Component {
   }
 
   render() {
-    const { logo, value, disabled, error } = this.state;
-    let now = this.state.processValue;
+    const { logo, value, disabled, error, startFlag } = this.state;
     const nameBH = error ? 'block' : 'none';
     return (
       <div className={wrap}>
@@ -168,10 +160,15 @@ class CreateTeamContent extends Component {
         </div>
         <hr className={footer_hr} />
         <div className={footer}>
-          <div className={now ? `${process_loading_content} ${opacityShow}` : process_loading_content}>
-            <Progress loadingCallBack={this.loadingCallBack} startFlag={now} successFunc={this.successLoading} loadingDesc={'Configuring team information…'} />
+          <div>
+            {
+              startFlag ?
+                <div className={process_loading_content}>
+                  <Progress loadingCallBack={this.loadingCallBack} startFlag={startFlag} successFunc={this.successLoading} loadingDesc={'Configuring team information…'} />
+                </div> :
+                <Button className={submit_class} onClick={this.create} >Create</Button>
+            }
           </div>
-          <Button className={`${now ? opacityHidden : ''} ${submit_class}`} onClick={this.create} disabled={disabled} >Create</Button>
         </div>
       </div>
     )

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import Button from 'bee/button';
-import PopDialog from 'pub-comp/pop';
-import { withRouter } from 'react-router-dom'
-import WidgetMaker from 'components/widget';
-import { content, home_file_item_dailog, close, home, noDataStyle } from './style.css';
-import { mapStateToProps } from '@u';
 import { connect } from 'react-redux';
-import homeActions from 'store/root/home/actions';
+import { withRouter } from 'react-router-dom'
+import { mapStateToProps } from '@u';
+import { openService } from 'public/regMessageTypeHandler';
 
+import PopDialog from 'pub-comp/pop';
+import WidgetMaker from 'components/widget';
+import { content, home_file_item_dailog, home, noDataStyle } from './style.css';
+
+import homeActions from 'store/root/home/actions';
 const { closeFolder } = homeActions;
 
 @withRouter
@@ -41,11 +42,10 @@ class homeFolderDialog extends Component {
       },
       folderModalDisplay,
       closeFolder,
-      history,
     } = this.props;
 
     const list = children.map((child, i) => {
-      const { type, widgetId, serviceCode, jsurl } = child;
+      const { type, widgetId, serviceCode, jsurl, serviceType } = child;
       const Widget = WidgetMaker(child);
       const props = {
         key: `widget-${widgetId}-${i}`,
@@ -53,11 +53,11 @@ class homeFolderDialog extends Component {
       };
       if (type === 3 && !jsurl) {
         props.clickHandler = () => {
-          history.push(`/service/${serviceCode}`);
+          openService(serviceCode, serviceType);
         }
       }
       return (
-        <Widget {...props} from="folder"/>
+        <Widget {...props} from="folder" />
       );
     });
     const noData = <div className={noDataStyle}>該檔夾為空</div>;
