@@ -1,65 +1,69 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { mapStateToProps } from '@u';
-import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
-
-@connect(
-  mapStateToProps(
-    'userInfo',
-  ),
-  {
-    
-  },
-)
-class Homecontent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
-
-  renderActive = (item) => {
-    const {
-      id,
-      type,
-      url,
-      title,
-    } = item;
-  }
-
-
-  rendercontent = () => {
-    const { tabs } = this.props;
-    if (tabs && tabs.length) {
-      return tabs.map((item, index) => {
-        return (
-          <div className={box}>
-            {context}
-          </div>
-        )
-      });
+function decorate72Changes(target, key, descriptor) {
+    const method = descriptor.value;
+    descriptor.value = () => {
+        method.apply(target);
+        console.log("俺变，俺变，俺变变变");
     }
-    return null;
-  }
-
-  render() {
-    const { tabs, routes } = this.props;
-    const flag = tabs && tabs.length ? 0 : 1;
-    return (
-
-      <div>
-        {/* {this.rendercontent()} */}
-        <div style={{ opacity: flag }}>
-          {
-            routes.map((route, i) => (
-              <RouteWithSubRoutes key={i} {...route} />
-            ))
-          }
-        </div>
-      </div>
-    );
-  }
+    console.log("学会72变");
+    return descriptor;
 }
-export default Homecontent;
 
+
+function decorateGoldenCudgel(target, key, descriptor) {
+    const method = descriptor.value;
+    descriptor.value = () => {
+        method.apply(target);
+        console.log("吃我一棒");
+    }
+    console.log("获得金箍棒");
+    return descriptor;
+}
+
+
+function decorateSharpEyes(target, key, descriptor) {
+    descriptor.value = () => {
+        console.log("妖怪，哪里跑");
+    }
+    console.log("获得火眼金眼");
+    return descriptor;
+}
+
+
+function decorateToString(target, key, descriptor) {
+    descriptor.value = () => {
+        console.log("我是孙行者");
+    }
+    return descriptor;
+}
+
+
+class Monkey {
+    constructor() {
+        console.log("很久很久以前，海边的一块石头，吸日月之精华，集天地之灵气，突然有一天，石头崩裂，从里面窜出一只泼猴！");
+    }
+
+    @decorateToString
+    toString() {
+        debugger
+        console.log('我是泼猴');
+    }
+
+    @decorateGoldenCudgel
+    attack() {
+        console.log("猴拳出击");
+    }
+
+    @decorate72Changes
+    defend() {
+        console.log("我跳，我跳，我跳跳跳");
+    }
+
+    @decorateSharpEyes
+    findMonster() { }
+}
+
+
+const monkeySun = new Monkey();
+monkeySun.defend();
+monkeySun.attack();
+monkeySun.findMonster();
