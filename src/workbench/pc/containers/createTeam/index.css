@@ -87,6 +87,7 @@
   color: #ffffff;
   line-height: 32px;
   font-size: 14px;
+  padding: 0 16px;
 }
 .submit_class:hover{
   background:#D23D37;

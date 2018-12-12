@@ -63,7 +63,6 @@ body .u-form-control:focus{
 }
 button.u-button {
   will-change: auto;
-  color: #555555;
 }
 body .u-button-danger{
   color: #ffffff;
