@@ -45,6 +45,8 @@ const { setCurrent } = rootActions;
 class Personals extends Component {
   constructor(props) {
     super(props);
+    const { userId, company } = props.userInfo;
+    const ticketHerf = `${getHost('ticket')}?from=diwork&user_id=${userId}&company=${company}`;
     this.state = {
       currType: 0,
       userInfo: {},
@@ -63,7 +65,7 @@ class Personals extends Component {
           name: '下载客户端',
         },
         {
-          href: "https://ticket.yonyoucloud.com/ticket/create/KJ",
+          href: ticketHerf,
           name: '问题与反馈',
         },
         {

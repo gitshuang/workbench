@@ -82,9 +82,11 @@ body .u-form-control{
 body .u-form-control:focus{
   border: 1px solid #00CDC3;
 }
+.u-button{
+  color: #555555;
+}
 button.u-button {
   will-change: auto;
-  color: #555555;
 }
 body .u-button-danger{
   color: #ffffff;
@@ -319,7 +321,7 @@ body .u-form-item .u-input-group-outer .u-input-after{
 }
 
 .react-tagsinput--focused {
-  border-color: rgb(102,175,233);
+  border-color: #00CDC3;
 }
 
 .react-tagsinput-tag {
