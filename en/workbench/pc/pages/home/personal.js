@@ -43,6 +43,7 @@ const { setCurrent } = rootActions;
 class Personals extends Component {
   constructor(props) {
     super(props);
+    const { userId, company } = props.userInfo;
     this.state = {
       currType: 0,
       userInfo: {},
@@ -61,7 +62,7 @@ class Personals extends Component {
           name: 'Download Client',
         },
         {
-          href: "https://ticket.yonyoucloud.com/ticket/create/KJ",
+          href: `${getHost('ticket')}?from=diwork&user_id=${userId}&company=${company}`,
           name: 'Questions and Feedbacks',
         },
         {
