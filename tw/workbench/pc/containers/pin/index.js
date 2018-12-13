@@ -1,15 +1,13 @@
-import React, { Component, Children, cloneElement } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import onClickOutside from 'react-onclickoutside';
-import { mapStateToProps, guid } from '@u';
+import { mapStateToProps } from '@u';
 /*  actions  */
 import rootActions from 'store/root/actions';
 import workActions from 'store/root/work/actions';
 /*  comp */
-import MoveToGroup from 'components/moveToGroup';
-import Button from 'bee/button';
+import MoveToGroup from 'pub-comp/moveToGroup';
 import Icon from 'pub-comp/icon';
 import LanguagesJSON from 'yutils/languages';
 /*  style */
@@ -18,16 +16,16 @@ import {
   header,
 } from './style.css';
 
-const {requestStart, requestSuccess, requestError} = rootActions;
+const { requestStart, requestSuccess, requestError } = rootActions;
 const { pinDisplayNone, setPinAdd, setAddGroup, getPinGroup } = workActions;
 
 @connect(
   mapStateToProps(
     'pinDisplay',
     'current',
-		'pinGroup',
+    'pinGroup',
     {
-      "namespace":"work"
+      "namespace": "work"
     }
   ),
   {
@@ -49,32 +47,22 @@ class Pin extends Component {
     }
   }
 
-	componentDidMount() {
-		// const {requestStart, requestSuccess, requestError, getPinGroup} = this.props;
-		// getPinGroup().then( ({ error, payload }) => {
-		//   if (error) {
-		//     requestError(payload);
-		//   }
-		//   let menuData = [];
-		//   Object.assign(menuData, payload);
-		//   this.setState({
-		//     menuData,
-		//   });
-		// })
-	}
+  componentDidMount() {
 
-	componentWillReceiveProps(nextProps) {
-		const {
-			pinGroup
-		} = nextProps;
-		this.setState({
-			menuData: pinGroup,
-		});
-	}
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      pinGroup
+    } = nextProps;
+    this.setState({
+      menuData: pinGroup,
+    });
+  }
 
   handleClickOutside(evt) {
-    const {  pinDisplayNone, pinDisplay  } = this.props;
-    if(pinDisplay){
+    const { pinDisplayNone, pinDisplay } = this.props;
+    if (pinDisplay) {
       pinDisplayNone();
     }
   }
@@ -110,7 +98,7 @@ class Pin extends Component {
   /*  menu  方法汇总   */
 
   /*  下三个方法为  添加新组  method  */
-  addNewGroup =(name) => {
+  addNewGroup = (name) => {
     const {
       setAddGroup,
       requestStart,
@@ -152,7 +140,7 @@ class Pin extends Component {
           onCancel={this.cancelFn}
           onAddGroup={this.addNewGroup}
           caller={LanguagesJSON.add}
-					languagesJSON={LanguagesJSON}
+          languagesJSON={LanguagesJSON}
         />
       </div>
     ) : null;
@@ -160,15 +148,15 @@ class Pin extends Component {
     return (
       <TransitionGroup>
         <CSSTransitionGroup
-          transitionName={ {
-              enter: 'animated',
-              enterActive: 'fadeIn',
-              leave: 'animated',
-              leaveActive: 'fadeOut',
-            } }
+          transitionName={{
+            enter: 'animated',
+            enterActive: 'fadeIn',
+            leave: 'animated',
+            leaveActive: 'fadeOut',
+          }}
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300} >
-          { content }
+          {content}
         </CSSTransitionGroup>
       </TransitionGroup>
     );
