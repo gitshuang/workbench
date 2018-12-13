@@ -6,7 +6,7 @@ import teamconfigActions from 'store/root/teamconfig/actions';
 const { closeUpgradeModal } = teamconfigActions;
 import PopDialog from 'pub-comp/pop';
 import {content} from './index.css';
-import { openService } from 'public/regMessageTypeHandler';
+import { openWin } from 'public/regMessageTypeHandler';
 
 @withRouter
 @connect(
@@ -39,7 +39,7 @@ class TeamUpgradeModal extends Component {
   // 删除确认
   configFn = () => {
     
-    openService({
+    openWin({
       id: 'updateenter',
       type: 'local',
       url: 'UpdateEnter',

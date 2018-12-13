@@ -26,9 +26,15 @@ const {
   changeTabsRouter
 } = rootActions;
 const {
-  
+
 } = homeActions;
 const handlers = {
+  openWin(data) {
+    if (typeof data !== 'object') {
+      throw new Error('data is must be a object.');
+    }
+    store.dispatch(addTabs(data));
+  },
   openService({ serviceCode, data, type, tenantId }) {
     if (tenantId && serviceCode) {
       get('/service/getServiceByTenantIdAndServiceCode', {
@@ -79,11 +85,6 @@ const handlers = {
         console.log(err);
       });
     } else if (serviceCode) {
-      // 打开本地
-      if (typeof serviceCode === "object") {
-        store.dispatch(addTabs(serviceCode));
-        return false;
-      }
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
@@ -231,7 +232,7 @@ const handlers = {
       throw new Error("userId is require");
     }
   },
-  setServiceRouter(data){
+  setServiceRouter(data) {
     store.dispatch(changeTabsRouter());
   }
 }
@@ -319,6 +320,10 @@ export function getOpenServiceData(serviceCode) {
 
 export function openService(serviceCode, type) {
   handlers.openService({ serviceCode, type });
+}
+
+export function openWin(data) {
+  handlers.openWin(data);
 }
 
 export function openHomePage(data) {

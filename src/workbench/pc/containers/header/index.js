@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getHost, getContext } from '@u';
 import Icon from 'pub-comp/icon';
-import { openService } from 'public/regMessageTypeHandler';
+import { openService, openWin } from 'public/regMessageTypeHandler';
 import { QuickApplication } from 'diwork-business-components';
 import Header from 'components/header';
 import Personal from './personal';
@@ -82,15 +82,12 @@ class HeaderContainer extends Component {
   // 调用快捷应用  打开全部应用
   openAllFn = () => {
     // this.props.history.push('/application');
-    openService({
+    openWin({
       id: 'application',
       type: 'local',
       url: 'Application',
       title: '全部应用',
     });
-  }
-  openService = () => {
-    openService('abcdefg');
   }
   // 调用快捷应用 点击单独每个应用
   openServiceFn = (applicationCode) => {
@@ -135,9 +132,6 @@ class HeaderContainer extends Component {
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
       </div>,
       <Personal />,
-      <div style={{ width: '50px', textAlign: "center" }} onClick={this.openService}>
-        <Icon type="bill" />
-      </div>,
     );
     return (
       <Header

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import Breadcrumbs from 'components/breadcrumb';
-import Header from 'containers/header';
+// import Breadcrumbs from 'components/breadcrumb';
+// import Header from 'containers/header';
 import CreateTeamContent from 'containers/createTeam';
 
 
@@ -29,18 +29,18 @@ class CreateTeam extends Component {
     };
   }
 
-  goBack = () => {
-    this.props.history.goBack();
-  }
+  // goBack = () => {
+  //   this.props.history.goBack();
+  // }
 
-  goHome = () => {
-    this.props.history.replace('');
-  }
+  // goHome = () => {
+  //   this.props.history.replace('');
+  // }
 
   render() {
     const { match: { params } } = this.props;
     return (
-      <div className=''>
+      <div>
         {/* <div className=" header">
           <Header onLeftClick={this.goHome} >
             <div>
@@ -51,9 +51,7 @@ class CreateTeam extends Component {
             <Breadcrumbs data={[{ name: '创建团队' }]} goback={this.goBack} />
           </div>
         </div> */}
-        <div className=" content">
-          <CreateTeamContent />
-        </div>
+        <CreateTeamContent />
       </div>
     );
   }

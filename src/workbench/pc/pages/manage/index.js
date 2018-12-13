@@ -9,8 +9,8 @@ import manageActions from 'store/root/manage/actions';
 
 import CreateManageModule from 'pub-comp/manageWidget';
 import folderBgSrc from 'assets/image/wgt/folder_bg.png';
-import HeaderPage from './headerPage';
-import {win} from './style.css';
+// import HeaderPage from './headerPage';
+import { win } from './style.css';
 import LanguagesJSON from 'yutils/languages';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -189,9 +189,9 @@ class Manage extends Component {
     addDesk: PropTypes.func,
   };
   static defaultProps = {
-    requestStart: () => {},
-    requestSuccess: () => {},
-    requestError: () => {},
+    requestStart: () => { },
+    requestSuccess: () => { },
+    requestError: () => { },
     history: {},
     isEdit: false,
     match: {},
@@ -208,41 +208,41 @@ class Manage extends Component {
     currGroupIndex: 0,
     title: '',
     moveData: [],
-    returnDefaultState: () => {},
-    getManageList: () => {},
-    moveGroup: () => {},
-    moveService: () => {},
-    setManageList: () => {},
-    setEditState: () => {},
-    emptySelectGroup: () => {},
-    batchDelect: () => {},
-    openBatchMove: () => {},
-    addGroup: () => {},
-    closeBatchMove: () => {},
-    batchMove: () => {},
-    closeFolder: () => {},
-    delectGroup: () => {},
-    renameGroup: () => {},
-    moveTopGroup: () => {},
-    moveBottomGroup: () => {},
-    addFolder: () => {},
-    selectListActions: () => {},
-    selectGroupActions: () => {},
-    setEditonlyId: () => {},
-    setDragInputState: () => {},
-    openFolder: () => {},
-    deleteFolder: () => {},
-    renameFolder: () => {},
-    setFolderEdit: () => {},
-    setCurrGroupIndex: () => {},
-    editTitle: () => {},
-    cancelFolderEdit: () => {},
-    delectService: () => {},
+    returnDefaultState: () => { },
+    getManageList: () => { },
+    moveGroup: () => { },
+    moveService: () => { },
+    setManageList: () => { },
+    setEditState: () => { },
+    emptySelectGroup: () => { },
+    batchDelect: () => { },
+    openBatchMove: () => { },
+    addGroup: () => { },
+    closeBatchMove: () => { },
+    batchMove: () => { },
+    closeFolder: () => { },
+    delectGroup: () => { },
+    renameGroup: () => { },
+    moveTopGroup: () => { },
+    moveBottomGroup: () => { },
+    addFolder: () => { },
+    selectListActions: () => { },
+    selectGroupActions: () => { },
+    setEditonlyId: () => { },
+    setDragInputState: () => { },
+    openFolder: () => { },
+    deleteFolder: () => { },
+    renameFolder: () => { },
+    setFolderEdit: () => { },
+    setCurrGroupIndex: () => { },
+    editTitle: () => { },
+    cancelFolderEdit: () => { },
+    delectService: () => { },
     applicationsMap: {},
     allServicesByLabelGroup: {},
-    getAllServicesByLabelGroup: () => {},
-    setCurrentSelectWidgetMap: () => {},
-    addDesk: () => {},
+    getAllServicesByLabelGroup: () => { },
+    setCurrentSelectWidgetMap: () => { },
+    addDesk: () => { },
   };
 
   constructor(props) {
@@ -524,7 +524,7 @@ class Manage extends Component {
       moveGroupDrag: this.moveGroupDrag,
       moveItemDrag: this.moveItemDrag,
       folderBgSrc,
-			languagesJSON: LanguagesJSON
+      languagesJSON: LanguagesJSON
     };
     return (
       <div className={win}>

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
 
-import Header from 'containers/header';
-import Breadcrumbs from 'components/breadcrumb';
+// import Header from 'containers/header';
+// import Breadcrumbs from 'components/breadcrumb';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
@@ -21,7 +21,7 @@ const { getTeamInfo } = teamconfigActions;
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
 import 'assets/style/Form.css';
 
-@withRouter
+// @withRouter
 @connect(
   mapStateToProps(
     'userInfo',
@@ -100,43 +100,44 @@ class Updateenter extends Component {
   render() {
     const { enterData } = this.state;
     const { userInfo } = this.props;
-    const { locale } = getContext(); 
+    const { locale } = getContext();
     return (
-      <div style={{ overflow: "hidden" }}>
-        {/* <div className=" header">
-          <Header onLeftClick={this.goHome}>
-            <div>
-              <span>企业认证</span>
-            </div>
-          </Header>
-          <div className="appBreadcrumb">
-            <Breadcrumbs data={[{ name: '企业认证' }]} goback={this.goBack} />
-          </div>
-        </div> */}
-        <div className="content">
-          <div className={pageEnterprise}>
-            <div className={enterTitle} >企业认证</div>
-            <hr className={hr} />
-            <div className={enterCont} >
-              {
-                enterData && Object.keys(userInfo).length > 0 ?
-                  <EnterContent
-                    data={enterData}
-                    userInfo={userInfo}
-                    _from="update"
-                    handleClickFn={this.handleClick}
-                    buttonText="升级"
-                    loadingDesc="正在升级企业..."
-                    uploadApplication={uploadApplication}
-                    texts={texts}
-                    lang={locale}
-                  /> : null
-              }
+      //  {/*  <div>
+      //     <div className=" header">
+      //       <Header onLeftClick={this.goHome}>
+      //         <div>
+      //           <span>企业认证</span>
+      //         </div>
+      //       </Header>
+      //       <div className="appBreadcrumb">
+      //         <Breadcrumbs data={[{ name: '企业认证' }]} goback={this.goBack} />
+      //       </div>
+      //     </div> 
+      //     <div className="content">
+      //   */}
+      <div className={pageEnterprise}>
+        <div className={enterTitle} >企业认证</div>
+        <hr className={hr} />
+        <div className={enterCont} >
+          {
+            enterData && Object.keys(userInfo).length > 0 ?
+              <EnterContent
+                data={enterData}
+                userInfo={userInfo}
+                _from="update"
+                handleClickFn={this.handleClick}
+                buttonText="升级"
+                loadingDesc="正在升级企业..."
+                uploadApplication={uploadApplication}
+                texts={texts}
+                lang={locale}
+              /> : null
+          }
 
-            </div>
-          </div>
         </div>
       </div>
+      //   </div>
+      // </div>
     );
   }
 }

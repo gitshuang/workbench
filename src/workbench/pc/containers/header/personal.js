@@ -13,7 +13,7 @@ import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import rootActions from 'store/root/actions';
 
-import { openService, openHomePage } from 'public/regMessageTypeHandler';
+import { openService, openWin, openHomePage } from 'public/regMessageTypeHandler';
 
 const { closeRequestDisplay } = homeActions;
 const { openExitModal } = teamconfigActions;
@@ -214,11 +214,12 @@ class Personals extends Component {
   dispatch = (action) => {
     const { routers, currType, userInfo } = this.state;
     if (action === "openConfig") {
-      openService({
+      openWin({
         id: 'teamconfig',
         type: 'local',
         url: 'Teamconfig',
         title: '团队设置',
+        data: {name: 'ddd'},
       });
       return false;
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { openService } from 'public/regMessageTypeHandler';
+import { openWin } from 'public/regMessageTypeHandler';
 import Dropdown from 'bee/dropdown';
 import Icon from 'pub-comp/icon';
 import Menu, { Item as MenuItem } from 'bee/menus';
@@ -79,7 +79,7 @@ class DropdownButton extends Component {
       history,
     } = this.props;
     // history.push('/establishusercenter');
-    openService({
+    openWin({
       id: 'create',
       type: 'local',
       url: 'EstablishUserCenter',
@@ -91,7 +91,7 @@ class DropdownButton extends Component {
     const {
       history,
     } = this.props;
-    openService({
+    openWin({
       id: 'ManageTeamEnter',
       type: 'local',
       url: 'ManageTeamEnter',

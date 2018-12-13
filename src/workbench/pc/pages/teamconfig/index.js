@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import { withRouter } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 
-import Header from 'containers/header';
-import BreadcrumbContainer from 'components/breadcrumb';
+// import Header from 'containers/header';
+// import BreadcrumbContainer from 'components/breadcrumb';
 import TeamconfigContent from 'containers/teamconfig';
 
-@withRouter
+// @withRouter
 class Teamconfig extends Component {
-  static propTypes = {
-    history: PropTypes.shape({
-      goBack: PropTypes.func,
-      replace: PropTypes.func,
-    }),
-  };
-  static defaultProps = {
-    history: {},
-  };
+  // static propTypes = {
+  //   history: PropTypes.shape({
+  //     goBack: PropTypes.func,
+  //     replace: PropTypes.func,
+  //   }),
+  // };
+  // static defaultProps = {
+  //   history: {},
+  // };
 
   constructor(props) {
     super(props);
@@ -27,17 +27,17 @@ class Teamconfig extends Component {
 
   }
 
-  goBack = () => {
-    this.props.history.goBack();
-  }
+  // goBack = () => {
+  //   this.props.history.goBack();
+  // }
 
-  goHome = () => {
-    this.props.history.replace('');
-  }
+  // goHome = () => {
+  //   this.props.history.replace('');
+  // }
 
   render() {
     return (
-      <div className="">
+      <div>
         {/* <div className=" header">
           <Header onLeftClick={this.goHome}>
             <div>
@@ -47,10 +47,10 @@ class Teamconfig extends Component {
           <div className="appBreadcrumb">
             <BreadcrumbContainer data={[{ name: '团队设置' }]} goback={this.goBack} />
           </div>
-        </div> */}
-        <div className=" content">
+        </div> 
+        <div className=" content">*/}
           <TeamconfigContent />
-        </div>
+        {/* </div> */}
       </div>
     );
   }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
-import Header from 'containers/header';
 import EstablishContent from 'containers/establishContent';
-import Breadcrumbs from 'components/breadcrumb';
+
+// import Header from 'containers/header';
+// import Breadcrumbs from 'components/breadcrumb';
 @withRouter
 class EstablishUserCenter extends Component {
 
@@ -18,13 +18,13 @@ class EstablishUserCenter extends Component {
     
   }
 
-  goHome = () => {
-    this.props.history.replace('');
-  }
+  // goHome = () => {
+  //   this.props.history.replace('');
+  // }
 
-  goBack = () => {
-    this.props.history.goBack();
-  }
+  // goBack = () => {
+  //   this.props.history.goBack();
+  // }
 
   render() {
     return (

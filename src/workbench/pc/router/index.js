@@ -3,7 +3,6 @@ import Wrap from 'pages/wrap';
 import Home from 'pages/home';
 import asyncComponent from './lazyload';
 
-const Page404 = asyncComponent(() => import(/* webpackChunkName: "Page404" */'pages/404'));
 // 工作页
 const Work = asyncComponent(() => import(/* webpackChunkName: "Work" */'pages/work'));
 // 全部应用
@@ -54,14 +53,10 @@ const routes = [
   //   path: '/manage',
   //   component: Manage,
   // },
-  // {
-  //   path: '/404',
-  //   component: Page404,
-  // },
-  // {
-  //   path: '/:type(app|service)/:code/:subcode?',
-  //   component: Work,
-  // },
+  {
+    path: '/:type(app|service)/:code/:subcode?',
+    component: Work,
+  },
   {
     path: '/search/:id/:value',
     component: Search,
@@ -141,13 +136,11 @@ const routes = [
 ];
 
 export const Pages = {
-  Page404: <Page404 />,
-  Work: <Work />,
   Application: <Application />,
   Manage: <Manage />,
-  Search: <Search />,
-  SearchResult: <SearchResult />,
-  Establish: <Establish />,
+  Search: <Search />, 
+  // SearchResult: <SearchResult />,
+  // Establish: <Establish />,
   EstablishUserCenter: <EstablishUserCenter />,
   CreateTeam: <CreateTeam />,
   CreateEnter: <CreateEnter />,

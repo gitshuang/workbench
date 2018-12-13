@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
 
-import Header from 'containers/header';
-import Breadcrumbs from 'components/breadcrumb';
+// import Header from 'containers/header';
+// import Breadcrumbs from 'components/breadcrumb';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
@@ -19,7 +19,7 @@ const { setCreateEnter } = homeActions;
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
 import 'assets/style/Form.css';
 
-@withRouter
+// @withRouter
 @connect(
   mapStateToProps(
     'userInfo',
@@ -52,7 +52,7 @@ class Enterprise extends Component {
   }
 
   componentWillMount() {
- 
+
   }
 
   goBack = () => {
@@ -87,42 +87,42 @@ class Enterprise extends Component {
     const { userInfo } = this.props;
     const { locale } = getContext();
     return (
-      <div style={{ overflow: "hidden" }}>
-        {/* <div className="header ">
-          <Header
-            onLeftClick={this.goHome}
-          >
-            <div>
-              <span>创建企业</span>
-            </div>
-          </Header>
-          <div className="appBreadcrumb">
-            <Breadcrumbs data={[{ name: '创建企业' }]} goback={this.goBack} />
-          </div>
-        </div> */}
+      // <div>
+      //   <div className="header ">
+      //     <Header
+      //       onLeftClick={this.goHome}
+      //     >
+      //       <div>
+      //         <span>创建企业</span>
+      //       </div>
+      //     </Header>
+      //     <div className="appBreadcrumb">
+      //       <Breadcrumbs data={[{ name: '创建企业' }]} goback={this.goBack} />
+      //     </div>
+      //   </div>
 
-        <div className="content">
-          <div className={pageEnterprise}>
-            <div className={enterTitle} >创建企业</div>
-            <hr className={hr} />
-            <div className={enterCont} >
-              {
-                Object.keys(userInfo).length > 0
-                ? <EnterContent
-                  userInfo={userInfo}
-                  _from="create"
-                  handleClickFn={this.handleClick}
-                  buttonText="创建"
-                  loadingDesc="正在创建企业..."
-                  uploadApplication={uploadApplication}
-                  texts={texts}
-                  lang={locale}
-                /> : null
-              }
-            </div>
-          </div>
+      //   <div className="content">
+      <div className={pageEnterprise}>
+        <div className={enterTitle} >创建企业</div>
+        <hr className={hr} />
+        <div className={enterCont} >
+          {
+            Object.keys(userInfo).length > 0
+              ? <EnterContent
+                userInfo={userInfo}
+                _from="create"
+                handleClickFn={this.handleClick}
+                buttonText="创建"
+                loadingDesc="正在创建企业..."
+                uploadApplication={uploadApplication}
+                texts={texts}
+                lang={locale}
+              /> : null
+          }
         </div>
       </div>
+      //   </div>
+      // </div>
     );
   }
 }

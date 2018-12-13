@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { openWin } from 'public/regMessageTypeHandler';
 import {
   wrap,
   en,
@@ -12,37 +13,34 @@ import Team from 'assets/image/wgt/team.png';
 import Company from 'assets/image/wgt/company.png';
 
 class EstablishContent extends Component {
-  
+
   openTeam = () => {
-    const { history } = this.props;
-    // history.push('/createteam/home');
+    openWin({
+      id: 'createteam',
+      type: 'local',
+      url: 'CreateTeam',
+      title: '创建团队',
+    });
   }
 
   openEnter = () => {
-    const { history } = this.props;
-    // history.push('/createenter/home');
+    openWin({
+      id: 'createenter',
+      type: 'local',
+      url: 'CreateEnter',
+      title: '创建企业',
+    });
   }
 
   render() {
-    // const { type } = this.props;
-    // console.log(process.env.LUN);
-    // debugger;
-    // let titleCont = null;
-    // if(type && type == "init"){
-    //   titleCont = (<div>
-    //     <h5>欢迎来到用友云</h5>
-    //     <p className={desc}>创建您的团队或企业，邀请好友一起体验吧。您也可以联系好友邀请您加入他/她的团队或企业。</p>
-    //   </div>)
-    // }
-    // {titleCont}
-    const { locale  } = window.diworkContext();
+    const { locale } = window.diworkContext();
     const enstyle = locale === 'en_US' ? en : '';
     return (
       <div className={`${wrap} ${enstyle}`}>
         <div className={`${est_context}`}>
           <div className={box} key='team'>
             <div className={imageBox}>
-              <img src = {Team} />
+              <img src={Team} />
             </div>
             <h6>免费创建团队</h6>
             <div className={content}>
@@ -58,13 +56,13 @@ class EstablishContent extends Component {
                 <li key='t6'>工作圈、微邮等办公协作工具</li>
               </ul>
             </div>
-            <div style={{textAlign:"center"}}>
+            <div style={{ textAlign: "center" }}>
               <button onClick={this.openTeam}>开始创建</button>
             </div>
           </div>
           <div className={box} key='enter'>
-          <div className={imageBox}>
-              <img src = {Company} />
+            <div className={imageBox}>
+              <img src={Company} />
             </div>
             <h6>免费创建企业</h6>
             <div className={`${content}`}>
@@ -80,7 +78,7 @@ class EstablishContent extends Component {
                 <li key='e6'>企业级应用市场提供全方位数字化服务入口</li>
               </ul>
             </div>
-            <div style={{textAlign:"center"}}>
+            <div style={{ textAlign: "center" }}>
               <button onClick={this.openEnter}>开始创建</button>
             </div>
           </div>
