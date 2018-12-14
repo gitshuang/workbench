@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'pages';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+import 'public/jDiworkBridge';
 import 'assets/style/reset.css';
 import 'assets/style/animate.css';
 import 'assets/style/iuapmobile.um.css';

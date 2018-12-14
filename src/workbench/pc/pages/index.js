@@ -18,7 +18,7 @@ import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 
 import rootActions from 'store/root/actions';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
-import 'public/jDiworkBridge';
+
 import BasicDialog from 'containers/basicDialog/';
 import Frame from 'components/frame/';
 
