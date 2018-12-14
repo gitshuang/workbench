@@ -12,12 +12,11 @@ import loginRoutes from 'router/login.js';
 import loginRoutesEn from 'router/loginEn.js';//由于官方首页多语下两套设计：中繁和英文
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
+import componentTool from 'public/componentTools';
 import { getContext, mapStateToProps, IS_IE } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 
 import rootActions from 'store/root/actions';
-
-import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 import 'public/jDiworkBridge';
 import BasicDialog from 'containers/basicDialog/';
