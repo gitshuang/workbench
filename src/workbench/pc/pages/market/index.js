@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
-import ApplicationWrap from 'containers/applicationWrap';
+// import ApplicationWrap from 'containers/applicationWrap';
 import workActions from 'store/root/work/actions';
 import IFrame from 'components/iframe_other';
 import { bg } from './style.css';
@@ -38,8 +38,8 @@ class Account extends Component {
   };
   static defaultProps = {
     brm: [],
-    addBrm: () => {},
-    popBrm: () => {},
+    addBrm: () => { },
+    popBrm: () => { },
     history: {},
     match: {},
   };
@@ -64,7 +64,7 @@ class Account extends Component {
     if (backVal > 1) {
       this.props.history.go(-backVal);
       this.props.popBrm({ index: -backVal });
-    }else{
+    } else {
       this.props.popBrm({ index: i });
       this.props.history.goBack();
     }
@@ -77,22 +77,31 @@ class Account extends Component {
     const brmLastLen = brmVal.length > 0 && brmVal[brmVal.length - 1].length;
     const appId = this.props.match.params.id;
     return (
-      <ApplicationWrap 
-        name={brmVal.length > 0 ? brmLastVal[brmLastLen - 1].name : ''} 
-        brms={brmVal.length > 1 ? brmVal[brmVal.length - 2] : [{ name: '' }]} 
-        goBack={this.goBack}
-      >
-        <div className={`${bg}  um-vbox`}>
-          {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
-          {
-            appId
-            ? 
+      <div>
+        {
+          appId
+            ?
             <IFrame title="应用市场" url={`/diwork-market/appMarket#/application/${appId}`} />
             :
             <IFrame title="应用市场" url="/diwork-market/appMarket" />
-          }
-        </div>
-      </ApplicationWrap>
+        }
+      </div>
+      // <ApplicationWrap 
+      //   name={brmVal.length > 0 ? brmLastVal[brmLastLen - 1].name : ''} 
+      //   brms={brmVal.length > 1 ? brmVal[brmVal.length - 2] : [{ name: '' }]} 
+      //   goBack={this.goBack}
+      // >
+      //   <div className={`${bg}  um-vbox`}>
+      //     {/* <iframe className={frameElm} src={'http://localhost:3005'} /> */}
+      //     {
+      //       appId
+      //       ? 
+      //       <IFrame title="应用市场" url={`/diwork-market/appMarket#/application/${appId}`} />
+      //       :
+      //       <IFrame title="应用市场" url="/diwork-market/appMarket" />
+      //     }
+      //   </div>
+      // </ApplicationWrap>
     );
   }
 }

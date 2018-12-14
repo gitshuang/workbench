@@ -72,7 +72,7 @@ class Wrap extends Component {
   render() {
     const { activeCarrier, routes } = this.props;
     return (
-      <div className='wrap'>
+      <div className='um-win'>
         <Homeheader />
         <div className='content'>
           {

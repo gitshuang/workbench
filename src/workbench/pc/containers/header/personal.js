@@ -262,7 +262,7 @@ class Personals extends Component {
     return (
       <div>
         <Personal
-          currType={currType}
+          currType={0}
           userInfo={userInfo}
           requestDisplay={requestDisplay}
           exitModal={exitModal}

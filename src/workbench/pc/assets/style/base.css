@@ -50,7 +50,7 @@ body {
 }
 
 .header{
-  position: fixed !important;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -64,6 +64,11 @@ body {
 
 .content{
   overflow-x: auto;
+  position: absolute;
+  top: 90px;
+  left: 0;
+  right: 0;
+  bottom: 0px;
 }
 
 

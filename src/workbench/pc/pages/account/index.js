@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { getHost, getContext } from '@u';
-import ApplicationWrap from 'containers/applicationWrap';
+// import ApplicationWrap from 'containers/applicationWrap';
 import IFrame from 'components/iframe_other';
 import { bg } from './style.css';
 
@@ -11,11 +11,14 @@ class Account extends Component {
     const { locale } = getContext();
     
     return (
-      <ApplicationWrap name="帐号管理">
-        <div className={`${bg}  um-vbox`}>
+      <div>
           <IFrame title="帐号管理" url={`${getHost('euc')}/diuser?locale=${locale === "zh_TW" ? "zh_HK" : locale}`} />
         </div>
-      </ApplicationWrap>
+      // <ApplicationWrap name="帐号管理">
+      //   <div className={`${bg}  um-vbox`}>
+      //     <IFrame title="帐号管理" url={`${getHost('euc')}/diuser?locale=${locale === "zh_TW" ? "zh_HK" : locale}`} />
+      //   </div>
+      // </ApplicationWrap>
     );
   }
 }

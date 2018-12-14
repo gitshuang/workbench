@@ -47,7 +47,7 @@ class Application extends Component {
             />
           </div>
         </div> */}
-        <div className={`content um-box `}>
+        <div className={`um-box `}>
           {
             Children.map(children, (child) => cloneElement(child))
           }

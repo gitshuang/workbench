@@ -229,7 +229,7 @@ class HomePage extends Component {
     }, () => {
       // this.props.history.push(`/homepage/${userId}/${activetab}`);
       openWin({
-        id: "Homepage",
+        id: "HomePage",
         title: "主页",
         data: {
           userId,
@@ -295,7 +295,7 @@ class HomePage extends Component {
     } = this.props;
     if (!userId) return null;
     return (
-      <div className='' style={{ overflow: 'auto' }}>
+      <div>
         {/* <div className="header">
           <Header onLeftClick={this.goHome} >
             <div>
@@ -306,7 +306,7 @@ class HomePage extends Component {
             <BreadcrumbContainer data={this.brm} goback={this.goBack} />
           </div>
         </div> */}
-        <div className={`${umContent} content`}>
+        {/* <div className={`${umContent} content`}> */}
           <div className={`${content}`}>
             <div className={user} id='user'>
               <img src={bg} />
@@ -337,7 +337,7 @@ class HomePage extends Component {
               <ul>
                 {this.renderTabs()}
               </ul>
-              <div>
+              <div style={Object.assign(style,{position:"relative"})}>
                 {/* {this.renderIframe()} */}
                 < IFrame
                   title={activetab}
@@ -346,7 +346,7 @@ class HomePage extends Component {
               </div>
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     );
   }
