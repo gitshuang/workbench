@@ -89,7 +89,7 @@ class HomePage extends Component {
       activetab: 'info',
       iframeUrl: '',
       style: {
-        height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
+        height: window.innerHeight - 128, //118 80 + 37 + 1 1是为了留黑线
       }
     };
 
@@ -161,7 +161,7 @@ class HomePage extends Component {
   }
 
   resizeFrame = () => {
-    this.setState({ style: { height: window.innerHeight - 118 } })
+    this.setState({ style: { height: window.innerHeight - 128 } })
   }
 
   // forbidBack = () => {
