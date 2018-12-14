@@ -51,13 +51,39 @@ class Personals extends Component {
       currType: 0,
       userInfo: {},
       routers: {
-        // openEntersetting: '/entersetting/home',
-        openConfig: '/teamconfig',
-        openAccount: '/account',
-        openManage: '/manage',
-        openUserinfo: '/userinfo',
-        openInvitation: '/invitation',
-        openDynamic: '/dynamic',
+        openConfig: {
+          id: 'Teamconfig',
+          title: '团队设置',
+          data: { name: 'ddd' },
+        },
+        openAccount: {
+          id: 'Account',
+          title: '账号管理',
+        },
+        openUserinfo: {
+          id: 'UserInfo',
+          title: '员工信息',
+        },
+        openInvitation: {
+          id: 'Invitation',
+          title: '邀请成员',
+        },
+        speak: {
+          id: 'Homepage',
+          title: '主页',
+          data: {
+            userId,
+            key: 'speak'
+          }
+        },
+        honor: {
+          id: 'Homepage',
+          title: '主页',
+          data: {
+            userId,
+            key: 'honor'
+          }
+        },
       },
       hrefs: [
         {
@@ -112,12 +138,12 @@ class Personals extends Component {
         {
           element: <Icon title="动态" type="Internet2" />,
           background: 'blue',
-          arguments: 'openDynamic',
+          arguments: 'speak',
         },
         {
           element: <Icon title="荣耀" type="glory" />,
           background: 'red',
-          arguments: 'openHomepage',
+          arguments: 'honor',
         },
       ],
     };
@@ -213,42 +239,13 @@ class Personals extends Component {
 
   dispatch = (action) => {
     const { routers, currType, userInfo } = this.state;
-    if (action === "openConfig") {
-      openWin({
-        id: 'teamconfig',
-        type: 'local',
-        url: 'Teamconfig',
-        title: '团队设置',
-        data: {name: 'ddd'},
-      });
-      return false;
-    }
     if (action === "openConfig" && currType == 0) {
       openService('GZTSYS001');
       return false;
     }
-    if (action === "openHomepage") {
-      openHomePage({
-        userId: userInfo.userId,
-        key: 'honor'
-      });
-      return false;
-    }
-    if (action === "openDynamic") {
-      openHomePage({
-        userId: userInfo.userId,
-        key: 'speak'
-      });
-      return false;
-    }
     if (routers[action]) {
-      this.openNewRouter(routers[action]);
+      openWin(routers[action]);
     }
-  }
-
-  openNewRouter = (path) => {
-    const { history } = this.props;
-    history.push(path);
   }
 
   render() {
@@ -278,7 +275,7 @@ class Personals extends Component {
           icons={icons || this.state.icons}
           locale={locale}
           animatedType="Right"
-          modalStyle={{right: 0}}
+          modalStyle={{ right: 0 }}
         />
         {
           exitModal ?

@@ -33,7 +33,8 @@ const handlers = {
     if (typeof data !== 'object') {
       throw new Error('data is must be a object.');
     }
-    store.dispatch(addTabs(data));
+    const param = Object.assign({ type: 'locale', url: data.id }, data);
+    store.dispatch(addTabs(param));
   },
   openService({ serviceCode, data, type, tenantId }) {
     if (tenantId && serviceCode) {

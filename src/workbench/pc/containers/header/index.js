@@ -83,9 +83,7 @@ class HeaderContainer extends Component {
   openAllFn = () => {
     // this.props.history.push('/application');
     openWin({
-      id: 'application',
-      type: 'local',
-      url: 'Application',
+      id: 'Application',
       title: '全部应用',
     });
   }

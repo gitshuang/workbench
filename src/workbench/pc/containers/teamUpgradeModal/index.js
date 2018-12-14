@@ -40,9 +40,7 @@ class TeamUpgradeModal extends Component {
   configFn = () => {
     
     openWin({
-      id: 'updateenter',
-      type: 'local',
-      url: 'UpdateEnter',
+      id: 'UpdateEnter',
       title: '升级企业',
     });
     // const { history, } = this.props;

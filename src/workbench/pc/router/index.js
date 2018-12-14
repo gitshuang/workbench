@@ -41,10 +41,10 @@ const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "Manage
 const HomePage = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/homepage'));
 
 const routes = [
-  {
-    path: '/establishusercenter',
-    component: EstablishUserCenter,
-  },
+  // {
+  //   path: '/establishusercenter',
+  //   component: EstablishUserCenter,
+  // },
   // {
   //   path: '/application',
   //   component: Application,
@@ -139,8 +139,6 @@ export const Pages = {
   Application: <Application />,
   Manage: <Manage />,
   Search: <Search />, 
-  // SearchResult: <SearchResult />,
-  // Establish: <Establish />,
   EstablishUserCenter: <EstablishUserCenter />,
   CreateTeam: <CreateTeam />,
   CreateEnter: <CreateEnter />,

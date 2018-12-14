@@ -16,18 +16,14 @@ class EstablishContent extends Component {
 
   openTeam = () => {
     openWin({
-      id: 'createteam',
-      type: 'local',
-      url: 'CreateTeam',
+      id: 'CreateTeam',
       title: '创建团队',
     });
   }
 
   openEnter = () => {
     openWin({
-      id: 'createenter',
-      type: 'local',
-      url: 'CreateEnter',
+      id: 'CreateEnter',
       title: '创建企业',
     });
   }

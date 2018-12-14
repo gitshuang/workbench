@@ -80,9 +80,7 @@ class DropdownButton extends Component {
     } = this.props;
     // history.push('/establishusercenter');
     openWin({
-      id: 'create',
-      type: 'local',
-      url: 'EstablishUserCenter',
+      id: 'EstablishUserCenter',
       title: '创建企业/团队',
     });
   }
@@ -93,8 +91,6 @@ class DropdownButton extends Component {
     } = this.props;
     openWin({
       id: 'ManageTeamEnter',
-      type: 'local',
-      url: 'ManageTeamEnter',
       title: '管理应用',
     });
     // history.push('/manageTeamEnter');

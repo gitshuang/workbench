@@ -95,7 +95,7 @@ class Invitation extends Component {
       creator: props.userInfo.userName,
       message: '',
     };
-    this.goBack = this.goBack.bind(this);
+    // this.goBack = this.goBack.bind(this);
   }
 
   componentWillMount() {
@@ -217,7 +217,7 @@ class Invitation extends Component {
       message,
     } = this.state;
     return (
-      <div>
+      <div className={wrap}>
         {/* <div className=" header">
           <Header onLeftClick={this.goHome} >
             <div>

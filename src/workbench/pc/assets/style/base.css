@@ -59,6 +59,7 @@ body {
   background-position: right;
   background-color:#ffffff;
   height: 88px;
+  border-bottom: 1px solid red;
 }
 
 .content{
