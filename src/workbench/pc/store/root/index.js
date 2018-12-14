@@ -69,7 +69,7 @@ const {
   openFrame,
   closeFrame,
 
-  changeActive,
+  openRoot,
   addTabs,
   changeTabsRouter,
 } = actions;
@@ -79,6 +79,9 @@ const defaultState = {
   tabs: [
 
   ],
+  currItem: {
+    id: 'home',
+  },
   activeCarrier: 'home',
   serviceList: [],
   messageType: false,
@@ -286,27 +289,29 @@ const reducer = handleActions({
       frameParam: {}
     }
   },
-  [changeActive]: (state, { payload, }) => {
+  [openRoot]: (state, { payload, }) => {
     return {
       ...state,
-      activeCarrier: payload,
+      activeCarrier: 'home',
     };
   },
   [addTabs]: (state, { payload, }) => {
     const { tabs } = state;
     const isF = tabs.find((item) => {
-      return item.id === payload.id
+      return item.id === payload.id;
     });
     if (isF && tabs.length) {
       return {
         ...state,
-        activeCarrier: payload.id
+        activeCarrier: payload.id,
+        currItem: payload
       }
     }
     return {
       ...state,
       tabs: [payload, ...tabs],
-      activeCarrier: payload.id
+      activeCarrier: payload.id,
+      currItem: payload,
     };
   },
   [changeTabsRouter]: (state, { payload, }) => {

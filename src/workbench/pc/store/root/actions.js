@@ -42,7 +42,7 @@ const {
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
-  CHANGE_ACTIVE,
+  OPEN_ROOT,
   ADD_TABS,
   CHANGE_TABS_ROUTER,
 } = types;
@@ -76,7 +76,7 @@ export default createActions(
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
-  CHANGE_ACTIVE,
+  OPEN_ROOT,
   ADD_TABS,
   CHANGE_TABS_ROUTER,
 );

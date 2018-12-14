@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 
-import Actions from 'store/root/actions';
-const { changeActive } = Actions;
+import { openWin } from 'public/regMessageTypeHandler';
 import { tabStyle } from './style.css';
 
 
@@ -14,7 +13,7 @@ import { tabStyle } from './style.css';
     'activeCarrier',
   ),
   {
-    changeActive
+
   },
 )
 
@@ -29,8 +28,7 @@ class Tabmenu extends Component {
   componentWillMount() { }
 
   changeActive = (item) => {
-    const { changeActive } = this.props;
-    changeActive(item.id);
+    openWin(item);
   }
 
 

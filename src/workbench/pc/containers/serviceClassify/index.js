@@ -7,6 +7,7 @@ import SearchInput from 'pub-comp/searchInput';
 import ButtonGroup from 'bee/button-group';
 import { ButtonBrand } from 'pub-comp/button';
 import GoTo from './goto';
+import {openWin} from 'public/regMessageTypeHandler';
 
 import {
   bg,
@@ -217,7 +218,11 @@ class serviceClassify extends Component {
   }
 
   openMarket = () => {
-    this.props.history.push('/market')
+    // this.props.history.push('/market')
+    openWin({
+      id: "Market",
+      title: "应用市场"
+    });
   }
 
   getCompanyType = () => {
@@ -268,7 +273,6 @@ class serviceClassify extends Component {
                 btnText="搜索"
                 classname={left}
               />
-              <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand>
               {_appType && locale === "zh_CN" ? <ButtonBrand className={openMarketBtn} onClick={this.openMarket} >应用市场</ButtonBrand> : null}
             </div>
             <div className={um_content}>

@@ -26,7 +26,7 @@ const {
   requestStart,
   requestSuccess,
   requestError,
-  changeActive,
+  openRoot,
   changeTabsRouter,
 } = rootActions;
 
@@ -42,7 +42,7 @@ const {
     requestStart,
     requestSuccess,
     requestError,
-    changeActive,
+    openRoot,
     changeTabsRouter
   },
 )
@@ -164,18 +164,12 @@ class Homeheader extends Component {
   }
 
   changeRouter = () => {
-    const { changeTabsRouter } = this.props;
-    changeTabsRouter({
-      id: 'create',
-      type: 'local',
-      url: 'CreateEnter',
-      title: '创建企业',
-    });
+
   }
 
 
   render() {
-    const { changeActive, activeCarrier } = this.props;
+    const { openRoot, activeCarrier } = this.props;
     const menu = <Icon type='master' />;
     const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '145px' }} /></a>;
     return (
@@ -195,7 +189,7 @@ class Homeheader extends Component {
             <Icon type="record" />
           </div>
           <div
-            onClick={() => { changeActive('home') }}
+            onClick={() => { openRoot() }}
             style={{ background: activeCarrier === "home" ? 'red' : 'none', width: '50px', textAlign: "center", lineHeight: '40px' }}
           >
             <Icon type="home" />

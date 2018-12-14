@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { mapStateToProps, getHost, getContext } from '@u';
 
 import { trigger } from 'public/componentTools';
-import { openService, dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { openService, dispatchMessageTypeHandler, openWin } from 'public/regMessageTypeHandler';
 
 import rootActions from 'store/root/actions';
 import homepageActions from 'store/root/homepage/actions';
@@ -23,13 +23,20 @@ import userinfo from 'assets/image/userinfo.png';
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { getUserInfo } = homepageActions;
 
-@withRouter
+// @withRouter
 @connect(
   mapStateToProps(
     'userInfo',
     {
+      key: 'currItem',
+      value: (home, ownProps, root) => {
+        return root.currItem
+      }
+    },
+    {
       namespace: 'homepage',
     },
+
   ),
   {
     requestStart,
@@ -107,7 +114,7 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
-    const { key, userId } = this.props.match.params;
+    const { key, userId } = this.props.currItem.data;
     this.setState({
       activetab: key,
       iframeUrl: this.urlPack(getHost(key)),
@@ -123,7 +130,7 @@ class HomePage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const newUserId = nextProps.match.params ? nextProps.match.params.userId : '';
+    const newUserId = nextProps.currItem.data ? nextProps.currItem.data.userId : '';
     const {
       userInfo: {
         userId
@@ -138,7 +145,7 @@ class HomePage extends Component {
         this.storageArr.push(newUserId);
       }
     }
-    const key = nextProps.match.params ? nextProps.match.params.key : '';
+    const key = nextProps.currItem.data ? nextProps.currItem.data.key : '';
     const { activetab } = this.state;
     // 切换用户  让地址栏和tabs 保持一致
     if (activetab && key && key !== activetab) {
@@ -157,9 +164,9 @@ class HomePage extends Component {
     this.setState({ style: { height: window.innerHeight - 118 } })
   }
 
-  forbidBack = () => {
-    history.pushState(null, null, document.URL);
-  }
+  // forbidBack = () => {
+  //   history.pushState(null, null, document.URL);
+  // }
 
   urlPack = (url) => {
     return url.indexOf('?') > -1 ? `${url}&` : `${url}?`
@@ -190,24 +197,24 @@ class HomePage extends Component {
     });
   }
 
-  goBack = () => {
-    const { history } = this.props;
-    // 设定pop为true
-    this.pop = true;
-    if (this.historys.length) {
-      // 将historys 去掉最后一个  并取出来
-      const lastHistory = this.historys.pop();
-      this.storageArr.pop();
-      history.replace(`/homepage/${lastHistory}/info`);
-    } else {
-      history.replace('');
-    }
-    // this.props.history.goBack();
-  }
+  // goBack = () => {
+  //   const { history } = this.props;
+  //   // 设定pop为true
+  //   this.pop = true;
+  //   if (this.historys.length) {
+  //     // 将historys 去掉最后一个  并取出来
+  //     const lastHistory = this.historys.pop();
+  //     this.storageArr.pop();
+  //     history.replace(`/homepage/${lastHistory}/info`);
+  //   } else {
+  //     history.replace('');
+  //   }
+  //   // this.props.history.goBack();
+  // }
 
-  goHome = () => {
-    this.props.history.replace('');
-  }
+  // goHome = () => {
+  //   this.props.history.replace('');
+  // }
 
   // 点击tabs 分类
   TabsClick = (activetab) => {
@@ -220,7 +227,15 @@ class HomePage extends Component {
       activetab,
       iframeUrl: this.urlPack(getHost(activetab)),
     }, () => {
-      this.props.history.push(`/homepage/${userId}/${activetab}`);
+      // this.props.history.push(`/homepage/${userId}/${activetab}`);
+      openWin({
+        id: "Homepage",
+        title: "主页",
+        data: {
+          userId,
+          key: activetab,
+        }
+      })
     });
   }
 
@@ -322,7 +337,7 @@ class HomePage extends Component {
               <ul>
                 {this.renderTabs()}
               </ul>
-              <div style={style}>
+              <div>
                 {/* {this.renderIframe()} */}
                 < IFrame
                   title={activetab}

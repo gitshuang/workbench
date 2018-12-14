@@ -69,7 +69,7 @@ class Personals extends Component {
           title: '邀请成员',
         },
         speak: {
-          id: 'Homepage',
+          id: 'HomePage',
           title: '主页',
           data: {
             userId,
@@ -77,7 +77,7 @@ class Personals extends Component {
           }
         },
         honor: {
-          id: 'Homepage',
+          id: 'HomePage',
           title: '主页',
           data: {
             userId,
