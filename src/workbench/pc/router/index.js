@@ -57,10 +57,10 @@ const routes = [
     path: '/:type(app|service)/:code/:subcode?',
     component: Work,
   },
-  {
-    path: '/search/:id/:value',
-    component: Search,
-  },
+  // {
+  //   path: '/search/:id/:value',
+  //   component: Search,
+  // },
   // {
   //   path: '/establish',
   //   component: Establish,

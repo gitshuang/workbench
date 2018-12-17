@@ -22,6 +22,7 @@ import {
   recently,
   tabPane1,
 } from './style.css';
+import { openWin } from 'public/regMessageTypeHandler';
 
 const {
   getSearchMore, getSearch, getSearchOther, setSearchHeadData,
@@ -167,6 +168,12 @@ class searchResult extends Component {
     }
     this.setState({dataNum:1,dataPerPageNum:10,activePage:1},()=>{
       this.props.history.push(`/search/${activetab}/${keywords}`);
+      openWin({
+        id: 'search',
+        data: {
+
+        }
+      })
     })
   }
 
