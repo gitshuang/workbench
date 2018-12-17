@@ -161,7 +161,8 @@ const reducer = handleActions({
     }
     let location = "";
 
-    if (!lisenceBeforeOpen || isSetPro) {
+    // if (!lisenceBeforeOpen || isSetPro) {
+    if (!lisenceBeforeOpen) {
       // 2018.11.09 新增lisenceBeforeOpen  为了判断是否直接用service上的url
       location = appendSearchParam(url, {
         ...getOpenServiceData(serviceCode),
@@ -274,7 +275,8 @@ const reducer = handleActions({
       ext1,
     }
     // 当不是第一次加载，并且是默认需要获取详情的url
-    if (!isSetPro && lisenceBeforeOpen) {
+    // if (!isSetPro && lisenceBeforeOpen) {
+    if (lisenceBeforeOpen) {
       const location = appendSearchParam(url, {
         ...getOpenServiceData(serviceCode),
         serviceCode,
@@ -287,7 +289,7 @@ const reducer = handleActions({
       pinType: hasWidget,
       current: newCurr,
       tabs: (tabs.length === 0 ? [tab] : [tab].concat(tabs)),
-      isSetPro: false,
+      // isSetPro: false,
     };
   },
   [setProductInfo]: (state, { payload: productInfo }) => {
@@ -323,7 +325,7 @@ const reducer = handleActions({
       pinType,
       tabs: [],
       productInfo,
-      isSetPro: true,
+      // isSetPro: true,
     };
   },
   [titleServiceDisplay]: state => ({
