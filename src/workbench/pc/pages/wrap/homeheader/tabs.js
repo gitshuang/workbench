@@ -11,6 +11,7 @@ import { tabStyle } from './style.css';
   mapStateToProps(
     'tabs',
     'activeCarrier',
+    'currItem',
   ),
   {
 

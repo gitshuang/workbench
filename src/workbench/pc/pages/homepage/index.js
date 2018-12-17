@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getHost, getContext } from '@u';
 
@@ -13,14 +12,13 @@ import homepageActions from 'store/root/homepage/actions';
 import Button from 'pub-comp/button';
 import IFrame from 'components/iframe';
 
-import { umContent, content, user, info, tabContent, active } from './style.css';
+import { content, user, info, tabContent, active } from './style.css';
 import bg from 'assets/image/homepage.png';
 import userinfo from 'assets/image/userinfo.png';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { getUserInfo } = homepageActions;
 
-// @withRouter
 @connect(
   mapStateToProps(
     'userInfo',
@@ -161,9 +159,9 @@ class HomePage extends Component {
     this.setState({ style: { height: window.innerHeight - 128 } })
   }
 
-  // forbidBack = () => {
-  //   history.pushState(null, null, document.URL);
-  // }
+  forbidBack = () => {
+    history.pushState(null, null, document.URL);
+  }
 
   urlPack = (url) => {
     return url.indexOf('?') > -1 ? `${url}&` : `${url}?`
@@ -193,25 +191,6 @@ class HomePage extends Component {
       this.isRe = false;
     });
   }
-
-  // goBack = () => {
-  //   const { history } = this.props;
-  //   // 设定pop为true
-  //   this.pop = true;
-  //   if (this.historys.length) {
-  //     // 将historys 去掉最后一个  并取出来
-  //     const lastHistory = this.historys.pop();
-  //     this.storageArr.pop();
-  //     history.replace(`/homepage/${lastHistory}/info`);
-  //   } else {
-  //     history.replace('');
-  //   }
-  //   // this.props.history.goBack();
-  // }
-
-  // goHome = () => {
-  //   this.props.history.replace('');
-  // }
 
   // 点击tabs 分类
   TabsClick = (activetab) => {
@@ -292,58 +271,43 @@ class HomePage extends Component {
     } = this.props;
     if (!userId) return null;
     return (
-      <div>
-        {/* <div className="header">
-          <Header onLeftClick={this.goHome} >
-            <div>
-              <span>{`${userName}的个人主页`}</span>
-            </div>
-          </Header>
-          <div className="appBreadcrumb">
-            <BreadcrumbContainer data={this.brm} goback={this.goBack} />
+      <div className={`${content}`}>
+        <div className={user} id='user'>
+          <img src={bg} />
+          <div className={info}>
+            <dl className="clearfix">
+              <dt>
+                <img src={userAvator || userinfo} />
+              </dt>
+              <dd>
+                <h5>{userName}</h5>
+                <h6>{company}</h6>
+                {
+                  this.state.isSelf
+                    ?
+                    null
+                    :
+                    <div>
+                      <Button onClick={this.sendMessage}>发消息</Button>
+                      <Button onClick={this.sendEmail}>发邮件</Button>
+                      <Button onClick={this.sendHonor}>发荣耀</Button>
+                    </div>
+                }
+              </dd>
+            </dl>
           </div>
-        </div> */}
-        {/* <div className={`${umContent} content`}> */}
-          <div className={`${content}`}>
-            <div className={user} id='user'>
-              <img src={bg} />
-              <div className={info}>
-                <dl className="clearfix">
-                  <dt>
-                    <img src={userAvator || userinfo} />
-                  </dt>
-                  <dd>
-                    <h5>{userName}</h5>
-                    <h6>{company}</h6>
-                    {
-                      this.state.isSelf
-                        ?
-                        null
-                        :
-                        <div>
-                          <Button onClick={this.sendMessage}>发消息</Button>
-                          <Button onClick={this.sendEmail}>发邮件</Button>
-                          <Button onClick={this.sendHonor}>发荣耀</Button>
-                        </div>
-                    }
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div className={`${tabContent}`}>
-              <ul>
-                {this.renderTabs()}
-              </ul>
-              <div style={Object.assign(style,{position:"relative"})}>
-                {/* {this.renderIframe()} */}
-                < IFrame
-                  title={activetab}
-                  url={`${iframeUrl}userId=${userId}`}
-                />
-              </div>
-            </div>
+        </div>
+        <div className={`${tabContent}`}>
+          <ul>
+            {this.renderTabs()}
+          </ul>
+          <div style={Object.assign(style, { position: "relative" })}>
+            < IFrame
+              title={activetab}
+              url={`${iframeUrl}userId=${userId}`}
+            />
           </div>
-        {/* </div> */}
+        </div>
       </div>
     );
   }

@@ -6,20 +6,18 @@ class EstablishUserCenter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     };
   }
 
   componentWillMount() {
-    
+
   }
 
   render() {
     return (
-      <div >
-        <div>
-          <EstablishContent  />
-        </div>
+      <div>
+        <EstablishContent />
       </div>
     );
   }

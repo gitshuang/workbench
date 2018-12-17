@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { withRouter } from 'react-router-dom';
 import Button from 'bee/button';
 import SearchInput from 'pub-comp/searchInput';
 import ButtonGroup from 'bee/button-group';
@@ -27,7 +26,6 @@ import applicationActions from 'store/root/application/actions';
 import rootActions from 'store/root/actions';
 const { getAllApplicationList } = applicationActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
-@withRouter
 @connect(
   mapStateToProps(
     'userInfo',
@@ -218,7 +216,6 @@ class serviceClassify extends Component {
   }
 
   openMarket = () => {
-    // this.props.history.push('/market')
     openWin({
       id: "Market",
       title: "应用市场"

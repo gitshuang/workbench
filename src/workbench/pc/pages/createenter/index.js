@@ -78,21 +78,6 @@ class Enterprise extends Component {
     const { userInfo } = this.props;
     const { locale } = getContext();
     return (
-      // <div>
-      //   <div className="header ">
-      //     <Header
-      //       onLeftClick={this.goHome}
-      //     >
-      //       <div>
-      //         <span>创建企业</span>
-      //       </div>
-      //     </Header>
-      //     <div className="appBreadcrumb">
-      //       <Breadcrumbs data={[{ name: '创建企业' }]} goback={this.goBack} />
-      //     </div>
-      //   </div>
-
-      //   <div className="content">
       <div className={pageEnterprise}>
         <div className={enterTitle} >创建企业</div>
         <hr className={hr} />
@@ -112,8 +97,6 @@ class Enterprise extends Component {
           }
         </div>
       </div>
-      //   </div>
-      // </div>
     );
   }
 }

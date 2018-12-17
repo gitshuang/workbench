@@ -98,9 +98,9 @@ const defaultState = {
   dialogMsg: '',
   showFrame: false,
   frameParam: {
-    
+
   },
-  currLan:'zh_CN',//当前的语言
+  currLan: 'zh_CN',//当前的语言
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -190,8 +190,8 @@ const reducer = handleActions({
     const info = window.diworkContext();
     const { tenantid, userid } = info;
     // 避免localhost环境下一直刷新
-    if (payload.tenantId == "tenantid" && payload.userId == "userid" ){
-       return state;
+    if (payload.tenantId == "tenantid" && payload.userId == "userid") {
+      return state;
     }
     if (!payload.tenantId || !tenantid) {
       return state;
@@ -199,7 +199,7 @@ const reducer = handleActions({
     if (payload.tenantId !== tenantid || payload.userId !== userid) {
       window.location.reload();
     }
-    return{
+    return {
       ...state,
     }
   },
@@ -252,16 +252,16 @@ const reducer = handleActions({
   [getCurrent]: state => state,
   [setCurrentNot]: state => state,
   [getAllEnableNot]: state => state,
-  [getCurrentNot]: (state,{payload}) => {
+  [getCurrentNot]: (state, { payload }) => {
     // console.log('payload',payload.langCode)
     return {
       ...state,
-      currLan:payload.langCode
+      currLan: payload.langCode
     }
   },
-  [showDialog]: (state, {payload: dialogData}) => {
-    let {type} = dialogData;
-    const {title, msg} = dialogData;
+  [showDialog]: (state, { payload: dialogData }) => {
+    let { type } = dialogData;
+    const { title, msg } = dialogData;
     const typeArray = ['warning', 'success', 'error'];
     if (!typeArray.find((ele) => (ele === type))) {
       type = 'success';
@@ -274,8 +274,8 @@ const reducer = handleActions({
       dialogMsg: msg
     }
   },
-  [closeDialogNew]: (state) => ({...state, showModal: false}),
-  [openFrame]: (state, {payload: param}) => {
+  [closeDialogNew]: (state) => ({ ...state, showModal: false }),
+  [openFrame]: (state, { payload: param }) => {
     return {
       ...state,
       showFrame: true,
@@ -297,14 +297,26 @@ const reducer = handleActions({
   },
   [addTabs]: (state, { payload, }) => {
     const { tabs } = state;
-    const isF = tabs.find((item) => {
+    const cIndex = tabs.findIndex((item) => {
       return item.id === payload.id;
     });
-    if (isF && tabs.length) {
-      return {
-        ...state,
-        activeCarrier: payload.id,
-        currItem: payload
+    if (cIndex > -1 && tabs.length) {
+      if (Object.is(tabs[cIndex], payload)) {
+        return {
+          ...state,
+          activeCarrier: payload.id,
+          currItem: payload
+        }
+      } else {
+        const newTabs = tabs.filter((item, index) => {
+          return index !== cIndex;
+        })
+        return {
+          ...state,
+          tabs: [payload, ...newTabs],
+          activeCarrier: payload.id,
+          currItem: payload
+        }
       }
     }
     return {
