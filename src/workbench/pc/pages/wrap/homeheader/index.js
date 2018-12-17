@@ -10,7 +10,7 @@ import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
 
 // 业务组件
-import DropdownButton from 'components/dropdown';
+import DropdownButton from '../dropdown';
 import Menu from './menu';
 import Tabmenu from './tabs';
 import Header from '../header';

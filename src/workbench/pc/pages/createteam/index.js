@@ -9,7 +9,6 @@ class CreateTeam extends Component {
     };
   }
   render() {
-    const { match: { params } } = this.props;
     return (
       <div>
         <CreateTeamContent />
