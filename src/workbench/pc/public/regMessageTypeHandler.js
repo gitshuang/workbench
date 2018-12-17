@@ -233,9 +233,6 @@ const handlers = {
       throw new Error("userId is require");
     }
   },
-  setServiceRouter(data) {
-    store.dispatch(changeTabsRouter());
-  }
 }
 window.handlers = handlers;
 const openServiceData = {};

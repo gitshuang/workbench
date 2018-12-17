@@ -12,9 +12,7 @@ import FormControl from 'bee/form-control';
 import { openMess } from 'pub-comp/notification';
 import { ButtonBrand } from 'pub-comp/button';
 
-import TagsInput from 'components/tagsInput';
-// import Header from 'containers/header';
-// import BreadcrumbContainer from 'components/breadcrumb';
+import TagsInput from './tagsInput';
 
 import SuccessDialog from './successDialog';
 

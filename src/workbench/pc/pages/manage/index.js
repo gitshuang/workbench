@@ -9,7 +9,6 @@ import manageActions from 'store/root/manage/actions';
 
 import CreateManageModule from 'pub-comp/manageWidget';
 import folderBgSrc from 'assets/image/wgt/folder_bg.png';
-// import HeaderPage from './headerPage';
 import { win } from './style.css';
 import LanguagesJSON from 'yutils/languages';
 
@@ -335,17 +334,6 @@ class Manage extends Component {
       // isEdit,
       setEditState,
     } = this.props;
-    /*
-    if(isEdit){
-      this.getManageList().then((error) => {
-        if (!error) {
-
-        }
-        setEditState(false);
-      });
-    }else{
-      this.goBack();
-    } */
     setEditState(false);
     this.popCloseCancel();
     this.goBack();
@@ -527,8 +515,7 @@ class Manage extends Component {
       languagesJSON: LanguagesJSON
     };
     return (
-      <div className={win}>
-        {/* <HeaderPage list={list} /> */}
+      <div className={`${win} home`}>
         <CreateManageModule {...manageReduxParams} {...manageOuterParams} />
       </div>
     );

@@ -1,67 +1,29 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { mapStateToProps } from '@u';
-import ApplicationWrap from 'containers/applicationWrap';
+import IFrame from 'components/iframe';
 
-import {
-  bg,
-  frameElm,
-} from './style.css';
 
-@withRouter
-@connect(
-  mapStateToProps(
-    'brm',
-    {
-      namespace: 'work',
-    },
-  ),
-  {
-  },
-)
 class Account extends Component {
   static propTypes = {
-    brm: PropTypes.arrayOf(PropTypes.object),
-    history: PropTypes.shape({
-      go: PropTypes.func,
-    }),
-    match: PropTypes.shape({
-      params: PropTypes.object,
-    }),
+    match: PropTypes.shape({}),
   };
   static defaultProps = {
-    brm: [],
-    history: {},
+    
     match: {},
   };
 
   componentDidMount() {
-    // this.props.addBrm({name:'应用详情',url:'/market/details'})
   }
 
   func = () => { }
 
   render() {
     const { params } = this.props.match;
-    const brmVal = this.props.brm;
     const { id } = params;
     return (
       <div>
-        <iframe title="applicaton" className={frameElm} src={`/diwork-market/appMarket/#/application/${id}`} />
+        <IFrame title="应用市场" src={`/diwork-market/appMarket/#/application/${id}`} />
       </div>
-      // <ApplicationWrap
-      //   name={brmVal.length <= 1 ? '应用详情' : brmVal[brmVal.length - 1].name}
-      //   brms={brmVal.length === 0 ? [{ name: '全部应用' }] : brmVal.slice(0, brmVal.length - 1)}
-      // >
-      //   <div className={`${bg}  um-vbox`}>
-      //     {/* <iframe className={frameElm} src={'http://localhost:3005/#/application/'+id} /> */}
-      //     {
-      //       <iframe title="applicaton" className={frameElm} src={`/diwork-market/appMarket/#/application/${id}`} />
-      //     }
-      //   </div>
-      // </ApplicationWrap>
     );
   }
 }

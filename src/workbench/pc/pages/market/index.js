@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 // import ApplicationWrap from 'containers/applicationWrap';
 import workActions from 'store/root/work/actions';
-import IFrame from 'components/iframe_other';
+import IFrame from 'components/iframe';
 import { bg } from './style.css';
 
 const { addBrm, popBrm } = workActions;

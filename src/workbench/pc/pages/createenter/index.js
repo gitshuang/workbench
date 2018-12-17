@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
 
-// import Header from 'containers/header';
-// import Breadcrumbs from 'components/breadcrumb';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
@@ -19,7 +16,6 @@ const { setCreateEnter } = homeActions;
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
 import 'assets/style/Form.css';
 
-// @withRouter
 @connect(
   mapStateToProps(
     'userInfo',
@@ -33,16 +29,11 @@ import 'assets/style/Form.css';
 )
 class Enterprise extends Component {
   static propTypes = {
-    history: PropTypes.shape({
-      goBack: PropTypes.func,
-      replace: PropTypes.func,
-    }),
     userInfo: PropTypes.shape({
       allowTenants: PropTypes.array,
     }),
   };
   static defaultProps = {
-    history: {},
     userInfo: {},
   };
   constructor(props) {

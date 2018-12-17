@@ -10,13 +10,13 @@ import workActions from 'store/root/work/actions';
 import Icon from 'pub-comp/icon';
 import Message from 'bee/message';
 /*  containers 容器组件  */
-import TabsContainer from 'containers/tabs';
-import HeaderContainer from 'containers/header';
-import BreadcrumbContainer from 'containers/breadcrumb';
-import ContentContainer from 'containers/content';
-import SideBarContainer from 'containers/sideBar';
-import TitleServiceContainer from 'containers/titleService';
-import Pin from 'containers/pin';
+import TabsContainer from './tabs';
+// import HeaderContainer from 'containers/header';
+// import BreadcrumbContainer from './breadcrumb';
+import ContentContainer from './content';
+import SideBarContainer from './sideBar';
+import TitleServiceContainer from './titleService';
+import Pin from './pin';
 
 /*  style样式库组件  */
 import styles from './style.css';
@@ -366,7 +366,7 @@ export default class Work extends Component {
     } = this.props;
     return (
       <div className={`${wrap}  ${work}`}>
-        <div className=" header">
+        {/* <div className=" header">
           <HeaderContainer onLeftClick={this.goBack} leftContent={domainName}>
             <div className={titleArea}>
               <span>{title}</span>
@@ -397,7 +397,7 @@ export default class Work extends Component {
           {
             widthBrm ? <BreadcrumbContainer withSidebar={type !== 1 && type !== 4} /> : null
           }
-        </div>
+        </div> */}
 
         <div className={`${workArea}`}>
           {this.makeLayout()}

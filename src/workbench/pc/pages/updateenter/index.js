@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
 
-// import Header from 'containers/header';
-// import Breadcrumbs from 'components/breadcrumb';
-
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
 import { texts } from 'yutils/entertext';

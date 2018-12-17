@@ -7,8 +7,8 @@ import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 
 import { Pages } from 'router';
 
-import Homeheader from 'containers/homeheader';
-import Iframe from 'components/iframe_other';
+import Homeheader from './homeheader';
+import Iframe from 'components/iframe';
 
 @withRouter
 @connect(
@@ -78,19 +78,15 @@ class Wrap extends Component {
           {
             this.rendercontent()
           }
-          {
-            activeCarrier === 'home'
-              ?
-              <div>
-                {
-                  routes.map((route, i) => (
-                    <RouteWithSubRoutes key={i} {...route} />
-                  ))
-                }
-              </div>
-              : null
-          }
         </div>
+        {
+          activeCarrier === 'home'
+            ?
+            routes.map((route, i) => (
+              <RouteWithSubRoutes key={i} {...route} />
+            ))
+            : null
+        }
       </div>
     );
   }

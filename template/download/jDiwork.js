@@ -355,6 +355,12 @@
     });
   };
 
+  var getData = function (callback) {
+    postToDiwork({
+      callbackId: reg('getData', callback)
+    });
+  };
+
   var switchChatTo = function (data, callback) {
     if (data.id || data.yht_id) {
       postToDiwork({
@@ -372,6 +378,8 @@
       })
     });
   }
+
+  
 
   window.addEventListener('DOMContentLoaded', function () {
     isReady = true;
@@ -430,6 +438,7 @@
     openFrame: openFrame,
     closeFrame: closeFrame,
     getPageParam: getPageParam,
+    getData: getData,
     modifyBrm: modifyBrm,
     switchChatTo: switchChatTo,
     openHomePage: openHomePage,

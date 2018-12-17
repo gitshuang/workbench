@@ -120,6 +120,12 @@ const handlerList = {
       type,
     });
   },
+  openHomePage(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
   openFrame(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
@@ -139,10 +145,11 @@ const handlerList = {
       data,
     });
   },
-  openHomePage(type, event) {
-    dispatchMessageTypeHandler(event);
+  getData(type){
+    const data = store.getState().currItem.data;
     postMessageToWin(this.source, {
       type,
+      data,
     });
   },
   execScript(type, event) {

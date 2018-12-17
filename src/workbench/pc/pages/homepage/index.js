@@ -11,10 +11,7 @@ import rootActions from 'store/root/actions';
 import homepageActions from 'store/root/homepage/actions';
 
 import Button from 'pub-comp/button';
-// import Tabs, { TabPane } from 'bee/tabs';
-import Header from 'containers/header';
-import BreadcrumbContainer from 'components/breadcrumb';
-import IFrame from 'components/iframe_other';
+import IFrame from 'components/iframe';
 
 import { umContent, content, user, info, tabContent, active } from './style.css';
 import bg from 'assets/image/homepage.png';

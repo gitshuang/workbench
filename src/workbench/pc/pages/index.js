@@ -19,7 +19,7 @@ import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import rootActions from 'store/root/actions';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
 
-import BasicDialog from 'containers/basicDialog/';
+import BasicDialog from 'components/basicDialog/';
 import Frame from 'components/frame/';
 
 const {

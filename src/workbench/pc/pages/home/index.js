@@ -8,12 +8,10 @@ import { openService } from 'public/regMessageTypeHandler';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 
-import { ElementsWrapper } from 'components/scrollNav';
-import HomeFolderDialog from 'containers/homeFolderDialog';
-import WidgeList from 'containers/homeWidgetList';
-// import HeaderPage from './headerPage';
-import HomeMark from './mark';
-import { pageHome } from './style.css';
+import HomeFolderDialog from './homeFolderDialog';
+import WidgeList from './homeWidgetList';
+import HomeMark from './homemark';
+import { wrap, content } from './style.css';
 
 const { getWorkList, getApplicationList, clearApplicationTips } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -129,7 +127,7 @@ class Home extends Component {
       requestSuccess();
     });
   }
-  
+
   getApplicationList = () => {
     // 请求应用   判断是否有过期应用功能
     const {
@@ -204,9 +202,8 @@ class Home extends Component {
   }
 
   updateViewport = () => {
-    const self = this;
     // if (this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
-    self.setState({
+    this.setState({
       viewport: {
         top: window.pageYOffset,
         height: window.innerHeight,
@@ -255,7 +252,7 @@ class Home extends Component {
       workList,
     } = this.props;
     const list = [];
-    const conts = [];
+    const contents = [];
     workList.forEach((da, i) => {
       const {
         widgetId: id,
@@ -264,13 +261,12 @@ class Home extends Component {
       const props = {
         key: `nav${id}`,
         data: da,
-        noTitle: !i,
       };
       list.push({
         label: name,
         target: `nav${id}`,
       });
-      conts.push(<WidgeList
+      contents.push(<WidgeList
         {...props}
         viewport={this.state.viewport}
         loadOk={this.loadOk}
@@ -278,12 +274,14 @@ class Home extends Component {
       />);
     });
     return (
-      <div ref='home' className={`${pageHome} home`}>
-        {/* <HeaderPage list={list} /> */}
-        <div style={{ background: "red", height: "20px", position: "absolute", top: '100px',zIndex: "111111" }} onClick={this.changeRouter}>切换到编辑</div>
-        <ElementsWrapper items={list} offset={0}>
-          {conts}
-        </ElementsWrapper>
+      <div
+        ref={c => this._container = c}
+        className={`${wrap} home`}
+      >
+        <div style={{ background: "red", height: "20px", position: "absolute", top: '100px', zIndex: "111111" }} onClick={this.changeRouter}>切换到编辑</div>
+        <div className={content}>
+          {contents}
+        </div>
         <HomeFolderDialog />
         {
           this.state.homemark ? <HomeMark
