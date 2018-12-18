@@ -41,7 +41,7 @@ const handlers = {
     if (typeof data !== 'object') {
       throw new Error('data is must be a object.');
     }
-    if(data.id === 'undefined'){
+    if(data.id === undefined){
       throw new Error('id is required.');
     }
     store.dispatch(delTabs(data));
