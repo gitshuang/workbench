@@ -26,14 +26,6 @@ class TeamTransferModal extends Component {
     }
   }
 
-  componentWillMount() {
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-
-  }
-
   // 删除确认
   configFn = () => {
     const { transferTeam } = this.props;

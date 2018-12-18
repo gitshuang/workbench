@@ -125,6 +125,7 @@ class HomePage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.currItem.id !== "HomePage") return;
     const newUserId = nextProps.currItem.data ? nextProps.currItem.data.userId : '';
     const {
       userInfo: {

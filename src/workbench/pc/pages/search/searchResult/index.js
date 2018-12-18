@@ -24,16 +24,18 @@ import {
 } from './style.css';
 import { openWin } from 'public/regMessageTypeHandler';
 
-const {
-  getSearchMore, getSearch, getSearchOther, setSearchHeadData,
-} = searchActions;
+const { getSearchMore, getSearch, } = searchActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 
 @connect(
   mapStateToProps(
     'SearchMoreList',
-    'SearchList',
-    'searchHeadData',
+    {
+      key: 'currItem',
+      value: (home, ownProps, root) => {
+        return root.currItem
+      }
+    },
     {
       namespace: 'search',
     },
@@ -44,8 +46,6 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     requestError,
     getSearchMore,
     getSearch,
-    getSearchOther,
-    setSearchHeadData,
   },
 )
 class searchResult extends Component {
@@ -67,31 +67,32 @@ class searchResult extends Component {
       searchValue: '',
       searchTab: '',
       dataNumSelect: [
-        { id: 0, name: '5条/页',value:5},
-        { id: 1, name: '10条/页', value:10},
-        { id: 2, name: '15条/页',value:15 },
-        { id: 3, name: '20条/页',value:20 }
+        { id: 0, name: '5条/页', value: 5 },
+        { id: 1, name: '10条/页', value: 10 },
+        { id: 2, name: '15条/页', value: 15 },
+        { id: 3, name: '20条/页', value: 20 }
       ],
-      dataNum:1,
-      enhancedPaginationText:{
-        jump:'跳至',
-        jumpPage:'页'
+      dataNum: 1,
+      enhancedPaginationText: {
+        jump: '跳至',
+        jumpPage: '页'
       }
     };
   }
 
   componentWillMount() {
-    const keywords = this.props.match.params.value || '';
+    const keywords = this.props.currItem.data.value || '';
     this.getSearchMoreList(keywords);
   }
 
   componentWillReceiveProps(nextProps) {
-    const value = nextProps.match.params ? nextProps.match.params.value : '';
-    const id = nextProps.match.params ? nextProps.match.params.id : '';
+    if (nextProps.currItem.id !== "Search") return;
+    const value = nextProps.currItem.data ? nextProps.currItem.data.value : '';
+    const type = nextProps.currItem.data ? nextProps.currItem.data.type : '';
     const { searchValue, searchTab } = this.state;
     if (searchValue === '' && searchTab === '') return;
-    if (value === searchValue && id === searchTab) return;
-    this.getSearchTpyeList(value, id, 0, 10);
+    if (value === searchValue && type === searchTab) return;
+    this.getSearchTpyeList(value, type, 0, 10);
   }
 
   getSearchMoreList = (keywords) => {
@@ -101,7 +102,7 @@ class searchResult extends Component {
       requestError,
       getSearchMore,
     } = this.props;
-    const { id } = this.props.match.params;
+    const { type } = this.props.currItem.data;
     requestStart();
     this.setState({ keywords }, () => {
       getSearchMore(keywords).then(({ error, payload }) => {
@@ -110,7 +111,7 @@ class searchResult extends Component {
           return false;
         }
         requestSuccess();
-        const activetab = id || payload.data[0].type;
+        const activetab = type || payload.data[0].type;
         this.setState({
           SearchMoreList: payload.data,
           activetab,
@@ -163,24 +164,26 @@ class searchResult extends Component {
     const { activetab, searchValue } = this.state;
     let { keywords } = this.state;
     if (searchValue === keywords) return;
-    if(keywords === ""){
+    if (keywords === "") {
       keywords = " ";
     }
-    this.setState({dataNum:1,dataPerPageNum:10,activePage:1},()=>{
-      this.props.history.push(`/search/${activetab}/${keywords}`);
+    this.setState({ dataNum: 1, dataPerPageNum: 10, activePage: 1 }, () => {
+      // this.props.history.push(`/search/${activetab}/${keywords}`);
       openWin({
-        id: 'search',
+        id: 'Search',
+        title: '搜索',
         data: {
-
+          type: activetab,
+          value: keywords
         }
-      })
+      });
     })
   }
 
   // 点击tabs 分类
   TabsClick = (activetab) => {
     let { keywords } = this.state;
-    if(keywords === ""){
+    if (keywords === "") {
       keywords = " ";
     }
     this.setState({
@@ -190,11 +193,19 @@ class searchResult extends Component {
         content: [],
       },
       totalPages: 0,
-      dataNum:1,
-      dataPerPageNum:10,
+      dataNum: 1,
+      dataPerPageNum: 10,
       isShownodataClassEach: true,
     }, () => {
-      this.props.history.push(`/search/${activetab}/${keywords}`);
+      // this.props.history.push(`/search/${activetab}/${keywords}`);
+      openWin({
+        id: 'Search',
+        title: '搜索',
+        data: {
+          type: activetab,
+          value: keywords
+        }
+      })
     });
   }
 
@@ -216,7 +227,7 @@ class searchResult extends Component {
     const { keywords, activePage, activetab } = this.state;
     this.setState({
       dataPerPageNum,
-      dataNum:id,
+      dataNum: id,
     }, () => {
       this.getSearchTpyeList(keywords, activetab, activePage - 1, dataPerPageNum);
     });
@@ -234,7 +245,7 @@ class searchResult extends Component {
     });
   }
 
-  openHomepage = (userId,key) => {
+  openHomepage = (userId, key) => {
     openHomePage({
       userId,
       key,
@@ -291,14 +302,14 @@ class searchResult extends Component {
         <div className={`${bg_wrap}  um-vbox`}>
           <div className={`${wrap} ${clearfix}  um-vbox`}>
             <SearchInput
-              onKeyDown = {this.onKeyup}
-              onChange = {this.inputOnChange}
-              keywords = {this.state.keywords}
-              onClick = {this.btnSearch}
-              placeholder = "搜索人员信息、服务及其他内容"
-              btnText = "搜索"
+              onKeyDown={this.onKeyup}
+              onChange={this.inputOnChange}
+              keywords={this.state.keywords}
+              onClick={this.btnSearch}
+              placeholder="搜索人员信息、服务及其他内容"
+              btnText="搜索"
             />
-            
+
             <div className={'' + ` ${tabContent}`}>
               <Tabs
                 destroyInactiveTabPane

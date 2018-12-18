@@ -6,21 +6,19 @@
   width: 100%;
   box-sizing: border-box;
   padding-left: 56px;
-  padding-right: 100px;
+  padding-right: 76px;
 }
 
 /* XL尺寸 */
 @media screen and (device-width: 1441px){
   .content{
-      padding-left: 60px;
-      padding-right: 76px;
+      
   }
 }
 /* L尺寸 */
 @media screen and (min-width: 1025px) and (max-width: 1440px) {
   .content{
-      padding-left: 60px;
-      padding-right: 76px;
+      
   }
 }
 /* M尺寸 */

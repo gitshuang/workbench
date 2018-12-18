@@ -43,7 +43,7 @@ class SearchContainer extends Component {
       title: '搜索',
       data: {
         type: 'addressbook',
-        text: text
+        value: text
       }
     })
   }

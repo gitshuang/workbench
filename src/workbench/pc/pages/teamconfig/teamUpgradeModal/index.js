@@ -28,14 +28,6 @@ class TeamUpgradeModal extends Component {
     }
   }
 
-  componentWillMount() {
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-
-  }
-
   // 删除确认
   configFn = () => {
     
