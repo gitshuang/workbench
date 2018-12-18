@@ -14,6 +14,9 @@ const handlerList = {
       type,
     });
   },
+  closeDialog(type, event) {
+    dispatchMessageTypeHandler(event);
+  },
   openDialog(type, event) {
     const postMessageToWinProxy = (callbackId) => {
       postMessageToWin(this.source, {
@@ -41,9 +44,6 @@ const handlerList = {
         data: false,
       });
     }
-  },
-  closeDialog(type, event) {
-    dispatchMessageTypeHandler(event);
   },
   addBrm(type, event) {
     dispatchMessageTypeHandler(event);
@@ -93,9 +93,9 @@ const handlerList = {
     const event = getNewEvent('mousedown');
     window.document.getElementById('root').dispatchEvent(event);
   },
-  refreshUserInfo(type, event) {
-    dispatchMessageTypeHandler(event);
-  },
+  // refreshUserInfo(type, event) {
+  //   dispatchMessageTypeHandler(event);
+  // },
   switchChatTo(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
@@ -120,12 +120,7 @@ const handlerList = {
       type,
     });
   },
-  openHomePage(type, event) {
-    dispatchMessageTypeHandler(event);
-    postMessageToWin(this.source, {
-      type,
-    });
-  },
+  
   openFrame(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
@@ -145,7 +140,25 @@ const handlerList = {
       data,
     });
   },
-  getData(type){
+  openWin(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
+  openHomePage(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
+  closeWin(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
+  getData(type) {
     const data = store.getState().currItem.data;
     postMessageToWin(this.source, {
       type,

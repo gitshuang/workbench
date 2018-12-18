@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import { dispatch, trigger } from 'public/componentTools';
-import { openHomePage } from 'public/regMessageTypeHandler';
 
 import Tabs, { TabPane } from 'bee/tabs';
 import SearchInput from 'pub-comp/searchInput';
@@ -245,13 +244,6 @@ class searchResult extends Component {
     });
   }
 
-  openHomepage = (userId, key) => {
-    openHomePage({
-      userId,
-      key,
-    });
-  }
-
   // 渲染列表页面
   otherlistLi(data) {
     if (!data || data.content.length === 0) return null;
@@ -264,7 +256,6 @@ class searchResult extends Component {
           type={data.type}
           url={data.renderUrl}
           from="full"
-          handleClick={this.openHomepage}
         />
       </li>
     ));

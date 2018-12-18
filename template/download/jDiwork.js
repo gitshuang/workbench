@@ -164,19 +164,19 @@
       }
     }
   };
-  var postMessage = function(){
+  var postMessage = function () {
 
   }
   var postToDiwork = function (data) {
     data.messType = messType;
     var origin = window.top.location.origin;
     var param = JSON.stringify(data);
-    
+
     if (originList.indexOf(origin) < 0) {
-      window.parent.postMessage(JSON.stringify(data), '*');
+      window.parent.postMessage(param, '*');
       return;
     }
-    window.top.postMessage(JSON.stringify(data), '*');
+    window.top.postMessage(param, '*');
   };
   var ready = function (callback) {
     var event = {
@@ -270,14 +270,7 @@
       callbackId: reg('popBrm', callback)
     });
   };
-  var modifyBrm = function (name, callback) {
-    postToDiwork({
-      detail: {
-        name: name
-      },
-      callbackId: reg('modifyBrm', callback)
-    });
-  };
+
   var getBrm = function (callback) {
     postToDiwork({
       callbackId: reg('getBrm', callback)
@@ -308,10 +301,28 @@
   var onData = function (callback) {
     on('data', callback);
   };
-  var customMessage = function (type) {
-    postToDiwork({
-      callbackId: type,
-    });
+  // var customMessage = function (type) {
+  //   postToDiwork({
+  //     callbackId: type,
+  //   });
+  // };
+  // var modifyBrm = function (name, callback) {
+  //   postToDiwork({
+  //     detail: {
+  //       name: name
+  //     },
+  //     callbackId: reg('modifyBrm', callback)
+  //   });
+  // };
+  var switchChatTo = function (data, callback) {
+    if (data.id || data.yht_id) {
+      postToDiwork({
+        detail: data,
+        callbackId: reg('switchChatTo', callback)
+      });
+    } else {
+      console.log('function switchChatTo need id or yht_id');
+    }
   };
   var openMessage = function (data, callback) {
     postToDiwork({
@@ -338,15 +349,13 @@
   var openFrame = function (data, callback) {
     postToDiwork({
       detail: data,
-      callbackId: reg('openFrame', callback || function () {
-      })
+      callbackId: reg('openFrame', callback || function () { })
     });
   };
   var closeFrame = function (data, callback) {
     postToDiwork({
       detail: data,
-      callbackId: reg('closeFrame', callback || function () {
-      })
+      callbackId: reg('closeFrame', callback || function () { })
     });
   };
   var getPageParam = function (callback) {
@@ -354,22 +363,11 @@
       callbackId: reg('getPageParam', callback)
     });
   };
-
-  var getData = function (callback) {
+  var openWin = function (data, callback) {
     postToDiwork({
-      callbackId: reg('getData', callback)
+      detail: data,
+      callbackId: reg('openWin', callback || function () { })
     });
-  };
-
-  var switchChatTo = function (data, callback) {
-    if (data.id || data.yht_id) {
-      postToDiwork({
-        detail: data,
-        callbackId: reg('switchChatTo', callback)
-      });
-    } else {
-      console.log('function switchChatTo need id or yht_id');
-    }
   };
   var openHomePage = function (data, callback) {
     postToDiwork({
@@ -377,9 +375,24 @@
       callbackId: reg('openHomePage', callback || function () {
       })
     });
-  }
-
-  
+  };
+  var closeWin = function (data, callback) {
+    postToDiwork({
+      detail: data,
+      callbackId: reg('closeWin', callback || function () { })
+    });
+  };
+  var getData = function (callback) {
+    postToDiwork({
+      callbackId: reg('getData', callback)
+    });
+  };
+  var execScript = function (data, callback) {
+    postToDiwork({
+      detail: data,
+      callbackId: reg('execScript', callback || function () { })
+    });
+  };
 
   window.addEventListener('DOMContentLoaded', function () {
     isReady = true;
@@ -388,7 +401,6 @@
   window.addEventListener('message', function (event) {
     var data = event.data;
     var origin = event.origin || event.originalEvent.origin;
-    // console.log('ooooorrrrriiiiiiggggnnnn', origin);
     if (originList.indexOf(origin) < 0 || !data) {
       return;
     }
@@ -422,25 +434,28 @@
   return {
     ready: ready,
     openService: openService,
-    checkServiceOpen: checkServiceOpen,
+    openDialog: openDialog,
     addBrm: addBrm,
     addBrm_prevent: addBrm_prevent,
     popBrm: popBrm,
     getBrm: getBrm,
-    openDialog: openDialog,
-    onData: onData,
-    getContext: getContext,
+    checkServiceOpen: checkServiceOpen,
     postDataToService: postDataToService,
-    customMessage: customMessage,
+    getContext: getContext,
+    onData: onData,
+    // customMessage: customMessage,
+    // modifyBrm: modifyBrm,
+    switchChatTo: switchChatTo,
     openMessage: openMessage,
     showDialog: showDialog,
     closeDialogNew: closeDialogNew,
     openFrame: openFrame,
     closeFrame: closeFrame,
     getPageParam: getPageParam,
-    getData: getData,
-    modifyBrm: modifyBrm,
-    switchChatTo: switchChatTo,
+    openWin: openWin,
     openHomePage: openHomePage,
+    closeWin: closeWin,
+    getData: getData,
+    execScript: execScript,
   };
 });

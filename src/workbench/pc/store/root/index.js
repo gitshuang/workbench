@@ -301,7 +301,9 @@ const reducer = handleActions({
     const cIndex = tabs.findIndex((item) => {
       return item.id === payload.id;
     });
+    // 判断是否已经打开
     if (cIndex > -1 && tabs.length) {
+      // 判断payload 和 原来tabs中对应的数据是否相等   主要是看看是否需要更新tabs
       if (Object.is(tabs[cIndex], payload)) {
         return {
           ...state,
@@ -330,7 +332,9 @@ const reducer = handleActions({
     const newTabs = tabs.filter((item) => {
       return item.id !== payload.id;
     });
+    // 判断删除的是否是当前获取焦点的tabs
     if (payload.id === activeCarrier) {
+      // 如果已经删除的长度大于0，就将第一个设定为active状态 ，否则直接回home
       if (newTabs.length) {
         return {
           ...state,
@@ -346,6 +350,7 @@ const reducer = handleActions({
         activeCarrier: 'home'
       }
     }
+    // 不是焦点的直接删。
     return {
       ...state,
       tabs: newTabs,

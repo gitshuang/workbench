@@ -41,7 +41,7 @@ const handlers = {
     if (typeof data !== 'object') {
       throw new Error('data is must be a object.');
     }
-    if(data.id === undefined){
+    if (data.id === undefined) {
       throw new Error('id is required.');
     }
     store.dispatch(delTabs(data));
@@ -236,10 +236,22 @@ const handlers = {
   closeFrame() {
     store.dispatch(closeFrame());
   },
+  // 后期想干掉， 这个现在diwork-public-components中搜索用到， 协同的个人主页中也用到
   openHomePage(data) {
     try {
       const key = data.key || 'info';
-      this.props.history.push(`/homepage/${data.userId}/${key}`);
+      dispatchMessageTypeHandler({
+        type: "openWin",
+        detail: {
+          id: 'HomePage',
+          title: "个人主页",
+          data: {
+            userId: data.userId,
+            key: key
+          }
+        }
+      })
+      // this.props.history.push(`/homepage/${data.userId}/${key}`);
     } catch (err) {
       throw new Error("userId is require");
     }
@@ -335,6 +347,3 @@ export function openWin(data) {
   handlers.openWin(data);
 }
 
-export function openHomePage(data) {
-  handlers.openHomePage(data);
-}

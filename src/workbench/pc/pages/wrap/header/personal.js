@@ -13,7 +13,7 @@ import homeActions from 'store/root/home/actions';
 import teamconfigActions from 'store/root/teamconfig/actions';
 import rootActions from 'store/root/actions';
 
-import { openService, openWin, openHomePage } from 'public/regMessageTypeHandler';
+import { openService, openWin, } from 'public/regMessageTypeHandler';
 
 const { closeRequestDisplay } = homeActions;
 const { openExitModal } = teamconfigActions;
