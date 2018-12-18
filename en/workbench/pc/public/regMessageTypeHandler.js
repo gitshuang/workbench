@@ -23,7 +23,7 @@ const {
   closeFrame,
   getUserInfo,
   addTabs,
-  changeTabsRouter
+  requestError,
 } = rootActions;
 const {
   
@@ -138,6 +138,7 @@ const handlers = {
         pushYA(subCode);
       }, (err) => {
         console.log(err);
+        store.dispatch(requestError(err));
       });
     }
   },
@@ -231,9 +232,6 @@ const handlers = {
       throw new Error("userId is require");
     }
   },
-  setServiceRouter(data){
-    store.dispatch(changeTabsRouter());
-  }
 }
 window.handlers = handlers;
 const openServiceData = {};
