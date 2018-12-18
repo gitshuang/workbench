@@ -71,7 +71,7 @@ const {
 
   openRoot,
   addTabs,
-  changeTabsRouter,
+  delTabs,
 } = actions;
 
 const defaultState = {
@@ -80,7 +80,7 @@ const defaultState = {
 
   ],
   currItem: {
-    id: 'home',
+    
   },
   activeCarrier: 'home',
   serviceList: [],
@@ -293,6 +293,7 @@ const reducer = handleActions({
     return {
       ...state,
       activeCarrier: 'home',
+      currItem: {},
     };
   },
   [addTabs]: (state, { payload, }) => {
@@ -326,17 +327,22 @@ const reducer = handleActions({
       currItem: payload,
     };
   },
-  [changeTabsRouter]: (state, { payload, }) => {
-    const { tabs } = state;
-    const index = tabs.findIndex((item) => {
-      return item.id === payload.id;
+  [delTabs]: (state, { payload, }) => {
+    const { tabs, activeCarrier } = state;
+    const newTabs = tabs.filter((item) => {
+      return item.id !== payload.id;
     });
-    if (index > -1) {
-      tabs.splice(index, 1, payload);
+    if(payload.id === activeCarrier){
+      return{
+        ...state,
+        tabs: newTabs,
+        currItem: {},
+        activeCarrier: 'home'
+      }
     }
     return {
       ...state,
-      tabs: [...tabs],
+      tabs: newTabs,
     };
   },
 }, defaultState);

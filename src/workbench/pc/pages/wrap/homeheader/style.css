@@ -7,13 +7,18 @@
 }
 .tabStyle li{
   float: left;
-  padding: 10px 20px;
+  padding: 10px 30px 10px 10px;
   line-height: 20px;
   background: #888888;
   margin-right: 2px;
   cursor: pointer;
+  position: relative;
 }
-
+.tabStyle li div{
+  position: absolute;
+  right: 4px;
+  top: 10px;
+}
 
 
 

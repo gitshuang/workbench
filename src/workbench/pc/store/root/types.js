@@ -29,5 +29,5 @@ export default createTypes(
   'CLOSE_FRAME',
   'OPEN_ROOT',
   'ADD_TABS',
-  'CHANGE_TABS_ROUTER',
+  'DEL_TABS',
 );

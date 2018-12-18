@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
+
 // 公共组件
 import Icon from 'pub-comp/icon';
 /*   actions   */
@@ -27,7 +28,6 @@ const {
   requestSuccess,
   requestError,
   openRoot,
-  changeTabsRouter,
 } = rootActions;
 
 
@@ -43,7 +43,6 @@ const {
     requestSuccess,
     requestError,
     openRoot,
-    changeTabsRouter
   },
 )
 class Homeheader extends Component {

@@ -23,6 +23,7 @@ const {
   closeFrame,
   getUserInfo,
   addTabs,
+  delTabs,
   requestError,
 } = rootActions;
 const {
@@ -35,6 +36,15 @@ const handlers = {
     }
     const param = Object.assign({ type: 'locale', url: data.id }, data);
     store.dispatch(addTabs(param));
+  },
+  closeWin(data) {
+    if (typeof data !== 'object') {
+      throw new Error('data is must be a object.');
+    }
+    if(data.id === 'undefined'){
+      throw new Error('id is required.');
+    }
+    store.dispatch(delTabs(data));
   },
   openService({ serviceCode, data, type, tenantId }) {
     if (tenantId && serviceCode) {

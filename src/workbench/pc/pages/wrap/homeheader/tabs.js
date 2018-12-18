@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
+import Icon from 'pub-comp/icon';
 
-import { openWin } from 'public/regMessageTypeHandler';
+import { openWin, dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import { tabStyle } from './style.css';
 
 
@@ -11,7 +11,6 @@ import { tabStyle } from './style.css';
   mapStateToProps(
     'tabs',
     'activeCarrier',
-    'currItem',
   ),
   {
 
@@ -28,10 +27,12 @@ class Tabmenu extends Component {
 
   componentWillMount() { }
 
-  changeActive = (item) => {
-    openWin(item);
+  closeWin = (param) => {
+    dispatchMessageTypeHandler({
+      type: "closeWin",
+      detail: param,
+    });
   }
-
 
   render() {
     const { tabs, activeCarrier } = this.props;
@@ -39,14 +40,15 @@ class Tabmenu extends Component {
       <div>
         <ul className={tabStyle}>
           {
-            tabs.map((item, index) => {
+            tabs.map(item => {
               return (
-                <li
-                  key={item.id}
-                  onClick={() => { this.changeActive(item) }}
+                <li key={item.id}
                   style={{ background: item.id === activeCarrier ? 'red' : '#888' }}
                 >
-                  {item.title}
+                  <p onClick={() => { openWin(item) }}>{item.title}</p>
+                  <div onClick={() => { this.closeWin(item) }}>
+                    <Icon type="error3" />
+                  </div>
                 </li>
               )
             })

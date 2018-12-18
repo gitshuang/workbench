@@ -44,7 +44,7 @@ const {
   CLOSE_FRAME,
   OPEN_ROOT,
   ADD_TABS,
-  CHANGE_TABS_ROUTER,
+  DEL_TABS,
 } = types;
 
 export default createActions(
@@ -78,5 +78,5 @@ export default createActions(
   CLOSE_FRAME,
   OPEN_ROOT,
   ADD_TABS,
-  CHANGE_TABS_ROUTER,
+  DEL_TABS,
 );
