@@ -80,7 +80,7 @@ const defaultState = {
 
   ],
   currItem: {
-    
+
   },
   activeCarrier: 'home',
   serviceList: [],
@@ -309,12 +309,10 @@ const reducer = handleActions({
           currItem: payload
         }
       } else {
-        const newTabs = tabs.filter((item, index) => {
-          return index !== cIndex;
-        })
+        tabs.splice(cIndex, 1, payload);
         return {
           ...state,
-          tabs: [payload, ...newTabs],
+          tabs: [...tabs],
           activeCarrier: payload.id,
           currItem: payload
         }
@@ -332,8 +330,16 @@ const reducer = handleActions({
     const newTabs = tabs.filter((item) => {
       return item.id !== payload.id;
     });
-    if(payload.id === activeCarrier){
-      return{
+    if (payload.id === activeCarrier) {
+      if (newTabs.length) {
+        return {
+          ...state,
+          tabs: newTabs,
+          currItem: newTabs[0],
+          activeCarrier: newTabs[0].id
+        }
+      }
+      return {
         ...state,
         tabs: newTabs,
         currItem: {},
