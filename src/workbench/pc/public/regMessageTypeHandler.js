@@ -20,6 +20,7 @@ const {
   closeDialogNew,
   openFrame,
   closeFrame,
+  requestError,
 } = rootActions;
 const { getUserInfo } = homeActions;
 const handlers = {
@@ -100,6 +101,7 @@ const handlers = {
         pushYA(subCode);
       }, (err) => {
         console.log(err);
+        store.dispatch(requestError(err));
       });
     }
   },
