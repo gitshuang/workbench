@@ -109,7 +109,7 @@ class Root extends Component {
 
     const { tenantid } = getContext();
     if (!tenantid) {
-      this.props.history.replace('/establish');
+      // this.props.history.replace('/establish');
     } else {
       // 请求快捷应用
       getServiceList().then(({ error, payload }) => {
@@ -157,7 +157,7 @@ class Root extends Component {
               :
               duoyuRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
           }
-          <Route component={NoMatch} />
+          {/* <Route component={NoMatch} /> */}
         </Switch>
         {showModal ? <BasicDialog /> : null}
         {showFrame ? <Frame /> : null}

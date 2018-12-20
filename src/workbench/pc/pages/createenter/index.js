@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
 
-
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
 import { texts } from 'yutils/entertext';
@@ -44,14 +43,6 @@ class Enterprise extends Component {
 
   componentWillMount() {
 
-  }
-
-  goBack = () => {
-    this.props.history.goBack();
-  }
-
-  goHome = () => {
-    this.props.history.replace('');
   }
 
   handleClick = (param, fn) => {

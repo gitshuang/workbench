@@ -11,12 +11,14 @@ import TeamManagerModal from '../teamManagerModal';
 import TeamRemoveModal from '../teamRemoveModal';
 import TeamUpgradeModal from '../teamUpgradeModal';
 import TeamTransferModal from '../teamTransferModal';
+
 import EnterOption from '../enterOption'
 import CreateTeam from './createTeam';
 
 import Checkbox from 'bee/checkbox';
 import Button from 'bee/button';
 import { ButtonBrand } from 'pub-comp/button';
+import { openWin } from 'public/regMessageTypeHandler';
 import Icon from 'pub-comp/icon';
 import Tabs from 'bee/tabs';
 import Select from 'bee/select';
@@ -59,6 +61,7 @@ import {
   nopic,
   memberSearch
 } from './index.css';
+
 
 @withRouter
 @connect(
@@ -305,8 +308,15 @@ class CreateTeamContent extends Component {
   }
 
   openXufei = (id) => {
-    const { history } = this.props;
-    history.push('/renew/' + id);
+    // const { history } = this.props;
+    // history.push('/renew/' + id);
+    openWin({
+      id: "Renew",
+      title: "应用续费",
+      data: {
+        appId: id,
+      },
+    });
   }
 
   // 设置团队应用

@@ -130,14 +130,6 @@ class Invitation extends Component {
     });
   }
 
-  // goBack = () => {
-  //   this.props.history.goBack();
-  // }
-
-  // goHome = () => {
-  //   this.props.history.replace('');
-  // }
-
   copyLink = () => {
     this.shortUrl.select();
     document.execCommand('copy');
