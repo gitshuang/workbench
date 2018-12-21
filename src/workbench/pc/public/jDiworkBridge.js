@@ -120,7 +120,7 @@ const handlerList = {
       type,
     });
   },
-  
+
   openFrame(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
@@ -158,8 +158,17 @@ const handlerList = {
       type,
     });
   },
-  getData(type) {
-    const data = store.getState().currItem.data;
+  getData(type, event) {
+    // const data = store.getState().currItem.data;
+    const tabs = store.getState().tabs;
+    const { 
+      detail: {
+        id,
+      } 
+    } = event;
+    const data = tabs.filter(item => {
+      return id === item.id;
+    });
     postMessageToWin(this.source, {
       type,
       data,

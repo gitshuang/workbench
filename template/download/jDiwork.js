@@ -382,8 +382,9 @@
       callbackId: reg('closeWin', callback || function () { })
     });
   };
-  var getData = function (callback) {
+  var getData = function (data, callback) {
     postToDiwork({
+      detail: data,
       callbackId: reg('getData', callback)
     });
   };
