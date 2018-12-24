@@ -53,10 +53,6 @@ const routes = [
   //   path: '/manage',
   //   component: Manage,
   // },
-  {
-    path: '/:type(app|service)/:code/:subcode?',
-    component: Work,
-  },
   // {
   //   path: '/search/:id/:value',
   //   component: Search,
@@ -114,8 +110,10 @@ const routes = [
   //   component: HomePage,
   // },
 
-
-  
+  {
+    path: '/:type(app|service)/:code/:subcode?',
+    component: Work,
+  },
   {
     path: '/',
     component: Wrap,
