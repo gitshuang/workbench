@@ -5,7 +5,7 @@ var config = {
   host: '""',
   assetsSubDirectory: 'static',
   // assetsPublicPath: 'https://cdn.yonyoucloud.com/',
-  assetsPublicPath: `http://workbench.yyuap.com/fe/${outPut}/`,
+  assetsPublicPath: `http://workbench.yyuap.com/fepages/${outPut}/`,
 
   productionSourceMap: true,
   // Gzip off by default as many popular static hosts such as

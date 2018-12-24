@@ -141,7 +141,7 @@ const handlers = {
             serviceCode,
           });
           store.dispatch(addTabs({
-            id: serviceId,
+            id: serviceCode,
             type: 'service',
             url: locations,
             title: serviceName,
