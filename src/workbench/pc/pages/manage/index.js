@@ -7,7 +7,7 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
-import CreateManageModule from 'pub-comp/manageWidget';
+import CreateManageModule from './manageWidget';
 import folderBgSrc from 'assets/image/wgt/folder_bg.png';
 import { win } from './style.css';
 import LanguagesJSON from 'yutils/languages';
