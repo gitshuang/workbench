@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 
 import teamconfigActions from 'store/root/teamconfig/actions';
@@ -9,7 +8,6 @@ const { exitTeam, closeExitModal } = teamconfigActions;
 import PopDialog from 'pub-comp/pop';
 import { content } from './index.css';
 
-@withRouter
 @connect(
   mapStateToProps(
     'exitModal',
@@ -39,13 +37,13 @@ class TeamRemoveModal extends Component {
 
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.close != this.props.close) {
-      this.setState({
-        close: nextProps.close
-      })
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.close != this.props.close) {
+  //     this.setState({
+  //       close: nextProps.close
+  //     })
+  //   }
+  // }
 
   // 删除确认
   configFn = (da) => {

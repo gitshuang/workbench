@@ -4,7 +4,7 @@ import { Personal } from 'diwork-business-components';
 // import Personal from 'components/personal';
 import { connect } from 'react-redux';
 import { mapStateToProps, getHost, logout } from '@u';
-import TeamExitModal from 'components/teamExitModal';
+// import TeamExitModal from 'components/teamExitModal';
 
 import Icon from 'pub-comp/icon';
 
@@ -278,6 +278,7 @@ class Personals extends Component {
           modalStyle={{ right: 0 }}
         />
         {
+          /*
           exitModal ?
             <TeamExitModal
               data={currData}
@@ -285,6 +286,7 @@ class Personals extends Component {
               userId={userInfo.userId}
               close
             /> : null
+            */
         }
       </div>
     );
