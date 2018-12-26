@@ -114,14 +114,6 @@ class WidgeFileItem extends Component {
       moveLine:'none',
     }
   }
-
-  // shouldComponentUpdate(nextProps,nextState){
-  //   if( nextProps.isOver && this.props.moveLine === nextProps.moveLine){
-  //     return false
-  //   }
-  //   return true
-  // }
-
   componentDidMount(){
     var position =  findDOMNode(this).getBoundingClientRect();
     this.setState({
@@ -147,22 +139,7 @@ class WidgeFileItem extends Component {
       })
     }
     var { canDrop, isDragging , isOver ,getItemType} = this.props;
-    // if( nextProps.isOver == true && getItemType.type !== 2){
-    //   var timer = setTimeout(()=>{
-    //     this.setState({
-    //       timeEnough:true,
-    //     })
-    //   },1500)
-    //   this.setState({
-    //     timer
-    //   })
-    // }else{
-    //   clearTimeout(this.state.timer);
-    //   this.setState({
-    //     timer: 0,
-    //     timeEnough:false,
-    //   })
-    // }
+   
     if( nextProps.isOver == true && nextProps.moveLine !== 'none' ){
         if(nextProps.moveLine == 'left'){
           this.setState({
@@ -358,20 +335,7 @@ class WidgeFileItem extends Component {
           'transform': 'scale(1.01,1.01)',
         }
       }
-      // if(offSet){
-      //   if(offSet.x <0 ){
-      //     var styleOverLine = {
-      //       'transform': 'scale(1,1)',
-      //       'boxShadow' :'-5px 0 0 0 #ddd,-8px 0 0 0 #fff',
-      //     }
-      //   }
-      //   if(offSet.x >0 ){
-      //     var styleOverLine = {
-      //       'transform': 'scale(1,1)',
-      //       'boxShadow' :'5px 0 0 0 #ddd,8px 0 0 0 #fff',
-      //     }
-      //   }
-      // }
+    
       if(this.state.moveLine !=='none'  ){
         if( this.state.moveLine == 'left' ){
           styleOverLine = {

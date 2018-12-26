@@ -9,12 +9,8 @@ import PopDialog from 'pub-comp/pop';
 
 import {
   widgetItem,
-  title,
-  title_left,
   title_right,
-  content,
   footer,
-  pop_cont,
   widgetItemCont,
   editDele,
   clearfix,
@@ -41,10 +37,9 @@ const type='item';
 var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
-    //let diffOffset = monitor.getDifferenceFromInitialOffset();
-    // props.editTitle(props.id,props.data.widgetName);
     timestamp=new Date().getTime();
     window.timestamp = timestamp;
+    
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType,dragType:props.dragType,props:props};
   },
   endDrag(props, monitor, component){
@@ -57,28 +52,19 @@ const itemTarget = {
     var { size } = props.data;
     var dirDistance = widgetStyle[size-1].width;
     const draggedId = monitor.getItem().id;
-    const previousParentId = monitor.getItem().parentId;
-    const preType = monitor.getItem().type;
-    let targetId = props.id;
-    let timeFlag=new Date().getTime();
     if (draggedId !== props.id){
       component.setState({
         drag:'fadeInLeft'
       });
-      //let diff = monitor.getDifferenceFromInitialOffset();
-      if(timeFlag - timestamp <100){
-        //console.log(timeFlag - timeFlag);
-        //props.editTitle(props.id,props.data.widgetName);
-      }
     }
+    
     const clientOffset = monitor.getClientOffset();
+
     var componentRect = 0;
     if(component){
       componentRect = findDOMNode(component).getBoundingClientRect();
     }
-    // const componentRect = findDOMNode(component).getBoundingClientRect();
     var xGap = componentRect.left-clientOffset.x;
-    var yGap = componentRect.top-clientOffset.y;
     var moveLine = 'none'
     if(Math.abs(xGap)<dirDistance){
       if(Math.abs(xGap)<(dirDistance/3)){
@@ -95,23 +81,14 @@ const itemTarget = {
 
 
   },
-  drop(props, monitor,component) {
+  drop(props, monitor) {
     const ifIntoFile = props.moveLine;
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
-    const preFolderType = monitor.getItem().folderType;
-    const dragType = monitor.getItem().dragType;
+    
+    props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,ifIntoFile);
 
-    if (draggedId !== props.id && preType !==1  && ((preFolderType!=="folder" && props.folderType!=="folder") || (dragType==="dragInFolder" && props.dragType =="dragInFolder"))) {
-      let timeOut = ifIntoFile=='center'//||(new Date().getTime() - timestamp > 1500);
-      if(timeOut && preType === 3 && props.data.type === 3 && preFolderType!=="folder"){
-        //放上去停留大于2s创建文件夹
-        props.addFolderDrag("",draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,timeOut);
-      }else {
-        props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,ifIntoFile);
-      }
-    }
   }
 };
 
@@ -133,20 +110,12 @@ function collectTaget(connect, monitor) {
   }
 }
 
-function getItemStyles() {
-  return{
-    pointerEvents: 'none',
-    background:'red',
-  }
-}
 
 class WidgetItem extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
-    // index: PropTypes.any.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    // id: PropTypes.any.isRequired,
   }
   constructor(props) {
     super(props);
@@ -164,32 +133,10 @@ class WidgetItem extends Component {
     }
   }
 
-  // shouldComponentUpdate(nextProps,nextState){
-  //   if( nextProps.isOver && this.props.moveLine === nextProps.moveLine){
-  //     return false
-  //   }
-  //   return true
-  // }
+
   componentWillReceiveProps(nextProps){
     var { canDrop, isDragging , isOver,getItemType,dragType} = this.props;
-    // if( nextProps.isOver == true ){
-    //   var timer = setTimeout(()=>{
-    //     this.setState({
-    //       timeEnough:true,
-    //     })
-    //   },1500)
-    //   this.setState({
-    //     timer
-    //   })
-    // }else{
-    //   clearTimeout(this.state.timer);
-    //   this.setState({
-    //     timer: 0,
-    //     timeEnough:false,
-    //   })
-    // }
-    /*
-    */
+  
     if( nextProps.isOver == true && nextProps.moveLine !== 'none' ){
       if(nextProps.moveLine == 'left'){
         this.setState({
@@ -326,24 +273,6 @@ class WidgetItem extends Component {
           'borderRadius':'0',
         }
       }
-      // if(offSet){
-      //   var styleOverLine = {
-      //     'transform': 'scale(1,1)',
-      //     'boxShadow' :'5px 0 0 0 #ddd,8px 0 0 0 #fff',
-      //   }
-      //   if(offSet.x <0){
-      //     var styleOverLine = {
-      //       'transform': 'scale(1,1)',
-      //       'boxShadow' :'-5px 0 0 0 #ddd,-8px 0 0 0 #fff',
-      //     }
-      //   }
-        // if(offSet.x>0){
-        //   var styleOverLine = {
-        //     'transform': 'scale(1,1)',
-        //     'boxShadow' :'5px 0 0 0 #ddd,8px 0 0 0 #fff',
-        //   }
-        // }
-      // }
       if(this.state.moveLine !=='none'  ){
         if( this.state.moveLine == 'left' ){
           styleOverLine = {

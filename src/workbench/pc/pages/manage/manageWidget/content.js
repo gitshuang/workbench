@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import {ButtonDefaultLine,ButtonBrand,ButtonDefaultAlpha} from 'pub-comp/button';
+import {ButtonDefaultAlpha} from 'pub-comp/button';
 import Icon from 'pub-comp/icon';
 import ManageGroup from './manageGroup';
-
-// import judgedBackend from 'components/backend';
-// import { DragDropContext } from 'react-dnd';
 
 import {
   um_content,
@@ -12,19 +9,11 @@ import {
   addGroupBtn,
 } from './style.css';
 
-
-
 export default class Content extends Component{
   constructor(props){
     super(props);
   }
-  static defaultProps = {
-    // manageList,
-    // addGroup,
-    // moveGroupDrag,
-    // moveItemDrag,
-    // checkFun,
-  }
+
 
   renderContent() {
     var {
@@ -42,7 +31,6 @@ export default class Content extends Component{
       moveGroup,
       moveTopGroup,
       moveBottomGroup,
-      addFolder,
       selectListActions,
       selectGroupActions,
       setEditonlyId,
@@ -70,7 +58,6 @@ export default class Content extends Component{
       moveGroup,
       moveTopGroup,
       moveBottomGroup,
-      addFolder,
       selectListActions,
       selectGroupActions,
       setEditonlyId,
@@ -78,7 +65,6 @@ export default class Content extends Component{
     }
     var {
       manageList,
-      curEditFolderId,
       drag,
       dragState,
       selectList,
@@ -86,27 +72,18 @@ export default class Content extends Component{
       currEditonlyId,
       currGroupIndex,
       title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       moveService,
-      addFolder,
-      closeFolder,
       setCurrGroupIndex,
       editTitle,
       selectListActions,
       selectGroupActions,
-      cancelFolderEdit,
       setEditonlyId,
       setDragInputState,
       delectService,
       addDesk,
-      folderBgSrc
     } = this.props;
     var widgetListProps = {
       manageList,
-      curEditFolderId,
       drag,
       dragState,
       selectList,
@@ -114,22 +91,14 @@ export default class Content extends Component{
       currEditonlyId,
       currGroupIndex,
       title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       moveService,
-      addFolder,
-      closeFolder,
       setCurrGroupIndex,
       editTitle,
       selectListActions,
       selectGroupActions,
-      cancelFolderEdit,
       setEditonlyId,
       setDragInputState,
       delectService,
-      folderBgSrc
     }
     var widgetSelectListProps={
       applicationsMap,
@@ -137,7 +106,6 @@ export default class Content extends Component{
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
-      deleteFolder,
       addDesk,
       requestSuccess,
       requestError,
@@ -162,8 +130,8 @@ export default class Content extends Component{
             key={item.widgetId}
             id={item.widgetId}
             type={item.type}
-            moveGroupDrag={this.props.moveGroupDrag}
-            moveItemDrag={this.props.moveItemDrag}
+            moveGroupDrag={moveGroupDrag}
+            moveItemDrag={moveItemDrag}
             checkFun={this.checkFun}
             {...manageProps}
             {...widgetListProps}

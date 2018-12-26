@@ -14,15 +14,11 @@ import WidgetList from '../manageWidgetList';
 import {
   widgetTitle,
   addGroupBtn,
-  addBtnContainer,
-  complete,
-  cancel,
   newGroupName,
   addBtn,
   groupArea,
   selectedBackClass,
   titleInputArea,
-  icon,
   iconBox,
   btn,
   newGroupName_focus,
@@ -51,7 +47,7 @@ function findItemById(manageList,id) {
 const type='item';
 
 const itemSource = {
-  beginDrag(props,monitor) {
+  beginDrag(props) {
     return { id: props.id,type:props.type,parentId:props.parentId,folderType:props.folderType };
   }
 };
@@ -174,11 +170,7 @@ class ManageGroup extends Component {
       })
     }
   }
-  // 添加文件夹
-  addFolderFn(groupIndex) {
-    const { addFolder } = this.props;
-    addFolder({ groupIndex });
-  }
+
   // 打开编辑分组形态
   openRenameGroupFn = (id) => {
     const {setEditonlyId} = this.props;
@@ -371,10 +363,6 @@ class ManageGroup extends Component {
       </Menu>
     );
 
-    // btnSelectedFun=()=>{
-    //    this.btn_selected.onClick()
-    // }
-
     return (
       <Dropdown
         trigger={['click']}
@@ -388,7 +376,6 @@ class ManageGroup extends Component {
 
     var {
       manageList,
-      curEditFolderId,
       drag,
       dragState,
       selectList,
@@ -396,18 +383,11 @@ class ManageGroup extends Component {
       currEditonlyId,
       currGroupIndex,
       title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       moveService,
-      addFolder,
-      closeFolder,
       setCurrGroupIndex,
       editTitle,
       selectListActions,
       selectGroupActions,
-      cancelFolderEdit,
       setEditonlyId,
       setDragInputState,
       applicationsMap,
@@ -418,12 +398,10 @@ class ManageGroup extends Component {
       requestSuccess,
       requestError,
       delectService,
-      folderBgSrc,
       languagesJSON
     } = this.props;
     var widgetListProps = {
       manageList,
-      curEditFolderId,
       drag,
       dragState,
       selectList,
@@ -431,22 +409,14 @@ class ManageGroup extends Component {
       currEditonlyId,
       currGroupIndex,
       title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       moveService,
-      addFolder,
-      closeFolder,
       setCurrGroupIndex,
       editTitle,
       selectListActions,
       selectGroupActions,
-      cancelFolderEdit,
       setEditonlyId,
       setDragInputState,
       delectService,
-      folderBgSrc
     }
     var widgetSelectListProps={
       applicationsMap,
@@ -454,7 +424,6 @@ class ManageGroup extends Component {
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
-      deleteFolder,
       addDesk,
       requestSuccess,
       requestError,
@@ -515,9 +484,6 @@ class ManageGroup extends Component {
           <div>
             <div className={iconBox}>
               <Icon title={languagesJSON.rename_group} type="record" onClick={ ()=>{this.openRenameGroupFn(widgetId)}} />
-            </div>
-            <div className={iconBox}>
-              <Icon title={languagesJSON.add_folder} type="add-files" onClick={this.addFolderFn.bind(this, index)} />
             </div>
             {this.renderDrop(index)}
           </div>

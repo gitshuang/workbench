@@ -18,22 +18,15 @@ const {
   stickGroup,
   moveTopGroup,
   moveBottomGroup,
-  addFolder,
-  setFolderEdit,
-  deleteFolder,
-  renameFolder,
   splitFolder,
   addService,
   delectService,
   moveService,
-  openFolder,
-  closeFolder,
   getAllServicesByLabelGroup,
   setCurrentSelectWidgetMap,
   openBatchMove,
   closeBatchMove,
   setEditState,
-  cancelFolderEdit,
   setCurrGroupIndex,
   editTitle,
   setEditonlyId,
@@ -43,15 +36,9 @@ const {
 } = actions;
 
 const defaultState = {
-  curEditFolderId: '',
   manageList: [],
   isEdit: false,
   isFocus: false,
-  curDisplayFolder: {
-    widgetName: '',
-    children: [],
-  },
-  folderModalDisplay: false,
   batchMoveModalDisplay: false,
   selectList: [], // 勾选的服务列表
   // selectWidgetList:[],
@@ -66,6 +53,8 @@ const defaultState = {
   allServicesByLabelGroup: {},
 
   dragState: true, // 是否可拖拽
+
+  shadowCard:false //默认没有
 };
 
 const findTreeById = (data, curId) => {
@@ -395,161 +384,7 @@ const reducer = handleActions({
       currEditonlyId: '',
     };
   },
-  [addFolder]: (state, {
-    payload: {
-      groupIndex, id, preParentId, preType, afterId, parentId, afterType,
-    },
-  }) => {
-    const { manageList } = state;
-    if (groupIndex === '') {
-      groupIndex = manageList.findIndex((value, index, arr) => value.widgetId === parentId);
-    }
-    const group = manageList[groupIndex];
-    const newId = guid();
-    let num = 1;
-    group.children.forEach((da, i) => {
-      da.type === 2 && (num++);
-    });
-    const _fileName = group.children ? (num) : 1;
 
-    const folderNameArr = [];
-    const nameArr = manageList.forEach((group, k) => {
-      group.children.forEach((v, k) => {
-        v.type === 2 && folderNameArr.push(v.widgetName);
-      });
-    });
-    const newFolderName = avoidSameName(folderNameArr, '文件夹');
-    const newdefaultFolder = {
-      type: 2,
-      widgetName: newFolderName, // "文件夹"+_fileName,
-      children: [],
-    };
-    const temp = {
-      ...newdefaultFolder,
-      widgetId: newId,
-      parentId: group.widgetId,
-    };
-    // group.children = group.children.concat({
-    //   ...newdefaultFolder,
-    //   widgetId: newId,
-    //   parentId:group.widgetId,
-    // });
-    // 拖拽创建文件夹
-    if (typeof afterId !== 'undefined') {
-      const dataAfter = findById(manageList, afterId);
-      group.children.splice(group.children.indexOf(dataAfter), 0, temp);
-      const dataPre = findById(manageList, id);
-      // let dataAfter = findById(manageList,afterId);
-      const groupData = findById(manageList, newId);
-      dataPre.parentId = groupData.widgetId;
-      dataAfter.parentId = groupData.widgetId;
-      // 放进文件夹
-      groupData.children.push(dataPre);
-      groupData.children.push(dataAfter);
-      // 给文件夹赋值parentId
-      typeof groupData.parentId === 'undefined' && (groupData.parentId = parentId);
-      if (preParentId !== parentId) {
-        const dataPreParent = findById(manageList, preParentId);
-        const dataAfterParent = findById(manageList, parentId);
-        // 删掉
-        dataPreParent.children.splice(dataPreParent.children.indexOf(dataPre), 1);
-        dataAfterParent.children.splice(dataAfterParent.children.indexOf(dataAfter), 1);
-      } else {
-        // 删掉
-        group.children.splice(group.children.indexOf(dataPre), 1);
-        group.children.splice(group.children.indexOf(dataAfter), 1);
-      }
-    } else {
-      group.children.push(temp);
-    }
-    manageList.splice(groupIndex, 1, {
-      ...group,
-    });
-    return {
-      ...state,
-      curEditFolderId: newId,
-      isEdit: true,
-      manageList: [...manageList],
-      currEditonlyId: newId,
-    };
-  },
-  [deleteFolder]: (state, { payload: folderId }) => {
-    const { manageList } = state;
-    let groupIndex;
-    let widgetIndex;
-    if (
-      !manageList.some((group, i) => {
-        groupIndex = i;
-        return group.children.some(({ widgetId }, j) => {
-          widgetIndex = j;
-          return folderId === widgetId;
-        });
-      })
-    ) {
-      return state;
-    }
-    const group = manageList[groupIndex];
-    group.children.splice(widgetIndex, 1);
-    group.children = [...group.children];
-    manageList.splice(groupIndex, 1, {
-      ...group,
-    });
-    delete state.currentSelectWidgetMap[folderId];
-    return {
-      ...state,
-      isEdit: true,
-      manageList: [...manageList],
-      currEditonlyId: '',
-      currentSelectWidgetMap: state.currentSelectWidgetMap,
-    };
-  },
-  [setFolderEdit]: (state, { payload: curEditFolderId }) => ({
-    ...state,
-    curEditFolderId,
-  }),
-  [cancelFolderEdit]: (state, { payload: cnaceFolder }) => {
-    const { manageList } = state;
-    return {
-      ...state,
-      curEditFolderId: false,
-      manageList: [...manageList],
-      currEditonlyId: '',
-    };
-  },
-  [renameFolder]: (state, { payload: { id: folderId, value: newName } }) => {
-    const { manageList } = state;
-    let groupIndex;
-    let widgetIndex;
-    if (
-      !manageList.some((group, i) => {
-        groupIndex = i;
-        return group.children.some(({ widgetId }, j) => {
-          widgetIndex = j;
-          return folderId === widgetId;
-        });
-      })
-    ) {
-      return state;
-    }
-    const group = manageList[groupIndex];
-    const folder = group.children[widgetIndex];
-    group.children.splice(widgetIndex, 1, {
-      ...folder,
-      widgetName: newName,
-    });
-    group.children = [...group.children];
-    manageList.splice(groupIndex, 1, {
-      ...group,
-    });
-
-    return {
-      ...state,
-      isEdit: true,
-      curEditFolderId: false,
-      manageList: [...manageList],
-      currEditonlyId: '',
-    };
-  },
   [splitFolder]: (state, { payload: manageList }) => ({
     ...state,
     manageList,
@@ -730,17 +565,8 @@ const reducer = handleActions({
       currEditonlyId: '',
     };
   },
-  [openFolder]: (state, { payload: curDisplayFolder }) => ({
-    ...state,
-    curDisplayFolder,
-    folderModalDisplay: true,
-    currEditonlyId: '',
-  }),
-  [closeFolder]: state => ({
-    ...state,
-    folderModalDisplay: false,
-    currEditonlyId: '',
-  }),
+ 
+  
   [openBatchMove]: state => ({
     ...state,
     batchMoveModalDisplay: true,

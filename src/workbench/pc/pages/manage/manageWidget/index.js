@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Content from './content'
 import Footer from './footer'
-import FolderDialog from './folderDialog'
 import BatchMove from './batchMove'
 import PopDialogComp from './popDialogComp'
 import judgedBackend from './backend';
@@ -25,35 +24,25 @@ class CreateManageModule extends Component {
       moveGroup,
       moveTopGroup,
       moveBottomGroup,
-      addFolder,
       selectListActions,
       selectGroupActions,
       setEditonlyId,
       setDragInputState,
       manageList,
-      curEditFolderId,
       drag,
       dragState,
       selectList,
       currGroupIndex,
       title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       moveService,
-      closeFolder,
       setCurrGroupIndex,
       editTitle,
-      cancelFolderEdit,
       delectService,
       batchDelectFn,
       openGroupTo,
       isEdit,
       save,
       popOpenCancel,
-      curDisplayFolder,
-      folderModalDisplay,
       batchMoveModalDisplay,
       moveData,
       closeBatchMove,
@@ -70,7 +59,6 @@ class CreateManageModule extends Component {
       addDesk,
       moveGroupDrag,
       moveItemDrag,
-      folderBgSrc,
       languagesJSON
     } = this.props;
     var manageProps = {
@@ -88,7 +76,6 @@ class CreateManageModule extends Component {
       moveGroup,
       moveTopGroup,
       moveBottomGroup,
-      addFolder,
       selectListActions,
       selectGroupActions,
       setEditonlyId,
@@ -98,7 +85,6 @@ class CreateManageModule extends Component {
     }
     var widgetListProps = {
       manageList,
-      curEditFolderId,
       drag,
       dragState,
       selectList,
@@ -106,22 +92,14 @@ class CreateManageModule extends Component {
       currEditonlyId,
       currGroupIndex,
       title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       moveService,
-      addFolder,
-      closeFolder,
       setCurrGroupIndex,
       editTitle,
       selectListActions,
       selectGroupActions,
-      cancelFolderEdit,
       setEditonlyId,
       setDragInputState,
       delectService,
-      folderBgSrc
     }
     var widgetSelectListProps={
       applicationsMap,
@@ -129,7 +107,6 @@ class CreateManageModule extends Component {
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
-      deleteFolder,
       addDesk,
       requestSuccess,
       requestError,
@@ -141,26 +118,6 @@ class CreateManageModule extends Component {
       isEdit,
       save,
       popOpenCancel,
-    }
-    var folderDialogProps = {
-      curDisplayFolder,
-      folderModalDisplay,
-      closeFolder,
-      moveService
-    }
-    var widgetItemProps ={
-      manageList,
-      curEditFolderId,
-      selectList,
-      selectGroup,
-      currGroupIndex,
-      drag,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
-      selectListActions,selectGroupActions,
-      addFolder,
-      delectService
     }
     var batchMoveRedux = {
       batchMoveModalDisplay,
@@ -183,7 +140,6 @@ class CreateManageModule extends Component {
       <div>
           <Content {...manageProps} {...widgetListProps} {...widgetSelectListProps} languagesJSON={languagesJSON}/>
           <Footer {...footerProps} languagesJSON={languagesJSON}/>
-          <FolderDialog {...folderDialogProps} {...widgetItemProps} languagesJSON={languagesJSON}/>
           <BatchMove {...batchMoveRedux} languagesJSON={languagesJSON}/>
           <PopDialogComp {...popDialogOuter} languagesJSON={languagesJSON}/>
       </div>

@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { DragDropContext } from 'react-dnd';
-import update from 'react/lib/update';
-import PropTypes from 'prop-types';
 import Icon from 'pub-comp/icon';
-import Button from 'bee/button';
-import { widgetList, widgetItem, title, file_context, title_left,
-  file_icon, title_right, context, bottom ,footer,clearfix,addModule,pop_dialog_widge_list} from './style.css'
+import { widgetList, clearfix,addModule,pop_dialog_widge_list} from './style.css'
 import WidgetItem from './widgetItem';
 import WidgeFileItem from './widgeFileItem';
 import PopDialog from 'pub-comp/pop';
@@ -29,12 +23,6 @@ class WidgetList extends Component {
       }
     }
 
-  // 添加文件夹
-  addFolderFn = (data)=> {
-    const { addFolder } = this.props;
-    const index = {groupIndex:data};
-    addFolder(index);
-  }
 
   openSelectWidget = ()=> {
       this.setState({
@@ -60,11 +48,7 @@ class WidgetList extends Component {
     moveService(data);
     preType === 3 && afterType === 2 && timeFlag && dataFolder && openFolder(dataFolder);
   }
-  addFolderDrag = (groupIndex,id,preParentId, preType,afterId,parentId,afterType) => {
-    let data = {groupIndex,id,preParentId, preType,afterId,parentId,afterType}
-    const { addFolder } = this.props;
-    addFolder(data);
-  }
+  
   editTitle = (id,name) => {
     let data = {id,name}
     const { editTitle } = this.props;
@@ -100,14 +84,9 @@ class WidgetList extends Component {
       title,
       drag,
       dragState,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,selectListActions,selectGroupActions,
-      cancelFolderEdit,
-      openFolder,
+      selectListActions,selectGroupActions,
       setEditonlyId,
       setDragInputState,
-      addFolder,
       delectService,
       applicationsMap,
       allServicesByLabelGroup,
@@ -117,40 +96,29 @@ class WidgetList extends Component {
       requestSuccess,
       requestError,
       currGroupIndex,
-      folderBgSrc,
       languagesJSON
     } = this.props;
     var widgetItemProps ={
       manageList,
-      curEditFolderId,
       selectList,
       selectGroup,
       currGroupIndex,
       title,
       drag,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       selectListActions,selectGroupActions,
-      addFolder,
       delectService
     }
     var widgetFileProps = {
       manageList,
-      curEditFolderId,
       selectList,
       selectGroup,
       currEditonlyId,
       drag,
       dragState,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,selectListActions,selectGroupActions,
-      cancelFolderEdit,
-      openFolder,
+      selectListActions,
+      selectGroupActions,
       setEditonlyId,
       setDragInputState,
-      folderBgSrc
     }
     var selectWidgetListProps = {
       applicationsMap,
@@ -158,18 +126,12 @@ class WidgetList extends Component {
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
-      deleteFolder,
       addDesk,
       requestSuccess,
       requestError,
   }
       const { data,index } = this.props;
-      // const pop_btn = [
-      //   {label:"确认",fun:this.popSave,className:""},
-      //   {label:"取消",fun:this.popClose,className:""}
-      // ]   //设置操作按钮
-
-      // const { data } = this.props;
+   
 
       const list = data.map((item, i) => {
         const {
@@ -178,7 +140,7 @@ class WidgetList extends Component {
           widgetId: id,
           widgetName: name,
         } = item;
-        switch (type) {
+        switch (type) {   //  这个type的几种类型代表什么
           case 2:
             return (
               <WidgeFileItem
@@ -215,7 +177,6 @@ class WidgetList extends Component {
                 moveLine = {this.moveLine(id,this.state.moveLine)}
                 moveItemDrag={this.moveItemDrag}
                 editTitle={this.editTitle}
-                addFolderDrag={this.addFolderDrag}
                 {...widgetItemProps}
                 languagesJSON={languagesJSON}
               />
@@ -224,11 +185,7 @@ class WidgetList extends Component {
       })
 
     let _da = {};
-    // let _parentId = "";
-    // if(this.props.data.length != 0){
-    //   _parentId = this.props.data[0].parentId;
-    //   console.log("this.props.data[0].parentId ---- " + this.props.data[0].parentId );
-    // }
+  
 
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
