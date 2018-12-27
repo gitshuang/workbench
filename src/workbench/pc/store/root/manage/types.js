@@ -1,6 +1,7 @@
 import { createTypes } from '@u';
 
 export default createTypes(
+  'UPDATE_SHADOW_CARD',
   'SET_MANAGE_LIST',
   'GET_MANAGE_LIST',
   'BATCH_DELECT',

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Icon from 'pub-comp/icon';
 import { widgetList, clearfix,addModule,pop_dialog_widge_list} from './style.css'
 import WidgetItem from './widgetItem';
-import WidgeFileItem from './widgeFileItem';
 import PopDialog from 'pub-comp/pop';
 import SelectWidgetList from '../manageSelectWidgetList';
 
@@ -77,16 +76,11 @@ class WidgetList extends Component {
   render() {
     var {
       manageList,
-      curEditFolderId,
       selectList,
       selectGroup,
-      currEditonlyId,
       title,
       drag,
-      dragState,
       selectListActions,selectGroupActions,
-      setEditonlyId,
-      setDragInputState,
       delectService,
       applicationsMap,
       allServicesByLabelGroup,
@@ -108,18 +102,7 @@ class WidgetList extends Component {
       selectListActions,selectGroupActions,
       delectService
     }
-    var widgetFileProps = {
-      manageList,
-      selectList,
-      selectGroup,
-      currEditonlyId,
-      drag,
-      dragState,
-      selectListActions,
-      selectGroupActions,
-      setEditonlyId,
-      setDragInputState,
-    }
+    
     var selectWidgetListProps = {
       applicationsMap,
       manageList,
@@ -138,30 +121,7 @@ class WidgetList extends Component {
           type,
           parentId,
           widgetId: id,
-          widgetName: name,
         } = item;
-        switch (type) {   //  这个type的几种类型代表什么
-          case 2:
-            return (
-              <WidgeFileItem
-                key={`widget-file-${id}-${i}`}
-                data={item}
-                id={id}
-                parentId={parentId}
-                index={id}
-                drag={drag}
-                propsIndex={index}
-                type={type}
-                savePosition = {this.savePosition}
-                moveLine = {this.moveLine(id,this.state.moveLine)}
-                moveItemDrag={this.moveItemDrag}
-                editTitle={this.editTitle}
-                onClick={(e)=>{this.widgeOnclick(e,item)}}
-                {...widgetFileProps}
-                languagesJSON={languagesJSON}
-              />
-            );
-          default:
             return (
               <WidgetItem
                 ref={id}
@@ -181,7 +141,6 @@ class WidgetList extends Component {
                 languagesJSON={languagesJSON}
               />
             );
-        }
       })
 
     let _da = {};

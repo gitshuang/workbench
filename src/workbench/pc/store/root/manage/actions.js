@@ -7,6 +7,7 @@ import {
 } from './api';
 
 const {
+  UPDATE_SHADOW_CARD,
   SET_MANAGE_LIST,
   GET_MANAGE_LIST,
   BATCH_DELECT,
@@ -47,6 +48,7 @@ const actions = createActions(
     [GET_MANAGE_LIST]: getManageList,
     [GET_ALL_SERVICES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
   },
+  UPDATE_SHADOW_CARD,
   BATCH_DELECT,
   ADD_GROUP,
   ADD_DESK,

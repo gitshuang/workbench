@@ -39,7 +39,10 @@ const itemSource = {
   beginDrag(props, monitor, component) {
     timestamp=new Date().getTime();
     window.timestamp = timestamp;
+    //const dragCard = utilService.getCardByGroupIDAndCardID(props.groups, props.groupID, props.id);
+    //dragCard.isShadow = true;
     
+		props.updateShadowCard();
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType,dragType:props.dragType,props:props};
   },
   endDrag(props, monitor, component){
@@ -180,12 +183,10 @@ class WidgetItem extends Component {
   }
 
   popSave = (data)=>{
-    const { deleteFolder,type,currGroupIndex,delectService,parentId } = this.props;
-    if(type === "pop"){
-     delectService({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
-    }else{
-      deleteFolder(data.widgetId);
-    }
+    const { currGroupIndex,delectService,parentId } = this.props;
+    console.log(this.props,'===============popsave')
+    console.log(data,'===============data')
+    delectService({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
     this.setState({
         showModal:false
     })
@@ -197,11 +198,6 @@ class WidgetItem extends Component {
       })
   }
 
-  fileDele = () =>{
-    this.setState({
-      showModal:true
-    })
-  }
   isContained =(a, b)=>{
     if(!(a instanceof Array) || !(b instanceof Array)) return false;
     if(a.length < b.length) return false;

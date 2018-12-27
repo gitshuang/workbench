@@ -4,6 +4,7 @@ import { guid, avoidSameName } from '@u';
 import actions from './actions';
 
 const {
+  updateShadowCard,
   setManageList,
   getManageList,
   addDesk,
@@ -114,7 +115,12 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
-
+  [updateShadowCard]:(state,{shadowCard}) => {
+    return {
+      ...state,
+      shadowCard: shadowCard
+    };
+  },
   [setManageList]: (state, { payload, error }) =>
     ({
       ...state,
@@ -450,29 +456,9 @@ const reducer = handleActions({
       id, preParentId, preType, afterId, parentId, afterType, ifIntoFile, timeFlag,
     },
   }) => {
-    function isSameParent(preParentId, parentId) {
-      return preParentId == parentId;
-    }
-    function compareIndex(manageAllList, id, afterId, preParentId, parentId) {
-      let parentData = {},
-        curIndex = 0,
-        afterIndex = 0;
-      if (preParentId == parentId) {
-        parentData = findById(manageAllList, preParentId);
-      }
-      parentData.children.forEach((v, k) => {
-        if (v.widgetId == id) {
-          curIndex = k;
-        }
-        if (v.widgetId == afterId) {
-          afterIndex = k;
-        }
-      });
-      return curIndex < afterIndex;
-    }
     const manageAllList = state.manageList;
     const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
-    const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
+	const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
     const preParentType = sourceData.type;
     const afterParentType = targetData.type;
     // 判断是否为文件夹里面元素拖拽
