@@ -412,29 +412,13 @@ const reducer = handleActions({
   },
   [delectService]: (state, { payload: { index, folder, widgetId } }) => {
     const manageList = state.manageList;
-    let curDisplayFolder = state.curDisplayFolder;
-
-    curDisplayFolder.children.forEach((item, index) => {
-      if (widgetId == item.widgetId) {
-        return curDisplayFolder.children.splice(index, 1);
-      }
-    });
-    curDisplayFolder.children = [...curDisplayFolder.children];
-    /* manageList[index].children.forEach((item,key)=>{
-      if ( item.widgetId == folder ){
-        item.children.forEach((list,i)=>{
-          if(list.widgetId == widgetId){
-            return manageList[index][key].splice(i,1);
-          }
-        })
-      }
-    }); */
-    curDisplayFolder = JSON.parse(JSON.stringify(curDisplayFolder));
+     manageList[index].children = manageList[index].children.filter((item,key)=>{
+      return item.widgetId!==widgetId
+    }); 
     return {
       ...state,
       isEdit: true,
       manageList: [...manageList],
-      curDisplayFolder,
       currEditonlyId: '',
     };
   },

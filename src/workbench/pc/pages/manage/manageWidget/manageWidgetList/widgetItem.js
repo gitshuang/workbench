@@ -126,7 +126,6 @@ class WidgetItem extends Component {
 
     this.popSave = this.popSave.bind(this);
     this.popClose = this.popClose.bind(this);
-
     this.state = {
       showModal:false,
       title:'',
@@ -184,8 +183,6 @@ class WidgetItem extends Component {
 
   popSave = (data)=>{
     const { currGroupIndex,delectService,parentId } = this.props;
-    console.log(this.props,'===============popsave')
-    console.log(data,'===============data')
     delectService({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
     this.setState({
         showModal:false
