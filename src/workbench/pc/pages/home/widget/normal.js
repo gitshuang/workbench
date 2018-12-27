@@ -26,6 +26,20 @@ const widgetStyle = [
     width: 360,
     height: 360,
   },
+  {
+    width: 544,
+  },
+  {
+    width: 544,
+    height: 360,
+  },
+  {
+    width: 728,
+  },
+  {
+    width: 728,
+    height: 360,
+  },
 ];
 
 

@@ -100,7 +100,7 @@ const handlers = {
         openServiceData[serviceCode] = data;
       }
       const serviceType = type === 2 ? '1' : '0';
-      getServiceInfoWithDetail({serviceCode,serviceType}).then((payload) => {
+      getServiceInfoWithDetail(serviceCode, serviceType).then((payload) => {
         const {
           serviceId,
           serviceName,
