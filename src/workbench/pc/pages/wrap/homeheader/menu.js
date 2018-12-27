@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 
+import Icon from 'pub-comp/icon';
 @connect(
   mapStateToProps(),
   {},
@@ -15,7 +15,9 @@ class Menu extends Component {
 
   render() {
     return (
-      <div />
+      <div>
+        <Icon type='master' />
+      </div>
     );
   }
 }

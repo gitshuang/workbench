@@ -169,14 +169,13 @@ class Homeheader extends Component {
 
   render() {
     const { openRoot, activeCarrier } = this.props;
-    const menu = <Icon type='master' />;
     const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '145px' }} /></a>;
     return (
       <div className="header" id="home_header">
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
-          iconName={menu}
+          iconName={<Menu />}
         >
           <span>{title || '首页'}</span>
         </Header>
