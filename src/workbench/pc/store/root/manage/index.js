@@ -410,18 +410,37 @@ const reducer = handleActions({
       currEditonlyId: '',
     };
   },
-  [delectService]: (state, { payload: { index, folder, widgetId } }) => {
-    const manageList = state.manageList;
-     manageList[index].children = manageList[index].children.filter((item,key)=>{
-      return item.widgetId!==widgetId
-    }); 
+  [delectService]: (state, { payload: folderId }) => {
+    const { manageList } = state;
+    let groupIndex;
+    let widgetIndex;
+    if (
+      !manageList.some((group, i) => {
+        groupIndex = i;
+        return group.children.some(({ widgetId }, j) => {
+          widgetIndex = j;
+          return folderId === widgetId;
+        });
+      })
+    ) {
+      return state;
+    }
+    const group = manageList[groupIndex];
+    group.children.splice(widgetIndex, 1);
+    group.children = [...group.children];
+    manageList.splice(groupIndex, 1, {
+      ...group,
+    });
+    delete state.currentSelectWidgetMap[folderId];
     return {
       ...state,
       isEdit: true,
       manageList: [...manageList],
       currEditonlyId: '',
+      currentSelectWidgetMap: state.currentSelectWidgetMap,
     };
   },
+ 
   [editTitle]: (state, { payload: { id, name } }) => {
     const manageList = state.manageList;
     // manageList = JSON.parse(JSON.stringify(manageList));
@@ -437,36 +456,20 @@ const reducer = handleActions({
   },
   [moveService]: (state, {
     payload: {
-      id, preParentId, preType, afterId, parentId, afterType, ifIntoFile, timeFlag,
-    },
+      id, preParentId, preType, afterId, parentId, afterType, ifIntoFile
+    }
   }) => {
     const manageAllList = state.manageList;
     const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
-	const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
+  	const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
     const preParentType = sourceData.type;
     const afterParentType = targetData.type;
     // 判断是否为文件夹里面元素拖拽
-    let manageList = (preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3) ? [sourceData] : manageAllList;
+    let manageList = manageAllList;
     const itemIn = findById(manageAllList, id);
     const itemAfter = findById(manageAllList, afterId);
-    if (preType === 3 && afterType === 2 && timeFlag) {
-      // 从外面拖入文件夹里面
-      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
-      if (preParentId !== afterId) {
-        itemIn.parentId = afterId;
-      }
-      itemAfter.children.push(itemIn); // 添加
-    } else if (
-      (preType === 2 && preParentId !== parentId) ||
-      (preType === 3 && afterType === 2 && preParentId !== parentId && !timeFlag) ||
-      (
-        (
-          (preParentType === 2 && afterParentType === 1) ||
-          (preParentType === 1 && afterParentType === 1 && preParentId !== parentId)
-        ) && preType === 3 && afterType === 3
-      )
-    ) {
-      // 从文件夹里面往外面拖拽 或 跨分组拖拽
+   if (preParentType === 1 && afterParentType === 1 && preParentId !== parentId && preType === 3 && afterType === 3) {
+      // 跨分组拖拽
       sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
       if (preParentId !== parentId) {
         itemIn.parentId = parentId;
@@ -489,7 +492,8 @@ const reducer = handleActions({
       const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
       const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
       const itemIndex = data.indexOf(item);
-      const afterIndex = data.indexOf(afterItem);
+	  const afterIndex = data.indexOf(afterItem);
+	  console.log("ifIntoFile ==========", ifIntoFile);
       if (ifIntoFile == 'left') {
         if (itemIndex < afterIndex) {
           manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
@@ -522,16 +526,12 @@ const reducer = handleActions({
         });
       }
     }
-    let curDisplayFolder = state.curDisplayFolder;
-    if (preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3) {
-      curDisplayFolder = JSON.parse(JSON.stringify(targetData));
-    }
+   
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return {
       ...state,
       isEdit: true,
       manageList,
-      curDisplayFolder,
       currEditonlyId: '',
     };
   },
@@ -562,10 +562,7 @@ const reducer = handleActions({
     manageList: [],
     isEdit: false,
     isFocus: false,
-    curDisplayFolder: {
-      widgetName: '',
-      children: [],
-    },
+   
     folderModalDisplay: false,
     batchMoveModalDisplay: false,
     selectList: [], // 勾选的服务列表

@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import Menu, { Item as MenuItem } from 'bee/menus';
 import Dropdown from 'bee/dropdown';
 import PopDialog from 'pub-comp/pop';
-import Button from 'bee/button';
-import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'pub-comp/button';
-import { avoidSameName ,getStrLenSubstr} from '@u';
+import {ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'pub-comp/button';
+import { avoidSameName } from '@u';
 import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
 import Message from 'bee/message';
 import WidgetList from '../manageWidgetList';
+import { findItemById } from '../../utils'
 import {
   widgetTitle,
   addGroupBtn,
@@ -28,23 +28,7 @@ import {
   noChildStyle
 } from './style.css';
 
-function findItemById(manageList,id) {
-  let dataItem;
-  for(let i = 0;i<manageList.length;i++){
-    if(manageList[i].children){
-      dataItem = findItemById(manageList[i].children,id)
-    }
-    if(dataItem){
-      break;
-    }
-    if(manageList[i].widgetId && manageList[i].widgetId === id){
-      dataItem = manageList[i];
-      break;
-    }
-  }
-  return dataItem;
-}
-const type='item';
+
 
 const itemSource = {
   beginDrag(props) {
@@ -59,7 +43,6 @@ const itemTarget = {
     const draggedType = monitor.getItem().type;
     const folderType = monitor.getItem().folderType;
     let afterParentId = props.data.parentId;
-
     if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
     }else if((draggedType===2 || draggedType===3) && props.data.type===1){
@@ -398,7 +381,8 @@ class ManageGroup extends Component {
       requestSuccess,
       requestError,
       delectService,
-      languagesJSON
+      languagesJSON,
+      updateShadowCard
     } = this.props;
     var widgetListProps = {
       manageList,
@@ -417,6 +401,7 @@ class ManageGroup extends Component {
       setEditonlyId,
       setDragInputState,
       delectService,
+      updateShadowCard
     }
     var widgetSelectListProps={
       applicationsMap,
@@ -542,4 +527,4 @@ class ManageGroup extends Component {
   }
 }
 
-export default DragSource(type, itemSource, collectSource)(DropTarget(type,itemTarget,collectTaget)(ManageGroup));
+export default DragSource("item", itemSource, collectSource)(DropTarget("item",itemTarget,collectTaget)(ManageGroup));

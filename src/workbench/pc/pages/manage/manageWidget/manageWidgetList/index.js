@@ -22,7 +22,6 @@ class WidgetList extends Component {
       }
     }
 
-
   openSelectWidget = ()=> {
       this.setState({
         showModal:true
@@ -41,30 +40,16 @@ class WidgetList extends Component {
       return 'none'
     }
   }
-  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType,ifIntoFile,timeFlag,dataFolder) => {
-    let data = {id,preParentId,preType,afterId,parentId,afterType,ifIntoFile,timeFlag,dataFolder}
-    const { moveService,openFolder } = this.props;
+  moveItemDrag = (id,preParentId, preType,afterId,parentId,afterType,ifIntoFile) => {
+    let data = {id,preParentId,preType,afterId,parentId,afterType,ifIntoFile}
+    const { moveService } = this.props;
     moveService(data);
-    preType === 3 && afterType === 2 && timeFlag && dataFolder && openFolder(dataFolder);
   }
   
   editTitle = (id,name) => {
     let data = {id,name}
     const { editTitle } = this.props;
     editTitle(data);
-  }
-
-  widgeOnclick = (e,da) => {
-    const {index,setCurrGroupIndex} = this.props;
-    setCurrGroupIndex(index);
-    if(e.target.getAttribute("name") == "file"){
-      this.props.openFolder(da);
-    }
-
-  }
-
-  popSave = (data)=>{
-
   }
 
   popClose = ()=>{
@@ -90,7 +75,8 @@ class WidgetList extends Component {
       requestSuccess,
       requestError,
       currGroupIndex,
-      languagesJSON
+      languagesJSON,
+      updateShadowCard
     } = this.props;
     var widgetItemProps ={
       manageList,
@@ -100,7 +86,8 @@ class WidgetList extends Component {
       title,
       drag,
       selectListActions,selectGroupActions,
-      delectService
+      delectService,
+      updateShadowCard
     }
     
     var selectWidgetListProps = {

@@ -441,6 +441,7 @@ class Manage extends Component {
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
       addDesk,
+      updateShadowCard
     };
     const manageOuterParams = {
       showModal: this.state.showModal,

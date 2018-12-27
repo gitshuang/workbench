@@ -41,7 +41,8 @@ export default class Content extends Component{
       setCurrentSelectWidgetMap,
       moveGroupDrag,
       moveItemDrag,
-      languagesJSON
+      languagesJSON,
+      updateShadowCard
     } = this.props;
     var manageProps = {
       manageList,
@@ -62,6 +63,7 @@ export default class Content extends Component{
       selectGroupActions,
       setEditonlyId,
       setDragInputState,
+      updateShadowCard
     }
     var {
       manageList,

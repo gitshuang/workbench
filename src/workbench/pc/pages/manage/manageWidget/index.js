@@ -59,7 +59,8 @@ class CreateManageModule extends Component {
       addDesk,
       moveGroupDrag,
       moveItemDrag,
-      languagesJSON
+      languagesJSON,
+      updateShadowCard
     } = this.props;
     var manageProps = {
       manageList,
@@ -82,6 +83,7 @@ class CreateManageModule extends Component {
       setDragInputState,
       moveGroupDrag,
       moveItemDrag,
+      updateShadowCard  //暂时放这里，因为不知道这几个props都是做什么的
     }
     var widgetListProps = {
       manageList,
@@ -136,6 +138,7 @@ class CreateManageModule extends Component {
       save,
       popCloseCancel,
     }
+    
     return (
       <div>
           <Content {...manageProps} {...widgetListProps} {...widgetSelectListProps} languagesJSON={languagesJSON}/>

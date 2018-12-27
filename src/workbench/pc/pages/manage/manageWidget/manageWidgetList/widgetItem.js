@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
 import PopDialog from 'pub-comp/pop';
+import { widgetStyle } from './widgetStyle'
 
 import {
   widgetItem,
@@ -17,32 +18,14 @@ import {
   widget_node
 } from './style.css'
 
-const widgetStyle = [
-  // 小
-  {
-    width: 176
-  },
-  // 中
-  {
-    width: 360
-  },
-  // 大
-  {
-    width: 360,
-    height: 360
-  }
-];
-
-const type='item';
-var timestamp;
 const itemSource = {
   beginDrag(props, monitor, component) {
-    timestamp=new Date().getTime();
-    window.timestamp = timestamp;
+   
     //const dragCard = utilService.getCardByGroupIDAndCardID(props.groups, props.groupID, props.id);
     //dragCard.isShadow = true;
     
-		props.updateShadowCard();
+    props.updateShadowCard();
+    //console.log(props.updateShadowCard,'props') a.isShadow = false;
     return { id: props.id , parentId:props.parentId,type:props.preType || props.type,folderType:props.folderType,dragType:props.dragType,props:props};
   },
   endDrag(props, monitor, component){
@@ -54,8 +37,9 @@ const itemTarget = {
   hover(props, monitor,component){
     var { size } = props.data;
     var dirDistance = widgetStyle[size-1].width;
-    const draggedId = monitor.getItem().id;
-    if (draggedId !== props.id){
+	const draggedId = monitor.getItem().id;
+	
+    if (draggedId !== props.id){ //这是什么
       component.setState({
         drag:'fadeInLeft'
       });
@@ -78,20 +62,18 @@ const itemTarget = {
         moveLine = 'right'
       }
     }
-    if(new Date().getTime() % 10 == 0){
+    if(new Date().getTime() % 10 == 0){   //这是什么
       props.savePosition(props.id,moveLine);
     }
-
-
+    
+    
   },
   drop(props, monitor) {
     const ifIntoFile = props.moveLine;
     const draggedId = monitor.getItem().id;
     const previousParentId = monitor.getItem().parentId;
     const preType = monitor.getItem().type;
-    
     props.moveItemDrag(draggedId,previousParentId,preType, props.id, props.data.parentId, props.data.type,ifIntoFile);
-
   }
 };
 
@@ -102,7 +84,6 @@ function collectSource(connect, monitor) {
   };
 }
 
-
 function collectTaget(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
@@ -112,7 +93,6 @@ function collectTaget(connect, monitor) {
     getItemType:monitor.getItem(),
   }
 }
-
 
 class WidgetItem extends Component {
   static propTypes = {
@@ -182,8 +162,8 @@ class WidgetItem extends Component {
   }
 
   popSave = (data)=>{
-    const { currGroupIndex,delectService,parentId } = this.props;
-    delectService({index:currGroupIndex,folder:parentId,widgetId:data.widgetId});
+    const { delectService } = this.props;
+    delectService(data.widgetId);
     this.setState({
         showModal:false
     })
@@ -248,7 +228,7 @@ class WidgetItem extends Component {
         widgetName
       }
     } = this.props;
-    const { connectDragSource, connectDropTarget,isDragging,selectList,drag } = this.props;
+    const { connectDragSource, connectDropTarget,isDragging,selectList,drag } = this.props;//connectDropTarget,
     const opacity = isDragging ? 0 : 1;
     const checkType = selectList.indexOf(id) > -1 ? true : false;
     if (isDragging) {
@@ -295,7 +275,6 @@ class WidgetItem extends Component {
           <div className={title_right}>{widgetName}</div>
         </div>
         <div className={widgetItemCont}>
-
         </div>
 
         <div className={`${clearfix} ${footer}`}>
@@ -315,5 +294,5 @@ class WidgetItem extends Component {
     ));
   }
 }
-
-export default DragSource(type, itemSource, collectSource)(DropTarget(type,itemTarget,collectTaget)(WidgetItem));
+export default DragSource("item", itemSource, collectSource)(DropTarget("item",itemTarget,collectTaget)(WidgetItem));
+//export default DragSource(type, itemSource, collectSource)(WidgetItem);
