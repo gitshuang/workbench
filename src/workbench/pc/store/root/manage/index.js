@@ -141,9 +141,23 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
+    // 更改了原有数据， 暂时无碍吧， 为了将数据的文件夹平铺到上一级
+    const list = payload.workList;
+    list.forEach(item => {
+      item.children.forEach((list, index) => {
+        if (list.type === 2) {
+          const arr = list.children;
+          item.children.splice(index, 1);
+          arr.forEach((data, key) => {
+            data.parentId = item.widgetId;
+            item.children.splice(index + key, 0, data);
+          });
+        }
+      });
+    });
     return {
       ...state,
-      manageList: payload.workList,
+      manageList: [...list],
       currEditonlyId: '',
     };
   },
