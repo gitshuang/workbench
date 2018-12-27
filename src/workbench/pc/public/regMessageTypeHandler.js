@@ -99,32 +99,8 @@ const handlers = {
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
-      // let typeVal = type === 2 ? 'app' : 'service';
-      // getProductInfo(serviceCode, typeVal).then((payload) => {
-      //   const {
-      //     curService: {
-      //       serviceCode: subCode,
-      //       url
-      //     },
-      //     curMenuBar: {
-      //       workspaceStyle
-      //     }
-      //   } = payload;
-      //   const locationProtocol = window.location.protocol;
-      //   const origin = window.location.origin;
-      //   if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
-      //     // const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`, data);
-      //     // window.open(location);
-      //     window.open(url);
-      //   } else {
-      //     store.dispatch(setProductInfo(payload));
-      //     this.props.history.push(`/${typeVal}/${serviceCode}/${subCode}`);
-      //   }
-      //   pushYA(subCode);
-      // }, (err) => {
-      //   console.log(err);
-      // });
-      getServiceInfoWithDetail(serviceCode).then((payload) => {
+      const serviceType = type === 2 ? '1' : '0';
+      getServiceInfoWithDetail({serviceCode,serviceType}).then((payload) => {
         const {
           serviceId,
           serviceName,
