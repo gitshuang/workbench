@@ -55,7 +55,16 @@ const defaultState = {
 
   dragState: true, // 是否可拖拽
 
-  shadowCard:false //默认没有
+  shadowCard:{}, //
+  layout: {
+		containerWidth: 1200,
+		containerHeight: 200,
+		calWidth: 175,
+		rowHeight: 175,
+		col: 6,
+		margin: [ 10, 10 ],
+		containerPadding: [ 0, 0 ]
+	},
 };
 
 const findTreeById = (data, curId) => {
@@ -115,7 +124,7 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
-  [updateShadowCard]:(state,{shadowCard}) => {
+  [updateShadowCard]:(state,{payload:shadowCard}) => {
     return {
       ...state,
       shadowCard: shadowCard
@@ -257,6 +266,7 @@ const reducer = handleActions({
     currEditonlyId: '',
   }),
   [addGroup]: (state, { payload: { index, widgetId, widgetName = '' } }) => {
+    debugger
     const manageList = state.manageList;
     const newGroup = {
       ...defaultGroup,
@@ -493,7 +503,6 @@ const reducer = handleActions({
       const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
       const itemIndex = data.indexOf(item);
 	  const afterIndex = data.indexOf(afterItem);
-	  console.log("ifIntoFile ==========", ifIntoFile);
       if (ifIntoFile == 'left') {
         if (itemIndex < afterIndex) {
           manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {

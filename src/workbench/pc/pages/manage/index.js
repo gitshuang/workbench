@@ -39,7 +39,6 @@ const {
   addDesk,
   setCurrentSelectWidgetMap,
   emptySelectGroup,
-  updateShadowCard
 } = manageActions;
 
 
@@ -99,7 +98,6 @@ const {
     setCurrentSelectWidgetMap,
     addDesk,
     emptySelectGroup,
-    updateShadowCard
   },
 )
 
@@ -157,7 +155,6 @@ class Manage extends Component {
     getAllServicesByLabelGroup: PropTypes.func,
     setCurrentSelectWidgetMap: PropTypes.func,
     addDesk: PropTypes.func,
-    updateShadowCard:PropTypes.func
   };
   static defaultProps = {
     requestStart: () => { },
@@ -204,7 +201,6 @@ class Manage extends Component {
     getAllServicesByLabelGroup: () => { },
     setCurrentSelectWidgetMap: () => { },
     addDesk: () => { },
-    updateShadowCard: () => {}
   };
 
   constructor(props) {
@@ -441,7 +437,6 @@ class Manage extends Component {
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
       addDesk,
-      updateShadowCard
     };
     const manageOuterParams = {
       showModal: this.state.showModal,

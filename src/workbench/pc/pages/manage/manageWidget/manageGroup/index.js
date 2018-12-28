@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import Menu, { Item as MenuItem } from 'bee/menus';
@@ -37,6 +38,18 @@ const itemSource = {
 };
 
 const itemTarget = {
+  // hover(props, monitor, component) {  //这个方法是从别的项目摘下来的
+	// 	const dragItem = monitor.getItem();
+	// 	if (dragItem.type === 3) {
+	// 		//卡片到组
+	// 		const hoverItem = props;
+	// 		const { x, y } = monitor.getClientOffset();
+	// 		const groupItemBoundingRect = findDOMNode(component).getBoundingClientRect();
+	// 		const groupItemX = groupItemBoundingRect.left;
+	// 		const groupItemY = groupItemBoundingRect.top;
+	// 		props.moveCardInGroupItem(dragItem, hoverItem, x - groupItemX, y - groupItemY);
+	// 	}
+	// },
   drop(props, monitor) {
     const draggedId = monitor.getItem().id;
     const preParentId = monitor.getItem().parentId;
@@ -73,21 +86,9 @@ function collectTaget(connect, monitor) {
   }
 }
 
-Array.prototype.distinct = function (){
-  var arr = this,
-    i,obj = {},
-    result = [],
-    len = arr.length;
-  for(i = 0; i< arr.length; i++){
-    if(!obj[arr[i]]){
-      obj[arr[i]] = 1;
-      result.push(arr[i]);
-    }
-  }
-  return result;
-};
-
-class ManageGroup extends Component {
+@DragSource("item", itemSource, collectSource)
+@DropTarget("item",itemTarget,collectTaget)
+export default class ManageGroup extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
@@ -382,7 +383,6 @@ class ManageGroup extends Component {
       requestError,
       delectService,
       languagesJSON,
-      updateShadowCard
     } = this.props;
     var widgetListProps = {
       manageList,
@@ -401,7 +401,6 @@ class ManageGroup extends Component {
       setEditonlyId,
       setDragInputState,
       delectService,
-      updateShadowCard
     }
     var widgetSelectListProps={
       applicationsMap,
@@ -510,7 +509,7 @@ class ManageGroup extends Component {
                       {...widgetListProps} { ...widgetSelectListProps } languagesJSON={languagesJSON}/>
         </div>
       </section>
-
+      {/* 底部添加分组按钮 */}
       <div className={addBtn} >
         <ButtonDefaultWhite className={addGroupBtn} onClick={this.addGroupFn.bind(this, index)}>
           <Icon type="add"></Icon>
@@ -527,4 +526,4 @@ class ManageGroup extends Component {
   }
 }
 
-export default DragSource("item", itemSource, collectSource)(DropTarget("item",itemTarget,collectTaget)(ManageGroup));
+//export default DragSource("item", itemSource, collectSource)(DropTarget("item",itemTarget,collectTaget)(ManageGroup));

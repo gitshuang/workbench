@@ -4,8 +4,17 @@ import { widgetList, clearfix,addModule,pop_dialog_widge_list} from './style.css
 import WidgetItem from './widgetItem';
 import PopDialog from 'pub-comp/pop';
 import SelectWidgetList from '../manageSelectWidgetList';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
 
-
+@connect(
+	mapStateToProps(
+		"manageList",
+		{
+			namespace: 'manage',
+		},
+	)
+)
 class WidgetList extends Component {
 
     //TUDO 数据中的 size ： sm 、lg、xg （小[标准]、中、大）
@@ -76,7 +85,6 @@ class WidgetList extends Component {
       requestError,
       currGroupIndex,
       languagesJSON,
-      updateShadowCard
     } = this.props;
     var widgetItemProps ={
       manageList,
@@ -87,7 +95,6 @@ class WidgetList extends Component {
       drag,
       selectListActions,selectGroupActions,
       delectService,
-      updateShadowCard
     }
     
     var selectWidgetListProps = {
@@ -108,6 +115,7 @@ class WidgetList extends Component {
           type,
           parentId,
           widgetId: id,
+          isShadow
         } = item;
             return (
               <WidgetItem
@@ -126,13 +134,13 @@ class WidgetList extends Component {
                 editTitle={this.editTitle}
                 {...widgetItemProps}
                 languagesJSON={languagesJSON}
+                isShadow = {isShadow}
               />
             );
       })
 
     let _da = {};
   
-
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
         <div className={addModule} onClick={this.openSelectWidget} >
