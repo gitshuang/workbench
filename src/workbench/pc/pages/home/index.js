@@ -74,7 +74,6 @@ class Home extends Component {
       expiredNum: 0,//过期应用个数 
       applications: [],
     };
-    this.updateViewport = this.updateViewport.bind(this);
   }
 
   componentWillMount() {
@@ -82,7 +81,6 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.updateViewport, false);
     window.addEventListener('resize', this.updateViewport, false);
     this.updateViewport();
     // 请求列表
@@ -91,19 +89,7 @@ class Home extends Component {
     this.getApplicationList();
   }
 
-  componentDidUpdate() {
-    let total = 0;
-    this.props.workList.forEach((v) => {
-      total += v.children.length;
-    });
-    if (this.state.lazyLoadNum === total) {
-      window.removeEventListener('scroll', this.updateViewport);
-      window.removeEventListener('resize', this.updateViewport);
-    }
-  }
-
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.updateViewport);
     window.removeEventListener('resize', this.updateViewport);
   }
 
@@ -202,14 +188,25 @@ class Home extends Component {
   }
 
   updateViewport = () => {
-    // if (this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
+    const total = this.props.workList.reduce(function (pre, cur) {
+      return pre + cur.children.length;
+    }, 0);
+    if (this.state.lazyLoadNum === total) {
+      window.removeEventListener('resize', this.updateViewport);
+      return false;
+    }
     this.setState({
       viewport: {
-        top: window.pageYOffset,
-        height: window.innerHeight,
+        top: this._container.scrollTop,
+        height: this._container.offsetHeight,
       },
     });
   }
+
+  scrollFn = () => {
+
+  }
+
 
   loadOk = (() => {
     const self = this;
@@ -277,6 +274,7 @@ class Home extends Component {
       <div
         ref={c => this._container = c}
         className={`${wrap} home`}
+        onScroll={this.updateViewport}
       >
         <div style={{ background: "red", height: "20px", position: "absolute", top: '100px', zIndex: "111111" }} onClick={this.changeRouter}>切换到编辑</div>
         <div className={content}>

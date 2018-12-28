@@ -118,14 +118,15 @@ const routes = [
     path: '/',
     component: Wrap,
     routes: [
-      {
-        path: '/',
-        component: Home,
-        exact: true,
-      },
+      
       {
         path: '/manage',
         component: Manage,
+        exact: true,
+      },
+      {
+        path: '/',
+        component: Home,
         exact: true,
       },
     ],

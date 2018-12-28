@@ -47,7 +47,6 @@ class HomeWidgeList extends Component {
       noTitle,
       openFolder,
       style,
-      lastIndex,
     } = this.props;
     // 新增元数据  控制groupTitle 样式
     const list = children.map((child, i) => {
@@ -86,17 +85,9 @@ class HomeWidgeList extends Component {
             </div>
           )
         }
-        {
-          lastIndex
-            ?
-            <div className={WidgetCont} style={this.lastStyle}>
-              <ul className={WidgetList}>{list}</ul>
-            </div>
-            :
-            <div className={WidgetCont}>
-              <ul className={WidgetList}>{list}</ul>
-            </div>
-        }
+        <div className={WidgetCont}>
+          <ul className={WidgetList}>{list}</ul>
+        </div>
       </div>
     );
   }
