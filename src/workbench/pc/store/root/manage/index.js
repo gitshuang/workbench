@@ -64,7 +64,9 @@ const defaultState = {
 		col: 6,
 		margin: [ 10, 10 ],
 		containerPadding: [ 0, 0 ]
-	},
+  },
+  currentHoveredTargetId:''
+  
 };
 
 const findTreeById = (data, curId) => {

@@ -7,8 +7,7 @@ import { mapStateToProps } from '@u';
 import { widgetStyle } from '../widgetStyle';
 import { calGridXY,checkCardContainInGroup } from '../utils'
 import manageActions from 'store/root/manage/actions';
-
-const { updateShadowCard } = manageActions;
+const { updateShadowCard, addGroup} = manageActions;
 
 
 import {
@@ -26,7 +25,8 @@ import {
 			namespace: 'manage',
     },
 	),{
-    updateShadowCard
+    updateShadowCard,
+    addGroup
   }
 )
 export default class Content extends Component{
@@ -80,7 +80,6 @@ export default class Content extends Component{
       requestStart,
       requestSuccess,
       requestError,
-      addGroup,
       delectGroup,
       renameGroup,
       moveGroup,
@@ -107,7 +106,6 @@ export default class Content extends Component{
       requestStart,
       requestSuccess,
       requestError,
-      addGroup,
       delectGroup,
       renameGroup,
       moveGroup,

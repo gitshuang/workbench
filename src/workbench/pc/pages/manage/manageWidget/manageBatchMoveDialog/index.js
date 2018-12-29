@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
-import { guid } from '@u';
+import { connect } from 'react-redux';
+import { guid,mapStateToProps } from '@u';
 import MoveToGroup from 'pub-comp/moveToGroup';
 import { pin } from './style.css';
+import manageActions from 'store/root/manage/actions';
+const { addGroup } = manageActions;
 
 
+@connect(
+	mapStateToProps(
+		"manageList",
+		{
+			namespace: 'manage',
+		},
+	),
+	{
+		addGroup
+	},
+)
 class ManageBatchMoveDialog extends Component {
   constructor(props) {
     super(props);

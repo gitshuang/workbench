@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
+import { connect } from 'react-redux';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import Menu, { Item as MenuItem } from 'bee/menus';
 import Dropdown from 'bee/dropdown';
 import PopDialog from 'pub-comp/pop';
 import {ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'pub-comp/button';
-import { avoidSameName } from '@u';
+import { avoidSameName,mapStateToProps } from '@u';
 import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
 import Message from 'bee/message';
 import WidgetList from '../manageWidgetList';
-import { findItemById } from '../../utils'
+import { findItemById } from '../../utils';
+import manageActions from 'store/root/manage/actions';
+const { addGroup } = manageActions;
 import {
   widgetTitle,
   addGroupBtn,
@@ -55,15 +58,12 @@ const itemTarget = {
     const preParentId = monitor.getItem().parentId;
     const draggedType = monitor.getItem().type;
     const folderType = monitor.getItem().folderType;
-    let afterParentId = props.data.parentId;
+    let afterParentId = props.data.widgetId;
     if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
-    }else if((draggedType===2 || draggedType===3) && props.data.type===1){
-      !props.data.parentId && (afterParentId = props.data.widgetId);
-      //因为冒泡 所以已经有的话 不需要执行move
+    }else if(draggedType===3 && props.data.type===1){
       let dataItem = findItemById(props.data.children,draggedId);
-      if(folderType==="folder" || typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)){
-        //folderType==="folder" 从文件夹把元素往分组里拖拽
+      if(typeof dataItem==="undefined" ){  
         props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }
     }
@@ -85,7 +85,17 @@ function collectTaget(connect, monitor) {
     getItemType:monitor.getItem(),
   }
 }
-
+@connect(
+	mapStateToProps(
+		"manageList",
+		{
+			namespace: 'manage',
+		},
+	),
+	{
+		addGroup
+	},
+)
 @DragSource("item", itemSource, collectSource)
 @DropTarget("item",itemTarget,collectTaget)
 export default class ManageGroup extends Component {

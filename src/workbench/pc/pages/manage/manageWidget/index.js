@@ -18,7 +18,6 @@ class CreateManageModule extends Component {
       requestStart,
       requestSuccess,
       requestError,
-      addGroup,
       delectGroup,
       renameGroup,
       moveGroup,
@@ -70,7 +69,6 @@ class CreateManageModule extends Component {
       requestStart,
       requestSuccess,
       requestError,
-      addGroup,
       delectGroup,
       renameGroup,
       moveGroup,
@@ -125,7 +123,6 @@ class CreateManageModule extends Component {
       moveData,
       closeBatchMove,
       batchMove,
-      addGroup
     }
     var popDialogOuter = {
       showModal,

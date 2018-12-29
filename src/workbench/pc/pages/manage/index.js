@@ -13,7 +13,6 @@ import LanguagesJSON from 'yutils/languages';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const {
-  addGroup,
   delectGroup,
   renameGroup,
   moveGroup,
@@ -79,7 +78,6 @@ const {
     moveGroup,
     moveService,
     setEditState,
-    addGroup,
     returnDefaultState,
     closeBatchMove,
     batchMove,
@@ -136,7 +134,6 @@ class Manage extends Component {
     emptySelectGroup: PropTypes.func,
     batchDelect: PropTypes.func,
     openBatchMove: PropTypes.func,
-    addGroup: PropTypes.func,
     closeBatchMove: PropTypes.func,
     batchMove: PropTypes.func,
     delectGroup: PropTypes.func,
@@ -182,7 +179,6 @@ class Manage extends Component {
     emptySelectGroup: () => { },
     batchDelect: () => { },
     openBatchMove: () => { },
-    addGroup: () => { },
     closeBatchMove: () => { },
     batchMove: () => { },
     delectGroup: () => { },
@@ -351,93 +347,7 @@ class Manage extends Component {
   }
 
   render() {
-    const list = [];
-    const {
-      manageList,
-      isEdit,
-      selectList,
-      batchMoveModalDisplay,
-      selectGroup,
-      currEditonlyId,
-      dragState,
-      drag,
-      currGroupIndex,
-      title,
-      moveData,
-      requestStart,
-      requestSuccess,
-      requestError,
-      setManageList,
-      getManageList,
-      batchDelect,
-      openBatchMove,
-      moveGroup,
-      moveService,
-      setEditState,
-      addGroup,
-      returnDefaultState,
-      closeBatchMove,
-      batchMove,
-      delectGroup,
-      renameGroup,
-      moveTopGroup,
-      moveBottomGroup,
-      selectListActions,
-      selectGroupActions,
-      setEditonlyId,
-      setDragInputState,
-      setCurrGroupIndex,
-      editTitle,
-      delectService,
-      applicationsMap,
-      allServicesByLabelGroup,
-      getAllServicesByLabelGroup,
-      setCurrentSelectWidgetMap,
-      addDesk,
-    } = this.props;
-    const manageReduxParams = {
-      manageList,
-      isEdit,
-      selectList,
-      batchMoveModalDisplay,
-      selectGroup,
-      currEditonlyId,
-      dragState,
-      drag,
-      currGroupIndex,
-      title,
-      moveData,
-      requestStart,
-      requestSuccess,
-      requestError,
-      setManageList,
-      getManageList,
-      batchDelect,
-      openBatchMove,
-      moveGroup,
-      moveService,
-      setEditState,
-      addGroup,
-      returnDefaultState,
-      closeBatchMove,
-      batchMove,
-      delectGroup,
-      renameGroup,
-      moveTopGroup,
-      moveBottomGroup,
-      selectListActions,
-      selectGroupActions,
-      setEditonlyId,
-      setDragInputState,
-      setCurrGroupIndex,
-      editTitle,
-      delectService,
-      applicationsMap,
-      allServicesByLabelGroup,
-      getAllServicesByLabelGroup,
-      setCurrentSelectWidgetMap,
-      addDesk,
-    };
+  
     const manageOuterParams = {
       showModal: this.state.showModal,
       showCancelModal: this.state.showCancelModal,
@@ -454,7 +364,7 @@ class Manage extends Component {
     };
     return (
       <div className={`${win} home`}>
-        <CreateManageModule {...manageReduxParams} {...manageOuterParams} />
+        <CreateManageModule {...this.props} {...manageOuterParams} />
       </div>
     );
   }
