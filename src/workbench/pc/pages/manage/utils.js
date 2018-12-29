@@ -15,6 +15,34 @@ export function findItemById(manageList, id) {
 	return dataItem;
 }
 
+
+/**
+ * 计算卡片容器的最大高度
+ * @param {Array} cards
+ * @param {Number} rowHeight
+ * @param {Number} margin
+ * @returns {Number} 容器高度
+ */
+export const getContainerMaxHeight = (cards, rowHeight, margin) => {
+    const resultRow = layoutBottom(cards);
+    return resultRow * rowHeight + (resultRow - 1) * margin[1] + 2 * margin[1];
+};
+
+/**
+ * 获得当前layout中最底单元格的Y坐标
+ * @param {Array} layout
+ * @returns {Number} 最底单元格Y坐标
+ */
+export const layoutBottom = layout => {
+    let max = 0,
+        bottomY;
+    for (let i = 0, len = layout.length; i < len; i++) {
+        bottomY = layout[i].gridy + layout[i].height;
+        if (bottomY > max) max = bottomY;
+    }
+    return max;
+};
+
 /**
  * 通过GroupID找到某个组，通过CardID找到该组内的卡片对象
  * @param {Array} manageList
@@ -79,6 +107,60 @@ export const calGridXY = (
     //防止卡片溢出容器
     return checkInContainer(gridX, gridY, col, cardWidth);
 };
+
+/**
+ * 给予一个grid的位置，算出元素具体的在容器中位置在哪里，单位是px
+ * @param {Number} gridx
+ * @param {Number} gridy
+ * @param {Number} margin
+ * @param {Number} rowHeight
+ * @param {Number} calWidth
+ * @returns {Object} 包含x，y坐标的对象
+ */
+export const calGridItemPosition = (
+    gridx,
+    gridy,
+    margin,
+    rowHeight,
+    calWidth
+) => {
+    const x = Math.round(gridx * calWidth + margin[0] * (gridx + 1));
+    const y = Math.round(gridy * rowHeight + margin[1] * (gridy + 1));
+    return {
+        x: x,
+        y: y
+    };
+};
+
+/**
+ * 宽和高计算成为px
+ * @param {Number} w
+ * @param {Number} h
+ * @param {Number} margin
+ * @param {Number} rowHeight
+ * @param {Number} cardWidth
+ * @returns {Object} 包含wPx, hPx的对象
+ */
+export const calWHtoPx = (w, h, margin, rowHeight, calWidth) => {
+    const wPx = Math.round(w * calWidth + (w - 1) * margin[0]);
+    const hPx = Math.round(h * rowHeight + (h - 1) * margin[1]);
+    return { wPx, hPx };
+};
+
+/**
+ * 以组为单位，设置卡片属性值
+ * @param {Array} groups
+ * @param {String} property
+ * @param {*} value
+ */
+export const setPropertyValueForCards = (groups, property, value) => {
+    _.forEach(groups, (g, index) => {
+        _.forEach(g.apps, a => {
+            a[property] = value;
+        });
+    });
+};
+
 
 /**
  * 防止元素溢出容器

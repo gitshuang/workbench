@@ -5,6 +5,8 @@ import actions from './actions';
 
 const {
   updateShadowCard,
+  updateLayout,
+  updateGroupList,
   setManageList,
   getManageList,
   addDesk,
@@ -65,8 +67,16 @@ const defaultState = {
 		margin: [ 10, 10 ],
 		containerPadding: [ 0, 0 ]
   },
-  currentHoveredTargetId:''
-  
+  currentHoveredTargetId:'',
+  defaultLayout: {
+		containerWidth: 1200,
+		containerHeight: 200,
+		calWidth: 175,
+		rowHeight: 175,
+		col: 6,
+		margin: [ 10, 10 ],
+		containerPadding: [ 0, 0 ]
+	},
 };
 
 const findTreeById = (data, curId) => {
@@ -130,6 +140,18 @@ const reducer = handleActions({
     return {
       ...state,
       shadowCard: shadowCard
+    };
+  },
+  [updateLayout] : (state,{payload:layout}) => {
+    return {
+      ...state,
+      layout: layout
+    };
+  },
+  [updateGroupList]:(state,{payload:layout}) => {
+    return {
+      ...state,
+      manageList: layout
     };
   },
   [setManageList]: (state, { payload, error }) =>

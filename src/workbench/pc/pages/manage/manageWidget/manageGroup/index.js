@@ -14,7 +14,7 @@ import Message from 'bee/message';
 import WidgetList from '../manageWidgetList';
 import { findItemById } from '../../utils';
 import manageActions from 'store/root/manage/actions';
-const { addGroup } = manageActions;
+const { addGroup,updateGroupList  } = manageActions;
 import {
   widgetTitle,
   addGroupBtn,
@@ -35,56 +35,76 @@ import {
 
 
 const itemSource = {
-  beginDrag(props) {
-    return { id: props.id,type:props.type,parentId:props.parentId,folderType:props.folderType };
-  }
+	beginDrag(props) {
+		return {
+			id: props.id,
+			index: props.index,
+			type: props.type
+		};
+	},
+	canDrag(props) {
+		return props.currEditID === '' ? true : false;
+	}
 };
 
 const itemTarget = {
-  // hover(props, monitor, component) {  //这个方法是从别的项目摘下来的
-	// 	const dragItem = monitor.getItem();
-	// 	if (dragItem.type === 3) {
-	// 		//卡片到组
-	// 		const hoverItem = props;
-	// 		const { x, y } = monitor.getClientOffset();
-	// 		const groupItemBoundingRect = findDOMNode(component).getBoundingClientRect();
-	// 		const groupItemX = groupItemBoundingRect.left;
-	// 		const groupItemY = groupItemBoundingRect.top;
-	// 		props.moveCardInGroupItem(dragItem, hoverItem, x - groupItemX, y - groupItemY);
-	// 	}
-	// },
-  drop(props, monitor) {
-    const draggedId = monitor.getItem().id;
-    const preParentId = monitor.getItem().parentId;
-    const draggedType = monitor.getItem().type;
-    const folderType = monitor.getItem().folderType;
-    let afterParentId = props.data.widgetId;
-    if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
-      props.moveGroupDrag(draggedId, props.id);
-    }else if(draggedType===3 && props.data.type===1){
-      let dataItem = findItemById(props.data.children,draggedId);
-      if(typeof dataItem==="undefined" ){  
-        props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
-      }
-    }
-  }
+  hover(props, monitor, component) {
+		const dragItem = monitor.getItem();
+         
+		if (dragItem.type === 1) { //1是group
+			//组hover到组
+			const dragIndex = monitor.getItem().index;
+			const hoverIndex = props.index;
+
+			if (dragIndex === hoverIndex) {
+				return;
+			}
+
+			const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+
+			const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+			const clientOffset = monitor.getClientOffset();
+
+			const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+				return;
+			}
+
+			if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+				return;
+			}
+
+			props.moveGroupItem(dragIndex, hoverIndex);
+
+			monitor.getItem().index = hoverIndex;
+		} else if (dragItem.type === 3) { //3 是widget
+			//卡片到组
+			const hoverItem = props;
+			const { x, y } = monitor.getClientOffset();
+			const groupItemBoundingRect = findDOMNode(component).getBoundingClientRect();
+			const groupItemX = groupItemBoundingRect.left;
+			const groupItemY = groupItemBoundingRect.top;
+			props.moveCardInGroupItem(dragItem, hoverItem, x - groupItemX, y - groupItemY);
+		}
+	},
+	drop(props, monitor, component) {
+		const dragItem = monitor.getItem();
+		const dropItem = props;
+		if (dragItem.type === 'group') {//释放的分组对象
+			props.onDrop(dragItem, dropItem);
+		} else if (dragItem.type === 'card') {//释放的分组内的卡片
+			props.onCardDropInGroupItem(dragItem, dropItem);
+		} else if (dragItem.type === 'cardlist') {//释放的Sider区域的卡片
+			props.onCardListDropInGroupItem(dragItem, dropItem);
+		}
+	}
 };
 
-function collectSource(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  };
-}
 
 
-function collectTaget(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver:monitor.isOver(),
-    getItemType:monitor.getItem(),
-  }
-}
+
 @connect(
 	mapStateToProps(
 		"manageList",
@@ -93,11 +113,18 @@ function collectTaget(connect, monitor) {
 		},
 	),
 	{
-		addGroup
+		addGroup,
+		updateGroupList
 	},
 )
-@DragSource("item", itemSource, collectSource)
-@DropTarget("item",itemTarget,collectTaget)
+@DragSource("item", itemSource, (connect, monitor) => ({
+	connectDragSource: connect.dragSource(),
+	isDragging: monitor.isDragging()
+}))
+@DropTarget("item",itemTarget, (connect, monitor) => ({
+	connectDropTarget: connect.dropTarget(),
+	isOver: monitor.isOver()
+}))
 export default class ManageGroup extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
@@ -502,9 +529,9 @@ export default class ManageGroup extends Component {
       //return null
     }
 
-    var { isOver, getItemType} = this.props;
+    var { isOver} = this.props;
     var overStyle = {};
-    if( isOver && getItemType.type === 1){
+    if( isOver){
       overStyle = {
         'transform': 'scale(1,1)',
         'boxShadow' :'0 0 0 3px #ddd,0 0 0 6px rgba(0,205,195,1)',

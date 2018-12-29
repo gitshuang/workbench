@@ -7,8 +7,9 @@ import { mapStateToProps } from '@u';
 import { widgetStyle } from '../widgetStyle';
 import { calGridXY,checkCardContainInGroup } from '../utils'
 import manageActions from 'store/root/manage/actions';
-const { updateShadowCard, addGroup} = manageActions;
-
+const { updateShadowCard, addGroup,updateGroupList} = manageActions;
+import { layoutCheck } from '../collision';
+import { compactLayout, compactLayoutHorizontal } from '../compact';
 
 import {
   um_content,
@@ -26,7 +27,8 @@ import {
     },
 	),{
     updateShadowCard,
-    addGroup
+    addGroup,
+    updateGroupList
   }
 )
 export default class Content extends Component{
@@ -47,14 +49,14 @@ export default class Content extends Component{
 		let shadowCard = this.props.shadowCard;
 		const { margin, containerWidth, col, rowHeight } = this.props.layout;
 		//计算当前所在的网格坐标
-		const { gridX, gridY } = calGridXY(x, y,widgetStyle[shadowCard.size-1].width , margin, containerWidth, col, rowHeight);
+		const { gridX, gridY } = calGridXY(x, y, shadowCard.width, margin, containerWidth, col, rowHeight);
 		if (gridX === shadowCard.gridx && gridY === shadowCard.gridy) {
 			return;
 		}
 		let groupIndex = hoverItem.index;
 		//先判断组内是否存在相同的卡片
-		const widgetId = shadowCard.widgetId;
-		const isContain = checkCardContainInGroup(manageList[groupIndex], widgetId);
+		const cardid = shadowCard.widgetId;
+		const isContain = checkCardContainInGroup(manageList[groupIndex], cardid);
 
 		if (isContain) {
 			return;
@@ -65,10 +67,28 @@ export default class Content extends Component{
 				return a.isShadow !== true;
 			});
 		});
-		shadowCard = { ...shadowCard, gridx: gridX, gridy: gridY };
+    shadowCard = { ...shadowCard, gridx: gridX, gridy: gridY };
 		//添加阴影的卡片
 		manageList[groupIndex].children.push(shadowCard);
+		//获得当前分组内最新的layout布局
+		const newlayout = layoutCheck(
+			manageList[groupIndex].children,
+			shadowCard,
+			shadowCard.widgetId,
+			shadowCard.widgetId,
+			axis
+		);
+		//压缩当前分组内的layout布局
+		let compactedLayout;
+		if(axis === 'gridx'){
+			compactedLayout = compactLayoutHorizontal(newlayout, this.props.col, cardid);
+		}else if(axis === 'gridy'){
+			compactedLayout = compactLayout(newlayout, shadowCard);
+		}
+		//更新group对象
+		manageList[groupIndex].children = compactedLayout;
 		this.props.updateShadowCard(shadowCard);
+		this.props.updateGroupList(manageList);
 	};
   renderContent() {
     var {

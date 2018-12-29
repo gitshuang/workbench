@@ -1,11 +1,9 @@
 .widgetItem {
-  position: relative;
+  position: absolute;
   float: left;
   margin-right: 10px;
   margin-bottom: 8px;
   display: block;
-  width:176px;
-  height:176px;
   background:rgba(255,255,255,1);
   border-radius: 3px ;
   border:1px solid #F1F1F1;
@@ -14,6 +12,12 @@
 }
 .widgetItemCanDrop{
   border:2px solid blue
+}
+.widgetItemShadow{
+    background: rgba(204,207,221,1);
+	position: absolute;
+	border-radius: 3px;
+	transition: all 0.2s ease-out;
 }
 .widgetFileItem{
   background-size: 100% 100%;

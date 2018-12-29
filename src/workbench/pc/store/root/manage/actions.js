@@ -8,6 +8,8 @@ import {
 
 const {
   UPDATE_SHADOW_CARD,
+  UPDATE_LAYOUT,
+  UPDATE_GROUP_LIST,
   SET_MANAGE_LIST,
   GET_MANAGE_LIST,
   BATCH_DELECT,
@@ -49,6 +51,8 @@ const actions = createActions(
     [GET_ALL_SERVICES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
   },
   UPDATE_SHADOW_CARD,
+  UPDATE_LAYOUT,
+  UPDATE_GROUP_LIST,
   BATCH_DELECT,
   ADD_GROUP,
   ADD_DESK,
