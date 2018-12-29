@@ -104,3 +104,72 @@
 }
 
 
+/*start:menubar*/
+.sideBar{
+  width: 700px; 
+  background: #fff;
+  text-align: left;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+.sideBar :global(.u-menu.u-menu-inline){
+  height: 100%;
+  overflow-y: auto;
+}
+
+
+/* 第三四级 */
+.sideBarList{
+  width: 500px;
+  overflow: auto;
+  background: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 2001;
+  font-size: 14px;
+  line-height: 28px;
+}
+.sideBarListItem {
+  width: 100%;
+  position: relative;
+  min-height: 40px;
+}
+.sideBarListItem:after{
+  display: block;
+  content: '';
+  clear: both;
+}
+.sideBarListItem :global(.sideBarListItemName) {
+  float: left;
+  width: 22%;
+}
+.sideBarListItem :global(ul.bottomBarPanel) {
+  float: left;
+  width: 78%;
+}
+.sideBarListItem :global(ul.bottomBarPanel li){
+  display: inline-block;
+  min-width: 120px;
+  position: relative;
+  /* padding-left: 10px; */
+  box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.sideBarListItem :global(ul.bottomBarPanel li:nth-child(n+1)) {
+  border-left: 1px solid #dcdcdc;
+}
+.sideBarList>:global(.pureBottom.bottomBar){
+    display: inline-block;
+    min-width: 120px;
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.sideBarList>:global(.pureBottom.bottomBar:nth-child(n+2)){
+  border-left:1px solid #dcdcdc;
+}
+/*end:menubar*/
