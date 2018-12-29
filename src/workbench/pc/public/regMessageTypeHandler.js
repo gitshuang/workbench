@@ -206,7 +206,7 @@ const handlers = {
   closeFrame() {
     store.dispatch(closeFrame());
   },
-  // 后期想干掉， 这个现在diwork-public-components中搜索用到， 协同的个人主页中也用到
+  // TODO 后期想干掉， 这个现在diwork-public-components中搜索用到， 协同的个人主页中也用到
   openHomePage(data) {
     const key = data.key || 'info';
     dispatchMessageTypeHandler({

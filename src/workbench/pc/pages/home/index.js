@@ -8,7 +8,6 @@ import { openService } from 'public/regMessageTypeHandler';
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 
-import HomeFolderDialog from './homeFolderDialog';
 import WidgeList from './homeWidgetList';
 import HomeMark from './homemark';
 import { wrap, content } from './style.css';
@@ -82,6 +81,7 @@ class Home extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateViewport, false);
+    // 默认加载第一屏
     this.updateViewport();
     // 请求列表
     this.getWorkList();
@@ -151,7 +151,6 @@ class Home extends Component {
   totalTime = () => {
     const localTime = localStorage.getItem('time');
     if (!localTime) return true;
-
     let day1 = new Date();
     day1.setDate(day1.getDate() - 1);
     const s1 = day1.format("yyyy-MM-dd");
@@ -203,11 +202,6 @@ class Home extends Component {
     });
   }
 
-  scrollFn = () => {
-
-  }
-
-
   loadOk = (() => {
     const self = this;
     let count = 0;
@@ -245,30 +239,14 @@ class Home extends Component {
   }
 
   render() {
-    const {
-      workList,
-    } = this.props;
-    const list = [];
+    const { workList, } = this.props;
     const contents = [];
-    workList.forEach((da, i) => {
-      const {
-        widgetId: id,
-        widgetName: name,
-      } = da;
+    workList.forEach(da => {
       const props = {
-        key: `nav${id}`,
+        key: `nav${da.widgetId}`,
         data: da,
       };
-      list.push({
-        label: name,
-        target: `nav${id}`,
-      });
-      contents.push(<WidgeList
-        {...props}
-        viewport={this.state.viewport}
-        loadOk={this.loadOk}
-        lastIndex={i === workList.length - 1 ? true : false}
-      />);
+      contents.push(<WidgeList {...props} viewport={this.state.viewport} loadOk={this.loadOk} />);
     });
     return (
       <div
@@ -276,11 +254,10 @@ class Home extends Component {
         className={`${wrap} home`}
         onScroll={this.updateViewport}
       >
-        <div style={{ background: "red", height: "20px", position: "absolute", top: '100px', zIndex: "111111" }} onClick={this.changeRouter}>切换到编辑</div>
+        <div style={{ background: "red", position: "absolute", top: '10px', right: 10, zIndex: 99 }} onClick={this.changeRouter}>切换到编辑</div>
         <div className={content}>
           {contents}
         </div>
-        <HomeFolderDialog />
         {
           this.state.homemark ? <HomeMark
             linkTo={this.linkTo}

@@ -118,24 +118,22 @@ const routes = [
     path: '/',
     component: Wrap,
     routes: [
-      
-      {
-        path: '/manage',
-        component: Manage,
-        exact: true,
-      },
       {
         path: '/',
         component: Home,
         exact: true,
+      },
+      {
+        path: '/manage',
+        component: Manage,
       },
     ],
   },
 ];
 
 export const Pages = {
-  Application: <Application />,
-  Manage: <Manage />,
+  // Application: <Application />,
+  // Manage: <Manage />,
   Search: <Search />, 
   EstablishUserCenter: <EstablishUserCenter />,
   CreateTeam: <CreateTeam />,
