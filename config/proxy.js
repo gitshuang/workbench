@@ -54,6 +54,8 @@ var api = [
   '/language/getAllEnable',
   '/language/current',
   '/manager/application/getApplicationTips',
+
+  '/menubar/getAll',
 ]
 
 var rapApi = [];
