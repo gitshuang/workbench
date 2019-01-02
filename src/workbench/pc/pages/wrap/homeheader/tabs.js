@@ -54,6 +54,9 @@ class Tabmenu extends Component {
             })
           }
         </ul>
+        <div>
+          <Icon type="xiala" />
+        </div>
       </div>
     );
   }
