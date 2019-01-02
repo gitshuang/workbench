@@ -15,8 +15,9 @@ import DropdownButton from '../dropdown';
 import Menu from './menu';
 import Tabmenu from './tabs';
 import Header from '../header';
-import { menus, create } from './style.css';
 import logoUrl from 'assets/image/logo2.svg';
+
+import { create, menus, history, home, active, upward } from './style.css';
 
 
 const {
@@ -181,18 +182,21 @@ class Homeheader extends Component {
         </Header>
         <div className={menus}>
           <div
-            style={{ width: '50px', textAlign: "center", lineHeight: '40px' }}
+            className={`${history} tc`}
             onClick={() => { this.changeRouter() }}
           >
             <Icon type="record" />
           </div>
           <div
+            className={`${home} tc ${activeCarrier === "home" ? active : ''}`}
             onClick={() => { openRoot() }}
-            style={{ background: activeCarrier === "home" ? 'red' : 'none', width: '50px', textAlign: "center", lineHeight: '40px' }}
           >
             <Icon type="home" />
           </div>
           <Tabmenu />
+          <div className={`${upward} tc`}>
+            <Icon type="upward" />
+          </div>
         </div>
       </div>
     );

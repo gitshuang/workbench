@@ -43,9 +43,21 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    let { workList } = payload;
-    const list = workList.filter((item) => {
+    // 将无数据的分组筛选掉
+    const list = payload.workList.filter((item) => {
       return item.children.length;
+    });
+    list.forEach(item => {
+      item.children.forEach((list, index) => {
+        if (list.type === 2) {
+          const arr = list.children;
+          item.children.splice(index, 1);
+          arr.forEach((data, key) => {
+            data.parentId = item.widgetId;
+            item.children.splice(index + key, 0, data);
+          });
+        }
+      });
     });
     return {
       ...state,

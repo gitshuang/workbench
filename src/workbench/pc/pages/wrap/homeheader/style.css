@@ -1,66 +1,3 @@
-.menus {
-  display: flex;
-  height: 40px;
-}
-.tabStyle{
-  overflow: hidden;
-}
-.tabStyle li{
-  float: left;
-  padding: 10px 30px 10px 10px;
-  line-height: 20px;
-  background: #888888;
-  margin-right: 2px;
-  cursor: pointer;
-  position: relative;
-}
-.tabStyle li div{
-  position: absolute;
-  right: 4px;
-  top: 10px;
-}
-
-
-
-.pageHome :global(.lebra-navbar-left-icon){
-  background:rgba(202,205,212,1);
-  border: 1px solid #FFFFFF;
-  border-radius: 100px;
-  color: #fff;
-}
-
-.logoImg{
-  max-height: 27px;
-}
-
-.imgInner{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-}
-
-.allBtn{
-  width: 100px;
-  height: 40px;
-  line-height: 35px;
-  position: absolute;
-  right: 0px;
-  top: 48px;
-  text-align:center;
-  color: #E14C46;
-  cursor: pointer;
-}
-
-.allBtn i{
-  position: relative;
-  top: 3px;
-  color: #E14C46 !important;
-}
-
-.btnDisable{
-  display: none;
-}
-
 .create{
   color: #E14C46;
   font-weight: bold;
@@ -74,33 +11,53 @@
   margin-right: 8px;
 }
 
-.logo_title{
-  font-size:17px;
-  width:204px;
-}
 
-.title_drop{
-  font-size:17px;
-  width:204px;
-}
-
-.header :global(.home_title){
-  font-size:14px;
-  background: transparent;
-  width: auto;
-
-}
-.header :global(.home_title) > label{
-  display: block;
-  white-space: nowrap;
-  width:180px;
+/* menus 样式 */
+.menus {
+  /* display: flex; */
+  height: 40px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
-.header :global(.home_title_down){
-  background: transparent;
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
+.history{
+  float: left;
+  padding-top: 10px;
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+}
+.home{
+  float: left;
+  padding-top: 10px;
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+}
+.menus .active{
+  background: #E14C46;
+}
+.upward{
+  cursor: pointer;
+  float: right;
+  width: 40px;
+  height: 40px;
+  padding-top: 10px;
+}
+
+/* tab */
+.tab{
+  float: left;
+}
+.tab ul{
+  overflow: hidden;
+}
+.tab ul li{
+  float: left;
+  padding: 10px 30px 10px 10px;
+  line-height: 20px;
+  background: #888888;
+  margin-right: 2px;
+  cursor: pointer;
+  position: relative;
 }
 
 
@@ -278,3 +235,8 @@
   border-left:1px solid #dcdcdc;
 }
 /*end:menubar*/
+.tab li div{
+  position: absolute;
+  right: 4px;
+  top: 10px;
+}

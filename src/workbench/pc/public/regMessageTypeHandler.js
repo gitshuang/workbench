@@ -1,18 +1,12 @@
-import workActions from 'store/root/work/actions';
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
 import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
 import { postMessageToWin, get, logout } from "@u";
 import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
 import { trigger } from "./componentTools";
-import {
-  getProductInfo,
-  getServiceInfoWithDetail,
-} from 'store/root/work/api';
+import { getServiceInfoWithDetail } from 'store/root/work/api';
 import { openMessage } from 'components/message';
 import { pushYA, appendSearchParam } from "yutils/utils";
-const { addBrm, popBrm, setProductInfo } = workActions;
 const {
   popMessage,
   changeMessageType,
@@ -26,24 +20,22 @@ const {
   delTabs,
   requestError,
 } = rootActions;
-const {
-
-} = homeActions;
 const handlers = {
   openWin(data) {
-    if (typeof data !== 'object') {
-      throw new Error('data is must be a object.');
-    }
-    const param = Object.assign({ type: 'locale', url: data.id }, data);
-    store.dispatch(addTabs(param));
-  },
-  closeWin(data) {
     if (typeof data !== 'object') {
       throw new Error('data is must be a object.');
     }
     if (data.id === undefined) {
       throw new Error('id is required.');
     }
+    if (data.title === undefined) {
+      throw new Error('title is required.');
+    }
+    const param = Object.assign({ type: 'locale', url: data.id }, data);
+    store.dispatch(addTabs(param));
+  },
+  closeWin() {
+    const data = store.getState().currItem;
     store.dispatch(delTabs(data));
   },
   openService({ serviceCode, data, type, tenantId }) {
@@ -102,7 +94,6 @@ const handlers = {
       const serviceType = type === 2 ? '1' : '0';
       getServiceInfoWithDetail(serviceCode, serviceType).then((payload) => {
         const {
-          serviceId,
           serviceName,
           url,
           workspaceStyle,
@@ -168,12 +159,6 @@ const handlers = {
     }
     return false;
   },
-  addBrm(data) {
-    store.dispatch(addBrm(data));
-  },
-  popBrm(data) {
-    store.dispatch(popBrm(data));
-  },
   popMessage() {
     store.dispatch(popMessage());
   },
@@ -212,25 +197,20 @@ const handlers = {
   closeFrame() {
     store.dispatch(closeFrame());
   },
-  // 后期想干掉， 这个现在diwork-public-components中搜索用到， 协同的个人主页中也用到
+  // TODO 后期想干掉， 这个现在diwork-public-components中搜索用到， 协同的个人主页中也用到
   openHomePage(data) {
-    try {
-      const key = data.key || 'info';
-      dispatchMessageTypeHandler({
-        type: "openWin",
-        detail: {
-          id: 'HomePage',
-          title: "个人主页",
-          data: {
-            userId: data.userId,
-            key: key
-          }
+    const key = data.key || 'info';
+    dispatchMessageTypeHandler({
+      type: "openWin",
+      detail: {
+        id: 'HomePage',
+        title: "个人主页",
+        data: {
+          userId: data.userId,
+          key: key
         }
-      })
-      // this.props.history.push(`/homepage/${data.userId}/${key}`);
-    } catch (err) {
-      throw new Error("userId is require");
-    }
+      }
+    });
   },
 }
 window.handlers = handlers;

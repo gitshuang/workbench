@@ -4,7 +4,6 @@ import {
   HashRouter as Router,
   withRouter,
   Switch,
-  Route
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from 'router';
@@ -23,10 +22,6 @@ import BasicDialog from 'components/basicDialog/';
 import Frame from 'components/frame/';
 
 const {
-  requestStart,
-  requestSuccess,
-  requestError,
-  getServiceList,
   getPoll,
   setUserInfo
 } = rootActions;
@@ -55,33 +50,16 @@ const NoMatch = ({ history }) => {
     'showModal',
   ),
   {
-    requestStart,
-    requestSuccess,
-    requestError,
-    getServiceList,
     getPoll,
     setUserInfo,
   }
 )
 class Root extends Component {
   static propTypes = {
-    history: PropTypes.shape({
-      goBack: PropTypes.func,
-      replace: PropTypes.func,
-    }),
-    requestStart: PropTypes.func,
-    requestSuccess: PropTypes.func,
-    requestError: PropTypes.func,
-    getServiceList: PropTypes.func,
     getPoll: PropTypes.func,
     setUserInfo: PropTypes.func,
   };
   static defaultProps = {
-    history: {},
-    requestStart: () => { },
-    requestSuccess: () => { },
-    requestError: () => { },
-    getServiceList: () => { },
     getPoll: () => { },
     setUserInfo: () => { },
   };
@@ -99,8 +77,6 @@ class Root extends Component {
       return false;
     }
     const {
-      requestError,
-      getServiceList,
       getPoll,
       setUserInfo
     } = this.props;
@@ -111,12 +87,6 @@ class Root extends Component {
     if (!tenantid) {
       // this.props.history.replace('/establish');
     } else {
-      // 请求快捷应用
-      getServiceList().then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-        }
-      });
       IM(new componentTool('IM'), getContext(), { // eslint-disable-line
         el: 'IM',
       });

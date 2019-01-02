@@ -150,18 +150,6 @@ class Personals extends Component {
   }
 
   componentWillMount() {
-    // const { getUserInfo } = this.props;
-    // getUserInfo().then(({ error, payload }) => {
-    //   if (error) {
-    //     return;
-    //   }
-    //   this.setState({
-    //     userInfo: payload,
-    //   },()=>{
-    //     this.getCompanyType();
-    //   });
-
-    // });
     //新增 添加多语的所有语言
     this.getAllEnableFunc();
   }
@@ -256,12 +244,14 @@ class Personals extends Component {
     } = this.props;
     const { userInfo, language, hrefs, TeamData, currType } = this.state;
 
-    const currData = currType == 0 ? TeamData[0] : TeamData[1];
+    // const currData = currType == 0 ? TeamData[0] : TeamData[1];
     const { locale } = window.diworkContext();
     if (language.defaultValue !== locale) return null;
     return (
       <div>
         <Personal
+          editType={false}
+          exitModalButton={false}
           currType={0}
           userInfo={userInfo}
           requestDisplay={requestDisplay}
@@ -277,17 +267,6 @@ class Personals extends Component {
           animatedType="Right"
           modalStyle={{ right: 0 }}
         />
-        {
-          /*
-          exitModal ?
-            <TeamExitModal
-              data={currData}
-              isManage={userInfo.admin}
-              userId={userInfo.userId}
-              close
-            /> : null
-            */
-        }
       </div>
     );
   }
