@@ -6,6 +6,7 @@ import MenuBarInner, {getChildrenDeep} from './menuInner';
 import Icon from 'pub-comp/icon';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import { openWin } from '../../../public/regMessageTypeHandler';
+import { openService } from 'public/regMessageTypeHandler';
 import rootActions from 'store/root/actions';
 import menuActions from 'store/root/menubar/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -78,15 +79,16 @@ class MenuBar extends Component {
     });
   }
   // 点击bottomBar打开页签，bottomBar是一二级菜单中二级，一二三级菜单三级，一二三四级菜单四级
-  openService = (id,name,url) =>{
-    openWin({
-      id: id,
-      title: name,
-      // data: {
-      //   type: 'addressbook',
-      //   value: text
-      // }
-    });
+  openService = (id,name,url,serviceCode) =>{
+    openService(serviceCode);
+    // openWin({
+    //   id: id,
+    //   title: name,
+    //   // data: {
+    //   //   type: 'addressbook',
+    //   //   value: text
+    //   // }
+    // });
     this.setState({menuShow:false})
   }
   // 获取所有需要在三四级区域展示的数据

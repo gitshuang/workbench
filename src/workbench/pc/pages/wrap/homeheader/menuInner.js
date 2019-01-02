@@ -92,17 +92,17 @@ class MenuBarInner extends Component {
         } = this.props;
         let result = [];
         let deep = getChildrenDeep(cur, 1);
-        cur.forEach(({ children, menuItemName, menuItemId, service }) => {
+        cur.forEach(({ children, menuItemName, menuItemId, service ,serviceCode}) => {
             // deep>1表示有4级存在
             if (deep > 1) {
                 let dom = [];
                 // 情况1每项都有4级；情况2有些只到3级，那么3级占位4级展示
                 if (children.length > 0) {
-                    children.forEach(({ menuItemName, menuItemId, service: { url } }) => {
+                    children.forEach(({ menuItemName, menuItemId, service: { url },serviceCode }) => {
                         dom.push(
                             <li className="bottomBar"
                                 key={menuItemId}
-                                onClick={e => this.props.openService(menuItemId, menuItemName, url)}
+                                onClick={e => this.props.openService(menuItemId, menuItemName, url,serviceCode)}
                             >
                                 {menuItemName}
                             </li>
@@ -119,7 +119,7 @@ class MenuBarInner extends Component {
                         <li className={sideBarListItem} key={menuItemId}>
                             <span className="sideBarListItemName" style={{ opacity: 0, visibility: 'hidden' }}>{'default'}</span>
                             <ul className="bottomBarPanel">
-                                <li className="bottomBar" onClick={e => this.props.openService(menuItemId, menuItemName, service.url)}>
+                                <li className="bottomBar" onClick={e => this.props.openService(menuItemId, menuItemName, service.url,serviceCode)}>
                                     {menuItemName}
                                 </li>
                             </ul>
@@ -131,7 +131,7 @@ class MenuBarInner extends Component {
                 result.push(
                     <li className="pureBottom bottomBar"
                         key={menuItemId}
-                        onClick={e => this.props.openService(menuItemId, menuItemName, service.url)}>
+                        onClick={e => this.props.openService(menuItemId, menuItemName, service.url,serviceCode)}>
                         {menuItemName}
                     </li>
                 )
