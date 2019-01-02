@@ -1,5 +1,4 @@
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
 import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
 import { postMessageToWin, get, logout } from "@u";
@@ -21,9 +20,6 @@ const {
   delTabs,
   requestError,
 } = rootActions;
-const {
-
-} = homeActions;
 const handlers = {
   openWin(data) {
     if (typeof data !== 'object') {
@@ -38,13 +34,8 @@ const handlers = {
     const param = Object.assign({ type: 'locale', url: data.id }, data);
     store.dispatch(addTabs(param));
   },
-  closeWin(data) {
-    if (typeof data !== 'object') {
-      throw new Error('data is must be a object.');
-    }
-    if (data.id === undefined) {
-      throw new Error('id is required.');
-    }
+  closeWin() {
+    const data = store.getState().currItem;
     store.dispatch(delTabs(data));
   },
   openService({ serviceCode, data, type, tenantId }) {
