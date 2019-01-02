@@ -136,6 +136,7 @@ class CreateManageModule extends Component {
     
     return (
       <div>
+          {/* <div style={{width:300}}>sider</div> */}
           <Content {...manageProps} {...widgetListProps} {...widgetSelectListProps} languagesJSON={languagesJSON}/>
           <Footer {...footerProps} languagesJSON={languagesJSON}/>
           <BatchMove {...batchMoveRedux} languagesJSON={languagesJSON}/>

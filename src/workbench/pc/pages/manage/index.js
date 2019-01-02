@@ -243,6 +243,18 @@ class Manage extends Component {
         requestError(payload);
       }
       requestSuccess();
+      _.forEach(payload.workList, (g) => {
+        _.forEach(g.children,(a)=>{
+          a.isShadow = false;
+          a.isChecked = false;
+          //a.apptype = Number(a.apptype);
+          a.gridx = Number(a.gridx);
+          a.gridy = Number(a.gridy);
+          a.height = Number(a.height);
+          a.width = Number(a.width);
+        })
+      });
+      this.props.updateGroupList(payload.workList);
       return error;
     });
   }

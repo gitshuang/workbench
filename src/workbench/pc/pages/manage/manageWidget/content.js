@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import {ButtonDefaultAlpha} from 'pub-comp/button';
 import Icon from 'pub-comp/icon';
 import ManageGroup from './manageGroup';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
-import { widgetStyle } from '../widgetStyle';
 import { calGridXY,checkCardContainInGroup } from '../utils'
 import manageActions from 'store/root/manage/actions';
-const { updateShadowCard, addGroup,updateGroupList} = manageActions;
+const { updateShadowCard, addGroup,updateGroupList,updateLayout} = manageActions;
 import { layoutCheck } from '../collision';
 import { compactLayout, compactLayoutHorizontal } from '../compact';
+import * as utilService from '../utils';
 
 import {
   um_content,
@@ -22,13 +23,15 @@ import {
     "manageList",
     "shadowCard",
     "layout",
+    "defaultLayout",
 		{
 			namespace: 'manage',
     },
 	),{
     updateShadowCard,
     addGroup,
-    updateGroupList
+    updateGroupList,
+    updateLayout
   }
 )
 export default class Content extends Component{
@@ -44,30 +47,32 @@ export default class Content extends Component{
 	 * @param {Number} y 当前元素所在的网页的y轴位置，单位为px
 	**/
 	moveCardInGroupItem = (dragItem, hoverItem, x, y) => {
+    
 		let axis = 'gridx';
 		let manageList = this.props.manageList;
 		let shadowCard = this.props.shadowCard;
 		const { margin, containerWidth, col, rowHeight } = this.props.layout;
 		//计算当前所在的网格坐标
-		const { gridX, gridY } = calGridXY(x, y, shadowCard.width, margin, containerWidth, col, rowHeight);
+		const { gridX, gridY } = utilService.calGridXY(x, y, shadowCard.width, margin, containerWidth, col, rowHeight);
 		if (gridX === shadowCard.gridx && gridY === shadowCard.gridy) {
 			return;
 		}
 		let groupIndex = hoverItem.index;
 		//先判断组内是否存在相同的卡片
-		const cardid = shadowCard.widgetId;
-		const isContain = checkCardContainInGroup(manageList[groupIndex], cardid);
+		const widgetId = shadowCard.widgetId;
+		const isContain = utilService.checkCardContainInGroup(manageList[groupIndex], widgetId);
 
 		if (isContain) {
 			return;
 		}
-    //删除阴影的卡片
-		manageList.forEach((g, index) => {   //优化
-			g.children = g.children.filter((a) => {
-				return a.isShadow !== true;
+		//删除阴影的卡片
+		_.forEach(manageList, (g, index) => {
+			_.remove(g.children, (a) => {
+				return a.isShadow === true;
 			});
 		});
-    shadowCard = { ...shadowCard, gridx: gridX, gridy: gridY };
+
+		shadowCard = { ...shadowCard, gridx: gridX, gridy: gridY };
 		//添加阴影的卡片
 		manageList[groupIndex].children.push(shadowCard);
 		//获得当前分组内最新的layout布局
@@ -77,19 +82,89 @@ export default class Content extends Component{
 			shadowCard.widgetId,
 			shadowCard.widgetId,
 			axis
-		);
+    );
 		//压缩当前分组内的layout布局
 		let compactedLayout;
 		if(axis === 'gridx'){
-			compactedLayout = compactLayoutHorizontal(newlayout, this.props.col, cardid);
+			compactedLayout = compactLayoutHorizontal(newlayout, this.props.layout.col, widgetId);
 		}else if(axis === 'gridy'){
 			compactedLayout = compactLayout(newlayout, shadowCard);
 		}
 		//更新group对象
-		manageList[groupIndex].children = compactedLayout;
+		manageList[groupIndex].children = newlayout;
 		this.props.updateShadowCard(shadowCard);
+    this.props.updateGroupList(manageList);
+  };
+  //当页面加载完成，获得卡片容器宽度
+	handleLoad = () => {
+		let fn = () => {
+			let clientWidth;
+			const containerDom = document.querySelector('#widget-container');
+			if (containerDom) {
+				clientWidth = containerDom.clientWidth;
+			} else {
+				const firstAddButton = document.querySelector('#first-add');
+				if (firstAddButton) {
+					clientWidth = firstAddButton.clientWidth - 10;
+				} else {
+					return;
+				}
+			}
+			const defaultCalWidth = this.props.defaultLayout.calWidth;
+			const { containerPadding, margin } = this.props.layout;
+			let layout = _.cloneDeep(this.props.layout);
+			const windowWidth = window.innerWidth - 60 * 2;
+			const col = utilService.calColCount(defaultCalWidth, windowWidth, containerPadding, margin);
+			const calWidth = utilService.calColWidth(clientWidth, col, containerPadding, margin);
+
+			let { manageList } = this.props;
+			manageList = _.cloneDeep(manageList);
+			_.forEach(manageList, (g) => {
+				let compactedLayout = compactLayoutHorizontal(g.children, col);
+				g.children = compactedLayout;
+			});
+
+			layout.calWidth = layout.rowHeight = calWidth;
+			layout.col = col;
+			layout.containerWidth = clientWidth;
+			this.props.updateGroupList(manageList);
+			this.props.updateLayout(layout);
+		}
+		utilService.DeferFn(fn)
+  };
+  /**
+	 * 释放卡片到分组
+	 * @param {Object} dragItem 拖拽的卡片对象
+	 * @param {Object} dropItem 释放的目标组对象
+	**/
+	onCardDropInGroupItem = (dragItem, dropItem) => {
+		let { manageList } = this.props;
+		manageList = _.cloneDeep(manageList);
+		//将所有分组内的阴影卡片设为非阴影
+		utilService.setPropertyValueForCards(manageList, 'isShadow', false);
+		//目标组内重新横向压缩布局
+		_.forEach(manageList, (g, targetGroupIndex) => {
+			let compactedLayout = compactLayoutHorizontal(manageList[targetGroupIndex].children, this.props.layout.col);
+			manageList[targetGroupIndex].children = compactedLayout;
+		});
+
 		this.props.updateGroupList(manageList);
+		this.props.updateShadowCard({});
 	};
+  componentWillUnmount() {
+		window.removeEventListener('resize', this.handleLoad);
+	}
+	//组件渲染完毕时，添加resize事件
+	componentDidMount() {
+		window.addEventListener('resize', this.handleLoad);
+		//初始化时默认执行新增分组的方法
+		// setTimeout(() => {
+		// 	if (this.props.groups.length === 0) {
+		// 		this.addFirstGroupItem();
+		// 		document.getElementsByClassName('ant-input')[1].select();//初始化选中input
+		// 	}
+		// },1500);
+	}
   renderContent() {
     var {
       manageList,
@@ -186,7 +261,7 @@ export default class Content extends Component{
     let list = [];
     if(manageList.length == 0){
       return (
-        <div className={addBtn} >
+        <div className={addBtn} id="first-add">
           <ButtonDefaultAlpha className={addGroupBtn} onClick={()=>{addGroup({index:0})}}>
             <Icon type="add"></Icon>
             //添加组
@@ -211,6 +286,8 @@ export default class Content extends Component{
             {...widgetSelectListProps}
             languagesJSON={languagesJSON}
             moveCardInGroupItem = {this.moveCardInGroupItem}
+            handleLoad = {this.handleLoad}
+            onCardDropInGroupItem = {this.onCardDropInGroupItem}
             />
         )
       });

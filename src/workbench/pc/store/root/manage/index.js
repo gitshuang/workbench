@@ -148,12 +148,13 @@ const reducer = handleActions({
       layout: layout
     };
   },
-  [updateGroupList]:(state,{payload:layout}) => {
+  [updateGroupList]:(state,{payload:groupList}) => {
     return {
       ...state,
-      manageList: layout
+      manageList: groupList
     };
   },
+ 
   [setManageList]: (state, { payload, error }) =>
     ({
       ...state,

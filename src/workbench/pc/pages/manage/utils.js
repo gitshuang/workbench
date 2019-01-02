@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export function findItemById(manageList, id) {
 	let dataItem;
 	for (let i = 0; i < manageList.length; i++) {
@@ -202,3 +204,75 @@ export const isContained = (a, b) => {
 	}
 	return true;
 }
+
+
+/**
+ * 已知格子大小，计算容器一行放置格子数量
+ * @param {Number} defaultCalWidth
+ * @param {Number} containerWidth
+ * @param {Number} containerPadding
+ * @param {Number} margin
+ * @returns {Number} 每行单元格数量
+ */
+export const calColCount = (
+    defaultCalWidth,
+    containerWidth,
+    containerPadding,
+    margin
+) => {
+    if (margin) {
+        return Math.floor(
+            (containerWidth - containerPadding[0] * 2 - margin[0]) /
+                (defaultCalWidth + margin[0])
+        );
+    }
+};
+
+/**
+ * 已知放置格子数量, 计算容器的每一个格子多大
+ * @param {Number} containerWidth
+ * @param {Number} col
+ * @param {Number} containerPadding
+ * @param {Number} margin
+ * @returns {Number} 单元格大小
+ */
+export const calColWidth = (containerWidth, col, containerPadding, margin) => {
+    if (margin) {
+        return (
+            (containerWidth - containerPadding[0] * 2 - margin[0] * (col + 1)) /
+            col
+        );
+    }
+    return (containerWidth - containerPadding[0] * 2 - 0 * (col + 1)) / col;
+};
+
+/**
+ * 连续的ajax延迟
+ * @param {Function} fn 需要延迟运行的的回调函数
+ **/
+let deferFnInterval;
+export function DeferFn(fn) {
+    deferFnInterval = new Date().getTime();
+    setTimeout(() => {
+        //停止输入0.5s后执行
+        if (new Date().getTime() - deferFnInterval >= 500) {
+            fn();
+        }
+    }, 500);
+}
+
+/**
+ * 从某个分组中删除卡片
+ * @param {Array} groups
+ * @param {Int} groupIndex
+ * @param {String} cardID
+ * @return {Object} 被删除的卡片对象
+ */
+export const removeCardByGroupIndexAndCardID = (groups, groupIndex, cardID) => {
+    let tmpGroupIndex = groupIndex;
+    let resultCardArr = [];
+    resultCardArr = _.remove(groups[tmpGroupIndex].children, a => {
+        return a.widgetId === cardID;
+    });
+    return resultCardArr[0];
+};
