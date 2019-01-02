@@ -194,7 +194,7 @@ class Homeheader extends Component {
             <Icon type="home" />
           </div>
           <Tabmenu />
-          <div className={upward}>
+          <div className={`${upward} tc`}>
             <Icon type="upward" />
           </div>
         </div>
