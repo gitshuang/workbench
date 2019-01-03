@@ -247,7 +247,6 @@ class Manage extends Component {
         _.forEach(g.children,(a)=>{
           a.isShadow = false;
           a.isChecked = false;
-          //a.apptype = Number(a.apptype);
           a.gridx = Number(a.gridx);
           a.gridy = Number(a.gridy);
           a.height = Number(a.height);

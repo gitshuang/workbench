@@ -155,6 +155,7 @@ export default class ManageGroup extends Component {
 					groupID={groupID}
 					groupIndex={index}
 					index={i}
+					type={c.type}
 					gridx={c.gridx}
 					gridy={c.gridy}
 					width={c.width}
