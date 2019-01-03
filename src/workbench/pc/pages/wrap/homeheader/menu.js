@@ -122,7 +122,7 @@ class MenuBar extends Component {
     let { menuShow, allMenuList, openKeys, selectedKeys,currentSubBar } = this.state;
     return (
       <div>
-        <Icon type='master' onClick={this.menuShow} />
+        <Icon type='master' className="ignoreClass" onClick={this.menuShow} />
         <TransitionGroup>
           <CSSTransitionGroup
             transitionName={{
@@ -146,6 +146,7 @@ class MenuBar extends Component {
                   onOpenChange={this.onOpenChange}
                   setSideBarAllSub={this.setSideBarAllSub}
                   openService={this.openService}
+                  outsideClickIgnoreClass={'ignoreClass'}
                 />
               ):null
             }
