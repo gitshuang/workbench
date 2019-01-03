@@ -1,0 +1,21 @@
+.add_item{
+    align-items: center;
+    background: #fff3dc;
+    display: flex;
+    height: 35px;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 5px;
+}
+.add_item span{
+    color: #de6a1c;
+    font-size: 12px;
+    
+}
+.sider_container{
+    margin: 10px 5px 15px;
+    padding: 1px 8px 0;
+}
+.toggleBar{
+    cursor: pointer;
+}

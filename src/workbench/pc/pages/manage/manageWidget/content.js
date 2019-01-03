@@ -8,7 +8,7 @@ import PopDialogComp from './popDialogComp';
 
 
 import {
-  um_content,
+  um_content, 
   addBtn,
   addGroupBtn,
 } from './style.css';

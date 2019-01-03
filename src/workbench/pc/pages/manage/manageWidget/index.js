@@ -5,7 +5,8 @@ import Content from './content'
 import judgedBackend from './backend';
 import { DragDropContext } from 'react-dnd';
 import languagesJSON from 'yutils/languages';
-
+import Sider from './sider';
+import { management } from './style.css'
 
 class CreateManageModule extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class CreateManageModule extends Component {
   }
   render() {
     return (
-      <div>
+      <div className={management}>
+          <Sider />
           <Content {...this.props} languagesJSON={languagesJSON}/>
       </div>
     );
