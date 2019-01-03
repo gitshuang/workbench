@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {ButtonDefaultAlpha} from 'pub-comp/button';
 import Icon from 'pub-comp/icon';
 import ManageGroup from './manageGroup';
+import Footer from './footer';
+import BatchMove from './batchMove';
+import PopDialogComp from './popDialogComp';
+
 
 import {
   um_content,
@@ -148,9 +152,64 @@ export default class Content extends Component{
 
 
   render(){
+    var {
+      addGroup,
+      manageList,
+      batchDelectFn,
+      openGroupTo,
+      save,
+      popOpenCancel,
+      batchMoveModalDisplay,
+      moveData,
+      closeBatchMove,
+      batchMove,
+      showModal,
+      showCancelModal,
+      popClose,
+      cancel,
+      popCloseCancel,
+      languagesJSON,
+    } = this.props;
+  
+    var footerProps = {
+      batchDelectFn,
+      openGroupTo,
+      save,
+      popOpenCancel,
+    }
+    
+    var popDialogOuter = {
+      showModal,
+      showCancelModal,
+      popClose,
+      batchDelectFn,
+      cancel,
+      save,
+      popCloseCancel,
+    }
+    var batchMoveRedux = {
+      batchMoveModalDisplay,
+      manageList,
+      moveData,
+      closeBatchMove,
+      batchMove,
+      addGroup
+    }
+    var popDialogOuter = {
+      showModal,
+      showCancelModal,
+      popClose,
+      batchDelectFn,
+      cancel,
+      save,
+      popCloseCancel,
+    }
     return(
       <div className={um_content}>
-      {this.renderContent()}
+          {this.renderContent()}
+          <Footer {...footerProps} languagesJSON={languagesJSON}/>
+          <BatchMove {...batchMoveRedux} languagesJSON={languagesJSON}/>
+          <PopDialogComp {...popDialogOuter} languagesJSON={languagesJSON}/>
       </div>
     )
   }
