@@ -113,18 +113,18 @@ class HeaderContainer extends Component {
     const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <div className={`${rightBtn}`} style={{ marginRight: "15px", display: homeStyle }}>
+      <div className={`${rightBtn}`} style={{ display: homeStyle }}>
         <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
           <Icon title="我的门户" type="Friends-space" style={{ fontSize: "18px" }} />
         </a>
       </div>,
 
-      <QuickApplication
-        locale={locale}
-        serviceList={serviceList}
-        openAllFn={this.openAllFn}
-        openServiceFn={this.openServiceFn}
-      />,
+      // <QuickApplication
+      //   locale={locale}
+      //   serviceList={serviceList}
+      //   openAllFn={this.openAllFn}
+      //   openServiceFn={this.openServiceFn}
+      // />,
       <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
         <Icon title="智能通讯" type="clock" style={{}} />
         <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>

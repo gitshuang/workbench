@@ -126,15 +126,14 @@ const routes = [
       {
         path: '/manage',
         component: Manage,
-        exact: true,
       },
     ],
   },
 ];
 
 export const Pages = {
-  Application: <Application />,
-  Manage: <Manage />,
+  // Application: <Application />,
+  // Manage: <Manage />,
   Search: <Search />, 
   EstablishUserCenter: <EstablishUserCenter />,
   CreateTeam: <CreateTeam />,

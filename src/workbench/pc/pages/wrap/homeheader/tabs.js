@@ -4,7 +4,7 @@ import { mapStateToProps } from '@u';
 import Icon from 'pub-comp/icon';
 
 import { openWin, dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
-import { tabStyle } from './style.css';
+import { tab, active } from './style.css';
 
 
 @connect(
@@ -37,13 +37,13 @@ class Tabmenu extends Component {
   render() {
     const { tabs, activeCarrier } = this.props;
     return (
-      <div>
-        <ul className={tabStyle}>
+      <div className={tab}>
+        <ul>
           {
             tabs.map(item => {
               return (
                 <li key={item.id}
-                  style={{ background: item.id === activeCarrier ? 'red' : '#888' }}
+                  className={item.id === activeCarrier ? active : ''}
                 >
                   <p onClick={() => { openWin(item) }}>{item.title}</p>
                   <div onClick={() => { this.closeWin(item) }}>
@@ -54,6 +54,9 @@ class Tabmenu extends Component {
             })
           }
         </ul>
+        <div>
+          <Icon type="xiala" />
+        </div>
       </div>
     );
   }

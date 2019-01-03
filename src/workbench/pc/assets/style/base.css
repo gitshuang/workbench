@@ -52,27 +52,31 @@ body {
   background:url("../image/wgt/navBar_bg.png") no-repeat;
   background-position: right;
   background-color:#ffffff;
-  height: 88px;
+  height: 89px;
   border-bottom: 1px solid red;
 }
 
 .content{
   overflow-x: auto;
   position: fixed;
-  top: 90px;
+  top: 88px;
   left: 0;
   right: 0;
   bottom: 0px;
   z-index: 1;
   background: #ffffff;
-  background: linear-gradient(to bottom,#A8ABB0, #D8DADC);
+  /* background: linear-gradient(to bottom,#A8ABB0, #D8DADC); */
 }
 
 .home{
-  overflow: hidden;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 2;
-  padding-top: 90px;
+  overflow: auto;
+  /* padding-top: 90px; */
   background: linear-gradient(180deg,#a8abb0,#d8dadc);
   /* background-image: url('../image/homeBg.png');
   background-repeat: repeat-x;
