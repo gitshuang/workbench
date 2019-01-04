@@ -14,3 +14,25 @@ export function findItemById(manageList,id) {
     }
     return dataItem;
   }
+
+/**
+ * 判断所有分组内是否有某卡片
+ * @param {Array} groups
+ * @param {String} cardID
+ * @returns {Boolean}
+ */
+export const hasCardContainInGroups = (groups, cardID) => {
+  let flag = false;
+  groups.forEach(g => {
+    g.children.forEach(a => {
+          if (a.widgetId === cardID) {
+              flag = true;
+              return false;
+          }
+      });
+      if (flag) {
+          return false;
+      }
+  });
+  return flag;
+};

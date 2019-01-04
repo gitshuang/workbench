@@ -55,7 +55,7 @@ const defaultState = {
 
   dragState: true, // 是否可拖拽
 
-  shadowCard:false //默认没有
+  shadowCard: false //默认没有
 };
 
 const findTreeById = (data, curId) => {
@@ -115,7 +115,7 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
-  [updateShadowCard]:(state,{shadowCard}) => {
+  [updateShadowCard]: (state, { shadowCard }) => {
     return {
       ...state,
       shadowCard: shadowCard
@@ -454,7 +454,7 @@ const reducer = handleActions({
       currentSelectWidgetMap: state.currentSelectWidgetMap,
     };
   },
- 
+
   [editTitle]: (state, { payload: { id, name } }) => {
     const manageList = state.manageList;
     // manageList = JSON.parse(JSON.stringify(manageList));
@@ -474,73 +474,110 @@ const reducer = handleActions({
     }
   }) => {
     const manageAllList = state.manageList;
-    const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
-  	const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
-    const preParentType = sourceData.type;
-    const afterParentType = targetData.type;
-    // 判断是否为文件夹里面元素拖拽
-    let manageList = manageAllList;
-    const itemIn = findById(manageAllList, id);
-    const itemAfter = findById(manageAllList, afterId);
-   if (preParentType === 1 && afterParentType === 1 && preParentId !== parentId && preType === 3 && afterType === 3) {
-      // 跨分组拖拽
-      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
-      if (preParentId !== parentId) {
-        itemIn.parentId = parentId;
-      }
-      if (ifIntoFile == 'left') {
-        targetData.children.splice(targetData.children.indexOf(itemAfter), 0, itemIn); // 添加
-      } else {
-        targetData.children.splice(targetData.children.indexOf(itemAfter) + 1, 0, itemIn); // 添加
-      }
-    } else if (preParentId !== parentId && preType === 3 && afterType === 1) {
-      // 跨分组拖拽 放到组内 而不是元素上
-      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
-      if (preParentId !== parentId) {
-        itemIn.parentId = parentId;
-      }
-      targetData.children.splice(targetData.children.length, 0, itemIn); // 添加
-    } else {
-      const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
-      const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;
-      const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+    const item = {
+      background: null,
+      children: [],
+      createTime: 1534917232000,
+      creator: null,
+      icon: "https://cdn.yonyoucloud.com/pro/workbench/%E4%BC%9A%E8%AE%AE%E7%AE%A1%E7%90%86.png",
+      orders: 5,
+      parentId: "1f812cc9-2aee-46a6-8c8a-1527f09055d9",
+      serviceCode: "XTHUIYI",
+      serviceId: "3ed5ede0-ecb0-463a-93dd-8d3e8ca72ae4",
+      serviceType: 2,
+      size: 1,
+      type: 3,
+      widgetId:id,
+      widgetName: "Newhahaha"
+    }
+    if (preParentId == 2) {//2代表sider
+      const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;
       const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
-      const itemIndex = data.indexOf(item);
-	  const afterIndex = data.indexOf(afterItem);
-	  console.log("ifIntoFile ==========", ifIntoFile);
+      const afterIndex = data.indexOf(afterItem);
       if (ifIntoFile == 'left') {
-        if (itemIndex < afterIndex) {
-          manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-            $splice: [
-              [itemIndex, 1],
-              [afterIndex - 1, 0, item],
-            ],
-          });
+        manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+          $splice: [
+            [afterIndex, 0, item],
+          ],
+        });
+      } else {
+        manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+          $splice: [
+            [afterIndex + 1, 0, item],
+          ],
+        });
+      }
+    } else {
+      const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
+      const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
+      const preParentType = sourceData.type;
+      const afterParentType = targetData.type;
+      // 判断是否为文件夹里面元素拖拽
+      let manageList = manageAllList;
+      const itemIn = findById(manageAllList, id);
+      const itemAfter = findById(manageAllList, afterId);
+      if (preParentType === 1 && afterParentType === 1 && preParentId !== parentId && preType === 3 && afterType === 3) {
+        // 跨分组拖拽
+        sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+        if (preParentId !== parentId) {
+          itemIn.parentId = parentId;
+        }
+        if (ifIntoFile == 'left') {
+          targetData.children.splice(targetData.children.indexOf(itemAfter), 0, itemIn); // 添加
         } else {
+          targetData.children.splice(targetData.children.indexOf(itemAfter) + 1, 0, itemIn); // 添加
+        }
+      } else if (preParentId !== parentId && preType === 3 && afterType === 1) {
+        // 跨分组拖拽 放到组内 而不是元素上
+        sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+        if (preParentId !== parentId) {
+          itemIn.parentId = parentId;
+        }
+        targetData.children.splice(targetData.children.length, 0, itemIn); // 添加
+      } else {
+        const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+        const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;
+        const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+        const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
+        const itemIndex = data.indexOf(item);
+        const afterIndex = data.indexOf(afterItem);
+        console.log("ifIntoFile ==========", ifIntoFile);
+        if (ifIntoFile == 'left') {
+          //debugger
+          if (itemIndex < afterIndex) {
+            manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+              $splice: [
+                [itemIndex, 1],
+                [afterIndex - 1, 0, item],
+              ],
+            });
+          } else {
+            manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+              $splice: [
+                [itemIndex, 1],
+                [afterIndex, 0, item],
+              ],
+            });
+          }
+        } else if (itemIndex < afterIndex) {
           manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
             $splice: [
               [itemIndex, 1],
               [afterIndex, 0, item],
             ],
           });
+        } else {
+          manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+            $splice: [
+              [itemIndex, 1],
+              [afterIndex + 1, 0, item],
+            ],
+          });
         }
-      } else if (itemIndex < afterIndex) {
-        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex, 0, item],
-          ],
-        });
-      } else {
-        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex + 1, 0, item],
-          ],
-        });
       }
     }
-   
+
+
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return {
       ...state,
@@ -549,8 +586,8 @@ const reducer = handleActions({
       currEditonlyId: '',
     };
   },
- 
-  
+
+
   [openBatchMove]: state => ({
     ...state,
     batchMoveModalDisplay: true,
@@ -576,7 +613,7 @@ const reducer = handleActions({
     manageList: [],
     isEdit: false,
     isFocus: false,
-   
+
     folderModalDisplay: false,
     batchMoveModalDisplay: false,
     selectList: [], // 勾选的服务列表

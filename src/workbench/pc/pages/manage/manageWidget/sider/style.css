@@ -19,3 +19,102 @@
 .toggleBar{
     cursor: pointer;
 }
+.selectService{
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 83%;
+}
+.menuListStyle{
+    position: absolute;
+    width: 200px;
+    background: red;
+}
+.card{
+    border:1px dashed #fff3dc;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+.cardLevelFour{
+   display: inline-block
+}
+.cardLevelThree{
+    display: block;
+    border-bottom: 1px dashed #fff3dc;
+    margin-bottom: 10px;
+}
+
+.result_app_list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.app_col {
+    width: 50%;
+    
+}
+.list_item {
+    padding-left: 5px;
+    margin-bottom: 4px;
+}
+.list_item_content:hover{
+    border: 1px dashed #C2C2C2;
+    
+}
+.unSelect {
+    color: #ccc
+}
+.list_item_content {
+    padding: 3px 4px;
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+.isAddColor {
+    color: #007ACE;
+}
+.iconlocation {
+    position: absolute;
+    top: -5px;
+    right: -2px;
+    font-size: 16px;
+}
+.unSelect {
+    color: #fff;
+}
+.triangle_bottom_right {
+    border-bottom-right-radius: 3px;
+    border-color: transparent red red
+        transparent;
+    border-style: solid;
+    border-width: 4px 6px 6px 9px;
+    bottom: 0;
+    height: 0;
+    position: absolute;
+    right: 0;
+    width: 0;
+}
+/* //IE10 */
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 145px;
+}
+.title_name {
+    display: block;
+    max-width: 100%;
+    flex-shrink: 1;
+    font-size: 13px;
+    line-height: 14px;
+}
