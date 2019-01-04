@@ -73,6 +73,7 @@ const {
   openRoot,
   addTabs,
   delTabs,
+  closeTabs,
 } = actions;
 
 const defaultState = {
@@ -304,6 +305,10 @@ const reducer = handleActions({
     });
     // 判断是否已经打开
     if (cIndex > -1 && tabs.length) {
+      // 判断是否是需要将这个赋值到第一位
+      // if(payload.putFirst){
+
+      // }
       // 判断payload 和 原来tabs中对应的数据是否相等   主要是看看是否需要更新tabs
       if (Object.is(tabs[cIndex], payload)) {
         return {
@@ -355,6 +360,14 @@ const reducer = handleActions({
     return {
       ...state,
       tabs: newTabs,
+    };
+  },
+  [closeTabs]: (state) => {
+    return {
+      ...state,
+      tabs: [],
+      activeCarrier: 'home',
+      currItem: {},
     };
   },
 }, defaultState);

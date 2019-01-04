@@ -30,4 +30,5 @@ export default createTypes(
   'OPEN_ROOT',
   'ADD_TABS',
   'DEL_TABS',
+  'CLOSE_TABS',
 );

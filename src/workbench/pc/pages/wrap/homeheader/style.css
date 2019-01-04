@@ -52,12 +52,13 @@
 .tab ul{
   overflow: hidden;
   height: 40px;
+  float: left;
 }
 .tab ul li{
   float: left;
   width: 120px;
   height: 40px;
-  padding-right: 30px;
+  padding-right: 20px;
   /* background: #888888; */
   cursor: pointer;
   position: relative;
@@ -67,7 +68,18 @@
   text-align: left;
   line-height: 40px;
 }
-
+.pulldown{
+  float: left;
+  width: 30px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+.pulldown button{
+  width: 100%;
+  min-width: auto;
+}
 
 /*start:menubar*/
 .sideBar{

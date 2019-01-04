@@ -45,6 +45,7 @@ const {
   OPEN_ROOT,
   ADD_TABS,
   DEL_TABS,
+  CLOSE_TABS,
 } = types;
 
 export default createActions(
@@ -79,4 +80,5 @@ export default createActions(
   OPEN_ROOT,
   ADD_TABS,
   DEL_TABS,
+  CLOSE_TABS,
 );
