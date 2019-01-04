@@ -254,6 +254,9 @@
 .sideBarList>:global(.pureBottom.bottomBar:nth-child(n+2)){
   border-left:1px solid #dcdcdc;
 }
+:global(.header .lebra-navbar-left){
+  z-index: 999;
+}
 /*end:menubar*/
 .tab li div{
   position: absolute;
