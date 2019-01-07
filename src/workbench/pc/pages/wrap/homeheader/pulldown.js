@@ -17,6 +17,7 @@ const { Item, Divider } = Menu;
     mapStateToProps(
         'tabs',
         'activeCarrier',
+        'currItem',
     ),
     {
         closeTabs,
@@ -31,6 +32,7 @@ class Pulldown extends Component {
     }
 
     componentDidMount() {
+        
     }
 
     handleClick = (e,item) => {
@@ -45,7 +47,9 @@ class Pulldown extends Component {
             return false;
         }
         if (selectItem.key === "pin") {
-            alert(123);
+            const { currItem } = this.props;
+            console.log(currItem);
+            alert(111);
             return false;
         }
         const { key, item: { props } } = selectItem;
@@ -57,13 +61,13 @@ class Pulldown extends Component {
     }
 
     render() {
-        const { tabs, activeCarrier, items } = this.props;
+        const { tabs, currItem, items } = this.props;
+        const flag = currItem.type === "locale" || Object.keys(currItem).length ===0 ? true : false;
         const menus = (
             <Menu
                 onClick={this.onSelect}
             >
-
-                <Item key="pin" disabled={activeCarrier === "home" ? true : false}>将当前页添加到首页</Item>
+                <Item key="pin" disabled={flag} >将当前页添加到首页</Item>
                 <Item key="close">关闭全部页签</Item>
                 <Divider />
                 {
