@@ -7,6 +7,7 @@ import {
 } from './api';
 
 const {
+  CHANGE_SIDER_STATE,
   UPDATE_SHADOW_CARD,
   SET_MANAGE_LIST,
   GET_MANAGE_LIST,
@@ -48,6 +49,7 @@ const actions = createActions(
     [GET_MANAGE_LIST]: getManageList,
     [GET_ALL_SERVICES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
   },
+  CHANGE_SIDER_STATE,
   UPDATE_SHADOW_CARD,
   BATCH_DELECT,
   ADD_GROUP,

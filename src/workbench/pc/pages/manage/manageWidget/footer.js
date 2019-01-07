@@ -10,6 +10,7 @@ const { } = manageActions;
   mapStateToProps(
     'selectList',
     'isEdit',
+    'isSiderDisplay',
   {
     namespace: 'manage',
   }
@@ -22,6 +23,13 @@ export default class Footer extends Component{
   static defaultProps = {
 
   }
+  componentWillReceiveProps(props){
+      this.refs.footer.style.width = this.refs.footer.parentNode.clientWidth+'px';
+  }
+  componentDidMount(){
+    this.refs.footer.style.width = this.refs.footer.parentNode.clientWidth+'px';
+
+  }
   render(){
     var {
       batchDelectFn,
@@ -30,11 +38,11 @@ export default class Footer extends Component{
       isEdit,
       save,
       popOpenCancel,
-      languagesJSON
+      languagesJSON,
     } = this.props;
-
+    
     return (
-        <div className={um_footer}>
+        <div className={um_footer} ref="footer">
           <div className={umBoxJustify}>
              <div className={`${batchArea}  horizontalParent`}>
               <ButtonDefaultLine onClick={batchDelectFn} disabled={selectList.length ? false:true} className="horizontal">{languagesJSON.delete}</ButtonDefaultLine>

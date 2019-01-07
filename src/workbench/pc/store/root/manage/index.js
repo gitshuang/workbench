@@ -34,6 +34,7 @@ const {
   returnDefaultState,
   setDragInputState,
   emptySelectGroup,
+  changeSiderState
 } = actions;
 
 const defaultState = {
@@ -55,7 +56,8 @@ const defaultState = {
 
   dragState: true, // 是否可拖拽
 
-  shadowCard: false //默认没有
+  shadowCard: false, //默认没有
+  isSiderDisplay:true
 };
 
 const findTreeById = (data, curId) => {
@@ -115,6 +117,12 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
+  [changeSiderState]:(state)=>{
+    return {
+      ...state,
+      isSiderDisplay: !state.isSiderDisplay
+    };
+  },
   [updateShadowCard]: (state, { shadowCard }) => {
     return {
       ...state,
@@ -474,22 +482,9 @@ const reducer = handleActions({
     }
   }) => {
     const manageAllList = state.manageList;
-    const item = {
-      background: null,
-      children: [],
-      createTime: 1534917232000,
-      creator: null,
-      icon: "https://cdn.yonyoucloud.com/pro/workbench/%E4%BC%9A%E8%AE%AE%E7%AE%A1%E7%90%86.png",
-      orders: 5,
-      parentId: "1f812cc9-2aee-46a6-8c8a-1527f09055d9",
-      serviceCode: "XTHUIYI",
-      serviceId: "3ed5ede0-ecb0-463a-93dd-8d3e8ca72ae4",
-      serviceType: 2,
-      size: 1,
-      type: 3,
-      widgetId:id,
-      widgetName: "Newhahaha"
-    }
+    let manageList = manageAllList;
+
+     
     if (preParentId == 2) {//2代表sider
       const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;
       const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
@@ -497,13 +492,13 @@ const reducer = handleActions({
       if (ifIntoFile == 'left') {
         manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
           $splice: [
-            [afterIndex, 0, item],
+            [afterIndex, 0, ...id],
           ],
         });
       } else {
         manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
           $splice: [
-            [afterIndex + 1, 0, item],
+            [afterIndex + 1, 0, ...id],
           ],
         });
       }
@@ -513,7 +508,6 @@ const reducer = handleActions({
       const preParentType = sourceData.type;
       const afterParentType = targetData.type;
       // 判断是否为文件夹里面元素拖拽
-      let manageList = manageAllList;
       const itemIn = findById(manageAllList, id);
       const itemAfter = findById(manageAllList, afterId);
       if (preParentType === 1 && afterParentType === 1 && preParentId !== parentId && preType === 3 && afterType === 3) {

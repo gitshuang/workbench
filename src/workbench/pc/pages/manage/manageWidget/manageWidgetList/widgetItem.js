@@ -38,13 +38,12 @@ const itemTarget = {
     var { size } = props.data;
     var dirDistance = widgetStyle[size-1].width;
 	const draggedId = monitor.getItem().id;
-	
+	 const draggedItem = monitor.getItem();
     if (draggedId !== props.id){ //这是什么
       component.setState({
         drag:'fadeInLeft'
       });
     }
-    
     const clientOffset = monitor.getClientOffset();
 
     var componentRect = 0;

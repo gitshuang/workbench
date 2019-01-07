@@ -9,7 +9,28 @@ import {app_col,list_item_content,title,isAddColor,title_name} from './style.css
 const noteSource = {
     beginDrag(props) {
         // debugger
-        return {id:props.menuItemId,type:3,parentId:2}
+        let  totalCards = []
+         props.checkedCardList.forEach(element => {
+            let checkedCard = {
+                size:1,
+                type:3,
+                widgetId : element.menuItemId,
+                widgetName : element.menuItemName
+            }
+            totalCards.push(checkedCard)
+        });
+        const draggedCardList = [{
+            size: 1,
+            type: 3,
+            widgetId:props.menuItemId,
+            widgetName: props.menuItemName
+        }]
+
+        if(!props.checked){
+             totalCards = totalCards.concat(draggedCardList)
+        }
+       
+        return {id:totalCards,type:3,parentId:2}
     }
 };
 
@@ -59,14 +80,14 @@ export default class Card extends Component {
         return false;
     }
     //改变SiderCard的选中状态
-    onChangeChecked = (e) => {
+    onChangeChecked = (e) => { 
         const checked = e.target.checked;
-        const { index, parentIndex } = this.props;
-        this.props.onChangeChecked(checked, parentIndex, index);
+        const { menuItemId, parentId } = this.props;
+        this.props.onChangeChecked(checked, parentId, menuItemId);
     };
     clickSiderCard = () => {
-        const { index, parentIndex, checked } = this.props;
-        this.props.onChangeChecked(!checked, parentIndex, index);
+        const { menuItemId, parentId, checked } = this.props;
+        this.props.onChangeChecked(!checked, parentId, menuItemId);
     };
     render() {
         
@@ -88,7 +109,8 @@ export default class Card extends Component {
                     style={
                         checked
                             ? {
-                                border: '1px dashed #d4d4d4'
+                                border: '1px dashed #d4d4d4',
+                                color:'red'
                             }
                             : null
                     }
