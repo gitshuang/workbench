@@ -34,8 +34,11 @@ const handlers = {
     const param = Object.assign({ type: 'locale', url: data.id }, data);
     store.dispatch(addTabs(param));
   },
-  closeWin() {
-    const data = store.getState().currItem;
+  closeWin(param) {
+    let data = store.getState().currItem;
+    if (typeof param === "object" && param.id) {
+      data = param;
+    }
     store.dispatch(delTabs(data));
   },
   openService({ serviceCode, data, type, tenantId }) {

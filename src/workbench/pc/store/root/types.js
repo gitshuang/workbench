@@ -7,7 +7,6 @@ export default createTypes(
   'GET_USER_INFO',
   'SET_USER_INFO',
   'GET_SERVICE_LIST',
-  'GET_MESSAGE',
   'CHANGE_QUICK_SERVICE_DISPLAY',
   'CHANGE_QUICK_SERVICE_HIDDEN',
   'POP_MESSAGE',
@@ -31,4 +30,9 @@ export default createTypes(
   'ADD_TABS',
   'DEL_TABS',
   'CLOSE_TABS',
+  'OPEN_PIN',
+  'CLOSE_PIN',
+  'GET_FOLDERS',
+  'SET_FOLDERS',
+  'ADD_FOLDERS',
 );

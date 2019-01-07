@@ -5,10 +5,13 @@ import { mapStateToProps } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 import Homeheader from './homeheader';
 import Homecontent from './homecontent';
+
+import Pin from './pin';
 @withRouter
 @connect(
   mapStateToProps(
     'activeCarrier',
+    'pinDisplay',
   ),
   {},
 )
@@ -23,7 +26,7 @@ class Wrap extends Component {
   }
 
   render() {
-    const { routes, activeCarrier } = this.props;
+    const { routes, activeCarrier, pinDisplay } = this.props;
     const vis = activeCarrier === 'home' ? 'block' : 'none';
     return (
       <div className='um-win'>
@@ -36,6 +39,9 @@ class Wrap extends Component {
           </div>
           <Homecontent routes={routes} />
         </div>
+        {
+          pinDisplay ? <Pin /> : null
+        }
       </div>
     );
   }

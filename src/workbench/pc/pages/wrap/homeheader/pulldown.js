@@ -33,19 +33,26 @@ class Pulldown extends Component {
     componentDidMount() {
     }
 
+    handleClick = (e,item) => {
+        e.stopPropagation();
+        const {closeWin} = this.props;
+        closeWin(item);
+    }
+
     onSelect = (selectItem) => {
         if (selectItem.key === "close") {
             this.props.closeTabs();
             return false;
         }
-        if(selectItem.key === "pin") {
+        if (selectItem.key === "pin") {
             alert(123);
             return false;
         }
-        const {item: {props}} = selectItem;
+        const { key, item: { props } } = selectItem;
+        const [id, title] = key.split('-');
         openWin({
-            id: props.eventKey,
-            title: props.children
+            id,
+            title
         });
     }
 
@@ -61,13 +68,18 @@ class Pulldown extends Component {
                 <Divider />
                 {
                     items.length && items.map((item) => {
-                        return <Item key={item.id}>{item.title}</Item>
+                        return (
+                            <Item key={`${item.id}-${item.title}`}>
+                                {item.title}
+                                <Icon type="error3" onClick={(e) => this.handleClick(e,item)} />
+                            </Item>
+                        )
                     })
                 }
             </Menu>
         );
         return (
-            <div className={pulldown} style={{width: this.props.width}}>
+            <div className={pulldown} style={{ width: this.props.width }}>
                 <Dropdown
                     trigger={['click']}
                     overlay={menus}

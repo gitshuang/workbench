@@ -21,8 +21,6 @@ const notification = Notification.newInstance({
   position: 'bottomRight',
 });
 
-const maxMessageShowNum = 3;
-
 function addMessage(message) {
   if (message) {
     const {
@@ -51,7 +49,6 @@ const {
   getUserInfo,
   setUserInfo,
   getServiceList,
-  getMessage,
   popMessage,
   changeMessageType,
   showIm,
@@ -74,16 +71,17 @@ const {
   addTabs,
   delTabs,
   closeTabs,
+  openPin,
+  closePin,
+  getFolders,
+  setFolders,
+  addFolders,
 } = actions;
 
 const defaultState = {
   userInfo: {},
-  tabs: [
-
-  ],
-  currItem: {
-
-  },
+  tabs: [],
+  currItem: {},
   activeCarrier: 'home',
   serviceList: [],
   messageType: false,
@@ -95,14 +93,11 @@ const defaultState = {
     portalUrl: ''
   },
   showModal: false,
-  dialogType: '',
-  dialogTitle: '',
-  dialogMsg: '',
+  dialogData: {},
   showFrame: false,
-  frameParam: {
-
-  },
+  frameParam: {},
   currLan: 'zh_CN',//当前的语言
+  pinDisplay: false,
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -128,9 +123,11 @@ const reducer = handleActions({
     return {
       ...state,
       showModal: true,
-      dialogType: 'error',
-      dialogTitle: '错误',
-      dialogMsg: msg
+      dialogData: {
+        type: 'error',
+        title: '错误',
+        msg: msg
+      },
     };
   },
   [getUserInfo]: (state, { payload, error }) => {
@@ -164,27 +161,6 @@ const reducer = handleActions({
     };
   },
   [uploadApplication]: state => state,
-  [getMessage]: (state, { payload: message, error }) => {
-    if (error) {
-      return state;
-    }
-    const { messageShowNum, messageList } = state;
-    const newMessageList = messageList.concat(message);
-    let newMessageShowNum = messageShowNum;
-    const popNums = maxMessageShowNum - messageShowNum;
-    if (popNums > 0) {
-      for (let i = 0, l = popNums; i < l; i += 1) {
-        newMessageShowNum += 1;
-        addMessage(newMessageList.shift());
-      }
-    }
-
-    return {
-      ...state,
-      messageList: newMessageList,
-      messageShowNum: newMessageShowNum,
-    };
-  },
   [getPoll]: (state, { payload, error }) => {
     if (error) {
       return state;
@@ -271,9 +247,12 @@ const reducer = handleActions({
     return {
       ...state,
       showModal: true,
-      dialogType: type || 'success',
-      dialogTitle: title || '提示',
-      dialogMsg: msg
+      dialogData: {
+        type: type || 'success',
+        title: title || '提示',
+        msg: msg
+      },
+
     }
   },
   [closeDialogNew]: (state) => ({ ...state, showModal: false }),
@@ -370,6 +349,45 @@ const reducer = handleActions({
       currItem: {},
     };
   },
+  [openPin]: (state) => {
+    return {
+      ...state,
+      pinDisplay: true
+    };
+  },
+  [closePin]: (state) => {
+    return {
+      ...state,
+      pinDisplay: false
+    };
+  },
+  [getFolders]: (state, { error, payload: folders }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      folders,
+    };
+  },
+  [setFolders]: (state, { error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+    };
+  },
+  [addFolders]: (state, { error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+    };
+  },
+  setFolders,
+  addFolders,
 }, defaultState);
 
 export default function (state, action) {
@@ -383,7 +401,7 @@ export default function (state, action) {
     team: team(state ? state.team : undefined, action),
     teamconfig: teamconfig(state ? state.teamconfig : undefined, action),
     homepage: homepage(state ? state.homepage : undefined, action),
-    menubar:menubar(state ? state.menubar : undefined , action),
+    menubar: menubar(state ? state.menubar : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;

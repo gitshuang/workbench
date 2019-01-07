@@ -105,7 +105,7 @@ class Tabmenu extends Component {
             })
           }
         </ul>
-        <Pulldown width={this.pullW} items={mores} />
+        <Pulldown width={this.pullW} items={mores} closeWin={this.closeWin}/>
       </div>
     );
   }

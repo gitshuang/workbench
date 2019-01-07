@@ -3,7 +3,6 @@ import types from './types';
 import {
   getUserInfo,
   getServiceList,
-  getMessage,
   uploadApplication,
   getPoll,
   getPortal,
@@ -13,6 +12,9 @@ import {
   setCurrentNot,
   getAllEnableNot,
   getCurrentNot,
+  getFolders,
+  setFolders,
+  addFolders,
 } from './api';
 
 const {
@@ -22,7 +24,6 @@ const {
   GET_USER_INFO,
   SET_USER_INFO,
   GET_SERVICE_LIST,
-  GET_MESSAGE,
   CHANGE_QUICK_SERVICE_DISPLAY,
   CHANGE_QUICK_SERVICE_HIDDEN,
   POP_MESSAGE,
@@ -46,13 +47,17 @@ const {
   ADD_TABS,
   DEL_TABS,
   CLOSE_TABS,
+  OPEN_PIN,
+  CLOSE_PIN,
+  GET_FOLDERS,
+  SET_FOLDERS,
+  ADD_FOLDERS,
 } = types;
 
 export default createActions(
   {
     [GET_SERVICE_LIST]: getServiceList,
     [GET_USER_INFO]: getUserInfo,
-    [GET_MESSAGE]: getMessage,
     [UPLOAD_APPLICATION]: uploadApplication,
     [GET_POLL]: getPoll,
     [GET_PORTAL]: getPortal,
@@ -62,6 +67,9 @@ export default createActions(
     [SET_CURRENT_NOT]: setCurrentNot,
     [GET_ALL_ENABLE_NOT]: getAllEnableNot,
     [GET_CURRENT_NOT]: getCurrentNot,
+    [GET_FOLDERS]: getFolders,
+    [SET_FOLDERS]: setFolders,
+    [ADD_FOLDERS]: addFolders,
   },
   REQUEST_START,
   REQUEST_SUCCESS,
@@ -81,4 +89,6 @@ export default createActions(
   ADD_TABS,
   DEL_TABS,
   CLOSE_TABS,
+  OPEN_PIN,
+  CLOSE_PIN,
 );
