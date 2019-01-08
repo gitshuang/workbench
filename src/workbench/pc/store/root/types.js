@@ -27,6 +27,7 @@ export default createTypes(
   'OPEN_FRAME',
   'CLOSE_FRAME',
   'OPEN_ROOT',
+  'SHOW_TABS',
   'ADD_TABS',
   'DEL_TABS',
   'CLOSE_TABS',

@@ -68,6 +68,7 @@ const {
   closeFrame,
 
   openRoot,
+  showTabs,
   addTabs,
   delTabs,
   closeTabs,
@@ -280,39 +281,60 @@ const reducer = handleActions({
       currItem: {},
     };
   },
-  [addTabs]: (state, { payload, }) => {
-    const { tabs } = state;
-    const cIndex = tabs.findIndex((item) => {
-      return item.id === payload.id;
-    });
-    // 判断是否已经打开
-    if (cIndex > -1 && tabs.length) {
-      // 判断是否是需要将这个赋值到第一位
-      // if(payload.putFirst){
-
-      // }
-      // 判断payload 和 原来tabs中对应的数据是否相等   主要是看看是否需要更新tabs
-      if (Object.is(tabs[cIndex], payload)) {
-        return {
-          ...state,
-          activeCarrier: payload.id,
-          hasWidget: payload.hasWidget,
-          currItem: payload
-        }
-      }
-      // 判断位置 
-      tabs.splice(cIndex, 1, payload);
-      return {
-        ...state,
-        tabs: [...tabs],
-        activeCarrier: payload.id,
-        hasWidget: payload.hasWidget,
-        currItem: payload
-      }
-    }
+  [showTabs]: (state, { payload, }) => {
     return {
       ...state,
-      tabs: [payload, ...tabs],
+      activeCarrier: payload.id,
+      hasWidget: payload.hasWidget,
+      currItem: payload,
+    };
+  },
+  [addTabs]: (state, { payload, }) => {
+    const { tabs } = state;
+    if (tabs.length >= 20) {
+      return {
+        ...state,
+        showModal: true,
+        dialogData: {
+          type: 'error',
+          title: '错误',
+          msg: '最多打开20个页签，请关闭不需要的页签。'
+        },
+      };
+    }
+    // const cIndex = tabs.findIndex((item) => {
+    //   return item.id === payload.id;
+    // });
+    // // 判断是否已经打开
+    // if (cIndex > -1 && tabs.length) {
+    //   // 判断payload 和 原来tabs中对应的数据是否相等   主要是看看是否需要更新tabs
+    //   if (Object.is(tabs[cIndex], payload)) {
+    //     return {
+    //       ...state,
+    //       activeCarrier: payload.id,
+    //       hasWidget: payload.hasWidget,
+    //       currItem: payload
+    //     }
+    //   } else {
+    //     // 判断位置 
+    //     tabs.splice(cIndex, 1, payload);
+    //     return {
+    //       ...state,
+    //       tabs: [...tabs],
+    //       activeCarrier: payload.id,
+    //       hasWidget: payload.hasWidget,
+    //       currItem: payload
+    //     }
+    //   }
+    // }
+    // TODO生成了新数组 这样感觉造成的重绘现象比较严重， 到底是选splice 不更改指针方案还是此方案 ？
+    const newTabs = tabs.filter(item => {
+      return item.id !== payload.id;
+    });
+    return {
+      ...state,
+      // tabs: [payload, ...tabs],
+      tabs: [payload, ...newTabs],
       activeCarrier: payload.id,
       hasWidget: payload.hasWidget,
       currItem: payload,

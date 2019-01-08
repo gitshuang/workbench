@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import Icon from 'pub-comp/icon';
-
-import { openWin, dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+import rootActions from 'store/root/actions';
 import Pulldown from './pulldown';
 import { tab, active } from './style.css';
 
-
+const { showTabs } = rootActions;
 @connect(
   mapStateToProps(
     'tabs',
     'activeCarrier',
   ),
   {
-
+    showTabs,
   },
 )
 
@@ -68,13 +68,13 @@ class Tabmenu extends Component {
     let tabs = [];
     const maxTabsNum = Math.floor((areaWidth - this.pullW) / 120);
     if (totalTabs.length > maxTabsNum) {
-      tabs = totalTabs.filter((item,index)=> {
+      tabs = totalTabs.filter((item, index) => {
         return index < maxTabsNum;
-      }); 
-      mores = totalTabs.filter((item,index)=> {
+      });
+      mores = totalTabs.filter((item, index) => {
         return index >= maxTabsNum;
-      }); 
-    }else{
+      });
+    } else {
       tabs = totalTabs;
     }
     return {
@@ -84,7 +84,7 @@ class Tabmenu extends Component {
   }
 
   render() {
-    const { tabs: totalTabs, activeCarrier } = this.props;
+    const { tabs: totalTabs, activeCarrier, showTabs } = this.props;
     const { width } = this.state;
     const { tabs, mores } = this.getTabsAndMores(totalTabs, width);
     return (
@@ -96,7 +96,7 @@ class Tabmenu extends Component {
                 <li key={item.id}
                   className={item.id === activeCarrier ? active : ''}
                 >
-                  <p onClick={() => { openWin(item) }}>{item.title}</p>
+                  <p onClick={() => { showTabs(item) }}>{item.title}</p>
                   <div onClick={() => { this.closeWin(item) }}>
                     <Icon type="error3" />
                   </div>
@@ -105,7 +105,7 @@ class Tabmenu extends Component {
             })
           }
         </ul>
-        <Pulldown width={this.pullW} items={mores} closeWin={this.closeWin}/>
+        <Pulldown width={this.pullW} items={mores} closeWin={this.closeWin} />
       </div>
     );
   }

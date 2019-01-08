@@ -16,7 +16,6 @@ const { Item, Divider } = Menu;
 @connect(
     mapStateToProps(
         'tabs',
-        'activeCarrier',
         'currItem',
         'hasWidget',
     ),
@@ -34,12 +33,12 @@ class Pulldown extends Component {
     }
 
     componentDidMount() {
-        
+
     }
 
-    handleClick = (e,item) => {
+    handleClick = (e, item) => {
         e.stopPropagation();
-        const {closeWin} = this.props;
+        const { closeWin } = this.props;
         closeWin(item);
     }
 
@@ -50,21 +49,16 @@ class Pulldown extends Component {
         }
         if (selectItem.key === "pin") {
             const { openPin } = this.props;
-            alert(111);
             openPin();
             return false;
         }
-        const { key, item: { props } } = selectItem;
-        const [id, title] = key.split('-');
-        openWin({
-            id,
-            title
-        });
+        const { item: { props: { attribute } } } = selectItem;
+        openWin(attribute);
     }
 
     render() {
         const { tabs, currItem, items, hasWidget } = this.props;
-        const flag = currItem.type === "locale" || Object.keys(currItem).length ===0 ? true : false;
+        const flag = currItem.type === "locale" || Object.keys(currItem).length === 0 ? true : false;
         const text = hasWidget ? "将当前页从首页移除" : "将当前页添加到首页";
         const menus = (
             <Menu
@@ -76,9 +70,9 @@ class Pulldown extends Component {
                 {
                     items.length && items.map((item) => {
                         return (
-                            <Item key={`${item.id}-${item.title}`}>
+                            <Item key={item.id} attribute={item}>
                                 {item.title}
-                                <Icon type="error3" onClick={(e) => this.handleClick(e,item)} />
+                                <Icon type="error3" onClick={(e) => this.handleClick(e, item)} />
                             </Item>
                         )
                     })

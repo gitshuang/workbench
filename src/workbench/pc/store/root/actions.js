@@ -44,6 +44,7 @@ const {
   OPEN_FRAME,
   CLOSE_FRAME,
   OPEN_ROOT,
+  SHOW_TABS,
   ADD_TABS,
   DEL_TABS,
   CLOSE_TABS,
@@ -52,7 +53,6 @@ const {
   GET_FOLDERS,
   SET_FOLDERS,
   ADD_FOLDERS,
-  SET_HAS_WIDGET,
 } = types;
 
 export default createActions(
@@ -87,6 +87,7 @@ export default createActions(
   OPEN_FRAME,
   CLOSE_FRAME,
   OPEN_ROOT,
+  SHOW_TABS,
   ADD_TABS,
   DEL_TABS,
   CLOSE_TABS,
