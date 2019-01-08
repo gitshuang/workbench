@@ -3,17 +3,21 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
+import RootActions from 'store/root/actions';
 import Homeheader from './homeheader';
 import Homecontent from './homecontent';
-
 import Pin from './pin';
+
+const { getFolders } = RootActions;
 @withRouter
 @connect(
   mapStateToProps(
     'activeCarrier',
     'pinDisplay',
   ),
-  {},
+  {
+    getFolders,
+  },
 )
 class Wrap extends Component {
   constructor(props) {
@@ -22,7 +26,8 @@ class Wrap extends Component {
   }
 
   componentDidMount() {
-
+    const {getFolders} = this.props;
+    getFolders();
   }
 
   render() {
@@ -39,8 +44,10 @@ class Wrap extends Component {
           </div>
           <Homecontent routes={routes} />
         </div>
+        <Pin />
+        
         {
-          pinDisplay ? <Pin /> : null
+          pinDisplay ?  <Pin /> : null
         }
       </div>
     );

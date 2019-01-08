@@ -31,7 +31,7 @@ const handlers = {
     if (data.title === undefined) {
       throw new Error('title is required.');
     }
-    const param = Object.assign({ type: 'locale', url: data.id }, data);
+    const param = Object.assign({ type: 'locale', url: data.id, hasWidget: false }, data);
     store.dispatch(addTabs(param));
   },
   closeWin(param) {
@@ -101,6 +101,7 @@ const handlers = {
           url,
           workspaceStyle,
           serviceCode: subCode,
+          hasWidget,
         } = payload;
         const locationProtocol = window.location.protocol;
         if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
@@ -115,6 +116,7 @@ const handlers = {
             type: 'service',
             url: locations,
             title: serviceName,
+            hasWidget: hasWidget
           }));
         }
         pushYA(subCode);

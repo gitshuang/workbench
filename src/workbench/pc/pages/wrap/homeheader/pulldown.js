@@ -9,7 +9,7 @@ import Button from 'bee/button';
 import { pulldown, } from './style.css'
 
 import rootActions from 'store/root/actions';
-const { closeTabs } = rootActions;
+const { closeTabs, openPin } = rootActions;
 
 const { Item, Divider } = Menu;
 
@@ -18,9 +18,11 @@ const { Item, Divider } = Menu;
         'tabs',
         'activeCarrier',
         'currItem',
+        'hasWidget',
     ),
     {
         closeTabs,
+        openPin
     },
 )
 class Pulldown extends Component {
@@ -47,9 +49,9 @@ class Pulldown extends Component {
             return false;
         }
         if (selectItem.key === "pin") {
-            const { currItem } = this.props;
-            console.log(currItem);
+            const { openPin } = this.props;
             alert(111);
+            openPin();
             return false;
         }
         const { key, item: { props } } = selectItem;
@@ -61,13 +63,14 @@ class Pulldown extends Component {
     }
 
     render() {
-        const { tabs, currItem, items } = this.props;
+        const { tabs, currItem, items, hasWidget } = this.props;
         const flag = currItem.type === "locale" || Object.keys(currItem).length ===0 ? true : false;
+        const text = hasWidget ? "将当前页从首页移除" : "将当前页添加到首页";
         const menus = (
             <Menu
                 onClick={this.onSelect}
             >
-                <Item key="pin" disabled={flag} >将当前页添加到首页</Item>
+                <Item key="pin" disabled={flag} >{text}</Item>
                 <Item key="close">关闭全部页签</Item>
                 <Divider />
                 {

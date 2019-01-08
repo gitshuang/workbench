@@ -79,25 +79,28 @@ const {
 } = actions;
 
 const defaultState = {
-  userInfo: {},
-  tabs: [],
-  currItem: {},
-  activeCarrier: 'home',
+  userInfo: {}, // userinfo
+  tabs: [],     // 多页签存储
+  currItem: {}, // 当前页签的内容
+  activeCarrier: 'home',  // 当前页签id
+  pinDisplay: false,  // 是否显示 pin弹窗
+  hasWidget: false,   // 是否已经pin上
+  folders: [],        // 分组列表
+  showModal: false,   // 统一modal的显隐
+  dialogData: {},     // modal 内容
+  showFrame: false,   // frame 遮罩层
+  frameParam: {},     // 打开frame传递的参数集合
+  currLan: 'zh_CN',//当前的语言
+
+  imShowed: false,
   serviceList: [],
   messageType: false,
   messageList: [],
   messageShowNum: 0,
-  imShowed: false,
   portalInfo: {
     openStatus: false,
     portalUrl: ''
   },
-  showModal: false,
-  dialogData: {},
-  showFrame: false,
-  frameParam: {},
-  currLan: 'zh_CN',//当前的语言
-  pinDisplay: false,
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -293,22 +296,25 @@ const reducer = handleActions({
         return {
           ...state,
           activeCarrier: payload.id,
+          hasWidget: payload.hasWidget,
           currItem: payload
         }
-      } else {
-        tabs.splice(cIndex, 1, payload);
-        return {
-          ...state,
-          tabs: [...tabs],
-          activeCarrier: payload.id,
-          currItem: payload
-        }
+      }
+      // 判断位置 
+      tabs.splice(cIndex, 1, payload);
+      return {
+        ...state,
+        tabs: [...tabs],
+        activeCarrier: payload.id,
+        hasWidget: payload.hasWidget,
+        currItem: payload
       }
     }
     return {
       ...state,
       tabs: [payload, ...tabs],
       activeCarrier: payload.id,
+      hasWidget: payload.hasWidget,
       currItem: payload,
     };
   },
@@ -325,14 +331,16 @@ const reducer = handleActions({
           ...state,
           tabs: newTabs,
           currItem: newTabs[0],
-          activeCarrier: newTabs[0].id
+          activeCarrier: newTabs[0].id,
+          hasWidget: newTabs[0].hasWidget,
         }
       }
       return {
         ...state,
         tabs: newTabs,
         currItem: {},
-        activeCarrier: 'home'
+        activeCarrier: 'home',
+        hasWidget: false,
       }
     }
     // 不是焦点的直接删。
@@ -347,6 +355,7 @@ const reducer = handleActions({
       tabs: [],
       activeCarrier: 'home',
       currItem: {},
+      hasWidget: false,
     };
   },
   [openPin]: (state) => {
@@ -378,16 +387,16 @@ const reducer = handleActions({
       ...state,
     };
   },
-  [addFolders]: (state, { error }) => {
+  [addFolders]: (state, { error, payload }) => {
+    const { folders } = state;
     if (error) {
       return state;
     }
     return {
       ...state,
+      folders: [...folders, payload],
     };
   },
-  setFolders,
-  addFolders,
 }, defaultState);
 
 export default function (state, action) {

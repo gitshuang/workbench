@@ -5,74 +5,67 @@ import onClickOutside from 'react-onclickoutside';
 import { mapStateToProps } from '@u';
 /*  actions  */
 import rootActions from 'store/root/actions';
-import workActions from 'store/root/work/actions';
 /*  comp */
 import MoveToGroup from 'pub-comp/moveToGroup';
 import LanguagesJSON from 'yutils/languages';
-/*  style */
-
-const { requestStart, requestSuccess, requestError, closePin } = rootActions;
-const { setPinAdd, setAddGroup } = workActions;
+import { pin } from './style.css';
+const {
+  requestStart,
+  requestSuccess,
+  requestError,
+  closePin,
+  getFolders,
+  setFolders,
+  addFolders,
+} = rootActions;
 
 @connect(
   mapStateToProps(
+    'currItem',
+    'folders',
     'pinDisplay',
-    'current',
-    'pinGroup',
-    {
-      "namespace": "work"
-    }
   ),
   {
     requestStart,
     requestSuccess,
     requestError,
     closePin,
-    setPinAdd,
-    setAddGroup,
+    getFolders,
+    setFolders,
+    addFolders,
   }
 )
 @onClickOutside
 class Pin extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      menuData: []
-    }
+    this.state = {};
   }
 
   componentDidMount() {
 
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {
-      pinGroup
-    } = nextProps;
-    this.setState({
-      menuData: pinGroup,
-    });
-  }
-
   handleClickOutside(evt) {
     const { closePin, pinDisplay } = this.props;
     if (pinDisplay) {
-      pinDisplayNone();
+      closePin();
     }
   }
+
   confirmFn = (parentId) => {
     const {
-      current: {
+      currItem: {
         title,
-        serviceCode,
+        id: serviceCode,
       },
-      setPinAdd,
+      setFolders,
       requestStart,
       requestSuccess,
       requestError,
     } = this.props;
     requestStart();
-    setPinAdd(
+    setFolders(
       serviceCode,
       title,
       parentId,
@@ -86,52 +79,39 @@ class Pin extends Component {
   }
 
   cancelFn = () => {
-    const { pinDisplayNone } = this.props;
-    pinDisplayNone();
+    const { closePin } = this.props;
+    closePin();
   }
-  /*  menu  方法汇总   */
 
-  /*  下三个方法为  添加新组  method  */
-  addNewGroup = (name) => {
+  addFolders = (name) => {
+
     const {
-      setAddGroup,
-      requestStart,
-      requestSuccess,
+      addFolders,
       requestError,
     } = this.props;
-    requestStart()
-    return setAddGroup(name).then((action) => {
+    return addFolders(name).then((action) => {
       const { error, payload } = action;
       if (error) {
         requestError(payload);
-      } else {
-        this.setState({
-          menuData: [...this.state.menuData, {
-            ...payload,
-            widgetName: name,
-            children: [],
-          }],
-        });
       }
-      requestSuccess();
       return action;
     });
   }
 
   render() {
-    const { pinDisplay } = this.props;
-    const content = pinDisplay ? (
-      <div className={`um-css3-hc`} >
+    const { folders } = this.props;
+    const content = (
+      <div className={`um-css3-hc ${pin}`} >
         <MoveToGroup
-          data={this.state.menuData}
+          data={folders}
           onSave={this.confirmFn}
           onCancel={this.cancelFn}
-          onAddGroup={this.addNewGroup}
+          onAddGroup={this.addFolders}
           caller={LanguagesJSON.add}
           languagesJSON={LanguagesJSON}
         />
       </div>
-    ) : null;
+    );
 
     return (
       <TransitionGroup>

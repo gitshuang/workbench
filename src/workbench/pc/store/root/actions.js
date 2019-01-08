@@ -52,6 +52,7 @@ const {
   GET_FOLDERS,
   SET_FOLDERS,
   ADD_FOLDERS,
+  SET_HAS_WIDGET,
 } = types;
 
 export default createActions(
