@@ -21,6 +21,7 @@ const { Item, Divider } = Menu;
         'currItem',
     ),
     {
+        requestError,
         closeTabs,
         openPin,
         cancelFolders,
@@ -51,14 +52,14 @@ class Pulldown extends Component {
             return false;
         }
         if (selectItem.key === "pin") {
-            const { openPin, cancelFolders, currItem: { id, hasWidget } } = this.props;
+            const { requestError, getWorkList, openPin, cancelFolders, currItem: { id, hasWidget } } = this.props;
             if (hasWidget) {
-                cancelFolders(id).then(({ payload, error }) => {
+                cancelFolders(id).then(({ error, payload }) => {
                     if (error) {
                         requestError(payload)
                         return false;
                     }
-                    getWorkList();
+                    getWorkList(param);
                 });
             } else {
                 openPin();
