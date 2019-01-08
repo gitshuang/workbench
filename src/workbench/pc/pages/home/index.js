@@ -81,12 +81,18 @@ class Home extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateViewport, false);
-    // 默认加载第一屏
-    this.updateViewport();
     // 请求列表
     this.getWorkList();
+    // 默认加载第一屏
+    this.updateViewport();
     // 判断是否到期应用，包含多少个到期应用
     this.getApplicationList();
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.workList !== this.props.workList.length){
+      this.updateViewport();
+    }
   }
 
   componentWillUnmount() {
