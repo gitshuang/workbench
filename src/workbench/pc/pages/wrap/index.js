@@ -44,7 +44,7 @@ class Wrap extends Component {
           </div>
           <Homecontent routes={routes} />
         </div>
-        <Pin />
+        {/* <Pin /> */}
         
         {
           pinDisplay ?  <Pin /> : null
