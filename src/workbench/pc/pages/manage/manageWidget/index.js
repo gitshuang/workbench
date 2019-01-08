@@ -7,6 +7,8 @@ import { DragDropContext } from 'react-dnd';
 import languagesJSON from 'yutils/languages';
 import Sider from './sider';
 import { management } from './style.css'
+import CustomDragLayer from './dragLayer/customDragLayer.js';
+
 
 class CreateManageModule extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class CreateManageModule extends Component {
       <div className={management}>
           <Sider />
           <Content {...this.props} languagesJSON={languagesJSON}/>
+          <CustomDragLayer/>
       </div>
     );
   }

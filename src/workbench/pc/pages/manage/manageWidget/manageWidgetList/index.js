@@ -102,7 +102,6 @@ class WidgetList extends Component {
   }
       const { data,index } = this.props;
    
-
       const list = data.map((item, i) => {
         const {
           type,

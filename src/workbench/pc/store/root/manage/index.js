@@ -489,6 +489,8 @@ const reducer = handleActions({
       const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;
       const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
       const afterIndex = data.indexOf(afterItem);
+      // 给增加parentId
+      id.forEach(item=>{item.parentId = parentId});
       if (ifIntoFile == 'left') {
         manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
           $splice: [
@@ -570,8 +572,6 @@ const reducer = handleActions({
         }
       }
     }
-
-
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return {
       ...state,

@@ -15,7 +15,7 @@ const noteSource = {
                 size:1,
                 type:3,
                 widgetId : element.menuItemId,
-                widgetName : element.menuItemName
+                widgetName : element.menuItemName,
             }
             totalCards.push(checkedCard)
         });
@@ -29,8 +29,7 @@ const noteSource = {
         if(!props.checked){
              totalCards = totalCards.concat(draggedCardList)
         }
-       
-        return {id:totalCards,type:3,parentId:2}
+        return {id:totalCards,type:"cardlist",parentId:2,cardList:totalCards}  //3代表widget，parentId=2暂时代表侧边栏
     }
 };
 

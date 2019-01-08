@@ -24,12 +24,12 @@
     outline: none;
     border: none;
     border-bottom: 1px solid black;
-    width: 83%;
+    width: 90%;
 }
 .menuListStyle{
     position: absolute;
     width: 200px;
-    background: red;
+    background: #d0cbcb;
 }
 .card{
     border:1px dashed #fff3dc;
@@ -47,12 +47,7 @@
     margin-bottom: 10px;
 }
 
-.result_app_list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    
-}
+
 .app_col {
     width: 50%;
     
@@ -118,3 +113,26 @@
     font-size: 13px;
     line-height: 14px;
 }
+.selectServiceArea{
+    display: flex;
+    justify-content:space-between
+}
+.serviceArea{
+    margin-top: 20px;
+}
+.serviceArea :global(.serviceTitle){
+    margin: 10px 0
+}
+.serviceArea :global(.result_app_list_4){
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.serviceArea :global(.result_app_list_3){
+    width: 100%;
+   
+}
+ :global(.serviceArea>.result_app_list){
+     border-bottom:1px solid #333
+ }
+
