@@ -5,10 +5,14 @@ import onClickOutside from 'react-onclickoutside';
 import { mapStateToProps } from '@u';
 /*  actions  */
 import rootActions from 'store/root/actions';
+import homeActions from 'store/root/home/actions';
 /*  comp */
 import MoveToGroup from 'pub-comp/moveToGroup';
 import LanguagesJSON from 'yutils/languages';
 import { pin } from './style.css';
+
+
+const { getWorkList } = homeActions;
 const {
   requestStart,
   requestSuccess,
@@ -33,6 +37,7 @@ const {
     getFolders,
     setFolders,
     addFolders,
+    getWorkList,
   }
 )
 @onClickOutside
@@ -63,6 +68,7 @@ class Pin extends Component {
       requestStart,
       requestSuccess,
       requestError,
+      getWorkList,
     } = this.props;
     requestStart();
     setFolders(
@@ -74,6 +80,7 @@ class Pin extends Component {
         requestError(payload);
       }
       this.cancelFn();
+      getWorkList();
       requestSuccess();
     });
   }

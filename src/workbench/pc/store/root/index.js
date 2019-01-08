@@ -75,6 +75,7 @@ const {
   openPin,
   closePin,
   getFolders,
+  cancelFolders,
   setFolders,
   addFolders,
 } = actions;
@@ -85,7 +86,6 @@ const defaultState = {
   currItem: {}, // 当前页签的内容
   activeCarrier: 'home',  // 当前页签id
   pinDisplay: false,  // 是否显示 pin弹窗
-  hasWidget: false,   // 是否已经pin上
   folders: [],        // 分组列表
   showModal: false,   // 统一modal的显隐
   dialogData: {},     // modal 内容
@@ -285,7 +285,6 @@ const reducer = handleActions({
     return {
       ...state,
       activeCarrier: payload.id,
-      hasWidget: payload.hasWidget,
       currItem: payload,
     };
   },
@@ -318,7 +317,6 @@ const reducer = handleActions({
     //     return {
     //       ...state,
     //       activeCarrier: payload.id,
-    //       hasWidget: payload.hasWidget,
     //       currItem: payload
     //     }
     //   } else {
@@ -328,7 +326,6 @@ const reducer = handleActions({
     //       ...state,
     //       tabs: [...tabs],
     //       activeCarrier: payload.id,
-    //       hasWidget: payload.hasWidget,
     //       currItem: payload
     //     }
     //   }
@@ -339,7 +336,6 @@ const reducer = handleActions({
       // tabs: [payload, ...tabs],
       tabs: [payload, ...newTabs],
       activeCarrier: payload.id,
-      hasWidget: payload.hasWidget,
       currItem: payload,
     };
   },
@@ -357,7 +353,6 @@ const reducer = handleActions({
           tabs: newTabs,
           currItem: newTabs[0],
           activeCarrier: newTabs[0].id,
-          hasWidget: newTabs[0].hasWidget,
         }
       }
       return {
@@ -365,7 +360,6 @@ const reducer = handleActions({
         tabs: newTabs,
         currItem: {},
         activeCarrier: 'home',
-        hasWidget: false,
       }
     }
     // 不是焦点的直接删。
@@ -380,7 +374,6 @@ const reducer = handleActions({
       tabs: [],
       activeCarrier: 'home',
       currItem: {},
-      hasWidget: false,
     };
   },
   [openPin]: (state) => {
@@ -404,12 +397,36 @@ const reducer = handleActions({
       folders,
     };
   },
+  [cancelFolders]: (state, { error }) => {
+    if (error) {
+      return state;
+    }
+    const { currItem, tabs, activeCarrier } = state;
+    currItem.hasWidget = false;
+    const currIndex = tabs.findIndex(item => {
+      return activeCarrier === item.id;
+    });
+    tabs[currIndex].hasWidget = false;
+    return {
+      ...state,
+      currItem: { ...currItem },
+      tabs: [...tabs],
+    };
+  },
   [setFolders]: (state, { error }) => {
     if (error) {
       return state;
     }
+    const { currItem, tabs, activeCarrier } = state;
+    currItem.hasWidget = true;
+    const currIndex = tabs.findIndex(item => {
+      return activeCarrier === item.id;
+    });
+    tabs[currIndex].hasWidget = true;
     return {
       ...state,
+      currItem: { ...currItem },
+      tabs: [...tabs],
     };
   },
   [addFolders]: (state, { error, payload }) => {

@@ -13,6 +13,7 @@ import {
   getAllEnableNot,
   getCurrentNot,
   getFolders,
+  cancelFolders,
   setFolders,
   addFolders,
 } from './api';
@@ -51,6 +52,7 @@ const {
   OPEN_PIN,
   CLOSE_PIN,
   GET_FOLDERS,
+  CANCEL_FOLDERS,
   SET_FOLDERS,
   ADD_FOLDERS,
 } = types;
@@ -69,6 +71,7 @@ export default createActions(
     [GET_ALL_ENABLE_NOT]: getAllEnableNot,
     [GET_CURRENT_NOT]: getCurrentNot,
     [GET_FOLDERS]: getFolders,
+    [CANCEL_FOLDERS]:cancelFolders,
     [SET_FOLDERS]: setFolders,
     [ADD_FOLDERS]: addFolders,
   },

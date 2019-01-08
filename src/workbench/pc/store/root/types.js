@@ -34,6 +34,7 @@ export default createTypes(
   'OPEN_PIN',
   'CLOSE_PIN',
   'GET_FOLDERS',
+  'CANCEL_FOLDERS',
   'SET_FOLDERS',
   'ADD_FOLDERS',
 );
