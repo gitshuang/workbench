@@ -108,11 +108,11 @@ const handlers = {
           window.open(url);
         } else {
           const locations = appendSearchParam(url, {
-            ...getOpenServiceData(serviceCode),
-            serviceCode,
+            ...getOpenServiceData(subCode),
+            subCode,
           });
           store.dispatch(addTabs({
-            id: serviceCode,
+            id: subCode,
             type: 'service',
             url: locations,
             title: serviceName,
