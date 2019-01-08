@@ -302,6 +302,12 @@ const reducer = handleActions({
         },
       };
     }
+
+    // TODO生成了新数组 这样感觉造成的重绘现象比较严重， ？
+    const newTabs = tabs.filter(item => {
+      return item.id !== payload.id;
+    });
+
     // const cIndex = tabs.findIndex((item) => {
     //   return item.id === payload.id;
     // });
@@ -327,10 +333,7 @@ const reducer = handleActions({
     //     }
     //   }
     // }
-    // TODO生成了新数组 这样感觉造成的重绘现象比较严重， 到底是选splice 不更改指针方案还是此方案 ？
-    const newTabs = tabs.filter(item => {
-      return item.id !== payload.id;
-    });
+
     return {
       ...state,
       // tabs: [payload, ...tabs],
