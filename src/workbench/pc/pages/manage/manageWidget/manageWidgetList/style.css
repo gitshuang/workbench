@@ -293,3 +293,8 @@
 :global(.widgetHover){
   background-color: indianred;
 }
+:global(.hide){
+  /* display: none; */
+  opacity: 0;
+}
+  

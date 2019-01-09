@@ -134,25 +134,49 @@ export default class MySider extends Component {
         return dom
     }
     onChangeChecked = (checked, parentId, menuItemId) => {
-        const { cardsList, checkedCardList } = this.state;
-        cardsList.forEach((item) => {
-            if (item.menuItemId == menuItemId) {
-                item.checked = checked;
-                checkedCardList.push(item)
-            }
-            if (item.children.length) {
-                item.children.forEach((a) => {
-                    if (a.menuItemId == menuItemId) {
-                        a.checked = checked;
-                        checkedCardList.push(a)
-
-                    }
-                })
-            }
-        })
+        const { cardsList, checkedCardList } = this.state; 
+        let newCheckedCardList = checkedCardList.slice(0);
+        if(checked){//如果是选中，改变cardList状态，push checkedCardList
+            cardsList.forEach((item) => {
+                if(item.menuItemId == menuItemId&&!item.children.length){
+                    item.checked = checked;
+                    newCheckedCardList.push(item)
+                }
+                
+                if (item.children.length) {
+                    item.children.forEach((a) => {
+                        if (a.menuItemId == menuItemId) {
+                            a.checked = checked;
+                            newCheckedCardList.push(a)
+                        }
+                    })
+                }
+            })
+        }
+        if(!checked){//如果是解除选中状态，改变cardList状态，从 checkedCardList中删除
+            cardsList.forEach((item) => {
+                if(item.menuItemId == menuItemId&&!item.children.length){
+                    item.checked = checked;
+                    newCheckedCardList = newCheckedCardList.filter(item=>{
+                        return item.menuItemId !== menuItemId
+                    })
+                }
+                
+                if (item.children.length) {
+                    item.children.forEach((a) => {
+                        if (a.menuItemId == menuItemId) {
+                            a.checked = checked;
+                            newCheckedCardList = newCheckedCardList.filter(item=>{
+                                return item.menuItemId !== menuItemId
+                            })
+                        }
+                    })
+                }
+            })
+        }
         this.setState({
             cardsList: cardsList,
-            checkedCardList: checkedCardList
+            checkedCardList: newCheckedCardList
         })
     }
     setSearchValue = (e) => {

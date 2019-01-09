@@ -57,14 +57,13 @@ class WidgetList extends Component {
         showModal:false
       })
   }
-
+   
   render() {
     var {
       manageList,
       selectList,
       selectGroup,
       title,
-      drag,
       selectListActions,selectGroupActions,
       delectService,
       applicationsMap,
@@ -84,7 +83,6 @@ class WidgetList extends Component {
       selectGroup,
       currGroupIndex,
       title,
-      drag,
       selectListActions,selectGroupActions,
       delectService,
       updateShadowCard
@@ -111,12 +109,12 @@ class WidgetList extends Component {
             return (
               <WidgetItem
                 ref={id}
-                drag={drag}
                 key={`widget-${id}-${i}`}
                 data={item}
                 id={id}
+                drag={item.drag}
                 parentId={parentId}
-                index={id}
+                index={i}
                 propsIndex={index}
                 type={type}
                 savePosition = {this.savePosition}

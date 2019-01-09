@@ -7,7 +7,7 @@ import { mapStateToProps } from '@u';
 import {app_col,list_item_content,title,isAddColor,title_name} from './style.css'
 
 const noteSource = {
-    beginDrag(props) {
+    beginDrag(props,monitor,component) {
         // debugger
         let  totalCards = []
          props.checkedCardList.forEach(element => {
@@ -27,7 +27,8 @@ const noteSource = {
         }]
 
         if(!props.checked){
-             totalCards = totalCards.concat(draggedCardList)
+             totalCards = totalCards.concat(draggedCardList);
+             component.clickSiderCard(true,props.parentId,props.menuItemId);
         }
         return {id:totalCards,type:"cardlist",parentId:2,cardList:totalCards}  //3代表widget，parentId=2暂时代表侧边栏
     }

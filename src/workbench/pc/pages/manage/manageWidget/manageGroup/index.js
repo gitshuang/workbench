@@ -32,7 +32,7 @@ import {
 
 const itemSource = {
   beginDrag(props) {
-    return { id: props.id,type:props.type,parentId:props.parentId,folderType:props.folderType };
+    return { id: props.id,type:props.type,parentId:props.parentId };
   }
 };
 
@@ -41,7 +41,6 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
     const preParentId = monitor.getItem().parentId;
     const draggedType = monitor.getItem().type;
-    const folderType = monitor.getItem().folderType;
     let afterParentId = props.data.parentId;
     if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
@@ -49,7 +48,7 @@ const itemTarget = {
       !props.data.parentId && (afterParentId = props.data.widgetId);
       //因为冒泡 所以已经有的话 不需要执行move
       let dataItem = findItemById(props.data.children,draggedId);
-      if(folderType==="folder" || typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)){
+      if( typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)){
         //folderType==="folder" 从文件夹把元素往分组里拖拽
         props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }
