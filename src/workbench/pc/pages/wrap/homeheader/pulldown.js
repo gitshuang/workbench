@@ -10,7 +10,7 @@ import { pulldown, } from './style.css';
 
 import rootActions from 'store/root/actions';
 import homeActions from 'store/root/home/actions';
-const { closeTabs, openPin, cancelFolders, requestError } = rootActions;
+const { closeTabs, openPin, cancelFolders, requestError, showTabs } = rootActions;
 const { getWorkList } = homeActions;
 
 const { Item, Divider } = Menu;
@@ -26,6 +26,7 @@ const { Item, Divider } = Menu;
         openPin,
         cancelFolders,
         getWorkList,
+        showTabs
     },
 )
 class Pulldown extends Component {
@@ -67,7 +68,8 @@ class Pulldown extends Component {
             return false;
         }
         const { item: { props: { attribute } } } = selectItem;
-        openWin(attribute);
+        // openWin(attribute);
+        this.props.showTabs(attribute);
     }
 
     render() {
