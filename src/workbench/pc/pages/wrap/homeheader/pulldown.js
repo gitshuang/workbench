@@ -59,7 +59,7 @@ class Pulldown extends Component {
                         requestError(payload)
                         return false;
                     }
-                    getWorkList(param);
+                    getWorkList();
                 });
             } else {
                 openPin();
