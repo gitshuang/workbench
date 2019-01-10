@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Collapse from 'bee-collapse';
+import Icon from 'pub-comp/icon';
 import { openService } from 'public/regMessageTypeHandler';
 // 加载components
 import WidgetMaker from '../widget';
@@ -69,8 +70,9 @@ class HomeWidgeList extends Component {
       <div className={item} style={style} >
         <div
           className={WidgetTitle}
-          onClick={() => { this.collapse() }}>
-          >
+          onClick={() => { this.collapse() }}
+        >
+          <Icon type = {this.state.open ? "pull-down" : "upward"} />
           <div>{name}</div>
         </div>
 
