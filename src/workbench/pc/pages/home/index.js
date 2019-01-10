@@ -246,7 +246,6 @@ class Home extends Component {
 
   updataView = (h) => {
     const { top, height } = this.state.viewport;
-    debugger
     this.setState({
       viewport: {
         height: height,
