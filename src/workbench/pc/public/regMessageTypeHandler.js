@@ -47,7 +47,7 @@ const handlers = {
     store.dispatch(addTabs(param));
   },
   closeWin(param) {
-    let data = store.getState().currItem;
+    let data = store.getState().wrap.currItem;
     if (typeof param === "object" && param.id) {
       data = param;
     }
