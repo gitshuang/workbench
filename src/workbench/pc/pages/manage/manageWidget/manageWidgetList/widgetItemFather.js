@@ -9,7 +9,19 @@ export default class WidgetItemFather extends Component {
 		super(props);
 		
 	}
+	popSave = (data) => {
+		const { delectService } = this.props;
+		delectService(data.widgetId);
+		this.setState({
+			showModal: false
+		})
+	}
 
+	popClose = () => {
+		this.setState({
+			showModal: false
+		})
+	}
 	isContained = (a, b) => {
 		if (!(a instanceof Array) || !(b instanceof Array)) return false;
 		if (a.length < b.length) return false;

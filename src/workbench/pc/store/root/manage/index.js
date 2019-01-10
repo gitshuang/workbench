@@ -58,9 +58,13 @@ const defaultState = {
 
   dragState: true, // 是否可拖拽
 
-  shadowCard: false, //默认没有
+  //shadowCard: false, //默认没有
   isSiderDisplay:true,  //左侧默认展开
   allMenuList: [],  // 左侧通过menu查找时的menuList
+  shadowCard: {
+    size:176
+  },
+
 };
 
 const findTreeById = (data, curId) => {
@@ -490,32 +494,26 @@ const reducer = handleActions({
   },
   [moveService]: (state, {
     payload: {
-      id, preParentId, preType, afterId, parentId, afterType, ifIntoFile
+      id, preParentId, preType, afterId, parentId, afterType, monitor
     }
   }) => {
     const manageAllList = state.manageList;
     let manageList = manageAllList;
-
      
     if (preParentId == 2) {//2代表sider
-      const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;
-      const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
+      const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
+      const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
       const afterIndex = data.indexOf(afterItem);
       // 给增加parentId
       id.forEach(item=>{item.parentId = parentId});
-      if (ifIntoFile == 'left') {
+      monitor.getItem().parentId = parentId
+      
         manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
           $splice: [
-            [afterIndex, 0, ...id],
+            [afterIndex, 0, state,shadowCard],//
           ],
         });
-      } else {
-        manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [afterIndex + 1, 0, ...id],
-          ],
-        });
-      }
+    
       updateAllMenuList(state.allMenuList,manageAllList)
 
     } else {
@@ -529,14 +527,19 @@ const reducer = handleActions({
       if (preParentType === 1 && afterParentType === 1 && preParentId !== parentId && preType === 3 && afterType === 3) {
         // 跨分组拖拽
         sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+        
+        const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 当前分组数据
+
         if (preParentId !== parentId) {
           itemIn.parentId = parentId;
+          monitor.getItem().parentId = parentId
         }
-        if (ifIntoFile == 'left') {
-          targetData.children.splice(targetData.children.indexOf(itemAfter), 0, itemIn); // 添加
-        } else {
-          targetData.children.splice(targetData.children.indexOf(itemAfter) + 1, 0, itemIn); // 添加
-        }
+        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+          $splice: [
+            [targetData.children.indexOf(itemAfter), 0, itemIn],
+          ],
+        });
+    
       } else if (preParentId !== parentId && preType === 3 && afterType === 1) {
         // 跨分组拖拽 放到组内 而不是元素上
         sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
@@ -551,25 +554,7 @@ const reducer = handleActions({
         const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
         const itemIndex = data.indexOf(item);
         const afterIndex = data.indexOf(afterItem);
-        console.log("ifIntoFile ==========", ifIntoFile);
-        if (ifIntoFile == 'left') {
-          //debugger
-          if (itemIndex < afterIndex) {
-            manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-              $splice: [
-                [itemIndex, 1],
-                [afterIndex - 1, 0, item],
-              ],
-            });
-          } else {
-            manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-              $splice: [
-                [itemIndex, 1],
-                [afterIndex, 0, item],
-              ],
-            });
-          }
-        } else if (itemIndex < afterIndex) {
+        if (itemIndex < afterIndex) {
           manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
             $splice: [
               [itemIndex, 1],
@@ -580,7 +565,7 @@ const reducer = handleActions({
           manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
             $splice: [
               [itemIndex, 1],
-              [afterIndex + 1, 0, item],
+              [afterIndex, 0, item],
             ],
           });
         }
