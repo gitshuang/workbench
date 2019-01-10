@@ -14,6 +14,7 @@ export default createTypes(
   'CANCEL_FOLDERS',
   'SET_FOLDERS',
   'ADD_FOLDERS',
+  'GET_ALL_MENU_LIST',
   'GET_HISTORY_LIST',
   'DEL_HISTORY',
   'DEL_ALL_HISTORY',
