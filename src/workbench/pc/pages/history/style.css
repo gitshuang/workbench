@@ -6,6 +6,7 @@
     background: #fff;
   width: 300px;
   height: 400px;
+  overflow: auto;
 
 }
 .historyPartInner :global(.inner-header) {
@@ -41,7 +42,7 @@
   }
 .historyPartInner :global(.inner-list .history-item:hover) {
     background: #f3f3f3;
-    color: #555;
+    color: #e14c46;
 }
 /* 全部历史记录*/
 .historyAll{
@@ -62,7 +63,7 @@
     line-height: 36px;
     border-bottom: 1px solid #dcdcdc;
     width: 100%;
-    padding: 0 20px;
+    padding: 20px 20px 0;
 }
 .historyADay :global(.day-list .item){
     padding: 10px 0;

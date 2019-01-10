@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import onClickOutside from 'react-onclickoutside';
 import { openWin } from 'public/regMessageTypeHandler';
-import { openService } from 'public/regMessageTypeHandler';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 import rootActions from 'store/root/actions';
 import wrapActions from 'store/root/wrap/actions';
@@ -65,16 +65,20 @@ class HistoryInner extends Component {
         requestError(payload);
         return;
       }
-      console.log('this.props.historyList22332323', this.props.historyList, payload)
       requestSuccess();
     });
   }
   handleClickOutside() {
     this.props.openHistory()
   }
-  openHistoryItem = (businessCode) => {
-
-    openService(businessCode);
+  openHistoryItem = (businessCode,extendParams) => {
+    dispatchMessageTypeHandler({
+      type: "openService",
+      detail: {
+        serviceCode: businessCode,
+        data: extendParams
+      }
+    });
     this.props.openHistory();
   }
   openAllHistory = () => {
@@ -91,12 +95,12 @@ class HistoryInner extends Component {
       <div className={historyPartInner}>
         <div className="inner-header">
           <label className="title">历史记录</label>
-          <label className="all" onClick={this.openAllHistory}> 全部</label>
+          {historyList.length > 0  && <label className="all" onClick={this.openAllHistory}> 全部</label>}
         </div>
         <ul className="inner-list">
           {
             historyList.map(item => {
-              return <li className="history-item" onClick={e => this.openHistoryItem(item.businessCode)}>{item.title}</li>
+              return <li className="history-item" onClick={e => this.openHistoryItem(item.businessCode,item.extendParams)}>{item.title}</li>
             })
           }
         </ul>

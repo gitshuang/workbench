@@ -16,6 +16,8 @@ const {
   setFolders,
   addFolders,
   getHistoryList,
+  delHistory,
+  delAllHistory,
 } = actions;
 
 const defaultState = {
@@ -221,6 +223,24 @@ const reducer = handleActions({
     return {
       ...state,
       historyList:payload,
+    };
+  },
+  [delHistory]:(state, { error, payload }) => {
+    if (error) {
+      return state;
+    }
+    // 这边需要操作，将this.props.historyList进行操作
+    return {
+      ...state,
+    };
+  },
+  [delAllHistory]: (state, { error, payload }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      historyList:[],
     };
   },
 }, defaultState);

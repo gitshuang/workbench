@@ -7,3 +7,5 @@ export const cancelFolders = serviceCode => post('/widget/deleteByServiceCode', 
 export const setFolders = (serviceCode, widgetName, parentId) => post('/widget/create', { parentId, serviceCode, type: 3, widgetName });
 export const addFolders = widgetName => post('/widget/create', { type: 1, widgetName });
 export const getHistoryList = () => get('/history/list');
+export const delHistory = latestAccessIds => post('/history/del', { latestAccessIds });
+export const delAllHistory = () => post('/history/delAll');
