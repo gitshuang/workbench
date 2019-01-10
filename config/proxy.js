@@ -56,6 +56,8 @@ var api = [
   '/manager/application/getApplicationTips',
 
   '/menubar/getAll',
+
+  '/history/list',
 ]
 
 var rapApi = [];
