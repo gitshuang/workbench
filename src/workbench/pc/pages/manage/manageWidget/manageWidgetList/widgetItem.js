@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import WidgetItemFather from './widgetItemFather';
 import { DragSource, DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 import Icon from 'pub-comp/icon';
@@ -49,98 +50,64 @@ const itemSource = {
 	}
 };
 const itemTarget = {
-	hover(props, monitor, component) {
-		if (!component) {
-			return null
-		}
-		const dragIndex = monitor.getItem().index
-		const hoverIndex = props.index
-
-		// Don't replace items with themselves
-		if (dragIndex === hoverIndex) {
-			return
-		}
-
-		// Determine rectangle on screen
-		const hoverBoundingRect = findDOMNode(
-			component,
-		).getBoundingClientRect()
-
-		// Get vertical middle
-		const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-		// Determine mouse position
-		const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2
-
-		const clientOffset = monitor.getClientOffset()
-
-		// Get pixels to the top
-		const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-		const hoverClientX = Math.abs(hoverBoundingRect.left - clientOffset.x)
-        
-		// Only perform the move when the mouse has crossed half of the items height
-		// When dragging downwards, only move when the cursor is below 50%
-		// When dragging upwards, only move when the cursor is above 50%
-		console.log("dragIndex",dragIndex)
-		console.log("hoverIndex=======",hoverIndex)
-        console.log("hoverClientX===============",hoverClientX)
-		console.log("hoverMiddleX===============================",hoverMiddleX)
 	
-        console.log("hoverClientY===============",hoverClientY)
-        console.log("hoverMiddleY===============================",hoverMiddleY)
-		// Dragging downwards
-		if ((dragIndex < hoverIndex && hoverClientY < hoverMiddleY)&&(dragIndex < hoverIndex && hoverClientX < hoverMiddleX)) {
-			return
+	hover(props, monitor,component){
+		var { size } = props.data;
+		var dirDistance = widgetStyle[size-1].width;
+		  const draggedId = monitor.getItem().id;
+		if (draggedId !== props.id){ //这是什么
+		  component.setState({
+			drag:'fadeInLeft'
+		  });
 		}
-		
-		// Dragging upwards
-		if ((dragIndex > hoverIndex && hoverClientY > hoverMiddleY)&&(dragIndex > hoverIndex && hoverClientX > hoverMiddleX)) {
-			return
+		const clientOffset = monitor.getClientOffset();
+	
+		var componentRect = 0;
+		if(component){
+		  componentRect = findDOMNode(component).getBoundingClientRect();
 		}
-		// Dragging let
-		// if () {
-		// 	return
-		// }
-
-		// Dragging right
-		// if () {
-		// 	return
-		// }
-
-		// Time to actually perform the action
-		//props.moveCard(dragIndex, hoverIndex)
-
-		// Note: we're mutating the monitor item here!
-		// Generally it's better to avoid mutations,
-		// but it's good here for the sake of performance
-		// to avoid expensive index searches.
-		let draggedId = monitor.getItem().id;
-		const previousParentId = monitor.getItem().parentId;
-		const preType = monitor.getItem().type;
-		//检查是否有重复
-		if (preType == "cardlist") {
-			draggedId = draggedId.filter(item => {
-				return !hasCardContainInGroups(props.manageList, item.widgetId)
-			})
-			if (!draggedId.length) return
+		var xGap = componentRect.left-clientOffset.x;
+		var moveLine = 'none'
+		if(Math.abs(xGap)<dirDistance){
+		  if(Math.abs(xGap)<(dirDistance/3)){
+			moveLine = 'left'
+		  }else if(Math.abs(xGap)<(dirDistance/3*2)){
+			moveLine = 'center'
+		  }else{
+			moveLine = 'right'
+		  }
 		}
-		props.moveItemDrag(draggedId, previousParentId, preType, props.id, props.data.parentId, props.data.type);
-		monitor.getItem().index = hoverIndex;
+		if(new Date().getTime() % 10 == 0){   //这是什么
+		  props.savePosition(props.id,moveLine);
+		}
+	  },
+	
+	drop(props, monitor, component) {
+			const ifIntoFile = props.moveLine;
+			let draggedId = monitor.getItem().id;
+			const previousParentId = monitor.getItem().parentId;
+			const preType = monitor.getItem().type;
+	
+			//检查是否有重复
+			if (preType == "cardlist") {
+				draggedId = draggedId.filter(item => {
+					return !hasCardContainInGroups(props.manageList, item.widgetId)
+				})
+				if (!draggedId.length) return
+			}
+	
+			props.moveItemDrag(draggedId, previousParentId, preType, props.id, props.data.parentId, props.data.type, ifIntoFile);
+		}
+}
 
-	},
-	//hover 悬浮调用 drop落在目标上时调用
-
-
-};
-
-function collectSource(connect, monitor) {
+@DragSource("item", itemSource, (connect, monitor) =>{
 	return {
 		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),
 		connectDragPreview: connect.dragPreview(),
 	};
-}
-
-function collectTaget(connect, monitor) {
+})
+@DropTarget("item", itemTarget, (connect, monitor)=> {
 	return {
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),
@@ -148,9 +115,9 @@ function collectTaget(connect, monitor) {
 		offSet: monitor.getDifferenceFromInitialOffset(),
 		getItemType: monitor.getItem(),
 	}
-}
+})
 
-class WidgetItem extends Component {
+export default class WidgetItem extends WidgetItemFather {
 	static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
@@ -158,8 +125,6 @@ class WidgetItem extends Component {
 	}
 	constructor(props) {
 		super(props);
-		this.popSave = this.popSave.bind(this);
-		this.popClose = this.popClose.bind(this);
 		this.state = {
 			showModal: false,
 			title: '',
@@ -217,45 +182,6 @@ class WidgetItem extends Component {
 		this.setState({
 			showModal: false
 		})
-	}
-
-	isContained = (a, b) => {
-		if (!(a instanceof Array) || !(b instanceof Array)) return false;
-		if (a.length < b.length) return false;
-		var aStr = a.toString();
-		for (var i = 0, len = b.length; i < len; i++) {
-			if (aStr.indexOf(b[i]) == -1) return false;
-		}
-		return true;
-	}
-	onHandChange = (flag) => {
-		const { selectList, selectGroup, selectListActions, selectGroupActions, propsIndex, manageList } = this.props;
-		const {
-			data: {
-				widgetId
-			}
-		} = this.props;
-		let selectList2;
-		if (!flag) {
-			selectList2 = selectList.filter((item, i) => {
-				return item !== widgetId;
-			});
-			const selectGroup2 = selectGroup.filter((item, i) => {
-				return propsIndex !== item;
-			});
-			selectGroupActions(selectGroup2);
-		} else {
-			selectList2 = [widgetId, ...selectList];
-			// 判断当前分组下的子节点是否都在selectList中
-			let newArr = manageList[propsIndex].children.map((item, index) => {
-				return item.widgetId;
-			})
-			if (this.isContained(selectList2, newArr)) {
-				selectGroup.push(propsIndex);
-				selectGroupActions(selectGroup);
-			}
-		}
-		selectListActions(selectList2);
 	}
 
 	render() {
@@ -336,4 +262,3 @@ class WidgetItem extends Component {
 		));
 	}
 }
-export default DragSource("item", itemSource, collectSource)(DropTarget("item", itemTarget, collectTaget)(WidgetItem));

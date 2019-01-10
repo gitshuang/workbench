@@ -36,3 +36,17 @@ export const hasCardContainInGroups = (groups, cardID) => {
   });
   return flag;
 };
+
+Array.prototype.distinct = function (){
+  var arr = this,
+    i,obj = {},
+    result = [],
+    len = arr.length;
+  for(i = 0; i< arr.length; i++){
+    if(!obj[arr[i]]){
+      obj[arr[i]] = 1;
+      result.push(arr[i]);
+    }
+  }
+  return result;
+};

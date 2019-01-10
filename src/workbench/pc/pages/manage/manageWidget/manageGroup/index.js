@@ -10,7 +10,11 @@ import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
 import Message from 'bee/message';
 import WidgetList from '../manageWidgetList';
-import { findItemById } from '../../utils'
+import { findItemById } from '../../utils';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+
+
 import {
   widgetTitle,
   addGroupBtn,
@@ -56,36 +60,24 @@ const itemTarget = {
   }
 };
 
-function collectSource(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  };
-}
 
 
-function collectTaget(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver:monitor.isOver(),
-    getItemType:monitor.getItem(),
+
+
+
+
+
+@connect(
+  mapStateToProps(
+      'manageList',
+      {
+          namespace: 'manage',
+      },
+  ),
+  {
+
   }
-}
-
-Array.prototype.distinct = function (){
-  var arr = this,
-    i,obj = {},
-    result = [],
-    len = arr.length;
-  for(i = 0; i< arr.length; i++){
-    if(!obj[arr[i]]){
-      obj[arr[i]] = 1;
-      result.push(arr[i]);
-    }
-  }
-  return result;
-};
-
+)
 class ManageGroup extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
@@ -358,20 +350,9 @@ class ManageGroup extends Component {
 
     var {
       manageList,
-      drag,
       dragState,
-      selectList,
       selectGroup,
       currEditonlyId,
-      currGroupIndex,
-      title,
-      moveService,
-      setCurrGroupIndex,
-      editTitle,
-      selectListActions,
-      selectGroupActions,
-      setEditonlyId,
-      setDragInputState,
       applicationsMap,
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
@@ -379,29 +360,9 @@ class ManageGroup extends Component {
       addDesk,
       requestSuccess,
       requestError,
-      delectService,
       languagesJSON,
-      updateShadowCard
     } = this.props;
-    var widgetListProps = {
-      manageList,
-      drag,
-      dragState,
-      selectList,
-      selectGroup,
-      currEditonlyId,
-      currGroupIndex,
-      title,
-      moveService,
-      setCurrGroupIndex,
-      editTitle,
-      selectListActions,
-      selectGroupActions,
-      setEditonlyId,
-      setDragInputState,
-      delectService,
-      updateShadowCard
-    }
+    
     var widgetSelectListProps={
       applicationsMap,
       manageList,
@@ -506,7 +467,7 @@ class ManageGroup extends Component {
         { groupTitle }
         <div>
           <WidgetList index={index} data={children} parentId={this.props.data.widgetId}
-                      {...widgetListProps} { ...widgetSelectListProps } languagesJSON={languagesJSON}/>
+                       { ...widgetSelectListProps } languagesJSON={languagesJSON}/>
         </div>
       </section>
 
@@ -526,4 +487,15 @@ class ManageGroup extends Component {
   }
 }
 
-export default DragSource("item", itemSource, collectSource)(DropTarget("item",itemTarget,collectTaget)(ManageGroup));
+export default DragSource("item", itemSource, (connect, monitor) =>{
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+})(DropTarget("item",itemTarget,(connect, monitor)=> {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver:monitor.isOver(),
+    getItemType:monitor.getItem(),
+  }
+})(ManageGroup));

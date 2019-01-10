@@ -4,8 +4,46 @@ import { widgetList, clearfix,addModule,pop_dialog_widge_list} from './style.css
 import WidgetItem from './widgetItem';
 import PopDialog from 'pub-comp/pop';
 import SelectWidgetList from '../manageSelectWidgetList';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+import manageActions from 'store/root/manage/actions';
+const { moveService,
+  setCurrGroupIndex,
+  editTitle,
+  selectListActions,
+  selectGroupActions,
+  setEditonlyId,
+  setDragInputState,
+  delectService,
+  updateShadowCard } = manageActions;
 
 
+@connect(
+  mapStateToProps(
+    "manageList",
+    "drag",
+    "dragState",
+    "selectList",
+    "selectGroup",
+    "currEditonlyId",
+    "currGroupIndex",
+    "title",
+      {
+          namespace: 'manage',
+      },
+  ),
+  {
+    moveService,
+    setCurrGroupIndex,
+    editTitle,
+    selectListActions,
+    selectGroupActions,
+    setEditonlyId,
+    setDragInputState,
+    delectService,
+    updateShadowCard
+  }
+)
 class WidgetList extends Component {
 
     //TUDO 数据中的 size ： sm 、lg、xg （小[标准]、中、大）
@@ -114,7 +152,7 @@ class WidgetList extends Component {
                 id={id}
                 drag={item.drag}
                 parentId={parentId}
-                index={i}
+                index={id}
                 propsIndex={index}
                 type={type}
                 savePosition = {this.savePosition}
@@ -132,10 +170,9 @@ class WidgetList extends Component {
 
     return (<ul className={`${widgetList} ${clearfix}`} >
         {list}
-        <div className={addModule} onClick={this.openSelectWidget} >
-          {/*<Icon title="添加快捷方式至首页" type="add"  />*/}
+        {/* <div className={addModule} onClick={this.openSelectWidget} >
           <Icon title={languagesJSON.addQuick_to_home} type="add"  />
-        </div>
+        </div> */}
 
         <PopDialog className={pop_dialog_widge_list} type="info" title={languagesJSON.addQuick_to_home} close={this.popClose} backdrop={false} show = { this.state.showModal } data={_da} >
             <SelectWidgetList close={this.popClose} parentId={this.props.parentId}
