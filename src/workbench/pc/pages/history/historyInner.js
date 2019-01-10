@@ -28,8 +28,6 @@ import { historyPartInner } from './style.css';
   },
 )
 
-
-
 @onClickOutside
 class HistoryInner extends Component {
   static propTypes = {

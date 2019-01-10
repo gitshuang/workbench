@@ -15,6 +15,7 @@ const {
   cancelFolders,
   setFolders,
   addFolders,
+  getAllMenuList,
   getHistoryList,
   delHistory,
   delAllHistory,
@@ -31,6 +32,7 @@ const defaultState = {
   activeCarrier: 'home',  // 当前页签id
   pinDisplay: false,  // 是否显示 pin弹窗
   folders: [],        // 分组列表
+  allMenuList: [],  // 菜单项
   historyList:[],  // 历史记录
 };
 
@@ -214,6 +216,15 @@ const reducer = handleActions({
     return {
       ...state,
       folders: [...folders, payload],
+    };
+  },
+  [getAllMenuList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      allMenuList: payload,
     };
   },
   [getHistoryList]: (state, { payload, error }) => {

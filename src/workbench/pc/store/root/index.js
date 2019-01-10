@@ -16,7 +16,6 @@ import manage from './manage';
 import team from './team';
 import teamconfig from './teamconfig';
 import homepage from './homepage';
-import menubar from './menubar';
 
 const notification = Notification.newInstance({
   position: 'bottomRight',
@@ -247,7 +246,6 @@ export default function (state, action) {
     team: team(state ? state.team : undefined, action),
     teamconfig: teamconfig(state ? state.teamconfig : undefined, action),
     homepage: homepage(state ? state.homepage : undefined, action),
-    menubar: menubar(state ? state.menubar : undefined, action),
   };
   const newState = Object.assign({}, rootState, pageState);
   return newState;

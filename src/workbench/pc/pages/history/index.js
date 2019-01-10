@@ -35,9 +35,10 @@ class History extends Component {
             transitionLeaveTimeout={500}
           >
             {this.props.historyShow && 
-              <HistoryInner outsideClickIgnoreClass='diworkiconfont' openHistory={this.props.openHistory} >
-                
-              </HistoryInner>
+              <HistoryInner 
+                outsideClickIgnoreClass='diworkiconfont' 
+                openHistory={this.props.openHistory} 
+              />
             }
           </CSSTransitionGroup>
         </TransitionGroup>
