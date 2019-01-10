@@ -6,6 +6,12 @@ import Checkbox from 'bee/checkbox';
 import { widgetStyle } from './widgetStyle';
 import { hasCardContainInGroups } from '../../utils';
 import { findDOMNode } from 'react-dom';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+import manageActions from 'store/root/manage/actions';
+const { moveSideCards } = manageActions;
+
+
 
 import {
 	widgetItem,
@@ -33,7 +39,7 @@ const itemSource = {
 	}
 };
 const itemTarget = {
-	hover(props, monitor) {
+	hover(props, monitor,component) {
 		let draggedId = monitor.getItem().id;	
 		if (draggedId !== props.id) {
 
@@ -42,18 +48,41 @@ const itemTarget = {
 
 			//检查是否有重复
 			if (preType == "cardlist") {
-				draggedId = draggedId.filter(item => {
-					return !hasCardContainInGroups(props.manageList, item.widgetId)
-				})
-				if (!draggedId.length) return
+				// draggedId = draggedId.filter(item => {
+				// 	return !hasCardContainInGroups(props.manageList, item.widgetId)
+				// })
+				// if (!draggedId.length) return
+				const cardList = monitor.getItem().cardList;
+				const siderCardPops = {
+					id:draggedId,
+					preParentId:previousParentId,
+					afterId:props.id,
+					parentId:props.data.parentId,
+					afterType:props.data.type,
+					monitor,
+					cardList
+				}
+				props.moveSideCards(siderCardPops);
+				//当前拖拽的id   hover的id,hover的parentID,hover的项的type
+			}else{
+				props.moveItemDrag(draggedId, previousParentId, preType, props.id, props.data.parentId, props.data.type,monitor);
 			}
 
-			props.moveItemDrag(draggedId, previousParentId, preType, props.id, props.data.parentId, props.data.type,monitor);
 		}
 
 	},
 }
-
+@connect(
+	mapStateToProps(
+		'manageList',
+		{
+			namespace: 'manage',
+		},
+	),
+	{
+	  moveSideCards
+	}
+)
 @DragSource("item", itemSource, (connect, monitor) => {
 	return {
 		connectDragSource: connect.dragSource(),

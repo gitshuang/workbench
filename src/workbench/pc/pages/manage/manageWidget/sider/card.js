@@ -34,7 +34,7 @@ const noteSource = {
             totalCards = totalCards.concat(draggedCardList);
             component.clickSiderCard(true, props.parentId, props.menuItemId);
         }
-        return { id: totalCards, type: "cardlist", parentId: 2, cardList: totalCards }  //3代表widget，parentId=2暂时代表侧边栏
+        return { id: "shadowCardId", type: "cardlist", parentId: 2, cardList: totalCards }  //3代表widget，parentId=2暂时代表侧边栏
 
     },
     endDrag(props, monitor, component) {

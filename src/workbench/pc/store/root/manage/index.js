@@ -36,7 +36,8 @@ const {
   setDragInputState,
   emptySelectGroup,
   changeSiderState,
-  getAllMenuList
+  getAllMenuList,
+  moveSideCards
 } = actions;
 
 const defaultState = {
@@ -62,7 +63,10 @@ const defaultState = {
   isSiderDisplay:true,  //左侧默认展开
   allMenuList: [],  // 左侧通过menu查找时的menuList
   shadowCard: {
-    size:176
+    size:1,
+    type:3,
+    widgetId:"shadowCardId",
+    widgetName:"阴影卡片"
   },
 
 };
@@ -124,6 +128,45 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
+  [moveSideCards]:(state,{
+    payload: {
+      id,preParentId, afterId, parentId, afterType, monitor,cardList
+    }
+  })=>{//after可以是3 可以是1
+    const manageAllList = state.manageList;
+    let manageList = manageAllList;
+    const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
+    const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
+    const afterIndex = data.indexOf(afterItem);
+    // 给增加parentId
+    cardList.forEach(item=>{item.parentId = parentId});
+      if(preParentId==2){
+        manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+          $splice: [
+            [afterIndex, 0, state.shadowCard],//
+          ],
+        });
+
+      }else{
+        const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+        const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+        const itemIndex = data.indexOf(item);
+        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+          $splice: [
+            [itemIndex, 1],
+            [afterIndex, 0, item],
+          ],
+        });
+      }
+      monitor.getItem().parentId = parentId;
+  
+      updateAllMenuList(state.allMenuList,manageAllList);
+      manageList = JSON.parse(JSON.stringify(manageAllList));
+      return {
+        ...state,
+        manageList,
+      };
+  },
   [getAllMenuList]: (state, { payload, error }) => {
     if (error) {
       return state;
@@ -501,20 +544,7 @@ const reducer = handleActions({
     let manageList = manageAllList;
      
     if (preParentId == 2) {//2代表sider
-      const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
-      const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
-      const afterIndex = data.indexOf(afterItem);
-      // 给增加parentId
-      id.forEach(item=>{item.parentId = parentId});
-      monitor.getItem().parentId = parentId
-      
-        manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [afterIndex, 0, state,shadowCard],//
-          ],
-        });
-    
-      updateAllMenuList(state.allMenuList,manageAllList)
+     
 
     } else {
       const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象

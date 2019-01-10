@@ -39,7 +39,8 @@ const {
   RETURN_DEFAULT_STATE,
   SET_DRAG_INPUT_STATE,
   EMPTY_SELECT_GROUP,
-  GET_ALL_MENU_LIST
+  GET_ALL_MENU_LIST,
+  MOVE_SIDE_CARDS
 } = types;
 
 const actions = createActions(
@@ -52,6 +53,7 @@ const actions = createActions(
     [GET_ALL_SERVICES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
     [GET_ALL_MENU_LIST]: getAllMenuList,
   },
+  MOVE_SIDE_CARDS,
   CHANGE_SIDER_STATE,
   UPDATE_SHADOW_CARD,
   BATCH_DELECT,
