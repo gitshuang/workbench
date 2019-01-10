@@ -31,8 +31,8 @@ const { requestStart, requestSuccess, requestError } = rootActions;
     'SearchMoreList',
     {
       key: 'currItem',
-      value: (home, ownProps, root) => {
-        return root.currItem
+      value: (wrap, ownProps, root) => {
+        return root.wrap.currItem
       }
     },
     {

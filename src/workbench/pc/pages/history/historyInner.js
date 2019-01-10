@@ -8,16 +8,16 @@ import { openWin } from 'public/regMessageTypeHandler';
 import { openService } from 'public/regMessageTypeHandler';
 
 import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
+import wrapActions from 'store/root/wrap/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { getHistoryList } = homeActions;
+const { getHistoryList } = wrapActions;
 import { historyPartInner } from './style.css';
 
 @connect(
   mapStateToProps(
     'historyList',
     {
-      namespace: 'home',
+      namespace: 'wrap',
     }
   ),
   {

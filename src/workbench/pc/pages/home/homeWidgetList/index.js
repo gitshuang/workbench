@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Collapse from 'bee-collapse';
+import Icon from 'pub-comp/icon';
 import { openService } from 'public/regMessageTypeHandler';
 // 加载components
 import WidgetMaker from '../widget';
@@ -14,11 +16,24 @@ class HomeWidgeList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      open: true,
+    };
   }
 
   componentDidMount() {
 
+  }
+
+  collapse = () => {
+    // this.props.updateViewport();
+    const { open } = this.state;
+    this.setState({
+      open: !open,
+    }, () => {
+      const h = open ? 0 : this._container.offsetHeight;
+      this.props.updataView(h);
+    });
   }
 
   render() {
@@ -53,12 +68,26 @@ class HomeWidgeList extends Component {
     })
     return (
       <div className={item} style={style} >
-        <div className={WidgetTitle}>
+        <div
+          className={WidgetTitle}
+          onClick={() => { this.collapse() }}
+        >
+          <Icon type = {this.state.open ? "pull-down" : "upward"} />
           <div>{name}</div>
         </div>
+
         <div className={WidgetCont}>
-          <ul className={WidgetList}>{list}</ul>
+          <Collapse in={this.state.open} >
+            <ul
+              ref={c => this._container = c}
+              className={WidgetList}
+            // style={{ height: 0 }}
+            >
+              {list}
+            </ul>
+          </Collapse>
         </div>
+
       </div>
     );
   }

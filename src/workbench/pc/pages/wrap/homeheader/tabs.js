@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import Icon from 'pub-comp/icon';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
-import rootActions from 'store/root/actions';
+import wrapActions from 'store/root/wrap/actions';
 import Pulldown from './pulldown';
 import { tab, active } from './style.css';
 
-const { showTabs } = rootActions;
+const { showTabs } = wrapActions;
 @connect(
   mapStateToProps(
     'tabs',
     'activeCarrier',
+    {
+      namespace: 'wrap',
+    }
   ),
   {
     showTabs,
@@ -80,21 +83,23 @@ class Tabmenu extends Component {
     return {
       tabs,
       mores,
+      maxTabsNum
     }
   }
 
   render() {
     const { tabs: totalTabs, activeCarrier, showTabs } = this.props;
     const { width } = this.state;
-    const { tabs, mores } = this.getTabsAndMores(totalTabs, width);
+    const { maxTabsNum, tabs, mores } = this.getTabsAndMores(totalTabs, width);
     return (
       <div className={tab} ref={(c) => { this.tabsArea = c; }}>
         <ul>
           {
-            tabs.map(item => {
+            tabs.map((item, index) => {
               return (
-                <li key={item.id}
+                <li key={`${item.id}`}
                   className={item.id === activeCarrier ? active : ''}
+                // style={{display: index < maxTabsNum ? 'block' : 'none' }}
                 >
                   <p onClick={() => { showTabs(item) }}>{item.title}</p>
                   <div onClick={() => { this.closeWin(item) }}>

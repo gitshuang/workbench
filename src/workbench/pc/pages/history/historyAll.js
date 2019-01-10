@@ -11,7 +11,7 @@ import { historyAll, historyADay } from './style.css';
   mapStateToProps(
     'historyList',
     {
-      namespace: 'home',
+      namespace: 'wrap',
     }
   ),
   {

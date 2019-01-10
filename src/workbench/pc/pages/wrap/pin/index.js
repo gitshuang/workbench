@@ -5,34 +5,42 @@ import onClickOutside from 'react-onclickoutside';
 import { mapStateToProps } from '@u';
 /*  actions  */
 import rootActions from 'store/root/actions';
+import wrapActions from 'store/root/wrap/actions';
+import homeActions from 'store/root/home/actions';
 /*  comp */
 import MoveToGroup from 'pub-comp/moveToGroup';
 import LanguagesJSON from 'yutils/languages';
 import { pin } from './style.css';
+
+
+const { getWorkList } = homeActions;
 const {
   requestStart,
   requestSuccess,
   requestError,
+} = rootActions;
+const {
   closePin,
-  getFolders,
   setFolders,
   addFolders,
-} = rootActions;
-
+} = wrapActions;
 @connect(
   mapStateToProps(
     'currItem',
     'folders',
     'pinDisplay',
+    {
+      namespace: 'wrap',
+    }
   ),
   {
     requestStart,
     requestSuccess,
     requestError,
     closePin,
-    getFolders,
     setFolders,
     addFolders,
+    getWorkList,
   }
 )
 @onClickOutside
@@ -63,6 +71,7 @@ class Pin extends Component {
       requestStart,
       requestSuccess,
       requestError,
+      getWorkList,
     } = this.props;
     requestStart();
     setFolders(
@@ -74,6 +83,7 @@ class Pin extends Component {
         requestError(payload);
       }
       this.cancelFn();
+      getWorkList();
       requestSuccess();
     });
   }

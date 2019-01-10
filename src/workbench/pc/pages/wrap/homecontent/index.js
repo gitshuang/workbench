@@ -9,6 +9,9 @@ import Iframe from 'components/iframe';
   mapStateToProps(
     'tabs',
     'activeCarrier',
+    {
+      namespace: 'wrap',
+    }
   ),
   {},
 )

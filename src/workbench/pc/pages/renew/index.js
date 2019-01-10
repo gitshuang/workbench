@@ -7,6 +7,9 @@ import IFrame from 'components/iframe';
 @connect(
   mapStateToProps(
     'currItem',
+    {
+      namespace: 'wrap',
+    }
   ),
   {},
 )

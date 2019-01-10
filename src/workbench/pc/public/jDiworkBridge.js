@@ -157,14 +157,14 @@ const handlerList = {
   },
   getData(type, event) {
     // const data = store.getState().currItem.data;
-    const tabs = store.getState().tabs;
+    const tabs = store.getState().wrap.tabs;
     const {
       detail: {
         id,
       }
     } = event;
     // 如果当前是打开的，来获取可以返回，不然返回空， 防止传错ID 来获取到其它的
-    const data = store.getState().activeCarrier === id ? tabs.filter(item => id === item.id) : {};
+    const data = store.getState().wrap.activeCarrier === id ? tabs.filter(item => id === item.id) : {};
     postMessageToWin(this.source, {
       type,
       data

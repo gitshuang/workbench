@@ -30,7 +30,7 @@ const { setCurrent } = rootActions;
     },
     {
       key: 'exitModal',
-      value: (home, ownProps, root) => root.teamconfig.exitModal,
+      value: (teamconfig, ownProps, root) => root.teamconfig.exitModal,
     },
     {
       namespace: 'home',

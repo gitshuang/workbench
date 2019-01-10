@@ -11,7 +11,7 @@ var api = [
   '/service/getAllAppsGroupByLabels',//废弃
 
   '/user/setCutUser',
-  '/user/getUserInfo',
+  
   '/user/getCanLoginTenants',
 
   '/getMessage',
@@ -58,6 +58,7 @@ var api = [
   '/menubar/getAll',
 
   '/history/list',
+  '/user/getUserInfo',
 ]
 
 var rapApi = [];
