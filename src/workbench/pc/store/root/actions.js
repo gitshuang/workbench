@@ -2,10 +2,8 @@ import { createActions } from '@u';
 import types from './types';
 import {
   getUserInfo,
-  getServiceList,
   uploadApplication,
   getPoll,
-  getPortal,
   setCurrent,
   getAllEnable,
   getCurrent,
@@ -20,7 +18,6 @@ const {
   REQUEST_ERROR,
   GET_USER_INFO,
   SET_USER_INFO,
-  GET_SERVICE_LIST,
   CHANGE_QUICK_SERVICE_DISPLAY,
   CHANGE_QUICK_SERVICE_HIDDEN,
   POP_MESSAGE,
@@ -29,7 +26,6 @@ const {
   HIDE_IM,
   UPLOAD_APPLICATION,
   GET_POLL,
-  GET_PORTAL,
   SET_CURRENT,
   GET_ALL_ENABLE,
   GET_CURRENT,
@@ -44,11 +40,9 @@ const {
 
 export default createActions(
   {
-    [GET_SERVICE_LIST]: getServiceList,
     [GET_USER_INFO]: getUserInfo,
     [UPLOAD_APPLICATION]: uploadApplication,
     [GET_POLL]: getPoll,
-    [GET_PORTAL]: getPortal,
     [SET_CURRENT]: setCurrent,
     [GET_ALL_ENABLE]: getAllEnable,
     [GET_CURRENT]: getCurrent,

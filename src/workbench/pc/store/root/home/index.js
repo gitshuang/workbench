@@ -9,7 +9,6 @@ const {
   openFolder,
   closeFolder,
   setCreateEnter,
-  getSearchEnterOrTeam,
   getApplicationList,
   clearApplicationTips
 } = actions;
@@ -23,7 +22,6 @@ const defaultState = {
     children: [],
   },
   folderModalDisplay: false,
-  searchEnterOrTeamList: [],
   applicationList: {},
 };
 
@@ -62,15 +60,6 @@ const reducer = handleActions({
     return {
       ...state,
       workList: list,
-    };
-  },
-  [getSearchEnterOrTeam]: (state, { payload, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-      searchEnterOrTeamList: payload,
     };
   },
   [changeRequestDisplay]: state => ({

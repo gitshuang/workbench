@@ -2,6 +2,8 @@ import { handleActions } from 'redux-actions';
 import actions from './actions';
 
 const {
+  getServiceList,
+  getPortal,
   openRoot,
   showTabs,
   addTabs,
@@ -16,6 +18,11 @@ const {
 } = actions;
 
 const defaultState = {
+  serviceList: [],
+  portalInfo: {
+    openStatus: false,
+    portalUrl: ''
+  },
   tabs: [],     // 多页签存储
   currItem: {}, // 当前页签的内容
   activeCarrier: 'home',  // 当前页签id
@@ -24,6 +31,24 @@ const defaultState = {
 };
 
 const reducer = handleActions({
+  [getServiceList]: (state, { payload: serviceList, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      serviceList,
+    };
+  },
+  [getPortal]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      portalInfo: payload,
+    };
+  },
   [openRoot]: (state, { payload, }) => {
     return {
       ...state,

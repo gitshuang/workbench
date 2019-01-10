@@ -49,14 +49,12 @@ const {
   requestError,
   getUserInfo,
   setUserInfo,
-  getServiceList,
   popMessage,
   changeMessageType,
   showIm,
   hideIm,
   uploadApplication,
   getPoll,
-  getPortal,
   setCurrent,
   getAllEnable,
   getCurrent,
@@ -78,14 +76,9 @@ const defaultState = {
   currLan: 'zh_CN',//当前的语言
 
   imShowed: false,
-  serviceList: [],
   messageType: false,
   messageList: [],
   messageShowNum: 0,
-  portalInfo: {
-    openStatus: false,
-    portalUrl: ''
-  },
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -139,15 +132,6 @@ const reducer = handleActions({
       userInfo: payload,
     };
   },
-  [getServiceList]: (state, { payload: serviceList, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-      serviceList,
-    };
-  },
   [uploadApplication]: state => state,
   [getPoll]: (state, { payload, error }) => {
     if (error) {
@@ -168,15 +152,6 @@ const reducer = handleActions({
     return {
       ...state,
     }
-  },
-  [getPortal]: (state, { payload, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-      portalInfo: payload,
-    };
   },
   [popMessage]: (state) => {
     const { messageShowNum, messageList } = state;

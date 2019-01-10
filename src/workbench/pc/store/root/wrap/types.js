@@ -1,6 +1,8 @@
 import { createTypes } from '@u';
 
 export default createTypes(
+  'GET_SERVICE_LIST',
+  'GET_PORTAL',
   'OPEN_ROOT',
   'SHOW_TABS',
   'ADD_TABS',
