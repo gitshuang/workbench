@@ -5,12 +5,15 @@ import { openWin } from 'public/regMessageTypeHandler';
 import Dropdown from 'bee/dropdown';
 import Menu from 'bee/menus';
 import Icon from 'pub-comp/icon';
+import { openMess } from 'pub-comp/notification';
 import Button from 'bee/button';
 import { pulldown, } from './style.css';
 
 import rootActions from 'store/root/actions';
+import wrapActions from 'store/root/wrap/actions';
 import homeActions from 'store/root/home/actions';
-const { closeTabs, openPin, cancelFolders, requestError, showTabs } = rootActions;
+const { requestError, } = rootActions;
+const { closeTabs, openPin, cancelFolders, showTabs } = wrapActions;
 const { getWorkList } = homeActions;
 
 const { Item, Divider } = Menu;
@@ -19,6 +22,9 @@ const { Item, Divider } = Menu;
     mapStateToProps(
         'tabs',
         'currItem',
+        {
+            namespace: 'wrap',
+        }
     ),
     {
         requestError,
@@ -60,6 +66,12 @@ class Pulldown extends Component {
                         requestError(payload)
                         return false;
                     }
+                    openMess({
+                        title: '移除成功!',
+                        duration: 2,
+                        type: 'success',
+                        closable: false,
+                    });
                     getWorkList();
                 });
             } else {
@@ -68,8 +80,8 @@ class Pulldown extends Component {
             return false;
         }
         const { item: { props: { attribute } } } = selectItem;
-        // openWin(attribute);
-        this.props.showTabs(attribute);
+        openWin(attribute);
+        // this.props.showTabs(attribute);
     }
 
     render() {

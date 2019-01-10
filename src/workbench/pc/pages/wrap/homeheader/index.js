@@ -8,6 +8,7 @@ import { mapStateToProps } from '@u';
 import Icon from 'pub-comp/icon';
 /*   actions   */
 import rootActions from 'store/root/actions';
+import wrapActions from 'store/root/wrap/actions';
 import homeActions from 'store/root/home/actions';
 
 // 业务组件
@@ -23,20 +24,27 @@ import { create, menus, history, home, active, upward } from './style.css';
 const {
   changeRequestDisplay,
 } = homeActions;
-
+const { openRoot, } = wrapActions;
 const {
   requestStart,
   requestSuccess,
   requestError,
-  openRoot,
 } = rootActions;
 
 
 @withRouter
 @connect(
   mapStateToProps(
-    'userInfo',
     'activeCarrier',
+    {
+      key: 'userInfo',
+      value: (wrap, ownProps, root) => {
+        return root.userInfo
+      }
+    },
+    {
+      namespace: 'wrap',
+    }
   ),
   {
     changeRequestDisplay,
@@ -76,10 +84,10 @@ class Homeheader extends Component {
   componentWillMount() { }
 
   componentDidMount() {
-    const { changeRequestDisplay } = this.props;
-    // 判断是否localstorage中包含这个值
+    // const { changeRequestDisplay } = this.props;
+    // // 判断是否localstorage中包含这个值
     if (localStorage.getItem('create')) {
-      changeRequestDisplay();
+      //   changeRequestDisplay();
       localStorage.removeItem('create');
     }
   }

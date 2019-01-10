@@ -12,10 +12,6 @@ import {
   setCurrentNot,
   getAllEnableNot,
   getCurrentNot,
-  getFolders,
-  cancelFolders,
-  setFolders,
-  addFolders,
 } from './api';
 
 const {
@@ -44,17 +40,6 @@ const {
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
-  OPEN_ROOT,
-  SHOW_TABS,
-  ADD_TABS,
-  DEL_TABS,
-  CLOSE_TABS,
-  OPEN_PIN,
-  CLOSE_PIN,
-  GET_FOLDERS,
-  CANCEL_FOLDERS,
-  SET_FOLDERS,
-  ADD_FOLDERS,
 } = types;
 
 export default createActions(
@@ -70,10 +55,6 @@ export default createActions(
     [SET_CURRENT_NOT]: setCurrentNot,
     [GET_ALL_ENABLE_NOT]: getAllEnableNot,
     [GET_CURRENT_NOT]: getCurrentNot,
-    [GET_FOLDERS]: getFolders,
-    [CANCEL_FOLDERS]:cancelFolders,
-    [SET_FOLDERS]: setFolders,
-    [ADD_FOLDERS]: addFolders,
   },
   REQUEST_START,
   REQUEST_SUCCESS,
@@ -89,11 +70,4 @@ export default createActions(
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
-  OPEN_ROOT,
-  SHOW_TABS,
-  ADD_TABS,
-  DEL_TABS,
-  CLOSE_TABS,
-  OPEN_PIN,
-  CLOSE_PIN,
 );

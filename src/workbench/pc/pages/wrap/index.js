@@ -3,17 +3,20 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
-import RootActions from 'store/root/actions';
+import wrapActions from 'store/root/wrap/actions';
 import Homeheader from './homeheader';
 import Homecontent from './homecontent';
 import Pin from './pin';
 
-const { getFolders } = RootActions;
+const { getFolders } = wrapActions;
 @withRouter
 @connect(
   mapStateToProps(
     'activeCarrier',
     'pinDisplay',
+    {
+      namespace: 'wrap',
+    }
   ),
   {
     getFolders,

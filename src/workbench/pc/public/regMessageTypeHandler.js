@@ -1,12 +1,16 @@
-import rootActions from 'store/root/actions';
-import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
 import { postMessageToWin, get, logout } from "@u";
-import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
-import { trigger } from "./componentTools";
-import { getServiceInfoWithDetail } from 'store/root/work/api';
-import { openMessage } from 'components/message';
 import { pushYA, appendSearchParam } from "yutils/utils";
+import rootActions from 'store/root/actions';
+import wrapActions from 'store/root/wrap/actions';
+import { getServiceInfoWithDetail } from 'store/root/work/api';
+import { trigger } from "./componentTools";
+import { openMessage } from 'components/message';
+import { openMess } from 'pub-comp/notification';
+import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
+
+import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
+
 const {
   popMessage,
   changeMessageType,
@@ -16,12 +20,20 @@ const {
   openFrame,
   closeFrame,
   getUserInfo,
-  addTabs,
-  delTabs,
   requestError,
 } = rootActions;
+const { addTabs, delTabs, } = wrapActions;
 const handlers = {
   openWin(data) {
+    if (store.getState().wrap.tabs.length >= 20) {
+      openMess({
+        title: '最多打开20个页签，请关闭不需要的页签。',
+        duration: 2,
+        type: 'warning',
+        closable: false,
+      });
+      return false;
+    }
     if (typeof data !== 'object') {
       throw new Error('data is must be a object.');
     }
@@ -91,6 +103,15 @@ const handlers = {
         console.log(err);
       });
     } else if (serviceCode) {
+      if (store.getState().wrap.tabs.length >= 20) {
+        openMess({
+          title: '最多打开20个页签，请关闭不需要的页签。',
+          duration: 2,
+          type: 'warning',
+          closable: false,
+        });
+        return false;
+      }
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
