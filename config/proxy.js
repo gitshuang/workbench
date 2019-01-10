@@ -57,6 +57,7 @@ var api = [
 
   '/menubar/getAll',
 
+  '/history/list',
   '/user/getUserInfo',
 ]
 

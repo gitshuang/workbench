@@ -7,6 +7,9 @@ import {
   cancelFolders,
   setFolders,
   addFolders,
+  getHistoryList,
+  delHistory,
+  delAllHistory,
 } from './api';
 
 const {
@@ -23,6 +26,9 @@ const {
   CANCEL_FOLDERS,
   SET_FOLDERS,
   ADD_FOLDERS,
+  GET_HISTORY_LIST,
+  DEL_HISTORY,
+  DEL_ALL_HISTORY,
 } = types;
 
 export default createActions(
@@ -36,6 +42,9 @@ export default createActions(
     [CANCEL_FOLDERS]:cancelFolders,
     [SET_FOLDERS]: setFolders,
     [ADD_FOLDERS]: addFolders,
+    [GET_HISTORY_LIST]: getHistoryList,
+    [DEL_HISTORY]: delHistory,
+    [DEL_ALL_HISTORY]: delAllHistory,
   },
   OPEN_ROOT,
   SHOW_TABS,

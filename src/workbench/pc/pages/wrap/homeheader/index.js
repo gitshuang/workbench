@@ -171,8 +171,8 @@ class Homeheader extends Component {
     });
   }
 
-  changeRouter = () => {
-
+  changeHistory = () => {
+    this.props.openHistory();
   }
 
 
@@ -191,7 +191,7 @@ class Homeheader extends Component {
         <div className={menus}>
           <div
             className={`${history} tc`}
-            onClick={() => { this.changeRouter() }}
+            onClick={() => { this.changeHistory() }}
           >
             <Icon type="record" />
           </div>

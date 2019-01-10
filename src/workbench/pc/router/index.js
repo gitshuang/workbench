@@ -39,6 +39,8 @@ const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'
 const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "ManageTeamEnter" */'pages/manageTeamEnter'));
 // 个人主页
 const HomePage = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/homepage'));
+// 全部历史
+const History = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/history/historyAll.js'));
 
 const routes = [
   // {
@@ -146,6 +148,7 @@ export const Pages = {
   Renew: <Renew />,
   UserInfo: <UserInfo />,
   ManageTeamEnter: <ManageTeamEnter />,
-  HomePage: <HomePage />
+  HomePage: <HomePage />,
+  History:<History/>
 }
 export default routes;

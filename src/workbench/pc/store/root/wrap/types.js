@@ -14,4 +14,7 @@ export default createTypes(
   'CANCEL_FOLDERS',
   'SET_FOLDERS',
   'ADD_FOLDERS',
+  'GET_HISTORY_LIST',
+  'DEL_HISTORY',
+  'DEL_ALL_HISTORY',
 );

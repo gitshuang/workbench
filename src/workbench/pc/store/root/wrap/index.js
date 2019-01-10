@@ -15,6 +15,9 @@ const {
   cancelFolders,
   setFolders,
   addFolders,
+  getHistoryList,
+  delHistory,
+  delAllHistory,
 } = actions;
 
 const defaultState = {
@@ -28,6 +31,7 @@ const defaultState = {
   activeCarrier: 'home',  // 当前页签id
   pinDisplay: false,  // 是否显示 pin弹窗
   folders: [],        // 分组列表
+  historyList:[],  // 历史记录
 };
 
 const reducer = handleActions({
@@ -211,7 +215,34 @@ const reducer = handleActions({
       ...state,
       folders: [...folders, payload],
     };
-  }
+  },
+  [getHistoryList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      historyList:payload,
+    };
+  },
+  [delHistory]:(state, { error, payload }) => {
+    if (error) {
+      return state;
+    }
+    // 这边需要操作，将this.props.historyList进行操作
+    return {
+      ...state,
+    };
+  },
+  [delAllHistory]: (state, { error, payload }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      historyList:[],
+    };
+  },
 }, defaultState);
 
 export default reducer;
