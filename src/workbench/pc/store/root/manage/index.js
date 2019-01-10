@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import update from 'react/lib/update';
 import { guid, avoidSameName } from '@u';
 import actions from './actions';
+import {updateAllMenuList} from './utils'
 
 const {
   updateShadowCard,
@@ -34,7 +35,8 @@ const {
   returnDefaultState,
   setDragInputState,
   emptySelectGroup,
-  changeSiderState
+  changeSiderState,
+  getAllMenuList
 } = actions;
 
 const defaultState = {
@@ -57,7 +59,8 @@ const defaultState = {
   dragState: true, // 是否可拖拽
 
   shadowCard: false, //默认没有
-  isSiderDisplay:true
+  isSiderDisplay:true,  //左侧默认展开
+  allMenuList: [],  // 左侧通过menu查找时的menuList
 };
 
 const findTreeById = (data, curId) => {
@@ -117,6 +120,15 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
+  [getAllMenuList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      allMenuList: payload,
+    };
+  },
   [changeSiderState]:(state)=>{
     return {
       ...state,
@@ -504,6 +516,8 @@ const reducer = handleActions({
           ],
         });
       }
+      updateAllMenuList(state.allMenuList,manageAllList)
+
     } else {
       const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
       const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象

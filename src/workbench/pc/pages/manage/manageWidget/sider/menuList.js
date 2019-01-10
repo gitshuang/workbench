@@ -8,14 +8,13 @@ import onClickOutside from 'react-onclickoutside';
 export default class MenuList extends React.Component{
     
     handleClick = (e) => {
-        this.props.closeMenuList(e.keyPath);
-        
+        this.props.showServiceAndChangeInput(e.keyPath);
     }
     handleClickOutside(evt) {
        // debugger
-       const {closeMenuList,isMenuListShow} = this.props;
+       const {showServiceAndChangeInput,isMenuListShow} = this.props;
         if(isMenuListShow){
-           closeMenuList();
+            showServiceAndChangeInput();
         }
        
       }

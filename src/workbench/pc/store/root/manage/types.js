@@ -1,6 +1,7 @@
 import { createTypes } from '@u';
 
 export default createTypes(
+  'GET_ALL_MENU_LIST',
   'CHANGE_SIDER_STATE',
   'UPDATE_SHADOW_CARD',
   'SET_MANAGE_LIST',

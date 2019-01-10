@@ -4,6 +4,7 @@ import {
   setManageList,
   getManageList,
   getAllServicesByLabelGroup,
+  getAllMenuList
 } from './api';
 
 const {
@@ -38,6 +39,7 @@ const {
   RETURN_DEFAULT_STATE,
   SET_DRAG_INPUT_STATE,
   EMPTY_SELECT_GROUP,
+  GET_ALL_MENU_LIST
 } = types;
 
 const actions = createActions(
@@ -48,6 +50,7 @@ const actions = createActions(
     [SET_MANAGE_LIST]: setManageList,
     [GET_MANAGE_LIST]: getManageList,
     [GET_ALL_SERVICES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
+    [GET_ALL_MENU_LIST]: getAllMenuList,
   },
   CHANGE_SIDER_STATE,
   UPDATE_SHADOW_CARD,
