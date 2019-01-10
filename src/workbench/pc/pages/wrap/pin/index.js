@@ -79,6 +79,7 @@ class Pin extends Component {
       title,
       parentId,
     ).then(({ error, payload }) => {
+      debugger
       if (error) {
         requestError(payload);
       }
