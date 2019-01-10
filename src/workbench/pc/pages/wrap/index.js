@@ -7,6 +7,7 @@ import RootActions from 'store/root/actions';
 import Homeheader from './homeheader';
 import Homecontent from './homecontent';
 import Pin from './pin';
+import History from '../history';
 
 const { getFolders } = RootActions;
 @withRouter
@@ -22,7 +23,9 @@ const { getFolders } = RootActions;
 class Wrap extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      historyShow:false,//
+    };
   }
 
   componentDidMount() {
@@ -30,12 +33,15 @@ class Wrap extends Component {
     getFolders();
   }
 
+  openHistory = () =>{
+    this.setState({historyShow:!this.state.historyShow})
+  }
   render() {
     const { routes, activeCarrier, pinDisplay } = this.props;
     const vis = activeCarrier === 'home' ? 'block' : 'none';
     return (
       <div className='um-win'>
-        <Homeheader />
+        <Homeheader openHistory={this.openHistory}/>
         <div className="content">
           <div style={{ display: vis }}>
             {
@@ -45,7 +51,7 @@ class Wrap extends Component {
           <Homecontent routes={routes} />
         </div>
         {/* <Pin /> */}
-        
+        <History historyShow={this.state.historyShow} openHistory={this.openHistory}></History>
         {
           pinDisplay ?  <Pin /> : null
         }
