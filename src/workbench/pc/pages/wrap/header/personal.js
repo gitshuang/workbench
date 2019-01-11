@@ -252,7 +252,7 @@ class Personals extends Component {
         <Personal
           editType={false}
           exitModalButton={false}
-          currType={0}
+          currType={currType}
           userInfo={userInfo}
           requestDisplay={requestDisplay}
           exitModal={exitModal}
