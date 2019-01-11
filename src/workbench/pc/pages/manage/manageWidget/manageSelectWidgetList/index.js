@@ -133,7 +133,6 @@ class SelectWidgetList extends Component {
   }
 
   btnSave = () => {
-    console.log(this.state);
     const { applications } = this.state;
     const { requestError, requestSuccess, addDesk, parentId } = this.props;
     let selectedList = [];
