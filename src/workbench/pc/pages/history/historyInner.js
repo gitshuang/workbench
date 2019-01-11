@@ -97,7 +97,7 @@ class HistoryInner extends Component {
         </div>
         <ul className="inner-list">
           {
-            historyList.map(item => {
+            historyList.filter((item,index)=>index<10).map(item => {
               return <li className="history-item" onClick={e => this.openHistoryItem(item.businessCode,item.extendParams)}>{item.title}</li>
             })
           }

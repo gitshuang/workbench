@@ -242,30 +242,22 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
-    let  newHistory = [];
-    let {latestAccessIds} = payload;
-    latestAccessIds.forEach(id=>{
-      state.historyList.forEach(item=>{
-        if(item.latestAccessId !== id){
-          newHistory.push(item)
-        }
-      })
-    });
     return {
       ...state,
       historyList:newHistory,
     };
   },
   [changeDelHistory]:(state, { payload, error}) => {
-    let  newHistory = [];
     let {latestAccessIds} = payload;
-    latestAccessIds.forEach(id=>{
-      state.historyList.forEach(item=>{
-        if(item.latestAccessId !== id){
-          newHistory.push(item)
+    let newHistory = [].concat(state.historyList);
+    
+    for(let id of latestAccessIds){
+      newHistory.forEach(({latestAccessId},index)=>{
+        if(id === latestAccessId){
+          newHistory.splice(index,1);
         }
       })
-    });
+    }
     return {
       ...state,
       historyList:newHistory,

@@ -151,10 +151,13 @@ class HistoryAll extends Component {
       }
       delHistory(param).then(({ error, payload }) => {
         if (error) {
+          changeDelHistory({latestAccessIds:param});
+          this.setState({deleteSelected:{}})
           requestError(payload);
           return;
         }
         changeDelHistory({latestAccessIds:param});
+        this.setState({deleteSelected:{}})
         requestSuccess();
       });
     }
@@ -171,10 +174,11 @@ class HistoryAll extends Component {
     return a
   }
   getList = (data) => {
+    let {deleteSelected} = this.state;
     return data.map(item=>{
       return (
         <li className="item">
-            <Checkbox className="item-checkbox"  onChange={e=>this.toggleSelected(e,item.latestAccessId)} />
+            <Checkbox className="item-checkbox" checked={!!deleteSelected[item.latestAccessId]}  onChange={e=>this.toggleSelected(e,item.latestAccessId)} />
             <span className="item-time">{`${new Date(item.createTime).getHours()}:${new Date(item.createTime).getMinutes()}`}</span>
             <span className="item-title" onClick={()=>this.openService(item.businessCode,item.extendParams)}>{item.title}</span>
             <Icon className="item-delete" type="error3" onClick={()=>this.delHistory('single',item)}></Icon>
