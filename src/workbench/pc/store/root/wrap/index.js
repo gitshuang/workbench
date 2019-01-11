@@ -244,7 +244,6 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      historyList:newHistory,
     };
   },
   [changeDelHistory]:(state, { payload, error}) => {
