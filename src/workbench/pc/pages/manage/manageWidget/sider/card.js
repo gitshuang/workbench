@@ -37,9 +37,8 @@ const noteSource = {
         return { id: "shadowCardId", type: "cardlist", parentId: 2, cardList: totalCards }  //3代表widget，parentId=2暂时代表侧边栏
 
     },
-    endDrag(props, monitor, component) {
-        console.log("endDrag===============endDrag");
-        
+    endDrag(props, monitor, component){
+        const currentItem = monitor.getItem()
     },
     canDrag(props, monitor) {
         if (props.hasBeenDragged) {
@@ -93,23 +92,21 @@ export default class Card extends Component {
         const { connectDragSource, manageList, serviceId, menuItemName, checked } = this.props;
         const isContainInGroups = hasCardContainInGroups(manageList, serviceId)
         return connectDragSource(
-            <div className={app_col}>
-                <div
-                    className={list_item_content}
-                    onClick={this.clickSiderCard}>
+            <div className={app_col}  onClick={this.clickSiderCard}>
+                
                     {
                         isContainInGroups
                             ?
-                            <div className={`${title} ${isAddColor}`}>
+                            <div className={`${list_item_content} ${title} ${isAddColor}`}>
                                 <span className={title_name} style={{}}>{menuItemName}</span>
                                 <i
-                                    title="卡片已选中"
+                                    title="卡片已在组中"
                                     className="selected"
-                                    style={{ color: 'rgb(0, 122, 206)' }}
+                                    style={{ color: 'rgb(0, 122, 206)'}}
                                 >+</i>
                             </div>
                             :
-                            <div className={title}>
+                            <div className={`${list_item_content} ${title}`}>
                                 <span className={title_name}>{menuItemName}</span>
                                 {checked ? (
                                     <i
@@ -129,7 +126,6 @@ export default class Card extends Component {
 
                     {isContainInGroups}
                 </div>
-            </div>
         );
     }
 }

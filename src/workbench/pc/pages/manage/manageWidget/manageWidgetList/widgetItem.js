@@ -9,7 +9,7 @@ import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
-const { moveSideCards } = manageActions;
+const { moveSideCards,dropSideCards } = manageActions;
 
 
 
@@ -71,6 +71,28 @@ const itemTarget = {
 		}
 
 	},
+	drop(props,monitor){
+		const dragSource = monitor.getItem()
+		// const didDrop = monitor.didDrop();
+		// const getDropResult = monitor.getDropResult();
+		if(dragSource.type=="cardlist"){
+		let draggedId = monitor.getItem().id;	
+		const previousParentId = monitor.getItem().parentId;
+		const preType = monitor.getItem().type;
+		const cardList = monitor.getItem().cardList;
+
+			const siderCardPops = {
+				id:draggedId,
+				preParentId:previousParentId,
+				afterId:props.id,
+				parentId:props.data.parentId,
+				afterType:props.data.type,
+				monitor,
+				cardList
+			}
+			props.dropSideCards(siderCardPops);
+		}
+	}
 }
 @connect(
 	mapStateToProps(
@@ -80,7 +102,8 @@ const itemTarget = {
 		},
 	),
 	{
-	  moveSideCards
+	  moveSideCards,
+	  dropSideCards
 	}
 )
 @DragSource("item", itemSource, (connect, monitor) => {
@@ -142,13 +165,13 @@ export default class WidgetItem extends WidgetItemFather {
 				</div>
 				<div className={widgetItemCont}>
 				</div>
-
-				<div className={`${clearfix} ${footer}`}>
+				{isOver?null:<div className={`${clearfix} ${footer}`}>
 					{this.props.type == "pop" ? null : <Checkbox className="test" checked={checkType} onChange={this.onHandChange} />}
 					<div className={`${editDele} ${clearfix}`}>
 						<div onClick={() => { this.popSave(this.props.data) }}><Icon title={languagesJSON.deleteService} type="dustbin" /></div>
 					</div>
-				</div>
+				</div>}
+				
 
 			</li>
 		));

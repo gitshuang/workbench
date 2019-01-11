@@ -1,6 +1,7 @@
 import { createTypes } from '@u';
 
 export default createTypes(
+  'DROP_SIDE_CARDS',
   'MOVE_SIDE_CARDS',
   'GET_ALL_MENU_LIST',
   'CHANGE_SIDER_STATE',

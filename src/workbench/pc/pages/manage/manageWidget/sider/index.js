@@ -129,7 +129,7 @@ export default class MySider extends Component {
    
     renderService = () => {
         let dom = '';
-
+        console.log(this.state.cardsList,'删除时是否重新渲染');
         dom = this.state.cardsList.map((a, b) => {
 
             return a.children.length == 0 ? (<div key={a.menuItemId} className="result_app_list_3">

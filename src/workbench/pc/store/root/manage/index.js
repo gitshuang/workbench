@@ -37,7 +37,8 @@ const {
   emptySelectGroup,
   changeSiderState,
   getAllMenuList,
-  moveSideCards
+  moveSideCards,
+  dropSideCards
 } = actions;
 
 const defaultState = {
@@ -128,6 +129,35 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
+  [dropSideCards]:(state,{
+    payload: {
+      id,preParentId, afterId, parentId, afterType, monitor,cardList
+    }
+  })=>{
+    const manageAllList = state.manageList;
+    let manageList = manageAllList;
+    const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
+    const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
+    const afterIndex = data.indexOf(afterItem);
+
+
+    ///只要曾经移入过组内，preParentId就灰从2变成正常的id
+    const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+    const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+    const itemIndex = data.indexOf(item);
+    manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+      $splice: [
+        [itemIndex, 1],
+        [afterIndex, 0, ...cardList],
+      ],
+    });
+    updateAllMenuList(state.allMenuList,manageAllList);
+      manageList = JSON.parse(JSON.stringify(manageAllList));
+      return {
+        ...state,
+        manageList,
+      };
+  },
   [moveSideCards]:(state,{
     payload: {
       id,preParentId, afterId, parentId, afterType, monitor,cardList
@@ -143,11 +173,11 @@ const reducer = handleActions({
       if(preParentId==2){
         manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
           $splice: [
-            [afterIndex, 0, state.shadowCard],//
+            [afterIndex, 0, state.shadowCard],// 第一次进组
           ],
         });
-
-      }else{
+        
+      }else{  //进组以后，
         const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
         const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
         const itemIndex = data.indexOf(item);
@@ -159,8 +189,8 @@ const reducer = handleActions({
         });
       }
       monitor.getItem().parentId = parentId;
-  
-      updateAllMenuList(state.allMenuList,manageAllList);
+      state.shadowCard.parentId = parentId
+      
       manageList = JSON.parse(JSON.stringify(manageAllList));
       return {
         ...state,
@@ -492,7 +522,7 @@ const reducer = handleActions({
     };
   },
   [delectService]: (state, { payload: folderId }) => {
-    const { manageList } = state;
+    const { manageList,allMenuList } = state;
     let groupIndex;
     let widgetIndex;
     if (
@@ -513,6 +543,7 @@ const reducer = handleActions({
       ...group,
     });
     delete state.currentSelectWidgetMap[folderId];
+    updateAllMenuList(allMenuList,manageList)
     return {
       ...state,
       isEdit: true,
@@ -543,10 +574,7 @@ const reducer = handleActions({
     const manageAllList = state.manageList;
     let manageList = manageAllList;
      
-    if (preParentId == 2) {//2代表sider
-     
-
-    } else {
+   
       const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
       const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
       const preParentType = sourceData.type;
@@ -600,7 +628,7 @@ const reducer = handleActions({
           });
         }
       }
-    }
+    
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return {
       ...state,
