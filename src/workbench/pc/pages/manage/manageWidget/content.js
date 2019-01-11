@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
-import {ButtonDefaultLine,ButtonBrand,ButtonDefaultAlpha} from 'pub-comp/button';
+import {ButtonDefaultAlpha} from 'pub-comp/button';
 import Icon from 'pub-comp/icon';
 import ManageGroup from './manageGroup';
+import Footer from './footer';
+import BatchMove from './batchMove';
+import PopDialogComp from './popDialogComp';
 
-// import judgedBackend from 'components/backend';
-// import { DragDropContext } from 'react-dnd';
 
 import {
-  um_content,
+  um_content, 
   addBtn,
   addGroupBtn,
 } from './style.css';
-
-
 
 export default class Content extends Component{
   constructor(props){
     super(props);
   }
-  static defaultProps = {
-    // manageList,
-    // addGroup,
-    // moveGroupDrag,
-    // moveItemDrag,
-    // checkFun,
-  }
+
 
   renderContent() {
     var {
@@ -42,7 +35,6 @@ export default class Content extends Component{
       moveGroup,
       moveTopGroup,
       moveBottomGroup,
-      addFolder,
       selectListActions,
       selectGroupActions,
       setEditonlyId,
@@ -53,7 +45,8 @@ export default class Content extends Component{
       setCurrentSelectWidgetMap,
       moveGroupDrag,
       moveItemDrag,
-      languagesJSON
+      languagesJSON,
+      updateShadowCard
     } = this.props;
     var manageProps = {
       manageList,
@@ -70,15 +63,14 @@ export default class Content extends Component{
       moveGroup,
       moveTopGroup,
       moveBottomGroup,
-      addFolder,
       selectListActions,
       selectGroupActions,
       setEditonlyId,
       setDragInputState,
+      updateShadowCard
     }
     var {
       manageList,
-      curEditFolderId,
       drag,
       dragState,
       selectList,
@@ -86,27 +78,18 @@ export default class Content extends Component{
       currEditonlyId,
       currGroupIndex,
       title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       moveService,
-      addFolder,
-      closeFolder,
       setCurrGroupIndex,
       editTitle,
       selectListActions,
       selectGroupActions,
-      cancelFolderEdit,
       setEditonlyId,
       setDragInputState,
       delectService,
       addDesk,
-      folderBgSrc
     } = this.props;
     var widgetListProps = {
       manageList,
-      curEditFolderId,
       drag,
       dragState,
       selectList,
@@ -114,22 +97,14 @@ export default class Content extends Component{
       currEditonlyId,
       currGroupIndex,
       title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       moveService,
-      addFolder,
-      closeFolder,
       setCurrGroupIndex,
       editTitle,
       selectListActions,
       selectGroupActions,
-      cancelFolderEdit,
       setEditonlyId,
       setDragInputState,
       delectService,
-      folderBgSrc
     }
     var widgetSelectListProps={
       applicationsMap,
@@ -137,7 +112,6 @@ export default class Content extends Component{
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
-      deleteFolder,
       addDesk,
       requestSuccess,
       requestError,
@@ -162,8 +136,8 @@ export default class Content extends Component{
             key={item.widgetId}
             id={item.widgetId}
             type={item.type}
-            moveGroupDrag={this.props.moveGroupDrag}
-            moveItemDrag={this.props.moveItemDrag}
+            moveGroupDrag={moveGroupDrag}
+            moveItemDrag={moveItemDrag}
             checkFun={this.checkFun}
             {...manageProps}
             {...widgetListProps}
@@ -178,9 +152,64 @@ export default class Content extends Component{
 
 
   render(){
+    var {
+      addGroup,
+      manageList,
+      batchDelectFn,
+      openGroupTo,
+      save,
+      popOpenCancel,
+      batchMoveModalDisplay,
+      moveData,
+      closeBatchMove,
+      batchMove,
+      showModal,
+      showCancelModal,
+      popClose,
+      cancel,
+      popCloseCancel,
+      languagesJSON,
+    } = this.props;
+  
+    var footerProps = {
+      batchDelectFn,
+      openGroupTo,
+      save,
+      popOpenCancel,
+    }
+    
+    var popDialogOuter = {
+      showModal,
+      showCancelModal,
+      popClose,
+      batchDelectFn,
+      cancel,
+      save,
+      popCloseCancel,
+    }
+    var batchMoveRedux = {
+      batchMoveModalDisplay,
+      manageList,
+      moveData,
+      closeBatchMove,
+      batchMove,
+      addGroup
+    }
+    var popDialogOuter = {
+      showModal,
+      showCancelModal,
+      popClose,
+      batchDelectFn,
+      cancel,
+      save,
+      popCloseCancel,
+    }
     return(
       <div className={um_content}>
-      {this.renderContent()}
+          {this.renderContent()}
+          <Footer {...footerProps} languagesJSON={languagesJSON}/>
+          <BatchMove {...batchMoveRedux} languagesJSON={languagesJSON}/>
+          <PopDialogComp {...popDialogOuter} languagesJSON={languagesJSON}/>
       </div>
     )
   }

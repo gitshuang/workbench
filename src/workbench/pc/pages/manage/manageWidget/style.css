@@ -1,7 +1,12 @@
+.management{
+  display: flex;
+  flex-flow: row;
+}
 .page_home :global(.lebra-navbar-left-icon){
 }
 .um_content{
-	padding:82px 23px 48px;
+  padding:82px 7px 48px;
+  flex: 1
 }
 .umBoxJustify{
   display: table;

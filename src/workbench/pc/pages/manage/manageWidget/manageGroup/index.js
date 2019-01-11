@@ -4,25 +4,25 @@ import PropTypes from 'prop-types';
 import Menu, { Item as MenuItem } from 'bee/menus';
 import Dropdown from 'bee/dropdown';
 import PopDialog from 'pub-comp/pop';
-import Button from 'bee/button';
-import {ButtonDefaultAlpha,ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'pub-comp/button';
-import { avoidSameName ,getStrLenSubstr} from '@u';
+import {ButtonCheckClose,ButtonCheckSelected,ButtonDefaultWhite} from 'pub-comp/button';
+import { avoidSameName } from '@u';
 import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
 import Message from 'bee/message';
 import WidgetList from '../manageWidgetList';
+import { findItemById } from '../../utils';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
+
+
 import {
   widgetTitle,
   addGroupBtn,
-  addBtnContainer,
-  complete,
-  cancel,
   newGroupName,
   addBtn,
   groupArea,
   selectedBackClass,
   titleInputArea,
-  icon,
   iconBox,
   btn,
   newGroupName_focus,
@@ -32,27 +32,11 @@ import {
   noChildStyle
 } from './style.css';
 
-function findItemById(manageList,id) {
-  let dataItem;
-  for(let i = 0;i<manageList.length;i++){
-    if(manageList[i].children){
-      dataItem = findItemById(manageList[i].children,id)
-    }
-    if(dataItem){
-      break;
-    }
-    if(manageList[i].widgetId && manageList[i].widgetId === id){
-      dataItem = manageList[i];
-      break;
-    }
-  }
-  return dataItem;
-}
-const type='item';
+
 
 const itemSource = {
-  beginDrag(props,monitor) {
-    return { id: props.id,type:props.type,parentId:props.parentId,folderType:props.folderType };
+  beginDrag(props) {
+    return { id: props.id,type:props.type,parentId:props.parentId };
   }
 };
 
@@ -61,16 +45,14 @@ const itemTarget = {
     const draggedId = monitor.getItem().id;
     const preParentId = monitor.getItem().parentId;
     const draggedType = monitor.getItem().type;
-    const folderType = monitor.getItem().folderType;
     let afterParentId = props.data.parentId;
-
     if (draggedId !== props.id && draggedType===1 && props.data.type===1) {
       props.moveGroupDrag(draggedId, props.id);
     }else if((draggedType===2 || draggedType===3) && props.data.type===1){
       !props.data.parentId && (afterParentId = props.data.widgetId);
       //因为冒泡 所以已经有的话 不需要执行move
       let dataItem = findItemById(props.data.children,draggedId);
-      if(folderType==="folder" || typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)){
+      if( typeof dataItem==="undefined" || (dataItem && dataItem.widgetId !==draggedId)){
         //folderType==="folder" 从文件夹把元素往分组里拖拽
         props.moveItemDrag(draggedId,preParentId,draggedType, props.id, afterParentId, props.data.type);
       }
@@ -78,36 +60,24 @@ const itemTarget = {
   }
 };
 
-function collectSource(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  };
-}
 
 
-function collectTaget(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver:monitor.isOver(),
-    getItemType:monitor.getItem(),
+
+
+
+
+
+@connect(
+  mapStateToProps(
+      'manageList',
+      {
+          namespace: 'manage',
+      },
+  ),
+  {
+
   }
-}
-
-Array.prototype.distinct = function (){
-  var arr = this,
-    i,obj = {},
-    result = [],
-    len = arr.length;
-  for(i = 0; i< arr.length; i++){
-    if(!obj[arr[i]]){
-      obj[arr[i]] = 1;
-      result.push(arr[i]);
-    }
-  }
-  return result;
-};
-
+)
 class ManageGroup extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
@@ -174,11 +144,7 @@ class ManageGroup extends Component {
       })
     }
   }
-  // 添加文件夹
-  addFolderFn(groupIndex) {
-    const { addFolder } = this.props;
-    addFolder({ groupIndex });
-  }
+
   // 打开编辑分组形态
   openRenameGroupFn = (id) => {
     const {setEditonlyId} = this.props;
@@ -371,10 +337,6 @@ class ManageGroup extends Component {
       </Menu>
     );
 
-    // btnSelectedFun=()=>{
-    //    this.btn_selected.onClick()
-    // }
-
     return (
       <Dropdown
         trigger={['click']}
@@ -388,28 +350,9 @@ class ManageGroup extends Component {
 
     var {
       manageList,
-      curEditFolderId,
-      drag,
       dragState,
-      selectList,
       selectGroup,
       currEditonlyId,
-      currGroupIndex,
-      title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
-      moveService,
-      addFolder,
-      closeFolder,
-      setCurrGroupIndex,
-      editTitle,
-      selectListActions,
-      selectGroupActions,
-      cancelFolderEdit,
-      setEditonlyId,
-      setDragInputState,
       applicationsMap,
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
@@ -417,44 +360,15 @@ class ManageGroup extends Component {
       addDesk,
       requestSuccess,
       requestError,
-      delectService,
-      folderBgSrc,
-      languagesJSON
+      languagesJSON,
     } = this.props;
-    var widgetListProps = {
-      manageList,
-      curEditFolderId,
-      drag,
-      dragState,
-      selectList,
-      selectGroup,
-      currEditonlyId,
-      currGroupIndex,
-      title,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
-      moveService,
-      addFolder,
-      closeFolder,
-      setCurrGroupIndex,
-      editTitle,
-      selectListActions,
-      selectGroupActions,
-      cancelFolderEdit,
-      setEditonlyId,
-      setDragInputState,
-      delectService,
-      folderBgSrc
-    }
+    
     var widgetSelectListProps={
       applicationsMap,
       manageList,
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
-      deleteFolder,
       addDesk,
       requestSuccess,
       requestError,
@@ -516,9 +430,6 @@ class ManageGroup extends Component {
             <div className={iconBox}>
               <Icon title={languagesJSON.rename_group} type="record" onClick={ ()=>{this.openRenameGroupFn(widgetId)}} />
             </div>
-            <div className={iconBox}>
-              <Icon title={languagesJSON.add_folder} type="add-files" onClick={this.addFolderFn.bind(this, index)} />
-            </div>
             {this.renderDrop(index)}
           </div>
         </div>
@@ -556,7 +467,7 @@ class ManageGroup extends Component {
         { groupTitle }
         <div>
           <WidgetList index={index} data={children} parentId={this.props.data.widgetId}
-                      {...widgetListProps} { ...widgetSelectListProps } languagesJSON={languagesJSON}/>
+                       { ...widgetSelectListProps } languagesJSON={languagesJSON}/>
         </div>
       </section>
 
@@ -576,4 +487,15 @@ class ManageGroup extends Component {
   }
 }
 
-export default DragSource(type, itemSource, collectSource)(DropTarget(type,itemTarget,collectTaget)(ManageGroup));
+export default DragSource("item", itemSource, (connect, monitor) =>{
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+})(DropTarget("item",itemTarget,(connect, monitor)=> {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver:monitor.isOver(),
+    getItemType:monitor.getItem(),
+  }
+})(ManageGroup));
