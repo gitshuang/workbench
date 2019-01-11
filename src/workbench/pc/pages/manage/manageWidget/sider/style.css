@@ -15,6 +15,15 @@
 .sider_container{
     margin: 10px 5px 15px;
     padding: 1px 8px 0;
+    width: 380px
+}
+.sider_container :global(.sider-container-fixed){
+    width: 380px;
+    position:fixed;
+}
+.sider_container :global(.serviceArea){
+    overflow-y: scroll;
+    margin: 10px 0;
 }
 .toggleBar{
     cursor: pointer;
@@ -118,18 +127,18 @@
     display: flex;
     justify-content:space-between
 }
-.serviceArea{
+.sider_container :global(.serviceArea){
     margin-top: 20px;
 }
-.serviceArea :global(.serviceTitle){
+.sider_container :global(.serviceArea .serviceTitle){
     margin: 10px 0
 }
-.serviceArea :global(.result_app_list_4){
+.sider_container :global(.serviceArea .result_app_list_4){
     width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
-.serviceArea :global(.result_app_list_3){
+.sider_container :global(.serviceArea .result_app_list_3){
     width: 100%;
    
 }

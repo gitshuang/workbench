@@ -6,7 +6,7 @@ const { changeSiderState,getAllMenuList } = manageActions;
 import rootActions from 'store/root/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
 
-import { add_item, sider_container, toggleBar, selectService, selectServiceArea, serviceArea } from './style.css'
+import { add_item, sider_container, toggleBar, selectService, selectServiceArea } from './style.css'
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import MenuList from './menuList';
 import Card from './card'
@@ -72,8 +72,18 @@ export default class MySider extends Component {
             })
             requestSuccess();
         })
+        const documentElement = document.documentElement||document.body;
+        this.serviceArea.style.height = (documentElement.clientHeight-180)+"px"
+        window.addEventListener('resize',()=>{
+            
+             this.serviceArea.style.height = (documentElement.clientHeight-180)+"px"
+             console.log("resize===================");
+          })
     }
 
+      componentWillUnmount(){
+        window.removeEventListener('resize')
+      }
     renderMenu = () => {
         const { menuList, isMenuListShow } = this.state;
         const props = {
@@ -261,7 +271,7 @@ export default class MySider extends Component {
                                 }}
                                 transitionEnterTimeout={1300}
                                 transitionLeaveTimeout={1300} >
-                                <div style={{ width: 380, display: isSiderDisplay ? "block" : "none" }}>
+                                <div className="sider-container-fixed" style={{ display: isSiderDisplay ? "block" : "none" }}>
                                     <div className={add_item}>
                                         <span>*拖动下方磁贴至右侧所需位置</span>
                                         <i className={toggleBar}
@@ -287,7 +297,7 @@ export default class MySider extends Component {
                                         </div> : null}
 
                                     {this.renderMenu()}
-                                    <div className={serviceArea}>
+                                    <div className="serviceArea" ref={ref=>this.serviceArea=ref}>
                                         {this.renderService()}
                                     </div>
                                 </div>

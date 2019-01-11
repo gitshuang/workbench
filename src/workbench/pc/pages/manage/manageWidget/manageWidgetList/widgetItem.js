@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 const { moveSideCards,dropSideCards } = manageActions;
+import update from 'react/lib/update';
 
 
 
@@ -52,17 +53,35 @@ const itemTarget = {
 				// 	return !hasCardContainInGroups(props.manageList, item.widgetId)
 				// })
 				// if (!draggedId.length) return
-				const cardList = monitor.getItem().cardList;
-				const siderCardPops = {
-					id:draggedId,
-					preParentId:previousParentId,
-					afterId:props.id,
-					parentId:props.data.parentId,
-					afterType:props.data.type,
-					monitor,
-					cardList
-				}
-				props.moveSideCards(siderCardPops);
+				console.log(props.isOver,'isoveer=============');
+
+				//if(props.isOver){
+					console.log(props.isOver,'isoveer=============');
+					const cardList = monitor.getItem().cardList;
+					const siderCardPops = {
+						id:draggedId,
+						preParentId:previousParentId,
+						afterId:props.id,
+						parentId:props.data.parentId,
+						afterType:props.data.type,
+						monitor,
+						cardList
+					}
+					props.moveSideCards(siderCardPops);
+				//}else{//hover上元素后又退出了
+					// props.manageList[props.propsIndex].children = props.manageList[props.propsIndex].children.filter(item=>{
+					// 	return item.widgetId!="shadowCardId"
+					// })
+					// const data = props.manageList[props.propsIndex].children
+					// const itemIndex = data.indexOf(props.shadowCard)
+					// debugger
+					// props.manageList.filter(({ widgetId }) => widgetId === monitor.getItem().parentId)[0].children = update(data, {
+					// 	$splice: [
+					// 	  [itemIndex,1 ],// 第一次进组
+					// 	],
+					//   });
+				//}
+				
 				//当前拖拽的id   hover的id,hover的parentID,hover的项的type
 			}else{
 				props.moveItemDrag(draggedId, previousParentId, preType, props.id, props.data.parentId, props.data.type,monitor);
@@ -97,6 +116,7 @@ const itemTarget = {
 @connect(
 	mapStateToProps(
 		'manageList',
+		'shadowCard',
 		{
 			namespace: 'manage',
 		},
