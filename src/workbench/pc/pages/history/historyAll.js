@@ -9,7 +9,7 @@ import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import rootActions from 'store/root/actions';
 import wrapActions from 'store/root/wrap/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { getHistoryList, delHistory, delAllHistory } = wrapActions;
+const { getHistoryList, delHistory, delAllHistory,changeDelHistory } = wrapActions;
 
 import { historyAll, historyADay } from './style.css';
 
@@ -27,6 +27,7 @@ import { historyAll, historyADay } from './style.css';
     getHistoryList,
     delHistory,
     delAllHistory,
+    changeDelHistory
   },
 )
 class HistoryAll extends Component {
@@ -38,6 +39,7 @@ class HistoryAll extends Component {
     getHistoryList: PropTypes.func,
     delHistory: PropTypes.func,
     delAllHistory: PropTypes.func,
+    changeDelHistory: PropTypes.func,
   };
   static defaultProps = {
     historyList: [],
@@ -47,6 +49,7 @@ class HistoryAll extends Component {
     getHistoryList: () => { },
     delHistory: () => {},
     delAllHistory: () => {},
+    changeDelHistory: () => { }
   };
 
   constructor(props) {
@@ -123,9 +126,9 @@ class HistoryAll extends Component {
       requestStart,
       requestSuccess,
       requestError,
-      getHistoryList,
       delHistory,
       delAllHistory,
+      changeDelHistory
     } = this.props;
     let {deleteSelected} = this.state;
     requestStart();
@@ -151,6 +154,7 @@ class HistoryAll extends Component {
           requestError(payload);
           return;
         }
+        changeDelHistory({latestAccessIds:param});
         requestSuccess();
       });
     }

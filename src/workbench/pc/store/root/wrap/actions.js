@@ -31,6 +31,7 @@ const {
   GET_HISTORY_LIST,
   DEL_HISTORY,
   DEL_ALL_HISTORY,
+  CHANGE_DEL_HISTORY,
 } = types;
 
 export default createActions(
@@ -56,4 +57,5 @@ export default createActions(
   CLOSE_TABS,
   OPEN_PIN,
   CLOSE_PIN,
+  CHANGE_DEL_HISTORY,
 );

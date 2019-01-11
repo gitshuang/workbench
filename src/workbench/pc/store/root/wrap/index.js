@@ -19,6 +19,8 @@ const {
   getHistoryList,
   delHistory,
   delAllHistory,
+  // 手动修改
+  changeDelHistory,
 } = actions;
 
 const defaultState = {
@@ -236,16 +238,40 @@ const reducer = handleActions({
       historyList:payload,
     };
   },
-  [delHistory]:(state, { error, payload }) => {
+  [delHistory]:(state, { payload, error}) => {
     if (error) {
       return state;
     }
-    // 这边需要操作，将this.props.historyList进行操作
+    let  newHistory = [];
+    let {latestAccessIds} = payload;
+    latestAccessIds.forEach(id=>{
+      state.historyList.forEach(item=>{
+        if(item.latestAccessId !== id){
+          newHistory.push(item)
+        }
+      })
+    });
     return {
       ...state,
+      historyList:newHistory,
     };
   },
-  [delAllHistory]: (state, { error, payload }) => {
+  [changeDelHistory]:(state, { payload, error}) => {
+    let  newHistory = [];
+    let {latestAccessIds} = payload;
+    latestAccessIds.forEach(id=>{
+      state.historyList.forEach(item=>{
+        if(item.latestAccessId !== id){
+          newHistory.push(item)
+        }
+      })
+    });
+    return {
+      ...state,
+      historyList:newHistory,
+    };
+  },
+  [delAllHistory]: (state, { payload, error }) => {
     if (error) {
       return state;
     }
