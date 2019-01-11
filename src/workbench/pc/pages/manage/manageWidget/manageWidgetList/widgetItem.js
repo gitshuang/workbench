@@ -53,7 +53,6 @@ const itemTarget = {
 				// 	return !hasCardContainInGroups(props.manageList, item.widgetId)
 				// })
 				// if (!draggedId.length) return
-				console.log(props.isOver,'isoveer=============');
 
 				//if(props.isOver){
 					console.log(props.isOver,'isoveer=============');
