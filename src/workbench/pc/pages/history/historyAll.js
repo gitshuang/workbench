@@ -151,8 +151,6 @@ class HistoryAll extends Component {
       }
       delHistory(param).then(({ error, payload }) => {
         if (error) {
-          changeDelHistory({latestAccessIds:param});
-          this.setState({deleteSelected:{}})
           requestError(payload);
           return;
         }
@@ -161,10 +159,6 @@ class HistoryAll extends Component {
         requestSuccess();
       });
     }
-  }
-
-  deleteItem = () =>{
-
   }
 
   getHeader = (key) => {
