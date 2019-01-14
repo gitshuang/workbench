@@ -150,6 +150,20 @@ class EnterContent extends Component {
     });
   }
 
+  clickFn = (e) => {
+    e.preventDefault();
+
+        this.props.form.validateFields((err, values) => {
+            if (err) {
+                console.log('校验失败', values);
+            } else {
+                console.log('提交成功', values)
+                console.log(this.state);
+                
+            }
+        });
+  }
+
   // 这个方法是点击了提交按钮执行的，form组件封的有点疯
   checkForm = (flag, data) => {
     const { handleClickFn, _from } = this.props;
@@ -228,6 +242,7 @@ class EnterContent extends Component {
 
   render() {
     const { buttonText, _from, loadingDesc, texts } = this.props;
+    const { getFieldProps, getFieldError } = this.props.form;
     const {
       address,
       startFlag,
@@ -253,30 +268,25 @@ class EnterContent extends Component {
     return (
       <Form submitCallBack={this.checkForm} showSubmit={false} className={enterForm}>
 
-        <FormItem
-          showMast={false}
-          labelName={<span>{texts.tenantNameLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-          isRequire
-          valuePropsName="value"
-          errorMessage={texts.tenantNameError}
-          method="blur"
-          inline
-        >
+        <FormItem>
+          <label><span>{texts.tenantNameLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
           <FormControl
             name="tenantName"
             value={tenantName || ''}
             onChange={(e) => { this.inputOnChange(e, 'tenantName'); }}
             placeholder={texts.placeholder1}
+            {...getFieldProps('tenantName', {
+              validateTrigger: 'onBlur',
+              rules: [{ required: true, message: texts.tenantNameError, }],
+            })}
           />
+          <span className='error'>
+            {getFieldError('tenantName')}
+          </span>
         </FormItem>
 
-        <FormItem
-          showMast={false}
-          labelName={<span>{texts.logoLabel} &nbsp;&nbsp;&nbsp; </span>}
-          valuePropsName="value"
-          method="change"
-          inline
-        >
+        <FormItem>
+          <label><span>{texts.logoLabel} &nbsp;&nbsp;&nbsp; </span></label>
           <Upload
             name="logo"
             logo={logo || ''}
@@ -288,15 +298,8 @@ class EnterContent extends Component {
           />
         </FormItem>
 
-        <FormItem
-          showMast={false}
-          labelName={<span>{texts.tenantIndustryLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-          isRequire
-          valuePropsName="value"
-          errorMessage={texts.tenantIndustryError}
-          method="blur"
-          inline
-        >
+        <FormItem>
+          <label><span>{texts.tenantIndustryLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
           <Select
             name="tenantIndustry"
             defaultValue="A"
@@ -311,15 +314,8 @@ class EnterContent extends Component {
           </Select>
         </FormItem>
 
-        <FormItem
-          showMast={false}
-          labelName={<span>{texts.tenantSizeLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-          isRequire
-          valuePropsName="value"
-          errorMessage={texts.tenantSizeError}
-          method="blur"
-          inline
-        >
+        <FormItem>
+          <label><span>{texts.tenantSizeLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
           <Select
             name="tenantSize"
             defaultValue="A"
@@ -334,26 +330,13 @@ class EnterContent extends Component {
           </Select>
         </FormItem>
         {
-          address ? <FormItem
-            showMast={false}
-            labelName={<span>{texts.addressLabel}&nbsp;&nbsp;</span>}
-            isRequire={false}
-            valuePropsName="value"
-            errorMessage={texts.addressError}
-            method="blur"
-            inline
-          >
+          address ? <FormItem>
+            <label><span>{texts.addressLabel}&nbsp;&nbsp;</span></label>
             <CitySelect name="address" onChange={this.onCityChange} defaultValue={address} />
-          </FormItem> : <div />
+          </FormItem> : null
         }
-        <FormItem
-          showMast={false}
-          isRequire={false}
-          valuePropsName="value"
-          errorMessage={texts.addressError}
-          method="blur"
-          inline
-        >
+        <FormItem>
+          <label></label>
           <FormControl
             name="addressInput"
             value={addressInput || ''}
@@ -362,14 +345,9 @@ class EnterContent extends Component {
           />
         </FormItem>
 
-        {_from === "create" || !charged ? <div></div> :
-          <FormItem
-            showMast={false}
-            labelName={<span>{texts.invitePermissionLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-            isRequire={false}
-            valuePropsName="value"
-            inline
-          >
+        {_from === "create" || !charged ? null :
+          <FormItem>
+            <label><span>{texts.invitePermissionLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
             <Select
               name="invitePermission"
               defaultValue="1"
@@ -383,14 +361,9 @@ class EnterContent extends Component {
             </Select>
           </FormItem>
         }
-        {_from === "create" ? <div></div> :
-          <FormItem
-            showMast={false}
-            labelName={<span>{texts.joinPermissionLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-            isRequire={false}
-            valuePropsName="value"
-            inline
-          >
+        {_from === "create" ? null :
+          <FormItem>
+            <label><span>{texts.joinPermissionLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
             <Select
               name="joinPermission"
               defaultValue="1"
@@ -403,13 +376,9 @@ class EnterContent extends Component {
             </Select>
           </FormItem>
         }
-        {_from === "create" || !charged ? <div></div> :
-          <FormItem
-            showMast={false}
-            labelName={<span>{texts.allowExitLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-            isRequire={false}
-            inline
-          >
+        {_from === "create" || !charged ? null :
+          <FormItem>
+            <label><span>{texts.allowExitLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
             <Radio.RadioGroup
               name="allowExit"
               onChange={this.allowExitChange}
@@ -420,14 +389,9 @@ class EnterContent extends Component {
             </Radio.RadioGroup>
           </FormItem>
         }
-        {_from === "create" ? <div></div> :
-          <FormItem
-            showMast={false}
-            labelName={<span>{texts.subordinateTypeLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-            isRequire={false}
-            valuePropsName="value"
-            inline
-          >
+        {_from === "create" ? null :
+          <FormItem>
+            <label><span>{texts.subordinateTypeLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
             <Select
               name="subordinateType"
               defaultValue={0}
@@ -440,13 +404,9 @@ class EnterContent extends Component {
             </Select>
           </FormItem>
         }
-        {_from === "create" ? <div></div> :
-          <FormItem
-            showMast={false}
-            labelName={<span>{texts.isWaterMarkLabel}<font color="red"> &nbsp;*&nbsp;</font></span>}
-            isRequire={false}
-            inline
-          >
+        {_from === "create" ? null :
+          <FormItem>
+            <label><span>{texts.isWaterMarkLabel}<font color="red"> &nbsp;*&nbsp;</font></span></label>
             <Radio.RadioGroup
               name="isWaterMark"
               onChange={this.watermarkChange}
@@ -461,40 +421,42 @@ class EnterContent extends Component {
         <div className={line}></div>
         <div className={infoTitle}>{texts.infoTitle}：</div>
 
-        <FormItem
-          showMast={false}
-          labelName={<span>{texts.linkmanLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-          isRequire valuePropsName="value"
-          errorMessage={texts.linkmanError}
-          method="blur"
-          inline
-        >
+        <FormItem>
+          <label><span>{texts.linkmanLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
           <FormControl
             name="linkman"
             value={linkman || ''}
             placeholder={texts.linkmanError}
             onChange={(e) => { this.inputOnChange(e, 'linkman'); }}
+            {...getFieldProps('linkman', {
+              validateTrigger: 'onBlur',
+              rules: [{ required: true, message: texts.linkmanError, }],
+            })}
           />
+          <span className='error'>
+            {getFieldError('linkman')}
+          </span>
         </FormItem>
 
-        <FormItem
-          showMast={false}
-          valuePropsName="value"
-          labelName={<span>{texts.tenantEmailLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
-          isRequire
-          method="blur"
-          htmlType="email"
-          errorMessage={texts.tenantEmailError}
-          inline
-        >
+        <FormItem>
+          <label><span>{texts.tenantEmailLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
           <FormControl
             name="tenantEmail"
             value={tenantEmail || ''}
             onChange={(e) => { this.inputOnChange(e, 'tenantEmail'); }}
             placeholder={texts.tenantEmailPlace}
+            {...getFieldProps('tenantEmail', {
+              validateTrigger: 'onBlur',
+              rules: [{ required: true, message: texts.tenantEmailError, }],
+            })}
           />
+          <span className='error'>
+            {getFieldError('linkman')}
+          </span>
         </FormItem>
+        {/* <div>
 
+        </div> */}
         <FormItem
           // showMast={false}
           labelName={<span>{texts.tenantTelLabel}<font color="red">&nbsp;*&nbsp;</font></span>}
@@ -545,8 +507,7 @@ class EnterContent extends Component {
               />
             </div>
             : <SubmitBtn
-              // isSubmit
-              // onClick={this.checkForm}
+              onClick={this.clickFn}
               buttonText={buttonText}
               disabled={this.state.disabled}
             />
@@ -556,4 +517,4 @@ class EnterContent extends Component {
   }
 }
 
-export default EnterContent;
+export default Form.createForm()(EnterContent);

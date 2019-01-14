@@ -13,9 +13,9 @@ class SubmitBtn extends Component {
     disabled: false,
     buttonText: '',
   };
-  click = () => {
+  click = (e) => {
     if (typeof this.props.onClick === 'function') {
-      this.props.onClick();
+      this.props.onClick(e);
     }
   }
   render() {
