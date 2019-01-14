@@ -48,6 +48,7 @@
 .historyAll{
     width: 640px;
     margin: 0 auto;
+    padding-bottom: 40px;
 }
 .historyAll :global(.historyAllBtnArea) {
     padding: 20px;
@@ -63,7 +64,7 @@
     line-height: 36px;
     border-bottom: 1px solid #dcdcdc;
     width: 100%;
-    padding: 20px 20px 0;
+    padding: 20px 0 0;
 }
 .historyADay :global(.day-list .item){
     padding: 10px 0;
@@ -73,10 +74,13 @@
     cursor: pointer;
 }
 .historyADay :global(.day-list .item-time){
+    display: inline-block;
     padding: 0 10px;
+    min-width: 100px;
+    
 }
 .historyADay :global(.day-list .item-title){
-    padding: 0 40px;
+    padding: 0 10px;
 }
 .historyADay :global(.day-list .iconfont.item-delete){
     float: right;
