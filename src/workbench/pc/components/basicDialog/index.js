@@ -53,19 +53,19 @@ class PopDialogComp extends Component {
 	}
 
 	render() {
-		const { 
+		const {
 			dialogData: {
-				type: dialogType, 
-				title: dialogTitle, 
+				type: dialogType,
+				title: dialogTitle,
 				msg: dialogMsg,
-			}, 
-			showModal, 
-			closeDialogNew 
+				btn: btns,
+			},
+			showModal,
+			closeDialogNew
 		} = this.props;
-		let btnLabel = "确定";
-		let _btn = [
+		const _btn = btns || [
 			{
-				label: btnLabel,
+				label: "确定",
 				fun: () => {
 					closeDialogNew();
 				},

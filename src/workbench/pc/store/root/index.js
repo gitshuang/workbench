@@ -201,7 +201,7 @@ const reducer = handleActions({
   },
   [showDialog]: (state, { payload: dialogData }) => {
     let { type } = dialogData;
-    const { title, msg } = dialogData;
+    const { title, msg, btn } = dialogData;
     const typeArray = ['warning', 'success', 'error'];
     if (!typeArray.find((ele) => (ele === type))) {
       type = 'success';
@@ -212,12 +212,12 @@ const reducer = handleActions({
       dialogData: {
         type: type || 'success',
         title: title || '提示',
-        msg: msg
+        msg: msg,
+        btn: btn,
       },
-
     }
   },
-  [closeDialogNew]: (state) => ({ ...state, showModal: false }),
+  [closeDialogNew]: (state) => ({ ...state, showModal: false, dialogData: {} }),
   [openFrame]: (state, { payload: param }) => {
     return {
       ...state,
