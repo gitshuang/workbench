@@ -271,7 +271,7 @@ export default class MySider extends Component {
                     <div className={sider_container}  style={{ display: isSiderDisplay ? "block" : "none" }}>
                     <div className="sider-container-fixed">
                         <div className={add_item}>
-                            <span>*拖动下方磁贴至右侧所需位置</span>
+                            <span>* 拖动下方磁贴至右侧所需位置</span>
                             <i className={toggleBar}
                                 onClick={changeSiderState}>
                                 {"<"}</i>

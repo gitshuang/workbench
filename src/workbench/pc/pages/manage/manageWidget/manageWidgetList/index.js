@@ -152,7 +152,7 @@ class WidgetList extends Component {
                 id={id}
                 drag={item.drag}
                 parentId={parentId}
-                index={id}
+                index={i}
                 propsIndex={index}
                 type={type}
                 savePosition = {this.savePosition}

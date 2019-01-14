@@ -1,30 +1,30 @@
 .add_item{
     align-items: center;
-    background: #fff3dc;
     display: flex;
-    height: 35px;
+    height: 40px;
     justify-content: space-between;
-    margin: 10px 0;
-    padding: 5px;
-    
+    padding: 0 15px;
+    background:rgba(255,171,0,0.05);
 }
 .add_item span{
-    color: #de6a1c;
-    font-size: 12px;
+    color: #FF8B00;
+    font-size: 14px;
     
 }
 .sider_container{
-    margin: 10px 5px 15px;
-    padding: 1px 8px 0;
-    width: 380px
+  
+    width: 320px;
+  
 }
 .sider_container :global(.sider-container-fixed){
-    width: 380px;
+    width: 320px;
     position:fixed;
+    overflow: hidden;
+    background:rgba(255,255,255,1);
 }
 .sider_container :global(.serviceArea){
     overflow-y: scroll;
-    margin: 10px 0;
+    background:rgba(243,243,243,1);
 }
 .toggleBar{
     cursor: pointer;
@@ -38,7 +38,7 @@
 }
 .menuListStyle{
     position: absolute;
-    width: 200px;
+    width: 140px;
     background: #d0cbcb;
 }
 .card{
@@ -59,8 +59,11 @@
 
 
 .app_col {
-    width: 50%;
-    
+    width: 140px;
+    height:32px;
+    background:rgba(255,255,255,1);
+    border-radius:3px;
+    /* border:1px solid rgba(0,179,158,1); */
 }
 .list_item {
     padding-left: 5px;
@@ -68,13 +71,12 @@
 }
 .list_item_content:hover{
     border: 1px dashed #C2C2C2;
-    
 }
 .unSelect {
     color: #ccc
 }
 .list_item_content {
-    padding: 3px 4px;
+    padding: 3px 10px;
     border-bottom: 1px solid #fff;
     border-top: 1px solid #fff;
     border-left: 1px solid #fff;
@@ -126,10 +128,27 @@
 }
 .selectServiceArea{
     display: flex;
-    justify-content:space-between
+    justify-content:space-between;
+    height: 42px;
+    background:rgba(255,255,255,1);
+    padding: 0 15px;
+    align-items: center;
+}
+.selectServiceArea :global(input){
+    height:32px;
+    background:rgba(255,255,255,1);
+    border-radius:4px;
+    border:1px solid rgba(217,217,217,1);
+    font-size:14px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    line-height:20px;
+    padding: 0 10px
 }
 .sider_container :global(.serviceArea){
-    margin-top: 20px;
+    padding: 20px 6px  20px 15px;
+    margin-right: -11px;
 }
 .sider_container :global(.serviceArea .serviceTitle){
     margin: 10px 0
@@ -138,6 +157,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 .sider_container :global(.serviceArea .result_app_list_3){
     width: 100%;
@@ -147,3 +167,18 @@
      border-bottom:1px solid #333
  }
 
+ .sider_container :global(.sider-container-fixed .u-menu-vertical > .u-menu-submenu > .u-menu-submenu-title){
+     height: 28px;
+     line-height: 28px
+ }
+ .sider_container :global(.sider-container-fixed .u-menu){
+     background: rgb(255, 255, 255,1);
+     font-size:12px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(66,75,90,1);
+ }
+ .sider_container :global(.u-menu-submenu-selected){
+    background:rgba(216,216,216,1);
+    opacity:0.5;
+ }
