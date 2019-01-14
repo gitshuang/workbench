@@ -1,6 +1,51 @@
 .enterForm{
   padding-bottom: 30px;
 }
+.enterForm :global(.u-form-item){
+  overflow: hidden;
+}
+.enterForm > div > label {
+  float: left;
+  width: 40%;
+  height: 32px;
+  text-align: right;
+  font-size: 14px;
+  line-height: 32px;
+}
+.enterForm input {
+  width: 338px;
+}
+
+.country{
+  
+} 
+.country :global(.u-label) {
+  width: auto;
+}
+.country :global(.u-select){
+  float: left;
+}
+.country :global(.u-select .u-select-selection){
+  border-radius: 3px 0 0 3px;
+  border-right: none;
+}
+
+.tel{
+  float: left;
+  position: relative;
+  overflow: hidden;
+}
+.code{
+  position: absolute;
+  left: 0;
+  z-index: 2;
+  line-height: 32px;
+}
+.country .tel input{
+  width: 230px;
+  padding-left: 44px;
+  border-radius: 0 3px 3px 0;
+}
 
 .enterForm :global(.u-label) {
   width: 40%;
@@ -106,30 +151,6 @@
   color: #fff;
 }
 
-.country{
-  float: left;
-  margin-left: 40%;
-  position: relative;
-  left: -56px;
-} 
-.country :global(.u-label) {
-  width: auto;
-}
-.country :global(.u-select .u-select-selection){
-  border-radius: 3px 0 0 3px;
-}
-.code{
-  float: left;
-  position: relative;
-  left: -272px;
-  z-index: 2;
-  line-height: 44px;
-}
-.inputPhone{
-  float: left;
-  position: relative;
-  left: -52px;
-}
 .enterForm .inputPhone :global(.u-input-inner>input){
   width: 226px !important;
   border-radius: 0 3px 3px 0 !important;

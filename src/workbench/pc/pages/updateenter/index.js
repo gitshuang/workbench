@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
 
-import EnterContent from 'pub-comp/enterContent';
+import EnterContent from 'components/enterContent';
 import { uploadApplication } from 'store/root/api';
 import { texts } from 'yutils/entertext';
 

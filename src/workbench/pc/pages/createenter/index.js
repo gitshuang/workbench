@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
-import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+
 import EnterContent from 'components/enterContent';
 import { uploadApplication } from 'store/root/api';
 import { texts } from 'yutils/entertext';
@@ -45,7 +45,7 @@ class Enterprise extends Component {
 
   }
 
-  create = (param, fn) => {
+  handleClick = (param, fn) => {
     const {
       requestStart,
       requestSuccess,
@@ -57,41 +57,14 @@ class Enterprise extends Component {
       // 此处调用callback
       fn({ error, payload });
       if (error) {
-        // requestError(payload);
         requestSuccess();
-        return;
-      }
-      requestSuccess();
+        // requestError(payload);
+        // return;
+      }else{
+        requestSuccess();
       localStorage.setItem('create', '1');
-    });
-  }
-
-  handleClick = (param, fn) => {
-    dispatchMessageTypeHandler({
-      type: "showDialog",
-      detail: {
-        type: 'warning',
-        title: '提示',
-        msg: "点击确定后，即将刷新页面，如果继续确定，后悔返回",
-        btn: [{
-          label: "确定",
-          fun: () => {
-            dispatchMessageTypeHandler({
-              type: "closeDialogNew",
-            });
-            this.create(param, fn);
-          },
-        },{
-          label: "取消",
-          fun: () => {
-            dispatchMessageTypeHandler({
-              type: "closeDialogNew",
-            });
-            fn({error: true});
-          },
-        }
-      ]
       }
+      
     });
   }
 
