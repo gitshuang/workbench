@@ -174,7 +174,7 @@ class MenuBarInner extends Component {
         } else {
           result.push(
             <li className={sideBarListItem} key={menuItemId}>
-              <span className="sideBarListItemName" style={{ opacity: 0, visibility: 'hidden' }}>{'default'}</span>
+              {/* <span className="sideBarListItemName" style={{ opacity: 0, visibility: 'hidden' }}>{'default'}</span> */}
               <ul className="bottomBarPanel">
                 <li className="bottomBar" onClick={e => this.openService(menuItemId, menuItemName, service.url, serviceCode)}>
                   {menuItemName}

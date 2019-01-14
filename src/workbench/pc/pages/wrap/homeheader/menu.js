@@ -6,6 +6,8 @@ import { mapStateToProps } from '@u';
 import MenuBarInner from './menuInner';
 import Icon from 'pub-comp/icon';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
+
+import {sideBarPanel,sideBarTitle} from './style.css'
 class MenuBar extends Component {
   static propTypes = {
     allMenuList: PropTypes.arrayOf(PropTypes.object),
@@ -63,7 +65,10 @@ class MenuBar extends Component {
           >
             {
               menuShow?(
-                <MenuBarInner outsideClickIgnoreClass={'ignoreClass'} menuShow={this.menuShow}/>
+                <div className={sideBarPanel}>
+                  <span className={sideBarTitle}>导航菜单</span>
+                  <MenuBarInner outsideClickIgnoreClass={'ignoreClass'} menuShow={this.menuShow}/>
+                </div>
               ):null
             }
           </CSSTransitionGroup>

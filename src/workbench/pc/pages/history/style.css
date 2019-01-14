@@ -4,7 +4,7 @@
 }
 .historyPartInner{
     background: #fff;
-  width: 300px;
+  width: 200px;
   height: 400px;
   overflow: auto;
 
@@ -28,8 +28,14 @@
     color: #007ace;
     cursor: pointer;
 }
+.historyPartInner :global(.inner-header label.all:hover){
+    color:#084E8A;
+}
 .historyPartInner :global(.inner-list .history-item ){
     display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     width: 100%;
     text-align: left;
     font-size: 14px;
