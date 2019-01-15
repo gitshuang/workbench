@@ -28,7 +28,7 @@ class Tabmenu extends Component {
       width: 0,
 
     };
-    this.pullW = 30;
+    this.pullW = 36;
   }
 
   componentWillMount() {

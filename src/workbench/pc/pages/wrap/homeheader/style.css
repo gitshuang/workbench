@@ -17,30 +17,37 @@
   display: flex;
   height: 40px;
   overflow: hidden;
+  background: rgb(243,243,243);
+  padding-top: 3px;
+  border-bottom: 1px solid rgba(78,89,104,0.19);
 }
 .history{
   float: left;
   padding-top: 10px;
   width: 50px;
-  height: 40px;
+  height: 36px;
   cursor: pointer;
 }
 .home{
   float: left;
-  padding-top: 10px;
-  width: 70px;
-  height: 40px;
+  padding-top: 8px;
+  width: 68px;
+  height: 36px;
   cursor: pointer;
+}
+.home:hover{
+  background: rgb(231,231,231);
 }
 .menus .active{
-  /* background: #E14C46; */
-  background: rgb(227,227,227);
+  background: #fff;
 }
+
 .upward{
+  position: relative;
+  top: -3px;
   cursor: pointer;
   float: right;
-  width: 40px;
-  height: 40px;
+  width: 36px;
   padding-top: 10px;
 }
 
@@ -51,7 +58,6 @@
 }
 .tab ul{
   overflow: hidden;
-  height: 40px;
   float: left;
 }
 .tab ul li{
@@ -59,26 +65,70 @@
   width: 120px;
   height: 40px;
   padding-right: 20px;
-  /* background: #888888; */
   cursor: pointer;
   position: relative;
 }
+.tab ul li:hover{
+  background: rgb(231,231,231);
+}
+.tab ul li:after{
+  /* content: "";
+  position: absolute;
+  right: 0;
+  top: 10px;
+  width: 1px;
+  height: 13px;
+  background: #CCCCCC; */
+}
+
 .tab ul li p{
   padding-left: 8px;
   text-align: left;
-  line-height: 40px;
+  line-height: 36px;
 }
+.tab li div{
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: 4px;
+  top: 12px;
+  border-radius: 50% 50%;
+}
+.tab li.active div{
+  background: #D8D8D8;
+}
+.tab li div i{
+  font-size: 14px;
+}
+
 .pulldown{
+  position: relative;
+  top: -3px;
   float: left;
-  width: 30px;
-  height: 40px;
+  width: 36px;
+  height: 39px;
   line-height: 40px;
   text-align: center;
   cursor: pointer;
+  border-left:1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
 }
 .pulldown button{
+  display: block;
   width: 100%;
+  height: 100%;
+  border-radius: 0;
   min-width: auto;
+  background: none;
+}
+.pulldown button i{
+  color: #111111;
+}
+.pulldown button:disabled{
+  /* background: #BFBFBF; */
+}
+.pulldown button:disabled i{
+  color: #888888;
 }
 
 /*start:menubar*/
@@ -297,10 +347,3 @@
   z-index: 999;
 }
 /*end:menubar*/
-.tab li div{
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  right: 0px;
-  top: 10px;
-}
