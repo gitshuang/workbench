@@ -33,7 +33,6 @@ const itemSource = {
 		return { id: props.id, parentId: props.parentId, type: props.type, props: props, index: props.index };
 	},
 	isDragging(props, monitor){
-		console.log("ddddddddddddddddddddd");
 	}
 	
 };
@@ -151,7 +150,6 @@ export default class WidgetItem extends WidgetItemFather {
 			color:"blue"
 		}:{}
 		const { title } = this.state;
-        console.log(isDragging,'isDragging=============');
 
 		return connectDragSource(connectDropTarget(
 			<li title={title} className={`${widgetItem} ${widget_node} animated pulse`}
@@ -167,8 +165,6 @@ export default class WidgetItem extends WidgetItemFather {
 						<div onClick={() => { this.popSave(this.props.data) }}><Icon title={languagesJSON.deleteService} type="dustbin" /></div>
 					</div>
 				</div>}
-				
-
 			</li>
 		));
 	}

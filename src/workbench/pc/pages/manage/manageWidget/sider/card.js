@@ -112,6 +112,7 @@ export default class Card extends Component {
         this.props.onChangeChecked(!checked, parentId, menuItemId);
     };
     render() {
+        console.log('render=====sider');
 
         const { connectDragSource, manageList, serviceId, menuItemName, checked } = this.props;
         const isContainInGroups = hasCardContainInGroups(manageList, serviceId)

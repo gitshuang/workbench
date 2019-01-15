@@ -40,7 +40,7 @@ const itemSource = {
 
 const itemTarget = {
   hover(props,monitor,component){
-    const isJustOverThisOne = monitor.isOver({ shallow: true });
+    //const isJustOverThisOne = monitor.isOver({ shallow: true });
     //console.log("isJustOverThisOne=======",isJustOverThisOne);
   },
   drop(props, monitor) {
@@ -65,6 +65,7 @@ const itemTarget = {
     }
     else if (draggedType == "cardlist" && props.data.type === 1&&isJustOverThisOne) {//左侧cards向组内非widget位置拖拽
       const cardList = monitor.getItem().cardList;
+      
       const siderCardPops = {
         id: draggedId,
         preParentId: preParentId,

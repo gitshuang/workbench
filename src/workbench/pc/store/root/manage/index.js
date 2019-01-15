@@ -131,41 +131,39 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
-  [updateManageList]:(state,{payload})=>{
+  [updateManageList]: (state, { payload }) => {
     payload = JSON.parse(JSON.stringify(payload));
     return {
       ...state,
-      manageList:payload
+      manageList: payload
     }
   },
   //在group上drop side card
-  [dropSideCardsInGroup]:(state,{
+  [dropSideCardsInGroup]: (state, {
     payload: {
       id, preParentId, afterId, parentId, afterType, monitor, cardList
     }
-  })=>{
+  }) => {
     //在已有元素的组内拖拽(删除之前组内的阴影卡片，追加现在组内的cardList)
+    cardList.forEach(item => { item.parentId = parentId });
+
     const manageAllList = state.manageList;
     let manageList = manageAllList;
-
-    // const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
-    // const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
-    // const afterIndex = data.indexOf(afterItem);
-    // ///只要曾经移入过组内，preParentId就灰从2变成正常的id
-    // const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
-    // const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
-    // const itemIndex = data.indexOf(item);
-
+   if(preParentId==2){ 
+     manageList.filter(({ widgetId }) => widgetId === parentId)[0].children.push(...cardList);
+   }else{
     const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
     const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
     const itemIndex = dataPre.indexOf(item);
-      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(dataPre, {
-        $splice: [
-          [itemIndex, 1],
-          [dataPre.length - 1, 0, ...cardList],
-        ],
-      });
+    manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(dataPre, {
+      $splice: [
+        [itemIndex, 1],
+        [dataPre.length - 1, 0, ...cardList],
+      ],
+    });
+   }
     
+
     updateAllMenuList(state.allMenuList, manageAllList);
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return {
@@ -175,12 +173,14 @@ const reducer = handleActions({
       currEditonlyId: '',
     };
   },
-  //在元素上drop side card
+  //在元素上drop side card on item
   [dropSideCards]: (state, {
     payload: {
       id, preParentId, afterId, parentId, afterType, monitor, cardList
     }
   }) => {
+    cardList.forEach(item => { item.parentId = parentId });
+
     const manageAllList = state.manageList;
     let manageList = manageAllList;
     const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
@@ -190,13 +190,13 @@ const reducer = handleActions({
     const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
     const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
     const itemIndex = data.indexOf(item);
-   
-      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-        $splice: [
-          [itemIndex, 1],
-          [afterIndex, 0, ...cardList],
-        ],
-      });
+
+    manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+      $splice: [
+        [itemIndex, 1],
+        [afterIndex, 0, ...cardList],
+      ],
+    });
     updateAllMenuList(state.allMenuList, manageAllList);
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return {
@@ -206,39 +206,70 @@ const reducer = handleActions({
       currEditonlyId: '',
     };
   },
+  //move shadow on items
   [moveSideCards]: (state, {
     payload: {
-      id, preParentId, afterId, parentId, afterType, monitor, cardList
+      id, preParentId, afterId, parentId, afterType, monitor
     }
-  }) => {//after可以是3 可以是1
+  }) => {//进组后完全模仿 组内元素拖拽
     const manageAllList = state.manageList;
+    const shadowCard = state.shadowCard;
     let manageList = manageAllList;
-    const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
-    const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
-    const afterIndex = data.indexOf(afterItem);
-    // 给增加parentId
-    cardList.forEach(item => { item.parentId = parentId });
-    if (preParentId == 2) { //从side第一次进组
+
+    const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
+    const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
+    const itemIn = findById(manageAllList, id);
+    const itemAfter = findById(manageAllList, afterId);
+    if (preParentId === 2) {//从侧边栏进组
+      const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
+      const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
+      const afterIndex = data.indexOf(afterItem);
       manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
         $splice: [
-          [afterIndex, 0, state.shadowCard],// 第一次进组
+          [afterIndex, 0, shadowCard],// 第一次进组
+        ],
+      });
+      monitor.getItem().parentId = parentId;
+      shadowCard.parentId = parentId;
+    } else if (preParentId !== parentId && afterType === 3) {
+      // 跨分组 元素上拖拽 
+      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+
+      const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 当前分组数据
+
+      if (preParentId !== parentId) {
+        itemIn.parentId = parentId;
+        monitor.getItem().parentId = parentId
+      }
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [targetData.children.indexOf(itemAfter), 0, itemIn],
         ],
       });
 
-    } else {  //进组以后，已经进过元素，可能进入其他的组，这时候就得知道上一个组的信息，以便删除shadowcard
+    } else if (preParentId !== parentId && afterType === 1) {
+      // 跨分组拖拽 放到组内 而不是元素上
+      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+      if (preParentId !== parentId) {
+        itemIn.parentId = parentId;
+      }
+      targetData.children.splice(targetData.children.length, 0, itemIn); // 添加
+    } else {//组内元素上拖拽
       const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+      const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;
       const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+      const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
       const itemIndex = data.indexOf(item);
-        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex, 0, item],
-          ],
-        });
+      const afterIndex = data.indexOf(afterItem);
+
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [itemIndex, 1],
+          [afterIndex, 0, item],
+        ],
+      });
 
     }
-    monitor.getItem().parentId = parentId;
-    state.shadowCard.parentId = parentId;
 
 
     manageList = JSON.parse(JSON.stringify(manageAllList));
@@ -661,15 +692,15 @@ const reducer = handleActions({
       const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
       const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
       const itemIndex = data.indexOf(item);
-	  const afterIndex = data.indexOf(afterItem);
-	  
-        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex, 0, item],
-          ],
-        });
-     
+      const afterIndex = data.indexOf(afterItem);
+
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [itemIndex, 1],
+          [afterIndex, 0, item],
+        ],
+      });
+
     }
 
     manageList = JSON.parse(JSON.stringify(manageAllList));
