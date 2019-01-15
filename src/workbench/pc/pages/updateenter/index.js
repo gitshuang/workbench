@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
 
-import EnterContent from 'components/enterContent';
+import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
 import { texts } from 'yutils/entertext';
 
@@ -99,19 +99,6 @@ class Updateenter extends Component {
     const { userInfo } = this.props;
     const { locale } = getContext();
     return (
-      //  {/*  <div>
-      //     <div className=" header">
-      //       <Header onLeftClick={this.goHome}>
-      //         <div>
-      //           <span>企业认证</span>
-      //         </div>
-      //       </Header>
-      //       <div className="appBreadcrumb">
-      //         <Breadcrumbs data={[{ name: '企业认证' }]} goback={this.goBack} />
-      //       </div>
-      //     </div> 
-      //     <div className="content">
-      //   */}
       <div className={pageEnterprise}>
         <div className={enterTitle} >企业认证</div>
         <hr className={hr} />
@@ -133,8 +120,6 @@ class Updateenter extends Component {
 
         </div>
       </div>
-      //   </div>
-      // </div>
     );
   }
 }

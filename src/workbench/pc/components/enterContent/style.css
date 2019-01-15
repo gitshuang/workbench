@@ -15,6 +15,9 @@
 .enterForm input {
   width: 338px;
 }
+.upload{
+  float: left;
+}
 
 .country{
   
@@ -37,12 +40,13 @@
 }
 .code{
   position: absolute;
-  left: 0;
+  top: 0;
+  left: 2px;
   z-index: 2;
   line-height: 32px;
 }
 .country .tel input{
-  width: 230px;
+  width: 226px;
   padding-left: 44px;
   border-radius: 0 3px 3px 0;
 }

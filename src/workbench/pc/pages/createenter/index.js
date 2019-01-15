@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
 
-import EnterContent from 'components/enterContent';
+import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
 import { texts } from 'yutils/entertext';
 
@@ -46,6 +46,7 @@ class Enterprise extends Component {
   }
 
   handleClick = (param, fn) => {
+    debugger
     const {
       requestStart,
       requestSuccess,
@@ -57,14 +58,12 @@ class Enterprise extends Component {
       // 此处调用callback
       fn({ error, payload });
       if (error) {
+        requestError(payload);
+        return;
+      } else {
         requestSuccess();
-        // requestError(payload);
-        // return;
-      }else{
-        requestSuccess();
-      localStorage.setItem('create', '1');
+        localStorage.setItem('create', '1');
       }
-      
     });
   }
 

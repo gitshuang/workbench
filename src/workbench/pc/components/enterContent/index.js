@@ -11,7 +11,7 @@ import Progress from 'pub-comp/progress';
 import Upload from './upload';
 import { check } from './checkTenantStatus';
 import SubmitBtn from './button';
-import { enterForm, tel, line, infoTitle, progressBar, country, code, } from './style.css';
+import { enterForm, tel, line, infoTitle, progressBar, country, code, upload, } from './style.css';
 
 const { Option } = Select;
 
@@ -165,7 +165,6 @@ class EnterContent extends Component {
 
   // 这个方法是点击了提交按钮执行的，form组件封的有点疯
   checkForm = (data) => {
-    debugger;
     const { handleClickFn, _from } = this.props;
     const {
       tenantId,
@@ -174,9 +173,9 @@ class EnterContent extends Component {
       logo,
     } = this.state;
 
-    // this.setState({
-    //   disabled: true,
-    // });
+    this.setState({
+      disabled: true,
+    });
     // 将地址 组合  真实上传的参数
     const TenantAddress = `${address.province}|${address.city}|${address.area}|${addressInput}`;
     data.tenantAddress = TenantAddress;
@@ -267,15 +266,17 @@ class EnterContent extends Component {
 
         <FormItem>
           <label><span>{texts.logoLabel} &nbsp;&nbsp;&nbsp; </span></label>
-          <Upload
-            name="logo"
-            logo={logo || ''}
-            onChange={this.onChangeUpload}
-            tip=""
-            logoError={texts.logoError}
-            logoError2={texts.logoError2}
-            uploadApplication={this.props.uploadApplication}
-          />
+          <div className={upload}>
+            <Upload
+              name="logo"
+              logo={logo || ''}
+              onChange={this.onChangeUpload}
+              tip=""
+              logoError={texts.logoError}
+              logoError2={texts.logoError2}
+              uploadApplication={this.props.uploadApplication}
+            />
+          </div>
         </FormItem>
 
         <FormItem>
