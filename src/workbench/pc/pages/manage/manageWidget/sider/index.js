@@ -12,6 +12,7 @@ import MenuList from './menuList';
 import Card from './card'
 import Icon from "pub-comp/icon";
 import { hasCardContainInGroups } from '../../utils'
+import CardsList from './cardList'
 @connect(
     mapStateToProps(
         'isSiderDisplay',
@@ -141,23 +142,19 @@ export default class MySider extends Component {
     renderService = () => {
         let dom = '';
         dom = this.state.cardsList.map((a, b) => {
-
+ 
             return a.children.length == 0 ? (<div key={a.menuItemId} className="result_app_list_3">
                 <Card {...a} key={a.menuItemIdb} index={b}
                     onChangeChecked={this.onChangeChecked}
                     checkedCardList={this.state.checkedCardList} />
                 <hr />
             </div>) :
-                (<div key={a.menuItemId} >
-                    <div className="serviceTitle">{a.menuItemName}</div>
-                    <div className="result_app_list_4">
-                        {a.children.map((item, c) => {
-                            return <Card {...item} key={item.menuItemId} index={c}
-                                onChangeChecked={this.onChangeChecked}
-                                checkedCardList={this.state.checkedCardList} />//{item.menuItemName}
-                        })}
-                    </div>
-                </div>)
+                (<CardsList 
+                    key={a.menuItemId} 
+                    list={a.children} 
+                    listName = {a.menuItemName}
+                    checkedCardList = {this.state.checkedCardList}
+                    onChangeChecked={this.onChangeChecked}/>)
         })
         return dom
     }

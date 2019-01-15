@@ -33,6 +33,7 @@ const itemSource = {
 		return { id: props.id, parentId: props.parentId, type: props.type, props: props, index: props.index };
 	},
 	isDragging(props, monitor){
+		return monitor.getItem().id === props.id;
 	}
 	
 };
@@ -150,12 +151,11 @@ export default class WidgetItem extends WidgetItemFather {
 			color:"blue"
 		}:{}
 		const { title } = this.state;
-
 		return connectDragSource(connectDropTarget(
-			<li title={title} className={`${widgetItem} ${widget_node} animated pulse`}
+			<li title={title} className={`${widgetItem} ${widget_node} animated `}
 				style={{ ...widgetStyle[size - 1], ...dragStyle }} >
 				<div className={title}>
-					<div className={title_right}>{`${widgetName} ${index}`}</div>
+				{isOver?null:<div className={title_right}>{`${widgetName} `}</div>}
 				</div>
 				<div className={widgetItemCont}>
 				</div>

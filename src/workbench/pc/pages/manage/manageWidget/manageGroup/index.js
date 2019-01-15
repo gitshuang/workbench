@@ -11,7 +11,7 @@ import { findItemById } from '../../utils';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
-const { dropSideCards,dropSideCardsInGroup } = manageActions;
+const { dropSideCards, dropSideCardsInGroup } = manageActions;
 
 import {
   widgetTitle,
@@ -39,15 +39,13 @@ const itemSource = {
 };
 
 const itemTarget = {
-  hover(props,monitor,component){
+  hover(props, monitor, component) {
     //const isJustOverThisOne = monitor.isOver({ shallow: true });
     //console.log("isJustOverThisOne=======",isJustOverThisOne);
   },
   drop(props, monitor) {
-    console.log("在group中drop============================++++++++++++++")
     const isJustOverThisOne = monitor.isOver({ shallow: true });
 
-    console.log("isJustOverThisOne=======",isJustOverThisOne);
     const draggedId = monitor.getItem().id;
     const preParentId = monitor.getItem().parentId;
     const draggedType = monitor.getItem().type;
@@ -63,9 +61,9 @@ const itemTarget = {
         props.moveItemDrag(draggedId, preParentId, draggedType, props.id, afterParentId, props.data.type);
       }
     }
-    else if (draggedType == "cardlist" && props.data.type === 1&&isJustOverThisOne) {//左侧cards向组内非widget位置拖拽
+    else if (draggedType == "cardlist" && props.data.type === 1 && isJustOverThisOne) {//左侧cards向组内非widget位置拖拽
       const cardList = monitor.getItem().cardList;
-      
+
       const siderCardPops = {
         id: draggedId,
         preParentId: preParentId,
@@ -74,9 +72,9 @@ const itemTarget = {
         afterType: props.data.type,
         monitor,
         cardList
-    }
+      }
       props.dropSideCardsInGroup(siderCardPops);
-      
+
     }
   }
 };
@@ -90,8 +88,8 @@ const itemTarget = {
     },
   ),
   {
-	dropSideCards,
-	dropSideCardsInGroup
+    dropSideCards,
+    dropSideCardsInGroup
   }
 )
 
@@ -259,8 +257,18 @@ export default class ManageGroup extends GroupItem {
           <div>
             <div className={iconBox}>
               <Icon title={languagesJSON.rename_group} type="record" onClick={() => { this.openRenameGroupFn(widgetId) }} />
+              <Icon title={languagesJSON.delete} type="dustbin" onClick={() => { this.delectGroupFn(index) }} />
+              {
+                index ?
+                  <Icon title={languagesJSON.move_up} type="record" onClick={() => { this.moveTopFn(index); }} />
+                  : <Icon title={languagesJSON.move_up} type="record" style={{color:'#999'}} onClick={() => { return false }} />}
+              {
+                index !== manageList.length - 1 ?
+                  <Icon title={languagesJSON.move_down} type="record" onClick={() => { this.moveBottomFn(index) }} />
+                  :
+                  <Icon title={languagesJSON.move_down} type="record" style={{color:'#999'}} onClick={() => { return false }} />}
             </div>
-            {this.renderDrop(index)}
+            {/* {this.renderDrop(index)} */}
           </div>
         </div>
       );

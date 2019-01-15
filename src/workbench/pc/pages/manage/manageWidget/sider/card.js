@@ -44,7 +44,6 @@ const noteSource = {
         const {manageList,updateManageList }= props;
         if(!monitor.didDrop()){
             //debugger
-            console.log("非正常拖拽")//如果存在阴影卡片就删除
             if(hasCardContainInGroups(manageList, DraggedItem.id)){
                 
                 manageList.forEach(item=>{
@@ -98,7 +97,10 @@ export default class Card extends Component {
         });
     }
     shouldComponentUpdate(nextProps){//优化：只有checked变化是才更新组件
-        if(nextProps.checked!==this.props.checked)return true
+        if(nextProps.checked!==this.props.checked)return true;
+        if (hasCardContainInGroups(this.props.manageList, this.props.serviceId)) {
+			return true;
+        }
         return false
     }
     //改变SiderCard的选中状态
@@ -112,7 +114,6 @@ export default class Card extends Component {
         this.props.onChangeChecked(!checked, parentId, menuItemId);
     };
     render() {
-        console.log('render=====sider');
 
         const { connectDragSource, manageList, serviceId, menuItemName, checked } = this.props;
         const isContainInGroups = hasCardContainInGroups(manageList, serviceId)
@@ -123,28 +124,18 @@ export default class Card extends Component {
                         isContainInGroups
                             ?
                             <div className={`${list_item_content} ${title} ${isAddColor}`}>
-                                <span className={title_name} style={{}}>{menuItemName}</span>
-                                <i
-                                    title="卡片已在组中"
-                                    className="selected"
-                                    style={{ color: 'rgb(0, 122, 206)'}}
-                                >+</i>
+                                <span className={title_name} >{menuItemName}</span>
                             </div>
                             :
-                            <div className={`${list_item_content} ${title}`}>
+                            <div className={`${list_item_content} ${title} ${checked?'item-checked':null}`}>
                                 <span className={title_name}>{menuItemName}</span>
                                 {checked ? (
                                     <i
                                         title="卡片已选中"
                                         className="selected"
                                         style={{ color: 'rgb(0, 122, 206)' }}
-                                    >+</i>
-                                ) : (
-                                        <i
-                                            title="卡片未选中"
-                                            className="unSelected"
-                                        >-</i>
-                                    )}
+                                    ></i>
+                                ) :null}
                             </div>
 
                     }
