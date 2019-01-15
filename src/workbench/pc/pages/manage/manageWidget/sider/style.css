@@ -201,6 +201,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    overflow: hidden;
 }
 .sider_container :global(.serviceArea .result_app_list_3){
     width: 100%;

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 const { moveSideCards,dropSideCards } = manageActions;
+import { findDOMNode } from 'react-dom'
 
 
 
@@ -40,7 +41,28 @@ const itemSource = {
 const itemTarget = {
 	hover(props, monitor,component) {
 		let draggedId = monitor.getItem().id;
+
+		// const dragIndex = monitor.getItem().index
+		// const hoverIndex = props.index
+		// const hoverBoundingRect = findDOMNode(
+		// 	component,
+		// ).getBoundingClientRect()
+		// const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+		// const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2
+		// const clientOffset = monitor.getClientOffset()
+		// const hoverClientY = clientOffset.y - hoverBoundingRect.top
+		// const hoverClientX = clientOffset.x - hoverBoundingRect.left
+
+		// if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY&&hoverClientX < hoverMiddleX) {
+		// 	return
+		// }
+		// // Dragging upwards
+		// if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY&& hoverClientX > hoverMiddleX) {
+		// 	return
+		// } 
+	
 		if (draggedId !== props.id) {  //如果被拖拽元素与被hover元素的id不一致，交换位置
+
 			const previousParentId = monitor.getItem().parentId;
 			const preType = monitor.getItem().type;
 
@@ -143,23 +165,22 @@ export default class WidgetItem extends WidgetItemFather {
 			}
 		} = this.props;
 		const { connectDragSource, connectDropTarget, isDragging, selectList, index,isOver } = this.props;//connectDropTarget,
-		//const opacity = isDragging ? 0.5 : 1;
 		const checkType = selectList.indexOf(id) > -1 ? true : false;
-		const dragStyle = isOver?{
+		const dragStyle = isDragging?{
 			opacity:0.5,
 			backgroundColor:'rgba(255,255,255,1)',
 			color:"blue"
 		}:{}
 		const { title } = this.state;
 		return connectDragSource(connectDropTarget(
-			<li title={title} className={`${widgetItem} ${widget_node} animated `}
+			<li title={title} className={`${widgetItem} ${widget_node}  `}
 				style={{ ...widgetStyle[size - 1], ...dragStyle }} >
 				<div className={title}>
-				{isOver?null:<div className={title_right}>{`${widgetName} `}</div>}
+				{isDragging?null:<div className={title_right}>{`${widgetName} `}</div>}
 				</div>
 				<div className={widgetItemCont}>
 				</div>
-				{isOver?null:<div className={`${clearfix} ${footer}`}>
+				{isDragging?null:<div className={`${clearfix} ${footer}`}>
 					{this.props.type == "pop" ? null : <Checkbox className="test" checked={checkType} onChange={this.onHandChange} />}
 					<div className={`${editDele} ${clearfix}`}>
 						<div onClick={() => { this.popSave(this.props.data) }}><Icon title={languagesJSON.deleteService} type="dustbin" /></div>

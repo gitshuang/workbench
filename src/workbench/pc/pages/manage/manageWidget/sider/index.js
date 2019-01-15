@@ -12,7 +12,9 @@ import MenuList from './menuList';
 import Card from './card'
 import Icon from "pub-comp/icon";
 import { hasCardContainInGroups } from '../../utils'
-import CardsList from './cardList'
+import CardsList from './cardList';
+
+
 @connect(
     mapStateToProps(
         'isSiderDisplay',
@@ -269,9 +271,9 @@ export default class MySider extends Component {
                     <div className="sider-container-fixed">
                         <div className={add_item}>
                             <span>* 拖动下方磁贴至右侧所需位置</span>
-                            <i className={toggleBar}
+                            {/* <i className={toggleBar}
                                 onClick={changeSiderState}>
-                                {"<"}</i>
+                                {"<"}</i> */}
                         </div>
 
                         {!this.state.ifSearchState ?

@@ -67,8 +67,10 @@
 }
 .widget_node{
   padding-top: 13px;
+  transition:all 1s ease 0s;
+  transform:translate3d(0px,0px,0px)
 }
-.widgetItem .content {
+.widgetItem .content { 
   position: relative;
 }
 /* .file_icon{
