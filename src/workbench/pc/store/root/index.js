@@ -73,7 +73,6 @@ const defaultState = {
   showFrame: false,   // frame 遮罩层
   frameParam: {},     // 打开frame传递的参数集合
   currLan: 'zh_CN',//当前的语言
-
   imShowed: false,
   messageType: false,
   messageList: [],

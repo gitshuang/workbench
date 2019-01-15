@@ -32,6 +32,7 @@ const {
   DEL_HISTORY,
   DEL_ALL_HISTORY,
   CHANGE_DEL_HISTORY,
+  CHANGE_RETRACT,
 } = types;
 
 export default createActions(
@@ -58,4 +59,5 @@ export default createActions(
   OPEN_PIN,
   CLOSE_PIN,
   CHANGE_DEL_HISTORY,
+  CHANGE_RETRACT
 );

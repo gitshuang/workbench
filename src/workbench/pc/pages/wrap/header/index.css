@@ -32,6 +32,14 @@
   text-align: center;
 }
 
+.rightBtn a{
+  text-decoration: none;
+}
+
+.rightBtn a i{
+  font-size: 18px;
+}
+
 :global(.lebra-navbar-right) :global(.iconfont){
   vertical-align: middle;
   transition: color .3s;

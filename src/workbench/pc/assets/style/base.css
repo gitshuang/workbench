@@ -52,6 +52,7 @@ body {
   background:url("../image/wgt/navBar_bg.png") no-repeat;
   background-position: right;
   background-color:#ffffff;
+  transition: all 0.2s ease-in 0s;
   /* height: 89px; */
   /* border-bottom: 1px solid red; */
 }
@@ -65,6 +66,7 @@ body {
   bottom: 0px;
   z-index: 1;
   background: #ffffff;
+  transition: all 0.2s ease-in 0s;
   /* background: linear-gradient(to bottom,#A8ABB0, #D8DADC); */
 }
 

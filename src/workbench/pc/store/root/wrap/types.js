@@ -19,4 +19,5 @@ export default createTypes(
   'DEL_HISTORY',
   'DEL_ALL_HISTORY',
   'CHANGE_DEL_HISTORY',
+  'CHANGE_RETRACT',
 );

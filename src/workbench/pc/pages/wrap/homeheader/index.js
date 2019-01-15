@@ -9,22 +9,19 @@ import Icon from 'pub-comp/icon';
 /*   actions   */
 import rootActions from 'store/root/actions';
 import wrapActions from 'store/root/wrap/actions';
-import homeActions from 'store/root/home/actions';
 
 // 业务组件
 import DropdownButton from '../dropdown';
 import Menu from './menu';
 import Tabmenu from './tabs';
 import Header from '../header';
+import Im from '../im';
 import logoUrl from 'assets/image/logo2.svg';
 
-import { create, menus, history, home, active, upward } from './style.css';
+import { create, menu, menus, history, home, active, upward, im } from './style.css';
 
 
-const {
-  changeRequestDisplay,
-} = homeActions;
-const { openRoot, } = wrapActions;
+const { openRoot, changeRetract} = wrapActions;
 const {
   requestStart,
   requestSuccess,
@@ -36,6 +33,7 @@ const {
 @connect(
   mapStateToProps(
     'activeCarrier',
+    'retract',
     {
       key: 'userInfo',
       value: (wrap, ownProps, root) => {
@@ -47,16 +45,15 @@ const {
     }
   ),
   {
-    changeRequestDisplay,
     requestStart,
     requestSuccess,
     requestError,
     openRoot,
+    changeRetract,
   },
 )
 class Homeheader extends Component {
   static propTypes = {
-    changeRequestDisplay: PropTypes.func,
     requestStart: PropTypes.func,
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
@@ -67,7 +64,6 @@ class Homeheader extends Component {
     }),
   };
   static defaultProps = {
-    changeRequestDisplay: () => { },
     requestStart: () => { },
     requestSuccess: () => { },
     requestError: () => { },
@@ -84,21 +80,12 @@ class Homeheader extends Component {
   componentWillMount() { }
 
   componentDidMount() {
-    // const { changeRequestDisplay } = this.props;
-    // // 判断是否localstorage中包含这个值
+    // 判断是否localstorage中包含这个值
     if (localStorage.getItem('create')) {
-      //   changeRequestDisplay();
       localStorage.removeItem('create');
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    // if (this.props.userInfo !== nextProps.userInfo) {
-    //   this.setState({
-    //     allowTenants: nextProps.userInfo.allowTenants,
-    //   });
-    // }
-  }
 
   onLeftTitleClick = () => { }
 
@@ -158,39 +145,34 @@ class Homeheader extends Component {
     window.location.replace(locationUrl);
   }
 
-  // 点击下拉
-  allBtnOnclick = () => {
-    this.setState({
-      allBtn: !this.state.allBtn,
-    });
-  }
-
-  btnShowFn = (btnShow) => {
-    this.setState({
-      btnShow,
-    });
-  }
-
   changeHistory = () => {
     this.props.openHistory();
   }
 
+  changeRetract = () => {
+    const {retract, changeRetract} = this.props;
+    changeRetract(retract);
+  }
+
 
   render() {
-    const { openRoot, activeCarrier } = this.props;
+    const { openRoot, activeCarrier, retract, style } = this.props;
     const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '145px' }} /></a>;
     return (
-      <div className="header" id="home_header">
+      <div className="header" id="home_header" style={style}>
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
-          iconName={<Menu />}
+          iconName={retract ? <Menu /> : "master" }
         >
           <span>{title || '首页'}</span>
         </Header>
         <div className={menus}>
+          {
+            retract ? null : <div className={`${menu} um-box-center`}><Menu /></div>
+          }
           <div
-            className={`${history} tc`}
+            className={`${history} um-box-center`}
             onClick={() => { this.changeHistory() }}
           >
             <Icon type="record" />
@@ -202,8 +184,11 @@ class Homeheader extends Component {
             <Icon type="home" />
           </div>
           <Tabmenu />
-          <div className={`${upward} tc`}>
-            <Icon type="upward" />
+          {
+            retract ? null : <Im classname={im}/>
+          }
+          <div className={`${upward} tc`} onClick={this.changeRetract}>
+            <Icon type={retract ? "upward" : "pull-down"} />
           </div>
         </div>
       </div>

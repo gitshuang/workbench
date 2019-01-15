@@ -16,14 +16,15 @@
 .menus {
   display: flex;
   height: 40px;
-  overflow: hidden;
   background: rgb(243,243,243);
   padding-top: 3px;
   border-bottom: 1px solid rgba(78,89,104,0.19);
 }
+.menu{
+  width: 48px;
+}
 .history{
   float: left;
-  padding-top: 10px;
   width: 50px;
   height: 36px;
   cursor: pointer;
@@ -42,15 +43,6 @@
   background: #fff;
 }
 
-.upward{
-  position: relative;
-  top: -3px;
-  cursor: pointer;
-  float: right;
-  width: 36px;
-  padding-top: 10px;
-}
-
 /* tab */
 .tab{
   float: left;
@@ -63,7 +55,6 @@
 .tab ul li{
   float: left;
   width: 120px;
-  height: 40px;
   padding-right: 20px;
   cursor: pointer;
   position: relative;
@@ -129,6 +120,29 @@
 }
 .pulldown button:disabled i{
   color: #888888;
+}
+
+.im{
+  padding-top: 5px;
+  /* margin-right: 0; */
+}
+
+.upward{
+  position: relative;
+  top: -3px;
+  cursor: pointer;
+  float: right;
+  width: 56px;
+  padding-top: 10px;
+}
+.upward::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 13px;
+  width: 2px;
+  height: 15px;
+  background: #CCCCCC;
 }
 
 /*start:menubar*/
