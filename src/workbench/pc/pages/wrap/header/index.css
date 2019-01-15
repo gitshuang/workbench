@@ -8,6 +8,7 @@
   text-align: center;
   position: relative;
   cursor: pointer;
+  z-index: 1;
 }
 
 :global(.lebra-navbar-left-content){
