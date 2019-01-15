@@ -67,10 +67,10 @@ const routes = [
   //   path: '/createteam/:data',
   //   component: CreateTeam,
   // },
-  {
-    path: '/createenter',
-    component: CreateEnter,
-  },
+  // {
+  //   path: '/createenter',
+  //   component: Teamconfig,
+  // },
   // {
   //   path: '/teamconfig',
   //   component: Teamconfig,

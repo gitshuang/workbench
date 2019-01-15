@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
@@ -76,6 +77,36 @@ class Updateenter extends Component {
   }
 
   handleClick = (param, fn) => {
+    dispatchMessageTypeHandler({
+      type: "showDialog",
+      detail: {
+        type: 'warning',
+        title: '提示',
+        msg: "创建团队，即将刷新页面",
+        btn: [{
+          label: "确定",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            this.create(param, fn);
+          },
+        },
+        {
+          label: "取消",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            fn({ error: true });
+          },
+        }
+        ]
+      }
+    });
+  }
+
+  create = (param, fn) => {
     const {
       requestStart,
       requestSuccess,
