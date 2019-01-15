@@ -8,7 +8,7 @@ import languagesJSON from 'yutils/languages';
 import Sider from './sider';
 import { management } from './style.css'
 import CustomDragLayer from './dragLayer/customDragLayer.js';
-
+// import Simple from './Simple'
 
 class CreateManageModule extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class CreateManageModule extends Component {
           <Sider />
           <Content {...this.props} languagesJSON={languagesJSON}/>
           <CustomDragLayer/>
+          {/* <Simple /> */}
       </div>
     );
   }

@@ -41,7 +41,9 @@ const {
   EMPTY_SELECT_GROUP,
   GET_ALL_MENU_LIST,
   MOVE_SIDE_CARDS,
-  DROP_SIDE_CARDS
+  DROP_SIDE_CARDS,
+  UPDATE_MANAGE_LIST,
+  DROP_SIDE_CARDS_IN_GROUP,
 } = types;
 
 const actions = createActions(
@@ -54,6 +56,8 @@ const actions = createActions(
     [GET_ALL_SERVICES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
     [GET_ALL_MENU_LIST]: getAllMenuList,
   },
+  DROP_SIDE_CARDS_IN_GROUP,
+  UPDATE_MANAGE_LIST,
   DROP_SIDE_CARDS,
   MOVE_SIDE_CARDS,
   CHANGE_SIDER_STATE,

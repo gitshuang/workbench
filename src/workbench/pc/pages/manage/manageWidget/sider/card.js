@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { hasCardContainInGroups } from '../../utils';
 import { mapStateToProps } from '@u';
 import { app_col, list_item_content, title, isAddColor, title_name } from './style.css'
+import manageActions from 'store/root/manage/actions';
+const { updateManageList } = manageActions;
 
 const noteSource = {
     beginDrag(props, monitor, component) {
@@ -38,7 +40,24 @@ const noteSource = {
 
     },
     endDrag(props, monitor, component){
-        const currentItem = monitor.getItem()
+        const DraggedItem = monitor.getItem();
+        const {manageList,updateManageList }= props;
+        if(!monitor.didDrop()){
+            //debugger
+            if(hasCardContainInGroups(manageList, DraggedItem.id)){
+                
+                manageList.forEach(item=>{
+                    item.children.forEach((a,b)=>{
+                        if(a.widgetId == DraggedItem.id){
+                            item.children.splice(b,1)
+                        }
+                    })
+                })
+            }
+            updateManageList(manageList)
+        }else{
+            console.log("正常拖拽")//
+        }
     },
     canDrag(props, monitor) {
         if (props.hasBeenDragged) {
@@ -56,6 +75,7 @@ const noteSource = {
         },
     ),
     {
+        updateManageList
     }
 )
 @DragSource('item', noteSource, (connect, monitor) => {
@@ -76,7 +96,13 @@ export default class Card extends Component {
             captureDraggingState: true
         });
     }
-    
+    shouldComponentUpdate(nextProps){//优化：只有checked变化是才更新组件
+        if(nextProps.checked!==this.props.checked)return true;
+        if (hasCardContainInGroups(this.props.manageList, this.props.serviceId)) {
+			return true;
+        }
+        return false
+    }
     //改变SiderCard的选中状态
     onChangeChecked = (e) => {
         const checked = e.target.checked;
@@ -98,28 +124,18 @@ export default class Card extends Component {
                         isContainInGroups
                             ?
                             <div className={`${list_item_content} ${title} ${isAddColor}`}>
-                                <span className={title_name} style={{}}>{menuItemName}</span>
-                                <i
-                                    title="卡片已在组中"
-                                    className="selected"
-                                    style={{ color: 'rgb(0, 122, 206)'}}
-                                >+</i>
+                                <span className={title_name} >{menuItemName}</span>
                             </div>
                             :
-                            <div className={`${list_item_content} ${title}`}>
+                            <div className={`${list_item_content} ${title} ${checked?'item-checked':null}`}>
                                 <span className={title_name}>{menuItemName}</span>
                                 {checked ? (
                                     <i
                                         title="卡片已选中"
                                         className="selected"
                                         style={{ color: 'rgb(0, 122, 206)' }}
-                                    >+</i>
-                                ) : (
-                                        <i
-                                            title="卡片未选中"
-                                            className="unSelected"
-                                        >-</i>
-                                    )}
+                                    ></i>
+                                ) :null}
                             </div>
 
                     }

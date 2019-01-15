@@ -4,13 +4,10 @@ import PropTypes from 'prop-types';
 import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
 import { widgetStyle } from './widgetStyle';
-import { hasCardContainInGroups } from '../../utils';
-import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
 const { moveSideCards,dropSideCards } = manageActions;
-import update from 'react/lib/update';
 
 
 
@@ -35,27 +32,20 @@ const itemSource = {
 
 		return { id: props.id, parentId: props.parentId, type: props.type, props: props, index: props.index };
 	},
-	endDrag(props, monitor, component) {
-		return { offSetItem: monitor.getDifferenceFromInitialOffset() }
+	isDragging(props, monitor){
+		return monitor.getItem().id === props.id;
 	}
+	
 };
 const itemTarget = {
 	hover(props, monitor,component) {
-		let draggedId = monitor.getItem().id;	
-		if (draggedId !== props.id) {
-
+		let draggedId = monitor.getItem().id;
+		if (draggedId !== props.id) {  //如果被拖拽元素与被hover元素的id不一致，交换位置
 			const previousParentId = monitor.getItem().parentId;
 			const preType = monitor.getItem().type;
 
-			//检查是否有重复
 			if (preType == "cardlist") {
-				// draggedId = draggedId.filter(item => {
-				// 	return !hasCardContainInGroups(props.manageList, item.widgetId)
-				// })
-				// if (!draggedId.length) return
-
-				//if(props.isOver){
-					console.log(props.isOver,'isoveer=============');
+				
 					const cardList = monitor.getItem().cardList;
 					const siderCardPops = {
 						id:draggedId,
@@ -67,23 +57,13 @@ const itemTarget = {
 						cardList
 					}
 					props.moveSideCards(siderCardPops);
-				//}else{//hover上元素后又退出了
-					// props.manageList[props.propsIndex].children = props.manageList[props.propsIndex].children.filter(item=>{
-					// 	return item.widgetId!="shadowCardId"
-					// })
-					// const data = props.manageList[props.propsIndex].children
-					// const itemIndex = data.indexOf(props.shadowCard)
-					// debugger
-					// props.manageList.filter(({ widgetId }) => widgetId === monitor.getItem().parentId)[0].children = update(data, {
-					// 	$splice: [
-					// 	  [itemIndex,1 ],// 第一次进组
-					// 	],
-					//   });
-				//}
+			
 				
 				//当前拖拽的id   hover的id,hover的parentID,hover的项的type
 			}else{
 				props.moveItemDrag(draggedId, previousParentId, preType, props.id, props.data.parentId, props.data.type,monitor);
+				monitor.getItem().index = props.index
+				
 			}
 
 		}
@@ -91,8 +71,6 @@ const itemTarget = {
 	},
 	drop(props,monitor){
 		const dragSource = monitor.getItem()
-		// const didDrop = monitor.didDrop();
-		// const getDropResult = monitor.getDropResult();
 		if(dragSource.type=="cardlist"){
 		let draggedId = monitor.getItem().id;	
 		const previousParentId = monitor.getItem().parentId;
@@ -106,7 +84,7 @@ const itemTarget = {
 				parentId:props.data.parentId,
 				afterType:props.data.type,
 				monitor,
-				cardList
+				cardList 
 			}
 			props.dropSideCards(siderCardPops);
 		}
@@ -125,36 +103,34 @@ const itemTarget = {
 	  dropSideCards
 	}
 )
+
+@DropTarget("item", itemTarget, (connect, monitor) => {
+	return {
+		connectDropTarget: connect.dropTarget(),
+		isOver:monitor.isOver()
+	}
+})
 @DragSource("item", itemSource, (connect, monitor) => {
 	return {
 		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),
-		connectDragPreview: connect.dragPreview(),
 	};
 })
-@DropTarget("item", itemTarget, (connect, monitor) => {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver(),
-		canDrop: monitor.canDrop(),
-		offSet: monitor.getDifferenceFromInitialOffset(),
-		getItemType: monitor.getItem(),
-	}
-})
-
 export default class WidgetItem extends WidgetItemFather {
 	static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
 		isDragging: PropTypes.bool.isRequired,
 	}
+	static defaultProps = {
+		isDragging: false
+	  };
 	constructor(props) {
 		super(props);
 		this.state = {
 			title: '',
 		}
 	}
-
 
 
 	render() {
@@ -167,20 +143,19 @@ export default class WidgetItem extends WidgetItemFather {
 			}
 		} = this.props;
 		const { connectDragSource, connectDropTarget, isDragging, selectList, index,isOver } = this.props;//connectDropTarget,
-		const opacity = isDragging ? 0.5 : 1;
+		//const opacity = isDragging ? 0.5 : 1;
 		const checkType = selectList.indexOf(id) > -1 ? true : false;
 		const dragStyle = isOver?{
 			opacity:0.5,
-			backgroundColor:'red',
+			backgroundColor:'rgba(255,255,255,1)',
 			color:"blue"
 		}:{}
-
 		const { title } = this.state;
 		return connectDragSource(connectDropTarget(
-			<li title={title} className={`${widgetItem} ${widget_node} animated pulse`}
+			<li title={title} className={`${widgetItem} ${widget_node} animated `}
 				style={{ ...widgetStyle[size - 1], ...dragStyle }} >
 				<div className={title}>
-					<div className={title_right}>{`${widgetName} ${index}`}</div>
+				{isOver?null:<div className={title_right}>{`${widgetName} `}</div>}
 				</div>
 				<div className={widgetItemCont}>
 				</div>
@@ -190,8 +165,6 @@ export default class WidgetItem extends WidgetItemFather {
 						<div onClick={() => { this.popSave(this.props.data) }}><Icon title={languagesJSON.deleteService} type="dustbin" /></div>
 					</div>
 				</div>}
-				
-
 			</li>
 		));
 	}
