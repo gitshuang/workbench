@@ -98,6 +98,7 @@ class MenuBarInner extends Component {
         <Item key={id} style={isTop ? { fontSize: '14px' } : null}>
           <span className={`item_${i} ${last_item}`} title={name}>
             {name}
+            <Icon type='forward2' className="itemIcon"></Icon>
           </span>
         </Item>
       )
@@ -175,7 +176,7 @@ class MenuBarInner extends Component {
           result.push(
             <li className={sideBarListItem} key={menuItemId}>
               {/* <span className="sideBarListItemName" style={{ opacity: 0, visibility: 'hidden' }}>{'default'}</span> */}
-              <ul className="bottomBarPanel">
+              <ul className="bottomBarPanel mixHasNoThree">
                 <li className="bottomBar" onClick={e => this.openService(menuItemId, menuItemName, service.url, serviceCode)}>
                   {menuItemName}
                 </li>
@@ -232,7 +233,6 @@ class MenuBarInner extends Component {
       <div className={sideBar}>
         <Menu
           onClick={this.handleClick}
-          style={{ width: '200px' }}
           onOpenChange={this.onOpenChange}
           openKeys={openKeys}
           selectedKeys={selectedKeys}
