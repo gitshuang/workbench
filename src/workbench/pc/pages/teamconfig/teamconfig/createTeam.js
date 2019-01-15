@@ -149,6 +149,7 @@ class CreateTeam extends Component {
                 placeholder="最多60个字符"
                 {...getFieldProps('tenantName', {
                   validateTrigger: 'onBlur',
+                  initialValue: tenantName,
                   rules: [{ required: true, message: "请输入团队名称", }],
                 })}
               />
