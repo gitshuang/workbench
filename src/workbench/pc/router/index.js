@@ -68,8 +68,8 @@ const routes = [
   //   component: CreateTeam,
   // },
   // {
-  //   path: '/createenter/:data',
-  //   component: CreateEnter,
+  //   path: '/createenter',
+  //   component: Teamconfig,
   // },
   // {
   //   path: '/teamconfig',

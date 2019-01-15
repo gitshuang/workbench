@@ -4,11 +4,10 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getHost, getContext } from '@u';
 import Icon from 'pub-comp/icon';
-import { openService, openWin } from 'public/regMessageTypeHandler';
-import { QuickApplication } from 'diwork-business-components';
 import Header from 'components/header';
 import Personal from './personal';
 import SearchContainer from './search';
+import Im from '../im';
 
 import actions from 'store/root/actions';
 import styles from './index.css';
@@ -18,8 +17,6 @@ const {
   rightBtn,
 } = styles;
 const {
-  showIm,
-  hideIm,
   requestError,
   requestSuccess
 } = actions;
@@ -27,14 +24,13 @@ const {
 @withRouter
 @connect(
   mapStateToProps(
-    'messageType',
-    'imShowed',
-    'serviceList',
-    'userInfo',
+    // 'userInfo',
+    'retract',
+    {
+      namespace: 'wrap',
+    },
   ),
   {
-    showIm,
-    hideIm,
     requestError,
     requestSuccess,
   }
@@ -55,44 +51,6 @@ class HeaderContainer extends Component {
     };
   }
 
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-    this.refs.IM.addEventListener('mousedown', (e) => {
-      e.stopPropagation();
-    });
-  }
-
-  toggleIM = (e) => {
-    e.stopPropagation();
-    const {
-      imShowed,
-      showIm,
-      hideIm,
-    } = this.props;
-    if (imShowed) {
-      hideIm();
-    } else {
-      showIm();
-    }
-  }
-
-  // 调用快捷应用  打开全部应用
-  openAllFn = () => {
-    // this.props.history.push('/application');
-    openWin({
-      id: 'Application',
-      title: '全部应用',
-    });
-  }
-  // 调用快捷应用 点击单独每个应用
-  openServiceFn = (applicationCode) => {
-    openService(applicationCode, 2);
-    // this.props.history.push(`/app/${applicationCode}`);
-  }
-
   render() {
     const {
       children,
@@ -101,34 +59,24 @@ class HeaderContainer extends Component {
       iconName,
       leftContent,
       rightContent,
-      messageType,
-      imShowed,
-      serviceList,
-      userInfo,
+      // userInfo,
+      retract,
     } = this.props;
     const rightArray = Children.toArray(rightContent);
     const portalUrl = getHost('yzone');
-    const { locale } = getContext();
-    let imClass = imShowed ? "active tc" : "tc";
-    const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
+    // const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
+    const im = retract ? <Im /> : <div/>;
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <div className={`${rightBtn}`} style={{ display: homeStyle }}>
-        <a href={portalUrl} target="_blank" style={{ "textDecoration": "none" }}>
-          <Icon title="我的门户" type="Friends-space" style={{ fontSize: "18px" }} />
+      <div 
+        className={`${rightBtn}`} 
+        // style={{ display: homeStyle }}
+      >
+        <a href={portalUrl} target="_blank" >
+          <Icon title="我的门户" type="Friends-space" />
         </a>
       </div>,
-
-      // <QuickApplication
-      //   locale={locale}
-      //   serviceList={serviceList}
-      //   openAllFn={this.openAllFn}
-      //   openServiceFn={this.openServiceFn}
-      // />,
-      <div ref="IM" className={`${imClass} ${rightBtn}`} onClick={this.toggleIM}>
-        <Icon title="智能通讯" type="clock" style={{}} />
-        <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
-      </div>,
+      im,
       <Personal />,
     );
     return (

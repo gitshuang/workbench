@@ -15,6 +15,7 @@ const { getFolders } = wrapActions;
   mapStateToProps(
     'activeCarrier',
     'pinDisplay',
+    'retract',
     {
       namespace: 'wrap',
     }
@@ -27,25 +28,25 @@ class Wrap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      historyShow:false,//
+      historyShow: false,//
     };
   }
 
   componentDidMount() {
-    const {getFolders} = this.props;
+    const { getFolders } = this.props;
     getFolders();
   }
 
-  openHistory = () =>{
-    this.setState({historyShow:!this.state.historyShow})
+  openHistory = () => {
+    this.setState({ historyShow: !this.state.historyShow })
   }
   render() {
-    const { routes, activeCarrier, pinDisplay } = this.props;
+    const { routes, activeCarrier, pinDisplay, retract } = this.props;
     const vis = activeCarrier === 'home' ? 'block' : 'none';
     return (
       <div className='um-win'>
-        <Homeheader openHistory={this.openHistory}/>
-        <div className="content">
+        <Homeheader openHistory={this.openHistory} style={{ top: retract ? 0 : -48 }} />
+        <div className="content" style={{top: retract ? 88 : 40}}>
           <div style={{ display: vis }}>
             {
               routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
@@ -54,9 +55,9 @@ class Wrap extends Component {
           <Homecontent routes={routes} />
         </div>
         {/* <Pin /> */}
-        <History historyShow={this.state.historyShow} openHistory={this.openHistory}></History>
+          <History historyShow={this.state.historyShow} openHistory={this.openHistory}></History>
         {
-          pinDisplay ?  <Pin /> : null
+          pinDisplay ? <Pin /> : null
         }
       </div>
     );

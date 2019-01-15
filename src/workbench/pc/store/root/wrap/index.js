@@ -21,6 +21,7 @@ const {
   delAllHistory,
   // 手动修改
   changeDelHistory,
+  changeRetract,
 } = actions;
 
 const defaultState = {
@@ -29,13 +30,14 @@ const defaultState = {
     openStatus: false,
     portalUrl: ''
   },
+  retract: true,
   tabs: [],     // 多页签存储
   currItem: {}, // 当前页签的内容
   activeCarrier: 'home',  // 当前页签id
   pinDisplay: false,  // 是否显示 pin弹窗
   folders: [],        // 分组列表
   allMenuList: [],  // 菜单项
-  historyList:[],  // 历史记录
+  historyList: [],  // 历史记录
 };
 
 const reducer = handleActions({
@@ -235,10 +237,10 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      historyList:payload,
+      historyList: payload,
     };
   },
-  [delHistory]:(state, { payload, error}) => {
+  [delHistory]: (state, { payload, error }) => {
     if (error) {
       return state;
     }
@@ -246,20 +248,20 @@ const reducer = handleActions({
       ...state,
     };
   },
-  [changeDelHistory]:(state, { payload, error}) => {
-    let {latestAccessIds} = payload;
+  [changeDelHistory]: (state, { payload, error }) => {
+    let { latestAccessIds } = payload;
     let newHistory = [].concat(state.historyList);
-    
-    for(let id of latestAccessIds){
-      newHistory.forEach(({latestAccessId},index)=>{
-        if(id === latestAccessId){
-          newHistory.splice(index,1);
+
+    for (let id of latestAccessIds) {
+      newHistory.forEach(({ latestAccessId }, index) => {
+        if (id === latestAccessId) {
+          newHistory.splice(index, 1);
         }
       })
     }
     return {
       ...state,
-      historyList:newHistory,
+      historyList: newHistory,
     };
   },
   [delAllHistory]: (state, { payload, error }) => {
@@ -268,7 +270,16 @@ const reducer = handleActions({
     }
     return {
       ...state,
-      historyList:[],
+      historyList: [],
+    };
+  },
+  [changeRetract]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      retract: !payload,
     };
   },
 }, defaultState);
