@@ -144,7 +144,7 @@ export const Pages = {
   UpdateEnter: <UpdateEnter />,
   Invitation: <Invitation />,
   Account: <Account />,
-  Market: <Market />,
+  market: <Market />,
   Renew: <Renew />,
   UserInfo: <UserInfo />,
   ManageTeamEnter: <ManageTeamEnter />,
