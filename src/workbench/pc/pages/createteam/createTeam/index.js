@@ -93,7 +93,7 @@ class CreateTeamContent extends Component {
       detail: {
         type: 'warning',
         title: '提示',
-        msg: "创建团队，即将刷新页面",
+        msg: "点击确定后即将刷新页面，是否继续？",
         btn: [{
           label: "确定",
           fun: () => {
