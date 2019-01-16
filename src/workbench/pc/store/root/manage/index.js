@@ -71,6 +71,7 @@ const defaultState = {
     widgetId: "shadowCardId",
     widgetName: "item"
   },
+  ifDifferentSizeExchanged:false//解决小size的hover大size的会出现不停调用move方法的现象
 
 };
 
@@ -761,6 +762,7 @@ const reducer = handleActions({
       widgetId: "shadowCardId",
       widgetName: "item"
     },
+    ifDifferentSizeExchanged:false
   }),
   [emptySelectGroup]: state => ({
     ...state,
