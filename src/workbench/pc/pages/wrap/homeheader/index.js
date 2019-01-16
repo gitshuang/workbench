@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 // 公共组件
 import Icon from 'pub-comp/icon';
@@ -21,7 +22,7 @@ import logoUrl from 'assets/image/logo2.svg';
 import { create, menu, menus, history, home, active, upward, im } from './style.css';
 
 
-const { openRoot, changeRetract} = wrapActions;
+const { openRoot, changeRetract } = wrapActions;
 const {
   requestStart,
   requestSuccess,
@@ -121,7 +122,7 @@ class Homeheader extends Component {
             name,
             value,
             type,
-            fun: this.changeTenant,
+            fun: this.handleClickFn,
           }))
         }
       />
@@ -131,6 +132,36 @@ class Homeheader extends Component {
         创建团队 \ 企业
       </div>
     return dom;
+  }
+
+  handleClickFn = (tenantId) => {
+    dispatchMessageTypeHandler({
+      type: "showDialog",
+      detail: {
+        type: 'warning',
+        title: '提示',
+        msg: "切换组织，将会重新刷新页面。",
+        btn: [
+          {
+            label: "确定",
+            fun: () => {
+              dispatchMessageTypeHandler({
+                type: "closeDialogNew",
+              });
+              this.changeTenant(tenantId);
+            },
+          },
+          {
+            label: "取消",
+            fun: () => {
+              dispatchMessageTypeHandler({
+                type: "closeDialogNew",
+              });
+            },
+          }
+        ]
+      }
+    });
   }
 
   changeTenant = (tenantId) => {
@@ -150,7 +181,7 @@ class Homeheader extends Component {
   }
 
   changeRetract = () => {
-    const {retract, changeRetract} = this.props;
+    const { retract, changeRetract } = this.props;
     changeRetract(retract);
   }
 
@@ -163,7 +194,7 @@ class Homeheader extends Component {
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
-          iconName={retract ? <Menu /> : "master" }
+          iconName={retract ? <Menu /> : "master"}
         >
           <span>{title || '首页'}</span>
         </Header>
@@ -185,7 +216,7 @@ class Homeheader extends Component {
           </div>
           <Tabmenu />
           {
-            retract ? null : <Im classname={im}/>
+            retract ? null : <Im classname={im} />
           }
           <div className={`${upward} tc`} onClick={this.changeRetract}>
             <Icon type={retract ? "upward" : "pull-down"} />
