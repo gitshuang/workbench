@@ -24,6 +24,9 @@ const {
 } = rootActions;
 const { getUserInfo } = homeActions;
 const handlers = {
+  openWin() { 
+    
+  },
   openService({ serviceCode, data, type, tenantId }) {
     if (tenantId && serviceCode) {
       get('/service/getServiceByTenantIdAndServiceCode', {
