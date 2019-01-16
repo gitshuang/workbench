@@ -331,6 +331,12 @@
       })
     });
   };
+  var refreshUserInfo = function (callback) {
+    postToDiwork({
+      callbackId: reg('refreshUserInfo', callback || function () {
+      })
+    });
+  };
   var showDialog = function (data, callback) {
     postToDiwork({
       detail: data,
@@ -448,6 +454,7 @@
     // modifyBrm: modifyBrm,
     switchChatTo: switchChatTo,
     openMessage: openMessage,
+    refreshUserInfo: refreshUserInfo,
     showDialog: showDialog,
     closeDialogNew: closeDialogNew,
     openFrame: openFrame,

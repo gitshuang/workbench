@@ -105,6 +105,12 @@ const handlerList = {
       type,
     });
   },
+  refreshUserInfo(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
   showDialog(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
