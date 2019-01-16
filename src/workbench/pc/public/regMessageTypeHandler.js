@@ -130,7 +130,7 @@ const handlers = {
         } else {
           const locations = appendSearchParam(url, {
             ...getOpenServiceData(subCode),
-            subCode,
+            serviceCode: subCode,
           });
           store.dispatch(addTabs({
             id: subCode,
