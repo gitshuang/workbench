@@ -41,26 +41,6 @@ const itemSource = {
 const itemTarget = {
 	hover(props, monitor,component) {
 		let draggedId = monitor.getItem().id;
-
-		// const dragIndex = monitor.getItem().index
-		// const hoverIndex = props.index
-		// const hoverBoundingRect = findDOMNode(
-		// 	component,
-		// ).getBoundingClientRect()
-		// const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-		// const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2
-		// const clientOffset = monitor.getClientOffset()
-		// const hoverClientY = clientOffset.y - hoverBoundingRect.top
-		// const hoverClientX = clientOffset.x - hoverBoundingRect.left
-
-		// if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY&&hoverClientX < hoverMiddleX) {
-		// 	return
-		// }
-		// // Dragging upwards
-		// if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY&& hoverClientX > hoverMiddleX) {
-		// 	return
-		// } 
-	
 		if (draggedId !== props.id) {  //如果被拖拽元素与被hover元素的id不一致，交换位置
 
 			const previousParentId = monitor.getItem().parentId;

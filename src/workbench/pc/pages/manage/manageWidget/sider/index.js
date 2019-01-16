@@ -75,18 +75,20 @@ export default class MySider extends Component {
             })
             requestSuccess();
         })
-        const documentElement = document.documentElement || document.body;
-        this.serviceArea.style.height = (documentElement.clientHeight - 180) + "px"
-        window.addEventListener('resize', () => {
-            this.serviceArea.style.height = (documentElement.clientHeight - 180) + "px"
-        })
+        
+        this.setHeight();
+        window.addEventListener('resize',this.setHeight)
     }
-    componentDidUpdate(){
-        const documentElement = document.documentElement || document.body;
-        this.serviceArea.style.height = (documentElement.clientHeight - 180) + "px"
+    setHeight = ()=>{
+        if(this.serviceArea){
+            this.serviceArea.style.height = ((document.documentElement || document.body).clientHeight - 180) + "px"        
+        }
+    }
+    componentDidUpdate(){//解决隐藏后重新显示
+        this.setHeight();        
     }
     componentWillUnmount() {
-        window.removeEventListener('resize')
+        window.removeEventListener('resize',this.setHeight)
     }
     renderMenu = () => {
         const { menuList, isMenuListShow } = this.state;
@@ -252,6 +254,7 @@ export default class MySider extends Component {
 
     }
     render() {
+
         const { inputValue, searchValue } = this.state;
         const { isSiderDisplay, changeSiderState } = this.props;
         return (

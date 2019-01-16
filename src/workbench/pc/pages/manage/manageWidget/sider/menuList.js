@@ -20,7 +20,6 @@ export default class MenuList extends React.Component{
       }
     render(){
         const {menuList,isMenuListShow} = this.props;
-        console.log(menuList,'menuList========')
         return <Menu defaultOpenKeys={["0"]} className={menuListStyle} onClick={this.handleClick} style={{display:isMenuListShow?"block":"none"}}>
         {menuList.map((item, index) => {
             return <SubMenu title={item.menuBarName} key={item.menuBarId} >

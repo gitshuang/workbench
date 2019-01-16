@@ -754,6 +754,13 @@ const reducer = handleActions({
     allServicesByLabelGroup: {},
 
     dragState: true, // 是否可拖拽
+    isSiderDisplay: true,  //左侧默认展开
+    shadowCard: {
+      size: 1,
+      type: 3,
+      widgetId: "shadowCardId",
+      widgetName: "item"
+    },
   }),
   [emptySelectGroup]: state => ({
     ...state,

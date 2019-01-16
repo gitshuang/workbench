@@ -7,6 +7,7 @@ import { mapStateToProps } from '@u';
 import { app_col, list_item_content, title, isAddColor, title_name } from './style.css'
 import manageActions from 'store/root/manage/actions';
 const { updateManageList } = manageActions;
+import { is } from 'immutable';
 
 const noteSource = {
     beginDrag(props, monitor, component) {
@@ -96,13 +97,17 @@ export default class Card extends Component {
             captureDraggingState: true
         });
     }
-    shouldComponentUpdate(nextProps){//优化：只有checked变化是才更新组件
-        if(nextProps.checked!==this.props.checked)return true;
-        if (hasCardContainInGroups(this.props.manageList, this.props.serviceId)) {
-			return true;
-        }
-        return false
-    }
+    // shouldComponentUpdate(nextProps,nextState){//优化：只有checked变化是才更新组件
+    //     if(nextProps.checked!==this.props.checked)return true;
+    //     const isContain = hasCardContainInGroups(this.props.manageList, this.props.serviceId)
+    //     const isNextContain = hasCardContainInGroups(nextProps.manageList, this.props.serviceId);
+        
+       
+    //     if (isContain!=isNextContain) {
+	// 		return true;
+    //     }
+    //     return false
+    // }
     //改变SiderCard的选中状态
     onChangeChecked = (e) => {
         const checked = e.target.checked;
