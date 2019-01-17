@@ -1,9 +1,24 @@
 .applyForm {
   padding-bottom: 30px;
   /* width:510px; */
-  width: 570px;
 }
-.applyForm :global(.u-input-inner>input){
+.applyForm :global(.u-form-item ){
+  padding:10px 0;
+}
+.applyForm :global(.u-form-item label> span){
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+}
+.applyForm :global(.u-form-item span.error){
+  display: block;
+  padding-left: 100px;
+  padding-top: 4px;
+  color: #eb1d15;
+}
+.applyForm :global(input.companyInput),
+.applyForm :global(input.linkman),
+.applyForm :global(input.tenantTel){
   width: 370px!important;
   box-sizing: border-box;
   height: 50px;
@@ -17,6 +32,9 @@
   background: rgba(255,255,255,1);
   border: 1px solid rgba(221,221,221,1);
   border-radius:0px;
+}
+.applyForm :global(.u-city-select){
+  display: inline-block;
 }
 .applyForm :global(.u-city-select .u-select .u-select-selection),
 .applyForm :global(.u-form-item .u-select){
@@ -41,7 +59,7 @@
   color: rgba(51,51,51,1);
   line-height: 50px;
   text-align: right;
-  width: 200px;
+  width: 140px;
   padding-right: 30px;
 }
 body  .applyForm :global(.u-form-control),
