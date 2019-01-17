@@ -25,7 +25,7 @@
   ];
 
   var hostname = "yyuap.com";
-  if ((window.location.hostname.indexOf(hostname) !== -1) && (originList.indexOf(window.location.origin) > -1)) {
+  if ((window.location.hostname.indexOf(hostname) !== -1) && (originList.indexOf(window.location.origin) < 0)) {
     document.domain = hostname;
   }
 
