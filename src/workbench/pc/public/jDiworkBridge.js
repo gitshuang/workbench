@@ -171,10 +171,7 @@ const handlerList = {
     });
   },
   getData(type, event) {
-<<<<<<< HEAD
     // const data = store.getState().currItem.data;
-=======
->>>>>>> fd9beca960a6d6b4277bc739356dae47c5b5d596
     const tabs = store.getState().wrap.tabs;
     const {
       detail: {
