@@ -76,6 +76,9 @@
   padding-left: 8px;
   text-align: left;
   line-height: 36px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 .tab li div{
   position: absolute;

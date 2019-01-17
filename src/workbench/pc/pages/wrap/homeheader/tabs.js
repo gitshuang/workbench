@@ -101,7 +101,7 @@ class Tabmenu extends Component {
                   className={item.id === activeCarrier ? active : ''}
                 // style={{display: index < maxTabsNum ? 'block' : 'none' }}
                 >
-                  <p onClick={() => { showTabs(item) }}>{item.title}</p>
+                  <p onClick={() => { showTabs(item) }} title={item.title}>{item.title}</p>
                   <div onClick={() => { this.closeWin(item) }}>
                     <Icon type="error3" />
                   </div>
