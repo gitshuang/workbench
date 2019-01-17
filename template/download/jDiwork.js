@@ -17,17 +17,19 @@
   var isReady = false;
   var uid = 0;
   var messType = 'JDIWORK';
-  var hostname = "yyuap.com";
-  if (window.location.hostname.indexOf(hostname) !== -1) {
-    document.domain = hostname;
-  }
   var originList = [
     'http://workbench.yyuap.com',
     'http://workbenchdev.yyuap.com',
     'https://www.diwork.com',
     'https://workbench-daily.yyuap.com',
-    window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : ''),
   ];
+
+  var hostname = "yyuap.com";
+  if ((window.location.hostname.indexOf(hostname) !== -1) && (originList.indexOf(window.location.origin) > -1)) {
+    document.domain = hostname;
+  }
+
+  originList.push(window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : ''),);
 
   var getUid = function () {
     return ++uid;
