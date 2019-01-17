@@ -17,6 +17,10 @@
   var isReady = false;
   var uid = 0;
   var messType = 'JDIWORK';
+  var hostname = "yyuap.com";
+  if (window.location.hostname.indexOf(hostname) !== -1) {
+    document.domain = hostname;
+  }
   var originList = [
     'http://workbench.yyuap.com',
     'http://workbenchdev.yyuap.com',
@@ -169,15 +173,14 @@
   }
   var postToDiwork = function (data) {
     data.messType = messType;
-    window.top.postMessage(JSON.stringify(data), '*');
-    // var origin = window.top.location.origin;
-    // var param = JSON.stringify(data);
-
-    // if (originList.indexOf(origin) < 0) {
-    //   window.parent.postMessage(param, '*');
-    //   return;
-    // }
-    // window.top.postMessage(param, '*');
+    // window.top.postMessage(JSON.stringify(data), '*');
+    var origin = window.top.location.origin;
+    var param = JSON.stringify(data);
+    if (originList.indexOf(origin) < 0) {
+      window.parent.postMessage(param, '*');
+      return;
+    }
+    window.top.postMessage(param, '*');
   };
   var ready = function (callback) {
     var event = {
