@@ -248,7 +248,7 @@
     padding-bottom: 30px;
 }
 .serviceFour :global(.applyService){
-    width: 480px;
+    width: 470px;
     margin: 0 auto;
     transform: translateX(-30px);
 }
