@@ -41,6 +41,7 @@ const {
   dropSideCards,
   updateManageList,
   dropSideCardsInGroup,
+  updateCheckedCardList
 } = actions;
 
 const defaultState = {
@@ -71,8 +72,8 @@ const defaultState = {
     widgetId: "shadowCardId",
     widgetName: "item"
   },
-  ifDifferentSizeExchanged:false//解决小size的hover大size的会出现不停调用move方法的现象
-
+  ifDifferentSizeExchanged:false,//解决小size的hover大size的会出现不停调用move方法的现象,暂时没用上
+  checkedCardList:[],//左侧已选择元素数组
 };
 
 const findTreeById = (data, curId) => {
@@ -132,6 +133,12 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
+  [updateCheckedCardList]:(state,{payload})=>{
+    return {
+      ...state,
+      checkedCardList:payload
+    }
+  },
   [updateManageList]: (state, { payload }) => {
     payload = JSON.parse(JSON.stringify(payload));
     return {
@@ -200,11 +207,14 @@ const reducer = handleActions({
     });
     updateAllMenuList(state.allMenuList, manageAllList);
     manageList = JSON.parse(JSON.stringify(manageAllList));
+     //跟新checkedCardList
+    
     return {
       ...state,
       isEdit: true,
       manageList,
       currEditonlyId: '',
+      checkedCardList:[]
     };
   },
   //move shadow on items
@@ -274,9 +284,11 @@ const reducer = handleActions({
 
 
     manageList = JSON.parse(JSON.stringify(manageAllList));
+   
     return {
       ...state,
       manageList,
+      
     };
   },
   [getAllMenuList]: (state, { payload, error }) => {
@@ -762,7 +774,8 @@ const reducer = handleActions({
       widgetId: "shadowCardId",
       widgetName: "item"
     },
-    ifDifferentSizeExchanged:false
+    ifDifferentSizeExchanged:false,
+    checkedCardList:[]
   }),
   [emptySelectGroup]: state => ({
     ...state,
