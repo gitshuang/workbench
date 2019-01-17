@@ -63,7 +63,7 @@ class HistoryAll extends Component {
   formatTime = (time, type = 1) => {
     // type = 1说明返回2019110这种格式;type=2说明返回2018年12月27日 星期四这些信息
     let newTime = new Date(time);
-    let day = newTime.getDay();
+    let day = newTime.getDay() === 0? '日':newTime.getDay() ;
     let year = newTime.getFullYear();
     let month = newTime.getMonth();
     let date = newTime.getDate();

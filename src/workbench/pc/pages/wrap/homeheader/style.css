@@ -324,21 +324,23 @@
   color: #555;
   font-size: 12px;
   padding-left: 10px;
+  line-height: 12px;
+  padding: 16px 6px;
 }
 .sideBarListItem :global(.sideBarListItemName:before){
   display: block;
   content: '';
   position: absolute;
-  height: 14px;
+  height: 12px;
   width: 2px;
   background: #E14C46;
   top: 0;
   left: 0;
-  margin-top: 7px;
+  margin-top: 16px;
 }
 .sideBarListItem :global(ul.bottomBarPanel) {
   float: left;
-  width: 78%;
+  width: 100%;
 }
 .sideBarListItem :global(ul.bottomBarPanel.mixHasNoThree){
   float: left;
@@ -350,12 +352,12 @@
 .sideBarListItem :global(ul.bottomBarPanel li){
   color: #111;
   display: inline-block;
-  min-width: 120px;
+  min-width: 25%;
   box-sizing: border-box;
   text-align: left;
   position: relative;
   padding-bottom: 10px;
-  padding-left: 10px;
+  padding-left: 6px;
 }
 /* .sideBarListItem :global(ul.bottomBarPanel li:nth-child(n+2)) {
   border-left: 1px solid #dcdcdc;
