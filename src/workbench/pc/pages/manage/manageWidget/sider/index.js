@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
-const { changeSiderState, getAllMenuList } = manageActions;
+const { changeSiderState, getAllMenuList,updateCheckedCardList } = manageActions;
 import rootActions from 'store/root/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
 
@@ -20,6 +20,7 @@ import CardsList from './cardList';
         'isSiderDisplay',
         'manageList',
         'allMenuList',
+        'checkedCardList',
         {
             namespace: 'manage',
         },
@@ -29,7 +30,8 @@ import CardsList from './cardList';
         requestStart,
         requestSuccess,
         requestError,
-        changeSiderState
+        changeSiderState,
+        updateCheckedCardList
     }
 )
 export default class MySider extends Component {
@@ -41,7 +43,6 @@ export default class MySider extends Component {
             isMenuListShow: false,
             cardsList: [],
             keyPath: [],
-            checkedCardList: [],
             searchValue: ''
         };
     }
@@ -75,18 +76,20 @@ export default class MySider extends Component {
             })
             requestSuccess();
         })
-        const documentElement = document.documentElement || document.body;
-        this.serviceArea.style.height = (documentElement.clientHeight - 180) + "px"
-        window.addEventListener('resize', () => {
-            this.serviceArea.style.height = (documentElement.clientHeight - 180) + "px"
-        })
+        
+        this.setHeight();
+        window.addEventListener('resize',this.setHeight)
     }
-    componentDidUpdate(){
-        const documentElement = document.documentElement || document.body;
-        this.serviceArea.style.height = (documentElement.clientHeight - 180) + "px"
+    setHeight = ()=>{
+        if(this.serviceArea){
+            this.serviceArea.style.height = ((document.documentElement || document.body).clientHeight - 180) + "px"        
+        }
+    }
+    componentDidUpdate(){//解决隐藏后重新显示
+        this.setHeight();        
     }
     componentWillUnmount() {
-        window.removeEventListener('resize')
+        window.removeEventListener('resize',this.setHeight)
     }
     renderMenu = () => {
         const { menuList, isMenuListShow } = this.state;
@@ -109,75 +112,67 @@ export default class MySider extends Component {
                     item.menuItems.forEach((a) => {
                         if (a.menuItemId == keyPath[0]) {
                             inputValue += a.menuItemName;
+                            cardsList = a.children;
                             return
                         }
                     })
                 }
             })
-
         }
 
         if (!keyPath.length) {
             cardsList = this.state.menuList[0].menuItems[0].children
             inputValue = `${this.state.menuList[0].menuBarName}/${this.state.menuList[0].menuItems[0].menuItemName}`
         }
-        this.state.menuList.forEach((item) => {
-            if (item.menuBarId == keyPath[1]) {
-                item.menuItems.forEach((a) => {
-                    if (a.menuItemId == keyPath[0]) {
-                        cardsList = a.children;
-                        return
-                    }
-                })
-            }
-        })
+       
         this.setState({
             cardsList,
             inputValue,
             isMenuListShow: false,
-            inputValue: inputValue,
             keyPath
         })
 
     }
 
     renderService = () => {
+        const {checkedCardList} = this.props;
         let dom = '';
         dom = this.state.cardsList.map((a, b) => {
- 
+            if(a.children.length==0){
+                const isContainInCheckCardList = checkedCardList.some(item=>{return item.serviceId==a.serviceId})
+                a.checked = isContainInCheckCardList
+            }
             return a.children.length == 0 ? (<div key={a.menuItemId} className="result_app_list_3">
                 <Card {...a} key={a.menuItemIdb} index={b}
                     onChangeChecked={this.onChangeChecked}
-                    checkedCardList={this.state.checkedCardList} />
+                    />
                 <hr />
             </div>) :
                 (<CardsList 
                     key={a.menuItemId} 
                     list={a.children} 
                     listName = {a.menuItemName}
-                    checkedCardList = {this.state.checkedCardList}
+                    checkedCardList = {checkedCardList}
                     onChangeChecked={this.onChangeChecked}/>)
         })
         return dom
     }
     onChangeChecked = (checked, parentId, menuItemId) => {
-        const { cardsList, checkedCardList } = this.state;
-        let newCheckedCardList = checkedCardList.slice(0);
-        //把已拖拽过去的从列表中移除
-        newCheckedCardList = newCheckedCardList.filter(item => {
-            return item.hasBeenDragged != true
-        })
+        const { cardsList } = this.state;
+        //const newCardsList = JSON.parse(JSON.stringify(cardsList))
+        const {checkedCardList,updateCheckedCardList} = this.props;
+        let newCheckedCardList = JSON.parse(JSON.stringify(checkedCardList));
         if (checked) {//如果是选中，改变cardList状态，push checkedCardList
             cardsList.forEach((item) => {
                 if (item.menuItemId == menuItemId && !item.children.length) {
-                    item.checked = checked;
+                    //item.checked = checked;
                     newCheckedCardList.push(item)
                 }
 
                 if (item.children.length) {
                     item.children.forEach((a) => {
                         if (a.menuItemId == menuItemId) {
-                            a.checked = checked;
+                            //a.checked = checked;
                             newCheckedCardList.push(a)
                         }
                     })
@@ -187,7 +182,7 @@ export default class MySider extends Component {
         if (!checked) {//如果是解除选中状态，改变cardList状态，从 checkedCardList中删除
             cardsList.forEach((item) => {
                 if (item.menuItemId == menuItemId && !item.children.length) {
-                    item.checked = checked;
+                    //item.checked = checked;
                     newCheckedCardList = newCheckedCardList.filter(item => {
                         return item.menuItemId !== menuItemId
                     })
@@ -196,7 +191,7 @@ export default class MySider extends Component {
                 if (item.children.length) {
                     item.children.forEach((a) => {
                         if (a.menuItemId == menuItemId) {
-                            a.checked = checked;
+                           // a.checked = checked;
                             newCheckedCardList = newCheckedCardList.filter(item => {
                                 return item.menuItemId !== menuItemId
                             })
@@ -207,8 +202,8 @@ export default class MySider extends Component {
         }
         this.setState({
             cardsList: cardsList,
-            checkedCardList: newCheckedCardList
         })
+        updateCheckedCardList(newCheckedCardList)
     }
 
     searchService = (e) => {
@@ -239,7 +234,6 @@ export default class MySider extends Component {
         this.setState(
             {
                 ifSearchState: !this.state.ifSearchState,
-                checkedCardList: [],
                 cardsList: []
             }, () => {
                 if (this.state.ifSearchState) { //如果切换到search,就清空 ccardList
@@ -252,10 +246,11 @@ export default class MySider extends Component {
 
     }
     render() {
+
         const { inputValue, searchValue } = this.state;
         const { isSiderDisplay, changeSiderState } = this.props;
         return (
-            <TransitionGroup>
+            <TransitionGroup component="div"  className={sider_container}>
                 <CSSTransitionGroup
                     transitionName={{
                         enter: 'animated',
@@ -267,7 +262,7 @@ export default class MySider extends Component {
                     transitionLeaveTimeout={1300} >
                       {
                     isSiderDisplay ?
-                    <div className={sider_container}  style={{ display: isSiderDisplay ? "block" : "none" }}>
+                    <div  style={{ display: isSiderDisplay ? "block" : "none" }}>
                     <div className="sider-container-fixed">
                         <div className={add_item}>
                             <span>* 拖动下方磁贴至右侧所需位置</span>

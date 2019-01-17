@@ -14,7 +14,7 @@
 .sider_container{
   
     width: 320px;
-  
+    background:rgba(243,243,243,1);
 }
 .sider_container :global(.sider-container-fixed){
     width: 320px;
