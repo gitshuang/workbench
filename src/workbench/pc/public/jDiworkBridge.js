@@ -7,6 +7,8 @@ const keys = [
   // "TEST_IFRAME_EVENT"  //测试数据的api注册
 ];
 
+document.domain = "yyuap.com";
+
 const handlerList = {
   openService(type, event) {
     dispatchMessageTypeHandler(event);
