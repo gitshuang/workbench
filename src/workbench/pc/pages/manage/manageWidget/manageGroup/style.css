@@ -148,6 +148,9 @@
 .newGroupName+:global(.uf):hover{
 	color:#4A515D;
 }
+.groupArea{
+  margin: 0 32px;
+}
 .groupArea>section{
   border: 1px solid #fff;
   min-width: 460px;
@@ -161,6 +164,7 @@
 .addBtn :global(.u-button){
   width: 100%;
   margin: 0 0 16px 0;
+  display: flex
 }
 .addBtn :global(.u-button:hover){
   background: rgba(255,255,255,0.6);
@@ -202,6 +206,9 @@
 }
 .widgetTitleInit>div:nth-child(2)>div{
   display: inline-table;
+}
+.widgetTitleInit :global(.u-checkbox .u-checkbox-label:before){
+  top:-14px;
 }
 .check_group :global(.u-checkbox){
   display:inline;

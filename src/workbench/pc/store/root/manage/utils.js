@@ -18,7 +18,7 @@ export function updateAllMenuList(allMenuList,manageList){
                }else{
                    if(hasCardContainInGroups(manageList,c.serviceId)){
                     c.hasBeenDragged = true;
-                   }else{
+                }else{
                     c.hasBeenDragged = false;
                    }
                    

@@ -10,13 +10,8 @@ const { updateManageList } = manageActions;
 
 const noteSource = {
     beginDrag(props, monitor, component) {
-        // debugger
         let totalCards = [];
-        let realCheckedCardList = []; 
-        realCheckedCardList = props.checkedCardList.filter(item=>{
-            return item.hasBeenDragged!=true
-        })
-        realCheckedCardList.forEach(element => {
+        props.checkedCardList.forEach(element => {
             let checkedCard = {
                 size: 1,
                 type: 3,
@@ -60,6 +55,7 @@ const noteSource = {
         }
     },
     canDrag(props, monitor) {
+       // debugger
         if (props.hasBeenDragged) {
             return false
         }
@@ -70,6 +66,7 @@ const noteSource = {
 @connect(
     mapStateToProps(
         'manageList',
+        'checkedCardList',
         {
             namespace: 'manage',
         },
@@ -89,26 +86,25 @@ export default class Card extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount() {
-    }
+ 
     componentDidMount() {
         this.props.connectDragPreview(getEmptyImage(), {
             captureDraggingState: true
         });
     }
-    shouldComponentUpdate(nextProps){//优化：只有checked变化是才更新组件
-        if(nextProps.checked!==this.props.checked)return true;
-        if (hasCardContainInGroups(this.props.manageList, this.props.serviceId)) {
-			return true;
-        }
-        return false
-    }
+    // shouldComponentUpdate(nextProps,nextState){//优化：只有checked变化是才更新组件
+    //     if(nextProps.checked!==this.props.checked)return true;
+    //     const isContain = hasCardContainInGroups(this.props.manageList, this.props.serviceId)
+    //     const isNextContain = hasCardContainInGroups(nextProps.manageList, this.props.serviceId);
+        
+       
+    //     if (isContain!=isNextContain) {
+	// 		return true;
+    //     }
+    //     return false
+    // }
     //改变SiderCard的选中状态
-    onChangeChecked = (e) => {
-        const checked = e.target.checked;
-        const { menuItemId, parentId } = this.props;
-        this.props.onChangeChecked(checked, parentId, menuItemId);
-    };
+   
     clickSiderCard = () => {
         const { menuItemId, parentId, checked } = this.props;
         this.props.onChangeChecked(!checked, parentId, menuItemId);
@@ -116,7 +112,7 @@ export default class Card extends Component {
     render() {
 
         const { connectDragSource, manageList, serviceId, menuItemName, checked } = this.props;
-        const isContainInGroups = hasCardContainInGroups(manageList, serviceId)
+        const isContainInGroups = hasCardContainInGroups(manageList, serviceId);
         return connectDragSource(
             <div className={app_col}  onClick={this.clickSiderCard}>
                 

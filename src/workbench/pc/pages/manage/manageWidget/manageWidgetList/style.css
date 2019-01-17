@@ -38,10 +38,7 @@
     line-height: 40px;
     display: -webkit-box;
 }
-.title_right{
-    -webkit-box-align: center;
-    display: -webkit-box;
-}
+
 
 /* .title_left{
   width: 30px;
@@ -54,11 +51,14 @@
 } */
 
 .title_right{
+  display: -webkit-box;
+  -webkit-box-align: center;
   -webkit-box-flex:1.0;
   -webkit-box-pack: start;
   padding-left: 10px;
   font-size: 16px;
-  color:#111111;
+  font-family: MicrosoftYaHei;
+  color: rgba(17,17,17,1);
 }
 .file_title_right{
   /* margin-top: 6px;
@@ -146,6 +146,10 @@
 }
 .editDele :global(.iconfont:hover){
   color: #111111;
+}
+.editDele :global(.iconfont::before){
+  top: -2px;
+  position: relative;
 }
 .title_cont{
   position: absolute;
