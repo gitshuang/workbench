@@ -188,7 +188,7 @@ function messageHandler({ detail, callbackId }, event) {
     handlerList[type].call(event, callbackId, { type, detail });
   }
 }
-
+window.domain = 'yyuap.com';
 window.addEventListener('message', (event) => {
   if (event.data) {
     let data = event.data;
