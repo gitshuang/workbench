@@ -11,8 +11,8 @@ const originList = [
   'https://www.diwork.com',
   'https://workbench-daily.yyuap.com',
 ];
-const hostname = "yyuap.com";
-if ((window.location.hostname.indexOf(hostname) !== -1) && (originList.indexOf(window.location.origin) < 0)) {
+const hostname = "workbench.yyuap.com";
+if (window.location.hostname.indexOf('workbench') < 0 && window.location.hostname!== 'localhost') {
   document.domain = hostname;
 }
 
