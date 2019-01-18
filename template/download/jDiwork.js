@@ -22,9 +22,12 @@
     'http://workbenchdev.yyuap.com',
     'https://www.diwork.com',
     'https://workbench-daily.yyuap.com',
-    window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : ''),
   ];
-
+  var hostname = "yyuap.com";
+  if (originList.indexOf(window.location.hostname) > -1) {
+    document.domain = hostname;
+  }
+  originList.push(window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : ''));
 
   var getUid = function () {
     return ++uid;
