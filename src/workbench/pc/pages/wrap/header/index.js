@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { mapStateToProps, getHost, getContext } from '@u';
 import Icon from 'pub-comp/icon';
 import Header from 'components/header';
-import Personal from './personal';
+// import Personal from './personal';
+import Info from './info';
 import SearchContainer from './search';
 import Im from '../im';
 
@@ -77,7 +78,8 @@ class HeaderContainer extends Component {
         </a>
       </div>,
       im,
-      <Personal />,
+      // <Personal />,
+      <Info />
     );
     return (
       <Header
