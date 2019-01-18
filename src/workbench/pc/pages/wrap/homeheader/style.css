@@ -22,6 +22,7 @@
 }
 .menu{
   width: 48px;
+  position: relative;
 }
 .history{
   float: left;
@@ -149,6 +150,12 @@
 }
 
 /*start:menubar*/
+.menuBarPart{
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top:36px;
+}
 .sideBarPanel {
   width: 900px;
   box-sizing: content-box;
@@ -156,6 +163,7 @@
   padding: 0;
   box-shadow: 0px 3px 6px 0px rgba(74,81,93,0.25);
   border: 1px solid rgba(78,89,104,0.19);
+
 }
 .sideBarTitle {
   display: inline-block;

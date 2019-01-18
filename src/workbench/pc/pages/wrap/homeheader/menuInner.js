@@ -201,7 +201,7 @@ class MenuBarInner extends Component {
   // 点击bottomBar打开页签，bottomBar是一二级菜单中二级，一二三级菜单三级，一二三四级菜单四级
   openService = (id,name,url,serviceCode) =>{
     openService(serviceCode);
-    this.props.menuShow();
+    this.props.openMenu();
   }
   // 获取所有需要在三四级区域展示的数据
   setSideBarAllSub = (id,name,data) =>{
@@ -222,7 +222,7 @@ class MenuBarInner extends Component {
   }
 
   handleClickOutside() {
-    this.props.menuShow()
+    this.props.openMenu()
   }
 
   render() {
