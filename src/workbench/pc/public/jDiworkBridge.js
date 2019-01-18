@@ -6,13 +6,9 @@ const keys = [
   'JDIWORK',
   // "TEST_IFRAME_EVENT"  //测试数据的api注册
 ];
-const originList = [
-  'http://workbench.yyuap.com',
-  'https://www.diwork.com',
-  'https://workbench-daily.yyuap.com',
-];
-const hostname = "workbench.yyuap.com";
-if (window.location.hostname.indexOf('workbench') < 0 && window.location.hostname!== 'localhost') {
+const hostname = "yyuap.com";
+const host = window.location.hostname.split('.')[0];
+if (host.indexOf('workbench') < 0 && window.location.hostname!== 'localhost') {
   document.domain = hostname;
 }
 
