@@ -174,14 +174,14 @@
   }
   var postToDiwork = function (data) {
     data.messType = messType;
-    // window.top.postMessage(JSON.stringify(data), '*');
-    var origin = window.top.location.origin;
-    var param = JSON.stringify(data);
-    if (originList.indexOf(origin) < 0) {
-      window.parent.postMessage(param, '*');
-      return;
-    }
-    window.top.postMessage(param, '*');
+    window.top.postMessage(JSON.stringify(data), '*');
+    // var origin = window.top.location.origin;
+    // var param = JSON.stringify(data);
+    // if (originList.indexOf(origin) < 0) {
+    //   window.parent.postMessage(param, '*');
+    //   return;
+    // }
+    // window.top.postMessage(param, '*');
   };
   var ready = function (callback) {
     var event = {
