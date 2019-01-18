@@ -22,7 +22,7 @@ class History extends Component {
 
   render() {
     return (
-      <div className={historyPart}>
+      <div className={historyPart} style={this.props.style}>
         <TransitionGroup>
           <CSSTransitionGroup
             transitionName={{
