@@ -13,7 +13,7 @@ import wrapActions from 'store/root/wrap/actions';
 
 // 业务组件
 import DropdownButton from '../dropdown';
-import Menu from './menu';
+//import Menu from './menu';
 import Tabmenu from './tabs';
 import Header from '../header';
 import Im from '../im';
@@ -187,20 +187,20 @@ class Homeheader extends Component {
 
 
   render() {
-    const { openRoot, activeCarrier, retract, style } = this.props;
+    const { openRoot, activeCarrier, retract, style, openMenu } = this.props;
     const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '145px' }} /></a>;
     return (
       <div className="header" id="home_header" style={style}>
         <Header
           onLeftTitleClick={this.onLeftTitleClick}
           leftContent={this.getLeftContent()}
-          iconName={retract ? <Menu /> : "master"}
+          iconName={retract ? <Icon type='master' className="ignoreClass" onClick={openMenu} /> : "master"}
         >
           <span>{title || '首页'}</span>
         </Header>
         <div className={menus}>
           {
-            retract ? null : <div className={`${menu} um-box-center`}><Menu /></div>
+            retract ? null : <div className={`${menu} um-box-center`}><Icon type='master' className="ignoreClass" onClick={openMenu} /></div>
           }
           <div
             className={`${history} um-box-center`}
