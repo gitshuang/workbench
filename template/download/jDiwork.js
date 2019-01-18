@@ -24,11 +24,12 @@
     'https://workbench-daily.yyuap.com',
   ];
   var hostname = window.location.hostname;
+  var origin = window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
   var domain = "yyuap.com";
-  if (originList.indexOf(window.location.hostname) > -1 && hostname.indexOf(domain) > -1) {
-    document.domain = hostname;
+  if (originList.indexOf(origin) > -1 && hostname.indexOf(domain) > -1) {
+    document.domain = domain;
   }
-  originList.push(window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : ''));
+  originList.push(origin);
 
   var getUid = function () {
     return ++uid;

@@ -13,7 +13,8 @@ const originList = [
 ];
 const domain = "yyuap.com";
 const hostname = window.location.hostname;
-if (hostname.indexOf(domain) > -1 && originList.indexOf(hostname) < 0 ) {
+const origin = window.location.origin;
+if (hostname.indexOf(domain) > -1 && originList.indexOf(origin) < 0 ) {
   document.domain = domain;
 }
 
