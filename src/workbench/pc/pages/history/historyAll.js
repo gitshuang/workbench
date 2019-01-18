@@ -58,12 +58,13 @@ class HistoryAll extends Component {
       historyListNew: {},//需要处理historyList按照日期分类
       deleteSelected:{},//选择要删除的历史记录
     }
+    this.DateChinese  = ['日','一','二','三','四','五',]
   }
 
   formatTime = (time, type = 1) => {
     // type = 1说明返回2019110这种格式;type=2说明返回2018年12月27日 星期四这些信息
     let newTime = new Date(time);
-    let day = newTime.getDay() === 0? '日':newTime.getDay() ;
+    let day = this.DateChinese[newTime.getDay()];
     let year = newTime.getFullYear();
     let month = newTime.getMonth();
     let date = newTime.getDate();
