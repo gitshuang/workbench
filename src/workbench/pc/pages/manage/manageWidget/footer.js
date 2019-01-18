@@ -26,7 +26,9 @@ export default class Footer extends Component{
     window.addEventListener('resize',this.setWidth)
   }
   setWidth=()=>{
+    if(this.footer){
     this.footer.style.width = this.footer.parentNode.clientWidth+'px';
+    }
   }
   componentWillUnmount(){
     window.removeEventListener('resize',this.setWidth)
