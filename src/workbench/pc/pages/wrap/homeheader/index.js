@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import { mapStateToProps } from '@u';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
@@ -52,7 +53,7 @@ class Homeheader extends Component {
     userInfo: {},
     openMenu: () => { },
     openHistory: () => { },
-    
+
   };
   constructor(props) {
     super(props);
@@ -61,7 +62,7 @@ class Homeheader extends Component {
     };
   }
 
-  componentWillMount() { 
+  componentWillMount() {
     // 判断是否localstorage中包含这个值
     if (localStorage.getItem('create')) {
       localStorage.removeItem('create');
@@ -69,7 +70,7 @@ class Homeheader extends Component {
   }
 
   componentDidMount() {
-    
+
   }
 
   enterOnclick = () => {
@@ -163,13 +164,29 @@ class Homeheader extends Component {
     const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '145px' }} /></a>;
     return (
       <div className="header" id="home_header" style={style}>
-        <Header
-          leftContent={this.getLeftContent()}
-          iconName={retract ? <Icon type='master' className="ignoreClass" onClick={openMenu} /> : "master"}
+        <CSSTransitionGroup
+          transitionName={{
+            enter: 'animated',
+            enterActive: `fadeIn`,
+            leave: 'animated',
+            leaveActive: `fadeOut`,
+          }}
+          transitionLeaveTimeout={100}
         >
-          <span>{title || '首页'}</span>
-        </Header>
-        <Navs openMenu={openMenu} openHistory={openHistory}/>
+          {
+            retract
+              ?
+              <Header
+                leftContent={this.getLeftContent()}
+                iconName={<Icon type='master' className="ignoreClass" onClick={openMenu} />}
+              >
+                <span>{title || '首页'}</span>
+              </Header>
+              : null
+          }
+        </CSSTransitionGroup>
+
+        <Navs openMenu={openMenu} openHistory={openHistory} />
       </div>
     );
   }

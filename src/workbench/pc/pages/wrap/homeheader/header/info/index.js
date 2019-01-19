@@ -41,28 +41,26 @@ class Info extends Component {
                             : <Icon type="staff-solid" />
                     }
                 </div>
-                <TransitionGroup>
-                    <CSSTransitionGroup
-                        transitionName={{
-                            enter: 'animated',
-                            enterActive: `fadeInRight`,
-                            leave: 'animated',
-                            leaveActive: `fadeOutRight`,
-                        }}
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}
-                    >
-                        {
-                            infoDisplay 
-                            ? 
-                            <InfoContent 
+                <CSSTransitionGroup
+                    transitionName={{
+                        enter: 'animated',
+                        enterActive: `fadeInRight`,
+                        leave: 'animated',
+                        leaveActive: `fadeOutRight`,
+                    }}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                >
+                    {
+                        infoDisplay
+                            ?
+                            <InfoContent
                                 closeInfo={this.closeInfo}
                                 outsideClickIgnoreClass={'ignoreClass'}
-                            /> 
+                            />
                             : null
-                        }
-                    </CSSTransitionGroup>
-                </TransitionGroup>
+                    }
+                </CSSTransitionGroup>
             </div>
         )
 

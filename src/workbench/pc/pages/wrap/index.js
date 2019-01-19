@@ -61,7 +61,6 @@ class Wrap extends Component {
         <Homeheader
           openHistory={this.openHistory}
           openMenu={this.openMenu}
-          style={{ top: retract ? 0 : this.nav - this.height }}
         />
         <div className="content" style={{ top: retract ? this.height : this.nav }}>
           <div style={{ display: vis }}>
