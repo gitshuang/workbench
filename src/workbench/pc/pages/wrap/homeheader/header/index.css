@@ -9,7 +9,6 @@
   position: relative;
   cursor: pointer;
   z-index: 1;
-  padding-left: 15px;
 }
 
 :global(.lebra-navbar-left-content){
