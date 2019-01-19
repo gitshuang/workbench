@@ -43,7 +43,7 @@ export default class CardsList extends React.Component {
             <div className="result_app_list_4" style={{...showStyle,transition:"height .5s"}} ref={ref=>this.listDom=ref}>
                 {list.map((item, c) => {
 
-                    return <Card {...item} key={item.menuItemId} index={c}
+                    return <Card data={item} key={item.menuItemId} index={c}
                         onChangeChecked={onChangeChecked}
                         checkedCardList={checkedCardList}
                         />//{item.menuItemName}

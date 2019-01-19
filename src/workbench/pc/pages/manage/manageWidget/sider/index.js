@@ -138,22 +138,22 @@ export default class MySider extends Component {
         const {checkedCardList} = this.props;
         let dom = '';
         dom = this.state.cardsList.map((a, b) => {
-            if(a.children.length==0){
-                const isContainInCheckCardList = checkedCardList.some(item=>{return item.serviceId==a.serviceId})
-                a.checked = isContainInCheckCardList
-            }
-            return a.children.length == 0 ? (<div key={a.menuItemId} className="result_app_list_3">
-                <Card {...a} key={a.menuItemIdb} index={b}
-                    onChangeChecked={this.onChangeChecked}
+            if (a.children&&a.children.length == 0) {
+                const isContainInCheckCardList = checkedCardList.some(item => { return item.serviceId == a.serviceId })
+                a.checked = isContainInCheckCardList;
+                return <div key={a.menuItemId} className="result_app_list_3">
+                    <Card data={a} key={a.menuItemIdb} index={b}
+                        onChangeChecked={this.onChangeChecked}
                     />
-                <hr />
-            </div>) :
-                (<CardsList 
-                    key={a.menuItemId} 
-                    list={a.children} 
-                    listName = {a.menuItemName}
-                    checkedCardList = {checkedCardList}
-                    onChangeChecked={this.onChangeChecked}/>)
+                    <hr />
+                </div>
+            }  
+            return <CardsList
+                key={a.menuItemId}
+                list={a.children}
+                listName={a.menuItemName}
+                checkedCardList={checkedCardList}
+                onChangeChecked={this.onChangeChecked} />
         })
         return dom
     }
@@ -162,7 +162,7 @@ export default class MySider extends Component {
         //const newCardsList = JSON.parse(JSON.stringify(cardsList))
         const {checkedCardList,updateCheckedCardList} = this.props;
         let newCheckedCardList = JSON.parse(JSON.stringify(checkedCardList));
-        if (checked) {//如果是选中，改变cardList状态，push checkedCardList
+        if (checked) {//如果是选中，push checkedCardList
             cardsList.forEach((item) => {
                 if (item.menuItemId == menuItemId && !item.children.length) {
                     //item.checked = checked;
@@ -203,6 +203,7 @@ export default class MySider extends Component {
         this.setState({
             cardsList: cardsList,
         })
+        console.log(newCheckedCardList,'newCheckedCardList=======================')
         updateCheckedCardList(newCheckedCardList)
     }
 

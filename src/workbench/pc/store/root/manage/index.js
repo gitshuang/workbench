@@ -179,6 +179,7 @@ const reducer = handleActions({
       isEdit: true,
       manageList,
       currEditonlyId: '',
+      checkedCardList:[]//drop 后checkedCardList 置空
     };
   },
   //在元素上drop side card on item
@@ -188,7 +189,7 @@ const reducer = handleActions({
     }
   }) => {
     cardList.forEach(item => { item.parentId = parentId });
-
+  
     const manageAllList = state.manageList;
     let manageList = manageAllList;
     const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
@@ -214,7 +215,7 @@ const reducer = handleActions({
       isEdit: true,
       manageList,
       currEditonlyId: '',
-      checkedCardList:[]
+      checkedCardList:[]//drop 后checkedCardList 置空
     };
   },
   //move shadow on items
