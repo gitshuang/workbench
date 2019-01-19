@@ -171,6 +171,7 @@ class Homeheader extends Component {
             leave: 'animated',
             leaveActive: `fadeOut`,
           }}
+          transitionEnterTimeout={120}
           transitionLeaveTimeout={100}
         >
           {
