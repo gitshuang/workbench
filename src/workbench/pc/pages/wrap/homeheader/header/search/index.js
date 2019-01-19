@@ -6,7 +6,7 @@ import { dispatch, trigger } from 'public/componentTools';
 import { Search } from 'diwork-business-components';
 import searchActions from 'store/root/search/actions';
 import rootActions from 'store/root/actions';
-import { openWin } from '../../../public/regMessageTypeHandler';
+import { openWin } from 'public/regMessageTypeHandler';
 
 const { getSearchSuggest } = searchActions;
 const { requestError } = rootActions;
