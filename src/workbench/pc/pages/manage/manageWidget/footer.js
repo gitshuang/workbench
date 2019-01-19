@@ -21,18 +21,7 @@ export default class Footer extends Component{
     super(props);
   }
   
-  componentDidMount(){
-    this.setWidth();
-    window.addEventListener('resize',this.setWidth)
-  }
-  setWidth=()=>{
-    if(this.footer){
-    this.footer.style.width = this.footer.parentNode.clientWidth+'px';
-    }
-  }
-  componentWillUnmount(){
-    window.removeEventListener('resize',this.setWidth)
-  }
+
   render(){
     var {
       batchDelectFn,
@@ -45,7 +34,7 @@ export default class Footer extends Component{
     } = this.props;
     
     return (
-        <div className={um_footer} ref={ref=>this.footer = ref}>
+        <div className={um_footer} >
           <div className={umBoxJustify}>
              <div className={`${batchArea}  horizontalParent`}>
               <ButtonDefaultLine onClick={batchDelectFn} disabled={selectList.length ? false:true} className="horizontal">{languagesJSON.delete}</ButtonDefaultLine>
