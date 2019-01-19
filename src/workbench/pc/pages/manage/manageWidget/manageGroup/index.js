@@ -260,13 +260,13 @@ export default class ManageGroup extends GroupItem {
               <Icon title={languagesJSON.delete} type="dustbin" onClick={() => { this.delectGroupFn(index) }} />
               {
                 index ?
-                  <Icon title={languagesJSON.move_up} type="record" onClick={() => { this.moveTopFn(index); }} />
-                  : <Icon title={languagesJSON.move_up} type="record" style={{color:'#999'}} onClick={() => { return false }} />}
+                  <Icon title={languagesJSON.move_up} type="move-upward" onClick={() => { this.moveTopFn(index); }} />
+                  : <Icon title={languagesJSON.move_up} type="move-upward" className="disabled" onClick={() => { return false }} />}
               {
                 index !== manageList.length - 1 ?
-                  <Icon title={languagesJSON.move_down} type="record" onClick={() => { this.moveBottomFn(index) }} />
+                  <Icon title={languagesJSON.move_down} type="move-down" onClick={() => { this.moveBottomFn(index) }} />
                   :
-                  <Icon title={languagesJSON.move_down} type="record" style={{color:'#999'}} onClick={() => { return false }} />}
+                  <Icon title={languagesJSON.move_down} type="move-down" className="disabled" onClick={() => { return false }} />}
             </div>
             {/* {this.renderDrop(index)} */}
           </div>

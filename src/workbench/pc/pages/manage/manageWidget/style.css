@@ -49,7 +49,9 @@
 .um_footer{
 	width:100%;
 	position:fixed;
-	bottom: 0;
+  bottom: 0;
+  right: 0;
+  padding-left: 320px;
 }
 .um_footer :global(.horizontalParent button ){
   width:68px;

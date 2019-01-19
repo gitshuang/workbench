@@ -265,28 +265,27 @@ export default class MySider extends Component {
                     <div  style={{ display: isSiderDisplay ? "block" : "none" }}>
                     <div className="sider-container-fixed">
                         <div className={add_item}>
-                            <span>* 拖动下方磁贴至右侧所需位置</span>
+                            <span><Icon type="notice" />拖动下方磁贴至右侧所需位置</span>
                             {/* <i className={toggleBar}
                                 onClick={changeSiderState}>
                                 {"<"}</i> */}
                         </div>
 
-                        {!this.state.ifSearchState ?
-                            <div className={selectServiceArea}>
-                                <input className={selectService}
-                                    onFocus={() => { this.setState({ isMenuListShow: true }) }}
-                                    value={inputValue}
-                                // onBlur={() => { this.setState({ isMenuListShow: false }) }}
-                                />
-                                <Icon type="search" onClick={this.switchFetchFn} />
-                            </div> : null}
+                       
                         {this.state.ifSearchState ?
                             <div className={selectServiceArea}>
                                 <input className={selectService}
                                     onKeyUp={this.searchService}
                                 />
                                 <span onClick={this.switchFetchFn}>取消</span>
-                            </div> : null}
+                            </div> : <div className={selectServiceArea}>
+                                <input className={selectService}
+                                    onFocus={() => { this.setState({ isMenuListShow: true }) }}
+                                    value={inputValue}
+                                // onBlur={() => { this.setState({ isMenuListShow: false }) }}
+                                />
+                                <Icon type="search" onClick={this.switchFetchFn} />
+                            </div> }
 
                         {this.renderMenu()}
                         <div className="serviceArea" ref={ref => this.serviceArea = ref}>

@@ -9,7 +9,12 @@
 .add_item span{
     color: #FF8B00;
     font-size: 14px;
-    
+    display: inline-block
+}
+.add_item :global(span i.diworkiconfont) {
+    vertical-align: sub;
+    color: #FF8B00;
+    margin-right: 2px;
 }
 .sider_container{
   

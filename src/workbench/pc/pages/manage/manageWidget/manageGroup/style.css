@@ -176,6 +176,9 @@
 .iconBox{
   position: relative;
 }
+.iconBox :global(.diworkiconfont.disabled::before) {
+  color: #999
+}
 .iconBox p{
   top:34px;
   font-size:12px;
