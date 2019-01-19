@@ -40,7 +40,7 @@ const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "Manage
 // 个人主页
 const HomePage = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/homepage'));
 // 全部历史
-const History = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/history/historyAll.js'));
+const History = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/history'));
 
 const routes = [
   // {

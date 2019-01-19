@@ -1,0 +1,53 @@
+/* menus 样式 */
+.menus {
+  display: flex;
+  height: 40px;
+  background: rgb(243,243,243);
+  padding-top: 3px;
+  border-bottom: 1px solid rgba(78,89,104,0.19);
+}
+.menu{
+  width: 48px;
+  position: relative;
+}
+.history{
+  float: left;
+  width: 50px;
+  height: 36px;
+  cursor: pointer;
+}
+.home{
+  float: left;
+  padding-top: 8px;
+  width: 68px;
+  height: 36px;
+  cursor: pointer;
+}
+.home:hover{
+  background: rgb(231,231,231);
+}
+.menus .active{
+  background: #fff;
+}
+
+.upward{
+  position: relative;
+  top: -3px;
+  cursor: pointer;
+  float: right;
+  width: 56px;
+  padding-top: 10px;
+}
+.upward::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 13px;
+  width: 2px;
+  height: 15px;
+  background: #CCCCCC;
+}
+
+.im{
+  padding-top: 5px;
+}

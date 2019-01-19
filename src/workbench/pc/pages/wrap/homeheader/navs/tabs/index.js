@@ -95,11 +95,10 @@ class Tabmenu extends Component {
       <div className={tab} ref={(c) => { this.tabsArea = c; }}>
         <ul>
           {
-            tabs.map((item, index) => {
+            tabs.map((item) => {
               return (
                 <li key={`${item.id}`}
                   className={item.id === activeCarrier ? active : ''}
-                // style={{display: index < maxTabsNum ? 'block' : 'none' }}
                 >
                   <p onClick={() => { showTabs(item) }} title={item.title}>{item.title}</p>
                   <div onClick={() => { this.closeWin(item) }}>

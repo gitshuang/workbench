@@ -2,10 +2,9 @@ import React, { Component, Children, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { mapStateToProps, getHost, getContext } from '@u';
+import { mapStateToProps, getHost } from '@u';
 import Icon from 'pub-comp/icon';
 import Header from 'components/header';
-// import Personal from './personal';
 import Info from './info';
 import SearchContainer from './search';
 import Im from '../im';
@@ -25,7 +24,6 @@ const {
 @withRouter
 @connect(
   mapStateToProps(
-    // 'userInfo',
     'retract',
     {
       namespace: 'wrap',
@@ -39,10 +37,12 @@ const {
 class HeaderContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
+    retract: PropTypes.bool,
   }
 
   static defaultProps = {
     iconName: "home",
+    retract: false,
   }
 
   constructor(props) {
@@ -60,25 +60,19 @@ class HeaderContainer extends Component {
       iconName,
       leftContent,
       rightContent,
-      // userInfo,
       retract,
     } = this.props;
     const rightArray = Children.toArray(rightContent);
     const portalUrl = getHost('yzone');
-    // const homeStyle = userInfo && userInfo.allowTenants && userInfo.allowTenants.length ? "inline-block" : 'none';
     const im = retract ? <Im /> : <div/>;
     const rightContents = rightArray.concat(
       <SearchContainer />,
-      <div 
-        className={`${rightBtn}`} 
-        // style={{ display: homeStyle }}
-      >
+      <div className={`${rightBtn}`} >
         <a href={portalUrl} target="_blank" >
           <Icon title="我的门户" type="Friends-space" />
         </a>
       </div>,
       im,
-      // <Personal />,
       <Info />
     );
     return (
