@@ -12,7 +12,7 @@
 }
 .applyForm :global(.u-form-item span.error){
   display: block;
-  padding-left: 100px;
+  padding-left: 140px;
   padding-top: 4px;
   color: #eb1d15;
 }

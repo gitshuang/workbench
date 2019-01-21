@@ -36,14 +36,9 @@ class CreateEnter extends Component {
     super(props);
     this.state = {
       flag: false,
-      tenantIndustry: 'A',
-      tenantSize: 'A',//staff的范围
-      linkman: '',
-      companyName: '',
-      tenantTel: '',
       defaultValue: {
-        province: 'Beijing',
-        city: 'Beijing',
+        province: '北京',
+        city: '北京',
       }
     };
   }
@@ -95,7 +90,7 @@ class CreateEnter extends Component {
     } = this.state;
     const { getFieldProps, getFieldError } = this.props.form;
     // let value =
-    let {tenantIndustry , tenantSize, companyName, linkman,tenantTel} = this.props.form.getFieldsValue();
+    let { tenantIndustry , tenantSize, companyName, linkman,tenantTel} = this.props.form.getFieldsValue();
     let disabled = false;
     if (flag || tenantIndustry == '' || tenantSize == '' || companyName == '' || linkman == '' || tenantTel == '' || !(/^1[34578][0-9]{9}$/).test(tenantTel)) {
       disabled = true;
@@ -173,7 +168,7 @@ class CreateEnter extends Component {
               className="linkman"
               {...getFieldProps('linkman', {
                 validateTrigger: 'onBlur',
-                rules: [{ required: true, message: 'Please enter the contact name', }],
+                rules: [{ required: true, message: 'Please enter the contact name'}],
               })}
             />
             <span className='error'>
