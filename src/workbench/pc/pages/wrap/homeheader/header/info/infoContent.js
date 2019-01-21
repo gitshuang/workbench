@@ -47,7 +47,7 @@ class InfoContent extends Component {
     componentWillMount() {
         this.getAllEnableFunc();
     }
-
+    // 从ftl文件中获取语言列表
     getAllEnableFunc = () => {
         const { locale, multilist } = window.diworkContext();
         const language = JSON.parse(multilist);
