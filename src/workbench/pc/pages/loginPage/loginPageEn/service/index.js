@@ -121,7 +121,7 @@ class Service extends Component {
             <div className={serviceFour} id="apply">
                   <div className="mainContent">
                       <span className="title">Applicaiton</span>
-                      <CreateEnter />
+                      <CreateEnter/>
                   </div>
             </div>
             <div className="mainFooter">
