@@ -1,16 +1,13 @@
 .dropdownButtonCont{
-    display: table;
+    display: flex;
     border: 1px solid #E6E7E9;
     border-radius: 100px;
-    padding-left: 13px;
-    margin-left: -5px; 
+    padding-left: 12px;
     background:rgba(243,243,243,1);
-    height: 30px;
+    height: 32px;
 }
 
 .labelCont{
-    margin-left: -8px;
-    display: table-cell;
 }
 .btnUpward,.btnPullDown{
     text-align: center;
@@ -38,7 +35,7 @@
     color:rgba(225,76,70,1);
 }
 .btnUpward>div,.btnPullDown>div{
-    width: 31px;
+    width: 30px;
     margin-left: 5px;
     margin-right: 3px;
     cursor: pointer;
@@ -52,6 +49,10 @@
     box-shadow: 0 3px 6px 0px rgba(74,81,93,0.25);
     border: rgba(78,89,104,0.19);
     width: 233px;
+    margin-top: 0;
+}
+.menuStyle :global(.u-dropdown-menu-item:first-child){
+    margin-top: 0;
 }
 .dropMenuItem{
     background: red;
@@ -143,7 +144,7 @@ dropdown_button_cont :globle(.u-dropdown-menu>.u-dropdown-menu-item):hover{
 :global(.home_title) > span{
     display: block;
     white-space: nowrap;
-    width:180px;
+    width:168px;
     overflow: hidden;
     text-overflow: ellipsis;
 }

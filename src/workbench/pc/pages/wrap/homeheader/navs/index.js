@@ -7,13 +7,14 @@ import { mapStateToProps } from '@u';
 import Icon from 'pub-comp/icon';
 import Tabmenu from './tabs';
 import Im from '../im';
-
+import History from './history';
 import { menus, menu, history, home, active, upward, im } from './style.css';
 
 /*   actions   */
 import wrapActions from 'store/root/wrap/actions';
 const { openRoot, changeRetract } = wrapActions;
 
+import menuImg from 'assets/image/menu2.svg';
 
 @connect(
   mapStateToProps(
@@ -34,25 +35,25 @@ class Navs extends Component {
     requestSuccess: PropTypes.func,
     requestError: PropTypes.func,
     openMenu: PropTypes.func,
-    openHistory: PropTypes.func,
   };
   static defaultProps = {
     requestStart: () => { },
     requestSuccess: () => { },
     requestError: () => { },
     openMenu: () => { },
-    openHistory: () => { },
   };
   constructor(props) {
     super(props);
     this.state = {
-      
+      historyShow: false,
     };
   }
 
 
-  changeHistory = () => {
-    this.props.openHistory();
+  openHistory = () => {
+    this.setState({
+      historyShow: !this.state.historyShow,
+    });
   }
 
   changeRetract = () => {
@@ -67,13 +68,22 @@ class Navs extends Component {
 
       <div className={menus}>
         {
-          retract ? null : <div className={`${menu} um-box-center`}><Icon type='master' className="ignoreClass" onClick={openMenu} /></div>
+          retract 
+          ? null 
+          : <div className={`${menu} um-box-center`}>
+              <img src={menuImg} className="ignoreClass" onClick={openMenu} />
+            </div>
         }
         <div
           className={`${history} um-box-center`}
-          onClick={() => { this.changeHistory() }}
+          onClick={() => { this.openHistory() }}
         >
           <Icon type="History" />
+          <History
+            historyShow={this.state.historyShow}
+            openHistory={this.openHistory}
+          >
+          </History>
         </div>
         <div
           className={`${home} tc ${activeCarrier === "home" ? active : ''}`}
