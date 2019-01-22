@@ -76,6 +76,10 @@ class InfoContent extends Component {
             window.location.reload();
         });;
     }
+    // 切换登录
+    onChangeEntry = (e) => {
+        console.log(e);
+    }
     // 打开账号管理
     openAccount = () => {
         openWin({
@@ -113,7 +117,7 @@ class InfoContent extends Component {
                             <li>
                                 <Menu className={menu} onClick={this.onChangeLanguage} >
                                     <SubMenu 
-                                        key="sub3" 
+                                        key="language" 
                                         title={
                                             <div className={list}>
                                                     <Icon type="language" />
@@ -126,6 +130,22 @@ class InfoContent extends Component {
                                                 return <MenuItem key={item.langCode}>{item.dislpayName}</MenuItem>
                                             })
                                         }
+                                    </SubMenu>
+                                </Menu>
+                            </li>
+                            <li>
+                                <Menu className={menu} onClick={this.onChangeEntry} >
+                                    <SubMenu 
+                                        key="login" 
+                                        title={
+                                            <div className={list}>
+                                                    <Icon type="language" />
+                                                <span>默认登录</span>
+                                            </div>
+                                        }
+                                    >
+                                        <MenuItem key="diwork">工作台</MenuItem>
+                                        <MenuItem key="nec">门户</MenuItem>
                                     </SubMenu>
                                 </Menu>
                             </li>

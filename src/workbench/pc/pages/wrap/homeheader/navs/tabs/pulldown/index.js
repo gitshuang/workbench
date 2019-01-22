@@ -115,7 +115,7 @@ class Pulldown extends Component {
                     overlay={menus}
                     animation="slide-up"
                 >
-                    <Button disabled={!tabs.length}><Icon type="pull-down" /></Button>
+                    <Button disabled={!tabs.length}><Icon type="More" /></Button>
                 </Dropdown>
             </div>
         );

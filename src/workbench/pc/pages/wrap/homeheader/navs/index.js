@@ -73,13 +73,13 @@ class Navs extends Component {
           className={`${history} um-box-center`}
           onClick={() => { this.changeHistory() }}
         >
-          <Icon type="record" />
+          <Icon type="History" />
         </div>
         <div
           className={`${home} tc ${activeCarrier === "home" ? active : ''}`}
           onClick={() => { openRoot() }}
         >
-          <Icon type="home" />
+          <Icon type="home-black" />
         </div>
         <Tabmenu />
         {
