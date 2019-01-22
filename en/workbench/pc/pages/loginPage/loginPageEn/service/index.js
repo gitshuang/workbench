@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
-import MainNav from '../navs/MainNav.js';
-import TopNav from '../navs/TopNav.js';
-import icon1 from './images/icon1.png';
-import icon2 from './images/icon2.png';
-import icon3 from './images/icon3.png';
-import icon4 from './images/icon4.png';
-import dot from './images/dot.png';
+import MainNav from '../../navs/MainNav.js';
+import TopNav from '../../navs/TopNav.js';
+import icon1 from '../../service/images/icon1.png'; //注意使用的图片是loginPage的
+import icon2 from '../../service/images/icon2.png';
+import icon3 from '../../service/images/icon3.png';
+import icon4 from '../../service/images/icon4.png';
+import dot from '../../service/images/dot.png';
 import CreateEnter from './createEnter';
-// import footerPng from '../pages/images/footer.png';
-import Footer from '../footer/index.js';
+import Footer from '../../footer';
 import{
-  ServicePanelEn,
+  ServicePanel,
   serviceThree,
   tipTitle,
   tipCon,
   serviceFour,
-} from './index.css';
+} from '../../service/index.css';
 
-// const  CAS_SERVER = "https://idtest.yyuap.com",
-// realservice="http://workbenchdev.yyuap.com";
 class Service extends Component {
   constructor(props){
     super(props);
     this.state = {
      
     }
-    // this.registryUrl = CAS_SERVER + '/register?sysid=diwork&mode=light&yhtrealservice=' + realservice;
  
   }
 
@@ -47,9 +43,17 @@ class Service extends Component {
   }
   render() {
     return (
-        <div className={ServicePanelEn}>
+        <div className={ServicePanel}>
             {/* <TopNav /> */}
-            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={''} activeIndex={'2'} history={this.props.history} lanCallBack={()=>{}}/>
+            <MainNav 
+              btnShow={false} 
+              loginClick={this.loginClick} 
+              registryUrl={''} 
+              activeIndex={'2'} 
+              history={this.props.history} 
+              lanCallBack={()=>{}}
+              currentLan='en_US'
+            />
             <div className="serviceOne">
                   <div className="mainContent">
                       <span className="title">Customized Service</span>
@@ -117,14 +121,9 @@ class Service extends Component {
             <div className={serviceFour} id="apply">
                   <div className="mainContent">
                       <span className="title">Applicaiton</span>
-                      {/* <div className="applyService">
-                      </div> */}
                       <CreateEnter />
                   </div>
             </div>
-            {/* <div className="mainFooter mainFooterFake">
-              <img src={footerPng} alt="" className="footerImg"/>
-            </div> */}
             <div className="mainFooter">
                 <Footer />
             </div>

@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import MainNav from '../navs/MainNav.js';
-import TopNav from '../navs/TopNav.js';
-// import footerPng from '../pages/images/footer.png';
+import MainNav from '../../navs/MainNav.js';
 import { Map, Marker } from 'react-amap';
-import Footer from '../footer/index.js';
+import Footer from '../../footer';
 
 import{
   AboutUsPanel,
- 
-} from './index.css';
+} from '../../aboutus/index.css';
  
 const wrapperStyles = {
     width: "100%",
@@ -38,8 +35,15 @@ class AboutUs extends Component {
     
     return (
         <div className={AboutUsPanel}>
-            {/* <TopNav /> */}
-            <MainNav btnShow={false} loginClick={this.loginClick} registryUrl={this.registryUrl} activeIndex={'4'} history={this.props.history} lanCallBack={()=>{}} />
+           <MainNav 
+            btnShow={false} 
+            loginClick={this.loginClick} 
+            registryUrl={this.registryUrl} 
+            activeIndex={'4'} 
+            history={this.props.history} 
+            lanCallBack={()=>{}} 
+            currentLan='en_US'
+           />
            <div className="mainCon">
                 <div className="title">Contact Us</div>
                 <div className="absoutUsCon">

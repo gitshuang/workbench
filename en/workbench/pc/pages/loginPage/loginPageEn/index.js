@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { getHost } from '@u';
-import MainNav from './navs/MainNav.js';
+import MainNav from '../navs/MainNav';
 import PageSeven from './pages/PageSeven.js';
 import {
   HomePagePanel,
   rightDotMenu,
   HomeOnePage
-} from './index.css';
+} from '../index.css';
 const windowLocationOrigin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');//ie8-ie10不兼容的原因
 
 const CAS_SERVER = getHost('euc'),//"https://user-daily.yyuap.com",
@@ -74,10 +74,24 @@ class LoginPage extends Component {
     }
     return (
       <div className={HomePagePanel}>
-        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} lanCallBack={this.lanCallBack} />
+        <MainNav 
+          btnShow={btnShow} 
+          loginClick={this.loginClick} 
+          registryUrl={this.registryUrl} 
+          history={this.props.history} 
+          activeIndex={'1'} 
+          lanCallBack={this.lanCallBack} 
+          currentLan={'en_US'} 
+        />
         <div className={`${HomeOnePage} amBody`}>
           <div className="videoContainer"></div>
-          <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace} loginModalShow={loginModalShow} />
+          <PageSeven 
+            loginClick={this.loginClick} 
+            registryUrl={this.registryUrl} 
+            curIndex={curIndex} 
+            sevenSpace={this.sevenSpace} 
+            loginModalShow={loginModalShow} 
+          />
         </div>
         {
           loginModalShow && (
@@ -88,7 +102,6 @@ class LoginPage extends Component {
                   src={this.loginUrl}
                   width="390px" height="356" name="yhtloginIframe"
                   scrolling="Yes"
-                  // noresize="noresize"
                   frameBorder="0">
                 </iframe>
               </div>

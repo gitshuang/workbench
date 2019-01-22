@@ -1,4 +1,4 @@
-import Footer from '../footer/index.js';
+import Footer from '../../footer';
 import {
   amPage,
   amBg,

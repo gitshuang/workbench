@@ -12,9 +12,7 @@ import FormControl from 'bee/form-control';
 import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
 import { texts } from 'yutils/entertext';
-import {
-  applyForm, applyBtn,
-} from './style.css';
+import { applyForm, applyBtn,} from '../../service/style.css';
 const FormItem = Form.FormItem;
 const { applyService } = loginpageActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -38,14 +36,9 @@ class CreateEnter extends Component {
     super(props);
     this.state = {
       flag: false,
-      tenantIndustry: 'A',
-      tenantSize: 'A',//staff的范围
-      linkman: '',
-      companyName: '',
-      tenantTel: '',
       defaultValue: {
-        province: '北京',
-        city: '北京',
+        province: '',
+        city: '',
       }
     };
   }
@@ -97,7 +90,7 @@ class CreateEnter extends Component {
     } = this.state;
     const { getFieldProps, getFieldError } = this.props.form;
     // let value =
-    let {tenantIndustry , tenantSize, companyName, linkman,tenantTel} = this.props.form.getFieldsValue();
+    let { tenantIndustry , tenantSize, companyName, linkman,tenantTel} = this.props.form.getFieldsValue();
     let disabled = false;
     if (flag || tenantIndustry == '' || tenantSize == '' || companyName == '' || linkman == '' || tenantTel == '' || !(/^1[34578][0-9]{9}$/).test(tenantTel)) {
       disabled = true;
@@ -106,15 +99,15 @@ class CreateEnter extends Component {
       <div className="applyService">
         <Form className={applyForm} showSubmit={false}>
           <FormItem>
-            <label><span>企业名称<font color="red">&nbsp;*&nbsp;</font></span></label>
+            <label><span>Company Name<font color="red">&nbsp;*&nbsp;</font></span></label>
             <FormControl
               name="companyName"
               value={companyName}
               className="companyInput"
-              placeholder="请输入企业名称"
+              placeholder="Please enter Company Name "
               {...getFieldProps('companyName', {
                 validateTrigger: 'onBlur',
-                rules: [{ required: true, message: '请输入企业名称', }],
+                rules: [{ required: true, message: 'Please enter Company Name ', }],
               })}
             />
             <span className='error'>
@@ -123,7 +116,7 @@ class CreateEnter extends Component {
           </FormItem>
 
           <FormItem>
-            <label><span>{texts.tenantIndustryLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
+            <label><span>Industry<font color="red">&nbsp;*&nbsp;</font></span></label>
             <Select
               name="tenantIndustry"
               {
@@ -141,7 +134,7 @@ class CreateEnter extends Component {
           </FormItem>
 
           <FormItem>
-            <label><span>{texts.tenantSizeLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
+            <label><span>Company Scale<font color="red">&nbsp;*&nbsp;</font></span></label>
             <Select
               {
               ...getFieldProps('tenantSize', {
@@ -157,7 +150,7 @@ class CreateEnter extends Component {
             </Select>
           </FormItem>
           <FormItem>
-            <label><span>{texts.addressLabel}&nbsp;&nbsp;</span></label>
+            <label><span>Province/City &nbsp;&nbsp;</span></label>
             <CitySelect
               name="address"
               onChange={this.onChange}
@@ -167,15 +160,15 @@ class CreateEnter extends Component {
           </FormItem>
 
           <FormItem>
-            <label><span>{texts.linkmanLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
+            <label><span>Contact<font color="red">&nbsp;*&nbsp;</font></span></label>
             <FormControl
               name="linkman"
               value={linkman || ''}
-              placeholder={texts.linkmanError}
+              placeholder={'Please enter the contact name'}
               className="linkman"
               {...getFieldProps('linkman', {
                 validateTrigger: 'onBlur',
-                rules: [{ required: true, message: texts.linkmanError, }],
+                rules: [{ required: true, message: 'Please enter the contact name'}],
               })}
             />
             <span className='error'>
@@ -183,15 +176,15 @@ class CreateEnter extends Component {
             </span>
           </FormItem>
           <FormItem>
-            <label><span>{texts.tenantTelLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
+            <label><span>Cellphone<font color="red">&nbsp;*&nbsp;</font></span></label>
             <FormControl
               name="tenantTel"
               value={linkman || ''}
-              placeholder={texts.tenantTelPlace}
+              placeholder={'Please enter the cellphone number'}
               className="tenantTel"
               {...getFieldProps('tenantTel', {
                 validateTrigger: 'onBlur',
-                rules: [{ required: true, message: texts.tenantTelPlace, },
+                rules: [{ required: true, message: 'Please enter the cellphone number', },
                   {pattern:/^1[34578][0-9]{9}$/, message:texts.tenantTelError}],
               })}
             />
