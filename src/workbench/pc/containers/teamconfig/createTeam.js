@@ -27,9 +27,9 @@ const {
 } = teamconfigActions;
 
 class SubmitBtn extends Component {
-  click = () => {
+  click = (e) => {
     if (typeof this.props.onClick === 'function') {
-      this.props.onClick();
+      this.props.onClick(e);
     }
   }
   render() {
@@ -38,7 +38,7 @@ class SubmitBtn extends Component {
         {
           this.props.disabled
             ?
-            <ButtonBrand onClick={this.click} >保存</ButtonBrand>
+            <ButtonBrand onClick={(e) => { this.click(e) }} >保存</ButtonBrand>
             :
             <ButtonBrand disabled={true} >保存</ButtonBrand>
         }
@@ -65,6 +65,7 @@ class CreateTeam extends Component {
     this.state = {
       disabled: true,
       isWaterMark: 1,
+      errorType: false,
     }
   }
 
@@ -77,103 +78,51 @@ class CreateTeam extends Component {
       }
       this.setState({
         ...payload
-      })
+      });
       requestSuccess();
     });
   }
 
-  checkForm = (flag, data) => {
+  clickFn = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (err) {
+        console.log('校验失败', values);
+      } else {
+        this.checkForm(values);
+      }
+    });
+  }
+
+  checkForm = (data) => {
+    const { logo, tenantId } = this.state;
     const { createTeam, changeTenantName } = this.props;
-    const { logo, tenantId, joinPermission, invitePermission, allowExit, isWaterMark } = this.state;
-
-    let _logo = data.find((da) => da.name == "logo");
-    if (!_logo.value && _logo.value == "") {
-      _logo.value = logo;
-    }
-
-    let _joinPermission = data.find((da) => da.name == "joinPermission");
-    if (!_joinPermission.value && _joinPermission.value == "") {
-      _joinPermission.value = joinPermission;
-    }
-
-    let _invitePermission = data.find((da) => da.name == "invitePermission");
-    if (!_invitePermission.value && _invitePermission.value == "") {
-      _invitePermission.value = invitePermission;
-    }
-
-    let _allowExit = data.find((da) => da.name == "allowExit");
-    if (!_allowExit.value && _allowExit.value == "") {
-      _allowExit.value = allowExit;
-    }
-    let _watermark = data.find((da) => da.name == "isWaterMark");
-    if (!_watermark.value && _watermark.value == "") {
-      _watermark.value = isWaterMark;
-    }
-    if (flag) {
-      this.setState({
-        disabled: false
-      })
-      data.push({ name: "tenantId", value: tenantId });
-      requestStart();
-  
-      createTeam(
-        data.reduce(
-          (obj, { value, name }) => {
-            name ? obj[name] = value : null;
-            return obj;
-          },
-          {},
-        ), "settingEnter"
-      ).then(({ error, payload }) => {
-        this.setState({ disabled: true });
-        if (error) {
-          requestError(payload);
-          return;
-        }
-        // 改变当前页面上边的团队名称
-        changeTenantName(payload.tenantName);
-        // 重新拉取userinfo 
-        dispatchMessageTypeHandler({
-          type: 'refreshUserInfo',
-        });
-        requestSuccess();
-        openMess({
-          title: '保存成功',
-          duration: 2,
-          type: 'success',
-          closable: false,
-        });
-
-        // const tenantId = payload.tenantId;
-        // window.location.href = "/?tenantId=" + tenantId + "&switch=true";
+    this.setState({
+      disabled: false
+    });
+    data.tenantId = tenantId;
+    data.logo = logo;
+    requestStart();
+    createTeam(data).then(({ error, payload }) => {
+      this.setState({ disabled: true });
+      if (error) {
+        requestError(payload);
+        return;
+      }
+      // 改变当前页面上边的团队名称
+      changeTenantName(payload.tenantName);
+      // 重新拉取userinfo 
+      dispatchMessageTypeHandler({
+        type: 'refreshUserInfo',
       });
-    }
-  }
-
-  inputOnChange = (e, name) => {
-    this.state[name] = e;
-    this.setState({
-      ...this.state
-    })
-  }
-
-  setOptherData = (obj) => {
-    this.state[obj.name] = obj.value;
-    this.setState({
-      ...this.state
-    })
-  }
-
-  allowExitChange = (value) => {
-    this.setState({
-      allowExit: value
-    })
-  }
-
-  watermarkChange = (value) => {
-    this.setState({
-      isWaterMark: value
-    })
+      requestSuccess();
+      openMess({
+        title: '保存成功',
+        duration: 2,
+        type: 'success',
+        closable: false,
+      });
+    });
   }
 
   onChangeUpload = (url) => {
@@ -182,38 +131,50 @@ class CreateTeam extends Component {
     })
   }
 
-  setUrl(name, url) {
-    this.state[name] = url;
-    this.setState({
-      ...this.state
-    })
-  }
-
   render() {
     const { tenantName, logo, allowExit, isWaterMark, invitePermission, joinPermission } = this.state;
-
+    const { getFieldProps, getFieldError } = this.props.form;
+    const _this = this;
     return (
       <div className={team_cont}>
 
         <div className={form_team}>
           <Form submitCallBack={this.checkForm} showSubmit={false} className={enter_form}>
-            <FormItem showMast={false} labelName={<span>团队名称<font color='red'> &nbsp;*&nbsp;</font></span>}
-              isRequire={true} valuePropsName='value' errorMessage="请输入团队名称" method="blur"
-              inline={true}>
-              <FormControl name="tenantName" value={tenantName ? tenantName : ""} onChange={(e) => { this.inputOnChange(e, "tenantName") }} placeholder="最多60个字符" />
+            <FormItem>
+              <label><span>团队名称<font color='red'> &nbsp;*&nbsp;</font></span></label>
+              <FormControl
+                name="tenantName"
+                value={tenantName || ""}
+                onChange={(e) => { this.inputOnChange(e, "tenantName") }}
+                placeholder="最多60个字符"
+                {...getFieldProps('tenantName', {
+                  validateTrigger: 'onBlur',
+                  initialValue: tenantName,
+                  rules: [{ required: true, message: "请输入团队名称", }],
+                })}
+              />
+              <span className='error'>
+                {getFieldError('tenantName')}
+              </span>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>团队头像<font color='red'> &nbsp; &nbsp;</font></span>} valuePropsName='value' method="change" inline={true}>
-              <Upload name='logo' logo={logo ? logo : ""} onChange={this.onChangeUpload} />
+            <FormItem >
+              <label><span>团队头像<font color='red'> &nbsp; &nbsp;</font></span></label>
+              <div style={{ float: "left" }}>
+                <Upload name='logo' logo={logo || ""} onChange={this.onChangeUpload} />
+              </div>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>邀请规则<font color='red'>&nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur" inline={true}>
+            <FormItem>
+              <label><span>邀请规则<font color='red'>&nbsp;*&nbsp;</font></span></label>
               <Select
-                defaultValue="1"
-                name="invitePermission"
-                value={invitePermission ? invitePermission : "1"}
                 style={{ width: 338, marginRight: 6 }}
-                onChange={(e) => { this.setOptherData({ name: "invitePermission", value: e }) }}
+                {
+                ...getFieldProps('invitePermission', {
+                  initialValue: invitePermission || '1',
+                  rules: [{ required: true }]
+                })
+                }
               >
                 <Option value="1">全员邀请</Option>
                 <Option value="2">禁止邀请</Option>
@@ -221,34 +182,66 @@ class CreateTeam extends Component {
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>申请权限<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} valuePropsName='value' errorMessage="请选择所属行业" method="blur" inline={true}>
+            <FormItem>
+              <label><span>申请权限<font color='red'>&nbsp;*&nbsp;</font></span></label>
               <Select
-                name="joinPermission"
-                defaultValue="1"
-                value={joinPermission ? joinPermission : "1"}
                 style={{ width: 338, marginRight: 6 }}
-                onChange={(e) => { this.setOptherData({ name: "joinPermission", value: e }) }}
+                {
+                ...getFieldProps('joinPermission', {
+                  initialValue: joinPermission || '1',
+                  rules: [{ required: true }]
+                })
+                }
               >
                 <Option value="0">允许 </Option>
                 <Option value="1">禁止</Option>
               </Select>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<span>允许用户退出<font color='red'> &nbsp;*&nbsp;</font></span>} isRequire={false} method="change" inline={true}>
-              <Radio.RadioGroup name="allowExit" onChange={this.allowExitChange} selectedValue={allowExit || "0"}>
+            <FormItem>
+              <label><span>允许用户退出<font color='red'>&nbsp;*&nbsp;</font></span></label>
+              <Radio.RadioGroup
+                name="allowExit"
+                selectedValue={allowExit || '0'}
+                {
+                ...getFieldProps('allowExit', {
+                  initialValue: allowExit || '0',
+                  onChange(value) {
+                    _this.setState({ allowExit: value });
+                  },
+                  rules: [{ required: true }]
+                })
+                }
+              >
                 <Radio value="0" >禁止</Radio>
                 <Radio value="1" >允许</Radio>
               </Radio.RadioGroup>
             </FormItem>
 
-            <FormItem showMast={false} labelName={<div><span>通讯录显示水印</span><font color='red'> &nbsp;*&nbsp;</font></div>} isRequire={false} method="change" inline={true}>
-              <Radio.RadioGroup name="isWaterMark" onChange={this.watermarkChange} selectedValue={isWaterMark}>
+            <FormItem>
+              <label><span>通讯录显示水印<font color='red'>&nbsp;*&nbsp;</font></span></label>
+              <Radio.RadioGroup
+                name="isWaterMark"
+                selectedValue={isWaterMark}
+                {
+                ...getFieldProps('isWaterMark', {
+                  initialValue: isWaterMark,
+                  onChange(value) {
+                    _this.setState({ isWaterMark: value });
+                  },
+                  rules: [{ required: true }]
+                })
+                }
+              >
                 <Radio value={0} >禁止</Radio>
                 <Radio value={1} >允许</Radio>
               </Radio.RadioGroup>
             </FormItem>
-
-            <SubmitBtn isSubmit disabled={this.state.disabled} />
+            <SubmitBtn
+              isSubmit
+              disabled={this.state.disabled}
+              onClick={this.clickFn}
+            />
           </Form>
         </div>
 
@@ -260,4 +253,4 @@ class CreateTeam extends Component {
   }
 }
 
-export default CreateTeam;
+export default Form.createForm()(CreateTeam);
