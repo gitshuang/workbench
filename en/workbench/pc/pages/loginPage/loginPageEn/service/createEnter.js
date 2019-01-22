@@ -37,8 +37,8 @@ class CreateEnter extends Component {
     this.state = {
       flag: false,
       defaultValue: {
-        province: 'Beijing',
-        city: 'Beijing',
+        province: '',
+        city: '',
       }
     };
   }
