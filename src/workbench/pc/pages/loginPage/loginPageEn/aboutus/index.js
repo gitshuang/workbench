@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MainNav from '../../navs/MainNav.js';
 import { Map, Marker } from 'react-amap';
-import Footer from '../../footer';
+import Footer from '../footer';
 
 import{
   AboutUsPanel,
