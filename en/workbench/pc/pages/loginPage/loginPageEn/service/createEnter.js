@@ -21,7 +21,6 @@ const { Option } = Select;
 @withRouter
 @connect(
   mapStateToProps(
-    'currLan',
   ),
   {
     requestStart,
@@ -37,8 +36,8 @@ class CreateEnter extends Component {
     this.state = {
       flag: false,
       defaultValue: {
-        province: '',
-        city: '',
+        province: 'Beijing',
+        city: 'Beijing',
       }
     };
   }
@@ -155,7 +154,7 @@ class CreateEnter extends Component {
               name="address"
               onChange={this.onChange}
               defaultValue={this.state.defaultValue}
-              lang={this.props.currLan}
+              lang={'en_US'}
             />
           </FormItem>
 

@@ -6,7 +6,7 @@ import {
   HomePagePanel,
   rightDotMenu,
   HomeOnePage
-} from '../index.css';
+} from './index.css';
 const windowLocationOrigin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');//ie8-ie10不兼容的原因
 
 const CAS_SERVER = getHost('euc'),//"https://user-daily.yyuap.com",
