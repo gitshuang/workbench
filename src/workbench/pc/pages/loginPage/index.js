@@ -214,19 +214,38 @@ class LoginPage extends Component {
     return (
       <div className={HomePagePanel}>
         {/* <TopNav /> */}
-        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} lanCallBack={this.lanCallBack} />
+        <MainNav 
+          btnShow={btnShow} 
+          loginClick={this.loginClick} 
+          registryUrl={this.registryUrl} 
+          history={this.props.history} 
+          activeIndex={'1'} 
+          lanCallBack={this.lanCallBack} 
+        />
         <div className={rightDotMenu} style={curIndex == 6 ? { marginTop: `${this.sevenSpace + 15}px`, top: 0 } : null} >
           {!loginModalShow && this.renderDot()}
         </div>
         <div ref={(ref) => { this.amBody = ref }} className={`${HomeOnePage} amBody animation0`}>
           <div className="videoContainer"></div>
-          <PageFirst loginClick={this.loginClick} registryUrl={this.registryUrl} loginModalShow={loginModalShow} pagesRef={pagesRef} />
+          <PageFirst 
+            loginClick={this.loginClick} 
+            registryUrl={this.registryUrl} 
+            loginModalShow={loginModalShow} 
+            pagesRef={pagesRef} 
+          />
           <PageSecond loginModalShow={loginModalShow} pagesRef={pagesRef} />
           <PageThird loginModalShow={loginModalShow} pagesRef={pagesRef} />
           <PageFour loginModalShow={loginModalShow} pagesRef={pagesRef} />
           <PageFive loginModalShow={loginModalShow} pagesRef={pagesRef} />
           <PageSix loginModalShow={loginModalShow} pagesRef={pagesRef} />
-          <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace} loginModalShow={loginModalShow} pagesRef={pagesRef} />
+          <PageSeven 
+            loginClick={this.loginClick} 
+            registryUrl={this.registryUrl} 
+            curIndex={curIndex} 
+            sevenSpace={this.sevenSpace} 
+            loginModalShow={loginModalShow} 
+            pagesRef={pagesRef} 
+          />
         </div>
         {curIndex !== 6 && !loginModalShow && <div className="goNextArrow" onClick={this.moveNext}> </div>}
         {

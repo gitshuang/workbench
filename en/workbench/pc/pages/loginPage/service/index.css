@@ -250,7 +250,7 @@
 .serviceFour :global(.applyService){
     width: 510px;
     margin: 0 auto;
-    transform: translateX(-70px);
+    transform: translateX(-30px);
 }
 .serviceFour :global(.applyService:after){
    content:'';
