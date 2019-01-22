@@ -9,12 +9,11 @@ import Tabmenu from './tabs';
 import Im from '../im';
 import History from './history';
 import { menus, menu, history, home, active, upward, im } from './style.css';
+import menuImg from 'assets/image/menu2.svg';
 
 /*   actions   */
 import wrapActions from 'store/root/wrap/actions';
 const { openRoot, changeRetract } = wrapActions;
-
-import menuImg from 'assets/image/menu2.svg';
 
 @connect(
   mapStateToProps(
