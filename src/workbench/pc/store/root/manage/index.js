@@ -72,8 +72,8 @@ const defaultState = {
     widgetId: "shadowCardId",
     widgetName: "item"
   },
-  ifDifferentSizeExchanged:false,//解决小size的hover大size的会出现不停调用move方法的现象,暂时没用上
-  checkedCardList:[],//左侧已选择元素数组
+  ifDifferentSizeExchanged: false,//解决小size的hover大size的会出现不停调用move方法的现象,暂时没用上
+  checkedCardList: [],//左侧已选择元素数组
 };
 
 const findTreeById = (data, curId) => {
@@ -133,10 +133,10 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
-  [updateCheckedCardList]:(state,{payload})=>{
+  [updateCheckedCardList]: (state, { payload }) => {
     return {
       ...state,
-      checkedCardList:payload
+      checkedCardList: payload
     }
   },
   [updateManageList]: (state, { payload }) => {
@@ -157,20 +157,30 @@ const reducer = handleActions({
 
     const manageAllList = state.manageList;
     let manageList = manageAllList;
-   if(preParentId==2){ 
-     manageList.filter(({ widgetId }) => widgetId === parentId)[0].children.push(...cardList);
-   }else{
-    const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
-    const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
-    const itemIndex = dataPre.indexOf(item);
-    manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(dataPre, {
-      $splice: [
-        [itemIndex, 1],
-        [dataPre.length - 1, 0, ...cardList],
-      ],
-    });
-   }
-    
+    if (preParentId == 2) {
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children.push(...cardList);
+    } else if (preParentId != parentId && preParentId != 2) {
+      const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+      const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+      const itemIndex = dataPre.indexOf(item);
+      manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children = update(dataPre, {
+        $splice: [
+          [itemIndex, 1],
+        ],
+      });
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children.push(...cardList);
+    } else {
+      const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+      const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+      const itemIndex = dataPre.indexOf(item);
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(dataPre, {
+        $splice: [
+          [itemIndex, 1],
+          [dataPre.length - 1, 0, ...cardList],
+        ],
+      });
+    }
+
 
     updateAllMenuList(state.allMenuList, manageAllList);
     manageList = JSON.parse(JSON.stringify(manageAllList));
@@ -179,7 +189,7 @@ const reducer = handleActions({
       isEdit: true,
       manageList,
       currEditonlyId: '',
-      checkedCardList:[]//drop 后checkedCardList 置空
+      checkedCardList: []//drop 后checkedCardList 置空
     };
   },
   //在元素上drop side card on item
@@ -189,7 +199,7 @@ const reducer = handleActions({
     }
   }) => {
     cardList.forEach(item => { item.parentId = parentId });
-  
+
     const manageAllList = state.manageList;
     let manageList = manageAllList;
     const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
@@ -208,14 +218,14 @@ const reducer = handleActions({
     });
     updateAllMenuList(state.allMenuList, manageAllList);
     manageList = JSON.parse(JSON.stringify(manageAllList));
-     //跟新checkedCardList
-    
+    //跟新checkedCardList
+
     return {
       ...state,
       isEdit: true,
       manageList,
       currEditonlyId: '',
-      checkedCardList:[]//drop 后checkedCardList 置空
+      checkedCardList: []//drop 后checkedCardList 置空
     };
   },
   //move shadow on items
@@ -285,11 +295,11 @@ const reducer = handleActions({
 
 
     manageList = JSON.parse(JSON.stringify(manageAllList));
-   
+
     return {
       ...state,
       manageList,
-      
+
     };
   },
   [getAllMenuList]: (state, { payload, error }) => {
@@ -775,8 +785,8 @@ const reducer = handleActions({
       widgetId: "shadowCardId",
       widgetName: "item"
     },
-    ifDifferentSizeExchanged:false,
-    checkedCardList:[]
+    ifDifferentSizeExchanged: false,
+    checkedCardList: []
   }),
   [emptySelectGroup]: state => ({
     ...state,
