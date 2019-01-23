@@ -23,18 +23,19 @@
     'https://www.diwork.com',
     'https://workbench-daily.yyuap.com',
   ];
-  var hostname = window.location.hostname;
   var origin = window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-  var domain = "yyuap.com";
-  if (originList.indexOf(origin) > -1 && hostname.indexOf(domain) > -1) {
-    try {
-      var href = window.top.location.href;
-      console.log(href);
-    } catch (e) {
-      document.domain = domain;
-      console.log(href);
-    }
-  }
+  
+  // var hostname = window.location.hostname;
+  // var domain = "yyuap.com";
+  // if (originList.indexOf(origin) > -1 && hostname.indexOf(domain) > -1) {
+  //   try {
+  //     var href = window.top.location.href;
+  //     console.log(href);
+  //   } catch (e) {
+  //     document.domain = domain;
+  //     console.log(href);
+  //   }
+  // }
 
   originList.push(origin);
 
