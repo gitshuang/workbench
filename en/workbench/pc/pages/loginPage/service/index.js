@@ -126,7 +126,7 @@ class Service extends Component {
               <img src={footerPng} alt="" className="footerImg"/>
             </div> */}
             <div className="mainFooter">
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </div>
     );

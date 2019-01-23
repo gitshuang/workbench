@@ -1,18 +1,18 @@
 .applyForm {
   padding-bottom: 30px;
-  /* width:510px; */
+  width:510px;
 }
 .applyForm :global(.u-form-item ){
   padding:10px 0;
 }
 .applyForm :global(.u-form-item label> span){
   display: inline-block;
-  width: 100px;
+  width: 140px;
   text-align: right;
 }
 .applyForm :global(.u-form-item span.error){
   display: block;
-  padding-left: 100px;
+  padding-left: 140px;
   padding-top: 4px;
   color: #eb1d15;
 }

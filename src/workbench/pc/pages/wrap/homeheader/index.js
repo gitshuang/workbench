@@ -12,7 +12,8 @@ import Icon from 'pub-comp/icon';
 import DropdownButton from './dropdown';
 import Header from './header';
 import Navs from './navs';
-import logoUrl from 'assets/image/logo2.svg';
+import logoUrl from 'assets/image/logo3.svg';
+import menuImg from 'assets/image/menu.svg';
 
 import { create } from './style.css';
 
@@ -161,7 +162,7 @@ class Homeheader extends Component {
 
   render() {
     const { retract, style, openMenu, openHistory } = this.props;
-    const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '145px' }} /></a>;
+    const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '90px' }} /></a>;
     return (
       <div className="header" id="home_header" style={style}>
         <CSSTransitionGroup
@@ -179,7 +180,7 @@ class Homeheader extends Component {
               ?
               <Header
                 leftContent={this.getLeftContent()}
-                iconName={<Icon type='master' className="ignoreClass" onClick={openMenu} />}
+                iconName={<img src={menuImg} className="ignoreClass" onClick={openMenu} />}
               >
                 <span>{title || '首页'}</span>
               </Header>

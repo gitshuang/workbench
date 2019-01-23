@@ -1,33 +1,60 @@
 /* menus 样式 */
 .menus {
   display: flex;
-  height: 40px;
-  background: rgb(243,243,243);
-  padding-top: 3px;
-  border-bottom: 1px solid rgba(78,89,104,0.19);
+  height: 34px;
+  background: #FCFCFC;
+  /* padding-top: 3px; */
+  border-top: 1px solid #F1F1F1;
+  border-bottom: 1px solid #cccccc;
+  transition: all 0.2s ease-in 0;
 }
 .menu{
   width: 48px;
   position: relative;
+  background: #E14C46;
+  cursor: pointer;
+}
+.menu :global(.iconfont){
+  color: #fff;
 }
 .history{
+  position: relative;
   float: left;
   width: 50px;
-  height: 36px;
+  height: 100%;
   cursor: pointer;
 }
 .home{
+  position: relative;
   float: left;
-  padding-top: 8px;
+  padding-top: 6px;
   width: 68px;
-  height: 36px;
+  height: 100%;
   cursor: pointer;
 }
 .home:hover{
-  background: rgb(231,231,231);
+  background: #f3f3f3;
 }
-.menus .active{
+.home::before{
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 1px;
+  height: 12px;
+  background: #CCCCCC;
+}
+
+.home.active{
   background: #fff;
+  border-top: 2px solid red;
+  padding-top: 4px;
+  border-left: 1px solid #F1F1F1;
+  border-right: 1px solid #F1F1F1;
+}
+.home.active::before{
+  content: '';
+  width: 0;
 }
 
 .upward{

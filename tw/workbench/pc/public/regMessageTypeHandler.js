@@ -30,6 +30,15 @@ const {
   
 } = homeActions;
 const handlers = {
+  openWin(data) {
+    if (typeof data !== 'object') {
+      throw new Error('data is must be a object.');
+    }
+    if (data.id === undefined) {
+      throw new Error('id is required.');
+    }
+    this.props.history.push(`/${data.id}`);
+  },
   openService({ serviceCode, data, type, tenantId }) {
     if (tenantId && serviceCode) {
       get('/service/getServiceByTenantIdAndServiceCode', {

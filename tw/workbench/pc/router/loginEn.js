@@ -1,6 +1,6 @@
-import LoginPage from 'pages/loginPageEn';
-import Service from 'pages/loginPageEn/service';
-import AboutUs from 'pages/loginPageEn/aboutus';
+import LoginPage from 'pages/loginPage/loginPageEn';
+import Service from 'pages/loginPage/loginPageEn/service';
+import AboutUs from 'pages/loginPage/loginPageEn/aboutus'; //这里还用中文版本的英文翻译
 const loginRoutes = [
     {
       path: '/',

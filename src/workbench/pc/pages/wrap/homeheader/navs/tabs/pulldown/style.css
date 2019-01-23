@@ -1,11 +1,11 @@
 
 .pulldown{
   position: relative;
-  top: -3px;
+  top: 0;
   float: left;
   width: 36px;
-  height: 39px;
-  line-height: 40px;
+  height: 100%;
+  /* line-height: 40px; */
   text-align: center;
   cursor: pointer;
   border-left:1px solid #CCCCCC;
@@ -20,7 +20,11 @@
   background: none;
 }
 .pulldown button i{
-  color: #111111;
+  /* color: #111111; */
+  color: #888888;
+}
+.pulldown button i::before{
+  color: #888888;
 }
 .pulldown button:disabled{
   /* background: #BFBFBF; */

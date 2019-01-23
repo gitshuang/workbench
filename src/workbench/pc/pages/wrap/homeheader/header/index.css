@@ -1,18 +1,32 @@
 .lebraNavbar{
-  height: 48px;
+  height: 40px;
 }
 
-:global(.lebra-navbar-left-icon){
-  width:32px;
-  height: 32px;
+.lebraNavbar :global(.lebra-navbar-left-icon){
+  width: 48px;
+  height: 26px;
   text-align: center;
   position: relative;
   cursor: pointer;
   z-index: 1;
 }
+.lebraNavbar :global(.lebra-navbar-left-icon::after){
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 6px;
+  height: 14px;
+  width: 1px;
+  background: #CCCCCC;
+}
+
+.lebraNavbar :global(.lebra-navbar-left-icon img){
+  width: 27px;
+  height: 26px;
+}
 
 :global(.lebra-navbar-left-content){
-  padding-left: 14px;
+  padding-left: 20px;
   font-size:14px;
   font-family:MicrosoftYaHei;
   color:#555555;
