@@ -56,6 +56,7 @@ var api = [
   '/manager/application/getApplicationTips',
 
   '/menubar/getAll',
+  '/menubar/get4Edit',//桌面编辑左侧获取menubar数据
 
   '/history/list',
   '/user/getUserInfo',
