@@ -7,12 +7,14 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
-import CreateManageModule from './manageWidget';
+import CreateManageModule from './manageWidgetNew';
+//import CreateManageModule from 'pub-comp/manageWidgetNew';
+
 import { win } from './style.css';
 import LanguagesJSON from 'yutils/languages';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
-const {
+const { 
   addGroup,
   delectGroup,
   renameGroup,
