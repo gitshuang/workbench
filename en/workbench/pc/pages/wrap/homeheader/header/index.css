@@ -1,0 +1,78 @@
+.lebraNavbar{
+  height: 40px;
+}
+
+.lebraNavbar :global(.lebra-navbar-left-icon){
+  width: 48px;
+  height: 26px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+}
+.lebraNavbar :global(.lebra-navbar-left-icon::after){
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 6px;
+  height: 14px;
+  width: 1px;
+  background: #CCCCCC;
+}
+
+.lebraNavbar :global(.lebra-navbar-left-icon img){
+  width: 27px;
+  height: 26px;
+}
+
+:global(.lebra-navbar-left-content){
+  padding-left: 20px;
+  font-size:14px;
+  font-family:MicrosoftYaHei;
+  color:#555555;
+}
+
+:global(.lebra-navbar-left-icon > .iconfont:hover){
+  color: #e14c46;
+}
+
+.rightBtn{
+  width:32px;
+  height: 32px;
+  line-height: 32px;
+  margin-right: 15px;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+}
+
+.rightBtn a{
+  text-decoration: none;
+}
+
+.rightBtn a i{
+  font-size: 18px;
+}
+
+:global(.lebra-navbar-right) :global(.iconfont){
+  vertical-align: middle;
+  transition: color .3s;
+}
+
+:global(.lebra-navbar-right) :global(.iconfont:hover){
+  color: #e14c46;
+}
+:global(.lebra-navbar-right) :global(.active) :global(.iconfont){
+  color: #e14c46;
+}
+
+:global(.lebra-navbar-right) :global(.CircleDot){
+  position: absolute;
+  width:6px;
+  height: 6px;
+  background: #e14c46;
+  border-radius: 50% 50%;
+  top:5px;
+  right:5px;
+}
+

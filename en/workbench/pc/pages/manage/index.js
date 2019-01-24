@@ -7,35 +7,28 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
-import CreateManageModule from 'pub-comp/manageWidget';
-import folderBgSrc from 'assets/image/wgt/folder_bg.png';
-import HeaderPage from './headerPage';
-import {win} from './style.css';
+import CreateManageModule from './manageWidgetNew';
+//import CreateManageModule from 'pub-comp/manageWidgetNew';
+
+import { win } from './style.css';
 import LanguagesJSON from 'yutils/languages';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
-const {
+const { 
   addGroup,
   delectGroup,
   renameGroup,
   moveGroup,
   moveTopGroup,
   moveBottomGroup,
-  addFolder,
   selectListActions,
   selectGroupActions,
   setEditonlyId,
   setDragInputState,
-  deleteFolder,
-  renameFolder,
-  setFolderEdit,
   moveService,
-  openFolder,
-  closeFolder,
   setCurrGroupIndex,
   editTitle,
   delectService,
-  cancelFolderEdit,
   closeBatchMove,
   batchMove,
   setManageList,
@@ -48,6 +41,7 @@ const {
   addDesk,
   setCurrentSelectWidgetMap,
   emptySelectGroup,
+  updateShadowCard
 } = manageActions;
 
 
@@ -58,12 +52,9 @@ const {
     'isEdit',
     'selectList',
     'batchMoveModalDisplay',
-    'curDisplayFolder',
-    'folderModalDisplay',
     'selectGroup',
     'currEditonlyId',
     'dragState',
-    'curEditFolderId',
     'drag',
     'currGroupIndex',
     'title',
@@ -95,28 +86,22 @@ const {
     returnDefaultState,
     closeBatchMove,
     batchMove,
-    closeFolder,
     delectGroup,
     renameGroup,
     moveTopGroup,
     moveBottomGroup,
-    addFolder,
     selectListActions,
     selectGroupActions,
     setEditonlyId,
     setDragInputState,
-    openFolder,
-    deleteFolder,
-    renameFolder,
-    setFolderEdit,
     setCurrGroupIndex,
     editTitle,
-    cancelFolderEdit,
     delectService,
     getAllServicesByLabelGroup,
     setCurrentSelectWidgetMap,
     addDesk,
     emptySelectGroup,
+    updateShadowCard
   },
 )
 
@@ -137,17 +122,11 @@ class Manage extends Component {
     manageList: PropTypes.arrayOf(PropTypes.object),
     selectList: PropTypes.arrayOf(PropTypes.string),
     batchMoveModalDisplay: PropTypes.bool,
-    curDisplayFolder: PropTypes.shape({
-      children: PropTypes.array,
-    }),
-    folderModalDisplay: PropTypes.bool,
+  
     selectGroup: PropTypes.arrayOf(PropTypes.number),
     currEditonlyId: PropTypes.string,
     dragState: PropTypes.bool,
-    curEditFolderId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
+  
     drag: PropTypes.string,
     currGroupIndex: PropTypes.number,
     title: PropTypes.string,
@@ -164,85 +143,70 @@ class Manage extends Component {
     addGroup: PropTypes.func,
     closeBatchMove: PropTypes.func,
     batchMove: PropTypes.func,
-    closeFolder: PropTypes.func,
     delectGroup: PropTypes.func,
     renameGroup: PropTypes.func,
     moveTopGroup: PropTypes.func,
     moveBottomGroup: PropTypes.func,
-    addFolder: PropTypes.func,
     selectListActions: PropTypes.func,
     selectGroupActions: PropTypes.func,
     setEditonlyId: PropTypes.func,
     setDragInputState: PropTypes.func,
-    openFolder: PropTypes.func,
-    deleteFolder: PropTypes.func,
-    renameFolder: PropTypes.func,
-    setFolderEdit: PropTypes.func,
     setCurrGroupIndex: PropTypes.func,
     editTitle: PropTypes.func,
-    cancelFolderEdit: PropTypes.func,
     delectService: PropTypes.func,
     applicationsMap: PropTypes.objectOf(PropTypes.object),
     allServicesByLabelGroup: PropTypes.objectOf(PropTypes.array),
     getAllServicesByLabelGroup: PropTypes.func,
     setCurrentSelectWidgetMap: PropTypes.func,
     addDesk: PropTypes.func,
+    updateShadowCard:PropTypes.func
   };
   static defaultProps = {
-    requestStart: () => {},
-    requestSuccess: () => {},
-    requestError: () => {},
+    requestStart: () => { },
+    requestSuccess: () => { },
+    requestError: () => { },
     history: {},
     isEdit: false,
     match: {},
     manageList: [],
     selectList: [],
     batchMoveModalDisplay: false,
-    curDisplayFolder: {},
-    folderModalDisplay: false,
     selectGroup: [],
     currEditonlyId: '',
     dragState: false,
-    curEditFolderId: '',
     drag: '',
     currGroupIndex: 0,
     title: '',
     moveData: [],
-    returnDefaultState: () => {},
-    getManageList: () => {},
-    moveGroup: () => {},
-    moveService: () => {},
-    setManageList: () => {},
-    setEditState: () => {},
-    emptySelectGroup: () => {},
-    batchDelect: () => {},
-    openBatchMove: () => {},
-    addGroup: () => {},
-    closeBatchMove: () => {},
-    batchMove: () => {},
-    closeFolder: () => {},
-    delectGroup: () => {},
-    renameGroup: () => {},
-    moveTopGroup: () => {},
-    moveBottomGroup: () => {},
-    addFolder: () => {},
-    selectListActions: () => {},
-    selectGroupActions: () => {},
-    setEditonlyId: () => {},
-    setDragInputState: () => {},
-    openFolder: () => {},
-    deleteFolder: () => {},
-    renameFolder: () => {},
-    setFolderEdit: () => {},
-    setCurrGroupIndex: () => {},
-    editTitle: () => {},
-    cancelFolderEdit: () => {},
-    delectService: () => {},
+    returnDefaultState: () => { },
+    getManageList: () => { },
+    moveGroup: () => { },
+    moveService: () => { },
+    setManageList: () => { },
+    setEditState: () => { },
+    emptySelectGroup: () => { },
+    batchDelect: () => { },
+    openBatchMove: () => { },
+    addGroup: () => { },
+    closeBatchMove: () => { },
+    batchMove: () => { },
+    delectGroup: () => { },
+    renameGroup: () => { },
+    moveTopGroup: () => { },
+    moveBottomGroup: () => { },
+    selectListActions: () => { },
+    selectGroupActions: () => { },
+    setEditonlyId: () => { },
+    setDragInputState: () => { },
+    setCurrGroupIndex: () => { },
+    editTitle: () => { },
+    delectService: () => { },
     applicationsMap: {},
     allServicesByLabelGroup: {},
-    getAllServicesByLabelGroup: () => {},
-    setCurrentSelectWidgetMap: () => {},
-    addDesk: () => {},
+    getAllServicesByLabelGroup: () => { },
+    setCurrentSelectWidgetMap: () => { },
+    addDesk: () => { },
+    updateShadowCard: () => {}
   };
 
   constructor(props) {
@@ -335,17 +299,6 @@ class Manage extends Component {
       // isEdit,
       setEditState,
     } = this.props;
-    /*
-    if(isEdit){
-      this.getManageList().then((error) => {
-        if (!error) {
-
-        }
-        setEditState(false);
-      });
-    }else{
-      this.goBack();
-    } */
     setEditState(false);
     this.popCloseCancel();
     this.goBack();
@@ -410,12 +363,9 @@ class Manage extends Component {
       isEdit,
       selectList,
       batchMoveModalDisplay,
-      curDisplayFolder,
-      folderModalDisplay,
       selectGroup,
       currEditonlyId,
       dragState,
-      curEditFolderId,
       drag,
       currGroupIndex,
       title,
@@ -434,23 +384,16 @@ class Manage extends Component {
       returnDefaultState,
       closeBatchMove,
       batchMove,
-      closeFolder,
       delectGroup,
       renameGroup,
       moveTopGroup,
       moveBottomGroup,
-      addFolder,
       selectListActions,
       selectGroupActions,
       setEditonlyId,
       setDragInputState,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       setCurrGroupIndex,
       editTitle,
-      cancelFolderEdit,
       delectService,
       applicationsMap,
       allServicesByLabelGroup,
@@ -463,12 +406,9 @@ class Manage extends Component {
       isEdit,
       selectList,
       batchMoveModalDisplay,
-      curDisplayFolder,
-      folderModalDisplay,
       selectGroup,
       currEditonlyId,
       dragState,
-      curEditFolderId,
       drag,
       currGroupIndex,
       title,
@@ -487,29 +427,23 @@ class Manage extends Component {
       returnDefaultState,
       closeBatchMove,
       batchMove,
-      closeFolder,
       delectGroup,
       renameGroup,
       moveTopGroup,
       moveBottomGroup,
-      addFolder,
       selectListActions,
       selectGroupActions,
       setEditonlyId,
       setDragInputState,
-      openFolder,
-      deleteFolder,
-      renameFolder,
-      setFolderEdit,
       setCurrGroupIndex,
       editTitle,
-      cancelFolderEdit,
       delectService,
       applicationsMap,
       allServicesByLabelGroup,
       getAllServicesByLabelGroup,
       setCurrentSelectWidgetMap,
       addDesk,
+      updateShadowCard
     };
     const manageOuterParams = {
       showModal: this.state.showModal,
@@ -523,12 +457,10 @@ class Manage extends Component {
       popOpenCancel: this.popOpenCancel,
       moveGroupDrag: this.moveGroupDrag,
       moveItemDrag: this.moveItemDrag,
-      folderBgSrc,
-			languagesJSON: LanguagesJSON
+      languagesJSON: LanguagesJSON
     };
     return (
-      <div className={win}>
-        {/* <HeaderPage list={list} /> */}
+      <div className={`${win} home`}>
         <CreateManageModule {...manageReduxParams} {...manageOuterParams} />
       </div>
     );

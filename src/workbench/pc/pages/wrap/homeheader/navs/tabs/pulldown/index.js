@@ -7,7 +7,7 @@ import Menu from 'bee/menus';
 import Icon from 'pub-comp/icon';
 import { openMess } from 'pub-comp/notification';
 import Button from 'bee/button';
-import { pulldown, } from './style.css';
+import { pulldown, dropdown, close, } from './style.css';
 
 import rootActions from 'store/root/actions';
 import wrapActions from 'store/root/wrap/actions';
@@ -92,10 +92,14 @@ class Pulldown extends Component {
         const menus = (
             <Menu
                 onClick={this.onSelect}
+                className={dropdown}
             >
                 <Item key="pin" disabled={flag} >{text}</Item>
-                <Item key="close">关闭全部页签</Item>
-                <Divider />
+                <Item key="close" className={close}>关闭全部页签</Item>
+                {
+                    items.length ? <Divider /> : null
+                }
+                
                 {
                     items.length && items.map((item) => {
                         return (

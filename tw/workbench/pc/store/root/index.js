@@ -7,6 +7,7 @@ import { trigger } from 'public/componentTools';
 import Notice from 'components/notice';
 import actions from './actions';
 
+import wrap from './wrap';
 import home from './home';
 import work from './work';
 import search from './search';
@@ -19,8 +20,6 @@ import homepage from './homepage';
 const notification = Notification.newInstance({
   position: 'bottomRight',
 });
-
-const maxMessageShowNum = 3;
 
 function addMessage(message) {
   if (message) {
@@ -49,15 +48,12 @@ const {
   requestError,
   getUserInfo,
   setUserInfo,
-  getServiceList,
-  getMessage,
   popMessage,
   changeMessageType,
   showIm,
   hideIm,
   uploadApplication,
   getPoll,
-  getPortal,
   setCurrent,
   getAllEnable,
   getCurrent,
@@ -68,36 +64,19 @@ const {
   closeDialogNew,
   openFrame,
   closeFrame,
-
-  changeActive,
-  addTabs,
-  changeTabsRouter,
 } = actions;
 
 const defaultState = {
-  userInfo: {},
-  tabs: [
-
-  ],
-  activeCarrier: 'home',
-  serviceList: [],
+  userInfo: {}, // userinfo
+  showModal: false,   // 统一modal的显隐
+  dialogData: {},     // modal 内容
+  showFrame: false,   // frame 遮罩层
+  frameParam: {},     // 打开frame传递的参数集合
+  currLan: 'zh_CN',//当前的语言
+  imShowed: false,
   messageType: false,
   messageList: [],
   messageShowNum: 0,
-  imShowed: false,
-  portalInfo: {
-    openStatus: false,
-    portalUrl: ''
-  },
-  showModal: false,
-  dialogType: '',
-  dialogTitle: '',
-  dialogMsg: '',
-  showFrame: false,
-  frameParam: {
-    
-  },
-  currLan:'zh_CN',//当前的语言
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -123,9 +102,11 @@ const reducer = handleActions({
     return {
       ...state,
       showModal: true,
-      dialogType: 'error',
-      dialogTitle: '錯誤',
-      dialogMsg: msg
+      dialogData: {
+        type: 'error',
+        title: '錯誤',
+        msg: msg
+      },
     };
   },
   [getUserInfo]: (state, { payload, error }) => {
@@ -149,37 +130,7 @@ const reducer = handleActions({
       userInfo: payload,
     };
   },
-  [getServiceList]: (state, { payload: serviceList, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-      serviceList,
-    };
-  },
   [uploadApplication]: state => state,
-  [getMessage]: (state, { payload: message, error }) => {
-    if (error) {
-      return state;
-    }
-    const { messageShowNum, messageList } = state;
-    const newMessageList = messageList.concat(message);
-    let newMessageShowNum = messageShowNum;
-    const popNums = maxMessageShowNum - messageShowNum;
-    if (popNums > 0) {
-      for (let i = 0, l = popNums; i < l; i += 1) {
-        newMessageShowNum += 1;
-        addMessage(newMessageList.shift());
-      }
-    }
-
-    return {
-      ...state,
-      messageList: newMessageList,
-      messageShowNum: newMessageShowNum,
-    };
-  },
   [getPoll]: (state, { payload, error }) => {
     if (error) {
       return state;
@@ -187,8 +138,8 @@ const reducer = handleActions({
     const info = window.diworkContext();
     const { tenantid, userid } = info;
     // 避免localhost环境下一直刷新
-    if (payload.tenantId == "tenantid" && payload.userId == "userid" ){
-       return state;
+    if (payload.tenantId == "tenantid" && payload.userId == "userid") {
+      return state;
     }
     if (!payload.tenantId || !tenantid) {
       return state;
@@ -196,18 +147,9 @@ const reducer = handleActions({
     if (payload.tenantId !== tenantid || payload.userId !== userid) {
       window.location.reload();
     }
-    return{
-      ...state,
-    }
-  },
-  [getPortal]: (state, { payload, error }) => {
-    if (error) {
-      return state;
-    }
     return {
       ...state,
-      portalInfo: payload,
-    };
+    }
   },
   [popMessage]: (state) => {
     const { messageShowNum, messageList } = state;
@@ -249,16 +191,16 @@ const reducer = handleActions({
   [getCurrent]: state => state,
   [setCurrentNot]: state => state,
   [getAllEnableNot]: state => state,
-  [getCurrentNot]: (state,{payload}) => {
+  [getCurrentNot]: (state, { payload }) => {
     // console.log('payload',payload.langCode)
     return {
       ...state,
-      currLan:payload.langCode
+      currLan: payload.langCode
     }
   },
-  [showDialog]: (state, {payload: dialogData}) => {
-    let {type} = dialogData;
-    const {title, msg} = dialogData;
+  [showDialog]: (state, { payload: dialogData }) => {
+    let { type } = dialogData;
+    const { title, msg, btn } = dialogData;
     const typeArray = ['warning', 'success', 'error'];
     if (!typeArray.find((ele) => (ele === type))) {
       type = 'success';
@@ -266,13 +208,16 @@ const reducer = handleActions({
     return {
       ...state,
       showModal: true,
-      dialogType: type || 'success',
-      dialogTitle: title || '提示',
-      dialogMsg: msg
+      dialogData: {
+        type: type || 'success',
+        title: title || '提示',
+        msg: msg,
+        btn: btn,
+      },
     }
   },
-  [closeDialogNew]: (state) => ({...state, showModal: false}),
-  [openFrame]: (state, {payload: param}) => {
+  [closeDialogNew]: (state) => ({ ...state, showModal: false, dialogData: {} }),
+  [openFrame]: (state, { payload: param }) => {
     return {
       ...state,
       showFrame: true,
@@ -286,47 +231,12 @@ const reducer = handleActions({
       frameParam: {}
     }
   },
-  [changeActive]: (state, { payload, }) => {
-    return {
-      ...state,
-      activeCarrier: payload,
-    };
-  },
-  [addTabs]: (state, { payload, }) => {
-    const { tabs } = state;
-    const isF = tabs.find((item) => {
-      return item.id === payload.id
-    });
-    if (isF && tabs.length) {
-      return {
-        ...state,
-        activeCarrier: payload.id
-      }
-    }
-    return {
-      ...state,
-      tabs: [payload, ...tabs],
-      activeCarrier: payload.id
-    };
-  },
-  [changeTabsRouter]: (state, { payload, }) => {
-    const { tabs } = state;
-    const index = tabs.findIndex((item) => {
-      return item.id === payload.id;
-    });
-    if (index > -1) {
-      tabs.splice(index, 1, payload);
-    }
-    return {
-      ...state,
-      tabs: [...tabs],
-    };
-  },
 }, defaultState);
 
 export default function (state, action) {
   const rootState = reducer(state, action);
   const pageState = {
+    wrap: wrap(state ? state.wrap : undefined, action),
     home: home(state ? state.home : undefined, action),
     work: work(state ? state.work : undefined, action),
     search: search(state ? state.search : undefined, action),

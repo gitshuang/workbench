@@ -1,0 +1,12 @@
+.create{
+  color: #E14C46;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.create :global(.iconfont){
+  position: relative;
+  top: 4px;
+  color: #E14C46;
+  margin-right: 8px;
+}

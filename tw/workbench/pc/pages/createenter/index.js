@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
-
-import Header from 'containers/header';
-import Breadcrumbs from 'components/breadcrumb';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
@@ -19,7 +16,6 @@ const { setCreateEnter } = homeActions;
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
 import 'assets/style/Form.css';
 
-@withRouter
 @connect(
   mapStateToProps(
     'userInfo',
@@ -33,16 +29,11 @@ import 'assets/style/Form.css';
 )
 class Enterprise extends Component {
   static propTypes = {
-    history: PropTypes.shape({
-      goBack: PropTypes.func,
-      replace: PropTypes.func,
-    }),
     userInfo: PropTypes.shape({
       allowTenants: PropTypes.array,
     }),
   };
   static defaultProps = {
-    history: {},
     userInfo: {},
   };
   constructor(props) {
@@ -52,18 +43,40 @@ class Enterprise extends Component {
   }
 
   componentWillMount() {
- 
-  }
 
-  goBack = () => {
-    this.props.history.goBack();
-  }
-
-  goHome = () => {
-    this.props.history.replace('');
   }
 
   handleClick = (param, fn) => {
+    dispatchMessageTypeHandler({
+      type: "showDialog",
+      detail: {
+        type: 'warning',
+        title: '',
+        msg: "",
+        btn: [{
+          label: "",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            this.create(param, fn);
+          },
+        },
+        {
+          label: "",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            fn({ error: true });
+          },
+        }
+        ]
+      }
+    });
+  }
+
+  create = (param, fn) => {
     const {
       requestStart,
       requestSuccess,
@@ -77,9 +90,10 @@ class Enterprise extends Component {
       if (error) {
         requestError(payload);
         return;
+      } else {
+        requestSuccess();
+        localStorage.setItem('create', '1');
       }
-      requestSuccess();
-      localStorage.setItem('create', '1');
     });
   }
 
@@ -87,40 +101,23 @@ class Enterprise extends Component {
     const { userInfo } = this.props;
     const { locale } = getContext();
     return (
-      <div style={{ overflow: "hidden" }}>
-        {/* <div className="header ">
-          <Header
-            onLeftClick={this.goHome}
-          >
-            <div>
-              <span>創建企業</span>
-            </div>
-          </Header>
-          <div className="appBreadcrumb">
-            <Breadcrumbs data={[{ name: '創建企業' }]} goback={this.goBack} />
-          </div>
-        </div> */}
-
-        <div className="content">
-          <div className={pageEnterprise}>
-            <div className={enterTitle} >創建企業</div>
-            <hr className={hr} />
-            <div className={enterCont} >
-              {
-                Object.keys(userInfo).length > 0
-                ? <EnterContent
-                  userInfo={userInfo}
-                  _from="create"
-                  handleClickFn={this.handleClick}
-                  buttonText="創建"
-                  loadingDesc="正在創建企業..."
-                  uploadApplication={uploadApplication}
-                  texts={texts}
-                  lang={locale}
-                /> : null
-              }
-            </div>
-          </div>
+      <div className={pageEnterprise}>
+        <div className={enterTitle} >創建企業</div>
+        <hr className={hr} />
+        <div className={enterCont} >
+          {
+            Object.keys(userInfo).length > 0
+              ? <EnterContent
+                userInfo={userInfo}
+                _from="create"
+                handleClickFn={this.handleClick}
+                buttonText="創建"
+                loadingDesc="正在創建企業..."
+                uploadApplication={uploadApplication}
+                texts={texts}
+                lang={locale}
+              /> : null
+          }
         </div>
       </div>
     );

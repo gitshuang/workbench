@@ -1,0 +1,194 @@
+.team_cont{
+  width: 100%;
+  padding-top: 20px; 
+}
+.form_team{
+  width: 100%;
+  padding-top: 20px;
+  margin: 0 auto;
+  position: relative;
+}
+.enter_form{
+  padding-bottom:15px;
+}
+.form_team .enter_form :global(.u-form-item){
+  min-height: 64px;
+  overflow: hidden;
+}
+.enter_form > div > label {
+  float: left;
+  width: 40%;
+  height: 32px;
+  text-align: right;
+  font-size: 14px;
+  line-height: 32px;
+}
+.enter_form :global(.error){
+  margin-left: 5px;
+  line-height: 32px;
+  color: #f22c1d;
+}
+.enter_form input{
+  width: 338px;
+}
+.enter_form :global(.u-label>span) {
+  vertical-align: middle;
+}
+.enter_form :global(.u-label>span>font) {
+  vertical-align: middle;
+}
+.enter_form :global(.input) {
+  font-size: 14px;
+  color:rgba(33,43,54,1);
+}
+
+.enter_form :global(.province),
+.enter_form :global(.city),
+.enter_form :global(.area) {
+  width: 90px!important;
+}
+
+.enter_form :global(.uf.uf-calendar) {
+  position: relative;
+  top: -4px;
+  right: 9px;
+}
+
+.enter_form :global(.u-form-submit) {
+  padding-left: 40%;
+}
+.enter_form :global(.u-form-submit>button) {
+  width:338px;
+  height:32px;
+  background:rgba(225,76,70,1);
+  border-radius: 3px;
+  margin-left: 1px;
+}
+.enter_form :global(textarea) {
+  min-height: 100px;
+  min-width: 300px;
+}
+.enter_form :global(.u-form-item){
+  width: 100%;
+}
+
+.page_enterprise{
+  margin: 10px 120px;
+  background: #fff;
+  min-width: 500px;
+  /* text-align: center; */
+  /* padding-left: 100px; */
+  /* overflow: hidden; */
+}
+.enter_title{
+   width: 100%;
+   /* height:180px;  */
+   /* line-height: 180px; */
+   background:rgba(94,102,112,1);
+   border-radius: 3px 3px 0px 0px;
+   margin: 0 auto;
+   text-align: center;
+   padding: 20px 0;
+}
+
+.title{
+  height:36px;
+  font-size:27px;
+  color:rgba(255,255,255,1);
+  line-height:36px;
+  margin-bottom: 15px;
+}
+
+.enter_title :global(.u-select){
+  color:#fff;
+  width:107px;
+  height:32px;
+  border-radius: 3px ;
+}
+.enter_title :global(.u-select-selection)>div{
+  line-height: 36px
+} 
+
+.hr{
+  background: rgba(13,20,36,0.1);
+  height: 1px;
+  margin-left: -100px;
+  border-top: none;
+  margin:0;
+  margin-bottom: 25px;
+}
+
+.enter_cont{
+  width: 600px;
+  margin: 0 auto;
+  padding-left: 80px;
+  overflow: hidden;
+}
+
+.enter_form :global(.u-input-inner > input){
+  width:338px !important;
+  background:rgba(255,255,255,1);
+  border-radius: 3px ;
+}
+
+.enter_form :global(.u-city-select){
+  display: inline-flex;
+}
+.enter_form :global(.u-select-lg .u-select-selection--single){
+  width: 271px;
+  border:1px solid RGBA(78, 89, 104, 0.2);
+}
+
+.page_enterprise :global(.u-select .u-select-selection){
+  background: transparent;
+  height: 36px;
+}
+
+.tenant_address{
+  background: red;
+}
+
+.lxr_hr{
+  height:1px;
+  background:rgba(13,20,36,1);
+  opacity:0.4;
+  margin-top: -77px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.lxr_title{
+  margin-left: 118px;
+  margin-bottom: 20px;
+  font-size: 17px;
+}
+.hr2{
+  margin-top: -65px;
+  background:rgba(13,20,36,1) !important;
+  opacity:0.4;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.lxr_hr_bottom{
+  margin-left: -160px;
+  width:450px;
+  height:11px;
+  background:rgba(13,20,36,1);
+  opacity:0.1;
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+
+.lxr_hr_bottom>hr{
+  width:100%;
+}
+
+.appBreadcrumb{
+  padding-left: 23px;
+  font-size: 14px;
+  height:32px;
+  background:rgba(255,255,255,1);
+}
+.team_cont :global(.u-radio){
+  margin-right: 18px;
+}

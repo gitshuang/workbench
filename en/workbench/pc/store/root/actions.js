@@ -2,11 +2,8 @@ import { createActions } from '@u';
 import types from './types';
 import {
   getUserInfo,
-  getServiceList,
-  getMessage,
   uploadApplication,
   getPoll,
-  getPortal,
   setCurrent,
   getAllEnable,
   getCurrent,
@@ -21,8 +18,6 @@ const {
   REQUEST_ERROR,
   GET_USER_INFO,
   SET_USER_INFO,
-  GET_SERVICE_LIST,
-  GET_MESSAGE,
   CHANGE_QUICK_SERVICE_DISPLAY,
   CHANGE_QUICK_SERVICE_HIDDEN,
   POP_MESSAGE,
@@ -31,7 +26,6 @@ const {
   HIDE_IM,
   UPLOAD_APPLICATION,
   GET_POLL,
-  GET_PORTAL,
   SET_CURRENT,
   GET_ALL_ENABLE,
   GET_CURRENT,
@@ -42,19 +36,13 @@ const {
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
-  CHANGE_ACTIVE,
-  ADD_TABS,
-  CHANGE_TABS_ROUTER,
 } = types;
 
 export default createActions(
   {
-    [GET_SERVICE_LIST]: getServiceList,
     [GET_USER_INFO]: getUserInfo,
-    [GET_MESSAGE]: getMessage,
     [UPLOAD_APPLICATION]: uploadApplication,
     [GET_POLL]: getPoll,
-    [GET_PORTAL]: getPortal,
     [SET_CURRENT]: setCurrent,
     [GET_ALL_ENABLE]: getAllEnable,
     [GET_CURRENT]: getCurrent,
@@ -76,7 +64,4 @@ export default createActions(
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
-  CHANGE_ACTIVE,
-  ADD_TABS,
-  CHANGE_TABS_ROUTER,
 );

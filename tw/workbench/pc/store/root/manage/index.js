@@ -2,8 +2,10 @@ import { handleActions } from 'redux-actions';
 import update from 'react/lib/update';
 import { guid, avoidSameName } from '@u';
 import actions from './actions';
+import { updateAllMenuList } from './utils'
 
 const {
+  updateShadowCard,
   setManageList,
   getManageList,
   addDesk,
@@ -18,40 +20,34 @@ const {
   stickGroup,
   moveTopGroup,
   moveBottomGroup,
-  addFolder,
-  setFolderEdit,
-  deleteFolder,
-  renameFolder,
   splitFolder,
   addService,
   delectService,
   moveService,
-  openFolder,
-  closeFolder,
   getAllServicesByLabelGroup,
   setCurrentSelectWidgetMap,
   openBatchMove,
   closeBatchMove,
   setEditState,
-  cancelFolderEdit,
   setCurrGroupIndex,
   editTitle,
   setEditonlyId,
   returnDefaultState,
   setDragInputState,
   emptySelectGroup,
+  changeSiderState,
+  getAllMenuList,
+  moveSideCards,
+  dropSideCards,
+  updateManageList,
+  dropSideCardsInGroup,
+  updateCheckedCardList
 } = actions;
 
 const defaultState = {
-  curEditFolderId: '',
   manageList: [],
   isEdit: false,
   isFocus: false,
-  curDisplayFolder: {
-    widgetName: '',
-    children: [],
-  },
-  folderModalDisplay: false,
   batchMoveModalDisplay: false,
   selectList: [], // 勾选的服务列表
   // selectWidgetList:[],
@@ -66,6 +62,18 @@ const defaultState = {
   allServicesByLabelGroup: {},
 
   dragState: true, // 是否可拖拽
+
+  //shadowCard: false, //默认没有
+  isSiderDisplay: true,  //左侧默认展开
+  allMenuList: [],  // 左侧通过menu查找时的menuList
+  shadowCard: {
+    size: 1,
+    type: 3,
+    widgetId: "shadowCardId",
+    widgetName: "item"
+  },
+  ifDifferentSizeExchanged: false,//解决小size的hover大size的会出现不停调用move方法的现象,暂时没用上
+  checkedCardList: [],//左侧已选择元素数组
 };
 
 const findTreeById = (data, curId) => {
@@ -125,7 +133,196 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
+  [updateCheckedCardList]: (state, { payload }) => {
+    return {
+      ...state,
+      checkedCardList: payload
+    }
+  },
+  [updateManageList]: (state, { payload }) => {
+    payload = JSON.parse(JSON.stringify(payload));
+    return {
+      ...state,
+      manageList: payload
+    }
+  },
+  //在group上drop side card
+  [dropSideCardsInGroup]: (state, {
+    payload: {
+      id, preParentId, afterId, parentId, afterType, monitor, cardList
+    }
+  }) => {
+    //在已有元素的组内拖拽(删除之前组内的阴影卡片，追加现在组内的cardList)
+    cardList.forEach(item => { item.parentId = parentId });
 
+    const manageAllList = state.manageList;
+    let manageList = manageAllList;
+    if (preParentId == 2) {
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children.push(...cardList);
+    } else if (preParentId != parentId && preParentId != 2) {
+      const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+      const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+      const itemIndex = dataPre.indexOf(item);
+      manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children = update(dataPre, {
+        $splice: [
+          [itemIndex, 1],
+        ],
+      });
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children.push(...cardList);
+    } else {
+      const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+      const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+      const itemIndex = dataPre.indexOf(item);
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(dataPre, {
+        $splice: [
+          [itemIndex, 1],
+          [dataPre.length - 1, 0, ...cardList],
+        ],
+      });
+    }
+
+
+    updateAllMenuList(state.allMenuList, manageAllList);
+    manageList = JSON.parse(JSON.stringify(manageAllList));
+    return {
+      ...state,
+      isEdit: true,
+      manageList,
+      currEditonlyId: '',
+      checkedCardList: []//drop 后checkedCardList 置空
+    };
+  },
+  //在元素上drop side card on item
+  [dropSideCards]: (state, {
+    payload: {
+      id, preParentId, afterId, parentId, afterType, monitor, cardList
+    }
+  }) => {
+    cardList.forEach(item => { item.parentId = parentId });
+
+    const manageAllList = state.manageList;
+    let manageList = manageAllList;
+    const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
+    const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
+    const afterIndex = data.indexOf(afterItem);
+    ///只要曾经移入过组内，preParentId就灰从2变成正常的id
+    const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+    const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+    const itemIndex = data.indexOf(item);
+
+    manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+      $splice: [
+        [itemIndex, 1],
+        [afterIndex, 0, ...cardList],
+      ],
+    });
+    updateAllMenuList(state.allMenuList, manageAllList);
+    manageList = JSON.parse(JSON.stringify(manageAllList));
+    //跟新checkedCardList
+
+    return {
+      ...state,
+      isEdit: true,
+      manageList,
+      currEditonlyId: '',
+      checkedCardList: []//drop 后checkedCardList 置空
+    };
+  },
+  //move shadow on items
+  [moveSideCards]: (state, {
+    payload: {
+      id, preParentId, afterId, parentId, afterType, monitor
+    }
+  }) => {//进组后完全模仿 组内元素拖拽
+    const manageAllList = state.manageList;
+    const shadowCard = state.shadowCard;
+    let manageList = manageAllList;
+
+    const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
+    const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
+    const itemIn = findById(manageAllList, id);
+    const itemAfter = findById(manageAllList, afterId);
+    if (preParentId === 2) {//从侧边栏进组
+      const data = manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 拖拽后 父级目标对象
+      const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0]; //被hover对象
+      const afterIndex = data.indexOf(afterItem);
+      manageAllList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [afterIndex, 0, shadowCard],// 第一次进组
+        ],
+      });
+      monitor.getItem().parentId = parentId;
+      shadowCard.parentId = parentId;
+    } else if (preParentId !== parentId && afterType === 3) {
+      // 跨分组 元素上拖拽 
+      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+
+      const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 当前分组数据
+
+      if (preParentId !== parentId) {
+        itemIn.parentId = parentId;
+        monitor.getItem().parentId = parentId
+      }
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [targetData.children.indexOf(itemAfter), 0, itemIn],
+        ],
+      });
+
+    } else if (preParentId !== parentId && afterType === 1) {
+      // 跨分组拖拽 放到组内 而不是元素上
+      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+      if (preParentId !== parentId) {
+        itemIn.parentId = parentId;
+      }
+      targetData.children.splice(targetData.children.length, 0, itemIn); // 添加
+    } else {//组内元素上拖拽
+      const dataPre = manageList.filter(({ widgetId }) => widgetId === preParentId)[0].children;
+      const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;
+      const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
+      const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
+      const itemIndex = data.indexOf(item);
+      const afterIndex = data.indexOf(afterItem);
+
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [itemIndex, 1],
+          [afterIndex, 0, item],
+        ],
+      });
+
+    }
+
+
+    manageList = JSON.parse(JSON.stringify(manageAllList));
+
+    return {
+      ...state,
+      manageList,
+
+    };
+  },
+  [getAllMenuList]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      allMenuList: payload,
+    };
+  },
+  [changeSiderState]: (state) => {
+    return {
+      ...state,
+      isSiderDisplay: !state.isSiderDisplay
+    };
+  },
+  [updateShadowCard]: (state, { shadowCard }) => {
+    return {
+      ...state,
+      shadowCard: shadowCard
+    };
+  },
   [setManageList]: (state, { payload, error }) =>
     ({
       ...state,
@@ -141,9 +338,23 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
+    // 更改了原有数据， 暂时无碍吧， 为了将数据的文件夹平铺到上一级
+    const list = payload.workList;
+    list.forEach(item => {
+      item.children.forEach((list, index) => {
+        if (list.type === 2) {
+          const arr = list.children;
+          item.children.splice(index, 1);
+          arr.forEach((data, key) => {
+            data.parentId = item.widgetId;
+            item.children.splice(index + key, 0, data);
+          });
+        }
+      });
+    });
     return {
       ...state,
-      manageList: payload.workList,
+      manageList: [...list],
       currEditonlyId: '',
     };
   },
@@ -395,86 +606,28 @@ const reducer = handleActions({
       currEditonlyId: '',
     };
   },
-  [addFolder]: (state, {
-    payload: {
-      groupIndex, id, preParentId, preType, afterId, parentId, afterType,
-    },
-  }) => {
-    const { manageList } = state;
-    if (groupIndex === '') {
-      groupIndex = manageList.findIndex((value, index, arr) => value.widgetId === parentId);
-    }
-    const group = manageList[groupIndex];
-    const newId = guid();
-    let num = 1;
-    group.children.forEach((da, i) => {
-      da.type === 2 && (num++);
-    });
-    const _fileName = group.children ? (num) : 1;
 
-    const folderNameArr = [];
-    const nameArr = manageList.forEach((group, k) => {
-      group.children.forEach((v, k) => {
-        v.type === 2 && folderNameArr.push(v.widgetName);
-      });
-    });
-    const newFolderName = avoidSameName(folderNameArr, '檔夾');
-    const newdefaultFolder = {
-      type: 2,
-      widgetName: newFolderName, // "文件夹"+_fileName,
-      children: [],
-    };
-    const temp = {
-      ...newdefaultFolder,
-      widgetId: newId,
-      parentId: group.widgetId,
-    };
-    // group.children = group.children.concat({
-    //   ...newdefaultFolder,
-    //   widgetId: newId,
-    //   parentId:group.widgetId,
-    // });
-    // 拖拽创建文件夹
-    if (typeof afterId !== 'undefined') {
-      const dataAfter = findById(manageList, afterId);
-      group.children.splice(group.children.indexOf(dataAfter), 0, temp);
-      const dataPre = findById(manageList, id);
-      // let dataAfter = findById(manageList,afterId);
-      const groupData = findById(manageList, newId);
-      dataPre.parentId = groupData.widgetId;
-      dataAfter.parentId = groupData.widgetId;
-      // 放进文件夹
-      groupData.children.push(dataPre);
-      groupData.children.push(dataAfter);
-      // 给文件夹赋值parentId
-      typeof groupData.parentId === 'undefined' && (groupData.parentId = parentId);
-      if (preParentId !== parentId) {
-        const dataPreParent = findById(manageList, preParentId);
-        const dataAfterParent = findById(manageList, parentId);
-        // 删掉
-        dataPreParent.children.splice(dataPreParent.children.indexOf(dataPre), 1);
-        dataAfterParent.children.splice(dataAfterParent.children.indexOf(dataAfter), 1);
-      } else {
-        // 删掉
-        group.children.splice(group.children.indexOf(dataPre), 1);
-        group.children.splice(group.children.indexOf(dataAfter), 1);
-      }
-    } else {
-      group.children.push(temp);
-    }
+  [splitFolder]: (state, { payload: manageList }) => ({
+    ...state,
+    manageList,
+    currEditonlyId: '',
+  }),
+  [addService]: (state, { payload: { index: groupIndex, service } }) => {
+    const { manageList } = state;
+    const group = manageList[groupIndex];
+    group.children = group.children.concat(service);
     manageList.splice(groupIndex, 1, {
       ...group,
     });
     return {
       ...state,
-      curEditFolderId: newId,
       isEdit: true,
       manageList: [...manageList],
-      currEditonlyId: newId,
+      currEditonlyId: '',
     };
   },
-  [deleteFolder]: (state, { payload: folderId }) => {
-    const { manageList } = state;
+  [delectService]: (state, { payload: folderId }) => {
+    const { manageList, allMenuList } = state;
     let groupIndex;
     let widgetIndex;
     if (
@@ -495,6 +648,7 @@ const reducer = handleActions({
       ...group,
     });
     delete state.currentSelectWidgetMap[folderId];
+    updateAllMenuList(allMenuList, manageList)
     return {
       ...state,
       isEdit: true,
@@ -503,100 +657,7 @@ const reducer = handleActions({
       currentSelectWidgetMap: state.currentSelectWidgetMap,
     };
   },
-  [setFolderEdit]: (state, { payload: curEditFolderId }) => ({
-    ...state,
-    curEditFolderId,
-  }),
-  [cancelFolderEdit]: (state, { payload: cnaceFolder }) => {
-    const { manageList } = state;
-    return {
-      ...state,
-      curEditFolderId: false,
-      manageList: [...manageList],
-      currEditonlyId: '',
-    };
-  },
-  [renameFolder]: (state, { payload: { id: folderId, value: newName } }) => {
-    const { manageList } = state;
-    let groupIndex;
-    let widgetIndex;
-    if (
-      !manageList.some((group, i) => {
-        groupIndex = i;
-        return group.children.some(({ widgetId }, j) => {
-          widgetIndex = j;
-          return folderId === widgetId;
-        });
-      })
-    ) {
-      return state;
-    }
-    const group = manageList[groupIndex];
-    const folder = group.children[widgetIndex];
-    group.children.splice(widgetIndex, 1, {
-      ...folder,
-      widgetName: newName,
-    });
-    group.children = [...group.children];
-    manageList.splice(groupIndex, 1, {
-      ...group,
-    });
 
-    return {
-      ...state,
-      isEdit: true,
-      curEditFolderId: false,
-      manageList: [...manageList],
-      currEditonlyId: '',
-    };
-  },
-  [splitFolder]: (state, { payload: manageList }) => ({
-    ...state,
-    manageList,
-    currEditonlyId: '',
-  }),
-  [addService]: (state, { payload: { index: groupIndex, service } }) => {
-    const { manageList } = state;
-    const group = manageList[groupIndex];
-    group.children = group.children.concat(service);
-    manageList.splice(groupIndex, 1, {
-      ...group,
-    });
-    return {
-      ...state,
-      isEdit: true,
-      manageList: [...manageList],
-      currEditonlyId: '',
-    };
-  },
-  [delectService]: (state, { payload: { index, folder, widgetId } }) => {
-    const manageList = state.manageList;
-    let curDisplayFolder = state.curDisplayFolder;
-
-    curDisplayFolder.children.forEach((item, index) => {
-      if (widgetId == item.widgetId) {
-        return curDisplayFolder.children.splice(index, 1);
-      }
-    });
-    curDisplayFolder.children = [...curDisplayFolder.children];
-    /* manageList[index].children.forEach((item,key)=>{
-      if ( item.widgetId == folder ){
-        item.children.forEach((list,i)=>{
-          if(list.widgetId == widgetId){
-            return manageList[index][key].splice(i,1);
-          }
-        })
-      }
-    }); */
-    curDisplayFolder = JSON.parse(JSON.stringify(curDisplayFolder));
-    return {
-      ...state,
-      isEdit: true,
-      manageList: [...manageList],
-      curDisplayFolder,
-      currEditonlyId: '',
-    };
-  },
   [editTitle]: (state, { payload: { id, name } }) => {
     const manageList = state.manageList;
     // manageList = JSON.parse(JSON.stringify(manageList));
@@ -612,65 +673,36 @@ const reducer = handleActions({
   },
   [moveService]: (state, {
     payload: {
-      id, preParentId, preType, afterId, parentId, afterType, ifIntoFile, timeFlag,
-    },
+      id, preParentId, preType, afterId, parentId, afterType, monitor
+    }
   }) => {
-    function isSameParent(preParentId, parentId) {
-      return preParentId == parentId;
-    }
-    function compareIndex(manageAllList, id, afterId, preParentId, parentId) {
-      let parentData = {},
-        curIndex = 0,
-        afterIndex = 0;
-      if (preParentId == parentId) {
-        parentData = findById(manageAllList, preParentId);
-      }
-      parentData.children.forEach((v, k) => {
-        if (v.widgetId == id) {
-          curIndex = k;
-        }
-        if (v.widgetId == afterId) {
-          afterIndex = k;
-        }
-      });
-      return curIndex < afterIndex;
-    }
     const manageAllList = state.manageList;
+    let manageList = manageAllList;
+
+
     const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
     const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
     const preParentType = sourceData.type;
     const afterParentType = targetData.type;
     // 判断是否为文件夹里面元素拖拽
-    let manageList = (preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3) ? [sourceData] : manageAllList;
     const itemIn = findById(manageAllList, id);
     const itemAfter = findById(manageAllList, afterId);
-    if (preType === 3 && afterType === 2 && timeFlag) {
-      // 从外面拖入文件夹里面
+    if (preParentType === 1 && afterParentType === 1 && preParentId !== parentId && preType === 3 && afterType === 3) {
+      // 跨分组拖拽
       sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
-      if (preParentId !== afterId) {
-        itemIn.parentId = afterId;
-      }
-      itemAfter.children.push(itemIn); // 添加
-    } else if (
-      (preType === 2 && preParentId !== parentId) ||
-      (preType === 3 && afterType === 2 && preParentId !== parentId && !timeFlag) ||
-      (
-        (
-          (preParentType === 2 && afterParentType === 1) ||
-          (preParentType === 1 && afterParentType === 1 && preParentId !== parentId)
-        ) && preType === 3 && afterType === 3
-      )
-    ) {
-      // 从文件夹里面往外面拖拽 或 跨分组拖拽
-      sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+
+      const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 当前分组数据
+
       if (preParentId !== parentId) {
         itemIn.parentId = parentId;
+        monitor.getItem().parentId = parentId
       }
-      if (ifIntoFile == 'left') {
-        targetData.children.splice(targetData.children.indexOf(itemAfter), 0, itemIn); // 添加
-      } else {
-        targetData.children.splice(targetData.children.indexOf(itemAfter) + 1, 0, itemIn); // 添加
-      }
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [targetData.children.indexOf(itemAfter), 0, itemIn],
+        ],
+      });
+
     } else if (preParentId !== parentId && preType === 3 && afterType === 1) {
       // 跨分组拖拽 放到组内 而不是元素上
       sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
@@ -685,62 +717,26 @@ const reducer = handleActions({
       const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
       const itemIndex = data.indexOf(item);
       const afterIndex = data.indexOf(afterItem);
-      if (ifIntoFile == 'left') {
-        if (itemIndex < afterIndex) {
-          manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-            $splice: [
-              [itemIndex, 1],
-              [afterIndex - 1, 0, item],
-            ],
-          });
-        } else {
-          manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-            $splice: [
-              [itemIndex, 1],
-              [afterIndex, 0, item],
-            ],
-          });
-        }
-      } else if (itemIndex < afterIndex) {
-        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex, 0, item],
-          ],
-        });
-      } else {
-        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex + 1, 0, item],
-          ],
-        });
-      }
+
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [itemIndex, 1],
+          [afterIndex, 0, item],
+        ],
+      });
+
     }
-    let curDisplayFolder = state.curDisplayFolder;
-    if (preParentType === 2 && afterParentType === 2 && preType === 3 && afterType === 3) {
-      curDisplayFolder = JSON.parse(JSON.stringify(targetData));
-    }
+
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return {
       ...state,
       isEdit: true,
       manageList,
-      curDisplayFolder,
       currEditonlyId: '',
     };
   },
-  [openFolder]: (state, { payload: curDisplayFolder }) => ({
-    ...state,
-    curDisplayFolder,
-    folderModalDisplay: true,
-    currEditonlyId: '',
-  }),
-  [closeFolder]: state => ({
-    ...state,
-    folderModalDisplay: false,
-    currEditonlyId: '',
-  }),
+
+
   [openBatchMove]: state => ({
     ...state,
     batchMoveModalDisplay: true,
@@ -766,10 +762,7 @@ const reducer = handleActions({
     manageList: [],
     isEdit: false,
     isFocus: false,
-    curDisplayFolder: {
-      widgetName: '',
-      children: [],
-    },
+
     folderModalDisplay: false,
     batchMoveModalDisplay: false,
     selectList: [], // 勾选的服务列表
@@ -785,6 +778,15 @@ const reducer = handleActions({
     allServicesByLabelGroup: {},
 
     dragState: true, // 是否可拖拽
+    isSiderDisplay: true,  //左侧默认展开
+    shadowCard: {
+      size: 1,
+      type: 3,
+      widgetId: "shadowCardId",
+      widgetName: "item"
+    },
+    ifDifferentSizeExchanged: false,
+    checkedCardList: []
   }),
   [emptySelectGroup]: state => ({
     ...state,

@@ -1,64 +1,58 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
-import ApplicationWrap from 'containers/applicationWrap';
+import PropTypes from 'prop-types';
+import IFrame from 'components/iframe';
 
-import {
-  bg,
-  frameElm,
-} from './style.css';
-
-@withRouter
 @connect(
   mapStateToProps(
-    'brm',
+    'currItem',
     {
-      namespace: 'work',
-    },
+      namespace: 'wrap',
+    }
   ),
-  {
-  },
+  {},
 )
 class Account extends Component {
   static propTypes = {
-    brm: PropTypes.arrayOf(PropTypes.object),
-    history: PropTypes.shape({
-      go: PropTypes.func,
-    }),
-    match: PropTypes.shape({
-      params: PropTypes.object,
-    }),
+    currItem: PropTypes.shape({}),
   };
   static defaultProps = {
-    brm: [],
-    history: {},
-    match: {},
+    currItem: {},
   };
 
-  componentDidMount() {
-    // this.props.addBrm({name:'应用详情',url:'/market/details'})
+  constructor(props) {
+    super(props);
+    this.state = {
+      appId: ''
+    };
   }
 
-  func = () => { }
+  componentDidMount() {
+    const { appId } = this.props.currItem.data;
+    this.setState({
+      appId,
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currItem.id !== "Renew") return;
+    const newAppId = nextProps.currItem.data ? nextProps.currItem.data.appId : '';
+    const appId = this.state;
+    if (newAppId && newAppId !== appId) {
+      this.setState({
+        appId: newAppId,
+      });
+    }
+  }
 
   render() {
-    const { params } = this.props.match;
-    const brmVal = this.props.brm;
-    const { id } = params;
+    const { appId } = this.state;
     return (
-      <ApplicationWrap
-        name={brmVal.length <= 1 ? '應用詳情' : brmVal[brmVal.length - 1].name}
-        brms={brmVal.length === 0 ? [{ name: '全部應用' }] : brmVal.slice(0, brmVal.length - 1)}
-      >
-        <div className={`${bg}  um-vbox`}>
-          {/* <iframe className={frameElm} src={'http://localhost:3005/#/application/'+id} /> */}
-          {
-            <iframe title="applicaton" className={frameElm} src={`/diwork-market/appMarket/#/application/${id}`} />
-          }
-        </div>
-      </ApplicationWrap>
+      <div>
+        {/* <IFrame title="应用市场" url={`http://localhost:3005/#/application/${appId}`} /> */}
+        <IFrame title="" url={`/diwork-market/appMarket/#/application/${appId}`} />
+      </div>
     );
   }
 }

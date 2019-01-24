@@ -35,7 +35,8 @@ const manageWidget = {
 	move_up: 'Move Up',
 	more: 'More',
 	save_latest_or_not: 'Save the latest modification?',
-	noDataGroup: 'The groups without content are invisible on homepage'
+	noDataGroup: 'The groups without content are invisible on homepage',
+	notice: ''
 };
 
 export default {

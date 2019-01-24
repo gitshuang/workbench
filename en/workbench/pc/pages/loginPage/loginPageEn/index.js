@@ -48,9 +48,6 @@ class LoginPage extends Component {
       this.loginClick();
     }
   }
-  componentWillReceiveProps(){
-
-  }
   
   lanCallBack = () => {
 

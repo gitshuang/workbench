@@ -13,7 +13,7 @@ export const getProductInfo = (
     serviceCode: code,
   });
 };
-export const getServiceInfoWithDetail = serviceCode => get('/service/getServiceInfoWithDetail', { serviceCode });
+export const getServiceInfoWithDetail = (serviceCode, serviceType = "0") => get('/service/getServiceInfoWithDetail', { serviceCode, serviceType });
 export const setPinCancel = serviceCode => post('/widget/deleteByServiceCode', { serviceCode });
 export const setPinAdd = (
   serviceCode,

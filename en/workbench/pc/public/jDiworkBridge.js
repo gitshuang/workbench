@@ -57,7 +57,7 @@ const handlerList = {
     }
   },
   addBrm(type, event) {
-    dispatchMessageTypeHandler(event);
+    // dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
       type,
     });
@@ -66,13 +66,14 @@ const handlerList = {
     window.brmClickPrevent = { type, source: this.source };
   },
   popBrm(type, event) {
-    dispatchMessageTypeHandler(event);
+    // dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
       type,
     });
   },
   getBrm(type, ) {
-    const data = store.getState().work.brm;
+    // const data = store.getState().work.brm;
+    const data = [];
     postMessageToWin(this.source, {
       type,
       data,
@@ -172,6 +173,7 @@ const handlerList = {
     });
   },
   getData(type, event) {
+    // const data = store.getState().currItem.data;
     const tabs = store.getState().wrap.tabs;
     const {
       detail: {

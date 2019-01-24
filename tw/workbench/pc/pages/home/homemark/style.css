@@ -1,0 +1,49 @@
+
+.mark{
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    width: 600px;
+    min-height: 50px;
+    padding:0 0 12px 0;
+    transform: translate(-50%);
+    margin-left:-300px\9;
+    background:rgba(255,251,242,1);
+    box-shadow:0px 10px 12px 0px rgba(74,81,93,0.25);
+    border-radius:0px 0px 3px 3px;
+    border:1px solid rgba(255,171,0,0.5);
+    border-top: 3px solid rgba(255,171,0,1);
+    z-index: 99999;
+  }
+  .mark p{
+    padding-top: 13px;
+    line-height: 24px;
+    font-size:16px;
+    padding-left: 20px;
+    padding-right: 10px;
+    color:rgba(255,139,0,1);
+    overflow: hidden;
+  }
+  .mark p i{
+    float: left;
+    font-size: 24px;
+    color: #ff8800;
+  }
+  .mark p span{
+    margin-left: 12px;
+    font-weight: 600;
+    margin-right: 10px;
+  }
+  .mark p b{
+    font-size:16px;
+    font-family:MicrosoftYaHei;
+    color:rgba(0,122,206,1);
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .mark p i:last-child{
+    float: right;
+    color: #757f8c;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,85 @@
+/* menus 样式 */
+.menus {
+  display: flex;
+  height: 34px;
+  background: #FCFCFC;
+  /* padding-top: 3px; */
+  border-top: 1px solid #F1F1F1;
+  border-bottom: 1px solid #cccccc;
+  transition: all 0.2s ease-in 0;
+}
+.menu{
+  width: 48px;
+  position: relative;
+  background: #E14C46;
+  cursor: pointer;
+}
+.menu :global(.iconfont){
+  color: #fff;
+}
+.history{
+  position: relative;
+  float: left;
+  width: 50px;
+  height: 100%;
+  cursor: pointer;
+}
+.history :global(.ignoreClass-history){
+  height: 32px;
+}
+.home{
+  position: relative;
+  float: left;
+  padding-top: 6px;
+  width: 68px;
+  height: 100%;
+  cursor: pointer;
+}
+.home:hover{
+  background: #f3f3f3;
+}
+.home::before{
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 1px;
+  height: 12px;
+  background: #CCCCCC;
+}
+
+.home.active{
+  background: #fff;
+  border-top: 2px solid red;
+  padding-top: 4px;
+  border-left: 1px solid #F1F1F1;
+  border-right: 1px solid #F1F1F1;
+}
+.home.active::before{
+  content: '';
+  width: 0;
+}
+.home.active :global(.iconfont::before){
+  color: #E14C46;
+}
+.upward{
+  position: relative;
+  top: -3px;
+  cursor: pointer;
+  float: right;
+  width: 56px;
+  padding-top: 10px;
+}
+.upward::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 13px;
+  width: 2px;
+  height: 15px;
+  background: #CCCCCC;
+}
+
+.im{
+  padding-top: 5px;
+}

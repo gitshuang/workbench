@@ -162,7 +162,7 @@ class Homeheader extends Component {
 
   render() {
     const { retract, style, openMenu, openHistory } = this.props;
-    const title = <a href=""><img alt="" src={logoUrl} style={{ marginTop: '8px', width: '90px' }} /></a>;
+    const title = <img alt="" src={logoUrl} style={{ marginTop: '8px', width: '90px' }} />;
     return (
       <div className="header" id="home_header" style={style}>
         <CSSTransitionGroup
