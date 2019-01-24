@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
+import Icon from 'pub-comp/icon';
 import { openService } from 'public/regMessageTypeHandler';
 
 import homeActions from 'store/root/home/actions';
@@ -10,7 +11,7 @@ import rootActions from 'store/root/actions';
 
 import WidgeList from './homeWidgetList';
 import HomeMark from './homemark';
-import { wrap, content } from './style.css';
+import { wrap, content, manage } from './style.css';
 
 const { getWorkList, getApplicationList, clearApplicationTips } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -278,7 +279,10 @@ class Home extends Component {
         className={`${wrap} home`}
         onScroll={this.updateViewport}
       >
-        <div style={{ background: "red", position: "absolute", top: '10px', right: 10, zIndex: 99 }} onClick={this.changeRouter}>切换到编辑</div>
+        <div className={manage} onClick={this.changeRouter}>
+          <Icon type="Set-up" />
+          <span>首页设置</span>
+        </div>
         <div className={content}>
           {contents}
         </div>

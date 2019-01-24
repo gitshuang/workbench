@@ -30,3 +30,36 @@
   }
 }
 
+.manage{
+  position: absolute;
+  top: 20px;
+  right: 20px; 
+  z-index: 99;
+  overflow: hidden;
+  height: 26px;
+  padding-top: 5px;
+  cursor: pointer;
+  border-radius:13px;
+  width: 96px;
+  padding-left: 10px;
+}
+.manage:hover{
+  background: rgba(0,0,0,0.1);
+}
+.manage :global(.iconfont){
+  float: left;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+}
+.manage :global(.iconfont::before){
+  color: #ffffff;
+}
+.manage span{
+  float: left;
+  color: #ffffff;
+  line-height: 16px;
+  margin-left: 8px;
+  font-size: 12px;
+}
