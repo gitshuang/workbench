@@ -56,7 +56,9 @@
   content: '';
   width: 0;
 }
-
+.home.active :global(.iconfont::before){
+  color: #E14C46;
+}
 .upward{
   position: relative;
   top: -3px;
