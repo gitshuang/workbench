@@ -69,7 +69,7 @@ class Im extends Component {
         const imClass = imShowed ? "active tc" : "tc";
         return (
             <div ref="IM" className={`${imClass} ${im} ${classname}`} onClick={this.toggleIM}>
-                <Icon title="智能通讯" type="clock" />
+                <Icon title="智能通讯" type="news" />
                 <span className="CircleDot" style={{ display: messageType ? 'block' : 'none' }}></span>
             </div>
         );

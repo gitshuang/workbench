@@ -75,11 +75,11 @@ const reducer = handleActions({
   },
   [addTabs]: (state, { payload, }) => {
     let { tabs } = state;
-    if (tabs.length >= 20) {
-      return {
-        ...state,
-      };
-    }
+    // if (tabs.length >= 20) {
+    //   return {
+    //     ...state,
+    //   };
+    // }
 
     // TODO生成了新数组 这样感觉造成的重绘现象比较严重， ？
     // const newTabs = tabs.filter(item => {
