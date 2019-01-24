@@ -180,7 +180,7 @@ class Homeheader extends Component {
               ?
               <Header
                 leftContent={this.getLeftContent()}
-                iconName={<img src={menuImg} className="ignoreClass" onClick={openMenu} />}
+                iconName={<img src={menuImg} className="ignoreClass-menu" onClick={openMenu} />}
               >
                 <span>{title || '首页'}</span>
               </Header>

@@ -70,14 +70,13 @@ class Navs extends Component {
           retract 
           ? null 
           : <div className={`${menu} um-box-center`}>
-              <img src={menuImg} className="ignoreClass" onClick={openMenu} />
+              <img src={menuImg} className="ignoreClass-menu" onClick={openMenu} />
             </div>
         }
-        <div
-          className={`${history} um-box-center`}
-          onClick={() => { this.openHistory() }}
-        >
-          <Icon type="History" />
+        <div className={`${history}`}>
+          <div className="ignoreClass-history um-box-center" onClick={() => { this.openHistory() }}>
+            <Icon type="History" />
+          </div>
           <History
             historyShow={this.state.historyShow}
             openHistory={this.openHistory}

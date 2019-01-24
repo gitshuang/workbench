@@ -24,6 +24,9 @@
   height: 100%;
   cursor: pointer;
 }
+.history :global(.ignoreClass-history){
+  height: 32px;
+}
 .home{
   position: relative;
   float: left;

@@ -36,7 +36,7 @@ class History extends Component {
           >
             {this.props.historyShow && 
               <HistoryInner 
-                outsideClickIgnoreClass='diworkiconfont' 
+                outsideClickIgnoreClass='ignoreClass-history' 
                 openHistory={this.props.openHistory} 
               />
             }
