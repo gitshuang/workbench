@@ -24,19 +24,6 @@
     'https://workbench-daily.yyuap.com',
   ];
   var origin = window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-  
-  // var hostname = window.location.hostname;
-  // var domain = "yyuap.com";
-  // if (originList.indexOf(origin) > -1 && hostname.indexOf(domain) > -1) {
-  //   try {
-  //     var href = window.top.location.href;
-  //     console.log(href);
-  //   } catch (e) {
-  //     document.domain = domain;
-  //     console.log(href);
-  //   }
-  // }
-
   originList.push(origin);
 
   var getUid = function () {
@@ -178,19 +165,9 @@
       }
     }
   };
-  var postMessage = function () {
-
-  }
   var postToDiwork = function (data) {
     data.messType = messType;
     window.top.postMessage(JSON.stringify(data), '*');
-    // var origin = window.top.location.origin;
-    // var param = JSON.stringify(data);
-    // if (originList.indexOf(origin) < 0) {
-    //   window.parent.postMessage(param, '*');
-    //   return;
-    // }
-    // window.top.postMessage(param, '*');
   };
   var ready = function (callback) {
     var event = {
@@ -315,19 +292,6 @@
   var onData = function (callback) {
     on('data', callback);
   };
-  // var customMessage = function (type) {
-  //   postToDiwork({
-  //     callbackId: type,
-  //   });
-  // };
-  // var modifyBrm = function (name, callback) {
-  //   postToDiwork({
-  //     detail: {
-  //       name: name
-  //     },
-  //     callbackId: reg('modifyBrm', callback)
-  //   });
-  // };
   var switchChatTo = function (data, callback) {
     if (data.id || data.yht_id) {
       postToDiwork({
@@ -464,8 +428,6 @@
     postDataToService: postDataToService,
     getContext: getContext,
     onData: onData,
-    // customMessage: customMessage,
-    // modifyBrm: modifyBrm,
     switchChatTo: switchChatTo,
     openMessage: openMessage,
     refreshUserInfo: refreshUserInfo,
