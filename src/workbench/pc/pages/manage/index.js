@@ -38,6 +38,7 @@ const {
   addDesk,
   setCurrentSelectWidgetMap,
   emptySelectGroup,
+  updateGroupList 
 } = manageActions;
 
 
@@ -96,6 +97,7 @@ const {
     setCurrentSelectWidgetMap,
     addDesk,
     emptySelectGroup,
+    updateGroupList
   },
 )
 
