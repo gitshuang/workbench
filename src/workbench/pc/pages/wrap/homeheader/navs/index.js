@@ -9,7 +9,7 @@ import Tabmenu from './tabs';
 import Im from '../im';
 import History from './history';
 import { menus, menu, history, home, active, upward, im } from './style.css';
-import menuImg from 'assets/image/menu2.svg';
+import menuImg from 'assets/image/menu.svg';
 
 /*   actions   */
 import wrapActions from 'store/root/wrap/actions';

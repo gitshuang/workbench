@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import PropTypes from 'prop-types';
+import Icon from 'pub-comp/icon';
 
 import onClickOutside from 'react-onclickoutside';
 import { openWin } from 'public/regMessageTypeHandler';
@@ -98,7 +99,12 @@ class HistoryInner extends Component {
         <ul className="inner-list">
           {
             historyList.filter((item,index)=>index<10).map(item => {
-              return <li className="history-item" onClick={e => this.openHistoryItem(item.businessCode,item.extendParams)}>{item.title}</li>
+              return (
+                <li className="history-item" onClick={e => this.openHistoryItem(item.businessCode,item.extendParams)}>
+                  <Icon type="blank-page" />
+                  {item.title}
+                </li>
+              )
             })
           }
         </ul>

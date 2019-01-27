@@ -30,8 +30,8 @@ class Wrap extends Component {
     this.state = {
       menuShow: false,//菜单栏
     };
-    this.height = 74;
-    this.nav = 34;
+    this.height = 72;
+    this.nav = 32;
   }
 
   componentDidMount() {

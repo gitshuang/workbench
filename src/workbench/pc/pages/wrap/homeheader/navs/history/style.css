@@ -6,7 +6,7 @@
 }
 .historyPartInner{
     background: #fff;
-    width: 152px;
+    width: 162px;
     height: 380px;
     overflow: auto;
     border: 1px solid #d0d0d0;
@@ -44,7 +44,7 @@
     white-space: nowrap;
     width: 100%;
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
     font-family: MicrosoftYaHei;
     color: #555;
     font-weight: 400;
@@ -54,5 +54,14 @@
   }
 .historyPartInner :global(.inner-list .history-item:hover) {
     background: #f3f3f3;
+    color: #e14c46;
+}
+.historyPartInner :global(.inner-list .history-item i){
+    position: relative;
+    top: 3px;
+    margin-right: 8px;
+    font-size: 18px;
+}
+.historyPartInner :global(.inner-list .history-item:hover i) {
     color: #e14c46;
 }

@@ -5,7 +5,7 @@ import Icon from 'pub-comp/icon';
 import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import wrapActions from 'store/root/wrap/actions';
 import Pulldown from './pulldown';
-import { tab, active, first } from './style.css';
+import { tab, active, first, pagesign } from './style.css';
 
 const { showTabs } = wrapActions;
 @connect(
@@ -100,6 +100,7 @@ class Tabmenu extends Component {
                 <li key={`${item.id}`}
                   className={`${item.id === activeCarrier ? active : ''} ${activeCarrier == 'home' && index==0 ? first : ''}`}
                 >
+                  <Icon type="blank-page" className={pagesign} />
                   <p onClick={() => { showTabs(item) }} title={item.title}>{item.title}</p>
                   <div onClick={() => { this.closeWin(item) }}>
                     <Icon type="error3" />

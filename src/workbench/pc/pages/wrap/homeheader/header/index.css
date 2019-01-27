@@ -1,5 +1,6 @@
 .lebraNavbar{
   height: 40px;
+  border-bottom: 1px solid #F1F1F1;
 }
 
 .lebraNavbar :global(.lebra-navbar-left-icon){

@@ -5,16 +5,17 @@
 }
 .tab ul{
   overflow: hidden;
+  height: 100%;
   float: left;
 }
 .tab ul li{
   float: left;
   width: 154px;
-  padding-right: 21px;
-  padding-left: 1px;
+  height: 100%;
+  padding-right: 20px;
   cursor: pointer;
   position: relative;
-  padding-top: 2px;
+  color: #555555;
 }
 .tab ul li::before{
   content: '';
@@ -27,16 +28,17 @@
   
 }
 .tab ul li:hover{
-  background: #f3f3f3;
+  /* background: #ffffff; */
 }
 
 .tab ul li p{
-  padding-left: 8px;
   text-align: left;
-  line-height: 30px;
+  height: 100%;
+  line-height: 32px;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
+  font-size: 12px;
 }
 .tab li div{
   position: absolute;
@@ -47,24 +49,29 @@
   border-radius: 50% 50%;
 }
 
+.tab li .pagesign{
+  float: left;
+  margin-top: 6px;
+  margin-left: 8px;
+  margin-right: 6px;
+  font-size: 18px;
+}
+
 .tab li div i{
   font-size: 14px;
+  color: #888888;
 }
 .tab ul .active{
-  background: #ffffff;
-  border-top: 2px solid red;
-  padding-top: 0;
-  border-left: 1px solid #F1F1F1;
-  border-right: 1px solid #F1F1F1;
-  padding-right: 20px;
-  padding-left: 0px;
-  color: #E14C46;
+  background: linear-gradient(90deg,rgba(225,76,70,1) 0%,rgba(221,60,73,1) 100%);
+  color: #ffffff;
+}
+.tab ul .active i{
+  color: #ffffff;
 }
 
 .tab ul .active::before,
 .tab ul .first::before,
 .tab ul .active + li::before{
-/* .tab ul li:first-child::before */
   content: '';
   width: 0;
 }
