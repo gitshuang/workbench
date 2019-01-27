@@ -75,7 +75,8 @@ export default class Content extends Component{
 		shadowCard = { ...shadowCard, gridx: gridX, gridy: gridY };
 		//添加阴影的卡片
 		manageList[groupIndex].children.push(shadowCard);
-		//获得当前分组内最新的layout布局
+    //获得当前分组内最新的layout布局
+    
 		const newlayout = layoutCheck(
 			manageList[groupIndex].children,
 			shadowCard,
@@ -83,6 +84,7 @@ export default class Content extends Component{
 			shadowCard.widgetId,
 			axis
     );
+
 		//压缩当前分组内的layout布局
 		let compactedLayout;
 		if(axis === 'gridx'){
@@ -90,10 +92,11 @@ export default class Content extends Component{
 		}else if(axis === 'gridy'){
 			compactedLayout = compactLayout(newlayout, shadowCard);
 		}
-		//更新group对象
-		manageList[groupIndex].children = newlayout;
-		this.props.updateShadowCard(shadowCard);
+    //更新group对象
+    manageList[groupIndex].children = compactedLayout;
+    this.props.updateShadowCard(shadowCard);
     this.props.updateGroupList(manageList);
+
   };
   //当页面加载完成，获得卡片容器宽度
 	handleLoad = () => {
@@ -259,6 +262,7 @@ export default class Content extends Component{
       requestError,
     }
     let list = [];
+    console.log(manageList,'manageList====================manageList===============')
     if(manageList.length == 0){
       return (
         <div className={addBtn} id="first-add">

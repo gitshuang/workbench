@@ -128,5 +128,6 @@ export const compactLayoutHorizontal = function(layout, cols, movingCardID) {
         compareList.push(finished);
         needCompact[i] = finished;
     }
+
     return needCompact;
 };

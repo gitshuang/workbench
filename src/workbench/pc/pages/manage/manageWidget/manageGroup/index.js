@@ -164,6 +164,7 @@ export default class ManageGroup extends Component {
 					isShadow={c.isShadow}
 					isChecked={c.isChecked}
 					key={`${groupID}_${c.widgetId}`}
+					name={c.widgetName}
 				/>
 			);
 		});
@@ -187,7 +188,7 @@ export default class ManageGroup extends Component {
     } = this.state;
     const containerHeight = utilService.getContainerMaxHeight(children, layout.rowHeight, layout.margin);
     
-   
+    //console.log(children,'render=============children===============render======')
     let _html = ( <div className={`${groupArea} animated zoomIn`} >
       <section className={inFoucs ? selectedBackClass : ""} >
         <GroupTitle groupID={id} index={index} widgetName={widgetName } children={children}/>

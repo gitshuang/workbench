@@ -107,11 +107,13 @@ export default class Item extends Component {
 		} = this.props;
         
 		const { margin, rowHeight, calWidth } = this.props.layout;
+		
 		const { x, y } = utilService.calGridItemPosition(gridx, gridy, margin, rowHeight, calWidth);
+		
+
 		const { wPx, hPx } = utilService.calWHtoPx(width, height, margin, rowHeight, calWidth);
 		let cardDom;
 		//是否为拖拽中的阴影卡片
-		
 		if (isShadow) {
 			cardDom = (
 				<div

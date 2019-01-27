@@ -157,7 +157,7 @@ export const calWHtoPx = (w, h, margin, rowHeight, calWidth) => {
  */
 export const setPropertyValueForCards = (groups, property, value) => {
     _.forEach(groups, (g, index) => {
-        _.forEach(g.apps, a => {
+        _.forEach(g.children, a => {
             a[property] = value;
         });
     });

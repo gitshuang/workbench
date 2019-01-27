@@ -191,6 +191,39 @@
                         "height":1,
                         "gridx":4,
                         "gridy":0
+                    },
+                    {
+                        "createTime": 1534917232000,
+                        "modifiedTime": null,
+                        "ts": null,
+                        "creator": null,
+                        "modifier": null,
+                        "tenantId": "dp7bijsx",
+                        "widgetId": "49f20559-334a-40ba-b200-7f2d714e0des",
+                        "templateId": "09f7e54b-727b-4825-a9a6-ff04ce55705b",
+                        "widgetConfig": null,
+                        "icon": "https://file-cdn.yonyoucloud.com/workapplation/%E5%91%98%E5%B7%A5%403x.png",
+                        "serviceCode": "HRPA020",
+                        "serviceId": "eb7263d8-1e7c-4638-9dfc-bd458825edes",
+                        "serviceType": 1,
+                        "widgetName": "aaaa",
+                        "widgetNameExt2": "Employee Info",
+                        "widgetNameExt3": "aaa",
+                        "widgetNameExt4": null,
+                        "widgetNameExt5": null,
+                        "widgetNameExt6": null,
+                        "userId": "fdd3248e-f65e-46fd-9da2-6a886d7a0547",
+                        "type": 3,
+                        "parentId": "756154a9-15f2-4d1c-98b9-1c27d0332d36",
+                        "orders": 103,
+                        "children": [],
+                        "jsurl": "https://cdn.yonyoucloud.com/diwork/widget/655c9b66-2c57-4e99-bef5-b3b95ed1426a.js",
+                        "background": "",
+                        "size": 1,
+                        "width":1,
+                        "height":1,
+                        "gridx":5,
+                        "gridy":0
                     }
                 ],
                 "jsurl": null,
@@ -354,6 +387,7 @@
                         "gridx":3,
                         "gridy":0
                     }
+                    
                 ],
                 "jsurl": null,
                 "background": null,
