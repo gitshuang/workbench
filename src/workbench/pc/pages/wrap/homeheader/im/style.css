@@ -16,3 +16,9 @@
     top:5px;
     right:5px;
   }
+  .im :global(.iconfont){
+      font-weight: normal;
+  }
+  .im :global(.iconfont:hover::before){
+      color: #e14c46;
+  }
