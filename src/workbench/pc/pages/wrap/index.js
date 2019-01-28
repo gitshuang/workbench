@@ -64,7 +64,7 @@ class Wrap extends Component {
         <Menu
           menuShow={this.state.menuShow}
           openMenu={this.openMenu}
-          style={{ top: retract ? this.height : this.nav }}
+          style={{ top: retract ? this.height - this.nav : this.nav }}
         />
         {
           pinDisplay ? <Pin /> : null

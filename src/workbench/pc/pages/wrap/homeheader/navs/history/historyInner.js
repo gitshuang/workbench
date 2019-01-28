@@ -53,18 +53,14 @@ class HistoryInner extends Component {
 
   componentDidMount() {
     const {
-      requestStart,
-      requestSuccess,
       requestError,
       getHistoryList,
     } = this.props;
-    requestStart();
     getHistoryList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
         return;
       }
-      requestSuccess();
     });
   }
   handleClickOutside() {

@@ -1,9 +1,9 @@
 /*start:menubar*/
 .menuBarPart{
   position: fixed;
-  z-index: 1;
+  z-index: 99998;
   left: 0;
-  top:36px;
+  top: 40px;
 }
 .sideBarPanel {
   width: 900px;
@@ -41,7 +41,8 @@
   height: 100%;
   width: 200px;
   padding: 0;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  overflow-x: hidden; 
   background: #fff;
   border-radius: 0;
   border:none;

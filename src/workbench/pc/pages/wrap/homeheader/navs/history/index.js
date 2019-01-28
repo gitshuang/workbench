@@ -27,9 +27,9 @@ class History extends Component {
           <CSSTransitionGroup
             transitionName={{
               enter: 'animated',
-              enterActive: `fadeInLeft`,
+              enterActive: `fadeIn`,
               leave: 'animated',
-              leaveActive: `fadeOutLeft`,
+              leaveActive: `fadeOut`,
             }}
             transitionEnterTimeout={500}
             transitionLeaveTimeout={500}
