@@ -9,7 +9,7 @@ import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 import rootActions from 'store/root/actions';
 import wrapActions from 'store/root/wrap/actions';
 const { requestStart, requestSuccess, requestError } = rootActions;
-const { getHistoryList, delHistory, delAllHistory,changeDelHistory } = wrapActions;
+const { getHistoryList, delHistory, delAllHistory, changeDelHistory } = wrapActions;
 
 import { historyAll, historyADay } from './style.css';
 
@@ -47,8 +47,8 @@ class HistoryAll extends Component {
     requestSuccess: () => { },
     requestError: () => { },
     getHistoryList: () => { },
-    delHistory: () => {},
-    delAllHistory: () => {},
+    delHistory: () => { },
+    delAllHistory: () => { },
     changeDelHistory: () => { }
   };
 
@@ -56,9 +56,9 @@ class HistoryAll extends Component {
     super(props);
     this.state = {
       historyListNew: {},//需要处理historyList按照日期分类
-      deleteSelected:{},//选择要删除的历史记录
+      deleteSelected: {},//选择要删除的历史记录
     }
-    this.DateChinese  = ['日','一','二','三','四','五',]
+    this.DateChinese = ['日', '一', '二', '三', '四', '五',]
   }
 
   formatTime = (time, type = 1) => {
@@ -74,8 +74,8 @@ class HistoryAll extends Component {
       return { year: year, month: month, date: date, day: day }
     }
   }
-  
-  formatHistoryList = (historyList) =>{
+
+  formatHistoryList = (historyList) => {
     let obj = {};
     historyList.forEach(item => {
       if (!obj[this.formatTime(item.createTime)]) {
@@ -91,17 +91,17 @@ class HistoryAll extends Component {
     let { historyList } = this.props;
     if (historyList.length > 0) {
       this.setState({ historyListNew: this.formatHistoryList(historyList) })
-    }else{
+    } else {
       console.log('历史记录是空的')
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.historyList.length!== this.props.historyList){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.historyList.length !== this.props.historyList) {
       this.setState({ historyListNew: this.formatHistoryList(nextProps.historyList) })
     }
   }
-  openService = (businessCode,extendParams) =>{
+  openService = (businessCode, extendParams) => {
     dispatchMessageTypeHandler({
       type: "openService",
       detail: {
@@ -112,17 +112,17 @@ class HistoryAll extends Component {
     this.props.openHistory();
   }
 
-  toggleSelected = (status,latestAccessId) =>{
-    let {deleteSelected} = this.state;
-    if(status){
+  toggleSelected = (status, latestAccessId) => {
+    let { deleteSelected } = this.state;
+    if (status) {
       deleteSelected[latestAccessId] = status;
-    }else{
+    } else {
       delete deleteSelected[latestAccessId];
     }
-    this.setState({deleteSelected})
+    this.setState({ deleteSelected })
   }
 
-  delHistory = (type,data) =>{
+  delHistory = (type, data) => {
     const {
       requestStart,
       requestSuccess,
@@ -131,9 +131,9 @@ class HistoryAll extends Component {
       delAllHistory,
       changeDelHistory
     } = this.props;
-    let {deleteSelected} = this.state;
+    let { deleteSelected } = this.state;
     requestStart();
-    if(type === 'all'){
+    if (type === 'all') {
       delAllHistory().then(({ error, payload }) => {
         if (error) {
           requestError(payload);
@@ -141,12 +141,12 @@ class HistoryAll extends Component {
         }
         requestSuccess();
       });
-    }else{
+    } else {
       let param = [];
-      if(type==='single'){
+      if (type === 'single') {
         param = [data.latestAccessId]
-      }else{
-        Object.keys(deleteSelected).forEach(key=>{
+      } else {
+        Object.keys(deleteSelected).forEach(key => {
           param.push(key);
         })
       }
@@ -155,8 +155,8 @@ class HistoryAll extends Component {
           requestError(payload);
           return;
         }
-        changeDelHistory({latestAccessIds:param});
-        this.setState({deleteSelected:{}})
+        changeDelHistory({ latestAccessIds: param });
+        this.setState({ deleteSelected: {} })
         requestSuccess();
       });
     }
@@ -169,42 +169,46 @@ class HistoryAll extends Component {
     return a
   }
   getList = (data) => {
-    let {deleteSelected} = this.state;
-    return data.map(item=>{
+    let { deleteSelected } = this.state;
+    return data.map(item => {
       return (
         <li className="item">
-            <Checkbox className="item-checkbox" checked={!!deleteSelected[item.latestAccessId]}  onChange={e=>this.toggleSelected(e,item.latestAccessId)} />
-            <span className="item-time">{`${new Date(item.createTime).getHours()}:${new Date(item.createTime).getMinutes()}`}</span>
-            <span className="item-title" onClick={()=>this.openService(item.businessCode,item.extendParams)}>{item.title}</span>
-            <Icon className="item-delete" type="error3" onClick={()=>this.delHistory('single',item)}></Icon>
+          <Checkbox className="item-checkbox" checked={!!deleteSelected[item.latestAccessId]} onChange={e => this.toggleSelected(e, item.latestAccessId)} />
+          <span className="item-time">{`${new Date(item.createTime).getHours()}:${new Date(item.createTime).getMinutes()}`}</span>
+          <span className="item-title" onClick={() => this.openService(item.businessCode, item.extendParams)}>{item.title}</span>
+          <Icon className="item-delete" type="error3" onClick={() => this.delHistory('single', item)}></Icon>
         </li>
       )
     })
   }
-  
-  render() {
-    let { historyListNew,deleteSelected } = this.state;
-    return (
-      <div className={historyAll}>
-        <div className="historyAllBtnArea">
-          <ButtonBrand onClick={()=>this.delHistory('all')}>清空历史记录</ButtonBrand>
-          <ButtonDefault  disabled={Object.keys(deleteSelected).length === 0} onClick={()=>this.delHistory('selected')}>删除历史记录</ButtonDefault>
-        </div>
-        {
-          Object.keys(historyListNew).map(item => {
-            return (
-              <div className={historyADay}>
-                <label className="day-head">
-                  {this.getHeader(item)}
-                </label>
-                <ul className="day-list">
-                  {this.getList(historyListNew[item])}
-                </ul>
-              </div>
-            )
 
-          })
-        }
+  render() {
+    let { historyListNew, deleteSelected } = this.state;
+    return (
+      <div className="diworkcontent">
+        <div className="contentbg">
+          <div className={historyAll}>
+            <div className="historyAllBtnArea">
+              <ButtonBrand onClick={() => this.delHistory('all')}>清空历史记录</ButtonBrand>
+              <ButtonDefault disabled={Object.keys(deleteSelected).length === 0} onClick={() => this.delHistory('selected')}>删除历史记录</ButtonDefault>
+            </div>
+            {
+              Object.keys(historyListNew).map(item => {
+                return (
+                  <div className={historyADay}>
+                    <label className="day-head">
+                      {this.getHeader(item)}
+                    </label>
+                    <ul className="day-list">
+                      {this.getList(historyListNew[item])}
+                    </ul>
+                  </div>
+                )
+
+              })
+            }
+          </div>
+        </div>
       </div>
     );
   }

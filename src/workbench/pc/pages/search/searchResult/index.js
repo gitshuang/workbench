@@ -289,7 +289,7 @@ class searchResult extends Component {
     });
 
     return (
-      <div className={`${bg}  um-vbox`}>
+      <div className={`${bg} contentbg um-vbox`}>
         <div className={`${bg_wrap}  um-vbox`}>
           <div className={`${wrap} ${clearfix}  um-vbox`}>
             <SearchInput
