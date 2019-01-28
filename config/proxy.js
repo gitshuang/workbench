@@ -60,6 +60,7 @@ var api = [
 
   '/history/list',
   '/user/getUserInfo',
+  '/defaultDesktop/query',
 ]
 
 var rapApi = [];

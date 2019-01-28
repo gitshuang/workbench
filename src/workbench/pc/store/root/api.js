@@ -9,3 +9,5 @@ export const getCurrent = () => get('/language/current');
 export const setCurrentNot = type => post('/language/setCurrentNotLogin', { langCode: type });
 export const getAllEnableNot = () => get('/language/getAllEnableNotLogin');
 export const getCurrentNot = () => get('/language/currentNotLogin');
+export const getDefaultDesktop = () => get('/defaultDesktop/query');
+export const setDefaultDesktop = (data) => post('/defaultDesktop/update', data);

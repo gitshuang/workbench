@@ -116,3 +116,8 @@
 .out{
     padding: 16px 0;
 }
+
+.info :global(.u-menu-item-selected){
+    color: #E14C46;
+    background: #e4e4e4;
+}

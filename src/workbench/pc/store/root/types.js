@@ -24,4 +24,6 @@ export default createTypes(
   'CLOSE_DIALOG_NEW',
   'OPEN_FRAME',
   'CLOSE_FRAME',
+  'GET_DEFAULT_DESKTOP',
+  'SET_DEFAULT_DESKTOP',
 );

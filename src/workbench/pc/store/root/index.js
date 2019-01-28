@@ -64,6 +64,8 @@ const {
   closeDialogNew,
   openFrame,
   closeFrame,
+  getDefaultDesktop,
+  setDefaultDesktop,
 } = actions;
 
 const defaultState = {
@@ -77,6 +79,7 @@ const defaultState = {
   messageType: false,
   messageList: [],
   messageShowNum: 0,
+  content: "workbench",      // 默认登录动作， workbench/protal
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -230,6 +233,24 @@ const reducer = handleActions({
       showFrame: false,
       frameParam: {}
     }
+  },
+  [getDefaultDesktop]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      content: payload.content,
+    };
+  },
+  [setDefaultDesktop]: (state, { payload, error }) => {
+    if (error) {
+      return state;
+    }
+    return {
+      ...state,
+      content: payload.content,
+    };
   },
 }, defaultState);
 
