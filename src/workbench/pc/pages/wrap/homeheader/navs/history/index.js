@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TransitionGroup, CSSTransitionGroup } from 'react-transition-group';
 import HistoryInner from './historyInner';
-import { historyPart} from './style.css';
+import { historyPart } from './style.css';
 class History extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,10 +14,6 @@ class History extends Component {
 
   componentDidMount() {
 
-  }
-
-  handleClickOutside() {
-    this.props.openHistory()
   }
 
   render() {
@@ -34,11 +30,11 @@ class History extends Component {
             transitionEnterTimeout={500}
             transitionLeaveTimeout={500}
           >
-            {this.props.historyShow && 
-              <HistoryInner 
-                outsideClickIgnoreClass='ignoreClass-history' 
-                openHistory={this.props.openHistory} 
-              />
+            {this.props.historyShow ?
+              <HistoryInner
+                outsideClickIgnoreClass='ignoreClass-history'
+                closeHistory={this.props.closeHistory}
+              /> : null
             }
           </CSSTransitionGroup>
         </TransitionGroup>

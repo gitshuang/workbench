@@ -55,6 +55,12 @@ class Navs extends Component {
     });
   }
 
+  closeHistory = () => {
+    this.setState({
+      historyShow: false,
+    });
+  }
+
   changeRetract = () => {
     const { retract, changeRetract } = this.props;
     changeRetract(retract);
@@ -79,9 +85,8 @@ class Navs extends Component {
           </div>
           <History
             historyShow={this.state.historyShow}
-            openHistory={this.openHistory}
-          >
-          </History>
+            closeHistory={this.closeHistory}
+          />
         </div>
         <div
           className={`${home} tc ${activeCarrier === "home" ? active : ''}`}

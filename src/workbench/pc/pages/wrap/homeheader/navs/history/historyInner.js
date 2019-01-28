@@ -63,8 +63,9 @@ class HistoryInner extends Component {
       }
     });
   }
-  handleClickOutside() {
-    this.props.openHistory()
+  handleClickOutside(e) {
+    e.stopPropagation();
+    this.props.closeHistory()
   }
   openHistoryItem = (businessCode,extendParams) => {
     dispatchMessageTypeHandler({
@@ -74,14 +75,14 @@ class HistoryInner extends Component {
         data: extendParams
       }
     });
-    this.props.openHistory();
+    this.props.closeHistory();
   }
   openAllHistory = () => {
     openWin({
       id: 'History',
       title: '全部历史',
     });
-    this.props.openHistory()
+    this.props.closeHistory()
   }
 
   render() {
