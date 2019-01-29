@@ -72,7 +72,8 @@ const itemTarget = {
 			const { x, y } = monitor.getClientOffset();
 			const groupItemBoundingRect = findDOMNode(component).getBoundingClientRect();
 			const groupItemX = groupItemBoundingRect.left;
-      const groupItemY = groupItemBoundingRect.top;
+			const groupItemY = groupItemBoundingRect.top;
+			
 			props.moveCardInGroupItem(dragItem, hoverItem, x - groupItemX, y - groupItemY);
 		}
 	},
@@ -173,7 +174,9 @@ export default class ManageGroup extends Component {
   render() {
     const {
       data: {
-        children,
+				children,//这里要注意一定不能这么传参，需要单独提出来传给cards,
+				//因为manageList是个数组，里面的每一项地址没变，所以不重新渲染本组件，
+				//但是每一项又是一个对象，对象属性children地址变了，想要重新渲染当前组件必须把children传进来
         widgetName 
       },
       index,
@@ -181,17 +184,18 @@ export default class ManageGroup extends Component {
       connectDropTarget,
       layout,
       defaultLayout,
-      id,
+			id,
+			cards
     } = this.props;
     const {
       inFoucs,
     } = this.state;
-    const containerHeight = utilService.getContainerMaxHeight(children, layout.rowHeight, layout.margin);
+    const containerHeight = utilService.getContainerMaxHeight(cards, layout.rowHeight, layout.margin);
     
     //console.log(children,'render=============children===============render======')
     let _html = ( <div className={`${groupArea} animated zoomIn`} >
       <section className={inFoucs ? selectedBackClass : ""} >
-        <GroupTitle groupID={id} index={index} widgetName={widgetName } children={children}/>
+        <GroupTitle groupID={id} index={index} widgetName={widgetName } children={cards}/>
         <div id="widget-container"
          style={{
           height:
@@ -199,7 +203,7 @@ export default class ManageGroup extends Component {
               ? containerHeight
               : defaultLayout.containerHeight
         }}>
-          {this.createCards(children, id, index)}
+          {this.createCards(cards, id, index)}
         </div>
       </section>
       {/* 底部添加分组按钮 */}
@@ -210,7 +214,9 @@ export default class ManageGroup extends Component {
         </ButtonDefaultWhite>
       </div>
 
-    </div>);
+		</div>);
+		
+		 console.log('render======groupList===========*******************+++++++++++++++++++++++++++++++++===============================');
     return connectDragSource(connectDropTarget(_html));
   }
 }

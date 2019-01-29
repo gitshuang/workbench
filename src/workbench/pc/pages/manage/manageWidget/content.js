@@ -50,13 +50,17 @@ export default class Content extends Component{
     
 		let axis = 'gridx';
 		let manageList = this.props.manageList;
-		let shadowCard = this.props.shadowCard;
+    let shadowCard = this.props.shadowCard;
 		const { margin, containerWidth, col, rowHeight } = this.props.layout;
-		//计算当前所在的网格坐标
+    //计算当前所在的网格坐标
 		const { gridX, gridY } = utilService.calGridXY(x, y, shadowCard.width, margin, containerWidth, col, rowHeight);
-		if (gridX === shadowCard.gridx && gridY === shadowCard.gridy) {
+    //console.log(shadowCard.gridx,'shadowCard.gridx========');
+    if (gridX === shadowCard.gridx && gridY === shadowCard.gridy) {
 			return;
-		}
+    }
+    //console.log(gridX,'gridX===================gridX');
+    //console.log(gridY,'gridY===================gridY');
+    
 		let groupIndex = hoverItem.index;
 		//先判断组内是否存在相同的卡片
 		const widgetId = shadowCard.widgetId;
@@ -64,14 +68,14 @@ export default class Content extends Component{
 
 		if (isContain) {
 			return;
-		}
+    }
+    console.log("nocontain==========nocontain================")
 		//删除阴影的卡片
 		_.forEach(manageList, (g, index) => {
 			_.remove(g.children, (a) => {
 				return a.isShadow === true;
 			});
 		});
-
 		shadowCard = { ...shadowCard, gridx: gridX, gridy: gridY };
 		//添加阴影的卡片
 		manageList[groupIndex].children.push(shadowCard);
@@ -262,7 +266,6 @@ export default class Content extends Component{
       requestError,
     }
     let list = [];
-    console.log(manageList,'manageList====================manageList===============')
     if(manageList.length == 0){
       return (
         <div className={addBtn} id="first-add">
@@ -278,6 +281,7 @@ export default class Content extends Component{
         list.push(
           <ManageGroup
             data={item}
+            cards={item.children}
             index={index}
             key={item.widgetId}
             id={item.widgetId}

@@ -137,6 +137,7 @@ function setDefaultSelected(manageList, applicationsMap) {
 
 const reducer = handleActions({
   [updateShadowCard]:(state,{payload:shadowCard}) => {
+    console.log(shadowCard,'shadowCard========================shadowCard');
     return {
       ...state,
       shadowCard: shadowCard

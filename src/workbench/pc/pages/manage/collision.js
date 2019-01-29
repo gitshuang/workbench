@@ -54,10 +54,11 @@ export const layoutCheck = (function() {
         let movedItem = [];
         axis = axis || "gridx";
         let newlayout = layout.map((item, index) => {
-            if (item.cardid !== cardID) {
+            
+            if (item.widgetId !== cardID) {
                 if (collision(item, layoutItem)) {
                     //碰撞检测，是否有方块和当前卡片有位置碰撞
-                    keyArr.push(item.cardid);
+                    keyArr.push(item.widgetId);
                     let offsetXY = item[axis] + 1;
                     // 移动模块位于循环检测方块中
                     let widthOrHeight = 0;

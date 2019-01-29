@@ -21,6 +21,7 @@ const noteSource = {
 		dragCard.isShadow = true;
 		props.updateShadowCard(dragCard);
 		return { id: props.id, type: props.type };
+
 	},
 	//结束拖拽，设置isShadow属性，shadowCard对象，更新groups
 	endDrag(props, monitor, component) {

@@ -99,7 +99,7 @@ export const compactLayoutHorizontal = function(layout, cols, movingCardID) {
     let moveCard;
     //进行坐标重置，移动中的卡片除外
     for (let i = 0; i < sorted.length; i++) {
-        if (movingCardID === sorted[i].cardid) {
+        if (movingCardID === sorted[i].widgetId) {
             moveCard = sorted[i];
             continue;
         }
@@ -111,7 +111,7 @@ export const compactLayoutHorizontal = function(layout, cols, movingCardID) {
 	}
 	//将非移动的卡片进行坐标重置
     for (let i = 0; i < sorted.length; i++) {
-        if (movingCardID !== sorted[i].cardid) {
+        if (movingCardID !== sorted[i].widgetId) {
             sorted[i].gridy = 0;
             sorted[i].gridx = 0;
         }
@@ -120,7 +120,7 @@ export const compactLayoutHorizontal = function(layout, cols, movingCardID) {
     //进行重新放置，移动中卡片除外
     for (let i = 0, length = sorted.length; i < length; i++) {
         let finished;
-        if (movingCardID === sorted[i].cardid) {
+        if (movingCardID === sorted[i].widgetId) {
             finished = sorted[i];
         } else {
             finished = getSpaceArea(compareList, sorted[i], cols);
