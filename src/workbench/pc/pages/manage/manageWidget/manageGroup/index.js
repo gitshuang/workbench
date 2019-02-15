@@ -195,7 +195,8 @@ export default class ManageGroup extends Component {
     //console.log(children,'render=============children===============render======')
     let _html = ( <div className={`${groupArea} animated zoomIn`} >
       <section className={inFoucs ? selectedBackClass : ""} >
-        <GroupTitle groupID={id} index={index} widgetName={widgetName } children={cards}/>
+				<GroupTitle groupID={id} index={index}
+				 data = {this.props.data}/>
         <div id="widget-container"
          style={{
           height:
