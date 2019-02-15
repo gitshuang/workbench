@@ -24,7 +24,6 @@
     "dic2": "node scripts/lanbuild.js 2"
   },
   "dependencies": {
-    "@diworkfe/public-components": "git+http://git.yonyou.com/iuap_ap/diwork-public-components.git#develop",
     "animate.css": "3.5.2",
     "array.find": "1.0.7",
     "array.from": "1.0.3",
@@ -42,6 +41,7 @@
     "lodash": "^4.17.11",
     "mutation-observer": "^1.0.3",
     "object-assign": "4.1.1",
+    "packageforusage": "0.0.1",
     "promise-polyfill": "6.0.2",
     "prop-types": "15.6.0",
     "rc-trigger": "^2.6.2",
@@ -78,7 +78,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "bee-navbar": "0.2.15",
-    "chalk": "2.3.0",
+    "chalk": "^2.3.0",
     "connect-history-api-fallback": "1.4.0",
     "css-loader": "0.28.7",
     "ejs": "2.5.7",

@@ -21,9 +21,9 @@ module.exports = {
       'router': paths('router'),
       'store': paths('store'),
       'yutils': paths('yutils'),
-      'bee': '@diworkfe/public-components/build/bee',
-      '@u': '@diworkfe/public-components/build/utils',
-      'pub-comp': '@diworkfe/public-components/build',
+      'bee': 'packageforusage/build/bee',
+      '@u': 'packageforusage/build/utils',
+      'pub-comp': 'packageforusage/build',
       // 'api': paths('api'),
     }
   },
