@@ -33,7 +33,8 @@
 }
 :global(.lebra-navbar-left){
   font-size: 16px;
-  padding-left:15px;
+  /* 为了menubar正常展示paddingleft放到left-icon上 */
+  /* padding-left:15px; */
 }
 :global(.lebra-navbar-left-content){
   position: relative;
@@ -60,7 +61,7 @@
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  font-size: 16px;
+  font-size: 14px;
 }
 :global(.lebra-navbar-left-icon){
   color:#555555;

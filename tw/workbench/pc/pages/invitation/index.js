@@ -206,6 +206,18 @@ class Invitation extends Component {
       creator,
       message,
     } = this.state;
+
+    const { userInfo: { allowTenants, } } = this.props;
+    const { tenantid } = window.diworkContext();
+    const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
+    const curText = curTenant.type === 0 ? "企業" : "團隊"; 
+    /*
+    const tip = (
+      <div className={tootip}>
+        鏈接複製成功，趕快發送給你的小夥伴吧！
+      </div>
+    );
+    */
     return (
       <div className={wrap}>
         {/* <div className=" header">
@@ -247,28 +259,45 @@ class Invitation extends Component {
               <p>署名</p>
               <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-              <p>輸入郵箱地址並用 “;” 隔開</p>
-              <TagsInput
-                value={this.state.mails}
-                addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
-                addOnBlur
-                onlyUnique
-                addOnPaste
-                validationRegex={regMail}
-                pasteSplit={data => data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())}
-                onChange={this.handleChange}
-              />
-              <div className={btnboxIe}>
-                <ButtonBrand className={submitBtn} onClick={this.submit} >確定發送</ButtonBrand>
-              </div>
-            </TabPane>
-            <TabPane tab="二維碼邀請" key="3" className={tabPane3}>
-              <div>
-                <span>掃描二維碼直接進入團隊</span>
-                <div className={qrCode} id="qrCode">
-                  <img alt="" src="/invite/getQRCode" />
+                <p>輸入郵箱地址並用 “;” 隔開</p>
+                <TagsInput
+                  value={this.state.mails}
+                  addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
+                  addOnBlur
+                  onlyUnique
+                  addOnPaste
+                  validationRegex={regMail}
+                  pasteSplit={data => data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())}
+                  onChange={this.handleChange}
+                />
+                {/* <ul className={mailList}>
+                {
+                  mails.map((mail, i) => {
+                    return (
+                      <li key={i}>
+                        <input type='text' value={mail} onChange={this.onMailChange(i)}/>
+                        {
+                          i + 1 === mails.length && mails.length < maxLength ? (
+                            <button className={addMailBtn} onClick={this.addMail}>+</button>
+                          ) : null
+                        }
+                      </li>
+                    );
+                  })
+                }
+                </ul> */}
+                <div className={btnboxIe}>
+                  <ButtonBrand className={submitBtn} onClick={this.submit} >確定發送</ButtonBrand>
                 </div>
-              </div>
+              </TabPane>
+              <TabPane tab="二維碼邀請" key="3" className={tabPane3}>
+                <div>
+                  <span>{`掃描二維碼直接進入${curText}`}</span>
+                  <div className={qrCode} id="qrCode">
+                    <img alt="" src="/invite/getQRCode" />
+                  </div>
+                  {/* <ButtonBrand className={printQrBtn} >二維碼</ButtonBrand> */}
+                </div>
             </TabPane>
           </Tabs>
         </div>

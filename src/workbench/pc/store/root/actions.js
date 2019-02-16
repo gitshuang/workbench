@@ -2,17 +2,16 @@ import { createActions } from '@u';
 import types from './types';
 import {
   getUserInfo,
-  getServiceList,
-  getMessage,
   uploadApplication,
   getPoll,
-  getPortal,
   setCurrent,
   getAllEnable,
   getCurrent,
   setCurrentNot,
   getAllEnableNot,
   getCurrentNot,
+  getDefaultDesktop,
+  setDefaultDesktop,
 } from './api';
 
 const {
@@ -21,8 +20,6 @@ const {
   REQUEST_ERROR,
   GET_USER_INFO,
   SET_USER_INFO,
-  GET_SERVICE_LIST,
-  GET_MESSAGE,
   CHANGE_QUICK_SERVICE_DISPLAY,
   CHANGE_QUICK_SERVICE_HIDDEN,
   POP_MESSAGE,
@@ -31,7 +28,6 @@ const {
   HIDE_IM,
   UPLOAD_APPLICATION,
   GET_POLL,
-  GET_PORTAL,
   SET_CURRENT,
   GET_ALL_ENABLE,
   GET_CURRENT,
@@ -42,25 +38,23 @@ const {
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
-  OPEN_ROOT,
-  ADD_TABS,
-  DEL_TABS,
+  GET_DEFAULT_DESKTOP,
+  SET_DEFAULT_DESKTOP,
 } = types;
 
 export default createActions(
   {
-    [GET_SERVICE_LIST]: getServiceList,
     [GET_USER_INFO]: getUserInfo,
-    [GET_MESSAGE]: getMessage,
     [UPLOAD_APPLICATION]: uploadApplication,
     [GET_POLL]: getPoll,
-    [GET_PORTAL]: getPortal,
     [SET_CURRENT]: setCurrent,
     [GET_ALL_ENABLE]: getAllEnable,
     [GET_CURRENT]: getCurrent,
     [SET_CURRENT_NOT]: setCurrentNot,
     [GET_ALL_ENABLE_NOT]: getAllEnableNot,
     [GET_CURRENT_NOT]: getCurrentNot,
+    [GET_DEFAULT_DESKTOP]:getDefaultDesktop,
+    [SET_DEFAULT_DESKTOP]:setDefaultDesktop,
   },
   REQUEST_START,
   REQUEST_SUCCESS,
@@ -76,7 +70,4 @@ export default createActions(
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
-  OPEN_ROOT,
-  ADD_TABS,
-  DEL_TABS,
 );

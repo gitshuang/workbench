@@ -1,6 +1,13 @@
 import { createTypes } from '@u';
 
 export default createTypes(
+  'UPDATE_CHECKED_CARD_LIST',
+  'DROP_SIDE_CARDS_IN_GROUP',
+  'UPDATE_MANAGE_LIST',
+  'DROP_SIDE_CARDS',
+  'MOVE_SIDE_CARDS',
+  'GET_ALL_MENU_LIST',
+  'CHANGE_SIDER_STATE',
   'UPDATE_SHADOW_CARD',
   'UPDATE_LAYOUT',
   'UPDATE_GROUP_LIST',

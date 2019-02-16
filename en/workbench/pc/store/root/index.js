@@ -7,6 +7,7 @@ import { trigger } from 'public/componentTools';
 import Notice from 'components/notice';
 import actions from './actions';
 
+import wrap from './wrap';
 import home from './home';
 import work from './work';
 import search from './search';
@@ -19,8 +20,6 @@ import homepage from './homepage';
 const notification = Notification.newInstance({
   position: 'bottomRight',
 });
-
-const maxMessageShowNum = 3;
 
 function addMessage(message) {
   if (message) {
@@ -49,15 +48,12 @@ const {
   requestError,
   getUserInfo,
   setUserInfo,
-  getServiceList,
-  getMessage,
   popMessage,
   changeMessageType,
   showIm,
   hideIm,
   uploadApplication,
   getPoll,
-  getPortal,
   setCurrent,
   getAllEnable,
   getCurrent,
@@ -68,39 +64,22 @@ const {
   closeDialogNew,
   openFrame,
   closeFrame,
-
-  openRoot,
-  addTabs,
-  delTabs,
+  getDefaultDesktop,
+  setDefaultDesktop,
 } = actions;
 
 const defaultState = {
-  userInfo: {},
-  tabs: [
-
-  ],
-  currItem: {
-
-  },
-  activeCarrier: 'home',
-  serviceList: [],
+  userInfo: {}, // userinfo
+  showModal: false,   // 统一modal的显隐
+  dialogData: {},     // modal 内容
+  showFrame: false,   // frame 遮罩层
+  frameParam: {},     // 打开frame传递的参数集合
+  currLan: 'zh_CN',//当前的语言
+  imShowed: false,
   messageType: false,
   messageList: [],
   messageShowNum: 0,
-  imShowed: false,
-  portalInfo: {
-    openStatus: false,
-    portalUrl: ''
-  },
-  showModal: false,
-  dialogType: '',
-  dialogTitle: '',
-  dialogMsg: '',
-  showFrame: false,
-  frameParam: {
-
-  },
-  currLan: 'zh_CN',//当前的语言
+  content: "workbench",      // 默认登录动作， workbench/protal
 };
 
 const createReducer = key => (state, { payload, error }) => {
@@ -126,9 +105,11 @@ const reducer = handleActions({
     return {
       ...state,
       showModal: true,
-      dialogType: 'error',
-      dialogTitle: 'Error',
-      dialogMsg: msg
+      dialogData: {
+        type: 'error',
+        title: 'Error',
+        msg: msg
+      },
     };
   },
   [getUserInfo]: (state, { payload, error }) => {
@@ -152,37 +133,7 @@ const reducer = handleActions({
       userInfo: payload,
     };
   },
-  [getServiceList]: (state, { payload: serviceList, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-      serviceList,
-    };
-  },
   [uploadApplication]: state => state,
-  [getMessage]: (state, { payload: message, error }) => {
-    if (error) {
-      return state;
-    }
-    const { messageShowNum, messageList } = state;
-    const newMessageList = messageList.concat(message);
-    let newMessageShowNum = messageShowNum;
-    const popNums = maxMessageShowNum - messageShowNum;
-    if (popNums > 0) {
-      for (let i = 0, l = popNums; i < l; i += 1) {
-        newMessageShowNum += 1;
-        addMessage(newMessageList.shift());
-      }
-    }
-
-    return {
-      ...state,
-      messageList: newMessageList,
-      messageShowNum: newMessageShowNum,
-    };
-  },
   [getPoll]: (state, { payload, error }) => {
     if (error) {
       return state;
@@ -202,15 +153,6 @@ const reducer = handleActions({
     return {
       ...state,
     }
-  },
-  [getPortal]: (state, { payload, error }) => {
-    if (error) {
-      return state;
-    }
-    return {
-      ...state,
-      portalInfo: payload,
-    };
   },
   [popMessage]: (state) => {
     const { messageShowNum, messageList } = state;
@@ -261,7 +203,7 @@ const reducer = handleActions({
   },
   [showDialog]: (state, { payload: dialogData }) => {
     let { type } = dialogData;
-    const { title, msg } = dialogData;
+    const { title, msg, btn } = dialogData;
     const typeArray = ['warning', 'success', 'error'];
     if (!typeArray.find((ele) => (ele === type))) {
       type = 'success';
@@ -269,12 +211,15 @@ const reducer = handleActions({
     return {
       ...state,
       showModal: true,
-      dialogType: type || 'success',
-      dialogTitle: title || 'Tips',
-      dialogMsg: msg
+      dialogData: {
+        type: type || 'success',
+        title: title || 'Tips',
+        msg: msg,
+        btn: btn,
+      },
     }
   },
-  [closeDialogNew]: (state) => ({ ...state, showModal: false }),
+  [closeDialogNew]: (state) => ({ ...state, showModal: false, dialogData: {} }),
   [openFrame]: (state, { payload: param }) => {
     return {
       ...state,
@@ -289,71 +234,22 @@ const reducer = handleActions({
       frameParam: {}
     }
   },
-  [openRoot]: (state, { payload, }) => {
-    return {
-      ...state,
-      activeCarrier: 'home',
-      currItem: {},
-    };
-  },
-  [addTabs]: (state, { payload, }) => {
-    const { tabs } = state;
-    const cIndex = tabs.findIndex((item) => {
-      return item.id === payload.id;
-    });
-    // 判断是否已经打开
-    if (cIndex > -1 && tabs.length) {
-      // 判断payload 和 原来tabs中对应的数据是否相等   主要是看看是否需要更新tabs
-      if (Object.is(tabs[cIndex], payload)) {
-        return {
-          ...state,
-          activeCarrier: payload.id,
-          currItem: payload
-        }
-      } else {
-        tabs.splice(cIndex, 1, payload);
-        return {
-          ...state,
-          tabs: [...tabs],
-          activeCarrier: payload.id,
-          currItem: payload
-        }
-      }
+  [getDefaultDesktop]: (state, { payload, error }) => {
+    if (error) {
+      return state;
     }
     return {
       ...state,
-      tabs: [payload, ...tabs],
-      activeCarrier: payload.id,
-      currItem: payload,
+      content: payload.content,
     };
   },
-  [delTabs]: (state, { payload, }) => {
-    const { tabs, activeCarrier } = state;
-    const newTabs = tabs.filter((item) => {
-      return item.id !== payload.id;
-    });
-    // 判断删除的是否是当前获取焦点的tabs
-    if (payload.id === activeCarrier) {
-      // 如果已经删除的长度大于0，就将第一个设定为active状态 ，否则直接回home
-      if (newTabs.length) {
-        return {
-          ...state,
-          tabs: newTabs,
-          currItem: newTabs[0],
-          activeCarrier: newTabs[0].id
-        }
-      }
-      return {
-        ...state,
-        tabs: newTabs,
-        currItem: {},
-        activeCarrier: 'home'
-      }
+  [setDefaultDesktop]: (state, { payload, error }) => {
+    if (error) {
+      return state;
     }
-    // 不是焦点的直接删。
     return {
       ...state,
-      tabs: newTabs,
+      content: payload.content,
     };
   },
 }, defaultState);
@@ -361,6 +257,7 @@ const reducer = handleActions({
 export default function (state, action) {
   const rootState = reducer(state, action);
   const pageState = {
+    wrap: wrap(state ? state.wrap : undefined, action),
     home: home(state ? state.home : undefined, action),
     work: work(state ? state.work : undefined, action),
     search: search(state ? state.search : undefined, action),

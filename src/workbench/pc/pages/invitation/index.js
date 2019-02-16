@@ -206,6 +206,18 @@ class Invitation extends Component {
       creator,
       message,
     } = this.state;
+
+    const { userInfo: { allowTenants, } } = this.props;
+    const { tenantid } = window.diworkContext();
+    const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
+    const curText = curTenant.type === 0 ? "企业" : "团队"; 
+    /*
+    const tip = (
+      <div className={tootip}>
+        链接复制成功，赶快发送给你的小伙伴吧！
+      </div>
+    );
+    */
     return (
       <div className={wrap}>
         {/* <div className=" header">
@@ -247,28 +259,45 @@ class Invitation extends Component {
               <p>署名</p>
               <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-              <p>输入邮箱地址并用 “;” 隔开</p>
-              <TagsInput
-                value={this.state.mails}
-                addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
-                addOnBlur
-                onlyUnique
-                addOnPaste
-                validationRegex={regMail}
-                pasteSplit={data => data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())}
-                onChange={this.handleChange}
-              />
-              <div className={btnboxIe}>
-                <ButtonBrand className={submitBtn} onClick={this.submit} >确定发送</ButtonBrand>
-              </div>
-            </TabPane>
-            <TabPane tab="二维码邀请" key="3" className={tabPane3}>
-              <div>
-                <span>扫描二维码直接进入团队</span>
-                <div className={qrCode} id="qrCode">
-                  <img alt="" src="/invite/getQRCode" />
+                <p>输入邮箱地址并用 “;” 隔开</p>
+                <TagsInput
+                  value={this.state.mails}
+                  addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
+                  addOnBlur
+                  onlyUnique
+                  addOnPaste
+                  validationRegex={regMail}
+                  pasteSplit={data => data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())}
+                  onChange={this.handleChange}
+                />
+                {/* <ul className={mailList}>
+                {
+                  mails.map((mail, i) => {
+                    return (
+                      <li key={i}>
+                        <input type='text' value={mail} onChange={this.onMailChange(i)}/>
+                        {
+                          i + 1 === mails.length && mails.length < maxLength ? (
+                            <button className={addMailBtn} onClick={this.addMail}>+</button>
+                          ) : null
+                        }
+                      </li>
+                    );
+                  })
+                }
+                </ul> */}
+                <div className={btnboxIe}>
+                  <ButtonBrand className={submitBtn} onClick={this.submit} >确定发送</ButtonBrand>
                 </div>
-              </div>
+              </TabPane>
+              <TabPane tab="二维码邀请" key="3" className={tabPane3}>
+                <div>
+                  <span>{`扫描二维码直接进入${curText}`}</span>
+                  <div className={qrCode} id="qrCode">
+                    <img alt="" src="/invite/getQRCode" />
+                  </div>
+                  {/* <ButtonBrand className={printQrBtn} >二维码</ButtonBrand> */}
+                </div>
             </TabPane>
           </Tabs>
         </div>

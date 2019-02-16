@@ -1,7 +1,7 @@
 import { createActions } from '@u';
 import types from './types';
 import {  getEnterInfo, getWorkList, 
-  setCreateEnter, getSearchEnterOrTeam, getApplicationList,
+  setCreateEnter, getApplicationList,
   clearApplicationTips,
 } from './api';
 
@@ -13,7 +13,6 @@ const {
   OPEN_FOLDER,
   CLOSE_FOLDER,
   SET_CREATE_ENTER,
-  GET_SEARCH_ENTER_OR_TEAM,
   GET_APPLICATION_LIST,
   CLEAR_APPLICATION_TIPS,
 } = types;
@@ -26,7 +25,6 @@ export default createActions(
     [GET_ENTER_INFO]: getEnterInfo,
     [GET_WORK_LIST]: getWorkList,
     [SET_CREATE_ENTER]: setCreateEnter,
-    [GET_SEARCH_ENTER_OR_TEAM]: getSearchEnterOrTeam,
     [GET_APPLICATION_LIST]: getApplicationList,
     [CLEAR_APPLICATION_TIPS]:clearApplicationTips,
   },

@@ -1,3 +1,33 @@
+/**
+ *  manageList ,
+ *  @param {Array} allMenuList  
+ *  @param {Array} manageList 
+ */
+export function updateAllMenuList(allMenuList,manageList){ 
+    allMenuList.forEach(a=>{ //第一级
+        a.menuItems.forEach(b=>{  //第二级
+           b.children.forEach(c=>{//第三极
+               if(c.children.length){
+                   c.children.forEach(d=>{
+                   if(hasCardContainInGroups(manageList,d.serviceId)){
+                        d.hasBeenDragged = true;
+                   }else{
+                    d.hasBeenDragged = false;
+                   }
+                   })
+               }else{
+                   if(hasCardContainInGroups(manageList,c.serviceId)){
+                    c.hasBeenDragged = true;
+                }else{
+                    c.hasBeenDragged = false;
+                   }
+                   
+               }
+          })
+       })
+    })
+}
+
 export function findTreeById(data, curId) {
     let result;
     for (let i = 0, l = data.length; i < l; i += 1) {
@@ -69,3 +99,24 @@ function compareIndex(manageAllList, id, afterId, preParentId, parentId) {
     });
     return curIndex < afterIndex;
 }
+/**
+ * 
+ * @param {Array} groups
+ * @param {String} cardID
+ * @returns {Boolean}
+ */
+export const hasCardContainInGroups = (groups, cardID) => {
+    let flag = false;
+    groups.forEach(g => {
+      g.children.forEach(a => {
+            if (a.widgetId === cardID) {
+                flag = true;
+                return false;
+            }
+        });
+        if (flag) {
+            return false;
+        }
+    });
+    return flag;
+  };

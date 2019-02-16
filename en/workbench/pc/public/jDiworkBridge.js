@@ -6,6 +6,17 @@ const keys = [
   'JDIWORK',
   // "TEST_IFRAME_EVENT"  //测试数据的api注册
 ];
+// const originList = [
+//   'http://workbench.yyuap.com',
+//   'http://workbenchdev.yyuap.com',
+//   'https://workbench-daily.yyuap.com',
+// ];
+// const domain = "yyuap.com";
+// const hostname = window.location.hostname;
+// const origin = window.location.origin;
+// if (hostname.indexOf(domain) > -1 && originList.indexOf(origin) < 0 ) {
+//   document.domain = domain;
+// }
 
 const handlerList = {
   openService(type, event) {
@@ -46,23 +57,23 @@ const handlerList = {
     }
   },
   addBrm(type, event) {
-    dispatchMessageTypeHandler(event);
+    // dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
       type,
     });
   },
-  addBrm_prevent(type, event) {
-    dispatchMessageTypeHandler(event);
+  addBrm_prevent(type, ) {
     window.brmClickPrevent = { type, source: this.source };
   },
   popBrm(type, event) {
-    dispatchMessageTypeHandler(event);
+    // dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
       type,
     });
   },
-  getBrm(type, event) {
-    const data = store.getState().work.brm;
+  getBrm(type, ) {
+    // const data = store.getState().work.brm;
+    const data = [];
     postMessageToWin(this.source, {
       type,
       data,
@@ -93,9 +104,6 @@ const handlerList = {
     const event = getNewEvent('mousedown');
     window.document.getElementById('root').dispatchEvent(event);
   },
-  // refreshUserInfo(type, event) {
-  //   dispatchMessageTypeHandler(event);
-  // },
   switchChatTo(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
@@ -103,6 +111,12 @@ const handlerList = {
     });
   },
   openMessage(type, event) {
+    dispatchMessageTypeHandler(event);
+    postMessageToWin(this.source, {
+      type,
+    });
+  },
+  refreshUserInfo(type, event) {
     dispatchMessageTypeHandler(event);
     postMessageToWin(this.source, {
       type,
@@ -160,18 +174,17 @@ const handlerList = {
   },
   getData(type, event) {
     // const data = store.getState().currItem.data;
-    const tabs = store.getState().tabs;
-    const { 
+    const tabs = store.getState().wrap.tabs;
+    const {
       detail: {
         id,
-      } 
+      }
     } = event;
-    const data = tabs.filter(item => {
-      return id === item.id;
-    });
+    // 如果当前是打开的，来获取可以返回，不然返回空， 防止传错ID 来获取到其它的
+    const data = store.getState().wrap.activeCarrier === id ? tabs.filter(item => id === item.id) : {};
     postMessageToWin(this.source, {
       type,
-      data,
+      data
     });
   },
   execScript(type, event) {
@@ -188,7 +201,6 @@ function messageHandler({ detail, callbackId }, event) {
     handlerList[type].call(event, callbackId, { type, detail });
   }
 }
-
 window.addEventListener('message', (event) => {
   if (event.data) {
     let data = event.data;

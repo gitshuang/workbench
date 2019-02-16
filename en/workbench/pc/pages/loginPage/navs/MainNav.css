@@ -72,6 +72,14 @@
     margin-top: 0;
 
 }
+.leftCon :global(.companylogoSvg.en){
+    width: auto;
+    height: 44px;
+    outline: none;
+    border: none;
+    margin-right: 10px;
+    margin-top: 12px;
+}
 .MainNav .middleCon{
     width: 50%;
     text-align: center;

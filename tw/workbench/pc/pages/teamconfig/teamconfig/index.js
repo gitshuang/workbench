@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
 
 import rootActions from 'store/root/actions';
@@ -63,7 +62,6 @@ import {
 } from './index.css';
 
 
-@withRouter
 @connect(
   mapStateToProps(
     'teamData',
@@ -435,8 +433,10 @@ class CreateTeamContent extends Component {
   }
   // 邀请成员
   inviteMember = () => {
-    const { history } = this.props;
-    history.push("/invitation");
+    openWin({
+      id: "Invitation",
+      title: "",
+    });
   }
 
   // 点击分页

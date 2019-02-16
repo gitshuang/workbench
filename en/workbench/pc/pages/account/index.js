@@ -7,7 +7,7 @@ class Account extends Component {
     const { locale } = getContext();
     
     return (
-      <div>
+      <div className="diworkcontent">
           <IFrame title="Account Mgmt" url={`${getHost('euc')}/diuser?locale=${locale === "zh_TW" ? "zh_HK" : locale}`} />
         </div>
     );

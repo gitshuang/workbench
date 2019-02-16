@@ -1,18 +1,16 @@
-import workActions from 'store/root/work/actions';
-import rootActions from 'store/root/actions';
-import homeActions from 'store/root/home/actions';
-import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
 import store from "store";
 import { postMessageToWin, get, logout } from "@u";
-import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
-import { trigger } from "./componentTools";
-import {
-  getProductInfo,
-  getServiceInfoWithDetail,
-} from 'store/root/work/api';
-import { openMessage } from 'components/message';
 import { pushYA, appendSearchParam } from "yutils/utils";
-const { addBrm, popBrm, setProductInfo } = workActions;
+import rootActions from 'store/root/actions';
+import wrapActions from 'store/root/wrap/actions';
+import { getServiceInfoWithDetail } from 'store/root/work/api';
+import { trigger } from "./componentTools";
+import { openMessage } from 'components/message';
+import { openMess } from 'pub-comp/notification';
+import { openGlobalDialog, closeGlobalDialog } from 'pub-comp/pop';
+
+import { enterOrTeam, crossTenantDialog, iframeElm } from "./regMessageTypeHandler.css";
+
 const {
   popMessage,
   changeMessageType,
@@ -22,27 +20,36 @@ const {
   openFrame,
   closeFrame,
   getUserInfo,
-  addTabs,
-  delTabs,
   requestError,
 } = rootActions;
-const {
-
-} = homeActions;
+const { addTabs, delTabs, } = wrapActions;
 const handlers = {
   openWin(data) {
-    if (typeof data !== 'object') {
-      throw new Error('data is must be a object.');
+    if (store.getState().wrap.tabs.length >= 20) {
+      openMess({
+        title: '',
+        duration: 2,
+        type: 'warning',
+        closable: false,
+      });
+      return false;
     }
-    const param = Object.assign({ type: 'locale', url: data.id }, data);
-    store.dispatch(addTabs(param));
-  },
-  closeWin(data) {
     if (typeof data !== 'object') {
       throw new Error('data is must be a object.');
     }
     if (data.id === undefined) {
       throw new Error('id is required.');
+    }
+    if (data.title === undefined) {
+      throw new Error('title is required.');
+    }
+    const param = Object.assign({ type: 'locale', url: data.id, hasWidget: false }, data);
+    store.dispatch(addTabs(param));
+  },
+  closeWin(param) {
+    let data = store.getState().wrap.currItem;
+    if (typeof param === "object" && param.id) {
+      data = param;
     }
     store.dispatch(delTabs(data));
   },
@@ -96,55 +103,41 @@ const handlers = {
         console.log(err);
       });
     } else if (serviceCode) {
+      if (store.getState().wrap.tabs.length >= 20) {
+        openMess({
+          title: '',
+          duration: 2,
+          type: 'warning',
+          closable: false,
+        });
+        return false;
+      }
       if (data && typeof data === 'object') {
         openServiceData[serviceCode] = data;
       }
-      // let typeVal = type === 2 ? 'app' : 'service';
-      // getProductInfo(serviceCode, typeVal).then((payload) => {
-      //   const {
-      //     curService: {
-      //       serviceCode: subCode,
-      //       url
-      //     },
-      //     curMenuBar: {
-      //       workspaceStyle
-      //     }
-      //   } = payload;
-      //   const locationProtocol = window.location.protocol;
-      //   const origin = window.location.origin;
-      //   if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
-      //     // const location = appendSearchParam(`${origin}/service/open/${typeVal}/${serviceCode}`, data);
-      //     // window.open(location);
-      //     window.open(url);
-      //   } else {
-      //     store.dispatch(setProductInfo(payload));
-      //     this.props.history.push(`/${typeVal}/${serviceCode}/${subCode}`);
-      //   }
-      //   pushYA(subCode);
-      // }, (err) => {
-      //   console.log(err);
-      // });
-      getServiceInfoWithDetail(serviceCode).then((payload) => {
+      const serviceType = type === 2 ? '1' : '0';
+      getServiceInfoWithDetail(serviceCode, serviceType).then((payload) => {
         const {
-          serviceId,
           serviceName,
           url,
           workspaceStyle,
           serviceCode: subCode,
+          hasWidget,
         } = payload;
         const locationProtocol = window.location.protocol;
         if (workspaceStyle === '_blank' || (locationProtocol === 'https:' && url.split(':')[0] === "http")) {
           window.open(url);
         } else {
           const locations = appendSearchParam(url, {
-            ...getOpenServiceData(serviceCode),
-            serviceCode,
+            ...getOpenServiceData(subCode),
+            serviceCode: subCode,
           });
           store.dispatch(addTabs({
-            id: serviceCode,
+            id: subCode,
             type: 'service',
             url: locations,
             title: serviceName,
+            hasWidget: hasWidget
           }));
         }
         pushYA(subCode);
@@ -192,12 +185,6 @@ const handlers = {
     }
     return false;
   },
-  addBrm(data) {
-    store.dispatch(addBrm(data));
-  },
-  popBrm(data) {
-    store.dispatch(popBrm(data));
-  },
   popMessage() {
     store.dispatch(popMessage());
   },
@@ -236,25 +223,20 @@ const handlers = {
   closeFrame() {
     store.dispatch(closeFrame());
   },
-  // 后期想干掉， 这个现在diwork-public-components中搜索用到， 协同的个人主页中也用到
+  // TODO 后期想干掉， 这个现在diwork-public-components中搜索用到， 协同的个人主页中也用到
   openHomePage(data) {
-    try {
-      const key = data.key || 'info';
-      dispatchMessageTypeHandler({
-        type: "openWin",
-        detail: {
-          id: 'HomePage',
-          title: "",
-          data: {
-            userId: data.userId,
-            key: key
-          }
+    const key = data.key || 'info';
+    dispatchMessageTypeHandler({
+      type: "openWin",
+      detail: {
+        id: 'HomePage',
+        title: "",
+        data: {
+          userId: data.userId,
+          key: key
         }
-      })
-      // this.props.history.push(`/homepage/${data.userId}/${key}`);
-    } catch (err) {
-      throw new Error("userId is require");
-    }
+      }
+    });
   },
 }
 window.handlers = handlers;

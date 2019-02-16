@@ -16,8 +16,6 @@ export const setCreateEnter = (list, updateType) => {
 // 获取企业信息
 export const getEnterInfo = param => get(`/manager/enter/info?enterId=${param}`);
 
-export const getSearchEnterOrTeam = () => get('/user/getCanLoginTenants');
-
 export const getApplicationList = () => (get('/manager/application/getApplicationTips'));
 
 export const clearApplicationTips= ()=> post('/manager/application/clearApplicationTips',{});

@@ -1,0 +1,90 @@
+/* menus 样式 */
+.menus {
+  display: flex;
+  height: 32px;
+  background: #F3F3F3;
+  transition: all 0.2s ease-in 0;
+}
+.menu{
+  width: 48px;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  line-height: 32px;
+}
+.menu img{
+  width: 20px;
+}
+.history{
+  position: relative;
+  float: left;
+  width: 50px;
+  height: 100%;
+  cursor: pointer;
+}
+.history :global(.ignoreClass-history){
+  height: 32px;
+}
+.history :global(.iconfont:hover::before){
+  /* color: #E14C46; */
+}
+.home{
+  position: relative;
+  float: left;
+  padding-top: 5px;
+  width: 68px;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 3px 3px 0 0;
+}
+.home:hover{
+  /* background: #ffffff; */
+}
+.home::before{
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 1px;
+  height: 12px;
+  background: #CCCCCC;
+}
+
+.home.active{
+  background: #E14C46;
+}
+.home.active::before{
+  content: '';
+  width: 0;
+}
+.home.active :global(.iconfont::before){
+  color: #ffffff;
+}
+.upward{
+  position: relative;
+  top: -3px;
+  cursor: pointer;
+  float: right;
+  width: 56px;
+  padding-top: 10px;
+}
+.upward::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 13px;
+  width: 2px;
+  height: 15px;
+  background: #CCCCCC;
+}
+.upward :global(.iconfont){
+  background: rgba(17, 17, 17, 0.7);
+  border-radius: 50% 50%;
+  color: #ffffff;
+}
+.upward :global(.iconfont:hover){
+  color: #ffffff;
+}
+.im{
+  padding-top: 5px;
+}

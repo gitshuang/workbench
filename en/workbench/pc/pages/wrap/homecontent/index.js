@@ -1,23 +1,34 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
-import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
+import { Pages } from 'router';
+import Iframe from 'components/iframe';
 
 @connect(
   mapStateToProps(
-    'userInfo',
+    'tabs',
+    'activeCarrier',
+    {
+      namespace: 'wrap',
+    }
   ),
-  {
-    
-  },
+  {},
 )
 class Homecontent extends Component {
+  static propTypes = {
+    tabs: PropTypes.array,
+    activeCarrier: PropTypes.string,
+  };
+  static defaultProps = {
+    tabs: [],
+    activeCarrier: '',
+  };
+
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
-
 
   renderActive = (item) => {
     const {
@@ -26,37 +37,27 @@ class Homecontent extends Component {
       url,
       title,
     } = item;
-  }
-
-
-  rendercontent = () => {
-    const { tabs } = this.props;
-    if (tabs && tabs.length) {
-      return tabs.map((item, index) => {
-        return (
-          <div className={box}>
-            {context}
-          </div>
-        )
-      });
+    if (type === "service") {
+      return <Iframe id={id} title={title} url={url} />
     }
-    return null;
+    const component = Pages[url];
+    return component;
   }
 
   render() {
-    const { tabs, routes } = this.props;
-    const flag = tabs && tabs.length ? 0 : 1;
+    const { activeCarrier, tabs } = this.props;
     return (
-
-      <div>
-        {/* {this.rendercontent()} */}
-        <div style={{ opacity: flag }}>
-          {
-            routes.map((route, i) => (
-              <RouteWithSubRoutes key={i} {...route} />
-            ))
-          }
-        </div>
+      <div className="diwork">
+        {
+          tabs.map(item => {
+            const dis = item.id === activeCarrier ? 'block' : 'none';
+            return (
+              <div className="diwork" style={{ display: dis }} key={item.id}>
+                {this.renderActive(item)}
+              </div>
+            )
+          })
+        }
       </div>
     );
   }

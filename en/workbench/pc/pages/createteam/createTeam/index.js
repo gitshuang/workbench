@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { mapStateToProps } from '@u';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 import rootActions from 'store/root/actions';
 import teamActions from 'store/root/team/actions';
@@ -79,15 +80,45 @@ class CreateTeamContent extends Component {
     })
   }
 
-  create = () => {
-    const { createTeam, requestStart, requestSuccess, requestError } = this.props;
-    const { value, logo } = this.state;
+  btnfn = () => {
+    const { value } = this.state;
     if (!value || value === "") {
       this.setState({
         error: true
       });
       return false;
     }
+    dispatchMessageTypeHandler({
+      type: "showDialog",
+      detail: {
+        type: 'warning',
+        title: '',
+        msg: "",
+        btn: [{
+          label: "",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            this.create();
+          },
+        },
+        {
+          label: "",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+          },
+        }
+      ]
+      }
+    });
+  }
+
+  create = () => {
+    const { createTeam, requestStart, requestSuccess, requestError } = this.props;
+    const { value, logo } = this.state;
     let data = {
       tenantName: value
     };
@@ -166,7 +197,7 @@ class CreateTeamContent extends Component {
                 <div className={process_loading_content}>
                   <Progress loadingCallBack={this.loadingCallBack} startFlag={startFlag} successFunc={this.successLoading} loadingDesc={'…'} />
                 </div> :
-                <Button className={submit_class} onClick={this.create} ></Button>
+                <Button className={submit_class} onClick={this.btnfn} ></Button>
             }
           </div>
         </div>

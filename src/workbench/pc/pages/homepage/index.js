@@ -24,8 +24,8 @@ const { getUserInfo } = homepageActions;
     'userInfo',
     {
       key: 'currItem',
-      value: (home, ownProps, root) => {
-        return root.currItem
+      value: (wrap, ownProps, root) => {
+        return root.wrap.currItem
       }
     },
     {

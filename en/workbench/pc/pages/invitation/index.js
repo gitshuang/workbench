@@ -206,6 +206,18 @@ class Invitation extends Component {
       creator,
       message,
     } = this.state;
+
+    const { userInfo: { allowTenants, } } = this.props;
+    const { tenantid } = window.diworkContext();
+    const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
+    const curText = curTenant.type === 0 ? " enterprise directly" : " team directly"; 
+    /*
+    const tip = (
+      <div className={tootip}>
+        Link copied. Send it to your friends now
+      </div>
+    );
+    */
     return (
       <div className={wrap}>
         {/* <div className=" header">
@@ -247,28 +259,45 @@ class Invitation extends Component {
               <p>Signature</p>
               <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
-              <p>Enter email addresses and separate them with “;”  </p>
-              <TagsInput
-                value={this.state.mails}
-                addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
-                addOnBlur
-                onlyUnique
-                addOnPaste
-                validationRegex={regMail}
-                pasteSplit={data => data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())}
-                onChange={this.handleChange}
-              />
-              <div className={btnboxIe}>
-                <ButtonBrand className={submitBtn} onClick={this.submit} >Send</ButtonBrand>
-              </div>
-            </TabPane>
-            <TabPane tab="QR Code" key="3" className={tabPane3}>
-              <div>
-                <span>Scan QR code to enter the team directly</span>
-                <div className={qrCode} id="qrCode">
-                  <img alt="" src="/invite/getQRCode" />
+                <p>Enter email addresses and separate them with “;”  </p>
+                <TagsInput
+                  value={this.state.mails}
+                  addKeys={[13, 186, 59]} // enter,semicolon:chrome186,firefox59
+                  addOnBlur
+                  onlyUnique
+                  addOnPaste
+                  validationRegex={regMail}
+                  pasteSplit={data => data.replace(/[\r\n,;]/g, ' ').split(' ').map(d => d.trim())}
+                  onChange={this.handleChange}
+                />
+                {/* <ul className={mailList}>
+                {
+                  mails.map((mail, i) => {
+                    return (
+                      <li key={i}>
+                        <input type='text' value={mail} onChange={this.onMailChange(i)}/>
+                        {
+                          i + 1 === mails.length && mails.length < maxLength ? (
+                            <button className={addMailBtn} onClick={this.addMail}>+</button>
+                          ) : null
+                        }
+                      </li>
+                    );
+                  })
+                }
+                </ul> */}
+                <div className={btnboxIe}>
+                  <ButtonBrand className={submitBtn} onClick={this.submit} >Send</ButtonBrand>
                 </div>
-              </div>
+              </TabPane>
+              <TabPane tab="QR Code" key="3" className={tabPane3}>
+                <div>
+                  <span>{`Scan QR code to enter the${curText}`}</span>
+                  <div className={qrCode} id="qrCode">
+                    <img alt="" src="/invite/getQRCode" />
+                  </div>
+                  {/* <ButtonBrand className={printQrBtn} >QR Code</ButtonBrand> */}
+                </div>
             </TabPane>
           </Tabs>
         </div>

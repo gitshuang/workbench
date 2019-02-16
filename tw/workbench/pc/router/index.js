@@ -39,6 +39,8 @@ const UserInfo = asyncComponent(() => import(/* webpackChunkName: "UserInfo" */'
 const ManageTeamEnter = asyncComponent(() => import(/* webpackChunkName: "ManageTeamEnter" */'pages/manageTeamEnter'));
 // 个人主页
 const HomePage = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/homepage'));
+// 全部历史
+const History = asyncComponent(() => import(/* webpackChunkName: "Dynamic" */'pages/history'));
 
 const routes = [
   // {
@@ -66,8 +68,8 @@ const routes = [
   //   component: CreateTeam,
   // },
   // {
-  //   path: '/createenter/:data',
-  //   component: CreateEnter,
+  //   path: '/createenter',
+  //   component: Teamconfig,
   // },
   // {
   //   path: '/teamconfig',
@@ -126,15 +128,14 @@ const routes = [
       {
         path: '/manage',
         component: Manage,
-        exact: true,
       },
     ],
   },
 ];
 
 export const Pages = {
-  Application: <Application />,
-  Manage: <Manage />,
+  // Application: <Application />,
+  // Manage: <Manage />,
   Search: <Search />, 
   EstablishUserCenter: <EstablishUserCenter />,
   CreateTeam: <CreateTeam />,
@@ -143,10 +144,11 @@ export const Pages = {
   UpdateEnter: <UpdateEnter />,
   Invitation: <Invitation />,
   Account: <Account />,
-  Market: <Market />,
+  market: <Market />,
   Renew: <Renew />,
   UserInfo: <UserInfo />,
   ManageTeamEnter: <ManageTeamEnter />,
-  HomePage: <HomePage />
+  HomePage: <HomePage />,
+  History:<History/>
 }
 export default routes;

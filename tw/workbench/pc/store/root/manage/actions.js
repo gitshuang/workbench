@@ -4,9 +4,11 @@ import {
   setManageList,
   getManageList,
   getAllServicesByLabelGroup,
+  getAllMenuList
 } from './api';
 
 const {
+  CHANGE_SIDER_STATE,
   UPDATE_SHADOW_CARD,
   UPDATE_LAYOUT,
   UPDATE_GROUP_LIST,
@@ -39,6 +41,12 @@ const {
   RETURN_DEFAULT_STATE,
   SET_DRAG_INPUT_STATE,
   EMPTY_SELECT_GROUP,
+  GET_ALL_MENU_LIST,
+  MOVE_SIDE_CARDS,
+  DROP_SIDE_CARDS,
+  UPDATE_MANAGE_LIST,
+  DROP_SIDE_CARDS_IN_GROUP,
+  UPDATE_CHECKED_CARD_LIST,
 } = types;
 
 const actions = createActions(
@@ -49,7 +57,14 @@ const actions = createActions(
     [SET_MANAGE_LIST]: setManageList,
     [GET_MANAGE_LIST]: getManageList,
     [GET_ALL_SERVICES_BY_LABEL_GROUP]: getAllServicesByLabelGroup,
+    [GET_ALL_MENU_LIST]: getAllMenuList,
   },
+  UPDATE_CHECKED_CARD_LIST,
+  DROP_SIDE_CARDS_IN_GROUP,
+  UPDATE_MANAGE_LIST,
+  DROP_SIDE_CARDS,
+  MOVE_SIDE_CARDS,
+  CHANGE_SIDER_STATE,
   UPDATE_SHADOW_CARD,
   UPDATE_LAYOUT,
   UPDATE_GROUP_LIST,

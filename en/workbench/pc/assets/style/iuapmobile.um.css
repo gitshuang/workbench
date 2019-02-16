@@ -158,7 +158,7 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/*常用的一些样式*/
+/* 常用的一些样式
 .btn, .btn-bg, .um-btn {
   position: relative;
   display: block;
@@ -195,7 +195,6 @@
   pointer-events: none;
   opacity: .6;
 }
-/*带填充的btn*/
 .btn-bg {
   background-color: #007aff;
   color: #ffffff;
@@ -407,4 +406,4 @@
   padding: 2px;
   font-size: 14px;
 }
-
+ */

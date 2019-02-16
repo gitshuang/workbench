@@ -26,6 +26,20 @@ const widgetStyle = [
     width: 360,
     height: 360,
   },
+  {
+    width: 544,
+  },
+  {
+    width: 544,
+    height: 360,
+  },
+  {
+    width: 728,
+  },
+  {
+    width: 728,
+    height: 360,
+  },
 ];
 
 
@@ -123,14 +137,14 @@ class WidgetItem extends Component {
       this.loadWidget();
       return false;
     }
-    if (!this.state.shouldLoad && this.props.viewport) {
+    if (!this.state.shouldLoad && this.props.viewport.height) {
       var el = findDOMNode(this.refs.normal_widget);
       this.updataLoadState(el.offsetTop, el.offsetHeight)
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.state.shouldLoad && prevProps.viewport) {
+    if (!this.state.shouldLoad && prevProps.viewport ) {
       var el = findDOMNode(this.refs.normal_widget);
       this.updataLoadState(el.offsetTop, el.offsetHeight)
     }

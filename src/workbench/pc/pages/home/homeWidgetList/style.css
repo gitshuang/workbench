@@ -11,6 +11,11 @@
     align-items: center;
     margin-top: 16px;
     font-size: 15px;
+    cursor: pointer;
+}
+.WidgetTitle :global(.diworkiconfont){
+    position: relative;
+    top: 4px;
 }
 .WidgetTitle>div:first-child{
     -webkit-box-flex: 1;

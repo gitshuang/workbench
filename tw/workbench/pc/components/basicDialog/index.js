@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {mapStateToProps} from '@u';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
 import PopDialog from 'pub-comp/pop';
 import rootActions from 'store/root/actions';
-import {titleStyle} from './style.css'
+import { titleStyle } from './style.css'
 import DragM from "dragm";
 import ToolTip from 'bee/toolTip';
 
@@ -19,23 +19,21 @@ class BuildTitle extends React.Component {
 	}
 
 	render() {
-		const {title} = this.props;
+		const { title } = this.props;
 		return (
 			<DragM updateTransform={this.updateTransform}>
-				<div style={{display: 'inline-block', width: '85%'}}>{title}</div>
+				<div style={{ display: 'inline-block', width: '85%' }}>{title}</div>
 			</DragM>
 		);
 	}
 }
 
-const {showDialog, closeDialogNew} = rootActions;
+const { showDialog, closeDialogNew } = rootActions;
 
 @connect(
 	mapStateToProps(
 		'showModal',
-		'dialogType',
-		'dialogTitle',
-		'dialogMsg'
+		'dialogData',
 	),
 	{
 		showDialog,
@@ -47,7 +45,7 @@ class PopDialogComp extends Component {
 	showTip = (tip, message) => {
 		if (message && message.length > 50) {
 			return <ToolTip trigger="click" rootClose inverse overlay={tip}>
-				<a style={{color: 'blue'}}>
+				<a style={{ color: 'blue' }}>
 					
 				</a>
 			</ToolTip>
@@ -55,11 +53,19 @@ class PopDialogComp extends Component {
 	}
 
 	render() {
-		const {dialogType, dialogMsg, dialogTitle, showModal, closeDialogNew} = this.props;
-		let btnLabel = "";
-		let _btn = [
+		const {
+			dialogData: {
+				type: dialogType,
+				title: dialogTitle,
+				msg: dialogMsg,
+				btn: btns,
+			},
+			showModal,
+			closeDialogNew
+		} = this.props;
+		const _btn = btns || [
 			{
-				label: btnLabel,
+				label: "",
 				fun: () => {
 					closeDialogNew();
 				},
@@ -72,7 +78,7 @@ class PopDialogComp extends Component {
 				{dialogMsg}
 			</div>
 		)
-		const title = <BuildTitle visible={showModal} title={<span className={titleStyle}>{dialogTitle}</span>}/>
+		const title = <BuildTitle visible={showModal} title={<span className={titleStyle}>{dialogTitle}</span>} />
 		return (
 			<PopDialog
 				className="basic_dialog_modal"
