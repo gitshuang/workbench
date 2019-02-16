@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { iframe } from './style.css';
-
+import { iframe, iframeCont } from './style.css';
 
 const propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
+  style: PropTypes.shape({}),
 };
 const defaultProps = {
   url: '',
   title: '',
+  style: {}
 };
 
 class Iframe extends Component {
@@ -17,13 +18,16 @@ class Iframe extends Component {
     const {
       title,
       url,
-			onLoad
+      style
     } = this.props;
-		return (<iframe onLoad={onLoad} id={title} title={title} src={url} className={iframe}/>);
+    return (
+      <div className={iframeCont} style={style}>
+        <iframe id={title} title={title} src={url} className={iframe} />
+      </div>
+    );
   }
 }
 
 Iframe.propTypes = propTypes;
 Iframe.defaultProps = defaultProps;
-
 export default Iframe;

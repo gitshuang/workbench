@@ -29,6 +29,8 @@
     "array.from": "1.0.3",
     "axios": "^0.18.0",
     "babel-runtime": "6.26.0",
+    "bee-collapse": "1.0.1",
+    "bee-form": "^2.0.7",
     "classnames": "2.2.5",
     "custom-event-polyfill": "^0.3.0",
     "diwork-business-components": "latest",

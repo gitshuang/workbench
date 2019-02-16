@@ -55,7 +55,6 @@ class Notice extends Component {
             </Button>
           ))
         }
-        {/* <div className='hideAuto'><Icon type='xiaoxi' /></div> */}
       </div>
     );
   }

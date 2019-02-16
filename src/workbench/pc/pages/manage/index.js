@@ -251,11 +251,28 @@ class Manage extends Component {
         _.forEach(g.children,(a)=>{
           a.isShadow = false;
           a.isChecked = false;
-          a.gridx = Number(a.gridx);
-          a.gridy = Number(a.gridy);
-          a.height = Number(a.height);
-          a.width = Number(a.width);
+          a.gridx = undefined;//Number(a.gridx);
+          a.gridy = undefined;//Number(a.gridy);
+          switch(a.size){
+            case 1:
+            a.height = 1;
+            a.width = 1;
+            break;
+            case 2:
+            a.height = 1;
+            a.width = 2;
+            break
+            case 3:
+            a.height = 2;
+            a.width = 2;
+            break
+            default:
+            a.height = 1;
+            a.width = 1;
+          }
+          
         })
+        
       });
       this.props.updateGroupList(payload.workList);
       return error;

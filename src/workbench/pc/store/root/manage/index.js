@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import update from 'react/lib/update';
 import { guid, avoidSameName } from '@u';
 import actions from './actions';
+import { updateAllMenuList } from './utils'
 
 const {
   updateShadowCard,
@@ -36,6 +37,13 @@ const {
   returnDefaultState,
   setDragInputState,
   emptySelectGroup,
+  changeSiderState,
+  getAllMenuList,
+  moveSideCards,
+  dropSideCards,
+  updateManageList,
+  dropSideCardsInGroup,
+  updateCheckedCardList
 } = actions;
 
 const defaultState = {
@@ -170,9 +178,23 @@ const reducer = handleActions({
     if (error) {
       return state;
     }
+    // 更改了原有数据， 暂时无碍吧， 为了将数据的文件夹平铺到上一级
+    const list = payload.workList;
+    list.forEach(item => {
+      item.children.forEach((list, index) => {
+        if (list.type === 2) {
+          const arr = list.children;
+          item.children.splice(index, 1);
+          arr.forEach((data, key) => {
+            data.parentId = item.widgetId;
+            item.children.splice(index + key, 0, data);
+          });
+        }
+      });
+    });
     return {
       ...state,
-      manageList: payload.workList,
+      manageList: [...list],
       currEditonlyId: '',
     };
   },
@@ -446,7 +468,7 @@ const reducer = handleActions({
     };
   },
   [delectService]: (state, { payload: folderId }) => {
-    const { manageList } = state;
+    const { manageList, allMenuList } = state;
     let groupIndex;
     let widgetIndex;
     if (
@@ -467,6 +489,7 @@ const reducer = handleActions({
       ...group,
     });
     delete state.currentSelectWidgetMap[folderId];
+    updateAllMenuList(allMenuList, manageList)
     return {
       ...state,
       isEdit: true,
@@ -475,7 +498,7 @@ const reducer = handleActions({
       currentSelectWidgetMap: state.currentSelectWidgetMap,
     };
   },
- 
+
   [editTitle]: (state, { payload: { id, name } }) => {
     const manageList = state.manageList;
     // manageList = JSON.parse(JSON.stringify(manageList));
@@ -491,29 +514,36 @@ const reducer = handleActions({
   },
   [moveService]: (state, {
     payload: {
-      id, preParentId, preType, afterId, parentId, afterType, ifIntoFile
+      id, preParentId, preType, afterId, parentId, afterType, monitor
     }
   }) => {
     const manageAllList = state.manageList;
+    let manageList = manageAllList;
+
+
     const sourceData = preParentId && findById(manageAllList, preParentId); // 拖拽前 父级源对象
-  	const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
+    const targetData = parentId && findById(manageAllList, parentId); // 拖拽后 父级目标对象
     const preParentType = sourceData.type;
     const afterParentType = targetData.type;
     // 判断是否为文件夹里面元素拖拽
-    let manageList = manageAllList;
     const itemIn = findById(manageAllList, id);
     const itemAfter = findById(manageAllList, afterId);
-   if (preParentType === 1 && afterParentType === 1 && preParentId !== parentId && preType === 3 && afterType === 3) {
+    if (preParentType === 1 && afterParentType === 1 && preParentId !== parentId && preType === 3 && afterType === 3) {
       // 跨分组拖拽
       sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
+
+      const data = manageList.filter(({ widgetId }) => widgetId === parentId)[0].children;// 当前分组数据
+
       if (preParentId !== parentId) {
         itemIn.parentId = parentId;
+        monitor.getItem().parentId = parentId
       }
-      if (ifIntoFile == 'left') {
-        targetData.children.splice(targetData.children.indexOf(itemAfter), 0, itemIn); // 添加
-      } else {
-        targetData.children.splice(targetData.children.indexOf(itemAfter) + 1, 0, itemIn); // 添加
-      }
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [targetData.children.indexOf(itemAfter), 0, itemIn],
+        ],
+      });
+
     } else if (preParentId !== parentId && preType === 3 && afterType === 1) {
       // 跨分组拖拽 放到组内 而不是元素上
       sourceData.children.splice(sourceData.children.indexOf(itemIn), 1); // 删掉
@@ -527,40 +557,17 @@ const reducer = handleActions({
       const item = dataPre.filter(({ widgetId }) => widgetId === id)[0];
       const afterItem = data.filter(({ widgetId }) => widgetId === afterId)[0];
       const itemIndex = data.indexOf(item);
-	  const afterIndex = data.indexOf(afterItem);
-      if (ifIntoFile == 'left') {
-        if (itemIndex < afterIndex) {
-          manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-            $splice: [
-              [itemIndex, 1],
-              [afterIndex - 1, 0, item],
-            ],
-          });
-        } else {
-          manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-            $splice: [
-              [itemIndex, 1],
-              [afterIndex, 0, item],
-            ],
-          });
-        }
-      } else if (itemIndex < afterIndex) {
-        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex, 0, item],
-          ],
-        });
-      } else {
-        manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
-          $splice: [
-            [itemIndex, 1],
-            [afterIndex + 1, 0, item],
-          ],
-        });
-      }
+      const afterIndex = data.indexOf(afterItem);
+
+      manageList.filter(({ widgetId }) => widgetId === parentId)[0].children = update(data, {
+        $splice: [
+          [itemIndex, 1],
+          [afterIndex, 0, item],
+        ],
+      });
+
     }
-   
+
     manageList = JSON.parse(JSON.stringify(manageAllList));
     return {
       ...state,
@@ -569,8 +576,8 @@ const reducer = handleActions({
       currEditonlyId: '',
     };
   },
- 
-  
+
+
   [openBatchMove]: state => ({
     ...state,
     batchMoveModalDisplay: true,
@@ -596,7 +603,7 @@ const reducer = handleActions({
     manageList: [],
     isEdit: false,
     isFocus: false,
-   
+
     folderModalDisplay: false,
     batchMoveModalDisplay: false,
     selectList: [], // 勾选的服务列表
@@ -612,6 +619,15 @@ const reducer = handleActions({
     allServicesByLabelGroup: {},
 
     dragState: true, // 是否可拖拽
+    isSiderDisplay: true,  //左侧默认展开
+    shadowCard: {
+      size: 1,
+      type: 3,
+      widgetId: "shadowCardId",
+      widgetName: "item"
+    },
+    ifDifferentSizeExchanged: false,
+    checkedCardList: []
   }),
   [emptySelectGroup]: state => ({
     ...state,

@@ -4,7 +4,6 @@ import {
   HashRouter as Router,
   withRouter,
   Switch,
-  Route
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from 'router';
@@ -12,22 +11,17 @@ import loginRoutes from 'router/login.js';
 import loginRoutesEn from 'router/loginEn.js';//由于官方首页多语下两套设计：中繁和英文
 import store from 'store';
 import IM from 'IM';  // eslint-disable-line
-import { getContext, mapStateToProps } from '@u';
+import componentTool from 'public/componentTools';
+import { getContext, mapStateToProps, IS_IE } from '@u';
 import RouteWithSubRoutes from 'pub-comp/routeWithSubRoutes';
 
 import rootActions from 'store/root/actions';
-
-import componentTool from 'public/componentTools';
 import { regMessageTypeHandler } from 'public/regMessageTypeHandler';
-import 'public/jDiworkBridge';
-import BasicDialog from 'containers/basicDialog/';
+
+import BasicDialog from 'components/basicDialog/';
 import Frame from 'components/frame/';
 
 const {
-  requestStart,
-  requestSuccess,
-  requestError,
-  getServiceList,
   getPoll,
   setUserInfo
 } = rootActions;
@@ -56,33 +50,16 @@ const NoMatch = ({ history }) => {
     'showModal',
   ),
   {
-    requestStart,
-    requestSuccess,
-    requestError,
-    getServiceList,
     getPoll,
     setUserInfo,
   }
 )
 class Root extends Component {
   static propTypes = {
-    history: PropTypes.shape({
-      goBack: PropTypes.func,
-      replace: PropTypes.func,
-    }),
-    requestStart: PropTypes.func,
-    requestSuccess: PropTypes.func,
-    requestError: PropTypes.func,
-    getServiceList: PropTypes.func,
     getPoll: PropTypes.func,
     setUserInfo: PropTypes.func,
   };
   static defaultProps = {
-    history: {},
-    requestStart: () => { },
-    requestSuccess: () => { },
-    requestError: () => { },
-    getServiceList: () => { },
     getPoll: () => { },
     setUserInfo: () => { },
   };
@@ -100,8 +77,6 @@ class Root extends Component {
       return false;
     }
     const {
-      requestError,
-      getServiceList,
       getPoll,
       setUserInfo
     } = this.props;
@@ -110,14 +85,8 @@ class Root extends Component {
 
     const { tenantid } = getContext();
     if (!tenantid) {
-      this.props.history.replace('/establish');
+      // this.props.history.replace('/establish');
     } else {
-      // 请求快捷应用
-      getServiceList().then(({ error, payload }) => {
-        if (error) {
-          requestError(payload);
-        }
-      });
       IM(new componentTool('IM'), getContext(), { // eslint-disable-line
         el: 'IM',
       });
@@ -147,7 +116,7 @@ class Root extends Component {
     const { showFrame, showModal } = this.props;
     const duoyuRoutes = this.state.defaultLan === 'en_US' ? loginRoutesEn : loginRoutes;
     return (
-      <div>
+      <div className={`${IS_IE ? 'ie9' : 'diwork'}`}>
         <Switch>
           {
             this.isLogin
@@ -158,7 +127,7 @@ class Root extends Component {
               :
               duoyuRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
           }
-          <Route component={NoMatch} />
+          {/* <Route component={NoMatch} /> */}
         </Switch>
         {showModal ? <BasicDialog /> : null}
         {showFrame ? <Frame /> : null}

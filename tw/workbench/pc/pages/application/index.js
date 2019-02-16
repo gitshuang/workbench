@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import ApplicationWrap from 'containers/applicationWrap';
-import ServiceClassify from 'containers/serviceClassify';
+import ServiceClassify from './serviceClassify';
 
 class Application extends Component {
   render() {
     return (
-      <ApplicationWrap name="全部應用">
+      <div>
         <ServiceClassify />
-      </ApplicationWrap>
+      </div>
     );
   }
 }

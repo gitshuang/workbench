@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
 
@@ -11,9 +11,8 @@ import Tabs, { TabPane } from 'bee/tabs';
 import FormControl from 'bee/form-control';
 import { openMess } from 'pub-comp/notification';
 import { ButtonBrand } from 'pub-comp/button';
-import Header from 'containers/header';
-import TagsInput from 'components/tagsInput';
-import BreadcrumbContainer from 'components/breadcrumb';
+
+import TagsInput from './tagsInput';
 
 import SuccessDialog from './successDialog';
 
@@ -37,7 +36,7 @@ const { getInviteUsersJoinAddress, sendMessage } = inviteActions;
 
 const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 
-@withRouter
+// @withRouter
 @connect(
   mapStateToProps(
     'inviteJoinAddress',
@@ -50,7 +49,7 @@ const regMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     {
       namespace: 'invitation',
     },
-    
+
   ),
   {
     requestStart,
@@ -76,11 +75,11 @@ class Invitation extends Component {
     }),
   };
   static defaultProps = {
-    getInviteUsersJoinAddress: () => {},
-    sendMessage: () => {},
-    requestStart: () => {},
-    requestSuccess: () => {},
-    requestError: () => {},
+    getInviteUsersJoinAddress: () => { },
+    sendMessage: () => { },
+    requestStart: () => { },
+    requestSuccess: () => { },
+    requestError: () => { },
     userInfo: {},
     history: {},
   };
@@ -94,7 +93,7 @@ class Invitation extends Component {
       creator: props.userInfo.userName,
       message: '',
     };
-    this.goBack = this.goBack.bind(this);
+    // this.goBack = this.goBack.bind(this);
   }
 
   componentWillMount() {
@@ -124,19 +123,11 @@ class Invitation extends Component {
     });
   }
 
-  setOptherData=(obj) => {
+  setOptherData = (obj) => {
     this.state[obj.name] = obj.value;
     this.setState({
       ...this.state,
     });
-  }
-
-  goBack = () => {
-    this.props.history.goBack();
-  }
-
-  goHome = () => {
-    this.props.history.replace('');
   }
 
   copyLink = () => {
@@ -215,6 +206,11 @@ class Invitation extends Component {
       creator,
       message,
     } = this.state;
+
+    const { userInfo: { allowTenants, } } = this.props;
+    const { tenantid } = window.diworkContext();
+    const curTenant = allowTenants && allowTenants.filter(tenant => tenant.tenantId === tenantid)[0];
+    const curText = curTenant.type === 0 ? "企業" : "團隊"; 
     /*
     const tip = (
       <div className={tootip}>
@@ -223,7 +219,7 @@ class Invitation extends Component {
     );
     */
     return (
-      <div className="">
+      <div className={wrap}>
         {/* <div className=" header">
           <Header onLeftClick={this.goHome} >
             <div>
@@ -234,34 +230,34 @@ class Invitation extends Component {
             <BreadcrumbContainer data={[{ name: '邀請成員' }]} goback={this.goBack} />
           </div>
         </div> */}
-        <div className={`${wrap}  content`}>
-          <div className={content}>
-            <Tabs
-              destroyInactiveTabPane
-              defaultActiveKey="1"
-              onChange={this.callback}
-              className="demo-tabs"
-            >
-              <TabPane tab="鏈接邀請" key="1" className={tabPane1}>
-                <p>將鏈接發給小夥伴就可以啦</p>
-                <div className={urlArea}>
-                  <span>鏈接</span>
-                  <input ref={(c) => { this.shortUrl = c; }} type="text" value={url} readOnly />
-                </div>
-                <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >複製鏈接</ButtonBrand>
+        {/* <div className={`${wrap}  content`}> */}
+        <div className={content}>
+          <Tabs
+            destroyInactiveTabPane
+            defaultActiveKey="1"
+            onChange={this.callback}
+            className="demo-tabs"
+          >
+            <TabPane tab="鏈接邀請" key="1" className={tabPane1}>
+              <p>將鏈接發給小夥伴就可以啦</p>
+              <div className={urlArea}>
+                <span>鏈接</span>
+                <input ref={(c) => { this.shortUrl = c; }} type="text" value={url} readOnly />
+              </div>
+              <ButtonBrand className={copyLinkBtn} onClick={this.copyLink} >複製鏈接</ButtonBrand>
 
-              </TabPane>
-              <TabPane tab="郵件邀請" key="2" className={tabPane2}>
+            </TabPane>
+            <TabPane tab="郵件邀請" key="2" className={tabPane2}>
 
-                <p className={firstP}>給你的小夥伴捎句話吧</p>
-                <FormControl
-                  placeholder="用友雲-賦能個人、啟動組織"
-                  value={message}
-                  onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
-                />
+              <p className={firstP}>給你的小夥伴捎句話吧</p>
+              <FormControl
+                placeholder="用友雲-賦能個人、啟動組織"
+                value={message}
+                onChange={(e) => { this.setOptherData({ name: 'message', value: e }); }}
+              />
 
-                <p>署名</p>
-                <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
+              <p>署名</p>
+              <FormControl value={creator} onChange={(e) => { this.setOptherData({ name: 'creator', value: e }); }} />
 
                 <p>輸入郵箱地址並用 “;” 隔開</p>
                 <TagsInput
@@ -296,16 +292,16 @@ class Invitation extends Component {
               </TabPane>
               <TabPane tab="二維碼邀請" key="3" className={tabPane3}>
                 <div>
-                  <span>掃描二維碼直接進入團隊</span>
+                  <span>{`掃描二維碼直接進入${curText}`}</span>
                   <div className={qrCode} id="qrCode">
                     <img alt="" src="/invite/getQRCode" />
                   </div>
                   {/* <ButtonBrand className={printQrBtn} >二維碼</ButtonBrand> */}
                 </div>
-              </TabPane>
-            </Tabs>
-          </div>
+            </TabPane>
+          </Tabs>
         </div>
+        {/* </div> */}
         <SuccessDialog show={successDialogShow} close={this.closeSuccessDialog} />
       </div>
     );

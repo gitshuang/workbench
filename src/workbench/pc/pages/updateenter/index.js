@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
@@ -76,6 +77,36 @@ class Updateenter extends Component {
   }
 
   handleClick = (param, fn) => {
+    dispatchMessageTypeHandler({
+      type: "showDialog",
+      detail: {
+        type: 'warning',
+        title: '提示',
+        msg: "点击确定后即将刷新页面，是否继续？",
+        btn: [{
+          label: "确定",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            this.create(param, fn);
+          },
+        },
+        {
+          label: "取消",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            fn({ error: true });
+          },
+        }
+        ]
+      }
+    });
+  }
+
+  create = (param, fn) => {
     const {
       requestStart,
       requestSuccess,
@@ -99,19 +130,6 @@ class Updateenter extends Component {
     const { userInfo } = this.props;
     const { locale } = getContext();
     return (
-      //  {/*  <div>
-      //     <div className=" header">
-      //       <Header onLeftClick={this.goHome}>
-      //         <div>
-      //           <span>企业认证</span>
-      //         </div>
-      //       </Header>
-      //       <div className="appBreadcrumb">
-      //         <Breadcrumbs data={[{ name: '企业认证' }]} goback={this.goBack} />
-      //       </div>
-      //     </div> 
-      //     <div className="content">
-      //   */}
       <div className={pageEnterprise}>
         <div className={enterTitle} >企业认证</div>
         <hr className={hr} />
@@ -133,8 +151,6 @@ class Updateenter extends Component {
 
         </div>
       </div>
-      //   </div>
-      // </div>
     );
   }
 }

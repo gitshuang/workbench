@@ -14,6 +14,7 @@ import {
   languageClass,
 } from './MainNav.css';
 import LogoSvg from './logo.svg';
+import LogoenSvg from './logoen.svg';
 const { setCurrentNot } = rootActions;
 @withRouter
 @connect(
@@ -95,16 +96,16 @@ class MainNavPanel extends Component {
 
   }
   handleChange = (value) => {
-    // const { onChangeLanguage } = this.props.language;
     this.onChangeLanguage(value);
   }
   render() {
+    const {currentLan} = this.props;
     const { defaultValue, languageList } = this.state;
     return (
       <div className={MainNav} id="MainNav">
         <div className={leftCon} onClick={this.goToHome} >
-          <img src={LogoSvg} className="companylogoSvg" />
-          <span className={headerDesc}>數位化工作入口</span>
+          {currentLan==='en_US'?  <img src={LogoenSvg} className="companylogoSvg en" />:  <img src={LogoSvg} className="companylogoSvg" />}
+          {currentLan==='en_US'?'':<span className={headerDesc}>數位化工作入口</span>}
         </div>
         <div className={middleCon}>
           <a className={`middleItem ${this.props.activeIndex * 1 === 1 ? 'actived' : null}`} onClick={() => { this.open('login') }}>首頁</a>

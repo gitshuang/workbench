@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getContext } from '@u';
-
-import Header from 'containers/header';
-import Breadcrumbs from 'components/breadcrumb';
+import { dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
 
 import EnterContent from 'pub-comp/enterContent';
 import { uploadApplication } from 'store/root/api';
@@ -21,7 +19,7 @@ const { getTeamInfo } = teamconfigActions;
 import { pageEnterprise, enterTitle, enterCont, hr } from './style.css';
 import 'assets/style/Form.css';
 
-@withRouter
+// @withRouter
 @connect(
   mapStateToProps(
     'userInfo',
@@ -79,6 +77,36 @@ class Updateenter extends Component {
   }
 
   handleClick = (param, fn) => {
+    dispatchMessageTypeHandler({
+      type: "showDialog",
+      detail: {
+        type: 'warning',
+        title: '',
+        msg: "",
+        btn: [{
+          label: "",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            this.create(param, fn);
+          },
+        },
+        {
+          label: "",
+          fun: () => {
+            dispatchMessageTypeHandler({
+              type: "closeDialogNew",
+            });
+            fn({ error: true });
+          },
+        }
+        ]
+      }
+    });
+  }
+
+  create = (param, fn) => {
     const {
       requestStart,
       requestSuccess,
@@ -100,41 +128,27 @@ class Updateenter extends Component {
   render() {
     const { enterData } = this.state;
     const { userInfo } = this.props;
-    const { locale } = getContext(); 
+    const { locale } = getContext();
     return (
-      <div style={{ overflow: "hidden" }}>
-        {/* <div className=" header">
-          <Header onLeftClick={this.goHome}>
-            <div>
-              <span>Enterprise Authentication</span>
-            </div>
-          </Header>
-          <div className="appBreadcrumb">
-            <Breadcrumbs data={[{ name: 'Enterprise Authentication' }]} goback={this.goBack} />
-          </div>
-        </div> */}
-        <div className="content">
-          <div className={pageEnterprise}>
-            <div className={enterTitle} >Enterprise Authentication</div>
-            <hr className={hr} />
-            <div className={enterCont} >
-              {
-                enterData && Object.keys(userInfo).length > 0 ?
-                  <EnterContent
-                    data={enterData}
-                    userInfo={userInfo}
-                    _from="update"
-                    handleClickFn={this.handleClick}
-                    buttonText="Upgrade"
-                    loadingDesc="Upgrading enterprise…"
-                    uploadApplication={uploadApplication}
-                    texts={texts}
-                    lang={locale}
-                  /> : null
-              }
+      <div className={pageEnterprise}>
+        <div className={enterTitle} >Enterprise Authentication</div>
+        <hr className={hr} />
+        <div className={enterCont} >
+          {
+            enterData && Object.keys(userInfo).length > 0 ?
+              <EnterContent
+                data={enterData}
+                userInfo={userInfo}
+                _from="update"
+                handleClickFn={this.handleClick}
+                buttonText="Upgrade"
+                loadingDesc="Upgrading enterprise…"
+                uploadApplication={uploadApplication}
+                texts={texts}
+                lang={locale}
+              /> : null
+          }
 
-            </div>
-          </div>
         </div>
       </div>
     );

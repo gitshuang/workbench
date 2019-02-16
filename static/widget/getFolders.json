@@ -45,30 +45,7 @@
       "parentId": null,
       "orders": 1,
       "children": [
-        {
-          "createTime": 1525765860000,
-          "modifiedTime": null,
-          "ts": null,
-          "creator": null,
-          "modifier": null,
-          "tenantId": "azwjep9l",
-          "widgetId": "da8a53ea-f1ea-4908-a355-943893f44f70",
-          "templateId": null,
-          "widgetConfig": null,
-          "icon": null,
-          "serviceCode": null,
-          "serviceId": null,
-          "serviceType": null,
-          "widgetName": "新建文件夹",
-          "userId": "fdd3248e-f65e-46fd-9da2-6a886d7a0547",
-          "type": 2,
-          "parentId": "e8ed634f-effc-4d97-aa95-3bf5ba73917f",
-          "orders": 12,
-          "children": [],
-          "jsurl": null,
-          "background": null,
-          "size": null
-        }
+        
       ],
       "jsurl": null,
       "background": null,

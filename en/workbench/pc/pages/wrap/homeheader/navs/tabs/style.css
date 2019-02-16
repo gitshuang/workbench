@@ -1,0 +1,77 @@
+/* tab */
+.tab{
+  float: left;
+  flex: 1;
+}
+.tab ul{
+  overflow: hidden;
+  height: 100%;
+  float: left;
+}
+.tab ul li{
+  float: left;
+  width: 154px;
+  height: 100%;
+  padding-right: 20px;
+  cursor: pointer;
+  position: relative;
+  color: #555555;
+}
+.tab ul li::before{
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 1px;
+  height: 12px;
+  background: #CCCCCC;
+  
+}
+.tab ul li:hover{
+  /* background: #ffffff; */
+}
+
+.tab ul li p{
+  text-align: left;
+  height: 100%;
+  line-height: 32px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.tab li div{
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: 4px;
+  top: 8px;
+  border-radius: 50% 50%;
+}
+
+.tab li .pagesign{
+  float: left;
+  margin-top: 6px;
+  margin-left: 8px;
+  margin-right: 6px;
+  font-size: 18px;
+}
+
+.tab li div i{
+  font-size: 14px;
+  color: #888888;
+}
+.tab ul .active{
+  background: linear-gradient(90deg,rgba(225,76,70,1) 0%,rgba(221,60,73,1) 100%);
+  color: #ffffff;
+}
+.tab ul .active i{
+  color: #ffffff;
+}
+
+.tab ul .active::before,
+.tab ul .first::before,
+.tab ul .active + li::before{
+  content: '';
+  width: 0;
+}

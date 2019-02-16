@@ -1,0 +1,24 @@
+.im{
+    width:32px;
+    height: 32px;
+    line-height: 32px;
+    margin-right: 15px;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+:global(.CircleDot){
+    position: absolute;
+    width:6px;
+    height: 6px;
+    background: #e14c46;
+    border-radius: 50% 50%;
+    top:5px;
+    right:5px;
+  }
+  .im :global(.iconfont){
+      font-weight: normal;
+  }
+  .im :global(.iconfont:hover::before){
+      color: #e14c46;
+  }

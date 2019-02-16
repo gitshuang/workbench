@@ -7,19 +7,16 @@ import { mapStateToProps } from '@u';
 import loginpageActions from 'store/root/loginpage/actions';
 import rootActions from 'store/root/actions';
 
-
-
-import Form, { FormItem } from 'bee/form';
+import Form from 'bee/form';
 import FormControl from 'bee/form-control';
 import Select from 'bee/select';
 import CitySelect from 'bee/city-select';
-import { openMess } from 'pub-comp/notification';
-import 'assets/style/Form.css';
+import { texts } from 'yutils/entertext';
 import {
   applyForm, applyBtn,
 } from './style.css';
-
-const {applyService} = loginpageActions;
+const FormItem = Form.FormItem;
+const { applyService } = loginpageActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { Option } = Select;
 
@@ -42,55 +39,41 @@ class CreateEnter extends Component {
     this.state = {
       flag: false,
       tenantIndustry: 'A',
-      tenantSize:'A',//staff的范围
+      tenantSize: 'A',//staff的范围
       linkman: '',
-      companyname:'',
-      tenantTel:'',
-      defaultValue:{
-        province:'北京',
-        city:'北京',
+      companyName: '',
+      tenantTel: '',
+      defaultValue: {
+        province: '北京',
+        city: '北京',
       }
     };
   }
   onChange = (obj) => {
     this.setState({
-        defaultValue:{
-          province:obj.province,
-          city:obj.city,
-        }
+      defaultValue: {
+        province: obj.province,
+        city: obj.city,
+      }
     })
   }
 
-  setOptherData = (obj) => {
-    this.state[obj.name] = obj.value;
-    this.setState({
-      ...this.state,
-    });
-  }
-  
-  inputOnChange = (e, name) => {
-    this.state[name] = e;
-    this.setState({
-      ...this.state,
-    });
-  }
-
-  submitService = () =>{
-    let{tenantIndustry, tenantSize,companyname, linkman, tenantTel} = this.state;
+  submitService = () => {
+    let {tenantIndustry , tenantSize, companyName, linkman,tenantTel} = this.props.form.getFieldsValue();
     const { applyService, requestStart, requestSuccess, requestError, } = this.props;
-    if(tenantIndustry== ''||tenantSize==''||companyname==''||linkman==''||tenantTel==''){
+    if (tenantIndustry == '' || tenantSize == '' || companyName == '' || linkman == '' || tenantTel == '') {
       return false;
     }
     let param = {
-      companyName:companyname,
-      contactName:linkman,
-      phoneNumber:tenantTel,
-      trade:tenantIndustry,
-      scale:tenantSize,
-      province:this.province,
-      city:this.city,
+      companyName: companyName,
+      contactName: linkman,
+      phoneNumber: tenantTel,
+      trade: tenantIndustry,
+      scale: tenantSize,
+      province: this.province,
+      city: this.city,
     }
-    this.setState({flag:true});
+    this.setState({ flag: true });
     requestStart()
     applyService(param).then(({ error, payload }) => {
       if (error) {
@@ -110,139 +93,123 @@ class CreateEnter extends Component {
   }
   render() {
     const {
-      flag,tenantIndustry, tenantSize,companyname, linkman,  tenantTel,
+      flag //设置在提交请求的过程中不可再次提交
     } = this.state;
+    const { getFieldProps, getFieldError } = this.props.form;
+    // let value =
+    let {tenantIndustry , tenantSize, companyName, linkman,tenantTel} = this.props.form.getFieldsValue();
     let disabled = false;
-    if(flag ||tenantIndustry==''||tenantSize == ''|| companyname == '' || linkman == ''|| tenantTel=='' || !(/^1[34578][0-9]{9}$/).test(tenantTel)){
+    if (flag || tenantIndustry == '' || tenantSize == '' || companyName == '' || linkman == '' || tenantTel == '' || !(/^1[34578][0-9]{9}$/).test(tenantTel)) {
       disabled = true;
     }
     return (
       <div className="applyService">
-        <Form  className={applyForm} showSubmit={false}>
-        <FormItem
-            showMast={false}
-            labelName={<span>企業名稱<font color="red"> &nbsp;*&nbsp;</font></span>}
-            isRequire
-            valuePropsName="value"
-            errorMessage="請輸入企業名稱"
-            method="blur"
-            inline
-          >
-            <FormControl ref={ref=>this.companyRef = ref}name="companyname" placeholder="請輸入企業名稱" value={companyname} onChange={(e) => { this.inputOnChange(e, 'companyname'); }} />
+        <Form className={applyForm} showSubmit={false}>
+          <FormItem>
+            <label><span>企業名稱<font color="red">&nbsp;*&nbsp;</font></span></label>
+            <FormControl
+              name="companyName"
+              value={companyName}
+              className="companyInput"
+              placeholder="請輸入企業名稱"
+              {...getFieldProps('companyName', {
+                validateTrigger: 'onBlur',
+                rules: [{ required: true, message: '請輸入企業名稱', }],
+              })}
+            />
+            <span className='error'>
+              {getFieldError('companyName')}
+            </span>
           </FormItem>
-        
-          <FormItem
-            showMast={false}
-            labelName={<span>行業<font color="red"> &nbsp;*&nbsp;</font></span>}
-            isRequire
-            valuePropsName="value"
-            errorMessage="請選擇所屬行業"
-            method="blur"
-            inline
-          >
+
+          <FormItem>
+            <label><span>{texts.tenantIndustryLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
             <Select
-              defaultValue="-所屬行業-"
               name="tenantIndustry"
-              style={{width:'370px'}}
-              onChange={(e) => { this.setOptherData({ name: 'tenantIndustry', value: e }); }}
+              {
+              ...getFieldProps('tenantIndustry', {
+                initialValue: tenantIndustry || 'A',
+                rules: [{ required: true }]
+              })
+              }
             >
-              <Option value="A">農、林、牧、漁業</Option>
-              <Option value="B">採礦業</Option>
-              <Option value="C">製造業</Option>
-              <Option value="D">電力、熱力、燃氣及水的生產和供應業</Option>
-              <Option value="S">環境和公共設施管理業、社會保障和社會組織</Option>
-              <Option value="E">建築業</Option>
-              <Option value="G">交通運輸、倉儲業和郵政業</Option>
-              <Option value="I">資訊傳輸、電腦服務和軟體業</Option>
-              <Option value="F">批發和零售業</Option>
-              <Option value="H">住宿、餐飲業</Option>
-              <Option value="J">金融、保險業</Option>
-              <Option value="K">房地產業</Option>
-              <Option value="L">租賃和商務服務業</Option>
-              <Option value="M">科學研究、技術服務和地質勘查業</Option>
-              <Option value="N">水利、環境和公共設施管理業</Option>
-              <Option value="O">居民服務和其他服務業</Option>
-              <Option value="P">教育</Option>
-              <Option value="Q">衛生、社會保障和社會服務業</Option>
-              <Option value="R">文化、體育、娛樂業</Option>
-              <Option value="T">國際組織</Option>
+              {
+                texts.tenantIndustry.map(({ label, value }) =>
+                  <Select.Option key={value} value={value}>{label}</Select.Option>)
+              }
             </Select>
           </FormItem>
 
-          <FormItem
-            showMast={false}
-            labelName={<span>規模<font color="red"> &nbsp;*&nbsp;</font></span>}
-            isRequire
-            valuePropsName="value"
-            errorMessage="請選擇規模範圍"
-            method="blur"
-            inline
-          >
+          <FormItem>
+            <label><span>{texts.tenantSizeLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
             <Select
-              defaultValue="-規模範圍-"
-              name="tenantSize"
-              style={{width:'370px'}}
-              onChange={(e) => { this.setOptherData({ name: 'tenantSize', value: e }); }}
+              {
+              ...getFieldProps('tenantSize', {
+                initialValue: tenantSize || 'A',
+                rules: [{ required: true }]
+              })
+              }
             >
-              <Option value="A">0－50</Option>
-              <Option value="B">51-100</Option>
-              <Option value="C">101-200</Option>
-              <Option value="D">201-500</Option>
-              <Option value="E">501-1000</Option>
-              <Option value="F">1001－2000</Option>
-              <Option value="G">2000人</Option>
+              {
+                texts.tenantSizeOption.map(({ label, value }) =>
+                  <Select.Option key={`${value}`} value={value}>{label}</Select.Option>)
+              }
             </Select>
           </FormItem>
-
-          <FormItem
-            showMast={false}
-            labelName={<span>所在省市<font color="red"> &nbsp;*&nbsp;</font></span>}
-            isRequire={false}
-            valuePropsName="value"
-            errorMessage="請輸入所在省市"
-            method="blur"
-            inline
-          >
-            <CitySelect name="address" onChange={this.onChange} defaultValue={this.state.defaultValue} lang={this.props.currLan}/>
-          </FormItem>
-          <FormItem
-            showMast={false}
-            labelName={<span>聯繫人<font color="red"> &nbsp;*&nbsp;</font></span>}
-            isRequire
-            valuePropsName="value"
-            errorMessage="請輸入聯繫人姓名"
-            method="blur"
-            inline
-          >
-            <FormControl name="linkman" placeholder="請輸入聯繫人姓名" value={linkman} onChange={(e) => { this.inputOnChange(e, 'linkman'); }} />
+          <FormItem>
+            <label><span>{texts.addressLabel}&nbsp;&nbsp;</span></label>
+            <CitySelect
+              name="address"
+              onChange={this.onChange}
+              defaultValue={this.state.defaultValue}
+              lang={this.props.currLan}
+            />
           </FormItem>
 
-          <FormItem
-            className="input_phone"
-            showMast={false}
-            valuePropsName="value"
-            labelName={<span>手機號<font color="red"> &nbsp;*&nbsp;</font></span>}
-            isRequire
-            method="blur"
-            htmlType="tel"
-            errorMessage="手機號格式錯誤"
-            inline
-          >
-            <FormControl name="tenantTel" placeholder="請輸入手機號" value={tenantTel} onChange={(e) => { this.inputOnChange(e, 'tenantTel'); }} />
+          <FormItem>
+            <label><span>{texts.linkmanLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
+            <FormControl
+              name="linkman"
+              value={linkman || ''}
+              placeholder={texts.linkmanError}
+              className="linkman"
+              {...getFieldProps('linkman', {
+                validateTrigger: 'onBlur',
+                rules: [{ required: true, message: texts.linkmanError, }],
+              })}
+            />
+            <span className='error'>
+              {getFieldError('linkman')}
+            </span>
+          </FormItem>
+          <FormItem>
+            <label><span>{texts.tenantTelLabel}<font color="red">&nbsp;*&nbsp;</font></span></label>
+            <FormControl
+              name="tenantTel"
+              value={linkman || ''}
+              placeholder={texts.tenantTelPlace}
+              className="tenantTel"
+              {...getFieldProps('tenantTel', {
+                validateTrigger: 'onBlur',
+                rules: [{ required: true, message: texts.tenantTelPlace, },
+                  {pattern:/^1[34578][0-9]{9}$/, message:texts.tenantTelError}],
+              })}
+            />
+            <span className='error'>
+              {getFieldError('tenantTel')}
+            </span>
           </FormItem>
 
         </Form>
         {
-          disabled?
-          <div className={`${applyBtn} disabled`} >立即申請</div>
-          :
-          <div className={applyBtn}  onClick={this.submitService}>立即申請</div>
-
+          disabled ?
+            <div className={`${applyBtn} disabled`} >立即申請</div>
+            :
+            <div className={applyBtn} onClick={this.submitService}>立即申請</div>
         }
-            {/* <div className={applyBtn} onClick={this.submitService}>立即申請</div> */}
       </div>
     );
   }
 }
-
-export default CreateEnter;
+export default Form.createForm()(CreateEnter);
+// export default CreateEnter;

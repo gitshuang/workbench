@@ -17,7 +17,6 @@ import {
 const windowLocationOrigin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');//ie8-ie10不兼容的原因
 
 const CAS_SERVER = getHost('euc'),//"https://user-daily.yyuap.com",
-  //yhtssoisloginUrl = CAS_SERVER + '/cas/iframeloginredirect',
   yhtssoisloginUrl = windowLocationOrigin + '/login_light',
   _destUrl = `${getHost('api')}/yhtssoislogin`, //只有这个不是登陆成功后跳转的链接
   realservice = windowLocationOrigin;
@@ -31,8 +30,8 @@ class LoginPage extends Component {
       preTime: new Date().getTime(),//上次执行的时间
       duration: 1200,//执行的间隔
       loginModalShow: false,//登录的modal是否展示
-      pagesRef:[],//放7个分页
-      lanChangeFlag:0,//为了解决bug：registryUrl写在this上而没有写在state上，所以callback函数修改url但是不会重新渲染
+      pagesRef: [],//放7个分页
+      lanChangeFlag: 0,//为了解决bug：registryUrl写在this上而没有写在state上，所以callback函数修改url但是不会重新渲染
     }
     this.amBody = null;
     this.scrollFunc = this.scrollFunc.bind(this);
@@ -55,6 +54,7 @@ class LoginPage extends Component {
     let space = Math.round((screenHeight + header - footer - fontHeight) / 2);
     this.sevenSpace = space;
   }
+
   componentDidMount() {
     if (document.addEventListener) {
       document.addEventListener('DOMMouseScroll', this.scrollFunc, false);
@@ -63,14 +63,14 @@ class LoginPage extends Component {
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
     document.getElementById('root').className = 'rootSpec';
     document.getElementsByTagName('body')[0].className = 'bodySpec';
-    console.log(this.getQueryString('autoLogin')&&this.getQueryString('autoLogin').indexOf('true')>-1)
-    if(this.getQueryString('autoLogin')&&this.getQueryString('autoLogin').indexOf('true')>-1){
+    console.log(this.getQueryString('autoLogin') && this.getQueryString('autoLogin').indexOf('true') > -1)
+    if (this.getQueryString('autoLogin') && this.getQueryString('autoLogin').indexOf('true') > -1) {
       this.loginClick();
     }
 
   }
-  
-  componentWillUnmount(){
+
+  componentWillUnmount() {
     if (document.removeEventListener) {
       document.removeEventListener('DOMMouseScroll', this.scrollFunc, false);
     }
@@ -79,13 +79,13 @@ class LoginPage extends Component {
     document.getElementById('root').className = '';
     document.getElementsByTagName('body')[0].className = '';
   }
-  getQueryString = (name) => {  
-    var reg = new RegExp("(^|&|\\?)" + name + "=([^&]*)(&|$)", "i");  
+  getQueryString = (name) => {
+    var reg = new RegExp("(^|&|\\?)" + name + "=([^&]*)(&|$)", "i");
     // var r = 'http://workbench.yyuap.com/?autoLogin=false#/'.substr(1).match(reg); 
-    var r =window.location.href.substr(1).match(reg);  
-    if (r != null) return unescape(r[2]).toString().toLocaleLowerCase();  
-    return null;  
-} 
+    var r = window.location.href.substr(1).match(reg);
+    if (r != null) return unescape(r[2]).toString().toLocaleLowerCase();
+    return null;
+  }
   scrollFunc = function (e) {
     let { preTime, duration, curIndex, alldata } = this.state;
     //如果动画还没执行完，则return
@@ -118,34 +118,34 @@ class LoginPage extends Component {
   }
   moveNext = () => {
     let preIndex = this.state.curIndex;
-    if(preIndex < 5  && !this.state.pagesRef[preIndex+2]._loaded){
-      if(!this.state.pagesRef[preIndex+1]._loaded){
+    if (preIndex < 5 && !this.state.pagesRef[preIndex + 2]._loaded) {
+      if (!this.state.pagesRef[preIndex + 1]._loaded) {
         //表示本身图片都没有被加载
-        let imgVal = preIndex+2;
-        let img  = require('./pages/images/'+ imgVal+'.png');
-        this.state.pagesRef[preIndex+1].children[0].style.backgroundImage = `url(${img})`
-        this.state.pagesRef[preIndex+1]._loaded = true;
+        let imgVal = preIndex + 2;
+        let img = require('./pages/images/' + imgVal + '.png');
+        this.state.pagesRef[preIndex + 1].children[0].style.backgroundImage = `url(${img})`
+        this.state.pagesRef[preIndex + 1]._loaded = true;
       }
       // 从第二张图片开始加载3,preIndex=0，3加载4，4加载5
-      let imgVal = preIndex+3;
-      let img  = require('./pages/images/'+ imgVal+'.png');
-      this.state.pagesRef[preIndex+2].children[0].style.backgroundImage = `url(${img})`
-      this.state.pagesRef[preIndex+2]._loaded = true;
+      let imgVal = preIndex + 3;
+      let img = require('./pages/images/' + imgVal + '.png');
+      this.state.pagesRef[preIndex + 2].children[0].style.backgroundImage = `url(${img})`
+      this.state.pagesRef[preIndex + 2]._loaded = true;
     }
     this.setState({ curIndex: preIndex + 1 }, () => {
       this.amBody.classList.remove(`animation${preIndex}`);
       this.amBody.classList.add(`animation${preIndex + 1}`);
     });
-    
+
   }
   movePrev = () => {
     let preIndex = this.state.curIndex;
-    if(!this.state.pagesRef[preIndex-1]._loaded){
+    if (!this.state.pagesRef[preIndex - 1]._loaded) {
       // 从第二张图片开始加载3,preIndex=0，3加载4，4加载5
-      let imgVal = preIndex-1+1;
-      let img  = require('./pages/images/'+ imgVal+'.png');
-      this.state.pagesRef[preIndex-1].children[0].style.backgroundImage = `url(${img})`;
-      this.state.pagesRef[preIndex-1]._loaded = true;
+      let imgVal = preIndex - 1 + 1;
+      let img = require('./pages/images/' + imgVal + '.png');
+      this.state.pagesRef[preIndex - 1].children[0].style.backgroundImage = `url(${img})`;
+      this.state.pagesRef[preIndex - 1]._loaded = true;
     }
     this.setState({ curIndex: preIndex - 1 }, () => {
       this.amBody.classList.remove(`animation${preIndex}`);
@@ -155,10 +155,10 @@ class LoginPage extends Component {
   }
   changePage = (index) => {
     //添加图片懒加载的
-    if(!this.state.pagesRef[index]._loaded){
+    if (!this.state.pagesRef[index]._loaded) {
       // 从第二张图片开始加载3,preIndex=0，3加载4，4加载5
-      let imgVal = index+1;
-      let img  = require('./pages/images/'+ imgVal+'.png');
+      let imgVal = index + 1;
+      let img = require('./pages/images/' + imgVal + '.png');
       this.state.pagesRef[index].children[0].style.backgroundImage = `url(${img})`;
       this.state.pagesRef[index]._loaded = true;
     }
@@ -169,6 +169,7 @@ class LoginPage extends Component {
       curIndex: index
     });
   }
+  
   renderDot = () => {
     let { alldata, curIndex } = this.state;
     return alldata.map((item, index) => {
@@ -177,11 +178,14 @@ class LoginPage extends Component {
       )
     })
   }
+
   loginClick = () => {
+    // 点击登录时屏幕不可滚动
     document.removeEventListener && document.removeEventListener("DOMMouseScroll", this.scrollFunc);
     window.onmousewheel = document.onmousewheel = null;
     this.setState({ loginModalShow: true })
   }
+
   closeLoginMoal = () => {
     if (document.addEventListener) {
       document.addEventListener('DOMMouseScroll', this.scrollFunc, false);
@@ -190,40 +194,58 @@ class LoginPage extends Component {
     window.onmousewheel = document.onmousewheel = this.scrollFunc;//IE/Opera/Chrome
     this.setState({ loginModalShow: false })
   }
-  lanCallBack = (lanCode) =>{
-    if(lanCode.toLowerCase() === 'zh_tw'){
+
+  lanCallBack = (lanCode) => {
+    if (lanCode.toLowerCase() === 'zh_tw') {
       // 友空间使用的是zh_HK
       this.registryUrl = this.registryUrl + `&locale=zh_HK`;
       this.loginUrl = this.loginUrl + `&locale=zh_HK`;
-    }else{
+    } else {
       this.registryUrl = this.registryUrl + `&locale=${lanCode}`;
       this.loginUrl = this.loginUrl + `&locale=${lanCode}`;
     }
-    this.setState({lanChangeFlag:++this.state.lanChangeFlag})
+    this.setState({ lanChangeFlag: ++this.state.lanChangeFlag })
   }
+
   render() {
     let { curIndex, loginModalShow, pagesRef } = this.state;
     let btnShow = (curIndex !== 0 && curIndex !== 6);
-    let sevenStyle = {
-      top: 0,
-      marginTop: this.sevenSpace + 'px'
-    }
+   
     return (
       <div className={HomePagePanel}>
         {/* <TopNav /> */}
-        <MainNav btnShow={btnShow} loginClick={this.loginClick} registryUrl={this.registryUrl} history={this.props.history} activeIndex={'1'} lanCallBack={this.lanCallBack}/>
+        <MainNav 
+          btnShow={btnShow} 
+          loginClick={this.loginClick} 
+          registryUrl={this.registryUrl} 
+          history={this.props.history} 
+          activeIndex={'1'} 
+          lanCallBack={this.lanCallBack} 
+        />
         <div className={rightDotMenu} style={curIndex == 6 ? { marginTop: `${this.sevenSpace + 15}px`, top: 0 } : null} >
           {!loginModalShow && this.renderDot()}
         </div>
         <div ref={(ref) => { this.amBody = ref }} className={`${HomeOnePage} amBody animation0`}>
           <div className="videoContainer"></div>
-          <PageFirst loginClick={this.loginClick} registryUrl={this.registryUrl} loginModalShow={loginModalShow} pagesRef={pagesRef}/>
-          <PageSecond loginModalShow={loginModalShow} pagesRef={pagesRef}/>
-          <PageThird loginModalShow={loginModalShow} pagesRef={pagesRef}/>
-          <PageFour loginModalShow={loginModalShow} pagesRef={pagesRef}/>
-          <PageFive loginModalShow={loginModalShow} pagesRef={pagesRef}/>
-          <PageSix loginModalShow={loginModalShow} pagesRef={pagesRef}/>
-          <PageSeven loginClick={this.loginClick} registryUrl={this.registryUrl} curIndex={curIndex} sevenSpace={this.sevenSpace} loginModalShow={loginModalShow} pagesRef={pagesRef}/>
+          <PageFirst 
+            loginClick={this.loginClick} 
+            registryUrl={this.registryUrl} 
+            loginModalShow={loginModalShow} 
+            pagesRef={pagesRef} 
+          />
+          <PageSecond loginModalShow={loginModalShow} pagesRef={pagesRef} />
+          <PageThird loginModalShow={loginModalShow} pagesRef={pagesRef} />
+          <PageFour loginModalShow={loginModalShow} pagesRef={pagesRef} />
+          <PageFive loginModalShow={loginModalShow} pagesRef={pagesRef} />
+          <PageSix loginModalShow={loginModalShow} pagesRef={pagesRef} />
+          <PageSeven 
+            loginClick={this.loginClick} 
+            registryUrl={this.registryUrl} 
+            curIndex={curIndex} 
+            sevenSpace={this.sevenSpace} 
+            loginModalShow={loginModalShow} 
+            pagesRef={pagesRef} 
+          />
         </div>
         {curIndex !== 6 && !loginModalShow && <div className="goNextArrow" onClick={this.moveNext}> </div>}
         {

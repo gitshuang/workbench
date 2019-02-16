@@ -3,17 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '@u';
+import Icon from 'pub-comp/icon';
 import { openService } from 'public/regMessageTypeHandler';
 
 import homeActions from 'store/root/home/actions';
 import rootActions from 'store/root/actions';
 
-import { ElementsWrapper } from 'components/scrollNav';
-import HomeFolderDialog from 'containers/homeFolderDialog';
-import WidgeList from 'containers/homeWidgetList';
-// import HeaderPage from './headerPage';
-import HomeMark from './mark';
-import { pageHome } from './style.css';
+import WidgeList from './homeWidgetList';
+import HomeMark from './homemark';
+import { wrap, content, manage } from './style.css';
 
 const { getWorkList, getApplicationList, clearApplicationTips } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
@@ -76,7 +74,6 @@ class Home extends Component {
       expiredNum: 0,//过期应用个数 
       applications: [],
     };
-    this.updateViewport = this.updateViewport.bind(this);
   }
 
   componentWillMount() {
@@ -84,28 +81,22 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.updateViewport, false);
     window.addEventListener('resize', this.updateViewport, false);
-    this.updateViewport();
     // 请求列表
     this.getWorkList();
+    // 默认加载第一屏
+    this.updateViewport();
     // 判断是否到期应用，包含多少个到期应用
     this.getApplicationList();
   }
 
-  componentDidUpdate() {
-    let total = 0;
-    this.props.workList.forEach((v) => {
-      total += v.children.length;
-    });
-    if (this.state.lazyLoadNum === total) {
-      window.removeEventListener('scroll', this.updateViewport);
-      window.removeEventListener('resize', this.updateViewport);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.workList !== this.props.workList.length) {
+      this.updateViewport();
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.updateViewport);
     window.removeEventListener('resize', this.updateViewport);
   }
 
@@ -129,7 +120,7 @@ class Home extends Component {
       requestSuccess();
     });
   }
-  
+
   getApplicationList = () => {
     // 请求应用   判断是否有过期应用功能
     const {
@@ -167,7 +158,6 @@ class Home extends Component {
   totalTime = () => {
     const localTime = localStorage.getItem('time');
     if (!localTime) return true;
-
     let day1 = new Date();
     day1.setDate(day1.getDate() - 1);
     const s1 = day1.format("yyyy-MM-dd");
@@ -204,12 +194,17 @@ class Home extends Component {
   }
 
   updateViewport = () => {
-    const self = this;
-    // if (this.refs.home.offsetHeight <= window.pageYOffset + window.innerHeight){}
-    self.setState({
+    const total = this.props.workList.reduce(function (pre, cur) {
+      return pre + cur.children.length;
+    }, 0);
+    if (this.state.lazyLoadNum === total) {
+      window.removeEventListener('resize', this.updateViewport);
+      return false;
+    }
+    this.setState({
       viewport: {
-        top: window.pageYOffset,
-        height: window.innerHeight,
+        top: this._container.scrollTop,
+        height: this._container.offsetHeight,
       },
     });
   }
@@ -250,41 +245,47 @@ class Home extends Component {
     history.replace('/manage');
   }
 
+  updataView = (h) => {
+    const { top, height } = this.state.viewport;
+    this.setState({
+      viewport: {
+        height: height,
+        top: top + h
+      }
+    })
+  }
+
   render() {
-    const {
-      workList,
-    } = this.props;
-    const list = [];
-    const conts = [];
-    workList.forEach((da, i) => {
-      const {
-        widgetId: id,
-        widgetName: name,
-      } = da;
+    const { workList, } = this.props;
+    const contents = [];
+    workList.forEach(da => {
       const props = {
-        key: `nav${id}`,
+        key: `nav${da.widgetId}`,
         data: da,
-        noTitle: !i,
       };
-      list.push({
-        label: name,
-        target: `nav${id}`,
-      });
-      conts.push(<WidgeList
-        {...props}
-        viewport={this.state.viewport}
-        loadOk={this.loadOk}
-        lastIndex={i === workList.length - 1 ? true : false}
-      />);
+      contents.push(
+        <WidgeList
+          {...props}
+          // updateViewport={this.updateViewport} 
+          viewport={this.state.viewport}
+          loadOk={this.loadOk}
+          updataView={this.updataView}
+        />
+      );
     });
     return (
-      <div ref='home' className={`${pageHome} home`}>
-        {/* <HeaderPage list={list} /> */}
-        <div style={{ background: "red", height: "20px", position: "absolute", top: '100px',zIndex: "111111" }} onClick={this.changeRouter}></div>
-        <ElementsWrapper items={list} offset={0}>
-          {conts}
-        </ElementsWrapper>
-        <HomeFolderDialog />
+      <div
+        ref={c => this._container = c}
+        className={`${wrap} home`}
+        onScroll={this.updateViewport}
+      >
+        <div className={manage} onClick={this.changeRouter}>
+          <Icon type="Set-up" />
+          <span></span>
+        </div>
+        <div className={content}>
+          {contents}
+        </div>
         {
           this.state.homemark ? <HomeMark
             linkTo={this.linkTo}

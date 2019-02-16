@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { mapStateToProps, getHost, getContext } from '@u';
 
 import { trigger } from 'public/componentTools';
-import { openService, dispatchMessageTypeHandler } from 'public/regMessageTypeHandler';
+import { openService, dispatchMessageTypeHandler, openWin } from 'public/regMessageTypeHandler';
 
 import rootActions from 'store/root/actions';
 import homepageActions from 'store/root/homepage/actions';
 
 import Button from 'pub-comp/button';
-// import Tabs, { TabPane } from 'bee/tabs';
-import Header from 'containers/header';
-import BreadcrumbContainer from 'components/breadcrumb';
-import IFrame from 'components/iframe_other';
+import IFrame from 'components/iframe';
 
-import { umContent, content, user, info, tabContent, active } from './style.css';
+import { content, user, info, tabContent, active } from './style.css';
 import bg from 'assets/image/homepage.png';
 import userinfo from 'assets/image/userinfo.png';
 
 const { requestStart, requestSuccess, requestError } = rootActions;
 const { getUserInfo } = homepageActions;
 
-@withRouter
 @connect(
   mapStateToProps(
     'userInfo',
     {
+      key: 'currItem',
+      value: (wrap, ownProps, root) => {
+        return root.wrap.currItem
+      }
+    },
+    {
       namespace: 'homepage',
     },
+
   ),
   {
     requestStart,
@@ -82,7 +84,7 @@ class HomePage extends Component {
       activetab: 'info',
       iframeUrl: '',
       style: {
-        height: window.innerHeight - 118, //118 80 + 37 + 1 1是为了留黑线
+        height: window.innerHeight - 128, //118 80 + 37 + 1 1是为了留黑线
       }
     };
 
@@ -107,7 +109,7 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
-    const { key, userId } = this.props.match.params;
+    const { key, userId } = this.props.currItem.data;
     this.setState({
       activetab: key,
       iframeUrl: this.urlPack(getHost(key)),
@@ -123,7 +125,8 @@ class HomePage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const newUserId = nextProps.match.params ? nextProps.match.params.userId : '';
+    if (nextProps.currItem.id !== "HomePage") return;
+    const newUserId = nextProps.currItem.data ? nextProps.currItem.data.userId : '';
     const {
       userInfo: {
         userId
@@ -138,7 +141,7 @@ class HomePage extends Component {
         this.storageArr.push(newUserId);
       }
     }
-    const key = nextProps.match.params ? nextProps.match.params.key : '';
+    const key = nextProps.currItem.data ? nextProps.currItem.data.key : '';
     const { activetab } = this.state;
     // 切换用户  让地址栏和tabs 保持一致
     if (activetab && key && key !== activetab) {
@@ -154,7 +157,7 @@ class HomePage extends Component {
   }
 
   resizeFrame = () => {
-    this.setState({ style: { height: window.innerHeight - 118 } })
+    this.setState({ style: { height: window.innerHeight - 128 } })
   }
 
   forbidBack = () => {
@@ -190,25 +193,6 @@ class HomePage extends Component {
     });
   }
 
-  goBack = () => {
-    const { history } = this.props;
-    // 设定pop为true
-    this.pop = true;
-    if (this.historys.length) {
-      // 将historys 去掉最后一个  并取出来
-      const lastHistory = this.historys.pop();
-      this.storageArr.pop();
-      history.replace(`/homepage/${lastHistory}/info`);
-    } else {
-      history.replace('');
-    }
-    // this.props.history.goBack();
-  }
-
-  goHome = () => {
-    this.props.history.replace('');
-  }
-
   // 点击tabs 分类
   TabsClick = (activetab) => {
     const { userId } = this.props.userInfo;
@@ -220,7 +204,15 @@ class HomePage extends Component {
       activetab,
       iframeUrl: this.urlPack(getHost(activetab)),
     }, () => {
-      this.props.history.push(`/homepage/${userId}/${activetab}`);
+      // this.props.history.push(`/homepage/${userId}/${activetab}`);
+      openWin({
+        id: "HomePage",
+        title: "",
+        data: {
+          userId,
+          key: activetab,
+        }
+      })
     });
   }
 
@@ -280,56 +272,41 @@ class HomePage extends Component {
     } = this.props;
     if (!userId) return null;
     return (
-      <div className='' style={{ overflow: 'auto' }}>
-        {/* <div className="header">
-          <Header onLeftClick={this.goHome} >
-            <div>
-              <span>{`${userName}s homepage`}</span>
-            </div>
-          </Header>
-          <div className="appBreadcrumb">
-            <BreadcrumbContainer data={this.brm} goback={this.goBack} />
+      <div className={`${content}`}>
+        <div className={user} id='user'>
+          <img src={bg} />
+          <div className={info}>
+            <dl className="clearfix">
+              <dt>
+                <img src={userAvator || userinfo} />
+              </dt>
+              <dd>
+                <h5>{userName}</h5>
+                <h6>{company}</h6>
+                {
+                  this.state.isSelf
+                    ?
+                    null
+                    :
+                    <div>
+                      <Button onClick={this.sendMessage}>Message</Button>
+                      <Button onClick={this.sendEmail}>Email</Button>
+                      <Button onClick={this.sendHonor}>Send Honor</Button>
+                    </div>
+                }
+              </dd>
+            </dl>
           </div>
-        </div> */}
-        <div className={`${umContent} content`}>
-          <div className={`${content}`}>
-            <div className={user} id='user'>
-              <img src={bg} />
-              <div className={info}>
-                <dl className="clearfix">
-                  <dt>
-                    <img src={userAvator || userinfo} />
-                  </dt>
-                  <dd>
-                    <h5>{userName}</h5>
-                    <h6>{company}</h6>
-                    {
-                      this.state.isSelf
-                        ?
-                        null
-                        :
-                        <div>
-                          <Button onClick={this.sendMessage}>Message</Button>
-                          <Button onClick={this.sendEmail}>Email</Button>
-                          <Button onClick={this.sendHonor}>Send Honor</Button>
-                        </div>
-                    }
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div className={`${tabContent}`}>
-              <ul>
-                {this.renderTabs()}
-              </ul>
-              <div style={style}>
-                {/* {this.renderIframe()} */}
-                < IFrame
-                  title={activetab}
-                  url={`${iframeUrl}userId=${userId}`}
-                />
-              </div>
-            </div>
+        </div>
+        <div className={`${tabContent}`}>
+          <ul>
+            {this.renderTabs()}
+          </ul>
+          <div style={Object.assign(style, { position: "relative" })}>
+            < IFrame
+              title={activetab}
+              url={`${iframeUrl}userId=${userId}`}
+            />
           </div>
         </div>
       </div>

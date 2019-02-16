@@ -1,0 +1,123 @@
+.win{
+    position: relative;
+}
+.avator{
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 50% 50%;
+}
+.avator img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50% 50%;
+}
+.avator :global(.iconfont){
+    font-size: 32px;
+}
+.info{
+    position: fixed;
+    top: 40px;
+    right: 12px;
+    width: 160px;
+    background: #ffffff;
+    z-index: 999;
+    box-shadow:0px 3px 6px 0px rgba(74,81,93,0.25);
+    border:1px solid rgba(78,89,104,0.19);
+} 
+.info span{
+    color: #555555;
+    font-size: 14px;
+    line-height: 32px;
+}
+.info dt {
+    padding: 18px 16px;
+    overflow: hidden;
+}
+.info dt div{
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+.info dt div :global(.iconfont){
+    font-size: 32px;
+}
+.info dt div img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50% 50%;
+}
+.info dt span{
+    float: left;
+    line-height: 32px;
+    width: 84px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.info dd{
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-top: 1px solid #D0D0D0;
+    border-bottom: 1px solid #D0D0D0;
+}
+.list{
+    height: 32px;
+    line-height: 32px;
+    padding: 0 16px;
+    cursor: pointer;
+}
+.list:hover{
+    background: #F3F3F3;
+}
+.list:hover span{
+    color: #E14C46;
+}
+.list:hover :global(.iconfont::before){
+    color: #E14C46;
+}
+
+.list :global(.iconfont){
+    float: left;
+    margin-top: 8px;
+    font-size: 16px;
+}
+.list span{
+    float: left;
+    margin-left: 12px;
+}
+.menu{
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+.info :global(.u-menu-submenu-vertical > .u-menu){
+    left: auto;
+    right: 100%;
+}
+.info :global(.u-menu-vertical > .u-menu-submenu > .u-menu-submenu-title){
+    padding: 0;
+    line-height: 32px;
+    height: 32px;
+}
+.info :global(.u-menu-submenu-selected){
+    background: none;
+}
+.info :global(.u-menu-submenu-active > .u-menu-submenu-title){
+    background: none;
+}
+.info :global(.u-menu-item){
+    cursor: pointer;
+}
+.info :global(.u-menu-item-active){
+    color: #E14C46;
+}
+.out{
+    padding: 16px 0;
+}
+
+.info :global(.u-menu-item-selected){
+    color: #E14C46;
+    background: #e4e4e4;
+}
