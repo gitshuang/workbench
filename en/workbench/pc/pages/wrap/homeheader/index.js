@@ -90,31 +90,24 @@ class Homeheader extends Component {
       },
     } = this.props;
     const tenantId = currentTeamConfig && currentTeamConfig.tenantId;
-    const dom = allowTenants && allowTenants.length
-      ?
-      <DropdownButton
-        getPopupContainer={() => document.getElementById('home_header')}
-        label={company}
-        tenantId={tenantId}
-        type="home"
-        dataItem={
-          allowTenants.map(({
-            tenantId: name,
-            tenantName: value,
-            team: type,
-          }) => ({
-            name,
-            value,
-            type,
-            fun: this.handleClickFn,
-          }))
-        }
-      />
-      :
-      <div className={create} onClick={this.enterOnclick}>
-        <Icon type="add" />
-         \ 
-      </div>
+    const dom = <DropdownButton
+      getPopupContainer={() => document.getElementById('home_header')}
+      label={company}
+      tenantId={tenantId}
+      type="home"
+      dataItem={
+        allowTenants.map(({
+          tenantId: name,
+          tenantName: value,
+          team: type,
+        }) => ({
+          name,
+          value,
+          type,
+          fun: this.handleClickFn,
+        }))
+      }
+    />
     return dom;
   }
 

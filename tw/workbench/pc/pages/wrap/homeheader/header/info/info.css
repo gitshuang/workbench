@@ -46,6 +46,7 @@
 .info dt div img{
     width: 32px;
     height: 32px;
+    border-radius: 50% 50%;
 }
 .info dt span{
     float: left;
@@ -114,4 +115,9 @@
 }
 .out{
     padding: 16px 0;
+}
+
+.info :global(.u-menu-item-selected){
+    color: #E14C46;
+    background: #e4e4e4;
 }

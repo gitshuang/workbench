@@ -47,12 +47,12 @@ class Homecontent extends Component {
   render() {
     const { activeCarrier, tabs } = this.props;
     return (
-      <div>
+      <div className="diwork">
         {
           tabs.map(item => {
             const dis = item.id === activeCarrier ? 'block' : 'none';
             return (
-              <div style={{ display: dis }} key={item.id}>
+              <div className="diwork" style={{ display: dis }} key={item.id}>
                 {this.renderActive(item)}
               </div>
             )

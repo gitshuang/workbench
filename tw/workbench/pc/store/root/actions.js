@@ -10,6 +10,8 @@ import {
   setCurrentNot,
   getAllEnableNot,
   getCurrentNot,
+  getDefaultDesktop,
+  setDefaultDesktop,
 } from './api';
 
 const {
@@ -36,6 +38,8 @@ const {
   CLOSE_DIALOG_NEW,
   OPEN_FRAME,
   CLOSE_FRAME,
+  GET_DEFAULT_DESKTOP,
+  SET_DEFAULT_DESKTOP,
 } = types;
 
 export default createActions(
@@ -49,6 +53,8 @@ export default createActions(
     [SET_CURRENT_NOT]: setCurrentNot,
     [GET_ALL_ENABLE_NOT]: getAllEnableNot,
     [GET_CURRENT_NOT]: getCurrentNot,
+    [GET_DEFAULT_DESKTOP]:getDefaultDesktop,
+    [SET_DEFAULT_DESKTOP]:setDefaultDesktop,
   },
   REQUEST_START,
   REQUEST_SUCCESS,

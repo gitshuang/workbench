@@ -36,7 +36,7 @@ const manageWidget = {
 	more: '更多',
 	save_latest_or_not: '是否保存最新修改？',
 	noDataGroup: '無內容的分組在首頁不可見',
-	notice: ''
+	notice: '拖動下方磁貼至右側所需位置'
 };
 
 export default {

@@ -1,21 +1,19 @@
 /* menus 样式 */
 .menus {
   display: flex;
-  height: 34px;
-  background: #FCFCFC;
-  /* padding-top: 3px; */
-  border-top: 1px solid #F1F1F1;
-  border-bottom: 1px solid #cccccc;
+  height: 32px;
+  background: #F3F3F3;
   transition: all 0.2s ease-in 0;
 }
 .menu{
   width: 48px;
   position: relative;
-  background: #E14C46;
   cursor: pointer;
+  text-align: center;
+  line-height: 32px;
 }
-.menu :global(.iconfont){
-  color: #fff;
+.menu img{
+  width: 20px;
 }
 .history{
   position: relative;
@@ -27,16 +25,20 @@
 .history :global(.ignoreClass-history){
   height: 32px;
 }
+.history :global(.iconfont:hover::before){
+  /* color: #E14C46; */
+}
 .home{
   position: relative;
   float: left;
-  padding-top: 6px;
+  padding-top: 5px;
   width: 68px;
   height: 100%;
   cursor: pointer;
+  border-radius: 3px 3px 0 0;
 }
 .home:hover{
-  background: #f3f3f3;
+  /* background: #ffffff; */
 }
 .home::before{
   content: '';
@@ -49,18 +51,14 @@
 }
 
 .home.active{
-  background: #fff;
-  border-top: 2px solid red;
-  padding-top: 4px;
-  border-left: 1px solid #F1F1F1;
-  border-right: 1px solid #F1F1F1;
+  background: #E14C46;
 }
 .home.active::before{
   content: '';
   width: 0;
 }
 .home.active :global(.iconfont::before){
-  color: #E14C46;
+  color: #ffffff;
 }
 .upward{
   position: relative;
@@ -79,7 +77,14 @@
   height: 15px;
   background: #CCCCCC;
 }
-
+.upward :global(.iconfont){
+  background: rgba(17, 17, 17, 0.7);
+  border-radius: 50% 50%;
+  color: #ffffff;
+}
+.upward :global(.iconfont:hover){
+  color: #ffffff;
+}
 .im{
   padding-top: 5px;
 }

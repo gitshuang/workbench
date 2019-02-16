@@ -10,15 +10,18 @@ import Menu, { Item as MenuItem, SubMenu } from 'bee/menus';
 import { info, list, out, menu } from './info.css';
 /*   actions   */
 import rootActions from 'store/root/actions';
-const { setCurrent } = rootActions;
+const { setCurrent, getDefaultDesktop, setDefaultDesktop, } = rootActions;
 
 
 @connect(
     mapStateToProps(
+        'content',
         'userInfo',
     ),
     {
-        setCurrent
+        setCurrent,
+        getDefaultDesktop,
+        setDefaultDesktop,
     }
 )
 @onClickOutside
@@ -41,10 +44,17 @@ class InfoContent extends Component {
                 },
             ],
             defaultValue: '',
+            desktop: [
+                { key: 'workbench', text: '' },
+                { key: 'portal', text: '' },
+            ],
+            locale: 'en_US',
         };
     }
 
     componentWillMount() {
+        const { getDefaultDesktop } = this.props;
+        getDefaultDesktop();
         this.getAllEnableFunc();
     }
     // 从ftl文件中获取语言列表
@@ -57,6 +67,7 @@ class InfoContent extends Component {
         this.setState({
             language,
             defaultValue,
+            locale
         });
     }
 
@@ -69,6 +80,7 @@ class InfoContent extends Component {
     onChangeLanguage = (e) => {
         const { setCurrent } = this.props;
         const value = e.key;
+        if (value === this.state.locale) return;
         setCurrent(value).then(({ error, payload }) => {
             if (error) {
                 return;
@@ -78,7 +90,11 @@ class InfoContent extends Component {
     }
     // 切换登录
     onChangeEntry = (e) => {
+        const { setDefaultDesktop, content } = this.props;
         console.log(e);
+        if (e.key !== content) {
+            setDefaultDesktop({ content: e.key });
+        }
     }
     // 打开账号管理
     openAccount = () => {
@@ -90,8 +106,8 @@ class InfoContent extends Component {
     }
 
     render() {
-        const { userInfo } = this.props;
-        const { menuDisplay, language, defaultValue } = this.state;
+        const { userInfo, content } = this.props;
+        const { language, defaultValue, desktop, locale } = this.state;
         const { userAvator, userName } = userInfo;
         return (
             <div className={info}>
@@ -115,53 +131,66 @@ class InfoContent extends Component {
                                 </div>
                             </li>
                             <li>
-                                <Menu className={menu} onClick={this.onChangeLanguage} >
-                                    <SubMenu 
-                                        key="language" 
+                                <Menu className={menu} onClick={this.onChangeLanguage} selectedKeys={[locale]}>
+                                    <SubMenu
+                                        key="language"
                                         title={
                                             <div className={list}>
-                                                    <Icon type="language" />
+                                                <Icon type="language" />
                                                 <span>{defaultValue}</span>
                                             </div>
                                         }
                                     >
                                         {
                                             language.map(item => {
-                                                return <MenuItem key={item.langCode}>{item.dislpayName}</MenuItem>
+                                                return (
+                                                    <MenuItem key={item.langCode}>
+                                                        {item.dislpayName}
+                                                    </MenuItem>
+                                                )
                                             })
                                         }
                                     </SubMenu>
                                 </Menu>
                             </li>
                             <li>
-                                <Menu className={menu} onClick={this.onChangeEntry} >
-                                    <SubMenu 
-                                        key="login" 
+                                <Menu
+                                    className={menu}
+                                    onClick={this.onChangeEntry}
+                                    selectedKeys={[content]}
+                                >
+                                    <SubMenu
+                                        key="login"
                                         title={
                                             <div className={list}>
-                                                    <Icon type="language" />
+                                                <Icon type="computer" />
                                                 <span></span>
                                             </div>
                                         }
                                     >
-                                        <MenuItem key="diwork"></MenuItem>
-                                        <MenuItem key="nec"></MenuItem>
+                                        {desktop.map(item => {
+                                            return (
+                                                <MenuItem key={item.key}>
+                                                    {item.text}
+                                                </MenuItem>
+                                            )
+                                        })}
                                     </SubMenu>
                                 </Menu>
                             </li>
                         </ul>
                     </dd>
                 </dl>
-              <div className={out}>
-                  <div className={list} onClick={() => {logout()}}>
+                <div className={out}>
+                    <div className={list} onClick={() => { logout() }}>
                         <Icon type="cancellation" />
                         <span></span>
                     </div>
                 </div>
-            </div>  
-        )  
+            </div>
+        )
 
     }
 }
 export default InfoContent;
-                                                
+

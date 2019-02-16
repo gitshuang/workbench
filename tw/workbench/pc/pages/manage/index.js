@@ -7,8 +7,8 @@ import { mapStateToProps } from '@u';
 import rootActions from 'store/root/actions';
 import manageActions from 'store/root/manage/actions';
 
-import CreateManageModule from './manageWidgetNew';
-//import CreateManageModule from 'pub-comp/manageWidgetNew';
+//import CreateManageModule from './manageWidgetNew';
+import CreateManageModule from 'pub-comp/manageWidgetNew';
 
 import { win } from './style.css';
 import LanguagesJSON from 'yutils/languages';

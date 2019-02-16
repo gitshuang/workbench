@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import PropTypes from 'prop-types';
+import Icon from 'pub-comp/icon';
 
 import onClickOutside from 'react-onclickoutside';
 import { openWin } from 'public/regMessageTypeHandler';
@@ -52,22 +53,19 @@ class HistoryInner extends Component {
 
   componentDidMount() {
     const {
-      requestStart,
-      requestSuccess,
       requestError,
       getHistoryList,
     } = this.props;
-    requestStart();
     getHistoryList().then(({ error, payload }) => {
       if (error) {
         requestError(payload);
         return;
       }
-      requestSuccess();
     });
   }
-  handleClickOutside() {
-    this.props.openHistory()
+  handleClickOutside(e) {
+    e.stopPropagation();
+    this.props.closeHistory()
   }
   openHistoryItem = (businessCode,extendParams) => {
     dispatchMessageTypeHandler({
@@ -77,14 +75,14 @@ class HistoryInner extends Component {
         data: extendParams
       }
     });
-    this.props.openHistory();
+    this.props.closeHistory();
   }
   openAllHistory = () => {
     openWin({
       id: 'History',
       title: '',
     });
-    this.props.openHistory()
+    this.props.closeHistory()
   }
 
   render() {
@@ -98,7 +96,12 @@ class HistoryInner extends Component {
         <ul className="inner-list">
           {
             historyList.filter((item,index)=>index<10).map(item => {
-              return <li className="history-item" onClick={e => this.openHistoryItem(item.businessCode,item.extendParams)}>{item.title}</li>
+              return (
+                <li className="history-item" onClick={e => this.openHistoryItem(item.businessCode,item.extendParams)}>
+                  <Icon type="blank-page" />
+                  {item.title}
+                </li>
+              )
             })
           }
         </ul>

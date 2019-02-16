@@ -130,7 +130,7 @@ class DropdownButton extends Component {
       <Menu className={menuStyle} >
         <MenuItem className={menuItem} >
           <div className={`${itemUl} open_item`}>{item}</div>
-          {
+          {/* {
             lastIem
               ? null
               : (
@@ -153,7 +153,7 @@ class DropdownButton extends Component {
                   </div>
                 </div>
               )
-          }
+          } */}
         </MenuItem>
       </Menu>
     );

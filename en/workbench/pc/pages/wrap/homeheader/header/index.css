@@ -1,5 +1,6 @@
 .lebraNavbar{
   height: 40px;
+  border-bottom: 1px solid #F1F1F1;
 }
 
 .lebraNavbar :global(.lebra-navbar-left-icon){
@@ -65,14 +66,3 @@
 :global(.lebra-navbar-right) :global(.active) :global(.iconfont){
   color: #e14c46;
 }
-
-:global(.lebra-navbar-right) :global(.CircleDot){
-  position: absolute;
-  width:6px;
-  height: 6px;
-  background: #e14c46;
-  border-radius: 50% 50%;
-  top:5px;
-  right:5px;
-}
-

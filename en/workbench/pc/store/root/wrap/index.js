@@ -30,7 +30,7 @@ const defaultState = {
     openStatus: false,
     portalUrl: ''
   },
-  retract: true,
+  retract: true,  // header合并一个
   tabs: [],     // 多页签存储
   currItem: {}, // 当前页签的内容
   activeCarrier: 'home',  // 当前页签id

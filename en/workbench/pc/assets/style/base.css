@@ -20,7 +20,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
-  /* background: linear-gradient(to bottom,#A8ABB0, #D8DADC); */
   font-size: 14px;
   color: #555555;
 }
@@ -29,7 +28,7 @@ body {
   width: 100%;
   height: 100%;
   min-height: 100%;
-  /* background: linear-gradient(180deg,#a8abb0,#d8dadc); */
+  font-size: 14px;
 }
 .diwork{
   min-height: 100%;
@@ -49,25 +48,21 @@ body {
   left: 0;
   width: 100%;
   z-index: 99;
-  background:url("../image/wgt/navBar_bg.png") no-repeat;
   background-position: right;
   background-color:#ffffff;
   transition: all 0.2s ease-in 0s;
-  /* height: 89px; */
-  /* border-bottom: 1px solid red; */
 }
 
 .content{
   overflow-x: auto;
   position: fixed;
-  top: 74px;
+  top: 72px;
   left: 0;
   right: 0;
   bottom: 0px;
   z-index: 1;
-  background: #ffffff;
+  background: #A8ABB0;
   transition: all 0.2s ease-in 0s;
-  /* background: linear-gradient(to bottom,#A8ABB0, #D8DADC); */
 }
 
 .home{
@@ -78,13 +73,27 @@ body {
   bottom: 0;
   z-index: 2;
   overflow: auto;
+  background: #A8ABB0;
   /* padding-top: 90px; */
-  background: linear-gradient(180deg,#a8abb0,#d8dadc);
+  /* background: linear-gradient(180deg,#a8abb0,#d8dadc); */
   /* background-image: url('../image/homeBg.png');
   background-repeat: repeat-x;
   background-position: top center; */
 }
 
+.diworkcontent{
+  width: 100%;
+  height: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+}
+
+.contentbg{
+  width: 100%;
+  min-height: 100%;
+  background: #ffffff;
+}
 
 .appBreadcrumb{
   padding-left: 23px;

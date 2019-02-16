@@ -34,7 +34,7 @@ class MenuBar extends Component {
             {
               menuShow ? (
                 <div className={sideBarPanel}>
-                  <span className={sideBarTitle}></span>
+                  {/* <span className={sideBarTitle}></span> */}
                   <MenuBarInner outsideClickIgnoreClass={'ignoreClass-menu'} openMenu={openMenu} />
                 </div>
               ) : null

@@ -36,7 +36,7 @@ const manageWidget = {
 	more: 'More',
 	save_latest_or_not: 'Save the latest modification?',
 	noDataGroup: 'The groups without content are invisible on homepage',
-	notice: ''
+	notice: 'Drag the widget rightwards'
 };
 
 export default {

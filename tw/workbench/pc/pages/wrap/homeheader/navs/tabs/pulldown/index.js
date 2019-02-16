@@ -7,7 +7,7 @@ import Menu from 'bee/menus';
 import Icon from 'pub-comp/icon';
 import { openMess } from 'pub-comp/notification';
 import Button from 'bee/button';
-import { pulldown, dropdown, close, } from './style.css';
+import { pulldown, dropdown, pin, close, blackpage, error } from './style.css';
 
 import rootActions from 'store/root/actions';
 import wrapActions from 'store/root/wrap/actions';
@@ -94,7 +94,7 @@ class Pulldown extends Component {
                 onClick={this.onSelect}
                 className={dropdown}
             >
-                <Item key="pin" disabled={flag} >{text}</Item>
+                <Item key="pin" className={pin} disabled={flag} >{text}</Item>
                 <Item key="close" className={close}></Item>
                 {
                     items.length ? <Divider /> : null
@@ -104,8 +104,9 @@ class Pulldown extends Component {
                     items.length && items.map((item) => {
                         return (
                             <Item key={item.id} attribute={item}>
+                                <Icon type="blank-page" className={blackpage} />
                                 {item.title}
-                                <Icon type="error3" onClick={(e) => this.handleClick(e, item)} />
+                                <Icon type="error3" className={error} onClick={(e) => this.handleClick(e, item)} />
                             </Item>
                         )
                     })
