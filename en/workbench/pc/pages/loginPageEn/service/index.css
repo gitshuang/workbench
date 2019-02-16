@@ -1,0 +1,262 @@
+/* :global(.rootSpec2){
+    min-height: 0!important;
+}
+:global(.bodySpec2){
+   height: 0!important;
+   min-height: 0!important;
+
+} */
+/*注意还有amPage amBg*/
+.ServicePanelEn{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+    /* overflow: auto; */
+    min-width: 1200px;
+    /* padding-top: 66px; */
+    position: relative;
+
+}
+.ServicePanelEn :global(.serviceOne){
+    background:url('./images/banner.png') no-repeat ;
+    background-position: 0 0;
+    width: 100%;
+    height: 378px;
+    background-size: cover;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    color:rgba(255,255,255,1);
+}
+.ServicePanelEn :global(.serviceOne .mainContent){
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 100px\9;
+
+}
+.ServicePanelEn :global(.serviceOne .title){
+    display: block;
+    font-size: 28px;
+    color: rgba(255,255,255,1);
+    line-height: 40px;
+    padding-bottom: 8px;
+}
+.ServicePanelEn :global(.serviceOne .desc){
+    display: block;
+    font-size: 16px;
+    color: rgba(255,255,255,1);
+    line-height: 22px;
+    padding-bottom: 36px;
+
+}
+.ServicePanelEn :global(.serviceOne .serviceBtn){
+    width:160px;
+    height:50px;
+    background:#eb1d15;
+    font-size:16px;
+    line-height:50px;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+}
+/*第二部分*/
+.ServicePanelEn :global(.serviceTwo){
+    background: #fff;
+    padding:98px 0;
+}
+.ServicePanelEn :global(.serviceTwo .mainContent) {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    
+}
+.ServicePanelEn :global(.serviceTwo .mainContent:before) {
+  content:'';
+  position:absolute;
+  width: 100%;
+  height: 1px;
+  background: rgba(216,216,216,1);;
+  top:50%;
+  left: 0;
+}
+.ServicePanelEn :global(.serviceTwo .mainContent:after) {
+    content:'';
+    position:absolute;
+    width: 1px;
+    height: 100%;
+    background: rgba(216,216,216,1);;
+    top:0;
+    left: 50%;
+  }
+.ServicePanelEn :global(.serviceTwo .twoItem){
+    width: 600px;
+    background: #fff;
+    height: 100px;
+    padding: 20px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.ServicePanelEn :global(.serviceTwo .leftTop),
+.ServicePanelEn :global(.serviceTwo .rightTop){
+    padding-top:0px;
+}
+.ServicePanelEn :global(.serviceTwo .leftBottom),
+.ServicePanelEn :global(.serviceTwo .rightBottom){
+    padding-bottom:0px;
+}
+.ServicePanelEn :global(.serviceTwo .rightTop),
+.ServicePanelEn :global(.serviceTwo .rightBottom){
+    padding-left: 10%;
+}
+ .ServicePanelEn :global(.serviceTwo .twoItem .icon ),
+ .ServicePanelEn :global(.serviceTwo .twoItem .con ){
+     float: left;
+ }
+ .ServicePanelEn :global(.serviceTwo .twoItem .con){
+     padding-left:20px;
+     width: 80%;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+ }
+ .ServicePanelEn :global(.serviceTwo .con .title ){
+    display: block;
+    font-size: 20px;
+    color: rgba(51,51,51,1);
+    line-height: 28px;
+    padding-bottom:6px;
+}
+.ServicePanelEn :global(.serviceTwo .con .subcon) {
+    display: block;
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+}
+/*第三部分*/
+.serviceThree{
+    background:rgba(243,243,243,1);
+    padding:58px 0 46px 0;
+}
+.serviceThree :global(.title){
+    display: inline-block;
+    font-size: 28px;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    color: rgba(51,51,51,1);
+    line-height: 40px;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 30px;
+}
+.serviceThree :global(.processCon){
+    width: 80%;
+    margin-left: 10%;
+}
+.serviceThree :global(.processCon:after){
+    content: '';
+    display: block;
+    clear: both;
+}
+.serviceThree :global(.process) {
+    box-sizing: border-box;
+    width: 33%;
+    text-align: center;
+    padding: 0 30px;
+    position: relative;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    float: left;
+    z-index:1;
+}
+
+.serviceThree :global(.process:not(:last-child):after){
+    content:'';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    top:24px;
+    left: 50%;
+    z-index:-1;
+}
+.serviceThree :global(.process span),
+.serviceThree :global(.process .processDot) {
+    display: block;
+}
+.serviceThree :global(.processDot) {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+}
+.serviceThree :global(.dotNum) {
+    font-size: 18px;
+    color: rgba(255,255,255,1);
+    line-height: 48px;
+    margin-top: -48px;
+}
+.tipTitle {
+    font-size: 18px;
+    color: rgba(51,51,51,1);
+    line-height: 25px;
+    padding: 27px 0 10px 0;
+}
+.tipCon {
+    font-size: 14px;
+    color: rgba(153,153,153,1);
+    line-height: 20px;
+    display: inline-block;
+    width: 60%;
+    margin: 0 auto;
+}
+
+/* .ServicePanelEn :global(.mainFooter){
+   overflow: hidden;
+}
+.ServicePanelEn :global(.mainFooter .footerImg){
+    width: 100%;
+    height: auto;
+    margin-bottom:-5px;
+} */
+.ServicePanelEn :global(.mainFooter.mainFooterFake){
+    height: 360px;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(#535353 85%, #3e3e3e 15%);
+ }
+ .ServicePanelEn :global(.mainFooter.mainFooterFake .footerImg){
+    width: 1200px;
+    height: 360px;
+    margin-bottom: -5px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -600px;
+ }
+/*第四个页面*/
+.serviceFour{
+    background: #fff;
+    padding: 90px 0 80px 0;
+}
+.serviceFour :global(.title){
+    font-size: 28px;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    color: rgba(51,51,51,1);
+    line-height: 40px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 30px;
+}
+.serviceFour :global(.applyService){
+    width: 570px;
+    margin: 0 auto;
+    transform: translateX(-70px);
+}
+.serviceFour :global(.applyService:after){
+   content:'';
+   display: inline-block;
+   clear: both;
+}
+.ServicePanelEn  :global(.u-form-control:focus){
+    border:1px solid #666
+}

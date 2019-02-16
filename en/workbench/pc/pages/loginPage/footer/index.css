@@ -1,0 +1,169 @@
+.FooterConPanel{
+    width: 100%;
+    /* height:306px; */
+    background:rgba(62,62,62,1);
+    color:#fff;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    padding: 38px 0 0 0; 
+    /* 因为左侧要留出来120px的二维码图片 */
+}
+.FooterConPanel :global( .footerTop) {
+    width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 34px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.FooterConPanel :global(.topSection) {
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    
+}
+
+.FooterConPanel :global(.topSection .title) {
+    font-size: 20px;
+    line-height: 28px;
+    padding-bottom: 36px;
+    display: block;
+}
+/*第一个部分修改*/
+:global(.allIcons){
+    display: block;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    color:#fff;
+}
+:global(.allIcons .iconItem){
+    border: 1px solid rgba(255,255,255,0.2);
+    background:rgba(62,62,62,1);
+    display: inline-block;
+    margin-right: 20px;
+    box-sizing: border-box;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    position: relative;
+}
+:global(.allIcons .iconItem .iconInner){
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    box-sizing: border-box;
+    margin-top: 24px;
+    margin-left: 36px;
+    filter: opacity(0.8);
+    background-image: url(./icon.png);
+    transition:all 0.3s;
+}
+:global(.allIcons .iconItem:hover .iconInner){
+    filter: opacity(1);
+}
+
+:global(.iconOne){
+    background-position: 507px 213px;
+}
+:global(.iconTwo){
+    background-position: 367px 213px;
+}
+:global(.iconThree){
+    background-position: 228px 213px;
+}
+:global(.iconFour){
+    background-position: 88px 212px;
+}
+/* 特殊的二维码 */
+:global(.allIcons .iconItem.codeItem){
+    position: absolute;
+    left: 0;
+    top: 120px;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+/* 动画 */
+:global(.iconItem.codeItem.fadeIn){
+    transform: translate(0,-100%);
+}
+:global(.allIcons .iconItem .iconInner2 ){
+    display: inline-block;
+    width: 74px;
+    height: 74px;
+    box-sizing: border-box;
+    margin-top: 7px;
+    margin-left: 24px;
+    background-size: contain;
+    background-image: url(./mdowncode.png);
+    
+}
+/* 小的二维码 */
+:global(.iconItem .lgCode){
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background-image: url('./lg_code1.png');
+    background-position: center;
+    background-size:contain;
+
+}
+:global(.allIcons .diff){
+    float: left;
+}
+/*下面的描述*/
+:global(.iconItem .iconDesc){
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    padding-top: 10px;
+}
+
+/*第二部分文字*/
+:global(.topSection.toptwo){
+    vertical-align: top;
+    padding-left: 40px;
+}
+:global(.topSection.toptwo .topTwoItem){
+    display: inline-block;
+    vertical-align: top;
+
+}
+:global(.topSection.toptwo .topTwoItem:first-child){
+    padding-right: 91px;
+}
+:global(.topTwoItem span),
+:global(.topTwoItem a){
+display: block;
+}
+:global(.topTwoItem .con){
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    color: rgba(204,204,204,1);
+    line-height: 30px;
+}
+/*底层*/
+.FooterBottom{
+    width: 1200px;
+    margin: 0 auto;  
+}
+.FooterBottom span{
+    display: inline-block;
+    width: 50%;
+    line-height: 48px;
+    font-size:14px;
+    color:rgba(204,204,204,1);
+}
+.FooterBottom :global(span.police){
+    text-align: left;
+}
+.FooterBottom :global(span.company){
+    display: inline-block;
+    /* width: 100%; */
+    line-height: 48px;
+    font-size:14px;
+    color:rgba(204,204,204,1);
+    text-align: center;
+
+}

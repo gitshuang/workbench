@@ -1,0 +1,130 @@
+.umContent{
+	padding: 0 120px;
+	padding-top: 10px;
+	min-width: 1366px;
+}
+.content{
+	width: 100%;
+	background: #ffffff;
+}
+.user{
+	position: relative;
+}
+.user img{
+	display: block;
+	width: 100%;
+}
+.info{
+	position: absolute;
+	left: 50%;
+	top: 24%;
+	transform: translate(-50%);
+	margin-left: -36px;
+}
+.info dt{
+	float: left;
+	width: 64px;
+	height: 64px;
+	border-radius: 50% 50%;
+	margin-right: 18px;
+}
+.info dt img{
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 50% 50%;
+}
+.info dd{
+	float: left;
+}
+.info dd h5{
+	font-size:27px;
+	font-family:MicrosoftYaHei;
+	color:rgba(255,255,255,1);
+	/* line-height: 36px; */
+	line-height: 36px;
+	/* margin-bottom: 5%; */
+}
+.info dd h6{
+	font-size:14px;
+	color:#fff;
+	line-height: 28px;
+	margin-bottom: 5%;
+}
+.info button{
+  padding: 0 10px;
+	height:34px;
+	min-width: 100px;
+  line-height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  font-size:14px;
+  font-family:PingFangSC-Regular;
+  border-radius: 3px;
+	margin-right: 10px;
+	margin-left: 0;
+  background: transparent;
+  color: #ffffff;
+}
+.info button:first-child{
+	/* margin-right: 10px;  */
+}
+.info button:hover{
+	color: #ffffff;
+  background: rgba(255,255,255,0.1);
+	border: 1px solid rgba(255,255,255,0.5);
+}
+
+.tabContent{
+	width: 100%;
+}
+
+.tabContent ul{
+	width: 100%;
+	height: 37px;
+	overflow: hidden;
+	display: flex;
+	border-bottom: 1px solid #d3d3d3;
+	justify-content: center;
+}
+
+.tabContent ul li{
+	float: left;
+	padding: 8px 10px;
+	line-height: 20px;
+  margin: 0 40px;
+	font-size: 14px;
+	position: relative;
+	cursor: pointer;
+	transition: all 0.4s;
+}
+.tabContent ul li::after{
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 5px;
+	background: #ffffff;
+	bottom: 0;
+	left: 50%;
+	margin-left: -7px;
+	border-radius: 3px;
+}
+.tabContent ul li:hover{
+	color: #E14C46;
+}
+.tabContent ul li.active{
+	color: #E14C46;
+}
+.tabContent ul li.active::after{
+	background: #E14C46;
+}
+
+/*定义滚动条宽高*/
+.tabContent::-webkit-scrollbar{
+  width: 8px;
+}
+/*定义滑块，内阴影及圆角*/
+.tabContent::-webkit-scrollbar-thumb{
+  border-radius: 8px;
+  background-color: #757575;
+}
+

@@ -1,0 +1,59 @@
+/* .modal {
+
+}
+.modal :global(.u-modal-content) {
+  padding: 5px;
+  border-radius: 3px;
+}
+.modal :global(.u-modal-content .u-modal-header){
+  padding-right: 14px;
+}
+.modal :global(.u-modal-header .u-close){
+  font-size: 24px;
+  margin-top:-4px;
+  color: #757F8C;
+}
+.modal :global(.u-modal-title) {
+  font-size: 19px;
+  font-family: MicrosoftYaHei;
+  color: rgba(71, 77, 84, 1);
+  line-height: 28px;
+}
+
+.modal :global(.u-modal-body) {
+  padding: 0 15px;
+  padding-top: 16px;
+}
+
+
+.modal :global(.u-button) {
+  line-height: 30px;
+  padding: 0;
+  width: 80px;
+  text-align: center;
+  height: 32px;
+  font-size: 14px;
+}
+
+.cancelButton {
+  background: none;
+  border: none;
+  outline: none;
+  line-height: 32px;
+  width: 80px;
+  text-align: center;
+  font-size: 14px;
+  font-family: MicrosoftYaHei;
+  color: rgba(71, 77, 84, 1);
+}
+ */
+ :global(.team_upgrade_modal_dailog .u-modal-dialog){
+  width: 400px !important;
+}
+.content{
+  
+}
+
+.content p{
+  line-height: 34px;
+}

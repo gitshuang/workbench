@@ -1,0 +1,33 @@
+
+.pageEnterprise{
+  margin: 10px 120px 0;
+  background: #fff;
+  min-width: 800px;
+  overflow: hidden;
+}
+
+.enterTitle{
+  font-size:21px;
+  color: #111111;
+  font-weight: 600;
+  line-height:27px; 
+  width: 360px;
+  margin: 0 auto;
+  padding-top: 30px;
+  margin-bottom: 10px;
+}
+
+.hr{
+  background: rgba(13,20,36,0.1);
+  height: 1px;
+  margin-left: 30px;
+  border-top: none;
+  margin-bottom: 25px;
+  width: 90%;
+}
+
+.enterCont{
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}

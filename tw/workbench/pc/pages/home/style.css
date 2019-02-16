@@ -1,0 +1,31 @@
+.wrap{
+  
+}
+
+.content{
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 56px;
+  padding-right: 76px;
+}
+
+/* XL尺寸 */
+@media screen and (device-width: 1441px){
+  .content{
+      
+  }
+}
+/* L尺寸 */
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+  .content{
+      
+  }
+}
+/* M尺寸 */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  .content{
+      padding-left: 52px;
+      padding-right: 48px;
+  }
+}
+
