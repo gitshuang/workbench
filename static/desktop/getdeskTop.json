@@ -54,11 +54,7 @@
                         "children": [],
                         "jsurl": null,
                         "background": null,
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":0,
-                        "gridy":0
+                        "size": 1
                     },
                     {
                         "createTime": 1534917232000,
@@ -87,11 +83,7 @@
                         "children": [],
                         "jsurl": null,
                         "background": null,
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":1,
-                        "gridy":0
+                        "size": 1
                     },
                     {
                         "createTime": 1534917232000,
@@ -120,11 +112,7 @@
                         "children": [],
                         "jsurl": "https://cdn.yonyoucloud.com/diwork/widget/bd2dc115-6014-4b74-9d1b-f38c3b46ba63.js",
                         "background": "",
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":2,
-                        "gridy":0
+                        "size": 1
                     },
                     {
                         "createTime": 1534917232000,
@@ -153,11 +141,7 @@
                         "children": [],
                         "jsurl": null,
                         "background": null,
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":3,
-                        "gridy":0
+                        "size": 1
                     },
                     {
                         "createTime": 1534917218000,
@@ -186,11 +170,7 @@
                         "children": [],
                         "jsurl": "http://iuap-market-test.oss-cn-beijing.aliyuncs.com/fileupload/f2e2431d-7651-44c4-8008-59abfa237a71.js",
                         "background": null,
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":4,
-                        "gridy":0
+                        "size": 1
                     },
                     {
                         "createTime": 1534917232000,
@@ -219,11 +199,7 @@
                         "children": [],
                         "jsurl": "https://cdn.yonyoucloud.com/diwork/widget/655c9b66-2c57-4e99-bef5-b3b95ed1426a.js",
                         "background": "",
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":5,
-                        "gridy":0
+                        "size": 1
                     }
                 ],
                 "jsurl": null,
@@ -282,11 +258,7 @@
                         "children": [],
                         "jsurl": "",
                         "background": "",
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":0,
-                        "gridy":0
+                        "size": 1
                     },
                     {
                         "createTime": 1534917232000,
@@ -315,11 +287,7 @@
                         "children": [],
                         "jsurl": "https://cdn.yonyoucloud.com/diwork/widget/655c9b66-2c57-4e99-bef5-b3b95ed1426a.js",
                         "background": "",
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":1,
-                        "gridy":0
+                        "size": 1
                     },
                     {
                         "createTime": 1534917232000,
@@ -348,11 +316,7 @@
                         "children": [],
                         "jsurl": "",
                         "background": "",
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":2,
-                        "gridy":0
+                        "size": 1
                     },
                     {
                         "createTime": 1534917232000,
@@ -381,11 +345,7 @@
                         "children": [],
                         "jsurl": null,
                         "background": null,
-                        "size": 1,
-                        "width":1,
-                        "height":1,
-                        "gridx":3,
-                        "gridy":0
+                        "size": 1
                     }
                     
                 ],
@@ -445,11 +405,7 @@
                         "children": [],
                         "jsurl": "https://cdn.yonyoucloud.com/diwork/widget/810aad10-ff7e-4ccf-82f6-134b9c1ff861.js",
                         "background": "",
-                        "size": 2,
-                        "width":1,
-                        "height":1,
-                        "gridx":0,
-                        "gridy":0
+                        "size": 2
                     }
                  
                 ],
