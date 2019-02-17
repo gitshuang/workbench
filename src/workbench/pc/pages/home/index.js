@@ -6,6 +6,7 @@ import { mapStateToProps } from "@u";
 import Icon from "pub-comp/icon";
 import { openService } from "public/regMessageTypeHandler";
 import _ from "lodash";
+import { scrollSpy, Element } from "react-scroll";
 
 import homeActions from "store/root/home/actions";
 import rootActions from "store/root/actions";
@@ -16,6 +17,8 @@ import { wrap, content, manage } from "./style.css";
 
 const { getWorkList, getApplicationList, clearApplicationTips } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
+import {calColCount} from '../manage/utils';
+import {compactLayoutHorizontal} from '../manage/compact'
 
 let resizeWaiter = false;
 
@@ -103,7 +106,7 @@ class Home extends Component {
 					layout.margin
 				);
 				_.forEach(groups, g => {
-					let compactedLayout = compactLayoutHorizontal(g.apps, col);
+					let compactedLayout = compactLayoutHorizontal(g.children, col);
 					// const firstCard = compactedLayout[0];
 					// compactedLayout = compactLayout(compactedLayout, firstCard);
 					g.apps = compactedLayout;
@@ -135,6 +138,8 @@ class Home extends Component {
 
 	componentWillUnmount() {
 		window.removeEventListener("resize", this.updateViewport);
+		window.removeEventListener("resize", this.handleHomeLoad);
+
 	}
 
 	getWorkList = () => {
@@ -178,7 +183,9 @@ class Home extends Component {
 					}
 				});
 			});
+			this.setState({ groups: payload.workList });
 			requestSuccess();
+			this.handleHomeLoad()
 		});
 	};
 
