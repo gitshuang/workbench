@@ -1,6 +1,6 @@
 .widgetItem {
-  position: relative;
-  float: left;
+  position: absolute;
+  /* float: left; */
   /*margin-top: 30px;*/
   margin-right: 10px;
   /* margin-top: 10px; */
@@ -77,7 +77,7 @@
 }
 
 .defaultArea{
-  position: relative;
+  /* position: relative; */
 }
 .defaultArea .iconImg{
   position: absolute;
