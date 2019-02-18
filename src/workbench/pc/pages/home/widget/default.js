@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { mapStateToProps } from '@u';
+
 
 import * as utilService from '../../manage/utils';
 
@@ -21,44 +20,9 @@ import {
 import Loading from 'bee/loading';
 
 
-const widgetStyle = [
-  // 小
-  {
-    width: 176,
-  },
-  // 中
-  {
-    width: 360,
-  },
-  // 大
-  {
-    width: 360,
-    height: 360,
-  },
-  {
-    width: 544,
-  },
-  {
-    width: 544,
-    height: 360,
-  },
-  {
-    width: 728,
-  },
-  {
-    width: 728,
-    height: 360,
-  },
-];
 
-@connect(
-	mapStateToProps(
-    "layout",
-		{
-			namespace: 'manage',
-    },
-	)
-)
+
+
 class WidgetItem extends Component {
   static propTypes = {
     data: PropTypes.shape({
@@ -141,34 +105,17 @@ class WidgetItem extends Component {
         height,
       },
       clickHandler,
+      style
     } = this.props;
 
-    const style = {
-      ...widgetStyle[size - 1],
-    };
-    if (background) {
-      style.backgroundImage = `url(${background})`;
-    }
-
-
-        
-		const { margin, rowHeight, calWidth } = this.props.layout;
-		
-		const { x, y } = utilService.calGridItemPosition(gridx, gridy, margin, rowHeight, calWidth);
-		
-		const { wPx, hPx } = utilService.calWHtoPx(width, height, margin, rowHeight, calWidth);
-
+   
     const defaultImgArray = [default1Icon, default2Icon, default3Icon, default4Icon];
     return (
       <li ref="default_widget" className={`${widgetItem} ${defaultArea}`}
         onClick={clickHandler}
         onKeyDown={clickHandler}
         role="presentation"
-        style={{
-          width: wPx,
-          height: hPx,
-          transform: `translate(${x}px, ${y}px)`
-        }}
+        style={style}
       >
         {this.state.shouldLoad?(
           <div>

@@ -17,7 +17,7 @@ import { wrap, content, manage } from "./style.css";
 
 const { getWorkList, getApplicationList, clearApplicationTips } = homeActions;
 const { requestStart, requestSuccess, requestError } = rootActions;
-import {calColCount} from '../manage/utils';
+import {calColCount,getContainerMaxHeight } from '../manage/utils';
 import {compactLayoutHorizontal} from '../manage/compact'
 
 let resizeWaiter = false;
@@ -109,7 +109,7 @@ class Home extends Component {
 					let compactedLayout = compactLayoutHorizontal(g.children, col);
 					// const firstCard = compactedLayout[0];
 					// compactedLayout = compactLayout(compactedLayout, firstCard);
-					g.apps = compactedLayout;
+					g.children = compactedLayout;
 				});
 				this.setState({ groups, layout }, () => {
 					// animateScroll.scrollTo(0);
@@ -324,12 +324,18 @@ class Home extends Component {
 
 	render() {
 		const { workList } = this.props;
+		const { layout } = this.state;
 		const contents = [];
 		workList.forEach(da => {
 			const props = {
 				key: `nav${da.widgetId}`,
 				data: da
 			};
+			const containerHeight = getContainerMaxHeight(
+				da.children,
+				layout.rowHeight,
+				layout.margin
+			);
 			contents.push(
 				<WidgeList
 					{...props}
@@ -337,6 +343,7 @@ class Home extends Component {
 					viewport={this.state.viewport}
 					loadOk={this.loadOk}
 					updataView={this.updataView}
+					height = {containerHeight}
 				/>
 			);
 		});

@@ -12,35 +12,6 @@ import axios from 'axios';
 import { findDOMNode } from 'react-dom'
 
 
-const widgetStyle = [
-  // 小
-  {
-    width: 176,
-  },
-  // 中
-  {
-    width: 360,
-  },
-  // 大
-  {
-    width: 360,
-    height: 360,
-  },
-  {
-    width: 544,
-  },
-  {
-    width: 544,
-    height: 360,
-  },
-  {
-    width: 728,
-  },
-  {
-    width: 728,
-    height: 360,
-  },
-];
 
 
 function getResultFetch(that, text, callback) {
@@ -189,6 +160,7 @@ class WidgetItem extends Component {
         size,
         widgetName: name,
       },
+      style
     } = this.props;
     const { widget: Widget, loaded } = this.state;
     let contentElm;
@@ -198,12 +170,8 @@ class WidgetItem extends Component {
       contentElm = (<Loading container={this} show />);
     }
 
-    const style = {
-      ...widgetStyle[size - 1],
-    };
-    if (background) {
-      style.backgroundImage = `url(${background})`;
-    }
+  
+   
     return (
       <li ref="normal_widget" className={widgetItem} style={style} >
         {this.state.shouldLoad ? (

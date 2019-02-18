@@ -4,6 +4,7 @@ import Icon from 'pub-comp/icon';
 import { openService } from 'public/regMessageTypeHandler';
 // 加载components
 import WidgetMaker from '../widget';
+import * as utilService from '../../manage/utils';
 // 加载样式 
 import {
   WidgetCont,
@@ -11,7 +12,17 @@ import {
   item,
   WidgetList,
 } from './style.css';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '@u';
 
+@connect(
+	mapStateToProps(
+    "layout",
+		{
+			namespace: 'manage',
+    },
+	)
+)
 class HomeWidgeList extends Component {
 
   constructor(props) {
@@ -43,6 +54,7 @@ class HomeWidgeList extends Component {
         children
       },
       style,
+      height
     } = this.props;
     // 新增元数据  控制groupTitle 样式
     const list = children.map((child, i) => {
@@ -51,6 +63,11 @@ class HomeWidgeList extends Component {
         serviceType,
         widgetId,
         serviceCode,
+        background,
+        gridx,
+        gridy,
+        width,
+        height
       } = child;
       const Widget = WidgetMaker(child);
       const props = {
@@ -62,10 +79,29 @@ class HomeWidgeList extends Component {
           openService(serviceCode, serviceType);
         }
       }
+      const { margin, rowHeight, calWidth } = this.props.layout;
+      
+      const { x, y } = utilService.calGridItemPosition(gridx, gridy, margin, rowHeight, calWidth);
+      
+      const { wPx, hPx } = utilService.calWHtoPx(width, height, margin, rowHeight, calWidth);
+
+      const style = {
+        width: wPx,
+        height: hPx,
+        transform: `translate(${x}px, ${y}px)`
+      }
+      if (background) {
+        style.backgroundImage = `url(${background})`;
+      }
+  
+  
+          
+      
       return (
         <Widget {...props} 
         viewport={this.props.viewport} 
         loadOk={this.props.loadOk}
+        style={style}
         />
       );
     })
@@ -84,7 +120,7 @@ class HomeWidgeList extends Component {
             <ul
               ref={c => this._container = c}
               className={WidgetList}
-            // style={{ height: 0 }}
+              style={{ height }}
             >
               {list}
             </ul>

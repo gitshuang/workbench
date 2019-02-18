@@ -6,6 +6,7 @@ import BatchMove from './batchMove'
 import PopDialogComp from './popDialogComp'
 import judgedBackend from './backend';
 import { DragDropContext } from 'react-dnd';
+import Sider from './sider'
 
 class CreateManageModule extends Component {
   constructor(props) {
@@ -135,8 +136,9 @@ class CreateManageModule extends Component {
     }
     
     return (
-      <div>
+      <div style={{display:'flex'}}>
           {/* <div style={{width:300}}>sider</div> */}
+          <Sider languagesJSON={languagesJSON}/>
           <Content {...manageProps} {...widgetListProps} {...widgetSelectListProps} languagesJSON={languagesJSON}/>
           <Footer {...footerProps} languagesJSON={languagesJSON}/>
           <BatchMove {...batchMoveRedux} languagesJSON={languagesJSON}/>

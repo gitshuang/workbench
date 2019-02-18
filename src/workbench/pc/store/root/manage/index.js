@@ -66,6 +66,7 @@ const defaultState = {
   dragState: true, // 是否可拖拽
 
   shadowCard:{}, //
+  isSiderDisplay: true,  //左侧默认展开
   layout: {
 		containerWidth: 1200,
 		containerHeight: 200,
@@ -84,7 +85,8 @@ const defaultState = {
 		col: 6,
 		margin: [ 10, 10 ],
 		containerPadding: [ 0, 0 ]
-	},
+  },
+  checkedCardList: [],//左侧已选择元素数组
 };
 
 const findTreeById = (data, curId) => {
@@ -144,6 +146,18 @@ function setDefaultSelected(manageList, applicationsMap) {
 }
 
 const reducer = handleActions({
+  [updateCheckedCardList]: (state, { payload }) => {
+    return {
+      ...state,
+      checkedCardList: payload
+    }
+  },
+  [changeSiderState]: (state) => {
+    return {
+      ...state,
+      isSiderDisplay: !state.isSiderDisplay
+    };
+  },
   [updateShadowCard]:(state,{payload:shadowCard}) => {
     return {
       ...state,
