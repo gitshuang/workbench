@@ -38,7 +38,19 @@ export default class Content extends Component{
   constructor(props){
     super(props);
   }
-
+/**
+	 * 移动组的顺序
+	 * @param {Number} dragIndex 拖拽的组对象的index值
+	 * @param {Number} hoverIndex 拖拽中鼠标悬浮的组对象的index值
+	**/
+	moveGroupItem = (dragIndex, hoverIndex) => {
+		let { manageList } = this.props;
+		manageList = _.cloneDeep(manageList);
+		const dragCard = manageList[dragIndex];
+		manageList.splice(dragIndex, 1);
+		manageList.splice(hoverIndex, 0, dragCard);
+		this.props.updateGroupList(manageList);
+	};
 /**
 	 * 拖拽中卡片在组上移动
 	 * @param {Object} dragItem 拖拽中的对象
@@ -54,12 +66,9 @@ export default class Content extends Component{
 		const { margin, containerWidth, col, rowHeight } = this.props.layout;
     //计算当前所在的网格坐标
 		const { gridX, gridY } = utilService.calGridXY(x, y, shadowCard.width, margin, containerWidth, col, rowHeight);
-    //console.log(shadowCard.gridx,'shadowCard.gridx========');
     if (gridX === shadowCard.gridx && gridY === shadowCard.gridy) {
 			return;
     }
-    //console.log(gridX,'gridX===================gridX');
-    //console.log(gridY,'gridY===================gridY');
     
 		let groupIndex = hoverItem.index;
 		//先判断组内是否存在相同的卡片
@@ -69,7 +78,6 @@ export default class Content extends Component{
 		if (isContain) {
 			return;
     }
-    console.log("nocontain==========nocontain================")
 		//删除阴影的卡片
 		_.forEach(manageList, (g, index) => {
 			_.remove(g.children, (a) => {
@@ -157,7 +165,29 @@ export default class Content extends Component{
 
 		this.props.updateGroupList(manageList);
 		this.props.updateShadowCard({});
+  };
+  
+  /**
+	 * 释放sider区中选中的所有卡片CardList到分组中
+	 * @param {Object} dragItem 拖拽sider区中选中的所有卡片
+	 * @param {Object} dropItem 释放的目标组对象
+	**/
+	onCardListDropInGroupItem = (dragItem, dropItem) => {
+		let { manageList,layout } = this.props;
+		manageList = _.cloneDeep(manageList);
+		const targetGroupIndex = dropItem.index;
+		const cardList = dragItem.cardList;
+		//拖拽卡片和目标组内卡片合并、去重
+		manageList[targetGroupIndex].children = _.concat(manageList[targetGroupIndex].children, cardList);
+		manageList[targetGroupIndex].children = _.uniqBy(manageList[targetGroupIndex].children, 'widgetId');
+		//目标组内重新横向压缩布局
+		//todo: 数组偶然的几率出现重排
+		let compactedLayout = compactLayoutHorizontal(manageList[targetGroupIndex].children, layout.col);
+		
+		manageList[targetGroupIndex].children = compactedLayout;
+		this.props.updateGroupList(manageList);
 	};
+
   componentWillUnmount() {
 		window.removeEventListener('resize', this.handleLoad);
 	}
@@ -296,6 +326,8 @@ export default class Content extends Component{
             moveCardInGroupItem = {this.moveCardInGroupItem}
             handleLoad = {this.handleLoad}
             onCardDropInGroupItem = {this.onCardDropInGroupItem}
+            onCardListDropInGroupItem = {this.onCardListDropInGroupItem}
+            moveGroupItem={this.moveGroupItem}//移动分组
             />
         )
       });

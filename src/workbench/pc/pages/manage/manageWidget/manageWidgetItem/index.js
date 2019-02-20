@@ -140,15 +140,10 @@ export default class Item extends Component {
 				>
 					<div style={{ paddingLeft: '10px' }}>{name}</div>
 					<div className={card_mid}>
-						<img 
-							src={background_card}
-							alt='logo'
-							width='107'
-							height='113'
-						/>
+						
 					</div>
 					<div className={card_footer}>
-						<Checkbox checked={isChecked} onChange={this.onCheckboxChange} />
+						{/* <Checkbox checked={isChecked} onChange={this.onCheckboxChange} /> */}
 						<Icon type='dustbin' className='card-delete' onClick={this.deleteCard} />
 						<i
 							className='iconfont icon-shanchu card_delete'

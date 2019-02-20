@@ -10,6 +10,21 @@ const { updateManageList } = manageActions;
 
 const noteSource = {
     beginDrag(props, monitor, component) {
+        
+        
+        const data = props.data;
+        // data.size = 1;
+        // data.type = 3;
+        // data.widgetId = data.service.serviceId;
+        // data.widgetName = data.service.serviceName;
+        // data.serviceCode = data.service.serviceCode;
+        // data.icon = data.service.serviceIcon;
+        // data.size = data.widgetTemplate.size;
+        // data.serviceType = data.widgetTemplate.serviceType
+        if (!data.checked) {//拖拽没被选择上的元素时，元素被push进checkedCardList
+            props.checkedCardList.push(data);
+            ///component.clickSiderCard(true, data.parentId, data.menuItemId);
+        }
         props.checkedCardList.forEach(element => {
             element.size = 1;
             element.type = 3;
@@ -18,23 +33,25 @@ const noteSource = {
             element.serviceCode = element.service.serviceCode;
             element.icon = element.service.serviceIcon;
             element.size = element.widgetTemplate.size;
-            element.serviceType = element.widgetTemplate.serviceType
+            element.serviceType = element.widgetTemplate.serviceType;
+            switch(element.size){
+                case 1:
+                element.height = 1;
+                element.width = 1;
+                break;
+                case 2:
+                element.height = 1;
+                element.width = 2;
+                break
+                case 3:
+                element.height = 2;
+                element.width = 2;
+                break
+                default:
+                element.height = 1;
+                element.width = 1;
+              }
         });
-        
-        const data = props.data;
-        data.size = 1;
-        data.type = 3;
-        data.widgetId = data.service.serviceId;
-        data.widgetName = data.service.serviceName;
-        data.serviceCode = data.service.serviceCode;
-        data.icon = data.service.serviceIcon;
-        data.size = data.widgetTemplate.size;
-        data.serviceType = data.widgetTemplate.serviceType
-        if (!data.checked) {//拖拽没被选择上的元素时，元素被push进checkedCardList
-            props.checkedCardList.push(data);
-            ///component.clickSiderCard(true, data.parentId, data.menuItemId);
-        }
-
         return { id: "shadowCardId", type: "cardlist", parentId: 2, cardList: props.checkedCardList }  //3代表widget，parentId=2暂时代表侧边栏
 
     },

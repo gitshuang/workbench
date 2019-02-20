@@ -14,7 +14,9 @@ const { addGroup,
   delectGroup,
   setEditonlyId,
   setDragInputState,
-  renameGroup } = manageActions;
+  renameGroup,
+  moveBottomGroup,
+  moveTopGroup } = manageActions;
 import languagesJSON from 'yutils/languages';
 import Icon from 'pub-comp/icon';
 
@@ -49,7 +51,9 @@ import {
     delectGroup,
     setEditonlyId,
     setDragInputState,
-    renameGroup
+    renameGroup,
+    moveBottomGroup,
+    moveTopGroup
   },
 )
 export default class GroupTitle extends React.Component {

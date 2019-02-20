@@ -22,10 +22,10 @@ export default class Footer extends Component{
     return (
         <div className={um_footer}>
           <div className={umBoxJustify}>
-             <div className={`${batchArea}  horizontalParent`}>
+             {/* <div className={`${batchArea}  horizontalParent`}>
               <ButtonDefaultLine onClick={this.props.batchDelectFn} disabled={selectList.length ? false:true} className="horizontal">{languagesJSON.delete}</ButtonDefaultLine>
               <ButtonDefaultLine onClick={this.props.openGroupTo} disabled={selectList.length ? false:true} >{languagesJSON.moveTo}</ButtonDefaultLine>
-            </div>
+            </div> */}
             <div className={`${saveArea}  horizontalParent`}>
               <ButtonBrand disabled={!isEdit} onClick={this.props.save}>{languagesJSON.save}</ButtonBrand>
               <ButtonDefaultLine onClick={this.props.popOpenCancel} >{languagesJSON.cancel}</ButtonDefaultLine>
