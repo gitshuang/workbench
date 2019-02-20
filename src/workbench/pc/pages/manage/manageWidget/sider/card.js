@@ -6,7 +6,7 @@ import { hasCardContainInGroups } from '../../utils';
 import { mapStateToProps } from '@u';
 import { list_item_content, title, isAddColor, title_name } from './style.css'
 import manageActions from 'store/root/manage/actions';
-const { updateManageList } = manageActions;
+const { updateManageList,updateShadowCard } = manageActions;
 
 const noteSource = {
     beginDrag(props, monitor, component) {
@@ -52,7 +52,14 @@ const noteSource = {
                 element.width = 1;
               }
         });
-        return { id: "shadowCardId", type: "cardlist", parentId: 2, cardList: props.checkedCardList }  //3代表widget，parentId=2暂时代表侧边栏
+        const dragCard = {
+            isShadow:true,
+            width:1,
+            height:1, 
+            widgetId:"shadowCardId",
+        };
+        props.updateShadowCard(dragCard);
+        return { id: "shadowCardId", type:"cardList", cardList: props.checkedCardList }  //3代表widget，parentId=2暂时代表侧边栏
 
     },
     endDrag(props, monitor, component) {
@@ -93,7 +100,8 @@ const noteSource = {
         },
     ),
     {
-        updateManageList
+        updateManageList,
+        updateShadowCard
     }
 )
 @DragSource('item', noteSource, (connect, monitor) => {

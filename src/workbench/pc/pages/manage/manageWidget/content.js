@@ -173,15 +173,27 @@ export default class Content extends Component{
 	 * @param {Object} dropItem 释放的目标组对象
 	**/
 	onCardListDropInGroupItem = (dragItem, dropItem) => {
-		let { manageList,layout } = this.props;
+		let { manageList,layout,shadowCard } = this.props;
 		manageList = _.cloneDeep(manageList);
 		const targetGroupIndex = dropItem.index;
 		const cardList = dragItem.cardList;
-		//拖拽卡片和目标组内卡片合并、去重
+    //拖拽卡片和目标组内卡片合并、去重
+    cardList.forEach(item=>{
+      item.gridx = shadowCard.gridx;
+      item.gridy = shadowCard.gridy;
+    })
+    
+    //删除阴影的卡片
+		_.forEach(manageList, (g, index) => {
+			_.remove(g.children, (a) => {
+				return a.isShadow === true;
+			});
+		});
 		manageList[targetGroupIndex].children = _.concat(manageList[targetGroupIndex].children, cardList);
 		manageList[targetGroupIndex].children = _.uniqBy(manageList[targetGroupIndex].children, 'widgetId');
 		//目标组内重新横向压缩布局
-		//todo: 数组偶然的几率出现重排
+    //todo: 数组偶然的几率出现重排
+    manageList.splice()
 		let compactedLayout = compactLayoutHorizontal(manageList[targetGroupIndex].children, layout.col);
 		
 		manageList[targetGroupIndex].children = compactedLayout;

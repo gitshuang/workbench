@@ -8,7 +8,6 @@ import { ButtonCheckClose, ButtonCheckSelected, ButtonDefaultWhite } from 'pub-c
 import { avoidSameName } from '@u';
 import Icon from 'pub-comp/icon';
 import Checkbox from 'bee/checkbox';
-import WidgetList from '../manageWidgetList';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '@u';
 import manageActions from 'store/root/manage/actions';
@@ -16,6 +15,7 @@ const { dropSideCards, dropSideCardsInGroup } = manageActions;
 import WidgetItem from '../manageWidgetItem';
 import * as utilService from '../../utils';
 import { findDOMNode } from 'react-dom';
+import GroupTitle from './groupTitle.js'
 
 import {
   widgetTitle,
@@ -74,7 +74,7 @@ const itemTarget = {
 			props.moveGroupItem(dragIndex, hoverIndex);
 
 			monitor.getItem().index = hoverIndex;
-		} else if (dragItem.type === 3) { //3 是widget
+		} else if (dragItem.type === 3||dragItem.type === "cardList") { //3 是widget
       //卡片到组
       const hoverItem = props;
 			const { x, y } = monitor.getClientOffset();
@@ -92,7 +92,7 @@ const itemTarget = {
 			props.moveGroupDrag(dragItem.id, props.id);
     } else if (dragItem.type === 3) {//释放的分组内的卡片
 			props.onCardDropInGroupItem(dragItem, dropItem);
-		} else if (dragItem.type === 'cardlist') {//释放的Sider区域的卡片
+		} else if (dragItem.type === 'cardList') {//释放的Sider区域的卡片
 			props.onCardListDropInGroupItem(dragItem, dropItem);
 		}
 	}
@@ -239,13 +239,6 @@ export default class ManageGroup extends GroupItem {
       dragState,
       selectGroup,
       currEditonlyId,
-      applicationsMap,
-      allServicesByLabelGroup,
-      getAllServicesByLabelGroup,
-      setCurrentSelectWidgetMap,
-      addDesk,
-      requestSuccess,
-      requestError,
       languagesJSON,
     } = this.props;
 
@@ -364,8 +357,7 @@ export default class ManageGroup extends GroupItem {
               : defaultLayout.containerHeight
         }}
 >
-          {/* <WidgetList index={index} data={children} parentId={this.props.data.widgetId}
-						{...widgetSelectListProps} languagesJSON={languagesJSON} /> */}
+         
 						{this.createCards(cards, id, index)}
         </div>
       </section>

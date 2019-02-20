@@ -6,7 +6,9 @@ import BatchMove from './batchMove'
 import PopDialogComp from './popDialogComp'
 import judgedBackend from './backend';
 import { DragDropContext } from 'react-dnd';
-import Sider from './sider'
+import Sider from './sider';
+import CustomDragLayer from './dragLayer/customDragLayer.js';
+
 
 class CreateManageModule extends Component {
   constructor(props) {
@@ -143,6 +145,8 @@ class CreateManageModule extends Component {
           <Footer {...footerProps} languagesJSON={languagesJSON}/>
           <BatchMove {...batchMoveRedux} languagesJSON={languagesJSON}/>
           <PopDialogComp {...popDialogOuter} languagesJSON={languagesJSON}/>
+          <CustomDragLayer/>
+
       </div>
     );
   }

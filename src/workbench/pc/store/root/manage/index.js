@@ -173,7 +173,8 @@ const reducer = handleActions({
   [updateGroupList]:(state,{payload:groupList}) => {
     return {
       ...state,
-      manageList: groupList
+      manageList: groupList,
+      checkedCardList:[]
     };
   },
  
