@@ -63,12 +63,12 @@ export default class CustomDragLayer extends Component {
 	shouldComponentUpdate(nextProps, nextState) {
 		const thisProps = this.props || {},
 			thisState = this.state || {};
-		if (this.props.item && this.props.item.type === 'cardlist' && this.props.isDragging !== nextProps.isDragging) {
+		if (this.props.item && this.props.item.type === 'cardList' && this.props.isDragging !== nextProps.isDragging) {
 			return true;
 		}
 		if (
 			this.props.item &&
-			this.props.item.type === 'cardlist' &&
+			this.props.item.type === 'cardList' &&
 			this.props.currentOffset !== nextProps.currentOffset
 		) {
 			//如果两次移动的直线距离大于1.5px
@@ -87,7 +87,7 @@ export default class CustomDragLayer extends Component {
 	}
 	render() {
 		const { item, itemType, isDragging } = this.props;
-		if (!isDragging || item.type !== 'cardlist') {
+		if (!isDragging || item.type !== 'cardList') {
 			return null;
 		}
 		//IE浏览器去掉拖拽预览

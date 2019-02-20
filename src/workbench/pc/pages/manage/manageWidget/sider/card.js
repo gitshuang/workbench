@@ -117,6 +117,7 @@ export default class Card extends Component {
     }
 
     componentDidMount() {
+        
         this.props.connectDragPreview(getEmptyImage(), {
             captureDraggingState: true
         });
