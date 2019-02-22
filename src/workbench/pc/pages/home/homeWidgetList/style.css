@@ -43,6 +43,8 @@
   list-style: none;
   overflow: hidden; 
   padding-left: 10px;
+  margin-top: -10px;
+  margin-left: -10px;
 }
 .WidgetList li{
     transition: all .3s;
